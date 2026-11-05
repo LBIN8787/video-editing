@@ -1,0 +1,41 @@
+channel_niche: "경제·비즈니스·AI 지식 해설 (얼굴 없는 내레이션형)"
+language: ko
+
+llm:
+  model: claude-opus-5-5
+  effort: high            # low | medium | high | xhigh | max
+  fallbacks: true         # 안전 분류기 거절 시 서버측 대체 모델로 재시도
+
+discover:
+  seed_keywords: ["AI 자동화", "부업 트렌드", "기업 분석", "경제 이슈"]
+  search_per_keyword: 25  # 키워드당 검색 결과 수 (최신순)
+  deep_check_top: 15      # 구독자 대비 조회수(아웃라이어) 계산할 상위 후보 수
+  min_outlier: 2.0        # 조회수 / 구독자수 기준 하한
+  rss_feeds: []           # 뉴스 RSS 주소 (선택)
+
+script:
+  target_minutes: 9
+  chars_per_minute: 330   # benchmark 결과가 있으면 스타일 프로필 값으로 덮어씀
+
+tts:
+  backend: edge           # edge | manual  (manual = 직접 녹음한 scene_XXX.wav 사용)
+  voice: ko-KR-InJoonNeural
+  rate: "+8%"
+
+edit:
+  width: 1920
+  height: 1080
+  fps: 30
+  font: "Noto Sans CJK KR"   # 시스템에 설치된 한글 폰트 이름
+  subtitle_size: 64
+  emphasis_color: "&H0000E5FF"   # ASS BGR 형식 (노랑)
+  bgm: ""                 # 배경음 파일 경로 (선택)
+  bgm_volume: 0.10
+  kenburns: true          # 정지 이미지에 천천히 줌인
+
+# 사람이 확인해야 다음 단계로 넘어가는 지점.
+# auto 로 바꾸면 해당 게이트를 자동 통과시킵니다.
+gates:
+  topic: manual
+  script: manual
+  draft: manual
