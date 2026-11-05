@@ -23,12 +23,14 @@ def _run(args: list[str]) -> str:
 def flat_playlist(url: str, limit: int) -> dict:
     """채널 /videos 탭 또는 ytsearch 결과를 빠르게 목록으로."""
     raw = _run(["-J", "--flat-playlist", "--playlist-end", str(limit), url])
-    return json.loads(raw) if raw.strip() else {"entries": []}
+    data = json.loads(raw) if raw.strip() else None
+    return data or {"entries": []}
 
 
 def video_info(video_id: str) -> dict:
-    raw = _run(["-J", "--skip-download", f"https://www.youtube.com/watch?v={video_id}"])
-    return json.loads(raw) if raw.strip() else {}
+    raw = _run(["-J", "--skip-download", "--ignore-no-formats-error", f"https://www.youtube.com/watch?v={video_id}"])
+    data = json.loads(raw) if raw.strip() else None
+    return data or {}
 
 
 def download_subs(video_id: str, out_dir: Path, lang: str = "ko") -> Path | None:

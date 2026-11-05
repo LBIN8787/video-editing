@@ -5,6 +5,7 @@
 """
 from __future__ import annotations
 
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime
@@ -13,8 +14,13 @@ from .. import config, yt
 from ..project import Project
 
 
+# YouTube 검색 필터: 업로드 날짜 = 이번 주 (관련도순). 최근 1주 안에 터진 영상을 찾는다.
+WEEK_FILTER = "EgIIAw%253D%253D"
+
+
 def search_keyword(kw: str, n: int) -> list[dict]:
-    data = yt.flat_playlist(f"ytsearchdate{n}:{kw}", n)
+    url = f"https://www.youtube.com/results?search_query={urllib.parse.quote(kw)}&sp={WEEK_FILTER}"
+    data = yt.flat_playlist(url, n) or {}
     out = []
     for e in data.get("entries") or []:
         if e and e.get("id") and (e.get("duration") or 0) > 70:
@@ -24,7 +30,7 @@ def search_keyword(kw: str, n: int) -> list[dict]:
 
 
 def enrich(c: dict) -> dict:
-    info = yt.video_info(c["id"])
+    info = yt.video_info(c["id"]) or {}
     subs = info.get("channel_follower_count") or 0
     up = info.get("upload_date")
     days = max((datetime.now() - datetime.strptime(up, "%Y%m%d")).days, 1) if up else None
