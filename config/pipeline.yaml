@@ -21,7 +21,9 @@ script:
   chars_per_minute: 260   # 2026-11 벤치마킹 측정값. 스타일 프로필 값이 있으면 그 값을 우선 사용
 
 tts:
-  backend: edge           # edge | manual  (manual = 직접 녹음한 scene_XXX.wav 사용)
+  backend: edge           # edge | manual | placeholder
+                          #  manual = 직접 녹음한 03_voice/scene_XXX.wav 사용
+                          #  placeholder = 글자 수로 길이만 맞춘 무음 (흐름 확인용 애니매틱)
   voice: ko-KR-InJoonNeural
   rate: "+8%"
 
@@ -35,6 +37,7 @@ edit:
   bgm: ""                 # 배경음 파일 경로 (선택)
   bgm_volume: 0.10
   kenburns: true          # 정지 이미지에 천천히 줌인
+  card_font: ""           # 임시 카드용 한글 폰트 파일 경로 (비우면 시스템에서 자동 탐색)
 
 # 사람이 확인해야 다음 단계로 넘어가는 지점.
 # auto 로 바꾸면 해당 게이트를 자동 통과시킵니다.
