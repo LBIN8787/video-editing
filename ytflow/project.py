@@ -8,7 +8,7 @@ from pathlib import Path
 
 from . import config
 
-STAGES = ["discover", "select", "research", "script", "voice", "subtitles", "assets", "assemble", "package"]
+STAGES = ["discover", "select", "research", "script", "clips", "voice", "assets", "subtitles", "assemble", "package"]
 # 게이트: 이 단계가 끝난 뒤 사람이 승인해야 다음 단계 진행
 GATE_AFTER = {"select": "topic", "script": "script", "assemble": "draft"}
 
@@ -49,8 +49,11 @@ class Project:
     @classmethod
     def open(cls, name_or_path: str) -> "Project":
         p = Path(name_or_path)
+        if not p.exists() and (config.PROJECTS_DIR / name_or_path).is_dir():
+            p = config.PROJECTS_DIR / name_or_path  # 폴더 이름이 정확히 같으면 우선
         if not p.exists():
-            matches = sorted(config.PROJECTS_DIR.glob(f"*{name_or_path}*"))
+            exact = [m for m in config.PROJECTS_DIR.glob(f"*-{name_or_path}") if m.is_dir()]
+            matches = exact or sorted(config.PROJECTS_DIR.glob(f"*{name_or_path}*"))
             if not matches:
                 raise SystemExit(f"프로젝트를 찾을 수 없습니다: {name_or_path}")
             p = matches[-1]

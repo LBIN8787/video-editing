@@ -1,0 +1,103 @@
+"""4.5단계: 소스 클립 확보 — 대본에 적힌 원본 영상 구간만 잘라 받는다.
+
+scene["source"] 형식:
+  {"url": "https://www.youtube.com/watch?v=...",
+   "start": "1:02.5", "end": "1:25",          # 구간을 알면 직접 지정
+   "find": "Naver", "length": 12,              # 모르면 자막에서 키워드를 찾아 시작점 결정
+   "pre": 1.0}                                 # find 로 찾은 지점보다 몇 초 앞에서 시작할지
+
+결과: 04_assets/scene_XXX.mp4 (원본 오디오 포함) + 04_assets/clips.csv (성공/실패/구간)
+
+주의
+  - YouTube 는 클라우드 서버 IP 의 영상 다운로드를 자주 막는다. 개인 PC 에서 실행하는 것을 권장.
+    봇 확인이 뜨면 config/pipeline.yaml 의 clips.cookies_from_browser 에 "chrome" 등을 적는다.
+  - 받을 수 없으면 clips.csv 에 URL·구간이 남으므로 직접 받아 같은 파일명으로 넣으면 된다.
+  - 타 채널 영상은 저작권 대상이다. 짧게 인용하고 출처 라벨을 반드시 단다 (label 필드).
+"""
+from __future__ import annotations
+
+import csv
+import re
+import sys
+import subprocess
+from pathlib import Path
+
+from .. import config, yt
+from ..project import Project
+
+
+def to_sec(t) -> float | None:
+    if t is None or t == "":
+        return None
+    if isinstance(t, (int, float)):
+        return float(t)
+    parts = [float(x) for x in str(t).split(":")]
+    s = 0.0
+    for p in parts:
+        s = s * 60 + p
+    return s
+
+
+def _vid(url: str) -> str:
+    m = re.search(r"(?:v=|youtu\.be/|shorts/)([\w-]{11})", url)
+    return m.group(1) if m else url
+
+
+def resolve(src: dict, work: Path) -> tuple[float, float, str]:
+    """(start, end, 메모) — find 가 있으면 자막에서 첫 등장 위치를 찾는다."""
+    start, end = to_sec(src.get("start")), to_sec(src.get("end"))
+    if start is not None and end is not None:
+        return start, end, "지정 구간"
+    if src.get("find"):
+        lang = src.get("lang", "en")
+        vtt = yt.download_subs(_vid(src["url"]), work, lang)
+        if vtt:
+            for c in yt.parse_vtt(vtt):
+                if re.search(src["find"], c["text"], re.I):
+                    st = max(0.0, c["start"] - float(src.get("pre", 1.0)))
+                    return st, st + float(src.get("length", 10)), f"자막에서 '{src['find']}' 발견 ({c['text'][:40]})"
+            return 0, 0, f"자막에 '{src['find']}' 없음"
+        return 0, 0, "자막 없음"
+    return 0, 0, "start/end 또는 find 필요"
+
+
+def download(url: str, start: float, end: float, out: Path) -> bool:
+    ccfg = config.load("pipeline").get("clips", {})
+    cmd = [sys.executable, "-m", "yt_dlp", "--no-warnings", "--js-runtimes", "node",
+           "-f", ccfg.get("format", "bv*[height<=1080]+ba/b[height<=1080]/b"),
+           "--download-sections", f"*{start:.2f}-{end:.2f}", "--force-keyframes-at-cuts",
+           "--merge-output-format", "mp4", "-o", str(out), url]
+    if ccfg.get("cookies_from_browser"):
+        cmd[3:3] = ["--cookies-from-browser", ccfg["cookies_from_browser"]]
+    proc = subprocess.run(cmd, capture_output=True, text=True)
+    if proc.returncode != 0 or not out.exists():
+        print("    ", (proc.stderr.strip().splitlines() or ["?"])[-1][:160])
+        return False
+    return True
+
+
+def run(project: Project) -> None:
+    scenes = project.read_json("script", "scenes.json")["scenes"]
+    adir = project.dir("assets")
+    work = adir / "work_subs"
+    rows, ok = [], 0
+    for s in scenes:
+        src = s.get("source")
+        if not src or not src.get("url"):
+            continue
+        out = adir / f"scene_{s['id']:03d}.mp4"
+        if out.exists():
+            rows.append([s["id"], "OK(기존)", src["url"], "", "", s.get("label", ""), ""])
+            ok += 1
+            continue
+        st, en, memo = resolve(src, work)
+        good = en > st and download(src["url"], st, en, out)
+        ok += good
+        rows.append([s["id"], "OK" if good else "FAILED", src["url"], f"{st:.1f}", f"{en:.1f}", s.get("label", ""), memo])
+        print(f"[clips] #{s['id']} {'OK' if good else 'FAILED'} {st:.1f}-{en:.1f}s {memo}")
+    with open(adir / "clips.csv", "w", newline="", encoding="utf-8-sig") as fh:
+        w = csv.writer(fh)
+        w.writerow(["scene", "status", "url", "start_sec", "end_sec", "label", "memo"])
+        w.writerows(rows)
+    print(f"[clips] {ok}/{len(rows)}개 확보 → {adir}/clips.csv (실패한 구간은 직접 받아 scene_XXX.mp4 로 넣어도 됩니다)")
+    project.mark_done("clips")

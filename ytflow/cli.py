@@ -13,13 +13,14 @@ import argparse
 
 from . import config
 from .project import GATE_AFTER, STAGES, Project
-from .stages import benchmark, discover, media, writing
+from .stages import benchmark, clips, discover, media, writing
 
 RUNNERS = {
     "discover": lambda p, a: discover.run(p, a.keywords),
     "select": lambda p, a: writing.select(p),
     "research": lambda p, a: writing.research(p),
     "script": lambda p, a: writing.script(p),
+    "clips": lambda p, a: clips.run(p),
     "voice": lambda p, a: media.voice(p),
     "subtitles": lambda p, a: media.subtitles(p),
     "assets": lambda p, a: media.assets(p),

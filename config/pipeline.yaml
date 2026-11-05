@@ -28,16 +28,29 @@ tts:
   rate: "+8%"
 
 edit:
+  # 식스시그마 실제 화면 분석(docs/03) 기준: 검은 배경 · 흰 글씨 · 빨간 강조 · 줌/BGM 없음
   width: 1920
   height: 1080
   fps: 30
-  font: "Noto Sans CJK KR"   # 시스템에 설치된 한글 폰트 이름
-  subtitle_size: 64
-  emphasis_color: "&H0000E5FF"   # ASS BGR 형식 (노랑)
-  bgm: ""                 # 배경음 파일 경로 (선택)
+  font: "Noto Sans CJK KR"   # 자막 폰트 이름 (윈도우는 "Malgun Gothic" 도 가능)
+  subtitle_size: 50
+  subtitle_chars: 28          # 자막 한 줄 최대 글자 수
+  emphasis_color: "&H002C40E8"   # ASS BGR 형식 = #E8402C (빨강)
+  logo_text: ""               # 화면 오른쪽 위 채널 로고 글자 (예: "6σ")
+  theme:                      # 인포 카드 색
+    bg: "#000000"
+    fg: "#FFFFFF"
+    muted: "#9A9A9A"
+    accent: "#E8402C"
+    line: 3
+  bgm: ""                     # 벤치마크 채널은 배경음악 없음
   bgm_volume: 0.10
-  kenburns: true          # 정지 이미지에 천천히 줌인
-  card_font: ""           # 임시 카드용 한글 폰트 파일 경로 (비우면 시스템에서 자동 탐색)
+  kenburns: false             # 정지 이미지 줌 (벤치마크 채널은 쓰지 않음)
+  card_font: ""               # 카드용 한글 폰트 파일 경로 (비우면 자동 탐색)
+
+clips:
+  format: "bv*[height<=1080]+ba/b[height<=1080]/b"
+  cookies_from_browser: ""    # YouTube 봇 확인이 뜨면 "chrome" / "edge" / "firefox"
 
 # 사람이 확인해야 다음 단계로 넘어가는 지점.
 # auto 로 바꾸면 해당 게이트를 자동 통과시킵니다.

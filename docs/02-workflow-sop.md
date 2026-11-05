@@ -17,6 +17,7 @@
 | 2 | select | 후보와 뉴스로 주제 5개 제안 (관점, 시의성, 리스크, 점수) | **⏸ 주제 고르기** `approve topic --pick N` | `00_source/shortlist.md` |
 | 3 | research | 소스 영상 자막 수집 → 출처·확인상태가 붙은 팩트시트 | `01_research/my_notes.md` 에 자료 추가, '재확인 필요' 검증 | `01_research/factsheet.md` |
 | 4 | script | 스타일 프로필대로 **씬 단위 대본** 작성 (내레이션, 큰글씨, 강조어, 화면지시, 이미지 프롬프트, 효과음) | **⏸ 대본 검수** `scenes.json` 직접 수정 가능 | `02_script/scenes.json`, `script.md` |
+| 4.5 | clips | 대본의 `source`(URL + 구간 또는 자막 키워드)대로 원본 영상의 해당 구간만 내려받음 | YouTube가 막으면 `clips.csv` 보고 직접 받아 `scene_XXX.mp4`로 넣기 | `04_assets/scene_XXX.mp4`, `clips.csv` |
 | 5 | voice | 씬별 TTS(edge-tts) 또는 직접 녹음 → 앞뒤 무음 제거, 음량 정규화 | (manual이면) `scene_001.wav` … 녹음 | `03_voice/clean/*.wav` |
 | 6 | subtitles | 20자 단위 자막 분할, 강조어 색 입힘, 큰글씨 레이어, 챕터 계산 | — | `05_edit/subs.srt`, `subs.ass` |
 | 7 | assets | 씬별 화면 샷리스트 + 비어 있는 씬 표시 | 이미지·영상을 `04_assets/scene_00N.*` 로 넣기 (AI 이미지 프롬프트 제공) | `04_assets/shotlist.csv` |

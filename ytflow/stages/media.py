@@ -1,7 +1,7 @@
 """5~8단계: 음성 → 자막 → 소스(화면) 체크 → 1차 가편집 영상 조립 (ffmpeg).
 
 결과물은 '완성본'이 아니라 편집자가 바로 손볼 수 있는 가편집(draft)이다.
-  05_edit/draft.mp4      자막·큰글씨·BGM 이 들어간 1차 영상
+  05_edit/draft.mp4      출처 라벨·2단 자막(원문+번역)·카드가 들어간 1차 영상
   05_edit/subs.srt       유튜브 업로드용 자막
   05_edit/subs.ass       강조색이 들어간 번인 자막 (프리미어/캡컷에서도 열림)
   05_edit/timeline.csv   씬별 시작/길이/소스 파일 → NLE 에서 그대로 따라 배치
@@ -41,6 +41,11 @@ def voice(project: Project) -> None:
     durs = {}
     for s in scenes:
         sid = f"scene_{s['id']:03d}"
+        if s.get("kind") == "quote":
+            # 원본 발언 장면: 내레이션 없이 클립의 원래 소리를 쓴다
+            durs[s["id"]] = _quote_audio(project, s, vdir / "clean" / f"{sid}.wav")
+            print(f"[voice] {sid} {durs[s['id']]}s (원본 발언)")
+            continue
         raw = next((p for p in vdir.glob(f"{sid}.*") if p.suffix in (".wav", ".mp3", ".m4a")), None)
         if raw is None:
             if cfg.get("backend") == "placeholder":
@@ -71,6 +76,21 @@ def voice(project: Project) -> None:
         print(f"[voice] {sid} {durs[s['id']]}s")
     project.write_json("voice", "durations.json", durs)
     project.mark_done("voice")
+
+
+def _quote_audio(project: Project, s: dict, out: Path) -> float:
+    from .clips import to_sec
+
+    out.parent.mkdir(exist_ok=True)
+    clip = project.dir("assets") / f"scene_{s['id']:03d}.mp4"
+    if clip.exists():
+        _ff(["-i", str(clip), "-vn", "-af", "loudnorm=I=-16:TP=-1.5", "-ar", "48000", "-ac", "2", str(out)])
+        return round(duration(out), 3)
+    src = s.get("source") or {}
+    st, en = to_sec(src.get("start")), to_sec(src.get("end"))
+    secs = (en - st) if (st is not None and en is not None and en > st) else float(src.get("length", 8))
+    _ff(["-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-t", f"{secs:.2f}", str(out)])
+    return round(secs, 3)
 
 
 # ---------------------------------------------------------------- 6. 자막
@@ -109,8 +129,9 @@ def subtitles(project: Project) -> None:
     scenes = project.read_json("script", "scenes.json")["scenes"]
     durs = {int(k): v for k, v in project.read_json("voice", "durations.json").items()}
     W, H = ecfg.get("width", 1920), ecfg.get("height", 1080)
-    font, size = ecfg.get("font", "Noto Sans CJK KR"), ecfg.get("subtitle_size", 64)
-    emph = ecfg.get("emphasis_color", "&H0000E5FF")
+    font, size = ecfg.get("font", "Noto Sans CJK KR"), ecfg.get("subtitle_size", 50)
+    emph = ecfg.get("emphasis_color", "&H002C40E8")
+    logo = ecfg.get("logo_text", "")
 
     srt, ass_events, timeline, chapters = [], [], [], []
     t, n, last_section = 0.0, 1, None
@@ -120,11 +141,21 @@ def subtitles(project: Project) -> None:
         if base != last_section:
             chapters.append({"t": round(t, 2), "label": s["section"]})
             last_section = base
-        lines = chunk_text(s["narration"])
+        lines = chunk_text(s["narration"], ecfg.get("subtitle_chars", 28))
         total = sum(len(x) for x in lines) or 1
+        en_lines = chunk_text(s["quote_en"], 60) if s.get("kind") == "quote" and s.get("quote_en") else []
+        if en_lines:
+            # 원문은 한국어 줄 수에 맞춰 같은 비율로 나눠 위에 작게 띄운다
+            per = max(1, round(len(en_lines) / max(len(lines), 1)))
+            groups = [" ".join(en_lines[i * per:(i + 1) * per]) for i in range(len(lines))]
+            groups[-1] = " ".join(en_lines[(len(lines) - 1) * per:]) or groups[-1]
+        if s.get("label"):
+            ass_events.append(f"Dialogue: 2,{_ts_ass(t)},{_ts_ass(t + d + GAP)},Label,,0,0,0,,{s['label']}")
         lt = t
-        for ln in lines:
+        for li, ln in enumerate(lines):
             ld = d * len(ln) / total
+            if en_lines and groups[li]:
+                ass_events.append(f"Dialogue: 0,{_ts_ass(lt)},{_ts_ass(lt + ld)},En,,0,0,0,,{groups[li]}")
             srt.append(f"{n}\n{_ts_srt(lt)} --> {_ts_srt(lt + ld)}\n{ln}\n")
             styled = ln
             for w in sorted(s.get("emphasis", []), key=len, reverse=True):
@@ -133,11 +164,6 @@ def subtitles(project: Project) -> None:
             ass_events.append(f"Dialogue: 0,{_ts_ass(lt)},{_ts_ass(lt + ld)},Sub,,0,0,0,,{styled}")
             lt += ld
             n += 1
-        vis = find_visual(project, s["id"])
-        own_visual = vis is not None and "_auto" not in vis.stem and s["visual_type"] != "text_card"
-        # 차트·캡처처럼 자체 제목이 있는 화면에는 큰 글씨를 겹치지 않는다
-        if s.get("on_screen_text") and not own_visual:
-            ass_events.append(f"Dialogue: 1,{_ts_ass(t)},{_ts_ass(t + d)},Big,,0,0,0,,{{\\fad(120,0)}}{s['on_screen_text']}")
         timeline.append({"scene": s["id"], "start": round(t, 3), "duration": round(d + GAP, 3),
                          "section": s["section"], "visual_type": s["visual_type"], "visual_brief": s["visual_brief"],
                          "sfx": s.get("sfx", "")})
@@ -150,12 +176,16 @@ PlayResY: {H}
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Sub,{font},{size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,5,0,2,80,80,70,1
-Style: Big,{font},{int(size * 1.7)},&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,1,0,0,0,100,100,0,0,1,8,0,8,80,80,90,1
+Style: Sub,{font},{size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,2.5,0,2,80,80,60,1
+Style: En,{font},{int(size * 0.62)},&H00B4B4B4,&H00B4B4B4,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,1.8,0,2,80,80,{60 + int(size * 1.25)},1
+Style: Label,{font},{int(size * 0.52)},&H00E6E6E6,&H00E6E6E6,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,1.5,0,7,40,40,30,1
+Style: Logo,{font},{int(size * 0.56)},&H00DCDCDC,&H00DCDCDC,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,1.5,0,9,40,40,30,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
+    if logo:
+        ass_events.append(f"Dialogue: 3,{_ts_ass(0)},{_ts_ass(t)},Logo,,0,0,0,,{logo}")
     edir = project.dir("edit")
     (edir / "subs.srt").write_text("\n".join(srt), encoding="utf-8")
     (edir / "subs.ass").write_text(header + "\n".join(ass_events) + "\n", encoding="utf-8")
@@ -169,67 +199,39 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 def find_visual(project: Project, sid: int) -> Path | None:
     """scene_007.png 처럼 직접 넣은 파일을 _auto 임시 카드보다 우선한다."""
     found = [p for p in sorted(project.dir("assets").glob(f"scene_{sid:03d}*")) if p.suffix.lower() in VISUAL_EXT]
-    found.sort(key=lambda p: "_auto" in p.stem)
+    found.sort(key=lambda p: (p.stem.endswith("_auto"), p.stem.endswith("_card")))
     return found[0] if found else None
 
 
-def _korean_font() -> str:
-    path = config.load("pipeline").get("edit", {}).get("card_font")
-    if path and Path(path).exists():
-        return path
-    out = subprocess.run(["fc-match", "-f", "%{file}", ":lang=ko:weight=bold"], capture_output=True, text=True).stdout
-    return out.strip()
-
-
-def make_card(path: Path, big: str, caption: str = "", note: str = "") -> None:
-    """텍스트 카드 PNG. big=가운데 큰 글씨, caption=아래 보조, note=편집자용 소스 요청(노란 띠)."""
-    from PIL import Image, ImageDraw, ImageFont
-
-    ecfg = config.load("pipeline").get("edit", {})
-    W, H = ecfg.get("width", 1920), ecfg.get("height", 1080)
-    img = Image.new("RGB", (W, H), (14, 20, 34))
-    d = ImageDraw.Draw(img)
-    fpath = _korean_font()
-    font = lambda size: ImageFont.truetype(fpath, size) if fpath else ImageFont.load_default()
-    d.rectangle([0, 0, 18, H], fill=(0, 200, 190))
-    if big:
-        size = 150 if len(big) <= 10 else 110 if len(big) <= 18 else 80
-        f = font(size)
-        w = d.textlength(big, font=f)
-        d.text(((W - w) / 2, H * 0.36), big, font=f, fill=(255, 255, 255))
-    if caption:
-        f = font(46)
-        w = d.textlength(caption, font=f)
-        d.text(((W - w) / 2, H * 0.62), caption, font=f, fill=(150, 165, 190))
-    if note:
-        # 자막(하단 ~150px)과 겹치지 않도록 그 위에 띠를 둔다
-        d.rectangle([0, H - 290, W, H - 200], fill=(255, 210, 60))
-        d.text((60, H - 268), f"[소스 필요] {note}"[:70], font=font(42), fill=(20, 20, 20))
-    img.save(path)
-
-
 def assets(project: Project, auto_cards: bool = True) -> None:
-    """샷리스트 작성. auto_cards 면 비어 있는 씬에 임시 카드를 만든다.
-    text_card 는 완성 카드, 나머지 유형은 '[소스 필요]' 띠가 붙은 자리표시 카드."""
+    """샷리스트 작성 + 카드 렌더링.
+    - scene["card"] 가 있으면 검은 배경 인포 카드(scene_XXX_card.png)를 매번 새로 그린다
+    - 직접 넣은 파일(scene_XXX.png/.mp4)이 있으면 그것이 우선
+    - 그래도 없으면 '[소스 필요]' 자리표시(scene_XXX_auto.png)"""
+    from . import cards
+
     scenes = project.read_json("script", "scenes.json")["scenes"]
-    if auto_cards:
-        for s in scenes:
-            if find_visual(project, s["id"]) is None:
-                # 큰 글씨는 자막(ASS Big 레이어)이 얹으므로 카드는 배경만 둔다
-                note = "" if s["visual_type"] == "text_card" else f"{s['visual_type']} · {s['visual_brief']}"
-                make_card(project.dir("assets") / f"scene_{s['id']:03d}_auto.png", "", "", note)
+    adir = project.dir("assets")
+    for s in scenes:
+        for old in adir.glob(f"scene_{s['id']:03d}_auto.png"):
+            old.unlink()
+        if s.get("card"):
+            cards.render(s["card"], adir / f"scene_{s['id']:03d}_card.png")
+        elif auto_cards and find_visual(project, s["id"]) is None:
+            cards.placeholder(adir / f"scene_{s['id']:03d}_auto.png", f"{s['visual_type']} · {s['visual_brief']}")
     f = project.dir("assets") / "shotlist.csv"
     missing = 0
     with open(f, "w", newline="", encoding="utf-8-sig") as fh:
         w = csv.writer(fh)
-        w.writerow(["scene", "file", "status", "visual_type", "visual_brief", "image_prompt", "on_screen_text"])
+        w.writerow(["scene", "file", "status", "visual_type", "label", "visual_brief", "image_prompt", "source_url"])
         for s in scenes:
             p = find_visual(project, s["id"])
             auto = p is not None and "_auto" in p.stem
             missing += p is None or auto
             status = "AUTO(임시카드)" if auto else "OK" if p else "MISSING"
             w.writerow([s["id"], p.name if p else f"scene_{s['id']:03d}.png", status,
-                        s["visual_type"], s["visual_brief"], s["image_prompt"], s["on_screen_text"]])
+                        s["visual_type"], s.get("label", ""), s["visual_brief"], s.get("image_prompt", ""),
+                        (s.get("source") or {}).get("url", "")])
     print(f"[assets] 샷리스트 → {f}\n         실제 소스가 필요한 씬 {missing}개 (임시 카드/단색으로 대체됨)")
     project.mark_done("assets")
 
@@ -250,7 +252,7 @@ def assemble(project: Project) -> None:
         out = work / f"v_{sid:03d}.mp4"
         src = find_visual(project, sid)
         if src is None:
-            _ff(["-f", "lavfi", "-i", f"color=c=0x15171c:s={W}x{H}:r={fps}:d={d}",
+            _ff(["-f", "lavfi", "-i", f"color=c=black:s={W}x{H}:r={fps}:d={d}",
                  "-c:v", "libx264", "-pix_fmt", "yuv420p", str(out)])
         elif src.suffix.lower() in (".mp4", ".mov"):
             _ff(["-stream_loop", "-1", "-i", str(src), "-t", str(d), "-an", "-vf", fit,
@@ -261,7 +263,7 @@ def assemble(project: Project) -> None:
                   f"zoompan=z='min(1+0.0008*on,1.15)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'"
                   f":d={frames}:s={W}x{H}:fps={fps},setsar=1")
             # 차트·카드는 가장자리가 잘리면 안 되므로 줌은 사진류에만
-            if not (ecfg.get("kenburns", True) and row.get("visual_type") in ("ai_image", "stock", "screenshot", "meme")):
+            if not (ecfg.get("kenburns", False) and row.get("visual_type") in ("ai_image", "stock", "screenshot", "meme")):
                 vf = fit
             _ff(["-loop", "1", "-i", str(src), "-t", str(d), "-vf", vf,
                  "-c:v", "libx264", "-pix_fmt", "yuv420p", str(out)])

@@ -81,16 +81,41 @@ def research(project: Project) -> None:
 
 
 # ---------------------------------------------------------------- 4. 대본
+class Source(BaseModel):
+    url: str = Field(description="원본 영상 URL")
+    start: str = Field(description="시작 'm:ss' (모르면 빈 문자열)")
+    end: str = Field(description="끝 'm:ss' (모르면 빈 문자열)")
+    find: str = Field(description="구간을 모를 때 자막에서 찾을 키워드 (아니면 빈 문자열)")
+    length: float = Field(description="find 사용 시 클립 길이(초)")
+
+
+class CardItem(BaseModel):
+    label: str
+    value: str
+    sub: str
+    highlight: bool
+
+
+class Card(BaseModel):
+    type: str = Field(description="number_compare | flow | table | bars | headline | text")
+    title: str
+    items: list[CardItem]
+    note: str
+
+
 class Scene(BaseModel):
     id: int
     section: str = Field(description="hook / intro / body-1 ... / outro")
-    narration: str
-    on_screen_text: str = Field(description="화면 큰 글씨 (없으면 빈 문자열)")
+    kind: str = Field(description="narration(내레이션) | quote(원본 발언: 원래 소리 + 번역 자막)")
+    narration: str = Field(description="내레이션 문장. kind=quote 이면 원문 발언의 한국어 번역")
+    quote_en: str = Field(description="kind=quote 일 때 원문 발언 (아니면 빈 문자열)")
+    label: str = Field(description="화면 왼쪽 위 출처 라벨 'YYYY.MM.DD · 출처'")
+    source: Source | None = Field(description="원본 영상을 쓸 때 (visual_type=source_video 또는 kind=quote)")
+    card: Card | None = Field(description="visual_type=card 일 때 검은 배경 인포 카드 내용")
     emphasis: list[str] = Field(description="자막에서 색으로 강조할 단어")
-    visual_type: str = Field(description="stock | ai_image | chart | screenshot | text_card | meme")
+    visual_type: str = Field(description="source_video | card | screenshot | stock | ai_image")
     visual_brief: str = Field(description="편집자/이미지 생성기용 화면 지시")
     image_prompt: str = Field(description="AI 이미지 생성 프롬프트 (영문)")
-    sfx: str = Field(description="효과음 (없으면 빈 문자열)")
 
 
 class Script(BaseModel):
@@ -110,15 +135,25 @@ def script(project: Project) -> None:
     res = llm.structured(config.prompt("script"), user, Script, max_tokens=32000)
     data = res.model_dump()
     project.write_json("script", "scenes.json", data)
-    md = [f"# {data['title_working']}\n"]
-    for s in data["scenes"]:
-        md.append(f"### #{s['id']} [{s['section']}] ({s['visual_type']})\n{s['narration']}\n"
-                  f"> 화면: {s['visual_brief']}  |  큰글씨: {s['on_screen_text']}  |  효과음: {s['sfx']}\n")
-    (project.dir("script") / "script.md").write_text("\n".join(md), encoding="utf-8")
+    write_script_md(project, data)
     total = sum(len(s["narration"].replace(" ", "")) for s in data["scenes"])
     print(f"[script] 씬 {len(data['scenes'])}개, {total}자 (~{total / cpm:.1f}분) → {project.dir('script')}/script.md\n"
           f"         수정은 scenes.json 에서. 확인 후: ytflow approve {project.path.name} script")
     project.mark_done("script")
+
+
+def write_script_md(project: Project, data: dict) -> None:
+    """사람이 읽는 대본: 원본 발언은 인용 블록, 화면 지시는 한 줄 요약."""
+    md = [f"# {data['title_working']}\n"]
+    for s in data["scenes"]:
+        src = s.get("source") or {}
+        rng = f"{src.get('start') or ''}~{src.get('end') or ''}".strip("~") or (f"자막 '{src.get('find')}'" if src.get("find") else "")
+        head = f"### #{s['id']} [{s['section']}] {'🎙 원본 발언' if s.get('kind') == 'quote' else ''} ({s['visual_type']})"
+        body = (f"> {s.get('quote_en', '')}\n\n{s['narration']}" if s.get("kind") == "quote" else s["narration"])
+        meta = f"라벨: {s.get('label', '')}" + (f"  |  소스: {src.get('url')} {rng}" if src.get("url") else "")
+        meta += f"  |  화면: {s['visual_brief']}"
+        md.append(f"{head}\n{body}\n\n_{meta}_\n")
+    (project.dir("script") / "script.md").write_text("\n".join(md), encoding="utf-8")
 
 
 # ---------------------------------------------------------------- 9. 패키지
