@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -10,6 +11,9 @@ from pathlib import Path
 
 def _run(args: list[str]) -> str:
     cmd = [sys.executable, "-m", "yt_dlp", "--no-warnings", "--ignore-errors", *args]
+    # YouTube 서명 해제(JS 챌린지)에 필요한 런타임. deno 가 없으면 node 를 사용
+    if not shutil.which("deno") and shutil.which("node"):
+        cmd[3:3] = ["--js-runtimes", "node"]
     out = subprocess.run(cmd, capture_output=True, text=True)
     if out.returncode not in (0, 1):
         raise RuntimeError(out.stderr[-2000:])
@@ -43,7 +47,7 @@ def download_lowres(video_id: str, out_dir: Path) -> Path | None:
     """컷 분석용 저화질 영상 (분석 후 삭제 권장)."""
     out_dir.mkdir(parents=True, exist_ok=True)
     _run([
-        "-f", "worst[height>=240][ext=mp4]/worst",
+        "-f", "bv*[height<=360]/worst[height>=144]/worst",
         "-o", str(out_dir / "%(id)s.%(ext)s"),
         f"https://www.youtube.com/watch?v={video_id}",
     ])

@@ -9,6 +9,7 @@
 
 - **docs/01-benchmark.md**: 무엇을 어떻게 벤치마킹하나 (측정 틀, 장르 가설 체크리스트, 주의점)
 - **docs/02-workflow-sop.md**: 단계별 SOP, 사람과 자동화의 역할 분담, 크론 운영, 품질 체크리스트
+- **docs/03-benchmark-result.md**: 식스시그마·AI비즈PT 실제 벤치마킹 결과 (규칙 원본: `data/style_profile.json`)
 
 ## 설치
 

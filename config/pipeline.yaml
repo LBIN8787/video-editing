@@ -7,7 +7,7 @@ llm:
   fallbacks: true         # 안전 분류기 거절 시 서버측 대체 모델로 재시도
 
 discover:
-  seed_keywords: ["AI 자동화", "부업 트렌드", "기업 분석", "경제 이슈"]
+  seed_keywords: ["엔비디아", "AI 반도체", "빅테크 실적", "AI 부업", "1인 창업 AI", "챗GPT 클로드 제미나이 비교"]
   search_per_keyword: 25  # 키워드당 검색 결과 수 (최신순)
   deep_check_top: 15      # 구독자 대비 조회수(아웃라이어) 계산할 상위 후보 수
   min_outlier: 2.0        # 조회수 / 구독자수 기준 하한
@@ -15,7 +15,7 @@ discover:
 
 script:
   target_minutes: 9
-  chars_per_minute: 330   # benchmark 결과가 있으면 스타일 프로필 값으로 덮어씀
+  chars_per_minute: 260   # 2026-11 벤치마킹 측정값. 스타일 프로필 값이 있으면 그 값을 우선 사용
 
 tts:
   backend: edge           # edge | manual  (manual = 직접 녹음한 scene_XXX.wav 사용)
