@@ -2,7 +2,10 @@ channel_niche: "경제·비즈니스·AI 지식 해설 (얼굴 없는 내레이�
 language: ko
 
 llm:
-  model: claude-opus-5-5
+  backend: claude-cli     # claude-cli = Claude 구독(claude -p) 사용, API 키 불필요
+                          # api        = Anthropic API (ANTHROPIC_API_KEY 필요)
+  cli_model: opus         # claude-cli 백엔드에서 쓸 모델 별칭
+  model: claude-opus-5-5  # 이하 api 백엔드 설정
   effort: high            # low | medium | high | xhigh | max
   fallbacks: true         # 안전 분류기 거절 시 서버측 대체 모델로 재시도
 

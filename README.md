@@ -16,8 +16,12 @@
 ```bash
 cd video-editing
 pip install -r requirements.txt     # ffmpeg/ffprobe 는 OS 패키지로 설치
-export ANTHROPIC_API_KEY=...        # 또는 `ant auth login`
 ```
+
+**Claude 연결 방식** (`config/pipeline.yaml` → `llm.backend`)
+- `claude-cli` (기본): Claude Pro/Max **구독**으로 동작합니다. API 키가 필요 없습니다.
+  `npm install -g @anthropic-ai/claude-code` 로 설치하고, `claude` 를 한 번 실행해 구독 계정으로 로그인하세요. 구독 사용량 한도를 함께 씁니다.
+- `api`: Anthropic API를 씁니다. `export ANTHROPIC_API_KEY=...` 가 필요하고, 쓴 만큼 과금됩니다.
 
 1. `config/channels.yaml`: 벤치마킹 채널 목록입니다. 식스시그마(기준)와 AI비즈PT가 들어 있고, 로제타는 주소를 확인하면 추가합니다.
 2. `config/pipeline.yaml`: 채널 분야, 시드 키워드, TTS 목소리, 폰트, BGM, 게이트를 설정합니다.
