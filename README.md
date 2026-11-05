@@ -18,7 +18,7 @@ pip install -r requirements.txt     # ffmpeg/ffprobe 는 OS 패키지로 설치
 export ANTHROPIC_API_KEY=...        # 또는 `ant auth login`
 ```
 
-1. `config/channels.yaml`: 세 채널의 실제 URL(@핸들)을 입력합니다. **필수**입니다.
+1. `config/channels.yaml`: 벤치마킹 채널 목록입니다. 식스시그마(기준)와 AI비즈PT가 들어 있고, 로제타는 주소를 확인하면 추가합니다.
 2. `config/pipeline.yaml`: 채널 분야, 시드 키워드, TTS 목소리, 폰트, BGM, 게이트를 설정합니다.
 
 ## 빠른 시작

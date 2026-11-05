@@ -1,19 +1,19 @@
 # 벤치마킹 대상 채널.
-# url 은 채널 페이지 주소(@핸들)로 바꿔 넣으세요. 이름이 비슷한 채널이 많아
-# 자동으로 추정하지 않았습니다. 한 번 실행해 보고 결과의 channel 이름을 꼭 확인하세요.
+# url 은 채널 페이지 주소(@핸들)입니다. 채널을 추가하면 weight 합이 1 이 되도록 맞춰 주세요.
 channels:
   - name: 식스시그마
     role: primary          # primary = 편집/대본 스타일의 기준 채널
-    url: "https://www.youtube.com/@CHANGE_ME_sixsigma"
-    weight: 0.6
+    url: "https://www.youtube.com/@식스시그마"
+    weight: 0.7
   - name: AI비즈PT
     role: reference
-    url: "https://www.youtube.com/@CHANGE_ME_aibizpt"
-    weight: 0.2
-  - name: 로제타
-    role: reference
-    url: "https://www.youtube.com/@CHANGE_ME_rosetta"
-    weight: 0.2
+    url: "https://www.youtube.com/@AIBizPT"
+    weight: 0.3
+  # 로제타: 채널 주소가 확인되면 주석을 풀고 weight 를 다시 나눠 주세요.
+  # - name: 로제타
+  #   role: reference
+  #   url: "https://www.youtube.com/@CHANGE_ME_rosetta"
+  #   weight: 0.2
 
 # 채널마다 분석할 최근 영상 수 / 그중 상세 분석(자막·컷)할 상위 아웃라이어 수
 recent_videos: 40
