@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=1920, height=1080">
+<script src="assets/gsap.min.js"></script>
+<style>@font-face{font-family:serif-x;src:url('assets/fonts/NanumMyeongjo-ExtraBold.ttf')}@font-face{font-family:serif-b;src:url('assets/fonts/NanumMyeongjo-Bold.ttf')}@font-face{font-family:pen;src:url('assets/fonts/NanumPenScript-Regular.ttf')}@font-face{font-family:sans;src:url('assets/fonts/NanumGothic-Bold.ttf')}@font-face{font-family:sans-x;src:url('assets/fonts/NanumGothic-ExtraBold.ttf')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#EEE7DA}
+#root{position:relative;width:100%;height:100%}
+#bg{position:absolute;inset:0;width:100%;height:100%}
+.t{position:absolute;white-space:nowrap;line-height:1.15}
+.t span{display:inline-block}
+.i{position:absolute}
+svg#ink{position:absolute;inset:0}
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="6.07" data-width="1920" data-height="1080">
+<img id="bg" src="assets/paper.jpg" class="clip" data-start="0" data-duration="6.07" data-track-index="0">
+<div id="e1" style="position:absolute;inset:0;background:#2b2f3a"></div><img id="e2" src="assets/paper.jpg" style="position:absolute;left:0;top:0;width:1920px;height:1080px;box-shadow:-30px 0 60px rgba(0,0,0,.45)"><div id="layer" class="clip" data-start="0" data-duration="6.07" data-track-index="1" data-layout-allow-overlap>
+<svg id="ink" width="1920" height="1080" viewBox="0 0 1920 1080"><path class="r0" d="M442.0805537197739 710.368919705376 C684.2371001671901 705.3285986770704, 929.1385461813383 706.6932434115573, 1479.0288603208214 714.4762338700145 M441.2927257687971 709.7658981047944 C765.3716060707145 707.2578567575974, 1088.9314101907094 708.9068241957141, 1478.4065719456598 714.314076444991" fill="none" stroke="#C4452F" stroke-width="4.5" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>
+<div id="e3" class="i" style="left:905px;top:275px"><svg
+  class="lucide lucide-memory-stick"
+  xmlns="http://www.w3.org/2000/svg"
+  width="110"
+  height="110"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#C4452F"
+  stroke-width="2.0"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 12v-2" />
+  <path d="M12 18v-2" />
+  <path d="M16 12v-2" />
+  <path d="M16 18v-2" />
+  <path d="M2 11h1.5" />
+  <path d="M20 18v-2" />
+  <path d="M20.5 11H22" />
+  <path d="M4 18v-2" />
+  <path d="M8 12v-2" />
+  <path d="M8 18v-2" />
+  <rect x="2" y="6" width="20" height="10" rx="2" />
+</svg>
+</div><div id="e4w" class="t" style="left:960px;top:470px;font-family:serif-x;font-size:120px;color:#C4452F;transform:translate(-50%,-50%)"><span id="e4">2</span></div><div id="e5w" class="t" style="left:960px;top:640px;font-family:serif-x;font-size:92px;color:#22304D;transform:translate(-50%,-50%)"><span id="e5">왜 한국 반도체가 흔들렸나</span></div>
+</div></div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#e2",{x:1920,rotation:4},{x:0,rotation:0,duration:0.7,ease:"power3.out"},0);
+tl.fromTo("#e3",{opacity:0,scale:0.85},{opacity:1,scale:1,duration:0.4,ease:"back.out(2)"},0.60);
+tl.fromTo("#e4",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},0.70);
+tl.fromTo("#e5",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},0.90);
+tl.to(".r0",{strokeDashoffset:0,duration:0.45,ease:"power1.inOut",stagger:0.037},1.30);
+window.__timelines["main"] = tl;
+tl.seek(0);
+</script></body></html>

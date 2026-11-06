@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=1920, height=1080">
+<script src="assets/gsap.min.js"></script>
+<style>@font-face{font-family:serif-x;src:url('assets/fonts/NanumMyeongjo-ExtraBold.ttf')}@font-face{font-family:serif-b;src:url('assets/fonts/NanumMyeongjo-Bold.ttf')}@font-face{font-family:pen;src:url('assets/fonts/NanumPenScript-Regular.ttf')}@font-face{font-family:sans;src:url('assets/fonts/NanumGothic-Bold.ttf')}@font-face{font-family:sans-x;src:url('assets/fonts/NanumGothic-ExtraBold.ttf')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#EEE7DA}
+#root{position:relative;width:100%;height:100%}
+#bg{position:absolute;inset:0;width:100%;height:100%}
+.t{position:absolute;white-space:nowrap;line-height:1.15}
+.t span{display:inline-block}
+.i{position:absolute}
+svg#ink{position:absolute;inset:0}
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="11.32" data-width="1920" data-height="1080">
+<img id="bg" src="assets/paper.jpg" class="clip" data-start="0" data-duration="11.32" data-track-index="0">
+<div id="layer" class="clip" data-start="0" data-duration="11.32" data-track-index="1" data-layout-allow-overlap>
+<svg id="ink" width="1920" height="1080" viewBox="0 0 1920 1080"><path class="r0" d="M737.5932354134503 183.73082499500683 C846.2838848482769 183.11578449798554, 955.6092900008234 185.36126774094308, 1182.3219897958322 186.7115276638827 M736.568965534348 184.41344138754175 C829.1041036858758 182.5821994431949, 920.3300449650869 183.36992239117015, 1183.3662003993536 187.19451236503173" fill="none" stroke="#C4452F" stroke-width="3.5" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><path class="r1" d="M346.1968524067178 260.67122547578583 C457.4950559843205 261.7296782740174, 570.1326182621112 259.42356415730825, 805.7367171393223 260.30061782835605 M345.8338836077012 260.4863433449518 C450.6251544664528 258.3794449807146, 555.3518991268407 258.2448141053204, 806.55343038076 260.5111976681041 M804.4096760362592 261.1281686632422 C804.6894716095867 363.1267473906104, 805.0016128595687 469.1069589736468, 807.7136698267691 601.0321207713941 M806.8179724076897 259.92505838713936 C808.0652840399288 331.1474263463685, 807.7055049052547 402.485557715413, 806.8546633334829 599.684758953609 M806.2444459230219 600.3032645880985 C634.3934352547359 599.4739272473635, 460.4415152475998 598.261744006009, 345.65922552415435 601.1364124550142 M805.613656312535 599.7391855764291 C637.5591076015858 598.1009695487779, 467.5354491842527 598.0527843304513, 346.46603416074754 600.0198226453933 M344.96026887905987 601.6427386975903 C346.34666054015196 516.3453495558092, 346.24727973220473 433.54825535150786, 345.1779976512509 261.39920033222774 M345.79184567242726 599.6425621355455 C344.3512165281715 482.5239068108824, 343.33500643733623 365.03539883423053, 346.7078809832528 259.7458445948332" fill="none" stroke="#22304D" stroke-width="3" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><path class="r2" d="M1113.5036823554888 260.0427305991939 C1226.5163407859109 263.89186519105, 1339.0101656114593 262.257039811996, 1574.4685079025369 259.3254281576374 M1114.0469987907818 260.04025783303683 C1228.1070034682964 260.16926021484505, 1342.441456359796 260.9022484816006, 1573.5947946191293 260.36125879253194 M1575.4746143498458 261.3453118077532 C1573.8117989718492 368.41046661565275, 1574.7232311714024 477.853386703841, 1575.1855132693067 598.5455131079563 M1574.2093338709622 260.0990092162634 C1574.7189129223373 354.52320630523633, 1573.5129177590954 449.884948911853, 1574.340657707555 600.8566249927511 M1573.6698869360152 598.9606187959348 C1394.595965733321 598.1076984297665, 1214.2147652599326 598.9921709469955, 1113.5600220921638 599.6784644369773 M1573.647973067848 600.258587292459 C1415.9794287131074 602.5992021521788, 1257.5720821505743 602.3863499542401, 1114.4290018045847 599.4386171109965 M1114.0690043516263 599.6655989547489 C1118.1422063389473 487.23889076396875, 1116.5414838660947 376.4071227021101, 1115.4240741101194 258.62078316777547 M1114.84733760902 599.6410222045255 C1113.9060336437524 495.1432754882384, 1113.3283746750633 389.760572707466, 1114.2232219511457 259.7354713565839" fill="none" stroke="#C4452F" stroke-width="3" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><path class="r3" d="M958.2351459654049 619.1308960555122 C958.0321470617876 649.5047145849094, 958.153681117259 677.3624562634155, 961.7808943720535 741.152233391814 M960.3859335391783 619.3978696719744 C959.9108853042237 651.5485642828978, 961.4020285338275 684.5104421556928, 959.7764561234974 740.3135373399593" fill="none" stroke="#22304D" stroke-width="3.5" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><path class="r4" d="M950.9685469617863 721.3890919621057 C952.6266882485958 724.7065757451089, 954.8990131623575 729.2524042348228, 959.511106120795 739.803556896001 M950.8988479377497 720.5475026949264 C953.4327207582564 726.442189299987, 955.8019634577971 732.2531039494579, 960.1027461770922 740.0607144173234 M960.4650003544987 738.8321120031178 C964.4141814564969 733.4502622813167, 966.8970807725866 725.1535365924777, 969.6586940044742 720.5399178917475 M960.5021464113146 740.3094205673784 C961.6126307819568 735.750175319703, 964.0650830043854 731.8415919764745, 969.0933497196269 720.0059440239287" fill="none" stroke="#22304D" stroke-width="3.5" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>
+<div id="e1" style="position:absolute;right:56px;top:40px;padding:6px 14px;background:rgba(251,248,241,.85);border-radius:6px;font-family:sans;font-size:24px;color:#5a5f6a;white-space:nowrap">자체 정리</div><div id="e2" style="position:absolute;left:56px;top:38px;font-family:sans-x;font-size:26px;color:#22304D;white-space:nowrap"><span style="background:#C4452F;color:#fff;padding:2px 12px;border-radius:4px;margin-right:12px">2</span>왜 한국 반도체가 흔들렸나</div><div id="e3w" class="t" style="left:960px;top:140px;font-family:serif-x;font-size:62px;color:#22304D;transform:translate(-50%,-50%)"><span id="e3">빵집과 오븐 회사</span></div><div id="e4" class="i" style="left:511px;top:305px"><svg
+  class="lucide lucide-factory"
+  xmlns="http://www.w3.org/2000/svg"
+  width="130"
+  height="130"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#22304D"
+  stroke-width="2.0"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 16h.01" />
+  <path d="M16 16h.01" />
+  <path d="M3 19a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5a.5.5 0 0 0-.769-.422l-4.462 2.844A.5.5 0 0 1 15 10.5v-2a.5.5 0 0 0-.769-.422L9.77 10.922A.5.5 0 0 1 9 10.5V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z" />
+  <path d="M8 16h.01" />
+</svg>
+</div><div id="e5w" class="t" style="left:576px;top:500px;font-family:serif-x;font-size:58px;color:#22304D;transform:translate(-50%,-50%)"><span id="e5">AI 공장</span></div><div id="e6w" class="t" style="left:576px;top:560px;font-family:pen;font-size:44px;color:#5a5f6a;transform:translate(-50%,-50%)"><span id="e6">허가가 막히면</span></div><div id="e7" class="i" style="left:1279px;top:305px"><svg
+  class="lucide lucide-store"
+  xmlns="http://www.w3.org/2000/svg"
+  width="130"
+  height="130"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#C4452F"
+  stroke-width="2.0"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" />
+  <path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" />
+  <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" />
+</svg>
+</div><div id="e8w" class="t" style="left:1344px;top:500px;font-family:serif-x;font-size:58px;color:#C4452F;transform:translate(-50%,-50%)"><span id="e8">빵집</span></div><div id="e9w" class="t" style="left:1344px;top:560px;font-family:pen;font-size:44px;color:#5a5f6a;transform:translate(-50%,-50%)"><span id="e9">새 매장이 안 생기면</span></div><div id="e10w" class="t" style="left:960px;top:430px;font-family:serif-x;font-size:120px;color:#C4452F;transform:translate(-50%,-50%)"><span id="e10">≈</span></div><div id="e11" class="i" style="left:668px;top:768px"><svg
+  class="lucide lucide-cpu"
+  xmlns="http://www.w3.org/2000/svg"
+  width="64"
+  height="64"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#C4452F"
+  stroke-width="2.0"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 20v2" />
+  <path d="M12 2v2" />
+  <path d="M17 20v2" />
+  <path d="M17 2v2" />
+  <path d="M2 12h2" />
+  <path d="M2 17h2" />
+  <path d="M2 7h2" />
+  <path d="M20 12h2" />
+  <path d="M20 17h2" />
+  <path d="M20 7h2" />
+  <path d="M7 20v2" />
+  <path d="M7 2v2" />
+  <rect x="4" y="4" width="16" height="16" rx="2" />
+  <rect x="8" y="8" width="8" height="8" rx="1" />
+</svg>
+</div><div id="e12w" class="t" style="left:760px;top:800px;font-family:serif-b;font-size:46px;color:#C4452F;transform:translate(0,-50%)"><span id="e12">오븐 회사(반도체) 주문 걱정</span></div>
+</div></div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#e1",{opacity:0},{opacity:1,duration:0.4},0.2);
+tl.fromTo("#e2",{opacity:0,x:-20},{opacity:1,x:0,duration:0.4},0.15);
+tl.fromTo("#e3",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},0.20);
+tl.to(".r0",{strokeDashoffset:0,duration:0.35,ease:"power1.inOut",stagger:0.029},0.50);
+tl.to(".r1",{strokeDashoffset:0,duration:0.4,ease:"power1.inOut",stagger:0.033},0.55);
+tl.fromTo("#e4",{opacity:0,scale:0.85},{opacity:1,scale:1,duration:0.4,ease:"back.out(2)"},0.75);
+tl.fromTo("#e5",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},0.85);
+tl.fromTo("#e6",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},0.95);
+tl.to(".r2",{strokeDashoffset:0,duration:0.4,ease:"power1.inOut",stagger:0.033},1.75);
+tl.fromTo("#e7",{opacity:0,scale:0.85},{opacity:1,scale:1,duration:0.4,ease:"back.out(2)"},1.95);
+tl.fromTo("#e8",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},2.05);
+tl.fromTo("#e9",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},2.15);
+tl.fromTo("#e10",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},1.55);
+tl.to(".r3",{strokeDashoffset:0,duration:0.35,ease:"power1.inOut",stagger:0.029},5.12);
+tl.to(".r4",{strokeDashoffset:0,duration:0.15,ease:"power1.inOut",stagger:0.012},5.42);
+tl.fromTo("#e11",{opacity:0,scale:0.85},{opacity:1,scale:1,duration:0.4,ease:"back.out(2)"},5.52);
+tl.fromTo("#e12",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},5.62);
+window.__timelines["main"] = tl;
+tl.seek(0);
+</script></body></html>

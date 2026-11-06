@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=1920, height=1080">
+<script src="assets/gsap.min.js"></script>
+<style>@font-face{font-family:serif-x;src:url('assets/fonts/NanumMyeongjo-ExtraBold.ttf')}@font-face{font-family:serif-b;src:url('assets/fonts/NanumMyeongjo-Bold.ttf')}@font-face{font-family:pen;src:url('assets/fonts/NanumPenScript-Regular.ttf')}@font-face{font-family:sans;src:url('assets/fonts/NanumGothic-Bold.ttf')}@font-face{font-family:sans-x;src:url('assets/fonts/NanumGothic-ExtraBold.ttf')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#EEE7DA}
+#root{position:relative;width:100%;height:100%}
+#bg{position:absolute;inset:0;width:100%;height:100%}
+.t{position:absolute;white-space:nowrap;line-height:1.15}
+.t span{display:inline-block}
+.i{position:absolute}
+svg#ink{position:absolute;inset:0}
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="7.99" data-width="1920" data-height="1080">
+<img id="bg" src="assets/paper.jpg" class="clip" data-start="0" data-duration="7.99" data-track-index="0">
+<div id="e1f" style="position:absolute;left:282px;top:102px;width:1356px;height:778px;background:#FBF8F1;box-shadow:0 18px 40px rgba(0,0,0,.28);transform:rotate(-1.6deg)"></div><div id="e1w" style="position:absolute;left:300px;top:120px;width:1320px;height:742px;overflow:hidden;transform:rotate(-1.6deg)"><video id="e1" class="clip" src="assets/clip_023.mp4" muted playsinline data-start="0" data-duration="7.99" data-track-index="2" style="width:100%;height:100%;object-fit:cover"></video></div><div style="position:absolute;left:870.0px;top:80px;width:180px;height:46px;background:rgba(236,220,170,.85);transform:rotate(3deg)"></div><div id="layer" class="clip" data-start="0" data-duration="7.99" data-track-index="1" data-layout-allow-overlap>
+<svg id="ink" width="1920" height="1080" viewBox="0 0 1920 1080"><path class="r0" d="M1523.3446017816664 166.75385281294584 C1533.9287774886027 177.38428663870693, 1542.0391505573898 184.40398724636435, 1553.7433376386762 201.3324065372348 M1525.0848939977586 167.59941580668092 C1532.862464346306 176.4598170205355, 1542.4119098046212 186.51443756365776, 1555.441630729288 200.43818345442415" fill="none" stroke="#F3D36B" stroke-width="3.5" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>
+<div id="e2" style="position:absolute;right:56px;top:40px;padding:6px 14px;background:rgba(251,248,241,.85);border-radius:6px;font-family:sans;font-size:24px;color:#5a5f6a;white-space:nowrap">자료 화면 · NASA 에임스 모듈형 슈퍼컴퓨터 시설 (NASA, 2019)</div><div id="e3" style="position:absolute;left:56px;top:38px;font-family:sans-x;font-size:26px;color:#22304D;white-space:nowrap"><span style="background:#C4452F;color:#fff;padding:2px 12px;border-radius:4px;margin-right:12px">4</span>돈은 멈췄나</div><div id="e4" style="position:absolute;left:1120px;top:60px;width:465px;height:110px;background:#FBF8F1;box-shadow:0 10px 26px rgba(0,0,0,.3);transform:rotate(-1.2deg)"><div id="e4m" style="position:absolute;left:28px;top:58px;width:409px;height:30px;background:#F3D36B;opacity:.8;transform-origin:left center"></div><div style="position:absolute;left:35px;top:18px;font-family:serif-x;font-size:56px;color:#22304D;white-space:nowrap">14초마다 하나씩</div></div><div id="e5" style="position:absolute;left:1505px;top:210px;font-family:pen;font-size:50px;color:#FFF3C4;text-shadow:0 2px 6px rgba(0,0,0,.8);white-space:nowrap">재시 CEO · 3분기 실적 발표</div>
+</div></div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#e1f,#e1w",{opacity:0,y:40},{opacity:1,y:0,duration:0.5,ease:"power2.out"},0.00);
+tl.fromTo("#e1",{scale:1.0},{scale:1.060,duration:7.99,ease:"none"},0);
+tl.fromTo("#e2",{opacity:0},{opacity:1,duration:0.4},0.2);
+tl.fromTo("#e3",{opacity:0,x:-20},{opacity:1,x:0,duration:0.4},0.15);
+tl.fromTo("#e4",{opacity:0,y:-24,rotation:-5},{opacity:1,y:0,rotation:-1.2,duration:0.5,ease:"back.out(1.6)"},0.75);
+tl.fromTo("#e4m",{scaleX:0},{scaleX:1,duration:0.5,ease:"power1.inOut"},1.20);
+tl.to(".r0",{strokeDashoffset:0,duration:0.25,ease:"power1.inOut",stagger:0.021},1.55);
+tl.fromTo("#e5",{opacity:0,y:8},{opacity:1,y:0,duration:0.35},1.75);
+window.__timelines["main"] = tl;
+tl.seek(0);
+</script></body></html>

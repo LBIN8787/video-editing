@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=1920, height=1080">
+<script src="assets/gsap.min.js"></script>
+<style>@font-face{font-family:serif-x;src:url('assets/fonts/NanumMyeongjo-ExtraBold.ttf')}@font-face{font-family:serif-b;src:url('assets/fonts/NanumMyeongjo-Bold.ttf')}@font-face{font-family:pen;src:url('assets/fonts/NanumPenScript-Regular.ttf')}@font-face{font-family:sans;src:url('assets/fonts/NanumGothic-Bold.ttf')}@font-face{font-family:sans-x;src:url('assets/fonts/NanumGothic-ExtraBold.ttf')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#EEE7DA}
+#root{position:relative;width:100%;height:100%}
+#bg{position:absolute;inset:0;width:100%;height:100%}
+.t{position:absolute;white-space:nowrap;line-height:1.15}
+.t span{display:inline-block}
+.i{position:absolute}
+svg#ink{position:absolute;inset:0}
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="7.04" data-width="1920" data-height="1080">
+<img id="bg" src="assets/paper.jpg" class="clip" data-start="0" data-duration="7.04" data-track-index="0">
+<div id="e1w" style="position:absolute;inset:0;overflow:hidden"><video id="e1" class="clip" src="assets/clip_027.mp4" muted playsinline data-start="0" data-duration="7.04" data-track-index="2" style="width:100%;height:100%;object-fit:cover"></video></div><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 62%,rgba(0,0,0,.55) 100%)"></div><div style="position:absolute;inset:0;box-shadow:inset 0 0 0 14px #EEE7DA, inset 0 0 0 16px rgba(0,0,0,.15)"></div><div id="layer" class="clip" data-start="0" data-duration="7.04" data-track-index="1" data-layout-allow-overlap>
+<svg id="ink" width="1920" height="1080" viewBox="0 0 1920 1080"></svg>
+<div id="e2" style="position:absolute;right:56px;top:40px;padding:6px 14px;background:rgba(0,0,0,.45);border-radius:6px;font-family:sans;font-size:24px;color:#FFFFFF;white-space:nowrap">자료 화면 · 밤의 지구, 미국 동부 불빛 (NASA, 2017)</div><div id="e3" style="position:absolute;left:56px;top:38px;font-family:sans-x;font-size:26px;color:#FFFFFF;white-space:nowrap"><span style="background:#C4452F;color:#fff;padding:2px 12px;border-radius:4px;margin-right:12px">5</span>전에도 이런 일이 있었나</div>
+</div></div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#e1",{scale:1.0},{scale:1.060,duration:7.04,ease:"none"},0);
+tl.fromTo("#e2",{opacity:0},{opacity:1,duration:0.4},0.2);
+tl.fromTo("#e3",{opacity:0,x:-20},{opacity:1,x:0,duration:0.4},0.15);
+window.__timelines["main"] = tl;
+tl.seek(0);
+</script></body></html>

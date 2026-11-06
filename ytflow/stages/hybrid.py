@@ -768,8 +768,15 @@ def sfx_files() -> dict:
     if not base.exists():
         base = config.ROOT / ".agents" / "skills" / "media-use" / "audio" / "assets" / "sfx"
     files = {k: base / f"{k}.mp3" for k in ("whoosh", "pop", "click-soft", "impact-bass-1")}
-    pen = config.ROOT / ".cache" / "sfx" / "pencil.mp3"
-    if pen.exists():
+    pen = config.ROOT / ".cache" / "sfx" / "pencil.wav"
+    if not pen.exists() or pen.stat().st_size < 1000:
+        # 연필 긁는 소리: 내려받지 않고 직접 만듦 (분홍 잡음 → 대역 통과 → 빠른 떨림 → 페이드)
+        pen.parent.mkdir(parents=True, exist_ok=True)
+        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i",
+                        "anoisesrc=color=pink:duration=0.9:amplitude=0.6:seed=7",
+                        "-af", "highpass=f=1800,lowpass=f=6500,tremolo=f=11:d=0.7,afade=t=in:d=0.05,afade=t=out:st=0.6:d=0.3",
+                        "-ar", "48000", "-ac", "2", str(pen)], check=False)
+    if pen.exists() and pen.stat().st_size > 1000:
         files["pencil"] = pen
     return {k: v for k, v in files.items() if v.exists()}
 
@@ -843,7 +850,7 @@ def make(project: Project, workers: int = 3) -> Path:
     sfx_wav = work / "sfx.wav"
     if ev:
         inputs, filt = [], []
-        vol = {"pencil": 0.22, "whoosh": 0.35, "pop": 0.3, "click-soft": 0.25, "impact-bass-1": 0.3}
+        vol = {"pencil": 0.12, "whoosh": 0.35, "pop": 0.3, "click-soft": 0.25, "impact-bass-1": 0.3}
         for k, (n, t) in enumerate(ev[:180]):
             inputs += ["-i", str(files[n])]
             filt.append(f"[{k}:a]atrim=0:{1.4 if n == 'pencil' else 2.5},volume={vol.get(n, 0.3)},adelay={int(t * 1000)}|{int(t * 1000)}[s{k}]")

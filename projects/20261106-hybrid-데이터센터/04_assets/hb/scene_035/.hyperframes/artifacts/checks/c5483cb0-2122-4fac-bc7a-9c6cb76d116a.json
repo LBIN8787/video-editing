@@ -1,0 +1,196 @@
+{
+  "ok": false,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 1,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"layer\"> is a timeline element that contains nested <svg id=\"ink\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#layer",
+        "dataAttributes": {},
+        "sourceFile": "/home/user/video-editing/projects/20261106-hybrid-데이터센터/04_assets/hb/scene_035/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"layer\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      }
+    ],
+    "filesScanned": 1
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 1,
+    "findings": [
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 1.197,
+        "selector": "#e1",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 285.54,
+          "top": 99.19,
+          "right": 1634.46,
+          "bottom": 882.81,
+          "width": 1348.91,
+          "height": 783.63
+        },
+        "containerSelector": "#e1w",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 289.9,
+          "top": 101.72,
+          "right": 1630.1,
+          "bottom": 880.28,
+          "width": 1340.2,
+          "height": 778.57
+        },
+        "overflow": {
+          "left": 4.36,
+          "right": 4.36,
+          "top": 2.53,
+          "bottom": 2.53
+        },
+        "dataAttributes": {
+          "data-hf-render-id": "e1",
+          "data-start": "0",
+          "data-duration": "7.18",
+          "data-track-index": "2",
+          "data-end": "7.18",
+          "data-has-audio": "false",
+          "data-hf-authored-opacity": ""
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 285.54,
+          "y": 99.19,
+          "width": 1348.91,
+          "height": 783.63
+        },
+        "firstSeen": 1.197,
+        "lastSeen": 6.781,
+        "occurrences": 8,
+        "heldMs": 5584,
+        "times": [
+          1.197,
+          1.994,
+          2.792,
+          3.59,
+          4.388,
+          5.186,
+          5.983,
+          6.781
+        ]
+      }
+    ],
+    "duration": 7.18,
+    "samples": [
+      0.399,
+      1.197,
+      1.994,
+      2.792,
+      3.59,
+      4.388,
+      5.186,
+      5.983,
+      6.781
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 1,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": false,
+    "errorCount": 1,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "contrast_aa_failure",
+        "severity": "error",
+        "message": "Contrast is 2.04:1; WCAG AA requires 3:1.",
+        "text": "다음 숫자가 나오면 다시 재 보겠습니다",
+        "fg": "rgb(196,69,47)",
+        "bg": "rgb(169,166,162)",
+        "ratio": 2.04,
+        "requiredRatio": 3,
+        "suggestedColor": "rgb(151,53,36)",
+        "large": true,
+        "selector": "#e4",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 662.71875,
+          "y": 612.297607421875,
+          "width": 594.5625,
+          "height": 64.390625
+        },
+        "time": 1.994,
+        "times": [
+          1.994,
+          5.186
+        ]
+      }
+    ],
+    "enabled": true,
+    "samples": [
+      0.399,
+      1.994,
+      3.59,
+      5.186,
+      6.781
+    ],
+    "checked": 8,
+    "passed": 6
+  },
+  "craft": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "step": 0.12399999999999989,
+    "samples": 58
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  }
+}

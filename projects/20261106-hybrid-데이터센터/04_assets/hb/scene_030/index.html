@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=1920, height=1080">
+<script src="assets/gsap.min.js"></script>
+<style>@font-face{font-family:serif-x;src:url('assets/fonts/NanumMyeongjo-ExtraBold.ttf')}@font-face{font-family:serif-b;src:url('assets/fonts/NanumMyeongjo-Bold.ttf')}@font-face{font-family:pen;src:url('assets/fonts/NanumPenScript-Regular.ttf')}@font-face{font-family:sans;src:url('assets/fonts/NanumGothic-Bold.ttf')}@font-face{font-family:sans-x;src:url('assets/fonts/NanumGothic-ExtraBold.ttf')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#EEE7DA}
+#root{position:relative;width:100%;height:100%}
+#bg{position:absolute;inset:0;width:100%;height:100%}
+.t{position:absolute;white-space:nowrap;line-height:1.15}
+.t span{display:inline-block}
+.i{position:absolute}
+svg#ink{position:absolute;inset:0}
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="3.56" data-width="1920" data-height="1080">
+<img id="bg" src="assets/paper.jpg" class="clip" data-start="0" data-duration="3.56" data-track-index="0">
+<div id="e1" style="position:absolute;inset:0;background:#2b2f3a"></div><img id="e2" src="assets/paper.jpg" style="position:absolute;left:0;top:0;width:1920px;height:1080px;box-shadow:-30px 0 60px rgba(0,0,0,.45)"><div id="layer" class="clip" data-start="0" data-duration="3.56" data-track-index="1" data-layout-allow-overlap>
+<svg id="ink" width="1920" height="1080" viewBox="0 0 1920 1080"><path class="r0" d="M728.1315951110494 711.0748205883818 C863.8312584699911 709.8788775203201, 1000.1124731848515 712.1855341073764, 1191.582362995219 714.2624064829363 M729.0309139400719 710.0820987888864 C901.782339711884 714.252498585259, 1073.550426441464 715.3973771696922, 1190.7155696934979 713.8084226928623" fill="none" stroke="#C4452F" stroke-width="4.5" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>
+<div id="e3" class="i" style="left:905px;top:275px"><svg
+  class="lucide lucide-scale"
+  xmlns="http://www.w3.org/2000/svg"
+  width="110"
+  height="110"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#C4452F"
+  stroke-width="2.0"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 3v18" />
+  <path d="m19 8 3 8a5 5 0 0 1-6 0zV7" />
+  <path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1" />
+  <path d="m5 8 3 8a5 5 0 0 1-6 0zV7" />
+  <path d="M7 21h10" />
+</svg>
+</div><div id="e4w" class="t" style="left:960px;top:470px;font-family:serif-x;font-size:120px;color:#C4452F;transform:translate(-50%,-50%)"><span id="e4">6</span></div><div id="e5w" class="t" style="left:960px;top:640px;font-family:serif-x;font-size:92px;color:#22304D;transform:translate(-50%,-50%)"><span id="e5">반대로 보면</span></div>
+</div></div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#e2",{x:1920,rotation:4},{x:0,rotation:0,duration:0.7,ease:"power3.out"},0);
+tl.fromTo("#e3",{opacity:0,scale:0.85},{opacity:1,scale:1,duration:0.4,ease:"back.out(2)"},0.60);
+tl.fromTo("#e4",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},0.70);
+tl.fromTo("#e5",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},0.90);
+tl.to(".r0",{strokeDashoffset:0,duration:0.45,ease:"power1.inOut",stagger:0.037},1.30);
+window.__timelines["main"] = tl;
+tl.seek(0);
+</script></body></html>

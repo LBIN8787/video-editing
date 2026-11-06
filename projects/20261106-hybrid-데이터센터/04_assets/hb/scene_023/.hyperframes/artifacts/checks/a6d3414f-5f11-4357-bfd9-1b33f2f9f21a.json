@@ -1,0 +1,286 @@
+{
+  "ok": false,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 1,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"layer\"> is a timeline element that contains nested <svg id=\"ink\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#layer",
+        "dataAttributes": {},
+        "sourceFile": "/home/user/video-editing/projects/20261106-hybrid-데이터센터/04_assets/hb/scene_023/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"layer\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      }
+    ],
+    "filesScanned": 1
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": false,
+    "errorCount": 1,
+    "warningCount": 0,
+    "infoCount": 1,
+    "findings": [
+      {
+        "code": "text_occluded",
+        "severity": "error",
+        "time": 1.332,
+        "selector": "#e2",
+        "message": "Text is hidden beneath an opaque element.",
+        "rect": {
+          "left": 1185.31,
+          "top": 46,
+          "right": 1850,
+          "bottom": 70,
+          "width": 664.69,
+          "height": 24
+        },
+        "containerSelector": "#e4",
+        "text": "자료 화면 · NASA 에임스 모듈형 슈퍼컴퓨터 시설 (NASA, 2019)",
+        "fixHint": "Give the text its own zone, raise its stacking order above the covering element, or mark intentional layering with data-layout-allow-occlusion.",
+        "coveredFraction": 0.26,
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1185.31,
+          "y": 46,
+          "width": 664.69,
+          "height": 24
+        },
+        "firstSeen": 1.332,
+        "lastSeen": 7.546,
+        "occurrences": 8,
+        "heldMs": 6214,
+        "times": [
+          1.332,
+          2.219,
+          3.107,
+          3.995,
+          4.883,
+          5.771,
+          6.658,
+          7.546
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 0.444,
+        "selector": "#e1",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 287.69,
+          "top": 100.53,
+          "right": 1632.31,
+          "bottom": 881.66,
+          "width": 1344.62,
+          "height": 781.13
+        },
+        "containerSelector": "#e1w",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 289.9,
+          "top": 101.81,
+          "right": 1630.1,
+          "bottom": 880.38,
+          "width": 1340.2,
+          "height": 778.57
+        },
+        "overflow": {
+          "left": 2.21,
+          "right": 2.21
+        },
+        "dataAttributes": {
+          "data-hf-render-id": "e1",
+          "data-start": "0",
+          "data-duration": "7.99",
+          "data-track-index": "2",
+          "data-end": "7.99",
+          "data-has-audio": "false",
+          "data-hf-authored-opacity": ""
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 287.69,
+          "y": 100.53,
+          "width": 1344.62,
+          "height": 781.13
+        },
+        "firstSeen": 0.444,
+        "lastSeen": 7.546,
+        "occurrences": 9,
+        "heldMs": 7102,
+        "times": [
+          0.444,
+          1.332,
+          2.219,
+          3.107,
+          3.995,
+          4.883,
+          5.771,
+          6.658,
+          7.546
+        ]
+      }
+    ],
+    "duration": 7.99,
+    "samples": [
+      0.444,
+      1.332,
+      2.219,
+      3.107,
+      3.995,
+      4.883,
+      5.771,
+      6.658,
+      7.546
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 2,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": false,
+    "errorCount": 1,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "contrast_aa_failure",
+        "severity": "error",
+        "message": "Contrast is 1.21:1; WCAG AA requires 3:1.",
+        "text": "재시 CEO · 3분기 실적 발표",
+        "fg": "rgb(255,243,196)",
+        "bg": "rgb(227,222,210)",
+        "ratio": 1.21,
+        "requiredRatio": 3,
+        "suggestedColor": "rgb(132,126,101)",
+        "large": true,
+        "selector": "#e5",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1505,
+          "y": 210,
+          "width": 395.953125,
+          "height": 63
+        },
+        "time": 3.995,
+        "times": [
+          2.219,
+          3.995,
+          5.771,
+          7.546
+        ]
+      }
+    ],
+    "enabled": true,
+    "samples": [
+      0.444,
+      2.219,
+      3.995,
+      5.771,
+      7.546
+    ],
+    "checked": 23,
+    "passed": 19
+  },
+  "craft": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 1,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "text_below_floor",
+        "severity": "warning",
+        "message": "Type floor is 28 px (2.6% of the 1080 px short side, what a phone can read) and 3 text elements stay under it for 0.5 s or more, the smallest \"자료 화면 · NASA 에임스 모듈형 슈퍼컴퓨터 시설 (NASA, ...\" at 24 px: set reading text to at least 28 px, or put data-layout-ignore on text that is texture rather than reading; see references/look.md.",
+        "text": "자료 화면 · NASA 에임스 모듈형 슈퍼컴퓨터 시설 (NASA, 2019)",
+        "selector": "#e2",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1185.31,
+          "y": 46,
+          "width": 664.69,
+          "height": 24
+        },
+        "time": 0.375,
+        "times": [
+          0.375,
+          0.375,
+          0.375
+        ],
+        "fontPx": 24,
+        "floorPx": 28,
+        "seconds": 7.615,
+        "elements": [
+          {
+            "selector": "#e2",
+            "text": "자료 화면 · NASA 에임스 모듈형 슈퍼컴퓨터 시설 (NASA, 2019)",
+            "fontPx": 24,
+            "time": 0.375,
+            "seconds": 7.615
+          },
+          {
+            "selector": "#e3",
+            "text": "돈은 멈췄나",
+            "fontPx": 26,
+            "time": 0.375,
+            "seconds": 7.615
+          },
+          {
+            "selector": "#e3 > span:nth-of-type(1)",
+            "text": "4",
+            "fontPx": 26,
+            "time": 0.375,
+            "seconds": 7.615
+          }
+        ]
+      }
+    ],
+    "enabled": true,
+    "step": 0.125,
+    "samples": 64
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  }
+}

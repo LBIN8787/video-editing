@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=1920, height=1080">
+<script src="assets/gsap.min.js"></script>
+<style>@font-face{font-family:serif-x;src:url('assets/fonts/NanumMyeongjo-ExtraBold.ttf')}@font-face{font-family:serif-b;src:url('assets/fonts/NanumMyeongjo-Bold.ttf')}@font-face{font-family:pen;src:url('assets/fonts/NanumPenScript-Regular.ttf')}@font-face{font-family:sans;src:url('assets/fonts/NanumGothic-Bold.ttf')}@font-face{font-family:sans-x;src:url('assets/fonts/NanumGothic-ExtraBold.ttf')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#EEE7DA}
+#root{position:relative;width:100%;height:100%}
+#bg{position:absolute;inset:0;width:100%;height:100%}
+.t{position:absolute;white-space:nowrap;line-height:1.15}
+.t span{display:inline-block}
+.i{position:absolute}
+svg#ink{position:absolute;inset:0}
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="11.85" data-width="1920" data-height="1080">
+<img id="bg" src="assets/paper.jpg" class="clip" data-start="0" data-duration="11.85" data-track-index="0">
+<div id="layer" class="clip" data-start="0" data-duration="11.85" data-track-index="1" data-layout-allow-overlap>
+<svg id="ink" width="1920" height="1080" viewBox="0 0 1920 1080"><path class="r0" d="M795.1673131653187 184.4324780023953 C895.1796086776912 182.70939381398713, 995.8196779988161 183.3403686378795, 1125.1406436925765 186.28154625187227 M796.1217601371383 185.1792870683881 C915.8670242322744 186.44787065313668, 1035.7001321527982 187.6742534593324, 1123.5396891442026 187.8659860708434" fill="none" stroke="#C4452F" stroke-width="3.5" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><path class="r1" d="M191.02031496934592 559.3038852972537 C666.206823444143 561.8535025473326, 1142.3708898260445 560.1334087987631, 1749.2462732093782 560.214089891389 M190.44085489127784 560.0264568730817 C791.9518063752726 568.6587685697361, 1393.822605004348 568.4632222776696, 1749.7033689543978 560.04279773321" fill="none" stroke="#22304D" stroke-width="4" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><path class="r2" d="M231.0652299053967 544.1127634041011 C227.10655410437582 554.2111127413809, 227.3051399722576 562.3333870969713, 229.6840099699795 576.4452608816325 M228.9588719960302 541.1101203743368 C229.043986702767 548.5415669102222, 230.93179036459028 557.3724584076554, 229.80393581353127 577.7856549683959" fill="none" stroke="#22304D" stroke-width="3" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><path class="r3" d="M716.2463390540953 542.7658135650679 C716.0530492464106 553.1233972201125, 715.9391543010275 562.684496309422, 717.9190035831805 579.5552970347926 M716.0822734305325 542.7540985659696 C718.015336551072 549.0680443082937, 716.8441619324702 557.9270295136608, 717.016115907735 577.4643156037666" fill="none" stroke="#22304D" stroke-width="3" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><path class="r4" d="M1201.427448202794 541.4188637260347 C1204.9995443884454 552.0356816988439, 1204.5731686297975 563.0356055218726, 1200.9539971963814 577.4653331879526 M1203.2056748650348 541.7980767576024 C1203.2634863993771 552.194521706365, 1201.6333335003503 561.0816006196662, 1204.2282960019386 577.1429762391374" fill="none" stroke="#22304D" stroke-width="3" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><path class="r5" d="M1691.8085573514923 540.0719138870015 C1688.74603953048 550.9479661775753, 1688.007182958567 563.3867147343233, 1689.1889908095823 580.5753693411127 M1690.329076299537 540.8420549492351 C1689.634836247682 552.7209991044365, 1690.14570506823 561.6361717256718, 1688.840476096142 576.8216368745082" fill="none" stroke="#22304D" stroke-width="3" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><path class="r6" d="M716.989666500191 496.9249640479684 C717.6704279965888 510.1961243338883, 716.6190906114111 521.0095713019371, 717.4239844227832 538.4854054942728 M717.4524777340393 495.48603314086796 C716.0905315445434 508.2959495127201, 716.1424220846665 519.2876888521015, 716.0526561903457 539.1002975098788" fill="none" stroke="#C4452F" stroke-width="2.5" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><path class="r7" d="M1202.1707756488895 355.5780142089352 C1201.364782442541 411.82654321556913, 1205.2009642440985 466.7969493202865, 1205.658978035984 536.3954416474328 M1204.5758791685416 354.53001133250075 C1202.808886106984 412.93061521686616, 1202.4017983666818 470.6586365702562, 1203.2648362845493 538.7789581452496" fill="none" stroke="#C4452F" stroke-width="2.5" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><path class="r8" d="M1692.551884797588 494.231064369902 C1690.4005604542233 508.020756229572, 1688.724261442516 521.7119156032801, 1688.6939716491847 539.5054778005928 M1689.0992806030438 496.1739895241335 C1690.260173692868 509.64783079475166, 1689.3941076721408 523.5946840358898, 1690.477016378753 538.4576187806204" fill="none" stroke="#C4452F" stroke-width="2.5" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>
+<div id="e1" style="position:absolute;right:56px;top:40px;padding:6px 14px;background:rgba(251,248,241,.85);border-radius:6px;font-family:sans;font-size:24px;color:#5a5f6a;white-space:nowrap">2026.11.06 기준 일정</div><div id="e2" style="position:absolute;left:56px;top:38px;font-family:sans-x;font-size:26px;color:#22304D;white-space:nowrap"><span style="background:#C4452F;color:#fff;padding:2px 12px;border-radius:4px;margin-right:12px">6</span>반대로 보면</div><div id="e3w" class="t" style="left:960px;top:140px;font-family:serif-x;font-size:62px;color:#22304D;transform:translate(-50%,-50%)"><span id="e3">다음에 볼 것</span></div><div id="e4w" class="t" style="left:230px;top:620px;font-family:serif-x;font-size:46px;color:#22304D;transform:translate(-50%,-50%)"><span id="e4">11월</span></div><div id="e5w" class="t" style="left:717px;top:620px;font-family:serif-x;font-size:46px;color:#22304D;transform:translate(-50%,-50%)"><span id="e5">12월</span></div><div id="e6w" class="t" style="left:1203px;top:620px;font-family:serif-x;font-size:46px;color:#22304D;transform:translate(-50%,-50%)"><span id="e6">1월</span></div><div id="e7w" class="t" style="left:1690px;top:620px;font-family:serif-x;font-size:46px;color:#22304D;transform:translate(-50%,-50%)"><span id="e7">2월</span></div><div id="e8" class="i" style="left:691px;top:324px"><svg
+  class="lucide lucide-calendar"
+  xmlns="http://www.w3.org/2000/svg"
+  width="52"
+  height="52"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#C4452F"
+  stroke-width="2.0"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2v3" />
+  <path d="M16 2v3" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+  <path d="M3 9h18" />
+</svg>
+</div><div id="e9w" class="t" style="left:717px;top:420px;font-family:serif-b;font-size:38px;color:#22304D;transform:translate(-50%,-50%)"><span id="e9">텍사스 전력망 감사 결과</span></div><div id="e10w" class="t" style="left:717px;top:468px;font-family:pen;font-size:34px;color:#5a5f6a;transform:translate(-50%,-50%)"><span id="e10">승인되는 물량이 몇 GW인지</span></div><div id="e11" class="i" style="left:1177px;top:184px"><svg
+  class="lucide lucide-calendar"
+  xmlns="http://www.w3.org/2000/svg"
+  width="52"
+  height="52"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#C4452F"
+  stroke-width="2.0"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2v3" />
+  <path d="M16 2v3" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+  <path d="M3 9h18" />
+</svg>
+</div><div id="e12w" class="t" style="left:1203px;top:280px;font-family:serif-b;font-size:38px;color:#22304D;transform:translate(-50%,-50%)"><span id="e12">새 주지사 취임 1/19 · 주의회</span></div><div id="e13w" class="t" style="left:1203px;top:328px;font-family:pen;font-size:34px;color:#5a5f6a;transform:translate(-50%,-50%)"><span id="e13">법안에 멈춤이 어디까지 담기나</span></div><div id="e14" class="i" style="left:1664px;top:324px"><svg
+  class="lucide lucide-calendar"
+  xmlns="http://www.w3.org/2000/svg"
+  width="52"
+  height="52"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#C4452F"
+  stroke-width="2.0"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2v3" />
+  <path d="M16 2v3" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+  <path d="M3 9h18" />
+</svg>
+</div><div id="e15w" class="t" style="left:1690px;top:420px;font-family:serif-b;font-size:38px;color:#22304D;transform:translate(-50%,-50%)"><span id="e15">빅테크 4분기 실적</span></div><div id="e16w" class="t" style="left:1690px;top:468px;font-family:pen;font-size:34px;color:#5a5f6a;transform:translate(-50%,-50%)"><span id="e16">2027년 설비투자 숫자</span></div>
+</div></div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#e1",{opacity:0},{opacity:1,duration:0.4},0.2);
+tl.fromTo("#e2",{opacity:0,x:-20},{opacity:1,x:0,duration:0.4},0.15);
+tl.fromTo("#e3",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},0.20);
+tl.to(".r0",{strokeDashoffset:0,duration:0.35,ease:"power1.inOut",stagger:0.029},0.50);
+tl.to(".r1",{strokeDashoffset:0,duration:0.6,ease:"power1.inOut",stagger:0.040},0.30);
+tl.to(".r2",{strokeDashoffset:0,duration:0.1,ease:"power1.inOut",stagger:0.008},0.50);
+tl.fromTo("#e4",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},0.55);
+tl.to(".r3",{strokeDashoffset:0,duration:0.1,ease:"power1.inOut",stagger:0.008},0.50);
+tl.fromTo("#e5",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},0.55);
+tl.to(".r4",{strokeDashoffset:0,duration:0.1,ease:"power1.inOut",stagger:0.008},0.50);
+tl.fromTo("#e6",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},0.55);
+tl.to(".r5",{strokeDashoffset:0,duration:0.1,ease:"power1.inOut",stagger:0.008},0.50);
+tl.fromTo("#e7",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},0.55);
+tl.fromTo("#e8",{opacity:0,scale:0.85},{opacity:1,scale:1,duration:0.4,ease:"back.out(2)"},0.65);
+tl.fromTo("#e9",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},0.80);
+tl.fromTo("#e10",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},0.95);
+tl.to(".r6",{strokeDashoffset:0,duration:0.25,ease:"power1.inOut",stagger:0.021},0.85);
+tl.fromTo("#e11",{opacity:0,scale:0.85},{opacity:1,scale:1,duration:0.4,ease:"back.out(2)"},6.10);
+tl.fromTo("#e12",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},6.25);
+tl.fromTo("#e13",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},6.40);
+tl.to(".r7",{strokeDashoffset:0,duration:0.25,ease:"power1.inOut",stagger:0.021},6.30);
+tl.fromTo("#e14",{opacity:0,scale:0.85},{opacity:1,scale:1,duration:0.4,ease:"back.out(2)"},7.10);
+tl.fromTo("#e15",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},7.25);
+tl.fromTo("#e16",{opacity:0,y:18},{opacity:1,y:0,duration:0.45,ease:"power2.out"},7.40);
+tl.to(".r8",{strokeDashoffset:0,duration:0.25,ease:"power1.inOut",stagger:0.021},7.30);
+window.__timelines["main"] = tl;
+tl.seek(0);
+</script></body></html>
