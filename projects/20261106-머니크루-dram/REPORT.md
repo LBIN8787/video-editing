@@ -3,7 +3,7 @@
 - 프로젝트: `20261106-머니크루-dram` · 편집 스타일: **flat** · 길이 약 **6.4분** · 장면 89개
 - 화면 구성: card 71, screenshot 14, source_video 4
 - 가편집: `05_edit/draft.mp4` · 자막: `05_edit/subs.srt` · 타임라인: `05_edit/timeline.csv`
-- 실제 소스로 바꿔야 할 장면: **9개** (아래 '남은 일')
+- 실제 소스로 바꿔야 할 장면: **4개** (아래 '남은 일')
 
 ## 1. 업로드 패키지
 
@@ -209,7 +209,7 @@
 | 8 | intro | 미국 데이터센터 증설이 막히면, 한국 메모리 매출의 몇 %가 영향권인가입니다. | card | 2026.11.06 · 식스시그마 정리 | OK |
 | 9 | intro | 특정 종목의 매수나 매도를 권하는 영상이 아닙니다. | card | 2026.11.06 · 식스시그마 | OK |
 | 10 | body-1 | 369%는 카운터포인트 리서치의 3분기 메모리 집계입니다. | screenshot | [2026.11.06 · Electronics Weekly](https://www.electronicsweekly.com/news/business/q3-dram-revenue-up-369-yoy-2026-11/) | OK |
-| 11 | body-1 | 트렌드포스가 아니라 카운터포인트 숫자라는 점부터 짚습니다. | screenshot | [2026.11.06 · DIGITIMES](https://www.digitimes.com/news/a20261106VL206/revenue-dram-ddr-hbm-market.html) | MISSING(자리표시) · 클립 다운로드 실패 |
+| 11 | body-1 | 트렌드포스가 아니라 카운터포인트 숫자라는 점부터 짚습니다. | screenshot | [2026.11.06 · DIGITIMES](https://www.digitimes.com/news/a20261106VL206/revenue-dram-ddr-hbm-market.html) | OK · 클립 다운로드 실패 |
 | 12 | body-1 | 매출은 출하량에 가격을 곱한 값입니다. | card | 2026.11.06 · Counterpoint(Electronics Weekly) | OK |
 | 13 | body-1 | 그런데 비트 출하량은 4% 늘었을 뿐입니다. | card | 2026.11.06 · Counterpoint(Electronics Weekly) | OK |
 | 14 | body-1 | 증가분의 대부분은 가격에서 나왔습니다. 평균가는 Gb당 1.9달러였습니다. | card | 2026.11.06 · Counterpoint(Electronics Weekly) | OK |
@@ -228,7 +228,7 @@
 | 27 | body-2 | 가격은 20% 후반대 올랐습니다. 여기서도 가격이 더 컸습니다. | card | 2026.10.28 · SK하이닉스 컨퍼런스콜(디일렉) | OK |
 | 28 | body-2 | 경영진은 향후 3년 D램과 HBM 물량이 사실상 모두 솔드아웃이라고 말했습니다. | card | 2026.10.28 · SK하이닉스 컨퍼런스콜(디일렉) | OK |
 | 29 | body-2 | 14개 주요 고객과 장기공급계약을 맺었고, 2027~28년 생산능력의 절반 이상을 덮습니다. | card | 2026.10.28 · SK하이닉스 컨퍼런스콜(디일렉) | OK |
-| 30 | body-2 | 삼성전자는 다음 날 3분기 확정 실적을 냈습니다. | screenshot | [2026.10.29 · 삼성전자 뉴스룸](https://news.samsung.com/kr/%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90-2026%EB%85%84-3%EB%B6%84%EA%B8%B0-%EC%8B%A4%EC%A0%81-%EB%B0%9C%ED%91%9C) | MISSING(자리표시) · 클립 다운로드 실패 |
+| 30 | body-2 | 삼성전자는 다음 날 3분기 확정 실적을 냈습니다. | screenshot | [2026.10.29 · 삼성전자 뉴스룸](https://news.samsung.com/kr/%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90-2026%EB%85%84-3%EB%B6%84%EA%B8%B0-%EC%8B%A4%EC%A0%81-%EB%B0%9C%ED%91%9C) | OK · 클립 다운로드 실패 |
 | 31 | body-2 | 연결 매출 195조 3천억 원, 영업이익 107조 4천억 원입니다. | card | 2026.10.29 · 삼성전자 | OK |
 | 32 | body-2 | 영업이익 107조 원 가운데 106조 5천억 원이 반도체 부문에서 나왔습니다. | card | 2026.10.29 · 삼성전자 | OK |
 | 33 | body-2 | 메모리 매출은 140조 7천억 원으로, 전사 매출의 약 72%입니다. | card | 2026.10.29 · 한국경제 | OK |
@@ -237,11 +237,11 @@
 | 36 | body-3 | 급락은 미국에서 먼저 시작됐습니다. | card | 2026.11.05 · 헤럴드경제 | OK |
 | 37 | body-3 | 필라델피아 반도체지수가 하루 만에 12.2% 내렸습니다. | screenshot | [2026.11.06 · 헤럴드경제](https://biz.heraldcorp.com/article/10928448) | OK |
 | 38 | body-3 | 계기는 11월 4일 미국 중간선거였습니다. | source_video | [2026.11.04 · Pulse News](https://www.youtube.com/watch?v=FC6wCnLN3d4) 1:00.0~1:04.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
-| 39 | body-3 | 텍사스 주지사 선거에서 데이터센터 모라토리엄을 공약한 후보가 이겼습니다. | screenshot | [2026.11.04 · CNBC](https://www.cnbc.com/2026/11/04/ai-stocks-texas-governor-data-centers.html) | MISSING(자리표시) · 클립 다운로드 실패 |
+| 39 | body-3 | 텍사스 주지사 선거에서 데이터센터 모라토리엄을 공약한 후보가 이겼습니다. | screenshot | [2026.11.04 · CNBC](https://www.cnbc.com/2026/11/04/ai-stocks-texas-governor-data-centers.html) | OK · 클립 다운로드 실패 |
 | 40 | body-3 | 민주당 지나 히노호사 후보입니다. 이미 짓고 있는 프로젝트는 예외로 보도됐습니다. | screenshot | [2026.11.05 · CNN](https://www.cnn.com/2026/11/05/economy/data-center-texas-election) | OK |
 | 41 | body-3 | 10개 주에서는 데이터센터 제한 주민투표 41건이 열렸습니다. | card | 2026.11.04 · CNBC·Euronews | OK |
 | 42 | body-3 | 그중 1건을 빼고 모두 데이터센터에 불리하게 결정됐습니다. | card | 2026.11.04 · CNBC·Euronews | OK |
-| 43 | body-3 | CNBC는 이 결과를 두고 골드만삭스의 추산을 전했습니다. | screenshot | [2026.11.05 · CNBC](https://www.cnbc.com/2026/11/05/ai-data-centers-midterms-capacity.html) | MISSING(자리표시) · 클립 다운로드 실패 |
+| 43 | body-3 | CNBC는 이 결과를 두고 골드만삭스의 추산을 전했습니다. | screenshot | [2026.11.05 · CNBC](https://www.cnbc.com/2026/11/05/ai-data-centers-midterms-capacity.html) | OK · 클립 다운로드 실패 |
 | 44 | body-3 | 모라토리엄 확대를 지지하는 쪽이 장악할 주에 미국 계획 용량의 45%가 있다는 내용입니다. | card | 2026.11.05 · CNBC(골드만삭스 추산) | OK |
 | 45 | body-3 | 노무라는 2027년 가동분은 대부분 이미 공사 중이라고 봤습니다. | card | 2026.11.05 · CNBC(노무라 분석) | OK |
 | 46 | body-3 | 위험은 2028년 계획분에 몰려 있다는 겁니다. | card | 2026.11.05 · CNBC(노무라 분석) | OK |
@@ -278,7 +278,7 @@
 | 77 | counter | 업계는 현물가가 계약가와 따로 움직인다고 설명합니다. 하루치로 판단하긴 이릅니다. | screenshot | [2026.11.06 · 뉴스핌](https://www.newspim.com/news/view/20261106000325) | OK |
 | 78 | counter | 이익이 정점일 때 PBR과 PER은 가장 낮아 보입니다. 피크 실적 함정입니다. | card | 2026.11.06 · 식스시그마 정리 | OK |
 | 79 | counter | 반대로 규제가 실제로 이뤄질 가능성은 낮다는 반론도 있습니다. | card | 2026.11.06 · 증권가 보도 | OK |
-| 80 | counter | 샌더스·오카시오코르테스 의원의 모라토리엄 법안은 3월에 발의된 상태입니다. | screenshot | [2026.03.25 · Axios](https://www.axios.com/2026/03/25/sanders-aoc-data-center-moratorium-bill) | MISSING(자리표시) · 클립 다운로드 실패 |
+| 80 | counter | 샌더스·오카시오코르테스 의원의 모라토리엄 법안은 3월에 발의된 상태입니다. | screenshot | [2026.03.25 · Axios](https://www.axios.com/2026/03/25/sanders-aoc-data-center-moratorium-bill) | OK · 클립 다운로드 실패 |
 | 81 | counter | 다만 규제론도, 반론도 아직은 전망입니다. | source_video | [2026.11.06 · CNBC](https://www.youtube.com/watch?v=8JiyJejo-e0) 1:00.0~1:04.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 82 | takeaway | 가져갈 건 세 가지입니다. | card | 2026.11.06 · 식스시그마 정리 | OK |
 | 83 | takeaway | 첫째, 369%는 출하량이 아니라 가격이 만든 숫자입니다. | card | 2026.11.06 · 식스시그마 정리 | OK |
@@ -297,12 +297,7 @@
 
 | 장면 | 상태 | 화면 지시 |
 |---|---|---|
-| 11 | MISSING(자리표시) | DIGITIMES 기사 헤드라인 캡처. |
 | 22 | TEMP(임시 썸네일 · 클립 교체 필요) | SK하이닉스 공식 채널 HBM 생산 B-roll, 소리 끔. 방송 화면 금지. |
-| 30 | MISSING(자리표시) | 삼성전자 뉴스룸 실적 발표 헤드라인 캡처. |
 | 35 | TEMP(임시 썸네일 · 클립 교체 필요) | 삼성반도체 공식 채널 팹 B-roll, 소리 끔. |
 | 38 | TEMP(임시 썸네일 · 클립 교체 필요) | 데이터센터 건설 현장 항공 B-roll, 뉴스 방송 화면 제외. |
-| 39 | MISSING(자리표시) | CNBC 기사 헤드라인 캡처. |
-| 43 | MISSING(자리표시) | CNBC 기사 헤드라인 캡처. |
-| 80 | MISSING(자리표시) | Axios 기사 헤드라인 캡처. |
 | 81 | TEMP(임시 썸네일 · 클립 교체 필요) | SK하이닉스 공식 채널 데이터센터·메모리 B-roll, 소리 끔. |

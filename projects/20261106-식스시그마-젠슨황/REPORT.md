@@ -3,7 +3,7 @@
 - 프로젝트: `20261106-식스시그마-젠슨황` · 편집 스타일: **sixsigma** · 길이 약 **6.6분** · 장면 54개
 - 화면 구성: card 21, screenshot 11, source_video 22
 - 가편집: `05_edit/draft.mp4` · 자막: `05_edit/subs.srt` · 타임라인: `05_edit/timeline.csv`
-- 실제 소스로 바꿔야 할 장면: **25개** (아래 '남은 일')
+- 실제 소스로 바꿔야 할 장면: **22개** (아래 '남은 일')
 
 ## 1. 업로드 패키지
 
@@ -242,18 +242,18 @@
 | 24 | body-2 | 정리하면, 연방 차원의 데이터센터 규제는 아직 시행된 것이 없습니다. 지금 움직이는 것은 텍사스 같은 주 단위 조치입니다. | source_video | [2026.11.04 · Where's Wallace](https://www.youtube.com/watch?v=REZWoeLMVcc) 0:08.1~0:17.1 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 25 | body-3 | 두 번째 길목은 중국입니다. 미국은 작년 12월, 판매액 25%를 정부에 내는 조건으로 H200 중국 판매를 허용했습니다. | source_video | [2026.01.28 · Bloomberg Television](https://www.youtube.com/watch?v=eh6_d4PIppM) 1:00.0~1:09.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 26 | body-3 | 올해 1월에는 중국이 H200 40만 개 이상 구매를 조건부 승인했다는 로이터 단독 보도가 나왔습니다. | card | 2026.01.28 · 로이터(Yahoo Finance) | OK |
-| 27 | body-3 | 그런데 11월 5일 로이터 보도에 따르면, 중국 정부는 수요가 있는데도 H200 대량 수입을 승인하지 않고 있습니다. | screenshot | [2026.11.05 · 로이터(Investing.com)](https://www.investing.com/news/stock-market-news/nvidia-chips-stockpile-in-hong-kong-awaits-china-import-approval--report-5003235) | MISSING(자리표시) · 클립 다운로드 실패 |
+| 27 | body-3 | 그런데 11월 5일 로이터 보도에 따르면, 중국 정부는 수요가 있는데도 H200 대량 수입을 승인하지 않고 있습니다. | screenshot | [2026.11.05 · 로이터(Investing.com)](https://www.investing.com/news/stock-market-news/nvidia-chips-stockpile-in-hong-kong-awaits-china-import-approval--report-5003235) | OK · 클립 다운로드 실패 |
 | 28 | body-3 | 로이터에 따르면 홍콩에 대기 중인 칩은 약 60만 개입니다. 실제로 들어간 것은 대형 인터넷 기업 한 곳당 약 1만 개라고 합니다. | card | 2026.11.05 · 로이터(Investing.com) | OK |
 | 29 | body-3 | 막힌 만큼 현지 가격은 올랐습니다. 10월 말 중국에서는 H200 8장짜리 서버가 600만 위안, 약 90만 달러 넘게 팔렸습니다. | source_video | [2026.11.05 · Guangzhou Huanmai](https://www.youtube.com/watch?v=-DOdv06-Eco) 1:00.0~1:09.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 30 | body-3 | 1년 전의 약 3배입니다. 블랙웰 서버는 2,000만 위안 이상이었다고 합니다. | card | 2026.11.05 · 로이터(Investing.com) | OK |
-| 31 | body-3 | 여기서 엔비디아 공시를 같이 봐야 합니다. 3분기 매출 가이던스 1,080억 달러는 중국 데이터센터 컴퓨팅 매출을 가정하지 않았습니다. | screenshot | [2026.08.27 · SEC 8-K](https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000073/q2fy27pr.htm) | MISSING(자리표시) · 클립 다운로드 실패 |
+| 31 | body-3 | 여기서 엔비디아 공시를 같이 봐야 합니다. 3분기 매출 가이던스 1,080억 달러는 중국 데이터센터 컴퓨팅 매출을 가정하지 않았습니다. | screenshot | [2026.08.27 · SEC 8-K](https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000073/q2fy27pr.htm) | OK · 클립 다운로드 실패 |
 | 32 | body-3 | 정리하면 60만 개는 가이던스에 잡힌 매출이 아닙니다. 가이던스 밖에서 막혀 있는 잠재 매출입니다. | source_video | [2026.08.27 · Yahoo Finance](https://www.youtube.com/watch?v=jIviHI7fqyc) 1:00.0~1:07.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 33 | body-4 | 세 번째 길목은 정치입니다. 하원 외교위, 중국특위, 정보위 위원장 세 명이 공동 서한을 보냈습니다. | source_video | [2026.11.05 · Forbes Breaking News](https://www.youtube.com/watch?v=68yPIG4bSqg) 1:00.0~1:07.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 34 | body-4 | 위원장들은 보도자료에서, 미국 국가안보가 얼마나 위험에 놓였는지 의회가 확인하는 것이 중요하다고 밝혔습니다. | screenshot | [2026.11.05 · 하원 외교위원회](https://foreignaffairs.house.gov/news/press-releases/chairmen-mast-moolenaar-and-crawford-request-jensen-huang-brief-congress-on-link-to-chinese-intelligence-asset) | OK |
 | 35 | body-4 | 일정은 이렇습니다. 10월 29일 뉴욕타임스 보도, 11월 4일 서한, 11일 회신 기한, 그리고 18일 브리핑입니다. | card | 2026.11.05 · 하원 외교위원회·Axios | OK |
 | 36 | body-4 | 다만 이것은 소환장도, 공개 청문회도 아닙니다. 비공개 합동 브리핑을 요청한 것입니다. | source_video | [2026.11.05 · AP Archive](https://www.youtube.com/watch?v=DvOXvPtCSvU) 0:30.8~0:37.8 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 37 | body-4 | 주제는 두 가지입니다. 메가스피드 임원 앨리스 황과의 교류, 그리고 산업스파이를 막는 엔비디아의 보안 체계입니다. | card | 2026.11.05 · 하원 외교위원회 | OK |
-| 38 | body-4 | 위원회는 앨리스 황을 '공개 보도된 중국 정보 자산'이라고 썼습니다. 젠슨 황과 친척은 아니며, 의혹은 입증되지 않았습니다. | screenshot | [2026.10.31 · DCD](https://www.datacenterdynamics.com/en/news/megaspeed-exec-with-close-ties-to-nvidia-ceo-jensen-huang-suspected-of-spying-for-china/) | MISSING(자리표시) · 클립 다운로드 실패 |
+| 38 | body-4 | 위원회는 앨리스 황을 '공개 보도된 중국 정보 자산'이라고 썼습니다. 젠슨 황과 친척은 아니며, 의혹은 입증되지 않았습니다. | screenshot | [2026.10.31 · DCD](https://www.datacenterdynamics.com/en/news/megaspeed-exec-with-close-ties-to-nvidia-ceo-jensen-huang-suspected-of-spying-for-china/) | OK · 클립 다운로드 실패 |
 | 39 | body-4 | 당사자들은 모두 부인했습니다. 엔비디아는 통상적인 업무상 교류라고 했고, 중국 외교부는 근거 없는 중상이라고 했습니다. | screenshot | [2026.10.31 · ABC7](https://abc7news.com/story/nvidia-denies-report-ceo-was-allegedly-targeted-chinese-spy-plot/20000206/) | OK |
 | 40 | body-4 | 젠슨 황이 브리핑에 응할지는 11월 6일 현재 알려지지 않았습니다. 이번 주 본인의 공개 발언도 확인되지 않았습니다. | source_video | [2026.11.06 · MJ英文 / MJ English](https://www.youtube.com/watch?v=4tFnGbxn1lg) 1:00.0~1:09.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 41 | body-5 | 같은 주, 서울에서는 엔비디아의 다른 제품이 소개됐습니다. RTX 스파크입니다. | source_video | [2026.06.01 · Wayne](https://www.youtube.com/watch?v=BC3XO8_9fkc) 1:00.0~1:06.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
@@ -290,13 +290,10 @@
 | 22 | TEMP(임시 썸네일 · 클립 교체 필요) | 텍사스 데이터센터·송전망 뉴스 영상, 소리 끔. 존슨 발언은 기사 인용이라 원음 사용 안 함. |
 | 24 | TEMP(임시 썸네일 · 클립 교체 필요) | 미국 의회 외관 B-roll. |
 | 25 | TEMP(임시 썸네일 · 클립 교체 필요) | H200 중국 판매 허용 관련 뉴스 영상, 소리 끔. |
-| 27 | MISSING(자리표시) | Investing.com 기사 헤드라인 캡처. |
 | 29 | TEMP(임시 썸네일 · 클립 교체 필요) | 중국 전자상가·서버 B-roll. |
-| 31 | MISSING(자리표시) | 8-K 보도자료의 3분기 전망 문단 캡처, 중국 미가정 문장에 빨간 박스. |
 | 32 | TEMP(임시 썸네일 · 클립 교체 필요) | 8월 실적 관련 영상, 소리 끔. |
 | 33 | TEMP(임시 썸네일 · 클립 교체 필요) | 하원 위원회 회의장 영상(마스트·물레나·크로퍼드), 소리 끔. |
 | 36 | TEMP(임시 썸네일 · 클립 교체 필요) | 의회 복도 B-roll. |
-| 38 | MISSING(자리표시) | DCD 헤드라인 캡처. 인물 사진·'간첩' 단정 문구 확대 금지. |
 | 40 | TEMP(임시 썸네일 · 클립 교체 필요) | 젠슨 황 과거 인터뷰 화면, 소리 끔. 이번 주 발언처럼 보이지 않게 라벨은 실제 영상 날짜로. |
 | 41 | TEMP(임시 썸네일 · 클립 교체 필요) | 컴퓨텍스 키노트의 RTX 스파크 공개 장면, 소리 끔. |
 | 44 | TEMP(임시 썸네일 · 클립 교체 필요) | 서울 간담회 보도 영상 또는 RTX 스파크 노트북 시연 B-roll. |

@@ -3,7 +3,7 @@
 - 프로젝트: `20261106-미주일기-현금흐름` · 편집 스타일: **paper** · 길이 약 **6.4분** · 장면 96개
 - 화면 구성: card 69, screenshot 14, source_video 13
 - 가편집: `05_edit/draft.mp4` · 자막: `05_edit/subs.srt` · 타임라인: `05_edit/timeline.csv`
-- 실제 소스로 바꿔야 할 장면: **20개** (아래 '남은 일')
+- 실제 소스로 바꿔야 할 장면: **13개** (아래 '남은 일')
 
 ## 1. 업로드 패키지
 
@@ -283,17 +283,17 @@ The Machine Economy, Wall Street Lounge, Gridline, THE COST LAYER, TalkTickers, 
 | 20 | intro | 흔히 듣는 'FCF 100% 돌파'는 정확히는 영업현금흐름 대비 비율입니다. | card | 2026.11.06 · 식스시그마 정리 | OK |
 | 21 | body-1 | 첫 번째, 알파벳은 왜 마이너스가 됐을까요? | card | 2026.10.28 · 알파벳 8-K | OK |
 | 22 | body-1 | 피차이 CEO는 실적 자료에 강한 분기였다고 적었습니다. | source_video | [2026.10.28 · Wall Street Lounge](https://www.youtube.com/watch?v=PfK3aQcfWWs) 1:00.0~1:04.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
-| 23 | body-1 | 연 매출 규모가 5천억 달러에 올라섰다는 문장입니다. | screenshot | [2026.10.28 · 알파벳 8-K](https://www.sec.gov/Archives/edgar/data/0001652044/000165204426000080/googexhibit991q32026.htm) | MISSING(자리표시) · 클립 다운로드 실패 |
+| 23 | body-1 | 연 매출 규모가 5천억 달러에 올라섰다는 문장입니다. | screenshot | [2026.10.28 · 알파벳 8-K](https://www.sec.gov/Archives/edgar/data/0001652044/000165204426000080/googexhibit991q32026.htm) | OK · 클립 다운로드 실패 |
 | 24 | body-1 | 하지만 같은 분기 설비투자가 번 현금을 91억 달러 넘었습니다. | card | 2026.10.28 · 알파벳 8-K | OK |
 | 25 | body-1 | 실적 발표 다음 날 주가는 크게 떨어졌습니다. | card | 2026.10.29 · 시세 | OK |
 | 26 | body-1 | 2004년 이후 최대 낙폭이라는 보도가 있지만, 수치는 재확인이 필요합니다. | screenshot | [2026.10.30 · 헤럴드경제](https://news.nate.com/view/20261030n34153) | OK |
 | 27 | body-1 | 알파벳은 6월에 800억 달러 규모 증자를 내놨습니다. | card | 2026.06.01 · 알파벳 FWP | OK |
 | 28 | body-1 | 올해 자사주 매입은 0달러, 장기부채는 1,251억 달러입니다. | card | 2026.10.28 · 알파벳 10-Q | OK |
-| 29 | body-1 | 이 안에는 버크셔 사모 100억 달러도 들어 있습니다. | screenshot | [2026.06.01 · 알파벳 FWP](https://www.sec.gov/Archives/edgar/data/0001652044/000119312526251733/d160205dfwp.htm) | MISSING(자리표시) · 클립 다운로드 실패 |
+| 29 | body-1 | 이 안에는 버크셔 사모 100억 달러도 들어 있습니다. | screenshot | [2026.06.01 · 알파벳 FWP](https://www.sec.gov/Archives/edgar/data/0001652044/000119312526251733/d160205dfwp.htm) | OK · 클립 다운로드 실패 |
 | 30 | body-1 | 다만 현금은 2,651억 달러, 최근 12개월 FCF도 아직 플러스입니다. | card | 2026.10.28 · 알파벳 10-Q | OK |
 | 31 | body-2 | 두 번째, 메타는 빈칸을 어떻게 메울까요? | card | 2026.10.21 · 메타 8-K | OK |
 | 32 | body-2 | 메타는 실적 자료에서 투자를 줄이지 않겠다고 밝혔습니다. | source_video | [2026.10.21 · Gridline](https://www.youtube.com/watch?v=lHO8sYal3rY) 1:00.0~1:04.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
-| 33 | body-2 | 핵심 사업과 새 AI 사업 모두에 공격적으로 투자한다는 문장입니다. | screenshot | [2026.10.21 · 메타 8-K](https://www.sec.gov/Archives/edgar/data/0001326801/000162828026066700/meta-09302026xexhibit991.htm) | MISSING(자리표시) · 클립 다운로드 실패 |
+| 33 | body-2 | 핵심 사업과 새 AI 사업 모두에 공격적으로 투자한다는 문장입니다. | screenshot | [2026.10.21 · 메타 8-K](https://www.sec.gov/Archives/edgar/data/0001326801/000162828026066700/meta-09302026xexhibit991.htm) | OK · 클립 다운로드 실패 |
 | 34 | body-2 | 영업현금흐름 328억 달러에 설비투자는 339억 달러였습니다. | card | 2026.10.21 · 메타 8-K | OK |
 | 35 | body-2 | 리스 원금까지 빼면 FCF는 마이너스 21억 달러입니다. | card | 2026.10.21 · 메타 8-K | OK |
 | 36 | body-2 | 장기부채는 작년 말 587억에서 809억 달러로 늘었습니다. | card | 2026.10.21 · 메타 8-K | OK |
@@ -302,7 +302,7 @@ The Machine Economy, Wall Street Lounge, Gridline, THE COST LAYER, TalkTickers, 
 | 39 | body-2 | 그런데도 올해 설비투자 계획은 1,350억에서 1,450억 달러입니다. | source_video | [2026.10.21 · THE COST LAYER](https://www.youtube.com/watch?v=qkuImA-rM0g) 1:00.0~1:04.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 40 | body-3 | 세 번째, 아마존은 얼마나 빌렸을까요? | card | 2026.10.29 · 아마존 IR | OK |
 | 41 | body-3 | 재시 CEO는 실적 자료에서 큰 그림부터 꺼냈습니다. | source_video | [2026.10.29 · TalkTickers: AI Podcast Discussing Earnings Calls](https://www.youtube.com/watch?v=Se0AsaPbACc) 1:00.0~1:04.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
-| 42 | body-3 | 1조 달러 매출 사업은 없었지만, 5~10년 안에 두 개가 나올 수 있다는 겁니다. | screenshot | [2026.10.29 · 아마존 IR](https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/) | MISSING(자리표시) · 클립 다운로드 실패 |
+| 42 | body-3 | 1조 달러 매출 사업은 없었지만, 5~10년 안에 두 개가 나올 수 있다는 겁니다. | screenshot | [2026.10.29 · 아마존 IR](https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/) | OK · 클립 다운로드 실패 |
 | 43 | body-3 | 최근 12개월 영업현금흐름은 1,683억 달러입니다. | card | 2026.10.29 · 아마존 IR | OK |
 | 44 | body-3 | 같은 기간 FCF는 마이너스 424억 달러입니다. 1년 전엔 플러스 148억이었습니다. | card | 2026.10.29 · 아마존 IR | OK |
 | 45 | body-3 | 장기부채는 작년 말 656억에서 1,731억 달러, 2.6배가 됐습니다. | card | 2026.10.29 · 아마존 IR | OK |
@@ -326,7 +326,7 @@ The Machine Economy, Wall Street Lounge, Gridline, THE COST LAYER, TalkTickers, 
 | 63 | body-5 | 연간으론 약 1,700억 달러인데, 기준 연도는 재확인이 필요합니다. | card | 2026.10.28 · MS IR | OK |
 | 64 | body-5 | 그런데 그 MS가 엔스케일 텍사스 확장 옵션을 행사하지 않았습니다. | screenshot | [2026.11.05 · Yahoo Finance](https://finance.yahoo.com/technology/ai/articles/microsoft-opts-against-expanding-nscale-112700515.html) | OK |
 | 65 | body-5 | 엔스케일은 기업가치 350억 달러를 목표로 상장을 준비하는 회사입니다. | source_video | [2026.11.06 · ConcreteCompute](https://www.youtube.com/watch?v=XNQO0Okqx6w) 1:00.0~1:04.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
-| 66 | body-5 | 로이터 소식통은 수개월 전 결정이고, 기존 계약엔 영향이 없다고 전했습니다. | screenshot | [2026.11.05 · TipRanks/The Fly](https://www.tipranks.com/news/the-fly/microsoft-to-not-expand-data-center-deal-with-nscale-reuters-reports-thefly-news) | MISSING(자리표시) · 클립 다운로드 실패 |
+| 66 | body-5 | 로이터 소식통은 수개월 전 결정이고, 기존 계약엔 영향이 없다고 전했습니다. | screenshot | [2026.11.05 · TipRanks/The Fly](https://www.tipranks.com/news/the-fly/microsoft-to-not-expand-data-center-deal-with-nscale-reuters-reports-thefly-news) | OK · 클립 다운로드 실패 |
 | 67 | body-5 | 10월엔 영국 러프턴 데이터센터 임차 계약도 해지했습니다. | card | 2026.10.19 · 머니투데이 | OK |
 | 68 | body-5 | 웨스트버지니아 철회 보도도 있지만, 블룸버그 원문은 확인하지 못했습니다. | card | 2026.11.06 · 알파경제 (블룸버그 인용) | OK |
 | 69 | body-5 | 보도된 배경은 모두 전력망 연결 지연입니다. | card | 2026.11.05 · FT·로이터 보도 | OK |
@@ -335,7 +335,7 @@ The Machine Economy, Wall Street Lounge, Gridline, THE COST LAYER, TalkTickers, 
 | 72 | body-6 | 3위 알파벳 121%, 4위 메타 107%입니다. | card | 2026.11.06 · 각 사 공시 직접 계산 | OK |
 | 73 | body-6 | MS는 현금 기준 68%, 리스를 넣어도 78%입니다. | card | 2026.11.06 · 각 사 공시 직접 계산 | OK |
 | 74 | body-6 | 비교로 애플을 넣으면 6%입니다. | card | 2026.11.02 · 애플 8-K | OK |
-| 75 | body-6 | 파레크 CFO는 분기에 번 280억 달러를 그대로 주주에게 돌려줬다고 적었습니다. | screenshot | [2026.11.02 · 애플 8-K](https://www.sec.gov/Archives/edgar/data/0000320193/000032019326000024/a8-kex991q4202609262026.htm) | MISSING(자리표시) · 클립 다운로드 실패 |
+| 75 | body-6 | 파레크 CFO는 분기에 번 280억 달러를 그대로 주주에게 돌려줬다고 적었습니다. | screenshot | [2026.11.02 · 애플 8-K](https://www.sec.gov/Archives/edgar/data/0000320193/000032019326000024/a8-kex991q4202609262026.htm) | OK · 클립 다운로드 실패 |
 | 76 | body-6 | MS·알파벳·메타를 더하면 현금 기준 94%, 리스 포함 99%입니다. | card | 2026.11.06 · 각 사 공시 직접 계산 | OK |
 | 77 | body-6 | Epoch AI는 3분기 전후로 설비투자가 영업현금흐름을 넘을 거라 내다봤습니다. | screenshot | [2026.11.06 · Epoch AI](https://epoch.ai/data-insights/hyperscaler-capex-vs-cash-flow) | OK |
 | 78 | counter | 그런데 정말 지갑이 비었을까요? | card | 2026.11.06 · 식스시그마 정리 | OK |
@@ -351,7 +351,7 @@ The Machine Economy, Wall Street Lounge, Gridline, THE COST LAYER, TalkTickers, 
 | 88 | takeaway | 둘째, 그 차이를 회사채와 증자로 메우고 있습니다. | card | 2026.11.06 · 식스시그마 정리 | OK |
 | 89 | takeaway | 셋째, 이번 주 계약 포기는 현금보다 전력과 규제 문제로 보도됐습니다. | card | 2026.11.06 · 식스시그마 정리 | OK |
 | 90 | takeaway | 지갑을 닫았다고 단정하기엔 아직 이릅니다. | source_video | [2026.11.06 · Keentel Engineering](https://www.youtube.com/watch?v=d-qW49nc_70) 1:00.0~1:04.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
-| 91 | outro | 다음에 볼 것입니다. 11월 10일, 코어위브 3분기 실적이 나옵니다. | screenshot | [2026.10.27 · 코어위브 IR](https://investors.coreweave.com/news/news-details/2026/CoreWeave-Announces-Date-of-Third-Quarter-2026-Financial-Results-and-Conference-Call/default.aspx) | MISSING(자리표시) · 클립 다운로드 실패 |
+| 91 | outro | 다음에 볼 것입니다. 11월 10일, 코어위브 3분기 실적이 나옵니다. | screenshot | [2026.10.27 · 코어위브 IR](https://investors.coreweave.com/news/news-details/2026/CoreWeave-Announces-Date-of-Third-Quarter-2026-Financial-Results-and-Conference-Call/default.aspx) | OK · 클립 다운로드 실패 |
 | 92 | outro | 백로그와 이자비용, MS 비중을 보겠습니다. | card | 2026.11.06 · 식스시그마 정리 | OK |
 | 93 | outro | 12월 중순 예상되는 오라클 실적에선 텐센트 취소 영향을 봅니다. | card | 2026.11.06 · 식스시그마 정리 | OK |
 | 94 | outro | 내년 1월 말부터는 빅테크 4곳의 2027년 설비투자 계획이 나옵니다. | card | 2026.11.06 · 식스시그마 정리 | OK |
@@ -368,21 +368,14 @@ The Machine Economy, Wall Street Lounge, Gridline, THE COST LAYER, TalkTickers, 
 |---|---|---|
 | 10 | TEMP(임시 썸네일 · 클립 교체 필요) | 데이터센터 건설 B-roll, 소리 끔 |
 | 22 | TEMP(임시 썸네일 · 클립 교체 필요) | 피차이 발표·구글 사옥 B-roll, 소리 끔 |
-| 23 | MISSING(자리표시) | 8-K 원문 'half-trillion dollar revenue run rate' 형광펜 |
-| 29 | MISSING(자리표시) | FWP 원문, 버크셔 사모 부분 형광펜 |
 | 32 | TEMP(임시 썸네일 · 클립 교체 필요) | 메타 데이터센터 B-roll, 소리 끔 |
-| 33 | MISSING(자리표시) | 8-K 원문 'investing aggressively' 형광펜 |
 | 39 | TEMP(임시 썸네일 · 클립 교체 필요) | 메타 서버 B-roll, 소리 끔 |
 | 41 | TEMP(임시 썸네일 · 클립 교체 필요) | 앤디 재시·AWS 데이터센터 B-roll, 소리 끔 |
-| 42 | MISSING(자리표시) | 보도자료 원문 'trillion dollar revenue business' 형광펜 |
 | 46 | TEMP(임시 썸네일 · 클립 교체 필요) | AWS 데이터센터 B-roll, 소리 끔 |
 | 59 | TEMP(임시 썸네일 · 클립 교체 필요) | 에이미 후드 CFO 실적 콜 원음, 2단 자막 |
 | 60 | TEMP(임시 썸네일 · 클립 교체 필요) | MS 데이터센터 B-roll, 소리 끔 |
 | 61 | TEMP(임시 썸네일 · 클립 교체 필요) | 사티아 나델라 실적 콜 원음, 2단 자막 |
 | 65 | TEMP(임시 썸네일 · 클립 교체 필요) | 엔스케일 데이터센터 B-roll, 소리 끔 |
-| 66 | MISSING(자리표시) | 기사 헤드라인 캡처 |
-| 75 | MISSING(자리표시) | 애플 8-K 원문 '$28 billion' 두 곳 형광펜 |
 | 83 | TEMP(임시 썸네일 · 클립 교체 필요) | 데이터센터 내부 B-roll, 소리 끔 |
 | 85 | TEMP(임시 썸네일 · 클립 교체 필요) | MS 데이터센터 B-roll, 소리 끔 |
 | 90 | TEMP(임시 썸네일 · 클립 교체 필요) | 변전소·전력망 B-roll, 소리 끔 |
-| 91 | MISSING(자리표시) | 코어위브 IR 실적일 공지 캡처, 날짜 형광펜 |
