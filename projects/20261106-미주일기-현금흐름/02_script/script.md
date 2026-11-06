@@ -48,7 +48,7 @@ _라벨: 2026.11.06 · 식스시그마 정리  |  화면: 질문 한 문장 text
 ### #10 [hook]  (source_video)
 각 사 공시와 경영진의 말로 따라가 보겠습니다.
 
-_라벨: 2026.11.06 · 자료 화면  |  화면: 데이터센터 건설 B-roll, 소리 끔_
+_라벨: 2026.11.06 · The Machine Economy  |  소스: https://www.youtube.com/watch?v=gx_AjpNXuGs 1:00.0~1:04.0  |  화면: 데이터센터 건설 B-roll, 소리 끔_
 
 ### #11 [intro]  (card)
 이 영상은 공시 정리이며, 투자 권유가 아닙니다.
@@ -108,7 +108,7 @@ _라벨: 2026.10.28 · 알파벳 8-K  |  화면: 장 전환 질문 카드_
 ### #22 [body-1]  (source_video)
 피차이 CEO는 실적 자료에 강한 분기였다고 적었습니다.
 
-_라벨: 2026.10.28 · Alphabet  |  화면: 피차이 발표·구글 사옥 B-roll, 소리 끔_
+_라벨: 2026.10.28 · Wall Street Lounge  |  소스: https://www.youtube.com/watch?v=PfK3aQcfWWs 1:00.0~1:04.0  |  화면: 피차이 발표·구글 사옥 B-roll, 소리 끔_
 
 ### #23 [body-1]  (screenshot)
 연 매출 규모가 5천억 달러에 올라섰다는 문장입니다.
@@ -158,7 +158,7 @@ _라벨: 2026.10.21 · 메타 8-K  |  화면: 장 전환 질문 카드_
 ### #32 [body-2]  (source_video)
 메타는 실적 자료에서 투자를 줄이지 않겠다고 밝혔습니다.
 
-_라벨: 2026.10.21 · Meta  |  화면: 메타 데이터센터 B-roll, 소리 끔_
+_라벨: 2026.10.21 · Gridline  |  소스: https://www.youtube.com/watch?v=lHO8sYal3rY 1:00.0~1:04.0  |  화면: 메타 데이터센터 B-roll, 소리 끔_
 
 ### #33 [body-2]  (screenshot)
 핵심 사업과 새 AI 사업 모두에 공격적으로 투자한다는 문장입니다.
@@ -193,7 +193,7 @@ _라벨: 2026.10.27 · Bloomberg Law  |  화면: 빨간 박스 표, 합계 강�
 ### #39 [body-2]  (source_video)
 그런데도 올해 설비투자 계획은 1,350억에서 1,450억 달러입니다.
 
-_라벨: 2026.10.21 · Meta  |  화면: 메타 서버 B-roll, 소리 끔_
+_라벨: 2026.10.21 · THE COST LAYER  |  소스: https://www.youtube.com/watch?v=qkuImA-rM0g 1:00.0~1:04.0  |  화면: 메타 서버 B-roll, 소리 끔_
 
 ### #40 [body-3]  (card)
 세 번째, 아마존은 얼마나 빌렸을까요?
@@ -203,7 +203,7 @@ _라벨: 2026.10.29 · 아마존 IR  |  화면: 장 전환 질문 카드_
 ### #41 [body-3]  (source_video)
 재시 CEO는 실적 자료에서 큰 그림부터 꺼냈습니다.
 
-_라벨: 2026.10.29 · Amazon  |  화면: 앤디 재시·AWS 데이터센터 B-roll, 소리 끔_
+_라벨: 2026.10.29 · TalkTickers: AI Podcast Discussing Earnings Calls  |  소스: https://www.youtube.com/watch?v=Se0AsaPbACc 1:00.0~1:04.0  |  화면: 앤디 재시·AWS 데이터센터 B-roll, 소리 끔_
 
 ### #42 [body-3]  (screenshot)
 1조 달러 매출 사업은 없었지만, 5~10년 안에 두 개가 나올 수 있다는 겁니다.
@@ -228,7 +228,7 @@ _라벨: 2026.10.29 · 아마존 IR  |  화면: 큰 숫자 비교_
 ### #46 [body-3]  (source_video)
 그리고 올해 현금 설비투자는 약 2,200억 달러입니다.
 
-_라벨: 2026.10.29 · Amazon  |  화면: AWS 데이터센터 B-roll, 소리 끔_
+_라벨: 2026.10.29 · Buckeye Drone  |  소스: https://www.youtube.com/watch?v=IE6qKiJcdwM 1:00.0~1:04.0  |  화면: AWS 데이터센터 B-roll, 소리 끔_
 
 ### #47 [body-4]  (card)
 네 번째, 오라클 계약은 왜 깨졌을까요?
@@ -295,19 +295,19 @@ _라벨: 2026.10.28 · MS IR  |  화면: 표 줄 추가_
 
 탄탄한 실적을 감안하면, 2027 회계연도에도 잉여현금흐름 플러스를 유지할 것으로 예상합니다.
 
-_라벨: 2026.10.28 · MS 실적 콜  |  화면: 에이미 후드 CFO 실적 콜 원음, 2단 자막_
+_라벨: 2026.10.28 · Benzinga  |  소스: https://www.youtube.com/watch?v=7h2EDZtKtYM 1:00.0~1:08.0  |  화면: 에이미 후드 CFO 실적 콜 원음, 2단 자막_
 
 ### #60 [body-5]  (source_video)
 정리하면, 번 돈 안에서 쓰겠다는 약속입니다.
 
-_라벨: 2026.10.28 · Microsoft  |  화면: MS 데이터센터 B-roll, 소리 끔_
+_라벨: 2026.10.28 · Why Did They Build That?  |  소스: https://www.youtube.com/watch?v=zVe8ZAZSjxU 1:00.0~1:04.0  |  화면: MS 데이터센터 B-roll, 소리 끔_
 
 ### #61 [body-5] 🎙 원본 발언 (source_video)
 > I have never been more confident in the long-term returns on our investments.
 
 우리 투자의 장기 수익을 지금보다 더 확신한 적은 없습니다.
 
-_라벨: 2026.10.28 · MS 실적 콜  |  화면: 사티아 나델라 실적 콜 원음, 2단 자막_
+_라벨: 2026.10.28 · PreMarket Prep  |  소스: https://www.youtube.com/watch?v=IOa2auV8O1k 1:00.0~1:06.0  |  화면: 사티아 나델라 실적 콜 원음, 2단 자막_
 
 ### #62 [body-5]  (card)
 다음 분기 설비투자는 500억 달러를 넘는다고 했습니다.
@@ -327,7 +327,7 @@ _라벨: 2026.11.05 · Yahoo Finance  |  소스: https://finance.yahoo.com/techn
 ### #65 [body-5]  (source_video)
 엔스케일은 기업가치 350억 달러를 목표로 상장을 준비하는 회사입니다.
 
-_라벨: 2026.11.06 · 자료 화면  |  화면: 엔스케일 데이터센터 B-roll, 소리 끔_
+_라벨: 2026.11.06 · ConcreteCompute  |  소스: https://www.youtube.com/watch?v=XNQO0Okqx6w 1:00.0~1:04.0  |  화면: 엔스케일 데이터센터 B-roll, 소리 끔_
 
 ### #66 [body-5]  (screenshot)
 로이터 소식통은 수개월 전 결정이고, 기존 계약엔 영향이 없다고 전했습니다.
@@ -417,7 +417,7 @@ _라벨: 2026.09.13 · Beancount  |  화면: 한 문장 카드_
 ### #83 [counter]  (source_video)
 그리고 계약 포기를 곧 지출 축소로 읽기는 어렵습니다.
 
-_라벨: 2026.11.06 · 자료 화면  |  화면: 데이터센터 내부 B-roll, 소리 끔_
+_라벨: 2026.11.06 · ClimateSort  |  소스: https://www.youtube.com/watch?v=Bp58sVATymc 0:42.0~0:46.0  |  화면: 데이터센터 내부 B-roll, 소리 끔_
 
 ### #84 [counter]  (card)
 오라클 수주잔고는 6,640억 달러, AWS 매출은 39% 늘었습니다.
@@ -427,7 +427,7 @@ _라벨: 2026.10.29 · 아마존·오라클 IR  |  화면: 큰 숫자 2개_
 ### #85 [counter]  (source_video)
 MS 역시 다음 분기 설비투자를 더 늘린다고 했습니다.
 
-_라벨: 2026.10.28 · Microsoft  |  화면: MS 데이터센터 B-roll, 소리 끔_
+_라벨: 2026.10.28 · NextGen Tech  |  소스: https://www.youtube.com/watch?v=vWp11KUU0A0 0:57.0~1:01.0  |  화면: MS 데이터센터 B-roll, 소리 끔_
 
 ### #86 [takeaway]  (card)
 정리하면 가져갈 건 세 가지입니다.
@@ -452,7 +452,7 @@ _라벨: 2026.11.06 · 식스시그마 정리  |  화면: 표 완성_
 ### #90 [takeaway]  (source_video)
 지갑을 닫았다고 단정하기엔 아직 이릅니다.
 
-_라벨: 2026.11.06 · 자료 화면  |  화면: 변전소·전력망 B-roll, 소리 끔_
+_라벨: 2026.11.06 · Keentel Engineering  |  소스: https://www.youtube.com/watch?v=d-qW49nc_70 1:00.0~1:04.0  |  화면: 변전소·전력망 B-roll, 소리 끔_
 
 ### #91 [outro]  (screenshot)
 다음에 볼 것입니다. 11월 10일, 코어위브 3분기 실적이 나옵니다.
