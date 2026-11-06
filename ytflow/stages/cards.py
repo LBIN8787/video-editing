@@ -222,7 +222,8 @@ def r_line(c: Canvas, card: dict):
 
 
 RENDER = {"line": r_line, "number_compare": r_number_compare, "flow": r_flow, "table": r_table, "bars": r_bars,
-          "headline": r_headline, "text": r_text}
+          "headline": r_headline, "text": r_text,
+          "analogy": r_number_compare}  # 정지 카드는 비유를 2칸 비교로
 
 
 def render(card: dict, path: Path) -> None:

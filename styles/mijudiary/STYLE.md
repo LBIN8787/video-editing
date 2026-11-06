@@ -2,6 +2,7 @@
 id: mijudiary
 title: 미주일기
 renderer: paper
+family: infographic   # source=원본 소스형 / infographic=자체 제작 인포그래픽형 / shorts
 status: reviewed
 reference: "https://www.youtube.com/@mijudiary — '챗GPT의 근본이 된 트랜스포머의 탄생과 발전' (dqvqEsrFE7w)"
 ---

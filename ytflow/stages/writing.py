@@ -124,7 +124,8 @@ class CardItem(BaseModel):
 
 
 class Card(BaseModel):
-    type: str = Field(description="chart | number_compare | flow | table | bars | line | headline | text")
+    type: str = Field(description="chart | number_compare | flow | table | bars | line | headline | text | analogy"
+                                  " (analogy: items[0]=실제 숫자·개념, items[1]=일상의 비유)")
     title: str = Field(description="카드 제목 (24자 이내)")
     items: list[CardItem]
     note: str = Field(description="아래 한 줄 메모 (36자 이내, 없으면 빈 문자열)")
@@ -132,6 +133,8 @@ class Card(BaseModel):
     period: str = Field("", description="chart 카드: 5d | 1mo | 3mo | 6mo | 1y | 2y | 5y")
     icon: str = Field("", description="text 카드의 큰 아이콘 이름 (선택)")
     unit: str = Field("", description="line 카드 값의 단위 (예: 달러, %, USD, KRW)")
+    start: str = Field("", description="chart 카드: 과거 기간 시작 YYYY-MM-DD (과거 사례용, 예: 1999-06-01). 비우면 오늘까지 period")
+    end: str = Field("", description="chart 카드: 과거 기간 끝 YYYY-MM-DD (비우면 오늘)")
 
 
 class Scene(BaseModel):
@@ -145,12 +148,25 @@ class Scene(BaseModel):
     card: Card | None = Field(description="visual_type=card 일 때 검은 배경 인포 카드 내용")
     emphasis: list[str] = Field(description="자막에서 색으로 강조할 단어")
     visual_type: str = Field(description="source_video | card | screenshot | stock | ai_image")
+    beat: str = Field("", description="이 장면이 논리에서 하는 일: fact | number | why | so_what | analogy | precedent | "
+                                      "jargon | question | quote | summary | counter | takeaway | next")
+    compare_to: str = Field("", description="beat=number 일 때 비교 기준 (예: '작년 같은 분기 251억 달러', '삼성전자 시총의 약 2배')")
     visual_brief: str = Field(description="편집자/이미지 생성기용 화면 지시")
     image_prompt: str = Field(description="AI 이미지 생성 프롬프트 (영문)")
 
 
+class Term(BaseModel):
+    term: str = Field(description="어려운 말 (예: 잉여현금흐름)")
+    plain: str = Field(description="중학생도 알아듣는 한 문장 풀이 (예: 번 돈에서 공장·장비 사는 데 쓴 돈을 빼고 남은 돈)")
+    scene_id: int = Field(description="이 말을 처음 풀어 주는 장면 id (처음 나오는 장면과 같거나 바로 앞)")
+
+
 class Script(BaseModel):
     title_working: str
+    core_message: str = Field("", description="시청자가 영상을 다 보고 기억할 한 문장 (숫자 1개 포함, 40자 안팎)")
+    logic: list[str] = Field(default_factory=list,
+                             description="논리 구조 3~6단계: 무슨 일(사실·숫자) → 왜(원인) → 그래서(결과) → 전에도?(과거 사례) → 반론 → 의미")
+    glossary: list[Term] = Field(default_factory=list, description="대본에 나오는 어려운 말과 쉬운 풀이")
     scenes: list[Scene]
 
 
@@ -169,8 +185,17 @@ def script(project: Project) -> None:
     addendum = config.STYLES_DIR / ref / "script.md" if ref else None
     if addendum and addendum.exists():  # 편집 스타일별 대본 규칙 (styles/<id>/script.md)
         user += f"\n\n# 이 영상의 편집 스타일({ref}) 대본 규칙\n" + addendum.read_text(encoding="utf-8")
-    res = llm.structured(config.prompt("script"), user, Script, max_tokens=32000)
+    family = config.style_family()
+    system = config.prompt("script") + "\n\n" + config.prompt(f"script_{family}") if family != "shorts" else config.prompt("script")
+    res = llm.structured(system, user, Script, max_tokens=32000)
     data = res.model_dump()
+    from ..scriptcheck import check
+    errs, warns = check(data, family)
+    if errs:  # 쉬운 설명·논리·화면 비율 점검에 걸리면 한 번 고쳐 쓴다
+        print(f"[script] 점검 {len(errs)}건 → 고쳐 쓰기: " + " / ".join(errs[:5]))
+        fix = (user + "\n\n# 첫 원고\n" + json.dumps(data, ensure_ascii=False) +
+               "\n\n# 점검에서 걸린 것 (모두 고친 전체 원고를 다시 쓰세요)\n" + "\n".join(f"- {x}" for x in errs + warns))
+        data = llm.structured(system, fix, Script, max_tokens=32000).model_dump()
     project.write_json("script", "scenes.json", data)
     write_script_md(project, data)
     total = sum(len(s["narration"].replace(" ", "")) for s in data["scenes"])
@@ -182,13 +207,20 @@ def script(project: Project) -> None:
 def write_script_md(project: Project, data: dict) -> None:
     """사람이 읽는 대본: 원본 발언은 인용 블록, 화면 지시는 한 줄 요약."""
     md = [f"# {data['title_working']}\n"]
+    if data.get("core_message"):
+        md.append(f"**핵심 한 문장:** {data['core_message']}\n")
+    if data.get("logic"):
+        md.append("**논리 구조:** " + " → ".join(data["logic"]) + "\n")
+    if data.get("glossary"):
+        md.append("**쉬운 말 풀이:**\n" + "\n".join(f"- {g['term']}: {g['plain']} (#{g['scene_id']})" for g in data["glossary"]) + "\n")
     for s in data["scenes"]:
         src = s.get("source") or {}
         rng = f"{src.get('start') or ''}~{src.get('end') or ''}".strip("~") or (f"자막 '{src.get('find')}'" if src.get("find") else "")
-        head = f"### #{s['id']} [{s['section']}] {'🎙 원본 발언' if s.get('kind') == 'quote' else ''} ({s['visual_type']})"
+        beat = f" ‹{s['beat']}›" if s.get("beat") else ""
+        head = f"### #{s['id']} [{s['section']}]{beat} {'🎙 원본 발언' if s.get('kind') == 'quote' else ''} ({s['visual_type']})"
         body = (f"> {s.get('quote_en', '')}\n\n{s['narration']}" if s.get("kind") == "quote" else s["narration"])
         meta = f"라벨: {s.get('label', '')}" + (f"  |  소스: {src.get('url')} {rng}" if src.get("url") else "")
-        meta += f"  |  화면: {s['visual_brief']}"
+        meta += (f"  |  비교 기준: {s['compare_to']}" if s.get("compare_to") else "") + f"  |  화면: {s['visual_brief']}"
         md.append(f"{head}\n{body}\n\n_{meta}_\n")
     (project.dir("script") / "script.md").write_text("\n".join(md), encoding="utf-8")
 

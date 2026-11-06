@@ -12,7 +12,10 @@ description: 주제 선정부터 자료조사, 대본, 소스 탐색, 편집, �
    - **codex-cli:** ChatGPT 구독. `codex login` 이 필요합니다.
    - **api:** `ANTHROPIC_API_KEY` 가 필요합니다.
    - **manual:** 에이전트인 당신이 직접 답합니다. 아래 'manual 모드' 참고.
-3. 편집 스타일을 고릅니다: `python -m ytflow styles`. 스타일 문서는 `styles/<id>/STYLE.md` 에 있습니다.
+3. 편집 스타일을 고릅니다: `python -m ytflow styles` (두 번째 열이 계열). 먼저 계열을 정합니다.
+   - **원본 소스형(source, sixsigma):** 실적발표·인터뷰처럼 당사자의 말이 핵심일 때. 클립을 사용자 PC 에서 `rebuild` 로 받아야 완성됩니다.
+   - **자체 제작 인포그래픽형(infographic, mijudiary·moneycrew):** 개념·구조·숫자 비교가 핵심일 때. 클라우드에서 끝까지 완성됩니다.
+   스타일 문서는 `styles/README.md`, `styles/<id>/STYLE.md` 에 있습니다.
 
 ## 실행
 ```bash

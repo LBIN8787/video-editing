@@ -47,7 +47,7 @@ ytflow/ ──────────────── 실행 코드 (python -
 ## 4. 제작 절차 (어떤 에이전트든 이 순서)
 | # | 단계 | 명령 | 산출물 | 에이전트가 확인할 것 |
 |---|---|---|---|---|
-| 0 | 스타일 선택 | `python -m ytflow styles` | — | 주제 성격에 맞는 스타일 (`styles/<id>/STYLE.md` 의 '언제 쓰나') |
+| 0 | 스타일 선택 | `python -m ytflow styles` | — | 먼저 계열(원본 소스형 / 자체 제작 인포그래픽형)을 정하고 스타일을 고름 (`styles/README.md`) |
 | 1 | 주제 선정 (트렌드 우선) | `stage discover` → `stage select` | `00_source/trends.json`, `shortlist.md` | 48시간 내 여러 매체 보도, 아웃라이어 근거, 리스크 |
 | 2 | 자료조사 | `stage research` | `01_research/factsheet.md`, `articles.json` | 모든 팩트에 URL·날짜, 교차확인 |
 | 3 | 대본 | `stage script` → `validate` | `02_script/scenes.json`, `script.md` | validate 통과, 분량, 원본 발언 근거 |

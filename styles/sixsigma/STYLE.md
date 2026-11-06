@@ -2,6 +2,7 @@
 id: sixsigma
 title: 식스시그마
 renderer: sixsigma
+family: source   # source=원본 소스형 / infographic=자체 제작 인포그래픽형 / shorts
 status: reviewed
 reference: "https://www.youtube.com/@식스시그마 — 스토리보드 2편(FGQApSFoQAc, -7KItQ2_yaI)"
 ---

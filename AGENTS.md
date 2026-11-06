@@ -9,9 +9,10 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 |---|---|
 | 영상 1편 만들기 | `skills/video-make/SKILL.md` |
 | 자료조사 / 대본 / 소스 / 편집만 | `skills/video-research`, `video-script`, `video-sources`, `video-edit` |
-| 편집 스타일 고르기·적용 | `styles/README.md`, `styles/<id>/STYLE.md`, `skills/edit-style-<id>` |
+| 편집 스타일 고르기·적용 | `styles/README.md`(계열 구분), `styles/<id>/STYLE.md`, `skills/edit-style-<id>` |
 | 새 편집 스타일 추가 (레퍼런스 영상 분석) | `skills/edit-style-new/SKILL.md` |
 | 전체 설계·에이전트별 차이 | `docs/04-agents.md`, `docs/02-workflow-sop.md` |
+| 영상편집 skill 도입 검토 | `docs/05-skills-review.md` |
 
 스킬은 `skills/` 가 원본입니다. `.claude/skills/`(Claude Code)와 `.agents/skills/`(Codex)는 `python scripts/sync_skills.py` 로 만든 복사본입니다. **원본만 고치고 동기화하세요.**
 
@@ -49,7 +50,15 @@ python -m ytflow styles | schemas | status <프로젝트>
 | X 게시물 캡처 | 공식 임베드(oEmbed) | 없음 (게시물 URL 만) |
 | Reddit | 공개 JSON | 클라우드 IP 는 403 으로 막힘 → 쓰지 않음 |
 
+## 편집 스타일 계열
+| 계열 | 뼈대 | 스타일 | 대본 화면 문법 |
+|---|---|---|---|
+| `source` 원본 소스형 | CEO·CFO 인터뷰·실적발표 원본 영상 + 자막 + 핵심요약 애니메이션 | sixsigma | `prompts/script_source.md` |
+| `infographic` 자체 제작 인포그래픽형 | 직접 그린 도식·차트·비유 그림 | mijudiary, moneycrew | `prompts/script_infographic.md` |
+| `shorts` 쇼츠 | 9:16 고정 훅 + 큰 자막 | shorts-aitips | `prompts/shorts_script.md` |
+
 ## 규칙 (모든 에이전트 공통)
+- **쉬운 대본:** 시청자는 일반인입니다. 핵심 한 문장(`core_message`), 논리 구조(`logic`), 숫자마다 비교 기준(`compare_to`), 비유 2개 이상, 과거 사례 1개 이상, 어려운 말 풀이(`glossary`)를 넣습니다. `prompts/script.md`, `validate` 가 점검합니다.
 - **사실:** 숫자와 발언은 출처로 확인된 것만 씁니다. '재확인 필요'는 단정하지 않습니다. 투자 권유 표현은 금지합니다.
 - **소스:** YouTube 봇 확인이나 사이트 접근 차단을 **우회하지 않습니다.** 막히면 임시 화면을 두고 사용자 PC 에서 `rebuild` 하게 안내합니다.
 - **스타일:** 레퍼런스 채널의 대사, 고유 캐릭터, 로고, 썸네일을 복제하지 않습니다. 구조와 기법만 가져옵니다.

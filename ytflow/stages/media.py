@@ -261,7 +261,8 @@ def assets(project: Project, auto_cards: bool = True) -> None:
         card = s.get("card")
         if card and card.get("ticker"):  # 실제 시세 차트: 데이터 받아 카드에 넣기 (01_research/prices 캐시)
             pdir = project.dir("research") / "prices"
-            card = dict(card, type="chart", _series=marketdata.fetch(card["ticker"], card.get("period") or "6mo", pdir),
+            card = dict(card, type="chart", _series=marketdata.fetch(card["ticker"], card.get("period") or "6mo", pdir,
+                                                                    card.get("start") or "", card.get("end") or ""),
                         _currency=marketdata.currency(card["ticker"], pdir))
         for old in list(adir.glob(f"scene_{sid:03d}_auto.*")) + list(adir.glob(f"scene_{sid:03d}_anim.mp4")) \
                 + list(adir.glob(f"scene_{sid:03d}_card.png")):

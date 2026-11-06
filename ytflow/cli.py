@@ -16,6 +16,7 @@
 from __future__ import annotations
 
 import argparse
+import yaml
 
 from . import config
 from .project import GATE_AFTER, STAGES, Project
@@ -82,8 +83,9 @@ def layout_qa(p: Project) -> bool:
 
 def validate(p: Project) -> bool:
     """대본 스키마·장면 규칙 점검. 문제를 출력하고 통과 여부를 돌려준다."""
-    from .stages.cards import RENDER
+    from .stages.paper import LAYOUT as RENDER
     from .stages.writing import Script
+    from .scriptcheck import check
     issues = []
     try:
         data = Script.model_validate(p.read_json("script", "scenes.json")).model_dump()
@@ -112,9 +114,14 @@ def validate(p: Project) -> bool:
                 issues.append(f"{tag}: {s['visual_type']} 장면에 source.url 또는 source.query 가 필요합니다")
         if not s.get("label") and s["visual_type"] != "card":
             issues.append(f"{tag}: label(날짜 · 출처)이 비어 있습니다")
+    family = config.style_family()
+    errs, warns = check(data, family)
+    issues += errs
     for x in issues:
         print("✗", x)
-    print(("✓ 통과" if not issues else f"문제 {len(issues)}건") + f" — 장면 {len(data['scenes'])}개")
+    for x in warns:
+        print("⚠", x)
+    print(("✓ 통과" if not issues else f"문제 {len(issues)}건") + f" (권고 {len(warns)}건) — 장면 {len(data['scenes'])}개 · 계열 {family}")
     return not issues
 
 
@@ -215,7 +222,7 @@ def main(argv: list[str] | None = None) -> None:
     mk.add_argument("--topic", help="주제 (없으면 소스 탐색으로 자동 선정)")
     mk.add_argument("--angle", help="관점·방향 메모 (선택)")
     mk.add_argument("--name", help="프로젝트 이름 (선택)")
-    mk.add_argument("--style", choices=["sixsigma", "paper"], help="편집 스타일")
+    mk.add_argument("--style", choices=["sixsigma", "paper", "flat"], help="렌더러 (보통은 --style-ref 로 스타일째 고름)")
     mk.add_argument("--style-ref", help="ytflow style 로 분석한 레퍼런스 이름 (측정한 색·속도를 적용)")
     mk.add_argument("--keywords", nargs="*")
 
@@ -260,7 +267,9 @@ def main(argv: list[str] | None = None) -> None:
             if d.is_dir() and not d.name.startswith("_") and (d / "STYLE.md").exists():
                 head = (d / "STYLE.md").read_text(encoding="utf-8").split("---")[1] if (d / "STYLE.md").read_text(encoding="utf-8").startswith("---") else ""
                 meta = dict(l.split(":", 1) for l in head.strip().splitlines() if ":" in l)
-                print(f"{d.name:14} {meta.get('title', '').strip():12} renderer={meta.get('renderer', '').split('#')[0].strip():9} status={meta.get('status', '').split('#')[0].strip()}")
+                fam = config.style_family(((yaml.safe_load((d / "edit.yaml").read_text(encoding="utf-8")) or {}).get("edit") or {})
+                                          if (d / "edit.yaml").exists() else {})
+                print(f"{d.name:14} {fam:12} {meta.get('title', '').strip():12} renderer={meta.get('renderer', '').split('#')[0].strip():9} status={meta.get('status', '').split('#')[0].strip()}")
     elif a.cmd == "make":
         cmd_make(a)
     elif a.cmd == "rebuild":

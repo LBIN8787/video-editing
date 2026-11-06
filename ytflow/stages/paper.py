@@ -734,8 +734,32 @@ def _d(s):
         return None
 
 
+def l_analogy(S, card):
+    """비유 카드: 왼쪽 = 실제 숫자·개념, 오른쪽 = 일상의 비유, 가운데 '≈'.
+    items[0] 실제, items[1] 비유 (label · value · sub · icon). 항목이 하나면 문장 카드로."""
+    items = card.get("items", [])[:2]
+    if len(items) < 2:
+        return l_text(S, card)
+    _title(S, card)
+    xs = (S.W * 0.27, S.W * 0.73)
+    for i, (x, it) in enumerate(zip(xs, items)):
+        col = S.red if (it.get("highlight") or i == 1) else S.ink
+        at = 0.25 + i * 0.9  # 실제 → (잠깐) → 비유 순서로 등장
+        if it.get("icon"):
+            S.icon(it["icon"], x, S.H * 0.32, 120, col, at=at)
+        if it.get("label"):
+            S.text(x, S.H * 0.46, it["label"], fit(FT("label"), it["label"], 40, S.W * 0.36), S.muted, at=at + 0.1)
+        if it.get("value"):
+            f = fit(FT("value"), it["value"], 104, S.W * 0.36)
+            S.text(x, S.H * 0.57, it["value"], f, col, at=at + 0.2)
+        if it.get("sub"):
+            S.text(x, S.H * 0.68, it["sub"], fit(FT("note"), it["sub"], 44, S.W * 0.38), S.ink, at=at + 0.3)
+    S.text(S.W / 2, S.H * 0.56, "≈", F(FT("value"), 130), S.red, at=1.0)
+    _note(S, card, S.H * 0.79)
+
+
 LAYOUT = {"chart": l_chart, "line": l_line, "number_compare": l_number_compare, "flow": l_flow, "table": l_table, "bars": l_bars,
-          "headline": l_headline, "text": l_text}
+          "headline": l_headline, "text": l_text, "analogy": l_analogy}
 
 
 # ---------------------------------------------------------------- 공개 함수

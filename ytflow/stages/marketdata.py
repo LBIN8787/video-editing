@@ -15,13 +15,23 @@ from pathlib import Path
 INTERVAL = {"5d": "1h", "1mo": "1d", "3mo": "1d", "6mo": "1d", "1y": "1wk", "2y": "1wk", "5y": "1mo", "10y": "1mo"}
 
 
-def fetch(ticker: str, period: str = "6mo", cache_dir: Path | None = None) -> list[dict]:
+def fetch(ticker: str, period: str = "6mo", cache_dir: Path | None = None,
+          start: str = "", end: str = "") -> list[dict]:
+    """start/end(YYYY-MM-DD)를 주면 그 기간(과거 사례: 2000년 시스코 등), 아니면 오늘까지 period."""
     period = period if period in INTERVAL else "6mo"
-    cache = cache_dir / f"{ticker.replace('^', 'IDX_')}_{period}.json" if cache_dir else None
+    if start:
+        t0 = int(datetime.strptime(start, "%Y-%m-%d").replace(tzinfo=timezone.utc).timestamp())
+        t1 = int(datetime.strptime(end, "%Y-%m-%d").replace(tzinfo=timezone.utc).timestamp()) if end \
+            else int(datetime.now(timezone.utc).timestamp())
+        days = (t1 - t0) / 86400
+        iv = "1d" if days <= 200 else "1wk" if days <= 3 * 366 else "1mo"
+        key, q = f"{start}_{end or 'now'}", f"period1={t0}&period2={t1}&interval={iv}"
+    else:
+        key, q = period, f"range={period}&interval={INTERVAL[period]}"
+    cache = cache_dir / f"{ticker.replace('^', 'IDX_')}_{key}.json" if cache_dir else None
     if cache and cache.exists():
         return json.loads(cache.read_text(encoding="utf-8"))
-    url = (f"https://query1.finance.yahoo.com/v8/finance/chart/{urllib.request.quote(ticker)}"
-           f"?range={period}&interval={INTERVAL[period]}")
+    url = f"https://query1.finance.yahoo.com/v8/finance/chart/{urllib.request.quote(ticker)}?{q}"
     try:
         with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 ytflow"}), timeout=20) as r:
             res = json.loads(r.read())["chart"]["result"][0]

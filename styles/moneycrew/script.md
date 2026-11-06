@@ -1,5 +1,6 @@
 # 머니크루 스타일 대본 추가 규칙
 
+- **계열:** 자체 제작 인포그래픽형(infographic). 공통 화면 문법은 `prompts/script_infographic.md` 입니다.
 - **화면 비율:** card 70~85%(line·bars·number_compare·flow·table), screenshot 5~15%, source_video 0~10%입니다. 원본 영상은 거의 쓰지 않습니다.
 - **장면 길이:** 한 장면은 내레이션 한 문장(약 3~5초)입니다. 자막이 위쪽 한 줄이라 문장은 28자 안팎으로 짧게 씁니다.
 - **주가:** 주가·지수는 chart 카드(ticker+period)로 실제 시세 캔들을 씁니다. 자막은 아래에 둡니다.

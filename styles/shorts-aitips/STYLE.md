@@ -2,6 +2,7 @@
 id: shorts-aitips
 title: AI 꿀팁 쇼츠
 renderer: shorts
+family: shorts   # source=원본 소스형 / infographic=자체 제작 인포그래픽형 / shorts
 status: reviewed
 reference: "2026-11-06 #클로드코드 · #ai꿀팁 · #claudecode · #ai툴 해시태그 이번 달 상위 쇼츠 16편의 공개 미리보기 프레임"
 ---

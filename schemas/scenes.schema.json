@@ -3,7 +3,7 @@
     "Card": {
       "properties": {
         "type": {
-          "description": "chart | number_compare | flow | table | bars | line | headline | text",
+          "description": "chart | number_compare | flow | table | bars | line | headline | text | analogy (analogy: items[0]=실제 숫자·개념, items[1]=일상의 비유)",
           "title": "Type",
           "type": "string"
         },
@@ -46,6 +46,18 @@
           "default": "",
           "description": "line 카드 값의 단위 (예: 달러, %, USD, KRW)",
           "title": "Unit",
+          "type": "string"
+        },
+        "start": {
+          "default": "",
+          "description": "chart 카드: 과거 기간 시작 YYYY-MM-DD (과거 사례용, 예: 1999-06-01). 비우면 오늘까지 period",
+          "title": "Start",
+          "type": "string"
+        },
+        "end": {
+          "default": "",
+          "description": "chart 카드: 과거 기간 끝 YYYY-MM-DD (비우면 오늘)",
+          "title": "End",
           "type": "string"
         }
       },
@@ -161,6 +173,18 @@
           "title": "Visual Type",
           "type": "string"
         },
+        "beat": {
+          "default": "",
+          "description": "이 장면이 논리에서 하는 일: fact | number | why | so_what | analogy | precedent | jargon | question | quote | summary | counter | takeaway | next",
+          "title": "Beat",
+          "type": "string"
+        },
+        "compare_to": {
+          "default": "",
+          "description": "beat=number 일 때 비교 기준 (예: '작년 같은 분기 251억 달러', '삼성전자 시총의 약 2배')",
+          "title": "Compare To",
+          "type": "string"
+        },
         "visual_brief": {
           "description": "편집자/이미지 생성기용 화면 지시",
           "title": "Visual Brief",
@@ -232,12 +256,60 @@
       ],
       "title": "Source",
       "type": "object"
+    },
+    "Term": {
+      "properties": {
+        "term": {
+          "description": "어려운 말 (예: 잉여현금흐름)",
+          "title": "Term",
+          "type": "string"
+        },
+        "plain": {
+          "description": "중학생도 알아듣는 한 문장 풀이 (예: 번 돈에서 공장·장비 사는 데 쓴 돈을 빼고 남은 돈)",
+          "title": "Plain",
+          "type": "string"
+        },
+        "scene_id": {
+          "description": "이 말을 처음 풀어 주는 장면 id (처음 나오는 장면과 같거나 바로 앞)",
+          "title": "Scene Id",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "term",
+        "plain",
+        "scene_id"
+      ],
+      "title": "Term",
+      "type": "object"
     }
   },
   "properties": {
     "title_working": {
       "title": "Title Working",
       "type": "string"
+    },
+    "core_message": {
+      "default": "",
+      "description": "시청자가 영상을 다 보고 기억할 한 문장 (숫자 1개 포함, 40자 안팎)",
+      "title": "Core Message",
+      "type": "string"
+    },
+    "logic": {
+      "description": "논리 구조 3~6단계: 무슨 일(사실·숫자) → 왜(원인) → 그래서(결과) → 전에도?(과거 사례) → 반론 → 의미",
+      "items": {
+        "type": "string"
+      },
+      "title": "Logic",
+      "type": "array"
+    },
+    "glossary": {
+      "description": "대본에 나오는 어려운 말과 쉬운 풀이",
+      "items": {
+        "$ref": "#/$defs/Term"
+      },
+      "title": "Glossary",
+      "type": "array"
     },
     "scenes": {
       "items": {

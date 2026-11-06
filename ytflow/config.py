@@ -50,3 +50,18 @@ def style_profile() -> dict:
 
     p = DATA_DIR / "style_profile.json"
     return json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+
+
+# 편집 스타일 계열: 대본의 화면 문법과 점검 기준이 계열마다 다르다
+FAMILIES = {
+    "source": "원본 소스형 — 인터뷰·실적발표·키노트 원본 영상 + 자막 + 중간 핵심요약 애니메이션 (식스시그마)",
+    "infographic": "자체 제작 인포그래픽형 — 도식·차트·비유 그림을 직접 그려 설명 (미주일기, 머니크루)",
+    "shorts": "세로 쇼츠 — 9:16, 고정 훅 + 큰 자막",
+}
+_RENDERER_FAMILY = {"sixsigma": "source", "paper": "infographic", "flat": "infographic", "shorts": "shorts"}
+
+
+def style_family(edit: dict | None = None) -> str:
+    """edit.family 가 있으면 그것, 없으면 렌더러로 추정 (sixsigma→source, paper·flat→infographic)."""
+    edit = edit if edit is not None else (load("pipeline").get("edit") or {})
+    return edit.get("family") or _RENDERER_FAMILY.get(edit.get("style", ""), "source")

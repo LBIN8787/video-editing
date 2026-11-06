@@ -5,6 +5,11 @@ description: 대본 장면에 쓸 원본 영상과 기사 캡처를 찾아 넣�
 
 # 소스 탐색과 확보 (sources → clips)
 
+## 계열별 차이
+- **원본 소스형(source):** 이 단계가 영상 품질을 좌우합니다. 검색어는 인물 이름 + 행사·매체 + 시기로 씁니다
+  (예: "Susan Li Meta Q3 2026 earnings call", "Jensen Huang CNBC interview November 2026"). 공식 실적발표·키노트 → 주요 방송 인터뷰 순으로 고릅니다.
+- **인포그래픽형(infographic):** 원본 영상 장면이 적어 대부분 기사 캡처만 확보합니다.
+
 ## 1. 영상 고르기: `python -m ytflow stage <프로젝트> sources`
 - **대상:** `source.query` 가 있고 url 이 빈 장면에 YouTube 검색으로 영상과 구간을 채웁니다.
 - **선정 기준:**

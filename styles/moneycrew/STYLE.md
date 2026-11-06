@@ -2,6 +2,7 @@
 id: moneycrew
 title: 머니크루
 renderer: flat
+family: infographic   # source=원본 소스형 / infographic=자체 제작 인포그래픽형 / shorts
 status: reviewed
 reference: "머니크루(moneycrew) — 영상 fuIZqGtjqLU (360p, 18분 43초)"
 ---
