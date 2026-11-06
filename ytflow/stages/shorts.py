@@ -185,14 +185,17 @@ def render_scene(project: Project, scene: dict, hook: list[str], out: Path, d: f
     if vis.startswith("page") and shot.exists():
         # 저장소 페이지를 가운데 창 안에서 천천히 스크롤 (화면 녹화 느낌)
         page = Image.open(shot)
-        sc = mw / page.width
+        # 첫 화면은 전체 폭, README·설치 부분은 본문 열(GitHub 기준 왼쪽 ~880px)만 잘라 크게
+        cx0, cx1 = (0, page.width) if vis == "page_top" else (0, min(page.width, 900))
+        cw = cx1 - cx0
+        sc = mw / cw
         ph = int(page.height * sc)
         start = {"page_top": 0.0, "page_readme": 0.22, "page_install": 0.45}.get(vis, 0.0)
         y0 = int(min(max(ph * start, 0), max(ph - mh, 0)))
         travel = int(min(220, max(ph - mh - y0, 0)))
         im.save(base)
         _ff(["-loop", "1", "-i", str(base), "-loop", "1", "-i", str(shot), "-t", f"{d:.3f}", "-filter_complex",
-             f"[1:v]scale={mw}:-2,crop={mw}:{mh}:0:'{y0}+{travel}*t/{d:.3f}'[pg];"
+             f"[1:v]crop={cw}:ih:{cx0}:0,scale={mw}:-2,crop={mw}:{mh}:0:'{y0}+{travel}*t/{d:.3f}'[pg];"
              f"[0:v][pg]overlay={mx0}:{my0},format=yuv420p", "-r", "30", "-c:v", "libx264", "-preset", "veryfast", str(out)])
         return
     if vis == "card" and scene.get("card"):
