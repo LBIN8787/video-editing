@@ -9,6 +9,7 @@
 from __future__ import annotations
 
 import csv
+import re
 import urllib.parse
 
 from .. import config, yt
@@ -31,16 +32,33 @@ def search(query: str, n: int = 12) -> list[dict]:
     return out
 
 
-def score(c: dict, prefer: list[str], used: dict) -> float:
-    s = 0.0
-    ch = c["channel"].lower()
-    if any(p.lower() in ch for p in prefer):
-        s += 100
-    s += min(c["views"], 2_000_000) / 100_000       # 조회수는 약하게만 반영
+def _tokens(t: str) -> set[str]:
+    import re
+    return {w for w in re.findall(r"[0-9A-Za-z가-힣]+", t.lower()) if len(w) >= 2}
+
+
+def relevance(query: str, title: str) -> float:
+    """검색어 단어 중 제목에 들어 있는 비율 (한글은 앞 2글자만 맞아도 인정: '슈퍼컴퓨터'↔'슈퍼컴')."""
+    q, t = _tokens(query), title.lower()
+    if not q:
+        return 0.0
+    hit = sum(1 for w in q if w in t or (re.match(r"[가-힣]", w) and w[:2] in t))
+    return hit / len(q)
+
+
+def score(c: dict, prefer: list[str], used: dict, query: str = "") -> float:
+    rel = relevance(query, c["title"]) if query else 1.0
+    s = rel * 100                                   # 1순위: 제목이 검색어와 맞는가
+    if rel >= 0.3 and any(p.lower() in c["channel"].lower() for p in prefer):
+        s += 30                                     # 관련 있을 때만 공식·주요 언론 가산점
+    s += min(c["views"], 2_000_000) / 200_000       # 조회수는 약하게만 반영
     s -= used.get(c["id"], 0) * 8                   # 같은 영상 반복 사용 억제
     if c["duration"] > 1800:
-        s += 5                                      # 긴 원본(키노트·인터뷰)은 쓸 구간이 많다
+        s += 3                                      # 긴 원본(키노트·인터뷰)은 쓸 구간이 많다
     return s
+
+
+MIN_RELEVANCE = 0.3
 
 
 def run(project: Project) -> None:
@@ -61,8 +79,9 @@ def run(project: Project) -> None:
             continue
         if q not in cache:
             cache[q] = search(q)
-        cands = sorted(cache[q], key=lambda c: score(c, prefer, used), reverse=True)
-        if not cands:
+        cands = [c for c in cache[q] if relevance(q, c["title"]) >= MIN_RELEVANCE]
+        cands = sorted(cands, key=lambda c: score(c, prefer, used, q), reverse=True)
+        if not cands:  # 관련 영상이 없으면 억지로 붙이지 않고 카드/자리표시로 남긴다
             rows.append([s["id"], q, "NOT FOUND", "", "", "", ""])
             print(f"[sources] #{s['id']} '{q}' → 결과 없음")
             continue

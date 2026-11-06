@@ -3,7 +3,7 @@
 ### #1 [hook]  (source_video)
 엔비디아 GPU 8,496장. 한국이 국가 예산으로 들인 슈퍼컴퓨터 '한강'입니다.
 
-_라벨: 2026.11.02 · KISTI  |  화면: 한강 서버 랙·전산실 B-roll 소리 끄고 전체 화면. TJB 영상(pWhpmau5J2Y)은 쓰지 말 것. KISTI·과기정통부 공식 채널 우선._
+_라벨: 2026.11.02 · JTBC News  |  소스: https://www.youtube.com/watch?v=aBBkVF4d5Bk 0:17.8~0:23.8  |  화면: 한강 서버 랙·전산실 B-roll 소리 끄고 전체 화면. TJB 영상(pWhpmau5J2Y)은 쓰지 말 것. KISTI·과기정통부 공식 채널 우선._
 
 ### #2 [hook]  (card)
 계약액은 3,825억 원. 11월 2일 대전에서 가동식을 열었습니다.
@@ -13,22 +13,22 @@ _라벨: 2026.11.02 · 정책브리핑(과기정통부)  |  화면: 검은 배�
 ### #3 [hook]  (source_video)
 같은 시기 일론 머스크의 xAI는 데이터센터 한 곳에 약 55만 장을 넣었다고 밝혔습니다.
 
-_라벨: 2026.09.25 · 머스크 X 게시물(Invezz 보도)  |  화면: xAI Colossus 데이터센터 내부 랙 투어 영상, 소리 끔._
+_라벨: 2026.09.25 · CNBC  |  소스: https://www.youtube.com/watch?v=q5XP8xDcRJE 1:00.0~1:07.0  |  화면: xAI Colossus 데이터센터 내부 랙 투어 영상, 소리 끔._
 
 ### #4 [hook]  (source_video)
 그렇다면 이 슈퍼컴은 한국의 AI 경쟁력에서 어느 정도 몫을 할까요?
 
-_라벨: 2026.11.02 · KISTI  |  화면: 한강 시스템 외관 B-roll. TJB 화면 제외._
+_라벨: 2026.11.02 · KBS대전 뉴스  |  소스: https://www.youtube.com/watch?v=kqU9nidwaog 0:17.4~0:22.4  |  화면: 한강 시스템 외관 B-roll. TJB 화면 제외._
 
 ### #5 [hook]  (source_video)
 정부 발표와 엔비디아 실적 콜의 말로 따라가 보겠습니다.
 
-_라벨: 2026.08.26 · NVIDIA 실적 콜  |  화면: 엔비디아 실적 콜 화면 또는 본사 B-roll, 소리 끔._
+_라벨: 2026.08.26 · Benzinga  |  소스: https://www.youtube.com/watch?v=jhMbFf7jUnw 1:00.0~1:05.0  |  화면: 엔비디아 실적 콜 화면 또는 본사 B-roll, 소리 끔._
 
 ### #6 [intro]  (source_video)
 뉴스는 '24배 빨라졌다'에서 끝났습니다. 이 영상은 돈과 순위를 봅니다. 투자 권유는 아닙니다.
 
-_라벨: 2026.11.02 · KISTI  |  화면: 가동식 현장 또는 KISTI 전산실 B-roll. TJB 제외._
+_라벨: 2026.11.02 · KBS News  |  소스: https://www.youtube.com/watch?v=VsmkTShtUtw 0:17.4~0:25.4  |  화면: 가동식 현장 또는 KISTI 전산실 B-roll. TJB 제외._
 
 ### #7 [body-1]  (screenshot)
 납품사는 HPE입니다. 2025년 5월, 3,825억 원에 계약을 맺었습니다.
@@ -38,7 +38,7 @@ _라벨: 2025.05.14 · 머니투데이  |  소스: https://www.mt.co.kr/tech/202
 ### #8 [body-1]  (source_video)
 엔비디아 GH200 등을 HPE 크레이 서버에 넣고, 팬 없이 물로 식히는 구조입니다.
 
-_라벨: 2025.05 · HPE  |  화면: HPE 공식 채널 Cray EX 제품 영상, 소리 끔._
+_라벨: 2025.05 · GIGABYTE  |  소스: https://www.youtube.com/watch?v=5Pg6dj2bUcA 0:09.6~0:16.6  |  화면: HPE 공식 채널 Cray EX 제품 영상, 소리 끔._
 
 ### #9 [body-1]  (card)
 돈은 이렇게 흐릅니다. 정부 예산이 KISTI로, KISTI가 HPE에, HPE가 칩을 사서 시스템을 짓습니다.
@@ -73,7 +73,7 @@ _라벨: 2026.11.02 · 정책브리핑 외  |  화면: 가로 타임라인, 마�
 ### #15 [body-2]  (source_video)
 정부 발표로는 이론 성능 614페타플롭스, 5호기 누리온의 24배입니다.
 
-_라벨: 2026.11.02 · KISTI  |  화면: 한강 랙 B-roll. TJB 제외._
+_라벨: 2026.11.02 · KBS News  |  소스: https://www.youtube.com/watch?v=WadrDAct_9A 0:21.1~0:27.1  |  화면: 한강 랙 B-roll. TJB 제외._
 
 ### #16 [body-2]  (screenshot)
 과기정통부는 이달 발표되는 TOP500에서 '10위권 등재'를 전망했습니다.
@@ -108,12 +108,12 @@ _라벨: 2026.06 · TOP500 KISTI 사이트  |  화면: 가로 막대, 마지막�
 ### #22 [body-2]  (source_video)
 정리하면, 슈퍼컴 순위는 해마다 밀립니다. 한강의 실제 순위는 다음 주에 처음 나옵니다.
 
-_라벨: 2025.11.17 · SC25 TOP500 발표  |  화면: SC 학회 TOP500 발표 현장 영상, 소리 끔._
+_라벨: 2025.11.17 · SC Conference Series  |  소스: https://www.youtube.com/watch?v=dkgFvrhhD8U 1:00.0~1:07.0  |  화면: SC 학회 TOP500 발표 현장 영상, 소리 끔._
 
 ### #23 [body-3]  (source_video)
 이제 빅테크와 비교합니다. 머스크는 9월, Colossus 2에 GB200과 GB300 약 55만 장이 있다고 밝혔습니다.
 
-_라벨: 2026.09.25 · 머스크 X 게시물(Invezz 보도)  |  화면: Colossus 2 외관·내부 영상, 소리 끔._
+_라벨: 2026.09.25 · CNBC  |  소스: https://www.youtube.com/watch?v=KRCD-Wi7Wik 0:26.8~0:34.8  |  화면: Colossus 2 외관·내부 영상, 소리 끔._
 
 ### #24 [body-3]  (card)
 GPU 개수만 보면 한강은 Colossus 2의 약 65분의 1, 1·2호를 합치면 약 92분의 1입니다.
@@ -128,17 +128,17 @@ _라벨: 2026.09.25 · Invezz  |  소스: https://invezz.com/news/2026/09/25/elo
 ### #26 [body-3]  (source_video)
 메타의 오하이오 Prometheus는 '수십만 개'를 돌리고 있고, 목표는 약 100만 개입니다.
 
-_라벨: 2026.10.20 · The Register  |  화면: 메타 데이터센터 B-roll(공식·주요 언론), 소리 끔._
+_라벨: 2026.10.20 · CNBC Television  |  소스: https://www.youtube.com/watch?v=fh2Q9JgMbRI 0:33.1~0:40.1  |  화면: 메타 데이터센터 B-roll(공식·주요 언론), 소리 끔._
 
 ### #27 [body-3]  (source_video)
 마이크로소프트 Fairwater도 '수십만 개 GB200'이라고만 밝혔습니다. 정확한 수량은 공개되지 않았습니다.
 
-_라벨: 2025.09 · Microsoft (Tom's Hardware 보도)  |  화면: 마이크로소프트 공식 Fairwater 영상, 소리 끔._
+_라벨: 2025.09 · WISN 12 News  |  소스: https://www.youtube.com/watch?v=gc5XZJfF0kQ 0:16.9~0:24.9  |  화면: 마이크로소프트 공식 Fairwater 영상, 소리 끔._
 
 ### #28 [body-3]  (source_video)
 칩 세대도 다릅니다. GB200·GB300은 GH200 다음 세대라, 장당 성능 차이는 개수 차이보다 큽니다.
 
-_라벨: 2025.03.18 · NVIDIA GTC  |  화면: 엔비디아 공식 블랙웰 제품 영상, 소리 끔._
+_라벨: 2025.03.18 · CNBC  |  소스: https://www.youtube.com/watch?v=ZkPU5GHDqkQ 1:00.0~1:08.0  |  화면: 엔비디아 공식 블랙웰 제품 영상, 소리 끔._
 
 ### #29 [body-3]  (screenshot)
 다만 국가 AI 자원이 한강만은 아닙니다. 추경으로 네이버·NHN·카카오가 약 1.3만 장을 확보합니다.
@@ -148,7 +148,7 @@ _라벨: 2025.07.28 · 머니투데이  |  소스: https://www.mt.co.kr/tech/202
 ### #30 [body-3]  (source_video)
 작년 10월 APEC에선 엔비디아가 한국에 GPU 26만 장 공급을 발표했습니다. 시기는 '향후 수년'입니다.
 
-_라벨: 2025.10.31 · APEC 경주  |  화면: APEC CEO 서밋 젠슨 황 발표 장면, 소리 끔._
+_라벨: 2025.10.31 · CNBC-TV18  |  소스: https://www.youtube.com/watch?v=WYBaa9dJcdY 1:00.0~1:08.0  |  화면: APEC CEO 서밋 젠슨 황 발표 장면, 소리 끔._
 
 ### #31 [body-3]  (card)
 26만 장 중 정부 몫은 5만 장입니다. 나머지는 삼성·SK·현대차·네이버 몫입니다.
@@ -158,14 +158,14 @@ _라벨: 2025.10.31 · 머니투데이 / 헤럴드경제  |  화면: 가로 막�
 ### #32 [body-4]  (source_video)
 이런 국가 수요를 엔비디아는 '소버린 AI'라고 부릅니다. 콜렛 크레스 CFO의 말입니다.
 
-_라벨: 2026.02.25 · NVIDIA 실적 콜  |  화면: 엔비디아 실적 콜 화면 또는 크레스 CFO 영상, 소리 끔._
+_라벨: 2026.02.25 · Yahoo Finance  |  소스: https://www.youtube.com/watch?v=1A0CeRUyhaI 1:00.0~1:06.0  |  화면: 엔비디아 실적 콜 화면 또는 크레스 CFO 영상, 소리 끔._
 
 ### #33 [body-4] 🎙 원본 발언 (source_video)
 > In fiscal year 2026, our Sovereign AI business more than tripled year over year to over $30,000,000,000
 
 2026 회계연도에 소버린 AI 사업은 전년 대비 3배 넘게 늘어 300억 달러를 넘었습니다.
 
-_라벨: 2026.02.25 · NVIDIA FY26 4분기 실적 콜  |  화면: 원래 목소리 재생. 하단 2단 자막(회색 원문/흰색 번역)._
+_라벨: 2026.02.25 · Amit Kukreja  |  소스: https://www.youtube.com/watch?v=gxIG-CslvDI 1:00.0~1:10.0  |  화면: 원래 목소리 재생. 하단 2단 자막(회색 원문/흰색 번역)._
 
 ### #34 [body-4]  (card)
 정리하면 총매출 2,159억 달러의 약 14%입니다. 주요 고객국으로 캐나다·프랑스·영국 등이 꼽혔고, 한국은 없었습니다.
@@ -175,14 +175,14 @@ _라벨: 2026.02.25 · NVIDIA 8-K (SEC)  |  화면: 큰 숫자 3개, 비중만 �
 ### #35 [body-4]  (source_video)
 올해 2분기부터는 소버린을 따로 떼지 않고, 지역 클라우드·기업과 묶어 ACIE로 보고합니다.
 
-_라벨: 2026.08.26 · NVIDIA 실적 콜  |  화면: 엔비디아 실적 발표 관련 영상, 소리 끔._
+_라벨: 2026.08.26 · Benzinga  |  소스: https://www.youtube.com/watch?v=qNpyWGj-Kro 1:00.0~1:07.0  |  화면: 엔비디아 실적 발표 관련 영상, 소리 끔._
 
 ### #36 [body-4] 🎙 원본 발언 (source_video)
 > ACIE revenue of $40 billion increased 25% sequentially and 138% year-over-year.
 
 ACIE 매출은 400억 달러로, 전 분기보다 25%, 1년 전보다 138% 늘었습니다.
 
-_라벨: 2026.08.26 · NVIDIA FY27 2분기 실적 콜  |  화면: 원래 목소리 재생. 하단 2단 자막._
+_라벨: 2026.08.26 · Bloomberg Television  |  소스: https://www.youtube.com/watch?v=50V2BcYo3ew 1:00.0~1:08.0  |  화면: 원래 목소리 재생. 하단 2단 자막._
 
 ### #37 [body-4]  (card)
 정리하면 데이터센터 매출 890억 달러의 약 45%입니다.
@@ -202,12 +202,12 @@ _라벨: 2026.06 · TOP500  |  화면: 표, 첫 행 빨간 박스._
 ### #40 [counter]  (source_video)
 그래서 '세계 10위권'이 'AI 컴퓨팅 10위권'을 뜻하진 않습니다. 목적도 달라 자원의 55%가 연구개발용입니다.
 
-_라벨: 2026.11.02 · 서울경제  |  화면: KISTI 연구 현장 B-roll, 소리 끔. TJB 제외._
+_라벨: 2026.11.02 · KISTI 국가슈퍼컴퓨팅센터  |  소스: https://www.youtube.com/watch?v=yWl0HBouoQo 0:43.2~0:51.2  |  화면: KISTI 연구 현장 B-roll, 소리 끔. TJB 제외._
 
 ### #41 [counter]  (source_video)
 이식 KISTI 원장은 한강을 '국내 연구자들의 도전적인 연구를 뒷받침하는 기반'으로 만들겠다고 했습니다.
 
-_라벨: 2026.11.02 · 경향신문  |  화면: 가동식 현장 영상(공식 채널), 소리 끔. 발언 음성 미확인이므로 내레이션으로 전달._
+_라벨: 2026.11.02 · 연합뉴스TV  |  소스: https://www.youtube.com/watch?v=KsdR4bJlJxI 0:07.9~0:15.9  |  화면: 가동식 현장 영상(공식 채널), 소리 끔. 발언 음성 미확인이므로 내레이션으로 전달._
 
 ### #42 [takeaway]  (card)
 정리하면 세 가지입니다. 첫째, 한강은 4번 유찰되고 사업비가 53% 늘어난 끝에 나왔습니다.
@@ -222,12 +222,12 @@ _라벨: 2026.09.25 · Invezz / 정책브리핑  |  화면: 같은 표, 2행 빨
 ### #44 [takeaway]  (source_video)
 셋째, 이 수요가 엔비디아 매출에 어떻게 잡히는지는 공개 자료로 확인되지 않습니다.
 
-_라벨: 2026.08.26 · NVIDIA  |  화면: 엔비디아 본사·소버린 AI 관련 공식 영상, 소리 끔._
+_라벨: 2026.08.26 · NVIDIA  |  소스: https://www.youtube.com/watch?v=_onork4X1Eg 0:23.7~0:30.7  |  화면: 엔비디아 본사·소버린 AI 관련 공식 영상, 소리 끔._
 
 ### #45 [outro]  (source_video)
 다음에 볼 것은 셋입니다. 먼저 11월 15일 시작하는 시카고 SC26, TOP500에서 한강의 실측 순위입니다.
 
-_라벨: 2025.11.17 · SC25 TOP500 발표  |  화면: SC 학회 현장 영상, 소리 끔._
+_라벨: 2025.11.17 · SC Conference Series  |  소스: https://www.youtube.com/watch?v=owwbjEsmr-Q 1:00.0~1:08.0  |  화면: SC 학회 현장 영상, 소리 끔._
 
 ### #46 [outro]  (screenshot)
 11월 17일엔 엔비디아 3분기 실적이 나옵니다. 가이던스는 1,080억 달러, ACIE 숫자를 봅니다.
@@ -237,4 +237,4 @@ _라벨: 2026.11 · NVIDIA IR  |  소스: https://nvidianews.nvidia.com/news/nvi
 ### #47 [outro]  (source_video)
 그리고 12월 14일, 한강의 공식 서비스가 시작됩니다. 순위가 나오면 후속편으로 이어 가겠습니다.
 
-_라벨: 2026.11.02 · 정책브리핑(과기정통부)  |  화면: 한강 랙 B-roll로 마무리, 소리 끔. TJB 제외._
+_라벨: 2026.11.02 · KBS News  |  소스: https://www.youtube.com/watch?v=8aeJeMbWsYI 0:07.8~0:14.8  |  화면: 한강 랙 B-roll로 마무리, 소리 끔. TJB 제외._
