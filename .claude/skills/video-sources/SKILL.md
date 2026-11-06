@@ -11,11 +11,13 @@ description: 대본 장면에 쓸 원본 영상과 기사 캡처를 찾아 넣�
   - 제목과 검색어가 맞는 정도가 최소 0.3 이상이어야 합니다.
   - 그중 `config/pipeline.yaml` 의 `sources.prefer_channels`(공식·주요 언론)를 우선합니다.
   - 같은 영상을 다시 쓰면 구간이 겹치지 않게 뒤로 밉니다.
+  - 이번 주 업로드를 먼저 찾고(`sources.recent_first`), 관련 영상이 2개 미만이면 전체 기간에서 보충합니다.
 - **결과 확인:** `04_assets/sources.csv` 를 열어 영상이 장면 내용과 맞는지 확인합니다. 틀리면 `scenes.json` 의 `source.url/start/end` 를 직접 고치고, `query` 를 더 구체적으로 바꿔 다시 실행합니다.
 
 ## 2. 내려받기·캡처: `python -m ytflow stage <프로젝트> clips`
 - **YouTube:** 지정 구간만 `04_assets/scene_XXX.mp4` 로 받습니다(원음 포함).
 - **기사·공시 URL:** 헤드라인 부분을 `scene_XXX_shot.png` 로 캡처합니다(`ytflow/assets/capture.js`, Playwright).
+- **X 게시물 URL** (`x.com/<계정>/status/<id>`): 공식 임베드(oEmbed)로 게시물 카드를 그려 캡처합니다. 로그인·스크래핑은 쓰지 않습니다.
 - **실패하면:**
   - YouTube 클립은 그 영상의 공개 썸네일로 `scene_XXX_temp.jpg` 임시 화면을 만듭니다(노란 '임시' 표시).
   - 접근을 막는 사이트(403, 보안 확인)는 실패로 남깁니다.

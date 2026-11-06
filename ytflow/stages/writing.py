@@ -37,10 +37,13 @@ class TopicShortlist(BaseModel):
 def select(project: Project) -> None:
     cands = project.read_json("source", "candidates.json")
     news = project.read_json("source", "news.json")
+    tf = project.dir("source") / "trends.json"
+    trends = json.loads(tf.read_text(encoding="utf-8")) if tf.exists() else {}
     niche = config.load("pipeline").get("channel_niche", "")
     user = (f"# 채널 분야\n{niche}\n\n# 스타일 프로필\n{_style_block()}\n\n"
             f"# 유튜브 후보 (outlier = 조회수/구독자)\n{json.dumps(cands, ensure_ascii=False)}\n\n"
-            f"# 뉴스\n{json.dumps(news, ensure_ascii=False)}")
+            f"# 뉴스\n{json.dumps(news, ensure_ascii=False)}\n\n"
+            f"# 트렌드 레이더 (최근 {trends.get('window_hours', '?')}시간, 여러 매체)\n{json.dumps(trends, ensure_ascii=False)[:60000]}")
     res = llm.structured(config.prompt("topic_select"), user, TopicShortlist)
     picks = sorted(res.picks, key=lambda p: p.score, reverse=True)
     project.write_json("source", "shortlist.json", [p.model_dump() for p in picks])

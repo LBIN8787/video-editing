@@ -21,8 +21,10 @@ def _fmt(sec: float) -> str:
     return f"{int(sec // 60)}:{sec % 60:04.1f}"
 
 
-def search(query: str, n: int = 12) -> list[dict]:
+def search(query: str, n: int = 12, recent: bool = False) -> list[dict]:
     url = f"https://www.youtube.com/results?search_query={urllib.parse.quote(query)}"
+    if recent:
+        url += "&sp=EgIIAw%253D%253D"  # 업로드 날짜: 이번 주
     data = yt.flat_playlist(url, n) or {}
     out = []
     for e in data.get("entries") or []:
@@ -78,7 +80,9 @@ def run(project: Project) -> None:
         if not q or src.get("url"):
             continue
         if q not in cache:
-            cache[q] = search(q)
+            fresh = search(q, recent=True) if cfg.get("recent_first", True) else []
+            ok = [c for c in fresh if relevance(q, c["title"]) >= MIN_RELEVANCE]
+            cache[q] = fresh if len(ok) >= 2 else fresh + search(q)  # 최신 영상이 모자라면 전체에서 보충
         cands = [c for c in cache[q] if relevance(q, c["title"]) >= MIN_RELEVANCE]
         cands = sorted(cands, key=lambda c: score(c, prefer, used, q), reverse=True)
         if not cands:  # 관련 영상이 없으면 억지로 붙이지 않고 카드/자리표시로 남긴다

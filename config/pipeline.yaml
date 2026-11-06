@@ -67,7 +67,24 @@ styles:
       red: "#C4452F"          # 빨간 펜
       anim_seconds: 1.2       # 장면 등장 애니메이션 길이
 
+trends:
+  window_hours: 48            # 이 시간 안의 기사·게시물만 '최신'으로 본다
+  hackernews: true
+  x_api: true                 # X API v2 (키가 있을 때만 동작: 환경변수 X_BEARER_TOKEN 또는 환경 네트워크 시크릿)
+  x_accounts: ["nvidia", "SKhynix", "Samsung", "elonmusk", "sama", "satyanadella", "sundarpichai", "tim_cook", "AnthropicAI", "OpenAI"]
+  english_keywords:           # 한국어 키워드의 영어 검색어 (해외 매체·HN·X 검색용)
+    엔비디아: "Nvidia"
+    AI 반도체: "AI chips"
+    빅테크 실적: "big tech earnings"
+    미국 주식: "US stocks"
+    반도체 주가: "semiconductor stocks"
+    삼성전자 SK하이닉스: "Samsung SK Hynix"
+    기업 지분 투자: "strategic stake investment"
+    데이터센터 투자: "data center investment"
+  max_headlines: 80
+
 sources:
+  recent_first: true          # 원본 영상 검색 시 이번 주 업로드를 먼저 찾고, 없으면 전체에서
   # 원본 영상 자동 선택 시 우선할 채널 (채널 이름에 포함되면 가산점)
   prefer_channels: ["NVIDIA", "Bloomberg", "CNBC", "Yahoo Finance", "Reuters", "WSJ", "Financial Times",
                     "삼성전자", "SK hynix", "SK하이닉스", "NAVER", "네이버", "현대자동차",

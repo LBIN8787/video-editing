@@ -39,6 +39,16 @@ python -m ytflow style <id> ref.mp4 --title <이름>               # 새 편집 
 python -m ytflow styles | schemas | status <프로젝트>
 ```
 
+## 트렌드 소스
+| 소스 | 방식 | 필요한 것 |
+|---|---|---|
+| Google News (국문·영문) | 공개 RSS | 없음 |
+| Hacker News | 공개 Algolia API | 없음 |
+| YouTube 이번 주 아웃라이어 | 검색 결과 페이지 | 없음 |
+| X 최근 게시물·공식 계정 | X API v2 최근 검색 | `X_BEARER_TOKEN` (선택, 유료 요금제) |
+| X 게시물 캡처 | 공식 임베드(oEmbed) | 없음 (게시물 URL 만) |
+| Reddit | 공개 JSON | 클라우드 IP 는 403 으로 막힘 → 쓰지 않음 |
+
 ## 규칙 (모든 에이전트 공통)
 - **사실:** 숫자와 발언은 출처로 확인된 것만 씁니다. '재확인 필요'는 단정하지 않습니다. 투자 권유 표현은 금지합니다.
 - **소스:** YouTube 봇 확인이나 사이트 접근 차단을 **우회하지 않습니다.** 막히면 임시 화면을 두고 사용자 PC 에서 `rebuild` 하게 안내합니다.

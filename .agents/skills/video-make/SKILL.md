@@ -19,6 +19,10 @@ description: 주제 선정부터 자료조사, 대본, 소스 탐색, 편집, �
 python -m ytflow make --style-ref <스타일id>                     # 주제 자동 선정
 python -m ytflow make --topic "주제" --angle "관점" --style-ref <id>
 ```
+주제는 **트렌드 우선**으로 고릅니다. discover 가 최근 48시간의 여러 매체(Google News 국문·영문, Hacker News, X API 선택)와 이번 주 YouTube 아웃라이어를 모아 `00_source/trends.json` 을 만들고, select 는 여러 매체가 동시에 다루는 가장 새로운 소재를 1순위로 둡니다.
+- 키워드는 `config/pipeline.yaml` 의 `discover.seed_keywords`, 영어 검색어는 `trends.english_keywords`, X 감시 계정은 `trends.x_accounts` 에서 정합니다.
+- X API 키는 선택입니다. 환경변수 `X_BEARER_TOKEN`, 또는 클라우드 환경의 네트워크 시크릿(api.x.com)으로 넣습니다. 없으면 X 게시물은 research 의 웹 검색으로 찾습니다.
+
 단계 순서: discover → select → research → script → sources → clips → voice → assets → subtitles → assemble → package → report.
 중간부터 다시 돌릴 때는 `python -m ytflow stage <프로젝트> <단계>`, 소스를 넣은 뒤에는 `python -m ytflow rebuild <프로젝트>` 를 씁니다.
 

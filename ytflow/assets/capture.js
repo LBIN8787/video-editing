@@ -10,6 +10,21 @@ const { chromium } = require('playwright');
   const page = await browser.newPage({ viewport: { width: 1400, height: 1100 }, locale: 'ko-KR' });
   let code = 0;
   try {
+    // X(트위터) 게시물: Python 이 받은 공식 임베드 HTML(oEmbed)을 그려서 게시물 카드만 캡처
+    //   node capture.js --embed <oembed.html> <out.png>
+    if (url === '--embed') {
+      const [, html, outFile] = process.argv.slice(2);
+      const body = require('fs').readFileSync(html, 'utf8');
+      await page.setContent(`<html><body style="margin:0;padding:40px;background:#fff;display:flex;justify-content:center">
+        ${body}<script async src="https://platform.twitter.com/widgets.js"></script></body></html>`);
+      await page.waitForSelector('iframe[id^="twitter-widget"]', { timeout: 20000 }).catch(() => {});
+      await page.waitForTimeout(3500);
+      const el = (await page.$('iframe[id^="twitter-widget"]')) || (await page.$('blockquote'));
+      await el.screenshot({ path: outFile });
+      console.log('OK(x embed)');
+      await browser.close();
+      process.exit(0);
+    }
     const resp = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
     await page.waitForTimeout(3000);
     const status = resp ? resp.status() : 0;

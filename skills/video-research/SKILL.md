@@ -8,6 +8,11 @@ description: 영상 주제의 자료조사를 한다. 웹 검색으로 1차 출�
 ## 자동
 `python -m ytflow stage <프로젝트> research` 를 실행합니다. 백엔드가 웹 검색으로 조사합니다(claude-cli: WebSearch/WebFetch, codex-cli: `codex --search exec`, api: 서버 웹 검색 도구).
 
+## 트렌드 우선
+- **입력:** 주제 선정 단계가 만든 `00_source/trends.json`(최근 48시간 Google News 국문·영문, Hacker News, X API 키가 있으면 X)을 먼저 봅니다. 거기 나온 최신 기사부터 확인하고 1차 출처까지 거슬러 올라갑니다.
+- **X 게시물:** 기업 공식 계정, CEO·임원, 기자·애널리스트의 게시물을 웹 검색으로 찾습니다(예: `site:x.com nvidia Naver`). 찾으면 URL·작성자·시각·원문을 적습니다. X 게시물 URL 은 대본에서 screenshot 장면으로 쓰면 공식 임베드로 캡처됩니다.
+- **시점:** 모든 팩트에 '언제 기준'인지 적습니다. 72시간 안의 정정·후속 보도를 반드시 확인합니다.
+
 ## 직접 할 때 (manual 모드, 또는 결과를 고칠 때)
 입력은 `00_source/shortlist.json` 의 선택된 주제(`state.json` 의 `pick` 번호)와 `01_research/my_notes.md`(있으면)입니다.
 

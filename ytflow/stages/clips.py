@@ -85,6 +85,23 @@ def is_youtube(url: str) -> bool:
 
 def capture(url: str, out: Path) -> tuple[bool, str]:
     js = Path(__file__).resolve().parent.parent / "assets" / "capture.js"
+    if re.match(r"https?://(x|twitter)\.com/[^/]+/status/\d+", url):
+        # X 게시물: 공식 임베드(oEmbed) HTML 을 받아 브라우저로 그린 뒤 캡처 (로그인·스크래핑 없음)
+        import json as _j
+        import urllib.parse
+        import urllib.request
+        try:
+            api = "https://publish.x.com/oembed?omit_script=1&lang=ko&url=" + urllib.parse.quote(url, safe="")
+            with urllib.request.urlopen(urllib.request.Request(api, headers={"User-Agent": "ytflow/0.1"}), timeout=20) as r:
+                o = _j.loads(r.read())
+        except Exception as e:
+            return False, f"X 임베드 실패: {str(e)[:80]}"
+        html = out.with_suffix(".embed.html")
+        html.write_text(o.get("html", ""), encoding="utf-8")
+        proc = subprocess.run(["node", str(js), "--embed", str(html), str(out)], capture_output=True, text=True, timeout=90)
+        html.unlink(missing_ok=True)
+        msg = (proc.stdout.strip().splitlines() or [proc.stderr.strip()[-120:]])[-1]
+        return proc.returncode == 0 and out.exists(), f"{msg} @{o.get('author_name', '')}"
     proc = subprocess.run(["node", str(js), url, str(out)], capture_output=True, text=True, timeout=90)
     msg = (proc.stdout.strip().splitlines() or [proc.stderr.strip()[-120:]])[-1]
     return proc.returncode == 0 and out.exists(), msg
