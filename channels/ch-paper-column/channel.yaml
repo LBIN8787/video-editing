@@ -13,3 +13,12 @@ target_minutes: 10
 cadence: "주 1편 (예: 목요일 업로드)"
 voice: ko-KR-InJoonNeural               # 운영 전 결정: 본인 녹음 / 공식 TTS (docs/05 'TTS')
 tone: "차분한 해설. 질문으로 장을 열고, 결론은 한 문장으로."
+
+# 소스 찾기 (벤치마킹: docs/07-sourcing.md — 미주일기식 '1차 문서에서 출발')
+sourcing:
+  start_from: document            # 기업 연구 블로그·논문·IR 보도자료·SEC 공시·정부·연구소 → 개념을 칼럼으로
+  documents: ["기업 공식 블로그·연구 페이지(anthropic.com/research, deepmind, openai)", "논문(arXiv·NBER·학술지)",
+              "IR 보도자료·SEC 공시", "정부·국제기구·연구소(IMF·Fed·Stanford HAI·METR)", "인물의 X 게시물(공식 계정)"]
+  photos: wikimedia_commons       # 인물·장소 사진은 위키미디어 공용 CC 사진만 (저작자·라이선스를 설명란에 표기)
+  min_documents: 3
+  chapters: true                  # 장 제목을 질문형으로 → 설명란 챕터

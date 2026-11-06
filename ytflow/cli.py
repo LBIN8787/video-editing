@@ -21,10 +21,11 @@ import yaml
 
 from . import config
 from .project import GATE_AFTER, STAGES, Project
-from .stages import benchmark, clips, discover, media, report, sources, style, writing
+from .stages import benchmark, clips, discover, media, report, scout, sources, style, writing
 
 RUNNERS = {
     "discover": lambda p, a: discover.run(p, a.keywords),
+    "scout": lambda p, a: scout.run(p),
     "select": lambda p, a: writing.select(p),
     "research": lambda p, a: writing.research(p),
     "article": lambda p, a: writing.article(p),
@@ -133,7 +134,7 @@ def cmd_make(a) -> None:
     ch = config.channel(a.channel) if a.channel else {}
     if ch.get("format") == "shorts":  # 쇼츠 채널은 쇼츠 파이프라인으로
         from .stages import shorts
-        p = shorts.make(a.name, None, a.topic)
+        p = shorts.make(a.name, None, a.topic, ch)
         _log_episode(ch["id"], p)
         return
     imported = Path(a.from_text).read_text(encoding="utf-8") if a.from_text else ""
@@ -170,15 +171,21 @@ def cmd_make(a) -> None:
                                                    "source_video_ids": [], "hook_idea": "", "score": 100, "risks": ""}])
         for st in ("discover", "select"):
             p.mark_done(st)
-    else:
+        RUNNERS["scout"](p, a)  # 주제를 줘도 소스부터 찾는다
+    else:  # 소스 먼저: 트렌드 → 화제별 소스 찾기 → 소스가 강한 주제 선정(형식 판단)
         RUNNERS["discover"](p, a)
+        RUNNERS["scout"](p, a)
         RUNNERS["select"](p, a)
+    if a.plan:  # 기획만: 주제·형식·소스를 사람이 먼저 본다
+        print(f"\n📋 기획 완료: {p.dir('source')}/shortlist.md (주제별 형식·소스)\n"
+              f"   고른 뒤: python -m ytflow approve {p.path.name} topic --pick N && python -m ytflow run {p.path.name}")
+        return
     stt = p.state()
     stt["pick"] = 1
     p.save_state(stt)
     for g in sorted(set(GATE_AFTER.values())):
         p.approve(g)
-    for stage in STAGES[2:]:
+    for stage in STAGES[STAGES.index("research"):]:
         print(f"--- {stage}")
         RUNNERS[stage](p, a)
     if ch:
@@ -265,7 +272,8 @@ def main(argv: list[str] | None = None) -> None:
 
     mk = sub.add_parser("make", help="자료조사부터 영상·업로드 패키지까지 한 번에")
     mk.add_argument("--topic", help="주제 (없으면 소스 탐색으로 자동 선정)")
-    mk.add_argument("--channel", help="채널 id (channels/<id>/channel.yaml: 스타일·형식·키워드·분량)")
+    mk.add_argument("--channel", help="채널 id (channels/<id>/channel.yaml: 스타일·형식·키워드·분량·소스 찾기)")
+    mk.add_argument("--plan", action="store_true", help="트렌드 → 소스 찾기 → 주제 선정(형식 판단)까지만 하고 멈춤")
     mk.add_argument("--from-text", help="가져온 조사 글(.md/.txt): 대화형 LLM 답·메모를 사실 확인 → 원고 → 영상으로")
     mk.add_argument("--angle", help="관점·방향 메모 (선택)")
     mk.add_argument("--name", help="프로젝트 이름 (선택)")

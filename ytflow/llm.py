@@ -213,8 +213,14 @@ def _api_web(system: str, user: str, max_tokens: int) -> str:
 
 
 def structured(system: str, user: str, schema: Type[T], max_tokens: int = 16000,
-               images: list | None = None) -> T:
-    """스키마로 검증된 JSON 출력. images 를 주면 그림(장면 미리보기 등)을 함께 보고 답한다."""
+               images: list | None = None, web: bool = False) -> T:
+    """스키마로 검증된 JSON 출력. images 를 주면 그림(장면 미리보기 등)을 함께 보고 답한다.
+    web=True 면 먼저 웹 검색으로 조사한 글을 받고, 그 글을 스키마로 옮긴다 (모든 백엔드 공통)."""
+    if web:
+        notes = text(system + "\n\n조사 결과를 빠짐없이 마크다운으로 적으세요 (URL·날짜 포함). 다음 단계에서 JSON 으로 옮깁니다.",
+                     user, max_tokens=max_tokens, web=True)
+        return structured("아래 조사 결과를 스키마에 맞게 그대로 옮기세요. 없는 URL·숫자를 만들지 마세요.\n\n" + system,
+                          notes, schema, max_tokens=max_tokens)
     b = _backend()
     if b == "manual":
         return schema.model_validate(_manual("structured", system, user, schema.model_json_schema(), images=images))

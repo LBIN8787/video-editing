@@ -16,3 +16,5 @@
 - **숫자는 움직이게.** number_compare·bars·line 은 값이 올라가며 그려집니다. 비교 기준(compare_to)을 카드의 sub·note 에 적습니다.
 - **원문은 문서 캡처로.** 공시·보도 문장은 screenshot(기사 헤드라인)이나 headline 카드로 보여 주고 핵심 단어를 emphasis 로.
 - 장이 바뀌는 첫 장면은 질문 한 문장의 text 카드(beat=question)로 엽니다.
+- **소스 목록의 1차 문서**(연구·논문·공시)는 screenshot 장면으로 원문을 보여 주고, 그 문서의 개념을 다음 장면의 도식으로 풉니다.
+- **인물·장소**가 나오면 소스 목록의 photo(위키미디어 CC)를 screenshot 장면으로 붙입니다(source.url = 그 소스 url). 사진이 없으면 아이콘 카드.

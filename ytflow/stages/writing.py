@@ -26,8 +26,12 @@ class TopicPick(BaseModel):
     why_now: str
     source_video_ids: list[str]
     hook_idea: str
-    score: int = Field(description="0-100, 클릭 잠재력 x 제작 난이도 역수 x 채널 적합도")
+    score: int = Field(description="0-100, 소스의 힘 x 시의성 x 채널 적합도")
     risks: str
+    format: str = Field("longform", description="longform(분석: 칼럼·보고서로 길게) | shorts(안내: 한 가지 사실·방법)")
+    format_reason: str = Field("", description="형식 판단 근거 (scout 의 depth·소스 수)")
+    scout_index: int = Field(0, description="scout.json topics 의 번호 (0부터). 이 주제의 소스 묶음")
+    entities: list[str] = Field(default_factory=list, description="사진이 필요한 인물·회사·장소 이름 (영문, 위키미디어 검색용)")
 
 
 class TopicShortlist(BaseModel):
@@ -40,21 +44,66 @@ def select(project: Project) -> None:
     tf = project.dir("source") / "trends.json"
     trends = json.loads(tf.read_text(encoding="utf-8")) if tf.exists() else {}
     niche = config.load("pipeline").get("channel_niche", "")
+    sf = project.dir("source") / "scout.json"
+    scout = json.loads(sf.read_text(encoding="utf-8")) if sf.exists() else {}
+    fmt = config.video_format()
     user = (f"# 채널 분야\n{niche}\n\n# 스타일 프로필\n{_style_block()}\n\n"
             f"# 유튜브 후보 (outlier = 조회수/구독자)\n{json.dumps(cands, ensure_ascii=False)}\n\n"
             f"# 뉴스\n{json.dumps(news, ensure_ascii=False)}\n\n"
-            f"# 트렌드 레이더 (최근 {trends.get('window_hours', '?')}시간, 여러 매체)\n{json.dumps(trends, ensure_ascii=False)[:60000]}")
+            f"# 트렌드 레이더 (최근 {trends.get('window_hours', '?')}시간, 여러 매체)\n{json.dumps(trends, ensure_ascii=False)[:40000]}\n\n"
+            f"# 화제별로 찾아 둔 소스 (scout: 소스가 강한 화제를 우선)\n{json.dumps(scout.get('topics', []), ensure_ascii=False)[:40000]}\n\n"
+            f"# 이 채널의 형식\n{fmt} — 이 형식에 맞는 주제를 1순위로. 형식이 다른 좋은 주제도 format 을 바꿔 함께 적으면 다른 채널 대기열로 보냅니다.")
     res = llm.structured(config.prompt("topic_select"), user, TopicShortlist)
-    picks = sorted(res.picks, key=lambda p: p.score, reverse=True)
+    picks = sorted(res.picks, key=lambda p: (p.format == fmt, p.score), reverse=True)  # 채널 형식에 맞는 주제가 먼저
+    _queue_other_formats(project, [p for p in picks if p.format != fmt])
     project.write_json("source", "shortlist.json", [p.model_dump() for p in picks])
     lines = ["# 주제 후보 (승인할 번호를 고르세요)\n"]
     for i, p in enumerate(picks, 1):
-        lines.append(f"## {i}. {p.title_working}  — {p.score}점\n- 관점: {p.angle}\n- 왜 지금: {p.why_now}\n"
-                     f"- 훅: {p.hook_idea}\n- 리스크: {p.risks}\n- 소스: {', '.join(p.source_video_ids)}\n")
+        lines.append(f"## {i}. [{'롱폼' if p.format == 'longform' else '쇼츠'}] {p.title_working}  — {p.score}점\n"
+                     f"- 형식 판단: {p.format_reason}\n- 관점: {p.angle}\n- 왜 지금: {p.why_now}\n"
+                     f"- 훅: {p.hook_idea}\n- 리스크: {p.risks}\n" + _sources_md(scout, p.scout_index))
     (project.dir("source") / "shortlist.md").write_text("\n".join(lines), encoding="utf-8")
     print(f"[select] {project.dir('source')}/shortlist.md 를 검토 후\n"
           f"         ytflow approve {project.path.name} topic --pick N")
     project.mark_done("select")
+
+
+def _sources_md(scout: dict, idx: int) -> str:
+    ts = scout.get("topics") or []
+    if not 0 <= idx < len(ts):
+        return ""
+    rows = [f"  - [{s['kind']}/{s['use_as']}] {s.get('speaker') or s['publisher']} — {s['title'][:70]} ({s.get('date', '')}) {s['url']}"
+            for s in ts[idx]["sources"]]
+    return f"- 소스 ({ts[idx]['depth']}): \n" + "\n".join(rows) + "\n"
+
+
+def _queue_other_formats(project: Project, picks: list) -> None:
+    """채널 형식과 다른 주제(예: 롱폼 채널에서 나온 '안내'형 소재)는 맞는 채널의 대기열로 보낸다."""
+    if not picks:
+        return
+    target = config.load("pipeline").get("format_channels") or {}
+    for p in picks:
+        cid = target.get(p.format)
+        if not cid or not (config.CHANNELS_DIR / cid).exists():
+            continue
+        f = config.CHANNELS_DIR / cid / "queue.md"
+        if not f.exists():
+            f.write_text(f"# 주제 대기열 — {cid}\n\n다른 채널의 주제 선정에서 이 채널 형식에 맞다고 판단된 소재입니다. "
+                         f"`python -m ytflow make --channel {cid} --topic \"...\"` 로 만듭니다.\n\n", encoding="utf-8")
+        line = f"- [ ] {p.title_working} — {p.format_reason} (출처 회의: `projects/{project.path.name}`)\n"
+        if p.title_working not in f.read_text(encoding="utf-8"):
+            with open(f, "a", encoding="utf-8") as fh:
+                fh.write(line)
+        print(f"[select] '{p.title_working[:30]}' → {cid} 대기열 ({p.format})")
+
+
+def _inventory_block(project: Project) -> str:
+    f = project.dir("source") / "inventory.json"
+    if not f.exists():
+        return ""
+    return ("# 소스 목록 (S번호) — 이 영상은 이 소스들로 만듭니다. 장면마다 source_ref 에 S번호를 적고, "
+            "source.url 은 그 소스의 url 을 그대로 씁니다. 목록에 없는 소스를 만들지 마세요.\n"
+            + f.read_text(encoding="utf-8") + "\n\n")
 
 
 def chosen_topic(project: Project) -> dict:
@@ -97,6 +146,12 @@ def research(project: Project) -> None:
         extra = ("## 가져온 조사 글 (모든 숫자·발언을 1차 출처로 확인하고, 확인 안 되면 '재확인 필요')\n"
                  + imported.read_text(encoding="utf-8") + "\n\n" + extra)
     from datetime import date
+    if (project.dir("source") / "scout.json").exists() and not (project.dir("source") / "inventory.json").exists():
+        from .scout import inventory
+        inventory(project)
+    inv = _inventory_block(project)
+    if inv:
+        extra = inv.replace("이 영상은 이 소스들로 만듭니다", "먼저 이 소스들을 열어 확인하고(발언 원문·숫자), 빈 곳만 더 찾으세요") + extra
     user = (f"# 오늘 날짜\n{date.today().isoformat()}\n\n# 주제\n{json.dumps(topic, ensure_ascii=False)}\n\n"
             f"# 소스 영상 자막 (있으면)\n{json.dumps(transcripts, ensure_ascii=False)}\n\n# 제작자 메모/추가 자료\n{extra}")
     print("[research] 웹 리서치 중 (수 분 걸릴 수 있음)")
@@ -121,7 +176,7 @@ def article(project: Project) -> None:
     pcfg = config.load("pipeline")
     minutes = pcfg.get("script", {}).get("target_minutes", 9)
     user = (f"# 채널 분야\n{pcfg.get('channel_niche', '')}\n\n# 주제\n{json.dumps(topic, ensure_ascii=False)}\n\n"
-            f"# 형식 규칙\n{rules}\n\n# 분량\n영상 약 {minutes}분 (원고 약 {int(minutes * 290)}자)\n\n# 팩트시트\n{fact}")
+            f"# 형식 규칙\n{rules}\n\n{_inventory_block(project)}# 분량\n영상 약 {minutes}분 (원고 약 {int(minutes * 290)}자)\n\n# 팩트시트\n{fact}")
     if imported.exists():
         user += "\n\n# 가져온 조사 글 (구성 참고용, 숫자는 팩트시트 기준)\n" + imported.read_text(encoding="utf-8")
     md = llm.text(config.prompt("article"), user)
@@ -178,6 +233,7 @@ class Scene(BaseModel):
     card: Card | None = Field(description="visual_type=card 일 때 검은 배경 인포 카드 내용")
     emphasis: list[str] = Field(description="자막에서 색으로 강조할 단어")
     visual_type: str = Field(description="source_video | card | screenshot | stock | ai_image")
+    source_ref: str = Field("", description="이 장면이 쓰는 소스 목록 번호 (S1, S2 …). 직접 그린 도식이면 빈 문자열")
     beat: str = Field("", description="이 장면이 논리에서 하는 일: fact | number | why | so_what | analogy | precedent | "
                                       "jargon | question | quote | summary | counter | takeaway | next")
     compare_to: str = Field("", description="beat=number 일 때 비교 기준 (예: '작년 같은 분기 251억 달러', '삼성전자 시총의 약 2배')")
@@ -214,7 +270,7 @@ def script(project: Project) -> None:
     art = project.dir("research") / "article.md"
     art_block = (f"# 원고 (이 글을 장면 대본으로 옮깁니다: 문단 순서를 지키고, 문장은 거의 그대로 내레이션으로)\n"
                  f"{art.read_text(encoding='utf-8')}\n\n") if art.exists() else ""
-    user = (f"# 스타일 프로필\n{_style_block()}\n\n# 주제\n{json.dumps(topic, ensure_ascii=False)}\n\n{art_block}"
+    user = (f"# 스타일 프로필\n{_style_block()}\n\n# 주제\n{json.dumps(topic, ensure_ascii=False)}\n\n{art_block}{_inventory_block(project)}"
             f"# 팩트시트\n{fact}\n\n# 인용 가능한 기사 (screenshot 장면의 source.url 로만 사용)\n{arts}\n\n# 분량\n약 {minutes}분, 분당 {cpm}자 → 내레이션 총 {int(minutes * cpm)}자 내외")
     ref = config.load("pipeline").get("edit", {}).get("style_ref")
     addendum = config.STYLES_DIR / ref / "script.md" if ref else None
@@ -282,6 +338,24 @@ def package(project: Project) -> None:
     if chapters:
         ch = "\n".join(f"{int(c['t'] // 60):02d}:{int(c['t'] % 60):02d} {c['label']}" for c in chapters)
         res["description"] = f"{res['description']}\n\n{ch}"
+    invf = project.dir("source") / "inventory.json"
+    if invf.exists():  # 설명란 출처: [원본] 영상 · [자료] 문서 · 사진 출처 및 이용 조건 (벤치마킹 채널 형식)
+        inv = json.loads(invf.read_text(encoding="utf-8"))
+        used = {s.get("source_ref") for s in scenes["scenes"]} | {(s.get("source") or {}).get("url") for s in scenes["scenes"]}
+        inv = [x for x in inv if x["id"] in used or x["url"] in used] or inv
+        vids = [x for x in inv if x["kind"] == "video"]
+        docs = [x for x in inv if x["kind"] not in ("video", "photo")]
+        pics = [x for x in inv if x["kind"] == "photo"]
+        blk = []
+        if vids:
+            blk.append("[원본]\n" + "\n".join(f"{i}. {x['publisher']}, {x['title']} ({x.get('date', '')}) {x['url']}" for i, x in enumerate(vids, 1)))
+        if docs:
+            blk.append("[자료]\n" + "\n".join(f"- {x['publisher']}, {x['title']} ({x.get('date', '')}) · {x['url']}" for x in docs))
+        if pics:
+            blk.append("사진 출처 및 이용 조건\n" + "\n".join(f"- {x['title']} · {x.get('artist', '')} · {x.get('license', '')} · {x['url']}" for x in pics))
+        if blk:
+            res["description"] = res["description"].rstrip() + "\n\n" + "\n\n".join(blk) + \
+                "\n\n이 영상은 공개된 발언과 자료를 정리한 것이며 특정 종목의 매수·매도를 권하지 않습니다."
     project.write_json("package", "upload.json", res)
     print(f"[package] {project.dir('package')}/upload.json")
     project.mark_done("package")

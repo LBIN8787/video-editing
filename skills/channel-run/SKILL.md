@@ -10,10 +10,14 @@ description: 운영 채널(channels/<id>) 규칙으로 이번 회차 영상을 �
 - 롱폼 칼럼(자체 제작, 미주일기): `ch-paper-column` — 자체 제작이 필요한 영상의 기본
 - 롱폼 보고서(원본 소스, 식스시그마): `ch-source-brief` — PC 에서 `rebuild` 필요
 - 롱폼 데이터 리포트(머니크루): `ch-data-motion`
-- 쇼츠 안내: `ch-ai-shorts`
+- 쇼츠 안내: `ch-ai-shorts`(AI·GitHub), `ch-money-shorts`(경제 상식, 롱폼 주제 선정에서 '안내'형으로 넘어온 대기열)
+- **형식 판단:** 서술할 내용이 많은 분석 → 롱폼, 한 가지 안내 → 쇼츠. 형식이 다른 소재는 `channels/<id>/queue.md` 로 갑니다.
 
 ## 2. 시작하기
+먼저 기획만 돌려 주제·형식·소스를 확인하는 것을 권합니다 (주제 선정과 글의 내용이 가장 중요).
 ```bash
+python -m ytflow make --channel <id> --plan                  # 트렌드 → 소스 찾기 → 주제·형식 결정까지
+python -m ytflow approve <프로젝트> topic --pick N && python -m ytflow run <프로젝트>
 python -m ytflow make --channel <id>                         # 트렌드에서 주제 자동
 python -m ytflow make --channel <id> --topic "주제"
 python -m ytflow make --channel <id> --from-text <조사글.md>   # 대화형 LLM 답·메모 → 사실 확인 → 원고 → 영상

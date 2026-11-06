@@ -105,6 +105,13 @@ def build(project: Project, repo: str | None, topic: str | None) -> None:
         project.write_json("source", "pick.json", pk.model_dump())
         print(f"[shorts] 선택: {topic} ({repo})")
     info = {}
+    if topic and not repo and config.load("pipeline").get("shorts_mode") == "info":
+        # 정보형 쇼츠(경제·기업 상식): 저장소 화면 대신 웹으로 사실을 확인하고 카드·큰 글씨로 보여 준다
+        print("[shorts] 정보형: 사실 확인 (웹 검색)")
+        facts = llm.text(config.prompt("shorts_facts"), f"# 주제\n{topic}\n\n# 오늘\n{__import__('datetime').date.today()}", web=True)
+        (res / "factsheet.md").write_text(facts, encoding="utf-8")
+        info = {"mode": "info", "facts": facts[:15000],
+                "rule": "저장소가 없으므로 page_* 화면은 쓰지 않습니다. card(숫자) · big_text · compare 만 씁니다. 숫자는 팩트에 있는 것만."}
     if repo:
         meta = _gh(f"/repos/{repo}") or {}
         readme = _gh(f"/repos/{repo}/readme") or {}
@@ -249,10 +256,22 @@ def assets(project: Project) -> None:
     project.mark_done("assets")
 
 
-def make(name: str | None, repo: str | None, topic: str | None) -> Project:
-    p = Project.create(name or f"shorts-{(repo or topic or 'auto').split('/')[-1][:20]}")
-    (p.path / "edit.yaml").write_text((config.STYLES_DIR / "shorts-aitips" / "edit.yaml").read_text(encoding="utf-8"),
-                                      encoding="utf-8")
+def make(name: str | None, repo: str | None, topic: str | None, channel: dict | None = None) -> Project:
+    ch = channel or {}
+    if not topic and not repo and ch.get("sourcing", {}).get("start_from") == "queue":  # 대기열의 첫 소재
+        q = config.CHANNELS_DIR / ch["id"] / "queue.md"
+        line = next((l for l in (q.read_text(encoding="utf-8").splitlines() if q.exists() else []) if l.startswith("- [ ] ")), "")
+        topic = line[6:].split(" — ")[0].strip() or None
+        if topic:
+            q.write_text(q.read_text(encoding="utf-8").replace(line, line.replace("- [ ] ", "- [x] ", 1)), encoding="utf-8")
+            print(f"[shorts] 대기열에서: {topic}")
+    p = Project.create(name or (f"{ch['id']}-" if ch else "shorts-") + (repo or topic or "auto").split("/")[-1][:20])
+    import yaml as _y
+    cur = _y.safe_load((config.STYLES_DIR / ch.get("style_ref", "shorts-aitips") / "edit.yaml").read_text(encoding="utf-8"))
+    if ch:
+        cur.update({"channel": ch["id"], "format": "shorts", "channel_niche": ch.get("niche", ""),
+                    "shorts_mode": "info" if ch.get("sourcing", {}).get("start_from") != "repo" else "repo"})
+    (p.path / "edit.yaml").write_text(_y.safe_dump(cur, allow_unicode=True, sort_keys=False), encoding="utf-8")
     p = Project.open(str(p.path))
     build(p, repo, topic)
     from . import media, report, writing

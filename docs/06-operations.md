@@ -6,7 +6,10 @@ ytflow 는 한 번 쓰고 끝내는 스크립트가 아니라 **매주 같은 �
 ## 1. 한 편이 만들어지는 길
 | 단계 | 명령 (`python -m ytflow stage <프로젝트> <단계>`) | 산출물 | 사람이 볼 것 |
 |---|---|---|---|
-| 소재 | `discover` → `select` | `00_source/trends.json`, `shortlist.md` | 주제 후보 (자동 모드는 1순위) |
+| 트렌드 | `discover` | `00_source/trends.json` | — |
+| **소스 먼저** | `scout` (채널별 출발점: 발언 영상 / 1차 문서 / 숫자 계열) | `00_source/scout.json` | 화제마다 쓸 수 있는 원본이 있나 |
+| 주제·형식 | `select` (소스가 강한 화제, 분석=롱폼 / 안내=쇼츠) | `shortlist.md`, 다른 형식은 `channels/<id>/queue.md` | **주제와 형식 — 가장 먼저 볼 곳** |
+| 소스 목록 | research 시작 때 `inventory` | `00_source/inventory.md` (S번호, 사진 라이선스) | 이 영상의 재료 |
 | 조사 | `research` | `01_research/factsheet.md`, `articles.json` | 숫자·발언의 출처, '재확인 필요' |
 | **원고** | `article` | `01_research/article.md` | **칼럼(롱폼) / 안내(쇼츠) 원고 — 가장 중요한 검수 지점** |
 | 대본 | `script` | `02_script/scenes.json`, `script.md` | 장면 나눔, 비유·과거 사례 (`validate`) |
@@ -14,7 +17,13 @@ ytflow 는 한 번 쓰고 끝내는 스크립트가 아니라 **매주 같은 �
 | 영상 | `voice` → `assets` → `subtitles` → `assemble` | `05_edit/final.mp4`, `final_sheet.png` | 프레임 시트 |
 | 업로드 | `package` → `report` | `06_package/upload.json`, `REPORT.md` | 제목·썸네일 문구, 남은 일 |
 
-## 2. 세 가지 시작 방법
+## 2. 시작 방법
+```bash
+# ⓪ 기획만 먼저 (권장): 트렌드 → 소스 찾기 → 주제·형식 결정에서 멈춤 → shortlist.md 확인 후 진행
+python -m ytflow make --channel ch-source-brief --plan
+python -m ytflow approve <프로젝트> topic --pick 2 && python -m ytflow run <프로젝트>
+```
+
 ```bash
 # ① 트렌드에서 자동으로 (주제 선정부터)
 python -m ytflow make --channel ch-paper-column

@@ -15,6 +15,11 @@ CEO·CFO·업계 사람이 직접 말하는 장면을 쓰고, 그 위에 자막�
 3. **쉽게 풀기** (beat=analogy 또는 jargon 카드) → **그래서** (beat=so_what).
 4. 근거가 기사면 **기사 캡처**(screenshot).
 
+### 소스 목록이 있을 때 (scout → inventory)
+- quote 장면은 소스 목록의 video 소스(S번호)에서만 만듭니다. source.url 은 그 영상 주소, source.find 에 발언 속 핵심 영어 단어 3~5개를
+  적어 두면 PC 의 rebuild 가 자막에서 구간을 찾습니다. 시각을 알면 start/end.
+- 영상 끝은 **틀릴 조건**으로 닫습니다: "이 판단이 틀렸다면 먼저 꺾일 숫자는 ○○입니다."
+
 ### 원본 영상 고르기 (source.query)
 - 1순위: 회사 공식 채널의 실적발표·키노트·인베스터데이 (예: "Meta Q3 2026 earnings call", "NVIDIA GTC 2026 keynote Jensen Huang").
 - 2순위: 주요 방송의 CEO·CFO 인터뷰 (CNBC, Bloomberg Television, Yahoo Finance, 한국경제TV 등) — 인물 이름 + 매체 + 시기로.

@@ -5,6 +5,14 @@ description: 대본 장면에 쓸 원본 영상과 기사 캡처를 찾아 넣�
 
 # 소스 탐색과 확보 (sources → clips)
 
+## 0. 소스 먼저 (scout) — 주제를 고르기 전에
+`python -m ytflow stage <프로젝트> scout`: 채널의 `sourcing.start_from` 에 따라 화제별 소스를 먼저 찾습니다(`docs/07-sourcing.md`).
+- **statement** (원본 소스형): CNBC·블룸버그·야후·폭스 비즈니스 공식 채널의 최근 10일·4분 이상 영상 목록 → 인물 발언 → 공시·데이터로 확인할 거리
+- **document** (칼럼형): 기업 연구·논문·IR·SEC·정부·연구소 문서 + 위키미디어 공용 CC 사진
+- **data** (데이터형): 시세 티커·통계 지표 + 비교할 과거 시기
+- 다른 해설 유튜버의 영상은 소스로 쓰지 않습니다. 인물 본인·회사·방송사·주최 기관의 공식 채널만.
+주제가 정해지면 `00_source/inventory.md`(S번호 소스 목록)가 만들어지고, 원고·대본이 이 목록으로 장면을 짓습니다(`source_ref`).
+
 ## 계열별 차이
 - **원본 소스형(source):** 이 단계가 영상 품질을 좌우합니다. 검색어는 인물 이름 + 행사·매체 + 시기로 씁니다
   (예: "Susan Li Meta Q3 2026 earnings call", "Jensen Huang CNBC interview November 2026"). 공식 실적발표·키노트 → 주요 방송 인터뷰 순으로 고릅니다.

@@ -13,3 +13,19 @@ cadence: "주 1~2편 (실적 시즌에 몰아서)"
 voice: ko-KR-InJoonNeural
 tone: "사실 전달 위주. 발언 → 정리하면 → 숫자 리듬."
 needs_pc_rebuild: true                   # YouTube 원본 클립은 사용자 PC 에서 rebuild 로 받음
+
+# 소스 찾기 (벤치마킹: docs/07-sourcing.md — 식스시그마식 '발언 원본에서 출발')
+sourcing:
+  start_from: statement           # 인물이 직접 말한 원본 영상 → 발언 → 공시·데이터로 교차 확인
+  max_age_days: 10                # 최근 10일 안의 원본
+  min_seconds: 240                # 4분 이상 (인터뷰·대담·실적 콜)
+  video_channels:                 # 원본 영상을 훑는 공식·방송 채널 (목록 조회만, 다운로드는 PC rebuild)
+    - "@CNBCtelevision"
+    - "@BloombergTelevision"
+    - "@YahooFinance"
+    - "@FoxBusiness"
+    - "@markets"                  # Bloomberg Markets & Finance
+  also_search: ["{회사} earnings call", "{회사} investor day", "{인물} interview", "{인물} podcast"]
+  verify_with: ["SEC/DART 공시(10-Q·10-K·8-K·13F)", "주주서한·실적 보도자료·실적 콜 녹취", "시세(야후 파이낸스)·지수·FRED", "로이터·블룸버그·CNBC 보도"]
+  correct_speaker: true           # 발언 속 숫자가 공시와 다르면 공시 숫자로 바로잡아 보여 준다
+  falsifiable_end: true           # "이 판단이 틀렸다면 무엇이 먼저 꺾이나"로 끝낸다

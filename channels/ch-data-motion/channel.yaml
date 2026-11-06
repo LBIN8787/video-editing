@@ -12,3 +12,11 @@ target_minutes: 8
 cadence: "격주 1편"
 voice: ko-KR-InJoonNeural
 tone: "데이터 리포트. 비교 기준을 늘 함께 말한다."
+
+# 소스 찾기 (벤치마킹: docs/07-sourcing.md — 머니크루식 '숫자 계열에서 출발')
+sourcing:
+  start_from: data                # 직접 계산·백테스트할 수 있는 숫자 계열 + 비교할 과거 시기
+  datasets: ["시세: 야후 파이낸스 티커(국내 .KS/.KQ, 미국, 지수 ^)", "FRED 공개 지표", "관세청 수출입·한국거래소 통계",
+             "업계 가격 지표(트렌드포스 등 공개 보도)"]
+  analogs: true                   # 과거 비슷한 시기(1970년대 원전, 2000년 닷컴, 메모리 사이클)를 같은 축으로
+  end_with: ["오늘 남는 세 가지", "앞으로 볼 신호(날짜)"]

@@ -19,6 +19,7 @@ scene["source"] 형식:
 """
 from __future__ import annotations
 
+import json
 import csv
 import re
 import sys
@@ -144,9 +145,24 @@ def run(project: Project) -> None:
     adir = project.dir("assets")
     work = adir / "work_subs"
     rows, ok = [], 0
+    invf = project.dir("source") / "inventory.json"
+    photos = {x["url"]: x for x in json.loads(invf.read_text(encoding="utf-8"))} if invf.exists() else {}
     for s in scenes:
         src = s.get("source")
         if not src or not src.get("url"):
+            continue
+        ph = photos.get(src["url"])
+        if ph and ph.get("kind") == "photo" and ph.get("image"):  # 위키미디어 공용 사진(CC): 원본 이미지를 받는다
+            shot = adir / f"scene_{s['id']:03d}_shot.jpg"
+            try:
+                import urllib.request
+                req = urllib.request.Request(ph["image"], headers={"User-Agent": "ytflow/1.0 (YouTube research pipeline)"})
+                shot.write_bytes(urllib.request.urlopen(req, timeout=30).read())
+                rows.append([s["id"], "PHOTO", src["url"], "", "", f"{ph.get('artist', '')} · {ph.get('license', '')}", ph["title"]])
+                ok += 1
+                print(f"[clips] #{s['id']} PHOTO {ph['title'][:40]} ({ph.get('license')})")
+            except Exception as e:
+                rows.append([s["id"], "FAILED", src["url"], "", "", "", f"사진 받기 실패: {e}"])
             continue
         if not is_youtube(src["url"]):
             shot = adir / f"scene_{s['id']:03d}_shot.png"

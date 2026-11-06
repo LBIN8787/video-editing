@@ -3,6 +3,8 @@
 이 저장소는 **유튜브 영상 제작 워크플로우**를 코드와 문서로 담은 것입니다.
 조사해서 글로 정리하던 일(대화형 LLM 의 답을 다듬던 일)을 이어서, 그 글을 **원고 → 대본 → 화면 → 영상**으로 바꾸는 반복 제작 라인입니다.
 롱폼은 장편 칼럼·보고서 분석, 쇼츠는 짧은 주제 안내입니다. 편집 스타일 하나가 유튜브 채널 하나입니다(`channels/`).
+**순서: 소스 먼저 → 소스가 강한 주제·형식 결정 → 글(원고) → 소스에 맞춘 편집 → 편집 스타일은 그 위에.**
+서술할 내용이 많고 자세한 분석이면 롱폼, 한 가지를 알려 주는 정보형이면 쇼츠로 나눕니다(다른 형식 소재는 그 채널 대기열로).
 주제 선정 → 소스 탐색 → 자료조사 → 대본 → 편집점 → 편집 스타일 → 자막 → 업로드 준비 순서로 진행합니다.
 Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를 따라 **같은 절차로** 작업합니다.
 
@@ -17,6 +19,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | 새 편집 스타일 추가 (레퍼런스 영상 분석) | `skills/edit-style-new/SKILL.md` |
 | 전체 설계·에이전트별 차이 | `docs/04-agents.md`, `docs/02-workflow-sop.md` |
 | 영상편집 skill 도입 검토 | `docs/05-skills-review.md` |
+| **소스 찾기 (벤치마킹 채널 방식, 소스 먼저)** | `docs/07-sourcing.md`, `channels/<id>/channel.yaml` 의 `sourcing` |
 
 스킬은 `skills/` 가 원본입니다. `.claude/skills/`(Claude Code)와 `.agents/skills/`(Codex)는 `python scripts/sync_skills.py` 로 만든 복사본입니다. **원본만 고치고 동기화하세요.**
 
@@ -39,6 +42,7 @@ python -m ytflow --help
 ```bash
 python -m ytflow make --channel <채널id> [--topic "주제" | --from-text 조사글.md]   # 채널 규칙으로 한 편
 python -m ytflow make --style-ref <스타일id> [--topic "주제"]   # 스타일만 지정해 한 편
+python -m ytflow make --channel <채널id> --plan                  # 트렌드 → 소스 찾기 → 주제·형식 결정까지만 (검토용)
 python -m ytflow channels                                       # 채널 목록
 python -m ytflow stage <프로젝트> <단계>                          # 단계 하나
 python -m ytflow rebuild <프로젝트>                               # 소스 넣은 뒤 재생성
