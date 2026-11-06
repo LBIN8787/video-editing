@@ -1,3 +1,7 @@
+# Windows 연결
+
+사용 환경은 Windows로 확인했다. 저장소 루트의 WINDOWS-START.md와 CONNECT-YOUTUBE.cmd를 사용한다. 대상 채널 ID가 고정되어 있으며, 이 PC에서 OAuth 연결을 마쳐야 업로드 권한을 사용할 수 있다. 예약 운영 방식은 아직 미선택이다.
+
 # AI 실전노트 개설·운영
 
 현재: 사용자가 채널 생성과 URL을 전달했다. 대상은 https://www.youtube.com/channel/UCb6tSnNY6X3BtH-ujxMIf3g 이다. 공개 페이지 조회는 throttled로 실패하여 이름·화면은 별도 확인하지 못했다. 업로드 OAuth 권한은 아직 미연결이며 실제 게시한 영상은 없다. 채널 생성 절차는 완료한 사용자 단계로 처리한다.
