@@ -10,7 +10,7 @@ def main():
  tracked=subprocess.check_output(['git','ls-files'],cwd=ROOT,text=True).splitlines()
  prefixes=('channels/','content/','work-cases/','studio/','styles/shorts-ai-guide/','styles/longform-ai-column/','styles/shorts-quiz-explain/','skills/content-studio/','.agents/skills/content-studio/','releases/shorts-ai-guide-v1.0.0/')
  roots={'AGENTS.md','README.md','.gitignore','WINDOWS-START.md','CONNECT-YOUTUBE.cmd','schemas/studio-project.schema.json','schemas/work-case.schema.json'}
- files={name:ROOT/name for name in tracked if name in roots or name.startswith(prefixes) or (name.startswith('scripts/') and name.split('/')[-1] in ['content_studio.py','test_content_studio.py','render_short.py','test_render_short.py','build_shorts_archive.py'])}
+ files={name:ROOT/name for name in tracked if name in roots or name.startswith(prefixes) or (name.startswith('scripts/') and name.split('/')[-1] in ['content_studio.py','test_content_studio.py','render_short.py','test_render_short.py','build_shorts_archive.py','sync_skills.py'])}
  assets=['studio/renderer/public/fonts/NotoSansCJKkr-Regular.otf','studio/renderer/public/fonts/NotoSansCJKkr-Bold.otf','studio/renderer/public/episode-003/voice.mp3','studio/renderer/out/shorts-guide-v1-reference.mp4','studio/renderer/out/locked-v1-final.png','studio/renderer/out/repeatability-qa.json']
  for name in assets:
   path=ROOT/name
