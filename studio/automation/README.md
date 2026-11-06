@@ -1,3 +1,7 @@
+# AI 채널 운영 연결
+
+계정 개설·운영 요청에 따라 AI만 활성 운영 대상으로 설정했습니다. 큐 worker는 아직 비활성이고 채널 OAuth 연결 전 업로드를 차단합니다. studio/youtube/에 업로더를 추가했습니다. channels/ai/launch/README.md가 최신 안내입니다. 기존 점검 문서는 당시 상태의 이력입니다.
+
 # 반복 작업 큐와 검수
 
 원본 shorts-automation 코드를 저장소 상대 경로로 옮겼다. 채널 보이스의 원본은 ../../channels/<id>/channel.json이다. settings.json은 실행 단계와 목표만 관리한다.

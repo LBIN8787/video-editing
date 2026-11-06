@@ -1,5 +1,8 @@
 # 영상편집 — ytflow
 
+> **AI 채널 개설·운영:** [AI 실전노트 연결 안내](channels/ai/launch/README.md). 사용자가 새 Google 계정을 직접 생성한 뒤 연결합니다. 업로드 코드는 준비했으며 OAuth 미연결, 예약 등록은 현재 한도 15/15로 실패한 상태입니다.
+
+
 > **채널별 반복 제작:** [콘텐츠 스튜디오](studio/README.md) · [AI 채널](channels/ai/README.md) · [퀴즈 채널](channels/quiz/README.md)
 > 조사와 글을 공통 원본으로 두고 쇼츠 안내형·롱폼 칼럼형으로 영상화합니다. [제작 목록](channels/README.md), 고정 음성·자동화 상태는 스튜디오 문서를 확인하세요.
 

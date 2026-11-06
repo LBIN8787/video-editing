@@ -5,10 +5,10 @@ from workflow import ROOT,KST,connect,plan,build,export,discover
 logging.basicConfig(filename=ROOT/'runner.log',level=logging.INFO,format='%(asctime)s %(levelname)s %(message)s')
 settings=json.loads((ROOT/'settings.json').read_text())
 if not settings['automation_enabled']:
- (ROOT/'health.json').write_text(json.dumps({**settings,'status':'paused_pending_sample_feedback'},ensure_ascii=False,indent=2))
- print('Paused: sample review phase; no planning, research, rendering, or publication scheduled')
+ (ROOT/'health.json').write_text(json.dumps({**settings,'status':'queue_worker_disabled'},ensure_ascii=False,indent=2))
+ print('Queue worker disabled for phase: '+settings['phase']+'; no implicit production or upload')
  sys.exit(0)
-c=connect();today=dt.datetime.now(KST).date().isoformat();plan(c,today)
+c=connect();today=dt.datetime.now(KST).date().isoformat();plan(c,today,settings.get('enabled_channels'))
 marker=ROOT/('discovery-'+today+'.done')
 if not marker.exists():
  try:discover();marker.write_text(today)
@@ -19,5 +19,5 @@ for row in list(c.execute("SELECT id FROM jobs WHERE state='ready' ORDER BY due"
 try:export(c)
 except Exception:logging.exception('Export failed')
 counts=dict(c.execute('SELECT state,count(*) FROM jobs WHERE due LIKE ? GROUP BY state',(today+'%',)).fetchall())
-(ROOT/'health.json').write_text(json.dumps({'checked_at':dt.datetime.now(KST).isoformat(),'daily_target_total':6,'daily_target_per_channel':3,'today':counts,'youtube_uploader':'not_connected','scheduler':'installation_required'},indent=2))
+(ROOT/'health.json').write_text(json.dumps({'checked_at':dt.datetime.now(KST).isoformat(),'daily_target_total':settings['daily_target_total'],'daily_target_per_channel':settings['daily_target_per_channel'],'today':counts,'youtube_uploader':'not_connected','scheduler':'installation_required'},indent=2))
 logging.info('Daily queue: %s',counts)

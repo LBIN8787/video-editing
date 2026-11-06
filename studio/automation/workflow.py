@@ -10,7 +10,7 @@ def connect(root=ROOT):
  root.mkdir(parents=True,exist_ok=True)
  c=sqlite3.connect(root/'queue.sqlite3',timeout=30);c.row_factory=sqlite3.Row
  c.execute('CREATE TABLE IF NOT EXISTS jobs(id TEXT PRIMARY KEY, channel TEXT, due TEXT, state TEXT, manifest TEXT, error TEXT, approval TEXT, video_id TEXT UNIQUE)');return c
-def plan(c,date):
+def plan(c,date,enabled_channels=None):
  day=dt.date.fromisoformat(date)
  # Keep legacy job IDs/channel assignments; add the missing slots per channel.
  channels=['ai','quiz','ai'] if day.toordinal()%2 else ['quiz','ai','quiz']
@@ -18,10 +18,11 @@ def plan(c,date):
  times={'ai':['09:00','14:00','20:00'],'quiz':['09:30','14:30','20:30']}
  counts={'ai':0,'quiz':0}
  for i,channel in enumerate(channels):
+  if enabled_channels is not None and channel not in enabled_channels:continue
   key=f'{date}-{i+1}';hour=times[channel][counts[channel]];counts[channel]+=1
   due=f'{date}T{hour}:00+09:00'
   c.execute('INSERT OR IGNORE INTO jobs(id,channel,due,state) VALUES(?,?,?,?)',(key,channel,due,'needs_script'))
-  c.execute("UPDATE jobs SET due=? WHERE id=? AND state NOT IN ('approved','published')",(due,key))
+  c.execute("UPDATE jobs SET due=? WHERE id=? AND state NOT IN ('approved','uploaded','published')",(due,key))
  c.commit()
 def inspect_video(path):
  d=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-of','json',str(path)]))
@@ -34,7 +35,7 @@ def bind(c,key,manifest):
  if not Path(d['file']).is_absolute():d['file']=str((ROOT/d['file']).resolve())
  if not d.get('title') or not d.get('description') or not d.get('source_urls') or not d.get('script_reviewed'):raise ValueError('Needs title, description, sources and reviewed script')
  row=c.execute('SELECT * FROM jobs WHERE id=?',(key,)).fetchone()
- if row is None or row['state']=='published':raise ValueError('Missing job or already published')
+ if row is None or row['state'] in ('uploaded','published'):raise ValueError('Missing job or already published')
  if d.get('channel')!=row['channel']:raise ValueError('Wrong channel')
  if d.get('transition_sfx',True):raise ValueError('Transition sounds must be disabled')
  validate_manifest(d)
@@ -53,7 +54,7 @@ def build(c,key):
    subprocess.run(['npx','remotion','render','src/index.ts',d['composition'],str(output),'--codec=h264','--browser-executable=/usr/bin/chromium','--concurrency=2'],cwd=PROJECT,check=True)
   digest=inspect_video(output)
   # Reject duplicate videos already prepared/published in the queue.
-  for row in c.execute("SELECT id,manifest FROM jobs WHERE id!=? AND state IN ('review','approved','published')",(key,)):
+  for row in c.execute("SELECT id,manifest FROM jobs WHERE id!=? AND state IN ('review','approved','uploaded','published')",(key,)):
    if json.loads(row['manifest']).get('sha256')==digest:raise ValueError('Duplicate video content')
   d.update(file=str(output),sha256=digest)
   c.execute("UPDATE jobs SET manifest=?,state='review' WHERE id=?",(json.dumps(d,ensure_ascii=False),key));c.commit()

@@ -13,6 +13,10 @@ class QueueTests(unittest.TestCase):
    plan(c,'2026-11-07')
    self.assertEqual(tuple(c.execute("SELECT state,manifest FROM jobs WHERE id='2026-11-07-1'").fetchone()),('review','kept'))
    self.assertEqual(dict(c.execute('SELECT channel,count(*) FROM jobs GROUP BY channel').fetchall()),{'ai':3,'quiz':3})
+ def test_ai_only_plan_does_not_start_quiz_channel(self):
+  with tempfile.TemporaryDirectory() as t:
+   c=connect(Path(t));plan(c,'2026-11-07',enabled_channels=['ai'])
+   self.assertEqual(dict(c.execute('SELECT channel,count(*) FROM jobs GROUP BY channel').fetchall()),{'ai':3})
  def test_unverified_job_cannot_be_approved(self):
   with tempfile.TemporaryDirectory() as t:
    c=connect(Path(t));plan(c,'2026-11-07')
