@@ -1,0 +1,292 @@
+{
+  "ok": false,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 1,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"layer\"> is a timeline element that contains nested <svg id=\"ink\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#layer",
+        "dataAttributes": {},
+        "sourceFile": "/home/user/video-editing/projects/20261106-hybrid-데이터센터/04_assets/hb/scene_002/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"layer\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      }
+    ],
+    "filesScanned": 1
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": false,
+    "errorCount": 1,
+    "warningCount": 1,
+    "infoCount": 1,
+    "findings": [
+      {
+        "code": "text_box_overflow",
+        "severity": "error",
+        "time": 7.042,
+        "selector": "#e4",
+        "message": "Text extends outside its nearest visual/container box.",
+        "rect": {
+          "left": 1558,
+          "top": 296,
+          "right": 1974.7,
+          "bottom": 346,
+          "width": 416.7,
+          "height": 50
+        },
+        "containerSelector": "#root",
+        "text": "당선인 발언 · 아직 법은 아님",
+        "fixHint": "Text is 417px x 50px inside 1920px x 1080px and overflows by up to 55px; widen the container to at least ~1975px, or allow wrapping with max-width/fitTextFontSize.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "width": 1920,
+          "height": 1080
+        },
+        "overflow": {
+          "right": 54.7
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1558,
+          "y": 296,
+          "width": 416.7,
+          "height": 50
+        },
+        "firstSeen": 7.042,
+        "lastSeen": 9.208,
+        "occurrences": 3,
+        "heldMs": 0,
+        "times": [
+          7.042,
+          8.125,
+          9.208
+        ]
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "warning",
+        "time": 7.042,
+        "selector": "#e4",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": 1558,
+          "top": 296,
+          "right": 1974.7,
+          "bottom": 346,
+          "width": 416.7,
+          "height": 50
+        },
+        "containerSelector": "#root",
+        "text": "당선인 발언 · 아직 법은 아님",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "width": 1920,
+          "height": 1080
+        },
+        "overflow": {
+          "right": 54.7
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1558,
+          "y": 296,
+          "width": 416.7,
+          "height": 50
+        },
+        "firstSeen": 7.042,
+        "lastSeen": 9.208,
+        "occurrences": 3,
+        "heldMs": 0,
+        "times": [
+          7.042,
+          8.125,
+          9.208
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 0.542,
+        "selector": "#e1",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -3.17,
+          "top": -1.78,
+          "right": 1923.17,
+          "bottom": 1081.78,
+          "width": 1926.34,
+          "height": 1083.56
+        },
+        "containerSelector": "#e1w",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "width": 1920,
+          "height": 1080
+        },
+        "overflow": {
+          "left": 3.17,
+          "right": 3.17
+        },
+        "dataAttributes": {
+          "data-hf-render-id": "e1",
+          "data-start": "0",
+          "data-duration": "9.75",
+          "data-track-index": "2",
+          "data-end": "9.75",
+          "data-has-audio": "false",
+          "data-hf-authored-opacity": ""
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -3.17,
+          "y": -1.78,
+          "width": 1926.34,
+          "height": 1083.56
+        },
+        "firstSeen": 0.542,
+        "lastSeen": 9.208,
+        "occurrences": 9,
+        "heldMs": 0,
+        "times": [
+          0.542,
+          1.625,
+          2.708,
+          3.792,
+          4.875,
+          5.958,
+          7.042,
+          8.125,
+          9.208
+        ]
+      }
+    ],
+    "duration": 9.75,
+    "samples": [
+      0.542,
+      1.625,
+      2.708,
+      3.792,
+      4.875,
+      5.958,
+      7.042,
+      8.125,
+      9.208
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 3,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "samples": [
+      0.542,
+      2.708,
+      4.875,
+      7.042,
+      9.208
+    ],
+    "checked": 9,
+    "passed": 9
+  },
+  "craft": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 1,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "text_below_floor",
+        "severity": "warning",
+        "message": "Type floor is 28 px (2.6% of the 1080 px short side, what a phone can read) and \"자료 화면 · 텍사스 코퍼스크리스티 (NASA, 2019)\" renders at 24 px for 9.38 s: set reading text to at least 28 px, or put data-layout-ignore on text that is texture rather than reading; see references/look.md.",
+        "text": "자료 화면 · 텍사스 코퍼스크리스티 (NASA, 2019)",
+        "selector": "#e2",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1338.58,
+          "y": 46,
+          "width": 511.42,
+          "height": 24
+        },
+        "time": 0.375,
+        "times": [
+          0.375
+        ],
+        "fontPx": 24,
+        "floorPx": 28,
+        "seconds": 9.375,
+        "elements": [
+          {
+            "selector": "#e2",
+            "text": "자료 화면 · 텍사스 코퍼스크리스티 (NASA, 2019)",
+            "fontPx": 24,
+            "time": 0.375,
+            "seconds": 9.375
+          }
+        ]
+      }
+    ],
+    "enabled": true,
+    "step": 0.125,
+    "samples": 78
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  }
+}

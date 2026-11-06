@@ -15,6 +15,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | 영상 1편 만들기 | `skills/video-make/SKILL.md` |
 | 형식: 롱폼 칼럼·보고서 / 쇼츠 안내 | `formats/README.md` |
 | 자료조사 / 대본 / 소스 / 편집만 | `skills/video-research`, `video-script`, `video-sources`, `video-edit` |
+| 하이브리드 (식스시그마 영상 + 머니크루 논리 + 미주일기 손그림) | `styles/hybrid/STYLE.md`, `prompts/script_hybrid.md`, `skills/edit-style-hybrid` |
 | 편집 스타일 고르기·적용 | `styles/README.md`(계열 구분), `styles/<id>/STYLE.md`, `skills/edit-style-<id>` |
 | 새 편집 스타일 추가 (레퍼런스 영상 분석) | `skills/edit-style-new/SKILL.md` |
 | 전체 설계·에이전트별 차이 | `docs/04-agents.md`, `docs/02-workflow-sop.md` |
@@ -67,7 +68,7 @@ python -m ytflow styles | schemas | status <프로젝트>
 ## 편집 스타일 계열
 | 계열 | 뼈대 | 스타일 | 대본 화면 문법 |
 |---|---|---|---|
-| `source` 원본 소스형 | CEO·CFO 인터뷰·실적발표 원본 영상 + 자막 + 핵심요약 애니메이션 | sixsigma | `prompts/script_source.md` |
+| `source` 원본 소스형 | CEO·CFO 인터뷰·실적발표 원본 영상 + 자막 + 핵심요약 애니메이션 | sixsigma, **hybrid**(원본 영상 + 인과 지도 + 손그림, `python -m ytflow hybrid <프로젝트>`) | `prompts/script_source.md`, hybrid 는 `prompts/script_hybrid.md` |
 | `infographic` 자체 제작 인포그래픽형 | 직접 그린 도식·차트·비유 그림 | **mijudiary(기본)**, moneycrew | `prompts/script_infographic.md` |
 | `shorts` 쇼츠 | 9:16 고정 훅 + 큰 자막 | shorts-aitips | `prompts/shorts_script.md` |
 
@@ -89,7 +90,7 @@ python -m ytflow styles | schemas | status <프로젝트>
 | `formats/` | 영상 형식: 롱폼(칼럼·보고서) / 쇼츠(짧은 안내) 원고 구조 |
 | `tools/external.json` | 외부 편집 도구 고정 버전 (HyperFrames, ffmpeg-skill). 본체는 설치 후 `tools/` 에 (커밋 안 함) |
 | `ytflow/` | 파이프라인 코드 |
-| `ytflow/stages/` | 단계별 코드. 렌더러는 `cards.py`(sixsigma), `paper.py`(paper), `flat.py`(flat), `hyper.py`(미주일기 카드 HTML + rough.js 손그림), 마스터링 `finish.py`, 발언 단어 정렬 `align.py`, 소스 먼저 `scout.py`, 보관 `upload.py` |
+| `ytflow/stages/` | 단계별 코드. 렌더러는 `cards.py`(sixsigma), `paper.py`(paper), `flat.py`(flat), `hyper.py`(미주일기 카드 HTML + rough.js 손그림), `hybrid.py`(하이브리드: 원본 영상·인과 지도·손그림 장면), 마스터링 `finish.py`, 발언 단어 정렬 `align.py`, 소스 먼저 `scout.py`, 보관 `upload.py` |
 | `prompts/` | 단계별 LLM 지시문 |
 | `config/` | 채널·파이프라인 설정 |
 | `styles/` | 편집 스타일 라이브러리 |

@@ -1,0 +1,1109 @@
+{
+ "title": "8% 위험에 11%를 팔았다 | 미국 선거가 한국 반도체를 흔든 길",
+ "core_message": "시장은 'AI 공장이 막힌다'는 두려움에 11%를 팔았지만, 잰 위험은 8%이고 그마저 2028년 이후다",
+ "question": "미국 선거 하나가 왜 한국 반도체 주가를 이틀 만에 11% 끌어내렸을까?",
+ "logic": [
+  "선거·주민투표",
+  "AI 공장 허가 막힘",
+  "새 공장 덜 짓기",
+  "칩·메모리 주문 걱정",
+  "한국 반도체 주가 급락",
+  "그런데 잰 크기는 8%, 2028년 이후",
+  "돈은 그대로, 막힌 건 속도",
+  "다음에 볼 것"
+ ],
+ "map": {
+  "nodes": {
+   "vote": {
+    "label": "미국 선거·주민투표",
+    "icon": "flag",
+    "x": 250,
+    "y": 400
+   },
+   "permit": {
+    "label": "AI 공장 허가 막힘",
+    "icon": "ban",
+    "x": 710,
+    "y": 400
+   },
+   "build": {
+    "label": "새 공장 덜 짓기",
+    "icon": "construction",
+    "x": 1170,
+    "y": 400
+   },
+   "chips": {
+    "label": "칩·메모리 주문 ↓?",
+    "icon": "memory-stick",
+    "x": 1630,
+    "y": 400
+   },
+   "kospi": {
+    "label": "한국 반도체 주가 ↓",
+    "icon": "trending-down",
+    "x": 1630,
+    "y": 720
+   },
+   "money": {
+    "label": "빅테크 돈은 그대로",
+    "icon": "dollar-sign",
+    "x": 1170,
+    "y": 720
+   },
+   "old": {
+    "label": "기존 공장 몸값 ↑",
+    "icon": "building-2",
+    "x": 710,
+    "y": 720
+   },
+   "fx": {
+    "label": "환율·미국 반도체",
+    "icon": "globe",
+    "x": 250,
+    "y": 720
+   }
+  },
+  "edges": [
+   [
+    "vote",
+    "permit"
+   ],
+   [
+    "permit",
+    "build"
+   ],
+   [
+    "build",
+    "chips"
+   ],
+   [
+    "chips",
+    "kospi"
+   ],
+   [
+    "money",
+    "build"
+   ],
+   [
+    "permit",
+    "old"
+   ],
+   [
+    "fx",
+    "kospi"
+   ]
+  ]
+ },
+ "scenes": [
+  {
+   "id": 1,
+   "type": "chart",
+   "chapter": 0,
+   "label": "2026.11.06 · 야후 파이낸스 (11/6 종가는 뉴스 보도)",
+   "ticker": "^KS11",
+   "period": "3mo",
+   "title": "코스피, 선거 뒤 이틀",
+   "beats": [
+    {
+     "say": "11월 6일, 코스피가 이틀 만에 11% 가까이 떨어졌습니다.",
+     "focus_last": 3,
+     "mark": "5,683 → 5,059"
+    },
+    {
+     "say": "외국인은 그 이틀 동안 6조 원 넘게 팔았습니다.",
+     "stamp": "외국인 -6.2조"
+    }
+   ],
+   "append": [
+    {
+     "date": "2026-11-06",
+     "close": 5059.69,
+     "source": "11/6 종가: 뉴스 보도 (팩트시트 F19)"
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "type": "footage",
+   "chapter": 0,
+   "label": "자료 화면 · 텍사스 코퍼스크리스티 (NASA, 2019)",
+   "clip": {
+    "src": "texas",
+    "start": 18,
+    "frame": "full"
+   },
+   "beats": [
+    {
+     "say": "그런데 방아쇠는 한국이 아니라 미국 텍사스에서 당겨졌습니다."
+    },
+    {
+     "say": "선거에서 이긴 새 주지사가, AI 데이터센터를 멈춰야 한다고 말했거든요.",
+     "vox": {
+      "text": "AI 데이터센터를 멈춰야",
+      "note": "당선인 발언 · 아직 법은 아님"
+     }
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "type": "versus",
+   "chapter": 0,
+   "label": "2026.11.06 · 서스케하나 보고서 보도",
+   "left": {
+    "value": "-11%",
+    "label": "코스피 이틀 낙폭",
+    "icon": "trending-down"
+   },
+   "right": {
+    "value": "8%",
+    "label": "취소될 수 있는 AI 공장",
+    "icon": "factory"
+   },
+   "beats": [
+    {
+     "say": "그런데 증권사 서스케하나가 따져 보니, 실제로 취소될 수 있는 물량은 계획의 8%였습니다.",
+     "show": "both"
+    },
+    {
+     "say": "위험은 8%인데, 주가는 11% 빠졌습니다. 오늘은 이 차이가 어디서 왔는지 따라가 보겠습니다.",
+     "show": "question",
+     "question": "이 차이는 어디서?"
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "type": "map_causal",
+   "chapter": 0,
+   "label": "자체 정리",
+   "title": "오늘 따라갈 길",
+   "beats": [
+    {
+     "say": "길은 네 칸입니다. 미국 선거, 막히는 AI 공장, 줄어들지 모를 칩 주문, 그리고 한국 주가.",
+     "reveal": [
+      "vote",
+      "permit",
+      "build",
+      "chips",
+      "kospi"
+     ],
+     "draw": [
+      [
+       "vote",
+       "permit"
+      ],
+      [
+       "permit",
+       "build"
+      ],
+      [
+       "build",
+       "chips"
+      ],
+      [
+       "chips",
+       "kospi"
+      ]
+     ],
+     "outline_only": true
+    },
+    {
+     "say": "칸마다, 실제로 얼마나 이어져 있는지 재 보겠습니다.",
+     "active": "vote"
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "type": "chapter",
+   "chapter": 1,
+   "num": "1",
+   "title": "선거 날, 무슨 일이 있었나",
+   "icon": "flag",
+   "beats": [
+    {
+     "say": "먼저, 선거 날 무슨 일이 있었는지 보겠습니다."
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "type": "usmap",
+   "chapter": 1,
+   "label": "2026.11.05 · The Next Web, GovTech",
+   "title": "데이터센터 주민투표 41건",
+   "beats": [
+    {
+     "say": "11월 3일 미국 중간선거 날, 데이터센터를 두고 주민투표가 41건 열렸습니다.",
+     "counter": {
+      "value": 41,
+      "suffix": "건",
+      "label": "주민투표"
+     }
+    },
+    {
+     "say": "열 개 주에서 열렸는데, 오하이오 한 곳에서만 21건이었습니다.",
+     "highlight": [
+      "Ohio"
+     ],
+     "note": {
+      "state": "Ohio",
+      "text": "오하이오 21건"
+     }
+    },
+    {
+     "say": "결과는 41건 중 40건, '짓지 말자' 쪽의 승리였습니다.",
+     "counter2": {
+      "value": 40,
+      "of": 41,
+      "label": "제한 쪽 승리"
+     }
+    }
+   ]
+  },
+  {
+   "id": 7,
+   "type": "footage",
+   "chapter": 1,
+   "label": "자료 화면 · 텍사스 코퍼스크리스티 (NASA, 2019)",
+   "clip": {
+    "src": "texas",
+    "start": 50,
+    "frame": "photo"
+   },
+   "beats": [
+    {
+     "say": "가장 눈길을 끈 곳은 텍사스입니다. 민주당 지나 이노호사 후보가 주지사에 당선됐습니다.",
+     "lower": {
+      "name": "텍사스",
+      "role": "주지사 선거 · 민주당 지나 이노호사 당선"
+     }
+    }
+   ]
+  },
+  {
+   "id": 8,
+   "type": "quote",
+   "chapter": 1,
+   "label": "2026.11.05 · CNN 인터뷰 보도",
+   "who": "지나 이노호사",
+   "role": "텍사스 주지사 당선인",
+   "quote": "주민을 보호할 규칙과 법이 없다. 보호 장치가 생길 때까지 데이터센터 일은 멈춰야 한다.",
+   "keyword": "멈춰야",
+   "note": "공약·발언",
+   "beats": [
+    {
+     "say": "이노호사는 주민을 보호할 규칙과 법이 없다며, 보호 장치가 생길 때까지 데이터센터 일을 멈춰야 한다고 말했습니다."
+    },
+    {
+     "say": "시장이 놀란 건 바로 이 한 문장입니다.",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": 9,
+   "type": "footage",
+   "chapter": 1,
+   "label": "자료 화면 · 2024.03 NASA 존슨우주센터 (NASA)",
+   "clip": {
+    "src": "abbott",
+    "start": 336,
+    "frame": "full"
+   },
+   "beats": [
+    {
+     "say": "그런데 텍사스의 브레이크는 선거 전에 이미 밟혀 있었습니다.",
+     "lower": {
+      "name": "그렉 애벗",
+      "role": "텍사스 주지사 (현직, 공화당) · 자료 화면"
+     }
+    },
+    {
+     "say": "공화당 애벗 주지사가 8월에, 전력망 연결을 기다리는 데이터센터를 전부 감사하라고 지시했거든요.",
+     "vox": {
+      "text": "데이터센터 전부 감사",
+      "note": "2026년 8월 지시"
+     }
+    }
+   ]
+  },
+  {
+   "id": 10,
+   "type": "checklist",
+   "chapter": 1,
+   "label": "2026.11.06 · 텍사스 트리뷴 등 보도",
+   "title": "텍사스, 지금 있는 것과 없는 것",
+   "rows": [
+    {
+     "label": "당선인의 발언·공약",
+     "state": "yes"
+    },
+    {
+     "label": "전력망 연결 감사 지시 (8월)",
+     "state": "yes"
+    },
+    {
+     "label": "시행 중인 법",
+     "state": "no"
+    },
+    {
+     "label": "새 주지사 취임",
+     "state": "date",
+     "value": "2027.01.19"
+    }
+   ],
+   "beats": [
+    {
+     "say": "정리하면, 지금 있는 건 당선인의 발언과 현 주지사의 감사 지시입니다.",
+     "upto": 2
+    },
+    {
+     "say": "시행 중인 법은 아직 없고, 새 주지사 취임은 내년 1월 19일입니다.",
+     "upto": 4,
+     "stamp": "아직 법은 없다"
+    }
+   ]
+  },
+  {
+   "id": 11,
+   "type": "chapter",
+   "chapter": 2,
+   "num": "2",
+   "title": "왜 한국 반도체가 흔들렸나",
+   "icon": "memory-stick",
+   "beats": [
+    {
+     "say": "그럼 미국의 데이터센터 이야기가, 왜 한국 반도체를 흔들었을까요?"
+    }
+   ]
+  },
+  {
+   "id": 12,
+   "type": "footage",
+   "chapter": 2,
+   "label": "자료 화면 · NASA 에임스 모듈형 슈퍼컴퓨터 시설 (NASA, 2019)",
+   "clip": {
+    "src": "supercomp",
+    "start": 70,
+    "frame": "full"
+   },
+   "beats": [
+    {
+     "say": "데이터센터는 쉽게 말해 AI 공장입니다.",
+     "lower": {
+      "name": "데이터센터 = AI 공장",
+      "role": "자료 화면 · 서버가 줄지어 선 내부"
+     }
+    },
+    {
+     "say": "이 안에 AI 칩과 메모리를 꽂은 서버가 끝없이 늘어서 있죠. 한국 반도체 회사들이 파는 메모리도 여기 들어갑니다.",
+     "vox": {
+      "text": "AI 칩과 메모리",
+      "note": "한국 메모리가 들어가는 곳"
+     }
+    }
+   ]
+  },
+  {
+   "id": 13,
+   "type": "map_causal",
+   "chapter": 2,
+   "label": "자체 정리",
+   "title": "시장이 걱정한 사슬",
+   "beats": [
+    {
+     "say": "시장이 걱정한 건 이 사슬입니다. 선거 결과로 AI 공장 허가가 막히고,",
+     "reveal": [
+      "vote",
+      "permit"
+     ],
+     "draw": [
+      [
+       "vote",
+       "permit"
+      ]
+     ],
+     "active": "permit"
+    },
+    {
+     "say": "새 공장을 덜 지으면, 그 안에 들어갈 칩과 메모리 주문도 줄지 모른다.",
+     "reveal": [
+      "build",
+      "chips"
+     ],
+     "draw": [
+      [
+       "permit",
+       "build"
+      ],
+      [
+       "build",
+       "chips"
+      ]
+     ],
+     "active": "chips"
+    },
+    {
+     "say": "그러면 메모리로 돈을 버는 한국 반도체 회사의 이익이 줄지 모른다는 겁니다.",
+     "reveal": [
+      "kospi"
+     ],
+     "draw": [
+      [
+       "chips",
+       "kospi"
+      ]
+     ],
+     "active": "kospi"
+    }
+   ]
+  },
+  {
+   "id": 14,
+   "type": "analogy",
+   "chapter": 2,
+   "label": "자체 정리",
+   "title": "빵집과 오븐 회사",
+   "left": {
+    "icon": "factory",
+    "label": "AI 공장",
+    "sub": "허가가 막히면"
+   },
+   "right": {
+    "icon": "store",
+    "label": "빵집",
+    "sub": "새 매장이 안 생기면"
+   },
+   "result": {
+    "icon": "cpu",
+    "label": "오븐 회사(반도체) 주문 걱정"
+   },
+   "beats": [
+    {
+     "say": "동네에 새 빵집 허가가 막히면, 오븐을 파는 회사가 주문이 줄까 걱정하는 것과 같습니다."
+    },
+    {
+     "say": "그럼 정말 그만큼 막히는 걸까요? 크기를 재 보겠습니다.",
+     "show_result": true
+    }
+   ]
+  },
+  {
+   "id": 15,
+   "type": "chapter",
+   "chapter": 3,
+   "num": "3",
+   "title": "8%는 얼마나 큰가",
+   "icon": "search",
+   "beats": [
+    {
+     "say": "8%가 실제로 어느 정도인지부터 보겠습니다."
+    }
+   ]
+  },
+  {
+   "id": 16,
+   "type": "funnel",
+   "chapter": 3,
+   "label": "2026.11.06 · Investing.com (서스케하나 보고서 보도)",
+   "title": "AI 공장 계획, 전력으로 재면",
+   "unit": "GW",
+   "bars": [
+    {
+     "value": 148,
+     "label": "2025~2030 계획 전체",
+     "sub": "원전 약 148기 규모"
+    },
+    {
+     "value": 60,
+     "label": "아직 허가 대기",
+     "sub": "전체의 40%"
+    },
+    {
+     "value": 12,
+     "label": "최악이면 취소",
+     "sub": "전체의 8%",
+     "highlight": true
+    }
+   ],
+   "beats": [
+    {
+     "say": "서스케하나는 2030년까지 계획된 AI 학습용 데이터센터를 전력으로 셌습니다. 148기가와트, 원전 약 148기 규모입니다.",
+     "upto": 1
+    },
+    {
+     "say": "이 가운데 60기가와트가 아직 허가를 기다리고 있고,",
+     "upto": 2
+    },
+    {
+     "say": "최악의 경우 그중 12기가와트가 취소될 수 있다고 봤습니다. 전체의 8%입니다.",
+     "upto": 3
+    }
+   ]
+  },
+  {
+   "id": 17,
+   "type": "apartments",
+   "chapter": 3,
+   "label": "자체 정리 (서스케하나 숫자를 아파트로)",
+   "title": "아파트 148개 동으로 바꾸면",
+   "total": 148,
+   "waiting": 60,
+   "cancel": 12,
+   "beats": [
+    {
+     "say": "아파트로 바꿔 보면, 148개 동을 짓기로 했는데",
+     "stage": 1
+    },
+    {
+     "say": "60개 동은 아직 구청 허가를 기다리고, 최악이면 그중 12개 동이 취소되는 셈입니다.",
+     "stage": 3
+    }
+   ]
+  },
+  {
+   "id": 18,
+   "type": "timeline",
+   "chapter": 3,
+   "label": "2026.11.06 · 서스케하나 보고서 보도",
+   "title": "위험은 언제 몰려 있나",
+   "years": [
+    "2026",
+    "2027",
+    "2028",
+    "2029",
+    "2030"
+   ],
+   "spans": [
+    {
+     "from": "2027",
+     "to": "2027",
+     "label": "대부분 허가 완료",
+     "tone": "ok"
+    },
+    {
+     "from": "2028",
+     "to": "2030",
+     "label": "취소·지연 위험이 몰린 구간",
+     "tone": "risk"
+    }
+   ],
+   "beats": [
+    {
+     "say": "그리고 '언제'가 중요합니다. 2027년에 들어설 물량은 대부분 이미 허가를 받았습니다.",
+     "upto": 1
+    },
+    {
+     "say": "위험은 2028년부터 2030년 사이에 몰려 있습니다. 그래서 서스케하나는 2027년이 가장 많이 짓는 해라는 전망을 바꾸지 않았습니다.",
+     "upto": 2
+    }
+   ]
+  },
+  {
+   "id": 19,
+   "type": "quote",
+   "chapter": 3,
+   "label": "2026.11.06 · Investing.com (서스케하나 보고서 보도)",
+   "who": "서스케하나 보고서",
+   "role": "보도로 전해진 결론",
+   "quote": "시장이 이미 위험을 더 많이 반영했을 수 있다.",
+   "keyword": "더 많이 반영",
+   "note": "주가가 위험보다 더 빠졌다는 뜻",
+   "beats": [
+    {
+     "say": "게다가 이 숫자에는 AI를 실제로 '쓰는' 추론 수요가 빠져 있습니다."
+    },
+    {
+     "say": "그래서 보고서의 결론은, 시장이 이미 위험을 더 많이 반영했을 수 있다는 것이었습니다.",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": 20,
+   "type": "chapter",
+   "chapter": 4,
+   "num": "4",
+   "title": "돈은 멈췄나",
+   "icon": "dollar-sign",
+   "beats": [
+    {
+     "say": "그럼 데이터센터에 돈을 쓰는 쪽은 멈췄을까요?"
+    }
+   ]
+  },
+  {
+   "id": 21,
+   "type": "bars",
+   "chapter": 4,
+   "label": "2026.10.28~29 · 각 사 3분기 실적 발표",
+   "title": "3분기 한 분기 설비투자",
+   "unit": "억 달러",
+   "items": [
+    {
+     "label": "아마존",
+     "value": 759
+    },
+    {
+     "label": "알파벳",
+     "value": 514
+    },
+    {
+     "label": "마이크로소프트",
+     "value": 452
+    }
+   ],
+   "beats": [
+    {
+     "say": "선거 직전 나온 빅테크 실적을 보면, 돈은 오히려 더 쓰고 있습니다."
+    },
+    {
+     "say": "3분기 석 달 동안 아마존 759억, 알파벳 514억, 마이크로소프트 452억 달러를 설비에 썼습니다."
+    }
+   ]
+  },
+  {
+   "id": 22,
+   "type": "bignum",
+   "chapter": 4,
+   "label": "2026.10.29 · 아마존 실적 발표 (환산: 11/6 환율·2026 정부 예산)",
+   "value": "298조 원",
+   "small": "아마존 올해 설비투자 계획 약 2,200억 달러",
+   "compare": {
+    "label": "한국 정부 1년 예산의",
+    "value": "약 41%"
+   },
+   "beats": [
+    {
+     "say": "아마존은 올해 약 2,200억 달러, 우리 돈 약 298조 원을 쓰겠다는 계획을 그대로 뒀습니다."
+    },
+    {
+     "say": "한국 정부 1년 예산의 40% 정도입니다.",
+     "show_compare": true
+    }
+   ]
+  },
+  {
+   "id": 23,
+   "type": "footage",
+   "chapter": 4,
+   "label": "자료 화면 · NASA 에임스 모듈형 슈퍼컴퓨터 시설 (NASA, 2019)",
+   "clip": {
+    "src": "supercomp",
+    "start": 96,
+    "frame": "photo"
+   },
+   "beats": [
+    {
+     "say": "아마존 재시 CEO는, AI 칩을 약 14초마다 하나씩 설치하는데 깔자마자 고객이 다 써 버린다고 했습니다.",
+     "vox": {
+      "text": "14초마다 하나씩",
+      "note": "재시 CEO · 3분기 실적 발표"
+     }
+    }
+   ]
+  },
+  {
+   "id": 24,
+   "type": "map_causal",
+   "chapter": 4,
+   "label": "자체 정리",
+   "title": "막힌 건 돈이 아니라 속도",
+   "beats": [
+    {
+     "say": "그러니까 막힌 건 돈이 아니라, 짓는 속도입니다.",
+     "reveal": [
+      "vote",
+      "permit",
+      "build",
+      "chips",
+      "kospi",
+      "money"
+     ],
+     "instant": [
+      [
+       "vote",
+       "permit"
+      ],
+      [
+       "permit",
+       "build"
+      ],
+      [
+       "build",
+       "chips"
+      ],
+      [
+       "chips",
+       "kospi"
+      ]
+     ],
+     "draw": [
+      [
+       "money",
+       "build"
+      ]
+     ],
+     "active": "money"
+    },
+    {
+     "say": "마이크로소프트도 외부 업체의 공급이 늦어져서, 설비투자가 생각보다 적었다고 설명했습니다.",
+     "active": "build",
+     "tag": {
+      "node": "build",
+      "text": "병목은 속도"
+     }
+    }
+   ]
+  },
+  {
+   "id": 25,
+   "type": "chapter",
+   "chapter": 5,
+   "num": "5",
+   "title": "전에도 이런 일이 있었나",
+   "icon": "clock",
+   "beats": [
+    {
+     "say": "전에도 새 데이터센터가 막힌 적이 있었을까요?"
+    }
+   ]
+  },
+  {
+   "id": 26,
+   "type": "usmap",
+   "chapter": 5,
+   "label": "2022.11 · Route Fifty",
+   "title": "2022년 북버지니아",
+   "beats": [
+    {
+     "say": "2022년 미국 북버지니아에서 비슷한 일이 있었습니다.",
+     "highlight": [
+      "Virginia"
+     ],
+     "note": {
+      "state": "Virginia",
+      "text": "북버지니아 2022"
+     }
+    },
+    {
+     "say": "전력회사가 새 데이터센터에는 몇 년 동안 전기를 대기 어렵다고 통보한 겁니다."
+    }
+   ]
+  },
+  {
+   "id": 27,
+   "type": "footage",
+   "chapter": 5,
+   "label": "자료 화면 · 밤의 지구, 미국 동부 불빛 (NASA, 2017)",
+   "clip": {
+    "src": "night",
+    "start": 47,
+    "frame": "full"
+   },
+   "beats": [
+    {
+     "say": "새로 짓는 길이 막히자 어떻게 됐을까요? 이미 있는 데이터센터로 수요가 몰렸습니다."
+    }
+   ]
+  },
+  {
+   "id": 28,
+   "type": "parking",
+   "chapter": 5,
+   "label": "2023 상반기 · CBRE (InsideNoVa 보도)",
+   "title": "빈자리 0.94%",
+   "beats": [
+    {
+     "say": "2023년 상반기 빈자리 비율이 0.94%. 100칸 주차장에 빈칸이 1칸도 안 남은 셈입니다.",
+     "fill": true
+    }
+   ]
+  },
+  {
+   "id": 29,
+   "type": "compare",
+   "chapter": 5,
+   "label": "자체 정리",
+   "title": "그때와 지금",
+   "cols": [
+    "2022 북버지니아",
+    "2026 지금"
+   ],
+   "rows": [
+    {
+     "label": "막힌 이유",
+     "a": "전력망 (물리적)",
+     "b": "정치·허가"
+    },
+    {
+     "label": "범위",
+     "a": "한 지역",
+     "b": "여러 주"
+    }
+   ],
+   "beats": [
+    {
+     "say": "다만 그때와 지금은 다릅니다. 그때는 전력망이라는 물리적 한계였고, 지금은 정치와 허가 문제입니다.",
+     "upto": 1
+    },
+    {
+     "say": "그때는 한 지역, 지금은 여러 주입니다. 그대로 되풀이된다고 볼 수는 없습니다.",
+     "upto": 2
+    }
+   ]
+  },
+  {
+   "id": 30,
+   "type": "chapter",
+   "chapter": 6,
+   "num": "6",
+   "title": "반대로 보면",
+   "icon": "scale",
+   "beats": [
+    {
+     "say": "이번엔 반대쪽 이야기입니다."
+    }
+   ]
+  },
+  {
+   "id": 31,
+   "type": "checklist",
+   "chapter": 6,
+   "label": "2026.11.06 · 서스케하나 보고서 보도",
+   "title": "8%가 전부는 아니다",
+   "rows": [
+    {
+     "label": "8%는 '취소'만 센 숫자",
+     "state": "warn"
+    },
+    {
+     "label": "허가 대기 60GW가 오래 묶이면 매출이 밀림",
+     "state": "warn"
+    },
+    {
+     "label": "최악이면 반도체 매출 1년 전보다 -10%",
+     "state": "warn"
+    },
+    {
+     "label": "보고서 원문은 비공개",
+     "state": "warn"
+    }
+   ],
+   "beats": [
+    {
+     "say": "8%는 취소만 센 숫자입니다. 허가를 기다리는 60기가와트가 오래 묶이면, 매출이 들어오는 시점이 줄줄이 밀립니다.",
+     "upto": 2
+    },
+    {
+     "say": "서스케하나도 최악이면 반도체 매출이 1년 전보다 10% 줄 수 있다고 했고, 보고서 원문은 공개되지 않았습니다.",
+     "upto": 4
+    }
+   ]
+  },
+  {
+   "id": 32,
+   "type": "map_causal",
+   "chapter": 6,
+   "label": "2026.11.06 · 뉴스1 등",
+   "title": "주가를 끌어내린 다른 길",
+   "beats": [
+    {
+     "say": "그리고 코스피가 빠진 이유도 이것 하나만은 아닙니다.",
+     "reveal": [
+      "vote",
+      "permit",
+      "build",
+      "chips",
+      "kospi",
+      "money"
+     ],
+     "instant": [
+      [
+       "vote",
+       "permit"
+      ],
+      [
+       "permit",
+       "build"
+      ],
+      [
+       "build",
+       "chips"
+      ],
+      [
+       "chips",
+       "kospi"
+      ],
+      [
+       "money",
+       "build"
+      ]
+     ]
+    },
+    {
+     "say": "같은 날 원달러 환율은 1,356원으로 올랐고, 미국 반도체 주식도 함께 급락했습니다.",
+     "reveal": [
+      "fx"
+     ],
+     "draw": [
+      [
+       "fx",
+       "kospi"
+      ]
+     ],
+     "active": "fx"
+    }
+   ]
+  },
+  {
+   "id": 33,
+   "type": "map_causal",
+   "chapter": 6,
+   "label": "자체 정리",
+   "title": "정리",
+   "beats": [
+    {
+     "say": "정리하면, 시장은 AI 공장이 막힌다는 두려움에 11%를 팔았습니다.",
+     "reveal": [
+      "vote",
+      "permit",
+      "build",
+      "chips",
+      "kospi",
+      "money",
+      "fx"
+     ],
+     "instant": [
+      [
+       "vote",
+       "permit"
+      ],
+      [
+       "permit",
+       "build"
+      ],
+      [
+       "build",
+       "chips"
+      ],
+      [
+       "chips",
+       "kospi"
+      ],
+      [
+       "money",
+       "build"
+      ],
+      [
+       "fx",
+       "kospi"
+      ]
+     ],
+     "active": "kospi",
+     "tag": {
+      "node": "kospi",
+      "text": "두려움 -11%"
+     }
+    },
+    {
+     "say": "그런데 잰 위험은 8%이고, 그마저 2028년 이후 물량입니다. 돈은 그대로고, 막힌 건 짓는 속도입니다.",
+     "active": "build",
+     "tag": {
+      "node": "build",
+      "text": "잰 위험 8% · 2028년~"
+     }
+    },
+    {
+     "say": "그래서 남은 질문은 '얼마나 줄어드나'보다 '언제, 어디로 옮겨 가나'입니다.",
+     "active": "permit",
+     "tag": {
+      "node": "permit",
+      "text": "언제·어디로?"
+     }
+    }
+   ]
+  },
+  {
+   "id": 34,
+   "type": "timeline",
+   "chapter": 6,
+   "label": "2026.11.06 기준 일정",
+   "title": "다음에 볼 것",
+   "years": [
+    "11월",
+    "12월",
+    "1월",
+    "2월"
+   ],
+   "events": [
+    {
+     "at": "12월",
+     "label": "텍사스 전력망 감사 결과",
+     "sub": "승인되는 물량이 몇 GW인지"
+    },
+    {
+     "at": "1월",
+     "label": "새 주지사 취임 1/19 · 주의회",
+     "sub": "법안에 멈춤이 어디까지 담기나"
+    },
+    {
+     "at": "2월",
+     "label": "빅테크 4분기 실적",
+     "sub": "2027년 설비투자 숫자"
+    }
+   ],
+   "beats": [
+    {
+     "say": "다음에 볼 것은 세 가지입니다. 12월 텍사스 전력망 감사 결과,",
+     "upto": 1
+    },
+    {
+     "say": "1월 19일 새 주지사 취임과 주의회, 그리고 1월 말부터 나올 빅테크 실적입니다.",
+     "upto": 3
+    }
+   ]
+  },
+  {
+   "id": 35,
+   "type": "outro",
+   "chapter": 6,
+   "label": "",
+   "title": "8% 위험에 11%",
+   "sub": "다음 숫자가 나오면 다시 재 보겠습니다",
+   "clip": {
+    "src": "supercomp",
+    "start": 40
+   },
+   "beats": [
+    {
+     "say": "8% 위험에 11%를 판 시장. 다음 숫자가 나오면 다시 재 보겠습니다."
+    }
+   ]
+  }
+ ],
+ "footage": {
+  "texas": {
+   "file": "texas.mp4",
+   "credit": "NASA (Ames Research Center), 2019 — UTM TCL4 Texas B-roll, 퍼블릭 도메인",
+   "url": "https://images.nasa.gov/details/ARC-20190815-AAV3213-UTM-TCL4-TexasBRoll-NASAWeb"
+  },
+  "abbott": {
+   "file": "abbott.mp4",
+   "credit": "NASA (Johnson Space Center), 2024 — NASA Johnson Space Center Hosts Texas Governor Greg Abbott, 퍼블릭 도메인",
+   "url": "https://images.nasa.gov/details/jsc2024m000097-NASA_Johnson_Space_Center_Hosts_Texas_Governor_Greg_Abbott"
+  },
+  "supercomp": {
+   "file": "supercomp.mp4",
+   "credit": "NASA (Ames Research Center), 2019 — Modular Supercomputing Facility B-roll, 퍼블릭 도메인",
+   "url": "https://images.nasa.gov/details/ARC-20190821-AAV3214-ModularSupercomputer-BRollResource-NASAWeb"
+  },
+  "night": {
+   "file": "night.mp4",
+   "credit": "NASA Goddard, 2017 — Lights of Human Activity: Earth at Night, 퍼블릭 도메인",
+   "url": "https://images.nasa.gov/details/GSFC_20170412_Lights_m12573_EarthAtNight"
+  }
+ }
+}

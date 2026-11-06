@@ -14,6 +14,7 @@
 
 | id | 이름 | 렌더러 | 상태 | 쓰는 곳 |
 |---|---|---|---|---|
+| `hybrid` | 하이브리드 (사용자 요청 조합) | hybrid (원본 영상 + 인과 지도 + 손그림 도식) | draft | 원본 영상이 있는 경제·산업 분석 롱폼 |
 | `sixsigma` | 식스시그마 | sixsigma (카드는 검은 배경 애니메이션) | reviewed | 기업·투자 뉴스, 실적·지분·딜 해설 |
 
 ### B. 자체 제작 인포그래픽형 (`family: infographic`)
@@ -44,6 +45,7 @@
 ## 렌더러
 | renderer | 코드 | 겉모습 |
 |---|---|---|
+| `hybrid` | `ytflow/stages/hybrid.py` | HyperFrames 장면별 렌더: 원본 영상·이름 자막·인과 지도·빗금 도식 |
 | `sixsigma` | `ytflow/stages/cards.py` | 검은 배경 정지 카드 + 원본 영상 |
 | `paper` | `ytflow/stages/paper.py` | 종이 질감 + 손그림 애니메이션 |
 | `shorts` | `ytflow/stages/shorts.py` | 9:16: 고정 훅 + 가운데 창(페이지 스크롤·카드·큰 글씨) + 큰 자막 |

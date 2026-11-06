@@ -266,6 +266,9 @@ def main(argv: list[str] | None = None) -> None:
 
     sub.add_parser("styles", help="스타일 라이브러리 목록")
     sub.add_parser("channels", help="운영 채널 목록 (channels/)")
+    hb = sub.add_parser("hybrid", help="하이브리드 스타일 영상 만들기 (02_script/hybrid.json → final.mp4)")
+    hb.add_argument("project")
+    hb.add_argument("--workers", type=int, default=3)
     vs = sub.add_parser("voice-sample", help="ElevenLabs 목소리 들어 보기 (채널 목소리 고를 때)")
     vs.add_argument("--voice-id", required=True)
     vs.add_argument("--text", default="메타는 석 달 동안 번 돈보다 3억 달러를 더 썼습니다. 그런데 주가는 왜 올랐을까요? 숫자로 따라가 보겠습니다.")
@@ -351,6 +354,9 @@ def main(argv: list[str] | None = None) -> None:
         out = config.ROOT / ".cache" / "voice_samples" / f"{a.voice_id}.mp3"
         out.parent.mkdir(parents=True, exist_ok=True)
         print(f"[voice-sample] {_elevenlabs(a.text, out, ec)}")
+    elif a.cmd == "hybrid":
+        from .stages import hybrid
+        hybrid.make(Project.open(a.project), a.workers)
     elif a.cmd == "channels":
         for d in sorted(config.CHANNELS_DIR.iterdir()):
             if (d / "channel.yaml").exists():
