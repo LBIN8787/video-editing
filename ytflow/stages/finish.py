@@ -1,6 +1,6 @@
 """마스터링: 가편집(draft.mp4) → 유튜브 납품본(final.mp4). ffmpeg-skill 도구를 그대로 부른다.
 
-1. loudness.py  — 2패스 EBU R128 음량 정규화: 유튜브 기준 -14 LUFS, 최대 -1 dBTP (영상은 다시 인코딩하지 않음)
+1. loudness.py  — 2패스 EBU R128 음량 정규화: 유튜브 기준 -14 LUFS, 최대 -1.5 dBTP(AAC 인코딩 여유 0.5, 기준은 -1) (영상은 다시 인코딩하지 않음)
 2. check.py     — 유튜브 규격 점검 (길이·화면비·fps·코덱·색·음량) → 05_edit/delivery_check.json
 3. look.py      — 프레임 시트 final_sheet.png (사람·에이전트가 눈으로 확인)
 
@@ -42,7 +42,7 @@ def master(project: Project) -> None:
         print("[master] ffmpeg-skill 없음 → draft 를 그대로 final 로 (설치: python scripts/install_tools.py)")
         return
     target = config.load("pipeline").get("edit", {}).get("loudness_lufs", -14)
-    lo = _run("loudness.py", str(draft), "-I", str(target), "--tp", "-1", "-o", str(final), "--overwrite")
+    lo = _run("loudness.py", str(draft), "-I", str(target), "--tp", "-1.5", "-o", str(final), "--overwrite")
     if lo["_exit"] or not final.exists():
         shutil.copy(draft, final)
         print(f"[master] 음량 정규화 실패 → draft 사용: {lo.get('_error', '')[:200]}")

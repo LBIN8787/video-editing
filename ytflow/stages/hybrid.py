@@ -88,10 +88,11 @@ class HDoc(hyper.Doc):
         self.sfx.append(("click-soft", at))
 
     # 복스식 주석: 종이 쪽지 + 형광펜 + 연결선 + 펜 메모 -------------
-    def vox(self, text: str, note: str, at: float, x: float = 1060, y: float = 150):
+    def vox(self, text: str, note: str, at: float, x: float = 1060, y: float = 150, on_paper: bool = False):
         i = self._id()
         f = fit(FT("title"), text, 56, 700)
         w = f.getlength(text) + 70
+        x = min(x, 1860 - w)  # 화면 오른쪽 밖으로 나가지 않게
         self.items.append(
             f'<div id="{i}" style="position:absolute;left:{x:.0f}px;top:{y:.0f}px;width:{w:.0f}px;height:110px;background:#FBF8F1;'
             f'box-shadow:0 10px 26px rgba(0,0,0,.3);transform:rotate(-1.2deg)">'
@@ -103,9 +104,12 @@ class HDoc(hyper.Doc):
             nx, ny = x + w - 40, y + 150
             self.rough("line", [nx - 20, y + 108, nx + 10, ny - 10], self.yellow, 3.5, at=at + 0.8, dur=0.25, roughness=0.8)
             nf = fit(FT("note"), note, 40, 760)
+            nleft = min(nx - 40, 1870 - nf.getlength(note))  # 메모도 화면 안에
+            # 영상 위면 밝은 글씨+그림자, 종이 위(사진 틀 밖)면 잉크색 (대비 3:1 이상)
+            ncol, nsh = (self.red, "") if on_paper else ("#FFF3C4", "text-shadow:0 2px 6px rgba(0,0,0,.8);")
             j = self._id()
-            self.items.append(f'<div id="{j}" style="position:absolute;left:{nx - 40:.0f}px;top:{ny:.0f}px;font-family:pen;font-size:{nf.size}px;'
-                              f'color:#FFF3C4;text-shadow:0 2px 6px rgba(0,0,0,.8);white-space:nowrap">{_e(note)}</div>')
+            self.items.append(f'<div id="{j}" style="position:absolute;left:{nleft:.0f}px;top:{ny:.0f}px;font-family:pen;font-size:{nf.size}px;'
+                              f'color:{ncol};{nsh}white-space:nowrap">{_e(note)}</div>')
             self.js.append(f'tl.fromTo("#{j}",{{opacity:0,y:8}},{{opacity:1,y:0,duration:0.35}},{at + 1.0:.2f});')
         self.sfx.append(("pencil", at + 0.45))
 
@@ -166,7 +170,7 @@ def s_footage(D: HDoc, sc: dict, bt: list, dur: float):
         if b.get("lower"):
             D.lower(b["lower"]["name"], b["lower"]["role"], t0 + 0.2)
         if b.get("vox"):
-            D.vox(b["vox"]["text"], b["vox"].get("note", ""), t0 + 0.4, x=1000 if full else 1120, y=140 if full else 60)
+            D.vox(b["vox"]["text"], b["vox"].get("note", ""), t0 + 0.4, x=1000 if full else 1120, y=140 if full else 110, on_paper=not full)
 
 
 def s_chart(D: HDoc, sc: dict, bt: list, dur: float):
@@ -611,8 +615,13 @@ def s_compare(D: HDoc, sc: dict, bt: list, dur: float):
 def s_outro(D: HDoc, sc: dict, bt: list, dur: float):
     D.video(sc["_clipfile"], dur, "photo", push=0.04)
     i = D._id()
-    D.items.append(f'<div id="{i}" style="position:absolute;inset:0;background:rgba(238,231,218,.55)"></div>')
+    # 사진 위 글자가 읽히도록: 뒤를 살짝 흐리게 + 가운데 종이 카드
+    D.items.append(f'<div id="{i}" style="position:absolute;inset:0;background:rgba(238,231,218,.35);backdrop-filter:blur(3px)"></div>')
     D.js.append(f'tl.fromTo("#{i}",{{opacity:0}},{{opacity:1,duration:0.8}},0.6);')
+    j = D._id()
+    D.items.append(f'<div id="{j}" style="position:absolute;left:{W / 2 - 600:.0f}px;top:360px;width:1200px;height:380px;background:#FBF8F1;'
+                   f'box-shadow:0 18px 40px rgba(0,0,0,.28);transform:rotate(-0.8deg)"></div>')
+    D.js.append(f'tl.fromTo("#{j}",{{opacity:0,y:30}},{{opacity:1,y:0,duration:0.6,ease:"power2.out"}},0.7);')
     D.text(W / 2, 470, sc["title"], FT("title"), 120, D.ink, at=0.9)
     D.rough("line", [W / 2 - 420, 560, W / 2 + 420, 566], D.red, 6, at=1.4, dur=0.5)
     D.text(W / 2, 640, sc.get("sub", ""), FT("note"), 56, D.red, at=1.8)
@@ -694,7 +703,9 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     if sc["type"] == "usmap":
         sc["_states"] = us_states()
     RENDER[sc["type"]](D, sc, bt, dur)
-    (work / "index.html").write_text(D.html(dur, "paper.jpg"), encoding="utf-8")
+    idx, html = work / "index.html", D.html(dur, "paper.jpg")
+    if not idx.exists() or idx.read_text(encoding="utf-8") != html:  # 바뀐 장면만 다시 렌더
+        idx.write_text(html, encoding="utf-8")
     (work / "hyperframes.json").write_text(json.dumps({"name": work.name}), encoding="utf-8")
     return D
 
