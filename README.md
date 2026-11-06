@@ -1,5 +1,8 @@
 # 영상편집 — ytflow
 
+> **Claude·Codex 운영/보관 차이 점검:** [2026-11-07 비교와 통합 위치 안내](docs/audits/2026-11-07-production-alignment/README.md). main과 스튜디오 브랜치는 아직 미통합이며 채널·보이스·업로드 명령의 차이를 확인한 뒤 실행하세요.
+
+
 > **같은 스타일로 반복 제작:** [쇼츠 자동화 v1.0.0 보관·재사용 안내](releases/shorts-ai-guide-v1.0.0/README.md). 고정 템플릿 ShortsGuideV1에서 내용만 바꾸고 폰트·레이아웃·보이스를 유지합니다.
 
 
