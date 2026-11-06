@@ -7,6 +7,9 @@
 벤치마킹(월1) → 소스탐색 → 주제선정⏸ → 리서치 → 대본⏸ → 음성 → 자막 → 화면소스 → 가편집⏸ → 업로드 패키지
 ```
 
+> **에이전트(Claude Code · Codex)로 작업한다면 [`AGENTS.md`](AGENTS.md) 부터 읽으세요.**
+> 단계별 절차는 [`skills/`](skills), 편집 스타일은 [`styles/`](styles), 에이전트별 차이는 [`docs/04-agents.md`](docs/04-agents.md) 에 있습니다.
+
 - **docs/01-benchmark.md**: 무엇을 어떻게 벤치마킹하나 (측정 틀, 장르 가설 체크리스트, 주의점)
 - **docs/02-workflow-sop.md**: 단계별 SOP, 사람과 자동화의 역할 분담, 크론 운영, 품질 체크리스트
 - **docs/03-benchmark-result.md**: 식스시그마·AI비즈PT 실제 벤치마킹 결과 (규칙 원본: `data/style_profile.json`)
@@ -45,12 +48,14 @@ python -m ytflow run 첫-영상                # 게이트마다 멈추면 appro
 | `prompts/*.md` | 각 단계 프롬프트. 채널 톤에 맞게 자유롭게 고치세요 |
 | `data/`, `projects/` | 실행 결과 (git 제외) |
 
-## 편집 스타일 2종
+## 편집 스타일 라이브러리 (`styles/`)
 
-| 스타일 | 기준 채널 | 화면 | 지정 방법 |
+| id | 기준 채널 | 화면 | 사용 |
 |---|---|---|---|
-| `sixsigma` (기본) | 식스시그마 | 원본 영상 중심, 검은 배경 인포 카드, 출처 라벨, 원문+번역 2단 자막 | 기본값 |
-| `paper` | 미주일기 | 종이 질감 배경, 손그림 선이 그려지는 애니메이션, 숫자 카운트업, 사진 콜라주, 상자 자막 | 프로젝트 폴더 `edit.yaml` 에 `edit: {style: paper}` |
+| `sixsigma` | 식스시그마 | 원본 영상 중심, 검은 배경 인포 카드, 출처 라벨, 원문+번역 2단 자막 | `make --style-ref sixsigma` |
+| `mijudiary` | 미주일기 | 종이 질감, 손그림 선이 그려지는 애니메이션, 숫자 카운트업, 콜라주, 상자 자막 | `make --style-ref mijudiary` |
+
+새 스타일은 레퍼런스 영상으로 `python -m ytflow style <id> <파일> --title <이름>` 을 실행해 추가합니다(`skills/edit-style-new`).
 
 ## 원본 클립 넣기 (본인 PC)
 

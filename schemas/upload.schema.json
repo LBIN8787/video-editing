@@ -1,0 +1,52 @@
+{
+  "properties": {
+    "titles": {
+      "description": "A/B 테스트용 제목 5개",
+      "items": {
+        "type": "string"
+      },
+      "title": "Titles",
+      "type": "array"
+    },
+    "thumbnail_texts": {
+      "description": "썸네일 문구 5개 (8자 내외)",
+      "items": {
+        "type": "string"
+      },
+      "title": "Thumbnail Texts",
+      "type": "array"
+    },
+    "thumbnail_concepts": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Thumbnail Concepts",
+      "type": "array"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    },
+    "tags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+    },
+    "pinned_comment": {
+      "title": "Pinned Comment",
+      "type": "string"
+    }
+  },
+  "required": [
+    "titles",
+    "thumbnail_texts",
+    "thumbnail_concepts",
+    "description",
+    "tags",
+    "pinned_comment"
+  ],
+  "title": "Package",
+  "type": "object"
+}

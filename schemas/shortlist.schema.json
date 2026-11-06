@@ -1,0 +1,66 @@
+{
+  "$defs": {
+    "TopicPick": {
+      "properties": {
+        "title_working": {
+          "title": "Title Working",
+          "type": "string"
+        },
+        "angle": {
+          "description": "기존 영상과 다른 우리만의 관점",
+          "title": "Angle",
+          "type": "string"
+        },
+        "why_now": {
+          "title": "Why Now",
+          "type": "string"
+        },
+        "source_video_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Video Ids",
+          "type": "array"
+        },
+        "hook_idea": {
+          "title": "Hook Idea",
+          "type": "string"
+        },
+        "score": {
+          "description": "0-100, 클릭 잠재력 x 제작 난이도 역수 x 채널 적합도",
+          "title": "Score",
+          "type": "integer"
+        },
+        "risks": {
+          "title": "Risks",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title_working",
+        "angle",
+        "why_now",
+        "source_video_ids",
+        "hook_idea",
+        "score",
+        "risks"
+      ],
+      "title": "TopicPick",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "picks": {
+      "items": {
+        "$ref": "#/$defs/TopicPick"
+      },
+      "title": "Picks",
+      "type": "array"
+    }
+  },
+  "required": [
+    "picks"
+  ],
+  "title": "TopicShortlist",
+  "type": "object"
+}

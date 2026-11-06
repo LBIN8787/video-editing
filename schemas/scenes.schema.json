@@ -1,0 +1,221 @@
+{
+  "$defs": {
+    "Card": {
+      "properties": {
+        "type": {
+          "description": "number_compare | flow | table | bars | headline | text",
+          "title": "Type",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/CardItem"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "title",
+        "items",
+        "note"
+      ],
+      "title": "Card",
+      "type": "object"
+    },
+    "CardItem": {
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "sub": {
+          "title": "Sub",
+          "type": "string"
+        },
+        "highlight": {
+          "title": "Highlight",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "label",
+        "value",
+        "sub",
+        "highlight"
+      ],
+      "title": "CardItem",
+      "type": "object"
+    },
+    "Scene": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "section": {
+          "description": "hook / intro / body-1 ... / outro",
+          "title": "Section",
+          "type": "string"
+        },
+        "kind": {
+          "description": "narration(내레이션) | quote(원본 발언: 원래 소리 + 번역 자막)",
+          "title": "Kind",
+          "type": "string"
+        },
+        "narration": {
+          "description": "내레이션 문장. kind=quote 이면 원문 발언의 한국어 번역",
+          "title": "Narration",
+          "type": "string"
+        },
+        "quote_en": {
+          "description": "kind=quote 일 때 원문 발언 (아니면 빈 문자열)",
+          "title": "Quote En",
+          "type": "string"
+        },
+        "label": {
+          "description": "화면 왼쪽 위 출처 라벨 'YYYY.MM.DD · 출처'",
+          "title": "Label",
+          "type": "string"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Source"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "원본 영상을 쓸 때 (visual_type=source_video 또는 kind=quote)"
+        },
+        "card": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Card"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "visual_type=card 일 때 검은 배경 인포 카드 내용"
+        },
+        "emphasis": {
+          "description": "자막에서 색으로 강조할 단어",
+          "items": {
+            "type": "string"
+          },
+          "title": "Emphasis",
+          "type": "array"
+        },
+        "visual_type": {
+          "description": "source_video | card | screenshot | stock | ai_image",
+          "title": "Visual Type",
+          "type": "string"
+        },
+        "visual_brief": {
+          "description": "편집자/이미지 생성기용 화면 지시",
+          "title": "Visual Brief",
+          "type": "string"
+        },
+        "image_prompt": {
+          "description": "AI 이미지 생성 프롬프트 (영문)",
+          "title": "Image Prompt",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "section",
+        "kind",
+        "narration",
+        "quote_en",
+        "label",
+        "source",
+        "card",
+        "emphasis",
+        "visual_type",
+        "visual_brief",
+        "image_prompt"
+      ],
+      "title": "Scene",
+      "type": "object"
+    },
+    "Source": {
+      "properties": {
+        "url": {
+          "description": "원본 영상 URL",
+          "title": "Url",
+          "type": "string"
+        },
+        "start": {
+          "description": "시작 'm:ss' (모르면 빈 문자열)",
+          "title": "Start",
+          "type": "string"
+        },
+        "end": {
+          "description": "끝 'm:ss' (모르면 빈 문자열)",
+          "title": "End",
+          "type": "string"
+        },
+        "find": {
+          "description": "구간을 모를 때 자막에서 찾을 키워드 (아니면 빈 문자열)",
+          "title": "Find",
+          "type": "string"
+        },
+        "length": {
+          "description": "클립 길이(초)",
+          "title": "Length",
+          "type": "number"
+        },
+        "query": {
+          "default": "",
+          "description": "url 을 모를 때 YouTube 에서 찾을 검색어 (sources 단계가 영상을 고른다)",
+          "title": "Query",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url",
+        "start",
+        "end",
+        "find",
+        "length"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "title_working": {
+      "title": "Title Working",
+      "type": "string"
+    },
+    "scenes": {
+      "items": {
+        "$ref": "#/$defs/Scene"
+      },
+      "title": "Scenes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "title_working",
+    "scenes"
+  ],
+  "title": "Script",
+  "type": "object"
+}

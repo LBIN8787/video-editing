@@ -1,7 +1,7 @@
 """0.5단계: 편집 스타일 분석 — 레퍼런스 영상 파일을 재고 읽어서 '편집 규칙'과 '렌더러 설정값'을 만든다.
 
 사람이 영상을 보고 손으로 정리하던 일을 자동화한다.
-  python -m ytflow style 미주일기 ~/Downloads/a.mp4 ~/Downloads/b.mp4
+  python -m ytflow style mijudiary ~/Downloads/a.mp4 ~/Downloads/b.mp4 --title 미주일기
 
 측정 (ffmpeg + numpy, 사람 판단 없음)
   - 하드 컷 수, 2초 단위 화면 변화 이벤트(분당), 정지 프레임 비율 → 편집 리듬
@@ -10,10 +10,12 @@
   - 말 사이 쉬는 구간의 음량 → 배경음악 유무
 해석 (Claude 가 장면 미리보기 시트를 직접 보고)
   - 레이아웃, 움직임, 반복 요소, 타이포그래피, 장 전환 방식 → 규칙 문장
-산출물: data/styles/<이름>/
+산출물: styles/<id>/  (스타일 라이브러리, styles/README.md)
   metrics.json   측정값          rules.json   해석한 편집 규칙
-  edit.yaml      이 스타일로 편집할 때 프로젝트에 넣는 설정 (make --style-ref <이름>)
-  sheet_*.png    장면 미리보기 (타 채널 화면이므로 저장소에 올리지 않음)
+  edit.yaml      이 스타일로 편집할 때 프로젝트에 넣는 설정 (make --style-ref <id>)
+  STYLE.md       사람·에이전트가 읽는 스타일 문서 (없을 때만 초안 생성, 이후 사람이 다듬음)
+  script.md      이 스타일로 대본을 쓸 때 추가 규칙 (없을 때만 초안 생성)
+  work/          장면 미리보기·움직임 띠 (타 채널 화면이므로 저장소에 올리지 않음)
 """
 from __future__ import annotations
 
@@ -27,7 +29,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 from pydantic import BaseModel, Field
 
-from .. import config, llm
+from .. import config, llm  # noqa: E402
 
 
 def _ff_frames(video: Path, fps: float, w: int, h: int, gray: bool) -> np.ndarray:
@@ -146,15 +148,16 @@ class StyleRules(BaseModel):
     renderer_gaps: list[str] = Field(description="현재 ytflow 렌더러(검은 카드 sixsigma / 종이 손그림 paper)가 아직 못 하는 것")
 
 
-def run(name: str, videos: list[str]) -> Path:
-    out = config.DATA_DIR / "styles" / name
+def run(name: str, videos: list[str], title: str | None = None) -> Path:
+    base = config.STYLES_DIR / name
+    out = base / "work"
     out.mkdir(parents=True, exist_ok=True)
     results = []
     for i, v in enumerate(videos):
         print(f"[style] 측정: {Path(v).name}")
         results.append(measure(Path(v).expanduser(), out, f"v{i}"))
     metrics = [r["metrics"] for r in results]
-    (out / "metrics.json").write_text(json.dumps(metrics, ensure_ascii=False, indent=2), encoding="utf-8")
+    (base / "metrics.json").write_text(json.dumps(metrics, ensure_ascii=False, indent=2), encoding="utf-8")
 
     def avg(k):
         vals = [m[k] for m in metrics if isinstance(m.get(k), (int, float))]
@@ -165,7 +168,8 @@ def run(name: str, videos: list[str]) -> Path:
 
     paperish = (avg("bright_ratio") or 0) > 0.5
     red = first("accent_red") or first("accent_red2")
-    edit = {"style": "paper" if paperish else "sixsigma", "subtitle_box": (avg("subtitle_box_ratio") or 0) > 0.3}
+    edit = {"style": "paper" if paperish else "sixsigma", "style_ref": name,
+            "subtitle_box": (avg("subtitle_box_ratio") or 0) > 0.3}
     if paperish:
         gap = avg("median_change_gap_s") or 2.0
         edit["paper"] = {k: v for k, v in {"base": first("paper"), "ink": first("ink"), "red": red,
@@ -175,16 +179,77 @@ def run(name: str, videos: list[str]) -> Path:
     if all(m.get("audio", {}).get("bgm_likely") for m in metrics if m.get("audio")):
         edit["bgm_hint"] = "레퍼런스에 배경음악이 깔려 있음 → edit.bgm 에 음원 파일을 지정하세요"
     import yaml
-    (out / "edit.yaml").write_text(f"# {name} 레퍼런스 영상에서 자동 측정한 편집 설정 (ytflow style)\n"
+    (base / "edit.yaml").write_text(f"# {title or name} 레퍼런스 영상에서 자동 측정한 편집 설정 (ytflow style)\n"
+                                   "# style = 사용할 렌더러(sixsigma | paper). 새 렌더러는 styles/README.md 참고\n"
                                    + yaml.safe_dump({"edit": edit}, allow_unicode=True, sort_keys=False), encoding="utf-8")
-    print(f"[style] 측정값 → {out}/metrics.json, 설정 → {out}/edit.yaml")
+    print(f"[style] 측정값 → {base}/metrics.json, 설정 → {base}/edit.yaml")
     imgs = [p for r in results for p in r["images"]][:8]
     print("[style] 장면 시트를 Claude 가 읽고 규칙 작성 중")
     rules = llm.structured(
         "당신은 유튜브 편집 감독입니다. 레퍼런스 채널의 장면 미리보기 시트(10초 간격)와 움직임 띠(0.2초 간격), "
         "측정값을 보고 '다른 영상에도 재현 가능한 편집 규칙'을 한국어로 정리하세요. 관찰한 것만 쓰고, 추정은 '추정'이라고 표시하세요. "
         "대사·고유 캐릭터·로고를 베끼는 규칙은 쓰지 말고 구조와 기법만 적으세요.",
-        json.dumps({"channel": name, "metrics": metrics}, ensure_ascii=False), StyleRules, images=imgs)
-    (out / "rules.json").write_text(json.dumps(rules.model_dump(), ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"[style] 규칙 → {out}/rules.json")
-    return out
+        json.dumps({"channel": title or name, "metrics": metrics}, ensure_ascii=False), StyleRules, images=imgs)
+    (base / "rules.json").write_text(json.dumps(rules.model_dump(), ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"[style] 규칙 → {base}/rules.json")
+    draft_docs(base, title or name, metrics, rules.model_dump(), edit)
+    return base
+
+
+def draft_docs(base: Path, title: str, metrics: list, rules: dict, edit: dict) -> None:
+    """STYLE.md / script.md 초안 (이미 있으면 건드리지 않는다: 사람이 다듬은 문서를 보호)."""
+    m = metrics[0] if metrics else {}
+    if not (base / "STYLE.md").exists():
+        bl = lambda xs: "\n".join(f"- {x}" for x in xs)
+        (base / "STYLE.md").write_text(f"""---
+id: {base.name}
+title: {title}
+renderer: {edit.get('style')}
+status: draft   # draft → reviewed (사람이 레퍼런스와 비교 확인 후)
+---
+
+# {title} 편집 스타일
+
+{rules.get('summary', '')}
+
+## 측정값 (ytflow style 자동 측정)
+| 하드 컷/분 | 화면 변화/분 | 정지 비율 | 밝은/어두운 화면 | 자막 상자 | 배경음악 |
+|---|---|---|---|---|---|
+| {m.get('hard_cuts_per_min')} | {m.get('change_events_per_min')} | {m.get('static_ratio')} | {m.get('bright_ratio')} / {m.get('dark_ratio')} | {m.get('subtitle_box_ratio')} | {(m.get('audio') or {}).get('bgm_likely')} |
+
+## 배경
+{bl(rules.get('backgrounds', []))}
+
+## 화면 배치
+{bl(rules.get('layout', []))}
+
+## 움직임·전환
+{bl(rules.get('motion', []))}
+
+## 반복 요소
+{bl(rules.get('recurring_elements', []))}
+
+## 글꼴
+{bl(rules.get('typography', []))}
+
+## 자막
+- {rules.get('subtitles', '')}
+
+## 소리
+- {rules.get('sound', '')}
+
+## 렌더러가 아직 못 하는 것
+{bl(rules.get('renderer_gaps', []))}
+
+## 품질 체크리스트 (가편집 검토 때)
+- [ ] 레퍼런스와 같은 화면 변화 간격 (약 {m.get('median_change_gap_s')}초)
+- [ ] 팔레트: 배경 {m.get('paper')} · 잉크 {m.get('ink')} · 강조 {m.get('accent_red') or m.get('accent_red2')}
+- [ ] 대사·캐릭터·로고를 베끼지 않았다 (구조와 기법만 가져온다)
+""", encoding="utf-8")
+    if not (base / "script.md").exists():
+        (base / "script.md").write_text(f"""# {title} 스타일 대본 추가 규칙 (초안)
+
+- 화면 변화 간격 약 {m.get('median_change_gap_s')}초 → 장면 하나는 내레이션 1~2문장.
+- 배경: 밝은 화면 {m.get('bright_ratio')} / 어두운 화면 {m.get('dark_ratio')} 비율에 맞춰 visual_type 을 고른다.
+- 레퍼런스 규칙(STYLE.md)의 '반복 요소'를 장면 설계에 활용한다.
+""", encoding="utf-8")

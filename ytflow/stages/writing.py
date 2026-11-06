@@ -109,7 +109,7 @@ class Source(BaseModel):
     end: str = Field(description="끝 'm:ss' (모르면 빈 문자열)")
     find: str = Field(description="구간을 모를 때 자막에서 찾을 키워드 (아니면 빈 문자열)")
     length: float = Field(description="클립 길이(초)")
-    query: str = Field(description="url 을 모를 때 YouTube 에서 찾을 검색어 (sources 단계가 영상을 고른다)")
+    query: str = Field("", description="url 을 모를 때 YouTube 에서 찾을 검색어 (sources 단계가 영상을 고른다)")
 
 
 class CardItem(BaseModel):
@@ -157,6 +157,10 @@ def script(project: Project) -> None:
     arts = af.read_text(encoding="utf-8") if af.exists() else "[]"
     user = (f"# 스타일 프로필\n{_style_block()}\n\n# 주제\n{json.dumps(topic, ensure_ascii=False)}\n\n"
             f"# 팩트시트\n{fact}\n\n# 인용 가능한 기사 (screenshot 장면의 source.url 로만 사용)\n{arts}\n\n# 분량\n약 {minutes}분, 분당 {cpm}자 → 내레이션 총 {int(minutes * cpm)}자 내외")
+    ref = config.load("pipeline").get("edit", {}).get("style_ref")
+    addendum = config.STYLES_DIR / ref / "script.md" if ref else None
+    if addendum and addendum.exists():  # 편집 스타일별 대본 규칙 (styles/<id>/script.md)
+        user += f"\n\n# 이 영상의 편집 스타일({ref}) 대본 규칙\n" + addendum.read_text(encoding="utf-8")
     res = llm.structured(config.prompt("script"), user, Script, max_tokens=32000)
     data = res.model_dump()
     project.write_json("script", "scenes.json", data)

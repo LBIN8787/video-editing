@@ -3,8 +3,12 @@ language: ko
 
 llm:
   backend: claude-cli     # claude-cli = Claude 구독(claude -p) 사용, API 키 불필요
+                          # codex-cli  = ChatGPT 구독(codex exec) 사용, API 키 불필요
                           # api        = Anthropic API (ANTHROPIC_API_KEY 필요)
+                          # manual     = 에이전트가 .llm/requests 를 읽고 직접 답함 (docs/04-agents.md)
+                          # 환경변수 YTFLOW_LLM_BACKEND 가 있으면 그 값이 우선
   cli_model: opus         # claude-cli 백엔드에서 쓸 모델 별칭
+  codex_model: ""         # codex-cli 백엔드 모델 (비우면 Codex 기본값)
   model: claude-opus-5-5  # 이하 api 백엔드 설정
   effort: high            # low | medium | high | xhigh | max
   fallbacks: true         # 안전 분류기 거절 시 서버측 대체 모델로 재시도

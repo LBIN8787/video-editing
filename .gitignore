@@ -1,8 +1,8 @@
 data/*
 !data/style_profile.json
 # 편집 스타일 분석: 규칙·측정값·설정은 올리고, 타 채널 화면(시트 이미지)은 제외
-!data/styles/
-data/styles/**/*.png
+# (스타일 라이브러리는 styles/ 로 이동)
+styles/**/work/
 # 프로젝트: 기획 문서(md/json/csv)만 버전 관리, 미디어·타 채널 자막·작업 파일은 제외
 projects/**/*.mp4
 projects/**/*.mov
@@ -19,3 +19,4 @@ projects/**/work/
 projects/**/work_subs/
 __pycache__/
 *.pyc
+.llm/

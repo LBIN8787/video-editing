@@ -9,6 +9,7 @@ CONFIG_DIR = ROOT / "config"
 PROMPT_DIR = ROOT / "prompts"
 DATA_DIR = ROOT / "data"          # 벤치마킹 원자료 / 스타일 프로필
 PROJECTS_DIR = ROOT / "projects"  # 영상 1편 = 프로젝트 폴더 1개
+STYLES_DIR = ROOT / "styles"      # 편집 스타일 라이브러리 (스타일 1개 = 폴더 1개)
 
 
 _OVERRIDE: dict = {}

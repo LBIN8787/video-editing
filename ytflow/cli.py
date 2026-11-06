@@ -7,6 +7,9 @@
   python -m ytflow stage <프로젝트> <단계>             # 단계 하나만 (재)실행
   python -m ytflow make --topic "주제" [--style paper]  # 자료조사~영상까지 한 번에
   python -m ytflow rebuild <프로젝트>              # 클립 받기~가편집 재생성 (PC에서 원본 클립 넣을 때)
+  python -m ytflow validate <프로젝트>             # 대본 점검 (에이전트가 직접 쓴 경우 필수)
+  python -m ytflow schemas                        # schemas/*.schema.json 내보내기
+  python -m ytflow styles                         # 편집 스타일 라이브러리 목록
   python -m ytflow status <프로젝트>
 """
 from __future__ import annotations
@@ -33,12 +36,59 @@ RUNNERS = {
 }
 
 
+def export_schemas() -> None:
+    import json as _json
+    from .stages.style import StyleRules
+    from .stages.writing import ArticleList, Package, Script, TopicShortlist
+    out = config.ROOT / "schemas"
+    out.mkdir(exist_ok=True)
+    for name, model in {"scenes": Script, "shortlist": TopicShortlist, "articles": ArticleList,
+                        "upload": Package, "style_rules": StyleRules}.items():
+        (out / f"{name}.schema.json").write_text(_json.dumps(model.model_json_schema(), ensure_ascii=False, indent=2),
+                                                 encoding="utf-8")
+        print("schemas/" + f"{name}.schema.json")
+
+
+def validate(p: Project) -> bool:
+    """대본 스키마·장면 규칙 점검. 문제를 출력하고 통과 여부를 돌려준다."""
+    from .stages.cards import RENDER
+    from .stages.writing import Script
+    issues = []
+    try:
+        data = Script.model_validate(p.read_json("script", "scenes.json")).model_dump()
+    except Exception as e:  # 스키마 자체가 틀림
+        print("✗ scenes.json 스키마 오류:\n", str(e)[:2000])
+        return False
+    for i, s in enumerate(data["scenes"], 1):
+        tag = f"#{s['id']}"
+        if s["id"] != i:
+            issues.append(f"{tag}: id 는 1부터 순서대로여야 합니다 (기대값 {i})")
+        if s["kind"] not in ("narration", "quote"):
+            issues.append(f"{tag}: kind={s['kind']} (narration|quote)")
+        if s["kind"] == "quote" and not s["quote_en"]:
+            issues.append(f"{tag}: quote 장면에 quote_en(원문)이 없습니다")
+        if s["visual_type"] == "card" and not s["card"]:
+            issues.append(f"{tag}: card 장면에 card 내용이 없습니다")
+        if s["card"] and s["card"]["type"] not in RENDER:
+            issues.append(f"{tag}: card.type={s['card']['type']} ({' | '.join(RENDER)})")
+        src = s.get("source") or {}
+        if s["visual_type"] in ("source_video", "screenshot") or s["kind"] == "quote":
+            if not (src.get("url") or src.get("query")):
+                issues.append(f"{tag}: {s['visual_type']} 장면에 source.url 또는 source.query 가 필요합니다")
+        if not s.get("label") and s["visual_type"] != "card":
+            issues.append(f"{tag}: label(날짜 · 출처)이 비어 있습니다")
+    for x in issues:
+        print("✗", x)
+    print(("✓ 통과" if not issues else f"문제 {len(issues)}건") + f" — 장면 {len(data['scenes'])}개")
+    return not issues
+
+
 def cmd_make(a) -> None:
     """자료조사 → 대본 → 소스 → 영상 → 업로드 패키지 → 보고서를 한 번에 (승인 게이트는 자동 통과)."""
 
     p = Project.create(a.name or (a.topic or "auto")[:30])
     if a.style_ref:  # 분석한 레퍼런스의 설정을 그대로 가져온다
-        ref = config.DATA_DIR / "styles" / a.style_ref / "edit.yaml"
+        ref = config.STYLES_DIR / a.style_ref / "edit.yaml"
         if not ref.exists():
             raise SystemExit(f"먼저 실행: python -m ytflow style {a.style_ref} <레퍼런스 영상들>")
         (p.path / "edit.yaml").write_text(ref.read_text(encoding="utf-8"), encoding="utf-8")
@@ -109,9 +159,15 @@ def main(argv: list[str] | None = None) -> None:
     g.add_argument("gate", choices=sorted(set(GATE_AFTER.values())))
     g.add_argument("--pick", type=int, help="topic 게이트: shortlist 번호")
 
-    sy = sub.add_parser("style", help="레퍼런스 영상 파일로 편집 스타일을 분석 → data/styles/<이름>/")
-    sy.add_argument("name")
+    sy = sub.add_parser("style", help="레퍼런스 영상 파일로 편집 스타일을 분석 → styles/<id>/")
+    sy.add_argument("name", help="스타일 id (영문 소문자 권장, 예: mijudiary)")
     sy.add_argument("videos", nargs="+")
+    sy.add_argument("--title", help="표시 이름 (예: 미주일기)")
+
+    sub.add_parser("styles", help="스타일 라이브러리 목록")
+    sub.add_parser("schemas", help="에이전트가 직접 쓰는 파일들의 JSON Schema 를 schemas/ 에 내보내기")
+    va = sub.add_parser("validate", help="프로젝트의 대본(scenes.json)과 파일을 점검")
+    va.add_argument("project")
 
     mk = sub.add_parser("make", help="자료조사부터 영상·업로드 패키지까지 한 번에")
     mk.add_argument("--topic", help="주제 (없으면 소스 탐색으로 자동 선정)")
@@ -147,7 +203,17 @@ def main(argv: list[str] | None = None) -> None:
         p.approve(a.gate)
         print(f"승인: {a.gate}. 이어서:  python -m ytflow run {p.path.name}")
     elif a.cmd == "style":
-        style.run(a.name, a.videos)
+        style.run(a.name, a.videos, a.title)
+    elif a.cmd == "schemas":
+        export_schemas()
+    elif a.cmd == "validate":
+        raise SystemExit(0 if validate(Project.open(a.project)) else 1)
+    elif a.cmd == "styles":
+        for d in sorted(config.STYLES_DIR.iterdir()):
+            if d.is_dir() and not d.name.startswith("_") and (d / "STYLE.md").exists():
+                head = (d / "STYLE.md").read_text(encoding="utf-8").split("---")[1] if (d / "STYLE.md").read_text(encoding="utf-8").startswith("---") else ""
+                meta = dict(l.split(":", 1) for l in head.strip().splitlines() if ":" in l)
+                print(f"{d.name:14} {meta.get('title', '').strip():12} renderer={meta.get('renderer', '').split('#')[0].strip():9} status={meta.get('status', '').split('#')[0].strip()}")
     elif a.cmd == "make":
         cmd_make(a)
     elif a.cmd == "rebuild":

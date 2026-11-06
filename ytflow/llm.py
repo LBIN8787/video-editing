@@ -1,16 +1,23 @@
 """Claude 호출 래퍼.
 
-backend (config/pipeline.yaml → llm.backend):
+backend (config/pipeline.yaml → llm.backend, 또는 환경변수 YTFLOW_LLM_BACKEND):
+  claude-cli  Claude Code CLI(`claude -p`). Claude Pro/Max 구독 로그인으로 동작, API 키 불필요
+  codex-cli   Codex CLI(`codex exec`). ChatGPT 구독 로그인으로 동작, API 키 불필요
   api         Anthropic API (ANTHROPIC_API_KEY 필요, 사용량만큼 과금)
-  claude-cli  로컬 Claude Code CLI(`claude -p`)를 호출. Pro/Max 구독 로그인으로 동작하며
-              API 키가 필요 없다. 구독 사용량 한도를 함께 쓴다.
+  manual      프로그램이 LLM 을 부르지 않는다. 요청을 .llm/requests/ 에 파일로 남기고 멈추면,
+              작업 중인 에이전트(Claude Code, Codex 등)가 답을 .llm/responses/ 에 쓰고 다시 실행한다.
+              → 에이전트 하나가 대화 안에서 모든 판단을 직접 하는 방식 (docs/04-agents.md)
 """
 from __future__ import annotations
 
+import hashlib
 import json
+import os
 import re
 import shutil
 import subprocess
+import tempfile
+from pathlib import Path
 from typing import Type, TypeVar
 
 import anthropic
@@ -87,14 +94,94 @@ def _json_from(out: dict):
 
 
 def _backend() -> str:
-    return _cfg().get("backend", "api")
+    return os.environ.get("YTFLOW_LLM_BACKEND") or _cfg().get("backend", "api")
+
+
+# ---------------------------------------------------------------- codex-cli 백엔드
+def strict_schema(schema: dict) -> dict:
+    """OpenAI 구조화 출력(strict)용: 모든 객체에 additionalProperties=false, 모든 속성을 required 로."""
+    def fix(node):
+        if isinstance(node, dict):
+            if node.get("type") == "object" and "properties" in node:
+                node["additionalProperties"] = False
+                node["required"] = list(node["properties"].keys())
+            node.pop("default", None)
+            for v in node.values():
+                fix(v)
+        elif isinstance(node, list):
+            for v in node:
+                fix(v)
+        return node
+    return fix(json.loads(json.dumps(schema)))
+
+
+def _codex(system: str, user: str, schema: dict | None = None, web: bool = False, images=None) -> str:
+    exe = shutil.which("codex")
+    if not exe:
+        raise SystemExit("codex CLI 가 없습니다. `npm install -g @openai/codex` 후 `codex login` 하세요.")
+    cfg = _cfg()
+    with tempfile.TemporaryDirectory() as td:
+        out = Path(td) / "out.txt"
+        cmd = [exe] + (["--search"] if web else []) + ["exec", "--skip-git-repo-check", "--ephemeral",
+                                                       "-s", "read-only", "-o", str(out)]
+        if cfg.get("codex_model"):
+            cmd += ["-m", cfg["codex_model"]]
+        if schema is not None:
+            sf = Path(td) / "schema.json"
+            sf.write_text(json.dumps(strict_schema(schema), ensure_ascii=False), encoding="utf-8")
+            cmd += ["--output-schema", str(sf)]
+        for im in images or []:
+            cmd += ["-i", str(im)]
+        cmd.append("-")  # 프롬프트는 stdin 으로 (codex exec 에는 별도 system 인자가 없어 앞에 붙인다)
+        prompt = f"# 지시\n{system}\n\n# 입력\n{user}"
+        proc = subprocess.run(cmd, input=prompt, capture_output=True, text=True, timeout=cfg.get("cli_timeout", 1800))
+        if proc.returncode != 0 or not out.exists():
+            raise RuntimeError(f"codex exec 실패 (exit {proc.returncode}): {proc.stderr[-1500:]}")
+        return out.read_text(encoding="utf-8").strip()
+
+
+# ---------------------------------------------------------------- manual 백엔드
+LLM_DIR = Path(__file__).resolve().parent.parent / ".llm"
+
+
+class PendingLLM(SystemExit):
+    """manual 모드에서 답이 아직 없을 때. 에이전트가 응답 파일을 쓰고 다시 실행하면 이어진다."""
+
+
+def _manual(kind: str, system: str, user: str, schema: dict | None = None, web: bool = False, images=None):
+    key = hashlib.sha1(json.dumps([kind, system, user, schema], ensure_ascii=False).encode()).hexdigest()[:12]
+    req, res_dir = LLM_DIR / "requests", LLM_DIR / "responses"
+    req.mkdir(parents=True, exist_ok=True)
+    res_dir.mkdir(parents=True, exist_ok=True)
+    ext = "json" if schema is not None else "md"
+    res = res_dir / f"{key}.{ext}"
+    if res.exists():
+        txt = res.read_text(encoding="utf-8")
+        return json.loads(txt) if schema is not None else txt
+    body = [f"# LLM 요청 {key} ({kind})", "",
+            f"답을 `{res.relative_to(LLM_DIR.parent)}` 에 쓰고 같은 명령을 다시 실행하세요.",
+            "웹 검색이 필요한 요청입니다. 직접 검색해 출처 URL 을 다세요." if web else "",
+            "", "## 지시 (system)", system, "", "## 입력 (user)", user]
+    if images:
+        body += ["", "## 함께 볼 이미지", *[str(i) for i in images]]
+    if schema is not None:
+        body += ["", "## 답 형식: 아래 JSON Schema 를 만족하는 JSON 하나만", "```json",
+                 json.dumps(schema, ensure_ascii=False, indent=1), "```"]
+    f = req / f"{key}.md"
+    f.write_text("\n".join(body), encoding="utf-8")
+    raise PendingLLM(f"[manual] LLM 응답이 필요합니다 → 요청: {f.relative_to(LLM_DIR.parent)}  /  답: {res.relative_to(LLM_DIR.parent)}")
 
 
 # ---------------------------------------------------------------- 공용 진입점
 def text(system: str, user: str, max_tokens: int = 64000, web: bool = False) -> str:
     """긴 마크다운 출력(대본·리서치). web=True 면 웹 검색·페이지 읽기를 허용한다.
     API 는 스트리밍으로 받아 타임아웃을 피한다."""
-    if _backend() == "claude-cli":
+    b = _backend()
+    if b == "manual":
+        return _manual("text", system, user, web=web)
+    if b == "codex-cli":
+        return _codex(system, user, web=web)
+    if b == "claude-cli":
         return _cli(system, user, tools=["WebSearch", "WebFetch"] if web else None).get("result", "").strip()
     if web:
         return _api_web(system, user, max_tokens)
@@ -128,7 +215,12 @@ def _api_web(system: str, user: str, max_tokens: int) -> str:
 def structured(system: str, user: str, schema: Type[T], max_tokens: int = 16000,
                images: list | None = None) -> T:
     """스키마로 검증된 JSON 출력. images 를 주면 그림(장면 미리보기 등)을 함께 보고 답한다."""
-    if _backend() == "claude-cli":
+    b = _backend()
+    if b == "manual":
+        return schema.model_validate(_manual("structured", system, user, schema.model_json_schema(), images=images))
+    if b == "codex-cli":
+        return schema.model_validate_json(_codex(system, user, schema.model_json_schema(), images=images))
+    if b == "claude-cli":
         if images:
             user += "\n\n# 함께 볼 이미지 (Read 로 열어 보세요)\n" + "\n".join(str(p) for p in images)
         out = _cli(system, user, schema.model_json_schema(), tools=["Read"] if images else None)

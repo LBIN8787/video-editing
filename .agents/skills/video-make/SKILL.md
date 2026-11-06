@@ -1,0 +1,38 @@
+---
+name: video-make
+description: 주제 선정부터 자료조사, 대본, 소스 탐색, 편집, 자막, 업로드 패키지, 보고서까지 유튜브 영상 1편을 ytflow 파이프라인으로 처음부터 끝까지 만든다. "영상 만들어줘", "이번 주 영상", "자동으로 제작" 같은 요청에 쓴다.
+---
+
+# 영상 1편 전체 제작 (ytflow make)
+
+## 준비 (처음 한 번)
+1. `pip install -r requirements.txt` 를 실행하고, ffmpeg·node 를 설치합니다.
+2. LLM 백엔드를 고릅니다 (`config/pipeline.yaml` → `llm.backend`, 또는 환경변수 `YTFLOW_LLM_BACKEND`).
+   - **claude-cli:** Claude 구독. `claude` 로그인이 필요합니다.
+   - **codex-cli:** ChatGPT 구독. `codex login` 이 필요합니다.
+   - **api:** `ANTHROPIC_API_KEY` 가 필요합니다.
+   - **manual:** 에이전트인 당신이 직접 답합니다. 아래 'manual 모드' 참고.
+3. 편집 스타일을 고릅니다: `python -m ytflow styles`. 스타일 문서는 `styles/<id>/STYLE.md` 에 있습니다.
+
+## 실행
+```bash
+python -m ytflow make --style-ref <스타일id>                     # 주제 자동 선정
+python -m ytflow make --topic "주제" --angle "관점" --style-ref <id>
+```
+단계 순서: discover → select → research → script → sources → clips → voice → assets → subtitles → assemble → package → report.
+중간부터 다시 돌릴 때는 `python -m ytflow stage <프로젝트> <단계>`, 소스를 넣은 뒤에는 `python -m ytflow rebuild <프로젝트>` 를 씁니다.
+
+## manual 모드 (에이전트가 직접 판단할 때)
+1. `YTFLOW_LLM_BACKEND=manual python -m ytflow make ...` 를 실행합니다. LLM 이 필요한 단계에서 멈추고 `.llm/requests/<id>.md` 를 남깁니다.
+2. 요청 파일을 읽고 답을 `.llm/responses/<id>.json`(또는 `.md`)에 씁니다. JSON 은 요청에 적힌 스키마(`schemas/*.schema.json`)를 지킵니다.
+3. 웹 검색이 필요한 요청(자료조사)은 당신의 검색 도구로 출처를 확인합니다. 그리고 `skills/video-research` 규칙을 따릅니다.
+4. 멈췄던 단계를 `python -m ytflow stage <프로젝트> <단계>` 로 이어서 실행합니다. 대본을 직접 썼다면 `python -m ytflow validate <프로젝트>` 를 반드시 통과시킵니다.
+
+## 끝난 뒤 확인
+- **보고서:** `projects/<프로젝트>/REPORT.md` 에서 '남은 일'(임시 화면, 재확인 필요 팩트)을 사용자에게 알립니다.
+- **화면 점검:** `skills/video-edit` 의 프레임 점검을 하고, 문제가 있으면 해당 단계만 다시 돌립니다.
+- **커밋:** 기획 문서(md/json/csv)만 커밋합니다. 미디어와 타 채널 화면은 커밋하지 않습니다(.gitignore).
+
+## 지킬 것
+- YouTube 봇 확인을 우회하지 않습니다. 클라우드에서 클립 다운로드가 막히면 임시 화면으로 두고, 사용자 PC에서 `rebuild` 하도록 안내합니다.
+- 투자 권유 표현을 쓰지 않습니다. 확인되지 않은 숫자는 단정하지 않습니다.
