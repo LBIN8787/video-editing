@@ -32,7 +32,7 @@ jobs:
       - run: python scripts/sync_skills.py --check
       - run: python -m unittest -v test_workflow.py test_content_policy.py test_work_cases.py
         working-directory: studio/automation
-      - run: python -m unittest discover -s studio/youtube -p 'test_publish.py' -v
+      - run: python -m unittest discover -s studio/youtube -p 'test_*.py' -v
       - run: npm ci --ignore-scripts
         working-directory: studio/renderer
       - run: npm run typecheck

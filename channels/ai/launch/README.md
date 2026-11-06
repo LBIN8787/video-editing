@@ -1,3 +1,7 @@
+# 최신 연결 상태
+
+Windows PC에 저장소·전용 Python·Google 업로드 라이브러리 설치와 OAuth 연결을 완료했습니다. 실제 API로 ai실전노트 / UCb6tSnNY6X3BtH-ujxMIf3g를 확인했습니다. 인증 정보는 해당 PC에만 있습니다. 실제 영상 업로드와 정기 실행은 아직 하지 않았습니다. 아래의 미연결 설명은 초기 준비 이력입니다.
+
 # Windows 연결
 
 사용 환경은 Windows로 확인했다. 저장소 루트의 WINDOWS-START.md와 CONNECT-YOUTUBE.cmd를 사용한다. 대상 채널 ID가 고정되어 있으며, 이 PC에서 OAuth 연결을 마쳐야 업로드 권한을 사용할 수 있다. 예약 운영 방식은 아직 미선택이다.

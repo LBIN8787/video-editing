@@ -16,7 +16,7 @@ def credentials(token_path):
 def save_token(path,text):
  path=Path(path).expanduser();path.parent.mkdir(parents=True,exist_ok=True)
  fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_TRUNC,0o600)
- with os.fdopen(fd,'w') as f:f.write(text)
+ with os.fdopen(fd,'w',encoding='utf-8') as f:f.write(text)
  os.chmod(path,0o600)
 
 def channel_identity(api,expected):
@@ -34,6 +34,6 @@ def main():
  save_token(Path(a.token),cred.to_json())
  if a.activate_publishing:
   root=Path(__file__).resolve().parents[2]
-  profile=root/'channels/ai/channel.json';data=json.loads(profile.read_text());data.update(account_created=True,youtube_channel_id=a.channel_id,uploads_enabled=True,status='ai_pilot',oauth_verified=True);profile.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+  profile=root/'channels/ai/channel.json';data=json.loads(profile.read_text(encoding='utf-8-sig'));data.update(account_created=True,youtube_channel_id=a.channel_id,uploads_enabled=True,status='ai_pilot',oauth_verified=True);profile.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
  print(json.dumps({'connected':identity,'token_saved':True,'publishing_enabled':a.activate_publishing},ensure_ascii=False))
 if __name__=='__main__':main()
