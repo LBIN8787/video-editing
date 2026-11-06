@@ -1,0 +1,62 @@
+{
+  "channel": "ai",
+  "title": "AI 쇼츠 디자인이 매번 바뀐다면? Remotion 템플릿 고정법",
+  "description": "AI 쇼츠 디자인이 매번 바뀐다면? Remotion 템플릿 고정법\n\n이번 쇼츠도 기존 ShortsGuideV1 1.0.0에 새 대본·음성·장면 입력을 넣어 제작했습니다. AI 코딩 도구에서 템플릿을 열고 디자인을 유지한 채 내용만 바꾸도록 요청해 보세요.\n\n요청문: 디자인은 수정하지 말고 제목, 장면 문구, 음성 경로와 자막만 새 내용으로 바꿔 줘. 미리보기에서 글자 잘림을 확인해 줘.\n\nRemotion은 코딩 실행 환경이 필요하며 무료 라이선스 대상인지 확인해야 합니다. AI 도구와 음성 요금은 별도입니다.\n\n공식 출처 (2026-11-07 확인)\nhttps://github.com/remotion-dev/remotion\nhttps://www.remotion.dev/docs/parameterized-rendering\nhttps://www.remotion.dev/docs/license/pricing\n\nAI 실전노트: 직접 적용한 AI 활용 기록. 화면은 자체 그래픽과 실제 파일 일부의 재구성입니다.\n#AI활용 #쇼츠제작 #Remotion\n",
+  "source_urls": [
+    "https://github.com/remotion-dev/remotion",
+    "https://www.remotion.dev/docs/parameterized-rendering",
+    "https://www.remotion.dev/docs/license/pricing"
+  ],
+  "source_checked_at": "2026-11-07",
+  "script_reviewed": true,
+  "transition_sfx": false,
+  "format_version": "ai-guide-v1",
+  "composition": "ShortsGuideV1",
+  "style_version": "1.0.0",
+  "file": "../renderer/out/AI-Shorts-005-Remotion.mp4",
+  "content_mode": "applied_work",
+  "work_case_ref": "work-cases/shorts-batch-005-006/case.json",
+  "voice": {
+    "provider": "elevenlabs",
+    "voice_name": "Han Aim",
+    "voice_id": "8jHHF8rMqMlg8if2mOUe",
+    "model_id": "eleven_v4",
+    "fallback_allowed": false,
+    "generations_per_script": 1,
+    "fallback_used": false,
+    "asset": "../renderer/public/episode-005/voice.mp3",
+    "sha256": "28335f718cf0e310dc5eafad5f3ebe3f8552b013a5f8cc2d38a6eef7af631239"
+  },
+  "sections": {
+    "news_context": "공식 공개 도구를 이번 실제 채널 제작에 적용한 활용 가이드. 신규 출시·인기 순위 보도 아님.",
+    "features": [
+      "템플릿 재사용",
+      "props로 내용 교체",
+      "MP4 출력"
+    ],
+    "usage_steps": [
+      "반복 제작의 문제",
+      "기능 · Remotion",
+      "활용 1 · 준비",
+      "활용 2 · 요청문",
+      "활용 3 · 검수와 출력",
+      "이번 제작의 실제 입력",
+      "실행 조건",
+      "오늘의 적용"
+    ],
+    "application_example": {
+      "input": "기존 ShortsGuideV1와 새 대본·음성",
+      "request": "기존 ShortsGuideV1 디자인은 수정하지 말고 제목, 장면 문구, 음성 경로, 자막과 장면 길이만 새 내용으로 바꿔 줘. 글자 잘림과 음성 동기화를 미리보기에서 확인해 줘.",
+      "expected_output": "같은 스타일의 새 쇼츠 MP4",
+      "evidence_type": "executed",
+      "evidence_files": [
+        "channels/ai/episodes/005-remotion/props.json",
+        "channels/ai/episodes/005-remotion/whisper-raw.json",
+        "work-cases/shorts-batch-005-006/evidence/final-qa.json"
+      ]
+    },
+    "result_check": "최종 MP4 전체 디코딩·모든 장면 대표 프레임·인식 문장·음량 분석. 직접 청취 검수는 남음.",
+    "conditions": "실행 환경·모델 설치 필요. Remotion 라이선스와 별도 AI/음성 요금 확인."
+  },
+  "publish_allowed": false
+}

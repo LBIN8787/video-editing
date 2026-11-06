@@ -1,0 +1,17 @@
+자막 타이핑 줄이는 Whisper 활용법: 음성에서 자막 초안까지
+
+이번 실제 쇼츠 음성을 faster-whisper small 모델로 로컬 인식해 한국어 자막 초안과 단어별 시간을 추출했습니다.
+
+활용 순서: 음성 준비 → language=ko, word_timestamps=True로 인식 → 원문과 고유명사 대조 → 짧은 자막 묶음/SRT → 영상에서 타이밍 확인.
+
+요청문: 원문과 비교해 제품명을 고치고 한 자막을 두 줄 이내로 나눠 줘. 불확실한 단어는 표시해 줘.
+
+로컬 음성 인식에는 모델 설치와 컴퓨터 자원이 필요합니다. 음성 인식 API는 호출하지 않았으며 ElevenLabs 음성 생성 요금과는 별개입니다.
+
+공식 출처 (2026-11-07 확인)
+https://github.com/openai/whisper
+https://github.com/SYSTRAN/faster-whisper
+https://github.com/openai/whisper/blob/main/LICENSE
+
+AI 실전노트: 직접 적용한 AI 활용 기록. 화면은 자체 그래픽과 실제 파일 일부의 재구성입니다.
+#AI활용 #쇼츠제작 #Whisper

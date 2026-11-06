@@ -1,0 +1,60 @@
+{
+  "id": "shorts-batch-005-006",
+  "domain": "video-channel",
+  "status": "partially_tested",
+  "objective": "고정 템플릿과 ElevenLabs 음성을 재사용하고 실제 음성 인식으로 AI 활용 쇼츠 MP4 두 편을 제작한다",
+  "acceptance_criteria": [
+    "서로 다른 활용 주제 두 편",
+    "같은 스타일·고정 음성",
+    "자막과 실물 MP4",
+    "소스·증거·미디어 보관"
+  ],
+  "results": [
+    "Remotion 반복 제작 활용법 005와 Whisper 자막 활용법 006을 MP4로 출력했다",
+    "faster-whisper small 모델로 실제 음성 두 개의 한국어 자막 초안을 추출했다",
+    "출력 45.9초 및 49.9초, 1080×1920 30fps H.264/AAC. 전체 디코딩과 장면 샘플 검사 통과",
+    "고정 ElevenLabs Han Aim / eleven_v4를 각 한 번 생성하고 전환 효과음·배경음 없이 구성했다"
+  ],
+  "limitations": [
+    "직접 청취 검수와 사용자 시청 피드백은 아직 남아 있다",
+    "이번 영상의 실제 YouTube 업로드·정기 예약은 실행하지 않았다",
+    "일반 새 대본의 완전 무인 제작 파이프라인이 아니라 두 편의 실제 제작이다",
+    "시간 절감·조회수 증가 효과는 측정하지 않았다"
+  ],
+  "public_scope": "자체 공개용 대본·작업 코드와 비밀정보 없는 입력·인식·파일 QA만 공개. 계정 자격증명은 포함하지 않는다.",
+  "evidence": [
+    {
+      "path": "work-cases/shorts-batch-005-006/evidence/final-qa.json",
+      "sha256": "d7fef264dc5f10a1f46f3762a781170f0dbe9e7736e088732d9e85ceeb5f52dd"
+    },
+    {
+      "path": "work-cases/shorts-batch-005-006/evidence/transcription-and-voice.json",
+      "sha256": "a9728246831ef78f3db3bda507cffe3bb48fd9736dc56923d245fc1be7c59ce7"
+    },
+    {
+      "path": "channels/ai/episodes/005-remotion/props.json",
+      "sha256": "17e1fb8453d4fba62d0c2fcc528e60f9fbced4a70146a0e2d6001381d3e01d4b"
+    },
+    {
+      "path": "channels/ai/episodes/005-remotion/whisper-raw.json",
+      "sha256": "4bda7c2baab594d08419f1a0f3b5d90f673a16c90a77d281099833991555e681"
+    },
+    {
+      "path": "channels/ai/episodes/005-remotion/voice-generation.json",
+      "sha256": "c3997747738f340c7c3f709f259762df0a2691997bf90e3c34506dd959387099"
+    },
+    {
+      "path": "channels/ai/episodes/006-whisper/props.json",
+      "sha256": "90106fee2f149ddf36c2593bdc3e2986fd0498665e7012cbb2898fe9c974fc88"
+    },
+    {
+      "path": "channels/ai/episodes/006-whisper/whisper-raw.json",
+      "sha256": "913b233447315faccefec0e4547a1f7246d1895a940fb19c2d97cd7eb6c19052"
+    },
+    {
+      "path": "channels/ai/episodes/006-whisper/voice-generation.json",
+      "sha256": "aae4bf8f763164f6a50649f6085dd13c59b92f49fb5685e71796169491657bda"
+    }
+  ],
+  "metrics": []
+}

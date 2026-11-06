@@ -1,0 +1,33 @@
+{
+  "005": {
+    "folder": "005-remotion",
+    "topic": "remotion-repeatable",
+    "title": "AI 쇼츠 디자인이 매번 바뀐다면? Remotion 템플릿 고정법",
+    "source": "Remotion 공식 문서 · 자체 제작 적용",
+    "scenes": [
+      {"phrase":"AI로 영상을", "step":"반복 제작의 문제", "titleLines":["AI 쇼츠 디자인", "왜 매번 다를까?"], "items":["글꼴이 바뀌고", "자막 위치가 달라지고", "영상마다 다시 수정"], "dark":false},
+      {"phrase":"리모션으로", "step":"기능 · Remotion", "titleLines":["편집 틀 고정", "내용만 교체"], "items":["글꼴·색상은 템플릿에", "자막 위치도 고정", "장면 문구·음성은 편마다 교체"], "dark":true},
+      {"phrase":"먼저 AI", "step":"활용 1 · 준비", "titleLines":["기존 템플릿을", "AI에게 열어주기"], "items":["AI 코딩 도구에서 프로젝트 열기", "고정 스타일 파일 확인", "새 대본과 음성 파일 준비"], "dark":false},
+      {"phrase":"그리고 이렇게", "step":"활용 2 · 요청문", "titleLines":["이렇게", "요청하세요"], "items":["디자인은 수정하지 마", "제목·장면 문구만 바꿔 줘", "음성 경로는 새 파일로 연결해 줘"], "dark":true},
+      {"phrase":"미리보기에서", "step":"활용 3 · 검수와 출력", "titleLines":["글자 잘림 확인", "MP4로 출력"], "items":["제목이 두 줄 안에 들어가는지", "자막이 음성과 맞는지", "미리보기 후 MP4 렌더"], "dark":false},
+      {"phrase":"이번 영상도", "step":"이번 제작의 실제 입력", "titleLines":["같은 템플릿", "새 대본 적용"], "items":["고정: ShortsGuideV1 1.0.0", "교체: 제목·장면·자막·음성"], "dark":false, "image":"episode-005/evidence.png"},
+      {"phrase":"다만 코딩", "step":"실행 조건", "titleLines":["코딩 환경 필요", "무료 조건 확인"], "items":["Node.js와 실행 환경 필요", "Remotion 무료 라이선스 조건 확인", "AI·음성 서비스 요금은 별도"], "dark":true},
+      {"phrase":"반복 제작에서", "step":"오늘의 적용", "titleLines":["다음 영상부터", "편집 틀 재사용"], "items":["템플릿 하나를 먼저 확정", "새 내용은 별도 파일로 저장", "반복 작업 하나부터 적용"], "dark":false}
+    ]
+  },
+  "006": {
+    "folder":"006-whisper",
+    "topic":"whisper-captions",
+    "title":"자막 타이핑 줄이는 Whisper 활용법: 음성에서 자막 초안까지",
+    "source":"OpenAI Whisper · faster-whisper · 자체 적용",
+    "scenes":[
+      {"phrase":"자동 자막", "step":"자막 작업의 문제", "titleLines":["자막 타이핑", "아직도 처음부터?"], "items":["말을 듣고 받아쓰기", "시간 위치까지 수동 조정", "초안부터 AI로 만들기"], "dark":false},
+      {"phrase":"위스퍼는", "step":"기능 · Whisper", "titleLines":["음성을 글로", "한국어 인식"], "items":["공개 음성 인식 모델", "음성에서 텍스트 추출", "이번 쇼츠 음성에 실제 적용"], "dark":true},
+      {"phrase":"활용 순서는", "step":"활용 1 · 추출", "titleLines":["음성 파일에서", "자막 초안 추출"], "items":["MP3·WAV 등 음성 준비", "언어를 한국어로 지정", "텍스트와 타임스탬프 추출"], "dark":false},
+      {"phrase":"그런 다음", "step":"활용 2 · AI 요청문", "titleLines":["초안은 이렇게", "다듬어 주세요"], "items":["원문과 비교해 제품명을 고쳐 줘", "한 자막은 두 줄 이내로 나눠 줘", "확실하지 않은 단어는 표시해 줘"], "dark":true},
+      {"phrase":"마지막에는", "step":"활용 3 · 실제 추출 일부", "titleLines":["자막 시간을", "영상에서 확인"], "items":["자막이 말보다 앞서지 않는지", "문장 끝이 너무 빨리 사라지는지"], "dark":false, "image":"episode-006/evidence.png"},
+      {"phrase":"로컬 실행에는", "step":"실행 조건과 비용", "titleLines":["로컬 실행", "모델 설치 필요"], "items":["컴퓨터 성능에 따라 처리 속도 차이", "이 음성 인식에는 API 호출 없음", "AI 음성 생성 요금은 별도"], "dark":true},
+      {"phrase":"자막 초안은", "step":"오늘의 적용", "titleLines":["초안은 AI로", "마지막은 직접"], "items":["제품명·숫자·고유명사 검수", "타이밍과 줄바꿈 확인", "원본 음성과 최종 비교"], "dark":false}
+    ]
+  }
+}
