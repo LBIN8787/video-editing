@@ -35,6 +35,12 @@ def check(data: dict, family: str = "source") -> tuple[list[str], list[str]]:
     for s in scenes:
         beats[s.get("beat") or ""].append(s)
 
+    # 0) 레퍼런스 채널 이름을 출처·화면에 쓰지 않는다 (구조와 기법만 벤치마킹)
+    for s in scenes:
+        for r in ("미주일기", "식스시그마", "머니크루", "AI비즈PT", "AIBizPT", "로제타"):
+            if r in s.get("label", "") or r in s["narration"] or r in json.dumps(s.get("card") or {}, ensure_ascii=False):
+                errs.append(f"#{s['id']}: 레퍼런스 채널 이름 '{r}' 이 들어 있습니다 (직접 만든 도식의 출처는 '자체 정리')")
+
     # 1) 핵심과 논리 구조
     if not (data.get("core_message") or "").strip():
         errs.append("core_message(시청자가 기억할 한 문장)가 비어 있습니다")

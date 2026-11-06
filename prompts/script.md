@@ -60,6 +60,7 @@ table(표) / headline(기사·공시 제목) / text(한 문장) / analogy(실제
 
 ## 3. 소스 표기
 - 모든 장면에 label: 'YYYY.MM.DD · 출처' (원본 영상의 날짜·출처, 카드는 근거 자료의 날짜·출처).
+  근거 자료 없이 직접 정리한 도식은 'YYYY.MM.DD · 자체 정리'. 벤치마킹한 채널 이름(미주일기 등)은 어디에도 쓰지 않습니다.
 - source_video: url 은 비우고 query 에 YouTube 검색어(회사 공식 채널·주요 언론이 나오게 구체적으로), length 는 장면 길이(초).
 - screenshot: '보도에 따르면' 같은 기사 근거 문장은 기사 헤드라인 캡처, X 게시물 근거는 그 게시물(x.com/…/status/…) 캡처.
   source.url 은 '인용 가능한 기사' 목록의 URL 만 씁니다.

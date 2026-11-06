@@ -276,6 +276,9 @@ def package(project: Project) -> None:
     user = (f"# 스타일 프로필\n{_style_block()}\n\n# 대본\n{json.dumps(scenes, ensure_ascii=False)}\n\n"
             f"# 챕터(초)\n{json.dumps(chapters, ensure_ascii=False)}")
     res = llm.structured(config.prompt("package"), user, Package).model_dump()
+    refs = ("미주일기", "식스시그마", "머니크루", "AI비즈PT", "AIBizPT", "로제타")  # 벤치마킹 채널 이름은 태그·제목에서 뺀다
+    res["tags"] = [t for t in res["tags"] if not any(r in t for r in refs)]
+    res["titles"] = [t for t in res["titles"] if not any(r in t for r in refs)] or res["titles"]
     if chapters:
         ch = "\n".join(f"{int(c['t'] // 60):02d}:{int(c['t'] % 60):02d} {c['label']}" for c in chapters)
         res["description"] = f"{res['description']}\n\n{ch}"
