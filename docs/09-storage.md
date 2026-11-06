@@ -31,8 +31,11 @@ Claude Code 와 Codex 가 **같은 GitHub 저장소**(LBIN8787/video-editing)를
 | 외부 도구 `tools/`, 외부 skill 복사본 | `python scripts/install_tools.py` |
 | 캐시 `.cache/` (ElevenLabs 음성 캐시 포함) | 자동 (ElevenLabs 캐시는 지우면 크레딧이 다시 듦 → 지우지 않기 권장) |
 
-## 4. 2026-11-06 현황
-- Drive 에 만든 것: 채널별 폴더 6개(각 영상의 원고·업로드 문구 문서 6개), `워크플로우 문서` 폴더(문서 9개), `보관 자료 (GitHub 밖)` 폴더, `ytflow 영상 목록` 문서, `benchmark_metrics.json`.
-- **아직 못 올린 것:** 영상 16개(약 693MB), 장면 소스 이미지 277개(48MB), 스타일 분석 이미지 8개(32MB), 벤치마킹·조사 자막 20개(2MB).
-  클라우드 세션에 Drive 토큰이 없어서입니다(커넥터는 파일 내용을 대화에 실어 보내는 방식이라 큰 파일을 못 옮김). 위 2의 방법 1 또는 2로 `upload --all --archive` 한 번이면 됩니다.
-- 클라우드 컨테이너는 세션이 끝나면 사라집니다. 그 전에 올리지 못한 영상은 이 세션에서 보낸 파일을 내려받거나, PC 에서 `rebuild` 로 다시 만듭니다(기획 파일은 GitHub 에 있어 같은 영상이 다시 나옵니다. 목소리·시세는 그날 값).
+## 4. 2026-11-06 현황 — 업로드 완료
+- Drive 토큰(네트워크 비밀값, drive.file 권한)으로 `python -m ytflow upload --all --archive` 실행 완료.
+- 영상 14편(프로젝트마다 final.mp4, 없으면 draft.mp4) + 자막 .srt + 업로드 문구 .txt → 채널별 폴더. 실험 프로젝트 8개는 `실험` 폴더.
+- 보관 자료 230개(장면 소스·원본 클립·조사 자막·시세·프레임 시트) → `보관 자료 (GitHub 밖)/<프로젝트>/`, 저장소 자료 25개(data·styles work).
+- 총 296개, 약 610MB. Drive 의 파일 크기를 원본과 대조해 불일치 0개.
+- 올린 기록: `projects/*/05_edit/drive.json`, `drive_archive.json` (GitHub 에 커밋됨 → Codex 도 무엇이 올라갔는지 압니다).
+- 주의: drive.file 권한 토큰은 **이 앱이 만든 파일만** 봅니다. 커넥터로 만든 폴더 안에 올리는 것은 되지만, 그 폴더의 다른 파일 목록은 API 로 보이지 않습니다.
+- 다음부터는 영상을 만든 뒤 `python -m ytflow upload <프로젝트> --archive` 한 번이면 됩니다(이미 올린 것은 건너뜀, 일시 오류는 자동 재시도).

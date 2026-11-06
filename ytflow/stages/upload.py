@@ -12,6 +12,7 @@ from __future__ import annotations
 import json
 import os
 import urllib.parse
+import urllib.error
 import urllib.request
 
 import yaml
@@ -43,6 +44,22 @@ def folder_for(project: Project) -> tuple[str, str]:
 
 
 def _upload(path, title: str, mime: str, parent: str) -> str:
+    """일시적 서버 오류(5xx·429·연결 끊김)는 4번까지 기다렸다가 처음부터 다시 올린다."""
+    import time
+    for i in range(5):
+        try:
+            return _upload_once(path, title, mime, parent)
+        except urllib.error.HTTPError as e:
+            if e.code < 500 and e.code != 429 or i == 4:
+                raise
+        except (urllib.error.URLError, ConnectionError, TimeoutError):
+            if i == 4:
+                raise
+        time.sleep(2 ** (i + 1))
+    return ""
+
+
+def _upload_once(path, title: str, mime: str, parent: str) -> str:
     size = path.stat().st_size
     meta = json.dumps({"name": title, "parents": [parent]}).encode()
     req = urllib.request.Request(f"{API}/upload/drive/v3/files?uploadType=resumable&fields=id", data=meta, method="POST",
@@ -128,10 +145,9 @@ def run(project: Project) -> None:
     cid, parent = folder_for(project)
     rec_f = edir / "drive.json"
     rec = json.loads(rec_f.read_text(encoding="utf-8")) if rec_f.exists() else {}
-    try:
-        title = project.read_json("package", "upload.json")["titles"][0]
-    except Exception:
-        title = project.state().get("name", project.path.name)
+    up_f = project.dir("package") / "upload.json"
+    title = json.loads(up_f.read_text(encoding="utf-8"))["titles"][0] if up_f.exists() \
+        else project.state().get("name", project.path.name)
     base = f"{project.path.name[:8]} {title}".replace("/", "·")[:120]
     files = [(vid, f"{base}.mp4", "video/mp4")]
     if (edir / "subs.srt").exists():
