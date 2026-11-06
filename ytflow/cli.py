@@ -5,6 +5,7 @@
   python -m ytflow run <프로젝트> [--until 단계]      # 게이트 전까지 자동 진행
   python -m ytflow approve <프로젝트> topic --pick 2  # 사람 승인
   python -m ytflow stage <프로젝트> <단계>             # 단계 하나만 (재)실행
+  python -m ytflow make --topic "주제" [--style paper]  # 자료조사~영상까지 한 번에
   python -m ytflow rebuild <프로젝트>              # 클립 받기~가편집 재생성 (PC에서 원본 클립 넣을 때)
   python -m ytflow status <프로젝트>
 """
@@ -14,20 +15,49 @@ import argparse
 
 from . import config
 from .project import GATE_AFTER, STAGES, Project
-from .stages import benchmark, clips, discover, media, writing
+from .stages import benchmark, clips, discover, media, report, sources, writing
 
 RUNNERS = {
     "discover": lambda p, a: discover.run(p, a.keywords),
     "select": lambda p, a: writing.select(p),
     "research": lambda p, a: writing.research(p),
     "script": lambda p, a: writing.script(p),
+    "sources": lambda p, a: sources.run(p),
     "clips": lambda p, a: clips.run(p),
     "voice": lambda p, a: media.voice(p),
     "subtitles": lambda p, a: media.subtitles(p),
     "assets": lambda p, a: media.assets(p),
     "assemble": lambda p, a: media.assemble(p),
     "package": lambda p, a: writing.package(p),
+    "report": lambda p, a: report.run(p),
 }
+
+
+def cmd_make(a) -> None:
+    """자료조사 → 대본 → 소스 → 영상 → 업로드 패키지 → 보고서를 한 번에 (승인 게이트는 자동 통과)."""
+
+    p = Project.create(a.name or (a.topic or "auto")[:30])
+    if a.style:
+        (p.path / "edit.yaml").write_text(f"edit:\n  style: {a.style}\n", encoding="utf-8")
+        p = Project.open(str(p.path))
+    print(f"=== make: {p.path.name} (style={a.style or 'sixsigma'})")
+    if a.topic:  # 주제를 직접 준 경우: 소스 탐색·주제 선정 생략
+        p.write_json("source", "shortlist.json", [{"title_working": a.topic, "angle": a.angle or "", "why_now": "",
+                                                   "source_video_ids": [], "hook_idea": "", "score": 100, "risks": ""}])
+        for st in ("discover", "select"):
+            p.mark_done(st)
+    else:
+        RUNNERS["discover"](p, a)
+        RUNNERS["select"](p, a)
+    stt = p.state()
+    stt["pick"] = 1
+    p.save_state(stt)
+    for g in sorted(set(GATE_AFTER.values())):
+        p.approve(g)
+    for stage in STAGES[2:]:
+        print(f"--- {stage}")
+        RUNNERS[stage](p, a)
+    print(f"\n✅ 완료: {p.path}/REPORT.md , {p.path}/05_edit/draft.mp4")
 
 
 def cmd_run(p: Project, a) -> None:
@@ -71,6 +101,13 @@ def main(argv: list[str] | None = None) -> None:
     g.add_argument("gate", choices=sorted(set(GATE_AFTER.values())))
     g.add_argument("--pick", type=int, help="topic 게이트: shortlist 번호")
 
+    mk = sub.add_parser("make", help="자료조사부터 영상·업로드 패키지까지 한 번에")
+    mk.add_argument("--topic", help="주제 (없으면 소스 탐색으로 자동 선정)")
+    mk.add_argument("--angle", help="관점·방향 메모 (선택)")
+    mk.add_argument("--name", help="프로젝트 이름 (선택)")
+    mk.add_argument("--style", choices=["sixsigma", "paper"], help="편집 스타일")
+    mk.add_argument("--keywords", nargs="*")
+
     rb = sub.add_parser("rebuild", help="소스 클립 받기 → 음성 → 화면 → 자막 → 가편집을 한 번에 (원본 클립을 넣은 뒤)")
     rb.add_argument("project")
 
@@ -96,9 +133,11 @@ def main(argv: list[str] | None = None) -> None:
             p.save_state(stt)
         p.approve(a.gate)
         print(f"승인: {a.gate}. 이어서:  python -m ytflow run {p.path.name}")
+    elif a.cmd == "make":
+        cmd_make(a)
     elif a.cmd == "rebuild":
         p = Project.open(a.project)
-        for stage in ("clips", "voice", "assets", "subtitles", "assemble"):
+        for stage in ("clips", "voice", "assets", "subtitles", "assemble", "report"):
             RUNNERS[stage](p, a)
     elif a.cmd == "status":
         p = Project.open(a.project)

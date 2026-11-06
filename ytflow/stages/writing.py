@@ -61,22 +61,44 @@ def chosen_topic(project: Project) -> dict:
 
 
 # ---------------------------------------------------------------- 3. 리서치
+class Article(BaseModel):
+    url: str
+    title: str
+    publisher: str
+    date: str = Field(description="YYYY-MM-DD (모르면 빈 문자열)")
+    facts: list[str] = Field(description="이 기사가 뒷받침하는 팩트 번호 (예: F1)")
+
+
+class ArticleList(BaseModel):
+    articles: list[Article]
+
+
 def research(project: Project) -> None:
+    """웹 검색으로 1차 출처를 확인해 팩트시트를 만들고, 인용 가능한 기사 목록을 뽑는다.
+    산출물: 01_research/factsheet.md, 01_research/articles.json"""
     topic = chosen_topic(project)
     sub_dir = project.dir("research") / "subs"
     transcripts = []
-    for vid in topic["source_video_ids"][:5]:
-        vtt = yt.download_subs(vid, sub_dir)
+    for vid in topic.get("source_video_ids", [])[:5]:
+        try:
+            vtt = yt.download_subs(vid, sub_dir)
+        except Exception:
+            vtt = None
         if vtt:
             text = " ".join(c["text"] for c in yt.parse_vtt(vtt))
             transcripts.append({"video_id": vid, "transcript": text[:20000]})
     notes = project.dir("research") / "my_notes.md"
     extra = notes.read_text(encoding="utf-8") if notes.exists() else ""
-    user = (f"# 주제\n{json.dumps(topic, ensure_ascii=False)}\n\n# 소스 영상 자막\n"
-            f"{json.dumps(transcripts, ensure_ascii=False)}\n\n# 제작자 메모/추가 자료\n{extra}")
-    md = llm.text(config.prompt("research"), user)
+    from datetime import date
+    user = (f"# 오늘 날짜\n{date.today().isoformat()}\n\n# 주제\n{json.dumps(topic, ensure_ascii=False)}\n\n"
+            f"# 소스 영상 자막 (있으면)\n{json.dumps(transcripts, ensure_ascii=False)}\n\n# 제작자 메모/추가 자료\n{extra}")
+    print("[research] 웹 리서치 중 (수 분 걸릴 수 있음)")
+    md = llm.text(config.prompt("research"), user, web=True)
     (project.dir("research") / "factsheet.md").write_text(md, encoding="utf-8")
-    print(f"[research] {project.dir('research')}/factsheet.md  (출처 표시된 항목만 대본에 사용됩니다)")
+    arts = llm.structured("팩트시트에 인용된 기사·공시·보도자료를 목록으로 뽑으세요. URL 이 적힌 것만, 팩트시트에 있는 그대로.",
+                          md, ArticleList)
+    project.write_json("research", "articles.json", [x.model_dump() for x in arts.articles])
+    print(f"[research] {project.dir('research')}/factsheet.md · 기사 {len(arts.articles)}건")
     project.mark_done("research")
 
 
@@ -86,7 +108,8 @@ class Source(BaseModel):
     start: str = Field(description="시작 'm:ss' (모르면 빈 문자열)")
     end: str = Field(description="끝 'm:ss' (모르면 빈 문자열)")
     find: str = Field(description="구간을 모를 때 자막에서 찾을 키워드 (아니면 빈 문자열)")
-    length: float = Field(description="find 사용 시 클립 길이(초)")
+    length: float = Field(description="클립 길이(초)")
+    query: str = Field(description="url 을 모를 때 YouTube 에서 찾을 검색어 (sources 단계가 영상을 고른다)")
 
 
 class CardItem(BaseModel):
@@ -130,8 +153,10 @@ def script(project: Project) -> None:
     cpm = (prof.get("targets") or {}).get("chars_per_minute") or pcfg.get("chars_per_minute", 330)
     minutes = (prof.get("targets") or {}).get("video_minutes") or pcfg.get("target_minutes", 9)
     fact = (project.dir("research") / "factsheet.md").read_text(encoding="utf-8")
+    af = project.dir("research") / "articles.json"
+    arts = af.read_text(encoding="utf-8") if af.exists() else "[]"
     user = (f"# 스타일 프로필\n{_style_block()}\n\n# 주제\n{json.dumps(topic, ensure_ascii=False)}\n\n"
-            f"# 팩트시트\n{fact}\n\n# 분량\n약 {minutes}분, 분당 {cpm}자 → 내레이션 총 {int(minutes * cpm)}자 내외")
+            f"# 팩트시트\n{fact}\n\n# 인용 가능한 기사 (screenshot 장면의 source.url 로만 사용)\n{arts}\n\n# 분량\n약 {minutes}분, 분당 {cpm}자 → 내레이션 총 {int(minutes * cpm)}자 내외")
     res = llm.structured(config.prompt("script"), user, Script, max_tokens=32000)
     data = res.model_dump()
     project.write_json("script", "scenes.json", data)

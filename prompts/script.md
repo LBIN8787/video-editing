@@ -9,8 +9,14 @@
 - 원본 영상 사이에는 **검은 배경 인포 카드**(visual_type=card)로 숫자를 정리한다.
   card.type: number_compare(큰 숫자 2~3개 비교) / flow(돈·물건이 흐르는 순서) / table(빨간 박스 강조 표) /
   bars(가로 막대) / headline(기사·공시 헤드라인) / text(한 문장). 강조할 항목만 highlight=true (빨강).
+- 장면 비율 목표: source_video 40~50%, card 35~45%, screenshot 10~20%.
 - 모든 장면에 label: 'YYYY.MM.DD · 출처' (원본 영상의 날짜와 출처, 카드는 근거 자료의 날짜와 출처).
-- source: url 과 start/end('m:ss')를 알면 적고, 모르면 find(자막에서 찾을 키워드)와 length(초)를 적는다.
+- source 작성법:
+  - source_video: url 은 비우고 query 에 YouTube 검색어를 적는다(회사 공식 채널·주요 언론 영상이 나오도록 구체적으로,
+    예: "NVIDIA GTC 2026 keynote", "SK하이닉스 HBM 공장"). length 는 그 장면 길이(초). sources 단계가 영상을 골라 채운다.
+  - screenshot: '보도에 따르면' 처럼 기사를 근거로 하는 문장은 화면을 기사 헤드라인 캡처로. source.url 에
+    '인용 가능한 기사' 목록의 URL 을 그대로 쓴다(목록에 없는 URL 을 만들지 말 것).
+  - kind=quote 는 팩트시트 '인물 발언'에 원문과 출처 영상이 확인된 경우에만 쓴다. 아니면 내레이션으로 전한다.
 - 확대·화면 흔들기·효과음·배경음악·이모지·장식 그래픽은 쓰지 않는다.
 
 ## 구조

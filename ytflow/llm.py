@@ -57,13 +57,15 @@ def _check(msg) -> None:
 
 
 # ---------------------------------------------------------------- claude-cli 백엔드
-def _cli(system: str, user: str, schema: dict | None = None) -> dict:
+def _cli(system: str, user: str, schema: dict | None = None, tools: list[str] | None = None) -> dict:
     exe = shutil.which("claude")
     if not exe:
         raise SystemExit("claude CLI 가 없습니다. `npm install -g @anthropic-ai/claude-code` 후 `claude` 로 로그인하세요.")
     cfg = _cfg()
     cmd = [exe, "-p", "--output-format", "json", "--system-prompt", system,
-           "--tools", "", "--no-session-persistence", "--model", cfg.get("cli_model", "opus")]
+           "--tools", ",".join(tools or []), "--no-session-persistence", "--model", cfg.get("cli_model", "opus")]
+    if tools:  # 비대화 실행이므로 지정한 도구(웹 검색 등)만 미리 허용
+        cmd += ["--allowedTools", ",".join(tools)]
     if schema is not None:
         cmd += ["--json-schema", json.dumps(schema, ensure_ascii=False)]
     proc = subprocess.run(cmd, input=user, capture_output=True, text=True, timeout=cfg.get("cli_timeout", 1800))
@@ -89,10 +91,13 @@ def _backend() -> str:
 
 
 # ---------------------------------------------------------------- 공용 진입점
-def text(system: str, user: str, max_tokens: int = 64000) -> str:
-    """긴 마크다운 출력(대본 등). API 는 스트리밍으로 받아 타임아웃을 피한다."""
+def text(system: str, user: str, max_tokens: int = 64000, web: bool = False) -> str:
+    """긴 마크다운 출력(대본·리서치). web=True 면 웹 검색·페이지 읽기를 허용한다.
+    API 는 스트리밍으로 받아 타임아웃을 피한다."""
     if _backend() == "claude-cli":
-        return _cli(system, user).get("result", "").strip()
+        return _cli(system, user, tools=["WebSearch", "WebFetch"] if web else None).get("result", "").strip()
+    if web:
+        return _api_web(system, user, max_tokens)
     with client().messages.stream(
         max_tokens=max_tokens,
         system=system,
@@ -100,6 +105,22 @@ def text(system: str, user: str, max_tokens: int = 64000) -> str:
         **_common(),
     ) as stream:
         msg = stream.get_final_message()
+    _check(msg)
+    return "".join(b.text for b in msg.content if b.type == "text").strip()
+
+
+def _api_web(system: str, user: str, max_tokens: int) -> str:
+    """API 백엔드: 서버측 웹 검색·페이지 읽기 도구를 붙여 리서치."""
+    tools = [{"type": "web_search_20260209", "name": "web_search", "max_uses": 15},
+             {"type": "web_fetch_20260209", "name": "web_fetch", "max_uses": 10}]
+    messages = [{"role": "user", "content": user}]
+    for _ in range(5):  # pause_turn 이면 이어서 진행
+        with client().messages.stream(max_tokens=max_tokens, system=system, messages=messages, tools=tools,
+                                      **_common()) as stream:
+            msg = stream.get_final_message()
+        if msg.stop_reason != "pause_turn":
+            break
+        messages.append({"role": "assistant", "content": msg.content})
     _check(msg)
     return "".join(b.text for b in msg.content if b.type == "text").strip()
 
