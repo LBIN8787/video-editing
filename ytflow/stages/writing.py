@@ -116,17 +116,22 @@ class Source(BaseModel):
 
 
 class CardItem(BaseModel):
-    label: str
-    value: str
-    sub: str
+    label: str = Field(description="항목 이름 (12자 이내). chart 카드면 표시할 날짜 YYYY-MM-DD")
+    value: str = Field(description="값 (10자 이내). bars·line 은 순수 숫자")
+    sub: str = Field(description="보조 설명 (18자 이내)")
     highlight: bool
+    icon: str = Field("", description="선 아이콘 이름 (ytflow.stages.icons.names(), 예: factory, cpu, zap, trending-down). 없으면 빈 문자열")
 
 
 class Card(BaseModel):
-    type: str = Field(description="number_compare | flow | table | bars | line | headline | text")
-    title: str
+    type: str = Field(description="chart | number_compare | flow | table | bars | line | headline | text")
+    title: str = Field(description="카드 제목 (24자 이내)")
     items: list[CardItem]
-    note: str
+    note: str = Field(description="아래 한 줄 메모 (36자 이내, 없으면 빈 문자열)")
+    ticker: str = Field("", description="chart 카드: 시세 종목 코드 (NVDA, 005930.KS, ^IXIC 등). 렌더러가 실제 가격을 받아 그린다")
+    period: str = Field("", description="chart 카드: 5d | 1mo | 3mo | 6mo | 1y | 2y | 5y")
+    icon: str = Field("", description="text 카드의 큰 아이콘 이름 (선택)")
+    unit: str = Field("", description="line 카드 값의 단위 (예: 달러, %, USD, KRW)")
 
 
 class Scene(BaseModel):

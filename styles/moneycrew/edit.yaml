@@ -5,11 +5,13 @@ edit:
   style_ref: moneycrew
   font: "NanumGothic"
   subtitle_size: 44
-  subtitle_position: top      # 자막은 화면 위쪽 가운데
+  subtitle_position: bottom   # 사용자 요청으로 아래 (레퍼런스는 위쪽)
   subtitle_dark: true         # 어두운 글씨, 상자·외곽선 없음
   subtitle_box: false
   emphasis_color: "&H00384FF0"   # 강조 = #F04F38 (빨강)
   label_position: bottom_right
+  push_in: 0.025              # 장면마다 천천히 다가가기 (2.5%)
+  fade_in: 0.25               # 배경색에서 0.25초 페이드
   paper:                      # 애니메이션 엔진 색 (flat 렌더러도 이 이름을 씀)
     base: '#F7F6F0'
     ink: '#1C2B3A'

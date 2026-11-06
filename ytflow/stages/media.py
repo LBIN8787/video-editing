@@ -232,8 +232,15 @@ def assets(project: Project, auto_cards: bool = True) -> None:
     adir = project.dir("assets")
     dfile = project.dir("voice") / "durations.json"
     durs = {int(k): v for k, v in json.loads(dfile.read_text()).items()} if dfile.exists() else {}
+    from . import marketdata
+    qa = {}
     for s in scenes:
         sid = s["id"]
+        card = s.get("card")
+        if card and card.get("ticker"):  # 실제 시세 차트: 데이터 받아 카드에 넣기 (01_research/prices 캐시)
+            pdir = project.dir("research") / "prices"
+            card = dict(card, type="chart", _series=marketdata.fetch(card["ticker"], card.get("period") or "6mo", pdir),
+                        _currency=marketdata.currency(card["ticker"], pdir))
         for old in list(adir.glob(f"scene_{sid:03d}_auto.*")) + list(adir.glob(f"scene_{sid:03d}_anim.mp4")) \
                 + list(adir.glob(f"scene_{sid:03d}_card.png")):
             old.unlink()
@@ -242,13 +249,20 @@ def assets(project: Project, auto_cards: bool = True) -> None:
         pasted = next((p for k in ("_shot", "_temp") for p in adir.glob(f"scene_{sid:03d}{k}.*")), None)
         d = durs.get(sid, 5.0) + GAP
         brief = f"{s['visual_type']} · {s['visual_brief']}"
+        if style == "sixsigma" and card:  # 식스시그마 카드도 같은 엔진(검은 배경 프로필)으로 → 겹침 방지·차트·아이콘
+            from . import flat as flat_mod
+            flat_mod.CURRENT["name"] = "dark"
+            qa[sid] = flat_mod.render_card(card, adir / f"scene_{sid:03d}_anim.mp4", d, seed=sid)
+            flat_mod.CURRENT["name"] = "flat"
+            print(f"[assets] #{sid} sixsigma card")
+            continue
         if style in ("paper", "flat"):  # 둘 다 애니메이션 MP4 렌더러 (같은 인터페이스)
             from . import flat as flat_mod
             from . import paper as paper_mod
             paper = flat_mod if style == "flat" else paper_mod
             out = adir / f"scene_{sid:03d}_anim.mp4"
-            if s.get("card"):
-                paper.render_card(s["card"], out, d, seed=sid)
+            if card:
+                qa[sid] = paper.render_card(card, out, d, seed=sid)
             elif own is None and pasted is not None:
                 paper.render_paste(pasted, out, d, caption=s.get("label", ""), seed=sid)
             elif own is None and auto_cards:
@@ -261,6 +275,9 @@ def assets(project: Project, auto_cards: bool = True) -> None:
                 cards.shot_on_black(pasted, adir / f"scene_{sid:03d}_card.png")
             elif own is None and pasted is None and auto_cards:
                 cards.placeholder(adir / f"scene_{sid:03d}_auto.png", brief)
+    project.write_json("assets", "layout_qa.json", {str(k): v for k, v in qa.items() if v})
+    if any(qa.values()):
+        print(f"[assets] ⚠ 겹침을 자동으로 못 푼 장면 {sum(1 for v in qa.values() if v)}개 → 04_assets/layout_qa.json")
     f = project.dir("assets") / "shotlist.csv"
     missing = 0
     with open(f, "w", newline="", encoding="utf-8-sig") as fh:
@@ -291,16 +308,30 @@ def assemble(project: Project) -> None:
     work.mkdir(exist_ok=True)
     fit = f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},setsar=1,fps={fps}"
 
+    # 화면 움직임: 생성한 장면은 천천히 다가가고(push_in), 모든 장면은 배경색에서 부드럽게 나타난다(fade_in)
+    push = float(ecfg.get("push_in", 0.0))
+    fade = float(ecfg.get("fade_in", 0.0))
+    bgc = "0x" + str((ecfg.get("paper") or {}).get("base", "#000000")).lstrip("#") if ecfg.get("style") != "sixsigma" else "black"
+
+    def polish(d: float, generated: bool) -> str:
+        f = ""
+        if generated and push > 0:
+            f += f",scale=w='{W}*(1+{push}*t/{d:.3f})':h=-2:eval=frame:flags=bicubic,crop={W}:{H}"
+        if fade > 0:
+            f += f",fade=t=in:st=0:d={fade}:color={bgc}"
+        return f
+
     clips, audios = [], []
     for row in timeline:
         sid, d = row["scene"], row["duration"]
         out = work / f"v_{sid:03d}.mp4"
         src = find_visual(project, sid)
+        gen = src is not None and any(src.stem.endswith(k) for k in ("_anim", "_card", "_shot", "_temp", "_auto"))
         if src is None:
             _ff(["-f", "lavfi", "-i", f"color=c=black:s={W}x{H}:r={fps}:d={d}",
                  "-c:v", "libx264", "-pix_fmt", "yuv420p", str(out)])
         elif src.suffix.lower() in (".mp4", ".mov"):
-            _ff(["-stream_loop", "-1", "-i", str(src), "-t", str(d), "-an", "-vf", fit,
+            _ff(["-stream_loop", "-1", "-i", str(src), "-t", str(d), "-an", "-vf", fit + polish(d, gen),
                  "-c:v", "libx264", "-pix_fmt", "yuv420p", str(out)])
         else:
             frames = max(int(d * fps), 1)
@@ -310,7 +341,7 @@ def assemble(project: Project) -> None:
             # 차트·카드는 가장자리가 잘리면 안 되므로 줌은 사진류에만
             if not (ecfg.get("kenburns", False) and row.get("visual_type") in ("ai_image", "stock", "screenshot", "meme")):
                 vf = fit
-            _ff(["-loop", "1", "-i", str(src), "-t", str(d), "-vf", vf,
+            _ff(["-loop", "1", "-i", str(src), "-t", str(d), "-vf", vf + polish(d, gen),
                  "-c:v", "libx264", "-pix_fmt", "yuv420p", str(out)])
         clips.append(out)
         a = work / f"a_{sid:03d}.wav"

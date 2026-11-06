@@ -57,6 +57,28 @@ def _isnum(v) -> bool:
         return False
 
 
+def layout_qa(p: Project) -> bool:
+    """모든 카드를 정지 화면으로 그려 배치 관리자가 못 푼 겹침을 모은다 (렌더링 없이 빠르게)."""
+    from .stages import flat, paper
+    st = config.load("pipeline").get("edit", {}).get("style", "sixsigma")
+    flat.CURRENT["name"] = "dark" if st == "sixsigma" else "flat"
+    ctx = flat._flat() if st in ("flat", "sixsigma") else __import__("contextlib").nullcontext()
+    bad = 0
+    with ctx:
+        for s in p.read_json("script", "scenes.json")["scenes"]:
+            c = s.get("card")
+            if not c:
+                continue
+            S = paper.Scene(s["id"])
+            paper.LAYOUT.get(c.get("type"), paper.l_text)(S, c)
+            if S.issues:
+                bad += 1
+                print(f"✗ #{s['id']} {c.get('type')}: " + "; ".join(S.issues))
+    flat.CURRENT["name"] = "flat"
+    print("✓ 겹침 없음" if not bad else f"겹침 남은 카드 {bad}개 → 대본에서 글자를 줄이거나 장면을 나누세요")
+    return not bad
+
+
 def validate(p: Project) -> bool:
     """대본 스키마·장면 규칙 점검. 문제를 출력하고 통과 여부를 돌려준다."""
     from .stages.cards import RENDER
@@ -178,6 +200,8 @@ def main(argv: list[str] | None = None) -> None:
 
     sub.add_parser("styles", help="스타일 라이브러리 목록")
     sub.add_parser("schemas", help="에이전트가 직접 쓰는 파일들의 JSON Schema 를 schemas/ 에 내보내기")
+    qa = sub.add_parser("qa", help="카드 화면을 렌더링해 글자·그래프 겹침과 안전 영역 침범을 점검")
+    qa.add_argument("project")
     va = sub.add_parser("validate", help="프로젝트의 대본(scenes.json)과 파일을 점검")
     va.add_argument("project")
 
@@ -218,6 +242,8 @@ def main(argv: list[str] | None = None) -> None:
         style.run(a.name, a.videos, a.title)
     elif a.cmd == "schemas":
         export_schemas()
+    elif a.cmd == "qa":
+        raise SystemExit(0 if layout_qa(Project.open(a.project)) else 1)
     elif a.cmd == "validate":
         raise SystemExit(0 if validate(Project.open(a.project)) else 1)
     elif a.cmd == "styles":

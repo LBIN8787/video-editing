@@ -10,6 +10,18 @@
   card.type: number_compare(큰 숫자 2~3개 비교) / flow(돈·물건이 흐르는 순서) / table(빨간 박스 강조 표) / line(주가·지표 추이, items=시점별 값) /
   bars(가로 막대) / headline(기사·공시 헤드라인) / text(한 문장). 강조할 항목만 highlight=true (빨강).
   bars·line 의 value 는 순수 숫자만 쓴다(예: "181.6", "-9.3"). 단위·설명은 label·sub 에 쓴다. line 은 시점 5개 이상.
+  **주가·지수 움직임은 chart 카드**로: ticker(예: NVDA, 005930.KS, 000660.KS, ^IXIC, ^SOX)와 period 를 쓰면
+  실제 시세로 캔들/선 차트를 그리고 가격 눈금·최고·최저·마지막 가격을 자동으로 적는다.
+  items 에는 사건 날짜(label=YYYY-MM-DD)와 설명(sub, 예: "-9.3%")을 넣어 차트 위에 표시한다.
+- 화면 글자 길이 제한(겹침 방지): 카드 title 24자, item label 12자, value 10자, sub 18자, note 36자 이내.
+  넘치면 장면을 둘로 나눈다. 한 카드의 items 는 최대 number_compare 3, flow 5, table 6, bars 8.
+- 아이콘: 카드 항목(icon)과 text 카드(icon)에 선 아이콘을 넣어 화면을 풍성하게 한다. 쓸 수 있는 이름:
+  factory warehouse truck ship container cpu microchip memory-stick server database cloud zap battery plug fuel
+  building building-2 landmark store house globe earth map-pin dollar-sign coins banknote wallet piggy-bank
+  chart-line chart-column chart-candlestick trending-up trending-down percent calculator scale gavel file-text
+  newspaper calendar clock hourglass users user handshake briefcase brain bot cog wrench shield shield-alert
+  triangle-alert circle-check ban siren megaphone smartphone laptop rocket atom lightbulb target search layers
+  network link crane construction car plane flag crown trophy
 - 장면 비율 목표: source_video 40~50%, card 35~45%, screenshot 10~20%.
 - 모든 장면에 label: 'YYYY.MM.DD · 출처' (원본 영상의 날짜와 출처, 카드는 근거 자료의 날짜와 출처).
 - source 작성법:

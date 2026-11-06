@@ -3,11 +3,12 @@
     "Card": {
       "properties": {
         "type": {
-          "description": "number_compare | flow | table | bars | line | headline | text",
+          "description": "chart | number_compare | flow | table | bars | line | headline | text",
           "title": "Type",
           "type": "string"
         },
         "title": {
+          "description": "카드 제목 (24자 이내)",
           "title": "Title",
           "type": "string"
         },
@@ -19,7 +20,32 @@
           "type": "array"
         },
         "note": {
+          "description": "아래 한 줄 메모 (36자 이내, 없으면 빈 문자열)",
           "title": "Note",
+          "type": "string"
+        },
+        "ticker": {
+          "default": "",
+          "description": "chart 카드: 시세 종목 코드 (NVDA, 005930.KS, ^IXIC 등). 렌더러가 실제 가격을 받아 그린다",
+          "title": "Ticker",
+          "type": "string"
+        },
+        "period": {
+          "default": "",
+          "description": "chart 카드: 5d | 1mo | 3mo | 6mo | 1y | 2y | 5y",
+          "title": "Period",
+          "type": "string"
+        },
+        "icon": {
+          "default": "",
+          "description": "text 카드의 큰 아이콘 이름 (선택)",
+          "title": "Icon",
+          "type": "string"
+        },
+        "unit": {
+          "default": "",
+          "description": "line 카드 값의 단위 (예: 달러, %, USD, KRW)",
+          "title": "Unit",
           "type": "string"
         }
       },
@@ -35,20 +61,29 @@
     "CardItem": {
       "properties": {
         "label": {
+          "description": "항목 이름 (12자 이내). chart 카드면 표시할 날짜 YYYY-MM-DD",
           "title": "Label",
           "type": "string"
         },
         "value": {
+          "description": "값 (10자 이내). bars·line 은 순수 숫자",
           "title": "Value",
           "type": "string"
         },
         "sub": {
+          "description": "보조 설명 (18자 이내)",
           "title": "Sub",
           "type": "string"
         },
         "highlight": {
           "title": "Highlight",
           "type": "boolean"
+        },
+        "icon": {
+          "default": "",
+          "description": "선 아이콘 이름 (ytflow.stages.icons.names(), 예: factory, cpu, zap, trending-down). 없으면 빈 문자열",
+          "title": "Icon",
+          "type": "string"
         }
       },
       "required": [

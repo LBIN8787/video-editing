@@ -11,17 +11,25 @@ from pathlib import Path
 
 from . import paper
 
-FLAT_PROFILE = {"texture": False, "wobble": 0.0, "tape": False, "underline": False, "top": 200, "tilt": False,
+FLAT_PROFILE = {"texture": False, "wobble": 0.0, "tape": False, "underline": False, "top": 130, "tilt": False,
                 "mark": "box",
                 "fonts": {"title": paper.SANS_X, "value": paper.SANS_X, "box": paper.SANS,
                           "note": paper.SANS, "label": paper.SANS}}
+
+
+# 식스시그마(검은 배경 미니멀): 같은 엔진, 고딕 보통 굵기, 강조는 상자
+DARK_PROFILE = dict(FLAT_PROFILE, top=130,
+                    fonts={"title": paper.SANS, "value": paper.SANS, "box": paper.SANS,
+                           "note": paper.SANS, "label": paper.FONT_DIR / "NanumGothic-Regular.ttf"})
+PROFILES = {"flat": FLAT_PROFILE, "dark": DARK_PROFILE}
+CURRENT = {"name": "flat"}
 
 
 @contextmanager
 def _flat():
     old = dict(paper.PROFILE)
     paper.PROFILE.clear()
-    paper.PROFILE.update(FLAT_PROFILE)
+    paper.PROFILE.update(PROFILES[CURRENT["name"]])
     try:
         yield
     finally:
@@ -29,9 +37,9 @@ def _flat():
         paper.PROFILE.update(old)
 
 
-def render_card(card: dict, out: Path, duration: float, seed: int = 1) -> None:
+def render_card(card: dict, out: Path, duration: float, seed: int = 1) -> list:
     with _flat():
-        paper.render_card(card, out, duration, seed)
+        return paper.render_card(card, out, duration, seed)
 
 
 def render_paste(image_path: Path, out: Path, duration: float, caption: str = "", seed: int = 1) -> None:
