@@ -10,6 +10,8 @@ PROMPT_DIR = ROOT / "prompts"
 DATA_DIR = ROOT / "data"          # 벤치마킹 원자료 / 스타일 프로필
 PROJECTS_DIR = ROOT / "projects"  # 영상 1편 = 프로젝트 폴더 1개
 STYLES_DIR = ROOT / "styles"      # 편집 스타일 라이브러리 (스타일 1개 = 폴더 1개)
+CHANNELS_DIR = ROOT / "channels"  # 운영 채널 (채널 1개 = 폴더 1개: channel.yaml · episodes.md)
+FORMATS_DIR = ROOT / "formats"    # 영상 형식: longform(장편 칼럼·보고서) | shorts(짧은 안내)
 
 
 _OVERRIDE: dict = {}
@@ -65,3 +67,16 @@ def style_family(edit: dict | None = None) -> str:
     """edit.family 가 있으면 그것, 없으면 렌더러로 추정 (sixsigma→source, paper·flat→infographic)."""
     edit = edit if edit is not None else (load("pipeline").get("edit") or {})
     return edit.get("family") or _RENDERER_FAMILY.get(edit.get("style", ""), "source")
+
+
+def channel(cid: str) -> dict:
+    f = CHANNELS_DIR / cid / "channel.yaml"
+    if not f.exists():
+        raise SystemExit(f"채널이 없습니다: {cid} (python -m ytflow channels)")
+    return yaml.safe_load(f.read_text(encoding="utf-8")) or {}
+
+
+def video_format() -> str:
+    """longform | shorts. 프로젝트 edit.yaml 의 format, 없으면 렌더러로 추정."""
+    data = load("pipeline")
+    return data.get("format") or ("shorts" if (data.get("edit") or {}).get("style") == "shorts" else "longform")

@@ -1,13 +1,17 @@
 # AGENTS.md — ytflow (영상편집 자동화)
 
 이 저장소는 **유튜브 영상 제작 워크플로우**를 코드와 문서로 담은 것입니다.
+조사해서 글로 정리하던 일(대화형 LLM 의 답을 다듬던 일)을 이어서, 그 글을 **원고 → 대본 → 화면 → 영상**으로 바꾸는 반복 제작 라인입니다.
+롱폼은 장편 칼럼·보고서 분석, 쇼츠는 짧은 주제 안내입니다. 편집 스타일 하나가 유튜브 채널 하나입니다(`channels/`).
 주제 선정 → 소스 탐색 → 자료조사 → 대본 → 편집점 → 편집 스타일 → 자막 → 업로드 준비 순서로 진행합니다.
 Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를 따라 **같은 절차로** 작업합니다.
 
 ## 먼저 읽을 것
 | 하려는 일 | 읽을 파일 |
 |---|---|
+| 채널 회차 만들기 (반복 운영) | `skills/channel-run/SKILL.md`, `channels/README.md`, `docs/06-operations.md` |
 | 영상 1편 만들기 | `skills/video-make/SKILL.md` |
+| 형식: 롱폼 칼럼·보고서 / 쇼츠 안내 | `formats/README.md` |
 | 자료조사 / 대본 / 소스 / 편집만 | `skills/video-research`, `video-script`, `video-sources`, `video-edit` |
 | 편집 스타일 고르기·적용 | `styles/README.md`(계열 구분), `styles/<id>/STYLE.md`, `skills/edit-style-<id>` |
 | 새 편집 스타일 추가 (레퍼런스 영상 분석) | `skills/edit-style-new/SKILL.md` |
@@ -33,7 +37,9 @@ python -m ytflow --help
 
 ## 주요 명령
 ```bash
-python -m ytflow make --style-ref <스타일id> [--topic "주제"]   # 전체 자동
+python -m ytflow make --channel <채널id> [--topic "주제" | --from-text 조사글.md]   # 채널 규칙으로 한 편
+python -m ytflow make --style-ref <스타일id> [--topic "주제"]   # 스타일만 지정해 한 편
+python -m ytflow channels                                       # 채널 목록
 python -m ytflow stage <프로젝트> <단계>                          # 단계 하나
 python -m ytflow rebuild <프로젝트>                               # 소스 넣은 뒤 재생성
 python -m ytflow validate <프로젝트>                              # 대본 점검 (직접 쓴 뒤 필수)
@@ -70,8 +76,11 @@ python -m ytflow styles | schemas | status <프로젝트>
 ## 폴더
 | 경로 | 내용 |
 |---|---|
+| `channels/` | 운영 채널: `channel.yaml`(형식·스타일·키워드·분량), `README.md`, `episodes.md`(회차 기록) |
+| `formats/` | 영상 형식: 롱폼(칼럼·보고서) / 쇼츠(짧은 안내) 원고 구조 |
+| `tools/external.json` | 외부 편집 도구 고정 버전 (HyperFrames, ffmpeg-skill). 본체는 설치 후 `tools/` 에 (커밋 안 함) |
 | `ytflow/` | 파이프라인 코드 |
-| `ytflow/stages/` | 단계별 코드. 렌더러는 `cards.py`(sixsigma), `paper.py`(paper), `flat.py`(flat) |
+| `ytflow/stages/` | 단계별 코드. 렌더러는 `cards.py`(sixsigma), `paper.py`(paper), `flat.py`(flat), `hyper.py`(미주일기 카드 HTML), 마스터링 `finish.py` |
 | `prompts/` | 단계별 LLM 지시문 |
 | `config/` | 채널·파이프라인 설정 |
 | `styles/` | 편집 스타일 라이브러리 |

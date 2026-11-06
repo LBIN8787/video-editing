@@ -16,6 +16,7 @@
 from __future__ import annotations
 
 import argparse
+from pathlib import Path
 import yaml
 
 from . import config
@@ -26,6 +27,7 @@ RUNNERS = {
     "discover": lambda p, a: discover.run(p, a.keywords),
     "select": lambda p, a: writing.select(p),
     "research": lambda p, a: writing.research(p),
+    "article": lambda p, a: writing.article(p),
     "script": lambda p, a: writing.script(p),
     "sources": lambda p, a: sources.run(p),
     "clips": lambda p, a: clips.run(p),
@@ -128,7 +130,18 @@ def validate(p: Project) -> bool:
 def cmd_make(a) -> None:
     """자료조사 → 대본 → 소스 → 영상 → 업로드 패키지 → 보고서를 한 번에 (승인 게이트는 자동 통과)."""
 
-    p = Project.create(a.name or (a.topic or "auto")[:30])
+    ch = config.channel(a.channel) if a.channel else {}
+    if ch.get("format") == "shorts":  # 쇼츠 채널은 쇼츠 파이프라인으로
+        from .stages import shorts
+        p = shorts.make(a.name, None, a.topic)
+        _log_episode(ch["id"], p)
+        return
+    imported = Path(a.from_text).read_text(encoding="utf-8") if a.from_text else ""
+    if imported and not a.topic:  # 가져온 글의 첫 제목을 주제로
+        a.topic = next((l.lstrip("# ").strip() for l in imported.splitlines() if l.strip()), "가져온 글")[:60]
+    p = Project.create(a.name or ((ch.get("id", "") + "-") if ch else "") + (a.topic or "auto")[:30])
+    if ch:
+        a.style_ref = a.style_ref or ch.get("style_ref")
     if not a.style_ref and not a.style:  # 계열의 기본 스타일 (자체 제작 = 미주일기)
         a.style_ref = (config.load("pipeline").get("default_styles") or {}).get(a.family or "infographic")
     if a.style_ref:  # 분석한 레퍼런스의 설정을 그대로 가져온다
@@ -136,6 +149,15 @@ def cmd_make(a) -> None:
         if not ref.exists():
             raise SystemExit(f"먼저 실행: python -m ytflow style {a.style_ref} <레퍼런스 영상들>")
         (p.path / "edit.yaml").write_text(ref.read_text(encoding="utf-8"), encoding="utf-8")
+    if ch:  # 채널 설정을 프로젝트에 얹는다: 분야·키워드·분량·형식
+        import yaml as _y
+        cur = _y.safe_load((p.path / "edit.yaml").read_text(encoding="utf-8")) if (p.path / "edit.yaml").exists() else {}
+        cur.update({"channel": ch["id"], "format": ch.get("format", "longform"), "channel_niche": ch.get("niche", "")})
+        cur.setdefault("discover", {})["seed_keywords"] = ch.get("seed_keywords") or []
+        cur.setdefault("script", {})["target_minutes"] = ch.get("target_minutes", 9)
+        (p.path / "edit.yaml").write_text(_y.safe_dump(cur, allow_unicode=True, sort_keys=False), encoding="utf-8")
+    if imported:
+        (p.dir("source") / "input.md").write_text(imported, encoding="utf-8")
     if a.style:
         import yaml as _y
         cur = _y.safe_load((p.path / "edit.yaml").read_text(encoding="utf-8")) if (p.path / "edit.yaml").exists() else {}
@@ -159,7 +181,27 @@ def cmd_make(a) -> None:
     for stage in STAGES[2:]:
         print(f"--- {stage}")
         RUNNERS[stage](p, a)
-    print(f"\n✅ 완료: {p.path}/REPORT.md , {p.path}/05_edit/draft.mp4")
+    if ch:
+        _log_episode(ch["id"], p)
+    print(f"\n✅ 완료: {p.path}/REPORT.md , {p.path}/05_edit/final.mp4")
+
+
+def _log_episode(cid: str, p: Project) -> None:
+    """channels/<id>/episodes.md 에 한 줄 추가 (같은 프로젝트면 갱신)."""
+    from .stages.media import duration
+    f = config.CHANNELS_DIR / cid / "episodes.md"
+    final = p.dir("edit") / "final.mp4"
+    vid = final if final.exists() else p.dir("edit") / "draft.mp4"
+    try:
+        title = p.read_json("package", "upload.json")["titles"][0].replace("|", "/")
+    except Exception:
+        title = p.state().get("name", p.path.name)
+    secs = duration(vid) if vid.exists() else 0
+    row = (f"| {p.path.name[:8]} | `projects/{p.path.name}` | {title} | {int(secs // 60)}:{int(secs % 60):02d} | "
+           f"{'완성' if final.exists() else '가편집'} — REPORT.md 의 남은 일 확인 |")
+    lines = [l for l in f.read_text(encoding="utf-8").splitlines() if f"projects/{p.path.name}`" not in l]
+    f.write_text("\n".join(lines + [row]) + "\n", encoding="utf-8")
+    print(f"[channel] {f} 에 기록")
 
 
 def cmd_run(p: Project, a) -> None:
@@ -214,6 +256,7 @@ def main(argv: list[str] | None = None) -> None:
     sy.add_argument("--title", help="표시 이름 (예: 미주일기)")
 
     sub.add_parser("styles", help="스타일 라이브러리 목록")
+    sub.add_parser("channels", help="운영 채널 목록 (channels/)")
     sub.add_parser("schemas", help="에이전트가 직접 쓰는 파일들의 JSON Schema 를 schemas/ 에 내보내기")
     qa = sub.add_parser("qa", help="카드 화면을 렌더링해 글자·그래프 겹침과 안전 영역 침범을 점검")
     qa.add_argument("project")
@@ -222,6 +265,8 @@ def main(argv: list[str] | None = None) -> None:
 
     mk = sub.add_parser("make", help="자료조사부터 영상·업로드 패키지까지 한 번에")
     mk.add_argument("--topic", help="주제 (없으면 소스 탐색으로 자동 선정)")
+    mk.add_argument("--channel", help="채널 id (channels/<id>/channel.yaml: 스타일·형식·키워드·분량)")
+    mk.add_argument("--from-text", help="가져온 조사 글(.md/.txt): 대화형 LLM 답·메모를 사실 확인 → 원고 → 영상으로")
     mk.add_argument("--angle", help="관점·방향 메모 (선택)")
     mk.add_argument("--name", help="프로젝트 이름 (선택)")
     mk.add_argument("--style", choices=["sixsigma", "paper", "flat"], help="렌더러 (보통은 --style-ref 로 스타일째 고름)")
@@ -274,6 +319,13 @@ def main(argv: list[str] | None = None) -> None:
                 fam = config.style_family(((yaml.safe_load((d / "edit.yaml").read_text(encoding="utf-8")) or {}).get("edit") or {})
                                           if (d / "edit.yaml").exists() else {})
                 print(f"{d.name:14} {fam:12} {meta.get('title', '').strip():12} renderer={meta.get('renderer', '').split('#')[0].strip():9} status={meta.get('status', '').split('#')[0].strip()}")
+    elif a.cmd == "channels":
+        for d in sorted(config.CHANNELS_DIR.iterdir()):
+            if (d / "channel.yaml").exists():
+                c = config.channel(d.name)
+                n = sum(1 for l in (d / "episodes.md").read_text(encoding="utf-8").splitlines() if l.startswith("| 2")) \
+                    if (d / "episodes.md").exists() else 0
+                print(f"{c['id']:16} {c.get('format', ''):9} style={c.get('style_ref', ''):14} 에피소드 {n:3}  {c.get('title', '')}")
     elif a.cmd == "make":
         cmd_make(a)
     elif a.cmd == "rebuild":

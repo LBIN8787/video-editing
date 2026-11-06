@@ -26,7 +26,9 @@ python -m ytflow make --topic "주제" --angle "관점" --style-ref <id>
 - 키워드는 `config/pipeline.yaml` 의 `discover.seed_keywords`, 영어 검색어는 `trends.english_keywords`, X 감시 계정은 `trends.x_accounts` 에서 정합니다.
 - X API 키는 선택입니다. 환경변수 `X_BEARER_TOKEN`, 또는 클라우드 환경의 네트워크 시크릿(api.x.com)으로 넣습니다. 없으면 X 게시물은 research 의 웹 검색으로 찾습니다.
 
-단계 순서: discover → select → research → script → sources → clips → voice → assets → subtitles → assemble → package → report.
+단계 순서: discover → select → research → **article** → script → sources → clips → voice → assets → subtitles → assemble(+마스터링) → package → report.
+- **article:** 팩트시트(와 가져온 조사 글)를 형식에 맞는 '읽는 원고' `01_research/article.md` 로 다듬습니다. 롱폼 = 장편 칼럼·보고서 분석, 쇼츠 = 짧은 주제 안내 (`formats/`). script 는 이 원고를 장면으로 나눕니다.
+- 채널 단위로 반복 제작할 때는 `skills/channel-run` 을 따릅니다 (`make --channel <id>`, `--from-text <글>`).
 중간부터 다시 돌릴 때는 `python -m ytflow stage <프로젝트> <단계>`, 소스를 넣은 뒤에는 `python -m ytflow rebuild <프로젝트>` 를 씁니다.
 
 ## manual 모드 (에이전트가 직접 판단할 때)

@@ -92,6 +92,10 @@ def research(project: Project) -> None:
             transcripts.append({"video_id": vid, "transcript": text[:20000]})
     notes = project.dir("research") / "my_notes.md"
     extra = notes.read_text(encoding="utf-8") if notes.exists() else ""
+    imported = project.dir("source") / "input.md"  # 가져온 조사 글 (대화형 LLM 답 등): 주장을 하나하나 확인 대상으로
+    if imported.exists():
+        extra = ("## 가져온 조사 글 (모든 숫자·발언을 1차 출처로 확인하고, 확인 안 되면 '재확인 필요')\n"
+                 + imported.read_text(encoding="utf-8") + "\n\n" + extra)
     from datetime import date
     user = (f"# 오늘 날짜\n{date.today().isoformat()}\n\n# 주제\n{json.dumps(topic, ensure_ascii=False)}\n\n"
             f"# 소스 영상 자막 (있으면)\n{json.dumps(transcripts, ensure_ascii=False)}\n\n# 제작자 메모/추가 자료\n{extra}")
@@ -103,6 +107,27 @@ def research(project: Project) -> None:
     project.write_json("research", "articles.json", [x.model_dump() for x in arts.articles])
     print(f"[research] {project.dir('research')}/factsheet.md · 기사 {len(arts.articles)}건")
     project.mark_done("research")
+
+
+# ---------------------------------------------------------------- 3.5 원고 (칼럼·보고서 / 짧은 안내)
+def article(project: Project) -> None:
+    """팩트시트(+가져온 글)를 형식에 맞는 '읽는 원고'로 다듬는다 → 01_research/article.md.
+    롱폼은 장편 칼럼·보고서 분석, 쇼츠는 짧은 주제 안내 (formats/<형식>.md)."""
+    topic = chosen_topic(project)
+    fmt = config.video_format()
+    rules = (config.FORMATS_DIR / f"{fmt}.md").read_text(encoding="utf-8")
+    fact = (project.dir("research") / "factsheet.md").read_text(encoding="utf-8")
+    imported = project.dir("source") / "input.md"
+    pcfg = config.load("pipeline")
+    minutes = pcfg.get("script", {}).get("target_minutes", 9)
+    user = (f"# 채널 분야\n{pcfg.get('channel_niche', '')}\n\n# 주제\n{json.dumps(topic, ensure_ascii=False)}\n\n"
+            f"# 형식 규칙\n{rules}\n\n# 분량\n영상 약 {minutes}분 (원고 약 {int(minutes * 290)}자)\n\n# 팩트시트\n{fact}")
+    if imported.exists():
+        user += "\n\n# 가져온 조사 글 (구성 참고용, 숫자는 팩트시트 기준)\n" + imported.read_text(encoding="utf-8")
+    md = llm.text(config.prompt("article"), user)
+    (project.dir("research") / "article.md").write_text(md, encoding="utf-8")
+    print(f"[article] {project.dir('research')}/article.md ({len(md.replace(' ', ''))}자, 형식 {fmt}) — 읽고 고친 뒤 script")
+    project.mark_done("article")
 
 
 # ---------------------------------------------------------------- 4. 대본
@@ -176,10 +201,15 @@ def script(project: Project) -> None:
     prof = config.style_profile()
     cpm = (prof.get("targets") or {}).get("chars_per_minute") or pcfg.get("chars_per_minute", 330)
     minutes = (prof.get("targets") or {}).get("video_minutes") or pcfg.get("target_minutes", 9)
+    if config.load("pipeline").get("channel"):  # 채널 설정의 분량이 우선
+        minutes = pcfg.get("target_minutes", minutes)
     fact = (project.dir("research") / "factsheet.md").read_text(encoding="utf-8")
     af = project.dir("research") / "articles.json"
     arts = af.read_text(encoding="utf-8") if af.exists() else "[]"
-    user = (f"# 스타일 프로필\n{_style_block()}\n\n# 주제\n{json.dumps(topic, ensure_ascii=False)}\n\n"
+    art = project.dir("research") / "article.md"
+    art_block = (f"# 원고 (이 글을 장면 대본으로 옮깁니다: 문단 순서를 지키고, 문장은 거의 그대로 내레이션으로)\n"
+                 f"{art.read_text(encoding='utf-8')}\n\n") if art.exists() else ""
+    user = (f"# 스타일 프로필\n{_style_block()}\n\n# 주제\n{json.dumps(topic, ensure_ascii=False)}\n\n{art_block}"
             f"# 팩트시트\n{fact}\n\n# 인용 가능한 기사 (screenshot 장면의 source.url 로만 사용)\n{arts}\n\n# 분량\n약 {minutes}분, 분당 {cpm}자 → 내레이션 총 {int(minutes * cpm)}자 내외")
     ref = config.load("pipeline").get("edit", {}).get("style_ref")
     addendum = config.STYLES_DIR / ref / "script.md" if ref else None

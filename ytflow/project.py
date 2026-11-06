@@ -8,7 +8,7 @@ from pathlib import Path
 
 from . import config
 
-STAGES = ["discover", "select", "research", "script", "sources", "clips", "voice", "assets", "subtitles", "assemble", "package", "report"]
+STAGES = ["discover", "select", "research", "article", "script", "sources", "clips", "voice", "assets", "subtitles", "assemble", "package", "report"]
 # 게이트: 이 단계가 끝난 뒤 사람이 승인해야 다음 단계 진행
 GATE_AFTER = {"select": "topic", "script": "script", "assemble": "draft"}
 
