@@ -721,8 +721,8 @@ def l_chart(S, card):
     _plot_series(S, [x[2:].replace("-", ".") for x in dates], [r["close"] for r in rows], cur, marks=marks,
                  ohlc=rows if card.get("style", "candle") == "candle" and len(rows) <= 140 else None)
     src = f"자료: {card.get('_source', 'Yahoo Finance')} · {card.get('ticker', '')} · {dates[-1]} 기준"
-    S.text(170, S.H * 0.70 + 82, src, F(FT("label"), 24), (140, 140, 140), "lm", rise=0, dur=0.2)
-    _note(S, card, y=S.H * 0.80)
+    S.text(170, PROFILE.get("top", 130) + 72, src, F(FT("label"), 24), (140, 140, 140), "lm", rise=0, dur=0.2)  # 출처는 제목 아래 왼쪽
+    _note(S, card, y=S.H * 0.805)
 
 
 def _d(s):

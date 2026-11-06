@@ -125,6 +125,11 @@ def article(project: Project) -> None:
     if imported.exists():
         user += "\n\n# 가져온 조사 글 (구성 참고용, 숫자는 팩트시트 기준)\n" + imported.read_text(encoding="utf-8")
     md = llm.text(config.prompt("article"), user)
+    import re as _re
+    parts = _re.split(r"\n#+\s*제작 메모\s*\n", md, maxsplit=1)  # 제작자용 메모는 대본에 넣지 않는다
+    md = parts[0].rstrip() + "\n"
+    if len(parts) > 1:
+        (project.dir("research") / "article_notes.md").write_text("# 원고 제작 메모\n\n" + parts[1], encoding="utf-8")
     (project.dir("research") / "article.md").write_text(md, encoding="utf-8")
     print(f"[article] {project.dir('research')}/article.md ({len(md.replace(' ', ''))}자, 형식 {fmt}) — 읽고 고친 뒤 script")
     project.mark_done("article")

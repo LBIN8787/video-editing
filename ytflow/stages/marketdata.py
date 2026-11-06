@@ -57,6 +57,8 @@ def fetch(ticker: str, period: str = "6mo", cache_dir: Path | None = None,
 
 
 def currency(ticker: str, cache_dir: Path | None = None) -> str:
+    if ticker.startswith("^"):  # 지수(코스피 ^KS11, 나스닥 ^IXIC)는 통화가 아니라 포인트
+        return "PT"
     if cache_dir:
         for f in cache_dir.glob(f"{ticker.replace('^', 'IDX_')}_*.meta.json"):
             return json.loads(f.read_text()).get("currency") or ""
@@ -64,6 +66,8 @@ def currency(ticker: str, cache_dir: Path | None = None) -> str:
 
 
 def fmt_price(v: float, cur: str) -> str:
+    if cur == "PT":
+        return f"{v:,.2f}"
     if cur == "KRW":
         return f"{v:,.0f}원"
     if cur in ("USD", ""):

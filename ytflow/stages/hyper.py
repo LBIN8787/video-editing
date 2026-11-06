@@ -259,11 +259,13 @@ def h_flow(D, card):
     _title(D, card)
     n = len(items)
     bw = min(330, (D.W - 160) / n - 70)
-    gap = (D.W - 160 - bw * n) / max(n - 1, 1)
+    gap = min((D.W - 160 - bw * n) / max(n - 1, 1), 230)  # 상자가 적으면 가운데로 모은다
+    left = (D.W - (bw * n + gap * (n - 1))) / 2
     y = D.H * 0.48
-    h = 170 if any(it.get("icon") for it in items) else 150
+    has_icon, has_val = any(it.get("icon") for it in items), any(it.get("value") for it in items)
+    h = 150 + (50 if has_icon else 0) + (40 if has_val else 0)  # 아이콘·값이 있으면 상자를 키워 글자끼리 띄운다
     for i, it in enumerate(items):
-        x0 = 80 + i * (bw + gap)
+        x0 = left + i * (bw + gap)
         col = D.red if it.get("highlight") else D.ink
         t = D.box(x0, y - h / 2, x0 + bw, y + h / 2, col, 5 if it.get("highlight") else 4)
         top = y - h / 2 + 18
@@ -272,9 +274,10 @@ def h_flow(D, card):
             top += 60
         lab = it.get("label", "")
         f = fit(FT("box"), lab, 40, bw - 30)
-        D.text(x0 + bw / 2, (top + y + h / 2) / 2 - (14 if it.get("value") else 0), lab, FT("box"), f.size, col)
+        bottom = y + h / 2 - (48 if has_val else 0)
+        D.text(x0 + bw / 2, (top + bottom) / 2, lab, FT("box"), f.size, col)
         if it.get("value"):
-            D.text(x0 + bw / 2, y + h / 2 - 30, it["value"], FT("label"), fit(FT("label"), it["value"], 30, bw - 30).size, D.muted)
+            D.text(x0 + bw / 2, y + h / 2 - 28, it["value"], FT("label"), fit(FT("label"), it["value"], 28, bw - 30).size, D.muted)
         if it.get("sub"):
             D.text(x0 + bw / 2, y + h / 2 + 44, it["sub"], FT("note"), fit(FT("note"), it["sub"], 40, bw + gap - 20).size, D.ink)
         if i < n - 1:
@@ -339,13 +342,22 @@ def h_headline(D, card):
     D.js.append(f'tl.fromTo("#{pid}",{{opacity:0,y:40,rotation:-4}},{{opacity:1,y:0,rotation:-1.2,duration:0.6,ease:"power2.out"}},0.1);')
     D.t = 0.6
     t = card.get("title", "")
-    f = fit(FT("title"), t, 64, D.W * 0.58)
-    D.text(D.W * 0.21, D.H * 0.36, t, FT("title"), f.size, D.ink, anchor="lm")
-    D.marker(D.W * 0.205, D.H * 0.36 + f.size * 0.12, f.getlength(t) + 20, f.size * 0.5, at=1.1, index=1)
-    D.t = 1.5
+    lines = [t]
+    if fit(FT("title"), t, 64, D.W * 0.58).size < 46 and " " in t:  # 길면 두 줄로 (가운데 가까운 띄어쓰기에서)
+        sp = [i for i, ch in enumerate(t) if ch == " "]
+        cut = min(sp, key=lambda i: abs(i - len(t) / 2))
+        lines = [t[:cut], t[cut + 1:]]
+    size = min(fit(FT("title"), ln, 64, D.W * 0.58).size for ln in lines)
+    f = paper.F(FT("title"), size)
+    y0 = D.H * (0.36 if len(lines) == 1 else 0.33)
+    for k, ln in enumerate(lines):
+        y = y0 + k * size * 1.35
+        D.text(D.W * 0.21, y, ln, FT("title"), size, D.ink, anchor="lm")
+        D.marker(D.W * 0.205, y + size * 0.12, f.getlength(ln) + 20, size * 0.5, at=1.1 + k * 0.4, index=1)
+    D.t = 1.5 + 0.4 * (len(lines) - 1)
     for k, it in enumerate(card.get("items", [])[:2]):
         s = " · ".join(x for x in (it.get("label", ""), it.get("value", ""), it.get("sub", "")) if x)
-        D.text(D.W * 0.21, D.H * 0.47 + k * 60, s, FT("label"), fit(FT("label"), s, 34, D.W * 0.58).size, D.muted, anchor="lm")
+        D.text(D.W * 0.21, D.H * (0.47 if len(lines) == 1 else 0.50) + k * 60, s, FT("label"), fit(FT("label"), s, 34, D.W * 0.58).size, D.muted, anchor="lm")
     _note(D, card, D.H * 0.76)
 
 

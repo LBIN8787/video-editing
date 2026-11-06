@@ -234,7 +234,11 @@ def _headline_fallback(project: Project, s: dict) -> dict | None:
     a = next((x for x in arts if x.get("url") == url), None)
     if not a:
         return None
-    return {"type": "headline", "title": a.get("title", "")[:60],
+    title = a.get("title", "")
+    host = url.split("/")[2] if "//" in url else ""
+    if len(title) < 18 or title.split("(")[0].strip().lower() in (a.get("publisher", "").lower(), host.lower()):
+        title = f"\u201c{s['narration'][:58]}\u201d"  # 기사 제목을 모르면 그 기사로 뒷받침한 문장을 인용 카드로
+    return {"type": "headline", "title": title[:60],
             "items": [{"label": f"{a.get('publisher', '')} · {a.get('date', '')}", "value": "", "sub": "", "highlight": False}],
             "note": url.split("/")[2] if "//" in url else ""}
 
