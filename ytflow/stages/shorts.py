@@ -111,7 +111,8 @@ def build(project: Project, repo: str | None, topic: str | None) -> None:
         facts = llm.text(config.prompt("shorts_facts"), f"# 주제\n{topic}\n\n# 오늘\n{__import__('datetime').date.today()}", web=True)
         (res / "factsheet.md").write_text(facts, encoding="utf-8")
         info = {"mode": "info", "facts": facts[:15000],
-                "rule": "저장소가 없으므로 page_* 화면은 쓰지 않습니다. card(숫자) · big_text · compare 만 씁니다. 숫자는 팩트에 있는 것만."}
+                "rule": "저장소가 없으므로 page_* 화면은 쓰지 않습니다. card(숫자, number_compare·bars 위주, 항목 2~3개) · big_text · "
+                        "compare(두 숫자 '가 vs 나', 칸 2개) 만 씁니다. 숫자는 팩트에 있는 것만."}
     if repo:
         meta = _gh(f"/repos/{repo}") or {}
         readme = _gh(f"/repos/{repo}/readme") or {}
@@ -212,14 +213,21 @@ def render_scene(project: Project, scene: dict, hook: list[str], out: Path, d: f
         flat.render_card(scene["card"], cm, d, seed=idx)
         flat.CURRENT["name"] = "flat"
         im.save(base)
-        ch = int(mw * 1080 / 1920)
+        ch = int(mw * ecfg.get("card_height", 1080) / ecfg.get("card_width", 1920))
         _ff(["-loop", "1", "-i", str(base), "-i", str(cm), "-t", f"{d:.3f}", "-filter_complex",
              f"[1:v]scale={mw}:{ch}[c];[0:v][c]overlay={mx0}:{my0 + (mh - ch) // 2},format=yuv420p",
              "-r", "30", "-c:v", "libx264", "-preset", "veryfast", str(out)])
         return
     dr = ImageDraw.Draw(im)
     red = paper._rgb(cfgp.get("red", "#FFD43B"))
-    if vis == "compare" and s.get("compare"):
+    if vis == "compare" and s.get("compare") and ecfg.get("shorts_mode") == "info":
+        # 정보형: 비교할 화면이 없으므로 '가 vs 나'를 큰 글씨로 위아래에
+        names = s["compare"][:2]
+        for i, n in enumerate(names):
+            f = paper.fit(paper.SANS_X, n, 104, mw - 60)
+            dr.text((W / 2, my0 + mh * (0.30 if i == 0 else 0.70)), n, font=f, fill=(255, 255, 255), anchor="mm")
+        dr.text((W / 2, my0 + mh * 0.5), "vs", font=paper.F(paper.SANS_X, 90), fill=red, anchor="mm")
+    elif vis == "compare" and s.get("compare"):
         names = s["compare"][:4]
         cols = 2
         rows = (len(names) + 1) // 2
@@ -269,8 +277,11 @@ def make(name: str | None, repo: str | None, topic: str | None, channel: dict | 
     import yaml as _y
     cur = _y.safe_load((config.STYLES_DIR / ch.get("style_ref", "shorts-aitips") / "edit.yaml").read_text(encoding="utf-8"))
     if ch:
+        info = ch.get("sourcing", {}).get("start_from") != "repo"
         cur.update({"channel": ch["id"], "format": "shorts", "channel_niche": ch.get("niche", ""),
-                    "shorts_mode": "info" if ch.get("sourcing", {}).get("start_from") != "repo" else "repo"})
+                    "shorts_mode": "info" if info else "repo"})
+        if info:  # 정보형은 카드가 화면의 주인공 → 정사각 캔버스로 그려 글자를 크게
+            cur.setdefault("edit", {}).update({"card_width": 1080, "card_height": 1080, "shorts_mode": "info"})
     (p.path / "edit.yaml").write_text(_y.safe_dump(cur, allow_unicode=True, sort_keys=False), encoding="utf-8")
     p = Project.open(str(p.path))
     build(p, repo, topic)

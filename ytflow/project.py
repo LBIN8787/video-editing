@@ -39,6 +39,10 @@ class Project:
     def create(cls, name: str) -> "Project":
         stamp = datetime.now().strftime("%Y%m%d")
         path = config.PROJECTS_DIR / f"{stamp}-{slugify(name)}"
+        n = 2
+        while (path / "state.json").exists() and json.loads((path / "state.json").read_text(encoding="utf-8")).get("done"):
+            path = config.PROJECTS_DIR / f"{stamp}-{slugify(name)}-{n}"  # 이미 진행한 프로젝트는 덮어쓰지 않는다
+            n += 1
         path.mkdir(parents=True, exist_ok=True)
         for d in LAYOUT.values():
             (path / d).mkdir(exist_ok=True)
