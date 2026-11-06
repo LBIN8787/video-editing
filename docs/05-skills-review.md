@@ -12,6 +12,16 @@
 - 미주일기 스타일은 `card_engine: hyperframes` 가 기본입니다. 도구가 없거나 렌더가 실패하면 기존 `paper.py` 로 자동 대체합니다.
 - 렌더 속도: 카드 1장 약 25초(이 환경은 GPU 없음, 소프트웨어 렌더) → 3개씩 병렬.
 
+## 3차 도입 (2026-11-06)
+| 항목 | 고정 버전·라이선스 | 어디에 | 확인한 것 |
+|---|---|---|---|
+| **rough.js** | `roughjs@4.6.6` (2023-11), MIT | `ytflow/stages/hyper.py` + `ytflow/assets/rough_paths.mjs`: 미주일기 카드의 밑줄·상자·동그라미·화살표를 rough.js 손그림 선으로, **막대는 빗금 채우기**, 강조 상자는 옅은 빗금. 시드 고정 → 같은 카드는 늘 같은 그림. 경로는 카드를 만들 때 node 로 미리 계산해 HTML 에 그대로 넣음(HyperFrames 계약 준수) | 숫자 카드·흐름도·막대 렌더 확인, `hyperframes check` 문제 0 |
+| **faster-whisper** | `faster-whisper==1.2.1`, MIT | `ytflow/stages/align.py`: 원본 발언(quote) 클립을 앞뒤 3초 여유로 받은 뒤 **단어 단위 받아쓰기 → 대본 quote_en 과 가장 잘 맞는 구간만 남기고 다시 자름**. 오디오는 ffmpeg 로 직접 읽어 PyAV 버전 문제를 피함 | 11.6초 시험 클립에서 해당 발언 3.9초만 정확히 잘라냄(일치도 1.00, CPU 약 6초) |
+| WhisperX | (선택) BSD-2 | 음소 단위가 더 필요할 때 `align.engine` 확장 예정. torch 가 필요해 기본 설치에서 뺌 | — |
+| **hand-drawn-diagrams** (시범) | commit `c8ffd6c`, MIT (원본 muthuishere) | 에이전트 skill 로 설치(`.claude/skills`, `.agents/skills`). 복잡한 구조도(공급망·지배구조)를 Excalidraw 손그림으로 그려 PNG 를 `04_assets/scene_XXX_shot.png` 로 넣고 rebuild → 미주일기 종이 콜라주로 들어감 | ⚠ 렌더 스크립트가 **스스로 `uv run playwright install chromium` 으로 브라우저를 내려받음** → PC 에서만 렌더. 편집 링크는 작성자 GitHub Pages 주소에 그림 데이터를 URL 로 실어 엶(서버 업로드 아님) |
+| 효과음 skill (vibe-motion/sound) | — | **보류 유지**: 저장소에 LICENSE 파일이 없음(=사용 허락 없음). Freesound API 키 필요. ElevenLabs 를 쓰게 되면 ElevenLabs 효과음 생성 API 가 대안 | |
+| **목소리** | ElevenLabs | `tts.backend: elevenlabs` 구현(캐시·글자별 시각). **영상 확정 후 목소리를 골라 적용** → `docs/08-voice.md` | 가짜 응답으로 요청 형식·캐시 확인(실제 호출 안 함) |
+
 ## 2차 조사: 지금 파이프라인에 맞는 후보
 | 후보 | ★ / 라이선스 | 채우는 빈칸 | 판단 |
 |---|---|---|---|

@@ -11,7 +11,7 @@ niche: "주식시장 중심의 투자·기술·기업 해설. 돈의 흐름·실
 seed_keywords: ["빅테크 실적", "현금흐름", "AI 투자", "반도체 주가", "금리", "삼성전자 SK하이닉스", "데이터센터 투자", "기업 부채"]
 target_minutes: 10
 cadence: "주 1편 (예: 목요일 업로드)"
-voice: ko-KR-InJoonNeural               # 운영 전 결정: 본인 녹음 / 공식 TTS (docs/05 'TTS')
+voice: "미정 — ElevenLabs 로 정함 (영상이 확정된 뒤 목소리를 고르고 아래 tts 의 주석을 풉니다)"
 tone: "차분한 해설. 질문으로 장을 열고, 결론은 한 문장으로."
 
 # 소스 찾기 (벤치마킹: docs/07-sourcing.md — 미주일기식 '1차 문서에서 출발')
@@ -22,3 +22,8 @@ sourcing:
   photos: wikimedia_commons       # 인물·장소 사진은 위키미디어 공용 CC 사진만 (저작자·라이선스를 설명란에 표기)
   min_documents: 3
   chapters: true                  # 장 제목을 질문형으로 → 설명란 챕터
+
+# 목소리 확정 후 (docs/08-voice.md):
+# tts:
+#   backend: elevenlabs
+#   elevenlabs: {voice_id: "<ElevenLabs 목소리 ID>", model_id: eleven_multilingual_v2, language_code: ko, stability: 0.5, similarity_boost: 0.75, speed: 1.0}

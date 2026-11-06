@@ -9,6 +9,8 @@ description: 미주일기 편집 스타일(구겨진 종이 배경 + 손그림 �
 - **기본 스타일:** 자체 제작(인포그래픽형) 영상의 기본입니다. `python -m ytflow make [--topic "..."]` 만으로 이 스타일이 쓰입니다(`config/pipeline.yaml` → `default_styles.infographic`).
 - **제작:** `python -m ytflow make --style-ref mijudiary [--topic "..."]`
 - **카드 엔진:** `card_engine: hyperframes`. 카드를 HyperFrames(HTML+GSAP)로 렌더합니다: 펜으로 그려지는 밑줄·상자·동그라미·화살표, 숫자 카운트업, 형광펜, 비유 카드. chart·line 은 `paper.py`.
+  선·상자·동그라미·화살표는 **rough.js 손그림**, 막대는 **빗금 채우기**입니다(`edit.rough: true`, 끄려면 false).
+  복잡한 구조도는 `hand-drawn-diagrams` skill 로 그린 PNG 를 `04_assets/scene_XXX_shot.png` 에 넣으면 종이 콜라주로 들어갑니다(렌더는 PC).
   도구 설치: `python scripts/install_tools.py`. 카드 HTML 은 `04_assets/hf/scene_XXX/index.html` 에 남아 직접 고칠 수 있고, 고친 뒤 `tools/hyperframes/node_modules/.bin/hyperframes render -o ../../scene_XXX_anim.mp4` 로 다시 렌더합니다(`.claude/skills/hyperframes-cli`).
 - **기존 프로젝트에 적용:** `cp styles/mijudiary/edit.yaml projects/<프로젝트>/edit.yaml` 후 assets → subtitles → assemble
 - **핵심 점검:**

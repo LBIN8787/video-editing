@@ -156,6 +156,8 @@ def cmd_make(a) -> None:
         cur.update({"channel": ch["id"], "format": ch.get("format", "longform"), "channel_niche": ch.get("niche", "")})
         cur.setdefault("discover", {})["seed_keywords"] = ch.get("seed_keywords") or []
         cur.setdefault("script", {})["target_minutes"] = ch.get("target_minutes", 9)
+        if ch.get("tts"):  # 채널 목소리 (확정되면 channel.yaml 의 tts: {backend: elevenlabs, elevenlabs: {voice_id: ...}})
+            cur["tts"] = ch["tts"]
         (p.path / "edit.yaml").write_text(_y.safe_dump(cur, allow_unicode=True, sort_keys=False), encoding="utf-8")
     if imported:
         (p.dir("source") / "input.md").write_text(imported, encoding="utf-8")
@@ -264,6 +266,9 @@ def main(argv: list[str] | None = None) -> None:
 
     sub.add_parser("styles", help="스타일 라이브러리 목록")
     sub.add_parser("channels", help="운영 채널 목록 (channels/)")
+    vs = sub.add_parser("voice-sample", help="ElevenLabs 목소리 들어 보기 (채널 목소리 고를 때)")
+    vs.add_argument("--voice-id", required=True)
+    vs.add_argument("--text", default="메타는 석 달 동안 번 돈보다 3억 달러를 더 썼습니다. 그런데 주가는 왜 올랐을까요? 숫자로 따라가 보겠습니다.")
     up = sub.add_parser("upload", help="완성 영상을 Google Drive 의 채널(편집 스타일)별 폴더에 올리기")
     up.add_argument("project", nargs="?")
     up.add_argument("--all", action="store_true", help="영상이 있는 모든 프로젝트")
@@ -335,6 +340,12 @@ def main(argv: list[str] | None = None) -> None:
         names = [d.name for d in sorted(config.PROJECTS_DIR.iterdir()) if (d / "05_edit").is_dir()] if a.all else [a.project]
         for n in names:
             upload.run(Project.open(n))
+    elif a.cmd == "voice-sample":
+        from .stages.media import _elevenlabs
+        ec = dict(config.load("pipeline").get("tts", {}).get("elevenlabs") or {}, voice_id=a.voice_id)
+        out = config.ROOT / ".cache" / "voice_samples" / f"{a.voice_id}.mp3"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        print(f"[voice-sample] {_elevenlabs(a.text, out, ec)}")
     elif a.cmd == "channels":
         for d in sorted(config.CHANNELS_DIR.iterdir()):
             if (d / "channel.yaml").exists():

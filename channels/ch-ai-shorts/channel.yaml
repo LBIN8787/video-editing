@@ -9,8 +9,13 @@ niche: "AI 활용법과 GitHub 화제 저장소 안내. README 에 있는 기능
 seed_keywords: ["claude code skill", "mcp server", "ai agent", "codex"]
 target_seconds: 40
 cadence: "주 3~5편"
-voice: ko-KR-InJoonNeural
+voice: "미정 — ElevenLabs 로 정함 (영상이 확정된 뒤 목소리를 고르고 아래 tts 의 주석을 풉니다)"
 tone: "결과부터 말하는 빠른 안내."
 
 sourcing:
   start_from: repo                # GitHub 최근 14일 별 증가 저장소 + README
+
+# 목소리 확정 후 (docs/08-voice.md):
+# tts:
+#   backend: elevenlabs
+#   elevenlabs: {voice_id: "<ElevenLabs 목소리 ID>", model_id: eleven_multilingual_v2, language_code: ko, stability: 0.5, similarity_boost: 0.75, speed: 1.0}

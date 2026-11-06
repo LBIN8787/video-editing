@@ -177,7 +177,14 @@ def run(project: Project) -> None:
             ok += 1
             continue
         st, en, memo = resolve(src, work)
+        from . import align
+        quote = s.get("kind") == "quote" and s.get("quote_en") and align.available()
+        if quote:  # 원본 발언: 앞뒤 3초 여유를 두고 받은 뒤 단어 단위로 다시 자른다
+            st, en = max(0.0, st - 3.0), en + 3.0
         good = en > st and download(src["url"], st, en, out)
+        if good and quote:
+            fixed, note = align.refine(out, s["quote_en"])
+            memo += f" / {note}"
         ok += good
         if not good and temp_still(src, adir / f"scene_{s['id']:03d}_temp.jpg"):
             memo += " / 임시 썸네일 사용"

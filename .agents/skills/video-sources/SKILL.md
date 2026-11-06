@@ -35,6 +35,11 @@ description: 대본 장면에 쓸 원본 영상과 기사 캡처를 찾아 넣�
   - YouTube 클립은 그 영상의 공개 썸네일로 `scene_XXX_temp.jpg` 임시 화면을 만듭니다(노란 '임시' 표시).
   - 접근을 막는 사이트(403, 보안 확인)는 실패로 남깁니다.
 
+## 2.5 원본 발언 구간 정밀 자르기 (faster-whisper)
+quote 장면 클립은 앞뒤 3초 여유로 받은 뒤 `ytflow/stages/align.py` 가 단어 단위로 받아쓰고, 대본의 `quote_en` 과 가장 잘 맞는 구간만 남겨 다시 자릅니다.
+`clips.csv` 의 memo 에 "단어 정렬 12.3~19.8s (일치도 0.93)" 처럼 남고, 일치도가 `align.min_score`(0.6) 보다 낮으면 자르지 않고 그대로 둡니다 → 직접 확인.
+모델은 `config/pipeline.yaml` 의 `align.model`(기본 small). 처음 실행 때 모델을 내려받습니다.
+
 ## 3. PC 에서 실제 클립 채우기
 - 클라우드 서버에서는 YouTube 가 영상 다운로드를 봇 확인으로 막습니다. **우회하지 않습니다.**
 - 사용자 PC 에서 `python -m ytflow rebuild <프로젝트>` 를 실행하게 합니다.

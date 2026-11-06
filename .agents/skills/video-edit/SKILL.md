@@ -11,6 +11,8 @@ python -m ytflow stage <프로젝트> assets      # 스타일 렌더러로 장�
 python -m ytflow stage <프로젝트> subtitles   # 05_edit/subs.ass(번인) · subs.srt(업로드) · chapters.json
 python -m ytflow stage <프로젝트> assemble    # 05_edit/draft.mp4 · timeline.csv → 마스터링 final.mp4
 ```
+**목소리:** 초안은 `tts.backend: edge`. 영상이 확정되면 ElevenLabs(`tts.backend: elevenlabs`, 채널별 `voice_id`)로 다시 입힙니다 → `docs/08-voice.md`. 목소리 후보 듣기: `python -m ytflow voice-sample --voice-id <ID>`.
+
 assemble 끝에 ffmpeg-skill 로 마스터링합니다(`ytflow/stages/finish.py`): 유튜브 음량 −14 LUFS(`final.mp4`), 유튜브 규격 점검(`delivery_check.json`), 프레임 시트(`final_sheet.png`).
 배경음은 `edit.bgm` 에 음원 경로를 주면 내레이션 아래로 자동으로 낮춰 깝니다. 업로드는 `final.mp4` 로 합니다.
 ```bash

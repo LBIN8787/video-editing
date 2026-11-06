@@ -8,8 +8,13 @@ concept: >
 niche: "주식시장 상식·일정·숫자 하나 안내. 투자 권유는 하지 않는다."
 target_seconds: 40
 cadence: "주 3~5편 (대기열에서)"
-voice: ko-KR-InJoonNeural
+voice: "미정 — ElevenLabs 로 정함 (영상이 확정된 뒤 목소리를 고르고 아래 tts 의 주석을 풉니다)"
 tone: "결과부터, 숫자 하나, 확인할 일정 하나."
 
 sourcing:
   start_from: queue               # channels/ch-money-shorts/queue.md 의 첫 소재 (롱폼 주제 선정에서 넘어온 것)
+
+# 목소리 확정 후 (docs/08-voice.md):
+# tts:
+#   backend: elevenlabs
+#   elevenlabs: {voice_id: "<ElevenLabs 목소리 ID>", model_id: eleven_multilingual_v2, language_code: ko, stability: 0.5, similarity_boost: 0.75, speed: 1.0}

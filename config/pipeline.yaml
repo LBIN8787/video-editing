@@ -25,11 +25,20 @@ script:
   chars_per_minute: 260   # 2026-11 벤치마킹 측정값. 스타일 프로필 값이 있으면 그 값을 우선 사용
 
 tts:
-  backend: edge           # edge | manual | placeholder
+  backend: edge           # edge(초안용) | elevenlabs(확정 목소리) | manual | placeholder
+                          #  ⚠ edge-tts 는 비공식 경로 → 수익 채널 업로드본은 elevenlabs 또는 본인 녹음으로 (docs/08-voice.md)
                           #  manual = 직접 녹음한 03_voice/scene_XXX.wav 사용
                           #  placeholder = 글자 수로 길이만 맞춘 무음 (흐름 확인용 애니매틱)
   voice: ko-KR-InJoonNeural
   rate: "+8%"
+  elevenlabs:             # 목소리 확정 후 voice_id 를 채우고 backend: elevenlabs 로 바꾸면 됨 (채널별로는 channel.yaml 의 tts)
+    voice_id: ""          # ElevenLabs 목소리 ID (Voice Library 또는 내가 만든 목소리)
+    model_id: eleven_multilingual_v2   # 한국어 지원. 더 빠른 초안은 eleven_flash_v2_5
+    language_code: ko
+    stability: 0.5
+    similarity_boost: 0.75
+    style: 0.0
+    speed: 1.0
 
 # 형식별 채널: 주제 선정에서 다른 형식으로 판단된 소재를 이 채널의 대기열(channels/<id>/queue.md)로 보낸다
 format_channels:
@@ -117,3 +126,11 @@ gates:
   topic: manual
   script: manual
   draft: manual
+
+# 원본 발언 구간 단어 정렬 (ytflow/stages/align.py, faster-whisper). 클립을 받는 PC 의 rebuild 에서 동작
+align:
+  model: small            # tiny | base | small | medium | large-v3 (클수록 정확, 느림)
+  compute_type: int8      # CPU int8 (GPU 가 있으면 float16)
+  pad_before: 0.15        # 발언 앞 여유(초)
+  pad_after: 0.30
+  min_score: 0.6          # 대본 원문과 받아쓰기 일치도 하한 (낮으면 자르지 않고 그대로 둠)

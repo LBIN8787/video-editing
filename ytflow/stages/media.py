@@ -67,6 +67,8 @@ def voice(project: Project) -> None:
                 if proxy:  # edge-tts 는 프록시 환경변수를 자동으로 읽지 않는다
                     cmd[1:1] = ["--proxy", proxy]
                 subprocess.run(cmd, check=True)
+            elif cfg.get("backend") == "elevenlabs":
+                raw = _elevenlabs(s["narration"], vdir / f"{sid}.mp3", cfg.get("elevenlabs") or {})
             else:
                 raise SystemExit(f"녹음 파일이 없습니다: {vdir}/{sid}.wav (tts.backend: manual)")
         clean = vdir / "clean" / f"{sid}.wav"
@@ -80,6 +82,38 @@ def voice(project: Project) -> None:
         print(f"[voice] {sid} {durs[s['id']]}s")
     project.write_json("voice", "durations.json", durs)
     project.mark_done("voice")
+
+
+def _elevenlabs(text: str, out: Path, ec: dict) -> Path:
+    """ElevenLabs TTS (with-timestamps). 같은 문장·목소리·설정이면 캐시를 써서 크레딧을 다시 쓰지 않는다.
+    키: 환경변수 ELEVENLABS_API_KEY, 또는 클라우드 환경의 네트워크 비밀값(api.elevenlabs.io, 헤더 xi-api-key).
+    결과: <장면>.mp3 + <장면>.align.json (글자별 시작·끝 초 — 단어 단위 자막에 씀)."""
+    import base64
+    import hashlib
+    import urllib.request
+    vid = ec.get("voice_id") or ""
+    if not vid:
+        raise SystemExit("tts.elevenlabs.voice_id 가 비어 있습니다. 목소리를 정한 뒤 config/pipeline.yaml 또는 channels/<id>/channel.yaml 의 tts 에 적으세요 (docs/08-voice.md)")
+    body = {"text": text, "model_id": ec.get("model_id", "eleven_multilingual_v2"),
+            "voice_settings": {k: ec[k] for k in ("stability", "similarity_boost", "style", "speed", "use_speaker_boost") if k in ec}}
+    if ec.get("language_code"):
+        body["language_code"] = ec["language_code"]
+    key = hashlib.sha1(json.dumps([vid, body], ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:16]
+    cache = config.ROOT / ".cache" / "elevenlabs" / f"{key}.json"
+    if cache.exists():
+        data = json.loads(cache.read_text(encoding="utf-8"))
+    else:
+        url = f"https://api.elevenlabs.io/v1/text-to-speech/{vid}/with-timestamps?output_format={ec.get('output_format', 'mp3_44100_128')}"
+        req = urllib.request.Request(url, data=json.dumps(body).encode(), method="POST", headers={
+            "Content-Type": "application/json", "xi-api-key": os.environ.get("ELEVENLABS_API_KEY", "proxy-injected")})
+        with urllib.request.urlopen(req, timeout=120) as r:
+            data = json.loads(r.read())
+        cache.parent.mkdir(parents=True, exist_ok=True)
+        cache.write_text(json.dumps(data), encoding="utf-8")
+    out.write_bytes(base64.b64decode(data["audio_base64"]))
+    if data.get("alignment"):
+        out.with_suffix(".align.json").write_text(json.dumps(data["alignment"], ensure_ascii=False), encoding="utf-8")
+    return out
 
 
 def _quote_audio(project: Project, s: dict, out: Path) -> float:

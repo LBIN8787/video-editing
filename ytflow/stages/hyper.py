@@ -28,6 +28,8 @@ from .paper import FT, fit, ellipse_path, rect_path, arrow_path, wobble
 TOOLS = config.ROOT / "tools" / "hyperframes"
 BIN = TOOLS / "node_modules" / ".bin" / "hyperframes"
 GSAP = TOOLS / "node_modules" / "gsap" / "dist" / "gsap.min.js"
+ROUGH = TOOLS / "node_modules" / "roughjs" / "bundled" / "rough.cjs.js"   # rough.js (MIT): 손그림 선·빗금 채우기
+ROUGH_JS = config.ROOT / "ytflow" / "assets" / "rough_paths.mjs"
 SUPPORTED = {"text", "number_compare", "analogy", "flow", "table", "bars", "headline"}
 
 
@@ -62,7 +64,11 @@ class Doc:
         m = np.array(paper._rgb(c["ink"])) * 0.72 + np.array(paper._rgb(c["base"])) * 0.28  # 대비 3:1 이상
         self.muted = _hex(tuple(int(v) for v in m))
         self.rng = np.random.default_rng(seed)
+        self.seed = seed
         self.items, self.svg, self.js, self.t, self.n = [], [], [], 0.25, 0
+        self.rq = []  # rough.js 도형 대기열: html() 때 node 로 한 번에 경로를 만든다
+        e = config.load("pipeline").get("edit", {})
+        self.use_rough = bool(e.get("rough", True)) and ROUGH.exists() and shutil.which("node") is not None
 
     def _id(self):
         self.n += 1
@@ -102,17 +108,50 @@ class Doc:
         self.js.append(f'tl.to("#{i}",{{strokeDashoffset:0,duration:{dur},ease:"power1.inOut"}},{t:.2f});')
         return t
 
+    def rough(self, kind, args, color, width=3, fill=None, at=None, gap=0.1, dur=0.5, roughness=1.3):
+        """rough.js 도형 하나 (선 + 빗금 채우기). 모든 선이 펜으로 그려지듯 나타난다."""
+        k = len(self.rq)
+        opts = {"seed": int(self.seed * 97 + k + 1), "roughness": roughness, "bowing": 1.2, "stroke": color, "strokeWidth": width}
+        if fill:
+            opts.update({"fill": fill, "fillStyle": "hachure", "hachureGap": 9, "hachureAngle": -41, "fillWeight": 2.2})
+        self.rq.append({"type": kind, "args": args, "opts": opts})
+        self.svg.append(f"@@ROUGH{k}@@")
+        t = self.at(at, gap)
+        self.js.append(f'tl.to(".r{k}",{{strokeDashoffset:0,duration:{dur},ease:"power1.inOut",stagger:{min(0.04, dur / 12):.3f}}},{t:.2f});')
+        return t
+
+    def _rough_svg(self, svg: str) -> str:
+        if not self.rq:
+            return svg
+        r = subprocess.run(["node", str(ROUGH_JS), str(ROUGH)], input=json.dumps(self.rq), capture_output=True, text=True, timeout=60)
+        shapes = json.loads(r.stdout)
+        for k, paths in enumerate(shapes):
+            el = "".join(f'<path class="r{k}" d="{p["d"]}" fill="none" stroke="{p["stroke"]}" stroke-width="{p["w"]}" '
+                         f'stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>' for p in paths)
+            svg = svg.replace(f"@@ROUGH{k}@@", el)
+        return svg
+
     def underline(self, x0, x1, y, at=None):
+        if self.use_rough:
+            return self.rough("line", [x0, y, x1, y + self.rng.uniform(-3, 3)], self.red, 3.5, at=at, dur=0.35, roughness=1.0)
         return self.stroke(wobble([(x0, y), (x1, y + self.rng.uniform(-3, 3))], self.rng, amp=1.6), self.red, 4, at, 0.1, 0.35)
 
-    def box(self, x0, y0, x1, y1, color, width=4, at=None):
+    def box(self, x0, y0, x1, y1, color, width=4, at=None, fill=None):
+        if self.use_rough:
+            return self.rough("rectangle", [x0, y0, x1 - x0, y1 - y0], color, width - 0.5, fill=fill, at=at, dur=0.5)
         return self.stroke(rect_path(x0, y0, x1, y1, self.rng), color, width, at, 0.1, 0.45)
 
     def circle(self, cx, cy, rx, ry, at=None):
+        if self.use_rough:
+            return self.rough("ellipse", [cx, cy, rx * 2, ry * 2], self.red, 3.5, at=at, dur=0.55, roughness=1.6)
         return self.stroke(ellipse_path(cx, cy, rx, ry, self.rng), self.red, 4, at, 0.1, 0.55)
 
     def arrow(self, x0, y0, x1, y1, color, at=None):
         body, head = arrow_path(x0, y0, x1, y1, self.rng)
+        if self.use_rough:
+            t = self.rough("line", [x0, y0, x1, y1], color, 3.5, at=at, gap=0.05, dur=0.35, roughness=0.9)
+            self.rough("linearPath", [[list(p) for p in head]], color, 3.5, at=t + 0.3, dur=0.15, roughness=0.6)
+            return t
         t = self.stroke(body, color, 4, at, 0.05, 0.35)
         self.stroke(head, color, 4, t + 0.3, 0.1, 0.15)
         return t
@@ -158,7 +197,7 @@ svg#ink{{position:absolute;inset:0}}
 <div id="root" data-composition-id="main" data-start="0" data-duration="{duration:.2f}" data-width="{self.W}" data-height="{self.H}">
 <img id="bg" src="assets/{bg_name}" class="clip" data-start="0" data-duration="{duration:.2f}" data-track-index="0">
 <div id="layer" class="clip" data-start="0" data-duration="{duration:.2f}" data-track-index="1" data-layout-allow-overlap>
-<svg id="ink" width="{self.W}" height="{self.H}" viewBox="0 0 {self.W} {self.H}">{''.join(self.svg)}</svg>
+<svg id="ink" width="{self.W}" height="{self.H}" viewBox="0 0 {self.W} {self.H}">{self._rough_svg(''.join(self.svg))}</svg>
 {''.join(self.items)}
 </div></div>
 <script>
@@ -219,7 +258,7 @@ def h_number_compare(D, card):
         t = D.text(x, base, v, FT("value"), f.size, col, counter=True)
         if it.get("highlight"):  # 빨간 펜 동그라미: 글자에 닿지 않게 넉넉히
             w = f.getlength(v)
-            D.circle(x, base + 4, w / 2 + 70, min(f.size * 0.78, D.H * 0.105), at=t + 0.9)
+            D.circle(x, base + 4, w / 2 + 105, min(f.size * 0.8, D.H * 0.105), at=t + 0.9)
         if it.get("sub"):
             D.text(x, base + D.H * 0.14, it["sub"], FT("note"), fit(FT("note"), it["sub"], 50, D.W / n - 120).size, D.ink)
     _note(D, card)
@@ -267,7 +306,8 @@ def h_flow(D, card):
     for i, it in enumerate(items):
         x0 = left + i * (bw + gap)
         col = D.red if it.get("highlight") else D.ink
-        t = D.box(x0, y - h / 2, x0 + bw, y + h / 2, col, 5 if it.get("highlight") else 4)
+        t = D.box(x0, y - h / 2, x0 + bw, y + h / 2, col, 5 if it.get("highlight") else 4,
+                  fill="rgba(140,44,61,0.18)" if it.get("highlight") and D.use_rough else None)
         top = y - h / 2 + 18
         if it.get("icon"):
             D.icon(it["icon"], x0 + bw / 2, top + 26, 52, col, at=t + 0.25)
@@ -325,10 +365,13 @@ def h_bars(D, card):
         D.t = 0.45 + i * 0.22
         D.text(x0 - 30, y, it.get("label", ""), FT("label"), fit(FT("label"), it.get("label", ""), 34, D.W * 0.24).size, D.muted, anchor="rm", gap=0.02)
         w = max(wmax * v / top, 8)
-        bid = D._id()
-        D.items.append(f'<div id="{bid}" style="position:absolute;left:{x0:.0f}px;top:{y - rh * 0.28:.0f}px;width:{w:.0f}px;'
-                       f'height:{rh * 0.56:.0f}px;background:{col};opacity:.88;transform-origin:left center"></div>')
-        D.js.append(f'tl.fromTo("#{bid}",{{scaleX:0}},{{scaleX:1,duration:0.7,ease:"power2.out"}},{D.t:.2f});')
+        if D.use_rough:  # 손으로 빗금을 그어 칠한 막대
+            D.rough("rectangle", [x0, y - rh * 0.28, w, rh * 0.56], col, 2.5, fill=col, at=D.t, dur=0.8)
+        else:
+            bid = D._id()
+            D.items.append(f'<div id="{bid}" style="position:absolute;left:{x0:.0f}px;top:{y - rh * 0.28:.0f}px;width:{w:.0f}px;'
+                           f'height:{rh * 0.56:.0f}px;background:{col};opacity:.88;transform-origin:left center"></div>')
+            D.js.append(f'tl.fromTo("#{bid}",{{scaleX:0}},{{scaleX:1,duration:0.7,ease:"power2.out"}},{D.t:.2f});')
         lab = f"{it['value']}" + (f" {it['sub']}" if it.get("sub") else "")
         D.text(x0 + w + 20, y, lab, FT("value"), fit(FT("value"), lab, 40, D.W * 0.95 - x0 - w).size, col, anchor="lm", at=D.t + 0.5)
     _note(D, card, y0 + n * rh + 50)

@@ -10,7 +10,7 @@ niche: "미국·한국 대형 기술주의 실적발표·경영진 발언 해설
 seed_keywords: ["실적발표", "earnings call", "CEO 인터뷰", "엔비디아", "빅테크 실적", "가이던스", "자사주", "인수합병"]
 target_minutes: 9
 cadence: "주 1~2편 (실적 시즌에 몰아서)"
-voice: ko-KR-InJoonNeural
+voice: "미정 — ElevenLabs 로 정함 (영상이 확정된 뒤 목소리를 고르고 아래 tts 의 주석을 풉니다)"
 tone: "사실 전달 위주. 발언 → 정리하면 → 숫자 리듬."
 needs_pc_rebuild: true                   # YouTube 원본 클립은 사용자 PC 에서 rebuild 로 받음
 
@@ -29,3 +29,8 @@ sourcing:
   verify_with: ["SEC/DART 공시(10-Q·10-K·8-K·13F)", "주주서한·실적 보도자료·실적 콜 녹취", "시세(야후 파이낸스)·지수·FRED", "로이터·블룸버그·CNBC 보도"]
   correct_speaker: true           # 발언 속 숫자가 공시와 다르면 공시 숫자로 바로잡아 보여 준다
   falsifiable_end: true           # "이 판단이 틀렸다면 무엇이 먼저 꺾이나"로 끝낸다
+
+# 목소리 확정 후 (docs/08-voice.md):
+# tts:
+#   backend: elevenlabs
+#   elevenlabs: {voice_id: "<ElevenLabs 목소리 ID>", model_id: eleven_multilingual_v2, language_code: ko, stability: 0.5, similarity_boost: 0.75, speed: 1.0}
