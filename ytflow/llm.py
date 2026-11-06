@@ -125,15 +125,24 @@ def _api_web(system: str, user: str, max_tokens: int) -> str:
     return "".join(b.text for b in msg.content if b.type == "text").strip()
 
 
-def structured(system: str, user: str, schema: Type[T], max_tokens: int = 16000) -> T:
-    """스키마로 검증된 JSON 출력."""
+def structured(system: str, user: str, schema: Type[T], max_tokens: int = 16000,
+               images: list | None = None) -> T:
+    """스키마로 검증된 JSON 출력. images 를 주면 그림(장면 미리보기 등)을 함께 보고 답한다."""
     if _backend() == "claude-cli":
-        out = _cli(system, user, schema.model_json_schema())
+        if images:
+            user += "\n\n# 함께 볼 이미지 (Read 로 열어 보세요)\n" + "\n".join(str(p) for p in images)
+        out = _cli(system, user, schema.model_json_schema(), tools=["Read"] if images else None)
         return schema.model_validate(_json_from(out))
+    content: list | str = user
+    if images:
+        import base64
+        content = [{"type": "image", "source": {"type": "base64", "media_type": "image/png",
+                                                 "data": base64.standard_b64encode(open(p, "rb").read()).decode()}}
+                   for p in images] + [{"type": "text", "text": user}]
     resp = client().messages.parse(
         max_tokens=max_tokens,
         system=system,
-        messages=[{"role": "user", "content": user}],
+        messages=[{"role": "user", "content": content}],
         output_format=schema,
         **_common(),
     )

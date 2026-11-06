@@ -15,7 +15,7 @@ import argparse
 
 from . import config
 from .project import GATE_AFTER, STAGES, Project
-from .stages import benchmark, clips, discover, media, report, sources, writing
+from .stages import benchmark, clips, discover, media, report, sources, style, writing
 
 RUNNERS = {
     "discover": lambda p, a: discover.run(p, a.keywords),
@@ -37,10 +37,18 @@ def cmd_make(a) -> None:
     """자료조사 → 대본 → 소스 → 영상 → 업로드 패키지 → 보고서를 한 번에 (승인 게이트는 자동 통과)."""
 
     p = Project.create(a.name or (a.topic or "auto")[:30])
+    if a.style_ref:  # 분석한 레퍼런스의 설정을 그대로 가져온다
+        ref = config.DATA_DIR / "styles" / a.style_ref / "edit.yaml"
+        if not ref.exists():
+            raise SystemExit(f"먼저 실행: python -m ytflow style {a.style_ref} <레퍼런스 영상들>")
+        (p.path / "edit.yaml").write_text(ref.read_text(encoding="utf-8"), encoding="utf-8")
     if a.style:
-        (p.path / "edit.yaml").write_text(f"edit:\n  style: {a.style}\n", encoding="utf-8")
-        p = Project.open(str(p.path))
-    print(f"=== make: {p.path.name} (style={a.style or 'sixsigma'})")
+        import yaml as _y
+        cur = _y.safe_load((p.path / "edit.yaml").read_text(encoding="utf-8")) if (p.path / "edit.yaml").exists() else {}
+        cur.setdefault("edit", {})["style"] = a.style
+        (p.path / "edit.yaml").write_text(_y.safe_dump(cur, allow_unicode=True), encoding="utf-8")
+    p = Project.open(str(p.path))
+    print(f"=== make: {p.path.name} (style={config.load('pipeline')['edit']['style']}, ref={a.style_ref or '-'})")
     if a.topic:  # 주제를 직접 준 경우: 소스 탐색·주제 선정 생략
         p.write_json("source", "shortlist.json", [{"title_working": a.topic, "angle": a.angle or "", "why_now": "",
                                                    "source_video_ids": [], "hook_idea": "", "score": 100, "risks": ""}])
@@ -101,11 +109,16 @@ def main(argv: list[str] | None = None) -> None:
     g.add_argument("gate", choices=sorted(set(GATE_AFTER.values())))
     g.add_argument("--pick", type=int, help="topic 게이트: shortlist 번호")
 
+    sy = sub.add_parser("style", help="레퍼런스 영상 파일로 편집 스타일을 분석 → data/styles/<이름>/")
+    sy.add_argument("name")
+    sy.add_argument("videos", nargs="+")
+
     mk = sub.add_parser("make", help="자료조사부터 영상·업로드 패키지까지 한 번에")
     mk.add_argument("--topic", help="주제 (없으면 소스 탐색으로 자동 선정)")
     mk.add_argument("--angle", help="관점·방향 메모 (선택)")
     mk.add_argument("--name", help="프로젝트 이름 (선택)")
     mk.add_argument("--style", choices=["sixsigma", "paper"], help="편집 스타일")
+    mk.add_argument("--style-ref", help="ytflow style 로 분석한 레퍼런스 이름 (측정한 색·속도를 적용)")
     mk.add_argument("--keywords", nargs="*")
 
     rb = sub.add_parser("rebuild", help="소스 클립 받기 → 음성 → 화면 → 자막 → 가편집을 한 번에 (원본 클립을 넣은 뒤)")
@@ -133,6 +146,8 @@ def main(argv: list[str] | None = None) -> None:
             p.save_state(stt)
         p.approve(a.gate)
         print(f"승인: {a.gate}. 이어서:  python -m ytflow run {p.path.name}")
+    elif a.cmd == "style":
+        style.run(a.name, a.videos)
     elif a.cmd == "make":
         cmd_make(a)
     elif a.cmd == "rebuild":

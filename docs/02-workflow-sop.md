@@ -1,5 +1,25 @@
 # 02. 제작 워크플로우 SOP — 소스 탐색부터 업로드 패키지까지
 
+## 한 줄 실행 (자동화 전체)
+
+```bash
+python -m ytflow style 미주일기 a.mp4 b.mp4        # (스타일을 바꿀 때만) 레퍼런스 영상 → 편집 규칙·설정
+python -m ytflow benchmark                         # (월 1회) 채널 벤치마킹 → 대본 규칙
+python -m ytflow make --style-ref 미주일기          # 주제 선정 → 자료조사 → 대본 → 소스 → 음성·자막·편집 → 패키지 → 보고서
+python -m ytflow rebuild <프로젝트>                 # (PC) 원본 클립을 받아 임시 화면 교체 후 재생성
+```
+
+| 자동화된 과정 | 담당 단계 | 사람이 볼 곳 |
+|---|---|---|
+| 주제 선정 | discover → select (아웃라이어 + Claude 평가) | `00_source/shortlist.md` |
+| 소스 탐색 | sources (장면별 YouTube 영상·구간), clips (구간 다운로드·기사 캡처) | `04_assets/sources.csv`, `clips.csv` |
+| 자료조사 | research (웹 검색, 출처·날짜·교차확인) | `01_research/factsheet.md` |
+| 대본 작성 | script (스타일 프로필 + 팩트시트 → 장면 단위) | `02_script/script.md` |
+| 편집점 | 장면 = 문장 단위, 원본 발언 구간, 카드 전환 (timeline) | `05_edit/timeline.csv` |
+| 편집 스타일 | style (레퍼런스 영상 측정·해석) → assets/assemble 렌더러 | `data/styles/<이름>/rules.json`, `edit.yaml` |
+| 자막 | subtitles (2단 원문+번역, 강조색, 상자형) | `05_edit/subs.srt` |
+| 업로드 준비 | package, report | `REPORT.md` |
+
 ```
 [0 벤치마킹] 월 1회 ─→ data/style_profile.json ──────────────┐ (모든 단계가 참조)
                                                                ▼

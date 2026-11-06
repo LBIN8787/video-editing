@@ -153,7 +153,13 @@ def _avg(dicts: list[dict]) -> dict:
 def run(with_video: bool = False, skip_llm: bool = False) -> Path:
     cfg = config.load("channels")
     all_metrics: dict = {}
+    from . import style as style_stage
     for ch in cfg["channels"]:
+        if ch.get("reference_videos"):  # 편집 스타일 레퍼런스 영상 분석 (파일이 있을 때만)
+            vids = [v for v in ch["reference_videos"] if Path(v).expanduser().exists()]
+            if vids:
+                style_stage.run(ch["name"], vids)
+    for ch in [c for c in cfg["channels"] if c.get("role") != "style"]:
         name = ch["name"]
         base = config.DATA_DIR / "channels" / name
         base.mkdir(parents=True, exist_ok=True)
