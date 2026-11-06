@@ -15,3 +15,5 @@ description: 채널별 조사 글에서 쇼츠 안내형과 롱폼 칼럼형 영
 8. AI 채널은 개설·운영 요청을 받았다. channels/ai/launch/README.md를 따라 연결하되 실제 계정·OAuth가 없으면 게시하지 않는다. 퀴즈는 보류한다. 결과와 남은 작업을 episode의 review.md에 기록한다.
 
 기존 ytflow와 이 스튜디오의 채널 설정을 혼동하지 않는다. 현재 채널에는 channel.json의 고정 음성 정책이 우선한다.
+
+AI 쇼츠 반복 제작은 shorts-ai-guide 1.0.0 / ShortsGuideV1을 사용한다. releases/shorts-ai-guide-v1.0.0/README.md와 style-lock.json을 읽고 제목·본문·음성·자료·길이만 바꾼다. 디자인 변경은 새 버전으로 기록한다. scripts/render_short.py --check-only로 폰트와 입력을 검사한다.

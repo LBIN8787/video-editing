@@ -1,3 +1,5 @@
+import {ShortsGuideV1} from './template/ShortsGuideV1';
+import referenceProps from './template/reference-props.json';
 import {AIRadar003} from './episode-003/AIRadar003';
 import {Quiz002} from './review-samples/Quiz002';
 import {Quiz001} from './review-samples/Quiz001';
@@ -21,6 +23,7 @@ import {Install} from './Install';
 import {Limit} from './Limit';
 import {Closing} from './Closing';
 export const Root=()=> <>
+<Composition id="ShortsGuideV1" component={ShortsGuideV1} defaultProps={referenceProps} calculateMetadata={({props})=>({durationInFrames:props.scenes.reduce((total,scene)=>total+scene.frames,0)})} durationInFrames={1500} fps={30} width={1080} height={1920} />
 <Composition id="AIRadar003" component={AIRadar003} durationInFrames={1500} fps={30} width={1080} height={1920} />
 <Composition id="Quiz002" component={Quiz002} durationInFrames={1166} fps={30} width={1080} height={1920} />
 <Composition id="Quiz001" component={Quiz001} durationInFrames={1024} fps={30} width={1080} height={1920} />
