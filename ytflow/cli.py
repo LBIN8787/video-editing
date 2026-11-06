@@ -272,6 +272,7 @@ def main(argv: list[str] | None = None) -> None:
     up = sub.add_parser("upload", help="완성 영상을 Google Drive 의 채널(편집 스타일)별 폴더에 올리기")
     up.add_argument("project", nargs="?")
     up.add_argument("--all", action="store_true", help="영상이 있는 모든 프로젝트")
+    up.add_argument("--archive", action="store_true", help="영상과 함께 보관 자료(장면 소스·원본 클립·자막·시세)도 올리기")
     sub.add_parser("schemas", help="에이전트가 직접 쓰는 파일들의 JSON Schema 를 schemas/ 에 내보내기")
     qa = sub.add_parser("qa", help="카드 화면을 렌더링해 글자·그래프 겹침과 안전 영역 침범을 점검")
     qa.add_argument("project")
@@ -337,9 +338,13 @@ def main(argv: list[str] | None = None) -> None:
                 print(f"{d.name:14} {fam:12} {meta.get('title', '').strip():12} renderer={meta.get('renderer', '').split('#')[0].strip():9} status={meta.get('status', '').split('#')[0].strip()}")
     elif a.cmd == "upload":
         from .stages import upload
-        names = [d.name for d in sorted(config.PROJECTS_DIR.iterdir()) if (d / "05_edit").is_dir()] if a.all else [a.project]
+        names = [d.name for d in sorted(config.PROJECTS_DIR.iterdir()) if (d / "05_edit").is_dir()] if a.all else ([a.project] if a.project else [])
         for n in names:
             upload.run(Project.open(n))
+            if a.archive:
+                upload.archive(Project.open(n))
+        if a.archive and a.all:
+            upload.archive_repo()
     elif a.cmd == "voice-sample":
         from .stages.media import _elevenlabs
         ec = dict(config.load("pipeline").get("tts", {}).get("elevenlabs") or {}, voice_id=a.voice_id)

@@ -21,6 +21,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | 영상편집 skill 도입 검토 | `docs/05-skills-review.md` |
 | **소스 찾기 (벤치마킹 채널 방식, 소스 먼저)** | `docs/07-sourcing.md`, `channels/<id>/channel.yaml` 의 `sourcing` |
 | 목소리(ElevenLabs, 영상 확정 후 적용) | `docs/08-voice.md` |
+| **어디에 무엇을 두나** (GitHub / Google Drive / 다시 만들기) | `docs/09-storage.md` |
 
 스킬은 `skills/` 가 원본입니다. `.claude/skills/`(Claude Code)와 `.agents/skills/`(Codex)는 `python scripts/sync_skills.py` 로 만든 복사본입니다. **원본만 고치고 동기화하세요.**
 
@@ -45,7 +46,7 @@ python -m ytflow make --channel <채널id> [--topic "주제" | --from-text 조�
 python -m ytflow make --style-ref <스타일id> [--topic "주제"]   # 스타일만 지정해 한 편
 python -m ytflow make --channel <채널id> --plan                  # 트렌드 → 소스 찾기 → 주제·형식 결정까지만 (검토용)
 python -m ytflow channels                                       # 채널 목록
-python -m ytflow upload <프로젝트> | --all                          # 완성 영상을 Google Drive 채널(편집 스타일)별 폴더에 보관 (config/storage.yaml)
+python -m ytflow upload <프로젝트> | --all [--archive]              # 완성 영상 → Google Drive 채널별 폴더, --archive 는 GitHub 밖 보관 자료까지 (docs/09-storage.md)
 python -m ytflow stage <프로젝트> <단계>                          # 단계 하나
 python -m ytflow rebuild <프로젝트>                               # 소스 넣은 뒤 재생성
 python -m ytflow validate <프로젝트>                              # 대본 점검 (직접 쓴 뒤 필수)
@@ -75,7 +76,7 @@ python -m ytflow styles | schemas | status <프로젝트>
 - **사실:** 숫자와 발언은 출처로 확인된 것만 씁니다. '재확인 필요'는 단정하지 않습니다. 투자 권유 표현은 금지합니다.
 - **소스:** YouTube 봇 확인이나 사이트 접근 차단을 **우회하지 않습니다.** 막히면 임시 화면을 두고 사용자 PC 에서 `rebuild` 하게 안내합니다.
 - **스타일:** 레퍼런스 채널의 대사, 고유 캐릭터, 로고, 썸네일을 복제하지 않습니다. 구조와 기법만 가져옵니다.
-- **커밋 대상:** 기획 문서(md/json/csv/yaml)는 커밋합니다. 미디어(mp4/wav/png/jpg), 타 채널 자막, `styles/**/work/`, `.llm/` 은 커밋하지 않습니다(.gitignore).
+- **커밋 대상:** 기획 문서(md/json/csv/yaml)는 커밋합니다. 미디어(mp4/wav/png/jpg), 타 채널 자막, `styles/**/work/`, `.llm/` 은 커밋하지 않습니다(.gitignore). 그중 다시 만들 수 없는 것은 Google Drive 에 보관합니다(`upload --all --archive`, `docs/09-storage.md`).
 - **결과 확인:** 영상을 만든 뒤에는 프레임을 뽑아 직접 확인하고(`skills/video-edit`), `REPORT.md` 의 남은 일을 사용자에게 알립니다.
 - **목소리:** 초안은 edge-tts, **업로드 최종본은 ElevenLabs**(영상 확정 후 채널별 voice_id 지정). API 키는 채팅에 쓰지 않고 환경변수·네트워크 비밀값으로.
 - **외부 도구:** 버전은 `tools/external.json` 에 고정합니다. 올릴 때는 그 도구의 SKILL.md·스크립트를 다시 읽고(네트워크 호출·자동 설치 확인) `docs/05-skills-review.md` 에 기록합니다.

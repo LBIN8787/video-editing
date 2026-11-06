@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import os
+import urllib.parse
 import urllib.request
 
 import yaml
@@ -67,6 +68,57 @@ def _upload(path, title: str, mime: str, parent: str) -> str:
     return ""
 
 
+def _folder(name: str, parent: str) -> str:
+    """parent 아래 name 폴더를 찾고, 없으면 만든다 (API 방식)."""
+    q = urllib.parse.quote(f"name = '{name}' and '{parent}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false")
+    with urllib.request.urlopen(urllib.request.Request(f"{API}/drive/v3/files?q={q}&fields=files(id)", headers=_auth()), timeout=30) as r:
+        hit = json.loads(r.read()).get("files") or []
+    if hit:
+        return hit[0]["id"]
+    body = json.dumps({"name": name, "parents": [parent], "mimeType": "application/vnd.google-apps.folder"}).encode()
+    req = urllib.request.Request(f"{API}/drive/v3/files?fields=id", data=body, method="POST",
+                                 headers={**_auth(), "Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.loads(r.read())["id"]
+
+
+# GitHub 에 올리지 않지만 다시 만들 수 없는 것 (docs/09-storage.md). 음성·렌더·작업 폴더는 다시 만들 수 있어 올리지 않는다.
+ARCHIVE_GLOBS = ["04_assets/*_shot.*", "04_assets/*_temp.*", "04_assets/scene_[0-9][0-9][0-9].mp4", "04_assets/repo_full.png",
+                 "01_research/subs/*.vtt", "01_research/prices/*.json", "05_edit/final_sheet.png"]
+
+
+def archive(project: Project) -> None:
+    """프로젝트의 보관 자료(장면 소스 캡처·사진·받은 원본 클립·자막·시세)를 '보관 자료/<프로젝트>/' 에 올린다."""
+    files = [p for g in ARCHIVE_GLOBS for p in project.path.glob(g) if p.is_file()]
+    if not files:
+        return
+    c = _cfg()
+    sync = c.get("local_sync_dir")
+    if sync:
+        import shutil
+        from pathlib import Path
+        dst = Path(sync).expanduser() / c["folder_names"]["archive"] / project.path.name
+        for p in files:
+            (dst / p.parent.name).mkdir(parents=True, exist_ok=True)
+            shutil.copy2(p, dst / p.parent.name / p.name)
+        print(f"[archive] {project.path.name}: {len(files)}개 → {dst}")
+        return
+    rec_f = project.dir("edit") / "drive_archive.json"
+    rec = json.loads(rec_f.read_text(encoding="utf-8")) if rec_f.exists() else {}
+    folder = _folder(project.path.name, c["folders"]["archive"])
+    subs = {}
+    for p in files:
+        key = str(p.relative_to(project.path))
+        if rec.get(key, {}).get("size") == p.stat().st_size:
+            continue
+        sub = subs.get(p.parent.name) or subs.setdefault(p.parent.name, _folder(p.parent.name, folder))
+        mime = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".mp4": "video/mp4",
+                ".vtt": "text/vtt", ".json": "application/json"}.get(p.suffix.lower(), "application/octet-stream")
+        rec[key] = {"id": _upload(p, p.name, mime, sub), "size": p.stat().st_size}
+    rec_f.write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"[archive] {project.path.name}: {len(files)}개 보관")
+
+
 def run(project: Project) -> None:
     edir = project.dir("edit")
     vid = edir / "final.mp4" if (edir / "final.mp4").exists() else edir / "draft.mp4"
@@ -110,3 +162,28 @@ def run(project: Project) -> None:
         rec[key] = {"id": fid, "size": path.stat().st_size, "folder": cid, "name": name}
         print(f"[upload] ↑ {cid}/{name} ({path.stat().st_size / 1e6:.1f}MB) → https://drive.google.com/file/d/{fid}/view")
     rec_f.write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+def archive_repo() -> None:
+    """프로젝트 밖의 비공개 보관 자료: 벤치마킹 원자료(data/), 스타일 분석 장면 미리보기(styles/*/work/)."""
+    c = _cfg()
+    files = [p for p in list(config.DATA_DIR.rglob("*")) + list(config.STYLES_DIR.glob("*/work/*"))
+             if p.is_file() and p.name != "style_profile.json" and p.name != "jargon.json"]
+    sync = c.get("local_sync_dir")
+    root_name = "저장소 자료 (data·styles work)"
+    if sync:
+        import shutil
+        from pathlib import Path
+        for p in files:
+            dst = Path(sync).expanduser() / c["folder_names"]["archive"] / root_name / p.relative_to(config.ROOT).parent
+            dst.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(p, dst / p.name)
+        print(f"[archive] 저장소 자료 {len(files)}개 → 동기화 폴더")
+        return
+    base = _folder(root_name, c["folders"]["archive"])
+    for p in files:
+        parent = base
+        for part in p.relative_to(config.ROOT).parent.parts:
+            parent = _folder(part, parent)
+        _upload(p, p.name, "application/octet-stream", parent)
+    print(f"[archive] 저장소 자료 {len(files)}개 보관")

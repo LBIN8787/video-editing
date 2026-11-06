@@ -414,8 +414,11 @@ def build(card: dict, work: Path, duration: float, seed: int = 1) -> Path:
     a = work / "assets"
     (a / "fonts").mkdir(parents=True, exist_ok=True)
     for p in (paper.SERIF, paper.SERIF_B, paper.PEN, paper.SANS, paper.SANS_X):
-        if not (a / "fonts" / p.name).exists():
-            shutil.copy(p, a / "fonts" / p.name)
+        if not (a / "fonts" / p.name).exists():  # 폰트는 카드마다 복사하지 않고 링크 (카드 80장 × 14MB 절약)
+            try:
+                os.link(p, a / "fonts" / p.name)
+            except OSError:
+                shutil.copy(p, a / "fonts" / p.name)
     shutil.copy(GSAP, a / "gsap.min.js")
     D = Doc(seed)
     bg = paper.paper_bg(D.W, D.H, seed=7)
