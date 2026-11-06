@@ -1,0 +1,37 @@
+name: Content studio checks
+on:
+  pull_request:
+    paths:
+      - 'channels/**'
+      - 'content/**'
+      - 'studio/**'
+      - 'styles/**'
+      - 'scripts/**'
+      - 'skills/content-studio/**'
+      - '.agents/skills/content-studio/**'
+      - '.claude/skills/content-studio/**'
+      - '.github/workflows/content-studio.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: studio/renderer/package-lock.json
+      - run: python -m unittest discover -s scripts -p 'test_content_studio.py' -v
+      - run: python scripts/sync_skills.py --check
+      - run: python -m unittest -v test_workflow.py test_content_policy.py
+        working-directory: studio/automation
+      - run: npm ci --ignore-scripts
+        working-directory: studio/renderer
+      - run: npm run typecheck
+        working-directory: studio/renderer

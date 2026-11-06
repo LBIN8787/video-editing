@@ -20,3 +20,26 @@ projects/**/work_subs/
 __pycache__/
 *.pyc
 .llm/
+
+# Content studio: keep authored records, exclude runtime state and generated media.
+.env
+.env.*
+!.env.example
+studio/renderer/node_modules/
+studio/renderer/out/
+studio/renderer/public/*
+!studio/renderer/public/README.md
+studio/renderer/research/
+studio/automation/*.sqlite3
+studio/automation/*.sqlite3-*
+studio/automation/*.log
+studio/automation/*.done
+studio/automation/*.lock
+studio/automation/health.json
+studio/automation/research/
+studio/automation/upload-bundles/
+channels/**/*.mp4
+channels/**/*.wav
+channels/**/*.mp3
+channels/**/*.png
+channels/**/*.jpg

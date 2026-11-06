@@ -1,0 +1,48 @@
+{
+  "channel": "ai",
+  "title": "엑셀 AI에게 맡길 때, 이 요청부터 해보세요",
+  "description": "공개 xlsx 스킬의 기능과 활용 요청문. 설명용 예시이며 사용 환경 확인이 필요합니다.",
+  "source_urls": [
+    "https://github.com/anthropics/skills/tree/main/skills/xlsx"
+  ],
+  "source_checked_at": "2026-11-06",
+  "script_reviewed": true,
+  "transition_sfx": false,
+  "format_version": "ai-guide-v1",
+  "composition": "AIRadar003",
+  "file": "../renderer/out/AI-Shorts-003-ElevenLabs.mp4",
+  "voice": {
+    "provider": "elevenlabs",
+    "voice_name": "Han Aim",
+    "voice_id": "8jHHF8rMqMlg8if2mOUe",
+    "model_id": "eleven_v4",
+    "fallback_allowed": false,
+    "generations_per_script": 1,
+    "fallback_used": false,
+    "asset": "../renderer/public/episode-003/voice.mp3",
+    "sha256": "45e4aefc2b36e6bf7e3e4f8c143a955b3f0f0aa7be16e928c752b96882298d90"
+  },
+  "sections": {
+    "news_context": "많은 관심을 받은 anthropics/skills의 xlsx 활용 안내. 신규 출시 속보가 아닌 기존 공개 스킬 발굴. 누적 별 수는 전체 저장소 기준.",
+    "features": [
+      "표 정리",
+      "수식 작성",
+      "차트 제작"
+    ],
+    "usage_steps": [
+      "지원 환경에서 xlsx 스킬 준비",
+      "원본 복사본 첨부",
+      "날짜와 중복 처리 기준, 수식과 차트 요청",
+      "결과 xlsx 파일 검사"
+    ],
+    "application_example": {
+      "input": "날짜 형식과 중복 행이 섞인 매출 파일",
+      "request": "날짜 통일, 중복은 별도 시트, 월별 합계 수식과 차트 작성",
+      "expected_output": "수식과 차트가 들어간 수정 가능한 .xlsx 파일",
+      "evidence_type": "illustrative",
+      "on_screen_label": "화면은 설명용 예시"
+    },
+    "result_check": "원본과 행 수, 합계, 수식 오류 대조",
+    "conditions": "스킬 지원·파일 실행·요금은 환경별 확인. 설치 메뉴 실연은 미포함."
+  }
+}

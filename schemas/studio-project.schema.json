@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Content studio project",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "channel",
+    "topic",
+    "style",
+    "format",
+    "source_ref",
+    "research_ref",
+    "article_ref",
+    "voice_ref",
+    "state",
+    "publish_allowed"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "channel": {
+      "enum": [
+        "ai",
+        "quiz"
+      ]
+    },
+    "topic": {
+      "type": "string"
+    },
+    "style": {
+      "enum": [
+        "shorts-ai-guide",
+        "longform-ai-column",
+        "shorts-quiz-explain"
+      ]
+    },
+    "format": {
+      "enum": [
+        "shorts",
+        "longform"
+      ]
+    },
+    "source_ref": {
+      "type": "string"
+    },
+    "research_ref": {
+      "type": "string"
+    },
+    "article_ref": {
+      "type": "string"
+    },
+    "voice_ref": {
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "draft",
+        "research",
+        "script",
+        "storyboard",
+        "render",
+        "review",
+        "approved",
+        "published"
+      ]
+    },
+    "publish_allowed": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}

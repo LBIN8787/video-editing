@@ -78,3 +78,11 @@ python -m ytflow styles | schemas | status <프로젝트>
 | `schemas/` | JSON Schema |
 | `projects/` | 영상별 작업 폴더. 기획 문서만 버전 관리 |
 | `data/style_profile.json` | 채널 대본 규칙 (benchmark) |
+
+## 채널별 반복 제작 (AI 활용·퀴즈)
+
+이 두 채널의 작업은 skills/content-studio/SKILL.md와 studio/README.md를 먼저 읽는다. channels/<id>/channel.json이 고정 음성과 허용 스타일의 원본이다. 전역 legacy Edge TTS 설정을 이 두 채널에 적용하지 않는다.
+
+조사 자료 → 글/안내문/칼럼 → 길이에 맞는 대본 → 장면 → 영상 순으로 진행한다. 쇼츠는 질문 하나의 짧은 안내이고 롱폼은 주장·근거·사례·반론의 분석이다. 이 스튜디오의 짧은 안내형에서는 위 일반 장문 규칙의 비유 2개·과거 사례 1개를 기계적으로 강제하지 말고 필요한 이해와 정확성을 우선한다.
+
+소스·기획·대본·검수 기록은 Git, 미디어·DB·로그·인증 정보는 외부/로컬에 둔다. 아직 정기 실행·업로드를 활성화하지 않는다.

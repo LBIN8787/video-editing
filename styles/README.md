@@ -68,3 +68,15 @@ python -m ytflow make --style-ref mijudiary                     # 이 스타일�
 python -m ytflow style <id> ref1.mp4 ref2.mp4 --title <이름>    # 새 스타일 추가
 ```
 새 스타일을 추가하는 절차는 `skills/edit-style-new/SKILL.md` 에 있습니다.
+
+## 채널 스튜디오의 편집 프로필
+
+기존 렌더러 스타일과 별도로 채널별 글→영상 제작 규칙을 관리한다. 다음 ID는 scripts/content_studio.py에서 사용하며 기존 ytflow make에 연결됐다는 뜻은 아니다.
+
+| ID | 용도 | 상태 |
+|---|---|---|
+| shorts-ai-guide | AI 기능·활용·사례 안내 | 기존 Remotion 샘플 있음 |
+| longform-ai-column | 주장·근거·비교·반론을 갖춘 칼럼 | 명세 단계 |
+| shorts-quiz-explain | 문제·정답·시각 해설 | 샘플 있음, 타깃 미정 |
+
+채널 프로필의 고정 보이스가 우선하며 스타일에서 음성을 변경하지 않는다.
