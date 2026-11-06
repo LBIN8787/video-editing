@@ -176,7 +176,12 @@ def subtitles(project: Project) -> None:
             for w in sorted(s.get("emphasis", []), key=len, reverse=True):
                 if w and w in styled:
                     styled = styled.replace(w, f"{{\\c{emph}}}{w}{{\\c{sub_color}}}", 1)  # 강조 뒤 원래 자막색으로
-            ass_events.append(f"Dialogue: 0,{_ts_ass(lt)},{_ts_ass(lt + ld)},Sub,,0,0,0,,{styled}")
+            if box == 3:
+                # 상자 자막: 상자(색 바뀜 없이 한 덩어리)와 글자(강조색)를 두 겹으로 → 강조 단어에서 상자가 끊기지 않음
+                ass_events.append(f"Dialogue: 0,{_ts_ass(lt)},{_ts_ass(lt + ld)},SubBox,,0,0,0,,{ln}")
+                ass_events.append(f"Dialogue: 1,{_ts_ass(lt)},{_ts_ass(lt + ld)},SubText,,0,0,0,,{styled}")
+            else:
+                ass_events.append(f"Dialogue: 0,{_ts_ass(lt)},{_ts_ass(lt + ld)},Sub,,0,0,0,,{styled}")
             lt += ld
             n += 1
         timeline.append({"scene": s["id"], "start": round(t, 3), "duration": round(d + GAP, 3),
@@ -192,6 +197,8 @@ PlayResY: {H}
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Sub,{font},{size},{sub_color},{sub_color},{back if box == 3 else "&H00000000"},{back},{-1 if top else 0},0,0,0,100,100,0,0,{box},{ecfg.get("subtitle_outline", 12 if box == 3 else (0 if ecfg.get("subtitle_dark") else 2.5))},0,{8 if top else 2},80,80,{ecfg.get("subtitle_margin_v", 30 if top else (50 if box == 3 else 60))},1
+Style: SubBox,{font},{size},&HFF000000,&HFF000000,{back},{back},0,0,0,0,100,100,0,0,3,{ecfg.get("subtitle_outline", 12)},0,2,80,80,{ecfg.get("subtitle_margin_v", 50)},1
+Style: SubText,{font},{size},{sub_color},{sub_color},&HFF000000,&HFF000000,0,0,0,0,100,100,0,0,1,0,0,2,80,80,{ecfg.get("subtitle_margin_v", 50)},1
 Style: En,{font},{int(size * 0.62)},&H00D2D2D2,&H00D2D2D2,{back if box == 3 else "&H00000000"},{back},0,0,0,0,100,100,0,0,{box},{8 if box == 3 else 1.8},0,2,80,80,{(50 if box == 3 else 60) + int(size * (1.6 if box == 3 else 1.25))},1
 Style: Label,{font},{int(size * 0.52)},&H00E6E6E6,&H00E6E6E6,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,1.5,0,{lab_align},40,40,30,1
 Style: Logo,{font},{int(size * 0.56)},&H00DCDCDC,&H00DCDCDC,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,1.5,0,9,40,40,30,1
@@ -218,6 +225,18 @@ def find_visual(project: Project, sid: int) -> Path | None:
     rank = {"_anim": 2, "_card": 2, "_shot": 3, "_temp": 4, "_auto": 5}
     found.sort(key=lambda p: (next((v for k, v in rank.items() if p.stem.endswith(k)), 1 if p.suffix == ".mp4" else 0), p.suffix != ".mp4"))
     return found[0] if found else None
+
+
+def _headline_fallback(project: Project, s: dict) -> dict | None:
+    url = (s.get("source") or {}).get("url", "")
+    f = project.dir("research") / "articles.json"
+    arts = json.loads(f.read_text(encoding="utf-8")) if f.exists() else []
+    a = next((x for x in arts if x.get("url") == url), None)
+    if not a:
+        return None
+    return {"type": "headline", "title": a.get("title", "")[:60],
+            "items": [{"label": f"{a.get('publisher', '')} · {a.get('date', '')}", "value": "", "sub": "", "highlight": False}],
+            "note": url.split("/")[2] if "//" in url else ""}
 
 
 def assets(project: Project, auto_cards: bool = True) -> None:
@@ -252,6 +271,8 @@ def assets(project: Project, auto_cards: bool = True) -> None:
         pasted = next((p for k in ("_shot", "_temp") for p in adir.glob(f"scene_{sid:03d}{k}.*")), None)
         d = durs.get(sid, 5.0) + GAP
         brief = f"{s['visual_type']} · {s['visual_brief']}"
+        if not card and own is None and pasted is None and s["visual_type"] == "screenshot":
+            card = _headline_fallback(project, s)  # 캡처 실패 → 기사 제목·매체·날짜로 헤드라인 카드
         if style == "sixsigma" and card:  # 식스시그마 카드도 같은 엔진(검은 배경 프로필)으로 → 겹침 방지·차트·아이콘
             from . import flat as flat_mod
             flat_mod.CURRENT["name"] = "dark"

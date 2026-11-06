@@ -225,8 +225,13 @@ class Scene:
         return self
 
     # --- 기본 요소
-    def text(self, x, y, s, font, color, anchor="mm", rise=18, dur=0.45, at=None, gap=0.12):
+    def text(self, x, y, s, font, color, anchor="mm", rise=18, dur=0.45, at=None, gap=0.12, plate=False):
         tile, (x0, y0) = self._layout_text(x, y, s, font, color, anchor)
+        if plate:  # 차트 위 라벨: 배경색 판을 깔아 선·캔들 위에서도 읽히게
+            bgc = _rgb(self.c["base"])
+            pl = Image.new("RGBA", (tile.size[0] + 16, tile.size[1] + 8), bgc + (225,))
+            pl.alpha_composite(tile, (8, 4))
+            tile, x0, y0 = pl, x0 - 8, y0 - 4
 
         def draw(img, d, p):
             e = ease(p)
@@ -449,8 +454,12 @@ def l_number_compare(S, card):
 
 def l_flow(S, card):
     """단계·돈의 흐름. 상자 안 글자는 상자 자리 안에 두고, 화살표 설명은 화살표 위 빈 곳에."""
-    _title(S, card)
     items = card.get("items", [])[:6]
+    if len(items) < 2:  # 상자 하나짜리 흐름도는 비어 보임 → 아이콘·문장 카드로
+        it = items[0] if items else {}
+        return l_text(S, {"title": card.get("title", ""), "icon": it.get("icon", ""),
+                          "items": [{"label": " · ".join(x for x in (it.get("label", ""), it.get("sub", "")) if x)}]})
+    _title(S, card)
     n = max(len(items), 1)
     bw = min(330, (S.W - 160) / n - 70)
     gap = (S.W - 160 - bw * n) / max(n - 1, 1)
@@ -540,7 +549,9 @@ def numeric(v) -> bool:
 
 def l_bars(S, card):
     items = card.get("items", [])[:8]
-    if not items or not all(numeric(it.get("value", "")) for it in items):
+    if len(items) < 2:  # 막대 하나는 비교가 아니라 숫자 하나 → 큰 숫자 카드로
+        return l_number_compare(S, card)
+    if not all(numeric(it.get("value", "")) for it in items):
         return l_table(S, card)  # 값이 순수 숫자가 아니면 막대를 그릴 수 없으므로 표로
     _title(S, card)
     vals = []
@@ -682,11 +693,13 @@ def _plot_series(S, xlabels, vals, unit, marks=None, label_all=False, ohlc=None)
             r = 9 * ease(p)
             d.ellipse([x - r, y - r, x + r, y + r], fill=col)
         S.add(dot, 0.2, gap=0.0)
-        size = 46 if last else 32
-        f = F(FT("value"), size)
-        # 라벨은 점 위쪽 → 겹치면 관리자가 옮김. 차트 영역 예약을 잠시 빼고 배치
+        if last:  # 마지막 가격: 차트 오른쪽 위 빈 곳에 크게 (캔들·축과 겹치지 않게)
+            S.text(x1, y1 - 34, txt, fit(FT("value"), txt, 46, x1 - x0 - 200), col, "rm", rise=8, dur=0.3, gap=0.08)
+            continue
+        f = F(FT("value"), 30)
+        # 사건 라벨은 점 위쪽, 배경판을 깔고 → 겹치면 관리자가 옮김. 차트 영역 예약을 잠시 빼고 배치
         area = S.occupied.pop(S.occupied.index((x0, y1 - 10, x1, y0 + 10)))
-        S.text(x + (0 if not last else 10), y - 38, txt, f, col, "mm" if not last else "lm", rise=8, dur=0.3, gap=0.08)
+        S.text(x, y - 36, txt, f, col, "mm", rise=8, dur=0.3, gap=0.08, plate=True)
         S.occupied.append(area)
 
 

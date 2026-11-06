@@ -40,6 +40,25 @@ const { chromium } = require('playwright');
     }
     const resp = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
     await page.waitForTimeout(3000);
+    // 쿠키·구독 동의 팝업 정리: '동의/Accept' 버튼을 누르고, 화면을 덮는 고정 레이어는 숨긴다 (페이지 내용은 그대로)
+    await page.evaluate(() => {
+      const re = /^(accept|accept all|agree|i agree|allow all|got it|ok|동의|모두 동의|확인|수락)/i;
+      for (const b of document.querySelectorAll('button, a[role=button], input[type=button]')) {
+        const t = (b.innerText || b.value || '').trim();
+        if (t && t.length < 30 && re.test(t)) { try { b.click(); } catch (e) {} }
+      }
+    }).catch(() => {});
+    await page.waitForTimeout(800);
+    await page.evaluate(() => {
+      for (const el of document.querySelectorAll('body *')) {
+        const cs = getComputedStyle(el);
+        if ((cs.position === 'fixed' || cs.position === 'sticky') && parseInt(cs.zIndex || '0') >= 100) {
+          const r = el.getBoundingClientRect();
+          if (r.width * r.height > window.innerWidth * window.innerHeight * 0.15) el.style.display = 'none';
+        }
+      }
+      document.documentElement.style.overflow = 'auto'; document.body.style.overflow = 'auto';
+    }).catch(() => {});
     const status = resp ? resp.status() : 0;
     const title = await page.title();
     if (status >= 400 || /보안 확인|Just a moment|Access Denied|403/i.test(title)) {
