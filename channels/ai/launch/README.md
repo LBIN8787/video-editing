@@ -1,6 +1,6 @@
 # AI 실전노트 개설·운영
 
-현재: 사용자 개설·운영 요청을 받았고 새 Google 계정을 사용자가 직접 만들기로 했다. 채널과 계정은 아직 생성 확인 전이다. 업로드 권한·채널 ID도 미연결이며 실제 게시한 영상은 없다.
+현재: 사용자가 채널 생성과 URL을 전달했다. 대상은 https://www.youtube.com/channel/UCb6tSnNY6X3BtH-ujxMIf3g 이다. 공개 페이지 조회는 throttled로 실패하여 이름·화면은 별도 확인하지 못했다. 업로드 OAuth 권한은 아직 미연결이며 실제 게시한 영상은 없다. 채널 생성 절차는 완료한 사용자 단계로 처리한다.
 
 ## 개설에 사용할 값
 
@@ -34,7 +34,7 @@
 
 ```bash
 python -m pip install -r studio/youtube/requirements.txt
-python studio/youtube/auth.py --client /PRIVATE/client_secret.json --token studio/youtube/.local/youtube-token.json --channel-id UC_YOUR_CHANNEL_ID --activate-publishing
+python studio/youtube/auth.py --client /PRIVATE/client_secret.json --token studio/youtube/.local/youtube-token.json --channel-id UCb6tSnNY6X3BtH-ujxMIf3g --activate-publishing
 ```
 
 이 명령은 그 PC 브라우저에서 Google 로그인을 열고 선택한 실제 채널 ID가 일치하는지 검사한다. 일치한 경우에만 토큰을 저장하고 로컬 채널 프로필에 업로드를 활성화한다. callback은 PC localhost이므로 클라우드 터미널에서 실행한 URL을 다른 PC로 열어 연결하려 하지 않는다.
@@ -52,7 +52,7 @@ python studio/youtube/auth.py --client /PRIVATE/client_secret.json --token studi
 
 ```bash
 # 제작과 QA를 거쳐 큐에서 approved가 된 작업만 업로드한다.
-python studio/youtube/publish.py --job-id JOB_ID --token studio/youtube/.local/youtube-token.json --channel-id UC_YOUR_CHANNEL_ID
+python studio/youtube/publish.py --job-id JOB_ID --token studio/youtube/.local/youtube-token.json --channel-id UCb6tSnNY6X3BtH-ujxMIf3g
 ```
 
 예외 발생 후 결과 불확실 상태에서는 Studio와 업로드 원장을 확인할 때까지 자동 재전송하지 않는다.

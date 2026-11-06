@@ -34,6 +34,6 @@ def main():
  save_token(Path(a.token),cred.to_json())
  if a.activate_publishing:
   root=Path(__file__).resolve().parents[2]
-  profile=root/'channels/ai/channel.json';data=json.loads(profile.read_text());data.update(account_created=True,youtube_channel_id=a.channel_id,uploads_enabled=True,status='ai_pilot');profile.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+  profile=root/'channels/ai/channel.json';data=json.loads(profile.read_text());data.update(account_created=True,youtube_channel_id=a.channel_id,uploads_enabled=True,status='ai_pilot',oauth_verified=True);profile.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
  print(json.dumps({'connected':identity,'token_saved':True,'publishing_enabled':a.activate_publishing},ensure_ascii=False))
 if __name__=='__main__':main()
