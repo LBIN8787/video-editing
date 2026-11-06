@@ -245,7 +245,8 @@ class Scene:
 
     # --- 렌더링
     def render(self, out: Path, duration: float):
-        anim = min(max(self.t + 0.5, float(self.c["anim_seconds"])), max(duration, 0.5))
+        last = max([t1 for _, t1, _ in self.items] + [self.t])  # 가장 늦게 끝나는 요소까지 다 그린 뒤 정지
+        anim = min(max(last + 0.25, float(self.c["anim_seconds"])), max(duration, 0.5))
         n = max(1, int(round(anim * self.fps)))
         bg = paper_bg(self.W, self.H).convert("RGBA")
         hold = max(0.0, duration - n / self.fps)
@@ -288,6 +289,7 @@ def _has_glyphs(font, s) -> bool:
 
 
 def _text_tile(s, font, color):
+    s = s.replace("\u2212", "-").replace("\u2013", "-")
     key = (s, id(font), color)
     if not _has_glyphs(font, s):  # 원문자는 나눔 글꼴에 없어서 '1.' 형태로
         s = s.translate(str.maketrans({"①": "1.", "②": "2.", "③": "3.", "④": "4.", "⑤": "5."}))

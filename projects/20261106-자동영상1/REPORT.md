@@ -203,12 +203,12 @@
 
 | # | 구간 | 내레이션 / 원문 발언 | 화면 | 소스 | 상태 |
 |---|---|---|---|---|---|
-| 1 | hook | 엔비디아 GPU 8,496장. 한국이 국가 예산으로 들인 슈퍼컴퓨터 '한강'입니다. | source_video | [2026.11.02 · JTBC News](https://www.youtube.com/watch?v=aBBkVF4d5Bk) 0:17.8~0:23.8 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
+| 1 | hook | 엔비디아 GPU 8,496장. 한국이 국가 예산으로 들인 슈퍼컴퓨터 '한강'입니다. | source_video | 2026.11.02 · JTBC News | MISSING(자리표시) |
 | 2 | hook | 계약액은 3,825억 원. 11월 2일 대전에서 가동식을 열었습니다. | card | 2026.11.02 · 정책브리핑(과기정통부) | OK |
-| 3 | hook | 같은 시기 일론 머스크의 xAI는 데이터센터 한 곳에 약 55만 장을 넣었다고 밝혔습니다. | source_video | [2026.09.25 · CNBC](https://www.youtube.com/watch?v=q5XP8xDcRJE) 1:00.0~1:07.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
+| 3 | hook | 같은 시기 일론 머스크의 xAI는 데이터센터 한 곳에 약 55만 장을 넣었다고 밝혔습니다. | source_video | [2026.09.25 · WREG News Channel 3](https://www.youtube.com/watch?v=IMqF_BePLac) 0:23.7~0:30.7 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 4 | hook | 그렇다면 이 슈퍼컴은 한국의 AI 경쟁력에서 어느 정도 몫을 할까요? | source_video | [2026.11.02 · KBS대전 뉴스](https://www.youtube.com/watch?v=kqU9nidwaog) 0:17.4~0:22.4 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
-| 5 | hook | 정부 발표와 엔비디아 실적 콜의 말로 따라가 보겠습니다. | source_video | [2026.08.26 · Benzinga](https://www.youtube.com/watch?v=jhMbFf7jUnw) 1:00.0~1:05.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
-| 6 | intro | 뉴스는 '24배 빨라졌다'에서 끝났습니다. 이 영상은 돈과 순위를 봅니다. 투자 권유는 아닙니다. | source_video | [2026.11.02 · KBS News](https://www.youtube.com/watch?v=VsmkTShtUtw) 0:17.4~0:25.4 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
+| 5 | hook | 정부 발표와 엔비디아 실적 콜의 말로 따라가 보겠습니다. | source_video | [2026.08.26 · EARNMOAR](https://www.youtube.com/watch?v=BhPTU0BOrWg) 1:00.0~1:05.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
+| 6 | intro | 뉴스는 '24배 빨라졌다'에서 끝났습니다. 이 영상은 돈과 순위를 봅니다. 투자 권유는 아닙니다. | source_video | [2026.11.02 · KBS News](https://www.youtube.com/watch?v=WadrDAct_9A) 0:21.1~0:29.1 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 7 | body-1 | 납품사는 HPE입니다. 2025년 5월, 3,825억 원에 계약을 맺었습니다. | screenshot | [2025.05.14 · 머니투데이](https://www.mt.co.kr/tech/2025/05/14/2025051315215140024) | OK |
 | 8 | body-1 | 엔비디아 GH200 등을 HPE 크레이 서버에 넣고, 팬 없이 물로 식히는 구조입니다. | source_video | [2025.05 · GIGABYTE](https://www.youtube.com/watch?v=5Pg6dj2bUcA) 0:09.6~0:16.6 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 9 | body-1 | 돈은 이렇게 흐릅니다. 정부 예산이 KISTI로, KISTI가 HPE에, HPE가 칩을 사서 시스템을 짓습니다. | card | 2025.05.14 · 바이라인네트워크 / HPE | OK |
@@ -217,39 +217,39 @@
 | 12 | body-1 | 여기까지 오는 데 입찰이 4번 유찰됐습니다. GPU 값이 뛰었기 때문입니다. | screenshot | [2024.11.05 · 머니투데이](https://www.mt.co.kr/tech/2024/11/05/2024110509300092225) | OK |
 | 13 | body-1 | 결국 총사업비는 2,929억 원에서 4,483억 원으로 53% 늘었습니다. | card | 2024.11.05 · 머니투데이 | OK |
 | 14 | body-1 | 정리하면, 2025년이 목표였던 서비스는 2026년 12월로 밀렸습니다. | card | 2026.11.02 · 정책브리핑 외 | OK |
-| 15 | body-2 | 정부 발표로는 이론 성능 614페타플롭스, 5호기 누리온의 24배입니다. | source_video | [2026.11.02 · KBS News](https://www.youtube.com/watch?v=WadrDAct_9A) 0:21.1~0:27.1 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
+| 15 | body-2 | 정부 발표로는 이론 성능 614페타플롭스, 5호기 누리온의 24배입니다. | source_video | [2026.11.02 · KBS대전 뉴스](https://www.youtube.com/watch?v=kqU9nidwaog) 0:25.4~0:31.4 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 16 | body-2 | 과기정통부는 이달 발표되는 TOP500에서 '10위권 등재'를 전망했습니다. | screenshot | [2026.11.02 · 정책브리핑(과기정통부)](https://www.korea.kr/news/policyNewsView.do?newsId=148974819) | OK |
 | 17 | body-2 | 짚을 게 있습니다. 614는 이론값인 Rpeak이고, 순위는 실측값인 Rmax로 매깁니다. | card | 2026.06 · TOP500 | OK |
 | 18 | body-2 | 6월 명단에서 10위 안에 들려면 실측 434.9페타플롭스가 필요했습니다. | card | 2026.06 · TOP500 | OK |
 | 19 | body-2 | 6월 명단의 한국 1위는 NHN클라우드 시스템으로 20위였습니다. 한강은 아직 명단에 없습니다. | card | 2026.06 · TOP500 sublist | OK |
 | 20 | body-2 | 일부 해외 기사엔 '6월 12위'라는 표현이 있지만, 공식 명단의 12위는 다른 시스템입니다. | screenshot | [2026.06 · TOP500](https://top500.org/lists/top500/list/2026/06/) | OK |
 | 21 | body-2 | 선배 누리온도 2018년 11위로 출발했습니다. 올해 6월엔 144위입니다. | card | 2026.06 · TOP500 KISTI 사이트 | OK |
-| 22 | body-2 | 정리하면, 슈퍼컴 순위는 해마다 밀립니다. 한강의 실제 순위는 다음 주에 처음 나옵니다. | source_video | [2025.11.17 · SC Conference Series](https://www.youtube.com/watch?v=dkgFvrhhD8U) 1:00.0~1:07.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
-| 23 | body-3 | 이제 빅테크와 비교합니다. 머스크는 9월, Colossus 2에 GB200과 GB300 약 55만 장이 있다고 밝혔습니다. | source_video | [2026.09.25 · CNBC](https://www.youtube.com/watch?v=KRCD-Wi7Wik) 0:26.8~0:34.8 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
+| 22 | body-2 | 정리하면, 슈퍼컴 순위는 해마다 밀립니다. 한강의 실제 순위는 다음 주에 처음 나옵니다. | source_video | [2025.11.17 · Forschungszentrum Jülich](https://www.youtube.com/watch?v=7faMXDAOxrk) 0:18.9~0:25.9 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
+| 23 | body-3 | 이제 빅테크와 비교합니다. 머스크는 9월, Colossus 2에 GB200과 GB300 약 55만 장이 있다고 밝혔습니다. | source_video | [2026.09.25 · CNBC](https://www.youtube.com/watch?v=sGXPesSleRA) 1:00.0~1:08.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 24 | body-3 | GPU 개수만 보면 한강은 Colossus 2의 약 65분의 1, 1·2호를 합치면 약 92분의 1입니다. | card | 2026.09.25 · Invezz / 정책브리핑 | OK |
 | 25 | body-3 | 머스크는 연말까지 GB300을 더 넣어 약 144만 장으로 늘린다는 계획입니다. 계획대로면 한강의 약 170배입니다. | screenshot | [2026.09.25 · Invezz](https://invezz.com/news/2026/09/25/elon-musk-says-xais-colossus-2-could-more-than-double-nvidia-chip-count-by-year-end/) | MISSING(자리표시) · 클립 다운로드 실패 |
 | 26 | body-3 | 메타의 오하이오 Prometheus는 '수십만 개'를 돌리고 있고, 목표는 약 100만 개입니다. | source_video | [2026.10.20 · CNBC Television](https://www.youtube.com/watch?v=fh2Q9JgMbRI) 0:33.1~0:40.1 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
-| 27 | body-3 | 마이크로소프트 Fairwater도 '수십만 개 GB200'이라고만 밝혔습니다. 정확한 수량은 공개되지 않았습니다. | source_video | [2025.09 · WISN 12 News](https://www.youtube.com/watch?v=gc5XZJfF0kQ) 0:16.9~0:24.9 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
-| 28 | body-3 | 칩 세대도 다릅니다. GB200·GB300은 GH200 다음 세대라, 장당 성능 차이는 개수 차이보다 큽니다. | source_video | [2025.03.18 · CNBC](https://www.youtube.com/watch?v=ZkPU5GHDqkQ) 1:00.0~1:08.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
+| 27 | body-3 | 마이크로소프트 Fairwater도 '수십만 개 GB200'이라고만 밝혔습니다. 정확한 수량은 공개되지 않았습니다. | source_video | [2025.09 · WBAY TV-2 | Green Bay, WI](https://www.youtube.com/watch?v=Iq3u47AIz8w) 0:06.5~0:14.4 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
+| 28 | body-3 | 칩 세대도 다릅니다. GB200·GB300은 GH200 다음 세대라, 장당 성능 차이는 개수 차이보다 큽니다. | source_video | [2025.03.18 · LuxPCGamerNews](https://www.youtube.com/watch?v=OfZoqyYpCKM) 0:24.4~0:32.5 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 29 | body-3 | 다만 국가 AI 자원이 한강만은 아닙니다. 추경으로 네이버·NHN·카카오가 약 1.3만 장을 확보합니다. | screenshot | [2025.07.28 · 머니투데이](https://www.mt.co.kr/tech/2025/07/28/2025072818560947822) | OK |
 | 30 | body-3 | 작년 10월 APEC에선 엔비디아가 한국에 GPU 26만 장 공급을 발표했습니다. 시기는 '향후 수년'입니다. | source_video | [2025.10.31 · CNBC-TV18](https://www.youtube.com/watch?v=WYBaa9dJcdY) 1:00.0~1:08.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 31 | body-3 | 26만 장 중 정부 몫은 5만 장입니다. 나머지는 삼성·SK·현대차·네이버 몫입니다. | card | 2025.10.31 · 머니투데이 / 헤럴드경제 | OK |
-| 32 | body-4 | 이런 국가 수요를 엔비디아는 '소버린 AI'라고 부릅니다. 콜렛 크레스 CFO의 말입니다. | source_video | [2026.02.25 · Yahoo Finance](https://www.youtube.com/watch?v=1A0CeRUyhaI) 1:00.0~1:06.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
-| 33 | body-4 | 🎙 "In fiscal year 2026, our Sovereign AI business more than tripled year over year to over $30,000,000,000" → 2026 회계연도에 소버린 AI 사업은 전년 대비 3배 넘게 늘어 300억 달러를 넘었습니다. | source_video | [2026.02.25 · Amit Kukreja](https://www.youtube.com/watch?v=gxIG-CslvDI) 1:00.0~1:10.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
+| 32 | body-4 | 이런 국가 수요를 엔비디아는 '소버린 AI'라고 부릅니다. 콜렛 크레스 CFO의 말입니다. | source_video | [2026.02.25 · EARNMOAR](https://www.youtube.com/watch?v=62C2BOjJM7g) 1:00.0~1:06.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
+| 33 | body-4 | 🎙 "In fiscal year 2026, our Sovereign AI business more than tripled year over year to over $30,000,000,000" → 2026 회계연도에 소버린 AI 사업은 전년 대비 3배 넘게 늘어 300억 달러를 넘었습니다. | source_video | [2026.02.25 · EARNMOAR](https://www.youtube.com/watch?v=62C2BOjJM7g) 1:09.0~1:19.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 34 | body-4 | 정리하면 총매출 2,159억 달러의 약 14%입니다. 주요 고객국으로 캐나다·프랑스·영국 등이 꼽혔고, 한국은 없었습니다. | card | 2026.02.25 · NVIDIA 8-K (SEC) | OK |
-| 35 | body-4 | 올해 2분기부터는 소버린을 따로 떼지 않고, 지역 클라우드·기업과 묶어 ACIE로 보고합니다. | source_video | [2026.08.26 · Benzinga](https://www.youtube.com/watch?v=qNpyWGj-Kro) 1:00.0~1:07.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
-| 36 | body-4 | 🎙 "ACIE revenue of $40 billion increased 25% sequentially and 138% year-over-year." → ACIE 매출은 400억 달러로, 전 분기보다 25%, 1년 전보다 138% 늘었습니다. | source_video | [2026.08.26 · Bloomberg Television](https://www.youtube.com/watch?v=50V2BcYo3ew) 1:00.0~1:08.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
+| 35 | body-4 | 올해 2분기부터는 소버린을 따로 떼지 않고, 지역 클라우드·기업과 묶어 ACIE로 보고합니다. | source_video | [2026.08.26 · Castify Earnings Call](https://www.youtube.com/watch?v=aq_e8Mlh0oU) 1:00.0~1:07.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
+| 36 | body-4 | 🎙 "ACIE revenue of $40 billion increased 25% sequentially and 138% year-over-year." → ACIE 매출은 400억 달러로, 전 분기보다 25%, 1년 전보다 138% 늘었습니다. | source_video | [2026.08.26 · EARNMOAR](https://www.youtube.com/watch?v=BhPTU0BOrWg) 1:08.0~1:16.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 37 | body-4 | 정리하면 데이터센터 매출 890억 달러의 약 45%입니다. | card | 2026.08.26 · NVIDIA 8-K (SEC) | OK |
 | 38 | body-4 | 그럼 한강의 GPU도 이 장부에 들어 있을까요? HPE를 거친 납품이고 국가별 내역이 비공개라, 확인할 수 없습니다. | card | 2026.08.26 · NVIDIA 8-K (SEC) | OK |
 | 39 | counter | 반론도 있습니다. TOP500은 과학계산 순위라, 빅테크 AI 클러스터는 대부분 참여하지 않습니다. | card | 2026.06 · TOP500 | OK |
-| 40 | counter | 그래서 '세계 10위권'이 'AI 컴퓨팅 10위권'을 뜻하진 않습니다. 목적도 달라 자원의 55%가 연구개발용입니다. | source_video | [2026.11.02 · KISTI 국가슈퍼컴퓨팅센터](https://www.youtube.com/watch?v=yWl0HBouoQo) 0:43.2~0:51.2 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
-| 41 | counter | 이식 KISTI 원장은 한강을 '국내 연구자들의 도전적인 연구를 뒷받침하는 기반'으로 만들겠다고 했습니다. | source_video | [2026.11.02 · 연합뉴스TV](https://www.youtube.com/watch?v=KsdR4bJlJxI) 0:07.9~0:15.9 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
+| 40 | counter | 그래서 '세계 10위권'이 'AI 컴퓨팅 10위권'을 뜻하진 않습니다. 목적도 달라 자원의 55%가 연구개발용입니다. | source_video | [2026.11.02 · KISTI의 과학향기](https://www.youtube.com/watch?v=bv2e9-NUUYA) 0:46.5~0:54.5 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
+| 41 | counter | 이식 KISTI 원장은 한강을 '국내 연구자들의 도전적인 연구를 뒷받침하는 기반'으로 만들겠다고 했습니다. | source_video | [2026.11.02 · YTN 사이언스 투데이](https://www.youtube.com/watch?v=lNqCrH3nqDA) 0:06.8~0:14.8 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 42 | takeaway | 정리하면 세 가지입니다. 첫째, 한강은 4번 유찰되고 사업비가 53% 늘어난 끝에 나왔습니다. | card | 2024.11.05 · 머니투데이 | OK |
 | 43 | takeaway | 둘째, 개수로는 xAI 한 곳의 약 92분의 1이고, 상대는 다음 세대 칩입니다. | card | 2026.09.25 · Invezz / 정책브리핑 | OK |
 | 44 | takeaway | 셋째, 이 수요가 엔비디아 매출에 어떻게 잡히는지는 공개 자료로 확인되지 않습니다. | source_video | [2026.08.26 · NVIDIA](https://www.youtube.com/watch?v=_onork4X1Eg) 0:23.7~0:30.7 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
-| 45 | outro | 다음에 볼 것은 셋입니다. 먼저 11월 15일 시작하는 시카고 SC26, TOP500에서 한강의 실측 순위입니다. | source_video | [2025.11.17 · SC Conference Series](https://www.youtube.com/watch?v=owwbjEsmr-Q) 1:00.0~1:08.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
+| 45 | outro | 다음에 볼 것은 셋입니다. 먼저 11월 15일 시작하는 시카고 SC26, TOP500에서 한강의 실측 순위입니다. | source_video | [2025.11.17 · SC Conference Series](https://www.youtube.com/watch?v=CzufXS2jY20) 1:00.0~1:08.0 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 | 46 | outro | 11월 17일엔 엔비디아 3분기 실적이 나옵니다. 가이던스는 1,080억 달러, ACIE 숫자를 봅니다. | screenshot | [2026.11 · NVIDIA IR](https://nvidianews.nvidia.com/news/nvidia-sets-conference-call-for-third-quarter-financial-results-6928873) | OK |
-| 47 | outro | 그리고 12월 14일, 한강의 공식 서비스가 시작됩니다. 순위가 나오면 후속편으로 이어 가겠습니다. | source_video | [2026.11.02 · KBS News](https://www.youtube.com/watch?v=8aeJeMbWsYI) 0:07.8~0:14.8 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
+| 47 | outro | 그리고 12월 14일, 한강의 공식 서비스가 시작됩니다. 순위가 나오면 후속편으로 이어 가겠습니다. | source_video | [2026.11.02 · KBS News](https://www.youtube.com/watch?v=WadrDAct_9A) 0:32.1~0:39.1 | TEMP(임시 썸네일 · 클립 교체 필요) · 클립 다운로드 실패 |
 
 ## 4. 남은 일
 
@@ -259,7 +259,7 @@
 
 | 장면 | 상태 | 화면 지시 |
 |---|---|---|
-| 1 | TEMP(임시 썸네일 · 클립 교체 필요) | 한강 서버 랙·전산실 B-roll 소리 끄고 전체 화면. TJB 영상(pWhpmau5J2Y)은 쓰지 말 것. KISTI·과기정통부 공식 채널 우선. |
+| 1 | MISSING(자리표시) | 한강 서버 랙·전산실 B-roll 소리 끄고 전체 화면. TJB 영상(pWhpmau5J2Y)은 쓰지 말 것. KISTI·과기정통부 공식 채널 우선. |
 | 3 | TEMP(임시 썸네일 · 클립 교체 필요) | xAI Colossus 데이터센터 내부 랙 투어 영상, 소리 끔. |
 | 4 | TEMP(임시 썸네일 · 클립 교체 필요) | 한강 시스템 외관 B-roll. TJB 화면 제외. |
 | 5 | TEMP(임시 썸네일 · 클립 교체 필요) | 엔비디아 실적 콜 화면 또는 본사 B-roll, 소리 끔. |

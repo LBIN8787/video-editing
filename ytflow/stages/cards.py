@@ -55,6 +55,7 @@ class Canvas:
         return self._font(int(size))
 
     def text(self, x, y, s, size, color=None, anchor="mm"):
+        s = s.replace("\u2212", "-").replace("\u2013", "-")  # 폰트에 없는 수학 기호 정리
         self.d.text((x, y), s, font=self.f(size), fill=color or self.fg, anchor=anchor)
 
     def fit(self, s, size, maxw):
