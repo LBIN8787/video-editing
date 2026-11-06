@@ -1,6 +1,7 @@
 """Editorial and fixed-voice gates. Metadata checks do not prove spoken claims."""
 import hashlib,json
 from pathlib import Path
+from work_cases import validate_case
 ROOT=Path(__file__).resolve().parent
 
 def validate_manifest(d,settings=None):
@@ -23,6 +24,10 @@ def validate_manifest(d,settings=None):
   raise ValueError('Missing or changed narration asset')
  if d.get('transition_sfx',True):raise ValueError('Transition sounds must be disabled')
  if channel=='ai':
+  if d.get('content_mode')=='applied_work':
+   if not d.get('work_case_ref'):raise ValueError('Actual-use videos must link a work case')
+   validate_case(d['work_case_ref'],ROOT.parents[1])
+   if d.get('sections',{}).get('application_example',{}).get('evidence_type')!='executed':raise ValueError('Actual-use videos cannot use illustrative examples as execution evidence')
   if d.get('format_version')!='ai-guide-v1':raise ValueError('Needs AI guide format')
   sections=d.get('sections',{})
   for key in ['news_context','features','usage_steps','application_example','result_check','conditions']:

@@ -1,0 +1,52 @@
+Actual local check output. No real YouTube request, Google login, Windows execution or new video generation.
+
+COMMAND: python -m unittest discover -s scripts -p test_content_studio.py -v
+EXIT: 0
+
+test_actual_case_required_for_new_ai_episode (test_content_studio.StudioTests.test_actual_case_required_for_new_ai_episode) ... ok
+test_channel_style_and_ids_cannot_escape_scope (test_content_studio.StudioTests.test_channel_style_and_ids_cannot_escape_scope) ... ok
+test_existing_episode_is_not_overwritten (test_content_studio.StudioTests.test_existing_episode_is_not_overwritten) ... ok
+test_short_and_long_reuse_research_without_overwrite (test_content_studio.StudioTests.test_short_and_long_reuse_research_without_overwrite) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.028s
+
+OK
+
+COMMAND: python -m unittest -v test_workflow.py test_content_policy.py test_work_cases.py
+EXIT: 0
+
+test_ai_only_plan_does_not_start_quiz_channel (test_workflow.QueueTests.test_ai_only_plan_does_not_start_quiz_channel) ... ok
+test_idempotent_daily_plan (test_workflow.QueueTests.test_idempotent_daily_plan) ... ok
+test_replan_preserves_existing_review (test_workflow.QueueTests.test_replan_preserves_existing_review) ... ok
+test_unverified_job_cannot_be_approved (test_workflow.QueueTests.test_unverified_job_cannot_be_approved) ... ok
+test_build_and_approval_recheck_policy_after_binding (test_content_policy.ContentPolicyTests.test_build_and_approval_recheck_policy_after_binding) ... ok
+test_changed_audio_and_fallback_are_rejected (test_content_policy.ContentPolicyTests.test_changed_audio_and_fallback_are_rejected) ... ok
+test_current_sample_matches_fixed_voice_and_guide (test_content_policy.ContentPolicyTests.test_current_sample_matches_fixed_voice_and_guide) ... ok
+test_missing_instructions_or_undisclosed_mock_is_rejected (test_content_policy.ContentPolicyTests.test_missing_instructions_or_undisclosed_mock_is_rejected) ... ok
+test_switching_voice_or_model_is_rejected (test_content_policy.ContentPolicyTests.test_switching_voice_or_model_is_rejected) ... ok
+test_changed_evidence_invalidates_the_case (test_work_cases.WorkCaseTests.test_changed_evidence_invalidates_the_case) ... ok
+test_partial_result_is_usable_only_with_stated_limits (test_work_cases.WorkCaseTests.test_partial_result_is_usable_only_with_stated_limits) ... ok
+test_recording_a_task_is_not_proof_of_execution (test_work_cases.WorkCaseTests.test_recording_a_task_is_not_proof_of_execution) ... ok
+test_unmeasured_savings_are_not_a_valid_result (test_work_cases.WorkCaseTests.test_unmeasured_savings_are_not_a_valid_result) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.034s
+
+OK
+
+COMMAND: python -m unittest discover -s studio/youtube -p test_publish.py -v
+EXIT: 0
+
+test_ambiguous_upload_cannot_be_repeated (test_publish.PublishingTests.test_ambiguous_upload_cannot_be_repeated) ... ok
+test_past_and_naive_schedule_are_rejected (test_publish.PublishingTests.test_past_and_naive_schedule_are_rejected) ... ok
+test_scheduled_upload_is_explicitly_private (test_publish.PublishingTests.test_scheduled_upload_is_explicitly_private) ... ok
+test_old_explainer_cannot_be_published_as_actual_use (test_publish.UploadIntegrationTests.test_old_explainer_cannot_be_published_as_actual_use) ... ok
+test_success_records_remote_id_and_prevents_second_insert (test_publish.UploadIntegrationTests.test_success_records_remote_id_and_prevents_second_insert) ... ok
+test_timeout_is_uncertain_and_does_not_retry_insert (test_publish.UploadIntegrationTests.test_timeout_is_uncertain_and_does_not_retry_insert) ... ok
+test_wrong_connected_channel_cannot_upload (test_publish.UploadIntegrationTests.test_wrong_connected_channel_cannot_upload) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.056s
+
+OK

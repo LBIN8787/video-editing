@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Actual work case",
+  "type": "object",
+  "required": [
+    "id",
+    "status",
+    "objective",
+    "acceptance_criteria",
+    "results",
+    "limitations",
+    "public_scope",
+    "evidence",
+    "metrics",
+    "domain"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "planned",
+        "running",
+        "partially_tested",
+        "tested",
+        "in_use"
+      ]
+    },
+    "objective": {
+      "type": "string"
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "public_scope": {
+      "type": "string"
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "array"
+    },
+    "domain": {
+      "enum": [
+        "video-channel",
+        "game-development",
+        "app-development",
+        "agent-setup",
+        "other"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

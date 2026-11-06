@@ -1,3 +1,7 @@
+# 실제 작업과 콘텐츠 연결
+
+AI 채널은 사용자의 실제 일에 AI를 적용하고, 산출물·검사·시행착오에서 영상을 만듭니다. work-cases/README.md가 최신 제작 기준입니다. 조사 글은 적용 후보를 고르는 입력이며, 실제 사용 여부를 대신하지 않습니다.
+
 # 최신 운영 결정
 
 AI 실전노트 개설·운영 요청을 받았으며 새 Google 계정을 사용자가 직접 만들기로 했습니다. channels/ai/launch/README.md가 최신 연결·운영 안내입니다. 계정·OAuth 미연결이고 예약 등록은 15/15 한도로 실패했습니다. 퀴즈 채널은 보류합니다. 아래 초기 설계의 샘플 검토 단계보다 이 결정이 우선합니다.
@@ -27,8 +31,9 @@ AI 실전노트 개설·운영 요청을 받았으며 새 Google 계정을 사�
 ## 새 영상 시작
 
 ```bash
-python scripts/content_studio.py new --channel ai --topic example-tool --episode ai-004 --style shorts-ai-guide
-python scripts/content_studio.py new --channel ai --topic example-tool --episode ai-long-001 --style longform-ai-column
+python scripts/content_studio.py work-case --id example-work
+python scripts/content_studio.py new --channel ai --topic example-tool --episode ai-004 --style shorts-ai-guide --work-case example-work
+python scripts/content_studio.py new --channel ai --topic example-tool --episode ai-long-001 --style longform-ai-column --work-case example-work
 python scripts/content_studio.py inventory
 ```
 

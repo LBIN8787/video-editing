@@ -1,0 +1,42 @@
+{
+  "id": "ai-channel-operations",
+  "status": "partially_tested",
+  "objective": "사용자의 실제 AI 채널 제작·업로드 준비를 Codex와 함께 구축하고 재사용 가능한 작업물로 남기기",
+  "acceptance_criteria": [
+    "채널과 고정 보이스 설정을 재사용한다",
+    "잘못된 채널 업로드와 중복 전송을 방지한다",
+    "Google 권한을 연결하고 실제 첫 업로드를 확인한다",
+    "같은 작업 환경에서 새 영상의 정기 제작·예약을 확인한다"
+  ],
+  "results": [
+    "채널별 설정·작업 생성기·고정 음성 검사와 업로드 코드를 실제로 작성했다",
+    "생성한 사용자 채널 ID를 운영 설정에 등록했다",
+    "작업 구조 4개, 큐·사례 정책 13개, 업로드 7개 로컬 테스트 총 24개가 통과했다",
+    "Windows 최초 OAuth 연결 실행 파일을 작성하고 전달 패키지를 만들었다"
+  ],
+  "limitations": [
+    "업로드 테스트는 모의 API를 사용했다. 실제 YouTube 전송 검증이 아니다",
+    "Google OAuth 클라이언트와 업로드 토큰은 미연결이다",
+    "Windows 실행 파일은 실제 Windows PC에서 아직 실행 검증하지 못했다",
+    "새 대본에서 새 MP4까지의 전체 정기 생성과 롱폼 렌더러는 아직 미완성이다",
+    "예약 생성은 15/15 한도로 실패했으며 새 정기 작업은 없다",
+    "시간 절감·비용 절감 효과는 측정하지 않았다"
+  ],
+  "public_scope": "사용자가 GitHub 정리를 요청한 이 프로젝트의 자체 코드와 비밀 정보 없는 로컬 검사 결과만 사용한다. 사용자 계정 자격·비공개 작업 원문은 포함하지 않는다.",
+  "evidence": [
+    {
+      "path": "work-cases/ai-channel-operations/evidence/checks.txt",
+      "sha256": "ea1b4239069386b0d2875c81abe56294e23c5121b3b5b628b4c5f6fb5b4b67c5"
+    },
+    {
+      "path": "studio/youtube/publish.py",
+      "sha256": "e08cecb1b81428fb398d06b28dde39aa229ef0e0fe8cf2625125f5a46d269b62"
+    },
+    {
+      "path": "studio/youtube/auth.py",
+      "sha256": "beb2f632a7c09c6df43a804cd83a8feb089c51e0a881e7491a62143ba4df69c2"
+    }
+  ],
+  "metrics": [],
+  "domain": "video-channel"
+}

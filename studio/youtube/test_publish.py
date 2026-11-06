@@ -23,7 +23,7 @@ class UploadIntegrationTests(unittest.TestCase):
   for target,value in [('publish.ROOT',root),('publish.validate_manifest',lambda d:True),('publish.inspect_video',lambda p:'hash-a')]:
    ctx=patch(target,value);ctx.start();self.addCleanup(ctx.stop)
   self.queue=sqlite3.connect(':memory:');self.queue.execute('CREATE TABLE jobs(id TEXT,channel TEXT,state TEXT,manifest TEXT,approval TEXT,due TEXT,video_id TEXT)')
-  manifest=json.dumps({'file':'fixture.mp4','sha256':'hash-a','title':'AI','description':'usage'})
+  manifest=json.dumps({'file':'fixture.mp4','sha256':'hash-a','title':'AI','description':'usage','content_mode':'applied_work'})
   self.queue.execute('INSERT INTO jobs VALUES(?,?,?,?,?,?,NULL)',('job-a','ai','approved',manifest,hashlib.sha256(manifest.encode()).hexdigest(),'2099-01-01T09:00:00+09:00'));self.queue.commit()
   self.ledger=sqlite3.connect(':memory:');self.api=MagicMock()
   self.api.channels.return_value.list.return_value.execute.return_value={'items':[{'id':'UC-test','snippet':{'title':'AI 실전노트'}}]}
@@ -43,6 +43,13 @@ class UploadIntegrationTests(unittest.TestCase):
   self.assertEqual(self.ledger.execute('SELECT state FROM uploads').fetchone()[0],'uncertain')
   with self.assertRaises(sqlite3.IntegrityError):publish(self.api,self.queue,self.ledger,'job-a','UC-test',lambda f:object())
   self.assertEqual(self.api.videos.return_value.insert.call_count,1)
+ def test_old_explainer_cannot_be_published_as_actual_use(self):
+  import json,hashlib
+  from publish import publish
+  row=self.queue.execute('SELECT manifest FROM jobs').fetchone();d=json.loads(row[0]);d.pop('content_mode');m=json.dumps(d)
+  self.queue.execute('UPDATE jobs SET manifest=?,approval=?',(m,hashlib.sha256(m.encode()).hexdigest()));self.queue.commit()
+  with self.assertRaises(ValueError):publish(self.api,self.queue,self.ledger,'job-a','UC-test',lambda f:object())
+  self.api.videos.return_value.insert.assert_not_called()
  def test_wrong_connected_channel_cannot_upload(self):
   from publish import publish
   self.api.channels.return_value.list.return_value.execute.return_value={'items':[{'id':'UC-wrong','snippet':{'title':'Other'}}]}
