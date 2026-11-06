@@ -1,0 +1,25 @@
+import React from 'react';
+import {Series,staticFile,useVideoConfig} from 'remotion';
+import {Audio} from '@remotion/media';
+import {BasicCaptions} from '../basic-captions';
+import {QuizScene} from './QuizScene';
+export const Quiz001=()=>{const {fps}=useVideoConfig();return <><style>{`.review-captions > div > div {font-family:"Noto Sans CJK KR",sans-serif!important;font-weight:700!important;background:rgba(25,35,30,.94)!important;border-radius:14px;padding:18px 24px!important;}`}</style><Series>
+<Series.Sequence name="Question" durationInFrames={177} premountFor={fps}><QuizScene variant={1} phase="Question"/>
+<Audio name="한국어 보이스" src={staticFile("review-samples/Quiz001/voice-0.wav")} premountFor={fps}/>
+<div className="review-captions"><BasicCaptions name="한글 자막" premountFor={fps} width={850} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:80,top:1390,wordBreak:"keep-all"}} captions={[{"text": "둘레가 같으면 넓이도 같을까요?", "startMs": 0, "endMs": 2820, "timestampMs": 0, "confidence": null, "pageBreakAfter": true}, {"text": "A와 B 중에 골라 보세요.", "startMs": 3340, "endMs": 4980, "timestampMs": 3340, "confidence": null, "pageBreakAfter": true}]}/></div></Series.Sequence>
+<Series.Sequence name="Conditions" durationInFrames={212} premountFor={fps}><QuizScene variant={1} phase="Conditions"/>
+<Audio name="한국어 보이스" src={staticFile("review-samples/Quiz001/voice-1.wav")} premountFor={fps}/>
+<div className="review-captions"><BasicCaptions name="한글 자막" premountFor={fps} width={850} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:80,top:1390,wordBreak:"keep-all"}} captions={[{"text": "A는 가로 세로 오.", "startMs": 0, "endMs": 1920, "timestampMs": 0, "confidence": null, "pageBreakAfter": true}, {"text": "B는 가로 칠, 세로 삼입니다.", "startMs": 2340, "endMs": 4320, "timestampMs": 2340, "confidence": null, "pageBreakAfter": true}, {"text": "둘레는 둘 다 이십이에요.", "startMs": 4900, "endMs": 6300, "timestampMs": 4900, "confidence": null, "pageBreakAfter": true}]}/></div></Series.Sequence>
+<Series.Sequence name="Think" durationInFrames={159} premountFor={fps}><QuizScene variant={1} phase="Think"/>
+<Audio name="한국어 보이스" src={staticFile("review-samples/Quiz001/voice-2.wav")} premountFor={fps}/>
+<div className="review-captions"><BasicCaptions name="한글 자막" premountFor={fps} width={850} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:80,top:1390,wordBreak:"keep-all"}} captions={[{"text": "그런데 안쪽을 채우는 칸의 수를", "startMs": 0, "endMs": 2599, "timestampMs": 0, "confidence": null, "pageBreakAfter": true}, {"text": "세어 보면 답이 달라져요.", "startMs": 2600, "endMs": 4620, "timestampMs": 2600, "confidence": null, "pageBreakAfter": true}]}/></div></Series.Sequence>
+<Series.Sequence name="Solve" durationInFrames={170} premountFor={fps}><QuizScene variant={1} phase="Solve"/>
+<Audio name="한국어 보이스" src={staticFile("review-samples/Quiz001/voice-3.wav")} premountFor={fps}/>
+<div className="review-captions"><BasicCaptions name="한글 자막" premountFor={fps} width={850} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:80,top:1390,wordBreak:"keep-all"}} captions={[{"text": "A는 오 곱하기 오, 이십오.", "startMs": 0, "endMs": 2580, "timestampMs": 0, "confidence": null, "pageBreakAfter": true}, {"text": "B는 칠 곱하기 삼, 이십일이죠.", "startMs": 2980, "endMs": 4900, "timestampMs": 2980, "confidence": null, "pageBreakAfter": true}]}/></div></Series.Sequence>
+<Series.Sequence name="Answer" durationInFrames={154} premountFor={fps}><QuizScene variant={1} phase="Answer"/>
+<Audio name="한국어 보이스" src={staticFile("review-samples/Quiz001/voice-4.wav")} premountFor={fps}/>
+<div className="review-captions"><BasicCaptions name="한글 자막" premountFor={fps} width={850} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:80,top:1390,wordBreak:"keep-all"}} captions={[{"text": "정답은 A.", "startMs": 0, "endMs": 1460, "timestampMs": 0, "confidence": null, "pageBreakAfter": true}, {"text": "둘레가 같다고 넓이까지 같은 건", "startMs": 1820, "endMs": 3719, "timestampMs": 1820, "confidence": null, "pageBreakAfter": true}, {"text": "아니에요.", "startMs": 3720, "endMs": 4060, "timestampMs": 3720, "confidence": null, "pageBreakAfter": true}]}/></div></Series.Sequence>
+<Series.Sequence name="Comment" durationInFrames={152} premountFor={fps}><QuizScene variant={1} phase="Comment"/>
+<Audio name="한국어 보이스" src={staticFile("review-samples/Quiz001/voice-5.wav")} premountFor={fps}/>
+<div className="review-captions"><BasicCaptions name="한글 자막" premountFor={fps} width={850} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:80,top:1390,wordBreak:"keep-all"}} captions={[{"text": "어느 쪽을 골랐나요?", "startMs": 0, "endMs": 1720, "timestampMs": 0, "confidence": null, "pageBreakAfter": true}, {"text": "처음 생각한 이유도 알려 주세요.", "startMs": 2340, "endMs": 4200, "timestampMs": 2340, "confidence": null, "pageBreakAfter": true}]}/></div></Series.Sequence>
+</Series></>;};

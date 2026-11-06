@@ -1,0 +1,27 @@
+{
+  "name": "ai-radar-short",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "studio": "remotion studio src/index.ts --no-open --port=3000",
+    "typecheck": "tsc",
+    "still": "remotion still src/index.ts AIRadar003 out/cover.png --frame=40 --browser-executable=/usr/bin/chromium",
+    "render": "remotion render src/index.ts AIRadar003 out/AI-Shorts-003-raw.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --browser-executable=/usr/bin/chromium --concurrency=2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@remotion/captions": "4.0.541",
+    "@remotion/cli": "^4.0.541",
+    "@remotion/media": "^4.0.541",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remotion": "^4.0.541",
+    "typescript": "^7.0.2"
+  }
+}
