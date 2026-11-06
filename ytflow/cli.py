@@ -5,6 +5,7 @@
   python -m ytflow run <프로젝트> [--until 단계]      # 게이트 전까지 자동 진행
   python -m ytflow approve <프로젝트> topic --pick 2  # 사람 승인
   python -m ytflow stage <프로젝트> <단계>             # 단계 하나만 (재)실행
+  python -m ytflow rebuild <프로젝트>              # 클립 받기~가편집 재생성 (PC에서 원본 클립 넣을 때)
   python -m ytflow status <프로젝트>
 """
 from __future__ import annotations
@@ -70,6 +71,9 @@ def main(argv: list[str] | None = None) -> None:
     g.add_argument("gate", choices=sorted(set(GATE_AFTER.values())))
     g.add_argument("--pick", type=int, help="topic 게이트: shortlist 번호")
 
+    rb = sub.add_parser("rebuild", help="소스 클립 받기 → 음성 → 화면 → 자막 → 가편집을 한 번에 (원본 클립을 넣은 뒤)")
+    rb.add_argument("project")
+
     st = sub.add_parser("status")
     st.add_argument("project")
 
@@ -92,6 +96,10 @@ def main(argv: list[str] | None = None) -> None:
             p.save_state(stt)
         p.approve(a.gate)
         print(f"승인: {a.gate}. 이어서:  python -m ytflow run {p.path.name}")
+    elif a.cmd == "rebuild":
+        p = Project.open(a.project)
+        for stage in ("clips", "voice", "assets", "subtitles", "assemble"):
+            RUNNERS[stage](p, a)
     elif a.cmd == "status":
         p = Project.open(a.project)
         stt = p.state()

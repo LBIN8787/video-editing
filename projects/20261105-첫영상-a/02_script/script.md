@@ -42,10 +42,10 @@ _라벨: 2026.07 · Bloomberg Television  |  소스: https://www.youtube.com/wat
 
 _라벨: 2026.11.03 · 네이버 정정 공시  |  화면: 7월 vs 11월 비교_
 
-### #9 [body-1]  (card)
+### #9 [body-1]  (screenshot)
 달러로는 그대로 10억 달러입니다. 그 사이 환율이 움직이면서 원화 금액과 주식 수만 줄었습니다.
 
-_라벨: 2026.11.03 · 네이버 정정 공시  |  화면: 달러 고정 카드_
+_라벨: 2026.11.03 · 증권플러스  |  소스: https://newsroom.stockplus.com/breaking-news/41942   |  화면: 기사 헤드라인 캡처_
 
 ### #10 [body-1]  (card)
 납입일은 10월 30일에서 11월 6일로 밀렸고, 신주 상장은 11월 27일입니다. 새 주식은 1년 동안 팔 수 없다고 알려져 있습니다.
@@ -57,10 +57,10 @@ _라벨: 2026.10.30 · 네이버 공시  |  화면: 일정 흐름도_
 
 _라벨: 2026.07 · NEWSPLUS  |  소스: https://www.youtube.com/watch?v=f8wykPn9dB8 0:00~0:06  |  화면: AI 팩토리 관련 화면 (소리 끔)_
 
-### #12 [body-2]  (card)
+### #12 [body-2]  (screenshot)
 보도에 따르면 엔비디아 투자는 네이버가 별도로 최소 90억 달러를 조달해야 성립합니다. 브룩필드가 최대 90억 달러를 대겠다는 비구속 조건에 서명해 둔 상태입니다.
 
-_라벨: 2026.07.27 · Korea Times, UPI  |  화면: 조건 표_
+_라벨: 2026.07.27 · The Korea Times  |  소스: https://www.koreatimes.co.kr/amp/business/tech-science/20260727/nvidia-invests-1-bil-in-naver-for-45-stake   |  화면: 기사 헤드라인 캡처_
 
 ### #13 [body-2]  (source_video)
 그 돈이 향하는 곳은 AI 팩토리, GPU로 가득 채운 데이터센터입니다. 2028년까지 200메가와트, 길게는 1기가와트가 목표입니다.
@@ -129,10 +129,10 @@ _라벨: NVIDIA · AI Factory 공식 영상  |  소스: https://www.youtube.com/
 
 _라벨: 2026.07.26 · Quartz  |  화면: 보유액 비교_
 
-### #26 [turn]  (card)
+### #26 [turn]  (screenshot)
 최근에는 엔비디아가 투자한 마벨이, 역시 엔비디아가 투자한 루멘텀을 사들인다는 합병 소식까지 나왔습니다.
 
-_라벨: 2026.11 · Motley Fool, TradingKey 보도  |  화면: 합병 흐름도_
+_라벨: 2026.11.04 · The Motley Fool  |  소스: https://www.fool.com/investing/breakfast-news/2026/11/04/breakfast-news/   |  화면: 기사 헤드라인 캡처_
 
 ### #27 [turn]  (card)
 어느 쪽이 이기든 엔비디아는 합쳐진 회사의 주주이자 큰 고객입니다. 지도 위의 점들이 이어지기 시작한 겁니다.

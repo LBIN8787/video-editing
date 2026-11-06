@@ -7,6 +7,9 @@ scene["source"] 형식:
    "pre": 1.0}                                 # find 로 찾은 지점보다 몇 초 앞에서 시작할지
 
 결과: 04_assets/scene_XXX.mp4 (원본 오디오 포함) + 04_assets/clips.csv (성공/실패/구간)
+  - YouTube 가 아닌 URL(기사·공시) → 헤드라인 부분 캡처 scene_XXX_shot.png (ytflow/assets/capture.js)
+  - YouTube 클립을 못 받으면 → 그 영상의 공개 썸네일로 '임시' 정지화면 scene_XXX_temp.jpg
+    (가편집에서 흐름을 보기 위한 것. 업로드 전 반드시 실제 클립으로 교체)
 
 주의
   - YouTube 는 클라우드 서버 IP 의 영상 다운로드를 자주 막는다. 개인 PC 에서 실행하는 것을 권장.
@@ -76,6 +79,49 @@ def download(url: str, start: float, end: float, out: Path) -> bool:
     return True
 
 
+def is_youtube(url: str) -> bool:
+    return bool(re.search(r"(youtube\.com|youtu\.be)/", url))
+
+
+def capture(url: str, out: Path) -> tuple[bool, str]:
+    js = Path(__file__).resolve().parent.parent / "assets" / "capture.js"
+    proc = subprocess.run(["node", str(js), url, str(out)], capture_output=True, text=True, timeout=90)
+    msg = (proc.stdout.strip().splitlines() or [proc.stderr.strip()[-120:]])[-1]
+    return proc.returncode == 0 and out.exists(), msg
+
+
+def temp_still(src: dict, out: Path) -> bool:
+    """공개 썸네일(i.ytimg.com)로 임시 정지화면. 구간 위치에 가까운 자동 프레임(hq1~3)을 고른다."""
+    import urllib.request
+    from PIL import Image, ImageDraw, ImageFont
+
+    vid = _vid(src["url"])
+    st = to_sec(src.get("start")) or 0
+    names = ["maxresdefault", "hq1", "hq2", "hq3"] if st < 30 else ["hq2", "hq1", "hq3", "maxresdefault"]
+    for n in names:
+        try:
+            with urllib.request.urlopen(f"https://i.ytimg.com/vi/{vid}/{n}.jpg", timeout=15) as r:
+                data = r.read()
+            tmp = out.with_suffix(".dl")
+            tmp.write_bytes(data)
+            im = Image.open(tmp).convert("RGB")
+            tmp.unlink()
+            w, h = im.size
+            if h / w > 0.7:  # 4:3 썸네일의 위아래 검은 띠 제거
+                im = im.crop((0, int(h * 0.125), w, int(h * 0.875)))
+            im = im.resize((1920, 1080))
+            d = ImageDraw.Draw(im)
+            fp = Path(__file__).resolve().parent.parent / "assets" / "fonts" / "NanumGothic-Bold.ttf"
+            f = ImageFont.truetype(str(fp), 30) if fp.exists() else ImageFont.load_default()
+            d.rectangle([1920 - 470, 20, 1900, 72], fill=(0, 0, 0))
+            d.text((1920 - 455, 30), "임시 화면 · 실제 클립으로 교체", font=f, fill=(255, 210, 60))
+            im.save(out, quality=92)
+            return True
+        except Exception:
+            continue
+    return False
+
+
 def run(project: Project) -> None:
     scenes = project.read_json("script", "scenes.json")["scenes"]
     adir = project.dir("assets")
@@ -85,6 +131,13 @@ def run(project: Project) -> None:
         src = s.get("source")
         if not src or not src.get("url"):
             continue
+        if not is_youtube(src["url"]):
+            shot = adir / f"scene_{s['id']:03d}_shot.png"
+            good, msg = (True, "기존 캡처") if shot.exists() else capture(src["url"], shot)
+            ok += good
+            rows.append([s["id"], "SHOT" if good else "FAILED", src["url"], "", "", s.get("label", ""), msg])
+            print(f"[clips] #{s['id']} {'SHOT' if good else 'FAILED'} {msg}")
+            continue
         out = adir / f"scene_{s['id']:03d}.mp4"
         if out.exists():
             rows.append([s["id"], "OK(기존)", src["url"], "", "", s.get("label", ""), ""])
@@ -93,6 +146,8 @@ def run(project: Project) -> None:
         st, en, memo = resolve(src, work)
         good = en > st and download(src["url"], st, en, out)
         ok += good
+        if not good and temp_still(src, adir / f"scene_{s['id']:03d}_temp.jpg"):
+            memo += " / 임시 썸네일 사용"
         rows.append([s["id"], "OK" if good else "FAILED", src["url"], f"{st:.1f}", f"{en:.1f}", s.get("label", ""), memo])
         print(f"[clips] #{s['id']} {'OK' if good else 'FAILED'} {st:.1f}-{en:.1f}s {memo}")
     with open(adir / "clips.csv", "w", newline="", encoding="utf-8-sig") as fh:

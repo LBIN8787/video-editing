@@ -32,6 +32,7 @@ class Project:
     def __init__(self, path: Path):
         self.path = path
         self.state_file = path / "state.json"
+        self.__post_init_override()
 
     # ---- 생성 / 로드 -------------------------------------------------
     @classmethod
@@ -58,6 +59,9 @@ class Project:
                 raise SystemExit(f"프로젝트를 찾을 수 없습니다: {name_or_path}")
             p = matches[-1]
         return cls(p)
+
+    def __post_init_override(self):
+        config.set_project_override(self.path / "edit.yaml")
 
     def dir(self, key: str) -> Path:
         return self.path / LAYOUT[key]

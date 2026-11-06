@@ -28,7 +28,9 @@ tts:
   rate: "+8%"
 
 edit:
-  # 식스시그마 실제 화면 분석(docs/03) 기준: 검은 배경 · 흰 글씨 · 빨간 강조 · 줌/BGM 없음
+  style: sixsigma             # sixsigma(검은 배경 미니멀) | paper(종이 질감 손그림 애니메이션)
+                              # 프로젝트마다 바꾸려면 projects/<프로젝트>/edit.yaml 에 "edit: {style: paper}"
+  # 아래 기본값은 sixsigma 기준: 검은 배경 · 흰 글씨 · 빨간 강조 · 줌/BGM 없음
   width: 1920
   height: 1080
   fps: 30
@@ -47,6 +49,19 @@ edit:
   bgm_volume: 0.10
   kenburns: false             # 정지 이미지 줌 (벤치마크 채널은 쓰지 않음)
   card_font: ""               # 카드용 한글 폰트 파일 경로 (비우면 자동 탐색)
+
+styles:
+  paper:                      # 미주일기 화면 분석 기준 (docs/03 '종이 스타일')
+    font: "NanumGothic"
+    subtitle_size: 44
+    subtitle_box: true        # 자막 뒤 반투명 어두운 상자
+    emphasis_color: "&H0066D9FF"   # 자막 강조 = 연노랑 #FFD966
+    label_position: bottom_right
+    paper:
+      base: "#EEE7DA"         # 종이색
+      ink: "#22304D"          # 남색 잉크
+      red: "#C4452F"          # 빨간 펜
+      anim_seconds: 1.2       # 장면 등장 애니메이션 길이
 
 clips:
   format: "bv*[height<=1080]+ba/b[height<=1080]/b"

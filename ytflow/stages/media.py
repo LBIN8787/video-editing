@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import csv
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -60,9 +61,12 @@ def voice(project: Project) -> None:
                 continue
             if cfg.get("backend") == "edge":
                 raw = vdir / f"{sid}.mp3"
-                subprocess.run([shutil.which("edge-tts") or "edge-tts", "--voice", cfg.get("voice", "ko-KR-InJoonNeural"),
-                                f"--rate={cfg.get('rate', '+0%')}", "--text", s["narration"], "--write-media", str(raw)],
-                               check=True)
+                cmd = [shutil.which("edge-tts") or "edge-tts", "--voice", cfg.get("voice", "ko-KR-InJoonNeural"),
+                       f"--rate={cfg.get('rate', '+0%')}", "--text", s["narration"], "--write-media", str(raw)]
+                proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
+                if proxy:  # edge-tts 는 프록시 환경변수를 자동으로 읽지 않는다
+                    cmd[1:1] = ["--proxy", proxy]
+                subprocess.run(cmd, check=True)
             else:
                 raise SystemExit(f"녹음 파일이 없습니다: {vdir}/{sid}.wav (tts.backend: manual)")
         clean = vdir / "clean" / f"{sid}.wav"
@@ -132,6 +136,10 @@ def subtitles(project: Project) -> None:
     font, size = ecfg.get("font", "Noto Sans CJK KR"), ecfg.get("subtitle_size", 50)
     emph = ecfg.get("emphasis_color", "&H002C40E8")
     logo = ecfg.get("logo_text", "")
+    paper = ecfg.get("style") == "paper"
+    box = 3 if ecfg.get("subtitle_box") else 1           # 3 = 글자 뒤 상자
+    back = "&H50101010" if box == 3 else "&H80000000"
+    lab_align = 3 if ecfg.get("label_position") == "bottom_right" else 7
 
     srt, ass_events, timeline, chapters = [], [], [], []
     t, n, last_section = 0.0, 1, None
@@ -150,7 +158,12 @@ def subtitles(project: Project) -> None:
             groups = [" ".join(en_lines[i * per:(i + 1) * per]) for i in range(len(lines))]
             groups[-1] = " ".join(en_lines[(len(lines) - 1) * per:]) or groups[-1]
         if s.get("label"):
-            ass_events.append(f"Dialogue: 2,{_ts_ass(t)},{_ts_ass(t + d + GAP)},Label,,0,0,0,,{s['label']}")
+            vis = find_visual(project, s["id"])
+            footage = vis is not None and vis.suffix == ".mp4" and not any(vis.stem.endswith(k) for k in ("_anim", "_auto"))
+            tag = "{\\c&H00505A66&\\bord0}" if paper and not footage else ""  # 종이 위에서는 진회색 글씨
+            pasted = paper and vis is not None and vis.stem.endswith("_anim") and not s.get("card")
+            if not pasted:  # 종이 콜라주는 사진 아래 손글씨 캡션이 출처를 대신한다
+                ass_events.append(f"Dialogue: 2,{_ts_ass(t)},{_ts_ass(t + d + GAP)},Label,,0,0,0,,{tag}{s['label']}")
         lt = t
         for li, ln in enumerate(lines):
             ld = d * len(ln) / total
@@ -176,9 +189,9 @@ PlayResY: {H}
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Sub,{font},{size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,2.5,0,2,80,80,60,1
-Style: En,{font},{int(size * 0.62)},&H00B4B4B4,&H00B4B4B4,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,1.8,0,2,80,80,{60 + int(size * 1.25)},1
-Style: Label,{font},{int(size * 0.52)},&H00E6E6E6,&H00E6E6E6,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,1.5,0,7,40,40,30,1
+Style: Sub,{font},{size},&H00FFFFFF,&H00FFFFFF,{back if box == 3 else "&H00000000"},{back},0,0,0,0,100,100,0,0,{box},{12 if box == 3 else 2.5},0,2,80,80,{50 if box == 3 else 60},1
+Style: En,{font},{int(size * 0.62)},&H00D2D2D2,&H00D2D2D2,{back if box == 3 else "&H00000000"},{back},0,0,0,0,100,100,0,0,{box},{8 if box == 3 else 1.8},0,2,80,80,{(50 if box == 3 else 60) + int(size * (1.6 if box == 3 else 1.25))},1
+Style: Label,{font},{int(size * 0.52)},&H00E6E6E6,&H00E6E6E6,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,1.5,0,{lab_align},40,40,30,1
 Style: Logo,{font},{int(size * 0.56)},&H00DCDCDC,&H00DCDCDC,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,1.5,0,9,40,40,30,1
 
 [Events]
@@ -199,26 +212,51 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 def find_visual(project: Project, sid: int) -> Path | None:
     """scene_007.png 처럼 직접 넣은 파일을 _auto 임시 카드보다 우선한다."""
     found = [p for p in sorted(project.dir("assets").glob(f"scene_{sid:03d}*")) if p.suffix.lower() in VISUAL_EXT]
-    found.sort(key=lambda p: (p.stem.endswith("_auto"), p.stem.endswith("_card")))
+    # 우선순위: 직접 넣은 파일 > 받은 클립 > 카드/애니메이션 > 기사 캡처 > 임시 썸네일 > 자리표시
+    rank = {"_anim": 2, "_card": 2, "_shot": 3, "_temp": 4, "_auto": 5}
+    found.sort(key=lambda p: (next((v for k, v in rank.items() if p.stem.endswith(k)), 1 if p.suffix == ".mp4" else 0), p.suffix != ".mp4"))
     return found[0] if found else None
 
 
 def assets(project: Project, auto_cards: bool = True) -> None:
-    """샷리스트 작성 + 카드 렌더링.
-    - scene["card"] 가 있으면 검은 배경 인포 카드(scene_XXX_card.png)를 매번 새로 그린다
-    - 직접 넣은 파일(scene_XXX.png/.mp4)이 있으면 그것이 우선
-    - 그래도 없으면 '[소스 필요]' 자리표시(scene_XXX_auto.png)"""
+    """샷리스트 작성 + 장면 화면 만들기. 스타일(edit.style)에 따라:
+    sixsigma: 카드 → 검은 배경 PNG, 기사 캡처 → 검은 화면 위 캡처, 없으면 '[소스 필요]' PNG
+    paper:    카드 → 손그림 애니메이션 MP4, 캡처/임시화면 → 종이 위 콜라주 애니메이션, 없으면 자리표시 애니메이션
+    직접 넣은 파일(scene_XXX.png/.mp4)과 받은 클립이 있으면 항상 그것이 우선."""
     from . import cards
 
+    style = config.load("pipeline").get("edit", {}).get("style", "sixsigma")
     scenes = project.read_json("script", "scenes.json")["scenes"]
     adir = project.dir("assets")
+    dfile = project.dir("voice") / "durations.json"
+    durs = {int(k): v for k, v in json.loads(dfile.read_text()).items()} if dfile.exists() else {}
     for s in scenes:
-        for old in adir.glob(f"scene_{s['id']:03d}_auto.png"):
+        sid = s["id"]
+        for old in list(adir.glob(f"scene_{sid:03d}_auto.*")) + list(adir.glob(f"scene_{sid:03d}_anim.mp4")) \
+                + list(adir.glob(f"scene_{sid:03d}_card.png")):
             old.unlink()
-        if s.get("card"):
-            cards.render(s["card"], adir / f"scene_{s['id']:03d}_card.png")
-        elif auto_cards and find_visual(project, s["id"]) is None:
-            cards.placeholder(adir / f"scene_{s['id']:03d}_auto.png", f"{s['visual_type']} · {s['visual_brief']}")
+        own = find_visual(project, sid)  # 직접 넣은 파일·받은 클립만 남은 상태
+        own = own if own is not None and not any(own.stem.endswith(k) for k in ("_shot", "_temp")) else None
+        pasted = next((p for k in ("_shot", "_temp") for p in adir.glob(f"scene_{sid:03d}{k}.*")), None)
+        d = durs.get(sid, 5.0) + GAP
+        brief = f"{s['visual_type']} · {s['visual_brief']}"
+        if style == "paper":
+            from . import paper
+            out = adir / f"scene_{sid:03d}_anim.mp4"
+            if s.get("card"):
+                paper.render_card(s["card"], out, d, seed=sid)
+            elif own is None and pasted is not None:
+                paper.render_paste(pasted, out, d, caption=s.get("label", ""), seed=sid)
+            elif own is None and auto_cards:
+                paper.render_placeholder(adir / f"scene_{sid:03d}_auto.mp4", d, brief, seed=sid)
+            print(f"[assets] #{sid} paper {'card' if s.get('card') else 'paste' if pasted is not None and own is None else 'own' if own else 'placeholder'}")
+        else:
+            if s.get("card"):
+                cards.render(s["card"], adir / f"scene_{sid:03d}_card.png")
+            elif own is None and pasted is not None and pasted.stem.endswith("_shot"):
+                cards.shot_on_black(pasted, adir / f"scene_{sid:03d}_card.png")
+            elif own is None and pasted is None and auto_cards:
+                cards.placeholder(adir / f"scene_{sid:03d}_auto.png", brief)
     f = project.dir("assets") / "shotlist.csv"
     missing = 0
     with open(f, "w", newline="", encoding="utf-8-sig") as fh:
@@ -226,9 +264,12 @@ def assets(project: Project, auto_cards: bool = True) -> None:
         w.writerow(["scene", "file", "status", "visual_type", "label", "visual_brief", "image_prompt", "source_url"])
         for s in scenes:
             p = find_visual(project, s["id"])
-            auto = p is not None and "_auto" in p.stem
-            missing += p is None or auto
-            status = "AUTO(임시카드)" if auto else "OK" if p else "MISSING"
+            temp = next(project.dir("assets").glob(f"scene_{s['id']:03d}_temp.*"), None)
+            auto = p is not None and p.stem.endswith("_auto")
+            real = p is not None and not auto and not p.stem.endswith("_temp") and \
+                not (temp is not None and p.stem.endswith("_anim") and not s.get("card"))
+            missing += not real
+            status = "OK" if real else "TEMP(임시 썸네일 · 클립 교체 필요)" if temp is not None else "MISSING(자리표시)"
             w.writerow([s["id"], p.name if p else f"scene_{s['id']:03d}.png", status,
                         s["visual_type"], s.get("label", ""), s["visual_brief"], s.get("image_prompt", ""),
                         (s.get("source") or {}).get("url", "")])
@@ -279,16 +320,17 @@ def assemble(project: Project) -> None:
     _ff(["-f", "concat", "-safe", "0", "-i", str(work / "audio.txt"), "-c", "copy", str(work / "voice.wav")])
 
     ass = str((edir / "subs.ass").resolve()).replace("\\", "/").replace(":", "\\:")
+    fdir = str((Path(__file__).resolve().parent.parent / "assets" / "fonts")).replace("\\", "/").replace(":", "\\:")
     args = ["-i", str(work / "video.mp4"), "-i", str(work / "voice.wav")]
     bgm = ecfg.get("bgm")
     if bgm and Path(bgm).exists():
         args += ["-stream_loop", "-1", "-i", bgm]
         # 내레이션이 나올 때 BGM 을 자동으로 눌러 주는 사이드체인 더킹
-        fc = (f"[0:v]ass='{ass}'[v];[1:a]asplit=2[n1][n2];[2:a]volume={ecfg.get('bgm_volume', 0.1)}[b];"
+        fc = (f"[0:v]ass='{ass}':fontsdir='{fdir}'[v];[1:a]asplit=2[n1][n2];[2:a]volume={ecfg.get('bgm_volume', 0.1)}[b];"
               f"[b][n1]sidechaincompress=threshold=0.05:ratio=8[bd];"
               f"[n2][bd]amix=inputs=2:duration=first:normalize=0[a]")
     else:
-        fc = f"[0:v]ass='{ass}'[v];[1:a]anull[a]"
+        fc = f"[0:v]ass='{ass}':fontsdir='{fdir}'[v];[1:a]anull[a]"
     _ff([*args, "-filter_complex", fc, "-map", "[v]", "-map", "[a]",
          "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-c:a", "aac", "-b:a", "192k",
          "-shortest", str(edir / "draft.mp4")])

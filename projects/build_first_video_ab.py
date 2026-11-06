@@ -27,6 +27,10 @@ NV_FACTORY = "https://www.youtube.com/watch?v=K6t4tusFZ5c"  # NVIDIA 공식: The
 NV_TAIPEI = "https://www.youtube.com/watch?v=wSp6AiNIrsY"   # NVIDIA 공식: GTC Taipei 2026 키노트
 NV_GTC = "https://www.youtube.com/watch?v=jw_o0xr8MWU"      # NVIDIA 공식: GTC 2026 키노트
 NAVER_CLOUD = "https://www.youtube.com/watch?v=OtrnlI0EP28"  # 네이버클라우드 공식 소개 영상
+# 기사 (A안 헤드라인 캡처: clips 단계가 헤드라인 부분을 캡처)
+KT = "https://www.koreatimes.co.kr/amp/business/tech-science/20260727/nvidia-invests-1-bil-in-naver-for-45-stake"
+FOOL = "https://www.fool.com/investing/breakfast-news/2026/11/04/breakfast-news/"
+STOCKPLUS = "https://newsroom.stockplus.com/breaking-news/41942"
 
 L_BBG = "2026.07 · Bloomberg Television"
 L_DISC = "2026.11.03 · 네이버 정정 공시"
@@ -203,13 +207,23 @@ def build(version: str) -> list[dict]:
                                     ("미정", "90억 달러", "정식 계약 전환 여부")])))
     add(N("outro", "엔비디아의 지도에 다음으로 올라갈 한국 회사는 어디일까요?", [],
           "card", "질문 카드", "", None, card("text", "다음으로 올라갈 한국 회사는?")))
+    if A:  # 보도 인용 문장은 기사 헤드라인 캡처로 보여 준다 (식스시그마 방식)
+        shots = {"달러로는 그대로": (STOCKPLUS, "2026.11.03 · 증권플러스"),
+                 "보도에 따르면 엔비디아 투자는": (KT, "2026.07.27 · The Korea Times"),
+                 "최근에는 엔비디아가 투자한 마벨이": (FOOL, "2026.11.04 · The Motley Fool")}
+        for sc in S:
+            for key, (url, label) in shots.items():
+                if sc["narration"].startswith(key):
+                    sc.update({"visual_type": "screenshot", "card": None, "label": label,
+                               "source": src(url), "visual_brief": "기사 헤드라인 캡처"})
     for i, s in enumerate(S, 1):
         s["id"] = i
     return S
 
 
 for v in ("A", "B"):
-    p = Project.create(f"첫영상-{v}")
+    existing = ROOT / "projects" / f"20261105-첫영상-{v.lower()}"
+    p = Project(existing) if existing.exists() else Project.create(f"첫영상-{v}")
     for d in ("00_source", "01_research"):
         shutil.copytree(BASE / d, p.path / d, dirs_exist_ok=True)
     st = p.state()

@@ -205,3 +205,18 @@ def placeholder(path: Path, note: str) -> None:
     c.text(c.W / 2, c.H * 0.40, "[ 소스 필요 ]", 44, c.muted)
     c.text(c.W / 2, c.H * 0.50, note, c.fit(note, 32, c.W - 480), c.muted)
     c.save(path)
+
+
+def shot_on_black(image_path: Path, out: Path) -> None:
+    """기사 캡처를 검은 화면 가운데 놓는다 (식스시그마식 헤드라인 화면)."""
+    from PIL import Image
+
+    c = Canvas()
+    im = Image.open(image_path).convert("RGB")
+    maxw, maxh = c.W - 360, c.H * 0.66
+    sc = min(maxw / im.width, maxh / im.height)
+    im = im.resize((int(im.width * sc), int(im.height * sc)))
+    x, y = (c.W - im.width) // 2, int(c.H * 0.42 - im.height / 2)
+    c.img.paste(im, (x, max(y, 90)))
+    c.box(x - 1, max(y, 90) - 1, x + im.width, max(y, 90) + im.height, c.muted, 1)
+    c.save(out)
