@@ -136,7 +136,9 @@ def subtitles(project: Project) -> None:
     font, size = ecfg.get("font", "Noto Sans CJK KR"), ecfg.get("subtitle_size", 50)
     emph = ecfg.get("emphasis_color", "&H002C40E8")
     logo = ecfg.get("logo_text", "")
-    paper = ecfg.get("style") == "paper"
+    paper = ecfg.get("style") in ("paper", "flat")
+    top = ecfg.get("subtitle_position") == "top"          # 머니크루식: 화면 위쪽 어두운 글씨
+    sub_color = "&H003A2E26" if ecfg.get("subtitle_dark") else "&H00FFFFFF"
     box = 3 if ecfg.get("subtitle_box") else 1           # 3 = 글자 뒤 상자
     back = "&H50101010" if box == 3 else "&H80000000"
     lab_align = 3 if ecfg.get("label_position") == "bottom_right" else 7
@@ -173,7 +175,7 @@ def subtitles(project: Project) -> None:
             styled = ln
             for w in sorted(s.get("emphasis", []), key=len, reverse=True):
                 if w and w in styled:
-                    styled = styled.replace(w, f"{{\\c{emph}}}{w}{{\\c&H00FFFFFF}}", 1)
+                    styled = styled.replace(w, f"{{\\c{emph}}}{w}{{\\c{sub_color}}}", 1)  # 강조 뒤 원래 자막색으로
             ass_events.append(f"Dialogue: 0,{_ts_ass(lt)},{_ts_ass(lt + ld)},Sub,,0,0,0,,{styled}")
             lt += ld
             n += 1
@@ -189,7 +191,7 @@ PlayResY: {H}
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Sub,{font},{size},&H00FFFFFF,&H00FFFFFF,{back if box == 3 else "&H00000000"},{back},0,0,0,0,100,100,0,0,{box},{12 if box == 3 else 2.5},0,2,80,80,{50 if box == 3 else 60},1
+Style: Sub,{font},{size},{sub_color},{sub_color},{back if box == 3 else "&H00000000"},{back},{-1 if top else 0},0,0,0,100,100,0,0,{box},{12 if box == 3 else (0 if ecfg.get("subtitle_dark") else 2.5)},0,{8 if top else 2},80,80,{30 if top else (50 if box == 3 else 60)},1
 Style: En,{font},{int(size * 0.62)},&H00D2D2D2,&H00D2D2D2,{back if box == 3 else "&H00000000"},{back},0,0,0,0,100,100,0,0,{box},{8 if box == 3 else 1.8},0,2,80,80,{(50 if box == 3 else 60) + int(size * (1.6 if box == 3 else 1.25))},1
 Style: Label,{font},{int(size * 0.52)},&H00E6E6E6,&H00E6E6E6,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,1.5,0,{lab_align},40,40,30,1
 Style: Logo,{font},{int(size * 0.56)},&H00DCDCDC,&H00DCDCDC,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,1.5,0,9,40,40,30,1
@@ -240,8 +242,10 @@ def assets(project: Project, auto_cards: bool = True) -> None:
         pasted = next((p for k in ("_shot", "_temp") for p in adir.glob(f"scene_{sid:03d}{k}.*")), None)
         d = durs.get(sid, 5.0) + GAP
         brief = f"{s['visual_type']} · {s['visual_brief']}"
-        if style == "paper":
-            from . import paper
+        if style in ("paper", "flat"):  # 둘 다 애니메이션 MP4 렌더러 (같은 인터페이스)
+            from . import flat as flat_mod
+            from . import paper as paper_mod
+            paper = flat_mod if style == "flat" else paper_mod
             out = adir / f"scene_{sid:03d}_anim.mp4"
             if s.get("card"):
                 paper.render_card(s["card"], out, d, seed=sid)
@@ -249,7 +253,7 @@ def assets(project: Project, auto_cards: bool = True) -> None:
                 paper.render_paste(pasted, out, d, caption=s.get("label", ""), seed=sid)
             elif own is None and auto_cards:
                 paper.render_placeholder(adir / f"scene_{sid:03d}_auto.mp4", d, brief, seed=sid)
-            print(f"[assets] #{sid} paper {'card' if s.get('card') else 'paste' if pasted is not None and own is None else 'own' if own else 'placeholder'}")
+            print(f"[assets] #{sid} {style} {'card' if s.get('card') else 'paste' if pasted is not None and own is None else 'own' if own else 'placeholder'}")
         else:
             if s.get("card"):
                 cards.render(s["card"], adir / f"scene_{sid:03d}_card.png")

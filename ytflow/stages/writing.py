@@ -120,7 +120,7 @@ class CardItem(BaseModel):
 
 
 class Card(BaseModel):
-    type: str = Field(description="number_compare | flow | table | bars | headline | text")
+    type: str = Field(description="number_compare | flow | table | bars | line | headline | text")
     title: str
     items: list[CardItem]
     note: str

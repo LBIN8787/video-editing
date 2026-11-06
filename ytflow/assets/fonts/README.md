@@ -5,4 +5,4 @@
 
 - NanumMyeongjo-Bold / ExtraBold: 종이 스타일 제목·숫자 (명조)
 - NanumPenScript-Regular: 손글씨 메모·밑줄 주석
-- NanumGothic-Regular / Bold: 자막·라벨
+- NanumGothic-Regular / Bold / ExtraBold: 자막·라벨·평면 인포그래픽(flat) 숫자

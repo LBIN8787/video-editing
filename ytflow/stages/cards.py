@@ -6,7 +6,7 @@
   - 큰 숫자 비교, 흐름도, 빨간 박스로 강조한 표, 기사 헤드라인 카드
 
 scene["card"] 형식 (모든 타입 공통):
-  {"type": "number_compare" | "flow" | "table" | "bars" | "headline" | "text",
+  {"type": "number_compare" | "flow" | "table" | "bars" | "line" | "headline" | "text",
    "title": "카드 제목 (선택)",
    "items": [{"label": "...", "value": "...", "sub": "...", "highlight": true}],
    "note": "카드 아래 회색 보조 문장 (선택)"}
@@ -189,7 +189,34 @@ def r_text(c: Canvas, card: dict):
         c.text(c.W / 2, c.H * 0.56 + i * 56, it.get("label", ""), c.fit(it.get("label", ""), 38, c.W - 300), c.muted)
 
 
-RENDER = {"number_compare": r_number_compare, "flow": r_flow, "table": r_table, "bars": r_bars,
+def r_line(c: Canvas, card: dict):
+    """꺾은선 (정지 화면). items 순서대로 x축, value 숫자, highlight 지점에 빨간 점과 값."""
+    items = card.get("items", [])
+    vals = []
+    for it in items:
+        try:
+            vals.append(float(str(it.get("value", "0")).replace(",", "")))
+        except ValueError:
+            vals.append(0.0)
+    if len(vals) < 2:
+        return r_text(c, card)
+    _title(c, card)
+    x0, x1, y0, y1 = 220, c.W - 260, c.H * 0.70, c.H * 0.26
+    lo, hi = min(vals), max(vals)
+    span = (hi - lo) or 1
+    pts = [(x0 + (x1 - x0) * i / (len(vals) - 1), y0 - (v - lo) / span * (y0 - y1)) for i, v in enumerate(vals)]
+    c.d.line([x0, y0 + 20, x1, y0 + 20], fill=c.muted, width=1)
+    c.d.line(pts, fill=c.fg, width=c.lw + 1)
+    for i in (0, len(items) - 1):
+        c.text(pts[i][0], y0 + 50, items[i].get("label", ""), 28, c.muted)
+    for (x, y), it in zip(pts, items):
+        if it.get("highlight"):
+            c.d.ellipse([x - 9, y - 9, x + 9, y + 9], fill=c.accent)
+            c.text(x, y - 44, it.get("sub") or it.get("value", ""), 44, c.accent)
+    _note(c, card)
+
+
+RENDER = {"line": r_line, "number_compare": r_number_compare, "flow": r_flow, "table": r_table, "bars": r_bars,
           "headline": r_headline, "text": r_text}
 
 

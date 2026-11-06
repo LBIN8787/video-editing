@@ -31,7 +31,17 @@ SERIF = FONT_DIR / "NanumMyeongjo-ExtraBold.ttf"
 SERIF_B = FONT_DIR / "NanumMyeongjo-Bold.ttf"
 PEN = FONT_DIR / "NanumPenScript-Regular.ttf"
 SANS = FONT_DIR / "NanumGothic-Bold.ttf"
+SANS_X = FONT_DIR / "NanumGothic-ExtraBold.ttf"
 _fonts: dict = {}
+
+# 렌더러 겉모습 프로필. paper(미주일기)가 기본, flat.py 가 평면 인포그래픽용으로 바꿔 쓴다.
+PAPER_PROFILE = {"texture": True, "wobble": 1.0, "tape": True, "underline": True, "top": 130, "tilt": True,
+                 "fonts": {"title": SERIF, "value": SERIF, "box": SERIF_B, "note": PEN, "label": SANS}}
+PROFILE = dict(PAPER_PROFILE)
+
+
+def FT(role: str) -> Path:
+    return PROFILE["fonts"][role]
 
 
 def F(path: Path, size: int) -> ImageFont.FreeTypeFont:
@@ -64,10 +74,14 @@ _bg_cache: dict = {}
 
 def paper_bg(W: int, H: int, seed: int = 7) -> Image.Image:
     """크림색 + 미세 노이즈 + 구김(큰 얼룩과 접힌 선)."""
-    key = (W, H, seed)
+    c = cfg()
+    key = (W, H, seed, PROFILE["texture"], c["base"])
     if key in _bg_cache:
         return _bg_cache[key].copy()
-    c = cfg()
+    if not PROFILE["texture"]:  # 평면 스타일: 무늬 없는 단색 배경
+        img = Image.new("RGB", (W, H), _rgb(c["base"]))
+        _bg_cache[key] = img
+        return img.copy()
     rng = np.random.default_rng(seed)
     base = np.ones((H, W, 3), np.float32) * np.array(_rgb(c["base"]), np.float32)
     small = rng.normal(0, 1, (H // 24 + 1, W // 24 + 1)).astype(np.float32)
@@ -90,7 +104,8 @@ def paper_bg(W: int, H: int, seed: int = 7) -> Image.Image:
 
 # ---------------------------------------------------------------- 손그림 도형
 def wobble(points, rng, amp=2.2, step=24):
-    """직선을 잘게 나눠 손떨림을 준다."""
+    """직선을 잘게 나눠 손떨림을 준다 (PROFILE wobble=0 이면 곧은 선)."""
+    amp *= PROFILE["wobble"]
     out = []
     for (x0, y0), (x1, y1) in zip(points, points[1:]):
         n = max(int(math.hypot(x1 - x0, y1 - y0) / step), 1)
@@ -211,6 +226,8 @@ class Scene:
         return self.stroke(head, color, 4, dur * 0.3, t0 + dur * 0.7, gap)
 
     def underline(self, x0, x1, y, color, dur=0.35, at=None, gap=0.1):
+        if not PROFILE["underline"]:
+            return self
         pts = wobble([(x0, y), ((x0 + x1) / 2, y + 4), (x1, y - 2)], self.rng, amp=1.6, step=30)
         return self.stroke(pts, color, 6, dur, at, gap)
 
@@ -229,8 +246,9 @@ class Scene:
         ImageDraw.Draw(shadow).rectangle([30, 36, 30 + card.width, 36 + card.height], fill=(40, 30, 20, 90))
         shadow = shadow.filter(ImageFilter.GaussianBlur(12))
         shadow.alpha_composite(card, (30, 30))
-        tape = Image.new("RGBA", (180, 46), (236, 224, 190, 170))
-        shadow.alpha_composite(tape.rotate(4, expand=True), (shadow.width // 2 - 90, 6))
+        if PROFILE["tape"]:
+            tape = Image.new("RGBA", (180, 46), (236, 224, 190, 170))
+            shadow.alpha_composite(tape.rotate(4, expand=True), (shadow.width // 2 - 90, 6))
         sprite = shadow.rotate(angle, expand=True, resample=Image.BICUBIC)
 
         def draw(img, d, p):
@@ -240,7 +258,7 @@ class Scene:
             img.alpha_composite(_fade(sp, min(1, e * 2)), (int(cx - sp.width / 2), int(cy - sp.height / 2)))
         self.add(draw, dur, at, gap)
         if caption:
-            self.text(cx, cy + sprite.height / 2 + 8, caption, F(PEN, 40), self.ink, "mt", dur=0.4)
+            self.text(cx, cy + sprite.height / 2 + 8, caption, F(FT("note"), 40), self.ink, "mt", dur=0.4)
         return self
 
     # --- 렌더링
@@ -322,8 +340,9 @@ TOP = 130  # 제목 y
 
 
 def _title(S: Scene, card: dict):
+    TOP = PROFILE.get("top", 130)  # 위쪽 자막을 쓰는 스타일은 제목을 아래로
     if card.get("title"):
-        f = fit(SERIF, card["title"], 60, S.W - 300)
+        f = fit(FT("title"), card["title"], 60, S.W - 300)
         S.text(S.W / 2, TOP, card["title"], f, S.ink)
         w = f.getlength(card["title"])
         S.underline(S.W / 2 - w / 2, S.W / 2 + w / 2, TOP + 44, S.red, dur=0.3)
@@ -331,7 +350,7 @@ def _title(S: Scene, card: dict):
 
 def _note(S: Scene, card: dict, y=None):
     if card.get("note"):
-        S.text(S.W / 2, y or S.H * 0.80, card["note"], fit(PEN, card["note"], 50, S.W - 400), S.red, dur=0.4)
+        S.text(S.W / 2, y or S.H * 0.80, card["note"], fit(FT("note"), card["note"], 50, S.W - 400), S.red, dur=0.4)
 
 
 def l_number_compare(S, card):
@@ -342,14 +361,14 @@ def l_number_compare(S, card):
         x = S.W * (i + 0.5) / n
         col = S.red if it.get("highlight") else S.ink
         if it.get("label"):
-            S.text(x, S.H * 0.33, it["label"], F(SANS, 36), (90, 96, 110))
-        f = fit(SERIF, it.get("value", ""), 150, S.W / n - 160)
+            S.text(x, S.H * 0.33, it["label"], F(FT("label"), 36), (90, 96, 110))
+        f = fit(FT("value"), it.get("value", ""), 150, S.W / n - 160)
         S.counter(x, S.H * 0.48, it.get("value", ""), f, col)
         if it.get("highlight"):
             w = f.getlength(it.get("value", ""))
             S.underline(x - w / 2, x + w / 2, S.H * 0.48 + 82, S.red, dur=0.35)
         if it.get("sub"):
-            S.text(x, S.H * 0.62, it["sub"], fit(PEN, it["sub"], 54, S.W / n - 120), S.ink)
+            S.text(x, S.H * 0.62, it["sub"], fit(FT("note"), it["sub"], 54, S.W / n - 120), S.ink)
     _note(S, card)
 
 
@@ -365,14 +384,14 @@ def l_flow(S, card):
         col = S.red if it.get("highlight") else S.ink
         h = 150
         S.box(x0, y - h / 2, x0 + bw, y + h / 2, col, 5 if it.get("highlight") else 4, fill=(246, 242, 233))
-        S.text(x0 + bw / 2, y - (20 if it.get("sub") else 0), it.get("label", ""), fit(SERIF_B, it.get("label", ""), 44, bw - 30), col)
+        S.text(x0 + bw / 2, y - (20 if it.get("sub") else 0), it.get("label", ""), fit(FT("box"), it.get("label", ""), 44, bw - 30), col)
         if it.get("sub"):
-            S.text(x0 + bw / 2, y + 36, it["sub"], fit(PEN, it["sub"], 42, bw - 24), (90, 96, 110))
+            S.text(x0 + bw / 2, y + 36, it["sub"], fit(FT("note"), it["sub"], 42, bw - 24), (90, 96, 110))
         if i < n - 1:
             ax0, ax1 = x0 + bw + 14, x0 + bw + gap - 14
             S.arrow(ax0, y, ax1, y, S.ink)
             if it.get("value"):
-                S.text((ax0 + ax1) / 2, y - 40, it["value"], fit(PEN, it["value"], 40, gap), S.red)
+                S.text((ax0 + ax1) / 2, y - 40, it["value"], fit(FT("note"), it["value"], 40, gap), S.red)
     _note(S, card)
 
 
@@ -385,10 +404,10 @@ def l_table(S, card):
     for i, it in enumerate(items):
         y = top + rh * (i + 0.5)
         col = S.red if it.get("highlight") else S.ink
-        S.text(x0, y, it.get("label", ""), fit(SANS, it.get("label", ""), 38, x1 - x0 - 20), (90, 96, 110) if not it.get("highlight") else col, "lm", gap=0.02)
-        S.text(x1, y, it.get("value", ""), fit(SERIF, it.get("value", ""), 50, x2 - x1 - 20), col, "lm", gap=0.02)
+        S.text(x0, y, it.get("label", ""), fit(FT("label"), it.get("label", ""), 38, x1 - x0 - 20), (90, 96, 110) if not it.get("highlight") else col, "lm", gap=0.02)
+        S.text(x1, y, it.get("value", ""), fit(FT("value"), it.get("value", ""), 50, x2 - x1 - 20), col, "lm", gap=0.02)
         if it.get("sub"):
-            S.text(x2, y, it["sub"], fit(PEN, it["sub"], 48, x3 - x2 - 20), col, "lm", gap=0.02)
+            S.text(x2, y, it["sub"], fit(FT("note"), it["sub"], 48, x3 - x2 - 20), col, "lm", gap=0.02)
         S.t += 0.14
         if i < len(items) - 1:
             S.stroke(wobble([(x0, y + rh / 2), (x3, y + rh / 2)], S.rng, amp=1.0, step=60), (170, 165, 150), 2, 0.3, gap=0.02)
@@ -416,17 +435,18 @@ def l_bars(S, card):
     for i, (it, v) in enumerate(zip(items, vals)):
         y = top + rh * (i + 0.5)
         col = S.red if it.get("highlight") else S.ink
-        S.text(x0 - 30, y, it.get("label", ""), fit(SANS, it.get("label", ""), 34, 420), col, "rm", gap=0.02)
+        S.text(x0 - 30, y, it.get("label", ""), fit(FT("label"), it.get("label", ""), 34, 420), col, "rm", gap=0.02)
         w = (x1 - x0) * min(v / cap, 1) if cap else 0
         hh = rh * 0.26
 
         def bar(img, d, p, y=y, w=w, col=col, hh=hh):
             ww = max(3, w * ease(p))
             d.rectangle([x0, y - hh, x0 + ww, y + hh], fill=col + (255,) if len(col) == 3 else col)
-            for k in range(int(x0) + 8, int(x0 + ww), 14):  # 손그림 빗금 느낌
-                d.line([k, y + hh, k + 10, y - hh], fill=(238, 231, 218), width=1)
+            if PROFILE["texture"]:
+                for k in range(int(x0) + 8, int(x0 + ww), 14):  # 손그림 빗금 느낌
+                    d.line([k, y + hh, k + 10, y - hh], fill=(238, 231, 218), width=1)
         S.add(bar, 0.5, gap=0.02)
-        S.text(x0 + w + 20, y, (it.get("sub") or it.get("value", "")) + (" ≫" if v > cap else ""), F(PEN, 44), col, "lm", gap=0.1)
+        S.text(x0 + w + 20, y, (it.get("sub") or it.get("value", "")) + (" ≫" if v > cap else ""), F(FT("note"), 44), col, "lm", gap=0.1)
     _note(S, card)
 
 
@@ -436,27 +456,60 @@ def l_headline(S, card):
     clip = Image.new("RGB", (w, h), (252, 251, 247))
     d = ImageDraw.Draw(clip)
     t = card.get("title", "")
-    d.text((60, 70), t, font=fit(SERIF, t, 72, w - 120), fill=(25, 25, 25))
+    d.text((60, 70), t, font=fit(FT("title"), t, 72, w - 120), fill=(25, 25, 25))
     d.line([60, 170, w - 60, 170], fill=(60, 60, 60), width=2)
     for i, it in enumerate(card.get("items", [])[:3]):
-        d.text((60, 205 + i * 70), it.get("label", ""), font=fit(SANS, it.get("label", ""), 40, w - 120),
+        d.text((60, 205 + i * 70), it.get("label", ""), font=fit(FT("label"), it.get("label", ""), 40, w - 120),
                fill=_rgb(cfg()["red"]) if it.get("highlight") else (70, 70, 70))
     if card.get("note"):
-        d.text((60, h - 60), card["note"], font=F(SANS, 26), fill=(130, 130, 130))
-    S.photo(clip, S.W / 2, S.H * 0.45, w, h, angle=-1.5)
+        d.text((60, h - 60), card["note"], font=F(FT("label"), 26), fill=(130, 130, 130))
+    S.photo(clip, S.W / 2, S.H * 0.45, w, h, angle=-1.5 if PROFILE.get("tilt", True) else 0.0)
 
 
 def l_text(S, card):
     t = card.get("title", "")
-    f = fit(SERIF, t, 104, S.W - 300)
+    f = fit(FT("title"), t, 104, S.W - 300)
     S.text(S.W / 2, S.H * 0.43, t, f, S.red if card.get("highlight") else S.ink, rise=26, dur=0.6)
     w = f.getlength(t)
     S.underline(S.W / 2 - w / 2, S.W / 2 + w / 2, S.H * 0.43 + 70, S.red, dur=0.45)
     for i, it in enumerate(card.get("items", [])[:3]):
-        S.text(S.W / 2, S.H * 0.58 + i * 64, it.get("label", ""), fit(PEN, it.get("label", ""), 56, S.W - 300), S.ink)
+        S.text(S.W / 2, S.H * 0.58 + i * 64, it.get("label", ""), fit(FT("note"), it.get("label", ""), 56, S.W - 300), S.ink)
 
 
-LAYOUT = {"number_compare": l_number_compare, "flow": l_flow, "table": l_table, "bars": l_bars,
+def l_line(S, card):
+    """꺾은선(주가·지표 추이). items 순서대로 x축, value 는 숫자. 왼쪽에서 오른쪽으로 그려진다.
+    highlight 항목에 점과 값 표시, sub 는 그 지점 설명."""
+    _title(S, card)
+    items = card.get("items", [])
+    vals = []
+    for it in items:
+        try:
+            vals.append(float(str(it.get("value", "0")).replace(",", "")))
+        except ValueError:
+            vals.append(0.0)
+    if len(vals) < 2:
+        return l_text(S, card)
+    x0, x1, y0, y1 = 220, S.W - 260, S.H * 0.70, S.H * 0.26
+    lo, hi = min(vals), max(vals)
+    span = (hi - lo) or 1
+    pts = [(x0 + (x1 - x0) * i / (len(vals) - 1), y0 - (v - lo) / span * (y0 - y1)) for i, v in enumerate(vals)]
+    S.stroke([(x0, y0 + 20), (x1, y0 + 20)], (200, 196, 186), 2, 0.25, gap=0.05)      # 기준선
+    for i in (0, len(items) - 1):
+        S.text(pts[i][0], y0 + 50, items[i].get("label", ""), F(FT("label"), 30), (120, 120, 120), gap=0.0)
+    S.stroke(pts, S.ink, 5, min(1.6, 0.25 * len(pts)), gap=min(1.6, 0.25 * len(pts)))
+    for (x, y), it, v in zip(pts, items, vals):
+        if it.get("highlight"):
+            col = S.red
+
+            def dot(img, d, p, x=x, y=y, col=col):
+                r = 10 * ease(p)
+                d.ellipse([x - r, y - r, x + r, y + r], fill=col)
+            S.add(dot, 0.25, gap=0.05)
+            S.text(x, y - 46, it.get("sub") or it.get("value", ""), fit(FT("value"), it.get("sub") or it.get("value", ""), 54, 500), col, dur=0.35)
+    _note(S, card)
+
+
+LAYOUT = {"line": l_line, "number_compare": l_number_compare, "flow": l_flow, "table": l_table, "bars": l_bars,
           "headline": l_headline, "text": l_text}
 
 
@@ -473,7 +526,7 @@ def render_paste(image_path: Path, out: Path, duration: float, caption: str = ""
     im = Image.open(image_path)
     # 사진+캡션이 하단 자막(아래 ~230px)을 침범하지 않도록
     S.photo(im, S.W / 2, S.H * 0.41, S.W * 0.70, S.H * 0.56,
-            angle=S.rng.choice([-2.2, -1.4, 1.2, 2.0]), caption=caption)
+            angle=S.rng.choice([-2.2, -1.4, 1.2, 2.0]) if PROFILE.get("tilt", True) else 0.0, caption=caption)
     S.render(out, duration)
 
 
@@ -484,6 +537,6 @@ def render_placeholder(out: Path, duration: float, note: str, seed: int = 1) -> 
     dashed = [pts[i:i + 3] for i in range(0, len(pts) - 2, 4)]
     for seg in dashed:
         S.stroke(seg, (150, 140, 120), 3, 0.05, gap=0.012)
-    S.text(S.W / 2, S.H * 0.40, "소스 필요", F(PEN, 70), S.red)
-    S.text(S.W / 2, S.H * 0.52, note, fit(PEN, note, 44, x1 - x0 - 80), S.ink)
+    S.text(S.W / 2, S.H * 0.40, "소스 필요", F(FT("note"), 70), S.red)
+    S.text(S.W / 2, S.H * 0.52, note, fit(FT("note"), note, 44, x1 - x0 - 80), S.ink)
     S.render(out, duration)

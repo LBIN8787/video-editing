@@ -51,7 +51,7 @@ python -m ytflow styles | schemas | status <프로젝트>
 | 경로 | 내용 |
 |---|---|
 | `ytflow/` | 파이프라인 코드 |
-| `ytflow/stages/` | 단계별 코드. 렌더러는 `cards.py`(sixsigma), `paper.py`(paper) |
+| `ytflow/stages/` | 단계별 코드. 렌더러는 `cards.py`(sixsigma), `paper.py`(paper), `flat.py`(flat) |
 | `prompts/` | 단계별 LLM 지시문 |
 | `config/` | 채널·파이프라인 설정 |
 | `styles/` | 편집 스타일 라이브러리 |

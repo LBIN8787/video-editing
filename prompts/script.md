@@ -7,7 +7,7 @@
 - kind=quote: quote_en 에 원문, narration 에 한국어 번역. 화면 아래 원문(작게, 회색) + 번역(흰색) 2단 자막.
   한 클립은 6~20초. 원문에서 확인된 발언만 쓴다(자막·기사로 확인되지 않은 발언을 만들어내지 말 것).
 - 원본 영상 사이에는 **검은 배경 인포 카드**(visual_type=card)로 숫자를 정리한다.
-  card.type: number_compare(큰 숫자 2~3개 비교) / flow(돈·물건이 흐르는 순서) / table(빨간 박스 강조 표) /
+  card.type: number_compare(큰 숫자 2~3개 비교) / flow(돈·물건이 흐르는 순서) / table(빨간 박스 강조 표) / line(주가·지표 추이, items=시점별 값) /
   bars(가로 막대) / headline(기사·공시 헤드라인) / text(한 문장). 강조할 항목만 highlight=true (빨강).
 - 장면 비율 목표: source_video 40~50%, card 35~45%, screenshot 10~20%.
 - 모든 장면에 label: 'YYYY.MM.DD · 출처' (원본 영상의 날짜와 출처, 카드는 근거 자료의 날짜와 출처).
