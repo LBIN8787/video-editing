@@ -19,6 +19,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 ## 환경
 ```bash
 pip install -r requirements.txt      # Python 3.10+, 그리고 ffmpeg·node(Playwright 캡처용)가 필요
+python scripts/install_tools.py      # 외부 편집 도구·skill (HyperFrames, ffmpeg-skill) 고정 버전 설치
 python -m ytflow --help
 ```
 
@@ -54,7 +55,7 @@ python -m ytflow styles | schemas | status <프로젝트>
 | 계열 | 뼈대 | 스타일 | 대본 화면 문법 |
 |---|---|---|---|
 | `source` 원본 소스형 | CEO·CFO 인터뷰·실적발표 원본 영상 + 자막 + 핵심요약 애니메이션 | sixsigma | `prompts/script_source.md` |
-| `infographic` 자체 제작 인포그래픽형 | 직접 그린 도식·차트·비유 그림 | mijudiary, moneycrew | `prompts/script_infographic.md` |
+| `infographic` 자체 제작 인포그래픽형 | 직접 그린 도식·차트·비유 그림 | **mijudiary(기본)**, moneycrew | `prompts/script_infographic.md` |
 | `shorts` 쇼츠 | 9:16 고정 훅 + 큰 자막 | shorts-aitips | `prompts/shorts_script.md` |
 
 ## 규칙 (모든 에이전트 공통)

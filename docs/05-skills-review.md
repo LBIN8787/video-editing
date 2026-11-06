@@ -1,5 +1,29 @@
 # 영상편집 skill 조사 (2026-11-06)
 
+## 도입 현황 (2026-11-06 2차)
+| 도구 | 버전 고정 | 어디에 쓰나 | 설치 |
+|---|---|---|---|
+| HyperFrames | `hyperframes@0.8.190` (10/23 릴리스), `gsap@3.13.0` | `ytflow/stages/hyper.py`: 미주일기 카드(text·number_compare·analogy·flow·table·bars·headline)를 HTML+GSAP 로 렌더. 펜으로 그려지는 선, 숫자 카운트업, 형광펜. 렌더 전 `hyperframes check` 로 레이아웃·대비 점검 | `python scripts/install_tools.py` |
+| ffmpeg-skill | commit `2d9f5ac` (v2.12.0, 10/23) | `ytflow/stages/finish.py`: assemble 뒤 유튜브 음량 −14 LUFS 마스터링(final.mp4), 유튜브 규격 점검(delivery_check.json), 프레임 시트(final_sheet.png) | 같은 스크립트 |
+
+- 목록과 버전: `tools/external.json`. 도구 본체(`tools/<이름>/`)와 그 skill 복사본은 저장소에 올리지 않습니다.
+- agent skill(`hyperframes`, `hyperframes-cli`, `hyperframes-registry`, `media-use`, `ffmpeg-skill`)은 `.claude/skills/`·`.agents/skills/` 에 들어가 Claude Code·Codex 가 같이 씁니다.
+- HyperFrames 사용 통계는 끕니다(`HYPERFRAMES_NO_TELEMETRY=1`). 설치 스크립트는 `npm --ignore-scripts` 로 설치 단계 스크립트를 실행하지 않습니다.
+- 미주일기 스타일은 `card_engine: hyperframes` 가 기본입니다. 도구가 없거나 렌더가 실패하면 기존 `paper.py` 로 자동 대체합니다.
+- 렌더 속도: 카드 1장 약 25초(이 환경은 GPU 없음, 소프트웨어 렌더) → 3개씩 병렬.
+
+## 2차 조사: 지금 파이프라인에 맞는 후보
+| 후보 | ★ / 라이선스 | 채우는 빈칸 | 판단 |
+|---|---|---|---|
+| [rough.js](https://github.com/rough-stuff/rough) | 21.3k / MIT | 손그림 도형(빗금 채우기·겹선)을 SVG 로. 시드 고정 시 같은 결과 | **다음 도입**: hyper.py 의 막대·상자·동그라미를 빗금 손그림으로 → 미주일기 질감 강화 |
+| [hand-drawn-diagrams](https://skills.sh/nexu-io/open-design/hand-drawn-diagrams) (open-design) | 106k / Apache-2.0 (모음 저장소) | 글 → Excalidraw 손그림 도식 + 애니메이션 SVG | 시범 가치 있음: 복잡한 구조도(공급망·지배구조)를 손그림으로. 원본(upstream) 라이선스는 미확인 |
+| [faster-whisper](https://github.com/SYSTRAN/faster-whisper) / [WhisperX](https://github.com/m-bain/whisperX) | 26.5k MIT / 25.1k BSD-2 | 단어 단위 시각: 원본 소스형(식스시그마)의 발언 구간 정밀 자르기, 원본 발언 자막 | **원본 소스형에 도입 권장** (사용자 PC rebuild 때 로컬 실행). video-use 의 유료 받아쓰기 대신 |
+| [vibe-motion/sound](https://github.com/vibe-motion/sound) | 291 / 라이선스 표기 없음 | Freesound 효과음 검색·다운로드(펜 긋는 소리·종이 소리·팝) | 보류: 저장소 라이선스 표기가 없고 Freesound API 키(무료) 필요. 효과음 파일마다 라이선스 확인 필요 |
+| 한국어 TTS: [MeloTTS](https://github.com/myshell-ai/MeloTTS)(MIT), CosyVoice(Apache-2.0) | 7.7k / MIT | 지금 쓰는 edge-tts 는 비공식 경로라 **수익 채널에서는 약관 위험** | 운영 전 결정 필요: ① 본인 녹음(manual) ② Azure 공식 TTS(유료, 저렴) ③ 오픈 모델(품질 시험 필요) |
+| vidIQ (이 세션에 연결된 커넥터) | — | 제목 점수·썸네일 생성·키워드·경쟁 채널 분석 | 업로드 패키지 단계에 활용 가능 (크레딧 차감) |
+| 썸네일 skill (ez-thumb, claude-thumbnails 등) | 수십 개 / Gemini 유료 | 썸네일 생성 | 보류: 대부분 유료 이미지 API 필요, 검증된 것이 적음 |
+| HyperFrames registry (약 450 블록) | 위와 같음 | 전환 효과·차트·키네틱 타이포 | 시범: `hyperframes add` 로 장 전환 블록 1~2개 |
+
 에이전트(Claude Code·Codex)용으로 공개된 영상편집 skill 중 ytflow 에 도입할 만한 것을 검토했습니다.
 별 수·라이선스·최근 업데이트는 GitHub 검색 API 기준(2026-11-06)이고, 기능은 각 README 기준입니다.
 

@@ -1,5 +1,6 @@
 data/*
 !data/style_profile.json
+!data/jargon.json
 # 편집 스타일 분석: 규칙·측정값·설정은 올리고, 타 채널 화면(시트 이미지)은 제외
 # (스타일 라이브러리는 styles/ 로 이동)
 styles/**/work/
@@ -20,3 +21,14 @@ projects/**/work_subs/
 __pycache__/
 *.pyc
 .llm/
+
+# 외부 도구 본체와 그 agent skill (scripts/install_tools.py 로 설치, 목록은 tools/external.json)
+tools/*
+!tools/external.json
+.claude/skills/hyperframes*/
+.claude/skills/media-use/
+.claude/skills/ffmpeg-skill/
+.agents/skills/hyperframes*/
+.agents/skills/media-use/
+.agents/skills/ffmpeg-skill/
+projects/**/hf/

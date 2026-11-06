@@ -6,7 +6,7 @@ description: 주제 선정부터 자료조사, 대본, 소스 탐색, 편집, �
 # 영상 1편 전체 제작 (ytflow make)
 
 ## 준비 (처음 한 번)
-1. `pip install -r requirements.txt` 를 실행하고, ffmpeg·node 를 설치합니다.
+1. `pip install -r requirements.txt` 를 실행하고, ffmpeg·node(22+)를 설치합니다. 그다음 `python scripts/install_tools.py` 로 외부 편집 도구(HyperFrames, ffmpeg-skill)를 고정 버전으로 설치합니다.
 2. LLM 백엔드를 고릅니다 (`config/pipeline.yaml` → `llm.backend`, 또는 환경변수 `YTFLOW_LLM_BACKEND`).
    - **claude-cli:** Claude 구독. `claude` 로그인이 필요합니다.
    - **codex-cli:** ChatGPT 구독. `codex login` 이 필요합니다.

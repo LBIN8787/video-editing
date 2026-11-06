@@ -27,3 +27,15 @@ def icon(name: str, size: int, color: tuple, stroke: float = 2.0) -> Image.Image
     svg = svg.replace('stroke-width="2"', f'stroke-width="{stroke}"')
     png = cairosvg.svg2png(bytestring=svg.encode(), output_width=size, output_height=size)
     return Image.open(io.BytesIO(png)).convert("RGBA")
+
+
+def svg_markup(name: str, size: int, color: str, stroke: float = 2.0) -> str | None:
+    """HTML 렌더러(hyper.py)용 인라인 SVG 문자열."""
+    f = ICON_DIR / f"{name}.svg"
+    if not name or not f.exists():
+        return None
+    svg = f.read_text(encoding="utf-8").replace("currentColor", color).replace('stroke-width="2"', f'stroke-width="{stroke}"')
+    svg = svg[svg.find("<svg"):]
+    import re
+    svg = re.sub(r'\swidth="\d+"', f' width="{size}"', svg, count=1)
+    return re.sub(r'\sheight="\d+"', f' height="{size}"', svg, count=1)

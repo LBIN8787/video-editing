@@ -6,7 +6,10 @@ description: 미주일기 편집 스타일(구겨진 종이 배경 + 손그림 �
 # 미주일기 스타일 (paper 렌더러)
 
 - **규칙 원본:** `styles/mijudiary/STYLE.md` (먼저 읽기), 대본 추가 규칙: `styles/mijudiary/script.md`
+- **기본 스타일:** 자체 제작(인포그래픽형) 영상의 기본입니다. `python -m ytflow make [--topic "..."]` 만으로 이 스타일이 쓰입니다(`config/pipeline.yaml` → `default_styles.infographic`).
 - **제작:** `python -m ytflow make --style-ref mijudiary [--topic "..."]`
+- **카드 엔진:** `card_engine: hyperframes`. 카드를 HyperFrames(HTML+GSAP)로 렌더합니다: 펜으로 그려지는 밑줄·상자·동그라미·화살표, 숫자 카운트업, 형광펜, 비유 카드. chart·line 은 `paper.py`.
+  도구 설치: `python scripts/install_tools.py`. 카드 HTML 은 `04_assets/hf/scene_XXX/index.html` 에 남아 직접 고칠 수 있고, 고친 뒤 `tools/hyperframes/node_modules/.bin/hyperframes render -o ../../scene_XXX_anim.mp4` 로 다시 렌더합니다(`.claude/skills/hyperframes-cli`).
 - **기존 프로젝트에 적용:** `cp styles/mijudiary/edit.yaml projects/<프로젝트>/edit.yaml` 후 assets → subtitles → assemble
 - **핵심 점검:**
   - 약 2초마다 화면이 변하는가

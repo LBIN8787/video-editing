@@ -31,7 +31,13 @@ tts:
   voice: ko-KR-InJoonNeural
   rate: "+8%"
 
+# 스타일 계열별 기본 스타일: make 에 --style-ref 가 없으면 --family(기본 infographic)로 고른다
+default_styles:
+  infographic: mijudiary      # 자체 제작이 필요한 영상은 미주일기 스타일 (사용자 선택 2026-11-06)
+  source: sixsigma            # 인터뷰·실적발표 원본 영상 중심
+
 edit:
+  loudness_lufs: -14          # 마스터링 음량 (유튜브 기준). final.mp4 = ffmpeg-skill loudness.py
   style: sixsigma             # sixsigma(검은 배경 미니멀) | paper(종이 질감 손그림 애니메이션)
                               # 프로젝트마다 바꾸려면 projects/<프로젝트>/edit.yaml 에 "edit: {style: paper}"
   # 아래 기본값은 sixsigma 기준: 검은 배경 · 흰 글씨 · 빨간 강조 · 줌/BGM 없음

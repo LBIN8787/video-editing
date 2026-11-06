@@ -15,6 +15,18 @@ SRC = ROOT / "skills"
 TARGETS = [ROOT / ".claude" / "skills", ROOT / ".agents" / "skills"]
 
 
+def external() -> set:
+    """scripts/install_tools.py 가 넣은 외부 skill 은 지우지 않는다 (tools/external.json)."""
+    import json
+    f = ROOT / "tools" / "external.json"
+    if not f.exists():
+        return set()
+    out = set()
+    for t in json.loads(f.read_text(encoding="utf-8"))["tools"]:
+        out |= {t["name"] if r == "." else Path(r).name for r in t.get("skills", [])}
+    return out
+
+
 def main(check: bool) -> int:
     bad = 0
     for tgt in TARGETS:
@@ -32,7 +44,7 @@ def main(check: bool) -> int:
             shutil.copytree(skill, dst)
         if not check:
             for old in tgt.iterdir() if tgt.exists() else []:
-                if not (SRC / old.name / "SKILL.md").exists():
+                if not (SRC / old.name / "SKILL.md").exists() and old.name not in external():
                     shutil.rmtree(old)
             print(f"동기화: {tgt.relative_to(ROOT)} ({len(list(tgt.iterdir()))}개)")
     if check:

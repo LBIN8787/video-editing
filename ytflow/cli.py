@@ -129,6 +129,8 @@ def cmd_make(a) -> None:
     """자료조사 → 대본 → 소스 → 영상 → 업로드 패키지 → 보고서를 한 번에 (승인 게이트는 자동 통과)."""
 
     p = Project.create(a.name or (a.topic or "auto")[:30])
+    if not a.style_ref and not a.style:  # 계열의 기본 스타일 (자체 제작 = 미주일기)
+        a.style_ref = (config.load("pipeline").get("default_styles") or {}).get(a.family or "infographic")
     if a.style_ref:  # 분석한 레퍼런스의 설정을 그대로 가져온다
         ref = config.STYLES_DIR / a.style_ref / "edit.yaml"
         if not ref.exists():
@@ -223,7 +225,9 @@ def main(argv: list[str] | None = None) -> None:
     mk.add_argument("--angle", help="관점·방향 메모 (선택)")
     mk.add_argument("--name", help="프로젝트 이름 (선택)")
     mk.add_argument("--style", choices=["sixsigma", "paper", "flat"], help="렌더러 (보통은 --style-ref 로 스타일째 고름)")
-    mk.add_argument("--style-ref", help="ytflow style 로 분석한 레퍼런스 이름 (측정한 색·속도를 적용)")
+    mk.add_argument("--style-ref", help="스타일 id (styles/<id>). 없으면 --family 의 기본 스타일")
+    mk.add_argument("--family", choices=["infographic", "source"], default="infographic",
+                    help="스타일 계열: infographic(자체 제작 → 미주일기, 기본) | source(원본 영상 → 식스시그마)")
     mk.add_argument("--keywords", nargs="*")
 
     rb = sub.add_parser("rebuild", help="소스 클립 받기 → 음성 → 화면 → 자막 → 가편집을 한 번에 (원본 클립을 넣은 뒤)")

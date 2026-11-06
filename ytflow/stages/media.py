@@ -254,8 +254,10 @@ def assets(project: Project, auto_cards: bool = True) -> None:
     adir = project.dir("assets")
     dfile = project.dir("voice") / "durations.json"
     durs = {int(k): v for k, v in json.loads(dfile.read_text()).items()} if dfile.exists() else {}
-    from . import marketdata
+    from . import marketdata, hyper
     qa = {}
+    engine = config.load("pipeline").get("edit", {}).get("card_engine", "pil")  # pil(paper.py) | hyperframes(hyper.py)
+    hf_jobs = []
     for s in scenes:
         sid = s["id"]
         card = s.get("card")
@@ -286,7 +288,9 @@ def assets(project: Project, auto_cards: bool = True) -> None:
             from . import paper as paper_mod
             paper = flat_mod if style == "flat" else paper_mod
             out = adir / f"scene_{sid:03d}_anim.mp4"
-            if card:
+            if card and style == "paper" and engine == "hyperframes" and hyper.available() and card.get("type") in hyper.SUPPORTED:
+                hf_jobs.append((sid, card, out, d))  # HTML+GSAP 렌더는 느려서 모아서 병렬로
+            elif card:
                 qa[sid] = paper.render_card(card, out, d, seed=sid)
             elif own is None and pasted is not None:
                 paper.render_paste(pasted, out, d, caption=s.get("label", ""), seed=sid)
@@ -300,6 +304,15 @@ def assets(project: Project, auto_cards: bool = True) -> None:
                 cards.shot_on_black(pasted, adir / f"scene_{sid:03d}_card.png")
             elif own is None and pasted is None and auto_cards:
                 cards.placeholder(adir / f"scene_{sid:03d}_auto.png", brief)
+    if hf_jobs:  # HyperFrames 카드: 3개씩 병렬 렌더 (실패하면 hyper.py 가 paper.py 로 대체)
+        from concurrent.futures import ThreadPoolExecutor
+        print(f"[assets] HyperFrames 카드 {len(hf_jobs)}개 렌더 (병렬 {config.load('pipeline').get('edit', {}).get('hf_workers', 3)})")
+        with ThreadPoolExecutor(config.load("pipeline").get("edit", {}).get("hf_workers", 3)) as ex:
+            futs = {sid: ex.submit(hyper.render_card, card, out, d, sid, adir / "hf" / f"scene_{sid:03d}")
+                    for sid, card, out, d in hf_jobs}
+            for sid, fu in futs.items():
+                qa[sid] = fu.result()
+                print(f"[assets] #{sid} hyperframes card")
     project.write_json("assets", "layout_qa.json", {str(k): v for k, v in qa.items() if v})
     if any(qa.values()):
         print(f"[assets] ⚠ 겹침을 자동으로 못 푼 장면 {sum(1 for v in qa.values() if v)}개 → 04_assets/layout_qa.json")
@@ -403,4 +416,6 @@ def assemble(project: Project) -> None:
             w.writerow({**row, "source": src.name if src else "(없음)"})
     print(f"[assemble] {edir}/draft.mp4 ({duration(edir / 'draft.mp4'):.1f}s)\n"
           f"           확인 후: ytflow approve {project.path.name} draft")
+    from .finish import master
+    master(project)  # 유튜브 음량 -14 LUFS·규격 점검·프레임 시트 (ffmpeg-skill) → final.mp4
     project.mark_done("assemble")
