@@ -49,6 +49,14 @@ def export_schemas() -> None:
         print("schemas/" + f"{name}.schema.json")
 
 
+def _isnum(v) -> bool:
+    try:
+        float(str(v).replace(",", ""))
+        return True
+    except ValueError:
+        return False
+
+
 def validate(p: Project) -> bool:
     """대본 스키마·장면 규칙 점검. 문제를 출력하고 통과 여부를 돌려준다."""
     from .stages.cards import RENDER
@@ -69,6 +77,10 @@ def validate(p: Project) -> bool:
             issues.append(f"{tag}: quote 장면에 quote_en(원문)이 없습니다")
         if s["visual_type"] == "card" and not s["card"]:
             issues.append(f"{tag}: card 장면에 card 내용이 없습니다")
+        if s["card"] and s["card"]["type"] in ("bars", "line"):
+            bad = [it["value"] for it in s["card"]["items"] if not _isnum(it["value"])]
+            if bad:
+                issues.append(f"{tag}: {s['card']['type']} 카드의 value 는 숫자만 (단위는 label/sub 로): {bad[:3]} → 지금은 표로 대체됨")
         if s["card"] and s["card"]["type"] not in RENDER:
             issues.append(f"{tag}: card.type={s['card']['type']} ({' | '.join(RENDER)})")
         src = s.get("source") or {}

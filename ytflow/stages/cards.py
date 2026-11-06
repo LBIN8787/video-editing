@@ -144,9 +144,19 @@ def r_table(c: Canvas, card: dict):
     _note(c, card)
 
 
+def _num(v) -> bool:
+    try:
+        float(str(v).replace(",", ""))
+        return True
+    except ValueError:
+        return False
+
+
 def r_bars(c: Canvas, card: dict):
-    """가로 막대. value 는 숫자 문자열, sub 는 막대 옆 표기(없으면 value)."""
+    """가로 막대. value 는 숫자 문자열, sub 는 막대 옆 표기(없으면 value). 숫자가 아니면 표로."""
     items = card.get("items", [])[:8]
+    if not items or not all(_num(it.get("value", "")) for it in items):
+        return r_table(c, card)
     _title(c, card)
     vals = []
     for it in items:
@@ -192,14 +202,9 @@ def r_text(c: Canvas, card: dict):
 def r_line(c: Canvas, card: dict):
     """꺾은선 (정지 화면). items 순서대로 x축, value 숫자, highlight 지점에 빨간 점과 값."""
     items = card.get("items", [])
-    vals = []
-    for it in items:
-        try:
-            vals.append(float(str(it.get("value", "0")).replace(",", "")))
-        except ValueError:
-            vals.append(0.0)
-    if len(vals) < 2:
-        return r_text(c, card)
+    if len(items) < 2 or not all(_num(it.get("value", "")) for it in items):
+        return r_table(c, card)
+    vals = [float(str(it["value"]).replace(",", "")) for it in items]
     _title(c, card)
     x0, x1, y0, y1 = 220, c.W - 260, c.H * 0.70, c.H * 0.26
     lo, hi = min(vals), max(vals)

@@ -36,6 +36,7 @@ _fonts: dict = {}
 
 # 렌더러 겉모습 프로필. paper(미주일기)가 기본, flat.py 가 평면 인포그래픽용으로 바꿔 쓴다.
 PAPER_PROFILE = {"texture": True, "wobble": 1.0, "tape": True, "underline": True, "top": 130, "tilt": True,
+                 "mark": "circle",  # 표 강조: circle(빨간 펜 동그라미) | box(곧은 빨간 상자)
                  "fonts": {"title": SERIF, "value": SERIF, "box": SERIF_B, "note": PEN, "label": SANS}}
 PROFILE = dict(PAPER_PROFILE)
 
@@ -414,13 +415,26 @@ def l_table(S, card):
     for i, it in enumerate(items):
         if it.get("highlight"):
             y = top + rh * (i + 0.5)
-            S.circle((x0 + x3) / 2, y, (x3 - x0) / 2 + 30, rh * 0.55, S.red, dur=0.55)
+            if PROFILE.get("mark") == "box":
+                S.box(x0 - 24, y - rh * 0.45, x3 + 24, y + rh * 0.45, S.red, 4, dur=0.4)
+            else:
+                S.circle((x0 + x3) / 2, y, (x3 - x0) / 2 + 30, rh * 0.55, S.red, dur=0.55)
     _note(S, card)
 
 
+def numeric(v) -> bool:
+    try:
+        float(str(v).replace(",", ""))
+        return True
+    except ValueError:
+        return False
+
+
 def l_bars(S, card):
-    _title(S, card)
     items = card.get("items", [])[:8]
+    if not items or not all(numeric(it.get("value", "")) for it in items):
+        return l_table(S, card)  # 값이 순수 숫자가 아니면 막대를 그릴 수 없으므로 표로
+    _title(S, card)
     vals = []
     for it in items:
         try:
@@ -481,14 +495,9 @@ def l_line(S, card):
     highlight 항목에 점과 값 표시, sub 는 그 지점 설명."""
     _title(S, card)
     items = card.get("items", [])
-    vals = []
-    for it in items:
-        try:
-            vals.append(float(str(it.get("value", "0")).replace(",", "")))
-        except ValueError:
-            vals.append(0.0)
-    if len(vals) < 2:
-        return l_text(S, card)
+    if len(items) < 2 or not all(numeric(it.get("value", "")) for it in items):
+        return l_table(S, card)  # 숫자 시계열이 아니면 표로
+    vals = [float(str(it["value"]).replace(",", "")) for it in items]
     x0, x1, y0, y1 = 220, S.W - 260, S.H * 0.70, S.H * 0.26
     lo, hi = min(vals), max(vals)
     span = (hi - lo) or 1

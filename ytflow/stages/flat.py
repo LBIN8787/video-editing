@@ -12,6 +12,7 @@ from pathlib import Path
 from . import paper
 
 FLAT_PROFILE = {"texture": False, "wobble": 0.0, "tape": False, "underline": False, "top": 200, "tilt": False,
+                "mark": "box",
                 "fonts": {"title": paper.SANS_X, "value": paper.SANS_X, "box": paper.SANS,
                           "note": paper.SANS, "label": paper.SANS}}
 
