@@ -6,6 +6,7 @@
   python -m ytflow approve <프로젝트> topic --pick 2  # 사람 승인
   python -m ytflow stage <프로젝트> <단계>             # 단계 하나만 (재)실행
   python -m ytflow make --topic "주제" [--style paper]  # 자료조사~영상까지 한 번에
+  python -m ytflow shorts [--repo owner/name]      # AI·깃허브 트렌드 쇼츠 (9:16)
   python -m ytflow rebuild <프로젝트>              # 클립 받기~가편집 재생성 (PC에서 원본 클립 넣을 때)
   python -m ytflow validate <프로젝트>             # 대본 점검 (에이전트가 직접 쓴 경우 필수)
   python -m ytflow schemas                        # schemas/*.schema.json 내보내기
@@ -193,6 +194,11 @@ def main(argv: list[str] | None = None) -> None:
     g.add_argument("gate", choices=sorted(set(GATE_AFTER.values())))
     g.add_argument("--pick", type=int, help="topic 게이트: shortlist 번호")
 
+    sh = sub.add_parser("shorts", help="AI 활용·깃허브 화제 기술 쇼츠(9:16)를 한 번에")
+    sh.add_argument("--repo", help="owner/name (없으면 GitHub·뉴스 트렌드에서 자동 선택)")
+    sh.add_argument("--topic", help="주제 (저장소 없이 뉴스·팁 소재)")
+    sh.add_argument("--name")
+
     sy = sub.add_parser("style", help="레퍼런스 영상 파일로 편집 스타일을 분석 → styles/<id>/")
     sy.add_argument("name", help="스타일 id (영문 소문자 권장, 예: mijudiary)")
     sy.add_argument("videos", nargs="+")
@@ -238,6 +244,9 @@ def main(argv: list[str] | None = None) -> None:
             p.save_state(stt)
         p.approve(a.gate)
         print(f"승인: {a.gate}. 이어서:  python -m ytflow run {p.path.name}")
+    elif a.cmd == "shorts":
+        from .stages import shorts
+        shorts.make(a.name, a.repo, a.topic)
     elif a.cmd == "style":
         style.run(a.name, a.videos, a.title)
     elif a.cmd == "schemas":

@@ -191,7 +191,7 @@ PlayResY: {H}
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Sub,{font},{size},{sub_color},{sub_color},{back if box == 3 else "&H00000000"},{back},{-1 if top else 0},0,0,0,100,100,0,0,{box},{12 if box == 3 else (0 if ecfg.get("subtitle_dark") else 2.5)},0,{8 if top else 2},80,80,{30 if top else (50 if box == 3 else 60)},1
+Style: Sub,{font},{size},{sub_color},{sub_color},{back if box == 3 else "&H00000000"},{back},{-1 if top else 0},0,0,0,100,100,0,0,{box},{ecfg.get("subtitle_outline", 12 if box == 3 else (0 if ecfg.get("subtitle_dark") else 2.5))},0,{8 if top else 2},80,80,{ecfg.get("subtitle_margin_v", 30 if top else (50 if box == 3 else 60))},1
 Style: En,{font},{int(size * 0.62)},&H00D2D2D2,&H00D2D2D2,{back if box == 3 else "&H00000000"},{back},0,0,0,0,100,100,0,0,{box},{8 if box == 3 else 1.8},0,2,80,80,{(50 if box == 3 else 60) + int(size * (1.6 if box == 3 else 1.25))},1
 Style: Label,{font},{int(size * 0.52)},&H00E6E6E6,&H00E6E6E6,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,1.5,0,{lab_align},40,40,30,1
 Style: Logo,{font},{int(size * 0.56)},&H00DCDCDC,&H00DCDCDC,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,1.5,0,9,40,40,30,1
@@ -228,6 +228,9 @@ def assets(project: Project, auto_cards: bool = True) -> None:
     from . import cards
 
     style = config.load("pipeline").get("edit", {}).get("style", "sixsigma")
+    if style == "shorts":  # 세로 쇼츠는 전용 화면 구성 (ytflow/stages/shorts.py)
+        from .shorts import assets as shorts_assets
+        return shorts_assets(project)
     scenes = project.read_json("script", "scenes.json")["scenes"]
     adir = project.dir("assets")
     dfile = project.dir("voice") / "durations.json"

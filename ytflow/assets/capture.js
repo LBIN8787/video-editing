@@ -12,6 +12,19 @@ const { chromium } = require('playwright');
   try {
     // X(트위터) 게시물: Python 이 받은 공식 임베드 HTML(oEmbed)을 그려서 게시물 카드만 캡처
     //   node capture.js --embed <oembed.html> <out.png>
+    // 페이지 전체 (쇼츠 화면 스크롤용): node capture.js --full <url> <out.png>
+    if (url === '--full') {
+      const [, target, outFile] = process.argv.slice(2);
+      await page.setViewportSize({ width: 1280, height: 900 });
+      const r = await page.goto(target, { waitUntil: 'domcontentloaded', timeout: 30000 });
+      await page.waitForTimeout(3500);
+      if (!r || r.status() >= 400) { console.log('BLOCKED ' + (r ? r.status() : 0)); await browser.close(); process.exit(2); }
+      const h = Math.min(await page.evaluate(() => document.body.scrollHeight), 7000);
+      await page.screenshot({ path: outFile, fullPage: true });  // 너무 길면 Python 쪽에서 7000px 로 자름
+      console.log('OK(full) ' + h + 'px');
+      await browser.close();
+      process.exit(0);
+    }
     if (url === '--embed') {
       const [, html, outFile] = process.argv.slice(2);
       const body = require('fs').readFileSync(html, 'utf8');

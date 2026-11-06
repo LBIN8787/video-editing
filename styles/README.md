@@ -6,6 +6,7 @@
 |---|---|---|---|---|
 | `sixsigma` | 식스시그마 | sixsigma | reviewed | 기업·투자 뉴스 해설 (원본 발언 + 검은 카드) |
 | `mijudiary` | 미주일기 | paper | reviewed | 개념·원리·역사 해설 (종이 콜라주 + 손그림 애니메이션) |
+| `shorts-aitips` | AI 꿀팁 쇼츠 (해시태그 상위 쇼츠) | shorts | reviewed | 9:16 쇼츠: GitHub·AI 활용 소재 (`python -m ytflow shorts`) |
 | `moneycrew` | 머니크루 | flat | reviewed | 산업·공급망·실적 해설 (평면 인포그래픽 모션, 위쪽 자막, 차트) |
 
 ## 렌더러
@@ -13,6 +14,7 @@
 |---|---|---|
 | `sixsigma` | `ytflow/stages/cards.py` | 검은 배경 정지 카드 + 원본 영상 |
 | `paper` | `ytflow/stages/paper.py` | 종이 질감 + 손그림 애니메이션 |
+| `shorts` | `ytflow/stages/shorts.py` | 9:16: 고정 훅 + 가운데 창(페이지 스크롤·카드·큰 글씨) + 큰 자막 |
 | `flat` | `ytflow/stages/flat.py` | paper 애니메이션 엔진 + 평면 프로필 (단색 배경, 곧은 선, 굵은 고딕) |
 
 카드 종류(number_compare · flow · table · bars · line · headline · text)는 모든 렌더러가 공통으로 따릅니다.

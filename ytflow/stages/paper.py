@@ -63,7 +63,9 @@ def cfg() -> dict:
     e = config.load("pipeline").get("edit", {})
     p = {"base": "#EEE7DA", "ink": "#22304D", "red": "#C4452F", "anim_seconds": 1.2}
     p.update(e.get("paper") or {})
-    return {"W": e.get("width", 1920), "H": e.get("height", 1080), "fps": e.get("fps", 30), **p}
+    # 카드는 항상 가로 캔버스에 그린다 (쇼츠는 세로 화면 안에 카드를 줄여 넣음): card_width/height 로 따로 지정 가능
+    return {"W": e.get("card_width", e.get("width", 1920)), "H": e.get("card_height", e.get("height", 1080)),
+            "fps": e.get("fps", 30), **p}
 
 
 def ease(p: float) -> float:
