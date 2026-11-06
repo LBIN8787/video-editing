@@ -16,6 +16,7 @@ ytflow 는 한 번 쓰고 끝내는 스크립트가 아니라 **매주 같은 �
 | 소스 | `sources` → `clips` | `04_assets/sources.csv`, 캡처 | 원본 소스형만 중요 |
 | 영상 | `voice` → `assets` → `subtitles` → `assemble` | `05_edit/final.mp4`, `final_sheet.png` | 프레임 시트 |
 | 업로드 | `package` → `report` | `06_package/upload.json`, `REPORT.md` | 제목·썸네일 문구, 남은 일 |
+| 보관 | `python -m ytflow upload <프로젝트>` | Google Drive `ytflow 영상/<채널·스타일>/` 에 영상·자막·업로드 문구 | Drive 폴더 (`config/storage.yaml`) |
 
 ## 2. 시작 방법
 ```bash

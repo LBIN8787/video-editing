@@ -31,6 +31,7 @@ python -m ytflow make --channel <id> --from-text <조사글.md>   # 대화형 LL
 고쳤다면 `python -m ytflow stage <프로젝트> script` 부터 다시 돌립니다.
 
 ## 4. 끝난 뒤
+- 영상 보관: `python -m ytflow upload <프로젝트>` → Google Drive `ytflow 영상` 아래 채널(편집 스타일) 폴더. PC 에서는 `config/storage.yaml` 의 `local_sync_dir`(Google Drive for desktop 폴더)에 복사, 클라우드에서는 Drive API 토큰(www.googleapis.com)이 필요합니다.
 - `python -m ytflow validate <프로젝트>`, 프레임 시트 `05_edit/final_sheet.png` 확인 (`skills/video-edit`).
 - `channels/<id>/episodes.md` 에 회차가 자동으로 기록됩니다. 업로드하면 상태 칸을 '업로드 YYYY-MM-DD'로 고칩니다.
 - `REPORT.md` 의 남은 일(임시 화면, 재확인 필요)을 사용자에게 알립니다. 기획 문서만 커밋합니다.

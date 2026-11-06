@@ -264,6 +264,9 @@ def main(argv: list[str] | None = None) -> None:
 
     sub.add_parser("styles", help="스타일 라이브러리 목록")
     sub.add_parser("channels", help="운영 채널 목록 (channels/)")
+    up = sub.add_parser("upload", help="완성 영상을 Google Drive 의 채널(편집 스타일)별 폴더에 올리기")
+    up.add_argument("project", nargs="?")
+    up.add_argument("--all", action="store_true", help="영상이 있는 모든 프로젝트")
     sub.add_parser("schemas", help="에이전트가 직접 쓰는 파일들의 JSON Schema 를 schemas/ 에 내보내기")
     qa = sub.add_parser("qa", help="카드 화면을 렌더링해 글자·그래프 겹침과 안전 영역 침범을 점검")
     qa.add_argument("project")
@@ -327,6 +330,11 @@ def main(argv: list[str] | None = None) -> None:
                 fam = config.style_family(((yaml.safe_load((d / "edit.yaml").read_text(encoding="utf-8")) or {}).get("edit") or {})
                                           if (d / "edit.yaml").exists() else {})
                 print(f"{d.name:14} {fam:12} {meta.get('title', '').strip():12} renderer={meta.get('renderer', '').split('#')[0].strip():9} status={meta.get('status', '').split('#')[0].strip()}")
+    elif a.cmd == "upload":
+        from .stages import upload
+        names = [d.name for d in sorted(config.PROJECTS_DIR.iterdir()) if (d / "05_edit").is_dir()] if a.all else [a.project]
+        for n in names:
+            upload.run(Project.open(n))
     elif a.cmd == "channels":
         for d in sorted(config.CHANNELS_DIR.iterdir()):
             if (d / "channel.yaml").exists():

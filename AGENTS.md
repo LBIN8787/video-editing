@@ -44,6 +44,7 @@ python -m ytflow make --channel <채널id> [--topic "주제" | --from-text 조�
 python -m ytflow make --style-ref <스타일id> [--topic "주제"]   # 스타일만 지정해 한 편
 python -m ytflow make --channel <채널id> --plan                  # 트렌드 → 소스 찾기 → 주제·형식 결정까지만 (검토용)
 python -m ytflow channels                                       # 채널 목록
+python -m ytflow upload <프로젝트> | --all                          # 완성 영상을 Google Drive 채널(편집 스타일)별 폴더에 보관 (config/storage.yaml)
 python -m ytflow stage <프로젝트> <단계>                          # 단계 하나
 python -m ytflow rebuild <프로젝트>                               # 소스 넣은 뒤 재생성
 python -m ytflow validate <프로젝트>                              # 대본 점검 (직접 쓴 뒤 필수)

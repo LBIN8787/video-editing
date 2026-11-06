@@ -1,0 +1,25 @@
+# 완성 영상 보관: Google Drive "ytflow 영상" 폴더 (편집 스타일·채널별 하위 폴더)
+# python -m ytflow upload <프로젝트> | --all
+drive:
+  # PC 에 'Google Drive for desktop' 이 있으면 그 동기화 폴더 안의 "ytflow 영상" 경로를 적으세요 (토큰 없이 복사만 함)
+  #   윈도우 예: "G:/내 드라이브/ytflow 영상"   맥 예: "~/Library/CloudStorage/GoogleDrive-<계정>/내 드라이브/ytflow 영상"
+  local_sync_dir: ""
+  folder_names:
+    ch-paper-column: "롱폼 · 미주일기 스타일 (ch-paper-column)"
+    ch-source-brief: "롱폼 · 식스시그마 스타일 (ch-source-brief)"
+    ch-data-motion: "롱폼 · 머니크루 스타일 (ch-data-motion)"
+    ch-ai-shorts: "쇼츠 · AI 꿀팁 (ch-ai-shorts)"
+    ch-money-shorts: "쇼츠 · 경제 상식 (ch-money-shorts)"
+    experiment: "실험 · 초기 벤치마킹 (운영 영상 아님)"
+  root: 16Y2oMXY7Ze_4yQP3Omlqll9rUwWPJvnu          # ytflow 영상 (API 로 올릴 때)
+  folders:
+    ch-paper-column: 10W0Ws3bDEwJLL7x7hOd0_-TymUejpLjZ   # 롱폼 · 미주일기 스타일
+    ch-source-brief: 1S-A_IcVh1SHFqhoLwDAN3cJrgTUfbxhK   # 롱폼 · 식스시그마 스타일
+    ch-data-motion: 1sJrI9mYFemlw2-niEKtyhxTmHk2vTp69    # 롱폼 · 머니크루 스타일
+    ch-ai-shorts: 1f0SYDO5VMUdpfll-FgnbjSbxevGSMP2i      # 쇼츠 · AI 꿀팁
+    ch-money-shorts: 18xCQtSz0SqYdej60pp-GN-TwotnVxnLh   # 쇼츠 · 경제 상식
+    experiment: 1BI45Ldobdi9KOxkwnlPXRigKGxDiblwR        # 실험 · 초기 벤치마킹
+  # 채널 설정이 없는 예전 프로젝트: 스타일로 채널 폴더를 정한다
+  style_to_channel: {mijudiary: ch-paper-column, sixsigma: ch-source-brief, moneycrew: ch-data-motion, shorts-aitips: ch-ai-shorts}
+  experiments: ["20261105-첫영상", "20261105-첫영상-a", "20261105-첫영상-a-paper", "20261105-첫영상-b",
+                "20261106-자동영상1", "20261106-자동영상1-flat", "20261106-자동영상1-paper", "20261106-트렌드영상1"]
