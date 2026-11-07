@@ -107,7 +107,8 @@ class HDoc(hyper.Doc):
             nf = fit(FT("note"), note, 40, 760)
             nleft = min(nx - 40, 1870 - nf.getlength(note))  # 메모도 화면 안에
             # 영상 위면 밝은 글씨+그림자, 종이 위(사진 틀 밖)면 잉크색 (대비 3:1 이상)
-            ncol, nsh = (self.red, "") if on_paper else ("#FFF3C4", "text-shadow:0 2px 6px rgba(0,0,0,.8);")
+            ncol, nsh = (self.red, "background:rgba(251,248,241,.92);padding:2px 12px;border-radius:6px;") if on_paper \
+                else ("#FFF3C4", "background:rgba(20,20,20,.55);padding:2px 12px;border-radius:6px;text-shadow:0 2px 6px rgba(0,0,0,.8);")
             j = self._id()
             self.items.append(f'<div id="{j}" style="position:absolute;left:{nleft:.0f}px;top:{ny:.0f}px;font-family:pen;font-size:{nf.size}px;'
                               f'color:{ncol};{nsh}white-space:nowrap">{_e(note)}</div>')
@@ -382,7 +383,8 @@ def s_quote(D: HDoc, sc: dict, bt: list, dur: float):
             mk_at = bt[-1][0] + 0.3 if any(b.get("mark") for b in sc["beats"]) else t0 + 1.6
             D.marker(400 + pre - 6, y + size * 0.18, f.getlength(kw) + 12, size * 0.55, at=mk_at, index=1)
             if sc.get("note"):
-                D.text(400 + pre + f.getlength(kw) / 2, y + size + 34, sc["note"], FT("note"), 42, D.red, at=mk_at + 0.4)
+                ny = 360 + min(len(lines), 5) * (size + 30) + 6  # 인용문 마지막 줄 아래 (다음 줄과 겹치지 않게)
+                D.text(min(400 + pre, 1500 - paper.F(FT("note"), 42).getlength(sc["note"])), ny, "↳ " + sc["note"], FT("note"), 42, D.red, at=mk_at + 0.4, anchor="lm")
             D.sfx.append(("pencil", mk_at))
     D.lower(sc.get("who", ""), sc.get("role", ""), t0 + 0.6)
 
