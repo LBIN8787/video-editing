@@ -1,0 +1,80 @@
+{
+  "id": "shorts-ai-guide",
+  "version": "1.1.0",
+  "composition": "ShortsGuideV2",
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "colors": {
+    "ink": "#19231e",
+    "paper": "#f3f1e8",
+    "accent": "#d4f85a"
+  },
+  "font": {
+    "family": "Noto Sans CJK KR",
+    "titleSize": 76,
+    "titleWeight": 900,
+    "bodySize": 40,
+    "captionSize": 50
+  },
+  "layout": {
+    "left": 80,
+    "right": 150,
+    "width": 850,
+    "headerTop": 110,
+    "stepTop": 180,
+    "titleTop": 242,
+    "panelTop": 495,
+    "panelHeight": 800,
+    "captionTop": 1380,
+    "sourceBottom": 238,
+    "progressBottom": 198,
+    "actionTop": 1320
+  },
+  "motion": {
+    "fadeFrames": 5,
+    "riseFrames": 12,
+    "risePixels": 38,
+    "springDamping": 16,
+    "springStiffness": 180
+  },
+  "audio": {
+    "provider": "elevenlabs",
+    "voiceId": "8jHHF8rMqMlg8if2mOUe",
+    "voiceName": "Han Aim",
+    "modelId": "eleven_v4",
+    "transitionSfx": false,
+    "bgm": false,
+    "targetLufs": -16,
+    "truePeakDb": -1.5,
+    "sampleRate": 48000
+  },
+  "export": {
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "crf": 18,
+    "pixelFormat": "yuv420p",
+    "fastStart": true
+  },
+  "allowedContentChanges": [
+    "episode",
+    "checkedAt",
+    "source",
+    "audio",
+    "captions",
+    "scene titles",
+    "scene steps",
+    "scene evidence images",
+    "scene durations",
+    "scene visual block",
+    "action instruction"
+  ],
+  "changePolicy": "Design changes require a new style version and a new reviewed reference render.",
+  "header": {
+    "showDate": false,
+    "showEpisodeNumber": false
+  },
+  "visual_policy": "Every scene shows input, action, output, comparison, or a practical condition using diagrams or own file excerpts. No bullet-only scene."
+}

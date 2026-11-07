@@ -4,8 +4,12 @@ import argparse,hashlib,json,shutil,subprocess
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 STYLE=ROOT/'styles/shorts-ai-guide';RENDERER=ROOT/'studio/renderer'
+def style_lock(version,root=ROOT):
+ if version not in ['1.0.0','1.1.0']:raise ValueError('Unsupported style version')
+ base=root/'styles/shorts-ai-guide'
+ return json.loads((base/('style-lock.json' if version=='1.0.0' else 'versions/1.1.0/style-lock.json')).read_text(encoding='utf-8'))
 def validate_props(d,root=ROOT):
- lock=json.loads((root/'styles/shorts-ai-guide/style-lock.json').read_text())
+ lock=style_lock(d.get('style_version'),root)
  allowed={'style_version','episode','checkedAt','source','audio','captions','scenes'}
  if set(d)!=allowed or d['style_version']!=lock['version']:raise ValueError('Unexpected props or style version')
  if not d['episode'] or not d['checkedAt'] or not d['source'] or len(d['source'])>52:raise ValueError('Missing header/source or source too long')
@@ -17,7 +21,14 @@ def validate_props(d,root=ROOT):
  total=0
  if not 3<=len(d['scenes'])<=9:raise ValueError('Use 3–9 scenes')
  for scene in d['scenes']:
-  if set(scene)-{'id','frames','step','titleLines','items','dark','image'}:raise ValueError('Scene style overrides are forbidden')
+  fields={'id','frames','step','titleLines','items','dark','image'}
+  if d['style_version']=='1.1.0':
+   fields.update({'visual','action'})
+   if scene.get('visual') not in ['inconsistent','consistent','files','prompt','preview','outputs','setup','recap','audio','recognize','extract','sync','local','check']:raise ValueError('Unknown visual block')
+   if not scene.get('action') or len(scene['action'])>60:raise ValueError('Needs a short actionable instruction')
+   required={'preview':['visual-v2/remotion-poster.png'],'outputs':['visual-v2/remotion-poster.png','visual-v2/whisper-poster.png'],'audio':['visual-v2/voice-waveform.png'],'sync':['visual-v2/voice-waveform.png']}
+   for name in required.get(scene['visual'],[]):asset(name)
+  if set(scene)-fields:raise ValueError('Scene style overrides are forbidden')
   if not isinstance(scene['frames'],int) or not 1<=scene['frames']<=600:raise ValueError('Invalid scene duration')
   total+=scene['frames']
   if not 1<=len(scene['titleLines'])<=2 or any(not x or len(x)>10 for x in scene['titleLines']):raise ValueError('Title needs 1–2 short lines of at most 10 characters')
@@ -38,7 +49,7 @@ def main():
  props=Path(a.props).resolve();d=json.loads(props.read_text());frames=validate_props(d)
  if a.check_only:print(json.dumps({'style_version':d['style_version'],'frames':frames,'valid':True}));return
  if not a.browser:raise ValueError('Pass the installed Chromium path with --browser')
- lock=json.loads((STYLE/'style-lock.json').read_text());out=Path(a.out).resolve();out.parent.mkdir(parents=True,exist_ok=True);raw=out.with_name(out.stem+'-raw.mp4')
+ lock=style_lock(d['style_version']);out=Path(a.out).resolve();out.parent.mkdir(parents=True,exist_ok=True);raw=out.with_name(out.stem+'-raw.mp4')
  subprocess.run(['npx','remotion','render','src/index.ts',lock['composition'],str(raw),'--props',str(props),'--codec=h264','--crf',str(lock['export']['crf']),'--pixel-format=yuv420p','--browser-executable',a.browser,'--concurrency=2'],cwd=RENDERER,check=True)
  subprocess.run(['ffmpeg','-v','error','-y','-i',str(raw),'-c:v','copy','-af',f"loudnorm=I={lock['audio']['targetLufs']}:TP={lock['audio']['truePeakDb']}:LRA=8",'-ar','48000','-c:a','aac','-b:a','192k','-movflags','+faststart',str(out)],check=True)
  subprocess.run(['ffmpeg','-v','error','-xerror','-i',str(out),'-f','null','-'],check=True)

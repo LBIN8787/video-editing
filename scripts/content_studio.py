@@ -32,7 +32,7 @@ def create(channel,topic,episode,style,root=ROOT,work_case=None):
   if not p.exists():p.write_text(text,encoding='utf-8')
  folder.mkdir(parents=True)
  plan={'schema_version':1,'id':episode,'channel':channel,'topic':topic,'style':style,'format':spec['format'],'source_ref':f'content/topics/{topic}/sources.json','research_ref':f'content/topics/{topic}/research.md','article_ref':f'content/topics/{topic}/article.md','voice_ref':f'channels/{channel}/channel.json#/voice','state':'draft','publish_allowed':False}
- if style=='shorts-ai-guide':plan.update(style_version=spec['version'],renderer_ref='studio/renderer/src/template/ShortsGuideV1.tsx')
+ if style=='shorts-ai-guide':plan.update(style_version=spec['version'],renderer_ref=f"studio/renderer/src/template/{spec.get('composition','ShortsGuideV1')}.tsx")
  if work_case:plan.update(content_mode='applied_work',work_case_ref=f'work-cases/{work_case}/case.json')
  (folder/'plan.json').write_text(json.dumps(plan,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
  (folder/'script.md').write_text('# 대본\n\n'+ '\n\n'.join('## '+x for x in spec['outline'])+'\n',encoding='utf-8')

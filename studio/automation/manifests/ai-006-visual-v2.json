@@ -1,0 +1,61 @@
+{
+  "channel": "ai",
+  "title": "자막 타이핑 줄이는 Whisper 활용법: 음성에서 자막 초안까지",
+  "description": "자막 타이핑 줄이는 Whisper 활용법: 음성에서 자막 초안까지\n\n이번 실제 쇼츠 음성을 faster-whisper small 모델로 로컬 인식해 한국어 자막 초안과 단어별 시간을 추출했습니다.\n\n활용 순서: 음성 준비 → language=ko, word_timestamps=True로 인식 → 원문과 고유명사 대조 → 짧은 자막 묶음/SRT → 영상에서 타이밍 확인.\n\n요청문: 원문과 비교해 제품명을 고치고 한 자막을 두 줄 이내로 나눠 줘. 불확실한 단어는 표시해 줘.\n\n로컬 음성 인식에는 모델 설치와 컴퓨터 자원이 필요합니다. 음성 인식 API는 호출하지 않았으며 ElevenLabs 음성 생성 요금과는 별개입니다.\n\n공식 출처 (2026-11-07 확인)\nhttps://github.com/openai/whisper\nhttps://github.com/SYSTRAN/faster-whisper\nhttps://github.com/openai/whisper/blob/main/LICENSE\n\nAI 실전노트: 직접 적용한 AI 활용 기록. 화면은 자체 그래픽과 실제 파일 일부의 재구성입니다.\n#AI활용 #쇼츠제작 #Whisper\n",
+  "source_urls": [
+    "https://github.com/openai/whisper",
+    "https://github.com/SYSTRAN/faster-whisper",
+    "https://github.com/openai/whisper/blob/main/LICENSE"
+  ],
+  "source_checked_at": "2026-11-07",
+  "script_reviewed": true,
+  "transition_sfx": false,
+  "format_version": "ai-guide-v1",
+  "composition": "ShortsGuideV2",
+  "style_version": "1.1.0",
+  "file": "../renderer/out/AI-Shorts-006-Whisper-Visual-v2.mp4",
+  "content_mode": "applied_work",
+  "work_case_ref": "work-cases/shorts-visual-revision/case.json",
+  "voice": {
+    "provider": "elevenlabs",
+    "voice_name": "Han Aim",
+    "voice_id": "8jHHF8rMqMlg8if2mOUe",
+    "model_id": "eleven_v4",
+    "fallback_allowed": false,
+    "generations_per_script": 1,
+    "fallback_used": false,
+    "asset": "../renderer/public/episode-006/voice.mp3",
+    "sha256": "7fc0505957cab421adacae4d167fad95afe520b6ebf74ad7b8be7941d0d0977f",
+    "generated_this_revision": false
+  },
+  "sections": {
+    "news_context": "공식 공개 도구를 이번 실제 채널 제작에 적용한 활용 가이드. 신규 출시·인기 순위 보도 아님.",
+    "features": [
+      "한국어 음성 인식",
+      "단어별 타임스탬프",
+      "자막 초안/SRT"
+    ],
+    "usage_steps": [
+      "자막 작업의 문제",
+      "기능 · Whisper",
+      "활용 1 · 추출",
+      "활용 2 · AI 요청문",
+      "활용 3 · 실제 추출 일부",
+      "실행 조건과 비용",
+      "오늘의 적용"
+    ],
+    "application_example": {
+      "input": "이번 실제 쇼츠 내레이션 MP3",
+      "request": "음성을 한국어로 인식해 단어별 타임스탬프를 JSON으로 추출해 줘. 원문과 비교해 제품명과 숫자를 확인하고, 한 자막을 두 줄 이내로 나눠 SRT도 만들어 줘. 원본 타임스탬프를 유지하고 불확실한 단어는 표시해 줘.",
+      "expected_output": "한국어 인식 JSON과 자막 SRT",
+      "evidence_type": "executed",
+      "evidence_files": [
+        "channels/ai/episodes/006-whisper/revisions/visual-v2/props.json",
+        "work-cases/shorts-visual-revision/evidence.json"
+      ]
+    },
+    "result_check": "최종 파일 전체 디코딩·장면 중간/끝 프레임·음량 확인. 날짜/회차 제거 및 시각적 행동 안내 확인. 직접 청취 검수는 남음.",
+    "conditions": "실행 환경·모델 설치 필요. Remotion 라이선스와 별도 AI/음성 요금 확인."
+  },
+  "publish_allowed": false
+}

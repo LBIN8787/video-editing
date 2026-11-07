@@ -1,3 +1,6 @@
+import {ShortsGuideV2} from './template/ShortsGuideV2';
+import visual005 from '../../../channels/ai/episodes/005-remotion/revisions/visual-v2/props.json';
+import visual006 from '../../../channels/ai/episodes/006-whisper/revisions/visual-v2/props.json';
 import {ShortsGuideV1} from './template/ShortsGuideV1';
 import referenceProps from './template/reference-props.json';
 import {AIRadar003} from './episode-003/AIRadar003';
@@ -23,6 +26,8 @@ import {Install} from './Install';
 import {Limit} from './Limit';
 import {Closing} from './Closing';
 export const Root=()=> <>
+<Composition id="ShortsGuideV2" component={ShortsGuideV2} defaultProps={visual005} calculateMetadata={({props})=>({durationInFrames:props.scenes.reduce((n,s)=>n+s.frames,0)})} durationInFrames={1376} fps={30} width={1080} height={1920}/>
+<Composition id="WhisperVisualGuide" component={ShortsGuideV2} defaultProps={visual006} durationInFrames={1496} fps={30} width={1080} height={1920}/>
 <Composition id="ShortsGuideV1" component={ShortsGuideV1} defaultProps={referenceProps} calculateMetadata={({props})=>({durationInFrames:props.scenes.reduce((total,scene)=>total+scene.frames,0)})} durationInFrames={1500} fps={30} width={1080} height={1920} />
 <Composition id="AIRadar003" component={AIRadar003} durationInFrames={1500} fps={30} width={1080} height={1920} />
 <Composition id="Quiz002" component={Quiz002} durationInFrames={1166} fps={30} width={1080} height={1920} />

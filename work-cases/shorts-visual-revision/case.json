@@ -1,0 +1,47 @@
+{
+  "id": "shorts-visual-revision",
+  "domain": "video-channel",
+  "status": "partially_tested",
+  "objective": "추가 쇼츠 005/006을 입력·행동·결과 중심으로 시각화하고 날짜·회차 표시를 제거한다",
+  "acceptance_criteria": [
+    "두 수정 MP4",
+    "모든 장면의 시각 자료와 행동 안내",
+    "날짜·회차 숨김",
+    "고정 음성 재사용과 이전 버전 보존"
+  ],
+  "results": [
+    "ShortsGuideV2 / 1.1.0을 기본 스타일로 추가했다",
+    "휴대폰 비교, 파일 선택, 요청문, 실제 수정본 미리보기, 음성 파형과 SRT 예시를 넣었다",
+    "45.9초와 49.9초의 수정 MP4를 출력했다",
+    "최종 파일 전체 디코딩·모든 장면 중간/끝 표본·음량 검사와 관련 테스트 8개 및 TypeScript 검사 통과"
+  ],
+  "limitations": [
+    "직접 청취 검수·사용자 시청 피드백은 남아 있다",
+    "조회수·이해도 개선은 측정하지 않았다",
+    "이번 작업은 YouTube 업로드·정기 실행 검증이 아니다"
+  ],
+  "public_scope": "자체 공개용 소스와 음성·자막 자료 일부, 계정정보 없는 파일 검사 결과만 공개한다",
+  "evidence": [
+    {
+      "path": "work-cases/shorts-visual-revision/evidence.json",
+      "sha256": "fcd3a0c696c7e6fabc6093b9192ab5f67a7a3eca9d5fd75e6e7dd5fb6caa01ad"
+    },
+    {
+      "path": "studio/renderer/src/template/ShortsGuideV2.tsx",
+      "sha256": "2a91b1ec058b4ed6918f5416d2dba04adc7c48768a71daf6f5c0c326a32d0670"
+    },
+    {
+      "path": "styles/shorts-ai-guide/versions/1.1.0/style-lock.json",
+      "sha256": "62747fac65a7e0f5b0adcba373795282f619d786659afb6932715918980dfb4d"
+    },
+    {
+      "path": "channels/ai/episodes/005-remotion/revisions/visual-v2/props.json",
+      "sha256": "7d4614964801cdeb26f0f318ca24f3cbb12937ac581ca54a3ffb9776daf706d7"
+    },
+    {
+      "path": "channels/ai/episodes/006-whisper/revisions/visual-v2/props.json",
+      "sha256": "efee47f7d0087f5b12e0ac99aef89df1bb873b13330e2748eb33eea14b88bc02"
+    }
+  ],
+  "metrics": []
+}

@@ -16,4 +16,4 @@ description: 채널별 조사 글에서 쇼츠 안내형과 롱폼 칼럼형 영
 
 기존 ytflow와 이 스튜디오의 채널 설정을 혼동하지 않는다. 현재 채널에는 channel.json의 고정 음성 정책이 우선한다.
 
-AI 쇼츠 반복 제작은 shorts-ai-guide 1.0.0 / ShortsGuideV1을 사용한다. releases/shorts-ai-guide-v1.0.0/README.md와 style-lock.json을 읽고 제목·본문·음성·자료·길이만 바꾼다. 디자인 변경은 새 버전으로 기록한다. scripts/render_short.py --check-only로 폰트와 입력을 검사한다.
+AI 쇼츠 신규·수정 제작은 shorts-ai-guide 1.1.0 / ShortsGuideV2를 기본으로 사용한다. styles/shorts-ai-guide/versions/1.1.0/README.md와 style-lock.json을 읽는다. 화면 날짜·회차는 표시하지 않고, 입력·행동·결과를 구체적인 자료로 보여준다. 고정 음성은 유지한다. 과거 1.0.0 구성은 재현용으로 보존한다. 디자인 변경은 새 버전으로 기록하고 scripts/render_short.py --check-only로 폰트와 입력을 검사한다.
