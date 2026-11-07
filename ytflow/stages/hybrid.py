@@ -381,7 +381,8 @@ def s_quote(D: HDoc, sc: dict, bt: list, dur: float):
             f = paper.F(FT("title"), size)
             pre = f.getlength(ln[:ln.index(kw)])
             mk_at = bt[-1][0] + 0.3 if any(b.get("mark") for b in sc["beats"]) else t0 + 1.6
-            D.marker(400 + pre - 6, y + size * 0.18, f.getlength(kw) + 12, size * 0.55, at=mk_at, index=1)
+            card_ix = next(n for n, it in enumerate(D.items) if f'id="{i}"' in it)  # 카드 바로 위, 글자 아래
+            D.marker(400 + pre - 6, y + size * 0.18, f.getlength(kw) + 12, size * 0.55, at=mk_at, index=card_ix + 1)
             if sc.get("note"):
                 ny = 360 + min(len(lines), 5) * (size + 30) + 6  # 인용문 마지막 줄 아래 (다음 줄과 겹치지 않게)
                 D.text(min(400 + pre, 1500 - paper.F(FT("note"), 42).getlength(sc["note"])), ny, "↳ " + sc["note"], FT("note"), 42, D.red, at=mk_at + 0.4, anchor="lm")
