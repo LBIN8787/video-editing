@@ -1,0 +1,38 @@
+# 완성 영상 보관: media/<프로젝트> 브랜치로 올라온 영상을 GitHub Release(프로젝트별)에 붙이고, 임시 브랜치는 지운다.
+# 키·토큰이 필요 없다 (GitHub Actions 기본 토큰). 사용: python -m ytflow upload <프로젝트> --to github
+name: media-release
+on:
+  push:
+    branches: ["media/**"]
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Attach media to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          BR="${GITHUB_REF#refs/heads/}"
+          NAME="${BR#media/}"
+          TAG="video-${NAME}"
+          DIR="_media/${NAME}"
+          ls -la "$DIR"
+          NOTES="$DIR/release_notes.md"
+          [ -f "$NOTES" ] || echo "ytflow 영상 보관: ${NAME}" > "$NOTES"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$DIR"/* --clobber
+            gh release edit "$TAG" --notes-file "$NOTES"
+          else
+            gh release create "$TAG" "$DIR"/* --title "${NAME}" --notes-file "$NOTES" --target main
+          fi
+      - name: Delete temporary branch
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X DELETE "repos/${GITHUB_REPOSITORY}/git/refs/heads/${GITHUB_REF#refs/heads/}" || true
