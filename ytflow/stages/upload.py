@@ -240,6 +240,7 @@ def github_release(project: Project, with_archive: bool = False) -> str:
         raise SystemExit(f"[upload] {name}: 영상 없음")
     work = Path(tempfile.mkdtemp(prefix="ytflow-rel-"))
     files = [_fit(vid, work)]
+    files += sorted(edir.glob("thumbnail_[A-Z].png")) + ([edir / "package.md"] if (edir / "package.md").exists() else [])
     for f in (edir / "subs.srt", edir / "subs.ass", edir / "upload.txt", project.dir("package") / "upload.txt"):
         if f.exists():
             files.append(f)
@@ -253,6 +254,10 @@ def github_release(project: Project, with_archive: bool = False) -> str:
     lines_ = up_txt.read_text(encoding="utf-8").splitlines() if up_txt else []
     head = next((l.split(":", 1)[1].strip() for l in lines_ if l.startswith("제목:")), None) \
         or next((l.strip() for l in lines_[1:3] if l.strip()), None) or project.state().get("name", name)
+    try:
+        head = json.loads((project.dir("script") / "hybrid.json").read_text(encoding="utf-8"))["package"]["title"]
+    except Exception:  # noqa: BLE001
+        pass
     remake = f"python -m ytflow hybrid {name}" if (project.dir("script") / "hybrid.json").exists() else f"python -m ytflow rebuild {name}"
     notes.write_text(
         f"## {head.replace('제목: ', '')}\n\n- 프로젝트: `projects/{name}` (기획·대본·팩트시트는 main 브랜치)\n"

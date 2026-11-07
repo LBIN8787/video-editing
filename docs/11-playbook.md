@@ -39,6 +39,10 @@ python -m ytflow archive search "world war 1918" --films                  # 영�
 - 초안은 edge-tts(자동). 최종은 ElevenLabs: 커넥터/웹으로 장 단위 긴 음성 → `python -m ytflow voice-import <프로젝트> part1.mp3 part2.mp3` (docs/08-voice.md).
 - 채널별 목소리는 `channels/<채널>/channel.yaml` 의 voice 에 적혀 있음.
 
+## 4-2. 제목·썸네일 (영상과 함께)
+- `hybrid.json` 에 `package` (제목 1 + 후보 3 + 썸네일 A/B/C + 이유). 규칙: `prompts/thumbnail.md`.
+- `python -m ytflow hybrid` 끝에 자동으로 `thumbnail` → `05_edit/thumbnail_*.png`, `thumbnail_preview.png`(휴대폰 크기까지), `package.md`. 미리보기를 눈으로 확인.
+
 ## 5. 만들기와 점검
 ```bash
 python -m ytflow hybrid <프로젝트>      # 음성 → 장면 렌더(병렬 3) → 이어 붙이기 → 자막 → 효과음 → 마스터링(final.mp4)

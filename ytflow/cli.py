@@ -266,6 +266,8 @@ def main(argv: list[str] | None = None) -> None:
 
     sub.add_parser("styles", help="스타일 라이브러리 목록")
     sub.add_parser("channels", help="운영 채널 목록 (channels/)")
+    th = sub.add_parser("thumbnail", help="제목·썸네일(A/B/C) 만들기 → 05_edit/thumbnail_*.png, package.md")
+    th.add_argument("project")
     sq = sub.add_parser("sync-qa", help="완성 영상의 자막·목소리·화면 싱크를 받아쓰기로 재기 → 05_edit/sync_qa.json")
     sq.add_argument("project")
     vi = sub.add_parser("voice-import", help="긴 내레이션 음성(ElevenLabs 웹·커넥터 mp3)을 대본 박자별로 잘라 03_voice 에 넣기")
@@ -368,6 +370,9 @@ def main(argv: list[str] | None = None) -> None:
         out = config.ROOT / ".cache" / "voice_samples" / f"{a.voice_id}.mp3"
         out.parent.mkdir(parents=True, exist_ok=True)
         print(f"[voice-sample] {_elevenlabs(a.text, out, ec)}")
+    elif a.cmd == "thumbnail":
+        from .stages import thumbnail
+        thumbnail.run(Project.open(a.project))
     elif a.cmd == "sync-qa":
         from .stages import syncqa
         syncqa.run(Project.open(a.project))

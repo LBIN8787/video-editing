@@ -1100,6 +1100,9 @@ def make(project: Project, workers: int = 3) -> Path:
     from .finish import master
     master(project)
     print(f"[hybrid] {edir}/final.mp4 ({t_acc:.1f}초)")
+    if spec.get("package"):  # 제목·썸네일 (영상과 함께 만든다 — prompts/thumbnail.md)
+        from . import thumbnail
+        thumbnail.run(project)
     try:  # 완성본 싱크를 받아쓰기로 재서 05_edit/sync_qa.json 에 (자막·목소리 0.3초 이내 95% 이상이면 통과)
         from . import syncqa
         syncqa.run(project)

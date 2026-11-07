@@ -49,6 +49,9 @@
 - 다른 행사·시점의 영상이면 label 과 lower 에 **'자료 화면'과 실제 날짜·장소**를 적습니다(시청자가 현장으로 오해하지 않게).
 - footage 의 출처·라이선스는 hybrid.json 의 footage{키: {file, credit, url}} 에 적고, 설명란에 자동으로 들어갑니다.
 
+### 4-1. 제목·썸네일 (package)
+hybrid.json 에 `package` 를 같이 쓴다: title, title_options(3), title_why, thumbnails(A/B/C: layout·image·lines·hl·marks·why). 규칙은 `prompts/thumbnail.md`.
+
 ### 5. 금지
 - 같은 레이아웃 반복, 한 문장마다 카드 한 장, 설명 없는 숫자 나열.
 - 벤치마킹 채널 이름·대사·캐릭터·로고. 투자 권유. 확인 안 된 숫자의 단정.
