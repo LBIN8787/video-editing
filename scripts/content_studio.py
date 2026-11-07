@@ -38,7 +38,11 @@ def create(channel,topic,episode,style,root=ROOT,work_case=None):
  if style=='shorts-ai-guide':
   brief=json.loads((ROOT/'studio/templates/shorts/production-brief.template.json').read_text(encoding='utf-8'))
   brief.update(episode=episode,channel=channel,work_case_ref=f'work-cases/{work_case}/case.json')
+  plan.update(packaging_ref=str(folder.relative_to(root)/'packaging.json'),edit_plan_refs={'edit_points':str(folder.relative_to(root)/'layers/edit-points.json'),'emphasis':str(folder.relative_to(root)/'layers/emphasis.json'),'skin':'styles/shorts-ai-guide/skins/paper-lime.json'})
   (folder/'production-brief.json').write_text(json.dumps(brief,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+  packaging=json.loads((ROOT/'studio/templates/shorts/packaging.template.json').read_text(encoding='utf-8'));packaging['episode']=episode
+  (folder/'packaging.json').write_text(json.dumps(packaging,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+  (folder/'plan.json').write_text(json.dumps(plan,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
  (folder/'script.md').write_text('# 대본\n\n'+ '\n\n'.join('## '+x for x in spec['outline'])+'\n',encoding='utf-8')
  (folder/'storyboard.md').write_text('# 장면 구성\n\n| 구간 | 내레이션 | 화면·자료 | 출처 ID | 실제/설명용 |\n|---|---|---|---|---|\n',encoding='utf-8')
  (folder/'review.md').write_text('# 검수\n\n미검수. 출처·내용·고정 보이스·장면·자막·최종 MP4를 확인하기 전 게시하지 않는다.\n',encoding='utf-8')

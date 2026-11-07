@@ -5,6 +5,8 @@ description: 채널별 실제 작업과 조사 자료를 반복 가능한 시각
 
 # 채널 콘텐츠 반복 제작
 
+제목·썸네일과 편집점/편집 포인트/그래픽 분리 기준은 studio/PACKAGING-AND-DIRECTION.md를 함께 따른다. 모든 신규 영상에 제목·세로 표지·가로 썸네일·선택 이유를 제공한다. 연출 계획과 교체 가능한 스킨을 다른 파일로 관리한다.
+
 제작 절차·입력 양식의 단일 기준은 `studio/SHORTS-WORKFLOW.md`다. 먼저 읽고, 현재 채널 설정은 `channels/<id>/channel.json`, 스타일은 `styles/<id>/profile.json`과 버전 lock에서 확인한다.
 
 1. `content_studio.py inventory`로 이전 편을 확인한다. 신규 AI 편은 실제 업무와 완료 기준을 정하고 work-case를 실행해 증거를 남긴다. 조사한 기능을 직접 실행한 경험으로 바꾸지 않는다. 예전 소개 샘플의 재편집은 `historical_illustrative_refresh`로 구분한다.

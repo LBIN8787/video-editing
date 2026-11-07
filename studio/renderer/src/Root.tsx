@@ -1,3 +1,6 @@
+import {LayeredShorts} from './layered/LayeredShorts';
+import layeredExample from '../../../channels/ai/episodes/006-whisper/layers/paper-props.json';
+import {ShortsCover} from './packaging/ShortsCover';
 import {ShortsGuideTemplate} from './template/ShortsGuideTemplate';
 import genericExample from '../../../channels/ai/episodes/003-xlsx/revisions/visual-v2/props.json';
 import {ShortsGuideV2} from './template/ShortsGuideV2';
@@ -18,7 +21,7 @@ import {Reveal2} from './episode-002/Reveal2';
 import {Hook2} from './episode-002/Hook2';
 import {AIRadar002} from './episode-002/AIRadar002';
 import React from 'react';
-import {Composition,Folder} from 'remotion';
+import {Composition,Folder,Still} from 'remotion';
 import {AIRadar} from './AIRadar';
 import {Hook} from './Hook';
 import {Reveal} from './Reveal';
@@ -28,6 +31,9 @@ import {Install} from './Install';
 import {Limit} from './Limit';
 import {Closing} from './Closing';
 export const Root=()=> <>
+<Composition id="LayeredShorts" component={LayeredShorts} defaultProps={layeredExample} calculateMetadata={({props})=>({durationInFrames:props.edit_points.cuts[props.edit_points.cuts.length-1].end_frame})} durationInFrames={1496} fps={30} width={1080} height={1920}/>
+<Still id="ShortsCoverVertical" component={ShortsCover} width={1080} height={1920} defaultProps={{topic:"remotion",headline:["디자인은 고정","내용만 교체"],tool:"Remotion",subline:"같은 스타일로 반복 제작하는 법"}}/>
+<Still id="ShortsThumbnailWide" component={ShortsCover} width={1280} height={720} defaultProps={{topic:"remotion",headline:["디자인은 고정","내용만 교체"],tool:"Remotion",subline:"같은 스타일로 반복 제작하는 법"}}/>
 <Composition id="ShortsGuideTemplate" component={ShortsGuideTemplate} defaultProps={genericExample} calculateMetadata={({props})=>({durationInFrames:props.scenes.reduce((n,s)=>n+s.frames,0)})} durationInFrames={1500} fps={30} width={1080} height={1920}/>
 <Composition id="ShortsGuideV2" component={ShortsGuideV2} defaultProps={visual005} calculateMetadata={({props})=>({durationInFrames:props.scenes.reduce((n,s)=>n+s.frames,0)})} durationInFrames={1376} fps={30} width={1080} height={1920}/>
 <Composition id="WhisperVisualGuide" component={ShortsGuideV2} defaultProps={visual006} durationInFrames={1496} fps={30} width={1080} height={1920}/>

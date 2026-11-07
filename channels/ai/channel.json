@@ -21,7 +21,8 @@
     "AIRadar003",
     "ShortsGuideV1",
     "ShortsGuideV2",
-    "ShortsGuideTemplate"
+    "ShortsGuideTemplate",
+    "LayeredShorts"
   ],
   "transition_sfx": false,
   "language": "ko",
@@ -60,5 +61,13 @@
     "show_episode_number": false,
     "instruction": "Every scene shows a concrete input, action, output or comparison. Keep the fixed voice and no transition SFX."
   },
-  "preferred_composition": "ShortsGuideTemplate"
+  "preferred_composition": "ShortsGuideTemplate",
+  "delivery_requirements": {
+    "title": true,
+    "thumbnail": true,
+    "shorts_cover": true,
+    "separate_direction_and_skin": true
+  },
+  "layered_composition": "LayeredShorts",
+  "default_visual_skin_ref": "styles/shorts-ai-guide/skins/paper-lime.json"
 }

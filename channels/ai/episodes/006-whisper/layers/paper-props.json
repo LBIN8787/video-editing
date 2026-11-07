@@ -1,0 +1,635 @@
+{
+  "content": {
+    "episode": "006",
+    "source": "OpenAI Whisper · faster-whisper · 자체 적용",
+    "audio": "episode-006/voice.mp3",
+    "captions": [
+      {
+        "text": "자동 자막, 매번 처음부터 타이핑하세요?",
+        "startMs": 0,
+        "endMs": 2920,
+        "timestampMs": 0,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "위스퍼는 음성을 글로 바꾸는 공개 AI",
+        "startMs": 3480,
+        "endMs": 6780,
+        "timestampMs": 3480,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "모델입니다.",
+        "startMs": 6780,
+        "endMs": 7500,
+        "timestampMs": 6780,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "이번에는 실제 쇼츠 음성에서 한국어 자막 초안을",
+        "startMs": 7880,
+        "endMs": 11620,
+        "timestampMs": 7880,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "만들었어요.",
+        "startMs": 11620,
+        "endMs": 12200,
+        "timestampMs": 11620,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "활용 순서는 세 단계입니다.",
+        "startMs": 12960,
+        "endMs": 14720,
+        "timestampMs": 12960,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "음성 파일을 준비하고, 인식 언어를 한국어로",
+        "startMs": 15420,
+        "endMs": 18640,
+        "timestampMs": 15420,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "지정한 뒤, 타임스탬프와 함께 텍스트를",
+        "startMs": 18640,
+        "endMs": 21520,
+        "timestampMs": 18640,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "추출하세요.",
+        "startMs": 21520,
+        "endMs": 22060,
+        "timestampMs": 21520,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "그런 다음 AI에게 이렇게 요청하면 됩니다.",
+        "startMs": 22840,
+        "endMs": 25560,
+        "timestampMs": 22840,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "원문과 비교해 제품명을 고치고, 한 자막을 두",
+        "startMs": 26400,
+        "endMs": 30180,
+        "timestampMs": 26400,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "줄 이내로 나눠 줘.",
+        "startMs": 30180,
+        "endMs": 31220,
+        "timestampMs": 30180,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "마지막에는 영상을 틀어 자막이 말보다 먼저",
+        "startMs": 31820,
+        "endMs": 35000,
+        "timestampMs": 31820,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "뜨거나 늦지 않는지 확인하세요.",
+        "startMs": 35000,
+        "endMs": 37120,
+        "timestampMs": 35000,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "로컬 실행에는 모델 설치와 컴퓨터 자원이",
+        "startMs": 37900,
+        "endMs": 40780,
+        "timestampMs": 37900,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "필요하지만, 음성 인식 API 요금 없이 쓸 수",
+        "startMs": 40780,
+        "endMs": 44300,
+        "timestampMs": 40780,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "있습니다.",
+        "startMs": 44300,
+        "endMs": 44720,
+        "timestampMs": 44300,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "자막 초안은 AI에게, 최종 확인은 직접 하는",
+        "startMs": 45320,
+        "endMs": 48940,
+        "timestampMs": 45320,
+        "confidence": null,
+        "pageBreakAfter": true
+      },
+      {
+        "text": "겁니다.",
+        "startMs": 48940,
+        "endMs": 49080,
+        "timestampMs": 48940,
+        "confidence": null,
+        "pageBreakAfter": true
+      }
+    ],
+    "scenes": [
+      {
+        "step": "자막 작업의 문제",
+        "titleLines": [
+          "자막 타이핑",
+          "아직도 처음부터?"
+        ],
+        "items": [
+          "말을 듣고 받아쓰기",
+          "시간 위치까지 수동 조정",
+          "초안부터 AI로 만들기"
+        ],
+        "dark": false,
+        "id": "1",
+        "visual": "image",
+        "action": "입력: 이번 쇼츠의 실제 음성 파일",
+        "visual_data": {
+          "image": "visual-v2/voice-waveform.png",
+          "heading": "실제 내레이션 파형",
+          "note": "voice.mp3 → 자막 초안 입력"
+        }
+      },
+      {
+        "step": "기능 · Whisper",
+        "titleLines": [
+          "음성을 글로",
+          "한국어 인식"
+        ],
+        "items": [
+          "공개 음성 인식 모델",
+          "음성에서 텍스트 추출",
+          "이번 쇼츠 음성에 실제 적용"
+        ],
+        "dark": true,
+        "id": "2",
+        "visual": "flow",
+        "action": "출력: 문장과 각 단어의 발화 시간",
+        "visual_data": {
+          "nodes": [
+            {
+              "label": "실제 내레이션 파일",
+              "kind": "audio"
+            },
+            {
+              "label": "Whisper 한국어 인식",
+              "kind": "file"
+            },
+            {
+              "label": "텍스트와 발화 시간",
+              "kind": "file"
+            }
+          ]
+        }
+      },
+      {
+        "step": "활용 1 · 추출",
+        "titleLines": [
+          "음성 파일에서",
+          "자막 초안 추출"
+        ],
+        "items": [
+          "MP3·WAV 등 음성 준비",
+          "언어를 한국어로 지정",
+          "텍스트와 타임스탬프 추출"
+        ],
+        "dark": false,
+        "id": "3",
+        "visual": "files",
+        "action": "한국어 지정 → 시간 포함 인식 → SRT 변환",
+        "visual_data": {
+          "folder": "자막 추출 작업",
+          "files": [
+            {
+              "name": "voice.mp3 · 음성 입력",
+              "kind": "audio"
+            },
+            {
+              "name": "언어 ko · 한국어",
+              "kind": "file"
+            },
+            {
+              "name": "타임스탬프 포함 출력",
+              "kind": "file"
+            }
+          ],
+          "note": "단어별 시간과 함께 추출"
+        }
+      },
+      {
+        "step": "활용 2 · AI 요청문",
+        "titleLines": [
+          "초안은 이렇게",
+          "다듬어 주세요"
+        ],
+        "items": [
+          "원문과 비교해 제품명을 고쳐 줘.",
+          "한 자막은 두 줄 이내로 나눠 줘.",
+          "확실하지 않은 단어는 표시해 줘."
+        ],
+        "dark": true,
+        "id": "4",
+        "visual": "prompt",
+        "action": "원문을 함께 주고 고유명사·줄바꿈 검수",
+        "visual_data": {
+          "lines": [
+            "원문과 비교해 제품명을 고쳐 줘.",
+            "한 자막은 두 줄 이내로 나눠 줘.",
+            "확실하지 않은 단어는 표시해 줘."
+          ]
+        }
+      },
+      {
+        "step": "활용 3 · 실제 추출 일부",
+        "titleLines": [
+          "자막 시간을",
+          "영상에서 확인"
+        ],
+        "items": [
+          "자막이 말보다 앞서지 않는지",
+          "문장 끝이 너무 빨리 사라지는지"
+        ],
+        "dark": false,
+        "id": "5",
+        "visual": "table",
+        "action": "영상 재생 → 자막과 음성 시작 위치 대조",
+        "visual_data": {
+          "heading": "실제 자막에서 발췌",
+          "columns": [
+            "시작",
+            "끝",
+            "자막 일부"
+          ],
+          "rows": [
+            [
+              "00:03.480",
+              "00:06.780",
+              "위스퍼는 음성을…"
+            ],
+            [
+              "00:06.780",
+              "00:07.500",
+              "모델입니다."
+            ]
+          ],
+          "note": "자막 문장과 시작·종료 시간을 확인"
+        }
+      },
+      {
+        "step": "실행 조건과 비용",
+        "titleLines": [
+          "로컬 실행",
+          "모델 설치 필요"
+        ],
+        "items": [
+          "컴퓨터 성능에 따라 처리 속도 차이",
+          "이 음성 인식에는 API 호출 없음",
+          "AI 음성 생성 요금은 별도"
+        ],
+        "dark": true,
+        "id": "6",
+        "visual": "flow",
+        "action": "로컬 음성 인식과 유료 음성 생성은 별개",
+        "visual_data": {
+          "nodes": [
+            {
+              "label": "내 컴퓨터의 음성 파일",
+              "kind": "audio"
+            },
+            {
+              "label": "로컬 Whisper 모델",
+              "kind": "folder"
+            },
+            {
+              "label": "텍스트 자막 파일",
+              "kind": "file"
+            }
+          ],
+          "note": "로컬 인식 API 요금 없음 · 설치 필요"
+        }
+      },
+      {
+        "step": "오늘의 적용",
+        "titleLines": [
+          "초안은 AI로",
+          "마지막은 직접"
+        ],
+        "items": [
+          "제품명·숫자·고유명사 검수",
+          "타이밍과 줄바꿈 확인",
+          "원본 음성과 최종 비교"
+        ],
+        "dark": false,
+        "id": "7",
+        "visual": "check",
+        "action": "영상 재생으로 제품명·숫자·타이밍 최종 확인",
+        "visual_data": {
+          "checks": [
+            "제품명·숫자·고유명사 검수",
+            "타이밍과 줄바꿈 확인",
+            "원본 음성과 최종 비교"
+          ],
+          "note": "최종 확인은 직접"
+        }
+      }
+    ]
+  },
+  "edit_points": {
+    "schema_version": 1,
+    "fps": 30,
+    "cuts": [
+      {
+        "scene_id": "1",
+        "start_frame": 0,
+        "end_frame": 104,
+        "transition": "cut",
+        "reason": "자막 작업의 문제로 설명의 역할이 바뀌는 지점"
+      },
+      {
+        "scene_id": "2",
+        "start_frame": 104,
+        "end_frame": 389,
+        "transition": "cut",
+        "reason": "기능 · Whisper로 설명의 역할이 바뀌는 지점"
+      },
+      {
+        "scene_id": "3",
+        "start_frame": 389,
+        "end_frame": 685,
+        "transition": "cut",
+        "reason": "활용 1 · 추출로 설명의 역할이 바뀌는 지점"
+      },
+      {
+        "scene_id": "4",
+        "start_frame": 685,
+        "end_frame": 955,
+        "transition": "cut",
+        "reason": "활용 2 · AI 요청문로 설명의 역할이 바뀌는 지점"
+      },
+      {
+        "scene_id": "5",
+        "start_frame": 955,
+        "end_frame": 1137,
+        "transition": "cut",
+        "reason": "활용 3 · 실제 추출 일부로 설명의 역할이 바뀌는 지점"
+      },
+      {
+        "scene_id": "6",
+        "start_frame": 1137,
+        "end_frame": 1360,
+        "transition": "cut",
+        "reason": "실행 조건과 비용로 설명의 역할이 바뀌는 지점"
+      },
+      {
+        "scene_id": "7",
+        "start_frame": 1360,
+        "end_frame": 1496,
+        "transition": "cut",
+        "reason": "오늘의 적용로 설명의 역할이 바뀌는 지점"
+      }
+    ]
+  },
+  "emphasis": {
+    "schema_version": 1,
+    "points": [
+      {
+        "scene_id": "1",
+        "from_frame": 0,
+        "to_frame": 34,
+        "focus_index": 0,
+        "target": "1:item:0",
+        "label": "말을 듣고 받아쓰기",
+        "method": "outline"
+      },
+      {
+        "scene_id": "1",
+        "from_frame": 34,
+        "to_frame": 69,
+        "focus_index": 0,
+        "target": "1:item:0",
+        "label": "시간 위치까지 수동 조정",
+        "method": "outline"
+      },
+      {
+        "scene_id": "1",
+        "from_frame": 69,
+        "to_frame": 104,
+        "focus_index": 0,
+        "target": "1:item:0",
+        "label": "초안부터 AI로 만들기",
+        "method": "outline"
+      },
+      {
+        "scene_id": "2",
+        "from_frame": 0,
+        "to_frame": 95,
+        "focus_index": 0,
+        "target": "2:item:0",
+        "label": "공개 음성 인식 모델",
+        "method": "outline"
+      },
+      {
+        "scene_id": "2",
+        "from_frame": 95,
+        "to_frame": 190,
+        "focus_index": 1,
+        "target": "2:item:1",
+        "label": "음성에서 텍스트 추출",
+        "method": "outline"
+      },
+      {
+        "scene_id": "2",
+        "from_frame": 190,
+        "to_frame": 285,
+        "focus_index": 2,
+        "target": "2:item:2",
+        "label": "이번 쇼츠 음성에 실제 적용",
+        "method": "outline"
+      },
+      {
+        "scene_id": "3",
+        "from_frame": 0,
+        "to_frame": 98,
+        "focus_index": 0,
+        "target": "3:item:0",
+        "label": "MP3·WAV 등 음성 준비",
+        "method": "outline"
+      },
+      {
+        "scene_id": "3",
+        "from_frame": 98,
+        "to_frame": 197,
+        "focus_index": 1,
+        "target": "3:item:1",
+        "label": "언어를 한국어로 지정",
+        "method": "outline"
+      },
+      {
+        "scene_id": "3",
+        "from_frame": 197,
+        "to_frame": 296,
+        "focus_index": 2,
+        "target": "3:item:2",
+        "label": "텍스트와 타임스탬프 추출",
+        "method": "outline"
+      },
+      {
+        "scene_id": "4",
+        "from_frame": 0,
+        "to_frame": 90,
+        "focus_index": 0,
+        "target": "4:item:0",
+        "label": "원문과 비교해 제품명을 고쳐 줘.",
+        "method": "outline"
+      },
+      {
+        "scene_id": "4",
+        "from_frame": 90,
+        "to_frame": 180,
+        "focus_index": 1,
+        "target": "4:item:1",
+        "label": "한 자막은 두 줄 이내로 나눠 줘.",
+        "method": "outline"
+      },
+      {
+        "scene_id": "4",
+        "from_frame": 180,
+        "to_frame": 270,
+        "focus_index": 2,
+        "target": "4:item:2",
+        "label": "확실하지 않은 단어는 표시해 줘.",
+        "method": "outline"
+      },
+      {
+        "scene_id": "5",
+        "from_frame": 0,
+        "to_frame": 60,
+        "focus_index": 0,
+        "target": "5:item:0",
+        "label": "자막이 말보다 앞서지 않는지",
+        "method": "outline"
+      },
+      {
+        "scene_id": "5",
+        "from_frame": 60,
+        "to_frame": 121,
+        "focus_index": 1,
+        "target": "5:item:1",
+        "label": "문장 끝이 너무 빨리 사라지는지",
+        "method": "outline"
+      },
+      {
+        "scene_id": "5",
+        "from_frame": 121,
+        "to_frame": 182,
+        "focus_index": 1,
+        "target": "5:item:1",
+        "label": "문장 끝이 너무 빨리 사라지는지",
+        "method": "outline"
+      },
+      {
+        "scene_id": "6",
+        "from_frame": 0,
+        "to_frame": 74,
+        "focus_index": 0,
+        "target": "6:item:0",
+        "label": "컴퓨터 성능에 따라 처리 속도 차이",
+        "method": "outline"
+      },
+      {
+        "scene_id": "6",
+        "from_frame": 74,
+        "to_frame": 148,
+        "focus_index": 1,
+        "target": "6:item:1",
+        "label": "이 음성 인식에는 API 호출 없음",
+        "method": "outline"
+      },
+      {
+        "scene_id": "6",
+        "from_frame": 148,
+        "to_frame": 223,
+        "focus_index": 2,
+        "target": "6:item:2",
+        "label": "AI 음성 생성 요금은 별도",
+        "method": "outline"
+      },
+      {
+        "scene_id": "7",
+        "from_frame": 0,
+        "to_frame": 45,
+        "focus_index": 0,
+        "target": "7:item:0",
+        "label": "제품명·숫자·고유명사 검수",
+        "method": "outline"
+      },
+      {
+        "scene_id": "7",
+        "from_frame": 45,
+        "to_frame": 90,
+        "focus_index": 1,
+        "target": "7:item:1",
+        "label": "타이밍과 줄바꿈 확인",
+        "method": "outline"
+      },
+      {
+        "scene_id": "7",
+        "from_frame": 90,
+        "to_frame": 136,
+        "focus_index": 2,
+        "target": "7:item:2",
+        "label": "원본 음성과 최종 비교",
+        "method": "outline"
+      }
+    ]
+  },
+  "skin": {
+    "schema_version": 1,
+    "id": "paper-lime",
+    "name": "종이와 라임",
+    "palette": {
+      "ink": "#19231e",
+      "paper": "#f3f1e8",
+      "accent": "#d4f85a",
+      "surface": "#ffffff",
+      "subtle": "#e9efdb",
+      "muted": "#657051",
+      "stroke": "#b8c1aa",
+      "onAccent": "#19231e",
+      "inverse": "#19231e",
+      "inverseText": "#f3f1e8",
+      "highlight": "#e4edcc"
+    },
+    "background": "dots",
+    "asset_overrides": {}
+  }
+}

@@ -1,3 +1,5 @@
+추가 제작 기준: [제목·썸네일 및 연출/그래픽 분리](studio/PACKAGING-AND-DIRECTION.md).
+
 반복 쇼츠 제작의 최신 기준: [제작 양식·워크플로우](studio/SHORTS-WORKFLOW.md). 날짜·회차 없는 시각 안내형, 고정 ElevenLabs 음성, 입력→행동→결과 예시를 사용합니다.
 
 # 영상편집 — ytflow

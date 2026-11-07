@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Independent Shorts production layers",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "episode", "content_ref", "edit_points_ref", "emphasis_ref", "skin_ref", "packaging_ref", "publish_allowed"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "episode": {"type": "string"},
+    "content_ref": {"type": "string"},
+    "edit_points_ref": {"type": "string"},
+    "emphasis_ref": {"type": "string"},
+    "skin_ref": {"type": "string"},
+    "asset_bindings_ref": {"type": "string"},
+    "packaging_ref": {"type": "string"},
+    "publish_allowed": {"type": "boolean"}
+  },
+  "description": "Referenced cut, attention and graphic data are semantically validated by scripts/compile_edit_package.py. Skin data cannot add voice, cut length or subtitle fields."
+}
