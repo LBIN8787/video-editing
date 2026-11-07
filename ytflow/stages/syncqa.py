@@ -39,9 +39,16 @@ def _words_windowed(wav, win: float = 25.0) -> list[dict]:
     if key not in align._models:
         align._models[key] = WhisperModel(c["model"], device="cpu", compute_type=c["compute_type"])
     model, out, sr = align._models[key], [], 16000
-    for k in range(0, len(audio), int(win * sr)):
+    step, lead = int((win - 6) * sr), 3.0   # 6초 겹치게 자르고, 창 앞 3초·뒤 3초 단어는 옆 창 것을 씀 (창 경계에서 시각이 틀어짐)
+    for k in range(0, len(audio), step):
         segs, _ = model.transcribe(audio[k:k + int(win * sr)], language="ko", word_timestamps=True, vad_filter=False)
-        out += [{"start": k / sr + float(w.start), "end": k / sr + float(w.end), "word": w.word.strip()} for sg in segs for w in (sg.words or [])]
+        lo = k / sr + (lead if k else 0.0)
+        hi = k / sr + win - lead
+        for sg in segs:
+            for w in (sg.words or []):
+                t = k / sr + float(w.start)
+                if lo <= t < hi or (k + step >= len(audio) and t >= lo):
+                    out.append({"start": t, "end": k / sr + float(w.end), "word": w.word.strip()})
     return out
 
 

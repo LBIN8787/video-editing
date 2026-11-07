@@ -918,24 +918,36 @@ def _word_starts(wav: Path, parts: list[str], dur: float) -> list[float] | None:
         words = align.transcribe(Path(wav), "ko")
     except Exception:  # noqa: BLE001
         return None
+    import difflib
     norm = align._norm
-    wl = [(w["start"], w["end"], len(norm(w["word"]))) for w in words if norm(w["word"])]
-    rec = sum(n for *_, n in wl)
-    scr = [len(norm(p)) for p in parts]
-    if not wl or not rec or not sum(scr):
+    R, owner = "", []
+    for wi, w in enumerate(words):
+        t = norm(w["word"])
+        R += t
+        owner += [wi] * len(t)
+    if not R:
         return None
-    out, acc = [], 0
-    for n in scr:
-        pos = acc / sum(scr) * rec          # 이 줄이 시작하는 글자 위치 (받아쓰기 기준)
-        c = 0
-        t = wl[-1][0]
-        for st, en, wn in wl:
-            if c + wn > pos:
-                t = st + (en - st) * max(0.0, pos - c) / wn
-                break
-            c += wn
-        out.append(min(max(t - 0.08, 0.0), dur))
-        acc += n
+    S, pos = "", []
+    for p in parts:
+        pos.append(len(S))
+        S += norm(p)
+    blocks = [b for b in difflib.SequenceMatcher(None, S, R, autojunk=False).get_matching_blocks() if b.size]
+
+    def s2r(p: int) -> int:  # 대본 글자 위치 → 받아쓰기 글자 위치 (글자 단위 맞추기, 숫자·띄어쓰기 차이에 강함)
+        prev = (0, 0)
+        for b in blocks:
+            if b.a <= p < b.a + b.size:
+                return b.b + (p - b.a)
+            if b.a > p:
+                a0, r0 = prev
+                return r0 + int((p - a0) * max(b.b - r0, 0) / max(b.a - a0, 1))
+            prev = (b.a + b.size, b.b + b.size)
+        return len(R) - 1
+
+    out = []
+    for p in pos:
+        wi = owner[min(max(s2r(p), 0), len(owner) - 1)]
+        out.append(min(max(float(words[wi]["start"]) - 0.05, 0.0), dur))
     out[0] = 0.0
     return out
 
