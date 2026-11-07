@@ -81,3 +81,7 @@
 
 ## 설치 전 주의
 타사 skill 은 설치 전에 SKILL.md 와 스크립트를 읽어 봅니다(에이전트가 실행할 명령이 들어 있음). 설치는 `.claude/skills/`(프로젝트) 단위로 하고 `skills/` 원본과 섞지 않습니다.
+
+
+## 2026-11-07 그래픽 팩 도구 조사
+그래픽 팩(그림 + 겉모습)에 쓸 스킬·도구 조사 결과는 `docs/14-graphic-pack-tools.md`. 추천: HyperFrames 블록(설치됨) → theme-factory(Apache-2.0) → roughViz·chart.xkcd(MIT) → Phosphor(MIT) → 한글 OFL 글꼴 → Open Peeps·ambientCG(CC0).
