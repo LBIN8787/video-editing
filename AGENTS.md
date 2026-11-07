@@ -15,6 +15,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | 영상 1편 만들기 | `skills/video-make/SKILL.md` |
 | 형식: 롱폼 칼럼·보고서 / 쇼츠 안내 | `formats/README.md` |
 | 자료조사 / 대본 / 소스 / 편집만 | `skills/video-research`, `video-script`, `video-sources`, `video-edit` |
+| **교양·상식·역사·심리 채널** (수요 분석 → 주제 → 깊은 조사 → 이야기 대본) | `docs/10-knowledge-demand.md`, `channels/ch-knowledge/`, `prompts/script_knowledge.md` |
 | 하이브리드 (식스시그마 영상 + 머니크루 논리 + 미주일기 손그림) | `styles/hybrid/STYLE.md`, `prompts/script_hybrid.md`, `skills/edit-style-hybrid` |
 | 편집 스타일 고르기·적용 | `styles/README.md`(계열 구분), `styles/<id>/STYLE.md`, `skills/edit-style-<id>` |
 | 새 편집 스타일 추가 (레퍼런스 영상 분석) | `skills/edit-style-new/SKILL.md` |
@@ -47,6 +48,9 @@ python -m ytflow make --channel <채널id> [--topic "주제" | --from-text 조�
 python -m ytflow make --style-ref <스타일id> [--topic "주제"]   # 스타일만 지정해 한 편
 python -m ytflow make --channel <채널id> --plan                  # 트렌드 → 소스 찾기 → 주제·형식 결정까지만 (검토용)
 python -m ytflow channels                                       # 채널 목록
+python -m ytflow demand [--channel ch-knowledge]                 # 분야별 수요 분석 (검색 → 채널 → 아웃라이어 배수)
+python -m ytflow archive search "influenza 1918" [--films]       # 공공 기록 사진·영상 (미국 의회도서관, 퍼블릭 도메인)
+python -m ytflow hybrid <프로젝트>                                # 하이브리드 영상 (02_script/hybrid.json → final.mp4)
 python -m ytflow upload <프로젝트> | --all [--archive]              # 완성 영상 → Google Drive 채널별 폴더, --archive 는 GitHub 밖 보관 자료까지 (docs/09-storage.md)
 python -m ytflow stage <프로젝트> <단계>                          # 단계 하나
 python -m ytflow rebuild <프로젝트>                               # 소스 넣은 뒤 재생성
@@ -90,7 +94,7 @@ python -m ytflow styles | schemas | status <프로젝트>
 | `formats/` | 영상 형식: 롱폼(칼럼·보고서) / 쇼츠(짧은 안내) 원고 구조 |
 | `tools/external.json` | 외부 편집 도구 고정 버전 (HyperFrames, ffmpeg-skill). 본체는 설치 후 `tools/` 에 (커밋 안 함) |
 | `ytflow/` | 파이프라인 코드 |
-| `ytflow/stages/` | 단계별 코드. 렌더러는 `cards.py`(sixsigma), `paper.py`(paper), `flat.py`(flat), `hyper.py`(미주일기 카드 HTML + rough.js 손그림), `hybrid.py`(하이브리드: 원본 영상·인과 지도·손그림 장면), 마스터링 `finish.py`, 발언 단어 정렬 `align.py`, 소스 먼저 `scout.py`, 보관 `upload.py` |
+| `ytflow/stages/` | 단계별 코드. 렌더러는 `cards.py`(sixsigma), `paper.py`(paper), `flat.py`(flat), `hyper.py`(미주일기 카드 HTML + rough.js 손그림), `hybrid.py`(하이브리드: 원본 영상·인과 지도·손그림 장면), 마스터링 `finish.py`, 발언 단어 정렬 `align.py`, 소스 먼저 `scout.py`, 보관 `upload.py`, 공공 기록 자료 `archive.py`, 수요 분석 `demand.py` |
 | `prompts/` | 단계별 LLM 지시문 |
 | `config/` | 채널·파이프라인 설정 |
 | `styles/` | 편집 스타일 라이브러리 |

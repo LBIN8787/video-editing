@@ -37,6 +37,11 @@
 | timeline | 연도 축 + 구간·일정 | years[], spans[{from,to,label,tone}] 또는 events[{at,label,sub}], 박자 upto |
 | compare | 그때 vs 지금 표 | cols[2], rows[{label,a,b}], 박자 upto |
 | outro | 마무리 제목 + 영상 | title, sub, clip |
+| people | 사람 100명 그림, 그중 N명 빨갛게 (비율을 사람 수로) | count, value, caption, sub, scatter, 박자 fill |
+| newspapers | 두 신문 비교: 검은 줄로 지워진 지면 vs 큰 제목 지면 (재구성 그림) | left{name,sub,stamp}, right{name,sub,headline,note}, 박자 show: left/right |
+| shape | 곡선 모양 비교 개념도 (U자 vs W자 등, 숫자 축 없음 — label 에 '개념도') | ticks[{at,label}], 박자 curve{tone,label,label_at,points[[x,y]...],circle,note} |
+
+자료 화면 사진은 `python -m ytflow archive search "<영문>"` 로 찾고 `ytflow.stages.archive.still_to_clip()` 으로 16:9 영상으로 바꿔 footage 에 넣습니다.
 
 ### 4. 원본 영상 (footage) — 소스 먼저
 - 쓸 수 있는 영상만: 인물 본인·회사·정부·기관의 **공식 영상**(사용자 PC 에서 rebuild 로 받는 YouTube 공식 채널 포함),
