@@ -27,6 +27,7 @@ from .. import config
 from ..project import Project
 from . import hyper, paper
 from .paper import FT, fit
+import numpy as np
 
 W, HH = 1920, 1080
 GAP = 0.28          # 박자 사이 쉼
@@ -627,16 +628,117 @@ def s_outro(D: HDoc, sc: dict, bt: list, dur: float):
     D.text(W / 2, 640, sc.get("sub", ""), FT("note"), 56, D.red, at=1.8)
 
 
+def s_people(D: HDoc, sc: dict, bt: list, dur: float):
+    """100명 그림: 그중 count 명이 빨갛게. 비율을 '사람'으로 느끼게 (3명 중 1명, 10명 중 4명)."""
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.h1(sc.get("title", ""), y=140)
+    n = int(sc["count"])
+    g = D._id()
+    rng = np.random.default_rng(sc["id"])
+    hit = set(rng.choice(100, n, replace=False).tolist()) if sc.get("scatter", True) else set(range(n))
+    out, x0, y0 = [], 330, 250
+    for k in range(100):
+        r_, c_ = divmod(k, 10)
+        cx, cy = x0 + c_ * 64, y0 + r_ * 62
+        cls = f"{g}h" if k in hit else f"{g}n"
+        out.append(f'<g class="{g}"><circle cx="{cx}" cy="{cy}" r="10" fill="{D.muted}"/>'
+                   f'<rect x="{cx - 13}" y="{cy + 13}" width="26" height="30" rx="11" fill="{D.muted}"/></g>'
+                   f'<g class="{cls}" style="opacity:0"><circle cx="{cx}" cy="{cy}" r="10" fill="{D.red}"/>'
+                   f'<rect x="{cx - 13}" y="{cy + 13}" width="26" height="30" rx="11" fill="{D.red}"/></g>')
+    D.svg.append("".join(out))
+    t0 = bt[0][0]
+    D.js.append(f'tl.fromTo(".{g}",{{opacity:0,y:10}},{{opacity:1,y:0,duration:0.25,stagger:0.012}},{t0 + 0.3:.2f});')
+    tf = next((t for b, (t, _) in zip(sc["beats"], bt) if b.get("fill")), bt[-1][0])
+    D.js.append(f'tl.to(".{g}h",{{opacity:1,duration:0.2,stagger:0.02}},{tf + 0.3:.2f});')
+    D.sfx.append(("pop", tf + 0.3))
+    D.text(1420, 470, sc["value"], FT("value"), 150, D.red, at=tf + 0.6, anchor="lm", counter=True)
+    D.text(1420, 600, sc.get("caption", ""), FT("note"), 46, D.ink, at=tf + 0.9, anchor="lm")
+    if sc.get("sub"):
+        D.text(1420, 680, sc["sub"], FT("label"), 34, "#5a5f6a", at=tf + 1.1, anchor="lm")
+
+
+def s_newspapers(D: HDoc, sc: dict, bt: list, dur: float):
+    """두 나라 신문 비교: 왼쪽은 검은 줄로 지워진(검열) 지면, 오른쪽은 큰 제목으로 보도한 지면. 재구성 그림."""
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    L, R = sc["left"], sc["right"]
+    tl_ = {b.get("show"): t for b, (t, _) in zip(sc["beats"], bt)}
+    for k, (it, x) in enumerate(((L, 250), (R, 1010))):
+        at = tl_.get("left" if k == 0 else "right", bt[0][0]) + 0.2
+        i = D._id()
+        D.items.append(f'<div id="{i}" style="position:absolute;left:{x}px;top:200px;width:660px;height:690px;background:#F7F2E6;'
+                       f'box-shadow:0 14px 34px rgba(0,0,0,.22);transform:rotate({-1.2 if k == 0 else 1.0}deg)"></div>')
+        D.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:40}},{{opacity:1,y:0,duration:0.5,ease:"power2.out"}},{at:.2f});')
+        D.text(x + 330, 260, it["name"], FT("title"), 46, D.ink, at=at + 0.2)
+        D.rough("line", [x + 40, 300, x + 620, 300], D.ink, 3, at=at + 0.3, dur=0.3, roughness=0.6)
+        D.text(x + 330, 330, it.get("sub", ""), FT("label"), 26, "#5a5f6a", at=at + 0.3)
+        if k == 0:  # 검열: 글줄 위에 검은 띠
+            for r_ in range(9):
+                y = 400 + r_ * 50
+                w = 560 if r_ % 3 != 2 else 380
+                D.rough("line", [x + 50, y, x + 50 + w, y], "#9a9488", 2, at=at + 0.4, dur=0.2, roughness=0.5)
+                j = D._id()
+                D.items.append(f'<div id="{j}" style="position:absolute;left:{x + 44}px;top:{y - 16}px;width:{w + 12}px;height:30px;'
+                               f'background:#1d1d1d;transform-origin:left center"></div>')
+                D.js.append(f'tl.fromTo("#{j}",{{scaleX:0}},{{scaleX:1,duration:0.18,ease:"power1.in"}},{at + 0.9 + r_ * 0.12:.2f});')
+            D.stamp(L.get("stamp", "검열"), x + 400, 790, at + 2.2, rot=-10)
+        else:
+            f = fit(FT("title"), it["headline"], 64, 580)
+            D.text(x + 330, 430, it["headline"], FT("title"), f.size, D.red, at=at + 0.5)
+            D.marker(x + 330 - f.getlength(it["headline"]) / 2 - 10, 432, f.getlength(it["headline"]) + 20, 30, at=at + 1.0)
+            for r_ in range(7):
+                y = 520 + r_ * 46
+                D.rough("line", [x + 50, y, x + 50 + (560 if r_ % 3 != 2 else 380), y], "#9a9488", 2, at=at + 0.7, dur=0.2, roughness=0.5)
+            if it.get("note"):
+                D.text(x + 330, 850, it["note"], FT("note"), 40, D.ink, at=at + 1.4)
+        D.sfx.append(("click-soft", at))
+
+
+def s_shape(D: HDoc, sc: dict, bt: list, dur: float):
+    """모양 비교 개념도 (숫자 축 없음): 보통은 U자, 그때는 W자. 박자마다 곡선 하나씩."""
+    D.label(sc.get("label", "개념도 · 모양만 나타냄"))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.h1(sc.get("title", ""), y=140)
+    x0, x1, y0, y1 = 380, 1560, 280, 800
+    t0 = bt[0][0]
+    D.rough("line", [x0, y1, x1 + 40, y1], D.ink, 3.5, at=t0 + 0.2, dur=0.5, roughness=0.7)
+    D.rough("line", [x0, y1, x0, y0 - 30], D.ink, 3.5, at=t0 + 0.3, dur=0.5, roughness=0.7)
+    D.text(x1 + 40, y1 + 50, sc.get("xlabel", "나이 →"), FT("note"), 40, D.ink, at=t0 + 0.4, anchor="rm")
+    D.text(x0 - 30, y0 - 60, sc.get("ylabel", "사망 위험 ↑"), FT("note"), 40, D.ink, at=t0 + 0.4, anchor="lm")
+    for k, tick in enumerate(sc.get("ticks", [])):
+        D.text(x0 + (x1 - x0) * tick["at"], y1 + 50, tick["label"], FT("label"), 30, "#5a5f6a", at=t0 + 0.5)
+    X = lambda u: x0 + (x1 - x0) * u
+    Y = lambda v: y1 - (y1 - y0) * v
+    for k, (b, (t, _)) in enumerate(zip(sc["beats"], bt)):
+        cv = b.get("curve")
+        if not cv:
+            continue
+        col = D.red if cv.get("tone") == "red" else D.muted
+        pts = [[X(u), Y(v)] for u, v in cv["points"]]
+        D.rough("curve", [pts], col, 6 if col == D.red else 5, at=t + 0.3, dur=1.4, roughness=0.8)
+        lx, ly = cv.get("label_at", [0.8, 0.5])
+        D.text(X(lx), Y(ly), cv["label"], FT("box"), 44, col, at=t + 1.2)
+        if cv.get("circle"):
+            cu, cvv = cv["circle"]
+            D.circle(X(cu), Y(cvv), 120, 90, at=t + 1.8)
+            if cv.get("note"):
+                D.text(X(cu), Y(cvv) - 130, cv["note"], FT("note"), 42, D.red, at=t + 2.1)
+        D.sfx.append(("pencil", t + 0.4))
+
+
 RENDER = {"footage": s_footage, "chart": s_chart, "versus": s_versus, "chapter": s_chapter, "map_causal": s_map_causal,
           "usmap": s_usmap, "quote": s_quote, "checklist": s_checklist, "analogy": s_analogy, "funnel": s_funnel,
           "apartments": s_apartments, "timeline": s_timeline, "bars": s_bars, "bignum": s_bignum, "parking": s_parking,
-          "compare": s_compare, "outro": s_outro}
+          "compare": s_compare, "outro": s_outro,
+          "people": s_people, "newspapers": s_newspapers, "shape": s_shape}
 
 
 # ---------------------------------------------------------------- 음성·시간
 def voice(project: Project, spec: dict) -> dict:
     """박자마다 TTS → 03_voice/hb_<장면>_<박자>.wav, 길이 표."""
     vdir = project.dir("voice")
+    vdir.mkdir(parents=True, exist_ok=True)  # 새 프로젝트는 폴더가 없을 수 있음
     cfg = config.load("pipeline").get("tts", {})
     durs = {}
     for sc in spec["scenes"]:
@@ -826,6 +928,7 @@ def make(project: Project, workers: int = 3) -> Path:
             print(f"[hybrid] #{sid} {'✗ ' + err if err else 'ok'}{' · 점검 ' + str(len(issues)) if issues else ''}")
     # 이어 붙이기 + 음성 + 자막 + 효과음
     edir = project.dir("edit")
+    edir.mkdir(parents=True, exist_ok=True)
     work = edir / "hb_work"
     work.mkdir(parents=True, exist_ok=True)
     vlist, alist, subs = [], [], []

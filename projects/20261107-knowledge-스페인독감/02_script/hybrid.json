@@ -1,0 +1,240 @@
+{
+ "title": "스페인 독감은 왜 '스페인'일까 | 병의 이름은 처음 말한 나라에 붙었다",
+ "core_message": "1918년 독감에 '스페인'이 붙은 건 처음 생긴 곳이어서가 아니라, 전쟁 중 모두가 숨길 때 처음 솔직하게 보도한 나라였기 때문이다. 숨긴 나라들은 더 크게 당했다.",
+ "question": "스페인에서 시작되지도 않은 병이, 왜 '스페인 독감'이 됐을까?",
+ "logic": ["1918년 세계 3명 중 1명 감염", "시작은 스페인이 아님(기원은 아직 미정)", "전쟁 중 나라들은 나쁜 소식을 숨김", "중립국 스페인만 자유롭게 보도 → 이름", "숨긴 대가: 필라델피아 vs 세인트루이스", "조선도 열 명 중 네 명", "87년 뒤 얼음 속에서 찾은 범인", "그래서 지금은 병에 지명을 붙이지 않는다"],
+ "compare_to": {"5억 명": "당시 세계 인구 3분의 1", "719 vs 347": "같은 기간 두 도시의 10만 명당 사망", "742만": "조선인 1,670만 명 중 44%", "11.8년": "미국 기대수명이 1년 만에 줄어든 폭"},
+ "analogies": ["반에서 감기가 돌 때 혼자 솔직하게 결석계를 낸 학생이 '감기 원조'로 찍히는 것", "불이 났는데 '불이야'를 외치지 않고 잔치를 연 마을"],
+ "past_cases": ["1918 필라델피아 퍼레이드", "1918 세인트루이스 조기 휴교"],
+ "glossary": {"중립국": "전쟁에 끼지 않은 나라", "검열": "정부가 신문 내용을 미리 보고 지우는 것", "자유공채": "미국이 전쟁 비용을 마련하려고 판 채권", "영구동토층": "1년 내내 녹지 않는 언 땅"},
+ "map": {
+  "nodes": {
+   "war": {"label": "1차 세계대전", "icon": "shield-alert", "x": 250, "y": 400},
+   "troops": {"label": "군대 이동·밀집 막사", "icon": "ship", "x": 710, "y": 400},
+   "spread": {"label": "독감이 세계로", "icon": "globe", "x": 1170, "y": 400},
+   "deaths": {"label": "최소 5천만 명 사망", "icon": "heart-pulse", "x": 1630, "y": 400},
+   "censor": {"label": "전쟁국: 나쁜 소식 검열", "icon": "lock", "x": 250, "y": 720},
+   "late": {"label": "숨긴 곳은 대비가 늦음", "icon": "hourglass", "x": 710, "y": 720},
+   "spain": {"label": "중립국 스페인: 보도", "icon": "newspaper", "x": 1170, "y": 720},
+   "name": {"label": "'스페인 독감'이란 이름", "icon": "tag", "x": 1630, "y": 720}
+  },
+  "edges": [["war", "troops"], ["troops", "spread"], ["spread", "deaths"], ["war", "censor"], ["censor", "late"], ["late", "spread"], ["spread", "spain"], ["spain", "name"]]
+ },
+ "footage": {
+  "march": {"file": "march.mp4", "credit": "Library of Congress, TR's sons' regiments during war, 1917-1918 [No. 1] (영화, 1918, 퍼블릭 도메인)", "url": "https://www.loc.gov/item/mp76000222/"},
+  "march2": {"file": "march2.mp4", "credit": "Library of Congress, 같은 영화", "url": "https://www.loc.gov/item/mp76000222/"},
+  "artillery": {"file": "artillery.mp4", "credit": "Library of Congress, 같은 영화", "url": "https://www.loc.gov/item/mp76000222/"},
+  "troopship": {"file": "troopship.mp4", "credit": "Library of Congress, 803rd Pioneer Infantry on the U.S.S. Philippine, Brest, 1919 (No known restrictions)", "url": "https://www.loc.gov/item/2010651614/"},
+  "glasgow": {"file": "glasgow.mp4", "credit": "Library of Congress, American Red Cross — American ward at the Fourth Scottish General Hospital in Glasgow, 1918 (No known restrictions)", "url": "https://www.loc.gov/item/2017675858/"},
+  "alfonso": {"file": "alfonso.mp4", "credit": "Library of Congress, Alfonso XIII, King of Spain, 1914 (1930년 이전 발행, 퍼블릭 도메인)", "url": "https://www.loc.gov/item/96508428/"},
+  "parade": {"file": "parade.mp4", "credit": "Library of Congress, Harris & Ewing — Liberty Loans Parade, Washington, 1918 (No known restrictions)", "url": "https://www.loc.gov/item/2016869133/"},
+  "parade2": {"file": "parade2.mp4", "credit": "Library of Congress, Harris & Ewing — Liberty Loans Parade, 1918 (No known restrictions)", "url": "https://www.loc.gov/item/2016869136/"},
+  "stlouis": {"file": "stlouis.mp4", "credit": "Library of Congress, American Red Cross — St. Louis Red Cross Motor Corps, Oct. 1918 (No known restrictions)", "url": "https://www.loc.gov/item/2011661525/"},
+  "seattle": {"file": "seattle.mp4", "credit": "Library of Congress, American Red Cross — Seattle street car masks, 1918 (No known restrictions)", "url": "https://www.loc.gov/item/2017668638/"},
+  "ward": {"file": "ward.mp4", "credit": "Library of Congress, Influenza ward, Walter Reed Hospital, 1918 (No known restrictions)", "url": "https://www.loc.gov/item/2016648028/"},
+  "seoul": {"file": "seoul.mp4", "credit": "Library of Congress, Korea - Seoul - Street scene, 1910 (No known restrictions)", "url": "https://www.loc.gov/item/2023641120/"},
+  "planes": {"file": "planes.mp4", "credit": "Library of Congress, TR's sons' regiments (1918)", "url": "https://www.loc.gov/item/mp76000222/"}
+ },
+ "scenes": [
+  {"id": 1, "type": "footage", "chapter": 0, "label": "자료 화면 · 1918년 프랑스, 행군하는 미군 (미국 의회도서관)", "clip": {"src": "march", "start": 0, "frame": "full"},
+   "beats": [
+    {"say": "1918년, 전 세계 사람 세 명 중 한 명이 같은 병에 걸렸습니다."},
+    {"say": "우리는 이 병을 '스페인 독감'이라고 부르죠. 그런데 이상한 점이 하나 있습니다.", "vox": {"text": "스페인 독감", "note": "1918~1919 · 인플루엔자 대유행"}}
+   ]},
+  {"id": 2, "type": "versus", "chapter": 0, "label": "CDC · 위키백과 종합", "left": {"value": "스페인", "label": "병에 붙은 이름", "icon": "tag"}, "right": {"value": "?", "label": "실제로 시작된 곳", "icon": "map-pin"},
+   "beats": [
+    {"say": "이 병은 스페인에서 시작되지 않았습니다. 스페인이 가장 심하게 당한 나라도 아니었고요."},
+    {"say": "그런데 왜 하필 스페인의 이름이 붙었을까요? 오늘은 이 질문 하나를 따라가 보겠습니다.", "question": "왜 하필 '스페인'?"}
+   ]},
+  {"id": 3, "type": "map_causal", "chapter": 0, "label": "자체 정리", "title": "오늘 따라갈 길",
+   "beats": [
+    {"say": "미리 말씀드리면, 답은 전쟁에 있습니다. 1차 세계대전이 병을 실어 날랐고,", "reveal": ["war", "troops", "spread"], "draw": [["war", "troops"], ["troops", "spread"]], "active": "spread"},
+    {"say": "같은 전쟁이 신문의 입을 막았습니다. 그리고 입을 막지 않은 단 한 나라가, 병의 이름을 뒤집어썼습니다.", "reveal": ["censor", "spain", "name"], "draw": [["war", "censor"], ["spain", "name"]], "active": "name"}
+   ]},
+
+  {"id": 4, "type": "chapter", "chapter": 1, "num": "1", "title": "이 병은 어디서 왔을까", "icon": "search",
+   "beats": [{"say": "먼저, 이 병이 처음 기록된 곳으로 가 보겠습니다."}]},
+  {"id": 5, "type": "usmap", "chapter": 1, "label": "HISTORY · J. M. Barry 『The Great Influenza』", "title": "1918년 3월, 미국 캔자스",
+   "beats": [
+    {"say": "1918년 3월, 미국 캔자스주의 육군 훈련소 캠프 펀스턴.", "highlight": ["Kansas"], "note": {"state": "Kansas", "text": "캠프 펀스턴"}},
+    {"say": "취사병 한 명이 고열로 쓰러졌습니다. 흔히 '기록상 첫 환자'로 꼽히는 앨버트 기첼입니다.", "counter": {"value": 1918, "suffix": "", "label": "3월 4일 (3월 11일이란 기록도)"}},
+    {"say": "그 뒤 몇 주 사이에 이 훈련소에서만 수백 명이 같은 증상으로 앓아누웠습니다."}
+   ]},
+  {"id": 6, "type": "footage", "chapter": 1, "label": "자료 화면 · 1919년 프랑스 브레스트항, 미군 수송선 (미국 의회도서관)", "clip": {"src": "troopship", "start": 0, "frame": "photo"},
+   "beats": [
+    {"say": "문제는 이 훈련소가 전쟁터로 가는 길목이었다는 겁니다.", "lower": {"name": "미군 수송선", "role": "자료 화면 · 1919년 프랑스 브레스트항"}},
+    {"say": "전쟁이 끝날 때까지 미국은 군인 약 200만 명을 대서양 건너 프랑스로 보냈습니다. 비좁은 배에, 빽빽한 막사에 실어서요.", "vox": {"text": "약 200만 명", "note": "미군이 프랑스로 보낸 병력"}}
+   ]},
+  {"id": 7, "type": "footage", "chapter": 1, "label": "자료 화면 · 1918년 영국 글래스고, 미군 병동 (미국 적십자 · 의회도서관)", "clip": {"src": "glasgow", "start": 0, "frame": "photo"},
+   "beats": [
+    {"say": "이 사진은 1918년 영국 글래스고의 한 병원입니다. 사진 설명에는 이렇게 적혀 있습니다.", "lower": {"name": "글래스고 병원 미군 병동", "role": "1918 · 미국 적십자 사진 설명"}},
+    {"say": "'환자 대부분은 막 도착한 수송선단의 독감 환자다.' 군대가 움직이는 길이 곧 병이 움직이는 길이었던 거죠.", "vox": {"text": "대부분 독감 환자", "note": "도착한 수송선단에서"}}
+   ]},
+  {"id": 8, "type": "checklist", "chapter": 1, "label": "CDC · 위키백과 종합 (2026.11 기준)", "title": "그래서, 시작은 어디였나",
+   "rows": [{"label": "미국 캔자스 (가장 유명한 설)", "state": "warn"}, {"label": "프랑스 서부전선 병영", "state": "warn"}, {"label": "중국", "state": "warn"}, {"label": "스페인", "state": "no"}],
+   "beats": [
+    {"say": "다만 캔자스가 진짜 출발점인지는 지금도 확실하지 않습니다. 프랑스의 병영, 중국에서 왔다는 설도 있거든요.", "upto": 3},
+    {"say": "확실한 건 하나입니다. 출발점 후보 어디에도 스페인은 없습니다.", "upto": 4, "stamp": "스페인은 아니다"}
+   ]},
+  {"id": 9, "type": "timeline", "chapter": 1, "label": "CDC · History of 1918 Flu Pandemic", "title": "세 번 밀려온 물결", "years": ["1918 봄", "1918 가을", "1919 겨울·봄"],
+   "events": [{"at": "1918 봄", "label": "1차: 비교적 약함", "sub": "앓고 지나가는 감기 같았다"}, {"at": "1918 가을", "label": "2차: 가장 치명적", "sub": "9~11월, 사망 대부분"}, {"at": "1919 겨울·봄", "label": "3차", "sub": "다시 한 번"}],
+   "beats": [
+    {"say": "병은 세 번에 걸쳐 밀려왔습니다. 봄의 첫 물결은 비교적 약했습니다. 독한 감기 정도로 여겨졌죠.", "upto": 1},
+    {"say": "그런데 그해 가을에 돌아온 두 번째 물결은 완전히 달랐습니다. 사망자의 대부분이 이 몇 달 사이에 나왔습니다.", "upto": 2},
+    {"say": "그리고 이듬해 겨울과 봄, 세 번째 물결이 한 번 더 지나갑니다.", "upto": 3}
+   ]},
+
+  {"id": 10, "type": "chapter", "chapter": 2, "num": "2", "title": "그런데 왜 '스페인'일까", "icon": "newspaper",
+   "beats": [{"say": "그럼 이제 본론입니다. 왜 '스페인'일까요?"}]},
+  {"id": 11, "type": "footage", "chapter": 2, "label": "자료 화면 · 1918년 프랑스, 미군 포병 (미국 의회도서관)", "clip": {"src": "artillery", "start": 0, "frame": "full"},
+   "beats": [
+    {"say": "1918년은 1차 세계대전의 마지막 해입니다. 미국, 영국, 프랑스, 독일. 큰 나라들은 모두 전쟁 중이었죠."},
+    {"say": "전쟁 중인 나라에게 '우리 군대에 전염병이 돈다'는 소식은, 적에게 약점을 알려 주는 일이었습니다.", "vox": {"text": "나쁜 소식 = 적에게 약점", "note": "전시 검열·자기검열"}}
+   ]},
+  {"id": 12, "type": "newspapers", "chapter": 2, "label": "재구성 그림 · HISTORY, 위키백과 종합",
+   "left": {"name": "전쟁 중인 나라의 신문", "sub": "1918 · 미국 · 영국 · 프랑스 · 독일", "stamp": "검열"},
+   "right": {"name": "중립국 스페인의 신문", "sub": "1918 · 마드리드", "headline": "정체 모를 병이 도시를 덮치다", "note": "있는 그대로 보도"},
+   "beats": [
+    {"say": "그래서 전쟁 중인 나라의 신문은 침묵했습니다. 정부가 지우기도 했고, 신문사가 알아서 쓰지 않기도 했습니다.", "show": "left"},
+    {"say": "그런데 스페인은 이 전쟁에 끼지 않은 중립국이었습니다. 전시 검열이 없었죠. 스페인 신문들은 병이 퍼지는 걸 있는 그대로 썼습니다.", "show": "right"}
+   ]},
+  {"id": 13, "type": "footage", "chapter": 2, "label": "자료 화면 · 알폰소 13세 (1914년 사진, 미국 의회도서관)", "clip": {"src": "alfonso", "start": 0, "frame": "photo"},
+   "beats": [
+    {"say": "결정적인 건 1918년 5월이었습니다. 스페인 국왕 알폰소 13세가 이 병에 걸린 겁니다.", "lower": {"name": "알폰소 13세", "role": "스페인 국왕 · 1914년 사진"}},
+    {"say": "왕이 앓아누웠다는 소식은 크게 퍼졌고, 바깥에서 보기엔 스페인이 가장 심하게 당한 나라처럼 보였습니다.", "vox": {"text": "국왕도 감염", "note": "1918년 5월 · 크게 보도"}}
+   ]},
+  {"id": 14, "type": "analogy", "chapter": 2, "label": "자체 정리", "title": "결석계를 낸 학생", "left": {"icon": "newspaper", "label": "스페인", "sub": "혼자 솔직하게 보도"}, "right": {"icon": "school", "label": "결석계 낸 학생", "sub": "반 전체가 아픈데"}, "result": {"icon": "tag", "label": "'감기 원조'라는 별명"},
+   "beats": [
+    {"say": "반 전체에 감기가 돌았는데 다들 참고 나오고, 한 학생만 솔직하게 결석계를 냈다고 해 볼까요."},
+    {"say": "그러면 그 학생이 '감기 옮긴 애'로 찍히기 쉽습니다. 스페인이 바로 그 학생이었던 겁니다.", "show_result": true}
+   ]},
+  {"id": 15, "type": "quote", "chapter": 2, "label": "위키백과 'Spanish flu' · 2019 CORD 논문", "who": "1918년 스페인 사람들", "role": "마드리드", "quote": "이건 프랑스 독감이다. 아니, '나폴리 병사'다.", "keyword": "프랑스 독감", "note": "정작 스페인에서 부른 이름",
+   "beats": [
+    {"say": "재밌는 건, 정작 스페인 사람들은 이 병을 '프랑스 독감'이라고 불렀다는 겁니다. 프랑스에서 넘어왔다고 본 거죠."},
+    {"say": "마드리드에서는 당시 유행하던 노래 제목을 따서 '나폴리 병사'라고도 했습니다. 다들 병의 이름을 남의 것으로 붙이고 싶었던 겁니다.", "mark": true}
+   ]},
+  {"id": 16, "type": "map_causal", "chapter": 2, "label": "자체 정리", "title": "이름이 붙은 길",
+   "beats": [
+    {"say": "정리하면 이렇습니다. 전쟁이 병을 실어 나르는 동안,", "reveal": ["war", "troops", "spread"], "instant": [["war", "troops"], ["troops", "spread"]], "active": "spread"},
+    {"say": "전쟁 중인 나라들은 입을 닫았고, 중립국 스페인만 말했습니다. 이름은 처음 생긴 곳이 아니라, 처음 말한 곳에 붙었습니다.", "reveal": ["censor", "spain", "name"], "draw": [["war", "censor"], ["spread", "spain"], ["spain", "name"]], "active": "name", "tag": {"node": "name", "text": "처음 '말한' 곳"}}
+   ]},
+
+  {"id": 17, "type": "chapter", "chapter": 3, "num": "3", "title": "숨긴 대가는 누가 치렀나", "icon": "hourglass",
+   "beats": [{"say": "그럼 숨긴 나라들은 무사했을까요? 두 도시를 비교해 보겠습니다."}]},
+  {"id": 18, "type": "footage", "chapter": 3, "label": "자료 화면 · 1918년 워싱턴 자유공채 퍼레이드 (필라델피아 아님, 미국 의회도서관)", "clip": {"src": "parade2", "start": 0, "frame": "photo"},
+   "beats": [
+    {"say": "1918년 9월 28일, 미국 필라델피아. 전쟁 비용을 모으는 자유공채 퍼레이드가 열렸습니다.", "lower": {"name": "자유공채 퍼레이드", "role": "자료 화면 · 1918년 워싱턴 (같은 해 비슷한 행사)"}},
+    {"say": "이미 도시에 환자가 늘고 있었고 보건 당국도 걱정했지만, 행사는 그대로 열렸습니다. 거리에 약 20만 명이 모였습니다.", "vox": {"text": "약 20만 명", "note": "1918.9.28 필라델피아"}}
+   ]},
+  {"id": 19, "type": "bignum", "chapter": 3, "label": "JSTOR Daily · RFE/RL (2009 PNAS 연구 인용)", "value": "72시간", "small": "퍼레이드가 끝나고", "compare": {"label": "시내 병원 31곳 병상이", "value": "모두 참"},
+   "beats": [
+    {"say": "그리고 72시간 뒤, 필라델피아 시내 병원 31곳의 병상이 전부 찼습니다."},
+    {"say": "물론 퍼레이드 하나 때문만은 아닙니다. 이미 번지던 불에 기름을 부은 셈이죠.", "show_compare": true}
+   ]},
+  {"id": 20, "type": "footage", "chapter": 3, "label": "자료 화면 · 1918년 10월 세인트루이스 적십자 차량대 (미국 의회도서관)", "clip": {"src": "stlouis", "start": 0, "frame": "photo"},
+   "beats": [
+    {"say": "같은 시기, 미주리주 세인트루이스는 다르게 움직였습니다.", "lower": {"name": "세인트루이스 적십자 차량대", "role": "1918년 10월 · 독감 유행 중"}},
+    {"say": "첫 민간인 환자가 보고되고 이틀쯤 만에, 학교와 교회와 극장의 문을 닫았습니다. 사람이 모이는 곳부터 막은 거죠.", "vox": {"text": "이틀 만에 휴교·휴관", "note": "첫 환자 보고 뒤"}}
+   ]},
+  {"id": 21, "type": "bars", "chapter": 3, "label": "Hatchett·Mecher·Lipsitch, PNAS 2007 (1918.9.8~12.28)", "title": "인구 10만 명당 초과 사망", "unit": "명", "items": [{"label": "필라델피아", "value": 719}, {"label": "세인트루이스", "value": 347}],
+   "beats": [
+    {"say": "결과는 어땠을까요. 2007년 미국 과학원 회보에 실린 연구가 같은 석 달 반 동안의 사망을 비교했습니다."},
+    {"say": "인구 10만 명당 필라델피아는 719명, 세인트루이스는 347명. 두 배 넘게 차이가 났습니다."}
+   ]},
+  {"id": 22, "type": "footage", "chapter": 3, "label": "자료 화면 · 1918년 시애틀, 마스크 없이는 전차를 못 탐 (미국 적십자 · 의회도서관)", "clip": {"src": "seattle", "start": 0, "frame": "photo"},
+   "beats": [
+    {"say": "연구진의 결론은 단순했습니다. 일찍, 여러 가지를 함께 막은 도시일수록 피해가 적었다는 겁니다.", "lower": {"name": "시애틀 전차", "role": "1918 · 마스크를 써야 탈 수 있었다"}},
+    {"say": "숨기거나 미루는 것엔 대가가 있었습니다. 그리고 그 대가는 이름이 붙은 스페인이 아니라, 숨긴 쪽이 치렀습니다.", "vox": {"text": "일찍 · 함께 막기", "note": "PNAS 2007 결론"}}
+   ]},
+
+  {"id": 23, "type": "chapter", "chapter": 4, "num": "4", "title": "얼마나 큰 병이었나", "icon": "globe",
+   "beats": [{"say": "이 병이 얼마나 컸는지, 숫자로 감을 잡아 보겠습니다."}]},
+  {"id": 24, "type": "people", "chapter": 4, "label": "CDC · 1918 Pandemic (H1N1 virus)", "title": "세계 인구 100명으로 줄이면", "count": 33, "value": "33명", "caption": "이 병에 걸렸다", "sub": "약 5억 명 = 당시 세계 인구의 3분의 1",
+   "beats": [
+    {"say": "당시 세계 인구를 100명으로 줄여 볼까요."},
+    {"say": "그중 33명이 이 병에 걸렸습니다. 약 5억 명, 세계 인구의 3분의 1입니다.", "fill": true}
+   ]},
+  {"id": 25, "type": "bignum", "chapter": 4, "label": "CDC · Taubenberger & Morens, EID 2006", "value": "5,000만 명", "small": "세계 사망자, 최소 추정", "compare": {"label": "연구에 따라", "value": "1,700만~1억"},
+   "beats": [
+    {"say": "세상을 떠난 사람은 최소 5천만 명으로 추정됩니다."},
+    {"say": "당시 기록이 허술해서 연구마다 1,700만에서 1억 명까지 차이가 납니다. 그만큼 제대로 세지도 못할 만큼 컸다는 뜻이죠.", "show_compare": true}
+   ]},
+  {"id": 26, "type": "shape", "chapter": 4, "label": "개념도 · 모양만 나타냄 (Taubenberger & Morens 2006)", "title": "누가 많이 죽었나",
+   "ticks": [{"at": 0.05, "label": "아기"}, {"at": 0.35, "label": "20~40대"}, {"at": 0.92, "label": "노인"}],
+   "beats": [
+    {"say": "더 무서운 건 누가 죽었느냐입니다. 보통 독감은 아기와 노인에게 위험합니다. 그래프로 그리면 양 끝이 높은 U자 모양이죠.",
+     "curve": {"tone": "muted", "label": "보통 독감 (U자)", "label_at": [0.6, 0.22], "points": [[0.0, 0.62], [0.08, 0.3], [0.2, 0.1], [0.35, 0.08], [0.5, 0.1], [0.7, 0.28], [0.85, 0.5], [1.0, 0.72]]}},
+    {"say": "그런데 1918년엔 가운데가 하나 더 솟았습니다. 한창 일할 나이인 20대에서 40대가 많이 죽은 겁니다. 그래서 W자라고 부릅니다.",
+     "curve": {"tone": "red", "label": "1918년 (W자)", "label_at": [0.62, 0.82], "points": [[0.0, 0.7], [0.08, 0.4], [0.18, 0.3], [0.3, 0.78], [0.42, 0.42], [0.55, 0.25], [0.75, 0.38], [0.88, 0.58], [1.0, 0.76]], "circle": [0.3, 0.78], "note": "한창 일할 나이"}}
+   ]},
+  {"id": 27, "type": "versus", "chapter": 4, "label": "CDC 국립보건통계센터 (NCHS)", "left": {"value": "50.9세", "label": "미국 기대수명 1917년", "icon": "users"}, "right": {"value": "39.1세", "label": "1918년", "icon": "trending-down"},
+   "beats": [
+    {"say": "미국의 기대수명은 1917년 50.9세에서, 1918년 39.1세로 떨어졌습니다. 1년 만에 11.8년이 줄어든 겁니다."},
+    {"say": "다행히 이듬해 다시 회복했지만, 한 해 동안 한 나라 사람들의 인생이 10년 넘게 짧아진 셈입니다.", "question": "1년 만에 -11.8년"}
+   ]},
+  {"id": 28, "type": "footage", "chapter": 4, "label": "자료 화면 · 1918년 워싱턴 월터리드 병원 독감 병동 (미국 의회도서관)", "clip": {"src": "ward", "start": 0, "frame": "photo"},
+   "beats": [
+    {"say": "병원은 복도와 베란다까지 침대로 채웠습니다. 이 사진처럼요.", "lower": {"name": "월터리드 병원 독감 병동", "role": "1918 · 워싱턴"}},
+    {"say": "그리고 이 거대한 물결은, 한반도도 비켜 가지 않았습니다."}
+   ]},
+
+  {"id": 29, "type": "chapter", "chapter": 5, "num": "5", "title": "조선의 무오년 독감", "icon": "map-pin",
+   "beats": [{"say": "1918년은 무오년입니다. 조선에서는 이 병을 '무오년 독감', 또는 스페인의 옛 이름을 따 '서반아 감기'라고 불렀습니다."}]},
+  {"id": 30, "type": "footage", "chapter": 5, "label": "자료 화면 · 1910년 무렵 서울 거리 (미국 의회도서관)", "clip": {"src": "seoul", "start": 0, "frame": "photo"},
+   "beats": [
+    {"say": "기록에 따르면 1918년 9월, 평안북도 강계에서 환자 300명이 나왔다는 기사가 처음 보입니다.", "lower": {"name": "서울 거리", "role": "자료 화면 · 1910년 무렵"}},
+    {"say": "그리고 10월과 11월, 병은 서울과 평양, 전국으로 번졌습니다.", "vox": {"text": "1918년 9월 → 11월", "note": "강계에서 전국으로"}}
+   ]},
+  {"id": 31, "type": "quote", "chapter": 5, "label": "매일신보 1918.12 (메디게이트뉴스 2019 인용)", "who": "매일신보", "role": "1918년 12월 기사 · 충남 서산", "quote": "온 가족이 앓아누워, 죽은 사람을 묻을 사람이 없는 형편이다.", "keyword": "묻을 사람이 없는", "note": "서산 한 군에서만 환자 8만 명",
+   "beats": [
+    {"say": "그해 12월 신문에는 충청남도 서산 한 군에서만 환자가 8만 명이라는 기사가 실렸습니다."},
+    {"say": "온 가족이 앓아누워, 죽은 사람을 묻을 사람조차 없다. 예산과 홍성에서는 일손이 없어 추수도 못 했다고 적혀 있습니다.", "mark": true}
+   ]},
+  {"id": 32, "type": "people", "chapter": 5, "label": "조선총독부 통계연보 1918 (메디게이트뉴스 · 프레시안 인용)", "title": "조선 사람 100명으로 줄이면", "count": 44, "value": "44명", "caption": "환자로 집계됐다", "sub": "1,670만 명 중 742만 명 · 사망 약 14만 명",
+   "beats": [
+    {"say": "조선총독부 통계로는, 조선인 1,670만 명 가운데 700만 명이 넘는 환자가 나왔습니다."},
+    {"say": "100명 중 44명꼴입니다. 사망자는 약 14만 명. 기록되지 못한 사람까지 생각하면 실제는 더 많았을 겁니다.", "fill": true}
+   ]},
+  {"id": 33, "type": "versus", "chapter": 5, "label": "조선총독부 통계연보 1918 (메디게이트뉴스 인용)", "left": {"value": "0.71%", "label": "일본인 치사율", "icon": "user"}, "right": {"value": "1.88%", "label": "조선인 치사율", "icon": "users"},
+   "beats": [
+    {"say": "같은 통계에서 눈에 띄는 숫자가 하나 더 있습니다. 걸린 사람 중 숨진 비율이 일본인은 0.71%, 조선인은 1.88%였습니다."},
+    {"say": "같은 병이었는데 조선인이 두 배 반이나 더 많이 숨졌습니다. 치료와 돌봄을 받을 수 있는 처지가 달랐던 거죠.", "question": "같은 병, 다른 결과"}
+   ]},
+  {"id": 34, "type": "quote", "chapter": 5, "label": "『백범일지』 · 의사학 31(1) 2022", "who": "김구", "role": "『백범일지』 중", "quote": "상해에 온 후 서반아 감기로 20일 동안 치료한 것뿐이다.", "keyword": "서반아 감기", "note": "1919년, 상하이",
+   "beats": [
+    {"say": "독립운동가 김구 선생도 이 병을 앓았습니다. 백범일지에 상하이에 온 뒤 '서반아 감기'로 20일을 치료받았다고 적었죠."},
+    {"say": "총독부가 마스크 같은 예방 지침을 내놓은 건 1919년 말이었습니다. 연구자들은 '뒤늦게'였다고 평가합니다.", "mark": true}
+   ]},
+
+  {"id": 35, "type": "chapter", "chapter": 6, "num": "6", "title": "87년 뒤에 찾은 범인", "icon": "dna",
+   "beats": [{"say": "그럼 이 병의 정체는 뭐였을까요? 답은 87년 뒤, 얼음 속에서 나왔습니다."}]},
+  {"id": 36, "type": "people", "chapter": 6, "label": "알래스카대 지구물리연구소 · CDC", "title": "알래스카 브레빅 미션, 1918년 11월", "count": 90, "value": "72명", "caption": "주민 80명 중 닷새 만에", "sub": "100명으로 바꾸면 90명 · 언 땅에 묻힘", "scatter": false,
+   "beats": [
+    {"say": "1918년 11월, 알래스카의 작은 마을 브레빅 미션. 닷새 동안 주민 80명 가운데 72명이 숨졌습니다."},
+    {"say": "100명으로 치면 90명입니다. 이들은 1년 내내 녹지 않는 언 땅, 영구동토층에 묻혔습니다.", "fill": true}
+   ]},
+  {"id": 37, "type": "timeline", "chapter": 6, "label": "CDC 'The Deadliest Flu' · PNAS 1999 · Science 2005", "title": "얼음 속 범인을 찾기까지", "years": ["1918", "1951", "1997", "2005"],
+   "events": [{"at": "1918", "label": "브레빅 미션 매장", "sub": "언 땅이 시신을 보존"}, {"at": "1951", "label": "헐틴 첫 발굴", "sub": "바이러스 되살리기 실패"}, {"at": "1997", "label": "72세 헐틴, 자비로 재발굴", "sub": "폐 조직 확보"}, {"at": "2005", "label": "유전체 전체 재구성", "sub": "H1N1 · 새에게서 온 바이러스"}],
+   "beats": [
+    {"say": "1951년, 대학원생 요한 헐틴이 이 무덤을 찾아갔지만, 당시 기술로는 바이러스를 찾지 못했습니다.", "upto": 2},
+    {"say": "46년 뒤인 1997년, 일흔두 살이 된 헐틴은 자기 돈을 들여 다시 그 마을로 갔습니다. 그리고 언 땅에서 폐 조직을 찾아냈죠.", "upto": 3},
+    {"say": "이 조직으로 미국 연구진이 2005년, 바이러스의 유전자 전체를 다시 맞췄습니다. 범인은 새에게서 온 H1N1 독감 바이러스였습니다.", "upto": 4}
+   ]},
+
+  {"id": 38, "type": "chapter", "chapter": 7, "num": "7", "title": "이름이 남긴 교훈", "icon": "tag",
+   "beats": [{"say": "마지막으로, 다시 이름 이야기로 돌아가 보겠습니다."}]},
+  {"id": 39, "type": "quote", "chapter": 7, "label": "WHO 보도자료 2015.05.08", "who": "세계보건기구(WHO)", "role": "새 감염병 이름 짓기 지침 · 2015", "quote": "지명, 사람 이름, 동물, 직업을 병의 이름에 쓰지 말 것. 피해야 할 예: 스페인 독감.", "keyword": "스페인 독감", "note": "새 질병부터 적용",
+   "beats": [
+    {"say": "2015년, 세계보건기구는 새 감염병에 이름을 붙이는 원칙을 발표했습니다. 지명이나 사람 이름을 쓰지 말라는 겁니다."},
+    {"say": "피해야 할 예로 든 이름 중 하나가 바로 '스페인 독감'이었습니다. 이름 하나가 한 나라와 사람들에게 낙인이 될 수 있으니까요.", "mark": true}
+   ]},
+  {"id": 40, "type": "map_causal", "chapter": 7, "label": "자체 정리", "title": "다시 보는 전체 그림",
+   "beats": [
+    {"say": "처음 그림을 다시 보겠습니다. 전쟁이 군대를 움직였고, 군대가 병을 세계로 퍼뜨렸습니다.", "reveal": ["war", "troops", "spread", "censor", "spain", "name"], "instant": [["war", "troops"], ["troops", "spread"], ["war", "censor"], ["spread", "spain"], ["spain", "name"]], "active": "spread"},
+    {"say": "숨긴 나라들은 대비가 늦었고, 그 대가는 사망자 숫자로 돌아왔습니다.", "reveal": ["late", "deaths"], "draw": [["censor", "late"], ["late", "spread"], ["spread", "deaths"]], "active": "deaths"},
+    {"say": "그리고 솔직하게 말한 나라는, 백 년 넘게 병의 이름을 달고 있습니다.", "active": "name", "tag": {"node": "name", "text": "처음 말한 곳에 붙은 이름"}}
+   ]},
+  {"id": 41, "type": "outro", "chapter": 7, "label": "", "title": "처음 말한 나라의 이름", "sub": "병은 숨길수록 커졌다", "clip": {"src": "march2", "start": 0},
+   "beats": [{"say": "병의 이름은 처음 생긴 곳이 아니라, 처음 말한 곳에 붙었습니다. 그리고 그 병은, 숨길수록 더 커졌습니다."}]}
+ ]
+}
