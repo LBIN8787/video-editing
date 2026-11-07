@@ -111,12 +111,9 @@ def _question(D, data, bt):
 
 
 def _bars(D, sc, bt, data, render):
-    fake = dict(sc, items=[{"label": i["label"], "value": i["value"]} for i in data["items"]], unit=data["unit"],
-                title=data["title"] or "")
-    if data["emph"] == 1 and len(fake["items"]) == 2:   # 강조 항목을 첫 칸(빨강)으로
-        fake["items"] = fake["items"][::-1]
-    render["bars"](D, fake, bt, 0)
-    _question(D, data, bt)
+    fake = dict(sc, items=[{"label": i["label"], "value": i["value"], "text": i["text"]} for i in data["items"]], unit=data["unit"],
+                title=data["title"] or data.get("question", ""), emph=data["emph"])
+    render["bars"](D, fake, bt, 0)   # 질문은 제목 자리에 (아래 라벨과 겹치지 않게)
 
 
 def _duel(D, sc, bt, data, render):

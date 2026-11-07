@@ -604,13 +604,15 @@ def s_bars(D: HDoc, sc: dict, bt: list, dur: float):
     items = sc["items"]
     top = max(i["value"] for i in items)
     t1 = bt[-1][0]
+    em = sc.get("emph", 0)   # 강조(강조색) 항목 번호 — 순서는 대본 그대로
     for k, it in enumerate(items):
         x = 520 + k * 440
         h = 480 * it["value"] / top
         at = t1 + 0.2 + k * 1.3
-        D.rough("rectangle", [x - 110, 820 - h, 220, h], D.red if k == 0 else D.ink, 2.5, fill=D.red if k == 0 else D.ink, at=at, dur=0.8)
-        D.text(x, 820 - h - 50, f'{it["value"]}', FT("value"), 72, D.red if k == 0 else D.ink, at=at + 0.5, counter=True)
-        D.text(x, 870, it["label"], FT("box"), 44, D.ink, at=at)
+        c = D.red if k == em else D.ink
+        D.rough("rectangle", [x - 110, 820 - h, 220, h], c, 2.5, fill=c, at=at, dur=0.8)
+        D.text(x, 820 - h - 50, f'{it.get("text", it["value"])}', FT("value"), 72, c, at=at + 0.5, counter=True)
+        D.text(x, 870, it["label"], FT("box"), fit(FT("box"), it["label"], 44, 400).size, D.ink, at=at)
         D.sfx.append(("pencil", at))
     D.text(1640, 870 - 600, sc.get("unit", ""), FT("note"), 40, "#5a5f6a", at=t1)
     D.rough("line", [330, 822, 1600, 824], D.ink, 3.5, at=bt[0][0] + 0.3, dur=0.6)
