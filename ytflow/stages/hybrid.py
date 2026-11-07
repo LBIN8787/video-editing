@@ -84,6 +84,9 @@ class HDoc(hyper.Doc):
 
     # 이름 자막 (lower third) ------------------------------------
     def lower(self, name: str, role: str, at: float, dark: bool = False):
+        from . import graphics
+        if graphics.component(self, "lower") == "bar" and dark:   # 영상 위에서만 얇은 선 스타일 (종이 위는 띠 유지)
+            return graphics.lower_bar(self, name, role, at)
         i = self._id()
         f = fit(FT("title"), name, 46, 900)
         w = max(f.getlength(name), fit(FT("label"), role, 26, 900).getlength(role)) + 80
@@ -184,7 +187,7 @@ def s_footage(D: HDoc, sc: dict, bt: list, dur: float):
     D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""), dark=full)
     for b, (t0, d) in zip(sc["beats"], bt):
         if b.get("lower"):
-            D.lower(b["lower"]["name"], b["lower"]["role"], t0 + 0.2)
+            D.lower(b["lower"]["name"], b["lower"]["role"], t0 + 0.2, dark=full)
         if b.get("vox"):
             D.vox(b["vox"]["text"], b["vox"].get("note", ""), t0 + 0.4, x=1000 if full else 1120, y=140 if full else 110, on_paper=not full)
 
@@ -249,11 +252,14 @@ def s_versus(D: HDoc, sc: dict, bt: list, dur: float):
 
 
 def s_chapter(D: HDoc, sc: dict, bt: list, dur: float):
-    # 종이 한 장이 오른쪽에서 밀려 들어오며 장 제목
+    # 종이 한 장이 오른쪽에서 밀려 들어오며 장 제목 (그래픽 팩 chapter: paper). 'type' 이면 큰 글씨 판.
+    from . import graphics
+    if graphics.component(D, "chapter", sc) == "type":
+        return graphics.chapter_type(D, sc)
     i = D._id()
     D.media.append(f'<div id="{i}" style="position:absolute;inset:0;background:#2b2f3a"></div>')
     j = D._id()
-    D.media.append(f'<img id="{j}" src="assets/paper.jpg" style="position:absolute;left:0;top:0;width:{W}px;height:{HH}px;box-shadow:-30px 0 60px rgba(0,0,0,.45)">')
+    D.media.append(f'<img id="{j}" src="assets/{getattr(D, 'bg_name', 'paper.jpg')}" style="position:absolute;left:0;top:0;width:{W}px;height:{HH}px;box-shadow:-30px 0 60px rgba(0,0,0,.45)">')
     D.js.append(f'tl.fromTo("#{j}",{{x:{W},rotation:4}},{{x:0,rotation:0,duration:0.7,ease:"power3.out"}},0);')
     D.sfx.append(("whoosh", 0.0))
     D.icon(sc.get("icon", ""), W / 2, 330, 110, D.red, at=0.6)
@@ -271,7 +277,8 @@ def _node_box(D: HDoc, key: str, nd: dict, state: str, at: float, instant: bool)
     col = D.red if state == "active" else (D.ink if state == "on" else "#a8a29a")
     fill = "rgba(196,69,47,0.22)" if state == "active" else None
     d = 0.01 if instant else 0.45
-    D.rough("rectangle", [x - bw / 2, y - bh / 2, bw, bh], col, 3.5 if state == "active" else 2.8, fill=fill, at=at, dur=d, gap=0.0)
+    from . import graphics
+    graphics.node(D, x, y, bw, bh, col, state, at, d)   # 칸 모양은 그래픽 팩(flow: box·pill·sticky·circle)
     D.icon(nd.get("icon", ""), x, y - 30, 48, col, at=at if instant else at + 0.15, gap=0.0)
     D.text(x, y + 34, nd["label"], FT("box"), fit(FT("box"), nd["label"], 34, bw - 30).size, col,
            at=at if instant else at + 0.2, gap=0.0, dur=0.01 if instant else 0.4)
@@ -867,7 +874,10 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     sc["_prices"] = project.dir("research") / "prices"
     if sc["type"] == "usmap":
         sc["_states"] = us_states()
-    RENDER[sc["type"]](D, sc, bt, dur)
+    D.bg_name = bg_name
+    from . import graphics
+    if not graphics.dispatch(D, sc, bt, dur, RENDER):   # 그래픽 팩이 다른 컴포넌트(그림)를 고르면 그걸로
+        RENDER[sc["type"]](D, sc, bt, dur)
     idx, html = work / "index.html", D.html(dur, bg_name)
     if not idx.exists() or idx.read_text(encoding="utf-8") != html:  # 바뀐 장면만 다시 렌더
         idx.write_text(html, encoding="utf-8")
