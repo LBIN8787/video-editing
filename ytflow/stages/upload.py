@@ -250,11 +250,14 @@ def github_release(project: Project, with_archive: bool = False) -> str:
     pc = config.load("pipeline")
     notes = work / "release_notes.md"
     up_txt = next((f for f in files if f.name == "upload.txt"), None)
-    head = up_txt.read_text(encoding="utf-8").split("\n")[0] if up_txt else name
+    lines_ = up_txt.read_text(encoding="utf-8").splitlines() if up_txt else []
+    head = next((l.split(":", 1)[1].strip() for l in lines_ if l.startswith("제목:")), None) \
+        or next((l.strip() for l in lines_[1:3] if l.strip()), None) or project.state().get("name", name)
+    remake = f"python -m ytflow hybrid {name}" if (project.dir("script") / "hybrid.json").exists() else f"python -m ytflow rebuild {name}"
     notes.write_text(
         f"## {head.replace('제목: ', '')}\n\n- 프로젝트: `projects/{name}` (기획·대본·팩트시트는 main 브랜치)\n"
         f"- 채널: `{pc.get('channel', '')}` · 스타일: `{(pc.get('edit') or {}).get('style_ref', '')}`\n"
-        f"- 다시 만들기: `python -m ytflow hybrid {name}` (방법: AGENTS.md, skills/edit-style-hybrid)\n"
+        f"- 다시 만들기: `{remake}` (방법: AGENTS.md, docs/11-playbook.md)\n"
         f"- 파일: " + ", ".join(f"`{f.name}`" for f in files) + "\n", encoding="utf-8")
     files.append(notes)
     # 작업 트리를 건드리지 않고(plumbing) main 위에 커밋 하나를 만들어 media/<이름> 으로 push

@@ -6,7 +6,19 @@ Claude Code 와 Codex 가 **같은 GitHub 저장소**(LBIN8787/video-editing)를
 코드(`ytflow/`), 문서(`docs/`, `AGENTS.md`), 절차서(`skills/`), 설정(`config/`, `channels/`, `styles/*/` 의 md·yaml·json),
 프로젝트 기획 파일(`projects/*/` 의 md·json·csv·srt·ass·yaml: 소스 목록·팩트시트·원고·대본·업로드 문구·보고서).
 
-## 2. Google Drive — `ytflow 영상` 폴더 (`config/storage.yaml`)
+## 2. 영상 보관 — GitHub Release (기본, 키 불필요) — 2026-11-07부터
+`python -m ytflow upload <프로젝트> [--archive]` → 릴리스 `video-<프로젝트>` 에 final.mp4·자막·업로드 문구(+ footage.zip).
+임시 브랜치 `media/<프로젝트>` 를 push 하면 `.github/workflows/media-release.yml` 이 릴리스에 붙이고 브랜치를 지웁니다.
+Drive 토큰처럼 1시간마다 만료되는 키가 없습니다. 주소는 `05_edit/release.json`. 자세한 절차: `docs/11-playbook.md`.
+
+### 왜 Drive 를 기본에서 뺐나
+| 방법 | 문제 |
+|---|---|
+| Drive API 토큰(네트워크 비밀값) | Google 접근 토큰은 약 1시간 뒤 만료 → 매번 새로 넣어야 함 |
+| Claude 의 Google Drive 커넥터 | 키는 필요 없지만 파일 하나 **10MB 제한** → 문서·업로드 문구용으로만 |
+| Drive + rclone (선택) | PC 에서 `rclone authorize "drive"` 로 받은 **오래가는 토큰**을 환경 변수 `RCLONE_CONFIG_GDRIVE_TYPE=drive`, `RCLONE_CONFIG_GDRIVE_TOKEN=<JSON>` 로 한 번만 넣으면 이후 자동 갱신. 원하면 이 방식으로 `--to drive` 를 연결 |
+
+## 2-1. (예전 방식) Google Drive — `ytflow 영상` 폴더 (`config/storage.yaml`)
 | 폴더 | 무엇 | 올리는 명령 |
 |---|---|---|
 | `롱폼 · 미주일기 스타일 (ch-paper-column)` 등 채널별 6개 | 완성 영상(final.mp4, 없으면 draft.mp4) + 자막 .srt + 업로드 문구 .txt | `python -m ytflow upload <프로젝트>` / `--all` |
