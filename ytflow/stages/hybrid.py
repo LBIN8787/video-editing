@@ -1032,7 +1032,12 @@ def make(project: Project, workers: int = 3) -> Path:
     work.mkdir(parents=True, exist_ok=True)
     vlist, alist, subs = [], [], []
     for sc, bt, dur in plan:
-        vlist.append(f"file '{(adir / f'hb_{sc['id']:03d}.mp4').resolve()}'")
+        vfile = adir / f"hb_{sc['id']:03d}.mp4"
+        vlist.append(f"file '{vfile.resolve()}'")
+        # 렌더러가 장면 길이를 0.1초 단위로 올려 잡는다 → 실제 영상 길이를 재서 음성·자막·효과음을 거기에 맞춘다
+        # (안 그러면 장면마다 0.01~0.03초씩 화면이 소리보다 늦어져 6분이면 0.5초 어긋남)
+        dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(vfile)],
+                                   capture_output=True, text=True).stdout or dur)
         # 장면 음성: 박자 사이 쉼을 넣어 한 파일로
         parts, t = [], 0.0
         for k, (t0, d) in enumerate(bt):
@@ -1044,11 +1049,11 @@ def make(project: Project, workers: int = 3) -> Path:
         inputs, filt = [], []
         for k, (t0, wav) in enumerate(parts):
             inputs += ["-i", str(wav)]
-            filt.append(f"[{k}:a]adelay={int(t0 * 1000)}|{int(t0 * 1000)}[d{k}]")
+            filt.append(f"[{k + 1}:a]adelay={int(t0 * 1000)}|{int(t0 * 1000)}[d{k}]")  # 0번 입력은 무음 바탕(anullsrc) → 박자 음성은 k+1번
         mix = "".join(f"[d{k}]" for k in range(len(parts)))
-        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-t", f"{dur:.2f}", "-i", "anullsrc=r=48000:cl=stereo",
+        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-t", f"{dur:.3f}", "-i", "anullsrc=r=48000:cl=stereo",
                         *inputs, "-filter_complex", ";".join(filt) + f";[0:a]{mix}amix=inputs={len(parts) + 1}:normalize=0:duration=first[a]",
-                        "-map", "[a]", "-t", f"{dur:.2f}", str(sa)], check=True)
+                        "-map", "[a]", "-t", f"{dur:.3f}", str(sa)], check=True)
         alist.append(f"file '{sa.resolve()}'")
         t_acc += dur
     (work / "v.txt").write_text("\n".join(vlist), encoding="utf-8")
@@ -1083,4 +1088,9 @@ def make(project: Project, workers: int = 3) -> Path:
     from .finish import master
     master(project)
     print(f"[hybrid] {edir}/final.mp4 ({t_acc:.1f}초)")
+    try:  # 완성본 싱크를 받아쓰기로 재서 05_edit/sync_qa.json 에 (자막·목소리 0.3초 이내 95% 이상이면 통과)
+        from . import syncqa
+        syncqa.run(project)
+    except Exception as e:  # noqa: BLE001
+        print(f"[hybrid] 싱크 점검 건너뜀: {e}")
     return edir / "final.mp4"

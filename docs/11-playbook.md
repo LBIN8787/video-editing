@@ -51,6 +51,9 @@ python -m ytflow hybrid <프로젝트>      # 음성 → 장면 렌더(병렬 3)
 | 화살표가 칸·글자를 가로지름 | 직선 → ㄱ자 → 줄 사이 빈 띠 순으로 다른 칸을 피하는 경로. 못 피하면 `04_assets/layout_qa.json` 에 기록 |
 | 글자 대비 부족 | HyperFrames check → layout_qa.json, 영상·사진 위 메모엔 배경 띠 |
 | 음량 | -14 LUFS, 실제 최대 -1.5 dBTP (`05_edit/delivery_check.json`) |
+| 박자 음성이 다음 박자 자리에 들어가 한 줄씩 늦고 장면 마지막 문장이 빠짐 (2026-11-07 발견·수정) | 장면 음성 합치기에서 ffmpeg 입력 번호를 +1 (0번은 무음 바탕) |
+| 렌더러가 장면 길이를 0.1초 단위로 올림 | 장면 영상의 실제 길이를 재서 음성·자막을 거기에 맞춤 |
+| **싱크 최종 확인** | 끝에 `sync-qa` 자동 실행: 완성본 소리를 25초 창으로 받아써 자막 줄 시작과 실제 말 시작 차이를 잼 → `05_edit/sync_qa.json` (0.3초 이내 95% 이상 + 화면−소리 0.1초 이내면 통과) |
 
 사람 눈 점검 (꼭):
 ```bash
@@ -67,7 +70,7 @@ python -m ytflow upload <프로젝트> --archive   # + 자료 화면 묶음(foot
 - 파일 하나 100MB 미만(넘으면 화질을 조금 낮춘 사본). 릴리스 파일은 하나 2GB 까지, 개수 제한 없음.
 - 기록: `05_edit/release.json` (주소) — GitHub 에 커밋됨.
 - 작업 기록(기획·팩트시트·대본·업로드 문구·이 문서)은 main 브랜치에 커밋 = **노하우 보관**.
-- Google Drive 는 선택: 작은 문서는 Drive 커넥터(10MB 이하, 키 없음)로, 영상은 `--to drive` (오래가는 rclone 토큰을 한 번 설정한 경우, docs/09-storage.md).
+- Google Drive: **키 없이** Apps Script 를 한 번 설치하면 릴리스가 15분 안에 Drive 채널 폴더로 자동 복사됨 (`docs/12-drive-sync.md`). 그 밖에: 작은 문서는 Drive 커넥터(10MB 이하, 키 없음)로, 영상은 `--to drive` (오래가는 rclone 토큰을 한 번 설정한 경우, docs/09-storage.md).
 
 ## 7. 마무리
 - `channels/<채널>/episodes.md` 에 한 줄, `queue.md` 상태 바꿈.
