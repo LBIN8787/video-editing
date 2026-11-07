@@ -70,3 +70,7 @@ python -m ytflow make --style-ref mijudiary                     # 이 스타일�
 python -m ytflow style <id> ref1.mp4 ref2.mp4 --title <이름>    # 새 스타일 추가
 ```
 새 스타일을 추가하는 절차는 `skills/edit-style-new/SKILL.md` 에 있습니다.
+
+## 연출과 그래픽 (2026-11-07~) — docs/13-direction-vs-graphics.md
+편집 스타일 = **연출 문법**(장면 종류·편집점·편집 포인트·리듬, 대본 hybrid.json) + **그래픽 스킨**(`skins/<id>/skin.yaml`: 색·글꼴·배경·선 질감·사진 톤·자막 상자).
+연출은 그대로 두고 스킨만 갈아 끼울 수 있다: `paper-sketch`(종이 손그림, 기본) · `clean-flat`(평면 인포그래픽) · `dark-doc`(어두운 다큐).

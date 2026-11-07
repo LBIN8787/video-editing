@@ -266,6 +266,10 @@ def main(argv: list[str] | None = None) -> None:
 
     sub.add_parser("styles", help="스타일 라이브러리 목록")
     sub.add_parser("channels", help="운영 채널 목록 (channels/)")
+    sp = sub.add_parser("skin-preview", help="같은 연출을 그래픽 스킨마다 렌더해 비교표 만들기 → 05_edit/skin_preview.png")
+    sp.add_argument("project")
+    sp.add_argument("--scenes", default="12,16,21,24")
+    sp.add_argument("--skins", default="paper-sketch,clean-flat,dark-doc")
     th = sub.add_parser("thumbnail", help="제목·썸네일(A/B/C) 만들기 → 05_edit/thumbnail_*.png, package.md")
     th.add_argument("project")
     sq = sub.add_parser("sync-qa", help="완성 영상의 자막·목소리·화면 싱크를 받아쓰기로 재기 → 05_edit/sync_qa.json")
@@ -370,6 +374,9 @@ def main(argv: list[str] | None = None) -> None:
         out = config.ROOT / ".cache" / "voice_samples" / f"{a.voice_id}.mp3"
         out.parent.mkdir(parents=True, exist_ok=True)
         print(f"[voice-sample] {_elevenlabs(a.text, out, ec)}")
+    elif a.cmd == "skin-preview":
+        from .stages import skin
+        skin.preview(Project.open(a.project), [int(x) for x in a.scenes.split(",")], a.skins.split(","))
     elif a.cmd == "thumbnail":
         from .stages import thumbnail
         thumbnail.run(Project.open(a.project))

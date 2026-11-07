@@ -43,7 +43,13 @@ def _e(s) -> str:
 # ---------------------------------------------------------------- 문서 (hyper.Doc 확장)
 class HDoc(hyper.Doc):
     def __init__(self, seed: int):
+        from . import skin as _skin
+        self.skin = _skin.load()
+        _skin.apply_fonts(self.skin)
+        paper.OVERRIDE.clear()
+        paper.OVERRIDE.update(_skin.paper_override(self.skin))
         super().__init__(seed)
+        self.rough_hook = lambda o: _skin.rough_opts(self.skin, o)
         self.media, self.under = [], []   # 영상·사진 (svg 아래), 종이 카드 등 바닥 요소
         self.css = []
         self.sfx = []                     # (효과음 이름, 장면 안 시각)
@@ -160,7 +166,13 @@ class HDoc(hyper.Doc):
         base = super().html(duration, bg_name)
         media = "".join(self.media)
         base = base.replace('<div id="layer"', media + '<div id="layer"', 1)
-        return base.replace("</style>", "".join(self.css) + "</style>", 1)
+        base = base.replace("</style>", "".join(self.css) + f"video{{filter:{_skin_mod().video_filter(self.skin) or 'none'}}}</style>", 1)
+        return _skin_mod().remap_html(base, self.skin)   # 기본 토큰 색 → 고른 스킨의 색
+
+
+def _skin_mod():
+    from . import skin
+    return skin
 
 
 # ---------------------------------------------------------------- 장면별 화면
@@ -832,7 +844,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     work.mkdir(parents=True, exist_ok=True)
     a = work / "assets"
     (a / "fonts").mkdir(parents=True, exist_ok=True)
-    for p in (paper.SERIF, paper.SERIF_B, paper.PEN, paper.SANS, paper.SANS_X):
+    for p in (paper.SERIF, paper.SERIF_B, paper.PEN, paper.SANS, paper.SANS_X, paper.FONT_DIR / "NanumGothic-Regular.ttf"):
         if not (a / "fonts" / p.name).exists():
             try:
                 os.link(p, a / "fonts" / p.name)
@@ -840,9 +852,10 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
                 shutil.copy(p, a / "fonts" / p.name)
     shutil.copy(hyper.GSAP, a / "gsap.min.js")
     D = HDoc(sc["id"] * 7 + 3)
-    bg = a / "paper.jpg"
+    bg_name = f"bg_{D.skin['id']}.jpg"          # 그래픽 스킨의 바탕 (종이·민무늬·모눈·어두운 필름)
+    bg = a / bg_name
     if not bg.exists():
-        paper.paper_bg(W, HH, seed=7).save(bg, quality=92)
+        _skin_mod().background(D.skin, W, HH).save(bg, quality=92)
     if sc.get("clip"):  # 원본 영상 구간을 장면 길이만큼 잘라 넣는다 (소리 없음)
         src = project.dir("assets") / "footage" / spec["footage"][sc["clip"]["src"]]["file"]
         out = a / f"clip_{sc['id']:03d}.mp4"
@@ -855,7 +868,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     if sc["type"] == "usmap":
         sc["_states"] = us_states()
     RENDER[sc["type"]](D, sc, bt, dur)
-    idx, html = work / "index.html", D.html(dur, "paper.jpg")
+    idx, html = work / "index.html", D.html(dur, bg_name)
     if not idx.exists() or idx.read_text(encoding="utf-8") != html:  # 바뀐 장면만 다시 렌더
         idx.write_text(html, encoding="utf-8")
     (work / "hyperframes.json").write_text(json.dumps({"name": work.name}), encoding="utf-8")
@@ -961,7 +974,7 @@ PlayResY: 1080
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Sub,NanumGothic,50,&H00FFFFFF,&H00FFFFFF,&H00202020,&H8A1E1E1E,1,0,0,0,100,100,0,0,3,14,0,2,80,80,48,1
+Style: Sub,{font},{size},{text},{text},{outline},{box},1,0,0,0,100,100,0,0,{border_style},{outline_w},0,2,80,80,{margin_v},1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -984,6 +997,8 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             d = (t1 - t0) * len(p) / tot
             lines.append(f"Dialogue: 0,{_ass_time(t)},{_ass_time(t + d - 0.02)},Sub,,0,0,0,,{p}")
             t += d
+    sk = _skin_mod()
+    head = head.format(**sk.subtitle_style(sk.load()))   # 자막 상자도 그래픽 스킨이 정함
     path.write_text(head + "\n".join(lines) + "\n", encoding="utf-8")
 
 

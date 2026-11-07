@@ -114,10 +114,14 @@ class Doc:
         opts = {"seed": int(self.seed * 97 + k + 1), "roughness": roughness, "bowing": 1.2, "stroke": color, "strokeWidth": width}
         if fill:
             opts.update({"fill": fill, "fillStyle": "hachure", "hachureGap": 9, "hachureAngle": -41, "fillWeight": 2.2})
+        if getattr(self, "rough_hook", None):  # 그래픽 스킨: 선 질감(거칠기·채우기 방식)
+            opts = self.rough_hook(opts)
         self.rq.append({"type": kind, "args": args, "opts": opts})
         self.svg.append(f"@@ROUGH{k}@@")
         t = self.at(at, gap)
         self.js.append(f'tl.to(".r{k}",{{strokeDashoffset:0,duration:{dur},ease:"power1.inOut",stagger:{min(0.04, dur / 12):.3f}}},{t:.2f});')
+        if fill and opts.get("fillStyle") == "solid":
+            self.js.append(f'tl.to(".r{k}f",{{opacity:1,duration:{max(dur, 0.2):.2f},ease:"power1.out"}},{t:.2f});')
         return t
 
     def _rough_svg(self, svg: str) -> str:
@@ -126,8 +130,11 @@ class Doc:
         r = subprocess.run(["node", str(ROUGH_JS), str(ROUGH)], input=json.dumps(self.rq), capture_output=True, text=True, timeout=60)
         shapes = json.loads(r.stdout)
         for k, paths in enumerate(shapes):
-            el = "".join(f'<path class="r{k}" d="{p["d"]}" fill="none" stroke="{p["stroke"]}" stroke-width="{p["w"]}" '
-                         f'stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>' for p in paths)
+            el = "".join(
+                (f'<path class="r{k}f" d="{p["d"]}" fill="{p["fill"]}" stroke="none" style="opacity:0"/>'   # 면 채우기(solid): 서서히 나타남
+                 if p.get("fill") and p["fill"] != "none" else
+                 f'<path class="r{k}" d="{p["d"]}" fill="none" stroke="{p["stroke"]}" stroke-width="{p["w"]}" '
+                 f'stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>') for p in paths)
             svg = svg.replace(f"@@ROUGH{k}@@", el)
         return svg
 

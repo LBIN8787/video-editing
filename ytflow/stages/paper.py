@@ -59,10 +59,14 @@ def _rgb(h: str) -> tuple:
     return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
 
 
+OVERRIDE: dict = {}   # 그래픽 스킨이 정한 바탕·글씨·강조색 (skin.paper_override) — edit.yaml 의 paper 보다 우선
+
+
 def cfg() -> dict:
     e = config.load("pipeline").get("edit", {})
     p = {"base": "#EEE7DA", "ink": "#22304D", "red": "#C4452F", "anim_seconds": 1.2}
     p.update(e.get("paper") or {})
+    p.update(OVERRIDE)
     # 카드는 항상 가로 캔버스에 그린다 (쇼츠는 세로 화면 안에 카드를 줄여 넣음): card_width/height 로 따로 지정 가능
     return {"W": e.get("card_width", e.get("width", 1920)), "H": e.get("card_height", e.get("height", 1080)),
             "fps": e.get("fps", 30), **p}
