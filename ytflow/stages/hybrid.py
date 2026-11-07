@@ -33,6 +33,7 @@ W, HH = 1920, 1080
 GAP = 0.28          # 박자 사이 쉼
 LEAD = 0.35         # 장면 시작 후 첫 내레이션까지
 TAIL = 0.55         # 마지막 박자 뒤 여유
+FPS = 30
 
 
 def _e(s) -> str:
@@ -46,6 +47,7 @@ class HDoc(hyper.Doc):
         self.media, self.under = [], []   # 영상·사진 (svg 아래), 종이 카드 등 바닥 요소
         self.css = []
         self.sfx = []                     # (효과음 이름, 장면 안 시각)
+        self.qa = []                      # 렌더 전 자체 점검 (선이 칸을 지남 등) → layout_qa.json
         self.blue = "#2F5D8C"
         self.yellow = "#F3D36B"
 
@@ -253,7 +255,7 @@ def s_chapter(D: HDoc, sc: dict, bt: list, dur: float):
 def _node_box(D: HDoc, key: str, nd: dict, state: str, at: float, instant: bool):
     """인과 지도 칸: state = dim | on | active"""
     x, y = nd["x"], nd["y"]
-    bw, bh = 330, 150
+    bw, bh = BW, BH
     col = D.red if state == "active" else (D.ink if state == "on" else "#a8a29a")
     fill = "rgba(196,69,47,0.22)" if state == "active" else None
     d = 0.01 if instant else 0.45
@@ -263,19 +265,61 @@ def _node_box(D: HDoc, key: str, nd: dict, state: str, at: float, instant: bool)
            at=at if instant else at + 0.2, gap=0.0, dur=0.01 if instant else 0.4)
 
 
-def _edge(D: HDoc, a: dict, b: dict, at: float, instant: bool, col: str):
+BW, BH = 330, 150   # 인과 지도 칸 크기
+
+
+def _hits(seg, rect) -> bool:
+    """수평·수직·사선 선분이 사각형(여유 포함)을 지나가나."""
+    (x0, y0), (x1, y1) = seg
+    l, t, r, b = rect
+    for k in range(0, 41):
+        x, y = x0 + (x1 - x0) * k / 40, y0 + (y1 - y0) * k / 40
+        if l < x < r and t < y < b:
+            return True
+    return False
+
+
+def _route(a: dict, b: dict, others: list) -> tuple[list, bool]:
+    """a 칸 → b 칸 화살표 경로. 다른 칸을 지나지 않는 첫 후보를 고른다 (직선 → ㄱ자 → 줄 사이 빈 띠로 돌아가기)."""
     ax, ay, bx, by = a["x"], a["y"], b["x"], b["y"]
+    hw, hh, m = BW / 2, BH / 2, 12
+    rects = [(o["x"] - hw - m, o["y"] - hh - m, o["x"] + hw + m, o["y"] + hh + m) for o in others]
+    sx = 1 if bx > ax else -1
+    sy = 1 if by > ay else -1
+    cands = []
     if ay == by:
-        p0, p1 = (ax + 175, ay), (bx - 175, by)
-    elif ax == bx:
-        p0, p1 = (ax, ay + 85), (bx, by - 85)
-    else:
-        p0, p1 = (ax + (175 if bx > ax else -175), ay), (bx, by - 85 if by > ay else by + 85)
-    D.t = at
-    D.arrow(p0[0], p0[1], p1[0], p1[1], col, at=at)
-    if instant:  # 이미 그린 화살표는 처음부터 보이게 (rough 대기열 마지막 2개 = 몸통·머리)
-        D.js[-1] = D.js[-1].replace("duration:0.15", "duration:0.01")
-        D.js[-2] = D.js[-2].replace("duration:0.35", "duration:0.01")
+        cands.append([(ax + sx * hw, ay), (bx - sx * hw, by)])
+    if ax == bx:
+        cands.append([(ax, ay + sy * hh), (bx, by - sy * hh)])
+    if ax != bx and ay != by:
+        cands.append([(ax + sx * hw, ay), (bx, ay), (bx, by - sy * hh)])          # 옆으로 나가 꺾어 내려가기
+        cands.append([(ax, ay + sy * hh), (ax, by), (bx - sx * hw, by)])          # 아래로 나가 꺾어 옆으로
+        cands.append([(ax + sx * hw, ay), (bx - sx * hw, by)])                    # 사선
+    # 줄 사이 빈 띠(두 줄 칸 사이)로 돌아가기
+    lanes = sorted({(ay + by) / 2, ay + sy * (hh + 70), ay - sy * (hh + 70), by + (hh + 70), by - (hh + 70)},
+                   key=lambda v: abs(v - (ay + by) / 2))
+    for ly in lanes:
+        pa = (ax, ay + (hh if ly > ay else -hh))
+        pb = (bx, by + (hh if ly > by else -hh))
+        cands.append([pa, (ax, ly), (bx, ly), pb])
+    for c in cands:
+        segs = list(zip(c[:-1], c[1:]))
+        if not any(_hits(sg, r) for sg in segs for r in rects):
+            return c, True
+    return cands[0], False
+
+
+def _edge(D: HDoc, a: dict, b: dict, at: float, instant: bool, col: str, others: list | None = None):
+    pts, ok = _route(a, b, others or [])
+    if not ok:
+        D.qa.append(f"인과 지도: '{a['label']}' → '{b['label']}' 화살표가 다른 칸을 지납니다 (칸 위치를 옮기세요)")
+    d_body, d_head = (0.01, 0.01) if instant else (0.35 + 0.1 * (len(pts) - 2), 0.15)
+    D.rough("linearPath", [[list(p) for p in pts]], col, 3.5, at=at, dur=d_body, roughness=0.9)
+    (x0, y0), (x1, y1) = pts[-2], pts[-1]
+    ang = math.atan2(y1 - y0, x1 - x0)
+    head = [[x1 - 22 * math.cos(ang - 0.45), y1 - 22 * math.sin(ang - 0.45)], [x1, y1],
+            [x1 - 22 * math.cos(ang + 0.45), y1 - 22 * math.sin(ang + 0.45)]]
+    D.rough("linearPath", [head], col, 3.5, at=at + d_body, dur=d_head, roughness=0.5)
 
 
 def s_map_causal(D: HDoc, sc: dict, bt: list, dur: float):
@@ -298,11 +342,12 @@ def s_map_causal(D: HDoc, sc: dict, bt: list, dur: float):
             shown.append(k)
         for e in b.get("instant", []):
             if tuple(e) not in drawn:
-                _edge(D, mp["nodes"][e[0]], mp["nodes"][e[1]], 0.35, True, D.ink)
+                _edge(D, mp["nodes"][e[0]], mp["nodes"][e[1]], 0.35, True, D.ink, [v for k2, v in mp["nodes"].items() if k2 not in e])
                 drawn.add(tuple(e))
         for e_i, e in enumerate(b.get("draw", [])):
             if tuple(e) not in drawn:
-                _edge(D, mp["nodes"][e[0]], mp["nodes"][e[1]], t0 + 0.6 + 0.55 * e_i, False, D.red if b.get("active") == e[1] else D.ink)
+                _edge(D, mp["nodes"][e[0]], mp["nodes"][e[1]], t0 + 0.6 + 0.55 * e_i, False, D.red if b.get("active") == e[1] else D.ink,
+                      [v for k2, v in mp["nodes"].items() if k2 not in e])
                 drawn.add(tuple(e))
                 D.sfx.append(("pencil", t0 + 0.6 + 0.55 * e_i))
         if b.get("active") and b["active"] != active:
@@ -778,7 +823,8 @@ def timing(sc: dict, durs: dict) -> tuple[list, float]:
         d = durs[f"{sc['id']:03d}_{k}"]
         bt.append((round(t, 2), d))
         t += d + GAP
-    return bt, round(t - GAP + TAIL, 2)
+    # 30fps 프레임 격자에 맞춤: 장면 영상 길이 = 음성 길이 (안 맞추면 장면마다 0.01~0.03초씩 밀려 끝에서 0.6초 어긋남)
+    return bt, math.ceil((t - GAP + TAIL) * FPS - 1e-6) / FPS
 
 
 # ---------------------------------------------------------------- 장면 렌더
@@ -842,6 +888,14 @@ def _ass_time(t: float) -> str:
 
 
 def _chunks(text: str, n: int = 24) -> list[str]:
+    """자막 한 줄 단위: 문장 끝(. ? !) → 쉼표 → 띄어쓰기 순으로 자연스럽게 끊는다 (한 줄 최대 n자 안팎)."""
+    sents = [x.strip() for x in re.split(r"(?<=[.?!])\s+", text) if x.strip()]
+    if len(sents) > 1:
+        return [c for x in sents for c in _chunks(x, n)]
+    if len(text) > n and "," in text:
+        parts = [x.strip() for x in re.split(r"(?<=,)\s+", text) if x.strip()]
+        if len(parts) > 1 and all(len(x) >= 6 for x in parts):
+            return [c for x in parts for c in _chunks(x, n)]
     words, out, cur = text.split(" "), [], ""
     for w in words:
         if len((cur + " " + w).strip()) > n and cur:
@@ -851,6 +905,38 @@ def _chunks(text: str, n: int = 24) -> list[str]:
             cur += " " + w
     if cur.strip():
         out.append(cur.strip())
+    return out
+
+
+def _word_starts(wav: Path, parts: list[str], dur: float) -> list[float] | None:
+    """자막 줄마다 '그 줄의 첫 글자를 말하기 시작하는 시각'(박자 음성 기준 초).
+    받아쓴 단어의 글자 누적 위치와 대본 글자 누적 위치를 비율로 맞춘다 (받아쓰기가 조금 틀려도 위치는 맞음)."""
+    from . import align
+    if not align.available():
+        return None
+    try:
+        words = align.transcribe(Path(wav), "ko")
+    except Exception:  # noqa: BLE001
+        return None
+    norm = align._norm
+    wl = [(w["start"], w["end"], len(norm(w["word"]))) for w in words if norm(w["word"])]
+    rec = sum(n for *_, n in wl)
+    scr = [len(norm(p)) for p in parts]
+    if not wl or not rec or not sum(scr):
+        return None
+    out, acc = [], 0
+    for n in scr:
+        pos = acc / sum(scr) * rec          # 이 줄이 시작하는 글자 위치 (받아쓰기 기준)
+        c = 0
+        t = wl[-1][0]
+        for st, en, wn in wl:
+            if c + wn > pos:
+                t = st + (en - st) * max(0.0, pos - c) / wn
+                break
+            c += wn
+        out.append(min(max(t - 0.08, 0.0), dur))
+        acc += n
+    out[0] = 0.0
     return out
 
 
@@ -869,8 +955,17 @@ Style: Sub,NanumGothic,50,&H00FFFFFF,&H00FFFFFF,&H00202020,&H8A1E1E1E,1,0,0,0,10
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
     lines = []
-    for t0, t1, text in events:
+    for ev in events:
+        t0, t1, text = ev[:3]
+        wav = ev[3] if len(ev) > 3 else None
         parts = _chunks(text)
+        starts = _word_starts(wav, parts, t1 - t0) if wav else None
+        if starts:  # 실제로 그 말을 하는 순간에 자막이 바뀐다 (faster-whisper 단어 시각)
+            for k, p in enumerate(parts):
+                a = t0 + starts[k]
+                b = t0 + starts[k + 1] - 0.02 if k + 1 < len(parts) else t1 + 0.15
+                lines.append(f"Dialogue: 0,{_ass_time(a)},{_ass_time(max(b, a + 0.3))},Sub,,0,0,0,,{p}")
+            continue
         tot = sum(len(p) for p in parts) or 1
         t = t0
         for p in parts:
@@ -921,7 +1016,7 @@ def make(project: Project, workers: int = 3) -> Path:
         work = adir / "hb" / f"scene_{sc['id']:03d}"
         out = adir / f"hb_{sc['id']:03d}.mp4"
         D = build_scene(project, spec, sc, bt, dur, work)
-        issues = hyper.check(work)
+        issues = D.qa + hyper.check(work)
         err = "" if out.exists() and out.stat().st_mtime > (work / "index.html").stat().st_mtime else render_scene(work, out)
         return sc["id"], D.sfx, issues, err
 
@@ -942,7 +1037,7 @@ def make(project: Project, workers: int = 3) -> Path:
         parts, t = [], 0.0
         for k, (t0, d) in enumerate(bt):
             parts.append((t0, project.dir("voice") / f"hb_{sc['id']:03d}_{k}.wav"))
-            subs.append((t_acc + t0, t_acc + t0 + d, sc["beats"][k]["say"]))
+            subs.append((t_acc + t0, t_acc + t0 + d, sc["beats"][k]["say"], project.dir("voice") / f"hb_{sc['id']:03d}_{k}.wav"))
         for name, at in results[sc["id"]][0]:
             sfx_events.append((name, t_acc + at))
         sa = work / f"a_{sc['id']:03d}.wav"

@@ -3,6 +3,9 @@
 - 올리는 파일: 05_edit/final.mp4 (없으면 draft.mp4) + 자막 subs.srt + 업로드 문구(upload.json 을 텍스트로)
 - 폴더: config/storage.yaml 의 drive.folders (채널 id → 폴더 id). 예전 프로젝트는 스타일로, 실험 프로젝트는 '실험' 폴더로.
 - 이미 올린 파일은 05_edit/drive.json 에 기록해 다시 올리지 않는다(파일이 바뀌면 크기로 알아채고 새로 올림).
+- **방법 0 (기본, 키 불필요): GitHub Release.** `upload <프로젝트> --to github` — 영상·자막·업로드 문구(+ --archive 면 자료 화면 묶음)를
+  임시 브랜치 media/<프로젝트> 로 밀어 올리면 .github/workflows/media-release.yml 이 'video-<프로젝트>' 릴리스에 붙이고 브랜치를 지운다.
+  git 자격 증명만 쓰므로 Drive 토큰이 필요 없다. 파일 하나 100MB 미만(넘으면 화질을 조금 낮춘 사본을 만든다).
 - 방법 1 (PC, 권장): config/storage.yaml 의 local_sync_dir 에 'Google Drive for desktop' 동기화 폴더를 적으면 복사만 한다.
 - 방법 2: Google Drive API 토큰(www.googleapis.com). 이 클라우드 환경에서는 네트워크 비밀값으로 저장하면 프록시가 붙여 준다.
   PC 에서는 환경변수 GOOGLE_DRIVE_TOKEN 에 OAuth 접근 토큰(scope drive.file)을 넣는다.
@@ -203,3 +206,80 @@ def archive_repo() -> None:
             parent = _folder(part, parent)
         _upload(p, p.name, "application/octet-stream", parent)
     print(f"[archive] 저장소 자료 {len(files)}개 보관")
+
+
+# ---------------------------------------------------------------- GitHub Release (키 불필요)
+LIMIT = 95 * 1024 * 1024  # git push 파일 하나 한도(100MB) 아래
+
+
+def _fit(path, work):
+    """100MB 넘는 영상은 화질을 조금 낮춘 사본으로 (해상도는 그대로)."""
+    import subprocess
+    if path.stat().st_size < LIMIT:
+        return path
+    out = work / path.name
+    for crf in (23, 26, 29):
+        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(path), "-c:v", "libx264", "-preset", "medium",
+                        "-crf", str(crf), "-c:a", "copy", str(out)], check=True)
+        if out.stat().st_size < LIMIT:
+            return out
+    raise SystemExit(f"{path.name}: 100MB 아래로 줄이지 못했습니다")
+
+
+def github_release(project: Project, with_archive: bool = False) -> str:
+    """영상·자막·업로드 문구를 GitHub Release 'video-<프로젝트>' 에 붙인다 (Actions 가 처리). 반환: 릴리스 주소."""
+    import shutil
+    import subprocess
+    import tempfile
+    from pathlib import Path
+    root = config.ROOT
+    name = project.path.name
+    edir = project.dir("edit")
+    vid = edir / "final.mp4" if (edir / "final.mp4").exists() else edir / "draft.mp4"
+    if not vid.exists():
+        raise SystemExit(f"[upload] {name}: 영상 없음")
+    work = Path(tempfile.mkdtemp(prefix="ytflow-rel-"))
+    files = [_fit(vid, work)]
+    for f in (edir / "subs.srt", edir / "subs.ass", edir / "upload.txt", project.dir("package") / "upload.txt"):
+        if f.exists():
+            files.append(f)
+    if with_archive and (project.dir("assets") / "footage").is_dir():  # 다시 받기 어려운 자료 화면 원본
+        z = shutil.make_archive(str(work / "footage"), "zip", project.dir("assets") / "footage")
+        files.append(Path(z) if Path(z).stat().st_size < LIMIT else None)
+        files = [f for f in files if f]
+    pc = config.load("pipeline")
+    notes = work / "release_notes.md"
+    up_txt = next((f for f in files if f.name == "upload.txt"), None)
+    head = up_txt.read_text(encoding="utf-8").split("\n")[0] if up_txt else name
+    notes.write_text(
+        f"## {head.replace('제목: ', '')}\n\n- 프로젝트: `projects/{name}` (기획·대본·팩트시트는 main 브랜치)\n"
+        f"- 채널: `{pc.get('channel', '')}` · 스타일: `{(pc.get('edit') or {}).get('style_ref', '')}`\n"
+        f"- 다시 만들기: `python -m ytflow hybrid {name}` (방법: AGENTS.md, skills/edit-style-hybrid)\n"
+        f"- 파일: " + ", ".join(f"`{f.name}`" for f in files) + "\n", encoding="utf-8")
+    files.append(notes)
+    # 작업 트리를 건드리지 않고(plumbing) main 위에 커밋 하나를 만들어 media/<이름> 으로 push
+    env = dict(os.environ, GIT_INDEX_FILE=str(work / "index"))
+    g = lambda *a, **k: subprocess.run(["git", *a], cwd=root, env=env, capture_output=True, text=True, check=True, **k).stdout.strip()
+    g("read-tree", "HEAD")
+    for f in files:
+        sha = g("hash-object", "-w", str(f))
+        g("update-index", "--add", "--cacheinfo", f"100644,{sha},_media/{name}/{f.name}")
+    tree = g("write-tree")
+    commit = g("commit-tree", tree, "-p", "HEAD", "-m", f"media: {name} (Actions 가 릴리스에 붙이고 이 브랜치를 지움)")
+    for k in range(4):
+        r = subprocess.run(["git", "push", "-f", "origin", f"{commit}:refs/heads/media/{name}"], cwd=root, capture_output=True, text=True)
+        if r.returncode == 0:
+            break
+        import time
+        time.sleep(2 ** (k + 1))
+    else:
+        raise SystemExit(r.stderr[-800:])
+    shutil.rmtree(work, ignore_errors=True)
+    url = subprocess.run(["git", "remote", "get-url", "origin"], cwd=root, capture_output=True, text=True).stdout.strip()
+    repo = url.rstrip("/").removesuffix(".git").split("github.com/")[-1]
+    rel = f"https://github.com/{repo}/releases/tag/video-{urllib.parse.quote(name)}"
+    rec = edir / "release.json"
+    rec.write_text(json.dumps({"release": rel, "files": [f.name for f in files], "video_bytes": files[0].stat().st_size if files[0].exists() else None},
+                              ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"[upload] GitHub Release 로 보냄 (1~2분 뒤 생성): {rel}")
+    return rel

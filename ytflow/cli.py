@@ -281,6 +281,7 @@ def main(argv: list[str] | None = None) -> None:
     up.add_argument("project", nargs="?")
     up.add_argument("--all", action="store_true", help="영상이 있는 모든 프로젝트")
     up.add_argument("--archive", action="store_true", help="영상과 함께 보관 자료(장면 소스·원본 클립·자막·시세)도 올리기")
+    up.add_argument("--to", choices=["github", "drive"], default="github", help="github(기본, 키 불필요: GitHub Release) | drive(Drive 토큰 필요)")
     sub.add_parser("schemas", help="에이전트가 직접 쓰는 파일들의 JSON Schema 를 schemas/ 에 내보내기")
     qa = sub.add_parser("qa", help="카드 화면을 렌더링해 글자·그래프 겹침과 안전 영역 침범을 점검")
     qa.add_argument("project")
@@ -348,6 +349,9 @@ def main(argv: list[str] | None = None) -> None:
         from .stages import upload
         names = [d.name for d in sorted(config.PROJECTS_DIR.iterdir()) if (d / "05_edit").is_dir()] if a.all else ([a.project] if a.project else [])
         for n in names:
+            if a.to == "github":
+                upload.github_release(Project.open(n), a.archive)
+                continue
             upload.run(Project.open(n))
             if a.archive:
                 upload.archive(Project.open(n))
