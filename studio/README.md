@@ -1,58 +1,34 @@
-# 최신 인증 상태
+# 반복 콘텐츠 제작 스튜디오
 
-Windows 작업 PC에서 Google OAuth 연결과 실제 ai실전노트 채널 조회를 확인했습니다. 인증 정보는 PC에만 있습니다. 실제 영상 전송·예약 실행은 아직 하지 않았습니다. 아래 초기 미연결 상태 기록보다 channels/ai/channel.json의 연결 상태가 우선합니다.
-
-# 실제 작업과 콘텐츠 연결
-
-AI 채널은 사용자의 실제 일에 AI를 적용하고, 산출물·검사·시행착오에서 영상을 만듭니다. work-cases/README.md가 최신 제작 기준입니다. 조사 글은 적용 후보를 고르는 입력이며, 실제 사용 여부를 대신하지 않습니다.
-
-# 최신 운영 결정
-
-AI 실전노트 개설·운영 요청을 받았으며 새 Google 계정을 사용자가 직접 만들기로 했습니다. channels/ai/launch/README.md가 최신 연결·운영 안내입니다. 계정·OAuth 미연결이고 예약 등록은 15/15 한도로 실패했습니다. 퀴즈 채널은 보류합니다. 아래 초기 설계의 샘플 검토 단계보다 이 결정이 우선합니다.
-
-# 반복 제작 스튜디오
-
-한 번 만들고 끝내는 영상이 아니라, 조사·글·대본·시각화를 반복하는 프로젝트다. 글로 답하던 정보 탐색을 검증된 콘텐츠로 정리하고 채널과 길이에 맞춰 영상화한다.
+최신 제작 기준과 실행 순서는 [SHORTS-WORKFLOW.md](SHORTS-WORKFLOW.md)다. 승인된 시각 안내형 1.1.0 디자인을 데이터 입력으로 재사용하는 1.1.1 / ShortsGuideTemplate이 기본이다.
 
 ```text
-공식 소스·커뮤니티 탐색 → 조사 원장 → 안내문/분석 글
-                                    ├─ 쇼츠: 질문 하나 → 짧은 안내 → 적용 예시
-                                    └─ 롱폼: 주장 → 근거 → 사례 → 반론 → 판단
-                                              ↓
-                              대본 → 장면 → 고정 음성 → 자막 → MP4 → 검수
+실제 업무 → AI 적용과 증거 → 출처·조사 글 → production-brief
+                                           ↓
+                         고정 음성 → 단어별 시간 → props → MP4
+                                           ↓
+                       장면·자막·음량 검수 → Git/Drive 보관
+                                           ↓
+                               별도 게시 검수 → YouTube
 ```
 
-| 경로 | 역할 |
+| 경로 | 책임 |
 |---|---|
-| channels/ai, channels/quiz (저장소 루트) | 채널 정체성·고정 보이스·편별 기록 |
-| content/topics (저장소 루트) | 재사용할 출처·조사·글 |
-| styles (저장소 루트) | 채널과 독립된 편집 규칙 |
-| studio/prompts | 조사 글을 대본과 화면으로 바꾸는 지시문 |
-| studio/renderer | 기존 Remotion 영상 소스와 자막 |
-| studio/automation | 큐·고정 음성 검사·렌더·파일 QA |
-| scripts/content_studio.py | 채널·주제·스타일로 다음 제작 폴더 생성 |
+| channels/ai/channel.json | 채널 ID·고정 음성·현재 스타일 |
+| styles/shorts-ai-guide/profile.json | 활성 버전·공통 렌더 구성 |
+| studio/templates/shorts | 새 편 제작 양식 |
+| schemas/shorts-production-brief.schema.json | 입력 데이터 규격 |
+| channels/ai/episodes/<편>/revisions/<버전> | 수정본 입력·음성 상태·검수·보관 위치 |
+| content/topics | 공식 출처·조사 글·안내문 |
+| work-cases | 실제 업무와 실행 증거·미완료 범위 |
+| scripts/prepare_visual_short.py | 원고 추출·음성/타이밍 검증·props 준비 |
+| scripts/render_short.py | 버전별 고정 입력 검사·MP4 출력 |
+| .github/workflows/content-studio.yml | 구성 일치·코드·정책 검사. 유료 음성 생성/게시 아님 |
 
-## 새 영상 시작
+신규 AI 편은 실제 작업 사례가 필요하다. 예전 소개 샘플 재편집은 실행 사례로 소급하지 않는다. AI Shorts 목표는 하루 3편이지만 무인 정기 작업은 아직 비활성이다. 퀴즈는 보류했고 롱폼 렌더러와 빈도는 미완성이다.
 
-```bash
-python scripts/content_studio.py work-case --id example-work
-python scripts/content_studio.py new --channel ai --topic example-tool --episode ai-004 --style shorts-ai-guide --work-case example-work
-python scripts/content_studio.py new --channel ai --topic example-tool --episode ai-long-001 --style longform-ai-column --work-case example-work
-python scripts/content_studio.py inventory
-```
+Windows 작업 PC의 Google OAuth와 실제 ai실전노트 채널 ID 조회는 확인했다. 인증 정보는 PC의 무시된 로컬 폴더에만 있다. 실제 업로드·예약 공개·주기적 제작은 별도 검증 대상이다. 예약 작업 생성은 이전에 15/15 한도로 실패했으며 이번 문서 갱신으로 등록되지 않는다.
 
-두 번째 명령은 같은 조사 글을 재사용한다. 이미 있는 글이나 영상 기록을 덮어쓰지 않는다. 생성 명령은 작업 문서만 만들며 대본 작성·유료 음성·렌더·예약·업로드를 자동 실행하지 않는다.
+001·002 최신 화면은 고정 ElevenLabs 음성 생성 혼잡으로 무음 검토본이다. 과금·TTS 대체는 없었다. 003은 기존 고정 음성, 005·006은 승인된 수정본을 유지한다. 이전 영상·작업 초안은 덮어쓰지 않는다.
 
-## 권한과 현재 상태
-
-계정·업로드·자동 정기 실행은 샘플 피드백 전 보류. 목표는 채널별 하루 3편이며 롱폼 3편/일이라는 뜻은 아니다. 롱폼은 제작 형식으로 추가했고 빈도는 미정이다. 퀴즈 대상과 학습/오락 방향은 미확정이다.
-
-소스 탐색부터 새 영상까지 무인 제작하는 연결은 미완성이다. 독립적으로 실행 가능한 기존 큐/QA와 Remotion 코드를 정리했으며, 전체 운영 상태는 automation/README.md와 docs/06-ai-production-audit.md를 본다.
-
-기존 ytflow는 별도 제작 경로다. 기존 전역 TTS 설정을 이 두 채널에 그대로 적용하지 않는다. 새 채널은 channels/<id>/channel.json의 고정 보이스를 따르고, 자동 생성 연결 전까지 다른 경로로 우회 실행하지 않는다.
-
-## 복구와 미디어
-
-소스·대본·기획·검수 기록은 Git에, MP4·음성·자료 이미지는 로컬/외부 아티팩트 저장소에 둔다. 각 편 episode.json과 renderer/assets-index.json에 파일명·체크섬을 기록했다. 이번 정리는 MP4를 GitHub에 업로드하거나 외부 저장소를 새로 연결한 것이 아니다.
-
-기존 작업 원본은 /workspace/ai-radar-short와 /workspace/shorts-automation에 남아 있다. 새 체크아웃에서 미디어를 복구한 뒤 npm ci로 의존성을 설치한다. 의존성·미디어가 없는 fresh clone에서 바로 렌더된다고 주장하지 않는다.
+소스·글·입력·검수는 Git에, 미디어·DB·로그·인증은 로컬/외부에 둔다. 기존 Drive 보관 폴더를 사용하며 업로드 후 메타데이터로 확인한다. 기존 ytflow의 다른 채널·전역 TTS 설정과 현재 스튜디오를 혼동하지 않는다.

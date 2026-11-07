@@ -1,3 +1,5 @@
+import {ShortsGuideTemplate} from './template/ShortsGuideTemplate';
+import genericExample from '../../../channels/ai/episodes/003-xlsx/revisions/visual-v2/props.json';
 import {ShortsGuideV2} from './template/ShortsGuideV2';
 import visual005 from '../../../channels/ai/episodes/005-remotion/revisions/visual-v2/props.json';
 import visual006 from '../../../channels/ai/episodes/006-whisper/revisions/visual-v2/props.json';
@@ -26,6 +28,7 @@ import {Install} from './Install';
 import {Limit} from './Limit';
 import {Closing} from './Closing';
 export const Root=()=> <>
+<Composition id="ShortsGuideTemplate" component={ShortsGuideTemplate} defaultProps={genericExample} calculateMetadata={({props})=>({durationInFrames:props.scenes.reduce((n,s)=>n+s.frames,0)})} durationInFrames={1500} fps={30} width={1080} height={1920}/>
 <Composition id="ShortsGuideV2" component={ShortsGuideV2} defaultProps={visual005} calculateMetadata={({props})=>({durationInFrames:props.scenes.reduce((n,s)=>n+s.frames,0)})} durationInFrames={1376} fps={30} width={1080} height={1920}/>
 <Composition id="WhisperVisualGuide" component={ShortsGuideV2} defaultProps={visual006} durationInFrames={1496} fps={30} width={1080} height={1920}/>
 <Composition id="ShortsGuideV1" component={ShortsGuideV1} defaultProps={referenceProps} calculateMetadata={({props})=>({durationInFrames:props.scenes.reduce((total,scene)=>total+scene.frames,0)})} durationInFrames={1500} fps={30} width={1080} height={1920} />

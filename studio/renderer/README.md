@@ -1,19 +1,24 @@
-# 최신 기본: 시각 안내형 1.1.0
+# AI 실전노트 영상 렌더러
 
-날짜·회차를 영상에서 숨기고 파일·요청·결과를 화면으로 보여주는 ShortsGuideV2가 기본이다. 005/006 revisions/visual-v2/README.md의 재출력 명령을 사용한다. 기존 1.0.0 구성은 이전 영상 재현용으로 남긴다.
+현재 기본은 **ShortsGuideTemplate / 1.1.1**이다. 승인된 시각 안내형 디자인에 파일·요청문·표·슬라이드·흐름·결과 확인 데이터를 넣는다. 날짜·상단 회차는 표시하지 않는다. 음성은 channels/ai/channel.json의 ElevenLabs Han Aim / eleven_v4로 고정한다.
 
-# AI 실전노트 Remotion 소스
-
-기존 AI 3편과 퀴즈 2편의 React 구성·자막을 보관한다. 현재 파일은 편별로 작성한 샘플이며 새 대본을 자동으로 넣는 공통 렌더러로 완성된 것은 아니다.
+제작 양식과 전체 명령은 ../SHORTS-WORKFLOW.md를 따른다. production-brief → 고정 음성/단어별 시간 → props → MP4 순서다. 원본 자료와 설명용 예시는 구분한다.
 
 ```bash
-cd studio/renderer
 npm ci
 npm run typecheck
-npx remotion studio src/index.ts
-npx remotion render src/index.ts AIRadar003 out/AI-Shorts-003-raw.mp4 --codec=h264 --browser-executable=/usr/bin/chromium --concurrency=2
+npx remotion studio src/index.ts --no-open
 ```
 
-Chromium 경로는 실행 호스트에 맞게 조정한다. 렌더 전 assets-index.json의 미디어를 public/에 복원해야 한다. public/README.md 참고. 과거 음성·효과음이 필요한 구형 구성은 이력으로 남겼으며 현재 고정 보이스 정책을 통과하지 못한다. 최신 AIRadar003은 ElevenLabs Han Aim 음성 파일을 사용한다.
+저장소 루트에서 실제 입력을 검증하고 렌더한다.
 
-실제 도구 조작 화면이 없는 장면은 설명용 그래픽이다. 고정 음성을 설정한다고 기존 MP4의 음성이 바뀌지 않는다. 새 제작 시 채널 설정을 확인하고 음성을 생성한 다음 타이밍에 맞게 장면·자막을 조정한다.
+```bash
+python scripts/render_short.py --props channels/ai/episodes/003-xlsx/revisions/visual-v2/props.json --check-only
+python scripts/render_short.py --props channels/ai/episodes/003-xlsx/revisions/visual-v2/props.json --out studio/renderer/out/AI-Shorts-003-XLSX-Visual-v2.mp4
+```
+
+미디어는 assets-index.json과 각 편 archive.json에 따라 Drive 보관본에서 복원한다. Chromium이 PATH에 없으면 --browser로 경로를 전달한다. Windows는 PYTHONUTF8=1을 사용한다. 비밀정보와 node_modules는 Git에 넣지 않는다.
+
+001·002의 최신 화면은 고정 음성 생성 혼잡으로 무음 미리보기다. `--silent-preview`와 PREVIEW 파일명이 필요하며 최종 음성 영상으로 게시할 수 없다. 003은 기존 고정 음성을 재사용한다. 005·006의 승인된 1.1.0 입력은 그대로 재현할 수 있다.
+
+1.0.0 / ShortsGuideV1, 1.1.0 / ShortsGuideV2와 과거 편별 구성은 이력이다. 새 편의 기본으로 고르지 않는다. 전체 정기 제작과 롱폼 렌더러가 완성됐다는 뜻은 아니다.

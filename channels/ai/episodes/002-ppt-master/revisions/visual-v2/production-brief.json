@@ -1,0 +1,236 @@
+{
+  "schema_version": 1,
+  "episode": "002",
+  "channel": "ai",
+  "title": "수정 가능한 PPT 받는 요청법",
+  "content_mode": "historical_illustrative_refresh",
+  "work_case_ref": "work-cases/shorts-retrofit-001-003/case.json",
+  "source_label": "PPT Master 공식 저장소 · 설명용 예시",
+  "source_urls": [
+    "https://github.com/hugohe3/ppt-master"
+  ],
+  "source_checked_at": "2026-11-07",
+  "target_seconds": 51,
+  "editorial_reviewed": true,
+  "core_task": {
+    "input": "프로젝트 폴더에 넣을 짧은 문서",
+    "action": "AI 코딩 도구에 편집 가능한 PPTX 생성 요청",
+    "output": "PowerPoint에서 개체를 직접 편집할 PPTX"
+  },
+  "voice": {
+    "status": "blocked_provider_busy",
+    "asset": "",
+    "metadata_ref": "channels/ai/episodes/002-ppt-master/revisions/visual-v2/voice-status.json"
+  },
+  "scenes": [
+    {
+      "visual": "slides",
+      "step": "발표 자료의 문제",
+      "titleLines": [
+        "PPT 글자 수정",
+        "왜 안 될까요?"
+      ],
+      "action": "이미지 한 장인지 텍스트 개체인지 확인",
+      "visual_data": {
+        "heading": "수정이 어려운 경우 · 설명용 예시",
+        "slideTitle": "프로젝트 제안",
+        "slideBody": [
+          "배경과 문제",
+          "실행 방법",
+          "기대 결과"
+        ],
+        "editable": false,
+        "note": "전체가 그림이면 글자만 바꾸기 어려움"
+      },
+      "items": [
+        "입력 자료 확인",
+        "구체적인 작업 요청",
+        "결과 파일 직접 확인"
+      ],
+      "dark": false,
+      "id": "1",
+      "narration": "에이아이가 만든 피피티, 그림 한 장이라 수정이 막히나요?"
+    },
+    {
+      "visual": "flow",
+      "step": "기능 · PPT Master",
+      "titleLines": [
+        "문서에서",
+        "수정 가능한 PPT"
+      ],
+      "action": "결과 파일 형식을 PPTX로 명시",
+      "visual_data": {
+        "nodes": [
+          {
+            "label": "문서 또는 발표 주제",
+            "kind": "file"
+          },
+          {
+            "label": "AI 코딩 도구 + 프로젝트",
+            "kind": "folder"
+          },
+          {
+            "label": "수정 가능한 .pptx",
+            "kind": "file"
+          }
+        ],
+        "note": "결과물은 PowerPoint에서 직접 확인"
+      },
+      "items": [
+        "입력 자료 확인",
+        "구체적인 작업 요청",
+        "결과 파일 직접 확인"
+      ],
+      "dark": false,
+      "id": "2",
+      "narration": "피피티 마스터는 문서와 주제를 발표 자료로 만드는 공개 프로젝트입니다. 핵심은, 파워포인트에서 직접 고칠 수 있는 결과물을 받는 거예요."
+    },
+    {
+      "visual": "files",
+      "step": "활용 1 · 준비",
+      "titleLines": [
+        "프로젝트 폴더에",
+        "문서 넣기"
+      ],
+      "action": "AI 코딩 도구에서 프로젝트 폴더 열기",
+      "visual_data": {
+        "heading": "PPT Master 프로젝트 · 구조 예시",
+        "folder": "내 발표 자료 프로젝트",
+        "files": [
+          {
+            "name": "발표할_문서.docx",
+            "kind": "file"
+          },
+          {
+            "name": "발표 대상과 목적.txt",
+            "kind": "file"
+          },
+          {
+            "name": "공식 작업 지침",
+            "kind": "folder"
+          }
+        ],
+        "note": "설치·모델 연결은 공식 안내대로 준비"
+      },
+      "items": [
+        "입력 자료 확인",
+        "구체적인 작업 요청",
+        "결과 파일 직접 확인"
+      ],
+      "dark": false,
+      "id": "3",
+      "narration": "먼저 공식 안내대로 준비한 프로젝트 폴더에 문서를 넣으세요."
+    },
+    {
+      "visual": "prompt",
+      "step": "활용 2 · 복사할 요청문",
+      "titleLines": [
+        "수정 가능하게",
+        "이렇게 요청"
+      ],
+      "action": "장수·텍스트 편집 가능·파일 형식 명시",
+      "visual_data": {
+        "lines": [
+          "이 문서를 발표용 5장으로 만들어 줘.",
+          "제목·본문은 수정 가능한 텍스트로.",
+          "완성 파일은 .pptx로 내보내 줘."
+        ]
+      },
+      "items": [
+        "입력 자료 확인",
+        "구체적인 작업 요청",
+        "결과 파일 직접 확인"
+      ],
+      "dark": false,
+      "id": "4",
+      "narration": "그리고 에이아이 코딩 도구에 이렇게 요청하세요. 이 문서를 발표용 다섯 장으로 만들고, 제목과 본문은 수정 가능한 텍스트로 구성해 줘."
+    },
+    {
+      "visual": "slides",
+      "step": "활용 3 · 직접 편집",
+      "titleLines": [
+        "제목을 클릭해",
+        "직접 바꿔 보세요"
+      ],
+      "action": "글자 개체가 따로 선택되는지 확인",
+      "visual_data": {
+        "heading": "편집 가능한 결과 형태 · 재구성",
+        "slideTitle": "제목을 바꿔 보세요",
+        "slideBody": [
+          "텍스트 개체 선택",
+          "제목 직접 입력",
+          "도형은 별도로 이동"
+        ],
+        "editable": true,
+        "note": "실제 서비스 조작 녹화가 아닌 편집 도식"
+      },
+      "items": [
+        "입력 자료 확인",
+        "구체적인 작업 요청",
+        "결과 파일 직접 확인"
+      ],
+      "dark": false,
+      "id": "5",
+      "narration": "완성된 피피티엑스를 파워포인트로 열고, 제목을 눌러 직접 바꿔 보세요."
+    },
+    {
+      "visual": "check",
+      "step": "결과 검사",
+      "titleLines": [
+        "예쁜 것만 말고",
+        "편집도 확인"
+      ],
+      "action": "원문과 결과 파일을 나란히 대조",
+      "visual_data": {
+        "checks": [
+          "제목과 본문을 각각 선택",
+          "도형과 차트를 따로 선택",
+          "원문에서 빠진 내용 확인"
+        ],
+        "note": "슬라이드 전체가 이미지인지도 확인"
+      },
+      "items": [
+        "입력 자료 확인",
+        "구체적인 작업 요청",
+        "결과 파일 직접 확인"
+      ],
+      "dark": false,
+      "id": "6",
+      "narration": "글자와 도형이 따로 선택되는지, 원문 내용이 빠지지 않았는지도 확인합니다."
+    },
+    {
+      "visual": "flow",
+      "step": "오늘의 적용",
+      "titleLines": [
+        "문서 한 장으로",
+        "먼저 시험하세요"
+      ],
+      "action": "설치·AI 모델 비용은 별도 확인",
+      "visual_data": {
+        "nodes": [
+          {
+            "label": "짧은 문서 한 장",
+            "kind": "file"
+          },
+          {
+            "label": "발표 자료 생성 요청",
+            "kind": "folder"
+          },
+          {
+            "label": "PPTX를 직접 열어 검수",
+            "kind": "file"
+          }
+        ],
+        "note": "결과 품질·완성도는 환경에 따라 다름"
+      },
+      "items": [
+        "입력 자료 확인",
+        "구체적인 작업 요청",
+        "결과 파일 직접 확인"
+      ],
+      "dark": false,
+      "id": "7",
+      "narration": "결과 품질은 모델과 자료에 따라 달라져요. 처음에는 짧은 문서 한 장으로 시작해 보세요."
+    }
+  ]
+}

@@ -1,19 +1,19 @@
 ---
 name: content-studio
-description: 채널별 조사 글에서 쇼츠 안내형과 롱폼 칼럼형 영상을 반복 제작할 때 사용한다.
+description: 채널별 실제 작업과 조사 자료를 반복 가능한 시각 안내 쇼츠·롱폼으로 만들 때 사용한다.
 ---
 
 # 채널 콘텐츠 반복 제작
 
-1. studio/README.md, channels/<id>/channel.json, 선택한 styles/<id>/STYLE.md를 읽는다.
-2. scripts/content_studio.py inventory로 이전 소재·편을 확인한다. 같은 조사 원장은 재사용하고 영상 중복은 피한다.
-3. AI 채널은 work-cases/README.md를 읽고 사용자의 실제 작업·완료 기준을 먼저 정한다. AI 도구를 적용해 실제 산출물과 증거를 남긴 뒤 공개할 범위를 정리한다. work-case 명령으로 원장을 만들고 new --work-case로 편별 작업 문서를 만든다. 기존 파일을 덮어쓰지 않는다.
-4. content/topics/<topic>/sources.json → research.md → article.md 순으로 출처와 글을 정리한다. studio/prompts를 따른다.
-5. 쇼츠는 간단한 주제 하나의 안내, 롱폼은 주장·근거·사례·반론을 갖춘 칼럼으로 대본화한다. 쇼츠에 장문용 비유·사례 개수를 억지로 맞추지 않는다.
-6. 실제 화면·도식·자막으로 장면을 구성하고 채널 고정 보이스를 확인한다. 보이스 실패 시 다른 TTS로 대체하지 않는다.
-7. 현재 자동 생성 연결과 롱폼 렌더러는 미완성이다. 사용할 수 있는 도구로 작업하되 미구현 구간을 완료라고 기록하지 않는다.
-8. AI 채널은 개설·운영 요청을 받았다. channels/ai/launch/README.md를 따라 연결하되 실제 계정·OAuth가 없으면 게시하지 않는다. 퀴즈는 보류한다. 결과와 남은 작업을 episode의 review.md에 기록한다.
+제작 절차·입력 양식의 단일 기준은 `studio/SHORTS-WORKFLOW.md`다. 먼저 읽고, 현재 채널 설정은 `channels/<id>/channel.json`, 스타일은 `styles/<id>/profile.json`과 버전 lock에서 확인한다.
 
-기존 ytflow와 이 스튜디오의 채널 설정을 혼동하지 않는다. 현재 채널에는 channel.json의 고정 음성 정책이 우선한다.
+1. `content_studio.py inventory`로 이전 편을 확인한다. 신규 AI 편은 실제 업무와 완료 기준을 정하고 work-case를 실행해 증거를 남긴다. 조사한 기능을 직접 실행한 경험으로 바꾸지 않는다. 예전 소개 샘플의 재편집은 `historical_illustrative_refresh`로 구분한다.
+2. 공식 출처를 확인하고 sources → research → article → 짧은 대본 순으로 정리한다. 숫자·인기·성과는 출처나 측정이 있을 때만 말한다.
+3. 새 편 생성기가 만드는 production-brief.json에 입력·행동·결과, 장면별 내레이션과 visual_data를 채운다. 쇼츠는 질문 하나다. 글 전체를 줄여 읽지 않는다.
+4. 기본은 1.1.1 / ShortsGuideTemplate이다. 승인된 1.1.0의 시각 디자인을 유지한 데이터 입력형 패치다. 날짜·상단 회차를 표시하지 않는다. 파일·표·편집 예시·요청문·실제 결과로 행동을 보여주고, 설명용 재구성을 실제 UI 녹화로 표시하지 않는다.
+5. 채널 고정 ElevenLabs 음성을 사용한다. 동일 대본의 기존 음성이 있으면 재사용한다. 실패·혼잡이면 다른 TTS로 바꾸지 않는다. 명시적인 무음 미리보기만 가능하며 PREVIEW 파일명·화면 표기를 넣고 최종 게시와 분리한다.
+6. 원고 추출 → 고정 음성 → 로컬 단어별 인식 → props 준비 → 고정 입력 검사 → MP4 순으로 작업한다. 자동 정렬이 불확실하면 start_ms를 직접 검수한다.
+7. MP4 전체 디코딩, 모든 장면 중간/끝, 글자 잘림·자막·음량을 확인한다. 직접 청취 여부와 남은 일을 review.md 및 REPORT.md에 기록한다. 소스는 Git, 미디어는 기존 Drive 보관 폴더에 두고 업로드 후 읽어 확인한다.
+8. 실제 YouTube 연결은 Windows에서 확인됐다. 인증 파일은 PC에만 있다. 게시·예약·정기 실행은 제작과 구분하며 미완성을 성공으로 표시하지 않는다. 퀴즈는 보류 상태다.
 
-AI 쇼츠 신규·수정 제작은 shorts-ai-guide 1.1.0 / ShortsGuideV2를 기본으로 사용한다. styles/shorts-ai-guide/versions/1.1.0/README.md와 style-lock.json을 읽는다. 화면 날짜·회차는 표시하지 않고, 입력·행동·결과를 구체적인 자료로 보여준다. 고정 음성은 유지한다. 과거 1.0.0 구성은 재현용으로 보존한다. 디자인 변경은 새 버전으로 기록하고 scripts/render_short.py --check-only로 폰트와 입력을 검사한다.
+이전 1.0.0 / 1.1.0 입력과 미디어는 재현용으로 보존한다. 새 디자인은 새 버전으로 기록한다. 원본 스킬만 고친 뒤 scripts/sync_skills.py로 두 에이전트용 복사본을 동기화한다. 전역 legacy Edge TTS 설정을 현재 AI 채널에 적용하지 않는다.

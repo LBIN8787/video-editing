@@ -1,3 +1,5 @@
+반복 쇼츠 제작의 최신 기준: [제작 양식·워크플로우](studio/SHORTS-WORKFLOW.md). 날짜·회차 없는 시각 안내형, 고정 ElevenLabs 음성, 입력→행동→결과 예시를 사용합니다.
+
 # 영상편집 — ytflow
 
 > **Claude·Codex 운영/보관 차이 점검:** [2026-11-07 비교와 통합 위치 안내](docs/audits/2026-11-07-production-alignment/README.md). main과 스튜디오 브랜치는 아직 미통합이며 채널·보이스·업로드 명령의 차이를 확인한 뒤 실행하세요.

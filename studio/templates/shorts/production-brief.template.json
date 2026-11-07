@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "episode": "ai-007",
+  "channel": "ai",
+  "title": "작업 하나를 해결하는 방법",
+  "content_mode": "applied_work",
+  "work_case_ref": "work-cases/실제-작업-id/case.json",
+  "source_label": "공식 문서 · 실제 적용 기록",
+  "source_urls": [],
+  "source_checked_at": "",
+  "target_seconds": 50,
+  "editorial_reviewed": false,
+  "core_task": {"input": "준비할 파일", "action": "어디에 무엇을 입력할지", "output": "확인할 결과 파일"},
+  "voice": {"status": "pending", "asset": "", "metadata_ref": ""},
+  "scenes": [
+    {"id": "input", "narration": "", "step": "준비", "titleLines": ["이 파일부터", "준비하세요"], "visual": "files", "visual_data": {"heading": "준비할 파일", "folder": "작업 프로젝트", "files": [{"name": "작업할_파일", "kind": "file"}], "note": "원본 복사본으로 시작"}, "action": "작업 환경을 열고 파일 준비", "items": ["입력 파일 준비"], "dark": false},
+    {"id": "request", "narration": "", "step": "요청", "titleLines": ["이 문장으로", "요청하세요"], "visual": "prompt", "visual_data": {"lines": ["파일과 처리 기준을 구체적으로 요청"]}, "action": "요청문을 붙여 넣고 실행", "items": ["구체적인 작업 요청"], "dark": false},
+    {"id": "check", "narration": "", "step": "결과 확인", "titleLines": ["결과 파일에서", "직접 확인"], "visual": "check", "visual_data": {"checks": ["원본과 결과 대조", "오류와 누락 확인", "실제 작업에 적용"]}, "action": "파일을 열어 결과 검수", "items": ["결과 파일 확인"], "dark": false}
+  ]
+}

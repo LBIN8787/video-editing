@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "shorts-production-brief.schema.json",
+  "title": "AI Shorts production brief",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "episode",
+    "channel",
+    "title",
+    "content_mode",
+    "work_case_ref",
+    "source_label",
+    "source_urls",
+    "source_checked_at",
+    "target_seconds",
+    "editorial_reviewed",
+    "core_task",
+    "voice",
+    "scenes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "episode": {
+      "type": "string"
+    },
+    "channel": {
+      "const": "ai"
+    },
+    "title": {
+      "type": "string"
+    },
+    "content_mode": {
+      "enum": [
+        "applied_work",
+        "historical_illustrative_refresh"
+      ]
+    },
+    "work_case_ref": {
+      "type": "string"
+    },
+    "source_label": {
+      "type": "string"
+    },
+    "source_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_checked_at": {
+      "type": "string"
+    },
+    "target_seconds": {
+      "type": "number",
+      "minimum": 10,
+      "maximum": 60
+    },
+    "editorial_reviewed": {
+      "type": "boolean"
+    },
+    "core_task": {
+      "type": "object"
+    },
+    "voice": {
+      "type": "object"
+    },
+    "scenes": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 9,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "narration",
+          "step",
+          "titleLines",
+          "visual",
+          "visual_data",
+          "action",
+          "items",
+          "dark"
+        ],
+        "properties": {
+          "visual": {
+            "enum": [
+              "flow",
+              "files",
+              "prompt",
+              "commands",
+              "browser",
+              "table",
+              "slides",
+              "image",
+              "check"
+            ]
+          },
+          "visual_data": {
+            "type": "object"
+          },
+          "narration": {
+            "type": "string"
+          },
+          "start_ms": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "episode": "001",
+  "channel": "ai",
+  "title": "소식 조사, 주제 하나로 시작하기",
+  "content_mode": "historical_illustrative_refresh",
+  "work_case_ref": "work-cases/shorts-retrofit-001-003/case.json",
+  "source_label": "last30days 공식 저장소 · 설명용 예시",
+  "source_urls": [
+    "https://github.com/mvanhorn/last30days-skill"
+  ],
+  "source_checked_at": "2026-11-07",
+  "target_seconds": 48,
+  "editorial_reviewed": true,
+  "core_task": {
+    "input": "내 작업에 필요한 조사 주제 하나",
+    "action": "Claude Code에서 스킬 설치 후 주제와 비교 기준 입력",
+    "output": "출처를 확인하고 시험할 도구 후보"
+  },
+  "voice": {
+    "status": "blocked_provider_busy",
+    "asset": "",
+    "metadata_ref": "channels/ai/episodes/001-last30days/revisions/visual-v2/voice-status.json"
+  },
+  "scenes": [
+    {
+      "visual": "browser",
+      "step": "흩어진 조사 자료",
+      "titleLines": [
+        "탭은 늘고",
+        "정리는 안 되나요?"
+      ],
+      "action": "조사할 질문을 하나로 좁히기",
+      "visual_data": {
+        "heading": "탭이 흩어진 상태 · 설명용 예시",
+        "query": "PPT AI 도구",
+        "results": [
+          {
+            "title": "공식 기능 안내",
+            "detail": "기능과 지원 조건을 따로 찾고"
+          },
+          {
+            "title": "커뮤니티 사용 후기",
+            "detail": "실제 경험과 광고를 구분하고"
+          },
+          {
+            "title": "가격과 연결 조건",
+            "detail": "내 환경에서 가능한지 확인"
+          }
+        ]
+      },
+      "items": [
+        "입력 자료 확인",
+        "구체적인 작업 요청",
+        "결과 파일 직접 확인"
+      ],
+      "dark": false,
+      "id": "1",
+      "narration": "에이아이 소식 조사, 탭만 계속 늘어나나요?"
+    },
+    {
+      "visual": "flow",
+      "step": "기능 · last30days",
+      "titleLines": [
+        "최근 자료를",
+        "주제별로 조사"
+      ],
+      "action": "출처와 함께 정리된 조사 초안 받기",
+      "visual_data": {
+        "nodes": [
+          {
+            "label": "조사할 질문 한 가지",
+            "kind": "file"
+          },
+          {
+            "label": "최근 반응과 자료 탐색",
+            "kind": "folder"
+          },
+          {
+            "label": "출처가 붙은 조사 정리",
+            "kind": "file"
+          }
+        ],
+        "note": "인기 순위 보장이 아닌 조사 도구"
+      },
+      "items": [
+        "입력 자료 확인",
+        "구체적인 작업 요청",
+        "결과 파일 직접 확인"
+      ],
+      "dark": false,
+      "id": "2",
+      "narration": "라스트 써티 데이즈는 최근 반응과 자료를 모아 주제별로 조사하는 공개 스킬입니다."
+    },
+    {
+      "visual": "commands",
+      "step": "활용 1 · 설치와 호출",
+      "titleLines": [
+        "설치 후",
+        "주제 한 가지 입력"
+      ],
+      "action": "Claude Code 채팅에서 공식 명령 사용",
+      "visual_data": {
+        "heading": "Claude Code · 공식 README 명령",
+        "lines": [
+          "/plugin marketplace add mvanhorn/last30days-skill",
+          "/plugin install last30days",
+          "/last30days PPT AI 도구"
+        ],
+        "note": "사용 환경·연결 조건은 공식 안내에서 확인"
+      },
+      "items": [
+        "입력 자료 확인",
+        "구체적인 작업 요청",
+        "결과 파일 직접 확인"
+      ],
+      "dark": false,
+      "id": "3",
+      "narration": "활용법은 이렇게요. 클로드 코드에서 공식 안내대로 스킬을 설치한 뒤, 조사할 주제를 한 가지 넣으세요."
+    },
+    {
+      "visual": "prompt",
+      "step": "활용 2 · 복사할 요청문",
+      "titleLines": [
+        "이 질문부터",
+        "넣어 보세요"
+      ],
+      "action": "비교 기준과 원문 출처를 함께 요청",
+      "visual_data": {
+        "lines": [
+          "최근 한 달 PPT AI 도구를 비교해 줘.",
+          "실제 사용 후기와 원문 링크를 붙여 줘.",
+          "내 영상 제작에 쓸 기준으로 정리해 줘."
+        ]
+      },
+      "items": [
+        "입력 자료 확인",
+        "구체적인 작업 요청",
+        "결과 파일 직접 확인"
+      ],
+      "dark": false,
+      "id": "4",
+      "narration": "예를 들면, 최근 한 달 피피티 에이아이 도구를 비교하고, 실제 사용 후기와 출처를 정리해 줘."
+    },
+    {
+      "visual": "browser",
+      "step": "활용 3 · 출처 확인",
+      "titleLines": [
+        "결과의 링크를",
+        "직접 열어 확인"
+      ],
+      "action": "작성자·작성일·광고 여부를 원문 대조",
+      "visual_data": {
+        "heading": "정리 결과에서 확인할 항목 · 예시",
+        "query": "내 작업에 쓸 PPT AI 도구",
+        "results": [
+          {
+            "title": "공식 기능 설명 →",
+            "detail": "지금도 지원하는 기능인지 확인"
+          },
+          {
+            "title": "실제 사용 후기 원문 →",
+            "detail": "누가 어떤 상황에서 사용했는지"
+          },
+          {
+            "title": "작성일·광고 표시 →",
+            "detail": "오래된 정보와 홍보를 구분"
+          }
+        ],
+        "note": "화면은 결과 형식을 보여주는 예시"
+      },
+      "items": [
+        "입력 자료 확인",
+        "구체적인 작업 요청",
+        "결과 파일 직접 확인"
+      ],
+      "dark": false,
+      "id": "5",
+      "narration": "결과를 받으면 도구 이름만 읽지 말고, 출처 링크를 열어 보세요. 누가 언제 쓴 글인지, 광고인지 실제 후기인지 확인하는 겁니다."
+    },
+    {
+      "visual": "check",
+      "step": "실행 조건",
+      "titleLines": [
+        "연결과 비용을",
+        "먼저 확인"
+      ],
+      "action": "소스별 연결·요금은 같지 않음",
+      "visual_data": {
+        "checks": [
+          "사용할 소스의 연결 상태",
+          "API·계정 등 준비 조건",
+          "무료 범위와 추가 요금"
+        ],
+        "note": "접근할 수 없는 소스는 결과에서 제외"
+      },
+      "items": [
+        "입력 자료 확인",
+        "구체적인 작업 요청",
+        "결과 파일 직접 확인"
+      ],
+      "dark": false,
+      "id": "6",
+      "narration": "엑스나 다른 소스는 별도 연결과 요금이 필요할 수 있어요."
+    },
+    {
+      "visual": "flow",
+      "step": "오늘의 적용",
+      "titleLines": [
+        "조사에서 끝내지",
+        "말고 하나 시험"
+      ],
+      "action": "실제 적용 결과를 작업 기록으로 남기기",
+      "visual_data": {
+        "nodes": [
+          {
+            "label": "내 작업 질문 하나",
+            "kind": "file"
+          },
+          {
+            "label": "후보 도구 하나 시험",
+            "kind": "folder"
+          },
+          {
+            "label": "결과·한계를 기록",
+            "kind": "file"
+          }
+        ],
+        "note": "조회수·성과 상승은 보장하지 않음"
+      },
+      "items": [
+        "입력 자료 확인",
+        "구체적인 작업 요청",
+        "결과 파일 직접 확인"
+      ],
+      "dark": false,
+      "id": "7",
+      "narration": "처음엔 내 작업에 쓸 주제 하나만. 조사 결과에서 직접 시험해 볼 도구를 골라 보세요."
+    }
+  ]
+}

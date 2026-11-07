@@ -8,6 +8,7 @@ on:
       - 'studio/**'
       - 'styles/**'
       - 'scripts/**'
+      - 'schemas/shorts-production-brief.schema.json'
       - 'skills/content-studio/**'
       - '.agents/skills/content-studio/**'
       - '.claude/skills/content-studio/**'
@@ -30,6 +31,7 @@ jobs:
           cache-dependency-path: studio/renderer/package-lock.json
       - run: python -m unittest discover -s scripts -p 'test_*.py' -v
       - run: python scripts/sync_skills.py --check
+      - run: python scripts/check_shorts_contract.py
       - run: python -m unittest -v test_workflow.py test_content_policy.py test_work_cases.py
         working-directory: studio/automation
       - run: python -m unittest discover -s studio/youtube -p 'test_*.py' -v
