@@ -1,0 +1,21 @@
+{"direction": "지도 여정 (Johnny Harris식)", "skin": "newsprint", "footage": ["march"],
+ "scenes": [
+  {"type": "journey", "places": {"kansas": [-96.8, 39.1], "brest": [-4.49, 48.39], "glasgow": [-4.25, 55.86], "madrid": [-3.7, 40.42], "seoul": [126.98, 37.57], "brevig": [-166.49, 65.33]},
+   "title": "병이 지나간 길, 1918", "label": "지도 · world-atlas (ISC)", "start": {"goto": null, "zoom": 1},
+   "beats": [{"from": "003_0"}, {"from": "003_1"}]},
+  {"type": "journey", "places": {"kansas": [-96.8, 39.1], "brest": [-4.49, 48.39]}, "label": "HISTORY · J. M. Barry", "start": {"goto": null, "zoom": 1},
+   "beats": [{"from": "005_0", "goto": "kansas", "zoom": 3.2, "pin": {"at": "kansas", "label": "캠프 펀스턴 · 1918.3"}}, {"from": "005_1"}]},
+  {"type": "journey", "places": {"kansas": [-96.8, 39.1], "brest": [-4.49, 48.39], "glasgow": [-4.25, 55.86]}, "label": "자료 · 미국 의회도서관 사진 설명",
+   "pins": [{"at": "kansas", "label": "캠프 펀스턴"}], "start": {"goto": "kansas", "zoom": 3.2},
+   "beats": [{"from": "006_1", "goto": null, "zoom": 1.6, "route": ["kansas", "brest"], "pin": {"at": "brest", "label": "브레스트항"}},
+             {"from": "007_1", "goto": "glasgow", "zoom": 3.0, "route": ["brest", "glasgow"], "pin": {"at": "glasgow", "label": "글래스고"}}]},
+  {"type": "journey", "places": {"kansas": [-96.8, 39.1], "brest": [-4.49, 48.39], "glasgow": [-4.25, 55.86], "madrid": [-3.7, 40.42]}, "label": "HISTORY · 위키백과 종합", "highlight": ["Spain"],
+   "drawn": [["kansas", "brest"], ["brest", "glasgow"]], "pins": [{"at": "kansas"}, {"at": "brest"}, {"at": "glasgow"}], "start": {"goto": "glasgow", "zoom": 3.0},
+   "beats": [{"from": "012_1", "goto": "madrid", "zoom": 3.4, "pin": {"at": "madrid", "label": "마드리드 · 보도"}}, {"from": "013_0"}]},
+  {"type": "journey", "places": {"kansas": [-96.8, 39.1], "brest": [-4.49, 48.39], "glasgow": [-4.25, 55.86], "madrid": [-3.7, 40.42], "seoul": [126.98, 37.57]}, "label": "매일신보 1918 (메디게이트뉴스 인용)", "highlight": ["Spain", "South Korea", "North Korea"],
+   "drawn": [["kansas", "brest"], ["brest", "glasgow"]], "pins": [{"at": "kansas"}, {"at": "brest"}, {"at": "glasgow"}, {"at": "madrid"}], "start": {"goto": "madrid", "zoom": 3.4},
+   "beats": [{"from": "029_0", "goto": "seoul", "zoom": 3.6, "route": ["brest", "seoul"], "pin": {"at": "seoul", "label": "경성 · 1918.9~11"}}, {"from": "030_1"}]},
+  {"type": "journey", "places": {"kansas": [-96.8, 39.1], "brest": [-4.49, 48.39], "glasgow": [-4.25, 55.86], "madrid": [-3.7, 40.42], "seoul": [126.98, 37.57], "brevig": [-166.49, 65.33]}, "label": "알래스카대 지구물리연구소 · CDC", "highlight": ["Spain", "South Korea", "North Korea"],
+   "drawn": [["kansas", "brest"], ["brest", "glasgow"], ["brest", "seoul"]], "pins": [{"at": "kansas"}, {"at": "brest"}, {"at": "glasgow"}, {"at": "madrid"}, {"at": "seoul"}], "start": {"goto": "seoul", "zoom": 3.6},
+   "beats": [{"from": "036_0", "goto": "brevig", "zoom": 3.4, "pin": {"at": "brevig", "label": "브레빅 미션 · 80명 중 72명"}}, {"from": "040_0", "goto": null, "zoom": 1}]}
+ ]}

@@ -873,6 +873,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
                         "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p", str(out)], check=True)
         sc["_clipfile"] = out.name
     sc["_map"] = spec.get("map")
+    sc["_project_dir"] = str(project.path)   # 새 연출(directions.py)이 박자 음성·단어 시각을 찾을 때
     sc["_prices"] = project.dir("research") / "prices"
     if sc["type"] == "usmap":
         sc["_states"] = us_states()
@@ -1136,3 +1137,10 @@ def make(project: Project, workers: int = 3) -> Path:
     except Exception as e:  # noqa: BLE001
         print(f"[hybrid] 싱크 점검 건너뜀: {e}")
     return edir / "final.mp4"
+
+
+try:  # 새 연출 문법(아카이브 다큐·지도 여정·키네틱 타이포)의 장면 type 을 추가 등록 — 기존 장면은 그대로
+    from . import directions as _directions
+    _directions.register()
+except Exception as _e_dir:  # noqa: BLE001
+    print(f"[hybrid] 새 연출 장면 등록 건너뜀: {_e_dir}")
