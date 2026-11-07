@@ -36,3 +36,20 @@
 - `with-timestamps` 엔드포인트로 받아 **글자별 시작·끝 시각**을 `03_voice/scene_XXX.align.json` 에 저장합니다(단어 단위 자막·쇼츠 단어 팝 자막에 쓸 수 있음).
 - 같은 문장·목소리·설정이면 `.cache/elevenlabs/` 캐시를 씁니다 → 다시 돌려도 크레딧을 또 쓰지 않습니다.
 - 크레딧 감: 한국어 10분 롱폼 ≈ 2,800~3,300자 ≈ 같은 수의 크레딧(모델·요금제에 따라 다름 — ElevenLabs 요금 페이지 확인).
+
+
+## 2026-11-07 확정 — API 키 없이 ElevenLabs 목소리 입히기
+| 채널 | 목소리 | voice_id | 모델 |
+|---|---|---|---|
+| ch-knowledge (교양·역사) | Nobel Butler — 부드러운 중년 남성 중저음, 다큐·연구 해설 | `YBRudLRm83BV5Mazcr42` | eleven_v4 |
+| ch-source-brief / 하이브리드 경제 | Hyun Bin — 차분하고 절제된 남성, 보고서 해설 | `s07IwTCOrCDCaETjUVjx` | eleven_v4 |
+
+절차 (키를 저장하지 않는 방법, Claude 의 ElevenLabs 커넥터 또는 ElevenLabs 웹):
+1. 대본 박자 문장을 장(chapter) 단위로 묶어 2~3덩어리(덩어리당 약 2,000자)로 만든다. 문장 사이는 빈 줄.
+2. 덩어리마다 위 목소리로 음성 생성 → mp3 를 `03_voice/el/part1.mp3, part2.mp3 …` 로 받는다.
+3. `python -m ytflow voice-import <프로젝트> 03_voice/el/part1.mp3 03_voice/el/part2.mp3`
+   — faster-whisper 단어 시각 + 대본과 글자 단위 맞추기(difflib)로 박자 끝을 찾고, 그 근처 가장 긴 쉼에서 자른다.
+   원래 초안 음성은 `03_voice/edge/` 로 옮겨 둔다. 자른 위치는 `03_voice/el/cuts.txt`.
+4. `python -m ytflow hybrid <프로젝트>` — 새 음성 길이에 맞춰 장면·자막·효과음이 다시 맞춰진다.
+점검: 박자별 받아쓰기와 대본의 일치율(스페인 독감 편 평균 97.3%), 시작·끝 글자가 맞는지.
+비용: 약 1크레딧/글자, 기본 2테이크. 계정이 무료 등급이면 'Unusual activity … Free Tier disabled' 로 한 테이크가 실패할 수 있음(다른 테이크는 성공) — 유료 요금제면 사라짐.

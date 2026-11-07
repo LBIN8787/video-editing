@@ -11,7 +11,11 @@ niche: "역사 속 사건·상식의 숨은 이유·인간 심리. 1차 출처�
 seed_keywords: ["왜 그럴까", "우리가 몰랐던", "역사 속 진짜 이유", "이름의 유래", "심리학", "전염병의 역사", "전쟁사", "생활 속 과학"]
 target_minutes: 9
 cadence: "주 1편 + 4편마다 몰아보기(통합본) 1편"
-voice: "미정 — ElevenLabs 로 정함 (영상이 확정된 뒤)"
+voice: "ElevenLabs · Nobel Butler (YBRudLRm83BV5Mazcr42) — 부드러운 중년 남성 중저음, 다큐·연구 해설용. 모델 eleven_v4 (2026-11-07 확정)"
+tts:
+  backend: elevenlabs
+  elevenlabs: {voice_id: YBRudLRm83BV5Mazcr42, model_id: eleven_v4, language_code: ko}
+  # API 키 없이: ElevenLabs 커넥터(또는 웹)로 장 단위 긴 음성 생성 → python -m ytflow voice-import <프로젝트> part1.mp3 part2.mp3
 tone: "이야기하듯. 장면(사람·장소·날짜)으로 시작 → 질문 → 반전 → 숫자는 사람 수로 → 오늘과 연결."
 needs_pc_rebuild: false                  # 공공 기록 자료는 클라우드에서 받음
 

@@ -35,6 +35,10 @@ python -m ytflow archive search "world war 1918" --films                  # 영�
 - 인과 지도 칸은 2줄 × 4칸(x = 250/710/1170/1630, y = 400/720)에 둠. 화살표는 렌더러가 다른 칸을 피해 돌려 그림.
 - 같은 type 연속 금지, 자료 화면 20~30초마다, 영상 8~10분.
 
+## 4-1. 목소리 (영상 확정 후, 키 없이)
+- 초안은 edge-tts(자동). 최종은 ElevenLabs: 커넥터/웹으로 장 단위 긴 음성 → `python -m ytflow voice-import <프로젝트> part1.mp3 part2.mp3` (docs/08-voice.md).
+- 채널별 목소리는 `channels/<채널>/channel.yaml` 의 voice 에 적혀 있음.
+
 ## 5. 만들기와 점검
 ```bash
 python -m ytflow hybrid <프로젝트>      # 음성 → 장면 렌더(병렬 3) → 이어 붙이기 → 자막 → 효과음 → 마스터링(final.mp4)

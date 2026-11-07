@@ -266,6 +266,9 @@ def main(argv: list[str] | None = None) -> None:
 
     sub.add_parser("styles", help="스타일 라이브러리 목록")
     sub.add_parser("channels", help="운영 채널 목록 (channels/)")
+    vi = sub.add_parser("voice-import", help="긴 내레이션 음성(ElevenLabs 웹·커넥터 mp3)을 대본 박자별로 잘라 03_voice 에 넣기")
+    vi.add_argument("project")
+    vi.add_argument("parts", nargs="+")
     dm = sub.add_parser("demand", help="분야별 수요 분석 (검색 → 채널 → 아웃라이어) → .cache/demand/<날짜>/summary.md")
     dm.add_argument("--channel", default="ch-knowledge")
     dm.add_argument("--top", type=int, default=25)
@@ -363,6 +366,9 @@ def main(argv: list[str] | None = None) -> None:
         out = config.ROOT / ".cache" / "voice_samples" / f"{a.voice_id}.mp3"
         out.parent.mkdir(parents=True, exist_ok=True)
         print(f"[voice-sample] {_elevenlabs(a.text, out, ec)}")
+    elif a.cmd == "voice-import":
+        from .stages import voice_import
+        voice_import.run(Project.open(a.project), a.parts)
     elif a.cmd == "demand":
         from .stages import demand
         demand.run(a.channel, a.top)
