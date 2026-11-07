@@ -637,25 +637,25 @@ def s_people(D: HDoc, sc: dict, bt: list, dur: float):
     g = D._id()
     rng = np.random.default_rng(sc["id"])
     hit = set(rng.choice(100, n, replace=False).tolist()) if sc.get("scatter", True) else set(range(n))
-    out, x0, y0 = [], 330, 250
+    out, x0, y0 = [], 260, 250
     for k in range(100):
         r_, c_ = divmod(k, 10)
-        cx, cy = x0 + c_ * 64, y0 + r_ * 62
+        cx, cy = x0 + c_ * 70, y0 + r_ * 64
         cls = f"{g}h" if k in hit else f"{g}n"
-        out.append(f'<g class="{g}"><circle cx="{cx}" cy="{cy}" r="10" fill="{D.muted}"/>'
-                   f'<rect x="{cx - 13}" y="{cy + 13}" width="26" height="30" rx="11" fill="{D.muted}"/></g>'
-                   f'<g class="{cls}" style="opacity:0"><circle cx="{cx}" cy="{cy}" r="10" fill="{D.red}"/>'
-                   f'<rect x="{cx - 13}" y="{cy + 13}" width="26" height="30" rx="11" fill="{D.red}"/></g>')
+        out.append(f'<g class="{g}"><circle cx="{cx}" cy="{cy}" r="9" fill="{D.muted}"/>'
+                   f'<path d="M{cx - 15},{cy + 36} v-8 a15,13 0 0 1 30,0 v8 z" fill="{D.muted}"/></g>'
+                   f'<g class="{cls}" style="opacity:0"><circle cx="{cx}" cy="{cy}" r="9" fill="{D.red}"/>'
+                   f'<path d="M{cx - 15},{cy + 36} v-8 a15,13 0 0 1 30,0 v8 z" fill="{D.red}"/></g>')
     D.svg.append("".join(out))
     t0 = bt[0][0]
     D.js.append(f'tl.fromTo(".{g}",{{opacity:0,y:10}},{{opacity:1,y:0,duration:0.25,stagger:0.012}},{t0 + 0.3:.2f});')
     tf = next((t for b, (t, _) in zip(sc["beats"], bt) if b.get("fill")), bt[-1][0])
     D.js.append(f'tl.to(".{g}h",{{opacity:1,duration:0.2,stagger:0.02}},{tf + 0.3:.2f});')
     D.sfx.append(("pop", tf + 0.3))
-    D.text(1420, 470, sc["value"], FT("value"), 150, D.red, at=tf + 0.6, anchor="lm", counter=True)
-    D.text(1420, 600, sc.get("caption", ""), FT("note"), 46, D.ink, at=tf + 0.9, anchor="lm")
+    D.text(1080, 470, sc["value"], FT("value"), 150, D.red, at=tf + 0.6, anchor="lm", counter=True)
+    D.text(1080, 600, sc.get("caption", ""), FT("note"), fit(FT("note"), sc.get("caption", ""), 50, 760).size, D.ink, at=tf + 0.9, anchor="lm")
     if sc.get("sub"):
-        D.text(1420, 680, sc["sub"], FT("label"), 34, "#5a5f6a", at=tf + 1.1, anchor="lm")
+        D.text(1080, 690, sc["sub"], FT("label"), fit(FT("label"), sc["sub"], 34, 760).size, "#5a5f6a", at=tf + 1.1, anchor="lm")
 
 
 def s_newspapers(D: HDoc, sc: dict, bt: list, dur: float):
@@ -677,7 +677,7 @@ def s_newspapers(D: HDoc, sc: dict, bt: list, dur: float):
             for r_ in range(9):
                 y = 400 + r_ * 50
                 w = 560 if r_ % 3 != 2 else 380
-                D.rough("line", [x + 50, y, x + 50 + w, y], "#9a9488", 2, at=at + 0.4, dur=0.2, roughness=0.5)
+                D.items.append(f'<div class="{i}l" style="position:absolute;left:{x + 50}px;top:{y - 4}px;width:{w}px;height:8px;background:#B9B09E;border-radius:4px"></div>')
                 j = D._id()
                 D.items.append(f'<div id="{j}" style="position:absolute;left:{x + 44}px;top:{y - 16}px;width:{w + 12}px;height:30px;'
                                f'background:#1d1d1d;transform-origin:left center"></div>')
@@ -686,12 +686,13 @@ def s_newspapers(D: HDoc, sc: dict, bt: list, dur: float):
         else:
             f = fit(FT("title"), it["headline"], 64, 580)
             D.text(x + 330, 430, it["headline"], FT("title"), f.size, D.red, at=at + 0.5)
-            D.marker(x + 330 - f.getlength(it["headline"]) / 2 - 10, 432, f.getlength(it["headline"]) + 20, 30, at=at + 1.0)
+            D.marker(x + 330 - f.getlength(it["headline"]) / 2 - 10, 440, f.getlength(it["headline"]) + 20, 30, at=at + 1.0, index=len(D.items))
             for r_ in range(7):
                 y = 520 + r_ * 46
-                D.rough("line", [x + 50, y, x + 50 + (560 if r_ % 3 != 2 else 380), y], "#9a9488", 2, at=at + 0.7, dur=0.2, roughness=0.5)
+                D.items.append(f'<div class="{i}l" style="position:absolute;left:{x + 50}px;top:{y - 4}px;width:{560 if r_ % 3 != 2 else 380}px;height:8px;background:#B9B09E;border-radius:4px"></div>')
             if it.get("note"):
                 D.text(x + 330, 850, it["note"], FT("note"), 40, D.ink, at=at + 1.4)
+        D.js.append(f'tl.fromTo(".{i}l",{{opacity:0,scaleX:0,transformOrigin:"left center"}},{{opacity:1,scaleX:1,duration:0.25,stagger:0.05}},{at + 0.4:.2f});')
         D.sfx.append(("click-soft", at))
 
 

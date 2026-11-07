@@ -266,6 +266,9 @@ def main(argv: list[str] | None = None) -> None:
 
     sub.add_parser("styles", help="스타일 라이브러리 목록")
     sub.add_parser("channels", help="운영 채널 목록 (channels/)")
+    dm = sub.add_parser("demand", help="분야별 수요 분석 (검색 → 채널 → 아웃라이어) → .cache/demand/<날짜>/summary.md")
+    dm.add_argument("--channel", default="ch-knowledge")
+    dm.add_argument("--top", type=int, default=25)
     ar = sub.add_parser("archive", help="공공 기록 사진·영상 찾기 (미국 의회도서관, 퍼블릭 도메인)")
     ar.add_argument("args", nargs="*")
     hb = sub.add_parser("hybrid", help="하이브리드 스타일 영상 만들기 (02_script/hybrid.json → final.mp4)")
@@ -356,6 +359,9 @@ def main(argv: list[str] | None = None) -> None:
         out = config.ROOT / ".cache" / "voice_samples" / f"{a.voice_id}.mp3"
         out.parent.mkdir(parents=True, exist_ok=True)
         print(f"[voice-sample] {_elevenlabs(a.text, out, ec)}")
+    elif a.cmd == "demand":
+        from .stages import demand
+        demand.run(a.channel, a.top)
     elif a.cmd == "archive":
         from .stages import archive
         archive.main(a.args)
