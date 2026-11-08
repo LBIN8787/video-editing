@@ -974,10 +974,27 @@ def _word_starts(wav: Path, parts: list[str], dur: float) -> list[float] | None:
             prev = (b.a + b.size, b.b + b.size)
         return len(R) - 1
 
+    # 받아쓰기는 단어 시작을 앞의 쉼(무음) 속으로 당겨 잡기도 한다 → 실제 말소리 시작(무음 끝)으로 보정
+    sil, st = [], None
+    pr = subprocess.run(["ffmpeg", "-hide_banner", "-nostdin", "-i", str(wav), "-af", "silencedetect=n=-40dB:d=0.15", "-f", "null", "-"],
+                        capture_output=True, text=True)
+    for ln in pr.stderr.splitlines():
+        if "silence_start:" in ln:
+            st = float(ln.split("silence_start:")[1].split()[0])
+        elif "silence_end:" in ln and st is not None:
+            sil.append((st, float(ln.split("silence_end:")[1].split()[0])))
+            st = None
+
+    def onset(t: float) -> float:
+        for s0, e0 in sil:
+            if s0 - 0.3 <= t < e0 - 0.05 and e0 - t <= 1.5:
+                return e0
+        return t
+
     out = []
     for p in pos:
         wi = owner[min(max(s2r(p), 0), len(owner) - 1)]
-        out.append(min(max(float(words[wi]["start"]) - 0.05, 0.0), dur))
+        out.append(min(max(onset(float(words[wi]["start"])) - 0.05, 0.0), dur))
     out[0] = 0.0
     return out
 
