@@ -28,6 +28,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **연출과 그래픽 분리** (편집점·편집 포인트는 대본, 색·글꼴·배경은 갈아 끼우는 스킨) | `docs/13-direction-vs-graphics.md`, `skins/` |
 | 그래픽 팩에 쓸 스킬·도구 (라이선스 확인·도입 순서) | `docs/14-graphic-pack-tools.md` |
 | **연출 조사** (시청 유지 원칙·벤치마크 대비 측정·개선안·연출 도구) | `docs/15-direction-research.md` |
+| **새 연출·그래픽 시험작** (아카이브 다큐·지도 여정·키네틱 타이포, 새 팩 newsprint·blueprint·kinetic-poster) | `docs/16-new-styles.md`, `ytflow/stages/directions.py`, `styles/demos/` |
 | 키 없이 Google Drive 로 자동 복사 (Apps Script, 한 번 설치) | `docs/12-drive-sync.md`, `tools/drive-sync/` |
 
 스킬은 `skills/` 가 원본입니다. `.claude/skills/`(Claude Code)와 `.agents/skills/`(Codex)는 `python scripts/sync_skills.py` 로 만든 복사본입니다. **원본만 고치고 동기화하세요.**

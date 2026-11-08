@@ -20,6 +20,13 @@ from . import hybrid, hyper
 from .hybrid import FT, HH, W, _e, fit
 
 
+def _fam(role: str) -> str:
+    """역할 글꼴(그래픽 팩이 정함) → HTML 글꼴 이름."""
+    from . import paper
+    return {paper.SERIF: "serif-x", paper.SERIF_B: "serif-b", paper.PEN: "pen", paper.SANS: "sans",
+            paper.SANS_X: "sans-x"}.get(Path(FT(role)), "sans")
+
+
 # ---------------------------------------------------------------- 1) 아카이브 다큐
 def _typewriter(D, x, y, text, size, color, at, font="sans", anchor="l"):
     i = D._id()
@@ -56,13 +63,13 @@ def s_card_type(D, sc, bt, dur):
     """검은 카드 + 타자기 글줄 (인용·핵심 문장). 박자마다 한 줄."""
     lines = sc["lines"]
     n = len(lines)
-    y0 = HH / 2 - (n - 1) * 70
+    y0 = HH / 2 - (n - 1) * 75 - (40 if sc.get("by") else 0)
     for k, ln in enumerate(lines):
         t = bt[min(k, len(bt) - 1)][0] + 0.2 + (0 if k < len(bt) else 0.9 * (k - len(bt) + 1))
-        f = fit(FT("title"), ln, 66, W - 360)
-        _typewriter(D, W / 2, y0 + k * 140, ln, f.size, D.ink, t, font="serif-x", anchor="m")
+        f = fit(FT("title"), ln, 92, W - 300)
+        _typewriter(D, W / 2, y0 + k * 150, ln, f.size, D.ink, t, font=_fam("title"), anchor="m")
     if sc.get("by"):
-        D.text(W / 2, y0 + n * 140 + 10, "— " + sc["by"], FT("label"), 32, "#5a5f6a", at=bt[-1][0] + 0.6)
+        D.text(W / 2, y0 + n * 150 + 10, "— " + sc["by"], FT("label"), 36, "#5a5f6a", at=bt[-1][0] + 0.6)
 
 
 # ---------------------------------------------------------------- 2) 지도 여정
@@ -95,7 +102,9 @@ def s_journey(D, sc, bt, dur):
          f'<g fill="#C4452F" fill-opacity=".25" stroke="#C4452F" stroke-width="1.2">{hls}</g>']
     pins_js = []
 
-    def pin(key, label, at, instant=False):
+    lab_font = fit(FT("label"), "가", 22, 999)
+
+    def pin(key, label, at, instant=False, side=None, dy=0):
         x, y = P[key]
         j = D._id()
         g.append(f'<g id="{j}" style="opacity:0"><circle cx="{x}" cy="{y}" r="9" fill="#C4452F" stroke="#FBF8F1" stroke-width="3"/>'
@@ -103,9 +112,12 @@ def s_journey(D, sc, bt, dur):
         pins_js.append(f'tl.to("#{j}",{{opacity:1,duration:{0.01 if instant else 0.3}}},{at:.2f});')
         if label:
             k = D._id()
-            g.append(f'<g id="{k}" style="opacity:0"><rect x="{x + 18}" y="{y - 52}" width="{len(label) * 17 + 34}" height="40" rx="4" '
+            lw = lab_font.getlength(label) + 28
+            lx = x - 18 - lw if (side or ("left" if x > W * 0.62 else "right")) == "left" else x + 18
+            ly = y - 48 + dy
+            g.append(f'<g id="{k}" style="opacity:0"><rect x="{lx:.1f}" y="{ly:.1f}" width="{lw:.0f}" height="36" rx="4" '
                      f'fill="#FBF8F1" stroke="#22304D" stroke-width="1.5"/>'
-                     f'<text x="{x + 34}" y="{y - 25}" font-family="sans" font-size="24" fill="#22304D">{_e(label)}</text></g>')
+                     f'<text x="{lx + 14:.1f}" y="{ly + 25:.1f}" font-family="sans" font-size="22" fill="#22304D">{_e(label)}</text></g>')
             pins_js.append(f'tl.to("#{k}",{{opacity:1,duration:{0.01 if instant else 0.35}}},{at + (0 if instant else 0.2):.2f});')
         if not instant:
             D.sfx.append(("pop", at))
@@ -121,7 +133,7 @@ def s_journey(D, sc, bt, dur):
     for a, b in sc.get("drawn", []):
         route(a, b, 0.0, True)
     for p in sc.get("pins", []):
-        pin(p["at"], p.get("label", ""), 0.0, True)
+        pin(p["at"], p.get("label", ""), 0.0, True, p.get("side"), p.get("dy", 0))
 
     def cam_to(key, zoom, at, d):
         x, y = P[key] if key else (W / 2, HH / 2)
@@ -138,7 +150,7 @@ def s_journey(D, sc, bt, dur):
         if b.get("route"):
             route(*b["route"], t0 + 0.6)
         if b.get("pin"):
-            pin(b["pin"]["at"], b["pin"].get("label", ""), t0 + (2.2 if b.get("route") else 0.8))
+            pin(b["pin"]["at"], b["pin"].get("label", ""), t0 + (2.2 if b.get("route") else 0.8), False, b["pin"].get("side"), b["pin"].get("dy", 0))
     g.append("</g>")
     D.svg.insert(0, "".join(g))
     D.js += pins_js
@@ -178,7 +190,7 @@ def s_kinetic(D, sc, bt, dur):
                 if big:
                     D.sfx.append(("pop", at))
             D.items.append(f'<div id="{gid}" style="position:absolute;left:120px;right:120px;top:{HH / 2 - 90:.0f}px;text-align:center;'
-                           f'font-family:serif-x;line-height:1.1;white-space:nowrap">{"".join(spans)}</div>')
+                           f'font-family:{_fam("value")};line-height:1.1;white-space:nowrap">{"".join(spans)}</div>')
             if ci < len(chunks) - 1 or k < len(bt) - 1:   # 다음 덩어리가 오면 위로 밀려 흐려짐
                 D.js.append(f'tl.to("#{gid}",{{y:-170,opacity:0.0,duration:0.3,ease:"power2.in"}},{max(c_end - 0.12, c_start + 0.3):.2f});')
             wi += len(ws)
