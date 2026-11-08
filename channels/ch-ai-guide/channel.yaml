@@ -1,0 +1,27 @@
+id: ch-ai-guide
+brand: ai                                # channels/brands.yaml (욕망 = 채널)
+title: "(가칭) AI 더 잘 쓰기"
+format: longform
+style_ref: hybrid                        # 실제 화면 녹화·공식 발표 영상 + 손그림 도식 (장면별 연출은 manual/05-style-matching.md)
+family: source
+concept: >
+  이번 주 AI 에서 가장 큰 변화 하나를 '무엇이 바뀌었나 → 왜 중요한가 → 나는 어떻게 쓰나' 순서로 풀고,
+  실제 화면으로 따라 하게 만드는 채널. 쇼츠 라인(ch-ai-shorts)과 같은 브랜드.
+niche: "새 AI 모델·기능·도구의 의미와 실제 사용법. 공식 발표·문서·직접 실행한 화면으로만 말한다. 과장된 '이거면 끝' 표현 금지."
+seed_keywords: ["claude", "chatgpt 새 기능", "AI 에이전트", "AI 활용법", "AI 자동화", "MCP", "AI 코딩", "AI 업무 효율"]
+target_minutes: 10
+cadence: "주 1편 (큰 발표가 있으면 48시간 안에)"
+voice: "미정 — ElevenLabs 로 정함 (밝고 빠른 30대 톤 권장, docs/08-voice.md)"
+tone: "결과부터 보여 주고(데모) → 원리는 비유로 → 따라 하기는 단계 번호로."
+needs_pc_rebuild: false
+
+topic_rules:
+  - "발표·출시 72시간 안이면 '무엇이 바뀌었나', 그 뒤면 '어떻게 쓰나'로"
+  - "직접 실행해 본 결과 화면이 1개 이상 (없으면 쇼츠로 낮춤)"
+  - "공식 출처(블로그·문서·릴리스 노트) 1개 이상 + 독립 검증(벤치마크·사용 후기) 1개 이상"
+  - "가격·제한(무료/유료, 지역) 정보를 반드시 포함"
+
+sourcing:
+  start_from: release             # 공식 발표·릴리스 노트·GitHub 저장소 → 직접 실행 화면 녹화
+  documents: ["회사 공식 블로그·문서·릴리스 노트", "GitHub README·CHANGELOG", "공식 계정 X 게시물(oEmbed 캡처)", "독립 벤치마크(LMArena, METR 등)"]
+  capture: "직접 실행 화면은 Playwright 캡처 또는 사용자 PC 화면 녹화 (로그인 화면·개인정보 가리기)"

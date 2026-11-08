@@ -3,11 +3,21 @@
 편집 스타일 하나 = 유튜브 채널 하나로 운영합니다. 채널 폴더에는 그 채널의 **설정(channel.yaml)·운영 안내(README.md)·에피소드 기록(episodes.md)** 이 있습니다.
 영상 한 편의 작업 파일은 `projects/<날짜>-<채널>-<주제>/` 에 쌓이고, 완성되면 `episodes.md` 에 한 줄이 자동으로 추가됩니다.
 
+## 세 브랜드 (욕망 하나 = 채널 하나) — `brands.yaml`, `../manual/01-desire-map.md`
+| 브랜드 | 욕망 | 제작 라인 |
+|---|---|---|
+| **ai** — AI 더 잘 쓰기 | AI 를 더 잘 알고 다루고 싶다 | `ch-ai-guide`(롱폼) · `ch-ai-shorts` |
+| **market** — 시장의 이유 | 돈의 흐름을 알아 이기고 싶다 | `ch-source-brief` · `ch-paper-column` · `ch-data-motion` · `ch-money-shorts` |
+| **curiosity** — 몰랐던 이유 | 궁금증을 풀고 싶다 | `ch-knowledge` |
+
+아래 표의 폴더는 브랜드 아래의 **제작 라인**(형식 + 기본 편집 스타일)입니다. 편집 스타일은 영상·장면마다 `../manual/05-style-matching.md` 로 다시 고릅니다.
+
 | 채널 | 형식 | 편집 스타일 | 계열 | 주기 |
 |---|---|---|---|---|
 | [`ch-paper-column`](ch-paper-column/README.md) (가칭) 종이 위의 경제 | 롱폼 칼럼 | 미주일기 (`mijudiary`) | 자체 제작 인포그래픽 | 주 1편 |
 | [`ch-source-brief`](ch-source-brief/README.md) (가칭) 원본으로 보는 기업 | 롱폼 보고서 | 식스시그마 (`sixsigma`) | 원본 소스 | 주 1~2편 |
 | [`ch-data-motion`](ch-data-motion/README.md) (가칭) 숫자로 보는 산업 | 롱폼 데이터 리포트 | 머니크루 (`moneycrew`) | 자체 제작 인포그래픽 | 격주 1편 |
+| [`ch-ai-guide`](ch-ai-guide/README.md) (가칭) AI 더 잘 쓰기 | 롱폼 (트렌드 해설·따라 하기) | 하이브리드 (`hybrid`) | 원본 소스 (화면 녹화·공식 발표) | 주 1편 |
 | [`ch-ai-shorts`](ch-ai-shorts/README.md) (가칭) AI 꿀팁 1분 | 쇼츠 안내 | AI 꿀팁 쇼츠 (`shorts-aitips`) | 쇼츠 | 주 3~5편 |
 | [`ch-money-shorts`](ch-money-shorts/README.md) (가칭) 1분 경제 상식 | 쇼츠 안내 (정보형) | 쇼츠 (`shorts-aitips`, 카드·큰 글씨) | 쇼츠 | 대기열에서 주 3~5편 |
 | [`ch-knowledge`](ch-knowledge/README.md) (가칭) 몰랐던 이유 | 롱폼 교양 (역사·상식·심리) | 하이브리드 (`hybrid`) | 원본 소스 (공공 기록) | 주 1편 + 몰아보기 |

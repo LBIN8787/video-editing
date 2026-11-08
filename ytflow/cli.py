@@ -272,6 +272,13 @@ def main(argv: list[str] | None = None) -> None:
     sp.add_argument("--skins", default="paper-sketch,clean-flat,dark-doc")
     th = sub.add_parser("thumbnail", help="제목·썸네일(A/B/C) 만들기 → 05_edit/thumbnail_*.png, package.md")
     th.add_argument("project")
+    ck = sub.add_parser("check", help="제작 체크리스트 자동 검사 (manual/06-checklist.md) → 05_edit/checklist.md, MUST 실패 시 종료 코드 1")
+    ck.add_argument("project"); ck.add_argument("--upto", default="G8", help="이 게이트까지만 (예: G4 = 대본까지)")
+    rv = sub.add_parser("review", help="사용자 검토 기록: --pass 면 매뉴얼 그대로, --reject \"이유\" 면 기준 변경 대기로")
+    rv.add_argument("project"); rv.add_argument("--pass", dest="passed", action="store_true")
+    rv.add_argument("--reject", default=""); rv.add_argument("--note", default="")
+    mb = sub.add_parser("manual-bump", help="기각 사유를 반영해 매뉴얼을 고친 뒤 버전 올리기 (manual/VERSION, CHANGELOG)")
+    mb.add_argument("summary")
     sq = sub.add_parser("sync-qa", help="완성 영상의 자막·목소리·화면 싱크를 받아쓰기로 재기 → 05_edit/sync_qa.json")
     sq.add_argument("project")
     vi = sub.add_parser("voice-import", help="긴 내레이션 음성(ElevenLabs 웹·커넥터 mp3)을 대본 박자별로 잘라 03_voice 에 넣기")
@@ -380,6 +387,22 @@ def main(argv: list[str] | None = None) -> None:
     elif a.cmd == "thumbnail":
         from .stages import thumbnail
         thumbnail.run(Project.open(a.project))
+    elif a.cmd == "check":
+        from .stages import checklist
+        p = Project.open(a.project)
+        R = checklist.run(p.path, a.upto)
+        out = checklist.write(p.path, R)
+        print(out.read_text(encoding="utf-8"))
+        if R.must_fail():
+            raise SystemExit(1)
+    elif a.cmd == "review":
+        from .stages import checklist
+        if not a.passed and not a.reject:
+            raise SystemExit("--pass 또는 --reject \"이유\" 중 하나를 주세요")
+        checklist.review(Project.open(a.project).path, a.passed, a.reject or a.note)
+    elif a.cmd == "manual-bump":
+        from .stages import checklist
+        checklist.bump(a.summary)
     elif a.cmd == "sync-qa":
         from .stages import syncqa
         syncqa.run(Project.open(a.project))

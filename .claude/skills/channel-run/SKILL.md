@@ -5,6 +5,9 @@ description: 운영 채널(channels/<id>) 규칙으로 이번 회차 영상을 �
 
 # 채널 회차 제작 (반복 작업)
 
+> **먼저 `manual/README.md` 를 읽습니다.** 브랜드(ai·market·curiosity)의 욕망 → `01_research/topic_brief.json` → 채널 매뉴얼(`manual/02~04`)의 조사·대본 공식 → `manual/05-style-matching.md` 로 연출·그래픽 → 단계마다 `python -m ytflow check <프로젝트> --upto G<n>`.
+> 사용자 결정은 `python -m ytflow review <프로젝트> --pass | --reject "이유"`. 기각 사유는 매뉴얼 기준으로 고친 뒤 `python -m ytflow manual-bump "요약"`.
+
 ## 1. 채널 고르기
 `python -m ytflow channels` 로 목록을 봅니다. 채널마다 `channels/<id>/README.md`(운영 안내)와 `channel.yaml`(설정)이 있습니다.
 - 롱폼 칼럼(자체 제작, 미주일기): `ch-paper-column` — 자체 제작이 필요한 영상의 기본
@@ -31,6 +34,7 @@ python -m ytflow make --channel <id> --from-text <조사글.md>   # 대화형 LL
 고쳤다면 `python -m ytflow stage <프로젝트> script` 부터 다시 돌립니다.
 
 ## 4. 끝난 뒤
+- `python -m ytflow check <프로젝트>` 가 MUST 실패 없이 통과해야 사용자에게 보냅니다. `05_edit/checklist.md` 를 결과 보고에 붙입니다.
 - 영상 보관: `python -m ytflow upload <프로젝트>` → Google Drive `ytflow 영상` 아래 채널(편집 스타일) 폴더. PC 에서는 `config/storage.yaml` 의 `local_sync_dir`(Google Drive for desktop 폴더)에 복사, 클라우드에서는 Drive API 토큰(www.googleapis.com)이 필요합니다.
 - `python -m ytflow validate <프로젝트>`, 프레임 시트 `05_edit/final_sheet.png` 확인 (`skills/video-edit`).
 - `channels/<id>/episodes.md` 에 회차가 자동으로 기록됩니다. 업로드하면 상태 칸을 '업로드 YYYY-MM-DD'로 고칩니다.

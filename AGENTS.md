@@ -8,9 +8,17 @@
 주제 선정 → 소스 탐색 → 자료조사 → 대본 → 편집점 → 편집 스타일 → 자막 → 업로드 준비 순서로 진행합니다.
 Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를 따라 **같은 절차로** 작업합니다.
 
+## 가장 먼저: 제작 매뉴얼 (`manual/`)
+**새 세션·새 모델은 `manual/README.md` 부터 읽습니다.** 세 채널은 사람의 욕망으로 나뉩니다 (`channels/brands.yaml`):
+**ai**(AI 를 더 잘 다루고 싶다) · **market**(돈의 흐름을 알아 이기고 싶다) · **curiosity**(궁금증을 풀고 싶다).
+한 편마다 `01_research/topic_brief.json`(욕망 → 트리거 → 질문 → 주제)을 먼저 쓰고, 단계마다 `python -m ytflow check <프로젝트>` 를 통과해야 다음으로 갑니다.
+사용자 검토 결과는 `python -m ytflow review <프로젝트> --pass | --reject "이유"` 로 기록하고, 기각 사유는 매뉴얼 기준으로 바꿔 `manual-bump` 로 버전을 올립니다 (`manual/CHANGELOG.md`, 태그 `manual-vN`).
+
 ## 먼저 읽을 것
 | 하려는 일 | 읽을 파일 |
 |---|---|
+| **제작 매뉴얼 (욕망 → 주제 → 조사 → 대본 → 연출 → 검사)** | `manual/README.md` → `manual/01~06` |
+| **반드시 지킬 것·검사** | `manual/06-checklist.md`, `python -m ytflow check <프로젝트>` |
 | 채널 회차 만들기 (반복 운영) | `skills/channel-run/SKILL.md`, `channels/README.md`, `docs/06-operations.md` |
 | 영상 1편 만들기 | `skills/video-make/SKILL.md` |
 | 형식: 롱폼 칼럼·보고서 / 쇼츠 안내 | `formats/README.md` |
@@ -59,6 +67,9 @@ python -m ytflow archive search "influenza 1918" [--films]       # 공공 기록
 python -m ytflow hybrid <프로젝트>                                # 하이브리드 영상 (02_script/hybrid.json → final.mp4, 끝에 sync-qa 자동)
 python -m ytflow skin-preview <프로젝트> [--skins a,b,c]          # 같은 연출을 그래픽 스킨별로 렌더해 비교 (YTFLOW_SKIN=<id> 로 한 번만 바꾸기)
 python -m ytflow thumbnail <프로젝트>                             # 제목·썸네일 A/B/C (hybrid.json 의 package, 규칙 prompts/thumbnail.md)
+python -m ytflow check <프로젝트> [--upto G4]                     # 체크리스트 자동 검사 (MUST 실패 시 종료 코드 1)
+python -m ytflow review <프로젝트> --pass | --reject "이유"        # 사용자 검토 기록 → 기각은 매뉴얼 '반영 대기'로
+python -m ytflow manual-bump "바꾼 기준 요약"                      # 기각 사유 반영 후 매뉴얼 버전 올리기
 python -m ytflow sync-qa <프로젝트>                               # 완성본 자막·목소리·화면 싱크를 받아쓰기로 측정 → 05_edit/sync_qa.json
 python -m ytflow voice-import <프로젝트> part1.mp3 [...]          # ElevenLabs 긴 음성을 대본 박자별로 자르기 (키 없이)
 python -m ytflow upload <프로젝트> [--archive]                    # 완성 영상 → GitHub Release (키 불필요), --to drive 는 Drive (docs/09-storage.md)
