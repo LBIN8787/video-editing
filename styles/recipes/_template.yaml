@@ -1,0 +1,18 @@
+# 새 편집 스타일(레시피) 추가: 이 파일을 복사해 <id>.yaml 로 저장하면 style-pick·check 가 바로 읽습니다.
+# 레시피 = 연출(장면 type 묶음·리듬) + 그래픽 팩(skins/<id>) + 렌더러. 코드 수정 없이 늘릴 수 있습니다.
+id: my-style
+name: "이름"
+status: idea                 # idea(아이디어) → demo(시험작 있음) → approved(사용자 통과, manual/reviews.md)
+renderer: hybrid             # hybrid | paper(mijudiary) | flat(moneycrew) | cards(sixsigma) | shorts
+skin: paper-sketch           # skins/<id>
+format: [longform]           # longform | shorts
+scene_types: [footage]       # 이 스타일의 뼈대 장면 type (prompts/script_hybrid.md, docs/16)
+fits:
+  brands: [curiosity]        # channels/brands.yaml 의 브랜드
+  questions: [원인]           # manual/01-desire-map.md §2 의 질문 유형
+  moods: [차분]               # 주제 분위기: 차분·긴장·위기·과거·미래·실용·빠름
+  needs: []                  # 필요한 소스: footage·archive·map·price·screen·statement
+roles: [body]                # 영상 안에서 맡는 곳: hook(첫 30초) · body(본론) · ending(결론) · whole(영상 전체)
+avoid: ""                    # 쓰면 안 되는 상황
+demo: ""                     # 시험작 프로젝트 (projects/<이름>)
+skill: ""                    # skills/<이름>

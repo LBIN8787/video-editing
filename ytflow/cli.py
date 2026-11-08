@@ -277,6 +277,9 @@ def main(argv: list[str] | None = None) -> None:
     rv = sub.add_parser("review", help="사용자 검토 기록: --pass 면 매뉴얼 그대로, --reject \"이유\" 면 기준 변경 대기로")
     rv.add_argument("project"); rv.add_argument("--pass", dest="passed", action="store_true")
     rv.add_argument("--reject", default=""); rv.add_argument("--note", default="")
+    sub.add_parser("recipes", help="편집 스타일 등록부 목록 (styles/recipes/*.yaml — 파일 하나 추가로 늘림)")
+    spk = sub.add_parser("style-pick", help="topic_brief 에 맞는 편집 스타일 추천 (영상 전체·훅·결론) → 01_research/style_pick.md")
+    spk.add_argument("project")
     mb = sub.add_parser("manual-bump", help="기각 사유를 반영해 매뉴얼을 고친 뒤 버전 올리기 (manual/VERSION, CHANGELOG)")
     mb.add_argument("summary")
     sq = sub.add_parser("sync-qa", help="완성 영상의 자막·목소리·화면 싱크를 받아쓰기로 재기 → 05_edit/sync_qa.json")
@@ -400,6 +403,12 @@ def main(argv: list[str] | None = None) -> None:
         if not a.passed and not a.reject:
             raise SystemExit("--pass 또는 --reject \"이유\" 중 하나를 주세요")
         checklist.review(Project.open(a.project).path, a.passed, a.reject or a.note)
+    elif a.cmd == "recipes":
+        from .stages import stylepick
+        print(stylepick.listing())
+    elif a.cmd == "style-pick":
+        from .stages import stylepick
+        print(stylepick.run(Project.open(a.project).path).read_text(encoding="utf-8"))
     elif a.cmd == "manual-bump":
         from .stages import checklist
         checklist.bump(a.summary)

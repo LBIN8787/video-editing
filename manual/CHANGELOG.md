@@ -2,7 +2,7 @@
 
 사용자가 영상을 **통과**시키면 그 영상을 만든 매뉴얼 버전을 그대로 씁니다. **기각**하면 사유가 아래 '반영 대기'에 쌓이고,
 매뉴얼(기준)을 고친 뒤 `python -m ytflow manual-bump "요약"` 으로 버전을 올립니다. 반영 대기가 비기 전에는 `check` 가 실패(G0)하므로 같은 실수가 다음 영상에 반복되지 않습니다.
-버전마다 git 태그 `manual-vN` 을 붙여 GitHub 에 백업합니다 → 예전 기준으로 돌아가기: `git checkout manual-vN -- manual/`.
+버전마다 스냅샷 브랜치 `manual/vN` 을 붙여 GitHub 에 백업합니다 → 예전 기준으로 돌아가기: `git checkout origin/manual/vN -- manual/`.
 
 ## 반영 대기
 

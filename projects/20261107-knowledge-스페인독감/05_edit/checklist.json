@@ -1,7 +1,7 @@
 {
  "project": "20261107-knowledge-스페인독감",
  "manual_version": "1",
- "checked": "2026-11-08T14:02:58",
+ "checked": "2026-11-08T14:05:49",
  "pass": false,
  "rows": [
   {
@@ -15,7 +15,7 @@
    "gate": "G1",
    "level": "MUST",
    "item": "topic_brief.json 있음",
-   "ok": false,
+   "ok": true,
    "detail": "01_research/topic_brief.json (schemas/topic_brief.schema.json)"
   },
   {
@@ -29,43 +29,43 @@
    "gate": "G1",
    "level": "MUST",
    "item": "욕망·시청자 질문",
-   "ok": false,
-   "detail": ""
+   "ok": true,
+   "detail": "스페인 독감은 왜 '스페인'일까?"
   },
   {
    "gate": "G1",
    "level": "MUST",
    "item": "트리거·왜 지금",
-   "ok": false,
-   "detail": ""
+   "ok": true,
+   "detail": "수요 분석(2026-11-07): 교양 분야에서 '누구나 아는 것 + 모르는 이유' 질문형 제목이 아웃라이어 상위. 1918년 대유행 기록이 미국 의회도서관에 풍부"
   },
   {
    "gate": "G1",
    "level": "MUST",
    "item": "욕망 점수 ≥12, 욕망 강도·보여 줄 자료 ≥2",
-   "ok": false,
-   "detail": "합계 0 {}"
+   "ok": true,
+   "detail": "합계 14 {'desire': 3, 'clarity': 3, 'timeliness': 1, 'demand': 2, 'visuals': 3, 'angle': 2}"
   },
   {
    "gate": "G1",
    "level": "MUST",
    "item": "수요 증거 1개 이상",
-   "ok": false,
-   "detail": "0"
+   "ok": true,
+   "detail": "1"
   },
   {
    "gate": "G1",
    "level": "SHOULD",
    "item": "후보 3개 비교 기록",
    "ok": false,
-   "detail": "0"
+   "detail": "2"
   },
   {
    "gate": "G1",
    "level": "SHOULD",
    "item": "우리만의 답(our_angle)",
-   "ok": false,
-   "detail": ""
+   "ok": true,
+   "detail": "이름의 이유에서 끝나지 않고 '숨길수록 커진다'(필라델피아 vs 세인트루이스)와 한국(무오년 독감, 조선인 치사율)까지 연결"
   },
   {
    "gate": "G2",
@@ -182,9 +182,16 @@
   {
    "gate": "G5",
    "level": "SHOULD",
-   "item": "그래픽 팩이 브랜드 추천 안",
+   "item": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
    "ok": true,
-   "detail": "paper-sketch"
+   "detail": "paper-sketch / 등록부 ['clean-flat', 'dark-doc', 'kinetic-poster', 'newsprint', 'paper-sketch']"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
+   "ok": true,
+   "detail": "python -m ytflow style-pick <프로젝트>"
   },
   {
    "gate": "G6",

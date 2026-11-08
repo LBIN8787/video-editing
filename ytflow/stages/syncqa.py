@@ -79,6 +79,24 @@ def run(project: Project) -> dict:
     for blk in sm.get_matching_blocks():
         for k in range(blk.size):
             m[blk.a + k] = blk.b + k
+    # 받아쓰기는 문장 앞의 쉼(무음) 속으로 시작점을 당겨 잡는 일이 있다 → 실제 말소리 시작(무음 끝)으로 보정
+    sil = []
+    pr = subprocess.run(["ffmpeg", "-hide_banner", "-nostdin", "-i", str(wav), "-af", "silencedetect=n=-35dB:d=0.2", "-f", "null", "-"],
+                        capture_output=True, text=True)
+    st = None
+    for ln in pr.stderr.splitlines():
+        if "silence_start:" in ln:
+            st = float(ln.split("silence_start:")[1].split()[0])
+        elif "silence_end:" in ln and st is not None:
+            sil.append((st, float(ln.split("silence_end:")[1].split()[0])))
+            st = None
+
+    def onset(t):
+        for s0, e0 in sil:
+            if s0 - 0.3 <= t < e0 - 0.05 and e0 - t <= 1.5:
+                return e0
+        return t
+
     rows = []
     for (a, b, text), p in zip(lines, starts):
         n = len(norm(text))
@@ -86,6 +104,7 @@ def run(project: Project) -> dict:
         if hit is None:
             continue
         spoken = float(words[owner[hit]]["start"])
+        spoken = onset(spoken)
         rows.append({"sub": round(a, 2), "spoken": round(spoken, 2), "off": round(a - spoken, 2), "text": text[:30]})
     offs = sorted(abs(r["off"]) for r in rows)
     res = {

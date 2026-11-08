@@ -9,6 +9,7 @@
 | 2 | 맡은 채널 하나: [`02-ai.md`](02-ai.md) · [`03-market.md`](03-market.md) · [`04-curiosity.md`](04-curiosity.md) | 그 채널의 주제 찾기 → 조사 → 대본 → 편집을 단계별로 |
 | 3 | [`05-style-matching.md`](05-style-matching.md) | 영상·장면마다 어떤 편집 스타일(연출 + 그래픽 팩)을 쓰나 |
 | 4 | [`06-checklist.md`](06-checklist.md) | **반드시 지킬 것**과 검사 방법 (자동 + 사람 눈) |
+| 5 | [`07-extend.md`](07-extend.md) | 채널·편집 스타일을 **파일 하나로 늘리는 법** (등록부 구조) |
 | 참고 | `../AGENTS.md`, `../docs/11-playbook.md`(명령 순서), `../docs/13`(연출·그래픽 분리), `../docs/15`(연출 조사), `../docs/16`(새 연출) | |
 
 ## 1. 세 채널 한눈에
@@ -27,7 +28,7 @@
 | 2. 소스 먼저 | 이 주제를 **보여 줄** 자료(발언 원본·공식 화면·공공 기록·데이터)가 있는지 | `01_research/sources.md` 또는 `loc_items.json` | G2 소스 |
 | 3. 깊은 조사 | 1차 출처로 숫자·발언·날짜를 확인, 교차 확인 상태 표시 | `01_research/factsheet.md` | G3 사실 |
 | 4. 대본 | 채널 대본 공식(각 채널 문서 §4)대로. 쉬운 말·비유·과거 사례·비교 기준 | `02_script/hybrid.json` (또는 `scenes.json`) | G4 대본 |
-| 5. 연출·그래픽 | `05-style-matching.md` 로 장면마다 연출 type 과 그래픽 팩 결정 | `edit.yaml`, `hybrid.json` 의 type·look | G5 연출 |
+| 5. 연출·그래픽 | `python -m ytflow style-pick` 추천 → `05-style-matching.md` 로 장면마다 연출 type 과 그래픽 팩 결정 | `edit.yaml`, `hybrid.json` 의 type·look | G5 연출 |
 | 6. 목소리·렌더 | 초안 edge-tts → 확정 후 ElevenLabs, `python -m ytflow hybrid <프로젝트>` | `05_edit/final.mp4`, `sync_qa.json`, `04_assets/layout_qa.json` | G6 완성본 |
 | 7. 제목·썸네일 | 제목 3개 + 썸네일 A/B/C, 이유 기록 | `05_edit/package.md`, `thumbnail_*.png` | G7 포장 |
 | 8. 보관·기록 | GitHub Release 업로드, 회차 기록, 남은 일 보고 | `05_edit/release.json`, `channels/<id>/episodes.md` | G8 보관 |
@@ -61,10 +62,10 @@ python -m ytflow check <프로젝트> --upto G4   # 대본까지만 검사 (렌�
 |---|---|
 | **통과** | `python -m ytflow review <프로젝트> --pass` → `manual/reviews.md` 에 기록. 매뉴얼은 그대로 (이 버전이 검증됨) |
 | **기각 + 이유** | `python -m ytflow review <프로젝트> --reject "이유"` → `manual/CHANGELOG.md` 의 '반영 대기'에 쌓임 |
-| (기각 후) | 이유를 **기준으로 바꿔** 매뉴얼(01~06)·프롬프트·검사기(`ytflow/stages/checklist.py`)를 고침 → `python -m ytflow manual-bump "바꾼 기준 요약"` → 커밋 → `git tag manual-vN && git push origin manual-vN` |
+| (기각 후) | 이유를 **기준으로 바꿔** 매뉴얼(01~06)·프롬프트·검사기(`ytflow/stages/checklist.py`)를 고침 → `python -m ytflow manual-bump "바꾼 기준 요약"` → 커밋 → `git push origin HEAD:refs/heads/manual/vN` |
 | (그동안) | '반영 대기'가 비기 전에는 `check` 가 G0 에서 실패 → 같은 실수가 다음 영상에 반복되지 않음 |
 
 - 기각 사유는 가능하면 **검사 가능한 규칙**으로 바꿉니다 (예: "자막이 작다" → "자막 글자 높이 ≥ 화면의 4.5%" 를 G6 자동 검사에 추가).
 - 매뉴얼 버전은 `manual/VERSION`, 바뀐 내용은 `manual/CHANGELOG.md`, 결정 기록은 `manual/reviews.md`. 모두 GitHub 에 커밋되어 백업됩니다.
-- 예전 기준으로 되돌리기: `git checkout manual-v<N> -- manual/` (태그로 어떤 버전이든 복구).
+- 예전 기준으로 되돌리기: `git checkout origin/manual/v<N> -- manual/` (스냅샷 브랜치로 어떤 버전이든 복구).
 - 각 영상의 `05_edit/checklist.json` 에 그때의 매뉴얼 버전이 남습니다 → 어떤 기준으로 만든 영상인지 추적.

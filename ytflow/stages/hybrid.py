@@ -922,7 +922,9 @@ def _chunks(text: str, n: int = 24) -> list[str]:
         parts = [x.strip() for x in re.split(r"(?<=,)\s+", text) if x.strip()]
         if len(parts) > 1 and all(len(x) >= 6 for x in parts):
             return [c for x in parts for c in _chunks(x, n)]
-    words, out, cur = text.split(" "), [], ""
+    # 숫자와 단위는 한 줄에 (예: '200만 명을' 이 '200만 / 명을' 로 갈라지지 않게)
+    glued = re.sub(r"(\d[\d,.]*[만억천조]?)\s+(명|개|년|원|달러|배|곳|척|대|건|번|살|채|퍼센트|%)", "\\1\u00a0\\2", text)
+    words, out, cur = glued.split(" "), [], ""
     for w in words:
         if len((cur + " " + w).strip()) > n and cur:
             out.append(cur.strip())
@@ -931,7 +933,9 @@ def _chunks(text: str, n: int = 24) -> list[str]:
             cur += " " + w
     if cur.strip():
         out.append(cur.strip())
-    return out
+    if len(out) > 1 and len(out[-1]) < 7 and len(out[-2]) + len(out[-1]) <= n + 8:  # 짧은 꼬리 줄은 앞 줄에 붙임
+        out[-2:] = [out[-2] + " " + out[-1]]
+    return [o.replace("\u00a0", " ") for o in out]
 
 
 def _word_starts(wav: Path, parts: list[str], dur: float) -> list[float] | None:

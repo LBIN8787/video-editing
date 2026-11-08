@@ -3,7 +3,7 @@
     python -m ytflow check <프로젝트> [--upto G4]        → 05_edit/checklist.md · checklist.json (MUST 실패 시 종료 코드 1)
     python -m ytflow review <프로젝트> --pass [--note ..]  → manual/reviews.md 에 '통과' (그 매뉴얼 버전을 그대로 씀)
     python -m ytflow review <프로젝트> --reject "이유"     → manual/reviews.md 에 '기각' + manual/CHANGELOG.md '반영 대기'
-    python -m ytflow manual-bump "바꾼 기준 요약"          → manual/VERSION +1, 대기 항목을 그 버전으로 확정, git 태그 manual-vN
+    python -m ytflow manual-bump "바꾼 기준 요약"          → manual/VERSION +1, 대기 항목을 그 버전으로 확정 (스냅샷 브랜치 manual/vN 으로 백업)
 
 기준: manual/06-checklist.md (사람용 표). 이 파일은 그중 자동으로 잴 수 있는 것만 잰다.
 """
@@ -30,9 +30,6 @@ UNFINISHED = ["재확인 필요", "TODO", "TBD", "확인 필요]", "XXX"]
 REF_NAMES = ["미주일기", "식스시그마", "머니크루", "AI비즈PT", "로제타"]
 BAD_LICENSE = ["CC BY-SA", "CC-BY-SA", "BY-NC", "BY-ND", "CC BY-NC", "CC BY-ND", "All rights reserved"]
 FOOTAGE_TYPES = {"footage", "kb", "journey", "outro"}
-SKIN_BY_BRAND = {"ai": {"blueprint", "clean-flat", "kinetic-poster"},
-                 "market": {"paper-sketch", "clean-flat", "dark-doc", "newsprint", "blueprint"},
-                 "curiosity": {"paper-sketch", "dark-doc", "newsprint", "kinetic-poster"}}
 
 
 def manual_version() -> str:
@@ -171,7 +168,11 @@ def run(path: Path, upto: str = "G8") -> Report:
             R.add("G5", "SHOULD", "자료 화면 공백 ≤45초", gap <= 45, f"최장 {gap:.0f}초")
             R.add("G5", "SHOULD", "장 표지 간격 ≤200초", not longform or cgap <= 200, f"최장 {cgap:.0f}초")
         skin = (ed.get("edit") or {}).get("skin", "paper-sketch")
-        R.add("G5", "SHOULD", "그래픽 팩이 브랜드 추천 안", brand not in SKIN_BY_BRAND or skin in SKIN_BY_BRAND[brand], skin)
+        from . import stylepick
+        rec = stylepick.skins_for(brand) if brand else set()
+        R.add("G5", "SHOULD", "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)", not rec or skin in rec, f"{skin} / 등록부 {sorted(rec)}")
+        sp = path / "01_research" / "style_pick.json"
+        R.add("G5", "SHOULD", "style-pick 기록 (상황에 맞춘 스타일 선택)", sp.exists(), "python -m ytflow style-pick <프로젝트>")
 
     if last >= 5:  # G6 완성본
         R.add("G6", "MUST", "final.mp4", (edt / "final.mp4").exists(), "")
@@ -270,5 +271,5 @@ def bump(summary: str, tag: bool = True) -> str:
     (MANUAL / "VERSION").write_text(ver + "\n", encoding="utf-8")
     print(f"[manual] v{ver}: {summary} (반영 {len(pend)}건)")
     if tag:
-        print(f"  커밋 후: git tag manual-v{ver} && git push origin manual-v{ver}")
+        print(f"  커밋 후: git push origin HEAD:refs/heads/manual/v{ver}")
     return ver

@@ -54,7 +54,8 @@ python -m ytflow check <프로젝트> --upto G4    # 대본까지만
 | MUST | 같은 type 3연속 없음 (chapter 제외) | ✅ |
 | SHOULD | 자료 화면 공백 ≤ 45초 (렌더 후 `hybrid_timeline.json` 으로 계산) | ✅ |
 | SHOULD | 약 3분마다 장 표지/질문 (최장 간격 ≤ 200초) | ✅ |
-| SHOULD | 그래픽 팩이 `05-style-matching` 의 브랜드 추천 중 하나 (`edit.yaml` 의 skin) | ✅ |
+| SHOULD | 그래픽 팩이 브랜드에 맞는 등록부 레시피의 팩 (`styles/recipes`, `edit.yaml` 의 skin) | ✅ |
+| SHOULD | `style-pick` 기록이 있음 (`01_research/style_pick.json`) — 상황에 맞춰 골랐다는 증거 | ✅ |
 
 ## G6 완성본
 | 등급 | 항목 | 자동 |

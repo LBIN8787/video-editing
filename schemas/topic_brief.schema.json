@@ -2,34 +2,193 @@
  "$schema": "https://json-schema.org/draft/2020-12/schema",
  "title": "topic_brief — 욕망에서 주제로 (manual/01-desire-map.md)",
  "type": "object",
- "required": ["brand", "desire", "trigger", "why_now", "viewer_question", "topic", "score", "demand_evidence"],
+ "required": [
+  "brand",
+  "desire",
+  "trigger",
+  "why_now",
+  "viewer_question",
+  "topic",
+  "score",
+  "demand_evidence",
+  "question_type"
+ ],
  "properties": {
-  "brand": {"enum": ["ai", "market", "curiosity"]},
-  "line": {"type": "string", "description": "제작 라인 channels/<id> (예: ch-paper-column)"},
-  "desire": {"type": "string", "description": "이 영상이 채우는 상위 욕망 (brands.yaml 의 desire 를 이 주제에 맞게 한 줄로)"},
-  "trigger": {"type": "string", "description": "지금 그 욕망을 건드린 사건 (날짜 포함)"},
-  "why_now": {"type": "string"},
-  "viewer_question": {"type": "string", "description": "시청자가 머릿속에 떠올린 질문 하나 (15자 안팎)"},
-  "question_type": {"type": "string", "description": "01-desire-map §2 의 질문 유형 (원인·연결·발언·방법·이름의 이유 …)"},
-  "topic": {"type": "string", "description": "주제 문장: [트리거] → [질문] → [우리 답의 방향]"},
-  "our_angle": {"type": "string", "description": "남들 영상보다 깊은 것 하나"},
+  "brand": {
+   "enum": [
+    "ai",
+    "market",
+    "curiosity"
+   ]
+  },
+  "line": {
+   "type": "string",
+   "description": "제작 라인 channels/<id> (예: ch-paper-column)"
+  },
+  "desire": {
+   "type": "string",
+   "description": "이 영상이 채우는 상위 욕망 (brands.yaml 의 desire 를 이 주제에 맞게 한 줄로)"
+  },
+  "trigger": {
+   "type": "string",
+   "description": "지금 그 욕망을 건드린 사건 (날짜 포함)"
+  },
+  "why_now": {
+   "type": "string"
+  },
+  "viewer_question": {
+   "type": "string",
+   "description": "시청자가 머릿속에 떠올린 질문 하나 (15자 안팎)"
+  },
+  "question_type": {
+   "enum": [
+    "정체",
+    "방법",
+    "영향",
+    "비교",
+    "원인",
+    "연결",
+    "발언",
+    "소문 확인",
+    "개념",
+    "과거 사례",
+    "이름의 이유",
+    "숨은 장면",
+    "행동의 이유",
+    "오늘과 연결"
+   ],
+   "description": "manual/01-desire-map.md §2 의 질문 유형 (styles/recipes 의 fits.questions 와 같은 단어)"
+  },
+  "topic": {
+   "type": "string",
+   "description": "주제 문장: [트리거] → [질문] → [우리 답의 방향]"
+  },
+  "our_angle": {
+   "type": "string",
+   "description": "남들 영상보다 깊은 것 하나"
+  },
   "score": {
    "type": "object",
-   "required": ["desire", "clarity", "timeliness", "demand", "visuals", "angle"],
+   "required": [
+    "desire",
+    "clarity",
+    "timeliness",
+    "demand",
+    "visuals",
+    "angle"
+   ],
    "properties": {
-    "desire": {"type": "integer", "minimum": 0, "maximum": 3},
-    "clarity": {"type": "integer", "minimum": 0, "maximum": 3},
-    "timeliness": {"type": "integer", "minimum": 0, "maximum": 3},
-    "demand": {"type": "integer", "minimum": 0, "maximum": 3},
-    "visuals": {"type": "integer", "minimum": 0, "maximum": 3},
-    "angle": {"type": "integer", "minimum": 0, "maximum": 3}
+    "desire": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 3
+    },
+    "clarity": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 3
+    },
+    "timeliness": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 3
+    },
+    "demand": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 3
+    },
+    "visuals": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 3
+    },
+    "angle": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 3
+    }
    }
   },
-  "demand_evidence": {"type": "array", "items": {"type": "object", "properties": {"kind": {"type": "string"}, "detail": {"type": "string"}, "url": {"type": "string"}}}},
-  "visual_sources": {"type": "array", "items": {"type": "string"}, "description": "보여 줄 자료 (발언 원본·공공 기록·시세·화면 녹화)"},
-  "rumor": {"type": "boolean", "description": "market: 소문 확인형이면 true (01 §4 규칙)"},
-  "format": {"enum": ["longform", "shorts"]},
-  "style": {"type": "object", "properties": {"skin": {"type": "string"}, "hook": {"type": "string"}, "why": {"type": "string"}}},
-  "candidates": {"type": "array", "items": {"type": "object", "properties": {"topic": {"type": "string"}, "total": {"type": "integer"}, "why_not": {"type": "string"}}}}
+  "demand_evidence": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "kind": {
+      "type": "string"
+     },
+     "detail": {
+      "type": "string"
+     },
+     "url": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "visual_sources": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "보여 줄 자료 (발언 원본·공공 기록·시세·화면 녹화)"
+  },
+  "rumor": {
+   "type": "boolean",
+   "description": "market: 소문 확인형이면 true (01 §4 규칙)"
+  },
+  "format": {
+   "enum": [
+    "longform",
+    "shorts"
+   ]
+  },
+  "style": {
+   "type": "object",
+   "properties": {
+    "skin": {
+     "type": "string"
+    },
+    "hook": {
+     "type": "string"
+    },
+    "why": {
+     "type": "string"
+    }
+   }
+  },
+  "candidates": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "topic": {
+      "type": "string"
+     },
+     "total": {
+      "type": "integer"
+     },
+     "why_not": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "mood": {
+   "type": "array",
+   "items": {
+    "enum": [
+     "차분",
+     "긴장",
+     "위기",
+     "과거",
+     "미래",
+     "실용",
+     "빠름"
+    ]
+   },
+   "description": "주제 분위기 (style-pick 이 씀)"
+  }
  }
 }
