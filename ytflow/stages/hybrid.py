@@ -826,6 +826,10 @@ def voice(project: Project, spec: dict) -> dict:
         for k, b in enumerate(sc["beats"]):
             key = f"{sc['id']:03d}_{k}"
             wav = vdir / f"hb_{key}.wav"
+            side = vdir / f"hb_{key}.txt"   # 대사가 바뀌면(장면 번호가 밀려도) 다시 만든다
+            if wav.exists() and (not side.exists() or side.read_text(encoding="utf-8") != b["say"]):
+                for ext in (".wav", ".mp3", ".words.json"):
+                    (vdir / f"hb_{key}{ext}").unlink(missing_ok=True)
             if not wav.exists():
                 mp3 = vdir / f"hb_{key}.mp3"
                 if cfg.get("backend") == "elevenlabs":
@@ -843,6 +847,7 @@ def voice(project: Project, spec: dict) -> dict:
                 subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(mp3), "-af",
                                 "silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse",
                                 "-ar", "48000", "-ac", "2", str(wav)], check=True)
+            side.write_text(b["say"], encoding="utf-8")
             durs[key] = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(wav)],
                                              capture_output=True, text=True).stdout)
     return durs
