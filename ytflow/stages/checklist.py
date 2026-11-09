@@ -176,6 +176,11 @@ def run(path: Path, upto: str = "G8") -> Report:
         R.add("G5", "MUST", f"한 스타일이 {int(rule['max_share'] * 100)}% 넘지 않음", ms["top_share"] <= rule["max_share"], f"{ms['top']} {ms['top_share']}")
         R.add("G5", "MUST", f"한 장면 안에서 겹친 장면(layers) {rule['min_layered']}개 이상", ms["layered_scenes"] >= rule["min_layered"], ms["layered_scenes"])
         R.add("G5", "MUST", f"같은 스타일 {rule['max_run'] + 1}장면 연속 없음", ms["max_run"] <= rule["max_run"], f"최장 {ms['max_run']}")
+        total = sum(x["dur"] for x in tl) if tl else 5.0 * sum(len(x.get("beats", [])) for x in spec.get("scenes", []))
+        es = stylepick.emphasis_stats(spec, total)
+        R.add("G5", "MUST", f"강조는 아껴서: 1분에 1번 이하 (이 영상 {es['limit']}번까지)", es["count"] <= es["limit"], f"{es['count']}번 {es['items']}")
+        R.add("G5", "MUST", "한 장면에 강조 1개까지 (위아래로 같은 내용 반복 금지)", not es["crowded"], f"넘친 장면 {es['crowded']}")
+        R.add("G5", "MUST", "핵심 단어 띄우기(words)는 단어 1~3개만", not es["bad_words"], es["bad_words"])
         rec = stylepick.skins_for(brand) if brand else set()
         R.add("G5", "SHOULD", "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)", not rec or skin in rec, f"{skin} / 등록부 {sorted(rec)}")
         sp = path / "01_research" / "style_pick.json"

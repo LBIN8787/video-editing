@@ -120,14 +120,12 @@ def listing() -> str:
 MIX_RULES = {"longform": {"min_recipes": 4, "max_share": 0.40, "min_layered": 3, "max_run": 2},
              "shorts": {"min_recipes": 2, "max_share": 0.60, "min_layered": 1, "max_run": 2}}
 NEUTRAL = {"chapter", "outro"}
-GOOD_LAYERS = [("kb", "words", "자료 화면 + 그 순간의 핵심 단어 (아카이브 × 키네틱)"),
-               ("kb", "locator", "자료 화면 + 위치 미니 지도 (아카이브 × 지도)"),
+GOOD_LAYERS = [("kb", "locator", "자료 화면 + 위치 미니 지도 (아카이브 × 지도)"),
                ("kb", "number", "자료 화면 + 큰 숫자 카드 (아카이브 × 데이터)"),
                ("journey", "photo", "지도 이동 + 그곳의 자료 사진 액자 (지도 × 아카이브)"),
                ("footage", "stamp", "원본 영상 + 날짜·장소 타자기 (하이브리드 × 아카이브)"),
-               ("footage", "words", "원본 영상 + 핵심 단어 (하이브리드 × 키네틱)"),
                ("bars", "photo", "막대 비교 + 비교 대상의 사진 (데이터 × 아카이브)"),
-               ("chart", "words", "주가 그래프 + 핵심 단어 (데이터 × 키네틱)")]
+               ("chart", "number", "주가 그래프 + 그날의 숫자 하나 (데이터, 영상에서 가장 중요한 숫자에만)")]
 
 
 def type_owner() -> dict:
@@ -172,9 +170,37 @@ def plan_text(res: dict) -> list[str]:
     hook = [m["id"] for m in res["mix"] if "hook" in (m.get("roles") or [])][:2]
     end = [m["id"] for m in res["mix"] if "ending" in (m.get("roles") or [])][:2]
     L += [f"| 훅 (첫 30초) | {' + '.join(hook) or '-'} |", f"| 본론 | {' → '.join(body)} (장면마다 번갈아) |", f"| 결론 | {' + '.join(end) or '-'} |", "",
-          "한 장면 안에서 겹치기 (`layers`) — 영상마다 3장면 이상:", ""]
+          "한 장면 안에서 겹치기 (`layers`) — 영상마다 3장면 이상, **강조가 아니라 내용**(사진·지도·도장)으로:", ""]
     L += [f"- `{a}` + `{b}`: {why}" for a, b, why in GOOD_LAYERS]
     r = MIX_RULES["longform"]
     L += ["", f"규칙(롱폼): 스타일 {r['min_recipes']}종 이상 · 한 스타일이 {int(r['max_share'] * 100)}% 넘지 않게 · 겹친 장면 {r['min_layered']}개 이상 · "
-          f"같은 스타일 {r['max_run'] + 1}장면 연속 금지 (`check` G5 가 검사)"]
+          f"같은 스타일 {r['max_run'] + 1}장면 연속 금지 · 강조는 1분에 1번 이하, 자막과 같은 문장 반복 금지 (`check` G5 가 검사)"]
     return L
+
+
+# ------------------------------------------------------------------ 강조 아껴 쓰기 (사용자 판정 2026-11-09: 남용은 안 쓰는 것만 못하다)
+EMPHASIS_PER_MIN = 1.0      # 강조(핵심 단어 띄우기·큰 숫자 카드·메모 쪽지·키네틱 장면)는 1분에 1번 이하
+EMPHASIS_MAX_HITS = 3
+
+
+def emphasis_stats(spec: dict, total_s: float) -> dict:
+    items, bad_words, crowded = [], [], []
+    for sc in spec.get("scenes", []):
+        n = 0
+        if sc.get("type") == "kinetic":
+            items.append((sc.get("id"), "kinetic"))
+            n += 1
+        for L in sc.get("layers") or []:
+            if L.get("kind") in ("words", "number"):
+                items.append((sc.get("id"), L["kind"]))
+                n += 1
+                if L["kind"] == "words" and not (1 <= len(L.get("hit") or []) <= EMPHASIS_MAX_HITS):
+                    bad_words.append(sc.get("id"))
+        for b in sc.get("beats", []):
+            if b.get("vox"):
+                items.append((sc.get("id"), "vox"))
+                n += 1
+        if n > 1:
+            crowded.append(sc.get("id"))
+    limit = max(2, round(total_s / 60 * EMPHASIS_PER_MIN))
+    return {"count": len(items), "limit": limit, "items": items, "bad_words": bad_words, "crowded": crowded}

@@ -309,6 +309,29 @@ def _kinetic_beat(D, sc, k, b, t0, d, top=None, max_size=128, band=False, last=F
         wi += len(ws)
 
 
+def _keyword_pop(D, sc, k, hits, t0, d, top, size=96):
+    """겹치기용 강조: 문장 전체가 아니라 '핵심 단어 1~3개'만, 그 말을 하는 순간 한 번 띄웠다 사라진다.
+    (아래 자막과 같은 문장을 위에 반복하지 않는다 — 2026-11-09 사용자 판정: 강조 남용 금지)"""
+    hits = [h for h in hits if h][:3]
+    if not hits:
+        return
+    pdir = Path(sc["_project_dir"])
+    wav = pdir / "03_voice" / f"hb_{sc['id']:03d}_{k}.wav"
+    words = sc["beats"][k]["say"].split(" ")
+    starts = hybrid._word_starts(wav, words, d) or [d * i / max(len(words), 1) for i in range(len(words))]
+    first = next((i for i, w in enumerate(words) if any(h in w for h in hits)), 0)
+    at = t0 + starts[first]
+    text = " ".join(hits)
+    f = fit(FT("value"), text, size, W - 400)
+    i = D._id()
+    D.items.append(f'<div id="{i}" style="position:absolute;left:0;right:0;top:{top:.0f}px;text-align:center;opacity:0">'
+                   f'<span style="display:inline-block;padding:10px 34px;border-radius:10px;background:rgba(12,12,14,.66);'
+                   f'font-family:{_fam("value")};font-size:{f.size}px;color:{_mix(D.red, "#FFFFFF", 0.38)};white-space:nowrap">{_e(text)}</span></div>')
+    D.js.append(f'tl.fromTo("#{i}",{{opacity:0,scale:1.25}},{{opacity:1,scale:1,duration:0.22,ease:"back.out(2)"}},{at:.2f});'
+                f'tl.to("#{i}",{{opacity:0,duration:0.3}},{min(at + 1.8, t0 + d):.2f});')
+    D.sfx.append(("pop", at))
+
+
 def s_kinetic(D, sc, bt, dur):
     """목소리가 말하는 순간 단어가 화면에 박힌다. 덩어리(한 줄) 단위로 위로 밀려 올라가며 바뀜. 강조 단어·숫자는 크게, 강조색."""
     for k, (b, (t0, d)) in enumerate(zip(sc["beats"], bt)):
@@ -334,7 +357,7 @@ def _cut(project, spec, src: str, start: float, dur: float, out: Path, w: int = 
 
 def apply_layers(D, project, spec, sc, bt, dur, adir: Path):
     """sc["layers"]: 바탕 장면(어떤 type 이든) 위에 다른 스타일 요소를 겹친다.
-    words   {beat, hit[], y}            키네틱 단어 (그 박자 말과 함께, 어두운 띠 위)  — kinetic-type
+    words   {beat, hit[1~3], y}         핵심 단어만 한 번 (문장 전체 금지, 자막과 중복 금지) — kinetic-type
     photo   {src, start, beat, side, caption, w}   자료 사진·영상 액자 (화면 속 화면)  — archive-doc
     stamp   {text, beat}                타자기 날짜·장소 도장                      — archive-doc
     line    {text, beat}                영상 위 타자기 한 줄 (아래 3분의 1 띠)       — archive-doc
@@ -350,8 +373,7 @@ def apply_layers(D, project, spec, sc, bt, dur, adir: Path):
         t, k = at_of(L)
         side = L.get("side", "right")
         if kind == "words":
-            _kinetic_beat(D, sc, k, dict(sc["beats"][k], hit=L.get("hit", [])), bt[k][0], bt[k][1],
-                          top=HH * L.get("y", 0.16), max_size=L.get("size", 84), band=True, last=True)
+            _keyword_pop(D, sc, k, L.get("hit", []), bt[k][0], bt[k][1], HH * L.get("y", 0.16), L.get("size", 96))
         elif kind == "photo":
             w = L.get("w", 640)
             h = int(w * 9 / 16)
