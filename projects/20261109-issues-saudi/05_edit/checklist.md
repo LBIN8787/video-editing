@@ -1,6 +1,6 @@
 # 체크리스트 — 20261109-issues-saudi
 
-매뉴얼 v8 · 2026-11-09T14:28:42 · **통과**
+매뉴얼 v9 · 2026-11-09T15:12:23 · **통과**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
@@ -44,16 +44,26 @@
 | G5 | SHOULD | 반복 피로: 눈요기 있는 장면 60% 이상 | ✅ | 16/16 |
 | G5 | SHOULD | 반복 피로: 같은 시각 효과 3장면 연속 없음 · 효과 3종 이상(롱폼) | ✅ | ['fx:dolly', 'fx:dust', 'fx:leak', 'fx:photofill', 'fx:scan', 'fx:tilt'] 연속 [] |
 | G5 | MUST | 같은 type 3연속 없음 | ✅ | [] |
-| G5 | SHOULD | 자료 화면 공백 ≤45초 | ⚠️ | 최장 136초 |
-| G5 | SHOULD | 장 표지 간격 ≤200초 | ✅ | 최장 83초 |
+| G5 | SHOULD | 자료 화면 공백 ≤45초 | ⚠️ | 최장 140초 |
+| G5 | SHOULD | 장 표지 간격 ≤200초 | ✅ | 최장 88초 |
 | G5 | MUST | 스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격) | ✅ | 7종 ['archive-doc', 'data-report', 'hybrid-causal', 'kinetic-type', 'map-journey' |
-| G5 | MUST | 한 스타일이 40% 넘지 않음 | ✅ | hybrid-causal 0.27 |
+| G5 | MUST | 한 스타일이 40% 넘지 않음 | ✅ | hybrid-causal 0.25 |
 | G5 | MUST | 한 장면 안에서 겹친 장면(layers) 3개 이상 | ✅ | 3 |
 | G5 | MUST | 같은 스타일 3장면 연속 없음 | ✅ | 최장 2 |
-| G5 | MUST | 강조는 아껴서: 1분에 1번 이하 (이 영상 5번까지) | ✅ | 1번 [(22, 'kinetic')] |
+| G5 | MUST | 강조는 아껴서: 1분에 1번 이하 (이 영상 6번까지) | ✅ | 1번 [(22, 'kinetic')] |
 | G5 | MUST | 한 장면에 강조 1개까지 (위아래로 같은 내용 반복 금지) | ✅ | 넘친 장면 [] |
 | G5 | MUST | 핵심 단어 띄우기(words)는 단어 1~3개만 | ✅ | [] |
 | G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ✅ | dark-doc / 등록부 ['clean-flat', 'dark-doc', 'kinetic-poster', 'newsprint', 'paper- |
 | G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ✅ | python -m ytflow style-pick <프로젝트> |
+| G6 | MUST | final.mp4 | ✅ |  |
+| G6 | MUST | 레이아웃 점검 비어 있음 | ✅ | {} |
+| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 0.97, 'p95_abs_offset': 0.14, 'median_abs_offset': 0.05, 'video_ |
+| G6 | SHOULD | 납품 점검(음량 등) | ✅ | completed |
+| G6 | SHOULD | 최종 목소리 ElevenLabs | ⚠️ |  |
+| G7 | MUST | 제목 후보 3개 + 이유 | ✅ |  |
+| G7 | MUST | 썸네일 A/B/C + 점검 ok | ✅ |  |
+| G7 | SHOULD | 제목 앞 22자 안에 질문/핵심 | ✅ | 유가는 올랐는데 사우디는 왜 마이너스 성 |
+| G8 | MUST | GitHub Release 업로드 | ✅ |  |
+| G8 | MUST | episodes.md 기록 | ✅ | ch-issues |
 
 사람 눈 검사(EYE)는 manual/06-checklist.md 끝의 5가지를 확인하세요.
