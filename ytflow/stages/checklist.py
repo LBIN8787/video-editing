@@ -170,6 +170,11 @@ def run(path: Path, upto: str = "G8") -> Report:
         R.add("G4", "SHOULD", "issues: 모르는 것(unknowns) 말하기", bool(tb.get("unknowns")) and "확인되지 않" in txt_all, "")
         voice_sc = [x for x in spec.get("scenes", []) if x.get("type") == "quote" or any(bb.get("lower") for bb in x.get("beats", []))]
         R.add("G4", "SHOULD", "issues: 사람의 목소리 장면 1개 이상 (quote·이름 자막)", bool(voice_sc), len(voice_sc))
+        says = [bb.get("say", "") for x in spec.get("scenes", []) for bb in x.get("beats", [])]
+        asks = sum(t.count("?") for t in says)
+        formal = sum(any(w in t for w in ("것으로 알려졌다", "것으로 전해졌다", "것으로 나타났다")) for t in says)
+        R.add("G4", "SHOULD", "issues: 말하듯 쓴 대본 — 묻는 문장 3개+, 보도문 말투 10% 이하 (08 §0-1)",
+              asks >= 3 and formal <= max(1, len(says) // 10), f"물음 {asks} · 보도문 {formal}/{len(says)}")
         R.add("G1", "SHOULD", "issues: 이름 붙은 시리즈(series)", bool(tb.get("series")), tb.get("series", ""))
         qd = [x["dur"] for x in tl if x.get("type") == "quote"]
         if len(qd) >= 2:

@@ -50,6 +50,7 @@ python -m ytflow check <프로젝트> --upto G4    # 대본까지만
 | SHOULD | 과장 단어 0개 (충격·소름·경악·역대급) | ✅ |
 | SHOULD | 첫 장면이 30초 안에 질문을 던짐 (`question` 단어가 첫 3장면 안에 or 질문형 문장) | ✅ |
 | SHOULD | market: 마지막 2장면 안에 확인할 신호(checklist) | ✅ |
+| SHOULD | issues: 말하듯 쓴 대본 — 묻는 문장(?) 3개 이상, 보도문 말투('~것으로 알려졌다') 비율 낮게 (08 §0-1) | ✅ |
 
 ## G5 연출
 | 등급 | 항목 | 자동 |
