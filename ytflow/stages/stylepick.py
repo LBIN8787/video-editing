@@ -205,3 +205,41 @@ def emphasis_stats(spec: dict, total_s: float) -> dict:
             crowded.append(sc.get("id"))
     limit = max(2, round(total_s / 60 * EMPHASIS_PER_MIN))
     return {"count": len(items), "limit": limit, "items": items, "bad_words": bad_words, "crowded": crowded}
+
+
+# ---------------------------------------------------------------- 반복 피로 (manual v9, 05 §0-3)
+# 글씨·도형만으로 된 자체 제작 장면 = 'plain'. 자료 화면·지도·실제 화면·사진 겹치기·시각 효과가 있으면 '눈요기(hook)'.
+PLAIN_TYPES = {"bignum", "bars", "versus", "checklist", "card_type", "analogy", "timeline", "map_causal", "quote",
+               "chart", "statement", "explain", "people", "compare_values", "proportion"}
+HOOK_TYPES = {"kb", "journey", "choropleth", "zoomshot", "chat", "terminal", "footage", "source", "usmap", "intro", "kinetic"}
+HOOK_LAYERS = {"photo", "locator", "mark"}
+
+
+def visual_hooks(sc: dict) -> list[str]:
+    """장면의 눈요기 목록 (비어 있으면 글씨·도형뿐인 plain 장면)."""
+    out = []
+    if sc.get("type") in HOOK_TYPES or sc.get("clip"):
+        out.append(sc.get("type"))
+    out += [f"layer:{L.get('kind')}" for L in sc.get("layers") or [] if L.get("kind") in HOOK_LAYERS]
+    fx = sc.get("fx") or []
+    out += [f"fx:{f}" for f in ([fx] if isinstance(fx, str) else fx)]
+    if sc.get("bg") == "photo":
+        out.append("bg:photo")
+    return out
+
+
+def variety_stats(spec: dict) -> dict:
+    scenes = [s for s in spec.get("scenes", []) if s.get("type") not in NEUTRAL]
+    hooks = [visual_hooks(s) for s in scenes]
+    run, worst, at = 0, 0, None
+    for s, h in zip(scenes, hooks):
+        run = 0 if h else run + 1
+        if run > worst:
+            worst, at = run, s.get("id")
+    fxs = [f for h in hooks for f in h if f.startswith("fx:")]
+    fx_runs = [scenes[i]["id"] for i in range(len(hooks) - 2)
+               if set(f for f in hooks[i] if f.startswith("fx:")) & set(f for f in hooks[i + 1] if f.startswith("fx:"))
+               & set(f for f in hooks[i + 2] if f.startswith("fx:"))]
+    sig = sorted({f for h in hooks for f in h} | {s.get("type") for s in scenes})
+    return {"n": len(scenes), "hooked": sum(1 for h in hooks if h), "ratio": round(sum(1 for h in hooks if h) / max(1, len(scenes)), 2),
+            "plain_run": worst, "plain_run_at": at, "fx_kinds": sorted(set(fxs)), "fx_runs": fx_runs, "signature": sig}

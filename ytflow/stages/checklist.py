@@ -192,6 +192,18 @@ def run(path: Path, upto: str = "G8") -> Report:
               not longform or len(kinds) >= 3, sorted(kinds))
         runs = [bgs[i] for i in range(len(bgs) - 2) if bgs[i] != "film" and bgs[i] == bgs[i + 1] == bgs[i + 2]]
         R.add("G5", "SHOULD", "배경: 같은 바탕 3장면 연속 없음 (film 제외)", not runs, runs)
+        from . import stylepick as _sp
+        vs = _sp.variety_stats(spec)
+        R.add("G5", "MUST", "반복 피로: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기: 자료·지도·사진 겹치기·시각 효과, 05 §0-3)",
+              vs["plain_run"] <= 2, f"최장 {vs['plain_run']}연속 (장면 {vs['plain_run_at']})")
+        R.add("G5", "SHOULD", "반복 피로: 눈요기 있는 장면 60% 이상", vs["ratio"] >= 0.6, f"{vs['hooked']}/{vs['n']}")
+        R.add("G5", "SHOULD", "반복 피로: 같은 시각 효과 3장면 연속 없음 · 효과 3종 이상(롱폼)",
+              not vs["fx_runs"] and (not longform or len(vs["fx_kinds"]) >= 3), f"{vs['fx_kinds']} 연속 {vs['fx_runs']}")
+        prev = _prev_episode_signature(path, spec)
+        if prev is not None:
+            cur = set(vs["signature"])
+            jac = len(cur & prev) / max(1, len(cur | prev))
+            R.add("G5", "SHOULD", "반복 피로: 같은 채널 직전 편과 화면 구성 겹침 70% 이하 (Jaccard)", jac <= 0.7, f"{jac:.0%}")
         types = [s.get("type") for s in spec.get("scenes", [])]
         run3 = [types[i] for i in range(len(types) - 2) if types[i] == types[i + 1] == types[i + 2] and types[i] != "chapter"]
         R.add("G5", "MUST", "같은 type 3연속 없음", not run3, run3)
@@ -327,3 +339,26 @@ def bump(summary: str, tag: bool = True) -> str:
     if tag:
         print(f"  커밋 후: git push origin HEAD:refs/heads/manual/v{ver}")
     return ver
+
+
+def _prev_episode_signature(path, spec):
+    """같은 채널(edit.yaml 의 channel)의 직전 프로젝트 화면 구성 (type·효과 집합). 없으면 None."""
+    import yaml
+    from . import stylepick as _sp
+    root = Path(path).parent
+    try:
+        ch = (yaml.safe_load((Path(path) / "edit.yaml").read_text(encoding="utf-8")) or {}).get("channel")
+    except Exception:
+        return None
+    best = None
+    for p in sorted(root.iterdir()):
+        if p == Path(path) or p.name >= Path(path).name or not (p / "edit.yaml").exists():
+            continue
+        try:
+            if (yaml.safe_load((p / "edit.yaml").read_text(encoding="utf-8")) or {}).get("channel") != ch:
+                continue
+            sp = json.loads((p / "02_script" / "hybrid.json").read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        best = set(_sp.variety_stats(sp)["signature"])
+    return best

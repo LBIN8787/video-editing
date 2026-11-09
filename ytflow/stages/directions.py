@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -626,3 +627,74 @@ def s_intro(D, sc, bt, dur):
 def register():
     hybrid.RENDER.update({"kb": s_kb, "card_type": s_card_type, "journey": s_journey, "kinetic": s_kinetic,
                           "chat": s_chat, "terminal": s_terminal, "zoomshot": s_zoomshot, "choropleth": s_choropleth, "intro": s_intro})
+
+
+# ---------------------------------------------------------------- 시각 효과 (manual v9: 반복 피로 막기)
+FX = {
+    "tilt": "3D 기울기로 들어와 펴지는 카메라 (도형·글씨 장면을 '물체'처럼)",
+    "dolly": "장면 내내 천천히 밀고 들어가며 옆으로 흐르는 카메라",
+    "dust": "빛 속 먼지 입자가 떠다님 (깊이감)",
+    "leak": "필름 빛샘이 화면을 쓸고 지나감 (따뜻한 전환감)",
+    "photofill": "큰 숫자·글자 안을 자료 사진으로 채움 (bignum·card_type, fill_src)",
+    "scan": "위에서 아래로 훑는 스캔 빛줄기 (자료·문서 느낌)",
+}
+
+
+def _rnd(seed):
+    import random
+    return random.Random(seed)
+
+
+def apply_fx(D, project, spec, sc, bt, dur, adir):
+    fx = sc.get("fx") or []
+    if isinstance(fx, str):
+        fx = [fx]
+    if not fx:
+        return
+    R = _rnd(sc["id"] * 31 + 7)
+    if "tilt" in fx or "dolly" in fx:
+        D.css.append("#root{perspective:1800px}#layer{transform-origin:50% 55%;will-change:transform}")
+    if "tilt" in fx:
+        rx, ry = R.choice([12, -10, 14]), R.choice([-16, 14, -12])
+        D.js.append(f'tl.fromTo("#layer",{{rotationX:{rx},rotationY:{ry},scale:0.9,y:40}},'
+                    f'{{rotationX:0,rotationY:0,scale:1,y:0,duration:2.4,ease:"power3.out"}},0);')
+        if dur > 6:
+            D.js.append(f'tl.to("#layer",{{rotationY:{-ry / 6:.1f},rotationX:{rx / 8:.1f},duration:{dur - 2.6:.2f},ease:"sine.inOut"}},2.4);')
+    if "dolly" in fx:
+        D.js.append(f'tl.fromTo("#layer",{{scale:1.0,x:{R.choice([30, -30])}}},{{scale:1.07,x:0,duration:{dur:.2f},ease:"none"}},0);')
+    if "dust" in fx:
+        parts = []
+        for k in range(46):
+            x, y, s = R.uniform(0, W), R.uniform(0, HH), R.uniform(2, 7)
+            j = D._id()
+            parts.append(f'<div id="{j}" style="position:absolute;left:{x:.0f}px;top:{y:.0f}px;width:{s:.1f}px;height:{s:.1f}px;border-radius:50%;'
+                         f'background:rgba(255,240,210,{R.uniform(.12, .38):.2f});filter:blur({R.uniform(0, 1.6):.1f}px)"></div>')
+            D.js.append(f'tl.to("#{j}",{{x:{R.uniform(-80, 80):.0f},y:{R.uniform(-160, -40):.0f},duration:{dur:.2f},ease:"none"}},0);')
+        D.top = getattr(D, "top", []) + [f'<div style="position:absolute;inset:0;pointer-events:none">{"".join(parts)}</div>']
+    if "leak" in fx:
+        j = D._id()
+        D.top = getattr(D, "top", []) + [
+            f'<div id="{j}" style="position:absolute;left:-60%;top:-20%;width:90%;height:140%;pointer-events:none;mix-blend-mode:screen;opacity:0;'
+            f'background:radial-gradient(ellipse at center,rgba(255,170,80,.55) 0%,rgba(255,90,40,.25) 35%,rgba(0,0,0,0) 70%)"></div>']
+        t = bt[min(1, len(bt) - 1)][0] if len(bt) > 1 else 0.3
+        D.js.append(f'tl.fromTo("#{j}",{{opacity:0,x:0}},{{opacity:1,x:{W * 0.9:.0f},duration:2.6,ease:"sine.inOut"}},{t:.2f});'
+                    f'tl.to("#{j}",{{opacity:0,duration:0.8}},{t + 2.2:.2f});')
+    if "scan" in fx:
+        j = D._id()
+        D.top = getattr(D, "top", []) + [
+            f'<div id="{j}" style="position:absolute;left:0;right:0;top:-120px;height:120px;pointer-events:none;mix-blend-mode:screen;'
+            f'background:linear-gradient(180deg,rgba(120,200,255,0) 0%,rgba(120,200,255,.18) 60%,rgba(200,240,255,.35) 100%)"></div>']
+        D.js.append(f'tl.fromTo("#{j}",{{y:0}},{{y:{HH + 240},duration:2.2,ease:"power1.inOut"}},{bt[0][0] + 0.4:.2f});')
+    if "photofill" in fx:
+        from . import backdrop
+        still = backdrop.photo_still(project, spec, sc.get("fill_src") or sc.get("bg_src"))
+        if still:
+            name = f"fill_{sc['id']:03d}.jpg"
+            shutil.copy(still, adir / name)
+            target = sc.get("value") or (sc.get("lines") or [""])[0]
+            for n, it in enumerate(D.items):
+                if f">{_e(target)}</span>" in it:
+                    D.items[n] = it.replace("<span id=", f'<span style="background:url(assets/{name}) 50% 50%/cover;-webkit-background-clip:text;'
+                                                         f'background-clip:text;color:transparent;-webkit-text-stroke:2px {D.ink}" class="pf" id=', 1)
+                    D.js.append(f'tl.fromTo(".pf",{{backgroundPosition:"30% 40%"}},{{backgroundPosition:"70% 60%",duration:{dur:.2f},ease:"none"}},0);')
+                    break

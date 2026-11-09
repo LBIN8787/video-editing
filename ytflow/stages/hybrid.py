@@ -910,6 +910,9 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     if sc.get("layers"):   # 한 장면 안에서 스타일 겹치기 (directions.apply_layers)
         from . import directions
         directions.apply_layers(D, project, spec, sc, bt, dur, a)
+    if sc.get("fx"):   # 시각 효과 (반복 피로 막기, manual 05 §0-3)
+        from . import directions as _dir
+        _dir.apply_fx(D, project, spec, sc, bt, dur, a)
     idx, html = work / "index.html", D.html(dur, bg_name)
     if not idx.exists() or idx.read_text(encoding="utf-8") != html:  # 바뀐 장면만 다시 렌더
         idx.write_text(html, encoding="utf-8")
