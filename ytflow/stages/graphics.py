@@ -7,7 +7,7 @@
     chapter    장 표지
     lower      인물·장소 소개 자막(이름 띠)
 그래픽 팩(skins/<id>/skin.yaml 의 components)이 의도마다 **컴포넌트**를 고른다:
-    compare    : bars(막대) · duel(큰 숫자 맞대기) · pictogram(아이콘 줄)
+    compare    : bars(막대) · duel(큰 숫자 맞대기) · pictogram(아이콘 줄 — 단위가 '명'일 때만, 아니면 원래 그림)
     proportion : people(사람 100명) · waffle(네모 칸 100개) · donut(도넛)
     flow       : box(손그림 네모) · pill(둥근 알약) · sticky(포스트잇) · circle(동그라미)
     chapter    : paper(종이 한 장이 밀려옴) · type(화면 가득 큰 글씨)
@@ -79,7 +79,10 @@ def dispatch(D, sc: dict, bt: list, dur: float, render: dict) -> bool:
         if comp == "duel" and sc["type"] != "versus" and len(data["items"]) == 2:
             return _duel(D, sc, bt, data, render) or True
         if comp == "pictogram":
-            return _pictogram(D, sc, bt, data) or True
+            # 사람 아이콘 줄은 '사람 수'일 때만 — 배럴·돈·%를 사람 모양으로 그리면 오해 (단위가 다른 versus 도 원래 그림)
+            if sc.get("look") == "pictogram" or "명" in (data.get("unit") or ""):
+                return _pictogram(D, sc, bt, data) or True
+            return False
         return False
     if intent == "proportion":
         data = proportion_data(sc)

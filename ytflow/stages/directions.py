@@ -122,7 +122,7 @@ def _map_colors(D) -> dict:
     land = _mix(base, "#FFFFFF", 0.45) if not dark else _mix(base, "#FFFFFF", 0.12)
     return {"sea": sea, "sea_line": _mix(sea, ink, 0.18), "land": land, "border": _mix(land, ink, 0.35),
             "coast": _mix(land, ink, 0.55), "grat": _mix(sea, "#FFFFFF", 0.35), "sea_text": _mix(sea, ink, 0.45),
-            "card": _mix(base, "#FFFFFF", 0.6), "ink": ink, "accent": D.red, "dark": dark}
+            "card": _mix(base, "#FFFFFF", 0.6) if not dark else pal.get("card", _mix(base, "#000000", 0.25)), "ink": ink, "accent": D.red, "dark": dark}
 
 
 SEAS = [("대 서 양", [-38, 28]), ("태 평 양", [-150, 12]), ("태 평 양", [165, 18]), ("인 도 양", [78, -18])]
@@ -382,7 +382,7 @@ def apply_layers(D, project, spec, sc, bt, dur, adir: Path):
             y = L.get("top", 150)
             i = D._id()
             rot = 2.2 if side == "right" else -2.2
-            cap = (f'<div style="position:absolute;left:0;right:0;bottom:16px;text-align:center;font-family:pen;font-size:30px;color:#2a2a2a">{_e(L["caption"])}</div>'
+            cap = (f'<div style="position:absolute;left:0;right:0;bottom:16px;text-align:center;font-family:pen;font-size:30px;color:{D.ink}">{_e(L["caption"])}</div>'
                    if L.get("caption") else "")
             if not hasattr(D, "top"):
                 D.top = []
