@@ -302,7 +302,10 @@ def _kinetic_beat(D, sc, k, b, t0, d, top=None, max_size=128, band=False, last=F
         D.items.append(f'<div id="{gid}" style="position:absolute;left:120px;right:120px;top:{y:.0f}px;text-align:center;'
                        f'font-family:{_fam("value")};line-height:1.1;white-space:nowrap">{"".join(spans)}</div>')
         if ci < len(chunks) - 1 or not last:   # 다음 덩어리가 오면 위로 밀려 흐려짐
-            D.js.append(f'tl.to("#{gid}",{{y:{-60 if band else -170},opacity:0.0,duration:0.3,ease:"power2.in"}},{max(c_end - 0.12, c_start + 0.3):.2f});')
+            if band:   # 띠 위에서는 다음 줄이 나오기 전에 완전히 빠진다 (두 줄이 겹쳐 보이지 않게)
+                D.js.append(f'tl.to("#{gid}",{{y:-40,opacity:0.0,duration:0.15,ease:"power2.in"}},{max(c_end - 0.22, c_start + 0.3):.2f});')
+            else:
+                D.js.append(f'tl.to("#{gid}",{{y:-170,opacity:0.0,duration:0.3,ease:"power2.in"}},{max(c_end - 0.12, c_start + 0.3):.2f});')
         wi += len(ws)
 
 
