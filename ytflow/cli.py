@@ -277,6 +277,8 @@ def main(argv: list[str] | None = None) -> None:
     rv = sub.add_parser("review", help="사용자 검토 기록: --pass 면 매뉴얼 그대로, --reject \"이유\" 면 기준 변경 대기로")
     rv.add_argument("project"); rv.add_argument("--pass", dest="passed", action="store_true")
     rv.add_argument("--reject", default=""); rv.add_argument("--note", default="")
+    so = sub.add_parser("short", help="세로 쇼츠 (Claude 판, HyperFrames): 02_script/short.json → 05_edit/final.mp4")
+    so.add_argument("project")
     sub.add_parser("recipes", help="편집 스타일 등록부 목록 (styles/recipes/*.yaml — 파일 하나 추가로 늘림)")
     spk = sub.add_parser("style-pick", help="topic_brief 에 맞는 편집 스타일 추천 (영상 전체·훅·결론) → 01_research/style_pick.md")
     spk.add_argument("project")
@@ -403,6 +405,9 @@ def main(argv: list[str] | None = None) -> None:
         if not a.passed and not a.reject:
             raise SystemExit("--pass 또는 --reject \"이유\" 중 하나를 주세요")
         checklist.review(Project.open(a.project).path, a.passed, a.reject or a.note)
+    elif a.cmd == "short":
+        from .stages import shorts_hf
+        shorts_hf.make(Project.open(a.project))
     elif a.cmd == "recipes":
         from .stages import stylepick
         print(stylepick.listing())
