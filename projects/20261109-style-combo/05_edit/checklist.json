@@ -1,7 +1,7 @@
 {
  "project": "20261109-style-combo",
- "manual_version": "2",
- "checked": "2026-11-09T00:51:00",
+ "manual_version": "3",
+ "checked": "2026-11-09T07:39:58",
  "pass": false,
  "rows": [
   {
@@ -9,7 +9,7 @@
    "level": "MUST",
    "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
    "ok": false,
-   "detail": "[2026-11-09 · 20261107-style-archive 기각] 스타일 자체는 합격. 그러나 한 스타일로만 영상 전체를 만들면 불합격 — 상황에 맞춰 섞어야 함 (장면마다 다른 스타일, 한 장면 안에서도 여러 스타일 조합); [2026-11-09 · 20261107-style-journey 기각] 지도가 보기 불편함: 양 끝이 둥근 타원 투영 + 디자인이 허전하고 밋밋함"
+   "detail": "[2026-11-09 · 20261109-style-combo 기각] 같은 이유: 강조(키네틱 단어 띠 등) 남용, 자막과 같은 내용 반복; [2026-11-09 · 20261109-ai-unslop 기각] 강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)"
   },
   {
    "gate": "G1",
@@ -167,6 +167,20 @@
   },
   {
    "gate": "G5",
+   "level": "SHOULD",
+   "item": "자료 화면 공백 ≤45초",
+   "ok": true,
+   "detail": "최장 39초"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "장 표지 간격 ≤200초",
+   "ok": true,
+   "detail": "최장 116초"
+  },
+  {
+   "gate": "G5",
    "level": "MUST",
    "item": "스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격)",
    "ok": true,
@@ -177,14 +191,14 @@
    "level": "MUST",
    "item": "한 스타일이 40% 넘지 않음",
    "ok": true,
-   "detail": "archive-doc 0.27"
+   "detail": "archive-doc 0.26"
   },
   {
    "gate": "G5",
    "level": "MUST",
    "item": "한 장면 안에서 겹친 장면(layers) 3개 이상",
    "ok": true,
-   "detail": "7"
+   "detail": "6"
   },
   {
    "gate": "G5",
@@ -192,6 +206,27 @@
    "item": "같은 스타일 3장면 연속 없음",
    "ok": true,
    "detail": "최장 2"
+  },
+  {
+   "gate": "G5",
+   "level": "MUST",
+   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 3번까지)",
+   "ok": true,
+   "detail": "3번 [(2, 'kinetic'), (7, 'vox'), (14, 'kinetic')]"
+  },
+  {
+   "gate": "G5",
+   "level": "MUST",
+   "item": "한 장면에 강조 1개까지 (위아래로 같은 내용 반복 금지)",
+   "ok": true,
+   "detail": "넘친 장면 []"
+  },
+  {
+   "gate": "G5",
+   "level": "MUST",
+   "item": "핵심 단어 띄우기(words)는 단어 1~3개만",
+   "ok": true,
+   "detail": "[]"
   },
   {
    "gate": "G5",
