@@ -3,12 +3,13 @@
 편집 스타일 하나 = 유튜브 채널 하나로 운영합니다. 채널 폴더에는 그 채널의 **설정(channel.yaml)·운영 안내(README.md)·에피소드 기록(episodes.md)** 이 있습니다.
 영상 한 편의 작업 파일은 `projects/<날짜>-<채널>-<주제>/` 에 쌓이고, 완성되면 `episodes.md` 에 한 줄이 자동으로 추가됩니다.
 
-## 세 브랜드 (욕망 하나 = 채널 하나) — `brands.yaml`, `../manual/01-desire-map.md`
+## 네 브랜드 (욕망 하나 = 채널 하나) — `brands.yaml`, `../manual/01-desire-map.md`
 | 브랜드 | 욕망 | 제작 라인 |
 |---|---|---|
 | **ai** — AI 더 잘 쓰기 | AI 를 더 잘 알고 다루고 싶다 | `ch-ai-guide`(롱폼) · `ch-ai-shorts` |
 | **market** — 시장의 이유 | 돈의 흐름을 알아 이기고 싶다 | `ch-source-brief` · `ch-paper-column` · `ch-data-motion` · `ch-money-shorts` |
 | **curiosity** — 몰랐던 이유 | 궁금증을 풀고 싶다 | `ch-knowledge` |
+| **issues** — 이슈의 구조 | 세상이 어떻게 돌아가는지 알고 싶다 | `ch-issues` (심층 12~15분 · 빠른 정리 5~8분) |
 
 아래 표의 폴더는 브랜드 아래의 **제작 라인**(형식 + 기본 편집 스타일)입니다. 편집 스타일은 영상·장면마다 `../manual/05-style-matching.md` 로 다시 고릅니다.
 

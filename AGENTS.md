@@ -9,8 +9,8 @@
 Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를 따라 **같은 절차로** 작업합니다.
 
 ## 가장 먼저: 제작 매뉴얼 (`manual/`)
-**새 세션·새 모델은 `manual/README.md` 부터 읽습니다.** 세 채널은 사람의 욕망으로 나뉩니다 (`channels/brands.yaml`):
-**ai**(AI 를 더 잘 다루고 싶다) · **market**(돈의 흐름을 알아 이기고 싶다) · **curiosity**(궁금증을 풀고 싶다).
+**새 세션·새 모델은 `manual/README.md` 부터 읽습니다.** 네 채널은 사람의 욕망으로 나뉩니다 (`channels/brands.yaml`):
+**ai**(AI 를 더 잘 다루고 싶다) · **market**(돈의 흐름을 알아 이기고 싶다) · **curiosity**(궁금증을 풀고 싶다) · **issues**(세상이 어떻게 돌아가는지 알고 싶다).
 한 편마다 `01_research/topic_brief.json`(욕망 → 트리거 → 질문 → 주제)을 먼저 쓰고, 단계마다 `python -m ytflow check <프로젝트>` 를 통과해야 다음으로 갑니다.
 사용자 검토 결과는 `python -m ytflow review <프로젝트> --pass | --reject "이유"` 로 기록하고, 기각 사유는 매뉴얼 기준으로 바꿔 `manual-bump` 로 버전을 올립니다 (`manual/CHANGELOG.md`, 스냅샷 브랜치 `manual/vN`).
 
@@ -20,6 +20,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **제작 매뉴얼 (욕망 → 주제 → 조사 → 대본 → 연출 → 검사)** | `manual/README.md` → `manual/01~06` |
 | **편집 스타일 등록부·자동 추천** (상황에 맞는 스타일, 파일 하나로 늘림) | `styles/recipes/`, `python -m ytflow style-pick <프로젝트>`, `manual/07-extend.md` |
 | **스타일 풀 늘리기** (조사·후보·라이선스, 새 장면 chat·terminal·zoomshot·choropleth·mark, 세로 쇼츠 Claude 판) | `docs/17-style-pool.md`, `skills/edit-style-pool`, `python -m ytflow short <프로젝트>` |
+| **시사·사회 이슈 채널** (비교 채널 8곳 640편 분석: 좋아하는 편집·이유·욕망, 절차·전용 검사) | `docs/18-issues-research.md`, `manual/08-issues.md`, `channels/ch-issues/`, `scripts/issues_research.py` |
 | **반드시 지킬 것·검사** | `manual/06-checklist.md`, `python -m ytflow check <프로젝트>` |
 | 채널 회차 만들기 (반복 운영) | `skills/channel-run/SKILL.md`, `channels/README.md`, `docs/06-operations.md` |
 | 영상 1편 만들기 | `skills/video-make/SKILL.md` |

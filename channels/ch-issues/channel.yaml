@@ -1,0 +1,29 @@
+id: ch-issues
+brand: issues                            # channels/brands.yaml (욕망 = 채널)
+title: "(가칭) 이슈의 구조"
+format: longform
+style_ref: hybrid
+family: source
+concept: >
+  뉴스 속 큰 사건·사회 이슈 하나를 골라 '왜 지금 → 어떤 구조 → 앞으로 → 우리에게'를 한 장의 그림으로 정리하는 시사 해설 채널.
+  양쪽 입장을 출처와 함께 보여 주고, 단정 대신 '확인된 것 / 주장 / 모르는 것'을 나눈다.
+niche: "국제정치·지정학, 국내 사회 이슈, 기업·도시·나라의 흥망. 비교 채널 분석 docs/18-issues-research.md"
+seed_keywords: ["국제 정세", "지정학", "전쟁 이유", "몰락 이유", "사회 이슈 정리", "제도 변화", "근황 정리"]
+target_minutes: 12            # 심층 12~15분 / 빠른 정리 5~8분 (topic_brief.format_length)
+cadence: "주 1~2편 (큰 사건은 48시간 안 빠른 정리 → 1주 안 심층)"
+voice: "미정 — ElevenLabs 로 정함 (차분하고 신뢰감 있는 30~40대 톤 권장)"
+tone: "사건 장면으로 시작 → '왜 지금' 질문 → 구조(지도·인과) → 양쪽 입장 → 앞으로 볼 신호 → 우리와의 연결. 단정·조롱·감정어 금지."
+needs_pc_rebuild: true        # 뉴스 영상 원본은 PC rebuild, 클라우드에서는 사진·지도·도식 중심
+
+sourcing:
+  start_from: news            # 통신사·주요 언론 2곳 이상 + 1차 자료(정부 발표·공식 성명·법령·통계)
+  verify_with: ["정부·기관 공식 발표, 법령 원문", "통신사(연합·AP·로이터)", "서로 다른 성향 언론 2곳 이상", "국제기구 통계(UN·IMF·World Bank)"]
+  photos: "퍼블릭 도메인(미국 정부·의회도서관)·위키미디어 CC BY/CC0·공식 보도자료 사진. 뉴스 영상 화면은 출처·날짜 표시, 길게 쓰지 않음"
+
+demand:
+  queries:
+    국제: ["국제 정세 정리", "전쟁 이유 정리", "지정학 이야기", "트럼프 정책 정리"]
+    몰락: ["몰락 이유", "망한 이유", "붕괴 이유"]
+    사회: ["사회 이슈 정리", "요즘 논란 정리", "제도 바뀌는 이유"]
+  min_seconds: 180
+  per_channel: 60

@@ -10,6 +10,8 @@ python -m ytflow check <프로젝트> --upto G4    # 대본까지만
 - **SHOULD** = 권고. 실패하면 이유를 `REPORT.md` 에 적고 진행 가능.
 - **EYE** = 사람(또는 에이전트)이 눈으로 확인. 자동 검사 불가 → 확인 후 `05_edit/checklist_eye.md` 에 체크.
 
+> **시사(issues) 채널**은 아래에 더해 `manual/08-issues.md` §6 의 전용 항목(기준 시각·양쪽 입장·단정 금지어·출처 다양성)을 `check` 가 함께 검사합니다.
+
 ## G1 주제 (`01_research/topic_brief.json`, 스키마 `schemas/topic_brief.schema.json`)
 | 등급 | 항목 | 자동 |
 |---|---|---|

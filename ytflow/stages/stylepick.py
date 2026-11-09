@@ -137,6 +137,7 @@ def type_owner() -> dict:
 
 
 def mix_stats(spec: dict, timeline: list | None = None) -> dict:
+    from . import hybrid  # noqa: F401  (directions 는 hybrid 를 먼저 불러야 함)
     from .directions import LAYER_KINDS
     own = type_owner()
     durs = {s["scene"]: s["dur"] for s in (timeline or [])}

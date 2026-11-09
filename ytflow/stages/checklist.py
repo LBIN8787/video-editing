@@ -21,13 +21,14 @@ from .. import config
 
 MANUAL = config.ROOT / "manual"
 GATES = ["G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8"]
-BRANDS = ("ai", "market", "curiosity")
+BRANDS = ("ai", "market", "curiosity", "issues")
 
 INVEST = ["사세요", "파세요", "매수 추천", "매도 추천", "매수하세요", "매도하세요", "지금이 기회", "지금 사야", "무조건 오", "확실히 오른",
           "수익 보장", "따라 사면", "목표가는", "꼭 사야", "담으세요", "줍줍"]
 HYPE = ["충격", "소름", "경악", "역대급", "미쳤다", "이거면 끝"]
 UNFINISHED = ["재확인 필요", "TODO", "TBD", "확인 필요]", "XXX"]
 REF_NAMES = ["미주일기", "식스시그마", "머니크루", "AI비즈PT", "로제타"]
+ISSUE_BANNED = ["범인은", "충들", "틀딱", "한남", "김치녀", "짱깨", "쪽바리", "빨갱이", "토착왜구", "매국노"]   # 단정·집단 비하 (manual/08 §6)
 BAD_LICENSE = ["CC BY-SA", "CC-BY-SA", "BY-NC", "BY-ND", "CC BY-NC", "CC BY-ND", "All rights reserved"]
 FOOTAGE_TYPES = {"footage", "kb", "journey", "outro"}
 
@@ -93,6 +94,7 @@ def run(path: Path, upto: str = "G8") -> Report:
     res, scr, edt = path / "01_research", path / "02_script", path / "05_edit"
     spec = _load(scr / "hybrid.json") or _load(scr / "scenes.json") or {}
     longform = (ed.get("format") or "longform") == "longform"
+    tl = _load(edt / "hybrid_timeline.json") or []
 
     # 매뉴얼: 기각 사유가 반영되기 전에는 새 영상을 만들지 않는다 (기준을 차곡차곡 쌓기)
     pend = pending_changes()
@@ -149,6 +151,22 @@ def run(path: Path, upto: str = "G8") -> Report:
             tail = [s.get("type") for s in spec.get("scenes", [])[-3:]]
             R.add("G4", "SHOULD", "market: 끝에 확인할 신호(checklist)", "checklist" in tail, tail)
 
+    if brand == "issues" and last >= 3:   # 시사 채널 전용 (manual/08-issues.md §6)
+        R.add("G4", "MUST", "issues: 사실 기준 시각(as_of)", bool(tb.get("as_of")), tb.get("as_of", ""))
+        sides = [x for x in tb.get("sides") or [] if x.get("source")]
+        R.add("G4", "MUST", "issues: 서로 다른 입장 2개 이상(각 출처)", len(sides) >= 2, len(sides))
+        txt_all = _texts(spec)
+        R.add("G4", "MUST", "issues: 대본에 '기준' 시점 언급", "기준" in txt_all, "")
+        bad = [w for w in ISSUE_BANNED if w in txt_all]
+        R.add("G4", "MUST", "issues: 단정·비하 금지어 없음", not bad, bad)
+        fs2 = _load(res / "factsheet.md") or ""
+        links2 = set(re.findall(r"https?://[^\s)>\]]+", fs2))
+        doms = {re.sub(r"^https?://(www\.)?", "", u).split("/")[0] for u in links2}
+        R.add("G3", "MUST", "issues: 출처 링크 5개 이상·도메인 3곳 이상", len(links2) >= 5 and len(doms) >= 3, f"{len(links2)}개 / {len(doms)}곳")
+        R.add("G4", "SHOULD", "issues: 모르는 것(unknowns) 말하기", bool(tb.get("unknowns")) and "확인되지 않" in txt_all, "")
+        qd = [x["dur"] for x in tl if x.get("type") == "quote"]
+        if len(qd) >= 2:
+            R.add("G5", "SHOULD", "issues: 양쪽 입장 장면 길이 차 30% 이내", min(qd) / max(qd) >= 0.7, [round(x, 1) for x in qd])
     if last >= 4:  # G5 연출
         types = [s.get("type") for s in spec.get("scenes", [])]
         run3 = [types[i] for i in range(len(types) - 2) if types[i] == types[i + 1] == types[i + 2] and types[i] != "chapter"]

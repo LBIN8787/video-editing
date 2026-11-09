@@ -18,7 +18,8 @@
    "enum": [
     "ai",
     "market",
-    "curiosity"
+    "curiosity",
+    "issues"
    ]
   },
   "line": {
@@ -189,6 +190,42 @@
     ]
    },
    "description": "주제 분위기 (style-pick 이 씀)"
+  },
+  "as_of": {
+   "type": "string",
+   "description": "issues: 사실 기준 날짜·시각 (YYYY-MM-DD HH:MM KST) — 영상에 '○월 ○일 기준'으로 말한다"
+  },
+  "sides": {
+   "type": "array",
+   "description": "issues: 서로 다른 입장 2개 이상, 각자 출처",
+   "items": {
+    "type": "object",
+    "properties": {
+     "who": {
+      "type": "string"
+     },
+     "claim": {
+      "type": "string"
+     },
+     "source": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "unknowns": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "issues: 아직 확인되지 않은 것 (영상에서 '모른다'고 말할 것)"
+  },
+  "format_length": {
+   "enum": [
+    "quick",
+    "deep"
+   ],
+   "description": "issues: quick 5~8분 / deep 12~15분"
   }
  }
 }
