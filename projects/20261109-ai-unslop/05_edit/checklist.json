@@ -1,8 +1,8 @@
 {
  "project": "20261109-ai-unslop",
  "manual_version": "3",
- "checked": "2026-11-09T01:20:44",
- "pass": true,
+ "checked": "2026-11-09T01:47:31",
+ "pass": false,
  "rows": [
   {
    "gate": "G0",
@@ -167,6 +167,20 @@
   },
   {
    "gate": "G5",
+   "level": "SHOULD",
+   "item": "자료 화면 공백 ≤45초",
+   "ok": false,
+   "detail": "최장 152초"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "장 표지 간격 ≤200초",
+   "ok": true,
+   "detail": "최장 68초"
+  },
+  {
+   "gate": "G5",
    "level": "MUST",
    "item": "스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격)",
    "ok": true,
@@ -177,14 +191,14 @@
    "level": "MUST",
    "item": "한 스타일이 40% 넘지 않음",
    "ok": true,
-   "detail": "screen-demo 0.29"
+   "detail": "screen-demo 0.27"
   },
   {
    "gate": "G5",
    "level": "MUST",
    "item": "한 장면 안에서 겹친 장면(layers) 3개 이상",
    "ok": true,
-   "detail": "5"
+   "detail": "6"
   },
   {
    "gate": "G5",
@@ -206,6 +220,76 @@
    "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
    "ok": true,
    "detail": "python -m ytflow style-pick <프로젝트>"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "final.mp4",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "레이아웃 점검 비어 있음",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
+   "ok": true,
+   "detail": "{'within_0_5s': 0.984, 'p95_abs_offset': 0.42, 'median_abs_offset': 0.04, 'video_minus_audio_s': -0.067}"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "납품 점검(음량 등)",
+   "ok": true,
+   "detail": "completed"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "최종 목소리 ElevenLabs",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "제목 후보 3개 + 이유",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "썸네일 A/B/C + 점검 ok",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "SHOULD",
+   "item": "제목 앞 22자 안에 질문/핵심",
+   "ok": false,
+   "detail": "AI가 만든 티 나는 화면, 스킬 하나로"
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "GitHub Release 업로드",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "episodes.md 기록",
+   "ok": false,
+   "detail": "ch-ai-guide"
   }
  ]
 }
