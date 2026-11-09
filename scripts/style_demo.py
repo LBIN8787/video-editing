@@ -6,6 +6,8 @@
 스펙: {"skin": "<그래픽 팩>", "scenes": [{"type": ..., ..., "beats": [{"from": "005_1", ...}]}], "footage": ["march", ...]}
 - 박자의 "from": "<원본 장면>_<박자>" → 그 문장(say)과 음성 파일(03_voice/hb_*.wav)을 그대로 가져온다 (목소리 비용 0).
 - 연출 장면 type 은 기존(hybrid.py)이든 새 것(directions.py: kb·card_type·journey·kinetic)이든 쓸 수 있다.
+- "copy": "021" → 원본 21번 장면(type·데이터)을 그대로 쓰고 적은 필드만 덮어씀.
+- "layers": [...] → 한 장면 안에 다른 스타일 요소 겹치기 (directions.apply_layers), "skin": "<팩>" → 그 장면만 다른 그래픽 팩.
 """
 from __future__ import annotations
 
@@ -27,8 +29,12 @@ def main(src_name: str, demo_name: str, spec_path: str) -> Path:
     say = {f"{s['id']:03d}_{k}": b["say"] for s in sh["scenes"] for k, b in enumerate(s["beats"])}
     for d in ("02_script", "03_voice", "04_assets/footage", "05_edit"):
         (dst / d).mkdir(parents=True, exist_ok=True)
+    by_id = {f"{s['id']:03d}": s for s in sh["scenes"]}
     scenes = []
     for i, sc in enumerate(spec["scenes"], 1):
+        if sc.get("copy"):   # 원본 장면을 그대로 가져와(type·데이터) 필요한 것만 덮어쓰기
+            base = {k: v for k, v in by_id[sc["copy"]].items() if k not in ("id", "beats", "chapter")}
+            sc = {**base, **{k: v for k, v in sc.items() if k != "copy"}}
         sc = dict(sc, id=i)
         beats = []
         for k, b in enumerate(sc["beats"]):

@@ -41,6 +41,8 @@
 | newspapers | 두 신문 비교: 검은 줄로 지워진 지면 vs 큰 제목 지면 (재구성 그림) | left{name,sub,stamp}, right{name,sub,headline,note}, 박자 show: left/right |
 | shape | 곡선 모양 비교 개념도 (U자 vs W자 등, 숫자 축 없음 — label 에 '개념도') | ticks[{at,label}], 박자 curve{tone,label,label_at,points[[x,y]...],circle,note} |
 
+**스타일 조합 (필수):** 한 스타일로만 쓰지 않습니다. 새 장면 type `kb`·`card_type`·`journey`·`kinetic`(docs/16)을 섞고, 장면에 `"layers"`(words·photo·stamp·line·locator·number)로 다른 스타일 요소를 겹치며, 필요한 장면만 `"skin"` 으로 그래픽 팩을 바꿉니다. 규칙과 필드는 `manual/05-style-matching.md` §0-1.
+
 자료 화면 사진은 `python -m ytflow archive search "<영문>"` 로 찾고 `ytflow.stages.archive.still_to_clip()` 으로 16:9 영상으로 바꿔 footage 에 넣습니다.
 
 ### 4. 원본 영상 (footage) — 소스 먼저

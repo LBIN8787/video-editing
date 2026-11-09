@@ -52,6 +52,7 @@ python -m ytflow check <프로젝트> --upto G4    # 대본까지만
 | 등급 | 항목 | 자동 |
 |---|---|---|
 | MUST | 같은 type 3연속 없음 (chapter 제외) | ✅ |
+| MUST | **스타일 조합**: 롱폼 4종 이상(쇼츠 2종), 한 스타일 40% 이하(쇼츠 60%), 겹친 장면(`layers`) 3개 이상(쇼츠 1개), 같은 스타일 3장면 연속 없음 — 한 스타일로만 만들면 불합격 | ✅ |
 | SHOULD | 자료 화면 공백 ≤ 45초 (렌더 후 `hybrid_timeline.json` 으로 계산) | ✅ |
 | SHOULD | 약 3분마다 장 표지/질문 (최장 간격 ≤ 200초) | ✅ |
 | SHOULD | 그래픽 팩이 브랜드에 맞는 등록부 레시피의 팩 (`styles/recipes`, `edit.yaml` 의 skin) | ✅ |

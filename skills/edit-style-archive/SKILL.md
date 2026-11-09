@@ -13,3 +13,4 @@ description: 아카이브 다큐 편집 스타일(자료 사진·영상 전체 �
 - **자료:** `python -m ytflow archive search "<영문>"` → `archive.still_to_clip()` 로 16:9 영상. credit·url 필수 (CC BY·CC0·퍼블릭 도메인만).
 - **만들기:** `edit.yaml` 의 `skin: dark-doc` → `python -m ytflow hybrid <프로젝트>` → `python -m ytflow check <프로젝트>`.
 - **시험작:** `projects/20261107-style-archive` (`styles/demos/archive.json`).
+- **혼자 쓰지 않기:** 이 스타일만으로 영상을 만들면 불합격입니다. 다른 스타일 장면과 번갈아 쓰고, 다른 장면 위에 이 스타일 요소를 겹칩니다 (`layers`, `manual/05-style-matching.md` §0-1).

@@ -98,9 +98,9 @@ def run(path: Path) -> Path:
         r = res[role]
         if r:
             L.append(f"| {label} | `{r['id']}` {r['name']} ({r['status']}) | {r['skin']} | {', '.join(r['scene_types'] or [])} | {', '.join(r['why'])} |")
-    L += ["", "**그래픽 팩은 영상 전체의 것 하나**만 씁니다 (훅·결론 스타일은 연출 장면 type 만 빌려 옴).",
-          f"→ `edit.yaml` 의 `skin: {b.get('skin')}`, 훅·결론 장면 type 은 위 표대로 hybrid.json 에.", "",
+    L += ["", f"**기본 그래픽 팩**은 `edit.yaml` 의 `skin: {b.get('skin')}`. 특정 구간만 다른 팩이 맞으면 그 장면에 `\"skin\": \"<팩>\"` (예: 지도 장면만 newsprint, 인용 한 줄만 dark-doc).", "",
           "후보 순위:", ""] + [f"- `{m['id']}` {m['score']:.1f}점 — {', '.join(m['why'])}" for m in res["mix"]]
+    L += plan_text(res)
     out = path / "01_research" / "style_pick.md"
     out.write_text("\n".join(L) + "\n", encoding="utf-8")
     return out
@@ -113,3 +113,68 @@ def listing() -> str:
         rows.append(f"| {r['id']} | {r.get('name')} | {r.get('status')} | {r.get('skin')} | {','.join(f.get('brands', []))} | "
                     f"{','.join(f.get('questions', []))} | {','.join(r.get('roles', []))} |")
     return "\n".join(rows)
+
+
+# ------------------------------------------------------------------ 조합 규칙 (manual/05 §0-1, 사용자 판정 2026-11-09)
+# 한 스타일로만 쭉 가면 불합격. 장면마다 다른 스타일 + 한 장면 안에서 겹치기(layers)가 기본.
+MIX_RULES = {"longform": {"min_recipes": 4, "max_share": 0.40, "min_layered": 3, "max_run": 2},
+             "shorts": {"min_recipes": 2, "max_share": 0.60, "min_layered": 1, "max_run": 2}}
+NEUTRAL = {"chapter", "outro"}
+GOOD_LAYERS = [("kb", "words", "자료 화면 + 그 순간의 핵심 단어 (아카이브 × 키네틱)"),
+               ("kb", "locator", "자료 화면 + 위치 미니 지도 (아카이브 × 지도)"),
+               ("kb", "number", "자료 화면 + 큰 숫자 카드 (아카이브 × 데이터)"),
+               ("journey", "photo", "지도 이동 + 그곳의 자료 사진 액자 (지도 × 아카이브)"),
+               ("footage", "stamp", "원본 영상 + 날짜·장소 타자기 (하이브리드 × 아카이브)"),
+               ("footage", "words", "원본 영상 + 핵심 단어 (하이브리드 × 키네틱)"),
+               ("bars", "photo", "막대 비교 + 비교 대상의 사진 (데이터 × 아카이브)"),
+               ("chart", "words", "주가 그래프 + 핵심 단어 (데이터 × 키네틱)")]
+
+
+def type_owner() -> dict:
+    out = {}
+    for r in load():
+        for t in r.get("owns") or []:
+            out.setdefault(t, r["id"])
+    return out
+
+
+def mix_stats(spec: dict, timeline: list | None = None) -> dict:
+    from .directions import LAYER_KINDS
+    own = type_owner()
+    durs = {s["scene"]: s["dur"] for s in (timeline or [])}
+    seq, share, used, layered = [], {}, set(), 0
+    for sc in spec.get("scenes", []):
+        t = sc.get("type")
+        if t in NEUTRAL:
+            continue
+        rid = own.get(t, f"?{t}")
+        d = durs.get(sc.get("id"), 5.0 * max(len(sc.get("beats", [])), 1))
+        seq.append(rid)
+        share[rid] = share.get(rid, 0) + d
+        used.add(rid)
+        lk = {LAYER_KINDS.get(L.get("kind")) for L in sc.get("layers") or []} - {None, rid}
+        used |= lk
+        layered += bool(lk)
+    tot = sum(share.values()) or 1
+    run, best = 1, 1
+    for a, b in zip(seq, seq[1:]):
+        run = run + 1 if a == b else 1
+        best = max(best, run)
+    top = max(share.items(), key=lambda kv: kv[1]) if share else ("", 0)
+    return {"recipes": sorted(used), "n_recipes": len(used), "top": top[0], "top_share": round(top[1] / tot, 2),
+            "layered_scenes": layered, "max_run": best if seq else 0, "sequence": seq}
+
+
+def plan_text(res: dict) -> list[str]:
+    L = ["", "## 조합 계획 (한 스타일로만 만들지 않습니다)", "",
+         "| 구간 | 쓸 스타일 (2개 이상 섞기) |", "|---|---|"]
+    body = [m["id"] for m in res["mix"] if "body" in (m.get("roles") or []) or "whole" in (m.get("roles") or [])][:3]
+    hook = [m["id"] for m in res["mix"] if "hook" in (m.get("roles") or [])][:2]
+    end = [m["id"] for m in res["mix"] if "ending" in (m.get("roles") or [])][:2]
+    L += [f"| 훅 (첫 30초) | {' + '.join(hook) or '-'} |", f"| 본론 | {' → '.join(body)} (장면마다 번갈아) |", f"| 결론 | {' + '.join(end) or '-'} |", "",
+          "한 장면 안에서 겹치기 (`layers`) — 영상마다 3장면 이상:", ""]
+    L += [f"- `{a}` + `{b}`: {why}" for a, b, why in GOOD_LAYERS]
+    r = MIX_RULES["longform"]
+    L += ["", f"규칙(롱폼): 스타일 {r['min_recipes']}종 이상 · 한 스타일이 {int(r['max_share'] * 100)}% 넘지 않게 · 겹친 장면 {r['min_layered']}개 이상 · "
+          f"같은 스타일 {r['max_run'] + 1}장면 연속 금지 (`check` G5 가 검사)"]
+    return L

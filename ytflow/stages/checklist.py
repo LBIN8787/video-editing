@@ -153,7 +153,7 @@ def run(path: Path, upto: str = "G8") -> Report:
         types = [s.get("type") for s in spec.get("scenes", [])]
         run3 = [types[i] for i in range(len(types) - 2) if types[i] == types[i + 1] == types[i + 2] and types[i] != "chapter"]
         R.add("G5", "MUST", "같은 type 3연속 없음", not run3, run3)
-        tl = _load(edt / "hybrid_timeline.json")
+        tl = _load(edt / "hybrid_timeline.json") or []
         if tl:
             t, last_f, gap, chap, last_c, cgap = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
             for s in tl:
@@ -169,6 +169,13 @@ def run(path: Path, upto: str = "G8") -> Report:
             R.add("G5", "SHOULD", "장 표지 간격 ≤200초", not longform or cgap <= 200, f"최장 {cgap:.0f}초")
         skin = (ed.get("edit") or {}).get("skin", "paper-sketch")
         from . import stylepick
+        ms = stylepick.mix_stats(spec, tl)
+        rule = stylepick.MIX_RULES["longform" if longform else "shorts"]
+        R.add("G5", "MUST", f"스타일 조합: {rule['min_recipes']}종 이상 섞기 (한 스타일로만 만들면 불합격)", ms["n_recipes"] >= rule["min_recipes"],
+              f"{ms['n_recipes']}종 {ms['recipes']}")
+        R.add("G5", "MUST", f"한 스타일이 {int(rule['max_share'] * 100)}% 넘지 않음", ms["top_share"] <= rule["max_share"], f"{ms['top']} {ms['top_share']}")
+        R.add("G5", "MUST", f"한 장면 안에서 겹친 장면(layers) {rule['min_layered']}개 이상", ms["layered_scenes"] >= rule["min_layered"], ms["layered_scenes"])
+        R.add("G5", "MUST", f"같은 스타일 {rule['max_run'] + 1}장면 연속 없음", ms["max_run"] <= rule["max_run"], f"최장 {ms['max_run']}")
         rec = stylepick.skins_for(brand) if brand else set()
         R.add("G5", "SHOULD", "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)", not rec or skin in rec, f"{skin} / 등록부 {sorted(rec)}")
         sp = path / "01_research" / "style_pick.json"

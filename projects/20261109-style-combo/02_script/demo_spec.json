@@ -1,0 +1,373 @@
+{
+ "direction": "스타일 조합 (장면마다 다른 스타일 + 한 장면 안에서 겹치기)",
+ "skin": "paper-sketch",
+ "footage": [
+  "march",
+  "march2",
+  "troopship",
+  "glasgow",
+  "alfonso",
+  "artillery",
+  "seoul",
+  "parade"
+ ],
+ "scenes": [
+  {
+   "type": "kb",
+   "clip": {
+    "src": "march",
+    "start": 0
+   },
+   "move": "in",
+   "label": "자료 화면 · 미국 의회도서관",
+   "layers": [
+    {
+     "kind": "stamp",
+     "text": "1918 · 프랑스 서부전선",
+     "beat": 0
+    },
+    {
+     "kind": "words",
+     "beat": 1,
+     "hit": [
+      "스페인",
+      "이상한"
+     ],
+     "y": 0.16
+    }
+   ],
+   "beats": [
+    {
+     "from": "001_0"
+    },
+    {
+     "from": "001_1"
+    }
+   ]
+  },
+  {
+   "type": "kinetic",
+   "beats": [
+    {
+     "from": "002_0",
+     "hit": [
+      "스페인에서",
+      "않았습니다."
+     ]
+    },
+    {
+     "from": "002_1",
+     "hit": [
+      "하필",
+      "스페인의"
+     ]
+    }
+   ]
+  },
+  {
+   "copy": "003",
+   "beats": [
+    {
+     "from": "003_0"
+    },
+    {
+     "from": "003_1"
+    }
+   ]
+  },
+  {
+   "type": "journey",
+   "skin": "newsprint",
+   "title": "병이 지나간 길, 1918",
+   "label": "지도 · world-atlas (ISC)",
+   "places": {
+    "kansas": [
+     -96.8,
+     39.1
+    ],
+    "brest": [
+     -4.49,
+     48.39
+    ]
+   },
+   "start": {
+    "goto": null,
+    "zoom": 1
+   },
+   "layers": [
+    {
+     "kind": "photo",
+     "src": "march2",
+     "beat": 1,
+     "side": "right",
+     "caption": "1918 · 행군하는 미군",
+     "w": 600,
+     "top": 260
+    }
+   ],
+   "beats": [
+    {
+     "from": "005_0",
+     "goto": "kansas",
+     "zoom": 3.0,
+     "pin": {
+      "at": "kansas",
+      "label": "캠프 펀스턴 · 1918.3"
+     }
+    },
+    {
+     "from": "005_1"
+    }
+   ]
+  },
+  {
+   "type": "kb",
+   "clip": {
+    "src": "troopship",
+    "start": 0
+   },
+   "move": "left",
+   "label": "자료 화면 · 미군 수송선 (미국 의회도서관)",
+   "layers": [
+    {
+     "kind": "locator",
+     "at": [
+      -4.49,
+      48.39
+     ],
+     "label": "프랑스 브레스트항",
+     "beat": 1,
+     "side": "right",
+     "top": 110
+    },
+    {
+     "kind": "number",
+     "value": "약 200만 명",
+     "label": "대서양을 건넌 미군",
+     "beat": 1,
+     "side": "left",
+     "top": 150
+    }
+   ],
+   "beats": [
+    {
+     "from": "006_0"
+    },
+    {
+     "from": "006_1"
+    }
+   ]
+  },
+  {
+   "type": "card_type",
+   "skin": "dark-doc",
+   "lines": [
+    "'환자 대부분은",
+    "막 도착한 수송선단의 독감 환자다.'"
+   ],
+   "by": "1918년 미국 적십자 사진 설명",
+   "beats": [
+    {
+     "from": "007_1"
+    }
+   ]
+  },
+  {
+   "copy": "011",
+   "clip": {
+    "src": "artillery",
+    "start": 0,
+    "frame": "full"
+   },
+   "layers": [
+    {
+     "kind": "stamp",
+     "text": "1918 · 전쟁 중인 나라들",
+     "beat": 0
+    },
+    {
+     "kind": "words",
+     "beat": 1,
+     "hit": [
+      "전염병이",
+      "돈다'는"
+     ],
+     "y": 0.16
+    }
+   ],
+   "beats": [
+    {
+     "from": "011_0"
+    },
+    {
+     "from": "011_1"
+    }
+   ]
+  },
+  {
+   "copy": "012",
+   "beats": [
+    {
+     "from": "012_0"
+    },
+    {
+     "from": "012_1"
+    }
+   ]
+  },
+  {
+   "type": "kb",
+   "clip": {
+    "src": "alfonso",
+    "start": 0
+   },
+   "move": "up",
+   "label": "자료 화면 · 알폰소 13세 (1914년 사진)",
+   "layers": [
+    {
+     "kind": "stamp",
+     "text": "1918년 5월 · 마드리드",
+     "beat": 0
+    },
+    {
+     "kind": "locator",
+     "at": [
+      -3.7,
+      40.42
+     ],
+     "label": "스페인 마드리드",
+     "beat": 0,
+     "side": "right",
+     "top": 110
+    }
+   ],
+   "beats": [
+    {
+     "from": "013_0",
+     "lower": {
+      "name": "알폰소 13세",
+      "role": "스페인 국왕 · 1914년 사진"
+     }
+    },
+    {
+     "from": "013_1"
+    }
+   ]
+  },
+  {
+   "copy": "014",
+   "beats": [
+    {
+     "from": "014_0"
+    },
+    {
+     "from": "014_1"
+    }
+   ]
+  },
+  {
+   "copy": "021",
+   "layers": [
+    {
+     "kind": "photo",
+     "src": "parade",
+     "beat": 0,
+     "side": "right",
+     "caption": "1918.9.28 필라델피아 퍼레이드",
+     "w": 520,
+     "top": 120,
+     "until": 1
+    }
+   ],
+   "beats": [
+    {
+     "from": "021_0"
+    },
+    {
+     "from": "021_1"
+    }
+   ]
+  },
+  {
+   "copy": "024",
+   "beats": [
+    {
+     "from": "024_0"
+    },
+    {
+     "from": "024_1"
+    }
+   ]
+  },
+  {
+   "type": "journey",
+   "skin": "newsprint",
+   "label": "매일신보 1918 (메디게이트뉴스 인용)",
+   "highlight": [
+    "South Korea",
+    "North Korea"
+   ],
+   "places": {
+    "brest": [
+     -4.49,
+     48.39
+    ],
+    "seoul": [
+     126.98,
+     37.57
+    ]
+   },
+   "pins": [
+    {
+     "at": "brest"
+    }
+   ],
+   "start": {
+    "goto": "brest",
+    "zoom": 2.4
+   },
+   "layers": [
+    {
+     "kind": "photo",
+     "src": "seoul",
+     "beat": 1,
+     "side": "left",
+     "caption": "1910년 무렵 서울 거리",
+     "w": 560,
+     "top": 300
+    }
+   ],
+   "beats": [
+    {
+     "from": "029_0",
+     "goto": "seoul",
+     "zoom": 3.4,
+     "route": [
+      "brest",
+      "seoul"
+     ],
+     "pin": {
+      "at": "seoul",
+      "label": "경성 · 1918.9~11",
+      "side": "right"
+     }
+    },
+    {
+     "from": "030_1"
+    }
+   ]
+  },
+  {
+   "type": "kinetic",
+   "beats": [
+    {
+     "from": "041_0",
+     "hit": [
+      "처음",
+      "숨길수록"
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -853,14 +853,23 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     work.mkdir(parents=True, exist_ok=True)
     a = work / "assets"
     (a / "fonts").mkdir(parents=True, exist_ok=True)
+    shutil.copy(hyper.GSAP, a / "gsap.min.js")
+    _env_skin = os.environ.get("YTFLOW_SKIN")
+    if sc.get("skin"):   # 장면별 그래픽 팩 (스타일 조합: 한 영상 안에서 구간마다 다른 팩)
+        os.environ["YTFLOW_SKIN"] = sc["skin"]
+    try:
+        D = HDoc(sc["id"] * 7 + 3)
+    finally:
+        if _env_skin is None:
+            os.environ.pop("YTFLOW_SKIN", None)
+        else:
+            os.environ["YTFLOW_SKIN"] = _env_skin
     for p in (paper.SERIF, paper.SERIF_B, paper.PEN, paper.SANS, paper.SANS_X, paper.FONT_DIR / "NanumGothic-Regular.ttf"):
-        if not (a / "fonts" / p.name).exists():
+        if not (a / "fonts" / p.name).exists():   # 글꼴은 그래픽 팩(장면별일 수 있음)이 정한 뒤에 연결
             try:
                 os.link(p, a / "fonts" / p.name)
             except OSError:
                 shutil.copy(p, a / "fonts" / p.name)
-    shutil.copy(hyper.GSAP, a / "gsap.min.js")
-    D = HDoc(sc["id"] * 7 + 3)
     bg_name = f"bg_{D.skin['id']}.jpg"          # 그래픽 스킨의 바탕 (종이·민무늬·모눈·어두운 필름)
     bg = a / bg_name
     if not bg.exists():
@@ -881,6 +890,9 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     from . import graphics
     if not graphics.dispatch(D, sc, bt, dur, RENDER):   # 그래픽 팩이 다른 컴포넌트(그림)를 고르면 그걸로
         RENDER[sc["type"]](D, sc, bt, dur)
+    if sc.get("layers"):   # 한 장면 안에서 스타일 겹치기 (directions.apply_layers)
+        from . import directions
+        directions.apply_layers(D, project, spec, sc, bt, dur, a)
     idx, html = work / "index.html", D.html(dur, bg_name)
     if not idx.exists() or idx.read_text(encoding="utf-8") != html:  # 바뀐 장면만 다시 렌더
         idx.write_text(html, encoding="utf-8")
@@ -1103,7 +1115,8 @@ def make(project: Project, workers: int = 3) -> Path:
         parts, t = [], 0.0
         for k, (t0, d) in enumerate(bt):
             parts.append((t0, project.dir("voice") / f"hb_{sc['id']:03d}_{k}.wav"))
-            subs.append((t_acc + t0, t_acc + t0 + d, sc["beats"][k]["say"], project.dir("voice") / f"hb_{sc['id']:03d}_{k}.wav"))
+            if sc["type"] != "kinetic" and sc.get("subs", True):   # 키네틱 장면은 화면 글자가 자막
+                subs.append((t_acc + t0, t_acc + t0 + d, sc["beats"][k]["say"], project.dir("voice") / f"hb_{sc['id']:03d}_{k}.wav"))
         for name, at in results[sc["id"]][0]:
             sfx_events.append((name, t_acc + at))
         sa = work / f"a_{sc['id']:03d}.wav"

@@ -1,0 +1,586 @@
+{
+ "title": "스페인 독감은 왜 '스페인'일까 | 병의 이름은 처음 말한 나라에 붙었다",
+ "core_message": "1918년 독감에 '스페인'이 붙은 건 처음 생긴 곳이어서가 아니라, 전쟁 중 모두가 숨길 때 처음 솔직하게 보도한 나라였기 때문이다. 숨긴 나라들은 더 크게 당했다.",
+ "question": "스페인에서 시작되지도 않은 병이, 왜 '스페인 독감'이 됐을까?",
+ "logic": [
+  "1918년 세계 3명 중 1명 감염",
+  "시작은 스페인이 아님(기원은 아직 미정)",
+  "전쟁 중 나라들은 나쁜 소식을 숨김",
+  "중립국 스페인만 자유롭게 보도 → 이름",
+  "숨긴 대가: 필라델피아 vs 세인트루이스",
+  "조선도 열 명 중 네 명",
+  "87년 뒤 얼음 속에서 찾은 범인",
+  "그래서 지금은 병에 지명을 붙이지 않는다"
+ ],
+ "compare_to": {
+  "5억 명": "당시 세계 인구 3분의 1",
+  "719 vs 347": "같은 기간 두 도시의 10만 명당 사망",
+  "742만": "조선인 1,670만 명 중 44%",
+  "11.8년": "미국 기대수명이 1년 만에 줄어든 폭"
+ },
+ "analogies": [
+  "반에서 감기가 돌 때 혼자 솔직하게 결석계를 낸 학생이 '감기 원조'로 찍히는 것",
+  "불이 났는데 '불이야'를 외치지 않고 잔치를 연 마을"
+ ],
+ "past_cases": [
+  "1918 필라델피아 퍼레이드",
+  "1918 세인트루이스 조기 휴교"
+ ],
+ "glossary": {
+  "중립국": "전쟁에 끼지 않은 나라",
+  "검열": "정부가 신문 내용을 미리 보고 지우는 것",
+  "자유공채": "미국이 전쟁 비용을 마련하려고 판 채권",
+  "영구동토층": "1년 내내 녹지 않는 언 땅"
+ },
+ "map": {
+  "nodes": {
+   "war": {
+    "label": "1차 세계대전",
+    "icon": "shield-alert",
+    "x": 250,
+    "y": 400
+   },
+   "troops": {
+    "label": "군대 이동·밀집 막사",
+    "icon": "ship",
+    "x": 710,
+    "y": 400
+   },
+   "spread": {
+    "label": "독감이 세계로",
+    "icon": "globe",
+    "x": 1170,
+    "y": 400
+   },
+   "deaths": {
+    "label": "최소 5천만 명 사망",
+    "icon": "heart-pulse",
+    "x": 1630,
+    "y": 400
+   },
+   "censor": {
+    "label": "전쟁국: 나쁜 소식 검열",
+    "icon": "lock",
+    "x": 250,
+    "y": 720
+   },
+   "late": {
+    "label": "숨긴 곳은 대비가 늦음",
+    "icon": "hourglass",
+    "x": 710,
+    "y": 720
+   },
+   "spain": {
+    "label": "중립국 스페인: 보도",
+    "icon": "newspaper",
+    "x": 1170,
+    "y": 720
+   },
+   "name": {
+    "label": "'스페인 독감'이란 이름",
+    "icon": "tag",
+    "x": 1630,
+    "y": 720
+   }
+  },
+  "edges": [
+   [
+    "war",
+    "troops"
+   ],
+   [
+    "troops",
+    "spread"
+   ],
+   [
+    "spread",
+    "deaths"
+   ],
+   [
+    "war",
+    "censor"
+   ],
+   [
+    "censor",
+    "late"
+   ],
+   [
+    "late",
+    "spread"
+   ],
+   [
+    "spread",
+    "spain"
+   ],
+   [
+    "spain",
+    "name"
+   ]
+  ]
+ },
+ "footage": {
+  "march": {
+   "file": "march.mp4",
+   "credit": "Library of Congress, TR's sons' regiments during war, 1917-1918 [No. 1] (영화, 1918, 퍼블릭 도메인)",
+   "url": "https://www.loc.gov/item/mp76000222/"
+  },
+  "march2": {
+   "file": "march2.mp4",
+   "credit": "Library of Congress, 같은 영화",
+   "url": "https://www.loc.gov/item/mp76000222/"
+  },
+  "artillery": {
+   "file": "artillery.mp4",
+   "credit": "Library of Congress, 같은 영화",
+   "url": "https://www.loc.gov/item/mp76000222/"
+  },
+  "troopship": {
+   "file": "troopship.mp4",
+   "credit": "Library of Congress, 803rd Pioneer Infantry on the U.S.S. Philippine, Brest, 1919 (No known restrictions)",
+   "url": "https://www.loc.gov/item/2010651614/"
+  },
+  "glasgow": {
+   "file": "glasgow.mp4",
+   "credit": "Library of Congress, American Red Cross — American ward at the Fourth Scottish General Hospital in Glasgow, 1918 (No known restrictions)",
+   "url": "https://www.loc.gov/item/2017675858/"
+  },
+  "alfonso": {
+   "file": "alfonso.mp4",
+   "credit": "Library of Congress, Alfonso XIII, King of Spain, 1914 (1930년 이전 발행, 퍼블릭 도메인)",
+   "url": "https://www.loc.gov/item/96508428/"
+  },
+  "parade": {
+   "file": "parade.mp4",
+   "credit": "Library of Congress, Harris & Ewing — Liberty Loans Parade, Washington, 1918 (No known restrictions)",
+   "url": "https://www.loc.gov/item/2016869133/"
+  },
+  "seoul": {
+   "file": "seoul.mp4",
+   "credit": "Library of Congress, Korea - Seoul - Street scene, 1910 (No known restrictions)",
+   "url": "https://www.loc.gov/item/2023641120/"
+  }
+ },
+ "scenes": [
+  {
+   "type": "kb",
+   "clip": {
+    "src": "march",
+    "start": 0
+   },
+   "move": "in",
+   "label": "자료 화면 · 미국 의회도서관",
+   "layers": [
+    {
+     "kind": "stamp",
+     "text": "1918 · 프랑스 서부전선",
+     "beat": 0
+    },
+    {
+     "kind": "words",
+     "beat": 1,
+     "hit": [
+      "스페인",
+      "이상한"
+     ],
+     "y": 0.16
+    }
+   ],
+   "beats": [
+    {
+     "say": "1918년, 전 세계 사람 세 명 중 한 명이 같은 병에 걸렸습니다."
+    },
+    {
+     "say": "우리는 이 병을 '스페인 독감'이라고 부르죠. 그런데 이상한 점이 하나 있습니다."
+    }
+   ],
+   "id": 1
+  },
+  {
+   "type": "kinetic",
+   "beats": [
+    {
+     "hit": [
+      "스페인에서",
+      "않았습니다."
+     ],
+     "say": "이 병은 스페인에서 시작되지 않았습니다. 스페인이 가장 심하게 당한 나라도 아니었고요."
+    },
+    {
+     "hit": [
+      "하필",
+      "스페인의"
+     ],
+     "say": "그런데 왜 하필 스페인의 이름이 붙었을까요? 오늘은 이 질문 하나를 따라가 보겠습니다."
+    }
+   ],
+   "id": 2
+  },
+  {
+   "type": "map_causal",
+   "label": "자체 정리",
+   "title": "오늘 따라갈 길",
+   "beats": [
+    {
+     "say": "미리 말씀드리면, 답은 전쟁에 있습니다. 1차 세계대전이 병을 실어 날랐고,"
+    },
+    {
+     "say": "같은 전쟁이 신문의 입을 막았습니다. 그리고 입을 막지 않은 단 한 나라가, 병의 이름을 뒤집어썼습니다."
+    }
+   ],
+   "id": 3
+  },
+  {
+   "type": "journey",
+   "skin": "newsprint",
+   "title": "병이 지나간 길, 1918",
+   "label": "지도 · world-atlas (ISC)",
+   "places": {
+    "kansas": [
+     -96.8,
+     39.1
+    ],
+    "brest": [
+     -4.49,
+     48.39
+    ]
+   },
+   "start": {
+    "goto": null,
+    "zoom": 1
+   },
+   "layers": [
+    {
+     "kind": "photo",
+     "src": "march2",
+     "beat": 1,
+     "side": "right",
+     "caption": "1918 · 행군하는 미군",
+     "w": 600,
+     "top": 260
+    }
+   ],
+   "beats": [
+    {
+     "goto": "kansas",
+     "zoom": 3.0,
+     "pin": {
+      "at": "kansas",
+      "label": "캠프 펀스턴 · 1918.3"
+     },
+     "say": "1918년 3월, 미국 캔자스주의 육군 훈련소 캠프 펀스턴."
+    },
+    {
+     "say": "취사병 한 명이 고열로 쓰러졌습니다. 흔히 '기록상 첫 환자'로 꼽히는 앨버트 기첼입니다."
+    }
+   ],
+   "id": 4
+  },
+  {
+   "type": "kb",
+   "clip": {
+    "src": "troopship",
+    "start": 0
+   },
+   "move": "left",
+   "label": "자료 화면 · 미군 수송선 (미국 의회도서관)",
+   "layers": [
+    {
+     "kind": "locator",
+     "at": [
+      -4.49,
+      48.39
+     ],
+     "label": "프랑스 브레스트항",
+     "beat": 1,
+     "side": "right",
+     "top": 110
+    },
+    {
+     "kind": "number",
+     "value": "약 200만 명",
+     "label": "대서양을 건넌 미군",
+     "beat": 1,
+     "side": "left",
+     "top": 150
+    }
+   ],
+   "beats": [
+    {
+     "say": "문제는 이 훈련소가 전쟁터로 가는 길목이었다는 겁니다."
+    },
+    {
+     "say": "전쟁이 끝날 때까지 미국은 군인 약 200만 명을 대서양 건너 프랑스로 보냈습니다. 비좁은 배에, 빽빽한 막사에 실어서요."
+    }
+   ],
+   "id": 5
+  },
+  {
+   "type": "card_type",
+   "skin": "dark-doc",
+   "lines": [
+    "'환자 대부분은",
+    "막 도착한 수송선단의 독감 환자다.'"
+   ],
+   "by": "1918년 미국 적십자 사진 설명",
+   "beats": [
+    {
+     "say": "'환자 대부분은 막 도착한 수송선단의 독감 환자다.' 군대가 움직이는 길이 곧 병이 움직이는 길이었던 거죠."
+    }
+   ],
+   "id": 6
+  },
+  {
+   "type": "footage",
+   "label": "자료 화면 · 1918년 프랑스, 미군 포병 (미국 의회도서관)",
+   "clip": {
+    "src": "artillery",
+    "start": 0,
+    "frame": "full"
+   },
+   "layers": [
+    {
+     "kind": "stamp",
+     "text": "1918 · 전쟁 중인 나라들",
+     "beat": 0
+    },
+    {
+     "kind": "words",
+     "beat": 1,
+     "hit": [
+      "전염병이",
+      "돈다'는"
+     ],
+     "y": 0.16
+    }
+   ],
+   "beats": [
+    {
+     "say": "1918년은 1차 세계대전의 마지막 해입니다. 미국, 영국, 프랑스, 독일. 큰 나라들은 모두 전쟁 중이었죠."
+    },
+    {
+     "say": "전쟁 중인 나라에게 '우리 군대에 전염병이 돈다'는 소식은, 적에게 약점을 알려 주는 일이었습니다."
+    }
+   ],
+   "id": 7
+  },
+  {
+   "type": "newspapers",
+   "label": "재구성 그림 · HISTORY, 위키백과 종합",
+   "left": {
+    "name": "전쟁 중인 나라의 신문",
+    "sub": "1918 · 미국 · 영국 · 프랑스 · 독일",
+    "stamp": "검열"
+   },
+   "right": {
+    "name": "중립국 스페인의 신문",
+    "sub": "1918 · 마드리드",
+    "headline": "정체 모를 병이 도시를 덮치다",
+    "note": "있는 그대로 보도"
+   },
+   "beats": [
+    {
+     "say": "그래서 전쟁 중인 나라의 신문은 침묵했습니다. 정부가 지우기도 했고, 신문사가 알아서 쓰지 않기도 했습니다."
+    },
+    {
+     "say": "그런데 스페인은 이 전쟁에 끼지 않은 중립국이었습니다. 전시 검열이 없었죠. 스페인 신문들은 병이 퍼지는 걸 있는 그대로 썼습니다."
+    }
+   ],
+   "id": 8
+  },
+  {
+   "type": "kb",
+   "clip": {
+    "src": "alfonso",
+    "start": 0
+   },
+   "move": "up",
+   "label": "자료 화면 · 알폰소 13세 (1914년 사진)",
+   "layers": [
+    {
+     "kind": "stamp",
+     "text": "1918년 5월 · 마드리드",
+     "beat": 0
+    },
+    {
+     "kind": "locator",
+     "at": [
+      -3.7,
+      40.42
+     ],
+     "label": "스페인 마드리드",
+     "beat": 0,
+     "side": "right",
+     "top": 110
+    }
+   ],
+   "beats": [
+    {
+     "lower": {
+      "name": "알폰소 13세",
+      "role": "스페인 국왕 · 1914년 사진"
+     },
+     "say": "결정적인 건 1918년 5월이었습니다. 스페인 국왕 알폰소 13세가 이 병에 걸린 겁니다."
+    },
+    {
+     "say": "왕이 앓아누웠다는 소식은 크게 퍼졌고, 바깥에서 보기엔 스페인이 가장 심하게 당한 나라처럼 보였습니다."
+    }
+   ],
+   "id": 9
+  },
+  {
+   "type": "analogy",
+   "label": "자체 정리",
+   "title": "결석계를 낸 학생",
+   "left": {
+    "icon": "newspaper",
+    "label": "스페인",
+    "sub": "혼자 솔직하게 보도"
+   },
+   "right": {
+    "icon": "school",
+    "label": "결석계 낸 학생",
+    "sub": "반 전체가 아픈데"
+   },
+   "result": {
+    "icon": "tag",
+    "label": "'감기 원조'라는 별명"
+   },
+   "beats": [
+    {
+     "say": "반 전체에 감기가 돌았는데 다들 참고 나오고, 한 학생만 솔직하게 결석계를 냈다고 해 볼까요."
+    },
+    {
+     "say": "그러면 그 학생이 '감기 옮긴 애'로 찍히기 쉽습니다. 스페인이 바로 그 학생이었던 겁니다."
+    }
+   ],
+   "id": 10
+  },
+  {
+   "type": "bars",
+   "label": "Hatchett·Mecher·Lipsitch, PNAS 2007 (1918.9.8~12.28)",
+   "title": "인구 10만 명당 초과 사망",
+   "unit": "명",
+   "items": [
+    {
+     "label": "필라델피아",
+     "value": 719
+    },
+    {
+     "label": "세인트루이스",
+     "value": 347
+    }
+   ],
+   "layers": [
+    {
+     "kind": "photo",
+     "src": "parade",
+     "beat": 0,
+     "side": "right",
+     "caption": "1918.9.28 필라델피아 퍼레이드",
+     "w": 520,
+     "top": 120,
+     "until": 1
+    }
+   ],
+   "beats": [
+    {
+     "say": "결과는 어땠을까요. 2007년 미국 과학원 회보에 실린 연구가 같은 석 달 반 동안의 사망을 비교했습니다."
+    },
+    {
+     "say": "인구 10만 명당 필라델피아는 719명, 세인트루이스는 347명. 두 배 넘게 차이가 났습니다."
+    }
+   ],
+   "id": 11
+  },
+  {
+   "type": "people",
+   "label": "CDC · 1918 Pandemic (H1N1 virus)",
+   "title": "세계 인구 100명으로 줄이면",
+   "count": 33,
+   "value": "33명",
+   "caption": "이 병에 걸렸다",
+   "sub": "약 5억 명 = 당시 세계 인구의 3분의 1",
+   "beats": [
+    {
+     "say": "당시 세계 인구를 100명으로 줄여 볼까요."
+    },
+    {
+     "say": "그중 33명이 이 병에 걸렸습니다. 약 5억 명, 세계 인구의 3분의 1입니다."
+    }
+   ],
+   "id": 12
+  },
+  {
+   "type": "journey",
+   "skin": "newsprint",
+   "label": "매일신보 1918 (메디게이트뉴스 인용)",
+   "highlight": [
+    "South Korea",
+    "North Korea"
+   ],
+   "places": {
+    "brest": [
+     -4.49,
+     48.39
+    ],
+    "seoul": [
+     126.98,
+     37.57
+    ]
+   },
+   "pins": [
+    {
+     "at": "brest"
+    }
+   ],
+   "start": {
+    "goto": "brest",
+    "zoom": 2.4
+   },
+   "layers": [
+    {
+     "kind": "photo",
+     "src": "seoul",
+     "beat": 1,
+     "side": "left",
+     "caption": "1910년 무렵 서울 거리",
+     "w": 560,
+     "top": 300
+    }
+   ],
+   "beats": [
+    {
+     "goto": "seoul",
+     "zoom": 3.4,
+     "route": [
+      "brest",
+      "seoul"
+     ],
+     "pin": {
+      "at": "seoul",
+      "label": "경성 · 1918.9~11",
+      "side": "right"
+     },
+     "say": "1918년은 무오년입니다. 조선에서는 이 병을 '무오년 독감', 또는 스페인의 옛 이름을 따 '서반아 감기'라고 불렀습니다."
+    },
+    {
+     "say": "그리고 10월과 11월, 병은 서울과 평양, 전국으로 번졌습니다."
+    }
+   ],
+   "id": 13
+  },
+  {
+   "type": "kinetic",
+   "beats": [
+    {
+     "hit": [
+      "처음",
+      "숨길수록"
+     ],
+     "say": "병의 이름은 처음 생긴 곳이 아니라, 처음 말한 곳에 붙었습니다. 그리고 그 병은, 숨길수록 더 커졌습니다."
+    }
+   ],
+   "id": 14
+  }
+ ]
+}
