@@ -169,6 +169,8 @@ class HDoc(hyper.Doc):
         base = super().html(duration, bg_name)
         media = "".join(self.media)
         base = base.replace('<div id="layer"', media + '<div id="layer"', 1)
+        if getattr(self, "top", None):   # 겹치기(layers)의 영상 액자: 렌더러가 찾도록 #layer 밖, 그 위에
+            base = base.replace("\n</div></div>\n<script>", "\n</div>" + "".join(self.top) + "</div>\n<script>", 1)
         base = base.replace("</style>", "".join(self.css) + f"video{{filter:{_skin_mod().video_filter(self.skin) or 'none'}}}</style>", 1)
         return _skin_mod().remap_html(base, self.skin)   # 기본 토큰 색 → 고른 스킨의 색
 

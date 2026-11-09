@@ -25,3 +25,12 @@ sourcing:
   start_from: release             # 공식 발표·릴리스 노트·GitHub 저장소 → 직접 실행 화면 녹화
   documents: ["회사 공식 블로그·문서·릴리스 노트", "GitHub README·CHANGELOG", "공식 계정 X 게시물(oEmbed 캡처)", "독립 벤치마크(LMArena, METR 등)"]
   capture: "직접 실행 화면은 Playwright 캡처 또는 사용자 PC 화면 녹화 (로그인 화면·개인정보 가리기)"
+
+# 수요 분석 (python -m ytflow demand --channel ch-ai-guide)
+demand:
+  queries:
+    AI디자인: ["바이브코딩 디자인", "AI 웹사이트 디자인", "AI 티 나는 디자인", "클로드 코드 디자인"]
+    AI스킬: ["클로드 스킬", "claude code skills", "클로드 코드 사용법", "코덱스 사용법"]
+    AI활용: ["AI 업무 자동화", "AI 활용법", "챗GPT 활용법", "AI 에이전트 사용법"]
+  min_seconds: 180
+  per_channel: 60

@@ -147,7 +147,7 @@ def mix_stats(spec: dict, timeline: list | None = None) -> dict:
         t = sc.get("type")
         if t in NEUTRAL:
             continue
-        rid = own.get(t, f"?{t}")
+        rid = sc.get("recipe") or own.get(t, f"?{t}")   # 장면이 스스로 밝힌 스타일(예: 화면 녹화 footage → screen-demo)이 우선
         d = durs.get(sc.get("id"), 5.0 * max(len(sc.get("beats", [])), 1))
         seq.append(rid)
         share[rid] = share.get(rid, 0) + d

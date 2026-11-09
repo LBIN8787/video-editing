@@ -33,8 +33,16 @@ def main(src_name: str, demo_name: str, spec_path: str) -> Path:
     scenes = []
     for i, sc in enumerate(spec["scenes"], 1):
         if sc.get("copy"):   # 원본 장면을 그대로 가져와(type·데이터) 필요한 것만 덮어쓰기
-            base = {k: v for k, v in by_id[sc["copy"]].items() if k not in ("id", "beats", "chapter")}
-            sc = {**base, **{k: v for k, v in sc.items() if k != "copy"}}
+            src_sc = by_id[sc["copy"]]
+            base = {k: v for k, v in src_sc.items() if k not in ("id", "beats", "chapter")}
+            beats_in = []
+            for k, b in enumerate(sc.get("beats", [])):   # 같은 장면의 박자면 박자 필드(reveal·draw·fill 등)도 가져옴
+                key = b.get("from", "")
+                if key.startswith(sc["copy"] + "_"):
+                    src_b = src_sc["beats"][int(key.split("_")[1])]
+                    b = {**{x: y for x, y in src_b.items() if x != "say"}, **b}
+                beats_in.append(b)
+            sc = {**base, **{k: v for k, v in sc.items() if k != "copy"}, "beats": beats_in}
         sc = dict(sc, id=i)
         beats = []
         for k, b in enumerate(sc["beats"]):

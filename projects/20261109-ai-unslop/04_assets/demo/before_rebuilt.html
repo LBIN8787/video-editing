@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="unslop-steps" content="Spacing, Color and icons, Type and copy, Details">
+<meta name="unslop-frame" content="200 22 1040">
+<title>EmberAI Dashboard — unslop</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ---------- 0단계: 원래 화면 (examples/dashboard.html 을 같은 값으로 옮김) ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1440px; min-height: 980px; }
+body { font-family: Inter, sans-serif; background-color: #2e1872; position: relative; color: #fff;
+  transition: background-color .6s; }
+.wash { position: absolute; inset: 0; background: linear-gradient(180deg, #5b34b8, #2e1872 50%, #170d3d); transition: opacity .6s; }
+.win { position: absolute; left: 220px; top: 40px; width: 1000px; height: 900px; display: flex; overflow: hidden; border-radius: 14px;
+  box-shadow: 0 40px 110px rgba(76,29,149,.6), 0 0 0 1px rgba(167,139,250,.4); }
+.side { width: 272px; flex-shrink: 0; display: flex; flex-direction: column; background: #140e33; border-right: 1px solid #2c2470;
+  padding: 10px 22px 0 10px; }
+.brand { display: flex; align-items: center; height: 36px; }
+.logo { position: relative; width: 32px; height: 32px; border-radius: 12px; display: grid; place-items: center; overflow: hidden;
+  background: #8b5cf6; box-shadow: 0 0 18px rgba(139,92,246,.7); }
+.logo .lg { position: absolute; inset: 0; background: linear-gradient(135deg, #8b5cf6, #3b82f6); }
+.logo .spark { position: relative; font-size: 15px; }
+.logo .glyph { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; }
+.glyph i { width: 10px; height: 14px; border-radius: 6px 6px 3px 3px; background: #151413; transform: rotate(8deg); display: block; }
+.wm { position: relative; margin-left: 7px; font-size: 19px; font-weight: 800; color: #c4b5fd; }
+.wm .wg { position: absolute; inset: 0; background: linear-gradient(135deg, #c4b5fd, #60a5fa); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.wm2 { position: relative; color: #e9d5ff; }
+.wm2 .wg2 { position: absolute; inset: 0; background: linear-gradient(135deg, #e9d5ff, #818cf8); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.pro { margin-left: 8px; }
+.bell { margin-left: auto; }
+.glow { border-radius: 9px; padding: 2px 8px; font-size: 10.5px; font-weight: 700; color: #fff; background-color: #7c4ff0;
+  box-shadow: 0 0 12px rgba(168,85,247,.55); }
+.hot { border-radius: 9px; padding: 2px 6px; font-size: 11px; font-weight: 800; color: #fff; background-color: #f43f5e; }
+.search { margin-top: 26px; display: flex; align-items: center; height: 46px; border-radius: 23px; border: 1px solid #5b4bc4; background: #1f1850;
+  padding: 0 7px 0 11px; box-shadow: 0 0 18px rgba(139,92,246,.4); }
+.search .sl { margin-left: 5px; font-size: 14px; font-weight: 600; color: #968ee0; }
+.kbd { margin-left: auto; border-radius: 9px; padding: 2px 8px; font-size: 10.5px; font-weight: 700; color: #fff; background-color: #7c4ff0;
+  box-shadow: 0 0 12px rgba(168,85,247,.55); border: 1px solid transparent; }
+.div { height: 1px; background: #2f2672; margin: 12px -22px 0 -10px; }
+.div2 { margin-top: 30px; }
+.lab { margin-top: 22px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #968ee0; }
+.nav { margin-top: 4px; }
+.plans { margin-top: 5px; }
+.nrow, .prow { position: relative; display: flex; align-items: center; border-radius: 12px; padding: 0 13px 0 7px; color: #d6d2ff;
+  transition: none; }
+.actbg { position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(135deg, #7c3aed, #2563eb);
+  box-shadow: 0 8px 24px rgba(124,58,237,.55); }
+.act { color: #fff; background-color: #6d3fe8; }
+.nl { position: relative; font-size: 14.5px; font-weight: 600; }
+.cnt { margin-left: auto; position: relative; }
+.ibox { position: relative; display: inline-grid; width: 16px; height: 16px; place-items: center; flex-shrink: 0; }
+.ibox > * { grid-area: 1 / 1; }
+.emo { font-size: 12px; line-height: 1; }
+.ico { opacity: 0; display: grid; }
+.main { position: relative; flex: 1; min-width: 0; overflow: hidden; background: #0d1131; padding: 0 0 0 18px; }
+.mwash { position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(70% 50% at 85% 0%, rgba(139,92,246,.4), transparent 70%), radial-gradient(60% 40% at 10% 100%, rgba(59,130,246,.25), transparent 70%); }
+.crumb { position: relative; margin-top: 10px; height: 36px; display: flex; align-items: center; font-size: 14.5px; font-weight: 700; }
+.crumb .nl { margin-left: 7px; font-weight: 700; }
+h1 { position: relative; margin-top: 4px; font-size: 35px; font-weight: 800; line-height: 1.25; color: #e9d5ff; }
+.gt { background: linear-gradient(135deg, #f0abfc, #818cf8); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.stats { position: relative; margin-top: 44px; display: flex; }
+.card { position: relative; overflow: hidden; border-radius: 24px; padding: 12px; background-color: #241f6a;
+  border: 1px solid rgba(167,139,250,.5); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 14px 34px rgba(124,58,237,.42); }
+.card > .cg { position: absolute; inset: 0; background: radial-gradient(120% 90% at 0% 0%, rgba(255,255,255,.12), rgba(255,255,255,0) 60%),
+  linear-gradient(115deg, #2b1f6e, #1f2269 48%, #122666); }
+.card > *:not(.cg) { position: relative; }
+.stat { width: 316px; height: 123px; }
+.stat + .stat { margin-left: 26px; }
+.cl { font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #d6d2ff; display: flex; align-items: center; gap: 6px; }
+.fig { margin-top: 4px; font-size: 32px; font-weight: 800; line-height: 1.2; color: #e9d5ff; font-variant-numeric: tabular-nums; }
+.chg { margin-top: 10px; font-size: 13px; font-weight: 700; color: #4ade80; }
+.deco { position: absolute !important; right: 6px; bottom: 20px; font-size: 54px; filter: drop-shadow(0 0 14px rgba(168,85,247,.8)); }
+.dot { width: 6px; height: 6px; border-radius: 3px; background: #E8622C; display: inline-block; }
+.chart { margin-top: 28px; width: 660px; height: 392px; }
+.chart .fig { font-size: 30px; }
+.chart .chg { margin-top: 6px; }
+.plot { position: absolute !important; left: 12px; right: 0; top: 128px; bottom: 30px; }
+.grid { position: absolute; left: 0; right: 0; height: 1px; background: rgba(139,92,246,.3); }
+.bars { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: flex-end; gap: 16px; }
+.bar { width: 40px; border-radius: 20px; background-color: #7c6cf0; box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 0 22px rgba(139,92,246,.55); }
+.bar.now { background-color: #c084fc; }
+.days { position: absolute; left: 0; right: 0; bottom: -24px; display: flex; gap: 16px; font-size: 11px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: rgba(196,181,253,.75); }
+.day { width: 40px; text-align: center; }
+
+/* ---------- 1단계: 간격 (4px 격자, 같은 것은 같은 크기) ---------- */
+.s1 .side { padding: 16px 16px 0 16px; }
+.s1 .search { margin-top: 20px; height: 36px; padding: 0 8px 0 12px; }
+.s1 .search .sl { margin-left: 10px; }
+.s1 .div { margin: 16px -16px 0 -16px; }
+.s1 .div2 { margin-top: 24px; }
+.s1 .lab { margin-top: 24px; }
+.s1 .nav, .s1 .plans { margin-top: 8px; }
+.s1 .nrow, .s1 .prow { height: 32px !important; margin-top: 2px !important; padding: 0 8px; }
+.s1 .nav .nrow:first-child, .s1 .plans .prow:first-child { margin-top: 0 !important; }
+.s1 .nrow .nl, .s1 .prow .nl { margin-left: 10px !important; }
+.s1 .main { padding: 0 32px; }
+.s1 .crumb { margin-top: 24px; }
+.s1 h1 { margin-top: 8px; }
+.s1 .stats { margin-top: 32px; }
+.s1 .card { padding: 20px; }
+.s1 .stat + .stat { margin-left: 16px; }
+.s1 .chart { margin-top: 16px; }
+.s1 .plot { left: 20px; right: 20px; top: 136px; bottom: 44px; }
+
+/* ---------- 2단계: 색과 아이콘 (따뜻한 흑연 무채색 + 숯불 주황 하나) ---------- */
+.s2 body { background-color: #0f0e0d; }
+.s2 .wash, .s2 .mwash, .s2 .actbg, .s2 .card > .cg, .s2 .logo .lg, .s2 .wm .wg, .s2 .wg2 { opacity: 0; }
+.s2 .wm2 { color: #EDEAE4; }
+.s2 .win { box-shadow: 0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(245,240,232,.08); }
+.s2 .side { background: #171615; border-right-color: rgba(245,240,232,.08); }
+.s2 .main { background: #121110; }
+.s2 .logo { background: #E8622C; box-shadow: none; }
+.s2 .logo .spark { opacity: 0; }
+.s2 .logo .glyph { opacity: 1; }
+.s2 .wm { color: #EDEAE4; }
+.s2 .glow, .s2 .hot { background-color: transparent; box-shadow: none; color: #8E8981; }
+.s2 .search { background: #1d1c1a; border-color: rgba(245,240,232,.08); box-shadow: none; }
+.s2 .search .sl { color: #8E8981; }
+.s2 .kbd { background-color: #262422; box-shadow: none; color: #A9A49B; }
+.s2 .div { background: rgba(245,240,232,.08); }
+.s2 .lab { color: #77736C; }
+.s2 .nrow, .s2 .prow { color: #A9A49B; }
+.s2 .act { background-color: #262422; color: #EDEAE4; box-shadow: inset 0 0 0 1px rgba(245,240,232,.06); }
+.s2 .emo { opacity: 0; }
+.s2 .ico { opacity: 1; }
+.s2 .crumb { color: #A9A49B; }
+.s2 h1, .s2 .fig { color: #EDEAE4; }
+.s2 .card { background-color: #1a1918; border-color: rgba(245,240,232,.08); box-shadow: none; }
+.s2 .cl { color: #A9A49B; }
+.s2 .chg { color: #8FBF8A; }
+.s2 .deco { opacity: 0; }
+.s2 .grid { background: rgba(245,240,232,.06); }
+.s2 .bar { background-color: #3A3835; box-shadow: none; }
+.s2 .bar.now { background-color: #E8622C; }
+.s2 .days { color: #77736C; }
+
+/* ---------- 3단계: 글꼴과 문구 (무게 400~500, 대문자 라벨 없애기, 느낌표·인사말 없애기) ---------- */
+.s3 body { font-family: "IBM Plex Sans", sans-serif; }
+.s3 .wm { font-weight: 600; font-size: 17px; margin-left: 10px; }
+.s3 .lab, .s3 .cl, .s3 .days { letter-spacing: 0; text-transform: none; font-weight: 500; }
+.s3 .lab { font-size: 12px; }
+.s3 .cl { font-size: 13px; }
+.s3 .nl { font-size: 14px; font-weight: 400; }
+.s3 .act .nl { font-weight: 500; }
+.s3 .crumb, .s3 .crumb .nl { font-weight: 500; font-size: 13px; }
+.s3 h1 { font-size: 28px; font-weight: 500; }
+.s3 .fig { font-size: 30px; font-weight: 500; }
+.s3 .chg { font-size: 13px; font-weight: 400; }
+.s3 .glow, .s3 .hot, .s3 .days, .s3 .kbd { font-family: "IBM Plex Mono", monospace; font-weight: 400; font-size: 12px; }
+.s3 .search .sl { font-weight: 400; }
+
+/* ---------- 4단계: 마감 (모서리 반지름 규칙, 키캡, 막대 모양, 표시 점) ---------- */
+.s4 .logo { border-radius: 8px; }
+.s4 .search { border-radius: 8px; }
+.s4 .kbd { border-radius: 4px; border-color: rgba(245,240,232,.12); padding: 0 6px; }
+.s4 .nrow, .s4 .prow { border-radius: 8px; }
+.s4 .card { border-radius: 14px; }
+.s4 .bar { border-radius: 4px 4px 0 0; }
+.swap > .to { display: none; } [data-in] { opacity: 0; }
+</style>
+</head>
+<body>
+<div class="wash"></div>
+<div class="win">
+  <aside class="side">
+    <div class="brand" data-gap="side">
+      <div class="logo" data-slop="Glowing gradient logo"><span class="lg"></span><span class="spark">✨</span><span class="glyph"><i></i></span></div>
+      <span class="wm">EmberAI<span class="wg">EmberAI</span></span>
+      <span class="glow pro" data-out="3">PRO</span>
+      <span class="bell"><span class="ibox"><span class="emo">🔔</span><span class="ico"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span></span></span>
+    </div>
+    <div class="search" data-gap="side" data-radius><span class="ibox"><span class="emo">🔍</span><span class="ico"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" />
+</svg></span></span><span class="sl"><span class="swap " data-at="3"><span class="from">Search anything...</span><span class="to">Search</span></span></span><span class="kbd">⌘K</span></div>
+    <div class="div"></div>
+    <p class="lab" data-gap="side">Navigation</p>
+    <nav class="nav" data-gap="side"><a class="nrow act" style="height:46px;margin-top:0px"><span class=actbg></span><span class="ibox"><span class="emo">🏠</span><span class="ico"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+</svg></span></span><span class="nl" style="margin-left:6px">Overview</span></a><a class="nrow" style="height:30px;margin-top:12px"><span class="ibox"><span class="emo">📥</span><span class="ico"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+  <rect x="2" y="4" width="20" height="16" rx="2" />
+</svg></span></span><span class="nl" style="margin-left:6px">Inbox</span><span class="cnt hot">12</span></a><a class="nrow" style="height:40px;margin-top:0px"><span class="ibox"><span class="emo">🚀</span><span class="ico"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" />
+  <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" />
+  <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />
+</svg></span></span><span class="nl" style="margin-left:8px">Projects</span><span class="cnt glow" data-out="3">New ✨</span></a><a class="nrow" style="height:32px;margin-top:8px"><span class="ibox"><span class="emo">👥</span><span class="ico"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <circle cx="9" cy="7" r="4" />
+</svg></span></span><span class="nl" style="margin-left:5px">Customers</span></a><a class="nrow" style="height:44px;margin-top:1px"><span class="ibox"><span class="emo">💸</span><span class="ico"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 17V7" />
+  <path d="M16 8h-6a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8" />
+  <path d="M4 3a1 1 0 0 1 1-1 1.3 1.3 0 0 1 .7.2l.933.6a1.3 1.3 0 0 0 1.4 0l.934-.6a1.3 1.3 0 0 1 1.4 0l.933.6a1.3 1.3 0 0 0 1.4 0l.933-.6a1.3 1.3 0 0 1 1.4 0l.934.6a1.3 1.3 0 0 0 1.4 0l.933-.6A1.3 1.3 0 0 1 19 2a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1 1.3 1.3 0 0 1-.7-.2l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.934.6a1.3 1.3 0 0 1-1.4 0l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-1.4 0l-.934-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-.7.2 1 1 0 0 1-1-1z" />
+</svg></span></span><span class="nl" style="margin-left:9px">Invoices</span></a><a class="nrow" style="height:31px;margin-top:14px"><span class="ibox"><span class="emo">📊</span><span class="ico"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="M18 17V9" />
+  <path d="M13 17V5" />
+  <path d="M8 17v-3" />
+</svg></span></span><span class="nl" style="margin-left:6px">Reports</span></a></nav>
+    <div class="div div2"></div>
+    <p class="lab"><span data-out="2">💳&nbsp;</span>Plans</p>
+    <div class="plans" data-gap="side"><div class="prow" style="height:42px;margin-top:0px"><span class="ibox"><span class="emo">🏢</span><span class="ico"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M10 12h4" />
+  <path d="M10 8h4" />
+  <path d="M14 21v-3a2 2 0 0 0-4 0v3" />
+  <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" />
+  <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" />
+</svg></span></span><span class="nl" style="margin-left:6px">Enterprise</span><span class="cnt glow">18<span data-out="2">&nbsp;👤</span></span></div><div class="prow" style="height:28px;margin-top:9px"><span class="ibox"><span class="emo">💼</span><span class="ico"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+  <rect width="20" height="14" x="2" y="6" rx="2" />
+</svg></span></span><span class="nl" style="margin-left:8px">Business</span><span class="cnt glow">64<span data-out="2">&nbsp;👤</span></span></div><div class="prow" style="height:38px;margin-top:2px"><span class="ibox"><span class="emo">⚡</span><span class="ico"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" />
+</svg></span></span><span class="nl" style="margin-left:4px">Pro</span><span class="cnt glow">210<span data-out="2">&nbsp;👤</span></span></div><div class="prow" style="height:44px;margin-top:12px"><span class="ibox"><span class="emo">🌱</span><span class="ico"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M11 20a10 10 0 0010-10 25.9 25.9 0 00-1.04-7.281 1 1 0 00-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0011 20" />
+  <path d="M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13" />
+</svg></span></span><span class="nl" style="margin-left:7px">Starter</span><span class="cnt glow">480<span data-out="2">&nbsp;👤</span></span></div><div class="prow" style="height:34px;margin-top:5px"><span class="ibox"><span class="emo">🎁</span><span class="ico"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 7v14" />
+  <path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8" />
+  <path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5" />
+  <rect x="3" y="7" width="18" height="4" rx="1" />
+</svg></span></span><span class="nl" style="margin-left:6px">Free</span><span class="cnt glow">1.2k<span data-out="2">&nbsp;👤</span></span></div></div>
+    <div data-gap="side" style="height:1px"></div>
+  </aside>
+  <main class="main">
+    <div class="mwash"></div>
+    <div class="crumb"><span data-out="2">📊</span><span class="nl">Overview</span></div>
+    <h1><span class="swap " data-at="3"><span class="from"><span class="gt" data-slop="Gradient text">Welcome back, Damir! 👋</span></span><span class="to">November 2026</span></span></h1>
+    <div class="stats">
+      <div class="card stat" data-radius><span class="cg"></span>
+        <p class="cl"><span data-out="2">💰</span>Paid this month</p>
+        <p class="fig"><span class="wm2">$48,210<span class="wg2">$48,210</span></span></p>
+        <p class="chg"><span class="swap " data-at="3"><span class="from">🔥 +12%!!</span><span class="to">+12% vs last month</span></span></p>
+        <span class="deco" data-slop="Emoji decoration">💳</span>
+      </div>
+      <div class="card stat"><span class="cg"></span>
+        <p class="cl"><span data-out="2">⚠️</span><span class="dot" data-in="4"></span>Overdue</p>
+        <p class="fig"><span class="swap " data-at="3"><span class="from"><span class="gt">07</span></span><span class="to">7</span></span></p>
+        <p class="chg"><span class="swap " data-at="3"><span class="from">😬 3 less!!</span><span class="to">3 fewer vs last month</span></span></p>
+      </div>
+    </div>
+    <div class="card chart" data-radius><span class="cg"></span>
+      <p class="cl"><span data-out="2">📈</span>Revenue</p>
+      <p class="fig"><span class="swap " data-at="3"><span class="from"><span class="gt">$124,860.40</span></span><span class="to">$124,860</span></span></p>
+      <p class="chg"><span class="swap " data-at="3"><span class="from">🚀 +4.2% this month!!</span><span class="to">+4.2% vs last month</span></span></p>
+      <div class="plot">
+        <div class="grid" style="top:0"></div><div class="grid" style="top:25%"></div><div class="grid" style="top:50%"></div><div class="grid" style="top:75%"></div>
+        <div class="bars" data-slop="Glowing pill bars"><div class="bar" style="height:120px"></div><div class="bar" style="height:172px"></div><div class="bar" style="height:133px"></div><div class="bar now" style="height:225px"></div><div class="bar" style="height:161px"></div><div class="bar" style="height:97px"></div><div class="bar" style="height:143px"></div></div>
+        <div class="days"><span class="day">Mon</span><span class="day">Tue</span><span class="day">Wed</span><span class="day">Thu</span><span class="day">Fri</span><span class="day">Sat</span><span class="day">Sun</span></div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

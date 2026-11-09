@@ -1,0 +1,211 @@
+{
+ "project": "20261109-ai-unslop",
+ "manual_version": "3",
+ "checked": "2026-11-09T01:20:44",
+ "pass": true,
+ "rows": [
+  {
+   "gate": "G0",
+   "level": "MUST",
+   "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "topic_brief.json 있음",
+   "ok": true,
+   "detail": "01_research/topic_brief.json (schemas/topic_brief.schema.json)"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "브랜드(ai/market/curiosity)",
+   "ok": true,
+   "detail": "ai"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망·시청자 질문",
+   "ok": true,
+   "detail": "AI가 만든 티, 어떻게 지워?"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "트리거·왜 지금",
+   "ok": true,
+   "detail": "2026-10-29 공개된 Claude 스킬 heydamir/unslop 이 11일 만에 GitHub 별 12,004개 (2026-11-09, 10월 20일 이후 생긴 저장소 중 4위)"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망 점수 ≥12, 욕망 강도·보여 줄 자료 ≥2",
+   "ok": true,
+   "detail": "합계 16 {'desire': 3, 'clarity': 2, 'timeliness': 3, 'demand': 3, 'visuals': 3, 'angle': 2}"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "수요 증거 1개 이상",
+   "ok": true,
+   "detail": "4"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "후보 3개 비교 기록",
+   "ok": true,
+   "detail": "3"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "우리만의 답(our_angle)",
+   "ok": true,
+   "detail": "소개에서 끝내지 않고 ① 예제 화면에 직접 적용한 전/후와 실제 측정(이모지 30개→0, 줄 높이 30~46px→32px) ② 스킬이 일하는 원리(공식 문서: 쓸 때만 본문을 펼침) ③ 쓰기 전 알아 둘 비용·한계"
+  },
+  {
+   "gate": "G2",
+   "level": "MUST",
+   "item": "자료 화면마다 credit·url",
+   "ok": true,
+   "detail": "5개, 빠짐 []"
+  },
+  {
+   "gate": "G2",
+   "level": "MUST",
+   "item": "금지 라이선스(SA·NC·ND) 없음",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G2",
+   "level": "SHOULD",
+   "item": "자료 화면 소스 3종 이상 (롱폼)",
+   "ok": false,
+   "detail": "2종"
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "팩트시트 + 출처 링크 3개 이상",
+   "ok": true,
+   "detail": "링크 5개"
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "확인 상태 표시(✅/⚠️)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "'쓰지 않는 것' 목록",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "core_message·question·logic",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "비교 기준≥1·비유≥2·과거 사례≥1·풀이≥1",
+   "ok": true,
+   "detail": "{'compare_to': 3, 'analogies': 2, 'past_cases': 1, 'glossary': 4}"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "투자 권유 표현 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "레퍼런스 채널 이름 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "미완성 표시 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "과장 단어 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "첫 3장면 안에 질문",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G5",
+   "level": "MUST",
+   "item": "같은 type 3연속 없음",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G5",
+   "level": "MUST",
+   "item": "스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격)",
+   "ok": true,
+   "detail": "8종 ['archive-doc', 'blueprint-explainer', 'data-report', 'hybrid-causal', 'kinetic-type', 'paper-column', 'screen-demo', 'statement-brief']"
+  },
+  {
+   "gate": "G5",
+   "level": "MUST",
+   "item": "한 스타일이 40% 넘지 않음",
+   "ok": true,
+   "detail": "screen-demo 0.29"
+  },
+  {
+   "gate": "G5",
+   "level": "MUST",
+   "item": "한 장면 안에서 겹친 장면(layers) 3개 이상",
+   "ok": true,
+   "detail": "5"
+  },
+  {
+   "gate": "G5",
+   "level": "MUST",
+   "item": "같은 스타일 3장면 연속 없음",
+   "ok": true,
+   "detail": "최장 2"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
+   "ok": true,
+   "detail": "clean-flat / 등록부 ['blueprint', 'clean-flat', 'dark-doc', 'kinetic-poster', 'paper-sketch']"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
+   "ok": true,
+   "detail": "python -m ytflow style-pick <프로젝트>"
+  }
+ ]
+}

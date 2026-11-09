@@ -41,6 +41,18 @@ def _typewriter(D, x, y, text, size, color, at, font="sans", anchor="l"):
     return at + 0.045 * len(text)
 
 
+def _stamp_line(D, text, at, color="#F2EBDD", dark=True):
+    """왼쪽 위 날짜·장소 도장: 빨간 세로선 + 타자기 글자. 영상 위에서는 어두운 받침(밝은 하늘 위에서도 대비 3:1 이상)."""
+    w = fit(FT("label"), text, 40, 2000).getlength(text) + 44
+    if dark:
+        i = D._id()
+        D.items.append(f'<div id="{i}" style="position:absolute;left:72px;top:88px;width:{w + 24:.0f}px;height:60px;border-radius:6px;'
+                       f'background:rgba(12,12,14,.62)"></div>')
+        D.js.append(f'tl.fromTo("#{i}",{{opacity:0}},{{opacity:1,duration:0.25}},{max(at - 0.2, 0):.2f});')
+    D.items.append(f'<div style="position:absolute;left:84px;top:96px;width:6px;height:44px;background:{D.red}"></div>')
+    _typewriter(D, 108, 118, text, 40, color, at)
+
+
 def s_kb(D, sc, bt, dur):
     """자료 화면 가득 + 켄 번스 움직임 + 필름 가장자리 어둡게 + 타자기 날짜·장소."""
     i = D._id()
@@ -54,8 +66,7 @@ def s_kb(D, sc, bt, dur):
     D.js.append(f'tl.fromTo("#{i}",{{scale:{s0},xPercent:{x0},yPercent:{y0}}},{{scale:{s1},xPercent:{x1},yPercent:{y1},duration:{dur:.2f},ease:"none"}},0);')
     D.label(sc.get("label", ""), dark=True)
     if sc.get("stamp"):
-        D.items.append(f'<div style="position:absolute;left:84px;top:96px;width:6px;height:44px;background:{D.red}"></div>')
-        _typewriter(D, 108, 118, sc["stamp"], 40, "#F2EBDD", 0.5)
+        _stamp_line(D, sc["stamp"], 0.5)
     for b, (t0, d) in zip(sc["beats"], bt):
         if b.get("lower"):
             D.lower(b["lower"]["name"], b["lower"]["role"], t0 + 0.2, dark=True)
@@ -157,7 +168,7 @@ def s_journey(D, sc, bt, dur):
         r = 10 / z ** 0.8
         g.append(f'<g id="{j}" style="opacity:0"><circle cx="{x}" cy="{y}" r="{r * 2.6:.2f}" fill="{C["accent"]}" opacity=".18"/>'
                  f'<circle cx="{x}" cy="{y}" r="{r:.2f}" fill="{C["accent"]}" stroke="#FFFFFF" stroke-width="{3 / z:.2f}"/></g>')
-        pins_js.append(f'tl.fromTo("#{j}",{{opacity:0,scale:{0.2 if not instant else 1}}},{{opacity:1,scale:1,transformOrigin:"{x}px {y}px",'
+        pins_js.append(f'tl.fromTo("#{j}",{{opacity:0,scale:{0.2 if not instant else 1},svgOrigin:"{x} {y}"}},{{opacity:1,scale:1,svgOrigin:"{x} {y}",'
                        f'duration:{0.01 if instant else 0.35},ease:"back.out(3)"}},{at:.2f});')
         if label:
             k = D._id()
@@ -205,7 +216,7 @@ def s_journey(D, sc, bt, dur):
     z = start.get("zoom", 1)
     tx, ty = clamp(start.get("goto"), z)
     _cx[0] = tx
-    D.js.append(f'tl.set("#{cam}",{{x:{tx:.1f},y:{ty:.1f},scale:{z}}},0);')
+    D.js.append(f'tl.set("#{cam}",{{svgOrigin:"0 0",x:{tx:.1f},y:{ty:.1f},scale:{z}}},0);')
     if z > 2:
         D.js.append("".join(f'tl.set("#{j}",{{opacity:0}},0);' for j in sea_ids))
     for a2, b2 in sc.get("drawn", []):
@@ -267,6 +278,7 @@ def _kinetic_beat(D, sc, k, b, t0, d, top=None, max_size=128, band=False, last=F
                        f'background:linear-gradient(90deg,rgba(10,10,12,0),rgba(10,10,12,.62) 18%,rgba(10,10,12,.62) 82%,rgba(10,10,12,0))"></div>')
         D.js.append(f'tl.fromTo("#{bi}",{{opacity:0}},{{opacity:1,duration:0.25}},{t0:.2f});tl.to("#{bi}",{{opacity:0,duration:0.3}},{t0 + d + 0.1:.2f});')
     base_col = "#FFFFFF" if band else D.ink
+    hit_col = _mix(D.red, "#FFFFFF", 0.38) if band else D.red   # 어두운 띠 위에서는 밝은 강조색 (대비 3:1 이상)
     wi = 0
     for ci, c in enumerate(chunks):
         ws = c.split(" ")
@@ -277,7 +289,7 @@ def _kinetic_beat(D, sc, k, b, t0, d, top=None, max_size=128, band=False, last=F
         spans = []
         for j, w in enumerate(ws):
             big = any(h in w for h in hits) or bool(re.search(r"\d", w))
-            col = D.red if big else base_col
+            col = hit_col if big else base_col
             sz = int(size * (1.25 if big else 1.0))
             sid = D._id()
             shadow = "text-shadow:0 4px 14px rgba(0,0,0,.6);" if band else ""
@@ -347,10 +359,12 @@ def apply_layers(D, project, spec, sc, bt, dur, adir: Path):
             rot = 2.2 if side == "right" else -2.2
             cap = (f'<div style="position:absolute;left:0;right:0;bottom:-58px;text-align:center;font-family:pen;font-size:30px;color:#2a2a2a">{_e(L["caption"])}</div>'
                    if L.get("caption") else "")
-            D.items.append(f'<div id="{i}" style="position:absolute;left:{x - 16}px;top:{y - 16}px;width:{w + 32}px;height:{h + (84 if cap else 32)}px;'
+            if not hasattr(D, "top"):
+                D.top = []
+            D.top.append(f'<div id="{i}" style="position:absolute;left:{x - 16}px;top:{y - 16}px;width:{w + 32}px;height:{h + (84 if cap else 32)}px;'
                            f'background:#FBF8F1;box-shadow:0 18px 40px rgba(0,0,0,.35);transform:rotate({rot}deg)">'
                            f'<div style="position:absolute;left:16px;top:16px;width:{w}px;height:{h}px;overflow:hidden">'
-                           f'<video class="clip" src="assets/{name}" muted playsinline data-start="0" data-duration="{dur:.2f}" data-track-index="{3 + n}" '
+                           f'<video id="{i}v" class="clip" src="assets/{name}" muted playsinline data-start="0" data-duration="{dur:.2f}" data-track-index="{3 + n}" '
                            f'style="width:100%;height:100%;object-fit:cover;filter:grayscale(.3) contrast(1.05)"></video></div>{cap}'
                            f'<div style="position:absolute;left:{w / 2 - 70:.0f}px;top:-22px;width:140px;height:40px;background:rgba(236,220,170,.85);transform:rotate(-4deg)"></div></div>')
             D.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:60,rotation:{rot * 3}}},{{opacity:1,y:0,rotation:{rot},duration:0.55,ease:"back.out(1.4)"}},{t:.2f});')
@@ -358,8 +372,8 @@ def apply_layers(D, project, spec, sc, bt, dur, adir: Path):
                 D.js.append(f'tl.to("#{i}",{{opacity:0,y:40,duration:0.4}},{bt[min(L["until"], len(bt) - 1)][0]:.2f});')
             D.sfx.append(("whoosh", t))
         elif kind == "stamp":
-            D.items.append(f'<div style="position:absolute;left:84px;top:96px;width:6px;height:44px;background:{D.red}"></div>')
-            _typewriter(D, 108, 118, L["text"], 40, L.get("color", "#F2EBDD" if L.get("dark", True) else D.ink), t)
+            dark = L.get("dark", True)
+            _stamp_line(D, L["text"], t, L.get("color", "#F2EBDD" if dark else D.ink), dark)
         elif kind == "line":
             i = D._id()
             D.items.append(f'<div id="{i}" style="position:absolute;left:0;right:0;top:{HH * 0.62:.0f}px;height:150px;'
@@ -376,8 +390,8 @@ def apply_layers(D, project, spec, sc, bt, dur, adir: Path):
             x = W - mw - 90 if side == "right" else 90
             y = L.get("top", 120)
             i = D._id()
-            lab = (f'<div style="position:absolute;left:0;right:0;bottom:-46px;text-align:center;font-family:sans;font-size:26px;color:#FFFFFF;'
-                   f'text-shadow:0 2px 8px rgba(0,0,0,.8)">{_e(L.get("label", ""))}</div>') if L.get("label") else ""
+            lab = (f'<div style="position:absolute;left:0;right:0;bottom:0;height:40px;line-height:40px;text-align:center;font-family:sans;'
+                   f'font-size:24px;color:#FFFFFF;background:rgba(12,12,14,.66)">{_e(L.get("label", ""))}</div>') if L.get("label") else ""
             D.items.append(f'<div id="{i}" style="position:absolute;left:{x}px;top:{y}px;width:{mw}px;height:{mh}px;border:4px solid #FBF8F1;'
                            f'box-shadow:0 14px 34px rgba(0,0,0,.4);background:{C["sea"]}">'
                            f'<svg width="{mw}" height="{mh}" viewBox="0 0 {mw} {mh}" style="position:absolute;inset:0">'
