@@ -43,6 +43,8 @@ python -m ytflow check <프로젝트> --upto G4    # 대본까지만
 | 등급 | 항목 | 자동 |
 |---|---|---|
 | MUST | `core_message`, `question`, `logic` 이 있음 | ✅ |
+| MUST | 롱폼: 본론 전 **MC 오프닝**(`intro`: 인사 → 오늘 이야기 → 순서 예고 → 시작 멘트) — README §2-1 | ✅ |
+| SHOULD | 장 표지마다 진행 멘트(앞 장 한 줄 정리 + 다음 질문) | EYE |
 | MUST | 숫자 비교 기준 `compare_to` ≥ 1, 비유 `analogies` ≥ 2, 과거 사례 `past_cases` ≥ 1, `glossary` ≥ 1 | ✅ |
 | MUST | **투자 권유 표현 0개** (사세요·매수 추천·지금이 기회·무조건 오른다·수익 보장 …) | ✅ |
 | MUST | 레퍼런스 채널 이름 0개 | ✅ |
@@ -56,6 +58,8 @@ python -m ytflow check <프로젝트> --upto G4    # 대본까지만
 | 등급 | 항목 | 자동 |
 |---|---|---|
 | MUST | 같은 type 3연속 없음 (chapter 제외) | ✅ |
+| MUST | **배경 바꿔 쓰기**: 장면 목적에 맞는 바탕 3종 이상 (photo·grid·spot·tint·film, 05 §0-2) | ✅ |
+| SHOULD | 같은 바탕 3장면 연속 없음 (film 제외) | ✅ |
 | MUST | **강조 아껴 쓰기**: 강조(words·number·vox·kinetic) 1분에 1번 이하, 한 장면에 1개까지, words 는 핵심 단어 1~3개만 — 자막과 같은 문장을 위에 반복하면 불합격 | ✅ |
 | MUST | **스타일 조합**: 롱폼 4종 이상(쇼츠 2종), 한 스타일 40% 이하(쇼츠 60%), 겹친 장면(`layers`) 3개 이상(쇼츠 1개), 같은 스타일 3장면 연속 없음 — 한 스타일로만 만들면 불합격 | ✅ |
 | SHOULD | 자료 화면 공백 ≤ 45초 (렌더 후 `hybrid_timeline.json` 으로 계산) | ✅ |

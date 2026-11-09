@@ -881,10 +881,15 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
                 os.link(p, a / "fonts" / p.name)
             except OSError:
                 shutil.copy(p, a / "fonts" / p.name)
-    bg_name = f"bg_{D.skin['id']}.jpg"          # 그래픽 스킨의 바탕 (종이·민무늬·모눈·어두운 필름)
+    from . import backdrop   # 장면 목적에 맞는 바탕 (film·grid·spot·tint·photo, manual 05 §0-2)
+    kind = backdrop.auto(sc, bool(spec.get("footage")))
+    chap = int(sc.get("chapter", 0) or 0)
+    tag = {"tint": f"_c{chap}", "photo": f"_{sc.get('bg_src', '')}"}.get(kind, "")
+    bg_name = f"bg_{D.skin['id']}_{kind}{tag}.jpg"
     bg = a / bg_name
     if not bg.exists():
-        _skin_mod().background(D.skin, W, HH).save(bg, quality=92)
+        still = backdrop.photo_still(project, spec, sc.get("bg_src")) if kind == "photo" else None
+        backdrop.make(D.skin, kind, W, HH, chap, still).save(bg, quality=92)
     if sc.get("clip"):  # 원본 영상 구간을 장면 길이만큼 잘라 넣는다 (소리 없음)
         src = project.dir("assets") / "footage" / spec["footage"][sc["clip"]["src"]]["file"]
         out = a / f"clip_{sc['id']:03d}.mp4"
@@ -893,6 +898,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
                         "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p", str(out)], check=True)
         sc["_clipfile"] = out.name
     sc["_map"] = spec.get("map")
+    sc["_chapters"] = [x.get("title", "") for x in spec["scenes"] if x.get("type") == "chapter"]
     sc["_project_dir"] = str(project.path)   # 새 연출(directions.py)이 박자 음성·단어 시각을 찾을 때
     sc["_prices"] = project.dir("research") / "prices"
     if sc["type"] == "usmap":

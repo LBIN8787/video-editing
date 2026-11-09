@@ -179,7 +179,19 @@ def run(path: Path, upto: str = "G8") -> Report:
         qd = [x["dur"] for x in tl if x.get("type") == "quote"]
         if len(qd) >= 2:
             R.add("G5", "SHOULD", "issues: 양쪽 입장 장면 길이 차 30% 이내", min(qd) / max(qd) >= 0.7, [round(x, 1) for x in qd])
+    if last >= 3 and longform:  # v8: 본론 전 MC 오프닝
+        sc0 = spec.get("scenes", [])[:2]
+        intro = [x for x in sc0 if x.get("type") == "intro" and len(x.get("beats", [])) >= 3]
+        R.add("G4", "MUST", "오프닝: 본론 전에 MC 오프닝(intro: 인사·오늘 이야기·순서 예고·시작 멘트, 3박자 이상)", bool(intro),
+              "첫 2장면에 intro 없음" if not intro else "")
     if last >= 4:  # G5 연출
+        from . import backdrop
+        bgs = backdrop.plan(spec)
+        kinds = set(bgs)
+        R.add("G5", "MUST", "배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2)",
+              not longform or len(kinds) >= 3, sorted(kinds))
+        runs = [bgs[i] for i in range(len(bgs) - 2) if bgs[i] != "film" and bgs[i] == bgs[i + 1] == bgs[i + 2]]
+        R.add("G5", "SHOULD", "배경: 같은 바탕 3장면 연속 없음 (film 제외)", not runs, runs)
         types = [s.get("type") for s in spec.get("scenes", [])]
         run3 = [types[i] for i in range(len(types) - 2) if types[i] == types[i + 1] == types[i + 2] and types[i] != "chapter"]
         R.add("G5", "MUST", "같은 type 3연속 없음", not run3, run3)

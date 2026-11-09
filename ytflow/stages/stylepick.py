@@ -119,7 +119,7 @@ def listing() -> str:
 # 한 스타일로만 쭉 가면 불합격. 장면마다 다른 스타일 + 한 장면 안에서 겹치기(layers)가 기본.
 MIX_RULES = {"longform": {"min_recipes": 4, "max_share": 0.40, "min_layered": 3, "max_run": 2},
              "shorts": {"min_recipes": 2, "max_share": 0.60, "min_layered": 1, "max_run": 2}}
-NEUTRAL = {"chapter", "outro"}
+NEUTRAL = {"chapter", "outro", "intro"}
 GOOD_LAYERS = [("kb", "locator", "자료 화면 + 위치 미니 지도 (아카이브 × 지도)"),
                ("kb", "number", "자료 화면 + 큰 숫자 카드 (아카이브 × 데이터)"),
                ("journey", "photo", "지도 이동 + 그곳의 자료 사진 액자 (지도 × 아카이브)"),

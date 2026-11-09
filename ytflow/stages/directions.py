@@ -592,6 +592,37 @@ def _layer_mark(D, L, at, end):
         D.rough("line", [x - 160, y + h + 120, x - 10, y + h / 2 + 10], D.red, 5, at=at, dur=0.4, roughness=1.2)
 
 
+# ---------------------------------------------------------------- 오프닝 (MC 진행) — manual v8
+def s_intro(D, sc, bt, dur):
+    """본론 전 MC 오프닝: 시리즈 배지·기준 시각 → 오늘의 제목 → 오늘 순서(장 제목을 대본에서 자동으로).
+    박자: 인사(배지) → 오늘 이야기(제목) → 순서 예고(agenda_beat 부터 목록) → '그럼 시작해 보겠습니다'."""
+    acc = D.red
+    lum = sum(c * w for c, w in zip(_hex(acc), (0.299, 0.587, 0.114)))
+    on_acc = "#15171D" if lum > 140 else "#FFFFFF"
+    i = D._id()
+    D.items.append(f'<div id="{i}" style="position:absolute;left:150px;top:150px;display:flex;align-items:center;gap:18px;font-family:sans-x;font-size:34px;color:{D.ink}">'
+                   f'<span style="background:{acc};color:{on_acc};padding:6px 20px;border-radius:6px;font-weight:700">{_e(sc.get("series", ""))}</span>'
+                   f'<span style="opacity:.8">{_e(sc.get("as_of", ""))}</span></div>')
+    D.js.append(f'tl.fromTo("#{i}",{{opacity:0,x:-30}},{{opacity:1,x:0,duration:0.5}},{bt[0][0] + 0.2:.2f});')
+    tb = bt[min(1, len(bt) - 1)][0] + 0.2
+    for k, ln in enumerate(sc.get("title_lines", [])):
+        f = fit(FT("title"), ln, 84, W - 420)
+        _typewriter(D, 150, 290 + k * 112, ln, f.size, D.ink, tb + k * 0.6, font=_fam("title"), anchor="l")
+    items = sc.get("agenda") or sc.get("_chapters", [])
+    ab = sc.get("agenda_beat", 2)
+    t0 = bt[min(ab, len(bt) - 1)][0] + 0.3
+    span = max(1.2, bt[min(ab, len(bt) - 1)][1] - 0.8)
+    y0 = 560 if len(items) <= 4 else 530
+    gap = min(84, 420 / max(1, len(items)))
+    for k, it in enumerate(items):
+        j = D._id()
+        D.items.append(f'<div id="{j}" style="position:absolute;left:160px;top:{y0 + k * gap:.0f}px;display:flex;align-items:center;gap:22px;'
+                       f'font-family:sans-x;font-size:38px;color:{D.ink};opacity:0">'
+                       f'<span style="width:52px;height:52px;border-radius:50%;border:3px solid {acc};color:{acc};display:flex;align-items:center;'
+                       f'justify-content:center;font-size:28px;font-weight:700">{k + 1}</span>{_e(it)}</div>')
+        D.js.append(f'tl.fromTo("#{j}",{{opacity:0,x:-24}},{{opacity:1,x:0,duration:0.35}},{t0 + k * span / max(1, len(items)):.2f});')
+
+
 def register():
     hybrid.RENDER.update({"kb": s_kb, "card_type": s_card_type, "journey": s_journey, "kinetic": s_kinetic,
-                          "chat": s_chat, "terminal": s_terminal, "zoomshot": s_zoomshot, "choropleth": s_choropleth})
+                          "chat": s_chat, "terminal": s_terminal, "zoomshot": s_zoomshot, "choropleth": s_choropleth, "intro": s_intro})
