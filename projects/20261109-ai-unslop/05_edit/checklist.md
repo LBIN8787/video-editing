@@ -1,6 +1,6 @@
 # 체크리스트 — 20261109-ai-unslop
 
-매뉴얼 v4 · 2026-11-09T08:28:38 · **통과**
+매뉴얼 v4 · 2026-11-09T10:44:02 · **통과**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
@@ -38,10 +38,5 @@
 | G5 | MUST | 핵심 단어 띄우기(words)는 단어 1~3개만 | ✅ | [] |
 | G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ✅ | clean-flat / 등록부 ['blueprint', 'clean-flat', 'codex-ai-note', 'dark-doc', 'kinet |
 | G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ✅ | python -m ytflow style-pick <프로젝트> |
-| G6 | MUST | final.mp4 | ✅ |  |
-| G6 | MUST | 레이아웃 점검 비어 있음 | ✅ | {} |
-| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 0.976, 'p95_abs_offset': 0.42, 'median_abs_offset': 0.04, 'video |
-| G6 | SHOULD | 납품 점검(음량 등) | ✅ | completed |
-| G6 | SHOULD | 최종 목소리 ElevenLabs | ⚠️ |  |
 
 사람 눈 검사(EYE)는 manual/06-checklist.md 끝의 5가지를 확인하세요.
