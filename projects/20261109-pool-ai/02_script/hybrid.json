@@ -1,0 +1,314 @@
+{
+ "title": "AI가 만든 티, 스킬 하나로 지우기 — unslop",
+ "core_message": "AI가 만든 화면은 늘 같은 방식으로 티가 나고, unslop은 그 티를 정해진 순서(진단 → 방향 → 아홉 단계)로 지워 주는 무료 스킬이다.",
+ "question": "AI가 만든 티 나는 화면, 어떻게 지울까?",
+ "logic": [
+  "AI 화면은 가장 흔한 모양을 내놓기 쉬워 서로 닮는다(보라 그라데이션·이모지·느낌표)",
+  "스킬은 Claude가 쓸 때만 펼쳐 보는 업무 설명서다",
+  "unslop 설명서는 진단 → 방향 5줄(먼저 묻기) → 9단계 수정 → 점검 순서를 강제한다",
+  "직접 적용하니 이모지 30개 → 0개, 메뉴 줄 높이 제각각 → 32px로 맞춰졌다",
+  "무료지만 코딩 AI 이용료·사이트 반영·이미지 생성 비용은 따로다"
+ ],
+ "compare_to": [
+  {
+   "value": "별 12,004개",
+   "to": "10월 20일 이후 생긴 저장소 중 4위 (1위 22,638)"
+  },
+  {
+   "value": "이모지 30개",
+   "to": "고친 뒤 0개"
+  },
+  {
+   "value": "메뉴 줄 높이 30~46px",
+   "to": "고친 뒤 모두 32px"
+  }
+ ],
+ "analogies": [
+  {
+   "a": "AI가 만든 화면",
+   "b": "기본 옵션 모델하우스 (깔끔하지만 어디서 본 듯한 집)"
+  },
+  {
+   "a": "스킬",
+   "b": "신입사원 업무 매뉴얼 — 목차만 책상에 두고 일이 생기면 그 장을 펼침"
+  }
+ ],
+ "past_cases": [
+  {
+   "case": "2011년 공개된 부트스트랩이 퍼진 뒤 많은 사이트가 비슷해 보인다는 말이 나옴",
+   "lesson": "편한 틀은 빨리 퍼지지만 모두를 닮게 만든다"
+  }
+ ],
+ "glossary": [
+  {
+   "term": "바이브 코딩",
+   "plain": "코드를 직접 짜지 않고 AI에게 말로 시켜 만드는 방식 (2025년 2월 카르파시가 처음 쓴 말)"
+  },
+  {
+   "term": "슬롭(slop)",
+   "plain": "AI가 대충 찍어 낸, 티 나는 결과물을 낮춰 부르는 말"
+  },
+  {
+   "term": "스킬",
+   "plain": "AI에게 주는 업무 설명서 폴더 (SKILL.md)"
+  },
+  {
+   "term": "깃허브 별",
+   "plain": "저장소에 누르는 '좋아요·즐겨찾기' 같은 표시"
+  }
+ ],
+ "map": {
+  "nodes": {
+   "ask": {
+    "label": "'/unslop 이 화면'",
+    "icon": "message-circle",
+    "x": 250,
+    "y": 400
+   },
+   "desc": {
+    "label": "이름·한 줄 설명으로 판단",
+    "icon": "tag",
+    "x": 710,
+    "y": 400
+   },
+   "body": {
+    "label": "SKILL.md 본문 펼치기",
+    "icon": "file-text",
+    "x": 1170,
+    "y": 400
+   },
+   "refs": {
+    "label": "참고 파일은 필요할 때만",
+    "icon": "files",
+    "x": 1630,
+    "y": 400
+   },
+   "audit": {
+    "label": "진단: AI 티 목록",
+    "icon": "search",
+    "x": 250,
+    "y": 720
+   },
+   "dir": {
+    "label": "방향 5줄 → 먼저 묻기",
+    "icon": "compass",
+    "x": 710,
+    "y": 720
+   },
+   "passes": {
+    "label": "9단계 수정",
+    "icon": "layers",
+    "x": 1170,
+    "y": 720
+   },
+   "check": {
+    "label": "점검표로 다시 보기",
+    "icon": "circle-check",
+    "x": 1630,
+    "y": 720
+   }
+  },
+  "edges": [
+   [
+    "ask",
+    "desc"
+   ],
+   [
+    "desc",
+    "body"
+   ],
+   [
+    "body",
+    "refs"
+   ],
+   [
+    "body",
+    "audit"
+   ],
+   [
+    "audit",
+    "dir"
+   ],
+   [
+    "dir",
+    "passes"
+   ],
+   [
+    "refs",
+    "passes"
+   ],
+   [
+    "passes",
+    "check"
+   ]
+  ]
+ },
+ "footage": {
+  "before": {
+   "file": "before.mp4",
+   "credit": "고치기 전 화면 — 예제: heydamir/unslop examples/dashboard.html (CC BY 4.0, Damir Sokolovsky)",
+   "url": "https://github.com/heydamir/unslop/tree/main/examples"
+  },
+  "after": {
+   "file": "after.mp4",
+   "credit": "고친 뒤 화면 — unslop 절차를 이 채널 직접 실행·녹화 (2026-11-09)",
+   "url": "https://github.com/heydamir/unslop"
+  }
+ },
+ "scenes": [
+  {
+   "type": "chat",
+   "app": "AI 대화 · 재구성 예시 (unslop 절차대로)",
+   "label": "재구성 예시 — unslop SKILL.md 의 진행 순서",
+   "turns": [
+    {
+     "role": "user",
+     "text": "/unslop 이 대시보드",
+     "beat": 0
+    },
+    {
+     "role": "ai",
+     "text": "고치기 전에 진단부터 할게요. 보라색 그라데이션, 이모지 30개, 느낌표 '!!' 3번이 보여요. 방향 다섯 줄을 먼저 정리해 드릴 테니, 이대로 진행할까요?",
+     "beat": 0,
+     "delay": 1.6
+    }
+   ],
+   "beats": [
+    {
+     "say": "이 영상을 만든 클로드 코드 세션에서, 설명서의 절차를 그대로 따라 적용했습니다."
+    }
+   ],
+   "id": 1
+  },
+  {
+   "type": "terminal",
+   "title": "터미널 · 실제 실행 기록 (2026.11.9)",
+   "label": "실제 실행 기록",
+   "lines": [
+    {
+     "cmd": "git clone https://github.com/heydamir/unslop",
+     "beat": 0
+    },
+    {
+     "out": "Cloning into 'unslop'...",
+     "beat": 0,
+     "delay": 2.4
+    },
+    {
+     "cmd": "cp -r unslop/skills/unslop ~/.claude/skills/",
+     "beat": 0,
+     "delay": 3.0
+    },
+    {
+     "cmd": "ls ~/.claude/skills/unslop",
+     "beat": 1,
+     "delay": 0.3
+    },
+    {
+     "out": "SKILL.md  agents  references  scripts",
+     "beat": 1,
+     "delay": 1.4
+    }
+   ],
+   "beats": [
+    {
+     "say": "설치는 간단합니다. 깃허브에서 내려받아, 클로드의 스킬 폴더에 복사하면 끝이에요."
+    },
+    {
+     "say": "폴더 안에는 SKILL.md라는 설명서 한 장과, 참고 자료, 보조 스크립트가 들어 있습니다."
+    }
+   ],
+   "id": 2
+  },
+  {
+   "type": "zoomshot",
+   "clip": {
+    "src": "before",
+    "start": 0
+   },
+   "label": "고치기 전 · unslop 예제 대시보드 (CC BY 4.0)",
+   "focus": [
+    {
+     "beat": 0,
+     "box": [
+      700,
+      70,
+      540,
+      80
+     ],
+     "label": "글자 그라데이션"
+    },
+    {
+     "beat": 1,
+     "box": [
+      395,
+      230,
+      300,
+      330
+     ],
+     "label": "이모지 아이콘"
+    }
+   ],
+   "beats": [
+    {
+     "say": "예제로는 언슬롭에 같이 들어 있는, 일부러 AI처럼 만든 대시보드를 썼습니다."
+    },
+    {
+     "say": "이 영상을 만든 클로드 코드 세션에서, 설명서의 절차를 그대로 따라 적용했습니다."
+    }
+   ],
+   "id": 3
+  },
+  {
+   "type": "bars",
+   "label": "GitHub 검색 (2026.10.20 이후 생성 · 11.9 기준)",
+   "title": "최근 새로 생긴 저장소, 별 순위",
+   "unit": "개",
+   "items": [
+    {
+     "label": "craft-anything",
+     "value": 22638,
+     "text": "22,638"
+    },
+    {
+     "label": "dsh-superagent",
+     "value": 21201,
+     "text": "21,201"
+    },
+    {
+     "label": "dsh-Go",
+     "value": 16093,
+     "text": "16,093"
+    },
+    {
+     "label": "unslop",
+     "value": 12004,
+     "text": "12,004"
+    }
+   ],
+   "emph": 3,
+   "layers": [
+    {
+     "kind": "mark",
+     "beat": 1,
+     "box": [
+      1450,
+      570,
+      200,
+      290
+     ],
+     "shape": "circle"
+    }
+   ],
+   "beats": [
+    {
+     "say": "같은 시기에 새로 생긴 저장소 가운데 네 번째로 많습니다."
+    },
+    {
+     "say": "앞의 셋은 AI 에이전트와 개발 도구인데, 화면 디자인만 다루는 스킬이 그 사이에 끼어든 거죠."
+    }
+   ],
+   "id": 4
+  }
+ ]
+}

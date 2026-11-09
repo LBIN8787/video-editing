@@ -71,6 +71,10 @@ python -m ytflow style-pick <프로젝트>   # topic_brief.json → 영상 전�
 | 신문·보도의 **차이** | `newspapers` | `quote` | |
 | 모양·패턴 (U자·W자) | `shape` (개념도 표시) | | 숫자 축 있는 척 |
 | 꼭 기억할 **한 문장** (결론·훅) | `kinetic` (단어가 말과 함께) | `card_type` | 9분 내내 kinetic |
+| AI 에게 **어떻게 시키는지** (프롬프트·답) | `chat` (재구성 예시 표시) | `footage`(실제 화면) | 지어낸 대화 |
+| **설치·실행 명령** | `terminal` (실제 실행 기록만) | `footage`(터미널 녹화) | |
+| 화면의 **한 곳**을 가리킨다 | `zoomshot` (카메라 줌 + 테두리) | layers `mark` | 줌 3번 이상 |
+| **여러 나라**가 나온다 | `choropleth` | `journey` | 출처 없는 값 |
 | 따라 하기 **단계** | `footage`(화면 녹화) + `vox` 주석 | `checklist` | |
 
 ## 3. 리듬 규칙 (docs/15 근거, `check` 가 일부 자동 검사)

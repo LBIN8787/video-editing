@@ -191,7 +191,7 @@ def emphasis_stats(spec: dict, total_s: float) -> dict:
             items.append((sc.get("id"), "kinetic"))
             n += 1
         for L in sc.get("layers") or []:
-            if L.get("kind") in ("words", "number"):
+            if L.get("kind") in ("words", "number", "mark"):
                 items.append((sc.get("id"), L["kind"]))
                 n += 1
                 if L["kind"] == "words" and not (1 <= len(L.get("hit") or []) <= EMPHASIS_MAX_HITS):

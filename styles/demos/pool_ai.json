@@ -1,0 +1,134 @@
+{
+ "direction": "새 스타일 풀 시험 (AI 대화·터미널·화면 줌·손그림 표시)",
+ "skin": "clean-flat",
+ "footage": [
+  "before",
+  "after"
+ ],
+ "scenes": [
+  {
+   "type": "chat",
+   "app": "AI 대화 · 재구성 예시 (unslop 절차대로)",
+   "label": "재구성 예시 — unslop SKILL.md 의 진행 순서",
+   "turns": [
+    {
+     "role": "user",
+     "text": "/unslop 이 대시보드",
+     "beat": 0
+    },
+    {
+     "role": "ai",
+     "text": "고치기 전에 진단부터 할게요. 보라색 그라데이션, 이모지 30개, 느낌표 '!!' 3번이 보여요. 방향 다섯 줄을 먼저 정리해 드릴 테니, 이대로 진행할까요?",
+     "beat": 0,
+     "delay": 1.6
+    }
+   ],
+   "beats": [
+    {
+     "from": "019_1"
+    }
+   ]
+  },
+  {
+   "type": "terminal",
+   "title": "터미널 · 실제 실행 기록 (2026.11.9)",
+   "label": "실제 실행 기록",
+   "lines": [
+    {
+     "cmd": "git clone https://github.com/heydamir/unslop",
+     "beat": 0
+    },
+    {
+     "out": "Cloning into 'unslop'...",
+     "beat": 0,
+     "delay": 2.4
+    },
+    {
+     "cmd": "cp -r unslop/skills/unslop ~/.claude/skills/",
+     "beat": 0,
+     "delay": 3.0
+    },
+    {
+     "cmd": "ls ~/.claude/skills/unslop",
+     "beat": 1,
+     "delay": 0.3
+    },
+    {
+     "out": "SKILL.md  agents  references  scripts",
+     "beat": 1,
+     "delay": 1.4
+    }
+   ],
+   "beats": [
+    {
+     "from": "018_0"
+    },
+    {
+     "from": "018_1"
+    }
+   ]
+  },
+  {
+   "type": "zoomshot",
+   "clip": {
+    "src": "before",
+    "start": 0
+   },
+   "label": "고치기 전 · unslop 예제 대시보드 (CC BY 4.0)",
+   "focus": [
+    {
+     "beat": 0,
+     "box": [
+      700,
+      70,
+      540,
+      80
+     ],
+     "label": "글자 그라데이션"
+    },
+    {
+     "beat": 1,
+     "box": [
+      395,
+      230,
+      300,
+      330
+     ],
+     "label": "이모지 아이콘"
+    }
+   ],
+   "beats": [
+    {
+     "from": "019_0"
+    },
+    {
+     "from": "019_1"
+    }
+   ]
+  },
+  {
+   "copy": "007",
+   "layers": [
+    {
+     "kind": "mark",
+     "beat": 1,
+     "box": [
+      1450,
+      570,
+      200,
+      290
+     ],
+     "shape": "circle"
+    }
+   ],
+   "beats": [
+    {
+     "from": "007_0"
+    },
+    {
+     "from": "007_1"
+    }
+   ]
+  }
+ ]
+}

@@ -343,7 +343,7 @@ def s_kinetic(D, sc, bt, dur):
 
 # ---------------------------------------------------------------- 4) 한 장면 안에서 스타일 겹치기 (layers)
 LAYER_KINDS = {"words": "kinetic-type", "photo": "archive-doc", "stamp": "archive-doc", "line": "archive-doc",
-               "locator": "map-journey", "number": "data-report"}
+               "locator": "map-journey", "number": "data-report", "mark": "hand-annotate"}
 
 
 def _cut(project, spec, src: str, start: float, dur: float, out: Path, w: int = 1280, h: int = 720):
@@ -382,7 +382,7 @@ def apply_layers(D, project, spec, sc, bt, dur, adir: Path):
             y = L.get("top", 150)
             i = D._id()
             rot = 2.2 if side == "right" else -2.2
-            cap = (f'<div style="position:absolute;left:0;right:0;bottom:-58px;text-align:center;font-family:pen;font-size:30px;color:#2a2a2a">{_e(L["caption"])}</div>'
+            cap = (f'<div style="position:absolute;left:0;right:0;bottom:16px;text-align:center;font-family:pen;font-size:30px;color:#2a2a2a">{_e(L["caption"])}</div>'
                    if L.get("caption") else "")
             if not hasattr(D, "top"):
                 D.top = []
@@ -436,9 +436,162 @@ def apply_layers(D, project, spec, sc, bt, dur, adir: Path):
                            f'<div style="position:absolute;left:0;right:0;top:168px;text-align:center;font-family:sans;font-size:{lf.size}px;color:#3a3a3a">{_e(L.get("label", ""))}</div></div>')
             D.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:-30}},{{opacity:1,y:0,duration:0.45,ease:"back.out(1.8)"}},{t:.2f});')
             D.sfx.append(("impact-bass-1", t + 0.1))
+        elif kind == "mark":
+            _layer_mark(D, L, t, bt[k][0] + bt[k][1])
         else:
             D.qa.append(f"장면 {sc['id']}: 모르는 layer kind '{kind}'")
 
 
+
+# ---------------------------------------------------------------- 5) 새 스타일 풀 (2026-11-09, HyperFrames 레지스트리 블록에서 아이디어: chat-thread·code-terminal-run·cursor-zoom-follow·cursor-annotate·world-map)
+def _card(D, x, y, w, h, title, dark=False):
+    bg, bar, fg = ("#151413", "#232220", "#8E8981") if dark else ("#FFFFFF", "#F1EEE8", "#7D776D")
+    i = D._id()
+    D.items.append(f'<div id="{i}" style="position:absolute;left:{x}px;top:{y}px;width:{w}px;height:{h}px;border-radius:18px;overflow:hidden;'
+                   f'background:{bg};box-shadow:0 24px 60px rgba(0,0,0,.22),0 0 0 1px rgba(0,0,0,.06)">'
+                   f'<div style="height:52px;background:{bar};display:flex;align-items:center;gap:10px;padding:0 22px">'
+                   f'<i style="width:13px;height:13px;border-radius:7px;background:#d9d4cb;display:block"></i><i style="width:13px;height:13px;border-radius:7px;background:#d9d4cb;display:block"></i>'
+                   f'<i style="width:13px;height:13px;border-radius:7px;background:#d9d4cb;display:block"></i>'
+                   f'<span style="margin-left:14px;font-family:sans;font-size:22px;color:{fg}">{_e(title)}</span></div></div>')
+    D.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:30}},{{opacity:1,y:0,duration:0.45,ease:"power2.out"}},0.15);')
+    return i
+
+
+def s_chat(D, sc, bt, dur):
+    """AI 대화 화면: 질문이 타자로 쳐지고, 답이 단어 단위로 흘러나온다 (상표·로고 없이 '예시(재구성)'로 표시).
+    turns: [{role: user|ai, text, beat}]"""
+    x, y, w, h = 360, 120, 1200, 800
+    _card(D, x, y, w, h, sc.get("app", "AI 대화 · 재구성 예시"))
+    cy = y + 90
+    for n, tn in enumerate(sc["turns"]):
+        k = min(tn.get("beat", n), len(bt) - 1)
+        at = bt[k][0] + tn.get("delay", 0.2)
+        text = tn["text"]
+        f = fit(FT("label"), "가", 30, 999)
+        lines = []
+        cur = ""
+        for word in text.split(" "):
+            if f.getlength((cur + " " + word).strip()) > 760 and cur:
+                lines.append(cur); cur = word
+            else:
+                cur = (cur + " " + word).strip()
+        lines.append(cur)
+        bh = 30 * 1.5 * len(lines) + 44
+        user = tn["role"] == "user"
+        bx = x + w - 60 - 820 if user else x + 60
+        i = D._id()
+        bg, fg = ("#171614", "#F6F2EA") if user else ("#F1EEE8", "#171614")
+        if user:   # 타자 치듯
+            spans = "".join(f'<span class="{i}c" style="opacity:0">{_e(ch)}</span>' for ch in text)
+            D.js.append(f'tl.to(".{i}c",{{opacity:1,duration:0.01,stagger:{min(0.04, 1.2 / max(len(text), 1)):.3f}}},{at:.2f});')
+        else:      # 단어 단위로 흘러나옴
+            spans = "".join(f'<span class="{i}w" style="opacity:0">{_e(wd)} </span>' for wd in text.split(" "))
+            D.js.append(f'tl.to(".{i}w",{{opacity:1,duration:0.08,stagger:0.07}},{at + 0.4:.2f});')
+        D.items.append(f'<div id="{i}" style="position:absolute;left:{bx}px;top:{cy}px;width:820px;opacity:0">'
+                       f'<div style="display:inline-block;{"float:right;" if user else ""}max-width:820px;padding:22px 28px;border-radius:20px;background:{bg};'
+                       f'color:{fg};font-family:sans;font-size:30px;line-height:1.5">{spans}</div></div>')
+        D.js.append(f'tl.to("#{i}",{{opacity:1,duration:0.2}},{at - 0.1:.2f});')
+        cy += bh + 30
+    D.label(sc.get("label", ""))
+
+
+def s_terminal(D, sc, bt, dur):
+    """터미널: 명령이 타자로, 결과가 줄 단위로. lines: [{cmd|out, beat}] — 실제 실행 기록만 (설명용이면 label 에 '재구성')."""
+    x, y, w, h = 210, 110, 1500, 820
+    _card(D, x, y, w, h, sc.get("title", "터미널"), dark=True)
+    ly = y + 100
+    for n, ln in enumerate(sc["lines"]):
+        k = min(ln.get("beat", 0), len(bt) - 1)
+        at = bt[k][0] + ln.get("delay", 0.3 + 0.35 * n)
+        i = D._id()
+        if "cmd" in ln:
+            spans = "".join(f'<span class="{i}c" style="opacity:0">{_e(ch)}</span>' for ch in ln["cmd"])
+            D.items.append(f'<div style="position:absolute;left:{x + 44}px;top:{ly}px;font-family:monospace;font-size:30px;color:#EDEAE4;white-space:pre">'
+                           f'<span style="color:#E8622C">$ </span>{spans}</div>')
+            D.js.append(f'tl.to(".{i}c",{{opacity:1,duration:0.01,stagger:0.03}},{at:.2f});')
+        else:
+            D.items.append(f'<div id="{i}" style="position:absolute;left:{x + 44}px;top:{ly}px;font-family:monospace;font-size:30px;color:#9FB79A;'
+                           f'white-space:pre;opacity:0">{_e(ln["out"])}</div>')
+            D.js.append(f'tl.to("#{i}",{{opacity:1,duration:0.15}},{at:.2f});')
+        ly += 50
+    D.label(sc.get("label", ""))
+
+
+def s_zoomshot(D, sc, bt, dur):
+    """화면 녹화 자동 줌: 자료 화면 위에서 카메라가 박자마다 지정한 네모로 다가가고, 그 자리를 얇은 선으로 표시.
+    focus: [{beat, box:[x,y,w,h] (1920×1080 기준), label}] — 마지막엔 box 없이 {beat, out:true} 로 전체로 돌아올 수 있음"""
+    i = D._id()
+    D.media.append(f'<div id="{i}" style="position:absolute;left:0;top:0;width:{W}px;height:{HH}px;overflow:hidden;background:#000;transform-origin:0 0">'
+                   f'<video id="{i}v" class="clip" src="assets/{sc["_clipfile"]}" muted playsinline data-start="0" data-duration="{dur:.2f}" '
+                   f'data-track-index="2" style="width:100%;height:100%;object-fit:cover"></video></div>')
+    for f in sc.get("focus", []):
+        k = min(f.get("beat", 0), len(bt) - 1)
+        at = bt[k][0] + f.get("delay", 0.2)
+        if f.get("out"):
+            D.js.append(f'tl.to("#{i}",{{scale:1,x:0,y:0,duration:0.9,ease:"power2.inOut"}},{at:.2f});')
+            continue
+        bx, by, bw, bh = f["box"]
+        z = min(W / bw, HH / bh) * 0.82
+        tx, ty = W / 2 - (bx + bw / 2) * z, HH / 2 - (by + bh / 2) * z
+        tx, ty = min(0, max(tx, W - W * z)), min(0, max(ty, HH - HH * z))
+        D.js.append(f'tl.to("#{i}",{{scale:{z:.3f},x:{tx:.1f},y:{ty:.1f},duration:0.9,ease:"power2.inOut"}},{at:.2f});')
+        o = D._id()
+        sx, sy = bx * z + tx, by * z + ty
+        D.items.append(f'<div id="{o}" style="position:absolute;left:{sx - 8:.0f}px;top:{sy - 8:.0f}px;width:{bw * z + 16:.0f}px;height:{bh * z + 16:.0f}px;'
+                       f'border:3px solid {D.red};border-radius:10px;opacity:0"></div>')
+        D.js.append(f'tl.to("#{o}",{{opacity:1,duration:0.25}},{at + 0.9:.2f});tl.to("#{o}",{{opacity:0,duration:0.25}},{bt[k][0] + bt[k][1]:.2f});')
+        if f.get("label"):
+            lb = D._id()
+            D.items.append(f'<div id="{lb}" style="position:absolute;left:{sx - 8:.0f}px;top:{max(sy - 58, 20):.0f}px;padding:6px 14px;border-radius:6px;'
+                           f'background:{D.red};color:#fff;font-family:sans;font-size:26px;opacity:0;white-space:nowrap">{_e(f["label"])}</div>')
+            D.js.append(f'tl.to("#{lb}",{{opacity:1,duration:0.25}},{at + 1.0:.2f});tl.to("#{lb}",{{opacity:0,duration:0.25}},{bt[k][0] + bt[k][1]:.2f});')
+    D.label(sc.get("label", ""), dark=True)
+
+
+def s_choropleth(D, sc, bt, dur):
+    """나라별 색칠 지도: values{나라 영문명: 숫자}, 박자마다 show[나라] 를 색칠, 범례. (world-atlas, 직사각형 지도)"""
+    world = _world({}, "mercator", sc.get("center"))
+    C = _map_colors(D)
+    vals = sc["values"]
+    hi = max(vals.values()) or 1
+    land = "".join(f'<path d="{c["d"]}"/>' for c in world["countries"])
+    g = [f'<rect x="0" y="0" width="{W}" height="{HH}" fill="{C["sea"]}"/>',
+         f'<g fill="{C["land"]}" stroke="{C["border"]}" stroke-width="0.7">{land}</g>']
+    shown = {}
+    for k, b in enumerate(sc["beats"]):
+        for name in b.get("show", []):
+            shown.setdefault(name, k)
+    for c in world["countries"]:
+        if c["name"] in vals:
+            k = min(shown.get(c["name"], 0), len(bt) - 1)
+            j = D._id()
+            op = 0.25 + 0.75 * vals[c["name"]] / hi
+            g.append(f'<path id="{j}" d="{c["d"]}" fill="{C["accent"]}" fill-opacity="{op:.2f}" stroke="{C["accent"]}" stroke-width="1" style="opacity:0"/>')
+            D.js.append(f'tl.to("#{j}",{{opacity:1,duration:0.5}},{bt[k][0] + 0.3:.2f});')
+    D.svg.insert(0, "".join(g))
+    D.label(sc.get("label", ""))
+    if sc.get("title"):
+        f = fit(FT("title"), sc["title"], 46, 900)
+        D.items.append(f'<div style="position:absolute;left:80px;top:64px;padding:14px 30px;background:{C["card"]};border:3px double {C["ink"]};'
+                       f'font-family:serif-x;font-size:{f.size}px;color:{C["ink"]}">{_e(sc["title"])}</div>')
+    if sc.get("legend"):
+        D.items.append(f'<div style="position:absolute;left:80px;bottom:150px;padding:12px 20px;background:{C["card"]};border-radius:8px;font-family:sans;'
+                       f'font-size:24px;color:{C["ink"]};display:flex;align-items:center;gap:14px">'
+                       f'<span style="width:120px;height:16px;border-radius:4px;background:linear-gradient(90deg,{C["accent"]}40,{C["accent"]})"></span>{_e(sc["legend"])}</div>')
+
+
+def _layer_mark(D, L, at, end):
+    """손그림 표시 (동그라미·밑줄·화살표) — 강조 예산에 포함."""
+    x, y, w, h = L["box"]
+    shape = L.get("shape", "circle")
+    if shape == "circle":
+        D.rough("ellipse", [x + w / 2, y + h / 2, w * 1.15, h * 1.35], D.red, 4, at=at, dur=0.5, roughness=1.6)
+    elif shape == "underline":
+        D.rough("line", [x, y + h + 8, x + w, y + h + 4], D.red, 5, at=at, dur=0.4, roughness=1.4)
+    else:
+        D.rough("line", [x - 160, y + h + 120, x - 10, y + h / 2 + 10], D.red, 5, at=at, dur=0.4, roughness=1.2)
+
+
 def register():
-    hybrid.RENDER.update({"kb": s_kb, "card_type": s_card_type, "journey": s_journey, "kinetic": s_kinetic})
+    hybrid.RENDER.update({"kb": s_kb, "card_type": s_card_type, "journey": s_journey, "kinetic": s_kinetic,
+                          "chat": s_chat, "terminal": s_terminal, "zoomshot": s_zoomshot, "choropleth": s_choropleth})
