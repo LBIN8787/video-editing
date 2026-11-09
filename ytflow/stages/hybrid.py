@@ -153,8 +153,12 @@ class HDoc(hyper.Doc):
             return
         i = self._id()
         col = "#FFFFFF" if dark else self.ink
-        self.items.append(f'<div id="{i}" style="position:absolute;left:56px;top:38px;font-family:sans-x;font-size:26px;color:{col};white-space:nowrap">'
-                          f'<span style="background:{self.red};color:#fff;padding:2px 12px;border-radius:4px;margin-right:12px">{_e(num)}</span>{_e(title)}</div>')
+        acc = (self.skin.get("palette") or {}).get("accent", "#C4452F").lstrip("#")
+        lum = sum(int(acc[k:k + 2], 16) * w for k, w in ((0, .299), (2, .587), (4, .114)))
+        on_acc = "#111111" if lum > 150 else "#fff"   # 밝은 강조색(청사진의 노랑) 위에는 검은 글자
+        back = "background:rgba(12,12,14,.55);padding:4px 14px 4px 4px;border-radius:6px;" if dark else ""   # 밝은 영상 위에서도 읽히게
+        self.items.append(f'<div id="{i}" style="position:absolute;left:56px;top:38px;font-family:sans-x;font-size:26px;color:{col};white-space:nowrap;{back}">'
+                          f'<span style="background:{self.red};color:{on_acc};padding:2px 12px;border-radius:4px;margin-right:12px">{_e(num)}</span>{_e(title)}</div>')
         self.js.append(f'tl.fromTo("#{i}",{{opacity:0,x:-20}},{{opacity:1,x:0,duration:0.4}},0.15);')
 
     def h1(self, title: str, at: float = 0.2, y: float = 150, size: int = 62):

@@ -9,7 +9,7 @@ const fs = require('fs'), path = require('path');
   const ctx = await b.newContext({ viewport: { width: 1920, height: 1080 }, recordVideo: { dir: outDir, size: { width: 1920, height: 1080 } } });
   const p = await ctx.newPage();
   await p.setContent(`<!doctype html><html><head><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>body{margin:0;background:#F4F1EA;height:1080px;display:grid;place-items:center;font-family:'IBM Plex Mono',monospace}
+  <style>body{margin:0;background:#2A2826;height:1080px;display:grid;place-items:center;font-family:'IBM Plex Mono',monospace}
   .w{width:1500px;height:820px;background:#151413;border-radius:14px;box-shadow:0 30px 70px rgba(0,0,0,.28);overflow:hidden}
   .bar{height:52px;background:#232220;display:flex;align-items:center;padding:0 22px;gap:10px}
   .bar i{width:14px;height:14px;border-radius:7px;background:#4a4744;display:block}
