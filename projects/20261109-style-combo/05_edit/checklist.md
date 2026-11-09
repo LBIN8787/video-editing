@@ -1,6 +1,6 @@
 # 체크리스트 — 20261109-style-combo
 
-매뉴얼 v4 · 2026-11-09T08:00:25 · **MUST 실패 9개**
+매뉴얼 v4 · 2026-11-09T08:28:40 · **MUST 실패 6개**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
@@ -40,13 +40,8 @@
 | G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ⚠️ | python -m ytflow style-pick <프로젝트> |
 | G6 | MUST | final.mp4 | ✅ |  |
 | G6 | MUST | 레이아웃 점검 비어 있음 | ✅ | {} |
-| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 1.0, 'p95_abs_offset': 0.16, 'median_abs_offset': 0.03, 'video_m |
+| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 1.0, 'p95_abs_offset': 0.17, 'median_abs_offset': 0.03, 'video_m |
 | G6 | SHOULD | 납품 점검(음량 등) | ✅ | completed |
 | G6 | SHOULD | 최종 목소리 ElevenLabs | ✅ |  |
-| G7 | MUST | 제목 후보 3개 + 이유 | ❌ |  |
-| G7 | MUST | 썸네일 A/B/C + 점검 ok | ❌ |  |
-| G7 | SHOULD | 제목 앞 22자 안에 질문/핵심 | ⚠️ |  |
-| G8 | MUST | GitHub Release 업로드 | ✅ |  |
-| G8 | MUST | episodes.md 기록 | ❌ | ch-knowledge |
 
 사람 눈 검사(EYE)는 manual/06-checklist.md 끝의 5가지를 확인하세요.
