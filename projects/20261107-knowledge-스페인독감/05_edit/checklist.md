@@ -1,10 +1,10 @@
 # 체크리스트 — 20261107-knowledge-스페인독감
 
-매뉴얼 v1 · 2026-11-08T14:05:49 · **MUST 실패 1개**
+매뉴얼 v2 · 2026-11-09T00:51:04 · **MUST 실패 5개**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
-| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ✅ |  |
+| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ❌ | [2026-11-09 · 20261107-style-archive 기각] 스타일 자체는 합격. 그러나 한 스타일로만 영상 전체를 만들면 불합격  |
 | G1 | MUST | topic_brief.json 있음 | ✅ | 01_research/topic_brief.json (schemas/topic_brief.schema.json) |
 | G1 | MUST | 브랜드(ai/market/curiosity) | ✅ | curiosity |
 | G1 | MUST | 욕망·시청자 질문 | ✅ | 스페인 독감은 왜 '스페인'일까? |
@@ -29,17 +29,11 @@
 | G5 | MUST | 같은 type 3연속 없음 | ✅ | [] |
 | G5 | SHOULD | 자료 화면 공백 ≤45초 | ⚠️ | 최장 155초 |
 | G5 | SHOULD | 장 표지 간격 ≤200초 | ✅ | 최장 92초 |
+| G5 | MUST | 스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격) | ✅ | 5종 ['data-report', 'hybrid-causal', 'map-journey', 'paper-column', 'statement-br |
+| G5 | MUST | 한 스타일이 40% 넘지 않음 | ❌ | hybrid-causal 0.54 |
+| G5 | MUST | 한 장면 안에서 겹친 장면(layers) 3개 이상 | ❌ | 0 |
+| G5 | MUST | 같은 스타일 3장면 연속 없음 | ❌ | 최장 3 |
 | G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ✅ | paper-sketch / 등록부 ['clean-flat', 'dark-doc', 'kinetic-poster', 'newsprint', 'pa |
 | G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ✅ | python -m ytflow style-pick <프로젝트> |
-| G6 | MUST | final.mp4 | ✅ |  |
-| G6 | MUST | 레이아웃 점검 비어 있음 | ✅ | {} |
-| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': None, 'p95_abs_offset': 0.37, 'median_abs_offset': 0.06, 'video_ |
-| G6 | SHOULD | 납품 점검(음량 등) | ✅ | completed |
-| G6 | SHOULD | 최종 목소리 ElevenLabs | ✅ |  |
-| G7 | MUST | 제목 후보 3개 + 이유 | ✅ |  |
-| G7 | MUST | 썸네일 A/B/C + 점검 ok | ✅ |  |
-| G7 | SHOULD | 제목 앞 22자 안에 질문/핵심 | ✅ | 스페인 독감은 왜 '스페인' 독감일까?  |
-| G8 | MUST | GitHub Release 업로드 | ✅ |  |
-| G8 | MUST | episodes.md 기록 | ✅ | ch-knowledge |
 
 사람 눈 검사(EYE)는 manual/06-checklist.md 끝의 5가지를 확인하세요.

@@ -1,15 +1,15 @@
 {
  "project": "20261107-knowledge-스페인독감",
- "manual_version": "1",
- "checked": "2026-11-08T14:05:49",
+ "manual_version": "2",
+ "checked": "2026-11-09T00:51:04",
  "pass": false,
  "rows": [
   {
    "gate": "G0",
    "level": "MUST",
    "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
-   "ok": true,
-   "detail": ""
+   "ok": false,
+   "detail": "[2026-11-09 · 20261107-style-archive 기각] 스타일 자체는 합격. 그러나 한 스타일로만 영상 전체를 만들면 불합격 — 상황에 맞춰 섞어야 함 (장면마다 다른 스타일, 한 장면 안에서도 여러 스타일 조합); [2026-11-09 · 20261107-style-journey 기각] 지도가 보기 불편함: 양 끝이 둥근 타원 투영 + 디자인이 허전하고 밋밋함"
   },
   {
    "gate": "G1",
@@ -181,6 +181,34 @@
   },
   {
    "gate": "G5",
+   "level": "MUST",
+   "item": "스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격)",
+   "ok": true,
+   "detail": "5종 ['data-report', 'hybrid-causal', 'map-journey', 'paper-column', 'statement-brief']"
+  },
+  {
+   "gate": "G5",
+   "level": "MUST",
+   "item": "한 스타일이 40% 넘지 않음",
+   "ok": false,
+   "detail": "hybrid-causal 0.54"
+  },
+  {
+   "gate": "G5",
+   "level": "MUST",
+   "item": "한 장면 안에서 겹친 장면(layers) 3개 이상",
+   "ok": false,
+   "detail": "0"
+  },
+  {
+   "gate": "G5",
+   "level": "MUST",
+   "item": "같은 스타일 3장면 연속 없음",
+   "ok": false,
+   "detail": "최장 3"
+  },
+  {
+   "gate": "G5",
    "level": "SHOULD",
    "item": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
    "ok": true,
@@ -192,76 +220,6 @@
    "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
    "ok": true,
    "detail": "python -m ytflow style-pick <프로젝트>"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "final.mp4",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "레이아웃 점검 비어 있음",
-   "ok": true,
-   "detail": "{}"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
-   "ok": true,
-   "detail": "{'within_0_5s': None, 'p95_abs_offset': 0.37, 'median_abs_offset': 0.06, 'video_minus_audio_s': -0.067}"
-  },
-  {
-   "gate": "G6",
-   "level": "SHOULD",
-   "item": "납품 점검(음량 등)",
-   "ok": true,
-   "detail": "completed"
-  },
-  {
-   "gate": "G6",
-   "level": "SHOULD",
-   "item": "최종 목소리 ElevenLabs",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "MUST",
-   "item": "제목 후보 3개 + 이유",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "MUST",
-   "item": "썸네일 A/B/C + 점검 ok",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "SHOULD",
-   "item": "제목 앞 22자 안에 질문/핵심",
-   "ok": true,
-   "detail": "스페인 독감은 왜 '스페인' 독감일까? "
-  },
-  {
-   "gate": "G8",
-   "level": "MUST",
-   "item": "GitHub Release 업로드",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G8",
-   "level": "MUST",
-   "item": "episodes.md 기록",
-   "ok": true,
-   "detail": "ch-knowledge"
   }
  ]
 }
