@@ -1,6 +1,6 @@
 # 체크리스트 — 20261109-ai-unslop
 
-매뉴얼 v3 · 2026-11-09T01:47:31 · **MUST 실패 2개**
+매뉴얼 v3 · 2026-11-09T02:11:01 · **통과**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
@@ -13,7 +13,7 @@
 | G1 | MUST | 수요 증거 1개 이상 | ✅ | 4 |
 | G1 | SHOULD | 후보 3개 비교 기록 | ✅ | 3 |
 | G1 | SHOULD | 우리만의 답(our_angle) | ✅ | 소개에서 끝내지 않고 ① 예제 화면에 직접 적용한 전/후와 실제 측정(이모지 30개→0, 줄 높이 30~46px→32px) ② 스킬이 일하는 원 |
-| G2 | MUST | 자료 화면마다 credit·url | ✅ | 5개, 빠짐 [] |
+| G2 | MUST | 자료 화면마다 credit·url | ✅ | 6개, 빠짐 [] |
 | G2 | MUST | 금지 라이선스(SA·NC·ND) 없음 | ✅ | [] |
 | G2 | SHOULD | 자료 화면 소스 3종 이상 (롱폼) | ⚠️ | 2종 |
 | G3 | MUST | 팩트시트 + 출처 링크 3개 이상 | ✅ | 링크 5개 |
@@ -37,13 +37,13 @@
 | G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ✅ | python -m ytflow style-pick <프로젝트> |
 | G6 | MUST | final.mp4 | ✅ |  |
 | G6 | MUST | 레이아웃 점검 비어 있음 | ✅ | {} |
-| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 0.984, 'p95_abs_offset': 0.42, 'median_abs_offset': 0.04, 'video |
+| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 0.976, 'p95_abs_offset': 0.45, 'median_abs_offset': 0.04, 'video |
 | G6 | SHOULD | 납품 점검(음량 등) | ✅ | completed |
 | G6 | SHOULD | 최종 목소리 ElevenLabs | ⚠️ |  |
 | G7 | MUST | 제목 후보 3개 + 이유 | ✅ |  |
 | G7 | MUST | 썸네일 A/B/C + 점검 ok | ✅ |  |
 | G7 | SHOULD | 제목 앞 22자 안에 질문/핵심 | ⚠️ | AI가 만든 티 나는 화면, 스킬 하나로 |
-| G8 | MUST | GitHub Release 업로드 | ❌ |  |
-| G8 | MUST | episodes.md 기록 | ❌ | ch-ai-guide |
+| G8 | MUST | GitHub Release 업로드 | ✅ |  |
+| G8 | MUST | episodes.md 기록 | ✅ | ch-ai-guide |
 
 사람 눈 검사(EYE)는 manual/06-checklist.md 끝의 5가지를 확인하세요.

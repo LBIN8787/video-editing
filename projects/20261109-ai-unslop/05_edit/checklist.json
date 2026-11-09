@@ -1,8 +1,8 @@
 {
  "project": "20261109-ai-unslop",
  "manual_version": "3",
- "checked": "2026-11-09T01:47:31",
- "pass": false,
+ "checked": "2026-11-09T02:11:01",
+ "pass": true,
  "rows": [
   {
    "gate": "G0",
@@ -72,7 +72,7 @@
    "level": "MUST",
    "item": "자료 화면마다 credit·url",
    "ok": true,
-   "detail": "5개, 빠짐 []"
+   "detail": "6개, 빠짐 []"
   },
   {
    "gate": "G2",
@@ -240,7 +240,7 @@
    "level": "MUST",
    "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
    "ok": true,
-   "detail": "{'within_0_5s': 0.984, 'p95_abs_offset': 0.42, 'median_abs_offset': 0.04, 'video_minus_audio_s': -0.067}"
+   "detail": "{'within_0_5s': 0.976, 'p95_abs_offset': 0.45, 'median_abs_offset': 0.04, 'video_minus_audio_s': -0.067}"
   },
   {
    "gate": "G6",
@@ -281,14 +281,14 @@
    "gate": "G8",
    "level": "MUST",
    "item": "GitHub Release 업로드",
-   "ok": false,
+   "ok": true,
    "detail": ""
   },
   {
    "gate": "G8",
    "level": "MUST",
    "item": "episodes.md 기록",
-   "ok": false,
+   "ok": true,
    "detail": "ch-ai-guide"
   }
  ]

@@ -32,7 +32,7 @@ PAPER, INK, RED, YELLOW = (238, 231, 218), (34, 48, 77), (214, 58, 42), (255, 21
 TIMESTAMP_BOX = (1080, 630, W, H)   # 유튜브가 재생 시간을 덮는 자리
 
 
-FIX = {"\u2212": "-", "\u2013": "-", "\u2014": "-"}   # 나눔 글꼴에 없는 빼기·대시 기호 → 보이게
+FIX = {"\u2212": "-", "\u2013": "-", "\u2014": "-", "\u2192": ">"}   # 나눔 글꼴에 없는 빼기·대시 기호 → 보이게
 
 
 def _fix(t: str) -> str:
@@ -124,9 +124,10 @@ def render(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
         pw = int(W * v.get("photo_width", 0.62))
         im = _image(project, spec, v["image"])
         im = _cover(im, pw if side != "full" else W, H, *v["image"].get("focus", [0.5, 0.35]))
-        im = ImageOps.grayscale(im).convert("RGB")
-        im = ImageEnhance.Contrast(im).enhance(1.25)
-        im = ImageOps.colorize(ImageOps.grayscale(im), (18, 20, 28), (236, 226, 205))   # 오래된 사진 느낌(채널 정체성)
+        if v.get("tone", "old") == "old":   # 오래된 사진 느낌(교양 채널 정체성). 화면 캡처 등 색이 중요한 사진은 "tone": "none"
+            im = ImageOps.grayscale(im).convert("RGB")
+            im = ImageEnhance.Contrast(im).enhance(1.25)
+            im = ImageOps.colorize(ImageOps.grayscale(im), (18, 20, 28), (236, 226, 205))
         px = W - im.width if side == "right" else 0
         base.paste(im, (px, 0))
         # 사진과 글씨 쪽 사이를 부드럽게 (어두운 그라데이션)
