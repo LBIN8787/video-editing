@@ -226,6 +226,29 @@
     "deep"
    ],
    "description": "issues: quick 5~8분 / deep 12~15분"
+  },
+  "driver": {
+   "type": "object",
+   "description": "이 영상을 띄울 힘 (manual/01 §4-1, docs/18 §6)",
+   "properties": {
+    "type": {
+     "enum": [
+      "소재",
+      "각도",
+      "형식"
+     ]
+    },
+    "why": {
+     "type": "string"
+    },
+    "angle": {
+     "type": "string"
+    }
+   }
+  },
+  "series": {
+   "type": "string",
+   "description": "이름 붙은 시리즈 (매 회 같은 이름·같은 형식)"
   }
  }
 }

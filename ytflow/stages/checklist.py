@@ -114,6 +114,10 @@ def run(path: Path, upto: str = "G8") -> Report:
     R.add("G1", "MUST", "수요 증거 1개 이상", len(tb.get("demand_evidence") or []) >= 1, len(tb.get("demand_evidence") or []))
     R.add("G1", "SHOULD", "후보 3개 비교 기록", len(tb.get("candidates") or []) >= 3, len(tb.get("candidates") or []))
     R.add("G1", "SHOULD", "우리만의 답(our_angle)", bool(tb.get("our_angle")), tb.get("our_angle", ""))
+    drv = tb.get("driver") or {}
+    R.add("G1", "MUST" if brand == "issues" else "SHOULD", "무엇이 띄우나(driver: 소재·각도·형식 + 근거)",
+          drv.get("type") in ("소재", "각도", "형식") and bool(drv.get("why")) and (drv.get("type") != "각도" or bool(drv.get("angle"))),
+          f"{drv.get('type', '')} · {drv.get('why', '')[:40]}")
 
     if last >= 1:  # G2 소스
         foot = spec.get("footage") or {}
@@ -164,6 +168,9 @@ def run(path: Path, upto: str = "G8") -> Report:
         doms = {re.sub(r"^https?://(www\.)?", "", u).split("/")[0] for u in links2}
         R.add("G3", "MUST", "issues: 출처 링크 5개 이상·도메인 3곳 이상", len(links2) >= 5 and len(doms) >= 3, f"{len(links2)}개 / {len(doms)}곳")
         R.add("G4", "SHOULD", "issues: 모르는 것(unknowns) 말하기", bool(tb.get("unknowns")) and "확인되지 않" in txt_all, "")
+        voice_sc = [x for x in spec.get("scenes", []) if x.get("type") == "quote" or any(bb.get("lower") for bb in x.get("beats", []))]
+        R.add("G4", "SHOULD", "issues: 사람의 목소리 장면 1개 이상 (quote·이름 자막)", bool(voice_sc), len(voice_sc))
+        R.add("G1", "SHOULD", "issues: 이름 붙은 시리즈(series)", bool(tb.get("series")), tb.get("series", ""))
         qd = [x["dur"] for x in tl if x.get("type") == "quote"]
         if len(qd) >= 2:
             R.add("G5", "SHOULD", "issues: 양쪽 입장 장면 길이 차 30% 이내", min(qd) / max(qd) >= 0.7, [round(x, 1) for x in qd])

@@ -20,6 +20,7 @@ python -m ytflow check <프로젝트> --upto G4    # 대본까지만
 | MUST | 욕망 점수 합계 ≥ 12, 욕망 강도 ≥ 2, 보여 줄 자료 ≥ 2 (01-desire-map §3) | ✅ |
 | MUST | 수요 증거 1개 이상 (`demand_evidence`: 검색·아웃라이어·뉴스 순위) | ✅ |
 | SHOULD | 후보 3개를 비교한 기록 (`candidates`) | ✅ |
+| SHOULD (issues 는 MUST) | `driver`: 이 영상을 무엇이 띄우나 — 소재·각도·형식 + 근거 (manual/01 §4-1). 소재가 약하면 각도(반대 결과·생활 체감·추억·사람)를 적음 | ✅ |
 | SHOULD | `our_angle` (남들 영상보다 깊은 것) | ✅ |
 
 ## G2 소스
