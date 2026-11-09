@@ -1,15 +1,15 @@
 {
  "project": "20261109-issues-saudi",
- "manual_version": "7",
- "checked": "2026-11-09T14:15:36",
- "pass": false,
+ "manual_version": "8",
+ "checked": "2026-11-09T14:28:42",
+ "pass": true,
  "rows": [
   {
    "gate": "G0",
    "level": "MUST",
    "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
-   "ok": false,
-   "detail": "[2026-11-09 · 20261109-issues-saudi 기각] 반 통과: 스타일은 통과. 1) 배경색이 한 가지로 단조로움 → 장면 상황에 맞춰 배경을 바꿔 쓸 것 2) 본론부터 바로 시작해 '뭘 말하려는 거지?' 느낌 → 본론 전에 MC처럼 오늘 무엇을 말할지 매끄럽게 여는 오프닝과 진행 멘트"
+   "ok": true,
+   "detail": ""
   },
   {
    "gate": "G1",
@@ -255,6 +255,27 @@
    "item": "배경: 같은 바탕 3장면 연속 없음 (film 제외)",
    "ok": true,
    "detail": "[]"
+  },
+  {
+   "gate": "G5",
+   "level": "MUST",
+   "item": "반복 피로: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기: 자료·지도·사진 겹치기·시각 효과, 05 §0-3)",
+   "ok": true,
+   "detail": "최장 0연속 (장면 None)"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "반복 피로: 눈요기 있는 장면 60% 이상",
+   "ok": true,
+   "detail": "16/16"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "반복 피로: 같은 시각 효과 3장면 연속 없음 · 효과 3종 이상(롱폼)",
+   "ok": true,
+   "detail": "['fx:dolly', 'fx:dust', 'fx:leak', 'fx:photofill', 'fx:scan', 'fx:tilt'] 연속 []"
   },
   {
    "gate": "G5",

@@ -1,10 +1,10 @@
 # 체크리스트 — 20261109-issues-saudi
 
-매뉴얼 v7 · 2026-11-09T14:15:36 · **MUST 실패 1개**
+매뉴얼 v8 · 2026-11-09T14:28:42 · **통과**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
-| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ❌ | [2026-11-09 · 20261109-issues-saudi 기각] 반 통과: 스타일은 통과. 1) 배경색이 한 가지로 단조로움 → 장면 상 |
+| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ✅ |  |
 | G1 | MUST | topic_brief.json 있음 | ✅ | 01_research/topic_brief.json (schemas/topic_brief.schema.json) |
 | G1 | MUST | 브랜드(ai/market/curiosity) | ✅ | issues |
 | G1 | MUST | 욕망·시청자 질문 | ✅ | 유가가 올랐는데 왜 사우디는 마이너스 성장? |
@@ -40,6 +40,9 @@
 | G4 | MUST | 오프닝: 본론 전에 MC 오프닝(intro: 인사·오늘 이야기·순서 예고·시작 멘트, 3박자 이상) | ✅ |  |
 | G5 | MUST | 배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2) | ✅ | ['film', 'grid', 'photo', 'spot', 'tint'] |
 | G5 | SHOULD | 배경: 같은 바탕 3장면 연속 없음 (film 제외) | ✅ | [] |
+| G5 | MUST | 반복 피로: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기: 자료·지도·사진 겹치기·시각 효과, 05 §0-3) | ✅ | 최장 0연속 (장면 None) |
+| G5 | SHOULD | 반복 피로: 눈요기 있는 장면 60% 이상 | ✅ | 16/16 |
+| G5 | SHOULD | 반복 피로: 같은 시각 효과 3장면 연속 없음 · 효과 3종 이상(롱폼) | ✅ | ['fx:dolly', 'fx:dust', 'fx:leak', 'fx:photofill', 'fx:scan', 'fx:tilt'] 연속 [] |
 | G5 | MUST | 같은 type 3연속 없음 | ✅ | [] |
 | G5 | SHOULD | 자료 화면 공백 ≤45초 | ⚠️ | 최장 136초 |
 | G5 | SHOULD | 장 표지 간격 ≤200초 | ✅ | 최장 83초 |
