@@ -1,7 +1,7 @@
 {
  "project": "20261110-v10-after",
- "manual_version": "9",
- "checked": "2026-11-10T05:29:15",
+ "manual_version": "10",
+ "checked": "2026-11-10T11:49:59",
  "pass": true,
  "rows": [
   {
@@ -259,6 +259,13 @@
   {
    "gate": "G5",
    "level": "SHOULD",
+   "item": "v10: 장식 효과(dust·leak)는 2장면 이하 — 내용이 담긴 볼거리(사진·지도·사물 그림·정리판) 먼저",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
    "item": "반복 피로: 눈요기 있는 장면 60% 이상",
    "ok": true,
    "detail": "6/9"
@@ -360,6 +367,48 @@
    "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
    "ok": false,
    "detail": "python -m ytflow style-pick <프로젝트>"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "final.mp4",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "레이아웃 점검 비어 있음",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
+   "ok": true,
+   "detail": "{'within_0_5s': 0.956, 'p95_abs_offset': 0.42, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.067}"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "납품 점검(음량 등)",
+   "ok": true,
+   "detail": "completed"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "움직임(v10): 화면 변화 ≥10회/분 · 정지 화면 비율 ≤0.45 (완성본 측정)",
+   "ok": true,
+   "detail": "변화 13.7/분 · 정지 0.18"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "최종 목소리 ElevenLabs",
+   "ok": false,
+   "detail": ""
   }
  ]
 }
