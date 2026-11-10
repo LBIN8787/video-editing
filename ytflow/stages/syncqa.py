@@ -62,7 +62,9 @@ def run(project: Project) -> dict:
             lines.append((_t(f[1]), _t(f[2]), f[9]))
     wav = edir / "hb_work" / "final_audio.wav"
     wav.parent.mkdir(parents=True, exist_ok=True)
-    subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(final), "-vn", "-ac", "1", "-ar", "16000", str(wav)], check=True)
+    voice = edir / "hb_work" / "voice.wav"   # 배경음이 있으면 쉼이 묻혀 받아쓰기·쉼 찾기가 흔들림 → 섞기 전 내레이션으로 잼 (시간축은 완성본과 같음)
+    src = voice if voice.exists() and voice.stat().st_mtime >= final.stat().st_mtime - 3600 else final
+    subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(src), "-vn", "-ac", "1", "-ar", "16000", str(wav)], check=True)
     words = _words_windowed(wav)
     norm = align._norm
     R, owner = "", []

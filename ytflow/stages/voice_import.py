@@ -89,9 +89,12 @@ def run(project: Project, parts: list[str], beats: list[tuple[str, str]] | None 
             if side.exists():
                 side.unlink()
         a, b = cuts[k], cuts[k + 1]
+        # 숨소리(약 -40dB)까지 잘라야 자막이 말보다 먼저 뜨지 않음 → -38dB, 앞뒤 0.05초 여유
         subprocess.run(FF + ["-ss", f"{a:.3f}", "-to", f"{b:.3f}", "-i", str(whole), "-af",
-                             "silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse",
+                             "silenceremove=start_periods=1:start_threshold=-38dB:start_silence=0.05,areverse,"
+                             "silenceremove=start_periods=1:start_threshold=-38dB:start_silence=0.05,areverse",
                              "-ar", "48000", "-ac", "2", str(wav)], check=True)
+        (vdir / f"hb_{key}.txt").write_text(say, encoding="utf-8")   # 대사 표시: 렌더가 이 음성을 대사에 맞는 것으로 알고 그대로 씀
         out.append(f"{key}\t{a:7.2f}–{b:7.2f}\t{say[:30]}")
     (work / "cuts.txt").write_text("\n".join(out) + "\n", encoding="utf-8")
     print(f"[voice-import] {len(beats)}박자로 자름 → {vdir} (자른 위치: {work / 'cuts.txt'})")

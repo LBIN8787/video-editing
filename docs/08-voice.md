@@ -43,6 +43,7 @@
 |---|---|---|---|
 | ch-knowledge (교양·역사) | Nobel Butler — 부드러운 중년 남성 중저음, 다큐·연구 해설 | `YBRudLRm83BV5Mazcr42` | eleven_v4 |
 | ch-source-brief / 하이브리드 경제 | Hyun Bin — 차분하고 절제된 남성, 보고서 해설 | `s07IwTCOrCDCaETjUVjx` | eleven_v4 |
+| ch-issues (시사, 2026-11-10 시험) | Mina — 또렷·따뜻·차분한 여성, 친근하고 신뢰감 있는 대화체 (MC 톤, 다른 채널과 성별로 구분) | `aiUUgjHa4mpHf6UenZuf` | eleven_v4 |
 
 절차 (키를 저장하지 않는 방법, Claude 의 ElevenLabs 커넥터 또는 ElevenLabs 웹):
 1. 대본 박자 문장을 장(chapter) 단위로 묶어 2~3덩어리(덩어리당 약 2,000자)로 만든다. 문장 사이는 빈 줄.
@@ -53,3 +54,7 @@
 4. `python -m ytflow hybrid <프로젝트>` — 새 음성 길이에 맞춰 장면·자막·효과음이 다시 맞춰진다.
 점검: 박자별 받아쓰기와 대본의 일치율(스페인 독감 편 평균 97.3%), 시작·끝 글자가 맞는지.
 비용: 약 1크레딧/글자, 기본 2테이크. 계정이 무료 등급이면 'Unusual activity … Free Tier disabled' 로 한 테이크가 실패할 수 있음(다른 테이크는 성공) — 유료 요금제면 사라짐.
+
+### 2026-11-10 — voice-import 숨소리 문제
+ElevenLabs 음성은 박자 앞에 숨소리(약 -40dB)가 있어 -45dB 기준으로 자르면 자막이 말보다 최대 1.2초 먼저 뜸 → `voice_import` 자르기 기준을 -38dB 로 올림(싱크 0.3초 안 64% → 94%).
+또 박자별 `hb_*.txt`(대사 표시)를 함께 써서, 렌더가 가져온 음성을 대사에 맞는 것으로 알고 그대로 씀. 싱크 점검은 배경음이 섞이기 전 내레이션(`hb_work/voice.wav`)으로 잼.
