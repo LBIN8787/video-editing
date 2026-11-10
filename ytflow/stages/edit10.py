@@ -176,3 +176,35 @@ def prepare(spec: dict, sc: dict):
     sc.setdefault("bg", "photo")
     sc.setdefault("bg_src", keys[(n - 1) % len(keys)])
     sc["look"] = "photo"
+
+
+# ---------------------------------------------------------------- A1 배경음 (등록부 assets/bgm/bgm.yaml 의 곡)
+def bgm_track(tid: str) -> dict | None:
+    import yaml
+    from .. import config
+    reg = yaml.safe_load((config.ROOT / "assets" / "bgm" / "bgm.yaml").read_text(encoding="utf-8")) or {}
+    t = (reg.get("tracks") or {}).get(tid)
+    if not t:
+        return None
+    f = config.ROOT / "assets" / "bgm" / t["file"]
+    if not f.exists():   # 음원은 커밋하지 않으므로 없으면 등록부 주소에서 다시 받음
+        subprocess.run(["curl", "-sSL", "-o", str(f), t["url"]], check=False)
+    return dict(t, path=f) if f.exists() else None
+
+
+def music(out: Path, dur: float, tid: str) -> Path | None:
+    """곡을 영상 길이에 맞춰 반복·자르고, 음량을 -28 LUFS 안팎으로 맞춘 뒤 앞뒤 페이드."""
+    t = bgm_track(tid)
+    if not t:
+        return None
+    subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-stream_loop", "-1", "-i", str(t["path"]), "-t", f"{dur + 0.5:.2f}",
+                    "-af", f"loudnorm=I=-28:TP=-6:LRA=7,afade=t=in:d=1.5,afade=t=out:st={max(0, dur - 3):.2f}:d=3",
+                    "-ar", "48000", "-ac", "2", str(out)], check=True)
+    return out
+
+
+# hybrid 보다 먼저 이 모듈을 불러온 경우(순환 import)에도 새 장면이 등록되게
+import sys as _sys  # noqa: E402
+if "ytflow.stages.hybrid" in _sys.modules and hasattr(_sys.modules["ytflow.stages.hybrid"], "RENDER") \
+        and "recap" not in _sys.modules["ytflow.stages.hybrid"].RENDER:
+    register()

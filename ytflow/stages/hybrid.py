@@ -1184,12 +1184,15 @@ def make(project: Project, workers: int = 3) -> Path:
     fdir = str(paper.FONT_DIR).replace(":", "\\:")
     a_in = ["-i", str(work / "voice.wav")] + (["-i", str(sfx_wav)] if ev else [])
     amix = "[1:a][2:a]amix=inputs=2:normalize=0:duration=first[a]" if ev else "[1:a]anull[a]"
-    if spec.get("bgm", "pad" if spec.get("edit_v10", True) else None) == "pad":   # 직접 합성한 배경 패드, 목소리가 나오면 자동으로 낮춤 (docs/19 A1)
+    bgm = spec.get("bgm", "pad" if spec.get("edit_v10", True) else None)
+    pw = None
+    if bgm:   # 배경음: 등록부 곡(assets/bgm/bgm.yaml) 또는 직접 합성 패드, 목소리가 나오면 자동으로 낮춤 (docs/19 A1)
         from . import edit10
-        pw = edit10.pad(work / "pad.wav", t_acc, spec.get("bgm_mood", "calm"))
+        pw = edit10.pad(work / "pad.wav", t_acc, spec.get("bgm_mood", "calm")) if bgm == "pad" else edit10.music(work / "bgm.wav", t_acc, bgm)
+    if pw:
         a_in += ["-i", str(pw)]
         n = 3 if ev else 2
-        pre = "[1:a]asplit=2[v1][vk];" + f"[{n}:a][vk]sidechaincompress=threshold=0.015:ratio=10:attack=15:release=500,volume=0.22[pd];"
+        pre = "[1:a]asplit=2[v1][vk];" + f"[{n}:a][vk]sidechaincompress=threshold=0.015:ratio=10:attack=15:release=500,volume={0.22 if bgm == 'pad' else 1.0}[pd];"
         amix = pre + (f"[v1][2:a][pd]amix=inputs=3:normalize=0:duration=first[a]" if ev else "[v1][pd]amix=inputs=2:normalize=0:duration=first[a]")
     subprocess.run(ff + ["-i", str(work / "video.mp4"), *a_in, "-filter_complex", f"[0:v]ass='{ass}':fontsdir='{fdir}'[v];{amix}",
                          "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "medium", "-crf", "19", "-c:a", "aac", "-b:a", "192k",
