@@ -1,8 +1,8 @@
 {
  "project": "20261110-v10-before",
  "manual_version": "9",
- "checked": "2026-11-10T04:47:15",
- "pass": true,
+ "checked": "2026-11-10T05:14:24",
+ "pass": false,
  "rows": [
   {
    "gate": "G0",
@@ -275,7 +275,7 @@
    "level": "SHOULD",
    "item": "반복 피로: 같은 채널 직전 편과 화면 구성 겹침 70% 이하 (Jaccard)",
    "ok": true,
-   "detail": "44%"
+   "detail": "50%"
   },
   {
    "gate": "G5",
@@ -283,6 +283,20 @@
    "item": "같은 type 3연속 없음",
    "ok": true,
    "detail": "[]"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "자료 화면 공백 ≤45초",
+   "ok": true,
+   "detail": "최장 38초"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "장 표지 간격 ≤200초",
+   "ok": true,
+   "detail": "최장 56초"
   },
   {
    "gate": "G5",
@@ -296,14 +310,14 @@
    "level": "MUST",
    "item": "한 스타일이 40% 넘지 않음",
    "ok": true,
-   "detail": "paper-column 0.31"
+   "detail": "paper-column 0.29"
   },
   {
    "gate": "G5",
    "level": "MUST",
    "item": "한 장면 안에서 겹친 장면(layers) 3개 이상",
-   "ok": true,
-   "detail": "3"
+   "ok": false,
+   "detail": "2"
   },
   {
    "gate": "G5",

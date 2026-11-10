@@ -1,8 +1,8 @@
 {
  "project": "20261110-v10-after",
  "manual_version": "9",
- "checked": "2026-11-10T04:47:25",
- "pass": true,
+ "checked": "2026-11-10T05:14:25",
+ "pass": false,
  "rows": [
   {
    "gate": "G0",
@@ -240,7 +240,7 @@
    "level": "MUST",
    "item": "배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2)",
    "ok": true,
-   "detail": "['film', 'grid', 'photo', 'tint']"
+   "detail": "['film', 'photo', 'tint']"
   },
   {
    "gate": "G5",
@@ -286,6 +286,20 @@
   },
   {
    "gate": "G5",
+   "level": "SHOULD",
+   "item": "자료 화면 공백 ≤45초",
+   "ok": true,
+   "detail": "최장 38초"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "장 표지 간격 ≤200초",
+   "ok": true,
+   "detail": "최장 56초"
+  },
+  {
+   "gate": "G5",
    "level": "MUST",
    "item": "스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격)",
    "ok": true,
@@ -296,14 +310,14 @@
    "level": "MUST",
    "item": "한 스타일이 40% 넘지 않음",
    "ok": true,
-   "detail": "hybrid-causal 0.25"
+   "detail": "hybrid-causal 0.26"
   },
   {
    "gate": "G5",
    "level": "MUST",
    "item": "한 장면 안에서 겹친 장면(layers) 3개 이상",
-   "ok": true,
-   "detail": "3"
+   "ok": false,
+   "detail": "2"
   },
   {
    "gate": "G5",
