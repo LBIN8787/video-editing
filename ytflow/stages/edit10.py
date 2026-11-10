@@ -1,4 +1,4 @@
-"""편집 보완 묶음 (docs/19 A·B 안) — 대본 맨 위 "edit_v10": true 일 때만 켜진다 (예전 영상은 그대로).
+"""편집 기준 v10 (manual 05 §0-4, docs/19) — 기본으로 켜짐. 끄려면 대본 맨 위 "edit_v10": false.
 
 A2 장면 전환   : 딱 자르기 대신 앞 장면 끝 0.3초 + 다음 장면 처음 0.35초에 걸친 전환 (wipe·push·zoom·iris 를 돌려 씀)
 A3 장면 안 움직임: 박자마다, 긴 박자는 4.5초마다 카메라가 살짝 다가가거나 옮겨 감 (멈춘 화면 줄이기)
@@ -165,3 +165,14 @@ def pad(out: Path, dur: float, mood: str = "calm") -> Path:
                     f"lowpass=f=900,aecho=0.8:0.7:120|260:0.25|0.18,afade=t=in:d=2,afade=t=out:st={max(0, dur - 2.5):.2f}:d=2.5,volume=0.5",
                     "-ac", "2", str(out)], check=True)
     return out
+
+
+def prepare(spec: dict, sc: dict):
+    """장 표지에 look 이 없으면 사진 표지로: 자료 화면을 장 번호 순서로 돌려 씀 (사용자 판정 2026-11-10: 전환 때 배경도 바뀌는 게 낫다)."""
+    if sc.get("type") != "chapter" or sc.get("look") or not spec.get("footage"):
+        return
+    keys = list(spec["footage"])
+    n = int(sc.get("chapter", 1) or 1)
+    sc.setdefault("bg", "photo")
+    sc.setdefault("bg_src", keys[(n - 1) % len(keys)])
+    sc["look"] = "photo"

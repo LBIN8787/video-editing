@@ -196,6 +196,8 @@ def run(path: Path, upto: str = "G8") -> Report:
         vs = _sp.variety_stats(spec)
         R.add("G5", "MUST", "반복 피로: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기: 자료·지도·사진 겹치기·시각 효과, 05 §0-3)",
               vs["plain_run"] <= 2, f"최장 {vs['plain_run']}연속 (장면 {vs['plain_run_at']})")
+        deco = [s.get("id") for s in spec.get("scenes", []) if set(s.get("fx") or []) & {"dust", "leak"}]
+        R.add("G5", "SHOULD", "v10: 장식 효과(dust·leak)는 2장면 이하 — 내용이 담긴 볼거리(사진·지도·사물 그림·정리판) 먼저", len(deco) <= 2, deco)
         R.add("G5", "SHOULD", "반복 피로: 눈요기 있는 장면 60% 이상", vs["ratio"] >= 0.6, f"{vs['hooked']}/{vs['n']}")
         R.add("G5", "SHOULD", "반복 피로: 같은 시각 효과 3장면 연속 없음 · 효과 3종 이상(롱폼)",
               not vs["fx_runs"] and (not longform or len(vs["fx_kinds"]) >= 3), f"{vs['fx_kinds']} 연속 {vs['fx_runs']}")
@@ -255,7 +257,7 @@ def run(path: Path, upto: str = "G8") -> Report:
         R.add("G6", "SHOULD", "납품 점검(음량 등)", dc.get("status") == "completed", dc.get("status"))
         mo = _load(edt / "motion.json") or {}
         if mo:  # 완성본을 실제로 잰 움직임 (docs/19 A4) — 대본에 효과를 적은 것만으로는 통과 못 함
-            R.add("G6", "SHOULD", "움직임: 화면 변화 ≥10회/분 · 정지 화면 비율 ≤0.45 (완성본 측정)",
+            R.add("G6", "MUST" if longform else "SHOULD", "움직임(v10): 화면 변화 ≥10회/분 · 정지 화면 비율 ≤0.45 (완성본 측정)",
                   mo.get("change_events_per_min", 0) >= 10 and mo.get("static_ratio", 1) <= 0.45,
                   f"변화 {mo.get('change_events_per_min')}/분 · 정지 {mo.get('static_ratio')}")
         el = any((path / "03_voice").glob("el*")) or any((path / "03_voice").glob("*eleven*"))

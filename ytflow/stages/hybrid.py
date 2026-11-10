@@ -886,6 +886,9 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
                 os.link(p, a / "fonts" / p.name)
             except OSError:
                 shutil.copy(p, a / "fonts" / p.name)
+    if spec.get("edit_v10", True):   # v10: 장 표지는 그 장의 자료 사진을 깐 표지가 기본
+        from . import edit10
+        edit10.prepare(spec, sc)
     from . import backdrop   # 장면 목적에 맞는 바탕 (film·grid·spot·tint·photo, manual 05 §0-2)
     kind = backdrop.auto(sc, bool(spec.get("footage")))
     chap = int(sc.get("chapter", 0) or 0)
@@ -915,7 +918,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     if sc.get("layers"):   # 한 장면 안에서 스타일 겹치기 (directions.apply_layers)
         from . import directions
         directions.apply_layers(D, project, spec, sc, bt, dur, a)
-    if spec.get("edit_v10"):   # 편집 보완 묶음: 전환·장면 안 움직임·소리 (docs/19)
+    if spec.get("edit_v10", True):   # 편집 기준 v10 (기본 켬): 전환·장면 안 움직임·소리 (docs/19, manual 05 §0-4)
         from . import edit10
         edit10.apply(D, spec, sc, bt, dur)
     if sc.get("fx"):   # 시각 효과 (반복 피로 막기, manual 05 §0-3)
@@ -1181,7 +1184,7 @@ def make(project: Project, workers: int = 3) -> Path:
     fdir = str(paper.FONT_DIR).replace(":", "\\:")
     a_in = ["-i", str(work / "voice.wav")] + (["-i", str(sfx_wav)] if ev else [])
     amix = "[1:a][2:a]amix=inputs=2:normalize=0:duration=first[a]" if ev else "[1:a]anull[a]"
-    if spec.get("bgm") == "pad":   # 직접 합성한 배경 패드, 목소리가 나오면 자동으로 낮춤 (docs/19 A1)
+    if spec.get("bgm", "pad" if spec.get("edit_v10", True) else None) == "pad":   # 직접 합성한 배경 패드, 목소리가 나오면 자동으로 낮춤 (docs/19 A1)
         from . import edit10
         pw = edit10.pad(work / "pad.wav", t_acc, spec.get("bgm_mood", "calm"))
         a_in += ["-i", str(pw)]

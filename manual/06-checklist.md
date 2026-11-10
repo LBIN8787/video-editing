@@ -60,6 +60,7 @@ python -m ytflow check <프로젝트> --upto G4    # 대본까지만
 | MUST | 같은 type 3연속 없음 (chapter 제외) | ✅ |
 | MUST | **배경 바꿔 쓰기**: 장면 목적에 맞는 바탕 3종 이상 (photo·grid·spot·tint·film, 05 §0-2) | ✅ |
 | SHOULD | 같은 바탕 3장면 연속 없음 (film 제외) | ✅ |
+| SHOULD | v10: 장식 효과(dust·leak) 2장면 이하 — 내용이 담긴 볼거리 먼저 (05 §0-4) | ✅ |
 | MUST | **반복 피로**: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기 = 자료·지도·사진 겹치기·시각 효과 fx, 05 §0-3) | ✅ |
 | SHOULD | 눈요기 장면 60% 이상 · 같은 효과 3연속 없음 · 효과 3종 이상 · 같은 채널 직전 편과 구성 겹침 70% 이하 | ✅ |
 | MUST | **강조 아껴 쓰기**: 강조(words·number·vox·kinetic) 1분에 1번 이하, 한 장면에 1개까지, words 는 핵심 단어 1~3개만 — 자막과 같은 문장을 위에 반복하면 불합격 | ✅ |
@@ -76,6 +77,7 @@ python -m ytflow check <프로젝트> --upto G4    # 대본까지만
 | MUST | 레이아웃 점검 비어 있음 (`04_assets/layout_qa.json`: 화살표·글자 겹침) | ✅ |
 | MUST | 싱크: 자막 0.5초 안 ≥ 95%, 화면−소리 ≤ 0.1초 (`sync_qa.json`), 중앙값 ≤ 0.2초 | ✅ |
 | MUST | 프레임 시트를 눈으로 확인 (`final_sheet.png`): 잘린 글자·겹침·빈 화면 | EYE |
+| MUST (롱폼) | **움직임(v10)**: 완성본 측정 화면 변화 ≥10회/분 · 정지 화면 비율 ≤0.45 (`motion.json`, 렌더 끝에 자동) | ✅ |
 | SHOULD | 음량 −14 LUFS 근처 (`delivery_check.json`) | ✅ |
 | SHOULD | 업로드 최종본은 ElevenLabs 목소리 (edge-tts 는 초안) | ✅ (`03_voice/el` 또는 channel tts) |
 
