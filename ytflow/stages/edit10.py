@@ -59,8 +59,6 @@ def apply(D, spec: dict, sc: dict, bt: list, dur: float):
         D.sfx.append((WHOOSH[k], max(0.0, dur - 0.25)))
         if next(s for s in spec["scenes"] if s["id"] == nxt).get("type") == "chapter":
             D.sfx.append(("riser", max(0.0, dur - 3.0)))   # 장 표지 직전에 살짝 끌어올림 (3초만 씀)
-    if sc.get("type") == "chapter":
-        D.sfx.append(("impact-bass-1", 0.35))
     # ---- 장면 안 움직임 (카메라가 박자마다 다가감)
     fx = sc.get("fx") or []
     if sc.get("type") not in NO_PULSE and not ({"tilt", "dolly"} & set(fx if isinstance(fx, list) else [fx])):
@@ -197,9 +195,19 @@ def music(out: Path, dur: float, tid: str) -> Path | None:
     t = bgm_track(tid)
     if not t:
         return None
-    subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-stream_loop", "-1", "-i", str(t["path"]), "-t", f"{dur + 0.5:.2f}",
-                    "-af", f"loudnorm=I=-28:TP=-6:LRA=7,afade=t=in:d=1.5,afade=t=out:st={max(0, dur - 3):.2f}:d=3",
-                    "-ar", "48000", "-ac", "2", str(out)], check=True)
+    # 곡이 영상보다 짧으면 이음매를 3초 겹쳐(acrossfade) 이어 붙임 — 딱 끊기는 반복 없이
+    src = str(t["path"])
+    ln = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", src],
+                              capture_output=True, text=True).stdout or 0)
+    n = max(1, int((dur + 1) // max(1.0, ln - 3)) + 1) if ln else 1
+    ins = sum((["-i", src] for _ in range(n)), [])
+    chain, last = [], "[0:a]"
+    for k in range(1, n):
+        chain.append(f"{last}[{k}:a]acrossfade=d=3:c1=tri:c2=tri[x{k}]")
+        last = f"[x{k}]"
+    chain.append(f"{last}atrim=0:{dur + 0.5:.2f},loudnorm=I=-30:TP=-8:LRA=7,afade=t=in:d=1.5,afade=t=out:st={max(0, dur - 3):.2f}:d=3[o]")
+    subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *ins, "-filter_complex", ";".join(chain),
+                    "-map", "[o]", "-ar", "48000", "-ac", "2", str(out)], check=True)
     return out
 
 

@@ -1083,7 +1083,8 @@ def sfx_files() -> dict:
     base = config.ROOT / ".claude" / "skills" / "media-use" / "audio" / "assets" / "sfx"
     if not base.exists():
         base = config.ROOT / ".agents" / "skills" / "media-use" / "audio" / "assets" / "sfx"
-    files = {k: base / f"{k}.mp3" for k in ("whoosh", "pop", "click-soft", "impact-bass-1", "whoosh-short", "riser", "chime")}
+    # impact-bass(저음 '두웅')는 쓰지 않음 — 2026-11-10 사용자 판정 '소리 자체가 싫다'
+    files = {k: base / f"{k}.mp3" for k in ("whoosh", "pop", "click-soft", "whoosh-short", "riser", "chime")}
     pen = config.ROOT / ".cache" / "sfx" / "pencil.wav"
     if not pen.exists() or pen.stat().st_size < 1000:
         # 연필 긁는 소리: 내려받지 않고 직접 만듦 (분홍 잡음 → 대역 통과 → 빠른 떨림 → 페이드)
@@ -1192,7 +1193,7 @@ def make(project: Project, workers: int = 3) -> Path:
     if pw:
         a_in += ["-i", str(pw)]
         n = 3 if ev else 2
-        pre = "[1:a]asplit=2[v1][vk];" + f"[{n}:a][vk]sidechaincompress=threshold=0.015:ratio=10:attack=15:release=500,volume={0.22 if bgm == 'pad' else 1.0}[pd];"
+        pre = "[1:a]asplit=2[v1][vk];" + f"[{n}:a][vk]sidechaincompress=threshold=0.03:ratio=3:attack=120:release=1500,volume={0.22 if bgm == 'pad' else 1.0}[pd];"   # 부드럽게 (단어 사이마다 들썩이지 않게)
         amix = pre + (f"[v1][2:a][pd]amix=inputs=3:normalize=0:duration=first[a]" if ev else "[v1][pd]amix=inputs=2:normalize=0:duration=first[a]")
     subprocess.run(ff + ["-i", str(work / "video.mp4"), *a_in, "-filter_complex", f"[0:v]ass='{ass}':fontsdir='{fdir}'[v];{amix}",
                          "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "medium", "-crf", "19", "-c:a", "aac", "-b:a", "192k",

@@ -1,13 +1,32 @@
 # 배경음 등록부 — 음원 파일(mp3)은 커밋하지 않음(.gitignore). 없으면 렌더할 때 url 에서 자동으로 다시 받음 (edit10.bgm_track)
 # 라이선스: Kevin MacLeod (incompetech.com), Creative Commons Attribution 4.0 — 설명란에 credit 줄을 반드시 넣음
-# 고른 기준(측정): 목소리 밑에서는 음량 출렁임(swing)이 작고, 박이 너무 잦지 않은 곡. 측정 2026-11-10.
+# 고른 기준(측정): 목소리 밑에서는 음량 출렁임(swing)이 작고, 박이 너무 잦지 않고, **대역이 넓은(99% 에너지 ≥4kHz) 곡**.
+# 대역이 좁은 곡(예: Ether Vox 700Hz)은 '퀄리티가 낮다'고 들림 (2026-11-10 사용자 판정). 측정 2026-11-10.
 tracks:
+  digital-clouds:
+    file: mixkit_digital_clouds.mp3
+    url: https://assets.mixkit.co/music/744/744.mp3
+    source: Mixkit "Digital Clouds" (#744)
+    license: Mixkit Stock Music Free License — 출처 표기 필요 없음(제3자 정리), 원문은 mixkit.co/license 의 'Stock Music Free License' 창에서 사람이 확인
+    credit: '(선택) Music: "Digital Clouds" — Mixkit (mixkit.co)'
+    measured: {minutes: 1.9, swing_db: 2.1, band99_hz: 7169, hits_per_s: 2.93, kbps: 320}
+    fits: [issues, market]          # 시사 기본 (2026-11-10): 꾸준·넓은 대역·중간 박
+    mood: 긴장
+  rest-now:
+    file: mixkit_rest_now.mp3
+    url: https://assets.mixkit.co/music/724/724.mp3
+    source: Mixkit "Rest Now" (#724)
+    license: Mixkit Stock Music Free License (위와 같음)
+    credit: '(선택) Music: "Rest Now" — Mixkit (mixkit.co)'
+    measured: {minutes: 1.6, swing_db: 1.3, band99_hz: 4259, hits_per_s: 0.05, kbps: 320}
+    fits: [curiosity, ai]           # 박 없는 잔잔한 바탕
+    mood: 차분
   ether-vox:
     file: Ether_Vox.mp3
     url: https://incompetech.com/music/royalty-free/mp3-royaltyfree/Ether%20Vox.mp3
     credit: '"Ether Vox" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0 License · http://creativecommons.org/licenses/by/4.0/'
     measured: {minutes: 3.4, level_db: -13.8, swing_db: 3.1, brightness_hz: 750, hits_per_s: 1.16}
-    fits: [issues, market]          # 고른 곡: 시사 기본 — 꾸준하고 잔잔한 맥박, 출렁임 가장 작음
+    fits: []                        # 2026-11-10 사용자 판정: 음질이 낮게 들림(소리가 700Hz 아래에 몰린 옛 신시사이저) → 쓰지 않음
     mood: 긴장
   inspired:
     file: Inspired.mp3
