@@ -21,6 +21,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **편집 스타일 등록부·자동 추천** (상황에 맞는 스타일, 파일 하나로 늘림) | `styles/recipes/`, `python -m ytflow style-pick <프로젝트>`, `manual/07-extend.md` |
 | **스타일 풀 늘리기** (조사·후보·라이선스, 새 장면 chat·terminal·zoomshot·choropleth·mark, 세로 쇼츠 Claude 판) | `docs/17-style-pool.md`, `skills/edit-style-pool`, `python -m ytflow short <프로젝트>` |
 | **시사·사회 이슈 채널** (비교 채널 8곳 640편 분석: 좋아하는 편집·이유·욕망, 절차·전용 검사) | `docs/18-issues-research.md`, `manual/08-issues.md`, `channels/ch-issues/`, `scripts/issues_research.py` |
+| **매뉴얼 점검** (v9의 아쉬운 점 측정, 더할 편집 방식 후보·우선순위) | `docs/19-manual-gaps.md` |
 | **반드시 지킬 것·검사** | `manual/06-checklist.md`, `python -m ytflow check <프로젝트>` |
 | 채널 회차 만들기 (반복 운영) | `skills/channel-run/SKILL.md`, `channels/README.md`, `docs/06-operations.md` |
 | 영상 1편 만들기 | `skills/video-make/SKILL.md` |
