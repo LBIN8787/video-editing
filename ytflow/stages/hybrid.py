@@ -915,6 +915,9 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     if sc.get("layers"):   # 한 장면 안에서 스타일 겹치기 (directions.apply_layers)
         from . import directions
         directions.apply_layers(D, project, spec, sc, bt, dur, a)
+    if spec.get("edit_v10"):   # 편집 보완 묶음: 전환·장면 안 움직임·소리 (docs/19)
+        from . import edit10
+        edit10.apply(D, spec, sc, bt, dur)
     if sc.get("fx"):   # 시각 효과 (반복 피로 막기, manual 05 §0-3)
         from . import directions as _dir
         _dir.apply_fx(D, project, spec, sc, bt, dur, a)
@@ -1077,7 +1080,7 @@ def sfx_files() -> dict:
     base = config.ROOT / ".claude" / "skills" / "media-use" / "audio" / "assets" / "sfx"
     if not base.exists():
         base = config.ROOT / ".agents" / "skills" / "media-use" / "audio" / "assets" / "sfx"
-    files = {k: base / f"{k}.mp3" for k in ("whoosh", "pop", "click-soft", "impact-bass-1")}
+    files = {k: base / f"{k}.mp3" for k in ("whoosh", "pop", "click-soft", "impact-bass-1", "whoosh-short", "riser", "chime")}
     pen = config.ROOT / ".cache" / "sfx" / "pencil.wav"
     if not pen.exists() or pen.stat().st_size < 1000:
         # 연필 긁는 소리: 내려받지 않고 직접 만듦 (분홍 잡음 → 대역 통과 → 빠른 떨림 → 페이드)
@@ -1167,10 +1170,10 @@ def make(project: Project, workers: int = 3) -> Path:
     sfx_wav = work / "sfx.wav"
     if ev:
         inputs, filt = [], []
-        vol = {"pencil": 0.12, "whoosh": 0.35, "pop": 0.3, "click-soft": 0.25, "impact-bass-1": 0.3}
+        vol = {"pencil": 0.12, "whoosh": 0.35, "pop": 0.3, "click-soft": 0.25, "impact-bass-1": 0.3, "whoosh-short": 0.3, "riser": 0.18, "chime": 0.22}
         for k, (n, t) in enumerate(ev[:180]):
-            inputs += ["-i", str(files[n])]
-            filt.append(f"[{k}:a]atrim=0:{1.4 if n == 'pencil' else 2.5},volume={vol.get(n, 0.3)},adelay={int(t * 1000)}|{int(t * 1000)}[s{k}]")
+            inputs += (["-ss", "7.0"] if n == "riser" else []) + ["-i", str(files[n])]
+            filt.append(f"[{k}:a]atrim=0:{1.4 if n == 'pencil' else (3.0 if n == 'riser' else 2.5)},volume={vol.get(n, 0.3)},adelay={int(t * 1000)}|{int(t * 1000)}[s{k}]")
         mix = "".join(f"[s{k}]" for k in range(len(filt)))
         subprocess.run(ff + inputs + ["-filter_complex", ";".join(filt) + f";{mix}amix=inputs={len(filt)}:normalize=0[o]",
                                       "-map", "[o]", "-ar", "48000", "-ac", "2", "-t", f"{t_acc:.2f}", str(sfx_wav)], check=True)
@@ -1178,6 +1181,13 @@ def make(project: Project, workers: int = 3) -> Path:
     fdir = str(paper.FONT_DIR).replace(":", "\\:")
     a_in = ["-i", str(work / "voice.wav")] + (["-i", str(sfx_wav)] if ev else [])
     amix = "[1:a][2:a]amix=inputs=2:normalize=0:duration=first[a]" if ev else "[1:a]anull[a]"
+    if spec.get("bgm") == "pad":   # 직접 합성한 배경 패드, 목소리가 나오면 자동으로 낮춤 (docs/19 A1)
+        from . import edit10
+        pw = edit10.pad(work / "pad.wav", t_acc, spec.get("bgm_mood", "calm"))
+        a_in += ["-i", str(pw)]
+        n = 3 if ev else 2
+        pre = "[1:a]asplit=2[v1][vk];" + f"[{n}:a][vk]sidechaincompress=threshold=0.015:ratio=10:attack=15:release=500,volume=0.22[pd];"
+        amix = pre + (f"[v1][2:a][pd]amix=inputs=3:normalize=0:duration=first[a]" if ev else "[v1][pd]amix=inputs=2:normalize=0:duration=first[a]")
     subprocess.run(ff + ["-i", str(work / "video.mp4"), *a_in, "-filter_complex", f"[0:v]ass='{ass}':fontsdir='{fdir}'[v];{amix}",
                          "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "medium", "-crf", "19", "-c:a", "aac", "-b:a", "192k",
                          str(edir / "draft.mp4")], check=True)
@@ -1187,6 +1197,13 @@ def make(project: Project, workers: int = 3) -> Path:
     from .finish import master
     master(project)
     print(f"[hybrid] {edir}/final.mp4 ({t_acc:.1f}초)")
+    try:  # 완성본 움직임 측정 (화면 변화/분·정지 비율·배경음) → 05_edit/motion.json (check G6, docs/19 A4)
+        from . import style as _style
+        m = _style.measure(edir / "final.mp4", work, "motion")["metrics"]
+        project.write_json("edit", "motion.json", {k: m[k] for k in ("change_events_per_min", "median_change_gap_s", "static_ratio", "hard_cuts_per_min", "audio") if k in m})
+        print(f"[hybrid] 움직임: 화면 변화 {m.get('change_events_per_min')}/분 · 정지 비율 {m.get('static_ratio')}")
+    except Exception as e:  # noqa: BLE001
+        print(f"[hybrid] 움직임 측정 건너뜀: {e}")
     if spec.get("package"):  # 제목·썸네일 (영상과 함께 만든다 — prompts/thumbnail.md)
         from . import thumbnail
         thumbnail.run(project)
@@ -1201,5 +1218,7 @@ def make(project: Project, workers: int = 3) -> Path:
 try:  # 새 연출 문법(아카이브 다큐·지도 여정·키네틱 타이포)의 장면 type 을 추가 등록 — 기존 장면은 그대로
     from . import directions as _directions
     _directions.register()
+    from . import edit10 as _edit10
+    _edit10.register()
 except Exception as _e_dir:  # noqa: BLE001
     print(f"[hybrid] 새 연출 장면 등록 건너뜀: {_e_dir}")

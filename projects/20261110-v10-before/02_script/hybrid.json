@@ -1,0 +1,573 @@
+{
+ "core_message": "유가가 올라도 기름이 나갈 길이 막혀 팔 수 있는 양이 줄면, '얼마나 만들었나'를 재는 산유국의 성장률은 줄어든다.",
+ "question": "유가는 올랐는데 왜 산유국 사우디는 마이너스 성장일까?",
+ "logic": [
+  "2월 28일 이란 전쟁 → 이란의 호르무즈 봉쇄",
+  "사우디는 동서 송유관·홍해로 우회, 후티가 그쪽도 공격",
+  "생산·수출 감소 → 실질 GDP -3.8% (석유 부문 -20.4%)",
+  "유가 상승으로 아람코 이익은 +34.5%, 그러나 정부 재정적자는 두 배 넘게",
+  "앞으로: 회복론(4분기 반등) vs 우려론(빠른 해결 어려움) — 협상이 변수"
+ ],
+ "compare_to": [
+  {
+   "value": "브렌트유 117달러 (10월 말)",
+   "to": "전쟁 직전 72달러"
+  },
+  {
+   "value": "사우디 생산 725만 배럴/일 (3월)",
+   "to": "2월 1,040만 배럴"
+  },
+  {
+   "value": "3분기 GDP -3.8%",
+   "to": "2분기 -4.7%"
+  }
+ ],
+ "analogies": [
+  {
+   "a": "호르무즈 해협",
+   "b": "깔때기의 좁은 목"
+  },
+  {
+   "a": "유가는 올랐는데 사우디 경제는 줄어든 것",
+   "b": "사과값은 올랐는데 가게 앞 길이 막혀 손님이 못 오는 과일 가게"
+  }
+ ],
+ "past_cases": [
+  {
+   "case": "2019년 9월 아브카이크 석유시설 피격 — 생산 절반 이상 멈췄지만 몇 주 만에 복구",
+   "lesson": "시설이 부서진 것보다 '길이 막힌 것'이 훨씬 오래 간다"
+  }
+ ],
+ "glossary": [
+  {
+   "term": "실질 GDP",
+   "plain": "값이 아니라 '얼마나 만들었나'를 재는 경제 규모 — 값이 올라도 만든 양이 줄면 줄어든다"
+  },
+  {
+   "term": "호르무즈 해협",
+   "plain": "페르시아만의 기름이 바다로 나가는 좁은 길목"
+  },
+  {
+   "term": "후티 반군",
+   "plain": "이란과 가까운 예멘의 무장 세력"
+  },
+  {
+   "term": "속보치",
+   "plain": "먼저 내놓는 잠정 숫자 — 나중에 고쳐질 수 있음"
+  },
+  {
+   "term": "재정적자",
+   "plain": "나라가 1년(한 분기) 동안 번 돈보다 쓴 돈이 많은 만큼"
+  }
+ ],
+ "map": {
+  "nodes": {
+   "war": {
+    "label": "이란 전쟁 (2.28)",
+    "icon": "siren",
+    "x": 250,
+    "y": 400
+   },
+   "hormuz": {
+    "label": "호르무즈 봉쇄",
+    "icon": "ban",
+    "x": 710,
+    "y": 400
+   },
+   "volume": {
+    "label": "팔 수 있는 양 ↓",
+    "icon": "trending-down",
+    "x": 1170,
+    "y": 400
+   },
+   "gdp": {
+    "label": "실질 GDP -3.8%",
+    "icon": "chart-line",
+    "x": 1630,
+    "y": 400
+   },
+   "price": {
+    "label": "유가 117달러까지",
+    "icon": "fuel",
+    "x": 250,
+    "y": 720
+   },
+   "profit": {
+    "label": "아람코 이익 +34.5%",
+    "icon": "coins",
+    "x": 710,
+    "y": 720
+   },
+   "houthi": {
+    "label": "후티의 홍해 공격",
+    "icon": "alert-triangle",
+    "x": 1170,
+    "y": 720
+   },
+   "budget": {
+    "label": "재정적자 2배+",
+    "icon": "landmark",
+    "x": 1630,
+    "y": 720
+   }
+  },
+  "edges": [
+   [
+    "war",
+    "hormuz"
+   ],
+   [
+    "hormuz",
+    "volume"
+   ],
+   [
+    "volume",
+    "gdp"
+   ],
+   [
+    "war",
+    "price"
+   ],
+   [
+    "price",
+    "profit"
+   ],
+   [
+    "houthi",
+    "volume"
+   ],
+   [
+    "volume",
+    "budget"
+   ]
+  ]
+ },
+ "footage": {
+  "hormuz": {
+   "file": "hormuz.mp4",
+   "credit": "호르무즈 해협 · NASA 우주왕복선 STS-4 사진 (1982, s04-37-716, 퍼블릭 도메인)",
+   "url": "https://images.nasa.gov/details/s04-37-716"
+  },
+  "riyadh": {
+   "file": "riyadh.mp4",
+   "credit": "리야드 야경 · NASA 국제우주정거장 사진 (2025, iss072e519565, 퍼블릭 도메인)",
+   "url": "https://images.nasa.gov/details/iss072e519565"
+  },
+  "redsea": {
+   "file": "redsea.mp4",
+   "credit": "홍해 연안 얀부항 야경 · NASA 국제우주정거장 사진 (2022, iss066e128404, 퍼블릭 도메인)",
+   "url": "https://images.nasa.gov/details/iss066e128404"
+  },
+  "qeshm": {
+   "file": "qeshm.mp4",
+   "credit": "이란 케슘섬과 페르시아만 · NASA 아폴로 7호 사진 (1968, as7-05-1615, 퍼블릭 도메인)",
+   "url": "https://images.nasa.gov/details/as7-05-1615"
+  }
+ },
+ "title": "유가는 올랐는데 사우디는 왜 작아졌나 (2분 정리)",
+ "scenes": [
+  {
+   "type": "intro",
+   "chapter": 0,
+   "series": "이슈의 구조",
+   "as_of": "11월 9일 기준",
+   "bg_src": "riyadh",
+   "title_lines": [
+    "기름값은 올랐는데,",
+    "사우디는 왜 작아졌을까?"
+   ],
+   "agenda_beat": 2,
+   "layers": [
+    {
+     "kind": "photo",
+     "src": "riyadh",
+     "beat": 1,
+     "side": "right",
+     "w": 720,
+     "top": 250,
+     "caption": "리야드 야경 · NASA ISS (2025)"
+    }
+   ],
+   "beats": [
+    {
+     "say": "안녕하세요. 복잡한 뉴스를 한 장의 구조로 풀어 드리는, 이슈의 구조입니다."
+    },
+    {
+     "say": "오늘은 2분 안에, 기름값이 올랐는데 사우디 경제는 왜 작아졌는지 정리해 보겠습니다."
+    },
+    {
+     "say": "순서는 두 가지입니다. 무슨 일이 있었는지, 그리고 왜 그렇게 됐는지요. 바로 시작하겠습니다."
+    }
+   ],
+   "id": 1
+  },
+  {
+   "type": "kb",
+   "chapter": 0,
+   "clip": {
+    "src": "hormuz",
+    "start": 0
+   },
+   "move": "in",
+   "stamp": "호르무즈 해협 · 우주에서 본 모습",
+   "label": "자료 사진 · NASA STS-4 (1982, 퍼블릭 도메인)",
+   "beats": [
+    {
+     "say": "11월 9일 기준, 기름값은 1년 전보다 50% 가까이 올랐습니다."
+    },
+    {
+     "say": "그런데 사우디의 3분기 경제 성장률은 마이너스 3.8%였습니다. 속보치입니다."
+    }
+   ],
+   "id": 2,
+   "layers": [
+    {
+     "kind": "locator",
+     "at": [
+      56.4,
+      26.5
+     ],
+     "label": "호르무즈 해협",
+     "beat": 0,
+     "side": "right",
+     "top": 120,
+     "scale": 2.2
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "chapter": 1,
+   "num": "1",
+   "title": "무슨 일이 있었나",
+   "icon": "siren",
+   "beats": [
+    {
+     "say": "첫 번째, 무슨 일이 있었을까요?"
+    }
+   ],
+   "id": 3
+  },
+  {
+   "type": "timeline",
+   "chapter": 1,
+   "label": "YTN·파이낸셜뉴스·IEA 집계 보도",
+   "title": "2026년, 무슨 일이",
+   "years": [
+    "2월",
+    "4월"
+   ],
+   "events": [
+    {
+     "at": "2월",
+     "label": "이란 전쟁 · 호르무즈 봉쇄",
+     "sub": "2월 28일"
+    },
+    {
+     "at": "4월",
+     "label": "해협 통과 기름 -81%",
+     "sub": "IEA 집계 보도"
+    }
+   ],
+   "beats": [
+    {
+     "say": "2월 28일, 이란 전쟁이 시작되자 이란은 호르무즈 해협을 막았습니다.",
+     "upto": 1
+    },
+    {
+     "say": "4월 초, 이 해협을 지나는 기름은 80% 넘게 줄었다는 국제에너지기구 집계가 나왔습니다.",
+     "upto": 2
+    }
+   ],
+   "fx": [
+    "tilt",
+    "dust"
+   ],
+   "id": 4,
+   "layers": [
+    {
+     "kind": "photo",
+     "src": "hormuz",
+     "beat": 1,
+     "side": "right",
+     "w": 520,
+     "top": 560,
+     "caption": "호르무즈 해협 · NASA (1982)"
+    }
+   ]
+  },
+  {
+   "type": "bars",
+   "chapter": 1,
+   "label": "IEA 자료 보도 (파이낸셜뉴스)",
+   "title": "사우디 원유 생산 (하루, 만 배럴)",
+   "emph": 1,
+   "items": [
+    {
+     "label": "2월",
+     "value": 1040,
+     "text": "1,040"
+    },
+    {
+     "label": "3월",
+     "value": 725,
+     "text": "725"
+    }
+   ],
+   "beats": [
+    {
+     "say": "사우디 생산도 2월 하루 1,040만 배럴에서, 3월 725만 배럴로 줄었습니다."
+    },
+    {
+     "say": "열 통을 팔던 나라가, 세 통을 못 팔게 된 셈입니다."
+    }
+   ],
+   "fx": [
+    "tilt"
+   ],
+   "id": 5
+  },
+  {
+   "type": "checklist",
+   "chapter": 1,
+   "label": "정리",
+   "title": "여기까지 정리",
+   "rows": [
+    {
+     "label": "길이 막혀, 팔 수 있는 양이 30% 가까이 줄었다",
+     "state": "warn"
+    }
+   ],
+   "beats": [
+    {
+     "say": "정리하면, 길이 막혀 팔 수 있는 양이 30% 가까이 줄었습니다.",
+     "upto": 1
+    }
+   ],
+   "fx": [
+    "scan"
+   ],
+   "id": 6
+  },
+  {
+   "type": "chapter",
+   "chapter": 2,
+   "num": "2",
+   "title": "왜 경제는 작아졌나",
+   "icon": "trending-down",
+   "beats": [
+    {
+     "say": "두 번째, 그런데 비싸게 팔 수 있는데 왜 경제는 작아졌을까요?"
+    }
+   ],
+   "id": 7
+  },
+  {
+   "type": "journey",
+   "chapter": 2,
+   "title": "사우디 기름이 나가는 길",
+   "label": "지도 · world-atlas (ISC) · 경로는 개념도",
+   "highlight": [
+    "Saudi Arabia",
+    "Iran",
+    "Yemen"
+   ],
+   "places": {
+    "ras": [
+     50.16,
+     26.64
+    ],
+    "hormuz": [
+     56.4,
+     26.5
+    ],
+    "yanbu": [
+     38.06,
+     24.09
+    ],
+    "babel": [
+     43.4,
+     12.6
+    ],
+    "riyadh": [
+     46.72,
+     24.71
+    ]
+   },
+   "start": {
+    "goto": "ras",
+    "zoom": 3.6
+   },
+   "beats": [
+    {
+     "say": "사우디는 나라를 가로지르는 송유관으로 기름을 홍해 쪽 얀부항까지 보냈지만,",
+     "goto": "riyadh",
+     "zoom": 3.0,
+     "route": [
+      "ras",
+      "yanbu"
+     ],
+     "pin": {
+      "at": "yanbu",
+      "label": "얀부항 (홍해)",
+      "side": "right"
+     }
+    },
+    {
+     "say": "예멘의 후티 반군이 홍해 쪽과 사우디 시설을 공격하면서 이 길도 불안해졌습니다.",
+     "goto": "yanbu",
+     "zoom": 2.8,
+     "route": [
+      "yanbu",
+      "babel"
+     ],
+     "pin": {
+      "at": "babel",
+      "label": "홍해 남쪽 · 후티 반군 공격",
+      "side": "right"
+     }
+    }
+   ],
+   "id": 8,
+   "layers": [
+    {
+     "kind": "photo",
+     "src": "redsea",
+     "beat": 0,
+     "side": "left",
+     "w": 460,
+     "top": 600,
+     "caption": "얀부항 야경 · NASA ISS (2022)"
+    }
+   ]
+  },
+  {
+   "type": "analogy",
+   "chapter": 2,
+   "label": "자체 정리",
+   "title": "값은 올랐는데 길이 막힌 과일 가게",
+   "left": {
+    "icon": "fuel",
+    "label": "사우디",
+    "sub": "비싸게 팔 수 있지만 길이 막힘"
+   },
+   "right": {
+    "icon": "store",
+    "label": "과일 가게",
+    "sub": "사과값은 올랐는데 가게 앞 길이 공사 중"
+   },
+   "result": {
+    "icon": "trending-down",
+    "label": "팔리는 양이 줄면 전체는 줄어든다"
+   },
+   "beats": [
+    {
+     "say": "사과값이 두 배로 뛰었는데 가게 앞 길이 막혀 손님이 못 오는 과일 가게를 떠올려 보세요."
+    },
+    {
+     "say": "경제 성장률은 값이 아니라 '얼마나 만들었나'를 재는 숫자라, 생산이 줄면 그대로 마이너스가 됩니다.",
+     "show_result": true
+    }
+   ],
+   "fx": [
+    "dust",
+    "dolly"
+   ],
+   "id": 9
+  },
+  {
+   "type": "versus",
+   "chapter": 2,
+   "label": "로이터(2026.11.3) · 블룸버그 보도(NACM 인용)",
+   "left": {
+    "value": "+34.5%",
+    "label": "아람코 3분기 순이익",
+    "icon": "trending-up"
+   },
+   "right": {
+    "value": "2배+",
+    "label": "정부 3분기 재정적자",
+    "icon": "landmark"
+   },
+   "beats": [
+    {
+     "say": "반면 국영 석유회사 아람코의 3분기 순이익은 34.5% 늘었습니다."
+    },
+    {
+     "say": "하지만 나라 재정적자는 직전 분기의 두 배를 넘었습니다.",
+     "question": "회사는 벌었는데, 나라 살림은?"
+    }
+   ],
+   "fx": [
+    "leak"
+   ],
+   "bg": "photo",
+   "bg_src": "riyadh",
+   "id": 10
+  },
+  {
+   "type": "checklist",
+   "chapter": 2,
+   "label": "정리",
+   "title": "한 장 정리",
+   "rows": [
+    {
+     "label": "길이 막혀, 팔 수 있는 양이 30% 가까이 줄었다",
+     "state": "warn"
+    },
+    {
+     "label": "값은 올랐지만 양이 줄어 경제는 작아졌다",
+     "state": "warn"
+    },
+    {
+     "label": "회사는 벌었지만 나라 살림은 빠듯해졌다",
+     "state": "warn"
+    }
+   ],
+   "beats": [
+    {
+     "say": "결국 값은 올랐지만 양이 줄어 경제는 작아졌고,",
+     "upto": 2
+    },
+    {
+     "say": "회사는 벌었지만 나라 살림은 빠듯해졌습니다.",
+     "upto": 3
+    }
+   ],
+   "fx": [
+    "scan"
+   ],
+   "id": 11
+  },
+  {
+   "type": "kinetic",
+   "chapter": 2,
+   "beats": [
+    {
+     "say": "유가가 올라도 길이 막히면, 산유국도 작아집니다.",
+     "hit": [
+      "길이",
+      "작아집니다."
+     ]
+    }
+   ],
+   "id": 12
+  },
+  {
+   "type": "outro",
+   "chapter": 2,
+   "title": "이슈의 구조",
+   "sub": "11월 9일 기준 · 출처는 설명란에",
+   "clip": {
+    "src": "qeshm",
+    "start": 0
+   },
+   "beats": [
+    {
+     "say": "오늘 이슈의 구조는 여기까지입니다. 출처는 설명란에 남겨 두겠습니다."
+    }
+   ],
+   "id": 13
+  }
+ ]
+}

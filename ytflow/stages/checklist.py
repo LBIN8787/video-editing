@@ -253,6 +253,11 @@ def run(path: Path, upto: str = "G8") -> Report:
               {k: sq.get(k) for k in ("within_0_5s", "p95_abs_offset", "median_abs_offset", "video_minus_audio_s")})
         dc = _load(edt / "delivery_check.json") or {}
         R.add("G6", "SHOULD", "납품 점검(음량 등)", dc.get("status") == "completed", dc.get("status"))
+        mo = _load(edt / "motion.json") or {}
+        if mo:  # 완성본을 실제로 잰 움직임 (docs/19 A4) — 대본에 효과를 적은 것만으로는 통과 못 함
+            R.add("G6", "SHOULD", "움직임: 화면 변화 ≥10회/분 · 정지 화면 비율 ≤0.45 (완성본 측정)",
+                  mo.get("change_events_per_min", 0) >= 10 and mo.get("static_ratio", 1) <= 0.45,
+                  f"변화 {mo.get('change_events_per_min')}/분 · 정지 {mo.get('static_ratio')}")
         el = any((path / "03_voice").glob("el*")) or any((path / "03_voice").glob("*eleven*"))
         try:
             el = el or (config.channel(ch).get("tts") or {}).get("backend") == "elevenlabs"
