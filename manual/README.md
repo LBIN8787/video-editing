@@ -5,14 +5,14 @@
 ## 0. 읽는 순서 (30분)
 | 순서 | 파일 | 얻는 것 |
 |---|---|---|
-| 1 | [`01-desire-map.md`](01-desire-map.md) | **왜 이 영상을 보는가** — 세 채널의 근본 욕망, 주제를 고르는 상위 기준 |
+| 1 | [`01-desire-map.md`](01-desire-map.md) | **왜 이 영상을 보는가** — 네 채널의 근본 욕망, 주제를 고르는 상위 기준 |
 | 2 | 맡은 채널 하나: [`02-ai.md`](02-ai.md) · [`03-market.md`](03-market.md) · [`04-curiosity.md`](04-curiosity.md) · [`08-issues.md`](08-issues.md) | 그 채널의 주제 찾기 → 조사 → 대본 → 편집을 단계별로 |
 | 3 | [`05-style-matching.md`](05-style-matching.md) | 영상·장면마다 어떤 편집 스타일(연출 + 그래픽 팩)을 쓰나 |
 | 4 | [`06-checklist.md`](06-checklist.md) | **반드시 지킬 것**과 검사 방법 (자동 + 사람 눈) |
 | 5 | [`07-extend.md`](07-extend.md) | 채널·편집 스타일을 **파일 하나로 늘리는 법** (등록부 구조) |
 | 참고 | `../AGENTS.md`, `../docs/11-playbook.md`(명령 순서), `../docs/13`(연출·그래픽 분리), `../docs/15`(연출 조사), `../docs/16`(새 연출) | |
 
-## 1. 세 채널 한눈에
+## 1. 네 채널 한눈에
 | 브랜드 (`channels/brands.yaml`) | 사람의 욕망 | 시청자가 묻는 것 | 제작 라인 (`channels/<id>`) |
 |---|---|---|---|
 | **ai** — AI 더 잘 쓰기 | AI 를 더 잘 알고 더 잘 다루고 싶다 | 이거 뭐야? 나는 어떻게 써? | `ch-ai-guide`(롱폼) · `ch-ai-shorts`(쇼츠) |
