@@ -143,3 +143,21 @@ python -c "from pathlib import Path; from ytflow.stages import style; print(styl
 - 질감·빛샘·스크랩북식 연출(2차 해설): https://motionarray.com/learn/premiere-pro/edit-documentary-in-premiere-pro/ · https://rndr.beehiiv.com/p/5-visuals-next-video-ead0
 - 소리(업체 글, 실험 근거 없음): https://www.motiontheagency.com/blog/sound-design-for-explainer-videos · https://licensing.routenote.com/blog/?p=9589
 - 설치된 연출 블록 목록: `.claude/skills/hyperframes-registry/references/discovery.md`
+
+## 5. 전후 비교 시험작 (2026-11-10) — `projects/20261110-v10-before` vs `projects/20261110-v10-after`
+같은 대본·같은 목소리(2분 2초), 편집만 다르게. 후 판은 대본 맨 위 `"edit_v10": true`, `"bgm": "pad"` (코드 `ytflow/stages/edit10.py`).
+
+| 항목 | 전 (매뉴얼 v9) | 후 (보완 묶음) |
+|---|---|---|
+| 정지 화면 비율 (완성본 측정) | 0.39 | **0.18** |
+| 화면 변화/분 (큰 변화만 셈) | 13.7 | 13.7 |
+| 장면 사이 | 딱 자르기 | 덮기·밀기·확대·원형 전환 4종을 돌려 씀 + 휙 소리 |
+| 장면 안 | 먼지·빛샘 같은 장식 효과 | 박자마다 방향을 바꾸며 이어지는 카메라 이동 (장식 효과는 뺌) |
+| 소리 | 목소리 + 연필·팝 | + 직접 합성한 배경 패드(목소리 나오면 낮춤) · 장 표지 앞 상승음 · 표지 타격음 · 정리판 차임 |
+| 장 표지 | 노란 전면 카드 | 그 장의 자료 사진을 흐리게 깐 표지 |
+| 생산 감소 | 막대 그래프 | 기름통 10개 중 3개가 빠지는 사물 그림 |
+| 정리 | 체크리스트 | 장 끝 정리판 (지난 줄은 흐리게, 새 줄은 밝게 쌓임) |
+| 싱크 (0.3초 안) | 97.8% | 91.1% (기준 0.5초 안 95%는 둘 다 통과) |
+
+**읽기:** 화면 변화 '횟수'는 같지만, 후 판은 멈춘 시간이 절반 이하로 줄었습니다. 소리와 전환은 측정기에 잘 안 잡히므로 직접 보고 판단해야 합니다(비교 영상 `05_edit/compare_before_after.mp4`, Release `video-20261110-v10-after`).
+**남은 일:** 후 판 싱크 0.3초 안 비율이 낮아진 원인(배경 패드가 받아쓰기를 방해하는지) 확인. 배경 패드는 임시 — 음원 결정(3-1) 후 교체.
