@@ -63,7 +63,7 @@ def make(sk: dict, kind: str, W: int, H: int, chapter: int = 0, photo: Path | No
         im = im.crop(((im.width - W) // 2, (im.height - H) // 2, (im.width - W) // 2 + W, (im.height - H) // 2 + H))
         im = im.filter(ImageFilter.GaussianBlur(14))
         arr = np.asarray(im, np.float32)
-        k = 0.5 if dark else 0.55
+        k = 0.4 if dark else 0.55
         arr = arr * k + base * (1 - k) * (1.0 if dark else 0.9)
         arr *= (1 - 0.45 * r2 / 2)[..., None]
     elif kind == "spot":

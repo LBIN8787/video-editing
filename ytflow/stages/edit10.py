@@ -33,7 +33,7 @@ def apply(D, spec: dict, sc: dict, bt: list, dur: float):
         k = kind_of(spec, sc["id"])
         if k == "wipe":
             i = D._id()
-            D.top = getattr(D, "top", []) + [f'<div id="{i}" style="position:absolute;inset:0;background:{acc};z-index:50"></div>']
+            D.top = getattr(D, "top", []) + [f'<div id="{i}" style="position:absolute;inset:0;background:{acc};z-index:50" data-layout-ignore></div>']
             D.js.append(f'tl.fromTo("#{i}",{{x:0}},{{x:{W},duration:0.4,ease:"power3.in"}},0);')
         elif k == "push":
             D.js.append(f'tl.fromTo("#root",{{x:{W * 0.35:.0f},filter:"blur(10px)"}},{{x:0,filter:"blur(0px)",duration:0.4,ease:"power3.out"}},0);')
@@ -48,7 +48,7 @@ def apply(D, spec: dict, sc: dict, bt: list, dur: float):
         t = max(0.0, dur - 0.3)
         if k == "wipe":
             i = D._id()
-            D.top = getattr(D, "top", []) + [f'<div id="{i}" style="position:absolute;inset:0;background:{acc};z-index:50;transform:translateX(-{W}px)"></div>']
+            D.top = getattr(D, "top", []) + [f'<div id="{i}" style="position:absolute;inset:0;background:{acc};z-index:50;transform:translateX(-{W}px)" data-layout-ignore></div>']
             D.js.append(f'tl.fromTo("#{i}",{{x:{-W}}},{{x:0,duration:0.3,ease:"power3.out"}},{t:.2f});')
         elif k == "push":
             D.js.append(f'tl.to("#root",{{x:{-W * 0.35:.0f},filter:"blur(10px)",duration:0.3,ease:"power3.in"}},{t:.2f});')
@@ -71,11 +71,13 @@ def apply(D, spec: dict, sc: dict, bt: list, dur: float):
                 marks.append(b0)
             n = int(bd // 4.5)
             marks += [b0 + bd * (j + 1) / (n + 1) for j in range(n)] if bd > 5 else []
-        marks = [m for m in sorted(marks) if 0.6 < m < dur - 0.7]
-        for j, m in enumerate(marks):
-            s = 1.0 + 0.035 * ((j + 1) % 2 + (0.5 if j % 3 == 2 else 0))
-            x = (-1) ** j * 16
-            D.js.append(f'tl.to("#layer",{{scale:{s:.3f},x:{x},duration:0.7,ease:"power2.inOut"}},{m:.2f});')
+        # 박자마다 방향을 바꾸며 끊임없이 천천히 다가가거나 옮겨 감 (멈춘 화면 없이, docs/15 '천천히 다가가기')
+        marks = [0.4] + [m for m in sorted(marks) if 0.8 < m < dur - 1.2] + [dur - 0.3]
+        for j in range(len(marks) - 1):
+            a, b = marks[j], marks[j + 1]
+            s = 1.0 + 0.04 * ((j + 1) % 2) + 0.015 * j / max(1, len(marks))
+            x = (-1) ** j * 18
+            D.js.append(f'tl.to("#layer",{{scale:{s:.3f},x:{x},duration:{b - a:.2f},ease:"sine.inOut"}},{a:.2f});')
 
 
 # ---------------------------------------------------------------- B11 정리판
