@@ -1,7 +1,7 @@
 {
  "project": "20261111-market-nvidia",
- "manual_version": "11",
- "checked": "2026-11-11T05:05:16",
+ "manual_version": "12",
+ "checked": "2026-11-11T07:14:26",
  "pass": true,
  "rows": [
   {
@@ -223,6 +223,13 @@
   },
   {
    "gate": "G5",
+   "level": "SHOULD",
+   "item": "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6)",
+   "ok": true,
+   "detail": "이번 light:slate · 직전 ['light:clean-white', 'dark:dark-doc']"
+  },
+  {
+   "gate": "G5",
    "level": "MUST",
    "item": "같은 type 3연속 없음",
    "ok": true,
@@ -295,8 +302,8 @@
    "gate": "G5",
    "level": "SHOULD",
    "item": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
-   "ok": true,
-   "detail": "paper-sketch / 등록부 ['blueprint', 'clean-flat', 'dark-doc', 'kinetic-poster', 'newsprint', 'paper-sketch']"
+   "ok": false,
+   "detail": "slate / 등록부 ['blueprint', 'clean-flat', 'dark-doc', 'kinetic-poster', 'newsprint', 'paper-sketch']"
   },
   {
    "gate": "G5",
@@ -304,83 +311,6 @@
    "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
    "ok": true,
    "detail": "python -m ytflow style-pick <프로젝트>"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "final.mp4",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "레이아웃 점검 비어 있음",
-   "ok": true,
-   "detail": "{}"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
-   "ok": true,
-   "detail": "{'within_0_5s': 1.0, 'p95_abs_offset': 0.07, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.067}"
-  },
-  {
-   "gate": "G6",
-   "level": "SHOULD",
-   "item": "납품 점검(음량 등)",
-   "ok": true,
-   "detail": "completed"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "움직임(v10): 화면 변화 ≥10회/분 · 정지 화면 비율 ≤0.45 (완성본 측정)",
-   "ok": true,
-   "detail": "변화 18.3/분 · 정지 0.16"
-  },
-  {
-   "gate": "G6",
-   "level": "SHOULD",
-   "item": "최종 목소리 ElevenLabs",
-   "ok": false,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "MUST",
-   "item": "제목 후보 3개 + 이유",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "MUST",
-   "item": "썸네일 A/B/C + 점검 ok",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "SHOULD",
-   "item": "제목 앞 22자 안에 질문/핵심",
-   "ok": true,
-   "detail": "반도체는 올랐는데 왜 엔비디아만 떨어졌나"
-  },
-  {
-   "gate": "G8",
-   "level": "MUST",
-   "item": "GitHub Release 업로드",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G8",
-   "level": "MUST",
-   "item": "episodes.md 기록",
-   "ok": true,
-   "detail": "ch-paper-column"
   }
  ]
 }

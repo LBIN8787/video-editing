@@ -79,6 +79,7 @@ python -m ytflow check <프로젝트> --upto G4    # 대본까지만
 | MUST | 프레임 시트를 눈으로 확인 (`final_sheet.png`): 잘린 글자·겹침·빈 화면 | EYE |
 | SHOULD | **움직임(v12)**: 완성본 측정 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (`motion.json`) — 숫자를 채우려 움직임을 더하지 않음 | ✅ |
 | EYE | 화면이 정신없지 않은가 · 배경음이 억지스럽지 않은가 (애매하면 빼기) | 사람 눈 |
+| SHOULD | 바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(미색 종이 등) 연속 금지 (05 §0-6) | ✅ |
 | SHOULD | 음량 −14 LUFS 근처 (`delivery_check.json`) | ✅ |
 | SHOULD | 업로드 최종본은 ElevenLabs 목소리 (edge-tts 는 초안) | ✅ (`03_voice/el` 또는 channel tts) |
 

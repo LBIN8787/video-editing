@@ -201,6 +201,24 @@ def run(path: Path, upto: str = "G8") -> Report:
         R.add("G5", "SHOULD", "반복 피로: 눈요기 있는 장면 60% 이상", vs["ratio"] >= 0.6, f"{vs['hooked']}/{vs['n']}")
         R.add("G5", "SHOULD", "반복 피로: 같은 시각 효과 3장면 연속 없음 · 효과 3종 이상(롱폼)",
               not vs["fx_runs"] and (not longform or len(vs["fx_kinds"]) >= 3), f"{vs['fx_kinds']} 연속 {vs['fx_runs']}")
+        # 바탕색 돌려 쓰기 (v13): 미색 종이 계열만 계속 쓰지 않기 — 직전 두 프로젝트와 같은 바탕 계열이면 경고
+        try:
+            from . import skin as _skin
+            def _fam(sid):
+                b = _skin.load(sid).get("palette", {}).get("base") or "#F3EFE6"
+                r, g, bb = (int(b.lstrip("#")[i:i + 2], 16) for i in (0, 2, 4))
+                if r + g + bb < 300: return f"dark:{sid}"
+                return "cream" if r - bb > 12 else f"light:{sid}"
+            cur = _fam((ed.get("edit") or {}).get("skin", "paper-sketch"))
+            prevs = []
+            for q in sorted(Path(path).parent.iterdir()):
+                if q.name < Path(path).name and (q / "edit.yaml").exists() and (q / "05_edit" / "final.mp4").exists():
+                    prevs.append(_fam(((yaml.safe_load((q / "edit.yaml").read_text(encoding="utf-8")) or {}).get("edit") or {}).get("skin", "paper-sketch")))
+            last2 = prevs[-2:]
+            R.add("G5", "SHOULD", "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6)",
+                  not (len(last2) == 2 and all(x == cur for x in last2)), f"이번 {cur} · 직전 {last2}")
+        except Exception:
+            pass
         prev = _prev_episode_signature(path, spec)
         if prev is not None:
             cur = set(vs["signature"])
