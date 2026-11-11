@@ -1,0 +1,18 @@
+# v15 · 2026-11-12 사용자 통과 (시험판 20261112-bg-trials)
+id: duotone-cover
+name: "듀오톤 사진 표지 (주제 사진을 카테고리 두 색으로 물들인 장 표지)"
+status: approved
+renderer: hybrid
+skin: dark-doc
+format: [longform]
+owns: []
+scene_types: [chapter]       # chapter 에 "look": "photo" + "bg_src" (brand 가 있으면 장 번호 순서로 자동)
+fits:
+  brands: [issues, market, curiosity, ai]
+  questions: [연결, 숨은 장면, 원인, 정체, 과거 사례]
+  moods: [차분, 긴장, 과거, 미래]
+  needs: [footage]
+roles: [body]
+avoid: "주제와 상관없는 사진(같은 위성 사진 반복) / 글자가 많은 그림(지도·인포그래픽) / 같은 사진 두 번"
+when: "그 장의 장소·사물이 분명할 때 — 시험장·거래소·데이터센터처럼 '바로 그곳'. 위키미디어 공용 PD·CC BY (archive commons)"
+demo: "20261112-bg-trials"

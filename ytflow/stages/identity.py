@@ -41,11 +41,26 @@ def get(spec: dict, sc: dict | None = None) -> dict | None:
 def prepare(spec: dict, sc: dict) -> None:
     """장면 dict 에 look·bg·skin·bg_src 를 채운다 (대본에 직접 쓴 값은 그대로 둠)."""
     idn = get(spec, sc)
+    t = sc.get("type")
+    look = sc.get("look")
+    # 상황으로 직접 고른 모양 (카테고리와 상관없이): 인과 지도·비유에 "look": "board" | "chalk", 장 표지에 dash·window·board·chalk
+    if t in ("map_causal", "analogy") and look in ("board", "chalk"):
+        register()
+        if look == "board" and t == "map_causal":
+            sc["type"] = "board"
+        sc.setdefault("bg", "cork" if look == "board" else "chalk")
+        sc.setdefault("skin", "corkboard" if look == "board" else "chalkboard")
+        return
+    if t == "chapter" and look in LOOK_BG and not idn:
+        register()
+        bg, skin = LOOK_BG[look]
+        sc.setdefault("bg", bg)
+        sc.setdefault("skin", skin)
+        return
     if not idn:
         return
     register()
     sc["_duo"] = idn.get("duotone")
-    t = sc.get("type")
     fo = spec.get("footage") or {}
     if t == "chapter":
         if not sc.get("look"):
@@ -69,6 +84,8 @@ def prepare(spec: dict, sc: dict) -> None:
             bg, skin = LOOK_BG[look]
             sc.setdefault("bg", bg)
             sc.setdefault("skin", skin)
+        return
+    if look == "plain":   # 이 장면은 카테고리 모양을 쓰지 않음
         return
     if t == "map_causal" and idn.get("structure") == "board":
         sc["type"] = "board"

@@ -1135,6 +1135,16 @@ def sfx_files() -> dict:
 
 def make(project: Project, workers: int = 3) -> Path:
     spec = json.loads((project.dir("script") / "hybrid.json").read_text(encoding="utf-8"))
+    if "brand" not in spec:   # v16: 대본에 brand 가 없으면 프로젝트 채널(edit.yaml channel → channels/<id>/channel.yaml brand)에서
+        try:
+            import yaml as _y
+            ed = _y.safe_load((project.path / "edit.yaml").read_text(encoding="utf-8")) or {}
+            ch = ed.get("channel")
+            cy = config.ROOT / "channels" / str(ch) / "channel.yaml"
+            if ch and cy.exists():
+                spec["brand"] = (_y.safe_load(cy.read_text(encoding="utf-8")) or {}).get("brand")
+        except Exception:  # noqa: BLE001
+            pass
     if spec.get("brand"):   # v15 카테고리 개성: 기본 팩을 따로 정하지 않았으면 카테고리의 기본 팩
         from . import identity
         idn = identity.get(spec)

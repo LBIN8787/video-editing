@@ -149,6 +149,10 @@ def run(path: Path, upto: str = "G8") -> Report:
         R.add("G4", "MUST", "미완성 표시 0개", not unf, unf)
         hype = [w for w in HYPE if w in txt]
         R.add("G4", "SHOULD", "과장 단어 0개", not hype, hype)
+        import re as _re2   # v16 진행 말투: 연결어미로 문장을 끝내지 않기 (README §2-2)
+        _says = [b.get("say", "") for s in spec.get("scenes", []) for b in s.get("beats", [])]
+        awk = [m.group(0) for t in _says for m in _re2.finditer(r"[^.?!]{0,14}(?:였|이었|했|었|았|였었)고요[.!]", t)]
+        R.add("G4", "MUST", "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2)", not awk, awk[:3])
         first = " ".join(b.get("say", "") for s in spec.get("scenes", [])[:3] for b in s.get("beats", []))
         R.add("G4", "SHOULD", "첫 3장면 안에 질문", "?" in first or "까요" in first or "일까" in first, "")
         if brand == "market":
