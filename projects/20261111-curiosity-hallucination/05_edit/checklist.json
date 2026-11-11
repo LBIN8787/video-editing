@@ -1,7 +1,7 @@
 {
  "project": "20261111-curiosity-hallucination",
- "manual_version": "11",
- "checked": "2026-11-11T04:34:30",
+ "manual_version": "13",
+ "checked": "2026-11-11T07:45:15",
  "pass": true,
  "rows": [
   {
@@ -217,6 +217,13 @@
   {
    "gate": "G5",
    "level": "SHOULD",
+   "item": "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6)",
+   "ok": true,
+   "detail": "이번 light:clean-white · 직전 ['dark:dark-doc', 'dark:midnight']"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
    "item": "반복 피로: 같은 채널 직전 편과 화면 구성 겹침 70% 이하 (Jaccard)",
    "ok": true,
    "detail": "32%"
@@ -295,8 +302,8 @@
    "gate": "G5",
    "level": "SHOULD",
    "item": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
-   "ok": true,
-   "detail": "newsprint / 등록부 ['clean-flat', 'dark-doc', 'kinetic-poster', 'newsprint', 'paper-sketch']"
+   "ok": false,
+   "detail": "clean-white / 등록부 ['clean-flat', 'dark-doc', 'kinetic-poster', 'newsprint', 'paper-sketch']"
   },
   {
    "gate": "G5",
@@ -304,83 +311,6 @@
    "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
    "ok": true,
    "detail": "python -m ytflow style-pick <프로젝트>"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "final.mp4",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "레이아웃 점검 비어 있음",
-   "ok": true,
-   "detail": "{}"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
-   "ok": true,
-   "detail": "{'within_0_5s': 0.987, 'p95_abs_offset': 0.1, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.033}"
-  },
-  {
-   "gate": "G6",
-   "level": "SHOULD",
-   "item": "납품 점검(음량 등)",
-   "ok": true,
-   "detail": "completed"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "움직임(v10): 화면 변화 ≥10회/분 · 정지 화면 비율 ≤0.45 (완성본 측정)",
-   "ok": true,
-   "detail": "변화 18.2/분 · 정지 0.15"
-  },
-  {
-   "gate": "G6",
-   "level": "SHOULD",
-   "item": "최종 목소리 ElevenLabs",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "MUST",
-   "item": "제목 후보 3개 + 이유",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "MUST",
-   "item": "썸네일 A/B/C + 점검 ok",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "SHOULD",
-   "item": "제목 앞 22자 안에 질문/핵심",
-   "ok": true,
-   "detail": "AI는 왜 그럴듯한 거짓말을 할까? | "
-  },
-  {
-   "gate": "G8",
-   "level": "MUST",
-   "item": "GitHub Release 업로드",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G8",
-   "level": "MUST",
-   "item": "episodes.md 기록",
-   "ok": true,
-   "detail": "ch-knowledge"
   }
  ]
 }
