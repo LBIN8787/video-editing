@@ -26,6 +26,17 @@ PHOTOS = [("exam", "Richard Huish College Exam Hall", "Richard Huish College Exa
           ("dc", "server room data center", "Microsoft Data Center Middenmeer, the Netherlands - 1.jpg")]
 
 
+# 장 표지 멘트 — v16 말투로 다시 씀 (뜻은 원래 대본과 같음)
+SAY = {
+    1: "무슨 일이 있었는지는 이제 보이시죠. 그럼 정부는 이걸 어떻게 막겠다는 걸까요?",
+    4: "그렇다면 AI는 왜 이렇게 지어낼까요? 힌트는 '시험'에 있습니다.",
+    6: "먼저 숫자부터 보겠습니다.",
+    7: "숫자는 이렇게 정리됩니다. 그럼 왜 엔비디아만 떨어졌을까요?",
+    8: "돈 이야기부터 시작해 보죠.",
+    9: "같은 날, 신뢰를 흔드는 소식도 나왔습니다.",
+}
+
+
 def photos() -> dict:
     fdir = P / "04_assets" / "footage"
     (fdir / "raw").mkdir(parents=True, exist_ok=True)
@@ -89,6 +100,8 @@ def main():
     ch("ai-industry-week", 9, 7, "ai", "photo", "dc")
     for i, s in enumerate(S, 1):
         s["id"] = i
+        if i in SAY:   # v16 진행 말투 (manual README §2-2): 연결어미 끝맺음·같은 틀 반복 없이
+            s["beats"] = [{"say": SAY[i]}]
     spec = {"title": "v15 시험판 — 카테고리 개성·증거판·칠판·듀오톤", "core_message": "카테고리마다 보는 순간 알 수 있는 화면",
             "brand": None, "scenes": S, "footage": fo, "map": SRC["issues-aiglasses"]["map"], "package": {}}
     (P / "02_script" / "hybrid.json").write_text(json.dumps(spec, ensure_ascii=False, indent=1), encoding="utf-8")

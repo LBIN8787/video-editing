@@ -1,10 +1,10 @@
 # 체크리스트 — 20261112-bg-trials
 
-매뉴얼 v15 · 2026-11-11T12:41:24 · **MUST 실패 22개**
+매뉴얼 v16 · 2026-11-11T13:39:51 · **MUST 실패 20개**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
-| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ❌ | [2026-11-11 · 20261112-bg-trials 기각] 진행 말투: 장 표지 '여기까지가 ~였고요.' 같은 끝맺음이 부자연스러워 흐름 |
+| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ✅ |  |
 | G1 | MUST | topic_brief.json 있음 | ❌ | 01_research/topic_brief.json (schemas/topic_brief.schema.json) |
 | G1 | MUST | 브랜드(ai/market/curiosity) | ✅ | issues |
 | G1 | MUST | 욕망·시청자 질문 | ❌ |  |
@@ -26,7 +26,7 @@
 | G4 | MUST | 레퍼런스 채널 이름 0개 | ✅ | [] |
 | G4 | MUST | 미완성 표시 0개 | ✅ | [] |
 | G4 | SHOULD | 과장 단어 0개 | ✅ | [] |
-| G4 | MUST | 진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2) | ❌ | ['까지가 무슨 일이 있었는지였고요.', '여기까지가 숫자였고요.'] |
+| G4 | MUST | 진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2) | ✅ | [] |
 | G4 | SHOULD | 첫 3장면 안에 질문 | ✅ |  |
 | G4 | MUST | issues: 사실 기준 시각(as_of) | ❌ |  |
 | G4 | MUST | issues: 서로 다른 입장 2개 이상(각 출처) | ❌ | 0 |
@@ -58,7 +58,7 @@
 | G5 | MUST | 강조는 아껴서: 1분에 1번 이하 (이 영상 2번까지) | ✅ | 0번 [] |
 | G5 | MUST | 한 장면에 강조 1개까지 (위아래로 같은 내용 반복 금지) | ✅ | 넘친 장면 [] |
 | G5 | MUST | 핵심 단어 띄우기(words)는 단어 1~3개만 | ✅ | [] |
-| G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ✅ | dark-doc / 등록부 ['clean-flat', 'dark-doc', 'kinetic-poster', 'newsprint', 'paper- |
+| G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ✅ | dark-doc / 등록부 ['clean-flat', 'corkboard', 'dark-doc', 'kinetic-poster', 'newspr |
 | G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ⚠️ | python -m ytflow style-pick <프로젝트> |
 | G6 | MUST | final.mp4 | ✅ |  |
 | G6 | MUST | 레이아웃 점검 비어 있음 | ✅ | {} |
