@@ -1,6 +1,6 @@
 # 체크리스트 — 20261111-issues-aiglasses
 
-매뉴얼 v11 · 2026-11-11T00:42:33 · **통과**
+매뉴얼 v11 · 2026-11-11T02:22:33 · **MUST 실패 2개**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
@@ -36,6 +36,7 @@
 | G4 | SHOULD | issues: 사람의 목소리 장면 1개 이상 (quote·이름 자막) | ✅ | 2 |
 | G4 | SHOULD | issues: 말하듯 쓴 대본 — 묻는 문장 3개+, 보도문 말투 10% 이하 (08 §0-1) | ✅ | 물음 6 · 보도문 0/32 |
 | G1 | SHOULD | issues: 이름 붙은 시리즈(series) | ✅ | 이슈의 구조 |
+| G5 | SHOULD | issues: 양쪽 입장 장면 길이 차 30% 이내 | ✅ | [14.3, 13.5] |
 | G4 | MUST | 오프닝: 본론 전에 MC 오프닝(intro: 인사·오늘 이야기·순서 예고·시작 멘트, 3박자 이상) | ✅ |  |
 | G5 | MUST | 배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2) | ✅ | ['film', 'grid', 'photo', 'spot', 'tint'] |
 | G5 | SHOULD | 배경: 같은 바탕 3장면 연속 없음 (film 제외) | ✅ | [] |
@@ -45,14 +46,27 @@
 | G5 | SHOULD | 반복 피로: 같은 시각 효과 3장면 연속 없음 · 효과 3종 이상(롱폼) | ✅ | ['fx:dust', 'fx:photofill', 'fx:scan', 'fx:tilt'] 연속 [] |
 | G5 | SHOULD | 반복 피로: 같은 채널 직전 편과 화면 구성 겹침 70% 이하 (Jaccard) | ✅ | 43% |
 | G5 | MUST | 같은 type 3연속 없음 | ✅ | [] |
+| G5 | SHOULD | 자료 화면 공백 ≤45초 | ⚠️ | 최장 224초 |
+| G5 | SHOULD | 장 표지 간격 ≤200초 | ✅ | 최장 63초 |
 | G5 | MUST | 스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격) | ✅ | 9종 ['?isotype', '?recap', 'archive-doc', 'data-report', 'hybrid-causal', 'kineti |
-| G5 | MUST | 한 스타일이 40% 넘지 않음 | ✅ | paper-column 0.3 |
+| G5 | MUST | 한 스타일이 40% 넘지 않음 | ✅ | paper-column 0.36 |
 | G5 | MUST | 한 장면 안에서 겹친 장면(layers) 3개 이상 | ✅ | 3 |
 | G5 | MUST | 같은 스타일 3장면 연속 없음 | ✅ | 최장 2 |
-| G5 | MUST | 강조는 아껴서: 1분에 1번 이하 (이 영상 3번까지) | ✅ | 1번 [(17, 'kinetic')] |
+| G5 | MUST | 강조는 아껴서: 1분에 1번 이하 (이 영상 4번까지) | ✅ | 1번 [(17, 'kinetic')] |
 | G5 | MUST | 한 장면에 강조 1개까지 (위아래로 같은 내용 반복 금지) | ✅ | 넘친 장면 [] |
 | G5 | MUST | 핵심 단어 띄우기(words)는 단어 1~3개만 | ✅ | [] |
 | G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ✅ | dark-doc / 등록부 ['clean-flat', 'dark-doc', 'kinetic-poster', 'newsprint', 'paper- |
 | G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ✅ | python -m ytflow style-pick <프로젝트> |
+| G6 | MUST | final.mp4 | ✅ |  |
+| G6 | MUST | 레이아웃 점검 비어 있음 | ✅ | {} |
+| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 1.0, 'p95_abs_offset': 0.07, 'median_abs_offset': 0.05, 'video_m |
+| G6 | SHOULD | 납품 점검(음량 등) | ✅ | completed |
+| G6 | MUST | 움직임(v10): 화면 변화 ≥10회/분 · 정지 화면 비율 ≤0.45 (완성본 측정) | ✅ | 변화 10.4/분 · 정지 0.25 |
+| G6 | SHOULD | 최종 목소리 ElevenLabs | ✅ |  |
+| G7 | MUST | 제목 후보 3개 + 이유 | ✅ |  |
+| G7 | MUST | 썸네일 A/B/C + 점검 ok | ✅ |  |
+| G7 | SHOULD | 제목 앞 22자 안에 질문/핵심 | ⚠️ | AI 안경 컨닝, 수능에서 정말 막을 수 |
+| G8 | MUST | GitHub Release 업로드 | ❌ |  |
+| G8 | MUST | episodes.md 기록 | ❌ | ch-issues |
 
 사람 눈 검사(EYE)는 manual/06-checklist.md 끝의 5가지를 확인하세요.

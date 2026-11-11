@@ -1,8 +1,8 @@
 {
  "project": "20261111-issues-aiglasses",
  "manual_version": "11",
- "checked": "2026-11-11T00:42:33",
- "pass": true,
+ "checked": "2026-11-11T02:22:33",
+ "pass": false,
  "rows": [
   {
    "gate": "G0",
@@ -229,6 +229,13 @@
    "detail": "이슈의 구조"
   },
   {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "issues: 양쪽 입장 장면 길이 차 30% 이내",
+   "ok": true,
+   "detail": "[14.3, 13.5]"
+  },
+  {
    "gate": "G4",
    "level": "MUST",
    "item": "오프닝: 본론 전에 MC 오프닝(intro: 인사·오늘 이야기·순서 예고·시작 멘트, 3박자 이상)",
@@ -293,6 +300,20 @@
   },
   {
    "gate": "G5",
+   "level": "SHOULD",
+   "item": "자료 화면 공백 ≤45초",
+   "ok": false,
+   "detail": "최장 224초"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "장 표지 간격 ≤200초",
+   "ok": true,
+   "detail": "최장 63초"
+  },
+  {
+   "gate": "G5",
    "level": "MUST",
    "item": "스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격)",
    "ok": true,
@@ -303,7 +324,7 @@
    "level": "MUST",
    "item": "한 스타일이 40% 넘지 않음",
    "ok": true,
-   "detail": "paper-column 0.3"
+   "detail": "paper-column 0.36"
   },
   {
    "gate": "G5",
@@ -322,7 +343,7 @@
   {
    "gate": "G5",
    "level": "MUST",
-   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 3번까지)",
+   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 4번까지)",
    "ok": true,
    "detail": "1번 [(17, 'kinetic')]"
   },
@@ -353,6 +374,83 @@
    "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
    "ok": true,
    "detail": "python -m ytflow style-pick <프로젝트>"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "final.mp4",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "레이아웃 점검 비어 있음",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
+   "ok": true,
+   "detail": "{'within_0_5s': 1.0, 'p95_abs_offset': 0.07, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.067}"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "납품 점검(음량 등)",
+   "ok": true,
+   "detail": "completed"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "움직임(v10): 화면 변화 ≥10회/분 · 정지 화면 비율 ≤0.45 (완성본 측정)",
+   "ok": true,
+   "detail": "변화 10.4/분 · 정지 0.25"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "최종 목소리 ElevenLabs",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "제목 후보 3개 + 이유",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "썸네일 A/B/C + 점검 ok",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "SHOULD",
+   "item": "제목 앞 22자 안에 질문/핵심",
+   "ok": false,
+   "detail": "AI 안경 컨닝, 수능에서 정말 막을 수"
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "GitHub Release 업로드",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "episodes.md 기록",
+   "ok": false,
+   "detail": "ch-issues"
   }
  ]
 }
