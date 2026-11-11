@@ -1,6 +1,6 @@
 # 체크리스트 — 20261111-issues-aiglasses
 
-매뉴얼 v11 · 2026-11-11T02:22:33 · **MUST 실패 2개**
+매뉴얼 v11 · 2026-11-11T03:59:24 · **통과**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
@@ -66,7 +66,7 @@
 | G7 | MUST | 제목 후보 3개 + 이유 | ✅ |  |
 | G7 | MUST | 썸네일 A/B/C + 점검 ok | ✅ |  |
 | G7 | SHOULD | 제목 앞 22자 안에 질문/핵심 | ⚠️ | AI 안경 컨닝, 수능에서 정말 막을 수 |
-| G8 | MUST | GitHub Release 업로드 | ❌ |  |
-| G8 | MUST | episodes.md 기록 | ❌ | ch-issues |
+| G8 | MUST | GitHub Release 업로드 | ✅ |  |
+| G8 | MUST | episodes.md 기록 | ✅ | ch-issues |
 
 사람 눈 검사(EYE)는 manual/06-checklist.md 끝의 5가지를 확인하세요.
