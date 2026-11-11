@@ -1,7 +1,7 @@
 {
  "project": "20261111-ai-industry-week",
  "manual_version": "11",
- "checked": "2026-11-11T00:53:03",
+ "checked": "2026-11-11T04:27:18",
  "pass": true,
  "rows": [
   {
@@ -230,6 +230,20 @@
   },
   {
    "gate": "G5",
+   "level": "SHOULD",
+   "item": "자료 화면 공백 ≤45초",
+   "ok": false,
+   "detail": "최장 73초"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "장 표지 간격 ≤200초",
+   "ok": true,
+   "detail": "최장 62초"
+  },
+  {
+   "gate": "G5",
    "level": "MUST",
    "item": "스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격)",
    "ok": true,
@@ -259,7 +273,7 @@
   {
    "gate": "G5",
    "level": "MUST",
-   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 2번까지)",
+   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 3번까지)",
    "ok": true,
    "detail": "1번 [(14, 'kinetic')]"
   },

@@ -58,9 +58,9 @@ s(dict(type="bars",chapter=1,label="Wikipedia 'Initial public offering' · Anthr
   beats=[{"say":"얼마나 큰지 비교해 보죠. 2019년 석유 회사 사우디 아람코가 294억 달러를 모아 당시 역대 최대였습니다."},
          {"say":"앤트로픽은 최대 약 644억 달러, 아람코의 두 배가 넘습니다. 올해 상장한 SpaceX 다음, 역대 두 번째 규모가 될 수 있습니다."}]))
 s(dict(type="analogy",chapter=1,label="자체 정리",title="AI 회사는 왜 큰돈이 필요할까",
-  left={"icon":"microchip","label":"AI 칩","sub":"한 장에 수천만 원"},right={"icon":"zap","label":"전기·데이터센터","sub":"도시 하나만큼의 전력"},
+  left={"icon":"microchip","label":"AI 칩","sub":"아주 비싼 부품이 아주 많이"},right={"icon":"zap","label":"전기·데이터센터","sub":"엄청난 양의 전력"},
   result={"icon":"landmark","label":"그래서 주식시장에서 돈을 모은다"},
-  layers=[{"kind":"photo","src":"pleiades","beat":0,"side":"left","w":420,"top":600,"caption":"슈퍼컴퓨터 · NASA 에임스 (2008)"}],
+  layers=[{"kind":"photo","src":"pleiades","beat":0,"side":"right","w":330,"top":690,"caption":"슈퍼컴퓨터 · NASA (2008)"}],
   beats=[{"say":"왜 이렇게 큰돈일까요? AI 는 수많은 칩과 그 칩을 돌릴 전기, 데이터센터가 있어야 만들어지기 때문입니다."},
          {"say":"동네 맛집이 체인점을 내려고 손님들에게 가게 지분을 파는 것처럼, AI 회사도 주식시장에서 돈을 모으는 거죠.","show_result":True}]))
 s(dict(type="recap",chapter=1,title="여기까지 정리",items=["AI 회사가 역대 손꼽히는 큰돈을 주식시장에서 모으고 있다"],new_from=0,
