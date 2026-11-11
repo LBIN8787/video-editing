@@ -50,19 +50,19 @@
 - 롱폼은 **3종 이상**(MUST), 같은 바탕 3장면 연속 금지(SHOULD, film 제외). `check` G5.
 - 새 바탕을 더하려면 `backdrop.py` 의 `KINDS`·`BY_TYPE` 와 이 표를 함께 고칩니다.
 
-## 0-6. 바탕색을 돌려 쓴다 — 미색 종이만 쓰지 않기 (v13, 2026-11-11 사용자 판정)
-> "배경색을 매번 같은 종이색으로 쓰지 않아도 된다."
-그래픽 팩 이름이 달라도 paper-sketch·clean-flat·newsprint·kinetic-poster 는 모두 **미색**입니다. 바탕색이 다른 팩을 돌려 씁니다.
-| 바탕 계열 | 팩 | 어울리는 곳 |
-|---|---|---|
-| 흰색 | `clean-white` | 설명·기술, 깔끔한 정보 |
-| 회청색 | `slate` | 경제·데이터 |
-| 남색 | `midnight` · `blueprint`(모눈) | AI·기술 최전선, 구조 설명 |
-| 먹색 | `dark-doc` | 시사·위기·다큐 |
-| 초록 | `forest` | 역사·이야기 |
-| 미색 | `paper-sketch` · `clean-flat` · `newsprint` · `kinetic-poster` | 손그림·옛 신문 느낌이 꼭 필요할 때만 |
-- 같은 바탕 계열을 **직전 두 편과 연속으로 쓰지 않습니다** (`check` G5 SHOULD).
-- 한 영상 안에서도 장(章)마다 색 기운(§0-2 tint)과 사진 바탕으로 변화를 줍니다.
+## 0-6. 바탕은 상황이 고른다 — 스타일의 일부 (v14, 2026-11-11 사용자 판정)
+> "배경은 특정 배경으로 고정이 아니라 그 상황에 어울리게. 스타일에 포함되는 내용이다."
+바탕(그래픽 팩의 색)은 영상 하나에 고정하지 않고, **장면이 하는 일**에 맞춰 바뀝니다 (코드 `edit10.SITUATION`, 기본으로 켜짐 — 끄려면 대본에 `"bg_mode": "fixed"`).
+| 장면이 하는 일 | type | 밝은 영상일 때 | 어두운 영상일 때 |
+|---|---|---|---|
+| **얼굴** (그 영상의 정체성) | 오프닝·장 표지·자료 화면·키네틱·끝 | 영상 기본 팩 (`edit.yaml` skin) | 영상 기본 팩 |
+| **숫자** | bars·chart·versus·bignum·isotype | 회청 `slate` → 흰 `clean-white` | 남색 `midnight` → 모눈 `blueprint` |
+| **사람의 말** | quote | 흰 `clean-white` → 회청 `slate` | 먹색 `dark-doc` → 초록 `forest` |
+| **구조·정리** | map_causal·analogy·checklist·recap·timeline | 종이 `paper-sketch` → 흰 `clean-white` | 초록 `forest` → 남색 `midnight` |
+- 각 줄의 첫 팩이 영상 기본 팩과 같으면 다음 팩을 씁니다. 밝기 계열(밝음/어두움)은 영상 기본 팩에 맞춰 화면이 튀지 않게 합니다.
+- 한 장면만 직접 정하려면 장면에 `"skin": "<팩>"`.
+- 그래픽 팩 목록: 흰 `clean-white` · 회청 `slate` · 남색 `midnight` · 모눈 `blueprint` · 먹색 `dark-doc` · 초록 `forest` · 미색 `paper-sketch`·`clean-flat`·`newsprint`·`kinetic-poster`.
+- 영상 기본 팩도 편마다 돌려 씁니다 — 직전 두 편과 같은 바탕 계열 연속 금지 (`check` G5 SHOULD).
 
 ## 0-5. 차분하게 — 움직임과 소리는 '덜'이 기본 (v12, 2026-11-11 사용자 판정)
 > "화면을 너무 정신없이 움직이고, 배경음도 꼭 안 넣어도 되는데 안 어울리는 걸 억지로 넣는 것 같다."

@@ -893,8 +893,12 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     (a / "fonts").mkdir(parents=True, exist_ok=True)
     shutil.copy(hyper.GSAP, a / "gsap.min.js")
     _env_skin = os.environ.get("YTFLOW_SKIN")
-    if sc.get("skin"):   # 장면별 그래픽 팩 (스타일 조합: 한 영상 안에서 구간마다 다른 팩)
-        os.environ["YTFLOW_SKIN"] = sc["skin"]
+    scene_skin = sc.get("skin")
+    if not scene_skin and spec.get("bg_mode", "situation") == "situation" and spec.get("edit_v10", True):
+        from . import edit10, skin as _skin_m   # 상황별 바탕 (manual 05 §0-6): 장면이 하는 일에 맞는 팩
+        scene_skin = edit10.situation_skin(sc, _skin_m.current())
+    if scene_skin:   # 장면별 그래픽 팩 (스타일 조합: 한 영상 안에서 구간마다 다른 팩)
+        os.environ["YTFLOW_SKIN"] = scene_skin
     try:
         D = HDoc(sc["id"] * 7 + 3)
     finally:
