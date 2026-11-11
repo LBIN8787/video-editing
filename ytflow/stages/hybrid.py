@@ -216,11 +216,11 @@ def s_chart(D: HDoc, sc: dict, bt: list, dur: float):
         v = lo + (hi - lo) * k / 4
         yy = Y(v)
         D.svg.append(f'<line x1="{x0}" y1="{yy:.0f}" x2="{x1}" y2="{yy:.0f}" stroke="#c9c0ae" stroke-width="1.5" stroke-dasharray="6 8"/>')
-        D.items.append(f'<div style="position:absolute;left:{x1 + 20}px;top:{yy - 16:.0f}px;font-family:sans;font-size:24px;color:#6b6f78">{v:,.0f}</div>')
+        D.items.append(f'<div style="position:absolute;left:{x1 + 20}px;top:{yy - 16:.0f}px;font-family:sans;font-size:24px;color:#4E525C">{v:,.0f}</div>')
     pts = [(X(i), Y(r["close"])) for i, r in enumerate(rows)]
     D.stroke(pts, D.ink, 4, at=0.3, dur=1.4)
     for lab, idx in ((rows[0]["date"][2:].replace("-", "."), 0), (rows[-1]["date"][2:].replace("-", "."), len(rows) - 1)):
-        D.items.append(f'<div style="position:absolute;left:{X(idx) - 60:.0f}px;top:{y1 + 18}px;font-family:sans;font-size:24px;color:#6b6f78">{lab}</div>')
+        D.items.append(f'<div style="position:absolute;left:{X(idx) - 60:.0f}px;top:{y1 + 18}px;font-family:sans;font-size:24px;color:#4E525C">{lab}</div>')
     # 마지막 이틀 강조 + 카메라 확대
     b0 = sc["beats"][0]
     n = b0.get("focus_last", 3)
@@ -276,11 +276,29 @@ def s_chapter(D: HDoc, sc: dict, bt: list, dur: float):
     D.rough("line", [W / 2 - w / 2, 710, W / 2 + w / 2, 714], D.red, 4.5, at=1.3, dur=0.45)
 
 
+def accent_text(D) -> str:
+    """강조색을 '글자'로 쓸 때: 밝은 팩이면 바탕과 대비 4.5:1 이 될 때까지 어둡게 (어두운 팩은 그대로)."""
+    def rgb(c):
+        c = c.lstrip("#"); return [int(c[i:i + 2], 16) for i in (0, 2, 4)]
+    def lum(c):
+        v = [x / 255 for x in c]; v = [x / 12.92 if x <= 0.03928 else ((x + 0.055) / 1.055) ** 2.4 for x in v]
+        return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]
+    base = rgb(D.skin.get("palette", {}).get("base", "#F3EFE6")); acc = rgb(D.red)
+    lb = lum(base)
+    if lb < 0.4:
+        return D.red
+    for _ in range(20):
+        if (lb + 0.05) / (lum(acc) + 0.05) >= 4.5:
+            break
+        acc = [int(x * 0.88) for x in acc]
+    return "#" + "".join(f"{x:02X}" for x in acc)
+
+
 def _node_box(D: HDoc, key: str, nd: dict, state: str, at: float, instant: bool):
     """인과 지도 칸: state = dim | on | active"""
     x, y = nd["x"], nd["y"]
     bw, bh = BW, BH
-    col = D.red if state == "active" else (D.ink if state == "on" else "#a8a29a")
+    col = accent_text(D) if state == "active" else (D.ink if state == "on" else "#a8a29a")
     fill = "rgba(196,69,47,0.22)" if state == "active" else None
     d = 0.01 if instant else 0.45
     from . import graphics

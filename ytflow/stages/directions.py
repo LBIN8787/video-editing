@@ -610,6 +610,7 @@ def s_intro(D, sc, bt, dur):
         f = fit(FT("title"), ln, 84, W - 420)
         _typewriter(D, 150, 290 + k * 112, ln, f.size, D.ink, tb + k * 0.6, font=_fam("title"), anchor="l")
     items = sc.get("agenda") or sc.get("_chapters", [])
+    acc_t = hybrid.accent_text(D)   # 밝은 팩에서도 번호가 읽히게
     ab = sc.get("agenda_beat", 2)
     t0 = bt[min(ab, len(bt) - 1)][0] + 0.3
     span = max(1.2, bt[min(ab, len(bt) - 1)][1] - 0.8)
@@ -619,7 +620,7 @@ def s_intro(D, sc, bt, dur):
         j = D._id()
         D.items.append(f'<div id="{j}" style="position:absolute;left:160px;top:{y0 + k * gap:.0f}px;display:flex;align-items:center;gap:22px;'
                        f'font-family:sans-x;font-size:38px;color:{D.ink};opacity:0">'
-                       f'<span style="width:52px;height:52px;border-radius:50%;border:3px solid {acc};color:{acc};display:flex;align-items:center;'
+                       f'<span style="width:52px;height:52px;border-radius:50%;border:3px solid {acc_t};color:{acc_t};display:flex;align-items:center;'
                        f'justify-content:center;font-size:28px;font-weight:700">{k + 1}</span>{_e(it)}</div>')
         D.js.append(f'tl.fromTo("#{j}",{{opacity:0,x:-24}},{{opacity:1,x:0,duration:0.35}},{t0 + k * span / max(1, len(items)):.2f});')
 

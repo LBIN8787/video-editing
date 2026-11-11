@@ -1,0 +1,99 @@
+from common import *
+brief={"brand":"curiosity","line":"ch-knowledge","series":"몰랐던 이유",
+ "desire":"매일 쓰는 AI가 왜 가끔 아주 그럴듯하게 틀리는지, 그 이유가 궁금하다 (AI의 미래가 어떻게 될지도)",
+ "trigger":"AI 를 쓰는 사람이 늘면서 'AI 가 지어낸 답'으로 곤란해진 사례가 계속 나옴 — 2025년 9월 OpenAI 연구진 논문이 이유를 '시험 채점 방식'으로 설명",
+ "why_now":"AI 안경·AI 검색처럼 AI 답을 그대로 믿는 상황이 늘어남 — 왜 틀리는지 알면 덜 속는다",
+ "viewer_question":"AI는 왜 그럴듯한 거짓말을 할까?","question_type":"행동의 이유","mood":["차분","미래"],
+ "topic":"AI 환각: 모를 때도 '찍는' 이유 — 다음 단어 맞히기 학습 + '모르겠다'에 0점을 주는 채점 방식 (Kalai 외 2025) · 2023년 가짜 판례 사건 · 1958년 퍼셉트론 과장",
+ "our_angle":"'AI가 거짓말을 한다'는 통념을 '찍는 법을 배운 모범생'으로 바꿔 보기 — 시험 채점 비유 하나로 원리와 미래(채점을 바꾸면 '모르겠다'를 배운다)를 함께",
+ "driver":{"type":"각도","why":"AI·빅테크 소재만으로는 약함(docs/18 0.83) → 일상 질문 + 반전 각도","angle":"반대 결과 (거짓말이 아니라 '찍기')"},
+ "score":{"desire":3,"clarity":3,"timeliness":2,"demand":2,"visuals":2,"angle":3},
+ "demand_evidence":[{"kind":"search","detail":"'AI 환각' 'AI 거짓말' 검색·영상 다수 (교양·IT 채널 질문형 제목)","url":"https://news.google.com/search?q=AI%20%ED%99%98%EA%B0%81"}],
+ "visual_sources":["NASA IBM 704 사진(1957)·슈퍼컴퓨터 플레이아데스(2008)·뉴욕 야경 (퍼블릭 도메인)","직접 그린 도식"],
+ "candidates":[{"topic":"AI는 왜 그럴듯한 거짓말을 할까?","total":15,"why_not":"선택"},{"topic":"AI는 왜 전기를 그렇게 많이 먹을까?","total":13,"why_not":"숫자 출처 정리 더 필요"},{"topic":"1958년에 '말하는 기계'를 약속한 사람","total":12,"why_not":"이번 영상의 과거 사례로 넣음"}]}
+fact="""# 팩트시트 — AI 는 왜 그럴듯한 거짓말을 할까 (2026-11-11 확인)
+
+| # | 사실 | 상태 | 출처 |
+|---|---|---|---|
+| F1 | 논문 'Why Language Models Hallucinate' (Kalai·Nachum·Vempala·Zhang, 2025-09-04 제출): 어려운 시험 문제 앞 학생처럼, 모르면 '찍는다' — 학습·평가가 '모르겠다'보다 찍기에 점수를 주기 때문 | ✅ | arXiv https://arxiv.org/abs/2509.04664 |
+| F2 | 같은 논문: 환각은 신비한 현상이 아니라 '참·거짓을 구별 못 하는 분류 오류'에서 시작, 해결책은 대부분의 평가 채점 방식을 바꾸는 것 | ✅ | 같은 초록 |
+| F3 | Mata v. Avianca: 2022년 2월 기내 서빙 카트에 무릎을 다쳤다며 항공사 상대 소송 → 변호사들이 ChatGPT 가 만든 가짜 판례를 서류에 인용 → 2023-06-22 뉴욕 남부 연방지법(P. 케빈 카스텔 판사) 5,000달러 제재 | ✅ | Wikipedia (CNBC·AP 인용) https://en.wikipedia.org/wiki/Mata_v._Avianca,_Inc. · CNBC 2023-05-30 https://www.cnbc.com/2023/05/30/chatgpt-cited-bogus-cases-for-a-new-york-federal-court-filing.html |
+| F4 | 1957년 프랭크 로젠블랫이 퍼셉트론을 IBM 704 에서 처음 모의 실행 | ✅ | Wikipedia 'Perceptron' (Rosenblatt 1957 보고서 인용) https://en.wikipedia.org/wiki/Perceptron |
+| F5 | 1958년 미 해군 기자회견 뒤 뉴욕타임스: "걷고, 말하고, 보고, 쓰고, 스스로를 복제하고, 자신의 존재를 의식할 것으로 기대되는 전자 컴퓨터의 배아" | ✅ | 같은 문서 (Olazaran 인용) |
+| F6 | 화면 속 IBM 704 사진은 1957년 NASA 랭글리 연구소의 같은 기종 (로젠블랫이 쓴 그 기계는 아님) | ✅ | NASA https://images.nasa.gov/details/LRC-1957-B701_P-05391 |
+
+## 쓰지 않는 것
+- 가짜 판례의 정확한 개수(보도마다 다름)
+- '환각률 ○%' 같은 모델별 숫자 (측정 방식마다 크게 다름)
+"""
+spec={"title":"AI는 왜 그럴듯한 거짓말을 할까?","bgm":"rest-now",
+ "core_message":"AI는 거짓말을 하려는 게 아니라, '모르겠다'에 0점을 주는 시험에서 찍는 법을 배웠다 — 채점을 바꾸면 '모르겠다'를 배울 수 있다.",
+ "question":"AI는 왜 그럴듯한 거짓말을 할까?",
+ "logic":["AI는 다음 단어를 맞히도록 배운 아주 큰 자동완성","드물게 나오는 사실은 참과 거짓을 구별하기 어렵다","시험(평가)은 '모르겠다'에 0점, 찍어서 맞으면 점수 → 찍는 쪽이 이득","그래서 모를 때도 자신 있게 지어낸다 → 채점을 바꾸면 줄일 수 있다"],
+ "compare_to":[{"value":"벌금 5,000달러","to":"가짜 판례를 낸 변호사들 (2023)"},{"value":"1958년의 기대","to":"걷고 말하고 스스로를 의식하는 기계"}],
+ "analogies":[{"a":"AI 언어 모델","b":"휴대폰 자판의 다음 단어 추천을 아주 크게 키운 것"},{"a":"AI의 환각","b":"모르는 문제를 찍는 수험생"}],
+ "past_cases":[{"case":"1958년 퍼셉트론 — '말하고 스스로를 의식할 기계'라는 보도","lesson":"AI는 늘 실제보다 더 아는 것처럼 보였다"}],
+ "glossary":[{"term":"환각(할루시네이션)","plain":"AI 가 사실이 아닌 내용을 사실처럼 만들어 내는 것"},{"term":"언어 모델","plain":"글의 다음 단어를 맞히도록 배운 AI"},{"term":"평가(벤치마크)","plain":"AI 실력을 재는 시험 문제 모음"}],
+ "scenes":[]}
+S=spec["scenes"]; s=S.append
+s(dict(type="intro",chapter=0,series="몰랐던 이유",as_of="AI 편",bg_src="ibm",title_lines=["AI는 왜","그럴듯한 거짓말을 할까?"],agenda_beat=2,
+  layers=[{"kind":"photo","src":"ibm","beat":1,"side":"right","w":600,"top":250,"caption":"IBM 704 · NASA 랭글리 (1957)"}],
+  beats=B("안녕하세요. 누구나 아는 것의 아무도 몰랐던 이유, 몰랐던 이유입니다.",
+          "오늘은 AI 이야기입니다. AI 를 써 보면 가끔 정말 그럴듯하게 틀리잖아요. 없는 책 제목, 없는 판례까지요.",
+          "이런 순서로 가 보겠습니다. 실제로 무슨 일이 있었는지, AI는 왜 지어내는지, 그리고 앞으로는 달라질지요.",
+          "다 보고 나시면, AI 답을 어떻게 믿어야 할지 감이 오실 거예요. 시작하겠습니다.")))
+s(dict(type="kb",chapter=0,clip={"src":"nyc","start":0},move="in",stamp="미국 뉴욕 · 2023년",label="자료 사진 · NASA STS-59 (1994, 퍼블릭 도메인)",
+  layers=[{"kind":"locator","at":[-74.0,40.71],"label":"뉴욕 연방법원","beat":0,"side":"right","top":120,"scale":2.2}],
+  beats=B("2023년 미국 뉴욕의 한 법정. 변호사들이 낸 서류에 판례가 여러 개 적혀 있었습니다.","그런데 상대편도, 판사도 그 판례를 찾을 수 없었습니다. 처음부터 없는 판례였거든요.")))
+s(dict(type="card_type",chapter=0,lines=["AI는 왜","그럴듯하게 지어낼까?"],beats=B("그 판례를 만든 건 AI 였습니다. AI는 왜 이렇게 그럴듯하게 지어낼까요? 오늘의 질문입니다.")))
+s(dict(type="chapter",chapter=1,num="1",title="그날 법정에서",icon="gavel",beats=B("첫 번째, 그날 법정에서는 무슨 일이 있었을까요?")))
+s(dict(type="timeline",chapter=1,label="Wikipedia 'Mata v. Avianca' (CNBC·AP 보도 인용)",title="가짜 판례 사건",years=["2022.2","2023.3","2023.5","2023.6"],
+  events=[{"at":"2022.2","label":"항공사 상대 소송","sub":"기내 카트에 무릎 부상"},{"at":"2023.3","label":"ChatGPT 로 서류 작성","sub":"판례 인용"},
+          {"at":"2023.5","label":"'판례를 찾을 수 없다'","sub":"상대편·법원"},{"at":"2023.6","label":"변호사 제재","sub":"6월 22일"}],
+  beats=[{"say":"시작은 평범한 소송이었습니다. 비행기 안에서 서빙 카트에 무릎을 다쳤다는 거였죠.","upto":1},
+         {"say":"변호사들은 ChatGPT 로 서류를 썼고, 그 안에 그럴듯한 판례들이 들어갔습니다.","upto":2},
+         {"say":"하지만 아무도 그 판례를 찾지 못했고, 결국 2023년 6월 법원이 변호사들을 제재했습니다.","upto":4}]))
+s(dict(type="bignum",chapter=1,label="Wikipedia 'Mata v. Avianca' · 뉴욕 남부 연방지법",value="$5,000",small="가짜 판례를 낸 변호사들에게 내린 벌금",fx=["photofill"],fill_src="nyc",
+  beats=B("벌금은 5,000달러. 돈보다 더 큰 건, AI 답을 확인 없이 믿으면 어떻게 되는지를 보여 준 사건이라는 점입니다.")))
+s(dict(type="recap",chapter=1,title="여기까지 정리",items=["AI는 없는 판례도 진짜처럼 만들어 냈다"],new_from=0,
+  layers=[{"kind":"photo","src":"nyc","beat":0,"side":"right","w":460,"top":560,"caption":"뉴욕 · NASA STS-59 (1994)"}],
+  beats=B("정리하면, AI는 없는 것도 진짜처럼 만들어 냈습니다. 그럼 왜 그럴까요?")))
+s(dict(type="chapter",chapter=2,num="2",title="AI는 왜 지어낼까",icon="brain",beats=B("두 번째, AI는 왜 지어낼까요? 힌트는 '시험'에 있습니다.")))
+s(dict(type="analogy",chapter=2,label="자체 정리",title="AI는 아주 큰 자동완성",
+  left={"icon":"smartphone","label":"휴대폰 자판","sub":"다음 단어 추천"},right={"icon":"bot","label":"AI 언어 모델","sub":"다음 단어 맞히기를 엄청나게 많이"},
+  result={"icon":"message-circle","label":"자연스러운 문장 ≠ 사실인 문장"},
+  layers=[{"kind":"photo","src":"pleiades","beat":0,"side":"left","w":420,"top":600,"caption":"슈퍼컴퓨터 · NASA 에임스 (2008)"}],
+  beats=[{"say":"AI 언어 모델은 휴대폰 자판의 다음 단어 추천을 아주 크게 키운 것과 비슷합니다. 다음에 올 말을 맞히도록 배웠죠."},
+         {"say":"그래서 문장은 아주 자연스럽습니다. 하지만 자연스러운 문장이 곧 사실인 문장은 아니죠.","show_result":True}]))
+s(dict(type="versus",chapter=2,label="Kalai 외 'Why Language Models Hallucinate' (2025) 비유 정리",left={"value":"0점","label":"'모르겠어요'라고 답하면","icon":"circle-alert"},
+  right={"value":"1점","label":"찍었는데 맞으면","icon":"target"},bg="photo",bg_src="pleiades",
+  beats=[{"say":"그런데 여기서 반전이 있습니다. AI 실력을 재는 시험 대부분이, '모르겠어요'라고 하면 0점을 줍니다."},
+         {"say":"찍어서 맞으면 1점이고요. 그렇다면 어떻게 해야 점수가 오를까요?","question":"그럼 무조건 찍는 게 이득?"}]))
+s(dict(type="quote",chapter=2,label="arXiv 2509.04664 초록 (2025.9)",who="OpenAI 연구진 외 논문",role="Why Language Models Hallucinate",
+  quote="언어 모델은 좋은 수험생이 되도록 다듬어졌고, 모를 때 찍으면 시험 점수가 오른다.",keyword="찍으면",note="논문의 답",fx=["dust"],
+  beats=[{"say":"2025년 9월 OpenAI 연구진이 쓴 논문의 답이 바로 이겁니다. AI는 좋은 수험생이 되도록 다듬어졌다는 거죠."},
+         {"say":"모를 때 찍으면 점수가 오르니, 모를 때도 자신 있게 답하는 쪽으로 배운다는 겁니다.","mark":True}]))
+s(dict(type="map_causal",chapter=2,label="이 영상 팩트시트 F1~F2 정리",fx=["tilt"],
+  beats=[{"say":"한 장으로 보면 이렇습니다. 다음 단어를 맞히도록 배우고, 드문 사실은 참과 거짓을 구별하기 어렵습니다.","reveal":["learn","rare"],"draw":[["learn","rare"]],"active":"rare"},
+         {"say":"여기에 '찍으면 이득'인 채점이 더해지면, 모를 때도 자신 있게 지어내는 AI가 됩니다.","reveal":["score","guess","halluc"],"draw":[["rare","guess"],["score","guess"],["guess","halluc"]],"active":"halluc"}]))
+s(dict(type="chapter",chapter=3,num="3",title="AI는 '모르겠다'를 배울까",icon="lightbulb",beats=B("마지막 세 번째, 그럼 앞으로 AI는 '모르겠다'고 말하게 될까요?")))
+s(dict(type="kb",chapter=3,clip={"src":"ibm","start":0},move="out",stamp="1957년 · IBM 704 (같은 기종)",label="자료 사진 · NASA 랭글리 (1957, 퍼블릭 도메인)",
+  beats=B("사실 AI는 처음부터 실제보다 더 아는 것처럼 보였습니다. 1957년, 이 IBM 704 같은 기종에서 '퍼셉트론'이라는 초기 인공 신경망이 처음 돌아갔는데요.",
+          "1958년 뉴욕타임스는 이 기계가 언젠가 걷고, 말하고, 스스로를 의식할 거라고 전했습니다. 기대가 실력보다 늘 앞서 있었던 거죠.")))
+s(dict(type="checklist",chapter=3,label="논문의 제안 + 오늘 쓸 수 있는 습관",title="앞으로, 그리고 오늘",
+  rows=[{"label":"연구진 제안: 틀린 자신감엔 감점, '모르겠다'엔 감점 없는 채점","state":"yes"},{"label":"오늘의 습관 ①: 숫자·판례·책 이름은 원문으로 확인","state":"yes"},
+        {"label":"오늘의 습관 ②: '모르면 모른다고 해도 돼'라고 미리 말해 주기","state":"yes"}],
+  beats=[{"say":"논문의 제안은 간단합니다. 틀린 자신감에는 감점을, 정직한 '모르겠다'에는 감점을 주지 말자는 거죠. 채점이 바뀌면 AI도 바뀔 수 있다는 겁니다.","upto":1},
+         {"say":"그때까지 우리가 할 일도 간단합니다. 숫자와 이름은 원문으로 확인하고, '모르면 모른다고 해도 돼'라고 먼저 말해 주는 겁니다.","upto":3}]))
+s(dict(type="kinetic",chapter=3,beats=[{"say":"AI는 거짓말을 배운 게 아니라, 찍는 법을 배운 겁니다.","hit":["찍는","배운"]}]))
+s(dict(type="outro",chapter=3,title="몰랐던 이유",sub="출처는 설명란에",clip={"src":"pleiades","start":0},beats=B("오늘 몰랐던 이유는 여기까지입니다. 다음에도 누구나 아는 것의 숨은 이유를 찾아오겠습니다.")))
+spec["map"]={"nodes":{"learn":{"label":"다음 단어 맞히기 학습","icon":"message-circle","x":300,"y":400},"rare":{"label":"드문 사실: 참·거짓 구별 어려움","icon":"search","x":850,"y":400},
+  "score":{"label":"'모르겠다' = 0점 채점","icon":"clipboard-list","x":300,"y":720},"guess":{"label":"모를 때도 찍기","icon":"target","x":1150,"y":720},
+  "halluc":{"label":"그럴듯한 지어내기(환각)","icon":"circle-alert","x":1620,"y":560}},
+  "edges":[["learn","rare"],["rare","guess"],["score","guess"],["guess","halluc"]]}
+spec["package"]={"title":"AI는 왜 그럴듯한 거짓말을 할까? | 범인은 '시험 채점'이었다","title_options":["AI는 왜 그럴듯한 거짓말을 할까? | 범인은 '시험 채점'이었다","AI는 거짓말을 배운 게 아니라 '찍는 법'을 배웠다","없는 판례까지 만든 AI, 그 이유는 시험 점수였다"],
+ "title_why":["누구나 아는 것 + 모르는 이유 질문 (curiosity 공식)","반전 문장","장면(판례 사건) + 이유"],
+ "thumbnails":[{"id":"A","name":"옛 컴퓨터 + 질문","layout":"photo","photo_side":"full","image":{"file":"04_assets/footage/raw/ibm.jpg","focus":[0.5,0.5]},"top":"몰랐던 이유 · AI 편","lines":["AI는 왜","그럴듯하게 틀릴까"],"hl":["틀릴까"],"sub":"범인은 시험 채점","size":140,"text_y":330,"marks":[],"why":["시대감 있는 사진 + 질문"]},
+  {"id":"B","name":"0점 vs 1점","layout":"versus","left":{"value":"0점","label":"'모르겠어요'"},"right":{"value":"1점","label":"찍어서 맞으면"},"headline":"AI가 찍는 이유","hl":[],"marks":[],"why":["비유 하나가 답"]},
+  {"id":"C","name":"반전 문장","layout":"photo","photo_side":"full","image":{"file":"04_assets/footage/raw/pleiades.jpg","focus":[0.5,0.5]},"top":"AI의 환각","lines":["거짓말이 아니라","'찍기'였다"],"hl":["찍기"],"sub":"","size":140,"text_y":330,"marks":[],"why":["통념 뒤집기"]}]}
+project("20261111-curiosity-hallucination","ch-knowledge","newsprint","호기심 채널 · AI는 왜 그럴듯한 거짓말을 할까 (AI 의 미래 포함) — manual v11",{"ibm":"LRC-1957-B701_P-05391","pleiades":"ARC-2008-ACD08-0272-005","nyc":"STS059-50-003"},brief,fact,spec)

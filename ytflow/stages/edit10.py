@@ -86,6 +86,10 @@ def s_recap(D, sc, bt, dur):
     items = sc["items"]
     new = sc.get("new_from", len(items) - 1)
     D.h1(sc.get("title", "여기까지 정리"), y=170)
+    from .hybrid import accent_text
+    acc_t = accent_text(D)
+    r, g, b = (int(D.red.lstrip("#")[i:i + 2], 16) for i in (0, 2, 4))
+    on_acc = "#15171D" if 0.299 * r + 0.587 * g + 0.114 * b > 150 else "#FFFFFF"
     y0 = 330
     for k, it in enumerate(items):
         y = y0 + k * 150
@@ -97,7 +101,7 @@ def s_recap(D, sc, bt, dur):
         D.items.append(f'<div id="{i}" style="position:absolute;left:260px;top:{y}px;width:1400px;display:flex;align-items:center;gap:30px;'
                        f'font-family:sans-x;font-size:46px;color:{col};opacity:0">'
                        f'<span style="flex:none;width:74px;height:74px;border-radius:12px;background:{D.red if fresh else "transparent"};'
-                       f'border:3px solid {D.red};color:{"#15171D" if fresh else D.red};display:flex;align-items:center;justify-content:center;'
+                       f'border:3px solid {acc_t};color:{on_acc if fresh else acc_t};display:flex;align-items:center;justify-content:center;'
                        f'font-size:38px;font-weight:700">{k + 1}</span><span>{_e(it)}</span></div>')
         D.js.append(f'tl.fromTo("#{i}",{{opacity:0,x:-30}},{{opacity:1,x:0,duration:0.45,ease:"power3.out"}},{at:.2f});')
         if fresh:
