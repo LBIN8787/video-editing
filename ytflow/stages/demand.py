@@ -55,7 +55,7 @@ def run(channel_id: str = "ch-knowledge", top: int = 25) -> str:
     queries: dict = cfg.get("queries") or {"상식": ["우리가 몰랐던 상식"]}
     per = int(cfg.get("per_channel", 80))
     min_s = int(cfg.get("min_seconds", 180))
-    out = config.ROOT / ".cache" / "demand" / dt.date.today().isoformat()
+    out = config.CACHE_DIR / "demand" / dt.date.today().isoformat()
     out.mkdir(parents=True, exist_ok=True)
 
     jobs = [(cat, q) for cat, qs in queries.items() for q in qs]

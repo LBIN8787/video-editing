@@ -51,3 +51,44 @@ Drive 토큰처럼 1시간마다 만료되는 키가 없습니다. 주소는 `05
 - 올린 기록: `projects/*/05_edit/drive.json`, `drive_archive.json` (GitHub 에 커밋됨 → Codex 도 무엇이 올라갔는지 압니다).
 - 주의: drive.file 권한 토큰은 **이 앱이 만든 파일만** 봅니다. 커넥터로 만든 폴더 안에 올리는 것은 되지만, 그 폴더의 다른 파일 목록은 API 로 보이지 않습니다.
 - 다음부터는 영상을 만든 뒤 `python -m ytflow upload <프로젝트> --archive` 한 번이면 됩니다(이미 올린 것은 건너뜀, 일시 오류는 자동 재시도).
+
+## 내 PC 에서 돌릴 때 — C 드라이브 대신 D 드라이브 쓰기 (2026-11-11 사용자 요청)
+영상 한 편에 렌더 중간 파일이 0.5~1GB 생깁니다. **모든 작업은 D 드라이브에서** 합니다.
+
+### 1) 저장소를 D 에 두기 (가장 중요)
+```powershell
+D:
+mkdir D:\ytflow
+cd D:\ytflow
+git clone https://github.com/LBIN8787/video-editing.git
+cd video-editing
+```
+이미 C 에 받아 두었다면 폴더째 `D:\ytflow\video-editing` 로 옮기면 됩니다(옮긴 뒤 그 폴더에서 Claude Code / Codex 를 엽니다).
+프로젝트(`projects/`)·렌더 도구(`tools/`)·배경음(`assets/bgm/`)이 모두 저장소 안에 있으므로 함께 D 로 갑니다.
+
+### 2) 저장소 밖으로 새는 캐시도 D 로 (한 번만, PowerShell)
+| 무엇 | 환경변수 | 값 |
+|---|---|---|
+| ytflow 캐시 (받은 자료·음성 캐시·측정) | `YTFLOW_CACHE_DIR` | `D:\ytflow\cache` |
+| 받아쓰기 모델(faster-whisper, 수백 MB) | `HF_HOME` | `D:\ytflow\hf` |
+| 렌더용 브라우저(Playwright) | `PLAYWRIGHT_BROWSERS_PATH` | `D:\ytflow\ms-playwright` |
+| npm 캐시 | `npm_config_cache` | `D:\ytflow\npm-cache` |
+| pip 캐시 | `PIP_CACHE_DIR` | `D:\ytflow\pip-cache` |
+| 임시 파일 | `TMP`, `TEMP` | `D:\ytflow\tmp` |
+
+```powershell
+mkdir D:\ytflow\cache, D:\ytflow\hf, D:\ytflow\ms-playwright, D:\ytflow\npm-cache, D:\ytflow\pip-cache, D:\ytflow\tmp
+setx YTFLOW_CACHE_DIR D:\ytflow\cache
+setx HF_HOME D:\ytflow\hf
+setx PLAYWRIGHT_BROWSERS_PATH D:\ytflow\ms-playwright
+setx npm_config_cache D:\ytflow\npm-cache
+setx PIP_CACHE_DIR D:\ytflow\pip-cache
+setx TMP D:\ytflow\tmp
+setx TEMP D:\ytflow\tmp
+```
+`setx` 는 **새로 연 창부터** 적용됩니다. 터미널·Claude Code·Codex 를 다시 연 뒤 `echo $env:YTFLOW_CACHE_DIR` 로 확인하세요.
+(TMP/TEMP 를 바꾸면 다른 프로그램의 임시 파일도 D 로 갑니다. 원치 않으면 이 두 줄은 빼도 됩니다.)
+
+### 3) 공간 정리 (영상을 Release 에 올린 뒤)
+렌더 중간 파일은 언제든 다시 만들 수 있습니다. Release 에 올린 프로젝트는 아래를 지워도 됩니다:
+`04_assets/hb/`, `04_assets/hb_*.mp4`, `05_edit/hb_work/`, `05_edit/draft.mp4` (완성본 `final.mp4`·기획 문서·목소리는 남김)

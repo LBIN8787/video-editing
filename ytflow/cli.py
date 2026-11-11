@@ -383,7 +383,7 @@ def main(argv: list[str] | None = None) -> None:
     elif a.cmd == "voice-sample":
         from .stages.media import _elevenlabs
         ec = dict(config.load("pipeline").get("tts", {}).get("elevenlabs") or {}, voice_id=a.voice_id)
-        out = config.ROOT / ".cache" / "voice_samples" / f"{a.voice_id}.mp3"
+        out = config.CACHE_DIR / "voice_samples" / f"{a.voice_id}.mp3"
         out.parent.mkdir(parents=True, exist_ok=True)
         print(f"[voice-sample] {_elevenlabs(a.text, out, ec)}")
     elif a.cmd == "skin-preview":

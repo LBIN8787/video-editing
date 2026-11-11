@@ -99,7 +99,7 @@ def _elevenlabs(text: str, out: Path, ec: dict) -> Path:
     if ec.get("language_code"):
         body["language_code"] = ec["language_code"]
     key = hashlib.sha1(json.dumps([vid, body], ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:16]
-    cache = config.ROOT / ".cache" / "elevenlabs" / f"{key}.json"
+    cache = config.CACHE_DIR / "elevenlabs" / f"{key}.json"
     if cache.exists():
         data = json.loads(cache.read_text(encoding="utf-8"))
     else:

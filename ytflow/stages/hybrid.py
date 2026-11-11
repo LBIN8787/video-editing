@@ -953,7 +953,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
 
 
 def us_states() -> dict:
-    cache = config.ROOT / ".cache" / "us_states_1500x860.json"
+    cache = config.CACHE_DIR / "us_states_1500x860.json"
     if not cache.exists():
         cache.parent.mkdir(parents=True, exist_ok=True)
         r = subprocess.run(["node", str(config.ROOT / "ytflow" / "assets" / "us_states.mjs"), str(hyper.TOOLS / "node_modules"), "1500", "860"],
@@ -1106,7 +1106,7 @@ def sfx_files() -> dict:
         base = config.ROOT / ".agents" / "skills" / "media-use" / "audio" / "assets" / "sfx"
     # impact-bass(저음 '두웅')는 쓰지 않음 — 2026-11-10 사용자 판정 '소리 자체가 싫다'
     files = {k: base / f"{k}.mp3" for k in ("whoosh", "pop", "click-soft", "whoosh-short", "riser", "chime")}
-    pen = config.ROOT / ".cache" / "sfx" / "pencil.wav"
+    pen = config.CACHE_DIR / "sfx" / "pencil.wav"
     if not pen.exists() or pen.stat().st_size < 1000:
         # 연필 긁는 소리: 내려받지 않고 직접 만듦 (분홍 잡음 → 대역 통과 → 빠른 떨림 → 페이드)
         pen.parent.mkdir(parents=True, exist_ok=True)
