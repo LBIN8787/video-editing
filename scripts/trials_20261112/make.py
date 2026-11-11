@@ -92,6 +92,9 @@ def main():
     spec = {"title": "v15 시험판 — 카테고리 개성·증거판·칠판·듀오톤", "core_message": "카테고리마다 보는 순간 알 수 있는 화면",
             "brand": None, "scenes": S, "footage": fo, "map": SRC["issues-aiglasses"]["map"], "package": {}}
     (P / "02_script" / "hybrid.json").write_text(json.dumps(spec, ensure_ascii=False, indent=1), encoding="utf-8")
+    st = P / "state.json"
+    if not st.exists():
+        st.write_text(json.dumps({"name": P.name, "created": "2026-11-12T00:00:00", "done": ["script"], "approved": []}, indent=2), encoding="utf-8")
     (P / "edit.yaml").write_text("# v15 시험판 (docs/21) — 장면마다 brand 가 달라 기본 팩은 dark-doc\n"
                                  "edit:\n  style: hybrid\n  style_ref: hybrid\n  family: source\n  skin: dark-doc\n"
                                  "channel: ch-issues\nformat: longform\n", encoding="utf-8")
