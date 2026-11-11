@@ -63,9 +63,14 @@ def make(sk: dict, kind: str, W: int, H: int, chapter: int = 0, photo: Path | No
         im = im.crop(((im.width - W) // 2, (im.height - H) // 2, (im.width - W) // 2 + W, (im.height - H) // 2 + H))
         im = im.filter(ImageFilter.GaussianBlur(14))
         arr = np.asarray(im, np.float32)
-        k = 0.4 if dark else 0.55
-        arr = arr * k + base * (1 - k) * (1.0 if dark else 0.9)
-        arr *= (1 - 0.45 * r2 / 2)[..., None]
+        if dark:   # 어두운 팩: 사진을 어둡게 깔아 밝은 글자가 보이게
+            arr = arr * 0.4 + base * 0.6
+            arr *= (1 - 0.45 * r2 / 2)[..., None]
+        else:      # 밝은 팩: 사진을 회색조로 바꿔 아주 옅게(밝은 바탕 쪽으로) 깔아 어두운 글자가 보이게 (야경 사진도 밝은 바탕이 되도록)
+            g = arr.mean(axis=2, keepdims=True)
+            lift = 255 - (255 - g) * 0.35          # 어두운 사진도 밝게 들어 올림
+            arr = lift * 0.25 + base * 0.75
+            arr *= (1 - 0.12 * r2 / 2)[..., None]
     elif kind == "spot":
         light = base + (np.array([255, 236, 200], np.float32) - base) * (0.10 if dark else 0.25)
         t = np.clip(r2 / 1.6, 0, 1)[..., None]

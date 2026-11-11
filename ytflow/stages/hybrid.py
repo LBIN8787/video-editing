@@ -896,7 +896,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     kind = backdrop.auto(sc, bool(spec.get("footage")))
     chap = int(sc.get("chapter", 0) or 0)
     tag = {"tint": f"_c{chap}", "photo": f"_{sc.get('bg_src', '')}"}.get(kind, "")
-    bg_name = f"bg_{D.skin['id']}_{kind}{tag}_b2.jpg"   # _b2: 바탕 밝기 규칙 판 (바꾸면 올림)
+    bg_name = f"bg_{D.skin['id']}_{kind}{tag}_b3.jpg"   # _b3: 바탕 밝기 규칙 판 (바꾸면 올림) — b3: 밝은 팩 사진 바탕을 옅게
     bg = a / bg_name
     if not bg.exists():
         still = backdrop.photo_still(project, spec, sc.get("bg_src")) if kind == "photo" else None
