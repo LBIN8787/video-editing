@@ -228,7 +228,8 @@ def s_chart(D: HDoc, sc: dict, bt: list, dur: float):
     t0 = bt[0][0]
     D.stroke(seg, D.red, 8, at=t0 + 1.2, dur=0.6)
     D.circle(seg[-1][0], seg[-1][1], 26, 26, at=t0 + 1.7)
-    D.text(seg[-1][0] - 20, seg[-1][1] + 70, f"{rows[-1]['close']:,.0f}", FT("value"), 54, accent_text(D), at=t0 + 1.9, anchor="rm")
+    ly = seg[-1][1] + 70 if seg[-1][1] + 70 < y1 - 50 else seg[-1][1] - 70   # 바닥(날짜 글자) 가까우면 점 위로
+    D.text(seg[-1][0] - 20, ly, f"{rows[-1]['close']:,.0f}", FT("value"), 54, accent_text(D), at=t0 + 1.9, anchor="rm")
     if b0.get("mark"):
         D.text(seg[0][0] - 30, min(p[1] for p in seg) - 70, b0["mark"], FT("note"), 50, accent_text(D), at=t0 + 2.2, anchor="rm")
     D.js.append(f'tl.to("#layer",{{scale:1.18,x:-230,y:40,duration:1.6,ease:"power2.inOut"}},{t0 + 1.0:.2f});')
@@ -519,7 +520,7 @@ def s_analogy(D: HDoc, sc: dict, bt: list, dur: float):
         D.rough("rectangle", [x - 230, 260, 460, 340], col, 3, at=at, dur=0.4)
         D.icon(it["icon"], x, 370, 130, col, at=at + 0.2)
         D.text(x, 500, it["label"], FT("title"), 58, col, at=at + 0.3)
-        D.text(x, 560, it["sub"], FT("note"), 44, "#5a5f6a", at=at + 0.4)
+        D.text(x, 560, it["sub"], FT("note"), fit(FT("note"), it["sub"], 44, 420).size, "#5a5f6a", at=at + 0.4)   # 상자(460) 안에 맞춤
     D.text(W / 2, 430, "≈", FT("value"), 120, D.red, at=t0 + 1.2)
     if len(bt) > 1 and sc.get("result"):
         t1 = bt[1][0]
