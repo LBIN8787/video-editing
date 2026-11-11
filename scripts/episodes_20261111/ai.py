@@ -52,7 +52,7 @@ s(dict(type="timeline",chapter=1,label="Anthropic 발표 (2026.6.1 · 10.26 · 1
   events=[{"at":"6월 1일","label":"비공개로 상장 신청","sub":""},{"at":"10월 26일","label":"신고서(S-1) 공개","sub":""},{"at":"11월 10일","label":"로드쇼 시작","sub":"주당 70~78달러"},{"at":"상장","label":"나스닥 'ANT'","sub":"예정"}],
   beats=[{"say":"앤트로픽은 6월에 비공개로 상장을 신청했고, 10월에 신고서를 공개했습니다.","upto":2},
          {"say":"그리고 11월 10일, 주당 70에서 78달러로 8억 2,500만 주를 팔겠다며 로드쇼를 시작했습니다. 나스닥 이름은 'ANT'입니다.","upto":4}]))
-s(dict(type="bars",chapter=1,label="Wikipedia 'Initial public offering' · Anthropic 발표로 계산",title="역대 상장 공모 규모 (억 달러)",unit="억 달러",emph=1,
+s(dict(type="bars",chapter=1,label="Wikipedia 'Initial public offering' · Anthropic 발표로 계산",title="역대 상장 공모 규모 (억 달러)",emph=1,
   layers=[{"kind":"locator","at":[-74.0,40.71],"label":"나스닥 · 뉴욕","beat":1,"side":"right","top":130,"scale":1.7}],
   items=[{"label":"SpaceX (2026)","value":857,"text":"857"},{"label":"앤트로픽 (최대)","value":644,"text":"약 644"},{"label":"사우디 아람코 (2019)","value":294,"text":"294"}],
   beats=[{"say":"얼마나 큰지 비교해 보죠. 2019년 석유 회사 사우디 아람코가 294억 달러를 모아 당시 역대 최대였습니다."},

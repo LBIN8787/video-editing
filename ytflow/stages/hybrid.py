@@ -228,9 +228,9 @@ def s_chart(D: HDoc, sc: dict, bt: list, dur: float):
     t0 = bt[0][0]
     D.stroke(seg, D.red, 8, at=t0 + 1.2, dur=0.6)
     D.circle(seg[-1][0], seg[-1][1], 26, 26, at=t0 + 1.7)
-    D.text(seg[-1][0] - 20, seg[-1][1] + 70, f"{rows[-1]['close']:,.0f}", FT("value"), 54, D.red, at=t0 + 1.9, anchor="rm")
+    D.text(seg[-1][0] - 20, seg[-1][1] + 70, f"{rows[-1]['close']:,.0f}", FT("value"), 54, accent_text(D), at=t0 + 1.9, anchor="rm")
     if b0.get("mark"):
-        D.text(seg[0][0] - 30, min(p[1] for p in seg) - 70, b0["mark"], FT("note"), 50, D.red, at=t0 + 2.2, anchor="rm")
+        D.text(seg[0][0] - 30, min(p[1] for p in seg) - 70, b0["mark"], FT("note"), 50, accent_text(D), at=t0 + 2.2, anchor="rm")
     D.js.append(f'tl.to("#layer",{{scale:1.18,x:-230,y:40,duration:1.6,ease:"power2.inOut"}},{t0 + 1.0:.2f});')
     D.sfx.append(("pencil", t0 + 1.2))
     if len(sc["beats"]) > 1 and sc["beats"][1].get("stamp"):
@@ -243,7 +243,7 @@ def s_versus(D: HDoc, sc: dict, bt: list, dur: float):
     D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
     L, R = sc["left"], sc["right"]
     t0 = bt[0][0]
-    for x, it, col, at in ((W * 0.28, L, D.ink, t0 + 0.2), (W * 0.72, R, D.red, t0 + 1.4)):
+    for x, it, col, at in ((W * 0.28, L, D.ink, t0 + 0.2), (W * 0.72, R, accent_text(D), t0 + 1.4)):
         D.icon(it["icon"], x, 300, 120, col, at=at)
         D.text(x, 520, it["value"], FT("value"), 210, col, at=at + 0.2, counter=True)
         D.text(x, 680, it["label"], FT("label"), 40, "#5a5f6a", at=at + 0.4)

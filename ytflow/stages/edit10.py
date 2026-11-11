@@ -138,7 +138,8 @@ def s_isotype(D, sc, bt, dur):
 # ---------------------------------------------------------------- A5 사진 장 표지
 def chapter_photo(D, sc, bt, dur):
     """장 표지 'photo': 흐린 자료 사진 바탕(backdrop photo) 위에 큰 번호 + 제목 + 가는 선이 그려짐."""
-    D.text(W / 2, 360, f"{sc.get('num', '')}", FT("value"), 220, D.red, at=0.35)
+    from .hybrid import accent_text
+    D.text(W / 2, 360, f"{sc.get('num', '')}", FT("value"), 220, accent_text(D), at=0.35)
     f = fit(FT("title"), sc["title"], 92, W - 300)
     D.text(W / 2, 560, sc["title"], FT("title"), f.size, D.ink, at=0.6)
     w = f.getlength(sc["title"])
