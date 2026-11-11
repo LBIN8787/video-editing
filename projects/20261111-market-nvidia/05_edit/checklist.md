@@ -1,6 +1,6 @@
 # 체크리스트 — 20261111-market-nvidia
 
-매뉴얼 v13 · 2026-11-11T07:45:16 · **통과**
+매뉴얼 v16 · 2026-11-11T12:42:28 · **MUST 실패 1개**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
@@ -26,6 +26,7 @@
 | G4 | MUST | 레퍼런스 채널 이름 0개 | ✅ | [] |
 | G4 | MUST | 미완성 표시 0개 | ✅ | [] |
 | G4 | SHOULD | 과장 단어 0개 | ✅ | [] |
+| G4 | MUST | 진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2) | ❌ | ['여기까지가 숫자였고요.'] |
 | G4 | SHOULD | 첫 3장면 안에 질문 | ✅ |  |
 | G4 | SHOULD | market: 끝에 확인할 신호(checklist) | ✅ | ['checklist', 'kinetic', 'outro'] |
 | G4 | MUST | 오프닝: 본론 전에 MC 오프닝(intro: 인사·오늘 이야기·순서 예고·시작 멘트, 3박자 이상) | ✅ |  |
@@ -36,6 +37,8 @@
 | G5 | SHOULD | 반복 피로: 눈요기 있는 장면 60% 이상 | ⚠️ | 7/13 |
 | G5 | SHOULD | 반복 피로: 같은 시각 효과 3장면 연속 없음 · 효과 3종 이상(롱폼) | ⚠️ | ['fx:dust', 'fx:tilt'] 연속 [] |
 | G5 | SHOULD | 바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6) | ✅ | 이번 light:slate · 직전 ['light:clean-white', 'dark:dark-doc'] |
+| G5 | SHOULD | v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게) | ⚠️ |  |
+| G5 | SHOULD | v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음 | ⚠️ | 표지 ['sf', 'taiwan', 'nyc'] · NASA 3 |
 | G5 | MUST | 같은 type 3연속 없음 | ✅ | [] |
 | G5 | SHOULD | 자료 화면 공백 ≤45초 | ⚠️ | 최장 184초 |
 | G5 | SHOULD | 장 표지 간격 ≤200초 | ✅ | 최장 92초 |
@@ -46,7 +49,18 @@
 | G5 | MUST | 강조는 아껴서: 1분에 1번 이하 (이 영상 4번까지) | ✅ | 1번 [(17, 'kinetic')] |
 | G5 | MUST | 한 장면에 강조 1개까지 (위아래로 같은 내용 반복 금지) | ✅ | 넘친 장면 [] |
 | G5 | MUST | 핵심 단어 띄우기(words)는 단어 1~3개만 | ✅ | [] |
-| G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ⚠️ | slate / 등록부 ['blueprint', 'clean-flat', 'dark-doc', 'kinetic-poster', 'newsprint |
+| G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ⚠️ | slate / 등록부 ['blueprint', 'clean-flat', 'corkboard', 'dark-doc', 'kinetic-poster |
 | G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ✅ | python -m ytflow style-pick <프로젝트> |
+| G6 | MUST | final.mp4 | ✅ |  |
+| G6 | MUST | 레이아웃 점검 비어 있음 | ✅ | {} |
+| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 1.0, 'p95_abs_offset': 0.07, 'median_abs_offset': 0.05, 'video_m |
+| G6 | SHOULD | 납품 점검(음량 등) | ✅ | completed |
+| G6 | SHOULD | 움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선) | ⚠️ | 변화 14.3/분 · 정지 0.55 |
+| G6 | SHOULD | 최종 목소리 ElevenLabs | ⚠️ |  |
+| G7 | MUST | 제목 후보 3개 + 이유 | ✅ |  |
+| G7 | MUST | 썸네일 A/B/C + 점검 ok | ✅ |  |
+| G7 | SHOULD | 제목 앞 22자 안에 질문/핵심 | ✅ | 반도체는 올랐는데 왜 엔비디아만 떨어졌나 |
+| G8 | MUST | GitHub Release 업로드 | ✅ |  |
+| G8 | MUST | episodes.md 기록 | ✅ | ch-paper-column |
 
 사람 눈 검사(EYE)는 manual/06-checklist.md 끝의 5가지를 확인하세요.

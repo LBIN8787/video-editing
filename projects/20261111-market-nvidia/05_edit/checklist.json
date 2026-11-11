@@ -1,8 +1,8 @@
 {
  "project": "20261111-market-nvidia",
- "manual_version": "13",
- "checked": "2026-11-11T07:45:16",
- "pass": true,
+ "manual_version": "16",
+ "checked": "2026-11-11T12:42:28",
+ "pass": false,
  "rows": [
   {
    "gate": "G0",
@@ -160,6 +160,13 @@
   },
   {
    "gate": "G4",
+   "level": "MUST",
+   "item": "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2)",
+   "ok": false,
+   "detail": "['여기까지가 숫자였고요.']"
+  },
+  {
+   "gate": "G4",
    "level": "SHOULD",
    "item": "첫 3장면 안에 질문",
    "ok": true,
@@ -227,6 +234,20 @@
    "item": "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6)",
    "ok": true,
    "detail": "이번 light:slate · 직전 ['light:clean-white', 'dark:dark-doc']"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게)",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음",
+   "ok": false,
+   "detail": "표지 ['sf', 'taiwan', 'nyc'] · NASA 3"
   },
   {
    "gate": "G5",
@@ -303,7 +324,7 @@
    "level": "SHOULD",
    "item": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
    "ok": false,
-   "detail": "slate / 등록부 ['blueprint', 'clean-flat', 'dark-doc', 'kinetic-poster', 'newsprint', 'paper-sketch']"
+   "detail": "slate / 등록부 ['blueprint', 'clean-flat', 'corkboard', 'dark-doc', 'kinetic-poster', 'midnight', 'newsprint', 'paper-sketch']"
   },
   {
    "gate": "G5",
@@ -311,6 +332,83 @@
    "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
    "ok": true,
    "detail": "python -m ytflow style-pick <프로젝트>"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "final.mp4",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "레이아웃 점검 비어 있음",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
+   "ok": true,
+   "detail": "{'within_0_5s': 1.0, 'p95_abs_offset': 0.07, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.067}"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "납품 점검(음량 등)",
+   "ok": true,
+   "detail": "completed"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선)",
+   "ok": false,
+   "detail": "변화 14.3/분 · 정지 0.55"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "최종 목소리 ElevenLabs",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "제목 후보 3개 + 이유",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "썸네일 A/B/C + 점검 ok",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "SHOULD",
+   "item": "제목 앞 22자 안에 질문/핵심",
+   "ok": true,
+   "detail": "반도체는 올랐는데 왜 엔비디아만 떨어졌나"
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "GitHub Release 업로드",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "episodes.md 기록",
+   "ok": true,
+   "detail": "ch-paper-column"
   }
  ]
 }

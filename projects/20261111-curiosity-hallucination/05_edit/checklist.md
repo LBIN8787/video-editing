@@ -1,10 +1,10 @@
 # 체크리스트 — 20261111-curiosity-hallucination
 
-매뉴얼 v13 · 2026-11-11T07:45:15 · **통과**
+매뉴얼 v15 · 2026-11-11T12:41:22 · **MUST 실패 1개**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
-| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ✅ |  |
+| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ❌ | [2026-11-11 · 20261112-bg-trials 기각] 진행 말투: 장 표지 '여기까지가 ~였고요.' 같은 끝맺음이 부자연스러워 흐름 |
 | G1 | MUST | topic_brief.json 있음 | ✅ | 01_research/topic_brief.json (schemas/topic_brief.schema.json) |
 | G1 | MUST | 브랜드(ai/market/curiosity) | ✅ | curiosity |
 | G1 | MUST | 욕망·시청자 질문 | ✅ | AI는 왜 그럴듯한 거짓말을 할까? |
@@ -26,6 +26,7 @@
 | G4 | MUST | 레퍼런스 채널 이름 0개 | ✅ | [] |
 | G4 | MUST | 미완성 표시 0개 | ✅ | [] |
 | G4 | SHOULD | 과장 단어 0개 | ✅ | [] |
+| G4 | MUST | 진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2) | ✅ | [] |
 | G4 | SHOULD | 첫 3장면 안에 질문 | ✅ |  |
 | G4 | MUST | 오프닝: 본론 전에 MC 오프닝(intro: 인사·오늘 이야기·순서 예고·시작 멘트, 3박자 이상) | ✅ |  |
 | G5 | MUST | 배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2) | ✅ | ['film', 'grid', 'photo', 'spot', 'tint'] |
@@ -35,6 +36,8 @@
 | G5 | SHOULD | 반복 피로: 눈요기 있는 장면 60% 이상 | ✅ | 9/12 |
 | G5 | SHOULD | 반복 피로: 같은 시각 효과 3장면 연속 없음 · 효과 3종 이상(롱폼) | ✅ | ['fx:dust', 'fx:photofill', 'fx:tilt'] 연속 [] |
 | G5 | SHOULD | 바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6) | ✅ | 이번 light:clean-white · 직전 ['dark:dark-doc', 'dark:midnight'] |
+| G5 | SHOULD | v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게) | ⚠️ |  |
+| G5 | SHOULD | v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음 | ⚠️ | 표지 ['ibm', 'pleiades', 'nyc'] · NASA 3 |
 | G5 | SHOULD | 반복 피로: 같은 채널 직전 편과 화면 구성 겹침 70% 이하 (Jaccard) | ✅ | 32% |
 | G5 | MUST | 같은 type 3연속 없음 | ✅ | [] |
 | G5 | SHOULD | 자료 화면 공백 ≤45초 | ⚠️ | 최장 122초 |
@@ -48,5 +51,16 @@
 | G5 | MUST | 핵심 단어 띄우기(words)는 단어 1~3개만 | ✅ | [] |
 | G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ⚠️ | clean-white / 등록부 ['clean-flat', 'dark-doc', 'kinetic-poster', 'newsprint', 'pap |
 | G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ✅ | python -m ytflow style-pick <프로젝트> |
+| G6 | MUST | final.mp4 | ✅ |  |
+| G6 | MUST | 레이아웃 점검 비어 있음 | ✅ | {} |
+| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 0.987, 'p95_abs_offset': 0.1, 'median_abs_offset': 0.05, 'video_ |
+| G6 | SHOULD | 납품 점검(음량 등) | ✅ | completed |
+| G6 | SHOULD | 움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선) | ✅ | 변화 16.4/분 · 정지 0.48 |
+| G6 | SHOULD | 최종 목소리 ElevenLabs | ✅ |  |
+| G7 | MUST | 제목 후보 3개 + 이유 | ✅ |  |
+| G7 | MUST | 썸네일 A/B/C + 점검 ok | ✅ |  |
+| G7 | SHOULD | 제목 앞 22자 안에 질문/핵심 | ✅ | AI는 왜 그럴듯한 거짓말을 할까? /  |
+| G8 | MUST | GitHub Release 업로드 | ✅ |  |
+| G8 | MUST | episodes.md 기록 | ✅ | ch-knowledge |
 
 사람 눈 검사(EYE)는 manual/06-checklist.md 끝의 5가지를 확인하세요.

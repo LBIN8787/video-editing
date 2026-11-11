@@ -1,15 +1,15 @@
 {
  "project": "20261111-issues-aiglasses",
- "manual_version": "14",
- "checked": "2026-11-11T11:08:34",
- "pass": true,
+ "manual_version": "15",
+ "checked": "2026-11-11T12:41:20",
+ "pass": false,
  "rows": [
   {
    "gate": "G0",
    "level": "MUST",
    "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
-   "ok": true,
-   "detail": ""
+   "ok": false,
+   "detail": "[2026-11-11 · 20261112-bg-trials 기각] 진행 말투: 장 표지 '여기까지가 ~였고요.' 같은 끝맺음이 부자연스러워 흐름이 깸 (스타일·화면은 모두 합격)"
   },
   {
    "gate": "G1",
@@ -157,6 +157,13 @@
    "item": "과장 단어 0개",
    "ok": true,
    "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2)",
+   "ok": false,
+   "detail": "['까지가 무슨 일이 있었는지였고요.']"
   },
   {
    "gate": "G4",

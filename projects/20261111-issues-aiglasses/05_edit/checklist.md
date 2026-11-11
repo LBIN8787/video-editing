@@ -1,10 +1,10 @@
 # 체크리스트 — 20261111-issues-aiglasses
 
-매뉴얼 v14 · 2026-11-11T11:08:34 · **통과**
+매뉴얼 v15 · 2026-11-11T12:41:20 · **MUST 실패 2개**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
-| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ✅ |  |
+| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ❌ | [2026-11-11 · 20261112-bg-trials 기각] 진행 말투: 장 표지 '여기까지가 ~였고요.' 같은 끝맺음이 부자연스러워 흐름 |
 | G1 | MUST | topic_brief.json 있음 | ✅ | 01_research/topic_brief.json (schemas/topic_brief.schema.json) |
 | G1 | MUST | 브랜드(ai/market/curiosity) | ✅ | issues |
 | G1 | MUST | 욕망·시청자 질문 | ✅ | AI 안경 컨닝, 수능에서 정말 막을 수 있을까? |
@@ -26,6 +26,7 @@
 | G4 | MUST | 레퍼런스 채널 이름 0개 | ✅ | [] |
 | G4 | MUST | 미완성 표시 0개 | ✅ | [] |
 | G4 | SHOULD | 과장 단어 0개 | ✅ | [] |
+| G4 | MUST | 진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2) | ❌ | ['까지가 무슨 일이 있었는지였고요.'] |
 | G4 | SHOULD | 첫 3장면 안에 질문 | ✅ |  |
 | G4 | MUST | issues: 사실 기준 시각(as_of) | ✅ | 2026-11-11 09:00 KST |
 | G4 | MUST | issues: 서로 다른 입장 2개 이상(각 출처) | ✅ | 2 |
