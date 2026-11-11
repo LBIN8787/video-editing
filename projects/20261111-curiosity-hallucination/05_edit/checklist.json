@@ -1,7 +1,7 @@
 {
  "project": "20261111-curiosity-hallucination",
  "manual_version": "11",
- "checked": "2026-11-11T00:45:08",
+ "checked": "2026-11-11T03:52:08",
  "pass": true,
  "rows": [
   {
@@ -230,6 +230,20 @@
   },
   {
    "gate": "G5",
+   "level": "SHOULD",
+   "item": "자료 화면 공백 ≤45초",
+   "ok": false,
+   "detail": "최장 122초"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "장 표지 간격 ≤200초",
+   "ok": true,
+   "detail": "최장 66초"
+  },
+  {
+   "gate": "G5",
    "level": "MUST",
    "item": "스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격)",
    "ok": true,
@@ -240,7 +254,7 @@
    "level": "MUST",
    "item": "한 스타일이 40% 넘지 않음",
    "ok": true,
-   "detail": "hybrid-causal 0.33"
+   "detail": "archive-doc 0.28"
   },
   {
    "gate": "G5",
@@ -259,7 +273,7 @@
   {
    "gate": "G5",
    "level": "MUST",
-   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 2번까지)",
+   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 4번까지)",
    "ok": true,
    "detail": "1번 [(16, 'kinetic')]"
   },

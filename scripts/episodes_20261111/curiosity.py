@@ -60,9 +60,9 @@ s(dict(type="recap",chapter=1,title="여기까지 정리",items=["AI는 없는 �
   beats=B("정리하면, AI는 없는 것도 진짜처럼 만들어 냈습니다. 그럼 왜 그럴까요?")))
 s(dict(type="chapter",chapter=2,num="2",title="AI는 왜 지어낼까",icon="brain",beats=B("두 번째, AI는 왜 지어낼까요? 힌트는 '시험'에 있습니다.")))
 s(dict(type="analogy",chapter=2,label="자체 정리",title="AI는 아주 큰 자동완성",
-  left={"icon":"smartphone","label":"휴대폰 자판","sub":"다음 단어 추천"},right={"icon":"bot","label":"AI 언어 모델","sub":"다음 단어 맞히기를 엄청나게 많이"},
+  left={"icon":"smartphone","label":"휴대폰 자판","sub":"다음 단어 추천"},right={"icon":"bot","label":"AI 언어 모델","sub":"다음 단어 맞히기를 아주 많이"},
   result={"icon":"message-circle","label":"자연스러운 문장 ≠ 사실인 문장"},
-  layers=[{"kind":"photo","src":"pleiades","beat":0,"side":"left","w":420,"top":600,"caption":"슈퍼컴퓨터 · NASA 에임스 (2008)"}],
+  layers=[{"kind":"photo","src":"pleiades","beat":0,"side":"right","w":330,"top":690,"caption":"슈퍼컴퓨터 · NASA (2008)"}],
   beats=[{"say":"AI 언어 모델은 휴대폰 자판의 다음 단어 추천을 아주 크게 키운 것과 비슷합니다. 다음에 올 말을 맞히도록 배웠죠."},
          {"say":"그래서 문장은 아주 자연스럽습니다. 하지만 자연스러운 문장이 곧 사실인 문장은 아니죠.","show_result":True}]))
 s(dict(type="versus",chapter=2,label="Kalai 외 'Why Language Models Hallucinate' (2025) 비유 정리",left={"value":"0점","label":"'모르겠어요'라고 답하면","icon":"circle-alert"},
