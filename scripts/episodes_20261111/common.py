@@ -1,6 +1,6 @@
 import json, subprocess, shutil
 from pathlib import Path
-ROOT=Path('/home/user/video-editing'); NASA=Path('/tmp/claude-0/-home-user/29c7e7c2-ab5e-5f3f-ac0c-a57433d47dc6/scratchpad/nasa')
+ROOT=Path('/home/user/video-editing'); NASA=ROOT/'.cache'/'nasa'   # images-api.nasa.gov 에서 받은 jpg (퍼블릭 도메인)
 NASA_META={
  "iss066e158841":("서울 야경 · NASA 국제우주정거장 사진 (2022, 퍼블릭 도메인)",),
  "iss037e005370":("서울 야경 · NASA 국제우주정거장 사진 (2013, 퍼블릭 도메인)",),
