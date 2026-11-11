@@ -277,14 +277,17 @@ def s_chapter(D: HDoc, sc: dict, bt: list, dur: float):
     D.rough("line", [W / 2 - w / 2, 710, W / 2 + w / 2, 714], D.red, 4.5, at=1.3, dur=0.45)
 
 
-def accent_text(D) -> str:
-    """강조색을 '글자'로 쓸 때: 밝은 팩이면 바탕과 대비 4.5:1 이 될 때까지 어둡게 (어두운 팩은 그대로)."""
+def accent_text(D, tint: float = 0.0) -> str:
+    """강조색을 '글자'로 쓸 때: 밝은 팩이면 바탕과 대비 4.5:1 이 될 때까지 어둡게 (어두운 팩은 그대로).
+    tint: 글자 뒤 칸을 강조색으로 옅게 칠했을 때 그 비율(예: 활성 칸 0.22) — 칠한 바탕 기준으로 잰다."""
     def rgb(c):
         c = c.lstrip("#"); return [int(c[i:i + 2], 16) for i in (0, 2, 4)]
     def lum(c):
         v = [x / 255 for x in c]; v = [x / 12.92 if x <= 0.03928 else ((x + 0.055) / 1.055) ** 2.4 for x in v]
         return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]
     base = rgb(D.skin.get("palette", {}).get("base", "#F3EFE6")); acc = rgb(D.red)
+    if tint:
+        base = [round(b * (1 - tint) + a * tint) for b, a in zip(base, acc)]
     lb = lum(base)
     if lb < 0.4:
         return D.red
@@ -299,7 +302,7 @@ def _node_box(D: HDoc, key: str, nd: dict, state: str, at: float, instant: bool)
     """인과 지도 칸: state = dim | on | active"""
     x, y = nd["x"], nd["y"]
     bw, bh = BW, BH
-    col = accent_text(D) if state == "active" else (D.ink if state == "on" else "#a8a29a")
+    col = accent_text(D, 0.22) if state == "active" else (D.ink if state == "on" else "#a8a29a")
     fill = "rgba(196,69,47,0.22)" if state == "active" else None
     d = 0.01 if instant else 0.45
     from . import graphics
