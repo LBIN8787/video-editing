@@ -1207,7 +1207,7 @@ def make(project: Project, workers: int = 3) -> Path:
     fdir = str(paper.FONT_DIR).replace(":", "\\:")
     a_in = ["-i", str(work / "voice.wav")] + (["-i", str(sfx_wav)] if ev else [])
     amix = "[1:a][2:a]amix=inputs=2:normalize=0:duration=first[a]" if ev else "[1:a]anull[a]"
-    bgm = spec.get("bgm", "pad" if spec.get("edit_v10", True) else None)
+    bgm = spec.get("bgm")   # v12: 기본은 배경음 없음 — 어울리는 곡이 확실할 때만 대본에 "bgm": "<등록부 id>"
     pw = None
     if bgm:   # 배경음: 등록부 곡(assets/bgm/bgm.yaml) 또는 직접 합성 패드, 목소리가 나오면 자동으로 낮춤 (docs/19 A1)
         from . import edit10

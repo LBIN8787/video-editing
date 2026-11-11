@@ -77,7 +77,8 @@ python -m ytflow check <프로젝트> --upto G4    # 대본까지만
 | MUST | 레이아웃 점검 비어 있음 (`04_assets/layout_qa.json`: 화살표·글자 겹침) | ✅ |
 | MUST | 싱크: 자막 0.5초 안 ≥ 95%, 화면−소리 ≤ 0.1초 (`sync_qa.json`), 중앙값 ≤ 0.2초 | ✅ |
 | MUST | 프레임 시트를 눈으로 확인 (`final_sheet.png`): 잘린 글자·겹침·빈 화면 | EYE |
-| MUST (롱폼) | **움직임(v10)**: 완성본 측정 화면 변화 ≥10회/분 · 정지 화면 비율 ≤0.45 (`motion.json`, 렌더 끝에 자동) | ✅ |
+| SHOULD | **움직임(v12)**: 완성본 측정 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (`motion.json`) — 숫자를 채우려 움직임을 더하지 않음 | ✅ |
+| EYE | 화면이 정신없지 않은가 · 배경음이 억지스럽지 않은가 (애매하면 빼기) | 사람 눈 |
 | SHOULD | 음량 −14 LUFS 근처 (`delivery_check.json`) | ✅ |
 | SHOULD | 업로드 최종본은 ElevenLabs 목소리 (edge-tts 는 초안) | ✅ (`03_voice/el` 또는 channel tts) |
 

@@ -257,8 +257,8 @@ def run(path: Path, upto: str = "G8") -> Report:
         R.add("G6", "SHOULD", "납품 점검(음량 등)", dc.get("status") == "completed", dc.get("status"))
         mo = _load(edt / "motion.json") or {}
         if mo:  # 완성본을 실제로 잰 움직임 (docs/19 A4) — 대본에 효과를 적은 것만으로는 통과 못 함
-            R.add("G6", "MUST" if longform else "SHOULD", "움직임(v10): 화면 변화 ≥10회/분 · 정지 화면 비율 ≤0.45 (완성본 측정)",
-                  mo.get("change_events_per_min", 0) >= 10 and mo.get("static_ratio", 1) <= 0.45,
+            R.add("G6", "SHOULD", "움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선)",
+                  mo.get("change_events_per_min", 0) >= 8 and mo.get("static_ratio", 1) <= 0.5,
                   f"변화 {mo.get('change_events_per_min')}/분 · 정지 {mo.get('static_ratio')}")
         el = any((path / "03_voice").glob("el*")) or any((path / "03_voice").glob("*eleven*"))
         try:

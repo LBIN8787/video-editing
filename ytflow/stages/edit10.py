@@ -1,4 +1,5 @@
-"""편집 기준 v10 (manual 05 §0-4, docs/19) — 기본으로 켜짐. 끄려면 대본 맨 위 "edit_v10": false.
+"""편집 기준 v10→v12 (manual 05 §0-4) — 기본으로 켜짐. 끄려면 대본 맨 위 "edit_v10": false.
+v12(2026-11-11 사용자 판정 '너무 정신없다·배경음 억지'): 전환은 부드러운 겹침, 장 표지만 밀기, 카메라는 한 방향으로 아주 천천히, 배경음은 기본 없음.
 
 A2 장면 전환   : 딱 자르기 대신 앞 장면 끝 0.3초 + 다음 장면 처음 0.35초에 걸친 전환 (wipe·push·zoom·iris 를 돌려 씀)
 A3 장면 안 움직임: 박자마다, 긴 박자는 4.5초마다 카메라가 살짝 다가가거나 옮겨 감 (멈춘 화면 줄이기)
@@ -18,10 +19,11 @@ WHOOSH = {"wipe": "whoosh", "push": "whoosh-short", "zoom": "whoosh", "iris": "w
 
 
 def kind_of(spec: dict, sc_id: int) -> str:
+    """v12 (사용자 판정 '너무 정신없다'): 보통 장면 사이는 부드러운 겹침(fade), 장 표지로 들어갈 때만 밀기(push)."""
     sc = next((s for s in spec["scenes"] if s["id"] == sc_id), None)
     if sc and sc.get("tr"):
         return sc["tr"]
-    return KINDS[(sc_id - 2) % len(KINDS)]
+    return "push" if sc and sc.get("type") == "chapter" else "fade"
 
 
 def apply(D, spec: dict, sc: dict, bt: list, dur: float):
@@ -31,12 +33,14 @@ def apply(D, spec: dict, sc: dict, bt: list, dur: float):
     # ---- 들어오기 (첫 장면 제외)
     if not first:
         k = kind_of(spec, sc["id"])
-        if k == "wipe":
+        if k == "fade":
+            D.js.append('tl.fromTo("#root",{opacity:0},{opacity:1,duration:0.35,ease:"power1.out"},0);')
+        elif k == "wipe":
             i = D._id()
             D.top = getattr(D, "top", []) + [f'<div id="{i}" style="position:absolute;inset:0;background:{acc};z-index:50" data-layout-ignore></div>']
             D.js.append(f'tl.fromTo("#{i}",{{x:0}},{{x:{W},duration:0.4,ease:"power3.in"}},0);')
         elif k == "push":
-            D.js.append(f'tl.fromTo("#root",{{x:{W * 0.35:.0f},filter:"blur(10px)"}},{{x:0,filter:"blur(0px)",duration:0.4,ease:"power3.out"}},0);')
+            D.js.append(f'tl.fromTo("#root",{{x:{W * 0.12:.0f},opacity:0}},{{x:0,opacity:1,duration:0.5,ease:"power2.out"}},0);')
         elif k == "zoom":
             D.js.append('tl.fromTo("#root",{scale:0.82,filter:"blur(14px)",opacity:0.4},{scale:1,filter:"blur(0px)",opacity:1,duration:0.45,ease:"power3.out"},0);')
         elif k == "iris":
@@ -46,19 +50,20 @@ def apply(D, spec: dict, sc: dict, bt: list, dur: float):
         nxt = ids[ids.index(sc["id"]) + 1]
         k = kind_of(spec, nxt)
         t = max(0.0, dur - 0.3)
-        if k == "wipe":
+        if k == "fade":
+            D.js.append(f'tl.to("#root",{{opacity:0,duration:0.25,ease:"power1.in"}},{t:.2f});')
+        elif k == "wipe":
             i = D._id()
             D.top = getattr(D, "top", []) + [f'<div id="{i}" style="position:absolute;inset:0;background:{acc};z-index:50;transform:translateX(-{W}px)" data-layout-ignore></div>']
             D.js.append(f'tl.fromTo("#{i}",{{x:{-W}}},{{x:0,duration:0.3,ease:"power3.out"}},{t:.2f});')
         elif k == "push":
-            D.js.append(f'tl.to("#root",{{x:{-W * 0.35:.0f},filter:"blur(10px)",duration:0.3,ease:"power3.in"}},{t:.2f});')
+            D.js.append(f'tl.to("#root",{{x:{-W * 0.12:.0f},opacity:0,duration:0.3,ease:"power2.in"}},{t:.2f});')
         elif k == "zoom":
             D.js.append(f'tl.to("#root",{{scale:1.2,filter:"blur(14px)",opacity:0.4,duration:0.3,ease:"power3.in"}},{t:.2f});')
         elif k == "iris":
             D.js.append(f'tl.to("#root",{{clipPath:"circle(0% at 50% 50%)",duration:0.3,ease:"power2.in"}},{t:.2f});')
-        D.sfx.append((WHOOSH[k], max(0.0, dur - 0.25)))
-        if next(s for s in spec["scenes"] if s["id"] == nxt).get("type") == "chapter":
-            D.sfx.append(("riser", max(0.0, dur - 3.0)))   # 장 표지 직전에 살짝 끌어올림 (3초만 씀)
+        if k == "push":   # 소리는 장이 바뀔 때만, 작게 (v12)
+            D.sfx.append(("whoosh-short", max(0.0, dur - 0.25)))
     # ---- 장면 안 움직임 (카메라가 박자마다 다가감)
     fx = sc.get("fx") or []
     if sc.get("type") not in NO_PULSE and not ({"tilt", "dolly"} & set(fx if isinstance(fx, list) else [fx])):
@@ -69,13 +74,8 @@ def apply(D, spec: dict, sc: dict, bt: list, dur: float):
                 marks.append(b0)
             n = int(bd // 4.5)
             marks += [b0 + bd * (j + 1) / (n + 1) for j in range(n)] if bd > 5 else []
-        # 박자마다 방향을 바꾸며 끊임없이 천천히 다가가거나 옮겨 감 (멈춘 화면 없이, docs/15 '천천히 다가가기')
-        marks = [0.4] + [m for m in sorted(marks) if 0.8 < m < dur - 1.2] + [dur - 0.3]
-        for j in range(len(marks) - 1):
-            a, b = marks[j], marks[j + 1]
-            s = 1.0 + 0.04 * ((j + 1) % 2) + 0.015 * j / max(1, len(marks))
-            x = (-1) ** j * 18
-            D.js.append(f'tl.to("#layer",{{scale:{s:.3f},x:{x},duration:{b - a:.2f},ease:"sine.inOut"}},{a:.2f});')
+        # v12: 장면 내내 한 방향으로 아주 천천히 다가가기만 (박자마다 흔들지 않음)
+        D.js.append(f'tl.fromTo("#layer",{{scale:1}},{{scale:1.025,duration:{max(1.0, dur - 0.3):.2f},ease:"none"}},0);')
 
 
 # ---------------------------------------------------------------- B11 정리판

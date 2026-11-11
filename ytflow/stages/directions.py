@@ -656,7 +656,7 @@ def apply_fx(D, project, spec, sc, bt, dur, adir):
     if "tilt" in fx or "dolly" in fx:
         D.css.append("#root{perspective:1800px}#layer{transform-origin:50% 55%;will-change:transform}")
     if "tilt" in fx:
-        rx, ry = R.choice([12, -10, 14]), R.choice([-16, 14, -12])
+        rx, ry = R.choice([5, -4, 6]), R.choice([-6, 5, -5])   # v12: 기울기 약하게
         D.js.append(f'tl.fromTo("#layer",{{rotationX:{rx},rotationY:{ry},scale:0.9,y:40}},'
                     f'{{rotationX:0,rotationY:0,scale:1,y:0,duration:2.4,ease:"power3.out"}},0);')
         if dur > 6:
@@ -665,7 +665,7 @@ def apply_fx(D, project, spec, sc, bt, dur, adir):
         D.js.append(f'tl.fromTo("#layer",{{scale:1.0,x:{R.choice([30, -30])}}},{{scale:1.07,x:0,duration:{dur:.2f},ease:"none"}},0);')
     if "dust" in fx:
         parts = []
-        for k in range(46):
+        for k in range(18):   # v12: 먼지 적게
             x, y, s = R.uniform(0, W), R.uniform(0, HH), R.uniform(2, 7)
             j = D._id()
             parts.append(f'<div id="{j}" style="position:absolute;left:{x:.0f}px;top:{y:.0f}px;width:{s:.1f}px;height:{s:.1f}px;border-radius:50%;'
