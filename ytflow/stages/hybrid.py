@@ -896,10 +896,12 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     (a / "fonts").mkdir(parents=True, exist_ok=True)
     shutil.copy(hyper.GSAP, a / "gsap.min.js")
     _env_skin = os.environ.get("YTFLOW_SKIN")
+    from . import identity   # v15 카테고리 개성: 장 표지 모양·증거판·칠판 (brand 가 있을 때만)
+    identity.prepare(spec, sc)
     scene_skin = sc.get("skin")
     if not scene_skin and spec.get("bg_mode", "situation") == "situation" and spec.get("edit_v10", True):
         from . import edit10, skin as _skin_m   # 상황별 바탕 (manual 05 §0-6): 장면이 하는 일에 맞는 팩
-        scene_skin = edit10.situation_skin(sc, _skin_m.current())
+        scene_skin = identity.situation_skin(spec, sc, _skin_m.current()) or edit10.situation_skin(sc, _skin_m.current())
     if scene_skin:   # 장면별 그래픽 팩 (스타일 조합: 한 영상 안에서 구간마다 다른 팩)
         os.environ["YTFLOW_SKIN"] = scene_skin
     try:
@@ -921,12 +923,16 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     from . import backdrop   # 장면 목적에 맞는 바탕 (film·grid·spot·tint·photo, manual 05 §0-2)
     kind = backdrop.auto(sc, bool(spec.get("footage")))
     chap = int(sc.get("chapter", 0) or 0)
-    tag = {"tint": f"_c{chap}", "photo": f"_{sc.get('bg_src', '')}"}.get(kind, "")
+    tag = {"tint": f"_c{chap}", "photo": f"_{sc.get('bg_src', '')}",
+           "duotone": f"_{sc.get('bg_src', '')}_{''.join(c.strip('#') for c in (sc.get('_duo') or []))}",
+           "glow": f"_{''.join(c.strip('#') for c in (sc.get('_duo') or []))}", "cork": f"_c{chap}", "chalk": f"_c{chap}", "dash": f"_c{chap}"}.get(kind, "")
+    still = backdrop.photo_still(project, spec, sc.get("bg_src")) if kind in ("photo", "duotone") else None
+    if still is not None and still.exists():   # 같은 키라도 사진을 바꾸면 바탕도 새로 (파일 크기로 구분)
+        tag += f"_{still.stat().st_size % 100000}"
     bg_name = f"bg_{D.skin['id']}_{kind}{tag}_b3.jpg"   # _b3: 바탕 밝기 규칙 판 (바꾸면 올림) — b3: 밝은 팩 사진 바탕을 옅게
     bg = a / bg_name
     if not bg.exists():
-        still = backdrop.photo_still(project, spec, sc.get("bg_src")) if kind == "photo" else None
-        backdrop.make(D.skin, kind, W, HH, chap, still).save(bg, quality=92)
+        backdrop.make(D.skin, kind, W, HH, chap, still, sc.get("_duo")).save(bg, quality=92)
     if sc.get("clip"):  # 원본 영상 구간을 장면 길이만큼 잘라 넣는다 (소리 없음)
         src = project.dir("assets") / "footage" / spec["footage"][sc["clip"]["src"]]["file"]
         out = a / f"clip_{sc['id']:03d}.mp4"
@@ -934,7 +940,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
                         "-t", f"{dur + 0.5:.2f}", "-an", "-vf", "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=30",
                         "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p", str(out)], check=True)
         sc["_clipfile"] = out.name
-    sc["_map"] = spec.get("map")
+    sc["_map"] = sc.get("map") or spec.get("map")   # 장면마다 다른 지도도 가능
     sc["_chapters"] = [x.get("title", "") for x in spec["scenes"] if x.get("type") == "chapter"]
     sc["_project_dir"] = str(project.path)   # 새 연출(directions.py)이 박자 음성·단어 시각을 찾을 때
     sc["_prices"] = project.dir("research") / "prices"
@@ -1129,6 +1135,12 @@ def sfx_files() -> dict:
 
 def make(project: Project, workers: int = 3) -> Path:
     spec = json.loads((project.dir("script") / "hybrid.json").read_text(encoding="utf-8"))
+    if spec.get("brand"):   # v15 카테고리 개성: 기본 팩을 따로 정하지 않았으면 카테고리의 기본 팩
+        from . import identity
+        idn = identity.get(spec)
+        e = config.load("pipeline").get("edit", {}) or {}
+        if idn and idn.get("base_skin") and not os.environ.get("YTFLOW_SKIN") and not e.get("skin"):
+            os.environ["YTFLOW_SKIN"] = idn["base_skin"]
     chapters = {sc["chapter"]: sc for sc in spec["scenes"] if sc["type"] == "chapter"}
     for sc in spec["scenes"]:  # 장 표시(왼쪽 위)
         ch = chapters.get(sc.get("chapter"))

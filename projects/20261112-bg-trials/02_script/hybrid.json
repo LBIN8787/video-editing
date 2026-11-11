@@ -1,0 +1,410 @@
+{
+ "title": "v15 시험판 — 카테고리 개성·증거판·칠판·듀오톤",
+ "core_message": "카테고리마다 보는 순간 알 수 있는 화면",
+ "brand": null,
+ "scenes": [
+  {
+   "type": "chapter",
+   "chapter": 1,
+   "num": "2",
+   "title": "정부는 어떻게 막나",
+   "icon": "shield-alert",
+   "beats": [
+    {
+     "say": "여기까지가 무슨 일이 있었는지였고요. 두 번째, 정부는 어떻게 막겠다는 걸까요?"
+    }
+   ],
+   "id": 1,
+   "brand": "issues",
+   "look": "board",
+   "sub": "수능 AI 안경 대책"
+  },
+  {
+   "type": "map_causal",
+   "chapter": 1,
+   "label": "이 영상 팩트시트 F1~F10 정리",
+   "beats": [
+    {
+     "say": "한 장으로 보면 이렇습니다. AI 안경이 나오자 정부는 금지와 처벌을 세게 했습니다.",
+     "reveal": [
+      "glass",
+      "rule",
+      "punish"
+     ],
+     "draw": [
+      [
+       "glass",
+       "rule"
+      ],
+      [
+       "rule",
+       "punish"
+      ]
+     ],
+     "active": "rule"
+    },
+    {
+     "say": "그런데 겉으로 구별이 어렵다 보니, 감독관은 부담을, 수험생은 오해를 걱정하게 됐습니다.",
+     "reveal": [
+      "hard",
+      "teacher",
+      "student"
+     ],
+     "draw": [
+      [
+       "glass",
+       "hard"
+      ],
+      [
+       "hard",
+       "teacher"
+      ],
+      [
+       "hard",
+       "student"
+      ]
+     ],
+     "active": "hard"
+    }
+   ],
+   "id": 2,
+   "brand": "issues",
+   "map": {
+    "nodes": {
+     "glass": {
+      "label": "AI 스마트안경 등장",
+      "icon": "camera",
+      "x": 250,
+      "y": 400
+     },
+     "rule": {
+      "label": "반입 금지·착용만 해도 무효",
+      "icon": "ban",
+      "x": 800,
+      "y": 400
+     },
+     "punish": {
+      "label": "형사 고발·응시 제한",
+      "icon": "gavel",
+      "x": 1450,
+      "y": 400
+     },
+     "hard": {
+      "label": "겉으로 구별 어려움",
+      "icon": "eye",
+      "x": 550,
+      "y": 720
+     },
+     "teacher": {
+      "label": "감독관: 민원·책임 부담",
+      "icon": "users",
+      "x": 1100,
+      "y": 720
+     },
+     "student": {
+      "label": "수험생: 일반 안경 오해 걱정",
+      "icon": "user",
+      "x": 1600,
+      "y": 720
+     }
+    },
+    "edges": [
+     [
+      "glass",
+      "rule"
+     ],
+     [
+      "rule",
+      "punish"
+     ],
+     [
+      "glass",
+      "hard"
+     ],
+     [
+      "hard",
+      "teacher"
+     ],
+     [
+      "hard",
+      "student"
+     ]
+    ]
+   }
+  },
+  {
+   "type": "chapter",
+   "chapter": 2,
+   "num": "3",
+   "title": "현장의 두 가지 걱정",
+   "icon": "users",
+   "beats": [
+    {
+     "say": "그럼 이제 막을 수 있을까요? 현장의 목소리는 조금 다릅니다."
+    }
+   ],
+   "id": 3,
+   "brand": "issues",
+   "look": "photo",
+   "bg_src": "exam"
+  },
+  {
+   "type": "chapter",
+   "chapter": 3,
+   "num": "2",
+   "title": "AI는 왜 지어낼까",
+   "icon": "brain",
+   "beats": [
+    {
+     "say": "두 번째, AI는 왜 지어낼까요? 힌트는 '시험'에 있습니다."
+    }
+   ],
+   "id": 4,
+   "brand": "curiosity",
+   "look": "chalk"
+  },
+  {
+   "type": "map_causal",
+   "chapter": 3,
+   "label": "이 영상 팩트시트 F1~F2 정리",
+   "beats": [
+    {
+     "say": "한 장으로 보면 이렇습니다. 다음 단어를 맞히도록 배우고, 드문 사실은 참과 거짓을 구별하기 어렵습니다.",
+     "reveal": [
+      "learn",
+      "rare"
+     ],
+     "draw": [
+      [
+       "learn",
+       "rare"
+      ]
+     ],
+     "active": "rare"
+    },
+    {
+     "say": "여기에 '찍으면 이득'인 채점이 더해지면, 모를 때도 자신 있게 지어내는 AI가 됩니다.",
+     "reveal": [
+      "score",
+      "guess",
+      "halluc"
+     ],
+     "draw": [
+      [
+       "rare",
+       "guess"
+      ],
+      [
+       "score",
+       "guess"
+      ],
+      [
+       "guess",
+       "halluc"
+      ]
+     ],
+     "active": "halluc"
+    }
+   ],
+   "id": 5,
+   "brand": "curiosity",
+   "map": {
+    "nodes": {
+     "learn": {
+      "label": "다음 단어 맞히기 학습",
+      "icon": "message-circle",
+      "x": 300,
+      "y": 400
+     },
+     "rare": {
+      "label": "드문 사실: 참·거짓 구별 어려움",
+      "icon": "search",
+      "x": 850,
+      "y": 400
+     },
+     "score": {
+      "label": "'모르겠다' = 0점 채점",
+      "icon": "clipboard-list",
+      "x": 300,
+      "y": 720
+     },
+     "guess": {
+      "label": "모를 때도 찍기",
+      "icon": "target",
+      "x": 1150,
+      "y": 720
+     },
+     "halluc": {
+      "label": "그럴듯한 지어내기(환각)",
+      "icon": "circle-alert",
+      "x": 1620,
+      "y": 560
+     }
+    },
+    "edges": [
+     [
+      "learn",
+      "rare"
+     ],
+     [
+      "rare",
+      "guess"
+     ],
+     [
+      "score",
+      "guess"
+     ],
+     [
+      "guess",
+      "halluc"
+     ]
+    ]
+   }
+  },
+  {
+   "type": "chapter",
+   "chapter": 4,
+   "num": "1",
+   "title": "숫자로 보면",
+   "icon": "chart-line",
+   "beats": [
+    {
+     "say": "첫 번째, 먼저 숫자부터 보겠습니다."
+    }
+   ],
+   "id": 6,
+   "brand": "market",
+   "look": "dash"
+  },
+  {
+   "type": "chapter",
+   "chapter": 5,
+   "num": "2",
+   "title": "엔비디아만의 이유",
+   "icon": "building-2",
+   "beats": [
+    {
+     "say": "여기까지가 숫자였고요. 두 번째, 엔비디아만의 이유는 무엇이었을까요?"
+    }
+   ],
+   "id": 7,
+   "brand": "market",
+   "look": "photo",
+   "bg_src": "nyse"
+  },
+  {
+   "type": "chapter",
+   "chapter": 6,
+   "num": "1",
+   "title": "돈 — AI 회사의 상장",
+   "icon": "landmark",
+   "beats": [
+    {
+     "say": "첫 번째, 돈 이야기부터 보겠습니다."
+    }
+   ],
+   "id": 8,
+   "brand": "ai",
+   "look": "window"
+  },
+  {
+   "type": "chapter",
+   "chapter": 7,
+   "num": "2",
+   "title": "신뢰 — AI 칩 회사",
+   "icon": "microchip",
+   "beats": [
+    {
+     "say": "두 번째, 같은 날 나온 신뢰 이야기입니다."
+    }
+   ],
+   "id": 9,
+   "brand": "ai",
+   "look": "photo",
+   "bg_src": "dc"
+  }
+ ],
+ "footage": {
+  "exam": {
+   "file": "exam.mp4",
+   "credit": "Public domain · 작자 미상 · 위키미디어 공용 · Richard Huish College Exam Hall",
+   "url": "https://commons.wikimedia.org/wiki/File:Richard_Huish_College_Exam_Hall.jpg",
+   "license": "Public domain"
+  },
+  "nyse": {
+   "file": "nyse.mp4",
+   "credit": "CC BY 2.0 · Kevin Hutchinson · 위키미디어 공용 · NYSE",
+   "url": "https://commons.wikimedia.org/wiki/File:NYSE.jpg",
+   "license": "CC BY 2.0"
+  },
+  "dc": {
+   "file": "dc.mp4",
+   "credit": "CC BY 4.0 · Hay Kranen · 위키미디어 공용 · Microsoft Data Center Middenmeer, the Netherlands ",
+   "url": "https://commons.wikimedia.org/wiki/File:Microsoft_Data_Center_Middenmeer,_the_Netherlands_-_1.jpg",
+   "license": "CC BY 4.0"
+  }
+ },
+ "map": {
+  "nodes": {
+   "glass": {
+    "label": "AI 스마트안경 등장",
+    "icon": "camera",
+    "x": 250,
+    "y": 400
+   },
+   "rule": {
+    "label": "반입 금지·착용만 해도 무효",
+    "icon": "ban",
+    "x": 800,
+    "y": 400
+   },
+   "punish": {
+    "label": "형사 고발·응시 제한",
+    "icon": "gavel",
+    "x": 1450,
+    "y": 400
+   },
+   "hard": {
+    "label": "겉으로 구별 어려움",
+    "icon": "eye",
+    "x": 550,
+    "y": 720
+   },
+   "teacher": {
+    "label": "감독관: 민원·책임 부담",
+    "icon": "users",
+    "x": 1100,
+    "y": 720
+   },
+   "student": {
+    "label": "수험생: 일반 안경 오해 걱정",
+    "icon": "user",
+    "x": 1600,
+    "y": 720
+   }
+  },
+  "edges": [
+   [
+    "glass",
+    "rule"
+   ],
+   [
+    "rule",
+    "punish"
+   ],
+   [
+    "glass",
+    "hard"
+   ],
+   [
+    "hard",
+    "teacher"
+   ],
+   [
+    "hard",
+    "student"
+   ]
+  ]
+ },
+ "package": {}
+}

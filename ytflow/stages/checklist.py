@@ -219,6 +219,17 @@ def run(path: Path, upto: str = "G8") -> Report:
                   not (len(last2) == 2 and all(x == cur for x in last2)), f"이번 {cur} · 직전 {last2}")
         except Exception:
             pass
+        if spec.get("scenes"):   # v15 카테고리 개성 (05 §0-7)
+            R.add("G5", "SHOULD", "v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게)",
+                  bool(spec.get("brand") or any(s.get("brand") for s in spec["scenes"])), spec.get("brand", ""))
+            fo = spec.get("footage") or {}
+            keys = list(fo)
+            covers = [s.get("bg_src") or (keys[(int(s.get("chapter", 1) or 1) - 1) % len(keys)] if keys and not s.get("look") else None)
+                      for s in spec["scenes"] if s.get("type") == "chapter"]   # 대본에 없으면 렌더러가 고르는 것(edit10.prepare)과 같게
+            covers = [c for c in covers if c]
+            nasa = [c for c in covers if "NASA" in (fo.get(c, {}).get("credit") or "")]
+            R.add("G5", "SHOULD", "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음",
+                  len(covers) == len(set(covers)) and len(nasa) <= 1, f"표지 {covers} · NASA {len(nasa)}")
         prev = _prev_episode_signature(path, spec)
         if prev is not None:
             cur = set(vs["signature"])

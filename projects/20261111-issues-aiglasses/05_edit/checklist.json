@@ -1,7 +1,7 @@
 {
  "project": "20261111-issues-aiglasses",
- "manual_version": "13",
- "checked": "2026-11-11T07:45:13",
+ "manual_version": "14",
+ "checked": "2026-11-11T11:08:34",
  "pass": true,
  "rows": [
   {
@@ -294,6 +294,20 @@
   {
    "gate": "G5",
    "level": "SHOULD",
+   "item": "v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게)",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음",
+   "ok": false,
+   "detail": "표지 ['seoul', 'seoul2', 'seoul', 'seoul2'] · NASA 4"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
    "item": "반복 피로: 같은 채널 직전 편과 화면 구성 겹침 70% 이하 (Jaccard)",
    "ok": true,
    "detail": "43%"
@@ -381,6 +395,83 @@
    "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
    "ok": true,
    "detail": "python -m ytflow style-pick <프로젝트>"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "final.mp4",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "레이아웃 점검 비어 있음",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
+   "ok": true,
+   "detail": "{'within_0_5s': 1.0, 'p95_abs_offset': 0.07, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.067}"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "납품 점검(음량 등)",
+   "ok": true,
+   "detail": "completed"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선)",
+   "ok": false,
+   "detail": "변화 6.2/분 · 정지 0.65"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "최종 목소리 ElevenLabs",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "제목 후보 3개 + 이유",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "썸네일 A/B/C + 점검 ok",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "SHOULD",
+   "item": "제목 앞 22자 안에 질문/핵심",
+   "ok": false,
+   "detail": "AI 안경 컨닝, 수능에서 정말 막을 수"
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "GitHub Release 업로드",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "episodes.md 기록",
+   "ok": true,
+   "detail": "ch-issues"
   }
  ]
 }

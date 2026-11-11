@@ -5,11 +5,14 @@
   1930년 이전 발행물은 미국에서 퍼블릭 도메인. 사진은 대부분 'No known restrictions'.
   항목마다 rights 를 저장하고, 'copyright' 표기가 있으면 쓰지 않습니다.
 - NASA images-api (퍼블릭 도메인) — media.py/clips 쪽에서 사용.
+- 위키미디어 공용(Commons) API: 주제에 맞는 사진 (v15 — 장 표지가 늘 NASA 사진이 되지 않게).
+  라이선스는 퍼블릭 도메인·CC0·CC BY 만 (CC BY-SA·NC·ND 는 거름). 출처 표기(credit)를 함께 저장.
 
 사진은 still_to_clip() 으로 16:9 무음 영상(세로 사진은 흐린 배경 채움)으로 바꿔
 hybrid.json 의 footage 에 넣습니다. 하이브리드 렌더러가 천천히 다가가는 움직임을 더합니다.
 
     python -m ytflow archive search "influenza 1918" [--films]
+    python -m ytflow archive commons "exam classroom"
 """
 from __future__ import annotations
 
@@ -30,7 +33,7 @@ def _get(url: str, timeout: int = 40) -> bytes:
         except Exception as e:  # noqa: BLE001
             if k == 3:
                 raise
-            time.sleep(4 * (k + 1))
+            time.sleep(10 * (k + 1))   # LoC·위키미디어 429 대비
     return b""
 
 
@@ -82,7 +85,67 @@ def still_to_clip(img: Path, out: Path, dur: float = 30.0, tone: str = "") -> Pa
     return out
 
 
+OK_LICENSE = ("public domain", "cc0", "cc by 1.0", "cc by 2.0", "cc by 2.5", "cc by 3.0", "cc by 4.0", "no restrictions", "pdm")
+
+
+def license_ok(name: str) -> bool:
+    n = (name or "").lower().strip()
+    if any(x in n for x in ("-sa", " sa ", "nc", "nd", "share")):
+        return False
+    return any(n.startswith(x) for x in OK_LICENSE)
+
+
+def commons_search(term: str, n: int = 12, width: int = 1920) -> list[dict]:
+    """위키미디어 공용 사진 검색 → 허용 라이선스만. [{title, license, artist, url, page, credit}]"""
+    q = urllib.parse.urlencode({"action": "query", "generator": "search", "gsrsearch": f"filetype:bitmap {term}", "gsrnamespace": 6,
+                                "gsrlimit": n * 2, "prop": "imageinfo", "iiprop": "url|extmetadata|size", "iiurlwidth": width, "format": "json"})
+    d = json.loads(_get("https://commons.wikimedia.org/w/api.php?" + q))
+    out = []
+    for p in (d.get("query") or {}).get("pages", {}).values():
+        ii = (p.get("imageinfo") or [{}])[0]
+        m = ii.get("extmetadata") or {}
+        lic = (m.get("LicenseShortName") or {}).get("value", "")
+        if not license_ok(lic) or ii.get("width", 0) < 1200:
+            continue
+        import re as _re
+        artist = _re.sub(r"<[^>]+>", "", (m.get("Artist") or {}).get("value", "")).strip()[:60]
+        if artist.lower().startswith("no machine-readable") or artist.lower().startswith("unknown"):
+            artist = ""
+        title = p["title"].removeprefix("File:")
+        out.append({"title": title, "license": lic, "artist": artist, "url": ii.get("thumburl") or ii.get("url"),
+                    "page": ii.get("descriptionurl", ""), "credit": f"{lic} · {artist or '작자 미상'} · 위키미디어 공용 · {title.rsplit('.', 1)[0][:50]}"})
+    return out[:n]
+
+
+def commons_file(title: str, width: int = 1920) -> dict | None:
+    """파일 이름 하나로 라이선스·작자·주소 (검색보다 가벼움). 허용 라이선스가 아니면 None."""
+    q = urllib.parse.urlencode({"action": "query", "titles": "File:" + title, "prop": "imageinfo",
+                                "iiprop": "url|extmetadata", "iiurlwidth": width, "format": "json"})
+    d = json.loads(_get("https://commons.wikimedia.org/w/api.php?" + q))
+    for p in (d.get("query") or {}).get("pages", {}).values():
+        ii = (p.get("imageinfo") or [{}])[0]
+        m = ii.get("extmetadata") or {}
+        lic = (m.get("LicenseShortName") or {}).get("value", "")
+        if not license_ok(lic):
+            return None
+        import re as _re
+        artist = _re.sub(r"<[^>]+>", "", (m.get("Artist") or {}).get("value", "")).strip()[:60]
+        if artist.lower().startswith(("no machine-readable", "unknown")):
+            artist = ""
+        return {"title": title, "license": lic, "artist": artist, "url": ii.get("thumburl") or ii.get("url"), "page": ii.get("descriptionurl", ""),
+                "credit": f"{lic} · {artist or '작자 미상'} · 위키미디어 공용 · {title.rsplit('.', 1)[0][:50]}"}
+    return None
+
+
 def main(argv: list[str]) -> None:
+    if argv and argv[0] == "commons":
+        for k, t in enumerate(argv[1:]):
+            if k:
+                time.sleep(6)   # 연달아 부르면 429
+            print("#", t)
+            for r in commons_search(t):
+                print(f"  {r['license']:14s} | {r['title'][:70]} | {r['page']}")
+        return
     if not argv or argv[0] != "search":
         print(__doc__)
         return

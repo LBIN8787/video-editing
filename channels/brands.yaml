@@ -61,3 +61,52 @@ brands:
       longform_deep: ch-issues          # 12~15분 심층 (지식한입·김지윤식 구조)
       longform_quick: ch-issues         # 5~8분 빠른 정리 (크랩식 구조) — 같은 라인, 길이만 다르게
     manual: manual/08-issues.md
+
+# ---------------------------------------------------------------- v15 카테고리 개성 (identity)
+# 채널을 몇 개로 묶어 운영해도(예: 세 채널) 카테고리마다 '보는 순간 알 수 있는' 편집이 남도록.
+# 한 편의 hybrid.json 에 "brand": "<id>" 를 쓰면 ytflow/stages/identity.py 가 적용 (장면에 "brand" 를 쓰면 그 장면만).
+#   concept        한 줄 컨셉 (세계관)
+#   base_skin      기본 그래픽 팩
+#   chapter_looks  장 표지 모양을 장 번호 순서로 돌려 씀: photo(듀오톤 자료 사진)·board(증거판 카드)·chalk(칠판)·dash(대시보드)·window(앱 창)
+#   duotone        자료 사진을 물들일 두 색 [어두운 색, 밝은 색]
+#   structure      인과 지도(map_causal)를 그릴 판: board(증거판) · chalk(칠판) · 없음(상황별 팩 그대로)
+#   situation      상황별 팩 덮어쓰기 (manual 05 §0-6 표의 카테고리판)
+#   signature      이 카테고리를 대표하는 연출 레시피 (styles/recipes) — 한 편에 2개 이상
+#   photo_hint     장 표지 사진 고르는 법 (NASA 위성 사진에 고정하지 않음)
+identity:
+  issues:
+    concept: "사건 파일 — 코르크 증거판·붉은 실·타자기 도장, 어두운 다큐 톤"
+    base_skin: dark-doc
+    chapter_looks: [board, photo, board, photo]
+    duotone: ["#14161C", "#C9473A"]
+    structure: board
+    situation: {data: [slate, midnight], voice: [dark-doc, forest], structure: [corkboard]}
+    signature: [issue-dark-montage, statement-brief, map-journey, data-choropleth]
+    photo_hint: "사건 현장·기관 건물·관련 장소 (위키미디어 공용 PD·CC BY, 정부 공개 사진)"
+  market:
+    concept: "트레이딩 데스크 — 대시보드 바탕·시세 차트·공시 형광펜, 차가운 남색"
+    base_skin: slate
+    chapter_looks: [dash, photo, dash, photo]
+    duotone: ["#0B1626", "#4C8DE6"]
+    structure: null
+    situation: {data: [slate, midnight], voice: [clean-white, slate], structure: [blueprint, slate]}
+    signature: [data-report, hybrid-causal, statement-brief, blueprint-explainer]
+    photo_hint: "거래소·회사 건물·공장·항만 (CC BY·PD, 회사 공식 보도 사진)"
+  curiosity:
+    concept: "교실과 기록 보관소 — 칠판 판서·옛 사진(세피아)·지도 여정, 밝은 종이"
+    base_skin: clean-white
+    chapter_looks: [chalk, photo, chalk, photo]
+    duotone: ["#2A2118", "#D9B98A"]
+    structure: chalk
+    situation: {data: [clean-white, slate], voice: [clean-white, paper-sketch], structure: [chalkboard]}
+    signature: [archive-doc, map-journey, kinetic-type, paper-column]
+    photo_hint: "그 시대·그 장소의 기록 사진 (의회도서관·위키미디어 공용 PD)"
+  ai:
+    concept: "제품 발표 무대 — 앱 창·은은한 빛·코드와 대화 화면, 짙은 남색과 청록"
+    base_skin: midnight
+    chapter_looks: [window, photo, window, photo]
+    duotone: ["#08121C", "#2DD4BF"]
+    structure: null
+    situation: {data: [midnight, blueprint], voice: [midnight, dark-doc], structure: [blueprint, midnight]}
+    signature: [ai-chat, terminal-typing, screen-zoom, blueprint-explainer]
+    photo_hint: "데이터센터·연구소·제품 화면 (PD·CC0·CC BY, 회사 공식 이미지)"

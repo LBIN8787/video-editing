@@ -60,3 +60,30 @@ v14 에서 바탕은 **장면이 하는 일(숫자·말·구조)**에 맞춰 바
 - 설치된 블록 목록: `.claude/skills/hyperframes-registry/references/discovery.md`
 - 배경의 역할(분위기·맥락을 정하되 내용을 가리지 않게): https://videobolt.net/motion-graphics-glossary/background-design
 - 기술·금융 영상의 '짙은 파랑 + 옅은 노드 선' 바탕 예: https://advids.co/blog/motion-graphic-explainer-video · https://hatchstudios.com/what-are-animated-backgrounds-types-styles-and-common-uses/
+
+## 6. 만든 것 (v15, 2026-11-12) — 카테고리 개성
+사용자 요청: "채널을 세 개쯤으로 묶어 운영하려는데 모든 카테고리가 같은 편집이면 걸린다 → 카테고리별 특색", "화면 전환 배경이 전부 NASA 사진 → 상황·카테고리·주제에 따라".
+
+| 만든 것 | 위치 |
+|---|---|
+| 카테고리 개성 표 (컨셉·기본 팩·장 표지 모양·인과 지도 판·듀오톤 색·대표 연출·사진 고르는 법) | `channels/brands.yaml` 의 `identity`, `manual/05-style-matching.md` §0-7 |
+| 적용 코드 (`"brand"` 하나로 장면이 바뀜) | `ytflow/stages/identity.py` |
+| 바탕 5종: 듀오톤 사진(B7) · 코르크 증거판(B1) · 칠판(B3) · 대시보드(B5) · 은은한 빛(B10, 정지) | `ytflow/stages/backdrop.py` `make_identity` |
+| 장 표지 4종: 증거판 카드 · 칠판 판서 · 대시보드 · 앱 창 (+ 듀오톤 사진 표지에 출처 표시) | `identity.chapter_*` |
+| 증거판 인과 지도 (같은 대본 reveal·draw·active → 핀 꽂은 카드 + 붉은 실) | `identity.s_board` |
+| 그래픽 팩 2종: `chalkboard`(분필 손글씨) · `corkboard` | `skins/` |
+| 주제에 맞는 사진 찾기 (위키미디어 공용, PD·CC0·CC BY 만) | `python -m ytflow archive commons "검색어"` |
+| 검사: brand 지정 · 표지 사진 중복/NASA 2장 이상 (SHOULD) | `checklist.py` G5 |
+| 시험판 (같은 검증된 문장, 새 모양 9장면) | `scripts/trials_20261112/make.py` → `projects/20261112-bg-trials` |
+
+### 세 채널로 묶는다면 (제안 — 결정은 사용자)
+| 묶음 | 카테고리 | 이유 | 편마다 쓰는 brand |
+|---|---|---|---|
+| A안 ① 세상과 돈 | issues + market | 같은 뉴스(사건→시장 영향)를 두 각도로. 증거판(사건)·대시보드(돈)가 한 채널 안에서 '오늘은 어느 쪽'을 알려 줌 | issues / market |
+| ② AI 최전선 | ai | 시청자 욕망이 가장 다름(도구·업계 소식), 쇼츠와 짝 | ai |
+| ③ 몰랐던 이유 | curiosity | 시의성 없는 상록 콘텐츠, 칠판·아카이브 톤 | curiosity |
+| B안 ① 이슈 | issues | 시사 단독(가장 앞서 있음) | issues |
+| ② 돈과 기술 | market + ai | AI 업계 돈 이야기(상장·칩)가 겹침 | market / ai |
+| ③ 몰랐던 이유 | curiosity | | curiosity |
+
+어느 안이든 개성은 **편 단위**(`brand`)로 남아, 한 채널 안에서도 카테고리가 섞여 보이지 않고 구분됩니다.
