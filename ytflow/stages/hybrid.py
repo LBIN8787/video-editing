@@ -596,8 +596,11 @@ def s_timeline(D: HDoc, sc: dict, bt: list, dur: float):
                 x = X[it["at"]]
                 yy = y - 140 - (k % 2) * 140
                 D.icon("calendar", x, yy - 70, 52, D.red, at=at)
-                D.text(x, yy, it["label"], FT("box"), fit(FT("box"), it["label"], 38, 520).size, D.ink, at=at + 0.15)
-                D.text(x, yy + 48, it.get("sub", ""), FT("note"), 34, "#5a5f6a", at=at + 0.3)
+                fl = fit(FT("box"), it["label"], 38, 520)
+                half = max(fl.getlength(it["label"]), paper.F(FT("note"), 34).getlength(it.get("sub", ""))) / 2 + 40
+                tx = min(max(x, half), W - half)   # 글자는 화면 안으로 (점·선은 제자리)
+                D.text(tx, yy, it["label"], FT("box"), fl.size, D.ink, at=at + 0.15)
+                D.text(tx, yy + 48, it.get("sub", ""), FT("note"), 34, "#5a5f6a", at=at + 0.3)
                 D.rough("line", [x, yy + 75, x, y - 22], D.red, 2.5, at=at + 0.2, dur=0.25)
             D.sfx.append(("pencil", at))
         shown = upto
