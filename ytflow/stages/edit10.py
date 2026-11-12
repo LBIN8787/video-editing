@@ -91,8 +91,9 @@ def s_recap(D, sc, bt, dur):
     r, g, b = (int(D.red.lstrip("#")[i:i + 2], 16) for i in (0, 2, 4))
     on_acc = "#15171D" if 0.299 * r + 0.587 * g + 0.114 * b > 150 else "#FFFFFF"
     y0 = 330
+    step = 150 if len(items) <= 4 else 118   # 5줄 이상이면 촘촘히 (마지막 줄이 아래 자막에 가리지 않게: 330+4*118=802)
     for k, it in enumerate(items):
-        y = y0 + k * 150
+        y = y0 + k * step
         fresh = k >= new
         b = min(k - new, len(bt) - 1) if fresh else 0
         at = (bt[b][0] + 0.3) if fresh else 0.25 + 0.15 * k
