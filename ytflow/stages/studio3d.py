@@ -83,18 +83,19 @@ const B0 = P.beats[0] || 0, B1 = P.beats[1] ?? (P.dur * 0.45);
 const parts = {};
 
 if (P.preset === "stack") {
-  const big = new THREE.Mesh(new THREE.BoxGeometry(2.2, 2.2, 2.2), white()); big.castShadow = true; big.position.set(-3.2, 1.1, 0); scene.add(big);
-  const lb = label(P.left); lb.position.set(-3.2, 3.0, 0.2); scene.add(lb);
-  const lr = label(P.right); lr.position.set(3.2, 3.9, 0.2); scene.add(lr);
+  // 같은 크기 상자: 왼쪽 1개(공급) vs 오른쪽 n개(수요) — 'N배'가 눈으로 보이게
+  const big = new THREE.Mesh(new THREE.BoxGeometry(1.0, 1.0, 1.0), white()); big.castShadow = true; big.position.set(-3.6, 0.5, 0); scene.add(big);
+  const lb = label(P.left); lb.scale.setScalar(0.8); lb.position.set(-3.6, 1.75, 0.2); scene.add(lb);
+  const lr = label(P.right); lr.scale.setScalar(0.8); lr.position.set(3.3, 2.75, 0.2); scene.add(lr);
   const cubes = [];
   for (let i = 0; i < P.n; i++) {
     const m = new THREE.Mesh(new THREE.BoxGeometry(1.0, 1.0, 1.0), white()); m.castShadow = true; m.receiveShadow = true;
-    const col = i % 3, row = Math.floor(i / 3);
-    m.userData.home = new THREE.Vector3(2.1 + col * 1.08 + (row % 2) * 0.3, 0.5 + row * 1.0, (i % 2) * 0.25);
+    const col = i % 5, row = Math.floor(i / 5);
+    m.userData.home = new THREE.Vector3(1.15 + col * 1.06 + (row % 2) * 0.2, 0.5 + row * 1.0, (i % 2) * 0.2);
     m.userData.rot = (i * 0.37) % 0.4 - 0.2; scene.add(m); cubes.push(m);
   }
   parts.draw = (t) => {
-    big.position.y = 1.1 + (1 - ease((t - B0) / 0.7)) * 6; big.rotation.y = 0.35;
+    big.position.y = 0.5 + (1 - ease((t - B0) / 0.7)) * 6; big.rotation.y = 0.35;
     lb.material.opacity = ease((t - B0 - 0.5) / 0.4); lr.material.opacity = ease((t - B1) / 0.4);
     cubes.forEach((m, i) => {
       const span = Math.max(0.08, Math.min(0.2, (P.dur - B1 - 1.2) / Math.max(1, P.n)));   // 둘째 박자 안에 다 쌓이게
@@ -102,7 +103,7 @@ if (P.preset === "stack") {
       m.visible = t >= t0 - 0.05; const h = m.userData.home;
       m.position.set(h.x, h.y + (1 - k) * 7, h.z); m.rotation.y = m.userData.rot + (1 - k) * 0.8;
     });
-    camera.position.set(0.4 + 0.6 * ease(t / P.dur), 4.2, 13.5 - 1.2 * ease(t / P.dur)); camera.lookAt(0.3, 1.6, 0);
+    camera.position.set(0.4 + 0.5 * ease(t / P.dur), 3.6, 12.5 - 1.0 * ease(t / P.dur)); camera.lookAt(0.6, 1.2, 0);
     spot.target.position.set(0.5, 0, 0);
   };
 } else if (P.preset === "swap") {

@@ -9,8 +9,8 @@ standalone: true            # 매뉴얼·채널 기본 연출이 아님 — 사�
 renderer: hybrid
 skin: clean-white
 format: [longform, shorts]
-owns: [metaphor]
-scene_types: [metaphor]      # mode: migrate(옮겨 감) · pop(튀어 들어옴 + 꼬리표) — ytflow/stages/motion.py
+owns: [metaphor, studio3d]
+scene_types: [studio3d, metaphor]   # v2: studio3d(어두운 스튜디오 3D: stack·swap·glow, ytflow/stages/studio3d.py) · v1: metaphor(migrate·pop)
 fits:
   brands: [ai, curiosity, market]
   questions: [정체, 개념, 원인, 비교, 행동의 이유, 오늘과 연결]
@@ -19,4 +19,4 @@ fits:
 roles: [hook, body]
 avoid: "숫자 자체가 주인공인 장면(→ 차트) / 사람·기관 관계(→ 증거판) / 한 영상에 4번 넘게 (비유가 흔해지면 힘이 빠짐) / 시사의 피해·사건(가벼워 보임)"
 when: "추상적인 흐름을 '무엇이 어디로 몰리나'로 보여 줄 때 — 개발자가 한 언어로 몰림, 돈이 먼저 들어옴, 수요가 공급보다 많음, 옛 물건 값이 오름"
-demo: "20261112-style-motion"
+demo: "20261112-style-3d"   # v1: 20261112-style-motion
