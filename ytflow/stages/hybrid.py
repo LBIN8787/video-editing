@@ -234,7 +234,8 @@ def s_chart(D: HDoc, sc: dict, bt: list, dur: float):
     D.stroke(seg, D.red, 8, at=t0 + 1.2, dur=0.6)
     D.circle(seg[-1][0], seg[-1][1], 26, 26, at=t0 + 1.7)
     ly = seg[-1][1] + 70 if seg[-1][1] + 70 < y1 - 50 else seg[-1][1] - 70   # 바닥(날짜 글자) 가까우면 점 위로
-    D.text(seg[-1][0] - 20, ly, f"{rows[-1]['close']:,.0f}", FT("value"), 54, accent_text(D), at=t0 + 1.9, anchor="rm")
+    _fmt = ",.2f" if str(sc.get("ticker", "")).startswith("^") else ",.0f"   # 지수는 소수 둘째 자리까지 (반올림으로 숫자가 대사와 달라지지 않게)
+    D.text(seg[-1][0] - 20, ly, format(rows[-1]['close'], _fmt), FT("value"), 54, accent_text(D), at=t0 + 1.9, anchor="rm")
     if b0.get("mark"):
         D.text(seg[0][0] - 30, min(p[1] for p in seg) - 70, b0["mark"], FT("note"), 50, accent_text(D), at=t0 + 2.2, anchor="rm")
     D.js.append(f'tl.to("#layer",{{scale:1.18,x:-230,y:40,duration:1.6,ease:"power2.inOut"}},{t0 + 1.0:.2f});')

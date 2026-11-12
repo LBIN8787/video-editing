@@ -122,8 +122,8 @@ def main():
     s(dict(type="chapter", chapter=3, num="3", title="오늘 코스피", icon="trending-down", look="dash",
            beats=B("그 여파는 오늘 한국 시장에서 보였습니다.")))
     s(dict(type="chart", chapter=3, label="야후 파이낸스 코스피 일별 종가 (^KS11) · 2026.11.12 기준", ticker="^KS11", period="1mo", title="코스피",
-           beats=[{"say": "코스피는 11월 10일 4.4%, 11일 2.6% 오르며 이틀 동안 크게 뛰었습니다.", "focus_last": 3, "mark": "5,375 → 5,342"},
-                  {"say": "그리고 오늘 12일, 0.6% 내린 5,342에 마감했습니다."}]))
+           beats=[{"say": "코스피는 11월 10일 4.4%, 11일 2.6% 오르며 이틀 동안 크게 뛰었습니다.", "focus_last": 3, "mark": "-0.61%"},
+                  {"say": "그리고 오늘 12일, 0.6% 내린 5,342.73에 마감했습니다."}]))
     s(dict(type="versus", chapter=3, label="야후 파이낸스 종가 · 2026.11.11 → 11.12",
            fx=["tilt"], left={"value": "+1.0%", "label": "삼성전자", "icon": "trending-up"}, right={"value": "-1.8%", "label": "SK하이닉스", "icon": "trending-down"},
            beats=B("종목마다 달랐습니다. 삼성전자는 1% 가까이 올랐지만, 엔비디아에 AI용 메모리를 많이 공급하는 SK하이닉스는 1.8% 내렸습니다.",
