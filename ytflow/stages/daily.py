@@ -108,8 +108,10 @@ def market(day: str, cache: Path) -> dict:
         p = _pct(fetch(t, "1mo", cache), day, t)
         if not p:
             continue
-        rel = round(p["pct"] - px.get(bench, {}).get("pct", 0.0), 2)
-        out["movers"].append(dict(p, ticker=t, name=ko, en=en, bench=bench, rel=rel))
+        bp = px.get(bench, {})
+        same = bp.get("date") == p["date"]   # 기준 지수와 같은 날짜일 때만 '지수 대비' (지수 갱신이 늦으면 비교하지 않음)
+        rel = round(p["pct"] - bp.get("pct", 0.0), 2) if same else 0.0
+        out["movers"].append(dict(p, ticker=t, name=ko, en=en, bench=bench, rel=rel, rel_ok=same))
     out["movers"].sort(key=lambda x: -abs(x["pct"]))
     big = [m for m in out["movers"] if abs(m["pct"]) >= 2.0][:6] or out["movers"][:3]
     for m in big:   # 움직임마다 뉴스 → 원인 종류
@@ -215,11 +217,14 @@ def to_md(b: dict) -> str:
     latest = {}
     for x in b["indices"]:
         latest[x["kind"]] = max(latest.get(x["kind"], ""), x["date"])
+    for m in b.get("movers", []):   # 종목 날짜가 지수보다 앞서면 지수 갱신이 늦은 것 (예: 2026-11-13 아침 코스피)
+        k = "kr" if m["ticker"].endswith((".KS", ".KQ")) else "us"
+        latest[k] = max(latest.get(k, ""), m["date"])
     L += [f"| {x['name']} | {x['close']:,} | {f(x)} | {x['date']}{' ⚠️ 원본 갱신 늦음 — 거래소·기사로 확인' if x['date'] < latest[x['kind']] else ''} |"
           for x in b["indices"]]
     L += ["", "## ② 업종 (미국 섹터 ETF, 약한 순)", "| 업종 | 등락 |", "|---|---|"] + [f"| {x['name']} ({x['ticker']}) | {f(x)} |" for x in b["sectors"]]
     L += ["", "## ③ 대형주 큰 움직임 (지수 대비 = 회사만의 움직임)", "| 종목 | 등락 | 기준 지수 대비 | 원인 종류(뉴스 제목 분류) |", "|---|---|---|---|"]
-    L += [f"| {m['name']} ({m['ticker']}) | {f(m)} | {m['rel']:+.2f}%p ({m['bench']}) | {', '.join(f'{k} {v}' for k, v in (m.get('driver_counts') or {}).items())} |"
+    L += [f"| {m['name']} ({m['ticker']}) | {f(m)} | {(format(m['rel'], '+.2f') + '%p') if m.get('rel_ok', True) else '— (지수 갱신 늦음)'} ({m['bench']}) | {', '.join(f'{k} {v}' for k, v in (m.get('driver_counts') or {}).items())} |"
           for m in b["movers"][:12]]
     L += ["", "## ④ 시장을 크게 움직인 이야기 — 상위 3개 (움직임 × 보도량)"]
     for i, s in enumerate(b["stories"], 1):
