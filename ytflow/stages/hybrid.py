@@ -176,6 +176,8 @@ class HDoc(hyper.Doc):
         if getattr(self, "top", None):   # 겹치기(layers)의 영상 액자: 렌더러가 찾도록 #layer 밖, 그 위에
             base = base.replace("\n</div></div>\n<script>", "\n</div>" + "".join(self.top) + "</div>\n<script>", 1)
         base = base.replace("</style>", "".join(self.css) + f"video{{filter:{_skin_mod().video_filter(self.skin) or 'none'}}}</style>", 1)
+        if getattr(self, "head_extra", None):   # 3D 장면 등: importmap·모듈 스크립트는 head 에
+            base = base.replace("</head>", self.head_extra + "</head>", 1)
         return _skin_mod().remap_html(base, self.skin)   # 기본 토큰 색 → 고른 스킨의 색
 
 
@@ -966,6 +968,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     if sc["type"] == "usmap":
         sc["_states"] = us_states()
     D.bg_name = bg_name
+    D._work = work
     from . import graphics
     if not graphics.dispatch(D, sc, bt, dur, RENDER):   # 그래픽 팩이 다른 컴포넌트(그림)를 고르면 그걸로
         RENDER[sc["type"]](D, sc, bt, dur)
@@ -1303,5 +1306,7 @@ try:  # 새 연출 문법(아카이브 다큐·지도 여정·키네틱 타이�
     _edit10.register()
     from . import motion as _motion   # 움직이는 비유 애니메이션 (metaphor 장면, styles/recipes/motion-metaphor.yaml)
     _motion.register()
+    from . import studio3d as _studio3d   # 어두운 스튜디오 3D 물체 (studio3d 장면, motion-metaphor v2 · docs/22)
+    _studio3d.register()
 except Exception as _e_dir:  # noqa: BLE001
     print(f"[hybrid] 새 연출 장면 등록 건너뜀: {_e_dir}")

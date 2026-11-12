@@ -24,6 +24,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **매뉴얼 점검·편집 기준 v10·채널별 검토·배경 후보** (v9 약점 측정, 전후 비교, v10 연출, 채널마다 더할 연출, 상황별 배경 조사) | `docs/21-background-styles.md`, `docs/20-channel-review.md`, `docs/19-manual-gaps.md`, `manual/05-style-matching.md` §0-4, `ytflow/stages/edit10.py` |
 | **카테고리 개성 (v15)** — 채널을 묶어도 카테고리마다 다른 화면: 시사 증거판·시장 대시보드·호기심 칠판·AI 앱 창, 장 표지 사진은 주제에 맞게 듀오톤 | `channels/brands.yaml` 의 `identity`, `manual/05-style-matching.md` §0-7, `ytflow/stages/identity.py`, `python -m ytflow archive commons "검색어"` |
 | **매일 브리핑 (v17)** — 시장: 전날 시장을 크게 움직인 이슈·보고서·전망·실적 / 시사: 전날 구조적 이슈 하나 | `manual/03-market.md` §0, `manual/08-issues.md` §0-2, `channels/ch-market-daily`, `ch-issues-daily`, `ytflow/stages/daily.py` |
+| **주식 채널 개설 계획** — 이름 후보(겹침 확인)·1일 1영상 운영(평일 아침 브리핑·심층·주말 분석) | `docs/23-stock-channel-plan.md`, `channels/ch-market-daily/channel.yaml` |
 | **어닝콜 해부·연결과 의미 (v18)** — 숫자·약속 → 시장의 걱정과 경영진의 답(원문+번역) → 무엇으로 이어지나(해석) → 남은 숙제 | `manual/03-market.md` §0-1, `ytflow/stages/earnings.py` |
 | **호기심 채널: 설명보다 호기심 먼저 (v18)** — 짧은 인사·소개 → 훅(답은 숨김) → 설명, 제목은 훅에서 | `manual/04-curiosity.md` §0, `topic_brief.hook` |
 | **움직이는 비유 애니메이션 (따로 쓰는 스타일, 매뉴얼 기준 아님·품질 보완 필요)** — 무리가 한쪽으로 옮겨 가고 의태어가 튀어나오는 비유 장면 (`metaphor` 장면, migrate·pop). 사용자가 고를 때만 | `styles/motion-metaphor/STYLE.md`, `docs/22-motion-reference.md`(레퍼런스 재분석·v2 방향), `styles/recipes/motion-metaphor.yaml`, `ytflow/stages/motion.py` |
