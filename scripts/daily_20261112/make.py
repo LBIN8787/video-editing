@@ -79,7 +79,7 @@ def main():
                    "이런 순서로 보겠습니다. 반도체를 띄운 코어위브 실적, 장 마감 뒤의 엔비디아, 그리고 오늘 코스피까지요.",
                    "시작하겠습니다.")))
     s(dict(type="bars", chapter=0, label="야후 파이낸스 종가 · 2026.11.10 → 11.11", title="11월 11일 미국 마감 (%)", unit="%", emph=2,
-           layers=[{"kind": "locator", "at": [-74.0, 40.71], "label": "미국 뉴욕 · 11월 11일 마감", "beat": 0, "side": "right", "top": 120, "scale": 2.2}],
+           layers=[{"kind": "locator", "at": [-74.0, 40.71], "label": "미국 뉴욕 · 11월 11일 마감", "beat": 0, "side": "left", "top": 170, "scale": 2.2}],
            items=[{"label": "S&P 500", "value": 1.31, "text": "+1.3"}, {"label": "나스닥", "value": 1.60, "text": "+1.6"},
                   {"label": "필라델피아 반도체 지수", "value": 5.66, "text": "+5.7"}],
            beats=B("먼저 숫자부터 보죠. 11월 11일 미국 S&P 500은 1.3%, 나스닥은 1.6% 올랐습니다.",
@@ -100,7 +100,7 @@ def main():
                   {"say": "또 하나는 빚입니다. AI 데이터센터를 짓는 회사들이 빚을 너무 많이 진다는 걱정이 컸는데, 코어위브는 담보 없는 빚을 줄이고 고객이 미리 내는 돈을 더 쓰겠다고 했습니다. 아파트를 지을 때 대출 대신 분양 대금을 미리 받는 것과 비슷하죠. 같은 걱정을 받던 오라클이 8.8% 오른 이유입니다.",
                    "reveal": ["fund", "orcl"], "draw": [["crwv", "fund"], ["fund", "orcl"]], "active": "orcl"}]))
     s(dict(type="bars", chapter=1, label="야후 파이낸스 종가 · 2026.11.10 → 11.11", title="11월 11일 하루 (%)", unit="%", emph=0,
-           layers=[{"kind": "number", "value": "+5.7%", "label": "반도체 지수", "beat": 1, "side": "left", "top": 620}],
+           fx=["tilt"],
            items=[{"label": "코어위브", "value": 24.71, "text": "+24.7"}, {"label": "마이크론", "value": 11.89, "text": "+11.9"},
                   {"label": "오라클", "value": 8.81, "text": "+8.8"}, {"label": "AMD", "value": 7.32, "text": "+7.3"},
                   {"label": "S&P 500", "value": 1.31, "text": "+1.3"}],
@@ -113,7 +113,7 @@ def main():
            beats=B("엔비디아도 이날 정규장에선 2.9% 올라 173달러에 마감했습니다.",
                    "하지만 장 마감 뒤 시간외 거래에서 9% 가까이 떨어졌습니다.")))
     s(dict(type="checklist", chapter=2, label="NBC 뉴스 · 2026.11.11 보도 · 11월 12일 기준", title="확인된 것과 아직 모르는 것",
-           layers=[{"kind": "photo", "src": "nvidia", "beat": 0, "side": "right", "w": 520, "top": 300, "caption": "엔비디아 간판 · CC BY 2.0 Will Buckner"}],
+           layers=[{"kind": "photo", "src": "nvidia", "beat": 0, "side": "right", "w": 460, "top": 610, "caption": "엔비디아 간판 · CC BY 2.0 Will Buckner"}],
            rows=[{"label": "보도: 이사회가 젠슨 황 CEO의 거취를 논의 (WSJ·NYT 등)", "state": "warn"},
                  {"label": "회사: 여러 차례 논평 요청에 답하지 않음", "state": "warn"},
                  {"label": "결정: 발표된 것 없음", "state": "no"}],
@@ -122,7 +122,6 @@ def main():
     s(dict(type="chapter", chapter=3, num="3", title="오늘 코스피", icon="trending-down", look="dash",
            beats=B("그 여파는 오늘 한국 시장에서 보였습니다.")))
     s(dict(type="chart", chapter=3, label="야후 파이낸스 코스피 일별 종가 (^KS11) · 2026.11.12 기준", ticker="^KS11", period="1mo", title="코스피",
-           layers=[{"kind": "locator", "at": [126.98, 37.57], "label": "서울 · 11월 12일 마감", "beat": 1, "side": "right", "top": 640, "scale": 2.2}],
            beats=[{"say": "코스피는 11월 10일 4.4%, 11일 2.6% 오르며 이틀 동안 크게 뛰었습니다.", "focus_last": 3, "mark": "5,375 → 5,342"},
                   {"say": "그리고 오늘 12일, 0.6% 내린 5,342에 마감했습니다."}]))
     s(dict(type="versus", chapter=3, label="야후 파이낸스 종가 · 2026.11.11 → 11.12",

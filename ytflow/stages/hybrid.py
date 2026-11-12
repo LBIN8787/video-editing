@@ -212,15 +212,20 @@ def s_chart(D: HDoc, sc: dict, bt: list, dur: float):
     lo, hi = lo - pad, hi + pad
     X = lambda i: x0 + (x1 - x0) * i / (len(rows) - 1)
     Y = lambda v: y1 - (y1 - y0) * (v - lo) / (hi - lo)
+    _pal = D.skin.get("palette", {})
+    _b = (_pal.get("base") or "#F3EFE6").lstrip("#")
+    _dark = sum(int(_b[i:i + 2], 16) for i in (0, 2, 4)) < 300
+    axis = (_pal.get("muted_text") or "#B8C2D0") if _dark else "#4E525C"   # 어두운 팩에서도 눈금 글자 대비 4.5:1
+    grid = (_pal.get("line") or "#3B4D66") if _dark else "#c9c0ae"
     for k in range(5):  # 가격 눈금
         v = lo + (hi - lo) * k / 4
         yy = Y(v)
-        D.svg.append(f'<line x1="{x0}" y1="{yy:.0f}" x2="{x1}" y2="{yy:.0f}" stroke="#c9c0ae" stroke-width="1.5" stroke-dasharray="6 8"/>')
-        D.items.append(f'<div style="position:absolute;left:{x1 + 20}px;top:{yy - 16:.0f}px;font-family:sans;font-size:24px;color:#4E525C">{v:,.0f}</div>')
+        D.svg.append(f'<line x1="{x0}" y1="{yy:.0f}" x2="{x1}" y2="{yy:.0f}" stroke="{grid}" stroke-width="1.5" stroke-dasharray="6 8"/>')
+        D.items.append(f'<div style="position:absolute;left:{x1 + 20}px;top:{yy - 16:.0f}px;font-family:sans;font-size:24px;color:{axis}">{v:,.0f}</div>')
     pts = [(X(i), Y(r["close"])) for i, r in enumerate(rows)]
     D.stroke(pts, D.ink, 4, at=0.3, dur=1.4)
     for lab, idx in ((rows[0]["date"][2:].replace("-", "."), 0), (rows[-1]["date"][2:].replace("-", "."), len(rows) - 1)):
-        D.items.append(f'<div style="position:absolute;left:{X(idx) - 60:.0f}px;top:{y1 + 18}px;font-family:sans;font-size:24px;color:#4E525C">{lab}</div>')
+        D.items.append(f'<div style="position:absolute;left:{X(idx) - 60:.0f}px;top:{y1 + 18}px;font-family:sans;font-size:24px;color:{axis}">{lab}</div>')
     # 마지막 이틀 강조 + 카메라 확대
     b0 = sc["beats"][0]
     n = b0.get("focus_last", 3)

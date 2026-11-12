@@ -1,7 +1,7 @@
 {
  "project": "20261112-market-daily",
  "manual_version": "17",
- "checked": "2026-11-12T08:26:53",
+ "checked": "2026-11-12T08:43:08",
  "pass": true,
  "rows": [
   {
@@ -226,7 +226,7 @@
    "level": "MUST",
    "item": "반복 피로: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기: 자료·지도·사진 겹치기·시각 효과, 05 §0-3)",
    "ok": true,
-   "detail": "최장 2연속 (장면 7)"
+   "detail": "최장 1연속 (장면 6)"
   },
   {
    "gate": "G5",
@@ -279,6 +279,20 @@
   },
   {
    "gate": "G5",
+   "level": "SHOULD",
+   "item": "자료 화면 공백 ≤45초",
+   "ok": false,
+   "detail": "최장 83초"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "장 표지 간격 ≤200초",
+   "ok": true,
+   "detail": "최장 95초"
+  },
+  {
+   "gate": "G5",
    "level": "MUST",
    "item": "스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격)",
    "ok": true,
@@ -289,14 +303,14 @@
    "level": "MUST",
    "item": "한 스타일이 40% 넘지 않음",
    "ok": true,
-   "detail": "data-report 0.4"
+   "detail": "data-report 0.37"
   },
   {
    "gate": "G5",
    "level": "MUST",
    "item": "한 장면 안에서 겹친 장면(layers) 3개 이상",
    "ok": true,
-   "detail": "4"
+   "detail": "3"
   },
   {
    "gate": "G5",
@@ -308,9 +322,9 @@
   {
    "gate": "G5",
    "level": "MUST",
-   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 2번까지)",
+   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 4번까지)",
    "ok": true,
-   "detail": "2번 [(7, 'number'), (14, 'kinetic')]"
+   "detail": "1번 [(14, 'kinetic')]"
   },
   {
    "gate": "G5",
