@@ -1,8 +1,8 @@
 {
  "project": "20261112-market-daily",
  "manual_version": "17",
- "checked": "2026-11-12T08:43:08",
- "pass": true,
+ "checked": "2026-11-12T09:30:05",
+ "pass": false,
  "rows": [
   {
    "gate": "G0",
@@ -173,6 +173,20 @@
    "detail": ""
   },
   {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "연결·의미: 팩트시트에 '## 해석'(근거 번호와 함께) — 사실만 옮기지 않기 (03 §0-1)",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "연결·의미: 대본에서 해석을 해석이라고 밝힘 ('해석'·'의미'·'로 볼 수 있')",
+   "ok": false,
+   "detail": ""
+  },
+  {
    "gate": "G1",
    "level": "MUST",
    "item": "매일 브리핑: daily_brief.json 있음 (python -m ytflow daily)",
@@ -269,6 +283,13 @@
    "item": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음",
    "ok": true,
    "detail": "표지 ['dc', 'nvidia'] · NASA 0"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "반복 피로: 같은 채널 직전 편과 화면 구성 겹침 70% 이하 (Jaccard)",
+   "ok": true,
+   "detail": "60%"
   },
   {
    "gate": "G5",

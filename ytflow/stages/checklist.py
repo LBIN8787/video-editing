@@ -173,6 +173,13 @@ def run(path: Path, upto: str = "G8") -> Report:
             hw = set(_re2.findall(r"[가-힣A-Za-z0-9]{2,}", (hk.get("line", "") + " " + hk.get("gap", ""))))
             tied = [t for t in titles if t and hw & set(_re2.findall(r"[가-힣A-Za-z0-9]{2,}", t))]
             R.add("G6", "SHOULD", "curiosity: 제목이 훅에서 나옴 (훅과 같은 낱말)", bool(hw) and len(tied) >= max(1, len([t for t in titles if t]) - 1), f"{len(tied)}/{len([t for t in titles if t])}")
+        if brand in ("market", "issues") and spec.get("scenes"):   # v18 연결·의미 (03 §0-1)
+            fs_all = (res / "factsheet.md").read_text(encoding="utf-8") if (res / "factsheet.md").exists() else ""
+            says_all = " ".join(b.get("say", "") for s in spec["scenes"] for b in s.get("beats", []))
+            R.add("G3", "MUST" if ch in ("ch-market-daily", "ch-issues-daily") else "SHOULD",
+                  "연결·의미: 팩트시트에 '## 해석'(근거 번호와 함께) — 사실만 옮기지 않기 (03 §0-1)", "## 해석" in fs_all, "")
+            R.add("G4", "SHOULD", "연결·의미: 대본에서 해석을 해석이라고 밝힘 ('해석'·'의미'·'로 볼 수 있')",
+                  any(w in says_all for w in ("해석", "의미", "로 볼 수 있", "라고 봅니다")), "")
         if ch in ("ch-market-daily", "ch-issues-daily"):   # v17 매일 브리핑 (03 §0, 08 §0-2)
             db = _load(res / "daily_brief.json")
             R.add("G1", "MUST", "매일 브리핑: daily_brief.json 있음 (python -m ytflow daily)", db is not None, "01_research/daily_brief.json")

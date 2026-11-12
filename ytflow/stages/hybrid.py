@@ -472,7 +472,8 @@ def s_quote(D: HDoc, sc: dict, bt: list, dur: float):
     size = 58 if len(lines) <= 3 else 50
     t0 = bt[0][0]
     kw = sc.get("keyword", "")
-    for k, ln in enumerate(lines[:5]):
+    nmax = 3 if sc.get("orig") else 5   # 원문 줄이 들어갈 자리 (번역은 3줄까지)
+    for k, ln in enumerate(lines[:nmax]):
         y = 360 + k * (size + 30)
         D.text(400, y, ln, FT("title"), size, D.ink, at=t0 + 0.3 + k * 0.5, anchor="lm")
         if kw and kw in ln:
@@ -482,9 +483,21 @@ def s_quote(D: HDoc, sc: dict, bt: list, dur: float):
             card_ix = next(n for n, it in enumerate(D.items) if f'id="{i}"' in it)  # 카드 바로 위, 글자 아래
             D.marker(400 + pre - 6, y + size * 0.18, f.getlength(kw) + 12, size * 0.55, at=mk_at, index=card_ix + 1)
             if sc.get("note"):
-                ny = 360 + min(len(lines), 5) * (size + 30) + 6  # 인용문 마지막 줄 아래 (다음 줄과 겹치지 않게)
+                ny = 360 + min(len(lines), nmax) * (size + 30) + 6  # 인용문 마지막 줄 아래 (다음 줄과 겹치지 않게)
                 D.text(min(400 + pre, 1500 - paper.F(FT("note"), 42).getlength(sc["note"])), ny, "↳ " + sc["note"], FT("note"), 42, D.red, at=mk_at + 0.4, anchor="lm")
             D.sfx.append(("pencil", mk_at))
+    if sc.get("orig"):   # v18 원문(영어) 한 줄 — 번역 아래, 카드 맨 아래 (어닝콜·발언 원본: 원문·번역 2단)
+        o = sc["orig"].strip()
+        o_lines, cur = [], ""
+        for wd in o.split(" "):
+            if len((cur + " " + wd).strip()) > 92:
+                o_lines.append(cur.strip()); cur = wd
+            else:
+                cur += " " + wd
+        o_lines.append(cur.strip())
+        for k, ln in enumerate(o_lines[:2]):
+            D.text(400, 676 + k * 36, ("“" if k == 0 else "") + ln + ("”" if k == len(o_lines[:2]) - 1 else ""),
+                   paper.SANS, 26, "#5a5f6a", at=t0 + 0.9, anchor="lm")
     D.lower(sc.get("who", ""), sc.get("role", ""), t0 + 0.6)
 
 

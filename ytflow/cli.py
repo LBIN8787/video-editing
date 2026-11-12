@@ -296,6 +296,11 @@ def main(argv: list[str] | None = None) -> None:
     dl.add_argument("--brand", default="market", choices=["market", "issues"])
     dl.add_argument("--date", default="", help="기준 거래일 YYYY-MM-DD (기본: 한국 아침 기준 가장 최근 거래일)")
     dl.add_argument("--project", default="", help="결과를 넣을 프로젝트 (없으면 새로 만듦)")
+    ec = sub.add_parser("earnings-call", help="어닝콜 녹취록 정리: 준비 발언 핵심 문장·애널리스트 질문표·질문 주제 → 01_research/earnings/<TICKER>_call.md")
+    ec.add_argument("project")
+    ec.add_argument("source", help="공식 녹취록 PDF·텍스트 경로 또는 주소 (IR 우선)")
+    ec.add_argument("--ticker", default="")
+    ec.add_argument("--period", default="", help="예: 3Q26")
     ar = sub.add_parser("archive", help="공공 기록 사진·영상 찾기 (미국 의회도서관, 퍼블릭 도메인)")
     ar.add_argument("args", nargs="*")
     hb = sub.add_parser("hybrid", help="하이브리드 스타일 영상 만들기 (02_script/hybrid.json → final.mp4)")
@@ -430,6 +435,9 @@ def main(argv: list[str] | None = None) -> None:
     elif a.cmd == "demand":
         from .stages import demand
         demand.run(a.channel, a.top)
+    elif a.cmd == "earnings-call":
+        from .stages import earnings
+        earnings.run(a.project, a.source, a.ticker, a.period)
     elif a.cmd == "daily":
         from .stages import daily
         daily.run(a.brand, a.date, a.project)
