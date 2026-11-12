@@ -81,7 +81,7 @@ def main():
            beats=B("첫 번째 걱정은 빚입니다. AI 데이터센터를 짓는 회사들이 빚을 너무 많이 진다는 걱정이 최근 시장을 짓눌렀죠.",
                    "CEO의 답은 이랬습니다. 지금 금리로는 담보 없는 채권으로 돈을 빌리지 않겠다, 그럴 필요도 없다.")))
     s(dict(type="checklist", chapter=2, label=LBL, title="그럼 돈은 어디서?",
-           layers=[{"kind": "number", "value": "약 90억 달러", "label": "앞으로 3개월 고객 선지급금·보증금", "beat": 0, "side": "right", "top": 260}],
+           fx=["tilt"],
            rows=[{"label": "고객이 미리 내는 돈 — 올해 계약의 70%에서 선지급", "state": "ok"},
                  {"label": "고객 계약에 묶은 담보 대출 — 계약이 끝날 때 다 갚도록", "state": "ok"},
                  {"label": "평균 차입 금리 7.9% — 1년 새 2.5%p 낮아짐", "state": "ok"},
@@ -148,7 +148,7 @@ def main():
         3: {"layers": [{"kind": "photo", "src": "dc", "beat": 1, "side": "right", "w": 420, "top": 560, "caption": "데이터센터 예시 · CC BY 4.0"}]},
         4: {"fx": ["dolly"]},
         7: {"fx": ["tilt"]},
-        8: {"fx": ["dolly"]},
+        8: {"fx": ["dolly"]},  # (9번 장면은 위에서 tilt)
         9: {"fx": ["dolly"]},
         10: {"fx": ["tilt"]},
         11: {"fx": ["tilt"]},

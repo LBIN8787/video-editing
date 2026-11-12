@@ -84,7 +84,7 @@ def _person(D, key, x, y, s, color):
 
 def _word(D, text, x, y, at, color=YEL, rot=-8, size=88):
     i = D._id()
-    D.items.append(f'<div id="{i}" style="position:absolute;left:{x:.0f}px;top:{y:.0f}px;transform:translate(-50%,-50%) rotate({rot}deg);font-family:sans-x;font-size:{size}px;'
+    D.items.append(f'<div id="{i}" data-layout-ignore style="position:absolute;left:{x:.0f}px;top:{y:.0f}px;transform:translate(-50%,-50%) rotate({rot}deg);font-family:sans-x;font-size:{size}px;'
                    f'color:{color};text-shadow:{_outline(6)},6px 8px 0 {INK};white-space:nowrap;letter-spacing:2px">{H.escape(text)}</div>')
     D.js.append(f'tl.fromTo("#{i}",{{opacity:0,scale:0.3}},{{opacity:1,scale:1,duration:0.45,ease:"back.out(2.6)"}},{at:.2f});')
     D.sfx.append(("pop", at))
@@ -99,7 +99,7 @@ def _title(D, W, title, hl, at):
     if hl and hl in title:
         a, b = title.split(hl, 1)
         parts = f'{H.escape(a)}<span style="background:{YEL};color:{INK};text-shadow:none;padding:0 14px;border-radius:6px;box-shadow:0 0 0 5px {INK}">{H.escape(hl)}</span>{H.escape(b)}'
-    D.items.append(f'<div id="{i}" style="position:absolute;left:50%;top:70px;transform:translateX(-50%);font-family:sans-x;font-size:64px;color:#fff;'
+    D.items.append(f'<div id="{i}" data-layout-ignore style="position:absolute;left:50%;top:70px;transform:translateX(-50%);font-family:sans-x;font-size:64px;color:#fff;'
                    f'text-shadow:{_outline(5)};white-space:nowrap">{parts}</div>')
     D.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:-20}},{{opacity:1,y:0,duration:0.4,ease:"power2.out"}},{at:.2f});')
 
