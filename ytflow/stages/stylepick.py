@@ -68,7 +68,7 @@ def score(r: dict, tb: dict) -> tuple[float, list[str]]:
 
 
 def pick(tb: dict) -> dict:
-    ranked = sorted(((score(r, tb), r) for r in load()), key=lambda x: -x[0][0])
+    ranked = sorted(((score(r, tb), r) for r in load() if not r.get("standalone")), key=lambda x: -x[0][0])   # standalone: 따로 고를 때만 (자동 추천 제외)
     ranked = [(s, w, r) for (s, w), r in ranked if s > -50]
 
     def best(role):
