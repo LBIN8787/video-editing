@@ -28,6 +28,8 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **주식 채널 개설 계획** — 이름 후보(겹침 확인)·1일 1영상 운영(평일 아침 브리핑·심층·주말 분석) | `docs/23-stock-channel-plan.md`, `channels/ch-market-daily/channel.yaml` |
 | **어닝콜 해부·연결과 의미 (v18)** — 숫자·약속 → 시장의 걱정과 경영진의 답(원문+번역) → 무엇으로 이어지나(해석) → 남은 숙제 | `manual/03-market.md` §0-1, `ytflow/stages/earnings.py` |
 | **호기심 채널: 설명보다 호기심 먼저 (v18)** — 짧은 인사·소개 → 훅(답은 숨김) → 설명, 제목은 훅에서 | `manual/04-curiosity.md` §0, `topic_brief.hook` |
+| **원본 발언 컷편집 (v20)** — 어닝콜·기자회견 긴 원본에서 대본과 맞는 문장만 단어 단위로 잘라 그 사람의 목소리로 (`bite` 장면, 원문·번역 2단) | `styles/source-cut/STYLE.md`, `skills/edit-style-source-cut`, `python -m ytflow cut <프로젝트>`, `ytflow/stages/cutedit.py` |
+| **손그림 삽화 (v20)** — 삽화 한 장 위를 카메라가 박자마다 옮겨 가며 설명 (붓 쓸기 등장·boil·손그림 표시·생각 풍선, 그림체는 자유). 그림은 사람이 준비 | `styles/illustrated/STYLE.md`, `skills/edit-style-illustrated`, `python -m ytflow art-brief <프로젝트>`, `ytflow/stages/illust.py` |
 | **움직이는 비유 애니메이션 (따로 쓰는 스타일, 매뉴얼 기준 아님·품질 보완 필요)** — 무리가 한쪽으로 옮겨 가고 의태어가 튀어나오는 비유 장면 (`metaphor` 장면, migrate·pop). 사용자가 고를 때만 | `styles/motion-metaphor/STYLE.md`, `docs/22-motion-reference.md`(레퍼런스 재분석·v2 방향), `styles/recipes/motion-metaphor.yaml`, `ytflow/stages/motion.py` |
 | **반드시 지킬 것·검사** | `manual/06-checklist.md`, `python -m ytflow check <프로젝트>` |
 | 채널 회차 만들기 (반복 운영) | `skills/channel-run/SKILL.md`, `channels/README.md`, `docs/06-operations.md` |
@@ -74,6 +76,8 @@ python -m ytflow make --style-ref <스타일id> [--topic "주제"]   # 스타일
 python -m ytflow make --channel <채널id> --plan                  # 트렌드 → 소스 찾기 → 주제·형식 결정까지만 (검토용)
 python -m ytflow channels                                       # 채널 목록
 python -m ytflow daily [--brand market|issues] --project <YYYYMMDD>-market-daily   # 매일 브리핑 주제 찾기: 전날 시장(지수·업종·큰 움직임·이슈/보고서/전망·실적) / 전날 시사 이슈
+python -m ytflow cut <프로젝트>                                   # 원본 발언 컷편집: bite 장면 문장을 긴 원본에서 찾아 02_script/cuts.json
+python -m ytflow art-brief <프로젝트>                             # 손그림 삽화 주문서 → 02_script/art_brief.md
 python -m ytflow yt-pack <프로젝트>                               # 유튜브 업로드 묶음: 설명란(챕터 타임코드·출처·면책)·제목 후보·태그 → 05_edit/youtube.md
 python -m ytflow earnings-call <프로젝트> <녹취록 PDF·주소> --ticker CRWV --period 3Q26   # 어닝콜 정리: 핵심 발언·애널리스트 질문표·질문 주제 (manual/03 §0-1)
 python -m ytflow demand [--channel ch-knowledge]                 # 분야별 수요 분석 (검색 → 채널 → 아웃라이어 배수)

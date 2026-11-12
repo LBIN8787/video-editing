@@ -59,6 +59,8 @@ def run(project: Project) -> dict:
     for ln in (edir / "subs.ass").read_text(encoding="utf-8").splitlines():
         if ln.startswith("Dialogue:"):
             f = ln.split(",", 9)
+            if f[4].strip() == "bite":   # 원본 발언 번역 자막: 내레이션이 아니므로 싱크 점검에서 뺀다
+                continue
             lines.append((_t(f[1]), _t(f[2]), f[9]))
     wav = edir / "hb_work" / "final_audio.wav"
     wav.parent.mkdir(parents=True, exist_ok=True)

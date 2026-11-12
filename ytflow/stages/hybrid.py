@@ -906,6 +906,10 @@ def timing(sc: dict, durs: dict) -> tuple[list, float]:
         d = durs[f"{sc['id']:03d}_{k}"]
         bt.append((round(t, 2), d))
         t += d + GAP
+    if sc.get("_bite"):   # 원본 발언 컷 (cutedit): 앞 내레이션 뒤에 그 사람의 말이 이어진다
+        tb = (t - GAP + 0.35) if bt else 0.0
+        sc["_bite_at"] = round(tb, 2)
+        return bt, math.ceil((tb + sc["_bite"]["dur"] + 0.45) * FPS - 1e-6) / FPS
     # 30fps 프레임 격자에 맞춤: 장면 영상 길이 = 음성 길이 (안 맞추면 장면마다 0.01~0.03초씩 밀려 끝에서 0.6초 어긋남)
     return bt, math.ceil((t - GAP + TAIL) * FPS - 1e-6) / FPS
 
@@ -954,7 +958,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     bg = a / bg_name
     if not bg.exists():
         backdrop.make(D.skin, kind, W, HH, chap, still, sc.get("_duo")).save(bg, quality=92)
-    if sc.get("clip"):  # 원본 영상 구간을 장면 길이만큼 잘라 넣는다 (소리 없음)
+    if sc.get("clip") and sc["type"] != "bite":  # 원본 영상 구간을 장면 길이만큼 잘라 넣는다 (소리 없음) — bite 는 cutedit 이 따로
         src = project.dir("assets") / "footage" / spec["footage"][sc["clip"]["src"]]["file"]
         out = a / f"clip_{sc['id']:03d}.mp4"
         subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-ss", str(sc["clip"]["start"]), "-i", str(src),
@@ -1117,6 +1121,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     for ev in events:
         t0, t1, text = ev[:3]
         wav = ev[3] if len(ev) > 3 else None
+        nm = ev[4] if len(ev) > 4 else ""
         parts = _chunks(text)
         starts = _word_starts(wav, parts, t1 - t0) if wav else None
         if starts:  # 실제로 그 말을 하는 순간에 자막이 바뀐다 (faster-whisper 단어 시각)
@@ -1129,7 +1134,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         t = t0
         for p in parts:
             d = (t1 - t0) * len(p) / tot
-            lines.append(f"Dialogue: 0,{_ass_time(t)},{_ass_time(t + d - 0.02)},Sub,,0,0,0,,{p}")
+            lines.append(f"Dialogue: 0,{_ass_time(t)},{_ass_time(t + d - 0.02)},Sub,{nm},0,0,0,,{p}")
             t += d
     sk = _skin_mod()
     head = head.format(**sk.subtitle_style(sk.load()))   # 자막 상자도 그래픽 스킨이 정함
@@ -1180,6 +1185,9 @@ def make(project: Project, workers: int = 3) -> Path:
             sc["_chnum"], sc["_chtitle"] = ch["num"], ch["title"]
     print("[hybrid] 음성")
     durs = voice(project, spec)
+    if any(sc.get("type") == "bite" for sc in spec["scenes"]):   # 원본 발언 컷편집: 대본과 맞는 구간만 잘라 이어 붙임
+        from . import cutedit
+        cutedit.prepare(project, spec)
     adir = project.dir("assets")
     plan = []
     for sc in spec["scenes"]:
@@ -1226,6 +1234,11 @@ def make(project: Project, workers: int = 3) -> Path:
             parts.append((t0, project.dir("voice") / f"hb_{sc['id']:03d}_{k}.wav"))
             if sc["type"] != "kinetic" and sc.get("subs", True):   # 키네틱 장면은 화면 글자가 자막
                 subs.append((t_acc + t0, t_acc + t0 + d, sc["beats"][k]["say"], project.dir("voice") / f"hb_{sc['id']:03d}_{k}.wav"))
+        if sc.get("_bite"):   # 원본 발언 소리 + 번역 자막 (자막 이름 'bite': 싱크 점검에서 제외)
+            parts.append((sc["_bite_at"], Path(sc["_bite"]["wav"])))
+            for s_ in sc["_bite"]["segs"]:
+                if s_.get("ko"):
+                    subs.append((t_acc + sc["_bite_at"] + s_["t0"], t_acc + sc["_bite_at"] + s_["t1"] - 0.05, s_["ko"], None, "bite"))
         for name, at in results[sc["id"]][0]:
             sfx_events.append((name, t_acc + at))
         sa = work / f"a_{sc['id']:03d}.wav"
@@ -1308,5 +1321,9 @@ try:  # 새 연출 문법(아카이브 다큐·지도 여정·키네틱 타이�
     _motion.register()
     from . import studio3d as _studio3d   # 어두운 스튜디오 3D 물체 (studio3d 장면, motion-metaphor v2 · docs/22)
     _studio3d.register()
+    from . import cutedit as _cutedit   # 원본 발언 컷편집 (bite 장면, styles/source-cut)
+    _cutedit.register()
+    from . import illust as _illust     # 손그림 삽화 (illust 장면, styles/illustrated)
+    _illust.register()
 except Exception as _e_dir:  # noqa: BLE001
     print(f"[hybrid] 새 연출 장면 등록 건너뜀: {_e_dir}")
