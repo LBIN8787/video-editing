@@ -1,6 +1,6 @@
 # 체크리스트 — 20261113-market-daily
 
-매뉴얼 v18 · 2026-11-12T22:36:32 · **통과**
+매뉴얼 v19 · 2026-11-12T23:01:15 · **통과**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
@@ -46,14 +46,27 @@
 | G5 | SHOULD | v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음 | ✅ | 표지 ['nvidia'] · NASA 0 |
 | G5 | SHOULD | 반복 피로: 같은 채널 직전 편과 화면 구성 겹침 70% 이하 (Jaccard) | ✅ | 60% |
 | G5 | MUST | 같은 type 3연속 없음 | ✅ | [] |
+| G5 | SHOULD | 자료 화면 공백 ≤45초 | ⚠️ | 최장 285초 |
+| G5 | SHOULD | 장 표지 간격 ≤200초 | ✅ | 최장 86초 |
 | G5 | MUST | 스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격) | ✅ | 7종 ['archive-doc', 'data-report', 'hybrid-causal', 'kinetic-type', 'map-journey' |
-| G5 | MUST | 한 스타일이 40% 넘지 않음 | ✅ | paper-column 0.35 |
+| G5 | MUST | 한 스타일이 40% 넘지 않음 | ✅ | paper-column 0.36 |
 | G5 | MUST | 한 장면 안에서 겹친 장면(layers) 3개 이상 | ✅ | 3 |
 | G5 | MUST | 같은 스타일 3장면 연속 없음 | ✅ | 최장 2 |
-| G5 | MUST | 강조는 아껴서: 1분에 1번 이하 (이 영상 3번까지) | ✅ | 1번 [(15, 'kinetic')] |
+| G5 | MUST | 강조는 아껴서: 1분에 1번 이하 (이 영상 5번까지) | ✅ | 1번 [(15, 'kinetic')] |
 | G5 | MUST | 한 장면에 강조 1개까지 (위아래로 같은 내용 반복 금지) | ✅ | 넘친 장면 [] |
 | G5 | MUST | 핵심 단어 띄우기(words)는 단어 1~3개만 | ✅ | [] |
 | G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ✅ | paper-sketch / 등록부 ['blueprint', 'clean-flat', 'clean-white', 'corkboard', 'dark |
 | G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ✅ | python -m ytflow style-pick <프로젝트> |
+| G6 | MUST | final.mp4 | ✅ |  |
+| G6 | MUST | 레이아웃 점검 비어 있음 | ✅ | {} |
+| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 0.991, 'p95_abs_offset': 0.07, 'median_abs_offset': 0.05, 'video |
+| G6 | SHOULD | 납품 점검(음량 등) | ✅ | completed |
+| G6 | SHOULD | 움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선) | ⚠️ | 변화 6.8/분 · 정지 0.64 |
+| G6 | SHOULD | 최종 목소리 ElevenLabs | ⚠️ |  |
+| G7 | MUST | 제목 후보 3개 + 이유 | ✅ |  |
+| G7 | MUST | 썸네일 A/B/C + 점검 ok | ✅ |  |
+| G7 | SHOULD | 제목 앞 22자 안에 질문/핵심 | ✅ | 엔비디아 창업자 사임, 시장은 왜 덜 흔 |
+| G8 | MUST | GitHub Release 업로드 | ✅ |  |
+| G8 | MUST | episodes.md 기록 | ✅ | ch-market-daily |
 
 사람 눈 검사(EYE)는 manual/06-checklist.md 끝의 5가지를 확인하세요.

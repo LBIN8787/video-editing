@@ -85,7 +85,7 @@ def main():
     s(dict(type="chapter", chapter=3, num="3", title="한국 시장", icon="trending-down", look="dash",
            beats=B("이제 한국 시장입니다. 12일 한국 장은 공식 사임 발표 전, 해임설이 돌던 상태에서 열렸습니다.")))
     s(dict(type="bars", chapter=3, label="야후 파이낸스 종가 · 연합인포맥스 등 보도 · 2026.11.11 → 11.12", title="11월 12일 한국 (%)", unit="", emph=3,
-           layers=[{"kind": "locator", "at": [126.98, 37.57], "label": "서울 · 11월 12일 마감", "beat": 0, "side": "right", "top": 170, "scale": 2.2}],
+           layers=[{"kind": "locator", "at": [126.98, 37.57], "label": "서울 · 11월 12일 마감", "beat": 0, "side": "left", "top": 170, "scale": 2.2}],
            items=[{"label": "코스피", "value": 0.61, "text": "-0.61"}, {"label": "삼성전자", "value": 0.97, "text": "+0.97"},
                   {"label": "SK하이닉스", "value": 1.80, "text": "-1.80"}, {"label": "NAVER", "value": 6.43, "text": "-6.43"}],
            beats=B("코스피는 0.61% 내린 5,342.73. 삼성전자는 0.97% 올랐고, SK하이닉스는 1.80% 내렸습니다.",
