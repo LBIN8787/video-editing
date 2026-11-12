@@ -158,12 +158,16 @@ def run(path: Path, upto: str = "G8") -> Report:
         if brand == "curiosity" and longform and spec.get("scenes"):   # v17 호기심 먼저 (04 §0)
             hk = tb.get("hook") or {}
             R.add("G1", "MUST", "curiosity: 훅 먼저 정하기 (topic_brief.hook: type·line·gap)", bool(hk.get("line") and hk.get("gap")), hk.get("type", ""))
-            s0 = spec["scenes"][0]
-            s0_txt = " ".join(b.get("say", "") for b in s0.get("beats", []))
-            R.add("G4", "MUST", "curiosity: 첫 장면은 인사·설명이 아니라 훅 (인사는 그다음 intro)",
-                  s0.get("type") != "intro" and "안녕하세요" not in s0_txt, s0.get("type"))
-            last_say = (s0.get("beats") or [{}])[-1].get("say", "")
-            R.add("G4", "MUST", "curiosity: 훅이 질문으로 끝남 (답은 숨김)", "?" in last_say or last_say.rstrip().endswith(("까요", "까")), last_say[-40:])
+            beats2 = [b.get("say", "") for s in spec["scenes"][:2] for b in s.get("beats", [])]
+            words = lambda t: set(_re2.findall(r"[가-힣A-Za-z0-9]{2,}", t))
+            hw0 = words(hk.get("line", ""))
+            hit = next((i for i, t in enumerate(beats2) if hw0 and len(words(t) & hw0) >= max(2, len(hw0) // 3)), None)
+            agenda = next((i for i, t in enumerate(beats2) if "순서" in t), None)
+            R.add("G4", "MUST", "curiosity: 짧은 인사·소개 뒤 곧바로 훅 (첫 두 장면 안, 순서 예고보다 앞) (04 §0)",
+                  hit is not None and hit <= 3 and (agenda is None or hit < agenda), f"훅 박자 {hit} · 순서 예고 {agenda}")
+            gap_w = words(hk.get("gap", ""))
+            R.add("G4", "MUST", "curiosity: 훅의 질문(gap)이 나옴 (답은 숨김)",
+                  any(("?" in t or "까요" in t) and len(words(t) & gap_w) >= 2 for t in beats2), hk.get("gap", "")[:40])
             pk = spec.get("package") or {}
             titles = [pk.get("title", "")] + list(pk.get("title_options") or [])
             hw = set(_re2.findall(r"[가-힣A-Za-z0-9]{2,}", (hk.get("line", "") + " " + hk.get("gap", ""))))
