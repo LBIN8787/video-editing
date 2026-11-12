@@ -31,6 +31,7 @@ brands:
       longform_statement: ch-source-brief   # 발언 원본 중심 (PC rebuild)
       longform_concept: ch-paper-column     # 개념·구조 칼럼
       longform_data: ch-data-motion         # 숫자·비교 리포트
+      daily: ch-market-daily                # v17 매일 아침: 전날 시장을 움직인 이슈·보고서·전망 (python -m ytflow daily)
       shorts: ch-money-shorts               # 하나만 알려 주는 안내
     manual: manual/03-market.md
 
@@ -60,6 +61,7 @@ brands:
     lines:
       longform_deep: ch-issues          # 12~15분 심층 (지식한입·김지윤식 구조)
       longform_quick: ch-issues         # 5~8분 빠른 정리 (크랩식 구조) — 같은 라인, 길이만 다르게
+      daily: ch-issues-daily            # v17 매일: 전날 가장 크게 다뤄진 구조적 이슈 하나 (python -m ytflow daily --brand issues)
     manual: manual/08-issues.md
 
 # ---------------------------------------------------------------- v15 카테고리 개성 (identity)

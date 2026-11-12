@@ -155,6 +155,29 @@ def run(path: Path, upto: str = "G8") -> Report:
         R.add("G4", "MUST", "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2)", not awk, awk[:3])
         first = " ".join(b.get("say", "") for s in spec.get("scenes", [])[:3] for b in s.get("beats", []))
         R.add("G4", "SHOULD", "첫 3장면 안에 질문", "?" in first or "까요" in first or "일까" in first, "")
+        if brand == "curiosity" and longform and spec.get("scenes"):   # v17 호기심 먼저 (04 §0)
+            hk = tb.get("hook") or {}
+            R.add("G1", "MUST", "curiosity: 훅 먼저 정하기 (topic_brief.hook: type·line·gap)", bool(hk.get("line") and hk.get("gap")), hk.get("type", ""))
+            s0 = spec["scenes"][0]
+            s0_txt = " ".join(b.get("say", "") for b in s0.get("beats", []))
+            R.add("G4", "MUST", "curiosity: 첫 장면은 인사·설명이 아니라 훅 (인사는 그다음 intro)",
+                  s0.get("type") != "intro" and "안녕하세요" not in s0_txt, s0.get("type"))
+            last_say = (s0.get("beats") or [{}])[-1].get("say", "")
+            R.add("G4", "MUST", "curiosity: 훅이 질문으로 끝남 (답은 숨김)", "?" in last_say or last_say.rstrip().endswith(("까요", "까")), last_say[-40:])
+            pk = spec.get("package") or {}
+            titles = [pk.get("title", "")] + list(pk.get("title_options") or [])
+            hw = set(_re2.findall(r"[가-힣A-Za-z0-9]{2,}", (hk.get("line", "") + " " + hk.get("gap", ""))))
+            tied = [t for t in titles if t and hw & set(_re2.findall(r"[가-힣A-Za-z0-9]{2,}", t))]
+            R.add("G6", "SHOULD", "curiosity: 제목이 훅에서 나옴 (훅과 같은 낱말)", bool(hw) and len(tied) >= max(1, len([t for t in titles if t]) - 1), f"{len(tied)}/{len([t for t in titles if t])}")
+        if ch in ("ch-market-daily", "ch-issues-daily"):   # v17 매일 브리핑 (03 §0, 08 §0-2)
+            db = _load(res / "daily_brief.json")
+            R.add("G1", "MUST", "매일 브리핑: daily_brief.json 있음 (python -m ytflow daily)", db is not None, "01_research/daily_brief.json")
+            intro_txt = " ".join(b.get("say", "") for s in spec.get("scenes", [])[:2] for b in s.get("beats", []))
+            R.add("G4", "MUST", "매일 브리핑: 오프닝에 기준 시각('○일 마감 기준' / '○시 기준')", "기준" in intro_txt, "")
+            if ch == "ch-market-daily":
+                fs = (res / "factsheet.md").read_text(encoding="utf-8") if (res / "factsheet.md").exists() else ""
+                kinds = [k for k in ("이슈", "보고서", "전망", "실적") if k in fs]
+                R.add("G3", "MUST", "매일 시장: 이야기마다 원인 종류(이슈·보고서·전망·실적)와 1차 출처를 팩트시트에", bool(kinds) and "http" in fs, kinds)
         if brand == "market":
             tail = [s.get("type") for s in spec.get("scenes", [])[-3:]]
             R.add("G4", "SHOULD", "market: 끝에 확인할 신호(checklist)", "checklist" in tail, tail)

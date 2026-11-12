@@ -23,6 +23,8 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **시사·사회 이슈 채널** (비교 채널 8곳 640편 분석: 좋아하는 편집·이유·욕망, 절차·전용 검사) | `docs/18-issues-research.md`, `manual/08-issues.md`, `channels/ch-issues/`, `scripts/issues_research.py` |
 | **매뉴얼 점검·편집 기준 v10·채널별 검토·배경 후보** (v9 약점 측정, 전후 비교, v10 연출, 채널마다 더할 연출, 상황별 배경 조사) | `docs/21-background-styles.md`, `docs/20-channel-review.md`, `docs/19-manual-gaps.md`, `manual/05-style-matching.md` §0-4, `ytflow/stages/edit10.py` |
 | **카테고리 개성 (v15)** — 채널을 묶어도 카테고리마다 다른 화면: 시사 증거판·시장 대시보드·호기심 칠판·AI 앱 창, 장 표지 사진은 주제에 맞게 듀오톤 | `channels/brands.yaml` 의 `identity`, `manual/05-style-matching.md` §0-7, `ytflow/stages/identity.py`, `python -m ytflow archive commons "검색어"` |
+| **매일 브리핑 (v17)** — 시장: 전날 시장을 크게 움직인 이슈·보고서·전망·실적 / 시사: 전날 구조적 이슈 하나 | `manual/03-market.md` §0, `manual/08-issues.md` §0-2, `channels/ch-market-daily`, `ch-issues-daily`, `ytflow/stages/daily.py` |
+| **호기심 채널: 설명보다 호기심 먼저 (v17)** — 맨 처음 훅(답은 숨김) → 인사 → 설명, 제목은 훅에서 | `manual/04-curiosity.md` §0, `topic_brief.hook` |
 | **반드시 지킬 것·검사** | `manual/06-checklist.md`, `python -m ytflow check <프로젝트>` |
 | 채널 회차 만들기 (반복 운영) | `skills/channel-run/SKILL.md`, `channels/README.md`, `docs/06-operations.md` |
 | 영상 1편 만들기 | `skills/video-make/SKILL.md` |
@@ -67,6 +69,7 @@ python -m ytflow make --channel <채널id> [--topic "주제" | --from-text 조�
 python -m ytflow make --style-ref <스타일id> [--topic "주제"]   # 스타일만 지정해 한 편
 python -m ytflow make --channel <채널id> --plan                  # 트렌드 → 소스 찾기 → 주제·형식 결정까지만 (검토용)
 python -m ytflow channels                                       # 채널 목록
+python -m ytflow daily [--brand market|issues] --project <YYYYMMDD>-market-daily   # 매일 브리핑 주제 찾기: 전날 시장(지수·업종·큰 움직임·이슈/보고서/전망·실적) / 전날 시사 이슈
 python -m ytflow demand [--channel ch-knowledge]                 # 분야별 수요 분석 (검색 → 채널 → 아웃라이어 배수)
 python -m ytflow archive search "influenza 1918" [--films]       # 공공 기록 사진·영상 (미국 의회도서관, 퍼블릭 도메인)
 python -m ytflow hybrid <프로젝트>                                # 하이브리드 영상 (02_script/hybrid.json → final.mp4, 끝에 sync-qa 자동)

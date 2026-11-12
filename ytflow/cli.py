@@ -292,6 +292,10 @@ def main(argv: list[str] | None = None) -> None:
     dm = sub.add_parser("demand", help="분야별 수요 분석 (검색 → 채널 → 아웃라이어) → .cache/demand/<날짜>/summary.md")
     dm.add_argument("--channel", default="ch-knowledge")
     dm.add_argument("--top", type=int, default=25)
+    dl = sub.add_parser("daily", help="매일 브리핑 주제 찾기: 전날 시장(지수·업종·큰 움직임·이슈/보고서/전망) 또는 전날 시사 이슈 → daily_brief.md")
+    dl.add_argument("--brand", default="market", choices=["market", "issues"])
+    dl.add_argument("--date", default="", help="기준 거래일 YYYY-MM-DD (기본: 한국 아침 기준 가장 최근 거래일)")
+    dl.add_argument("--project", default="", help="결과를 넣을 프로젝트 (없으면 새로 만듦)")
     ar = sub.add_parser("archive", help="공공 기록 사진·영상 찾기 (미국 의회도서관, 퍼블릭 도메인)")
     ar.add_argument("args", nargs="*")
     hb = sub.add_parser("hybrid", help="하이브리드 스타일 영상 만들기 (02_script/hybrid.json → final.mp4)")
@@ -426,6 +430,9 @@ def main(argv: list[str] | None = None) -> None:
     elif a.cmd == "demand":
         from .stages import demand
         demand.run(a.channel, a.top)
+    elif a.cmd == "daily":
+        from .stages import daily
+        daily.run(a.brand, a.date, a.project)
     elif a.cmd == "archive":
         from .stages import archive
         archive.main(a.args)

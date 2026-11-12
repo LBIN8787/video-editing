@@ -1,0 +1,23 @@
+id: ch-market-daily
+brand: market                               # channels/brands.yaml (욕망 = 채널)
+title: "(가칭) 어제 시장, 오늘 아침"
+format: longform
+style_ref: hybrid
+family: source
+concept: >
+  매일 아침, 전날 시장을 크게 움직인 것(이슈·증권사/기관 보고서·전망·실적)을 골라 '왜 움직였나'를 설명한다.
+  지수·업종 마감 → 가장 크게 움직인 이야기 2~3개 → 원인(1차 출처) → 시장 전체와 따로/같이 움직였나 → 오늘 확인할 것.
+niche: "미국·한국 시장 전날 마감 해설. 실제 시세와 1차 출처(회사 발표·공시·보고서 원문·연준·통계)만. 투자 권유는 하지 않는다."
+seed_keywords: ["뉴욕증시 마감", "코스피 마감", "특징주", "증권사 리포트", "목표가", "가이던스", "연준", "실적 발표"]
+target_minutes: 7
+cadence: "평일 매일 (한국 시간 아침, 미국 장 마감 뒤)"
+tone: "아침 시황 진행자. 숫자에는 비교 기준, 원인에는 출처, 끝에는 '오늘 볼 것'."
+daily:
+  scan: "python -m ytflow daily --project <YYYYMMDD>-market-daily"   # 전날 시장 → 01_research/daily_brief.md
+  stories: [2, 3]                  # 한 편에 다룰 이야기 수
+  window: "한국 아침 6~9시 제작 → 오전 업로드 (미국 장 마감 16:00 ET = 06:00 KST, 서머타임 05:00)"
+  as_of: "○월 ○일 마감 기준 (미국·한국 날짜를 따로)"
+sourcing:
+  start_from: data
+  datasets: ["시세: 야후 파이낸스 (marketdata.py, 날짜 확인)", "회사 발표·IR·SEC 8-K / DART 공시", "증권사·기관 보고서 원문(공개분) 또는 보도에 인용된 문장", "연준·통계청·BLS 발표"]
+  end_with: ["오늘 확인할 것 (일정·지표·발표 시각)"]
