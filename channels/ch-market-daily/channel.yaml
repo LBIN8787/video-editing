@@ -10,10 +10,10 @@ concept: >
 niche: "미국·한국 시장 전날 마감 해설. 실제 시세와 1차 출처(회사 발표·공시·보고서 원문·연준·통계)만. 투자 권유는 하지 않는다."
 seed_keywords: ["뉴욕증시 마감", "코스피 마감", "특징주", "증권사 리포트", "목표가", "가이던스", "연준", "실적 발표"]
 target_minutes: 7
-cadence: "1일 1영상 — 월~금 아침 브리핑(08시 전후), 큰 실적·어닝콜 날은 심층 분석으로 대신, 토 주간 분석, 일 분석글 (docs/23-stock-channel-plan.md)"
+cadence: "1일 1영상 — 월~금 아침 브리핑(08시 전후), 주제가 복잡한 날은(요일 무관) 심층 분석으로 대신, 토 주간 분석, 일 분석글 (docs/23-stock-channel-plan.md)"
 schedule:
   weekday: {kind: briefing, minutes: [6, 8], upload: "08:00 KST 전후"}
-  deep_dive: {kind: earnings_call, minutes: [7, 10], when: "큰 실적·어닝콜·사건이 있는 날 (그날의 1편을 대신)"}
+  deep_dive: {kind: deep_dive, minutes: [7, 12], when: "요일 고정 아님 — 주제의 복잡도로 매일 정함 (docs/23 §2 신호 둘 이상), 그날의 1편을 대신하고 앞 1분은 시장 요약"}
   saturday: {kind: weekly_review, minutes: [8, 12]}
   sunday: {kind: analysis, minutes: [8, 12]}
   holidays: "미국·한국 휴장일은 쉬거나 주간 분석으로"

@@ -135,14 +135,26 @@ def market(day: str, cache: Path) -> dict:
     words = Counter(w for n in out["market_news"] for w in set(re.findall(r"[가-힣A-Za-z]{2,}", n["title"])) if w not in stop)
     out["themes"] = [{"word": w, "count": c} for w, c in words.most_common(12) if c >= 3]
     ranked = sorted([m for m in big if m.get("news")], key=lambda x: -x["score"])[:3]
+    sox = next((x["pct"] for x in out["indices"] if x["ticker"] == "^SOX"), 0.0)
     for m in ranked:
         lead = max(m["driver_counts"], key=m["driver_counts"].get) if m["driver_counts"] else "이슈"
         alone = abs(m["rel"]) >= 2
+        # 브리핑이냐 심층이냐 (docs/23 §2): 신호 둘 이상이면 심층 후보 — 최종 판단은 사람
+        sig = []
+        if len([k for k, v in m["driver_counts"].items() if k != "이슈" and v >= 3]) >= 1 and m["driver_counts"].get("이슈", 0) >= 5:
+            sig.append("원인 종류 여러 갈래")
+        if abs(m["pct"]) >= 10 or (abs(sox) >= 4 and m["bench"] == "^SOX" and abs(m["rel"]) >= 3):
+            sig.append("시장·업종을 크게 움직임")
+        if m["driver_counts"].get("실적", 0) + m["driver_counts"].get("전망", 0) >= 4:
+            sig.append("실적·가이던스(어닝콜) 설명이 핵심")
+        if (m["ticker"].endswith(".KS") and abs(m["pct"]) >= 5) or (m["ticker"] in ("NVDA", "MU", "TSM") and abs(m["pct"]) >= 5):
+            sig.append("한국 시장으로 이어지는 고리")
         out["stories"].append({
             "ticker": m["ticker"], "name": m["name"], "pct": m["pct"], "rel": m["rel"], "bench": m["bench"], "driver": lead,
             "angle": ("업종·지수와 따로 움직임 → 회사만의 이유" if alone else "업종·지수와 같이 움직임 → 시장 전체의 이유"),
             "question": f"{m['name']}는 왜 {'올랐' if m['pct'] > 0 else '떨어졌'}을까?",
-            "headlines": [n["title"] for n in m["news"][:4]], "check_first": "회사 발표·공시·보고서 원문·당국 발표로 원인 확인"})
+            "headlines": [n["title"] for n in m["news"][:4]], "check_first": "회사 발표·공시·보고서 원문·당국 발표로 원인 확인",
+            "depth": "심층 후보" if len(sig) >= 2 else "브리핑", "depth_why": sig})
     return out
 
 
@@ -211,7 +223,8 @@ def to_md(b: dict) -> str:
           for m in b["movers"][:12]]
     L += ["", "## ④ 시장을 크게 움직인 이야기 — 상위 3개 (움직임 × 보도량)"]
     for i, s in enumerate(b["stories"], 1):
-        L += ["", f"### {i}. {s['name']} {s['pct']:+.2f}% — 원인 종류: **{s['driver']}**", f"- 각도: {s['angle']}", f"- 질문: {s['question']}",
+        L += ["", f"### {i}. {s['name']} {s['pct']:+.2f}% — 원인 종류: **{s['driver']}** · **{s.get('depth', '브리핑')}**{' (' + ', '.join(s.get('depth_why') or []) + ')' if s.get('depth_why') else ''}",
+              f"- 각도: {s['angle']}", f"- 질문: {s['question']}",
               *[f"- {h}" for h in s["headlines"]], f"- 먼저 확인: {s['check_first']}"]
     L += ["", "## ⑤ 그날의 주제어 (시장 전체 뉴스에 3번 이상) — 관심 종목 밖의 이야기도 여기서", ", ".join(f"{t['word']}({t['count']})" for t in b.get("themes", [])) or "(없음)"]
     L += ["", "## ⑥ 시장 전체 뉴스 (보고서·전망·마감 시황)"]
