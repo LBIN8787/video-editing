@@ -1,15 +1,15 @@
 {
  "project": "20261111-curiosity-hallucination",
- "manual_version": "15",
- "checked": "2026-11-11T12:41:22",
+ "manual_version": "16",
+ "checked": "2026-11-12T08:13:40",
  "pass": false,
  "rows": [
   {
    "gate": "G0",
    "level": "MUST",
    "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
-   "ok": false,
-   "detail": "[2026-11-11 · 20261112-bg-trials 기각] 진행 말투: 장 표지 '여기까지가 ~였고요.' 같은 끝맺음이 부자연스러워 흐름이 깸 (스타일·화면은 모두 합격)"
+   "ok": true,
+   "detail": ""
   },
   {
    "gate": "G1",
@@ -173,6 +173,34 @@
    "detail": ""
   },
   {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "curiosity: 훅 먼저 정하기 (topic_brief.hook: type·line·gap)",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "curiosity: 첫 장면은 인사·설명이 아니라 훅 (인사는 그다음 intro)",
+   "ok": false,
+   "detail": "intro"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "curiosity: 훅이 질문으로 끝남 (답은 숨김)",
+   "ok": false,
+   "detail": "시면, AI 답을 어떻게 믿어야 할지 감이 오실 거예요. 시작하겠습니다."
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "curiosity: 제목이 훅에서 나옴 (훅과 같은 낱말)",
+   "ok": false,
+   "detail": "0/4"
+  },
+  {
    "gate": "G4",
    "level": "MUST",
    "item": "오프닝: 본론 전에 MC 오프닝(intro: 인사·오늘 이야기·순서 예고·시작 멘트, 3박자 이상)",
@@ -324,7 +352,7 @@
    "level": "SHOULD",
    "item": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
    "ok": false,
-   "detail": "clean-white / 등록부 ['clean-flat', 'dark-doc', 'kinetic-poster', 'newsprint', 'paper-sketch']"
+   "detail": "clean-white / 등록부 ['chalkboard', 'clean-flat', 'dark-doc', 'kinetic-poster', 'newsprint', 'paper-sketch']"
   },
   {
    "gate": "G5",

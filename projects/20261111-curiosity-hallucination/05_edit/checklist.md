@@ -1,10 +1,10 @@
 # 체크리스트 — 20261111-curiosity-hallucination
 
-매뉴얼 v15 · 2026-11-11T12:41:22 · **MUST 실패 1개**
+매뉴얼 v16 · 2026-11-12T08:13:40 · **MUST 실패 3개**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
-| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ❌ | [2026-11-11 · 20261112-bg-trials 기각] 진행 말투: 장 표지 '여기까지가 ~였고요.' 같은 끝맺음이 부자연스러워 흐름 |
+| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ✅ |  |
 | G1 | MUST | topic_brief.json 있음 | ✅ | 01_research/topic_brief.json (schemas/topic_brief.schema.json) |
 | G1 | MUST | 브랜드(ai/market/curiosity) | ✅ | curiosity |
 | G1 | MUST | 욕망·시청자 질문 | ✅ | AI는 왜 그럴듯한 거짓말을 할까? |
@@ -28,6 +28,10 @@
 | G4 | SHOULD | 과장 단어 0개 | ✅ | [] |
 | G4 | MUST | 진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2) | ✅ | [] |
 | G4 | SHOULD | 첫 3장면 안에 질문 | ✅ |  |
+| G1 | MUST | curiosity: 훅 먼저 정하기 (topic_brief.hook: type·line·gap) | ❌ |  |
+| G4 | MUST | curiosity: 첫 장면은 인사·설명이 아니라 훅 (인사는 그다음 intro) | ❌ | intro |
+| G4 | MUST | curiosity: 훅이 질문으로 끝남 (답은 숨김) | ❌ | 시면, AI 답을 어떻게 믿어야 할지 감이 오실 거예요. 시작하겠습니다. |
+| G6 | SHOULD | curiosity: 제목이 훅에서 나옴 (훅과 같은 낱말) | ⚠️ | 0/4 |
 | G4 | MUST | 오프닝: 본론 전에 MC 오프닝(intro: 인사·오늘 이야기·순서 예고·시작 멘트, 3박자 이상) | ✅ |  |
 | G5 | MUST | 배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2) | ✅ | ['film', 'grid', 'photo', 'spot', 'tint'] |
 | G5 | SHOULD | 배경: 같은 바탕 3장면 연속 없음 (film 제외) | ✅ | [] |
@@ -49,7 +53,7 @@
 | G5 | MUST | 강조는 아껴서: 1분에 1번 이하 (이 영상 4번까지) | ✅ | 1번 [(16, 'kinetic')] |
 | G5 | MUST | 한 장면에 강조 1개까지 (위아래로 같은 내용 반복 금지) | ✅ | 넘친 장면 [] |
 | G5 | MUST | 핵심 단어 띄우기(words)는 단어 1~3개만 | ✅ | [] |
-| G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ⚠️ | clean-white / 등록부 ['clean-flat', 'dark-doc', 'kinetic-poster', 'newsprint', 'pap |
+| G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ⚠️ | clean-white / 등록부 ['chalkboard', 'clean-flat', 'dark-doc', 'kinetic-poster', 'ne |
 | G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ✅ | python -m ytflow style-pick <프로젝트> |
 | G6 | MUST | final.mp4 | ✅ |  |
 | G6 | MUST | 레이아웃 점검 비어 있음 | ✅ | {} |
