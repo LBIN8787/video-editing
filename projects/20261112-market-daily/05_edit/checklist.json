@@ -1,8 +1,8 @@
 {
  "project": "20261112-market-daily",
- "manual_version": "16",
- "checked": "2026-11-12T08:12:46",
- "pass": false,
+ "manual_version": "17",
+ "checked": "2026-11-12T08:26:53",
+ "pass": true,
  "rows": [
   {
    "gate": "G0",
@@ -15,7 +15,7 @@
    "gate": "G1",
    "level": "MUST",
    "item": "topic_brief.json 있음",
-   "ok": false,
+   "ok": true,
    "detail": "01_research/topic_brief.json (schemas/topic_brief.schema.json)"
   },
   {
@@ -29,57 +29,57 @@
    "gate": "G1",
    "level": "MUST",
    "item": "욕망·시청자 질문",
-   "ok": false,
-   "detail": ""
+   "ok": true,
+   "detail": "무엇이 반도체만 띄웠고, 왜 하루 만에 분위기가 바뀌었을까?"
   },
   {
    "gate": "G1",
    "level": "MUST",
    "item": "트리거·왜 지금",
-   "ok": false,
-   "detail": ""
+   "ok": true,
+   "detail": "11/11 미국 반도체 지수 +5.7% (코어위브 실적) → 장 마감 뒤 엔비디아 시간외 약 -9% (CEO 거취 보도) → 11/12 코스피 -0.6%"
   },
   {
    "gate": "G1",
    "level": "MUST",
    "item": "욕망 점수 ≥12, 욕망 강도·보여 줄 자료 ≥2",
-   "ok": false,
-   "detail": "합계 0 {}"
+   "ok": true,
+   "detail": "합계 15 {'desire': 3, 'clarity': 3, 'timeliness': 3, 'demand': 2, 'visuals': 2, 'angle': 2}"
   },
   {
    "gate": "G1",
    "level": "MUST",
    "item": "수요 증거 1개 이상",
-   "ok": false,
-   "detail": "0"
+   "ok": true,
+   "detail": "1"
   },
   {
    "gate": "G1",
    "level": "SHOULD",
    "item": "후보 3개 비교 기록",
-   "ok": false,
-   "detail": "0"
+   "ok": true,
+   "detail": "3"
   },
   {
    "gate": "G1",
    "level": "SHOULD",
    "item": "우리만의 답(our_angle)",
-   "ok": false,
-   "detail": ""
+   "ok": true,
+   "detail": "같은 날 '실적'이 띄우고 '이슈'가 끌어내린 하루 — 원인 종류를 나눠 보면 내일 볼 것이 보인다"
   },
   {
    "gate": "G1",
    "level": "SHOULD",
    "item": "무엇이 띄우나(driver: 소재·각도·형식 + 근거)",
-   "ok": false,
-   "detail": " · "
+   "ok": true,
+   "detail": "소재 · 하루 ±5% 이상 움직임 + 대형 이슈 동시"
   },
   {
    "gate": "G2",
    "level": "MUST",
    "item": "자료 화면마다 credit·url",
-   "ok": false,
-   "detail": "0개, 빠짐 []"
+   "ok": true,
+   "detail": "2개, 빠짐 []"
   },
   {
    "gate": "G2",
@@ -93,42 +93,42 @@
    "level": "SHOULD",
    "item": "자료 화면 소스 3종 이상 (롱폼)",
    "ok": false,
-   "detail": "0종"
+   "detail": "2종"
   },
   {
    "gate": "G3",
    "level": "MUST",
    "item": "팩트시트 + 출처 링크 3개 이상",
-   "ok": false,
-   "detail": "링크 0개"
+   "ok": true,
+   "detail": "링크 6개"
   },
   {
    "gate": "G3",
    "level": "SHOULD",
    "item": "확인 상태 표시(✅/⚠️)",
-   "ok": false,
+   "ok": true,
    "detail": ""
   },
   {
    "gate": "G3",
    "level": "SHOULD",
    "item": "'쓰지 않는 것' 목록",
-   "ok": false,
+   "ok": true,
    "detail": ""
   },
   {
    "gate": "G4",
    "level": "MUST",
    "item": "core_message·question·logic",
-   "ok": false,
+   "ok": true,
    "detail": ""
   },
   {
    "gate": "G4",
    "level": "MUST",
    "item": "비교 기준≥1·비유≥2·과거 사례≥1·풀이≥1",
-   "ok": false,
-   "detail": "{'compare_to': 0, 'analogies': 0, 'past_cases': 0, 'glossary': 0}"
+   "ok": true,
+   "detail": "{'compare_to': 3, 'analogies': 2, 'past_cases': 1, 'glossary': 3}"
   },
   {
    "gate": "G4",
@@ -169,7 +169,7 @@
    "gate": "G4",
    "level": "SHOULD",
    "item": "첫 3장면 안에 질문",
-   "ok": false,
+   "ok": true,
    "detail": ""
   },
   {
@@ -183,36 +183,36 @@
    "gate": "G4",
    "level": "MUST",
    "item": "매일 브리핑: 오프닝에 기준 시각('○일 마감 기준' / '○시 기준')",
-   "ok": false,
+   "ok": true,
    "detail": ""
   },
   {
    "gate": "G3",
    "level": "MUST",
    "item": "매일 시장: 이야기마다 원인 종류(이슈·보고서·전망·실적)와 1차 출처를 팩트시트에",
-   "ok": false,
-   "detail": "[]"
+   "ok": true,
+   "detail": "['이슈', '보고서', '전망', '실적']"
   },
   {
    "gate": "G4",
    "level": "SHOULD",
    "item": "market: 끝에 확인할 신호(checklist)",
-   "ok": false,
-   "detail": "[]"
+   "ok": true,
+   "detail": "['kinetic', 'checklist', 'outro']"
   },
   {
    "gate": "G4",
    "level": "MUST",
    "item": "오프닝: 본론 전에 MC 오프닝(intro: 인사·오늘 이야기·순서 예고·시작 멘트, 3박자 이상)",
-   "ok": false,
-   "detail": "첫 2장면에 intro 없음"
+   "ok": true,
+   "detail": ""
   },
   {
    "gate": "G5",
    "level": "MUST",
    "item": "배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2)",
-   "ok": false,
-   "detail": "[]"
+   "ok": true,
+   "detail": "['film', 'grid', 'photo', 'spot', 'tint']"
   },
   {
    "gate": "G5",
@@ -226,7 +226,7 @@
    "level": "MUST",
    "item": "반복 피로: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기: 자료·지도·사진 겹치기·시각 효과, 05 §0-3)",
    "ok": true,
-   "detail": "최장 0연속 (장면 None)"
+   "detail": "최장 2연속 (장면 7)"
   },
   {
    "gate": "G5",
@@ -239,15 +239,15 @@
    "gate": "G5",
    "level": "SHOULD",
    "item": "반복 피로: 눈요기 있는 장면 60% 이상",
-   "ok": false,
-   "detail": "0/0"
+   "ok": true,
+   "detail": "8/11"
   },
   {
    "gate": "G5",
    "level": "SHOULD",
    "item": "반복 피로: 같은 시각 효과 3장면 연속 없음 · 효과 3종 이상(롱폼)",
    "ok": false,
-   "detail": "[] 연속 []"
+   "detail": "['fx:tilt'] 연속 []"
   },
   {
    "gate": "G5",
@@ -255,6 +255,20 @@
    "item": "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6)",
    "ok": true,
    "detail": "이번 cream · 직전 ['light:slate', 'dark:dark-doc']"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게)",
+   "ok": true,
+   "detail": "market"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음",
+   "ok": true,
+   "detail": "표지 ['dc', 'nvidia'] · NASA 0"
   },
   {
    "gate": "G5",
@@ -267,36 +281,36 @@
    "gate": "G5",
    "level": "MUST",
    "item": "스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격)",
-   "ok": false,
-   "detail": "0종 []"
+   "ok": true,
+   "detail": "6종 ['archive-doc', 'data-report', 'hybrid-causal', 'kinetic-type', 'map-journey', 'paper-column']"
   },
   {
    "gate": "G5",
    "level": "MUST",
    "item": "한 스타일이 40% 넘지 않음",
    "ok": true,
-   "detail": " 0.0"
+   "detail": "data-report 0.4"
   },
   {
    "gate": "G5",
    "level": "MUST",
    "item": "한 장면 안에서 겹친 장면(layers) 3개 이상",
-   "ok": false,
-   "detail": "0"
+   "ok": true,
+   "detail": "4"
   },
   {
    "gate": "G5",
    "level": "MUST",
    "item": "같은 스타일 3장면 연속 없음",
    "ok": true,
-   "detail": "최장 0"
+   "detail": "최장 1"
   },
   {
    "gate": "G5",
    "level": "MUST",
    "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 2번까지)",
    "ok": true,
-   "detail": "0번 []"
+   "detail": "2번 [(7, 'number'), (14, 'kinetic')]"
   },
   {
    "gate": "G5",
@@ -323,78 +337,8 @@
    "gate": "G5",
    "level": "SHOULD",
    "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
-   "ok": false,
+   "ok": true,
    "detail": "python -m ytflow style-pick <프로젝트>"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "final.mp4",
-   "ok": false,
-   "detail": ""
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "레이아웃 점검 비어 있음",
-   "ok": false,
-   "detail": ""
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
-   "ok": false,
-   "detail": "{'within_0_5s': None, 'p95_abs_offset': None, 'median_abs_offset': None, 'video_minus_audio_s': None}"
-  },
-  {
-   "gate": "G6",
-   "level": "SHOULD",
-   "item": "납품 점검(음량 등)",
-   "ok": false,
-   "detail": "None"
-  },
-  {
-   "gate": "G6",
-   "level": "SHOULD",
-   "item": "최종 목소리 ElevenLabs",
-   "ok": false,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "MUST",
-   "item": "제목 후보 3개 + 이유",
-   "ok": false,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "MUST",
-   "item": "썸네일 A/B/C + 점검 ok",
-   "ok": false,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "SHOULD",
-   "item": "제목 앞 22자 안에 질문/핵심",
-   "ok": false,
-   "detail": ""
-  },
-  {
-   "gate": "G8",
-   "level": "MUST",
-   "item": "GitHub Release 업로드",
-   "ok": false,
-   "detail": ""
-  },
-  {
-   "gate": "G8",
-   "level": "MUST",
-   "item": "episodes.md 기록",
-   "ok": false,
-   "detail": "ch-market-daily"
   }
  ]
 }

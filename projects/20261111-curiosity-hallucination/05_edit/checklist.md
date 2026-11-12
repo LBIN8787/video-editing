@@ -1,6 +1,6 @@
 # 체크리스트 — 20261111-curiosity-hallucination
 
-매뉴얼 v16 · 2026-11-12T08:13:40 · **MUST 실패 3개**
+매뉴얼 v17 · 2026-11-12T08:17:38 · **MUST 실패 3개**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
@@ -29,8 +29,8 @@
 | G4 | MUST | 진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2) | ✅ | [] |
 | G4 | SHOULD | 첫 3장면 안에 질문 | ✅ |  |
 | G1 | MUST | curiosity: 훅 먼저 정하기 (topic_brief.hook: type·line·gap) | ❌ |  |
-| G4 | MUST | curiosity: 첫 장면은 인사·설명이 아니라 훅 (인사는 그다음 intro) | ❌ | intro |
-| G4 | MUST | curiosity: 훅이 질문으로 끝남 (답은 숨김) | ❌ | 시면, AI 답을 어떻게 믿어야 할지 감이 오실 거예요. 시작하겠습니다. |
+| G4 | MUST | curiosity: 짧은 인사·소개 뒤 곧바로 훅 (첫 두 장면 안, 순서 예고보다 앞) (04 §0) | ❌ | 훅 박자 None · 순서 예고 2 |
+| G4 | MUST | curiosity: 훅의 질문(gap)이 나옴 (답은 숨김) | ❌ |  |
 | G6 | SHOULD | curiosity: 제목이 훅에서 나옴 (훅과 같은 낱말) | ⚠️ | 0/4 |
 | G4 | MUST | 오프닝: 본론 전에 MC 오프닝(intro: 인사·오늘 이야기·순서 예고·시작 멘트, 3박자 이상) | ✅ |  |
 | G5 | MUST | 배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2) | ✅ | ['film', 'grid', 'photo', 'spot', 'tint'] |
