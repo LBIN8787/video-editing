@@ -1,6 +1,6 @@
 # 체크리스트 — 20261112-market-call
 
-매뉴얼 v17 · 2026-11-12T09:30:04 · **통과**
+매뉴얼 v18 · 2026-11-12T12:40:06 · **통과**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
@@ -45,11 +45,13 @@
 | G5 | SHOULD | v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게) | ✅ | market |
 | G5 | SHOULD | v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음 | ✅ | 표지 ['dc'] · NASA 0 |
 | G5 | MUST | 같은 type 3연속 없음 | ✅ | [] |
+| G5 | SHOULD | 자료 화면 공백 ≤45초 | ⚠️ | 최장 369초 |
+| G5 | SHOULD | 장 표지 간격 ≤200초 | ✅ | 최장 120초 |
 | G5 | MUST | 스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격) | ✅ | 7종 ['archive-doc', 'data-report', 'hybrid-causal', 'kinetic-type', 'map-journey' |
-| G5 | MUST | 한 스타일이 40% 넘지 않음 | ✅ | paper-column 0.35 |
-| G5 | MUST | 한 장면 안에서 겹친 장면(layers) 3개 이상 | ✅ | 6 |
+| G5 | MUST | 한 스타일이 40% 넘지 않음 | ✅ | paper-column 0.37 |
+| G5 | MUST | 한 장면 안에서 겹친 장면(layers) 3개 이상 | ✅ | 5 |
 | G5 | MUST | 같은 스타일 3장면 연속 없음 | ✅ | 최장 2 |
-| G5 | MUST | 강조는 아껴서: 1분에 1번 이하 (이 영상 3번까지) | ✅ | 2번 [(9, 'number'), (19, 'kinetic')] |
+| G5 | MUST | 강조는 아껴서: 1분에 1번 이하 (이 영상 6번까지) | ✅ | 2번 [(9, 'number'), (19, 'kinetic')] |
 | G5 | MUST | 한 장면에 강조 1개까지 (위아래로 같은 내용 반복 금지) | ✅ | 넘친 장면 [] |
 | G5 | MUST | 핵심 단어 띄우기(words)는 단어 1~3개만 | ✅ | [] |
 | G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ✅ | paper-sketch / 등록부 ['blueprint', 'clean-flat', 'corkboard', 'dark-doc', 'kinetic |

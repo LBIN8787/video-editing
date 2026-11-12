@@ -1186,11 +1186,15 @@ def make(project: Project, workers: int = 3) -> Path:
     sfx_events = []
     t_acc = 0.0
 
+    import threading
+    build_lock = threading.Lock()   # 장면 HTML 만들기는 한 번에 하나씩: 그래픽 팩(YTFLOW_SKIN)·글꼴·색이 전역 설정이라 동시에 만들면 다른 장면의 팩이 섞임 (2026-11-12 발견)
+
     def job(item):
         sc, bt, dur = item
         work = adir / "hb" / f"scene_{sc['id']:03d}"
         out = adir / f"hb_{sc['id']:03d}.mp4"
-        D = build_scene(project, spec, sc, bt, dur, work)
+        with build_lock:
+            D = build_scene(project, spec, sc, bt, dur, work)
         issues = D.qa + hyper.check(work)
         err = "" if out.exists() and out.stat().st_mtime > (work / "index.html").stat().st_mtime else render_scene(work, out)
         return sc["id"], D.sfx, issues, err
@@ -1297,5 +1301,7 @@ try:  # 새 연출 문법(아카이브 다큐·지도 여정·키네틱 타이�
     _directions.register()
     from . import edit10 as _edit10
     _edit10.register()
+    from . import motion as _motion   # 움직이는 비유 애니메이션 (metaphor 장면, styles/recipes/motion-metaphor.yaml)
+    _motion.register()
 except Exception as _e_dir:  # noqa: BLE001
     print(f"[hybrid] 새 연출 장면 등록 건너뜀: {_e_dir}")

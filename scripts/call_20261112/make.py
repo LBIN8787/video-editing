@@ -49,8 +49,8 @@ def main():
                    "질문하러 나온 애널리스트들이 질문보다 고맙다는 말을 먼저 한 어닝콜이 있었습니다. 실적이 좋아서만은 아니었습니다. 무엇이 달랐을까요?",
                    "이런 순서로 보겠습니다. 숫자와 약속, 시장의 걱정 세 가지와 경영진의 답, 그 답이 무엇으로 이어지는지, 그리고 남은 숙제까지요.",
                    "시작하겠습니다.")))
-    s(dict(type="bars", chapter=0, label="야후 파이낸스 종가 · 2026.11.10 → 11.11", title="어닝콜 다음 날 (%)", unit="%", emph=0,
-           layers=[{"kind": "locator", "at": [-74.31, 40.79], "label": "코어위브 본사 · 미국 뉴저지", "beat": 0, "side": "left", "top": 170, "scale": 2.2}],
+    s(dict(type="bars", chapter=0, label="야후 파이낸스 종가 · 2026.11.10 → 11.11", title="어닝콜 다음 날 (%)", unit="", emph=0,
+           layers=[{"kind": "locator", "at": [-74.31, 40.79], "label": "코어위브 본사 · 미국 뉴저지", "beat": 0, "side": "right", "top": 170, "scale": 2.2}],
            items=[{"label": "코어위브", "value": 24.71, "text": "+24.7"}, {"label": "마이크론", "value": 11.89, "text": "+11.9"},
                   {"label": "오라클", "value": 8.81, "text": "+8.8"}, {"label": "반도체 지수", "value": 5.66, "text": "+5.7"}],
            beats=B("먼저 결과부터 보죠. 어닝콜 다음 날 코어위브는 24.7% 올랐고, 마이크론과 오라클, 반도체 지수까지 함께 올랐습니다.",
@@ -81,7 +81,7 @@ def main():
            beats=B("첫 번째 걱정은 빚입니다. AI 데이터센터를 짓는 회사들이 빚을 너무 많이 진다는 걱정이 최근 시장을 짓눌렀죠.",
                    "CEO의 답은 이랬습니다. 지금 금리로는 담보 없는 채권으로 돈을 빌리지 않겠다, 그럴 필요도 없다.")))
     s(dict(type="checklist", chapter=2, label=LBL, title="그럼 돈은 어디서?",
-           layers=[{"kind": "number", "value": "약 90억 달러", "label": "앞으로 3개월 고객 선지급금·보증금", "beat": 0, "side": "right", "top": 640}],
+           layers=[{"kind": "number", "value": "약 90억 달러", "label": "앞으로 3개월 고객 선지급금·보증금", "beat": 0, "side": "right", "top": 260}],
            rows=[{"label": "고객이 미리 내는 돈 — 올해 계약의 70%에서 선지급", "state": "ok"},
                  {"label": "고객 계약에 묶은 담보 대출 — 계약이 끝날 때 다 갚도록", "state": "ok"},
                  {"label": "평균 차입 금리 7.9% — 1년 새 2.5%p 낮아짐", "state": "ok"},
@@ -94,9 +94,8 @@ def main():
            orig="We have 10x as much qualified demand as available capacity through the end of 2027.",
            beats=B("두 번째 걱정은 공급 과잉입니다. 데이터센터가 너무 많이 지어져서 곧 남아돌 거라는 시각이죠.",
                    "답은 수요가 10배라는 것이었습니다. 지금 줄 선 고객에게 다 팔 수도 있지만, 더 좋은 조건을 위해 일부러 기다리고 있다고까지 했습니다.")))
-    s(dict(type="bignum", chapter=2, label=LBL, small="옛 세대 GPU(암페어·호퍼) 이용료 · 지난 분기보다", value="+30~50%",
+    s(dict(type="bignum", chapter=2, label=LBL, small="걱정 ③ 낡은 GPU? · 옛 세대(암페어·호퍼) 이용료, 지난 분기보다", value="+30~50%",
            compare={"label": "2027년 재계약 시 추가 투자 없이", "value": "연 약 40억 달러"},
-           layers=[{"kind": "stamp", "text": "걱정 ③ GPU는 금방 낡는다?", "beat": 0, "dark": True, "color": "#1d1d1d"}],
            beats=B("세 번째 걱정은 GPU가 금방 낡아서 값어치를 잃는다는 겁니다. 그런데 몇 년 된 옛 세대 GPU의 이용료가 지난 분기보다 30에서 50% 올랐고, 원래 계약보다도 비싸게 다시 팔렸습니다.",
                    "2027년에 계약이 끝나는 GPU 13만 개를 지금 가격으로 다시 계약하면, 추가 투자 없이 1년에 40억 달러 가까운 매출이 생긴다고 했습니다.")))
     s(dict(type="quote", chapter=2, label=LBL + " · 질의응답", who="골드만삭스 애널리스트", role="첫 질문의 첫마디",
@@ -149,9 +148,9 @@ def main():
         3: {"layers": [{"kind": "photo", "src": "dc", "beat": 1, "side": "right", "w": 420, "top": 560, "caption": "데이터센터 예시 · CC BY 4.0"}]},
         4: {"fx": ["dolly"]},
         7: {"fx": ["tilt"]},
-        8: {"fx": ["scan"]},
+        8: {"fx": ["dolly"]},
         9: {"fx": ["dolly"]},
-        10: {"fx": ["scan"]},
+        10: {"fx": ["tilt"]},
         11: {"fx": ["tilt"]},
         14: {"fx": ["dolly"]},
         15: {"layers": [{"kind": "locator", "at": [126.98, 37.57], "label": "서울 · 11월 12일 SK하이닉스 -1.8%", "beat": 1, "side": "right", "top": 700, "scale": 2.0}]},

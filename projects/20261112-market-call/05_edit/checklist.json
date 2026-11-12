@@ -1,7 +1,7 @@
 {
  "project": "20261112-market-call",
- "manual_version": "17",
- "checked": "2026-11-12T09:30:04",
+ "manual_version": "18",
+ "checked": "2026-11-12T12:40:06",
  "pass": true,
  "rows": [
   {
@@ -293,6 +293,20 @@
   },
   {
    "gate": "G5",
+   "level": "SHOULD",
+   "item": "자료 화면 공백 ≤45초",
+   "ok": false,
+   "detail": "최장 369초"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "장 표지 간격 ≤200초",
+   "ok": true,
+   "detail": "최장 120초"
+  },
+  {
+   "gate": "G5",
    "level": "MUST",
    "item": "스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격)",
    "ok": true,
@@ -303,14 +317,14 @@
    "level": "MUST",
    "item": "한 스타일이 40% 넘지 않음",
    "ok": true,
-   "detail": "paper-column 0.35"
+   "detail": "paper-column 0.37"
   },
   {
    "gate": "G5",
    "level": "MUST",
    "item": "한 장면 안에서 겹친 장면(layers) 3개 이상",
    "ok": true,
-   "detail": "6"
+   "detail": "5"
   },
   {
    "gate": "G5",
@@ -322,7 +336,7 @@
   {
    "gate": "G5",
    "level": "MUST",
-   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 3번까지)",
+   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 6번까지)",
    "ok": true,
    "detail": "2번 [(9, 'number'), (19, 'kinetic')]"
   },
