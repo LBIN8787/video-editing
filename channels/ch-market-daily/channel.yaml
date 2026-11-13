@@ -34,3 +34,16 @@ tts:   # 2026-11-13 사용자 선택 (docs/08-voice.md §2차 후보 8명): Teo 
   elevenlabs: {voice_id: 0mlAtfsvMzFpppUuNWkV, model_id: eleven_v4, language_code: ko, stability: 0.55, speed: 1.0}
   # 키 없이: ElevenLabs 커넥터로 장(章)별 2~3덩어리 생성 → python -m ytflow voice-import <프로젝트> part1.mp3 part2.mp3 (테이크 중 대본과 다 맞는 것)
   # 크레딧: 한 편(6~8분, 2,500~3,300자) ≈ 2,100~2,800 크레딧/테이크 → 매일이면 월 7만~9만 (월 1만 무료 한도로는 부족)
+youtube:   # 유튜브 올리기·관리 (python -m ytflow yt-publish, docs/24-youtube-publish.md)
+  category_id: "25"          # 뉴스/정치 (시장 브리핑)
+  default_language: ko
+  made_for_kids: false
+  publish_time: "08:00"      # 한국 시간 예약 공개 (지났으면 바로 공개)
+  privacy: public
+  captions: true             # subs.ass → 한국어 자막 트랙
+  synthetic_media: false     # 실제 인물·사건처럼 보이는 합성 없음 (AI 목소리 내레이션은 채널 정보에 밝힘)
+  playlists:                 # 영상 종류 → 재생목록 (없으면 만듦)
+    briefing: "아침 시장 브리핑"
+    deep: "심층 분석"
+    weekly: "주간 시장 정리"
+    analysis: "주말 분석"

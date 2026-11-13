@@ -301,6 +301,13 @@ def main(argv: list[str] | None = None) -> None:
     cu.add_argument("--force", action="store_true", help="이미 찾은(사람이 고친) 구간도 다시 찾기")
     ab = sub.add_parser("art-brief", help="손그림 삽화 주문서: illust 장면마다 그릴 내용·파일 이름·카메라가 볼 곳 → 02_script/art_brief.md")
     ab.add_argument("project")
+    yu = sub.add_parser("yt-publish", help="유튜브 올리기·관리: 업로드(예약 공개)·썸네일·자막·재생목록 (공식 API, docs/24-youtube-publish.md)")
+    yu.add_argument("project")
+    yu.add_argument("--via", choices=["github", "here"], default="github", help="github: Actions 가 올림(기본, 키는 저장소 비밀값) / here: 이 컴퓨터에서 (YT_* 환경변수)")
+    yu.add_argument("--at", default=None, help="공개 시각 (예: 2026-11-14T08:00, 한국 시간). 없으면 채널 publish_time, 지났으면 바로 공개")
+    yu.add_argument("--privacy", choices=["public", "unlisted", "private"], default=None)
+    yu.add_argument("--thumb", default="A", help="썸네일 A/B/C (API 는 한 장만 — 테스트 및 비교는 Studio 에서)")
+    yu.add_argument("--dry-run", action="store_true", help="올리지 않고 무엇을 할지만 보기")
     yp = sub.add_parser("yt-pack", help="유튜브 업로드 묶음: 설명란(챕터 타임코드·출처·면책)·제목 후보·태그 → 05_edit/youtube.md")
     yp.add_argument("project")
     ec = sub.add_parser("earnings-call", help="어닝콜 녹취록 정리: 준비 발언 핵심 문장·애널리스트 질문표·질문 주제 → 01_research/earnings/<TICKER>_call.md")
@@ -450,6 +457,12 @@ def main(argv: list[str] | None = None) -> None:
         from .project import Project as _P
         from .stages import illust
         illust.brief(_P.open(a.project))
+    elif a.cmd == "yt-publish":
+        from .stages import ytpublish
+        if a.dry_run or a.via == "here":
+            ytpublish.run(a.project, at=a.at, privacy=a.privacy, dry_run=a.dry_run, thumb=a.thumb)
+        else:
+            ytpublish.request_github(a.project, at=a.at, privacy=a.privacy, thumb=a.thumb)
     elif a.cmd == "yt-pack":
         from .stages import ytpack
         ytpack.run(a.project)

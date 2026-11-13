@@ -1,0 +1,66 @@
+# 유튜브 올리기·관리: publish/<프로젝트> 브랜치가 올라오면 GitHub Release 'video-<프로젝트>' 의 영상을 받아
+# 공식 YouTube Data API 로 업로드(예약 공개)·썸네일·자막·재생목록까지 하고, 결과를 main 에 기록한 뒤 브랜치를 지운다.
+# 필요한 저장소 비밀값(한 번만, scripts/youtube_auth.py --to-github): YT_CLIENT_ID · YT_CLIENT_SECRET · YT_REFRESH_TOKEN
+# 요청: python -m ytflow yt-publish <프로젝트> --via github   (docs/24-youtube-publish.md)
+name: youtube-publish
+on:
+  push:
+    branches: ["publish/**"]
+permissions:
+  contents: write
+concurrency:
+  group: youtube-publish
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Read request
+        id: req
+        run: |
+          NAME="${GITHUB_REF#refs/heads/publish/}"
+          git fetch --depth 1 origin "$GITHUB_REF"
+          git show FETCH_HEAD:"_publish/${NAME}.json" > /tmp/req.json
+          echo "name=${NAME}" >> "$GITHUB_OUTPUT"
+          cat /tmp/req.json
+      - name: Get video from release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          D="projects/${{ steps.req.outputs.name }}/05_edit"
+          mkdir -p "$D"
+          gh release download "video-${{ steps.req.outputs.name }}" -D "$D" --clobber -p final.mp4 -p "thumbnail_*.png" -p subs.ass
+          ls -la "$D"
+      - name: Publish to YouTube
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: |
+          pip install -q pyyaml pillow
+          python - <<'PY'
+          import json
+          from ytflow.stages import ytpublish
+          r = json.load(open("/tmp/req.json"))
+          ytpublish.run(r["project"], at=r.get("at"), privacy=r.get("privacy"), thumb=r.get("thumb") or "A")
+          PY
+      - name: Record result on main
+        if: always()
+        run: |
+          F="projects/${{ steps.req.outputs.name }}/05_edit/youtube_publish.json"
+          [ -f "$F" ] || exit 0
+          git config user.name "ytflow-bot"; git config user.email "ytflow-bot@users.noreply.github.com"
+          git add -f "$F"; git commit -m "youtube: ${{ steps.req.outputs.name }} 올림 기록" || exit 0
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done
+      - name: Delete request branch
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X DELETE "repos/${GITHUB_REPOSITORY}/git/refs/heads/${GITHUB_REF#refs/heads/}" || true

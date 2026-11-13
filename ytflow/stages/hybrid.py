@@ -862,26 +862,47 @@ RENDER = {"footage": s_footage, "chart": s_chart, "versus": s_versus, "chapter":
 
 
 # ---------------------------------------------------------------- 음성·시간
+def _channel_tts(project: Project) -> dict:
+    try:
+        import yaml as _y
+        ed = _y.safe_load((project.path / "edit.yaml").read_text(encoding="utf-8")) or {}
+        cy = config.ROOT / "channels" / str(ed.get("channel")) / "channel.yaml"
+        return ((_y.safe_load(cy.read_text(encoding="utf-8")) or {}).get("tts") or {}) if cy.exists() else {}
+    except Exception:  # noqa: BLE001
+        return {}
+
+
 def voice(project: Project, spec: dict) -> dict:
     """박자마다 TTS → 03_voice/hb_<장면>_<박자>.wav, 길이 표."""
     vdir = project.dir("voice")
     vdir.mkdir(parents=True, exist_ok=True)  # 새 프로젝트는 폴더가 없을 수 있음
-    cfg = config.load("pipeline").get("tts", {})
+    cfg = dict(config.load("pipeline").get("tts", {}))
+    ch_tts = _channel_tts(project)   # 채널마다 정한 목소리 (channels/<id>/channel.yaml 의 tts) — 예: 이어 읽는 시장 = Teo
+    if ch_tts and os.environ.get("YTFLOW_TTS", "") != "edge":   # YTFLOW_TTS=edge 면 초안 목소리로 강제
+        cfg = {**cfg, **ch_tts, "elevenlabs": {**(cfg.get("elevenlabs") or {}), **(ch_tts.get("elevenlabs") or {})}}
+    el = cfg.get("backend") == "elevenlabs"
+    tag = f"\n#voice={(cfg.get('elevenlabs') or {}).get('voice_id', '')}" if el else ""   # 목소리를 바꾸면 박자 음성을 다시 만듦
     durs = {}
     for sc in spec["scenes"]:
         for k, b in enumerate(sc["beats"]):
             key = f"{sc['id']:03d}_{k}"
             wav = vdir / f"hb_{key}.wav"
             side = vdir / f"hb_{key}.txt"   # 대사가 바뀌면(장면 번호가 밀려도) 다시 만든다
-            if wav.exists() and (not side.exists() or side.read_text(encoding="utf-8") != b["say"]):
+            if wav.exists() and (not side.exists() or side.read_text(encoding="utf-8") != b["say"] + tag):
                 for ext in (".wav", ".mp3", ".words.json"):
                     (vdir / f"hb_{key}{ext}").unlink(missing_ok=True)
             if not wav.exists():
                 mp3 = vdir / f"hb_{key}.mp3"
-                if cfg.get("backend") == "elevenlabs":
+                done = False
+                if el:
                     from .media import _elevenlabs
-                    _elevenlabs(b["say"], mp3, cfg.get("elevenlabs") or {})
-                else:
+                    try:
+                        _elevenlabs(b["say"], mp3, cfg.get("elevenlabs") or {})
+                        done = True
+                    except Exception as e:  # noqa: BLE001  키 없음·크레딧 부족 → 초안 목소리로 (영상은 멈추지 않음, 기록만)
+                        print(f"[hybrid] ElevenLabs 실패 → edge 초안 목소리로: {str(e)[:160]}")
+                        el, tag = False, ""
+                if not done:
                     cmd = [shutil.which("edge-tts") or "edge-tts", "--voice", cfg.get("voice", "ko-KR-InJoonNeural"),
                            f"--rate={cfg.get('rate', '+0%')}", "--text", b["say"], "--write-media", str(mp3)]
                     px = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
@@ -893,7 +914,7 @@ def voice(project: Project, spec: dict) -> dict:
                 subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(mp3), "-af",
                                 "silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse",
                                 "-ar", "48000", "-ac", "2", str(wav)], check=True)
-            side.write_text(b["say"], encoding="utf-8")
+            side.write_text(b["say"] + tag, encoding="utf-8")
             durs[key] = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(wav)],
                                              capture_output=True, text=True).stdout)
     return durs
