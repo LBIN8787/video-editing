@@ -1346,5 +1346,7 @@ try:  # 새 연출 문법(아카이브 다큐·지도 여정·키네틱 타이�
     _cutedit.register()
     from . import illust as _illust     # 손그림 삽화 (illust 장면, styles/illustrated)
     _illust.register()
+    from . import newsdesk as _newsdesk  # 뉴스 데스크 카드 (newsdesk 장면, styles/news-desk)
+    _newsdesk.register()
 except Exception as _e_dir:  # noqa: BLE001
     print(f"[hybrid] 새 연출 장면 등록 건너뜀: {_e_dir}")

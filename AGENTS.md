@@ -31,6 +31,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **호기심 채널: 설명보다 호기심 먼저 (v18)** — 짧은 인사·소개 → 훅(답은 숨김) → 설명, 제목은 훅에서 | `manual/04-curiosity.md` §0, `topic_brief.hook` |
 | **원본 발언 컷편집 (v20)** — 어닝콜·기자회견 긴 원본에서 대본과 맞는 문장만 단어 단위로 잘라 그 사람의 목소리로 (`bite` 장면, 원문·번역 2단) | `styles/source-cut/STYLE.md`, `skills/edit-style-source-cut`, `python -m ytflow cut <프로젝트>`, `ytflow/stages/cutedit.py` |
 | **손그림 삽화 (v20)** — 삽화 한 장 위를 카메라가 박자마다 옮겨 가며 설명 (붓 쓸기 등장·boil·손그림 표시·생각 풍선, 그림체는 자유). 그림은 사람이 준비 | `styles/illustrated/STYLE.md`, `skills/edit-style-illustrated`, `python -m ytflow art-brief <프로젝트>`, `ytflow/stages/illust.py` |
+| **레퍼런스 2편 분석 (2026-11-13)** — 뉴스 데스크 카드(한 소식 = 한 장, `newsdesk` 장면) · 말하는 사람 쇼츠(본인 촬영 → 점프 컷·펀치 인·큰 자막·끼워 넣는 카드), 기존 스타일과 차이·장단점 | `docs/25-reference-2611.md`, `styles/news-desk/`, `styles/presenter-shorts/`, `python -m ytflow presenter <프로젝트>` |
 | **움직이는 비유 애니메이션 (따로 쓰는 스타일, 매뉴얼 기준 아님·품질 보완 필요)** — 무리가 한쪽으로 옮겨 가고 의태어가 튀어나오는 비유 장면 (`metaphor` 장면, migrate·pop). 사용자가 고를 때만 | `styles/motion-metaphor/STYLE.md`, `docs/22-motion-reference.md`(레퍼런스 재분석·v2 방향), `styles/recipes/motion-metaphor.yaml`, `ytflow/stages/motion.py` |
 | **반드시 지킬 것·검사** | `manual/06-checklist.md`, `python -m ytflow check <프로젝트>` |
 | 채널 회차 만들기 (반복 운영) | `skills/channel-run/SKILL.md`, `channels/README.md`, `docs/06-operations.md` |
@@ -79,6 +80,7 @@ python -m ytflow channels                                       # 채널 목록
 python -m ytflow daily [--brand market|issues] --project <YYYYMMDD>-market-daily   # 매일 브리핑 주제 찾기: 전날 시장(지수·업종·큰 움직임·이슈/보고서/전망·실적) / 전날 시사 이슈
 python -m ytflow cut <프로젝트>                                   # 원본 발언 컷편집: bite 장면 문장을 긴 원본에서 찾아 02_script/cuts.json
 python -m ytflow art-brief <프로젝트>                             # 손그림 삽화 주문서 → 02_script/art_brief.md
+python -m ytflow presenter <프로젝트>                             # 말하는 사람 쇼츠: 본인 촬영 → 점프 컷·펀치 인·훅·큰 자막·카드 (02_script/presenter.json)
 python -m ytflow yt-publish <프로젝트> [--dry-run] [--at 시각]     # 유튜브 올리기·관리 (공식 API, Actions 가 업로드·설명란·예약·썸네일·자막·재생목록)
 python -m ytflow yt-pack <프로젝트>                               # 유튜브 업로드 묶음: 설명란(챕터 타임코드·출처·면책)·제목 후보·태그 → 05_edit/youtube.md
 python -m ytflow earnings-call <프로젝트> <녹취록 PDF·주소> --ticker CRWV --period 3Q26   # 어닝콜 정리: 핵심 발언·애널리스트 질문표·질문 주제 (manual/03 §0-1)

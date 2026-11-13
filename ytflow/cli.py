@@ -301,6 +301,8 @@ def main(argv: list[str] | None = None) -> None:
     cu.add_argument("--force", action="store_true", help="이미 찾은(사람이 고친) 구간도 다시 찾기")
     ab = sub.add_parser("art-brief", help="손그림 삽화 주문서: illust 장면마다 그릴 내용·파일 이름·카메라가 볼 곳 → 02_script/art_brief.md")
     ab.add_argument("project")
+    pz = sub.add_parser("presenter", help="말하는 사람 쇼츠: 본인 촬영 영상 → 점프 컷·펀치 인·훅 제목·큰 자막·끼워 넣는 카드 (02_script/presenter.json)")
+    pz.add_argument("project")
     yu = sub.add_parser("yt-publish", help="유튜브 올리기·관리: 업로드(예약 공개)·썸네일·자막·재생목록 (공식 API, docs/24-youtube-publish.md)")
     yu.add_argument("project")
     yu.add_argument("--via", choices=["github", "here"], default="github", help="github: Actions 가 올림(기본, 키는 저장소 비밀값) / here: 이 컴퓨터에서 (YT_* 환경변수)")
@@ -457,6 +459,10 @@ def main(argv: list[str] | None = None) -> None:
         from .project import Project as _P
         from .stages import illust
         illust.brief(_P.open(a.project))
+    elif a.cmd == "presenter":
+        from .project import Project as _P
+        from .stages import presenter
+        presenter.make(_P.open(a.project))
     elif a.cmd == "yt-publish":
         from .stages import ytpublish
         if a.dry_run or a.via == "here":
