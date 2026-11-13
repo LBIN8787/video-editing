@@ -212,7 +212,7 @@ class Board:
             did = f"{self.p}_{mid}"
             self.html.append(f'<div id="{did}" style="position:absolute;left:{x - wch / 2:.0f}px;top:{y - 75}px;width:{wch:.0f}px;height:150px;'
                              f'border:9px double {RED};border-radius:14px;color:{RED};font-family:serif-x;font-size:{fs}px;line-height:1;display:flex;align-items:center;'
-                             f'justify-content:center;white-space:nowrap;transform:rotate({m.get("rot", -6)}deg);background:rgba(251,248,241,.9);opacity:0">{_e(text)}</div>')
+                             f'justify-content:center;white-space:nowrap;transform:rotate({m.get("rot", -6)}deg);background:rgba(251,248,241,.96);box-shadow:0 0 0 14px rgba(251,248,241,.96),0 10px 26px rgba(0,0,0,.25);opacity:0">{_e(text)}</div>')
             self.js.append(f'tl.fromTo("#{did}",{{opacity:0,scale:1.7}},{{opacity:1,scale:1,duration:0.26,ease:"power4.in"}},{t:.2f});')
             self._sfx("click-soft", t + 0.24)
             self.pos[mid] = (x, y, wch, 150)
@@ -221,7 +221,9 @@ class Board:
             fs = m.get("fs", 230)
             did = f"{self.p}_{mid}"
             self.html.append(f'<div id="{did}" style="position:absolute;left:{x - 600}px;top:{y - fs * 0.75:.0f}px;width:1200px;text-align:center;opacity:0">'
-                             f'<div id="{did}n" style="font-family:serif-x;font-size:{fs}px;line-height:1.1;color:{m.get("color", RED)};white-space:nowrap">{_e(val)}</div>'
+                             f'<div id="{did}n" style="font-family:serif-x;font-size:{fs}px;line-height:1.1;color:{m.get("color", RED)};white-space:nowrap;'
+                             + (f'display:inline-block;background:{CARD};padding:6px 40px 14px;box-shadow:0 14px 30px rgba(0,0,0,.28);transform:rotate(-1.5deg)' if m.get("card") else "")
+                             + f'">{_e(val)}</div>'
                              + (f'<div style="margin-top:6px">{__import__("ytflow.stages.story_kit", fromlist=["tag"]).tag(m["label"], m.get("lfs", 62))}</div>' if m.get("label") else "") + '</div>')
             self.js.append(f'tl.fromTo("#{did}",{{opacity:0,y:30}},{{opacity:1,y:0,duration:0.4,ease:"power2.out"}},{t:.2f});')
             mm = re.search(r"\d[\d,]*(\.\d+)?", val)
