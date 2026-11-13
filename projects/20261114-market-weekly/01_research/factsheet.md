@@ -35,6 +35,11 @@
 - F5 ⚠️ AP: 경제학자 다수는 12월 인상을 예상 (보도) — 영상에서는 '시장은 12월 회의를 주목'까지만
 - F6 ⚠️ 이란 전쟁 이후 유가 높음 (AP: 브렌트 95.81달러, 2월 말 72달러) — 에너지 물가 배경 설명에만
 
+- F7 ✅ **연준 금융안정보고서 (11/13, 1년 2회)** 요약 1번: "Measures of equity valuations have remained high, partly driven by market enthusiasm for super intelligence (SI)." — https://www.federalreserve.gov/publications/files/financial-stability-report-20261113.pdf (목록 https://www.federalreserve.gov/publications/financial-stability-report.htm)
+- F8 ✅ 같은 보고서 Box 5.1 (뉴욕 연은, 9~10월 시장 참가자 23곳 설문, "should not be interpreted as representing the views of the Federal Reserve"): "AI was the top-cited risk" — 걱정 ① 높은 주가와 실적 미달 시 조정 ② AI 사이버 공격 ③ 복잡한 AI 관련 자금 조달. "a sharp correction in AI-related equities, driven by uncertain returns on large capital expenditures". 장기 국채 금리 추가 상승도 주요 위험
+- F9 ✅ 같은 보고서: "Advanced computing–related debt issuance rose to more than $680 billion by October 2026, about a fivefold increase from $130 billion in all of 2023"
+- F10 ⚠️ 응답 비율 87%(봄 50%)는 보도(CNBC·Bloomberg 등) 숫자 — 보고서 그림에서 숫자를 직접 확인하지 못해 영상에서 쓰지 않음. '3조 달러 넘는 보증·리스'도 원문에서 확인 못 해 뺌
+
 ## 한국 · 원인 종류: **이슈**
 - K1 ✅ 11/13 코스피 5,290.53 (-0.98%), 장중 5,500선 넘었다가 하락 전환, 외국인 순매도(아주경제 5,475억 원, 매체마다 집계 다름 → 영상은 '5천억 원 넘게'), 삼성전자 -0.96%, SK하이닉스 -3.03% — 아주경제 https://www.ajunews.com/view/20261113152425151 , MTN https://news.mtn.co.kr/article/2026111315370634191
 - K2 ⚠️ 정부 자본시장 간담회에서 구체적 실행 계획은 나오지 않았다는 평가 (아주경제 1곳) — 영상에서 쓰지 않음
@@ -43,7 +48,8 @@
 - I1 💬 이번 주 반등은 걱정이 풀렸다기보다 너무 빠진 가격이 되돌아온 성격이 크다 — 근거 W2, R1, R2, R3 (반도체 지수는 아직 11/4 수준 아래)
 - I2 💬 엔비디아 공백 → 대안(AMD·브로드컴)으로 쏠렸다가 금요일 되돌림 — 하루 이틀의 쏠림은 쉽게 되돌아간다, 확인은 실적 — 근거 W3, W4, N5, N6, N7
 - I3 💬 금리가 오르는 한 주에 이자 없는 자산(금·비트코인)이 약했다 — 관찰, 인과 단정 안 함 — 근거 W5, F1
+- I5 💬 금융안정보고서가 13일 주가를 움직였다는 근거는 없음(말함). 다만 지난주 급락의 걱정(AI 투자 수익·빚)과 연준 보고서의 위험 1순위가 같다 — 근거 R2, F7, F8, F9
 - I4 💬 다음 주 엔비디아 실적과 연준 의사록이 세 흐름(AI 투자·리더십·금리)을 한꺼번에 시험 — 근거 N2, F4
 
 ## 쓰지 않는 것
-- 사적 인물 이름·사생활 내용 · 증권사 목표가 · 외국인 순매도 정확한 금액(매체마다 다름) · AP의 '첫 주간 상승' 표현(장중 기사) · 엔비디아 칩 중국 공급 의혹(보도 1곳, 확인 안 됨) · 월마트 등 다른 실적 일정(1곳)
+- 데일리·콜린스 연은 총재 발언(보도 1곳, 원문 미확인) · 사적 인물 이름·사생활 내용 · 증권사 목표가 · 외국인 순매도 정확한 금액(매체마다 다름) · AP의 '첫 주간 상승' 표현(장중 기사) · 엔비디아 칩 중국 공급 의혹(보도 1곳, 확인 안 됨) · 월마트 등 다른 실적 일정(1곳)
