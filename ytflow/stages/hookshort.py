@@ -81,28 +81,52 @@ def make(project: Project) -> Path:
     media, items, js, subs = [], [], [], []
     kws = spec.get("keywords", [])
     prev_file, flip = None, 0
+    from . import align, motion2
+    scene_end = {}
+    for n, (sc, k, b, t0, d) in enumerate(plan):
+        scene_end[sc["id"]] = t0 + d + (GAP if n + 1 < len(plan) else TAIL)
+    stages, sfx = {}, []
     for n, (sc, k, b, t0, d) in enumerate(plan):
         m = dict(sc.get("media") or {}, **(b.get("media") or {}))
-        src = project.dir("assets") / m["file"]
-        name = f"m{n:02d}{src.suffix}"
-        if not (a / name).exists():
-            shutil.copy(src, a / name)
-        same = m["file"] == prev_file
-        flip = (flip + 1) % 2 if same else 0
-        z = m.get("zoom", 1.0) * (1.12 if flip else 1.0)          # 같은 화면이면 번갈아 확대 (펀치 인)
-        pos = m.get("pos", "50% 0%")
         end = t0 + d + (GAP if n + 1 < len(plan) else TAIL)
-        vid = f"md{n}"
-        if src.suffix.lower() in (".mp4", ".mov", ".webm"):
-            media.append(f'<video id="{vid}" class="clip" src="assets/{name}" muted playsinline data-start="{t0 - (LEAD if n == 0 else 0):.3f}" '
-                         f'data-duration="{end - t0:.3f}" data-track-index="{2 + n % 2}" style="position:absolute;inset:0;width:100%;height:100%;'
-                         f'object-fit:cover;object-position:{pos};transform:scale({z});transform-origin:{pos}"></video>')
+        # 말에 맞춰 움직이는 사물 (모션 무대, motion2) — 낱말을 말하는 순간 생김
+        if b.get("motion"):
+            stg = stages.setdefault(sc["id"], motion2.Stage(f"st{sc['id']}"))
+            wav = project.dir("voice") / f"hb_{sc['id']:03d}_{k}.wav"
+            try:
+                ws = align.transcribe(wav, "ko")
+            except Exception:  # noqa: BLE001
+                ws = []
+            for mv in b["motion"]:
+                tm = t0 + (motion2.word_time(ws, b["say"], mv["t"], d) if mv.get("t") else 0.0) + mv.get("delay", 0.0)
+                stg.add(mv, tm, scene_end[sc["id"]])
+        if sc.get("stage") or not m.get("file"):   # 무대 바탕 (화면 캡처 없이 사물만)
+            if n == 0 or plan[n - 1][0] is not sc:
+                sid = f"bg{sc['id']}"
+                media.append(f'<div id="{sid}" style="position:absolute;inset:0;opacity:0;background:radial-gradient(120% 80% at 50% 40%,#1E2633 0%,#0B0E13 70%)">'
+                             f'<div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),'
+                             f'linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:60px 60px"></div></div>')
+                js.append(f'tl.set("#{sid}",{{opacity:1}},{(0 if n == 0 else t0):.3f});tl.set("#{sid}",{{opacity:0}},{scene_end[sc["id"]]:.3f});')
+            prev_file = None
         else:
-            media.append(f'<div id="{vid}" style="position:absolute;inset:0;overflow:hidden;opacity:0;background:#0d1117">'
-                         f'<img src="assets/{name}" style="width:100%;height:100%;object-fit:cover;object-position:{pos};transform-origin:{pos};transform:scale({z})"></div>')
-            js.append(f'tl.set("#{vid}",{{opacity:1}},{(0 if n == 0 else t0):.3f});tl.set("#{vid}",{{opacity:0}},{end:.3f});'
-                      f'tl.fromTo("#{vid} img",{{scale:{z}}},{{scale:{z * 1.04:.3f},duration:{end - t0:.3f},ease:"none"}},{t0:.3f});')
-        prev_file = m["file"]
+            src = project.dir("assets") / m["file"]
+            name = f"m{n:02d}{src.suffix}"
+            if not (a / name).exists():
+                shutil.copy(src, a / name)
+            flip = (flip + 1) % 2 if m["file"] == prev_file else 0
+            z = m.get("zoom", 1.0) * (1.12 if flip else 1.0)          # 같은 화면이면 번갈아 확대 (펀치 인)
+            pos = m.get("pos", "50% 0%")
+            vid = f"md{n}"
+            if src.suffix.lower() in (".mp4", ".mov", ".webm"):
+                media.append(f'<video id="{vid}" class="clip" src="assets/{name}" muted playsinline data-start="{t0 - (LEAD if n == 0 else 0):.3f}" '
+                             f'data-duration="{end - t0:.3f}" data-track-index="{2 + n % 2}" style="position:absolute;inset:0;width:100%;height:100%;'
+                             f'object-fit:cover;object-position:{pos};transform:scale({z});transform-origin:{pos}"></video>')
+            else:
+                media.append(f'<div id="{vid}" style="position:absolute;inset:0;overflow:hidden;opacity:0;background:#0d1117">'
+                             f'<img src="assets/{name}" style="width:100%;height:100%;object-fit:cover;object-position:{pos};transform-origin:{pos};transform:scale({z})"></div>')
+                js.append(f'tl.set("#{vid}",{{opacity:1}},{(0 if n == 0 else t0):.3f});tl.set("#{vid}",{{opacity:0}},{end:.3f});'
+                          f'tl.fromTo("#{vid} img",{{scale:{z}}},{{scale:{z * 1.04:.3f},duration:{end - t0:.3f},ease:"none"}},{t0:.3f});')
+            prev_file = m["file"]
         # 자막: 말하는 순간 바뀜
         wav = project.dir("voice") / f"hb_{sc['id']:03d}_{k}.wav"
         parts = hybrid._chunks(b["say"], spec.get("chunk", 12))
@@ -128,6 +152,11 @@ def make(project: Project) -> Path:
             js.append(f'tl.fromTo("#{iid}",{{opacity:0,scale:0.88,y:30}},{{opacity:1,scale:1,y:0,duration:0.3,ease:"back.out(1.8)"}},{ti:.3f});'
                       f'tl.from("#{iid} .cd",{{opacity:0,y:30,stagger:0.12,duration:0.25}},{ti + 0.1:.3f});'
                       f'tl.to("#{iid}",{{opacity:0,duration:0.15}},{t0 + d:.3f});')
+    for sid_, stg in stages.items():   # 모션 무대 마무리 (장면 끝에 사물이 사라짐)
+        h_, j_ = stg.finish(scene_end[sid_])
+        items.append(h_)
+        js.append(j_)
+        sfx += [(nm, tt) for nm, tt in stg.sfx]
     # 위·아래 어둡게(글자 대비) · 채널 이름 · 훅 제목 · 출처
     items.insert(0, '<div style="position:absolute;inset:0;background:rgba(0,0,0,.22)"></div>'
                     '<div style="position:absolute;left:0;right:0;top:0;height:900px;background:linear-gradient(180deg,rgba(0,0,0,.72),rgba(0,0,0,0))"></div>'
@@ -180,7 +209,15 @@ tl.seek(0);
         inputs += ["-i", str(project.dir("voice") / f"hb_{sc['id']:03d}_{k}.wav")]
         ms = int(round(t0 * 1000))
         filt.append(f"[{i}:a]adelay={ms}|{ms}[a{i}]")
-    filt.append("".join(f"[a{i}]" for i in range(len(plan))) + f"amix=inputs={len(plan)}:normalize=0,apad,atrim=0:{vdur:.3f},loudnorm=I=-14:TP=-1.5:LRA=7[out]")
+    files = hybrid.sfx_files()   # 효과음 (사물이 튀어나올 때 pop·whoosh — 작게)
+    nv = len(plan)
+    ev = [(nm, tt) for nm, tt in sfx if nm in files][:60]
+    for j, (nm, tt) in enumerate(ev):
+        inputs += ["-i", str(files[nm])]
+        ms = int(round(tt * 1000))
+        filt.append(f"[{nv + j}:a]volume=0.22,adelay={ms}|{ms}[f{j}]")
+    filt.append("".join(f"[a{i}]" for i in range(nv)) + "".join(f"[f{j}]" for j in range(len(ev)))
+                + f"amix=inputs={nv + len(ev)}:normalize=0,apad,atrim=0:{vdur:.3f},loudnorm=I=-14:TP=-1.5:LRA=7[out]")
     aud = work / "audio.wav"
     subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *inputs, "-filter_complex", ";".join(filt), "-map", "[out]",
                     "-ar", "48000", "-ac", "2", str(aud)], check=True)

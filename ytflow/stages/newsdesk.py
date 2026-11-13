@@ -142,6 +142,25 @@ def s_newsdesk(D, sc: dict, bt: list, dur: float):
         if p.get("caption"):
             D.items.append(f'<div style="position:absolute;left:{px}px;top:{py + ph + 14}px;width:{pw}px;text-align:center;font-family:sans;font-size:22px;color:{MUTED}">{_e(p["caption"])}</div>')
     # 아래: 출처 · 채널 주소
+    # 말에 맞춰 움직이는 사물 (motion2, 2026-11-13 사용자: 요약문보다 '대본에 맞춰 생기는 애니메이션') — 오른쪽 패널 대신 쓸 수 있음
+    if any(b.get("motion") for b in sc["beats"]):
+        from pathlib import Path as _P
+        from . import align, motion2
+        stg = motion2.Stage(f"nd{sc['id']}", 1920, 1080)
+        for k, (b, (t0, d)) in enumerate(zip(sc["beats"], bt)):
+            if not b.get("motion"):
+                continue
+            wav = _P(sc["_project_dir"]) / "03_voice" / f"hb_{sc['id']:03d}_{k}.wav"
+            try:
+                ws = align.transcribe(wav, "ko")
+            except Exception:  # noqa: BLE001
+                ws = []
+            for mv in b["motion"]:
+                stg.add(mv, t0 + (motion2.word_time(ws, b["say"], mv["t"], d) if mv.get("t") else 0.0) + mv.get("delay", 0.0), dur)
+        h_, j_ = stg.finish(dur, keep=True)
+        D.items.append(h_)
+        D.js.append(j_)
+        D.sfx += stg.sfx
     # 출처는 자막 상자(아래 가운데)와 겹치지 않게 본문 아래 줄에 (2026-11-13 시험작에서 겹침 발견)
     D.items.append(f'<div style="position:absolute;left:96px;top:830px;width:1730px;padding-top:14px;border-top:1px solid {LINE};'
                    f'font-family:sans;font-size:22px;color:{MUTED};display:flex;justify-content:space-between">'
