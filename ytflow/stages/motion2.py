@@ -181,6 +181,9 @@ class Stage:
                                 f'stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" marker-end="url(#{self.p}_head)" opacity="0"/>')
                 self.js.append(f'tl.set("#{aid}",{{opacity:1}},{t:.3f});tl.to("#{aid}",{{strokeDashoffset:0,duration:0.4,ease:"power2.inOut"}},{t:.3f});')
                 self.sfx.append(("whoosh-short", t))
+        if do == "anchor":   # 보이지 않는 기준점 (기존 장면의 그림 위치) — 화살표·날아가기의 출발·도착점
+            self.pos[m["id"]] = (x, y, m.get("w", 140), m.get("h", 140))
+            return
         if do == "pulse" and m.get("on") in self.pos:
             self.js.append(f'tl.fromTo("#{self.p}_{m["on"]}",{{scale:1}},{{scale:1.18,duration:0.16,yoyo:true,repeat:1,ease:"power1.inOut"}},{t:.3f});')
         elif do == "out" and m.get("on") in self.pos:
@@ -197,3 +200,41 @@ class Stage:
         if not keep and (self.pos or self.svg):
             js.append(f'tl.to("[id^={self.p}_]",{{opacity:0,duration:0.15}},{end - 0.15:.3f});')
         return html, "\n".join(js)
+
+
+def apply(D, sc: dict, bt: list, dur: float, w: int = 1920, h: int = 1080, keep: bool = True) -> None:
+    """어느 장면이든 박자에 motion 이 있으면 그 장면 위에 '말에 맞춰 생기는 사물'을 겹친다 (요약 + 애니메이션 혼용, 2026-11-13 사용자).
+    색은 그 장면의 그래픽 팩을 따른다."""
+    if not any(b.get("motion") for b in sc.get("beats", [])):
+        return
+    from pathlib import Path
+    from . import align
+    pal = D.skin.get("palette", {})
+    acc = pal.get("accent", YEL)
+    stg = Stage(f"mo{sc['id']}", w, h, theme={"icon_bg": pal.get("card2", pal.get("card", "#1C2E47")), "ring": acc, "arrow": acc,
+                                             "card": pal.get("card", "#16263C"), "card_ink": pal.get("ink", "#E8EEF6"), "label": pal.get("ink", "#E8EEF6")})
+    for k, (b, (t0, d)) in enumerate(zip(sc["beats"], bt)):
+        if not b.get("motion"):
+            continue
+        wav = Path(sc["_project_dir"]) / "03_voice" / f"hb_{sc['id']:03d}_{k}.wav"
+        try:
+            ws = align.transcribe(wav, "ko")
+        except Exception:  # noqa: BLE001
+            ws = []
+        for mv in b["motion"]:
+            stg.add(mv, t0 + (word_time(ws, b["say"], mv["t"], d) if mv.get("t") else 0.0) + mv.get("delay", 0.0), dur)
+    h_, j_ = stg.finish(dur, keep=keep)
+    D.items.append(h_)
+    D.js.append(j_)
+    D.sfx += stg.sfx
+
+
+def row_time(sc: dict, k: int, b: dict, t0: float, d: float, word: str) -> float | None:
+    """체크리스트 줄 등: 그 박자에서 word 를 말하는 순간 (없으면 None)."""
+    from pathlib import Path
+    from . import align
+    try:
+        ws = align.transcribe(Path(sc["_project_dir"]) / "03_voice" / f"hb_{sc['id']:03d}_{k}.wav", "ko")
+    except Exception:  # noqa: BLE001
+        ws = []
+    return t0 + word_time(ws, b["say"], word, d)

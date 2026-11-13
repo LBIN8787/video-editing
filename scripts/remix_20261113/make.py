@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 SRC = ROOT / "projects" / "20261113-market-daily"
 P = ROOT / "projects" / "20261113-market-remix"
-CH = {5: "체크리스트 → 뉴스 데스크 카드 + 움직이는 사물", 9: "대결 카드 → 뉴스 데스크 카드 + 돈의 이동", 14: "체크리스트 → 뉴스 데스크 카드 + 숫자 세기"}
+CH = {5: "요약 체크리스트 + 말에 맞춰 생기는 그림", 9: "대결 카드 + 돈이 날아가는 화살표", 14: "요약 체크리스트 + 매출 숫자 세기·아이콘"}
 
 
 def build():
@@ -27,42 +27,38 @@ def build():
     spec = json.loads((SRC / "02_script" / "hybrid.json").read_text(encoding="utf-8"))
     S = {s["id"]: s for s in spec["scenes"]}
     keep = lambda i: {"id": i, "chapter": S[i]["chapter"], "beats": S[i]["beats"]}
-    S[5] = dict(keep(5), type="newsdesk", idx=1, total=3, source="NVIDIA", tag="공시", tag_color="red", date="11월 11일 8-K",
-                headline="창업자가 물러났다", hl="물러났다", sub="젠슨 황, 사장·CEO·이사직에서 즉시 사임",
-                stats=[{"label": "효력", "value": "즉시", "color": "red"}, {"label": "임시 CEO", "value": "크레스 CFO", "color": "white"}],
-                bullets=["첫 이사회 의장 따로 선임", "정식 CEO는 안팎에서 찾는 중"],
-                footer="출처: 엔비디아 8-K 공시·보도자료 (SEC, 2026.11.11)")
-    S[5]["beats"] = [dict(S[5]["beats"][0], motion=[
-                        {"t": "사임", "do": "icon", "id": "seat", "icon": "🪑", "x": 1230, "y": 320, "d": 170, "bg": "#C9CDD3", "label": "CEO 자리"},
-                        {"t": "크레스", "do": "icon", "id": "kr", "icon": "👩‍💼", "x": 1660, "y": 320, "d": 170, "bg": "#3DDC97", "label": "크레스 (임시)"},
-                        {"t": "겸합니다", "do": "arrow", "a": "kr", "b": "seat"}]),
-                     dict(S[5]["beats"][1], motion=[
-                        {"t": "의장", "do": "icon", "id": "ch", "icon": "🏛️", "x": 1230, "y": 630, "d": 160, "label": "이사회 의장"},
-                        {"t": "후보", "do": "icon", "id": "sr", "icon": "🔎", "x": 1660, "y": 630, "d": 160, "bg": "#58A6FF", "label": "정식 CEO 찾는 중"}])]
-    S[9] = dict(keep(9), type="newsdesk", idx=2, total=3, source="AMD · BROADCOM", tag="흐름", tag_color="green", date="11월 12일 마감",
-                headline="돈은 대안으로 옮겨 갔다", hl="대안으로", sub="반도체 지수가 내린 날, 두 회사만 반대로",
-                stats=[{"label": "AMD", "value": "+5.86%", "color": "green"}, {"label": "브로드컴", "value": "+5.54%", "color": "green"},
-                       {"label": "엔비디아", "value": "-4.34%", "color": "red"}],
-                footer="출처: 야후 파이낸스 종가 (2026.11.12) · 해석: 보도")
-    S[9]["beats"] = [dict(S[9]["beats"][0], motion=[
-                        {"t": "같은", "do": "icon", "id": "nv", "icon": "💸", "x": 1180, "y": 330, "d": 160, "bg": "#FF5A4E"},
-                        {"t": "AMD", "do": "icon", "id": "amd", "icon": "📈", "x": 1660, "y": 220, "d": 170, "bg": "#3DDC97", "label": "AMD +5.86%"},
-                        {"t": "AMD", "do": "arrow", "a": "nv", "b": "amd", "delay": 0.15},
-                        {"t": "브로드컴", "do": "icon", "id": "av", "icon": "📈", "x": 1660, "y": 540, "d": 170, "bg": "#3DDC97", "label": "브로드컴 +5.54%"},
-                        {"t": "브로드컴", "do": "arrow", "a": "nv", "b": "av", "delay": 0.15},
-                        {"t": "반도체", "do": "icon", "id": "sox", "icon": "🏭", "x": 1180, "y": 640, "d": 170, "bg": "#C9CDD3", "label": "반도체 지수 ↓"}]),
-                     dict(S[9]["beats"][1], motion=[{"t": "가속기", "do": "pulse", "on": "amd"}, {"t": "맞춤형", "do": "pulse", "on": "av"}])]
-    S[14] = dict(keep(14), type="newsdesk", idx=3, total=3, source="NAVER", tag="주의", tag_color="yellow", date="11월 12일",
-                 headline="최대 매출에도 떨어졌다", hl="떨어졌다", sub="좋은 실적도 기대와 비교된다",
-                 stats=[{"label": "주가", "value": "-6.43%", "color": "red"}, {"label": "매출 증가", "value": "+10.7%", "color": "green"}],
-                 bullets=["하락 이유는 보도의 해석 (회사 설명 아님)"],
-                 footer="출처: NAVER 3분기 실적 공시 · 아주경제 보도 (2026.11.12)")
-    S[14]["beats"] = [dict(S[14]["beats"][0], motion=[
-                         {"t": "3조", "do": "count", "id": "rev", "value": "34,724억", "label": "3분기 매출 (원)", "x": 1440, "y": 330, "w": 720, "h": 330, "fs": 120},
-                         {"t": "여섯", "do": "icon", "id": "six", "icon": "🏆", "x": 1230, "y": 650, "d": 150, "label": "6분기 연속 최대"}]),
-                      dict(S[14]["beats"][1], motion=[
-                         {"t": "불확실성", "do": "icon", "id": "q", "icon": "❓", "x": 1660, "y": 650, "d": 150, "bg": "#FF5A4E", "label": "AI 협력 불확실성"},
-                         {"t": "해석", "do": "pulse", "on": "q"}])]
+    # v2 (2026-11-13 사용자: "한눈에 — 중요 내용 정리(요약)에 애니메이션·그림을 덧붙여 혼용"):
+    # 요약 장면(체크리스트·대결)은 그대로 두고, 줄은 핵심 낱말을 말할 때 나타나게 + 오른쪽에 말에 맞춰 생기는 사물
+    s5 = dict(S[5]); s5.pop("layers", None)
+    s5.update(x=150, text_w=860)
+    s5["rows"] = [dict(r, t=t) for r, t in zip(S[5]["rows"], ("사임", "크레스", "의장", "후보"))]
+    s5["beats"] = [dict(S[5]["beats"][0], motion=[
+                       {"t": "사임", "do": "icon", "id": "seat", "icon": "🪑", "x": 1430, "y": 330, "d": 170, "label": "CEO 자리"},
+                       {"t": "크레스", "do": "icon", "id": "kr", "icon": "👩‍💼", "x": 1760, "y": 330, "d": 150, "label": "크레스 (임시)"},
+                       {"t": "겸합니다", "do": "arrow", "a": "kr", "b": "seat"}]),
+                   dict(S[5]["beats"][1], motion=[
+                       {"t": "의장", "do": "icon", "id": "ch", "icon": "🏛️", "x": 1430, "y": 640, "d": 150, "label": "이사회 의장"},
+                       {"t": "후보", "do": "icon", "id": "sr", "icon": "🔎", "x": 1760, "y": 640, "d": 150, "label": "CEO 찾는 중"}])]
+    S[5] = s5
+    s9 = dict(S[9])   # 대결 카드(AMD vs 엔비디아) 그대로 + 돈이 엔비디아에서 AMD 쪽으로 날아감
+    s9["beats"] = [dict(S[9]["beats"][0], motion=[   # 대결 장면은 막대 두 개로 그려짐: AMD 막대 위(516,300), 엔비디아 막대 위(960,470)
+                       {"do": "anchor", "id": "nvA", "x": 960, "y": 580, "w": 120, "h": 60},
+                       {"do": "anchor", "id": "amdA", "x": 516, "y": 300, "w": 160, "h": 90},
+                       {"t": "AMD", "do": "icon", "id": "m1", "icon": "💸", "from": "nvA", "x": 740, "y": 250, "d": 110},
+                       {"t": "AMD", "do": "arrow", "a": "nvA", "b": "amdA", "delay": 0.2},
+                       {"t": "브로드컴", "do": "icon", "id": "av", "icon": "📈", "x": 1480, "y": 330, "d": 140, "label": "브로드컴 +5.54%"},
+                       {"t": "브로드컴", "do": "arrow", "a": "nvA", "b": "av", "delay": 0.2}]),
+                   S[9]["beats"][1]]
+    S[9] = s9
+    s14 = dict(S[14]); s14.update(x=150, text_w=880)
+    s14["rows"] = [dict(r, t=t) for r, t in zip(S[14]["rows"], ("3조", "여섯", "불확실성"))]
+    s14["beats"] = [dict(S[14]["beats"][0], motion=[
+                        {"t": "3조", "do": "count", "id": "rev", "value": "34,724억", "label": "3분기 매출 (원)", "x": 1560, "y": 340, "w": 560, "h": 260, "fs": 96},
+                        {"t": "여섯", "do": "icon", "id": "six", "icon": "🏆", "x": 1430, "y": 660, "d": 140, "label": "6분기 연속"}]),
+                    dict(S[14]["beats"][1], motion=[
+                        {"t": "불확실성", "do": "icon", "id": "q", "icon": "❓", "x": 1720, "y": 660, "d": 140, "bg": "#FF5A4E", "label": "AI 협력?"},
+                        {"t": "해석", "do": "pulse", "on": "q"}])]
+    S[14] = s14
     spec["scenes"] = [S[i] for i in sorted(S)]
     spec["title"] = spec.get("title", "") + " (혼합 스타일 비교판)"
     (P / "02_script" / "hybrid.json").write_text(json.dumps(spec, ensure_ascii=False, indent=1), encoding="utf-8")

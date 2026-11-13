@@ -536,25 +536,30 @@ def s_checklist(D: HDoc, sc: dict, bt: list, dur: float):
     D.h1(sc.get("title", ""), y=150)
     rows = sc["rows"]
     y0, rh = 310, 125
+    xl = sc.get("x", 380)                     # 오른쪽에 움직이는 그림을 둘 때: "x": 160, "text_w": 900 (요약 + 애니메이션 혼용)
+    tw = sc.get("text_w", 1000)
     shown = 0
-    for b, (t0, d) in zip(sc["beats"], bt):
+    from . import motion2
+    for k_b, (b, (t0, d)) in enumerate(zip(sc["beats"], bt)):
         upto = b.get("upto", len(rows))
         for r_i in range(shown, upto):
             r = rows[r_i]
             y = y0 + r_i * rh
             at = t0 + 0.3 + (r_i - shown) * 0.9
-            D.rough("rectangle", [380, y - 30, 60, 60], D.ink, 3, at=at, dur=0.3)
-            D.text(480, y, r["label"], FT("box"), fit(FT("box"), r["label"], 46, 1000).size, D.ink, at=at + 0.1, anchor="lm")
+            if r.get("t"):   # 그 줄의 핵심 낱말을 말하는 순간 줄이 나타남
+                at = max(t0, (motion2.row_time(sc, k_b, b, t0, d, r["t"]) or at) - 0.15)
+            D.rough("rectangle", [xl, y - 30, 60, 60], D.ink, 3, at=at, dur=0.3)
+            D.text(xl + 100, y, r["label"], FT("box"), fit(FT("box"), r["label"], 46, tw).size, D.ink, at=at + 0.1, anchor="lm")
             st = r.get("state")
-            if st == "yes":
-                D.rough("linearPath", [[[390, y], [405, y + 20], [436, y - 26]]], "#2E7D4F", 6, at=at + 0.45, dur=0.3)
+            if st in ("yes", "ok"):   # 확인된 줄은 체크 (2026-11-13: 'ok' 가 빈 칸으로 남아 무엇이 확인인지 안 보임)
+                D.rough("linearPath", [[[xl + 10, y], [xl + 25, y + 20], [xl + 56, y - 26]]], "#2E7D4F", 6, at=at + 0.45, dur=0.3)
             elif st == "no":
-                D.rough("line", [388, y - 22, 432, y + 22], D.red, 6, at=at + 0.45, dur=0.15)
-                D.rough("line", [432, y - 22, 388, y + 22], D.red, 6, at=at + 0.6, dur=0.15)
+                D.rough("line", [xl + 8, y - 22, xl + 52, y + 22], D.red, 6, at=at + 0.45, dur=0.15)
+                D.rough("line", [xl + 52, y - 22, xl + 8, y + 22], D.red, 6, at=at + 0.6, dur=0.15)
             elif st == "date":
                 D.text(1500, y, r.get("value", ""), FT("value"), 52, D.red, at=at + 0.45, anchor="lm")
             elif st == "warn":
-                D.icon("triangle-alert", 410, y, 44, "#C77B12", at=at + 0.4)
+                D.icon("triangle-alert", xl + 30, y, 44, "#C77B12", at=at + 0.4)
             D.sfx.append(("pencil", at))
         shown = upto
         if b.get("stamp"):
@@ -1024,6 +1029,9 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     from . import graphics
     if not graphics.dispatch(D, sc, bt, dur, RENDER):   # 그래픽 팩이 다른 컴포넌트(그림)를 고르면 그걸로
         RENDER[sc["type"]](D, sc, bt, dur)
+    if sc["type"] != "newsdesk":   # 요약 장면 위에 '말에 맞춰 생기는 사물' (박자 motion, docs/25 §8)
+        from . import motion2
+        motion2.apply(D, sc, bt, dur)
     if sc.get("layers"):   # 한 장면 안에서 스타일 겹치기 (directions.apply_layers)
         from . import directions
         directions.apply_layers(D, project, spec, sc, bt, dur, a)
