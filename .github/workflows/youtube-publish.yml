@@ -36,7 +36,8 @@ jobs:
         run: |
           D="projects/${{ steps.req.outputs.name }}/05_edit"
           mkdir -p "$D"
-          gh release download "video-${{ steps.req.outputs.name }}" -D "$D" --clobber -p final.mp4 -p "thumbnail_*.png" -p subs.ass
+          if grep -q '"resume": true' /tmp/req.json; then P="-p thumbnail_*.png -p subs.ass"; else P="-p final.mp4 -p thumbnail_*.png -p subs.ass"; fi
+          gh release download "video-${{ steps.req.outputs.name }}" -D "$D" --clobber $P
           ls -la "$D"
       - name: Publish to YouTube
         env:
@@ -49,7 +50,7 @@ jobs:
           import json
           from ytflow.stages import ytpublish
           r = json.load(open("/tmp/req.json"))
-          ytpublish.run(r["project"], at=r.get("at"), privacy=r.get("privacy"), thumb=r.get("thumb") or "A")
+          ytpublish.run(r["project"], at=r.get("at"), privacy=r.get("privacy"), thumb=r.get("thumb") or "A", resume=bool(r.get("resume")))
           PY
       - name: Record result on main
         if: always()

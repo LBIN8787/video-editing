@@ -120,13 +120,19 @@ def _req(tok, method, url, body=None, ctype="application/json", headers=None):
         h["Content-Type"] = ctype
         if isinstance(body, (dict, list)):
             body = json.dumps(body, ensure_ascii=False).encode()
-    req = urllib.request.Request(url, data=body, method=method, headers=h)
-    try:
-        with urllib.request.urlopen(req, timeout=600) as r:
-            raw = r.read()
-            return (json.loads(raw) if raw else {}), r.headers
-    except urllib.error.HTTPError as e:
-        raise SystemExit(f"[yt-publish] {method} {url.split('?')[0]} → {e.code}: {e.read()[:600].decode('utf-8', 'replace')}")
+    import time
+    for k in range(4):   # 409 ABORTED·5xx 는 유튜브 쪽 일시 오류 → 잠시 뒤 다시 (2026-11-13 재생목록 409 발생)
+        req = urllib.request.Request(url, data=body, method=method, headers=h)
+        try:
+            with urllib.request.urlopen(req, timeout=600) as r:
+                raw = r.read()
+                return (json.loads(raw) if raw else {}), r.headers
+        except urllib.error.HTTPError as e:
+            msg = e.read()[:600].decode("utf-8", "replace")
+            if e.code in (409, 500, 502, 503, 504) and k < 3 and "upload/youtube/v3/videos" not in url:
+                time.sleep(3 * 2 ** k)
+                continue
+            raise SystemExit(f"[yt-publish] {method} {url.split('?')[0]} → {e.code}: {msg}")
 
 
 def upload(tok, video: Path, meta: dict) -> str:
@@ -185,12 +191,15 @@ def build_meta(pr: Project, at: str | None = None, privacy: str | None = None) -
     return meta, s
 
 
-def run(project: str, at: str | None = None, privacy: str | None = None, dry_run: bool = False, thumb: str = "A") -> dict:
+def run(project: str, at: str | None = None, privacy: str | None = None, dry_run: bool = False, thumb: str = "A", resume: bool = False) -> dict:
     pr = Project.open(project)
     edir = pr.dir("edit")
     rec_p = edir / "youtube_publish.json"
-    if rec_p.exists() and json.loads(rec_p.read_text(encoding="utf-8")).get("video_id") and not dry_run:
-        raise SystemExit(f"[yt-publish] 이미 올림: {rec_p} (다시 올리려면 이 파일을 지우세요 — 중복 업로드 방지)")
+    old = json.loads(rec_p.read_text(encoding="utf-8")) if rec_p.exists() else {}
+    if old.get("video_id") and not dry_run:
+        if not resume:
+            raise SystemExit(f"[yt-publish] 이미 올림: {rec_p} (못 한 단계만 다시: --resume / 새로 올리려면 이 파일을 지우세요)")
+        return _resume(pr, old, rec_p, thumb)
     meta, s = build_meta(pr, at, privacy)
     video = edir / "final.mp4"
     plan = {"title": meta["snippet"]["title"], "privacy": meta["status"]["privacyStatus"], "publishAt": meta["status"].get("publishAt"),
@@ -222,7 +231,28 @@ def run(project: str, at: str | None = None, privacy: str | None = None, dry_run
     return rec
 
 
-def request_github(project: str, at: str | None = None, privacy: str | None = None, thumb: str = "A") -> None:
+def _resume(pr: Project, rec: dict, rec_p: Path, thumb: str) -> dict:
+    """이미 올린 영상에 빠진 단계(썸네일·자막·재생목록)만 다시."""
+    s, edir, vid, tok = settings(pr), pr.dir("edit"), rec["video_id"], _token()
+    steps = {"thumbnail": lambda: thumbnail(tok, vid, edir / f"thumbnail_{thumb}.png"),
+             "captions": lambda: captions(tok, vid, ass_to_srt(edir / "subs.ass")),
+             "playlist": lambda: playlist(tok, vid, rec["playlist"]) if rec.get("playlist") else None}
+    rec["warnings"] = []
+    for name, fn in steps.items():
+        if name in rec["steps"]:
+            continue
+        try:
+            fn()
+            rec["steps"].append(name)
+        except SystemExit as e:
+            rec["warnings"].append(f"{name}: {e}")
+    rec["resumed_at"] = dt.datetime.now(KST).isoformat(timespec="seconds")
+    rec_p.write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"[yt-publish] 다시: {', '.join(rec['steps'])}" + (f" · 경고 {len(rec['warnings'])}" if rec["warnings"] else ""))
+    return rec
+
+
+def request_github(project: str, at: str | None = None, privacy: str | None = None, thumb: str = "A", resume: bool = False) -> None:
     """GitHub Actions 에 올리기를 맡긴다: publish/<프로젝트> 브랜치에 요청 파일 하나를 올리면 워크플로가 Release 영상을 받아 올린다."""
     import subprocess
     import tempfile
@@ -231,9 +261,9 @@ def request_github(project: str, at: str | None = None, privacy: str | None = No
     name = pr.path.name
     if not (pr.dir("edit") / "youtube.md").exists():
         raise SystemExit("[yt-publish] 05_edit/youtube.md 가 없습니다 — 먼저 python -m ytflow yt-pack " + name)
-    if not (pr.dir("edit") / "release.json").exists():
+    if not resume and not (pr.dir("edit") / "release.json").exists():
         raise SystemExit("[yt-publish] 영상이 GitHub Release 에 없습니다 — 먼저 python -m ytflow upload " + name)
-    req = json.dumps({"project": name, "at": at, "privacy": privacy, "thumb": thumb}, ensure_ascii=False)
+    req = json.dumps({"project": name, "at": at, "privacy": privacy, "thumb": thumb, "resume": resume}, ensure_ascii=False)
     work = Path(tempfile.mkdtemp(prefix="ytflow-pub-"))
     (work / "req.json").write_text(req, encoding="utf-8")
     env = dict(os.environ, GIT_INDEX_FILE=str(work / "index"))
