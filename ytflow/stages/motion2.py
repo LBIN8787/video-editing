@@ -177,9 +177,16 @@ class Stage:
                 bend = min(80, L * 0.15)
                 cx, cy = (x1 + x2) / 2 - dy / L * bend, (y1 + y2) / 2 + dx / L * bend
                 aid = f"{self.p}_ar_{m['a']}_{m['b']}"
-                self.svg.append(f'<path id="{aid}" d="M{x1:.0f},{y1:.0f} Q{cx:.0f},{cy:.0f} {x2:.0f},{y2:.0f}" fill="none" stroke="{self.th["arrow"]}" stroke-width="10" '
-                                f'stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" marker-end="url(#{self.p}_head)" opacity="0"/>')
-                self.js.append(f'tl.set("#{aid}",{{opacity:1}},{t:.3f});tl.to("#{aid}",{{strokeDashoffset:0,duration:0.4,ease:"power2.inOut"}},{t:.3f});')
+                col = self.th["arrow"]
+                self.svg.append(f'<path id="{aid}" d="M{x1:.0f},{y1:.0f} Q{cx:.0f},{cy:.0f} {x2:.0f},{y2:.0f}" fill="none" stroke="{col}" stroke-width="10" '
+                                f'stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" opacity="0"/>')
+                # 화살촉은 선이 다 그려진 뒤에 (2026-11-13: 화살촉이 먼저 보여 빈 곳을 가리킴)
+                ang = math.atan2(y2 - cy, x2 - cx)
+                tip = [(x2 + 8 * math.cos(ang), y2 + 8 * math.sin(ang))] + [(x2 + 30 * math.cos(ang + s_), y2 + 30 * math.sin(ang + s_)) for s_ in (2.6, -2.6)]
+                self.svg.append(f'<polygon id="{aid}_h" points="{" ".join(f"{px:.0f},{py:.0f}" for px, py in tip)}" fill="{col}" opacity="0"/>')
+                dur_ = 0.45
+                self.js.append(f'tl.set("#{aid}",{{opacity:1}},{t:.3f});tl.to("#{aid}",{{strokeDashoffset:0,duration:{dur_},ease:"power2.inOut"}},{t:.3f});'
+                               f'tl.to("#{aid}_h",{{opacity:1,duration:0.08}},{t + dur_ - 0.04:.3f});')
                 self.sfx.append(("whoosh-short", t))
         if do == "anchor":   # 보이지 않는 기준점 (기존 장면의 그림 위치) — 화살표·날아가기의 출발·도착점
             self.pos[m["id"]] = (x, y, m.get("w", 140), m.get("h", 140))

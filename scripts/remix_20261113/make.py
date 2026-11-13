@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 SRC = ROOT / "projects" / "20261113-market-daily"
 P = ROOT / "projects" / "20261113-market-remix"
-CH = {5: "요약 체크리스트 + 말에 맞춰 생기는 그림", 9: "대결 카드 + 돈이 날아가는 화살표", 14: "요약 체크리스트 + 매출 숫자 세기·아이콘"}
+CH = {5: "요약 체크리스트 + 말에 맞춰 생기는 그림", 9: "막대 3개가 말할 때 서고 + 돈이 옮겨 가는 화살표", 14: "요약 체크리스트 + 매출 숫자 세기·아이콘"}
 
 
 def build():
@@ -40,14 +40,19 @@ def build():
                        {"t": "의장", "do": "icon", "id": "ch", "icon": "🏛️", "x": 1430, "y": 640, "d": 150, "label": "이사회 의장"},
                        {"t": "후보", "do": "icon", "id": "sr", "icon": "🔎", "x": 1760, "y": 640, "d": 150, "label": "CEO 찾는 중"}])]
     S[5] = s5
-    s9 = dict(S[9])   # 대결 카드(AMD vs 엔비디아) 그대로 + 돈이 엔비디아에서 AMD 쪽으로 날아감
-    s9["beats"] = [dict(S[9]["beats"][0], motion=[   # 대결 장면은 막대 두 개로 그려짐: AMD 막대 위(516,300), 엔비디아 막대 위(960,470)
-                       {"do": "anchor", "id": "nvA", "x": 960, "y": 580, "w": 120, "h": 60},
-                       {"do": "anchor", "id": "amdA", "x": 516, "y": 300, "w": 160, "h": 90},
-                       {"t": "AMD", "do": "icon", "id": "m1", "icon": "💸", "from": "nvA", "x": 740, "y": 250, "d": 110},
-                       {"t": "AMD", "do": "arrow", "a": "nvA", "b": "amdA", "delay": 0.2},
-                       {"t": "브로드컴", "do": "icon", "id": "av", "icon": "📈", "x": 1480, "y": 330, "d": 140, "label": "브로드컴 +5.54%"},
-                       {"t": "브로드컴", "do": "arrow", "a": "nvA", "b": "av", "delay": 0.2}]),
+    # v3 (2026-11-13 사용자: 화살표가 먼저 나와 빈 곳을 가리키고, AMD·브로드컴이 한 화면에 같이 안 나옴)
+    # → 막대 3개(엔비디아·AMD·브로드컴)가 각자 이름을 말할 때 서고, 막대가 선 뒤에 엔비디아에서 그 막대로 화살표
+    s9 = {"id": 9, "chapter": S[9]["chapter"], "type": "bars", "label": S[9]["label"], "title": "11월 12일 (%)", "unit": "", "emph": 0,
+          "items": [{"label": "엔비디아", "value": 4.34, "text": "-4.34", "t": "같은"},
+                    {"label": "AMD", "value": 5.86, "text": "+5.86", "t": "AMD"},
+                    {"label": "브로드컴", "value": 5.54, "text": "+5.54", "t": "브로드컴"}]}
+    s9["beats"] = [dict(S[9]["beats"][0], motion=[   # 막대 위치: 엔비디아 x520(위 465) · AMD x960(위 340) · 브로드컴 x1400(위 366)
+                       {"do": "anchor", "id": "nvA", "x": 520, "y": 600, "w": 120, "h": 60},
+                       {"do": "anchor", "id": "amdA", "x": 830, "y": 470, "w": 40, "h": 40},
+                       {"do": "anchor", "id": "avA", "x": 1270, "y": 500, "w": 40, "h": 40},
+                       {"t": "AMD", "do": "arrow", "a": "nvA", "b": "amdA", "delay": 1.2},
+                       {"t": "AMD", "do": "icon", "id": "m1", "icon": "💸", "from": "nvA", "x": 700, "y": 330, "d": 110, "delay": 1.2},
+                       {"t": "브로드컴", "do": "arrow", "a": "nvA", "b": "avA", "delay": 1.2}]),
                    S[9]["beats"][1]]
     S[9] = s9
     s14 = dict(S[14]); s14.update(x=150, text_w=880)

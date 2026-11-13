@@ -698,6 +698,12 @@ def s_bars(D: HDoc, sc: dict, bt: list, dur: float):
         x = 520 + k * 440 if n <= 3 else 960 + (k - (n - 1) / 2) * step
         h = 480 * it["value"] / top
         at = t1 + 0.2 + k * stagger
+        if it.get("t"):   # 그 항목 이름을 말하는 순간 막대가 섬 (2026-11-13: 막대가 늦게 나와 화살표가 빈 곳을 가리킴)
+            from . import motion2
+            for k_b, (b_, (tb, db)) in enumerate(zip(sc["beats"], bt)):
+                if it["t"] in b_["say"]:
+                    at = max(tb, motion2.row_time(sc, k_b, b_, tb, db, it["t"]) - 0.1)
+                    break
         c = D.red if k == em else D.ink
         D.rough("rectangle", [x - bw / 2, 820 - h, bw, h], c, 2.5, fill=c, at=at, dur=0.8)
         D.text(x, 820 - h - 50, f'{it.get("text", it["value"])}', FT("value"), vsize, c, at=at + 0.5, counter=True)
