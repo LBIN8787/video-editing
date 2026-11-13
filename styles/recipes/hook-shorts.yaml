@@ -1,0 +1,19 @@
+# 2026-11-13 레퍼런스 분석 (docs/25 §2-1): PICKIT 쇼츠의 편집 기법만 — 얼굴 없이 (사용자: "얼굴이 들어가는 편집을 말한 건 아니에요")
+id: hook-shorts
+name: "훅 쇼츠 (얼굴 없이: 실제 화면 꽉 채움 + 훅 제목 + 큰 자막 + 튀어나오는 카드 + 빠른 박자)"
+status: demo
+renderer: hookshort
+skin: none
+format: [shorts]
+owns: []
+scene_types: []
+fits:
+  brands: [ai, market, curiosity]
+  questions: [한 가지 알려 주기, 추천, 놀라운 사실, 사용법]
+  moods: [빠름, 실용]
+  needs: [screen]
+roles: [whole]
+avoid: "실제 화면(캡처·녹화)이 없을 때 (→ shorts-card) / 설명할 것이 많을 때 (→ 롱폼)"
+when: "AI 도구·저장소·기능 하나를 30~45초로 — 화면 캡처·녹화가 있고, 숫자 하나·목록 하나·명령어 하나로 정리될 때"
+demo: "20261113-style-hookshort"
+skill: "edit-style-hook-shorts"

@@ -51,3 +51,8 @@ python -m ytflow yt-publish <프로젝트> --at 2026-11-17T08:00 --thumb B   # �
 - 채널 목소리는 `channel.yaml` 의 `tts`(Teo, ElevenLabs)를 렌더가 바로 쓴다. 키는 클라우드 환경의 네트워크 비밀값(api.elevenlabs.io, `xi-api-key`).
 - 키가 안 먹거나 크레딧이 없으면 **영상은 멈추지 않고 edge 초안 목소리로** 만들고 로그에 남긴다 — 그 날은 올리기 전에 확인.
 - 강제로 초안 목소리: `YTFLOW_TTS=edge python -m ytflow hybrid <프로젝트>`.
+
+## 4. 첫 시험 (2026-11-13)
+- 11/13 브리핑을 **비공개**로 올림 → https://youtu.be/R-iAk3UtERQ : 업로드·제목·설명란·태그·카테고리·한국어 자막 ✅, 재생목록은 유튜브 일시 오류(409) → `--resume` 으로 다시 ✅.
+- **썸네일 403** ("doesn't have permissions to upload and set custom video thumbnails") — 채널 **전화 인증**(https://www.youtube.com/verify)이 안 돼 있으면 맞춤 썸네일을 못 씀. 인증 뒤 `python -m ytflow yt-publish <프로젝트> --resume` 으로 썸네일만 다시.
+- 일시 오류(409·5xx)는 3번까지 자동 재시도. 빠진 단계만 다시: `--resume`.

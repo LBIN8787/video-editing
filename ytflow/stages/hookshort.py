@@ -114,7 +114,8 @@ def make(project: Project) -> Path:
             for kw in kws:
                 h = h.replace(_e(kw), f'<span style="color:{YEL}">{_e(kw)}</span>')
             cid = f"c{n}_{j}"
-            items.append(f'<div id="{cid}" style="position:absolute;left:50px;right:50px;top:1330px;text-align:center;font-family:gx;font-size:70px;white-space:nowrap;'
+            fs = min(72, int(940 / max(len(ptxt), 1)))   # 한 줄에 들어가게 (2026-11-13: 긴 덩어리가 화면 끝에 닿음)
+            items.append(f'<div id="{cid}" style="position:absolute;left:50px;right:50px;top:1330px;text-align:center;font-family:gx;font-size:{fs}px;white-space:nowrap;'
                          f'line-height:1.2;color:#fff;-webkit-text-stroke:4px #000;paint-order:stroke fill;text-shadow:0 4px 14px rgba(0,0,0,.75);opacity:0">{h}</div>')
             js.append(f'tl.set("#{cid}",{{opacity:1}},{s0:.3f});tl.set("#{cid}",{{opacity:0}},{max(s1, s0 + 0.2):.3f});')
             subs.append((s0, max(s1, s0 + 0.2), ptxt))
@@ -128,7 +129,8 @@ def make(project: Project) -> Path:
                       f'tl.from("#{iid} .cd",{{opacity:0,y:30,stagger:0.12,duration:0.25}},{ti + 0.1:.3f});'
                       f'tl.to("#{iid}",{{opacity:0,duration:0.15}},{t0 + d:.3f});')
     # 위·아래 어둡게(글자 대비) · 채널 이름 · 훅 제목 · 출처
-    items.insert(0, '<div style="position:absolute;left:0;right:0;top:0;height:900px;background:linear-gradient(180deg,rgba(0,0,0,.72),rgba(0,0,0,0))"></div>'
+    items.insert(0, '<div style="position:absolute;inset:0;background:rgba(0,0,0,.22)"></div>'
+                    '<div style="position:absolute;left:0;right:0;top:0;height:900px;background:linear-gradient(180deg,rgba(0,0,0,.72),rgba(0,0,0,0))"></div>'
                     '<div style="position:absolute;left:0;right:0;bottom:0;height:900px;background:linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,0))"></div>'
                     f'<div style="position:absolute;left:60px;top:70px;font-family:gx;font-size:30px;color:#fff;letter-spacing:2px">{_e(spec.get("brand", ""))}</div>')
     hk = spec.get("hook") or {}
