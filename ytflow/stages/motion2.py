@@ -78,7 +78,7 @@ class Stage:
         do = m["do"]
         x, y = m.get("x", 540), m.get("y", 760)
         lab = m.get("label", "")
-        lab_html = (f'<div style="position:absolute;left:-60px;right:-60px;bottom:-62px;text-align:center;font-family:gx,sans-x;font-size:40px;color:#fff;'
+        lab_html = (f'<div style="position:absolute;left:-60px;right:-60px;bottom:-58px;text-align:center;white-space:nowrap;font-family:gx,sans-x;font-size:{m.get("lfs", 34)}px;color:#fff;'
                     f'-webkit-text-stroke:2px #000;paint-order:stroke fill">{_e(lab)}</div>') if lab else ""
         if do == "folder":
             inner = (f'<div style="position:absolute;inset:0;perspective:700px">'
@@ -117,17 +117,23 @@ class Stage:
             inner = (f'<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;'
                      f'background:rgba(246,244,238,.97);border-radius:32px;box-shadow:0 20px 60px rgba(0,0,0,.5)">'
                      f'<div style="font-family:gr,sans;font-size:38px;color:#555">{_e(lab)}</div>'
-                     f'<div id="{self.p}_{m["id"]}_n" style="font-family:gx,sans-x;font-size:190px;line-height:1.05;color:#111">{_e(val)}</div></div>')
-            did = self._box(m["id"], x, y, 900, 420, inner)
+                     f'<div id="{self.p}_{m["id"]}_n" style="font-family:gx,sans-x;font-size:{m.get("fs", 190)}px;line-height:1.05;color:#111">{_e(val)}</div></div>')
+            cw, ch = m.get("w", 900), m.get("h", 420)
+            did = self._box(m["id"], x, y, cw, ch, inner)
             self._enter(did, t)
-            if num and num.replace(".", "").isdigit():
-                dec = len(num.split(".")[1]) if "." in num else 0
-                i0 = val.index(num[0])
-                pre, post = val[:i0], val[i0 + len(num):] if val[i0:i0 + len(num)] == num else val[i0 + 1:]
-                self.js.append(f'(function(){{var o={{v:0}};tl.to(o,{{v:{num},duration:0.9,ease:"power2.out",onUpdate:function(){{'
-                               f'document.getElementById("{self.p}_{m["id"]}_n").textContent="{_e(pre)}"+o.v.toFixed({dec})+"{_e(post)}";}}}},{t + 0.1:.3f});}})();')
+            mm = re.search(r"\d[\d,]*(\.\d+)?", val)
+            if mm:   # 앞뒤 글자는 그대로, 숫자만 0에서 올라감 (쉼표 유지) — 2026-11-13: '34,724억'이 '347244,724억'으로 깨짐
+                core = mm.group(0)
+                pre, post = val[:mm.start()], val[mm.end():]
+                numv = core.replace(",", "")
+                dec = len(numv.split(".")[1]) if "." in numv else 0
+                fmt = (f'Number(o.v.toFixed({dec})).toLocaleString("en-US",{{minimumFractionDigits:{dec},maximumFractionDigits:{dec}}})'
+                       if "," in core else f'o.v.toFixed({dec})')
+                self.js.append(f'(function(){{var o={{v:0}};tl.to(o,{{v:{numv},duration:0.9,ease:"power2.out",onUpdate:function(){{'
+                               f'document.getElementById("{self.p}_{m["id"]}_n").textContent="{_e(pre)}"+{fmt}+"{_e(post)}";}}}},{t + 0.1:.3f});}})();')
             # 반짝이는 별 몇 개 (숫자 강조)
-            for k, (dx, dy) in enumerate(((-380, -170), (390, -150), (-330, 170), (360, 180))):
+            sc_ = cw / 900
+            for k, (dx, dy) in enumerate(((-380 * sc_, -170 * sc_), (390 * sc_, -150 * sc_), (-330 * sc_, 170 * sc_), (360 * sc_, 180 * sc_))):
                 sid = f"{did}_s{k}"
                 self.items.append(f'<div id="{sid}" style="position:absolute;left:{x + dx - 30}px;top:{y + dy - 30}px;font-size:60px;opacity:0;z-index:6">✨</div>')
                 self.js.append(f'tl.fromTo("#{sid}",{{opacity:0,scale:0.2}},{{opacity:1,scale:1.2,duration:0.25}},{t + 0.5 + k * 0.08:.3f});'
