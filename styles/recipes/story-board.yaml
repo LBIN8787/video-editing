@@ -1,0 +1,22 @@
+# 2026-11-13 사용자 요청: "호기심 채널은 이야기를 들려주듯 — 이 대본에 맞추어 애니메이션 효과" (참고: 미주일기 XE-9raLLQTQ)
+# 주식 채널(정보형 = 요약판 + 말에 맞춰 생기는 사물)과 다른 양식: 큰 종이 한 장 위에 이야기가 그려지고 카메라가 따라감.
+id: story-board
+name: "이야기 그림판 (말하는 순간 종이 위에 사람·사물이 그려지고 카메라가 따라감)"
+status: demo
+renderer: hybrid
+skin: paper-sketch
+format: [longform]
+owns: [story]
+scene_types: [story]          # ytflow/stages/story.py
+backbone: true                # 이야기 채널의 뼈대: 한 스타일 40% 상한 대신 75% (manual/04 §0-4)
+layered: true                 # 한 장면 안에 그림·도장·쪽지·말풍선이 겹침 → 겹친 장면으로 셈
+fits:
+  brands: [curiosity]
+  questions: [행동의 이유, 그때 무슨 일이, 이름의 유래, 오늘과 연결]
+  moods: [차분, 과거, 미래]
+  needs: []
+roles: [hook, body, ending]
+avoid: "숫자 표가 주인공(→ 차트·뉴스 데스크) / 매일 시장 브리핑(정보형 → 요약판 + motion) / 실존 인물 얼굴을 닮게 그리기(막대 인물 + 이름표로)"
+when: "사람·장소·날짜가 있는 이야기 — 누가, 언제, 어디서, 무엇을 했고 그래서 어떻게 됐나. 장면 → 인물 → 사건 → 반전을 한 장의 종이 위에 쌓을 때"
+demo: "20261113-curiosity-moravec"
+skill: "edit-style-story-board"

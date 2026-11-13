@@ -23,7 +23,7 @@
 | 사진 장소·날짜를 틀리게 쓰지 않음 (다른 장소 사진이면 그 도시 이름을 쓰지 않는다) | 사실 규칙 |
 | 글꼴에 없는 기호(−, –, —)는 자동으로 '-' 로 | 글자 빠짐 방지 |
 
-배치: `layout: photo` (사진 한쪽 + 반대쪽 큰 글씨, `photo_side: right|left|full`) 또는 `layout: versus` (종이 바탕 숫자 둘).
+배치: `layout: board` (**호기심 채널 이야기형 기본** — 종이 바탕 + 영상 그림판과 같은 선 그림 `drawings[{icon|pose, x, y, s, color, label}]` + 큰 두 줄 글씨, 강조 단어는 빨강, 2026-11-13) · `layout: photo` (사진 한쪽 + 반대쪽 큰 글씨, `photo_side: right|left|full`) 또는 `layout: versus` (종이 바탕 숫자 둘).
 표시: `marks: [{type: circle|arrow|x|stamp, ...}]`. 변형마다 `why` 2~3줄.
 
 ### 만들기·점검

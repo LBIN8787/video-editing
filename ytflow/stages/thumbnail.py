@@ -9,6 +9,8 @@
 배치(layout):
 - photo : 자료 사진을 한쪽에 꽉 채우고(흑백·어둡게), 반대쪽에 큰 두 줄 글씨. 손그림 빨간 동그라미·화살표·도장.
 - versus: 종이 바탕에 두 숫자 맞대기 (채널의 종이·손그림 정체성).
+- board : 이야기 그림판(story 장면)과 같은 얼굴 — 종이 바탕 + 선으로 그린 사람·사물(drawings) + 큰 두 줄 글씨 + 빨간 펜 표시.
+          호기심 채널(이야기형)용. drawings: [{"icon": "chess"|"shirt"|"bot"|… , "pose": "think"(사람), "x", "y", "s", "color"}]
 공통: 굵은 고딕 + 두꺼운 테두리, 강조 단어 하나만 색, 오른쪽 아래(재생 시간 표시 자리) 비움.
 """
 from __future__ import annotations
@@ -108,12 +110,39 @@ def _text_block(d: ImageDraw.ImageDraw, lines: list[str], hl: list[str], x: int,
         tokens = ln.split(" ")
         for i, tok in enumerate(tokens):
             word = tok + (" " if i < len(tokens) - 1 else "")
-            col = YELLOW if any(h in tok for h in hl) else fill
+            col = (RED if sum(stroke[:3]) > 500 else YELLOW) if any(h in tok for h in hl) else fill   # 종이 바탕에서는 노랑 대신 빨강 (읽히게)
             d.text((cx, y), word, font=f, fill=col, stroke_width=max(8, s // 11), stroke_fill=stroke)
             cx += f.getlength(word)
         boxes.append((x if align == "left" else x - lw / 2, y, (x if align == "left" else x - lw / 2) + lw, y + s))
         y += int(s * gap)
     return boxes
+
+
+def _board(base: Image.Image, v: dict) -> Image.Image:
+    """종이 결 + 선 그림 (story.py 의 그림과 같은 모양)."""
+    import io
+    import cairosvg
+    import numpy as np
+    from .story import POSES, _children
+    rng = np.random.default_rng(7)
+    noise = (rng.normal(0, 6, (H // 4, W // 4))).astype(np.int16)
+    n = Image.fromarray(np.clip(128 + noise, 0, 255).astype(np.uint8)).resize((W, H), Image.BICUBIC).filter(ImageFilter.GaussianBlur(2))
+    paper = Image.merge("RGB", [ImageOps.autocontrast(n, cutoff=0).point(lambda q, c=c: int(c - 10 + q * 20 / 255)) for c in PAPER])
+    base = paper.convert("RGBA")
+    for dr in v.get("drawings", []):
+        kids = POSES[dr["pose"]] if dr.get("pose") else _children(dr["icon"])
+        col = dr.get("color", "#22304D")
+        sw = dr.get("sw", 1.6)
+        svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 26 26" fill="none" stroke="{col}" stroke-width="{sw}" '
+               f'stroke-linecap="round" stroke-linejoin="round">{"".join(kids)}</svg>')
+        s_ = int(dr.get("s", 300))
+        im = Image.open(io.BytesIO(cairosvg.svg2png(bytestring=svg.encode(), output_width=s_, output_height=s_))).convert("RGBA")
+        base.alpha_composite(im, (int(dr["x"] - s_ / 2), int(dr["y"] - s_ / 2)))
+        if dr.get("label"):
+            dd = ImageDraw.Draw(base)
+            fl = _font(PEN, dr.get("lfs", 52))
+            dd.text((dr["x"], dr["y"] + s_ / 2 + 4), dr["label"], font=fl, fill=INK, anchor="mt")
+    return base
 
 
 def render(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
@@ -162,6 +191,21 @@ def render(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
             yy = boxes[-1][3] + 30
             d.text((tx + 4, yy), v["sub"], font=fs, fill=(255, 238, 190), stroke_width=4, stroke_fill=(10, 10, 10))
             boxes.append((tx, yy, tx + fs.getlength(v["sub"]), yy + 60))
+    elif v.get("layout") == "board":   # 이야기 그림판: 영상 속 그림과 같은 선 그림 + 큰 글씨 (2026-11-13)
+        base = _board(base, v)
+        d = ImageDraw.Draw(base)
+        tx, y = v.get("text_x", 60), v.get("text_y", 90)
+        if v.get("top"):
+            ft = _font(GOTHIC_X, 40)
+            d.rounded_rectangle([tx - 6, y - 70, tx + ft.getlength(v["top"]) + 26, y - 14], 10, fill=RED)
+            d.text((tx + 10, y - 66), v["top"], font=ft, fill=(255, 255, 255))
+            boxes.append((tx, y - 70, tx + ft.getlength(v["top"]) + 26, y - 14))
+        boxes += _text_block(d, v["lines"], v.get("hl", []), tx, y, v.get("text_w", 760), v.get("size", 130), fill=INK, stroke=PAPER)
+        if v.get("sub"):
+            fs = _font(PEN, 64)
+            yy = boxes[-1][3] + 24
+            d.text((tx + 4, yy), v["sub"], font=fs, fill=RED)
+            boxes.append((tx, yy, tx + fs.getlength(v["sub"]), yy + 64))
     else:  # versus: 종이 바탕 두 숫자
         d = ImageDraw.Draw(base)
         L, R = v["left"], v["right"]

@@ -32,6 +32,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **원본 발언 컷편집 (v20)** — 어닝콜·기자회견 긴 원본에서 대본과 맞는 문장만 단어 단위로 잘라 그 사람의 목소리로 (`bite` 장면, 원문·번역 2단) | `styles/source-cut/STYLE.md`, `skills/edit-style-source-cut`, `python -m ytflow cut <프로젝트>`, `ytflow/stages/cutedit.py` |
 | **손그림 삽화 (v20)** — 삽화 한 장 위를 카메라가 박자마다 옮겨 가며 설명 (붓 쓸기 등장·boil·손그림 표시·생각 풍선, 그림체는 자유). 그림은 사람이 준비 | `styles/illustrated/STYLE.md`, `skills/edit-style-illustrated`, `python -m ytflow art-brief <프로젝트>`, `ytflow/stages/illust.py` |
 | **레퍼런스 2편 분석 (2026-11-13)** — 뉴스 데스크 카드(한 소식 = 한 장, `newsdesk` 장면) · 훅 쇼츠(얼굴 없이: 실제 화면 꽉 채움·훅 제목·큰 자막·튀어나오는 카드) · 말하는 사람 쇼츠(본인 촬영 있을 때만), 기존 스타일과 차이·장단점, AI 채널 적용 | `docs/25-reference-2611.md`, `styles/news-desk/`, `styles/recipes/hook-shorts.yaml`, `python -m ytflow hookshort <프로젝트>`, `python -m ytflow presenter <프로젝트>` |
+| **이야기 그림판 — 호기심 채널 이야기형 (v21)** — 말하는 순간 종이 위에 사람·사물이 선으로 그려지고 카메라가 따라감, 정보형(주식)과 다른 양식, 썸네일 `board` | `manual/04-curiosity.md` §0-4, `styles/story-board/STYLE.md`, `skills/edit-style-story-board`, `ytflow/stages/story.py`, `scripts/curiosity_story/make.py` |
 | **움직이는 비유 애니메이션 (따로 쓰는 스타일, 매뉴얼 기준 아님·품질 보완 필요)** — 무리가 한쪽으로 옮겨 가고 의태어가 튀어나오는 비유 장면 (`metaphor` 장면, migrate·pop). 사용자가 고를 때만 | `styles/motion-metaphor/STYLE.md`, `docs/22-motion-reference.md`(레퍼런스 재분석·v2 방향), `styles/recipes/motion-metaphor.yaml`, `ytflow/stages/motion.py` |
 | **반드시 지킬 것·검사** | `manual/06-checklist.md`, `python -m ytflow check <프로젝트>` |
 | 채널 회차 만들기 (반복 운영) | `skills/channel-run/SKILL.md`, `channels/README.md`, `docs/06-operations.md` |

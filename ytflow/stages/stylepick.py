@@ -140,6 +140,7 @@ def mix_stats(spec: dict, timeline: list | None = None) -> dict:
     from . import hybrid  # noqa: F401  (directions 는 hybrid 를 먼저 불러야 함)
     from .directions import LAYER_KINDS
     own = type_owner()
+    flags = {r["id"]: r for r in load()}
     durs = {s["scene"]: s["dur"] for s in (timeline or [])}
     seq, share, used, layered = [], {}, set(), 0
     for sc in spec.get("scenes", []):
@@ -153,7 +154,7 @@ def mix_stats(spec: dict, timeline: list | None = None) -> dict:
         used.add(rid)
         lk = {LAYER_KINDS.get(L.get("kind")) for L in sc.get("layers") or []} - {None, rid}
         used |= lk
-        layered += bool(lk)
+        layered += bool(lk) or bool(flags.get(rid, {}).get("layered"))   # 그림판처럼 한 장면 안에 여러 요소가 겹치는 스타일
     tot = sum(share.values()) or 1
     run, best = 1, 1
     for a, b in zip(seq, seq[1:]):
@@ -161,7 +162,8 @@ def mix_stats(spec: dict, timeline: list | None = None) -> dict:
         best = max(best, run)
     top = max(share.items(), key=lambda kv: kv[1]) if share else ("", 0)
     return {"recipes": sorted(used), "n_recipes": len(used), "top": top[0], "top_share": round(top[1] / tot, 2),
-            "layered_scenes": layered, "max_run": best if seq else 0, "sequence": seq}
+            "layered_scenes": layered, "max_run": best if seq else 0, "sequence": seq,
+            "backbone": bool(flags.get(top[0], {}).get("backbone"))}   # 이야기 채널의 뼈대 스타일 (상한 75%, manual/04 §0-4)
 
 
 def plan_text(res: dict) -> list[str]:
