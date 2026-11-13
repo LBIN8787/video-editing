@@ -133,7 +133,7 @@ class Board:
             fs = m.get("fs", 84 if do == "chip" else 72)
             rot = m.get("rot", -1.5 if do == "chip" else -3)
             text = m.get("text", "")
-            wch = sum(1.0 if ord(ch) > 0x2E80 else 0.58 for ch in text) * fs + (90 if do == "chip" else 30)
+            wch = sum(1.0 if ord(ch) > 0x2E80 else 0.62 for ch in text) * fs * 1.08 + (110 if do == "chip" else 40)
             hh = fs * 1.55
             dark = m.get("tone") == "dark"
             did = f"{self.p}_{mid}"
@@ -144,11 +144,12 @@ class Board:
                     f'<div id="{did}" style="position:absolute;left:{x - wch / 2:.0f}px;top:{y - hh / 2:.0f}px;width:{wch:.0f}px;height:{hh:.0f}px;'
                     f'background:{bg};box-shadow:0 14px 34px rgba(0,0,0,.22);transform:rotate({rot}deg);opacity:0">'
                     f'<div id="{did}m" style="position:absolute;left:34px;right:34px;top:{hh * 0.52:.0f}px;height:{fs * 0.42:.0f}px;background:{MARK};opacity:.85;'
-                    f'transform:scaleX(0);transform-origin:left center"></div>'
+                    f'transform-origin:left center"></div>'
                     f'<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:{m.get("font", "serif-x")};'
                     f'font-size:{fs}px;color:{col};white-space:nowrap">{_e(text)}</div></div>')
                 self.js.append(f'tl.fromTo("#{did}",{{opacity:0,y:-30,rotation:{rot - 5}}},{{opacity:1,y:0,rotation:{rot},duration:0.45,ease:"back.out(1.6)"}},{t:.2f});')
                 self._sfx("pop", t)
+                self.js.append(f'tl.set("#{did}m",{{scaleX:0}},0);')   # 형광펜: 처음엔 0 (CSS transform 대신 GSAP 로 — 충돌 방지)
                 if m.get("hl"):
                     self.js.append(f'tl.to("#{did}m",{{scaleX:1,duration:0.45,ease:"power1.inOut"}},{t + 0.45:.2f});')
             else:
@@ -281,8 +282,8 @@ class Board:
         cv = f"{self.p}cv"
         wob = f"{self.p}wob"
         D.items.append(
-            f'<div style="position:absolute;inset:0;overflow:hidden">'
-            f'<div id="{cv}" style="position:absolute;left:0;top:0;width:{CW}px;height:{CH}px;transform-origin:0 0">'
+            f'<div style="position:absolute;inset:0;overflow:hidden" data-layout-allow-overflow>'   # 카메라가 다른 곳을 볼 때 화면 밖 그림은 의도된 것
+            f'<div id="{cv}" data-layout-allow-overflow style="position:absolute;left:0;top:0;width:{CW}px;height:{CH}px;transform-origin:0 0">'
             f'<svg width="{CW}" height="{CH}" viewBox="0 0 {CW} {CH}" style="position:absolute;inset:0;overflow:visible">'
             f'<filter id="{wob}"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" seed="3"/>'
             f'<feDisplacementMap in="SourceGraphic" scale="7"/></filter><g filter="url(#{wob})">{"".join(self.svg)}</g></svg>'
