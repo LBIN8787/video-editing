@@ -59,6 +59,8 @@ def _e(s) -> str:
 
 
 def _children(name: str) -> list[str]:
+    if name.startswith("pose:"):
+        return POSES.get(name[5:], POSES["stand"])
     if name in SHAPES:
         return SHAPES[name]
     from .icons import ICON_DIR
@@ -83,6 +85,43 @@ class Board:
         self.n = 0
         self.cam = "full"   # 기본: 이 장면에 그린 것 전체에 맞춤
         self.cam_events: list = []
+        self.layers = {0: [], 1: [], 2: []}   # v2: 뒤·가운데·앞 (패럴랙스, story_kit)
+        self.last_in = ""
+        self.bg_events: list = []
+        self.credits: list = []
+        self.rots: dict = {}
+
+    def layer(self, z: int) -> list:
+        return self.layers[max(0, min(2, int(z)))]
+
+    def asset(self, src: str) -> str:
+        """04_assets/story/<src> → 장면 assets (하드링크)."""
+        import os
+        import shutil
+        from pathlib import Path
+        f = Path(self.D._proj) / "04_assets" / "story" / src
+        name = f"story_{src}"
+        dst = Path(self.D._work) / "assets" / name
+        if f.exists() and not dst.exists():
+            try:
+                os.link(f, dst)
+            except OSError:
+                shutil.copy(f, dst)
+        if not f.exists():
+            self.D.qa.append(f"story/missing: 04_assets/story/{src}")
+        return name
+
+    def html_label(self, x, y, text, t):
+        from .story_kit import tag
+        i = self._id()
+        self.layers[2].append(f'<div id="{i}" style="position:absolute;left:{x:.0f}px;top:{y:.0f}px;opacity:0">{tag(text, 50)}</div>')
+        self.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:10}},{{opacity:1,y:0,duration:0.35}},{t:.2f});')
+
+    def js_html_into(self, on, html):   # 문서 위 형광펜: 같은 자리·같은 기울기의 투명 상자 안에
+        x, y, w, h = self.pos[on]
+        r = self.rots.get(on, 0)
+        self.layers[1].append(f'<div style="position:absolute;left:{x - w / 2:.0f}px;top:{y - h / 2:.0f}px;width:{w}px;height:{h}px;'
+                              f'transform:rotate({r}deg);pointer-events:none">{html}</div>')
 
     def _id(self):
         self.n += 1
@@ -106,8 +145,10 @@ class Board:
         if not text:
             return
         i = self._id()
+        from .story_kit import tag
+        inner = tag(text, fs, col) if font == "pen" else _e(text)
         self.html.append(f'<div id="{i}" style="position:absolute;left:{x - 700}px;top:{y}px;width:1400px;text-align:center;font-family:{font};'
-                         f'font-size:{fs}px;color:{col};white-space:nowrap;opacity:0">{_e(text)}</div>')
+                         f'font-size:{fs}px;color:{col};white-space:nowrap;opacity:0">{inner}</div>')
         self.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:12}},{{opacity:1,y:0,duration:0.35}},{t:.2f});')
 
     def add(self, m: dict, t: float):
@@ -117,6 +158,12 @@ class Board:
         if m.get("cam"):
             c = m["cam"]
             self.cam_events.append((max(t - 0.15, 0), c if c == "full" else tuple(c)))
+        from . import story_kit
+        if do in ("photo", "doc", "mark", "sticker", "card", "big", "bg"):
+            if do in ("doc", "photo", "card"):
+                self.rots[mid] = m.get("rot", story_kit._rot(mid))
+            story_kit.kit(self, m, t, mid, x, y, self.asset)
+            return
         if do == "draw":
             s = m.get("s", 260)
             self._drawn(f"{self.p}_{mid}", _children(m["icon"]), x, y, s, t, m.get("color", INK), m.get("sw", 9))
@@ -164,8 +211,8 @@ class Board:
             wch = sum(1.0 if ord(ch) > 0x2E80 else 0.6 for ch in text) * fs + 110
             did = f"{self.p}_{mid}"
             self.html.append(f'<div id="{did}" style="position:absolute;left:{x - wch / 2:.0f}px;top:{y - 75}px;width:{wch:.0f}px;height:150px;'
-                             f'border:9px double {RED};border-radius:14px;color:{RED};font-family:serif-x;font-size:{fs}px;display:flex;align-items:center;'
-                             f'justify-content:center;white-space:nowrap;transform:rotate({m.get("rot", -6)}deg);background:rgba(251,248,241,.6);opacity:0">{_e(text)}</div>')
+                             f'border:9px double {RED};border-radius:14px;color:{RED};font-family:serif-x;font-size:{fs}px;line-height:1;display:flex;align-items:center;'
+                             f'justify-content:center;white-space:nowrap;transform:rotate({m.get("rot", -6)}deg);background:rgba(251,248,241,.9);opacity:0">{_e(text)}</div>')
             self.js.append(f'tl.fromTo("#{did}",{{opacity:0,scale:1.7}},{{opacity:1,scale:1,duration:0.26,ease:"power4.in"}},{t:.2f});')
             self._sfx("click-soft", t + 0.24)
             self.pos[mid] = (x, y, wch, 150)
@@ -173,9 +220,9 @@ class Board:
             val = str(m.get("value", ""))
             fs = m.get("fs", 230)
             did = f"{self.p}_{mid}"
-            self.html.append(f'<div id="{did}" style="position:absolute;left:{x - 900}px;top:{y - fs * 0.75:.0f}px;width:1800px;text-align:center;opacity:0">'
+            self.html.append(f'<div id="{did}" style="position:absolute;left:{x - 600}px;top:{y - fs * 0.75:.0f}px;width:1200px;text-align:center;opacity:0">'
                              f'<div id="{did}n" style="font-family:serif-x;font-size:{fs}px;line-height:1.1;color:{m.get("color", RED)};white-space:nowrap">{_e(val)}</div>'
-                             f'<div style="font-family:pen;font-size:{m.get("lfs", 70)}px;color:{INK};white-space:nowrap">{_e(m.get("label", ""))}</div></div>')
+                             + (f'<div style="margin-top:6px">{__import__("ytflow.stages.story_kit", fromlist=["tag"]).tag(m["label"], m.get("lfs", 62))}</div>' if m.get("label") else "") + '</div>')
             self.js.append(f'tl.fromTo("#{did}",{{opacity:0,y:30}},{{opacity:1,y:0,duration:0.4,ease:"power2.out"}},{t:.2f});')
             mm = re.search(r"\d[\d,]*(\.\d+)?", val)
             if mm:
@@ -277,17 +324,40 @@ class Board:
         elif do == "undim" and m.get("on") in self.pos:
             self.js.append(f'tl.to("#{self.p}_{m["on"]}",{{opacity:1,duration:0.4}},{t:.2f});')
 
-    def finish(self, dur: float):
+    def finish(self, dur: float, fade: bool = True):
         D = self.D
         cv = f"{self.p}cv"
         wob = f"{self.p}wob"
-        D.items.append(
-            f'<div style="position:absolute;inset:0;overflow:hidden" data-layout-allow-overflow>'   # 카메라가 다른 곳을 볼 때 화면 밖 그림은 의도된 것
-            f'<div id="{cv}" data-layout-allow-overflow style="position:absolute;left:0;top:0;width:{CW}px;height:{CH}px;transform-origin:0 0">'
-            f'<svg width="{CW}" height="{CH}" viewBox="0 0 {CW} {CH}" style="position:absolute;inset:0;overflow:visible">'
-            f'<filter id="{wob}"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" seed="3"/>'
-            f'<feDisplacementMap in="SourceGraphic" scale="7"/></filter><g filter="url(#{wob})">{"".join(self.svg)}</g></svg>'
-            f'{"".join(self.html)}</div></div>')
+        PAR = {0: 0.92, 1: 1.0, 2: 1.07}   # 2.5D: 뒤는 느리게, 앞은 빠르게 (카메라가 움직일 때만 차이가 보임)
+        # 배경 (화면 기준, 그림판 아래): 어두운 종이 · 사진 전체
+        for k, (t, mode, src, credit) in enumerate(self.bg_events):
+            bid = f"{self.p}bg{k}"
+            if mode == "dark":
+                inner = (f'<div style="position:absolute;inset:0;background:#2C2E34"></div>'   # 어두운 종이: 구김 결이 보이게 (검정 단색 금지)
+                         f'<img src="assets/{D.bg_name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;'
+                         f'mix-blend-mode:overlay;opacity:.55;filter:grayscale(1) contrast(1.9)">'
+                         f'<div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(255,255,255,.06) 0%,rgba(0,0,0,.35) 100%)"></div>')
+            elif mode == "photo" and src:
+                inner = (f'<img src="assets/{src}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.35) sepia(.25) brightness(.62) contrast(1.1)">'
+                         f'<div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(0,0,0,0) 30%,rgba(0,0,0,.5) 100%)"></div>')
+            else:
+                inner = ""
+            D.items.append(f'<div id="{bid}" style="position:absolute;inset:0;opacity:0">{inner}</div>')
+            D.js.append(f'tl.to("#{bid}",{{opacity:1,duration:0.7,ease:"power1.inOut"}},{max(t - 0.2, 0):.2f});')
+            for j in range(k):   # 앞 배경은 끔
+                D.js.append(f'tl.to("#{self.p}bg{j}",{{opacity:0,duration:0.7}},{max(t - 0.2, 0):.2f});')
+            if credit:
+                self.credits.append(credit)
+        lay = {0: "".join(self.layers[0]),
+               1: (f'<svg width="{CW}" height="{CH}" viewBox="0 0 {CW} {CH}" style="position:absolute;inset:0;overflow:visible">'
+                   f'<filter id="{wob}"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" seed="3"/>'
+                   f'<feDisplacementMap in="SourceGraphic" scale="7"/></filter><g filter="url(#{wob})">{"".join(self.svg)}</g></svg>'
+                   + "".join(self.layers[1]) + "".join(self.html)),
+               2: "".join(self.layers[2])}
+        D.items.append(f'<div style="position:absolute;inset:0;overflow:hidden" data-layout-allow-overflow>'   # 카메라가 다른 곳을 볼 때 화면 밖 그림은 의도된 것
+                       + "".join(f'<div id="{cv}{k}" data-layout-allow-overflow style="position:absolute;left:0;top:0;width:{CW}px;height:{CH}px;'
+                                 f'transform-origin:0 0">{lay[k]}</div>' for k in (0, 1, 2) if lay[k]) + '</div>')
+        used = [k for k in (0, 1, 2) if lay[k]]
 
         def fit():   # 장면에 그린 것 전체를 감싸는 카메라 (여백 120, 아래 15% 자막 자리 비움)
             if not self.pos:
@@ -299,36 +369,55 @@ class Board:
             z = max(0.5, min(1.0, W / (x1 - x0), H_ * 0.84 / (y1 - y0)))
             return ((x0 + x1) / 2, (y0 + y1) / 2 + (540 - 455) / z, z)
 
-        def tf(c):
+        def cam_of(c):
             if c == "full":
                 c = fit()
             cx, cy, z = c
             tx = min(0.0, max(W - CW * z, W / 2 - cx * z))
             ty = min(0.0, max(H_ - CH * z, H_ / 2 - cy * z))
-            return z, tx, ty
-        z, tx, ty = tf(self.cam)
+            return ((W / 2 - tx) / z, (H_ / 2 - ty) / z, z)   # 실제로 보이는 가운데
+
+        def setv(c, k):
+            cx, cy, z = c
+            zk = z * PAR[k]
+            return f'scale:{zk:.4f},x:{W / 2 - cx * zk:.1f},y:{H_ / 2 - cy * zk:.1f}'
+
+        cur = cam_of(self.cam)
         evs = sorted(self.cam_events)
         if evs and evs[0][0] <= 0.3:   # 첫 카메라는 처음부터
-            z, tx, ty = tf(evs[0][1])
+            cur = cam_of(evs[0][1])
             evs = evs[1:]
-        D.js.append(f'tl.set("#{cv}",{{scale:{z:.3f},x:{tx:.1f},y:{ty:.1f}}},0);')
-        last_t = 0.0
-        for t, c in evs:
-            z2, tx2, ty2 = tf(c)
-            D.js.append(f'tl.to("#{cv}",{{scale:{z2:.3f},x:{tx2:.1f},y:{ty2:.1f},duration:0.95,ease:"power2.inOut"}},{t:.2f});')
-            z, tx, ty, last_t = z2, tx2, ty2, t + 0.95
-        if dur - last_t > 1.2:   # 마지막 자리에서 아주 천천히 당김 (멈춘 화면 방지, 흔들림 아님)
-            cx, cy = (W / 2 - tx) / z, (H_ / 2 - ty) / z
-            z3 = z * 1.03
-            _, tx3, ty3 = tf((cx, cy, z3))
-            D.js.append(f'tl.to("#{cv}",{{scale:{z3:.3f},x:{tx3:.1f},y:{ty3:.1f},duration:{dur - last_t:.2f},ease:"none"}},{last_t:.2f});')
+        for k in used:
+            D.js.append(f'tl.set("#{cv}{k}",{{{setv(cur, k)}}},0);')
+        marks = [t for t, _ in evs] + [dur]
+        t_free = 0.0
+        for i, (t, c) in enumerate(evs + [(dur, None)]):
+            if t - t_free > 1.0:   # 머무는 동안 아주 천천히 당김 (멈춘 화면 방지, 흔들림 아님)
+                drift = (cur[0], cur[1], cur[2] * (1 + 0.012 * min(t - t_free, 6)))
+                for k in used:
+                    D.js.append(f'tl.to("#{cv}{k}",{{{setv(drift, k)}, duration:{t - t_free:.2f},ease:"none"}},{t_free:.2f});')
+                cur = drift
+            if c is None:
+                break
+            nxt = cam_of(c)
+            for k in used:
+                D.js.append(f'tl.to("#{cv}{k}",{{{setv(nxt, k)}, duration:0.95,ease:"power2.inOut"}},{t:.2f});')
+            cur, t_free = nxt, t + 0.95
+        _ = marks
         D.js.extend(self.js)
+        if fade:   # 단락 사이: 검은 화면을 거쳐 밝아짐 (미주일기·다큐 전환)
+            fid = f"{self.p}fade"
+            D.items.append(f'<div id="{fid}" style="position:absolute;inset:0;background:#000;opacity:1;pointer-events:none"></div>')
+            D.js.append(f'tl.to("#{fid}",{{opacity:0,duration:0.45,ease:"power1.out"}},0.05);')
+        if self.credits:
+            D.label(" · ".join(dict.fromkeys(self.credits))[:150])
 
 
 def s_story(D, sc: dict, bt: list, dur: float):
     from pathlib import Path
     from . import align
     from .motion2 import word_time
+    D._proj = sc["_project_dir"]
     B = Board(D, f"st{sc['id']}")
     if sc.get("cam"):
         B.cam = "full" if sc["cam"] == "full" else tuple(sc["cam"])
@@ -343,9 +432,19 @@ def s_story(D, sc: dict, bt: list, dur: float):
         for m in b["draw"]:
             tt = t0 + (word_time(ws, b["say"], m["t"], d) if m.get("t") else 0.05) + m.get("delay", 0.0)
             B.add(m, max(tt, 0.05))
+    low = [k for k, (x, y, w, h) in B.pos.items() if y + h / 2 > 1860]
+    if low:   # 그림판 맨 아래는 넓게 볼 때 자막과 겹침
+        D.qa.append(f"story/caption_zone: {low} 가 그림판 아래쪽(y>1860) — 위로 옮기세요")
     B.finish(dur)
-    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
-    D.label(sc.get("credit", ""))
+    dark0 = any(t < 1.0 and mode in ("dark", "photo") for t, mode, _s, _c in B.bg_events)   # 어두운 배경으로 시작하면 장 꼬리표도 밝게
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""), dark=dark0)
+    if sc.get("credit"):
+        D.label(sc.get("credit", ""))
+    kinds = [m["do"] for b in sc["beats"] for m in b.get("draw", []) if m["do"] in ("photo", "doc", "sticker", "card", "draw", "figure", "chip", "note", "count", "big", "stamp")]
+    if len(kinds) >= 6:   # 그림 패턴 반복 점검 (2026-11-13 사용자: "그림 패턴도 너무 매번 똑같다")
+        top = max(set(kinds), key=kinds.count)
+        if kinds.count(top) / len(kinds) > 0.5:
+            D.qa.append(f"story/repetitive: '{top}' 가 그림의 {kinds.count(top) / len(kinds):.0%} — 재료를 섞으세요 (사진·문서·스티커·카드·큰 글자)")
 
 
 def register():

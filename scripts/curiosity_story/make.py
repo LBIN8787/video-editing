@@ -213,25 +213,25 @@ SPEC = {
         "title_why": ["훅의 틈(gap) 그대로 — 질문형 (manual/04 §0-3 ①)",
                       "훅의 장면·숫자(1997년 6국 19수) — 장면·숫자형 ②",
                       "상식 깨기형 ③ — '어려운 건 체스'라는 통념을 뒤집음, 답(진화)은 숨김"],
-        "thumbnails": [   # layout board: 영상의 그림판과 같은 얼굴 (종이 + 선 그림 + 큰 글씨), prompts/thumbnail.md
+        "thumbnails": [   # layout board v2: 종이 + 실제 사진 폴라로이드 + 스티커 + 큰 글씨 (영상과 같은 재료, docs/26)
             {"id": "A", "name": "체스 vs 빨래 (질문형)", "layout": "board", "top": "몰랐던 이유 · AI 편",
-             "lines": ["체스는 이기는데", "빨래는 왜?"], "hl": ["빨래는"], "size": 140, "text_y": 280, "text_w": 700,
-             "drawings": [{"icon": "chess", "x": 880, "y": 300, "s": 300},
-                          {"icon": "shirt", "x": 1110, "y": 430, "s": 230, "color": "#C4452F"}],
-             "marks": [{"type": "circle", "box": [985, 305, 1235, 555]}],
-             "why": ["두 장면(체스·빨래) 대비 하나로 '어? 왜?' — 제목 ①과 짝", "답(진화)은 숨김, 영상 그림과 같은 선 그림"]},
+             "lines": ["체스는 이기는데", "빨래는 왜?"], "hl": ["빨래는"], "size": 128, "text_y": 280, "text_w": 640,
+             "photos": [{"file": "projects/20261113-curiosity-moravec/04_assets/story/chess.jpg", "x": 880, "y": 230, "w": 300, "h": 200, "rot": -4, "caption": "체스"},
+                        {"file": "projects/20261113-curiosity-moravec/04_assets/story/laundry.jpg", "x": 1090, "y": 470, "w": 290, "h": 200, "rot": 3, "caption": "빨래", "focus": [0.62, 0.5]}],
+             "marks": [{"type": "circle", "box": [920, 330, 1260, 620]}],
+             "why": ["두 장면(체스·빨래) 대비 하나로 '어? 왜?' — 제목 ①과 짝", "영상과 같은 사진·폴라로이드"]},
             {"id": "B", "name": "19수 장면 (숫자형)", "layout": "board", "top": "1997. 5. 11 뉴욕",
-             "lines": ["19수 만에 이긴 기계", "티셔츠 앞에서 멈췄다"], "hl": ["멈췄다"], "size": 108, "text_y": 290, "text_w": 760,
-             "drawings": [{"pose": "stand", "x": 920, "y": 300, "s": 340, "label": "카스파로프"},
-                          {"icon": "bot", "x": 1150, "y": 330, "s": 220}],
-             "marks": [{"type": "stamp", "text": "기권", "at": [900, 600], "size": 56, "rot": -10}],
-             "why": ["훅의 숫자(19수) — 제목 ②와 짝", "실존 인물은 막대 인물 + 이름표 (얼굴을 닮게 그리지 않음)"]},
+             "lines": ["19수 만에 이긴 기계", "티셔츠 앞에서 멈췄다"], "hl": ["멈췄다"], "size": 104, "text_y": 290, "text_w": 700,
+             "photos": [{"file": "projects/20261113-curiosity-moravec/04_assets/story/kasparov.jpg", "x": 880, "y": 280, "w": 230, "h": 270, "rot": -5, "caption": "카스파로프", "focus": [0.5, 0.25]},
+                        {"file": "projects/20261113-curiosity-moravec/04_assets/story/deepblue.jpg", "x": 1120, "y": 330, "w": 210, "h": 270, "rot": 4, "caption": "딥 블루"}],
+             "marks": [{"type": "stamp", "text": "19수 · 기권", "at": [900, 560], "size": 50, "rot": -9}],
+             "why": ["훅의 숫자(19수) — 제목 ②와 짝", "실제 인물 사진(CC BY 4.0) + 딥 블루(CC BY 2.0)"]},
             {"id": "C", "name": "상식 깨기", "layout": "board", "top": "모라벡의 역설",
-             "lines": ["AI에게 어려운 건", "체스가 아니라 빨래"], "hl": ["빨래"], "size": 116, "text_y": 290, "text_w": 760,
-             "drawings": [{"icon": "bot", "x": 950, "y": 250, "s": 250, "label": "어디가 소매지?"},
-                          {"icon": "cloth", "x": 1110, "y": 480, "s": 230, "color": "#C4452F"}],
+             "lines": ["AI에게 어려운 건", "체스가 아니라 빨래"], "hl": ["빨래"], "size": 112, "text_y": 290, "text_w": 700,
+             "photos": [{"file": "projects/20261113-curiosity-moravec/04_assets/story/laundry.jpg", "x": 1000, "y": 300, "w": 360, "h": 250, "rot": -3, "caption": "빨래 개는 손 (1917)", "focus": [0.62, 0.5]}],
+             "drawings": [{"sticker": True, "icon": "bot", "x": 1130, "y": 540, "s": 170}],
              "marks": [],
-             "why": ["통념('어려운 건 체스')을 뒤집기 — 제목 ③과 짝", "로봇이 천 덩어리를 보는 장면"]},
+             "why": ["통념('어려운 건 체스')을 뒤집기 — 제목 ③과 짝", "옛 사진(1917) + 로봇 스티커"]},
         ]},
 }
 
@@ -275,7 +275,20 @@ FACTS = """# 팩트시트 — 체스 챔피언을 이긴 AI는 왜 빨래를 못
 """
 
 
+def apply_v2():   # V2 apply: 그림 재료 v2 (scripts/curiosity_story/v2.py) — 대본은 그대로
+    import importlib.util
+    spec_ = importlib.util.spec_from_file_location("v2", Path(__file__).with_name("v2.py"))
+    v2 = importlib.util.module_from_spec(spec_)
+    spec_.loader.exec_module(v2)
+    for sc in SCENES:
+        if sc["id"] in v2.V2:
+            for b, draws in zip(sc["beats"], v2.V2[sc["id"]]):
+                b["draw"] = draws
+            sc.pop("credit", None)
+
+
 def main():
+    apply_v2()
     for d in ("01_research", "02_script", "05_edit"):
         (P / d).mkdir(parents=True, exist_ok=True)
     (P / "01_research" / "topic_brief.json").write_text(json.dumps(TOPIC, ensure_ascii=False, indent=1), encoding="utf-8")
