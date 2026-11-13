@@ -200,6 +200,29 @@ def s_footage(D: HDoc, sc: dict, bt: list, dur: float):
             D.vox(b["vox"]["text"], b["vox"].get("note", ""), t0 + 0.4, x=1000 if full else 1120, y=140 if full else 110, on_paper=not full)
 
 
+def _free_spot(pts: list, used: list, ax: float, ay: float, w: float, h: float, top: float, bottom: float) -> tuple[float, float]:
+    """기준점(ax, ay) 근처에서 선(pts)과 이미 놓은 글자(used)에 겹치지 않는 자리 → (오른쪽 끝 x, 가운데 y). 글자는 anchor='rm'."""
+    import math
+    dense = []
+    for (x1_, y1_), (x2_, y2_) in zip(pts, pts[1:]):   # 선을 촘촘한 점으로
+        n = max(1, int(math.hypot(x2_ - x1_, y2_ - y1_) / 8))
+        dense += [(x1_ + (x2_ - x1_) * k / n, y1_ + (y2_ - y1_) * k / n) for k in range(n + 1)]
+    pad = 30   # 선 굵기(강조 8px)·글자 여백까지
+    for dy in (100, -100, 150, -150, 210, -210, 270, -270):
+        for dx in (-30, -140, 60, -260):
+            rx, cy = ax + dx, ay + dy
+            L, R, T, B = rx - w - pad, rx + pad, cy - h / 2 - pad, cy + h / 2 + pad
+            if T < top or B > bottom:
+                continue
+            if any(L <= x <= R and T <= y <= B for x, y in dense):
+                continue
+            if any(not (R < a or L > b or B < c or T > d) for a, b, c, d in used):
+                continue
+            used.append((L, R, T, B))
+            return rx, cy
+    return ax - 20, ay + 70
+
+
 def s_chart(D: HDoc, sc: dict, bt: list, dur: float):
     from . import marketdata
     rows = marketdata.fetch(sc["ticker"], sc.get("period", "3mo"), sc["_prices"])
@@ -235,11 +258,15 @@ def s_chart(D: HDoc, sc: dict, bt: list, dur: float):
     t0 = bt[0][0]
     D.stroke(seg, D.red, 8, at=t0 + 1.2, dur=0.6)
     D.circle(seg[-1][0], seg[-1][1], 26, 26, at=t0 + 1.7)
-    ly = seg[-1][1] + 70 if seg[-1][1] + 70 < y1 - 50 else seg[-1][1] - 70   # 바닥(날짜 글자) 가까우면 점 위로
     _fmt = ",.2f" if str(sc.get("ticker", "")).startswith("^") else ",.0f"   # 지수는 소수 둘째 자리까지 (반올림으로 숫자가 대사와 달라지지 않게)
-    D.text(seg[-1][0] - 20, ly, format(rows[-1]['close'], _fmt), FT("value"), 54, accent_text(D), at=t0 + 1.9, anchor="rm")
+    val_txt = format(rows[-1]['close'], _fmt)
+    used = []
+    # 숫자 글자는 선과 겹치지 않는 빈 곳에 (2026-11-13 사용자: '166'·'-4.34%'가 그래프 선 위에 겹침)
+    vx, vy = _free_spot(pts, used, seg[-1][0], seg[-1][1], len(val_txt) * 32, 60, y0, y1 + 10)
+    D.text(vx, vy, val_txt, FT("value"), 54, accent_text(D), at=t0 + 1.9, anchor="rm")
     if b0.get("mark"):
-        D.text(seg[0][0] - 30, min(p[1] for p in seg) - 70, b0["mark"], FT("note"), 50, accent_text(D), at=t0 + 2.2, anchor="rm")
+        mx, my = _free_spot(pts, used, (seg[0][0] + seg[-1][0]) / 2, min(p[1] for p in seg), len(b0["mark"]) * 28, 56, y0, y1 + 10)
+        D.text(mx, my, b0["mark"], FT("note"), 50, accent_text(D), at=t0 + 2.2, anchor="rm")
     D.js.append(f'tl.to("#layer",{{scale:1.18,x:-230,y:40,duration:1.6,ease:"power2.inOut"}},{t0 + 1.0:.2f});')
     D.sfx.append(("pencil", t0 + 1.2))
     if len(sc["beats"]) > 1 and sc["beats"][1].get("stamp"):

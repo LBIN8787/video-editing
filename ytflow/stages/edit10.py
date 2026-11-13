@@ -229,7 +229,7 @@ if "ytflow.stages.hybrid" in _sys.modules and hasattr(_sys.modules["ytflow.stage
 # 영상의 기본 팩(edit.yaml skin)은 오프닝·장 표지·자료 화면·끝처럼 '얼굴' 장면에 쓰고,
 # 나머지 장면은 하는 일(숫자·발언·구조)에 맞는 팩을 고른다. 밝기 계열(밝음/어두움)은 기본 팩과 맞춰 너무 튀지 않게.
 SITUATION = {
-    "data":      ({"bars", "chart", "versus", "bignum", "isotype", "people", "compare_values"}, ["slate", "clean-white"], ["midnight", "blueprint"]),
+    "data":      ({"bars", "chart", "versus", "bignum", "isotype", "people", "compare_values", "newsdesk"}, ["slate", "clean-white"], ["midnight", "blueprint"]),
     "voice":     ({"quote"}, ["clean-white", "slate"], ["dark-doc", "forest"]),
     "structure": ({"map_causal", "analogy", "checklist", "recap", "timeline"}, ["paper-sketch", "clean-white"], ["forest", "midnight"]),
 }

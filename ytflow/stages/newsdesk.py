@@ -33,14 +33,17 @@ def _c(x: str | None, default="yellow") -> str:
 def s_newsdesk(D, sc: dict, bt: list, dur: float):
     from .hybrid import _e
     brand = sc.get("brand") or "이어 읽는 시장"
-    acc = _c(sc.get("accent"), "yellow")
+    pal = D.skin.get("palette", {})   # 영상의 그래픽 팩 색을 따름 — 카드만 다른 세계처럼 보이지 않게 (2026-11-13 사용자)
+    global BG, PANEL, LINE, INK, MUTED
+    PANEL, LINE, INK, MUTED = pal.get("card", PANEL), pal.get("line", LINE), pal.get("ink", INK), pal.get("muted_text", MUTED)
+    acc = _c(sc.get("accent"), pal.get("accent", "yellow")) if sc.get("accent") else pal.get("accent", COL["yellow"])
     i = D._id()
     t1 = bt[1][0] if len(bt) > 1 else 1.2
     pb = sc.get("panel_beat", 1 if len(bt) > 1 else 0)
     tp = bt[min(pb, len(bt) - 1)][0] + (0.2 if pb else 0.9)
     # 바탕 (카테고리 바탕 위를 덮음) + 바깥 틀
-    D.media.append(f'<div style="position:absolute;inset:0;background:{BG}"></div>'
-                   f'<div style="position:absolute;left:40px;top:40px;right:40px;bottom:40px;border:1px solid {LINE};border-radius:10px"></div>')
+    # 바탕은 영상 공통 바탕 그대로 (검은 판을 덮지 않음) + 얇은 틀만
+    D.media.append(f'<div style="position:absolute;left:40px;top:40px;right:40px;bottom:40px;border:1px solid {LINE};border-radius:10px;opacity:.7"></div>')
     # 위: 진행 막대 · NEWS n / N — 출처 · 채널 칩
     idx, total = sc.get("idx"), sc.get("total")
     if idx and total:
@@ -72,7 +75,7 @@ def s_newsdesk(D, sc: dict, bt: list, dur: float):
     D.js.append(f'tl.fromTo("#{i}h",{{opacity:0,y:18}},{{opacity:1,y:0,duration:0.45,ease:"power3.out"}},0.35);')
     y += int(hsize * 1.25 * (1 if len(sc.get("headline", "")) <= 20 else 2)) + 16
     if sc.get("sub"):
-        D.items.append(f'<div id="{i}s" style="position:absolute;left:{x0}px;top:{y}px;width:900px;font-family:sans;font-size:34px;color:#C9CDD3">{_e(sc["sub"])}</div>')
+        D.items.append(f'<div id="{i}s" style="position:absolute;left:{x0}px;top:{y}px;width:900px;font-family:sans;font-size:34px;color:{INK};opacity:.82">{_e(sc["sub"])}</div>')
         D.js.append(f'tl.fromTo("#{i}s",{{opacity:0}},{{opacity:1,duration:0.4}},0.7);')
         y += 80
     stats = sc.get("stats") or []
@@ -146,7 +149,8 @@ def s_newsdesk(D, sc: dict, bt: list, dur: float):
     if any(b.get("motion") for b in sc["beats"]):
         from pathlib import Path as _P
         from . import align, motion2
-        stg = motion2.Stage(f"nd{sc['id']}", 1920, 1080)
+        stg = motion2.Stage(f"nd{sc['id']}", 1920, 1080, theme={"icon_bg": pal.get("card2", "#1C2E47"), "ring": acc, "arrow": acc,
+                                                                "card": pal.get("card", "#16263C"), "card_ink": INK, "label": INK})
         for k, (b, (t0, d)) in enumerate(zip(sc["beats"], bt)):
             if not b.get("motion"):
                 continue

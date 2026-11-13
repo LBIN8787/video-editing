@@ -48,8 +48,11 @@ def word_time(words: list, say: str, target: str, dur: float) -> float:
 class Stage:
     """사물들을 모아 HTML·GSAP 로 만든다. items(앞), js 에 붙여 쓴다."""
 
-    def __init__(self, prefix: str, w: int = 1080, h: int = 1920):
+    def __init__(self, prefix: str, w: int = 1080, h: int = 1920, theme: dict | None = None):
+        """theme: 영상의 그래픽 팩과 맞춤 (2026-11-13 사용자: 애니메이션 바탕·색이 기존 장면과 괴리) —
+        icon_bg(아이콘 동그라미), ring(테두리), arrow(화살표), card(숫자 카드), card_ink, label(이름표 글자)."""
         self.p = prefix
+        self.th = {"icon_bg": YEL, "ring": "", "arrow": YEL, "card": "rgba(246,244,238,.97)", "card_ink": "#111", "label": "#fff", **(theme or {})}
         self.w, self.h = w, h
         self.pos: dict = {}
         self.items: list = []
@@ -78,7 +81,7 @@ class Stage:
         do = m["do"]
         x, y = m.get("x", 540), m.get("y", 760)
         lab = m.get("label", "")
-        lab_html = (f'<div style="position:absolute;left:-60px;right:-60px;bottom:-58px;text-align:center;white-space:nowrap;font-family:gx,sans-x;font-size:{m.get("lfs", 34)}px;color:#fff;'
+        lab_html = (f'<div style="position:absolute;left:-60px;right:-60px;bottom:-58px;text-align:center;white-space:nowrap;font-family:gx,sans-x;font-size:{m.get("lfs", 34)}px;color:{self.th["label"]};'
                     f'-webkit-text-stroke:2px #000;paint-order:stroke fill">{_e(lab)}</div>') if lab else ""
         if do == "folder":
             inner = (f'<div style="position:absolute;inset:0;perspective:700px">'
@@ -104,10 +107,9 @@ class Stage:
                      f'filter:drop-shadow(0 10px 18px rgba(0,0,0,.45))">⚙️</div>{lab_html}')
             did = self._box(m["id"], x, y, 270, 270, inner)
             self._enter(did, t, m.get("from"), x, y)
-            spin = max(end - t, 0.5)
-            self.js.append(f'tl.to("#{did} .gr",{{rotation:{int(240 * spin)},duration:{spin:.2f},ease:"none"}},{t:.3f});')
+            self.js.append(f'tl.fromTo("#{did} .gr",{{rotation:-120}},{{rotation:240,duration:1.0,ease:"power2.out"}},{t:.3f});')   # 한 바퀴 돌고 멈춤 (계속 돌면 산만)
         elif do == "icon":
-            inner = (f'<div style="position:absolute;inset:0;border-radius:50%;background:{m.get("bg", YEL)};display:flex;align-items:center;'
+            inner = (f'<div style="position:absolute;inset:0;border-radius:50%;background:{m.get("bg", self.th["icon_bg"])};{("border:5px solid " + self.th["ring"] + ";") if self.th["ring"] else ""}display:flex;align-items:center;'
                      f'justify-content:center;font-size:{m.get("size", 110)}px;box-shadow:0 12px 30px rgba(0,0,0,.45)">{_e(m.get("icon", "★"))}</div>{lab_html}')
             did = self._box(m["id"], x, y, m.get("d", 240), m.get("d", 240), inner)
             self._enter(did, t, m.get("from"), x, y)
@@ -115,9 +117,9 @@ class Stage:
             val = str(m.get("value", ""))
             num = re.sub(r"[^\d.]", "", val)
             inner = (f'<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;'
-                     f'background:rgba(246,244,238,.97);border-radius:32px;box-shadow:0 20px 60px rgba(0,0,0,.5)">'
-                     f'<div style="font-family:gr,sans;font-size:38px;color:#555">{_e(lab)}</div>'
-                     f'<div id="{self.p}_{m["id"]}_n" style="font-family:gx,sans-x;font-size:{m.get("fs", 190)}px;line-height:1.05;color:#111">{_e(val)}</div></div>')
+                     f'background:{self.th["card"]};border-radius:32px;box-shadow:0 20px 60px rgba(0,0,0,.5)">'
+                     f'<div style="font-family:gr,sans;font-size:38px;color:{self.th["card_ink"]};opacity:.75">{_e(lab)}</div>'
+                     f'<div id="{self.p}_{m["id"]}_n" style="font-family:gx,sans-x;font-size:{m.get("fs", 190)}px;line-height:1.05;color:{self.th["card_ink"]}">{_e(val)}</div></div>')
             cw, ch = m.get("w", 900), m.get("h", 420)
             did = self._box(m["id"], x, y, cw, ch, inner)
             self._enter(did, t)
@@ -175,13 +177,10 @@ class Stage:
                 bend = min(80, L * 0.15)
                 cx, cy = (x1 + x2) / 2 - dy / L * bend, (y1 + y2) / 2 + dx / L * bend
                 aid = f"{self.p}_ar_{m['a']}_{m['b']}"
-                self.svg.append(f'<path id="{aid}" d="M{x1:.0f},{y1:.0f} Q{cx:.0f},{cy:.0f} {x2:.0f},{y2:.0f}" fill="none" stroke="{YEL}" stroke-width="12" '
+                self.svg.append(f'<path id="{aid}" d="M{x1:.0f},{y1:.0f} Q{cx:.0f},{cy:.0f} {x2:.0f},{y2:.0f}" fill="none" stroke="{self.th["arrow"]}" stroke-width="10" '
                                 f'stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" marker-end="url(#{self.p}_head)" opacity="0"/>')
                 self.js.append(f'tl.set("#{aid}",{{opacity:1}},{t:.3f});tl.to("#{aid}",{{strokeDashoffset:0,duration:0.4,ease:"power2.inOut"}},{t:.3f});')
                 self.sfx.append(("whoosh-short", t))
-        if do in ("folder", "file", "gear", "icon") and end - t > 1.2:   # 들어온 뒤 살짝 떠 있음 (정지 화면 방지)
-            n = max(1, int((end - t - 0.6) / 0.9))
-            self.js.append(f'tl.to("#{self.p}_{m["id"]}",{{y:-10,duration:0.45,ease:"sine.inOut",yoyo:true,repeat:{2 * n - 1}}},{t + 0.6:.3f});')
         if do == "pulse" and m.get("on") in self.pos:
             self.js.append(f'tl.fromTo("#{self.p}_{m["on"]}",{{scale:1}},{{scale:1.18,duration:0.16,yoyo:true,repeat:1,ease:"power1.inOut"}},{t:.3f});')
         elif do == "out" and m.get("on") in self.pos:
@@ -192,7 +191,7 @@ class Stage:
         html = "".join(self.items)
         if self.svg:
             html += (f'<svg style="position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none" viewBox="0 0 {self.w} {self.h}">'
-                     f'<defs><marker id="{self.p}_head" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="{YEL}"/></marker></defs>'
+                     f'<defs><marker id="{self.p}_head" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="{self.th["arrow"]}"/></marker></defs>'
                      f'{"".join(self.svg)}</svg>')
         js = list(self.js)
         if not keep and (self.pos or self.svg):
