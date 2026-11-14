@@ -918,8 +918,10 @@ def voice(project: Project, spec: dict) -> dict:
     ch_tts = _channel_tts(project)   # 채널마다 정한 목소리 (channels/<id>/channel.yaml 의 tts) — 예: 이어 읽는 시장 = Teo
     if ch_tts and os.environ.get("YTFLOW_TTS", "") != "edge":   # YTFLOW_TTS=edge 면 초안 목소리로 강제
         cfg = {**cfg, **ch_tts, "elevenlabs": {**(cfg.get("elevenlabs") or {}), **(ch_tts.get("elevenlabs") or {})}}
+    if spec.get("tts_rate"):   # v24: 영상마다 말 빠르기 (다큐 내레이션은 차분하게, README §2-3·§2-4)
+        cfg["rate"] = spec["tts_rate"]
     el = cfg.get("backend") == "elevenlabs"
-    tag = f"\n#voice={(cfg.get('elevenlabs') or {}).get('voice_id', '')}" if el else ""   # 목소리를 바꾸면 박자 음성을 다시 만듦
+    tag = f"\n#voice={(cfg.get('elevenlabs') or {}).get('voice_id', '')}" if el else (f"\n#rate={cfg['rate']}" if spec.get("tts_rate") else "")   # 목소리·빠르기를 바꾸면 박자 음성을 다시 만듦
     durs = {}
     for sc in spec["scenes"]:
         for k, b in enumerate(sc["beats"]):
@@ -961,16 +963,17 @@ def voice(project: Project, spec: dict) -> dict:
 def timing(sc: dict, durs: dict) -> tuple[list, float]:
     t = LEAD + (0.9 if sc["type"] == "chapter" else 0.0)
     bt = []
+    gap = sc.get("gap", GAP)   # v24: 장면마다 문장 사이 쉼 (다큐 내레이션은 길게)
     for k, _ in enumerate(sc["beats"]):
         d = durs[f"{sc['id']:03d}_{k}"]
         bt.append((round(t, 2), d))
-        t += d + GAP
+        t += d + gap
     if sc.get("_bite"):   # 원본 발언 컷 (cutedit): 앞 내레이션 뒤에 그 사람의 말이 이어진다
-        tb = (t - GAP + 0.35) if bt else 0.0
+        tb = (t - gap + 0.35) if bt else 0.0
         sc["_bite_at"] = round(tb, 2)
         return bt, math.ceil((tb + sc["_bite"]["dur"] + 0.45) * FPS - 1e-6) / FPS
     # 30fps 프레임 격자에 맞춤: 장면 영상 길이 = 음성 길이 (안 맞추면 장면마다 0.01~0.03초씩 밀려 끝에서 0.6초 어긋남)
-    return bt, math.ceil((t - GAP + TAIL) * FPS - 1e-6) / FPS
+    return bt, math.ceil((t - gap + TAIL) * FPS - 1e-6) / FPS
 
 
 # ---------------------------------------------------------------- 장면 렌더

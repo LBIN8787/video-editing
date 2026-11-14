@@ -300,7 +300,10 @@ def apply_v6():   # v6: 대본 v6 (미주일기 문법, 10.7분, 2026-11-14 통�
     spec_ = importlib.util.spec_from_file_location("v6", Path(__file__).with_name("v6.py"))
     v6 = importlib.util.module_from_spec(spec_)
     spec_.loader.exec_module(v6)
-    SPEC["scenes"] = v6.scenes_mixed()   # 문장 순서는 그대로, 질문·숫자·인용 문장은 kinetic·bignum·versus·quote 로 (스타일 섞기 규칙)
+    SPEC["scenes"] = v6.scenes_mixed()
+    SPEC["tts_rate"] = "-5%"          # 미주일기식 차분한 다큐 내레이션 (초안 +8% 는 9분으로 짧았음)
+    for sc in SPEC["scenes"]:
+        sc["gap"] = 0.5                 # 문장 사이 쉼 0.28 → 0.5초   # 문장 순서는 그대로, 질문·숫자·인용 문장은 kinetic·bignum·versus·quote 로 (스타일 섞기 규칙)
 
 
 def main():
