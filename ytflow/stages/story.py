@@ -452,7 +452,7 @@ def s_story(D, sc: dict, bt: list, dur: float):
     D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""), dark=dark0)
     if sc.get("credit"):
         D.label(sc.get("credit", ""))
-    kinds = [m["do"] for b in sc["beats"] for m in b.get("draw", []) if m["do"] in ("photo", "doc", "sticker", "card", "draw", "figure", "chip", "note", "count", "big", "stamp")]
+    kinds = [m["do"] for b in sc["beats"] for m in b.get("draw", []) if m["do"] in ("photo", "doc", "sticker", "card", "draw", "figure", "chip", "note", "count", "big", "stamp", "bubble", "cut", "puppet")]
     if len(kinds) >= 6:   # 그림 패턴 반복 점검 (2026-11-13 사용자: "그림 패턴도 너무 매번 똑같다")
         top = max(set(kinds), key=kinds.count)
         if kinds.count(top) / len(kinds) > 0.5:
