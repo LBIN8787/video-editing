@@ -692,7 +692,7 @@ def s_bars(D: HDoc, sc: dict, bt: list, dur: float):
     pos = max([i["value"] for i in items if i["value"] > 0] or [0])
     neg = max([-i["value"] for i in items if i["value"] < 0] or [0])
     span = (pos + neg) or 1
-    area_top, area_bot = 270, 800 if neg else 820       # 막대가 차지하는 세로 범위
+    area_top, area_bot = 340, 800 if neg else 820       # 막대가 차지하는 세로 범위 (값 글자가 제목 밑줄에 닿지 않게)
     base = area_top + (area_bot - area_top) * pos / span if neg else area_bot
     scale = (area_bot - area_top) / span
     t0 = bt[0][0]
@@ -702,9 +702,13 @@ def s_bars(D: HDoc, sc: dict, bt: list, dur: float):
     bw = 220 if n <= 3 else min(220, step * 0.55)
     stagger = 0.9 if n <= 3 else 0.6
     vsize = 72 if n <= 3 else 60
-    D.rough("line", [330, base, 1600, base + 2], D.ink, 3.5, at=t0 + 0.1, dur=0.5)
+    D.rough("line", [330 + (260 if any(L.get("side") == "left" for L in sc.get("layers") or []) else 0), base, 1600, base + 2], D.ink, 3.5, at=t0 + 0.1, dur=0.5)
+    off = 260 if any(L.get("side") == "left" for L in sc.get("layers") or []) else 0   # 왼쪽에 지도·사진이 있으면 막대를 오른쪽으로 (2026-11-14 지도가 막대를 가림)
+    if n > 3 and off:
+        step = (1550 - (370 + off)) / (n - 1)
+        bw = min(220, step * 0.55)
     for k, it in enumerate(items):
-        x = 520 + k * 440 if n <= 3 else 960 + (k - (n - 1) / 2) * step
+        x = 520 + off + k * (440 - off / 2) if n <= 3 else 370 + off + k * step if off else 960 + (k - (n - 1) / 2) * step
         v = it["value"]
         h = max(abs(v) * scale, 6)
         at = t0 + 0.4 + k * stagger
