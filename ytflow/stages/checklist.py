@@ -225,6 +225,27 @@ def run(path: Path, upto: str = "G8") -> Report:
                 fs = (res / "factsheet.md").read_text(encoding="utf-8") if (res / "factsheet.md").exists() else ""
                 kinds = [k for k in ("이슈", "보고서", "전망", "실적") if k in fs]
                 R.add("G3", "MUST", "매일 시장: 이야기마다 원인 종류(이슈·보고서·전망·실적)와 1차 출처를 팩트시트에", bool(kinds) and "http" in fs, kinds)
+                # v26 (03 §0-2, 2026-11-15 사용자): 뻔한 사실 말고 자료를 엮어야 보이는 것 — 자료 지도·말과 행동·매체 프레임
+                deep = path.name.endswith(("-analysis", "-weekly")) or str(tb.get("depth", "")).startswith("심층")
+                lvl = "MUST" if deep else "SHOULD"
+
+                def _rows(head):
+                    m_ = re.search(r"^## " + head + r"[^\n]*\n(.*?)(?=^## |\Z)", fs, re.S | re.M)
+                    rows_ = [ln for ln in (m_.group(1).splitlines() if m_ else []) if ln.strip().startswith("|") and not re.match(r"^\|\s*-", ln.strip())]
+                    return [[c.strip() for c in ln.strip().strip("|").split("|")] for ln in rows_[1:]]   # 첫 줄은 머리
+                R.add("G1", lvl, "v26: topic_brief 에 known(이미 알려진 것)·new_angle(자료를 엮어야 보이는 것) — 제목·훅은 new_angle 에서 (03 §0-2)",
+                      bool(tb.get("known")) and bool(tb.get("new_angle")), (tb.get("new_angle") or "")[:40])
+                amap = _rows("자료 지도")
+                kinds_ = {k: sum(1 for r_ in amap if any(k in c for c in r_[:3])) for k in ("보고서", "발언", "행동")}
+                meant = all(len(r_) >= 5 and r_[4] not in ("", "-") for r_ in amap)
+                R.add("G3", lvl, "v26: 팩트시트 '## 자료 지도' — 보고서·발언·행동 각 2줄+, 합계 6줄+, 자료마다 의미 칸 (03 §0-2)",
+                      len(amap) >= 6 and all(v >= 2 for v in kinds_.values()) and meant, f"{len(amap)}줄 {kinds_} 의미{'✓' if meant else '빈칸'}")
+                media = _rows("매체 프레임")
+                R.add("G3", lvl, "v26: 팩트시트 '## 매체 프레임' — 매체 4곳+ (국내 2·해외 2), 제목·강조점·빠진 것 (03 §0-2)", len(media) >= 4, f"{len(media)}곳")
+                if spec.get("scenes"):
+                    says_m = " ".join(b.get("say", "") for s_ in spec["scenes"] for b in s_.get("beats", []))
+                    R.add("G4", lvl, "v26: 대본에 매체가 어떻게 다뤘나 + 말과 행동 맞대기 (03 §0-2)",
+                          any(s_.get("type") == "newspapers" for s_ in spec["scenes"]) or ("매체" in says_m and ("보도" in says_m or "기사" in says_m)), "")
         if brand == "market":
             tail = [s.get("type") for s in spec.get("scenes", [])[-3:]]
             R.add("G4", "SHOULD", "market: 끝에 확인할 신호(checklist)", "checklist" in tail, tail)

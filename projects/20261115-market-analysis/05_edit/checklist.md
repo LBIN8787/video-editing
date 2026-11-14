@@ -1,10 +1,10 @@
 # 체크리스트 — 20261115-market-analysis
 
-매뉴얼 v25 · 2026-11-14T22:41:49 · **통과**
+매뉴얼 v25 · 2026-11-14T23:17:02 · **MUST 실패 5개**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
-| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ✅ |  |
+| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ❌ | [2026-11-14 · 20261115-market-analysis 기각] 제목·썸네일 A('엔비디아는 왜 고객의 빚까지 보증하나')는 이미  |
 | G1 | MUST | topic_brief.json 있음 | ✅ | 01_research/topic_brief.json (schemas/topic_brief.schema.json) |
 | G1 | MUST | 브랜드(ai/market/curiosity) | ✅ | market |
 | G1 | MUST | 욕망·시청자 질문 | ✅ | 세계에서 가장 돈을 잘 버는 칩 회사가, 왜 고객의 빚까지 보증하고 있을까? |
@@ -35,6 +35,10 @@
 | G1 | MUST | 매일 브리핑: daily_brief.json 있음 (python -m ytflow daily) | ✅ | 01_research/daily_brief.json |
 | G4 | MUST | 매일 브리핑: 오프닝에 기준 시각('○일 마감 기준' / '○시 기준') | ✅ |  |
 | G3 | MUST | 매일 시장: 이야기마다 원인 종류(이슈·보고서·전망·실적)와 1차 출처를 팩트시트에 | ✅ | ['이슈', '보고서', '전망', '실적'] |
+| G1 | MUST | v26: topic_brief 에 known(이미 알려진 것)·new_angle(자료를 엮어야 보이는 것) — 제목·훅은 new_angle 에서 (03 §0-2) | ❌ |  |
+| G3 | MUST | v26: 팩트시트 '## 자료 지도' — 보고서·발언·행동 각 2줄+, 합계 6줄+, 자료마다 의미 칸 (03 §0-2) | ❌ | 0줄 {'보고서': 0, '발언': 0, '행동': 0} 의미✓ |
+| G3 | MUST | v26: 팩트시트 '## 매체 프레임' — 매체 4곳+ (국내 2·해외 2), 제목·강조점·빠진 것 (03 §0-2) | ❌ | 0곳 |
+| G4 | MUST | v26: 대본에 매체가 어떻게 다뤘나 + 말과 행동 맞대기 (03 §0-2) | ❌ |  |
 | G4 | SHOULD | market: 끝에 확인할 신호(checklist) | ✅ | ['kinetic', 'checklist', 'outro'] |
 | G4 | MUST | 인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1) | ✅ | [] |
 | G4 | SHOULD | 말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용) | ✅ | [] |
@@ -70,7 +74,7 @@
 | G6 | SHOULD | 최종 목소리 ElevenLabs | ✅ |  |
 | G7 | MUST | 제목 후보 3개 + 이유 | ✅ |  |
 | G7 | MUST | 썸네일 A/B/C + 점검 ok | ✅ |  |
-| G7 | SHOULD | 제목 앞 22자 안에 질문/핵심 | ✅ | 엔비디아는 왜 고객의 빚까지 보증하나 / |
+| G7 | SHOULD | 제목 앞 22자 안에 질문/핵심 | ⚠️ | AI 공장의 돈 고리: 약속 2,790억 |
 | G8 | MUST | GitHub Release 업로드 | ✅ |  |
 | G8 | MUST | episodes.md 기록 | ✅ | ch-market-daily |
 

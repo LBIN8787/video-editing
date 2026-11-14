@@ -1,15 +1,15 @@
 {
  "project": "20261115-market-analysis",
  "manual_version": "25",
- "checked": "2026-11-14T22:41:49",
- "pass": true,
+ "checked": "2026-11-14T23:17:02",
+ "pass": false,
  "rows": [
   {
    "gate": "G0",
    "level": "MUST",
    "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
-   "ok": true,
-   "detail": ""
+   "ok": false,
+   "detail": "[2026-11-14 · 20261115-market-analysis 기각] 제목·썸네일 A('엔비디아는 왜 고객의 빚까지 보증하나')는 이미 너무 알려진 사실이라 뻔함. 그동안 나온 보고서·주요 내용을 분석해 더 심도 있게 엮을 것 — 발언·행동 자료가 어떤 의미를 가지는지, 매체는 이를 어떻게 다루는지까지"
   },
   {
    "gate": "G1",
@@ -220,6 +220,34 @@
    "item": "매일 시장: 이야기마다 원인 종류(이슈·보고서·전망·실적)와 1차 출처를 팩트시트에",
    "ok": true,
    "detail": "['이슈', '보고서', '전망', '실적']"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "v26: topic_brief 에 known(이미 알려진 것)·new_angle(자료를 엮어야 보이는 것) — 제목·훅은 new_angle 에서 (03 §0-2)",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "v26: 팩트시트 '## 자료 지도' — 보고서·발언·행동 각 2줄+, 합계 6줄+, 자료마다 의미 칸 (03 §0-2)",
+   "ok": false,
+   "detail": "0줄 {'보고서': 0, '발언': 0, '행동': 0} 의미✓"
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "v26: 팩트시트 '## 매체 프레임' — 매체 4곳+ (국내 2·해외 2), 제목·강조점·빠진 것 (03 §0-2)",
+   "ok": false,
+   "detail": "0곳"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "v26: 대본에 매체가 어떻게 다뤘나 + 말과 행동 맞대기 (03 §0-2)",
+   "ok": false,
+   "detail": ""
   },
   {
    "gate": "G4",
@@ -470,8 +498,8 @@
    "gate": "G7",
    "level": "SHOULD",
    "item": "제목 앞 22자 안에 질문/핵심",
-   "ok": true,
-   "detail": "엔비디아는 왜 고객의 빚까지 보증하나 |"
+   "ok": false,
+   "detail": "AI 공장의 돈 고리: 약속 2,790억"
   },
   {
    "gate": "G8",

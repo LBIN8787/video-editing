@@ -68,6 +68,19 @@
       "type": "string",
       "description": "남들 영상보다 깊은 것 하나"
     },
+    "known": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "v26 (manual/03 §0-2): 헤드라인 수준으로 이미 알려진 사실 1~3줄 — 제목·훅으로 쓰지 않음"
+    },
+    "new_angle": {
+      "type": "string",
+      "description": "v26 (manual/03 §0-2): 보고서·발언·행동 자료를 엮어야 보이는 한 문장 (근거 번호) — 제목·훅·썸네일 A 는 여기서"
+    },
+    "depth": {
+      "type": "string",
+      "description": "브리핑 / 심층 (manual/09 §2) — 심층이면 v26 자료 지도·매체 프레임 MUST"
+    },
     "score": {
       "type": "object",
       "required": [
