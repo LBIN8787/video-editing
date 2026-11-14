@@ -40,6 +40,11 @@
 **추천:** 매일 자동(클라우드)은 **OpenAI API(gpt-image-2 계열, 투명 배경)** 또는 지금처럼 **ElevenLabs Seedream 5.5**(가장 쌈). 사용자 PC 에서 만들 때는 **Codex $imagegen**(구독 안, 추가 비용 0).
 한 편 8~12장 기준: Seedream ≈ $0.2, GPT Image 2.6(ElevenLabs) ≈ $0.4, OpenAI 직접 중간 품질 ≈ $0.3~1.
 
+### 시험 결과 (2026-11-14)
+- **Codex `$imagegen` (ChatGPT Pro 구독, 클라우드 세션에서 `codex login --device-auth` 로 로그인):** 아기 모델 시트 1장 41초, 추가 비용 0, 1752×897.
+  같은 프롬프트의 Seedream 5.5 와 비교해 품질 비슷(표정이 더 살아 있음, 반팔 우주복으로 해석), `art-cut` 으로 3조각 정상.
+- 로그인은 **그 세션의 컨테이너에만** 남음 → 사람과 함께하는 세션에서는 Codex(무료)로, 사람 없는 아침 자동 실행은 ElevenLabs·OpenAI API 로 (또는 매번 로그인 승인).
+
 ### 주문서 예 (`02_script/art_plan.json`)
 ```json
 {"sheets": [

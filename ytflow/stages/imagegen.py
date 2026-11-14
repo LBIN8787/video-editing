@@ -84,7 +84,9 @@ def gen_codex(prompt: str, out: Path) -> dict:
         raise RuntimeError("codex CLI 없음 — Codex 를 쓰는 PC 에서 실행하세요")
     task = (f"Use the $imagegen skill to generate ONE image and save it exactly to {out.resolve()} (PNG, landscape). "
             f"Do not edit any other file. Prompt: {prompt}")
-    subprocess.run(["codex", "exec", "--skip-git-repo-check", task], check=True, timeout=900)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    subprocess.run(["codex", "exec", "--skip-git-repo-check", "-s", "workspace-write", "-C", str(out.parent.resolve()), task],
+                   check=True, timeout=900)
     if not out.exists():
         raise RuntimeError("codex 가 그림을 저장하지 않음")
     return {"backend": "codex", "model": "gpt-image (ChatGPT 구독)"}
