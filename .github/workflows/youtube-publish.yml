@@ -50,7 +50,7 @@ jobs:
           import json
           from ytflow.stages import ytpublish
           r = json.load(open("/tmp/req.json"))
-          ytpublish.run(r["project"], at=r.get("at"), privacy=r.get("privacy"), thumb=r.get("thumb") or "A", resume=bool(r.get("resume")))
+          ytpublish.run(r["project"], at=r.get("at"), privacy=r.get("privacy"), thumb=r.get("thumb") or "A", resume=bool(r.get("resume")), update_meta=bool(r.get("update_meta")))
           PY
       - name: Record result on main
         if: always()
@@ -58,7 +58,7 @@ jobs:
           F="projects/${{ steps.req.outputs.name }}/05_edit/youtube_publish.json"
           [ -f "$F" ] || exit 0
           git config user.name "ytflow-bot"; git config user.email "ytflow-bot@users.noreply.github.com"
-          git add -f "$F"; git commit -m "youtube: ${{ steps.req.outputs.name }} 올림 기록" || exit 0
+          git add -f "$F"; git commit -m "youtube: ${{ steps.req.outputs.name }} 올림·수정 기록" || exit 0
           for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done
       - name: Delete request branch
         if: always()

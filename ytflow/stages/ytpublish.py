@@ -191,11 +191,16 @@ def build_meta(pr: Project, at: str | None = None, privacy: str | None = None) -
     return meta, s
 
 
-def run(project: str, at: str | None = None, privacy: str | None = None, dry_run: bool = False, thumb: str = "A", resume: bool = False) -> dict:
+def run(project: str, at: str | None = None, privacy: str | None = None, dry_run: bool = False, thumb: str = "A", resume: bool = False,
+        update_meta: bool = False) -> dict:
     pr = Project.open(project)
     edir = pr.dir("edit")
     rec_p = edir / "youtube_publish.json"
     old = json.loads(rec_p.read_text(encoding="utf-8")) if rec_p.exists() else {}
+    if update_meta:
+        if not old.get("video_id"):
+            raise SystemExit("[yt-publish] --update-meta: 아직 올린 영상이 없습니다 (youtube_publish.json 의 video_id)")
+        return _update_meta(pr, old, rec_p, dry_run)
     if old.get("video_id") and not dry_run:
         if not resume:
             raise SystemExit(f"[yt-publish] 이미 올림: {rec_p} (못 한 단계만 다시: --resume / 새로 올리려면 이 파일을 지우세요)")
@@ -231,6 +236,28 @@ def run(project: str, at: str | None = None, privacy: str | None = None, dry_run
     return rec
 
 
+def _update_meta(pr: Project, rec: dict, rec_p: Path, dry_run: bool = False) -> dict:
+    """이미 올린 영상의 제목·설명란·태그를 youtube.md(제목 1번)로 다시 맞춘다 (2026-11-15 사용자: 올린 뒤 제목 C 선택)."""
+    p, vid = pack(pr), rec["video_id"]
+    if dry_run:
+        print(f"[yt-publish] 제목·설명란·태그 바꾸기 미리 보기 (바꾸지 않음): {vid} → {p['title']}")
+        return {"video_id": vid, "title": p["title"]}
+    tok = _token()
+    cur, _ = _req(tok, "GET", f"{API}/videos?part=snippet&id={vid}")
+    if not cur.get("items"):
+        raise SystemExit(f"[yt-publish] 영상을 찾지 못함: {vid}")
+    sn = cur["items"][0]["snippet"]
+    sn.update(title=p["title"], description=p["description"], tags=p["tags"])
+    sn.pop("thumbnails", None), sn.pop("localized", None), sn.pop("channelTitle", None), sn.pop("publishedAt", None), sn.pop("channelId", None)
+    _req(tok, "PUT", f"{API}/videos?part=snippet", {"id": vid, "snippet": sn})
+    rec.setdefault("title_history", []).append(rec.get("title"))
+    rec["title"] = p["title"]
+    rec["meta_updated_at"] = dt.datetime.now(KST).isoformat(timespec="seconds")
+    rec_p.write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"[yt-publish] 제목·설명란·태그 바꿈: {rec['url']} → {p['title']}")
+    return rec
+
+
 def _resume(pr: Project, rec: dict, rec_p: Path, thumb: str) -> dict:
     """이미 올린 영상에 빠진 단계(썸네일·자막·재생목록)만 다시."""
     s, edir, vid, tok = settings(pr), pr.dir("edit"), rec["video_id"], _token()
@@ -252,7 +279,8 @@ def _resume(pr: Project, rec: dict, rec_p: Path, thumb: str) -> dict:
     return rec
 
 
-def request_github(project: str, at: str | None = None, privacy: str | None = None, thumb: str = "A", resume: bool = False) -> None:
+def request_github(project: str, at: str | None = None, privacy: str | None = None, thumb: str = "A", resume: bool = False,
+                   update_meta: bool = False) -> None:
     """GitHub Actions 에 올리기를 맡긴다: publish/<프로젝트> 브랜치에 요청 파일 하나를 올리면 워크플로가 Release 영상을 받아 올린다."""
     import subprocess
     import tempfile
@@ -261,9 +289,10 @@ def request_github(project: str, at: str | None = None, privacy: str | None = No
     name = pr.path.name
     if not (pr.dir("edit") / "youtube.md").exists():
         raise SystemExit("[yt-publish] 05_edit/youtube.md 가 없습니다 — 먼저 python -m ytflow yt-pack " + name)
+    resume = resume or update_meta   # 이미 올린 영상: 영상 파일은 다시 받지 않음
     if not resume and not (pr.dir("edit") / "release.json").exists():
         raise SystemExit("[yt-publish] 영상이 GitHub Release 에 없습니다 — 먼저 python -m ytflow upload " + name)
-    req = json.dumps({"project": name, "at": at, "privacy": privacy, "thumb": thumb, "resume": resume}, ensure_ascii=False)
+    req = json.dumps({"project": name, "at": at, "privacy": privacy, "thumb": thumb, "resume": resume, "update_meta": update_meta}, ensure_ascii=False)
     work = Path(tempfile.mkdtemp(prefix="ytflow-pub-"))
     (work / "req.json").write_text(req, encoding="utf-8")
     env = dict(os.environ, GIT_INDEX_FILE=str(work / "index"))

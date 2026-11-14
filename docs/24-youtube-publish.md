@@ -42,6 +42,7 @@ python -m ytflow upload <프로젝트>                 # 영상 → GitHub Relea
 python -m ytflow yt-publish <프로젝트> --dry-run    # 무엇을 올릴지 미리 보기 (제목·공개 상태·예약 시각·재생목록)
 python -m ytflow yt-publish <프로젝트>              # GitHub Actions 가 올림 → 몇 분 뒤 05_edit/youtube_publish.json
 python -m ytflow yt-publish <프로젝트> --at 2026-11-17T08:00 --thumb B   # 시각·썸네일 지정
+python -m ytflow yt-publish <프로젝트> --update-meta   # 이미 올린 영상의 제목·설명란·태그를 youtube.md(제목 1번)로 다시 맞춤
 ```
 - 같은 프로젝트를 두 번 올리지 않는다(`youtube_publish.json` 에 video_id 가 있으면 멈춤).
 - 썸네일이 거절되면(전화 인증 안 된 채널) 영상은 그대로 두고 `warnings` 에 남긴다.

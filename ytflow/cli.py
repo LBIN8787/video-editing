@@ -317,6 +317,7 @@ def main(argv: list[str] | None = None) -> None:
     yu.add_argument("--thumb", default="A", help="썸네일 A/B/C (API 는 한 장만 — 테스트 및 비교는 Studio 에서)")
     yu.add_argument("--dry-run", action="store_true", help="올리지 않고 무엇을 할지만 보기")
     yu.add_argument("--resume", action="store_true", help="이미 올린 영상에 빠진 단계(썸네일·자막·재생목록)만 다시")
+    yu.add_argument("--update-meta", action="store_true", help="이미 올린 영상의 제목·설명란·태그를 youtube.md(제목 1번)로 다시 맞추기")
     yp = sub.add_parser("yt-pack", help="유튜브 업로드 묶음: 설명란(챕터 타임코드·출처·면책)·제목 후보·태그 → 05_edit/youtube.md")
     yp.add_argument("project")
     ec = sub.add_parser("earnings-call", help="어닝콜 녹취록 정리: 준비 발언 핵심 문장·애널리스트 질문표·질문 주제 → 01_research/earnings/<TICKER>_call.md")
@@ -483,9 +484,9 @@ def main(argv: list[str] | None = None) -> None:
     elif a.cmd == "yt-publish":
         from .stages import ytpublish
         if a.dry_run or a.via == "here":
-            ytpublish.run(a.project, at=a.at, privacy=a.privacy, dry_run=a.dry_run, thumb=a.thumb, resume=a.resume)
+            ytpublish.run(a.project, at=a.at, privacy=a.privacy, dry_run=a.dry_run, thumb=a.thumb, resume=a.resume, update_meta=a.update_meta)
         else:
-            ytpublish.request_github(a.project, at=a.at, privacy=a.privacy, thumb=a.thumb, resume=a.resume)
+            ytpublish.request_github(a.project, at=a.at, privacy=a.privacy, thumb=a.thumb, resume=a.resume, update_meta=a.update_meta)
     elif a.cmd == "yt-pack":
         from .stages import ytpack
         ytpack.run(a.project)
