@@ -301,6 +301,10 @@ def main(argv: list[str] | None = None) -> None:
     cu.add_argument("--force", action="store_true", help="이미 찾은(사람이 고친) 구간도 다시 찾기")
     ab = sub.add_parser("art-brief", help="손그림 삽화 주문서: illust 장면마다 그릴 내용·파일 이름·카메라가 볼 곳 → 02_script/art_brief.md")
     ab.add_argument("project")
+    ag = sub.add_parser("art-gen", help="그림 생성 (02_script/art_plan.json 시트 → 조각): --backend openai|gemini|codex|manual (docs/28)")
+    ag.add_argument("args", nargs=argparse.REMAINDER)
+    ac = sub.add_parser("art-cut", help="그림 시트 → 조각 (흰·투명 배경 지우고 세로 빈 열에서 자름): 시트.png 출력폴더 이름1,이름2")
+    ac.add_argument("args", nargs="*")
     hs = sub.add_parser("hookshort", help="훅 쇼츠 (얼굴 없이): AI 목소리 + 실제 화면 꽉 채움 · 훅 제목 · 큰 자막 · 튀어나오는 카드 (02_script/hookshort.json)")
     hs.add_argument("project")
     pz = sub.add_parser("presenter", help="말하는 사람 쇼츠: 본인 촬영 영상 → 점프 컷·펀치 인·훅 제목·큰 자막·끼워 넣는 카드 (02_script/presenter.json)")
@@ -462,6 +466,12 @@ def main(argv: list[str] | None = None) -> None:
         from .project import Project as _P
         from .stages import illust
         illust.brief(_P.open(a.project))
+    elif a.cmd == "art-gen":
+        from .stages import imagegen
+        imagegen.main_gen(a.args)
+    elif a.cmd == "art-cut":
+        from .stages import imagegen
+        imagegen.main_cut(a.args)
     elif a.cmd == "hookshort":
         from .project import Project as _P
         from .stages import hookshort
