@@ -1,0 +1,17 @@
+# 호기심(ch-knowledge) 이야기 그림판 스타일 시험편 — 2026-11-14
+# 목적: 클라우드(GitHub Actions/리눅스 컨테이너, Node·Chromium 없음)에서
+#       호기심 채널의 '이야기 그림판'(story-board) 애니메이션이 끝까지 렌더되는지 확인.
+#       그림: projects/20261114-curiosity-test/build/board.py (Pillow 벡터 — 브라우저 없이 렌더)
+#       목소리: edge-tts (ko-KR-InJoonNeural, rate +8%) — 무료, 키 없음
+# 유튜브 업로드 없음 · main 브랜치 무관 (exp/cloud-render-test)
+edit:
+  style: paper            # 종이 질감·나눔 폰트·자막 상자 등 paper 프로필을 그대로 씀
+  family: infographic
+  width: 1920
+  height: 1080
+  fps: 30
+  bgm: ""                 # 배경음 없음 — 저역 타격음('두웅') 금지 규칙, 소리 장식 없이 호흡만
+  subtitle_chars: 24      # 짧은 줄 (이야기 리듬)
+  subtitle_position: bottom
+channel: ch-knowledge
+format: longform
