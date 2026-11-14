@@ -481,9 +481,10 @@ class Stage:
             nxt = [tt for tt, md in modes[k + 1:] if md != "dark"]
             if nxt:
                 D.js.append(f'tl.to("#{bid}",{{opacity:0,duration:0.9}},{max(nxt[0] - 0.2, 0):.2f});')
-        D.items.append(f'<div id="{self.p}st" data-layout-allow-overflow style="position:absolute;left:0;top:0;width:{W}px;height:{H_}px;overflow:hidden">'
+        D.items.append(f'<div id="{self.p}st" data-layout-allow-overflow style="position:absolute;left:0;top:0;width:{W}px;height:{H_}px;overflow:hidden;perspective:2200px;perspective-origin:50% 40%">'
+                       f'<div id="{self.p}tilt" data-layout-allow-overflow style="position:absolute;left:0;top:0;width:{W}px;height:{H_}px;transform-origin:50% 60%">'
                        f'<div id="{self.p}cam" data-layout-allow-overflow style="position:absolute;left:0;top:0;width:{W}px;height:{H_}px;transform-origin:0 0">'
-                       + "".join(self.html) + '</div></div>')
+                       + "".join(self.html) + '</div></div></div>')
         if self.hud:
             D.items.append(f'<div id="{self.p}hud" style="position:absolute;left:0;top:0;width:{W}px;height:{H_}px;pointer-events:none">' + "".join(self.hud) + '</div>')
         D.js.extend(self.js)
@@ -504,6 +505,13 @@ class Stage:
             y = min(0.0, max(H_ - H_ * z, H_ / 2 - cy * z))
             return f"scale:{z:.4f},x:{x:.1f},y:{y:.1f}"
         D.js.append(f'tl.set("{cam}",{{{view(W / 2, H_ / 2, 1.07)}}},0);')
+        # ④ 원근: 종이가 살짝 누운 채(rotationX) 박자마다 좌우로 천천히 돌아감(rotationY) — 2.5D 깊이 (미주일기 '원근 바닥')
+        tilt = f"#{self.p}tilt"
+        D.js.append(f'tl.set("{tilt}",{{rotationX:7,rotationY:-3}},0);')
+        for k, b in enumerate(self.beats):
+            ry = (3.5 if k % 2 == 0 else -3.5)
+            rx = 6 + (k % 3)
+            D.js.append(f'tl.to("{tilt}",{{rotationX:{rx},rotationY:{ry},duration:{max(1.5, b["d"] + 0.5):.2f},ease:"sine.inOut"}},{max(b["t0"] - 0.2, 0):.2f});')
         cx, cy, z = W / 2, H_ / 2, 1.07
         for k, b in enumerate(self.beats):
             f = b["focus"]
@@ -522,15 +530,14 @@ class Stage:
             if rest > 0.3:
                 z2 = z + 0.03
                 D.js.append(f'tl.to("{cam}",{{{view(cx, cy, z2)},duration:{rest:.2f},ease:"none"}},{t0 - 0.15 + mv:.2f});')
-                # ③ 화면 바꾸기: 긴 문장(4초+)은 중간에 그 박자 주인공의 가까운 화면으로 잘랐다가(컷) 다시 넓은 화면으로 — 영상의 리듬
+                # ③ 긴 문장(4초+)은 중간에 주인공 쪽으로 깊게 밀고 들어갔다가 빠져나옴 — 하드 컷이 아니라 카메라 이동 (미주일기: 하드 컷 분당 1.35회, styles/mijudiary)
                 if f and d >= 4.0:
                     lx, ly = f[-1]
                     c1 = t0 + d * 0.45
                     c2 = min(c1 + max(1.6, d * 0.3), end - 0.4)
                     if c2 - c1 >= 1.2:
-                        D.js.append(f'tl.set("{cam}",{{{view(W / 2 + (lx - W / 2) * 0.9, H_ / 2 + (ly - H_ / 2) * 0.9, 1.38)}}},{c1:.2f});'
-                                    f'tl.to("{cam}",{{{view(W / 2 + (lx - W / 2) * 0.9, H_ / 2 + (ly - H_ / 2) * 0.9, 1.44)},duration:{c2 - c1:.2f},ease:"none"}},{c1:.2f});'
-                                    f'tl.set("{cam}",{{{view(cx, cy, z2)}}},{c2:.2f});')
+                        D.js.append(f'tl.to("{cam}",{{{view(W / 2 + (lx - W / 2) * 0.85, H_ / 2 + (ly - H_ / 2) * 0.85, 1.32)},duration:{min(1.1, c2 - c1):.2f},ease:"power2.inOut"}},{c1:.2f});'
+                                    f'tl.to("{cam}",{{{view(cx, cy, z2)},duration:0.9,ease:"power2.inOut"}},{c2:.2f});')
                 z = z2
         fid = f"{self.p}fade"
         D.items.append(f'<div id="{fid}" style="position:absolute;inset:0;background:#000;opacity:1;pointer-events:none"></div>')
