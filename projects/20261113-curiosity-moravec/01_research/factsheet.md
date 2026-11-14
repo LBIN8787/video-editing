@@ -15,3 +15,14 @@
 - 런드로이드가 셔츠 한 장 개는 데 걸린 시간 (보도마다 다르고 측정값 없음) · 가격 (1천 달러/1만6천 달러로 엇갈림)
 - 모라벡의 '10억 년의 경험' 문장 직접 인용 (원문 페이지 미확인 → '아주 오랜 세월'로)
 - 요즘 집안일 로봇 출시 시기 전망 (확인된 일정 없음)
+
+## 추가 확인 (2026-11-14, 대본 v6)
+| # | 사실 | 상태 | 출처 |
+|---|---|---|---|
+| F9 | 런드로이드는 2015년 10월 도쿄 CEATEC 에서 처음 공개, 세븐 드리머스·파나소닉·다이와하우스 공동 개발 | ✅ | https://en.wikipedia.org/wiki/Laundroid · https://japantimes.co.jp/news/2015/10/09/business/tech/laundry-folding-robot-unveiled-tokyo-trade-fair |
+| F10 | 2016년 11월 시리즈 B 약 6천만 달러(60억 엔) 투자 유치 (파나소닉·다이와하우스·SBI) → 약 600억 원 | ✅ | https://aitopics.org/doc/news:16040FDE · Wikipedia Laundroid |
+| F11 | 체스의 가장 오래된 형태(차투랑가)는 약 600년경 인도 → '1,400년 남짓' | ✅ | https://en.wikipedia.org/wiki/Origins_of_chess |
+| F12 | 두 발로 걷기: 늦어도 360만 년 전(라에톨리 발자국), 화석 증거로는 400만 년 넘음 → '수백만 년' | ✅ | https://www.discovermagazine.com/the-sciences/sahelanthropus-was-the-first-hominin-to-walk-on-2-feet |
+| F13 | 튜링은 1948년 챔퍼나운과 체스 프로그램 '튜로챔프'를 만들었으나 당시 컴퓨터로 돌리지 못했고, 1952년 여름 연필과 종이로 직접 계산하며(한 수에 약 30분) 글레니와 대국, 29수 만에 짐 | ✅ | https://en.wikipedia.org/wiki/Turochamp |
+| F14 | 2012년 튜링 탄생 100주년 학회에서 카스파로프가 복원된 튜로챔프를 16수 만에 이김 | ✅ | https://en.wikipedia.org/wiki/Turochamp |
+| F15 | 1979년 스탠퍼드 카트(모라벡)가 의자가 놓인 방을 사람 도움 없이 약 다섯 시간 걸려 건넘 — 한 걸음 가고 10~15분 멈춰 사진을 분석 | ✅ | https://web.stanford.edu/~learnest/sail/oldcart.html · https://frc.ri.cmu.edu/~hpm/project.archive/robot.papers/2002/Commercial/1979.MRL.html |

@@ -43,7 +43,7 @@ python -m ytflow check <프로젝트> --upto G4    # 대본까지만
 | 등급 | 항목 | 자동 |
 |---|---|---|
 | MUST | `core_message`, `question`, `logic` 이 있음 | ✅ |
-| MUST | 롱폼: 본론 전 **MC 오프닝**(`intro`: 인사 → 오늘 이야기 → 순서 예고 → 시작 멘트) — README §2-1 | ✅ |
+| MUST | **인트로 없음**: 첫 장면이 인사·순서 예고 `intro` 가 아니고, 인사·채널 소개·구독 부탁 문구 없음 — README §2-1 (v24) | ✅ |
 | SHOULD | 장 표지마다 진행 멘트(앞 장 한 줄 정리 + 다음 질문) | EYE |
 | MUST | 숫자 비교 기준 `compare_to` ≥ 1, 비유 `analogies` ≥ 2, 과거 사례 `past_cases` ≥ 1, `glossary` ≥ 1 | ✅ |
 | MUST | **투자 권유 표현 0개** (사세요·매수 추천·지금이 기회·무조건 오른다·수익 보장 …) | ✅ |

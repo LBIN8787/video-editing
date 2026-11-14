@@ -252,11 +252,19 @@ def run(path: Path, upto: str = "G8") -> Report:
         qd = [x["dur"] for x in tl if x.get("type") == "quote"]
         if len(qd) >= 2:
             R.add("G5", "SHOULD", "issues: 양쪽 입장 장면 길이 차 30% 이내", min(qd) / max(qd) >= 0.7, [round(x, 1) for x in qd])
-    if last >= 3 and longform and brand != "curiosity":  # v8: 본론 전 MC 오프닝 (호기심 채널은 v23 채널 소개 인트로 없음, 04 §0)
-        sc0 = spec.get("scenes", [])[:2]
-        intro = [x for x in sc0 if x.get("type") == "intro" and len(x.get("beats", [])) >= 3]
-        R.add("G4", "MUST", "오프닝: 본론 전에 MC 오프닝(intro: 인사·오늘 이야기·순서 예고·시작 멘트, 3박자 이상)", bool(intro),
-              "첫 2장면에 intro 없음" if not intro else "")
+    if last >= 3:  # v24 인트로 없음 (README §2-1) · 말투 (README §2-3, 미주일기식)
+        sc0 = spec.get("scenes", [])[:1]
+        _all = [b.get("say", "") for s in spec.get("scenes", []) for b in s.get("beats", [])]
+        greet = [t for t in _all if _re.search(r"안녕하세요|구독과 좋아요|구독 ?좋아요|이런 순서로|순서로 (가|따라가) 보겠습니다|시작해 보겠습니다", t)]
+        R.add("G4", "MUST", "인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1)",
+              not any(x.get("type") == "intro" for x in sc0) and not greet, [g[:30] for g in greet[:2]])
+        bad = [m.group(0) for t in _all for m in _re.finditer(r"헐|대박|미쳤|ㅋ|계시죠\?|손을 (한번 )?펴 보세요|부를게요|여러분!", t)]
+        R.add("G4", "SHOULD", "말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용)", not bad, bad[:3])
+        sents = [x for t in _all for x in _re.split(r"(?<=[.?!])\s+", t) if len(x.strip()) > 3]
+        formal = sum(1 for x in sents if _re.search(r"(습니다|니다|까요)[.?!]?$", x.strip()))
+        avg = sum(len(x) for x in sents) / max(len(sents), 1)
+        R.add("G4", "SHOULD", "말투: '~습니다/~니다·~까요' 80% 이상, 평균 문장 35자 이상 (미주일기 96~100%·62~71자)",
+              formal / max(len(sents), 1) >= 0.8 and avg >= 35, f"{formal / max(len(sents), 1):.0%} · {avg:.0f}자")
     if last >= 4:  # G5 연출
         from . import backdrop
         bgs = backdrop.plan(spec)
