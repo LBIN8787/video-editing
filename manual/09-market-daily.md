@@ -59,7 +59,7 @@ daily_brief 의 이야기마다 `depth`(브리핑 / 심층 후보)와 이유가 
 - **무엇:** SAVE — '투자의 모든 소식, 이제 한 곳에서' (Fivelines, 앱 + 웹 https://www.saveticker.com). 글로벌 속보·기업 리포트·경제 지표·투자 일정을 요약해 보여 줌.
 - **어떻게:** 사람이 앱/웹에서 본다. 웹은 Cloudflare 봇 확인이 걸려 있고 robots.txt 가 AI 수집기를 막으며(`ai-train=no, use=reference`), 그래서 **자동 수집·우회·비공개 API 호출은 하지 않는다.**
   - `python -m ytflow daily` 가 `01_research/save_check.md` (속보·리포트·경제지표·일정 표)를 만든다 → 본 것을 내 말로 한 줄씩, 상태 `확인함`.
-  - **메모 없이 (추천, docs/28 §1):** 휴대폰 SAVE 알림 → 알림 전달 앱 → Gmail 라벨 `SAVE알림` → Apps Script(`tools/save-forward`)가 10분마다 `inbox/save/<YYYYMMDD>.md` 에 자동 커밋 → daily 가 표에 옮김.
+  - **메모 없이 (지금 도는 길, docs/28 §1 — 2026-11-14 완료):** 휴대폰 SAVE 알림 → **MacroDroid** 가 본인 Gmail 로 `[save알림]` 메일 → **30분마다 도는 감시**(Pickle 정기 작업, 스팸함 포함)가 `inbox/save/<YYYYMMDD>.md` 에 `- <내용> (알림 MM-dd HH:mm)` 로 자동 커밋(한국 06:00 이후 알림은 다음 날 파일) → daily 가 표에 옮김. `tools/save-forward`(Apps Script)는 **켜지 않음** — 백업용이고, 같이 켜면 같은 알림이 두 줄로 쌓인다.
   - 손 메모도 그대로 됨: 전날 밤~05:50 사이 `inbox/save/<YYYYMMDD>.md` 에 올리면 daily 가 표에 옮긴다. 메모도 없으면 상태를 `확인 못 함: 이유` 로 적고 보고에 남긴다 (빈칸이면 `check` MUST 실패).
 - **쓰는 법:** SAVE 소식은 **단서**. 이야기 고르기(§2)의 후보에 더하고, 영상에 넣는 것은 아래 §3-1 의 1차 출처로 다시 확인해 factsheet 에 쓴다. SAVE 요약 문장을 대본에 그대로 옮기지 않는다.
 - daily_brief(시세·뉴스 검색)에 없던 소식이 SAVE 에만 있으면 그 이유(시간대·출처)를 확인한 뒤 넣을지 정한다.
