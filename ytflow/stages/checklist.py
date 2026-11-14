@@ -246,6 +246,21 @@ def run(path: Path, upto: str = "G8") -> Report:
                     says_m = " ".join(b.get("say", "") for s_ in spec["scenes"] for b in s_.get("beats", []))
                     R.add("G4", lvl, "v26: 대본에 매체가 어떻게 다뤘나 + 말과 행동 맞대기 (03 §0-2)",
                           any(s_.get("type") == "newspapers" for s_ in spec["scenes"]) or ("매체" in says_m and ("보도" in says_m or "기사" in says_m)), "")
+        if ch == "ch-market-daily" and spec.get("scenes"):   # v27 (manual/09 §6, 2026-11-15 사용자: "말은 많은데 45일·60일만 강조된 채 멈춰 있다")
+            def _nums(s_):
+                return {re.sub(r"[,\s]", "", m_) for m_ in re.findall(r"\d[\d,]*(?:\.\d+)?", s_)}
+            bare = []
+            for s_ in spec["scenes"]:
+                if s_.get("type") in ("chapter", "kinetic", "outro", "intro"):
+                    continue
+                shown = _nums(json.dumps({k_: v_ for k_, v_ in s_.items() if k_ not in ("beats", "label", "id", "chapter")}, ensure_ascii=False))
+                for k_, b_ in enumerate(s_.get("beats", [])):
+                    if b_.get("motion") or b_.get("reveal") or b_.get("upto") or b_.get("show_result") or b_.get("show"):
+                        continue
+                    extra = _nums(b_.get("say", "")) - shown
+                    if len(extra) >= 2:
+                        bare.append(f"{s_.get('id')}-{k_ + 1}")
+            R.add("G4", "MUST", "v27: 화면에 없는 숫자를 2개+ 말하면서 그 순간 생기는 그림(motion)이 없는 박자 0개 (manual/09 §6)", not bare, bare[:8])
         if ch == "ch-market-daily":   # 2026-11-15 사용자: 제목·썸네일에 채널 이름 붙이지 않음, 날짜만 (manual/09 §7)
             pk_ = spec.get("package") or {}
             txts_ = [pk_.get("title", "")] + list(pk_.get("title_options") or []) + [" ".join([th.get("top", ""), *th.get("lines", []), th.get("sub", ""), th.get("headline", "")]) for th in pk_.get("thumbnails") or []]
@@ -404,6 +419,8 @@ def run(path: Path, upto: str = "G8") -> Report:
                   f"변화 {mo.get('change_events_per_min')}/분 · 정지 {mo.get('static_ratio')}")
             if brand == "curiosity":   # v25 (2026-11-14 사용자: "사진을 잘 뽑은 정적인 동영상 같다 — 동적인 움직임을 살려라", README §2-5)
                 R.add("G6", "MUST", "curiosity 움직임: 정지 화면 비율 ≤0.3 (README §2-5)", mo.get("static_ratio", 1) <= 0.3, f"정지 {mo.get('static_ratio')}")
+            if ch == "ch-market-daily":   # v27 (manual/09 §6, 2026-11-15 사용자: "영상이 정적이다, 멈춰 있는 부분이 많다")
+                R.add("G6", "MUST", "시장 움직임: 정지 화면 비율 ≤0.45 (목표 0.3, manual/09 §6)", mo.get("static_ratio", 1) <= 0.45, f"정지 {mo.get('static_ratio')}")
         el = any((path / "03_voice").glob("el*")) or any((path / "03_voice").glob("*eleven*"))
         try:
             el = el or (config.channel(ch).get("tts") or {}).get("backend") == "elevenlabs"
