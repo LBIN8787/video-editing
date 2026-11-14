@@ -176,7 +176,7 @@ def run(path: Path, upto: str = "G8") -> Report:
             hw0 = words(hk.get("line", ""))
             hit = next((i for i, t in enumerate(beats2) if hw0 and len(words(t) & hw0) >= max(2, len(hw0) // 3)), None)
             agenda = next((i for i, t in enumerate(beats2) if "순서" in t), None)
-            R.add("G4", "MUST", "curiosity: 짧은 인사·소개 뒤 곧바로 훅 (첫 두 장면 안, 순서 예고보다 앞) (04 §0)",
+            R.add("G4", "MUST", "curiosity: 첫 박자부터 곧바로 훅 (채널 소개 인트로 없음, 첫 두 장면 안, 순서 예고보다 앞) (04 §0)",
                   hit is not None and hit <= 3 and (agenda is None or hit < agenda), f"훅 박자 {hit} · 순서 예고 {agenda}")
             gap_w = words(hk.get("gap", ""))
             R.add("G4", "MUST", "curiosity: 훅의 질문(gap)이 나옴 (답은 숨김)",
@@ -252,7 +252,7 @@ def run(path: Path, upto: str = "G8") -> Report:
         qd = [x["dur"] for x in tl if x.get("type") == "quote"]
         if len(qd) >= 2:
             R.add("G5", "SHOULD", "issues: 양쪽 입장 장면 길이 차 30% 이내", min(qd) / max(qd) >= 0.7, [round(x, 1) for x in qd])
-    if last >= 3 and longform:  # v8: 본론 전 MC 오프닝
+    if last >= 3 and longform and brand != "curiosity":  # v8: 본론 전 MC 오프닝 (호기심 채널은 v23 채널 소개 인트로 없음, 04 §0)
         sc0 = spec.get("scenes", [])[:2]
         intro = [x for x in sc0 if x.get("type") == "intro" and len(x.get("beats", [])) >= 3]
         R.add("G4", "MUST", "오프닝: 본론 전에 MC 오프닝(intro: 인사·오늘 이야기·순서 예고·시작 멘트, 3박자 이상)", bool(intro),
