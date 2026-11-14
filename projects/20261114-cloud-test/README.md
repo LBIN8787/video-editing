@@ -17,7 +17,9 @@ for s in voice assets subtitles assemble report; do python -m ytflow stage proje
 ```
 결과: `05_edit/final.mp4` · `05_edit/final_sheet.png` · `05_edit/delivery_check.json` · `05_edit/subs.srt` · `REPORT.md`
 
-## 이번 시험에서 확인한 것 (2026-11-14, 리눅스 컨테이너)
-- 길이 39.7초 · 1920x1080 · 30fps · h264 · AAC 48kHz · **-14.0 LUFS** · true peak -2.4 dBTP · 5.9MB
-- `delivery_check.json`: 실패 0, 경고 1(자막 트랙을 따로 넣지 않고 화면에 굽는 방식이라 `subtitles: none`) — 의도된 경고
-- `layout_qa.json` 비어 있음(겹침 0) · 나눔 폰트로 □ 글자 없음
+## 이번 시험에서 확인한 것 (2026-11-14, 리눅스 컨테이너 · ffmpeg 8.0 정적 빌드)
+- 길이 39.67초 · 1920x1080 · 30fps · h264(bt709 태그 없음, 플레이어 기본값) · AAC 2ch 48kHz · **-14.0 LUFS** · true peak -2.4 dBTP · 5.9MB
+- `delivery_check.json`: 실패 0, 경고 1(자막을 화면에 굽고 별도 자막 트랙은 넣지 않아 `subtitles: none`) — 의도된 경고
+- `layout_qa.json` 비어 있음(`python -m ytflow qa` → 겹침 없음) · 나눔 폰트 동봉으로 □ 글자 없음
+- 받아쓰기(base)로 확인한 낭독: "1967년, 세슘 원자 진동 91억 9,263만 1,770번이 1초가 됐습니다", "38마이크로초" 모두 의도대로 발음
+- 자막 싱크(`05_edit/sync_qa.json`): 14줄 중 12줄 0.02초 이내, 2줄이 0.8~1.0초 먼저 뜸 — 장면 자막을 글자 수 비례로 나누는 `media.subtitles` 설계 때문. `check`(체크리스트)는 채널·`hybrid.json`(beats/type) 기준이라 이 경로에는 해당 없음 → `validate` 로 점검

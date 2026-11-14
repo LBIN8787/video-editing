@@ -1,0 +1,20 @@
+{
+  "_설명": "완성본 자막·목소리 싱크 실측. `python -m ytflow sync-qa` 는 이 환경(faster-whisper ctranslate2/mkl)에서 메모리 할당 실패로 끝까지 돌지 않아, 같은 방식(faster-whisper 받아쓰기 단어 시각 ↔ subs.srt 줄 첫 글자)을 base 모델로 직접 재어 기록했습니다.",
+  "method": "faster-whisper base(int8, CPU) word_timestamps → subs.srt 각 줄 첫 단어의 실제 발화 시각 − 자막 표시 시각",
+  "model": "whisper base · int8 · CPU",
+  "measured_at": "2026-11-14",
+  "lines": 16,
+  "lines_matched": 14,
+  "within_0_5s": 0.857,
+  "median_abs_offset": 0.016,
+  "p95_abs_offset": 0.785,
+  "max_abs_offset": 0.973,
+  "video_duration_s": 39.667,
+  "audio_duration_s": 39.658,
+  "video_minus_audio_s": 0.009,
+  "late_lines": [
+    {"line": 2, "text": "답은 원자 안에 있습니다.", "subtitle_at": 2.095, "spoken_at": 2.88, "offset_s": 0.785},
+    {"line": 6, "text": "지구의 하루는 조금씩 늘어납니다.", "subtitle_at": 12.967, "spoken_at": 13.94, "offset_s": 0.973}
+  ],
+  "note": "12/14 줄은 0.02초 안쪽. 두 줄이 약 0.8~1.0초 먼저 뜨는 것은 media.subtitles 가 장면 하나의 자막을 글자 수 비례로 나누는데, 질문 뒤 쉼·숫자 낭독이 느려 실제 발화 비율과 달라지기 때문(파이프라인 설계상 한계). 개선안: edge-tts WordBoundary 시간으로 자막을 자르거나, 받아쓰기 단어 시각으로 재정렬하는 단계 추가."
+}
