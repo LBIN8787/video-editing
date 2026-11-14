@@ -181,6 +181,28 @@ def run(path: Path, upto: str = "G8") -> Report:
             gap_w = words(hk.get("gap", ""))
             R.add("G4", "MUST", "curiosity: 훅의 질문(gap)이 나옴 (답은 숨김)",
                   any(("?" in t or "까요" in t) and len(words(t) & gap_w) >= 2 for t in beats2), hk.get("gap", "")[:40])
+            # v23 시청자 먼저 (04 §0-6, docs/29): 상권 조사처럼 시청자를 먼저 알고, 대본이 지식 습득으로 치우치지 않게
+            aud = (res / "audience.md").read_text(encoding="utf-8") if (res / "audience.md").exists() else ""
+            R.add("G1", "MUST", "curiosity: 시청자 조사 01_research/audience.md (주 시청자·유입 경로·유입 이유·끝까지 보는 이유)",
+                  all(k in aud for k in ("주 시청자", "유입 경로", "유입 이유", "끝까지 보는 이유")), "docs/29")
+            sv = sorted((Path(path) / "02_script").glob("script_v*.md"))
+            if sv:   # 사람이 문장마다 ●이야기 / ○지식 으로 표시한 대본
+                body = sv[-1].read_text(encoding="utf-8")
+                body = body[body.find("## 2."):body.find("## 3.")] if "## 2." in body else body
+                cnt = {"●": 0, "○": 0}
+                for ln in body.splitlines():
+                    if ln[:1] in cnt:
+                        cnt[ln[0]] += len([x for x in _re2.split(r"(?<=[.?!])\s+", ln[1:].strip()) if x])
+                tot = sum(cnt.values()) or 1
+                R.add("G4", "MUST", "curiosity: 지식·설명·수치 문장 ≤ 30% (대본 표시 ○, 04 §0-6)", cnt["○"] / tot <= 0.30, f"{cnt['○']}/{tot} = {cnt['○'] / tot:.0%} ({sv[-1].name})")
+            else:   # 표시가 없으면 낱말로 센 하한 (실제보다 낮게 나옴)
+                sents = [x for t in _says for x in _re2.split(r"(?<=[.?!])\s+", t) if x.strip()]
+                kn = [x for x in sents if _re2.search(r"\d{4}년|\d|대학|박사|교수|학자|논문|책에|이라고 부릅|알려져|정리했|순서로|첫 번째|두 번째|세 번째", x)]
+                R.add("G4", "MUST", "curiosity: 지식·설명·수치 문장 ≤ 30% (자동 하한 — 02_script/script_vN.md 에 ●/○ 표시 권장)",
+                      len(kn) / max(len(sents), 1) <= 0.30, f"{len(kn)}/{len(sents)}")
+            rvw = (Path(path) / "02_script" / "script_review.md")
+            R.add("G4", "MUST", "curiosity: 편집 전에 대본만 사용자 검토 통과 (02_script/script_review.md '통과', 04 §0-6)",
+                  rvw.exists() and "통과" in rvw.read_text(encoding="utf-8"), "")
             pk = spec.get("package") or {}
             titles = [pk.get("title", "")] + list(pk.get("title_options") or [])
             hw = set(_re2.findall(r"[가-힣A-Za-z0-9]{2,}", (hk.get("line", "") + " " + hk.get("gap", ""))))

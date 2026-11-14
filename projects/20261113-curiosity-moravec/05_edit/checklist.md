@@ -1,10 +1,10 @@
 # 체크리스트 — 20261113-curiosity-moravec
 
-매뉴얼 v21 · 2026-11-14T06:47:28 · **통과**
+매뉴얼 v21 · 2026-11-14T06:57:09 · **MUST 실패 2개**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
-| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ✅ |  |
+| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ❌ | [2026-11-14 · 20261113-curiosity-moravec 기각] 대본 구성부터 문제. 주 시청자층·유입 경로·유입 이유를 상권  |
 | G1 | MUST | topic_brief.json 있음 | ✅ | 01_research/topic_brief.json (schemas/topic_brief.schema.json) |
 | G1 | MUST | 브랜드(ai/market/curiosity) | ✅ | curiosity |
 | G1 | MUST | 욕망·시청자 질문 | ✅ | 체스 챔피언을 이긴 AI는 왜 빨래를 못 갤까? |
@@ -31,6 +31,9 @@
 | G1 | MUST | curiosity: 훅 먼저 정하기 (topic_brief.hook: type·line·gap) | ✅ | 장면 |
 | G4 | MUST | curiosity: 짧은 인사·소개 뒤 곧바로 훅 (첫 두 장면 안, 순서 예고보다 앞) (04 §0) | ✅ | 훅 박자 3 · 순서 예고 None |
 | G4 | MUST | curiosity: 훅의 질문(gap)이 나옴 (답은 숨김) | ✅ | 체스 챔피언을 이긴 기계는 왜 티셔츠 한 장을 못 갰을까? |
+| G1 | MUST | curiosity: 시청자 조사 01_research/audience.md (주 시청자·유입 경로·유입 이유·끝까지 보는 이유) | ✅ | docs/29 |
+| G4 | MUST | curiosity: 지식·설명·수치 문장 ≤ 30% (대본 표시 ○, 04 §0-6) | ✅ | 9/65 = 14% (script_v5.md) |
+| G4 | MUST | curiosity: 편집 전에 대본만 사용자 검토 통과 (02_script/script_review.md '통과', 04 §0-6) | ❌ |  |
 | G6 | SHOULD | curiosity: 제목이 훅에서 나옴 (훅과 같은 낱말) | ✅ | 3/4 |
 | G4 | MUST | 오프닝: 본론 전에 MC 오프닝(intro: 인사·오늘 이야기·순서 예고·시작 멘트, 3박자 이상) | ✅ |  |
 | G5 | MUST | 배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2) | ✅ | ['dark', 'film', 'grid', 'spot'] |
