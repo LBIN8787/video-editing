@@ -1,8 +1,8 @@
 {
  "project": "20261114-market-weekly",
  "manual_version": "20",
- "checked": "2026-11-14T00:37:23",
- "pass": false,
+ "checked": "2026-11-14T00:56:44",
+ "pass": true,
  "rows": [
   {
    "gate": "G0",
@@ -77,6 +77,20 @@
   {
    "gate": "G2",
    "level": "MUST",
+   "item": "시장: SAVE(오선) 소식 확인 기록 — 상태 '확인함' 또는 '확인 못 함: 이유' (01_research/save_check.md)",
+   "ok": true,
+   "detail": "확인 못 함: 무인 클라우드 실행 — 앱 확인할 사람 없음, inbox/save/20261114 메모 없음, 웹은 봇 확인·AI 수집 거부라 자동 수집 안 함 (manual/09 §3-0)"
+  },
+  {
+   "gate": "G2",
+   "level": "SHOULD",
+   "item": "시장: SAVE 실제로 확인함 (항목 1개 이상)",
+   "ok": false,
+   "detail": "확인 못 함: 무인 클라우드 실행 — 앱 확인할 사람 없음, inbox/save/20261114 메모 없음, 웹은 봇 확인·AI 수집 거부라 자동 수집 안 함 (manual/09 §3-0) · 항목 0"
+  },
+  {
+   "gate": "G2",
+   "level": "MUST",
    "item": "자료 화면마다 credit·url",
    "ok": true,
    "detail": "5개, 빠짐 []"
@@ -128,7 +142,7 @@
    "level": "MUST",
    "item": "비교 기준≥1·비유≥2·과거 사례≥1·풀이≥1",
    "ok": true,
-   "detail": "{'compare_to': 4, 'analogies': 2, 'past_cases': 1, 'glossary': 4}"
+   "detail": "{'compare_to': 4, 'analogies': 2, 'past_cases': 2, 'glossary': 7}"
   },
   {
    "gate": "G4",
@@ -155,8 +169,8 @@
    "gate": "G4",
    "level": "SHOULD",
    "item": "과장 단어 0개",
-   "ok": true,
-   "detail": "[]"
+   "ok": false,
+   "detail": "['충격']"
   },
   {
    "gate": "G4",
@@ -233,14 +247,14 @@
    "level": "SHOULD",
    "item": "배경: 같은 바탕 3장면 연속 없음 (film 제외)",
    "ok": false,
-   "detail": "['grid']"
+   "detail": "['tint', 'tint', 'tint']"
   },
   {
    "gate": "G5",
    "level": "MUST",
    "item": "반복 피로: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기: 자료·지도·사진 겹치기·시각 효과, 05 §0-3)",
    "ok": true,
-   "detail": "최장 1연속 (장면 4)"
+   "detail": "최장 2연속 (장면 23)"
   },
   {
    "gate": "G5",
@@ -254,7 +268,7 @@
    "level": "SHOULD",
    "item": "반복 피로: 눈요기 있는 장면 60% 이상",
    "ok": true,
-   "detail": "13/18"
+   "detail": "16/23"
   },
   {
    "gate": "G5",
@@ -282,7 +296,7 @@
    "level": "SHOULD",
    "item": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음",
    "ok": true,
-   "detail": "표지 ['nyse', 'fed'] · NASA 0"
+   "detail": "표지 ['nyse', 'fed', 'dc'] · NASA 0"
   },
   {
    "gate": "G5",
@@ -324,7 +338,7 @@
    "level": "MUST",
    "item": "한 스타일이 40% 넘지 않음",
    "ok": true,
-   "detail": "data-report 0.38"
+   "detail": "data-report 0.37"
   },
   {
    "gate": "G5",
@@ -345,7 +359,7 @@
    "level": "MUST",
    "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 9번까지)",
    "ok": true,
-   "detail": "1번 [(22, 'kinetic')]"
+   "detail": "1번 [(28, 'kinetic')]"
   },
   {
    "gate": "G5",
@@ -374,83 +388,6 @@
    "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
    "ok": true,
    "detail": "python -m ytflow style-pick <프로젝트>"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "final.mp4",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "레이아웃 점검 비어 있음",
-   "ok": true,
-   "detail": "{}"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
-   "ok": true,
-   "detail": "{'within_0_5s': 0.99, 'p95_abs_offset': 0.08, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.1}"
-  },
-  {
-   "gate": "G6",
-   "level": "SHOULD",
-   "item": "납품 점검(음량 등)",
-   "ok": true,
-   "detail": "completed"
-  },
-  {
-   "gate": "G6",
-   "level": "SHOULD",
-   "item": "움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선)",
-   "ok": false,
-   "detail": "변화 6.9/분 · 정지 0.67"
-  },
-  {
-   "gate": "G6",
-   "level": "SHOULD",
-   "item": "최종 목소리 ElevenLabs",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "MUST",
-   "item": "제목 후보 3개 + 이유",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "MUST",
-   "item": "썸네일 A/B/C + 점검 ok",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "SHOULD",
-   "item": "제목 앞 22자 안에 질문/핵심",
-   "ok": true,
-   "detail": "반도체 반등한 한 주, 왜 주인공만 빠졌"
-  },
-  {
-   "gate": "G8",
-   "level": "MUST",
-   "item": "GitHub Release 업로드",
-   "ok": false,
-   "detail": ""
-  },
-  {
-   "gate": "G8",
-   "level": "MUST",
-   "item": "episodes.md 기록",
-   "ok": true,
-   "detail": "ch-market-daily"
   }
  ]
 }
