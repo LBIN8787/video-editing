@@ -1,8 +1,8 @@
 {
  "project": "20261114-market-weekly",
  "manual_version": "20",
- "checked": "2026-11-14T01:26:08",
- "pass": true,
+ "checked": "2026-11-14T04:21:56",
+ "pass": false,
  "rows": [
   {
    "gate": "G0",
@@ -317,14 +317,14 @@
    "level": "SHOULD",
    "item": "자료 화면 공백 ≤45초",
    "ok": false,
-   "detail": "최장 773초"
+   "detail": "최장 729초"
   },
   {
    "gate": "G5",
    "level": "SHOULD",
    "item": "장 표지 간격 ≤200초",
    "ok": false,
-   "detail": "최장 297초"
+   "detail": "최장 289초"
   },
   {
    "gate": "G5",
@@ -338,7 +338,7 @@
    "level": "MUST",
    "item": "한 스타일이 40% 넘지 않음",
    "ok": true,
-   "detail": "paper-column 0.35"
+   "detail": "paper-column 0.36"
   },
   {
    "gate": "G5",
@@ -357,7 +357,7 @@
   {
    "gate": "G5",
    "level": "MUST",
-   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 13번까지)",
+   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 12번까지)",
    "ok": true,
    "detail": "1번 [(27, 'kinetic')]"
   },
@@ -388,6 +388,83 @@
    "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
    "ok": true,
    "detail": "python -m ytflow style-pick <프로젝트>"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "final.mp4",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "레이아웃 점검 비어 있음",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
+   "ok": true,
+   "detail": "{'within_0_5s': 0.992, 'p95_abs_offset': 0.09, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.1}"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "납품 점검(음량 등)",
+   "ok": true,
+   "detail": "completed"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선)",
+   "ok": false,
+   "detail": "변화 5.7/분 · 정지 0.69"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "최종 목소리 ElevenLabs",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "제목 후보 3개 + 이유",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "썸네일 A/B/C + 점검 ok",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "SHOULD",
+   "item": "제목 앞 22자 안에 질문/핵심",
+   "ok": true,
+   "detail": "반도체 반등한 한 주, 왜 주인공만 빠졌"
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "GitHub Release 업로드",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "episodes.md 기록",
+   "ok": true,
+   "detail": "ch-market-daily"
   }
  ]
 }
