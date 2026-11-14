@@ -121,13 +121,18 @@ def cut(sheet: Path, outdir: Path, names: list[str], white: int = 232, gap: int 
             segs.append([s0, x])
     if run:
         segs.append([s0, len(cols)])
-    merged = []
-    for s in segs:
-        if merged and s[0] - merged[-1][1] < gap:
-            merged[-1][1] = s[1]
-        else:
-            merged.append(s)
-    merged = [s for s in merged if s[1] - s[0] > 80]
+    def merge(g):
+        m = []
+        for s in segs:
+            if m and s[0] - m[-1][1] < g:
+                m[-1][1] = s[1]
+            else:
+                m.append(list(s))
+        return [s for s in m if s[1] - s[0] > 80]
+    for g in (gap, 24, 12, 6, 2):   # 조각끼리 가까우면(의자 다리와 자판 30px 등) 간격 기준을 줄여 다시
+        merged = merge(g)
+        if len(merged) == len(names):
+            break
     if len(merged) != len(names):
         raise RuntimeError(f"조각 수가 다름: 시트에서 {len(merged)}개, 이름 {len(names)}개 — 프롬프트의 '간격' 문장을 확인하거나 다시 생성")
     alpha = ndimage.gaussian_filter(fg.astype(float), 1.0)

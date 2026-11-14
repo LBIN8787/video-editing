@@ -277,12 +277,12 @@ FACTS = """# 팩트시트 — 체스 챔피언을 이긴 AI는 왜 빨래를 못
 
 def apply_v2():   # V2 apply: 그림 재료 v2 (scripts/curiosity_story/v2.py) — 대본은 그대로
     import importlib.util
-    spec_ = importlib.util.spec_from_file_location("v2", Path(__file__).with_name("v2.py"))
+    spec_ = importlib.util.spec_from_file_location("v3", Path(__file__).with_name("v3.py"))   # v3: AI 그림 조각 (2026-11-14), v2 는 사진·스티커판
     v2 = importlib.util.module_from_spec(spec_)
     spec_.loader.exec_module(v2)
     for sc in SCENES:
-        if sc["id"] in v2.V2:
-            for b, draws in zip(sc["beats"], v2.V2[sc["id"]]):
+        if sc["id"] in v2.V3:
+            for b, draws in zip(sc["beats"], v2.V3[sc["id"]]):
                 b["draw"] = draws
             sc.pop("credit", None)
 
