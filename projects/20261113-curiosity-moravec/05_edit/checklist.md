@@ -1,10 +1,10 @@
 # 체크리스트 — 20261113-curiosity-moravec
 
-매뉴얼 v24 · 2026-11-14T11:23:27 · **통과**
+매뉴얼 v24 · 2026-11-14T13:13:33 · **MUST 실패 1개**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
-| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ✅ |  |
+| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ❌ | [2026-11-14 · 20261113-curiosity-moravec 기각] 반짝 효과음은 빼기. 동영상이라는 동적인 움직임을 살리는 것이  |
 | G1 | MUST | topic_brief.json 있음 | ✅ | 01_research/topic_brief.json (schemas/topic_brief.schema.json) |
 | G1 | MUST | 브랜드(ai/market/curiosity) | ✅ | curiosity |
 | G1 | MUST | 욕망·시청자 질문 | ✅ | 체스 챔피언을 이긴 AI는 왜 빨래를 못 갤까? |
@@ -63,9 +63,10 @@
 | G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ✅ | python -m ytflow style-pick <프로젝트> |
 | G6 | MUST | final.mp4 | ✅ |  |
 | G6 | MUST | 레이아웃 점검 비어 있음 | ✅ | {} |
-| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 1.0, 'p95_abs_offset': 0.1, 'median_abs_offset': 0.05, 'video_mi |
+| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 0.995, 'p95_abs_offset': 0.1, 'median_abs_offset': 0.05, 'video_ |
 | G6 | SHOULD | 납품 점검(음량 등) | ✅ | completed |
-| G6 | SHOULD | 움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선) | ⚠️ | 변화 16.2/분 · 정지 0.6 |
+| G6 | SHOULD | 움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선) | ✅ | 변화 22.0/분 · 정지 0.24 |
+| G6 | MUST | curiosity 움직임: 정지 화면 비율 ≤0.3 (README §2-5) | ✅ | 정지 0.24 |
 | G6 | SHOULD | 최종 목소리 ElevenLabs | ✅ |  |
 | G7 | MUST | 제목 후보 3개 + 이유 | ✅ |  |
 | G7 | MUST | 썸네일 A/B/C + 점검 ok | ✅ |  |

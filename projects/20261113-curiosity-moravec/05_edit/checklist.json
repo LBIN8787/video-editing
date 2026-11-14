@@ -1,15 +1,15 @@
 {
  "project": "20261113-curiosity-moravec",
  "manual_version": "24",
- "checked": "2026-11-14T11:23:27",
- "pass": true,
+ "checked": "2026-11-14T13:13:33",
+ "pass": false,
  "rows": [
   {
    "gate": "G0",
    "level": "MUST",
    "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
-   "ok": true,
-   "detail": ""
+   "ok": false,
+   "detail": "[2026-11-14 · 20261113-curiosity-moravec 기각] 반짝 효과음은 빼기. 동영상이라는 동적인 움직임을 살리는 것이 목표인데, 지금은 사진을 잘 뽑은 정적인 동영상 같음"
   },
   {
    "gate": "G1",
@@ -422,7 +422,7 @@
    "level": "MUST",
    "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
    "ok": true,
-   "detail": "{'within_0_5s': 1.0, 'p95_abs_offset': 0.1, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.1}"
+   "detail": "{'within_0_5s': 0.995, 'p95_abs_offset': 0.1, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.1}"
   },
   {
    "gate": "G6",
@@ -435,8 +435,15 @@
    "gate": "G6",
    "level": "SHOULD",
    "item": "움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선)",
-   "ok": false,
-   "detail": "변화 16.2/분 · 정지 0.6"
+   "ok": true,
+   "detail": "변화 22.0/분 · 정지 0.24"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "curiosity 움직임: 정지 화면 비율 ≤0.3 (README §2-5)",
+   "ok": true,
+   "detail": "정지 0.24"
   },
   {
    "gate": "G6",
