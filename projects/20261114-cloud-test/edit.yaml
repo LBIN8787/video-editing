@@ -1,0 +1,11 @@
+# 클라우드 렌더링 시험작 (2026-11-14) — 렌더 경로만 검증하는 짧은 정보형 시험편
+# 목적: 키 없는 환경(GitHub Actions/리눅스 컨테이너)에서 edge-tts + PIL 카드 + ffmpeg 만으로
+#       final.mp4 · final_sheet.png · delivery_check.json 이 나오는지 확인. 유튜브 업로드 없음.
+edit:
+  style: paper           # 미주일기 인포그래픽 렌더러 (카드 = PIL, 자막 = libass, 폰트는 저장소 동봉 나눔)
+  family: infographic
+  width: 1920
+  height: 1080
+  fps: 30
+  bgm: ""                # 배경음 없음 (저역 타격음·소리 장식 없이 깔끔한 호흡)
+format: longform
