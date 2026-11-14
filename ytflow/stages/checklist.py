@@ -265,6 +265,10 @@ def run(path: Path, upto: str = "G8") -> Report:
         avg = sum(len(x) for x in sents) / max(len(sents), 1)
         R.add("G4", "SHOULD", "말투: '~습니다/~니다·~까요' 80% 이상, 평균 문장 35자 이상 (미주일기 96~100%·62~71자)",
               formal / max(len(sents), 1) >= 0.8 and avg >= 35, f"{formal / max(len(sents), 1):.0%} · {avg:.0f}자")
+    if last >= 6 and longform:  # v24 길이: 롱폼 최소 10분 (README §2-4)
+        tl_ = Path(path) / "05_edit" / "hybrid_timeline.json"
+        tot_ = sum(x.get("dur", 0) for x in json.loads(tl_.read_text(encoding="utf-8"))) if tl_.exists() else 0
+        R.add("G6", "MUST", "길이: 롱폼 10분 이상 (README §2-4)", tot_ >= 600, f"{tot_ / 60:.1f}분")
     if last >= 4:  # G5 연출
         from . import backdrop
         bgs = backdrop.plan(spec)
