@@ -246,6 +246,11 @@ def run(path: Path, upto: str = "G8") -> Report:
                     says_m = " ".join(b.get("say", "") for s_ in spec["scenes"] for b in s_.get("beats", []))
                     R.add("G4", lvl, "v26: 대본에 매체가 어떻게 다뤘나 + 말과 행동 맞대기 (03 §0-2)",
                           any(s_.get("type") == "newspapers" for s_ in spec["scenes"]) or ("매체" in says_m and ("보도" in says_m or "기사" in says_m)), "")
+        if ch == "ch-market-daily":   # 2026-11-15 사용자: 제목·썸네일에 채널 이름 붙이지 않음, 날짜만 (manual/09 §7)
+            pk_ = spec.get("package") or {}
+            txts_ = [pk_.get("title", "")] + list(pk_.get("title_options") or []) + [" ".join([th.get("top", ""), *th.get("lines", []), th.get("sub", ""), th.get("headline", "")]) for th in pk_.get("thumbnails") or []]
+            named_ = [x[:30] for x in txts_ if "이어 읽는 시장" in x or "이어읽는시장" in x]
+            R.add("G6", "MUST", "제목·썸네일에 채널 이름(이어 읽는 시장) 없음 — 날짜만 (manual/09 §7)", not named_, named_[:2])
         if brand == "market":
             tail = [s.get("type") for s in spec.get("scenes", [])[-3:]]
             R.add("G4", "SHOULD", "market: 끝에 확인할 신호(checklist)", "checklist" in tail, tail)
