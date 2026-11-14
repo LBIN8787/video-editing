@@ -58,6 +58,10 @@ class Stage:
         self.credits: list = []
         self.n = 0
         self.dark = sc.get("bg") == "dark"
+        # v25 움직임 (2026-11-14 사용자: "사진을 잘 뽑은 정적인 동영상 같다 — 동영상이라는 동적인 움직임을 살려라")
+        self.beats: list = []     # 박자마다 {"t0","d","focus":[(x,y)...]} → 카메라가 그 박자의 주인공으로 다가가며 계속 움직임
+        self.hud: list = []       # 글자(연도·이름·숫자)는 카메라 밖 위층 — 카메라가 움직여도 잘리지 않음
+        self.idle: list = []      # 등장한 모든 그림은 숨 쉬듯 계속 움직임 (완전히 멈춘 프레임 없음)
 
     # ---------------------------------------------------------------- 공통
     def _id(self):
@@ -118,8 +122,14 @@ class Stage:
 
     # ---------------------------------------------------------------- 동작
     def add(self, m: dict, t: float):
-        do = m["do"]
         mid = m.get("id") or self._id()
+        m = dict(m, id=mid)
+        self._add(m, t)
+        self._track(m, t, mid)
+
+    def _add(self, m: dict, t: float):
+        do = m["do"]
+        mid = m["id"]
         did = f"{self.p}_{mid}"
         js = self.js
         if do == "in":
@@ -169,8 +179,17 @@ class Stage:
                                  f'<img id="{did}_p0" src="assets/{a}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transform:{flip}">'
                                  f'</div></div></div>')
                 self.el[mid] = {"kind": "cut", "x": x, "y": y - h / 2, "w": w, "h": h, "n": 1, "flip": flip}
-            self.enter(did, t, m.get("from", "pop"))
-            self.sfx("whoosh-short" if m.get("from") in ("left", "right", "top") else "pop", t)
+            if m.get("from") == "walk":   # v25 걸어서(굴러서) 화면 밖에서 들어옴 — 나타나기 대신 움직임
+                dx = -760 if m.get("x", W / 2) <= W / 2 else 760
+                wd = m.get("wdur", 1.6)
+                self.js.append(f'tl.fromTo("#{did}",{{opacity:1,x:{dx}}},{{opacity:1,x:0,duration:{wd},ease:"power1.out",immediateRender:false}},{t:.2f});')
+                n = max(2, int(wd / 0.38))
+                for k in range(n):
+                    self.js.append(f'tl.to("#{did}_mv",{{y:-16,rotation:{2.5 if k % 2 else -2.5},duration:{wd / n / 2:.2f},ease:"sine.out",yoyo:true,repeat:1}},{t + k * wd / n:.2f});')
+                    self.sfx("click-soft", t + k * wd / n + wd / n / 2)
+            else:
+                self.enter(did, t, m.get("from", "pop"))
+                self.sfx("whoosh-short" if m.get("from") in ("left", "right", "top") else "pop", t)
             self.show(t, mid, "in")
         elif do == "out":
             ons = list(self.vis) if m.get("on") == "all" else ([m["on"]] if isinstance(m.get("on"), str) else m.get("on", []))
@@ -339,6 +358,18 @@ class Stage:
         elif do == "bg":
             self.bg_events.append((t, m.get("mode", "paper")))
 
+    def _track(self, m: dict, t: float, mid: str):
+        do = m["do"]
+        if do in ("text", "count") and self.html:   # 글자는 카메라 밖으로
+            self.hud.append(self.html.pop())
+            return
+        if do == "in" and mid in self.el:
+            self.idle.append((f"{self.p}_{mid}", t, self.el[mid]["kind"]))
+        on = m.get("on") if do != "in" else mid
+        if do in ("in", "act", "to", "pose", "morph", "fx", "into", "cover", "tilt", "mark", "seesaw") and on in self.el and self.beats:
+            e = self.el[on]
+            self.beats[-1]["focus"].append((e["x"], e["y"]))
+
     def _inject(self, on, html):
         key = f'<div id="{self.p}_{on}_mv" style="position:absolute;inset:0">'
         key2 = f'<div id="{self.p}_{on}_mv" style="position:absolute;inset:12%">'
@@ -451,13 +482,59 @@ class Stage:
             if nxt:
                 D.js.append(f'tl.to("#{bid}",{{opacity:0,duration:0.9}},{max(nxt[0] - 0.2, 0):.2f});')
         D.items.append(f'<div id="{self.p}st" data-layout-allow-overflow style="position:absolute;left:0;top:0;width:{W}px;height:{H_}px;overflow:hidden">'
-                       + "".join(self.html) + '</div>')
+                       f'<div id="{self.p}cam" data-layout-allow-overflow style="position:absolute;left:0;top:0;width:{W}px;height:{H_}px;transform-origin:0 0">'
+                       + "".join(self.html) + '</div></div>')
+        if self.hud:
+            D.items.append(f'<div id="{self.p}hud" style="position:absolute;left:0;top:0;width:{W}px;height:{H_}px;pointer-events:none">' + "".join(self.hud) + '</div>')
         D.js.extend(self.js)
-        # 머무는 동안 아주 천천히 다가감 (정지 화면 방지)
-        D.js.append(f'tl.fromTo("#{self.p}st",{{scale:1}},{{scale:1.025,duration:{dur:.2f},ease:"none",transformOrigin:"50% 45%"}},0);')
+        # ① 대기 동작: 등장한 그림은 끝까지 숨 쉬듯 위아래·좌우로 (그림마다 박자 다르게)
+        for i, (did, t, kind) in enumerate(self.idle):
+            per = 1.7 + (i % 5) * 0.23
+            n = int((dur - t - 0.8) / per)
+            if n < 1:
+                continue
+            amp = {"cut": 2.6, "lens": 1.2}.get(kind, 1.0)
+            rot = (1.6 if i % 2 else -1.6) * (1 if kind == "cut" else 0.5)
+            D.js.append(f'tl.to("#{did}",{{yPercent:{-amp},rotation:{rot},duration:{per:.2f},yoyo:true,repeat:{n},ease:"sine.inOut"}},{t + 0.8:.2f});')
+        # ② 카메라: 박자마다 그 박자의 주인공 쪽으로 밀고 들어가며 옮겨 가고, 머무는 동안에도 천천히 계속 다가감
+        cam = f"#{self.p}cam"
+
+        def view(cx, cy, z):
+            x = min(0.0, max(W - W * z, W / 2 - cx * z))
+            y = min(0.0, max(H_ - H_ * z, H_ / 2 - cy * z))
+            return f"scale:{z:.4f},x:{x:.1f},y:{y:.1f}"
+        D.js.append(f'tl.set("{cam}",{{{view(W / 2, H_ / 2, 1.07)}}},0);')
+        cx, cy, z = W / 2, H_ / 2, 1.07
+        for k, b in enumerate(self.beats):
+            f = b["focus"]
+            if f:
+                fx = sum(p[0] for p in f) / len(f)
+                fy = sum(p[1] for p in f) / len(f)
+                cx, cy = W / 2 + (fx - W / 2) * 0.55, H_ / 2 + (fy - H_ / 2) * 0.55
+                z = 1.13 if len(set(f)) <= 2 else 1.06
+            else:
+                z = 1.04 if z > 1.08 else 1.10   # 새 주인공이 없으면 밀고 당기기를 번갈아
+            t0, d = b["t0"], b["d"]
+            mv = min(1.3, max(0.7, d * 0.35))
+            D.js.append(f'tl.to("{cam}",{{{view(cx, cy, z)},duration:{mv:.2f},ease:"power2.inOut"}},{max(t0 - 0.15, 0):.2f});')
+            end = b.get("end") or (t0 + d + 0.5)
+            rest = end - (t0 - 0.15 + mv)
+            if rest > 0.3:
+                z2 = z + 0.03
+                D.js.append(f'tl.to("{cam}",{{{view(cx, cy, z2)},duration:{rest:.2f},ease:"none"}},{t0 - 0.15 + mv:.2f});')
+                # ③ 화면 바꾸기: 긴 문장(4초+)은 중간에 그 박자 주인공의 가까운 화면으로 잘랐다가(컷) 다시 넓은 화면으로 — 영상의 리듬
+                if f and d >= 4.0:
+                    lx, ly = f[-1]
+                    c1 = t0 + d * 0.45
+                    c2 = min(c1 + max(1.6, d * 0.3), end - 0.4)
+                    if c2 - c1 >= 1.2:
+                        D.js.append(f'tl.set("{cam}",{{{view(W / 2 + (lx - W / 2) * 0.9, H_ / 2 + (ly - H_ / 2) * 0.9, 1.38)}}},{c1:.2f});'
+                                    f'tl.to("{cam}",{{{view(W / 2 + (lx - W / 2) * 0.9, H_ / 2 + (ly - H_ / 2) * 0.9, 1.44)},duration:{c2 - c1:.2f},ease:"none"}},{c1:.2f});'
+                                    f'tl.set("{cam}",{{{view(cx, cy, z2)}}},{c2:.2f});')
+                z = z2
         fid = f"{self.p}fade"
         D.items.append(f'<div id="{fid}" style="position:absolute;inset:0;background:#000;opacity:1;pointer-events:none"></div>')
-        D.js.append(f'tl.to("#{fid}",{{opacity:0,duration:0.45,ease:"power1.out"}},0.05);')
+        D.js.append(f'tl.to("#{fid}",{{opacity:0,duration:0.3,ease:"power1.out"}},0.02);')
         if self.credits:
             D.label(" · ".join(dict.fromkeys(self.credits))[:150])
 
@@ -495,6 +572,7 @@ def s_stage(D, sc: dict, bt: list, dur: float):
     D._proj = sc["_project_dir"]
     S = Stage(D, sc)
     for k, (b, (t0, d)) in enumerate(zip(sc["beats"], bt)):
+        S.beats.append({"t0": t0, "d": d, "focus": [], "end": bt[k + 1][0] if k + 1 < len(bt) else dur})
         wav = Path(sc["_project_dir"]) / "03_voice" / f"hb_{sc['id']:03d}_{k}.wav"
         try:
             ws = align.transcribe(wav, "ko")
