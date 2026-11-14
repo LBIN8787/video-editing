@@ -424,7 +424,7 @@ class Stage:
                             for sx, sy in ((40, 40), (150, 0), (110, 110)))
             self.html.append(f'<svg id="{did}" style="position:absolute;left:{x - 90:.0f}px;top:{y - 60:.0f}px;overflow:visible;opacity:0" width="200" height="160">{stars}</svg>')
             js.append(f'tl.fromTo("#{did}",{{opacity:0,scale:0.3}},{{opacity:1,scale:1,duration:0.4,ease:"back.out(3)"}},{t:.2f});tl.to("#{did}",{{opacity:0,duration:0.4}},{t + 1.6:.2f});')
-            self.sfx("chime", t)
+            pass   # 반짝 효과음 없음 (2026-11-14 사용자: "반짝 하며 나오는 효과음은 빼 주세요")
         elif kind == "smoke":
             puffs = "".join(f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="#B9B4AA" stroke="{INK}" stroke-width="3"/>' for cx, cy, r in ((40, 120, 30), (80, 70, 40), (50, 20, 26)))
             self.html.append(f'<svg id="{did}" style="position:absolute;left:{x - 60:.0f}px;top:{y - 140:.0f}px;overflow:visible;opacity:0" width="140" height="160">{puffs}</svg>')

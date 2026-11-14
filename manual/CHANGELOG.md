@@ -5,6 +5,7 @@
 버전마다 스냅샷 브랜치 `manual/vN` 을 붙여 GitHub 에 백업합니다 → 예전 기준으로 돌아가기: `git checkout origin/manual/vN -- manual/`.
 
 ## 반영 대기
+- [2026-11-14 · 20261113-curiosity-moravec 기각] 반짝 효과음은 빼기. 동영상이라는 동적인 움직임을 살리는 것이 목표인데, 지금은 사진을 잘 뽑은 정적인 동영상 같음
 
 ## v24 — 2026-11-14
 - v24: 롱폼 최소 10분(모든 채널, 매일 브리핑 포함) — README §2-4, channel.yaml target_minutes, check G6
