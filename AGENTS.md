@@ -28,7 +28,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **유튜브 올리기·관리 자동화** — 업로드·설명란(더보기)·태그·카테고리·예약 공개·썸네일·자막·재생목록 (공식 API, GitHub Actions) | `docs/24-youtube-publish.md`, `python -m ytflow yt-publish <프로젝트>`, `scripts/youtube_auth.py`, `.github/workflows/youtube-publish.yml` |
 | **주식 채널 개설 계획** — 이름 후보(겹침 확인)·1일 1영상 운영(평일 아침 브리핑·심층·주말 분석) | `docs/23-stock-channel-plan.md`, `channels/ch-market-daily/channel.yaml` |
 | **어닝콜 해부·연결과 의미 (v18)** — 숫자·약속 → 시장의 걱정과 경영진의 답(원문+번역) → 무엇으로 이어지나(해석) → 남은 숙제 | `manual/03-market.md` §0-1, `ytflow/stages/earnings.py` |
-| **호기심 채널: 설명보다 호기심 먼저 (v18)** — 짧은 인사·소개 → 훅(답은 숨김) → 설명, 제목은 훅에서 | `manual/04-curiosity.md` §0, `topic_brief.hook` |
+| **호기심 채널: 설명보다 호기심 먼저 (v18)** — 첫 문장부터 훅(답은 숨김, 인트로 없음 v24) → 이야기, 제목은 훅에서 | `manual/04-curiosity.md` §0, `topic_brief.hook` |
 | **원본 발언 컷편집 (v20)** — 어닝콜·기자회견 긴 원본에서 대본과 맞는 문장만 단어 단위로 잘라 그 사람의 목소리로 (`bite` 장면, 원문·번역 2단) | `styles/source-cut/STYLE.md`, `skills/edit-style-source-cut`, `python -m ytflow cut <프로젝트>`, `ytflow/stages/cutedit.py` |
 | **손그림 삽화 (v20)** — 삽화 한 장 위를 카메라가 박자마다 옮겨 가며 설명 (붓 쓸기 등장·boil·손그림 표시·생각 풍선, 그림체는 자유). 그림은 사람이 준비 | `styles/illustrated/STYLE.md`, `skills/edit-style-illustrated`, `python -m ytflow art-brief <프로젝트>`, `ytflow/stages/illust.py` |
 | **레퍼런스 2편 분석 (2026-11-13)** — 뉴스 데스크 카드(한 소식 = 한 장, `newsdesk` 장면) · 훅 쇼츠(얼굴 없이: 실제 화면 꽉 채움·훅 제목·큰 자막·튀어나오는 카드) · 말하는 사람 쇼츠(본인 촬영 있을 때만), 기존 스타일과 차이·장단점, AI 채널 적용 | `docs/25-reference-2611.md`, `styles/news-desk/`, `styles/recipes/hook-shorts.yaml`, `python -m ytflow hookshort <프로젝트>`, `python -m ytflow presenter <프로젝트>` |
