@@ -687,18 +687,27 @@ def s_bars(D: HDoc, sc: dict, bt: list, dur: float):
     D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
     D.h1(sc.get("title", ""), y=140)
     items = sc["items"]
-    top = max(i["value"] for i in items)
-    t1 = bt[-1][0]
+    # 2026-11-14 사용자: "그래프를 보여주는 게 너무 늦다 — 대사와 함께" · "-인데 +처럼 나오는 것이 직관적이지 않다"
+    # → 첫 박자부터 차례로 서고(항목 t 가 있으면 그 말을 하는 순간), 음수는 기준선 아래로 내려 그린다.
+    pos = max([i["value"] for i in items if i["value"] > 0] or [0])
+    neg = max([-i["value"] for i in items if i["value"] < 0] or [0])
+    span = (pos + neg) or 1
+    area_top, area_bot = 270, 800 if neg else 820       # 막대가 차지하는 세로 범위
+    base = area_top + (area_bot - area_top) * pos / span if neg else area_bot
+    scale = (area_bot - area_top) / span
+    t0 = bt[0][0]
     em = sc.get("emph", 0)   # 강조(강조색) 항목 번호 — 순서는 대본 그대로
     n = len(items)
     step = 440 if n <= 3 else 1180 / (n - 1)       # 4개 이상이면 화면 안에 고르게 (예전 2~3개 배치는 그대로)
     bw = 220 if n <= 3 else min(220, step * 0.55)
-    stagger = 1.3 if n <= 3 else 0.7
+    stagger = 0.9 if n <= 3 else 0.6
     vsize = 72 if n <= 3 else 60
+    D.rough("line", [330, base, 1600, base + 2], D.ink, 3.5, at=t0 + 0.1, dur=0.5)
     for k, it in enumerate(items):
         x = 520 + k * 440 if n <= 3 else 960 + (k - (n - 1) / 2) * step
-        h = 480 * it["value"] / top
-        at = t1 + 0.2 + k * stagger
+        v = it["value"]
+        h = max(abs(v) * scale, 6)
+        at = t0 + 0.4 + k * stagger
         if it.get("t"):   # 그 항목 이름을 말하는 순간 막대가 섬 (2026-11-13: 막대가 늦게 나와 화살표가 빈 곳을 가리킴)
             from . import motion2
             for k_b, (b_, (tb, db)) in enumerate(zip(sc["beats"], bt)):
@@ -706,12 +715,18 @@ def s_bars(D: HDoc, sc: dict, bt: list, dur: float):
                     at = max(tb, motion2.row_time(sc, k_b, b_, tb, db, it["t"]) - 0.1)
                     break
         c = D.red if k == em else D.ink
-        D.rough("rectangle", [x - bw / 2, 820 - h, bw, h], c, 2.5, fill=c, at=at, dur=0.8)
-        D.text(x, 820 - h - 50, f'{it.get("text", it["value"])}', FT("value"), vsize, c, at=at + 0.5, counter=True)
-        D.text(x, 870, it["label"], FT("box"), fit(FT("box"), it["label"], 44, step - 20 if n > 3 else 400).size, D.ink, at=at)
+        txt = f'{it.get("text", v)}'
+        lsize = fit(FT("box"), it["label"], 44, step - 20 if n > 3 else 400).size
+        if v >= 0:
+            D.rough("rectangle", [x - bw / 2, base - h, bw, h], c, 2.5, fill=c, at=at, dur=0.6)
+            D.text(x, base - h - 50, txt, FT("value"), vsize, c, at=at + 0.4, counter=True)
+            D.text(x, base + 48, it["label"], FT("box"), lsize, D.ink, at=at)
+        else:   # 아래로: 값은 막대 끝 아래, 이름은 기준선 위
+            D.rough("rectangle", [x - bw / 2, base, bw, h], c, 2.5, fill=c, at=at, dur=0.6)
+            D.text(x, base + h + 50, txt, FT("value"), vsize, c, at=at + 0.4, counter=True)
+            D.text(x, base - 40, it["label"], FT("box"), lsize, D.ink, at=at)
         D.sfx.append(("pencil", at))
-    D.text(1640, 870 - 600, sc.get("unit", ""), FT("note"), 40, "#5a5f6a", at=t1)
-    D.rough("line", [330, 822, 1600, 824], D.ink, 3.5, at=bt[0][0] + 0.3, dur=0.6)
+    D.text(1640, 270, sc.get("unit", ""), FT("note"), 40, "#5a5f6a", at=t0)
 
 
 def s_bignum(D: HDoc, sc: dict, bt: list, dur: float):

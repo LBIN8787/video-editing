@@ -38,6 +38,12 @@
 - F7 ✅ **연준 금융안정보고서 (11/13, 1년 2회)** 요약 1번: "Measures of equity valuations have remained high, partly driven by market enthusiasm for super intelligence (SI)." — https://www.federalreserve.gov/publications/files/financial-stability-report-20261113.pdf (목록 https://www.federalreserve.gov/publications/financial-stability-report.htm)
 - F8 ✅ 같은 보고서 Box 5.1 (뉴욕 연은, 9~10월 시장 참가자 23곳 설문, "should not be interpreted as representing the views of the Federal Reserve"): "AI was the top-cited risk" — 걱정 ① 높은 주가와 실적 미달 시 조정 ② AI 사이버 공격 ③ 복잡한 AI 관련 자금 조달. "a sharp correction in AI-related equities, driven by uncertain returns on large capital expenditures". 장기 국채 금리 추가 상승도 주요 위험
 - F9 ✅ 같은 보고서: "Advanced computing–related debt issuance rose to more than $680 billion by October 2026, about a fivefold increase from $130 billion in all of 2023"
+- F11 ✅ 같은 보고서 Box 2.2: "advanced computing–related borrowing as a share of nonfinancial investment-grade corporate debt issuance increased from less than 6 percent in 2023 to about 31 percent in 2026" · 공개 부채 잔액 1.1조 달러+ (2026.10)
+- F12 ✅ Box 2.2: 장부 밖 약속 — "not-yet-commenced leases (whose undiscounted values exceed $1 trillion) and other obligations such as take-or-pay contracts and residual value guarantees (whose undiscounted values exceed $2 trillion)" · 할인 안 한 값이라 빚과 직접 비교 불가(각주 5)
+- F13 ✅ Box 2.2: 하이퍼스케일러 장기 임차 → 개발사가 그 계약으로 자금 조달, GPU 회사의 잔존가치 보증 + 지분 투자 → "circular financing" dynamic
+- F14 ✅ Box 2.2: 채권은 주로 뮤추얼펀드·연기금·보험사, 후순위·지분은 하이일드 펀드·생명보험·BDC·사모 대출 · "the largest U.S. bank holding companies have close to $1 trillion of exposure to large technology firms, data center developers, advanced computing–related SPEs and private credit vehicles, and utility companies" (스트레스 테스트에서 점검) · 빅테크가 손실을 흡수해 충격을 줄일 수도 있지만 장부보다 노출이 클 수 있다
+- F15 ✅ Box 2.2 그림 B: 1995년부터의 통신 투자 주기와 비교 — "the pace of the current cycle's investment may surpass that of the 1990s telecom cycle relatively soon" · 하이퍼스케일러는 현금흐름이 강해 빚을 덜 냈다 "at least until this year" (하이퍼스케일러 = 아마존·알파벳·메타·MS·오라클)
+- F16 ✅ 5장 시나리오: "An unexpected downturn in corporate earnings could prompt declines in corporate asset valuations, a tightening of credit conditions, and a pullback from capital expenditures, reducing aggregate demand" · 레버리지 투자자의 매도가 하락을 키울 수 있음
 - F10 ⚠️ 응답 비율 87%(봄 50%)는 보도(CNBC·Bloomberg 등) 숫자 — 보고서 그림에서 숫자를 직접 확인하지 못해 영상에서 쓰지 않음. '3조 달러 넘는 보증·리스'도 원문에서 확인 못 해 뺌
 
 ## 한국 · 원인 종류: **이슈**
@@ -49,6 +55,9 @@
 - I2 💬 엔비디아 공백 → 대안(AMD·브로드컴)으로 쏠렸다가 금요일 되돌림 — 하루 이틀의 쏠림은 쉽게 되돌아간다, 확인은 실적 — 근거 W3, W4, N5, N6, N7
 - I3 💬 금리가 오르는 한 주에 이자 없는 자산(금·비트코인)이 약했다 — 관찰, 인과 단정 안 함 — 근거 W5, F1
 - I5 💬 금융안정보고서가 13일 주가를 움직였다는 근거는 없음(말함). 다만 지난주 급락의 걱정(AI 투자 수익·빚)과 연준 보고서의 위험 1순위가 같다 — 근거 R2, F7, F8, F9
+- I6 💬 AI 투자가 현금에서 빚으로 넘어가는 시점이라 금리에 더 민감 → 10년물 5.15%는 데이터센터 자금 비용 상승 — 근거 W5, F9, F15
+- I7 💬 한국 AI 메모리(SK하이닉스·삼성전자) 주문은 데이터센터 투자에서 나옴 → 투자 속도 변화가 한국 반도체 숫자로 이어질 수 있음 — 근거 F16, W6
+- I8 💬 걱정을 푸는 열쇠 = AI 투자 수익 → 첫 숫자는 엔비디아 실적(데이터센터 매출·전망) — 근거 F8, N2
 - I4 💬 다음 주 엔비디아 실적과 연준 의사록이 세 흐름(AI 투자·리더십·금리)을 한꺼번에 시험 — 근거 N2, F4
 
 ## 쓰지 않는 것
