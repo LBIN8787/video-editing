@@ -287,8 +287,17 @@ def apply_v2():   # V2 apply: 그림 재료 v2 (scripts/curiosity_story/v2.py) �
             sc.pop("credit", None)
 
 
+def apply_v4():   # v4: 애니메이션 무대 (stage) — 2026-11-14 기각 반영, 제작 의도 02_script/intent.md, manual/04 §0-5
+    import importlib.util
+    spec_ = importlib.util.spec_from_file_location("v4", Path(__file__).with_name("v4.py"))
+    v4 = importlib.util.module_from_spec(spec_)
+    spec_.loader.exec_module(v4)
+    v4.apply(SCENES)
+
+
 def main():
     apply_v2()
+    apply_v4()
     for d in ("01_research", "02_script", "05_edit"):
         (P / d).mkdir(parents=True, exist_ok=True)
     (P / "01_research" / "topic_brief.json").write_text(json.dumps(TOPIC, ensure_ascii=False, indent=1), encoding="utf-8")

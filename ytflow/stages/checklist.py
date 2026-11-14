@@ -134,7 +134,7 @@ def run(path: Path, upto: str = "G8") -> Report:
     if last >= 1:  # G2 소스
         foot = spec.get("footage") or {}
         miss = [k for k, v in foot.items() if not (v.get("credit") and v.get("url"))]
-        drawn = not foot and any(x.get("type") == "story" for x in spec.get("scenes", []))   # 그림판(story)만으로 그린 영상: 자료 화면 없음 (manual/04 §0-4)
+        drawn = not foot and any(x.get("type") in ("story", "stage") for x in spec.get("scenes", []))   # 그림판(story)만으로 그린 영상: 자료 화면 없음 (manual/04 §0-4)
         R.add("G2", "MUST", "자료 화면마다 credit·url", bool(foot and not miss) or drawn, f"{len(foot)}개, 빠짐 {miss}" + (" · 직접 그린 그림판" if drawn else ""))
         bad = [k for k, v in foot.items() if any(b.lower() in (v.get("credit", "")).lower() for b in BAD_LICENSE)]
         R.add("G2", "MUST", "금지 라이선스(SA·NC·ND) 없음", not bad, bad)

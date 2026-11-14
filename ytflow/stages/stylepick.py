@@ -213,7 +213,7 @@ def emphasis_stats(spec: dict, total_s: float) -> dict:
 # 글씨·도형만으로 된 자체 제작 장면 = 'plain'. 자료 화면·지도·실제 화면·사진 겹치기·시각 효과가 있으면 '눈요기(hook)'.
 PLAIN_TYPES = {"bignum", "bars", "versus", "checklist", "card_type", "analogy", "timeline", "map_causal", "quote",
                "chart", "statement", "explain", "people", "compare_values", "proportion"}
-HOOK_TYPES = {"story", "kb", "journey", "choropleth", "zoomshot", "chat", "terminal", "footage", "source", "usmap", "intro", "kinetic"}
+HOOK_TYPES = {"story", "stage", "kb", "journey", "choropleth", "zoomshot", "chat", "terminal", "footage", "source", "usmap", "intro", "kinetic"}
 HOOK_LAYERS = {"photo", "locator", "mark"}
 
 

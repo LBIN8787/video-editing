@@ -2,50 +2,14 @@
 
 각 시트를 생성한 뒤 `04_assets/story/gen/<id>_sheet.png` 로 저장하고 `python -m ytflow art-cut` 으로 조각을 냅니다.
 
-## baby → baby_look, baby_grab, baby_walk
+## places → building, house, book
 
 ```
-the same chubby toddler (about one year old, short dark hair, cream onesie with a muted red stripe), three poses: (1) sitting on the floor, head turned, looking around curiously with wide eyes; (2) sitting and reaching out with one hand, grabbing a small wooden toy block; (3) standing and taking a wobbly first step, arms out for balance. Each one shown side by side, evenly spaced with clear empty space between them, each full and not overlapping. Flat editorial vector illustration, warm cream, navy blue and muted brick-red palette, confident navy outlines, soft flat shading, subtle paper grain, charming and gentle. Plain pure white background, no ground shadows, no text, no labels.
+three separate objects: (1) a small two-story Japanese tech company building with a large open roll-up shutter garage door on the ground floor, no signs and no letters; (2) a cozy small family house with a red roof and warm lit window; (3) an old hardcover book lying open, pages slightly curved. Each one shown side by side, evenly spaced with clear empty space between them, each full and not overlapping. Flat editorial vector illustration, warm cream, navy blue and muted brick-red palette, confident navy outlines, soft flat shading, subtle paper grain, charming and gentle. Plain pure white background, no ground shadows, no text, no labels.
 ```
 
-## robot → robot_stare, robot_pinch, robot_confused
+## crumples → crumple1, crumple2, crumple3
 
 ```
-the same friendly boxy household robot (rounded navy-blue body, cream face screen with two simple dot eyes, one jointed arm with a two-finger gripper), three poses: (1) staring down at a crumpled brick-red t-shirt in front of it, head tilted; (2) leaning forward, pinching a corner of the crumpled t-shirt awkwardly with its gripper; (3) holding up the tangled t-shirt, looking confused, small sweat drop and a question mark above its head. Each one shown side by side, evenly spaced with clear empty space between them, each full and not overlapping. Flat editorial vector illustration, warm cream, navy blue and muted brick-red palette, confident navy outlines, soft flat shading, subtle paper grain, charming and gentle. Plain pure white background, no ground shadows, no text, no labels.
-```
-
-## objects → shirt_crumpled, shirt_folded, chessboard
-
-```
-three separate objects: (1) a messy crumpled brick-red t-shirt in a heap; (2) the same t-shirt neatly folded into a square; (3) a small wooden chess board at a three-quarter angle with a few chess pieces mid-game. Each one shown side by side, evenly spaced with clear empty space between them, each full and not overlapping. Flat editorial vector illustration, warm cream, navy blue and muted brick-red palette, confident navy outlines, soft flat shading, subtle paper grain, charming and gentle. Plain pure white background, no ground shadows, no text, no labels.
-```
-
-## lab → oldrobot, oldcomputer, examtaker
-
-```
-three separate things from a 1980s robotics lab: (1) a clunky vintage research robot on wheels with a camera head, bumping awkwardly into a wooden chair; (2) a beige vintage 1980s desktop computer whose screen shows a checkers board; (3) an adult in a sweater sitting at a small desk, confidently filling in an exam paper with a pencil. Each one shown side by side, evenly spaced with clear empty space between them, each full and not overlapping. Flat editorial vector illustration, warm cream, navy blue and muted brick-red palette, confident navy outlines, soft flat shading, subtle paper grain, charming and gentle. Plain pure white background, no ground shadows, no text, no labels.
-```
-
-## hands → hand_pick, hands_fold, basket
-
-```
-three separate things: (1) a human hand pulling one brick-red t-shirt out of a messy pile of laundry; (2) two human hands neatly folding a brick-red t-shirt on a table; (3) a woven laundry basket overflowing with crumpled clothes. Each one shown side by side, evenly spaced with clear empty space between them, each full and not overlapping. Flat editorial vector illustration, warm cream, navy blue and muted brick-red palette, confident navy outlines, soft flat shading, subtle paper grain, charming and gentle. Plain pure white background, no ground shadows, no text, no labels.
-```
-
-## ancestor → anc_look, anc_grab, anc_walk
-
-```
-the same prehistoric human ancestor (simple fur garment, bare feet, dark hair), three poses: (1) standing and shading eyes with one hand, scanning the horizon; (2) reaching up to grab a round fruit from a tree branch; (3) walking forward barefoot carrying a wooden stick. Each one shown side by side, evenly spaced with clear empty space between them, each full and not overlapping. Flat editorial vector illustration, warm cream, navy blue and muted brick-red palette, confident navy outlines, soft flat shading, subtle paper grain, charming and gentle. Plain pure white background, no ground shadows, no text, no labels.
-```
-
-## machines → foldmachine, robotarms, motionfilm
-
-```
-three separate things: (1) a boxy home laundry-folding machine cabinet with a t-shirt stuck half inside its slot and a small puff of smoke (broken, no logo); (2) two white robotic arms on a lab table carefully folding a brick-red t-shirt; (3) a film strip of small frames showing robot arm motions, like a recorded demonstration. Each one shown side by side, evenly spaced with clear empty space between them, each full and not overlapping. Flat editorial vector illustration, warm cream, navy blue and muted brick-red palette, confident navy outlines, soft flat shading, subtle paper grain, charming and gentle. Plain pure white background, no ground shadows, no text, no labels.
-```
-
-## extras → baby_wave, calculator, chessking
-
-```
-three separate things: (1) the same chubby toddler in a cream onesie with a muted red stripe, smiling and waving goodbye; (2) a simple pocket calculator; (3) an old wooden chess king piece standing tall. Each one shown side by side, evenly spaced with clear empty space between them, each full and not overlapping. Flat editorial vector illustration, warm cream, navy blue and muted brick-red palette, confident navy outlines, soft flat shading, subtle paper grain, charming and gentle. Plain pure white background, no ground shadows, no text, no labels.
+the same muted brick-red cotton T-shirt shown three times, each time crumpled into a completely different messy shape lying flat: (1) a twisted knot with one sleeve sticking out; (2) a flat tangled heap folded over itself; (3) a loose crumpled ball with the collar visible. Each one shown side by side, evenly spaced with clear empty space between them, each full and not overlapping. Flat editorial vector illustration, warm cream, navy blue and muted brick-red palette, confident navy outlines, soft flat shading, subtle paper grain, charming and gentle. Plain pure white background, no ground shadows, no text, no labels.
 ```

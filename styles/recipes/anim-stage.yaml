@@ -1,0 +1,22 @@
+# 2026-11-14 사용자 기각 반영 (manual/04 §0-5): "난잡하다 — 의도를 먼저 정하고, 대본을 바탕으로 애니메이션을. 사진 붙여넣기·소제목 글자 말고."
+# 이야기 그림판(story-board)의 후속: 큰 종이에 쌓지 않고 화면 한 장이 무대, 주인공이 대본의 동사를 연기, 글자는 한 번에 하나.
+id: anim-stage
+name: "애니메이션 무대 (주인공 그림이 대본의 동사를 연기, 한 화면 한 생각, 의도표 필수)"
+status: demo
+renderer: hybrid
+skin: paper-sketch
+format: [longform]
+owns: [stage]
+scene_types: [stage]          # ytflow/stages/stage.py
+backbone: true                # 이야기 채널의 뼈대 (manual/04 §0-4·0-5)
+layered: true
+fits:
+  brands: [curiosity]
+  questions: [행동의 이유, 그때 무슨 일이, 이름의 유래, 오늘과 연결]
+  moods: [차분, 과거, 미래]
+  needs: []
+roles: [hook, body, ending]
+avoid: "숫자 표가 주인공 / 매일 시장 브리핑(정보형) / 실존 인물 얼굴을 그림으로 닮게(실제 사진으로) / 사진·문서·쪽지를 쌓기"
+when: "사람·사물이 무언가를 '하는' 이야기 — 대본의 동사(걷다·쓰러지다·집다·미끄러지다·닫다)를 그림이 연기할 수 있을 때. 02_script/intent.md(목표·욕망·장면 목표)와 박자별 why 를 먼저 쓴다"
+demo: "20261113-curiosity-moravec"
+skill: "edit-style-story-board"

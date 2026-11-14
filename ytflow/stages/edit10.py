@@ -14,7 +14,7 @@ from pathlib import Path
 from .hybrid import FT, HH, W, _e, fit
 
 KINDS = ["wipe", "push", "zoom", "iris"]
-NO_PULSE = {"story", "kb", "journey", "kinetic", "chapter", "footage", "zoomshot", "outro"}
+NO_PULSE = {"story", "stage", "kb", "journey", "kinetic", "chapter", "footage", "zoomshot", "outro"}
 WHOOSH = {"wipe": "whoosh", "push": "whoosh-short", "zoom": "whoosh", "iris": "whoosh-short"}
 
 
