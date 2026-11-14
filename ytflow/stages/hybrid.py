@@ -208,8 +208,8 @@ def _free_spot(pts: list, used: list, ax: float, ay: float, w: float, h: float, 
         n = max(1, int(math.hypot(x2_ - x1_, y2_ - y1_) / 8))
         dense += [(x1_ + (x2_ - x1_) * k / n, y1_ + (y2_ - y1_) * k / n) for k in range(n + 1)]
     pad = 30   # 선 굵기(강조 8px)·글자 여백까지
-    for dy in (100, -100, 150, -150, 210, -210, 270, -270):
-        for dx in (-30, -140, 60, -260):
+    for dy in (100, -100, 150, -150, 210, -210, 270, -270, 340, -340, 420, -420):   # 2026-11-14: 후보가 모자라 검사 없는 대체 위치로 떨어져 글자가 선에 걸림
+        for dx in (-30, -140, 60, -260, -400, -560):
             rx, cy = ax + dx, ay + dy
             L, R, T, B = rx - w - pad, rx + pad, cy - h / 2 - pad, cy + h / 2 + pad
             if T < top or B > bottom:
@@ -258,14 +258,15 @@ def s_chart(D: HDoc, sc: dict, bt: list, dur: float):
     t0 = bt[0][0]
     D.stroke(seg, D.red, 8, at=t0 + 1.2, dur=0.6)
     D.circle(seg[-1][0], seg[-1][1], 26, 26, at=t0 + 1.7)
-    _fmt = ",.2f" if str(sc.get("ticker", "")).startswith("^") else ",.0f"   # 지수는 소수 둘째 자리까지 (반올림으로 숫자가 대사와 달라지지 않게)
+    _fmt = ",.2f" if str(sc.get("ticker", "")).startswith("^") or rows[-1]["close"] < 1000 else ",.0f"   # 지수·1,000 미만 가격은 소수 둘째 자리까지 (반올림으로 숫자가 대사와 달라지지 않게, 2026-11-14 '163' vs 162.85)
     val_txt = format(rows[-1]['close'], _fmt)
-    used = []
+    # 오른쪽 가격 눈금 글자 자리는 비워 둠 (2026-11-14 사용자: 글자 삐져나옴·겹침 주의 — '10,146.32'가 눈금 '9,519'에 겹침)
+    used = [(x1 + 5, x1 + 150, Y(lo + (hi - lo) * k / 4) - 22, Y(lo + (hi - lo) * k / 4) + 22) for k in range(5)]
     # 숫자 글자는 선과 겹치지 않는 빈 곳에 (2026-11-13 사용자: '166'·'-4.34%'가 그래프 선 위에 겹침)
     vx, vy = _free_spot(pts, used, seg[-1][0], seg[-1][1], len(val_txt) * 32, 60, y0, y1 + 10)
     D.text(vx, vy, val_txt, FT("value"), 54, accent_text(D), at=t0 + 1.9, anchor="rm")
     if b0.get("mark"):
-        mx, my = _free_spot(pts, used, (seg[0][0] + seg[-1][0]) / 2, min(p[1] for p in seg), len(b0["mark"]) * 28, 56, y0, y1 + 10)
+        mx, my = _free_spot(pts, used, (seg[0][0] + seg[-1][0]) / 2, min(p[1] for p in seg), len(b0["mark"]) * 40, 60, y0, y1 + 10)
         D.text(mx, my, b0["mark"], FT("note"), 50, accent_text(D), at=t0 + 2.2, anchor="rm")
     D.js.append(f'tl.to("#layer",{{scale:1.18,x:-230,y:40,duration:1.6,ease:"power2.inOut"}},{t0 + 1.0:.2f});')
     D.sfx.append(("pencil", t0 + 1.2))

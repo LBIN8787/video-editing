@@ -7,16 +7,16 @@
 
 ## 설명란 (그대로 붙여 넣기)
 ```
-지난주 급락 뒤 이번 주 반도체는 8% 되돌렸지만 엔비디아만 리더십 공백으로 13% 가까이 빠졌고, 금리는 다시 5%대로 올랐다. 반등은 걱정 해소가 아니라 가격 되돌림에 가깝고, 다음 주 엔비디아 실적과 연준 의사록이 첫 답을 준다.
+지난주 급락 뒤 이번 주 반도체는 8% 되돌렸지만 엔비디아만 리더십 공백으로 13% 가까이 빠졌고, 금리는 다시 5%대로 올랐다. 반등은 걱정 해소가 아니라 가격 되돌림에 가깝다. 13일 연준 금융안정보고서도 AI를 금융 시장의 가장 큰 위험으로 꼽았고, 다음 주 엔비디아 실적과 연준 의사록이 첫 답을 준다.
 
 📌 기준: 11월 13일 미국·한국 마감 (주간: 11/6 종가 대비)
 
 📌 챕터
 0:00 오프닝
-1:14 1. 급락 뒤의 되돌림
-2:49 2. 엔비디아의 빈자리
-4:46 3. 다시 오르는 금리
-6:06 4. 한국 시장의 한 주
+1:15 1. 급락 뒤의 되돌림
+2:50 2. 엔비디아의 빈자리
+4:59 3. 금리, 그리고 연준의 AI 경고
+7:39 4. 한국 시장의 한 주
 
 📚 출처
 - https://finance.yahoo.com/quote/%5EGSPC/history
@@ -34,6 +34,8 @@
 - https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm
 - https://www.federalreserve.gov/monetarypolicy/files/monetary20260916a1.pdf
 - https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+- https://www.federalreserve.gov/publications/files/financial-stability-report-20261113.pdf
+- https://www.federalreserve.gov/publications/financial-stability-report.htm
 - https://www.ajunews.com/view/20261113152425151
 - https://news.mtn.co.kr/article/2026111315370634191
 
