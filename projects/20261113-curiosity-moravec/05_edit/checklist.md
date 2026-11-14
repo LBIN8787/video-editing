@@ -1,6 +1,6 @@
 # 체크리스트 — 20261113-curiosity-moravec
 
-매뉴얼 v24 · 2026-11-14T10:19:29 · **통과**
+매뉴얼 v24 · 2026-11-14T11:23:27 · **통과**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
@@ -38,6 +38,7 @@
 | G4 | MUST | 인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1) | ✅ | [] |
 | G4 | SHOULD | 말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용) | ✅ | [] |
 | G4 | SHOULD | 말투: '~습니다/~니다·~까요' 80% 이상, 평균 문장 35자 이상 (미주일기 96~100%·62~71자) | ✅ | 100% · 63자 |
+| G6 | MUST | 길이: 롱폼 10분 이상 (README §2-4) | ✅ | 10.4분 |
 | G5 | MUST | 배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2) | ✅ | ['dark', 'film', 'grid', 'spot', 'tint'] |
 | G5 | SHOULD | 배경: 같은 바탕 3장면 연속 없음 (film 제외) | ⚠️ | ['spot', 'spot'] |
 | G5 | MUST | 반복 피로: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기: 자료·지도·사진 겹치기·시각 효과, 05 §0-3) | ✅ | 최장 1연속 (장면 2) |
@@ -49,16 +50,27 @@
 | G5 | SHOULD | v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음 | ✅ | 표지 [] · NASA 0 |
 | G5 | SHOULD | 반복 피로: 같은 채널 직전 편과 화면 구성 겹침 70% 이하 (Jaccard) | ✅ | 22% |
 | G5 | MUST | 같은 type 3연속 없음 | ✅ | [] |
-| G5 | SHOULD | 자료 화면 공백 ≤45초 | ⚠️ | 최장 312초 |
-| G5 | SHOULD | 장 표지 간격 ≤200초 | ✅ | 최장 100초 |
+| G5 | SHOULD | 자료 화면 공백 ≤45초 | ⚠️ | 최장 622초 |
+| G5 | SHOULD | 장 표지 간격 ≤200초 | ⚠️ | 최장 622초 |
 | G5 | MUST | 스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격) | ✅ | 5종 ['anim-stage', 'data-report', 'hybrid-causal', 'kinetic-type', 'statement-bri |
-| G5 | MUST | 한 스타일이 85% 넘지 않음 | ✅ | anim-stage 0.52 |
+| G5 | MUST | 한 스타일이 85% 넘지 않음 | ✅ | anim-stage 0.85 |
 | G5 | MUST | 한 장면 안에서 겹친 장면(layers) 3개 이상 | ✅ | 14 |
 | G5 | MUST | 같은 스타일 3장면 연속 없음 | ✅ | 최장 2 |
-| G5 | MUST | 강조는 아껴서: 1분에 1번 이하 (이 영상 5번까지) | ✅ | 3번 [(7, 'kinetic'), (12, 'kinetic'), (22, 'kinetic')] |
+| G5 | MUST | 강조는 아껴서: 1분에 1번 이하 (이 영상 10번까지) | ✅ | 3번 [(7, 'kinetic'), (12, 'kinetic'), (22, 'kinetic')] |
 | G5 | MUST | 한 장면에 강조 1개까지 (위아래로 같은 내용 반복 금지) | ✅ | 넘친 장면 [] |
 | G5 | MUST | 핵심 단어 띄우기(words)는 단어 1~3개만 | ✅ | [] |
 | G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ✅ | paper-sketch / 등록부 ['chalkboard', 'clean-flat', 'clean-white', 'dark-doc', 'kine |
 | G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ✅ | python -m ytflow style-pick <프로젝트> |
+| G6 | MUST | final.mp4 | ✅ |  |
+| G6 | MUST | 레이아웃 점검 비어 있음 | ✅ | {} |
+| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 1.0, 'p95_abs_offset': 0.1, 'median_abs_offset': 0.05, 'video_mi |
+| G6 | SHOULD | 납품 점검(음량 등) | ✅ | completed |
+| G6 | SHOULD | 움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선) | ⚠️ | 변화 16.2/분 · 정지 0.6 |
+| G6 | SHOULD | 최종 목소리 ElevenLabs | ✅ |  |
+| G7 | MUST | 제목 후보 3개 + 이유 | ✅ |  |
+| G7 | MUST | 썸네일 A/B/C + 점검 ok | ✅ |  |
+| G7 | SHOULD | 제목 앞 22자 안에 질문/핵심 | ✅ | 체스 챔피언을 이긴 AI는 왜 빨래를 못 |
+| G8 | MUST | GitHub Release 업로드 | ✅ |  |
+| G8 | MUST | episodes.md 기록 | ✅ | ch-knowledge |
 
 사람 눈 검사(EYE)는 manual/06-checklist.md 끝의 5가지를 확인하세요.

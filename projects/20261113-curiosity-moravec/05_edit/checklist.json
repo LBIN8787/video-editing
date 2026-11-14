@@ -1,7 +1,7 @@
 {
  "project": "20261113-curiosity-moravec",
  "manual_version": "24",
- "checked": "2026-11-14T10:19:29",
+ "checked": "2026-11-14T11:23:27",
  "pass": true,
  "rows": [
   {
@@ -243,6 +243,13 @@
    "detail": "100% · 63자"
   },
   {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "길이: 롱폼 10분 이상 (README §2-4)",
+   "ok": true,
+   "detail": "10.4분"
+  },
+  {
    "gate": "G5",
    "level": "MUST",
    "item": "배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2)",
@@ -324,14 +331,14 @@
    "level": "SHOULD",
    "item": "자료 화면 공백 ≤45초",
    "ok": false,
-   "detail": "최장 312초"
+   "detail": "최장 622초"
   },
   {
    "gate": "G5",
    "level": "SHOULD",
    "item": "장 표지 간격 ≤200초",
-   "ok": true,
-   "detail": "최장 100초"
+   "ok": false,
+   "detail": "최장 622초"
   },
   {
    "gate": "G5",
@@ -345,7 +352,7 @@
    "level": "MUST",
    "item": "한 스타일이 85% 넘지 않음",
    "ok": true,
-   "detail": "anim-stage 0.52"
+   "detail": "anim-stage 0.85"
   },
   {
    "gate": "G5",
@@ -364,7 +371,7 @@
   {
    "gate": "G5",
    "level": "MUST",
-   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 5번까지)",
+   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 10번까지)",
    "ok": true,
    "detail": "3번 [(7, 'kinetic'), (12, 'kinetic'), (22, 'kinetic')]"
   },
@@ -395,6 +402,83 @@
    "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
    "ok": true,
    "detail": "python -m ytflow style-pick <프로젝트>"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "final.mp4",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "레이아웃 점검 비어 있음",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
+   "ok": true,
+   "detail": "{'within_0_5s': 1.0, 'p95_abs_offset': 0.1, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.1}"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "납품 점검(음량 등)",
+   "ok": true,
+   "detail": "completed"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선)",
+   "ok": false,
+   "detail": "변화 16.2/분 · 정지 0.6"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "최종 목소리 ElevenLabs",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "제목 후보 3개 + 이유",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "썸네일 A/B/C + 점검 ok",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "SHOULD",
+   "item": "제목 앞 22자 안에 질문/핵심",
+   "ok": true,
+   "detail": "체스 챔피언을 이긴 AI는 왜 빨래를 못"
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "GitHub Release 업로드",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "episodes.md 기록",
+   "ok": true,
+   "detail": "ch-knowledge"
   }
  ]
 }
