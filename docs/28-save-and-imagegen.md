@@ -18,7 +18,7 @@
 | # | 무엇 | 어디서 |
 |---|---|---|
 | 1 | SAVE 앱 알림 켜기 (관심 기업·키워드·경제지표·리포트) | 휴대폰 SAVE 앱 설정 |
-| 2 | **MacroDroid** 매크로 — 트리거 `알림을 받으면`(앱 `SAVE`, 조건 없음) → 동작 `이메일 보내기`(본인 Gmail 계정), 제목 `[save알림]`, 본문 `{notification}` | 휴대폰(Android) |
+| 2 | **MacroDroid** 매크로 — 트리거 `알림을 받으면`(앱 `SAVE`, 조건 없음) → 동작 `이메일 보내기`(본인 Gmail 계정), 제목 `[save알림]`, 본문 `[app_name] \| [notification_title] \| [notification]` (MacroDroid 변수는 대괄호 — 중괄호 `{notification}` 는 글자 그대로 나감, 2026-11-14 수정) | 휴대폰(Android) |
 | 3 | **30분마다 Gmail 감시** — `[save알림]` 메일(**스팸함 포함**, `in:anywhere`)을 읽어 `LBIN8787/video-editing` `main` 의 `inbox/save/<YYYYMMDD>.md` 에 `- <내용> (알림 MM-dd HH:mm)` 로 덧붙임 (이미 적힌 알림은 건너뜀) | Pickle 정기 작업 `📈 SAVE 알림 메일 감시` |
 | 4 | `daily` 가 `01_research/save_check.md` 표로 옮기고 상태 '확인함 (사용자 메모: …)' | 아침 06:05 자동 제작 |
 
