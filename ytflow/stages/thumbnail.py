@@ -151,6 +151,18 @@ def _board(base: Image.Image, v: dict) -> Image.Image:
         x0, y0 = int(ph["x"] - card.width / 2), int(ph["y"] - card.height / 2)
         base.alpha_composite(sh, (x0 + 6, y0 + 12))
         base.alpha_composite(card, (x0, y0))
+    for ct in v.get("cutouts", []):   # 그림 조각 (영상의 stage 주인공과 같은 그림, 배경 투명) — 2026-11-14 v22
+        im_ = Image.open(ct["file"]).convert("RGBA")
+        hh = int(ct.get("h", 300))
+        im_ = im_.resize((round(hh * im_.width / im_.height), hh), Image.LANCZOS)
+        if ct.get("rot"):
+            im_ = im_.rotate(ct["rot"], expand=True, resample=Image.BICUBIC)
+        sh = Image.new("RGBA", im_.size, (0, 0, 0, 0))
+        sh.paste((30, 24, 16, 80), mask=im_.split()[3])
+        sh = sh.filter(ImageFilter.GaussianBlur(9))
+        x0, y0 = int(ct["x"] - im_.width / 2), int(ct["y"] - im_.height / 2)
+        base.alpha_composite(sh, (x0 + 4, y0 + 10))
+        base.alpha_composite(im_, (x0, y0))
     for dr in v.get("drawings", []):
         if dr.get("sticker"):   # 둥근 스티커 (영상의 sticker 와 같음)
             d_ = int(dr.get("s", 180))
