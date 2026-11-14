@@ -119,6 +119,18 @@ def run(path: Path, upto: str = "G8") -> Report:
           drv.get("type") in ("소재", "각도", "형식") and bool(drv.get("why")) and (drv.get("type") != "각도" or bool(drv.get("angle"))),
           f"{drv.get('type', '')} · {drv.get('why', '')[:40]}")
 
+    ed_ch = ""
+    try:
+        ed_ch = (yaml.safe_load((Path(path) / "edit.yaml").read_text(encoding="utf-8")) or {}).get("channel", "")
+    except Exception:
+        pass
+    if last >= 1 and (ed_ch == "ch-market-daily" or brand == "market"):   # SAVE(오선) 소식 기본 확인 (2026-11-14 사용자, manual/09 §3-0)
+        from . import savecheck
+        sv = savecheck.read(Path(path) / "01_research")
+        R.add("G2", "MUST", "시장: SAVE(오선) 소식 확인 기록 — 상태 '확인함' 또는 '확인 못 함: 이유' (01_research/save_check.md)",
+              sv["done"], sv["status"] or "save_check.md 없음 (python -m ytflow daily 가 만듦)")
+        R.add("G2", "SHOULD", "시장: SAVE 실제로 확인함 (항목 1개 이상)", sv["done"] and sv["status"].startswith("확인함") and sv["items"] >= 1,
+              f"{sv['status']} · 항목 {sv['items']}")
     if last >= 1:  # G2 소스
         foot = spec.get("footage") or {}
         miss = [k for k, v in foot.items() if not (v.get("credit") and v.get("url"))]

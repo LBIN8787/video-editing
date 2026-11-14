@@ -258,6 +258,11 @@ def run(brand: str = "market", day: str = "", project: str = "") -> Path:
     (rdir / "daily_brief.json").write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
     (rdir / "daily_brief.md").write_text(to_md(b), encoding="utf-8")
     print(f"[daily] → {rdir / 'daily_brief.md'}")
+    if brand == "market":   # SAVE(오선) 소식은 기본 확인 (2026-11-14 사용자) — 사람이 앱/웹에서 보고 표를 채움 (savecheck.py)
+        from . import savecheck
+        sp = savecheck.ensure(rdir, day)
+        st = savecheck.read(rdir)
+        print(f"[daily] SAVE 확인 표 → {sp} · 상태: {st['status']}" + ("" if st["done"] else " — 앱/웹에서 확인해 채우세요 (자동 수집 안 됨)"))
     for i, s in enumerate(b["stories"][:3], 1):
         print(f"  {i}. {s.get('name', s.get('headline'))} {s.get('pct', '')} {s.get('driver', '')}")
     return rdir / "daily_brief.md"
