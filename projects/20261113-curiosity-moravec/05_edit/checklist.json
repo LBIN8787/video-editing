@@ -1,8 +1,8 @@
 {
  "project": "20261113-curiosity-moravec",
- "manual_version": "22",
- "checked": "2026-11-14T06:58:37",
- "pass": false,
+ "manual_version": "24",
+ "checked": "2026-11-14T10:19:29",
+ "pass": true,
  "rows": [
   {
    "gate": "G0",
@@ -100,7 +100,7 @@
    "level": "MUST",
    "item": "팩트시트 + 출처 링크 3개 이상",
    "ok": true,
-   "detail": "링크 9개"
+   "detail": "링크 22개"
   },
   {
    "gate": "G3",
@@ -184,14 +184,14 @@
    "level": "MUST",
    "item": "curiosity: 첫 박자부터 곧바로 훅 (채널 소개 인트로 없음, 첫 두 장면 안, 순서 예고보다 앞) (04 §0)",
    "ok": true,
-   "detail": "훅 박자 3 · 순서 예고 None"
+   "detail": "훅 박자 0 · 순서 예고 None"
   },
   {
    "gate": "G4",
    "level": "MUST",
    "item": "curiosity: 훅의 질문(gap)이 나옴 (답은 숨김)",
    "ok": true,
-   "detail": "체스 챔피언을 이긴 기계는 왜 티셔츠 한 장을 못 갰을까?"
+   "detail": "세계 체스 챔피언을 이긴 기계가 왜 티셔츠 한 장 앞에서는 고전했을까?"
   },
   {
    "gate": "G1",
@@ -205,13 +205,13 @@
    "level": "MUST",
    "item": "curiosity: 지식·설명·수치 문장 ≤ 30% (대본 표시 ○, 04 §0-6)",
    "ok": true,
-   "detail": "9/64 = 14% (script_v5.md)"
+   "detail": "0/1 = 0% (script_v6.md)"
   },
   {
    "gate": "G4",
    "level": "MUST",
    "item": "curiosity: 편집 전에 대본만 사용자 검토 통과 (02_script/script_review.md '통과', 04 §0-6)",
-   "ok": false,
+   "ok": true,
    "detail": ""
   },
   {
@@ -222,25 +222,46 @@
    "detail": "3/4"
   },
   {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "말투: '~습니다/~니다·~까요' 80% 이상, 평균 문장 35자 이상 (미주일기 96~100%·62~71자)",
+   "ok": true,
+   "detail": "100% · 63자"
+  },
+  {
    "gate": "G5",
    "level": "MUST",
    "item": "배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2)",
    "ok": true,
-   "detail": "['dark', 'film', 'grid', 'spot']"
+   "detail": "['dark', 'film', 'grid', 'spot', 'tint']"
   },
   {
    "gate": "G5",
    "level": "SHOULD",
    "item": "배경: 같은 바탕 3장면 연속 없음 (film 제외)",
-   "ok": true,
-   "detail": "[]"
+   "ok": false,
+   "detail": "['spot', 'spot']"
   },
   {
    "gate": "G5",
    "level": "MUST",
    "item": "반복 피로: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기: 자료·지도·사진 겹치기·시각 효과, 05 §0-3)",
    "ok": true,
-   "detail": "최장 1연속 (장면 7)"
+   "detail": "최장 1연속 (장면 2)"
   },
   {
    "gate": "G5",
@@ -254,7 +275,7 @@
    "level": "SHOULD",
    "item": "반복 피로: 눈요기 있는 장면 60% 이상",
    "ok": true,
-   "detail": "9/11"
+   "detail": "17/23"
   },
   {
    "gate": "G5",
@@ -289,7 +310,7 @@
    "level": "SHOULD",
    "item": "반복 피로: 같은 채널 직전 편과 화면 구성 겹침 70% 이하 (Jaccard)",
    "ok": true,
-   "detail": "17%"
+   "detail": "22%"
   },
   {
    "gate": "G5",
@@ -317,21 +338,21 @@
    "level": "MUST",
    "item": "스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격)",
    "ok": true,
-   "detail": "4종 ['anim-stage', 'hybrid-causal', 'kinetic-type', 'statement-brief']"
+   "detail": "5종 ['anim-stage', 'data-report', 'hybrid-causal', 'kinetic-type', 'statement-brief']"
   },
   {
    "gate": "G5",
    "level": "MUST",
    "item": "한 스타일이 85% 넘지 않음",
    "ok": true,
-   "detail": "anim-stage 0.84"
+   "detail": "anim-stage 0.52"
   },
   {
    "gate": "G5",
    "level": "MUST",
    "item": "한 장면 안에서 겹친 장면(layers) 3개 이상",
    "ok": true,
-   "detail": "7"
+   "detail": "14"
   },
   {
    "gate": "G5",
@@ -345,7 +366,7 @@
    "level": "MUST",
    "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 5번까지)",
    "ok": true,
-   "detail": "2번 [(3, 'kinetic'), (14, 'kinetic')]"
+   "detail": "3번 [(7, 'kinetic'), (12, 'kinetic'), (22, 'kinetic')]"
   },
   {
    "gate": "G5",
@@ -374,83 +395,6 @@
    "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
    "ok": true,
    "detail": "python -m ytflow style-pick <프로젝트>"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "final.mp4",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "레이아웃 점검 비어 있음",
-   "ok": true,
-   "detail": "{}"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
-   "ok": true,
-   "detail": "{'within_0_5s': 1.0, 'p95_abs_offset': 0.09, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.033}"
-  },
-  {
-   "gate": "G6",
-   "level": "SHOULD",
-   "item": "납품 점검(음량 등)",
-   "ok": true,
-   "detail": "completed"
-  },
-  {
-   "gate": "G6",
-   "level": "SHOULD",
-   "item": "움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선)",
-   "ok": false,
-   "detail": "변화 17.7/분 · 정지 0.52"
-  },
-  {
-   "gate": "G6",
-   "level": "SHOULD",
-   "item": "최종 목소리 ElevenLabs",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "MUST",
-   "item": "제목 후보 3개 + 이유",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "MUST",
-   "item": "썸네일 A/B/C + 점검 ok",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "SHOULD",
-   "item": "제목 앞 22자 안에 질문/핵심",
-   "ok": true,
-   "detail": "체스 챔피언을 이긴 AI는 왜 빨래를 못"
-  },
-  {
-   "gate": "G8",
-   "level": "MUST",
-   "item": "GitHub Release 업로드",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G8",
-   "level": "MUST",
-   "item": "episodes.md 기록",
-   "ok": true,
-   "detail": "ch-knowledge"
   }
  ]
 }

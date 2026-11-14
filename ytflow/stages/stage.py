@@ -174,7 +174,7 @@ class Stage:
             self.show(t, mid, "in")
         elif do == "out":
             ons = list(self.vis) if m.get("on") == "all" else ([m["on"]] if isinstance(m.get("on"), str) else m.get("on", []))
-            ons = [o for o in ons if o not in m.get("keep", [])]
+            ons = [o for o in ons if o not in m.get("keep", []) and o in self.el]   # 이 장면에 없는 것은 건너뜀 (장면을 나눈 경우)
             to = m.get("to", "fade")
             mv = {"left": "x:-900,", "right": "x:900,", "up": "y:-600,", "down": "y:400,"}.get(to, "")
             for o in ons:

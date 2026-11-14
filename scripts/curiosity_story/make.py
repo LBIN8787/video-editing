@@ -244,12 +244,12 @@ TOPIC = {
     "question_type": "행동의 이유", "mood": ["차분", "과거", "미래"],
     "topic": "모라벡의 역설: 1997 딥 블루 · 1988 모라벡 『마음의 아이들』 · 1994 핑커 · 2019 빨래 로봇 회사 파산 · 2024 π0",
     "our_angle": "'AI는 어려운 걸 못 한다'는 통념 대신 '우리가 쉽다고 느끼는 게 기계에겐 어렵다' — 체스와 빨래 두 장면으로",
-    "hook": {"type": "장면", "line": "1997년 5월 11일 미국 뉴욕, 세계 체스 챔피언 카스파로프가 체스판 앞에서 기계에게 졌습니다.",
-             "gap": "체스 챔피언을 이긴 기계는 왜 티셔츠 한 장을 못 갰을까?", "withheld": "답(진화가 다듬은 능력)은 2장에서", "payoff_scene": 9},
+    "hook": {"type": "장면", "line": "2015년 10월 일본 도쿄 가전 전시회에서 냉장고만 한 빨래 개는 기계가 관람객의 발길을 붙잡았습니다.",
+             "gap": "세계 체스 챔피언을 이긴 기계가 왜 티셔츠 한 장 앞에서는 고전했을까?", "withheld": "답(진화가 다듬은 능력)은 6장에서", "payoff_scene": 6},
     "driver": {"type": "각도", "why": "AI 소재 + 일상(빨래) 반전", "angle": "어려움의 기준이 거꾸로"},
     "score": {"desire": 3, "clarity": 3, "timeliness": 2, "demand": 2, "visuals": 2, "angle": 3},
     "demand_evidence": [{"kind": "search", "detail": "'빨래 개는 로봇' '모라벡의 역설' 검색·영상 다수", "url": "https://news.google.com/search?q=%EB%AA%A8%EB%9D%BC%EB%B2%A1%EC%9D%98%20%EC%97%AD%EC%84%A4"}],
-    "visual_sources": ["직접 그린 그림판 (막대 인물·선 아이콘 Lucide ISC)", "사진 없음 — 실존 인물은 막대 인물 + 이름표"],
+    "visual_sources": ["AI 그림 조각 (Codex $imagegen, 같은 그림체, 02_script/art_plan.json)", "실제 사진: 카스파로프 (CC BY 4.0), 딥 블루 (CC BY 2.0)", "튜링·모라벡은 이름 한 줄 + 그가 남긴 것(그림)"],
     "candidates": [{"topic": "체스 챔피언을 이긴 AI는 왜 빨래를 못 갤까?", "total": 15, "why_not": "선택"},
                    {"topic": "로봇은 왜 아직 계단을 잘 못 오를까?", "total": 11, "why_not": "같은 역설 — 이번 편에 녹임"},
                    {"topic": "AI는 왜 손가락을 이상하게 그릴까?", "total": 12, "why_not": "출처 정리 더 필요"}],
@@ -295,13 +295,21 @@ def apply_v4():   # v4: 애니메이션 무대 (stage) — 2026-11-14 기각 반
     v4.apply(SCENES)
 
 
+def apply_v6():   # v6: 대본 v6 (미주일기 문법, 10.7분, 2026-11-14 통과) + 애니메이션 무대 — scripts/curiosity_story/v6.py
+    import importlib.util
+    spec_ = importlib.util.spec_from_file_location("v6", Path(__file__).with_name("v6.py"))
+    v6 = importlib.util.module_from_spec(spec_)
+    spec_.loader.exec_module(v6)
+    SPEC["scenes"] = v6.scenes_mixed()   # 문장 순서는 그대로, 질문·숫자·인용 문장은 kinetic·bignum·versus·quote 로 (스타일 섞기 규칙)
+
+
 def main():
-    apply_v2()
-    apply_v4()
+    apply_v6()   # v2·v4(이전 대본)는 쓰지 않음
     for d in ("01_research", "02_script", "05_edit"):
         (P / d).mkdir(parents=True, exist_ok=True)
     (P / "01_research" / "topic_brief.json").write_text(json.dumps(TOPIC, ensure_ascii=False, indent=1), encoding="utf-8")
-    (P / "01_research" / "factsheet.md").write_text(FACTS, encoding="utf-8")
+    if not (P / "01_research" / "factsheet.md").exists():   # 이후 추가한 사실(F9~)을 덮어쓰지 않음
+        (P / "01_research" / "factsheet.md").write_text(FACTS, encoding="utf-8")
     (P / "02_script" / "hybrid.json").write_text(json.dumps(SPEC, ensure_ascii=False, indent=1), encoding="utf-8")
     (P / "edit.yaml").write_text("# 호기심 채널 · 이야기형 (story-board) 시험작 — 2026-11-13\nedit:\n  style: hybrid\n  style_ref: hybrid\n  family: source\n"
                                  "  skin: paper-sketch\nchannel: ch-knowledge\nformat: longform\n", encoding="utf-8")

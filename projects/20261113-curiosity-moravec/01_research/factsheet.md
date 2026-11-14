@@ -28,4 +28,4 @@
 | F15 | 1979년 스탠퍼드 카트(모라벡)가 의자가 놓인 방을 사람 도움 없이 약 다섯 시간 걸려 건넘 — 한 걸음 가고 10~15분 멈춰 사진을 분석 | ✅ | https://web.stanford.edu/~learnest/sail/oldcart.html · https://frc.ri.cmu.edu/~hpm/project.archive/robot.papers/2002/Commercial/1979.MRL.html |
 | F16 | 1996년 2월 필라델피아 첫 대결: 딥 블루가 1국을 이겼으나 카스파로프가 4-2 로 승리 | ✅ | https://en.wikipedia.org/wiki/Deep_Blue_versus_Garry_Kasparov |
 | F17 | 2015년 6월 5~6일 캘리포니아 포모나 다르파 로보틱스 챌린지 결선: 차 운전·문 열기·밸브·잔해 걷기 과제, 로봇들이 잇따라 넘어짐, 카이스트 팀(휴보) 우승, 2위 IHMC 로봇은 과제를 마치고 관중에게 손을 흔들다 넘어짐 | ✅ | https://venturebeat.com/business/koreas-team-kaist-wins-the-2015-darpa-robotics-challenge · https://www.unmannedsystemstechnology.com/2015/06/winners-of-darpa-robotics-challenge-finals-announced/ · https://robohub.org/dont-be-fooled-by-robots-falling-down-at-darpa-robotics-challenge |
-| F18 | 휴보는 평평한 곳에서 무릎을 꿇고 바퀴로 이동하는 변신 방식으로 넘어짐 위험을 줄임 | ⚠️ 재확인 (널리 보도된 내용, 렌더 전 1차 출처 확인) | KAIST 발표·보도 |
+| F18 | DRC-휴보는 무릎·발목의 바퀴로 무릎을 꿇고 굴러가는 방식으로 바꿔 무게중심을 낮추고 넘어짐을 줄임 (8개 과제 44분 28초, 상금 200만 달러) | ✅ | https://www.technologyreview.com/2015/06/05/167791/a-transformer-wins-darpas-2-million-robotics-challenge/ · https://en.wikipedia.org/wiki/HUBO |

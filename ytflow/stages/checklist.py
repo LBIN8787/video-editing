@@ -180,7 +180,8 @@ def run(path: Path, upto: str = "G8") -> Report:
                   hit is not None and hit <= 3 and (agenda is None or hit < agenda), f"훅 박자 {hit} · 순서 예고 {agenda}")
             gap_w = words(hk.get("gap", ""))
             R.add("G4", "MUST", "curiosity: 훅의 질문(gap)이 나옴 (답은 숨김)",
-                  any(("?" in t or "까요" in t) and len(words(t) & gap_w) >= 2 for t in beats2), hk.get("gap", "")[:40])
+                  any(("?" in t or "까요" in t) and len(words(t) & gap_w) >= 2 for t in [b.get("say", "") for s in spec["scenes"][:4] for b in s.get("beats", [])]),
+                  hk.get("gap", "")[:40])   # v24 미주일기 문법: 여는 장면 → 그 일의 크기 → 질문 (첫 네 장면 안)
             # v23 시청자 먼저 (04 §0-6, docs/29): 상권 조사처럼 시청자를 먼저 알고, 대본이 지식 습득으로 치우치지 않게
             aud = (res / "audience.md").read_text(encoding="utf-8") if (res / "audience.md").exists() else ""
             R.add("G1", "MUST", "curiosity: 시청자 조사 01_research/audience.md (주 시청자·유입 경로·유입 이유·끝까지 보는 이유)",
@@ -255,13 +256,13 @@ def run(path: Path, upto: str = "G8") -> Report:
     if last >= 3:  # v24 인트로 없음 (README §2-1) · 말투 (README §2-3, 미주일기식)
         sc0 = spec.get("scenes", [])[:1]
         _all = [b.get("say", "") for s in spec.get("scenes", []) for b in s.get("beats", [])]
-        greet = [t for t in _all if _re.search(r"안녕하세요|구독과 좋아요|구독 ?좋아요|이런 순서로|순서로 (가|따라가) 보겠습니다|시작해 보겠습니다", t)]
+        greet = [t for t in _all if re.search(r"안녕하세요|구독과 좋아요|구독 ?좋아요|이런 순서로|순서로 (가|따라가) 보겠습니다|시작해 보겠습니다", t)]
         R.add("G4", "MUST", "인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1)",
               not any(x.get("type") == "intro" for x in sc0) and not greet, [g[:30] for g in greet[:2]])
-        bad = [m.group(0) for t in _all for m in _re.finditer(r"헐|대박|미쳤|ㅋ|계시죠\?|손을 (한번 )?펴 보세요|부를게요|여러분!", t)]
+        bad = [m.group(0) for t in _all for m in re.finditer(r"헐|대박|미쳤|ㅋ|계시죠\?|손을 (한번 )?펴 보세요|부를게요|여러분!", t)]
         R.add("G4", "SHOULD", "말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용)", not bad, bad[:3])
-        sents = [x for t in _all for x in _re.split(r"(?<=[.?!])\s+", t) if len(x.strip()) > 3]
-        formal = sum(1 for x in sents if _re.search(r"(습니다|니다|까요)[.?!]?$", x.strip()))
+        sents = [x for t in _all for x in re.split(r"(?<=[.?!])\s+", t) if len(x.strip()) > 3]
+        formal = sum(1 for x in sents if re.search(r"(습니다|니다|까요)[.?!]?$", x.strip()))
         avg = sum(len(x) for x in sents) / max(len(sents), 1)
         R.add("G4", "SHOULD", "말투: '~습니다/~니다·~까요' 80% 이상, 평균 문장 35자 이상 (미주일기 96~100%·62~71자)",
               formal / max(len(sents), 1) >= 0.8 and avg >= 35, f"{formal / max(len(sents), 1):.0%} · {avg:.0f}자")
