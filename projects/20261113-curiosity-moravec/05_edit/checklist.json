@@ -1,7 +1,7 @@
 {
  "project": "20261113-curiosity-moravec",
- "manual_version": "20",
- "checked": "2026-11-14T05:43:20",
+ "manual_version": "21",
+ "checked": "2026-11-14T06:47:28",
  "pass": true,
  "rows": [
   {
@@ -212,7 +212,7 @@
    "level": "MUST",
    "item": "배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2)",
    "ok": true,
-   "detail": "['film', 'grid', 'spot']"
+   "detail": "['dark', 'film', 'grid', 'spot']"
   },
   {
    "gate": "G5",
@@ -303,14 +303,14 @@
    "level": "MUST",
    "item": "스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격)",
    "ok": true,
-   "detail": "4종 ['hybrid-causal', 'kinetic-type', 'statement-brief', 'story-board']"
+   "detail": "4종 ['anim-stage', 'hybrid-causal', 'kinetic-type', 'statement-brief']"
   },
   {
    "gate": "G5",
    "level": "MUST",
    "item": "한 스타일이 85% 넘지 않음",
    "ok": true,
-   "detail": "story-board 0.84"
+   "detail": "anim-stage 0.84"
   },
   {
    "gate": "G5",
@@ -380,7 +380,7 @@
    "level": "MUST",
    "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
    "ok": true,
-   "detail": "{'within_0_5s': 0.992, 'p95_abs_offset': 0.09, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.033}"
+   "detail": "{'within_0_5s': 1.0, 'p95_abs_offset': 0.09, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.033}"
   },
   {
    "gate": "G6",
@@ -393,8 +393,8 @@
    "gate": "G6",
    "level": "SHOULD",
    "item": "움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선)",
-   "ok": true,
-   "detail": "변화 19.2/분 · 정지 0.31"
+   "ok": false,
+   "detail": "변화 17.7/분 · 정지 0.52"
   },
   {
    "gate": "G6",
