@@ -90,6 +90,8 @@ class Board:
         self.bg_events: list = []
         self.credits: list = []
         self.rots: dict = {}
+        self.cuts: dict = {}      # 그림 조각(자세 바꾸기용)
+        self.puppets: dict = {}   # 관절 인형
 
     def layer(self, z: int) -> list:
         return self.layers[max(0, min(2, int(z)))]
@@ -100,7 +102,7 @@ class Board:
         import shutil
         from pathlib import Path
         f = Path(self.D._proj) / "04_assets" / "story" / src
-        name = f"story_{src}"
+        name = "story_" + src.replace("/", "_")
         dst = Path(self.D._work) / "assets" / name
         if f.exists() and not dst.exists():
             try:
@@ -116,6 +118,14 @@ class Board:
         i = self._id()
         self.layers[2].append(f'<div id="{i}" style="position:absolute;left:{x:.0f}px;top:{y:.0f}px;opacity:0">{tag(text, 50)}</div>')
         self.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:10}},{{opacity:1,y:0,duration:0.35}},{t:.2f});')
+
+    def js_html_into_cut(self, on, html):   # 그림 조각 안에 새 자세 그림 추가
+        key = f'<div id="{self.p}_{on}_mv" style="position:absolute;inset:0">'
+        for L in self.layers.values():
+            for i, h in enumerate(L):
+                if key in h:
+                    L[i] = h.replace(key, key + html, 1)
+                    return
 
     def js_html_into(self, on, html):   # 문서 위 형광펜: 같은 자리·같은 기울기의 투명 상자 안에
         x, y, w, h = self.pos[on]
@@ -159,7 +169,7 @@ class Board:
             c = m["cam"]
             self.cam_events.append((max(t - 0.15, 0), c if c == "full" else tuple(c)))
         from . import story_kit
-        if do in ("photo", "doc", "mark", "sticker", "card", "big", "bg"):
+        if do in ("photo", "doc", "mark", "sticker", "card", "big", "bg", "cut", "pose", "move", "shake", "puppet", "act"):
             if do in ("doc", "photo", "card"):
                 self.rots[mid] = m.get("rot", story_kit._rot(mid))
             story_kit.kit(self, m, t, mid, x, y, self.asset)

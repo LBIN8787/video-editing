@@ -25,7 +25,7 @@ POOL = {   # 등장 방식 돌려 쓰기 (같은 방식 연속 금지)
     "big": ["rise", "place"],
     "chip": ["drop", "slide", "place"],
 }
-LAYER = {"photo": 1, "doc": 1, "card": 1, "sticker": 2, "big": 0, "chip": 2, "note": 2, "stamp": 2}
+LAYER = {"photo": 1, "doc": 1, "card": 1, "sticker": 2, "big": 2, "chip": 2, "note": 2, "stamp": 2}
 
 
 def _e(s) -> str:
@@ -194,12 +194,92 @@ def kit(B, m: dict, t: float, mid: str, x: float, y: float, asset) -> bool:
         fs = m.get("fs", 300)
         col = m.get("color", INK)
         out.append(f'<div id="{did}" style="position:absolute;left:{x - 1500}px;top:{y - fs * 0.62:.0f}px;width:3000px;text-align:center;font-family:serif-x;'
-                   f'font-size:{fs}px;line-height:1.1;color:{col};opacity:0;white-space:nowrap">{_e(m.get("text", ""))}'
+                   f'font-size:{fs}px;line-height:1.1;color:{col};opacity:0;white-space:nowrap;-webkit-text-stroke:{max(6, fs // 16)}px #F3EEE3;paint-order:stroke fill">{_e(m.get("text", ""))}'
                    + (f'<div style="font-family:pen;font-size:{m.get("nfs", 80)}px;color:{RED};margin-top:-10px">{_e(m["note"])}</div>' if m.get("note") else "")
                    + '</div>')
         enter(B, did, t, "rise", 0)
         B.js.append(f'tl.to("#{did}",{{opacity:{m.get("alpha", 1)},duration:0.01}},{t + 0.8:.2f});')
         B.pos[mid] = (x, y, len(m.get("text", "")) * fs * 0.8, fs * 1.2)
+        return True
+    if do == "cut":   # 그림 조각 (AI 생성 일러스트의 배경을 지운 것) — 대본의 장면을 그림이 직접 보여 줌 (2026-11-14)
+        src = asset(m["src"])
+        from PIL import Image as _I
+        from pathlib import Path as _P
+        try:
+            iw, ih = _I.open(_P(B.D._proj) / "04_assets" / "story" / m["src"]).size
+        except Exception:  # noqa: BLE001
+            iw, ih = 1, 1
+        h = m.get("h", 520)
+        w = round(h * iw / ih)
+        flip = "scaleX(-1)" if m.get("flip") else ""
+        out.append(f'<div id="{did}" style="position:absolute;left:{x - w / 2:.0f}px;top:{y - h:.0f}px;width:{w}px;height:{h}px;opacity:0;'
+                   f'filter:drop-shadow(0 18px 16px rgba(30,24,16,.22))"><div id="{did}_mv" style="position:absolute;inset:0">'
+                   f'<img id="{did}_p0" src="assets/{src}" style="position:absolute;left:0;bottom:0;width:100%;height:100%;object-fit:contain;transform:{flip}"></div></div>')
+        B.cuts[mid] = {"n": 1, "w": w, "h": h, "flip": flip}
+        style = m.get("in") or pick_in(B, "photo", mid, None)
+        enter(B, did, t, style, 0, x)
+        B._sfx("whoosh-short", t)
+        B.pos[mid] = (x, y - h / 2, w, h)
+        return True
+    if do == "pose" and m.get("on") in getattr(B, "cuts", {}):   # 같은 인물의 다른 자세로 바뀜 (살짝 움츠렸다 펴며)
+        on = m["on"]; c = B.cuts[on]
+        src = asset(m["src"]); k = c["n"]; c["n"] += 1
+        base = f"{B.p}_{on}"
+        B.js_html_into_cut(on, f'<img id="{base}_p{k}" src="assets/{src}" style="position:absolute;left:0;bottom:0;width:100%;height:100%;object-fit:contain;opacity:0;transform:{c["flip"]}">')
+        B.js.append(f'tl.to("#{base}_mv",{{scaleY:0.95,scaleX:1.03,transformOrigin:"50% 100%",duration:0.1}},{t:.2f});'
+                    f'tl.set("#{base}_mv img",{{opacity:0}},{t + 0.1:.2f});tl.set("#{base}_p{k}",{{opacity:1}},{t + 0.1:.2f});'
+                    f'tl.to("#{base}_mv",{{scaleY:1,scaleX:1,duration:0.35,ease:"back.out(2.5)"}},{t + 0.1:.2f});')
+        B._sfx("pop", t)
+        return True
+    if do == "move" and m.get("on") in B.pos:   # 걸어가기·옮겨 가기 (hop: 걸음마다 살짝 튐)
+        on = m["on"]; base = f"{B.p}_{on}"
+        dx, dy, dur = m.get("dx", 0), m.get("dy", 0), m.get("dur", 2.0)
+        B.js.append(f'tl.to("#{base}",{{x:"+={dx}",y:"+={dy}",duration:{dur},ease:"{m.get("ease", "none")}"}},{t:.2f});')
+        if m.get("hop", True):
+            n = max(2, int(dur / 0.45))
+            for k in range(n):
+                B.js.append(f'tl.to("#{base}_mv",{{y:-26,rotation:{3 if k % 2 else -3},duration:{dur / n / 2:.2f},ease:"sine.out",yoyo:true,repeat:1}},{t + k * dur / n:.2f});')
+                B._sfx("click-soft", t + k * dur / n + dur / n / 2)
+        x0, y0, w0, h0 = B.pos[on]
+        B.pos[on] = (x0 + dx, y0 + dy, w0, h0)
+        return True
+    if do == "shake" and m.get("on") in B.pos:   # 헛손질·당황 (짧게, 행동일 때만)
+        base = f"{B.p}_{m['on']}"
+        B.js.append(f'tl.to("#{base}",{{rotation:4,duration:0.08,yoyo:true,repeat:5,ease:"sine.inOut"}},{t:.2f});tl.to("#{base}",{{rotation:0,duration:0.1}},{t + 0.5:.2f});')
+        return True
+    if do == "puppet":   # 관절 인형 (벡터 캐릭터, puppet.py)
+        from . import puppet
+        sc_ = m.get("s", 1.6)
+        svg, info = puppet.build(m["char"], did)
+        w, h = info["w"] * sc_, info["h"] * sc_
+        q = (f'<text id="{did}_q" x="70" y="-360" font-family="serif-x" font-size="110" fill="{RED}" opacity="0">?</text>' if m["char"] == "robot" else "")
+        out.append(f'<div id="{did}" style="position:absolute;left:{x - w / 2:.0f}px;top:{y - h:.0f}px;width:{w:.0f}px;height:{h:.0f}px;opacity:0;'
+                   f'filter:drop-shadow(0 16px 14px rgba(30,24,16,.2))"><div id="{did}_mv" style="position:absolute;inset:0">'
+                   f'<svg viewBox="{-info["w"] / 2:.0f} {-info["h"]:.0f} {info["w"]} {info["h"]}" width="{w:.0f}" height="{h:.0f}" style="overflow:visible">'
+                   f'<g transform="{"scale(-1,1)" if m.get("flip") else ""}">{svg}{q}</g></svg></div></div>')
+        B.puppets[mid] = {"char": m["char"], "info": info, "s": sc_, "x": x, "y": y}
+        enter(B, did, t, m.get("in") or "place", 0, x)
+        B._sfx("whoosh-short", t)
+        B.pos[mid] = (x, y - h / 2, w, h)
+        return True
+    if do == "act" and m.get("on") in getattr(B, "puppets", {}):
+        from . import puppet
+        on = m["on"]; P_ = B.puppets[on]; base = f"{B.p}_{on}"
+        tgt = None
+        if m.get("target") in B.pos:   # 대상이 손으로 오는 거리 (화면 그림판 좌표 차)
+            hx, hy = P_["info"].get("hand", (0, 0))
+            tx_, ty_, tw_, th_ = B.pos[m["target"]]
+            handx, handy = P_["x"] + hx * P_["s"], P_["y"] + hy * P_["s"]
+            tgt = (f"{B.p}_{m['target']}", handx - tx_, handy - (ty_ + th_ / 2) + 30)
+        mm = dict(m, _char=P_["char"])
+        if m["a"] == "walk":
+            mm["dx"] = m.get("dx", 500)
+            puppet.act(B.js, B.D.sfx, base, "walk", t, P_["info"], mm, tgt)
+            P_["x"] += mm["dx"]
+            x0, y0, w0, h0 = B.pos[on]
+            B.pos[on] = (x0 + mm["dx"], y0, w0, h0)
+        else:
+            puppet.act(B.js, B.D.sfx, base, m["a"], t, P_["info"], mm, tgt)
         return True
     if do == "bg":   # 배경 바꾸기 (화면 기준): paper · dark · photo
         B.bg_events.append((t, m.get("mode", "paper"), asset(m["src"]) if m.get("src") else None, m.get("credit")))
