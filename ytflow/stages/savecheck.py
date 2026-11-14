@@ -57,10 +57,13 @@ def ensure(rdir: Path, day: str) -> Path:
         for n in notes:
             for ln in n.read_text(encoding="utf-8").splitlines():
                 ln = ln.strip(" -*\t")
-                if ln and not ln.startswith("#"):
+                core = re.sub(r"\(알림[^)]*\)", "", ln)
+                core = re.sub(r"[{\[][a-z_]+[}\]]", "", core).strip(" -·:|")   # 전달 앱 변수({notification}·[notification])가 안 바뀐 줄은 버림
+                if ln and not ln.startswith("#") and len(core) >= 4:
                     rows.append(f"| 메모 | {ln.replace('|', '/')} |  | (확인 전) |  |")
-        t = p.read_text(encoding="utf-8").replace(f"상태: {UNSET}", "상태: 확인함 (사용자 메모: " + ", ".join(n.name for n in notes) + ")", 1)
-        p.write_text(t.rstrip("\n") + "\n" + "\n".join(rows) + "\n", encoding="utf-8")
+        if rows:   # 쓸 만한 줄이 없으면(변수만 온 알림 등) '미확인' 그대로 — 확인한 척하지 않음
+            t = p.read_text(encoding="utf-8").replace(f"상태: {UNSET}", "상태: 확인함 (사용자 메모: " + ", ".join(n.name for n in notes) + ")", 1)
+            p.write_text(t.rstrip("\n") + "\n" + "\n".join(rows) + "\n", encoding="utf-8")
     return p
 
 
