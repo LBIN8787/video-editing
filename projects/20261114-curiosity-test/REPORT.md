@@ -81,7 +81,7 @@
 | 단계 | 표준 경로 | 이번에 실제로 돈 것 |
 |---|---|---|
 | 대본 | `ytflow script` (LLM) | **에이전트 직접 작성** (`YTFLOW_LLM_BACKEND` 불필요, `.llm/` 요청 없음) → `02_script/scenes.json` |
-| 그림 | 호기심 그림판 = `ytflow/stages/story.py` → **HyperFrames(HTML+GSAP) → node + chromium** | **`build/board.py` (Pillow 벡터)** — 이 컨테이너에는 node·chromium·`tools/hyperframes` 가 없어 `story.py` 경로가 실행 불가 | 
+| 그림 | 호기심 그림판 = `ytflow/stages/story.py` → **HyperFrames(HTML+GSAP) → node + chromium** | **`build/board.py` (Pillow 벡터) + ChatGPT 웹 그림**. 큰 그림(창가의 여행자·창 클로즈업·여객기·벤치의 예비 선수·김 서림 비교)은 **chatgpt.com 에서 만든 일러스트**를 흰 배경만 지워 투명 PNG로 오려 붙이고(`build/art_assets.py`), 도해(창 단면)·기압 막대·FAA 문서는 정확도와 한글 이름표 때문에 벡터로 그렸다. 이 컨테이너에는 node·chromium·`tools/hyperframes` 가 없어 `story.py` 경로는 실행 불가 | 
 | 목소리 | `ytflow stage voice` (edge-tts → 무음 제거·정규화) | **`build/tts_timed.py`** — 같은 edge-tts(ko-KR-InJoonNeural, +8%) + 무음 정리 + **받아쓰기(faster-whisper base)로 단어 시각**까지 저장 |
 | 그림 타이밍 | `story.json` 의 `t`(초) | `02_script/board.json` 의 `word` — **그 낱말을 말하는 순간** 그려진다 (`03_voice/timings.json` 의 글자별 시각) |
 | 자막 | `ytflow stage subtitles` (장면 길이를 글자 수 비례 배분) | 단계가 만든 스타일 머리글을 그대로 쓰고 줄 시각만 **`build/subs_timed.py`** 로 단어 시각에 다시 박음 |
@@ -95,6 +95,15 @@
 - 등장은 **선이 그려지듯**(`prog` 로 폴리라인 부분 그리기) 또는 살짝 떠올랐다 안착. 제자리 흔들림 없음.
 - 배경은 장면마다 바꿈: 밝은 종이(대부분) · 어두운 종이(#6 숫자) · 모래색(#9 벤치).
 
+### 7-1. ChatGPT 그림 (2026-11-14 재렌더)
+- 사용 계정: `s99078634@gmail.com` (브라우저에 이미 로그인) · 대화 `https://chatgpt.com/c/6af7ee3a-ba8c-83ec-a206-55bc82da427d`
+- 그림 5장(같은 대화에서 이어 그려 그림체 고정): ① 창가에 앉은 여행자 ② 창 안쪽 유리 아래 구멍 클로즈업 ③ 옆에서 본 여객기(3장짜리 시트에서 잘라냄) ④ 벤치에 앉아 기다리는 예비 선수 ⑤ 김 서린 창 / 구멍 있어 깨끗한 창 한 쌍.
+  원본은 `04_assets/story/raw/`, 투명 조각은 `04_assets/story/gen/`. 주문서·크롭 좌표는 `02_script/art_plan.json`.
+- 프롬프트 원칙: 흰 배경(#FFFFFF) · 글자·숫자·라벨 없음 · 그림자/테두리 없음 → 한글 자막·손글씨 이름표를 렌더러가 위에 얹어도 깨지지 않는다.
+- 오리기: 테두리와 이어진 흰색만 플러드필로 지워(그림 속 흰 구름·유리 반사는 남김) 1px 페더 → PNG. 알파 경계에 흰 테두리 없음(프레임 확인).
+- 붙이기: `board.json` 의 새 아이템 `{"kind": "art", "src": "passenger.png", "x": …, "y": …, "w": …}` — 도화지에 오려 붙인 느낌으로 옅은 그림자 + 살짝 떠오르는 등장. 좌표·크기는 장면 카메라(줌)에 맞춰 잡았고, 구멍 위치는 조각 안에서 원을 검출해(중심 기준 상대좌표) 빨간 펜 동그라미를 정확히 얹었다.
+- 단면 도해(4·5·7장면)는 ChatGPT 로도 한 장 그려 봤으나 3/4 원근이라 '바깥/가운데/안쪽 창' 이름표와 압력 화살표 좌표를 맞출 수 없어 채택하지 않았다(정확한 벡터 도해가 낫다고 판단).
+
 ### 지킨 편집 규칙 (manual/reviews.md · manual/04 §0)
 - 저음 타격음 없음 — 배경음 자체를 넣지 않았다(`edit.bgm: ""`), 장면 전환음도 없음.
 - "여기까지가 ~였고요" 같은 마무리 상투구 없음 — 마지막 문장은 첫 질문의 답("창이 버티는 이유가 거기 있습니다").
@@ -102,7 +111,7 @@
 - 타이틀 화면의 큰 글자가 자막과 같은 문장을 반복하지 않게, 그림판 위 글자는 이름표·수치·손글씨 낱말로만.
 
 ## 8. 검증 결과 (실측)
-- 길이 **46.29초** · 1920×1080 · 30fps · h264 + AAC 48kHz 2ch · **-14.0 LUFS** · true peak -2.3 dBTP · 11.2MB
+- 길이 **46.29초** · 1920×1080 · 30fps · h264 + AAC 48kHz 2ch · **-14.0 LUFS** · true peak -2.7 dBTP · 13.6MB
 - `delivery_check.json`: **PASS 11 / WARN 1** — 경고는 자막을 화면에 구워 별도 자막 트랙이 없다는 것(의도)
 - `python -m ytflow qa` → **겹침 없음**
 - `sync_qa.json`(받아쓰기로 자막−말 시각 실측): 22줄 · **중앙값 0.05초** · 0.5초 이내 86% · 최대 2.28초.

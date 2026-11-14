@@ -629,12 +629,13 @@ def i_fog(d, cam, it, p, pal):
 def i_crack(d, cam, it, p, pal):
     x, y, s = it["x"], it["y"], it.get("s", 1.0)
     e = ease_out(p)
+    sw = it.get("sw", 4)
     branches = [[(0, 0), (-20, 60), (6, 120), (-14, 190)],
                 [(0, 0), (50, 40), (110, 30), (170, 56)],
                 [(0, 0), (-60, 30), (-110, 90)],
                 [(0, 0), (20, -60), (-6, -120)]]
     for b in branches:
-        polyline(d, cam, [(x + dx * s, y + dy * s) for dx, dy in b], pal["red"] if False else pal["ink"], 4, e, 220)
+        polyline(d, cam, [(x + dx * s, y + dy * s) for dx, dy in b], pal["ink"], sw, e, 225)
 
 
 def i_wall(d, cam, it, p, pal):
@@ -666,6 +667,63 @@ def i_path(d, cam, it, p, pal):
     polyline(d, cam, [tuple(q) for q in it["pts"]], col, it.get("sw", 8), ease_out(p), it.get("alpha", 255))
 
 
+ART_DIR = PROJ / "04_assets" / "story" / "gen"
+_ART: dict = {}
+_ART_SZ: dict = {}
+
+
+def art_sprite(src: str, w: int, h: int, alpha: int, shadow: bool):
+    """gen/<src>.png 를 (w,h) 로 줄이고, 필요하면 옅은 종이 그림자를 붙인 사본을 돌려준다."""
+    key = (src, w, h, alpha, shadow)
+    if key in _ART_SZ:
+        return _ART_SZ[key]
+    if src not in _ART:
+        _ART[src] = Image.open(ART_DIR / src).convert("RGBA")
+    im = _ART[src].resize((max(1, w), max(1, h)), Image.LANCZOS)
+    if shadow:                      # 도화지에 오려 붙인 느낌: 오른쪽 아래로 아주 옅은 그림자
+        pad = max(6, w // 40)
+        canvas = Image.new("RGBA", (w + pad * 2, h + pad * 2), (0, 0, 0, 0))
+        a = im.getchannel("A")
+        sh = Image.new("RGBA", (w + pad * 2, h + pad * 2), (0, 0, 0, 0))
+        sh.paste(Image.new("RGBA", (w, h), (28, 32, 44, 46)), (pad + int(pad * 0.5), pad + int(pad * 0.7)), a)
+        sh = sh.filter(ImageFilter.GaussianBlur(max(2, pad * 0.55)))
+        canvas.alpha_composite(sh)
+        canvas.alpha_composite(im, (pad, pad))
+        im = canvas
+        w, h = im.size
+    if alpha < 255:
+        im = im.copy()
+        im.putalpha(im.getchannel("A").point(lambda v: v * alpha // 255))
+    if len(_ART_SZ) > 60:
+        _ART_SZ.clear()
+    _ART_SZ[key] = im
+    return im
+
+
+def i_art(d, cam, it, p, pal):
+    """ChatGPT 웹에서 만든 그림 조각(투명 PNG)을 도화지에 오려 붙인다.
+
+    x,y = 중심(그림판 좌표) · w = 그림판에서의 너비 · rot(도) · shadow(기본 켜짐).
+    등장은 살짝 떠오르며 밝아진다(선이 그려지는 다른 아이템과 달리 '붙는' 느낌).
+    """
+    e = ease_out(p)
+    w = it["w"] * (0.94 + 0.06 * e)
+    src = it["src"]
+    if src not in _ART:
+        _ART[src] = Image.open(ART_DIR / src).convert("RGBA")
+    iw, ih = _ART[src].size
+    h = w * ih / iw
+    pw, ph = int(w * cam.k), int(h * cam.k)
+    sh = bool(it.get("shadow", True)) and pal is not DARK    # 어두운 종이엔 그림자가 안 보인다
+    im = art_sprite(src, pw, ph, int(255 * min(1, e * 1.6)), sh)
+    rot = float(it.get("rot", 0.0))
+    if rot:
+        im = im.rotate(rot, expand=True, resample=Image.BICUBIC)
+    px, py = cam.pt(it["x"], it["y"] + (1 - e) * 26)
+    d._image.paste(im, (int(px - im.width / 2), int(py - im.height / 2)), im)
+    it["_px"] = (px, py, im.width, im.height)   # 뒤따르는 손글씨 좌표를 맞출 때 참고
+
+
 def i_credit(d, cam, it, p, pal):
     text_at(d, cam, it["x"], it["y"], it["text"], it.get("fs", 30), pal["mute"], "sans", it.get("anchor", "lm"),
             int(190 * ease_out(p)))
@@ -673,7 +731,8 @@ def i_credit(d, cam, it, p, pal):
 
 KIND = dict(window=i_window, hole=i_hole, circle=i_circle, cross=i_cross, check=i_check, arrow=i_arrow,
             dash=i_dash, note=i_note, chip=i_chip, stamp=i_stamp, big=i_big, figure=i_figure, plane=i_plane,
-            section=i_section, path=i_path, wall=i_wall, bars=i_bars, bench=i_bench, doc=i_doc, fog=i_fog, crack=i_crack, credit=i_credit)
+            section=i_section, path=i_path, wall=i_wall, bars=i_bars, bench=i_bench, doc=i_doc, fog=i_fog, crack=i_crack, credit=i_credit,
+            art=i_art)
 
 
 # ------------------------------------------------------------------ 장면 문법

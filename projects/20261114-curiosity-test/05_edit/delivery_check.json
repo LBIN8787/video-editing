@@ -3,7 +3,7 @@
  "output": null,
  "dry_run": false,
  "commands": [
-  "/workspace/bin/ffmpeg -hide_banner -nostdin -i projects/20261114-curiosity-test/05_edit/final.mp4 -vn -af loudnorm=I=-14:TP=-1:LRA=11:print_format=json -f null -"
+  "/workspace/bin/ffmpeg -hide_banner -nostdin -i /workspace/repos/video-editing/projects/20261114-curiosity-test/05_edit/final.mp4 -vn -af loudnorm=I=-14:TP=-1:LRA=11:print_format=json -f null -"
  ],
  "verified": false,
  "verification": [],
@@ -75,7 +75,7 @@
   {
    "check": "file size",
    "status": "PASS",
-   "value": "11.2 MB",
+   "value": "13.6 MB",
    "expected": "<= 262144 MB",
    "fix": "export.py --crf 24 or lower resolution",
    "reason": "",
@@ -111,7 +111,7 @@
   {
    "check": "true peak",
    "status": "PASS",
-   "value": "-2.3 dBTP",
+   "value": "-2.7 dBTP",
    "expected": "<= -1 dBTP",
    "fix": "loudness.py --tp -1",
    "reason": "",
