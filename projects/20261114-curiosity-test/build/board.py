@@ -542,8 +542,8 @@ def i_section(d, cam, it, p, pal):
                 continue
             polyline(d, cam, [(xx + th / 2, y1 + 54), (xx + th / 2, y1 + 108)], pal["mute"], 3, 1.0, la)
             text_at(d, cam, xx + th / 2, y1 + 146, nm, 48, pal["ink"], "pen", "mm", la, -3)
-        text_at(d, cam, cx0 + 60, cy0 + 62, "하늘", 48, pal["mute"], "pen", "lm", la)
-        text_at(d, cam, cx1 - 60, cy0 + 62, "기내", 48, pal["mute"], "pen", "rm", la)
+        text_at(d, cam, cx0 + 150, cy0 + 62, "하늘", 48, pal["mute"], "pen", "lm", la)
+        text_at(d, cam, cx1 - 150, cy0 + 62, "기내", 48, pal["mute"], "pen", "rm", la)
     # 카드 테두리 (맨 위)
     rrect(d, cam, (cx0, cy0, cx1, cy1), 26, outline=pal["ink"], width=5, prog=e)
     return hole_xy, xs
