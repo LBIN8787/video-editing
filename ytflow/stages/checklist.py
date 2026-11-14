@@ -376,6 +376,8 @@ def run(path: Path, upto: str = "G8") -> Report:
             R.add("G6", "SHOULD", "움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선)",
                   mo.get("change_events_per_min", 0) >= 8 and mo.get("static_ratio", 1) <= 0.5,
                   f"변화 {mo.get('change_events_per_min')}/분 · 정지 {mo.get('static_ratio')}")
+            if brand == "curiosity":   # v25 (2026-11-14 사용자: "사진을 잘 뽑은 정적인 동영상 같다 — 동적인 움직임을 살려라", README §2-5)
+                R.add("G6", "MUST", "curiosity 움직임: 정지 화면 비율 ≤0.3 (README §2-5)", mo.get("static_ratio", 1) <= 0.3, f"정지 {mo.get('static_ratio')}")
         el = any((path / "03_voice").glob("el*")) or any((path / "03_voice").glob("*eleven*"))
         try:
             el = el or (config.channel(ch).get("tts") or {}).get("backend") == "elevenlabs"
