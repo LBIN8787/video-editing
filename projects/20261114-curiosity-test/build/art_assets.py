@@ -23,8 +23,38 @@ RAW = PROJ / "04_assets" / "story" / "raw"
 GEN = PROJ / "04_assets" / "story" / "gen"
 
 
+def enclosed_white(near: np.ndarray, min_frac: float) -> np.ndarray:
+    """테두리와 닿지 않은 흰 덩어리(벤치 다리 사이 같은 곳)를 찾는다 — 4배 줄여서 라벨링."""
+    h, w = near.shape
+    small = near[::4, ::4] > 0
+    sh, sw = small.shape
+    seen = np.zeros_like(small, dtype=bool)
+    out = np.zeros_like(small, dtype=bool)
+    min_cells = max(4, int(min_frac * sh * sw))
+    for y0 in range(sh):
+        for x0 in range(sw):
+            if not small[y0, x0] or seen[y0, x0]:
+                continue
+            stack, cells, border = [(y0, x0)], [], False
+            seen[y0, x0] = True
+            while stack:
+                y, x = stack.pop()
+                cells.append((y, x))
+                if y in (0, sh - 1) or x in (0, sw - 1):
+                    border = True
+                for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                    ny, nx = y + dy, x + dx
+                    if 0 <= ny < sh and 0 <= nx < sw and small[ny, nx] and not seen[ny, nx]:
+                        seen[ny, nx] = True
+                        stack.append((ny, nx))
+            if not border and len(cells) >= min_cells:
+                for y, x in cells:
+                    out[y, x] = True
+    return np.kron(out, np.ones((4, 4), dtype=bool))[:h, :w]
+
+
 def cut_one(src: Path, dst: Path, white: int = 243, trim: int = 2,
-            crop: list[int] | None = None) -> tuple[int, int]:
+            crop: list[int] | None = None, fill_enclosed: float = 0.0) -> tuple[int, int]:
     im = Image.open(src).convert("RGBA")
     if crop:
         im = im.crop(tuple(int(v) for v in crop))
@@ -39,6 +69,8 @@ def cut_one(src: Path, dst: Path, white: int = 243, trim: int = 2,
         if lab.getpixel(s) == 255:
             ImageDraw.floodfill(lab, s, 128, thresh=0)
     bg = np.asarray(lab) == 128
+    if fill_enclosed:                     # 그림 안쪽에 갇힌 흰 바탕도 지운다(벤치 다리 사이 등)
+        bg = bg | enclosed_white(near, fill_enclosed)
     fg = ~bg
     ys, xs = np.where(fg)
     if len(xs) == 0:
@@ -67,7 +99,7 @@ def main() -> None:
         if not src.exists():
             print(f"[art] 건너뜀 (원본 없음): {src}")
             continue
-        w, h = cut_one(src, dst, crop=item.get("crop"))
+        w, h = cut_one(src, dst, crop=item.get("crop"), fill_enclosed=item.get("fill_enclosed", 0.0))
         print(f"[art] {src.name} → gen/{dst.name} ({w}×{h})")
 
 

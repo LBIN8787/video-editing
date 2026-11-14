@@ -1,17 +1,17 @@
 {
- "_설명": "ChatGPT(chatgpt.com, s99078634@gmail.com) 웹에서 만든 그림 — 같은 대화에서 이어 그려 그림체가 같다. raw/<file> 을 crop 으로 잘라 gen/<name>.png (투명 PNG)로 만든다. build/art_assets.py.",
+ "_설명": "ChatGPT(chatgpt.com, s99078634@gmail.com) 웹에서 같은 대화로 이어 그린 그림 — 대화 https://chatgpt.com/c/6af7ee3a-ba8c-83ec-a206-55bc82da427d. raw/<file> 을 crop 으로 잘라 gen/<name>.png (투명 PNG)로 만든다. build/art_assets.py.",
  "chat": "https://chatgpt.com/c/6af7ee3a-ba8c-83ec-a206-55bc82da427d",
  "style": "따뜻한 편집 일러스트(잉크 외곽선·크림/모래 바탕·벽돌색 포인트·종이 결), 흰 배경(#FFFFFF)",
  "art": [
   {
    "name": "passenger",
    "file": "passenger.png",
-   "note": "창가에 앉은 여행자 — 1·2·12장면"
+   "note": "창가에 앉은 여행자 — 1·16장면"
   },
   {
    "name": "window_hole",
    "file": "window_hole.png",
-   "note": "창 안쪽 유리 아래쪽의 작은 구멍 클로즈업 — 2·3·9·12장면"
+   "note": "창 안쪽 유리 아래쪽의 작은 구멍 클로즈업 — 2·3·14·16장면"
   },
   {
    "name": "plane",
@@ -22,12 +22,13 @@
     1218,
     992
    ],
-   "note": "옆에서 본 여객기 — 1·6·12장면"
+   "note": "옆에서 본 여객기 — 1장면"
   },
   {
    "name": "bench",
    "file": "bench.png",
-   "note": "벤치에 앉아 기다리는 예비 선수 — 9장면"
+   "note": "벤치에 앉아 기다리는 예비 선수 — 11장면",
+   "fill_enclosed": 0.004
   },
   {
    "name": "fog_left",
@@ -38,7 +39,7 @@
     748,
     978
    ],
-   "note": "김 서린 창 — 11장면"
+   "note": "김 서린 창 — 15장면"
   },
   {
    "name": "fog_right",
@@ -49,12 +50,44 @@
     1506,
     978
    ],
-   "note": "구멍이 있어 깨끗한 창 — 11장면"
+   "note": "구멍이 있어 깨끗한 창 — 15장면"
   },
   {
    "name": "section",
    "file": "section.png",
-   "note": "창 단면(세 겹) 손그림 도해 — 4·5·7장면 바탕"
+   "note": "v2: 세 겹 창 단면(정면·직각) 손그림 — 4·5·6·7·9장면의 바탕. 이름표는 렌더러가 위에 얹는다"
+  },
+  {
+   "name": "cabin",
+   "file": "cabin.png",
+   "note": "v2: 기내가 열린 여객기 단면(사람·구름) — 8장면(0.23 vs 0.75기압)"
+  },
+  {
+   "name": "gate",
+   "file": "gate.png",
+   "note": "v2: 돌벽과 작은 나무 문, 문으로 빠져나가는 바람 — 10장면 지름길 비유"
+  },
+  {
+   "name": "vintage",
+   "file": "era_sheet.png",
+   "crop": [
+    40,
+    100,
+    1270,
+    540
+   ],
+   "note": "v2: 1950년대 초기 제트 여객기(네모난 창) — 13장면"
+  },
+  {
+   "name": "acrylic",
+   "file": "era_sheet.png",
+   "crop": [
+    1510,
+    20,
+    2010,
+    690
+   ],
+   "note": "v2: 구멍 뚫린 두꺼운 아크릴 창 한 장 — 14장면"
   }
  ]
 }

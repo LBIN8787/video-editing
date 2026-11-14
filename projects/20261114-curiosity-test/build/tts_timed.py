@@ -30,7 +30,7 @@ VOICE = PROJ / "03_voice"
 FF = "ffmpeg"
 FP = "ffprobe"
 VOICE_ID = "ko-KR-InJoonNeural"
-RATE = "+8%"
+RATE = "+0%"   # v2: 자연 속도 — v1 의 +8% 가 빠르다는 지적을 반영
 
 
 def sh(args: list[str]) -> None:
@@ -143,7 +143,7 @@ def main() -> None:
         # 앞뒤 무음 + 문장 사이 긴 침묵만 줄인다 (0.45초 넘는 침묵 → 0.30초).
         # prosody 는 edge-tts 그대로 두고 '숨 쉴 틈 없는' 이야기 리듬만 만든다.
         sh(["-i", str(mp3), "-af",
-            "silenceremove=start_periods=1:start_threshold=-40dB:stop_periods=-1:stop_duration=0.45:stop_threshold=-40dB:stop_silence=0.30,"
+            "silenceremove=start_periods=1:start_threshold=-40dB:stop_periods=-1:stop_duration=0.55:stop_threshold=-40dB:stop_silence=0.36,"
             "areverse,silenceremove=start_periods=1:start_threshold=-40dB,areverse,loudnorm=I=-16:TP=-1.5",
             "-ar", "48000", "-ac", "2", str(wav)])
         raw.unlink(missing_ok=True)
@@ -158,11 +158,13 @@ def main() -> None:
             print(f"[voice] #{sid} {d}s · 받아쓰기 정렬 실패 → 비례 배분")
         else:
             print(f"[voice] #{sid} {d}s · 단어 {len(words)}개 정렬")
-        timing[str(sid)] = {"dur": d, "chars": ct, "narration": s["narration"]}
+        timing[str(sid)] = {"dur": d, "chars": ct, "narration": s["narration"],
+                            "gap": float(s.get("gap", 0.12))}
     (VOICE / "durations.json").write_text(json.dumps(durs, ensure_ascii=False, indent=1), encoding="utf-8")
     (VOICE / "timings.json").write_text(json.dumps(timing, ensure_ascii=False), encoding="utf-8")
     total = sum(durs.values())
-    print(f"[voice] 장면 {len(durs)}개 · 말소리 {total:.2f}s (+장면 사이 0.12s → {total + 0.12 * len(durs):.2f}s)")
+    gaps = sum(float(s.get("gap", 0.12)) for s in scenes)
+    print(f"[voice] 장면 {len(durs)}개 · 말소리 {total:.2f}s (+장면 사이 숨 {gaps:.2f}s → {total + gaps:.2f}s)")
 
 
 if __name__ == "__main__":

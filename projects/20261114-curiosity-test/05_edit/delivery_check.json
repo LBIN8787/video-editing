@@ -12,7 +12,7 @@
   {
    "check": "duration",
    "status": "PASS",
-   "value": "46.29s",
+   "value": "123.95s",
    "expected": "<= 43200s",
    "fix": "decide with the user: cut.py keeps quality but drops content; fit.py --duration speeds up (audio pitch-preserved, motion faster)",
    "reason": "",
@@ -75,7 +75,7 @@
   {
    "check": "file size",
    "status": "PASS",
-   "value": "13.6 MB",
+   "value": "32.0 MB",
    "expected": "<= 262144 MB",
    "fix": "export.py --crf 24 or lower resolution",
    "reason": "",
@@ -111,7 +111,7 @@
   {
    "check": "true peak",
    "status": "PASS",
-   "value": "-2.7 dBTP",
+   "value": "-2.4 dBTP",
    "expected": "<= -1 dBTP",
    "fix": "loudness.py --tp -1",
    "reason": "",

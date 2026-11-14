@@ -578,36 +578,55 @@ def i_bench(d, cam, it, p, pal):
     polyline(d, cam, [(x + 46, y + 150), (x + w - 46, y + 150)], pal["ink"], 6, e, 170)
 
 
+def wobble_pts(x0, y0, x1, y1, amp=2.2, n=26, seed=0):
+    """손으로 그은 듯 살짝 흔들리는 사각 테두리 점들."""
+    rng = np.random.default_rng(seed)
+    pts = []
+    for (ax, ay, bx, by) in ((x0, y0, x1, y0), (x1, y0, x1, y1), (x1, y1, x0, y1), (x0, y1, x0, y0)):
+        for i in range(n):
+            t = i / n
+            pts.append((ax + (bx - ax) * t + float(rng.normal(0, amp)),
+                        ay + (by - ay) * t + float(rng.normal(0, amp))))
+    pts.append(pts[0])
+    return pts
+
+
 def i_doc(d, cam, it, p, pal):
-    """규정 문서 한 장: 머리글 · 회색 글줄 · 형광펜 문구 · 도장."""
+    """규정 문서 한 장 — 그림판에 테이프로 붙인, 누렇게 바랜 종이. (v2: 흰 카드가 아니라 종이로)"""
     x, y, w, h = it["x"], it["y"], it["w"], it["h"]
     e = ease_out(p)
-    shadow(d, cam, x + w / 2 + 18, y + h / 2 + 22, w * 0.52, h * 0.52, pal, 50)
-    rrect(d, cam, (x, y, x + w, y + h), 14, fill=pal["cream"], outline=shade(pal["ink"], 0.3, pal["cream"]), width=4)
+    paper = shade(pal["wood"] if pal is not DARK else pal["cream"], 0.45, pal["cream"])
+    ink = shade(pal["ink"], 0.92, paper)
+    shadow(d, cam, x + w / 2 + 20, y + h / 2 + 26, w * 0.52, h * 0.52, pal, 55)
+    rrect(d, cam, (x, y, x + w, y + h), 8, fill=paper, outline=None, width=4)
+    for tx in (x + w * 0.05, x + w * 0.81):                 # 위쪽 두 귀퉁이에 마스킹 테이프
+        d.rounded_rectangle([cam.pt(tx, y - 30), cam.pt(tx + w * 0.14, y + 26)], radius=cam.ln(4),
+                            fill=rgba(pal["mark"], int(120 * e)))
+    polyline(d, cam, wobble_pts(x, y, x + w, y + h, 2.0, 26, 3), ink, 3.5, e, 190, close=True)
     # 머리글
-    polyline(d, cam, [(x + w * 0.08, y + h * 0.14), (x + w * 0.92, y + h * 0.14)], pal["ink"], 3, e, 120)
     text_at(d, cam, x + w * 0.08, y + h * 0.075, it.get("head", "AC 25.775-1"), it.get("head_fs", 46),
-            pal["ink"], "sansx", "lm", int(255 * e))
-    text_at(d, cam, x + w * 0.08, y + h * 0.185, it.get("sub", "Windows and Windshields · FAA · 2003. 1. 17"),
+            ink, "serif", "lm", int(255 * e))
+    polyline(d, cam, [(x + w * 0.08, y + h * 0.145), (x + w * 0.92, y + h * 0.145)], ink, 2.2, e, 150)
+    text_at(d, cam, x + w * 0.08, y + h * 0.19, it.get("sub", "Windows and Windshields · FAA · 2003. 1. 17"),
             it.get("sub_fs", 30), pal["mute"], "sans", "lm", int(255 * e))
-    # 회색 글줄
+    # 회색 글줄 (연필로 그은 밑줄처럼)
     for k in range(it.get("lines", 7)):
         yy = y + h * (0.27 + 0.045 * k)
         ww = w * (0.84 if k % 3 else 0.62)
-        polyline(d, cam, [(x + w * 0.08, yy), (x + w * 0.08 + ww, yy)], pal["mute"], 7, e, 55)
-    # 형광펜 문구
+        polyline(d, cam, [(x + w * 0.08, yy), (x + w * 0.08 + ww, yy)], pal["mute"], 6, e, 40)
+    # 형광펜 문구 + 손글씨 풀이
+    gl = it.get("glosses") or []
     for k, q in enumerate(it.get("quotes", [])):
         qy = y + h * (0.62 + 0.10 * k)
         fw = w * 0.84
         if k == 0:
-            d.rounded_rectangle([cam.pt(x + w * 0.06, qy - 38), cam.pt(x + w * 0.06 + fw, qy + 18)],
-                                radius=cam.ln(6), fill=rgba(pal["mark"], int(140 * e)))
-        text_at(d, cam, x + w * 0.08, qy, q, it.get("quote_fs", 34), pal["ink"], "sansb", "lm", int(255 * e), max_w=w * 0.82)
-        gl = (it.get("glosses") or [])
+            d.rounded_rectangle([cam.pt(x + w * 0.06, qy - 40), cam.pt(x + w * 0.06 + fw, qy + 16)],
+                                radius=cam.ln(4), fill=rgba(pal["mark"], int(135 * e)))
+        text_at(d, cam, x + w * 0.08, qy, q, it.get("quote_fs", 34), ink, "serif", "lm", int(255 * e), max_w=w * 0.82)
+        polyline(d, cam, [(x + w * 0.06, qy + 24), (x + w * 0.06 + fw * 0.72, qy + 26)], pal["red"], 2.2, e, 150)
         if k < len(gl):
-            text_at(d, cam, x + w * 0.08, qy + 34, gl[k], it.get("gloss_fs", 26), pal["mute"], "sans", "lm",
+            text_at(d, cam, x + w * 0.08, qy + 62, gl[k], it.get("gloss_fs", 28), pal["mute"], "pen", "lm",
                     int(235 * e), max_w=w * 0.82)
-        polyline(d, cam, [(x + w * 0.06, qy + 62), (x + w * 0.06 + fw, qy + 62)], pal["ink"], 2, e, 80)
 
 
 def i_fog(d, cam, it, p, pal):
@@ -665,6 +684,44 @@ def i_wall(d, cam, it, p, pal):
 def i_path(d, cam, it, p, pal):
     col = pal[it.get("color", "ink")]
     polyline(d, cam, [tuple(q) for q in it["pts"]], col, it.get("sw", 8), ease_out(p), it.get("alpha", 255))
+
+
+def i_penpath(d, cam, it, p, pal):
+    """여러 점을 잇는 펜 선. dash=(on,off) 를 주면 점선(돌아가는 길)."""
+    pts = [tuple(q) for q in it["pts"]]
+    e = ease_out(p)
+    col = pal[it.get("color", "ink")]
+    sw = it.get("sw", 4)
+    alpha = it.get("alpha", 255)
+    dash = it.get("dash")
+    if not dash:
+        polyline(d, cam, pts, col, sw, e, alpha)
+        return
+    on, off = dash
+    total = sum(math.dist(pts[i], pts[i + 1]) for i in range(len(pts) - 1))
+    limit = total * e
+    walked = 0.0
+    for i in range(len(pts) - 1):
+        (x0, y0), (x1, y1) = pts[i], pts[i + 1]
+        seg = math.dist((x0, y0), (x1, y1))
+        n = max(1, int(seg / 2))
+        for k in range(n):
+            t0, t1 = k / n, (k + 1) / n
+            if walked >= limit:
+                return
+            if (walked % (on + off)) < on:
+                polyline(d, cam, [(x0 + (x1 - x0) * t0, y0 + (y1 - y0) * t0),
+                                  (x0 + (x1 - x0) * t1, y0 + (y1 - y0) * t1)], col, sw, 1.0, alpha)
+            walked += seg / n
+
+
+def i_fillrect(d, cam, it, p, pal):
+    """종이 위에 형광펜으로 칠한 면 (사이 공기가 차오르는 표시)."""
+    e = ease_out(p)
+    x0, y0, x1, y1 = it["x0"], it["y0"], it["x1"], it["y1"]
+    yy = y1 - (y1 - y0) * e
+    d.rectangle([cam.pt(x0, yy), cam.pt(x1, y1)], fill=rgba(pal[it.get("color", "mark")], int(it.get("alpha", 95))))
+
 
 
 ART_DIR = PROJ / "04_assets" / "story" / "gen"
@@ -732,7 +789,7 @@ def i_credit(d, cam, it, p, pal):
 KIND = dict(window=i_window, hole=i_hole, circle=i_circle, cross=i_cross, check=i_check, arrow=i_arrow,
             dash=i_dash, note=i_note, chip=i_chip, stamp=i_stamp, big=i_big, figure=i_figure, plane=i_plane,
             section=i_section, path=i_path, wall=i_wall, bars=i_bars, bench=i_bench, doc=i_doc, fog=i_fog, crack=i_crack, credit=i_credit,
-            art=i_art)
+            art=i_art, penpath=i_penpath, fillrect=i_fillrect)
 
 
 # ------------------------------------------------------------------ 장면 문법
@@ -778,7 +835,7 @@ def item_time(it, timing, last_idx):
 def render_scene(sc, timing, bg_cache, out_path: Path, voice_dur: float, still_at: float | None = None):
     bg = bg_cache[sc.get("bg", "paper")]
     pal = PALETTES[sc.get("bg", "paper")]
-    total = voice_dur + GAP
+    total = voice_dur + float(sc.get("gap", GAP))
     # 아이템 시각
     last = 0
     items = []

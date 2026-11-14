@@ -54,7 +54,7 @@ def main() -> None:
             times.append(w["s"] + (w["e"] - w["s"]) * (i / max(len(wt), 1)))
     lines = []
     for ln in (ED / "subs.ass").read_text(encoding="utf-8").splitlines():
-        if not ln.startswith("Dialogue:") or "SubBox" not in ln:
+        if not ln.startswith("Dialogue:") or ",SubOne," not in ln:
             continue
         parts = ln.split(",", 9)
         lines.append({"start": t_sec(parts[1]), "end": t_sec(parts[2]), "text": parts[9].strip()})

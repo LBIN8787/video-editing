@@ -50,7 +50,19 @@ def chunk(text: str, mx: int = 24) -> list[str]:
 def main() -> None:
     scenes = json.loads(SRC.read_text(encoding="utf-8"))["scenes"]
     tim = json.loads(TIM.read_text(encoding="utf-8"))
-    header = ASS.read_text(encoding="utf-8").split("[Events]")[0] + "[Events]\n"
+    head = ASS.read_text(encoding="utf-8").split("[Events]")[0]
+    # 자막 한 겹으로 그린다(상자 + 흰 글자). 예전처럼 상자용·글자용 두 겹을 겹치면
+    # libass 가 두 줄로 밀어내 상자와 글자가 어긋난다.
+    if "Style: SubOne," not in head:
+        sub_one = ("Style: SubOne,NanumGothic,44,&H00FFFFFF,&H00FFFFFF,&H50101010,&H50101010,0,0,0,0,100,100,0,0,"
+                   "3,12,0,2,80,80,50,1")
+        lines = head.splitlines()
+        for i, ln in enumerate(lines):
+            if ln.startswith("Style: SubText,"):
+                lines.insert(i + 1, sub_one)
+                break
+        head = "\n".join(lines) + "\n"
+    header = head + "[Events]\n"
     ev, srt, n = [], [], 1
     t_scene = 0.0
     for s in scenes:
@@ -74,17 +86,16 @@ def main() -> None:
             t1 = cmap.get(a1, t_scene + d) if li + 1 < len(lines) else t_scene + d
             if t1 <= t0:
                 t1 = t0 + max(0.6, len(ln) * 0.12)
-            t0 = t_scene + max(0.0, t0 - 0.04)
-            t1 = t_scene + min(d, t1 + 0.12)
+            t0 = t_scene + max(0.0, t0)
+            t1 = t_scene + min(d, t1)
             styled = ln
             for w in sorted(s.get("emphasis") or [], key=len, reverse=True):
                 if w and w in styled:
                     styled = styled.replace(w, f"{{\\c{EMPH}}}{w}{{\\c{SUB}}}", 1)
-            ev.append(f"Dialogue: 0,{ts_ass(t0)},{ts_ass(t1)},SubBox,,0,0,0,,{ln}")
-            ev.append(f"Dialogue: 1,{ts_ass(t0)},{ts_ass(t1)},SubText,,0,0,0,,{styled}")
+            ev.append(f"Dialogue: 0,{ts_ass(t0)},{ts_ass(t1)},SubOne,,0,0,0,,{styled}")
             srt.append(f"{n}\n{ts_srt(t0)} --> {ts_srt(t1)}\n{ln}\n")
             n += 1
-        t_scene += d + 0.12
+        t_scene += d + float(tim[str(s["id"])].get("gap", 0.12))
     ASS.write_text(header + "\n".join(ev) + "\n", encoding="utf-8")
     SRT.write_text("\n".join(srt) + "\n", encoding="utf-8")
     print(f"[subs] {n - 1}줄 · 마지막 {t_scene:.2f}s → {ASS.name}, {SRT.name}")
