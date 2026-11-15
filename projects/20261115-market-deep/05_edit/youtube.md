@@ -13,13 +13,17 @@
 
 📌 챕터
 0:00 오프닝
-0:56 1. 무슨 일이 있었나
-2:05 2. 시장의 첫 반응
-3:20 3. 어디가 흔들렸나
-6:11 4. 칩보다 먼저 흔들리는 것
-7:48 5. 연준이 본 같은 고리
-9:44 6. 한국으로 이어지는 줄
-11:42 7. 주의할 점
+1:07 1. 무슨 일이 있었나
+2:47 2. 공시에 이미 적혀 있던 위험
+3:29 3. 시장의 첫 반응
+4:44 4. 어디가 흔들렸나
+7:34 5. 칩보다 먼저 흔들리는 것
+9:12 6. 직접 계산해 본 약속의 크기
+10:15 7. 연준이 본 같은 고리
+12:11 8. 창업자가 떠난 날, 같은 틀로
+13:58 9. 한국으로 이어지는 줄
+15:56 10. 주의할 점
+17:42 11. 확인할 신호 셋
 
 📚 출처
 - https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm
@@ -27,6 +31,7 @@
 - https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435490
 - https://www.sec.gov/Archives/edgar/data/1045810/000104581026000065/information_table.xml
 - https://www.sec.gov/Archives/edgar/data/1045810/000104581026000062/primary_doc.xml
+- https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm
 - https://www.sec.gov/Archives/edgar/data/1045810/000104581026000073/q2fy27cfocommentary.htm
 - https://www.federalreserve.gov/publications/files/financial-stability-report-20261113.pdf
 - https://www.hankyung.com/article/202611135324i
@@ -50,6 +55,6 @@
 
 ## 체크
 - 공개 예약: 한국 시간 08:00 (평일)  - 재생목록: 아침 브리핑 / 심층 / 주간
-- 챕터 8개 (유튜브는 3개 이상·각 10초 이상이어야 표시)
+- 챕터 12개 (유튜브는 3개 이상·각 10초 이상이어야 표시)
 - '변경되거나 합성된 콘텐츠': 실제 인물·사건처럼 보이는 합성 없음 → 아니요 (AI 목소리 사용은 설명란·채널 정보에 밝힘)
 - 고정 댓글: 정정이 생기면 여기에 (manual/09 §12)
