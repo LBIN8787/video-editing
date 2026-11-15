@@ -179,7 +179,7 @@ def build() -> dict:
                           "why": "언제 쓰나·쓰지 않나·대신이 정해지지 않음 — usage.yaml (스타일은 레시피 when·fits, 기법은 techniques.yaml) 에 초안을 써서 확인받기"})
     # 제안함 (담당이 아닌 에이전트가 남긴 것, docs/35) — 담당이 반영하거나 사용자에게 묻는다
     from . import governance as gv
-    for p in gv.proposals("new"):
+    for p in gv.proposals("open"):
         items.append({"kind": "proposal", "level": "ask", "file": p["file"], "line": 0, "text": f"[{p.get('kind')}] {p['text'][:140]}",
                       "why": f"{p.get('from_branch')} 의 제안 — 담당이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로"})
     # 주제 레포가 가리키는 장면·기법이 있나
