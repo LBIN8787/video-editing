@@ -1,0 +1,46 @@
+# 주제 레포: 호기심 (curiosity) — "궁금증을 풀고 싶다". 이야기가 목적, 정보는 그 안에 (README §1-1).
+id: curiosity
+name: 호기심 · 이야기
+inherits: main
+channels: [ch-knowledge]
+manual: [manual/04-curiosity.md]
+look: 칠판·종이 무대 (05 §0-7)
+defaults:
+  backbone: [story, stage]  # 04 §0-4·0-5 뼈대 스타일
+  camera: fixed             # 04 §0-5: 카메라는 고정이 기본, 시간·공간 이동일 때만
+  script_review: true       # v23 편집 전 대본만 사용자 검토
+  knowledge_ratio: 0.3      # v23 지식 문장 ≤30%
+situations:
+  override:
+    open-scene:
+      scenes: [stage, story, kb]
+      techniques: [draw-on, parallax-photo]
+      why: 때·곳·사람이 있는 여는 장면 → 질문 하나 (README §2-3, 04 §0-6)
+    change:
+      scenes: [stage]
+      techniques: [morph, match-move]
+      why: 동사를 그림이 연기 — 쓰러지다·닫다·바뀌다 (04 §0-5)
+  add:
+    character-acts:
+      name: 주인공이 무언가를 한다
+      signals: ['걸어', '앉', '일어나', '집어', '닫', '열었', '쓰러', '들고', '만들었', '시도했']
+      scenes: [stage, story]
+      techniques: [stagger, draw-on]
+      avoid: 사진·쪽지를 쌓기, 소제목 글자
+      why: 한 화면 한 생각, 대본의 동사를 그림이 (v22)
+    reveal:
+      name: 답을 밝히는 순간 (반전)
+      signals: ['사실은', '알고 보니', '바로', '그 답은', '이름이 붙', '역설']
+      scenes: [stage, card_type]
+      techniques: [morph, match-move, pull-back]
+      avoid: 답을 앞에서 미리 말하기
+      why: 훅에서 숨긴 답을 회수 (04 §0-1 payoff)
+    scale:
+      name: 크기·시간의 규모를 느낀다
+      signals: ['억 년', '만 년', '배나', '수천', '수만', '맨 끝', '한 점']
+      scenes: [stage, people, timeline]
+      techniques: [stagger, pull-back]
+      avoid: 큰 숫자 글자만
+      why: 규모는 크기·위치로 (04 §0-5 '긴 길과 한 점')
+  drop: [command, ai-ask, rank]
+avoid_techniques: [whip-pan, gl-transitions]

@@ -415,6 +415,9 @@ def run(path: Path, upto: str = "G8") -> Report:
         R.add("G5", "SHOULD", "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)", not rec or skin in rec, f"{skin} / 등록부 {sorted(rec)}")
         sp = path / "01_research" / "style_pick.json"
         R.add("G5", "SHOULD", "style-pick 기록 (상황에 맞춘 스타일 선택)", sp.exists(), "python -m ytflow style-pick <프로젝트>")
+        ep = path / "02_script" / "EDIT_CONTEXT.md"   # 메인 → 주제 레포 → 이 영상 (docs/33)
+        R.add("G5", "SHOULD", "edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움)", ep.exists(),
+              "python -m ytflow edit-plan <프로젝트> → 02_script/EDIT_CONTEXT.md")
 
     if last >= 5:  # G6 완성본
         R.add("G6", "MUST", "final.mp4", (edt / "final.mp4").exists(), "")

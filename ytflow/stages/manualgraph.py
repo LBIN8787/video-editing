@@ -360,7 +360,8 @@ def source_hash() -> str:
     import hashlib
     h = hashlib.sha1()
     files = sorted([*MANUAL.glob("*.md"), *MANUAL.glob("*.yaml"), MANUAL / "VERSION",
-                    *(ROOT / "styles" / "recipes").glob("*.yaml"), *(ROOT / "skins").glob("*/skin.yaml"), TECHNIQUES])
+                    *(ROOT / "styles" / "recipes").glob("*.yaml"), *(ROOT / "skins").glob("*/skin.yaml"), TECHNIQUES,
+                    *(ROOT / "topics").glob("*/topic.yaml")])
     for f in files:
         if f.exists():
             h.update(f.name.encode()); h.update(f.read_bytes())
@@ -946,7 +947,60 @@ def build() -> dict:
         for r in t.get("related", []):
             if r in tnode:
                 tnode[r].setdefault("techniques", []).append(t["id"])
-    lex = [t for t in lex if t["mentioned_in"] or t["cat"] in ("style", "motion", "measure", "fx", "technique") or t["used_by"]]
+    # ---- 레포 층: 메인 → 주제 레포 → 상황 → 영상 (docs/33)
+    from . import layers as _ly
+    layer_nodes, sit_refs = [], set()
+    try:
+        corp = _ly.corpus()
+    except Exception:
+        corp = {}
+    main_sits = _ly.main_situations()
+    layer_nodes.append({"id": "layer:main", "kind": "layer", "label": "메인 레포 — 편집 매뉴얼", "situations": list(main_sits),
+                        "techniques": len(_ly.techniques())})
+    for k, v in main_sits.items():
+        layer_nodes.append({"id": f"sit:main:{k}", "kind": "situation", "topic": "main", "key": k, "label": v.get("name", k),
+                            "origin": "main", "scenes": v.get("scenes") or [], "techniques": v.get("techniques") or [],
+                            "avoid": v.get("avoid", ""), "why": v.get("why", ""), "signals": (v.get("signals") or [])[:6]})
+        E("layer:main", f"sit:main:{k}", "has")
+        sit_refs |= set(v.get("scenes") or [])
+    for tid in _ly.topic_ids():
+        eff = _ly.resolve(tid)
+        c = corp.get(tid, {"projects": [], "situations": {}})
+        layer_nodes.append({"id": f"topic:{tid}", "kind": "topic", "key": tid, "label": eff["name"], "look": eff["look"],
+                            "defaults": eff["defaults"], "avoid_techniques": eff["avoid_techniques"], "manual": eff["manual"],
+                            "channels": eff["channels"], "added": eff["added"], "overridden": eff["overridden"], "dropped": eff["dropped"],
+                            "situations": list(eff["situations"]), "projects": c["projects"]})
+        E("layer:main", f"topic:{tid}", "inherits")
+        for f in eff["manual"]:
+            d = file_to_doc.get(f)
+            if d:
+                E(f"topic:{tid}", d["id"], "guided_by")
+        for k, v in eff["situations"].items():
+            st = c["situations"].get(k, {})
+            sid = f"sit:{tid}:{k}"
+            layer_nodes.append({"id": sid, "kind": "situation", "topic": tid, "key": k, "label": v.get("name", k), "origin": v["origin"],
+                                "scenes": v.get("scenes") or [], "techniques": v["techniques_ok"], "blocked": v["techniques_blocked"],
+                                "base_scenes": v.get("base_scenes"), "avoid": v.get("avoid", ""), "why": v.get("why", ""),
+                                "signals": (v.get("signals") or [])[:6], "count": st.get("count", 0), "fit": st.get("fit", 0),
+                                "examples": st.get("examples", [])})
+            E(f"topic:{tid}", sid, "has")
+            if v["origin"] != "add":
+                E(sid, f"sit:main:{k}", "from_main")
+            sit_refs |= set(v.get("scenes") or [])
+        for pr in c["projects"]:
+            eid = f"ep:{pr['project']}"
+            layer_nodes.append({"id": eid, "kind": "episode", "topic": tid, "label": pr["project"], **pr})
+            E(f"topic:{tid}", eid, "episode")
+    for n in layer_nodes:
+        if n["kind"] == "situation":
+            for sc in n["scenes"]:
+                if f"term:{sc}" in tnode:
+                    E(n["id"], f"term:{sc}", "uses")
+            for tq in n["techniques"]:
+                if f"term:tech-{tq}" in tnode:
+                    E(n["id"], f"term:tech-{tq}", "uses")
+    lex = [t for t in lex if t["mentioned_in"] or t["cat"] in ("style", "motion", "measure", "fx", "technique") or t["used_by"]
+           or t["key"] in sit_refs]
     bans = prohibitions(secs)
     tiers_ov = load_tiers()
     vers_applied = {v["v"]: sorted({a["project"] for a in v["applied"]}) for v in versions}
@@ -975,7 +1029,7 @@ def build() -> dict:
             E(f["id"], f"theme:{t}", "about")
         if f.get("intent"):
             E(f["id"], f["intent"], "clarifies" if f["about"] else "quoted_as")
-    nodes = steps + gates + channels + docs + secs + rules + checks + versions + reviews + themes + codes + intent_nodes + lex + fbs
+    nodes = steps + gates + channels + docs + secs + rules + checks + versions + reviews + themes + codes + intent_nodes + lex + fbs + layer_nodes
     cur = _read(MANUAL / "VERSION").strip() or "0"
     stats = {
         "manual_version": int(cur),
@@ -986,6 +1040,8 @@ def build() -> dict:
         "intents": len(intent_nodes), "misaligned": sum(i["status"] == "misaligned" for i in intent_nodes),
         "intents_reviewed": sum(i["annotated"] for i in intent_nodes), "conflicts": len(conflicts), "code": len(codes),
         "terms": len(lex), "bans": len(bans), "feedback": len(fbs),
+        "topics": sum(1 for n in layer_nodes if n["kind"] == "topic"), "episodes": sum(1 for n in layer_nodes if n["kind"] == "episode"),
+        "main_situations": len(main_sits),
         "tiers": {k: sum(1 for x in bans + rules if x.get("tier") == k) for k in TIER},
         "overfit": sum(1 for x in bans + rules + checks if x.get("overfit")),
         "principle_bans": sum(1 for b in bans if b.get("tier") == "principle"),

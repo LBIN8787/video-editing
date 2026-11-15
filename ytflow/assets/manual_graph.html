@@ -161,6 +161,27 @@ svg .muted{fill:var(--muted)}
 @media (max-width:640px){.pol{grid-template-columns:minmax(0,1fr)}}
 .pol div{font-size:12px;display:flex;flex-direction:column;gap:6px;min-width:0}
 .pol p{margin:0;padding:6px 8px;border-radius:4px;background:var(--sunk)}
+/* 레포 구조 */
+.repo{padding:14px;display:flex;flex-direction:column;gap:14px}
+.rmain{border:2px solid var(--fg);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;cursor:pointer;background:var(--panel)}
+.rmain h3{margin:0;font-size:16px} .rmain p{margin:0;font-size:12.5px;color:var(--muted)}
+.rstats{display:flex;flex-wrap:wrap;gap:6px}
+.rstats span{font-size:11.5px;font-family:var(--mono);padding:2px 8px;border-radius:10px;background:var(--sunk)}
+.rinherit{font-size:11.5px;color:var(--muted);padding-left:22px;position:relative}
+.rinherit::before{content:"";position:absolute;left:10px;top:-14px;bottom:-14px;border-left:2px solid var(--line)}
+.rtopics{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;position:relative;padding-left:22px}
+.rtopics::before{content:"";position:absolute;left:10px;top:-14px;bottom:50%;border-left:2px solid var(--line)}
+.rtopic{all:unset;box-sizing:border-box;cursor:pointer;border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:6px;padding:10px;display:flex;flex-direction:column;gap:6px;min-width:0;background:var(--panel)}
+.rtopic[aria-pressed="true"]{outline:2px solid var(--accent)}
+.rtopic b{font-size:14px} .rtopic small{color:var(--muted);font-size:11.5px}
+.sitrow{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.4fr);gap:4px 12px;padding:8px 10px;border-radius:5px;border-left:4px solid var(--line);background:var(--sunk);font-size:12.5px}
+@media (max-width:700px){.sitrow{grid-template-columns:minmax(0,1fr)}}
+.sitrow:hover,.sitrow:focus-visible{outline:2px solid var(--accent)}
+.sitrow.add{border-color:var(--pass)} .sitrow.override{border-color:var(--pend)} .sitrow.main{border-color:var(--line)}
+.sitrow .chips{gap:3px}
+.eprow{display:grid;grid-template-columns:minmax(0,1fr) 70px 70px;gap:8px;align-items:center;font-size:12.5px;padding:6px 8px;border-radius:4px;background:var(--sunk);cursor:pointer}
+.eprow:hover{outline:2px solid var(--accent)}
+.mini{height:6px;border-radius:3px;background:var(--line);overflow:hidden}.mini span{display:block;height:100%;background:var(--accent)}
 /* 작업 절차 */
 .proc-wrap{padding:10px 8px 16px;display:flex;justify-content:center}
 .proc-wrap svg{width:100%;max-width:560px;height:auto;display:block}
@@ -307,7 +328,7 @@ button.tile:hover,button.tile:focus-visible{border-color:var(--accent)}
   </header>
   <div class="tiles" id="tiles"></div>
   <nav class="tabs" aria-label="보기">
-    <a href="#now">한눈에</a><a href="#proc">작업 절차</a><a href="#align">의도 정렬</a><a href="#flow">내 피드백 → 매뉴얼</a><a href="#map">매뉴얼 구조</a><a href="#timeline">버전 타임라인</a><a href="#terms">용어 사전</a><a href="#edit">고치기·제어</a>
+    <a href="#repo">레포 구조</a><a href="#now">한눈에</a><a href="#proc">작업 절차</a><a href="#align">의도 정렬</a><a href="#flow">내 피드백 → 매뉴얼</a><a href="#map">매뉴얼 구조</a><a href="#timeline">버전 타임라인</a><a href="#terms">용어 사전</a><a href="#edit">고치기·제어</a>
   </nav>
   <div class="grid">
     <main id="view" class="stage"></main>
@@ -353,6 +374,9 @@ function nodeName(n){
     case "code": return `${n.file.replace("ytflow/stages/","")}:${n.line}`;
     case "intent": return `“${n.quote}”`;
     case "term": return n.name;
+    case "situation": return `${n.label} (${n.topic === "main" ? "메인" : n.topic})`;
+    case "episode": return n.project;
+    case "topic": case "layer": return n.label;
     default: return n.label || n.id;
   }
 }
@@ -703,6 +727,86 @@ function renderAlign(){
     try { await api("/api/intent-pending", {text}); toast("반영 대기에 넣었습니다. 고치기 전까지 check G0 가 실패합니다"); await reload(); } catch (e) { toast(e.message); } };
 }
 
+/* ---------- 레포 구조: 메인 → 주제 레포 → 상황 → 영상 ---------- */
+let repoTopic = null;
+const ORIGIN = {main: "메인 그대로", override: "주제가 바꿈", add: "주제가 더함"};
+function scChip(sc){ const id = "term:" + sc; return N[id] ? `<button class="tchip" data-term="${esc(id)}"><i>장면</i>${esc(sc)}</button>` : `<span class="chip">${esc(sc)}</span>`; }
+function tqChip(t){ const id = "term:tech-" + t, n = N[id]; return n ? `<button class="tchip" data-term="${esc(id)}"><i>${esc(n.tech_status_label || "")}</i>${esc(n.short || n.name)}</button>` : `<span class="chip">${esc(t)}</span>`; }
+function renderRepo(){
+  const S = G.stats, main = N["layer:main"];
+  const topics = G.nodes.filter(n => n.kind === "topic");
+  if (!repoTopic || !N["topic:" + repoTopic]) repoTopic = (topics.find(t => t.key === "market") || topics[0] || {}).key;
+  const T = N["topic:" + repoTopic];
+  const tiers = S.tiers || {};
+  const sits = T ? T.situations.map(k => N[`sit:${T.key}:${k}`]).filter(Boolean) : [];
+  const grp = o => sits.filter(x => x.origin === o).sort((a, b) => b.count - a.count);
+  const sitRow = x => `<div class="sitrow ${x.origin}" role="button" tabindex="0" data-go="${esc(x.id)}">
+      <div><b>${esc(x.label)}</b><br><small style="color:var(--muted)">${esc(ORIGIN[x.origin])}${x.count ? ` · 이 주제 영상에서 ${x.count}장면 · 지금 장면 종류가 맞음 ${Math.round(x.fit / x.count * 100)}%` : " · 아직 나온 적 없음"}</small></div>
+      <div class="chips">${x.scenes.map(scChip).join("")}${x.techniques.map(tqChip).join("")}${(x.blocked || []).map(t => `<span class="chip" style="text-decoration:line-through" title="이 주제에서 기본으로 쓰지 않음">${esc(t)}</span>`).join("")}</div></div>`;
+  $("#view").innerHTML = `
+    <div class="stage-head"><h2>레포 구조 — 메인 매뉴얼에서 주제별로, 상황에 맞춰 영상까지</h2>
+      <span class="hint">메인은 모든 영상의 편집 매뉴얼입니다. 주제 레포(주식·호기심·AI·시사)는 메인을 물려받아 다른 것만 바꾸고 더하며, 영상 한 편은 대본의 박자마다 '상황'을 찾아 그 주제의 장면·연출 기법으로 채웁니다.</span></div>
+    <div class="repo">
+      <div class="rmain" role="button" tabindex="0" data-go="layer:main"><span class="label">메인 레포</span><h3>편집 매뉴얼 v${S.manual_version}</h3>
+        <p>manual/ · manual/situations.yaml · styles/techniques.yaml · manual/glossary.yaml — 모든 주제·모든 영상에 적용</p>
+        <div class="rstats"><span>영구 원칙 ${tiers.principle || 0}</span><span>작업 기준 ${tiers.standard || 0}</span><span>스타일 기본값 ${tiers.style || 0}</span><span>작업 절차 8단계 · G0~G8</span><span>공통 상황 ${S.main_situations}</span><span>연출 기법 ${main ? main.techniques : 0}</span><span>용어 ${S.terms}</span></div></div>
+      <div class="rinherit">↓ 물려받음 (inherits: main) — 주제는 메인을 고치지 않고 다른 것만 적음</div>
+      <div class="rtopics">${topics.map(t => `<button class="rtopic" data-topic="${esc(t.key)}" aria-pressed="${t.key === repoTopic}">
+          <span class="label">주제 레포 · topics/${esc(t.key)}</span><b>${esc(t.label)}</b><small>${esc(t.look || "")}</small>
+          <div class="rstats"><span>상황 ${t.situations.length}</span><span style="color:var(--pass)">+더함 ${t.added.length}</span><span style="color:var(--pend)">바꿈 ${t.overridden.length}</span><span>−뺌 ${t.dropped.length}</span><span>영상 ${t.projects.length}</span></div></button>`).join("")}</div>
+      ${T ? `<div class="rinherit">↓ ${esc(T.label)} — 이 주제에서 달라지는 것</div>
+      <section style="display:flex;flex-direction:column;gap:8px">
+        <div class="chips"><span class="label" style="margin-right:6px">스타일 기본값 (금지 아님)</span>${Object.entries(T.defaults || {}).map(([k, v]) => `<span class="chip">${esc(k)}: ${esc(Array.isArray(v) ? v.join("·") : String(v))}</span>`).join("") || "<span class='empty'>없음</span>"}</div>
+        <div class="chips"><span class="label" style="margin-right:6px">기본으로 쓰지 않는 기법</span>${(T.avoid_techniques || []).map(tqChip).join("") || "<span class='empty'>없음</span>"}</div>
+        <div class="chips"><span class="label" style="margin-right:6px">주제 매뉴얼</span>${(T.manual || []).map(f => { const d = G.nodes.find(n => n.kind === "doc" && n.file === f); return d ? `<button class="chip" style="cursor:pointer" data-go="${esc(d.id)}">${esc(f)}</button>` : `<span class="chip">${esc(f)}</span>`; }).join("")}</div>
+        <h3 style="margin:8px 0 0;font-size:14px">상황 → 화면 (대본의 한 박자가 하는 일에 따라)</h3>
+        <p class="lead" style="margin:0;font-size:12.5px;color:var(--muted)">초록 = 이 주제가 더한 상황, 주황 = 메인 것을 이 주제에 맞게 바꿈, 회색 = 메인 그대로. 칩을 누르면 그 장면·기법이 무엇이고 어떻게 구현됐는지.</p>
+        <div class="items">${grp("add").map(sitRow).join("")}${grp("override").map(sitRow).join("")}${grp("main").map(sitRow).join("")}</div>
+        ${T.dropped.length ? `<p class="empty" style="margin:0">이 주제에서 뺀 메인 상황: ${T.dropped.map(k => esc((N["sit:main:" + k] || {}).label || k)).join(", ")}</p>` : ""}
+        <h3 style="margin:8px 0 0;font-size:14px">이 주제의 영상 (python -m ytflow edit-plan &lt;영상&gt;)</h3>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) 70px 70px;gap:8px;font-size:11px;color:var(--muted);padding:0 8px"><span>영상</span><span>상황 찾음</span><span>장면 맞음</span></div>
+        <div class="items">${T.projects.slice().reverse().map(p => `<div class="eprow" role="button" tabindex="0" data-go="ep:${esc(p.project)}"><span>${esc(p.project)}</span>
+          <span><div class="mini"><span style="width:${p.coverage * 100}%"></span></div><small>${Math.round(p.coverage * 100)}%</small></span>
+          <span><div class="mini"><span style="width:${p.fit * 100}%;background:var(--pass)"></span></div><small>${Math.round(p.fit * 100)}%</small></span></div>`).join("") || "<p class='empty'>아직 없음</p>"}</div>
+      </section>` : ""}
+    </div>`;
+  const V = $("#view");
+  V.querySelectorAll("[data-topic]").forEach(b => b.onclick = () => { repoTopic = b.dataset.topic; renderRepo(); inspect("topic:" + repoTopic); });
+  V.querySelectorAll("[data-go]").forEach(b => b.onclick = ev => { if (ev.target.closest("[data-term]")) return; inspect(b.dataset.go); });
+  wireTerms(V);
+}
+function layerCard(n){
+  let h = "";
+  if (n.kind === "layer") {
+    h += `<span class="label">메인 레포</span><h3>편집 매뉴얼 — 모든 영상의 바탕</h3><p style="margin:0">원칙·작업 기준·작업 절차·공통 상황 ${n.situations.length}개·연출 기법 ${n.techniques}개를 모든 주제 레포가 물려받습니다. 주제 레포는 메인을 고치지 않고 다른 것만 적습니다.</p>
+      <div class="label">공통 상황</div><ul class="rel">${n.situations.map(k => `<li><button data-go="sit:main:${esc(k)}">${esc((N["sit:main:" + k] || {}).label || k)}</button></li>`).join("")}</ul>`;
+  } else if (n.kind === "topic") {
+    h += `<span class="label">주제 레포 · topics/${esc(n.key)}/topic.yaml</span><h3>${esc(n.label)}</h3>
+      <dl class="kv"><dt>물려받음</dt><dd>메인 레포</dd><dt>채널</dt><dd>${esc(n.channels.join(", "))}</dd><dt>화면 개성</dt><dd>${esc(n.look)}</dd></dl>
+      <div class="label">더한 상황</div><div class="chips">${n.added.map(k => `<button class="chip" style="cursor:pointer" data-go="sit:${esc(n.key)}:${esc(k)}">${esc((N[`sit:${n.key}:${k}`] || {}).label || k)}</button>`).join("") || "-"}</div>
+      <div class="label">바꾼 상황</div><div class="chips">${n.overridden.map(k => `<button class="chip" style="cursor:pointer" data-go="sit:${esc(n.key)}:${esc(k)}">${esc((N[`sit:${n.key}:${k}`] || {}).label || k)}</button>`).join("") || "-"}</div>
+      <div class="codeln"><small>이 주제의 맥락 파일 만들기 (영상마다)</small>python -m ytflow edit-plan &lt;영상&gt;</div>`;
+  } else if (n.kind === "situation") {
+    h += `<div class="chips"><span class="chip">상황</span><span class="chip">${n.topic === "main" ? "메인" : esc((N["topic:" + n.topic] || {}).label || n.topic)}</span><span class="chip ${n.origin === "add" ? "pass" : n.origin === "override" ? "pend" : ""}">${esc(ORIGIN[n.origin])}</span></div>
+      <h3>${esc(n.label)}</h3>${n.why ? `<p style="margin:0">${hl(n.why)}</p>` : ""}
+      <div class="label">1순위 → 2순위 장면</div><div class="chips">${n.scenes.map(scChip).join("")}</div>
+      ${n.base_scenes ? `<p class="empty" style="margin:0">메인에서는: ${esc(n.base_scenes.join(" → "))}</p>` : ""}
+      <div class="label">함께 쓸 연출 기법</div><div class="chips">${n.techniques.map(tqChip).join("") || "-"}</div>
+      ${(n.blocked || []).length ? `<p class="empty" style="margin:0">이 주제에서 기본으로 쓰지 않음: ${esc(n.blocked.join(", "))}</p>` : ""}
+      ${n.avoid ? `<div class="callout"><b>피할 것</b><br>${hl(n.avoid)}</div>` : ""}
+      <div class="label">이렇게 알아봄 (대본 속 말)</div><div class="codeln" style="white-space:normal">${esc(n.signals.join("  ·  "))}</div>
+      ${(n.examples || []).length ? `<div class="label">실제 영상에서 나온 문장 (${n.count}장면)</div><div class="items">${n.examples.map(e => `<div class="item ${e.fit ? "pass" : "rej"}" role="button" tabindex="0" data-go="ep:${esc(e.project)}"><small>${esc(e.project)} · 장면 ${e.scene} · 지금 ${esc(e.type)}${e.fit ? " ✓" : " ⚠"}</small><span>“${hl(e.say)}”</span></div>`).join("")}</div>` : ""}
+      ${n.topic !== "main" && n.origin !== "add" ? `<div class="row"><button class="btn" data-go="sit:main:${esc(n.key)}">메인의 원래 상황 보기</button></div>` : ""}`;
+  } else if (n.kind === "episode") {
+    const T = N["topic:" + n.topic];
+    h += `<span class="label">영상 · ${esc(T ? T.label : n.topic)}</span><h3>${esc(n.project)}</h3>
+      <dl class="kv"><dt>상황 찾음</dt><dd>${Math.round(n.coverage * 100)}% (장면 ${n.scenes})</dd><dt>장면 종류 맞음</dt><dd>${Math.round(n.fit * 100)}% — ⚠ 는 다시 볼 곳 (틀렸다는 뜻 아님)</dd></dl>
+      <div class="codeln"><small>이 영상의 편집 맥락 파일</small>python -m ytflow edit-plan ${esc(n.project)}\n→ 02_script/EDIT_CONTEXT.md · edit_plan.json</div>
+      <div class="items">${n.rows.map(r => { const s = r.sit && N[`sit:${n.topic}:${r.sit}`]; return `<div class="item ${!s ? "" : r.fit ? "pass" : "rej"}" ${s ? `role="button" tabindex="0" data-go="${esc(s.id)}"` : ""}><small>장면 ${r.s} · 지금 ${esc(r.type)}${s ? (r.fit ? " ✓" : ` ⚠ 추천 ${esc(r.rec.join(" → "))}`) : ""}</small><b>${s ? esc(s.label) : "상황 못 찾음"}</b><span style="color:var(--muted)">${hl(r.say)}</span></div>`; }).join("")}</div>`;
+  }
+  return h;
+}
+
 /* ---------- 작업 절차 (매뉴얼 README §2·§5 그대로) ---------- */
 const PROC = [
   {id: "start", label: "요청 · 매일 06:05 자동", sub: "주제 또는 조사 글", kind: "start", does: "사용자가 주제·조사 글을 주거나, 매일 브리핑 채널은 06:05 KST 에 자동으로 시작합니다.", cmd: "python -m ytflow make --channel <채널> [--topic …]\npython -m ytflow daily --brand market", themes: []},
@@ -1033,6 +1137,7 @@ function inspect(id, back){
   let h = `<span class="label">${esc(n.kind)}</span><h3>${esc(n.kind === "version" ? `v${n.v} · ${n.date}` : n.kind === "review" ? `${n.project}` : nodeName(n))}</h3>`;
   if (n.kind === "term") { $("#insp").innerHTML = termCard(n); afterInspect(n, id); return; }
   if (n.kind === "proc") { $("#insp").innerHTML = procCard(n); afterInspect(n, id); return; }
+  if (["layer", "topic", "situation", "episode"].includes(n.kind)) { $("#insp").innerHTML = layerCard(n); afterInspect(n, id); return; }
   h += termChips(n);
   if (n.kind === "version") {
     h += `<p style="margin:0">${hl(n.summary)}</p>`;
@@ -1085,9 +1190,9 @@ function afterInspect(n, id){
 /* ---------- 경로 ---------- */
 function route(){
   if (window.matchMedia("(max-width:980px)").matches) { document.querySelector("aside.inspector").setAttribute("data-empty", ""); HIST = []; }
-  const h = (location.hash || "#now").slice(1);
+  const h = (location.hash || "#repo").slice(1);
   document.querySelectorAll("nav.tabs a").forEach(a => a.getAttribute("href") === "#" + h ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
-  ({now: renderNow, proc: renderProc, terms: renderTerms, align: renderAlign, flow: renderFlow, map: renderMap, timeline: renderTimeline, edit: renderEdit}[h] || renderNow)();
+  ({repo: renderRepo, now: renderNow, proc: renderProc, terms: renderTerms, align: renderAlign, flow: renderFlow, map: renderMap, timeline: renderTimeline, edit: renderEdit}[h] || renderRepo)();
 }
 window.addEventListener("hashchange", route);
 document.addEventListener("keydown", ev => { const t = ev.target; if ((ev.key === "Enter" || ev.key === " ") && t.matches && t.matches('div[role="button"]')) { ev.preventDefault(); t.click(); } });

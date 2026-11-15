@@ -284,6 +284,9 @@ def main(argv: list[str] | None = None) -> None:
     spk.add_argument("project")
     mb = sub.add_parser("manual-bump", help="기각 사유를 반영해 매뉴얼을 고친 뒤 버전 올리기 (manual/VERSION, CHANGELOG)")
     mb.add_argument("summary")
+    ep = sub.add_parser("edit-plan", help="메인 → 주제 레포 → 이 영상: 박자마다 상황을 찾아 장면 종류·연출 기법 채우기 → 02_script/EDIT_CONTEXT.md·edit_plan.json (docs/33)")
+    ep.add_argument("project")
+    sub.add_parser("topics", help="주제 레포(topics/<brand>) 목록 — 메인에서 물려받고 바꾸고 더한 상황")
     mg = sub.add_parser("manual-graph", help="매뉴얼 지식 그래프 → manual/graph.json (검토→버전→절·게이트·규칙·검사 코드), --html 로 보기 전용 페이지")
     mg.add_argument("--html", default=None); mg.add_argument("--artifact", default=None, help="공유 페이지(Artifact)로 올릴 HTML")
     fb = sub.add_parser("feedback", help="사용자가 한 말을 원문 그대로 기록 (영상 검토 밖의 방향·뜻 바로잡기 포함) → manual/feedback.yaml + 그래프 갱신")
@@ -463,6 +466,12 @@ def main(argv: list[str] | None = None) -> None:
         from .stages import checklist, manualgraph
         checklist.bump(a.summary)
         manualgraph.write()
+    elif a.cmd == "edit-plan":
+        from .stages import layers
+        layers.write_plan(Project.open(a.project).path)
+    elif a.cmd == "topics":
+        from .stages import layers
+        print(layers.listing())
     elif a.cmd == "manual-graph":
         from .stages import manualgraph
         manualgraph.write(a.html, a.artifact)

@@ -43,7 +43,7 @@
 | 2. 소스 먼저 | 이 주제를 **보여 줄** 자료(발언 원본·공식 화면·공공 기록·데이터)가 있는지 | `01_research/sources.md` 또는 `loc_items.json` | G2 소스 |
 | 3. 깊은 조사 | 1차 출처로 숫자·발언·날짜를 확인, 교차 확인 상태 표시 | `01_research/factsheet.md` | G3 사실 |
 | 4. 대본 | 채널 대본 공식(각 채널 문서 §4)대로. 쉬운 말·비유·과거 사례·비교 기준 | `02_script/hybrid.json` (또는 `scenes.json`) | G4 대본 |
-| 5. 연출·그래픽 | `python -m ytflow style-pick` 추천 → `05-style-matching.md` 로 장면마다 연출 type 과 그래픽 팩 결정 | `edit.yaml`, `hybrid.json` 의 type·look | G5 연출 |
+| 5. 연출·그래픽 | `python -m ytflow style-pick` 추천 → **`python -m ytflow edit-plan`(메인 → 주제 레포 `topics/<brand>` → 박자마다 상황 → 장면·기법, `02_script/EDIT_CONTEXT.md`)** → `05-style-matching.md` 로 장면마다 연출 type 과 그래픽 팩 결정 | `edit.yaml`, `hybrid.json` 의 type·look | G5 연출 |
 | 6. 목소리·렌더 | 초안 edge-tts → 확정 후 ElevenLabs, `python -m ytflow hybrid <프로젝트>` | `05_edit/final.mp4`, `sync_qa.json`, `04_assets/layout_qa.json` | G6 완성본 |
 | 7. 제목·썸네일 | 제목 3개 + 썸네일 A/B/C, 이유 기록 | `05_edit/package.md`, `thumbnail_*.png` | G7 포장 |
 | 8. 보관·기록 | GitHub Release 업로드, 회차 기록, 남은 일 보고 | `05_edit/release.json`, `channels/<id>/episodes.md` | G8 보관 |

@@ -1,0 +1,35 @@
+# 주제 레포: 시사 (issues) — "세상이 어떻게 돌아가는지 알고 싶다". 재미있게 보는 뉴스, 사실이 재미를 이김.
+id: issues
+name: 시사 · 이슈
+inherits: main
+channels: [ch-issues, ch-issues-daily]
+manual: [manual/08-issues.md]
+look: 증거판 (05 §0-7)
+defaults:
+  both_sides_equal: true   # 08 §4 양쪽 입장 같은 틀 (영구 원칙)
+  timestamp: true          # 기준 시각 표시 (08 §6)
+situations:
+  add:
+    both-sides:
+      name: 양쪽 입장
+      signals: ['반면', '반대 측', '찬성', '반대', '입장', '쪽에서는', '정부는', '야당']
+      scenes: [versus, compare, quote]
+      techniques: [split-screen]
+      avoid: 크기·색·길이가 다른 틀 (한쪽 편들기 — 영구 원칙)
+      why: 양쪽을 같은 틀로 (08 §4)
+    not-known:
+      name: 아직 모르는 것
+      signals: ['아직', '확인되지', '조사 중', '밝혀지지', '수사']
+      scenes: [card_type, checklist]
+      techniques: []
+      avoid: 의혹을 사실처럼, 범인 단정
+      why: "'아직 모른다' 는 그대로 (08 §0-1, 영구 원칙)"
+    us-link:
+      name: 우리에게 무슨 뜻인가
+      signals: ['우리', '생활', '가계', '월급', '물가', '내 ']
+      scenes: [people, analogy, map_causal]
+      techniques: [stagger, draw-on]
+      avoid: 겁주기
+      why: 사건 → 우리 (08 구성)
+  drop: [command, ai-ask]
+avoid_techniques: [whip-pan, gl-transitions]
