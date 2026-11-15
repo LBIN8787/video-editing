@@ -217,6 +217,78 @@ def git_versions() -> dict[int, dict]:
 
 
 
+# ------------------------------------------------------------------ 사용자 피드백 기록 (영상 검토가 아닌 말도)
+FEEDBACK = MANUAL / "feedback.yaml"
+FB_KIND = {"review": "영상 검토", "direction": "방향·기준 요청", "clarify": "뜻 바로잡기", "tool": "도구 요청"}
+
+
+def parse_feedback() -> list[dict]:
+    try:
+        import yaml
+        items = (yaml.safe_load(_read(FEEDBACK)) or {}).get("feedback", []) or []
+    except Exception:
+        return []
+    out = []
+    for i, f in enumerate(items):
+        q = str(f.get("quote", "")).strip()
+        if not q:
+            continue
+        out.append({"id": f"fb:{i + 1}", "kind": "feedback", "date": str(f.get("date", "")), "quote": q, "label": q[:60],
+                    "fb_kind": f.get("kind", "direction"), "fb_kind_label": FB_KIND.get(f.get("kind", "direction"), f.get("kind", "")),
+                    "project": f.get("project", "") or "", "about": str(f.get("about", "") or ""), "note": f.get("note", "") or "",
+                    "pending": bool(f.get("pending")), "themes": _themes(q)})
+    return out
+
+
+def add_feedback(quote: str, kind: str = "direction", project: str = "", about: str = "", note: str = "",
+                 pending: bool = False) -> dict:
+    """사용자가 한 말을 그대로 기록 → (선택) 반영 대기 → 그래프 다시 만들기."""
+    import yaml
+    doc = (yaml.safe_load(_read(FEEDBACK)) or {}) if FEEDBACK.exists() else {}
+    doc.setdefault("feedback", [])
+    item = {"date": dt.date.today().isoformat(), "kind": kind, "quote": quote.strip()}
+    if project:
+        item["project"] = project
+    if about:
+        item["about"] = about.replace("intent:", "")
+    if note:
+        item["note"] = note
+    if pending:
+        item["pending"] = True
+    doc["feedback"].append(item)
+    head = ("# 사용자 피드백 기록 — 영상 검토(reviews.md) 밖에서 한 말도 원문 그대로 남깁니다. 그래프의 '사용자 원문'이 됩니다.\n"
+            "# python -m ytflow feedback \"원문\" [--kind direction|clarify|tool|review] [--project P] [--about 의도ID] [--pending]\n"
+            "# kind: direction 방향·기준 요청 · clarify 뜻 바로잡기(모델 해석이 틀렸을 때) · tool 도구 요청 · review 영상에 대한 말\n"
+            "# about: 이 말이 바로잡는 의도 ID (manual-ui '의도 정렬'의 intent:xxxx 에서 xxxx) · pending: 매뉴얼 '반영 대기'에도 넣음\n")
+    FEEDBACK.write_text(head + yaml.safe_dump(doc, allow_unicode=True, sort_keys=False, width=110), encoding="utf-8")
+    if pending:
+        cl = MANUAL / "CHANGELOG.md"
+        line = f"- [{item['date']} · 사용자 피드백{' · ' + project if project else ''}] {quote.strip()}"
+        cl.write_text(_read(cl).replace("## 반영 대기\n", f"## 반영 대기\n{line}\n", 1), encoding="utf-8")
+    write()
+    return item
+
+
+def source_hash() -> str:
+    """그래프를 만드는 원본(매뉴얼·검토·피드백·판정·용어·레시피·스킨)의 지문 — 그래프가 옛것인지 확인용."""
+    import hashlib
+    h = hashlib.sha1()
+    files = sorted([*MANUAL.glob("*.md"), *MANUAL.glob("*.yaml"), MANUAL / "VERSION",
+                    *(ROOT / "styles" / "recipes").glob("*.yaml"), *(ROOT / "skins").glob("*/skin.yaml")])
+    for f in files:
+        if f.exists():
+            h.update(f.name.encode()); h.update(f.read_bytes())
+    return h.hexdigest()[:12]
+
+
+def is_stale() -> bool:
+    try:
+        g = json.loads(_read(MANUAL / "graph.json"))
+    except Exception:
+        return True
+    return g.get("source_hash") != source_hash()
+
+
 # ------------------------------------------------------------------ 의도 정렬: 사용자 원문 → 모델 해석 → 규칙 → 코드 → 결과
 INTENTS = MANUAL / "intents.yaml"
 STATUS = {"aligned": "정렬됨", "over": "과잉 해석", "under": "덜 반영", "drift": "다른 뜻으로", "conflict": "다른 규칙과 충돌",
@@ -662,6 +734,10 @@ def build() -> dict:
     for c in codes:
         for q, vv, d in _user_quotes(c["src"]):
             add_intent(q, vv or (c["versions"][-1] if c["versions"] else None), d, c["id"], "code")
+    fbs = parse_feedback()
+    for f in fbs:
+        if not f["about"]:
+            add_intent(f["quote"], None, f["date"], f["id"], "feedback")
 
     # 같은 말을 조금씩 다르게 옮긴 원문은 한 의도로 묶음 (한쪽이 다른 쪽을 품거나 거의 같으면)
     import difflib
@@ -687,6 +763,21 @@ def build() -> dict:
             head["sources"] += [s2 for s2 in x["sources"] if s2["ref"] not in [y["ref"] for y in head["sources"]]]
         merged[head["id"]] = head
     intents = merged
+    for f in fbs:   # 의도를 바로잡는 말은 그 의도에 붙임
+        if f["about"]:
+            tgt = next((it for it in intents.values() if "intent:" + f["about"] in it["member_ids"]), None)
+            if tgt:
+                tgt["sources"].append({"ref": f["id"], "kind": "feedback"})
+                tgt.setdefault("clarified", []).append({"date": f["date"], "quote": f["quote"], "ref": f["id"]})
+                f["intent"] = tgt["id"]
+            else:
+                add_intent(f["quote"], None, f["date"], f["id"], "feedback")
+                iid = _iid(f["quote"])
+                if iid in intents:
+                    intents[iid].setdefault("variants", []); intents[iid].setdefault("member_ids", [iid])
+                    f["intent"] = iid
+        else:
+            f["intent"] = next((it["id"] for it in intents.values() if any(s2["ref"] == f["id"] for s2 in it["sources"])), None)
 
     ann = load_annotations()
     by_ver_targets: dict[int, list[str]] = {}
@@ -737,7 +828,7 @@ def build() -> dict:
     find = term_matcher(lex)
     tnode = {t["id"]: t for t in lex}
     mention: dict[str, list[str]] = {}
-    for n in secs + versions + reviews + codes + rules + checks + intent_nodes + list(_steps_text(steps)):
+    for n in secs + versions + reviews + codes + rules + checks + intent_nodes + fbs + list(_steps_text(steps)):
         text = " ".join(str(n.get(k, "")) for k in ("title", "body", "summary", "reason", "label", "src", "quote", "does"))
         ts = find(text)
         if ts:
@@ -750,7 +841,12 @@ def build() -> dict:
     lex = [t for t in lex if t["mentioned_in"] or t["cat"] in ("style", "motion", "measure", "fx") or t["used_by"]]
     bans = prohibitions(secs)
 
-    nodes = steps + gates + channels + docs + secs + rules + checks + versions + reviews + themes + codes + intent_nodes + lex
+    for f in fbs:
+        for t in f["themes"]:
+            E(f["id"], f"theme:{t}", "about")
+        if f.get("intent"):
+            E(f["id"], f["intent"], "clarifies" if f["about"] else "quoted_as")
+    nodes = steps + gates + channels + docs + secs + rules + checks + versions + reviews + themes + codes + intent_nodes + lex + fbs
     cur = _read(MANUAL / "VERSION").strip() or "0"
     stats = {
         "manual_version": int(cur),
@@ -760,9 +856,9 @@ def build() -> dict:
         "must": sum(r["level"] == "MUST" for r in rules), "auto": sum(r["auto"] for r in rules),
         "intents": len(intent_nodes), "misaligned": sum(i["status"] == "misaligned" for i in intent_nodes),
         "intents_reviewed": sum(i["annotated"] for i in intent_nodes), "conflicts": len(conflicts), "code": len(codes),
-        "terms": len(lex), "bans": len(bans),
+        "terms": len(lex), "bans": len(bans), "feedback": len(fbs),
     }
-    return {"schema": SCHEMA_VERSION, "generated": dt.datetime.now().isoformat(timespec="seconds"),
+    return {"schema": SCHEMA_VERSION, "generated": dt.datetime.now().isoformat(timespec="seconds"), "source_hash": source_hash(),
             "stats": stats, "pending": pending, "status_labels": STATUS, "conflicts": conflicts, "bans": bans,
             "nodes": nodes, "edges": edges}
 
@@ -771,7 +867,10 @@ def _steps_text(steps):
     return steps
 
 
-def write(html_out: str | None = None) -> Path:
+ARTIFACT_URL = "https://claude.ai/artifact/8iBFUN2XD5j4SxtLain5uR"   # 공유 페이지 (읽기 전용) — 피드백 뒤 다시 올림 (docs/31 §8)
+
+
+def write(html_out: str | None = None, artifact_out: str | None = None) -> Path:
     g = build()
     out = MANUAL / "graph.json"
     slim = json.loads(json.dumps(g))
@@ -781,6 +880,9 @@ def write(html_out: str | None = None) -> Path:
     s = g["stats"]
     print(f"[manual-graph] v{s['manual_version']} · 절 {s['sections']} · 규칙 {s['rules']}(MUST {s['must']}) · 검사 코드 {s['checks']} "
           f"· 버전 {s['versions']} · 검토 {s['reviews']}(기각 {s['rejects']}) · 반영 대기 {s['pending']} → {out.relative_to(ROOT)}")
+    if artifact_out:
+        Path(artifact_out).write_text(page(g, standalone=True, wrap=False), encoding="utf-8")
+        print(f"[manual-graph] 공유 페이지용 → {artifact_out} (Artifact 로 {ARTIFACT_URL} 에 다시 올림)")
     if html_out:
         Path(html_out).write_text(page(g, standalone=True, wrap=True), encoding="utf-8")
         print(f"[manual-graph] 보기 전용 HTML → {html_out}")
@@ -877,6 +979,7 @@ def serve(port: int = 8770, host: str = "127.0.0.1") -> None:
                     if passed and not path.exists():
                         raise ValueError(f"projects/{proj} 폴더가 없습니다")
                     checklist.review(path, passed, reason)
+                    write()
                     return self._json({"ok": True})
                 if u.path == "/api/pending":
                     cl = MANUAL / "CHANGELOG.md"
@@ -893,6 +996,7 @@ def serve(port: int = 8770, host: str = "127.0.0.1") -> None:
                         item = f"- [{dt.date.today().isoformat()} · 직접 기각] {text}"
                         s = s.replace("## 반영 대기\n", f"## 반영 대기\n{item}\n", 1)
                     cl.write_text(s, encoding="utf-8")
+                    write()
                     return self._json({"ok": True})
                 if u.path == "/api/bump":
                     summary = (body.get("summary") or "").strip()
@@ -910,6 +1014,15 @@ def serve(port: int = 8770, host: str = "127.0.0.1") -> None:
                             raise ValueError("알 수 없는 상태")
                     save_annotation(iid, body)
                     write()
+                    return self._json({"ok": True})
+                if u.path == "/api/feedback":
+                    q = (body.get("quote") or "").strip()
+                    if not q:
+                        raise ValueError("한 말을 적어 주세요")
+                    if body.get("kind", "direction") not in FB_KIND:
+                        raise ValueError("알 수 없는 종류")
+                    add_feedback(q, body.get("kind", "direction"), (body.get("project") or "").strip(),
+                                 (body.get("about") or "").strip(), (body.get("note") or "").strip(), bool(body.get("pending")))
                     return self._json({"ok": True})
                 if u.path == "/api/intent-pending":
                     text = (body.get("text") or "").strip()

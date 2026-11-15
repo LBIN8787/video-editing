@@ -99,6 +99,11 @@ def run(path: Path, upto: str = "G8") -> Report:
     # 매뉴얼: 기각 사유가 반영되기 전에는 새 영상을 만들지 않는다 (기준을 차곡차곡 쌓기)
     pend = pending_changes()
     R.add("G0", "MUST", "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)", not pend, "; ".join(pend))
+    try:   # 피드백·매뉴얼을 바꾼 뒤 그래프를 다시 만들었나 (docs/31 §8)
+        from . import manualgraph as _mg
+        R.add("G0", "SHOULD", "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)", not _mg.is_stale(), "manual/graph.json")
+    except Exception:
+        pass
 
     # G1 주제
     tb = _load(res / "topic_brief.json")

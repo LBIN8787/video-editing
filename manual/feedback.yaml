@@ -1,0 +1,10 @@
+# 사용자 피드백 기록 — 영상 검토(reviews.md) 밖에서 한 말도 원문 그대로 남깁니다. 그래프의 '사용자 원문'이 됩니다.
+# python -m ytflow feedback "원문" [--kind direction|clarify|tool|review] [--project P] [--about 의도ID] [--pending]
+# kind: direction 방향·기준 요청 · clarify 뜻 바로잡기(모델 해석이 틀렸을 때) · tool 도구 요청 · review 영상에 대한 말
+# about: 이 말이 바로잡는 의도 ID (manual-ui '의도 정렬'의 intent:xxxx 에서 xxxx) · pending: 매뉴얼 '반영 대기'에도 넣음
+feedback:
+- date: '2026-11-15'
+  kind: clarify
+  quote: 나는 동영상의 이점을 살린다 즉 정적인 단순 다음 ppt 다음 ppt가 아니라 영상의 이점을 살려라 라고 했지 반드시 카메라를 움직여라 라고 하려고 했던게 아닌데
+  about: 759c49eb
+  note: v25 해석(README §2-5 카메라 계속 움직임·정지 비율 ≤0.3)이 뜻과 다름 — 의도 정렬에 과잉 해석으로 판정 (사용자 확인 대기)

@@ -131,6 +131,10 @@ python -m ytflow styles | schemas | status <프로젝트>
 | `shorts` 쇼츠 | 9:16 고정 훅 + 큰 자막 | shorts-aitips | `prompts/shorts_script.md` |
 
 ## 규칙 (모든 에이전트 공통)
+- **피드백 → 그래프 (2026-11-15 사용자 요청):** 사용자가 피드백하면 원문 그대로 기록하고 매뉴얼 그래프와 공유 페이지를 갱신합니다.
+  1) 영상 판정은 `python -m ytflow review <프로젝트> --pass | --reject "원문"`, 그 밖의 말(방향 요청·"그런 뜻이 아니었다"·도구 요청)은 `python -m ytflow feedback "원문" --kind direction|clarify|tool [--about intent:xxxx] [--pending]` — 둘 다 `manual/graph.json` 을 자동으로 다시 만듭니다.
+  2) 모델 해석이 틀렸다는 말이면 `manual/intents.yaml` 에 뜻한 것·뜻하지 않은 것·판정도 적습니다(`manual-ui` '의도 정렬').
+  3) `python -m ytflow manual-graph --artifact <스크래치>/manual-graph.html` → Artifact 도구로 **같은 공유 페이지**(`ytflow/stages/manualgraph.py` 의 `ARTIFACT_URL`)에 다시 올리고 → 커밋·push. 매뉴얼을 고쳤는데 그래프가 옛것이면 `check` G0 SHOULD 가 알려 줍니다.
 - **쉬운 대본:** 시청자는 일반인입니다. 핵심 한 문장(`core_message`), 논리 구조(`logic`), 숫자마다 비교 기준(`compare_to`), 비유 2개 이상, 과거 사례 1개 이상, 어려운 말 풀이(`glossary`)를 넣습니다. `prompts/script.md`, `validate` 가 점검합니다.
 - **사실:** 숫자와 발언은 출처로 확인된 것만 씁니다. '재확인 필요'는 단정하지 않습니다. 투자 권유 표현은 금지합니다.
 - **소스:** YouTube 봇 확인이나 사이트 접근 차단을 **우회하지 않습니다.** 막히면 임시 화면을 두고 사용자 PC 에서 `rebuild` 하게 안내합니다.

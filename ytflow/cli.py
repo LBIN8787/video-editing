@@ -285,7 +285,11 @@ def main(argv: list[str] | None = None) -> None:
     mb = sub.add_parser("manual-bump", help="기각 사유를 반영해 매뉴얼을 고친 뒤 버전 올리기 (manual/VERSION, CHANGELOG)")
     mb.add_argument("summary")
     mg = sub.add_parser("manual-graph", help="매뉴얼 지식 그래프 → manual/graph.json (검토→버전→절·게이트·규칙·검사 코드), --html 로 보기 전용 페이지")
-    mg.add_argument("--html", default=None)
+    mg.add_argument("--html", default=None); mg.add_argument("--artifact", default=None, help="공유 페이지(Artifact)로 올릴 HTML")
+    fb = sub.add_parser("feedback", help="사용자가 한 말을 원문 그대로 기록 (영상 검토 밖의 방향·뜻 바로잡기 포함) → manual/feedback.yaml + 그래프 갱신")
+    fb.add_argument("quote"); fb.add_argument("--kind", default="direction", choices=["direction", "clarify", "tool", "review"])
+    fb.add_argument("--project", default=""); fb.add_argument("--about", default="", help="바로잡는 의도 ID (intent:xxxx)")
+    fb.add_argument("--note", default=""); fb.add_argument("--pending", action="store_true", help="매뉴얼 '반영 대기'에도 넣기 (check G0)")
     mu = sub.add_parser("manual-ui", help="매뉴얼 그래프 보기·고치기 도구 (로컬 서버): 검토 기록·반영 대기·버전 올리기·md 편집")
     mu.add_argument("--port", type=int, default=8770); mu.add_argument("--host", default="127.0.0.1")
     sq = sub.add_parser("sync-qa", help="완성 영상의 자막·목소리·화면 싱크를 받아쓰기로 재기 → 05_edit/sync_qa.json")
@@ -442,6 +446,8 @@ def main(argv: list[str] | None = None) -> None:
         if not a.passed and not a.reject:
             raise SystemExit("--pass 또는 --reject \"이유\" 중 하나를 주세요")
         checklist.review(Project.open(a.project).path, a.passed, a.reject or a.note)
+        from .stages import manualgraph
+        manualgraph.write()
     elif a.cmd == "short":
         from .stages import shorts_hf
         shorts_hf.make(Project.open(a.project))
@@ -457,7 +463,11 @@ def main(argv: list[str] | None = None) -> None:
         manualgraph.write()
     elif a.cmd == "manual-graph":
         from .stages import manualgraph
-        manualgraph.write(a.html)
+        manualgraph.write(a.html, a.artifact)
+    elif a.cmd == "feedback":
+        from .stages import manualgraph
+        it = manualgraph.add_feedback(a.quote, a.kind, a.project, a.about, a.note, a.pending)
+        print(f"[feedback] {it['date']} · {manualgraph.FB_KIND.get(a.kind)} 기록 → manual/feedback.yaml" + (" + 반영 대기" if a.pending else ""))
     elif a.cmd == "manual-ui":
         from .stages import manualgraph
         manualgraph.serve(a.port, a.host)

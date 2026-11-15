@@ -336,6 +336,7 @@ function nodeName(n){
 function renderTiles(){
   const s = G.stats;
   const T = [
+    [s.rejects + s.passes + (s.feedback || 0), "내 피드백 (검토 + 말)", "", "now:fb"],
     [s.conflicts, "충돌 후보 — 반대 방향 규칙", s.conflicts ? "warn" : "", "now:conf"],
     [`${s.misaligned} / ${s.intents}`, "어긋난 의도 / 사용자 원문", s.misaligned ? "warn" : "", "now:mis"],
     [s.bans, "금지·하지 않는 것", "", "now:ban"],
@@ -509,6 +510,12 @@ function renderEdit(){
     <div class="stage-head"><h2>매뉴얼 고치기와 버전 제어</h2>
       <span class="hint">${LIVE ? "로컬 서버에 연결됨: 저장하면 바로 manual/ 파일이 바뀝니다." : "읽기 전용 화면입니다. 저장소에서 <code>python -m ytflow manual-ui</code> 를 켜면 여기서 바로 고칩니다. 지금은 같은 일을 하는 명령을 복사해 쓰세요."}</span></div>
     <div class="forms">
+      <div class="card"><h3>0. 내 말 기록 (영상 검토 밖)</h3><p>방향 요청·뜻 바로잡기처럼 영상 하나에 대한 판정이 아닌 말. 원문 그대로 manual/feedback.yaml 에 남고 그래프가 바로 바뀝니다.</p>
+        <label class="field">한 말 (원문 그대로) <textarea id="fb-q" rows="3" placeholder="예: 반드시 카메라를 움직이라는 뜻이 아니었다"></textarea></label>
+        <label class="field">종류 <select id="fb-k"><option value="direction">방향·기준 요청</option><option value="clarify">뜻 바로잡기 (모델 해석이 틀림)</option><option value="review">영상에 대한 말</option><option value="tool">도구 요청</option></select></label>
+        <label class="field">바로잡는 의도 ID (선택) <input id="fb-a" placeholder="intent:759c49eb"></label>
+        <label class="field" style="flex-direction:row;align-items:center;gap:6px"><input type="checkbox" id="fb-p"> 매뉴얼 '반영 대기'에도 넣기</label>
+        <div class="row"><button class="btn primary" id="fb-go" ${dis}>기록</button></div><div id="fb-cmd"></div></div>
       <div class="card"><h3>1. 검토 기록</h3><p>영상을 보고 통과·기각을 남깁니다. 기각은 '반영 대기'에 쌓이고, 비우기 전까지 check G0 가 실패합니다.</p>
         <label class="field">프로젝트 <input id="rv-proj" placeholder="20261115-market-fsr"></label>
         <label class="field">결과 <select id="rv-res"><option value="reject">기각</option><option value="pass">통과</option></select></label>
@@ -535,10 +542,15 @@ function renderEdit(){
     const s = $("#bp-sum").value.trim().replace(/"/g, "'");
     $("#bp-cmd").innerHTML = LIVE ? "" : cmdBox(`python -m ytflow manual-bump "${s || "바꾼 기준 요약"}"\npython -m ytflow manual-graph`);
   };
+  const fbCmd = () => { if (LIVE) return; const q = $("#fb-q").value.trim().replace(/"/g, "'"), k = $("#fb-k").value, a = $("#fb-a").value.trim();
+    $("#fb-cmd").innerHTML = cmdBox(`python -m ytflow feedback "${q || "한 말"}" --kind ${k}${a ? " --about " + a : ""}${$("#fb-p").checked ? " --pending" : ""}`); };
+  ["#fb-q", "#fb-k", "#fb-a", "#fb-p"].forEach(s => $(s).addEventListener("input", fbCmd)); fbCmd();
   ["#rv-proj", "#rv-res", "#rv-reason", "#bp-sum"].forEach(s => $(s).addEventListener("input", showCmd)); showCmd();
   $("#view").addEventListener("click", ev => { const b = ev.target.closest(".copy"); if (!b) return;
     navigator.clipboard.writeText(b.dataset.c).then(() => toast("복사했습니다"), () => toast("복사하지 못했습니다. 글자를 직접 선택하세요")); });
   if (!LIVE) return;
+  $("#fb-go").onclick = async () => { try { await api("/api/feedback", {quote: $("#fb-q").value, kind: $("#fb-k").value, about: $("#fb-a").value, pending: $("#fb-p").checked});
+    toast("기록했습니다. 그래프를 다시 만들었습니다"); await reload(); } catch (e) { toast(e.message); } };
   $("#rv-go").onclick = async () => { try { await api("/api/review", {project: $("#rv-proj").value, result: $("#rv-res").value, reason: $("#rv-reason").value});
     toast("검토를 기록했습니다"); await reload(); } catch (e) { toast(e.message); } };
   $("#pd-go").onclick = async () => { try { await api("/api/pending", {text: $("#pd-text").value}); toast("반영 대기에 추가했습니다"); await reload(); } catch (e) { toast(e.message); } };
@@ -609,6 +621,7 @@ function renderAlign(){
         <div class="chips">${it.sources.map(s => `<button class="chip" style="cursor:pointer" data-go="${esc(s.ref)}">${esc(s.kind === "review" ? "검토" : s.kind === "code" ? "코드 주석" : "매뉴얼")} · ${esc(cut(nodeName(N[s.ref]) || s.ref, 30))}</button>`).join("")}</div>
         <label class="field">내가 뜻한 것 <textarea id="al-meaning" rows="2" ${dis} placeholder="이 말로 정말 원했던 것">${esc(d.meaning)}</textarea></label>
         <label class="field">뜻하지 않은 것 (한 줄에 하나) <textarea id="al-not" rows="2" ${dis} placeholder="예: 카메라를 반드시 움직여라">${esc(d.not_meant)}</textarea></label>
+        ${(it.clarified || []).map(c => `<div class="callout" style="background:var(--reject-soft);border-color:var(--reject)"><b>${esc(c.date)} 내가 바로잡은 말</b><br>“${esc(c.quote)}”</div>`).join("")}
         ${it.note ? `<p class="empty" style="margin:0">${esc(it.note)}</p>` : ""}</div></div>
       <div class="link"><span class="num">2</span><div class="box"><h3>모델이 옮긴 해석 (버전)</h3>
         ${vers.map(v => `<div class="reading"><div class="rhead"><button class="btn" data-go="${esc(v.id)}" style="font-size:12px;padding:2px 8px">v${v.v} · ${esc(v.date)}</button></div><p class="ex">${esc(v.summary)}</p></div>`).join("") || `<p class="empty">이 원문과 이어진 버전이 없습니다.</p>`}</div></div>
@@ -772,8 +785,18 @@ function feedbackStories(){
 
 /* ---------- 한눈에: 통과·금지·충돌 후보·어긋난 의도·기각 ---------- */
 let nowFocus = null, banTheme = "all";
+let fbMore = false;
+function fbItem(x){
+  if (x.kind === "review") { const e = (OUT[x.id] || []).find(y => y.kind === "applied_in");
+    const where = x.result === "pass" ? `v${x.manual_version} 기준 검증` : x.status === "pending" ? "반영 대기 중" : e ? `→ ${e.t.replace("ver:", "v")} 에 반영` : "-";
+    return `<div class="item ${x.result === "pass" ? "pass" : "rej"}" role="button" tabindex="0" data-go="${esc(x.id)}"><small>${esc(x.date)} · 영상 검토 ${x.result === "pass" ? "통과" : "기각"} · ${esc(x.project.replace(/^\d{8}-/, ""))} · ${esc(where)}</small>${x.reason ? `<span>“${hl(cut(x.reason, 160))}”</span>` : ""}</div>`; }
+  const it = x.intent && N[x.intent];
+  const where = [x.pending ? "반영 대기" : "", it ? (x.about ? "의도를 바로잡음" : "사용자 원문으로 추가") : ""].filter(Boolean).join(" · ") || "기록됨";
+  return `<div class="item ${x.fb_kind === "clarify" ? "mis" : "ban"}" role="button" tabindex="0" ${it ? `data-al="${esc(it.id)}"` : `data-go="${esc(x.id)}"`}><small>${esc(x.date)} · ${esc(x.fb_kind_label)}${x.project ? " · " + esc(x.project) : ""} · ${esc(where)}</small><span>“${hl(cut(x.quote, 180))}”</span>${x.note ? `<span style="color:var(--muted)">${hl(x.note)}</span>` : ""}</div>`;
+}
 function renderNow(){
   const S = G.stats, themes = G.nodes.filter(n => n.kind === "theme");
+  const fbAll = G.nodes.filter(n => n.kind === "review" || n.kind === "feedback").sort((a, b) => (b.date || "").localeCompare(a.date || "") || (b.kind === "feedback") - (a.kind === "feedback") || b.id.localeCompare(a.id, undefined, {numeric: true}));
   const tl = k => (N["theme:" + k] || {}).label || k;
   const reviews = G.nodes.filter(n => n.kind === "review").sort((a, b) => b.date.localeCompare(a.date));
   const pass = reviews.filter(r => r.result === "pass"), rej = reviews.filter(r => r.result === "reject");
@@ -793,6 +816,10 @@ function renderNow(){
         <div class="k-pass"><b>통과</b><br>사용자가 통과시킨 영상 = 그때 매뉴얼 버전이 검증됨</div>
         <div class="k-rej"><b>기각</b><br>사용자가 돌려보낸 영상 → 반영된 버전</div>
       </div>
+      <section id="now-fb"><h3><span class="chip">내 피드백 ${fbAll.length}</span> 최근에 한 말과 어디로 갔나</h3>
+        <p class="lead">영상 검토(통과·기각)와 그 밖에 한 말(방향 요청·뜻 바로잡기)을 날짜 순으로. 피드백을 기록하면 이 목록과 모든 탭이 함께 바뀝니다.</p>
+        <div class="items">${fbAll.slice(0, fbMore ? 999 : 8).map(fbItem).join("")}</div>
+        ${fbAll.length > 8 ? `<button class="btn" id="fb-more">${fbMore ? "접기" : `전체 ${fbAll.length}개 보기`}</button>` : ""}</section>
       <section id="now-conf"><h3><span class="chip pend">충돌 후보 ${S.conflicts}</span> 반대 방향 규칙</h3>
         <p class="lead">낱말로 자동 추정한 후보입니다 ('계속·끊임없이·반드시' ↔ '끈다·쓰지 않음·고정이 기본').</p>${conf || `<p class="empty">없음</p>`}</section>
       <section id="now-mis"><h3><span class="chip reject">어긋난 의도 ${mis.length}</span> 내가 한 말 ≠ 모델 해석</h3>
@@ -810,6 +837,7 @@ function renderNow(){
   V.querySelectorAll("[data-go]").forEach(b => b.onclick = ev => { if (ev.target.closest(".term")) return; inspect(b.dataset.go); });
   V.querySelectorAll("[data-al]").forEach(b => b.onclick = ev => { if (ev.target.closest(".term")) return; alSel = b.dataset.al; location.hash = "align"; });
   V.querySelectorAll("[data-bt]").forEach(b => b.onclick = () => { banTheme = b.dataset.bt; nowFocus = "ban"; renderNow(); });
+  const fm = $("#fb-more"); if (fm) fm.onclick = () => { fbMore = !fbMore; nowFocus = "fb"; renderNow(); };
   wireTerms(V);
   if (nowFocus) { const el = document.getElementById("now-" + nowFocus); if (el) el.scrollIntoView({block: "start"}); nowFocus = null; }
 }
@@ -911,7 +939,7 @@ function termChips(n){
 }
 
 /* ---------- 속성 패널 ---------- */
-const EDGE_WORD = {interpreted_in:"해석한 버전", quoted_in:"원문이 적힌 곳", implemented_by:"구현", gated_by:"게이트", contains:"포함", defines:"정의", belongs_to:"규칙", enforces:"검사 코드", applied_in:"반영 버전", approved_in:"통과 버전", touched:"고친 곳", about:"주제", guided_by:"매뉴얼"};
+const EDGE_WORD = {clarifies: "바로잡은 의도", quoted_as: "사용자 원문", interpreted_in:"해석한 버전", quoted_in:"원문이 적힌 곳", implemented_by:"구현", gated_by:"게이트", contains:"포함", defines:"정의", belongs_to:"규칙", enforces:"검사 코드", applied_in:"반영 버전", approved_in:"통과 버전", touched:"고친 곳", about:"주제", guided_by:"매뉴얼"};
 function relList(id){
   const out = (OUT[id] || []).map(e => [e, e.t, "→"]), inn = (IN[id] || []).map(e => [e, e.s, "←"]);
   const all = [...out, ...inn].filter(([e]) => !["contains"].includes(e.kind) || N[id].kind !== "doc");
@@ -959,6 +987,8 @@ function inspect(id, back){
     h += `<dl class="kv"><dt>위치</dt><dd>${esc(n.file)}:${n.line}</dd><dt>버전</dt><dd>${n.versions.map(v => "v" + v).join(", ")}</dd></dl><pre class="diff" style="white-space:pre-wrap">${esc(n.src)}</pre>`;
   } else if (n.kind === "intent") {
     h += `<p style="margin:0">${esc(n.quote)}</p>${n.meaning ? `<dl class="kv"><dt>뜻한 것</dt><dd>${esc(n.meaning)}</dd></dl>` : ""}<div class="row"><a class="btn" href="#align" data-al="${esc(n.id)}">의도 정렬에서 보기</a></div>`;
+  } else if (n.kind === "feedback") {
+    h += `<div class="chips"><span class="chip">${esc(n.fb_kind_label)}</span><span class="chip">${esc(n.date)}</span>${n.pending ? '<span class="chip pend">반영 대기</span>' : ""}</div><p style="margin:0">“${hl(n.quote)}”</p>${n.note ? `<p class="empty" style="margin:0">${esc(n.note)}</p>` : ""}${n.intent ? `<div class="row"><a class="btn" href="#align" data-al="${esc(n.intent)}">의도 정렬에서 보기</a></div>` : ""}`;
   } else if (n.kind === "step") {
     h += `<p style="margin:0">${esc(n.does)}</p><dl class="kv"><dt>남는 파일</dt><dd>${esc(n.outputs)}</dd></dl>`;
   }

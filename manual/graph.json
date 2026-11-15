@@ -1,6 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-15T05:23:51",
+ "generated": "2026-11-15T05:27:03",
+ "source_hash": "d07a9e7d815b",
  "stats": {
   "manual_version": 31,
   "versions": 31,
@@ -9,7 +10,7 @@
   "passes": 10,
   "pending": 0,
   "rules": 57,
-  "checks": 97,
+  "checks": 98,
   "sections": 116,
   "must": 29,
   "auto": 49,
@@ -19,7 +20,8 @@
   "conflicts": 2,
   "code": 58,
   "terms": 99,
-  "bans": 110
+  "bans": 110,
+  "feedback": 1
  },
  "pending": [],
  "status_labels": {
@@ -1308,7 +1310,7 @@
    "key": "README",
    "file": "manual/README.md",
    "label": "제작 매뉴얼 — 처음 온 사람(새 세션·새 모델)이 여기서 시작합니다",
-   "lines": 133,
+   "lines": 135,
    "versions": [],
    "last_version": null
   },
@@ -3364,7 +3366,7 @@
    "label": "검토 → 통과·기각 → 기준을 쌓기 (사용자와 함께)",
    "title": "5. 검토 → 통과·기각 → 기준을 쌓기 (사용자와 함께)",
    "line": 119,
-   "end": 133,
+   "end": 135,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4035,344 +4037,344 @@
    "line": 101
   },
   {
-   "id": "check:105",
+   "id": "check:104",
+   "kind": "check",
+   "gate": "gate:G0",
+   "level": "SHOULD",
+   "label": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 104
+  },
+  {
+   "id": "check:110",
    "kind": "check",
    "gate": "gate:G1",
    "level": "MUST",
    "label": "topic_brief.json 있음",
    "file": "ytflow/stages/checklist.py",
-   "line": 105
-  },
-  {
-   "id": "check:107",
-   "kind": "check",
-   "gate": "gate:G1",
-   "level": "MUST",
-   "label": "브랜드(ai/market/curiosity)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 107
-  },
-  {
-   "id": "check:108",
-   "kind": "check",
-   "gate": "gate:G1",
-   "level": "MUST",
-   "label": "욕망·시청자 질문",
-   "file": "ytflow/stages/checklist.py",
-   "line": 108
-  },
-  {
-   "id": "check:109",
-   "kind": "check",
-   "gate": "gate:G1",
-   "level": "MUST",
-   "label": "트리거·왜 지금",
-   "file": "ytflow/stages/checklist.py",
-   "line": 109
+   "line": 110
   },
   {
    "id": "check:112",
    "kind": "check",
    "gate": "gate:G1",
    "level": "MUST",
-   "label": "욕망 점수 ≥12, 욕망 강도·보여 줄 자료 ≥2",
+   "label": "브랜드(ai/market/curiosity)",
    "file": "ytflow/stages/checklist.py",
    "line": 112
+  },
+  {
+   "id": "check:113",
+   "kind": "check",
+   "gate": "gate:G1",
+   "level": "MUST",
+   "label": "욕망·시청자 질문",
+   "file": "ytflow/stages/checklist.py",
+   "line": 113
   },
   {
    "id": "check:114",
    "kind": "check",
    "gate": "gate:G1",
    "level": "MUST",
-   "label": "수요 증거 1개 이상",
+   "label": "트리거·왜 지금",
    "file": "ytflow/stages/checklist.py",
    "line": 114
   },
   {
-   "id": "check:115",
+   "id": "check:117",
+   "kind": "check",
+   "gate": "gate:G1",
+   "level": "MUST",
+   "label": "욕망 점수 ≥12, 욕망 강도·보여 줄 자료 ≥2",
+   "file": "ytflow/stages/checklist.py",
+   "line": 117
+  },
+  {
+   "id": "check:119",
+   "kind": "check",
+   "gate": "gate:G1",
+   "level": "MUST",
+   "label": "수요 증거 1개 이상",
+   "file": "ytflow/stages/checklist.py",
+   "line": 119
+  },
+  {
+   "id": "check:120",
    "kind": "check",
    "gate": "gate:G1",
    "level": "SHOULD",
    "label": "후보 3개 비교 기록",
    "file": "ytflow/stages/checklist.py",
-   "line": 115
+   "line": 120
   },
   {
-   "id": "check:116",
+   "id": "check:121",
    "kind": "check",
    "gate": "gate:G1",
    "level": "SHOULD",
    "label": "우리만의 답(our_angle)",
    "file": "ytflow/stages/checklist.py",
-   "line": 116
+   "line": 121
   },
   {
-   "id": "check:130",
+   "id": "check:135",
    "kind": "check",
    "gate": "gate:G2",
    "level": "MUST",
    "label": "시장: SAVE(오선) 소식 확인 기록 — 상태 '확인함' 또는 '확인 못 함: 이유' (01_research/save_check.md)",
    "file": "ytflow/stages/checklist.py",
-   "line": 130
+   "line": 135
   },
   {
-   "id": "check:132",
+   "id": "check:137",
    "kind": "check",
    "gate": "gate:G2",
    "level": "SHOULD",
    "label": "시장: SAVE 실제로 확인함 (항목 1개 이상)",
    "file": "ytflow/stages/checklist.py",
-   "line": 132
+   "line": 137
   },
   {
-   "id": "check:138",
+   "id": "check:143",
    "kind": "check",
    "gate": "gate:G2",
    "level": "MUST",
    "label": "자료 화면마다 credit·url",
    "file": "ytflow/stages/checklist.py",
-   "line": 138
+   "line": 143
   },
   {
-   "id": "check:140",
+   "id": "check:145",
    "kind": "check",
    "gate": "gate:G2",
    "level": "MUST",
    "label": "금지 라이선스(SA·NC·ND) 없음",
    "file": "ytflow/stages/checklist.py",
-   "line": 140
+   "line": 145
   },
   {
-   "id": "check:142",
+   "id": "check:147",
    "kind": "check",
    "gate": "gate:G2",
    "level": "SHOULD",
    "label": "자료 화면 소스 3종 이상 (롱폼)",
    "file": "ytflow/stages/checklist.py",
-   "line": 142
+   "line": 147
   },
   {
-   "id": "check:147",
+   "id": "check:152",
    "kind": "check",
    "gate": "gate:G3",
    "level": "MUST",
    "label": "팩트시트 + 출처 링크 3개 이상",
    "file": "ytflow/stages/checklist.py",
-   "line": 147
+   "line": 152
   },
   {
-   "id": "check:148",
+   "id": "check:153",
    "kind": "check",
    "gate": "gate:G3",
    "level": "SHOULD",
    "label": "확인 상태 표시(✅/⚠️)",
    "file": "ytflow/stages/checklist.py",
-   "line": 148
+   "line": 153
   },
   {
-   "id": "check:149",
+   "id": "check:154",
    "kind": "check",
    "gate": "gate:G3",
    "level": "SHOULD",
    "label": "'쓰지 않는 것' 목록",
    "file": "ytflow/stages/checklist.py",
-   "line": 149
-  },
-  {
-   "id": "check:153",
-   "kind": "check",
-   "gate": "gate:G4",
-   "level": "MUST",
-   "label": "core_message·question·logic",
-   "file": "ytflow/stages/checklist.py",
-   "line": 153
-  },
-  {
-   "id": "check:156",
-   "kind": "check",
-   "gate": "gate:G4",
-   "level": "MUST",
-   "label": "비교 기준≥1·비유≥2·과거 사례≥1·풀이≥1",
-   "file": "ytflow/stages/checklist.py",
-   "line": 156
+   "line": 154
   },
   {
    "id": "check:158",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
-   "label": "투자 권유 표현 0개",
+   "label": "core_message·question·logic",
    "file": "ytflow/stages/checklist.py",
    "line": 158
   },
   {
-   "id": "check:160",
+   "id": "check:161",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "비교 기준≥1·비유≥2·과거 사례≥1·풀이≥1",
+   "file": "ytflow/stages/checklist.py",
+   "line": 161
+  },
+  {
+   "id": "check:163",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "투자 권유 표현 0개",
+   "file": "ytflow/stages/checklist.py",
+   "line": 163
+  },
+  {
+   "id": "check:165",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "레퍼런스 채널 이름 0개",
    "file": "ytflow/stages/checklist.py",
-   "line": 160
+   "line": 165
   },
   {
-   "id": "check:162",
+   "id": "check:167",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "미완성 표시 0개",
    "file": "ytflow/stages/checklist.py",
-   "line": 162
+   "line": 167
   },
   {
-   "id": "check:164",
+   "id": "check:169",
    "kind": "check",
    "gate": "gate:G4",
    "level": "SHOULD",
    "label": "과장 단어 0개",
    "file": "ytflow/stages/checklist.py",
-   "line": 164
+   "line": 169
   },
   {
-   "id": "check:168",
+   "id": "check:173",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2)",
    "file": "ytflow/stages/checklist.py",
-   "line": 168
+   "line": 173
   },
   {
-   "id": "check:170",
+   "id": "check:175",
    "kind": "check",
    "gate": "gate:G4",
    "level": "SHOULD",
    "label": "첫 3장면 안에 질문",
    "file": "ytflow/stages/checklist.py",
-   "line": 170
+   "line": 175
   },
   {
-   "id": "check:173",
+   "id": "check:178",
    "kind": "check",
    "gate": "gate:G1",
    "level": "MUST",
    "label": "curiosity: 훅 먼저 정하기 (topic_brief.hook: type·line·gap)",
    "file": "ytflow/stages/checklist.py",
-   "line": 173
+   "line": 178
   },
   {
-   "id": "check:179",
+   "id": "check:184",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "curiosity: 첫 박자부터 곧바로 훅 (채널 소개 인트로 없음, 첫 두 장면 안, 순서 예고보다 앞) (04 §0)",
    "file": "ytflow/stages/checklist.py",
-   "line": 179
+   "line": 184
   },
   {
-   "id": "check:182",
+   "id": "check:187",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "curiosity: 훅의 질문(gap)이 나옴 (답은 숨김)",
    "file": "ytflow/stages/checklist.py",
-   "line": 182
+   "line": 187
   },
   {
-   "id": "check:187",
+   "id": "check:192",
    "kind": "check",
    "gate": "gate:G1",
    "level": "MUST",
    "label": "curiosity: 시청자 조사 01_research/audience.md (주 시청자·유입 경로·유입 이유·끝까지 보는 이유)",
    "file": "ytflow/stages/checklist.py",
-   "line": 187
+   "line": 192
   },
   {
-   "id": "check:198",
+   "id": "check:203",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "curiosity: 지식·설명·수치 문장 ≤ 30% (대본 표시 ○, 04 §0-6)",
    "file": "ytflow/stages/checklist.py",
-   "line": 198
+   "line": 203
   },
   {
-   "id": "check:202",
+   "id": "check:207",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "curiosity: 지식·설명·수치 문장 ≤ 30% (자동 하한 — 02_script/script_vN.md 에 ●/○ 표시 권장)",
    "file": "ytflow/stages/checklist.py",
-   "line": 202
+   "line": 207
   },
   {
-   "id": "check:205",
+   "id": "check:210",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "curiosity: 편집 전에 대본만 사용자 검토 통과 (02_script/script_review.md '통과', 04 §0-6)",
    "file": "ytflow/stages/checklist.py",
-   "line": 205
+   "line": 210
   },
   {
-   "id": "check:211",
+   "id": "check:216",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "curiosity: 제목이 훅에서 나옴 (훅과 같은 낱말)",
    "file": "ytflow/stages/checklist.py",
-   "line": 211
+   "line": 216
   },
   {
-   "id": "check:217",
+   "id": "check:222",
    "kind": "check",
    "gate": "gate:G4",
    "level": "SHOULD",
    "label": "연결·의미: 대본에서 해석을 해석이라고 밝힘 ('해석'·'의미'·'로 볼 수 있')",
    "file": "ytflow/stages/checklist.py",
-   "line": 217
+   "line": 222
   },
   {
-   "id": "check:221",
+   "id": "check:226",
    "kind": "check",
    "gate": "gate:G1",
    "level": "MUST",
    "label": "매일 브리핑: daily_brief.json 있음 (python -m ytflow daily)",
    "file": "ytflow/stages/checklist.py",
-   "line": 221
+   "line": 226
   },
   {
-   "id": "check:223",
+   "id": "check:228",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "매일 브리핑: 오프닝에 기준 시각('○일 마감 기준' / '○시 기준')",
    "file": "ytflow/stages/checklist.py",
-   "line": 223
+   "line": 228
   },
   {
-   "id": "check:227",
+   "id": "check:232",
    "kind": "check",
    "gate": "gate:G3",
    "level": "MUST",
    "label": "매일 시장: 이야기마다 원인 종류(이슈·보고서·전망·실적)와 1차 출처를 팩트시트에",
    "file": "ytflow/stages/checklist.py",
-   "line": 227
-  },
-  {
-   "id": "check:236",
-   "kind": "check",
-   "gate": "gate:G1",
-   "level": "MUST/SHOULD",
-   "label": "v26: topic_brief 에 known(이미 알려진 것)·new_angle(자료를 엮어야 보이는 것) — 제목·훅은 new_angle 에서 (03 §0-2)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 236
+   "line": 232
   },
   {
    "id": "check:241",
    "kind": "check",
-   "gate": "gate:G3",
+   "gate": "gate:G1",
    "level": "MUST/SHOULD",
-   "label": "v26: 팩트시트 '## 자료 지도' — 보고서·발언·행동 각 2줄+, 합계 6줄+, 자료마다 의미 칸 (03 §0-2)",
+   "label": "v26: topic_brief 에 known(이미 알려진 것)·new_angle(자료를 엮어야 보이는 것) — 제목·훅은 new_angle 에서 (03 §0-2)",
    "file": "ytflow/stages/checklist.py",
    "line": 241
   },
@@ -4380,387 +4382,366 @@
    "id": "check:246",
    "kind": "check",
    "gate": "gate:G3",
-   "level": "MUST",
-   "label": "주간: 팩트시트 '## 다음 주 일정' 5줄+ (실적 1줄+, 한국 시간·볼 것·출처) (manual/09 §2)",
+   "level": "MUST/SHOULD",
+   "label": "v26: 팩트시트 '## 자료 지도' — 보고서·발언·행동 각 2줄+, 합계 6줄+, 자료마다 의미 칸 (03 §0-2)",
    "file": "ytflow/stages/checklist.py",
    "line": 246
   },
   {
-   "id": "check:248",
+   "id": "check:251",
+   "kind": "check",
+   "gate": "gate:G3",
+   "level": "MUST",
+   "label": "주간: 팩트시트 '## 다음 주 일정' 5줄+ (실적 1줄+, 한국 시간·볼 것·출처) (manual/09 §2)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 251
+  },
+  {
+   "id": "check:253",
    "kind": "check",
    "gate": "gate:G1",
    "level": "MUST/SHOULD",
    "label": "v28: topic_brief hub_event — 그 기간 시장을 가장 크게 흔든 사건이 중심축 (03 §0-3)",
    "file": "ytflow/stages/checklist.py",
-   "line": 248
-  },
-  {
-   "id": "check:249",
-   "kind": "check",
-   "gate": "gate:G3",
-   "level": "MUST/SHOULD",
-   "label": "v28: 팩트시트 '## 파급 경로'·'## 주의할 점' (03 §0-3)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 249
-  },
-  {
-   "id": "check:252",
-   "kind": "check",
-   "gate": "gate:G4",
-   "level": "MUST/SHOULD",
-   "label": "v28: 대본 앞 3장면 안에 중심 사건 (03 §0-3)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 252
+   "line": 253
   },
   {
    "id": "check:254",
    "kind": "check",
    "gate": "gate:G3",
    "level": "MUST/SHOULD",
-   "label": "v26: 팩트시트 '## 매체 프레임' — 매체 4곳+ (국내 2·해외 2), 제목·강조점·빠진 것 (03 §0-2)",
+   "label": "v28: 팩트시트 '## 파급 경로'·'## 주의할 점' (03 §0-3)",
    "file": "ytflow/stages/checklist.py",
    "line": 254
   },
   {
-   "id": "check:256",
+   "id": "check:257",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST/SHOULD",
+   "label": "v28: 대본 앞 3장면 안에 중심 사건 (03 §0-3)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 257
+  },
+  {
+   "id": "check:259",
+   "kind": "check",
+   "gate": "gate:G3",
+   "level": "MUST/SHOULD",
+   "label": "v26: 팩트시트 '## 매체 프레임' — 매체 4곳+ (국내 2·해외 2), 제목·강조점·빠진 것 (03 §0-2)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 259
+  },
+  {
+   "id": "check:261",
    "kind": "check",
    "gate": "gate:G3",
    "level": "MUST/SHOULD",
    "label": "v28: 매체 프레임에 '입장' 칸 (낙관·우려·중립, 03 §0-3)",
    "file": "ytflow/stages/checklist.py",
-   "line": 256
+   "line": 261
   },
   {
-   "id": "check:259",
+   "id": "check:264",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST/SHOULD",
    "label": "v26: 대본에 매체가 어떻게 다뤘나 + 말과 행동 맞대기 (03 §0-2)",
    "file": "ytflow/stages/checklist.py",
-   "line": 259
+   "line": 264
   },
   {
-   "id": "check:275",
+   "id": "check:280",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "v27: 화면에 없는 숫자를 2개+ 말하면서 그 순간 생기는 그림(motion)이 없는 박자 0개 (manual/09 §6)",
    "file": "ytflow/stages/checklist.py",
-   "line": 275
+   "line": 280
   },
   {
-   "id": "check:280",
+   "id": "check:285",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "제목·썸네일에 채널 이름(이어 읽는 시장) 없음 — 날짜만 (manual/09 §7)",
    "file": "ytflow/stages/checklist.py",
-   "line": 280
-  },
-  {
-   "id": "check:283",
-   "kind": "check",
-   "gate": "gate:G4",
-   "level": "SHOULD",
-   "label": "market: 끝에 확인할 신호(checklist)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 283,
-   "terms": [
-    "term:checklist"
-   ]
-  },
-  {
-   "id": "check:286",
-   "kind": "check",
-   "gate": "gate:G4",
-   "level": "MUST",
-   "label": "issues: 사실 기준 시각(as_of)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 286
+   "line": 285
   },
   {
    "id": "check:288",
    "kind": "check",
    "gate": "gate:G4",
+   "level": "SHOULD",
+   "label": "market: 끝에 확인할 신호(checklist)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 288,
+   "terms": [
+    "term:checklist"
+   ]
+  },
+  {
+   "id": "check:291",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "issues: 사실 기준 시각(as_of)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 291
+  },
+  {
+   "id": "check:293",
+   "kind": "check",
+   "gate": "gate:G4",
    "level": "MUST",
    "label": "issues: 서로 다른 입장 2개 이상(각 출처)",
    "file": "ytflow/stages/checklist.py",
-   "line": 288
+   "line": 293
   },
   {
-   "id": "check:290",
+   "id": "check:295",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "issues: 대본에 '기준' 시점 언급",
    "file": "ytflow/stages/checklist.py",
-   "line": 290
-  },
-  {
-   "id": "check:292",
-   "kind": "check",
-   "gate": "gate:G4",
-   "level": "MUST",
-   "label": "issues: 단정·비하 금지어 없음",
-   "file": "ytflow/stages/checklist.py",
-   "line": 292
-  },
-  {
-   "id": "check:296",
-   "kind": "check",
-   "gate": "gate:G3",
-   "level": "MUST",
-   "label": "issues: 출처 링크 5개 이상·도메인 3곳 이상",
-   "file": "ytflow/stages/checklist.py",
-   "line": 296
+   "line": 295
   },
   {
    "id": "check:297",
    "kind": "check",
    "gate": "gate:G4",
-   "level": "SHOULD",
-   "label": "issues: 모르는 것(unknowns) 말하기",
+   "level": "MUST",
+   "label": "issues: 단정·비하 금지어 없음",
    "file": "ytflow/stages/checklist.py",
    "line": 297
   },
   {
-   "id": "check:299",
+   "id": "check:301",
+   "kind": "check",
+   "gate": "gate:G3",
+   "level": "MUST",
+   "label": "issues: 출처 링크 5개 이상·도메인 3곳 이상",
+   "file": "ytflow/stages/checklist.py",
+   "line": 301
+  },
+  {
+   "id": "check:302",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "SHOULD",
+   "label": "issues: 모르는 것(unknowns) 말하기",
+   "file": "ytflow/stages/checklist.py",
+   "line": 302
+  },
+  {
+   "id": "check:304",
    "kind": "check",
    "gate": "gate:G4",
    "level": "SHOULD",
    "label": "issues: 사람의 목소리 장면 1개 이상 (quote·이름 자막)",
    "file": "ytflow/stages/checklist.py",
-   "line": 299,
+   "line": 304,
    "terms": [
     "term:quote"
    ]
   },
   {
-   "id": "check:303",
+   "id": "check:308",
    "kind": "check",
    "gate": "gate:G4",
    "level": "SHOULD",
    "label": "issues: 말하듯 쓴 대본 — 묻는 문장 3개+, 보도문 말투 10% 이하 (08 §0-1)",
    "file": "ytflow/stages/checklist.py",
-   "line": 303
+   "line": 308
   },
   {
-   "id": "check:305",
+   "id": "check:310",
    "kind": "check",
    "gate": "gate:G1",
    "level": "SHOULD",
    "label": "issues: 이름 붙은 시리즈(series)",
    "file": "ytflow/stages/checklist.py",
-   "line": 305
+   "line": 310
   },
   {
-   "id": "check:308",
+   "id": "check:313",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "issues: 양쪽 입장 장면 길이 차 30% 이내",
    "file": "ytflow/stages/checklist.py",
-   "line": 308
+   "line": 313
   },
   {
-   "id": "check:313",
+   "id": "check:318",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1)",
    "file": "ytflow/stages/checklist.py",
-   "line": 313,
+   "line": 318,
    "terms": [
     "term:intro"
    ]
   },
   {
-   "id": "check:316",
+   "id": "check:321",
    "kind": "check",
    "gate": "gate:G4",
    "level": "SHOULD",
    "label": "말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용)",
    "file": "ytflow/stages/checklist.py",
-   "line": 316
-  },
-  {
-   "id": "check:320",
-   "kind": "check",
-   "gate": "gate:G4",
-   "level": "SHOULD",
-   "label": "말투: '~습니다/~니다·~까요' 80% 이상, 평균 문장 35자 이상 (미주일기 96~100%·62~71자)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 320
+   "line": 321
   },
   {
    "id": "check:325",
    "kind": "check",
-   "gate": "gate:G6",
-   "level": "MUST",
-   "label": "길이: 롱폼 10분 이상 (README §2-4)",
+   "gate": "gate:G4",
+   "level": "SHOULD",
+   "label": "말투: '~습니다/~니다·~까요' 80% 이상, 평균 문장 35자 이상 (미주일기 96~100%·62~71자)",
    "file": "ytflow/stages/checklist.py",
    "line": 325
   },
   {
    "id": "check:330",
    "kind": "check",
-   "gate": "gate:G5",
+   "gate": "gate:G6",
    "level": "MUST",
-   "label": "배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2)",
+   "label": "길이: 롱폼 10분 이상 (README §2-4)",
    "file": "ytflow/stages/checklist.py",
    "line": 330
   },
   {
-   "id": "check:333",
+   "id": "check:335",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "MUST",
+   "label": "배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 335
+  },
+  {
+   "id": "check:338",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "배경: 같은 바탕 3장면 연속 없음 (film 제외)",
    "file": "ytflow/stages/checklist.py",
-   "line": 333
+   "line": 338
   },
   {
-   "id": "check:336",
+   "id": "check:341",
    "kind": "check",
    "gate": "gate:G5",
    "level": "MUST",
    "label": "반복 피로: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기: 자료·지도·사진 겹치기·시각 효과, 05 §0-3)",
    "file": "ytflow/stages/checklist.py",
-   "line": 336
+   "line": 341
   },
   {
-   "id": "check:339",
+   "id": "check:344",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "v10: 장식 효과(dust·leak)는 2장면 이하 — 내용이 담긴 볼거리(사진·지도·사물 그림·정리판) 먼저",
    "file": "ytflow/stages/checklist.py",
-   "line": 339,
+   "line": 344,
    "terms": [
     "term:fx-dust",
     "term:fx-leak"
    ]
   },
   {
-   "id": "check:340",
+   "id": "check:345",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "반복 피로: 눈요기 있는 장면 60% 이상",
    "file": "ytflow/stages/checklist.py",
-   "line": 340
+   "line": 345
   },
   {
-   "id": "check:341",
+   "id": "check:346",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "반복 피로: 같은 시각 효과 3장면 연속 없음 · 효과 3종 이상(롱폼)",
    "file": "ytflow/stages/checklist.py",
-   "line": 341
-  },
-  {
-   "id": "check:357",
-   "kind": "check",
-   "gate": "gate:G5",
-   "level": "SHOULD",
-   "label": "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 357,
-   "terms": [
-    "term:graphic-pack"
-   ]
+   "line": 346
   },
   {
    "id": "check:362",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
-   "label": "v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게)",
+   "label": "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6)",
    "file": "ytflow/stages/checklist.py",
-   "line": 362
+   "line": 362,
+   "terms": [
+    "term:graphic-pack"
+   ]
   },
   {
-   "id": "check:370",
+   "id": "check:367",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "label": "v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 367
+  },
+  {
+   "id": "check:375",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음",
    "file": "ytflow/stages/checklist.py",
-   "line": 370
+   "line": 375
   },
   {
-   "id": "check:376",
+   "id": "check:381",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "반복 피로: 같은 채널 직전 편과 화면 구성 겹침 70% 이하 (Jaccard)",
    "file": "ytflow/stages/checklist.py",
-   "line": 376
+   "line": 381
   },
   {
-   "id": "check:379",
+   "id": "check:384",
    "kind": "check",
    "gate": "gate:G5",
    "level": "MUST",
    "label": "같은 type 3연속 없음",
    "file": "ytflow/stages/checklist.py",
-   "line": 379
+   "line": 384
   },
   {
-   "id": "check:392",
+   "id": "check:397",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "자료 화면 공백 ≤45초",
    "file": "ytflow/stages/checklist.py",
-   "line": 392
-  },
-  {
-   "id": "check:393",
-   "kind": "check",
-   "gate": "gate:G5",
-   "level": "SHOULD",
-   "label": "장 표지 간격 ≤200초",
-   "file": "ytflow/stages/checklist.py",
-   "line": 393
+   "line": 397
   },
   {
    "id": "check:398",
    "kind": "check",
    "gate": "gate:G5",
-   "level": "MUST",
-   "label": "스타일 조합: {rule['min_recipes']}종 이상 섞기 (한 스타일로만 만들면 불합격)",
+   "level": "SHOULD",
+   "label": "장 표지 간격 ≤200초",
    "file": "ytflow/stages/checklist.py",
    "line": 398
-  },
-  {
-   "id": "check:401",
-   "kind": "check",
-   "gate": "gate:G5",
-   "level": "MUST",
-   "label": "한 스타일이 {int(cap * 100)}% 넘지 않음",
-   "file": "ytflow/stages/checklist.py",
-   "line": 401
-  },
-  {
-   "id": "check:402",
-   "kind": "check",
-   "gate": "gate:G5",
-   "level": "MUST",
-   "label": "한 장면 안에서 겹친 장면(layers) {rule['min_layered']}개 이상",
-   "file": "ytflow/stages/checklist.py",
-   "line": 402,
-   "terms": [
-    "term:layers"
-   ]
   },
   {
    "id": "check:403",
    "kind": "check",
    "gate": "gate:G5",
    "level": "MUST",
-   "label": "같은 스타일 {rule['max_run'] + 1}장면 연속 없음",
+   "label": "스타일 조합: {rule['min_recipes']}종 이상 섞기 (한 스타일로만 만들면 불합격)",
    "file": "ytflow/stages/checklist.py",
    "line": 403
   },
@@ -4769,7 +4750,7 @@
    "kind": "check",
    "gate": "gate:G5",
    "level": "MUST",
-   "label": "강조는 아껴서: 1분에 1번 이하 (이 영상 {es['limit']}번까지)",
+   "label": "한 스타일이 {int(cap * 100)}% 넘지 않음",
    "file": "ytflow/stages/checklist.py",
    "line": 406
   },
@@ -4778,154 +4759,184 @@
    "kind": "check",
    "gate": "gate:G5",
    "level": "MUST",
-   "label": "한 장면에 강조 1개까지 (위아래로 같은 내용 반복 금지)",
+   "label": "한 장면 안에서 겹친 장면(layers) {rule['min_layered']}개 이상",
    "file": "ytflow/stages/checklist.py",
-   "line": 407
+   "line": 407,
+   "terms": [
+    "term:layers"
+   ]
   },
   {
    "id": "check:408",
    "kind": "check",
    "gate": "gate:G5",
    "level": "MUST",
-   "label": "핵심 단어 띄우기(words)는 단어 1~3개만",
+   "label": "같은 스타일 {rule['max_run'] + 1}장면 연속 없음",
    "file": "ytflow/stages/checklist.py",
    "line": 408
   },
   {
-   "id": "check:410",
+   "id": "check:411",
    "kind": "check",
    "gate": "gate:G5",
-   "level": "SHOULD",
-   "label": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
+   "level": "MUST",
+   "label": "강조는 아껴서: 1분에 1번 이하 (이 영상 {es['limit']}번까지)",
    "file": "ytflow/stages/checklist.py",
-   "line": 410,
-   "terms": [
-    "term:graphic-pack"
-   ]
+   "line": 411
   },
   {
    "id": "check:412",
    "kind": "check",
    "gate": "gate:G5",
-   "level": "SHOULD",
-   "label": "style-pick 기록 (상황에 맞춘 스타일 선택)",
+   "level": "MUST",
+   "label": "한 장면에 강조 1개까지 (위아래로 같은 내용 반복 금지)",
    "file": "ytflow/stages/checklist.py",
    "line": 412
   },
   {
+   "id": "check:413",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "MUST",
+   "label": "핵심 단어 띄우기(words)는 단어 1~3개만",
+   "file": "ytflow/stages/checklist.py",
+   "line": 413
+  },
+  {
    "id": "check:415",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "label": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 415,
+   "terms": [
+    "term:graphic-pack"
+   ]
+  },
+  {
+   "id": "check:417",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "label": "style-pick 기록 (상황에 맞춘 스타일 선택)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 417
+  },
+  {
+   "id": "check:420",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "final.mp4",
    "file": "ytflow/stages/checklist.py",
-   "line": 415
+   "line": 420
   },
   {
-   "id": "check:417",
+   "id": "check:422",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "레이아웃 점검 비어 있음",
    "file": "ytflow/stages/checklist.py",
-   "line": 417
+   "line": 422
   },
   {
-   "id": "check:423",
+   "id": "check:428",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
    "file": "ytflow/stages/checklist.py",
-   "line": 423
+   "line": 428
   },
   {
-   "id": "check:426",
+   "id": "check:431",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "납품 점검(음량 등)",
    "file": "ytflow/stages/checklist.py",
-   "line": 426
+   "line": 431
   },
   {
-   "id": "check:429",
+   "id": "check:434",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선)",
    "file": "ytflow/stages/checklist.py",
-   "line": 429,
+   "line": 434,
    "terms": [
     "term:static-ratio",
     "term:change-rate"
    ]
   },
   {
-   "id": "check:433",
+   "id": "check:438",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "curiosity 움직임: 정지 화면 비율 ≤0.3 (README §2-5)",
    "file": "ytflow/stages/checklist.py",
-   "line": 433,
+   "line": 438,
    "terms": [
     "term:static-ratio"
    ]
   },
   {
-   "id": "check:439",
+   "id": "check:444",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "최종 목소리 ElevenLabs",
    "file": "ytflow/stages/checklist.py",
-   "line": 439
-  },
-  {
-   "id": "check:443",
-   "kind": "check",
-   "gate": "gate:G7",
-   "level": "MUST",
-   "label": "제목 후보 3개 + 이유",
-   "file": "ytflow/stages/checklist.py",
-   "line": 443
-  },
-  {
-   "id": "check:445",
-   "kind": "check",
-   "gate": "gate:G7",
-   "level": "MUST",
-   "label": "썸네일 A/B/C + 점검 ok",
-   "file": "ytflow/stages/checklist.py",
-   "line": 445
+   "line": 444
   },
   {
    "id": "check:448",
    "kind": "check",
    "gate": "gate:G7",
-   "level": "SHOULD",
-   "label": "제목 앞 22자 안에 질문/핵심",
+   "level": "MUST",
+   "label": "제목 후보 3개 + 이유",
    "file": "ytflow/stages/checklist.py",
    "line": 448
   },
   {
-   "id": "check:451",
+   "id": "check:450",
+   "kind": "check",
+   "gate": "gate:G7",
+   "level": "MUST",
+   "label": "썸네일 A/B/C + 점검 ok",
+   "file": "ytflow/stages/checklist.py",
+   "line": 450
+  },
+  {
+   "id": "check:453",
+   "kind": "check",
+   "gate": "gate:G7",
+   "level": "SHOULD",
+   "label": "제목 앞 22자 안에 질문/핵심",
+   "file": "ytflow/stages/checklist.py",
+   "line": 453
+  },
+  {
+   "id": "check:456",
    "kind": "check",
    "gate": "gate:G8",
    "level": "MUST",
    "label": "GitHub Release 업로드",
    "file": "ytflow/stages/checklist.py",
-   "line": 451
+   "line": 456
   },
   {
-   "id": "check:453",
+   "id": "check:458",
    "kind": "check",
    "gate": "gate:G8",
    "level": "MUST",
    "label": "episodes.md 기록",
    "file": "ytflow/stages/checklist.py",
-   "line": 453
+   "line": 458
   },
   {
    "id": "ver:1",
@@ -6128,10 +6139,10 @@
    "src": "\"\"\"v15 카테고리 바탕. 움직이지 않는 그림 한 장 (v12 '차분하게').\"\"\""
   },
   {
-   "id": "code:ytflow/stages/checklist.py:165",
+   "id": "code:ytflow/stages/checklist.py:170",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 165,
+   "line": 170,
    "versions": [
     16
    ],
@@ -6139,10 +6150,10 @@
    "src": "import re as _re2   # v16 진행 말투: 연결어미로 문장을 끝내지 않기 (README §2-2)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:171",
+   "id": "code:ytflow/stages/checklist.py:176",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 171,
+   "line": 176,
    "versions": [
     17
    ],
@@ -6150,10 +6161,10 @@
    "src": "if brand == \"curiosity\" and longform and spec.get(\"scenes\"):   # v17 호기심 먼저 (04 §0)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:184",
+   "id": "code:ytflow/stages/checklist.py:189",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 184,
+   "line": 189,
    "versions": [
     24
    ],
@@ -6161,10 +6172,10 @@
    "src": "hk.get(\"gap\", \"\")[:40])   # v24 미주일기 문법: 여는 장면 → 그 일의 크기 → 질문 (첫 네 장면 안)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:185",
+   "id": "code:ytflow/stages/checklist.py:190",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 185,
+   "line": 190,
    "versions": [
     23
    ],
@@ -6172,10 +6183,10 @@
    "src": "# v23 시청자 먼저 (04 §0-6, docs/29): 상권 조사처럼 시청자를 먼저 알고, 대본이 지식 습득으로 치우치지 않게"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:212",
+   "id": "code:ytflow/stages/checklist.py:217",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 212,
+   "line": 217,
    "versions": [
     18
    ],
@@ -6183,10 +6194,10 @@
    "src": "if brand in (\"market\", \"issues\") and spec.get(\"scenes\"):   # v18 연결·의미 (03 §0-1)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:219",
+   "id": "code:ytflow/stages/checklist.py:224",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 219,
+   "line": 224,
    "versions": [
     17
    ],
@@ -6194,10 +6205,10 @@
    "src": "if ch in (\"ch-market-daily\", \"ch-issues-daily\"):   # v17 매일 브리핑 (03 §0, 08 §0-2)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:228",
+   "id": "code:ytflow/stages/checklist.py:233",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 228,
+   "line": 233,
    "versions": [
     26
    ],
@@ -6205,10 +6216,10 @@
    "src": "# v26 (03 §0-2, 2026-11-15 사용자): 뻔한 사실 말고 자료를 엮어야 보이는 것 — 자료 지도·말과 행동·매체 프레임"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:261",
+   "id": "code:ytflow/stages/checklist.py:266",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 261,
+   "line": 266,
    "versions": [
     27
    ],
@@ -6216,10 +6227,10 @@
    "src": "if ch == \"ch-market-daily\" and spec.get(\"scenes\"):   # v27 (manual/09 §6, 2026-11-15 사용자: \"말은 많은데 45일·60일만 강조된 채 멈춰 있다\")"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:309",
+   "id": "code:ytflow/stages/checklist.py:314",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 309,
+   "line": 314,
    "versions": [
     24
    ],
@@ -6227,10 +6238,10 @@
    "src": "if last >= 3:  # v24 인트로 없음 (README §2-1) · 말투 (README §2-3, 미주일기식)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:322",
+   "id": "code:ytflow/stages/checklist.py:327",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 322,
+   "line": 327,
    "versions": [
     24
    ],
@@ -6238,10 +6249,10 @@
    "src": "if last >= 6 and longform:  # v24 길이: 롱폼 최소 10분 (README §2-4)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:343",
+   "id": "code:ytflow/stages/checklist.py:348",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 343,
+   "line": 348,
    "versions": [
     13
    ],
@@ -6252,10 +6263,10 @@
    ]
   },
   {
-   "id": "code:ytflow/stages/checklist.py:361",
+   "id": "code:ytflow/stages/checklist.py:366",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 361,
+   "line": 366,
    "versions": [
     15
    ],
@@ -6263,10 +6274,10 @@
    "src": "if spec.get(\"scenes\"):   # v15 카테고리 개성 (05 §0-7)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:432",
+   "id": "code:ytflow/stages/checklist.py:437",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 432,
+   "line": 437,
    "versions": [
     25
    ],
@@ -7290,7 +7301,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:343",
+     "ref": "code:ytflow/stages/checklist.py:348",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -7343,7 +7354,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:165",
+     "ref": "code:ytflow/stages/checklist.py:170",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -7556,7 +7567,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:165",
+     "ref": "code:ytflow/stages/checklist.py:170",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -7623,13 +7634,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:171",
+     "ref": "code:ytflow/stages/checklist.py:176",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:219",
+     "ref": "code:ytflow/stages/checklist.py:224",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -7690,7 +7701,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:165",
+     "ref": "code:ytflow/stages/checklist.py:170",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -7860,19 +7871,19 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:184",
+     "ref": "code:ytflow/stages/checklist.py:189",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:309",
+     "ref": "code:ytflow/stages/checklist.py:314",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:322",
+     "ref": "code:ytflow/stages/checklist.py:327",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -8002,7 +8013,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:432",
+     "ref": "code:ytflow/stages/checklist.py:437",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -8063,7 +8074,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:432",
+     "ref": "code:ytflow/stages/checklist.py:437",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -8154,13 +8165,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:228",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "check:236",
+     "ref": "code:ytflow/stages/checklist.py:233",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -8172,13 +8177,19 @@
      "by": ""
     },
     {
-     "ref": "check:254",
+     "ref": "check:246",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
      "ref": "check:259",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:264",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -8204,6 +8215,10 @@
     {
      "ref": "sec:README§2-5",
      "kind": "manual"
+    },
+    {
+     "ref": "fb:1",
+     "kind": "feedback"
     }
    ],
    "variants": [
@@ -8212,6 +8227,13 @@
    "member_ids": [
     "intent:759c49eb",
     "intent:4300a065"
+   ],
+   "clarified": [
+    {
+     "date": "2026-11-15",
+     "quote": "나는 동영상의 이점을 살린다 즉 정적인 단순 다음 ppt 다음 ppt가 아니라 영상의 이점을 살려라 라고 했지 반드시 카메라를 움직여라 라고 하려고 했던게 아닌데",
+     "ref": "fb:1"
+    }
    ],
    "themes": [
     "motion",
@@ -8239,10 +8261,10 @@
      "by": "Claude 기록 — 2026-11-15 사용자 설명('카메라를 반드시 움직이라는 뜻이 아니었다') 기준, 사용자 확인 필요"
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:432",
-     "status": "over",
-     "note": "정지 화면 비율 ≤0.3 MUST 는 프레임 차이만 재므로 카메라를 흔들면 통과 — 의도(말하는 내용이 화면에 생김)를 재지 않음. v30 은 시장 채널에서 같은 숫자를 '참고만'으로 내림",
-     "by": "Claude 기록 — 2026-11-15 사용자 설명('카메라를 반드시 움직이라는 뜻이 아니었다') 기준, 사용자 확인 필요"
+     "ref": "code:ytflow/stages/checklist.py:437",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
     },
     {
      "ref": "code:ytflow/stages/stage.py:61",
@@ -8255,6 +8277,12 @@
      "status": "unreviewed",
      "note": "",
      "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:432",
+     "status": "over",
+     "note": "정지 화면 비율 ≤0.3 MUST 는 프레임 차이만 재므로 카메라를 흔들면 통과 — 의도(말하는 내용이 화면에 생김)를 재지 않음. v30 은 시장 채널에서 같은 숫자를 '참고만'으로 내림",
+     "by": "Claude 기록 — 2026-11-15 사용자 설명('카메라를 반드시 움직이라는 뜻이 아니었다') 기준, 사용자 확인 필요"
     },
     {
      "ref": "sec:09§6",
@@ -8336,19 +8364,19 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:184",
+     "ref": "code:ytflow/stages/checklist.py:189",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:309",
+     "ref": "code:ytflow/stages/checklist.py:314",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:322",
+     "ref": "code:ytflow/stages/checklist.py:327",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -8390,7 +8418,7 @@
      "kind": "code"
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:432",
+     "ref": "code:ytflow/stages/checklist.py:437",
      "kind": "code"
     }
    ],
@@ -8422,7 +8450,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:432",
+     "ref": "code:ytflow/stages/checklist.py:437",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -8513,19 +8541,19 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:184",
+     "ref": "code:ytflow/stages/checklist.py:189",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:309",
+     "ref": "code:ytflow/stages/checklist.py:314",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:322",
+     "ref": "code:ytflow/stages/checklist.py:327",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -8667,19 +8695,19 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:184",
+     "ref": "code:ytflow/stages/checklist.py:189",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:309",
+     "ref": "code:ytflow/stages/checklist.py:314",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:322",
+     "ref": "code:ytflow/stages/checklist.py:327",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -8770,19 +8798,19 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:184",
+     "ref": "code:ytflow/stages/checklist.py:189",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:309",
+     "ref": "code:ytflow/stages/checklist.py:314",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:322",
+     "ref": "code:ytflow/stages/checklist.py:327",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -8862,7 +8890,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:261",
+     "ref": "code:ytflow/stages/checklist.py:266",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -8892,7 +8920,7 @@
      "by": ""
     },
     {
-     "ref": "check:275",
+     "ref": "check:280",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -9027,25 +9055,25 @@
      "by": ""
     },
     {
-     "ref": "check:248",
+     "ref": "check:253",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:249",
+     "ref": "check:254",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:252",
+     "ref": "check:257",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:256",
+     "ref": "check:261",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -9215,19 +9243,19 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:184",
+     "ref": "code:ytflow/stages/checklist.py:189",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:309",
+     "ref": "code:ytflow/stages/checklist.py:314",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:322",
+     "ref": "code:ytflow/stages/checklist.py:327",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -9314,7 +9342,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:261",
+     "ref": "code:ytflow/stages/checklist.py:266",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -9344,7 +9372,7 @@
      "by": ""
     },
     {
-     "ref": "check:275",
+     "ref": "check:280",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -9364,7 +9392,7 @@
    "date": "2026-11-15",
    "sources": [
     {
-     "ref": "code:ytflow/stages/checklist.py:261",
+     "ref": "code:ytflow/stages/checklist.py:266",
      "kind": "code"
     }
    ],
@@ -9412,7 +9440,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:261",
+     "ref": "code:ytflow/stages/checklist.py:266",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -9442,7 +9470,7 @@
      "by": ""
     },
     {
-     "ref": "check:275",
+     "ref": "check:280",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -9904,7 +9932,7 @@
     "sec:09§4",
     "sec:README§2-1",
     "rule:G4:1",
-    "check:313"
+    "check:318"
    ]
   },
   {
@@ -10250,7 +10278,7 @@
     "sec:08§6",
     "sec:09§4",
     "sec:09§5",
-    "check:299"
+    "check:304"
    ]
   },
   {
@@ -10297,7 +10325,7 @@
     "sec:08§h89",
     "sec:09§4",
     "rule:G4:1",
-    "check:283"
+    "check:288"
    ]
   },
   {
@@ -11032,7 +11060,7 @@
     "sec:06§G5",
     "ver:9",
     "rule:G5:1",
-    "check:339"
+    "check:344"
    ]
   },
   {
@@ -11070,7 +11098,7 @@
     "sec:06§G5",
     "ver:9",
     "rule:G5:1",
-    "check:339"
+    "check:344"
    ]
   },
   {
@@ -13031,8 +13059,8 @@
     "ver:27",
     "ver:30",
     "rule:G6:1",
-    "check:429",
-    "check:433"
+    "check:434",
+    "check:438"
    ]
   },
   {
@@ -13070,7 +13098,7 @@
     "sec:README§2-5",
     "ver:31",
     "rule:G6:1",
-    "check:429"
+    "check:434"
    ]
   },
   {
@@ -13184,7 +13212,7 @@
     "ver:3",
     "ver:4",
     "rule:G5:1",
-    "check:402"
+    "check:407"
    ]
   },
   {
@@ -13230,14 +13258,31 @@
     "ver:3",
     "ver:13",
     "rev:15",
-    "code:ytflow/stages/checklist.py:343",
+    "code:ytflow/stages/checklist.py:348",
     "rule:G5:1",
     "rule:G6:1",
-    "check:357",
-    "check:410",
+    "check:362",
+    "check:415",
     "intent:00ba80c7",
     "step:5"
    ]
+  },
+  {
+   "id": "fb:1",
+   "kind": "feedback",
+   "date": "2026-11-15",
+   "quote": "나는 동영상의 이점을 살린다 즉 정적인 단순 다음 ppt 다음 ppt가 아니라 영상의 이점을 살려라 라고 했지 반드시 카메라를 움직여라 라고 하려고 했던게 아닌데",
+   "label": "나는 동영상의 이점을 살린다 즉 정적인 단순 다음 ppt 다음 ppt가 아니라 영상의 이점을 살려라 라고 했",
+   "fb_kind": "clarify",
+   "fb_kind_label": "뜻 바로잡기",
+   "project": "",
+   "about": "759c49eb",
+   "note": "v25 해석(README §2-5 카메라 계속 움직임·정지 비율 ≤0.3)이 뜻과 다름 — 의도 정렬에 과잉 해석으로 판정 (사용자 확인 대기)",
+   "pending": false,
+   "themes": [
+    "motion"
+   ],
+   "intent": "intent:759c49eb"
   }
  ],
  "edges": [
@@ -14192,22 +14237,12 @@
    "kind": "enforces"
   },
   {
-   "s": "check:105",
-   "t": "gate:G1",
+   "s": "check:104",
+   "t": "gate:G0",
    "kind": "enforces"
   },
   {
-   "s": "check:107",
-   "t": "gate:G1",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:108",
-   "t": "gate:G1",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:109",
+   "s": "check:110",
    "t": "gate:G1",
    "kind": "enforces"
   },
@@ -14217,68 +14252,73 @@
    "kind": "enforces"
   },
   {
+   "s": "check:113",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
    "s": "check:114",
    "t": "gate:G1",
    "kind": "enforces"
   },
   {
-   "s": "check:115",
+   "s": "check:117",
    "t": "gate:G1",
    "kind": "enforces"
   },
   {
-   "s": "check:116",
+   "s": "check:119",
    "t": "gate:G1",
    "kind": "enforces"
   },
   {
-   "s": "check:130",
+   "s": "check:120",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:121",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:135",
    "t": "gate:G2",
    "kind": "enforces"
   },
   {
-   "s": "check:132",
+   "s": "check:137",
    "t": "gate:G2",
    "kind": "enforces"
   },
   {
-   "s": "check:138",
+   "s": "check:143",
    "t": "gate:G2",
    "kind": "enforces"
   },
   {
-   "s": "check:140",
-   "t": "gate:G2",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:142",
+   "s": "check:145",
    "t": "gate:G2",
    "kind": "enforces"
   },
   {
    "s": "check:147",
-   "t": "gate:G3",
+   "t": "gate:G2",
    "kind": "enforces"
   },
   {
-   "s": "check:148",
-   "t": "gate:G3",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:149",
+   "s": "check:152",
    "t": "gate:G3",
    "kind": "enforces"
   },
   {
    "s": "check:153",
-   "t": "gate:G4",
+   "t": "gate:G3",
    "kind": "enforces"
   },
   {
-   "s": "check:156",
-   "t": "gate:G4",
+   "s": "check:154",
+   "t": "gate:G3",
    "kind": "enforces"
   },
   {
@@ -14287,98 +14327,103 @@
    "kind": "enforces"
   },
   {
-   "s": "check:160",
+   "s": "check:161",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:162",
+   "s": "check:163",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:164",
+   "s": "check:165",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:168",
+   "s": "check:167",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:170",
+   "s": "check:169",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
    "s": "check:173",
-   "t": "gate:G1",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:179",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:182",
+   "s": "check:175",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:178",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:184",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
    "s": "check:187",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:192",
    "t": "gate:G1",
    "kind": "enforces"
   },
   {
-   "s": "check:198",
+   "s": "check:203",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:202",
+   "s": "check:207",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:205",
+   "s": "check:210",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:211",
+   "s": "check:216",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:217",
+   "s": "check:222",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:221",
+   "s": "check:226",
    "t": "gate:G1",
    "kind": "enforces"
   },
   {
-   "s": "check:223",
+   "s": "check:228",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:227",
+   "s": "check:232",
    "t": "gate:G3",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:236",
-   "t": "gate:G1",
    "kind": "enforces"
   },
   {
    "s": "check:241",
-   "t": "gate:G3",
+   "t": "gate:G1",
    "kind": "enforces"
   },
   {
@@ -14387,18 +14432,13 @@
    "kind": "enforces"
   },
   {
-   "s": "check:248",
-   "t": "gate:G1",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:249",
+   "s": "check:251",
    "t": "gate:G3",
    "kind": "enforces"
   },
   {
-   "s": "check:252",
-   "t": "gate:G4",
+   "s": "check:253",
+   "t": "gate:G1",
    "kind": "enforces"
   },
   {
@@ -14407,33 +14447,33 @@
    "kind": "enforces"
   },
   {
-   "s": "check:256",
-   "t": "gate:G3",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:259",
+   "s": "check:257",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:275",
+   "s": "check:259",
+   "t": "gate:G3",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:261",
+   "t": "gate:G3",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:264",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
    "s": "check:280",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:285",
    "t": "gate:G6",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:283",
-   "t": "gate:G4",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:286",
-   "t": "gate:G4",
    "kind": "enforces"
   },
   {
@@ -14442,18 +14482,18 @@
    "kind": "enforces"
   },
   {
-   "s": "check:290",
+   "s": "check:291",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:292",
+   "s": "check:293",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:296",
-   "t": "gate:G3",
+   "s": "check:295",
+   "t": "gate:G4",
    "kind": "enforces"
   },
   {
@@ -14462,67 +14502,62 @@
    "kind": "enforces"
   },
   {
-   "s": "check:299",
+   "s": "check:301",
+   "t": "gate:G3",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:302",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:303",
+   "s": "check:304",
    "t": "gate:G4",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:305",
-   "t": "gate:G1",
    "kind": "enforces"
   },
   {
    "s": "check:308",
-   "t": "gate:G5",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:310",
+   "t": "gate:G1",
    "kind": "enforces"
   },
   {
    "s": "check:313",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:318",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:316",
-   "t": "gate:G4",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:320",
+   "s": "check:321",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
    "s": "check:325",
-   "t": "gate:G6",
+   "t": "gate:G4",
    "kind": "enforces"
   },
   {
    "s": "check:330",
+   "t": "gate:G6",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:335",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:333",
-   "t": "gate:G5",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:336",
-   "t": "gate:G5",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:339",
-   "t": "gate:G5",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:340",
+   "s": "check:338",
    "t": "gate:G5",
    "kind": "enforces"
   },
@@ -14532,7 +14567,17 @@
    "kind": "enforces"
   },
   {
-   "s": "check:357",
+   "s": "check:344",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:345",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:346",
    "t": "gate:G5",
    "kind": "enforces"
   },
@@ -14542,42 +14587,32 @@
    "kind": "enforces"
   },
   {
-   "s": "check:370",
+   "s": "check:367",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:376",
+   "s": "check:375",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:379",
+   "s": "check:381",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:392",
+   "s": "check:384",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:393",
+   "s": "check:397",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
    "s": "check:398",
-   "t": "gate:G5",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:401",
-   "t": "gate:G5",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:402",
    "t": "gate:G5",
    "kind": "enforces"
   },
@@ -14602,7 +14637,7 @@
    "kind": "enforces"
   },
   {
-   "s": "check:410",
+   "s": "check:411",
    "t": "gate:G5",
    "kind": "enforces"
   },
@@ -14612,48 +14647,53 @@
    "kind": "enforces"
   },
   {
+   "s": "check:413",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
    "s": "check:415",
-   "t": "gate:G6",
+   "t": "gate:G5",
    "kind": "enforces"
   },
   {
    "s": "check:417",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:420",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:423",
+   "s": "check:422",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:426",
+   "s": "check:428",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:429",
+   "s": "check:431",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:433",
+   "s": "check:434",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:439",
+   "s": "check:438",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:443",
-   "t": "gate:G7",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:445",
-   "t": "gate:G7",
+   "s": "check:444",
+   "t": "gate:G6",
    "kind": "enforces"
   },
   {
@@ -14662,12 +14702,22 @@
    "kind": "enforces"
   },
   {
-   "s": "check:451",
-   "t": "gate:G8",
+   "s": "check:450",
+   "t": "gate:G7",
    "kind": "enforces"
   },
   {
    "s": "check:453",
+   "t": "gate:G7",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:456",
+   "t": "gate:G8",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:458",
    "t": "gate:G8",
    "kind": "enforces"
   },
@@ -15824,67 +15874,67 @@
   },
   {
    "s": "ver:16",
-   "t": "code:ytflow/stages/checklist.py:165",
+   "t": "code:ytflow/stages/checklist.py:170",
    "kind": "implemented_by"
   },
   {
    "s": "ver:17",
-   "t": "code:ytflow/stages/checklist.py:171",
+   "t": "code:ytflow/stages/checklist.py:176",
    "kind": "implemented_by"
   },
   {
    "s": "ver:24",
-   "t": "code:ytflow/stages/checklist.py:184",
+   "t": "code:ytflow/stages/checklist.py:189",
    "kind": "implemented_by"
   },
   {
    "s": "ver:23",
-   "t": "code:ytflow/stages/checklist.py:185",
+   "t": "code:ytflow/stages/checklist.py:190",
    "kind": "implemented_by"
   },
   {
    "s": "ver:18",
-   "t": "code:ytflow/stages/checklist.py:212",
+   "t": "code:ytflow/stages/checklist.py:217",
    "kind": "implemented_by"
   },
   {
    "s": "ver:17",
-   "t": "code:ytflow/stages/checklist.py:219",
+   "t": "code:ytflow/stages/checklist.py:224",
    "kind": "implemented_by"
   },
   {
    "s": "ver:26",
-   "t": "code:ytflow/stages/checklist.py:228",
+   "t": "code:ytflow/stages/checklist.py:233",
    "kind": "implemented_by"
   },
   {
    "s": "ver:27",
-   "t": "code:ytflow/stages/checklist.py:261",
+   "t": "code:ytflow/stages/checklist.py:266",
    "kind": "implemented_by"
   },
   {
    "s": "ver:24",
-   "t": "code:ytflow/stages/checklist.py:309",
+   "t": "code:ytflow/stages/checklist.py:314",
    "kind": "implemented_by"
   },
   {
    "s": "ver:24",
-   "t": "code:ytflow/stages/checklist.py:322",
+   "t": "code:ytflow/stages/checklist.py:327",
    "kind": "implemented_by"
   },
   {
    "s": "ver:13",
-   "t": "code:ytflow/stages/checklist.py:343",
+   "t": "code:ytflow/stages/checklist.py:348",
    "kind": "implemented_by"
   },
   {
    "s": "ver:15",
-   "t": "code:ytflow/stages/checklist.py:361",
+   "t": "code:ytflow/stages/checklist.py:366",
    "kind": "implemented_by"
   },
   {
    "s": "ver:25",
-   "t": "code:ytflow/stages/checklist.py:432",
+   "t": "code:ytflow/stages/checklist.py:437",
    "kind": "implemented_by"
   },
   {
@@ -16109,37 +16159,27 @@
   },
   {
    "s": "ver:26",
-   "t": "check:236",
-   "kind": "implemented_by"
-  },
-  {
-   "s": "ver:26",
    "t": "check:241",
    "kind": "implemented_by"
   },
   {
-   "s": "ver:28",
-   "t": "check:248",
-   "kind": "implemented_by"
-  },
-  {
-   "s": "ver:28",
-   "t": "check:249",
-   "kind": "implemented_by"
-  },
-  {
-   "s": "ver:28",
-   "t": "check:252",
-   "kind": "implemented_by"
-  },
-  {
    "s": "ver:26",
+   "t": "check:246",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:28",
+   "t": "check:253",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:28",
    "t": "check:254",
    "kind": "implemented_by"
   },
   {
    "s": "ver:28",
-   "t": "check:256",
+   "t": "check:257",
    "kind": "implemented_by"
   },
   {
@@ -16148,23 +16188,33 @@
    "kind": "implemented_by"
   },
   {
+   "s": "ver:28",
+   "t": "check:261",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:26",
+   "t": "check:264",
+   "kind": "implemented_by"
+  },
+  {
    "s": "ver:27",
-   "t": "check:275",
+   "t": "check:280",
    "kind": "implemented_by"
   },
   {
    "s": "ver:10",
-   "t": "check:339",
+   "t": "check:344",
    "kind": "implemented_by"
   },
   {
    "s": "ver:15",
-   "t": "check:362",
+   "t": "check:367",
    "kind": "implemented_by"
   },
   {
    "s": "ver:15",
-   "t": "check:370",
+   "t": "check:375",
    "kind": "implemented_by"
   },
   {
@@ -16454,6 +16504,11 @@
   },
   {
    "s": "intent:759c49eb",
+   "t": "fb:1",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:759c49eb",
    "t": "theme:motion",
    "kind": "about"
   },
@@ -16584,7 +16639,7 @@
   },
   {
    "s": "intent:8ecb5021",
-   "t": "code:ytflow/stages/checklist.py:432",
+   "t": "code:ytflow/stages/checklist.py:437",
    "kind": "quoted_in"
   },
   {
@@ -16759,7 +16814,7 @@
   },
   {
    "s": "intent:99b74c20",
-   "t": "code:ytflow/stages/checklist.py:261",
+   "t": "code:ytflow/stages/checklist.py:266",
    "kind": "quoted_in"
   },
   {
@@ -16886,6 +16941,16 @@
    "s": "intent:88b07e08",
    "t": "theme:script",
    "kind": "about"
+  },
+  {
+   "s": "fb:1",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "fb:1",
+   "t": "intent:759c49eb",
+   "kind": "clarifies"
   }
  ]
 }
