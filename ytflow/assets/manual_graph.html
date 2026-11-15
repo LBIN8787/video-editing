@@ -385,6 +385,7 @@ function nodeName(n){
 function renderTiles(){
   const s = G.stats;
   const T = [
+    [G.audit ? `${G.audit.items.filter(x => x.level === "ask").length}` : "-", G.audit ? `정기 검토 물어볼 것 (${(G.audit.date || "").slice(5, 10)})` : "정기 검토 (아직 안 돎)", G.audit && G.audit.items.some(x => x.level === "ask") ? "warn" : "", "now:audit"],
     [s.rejects + s.passes + (s.feedback || 0), "내 피드백 (검토 + 말)", "", "now:fb"],
     [s.conflicts, "충돌 후보 — 반대 방향 규칙", s.conflicts ? "warn" : "", "now:conf"],
     [`${s.misaligned} / ${s.intents}`, "어긋난 의도 / 사용자 원문", s.misaligned ? "warn" : "", "now:mis"],
@@ -918,6 +919,22 @@ function feedbackStories(){
 /* ---------- 한눈에: 통과·금지·충돌 후보·어긋난 의도·기각 ---------- */
 let nowFocus = null, banTheme = "all";
 let fbMore = false, banTier = "principle";
+const AKIND = {conflict: "충돌 후보", overfit: "과적합 후보", pending: "반영 대기", untiered: "층 미정 피드백", misaligned: "어긋난 해석",
+  retired: "폐지된 기준이 남음", ref: "깨진 참조", coderef: "코드 위치 바뀜", topic: "주제 레포 오류", stale: "옛 그래프"};
+function auditCard(){
+  const A = G.audit;
+  if (!A) return `<section id="now-audit"><h3><span class="chip">정기 검토</span> 아직 돌지 않음</h3><p class="lead">python -m ytflow manual-audit — 매일 밤 자동으로 돕니다 (docs/34).</p></section>`;
+  const ask = A.items.filter(x => x.level === "ask"), fix = A.items.filter(x => x.level === "fix");
+  const row = x => `<div class="item ${x.level === "ask" ? "mis" : "rej"}"><small>${esc(AKIND[x.kind] || x.kind)}${x.new ? " · 새로" : ""} · ${esc(x.file || "")}${x.line ? ":" + x.line : ""} · 처음 본 날 ${esc(x.since || "")}</small><span>${hl(x.text)}</span><span style="color:var(--muted)">${esc(x.why)}</span></div>`;
+  const last = (A.log || []).slice(-7);
+  return `<section id="now-audit"><h3><span class="chip ${ask.length ? "pend" : "pass"}">정기 검토</span> ${esc((A.date || "").replace("T", " "))} — 물어볼 것 ${ask.length} · 고칠 것 ${fix.length} · 지난번 뒤 해결 ${A.counts.resolved}</h3>
+    <p class="lead">매일 밤 매뉴얼을 같은 기준으로 잽니다. 판단이 필요 없는 것(폐지된 기준 잔재·깨진 참조·옛 그래프)은 고치고, 규칙의 뜻·층을 바꾸는 것은 아래 질문으로 남깁니다. 답은 다음 대화에서 하시면 됩니다.</p>
+    ${ask.length ? `<div class="label">물어볼 것</div><div class="items">${ask.map(row).join("")}</div>` : `<p class="empty" style="margin:0">물어볼 것 없음 — 매뉴얼이 깨끗합니다.</p>`}
+    ${fix.length ? `<div class="label">아직 못 고친 것</div><div class="items">${fix.map(row).join("")}</div>` : ""}
+    ${(A.fixed || []).length ? `<div class="label">지난 검토에서 고친 것</div><div class="items">${A.fixed.map(t => `<div class="item pass"><span>${esc(t)}</span></div>`).join("")}</div>` : ""}
+    ${(A.resolved || []).length ? `<details><summary class="empty">해결된 항목 ${A.resolved.length}개</summary>${A.resolved.map(x => `<p class="empty" style="margin:4px 0">${esc(AKIND[x.kind] || x.kind)}: ${esc(x.text.slice(0, 90))}</p>`).join("")}</details>` : ""}
+    ${last.length ? `<div class="label">최근 검토</div><div class="chips">${last.map(e => `<span class="chip">${esc((e.date || "").slice(5, 16).replace("T", " "))} · 물음 ${e.ask} · 고칠 ${e.fix}</span>`).join("")}</div>` : ""}</section>`;
+}
 const TIER_DESC = {principle: "사실·법·권리·안전 — 진짜 금지, 어떤 지시가 와도", standard: "품질을 위한 제작 방법 — 버전으로 바뀔 수 있음",
   style: "소리·카메라·바탕·비율 — 금지 아님, 켜고 끄는 기본값", trial: "한 영상·한 시도의 반응 — 금지·MUST 로 만들지 않음"};
 function tierItem(x){
@@ -961,6 +978,7 @@ function renderNow(){
         <div class="k-pass"><b>통과</b><br>사용자가 통과시킨 영상 = 그때 매뉴얼 버전이 검증됨</div>
         <div class="k-rej"><b>기각</b><br>사용자가 돌려보낸 영상 → 반영된 버전</div>
       </div>
+      ${auditCard()}
       <section id="now-fb"><h3><span class="chip">내 피드백 ${fbAll.length}</span> 최근에 한 말과 어디로 갔나</h3>
         <p class="lead">영상 검토(통과·기각)와 그 밖에 한 말(방향 요청·뜻 바로잡기)을 날짜 순으로. 피드백을 기록하면 이 목록과 모든 탭이 함께 바뀝니다.</p>
         <div class="items">${fbAll.slice(0, fbMore ? 999 : 8).map(fbItem).join("")}</div>

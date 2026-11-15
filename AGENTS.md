@@ -42,6 +42,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **매뉴얼 그래프·의도 정렬·고치기 도구** — 한눈에(통과·금지·충돌 후보)·작업 절차 흐름도·내 피드백 → 매뉴얼 카드·용어 사전(스타일·장면·효과·움직임이 무엇이고 어떻게 구현됐나, `manual/glossary.yaml`), 내가 한 말(원문) → 모델 해석(버전) → 매뉴얼 규칙 → 코드·검사 → 검토 결과가 맞는지 판정(`manual/intents.yaml`: 뜻한 것·뜻하지 않은 것·과잉 해석/충돌), 검토 → 반영 버전 → 고친 절·게이트·규칙·검사 코드를 그래프로(`manual/graph.json`, 에이전트가 읽는 정책 그래프), 브라우저에서 매뉴얼 편집·검토 기록·버전 올리기 | `docs/31-manual-graph.md`, `python -m ytflow manual-graph`, `python -m ytflow manual-ui`, `ytflow/stages/manualgraph.py` |
 | **레포 구조: 메인 → 주제 레포 → 상황 → 영상 (2026-11-15)** — 매뉴얼이 메인 레포, `topics/<brand>/topic.yaml`(주식·호기심·AI·시사)이 메인을 물려받아 기본값·상황을 바꾸고 더함. 영상마다 `edit-plan` 으로 박자별 상황 → 장면 종류·연출 기법을 채우고 `02_script/EDIT_CONTEXT.md` 를 **편집 전에 먼저 읽음** | `docs/33-repo-layers.md`, `topics/README.md`, `manual/situations.yaml`, `python -m ytflow topics`, `python -m ytflow edit-plan <프로젝트>`, `ytflow/stages/layers.py` |
 | **연출 기법 카탈로그** (깃허브 등 열린 구현 조사: 글자 쪼개기·스크램블·모프·매치 무브·J/L컷·사진 깊이·순위 막대·맞대기 …, 이미 있음/후보/보류·라이선스·내 피드백과 부딪히는 점) — GSAP 3.13 플러그인 전부 무료 | `docs/32-technique-research.md`, `styles/techniques.yaml`, 매뉴얼 그래프 '용어 사전 → 연출 기법' |
+| **매뉴얼 정기 검토 (매일 밤 자동, 2026-11-15)** — 충돌·과적합·폐지된 기준 잔재·깨진 참조·층 미정 피드백을 재고, 판단이 필요 없는 것만 고쳐 커밋, 판단이 필요한 것은 질문으로 (그래프 '한눈에 → 정기 검토' + 휴대폰 알림). 매뉴얼 버전은 올리지 않음 | `docs/34-manual-review.md`, `skills/manual-review/SKILL.md`, `python -m ytflow manual-audit`, `manual/audit.md` |
 | **반드시 지킬 것·검사** | `manual/06-checklist.md`, `python -m ytflow check <프로젝트>` |
 | 채널 회차 만들기 (반복 운영) | `skills/channel-run/SKILL.md`, `channels/README.md`, `docs/06-operations.md` |
 | 영상 1편 만들기 | `skills/video-make/SKILL.md` |
@@ -105,6 +106,7 @@ python -m ytflow edit-plan <프로젝트>                            # 메인 �
 python -m ytflow check <프로젝트> [--upto G4]                     # 체크리스트 자동 검사 (MUST 실패 시 종료 코드 1)
 python -m ytflow review <프로젝트> --pass | --reject "이유"        # 사용자 검토 기록 → 기각은 매뉴얼 '반영 대기'로
 python -m ytflow manual-bump "바꾼 기준 요약"                      # 기각 사유 반영 후 매뉴얼 버전 올리기
+python -m ytflow manual-audit [--fixed "고친 것"]                   # 매뉴얼 정기 검토: 충돌·과적합·폐지된 기준 잔재·깨진 참조 → manual/audit.md (매일 밤 자동, docs/34)
 python -m ytflow manual-graph | manual-ui [--port 8770]           # 매뉴얼 지식 그래프(manual/graph.json) / 그래프 보기·매뉴얼 고치기 도구
 python -m ytflow sync-qa <프로젝트>                               # 완성본 자막·목소리·화면 싱크를 받아쓰기로 측정 → 05_edit/sync_qa.json
 python -m ytflow voice-import <프로젝트> part1.mp3 [...]          # ElevenLabs 긴 음성을 대본 박자별로 자르기 (키 없이)

@@ -284,6 +284,9 @@ def main(argv: list[str] | None = None) -> None:
     spk.add_argument("project")
     mb = sub.add_parser("manual-bump", help="기각 사유를 반영해 매뉴얼을 고친 뒤 버전 올리기 (manual/VERSION, CHANGELOG)")
     mb.add_argument("summary")
+    au = sub.add_parser("manual-audit", help="매뉴얼 정기 검토: 충돌·과적합·폐지된 기준 잔재·깨진 참조·층 미정 피드백 → manual/audit.md (docs/34)")
+    au.add_argument("--quiet", action="store_true"); au.add_argument("--note", default="")
+    au.add_argument("--fixed", action="append", default=[], help="이번 검토에서 고친 것 한 줄 (여러 번)")
     ep = sub.add_parser("edit-plan", help="메인 → 주제 레포 → 이 영상: 박자마다 상황을 찾아 장면 종류·연출 기법 채우기 → 02_script/EDIT_CONTEXT.md·edit_plan.json (docs/33)")
     ep.add_argument("project")
     sub.add_parser("topics", help="주제 레포(topics/<brand>) 목록 — 메인에서 물려받고 바꾸고 더한 상황")
@@ -466,6 +469,9 @@ def main(argv: list[str] | None = None) -> None:
         from .stages import checklist, manualgraph
         checklist.bump(a.summary)
         manualgraph.write()
+    elif a.cmd == "manual-audit":
+        from .stages import audit
+        audit.write(a.quiet, a.note, a.fixed)
     elif a.cmd == "edit-plan":
         from .stages import layers
         layers.write_plan(Project.open(a.project).path)

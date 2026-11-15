@@ -149,6 +149,7 @@ python -m ytflow check <프로젝트> --upto G4   # 대본까지만 검사 (렌�
 | (기각 후) | 이유를 **기준으로 바꿔** 매뉴얼(01~06)·프롬프트·검사기(`ytflow/stages/checklist.py`)를 고침 → `python -m ytflow manual-bump "바꾼 기준 요약"` → 커밋 → `git push origin HEAD:refs/heads/manual/vN` |
 | **그 밖의 말** (방향 요청·"그런 뜻이 아니었다") | `python -m ytflow feedback "원문" --kind direction\|clarify [--about intent:xxxx] [--pending]` → `manual/feedback.yaml` (원문 그대로). 해석이 틀렸다는 말이면 '의도 정렬'에서 판정 |
 | (기록할 때마다) | 매뉴얼 그래프(`manual/graph.json`)가 자동으로 다시 만들어짐 → 공유 페이지도 다시 올림 (docs/31 §8) |
+| (매일 밤 자동) | 정기 검토가 매뉴얼을 같은 기준으로 재고(`manual-audit`), 판단이 필요 없는 것은 고치고, 판단이 필요한 것은 질문으로 남겨 알림 (docs/34, `skills/manual-review`) |
 | (그동안) | '반영 대기'가 비기 전에는 `check` 가 G0 에서 실패 → 같은 실수가 다음 영상에 반복되지 않음 |
 
 - 기각 사유는 가능하면 **검사 가능한 규칙**으로 바꿉니다 (예: "자막이 작다" → "자막 글자 높이 ≥ 화면의 4.5%" 를 G6 자동 검사에 추가).

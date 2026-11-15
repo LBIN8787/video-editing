@@ -64,7 +64,7 @@ SEC_NUM = re.compile(r"^(G\d|\d+(?:-\d+)*)\.?\s")
 def parse_docs() -> tuple[list[dict], list[dict]]:
     docs, secs = [], []
     for p in sorted(MANUAL.glob("*.md")):
-        if p.name in ("CHANGELOG.md", "reviews.md"):
+        if p.name in ("CHANGELOG.md", "reviews.md", "audit.md"):   # 기록·보고서는 매뉴얼 본문이 아님
             continue
         key = _file_key(p)
         lines = _read(p).splitlines()
@@ -363,6 +363,8 @@ def source_hash() -> str:
                     *(ROOT / "styles" / "recipes").glob("*.yaml"), *(ROOT / "skins").glob("*/skin.yaml"), TECHNIQUES,
                     *(ROOT / "topics").glob("*/topic.yaml")])
     for f in files:
+        if f.name == "audit.md":   # 검토 보고서는 그래프 원본이 아님
+            continue
         if f.exists():
             h.update(f.name.encode()); h.update(f.read_bytes())
     return h.hexdigest()[:12]
@@ -1051,7 +1053,15 @@ def build() -> dict:
         "overfit": sum(1 for x in bans + rules + checks if x.get("overfit")),
         "principle_bans": sum(1 for b in bans if b.get("tier") == "principle"),
     }
+    try:   # 정기 검토 결과 (manual-audit, docs/34)
+        _au = json.loads((MANUAL / "audit.json").read_text(encoding="utf-8"))
+        audit_sum = {"date": _au.get("date"), "counts": _au.get("counts"), "items": _au.get("items", [])[:60],
+                     "resolved": _au.get("resolved", [])[:20], "log": (_au.get("log") or [])[-10:],
+                     "fixed": _au.get("fixed_by_agent", [])}
+    except Exception:
+        audit_sum = None
     return {"schema": SCHEMA_VERSION, "generated": dt.datetime.now().isoformat(timespec="seconds"), "source_hash": source_hash(),
+            "audit": audit_sum,
             "stats": stats, "pending": pending, "status_labels": STATUS, "conflicts": conflicts, "bans": bans, "tier_labels": TIER,
             "nodes": nodes, "edges": edges}
 
