@@ -64,5 +64,7 @@ python -m ytflow archive si "steam locomotive"     # CC0 이미지만, 소장처
 
 ## 5. 남은 일
 - Gmail 필터 (사람, 한 번): `from:(tldrnewsletter.com OR simonsfoundation.org OR aeon.co OR axios.com OR thedailyupside.com OR uppity.co.kr OR kdi.re.kr OR deeplearning.ai OR jstor.org OR publicdomainreview.org OR ourworldindata OR pewresearch.org)` → 받은편지함 건너뛰기 + `뉴스레터` 라벨. 첫 메일이 오면 실제 보낸 주소로 맞추기.
-- 매일 자동 수집: 아침 제작 전(05:40 전후)에 §2 의 1~5 를 돌리는 정기 작업 — 사용자가 정하면 만듦.
+- 매일 자동 수집 (2026-11-15 만듦): 정기 작업 `📰 뉴스레터 소재 수집 (매일 05:40)` (`trig_01FofZNNb2FYStBdN4L9MZv7`, 한국 05:40, 매번 새 세션) 이 §2 의 1~5 를 돌림.
+  main 에 이 코드가 합쳐지기 전에는 `ccr-28400ba3-s13cmo` 브랜치에, 합쳐진 뒤에는 main 에 커밋.
+  **⚠️ 만들 때 Gmail 커넥터를 붙이지 못함** — 사용자가 claude.ai 의 정기 작업(루틴) 설정에서 이 작업에 Gmail 커넥터를 더해야 메일을 읽음. 그 전에는 RSS 만 수집.
 - 매뉴얼 반영(manual/09 §3-0 옆에 '뉴스레터 화제'): 매뉴얼 담당에게 제안함으로 남김 (`proposals/manual/`).
