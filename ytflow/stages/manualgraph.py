@@ -460,6 +460,7 @@ def save_annotation(iid: str, data: dict) -> None:
     INTENTS.write_text(head + yaml.safe_dump(doc, allow_unicode=True, sort_keys=False, width=110), encoding="utf-8")
 
 
+POLAR_THEMES = ("motion", "sound", "background", "emphasis", "variety")
 PLUS = ["계속 움직", "끊임없", "완전히 멈춘 순간이 없", "멈춘 화면 없", "다가간다", "밀고 들어", "숨 쉰다", "반드시", "켠다"]
 MINUS = ["끈다", "기본 끔", "쓰지 않", "고정이 기본", "억지로", "흔들지 않", "덜'이 기본", "낮춥니다", "카메라를 흔들어"]
 
@@ -479,7 +480,7 @@ def polarity_lines(secs: list[dict]) -> list[dict]:
                 continue
             pol = "+" if any(w in ln for w in PLUS) else "-" if any(w in ln for w in MINUS) else None
             if pol:
-                for t in th:
+                for t in [x for x in th if x in POLAR_THEMES]:   # 더 하라/덜 하라 비교는 스타일 주제에만 의미가 있음
                     out.append({"section": s["id"], "theme": t, "pol": pol, "text": ln.strip()[:200]})
     return out
 

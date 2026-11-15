@@ -2,6 +2,34 @@
 
 Claude Code 와 Codex 가 **같은 GitHub 저장소**(LBIN8787/video-editing)를 씁니다. 코드·문서·기획 파일은 GitHub, 큰 미디어는 Google Drive 에 둡니다.
 
+## 0. 2026-11-15부터: 파일은 Google Drive 에서 관리 (D 드라이브 대신, 사용자 요청)
+**내려받는 것·만드는 큰 파일은 모두 Google Drive 에 둡니다.** PC 에서는 Google Drive for desktop 이 Drive 를 드라이브 문자(보통 `G:`)로 보여 주므로, 그 안의 폴더에 저장하면 자동으로 올라갑니다.
+
+### 1) 한 번만 설정 (PowerShell)
+```powershell
+# Google Drive for desktop 설치·로그인 후, 탐색기에서 '내 드라이브' 경로를 확인 (예: G:\내 드라이브)
+mkdir "G:\내 드라이브\ytflow\refs", "G:\내 드라이브\ytflow\cache", "G:\내 드라이브\ytflow\영상"
+setx YTFLOW_DRIVE "G:\내 드라이브\ytflow"
+```
+새로 연 터미널·Claude Code·Codex 부터 적용됩니다(`echo $env:YTFLOW_DRIVE`).
+
+### 2) 무엇을 어디에
+| 무엇 | 위치 |
+|---|---|
+| 레퍼런스 영상 캡처·rea-video 분석 결과 (`skills/ref-watch-ego`) | `%YTFLOW_DRIVE%\refs\<영상ID>\` |
+| 사용자가 받은 원본 영상·자료 화면 | `%YTFLOW_DRIVE%\refs\` 또는 `%YTFLOW_DRIVE%\cache\` |
+| ytflow 캐시 (받은 자료·측정) | `YTFLOW_DRIVE` 가 있으면 자동으로 `%YTFLOW_DRIVE%\cache` (`ytflow/config.py`) |
+| 완성 영상·자막·업로드 문구 | `%YTFLOW_DRIVE%\영상\` (+ GitHub Release 보관은 그대로) |
+| 클라우드 세션에서 만든 파일 | Drive 커넥터로 `ytflow` 폴더에 업로드(파일당 10MB). 큰 영상은 rclone(§2 표) 또는 GitHub Release |
+
+### 3) 예외 — Drive 동기화 폴더에 두면 안 되는 것
+Drive 동기화는 파일 수만 개짜리 폴더와 계속 바뀌는 잠금 파일에 약해서 아래는 망가지거나 동기화가 멈춥니다. **PC 의 기존 위치에 그대로** 둡니다(새로 만들지 않음).
+- git 저장소 `video-editing` (`.git` 이 깨질 수 있음)
+- 파이썬 가상환경(`reavenv`)·pip/npm 캐시·Playwright 브라우저·받아쓰기 모델(`HF_HOME`)·`REA_VIDEO_MODELS`
+- 렌더 중간 파일(`04_assets/hb*`, `05_edit/*work/`) — 다시 만들 수 있으므로 저장소 안에 두고 Release 뒤 지웁니다.
+
+아래 'D 드라이브' 절은 이 예외 항목에만 해당하는 예전 기록입니다.
+
 ## 1. GitHub (git)
 코드(`ytflow/`), 문서(`docs/`, `AGENTS.md`), 절차서(`skills/`), 설정(`config/`, `channels/`, `styles/*/` 의 md·yaml·json),
 프로젝트 기획 파일(`projects/*/` 의 md·json·csv·srt·ass·yaml: 소스 목록·팩트시트·원고·대본·업로드 문구·보고서).
@@ -52,7 +80,8 @@ Drive 토큰처럼 1시간마다 만료되는 키가 없습니다. 주소는 `05
 - 주의: drive.file 권한 토큰은 **이 앱이 만든 파일만** 봅니다. 커넥터로 만든 폴더 안에 올리는 것은 되지만, 그 폴더의 다른 파일 목록은 API 로 보이지 않습니다.
 - 다음부터는 영상을 만든 뒤 `python -m ytflow upload <프로젝트> --archive` 한 번이면 됩니다(이미 올린 것은 건너뜀, 일시 오류는 자동 재시도).
 
-## 내 PC 에서 돌릴 때 — C 드라이브 대신 D 드라이브 쓰기 (2026-11-11 사용자 요청)
+## (예전, 2026-11-11) 내 PC 에서 돌릴 때 — C 드라이브 대신 D 드라이브 쓰기
+> 2026-11-15부터 파일은 Google Drive(§0). 이 절은 §0-3 예외 항목(저장소·도구 설치)의 기존 위치 기록입니다.
 영상 한 편에 렌더 중간 파일이 0.5~1GB 생깁니다. **모든 작업은 D 드라이브에서** 합니다.
 
 ### 1) 저장소를 D 에 두기 (가장 중요)

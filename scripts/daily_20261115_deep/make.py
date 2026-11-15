@@ -90,7 +90,7 @@ def main():
     S = []
     s = S.append
     # 여는 장면: 사건 → 크기 → 질문
-    s(dict(type="quote", chapter=0, label=K8, fx=["dolly"], who="엔비디아 이사회", role="8-K 공시 · 11월 11일 자",
+    s(dict(type="quote", chapter=0, label=K8, who="엔비디아 이사회", role="8-K 공시 · 11월 11일 자",
            quote="이사회는 젠슨 황의 사장·CEO·이사직 사임을 받아들였다. 즉시 효력.", keyword="즉시",
            orig="the Board of Directors ... accepted the resignation of Jen-Hsun Huang, as NVIDIA's President, Chief Executive Officer and member of the Board, effective immediately.",
            beats=B("11월 11일 장이 끝난 뒤, 엔비디아 이사회는 짧은 공시 한 장을 냈습니다. 33년 동안 회사를 이끈 창업자 젠슨 황의 사임을 받아들였고, 즉시 효력이 생긴다는 내용이었습니다.",
@@ -104,7 +104,7 @@ def main():
     # 1. 무슨 일이
     s(dict(type="chapter", chapter=1, num="1", title="무슨 일이 있었나", icon="calendar", look="photo", bg_src="nvidia",
            beats=B("먼저 일주일을 날짜 순서로 정리하겠습니다.")))
-    s(dict(type="checklist", chapter=1, label=K8 + " · 사생활 관련 보도 내용은 다루지 않음", title="엔비디아의 일주일", fx=["tilt"], x=150, text_w=860, skin=NP,
+    s(dict(type="checklist", chapter=1, label=K8 + " · 사생활 관련 보도 내용은 다루지 않음", title="엔비디아의 일주일", x=150, text_w=860, skin=NP,
            rows=[{"label": "9일 이사회가 CEO 관련 보도 조사 → 주가 -4.27%", "state": "warn", "t": "9일"},
                  {"label": "11일 장 마감 뒤 사임 수락 (8-K)", "state": "warn", "t": "11일"},
                  {"label": "크레스 CFO 가 임시 CEO 겸임", "state": "ok", "t": "크레스"},
@@ -113,7 +113,7 @@ def main():
            beats=[{"say": "9일 월요일, 이사회가 최고경영자 관련 보도를 조사한다는 소식에 주가가 먼저 흔들렸습니다. 이 영상은 사생활 보도의 내용은 다루지 않고, 공시된 사실과 사업에 미치는 영향만 봅니다.", "upto": 1},
                   {"say": "11일 장 마감 뒤 사임이 공시됐습니다. 크레스 최고재무책임자가 임시 최고경영자를 맡고, 1993년부터 이사였던 하비 존스가 첫 이사회 의장이 됐습니다. 그리고 3분기 실적은 한국 시간 18일 새벽, 예정대로 나옵니다.", "upto": 5,
                    "motion": [M("크레스", "icon", id="kr", icon="👩‍💼", x=1620, y=420, d=170, label="임시 CEO"), M("존스", "icon", id="ch", icon="🏛️", x=1620, y=740, d=170, label="첫 의장")]}]))
-    s(dict(type="quote", chapter=1, label=K8 + " · 보도자료 (11월 12일)", fx=["scan"], who="하비 존스", role="엔비디아 이사회 의장 · 11월 12일",
+    s(dict(type="quote", chapter=1, label=K8 + " · 보도자료 (11월 12일)", who="하비 존스", role="엔비디아 이사회 의장 · 11월 12일",
            quote="회사의 운영, 고객과의 약속, 제품 로드맵은 중단 없이 이어질 것으로 기대한다.", keyword="고객과의 약속",
            orig="we expect the company's operations, customer commitments and product roadmap to continue without interruption.",
            beats=B("이사회 의장은 보도자료에서 세 가지가 중단 없이 이어질 것이라고 말했습니다. 회사의 운영, 제품 로드맵, 그리고 고객과의 약속입니다.",
@@ -122,14 +122,14 @@ def main():
     # 2. 시장의 첫 반응
     s(dict(type="chapter", chapter=2, num="2", title="시장의 첫 반응", icon="trending-up", look="photo", bg_src="nyse",
            beats=B("돈은 이 소식에 어떻게 움직였을까요?")))
-    s(dict(type="bars", chapter=2, label="야후 파이낸스 종가 · 2026.11.6 → 11.13", title="같은 한 주, 반도체 성적표 (%)", unit="", emph=3, fx=["dolly"], skin=DS,
+    s(dict(type="bars", chapter=2, label="야후 파이낸스 종가 · 2026.11.6 → 11.13", title="같은 한 주, 반도체 성적표 (%)", unit="", emph=3, skin=DS,
            items=[{"label": "AMD", "value": 18.93, "text": "+18.93", "t": "AMD는"}, {"label": "브로드컴", "value": 18.16, "text": "+18.16", "t": "브로드컴은"},
                   {"label": "반도체 지수", "value": 8.05, "text": "+8.05", "t": "반도체 지수는"}, {"label": "엔비디아", "value": -12.75, "text": "-12.75", "t": "엔비디아는"}],
            beats=[{"say": "같은 한 주, AMD는 18.93%, 브로드컴은 18.16% 올랐고 반도체 지수도 8.05% 올랐습니다. 엔비디아만 12.75% 내렸습니다. 돈이 대안을 찾아 옮겨 간 겁니다."},
                   {"say": "보도에 따르면 사임 발표 다음 날 엔비디아는 장 초반 13% 넘게 빠졌다가 4.34% 하락으로 마감했습니다. 그리고 13일에는 AMD가 8.75% 내리며 쏠림의 일부가 되돌아왔습니다.",
-                   "motion": [M("13%", "count", id="iv", value="-13%", label="12일 장 초반 (보도)", x=1640, y=320, w=440, h=210, fs=90),
-                              M("8.75%", "count", id="amd", value="-8.75%", label="13일 AMD", x=1640, y=600, w=440, h=210, fs=90)]}]))
-    s(dict(type="checklist", chapter=2, label="모틀리풀(11.14)·한국경제·헤럴드경제(11.13)·포천(11.11) · 목표가는 다루지 않음", title="엇갈린 해석, 근거는 무엇인가", fx=["scan"], x=150, text_w=880, skin=NP,
+                   "motion": [M("13%", "count", id="iv", value="-13%", label="12일 장 초반 (보도)", x=640, y=830, w=400, h=180, fs=80),
+                              M("8.75%", "count", id="amd", value="-8.75%", label="13일 AMD", x=1120, y=830, w=400, h=180, fs=80)]}]))
+    s(dict(type="checklist", chapter=2, label="모틀리풀(11.14)·한국경제·헤럴드경제(11.13)·포천(11.11) · 목표가는 다루지 않음", title="엇갈린 해석, 근거는 무엇인가", x=150, text_w=880, skin=NP,
            rows=[{"label": "낙관: 단기 사업 영향은 걱정 안 한다 (번스타인)", "state": "ok", "t": "번스타인"},
                  {"label": "낙관: 루빈 사이클·공급망 확보, 로드맵 2028년까지 (삼성증권)", "state": "ok", "t": "삼성증권"},
                  {"label": "우려: 뚜렷한 후계자도, 2인자도 없다 (멜리우스)", "state": "warn", "t": "멜리우스"},
@@ -137,14 +137,55 @@ def main():
                  {"label": "구분: 경영 불확실성 ≠ 반도체 업황 (유안타)", "state": "ok", "t": "유안타"}],
            beats=[{"say": "해석은 엇갈렸습니다. 낙관하는 쪽의 근거는 확정된 계획입니다. 번스타인의 애널리스트는 단기 사업 영향은 걱정하지 않는다고 했고, 삼성증권은 차세대 루빈 제품과 부품 공급망이 이미 확보됐고 로드맵도 2028년까지 정해져 있다고 짚었습니다.", "upto": 2},
                   {"say": "우려하는 쪽의 근거는 사람입니다. 멜리우스는 뚜렷한 후계자도 운영 2인자도 없다고 했고, 포천은 사임 전날 이미 창업자와 수십 년 얽힌 이사회를 문제로 꼽았습니다. 그리고 유안타증권은, 경영 불확실성과 반도체 업황은 구분해야 한다고 정리했습니다.", "upto": 5}]))
-    # 3. 돈의 약속
-    s(dict(type="chapter", chapter=3, num="3", title="칩보다 먼저 흔들리는 것", icon="handshake", look="board",
+    # 3. 어디가 흔들렸나 — 시장·산업별 영향 (2026-11-15 사용자: "어떤 시장과 어떤 산업이 어떤 영향을 받는지")
+    PX = "야후 파이낸스 종가 · 사임 공시 전날(11일) → 13일"
+    s(dict(type="chapter", chapter=3, num="3", title="어디가 흔들렸나", icon="git-branch", look="photo", bg_src="dc",
+           beats=B("그렇다면 이 소식은 어떤 시장, 어떤 산업을 흔들었을까요? 사임 공시 전날 종가와 13일 종가를, 업종별로 나란히 놓아 보겠습니다.")))
+    s(dict(type="bars", chapter=3, label=PX + " · 네비우스는 12일 자체 3분기 실적도 발표", title="AI 클라우드·데이터센터 금융 (%)", unit="", emph=0, skin=DS,
+           items=[{"label": "네비우스", "value": -25.09, "text": "-25.09", "t": "네비우스는"}, {"label": "코어위브", "value": -12.57, "text": "-12.57", "t": "코어위브는"},
+                  {"label": "블루아울", "value": -4.32, "text": "-4.32", "t": "블루아울도"}, {"label": "오라클", "value": -2.36, "text": "-2.36", "t": "오라클은"}],
+           beats=B("가장 크게 흔들린 곳은 엔비디아의 칩을 사서 빌려주는 AI 클라우드였습니다. 네비우스는 이틀 동안 25.09%, 코어위브는 12.57% 내렸습니다. 다만 네비우스는 같은 날 자체 3분기 실적에서 손실이 커졌다고 발표해, 사임만의 영향으로 볼 수는 없습니다.",
+                   "데이터센터에 돈을 빌려주는 사모 대출 회사 블루아울도 4.32% 내렸고, AI 클라우드 사업을 키워 온 오라클은 2.36% 내렸습니다. 연준 보고서가 그린 순환 금융의 고리 위에 있는 회사들입니다.")))
+    s(dict(type="checklist", chapter=3, label="엔비디아 13F (2026.6.30 기준, 8.14 제출) · 13G (7.20) · SEC", title="엔비디아가 지분을 가진 회사들", x=150, text_w=880, skin=NP,
+           layers=[{"kind": "photo", "src": "nvidia", "beat": 1, "side": "right", "w": 420, "top": 620, "caption": f"엔비디아 간판 · {cr['nvidia']}"}],
+           rows=[{"label": "인텔 약 300억 달러", "state": "warn", "t": "인텔"},
+                 {"label": "코어위브 약 47억 달러 (4,721만 주)", "state": "warn", "t": "코어위브"},
+                 {"label": "코히런트 약 31억 · 노키아·시놉시스 각 약 22억 달러", "state": "warn", "t": "코히런트"},
+                 {"label": "네비우스 9.3% (대부분 워런트)", "state": "warn", "t": "네비우스"}],
+           beats=[{"say": "이 회사들에는 공통점이 있습니다. 엔비디아가 증권 당국에 낸 6월 말 기준 보유 주식 보고서를 보면, 엔비디아는 인텔 주식을 약 300억 달러, 코어위브를 약 47억 달러어치 갖고 있습니다.", "upto": 2},
+                  {"say": "광통신 부품 회사 코히런트, 통신 장비 회사 노키아, 반도체 설계 소프트웨어 회사 시놉시스의 지분도 있고, 네비우스는 9.3%를 갖고 있습니다. 엔비디아의 지분 목록이 곧 엔비디아의 공급망과 고객 지도인 셈입니다.", "upto": 4}]))
+    s(dict(type="bars", chapter=3, label=PX, title="엔비디아 지분 회사·부품·메모리 (%)", unit="", emph=0, skin=DS,
+           items=[{"label": "코히런트", "value": -6.98, "text": "-6.98", "t": "코히런트"}, {"label": "인텔", "value": -4.54, "text": "-4.54", "t": "인텔"},
+                  {"label": "노키아", "value": -4.38, "text": "-4.38", "t": "노키아"}, {"label": "마이크론", "value": -4.07, "text": "-4.07", "t": "마이크론은"},
+                  {"label": "TSMC", "value": -3.54, "text": "-3.54", "t": "TSMC는"}],
+           beats=B("그리고 이 회사들이 함께 내렸습니다. 같은 이틀 동안 코히런트는 6.98%, 인텔은 4.54%, 노키아는 4.38% 내렸습니다.",
+                   "엔비디아 칩 옆에 붙는 메모리를 만드는 마이크론은 4.07%, 엔비디아 칩을 생산하는 TSMC는 3.54% 내렸습니다. 엔비디아의 공급망을 따라 흔들림이 번진 모양입니다.")))
+    s(dict(type="bars", chapter=3, label=PX, title="버틴 쪽: 고객과 전력 (%)", unit="", emph=1, skin=DS,
+           layers=[{"kind": "photo", "src": "dc", "beat": 0, "side": "left", "w": 380, "top": 300, "caption": f"데이터센터 · {cr['dc']}"}],
+           items=[{"label": "메타", "value": 2.05, "text": "+2.05", "t": "메타"}, {"label": "컨스텔레이션", "value": 1.99, "text": "+1.99", "t": "컨스텔레이션"},
+                  {"label": "구글", "value": 0.79, "text": "+0.79", "t": "구글"}, {"label": "MS", "value": 0.53, "text": "+0.53", "t": "마이크로소프트"},
+                  {"label": "브로드컴", "value": 0.52, "text": "+0.52", "t": "브로드컴도"}],
+           beats=B("반대로 버틴 쪽도 있습니다. 엔비디아 칩을 사는 고객인 빅테크는 메타 2.05%, 구글 0.79%, 마이크로소프트 0.53% 올랐습니다.",
+                   "데이터센터에 전기를 대는 컨스텔레이션 에너지는 1.99%, 경쟁 칩을 만드는 브로드컴도 0.52% 올랐습니다. 같은 이틀 동안 반도체 지수는 3.95% 내렸습니다.")))
+    s(dict(type="map_causal", chapter=3, look="board", label="자체 해석 · 근거: 업종별 종가(11일→13일), 엔비디아 13F·13G · 이틀 숫자라 인과 단정 안 함",
+           map={"nodes": {"nv": {"label": "엔비디아의 돈·지분·협력", "icon": "handshake", "x": 960, "y": 300},
+                          "cl": {"label": "흔들림: AI 클라우드·사모 금융", "icon": "trending-down", "x": 380, "y": 560},
+                          "sp": {"label": "흔들림: 지분 공급사·메모리", "icon": "trending-down", "x": 380, "y": 820},
+                          "cu": {"label": "버팀: 빅테크 고객·전력", "icon": "trending-up", "x": 1540, "y": 560},
+                          "cv": {"label": "겹친 일: 금리↑·네비우스 실적", "icon": "circle-alert", "x": 1540, "y": 820}},
+                "edges": [["nv", "cl"], ["nv", "sp"], ["nv", "cu"]]},
+           beats=[{"say": "여기서부터는 해석입니다. 엔비디아와 돈, 지분, 협력으로 묶인 곳일수록 더 흔들렸고, 엔비디아의 칩을 사는 고객과 데이터센터의 전력은 버텼습니다. 시장은 이번 일을 AI 수요가 꺾였다는 신호가 아니라, 엔비디아의 돈과 관계가 흔들릴 수 있다는 신호로 읽은 것으로 볼 수 있습니다.",
+                   "reveal": ["nv", "cl", "sp", "cu"], "draw": [["nv", "cl"], ["nv", "sp"], ["nv", "cu"]], "active": "cl"},
+                  {"say": "다만 이틀의 숫자입니다. 같은 기간 미국 10년물 금리가 5.00%에서 5.15%로 올랐고, 네비우스의 실적도 겹쳤습니다. 함께 움직였다는 것까지가 사실이고, 원인을 하나로 단정할 수는 없습니다.",
+                   "reveal": ["cv"], "draw": [], "active": "cv"}]))
+    # 4. 돈의 약속
+    s(dict(type="chapter", chapter=4, num="4", title="칩보다 먼저 흔들리는 것", icon="handshake", look="board",
            beats=B("그런데 업황과 경영을 구분하고 나면, 그 사이에 하나가 남습니다.")))
-    s(dict(type="quote", chapter=3, label="헤럴드경제 (2026.11.13) 보도 속 발언 · 유안타증권 이재원 연구원", fx=["dolly"], who="이재원", role="유안타증권 연구원 · 11월 13일",
+    s(dict(type="quote", chapter=4, label="헤럴드경제 (2026.11.13) 보도 속 발언 · 유안타증권 이재원 연구원", who="이재원", role="유안타증권 연구원 · 11월 13일",
            quote="창업자의 의지 없이는 어려웠을 의사결정이며, 후임 체제에서도 생태계 지원 속도와 범위가 유지되는지 확인이 필요하다.", keyword="생태계 지원",
            beats=B("같은 연구원은 한 가지를 더 짚었습니다. 엔비디아가 8월에 대형 금융사들과 대규모 인프라 자금을 모으고, 칩의 잔존 가치를 보증하기로 한 결정은, 창업자의 의지 없이는 어려웠을 것이라는 겁니다.",
                    "다올투자증권도 걱정할 점으로 AI 생태계에 대한 금융 지원이 계속될 수 있느냐를 꼽았습니다. 칩도, 로드맵도 아닌, 돈의 약속입니다.")))
-    s(dict(type="checklist", chapter=3, label="엔비디아 2분기 실적 보도자료·CFO 코멘터리 (2026.8.26, SEC 8-K)", title="창업자 시절에 건 돈의 약속", fx=["tilt"], x=150, text_w=860, skin=NP,
+    s(dict(type="checklist", chapter=4, label="엔비디아 2분기 실적 보도자료·CFO 코멘터리 (2026.8.26, SEC 8-K)", title="창업자 시절에 건 돈의 약속", x=150, text_w=860, skin=NP,
            rows=[{"label": "부품을 미리 사겠다는 약속: 2,790억 달러 (대부분 메모리)", "state": "warn", "t": "2,790억"},
                  {"label": "고객 데이터센터 임대 보증: 최대 1,085억 달러", "state": "warn", "t": "1,085억"},
                  {"label": "6개 금융사와 금융 플랫폼: 5,000억 달러+ (확정 전)", "state": "warn", "t": "5,000억"},
@@ -153,7 +194,7 @@ def main():
                    "motion": [M("오픈AI", "icon", id="oa", icon="🏗️", x=1620, y=420, d=170, label="오하이오 부지")]},
                   {"say": "금융사들과 5,000억 달러가 넘는 금융 플랫폼을 만들기로 했고, 대형 고객의 대금 기한도 늘려 돈을 받는 기간이 45일에서 60일로 길어졌습니다. 당시 황 최고경영자는 수요가 가속하고 있다고 말했습니다.", "upto": 4,
                    "motion": [M("가속", "icon", id="ac", icon="🚀", x=1620, y=740, d=170, label="'수요 가속'")]}]))
-    s(dict(type="map_causal", chapter=3, look="board", label="자체 해석 · 근거: 엔비디아 공시, 유안타·다올 분석(헤럴드경제), 이사회 보도자료",
+    s(dict(type="map_causal", chapter=4, look="board", label="자체 해석 · 근거: 엔비디아 공시, 유안타·다올 분석(헤럴드경제), 이사회 보도자료",
            map={"nodes": {"ceo": {"label": "창업자의 결정", "icon": "user", "x": 300, "y": 330},
                           "prom": {"label": "보증·금융 지원·대금 기한", "icon": "handshake", "x": 960, "y": 330},
                           "cust": {"label": "AI 클라우드·오픈AI 데이터센터", "icon": "server", "x": 1620, "y": 330},
@@ -166,9 +207,9 @@ def main():
                   {"say": "고리의 첫 칸에 있던 사람이 떠났습니다. 새 경영진이 이 약속을 같은 속도로 이어 가느냐가, 이번 사임에서 가장 먼저 확인해야 할 질문입니다. 이사회가 굳이 고객과의 약속을 언급한 이유도 여기에 있다고 봅니다.",
                    "reveal": ["q"], "draw": [["rev", "q"], ["q", "prom"]], "active": "q"}]))
     # 4. 연준이 본 같은 고리
-    s(dict(type="chapter", chapter=4, num="4", title="연준이 본 같은 고리", icon="landmark", look="photo", bg_src="fed",
+    s(dict(type="chapter", chapter=5, num="5", title="연준이 본 같은 고리", icon="landmark", look="photo", bg_src="fed",
            beats=B("이 고리는 엔비디아 한 회사만의 이야기가 아닙니다. 같은 주, 미국 중앙은행도 이 고리를 짚었습니다.")))
-    s(dict(type="map_causal", chapter=4, look="board", label="연준 금융안정보고서 (2026.11.13) Box 2.2 · Box 5.1 (설문은 연준 공식 견해 아님, 비율은 로이터 보도)",
+    s(dict(type="map_causal", chapter=5, look="board", label="연준 금융안정보고서 (2026.11.13) Box 2.2 · Box 5.1 (설문은 연준 공식 견해 아님, 비율은 로이터 보도)",
            map={"nodes": {"gpu": {"label": "GPU 회사: 잔존가치 보증·지분 투자", "icon": "microchip", "x": 330, "y": 340},
                           "dev": {"label": "데이터센터 개발사·AI 클라우드", "icon": "server", "x": 1000, "y": 340},
                           "big": {"label": "빅테크: 장기 임차", "icon": "building-2", "x": 1600, "y": 560},
@@ -178,14 +219,14 @@ def main():
            beats=[{"say": "11월 13일 연준의 금융안정보고서는, GPU 회사가 칩의 가치를 보증하고 지분까지 투자하며, 개발사가 그 계약을 담보로 돈을 빌려 다시 칩을 사는 구조를 순환 금융이라고 불렀습니다.",
                    "reveal": ["gpu", "dev", "big", "loan", "buy"], "draw": [["gpu", "dev"], ["big", "dev"], ["dev", "loan"], ["loan", "buy"], ["buy", "gpu"]], "active": "gpu"},
                   {"say": "로이터 보도에 따르면 이 보고서의 설문에서 AI를 금융 위험으로 꼽은 비율은 87%였습니다. 로이터는 이 설문이 엔비디아 최고경영자 사임 전에 이뤄졌다는 점도 짚었습니다. 고리의 맨 앞 칸이 흔들린 것은, 그 뒤의 일입니다.", "active": "buy"}]))
-    s(dict(type="bars", chapter=4, label="연준 금융안정보고서 (2026.11.13) Box 2.2", title="AI 컴퓨팅 인프라용 채권 발행 (억 달러)", unit="", emph=1, fx=["dolly"], skin=DS,
+    s(dict(type="bars", chapter=5, label="연준 금융안정보고서 (2026.11.13) Box 2.2", title="AI 컴퓨팅 인프라용 채권 발행 (억 달러)", unit="", emph=1, skin=DS,
            layers=[{"kind": "photo", "src": "fed", "beat": 0, "side": "left", "w": 380, "top": 300, "caption": f"연준 에클스 빌딩 · {cr['fed']}"}],
            items=[{"label": "2023년", "value": 1300, "text": "1,300", "t": "2023년"}, {"label": "2026년 10월까지", "value": 6800, "text": "6,800+", "t": "올해는"}],
            beats=[{"say": "이 고리를 도는 빚도 커졌습니다. AI 컴퓨팅 인프라를 짓느라 발행한 채권은 2023년 한 해 1,300억 달러였는데, 올해는 10월까지 6,800억 달러를 넘었습니다."},
                   {"say": "보고서는 아직 시작하지 않은 임대 계약이 1조 달러, 보증과 장기 계약 약속이 2조 달러를 넘는다고 적었습니다. 엔비디아의 보증은 그 큰 그물의 한 매듭입니다. 빚이 커질수록, 그 매듭을 쥔 사람의 결정도 무거워집니다.",
                    "motion": [M("1조", "count", id="l1", value="1조+", label="미개시 임대", x=1640, y=330, w=420, h=210, fs=100),
                               M("2조", "count", id="l2", value="2조+", label="보증·장기 계약", x=1640, y=620, w=420, h=210, fs=100)]}]))
-    s(dict(type="map_causal", chapter=4, look="board", label="자체 해석 · 근거: 연준 보고서 5장 시나리오, 엔비디아 공시, 국내 증권가 분석(서울경제·헤럴드경제)",
+    s(dict(type="map_causal", chapter=5, look="board", label="자체 해석 · 근거: 연준 보고서 5장 시나리오, 엔비디아 공시, 국내 증권가 분석(서울경제·헤럴드경제)",
            map={"nodes": {"hub": {"label": "젠슨 황 사임", "icon": "user", "x": 960, "y": 300},
                           "slow": {"label": "새 체제가 지원 속도 조절", "icon": "trending-down", "x": 420, "y": 560},
                           "keep": {"label": "지원 유지·로드맵 그대로", "icon": "trending-up", "x": 1500, "y": 560},
@@ -198,16 +239,23 @@ def main():
                    "reveal": ["keep", "issue"], "draw": [["hub", "keep"], ["keep", "issue"]], "active": "issue"},
                   {"say": "서울경제는 새 경영진의 투자 속도 조절과 미국의 대중국 수출 규제를 여전히 남은 변수로 꼽았습니다. 두 가지 모두 공장이나 기술이 아니라, 사람이 내리는 결정의 문제라는 점이 이번 사건의 성격을 보여 줍니다.", "active": "hub"}]))
     # 5. 한국
-    s(dict(type="chapter", chapter=5, num="5", title="한국으로 이어지는 줄", icon="microchip", look="photo", bg_src="seoul",
+    s(dict(type="chapter", chapter=6, num="6", title="한국으로 이어지는 줄", icon="microchip", look="photo", bg_src="seoul",
            beats=B("이 갈림길은 한국 시장과도 이어져 있습니다.")))
-    s(dict(type="bars", chapter=5, label="야후 파이낸스 종가 · 아주경제·MTN 마감 보도 · 헤럴드경제(11.13) '안도 랠리'", title="한국, 13일 하루 (%)", unit="", emph=1, skin=DS,
+    s(dict(type="bars", chapter=6, label="야후 파이낸스 종가 · 아주경제·MTN 마감 보도 · 헤럴드경제(11.13) '안도 랠리'", title="한국, 13일 하루 (%)", unit="", emph=1, skin=DS,
            layers=[{"kind": "locator", "at": [126.98, 37.57], "label": "서울 · 11월 13일 마감", "beat": 0, "side": "left", "top": 170, "scale": 2.2}],
            items=[{"label": "코스피", "value": -0.98, "text": "-0.98", "t": "코스피는"}, {"label": "SK하이닉스", "value": -3.03, "text": "-3.03", "t": "SK하이닉스는"},
                   {"label": "삼성전자", "value": -0.96, "text": "-0.96", "t": "삼성전자는"}],
            beats=[{"say": "사임 소식이 전해진 13일, 국내 매체들은 삼성전자와 SK하이닉스의 안도 랠리를 전했습니다. 엔비디아의 경영 문제와 반도체 업황은 다르다는 해석이었습니다."},
                   {"say": "하지만 마감은 달랐습니다. 장 초반 오름세는 이어지지 못했고, 코스피는 0.98%, SK하이닉스는 3.03%, 삼성전자는 0.96% 내렸습니다. 외국인은 하루에 5천억 원 넘게 팔았습니다. 매체의 제목과 그날의 마감이 달랐다는 것, 그것이 이번 주 한국 시장이 보여 준 신호였습니다.",
                    "motion": [M("5천억", "count", id="fx", value="5천억 원+", label="13일 외국인 순매도", x=1660, y=770, w=320, h=180, fs=64)]}]))
-    s(dict(type="map_causal", chapter=5, look="board", label="서울경제(11.15)·시대 사설(11.13)·미래에셋(서울경제 인용)·엔비디아 2분기 보도자료 · 마지막 문장은 자체 해석",
+    s(dict(type="bars", chapter=6, label="야후 파이낸스 종가 · 11일 → 13일 · 네이버·SK텔레콤은 엔비디아와 한국 AI 공장 협력(8월 보도자료)", title="한국 AI·반도체, 이틀 등락 (%)", unit="", emph=0, skin=DS,
+           layers=[{"kind": "photo", "src": "seoul", "beat": 0, "side": "left", "w": 360, "top": 300, "caption": f"서울 여의도 · {cr['seoul']}"}],
+           items=[{"label": "네이버", "value": -11.22, "text": "-11.22", "t": "네이버는"}, {"label": "SK하이닉스", "value": -4.78, "text": "-4.78", "t": "SK하이닉스는"},
+                  {"label": "한미반도체", "value": -1.25, "text": "-1.25", "t": "한미반도체는"}, {"label": "삼성전자", "value": 0.0, "text": "0.00", "t": "삼성전자는"},
+                  {"label": "SK텔레콤", "value": 1.45, "text": "+1.45", "t": "SK텔레콤은"}],
+           beats=B("이틀로 넓혀 보면 차이가 더 분명합니다. 엔비디아와 한국에 AI 공장을 함께 짓기로 한 네이버는 11.22%, SK하이닉스는 4.78%, 고대역폭 메모리 장비를 만드는 한미반도체는 1.25% 내렸습니다.",
+                   "반면 삼성전자는 제자리였고, SK텔레콤은 1.45% 올랐습니다. 같은 AI·반도체 업종 안에서도, 엔비디아와 얼마나 깊이 묶여 있느냐에 따라 반응이 갈린 것으로 볼 수 있습니다.")))
+    s(dict(type="map_causal", chapter=6, look="board", label="서울경제(11.15)·시대 사설(11.13)·미래에셋(서울경제 인용)·엔비디아 2분기 보도자료 · 마지막 문장은 자체 해석",
            map={"nodes": {"hub": {"label": "젠슨 황 사임", "icon": "user", "x": 960, "y": 300},
                           "cn": {"label": "중국 협상·고객·투자 전략 (서울경제)", "icon": "circle-alert", "x": 380, "y": 560},
                           "hbm": {"label": "HBM 수요는 유지 (미래에셋)", "icon": "microchip", "x": 1540, "y": 560},
@@ -219,9 +267,9 @@ def main():
                   {"say": "한 사설은 특정 고객에 대한 의존을 경계해야 한다고 썼습니다. 여기서부터는 해석입니다. 엔비디아가 8월에 발표한 SK하이닉스와의 메모리 다년 협력, 그리고 2,790억 달러 부품 약속의 대부분이 메모리라는 점을 함께 보면, 약속이 이어지느냐가 한국에 가장 직접적인 변수라고 볼 수 있습니다.",
                    "reveal": ["dep", "mem"], "draw": [["cn", "dep"], ["hbm", "mem"]], "active": "mem"}]))
     # 6. 주의할 점
-    s(dict(type="chapter", chapter=6, num="6", title="주의할 점", icon="circle-alert", look="board",
+    s(dict(type="chapter", chapter=7, num="7", title="주의할 점", icon="circle-alert", look="board",
            beats=B("이런 사건일수록 해석보다 먼저 조심해야 할 것들이 있습니다.")))
-    s(dict(type="checklist", chapter=6, label="팩트시트 '주의할 점' · 투자 권유가 아닙니다", title="이번 사건, 이렇게 보지 않기", fx=["scan"], x=150, text_w=900, skin=NP,
+    s(dict(type="checklist", chapter=7, label="팩트시트 '주의할 점' · 투자 권유가 아닙니다", title="이번 사건, 이렇게 보지 않기", x=150, text_w=900, skin=NP,
            rows=[{"label": "사생활 보도와 사업 영향은 다른 문제", "state": "warn", "t": "사생활"},
                  {"label": "하루 주가로 결론 내지 않기 (장중 -13% → 마감 -4.34%)", "state": "warn", "t": "하루"},
                  {"label": "대안주 쏠림은 다음 날 되돌아왔다 (AMD -8.75%)", "state": "warn", "t": "대안주"},
@@ -229,20 +277,20 @@ def main():
                  {"label": "목표가 숫자보다 근거(로드맵·후계·금융 지원)를 보기", "state": "ok", "t": "근거"}],
            beats=[{"say": "첫째, 사생활 보도와 사업 영향은 다른 문제입니다. 둘째, 하루 주가로 결론을 내지 않습니다. 장 초반 13% 넘게 빠졌던 주가는 4.34% 하락으로 마감했고, 대안으로 몰렸던 돈은 다음 날 일부 되돌아왔습니다.", "upto": 3},
                   {"say": "셋째, 복귀설 같은 확인되지 않은 후속 소식은 공시가 나오기 전까지 단정하지 않습니다. 그리고 애널리스트의 목표가 숫자보다, 그 숫자를 만든 근거가 로드맵인지 후계인지 금융 지원인지를 보는 편이 더 오래 쓸모 있습니다.", "upto": 5}]))
-    s(dict(type="kinetic", chapter=6, beats=[{"say": "칩보다 먼저 흔들리는 것은, 약속입니다.", "hit": ["칩보다", "약속입니다."]}]))
-    s(dict(type="analogy", chapter=6, label="비유 · 과거 비교는 보도(야후 파이낸스, 한 애널리스트의 '스티브 잡스 순간' 비유)", title="악보는 남았고, 지휘자가 바뀌었다",
+    s(dict(type="kinetic", chapter=7, beats=[{"say": "칩보다 먼저 흔들리는 것은, 약속입니다.", "hit": ["칩보다", "약속입니다."]}]))
+    s(dict(type="analogy", chapter=7, label="비유 · 과거 비교는 보도(야후 파이낸스, 한 애널리스트의 '스티브 잡스 순간' 비유)", title="악보는 남았고, 지휘자가 바뀌었다",
            left={"icon": "layers", "label": "악보", "sub": "로드맵·공급망: 2028년까지 확정"}, right={"icon": "user", "label": "지휘자", "sub": "템포: 투자·금융 지원의 속도"},
            result={"icon": "circle-alert", "label": "곡은 같아도 템포는 바뀔 수 있다"},
            beats=[{"say": "오케스트라에 비유하면, 악보는 남았고 지휘자가 바뀐 상황입니다. 로드맵과 공급망이라는 악보는 2028년까지 쓰여 있습니다. 하지만 곡의 빠르기, 그러니까 투자와 금융 지원의 속도는 지휘자가 정합니다."},
                   {"say": "한 애널리스트는 이번 일을 2011년 애플의 스티브 잡스 순간에 비유했습니다. 창업자가 떠난 뒤의 평가는, 첫날 주가가 아니라 새 경영진이 내리는 다음 결정들로 정해진다는 뜻입니다.", "show_result": True}]))
     # 7. 확인할 신호
-    s(dict(type="checklist", chapter=6, label="11월 15일 기준 일정 (한국 시간) · 투자 권유가 아닙니다", title="다음 주에 확인할 신호", fx=["dolly"], skin=NP,
+    s(dict(type="checklist", chapter=7, label="11월 15일 기준 일정 (한국 시간) · 투자 권유가 아닙니다", title="다음 주에 확인할 신호", skin=NP,
            rows=[{"label": "18일(수) 06:20 실적 — 약속·보증 금액이 그대로인가", "state": "warn"},
                  {"label": "07:00 콜 — 크레스가 로드맵·고객 계약·금융 지원을 어떻게 말하나", "state": "warn"},
                  {"label": "정식 CEO 인선 속도 · 19일(목) 04:00 연준 의사록", "state": "warn"}],
            beats=[{"say": "확인할 신호는 분명합니다. 한국 시간 18일 새벽 6시 20분 실적에서는 매출과 함께, 약속과 보증의 금액이 그대로인지 봅니다. 7시 콜에서는 임시 최고경영자 크레스가 로드맵과 고객 계약, 그리고 금융 지원을 어떻게 설명하는지가 첫 신호입니다.", "upto": 2},
                   {"say": "그 뒤로는 정식 최고경영자를 얼마나 빨리 찾는지, 그리고 19일 새벽 나올 연준 의사록이 AI와 금융 위험을 어떻게 다루는지도 함께 봅니다.", "upto": 3}]))
-    s(dict(type="outro", chapter=6, title="11월 15일까지의 자료", sub="출처는 설명란에", clip={"src": "nvidia", "start": 0},
+    s(dict(type="outro", chapter=7, title="11월 15일까지의 자료", sub="출처는 설명란에", clip={"src": "nvidia", "start": 0},
            beats=B("11월 11일의 공시 한 장으로 창업자는 떠났지만, 그가 고객에게 걸어 둔 약속들은 아직 장부에 남아 있습니다. 그 약속이 이어지는지가 엔비디아를 넘어 AI 투자 전체의 속도를 정할 수 있습니다. 18일 새벽, 새 경영진은 그 약속을 어떻게 말할까요? 출처는 모두 설명란에 남겨 두겠습니다.")))
     for i, x in enumerate(S, 1):
         x["id"] = i

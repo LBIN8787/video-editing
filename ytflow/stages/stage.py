@@ -488,7 +488,7 @@ class Stage:
         if self.hud:
             D.items.append(f'<div id="{self.p}hud" style="position:absolute;left:0;top:0;width:{W}px;height:{H_}px;pointer-events:none">' + "".join(self.hud) + '</div>')
         D.js.extend(self.js)
-        # v32 (2026-11-15 사용자: "동영상의 이점 = 말하는 것이 화면에 생긴다, 카메라를 반드시 움직이라는 뜻이 아니었다"):
+        # v34 (2026-11-15 사용자: "동영상의 이점 = 말하는 것이 화면에 생긴다, 카메라를 반드시 움직이라는 뜻이 아니었다"):
         # 카메라·원근·대기 동작은 금지도 필수도 아닌 '스타일 기본값' — 기본 끔, 장면이나 대본 맨 위에서 켬 (manual/README §2-5)
         #   "camera": "fixed"(기본) | "move"(박자마다 주인공 쪽으로)   "perspective": true   "idle": true
         opt = {**(self.sc.get("_spec_stage") or {}), **{k: self.sc[k] for k in ("camera", "perspective", "idle") if k in self.sc}}
@@ -559,7 +559,7 @@ class Stage:
         if nowhy:
             q.append(f"stage/no_why: 박자 {nowhy} 에 why(이 그림·움직임의 의도) 없음")
         static = [k + 1 for k, b in enumerate(beats) if not any(a["do"] in MOTION for a in b.get("act", []))]
-        if beats and len(static) / len(beats) > 0.3:   # v32: 렌더를 막는 검사가 아니라 참고 (스타일 기본값)
+        if beats and len(static) / len(beats) > 0.3:   # v34: 렌더를 막는 검사가 아니라 참고 (스타일 기본값)
             print(f"[stage] 참고: 움직임 없는 박자 {static} ({len(static)}/{len(beats)}) — 그 박자에 말하는 것이 화면에 생기는지 확인")
         vis, worst, wt = {}, 0, 0.0
         txt_worst = 0

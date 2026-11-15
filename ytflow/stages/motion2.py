@@ -133,9 +133,9 @@ class Stage:
                        if "," in core else f'o.v.toFixed({dec})')
                 self.js.append(f'(function(){{var o={{v:0}};tl.to(o,{{v:{numv},duration:0.9,ease:"power2.out",onUpdate:function(){{'
                                f'document.getElementById("{self.p}_{m["id"]}_n").textContent="{_e(pre)}"+{fmt}+"{_e(post)}";}}}},{t + 0.1:.3f});}})();')
-            # 반짝이는 별 몇 개 (숫자 강조)
+            # 반짝이는 별 몇 개 (숫자 강조) — 시장 채널은 끔 (v32, 2026-11-15 사용자: 과하고 분위기와 안 맞음)
             sc_ = cw / 900
-            for k, (dx, dy) in enumerate(((-380 * sc_, -170 * sc_), (390 * sc_, -150 * sc_), (-330 * sc_, 170 * sc_), (360 * sc_, 180 * sc_))):
+            for k, (dx, dy) in [] if getattr(self, "no_sparkle", False) else enumerate(((-380 * sc_, -170 * sc_), (390 * sc_, -150 * sc_), (-330 * sc_, 170 * sc_), (360 * sc_, 180 * sc_))):
                 sid = f"{did}_s{k}"
                 self.items.append(f'<div id="{sid}" style="position:absolute;left:{x + dx - 30}px;top:{y + dy - 30}px;font-size:60px;opacity:0;z-index:6">✨</div>')
                 self.js.append(f'tl.fromTo("#{sid}",{{opacity:0,scale:0.2}},{{opacity:1,scale:1.2,duration:0.25}},{t + 0.5 + k * 0.08:.3f});'
@@ -220,6 +220,7 @@ def apply(D, sc: dict, bt: list, dur: float, w: int = 1920, h: int = 1080, keep:
     acc = pal.get("accent", YEL)
     stg = Stage(f"mo{sc['id']}", w, h, theme={"icon_bg": pal.get("card2", pal.get("card", "#1C2E47")), "ring": acc, "arrow": acc,
                                              "card": pal.get("card", "#16263C"), "card_ink": pal.get("ink", "#E8EEF6"), "label": pal.get("ink", "#E8EEF6")})
+    stg.no_sparkle = getattr(D, "no_zoom", False)
     for k, (b, (t0, d)) in enumerate(zip(sc["beats"], bt)):
         if not b.get("motion"):
             continue

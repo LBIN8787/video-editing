@@ -1079,7 +1079,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     sc["_map"] = sc.get("map") or spec.get("map")   # 장면마다 다른 지도도 가능
     sc["_chapters"] = [x.get("title", "") for x in spec["scenes"] if x.get("type") == "chapter"]
     sc["_project_dir"] = str(project.path)   # 새 연출(directions.py)이 박자 음성·단어 시각을 찾을 때
-    sc.setdefault("_spec_stage", {k: spec[k] for k in ("camera", "perspective", "idle") if k in spec})   # 무대(stage) 움직임 기본값 (v32)
+    sc.setdefault("_spec_stage", {k: spec[k] for k in ("camera", "perspective", "idle") if k in spec})   # 무대(stage) 움직임 기본값 (v34)
     sc["_prices"] = project.dir("research") / "prices"
     if sc["type"] == "usmap":
         sc["_states"] = us_states()

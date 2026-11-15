@@ -654,7 +654,7 @@ def apply_fx(D, project, spec, sc, bt, dur, adir):
         return
     R = _rnd(sc["id"] * 31 + 7)
     if getattr(D, "no_zoom", False):   # v31 확대·축소 없음 (2026-11-15 사용자) — tilt·dolly 는 쓰지 않고 scan(빛 훑기)만
-        fx = [f for f in fx if f not in ("tilt", "dolly")]
+        fx = [f for f in fx if f not in ("tilt", "dolly", "scan")]   # v32: 스캔(빛 훑기)도 빼기 (2026-11-15 사용자: "스캔하는 듯한 모션그래픽·반짝이는 것 빼 주세요 — 과하고 분위기와 안 맞음")
     if "tilt" in fx or "dolly" in fx:
         D.css.append("#root{perspective:1800px}#layer{transform-origin:50% 55%;will-change:transform}")
     if "tilt" in fx:

@@ -1,7 +1,7 @@
 {
  "project": "20261115-market-deep",
- "manual_version": "29",
- "checked": "2026-11-15T04:13:33",
+ "manual_version": "32",
+ "checked": "2026-11-15T06:26:06",
  "pass": true,
  "rows": [
   {
@@ -114,7 +114,7 @@
    "level": "MUST",
    "item": "팩트시트 + 출처 링크 3개 이상",
    "ok": true,
-   "detail": "링크 13개"
+   "detail": "링크 15개"
   },
   {
    "gate": "G3",
@@ -317,14 +317,14 @@
    "level": "SHOULD",
    "item": "말투: '~습니다/~니다·~까요' 80% 이상, 평균 문장 35자 이상 (미주일기 96~100%·62~71자)",
    "ok": true,
-   "detail": "100% · 43자"
+   "detail": "100% · 44자"
   },
   {
    "gate": "G6",
    "level": "MUST",
    "item": "길이: 롱폼 10분 이상 (README §2-4)",
    "ok": true,
-   "detail": "10.5분"
+   "detail": "13.8분"
   },
   {
    "gate": "G5",
@@ -345,7 +345,7 @@
    "level": "MUST",
    "item": "반복 피로: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기: 자료·지도·사진 겹치기·시각 효과, 05 §0-3)",
    "ok": true,
-   "detail": "최장 2연속 (장면 14)"
+   "detail": "최장 2연속 (장면 10)"
   },
   {
    "gate": "G5",
@@ -358,15 +358,15 @@
    "gate": "G5",
    "level": "SHOULD",
    "item": "반복 피로: 눈요기 있는 장면 60% 이상",
-   "ok": true,
-   "detail": "13/18"
+   "ok": false,
+   "detail": "10/24"
   },
   {
    "gate": "G5",
    "level": "SHOULD",
    "item": "반복 피로: 같은 시각 효과 3장면 연속 없음 · 효과 3종 이상(롱폼)",
-   "ok": true,
-   "detail": "['fx:dolly', 'fx:scan', 'fx:tilt'] 연속 []"
+   "ok": false,
+   "detail": "[] 연속 []"
   },
   {
    "gate": "G5",
@@ -387,14 +387,14 @@
    "level": "SHOULD",
    "item": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음",
    "ok": true,
-   "detail": "표지 ['nvidia', 'nyse', 'fed', 'seoul'] · NASA 0"
+   "detail": "표지 ['nvidia', 'nyse', 'dc', 'fed', 'seoul'] · NASA 0"
   },
   {
    "gate": "G5",
    "level": "SHOULD",
    "item": "반복 피로: 같은 채널 직전 편과 화면 구성 겹침 70% 이하 (Jaccard)",
-   "ok": false,
-   "detail": "85%"
+   "ok": true,
+   "detail": "57%"
   },
   {
    "gate": "G5",
@@ -408,14 +408,14 @@
    "level": "SHOULD",
    "item": "자료 화면 공백 ≤45초",
    "ok": false,
-   "detail": "최장 605초"
+   "detail": "최장 808초"
   },
   {
    "gate": "G5",
    "level": "SHOULD",
    "item": "장 표지 간격 ≤200초",
    "ok": true,
-   "detail": "최장 128초"
+   "detail": "최장 170초"
   },
   {
    "gate": "G5",
@@ -429,14 +429,14 @@
    "level": "MUST",
    "item": "한 스타일이 40% 넘지 않음",
    "ok": true,
-   "detail": "paper-column 0.35"
+   "detail": "data-report 0.33"
   },
   {
    "gate": "G5",
    "level": "MUST",
    "item": "한 장면 안에서 겹친 장면(layers) 3개 이상",
    "ok": true,
-   "detail": "3"
+   "detail": "6"
   },
   {
    "gate": "G5",
@@ -448,9 +448,9 @@
   {
    "gate": "G5",
    "level": "MUST",
-   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 10번까지)",
+   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 14번까지)",
    "ok": true,
-   "detail": "1번 [(22, 'kinetic')]"
+   "detail": "1번 [(29, 'kinetic')]"
   },
   {
    "gate": "G5",
@@ -499,7 +499,7 @@
    "level": "MUST",
    "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
    "ok": true,
-   "detail": "{'within_0_5s': 1.0, 'p95_abs_offset': 0.09, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.033}"
+   "detail": "{'within_0_5s': 1.0, 'p95_abs_offset': 0.09, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.1}"
   },
   {
    "gate": "G6",
@@ -512,15 +512,8 @@
    "gate": "G6",
    "level": "SHOULD",
    "item": "움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선)",
-   "ok": true,
-   "detail": "변화 20.5/분 · 정지 0.14"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "시장 움직임: 정지 화면 비율 ≤0.45 (목표 0.3, manual/09 §6)",
-   "ok": true,
-   "detail": "정지 0.14"
+   "ok": false,
+   "detail": "변화 6.6/분 · 정지 0.73"
   },
   {
    "gate": "G6",
