@@ -84,16 +84,49 @@ def unwrap(url: str) -> str:
 OPAQUE = ("beehiiv.com", "substack.com/redirect", "list-manage.com/track", "links.", "click.", "email.", "r.", "trk.", "go.")
 
 
-def resolve(url: str, timeout: int = 8) -> str:
-    """열어 봐야 아는 짧은 추적 주소(beehiiv·substack 등) → 따라가서 최종 주소. 실패하면 그대로."""
-    host = urllib.parse.urlsplit(url).netloc
-    if not any(o in url or host.startswith(o) for o in OPAQUE):
-        return url
+# Ingestion never dereferences email links. Even HEAD can trigger an action.
+MANAGEMENT = re.compile(
+    r"unsubscribe|subscription|preferences|opt[-_ ]?out|manage[-_ /]?profile|"
+    r"confirm|verification|verify|sign[-_ ]?in|log[-_ ]?in|password|"
+    r"구독.?해지|수신.?거부|환경.?설정|본인.?인증", re.I)
+PUBLIC_QUERY = {"id", "v", "q", "s", "page", "lang", "language", "year", "month"}
+SENSITIVE_QUERY = re.compile(
+    r"token|secret|email|recipient|subscriber|signature|auth|session|hash|"
+    r"^key$|^code$|^uid$|^cid$|^mid$", re.I)
+
+
+def public_link(url: str) -> bool:
+    """Conservative publication gate, not proof that a URL is safe to visit."""
     try:
-        r = urllib.request.urlopen(urllib.request.Request(url, headers=UA, method="HEAD"), timeout=timeout)
-        return unwrap(r.geturl())
-    except Exception:  # noqa: BLE001
-        return url
+        p = urllib.parse.urlsplit(url)
+        host = (p.hostname or "").lower()
+        if p.scheme not in ("http", "https") or not host or p.username or p.password:
+            return False
+        decoded = urllib.parse.unquote(url)
+        if MANAGEMENT.search(decoded):
+            return False
+        low = decoded.lower()
+        if (host == "beehiiv.com" or host.endswith(".beehiiv.com") or
+                host.startswith(("links.", "click.", "email.", "r.", "trk.", "go.")) or
+                (host.endswith("substack.com") and p.path.startswith("/redirect")) or
+                (host.endswith("list-manage.com") and p.path.startswith("/track"))):
+            return False
+        # Unknown query keys can be per-recipient identifiers: retain privately
+        # for manual canonical-source lookup, never publish or request them.
+        pairs = urllib.parse.parse_qsl(p.query, keep_blank_values=True)
+        if any(SENSITIVE_QUERY.search(k) or k.lower() not in PUBLIC_QUERY or
+               len(v) > 80 or "@" in v for k, v in pairs):
+            return False
+        if re.search(r"(?:^|/)[A-Za-z0-9_=-]{48,}(?:/|$)", p.path):
+            return False
+        return True
+    except ValueError:
+        return False
+
+
+def resolve(url: str, timeout: int = 8) -> str:
+    """Compatibility helper: offline unwrap only; never follows redirects."""
+    return unwrap(url)
 
 
 def kind(url: str, c: dict) -> str:
@@ -178,10 +211,17 @@ def items_from(msg: dict, c: dict, do_resolve: bool = True) -> list[dict]:
     own = [m.lower() for m in src.get("match", [])]
     out, urls = [], set()
     for title, url in extract(msg.get("body", "")):
-        url = unwrap(url)
-        if do_resolve:
-            url = resolve(url)
-        if len(title) < 8 or skip(url, title, c, own) or url in urls:
+        # Filter raw link/label BEFORE unwrapping. No email-link HTTP requests,
+        # including when do_resolve=True (legacy API compatibility).
+        if len(title) < 8 or MANAGEMENT.search(urllib.parse.unquote(url) + " " + title):
+            continue
+        if skip(url, title, c, own):
+            continue
+        try:
+            url = unwrap(url)
+        except ValueError:
+            continue
+        if not public_link(url) or skip(url, title, c, own) or url in urls:
             continue
         urls.add(url)
         k = kind(url, c)
@@ -269,6 +309,9 @@ def rss() -> list[Path]:
                 continue
             if datetime.now(timezone.utc) - t > timedelta(days=2) or not title or not url:
                 continue
+            url = unwrap(url)
+            if not public_link(url):
+                continue
             items.append({"title": _clean(title), "url": url, "kind": kind(url, c), "reuse": reuse(url, c), "brand": route(title, s, c),
                           "source": s["id"], "source_name": s["name"], "msg": "rss", "date": t.isoformat()})
     out = add(items, [])
@@ -353,3 +396,4 @@ def main(argv: list[str]) -> None:
         sources()
     else:
         print(__doc__)
+
