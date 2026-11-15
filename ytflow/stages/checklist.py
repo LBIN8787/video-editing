@@ -240,6 +240,10 @@ def run(path: Path, upto: str = "G8") -> Report:
                 meant = all(len(r_) >= 5 and r_[4] not in ("", "-") for r_ in amap)
                 R.add("G3", lvl, "v26: 팩트시트 '## 자료 지도' — 보고서·발언·행동 각 2줄+, 합계 6줄+, 자료마다 의미 칸 (03 §0-2)",
                       len(amap) >= 6 and all(v >= 2 for v in kinds_.values()) and meant, f"{len(amap)}줄 {kinds_} 의미{'✓' if meant else '빈칸'}")
+                if path.name.endswith("-weekly"):   # 2026-11-15 사용자: 매주 다음 주 일정·실적 브리핑·분석 (manual/09 §2)
+                    sched = _rows("다음 주 일정")
+                    has_earn = any("실적" in " ".join(r_) for r_ in sched)
+                    R.add("G3", "MUST", "주간: 팩트시트 '## 다음 주 일정' 5줄+ (실적 1줄+, 한국 시간·볼 것·출처) (manual/09 §2)", len(sched) >= 5 and has_earn, f"{len(sched)}줄 · 실적 {'있음' if has_earn else '없음'}")
                 hub = tb.get("hub_event") or {}
                 R.add("G1", lvl, "v28: topic_brief hub_event — 그 기간 시장을 가장 크게 흔든 사건이 중심축 (03 §0-3)", bool(hub), str(hub.get("name", ""))[:40] if isinstance(hub, dict) else str(hub)[:40])
                 R.add("G3", lvl, "v28: 팩트시트 '## 파급 경로'·'## 주의할 점' (03 §0-3)", "## 파급 경로" in fs and "## 주의할 점" in fs, "")
