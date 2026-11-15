@@ -1,0 +1,600 @@
+{
+ "project": "20261111-ai-industry-week",
+ "topic": "ai",
+ "topic_name": "AI · 활용",
+ "scenes": [
+  {
+   "scene": 1,
+   "type": "intro",
+   "chapter": 0,
+   "situation": "change",
+   "situation_name": "바뀌었다·변했다 (동사)",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "안녕하세요. AI 업계 최전선 소식을 이용자 눈높이로 풀어 드리는, AI 최전선입니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "이번 주엔 같은 날 두 가지 큰 뉴스가 나왔거든요. 하나는 돈, 하나는 신뢰 이야기입니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "이런 순서로 보겠습니다. AI 회사의 사상 손꼽히는 상장, AI 칩 회사의 신뢰 문제, 그리고 우리에게 바뀌는 것까지요.",
+     "situations": [
+      "change"
+     ],
+     "hits": [
+      "바뀌"
+     ]
+    },
+    {
+     "say": "다 보고 나시면, AI 뉴스를 볼 때 무엇을 봐야 할지 감이 오실 거예요. 시작하겠습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ],
+   "recommended_scenes": [
+    "stage",
+    "analogy",
+    "shape"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "morph",
+     "status": "candidate"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "바뀐 전후를 글자로만",
+   "why": "대본의 동사를 그림이 연기 (04 §0-5)"
+  },
+  {
+   "scene": 2,
+   "type": "kb",
+   "chapter": 0,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "11월 10일, 챗봇 클로드를 만드는 앤트로픽이 상장을 위한 투자자 설명회, 로드쇼를 시작했습니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "모으려는 돈은 가격 상단 기준으로 약 640억 달러. 우리 돈으로 수십조 원입니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "억 달러",
+      "조 원"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "chart",
+    "bignum",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말하는 숫자가 그 순간 화면에 생긴다 (작업 기준, 09 §6 v27·v30)"
+  },
+  {
+   "scene": 3,
+   "type": "card_type",
+   "chapter": 0,
+   "situation": "question",
+   "situation_name": "질문·명제 한 줄을 던진다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "AI 회사는 왜 이렇게 큰돈이 필요할까요? 오늘의 첫 질문입니다.",
+     "situations": [
+      "question"
+     ],
+     "hits": [
+      "?",
+      "왜 "
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "card_type",
+    "chapter"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "그림을 억지로 넣기",
+   "why": "질문은 글자 하나로 — 강조 예산 안에서 (05 §0-1)"
+  },
+  {
+   "scene": 4,
+   "type": "chapter",
+   "chapter": 1,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "첫 번째, 돈 이야기부터 보겠습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 5,
+   "type": "timeline",
+   "chapter": 1,
+   "situation": "new-tool",
+   "situation_name": "새 도구·모델 소개",
+   "origin": "add",
+   "also": [],
+   "beats": [
+    {
+     "say": "앤트로픽은 6월에 비공개로 상장을 신청했고, 10월에 신고서를 공개했습니다.",
+     "situations": [
+      "new-tool"
+     ],
+     "hits": [
+      "공개"
+     ]
+    },
+    {
+     "say": "그리고 11월 10일, 주당 70에서 78달러로 8억 2,500만 주를 팔겠다며 로드쇼를 시작했습니다. 나스닥 이름은 'ANT'입니다.",
+     "situations": [],
+     "hits": []
+    }
+   ],
+   "recommended_scenes": [
+    "footage",
+    "kb",
+    "chat"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "홍보 문구 그대로",
+   "why": "'이거 뭔데 다들 난리야?' — 공식 화면으로"
+  },
+  {
+   "scene": 6,
+   "type": "bars",
+   "chapter": 1,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "main",
+   "also": [
+    "open-scene"
+   ],
+   "beats": [
+    {
+     "say": "얼마나 큰지 비교해 보죠. 2019년 석유 회사 사우디 아람코가 294억 달러를 모아 당시 역대 최대였습니다.",
+     "situations": [
+      "open-scene",
+      "metric"
+     ],
+     "hits": [
+      "2019년"
+     ]
+    },
+    {
+     "say": "앤트로픽은 최대 약 644억 달러, 아람코의 두 배가 넘습니다. 올해 상장한 SpaceX 다음, 역대 두 번째 규모가 될 수 있습니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "억 달러"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "chart",
+    "bignum",
+    "bars"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말하는 숫자가 그 순간 화면에 생긴다 (작업 기준, 09 §6 v27·v30)"
+  },
+  {
+   "scene": 7,
+   "type": "analogy",
+   "chapter": 1,
+   "situation": "question",
+   "situation_name": "질문·명제 한 줄을 던진다",
+   "origin": "main",
+   "also": [
+    "cause"
+   ],
+   "beats": [
+    {
+     "say": "왜 이렇게 큰돈일까요? AI 는 수많은 칩과 그 칩을 돌릴 전기, 데이터센터가 있어야 만들어지기 때문입니다.",
+     "situations": [
+      "question",
+      "cause"
+     ],
+     "hits": [
+      "?",
+      "왜 ",
+      "일까요"
+     ]
+    },
+    {
+     "say": "동네 맛집이 체인점을 내려고 손님들에게 가게 지분을 파는 것처럼, AI 회사도 주식시장에서 돈을 모으는 거죠.",
+     "situations": [],
+     "hits": []
+    }
+   ],
+   "recommended_scenes": [
+    "card_type",
+    "chapter"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "그림을 억지로 넣기",
+   "why": "질문은 글자 하나로 — 강조 예산 안에서 (05 §0-1)"
+  },
+  {
+   "scene": 8,
+   "type": "recap",
+   "chapter": 1,
+   "situation": "conclusion",
+   "situation_name": "꼭 기억할 한 문장 (결론·훅)",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "정리하면, AI 회사가 역대 손꼽히는 큰돈을 주식시장에서 모으고 있습니다.",
+     "situations": [
+      "conclusion"
+     ],
+     "hits": [
+      "정리하면"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "kinetic",
+    "card_type",
+    "recap"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "영상 내내 키네틱, 자막과 같은 문장 다시 쓰기",
+   "why": "강조는 아껴서 — 결론 한 번 (05 §0-1)"
+  },
+  {
+   "scene": 9,
+   "type": "chapter",
+   "chapter": 2,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "두 번째, 같은 날 나온 신뢰 이야기입니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 10,
+   "type": "kb",
+   "chapter": 2,
+   "situation": "media",
+   "situation_name": "보도·매체가 어떻게 다뤘나",
+   "origin": "main",
+   "also": [
+    "said",
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "AI 칩 1위 회사 엔비디아의 이사회가, CEO 젠슨 황 관련 안보 의혹 보도를 조사하기 시작했습니다. 11월 10일엔 외부 조사팀까지 꾸렸죠.",
+     "situations": [
+      "media"
+     ],
+     "hits": [
+      "보도"
+     ]
+    },
+    {
+     "say": "이사회는 국가안보나 회사 기밀이 침해됐다고 볼 이유는 없다고 밝혔습니다. 주가 이야기는 시장의 이유 채널에서 자세히 다뤘습니다.",
+     "situations": [
+      "said",
+      "metric"
+     ],
+     "hits": [
+      "밝혔"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "newspapers",
+    "quote"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-screen",
+     "status": "partial"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "매체 판단을 단정",
+   "why": "매체 프레임의 차이 자체가 이야기 (03 §0-2)"
+  },
+  {
+   "scene": 11,
+   "type": "map_causal",
+   "chapter": 2,
+   "situation": "question",
+   "situation_name": "질문·명제 한 줄을 던진다",
+   "origin": "main",
+   "also": [
+    "metric",
+    "media"
+   ],
+   "beats": [
+    {
+     "say": "AI 업계에 이게 왜 중요할까요? 엔비디아 칩은 거의 모든 AI 회사가 쓰는 엔진입니다.",
+     "situations": [
+      "question"
+     ],
+     "hits": [
+      "?",
+      "왜 "
+     ]
+    },
+    {
+     "say": "그런데 엔비디아 칩이 수출 규제를 피해 중국으로 갔는지 정부가 조사 중이라는 보도가 겹치면서, 칩이 어디로 가는지에 대한 신뢰가 문제로 떠올랐습니다.",
+     "situations": [
+      "metric",
+      "media"
+     ],
+     "hits": [
+      "올랐"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "card_type",
+    "chapter"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "그림을 억지로 넣기",
+   "why": "질문은 글자 하나로 — 강조 예산 안에서 (05 §0-1)"
+  },
+  {
+   "scene": 12,
+   "type": "chapter",
+   "chapter": 3,
+   "situation": "question",
+   "situation_name": "질문·명제 한 줄을 던진다",
+   "origin": "main",
+   "also": [
+    "cause"
+   ],
+   "beats": [
+    {
+     "say": "마지막 세 번째, 그래서 우리에게는 무엇이 바뀔까요?",
+     "situations": [
+      "question",
+      "cause"
+     ],
+     "hits": [
+      "?"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "card_type",
+    "chapter"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "그림을 억지로 넣기",
+   "why": "질문은 글자 하나로 — 강조 예산 안에서 (05 §0-1)"
+  },
+  {
+   "scene": 13,
+   "type": "checklist",
+   "chapter": 3,
+   "situation": "new-tool",
+   "situation_name": "새 도구·모델 소개",
+   "origin": "add",
+   "also": [
+    "cause",
+    "conclusion"
+   ],
+   "beats": [
+    {
+     "say": "먼저, 당장 서비스 요금이나 사용법이 바뀐다는 발표는 없습니다. 대신 상장한 회사는 매출과 손실, 위험을 정기적으로 공개해야 합니다.",
+     "situations": [
+      "new-tool"
+     ],
+     "hits": [
+      "공개"
+     ]
+    },
+    {
+     "say": "그리고 AI 칩 공급 소식은 결국 AI 서비스의 가격과 속도로 이어질 수 있으니, 계속 지켜볼 신호입니다.",
+     "situations": [
+      "cause",
+      "conclusion"
+     ],
+     "hits": [
+      "로 이어"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "footage",
+    "kb",
+    "chat"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "홍보 문구 그대로",
+   "why": "'이거 뭔데 다들 난리야?' — 공식 화면으로"
+  },
+  {
+   "scene": 14,
+   "type": "kinetic",
+   "chapter": 3,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "AI 를 잘 쓰려면, 이제 AI 를 만드는 돈의 흐름도 봐야 합니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 15,
+   "type": "outro",
+   "chapter": 3,
+   "situation": "point",
+   "situation_name": "화면의 한 곳을 가리킨다",
+   "origin": "override",
+   "also": [],
+   "beats": [
+    {
+     "say": "오늘 AI 최전선은 여기까지입니다. 바로 써먹는 활용법은 쇼츠에서, 업계 소식은 다음 주에 또 찾아오겠습니다.",
+     "situations": [
+      "point"
+     ],
+     "hits": [
+      "여기"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "zoomshot",
+    "footage"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    }
+   ],
+   "blocked": [],
+   "avoid": "줌 3번 이상",
+   "why": "화면의 한 곳 — 실제 화면 위 표시"
+  }
+ ],
+ "coverage": 0.8,
+ "fit": 0.33,
+ "counts": {
+  "question": 4,
+  "metric": 2,
+  "new-tool": 2,
+  "change": 1,
+  "conclusion": 1,
+  "media": 1,
+  "point": 1
+ },
+ "defaults": {
+  "real_screen": true,
+  "emphasis_budget": 1
+ }
+}

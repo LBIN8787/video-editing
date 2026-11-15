@@ -1,0 +1,314 @@
+# 연출 기법 카탈로그 — 스타일(레시피)보다 작은 단위의 '화면 문법' (2026-11-15 조사, docs/32-technique-research.md)
+# 용어 사전(매뉴얼 그래프 '용어 사전' 탭, 분류 '연출 기법')에 자동으로 들어갑니다.
+#
+# status : have 이미 있음(렌더러에 구현) · partial 비슷한 것 있음 · candidate 후보(아직 없음) · hold 보류(라이선스·피드백 충돌)
+# tier   : 이 카탈로그의 모든 기법은 '스타일 기본값' 층 — 금지도 MUST 도 아님 (manual/README §3-1). 쓸지 말지는 장면이 고름
+# tools  : 구현에 쓸 수 있는 열린 도구 — license 는 확인한 근거(checked: 원문/목록 사이트) 와 함께. 쓰기 전 원문 다시 확인
+# related: 이미 있는 용어(장면 종류·움직임 key) — 그래프가 서로 잇습니다
+# caution: 지금까지 사용자 피드백과 부딪히는 점 (반드시 읽기)
+# anim   : 용어 사전의 원리 움직임 예시 종류
+
+techniques:
+  # ───────────────────────── 글자
+  split-reveal:
+    name: 글자 쪼개 등장 (SplitText)
+    group: 글자
+    status: partial
+    aliases: [SplitText, 글자 쪼개]
+    plain: 한 문장을 글자·낱말·줄 단위로 쪼개 하나씩 차례로 올라오게 하는 등장
+    look: 제목·핵심 한 줄이 아래에서 낱말씩 떠오르며 완성됨
+    use_when: 장 표지 제목, 결론 한 문장, 쇼츠 훅 — 한 영상에 몇 번만
+    caution: 강조 예산(1분 1번, v4) 안에서. 자막과 같은 문장을 다시 띄우지 않음 (v4 기각)
+    how: GSAP SplitText(gsap 3.13 에 포함, 무료) 로 글자 묶음을 만들고 stagger 로 차례 등장 — 지금 kinetic 은 낱말 단위만 직접 나눔
+    tools:
+      - {name: GSAP SplitText, url: "https://gsap.com/docs/v3/Plugins/SplitText/", license: "GSAP standard no-charge license (상업 가능)", checked: "gsap npm README"}
+      - {name: doong-jo/kinetic-typography (예시 모음), url: "https://github.com/doong-jo/kinetic-typography", license: MIT, checked: 목록 사이트}
+    related: [kinetic]
+    anim: kinetic
+
+  scramble:
+    name: 글자 섞였다 풀리기 (스크램블)
+    group: 글자
+    status: candidate
+    aliases: [스크램블, ScrambleText]
+    plain: 무작위 글자가 빠르게 바뀌다가 진짜 글자로 맞춰지며 멈추는 등장
+    look: '"#%A9..." 가 "631억" 으로 굳어짐 — 해독되는 느낌'
+    use_when: 숫자·코드·이름이 '밝혀지는' 순간 (AI 채널 명령어, 시장의 발표 숫자). 한 영상 1~2번
+    caution: 정보형 장면에선 읽기 방해 — 결과가 바로 읽혀야 하는 표에는 쓰지 않음
+    how: GSAP ScrambleTextPlugin(무료) — 박자 시각에 맞춰 0.6~1초
+    tools:
+      - {name: GSAP ScrambleTextPlugin, url: "https://gsap.com/docs/v3/Plugins/ScrambleTextPlugin/", license: "GSAP standard no-charge license", checked: "gsap npm README"}
+    related: [terminal, bignum, beat-motion]
+    anim: scramble
+
+  count-up:
+    name: 숫자 세며 오르기 (카운트업)
+    group: 글자
+    status: have
+    aliases: [카운트업, countUp]
+    plain: 숫자가 0(또는 이전 값)에서 목표 값까지 빠르게 세며 올라가는 것
+    look: 0 → 631억 이 1초 동안 굴러 올라감
+    use_when: 크기를 느끼게 할 숫자 하나 — 말하는 순간에 맞춰 (beat-motion 의 count)
+    how: 지금 bignum·motion count 가 GSAP 로 구현. 바깥 도구가 필요하면 countUp.js(MIT)
+    tools:
+      - {name: inorganik/countUp.js, url: "https://github.com/inorganik/countUp.js", license: MIT, checked: 목록 사이트}
+    related: [bignum, beat-motion]
+    anim: beat-motion
+
+  rough-highlight:
+    name: 손그림 형광펜·밑줄·괄호 (차례로)
+    group: 글자
+    status: partial
+    aliases: [rough-notation, 손그림 형광펜]
+    plain: 문서·화면의 한 줄에 손으로 그은 듯한 형광펜·밑줄·동그라미·괄호·취소선이 그려지는 것, 여러 개면 순서대로
+    look: 기사 캡처의 한 줄에 노란 형광펜이 쓱 칠해지고, 이어서 옆 숫자에 동그라미
+    use_when: 증거(기사·공시·논문 캡처)에서 '여기' 를 가리킬 때 — 말하는 순간
+    caution: 한 화면에 표시 2개까지 (강조 예산)
+    how: 지금 layers mark(rough.js)가 동그라미·밑줄을 그림. rough-notation 은 같은 rough.js 바탕에 highlight·bracket·strike-through·묶음 순서(annotationGroup)를 더함
+    tools:
+      - {name: rough-stuff/rough-notation, url: "https://github.com/rough-stuff/rough-notation", license: MIT, checked: 목록 사이트}
+    related: [layers]
+    anim: highlight
+
+  # ───────────────────────── 선·모양
+  draw-on:
+    name: 선이 그려지기 (드로우 온)
+    group: 선·모양
+    status: have
+    aliases: [드로우 온, DrawSVG, vivus]
+    plain: 도형·화살표·지도 경로가 펜으로 그리듯 한쪽 끝부터 나타나는 것
+    look: 인과 지도의 화살표가 A 에서 B 로 그어짐
+    use_when: 연결·흐름·경로를 말할 때 — '이것이 저것으로 이어진다'
+    how: 지금 hybrid·story 가 rough.js 선을 stroke-dashoffset 으로 그림. GSAP DrawSVGPlugin(무료)·vivus(MIT) 도 같은 원리
+    tools:
+      - {name: GSAP DrawSVGPlugin, url: "https://gsap.com/docs/v3/Plugins/DrawSVGPlugin/", license: "GSAP standard no-charge license", checked: "gsap npm README"}
+      - {name: maxwellito/vivus, url: "https://github.com/maxwellito/vivus", license: MIT, checked: 목록 사이트 (2022 이후 개발 멈춤)}
+    related: [map_causal, story, journey]
+    anim: draw
+
+  morph:
+    name: 모양 바뀌기 (모프)
+    group: 선·모양
+    status: candidate
+    aliases: [모프, 모양 바뀌기, MorphSVG, flubber]
+    plain: 한 도형이 끊기지 않고 다른 도형으로 변하는 것 — 같은 것이 다른 모습이 됨을 보여 줌
+    look: 동그라미(회사) 가 지도 모양(나라)으로, 막대가 사람 모양으로 스르르 바뀜
+    use_when: '"A 가 사실은 B 다", "이것이 저것이 된다" — 말의 동사(바뀌다·변하다)를 그림이 연기할 때 (04 §0-5)'
+    caution: 의미 없는 모프는 장식 — 바뀌는 이유를 대본이 말할 때만
+    how: GSAP MorphSVGPlugin(무료) 또는 flubber(MIT) 로 SVG 경로 보간 → 박자 시각에 1초 안팎
+    tools:
+      - {name: GSAP MorphSVGPlugin, url: "https://gsap.com/docs/v3/Plugins/MorphSVGPlugin/", license: "GSAP standard no-charge license", checked: "gsap npm README"}
+      - {name: veltman/flubber, url: "https://github.com/veltman/flubber", license: MIT, checked: 목록 사이트}
+    related: [stage, metaphor, isotype]
+    anim: morph
+
+  stagger:
+    name: 차례로 등장 (스태거)
+    group: 선·모양
+    status: have
+    aliases: [스태거, LaggedStart, stagger]
+    plain: 여러 개를 한꺼번에가 아니라 조금씩 시차를 두고 차례로 나타내는 것
+    look: 사람 아이콘 10개가 왼쪽부터 톡톡톡 채워짐
+    use_when: 목록·사람 수·여러 항목 — 눈이 하나씩 따라가게
+    how: GSAP stagger (지금 isotype·people 등에서 사용). Manim 의 LaggedStart 와 같은 개념
+    tools:
+      - {name: ManimCommunity/manim (LaggedStart), url: "https://docs.manim.community/en/stable/reference/manim.animation.composition.LaggedStart.html", license: MIT, checked: manim.community}
+    related: [isotype, people]
+    anim: stagger
+
+  motion-path:
+    name: 길 따라 움직이기 (모션 패스)
+    group: 선·모양
+    status: partial
+    aliases: [모션 패스, MotionPath]
+    plain: 물건(배·트럭·돈 아이콘)이 그려진 경로를 따라 실제로 이동하는 것
+    look: 공급망 지도 위로 컨테이너 아이콘이 대만 → 미국 길을 따라 미끄러짐
+    use_when: 공급망·자금 흐름·전파 — '어디서 어디로'
+    how: journey 는 경로를 그리고 핀을 찍음. GSAP MotionPathPlugin(무료) 로 아이콘을 경로에 태움
+    tools:
+      - {name: GSAP MotionPathPlugin, url: "https://gsap.com/docs/v3/Plugins/MotionPathPlugin/", license: "GSAP standard no-charge license", checked: "gsap npm README"}
+    related: [journey, map_causal]
+    anim: draw
+
+  # ───────────────────────── 이어 주기 (장면과 장면 사이)
+  match-move:
+    name: 같은 것이 다음 화면으로 이어짐 (매치 무브·Flip)
+    group: 이어 주기
+    status: candidate
+    aliases: [매치 무브, 매치 컷, match cut, GSAP Flip]
+    plain: 앞 장면의 한 요소(숫자·로고·도형)가 사라지지 않고 다음 장면의 제자리로 옮겨 가며 장면이 바뀌는 것 — 그래픽판 매치 컷
+    look: 표지의 '631억' 카드가 작아지며 다음 장면 표의 한 칸으로 들어가 앉음
+    use_when: 앞 장면의 결론이 다음 장면의 출발점일 때 — 장면이 '넘어가는' 게 아니라 '이어지는' 느낌 (README §2-1 진행 멘트 대신)
+    caution: 화면 전체를 움직이는 카메라가 아님 — 요소 하나만 이동 (v12·v30 억지 움직임과 다름)
+    how: GSAP Flip(무료) — 이전 위치를 기록하고 새 레이아웃으로 옮김. 장면 경계에서 두 장면을 겹쳐 렌더해야 함 (edit10 전환 구간 0.3초 활용)
+    tools:
+      - {name: GSAP Flip, url: "https://gsap.com/docs/v3/Plugins/Flip/", license: "GSAP standard no-charge license", checked: "gsap npm README"}
+      - {name: Manim TransformMatchingShapes (같은 개념), url: "https://docs.manim.community/", license: MIT, checked: manim.community}
+    related: [transition]
+    anim: flip
+
+  j-l-cut:
+    name: 소리 먼저·소리 남기 (J컷·L컷)
+    group: 이어 주기
+    status: candidate
+    aliases: [J컷, L컷, J-cut, L-cut]
+    plain: 다음 장면의 소리가 화면보다 먼저 들리기 시작하거나(J), 화면이 바뀐 뒤에도 앞 장면 소리가 조금 이어지는(L) 편집
+    look: CEO 얼굴이 나오기 0.5초 전부터 그의 목소리가 들리기 시작함
+    use_when: 원본 발언(bite)·자료 영상으로 넘어갈 때 — 하드 컷의 덜컥거림 없이
+    how: cutedit·footage 의 오디오 시작을 화면 경계보다 0.3~0.8초 앞(J)·뒤(L)로 — ffmpeg adelay/atrim, 내레이션은 그 구간 낮춤
+    tools:
+      - {name: ffmpeg (adelay·amix), url: "https://ffmpeg.org/ffmpeg-filters.html", license: "LGPL/GPL (도구로만 사용)", checked: 공식 문서}
+    related: [bite, footage, hard-cut]
+    anim: jcut
+
+  xfade-pack:
+    name: 장면 전환 묶음 (xfade)
+    group: 이어 주기
+    status: partial
+    aliases: [xfade]
+    plain: 겹침·지우개(wipe)·밀기(slide)·원 열기·픽셀 등 ffmpeg 에 들어 있는 장면 전환 수십 가지
+    look: 앞 장면이 원으로 오므라들며 다음 장면이 드러남 (circleopen)
+    use_when: 장 표지 앞뒤처럼 '단락이 바뀐다' 를 보여 줄 때만
+    caution: v12 기각 '매 장면 휙 전환은 정신없다' — 보통 장면은 부드러운 겹침(fade) 하나만
+    how: 지금 edit10 이 HTML 안에서 wipe·push·zoom·iris 를 돌려 씀. 영상 조각을 이을 땐 ffmpeg xfade=transition=fade|dissolve|wipeleft|slideup|circleopen|pixelize…
+    tools:
+      - {name: FFmpeg xfade, url: "https://trac.ffmpeg.org/wiki/Xfade", license: "LGPL/GPL (도구로만 사용)", checked: 공식 위키}
+      - {name: Motion Canvas transitions (fade·slide·zoomIn 개념), url: "https://motioncanvas.io/docs/transitions", license: MIT (저장소 원문 미확인), checked: 공식 문서}
+    related: [transition, hard-cut]
+    anim: crossfade
+
+  zoom-into:
+    name: 확대해 들어가며 다음 장면 (줌 인 전환)
+    group: 이어 주기
+    status: hold
+    aliases: [줌 인 전환, zoomInTransition]
+    plain: 화면의 한 곳으로 확대해 들어가면 그 안이 다음 장면이 되는 전환
+    look: 지도 위 한 도시로 들어가면 그 도시의 거리 사진이 펼쳐짐
+    use_when: 전체 → 한 부분으로 '들어가는' 이야기 (호기심·역사)
+    caution: 시장 채널 v31 '확대·축소 쓰지 않음' 과 충돌 — 시장 채널은 쓰지 않음. 다른 채널도 한 영상 1번 이하
+    how: Motion Canvas zoomInTransition 개념을 GSAP 로 — 앞 장면 scale 확대 + 다음 장면 페이드
+    tools:
+      - {name: Motion Canvas zoomInTransition, url: "https://motioncanvas.io/api/core/transitions", license: MIT (저장소 원문 미확인), checked: 공식 문서}
+    related: [zoomshot, slow-push]
+    anim: pullback
+
+  whip-pan:
+    name: 휙 넘기기 (휩 팬)
+    group: 이어 주기
+    status: hold
+    aliases: [휩 팬, whip pan]
+    plain: 화면이 번지며 옆으로 휙 지나가는 사이에 다음 장면으로 바뀌는 전환
+    look: 가로로 흐려진 띠가 지나가며 장면이 바뀜
+    use_when: 빠른 쇼츠의 시간·장소 점프
+    caution: v12 기각('매 장면 휙 전환·휙 소리 — 정신없다')과 정면 충돌 — 롱폼에서는 쓰지 않음
+    how: 앞 장면 끝·다음 장면 처음에 가로 이동 + 가로 흐림(ffmpeg xfade hblur 또는 CSS blur)
+    tools:
+      - {name: FFmpeg xfade hblur, url: "https://trac.ffmpeg.org/wiki/Xfade", license: "LGPL/GPL (도구로만 사용)", checked: 공식 위키}
+    related: [transition]
+    anim: whip
+
+  gl-transitions:
+    name: 셰이더 전환 모음 (gl-transitions)
+    group: 이어 주기
+    status: hold
+    aliases: [gl-transitions]
+    plain: GPU 셰이더로 만든 화려한 전환(물결·큐브·조각 나기 등) 수백 가지 모음
+    use_when: 지금은 쓰지 않음 (보류) — 쓴다면 쇼츠의 장면 점프 한두 번, 전환마다 라이선스를 확인한 것만
+    look: 장면이 물결처럼 일렁이며 바뀜
+    caution: 전환마다 라이선스가 따로 적혀 있음(한 줄로 정리 안 됨) + 화려한 전환은 v12 '정신없다' 기각과 충돌 — 보류
+    how: ffmpeg-gl-transition 이나 브라우저 WebGL 로 렌더
+    tools:
+      - {name: gl-transitions/gl-transitions, url: "https://github.com/gl-transitions/gl-transitions", license: "전환마다 다름 (license 칸 확인 필요)", checked: npm·목록 사이트}
+    related: [transition]
+    anim: crossfade
+
+  # ───────────────────────── 사진·깊이
+  parallax-photo:
+    name: 사진에 깊이 (2.5D 시차)
+    group: 사진·깊이
+    status: candidate
+    aliases: [2.5D 시차, 패럴랙스, parallax]
+    plain: 사진 한 장을 앞·뒤 층으로 나눠, 앞은 조금 더 움직이고 뒤는 덜 움직이게 해 입체처럼 보이게 하는 것
+    look: 옛 사진 속 사람이 배경에서 살짝 떠 보이며 아주 천천히 깊어짐
+    use_when: 역사·인물 사진이 오래 머무는 장 표지·여는 장면 (호기심·시사)
+    caution: '카메라를 억지로 움직이는 것과 같은 계열(v30) — 사진이 이야기의 증거로 오래 머물 때만, 한 영상 몇 장. 시장 채널은 v31 로 쓰지 않음'
+    how: 깊이 추정(Depth Anything) → 깊이에 따라 층을 나눠 GSAP 로 다른 속도 이동. 브라우저만으로 되는 render-image-depth(MIT) 방식이 렌더러와 맞음
+    tools:
+      - {name: activeguild/render-image-depth, url: "https://github.com/activeguild/render-image-depth", license: MIT, checked: 목록 사이트}
+      - {name: DepthFlow, url: "https://github.com/BrokenSource/DepthFlow", license: "AGPLv3 또는 상업(별도) — 그대로 쓰지 않음", checked: PyPI 설명}
+    related: [kb, perspective-paper]
+    anim: parallax
+
+  pull-back:
+    name: 한 점에서 물러나며 전체 보기 (풀백 리빌)
+    group: 사진·깊이
+    status: candidate
+    aliases: [풀백, pull-back]
+    plain: 아주 가까이 보이던 한 부분(숫자·얼굴)에서 시작해 물러나면 그것이 큰 그림의 일부였음이 드러나는 것
+    look: '"0.3%" 한 칸에서 물러나면 수천 칸짜리 표 전체가 보임'
+    use_when: 훅 — 작은 것이 사실은 큰 것의 일부라는 반전 (시장·호기심)
+    caution: 카메라 이동이므로 한 영상 1번, 시장 채널은 v31(확대·축소 없음) 확인 후
+    how: HyperFrames 레지스트리 블록 pull-back-reveal 아이디어 (Apache-2.0, 설치됨, docs/17 후보) — GSAP scale 1 → 큰 값의 역방향
+    tools:
+      - {name: HyperFrames pull-back-reveal, url: "https://github.com/heygen-com/hyperframes", license: Apache-2.0, checked: tools/external.json}
+    related: [zoomshot]
+    anim: pullback
+
+  # ───────────────────────── 데이터
+  bar-race:
+    name: 순위가 바뀌는 막대 (바 차트 레이스)
+    group: 데이터
+    status: candidate
+    aliases: [바 차트 레이스, bar chart race]
+    plain: 시간이 흐르며 막대 길이가 바뀌고 순위가 엎치락뒤치락 자리를 바꾸는 차트
+    look: 2015 → 2025 시가총액 순위에서 엔비디아 막대가 아래에서 1위로 올라옴
+    use_when: '순위·점유율이 시간에 따라 바뀐 이야기 (시장) — 데이터 출처 필수'
+    caution: 숫자가 많아 읽기 바쁨 — 막대 10개 이하, 15초 안팎
+    how: HyperFrames bar-chart-race 블록(설치됨) 또는 Python dexplo/bar_chart_race(MIT) 로 영상 조각
+    tools:
+      - {name: dexplo/bar_chart_race, url: "https://github.com/dexplo/bar_chart_race", license: MIT, checked: 목록 사이트}
+      - {name: HyperFrames bar-chart-race, url: "https://github.com/heygen-com/hyperframes", license: Apache-2.0, checked: tools/external.json}
+    related: [bars]
+    anim: race
+
+  chart-morph:
+    name: 차트가 다른 차트로 바뀜
+    group: 데이터
+    status: candidate
+    aliases: [차트 모프]
+    plain: 막대 차트가 원 그래프로, 꺾은선이 막대로 — 같은 숫자를 다른 눈으로 보게 바뀌는 것
+    look: 매출 막대 5개가 모여 하나의 원이 되며 비중이 보임
+    use_when: '"그런데 비중으로 보면" 처럼 관점이 바뀌는 문장'
+    how: 각 막대·조각을 SVG 경로로 그리고 MorphSVG(무료)·flubber(MIT) 로 보간
+    tools:
+      - {name: veltman/flubber, url: "https://github.com/veltman/flubber", license: MIT, checked: 목록 사이트}
+    related: [bars, chart, compare]
+    anim: morph
+
+  # ───────────────────────── 화면 나누기
+  split-screen:
+    name: 나란히 맞대기 (스플릿 스크린)
+    group: 화면 나누기
+    status: partial
+    aliases: [스플릿 스크린, 화면 나누기, 맞대기]
+    plain: 화면을 둘로 나눠 두 자료(말과 행동, 전과 후, 두 회사)를 동시에 보여 주는 것
+    look: 왼쪽엔 CEO 발언 자막, 오른쪽엔 같은 날 공시 문장 — 말과 행동이 나란히
+    use_when: 시장 v26 '말과 행동 맞대기', 시사 '양쪽 입장 같은 틀(08 §4)'
+    caution: 양쪽 크기·색·길이를 같게 (한쪽 편들기 금지 — 영구 원칙)
+    how: versus·compare 는 도식으로 비교. 영상·캡처 두 개를 나란히 놓는 장면은 layers 두 칸 배치로 확장
+    tools: []
+    related: [versus, compare, bite]
+    anim: split
+
+  spotlight:
+    name: 나머지 어둡게 (스포트라이트)
+    group: 화면 나누기
+    status: have
+    aliases: [스포트라이트, 나머지 어둡게]
+    plain: 화면의 여러 요소 중 지금 말하는 하나만 밝게 두고 나머지를 흐리게 하는 것
+    look: 인과 지도 칸 7개 중 지금 말하는 칸만 진하고 나머지는 옅어짐
+    use_when: 복잡한 도식에서 지금 어디를 보는지 알려 줄 때 — 카메라 이동 대신
+    how: map_causal 의 dim·on·active 상태 (hybrid.py)
+    tools: []
+    related: [map_causal]
+    anim: spotlight

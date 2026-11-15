@@ -40,7 +40,12 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **의도 먼저 — 애니메이션 무대 (v22)** — 만들기 전에 제작 목표·시청자 욕망·기억할 한 장면(`02_script/intent.md`), 장면 goal·박자 why 필수, 한 화면 한 생각·글자 하나·대본의 동사를 그림이 연기 (`stage` 장면) | `manual/04-curiosity.md` §0-5, `styles/anim-stage/STYLE.md`, `ytflow/stages/stage.py` |
 | **대본 → 그림·애니메이션 (호기심)** — AI 그림 조각(cut·pose·move) vs 관절 인형(puppet), 그림 생성 여러 길(ElevenLabs·OpenAI GPT Image·Gemini·Codex 구독·수동) | `docs/27-story-animation.md`, `docs/28-save-and-imagegen.md` §2, `python -m ytflow art-gen <프로젝트> --backend ...`, `python -m ytflow art-cut`, `ytflow/stages/imagegen.py`, `ytflow/stages/puppet.py` |
 | **움직이는 비유 애니메이션 (따로 쓰는 스타일, 매뉴얼 기준 아님·품질 보완 필요)** — 무리가 한쪽으로 옮겨 가고 의태어가 튀어나오는 비유 장면 (`metaphor` 장면, migrate·pop). 사용자가 고를 때만 | `styles/motion-metaphor/STYLE.md`, `docs/22-motion-reference.md`(레퍼런스 재분석·v2 방향), `styles/recipes/motion-metaphor.yaml`, `ytflow/stages/motion.py` |
+| **매뉴얼 그래프·의도 정렬·고치기 도구** — 한눈에(통과·금지·충돌 후보)·작업 절차 흐름도·내 피드백 → 매뉴얼 카드·용어 사전(스타일·장면·효과·움직임이 무엇이고 어떻게 구현됐나, `manual/glossary.yaml`), 내가 한 말(원문) → 모델 해석(버전) → 매뉴얼 규칙 → 코드·검사 → 검토 결과가 맞는지 판정(`manual/intents.yaml`: 뜻한 것·뜻하지 않은 것·과잉 해석/충돌), 검토 → 반영 버전 → 고친 절·게이트·규칙·검사 코드를 그래프로(`manual/graph.json`, 에이전트가 읽는 정책 그래프), 브라우저에서 매뉴얼 편집·검토 기록·버전 올리기 | `docs/31-manual-graph.md`, `python -m ytflow manual-graph`, `python -m ytflow manual-ui`, `ytflow/stages/manualgraph.py` |
+| **레포 구조: 메인 → 주제 레포 → 상황 → 영상 (2026-11-15)** — 매뉴얼이 메인 레포, `topics/<brand>/topic.yaml`(주식·호기심·AI·시사)이 메인을 물려받아 기본값·상황을 바꾸고 더함. 영상마다 `edit-plan` 으로 박자별 상황 → 장면 종류·연출 기법을 채우고 `02_script/EDIT_CONTEXT.md` 를 **편집 전에 먼저 읽음** | `docs/33-repo-layers.md`, `topics/README.md`, `manual/situations.yaml`, `python -m ytflow topics`, `python -m ytflow edit-plan <프로젝트>`, `ytflow/stages/layers.py` |
+| **연출 기법 카탈로그** (깃허브 등 열린 구현 조사: 글자 쪼개기·스크램블·모프·매치 무브·J/L컷·사진 깊이·순위 막대·맞대기 …, 이미 있음/후보/보류·라이선스·내 피드백과 부딪히는 점) — GSAP 3.13 플러그인 전부 무료 | `docs/32-technique-research.md`, `styles/techniques.yaml`, 매뉴얼 그래프 '용어 사전 → 연출 기법' |
+| **매뉴얼 정기 검토 (매일 밤 자동, 2026-11-15)** — 충돌·과적합·폐지된 기준 잔재·깨진 참조·층 미정 피드백을 재고, 판단이 필요 없는 것만 고쳐 커밋, 판단이 필요한 것은 질문으로 (그래프 '한눈에 → 정기 검토' + 휴대폰 알림). 매뉴얼 버전은 올리지 않음 | `docs/34-manual-review.md`, `skills/manual-review/SKILL.md`, `python -m ytflow manual-audit`, `manual/audit.md` |
 | **레퍼런스 영상 움직임 분석 — PC 의 ego lite + rea-video** — 클라우드는 YouTube 에 막히므로 사용자 PC 의 에이전트가 ego lite 로 재생 화면을 '정지 → 이동 → 찍기' 캡처(내려받기 없음) → rea-video 장면 분석 → 요소가 대본의 동사를 연기하는 움직임 문법 정리 | `skills/ref-watch-ego/SKILL.md`, `scripts/frames_to_clip.py`, `docs/31-motion-grammar.md`(결과) |
+| **매뉴얼 관리 — 한 번에 한 명만 (2026-11-15)** — 매뉴얼 담당 1명 + 잠금(`locks` 브랜치), 다른 에이전트는 제안함, 막는 장치 세 겹(명령·Claude hook·git pre-commit) | `docs/35-manual-ownership.md`, `manual/OWNERS.yaml`, `python -m ytflow manual-lock status`, `python -m ytflow manual-propose "…"` |
 | **반드시 지킬 것·검사** | `manual/06-checklist.md`, `python -m ytflow check <프로젝트>` |
 | 채널 회차 만들기 (반복 운영) | `skills/channel-run/SKILL.md`, `channels/README.md`, `docs/06-operations.md` |
 | 영상 1편 만들기 | `skills/video-make/SKILL.md` |
@@ -100,9 +105,12 @@ python -m ytflow skin-preview <프로젝트> [--skins a,b,c]          # 같은 �
 python -m ytflow thumbnail <프로젝트>                             # 제목·썸네일 A/B/C (hybrid.json 의 package, 규칙 prompts/thumbnail.md)
 python -m ytflow short <프로젝트>                                  # 세로 쇼츠 Claude 판 (02_script/short.json, 실제 화면 중심)
 python -m ytflow recipes | style-pick <프로젝트>                    # 편집 스타일 등록부 / 이 영상에 맞는 스타일 추천
+python -m ytflow edit-plan <프로젝트>                            # 메인 → 주제 레포 → 이 영상: 박자마다 상황 → 장면·기법 → 02_script/EDIT_CONTEXT.md (편집 전에 먼저)
 python -m ytflow check <프로젝트> [--upto G4]                     # 체크리스트 자동 검사 (MUST 실패 시 종료 코드 1)
 python -m ytflow review <프로젝트> --pass | --reject "이유"        # 사용자 검토 기록 → 기각은 매뉴얼 '반영 대기'로
 python -m ytflow manual-bump "바꾼 기준 요약"                      # 기각 사유 반영 후 매뉴얼 버전 올리기
+python -m ytflow manual-audit [--fixed "고친 것"]                   # 매뉴얼 정기 검토: 충돌·과적합·폐지된 기준 잔재·깨진 참조 → manual/audit.md (매일 밤 자동, docs/34)
+python -m ytflow manual-graph | manual-ui [--port 8770]           # 매뉴얼 지식 그래프(manual/graph.json) / 그래프 보기·매뉴얼 고치기 도구
 python -m ytflow sync-qa <프로젝트>                               # 완성본 자막·목소리·화면 싱크를 받아쓰기로 측정 → 05_edit/sync_qa.json
 python -m ytflow voice-import <프로젝트> part1.mp3 [...]          # ElevenLabs 긴 음성을 대본 박자별로 자르기 (키 없이)
 python -m ytflow upload <프로젝트> [--archive]                    # 완성 영상 → GitHub Release (키 불필요), --to drive 는 Drive (docs/09-storage.md)
@@ -131,6 +139,12 @@ python -m ytflow styles | schemas | status <프로젝트>
 | `shorts` 쇼츠 | 9:16 고정 훅 + 큰 자막 | shorts-aitips | `prompts/shorts_script.md` |
 
 ## 규칙 (모든 에이전트 공통)
+- **매뉴얼은 한 번에 한 명만 (2026-11-15 사용자 요청, docs/35):** 매뉴얼·규칙 파일(`manual/OWNERS.yaml` 의 protected — manual/, topics/, styles/recipes·techniques, skills/, AGENTS.md, 검사 코드)은 **잠금을 가진 한 명(평소에는 매뉴얼 담당)만** 고칩니다. 작업 전에 `python -m ytflow manual-lock status`. 담당이 아니면 고치지 말고 `python -m ytflow manual-propose "내용"` 으로 제안함(`proposals/manual/`)에 남기세요 — `review`·`feedback` 도 자동으로 제안함으로 갑니다. 사용자가 매뉴얼 작업을 맡겼을 때만 `manual-lock acquire --force --reason "사용자 허락: …"`, 끝나면 `release`. 처음 클론하면 `git config core.hooksPath .githooks`. 영상 프로젝트·렌더러·자료는 각자 브랜치에서 자유롭게.
+- **피드백 → 그래프 (2026-11-15 사용자 요청):** 사용자가 피드백하면 원문 그대로 기록하고 매뉴얼 그래프와 공유 페이지를 갱신합니다.
+  1) 영상 판정은 `python -m ytflow review <프로젝트> --pass | --reject "원문"`, 그 밖의 말(방향 요청·"그런 뜻이 아니었다"·도구 요청)은 `python -m ytflow feedback "원문" --kind direction|clarify|tool [--about intent:xxxx] [--pending]` — 둘 다 `manual/graph.json` 을 자동으로 다시 만듭니다.
+  2) 모델 해석이 틀렸다는 말이면 `manual/intents.yaml` 에 뜻한 것·뜻하지 않은 것·판정도 적습니다(`manual-ui` '의도 정렬').
+  3) `python -m ytflow manual-graph --artifact <스크래치>/manual-graph.html` → Artifact 도구로 **같은 공유 페이지**(`ytflow/stages/manualgraph.py` 의 `ARTIFACT_URL`)에 다시 올리고 → 커밋·push. 매뉴얼을 고쳤는데 그래프가 옛것이면 `check` G0 SHOULD 가 알려 줍니다.
+- **규칙의 네 층 (2026-11-15 사용자 요청, manual/README §3-1):** 영구 원칙(사실·법·권리·안전 — 진짜 금지) · 작업 기준(제작 방법) · 스타일 기본값(소리·카메라·바탕·비율 — 금지라고 쓰지 않고 켬/끔 기본값과 범위로) · 실험 기록(한 영상의 반응 — 매뉴얼 금지·MUST 로 옮기지 않음). 피드백을 매뉴얼로 옮기기 전에 `feedback --scope` 로 층부터 정하고, 애매하면 실험 기록으로 둡니다. 스타일 층을 MUST 검사로 만들지 않습니다. 분류: `manual/rule_tiers.yaml`, 확인: 매뉴얼 그래프 '한눈에 → 과적합 후보'.
 - **쉬운 대본:** 시청자는 일반인입니다. 핵심 한 문장(`core_message`), 논리 구조(`logic`), 숫자마다 비교 기준(`compare_to`), 비유 2개 이상, 과거 사례 1개 이상, 어려운 말 풀이(`glossary`)를 넣습니다. `prompts/script.md`, `validate` 가 점검합니다.
 - **사실:** 숫자와 발언은 출처로 확인된 것만 씁니다. '재확인 필요'는 단정하지 않습니다. 투자 권유 표현은 금지합니다.
 - **소스:** YouTube 봇 확인이나 사이트 접근 차단을 **우회하지 않습니다.** 막히면 임시 화면을 두고 사용자 PC 에서 `rebuild` 하게 안내합니다.

@@ -284,6 +284,29 @@ def main(argv: list[str] | None = None) -> None:
     spk.add_argument("project")
     mb = sub.add_parser("manual-bump", help="기각 사유를 반영해 매뉴얼을 고친 뒤 버전 올리기 (manual/VERSION, CHANGELOG)")
     mb.add_argument("summary")
+    ml = sub.add_parser("manual-lock", help="매뉴얼 잠금 — 한 번에 한 명만 매뉴얼·규칙 파일을 고친다 (status|acquire|release|check, docs/35)")
+    ml.add_argument("action", choices=["status", "acquire", "release", "check"])
+    ml.add_argument("--purpose", default=""); ml.add_argument("--force", action="store_true"); ml.add_argument("--reason", default="")
+    ml.add_argument("--hours", type=float, default=None); ml.add_argument("--path", default="")
+    mp = sub.add_parser("manual-propose", help="담당이 아닐 때 매뉴얼에 넣을 것을 제안함에 남기기 → proposals/manual/ (docs/35)")
+    mp.add_argument("text"); mp.add_argument("--kind", default="fix", choices=["feedback", "review", "fix", "rule", "tool"])
+    mp.add_argument("--project", default=""); mp.add_argument("--source", default="")
+    au = sub.add_parser("manual-audit", help="매뉴얼 정기 검토: 충돌·과적합·폐지된 기준 잔재·깨진 참조·층 미정 피드백 → manual/audit.md (docs/34)")
+    au.add_argument("--quiet", action="store_true"); au.add_argument("--note", default="")
+    au.add_argument("--fixed", action="append", default=[], help="이번 검토에서 고친 것 한 줄 (여러 번)")
+    ep = sub.add_parser("edit-plan", help="메인 → 주제 레포 → 이 영상: 박자마다 상황을 찾아 장면 종류·연출 기법 채우기 → 02_script/EDIT_CONTEXT.md·edit_plan.json (docs/33)")
+    ep.add_argument("project")
+    sub.add_parser("topics", help="주제 레포(topics/<brand>) 목록 — 메인에서 물려받고 바꾸고 더한 상황")
+    mg = sub.add_parser("manual-graph", help="매뉴얼 지식 그래프 → manual/graph.json (검토→버전→절·게이트·규칙·검사 코드), --html 로 보기 전용 페이지")
+    mg.add_argument("--html", default=None); mg.add_argument("--artifact", default=None, help="공유 페이지(Artifact)로 올릴 HTML")
+    fb = sub.add_parser("feedback", help="사용자가 한 말을 원문 그대로 기록 (영상 검토 밖의 방향·뜻 바로잡기 포함) → manual/feedback.yaml + 그래프 갱신")
+    fb.add_argument("quote"); fb.add_argument("--kind", default="direction", choices=["direction", "clarify", "tool", "review"])
+    fb.add_argument("--project", default=""); fb.add_argument("--about", default="", help="바로잡는 의도 ID (intent:xxxx)")
+    fb.add_argument("--note", default=""); fb.add_argument("--pending", action="store_true", help="매뉴얼 '반영 대기'에도 넣기 (check G0)")
+    fb.add_argument("--scope", default="", choices=["", "principle", "standard", "style", "trial"],
+                    help="이 말의 층: principle 영구 원칙 · standard 작업 기준 · style 스타일 기본값 · trial 실험 기록(금지로 만들지 않음)")
+    mu = sub.add_parser("manual-ui", help="매뉴얼 그래프 보기·고치기 도구 (로컬 서버): 검토 기록·반영 대기·버전 올리기·md 편집")
+    mu.add_argument("--port", type=int, default=8770); mu.add_argument("--host", default="127.0.0.1")
     sq = sub.add_parser("sync-qa", help="완성 영상의 자막·목소리·화면 싱크를 받아쓰기로 재기 → 05_edit/sync_qa.json")
     sq.add_argument("project")
     vi = sub.add_parser("voice-import", help="긴 내레이션 음성(ElevenLabs 웹·커넥터 mp3)을 대본 박자별로 잘라 03_voice 에 넣기")
@@ -437,7 +460,14 @@ def main(argv: list[str] | None = None) -> None:
         from .stages import checklist
         if not a.passed and not a.reject:
             raise SystemExit("--pass 또는 --reject \"이유\" 중 하나를 주세요")
-        checklist.review(Project.open(a.project).path, a.passed, a.reject or a.note)
+        from .stages import governance as gv
+        if not gv.can_write():   # 매뉴얼 담당이 아니면 제안함으로 (docs/35)
+            gv.propose(("통과" if a.passed else "기각") + f": {a.reject or a.note}", "review", a.project,
+                       f"python -m ytflow review {a.project} " + ("--pass" if a.passed else f'--reject "{a.reject}"'))
+        else:
+            checklist.review(Project.open(a.project).path, a.passed, a.reject or a.note)
+            from .stages import manualgraph
+            manualgraph.write()
     elif a.cmd == "short":
         from .stages import shorts_hf
         shorts_hf.make(Project.open(a.project))
@@ -448,8 +478,47 @@ def main(argv: list[str] | None = None) -> None:
         from .stages import stylepick
         print(stylepick.run(Project.open(a.project).path).read_text(encoding="utf-8"))
     elif a.cmd == "manual-bump":
-        from .stages import checklist
+        from .stages import checklist, manualgraph, governance as gv
+        gv.guard_or_exit("manual-bump")
         checklist.bump(a.summary)
+        manualgraph.write()
+    elif a.cmd == "manual-lock":
+        from .stages import governance as gv
+        if a.action == "status":
+            print(gv.status())
+        elif a.action == "acquire":
+            gv.acquire(a.purpose or "매뉴얼 작업", a.force, a.reason, a.hours)
+        elif a.action == "release":
+            gv.release()
+        else:
+            ok = (not a.path or not gv.is_protected(a.path)) or gv.can_write()
+            print(gv.holder_ok()[1]); raise SystemExit(0 if ok else 2)
+    elif a.cmd == "manual-propose":
+        from .stages import governance as gv
+        gv.propose(a.text, a.kind, a.project, a.source)
+    elif a.cmd == "manual-audit":
+        from .stages import audit
+        audit.write(a.quiet, a.note, a.fixed)
+    elif a.cmd == "edit-plan":
+        from .stages import layers
+        layers.write_plan(Project.open(a.project).path)
+    elif a.cmd == "topics":
+        from .stages import layers
+        print(layers.listing())
+    elif a.cmd == "manual-graph":
+        from .stages import manualgraph
+        manualgraph.write(a.html, a.artifact)
+    elif a.cmd == "feedback":
+        from .stages import manualgraph
+        from .stages import governance as gv
+        if not gv.can_write():   # 매뉴얼 담당이 아니면 제안함으로 (docs/35)
+            gv.propose(a.quote, "feedback", a.project, f"feedback --kind {a.kind} --scope {a.scope} --about {a.about} --note {a.note}")
+            return
+        it = manualgraph.add_feedback(a.quote, a.kind, a.project, a.about, a.note, a.pending, a.scope)
+        print(f"[feedback] {it['date']} · {manualgraph.FB_KIND.get(a.kind)} 기록 → manual/feedback.yaml" + (" + 반영 대기" if a.pending else ""))
+    elif a.cmd == "manual-ui":
+        from .stages import manualgraph
+        manualgraph.serve(a.port, a.host)
     elif a.cmd == "sync-qa":
         from .stages import syncqa
         syncqa.run(Project.open(a.project))

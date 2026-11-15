@@ -99,6 +99,11 @@ def run(path: Path, upto: str = "G8") -> Report:
     # 매뉴얼: 기각 사유가 반영되기 전에는 새 영상을 만들지 않는다 (기준을 차곡차곡 쌓기)
     pend = pending_changes()
     R.add("G0", "MUST", "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)", not pend, "; ".join(pend))
+    try:   # 피드백·매뉴얼을 바꾼 뒤 그래프를 다시 만들었나 (docs/31 §8)
+        from . import manualgraph as _mg
+        R.add("G0", "SHOULD", "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)", not _mg.is_stale(), "manual/graph.json")
+    except Exception:
+        pass
 
     # G1 주제
     tb = _load(res / "topic_brief.json")
@@ -220,7 +225,7 @@ def run(path: Path, upto: str = "G8") -> Report:
             db = _load(res / "daily_brief.json")
             R.add("G1", "MUST", "매일 브리핑: daily_brief.json 있음 (python -m ytflow daily)", db is not None, "01_research/daily_brief.json")
             intro_txt = " ".join(b.get("say", "") for s in spec.get("scenes", [])[:2] for b in s.get("beats", []))
-            R.add("G4", "MUST", "매일 브리핑: 오프닝에 기준 시각('○일 마감 기준' / '○시 기준')", "기준" in intro_txt, "")
+            R.add("G4", "MUST", "매일 브리핑: 첫 두 장면 안에 기준 시각('○일 마감 기준' / '○시 기준') — 인트로 없이 (README §2-1)", "기준" in intro_txt, "")
             if ch == "ch-market-daily":
                 fs = (res / "factsheet.md").read_text(encoding="utf-8") if (res / "factsheet.md").exists() else ""
                 kinds = [k for k in ("이슈", "보고서", "전망", "실적") if k in fs]
@@ -332,18 +337,20 @@ def run(path: Path, upto: str = "G8") -> Report:
     if last >= 6 and longform:  # v24 길이: 롱폼 최소 10분 (README §2-4)
         tl_ = Path(path) / "05_edit" / "hybrid_timeline.json"
         tot_ = sum(x.get("dur", 0) for x in json.loads(tl_.read_text(encoding="utf-8"))) if tl_.exists() else 0
-        R.add("G6", "MUST", "길이: 롱폼 10분 이상 (README §2-4)", tot_ >= 600, f"{tot_ / 60:.1f}분")
+        quick_ = spec.get("format") == "quick"   # 시사 48시간 안 빠른 정리 (08 §1, v34): 5~8분 예외
+        min_ = 300 if quick_ else 600
+        R.add("G6", "MUST", f"길이: {'빠른 정리 5분' if quick_ else '롱폼 10분'} 이상 — 많이 짧으면 쇼츠로 (README §2-4)", tot_ >= min_, f"{tot_ / 60:.1f}분")
     if last >= 4:  # G5 연출
         from . import backdrop
         bgs = backdrop.plan(spec)
         kinds = set(bgs)
-        R.add("G5", "MUST", "배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2)",
+        R.add("G5", "SHOULD", "배경: 장면 목적에 맞춰 여러 가지 (권고 3종, 05 §0-2 — v34 유동)",
               not longform or len(kinds) >= 3, sorted(kinds))
         runs = [bgs[i] for i in range(len(bgs) - 2) if bgs[i] != "film" and bgs[i] == bgs[i + 1] == bgs[i + 2]]
         R.add("G5", "SHOULD", "배경: 같은 바탕 3장면 연속 없음 (film 제외)", not runs, runs)
         from . import stylepick as _sp
         vs = _sp.variety_stats(spec)
-        R.add("G5", "MUST", "반복 피로: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기: 자료·지도·사진 겹치기·시각 효과, 05 §0-3)",
+        R.add("G5", "SHOULD", "반복 피로: 글씨·도형뿐인 장면이 길게 이어지지 않게 (권고 2장면까지, 05 §0-3 — v34 유동)",
               vs["plain_run"] <= 2, f"최장 {vs['plain_run']}연속 (장면 {vs['plain_run_at']})")
         deco = [s.get("id") for s in spec.get("scenes", []) if set(s.get("fx") or []) & {"dust", "leak"}]
         R.add("G5", "SHOULD", "v10: 장식 효과(dust·leak)는 2장면 이하 — 내용이 담긴 볼거리(사진·지도·사물 그림·정리판) 먼저", len(deco) <= 2, deco)
@@ -386,7 +393,7 @@ def run(path: Path, upto: str = "G8") -> Report:
             R.add("G5", "SHOULD", "반복 피로: 같은 채널 직전 편과 화면 구성 겹침 70% 이하 (Jaccard)", jac <= 0.7, f"{jac:.0%}")
         types = [s.get("type") for s in spec.get("scenes", [])]
         run3 = [types[i] for i in range(len(types) - 2) if types[i] == types[i + 1] == types[i + 2] and types[i] != "chapter"]
-        R.add("G5", "MUST", "같은 type 3연속 없음", not run3, run3)
+        R.add("G5", "SHOULD", "같은 type 3연속 없음 (권고, v34 유동)", not run3, run3)
         tl = _load(edt / "hybrid_timeline.json") or []
         if tl:
             t, last_f, gap, chap, last_c, cgap = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
@@ -405,21 +412,24 @@ def run(path: Path, upto: str = "G8") -> Report:
         from . import stylepick
         ms = stylepick.mix_stats(spec, tl)
         rule = stylepick.MIX_RULES["longform" if longform else "shorts"]
-        R.add("G5", "MUST", f"스타일 조합: {rule['min_recipes']}종 이상 섞기 (한 스타일로만 만들면 불합격)", ms["n_recipes"] >= rule["min_recipes"],
+        R.add("G5", "SHOULD", f"스타일 조합: 상황에 맞춰 섞기 (권고 {rule['min_recipes']}종, v34 유동)", ms["n_recipes"] >= rule["min_recipes"],
               f"{ms['n_recipes']}종 {ms['recipes']}")
         cap = 0.85 if ms.get("backbone") else rule["max_share"]   # 뼈대 스타일(story-board 등)은 85%까지 (manual/04 §0-4, 참고 영상은 거의 한 장의 캔버스)
-        R.add("G5", "MUST", f"한 스타일이 {int(cap * 100)}% 넘지 않음", ms["top_share"] <= cap, f"{ms['top']} {ms['top_share']}")
-        R.add("G5", "MUST", f"한 장면 안에서 겹친 장면(layers) {rule['min_layered']}개 이상", ms["layered_scenes"] >= rule["min_layered"], ms["layered_scenes"])
-        R.add("G5", "MUST", f"같은 스타일 {rule['max_run'] + 1}장면 연속 없음", ms["max_run"] <= rule["max_run"], f"최장 {ms['max_run']}")
+        R.add("G5", "SHOULD", f"한 스타일이 {int(cap * 100)}% 넘지 않음 (권고, v34 유동)", ms["top_share"] <= cap, f"{ms['top']} {ms['top_share']}")
+        R.add("G5", "SHOULD", f"한 장면 안에서 겹친 장면(layers) {rule['min_layered']}개 안팎 (권고, v34 유동)", ms["layered_scenes"] >= rule["min_layered"], ms["layered_scenes"])
+        R.add("G5", "SHOULD", f"같은 스타일 {rule['max_run'] + 1}장면 연속 없음 (권고, v34 유동)", ms["max_run"] <= rule["max_run"], f"최장 {ms['max_run']}")
         total = sum(x["dur"] for x in tl) if tl else 5.0 * sum(len(x.get("beats", [])) for x in spec.get("scenes", []))
         es = stylepick.emphasis_stats(spec, total)
-        R.add("G5", "MUST", f"강조는 아껴서: 1분에 1번 이하 (이 영상 {es['limit']}번까지)", es["count"] <= es["limit"], f"{es['count']}번 {es['items']}")
-        R.add("G5", "MUST", "한 장면에 강조 1개까지 (위아래로 같은 내용 반복 금지)", not es["crowded"], f"넘친 장면 {es['crowded']}")
-        R.add("G5", "MUST", "핵심 단어 띄우기(words)는 단어 1~3개만", not es["bad_words"], es["bad_words"])
+        R.add("G5", "SHOULD", f"강조는 아껴서: 1분에 1번 안팎 (이 영상 {es['limit']}번, v34 유동)", es["count"] <= es["limit"], f"{es['count']}번 {es['items']}")
+        R.add("G5", "SHOULD", "한 장면에 강조 1개까지 (위아래로 같은 내용 반복 피하기, v34 유동)", not es["crowded"], f"넘친 장면 {es['crowded']}")
+        R.add("G5", "SHOULD", "핵심 단어 띄우기(words)는 단어 1~3개 (v34 유동)", not es["bad_words"], es["bad_words"])
         rec = stylepick.skins_for(brand) if brand else set()
         R.add("G5", "SHOULD", "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)", not rec or skin in rec, f"{skin} / 등록부 {sorted(rec)}")
         sp = path / "01_research" / "style_pick.json"
         R.add("G5", "SHOULD", "style-pick 기록 (상황에 맞춘 스타일 선택)", sp.exists(), "python -m ytflow style-pick <프로젝트>")
+        ep = path / "02_script" / "EDIT_CONTEXT.md"   # 메인 → 주제 레포 → 이 영상 (docs/33)
+        R.add("G5", "SHOULD", "edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움)", ep.exists(),
+              "python -m ytflow edit-plan <프로젝트> → 02_script/EDIT_CONTEXT.md")
 
     if last >= 5:  # G6 완성본
         R.add("G6", "MUST", "final.mp4", (edt / "final.mp4").exists(), "")
@@ -440,7 +450,7 @@ def run(path: Path, upto: str = "G8") -> Report:
                   mo.get("change_events_per_min", 0) >= 8 and mo.get("static_ratio", 1) <= 0.5,
                   f"변화 {mo.get('change_events_per_min')}/분 · 정지 {mo.get('static_ratio')}")
             if brand == "curiosity":   # v25 (2026-11-14 사용자: "사진을 잘 뽑은 정적인 동영상 같다 — 동적인 움직임을 살려라", README §2-5)
-                R.add("G6", "MUST", "curiosity 움직임: 정지 화면 비율 ≤0.3 (README §2-5)", mo.get("static_ratio", 1) <= 0.3, f"정지 {mo.get('static_ratio')}")
+                R.add("G6", "SHOULD", "curiosity 움직임: 정지 화면 비율 참고 ≤0.3 (README §2-5 v34 — 숫자를 맞추려 화면을 흔들지 않음)", mo.get("static_ratio", 1) <= 0.3, f"정지 {mo.get('static_ratio')}")
         el = any((path / "03_voice").glob("el*")) or any((path / "03_voice").glob("*eleven*"))
         try:
             el = el or (config.channel(ch).get("tts") or {}).get("backend") == "elevenlabs"
