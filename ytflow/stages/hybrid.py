@@ -1034,8 +1034,8 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
         os.environ["YTFLOW_SKIN"] = scene_skin
     try:
         D = HDoc(sc["id"] * 7 + 3)
-        # v27 박자 카메라 (manual/09 §6, 2026-11-15 사용자: "영상이 정적이다, 멈춰 있는 부분이 많다"): 시장 브랜드 기본 켬, spec camera: "calm" 이면 끔
-        D.cam = spec.get("camera", "beat" if spec.get("brand") == "market" else "calm") == "beat" and sc.get("type") not in CAM_SKIP
+        # v27 박자 카메라 (manual/09 §6): spec camera: "beat" 일 때만
+        D.cam = spec.get("camera", "calm") == "beat" and sc.get("type") not in CAM_SKIP   # v30: 기본 끔 (2026-11-15 사용자: 억지 미세 움직임 필요 없음)
     finally:
         if _env_skin is None:
             os.environ.pop("YTFLOW_SKIN", None)

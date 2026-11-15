@@ -71,7 +71,7 @@ def pack(pr: Project) -> dict:
 
 def kind_of(pr: Project) -> str:
     n = pr.path.name
-    return "weekly" if n.endswith("-weekly") else "analysis" if n.endswith("-analysis") else \
+    return "weekly" if n.endswith(("-weekly", "-review")) else "analysis" if n.endswith("-analysis") else \
         "deep" if "deep" in n or "call" in n else "briefing"
 
 

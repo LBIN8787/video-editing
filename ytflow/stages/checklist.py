@@ -226,7 +226,7 @@ def run(path: Path, upto: str = "G8") -> Report:
                 kinds = [k for k in ("이슈", "보고서", "전망", "실적") if k in fs]
                 R.add("G3", "MUST", "매일 시장: 이야기마다 원인 종류(이슈·보고서·전망·실적)와 1차 출처를 팩트시트에", bool(kinds) and "http" in fs, kinds)
                 # v26 (03 §0-2, 2026-11-15 사용자): 뻔한 사실 말고 자료를 엮어야 보이는 것 — 자료 지도·말과 행동·매체 프레임
-                deep = path.name.endswith(("-analysis", "-weekly")) or str(tb.get("depth", "")).startswith("심층")
+                deep = path.name.endswith(("-analysis", "-weekly", "-review")) or str(tb.get("depth", "")).startswith("심층")
                 lvl = "MUST" if deep else "SHOULD"
 
                 def _rows(head):
@@ -240,7 +240,7 @@ def run(path: Path, upto: str = "G8") -> Report:
                 meant = all(len(r_) >= 5 and r_[4] not in ("", "-") for r_ in amap)
                 R.add("G3", lvl, "v26: 팩트시트 '## 자료 지도' — 보고서·발언·행동 각 2줄+, 합계 6줄+, 자료마다 의미 칸 (03 §0-2)",
                       len(amap) >= 6 and all(v >= 2 for v in kinds_.values()) and meant, f"{len(amap)}줄 {kinds_} 의미{'✓' if meant else '빈칸'}")
-                if path.name.endswith("-weekly"):   # 2026-11-15 사용자: 매주 다음 주 일정·실적 브리핑·분석 (manual/09 §2)
+                if path.name.endswith(("-weekly", "-review")):   # 2026-11-15 사용자: 매주 다음 주 일정·실적 브리핑·분석 (manual/09 §2)
                     sched = _rows("다음 주 일정")
                     has_earn = any("실적" in " ".join(r_) for r_ in sched)
                     R.add("G3", "MUST", "주간: 팩트시트 '## 다음 주 일정' 5줄+ (실적 1줄+, 한국 시간·볼 것·출처) (manual/09 §2)", len(sched) >= 5 and has_earn, f"{len(sched)}줄 · 실적 {'있음' if has_earn else '없음'}")
@@ -431,8 +431,6 @@ def run(path: Path, upto: str = "G8") -> Report:
                   f"변화 {mo.get('change_events_per_min')}/분 · 정지 {mo.get('static_ratio')}")
             if brand == "curiosity":   # v25 (2026-11-14 사용자: "사진을 잘 뽑은 정적인 동영상 같다 — 동적인 움직임을 살려라", README §2-5)
                 R.add("G6", "MUST", "curiosity 움직임: 정지 화면 비율 ≤0.3 (README §2-5)", mo.get("static_ratio", 1) <= 0.3, f"정지 {mo.get('static_ratio')}")
-            if ch == "ch-market-daily":   # v27 (manual/09 §6, 2026-11-15 사용자: "영상이 정적이다, 멈춰 있는 부분이 많다")
-                R.add("G6", "MUST", "시장 움직임: 정지 화면 비율 ≤0.45 (목표 0.3, manual/09 §6)", mo.get("static_ratio", 1) <= 0.45, f"정지 {mo.get('static_ratio')}")
         el = any((path / "03_voice").glob("el*")) or any((path / "03_voice").glob("*eleven*"))
         try:
             el = el or (config.channel(ch).get("tts") or {}).get("backend") == "elevenlabs"
