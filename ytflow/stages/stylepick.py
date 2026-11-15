@@ -227,6 +227,8 @@ def visual_hooks(sc: dict) -> list[str]:
     out += [f"fx:{f}" for f in ([fx] if isinstance(fx, str) else fx)]
     if sc.get("bg") == "photo":
         out.append("bg:photo")
+    if any(b.get("motion") for b in sc.get("beats", [])):   # 말에 맞춰 생기는 사물·숫자 (motion2) — 확대·스캔 없이도 눈요기 (v32)
+        out.append("motion")
     return out
 
 
