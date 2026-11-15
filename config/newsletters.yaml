@@ -10,9 +10,9 @@
 
 sources:
   # ── 시장 ──
-  - {id: axios, name: Axios (Markets·Closer), match: [axios.com], brands: [market, issues], cadence: 평일, arrives: "장 마감 판이면 06~07시 / 아침 판은 전날 밤", status: planned}
-  - {id: dailyupside, name: The Daily Upside, match: [thedailyupside.com], brands: [market], cadence: 평일, arrives: "전날 밤 (배경·심층용)", status: planned}
-  - {id: uppity, name: 어피티 머니레터, match: [uppity.co.kr], brands: [market, issues], cadence: 평일 아침, arrives: "07시 전후", status: planned}
+  - {id: axios, name: Axios (Markets·Closer), match: [axios.com], brands: [market, issues], cadence: 평일, arrives: "장 마감 판이면 06~07시 / 아침 판은 전날 밤", status: subscribed}
+  - {id: dailyupside, name: The Daily Upside, match: [thedailyupside.com], brands: [market], cadence: 평일, arrives: "전날 밤 (배경·심층용)", status: subscribed}
+  - {id: uppity, name: 어피티 머니레터, match: [uppity.co.kr], brands: [market, issues], cadence: 평일 아침, arrives: "07시 전후", status: subscribed}
   - {id: kdi, name: KDI 경제정보센터, match: [kdi.re.kr], brands: [market, issues], cadence: 수시, arrives: 수시, status: planned}
   - {id: bloomberg, name: Bloomberg 아침 판, match: [bloomberg.com, bloomberg.net], brands: [market], cadence: 평일, arrives: "확인 필요", status: blocked}
   - {id: wsj, name: WSJ The 10-Point, match: [wsj.com, dowjones.com], brands: [market, issues], cadence: 평일, arrives: "확인 필요", status: blocked}
@@ -25,10 +25,10 @@ sources:
   - {id: quanta, name: Quanta Magazine, match: [simonsfoundation.org, quantamagazine.org], brands: [curiosity], cadence: 주간, arrives: 수시, status: subscribed}
   - {id: aeon, name: Aeon, match: [aeon.co], brands: [curiosity], cadence: 주간, arrives: 수시, status: subscribed}
   - {id: jstor, name: JSTOR Daily, match: [jstor.org], brands: [curiosity, issues], cadence: "주간(목)", arrives: 수시, status: planned}
-  - {id: pdr, name: The Public Domain Review, match: [publicdomainreview.org], brands: [curiosity], cadence: 격주, arrives: 수시, status: planned}
+  - {id: pdr, name: The Public Domain Review, match: [publicdomainreview.org], brands: [curiosity], cadence: 격주, arrives: 수시, status: subscribed}
   # ── 시사 (+ 데이터) ──
-  - {id: owid, name: Our World in Data Brief, match: [ourworldindata], brands: [issues, curiosity, market], cadence: "월 2회", arrives: 수시, status: planned}
-  - {id: pew, name: Pew Research Center, match: [pewresearch.org], brands: [issues, curiosity], cadence: 주간, arrives: 수시, status: planned}
+  - {id: owid, name: Our World in Data Brief, match: [ourworldindata], brands: [issues, curiosity, market], cadence: "월 2회", arrives: 수시, status: subscribed}
+  - {id: pew, name: Pew Research Center, match: [pewresearch.org], brands: [issues, curiosity], cadence: 주간, arrives: 수시, status: subscribed}
   - {id: newneek, name: 뉴닉, match: [newneek.co], brands: [issues], cadence: 평일, arrives: "07시 전후", status: blocked}
 
 # 소재마다 채널을 나눌 때 쓰는 낱말 (뉴스레터의 brands 가 여러 개일 때만). 소문자로 비교
