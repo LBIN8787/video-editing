@@ -92,3 +92,9 @@
 - **읽은 것:** SKILL.md, references/setup.md, 네트워크 호출(`util.py` 모델 내려받기, `vlm.py` 는 키가 있을 때만). 설치 스크립트는 pip/pipx 만 씀. 자동 유료 호출 없음(`remake-run` 은 쓰지 않음).
 - **쓰는 법:** 영상 파일이 있어야 함. 클라우드는 YouTube 봇 확인으로 내려받기가 막히므로(우회하지 않음) 사용자가 PC 에서 받은 mp4 를 Drive 에 올리거나, PC 에서 직접 `rea-video decompose` 를 돌림(D 드라이브 캐시: `REA_VIDEO_MODELS=D:\ytflow\cache\rea-video`).
 - **절차:** `decompose ref.mp4 -o out/ref --lang en` → `review out/ref` → 에이전트가 장면 그림을 보고 `review_answers.json` 작성 → `apply-review` → `VIDEO.md` 를 읽고 움직임 문법을 매뉴얼로.
+
+## 2026-11-15 ego lite (사용자 PC 의 AI 에이전트용 브라우저)
+- **무엇:** `citrolabs/ego-lite` (MIT, 커밋 `bacaece`, 스킬 `ego-browser` 2.2.0). 사용자의 로그인 상태를 가진 Chromium 브라우저를 에이전트가 별도 Space 에서 조종(열기·클릭·스냅샷·캡처). macOS·Windows 만, Linux(클라우드)는 미지원.
+- **읽은 것:** README, `skills/ego-browser/SKILL.md`, `references/install*.md`, `scripts/install.sh`(macOS 전용, cdn.ego.app 에서 dmg 를 받음). 실제 사용법은 설치된 앱의 `ego-browser skill` 출력이 기준.
+- **쓰는 곳:** `skills/ref-watch-ego` — 레퍼런스 영상을 내려받지 않고 사용자 브라우저에서 '정지 → 이동 → 찍기'로 캡처해 분석. youtube.com 영상 페이지만 열고, 쿠키를 다른 도구에 넘기지 않음.
+- **주의:** 로그인된 브라우저라 계정 행동(구독·댓글·좋아요)을 하지 않도록 스킬에 명시. 첫 실행 때 크롬 데이터 가져오기는 사용자가 결정.

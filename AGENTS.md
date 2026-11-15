@@ -39,6 +39,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **의도 먼저 — 애니메이션 무대 (v22)** — 만들기 전에 제작 목표·시청자 욕망·기억할 한 장면(`02_script/intent.md`), 장면 goal·박자 why 필수, 한 화면 한 생각·글자 하나·대본의 동사를 그림이 연기 (`stage` 장면) | `manual/04-curiosity.md` §0-5, `styles/anim-stage/STYLE.md`, `ytflow/stages/stage.py` |
 | **대본 → 그림·애니메이션 (호기심)** — AI 그림 조각(cut·pose·move) vs 관절 인형(puppet), 그림 생성 여러 길(ElevenLabs·OpenAI GPT Image·Gemini·Codex 구독·수동) | `docs/27-story-animation.md`, `docs/28-save-and-imagegen.md` §2, `python -m ytflow art-gen <프로젝트> --backend ...`, `python -m ytflow art-cut`, `ytflow/stages/imagegen.py`, `ytflow/stages/puppet.py` |
 | **움직이는 비유 애니메이션 (따로 쓰는 스타일, 매뉴얼 기준 아님·품질 보완 필요)** — 무리가 한쪽으로 옮겨 가고 의태어가 튀어나오는 비유 장면 (`metaphor` 장면, migrate·pop). 사용자가 고를 때만 | `styles/motion-metaphor/STYLE.md`, `docs/22-motion-reference.md`(레퍼런스 재분석·v2 방향), `styles/recipes/motion-metaphor.yaml`, `ytflow/stages/motion.py` |
+| **레퍼런스 영상 움직임 분석 — PC 의 ego lite + rea-video** — 클라우드는 YouTube 에 막히므로 사용자 PC 의 에이전트가 ego lite 로 재생 화면을 '정지 → 이동 → 찍기' 캡처(내려받기 없음) → rea-video 장면 분석 → 요소가 대본의 동사를 연기하는 움직임 문법 정리 | `skills/ref-watch-ego/SKILL.md`, `scripts/frames_to_clip.py`, `docs/31-motion-grammar.md`(결과) |
 | **반드시 지킬 것·검사** | `manual/06-checklist.md`, `python -m ytflow check <프로젝트>` |
 | 채널 회차 만들기 (반복 운영) | `skills/channel-run/SKILL.md`, `channels/README.md`, `docs/06-operations.md` |
 | 영상 1편 만들기 | `skills/video-make/SKILL.md` |
