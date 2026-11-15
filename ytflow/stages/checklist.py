@@ -244,6 +244,16 @@ def run(path: Path, upto: str = "G8") -> Report:
                     sched = _rows("다음 주 일정")
                     has_earn = any("실적" in " ".join(r_) for r_ in sched)
                     R.add("G3", "MUST", "주간: 팩트시트 '## 다음 주 일정' 5줄+ (실적 1줄+, 한국 시간·볼 것·출처) (manual/09 §2)", len(sched) >= 5 and has_earn, f"{len(sched)}줄 · 실적 {'있음' if has_earn else '없음'}")
+                # v33 머니크루 수준의 깊이 (03 §0-4, docs/31)
+                calc_m = re.search(r"^## 직접 계산[^\n]*\n(.*?)(?=^## |\Z)", fs, re.S | re.M)
+                wrong_m = re.search(r"^## 틀리는 경우[^\n]*\n(.*?)(?=^## |\Z)", fs, re.S | re.M)
+                sig_m = re.search(r"^## 신호[^\n]*\n(.*?)(?=^## |\Z)", fs, re.S | re.M)
+                n_calc = len(re.findall(r"^\s*[-|*]\s*\S.*[=×÷→]", calc_m.group(1), re.M)) if calc_m else 0
+                n_wrong = len(re.findall(r"^\s*(?:[-*]|\d+[.)])\s*\S", wrong_m.group(1), re.M)) if wrong_m else 0
+                n_sig = len([ln for ln in (sig_m.group(1).splitlines() if sig_m else []) if re.search(r"\d", ln) and re.search(r"(?:[-*]|\d+[.)]|\|)\s*\S", ln)])
+                R.add("G3", lvl, "v33: 팩트시트 '## 직접 계산' 1개+ (식·출처 숫자) — 연결 비율·민감도 (03 §0-4)", n_calc >= 1, f"{n_calc}개")
+                R.add("G3", lvl, "v33: 팩트시트 '## 틀리는 경우' 3개 (03 §0-4)", n_wrong >= 3, f"{n_wrong}개")
+                R.add("G3", lvl, "v33: 팩트시트 '## 신호' 숫자 기준선·날짜 3개+ (03 §0-4)", n_sig >= 3, f"{n_sig}개")
                 hub = tb.get("hub_event") or {}
                 R.add("G1", lvl, "v28: topic_brief hub_event — 그 기간 시장을 가장 크게 흔든 사건이 중심축 (03 §0-3)", bool(hub), str(hub.get("name", ""))[:40] if isinstance(hub, dict) else str(hub)[:40])
                 R.add("G3", lvl, "v28: 팩트시트 '## 파급 경로'·'## 주의할 점' (03 §0-3)", "## 파급 경로" in fs and "## 주의할 점" in fs, "")
