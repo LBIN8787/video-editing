@@ -275,6 +275,19 @@ button.tile:hover,button.tile:focus-visible{border-color:var(--accent)}
 @keyframes dleak{from{transform:translateX(-120px)}to{transform:translateX(180px)}}
 .d-layer{animation:dlayer 4s cubic-bezier(.2,.7,.2,1) infinite}
 @keyframes dlayer{0%{transform:translate(40px,-30px) rotate(12deg);opacity:0}30%,90%{transform:translate(0,0) rotate(-4deg);opacity:1}100%{opacity:0}}
+.d-par1{animation:dpar1 6s ease-in-out infinite alternate}.d-par2{animation:dpar2 6s ease-in-out infinite alternate}.d-par3{animation:dpar3 6s ease-in-out infinite alternate}
+@keyframes dpar1{from{transform:translateX(0)}to{transform:translateX(-4px)}}@keyframes dpar2{from{transform:translateX(0)}to{transform:translateX(-10px)}}@keyframes dpar3{from{transform:translateX(0) scale(1)}to{transform:translateX(-18px) scale(1.04)}}
+.d-flip{animation:dflip 4s cubic-bezier(.5,0,.2,1) infinite}
+@keyframes dflip{0%,25%{transform:translate(0,0) scale(1)}60%,100%{transform:translate(52px,22px) scale(.45)}}
+.d-flipB{opacity:0;animation:dflipB 4s infinite}@keyframes dflipB{0%,40%{opacity:0}60%,100%{opacity:1}}
+.d-pull{transform-origin:118px 30px;animation:dpull 4s ease-in-out infinite}
+@keyframes dpull{0%,15%{transform:scale(4)}70%,100%{transform:scale(1)}}
+.d-whip{animation:dwhip 3s infinite}@keyframes dwhip{0%,40%{transform:translateX(0);filter:none}50%{transform:translateX(-80px);filter:blur(3px)}51%{transform:translateX(80px);filter:blur(3px)}60%,100%{transform:translateX(0);filter:none}}
+.d-dim{animation:ddim 4s infinite}@keyframes ddim{0%,30%{opacity:1}45%,100%{opacity:.25}}
+.d-hi{transform-origin:left;transform:scaleX(0);animation:dhi 3.5s ease-out infinite}@keyframes dhi{0%,15%{transform:scaleX(0)}45%,100%{transform:scaleX(1)}}
+.d-race1{animation:drace1 5s ease-in-out infinite}.d-race2{animation:drace2 5s ease-in-out infinite}
+@keyframes drace1{0%,30%{transform:translateY(0)}60%,100%{transform:translateY(22px)}}@keyframes drace2{0%,30%{transform:translateY(0)}60%,100%{transform:translateY(-22px)}}
+.d-grow{transform-box:fill-box;transform-origin:left;animation:dgrow 5s ease-in-out infinite}@keyframes dgrow{0%,30%{transform:scaleX(.45)}60%,100%{transform:scaleX(1)}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}.demo *{animation:none!important;opacity:1!important}}
 /* 휴대폰: 속성은 아래에서 올라오는 창 */
 @media (max-width:980px){
@@ -929,24 +942,45 @@ function demo(kind, cap){
     "leak": `<svg viewBox="0 0 160 90">${scene}<rect x="0" y="0" width="60" height="90" fill="#ffb347" opacity=".35" class="d-leak"/></svg>`,
     "layers": `<svg viewBox="0 0 160 90"><rect x="16" y="40" width="40" height="18" rx="2" class="soft"/><rect x="104" y="40" width="40" height="18" rx="2" class="soft"/><path d="M56 49 H104" class="stk"/><g class="d-layer"><rect x="60" y="8" width="44" height="32" fill="var(--panel)" stroke="var(--fg)"/><rect x="64" y="12" width="36" height="20" class="acc" opacity=".5"/></g></svg>`,
   };
+  Object.assign(S, {
+    "scramble": `<svg viewBox="0 0 160 90"><text x="80" y="54" font-size="22" font-weight="700" text-anchor="middle" class="ink" font-family="var(--mono)">#%A9<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;.45;.5;1" dur="3s" repeatCount="indefinite"/></text><text x="80" y="54" font-size="22" font-weight="700" text-anchor="middle" class="acc" opacity="0" font-family="var(--mono)">631억<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;.45;.5;1" dur="3s" repeatCount="indefinite"/></text>
+      <text x="80" y="54" font-size="22" font-weight="700" text-anchor="middle" class="ink" opacity="0" font-family="var(--mono)">6$1@<animate attributeName="opacity" values="0;1;0;0;0" keyTimes="0;.2;.3;.5;1" dur="3s" repeatCount="indefinite"/></text></svg>`,
+    "highlight": `<svg viewBox="0 0 160 90">${doc}<rect x="28" y="40" width="94" height="8" fill="#ffd84d" opacity=".7" class="d-hi"/><rect x="28" y="40" width="94" height="8" fill="none"/></svg>`,
+    "morph": `<svg viewBox="0 0 160 90"><path class="acc" d="M80 20 C 98 20 108 32 108 45 C 108 58 98 70 80 70 C 62 70 52 58 52 45 C 52 32 62 20 80 20 Z"><animate attributeName="d" dur="4s" repeatCount="indefinite" values="M80 20 C 98 20 108 32 108 45 C 108 58 98 70 80 70 C 62 70 52 58 52 45 C 52 32 62 20 80 20 Z;M80 18 C 100 30 124 26 118 46 C 112 64 98 72 80 70 C 60 68 40 64 44 44 C 48 28 60 10 80 18 Z;M80 18 C 100 30 124 26 118 46 C 112 64 98 72 80 70 C 60 68 40 64 44 44 C 48 28 60 10 80 18 Z;M80 20 C 98 20 108 32 108 45 C 108 58 98 70 80 70 C 62 70 52 58 52 45 C 52 32 62 20 80 20 Z" keyTimes="0;.4;.7;1"/></path></svg>`,
+    "stagger": `<svg viewBox="0 0 160 90">${Array.from({length: 8}, (_, i) => `<g class="d-pop" style="animation-delay:${0.3 + i * .25}s">${`<circle cx="${22 + i * 17}" cy="40" r="5" class="ink"/><rect x="${17 + i * 17}" y="47" width="10" height="14" rx="3" class="ink"/>`}</g>`).join("")}</svg>`,
+    "flip": `<svg viewBox="0 0 160 90"><g class="d-flipB"><rect x="70" y="52" width="80" height="30" rx="2" class="soft"/><line x1="70" y1="67" x2="150" y2="67" stroke="var(--panel)"/><line x1="110" y1="52" x2="110" y2="82" stroke="var(--panel)"/></g><g class="d-flip"><rect x="30" y="20" width="70" height="34" rx="4" class="acc"/><text x="65" y="42" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">631억</text></g></svg>`,
+    "jcut": `<svg viewBox="0 0 160 90"><text x="6" y="18" font-size="7" class="ink">화면</text><rect x="30" y="10" width="62" height="12" class="soft"/><rect x="92" y="10" width="62" height="12" class="acc"/><text x="6" y="40" font-size="7" class="ink">소리</text><rect x="30" y="32" width="48" height="12" class="soft"/><rect x="78" y="32" width="76" height="12" class="red" opacity=".7"/>
+      <line x1="92" y1="6" x2="92" y2="50" stroke="var(--fg)" stroke-dasharray="2 2"/><text x="78" y="62" font-size="7" class="ink">← 다음 사람 목소리가 먼저</text><rect x="30" y="72" width="2" height="12" class="ink"><animate attributeName="x" from="30" to="154" dur="4s" repeatCount="indefinite"/></rect></svg>`,
+    "parallax": `<svg viewBox="0 0 160 90"><g class="d-par1"><rect x="-10" y="0" width="190" height="90" fill="var(--accent-soft)"/><polygon points="-10,70 40,30 80,60 120,25 180,65 180,90 -10,90" class="soft"/></g><g class="d-par2"><polygon points="-10,90 30,62 70,80 110,58 180,84 180,90" class="ink" opacity=".35"/></g><g class="d-par3">${fig(82)}</g></svg>`,
+    "pullback": `<svg viewBox="0 0 160 90"><g class="d-pull">${Array.from({length: 24}, (_, i) => `<rect x="${12 + (i % 6) * 24}" y="${10 + Math.floor(i / 6) * 18}" width="20" height="14" class="${i === 4 ? "red" : "soft"}"/>`).join("")}</g></svg>`,
+    "whip": `<svg viewBox="0 0 160 90"><g class="d-whip">${scene}</g></svg>`,
+    "race": `<svg viewBox="0 0 160 90"><g class="d-race1"><rect x="40" y="18" width="90" height="14" class="soft"/><text x="36" y="29" font-size="8" text-anchor="end" class="ink">A</text></g><g class="d-race2"><rect x="40" y="40" width="70" height="14" class="acc d-grow"/><text x="36" y="51" font-size="8" text-anchor="end" class="ink">B</text></g><rect x="40" y="62" width="50" height="14" class="soft"/><text x="36" y="73" font-size="8" text-anchor="end" class="ink">C</text></svg>`,
+    "split": `<svg viewBox="0 0 160 90"><rect x="6" y="10" width="70" height="70" rx="3" class="soft"/><text x="41" y="30" font-size="8" text-anchor="middle" class="ink">말</text><rect x="14" y="40" width="54" height="5" class="ink" opacity=".5"/><rect x="14" y="50" width="40" height="5" class="ink" opacity=".5"/><line x1="80" y1="10" x2="80" y2="80" stroke="var(--fg)"/>
+      <g class="d-pop" style="animation-delay:1s"><rect x="84" y="10" width="70" height="70" rx="3" class="soft"/><text x="119" y="30" font-size="8" text-anchor="middle" class="ink">행동</text><rect x="92" y="40" width="54" height="5" class="red" opacity=".7"/><rect x="92" y="50" width="34" height="5" class="red" opacity=".7"/></g></svg>`,
+    "spotlight": `<svg viewBox="0 0 160 90"><rect x="12" y="34" width="34" height="20" rx="3" class="ink d-dim"/><rect x="63" y="34" width="34" height="20" rx="3" class="acc"/><rect x="114" y="34" width="34" height="20" rx="3" class="ink d-dim"/><path d="M46 44 H63 M97 44 H114" class="stk d-dim"/></svg>`,
+  });
   if (!S[kind]) return "";
   return `<div class="demo"><div class="screen" aria-hidden="true">${S[kind]}</div>${cap ? `<span class="cap">${esc(cap)}</span>` : ""}</div>`;
 }
-let lexCat = "all", lexQ = "";
+let lexCat = "all", lexQ = "", lexSt = "all";
 function renderTerms(){
   const terms = G.nodes.filter(n => n.kind === "term");
-  const cats = [...new Set(terms.map(t => t.cat))];
+  const ORDER = ["technique", "style", "scene", "motion", "fx", "measure", "skin"];
+  const cats = [...new Set(terms.map(t => t.cat))].sort((a, b) => ORDER.indexOf(a) - ORDER.indexOf(b));
   const q = lexQ.trim().toLowerCase();
-  const list = terms.filter(t => (lexCat === "all" || t.cat === lexCat) && (!q || (t.name + " " + t.plain + " " + (t.aliases || []).join(" ")).toLowerCase().includes(q)))
+  const list = terms.filter(t => (lexCat === "all" || t.cat === lexCat) && (lexSt === "all" || t.tech_status === lexSt) && (!q || (t.name + " " + t.plain + " " + (t.aliases || []).join(" ")).toLowerCase().includes(q)))
     .sort((a, b) => (b.mentioned_in.length - a.mentioned_in.length) || a.name.localeCompare(b.name));
   $("#view").innerHTML = `
     <div class="stage-head"><h2>용어 사전 — 그래서 저게 뭐야?</h2><span class="hint">매뉴얼·코드에 나오는 편집 스타일·장면 종류·효과·움직임을 쉬운 말로. 누르면 화면에서 어떻게 보이는지와 어떻게 만들어지는지가 나옵니다.</span></div>
     <div class="al-filter"><input id="lex-q" aria-label="찾기" placeholder="찾기: 카메라, tilt, 무대 …" value="${esc(lexQ)}" style="flex:1;min-width:160px;border:1px solid var(--line);background:var(--bg);border-radius:4px;padding:4px 8px">
       <button data-lc="all" aria-pressed="${lexCat === "all"}">전체 ${terms.length}</button>${cats.map(c => `<button data-lc="${c}" aria-pressed="${lexCat === c}">${esc(terms.find(t => t.cat === c).cat_label)} ${terms.filter(t => t.cat === c).length}</button>`).join("")}</div>
-    <div class="lex">${list.map(t => `<button class="lexcard" data-term="${esc(t.id)}"><span class="chips"><span class="chip">${esc(t.cat_label)}</span>${t.status ? `<span class="chip ${t.status === "approved" ? "pass" : ""}">${esc(STATUS_WORD[t.status] || t.status)}</span>` : ""}<span class="chip">매뉴얼·코드 ${t.mentioned_in.length}곳</span></span>
+    ${lexCat === "technique" ? `<div class="al-filter"><span class="empty">연출 기법 — 깃허브 등 열린 구현을 조사한 카탈로그 (styles/techniques.yaml, docs/32). 모두 '스타일 기본값' 층이라 금지도 MUST 도 아닙니다.</span>
+      ${[["all", "모두"], ["have", "이미 있음"], ["partial", "비슷한 것 있음"], ["candidate", "후보"], ["hold", "보류"]].map(([k, l]) => `<button data-ls="${k}" aria-pressed="${lexSt === k}">${l} ${k === "all" ? terms.filter(t => t.cat === "technique").length : terms.filter(t => t.tech_status === k).length}</button>`).join("")}</div>` : ""}
+    <div class="lex">${list.map(t => `<button class="lexcard" data-term="${esc(t.id)}"><span class="chips">${t.tech_status ? `<span class="chip ${t.tech_status === "have" ? "pass" : t.tech_status === "hold" ? "reject" : t.tech_status === "candidate" ? "pend" : ""}">${esc(t.tech_status_label)}</span>` : ""}<span class="chip">${esc(t.cat_label)}</span>${t.status ? `<span class="chip ${t.status === "approved" ? "pass" : ""}">${esc(STATUS_WORD[t.status] || t.status)}</span>` : ""}<span class="chip">매뉴얼·코드 ${t.mentioned_in.length}곳</span></span>
       <b>${esc(t.short || t.name)}</b>${demo(t.anim)}<p>${esc(t.plain)}</p></button>`).join("") || `<p class="empty">찾는 말이 없습니다.</p>`}</div>`;
   const qi = $("#lex-q"); qi.oninput = () => { lexQ = qi.value; const pos = qi.selectionStart; renderTerms(); const n = $("#lex-q"); n.focus(); n.setSelectionRange(pos, pos); };
-  $("#view").querySelectorAll("[data-lc]").forEach(b => b.onclick = () => { lexCat = b.dataset.lc; renderTerms(); });
+  $("#view").querySelectorAll("[data-lc]").forEach(b => b.onclick = () => { lexCat = b.dataset.lc; lexSt = "all"; renderTerms(); });
+  $("#view").querySelectorAll("[data-ls]").forEach(b => b.onclick = () => { lexSt = b.dataset.ls; renderTerms(); });
   $("#view").querySelectorAll("[data-term]").forEach(b => b.onclick = () => inspect(b.dataset.term));
 }
 function termCard(n){
@@ -958,9 +992,14 @@ function termCard(n){
     <div><div class="label">무엇인가요</div><p style="margin:2px 0 0">${esc(n.plain || "-")}</p></div>`;
   if (n.look && n.look !== n.name && n.look !== n.plain) h += `<div><div class="label">화면에서는</div><p style="margin:2px 0 0">${esc(n.look)}</p></div>`;
   if (n.intro && n.intro !== n.plain) h += `<div><div class="label">스타일 문서 첫 줄</div><p style="margin:2px 0 0">${esc(n.intro)}</p></div>`;
-  if (n.caution) h += `<div class="callout"><b>헷갈리기 쉬운 점</b><br>${esc(n.caution)}</div>`;
+  if (n.tech_status) h = h.replace('<div class="chips">', `<div class="chips"><span class="chip ${n.tech_status === "have" ? "pass" : n.tech_status === "hold" ? "reject" : n.tech_status === "candidate" ? "pend" : ""}">${esc(n.tech_status_label)}</span>${n.group ? `<span class="chip">${esc(n.group)}</span>` : ""}<span class="chip">스타일 기본값 층 — 금지 아님</span>`);
+  if (n.use_when) h += `<div><div class="label">언제 쓰나</div><p style="margin:2px 0 0">${hl(n.use_when)}</p></div>`;
+  if (n.caution) h += `<div class="callout"><b>${n.cat === "technique" ? "내 피드백과 부딪히는 점·주의" : "헷갈리기 쉬운 점"}</b><br>${hl(n.caution)}</div>`;
   if (n.how) h += `<div><div class="label">어떻게 만들어지나</div><p style="margin:2px 0 0">${esc(n.how)}</p></div>`;
   (n.code || []).forEach(c => h += `<div class="codeln"><small>${esc(c.file)}${c.line ? ":" + c.line : ""}</small>${esc(c.src)}</div>`);
+  if ((n.tools || []).length) h += `<div><div class="label">구현에 쓸 수 있는 열린 도구</div>${n.tools.map(t => `<div class="codeln" style="white-space:normal"><small>${esc(t.license || "")}${t.checked ? " · 확인: " + esc(t.checked) : ""}</small><a href="${esc(t.url)}" target="_blank" rel="noopener" style="color:var(--accent)">${esc(t.name)}</a></div>`).join("")}</div>`;
+  if ((n.related || []).length) h += `<div><div class="label">닮은 기존 용어 (이미 있는 것)</div><div class="chips">${n.related.map(id => N[id] ? `<button class="tchip" data-term="${esc(id)}"><i>${esc(N[id].cat_label)}</i>${esc(N[id].short || N[id].name)}</button>` : "").join("")}</div></div>`;
+  if ((n.techniques || []).length) h += `<div><div class="label">이것과 닮은 연출 기법 (조사한 후보 포함)</div><div class="chips">${n.techniques.map(id => N[id] ? `<button class="tchip" data-term="${esc(id)}"><i>${esc(N[id].tech_status_label)}</i>${esc(N[id].short || N[id].name)}</button>` : "").join("")}</div></div>`;
   if (n.enable) h += `<div><div class="label">켜고 끄는 법</div><p style="margin:2px 0 0;font-family:var(--mono);font-size:12px">${esc(n.enable)}</p></div>`;
   if (n.avoid) h += `<div><div class="label">쓰면 안 되는 때</div><p style="margin:2px 0 0">${esc(n.avoid)}</p></div>`;
   if (n.fits) h += `<dl class="kv"><dt>맞는 곳</dt><dd>${esc(n.fits)}</dd>${n.demo ? `<dt>시험작</dt><dd>${esc(n.demo)}</dd>` : ""}${n.doc ? `<dt>문서</dt><dd>${esc(n.doc)}</dd>` : ""}${n.skill ? `<dt>스킬</dt><dd>skills/${esc(n.skill)}</dd>` : ""}</dl>`;

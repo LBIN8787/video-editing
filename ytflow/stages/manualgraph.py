@@ -360,7 +360,7 @@ def source_hash() -> str:
     import hashlib
     h = hashlib.sha1()
     files = sorted([*MANUAL.glob("*.md"), *MANUAL.glob("*.yaml"), MANUAL / "VERSION",
-                    *(ROOT / "styles" / "recipes").glob("*.yaml"), *(ROOT / "skins").glob("*/skin.yaml")])
+                    *(ROOT / "styles" / "recipes").glob("*.yaml"), *(ROOT / "skins").glob("*/skin.yaml"), TECHNIQUES])
     for f in files:
         if f.exists():
             h.update(f.name.encode()); h.update(f.read_bytes())
@@ -478,7 +478,9 @@ def polarity_lines(secs: list[dict]) -> list[dict]:
 
 # ------------------------------------------------------------------ 용어 층: '그래서 저게 뭐야?' — 스타일·장면 종류·효과·그래픽 팩·움직임 용어
 GLOSSARY = MANUAL / "glossary.yaml"
-CAT_LABEL = {"style": "편집 스타일", "scene": "장면 종류", "fx": "시각 효과", "skin": "그래픽 팩", "motion": "움직임", "measure": "측정값"}
+TECHNIQUES = ROOT / "styles" / "techniques.yaml"
+TECH_STATUS = {"have": "이미 있음", "partial": "비슷한 것 있음", "candidate": "후보 (아직 없음)", "hold": "보류"}
+CAT_LABEL = {"technique": "연출 기법", "style": "편집 스타일", "scene": "장면 종류", "fx": "시각 효과", "skin": "그래픽 팩", "motion": "움직임", "measure": "측정값"}
 ANIM_BY_KEY = {"kb": "kenburns", "zoomshot": "zoomshot", "kinetic": "kinetic", "stage": "walk", "story": "draw", "journey": "draw",
                "tilt": "tilt", "dolly": "push", "scan": "scan", "dust": "dust", "leak": "leak", "terminal": "kinetic",
                "chat": "kinetic", "bignum": "beat-motion", "map_causal": "draw", "chapter": "crossfade", "illust": "push",
@@ -597,6 +599,19 @@ def parse_lexicon() -> list[dict]:
             if s2 in terms:
                 terms[s2]["used_by"].append(f"term:style-{k}")
 
+    # 연출 기법 카탈로그 (styles/techniques.yaml, docs/32) — 스타일보다 작은 화면 문법, 모두 '스타일 기본값' 층
+    try:
+        tq = (yaml.safe_load(_read(TECHNIQUES)) or {}).get("techniques", {}) or {}
+    except Exception:
+        tq = {}
+    for k, q in tq.items():
+        T(f"tech-{k}", name=q.get("name", k), short=re.split(r"\s*[(（]", str(q.get("name", k)))[0].strip(), cat="technique",
+          plain=q.get("plain", ""), look=q.get("look", ""), how=q.get("how", ""), caution=q.get("caution", ""),
+          use_when=q.get("use_when", ""), group=q.get("group", ""), tech_status=q.get("status", "candidate"),
+          tech_status_label=TECH_STATUS.get(q.get("status", "candidate"), q.get("status", "")),
+          tools=q.get("tools") or [], related_keys=q.get("related") or [], anim=q.get("anim"),
+          aliases=[a for a in (q.get("aliases") or []) if a], doc="styles/techniques.yaml · docs/32-technique-research.md")
+
     # 사람이 쓴 용어 사전 (덮어쓰기·추가)
     try:
         gl = (yaml.safe_load(_read(GLOSSARY)) or {}).get("terms", {}) or {}
@@ -616,6 +631,7 @@ def parse_lexicon() -> list[dict]:
         t.setdefault("name", t["key"]); t.setdefault("cat", "scene"); t.setdefault("plain", "")
         t["label"] = t["name"]
         t["cat_label"] = CAT_LABEL.get(t["cat"], t["cat"])
+        t["related"] = [f"term:{r}" for r in t.pop("related_keys", []) if r in terms]
         out.append(t)
     return out
 
@@ -926,7 +942,11 @@ def build() -> dict:
     for t in lex:
         t["mentioned_in"] = mention.get(t["id"], [])
         t["scenes"] = [f"term:{x}" for x in t.get("scenes", []) if f"term:{x}" in tnode]
-    lex = [t for t in lex if t["mentioned_in"] or t["cat"] in ("style", "motion", "measure", "fx") or t["used_by"]]
+    for t in lex:   # 관련 기존 용어에서 거꾸로도 잇기 (이 장면과 닮은 기법)
+        for r in t.get("related", []):
+            if r in tnode:
+                tnode[r].setdefault("techniques", []).append(t["id"])
+    lex = [t for t in lex if t["mentioned_in"] or t["cat"] in ("style", "motion", "measure", "fx", "technique") or t["used_by"]]
     bans = prohibitions(secs)
     tiers_ov = load_tiers()
     vers_applied = {v["v"]: sorted({a["project"] for a in v["applied"]}) for v in versions}

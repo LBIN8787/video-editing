@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-15T06:28:57",
- "source_hash": "4dd51d6b0d47",
+ "generated": "2026-11-15T06:34:37",
+ "source_hash": "7a0aa19f3303",
  "stats": {
   "manual_version": 31,
   "versions": 31,
@@ -19,7 +19,7 @@
   "intents_reviewed": 2,
   "conflicts": 3,
   "code": 58,
-  "terms": 99,
+  "terms": 119,
   "bans": 110,
   "feedback": 1,
   "tiers": {
@@ -2797,7 +2797,8 @@
     "term:versus",
     "term:checklist",
     "term:newspapers",
-    "term:board"
+    "term:board",
+    "term:tech-split-screen"
    ]
   },
   {
@@ -3039,7 +3040,8 @@
    "last_version": 22,
    "terms": [
     "term:stage",
-    "term:style-anim-stage"
+    "term:style-anim-stage",
+    "term:tech-morph"
    ]
   },
   {
@@ -3299,6 +3301,7 @@
     "term:bars",
     "term:bignum",
     "term:outro",
+    "term:tech-split-screen",
     "term:graphic-pack"
    ]
   },
@@ -4132,7 +4135,8 @@
    "last_version": 28,
    "terms": [
     "term:recap",
-    "term:quote"
+    "term:quote",
+    "term:tech-split-screen"
    ]
   },
   {
@@ -6647,6 +6651,9 @@
    "label": "v26: 대본에 매체가 어떻게 다뤘나 + 말과 행동 맞대기 (03 §0-2)",
    "file": "ytflow/stages/checklist.py",
    "line": 264,
+   "terms": [
+    "term:tech-split-screen"
+   ],
    "tier_key": "check:ea1fcde7",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8240,7 +8247,10 @@
      "schemas/topic_brief.schema.json",
      "ytflow/stages/checklist.py"
     ]
-   }
+   },
+   "terms": [
+    "term:tech-split-screen"
+   ]
   },
   {
    "id": "ver:27",
@@ -9665,7 +9675,10 @@
     2
    ],
    "label": "v2: 뒤·가운데·앞 (패럴랙스, story_kit)",
-   "src": "self.layers = {0: [], 1: [], 2: []}   # v2: 뒤·가운데·앞 (패럴랙스, story_kit)"
+   "src": "self.layers = {0: [], 1: [], 2: []}   # v2: 뒤·가운데·앞 (패럴랙스, story_kit)",
+   "terms": [
+    "term:tech-parallax-photo"
+   ]
   },
   {
    "id": "code:ytflow/stages/story_kit.py:1",
@@ -12650,8 +12663,13 @@
    "anim": "cut",
    "label": "bite",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "ver:20"
+   ],
+   "techniques": [
+    "term:tech-j-l-cut",
+    "term:tech-split-screen"
    ]
   },
   {
@@ -12682,6 +12700,7 @@
    "anim": "kenburns",
    "label": "kb",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:04§4",
     "sec:05§0-3",
@@ -12689,6 +12708,9 @@
     "sec:05§3",
     "sec:05§4",
     "sec:08§h89"
+   ],
+   "techniques": [
+    "term:tech-parallax-photo"
    ]
   },
   {
@@ -12719,6 +12741,7 @@
    "anim": null,
    "label": "card_type",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-2",
     "sec:05§2",
@@ -12753,6 +12776,7 @@
    "anim": "draw",
    "label": "journey",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:04§4",
     "sec:05§h25",
@@ -12761,6 +12785,10 @@
     "sec:05§3",
     "sec:05§4",
     "sec:08§h89"
+   ],
+   "techniques": [
+    "term:tech-draw-on",
+    "term:tech-motion-path"
    ]
   },
   {
@@ -12789,6 +12817,7 @@
    "anim": "kinetic",
    "label": "kinetic",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:02§h40",
     "sec:04§0-4",
@@ -12800,6 +12829,9 @@
     "sec:06§G5",
     "sec:09§4",
     "rule:G5:1"
+   ],
+   "techniques": [
+    "term:tech-split-reveal"
    ]
   },
   {
@@ -12828,6 +12860,7 @@
    "anim": "kinetic",
    "label": "chat",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-3",
     "sec:05§2"
@@ -12859,9 +12892,13 @@
    "anim": "kinetic",
    "label": "terminal",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-3",
     "sec:05§2"
+   ],
+   "techniques": [
+    "term:tech-scramble"
    ]
   },
   {
@@ -12891,9 +12928,14 @@
    "anim": "zoomshot",
    "label": "zoomshot",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-3",
     "sec:05§2"
+   ],
+   "techniques": [
+    "term:tech-zoom-into",
+    "term:tech-pull-back"
    ]
   },
   {
@@ -12923,6 +12965,7 @@
    "anim": null,
    "label": "choropleth",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-3",
     "sec:05§2",
@@ -12953,6 +12996,7 @@
    "anim": null,
    "label": "intro",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:02§h40",
     "sec:03§4",
@@ -12990,6 +13034,7 @@
    "anim": "layers",
    "label": "recap",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-6",
     "sec:05§0-4",
@@ -13021,11 +13066,16 @@
    "anim": "beat-motion",
    "label": "isotype",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:04§4",
     "sec:05§0-6",
     "sec:05§0-4",
     "ver:10"
+   ],
+   "techniques": [
+    "term:tech-morph",
+    "term:tech-stagger"
    ]
   },
   {
@@ -13058,6 +13108,7 @@
    "anim": "kenburns",
    "label": "footage",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:02§h40",
     "sec:03§2",
@@ -13071,6 +13122,9 @@
     "sec:05§4",
     "sec:08§6",
     "sec:README§3"
+   ],
+   "techniques": [
+    "term:tech-j-l-cut"
    ]
   },
   {
@@ -13099,6 +13153,7 @@
    "anim": null,
    "label": "chart",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:03§0",
     "sec:03§2",
@@ -13109,6 +13164,9 @@
     "sec:05§2",
     "sec:05§4",
     "sec:09§4"
+   ],
+   "techniques": [
+    "term:tech-chart-morph"
    ]
   },
   {
@@ -13138,6 +13196,7 @@
    "anim": null,
    "label": "versus",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:02§h40",
     "sec:03§0",
@@ -13152,6 +13211,9 @@
     "sec:05§4",
     "sec:09§4",
     "sec:09§7"
+   ],
+   "techniques": [
+    "term:tech-split-screen"
    ]
   },
   {
@@ -13184,6 +13246,7 @@
    "anim": "crossfade",
    "label": "chapter",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:03§0",
     "sec:05§0-7",
@@ -13225,6 +13288,7 @@
    "anim": "draw",
    "label": "map_causal",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:03§2",
     "sec:03§4",
@@ -13235,6 +13299,11 @@
     "sec:05§4",
     "sec:08§h89",
     "sec:09§4"
+   ],
+   "techniques": [
+    "term:tech-draw-on",
+    "term:tech-motion-path",
+    "term:tech-spotlight"
    ]
   },
   {
@@ -13263,6 +13332,7 @@
    "anim": null,
    "label": "usmap",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:05§2"
    ]
@@ -13296,6 +13366,7 @@
    "anim": null,
    "label": "quote",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:03§0-1",
     "sec:03§2",
@@ -13341,6 +13412,7 @@
    "anim": null,
    "label": "checklist",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:02§h40",
     "sec:03§0",
@@ -13387,6 +13459,7 @@
    "anim": null,
    "label": "analogy",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:02§h40",
     "sec:03§0-1",
@@ -13425,6 +13498,7 @@
    "anim": null,
    "label": "funnel",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": []
   },
   {
@@ -13453,6 +13527,7 @@
    "anim": null,
    "label": "apartments",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": []
   },
   {
@@ -13484,6 +13559,7 @@
    "anim": null,
    "label": "timeline",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:03§4",
     "sec:04§4",
@@ -13522,6 +13598,7 @@
    "anim": null,
    "label": "bars",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:03§0",
     "sec:03§0-1",
@@ -13533,6 +13610,10 @@
     "sec:05§2",
     "sec:08§h89",
     "sec:09§4"
+   ],
+   "techniques": [
+    "term:tech-bar-race",
+    "term:tech-chart-morph"
    ]
   },
   {
@@ -13563,6 +13644,7 @@
    "anim": "beat-motion",
    "label": "bignum",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:02§h40",
     "sec:03§0-1",
@@ -13570,6 +13652,10 @@
     "sec:05§0-2",
     "sec:05§0-6",
     "sec:05§2"
+   ],
+   "techniques": [
+    "term:tech-scramble",
+    "term:tech-count-up"
    ]
   },
   {
@@ -13598,6 +13684,7 @@
    "anim": null,
    "label": "parking",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:05§2"
    ]
@@ -13628,11 +13715,16 @@
    "anim": null,
    "label": "compare",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:03§2",
     "sec:03§4",
     "sec:05§2",
     "sec:05§4"
+   ],
+   "techniques": [
+    "term:tech-chart-morph",
+    "term:tech-split-screen"
    ]
   },
   {
@@ -13659,6 +13751,7 @@
    "anim": null,
    "label": "outro",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:02§h40",
     "sec:03§0",
@@ -13695,9 +13788,13 @@
    "anim": null,
    "label": "people",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:05§2",
     "sec:05§4"
+   ],
+   "techniques": [
+    "term:tech-stagger"
    ]
   },
   {
@@ -13726,6 +13823,7 @@
    "anim": null,
    "label": "newspapers",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:03§0-2",
     "sec:04§4",
@@ -13759,6 +13857,7 @@
    "anim": null,
    "label": "shape",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:05§2"
    ]
@@ -13787,6 +13886,7 @@
    "anim": null,
    "label": "board",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:03§0-1",
     "sec:03§0-2",
@@ -13823,6 +13923,7 @@
    "anim": "push",
    "label": "illust",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "ver:20"
    ]
@@ -13853,7 +13954,11 @@
    "anim": "walk",
    "label": "metaphor",
    "cat_label": "장면 종류",
-   "mentioned_in": []
+   "related": [],
+   "mentioned_in": [],
+   "techniques": [
+    "term:tech-morph"
+   ]
   },
   {
    "id": "term:newsdesk",
@@ -13881,6 +13986,7 @@
    "anim": "layers",
    "label": "newsdesk",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": []
   },
   {
@@ -13909,6 +14015,7 @@
    "anim": "walk",
    "label": "stage",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:04§0-5",
     "sec:README§1-1",
@@ -13917,6 +14024,9 @@
     "code:ytflow/stages/hybrid.py:1446",
     "code:ytflow/stages/stage.py:1",
     "code:ytflow/stages/thumbnail.py:154"
+   ],
+   "techniques": [
+    "term:tech-morph"
    ]
   },
   {
@@ -13945,8 +14055,12 @@
    "anim": "draw",
    "label": "story",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "sec:04§0-4"
+   ],
+   "techniques": [
+    "term:tech-draw-on"
    ]
   },
   {
@@ -13975,6 +14089,7 @@
    "anim": null,
    "label": "studio3d",
    "cat_label": "장면 종류",
+   "related": [],
    "mentioned_in": [
     "code:ytflow/stages/hybrid.py:1436",
     "code:ytflow/stages/studio3d.py:1"
@@ -14009,6 +14124,7 @@
    "anim": "tilt",
    "label": "tilt (시각 효과)",
    "cat_label": "시각 효과",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-3",
     "sec:09§6",
@@ -14047,6 +14163,7 @@
    "anim": "push",
    "label": "dolly (시각 효과)",
    "cat_label": "시각 효과",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-3",
     "sec:09§6",
@@ -14085,6 +14202,7 @@
    "anim": "dust",
    "label": "dust (시각 효과)",
    "cat_label": "시각 효과",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-4",
     "sec:05§0-3",
@@ -14123,6 +14241,7 @@
    "anim": "leak",
    "label": "leak (시각 효과)",
    "cat_label": "시각 효과",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-4",
     "sec:05§0-3",
@@ -14160,6 +14279,7 @@
    "enable": "hybrid.json 장면의 \"fx\": [\"photofill\"]",
    "label": "photofill (시각 효과)",
    "cat_label": "시각 효과",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-3",
     "ver:9"
@@ -14194,6 +14314,7 @@
    "anim": "scan",
    "label": "scan (시각 효과)",
    "cat_label": "시각 효과",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-3",
     "sec:09§6",
@@ -14225,6 +14346,7 @@
    "anim": "layers",
    "label": "청사진 (blueprint)",
    "cat_label": "그래픽 팩",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-6",
     "sec:05§1"
@@ -14254,6 +14376,7 @@
    "anim": "layers",
    "label": "평면 인포그래픽 (clean-flat)",
    "cat_label": "그래픽 팩",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-6",
     "sec:05§1",
@@ -14284,6 +14407,7 @@
    "anim": "layers",
    "label": "하얀 평면 (clean-white)",
    "cat_label": "그래픽 팩",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-7",
     "sec:05§0-6"
@@ -14313,6 +14437,7 @@
    "anim": "layers",
    "label": "어두운 다큐 (dark-doc)",
    "cat_label": "그래픽 팩",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-1",
     "sec:05§0-7",
@@ -14346,6 +14471,7 @@
    "anim": "layers",
    "label": "포레스트 (forest)",
    "cat_label": "그래픽 팩",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-6"
    ]
@@ -14374,6 +14500,7 @@
    "anim": "layers",
    "label": "키네틱 포스터 (kinetic-poster)",
    "cat_label": "그래픽 팩",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-6",
     "sec:05§1",
@@ -14404,6 +14531,7 @@
    "anim": "layers",
    "label": "미드나이트 (midnight)",
    "cat_label": "그래픽 팩",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-7",
     "sec:05§0-6"
@@ -14433,6 +14561,7 @@
    "anim": "layers",
    "label": "신문지 (newsprint)",
    "cat_label": "그래픽 팩",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-1",
     "sec:05§0-6",
@@ -14464,6 +14593,7 @@
    "anim": "layers",
    "label": "종이 위 손그림 (paper-sketch)",
    "cat_label": "그래픽 팩",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-6",
     "sec:05§1"
@@ -14493,6 +14623,7 @@
    "anim": "layers",
    "label": "슬레이트 (slate)",
    "cat_label": "그래픽 팩",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-7",
     "sec:05§0-6",
@@ -14535,6 +14666,7 @@
    "anim": "kinetic",
    "label": "AI 대화 화면 (질문 타자 + 답이 흘러나옴)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-7"
    ]
@@ -14577,6 +14709,7 @@
    "anim": "walk",
    "label": "애니메이션 무대 (주인공 그림이 대본의 동사를 연기, 한 화면 한 생각, 의도표 필수)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "sec:04§0-5",
     "ver:21",
@@ -14619,6 +14752,7 @@
    "anim": "crossfade",
    "label": "앱 창 장 표지 (은은한 빛 위에 뜬 창 + 탭 이름)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-7"
    ]
@@ -14662,6 +14796,7 @@
    "anim": "kenburns",
    "label": "아카이브 다큐 (자료 화면 켄 번스 + 타자기 문장)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-7",
     "sec:05§5"
@@ -14706,6 +14841,7 @@
    "anim": "draw",
    "label": "청사진 설명 (남색 모눈 + 흰 선 구조도)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": []
   },
   {
@@ -14745,6 +14881,7 @@
    "anim": "draw",
    "label": "칠판 판서 (분필 글씨 인과 지도·비유, 칠판 장 표지)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-7"
    ]
@@ -14784,6 +14921,7 @@
    "anim": "crossfade",
    "label": "대시보드 장 표지 (짙은 남색 모눈 + CHAPTER 번호 + 강조선)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-7"
    ]
@@ -14823,6 +14961,7 @@
    "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"data-choropleth\"",
    "label": "나라 색칠 지도 (값이나 '다룬 나라'를 색으로)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": []
   },
   {
@@ -14865,6 +15004,7 @@
    "anim": "beat-motion",
    "label": "데이터 리포트 (실제 시세·막대·비교표)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "sec:05§1",
     "sec:09§6"
@@ -14905,6 +15045,7 @@
    "anim": "crossfade",
    "label": "듀오톤 사진 표지 (주제 사진을 카테고리 두 색으로 물들인 장 표지)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-7"
    ]
@@ -14943,6 +15084,7 @@
    "anim": "draw",
    "label": "증거판 (코르크 판 + 핀 꽂은 카드 + 붉은 실)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-7"
    ]
@@ -14980,6 +15122,7 @@
    "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"hand-annotate\"",
    "label": "손그림 표시 (동그라미·밑줄·화살표를 한 번)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-3",
     "ver:20"
@@ -15018,6 +15161,7 @@
    "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"hook-shorts\"",
    "label": "훅 쇼츠 (얼굴 없이: 실제 화면 꽉 채움 + 훅 제목 + 큰 자막 + 튀어나오는 카드 + 빠른 박자)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": []
   },
   {
@@ -15061,6 +15205,7 @@
    "anim": "kenburns",
    "label": "하이브리드 인과 (원본 영상 + 손그림 인과 지도)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": []
   },
   {
@@ -15101,6 +15246,7 @@
    "anim": "push",
    "label": "손그림 삽화 (삽화 한 장 위를 카메라가 옮겨 가며 설명)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "ver:20"
    ]
@@ -15145,6 +15291,7 @@
    "anim": "kenburns",
    "label": "시사 심층 (어두운 영화 톤 + 실사 사진 몽타주 + 지도·인과 결론)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "sec:08§4"
    ]
@@ -15188,6 +15335,7 @@
    "anim": "kenburns",
    "label": "시사 빠른 정리 5~8분 (밝은 사진 콜라주 + 장 구분 + 숫자 하나)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "sec:08§4"
    ]
@@ -15229,6 +15377,7 @@
    "anim": "kinetic",
    "label": "키네틱 타이포 (말하는 순간 단어가 튀어나옴)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "sec:05§5"
    ]
@@ -15272,6 +15421,7 @@
    "anim": "draw",
    "label": "지도 여정 (세계 지도 카메라 이동 + 경로 + 핀)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "sec:04§4",
     "sec:05§h25",
@@ -15319,6 +15469,7 @@
    "anim": "walk",
    "label": "움직이는 비유 애니메이션 (무리가 옮겨 가고, 의태어가 튀어나오는 비유 장면)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "code:ytflow/stages/hybrid.py:1436",
     "code:ytflow/stages/studio3d.py:1"
@@ -15362,6 +15513,7 @@
    "anim": "layers",
    "label": "뉴스 데스크 카드 (한 소식 = 한 장: 순번·꼬리표·강조 제목·숫자 3칸·증거 패널)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": []
   },
   {
@@ -15409,6 +15561,7 @@
    "anim": "draw",
    "label": "종이 칼럼 (구겨진 종이 + 손그림 + 콜라주)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-7"
    ]
@@ -15448,6 +15601,7 @@
    "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"presenter-shorts\"",
    "label": "말하는 사람 쇼츠 (본인 촬영 → 점프 컷·펀치 인·훅 제목·큰 자막·끼워 넣는 카드)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": []
   },
   {
@@ -15488,6 +15642,7 @@
    "anim": "kenburns",
    "label": "화면 따라 하기 (직접 실행 화면 녹화 + 주석 + 단계 번호)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": []
   },
   {
@@ -15526,6 +15681,7 @@
    "anim": "zoomshot",
    "label": "화면 자동 줌 (가리키는 곳으로 카메라가 다가감 + 얇은 테두리)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": []
   },
   {
@@ -15561,6 +15717,7 @@
    "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"shorts-card\"",
    "label": "쇼츠 카드 (9:16 고정 훅 + 큰 자막)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": []
   },
   {
@@ -15596,6 +15753,7 @@
    "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"shorts-claude\"",
    "label": "쇼츠 Claude 판 (실제 녹화 화면 중심, 고정 배치)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": []
   },
   {
@@ -15630,6 +15788,7 @@
    "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"shorts-guide-codex\"",
    "label": "쇼츠 설명 카드형 — Codex 'AI 실전노트' (종이색·짙은 녹색·라임 한 곳)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": []
   },
   {
@@ -15670,6 +15829,7 @@
    "anim": "cut",
    "label": "원본 발언 컷편집 (그 사람이 직접 말하는 부분만 잘라 넣기)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "ver:20"
    ]
@@ -15712,6 +15872,7 @@
    "anim": "kenburns",
    "label": "발언 원본 브리핑 (원본 인터뷰 + 원문·번역 자막 + 요약 카드)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": []
   },
   {
@@ -15752,6 +15913,7 @@
    "anim": "draw",
    "label": "이야기 그림판 (말하는 순간 종이 위에 사람·사물이 그려지고 카메라가 따라감)",
    "cat_label": "편집 스타일",
+   "related": [],
    "mentioned_in": [
     "sec:04§0-4",
     "code:ytflow/stages/story_kit.py:1"
@@ -15793,6 +15955,840 @@
    "anim": "kinetic",
    "label": "터미널 타자 (명령이 쳐지고 결과가 나옴)",
    "cat_label": "편집 스타일",
+   "related": [],
+   "mentioned_in": []
+  },
+  {
+   "id": "term:tech-split-reveal",
+   "kind": "term",
+   "key": "tech-split-reveal",
+   "aliases": [
+    "SplitText",
+    "글자 쪼개"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "글자 쪼개 등장 (SplitText)",
+   "short": "글자 쪼개 등장",
+   "cat": "technique",
+   "plain": "한 문장을 글자·낱말·줄 단위로 쪼개 하나씩 차례로 올라오게 하는 등장",
+   "look": "제목·핵심 한 줄이 아래에서 낱말씩 떠오르며 완성됨",
+   "how": "GSAP SplitText(gsap 3.13 에 포함, 무료) 로 글자 묶음을 만들고 stagger 로 차례 등장 — 지금 kinetic 은 낱말 단위만 직접 나눔",
+   "caution": "강조 예산(1분 1번, v4) 안에서. 자막과 같은 문장을 다시 띄우지 않음 (v4 기각)",
+   "use_when": "장 표지 제목, 결론 한 문장, 쇼츠 훅 — 한 영상에 몇 번만",
+   "group": "글자",
+   "tech_status": "partial",
+   "tech_status_label": "비슷한 것 있음",
+   "tools": [
+    {
+     "name": "GSAP SplitText",
+     "url": "https://gsap.com/docs/v3/Plugins/SplitText/",
+     "license": "GSAP standard no-charge license (상업 가능)",
+     "checked": "gsap npm README"
+    },
+    {
+     "name": "doong-jo/kinetic-typography (예시 모음)",
+     "url": "https://github.com/doong-jo/kinetic-typography",
+     "license": "MIT",
+     "checked": "목록 사이트"
+    }
+   ],
+   "anim": "kinetic",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "글자 쪼개 등장 (SplitText)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:kinetic"
+   ],
+   "mentioned_in": []
+  },
+  {
+   "id": "term:tech-scramble",
+   "kind": "term",
+   "key": "tech-scramble",
+   "aliases": [
+    "스크램블",
+    "ScrambleText"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "글자 섞였다 풀리기 (스크램블)",
+   "short": "글자 섞였다 풀리기",
+   "cat": "technique",
+   "plain": "무작위 글자가 빠르게 바뀌다가 진짜 글자로 맞춰지며 멈추는 등장",
+   "look": "\"#%A9...\" 가 \"631억\" 으로 굳어짐 — 해독되는 느낌",
+   "how": "GSAP ScrambleTextPlugin(무료) — 박자 시각에 맞춰 0.6~1초",
+   "caution": "정보형 장면에선 읽기 방해 — 결과가 바로 읽혀야 하는 표에는 쓰지 않음",
+   "use_when": "숫자·코드·이름이 '밝혀지는' 순간 (AI 채널 명령어, 시장의 발표 숫자). 한 영상 1~2번",
+   "group": "글자",
+   "tech_status": "candidate",
+   "tech_status_label": "후보 (아직 없음)",
+   "tools": [
+    {
+     "name": "GSAP ScrambleTextPlugin",
+     "url": "https://gsap.com/docs/v3/Plugins/ScrambleTextPlugin/",
+     "license": "GSAP standard no-charge license",
+     "checked": "gsap npm README"
+    }
+   ],
+   "anim": "scramble",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "글자 섞였다 풀리기 (스크램블)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:terminal",
+    "term:bignum",
+    "term:beat-motion"
+   ],
+   "mentioned_in": []
+  },
+  {
+   "id": "term:tech-count-up",
+   "kind": "term",
+   "key": "tech-count-up",
+   "aliases": [
+    "카운트업",
+    "countUp"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "숫자 세며 오르기 (카운트업)",
+   "short": "숫자 세며 오르기",
+   "cat": "technique",
+   "plain": "숫자가 0(또는 이전 값)에서 목표 값까지 빠르게 세며 올라가는 것",
+   "look": "0 → 631억 이 1초 동안 굴러 올라감",
+   "how": "지금 bignum·motion count 가 GSAP 로 구현. 바깥 도구가 필요하면 countUp.js(MIT)",
+   "use_when": "크기를 느끼게 할 숫자 하나 — 말하는 순간에 맞춰 (beat-motion 의 count)",
+   "group": "글자",
+   "tech_status": "have",
+   "tech_status_label": "이미 있음",
+   "tools": [
+    {
+     "name": "inorganik/countUp.js",
+     "url": "https://github.com/inorganik/countUp.js",
+     "license": "MIT",
+     "checked": "목록 사이트"
+    }
+   ],
+   "anim": "beat-motion",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "숫자 세며 오르기 (카운트업)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:bignum",
+    "term:beat-motion"
+   ],
+   "mentioned_in": []
+  },
+  {
+   "id": "term:tech-rough-highlight",
+   "kind": "term",
+   "key": "tech-rough-highlight",
+   "aliases": [
+    "rough-notation",
+    "손그림 형광펜"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "손그림 형광펜·밑줄·괄호 (차례로)",
+   "short": "손그림 형광펜·밑줄·괄호",
+   "cat": "technique",
+   "plain": "문서·화면의 한 줄에 손으로 그은 듯한 형광펜·밑줄·동그라미·괄호·취소선이 그려지는 것, 여러 개면 순서대로",
+   "look": "기사 캡처의 한 줄에 노란 형광펜이 쓱 칠해지고, 이어서 옆 숫자에 동그라미",
+   "how": "지금 layers mark(rough.js)가 동그라미·밑줄을 그림. rough-notation 은 같은 rough.js 바탕에 highlight·bracket·strike-through·묶음 순서(annotationGroup)를 더함",
+   "caution": "한 화면에 표시 2개까지 (강조 예산)",
+   "use_when": "증거(기사·공시·논문 캡처)에서 '여기' 를 가리킬 때 — 말하는 순간",
+   "group": "글자",
+   "tech_status": "partial",
+   "tech_status_label": "비슷한 것 있음",
+   "tools": [
+    {
+     "name": "rough-stuff/rough-notation",
+     "url": "https://github.com/rough-stuff/rough-notation",
+     "license": "MIT",
+     "checked": "목록 사이트"
+    }
+   ],
+   "anim": "highlight",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "손그림 형광펜·밑줄·괄호 (차례로)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:layers"
+   ],
+   "mentioned_in": []
+  },
+  {
+   "id": "term:tech-draw-on",
+   "kind": "term",
+   "key": "tech-draw-on",
+   "aliases": [
+    "드로우 온",
+    "DrawSVG",
+    "vivus"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "선이 그려지기 (드로우 온)",
+   "short": "선이 그려지기",
+   "cat": "technique",
+   "plain": "도형·화살표·지도 경로가 펜으로 그리듯 한쪽 끝부터 나타나는 것",
+   "look": "인과 지도의 화살표가 A 에서 B 로 그어짐",
+   "how": "지금 hybrid·story 가 rough.js 선을 stroke-dashoffset 으로 그림. GSAP DrawSVGPlugin(무료)·vivus(MIT) 도 같은 원리",
+   "use_when": "연결·흐름·경로를 말할 때 — '이것이 저것으로 이어진다'",
+   "group": "선·모양",
+   "tech_status": "have",
+   "tech_status_label": "이미 있음",
+   "tools": [
+    {
+     "name": "GSAP DrawSVGPlugin",
+     "url": "https://gsap.com/docs/v3/Plugins/DrawSVGPlugin/",
+     "license": "GSAP standard no-charge license",
+     "checked": "gsap npm README"
+    },
+    {
+     "name": "maxwellito/vivus",
+     "url": "https://github.com/maxwellito/vivus",
+     "license": "MIT",
+     "checked": "목록 사이트 (2022 이후 개발 멈춤)"
+    }
+   ],
+   "anim": "draw",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "선이 그려지기 (드로우 온)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:map_causal",
+    "term:story",
+    "term:journey"
+   ],
+   "mentioned_in": []
+  },
+  {
+   "id": "term:tech-morph",
+   "kind": "term",
+   "key": "tech-morph",
+   "aliases": [
+    "모프",
+    "모양 바뀌기",
+    "MorphSVG",
+    "flubber"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "모양 바뀌기 (모프)",
+   "short": "모양 바뀌기",
+   "cat": "technique",
+   "plain": "한 도형이 끊기지 않고 다른 도형으로 변하는 것 — 같은 것이 다른 모습이 됨을 보여 줌",
+   "look": "동그라미(회사) 가 지도 모양(나라)으로, 막대가 사람 모양으로 스르르 바뀜",
+   "how": "GSAP MorphSVGPlugin(무료) 또는 flubber(MIT) 로 SVG 경로 보간 → 박자 시각에 1초 안팎",
+   "caution": "의미 없는 모프는 장식 — 바뀌는 이유를 대본이 말할 때만",
+   "use_when": "\"A 가 사실은 B 다\", \"이것이 저것이 된다\" — 말의 동사(바뀌다·변하다)를 그림이 연기할 때 (04 §0-5)",
+   "group": "선·모양",
+   "tech_status": "candidate",
+   "tech_status_label": "후보 (아직 없음)",
+   "tools": [
+    {
+     "name": "GSAP MorphSVGPlugin",
+     "url": "https://gsap.com/docs/v3/Plugins/MorphSVGPlugin/",
+     "license": "GSAP standard no-charge license",
+     "checked": "gsap npm README"
+    },
+    {
+     "name": "veltman/flubber",
+     "url": "https://github.com/veltman/flubber",
+     "license": "MIT",
+     "checked": "목록 사이트"
+    }
+   ],
+   "anim": "morph",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "모양 바뀌기 (모프)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:stage",
+    "term:metaphor",
+    "term:isotype"
+   ],
+   "mentioned_in": [
+    "sec:04§0-5"
+   ]
+  },
+  {
+   "id": "term:tech-stagger",
+   "kind": "term",
+   "key": "tech-stagger",
+   "aliases": [
+    "스태거",
+    "LaggedStart",
+    "stagger"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "차례로 등장 (스태거)",
+   "short": "차례로 등장",
+   "cat": "technique",
+   "plain": "여러 개를 한꺼번에가 아니라 조금씩 시차를 두고 차례로 나타내는 것",
+   "look": "사람 아이콘 10개가 왼쪽부터 톡톡톡 채워짐",
+   "how": "GSAP stagger (지금 isotype·people 등에서 사용). Manim 의 LaggedStart 와 같은 개념",
+   "use_when": "목록·사람 수·여러 항목 — 눈이 하나씩 따라가게",
+   "group": "선·모양",
+   "tech_status": "have",
+   "tech_status_label": "이미 있음",
+   "tools": [
+    {
+     "name": "ManimCommunity/manim (LaggedStart)",
+     "url": "https://docs.manim.community/en/stable/reference/manim.animation.composition.LaggedStart.html",
+     "license": "MIT",
+     "checked": "manim.community"
+    }
+   ],
+   "anim": "stagger",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "차례로 등장 (스태거)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:isotype",
+    "term:people"
+   ],
+   "mentioned_in": []
+  },
+  {
+   "id": "term:tech-motion-path",
+   "kind": "term",
+   "key": "tech-motion-path",
+   "aliases": [
+    "모션 패스",
+    "MotionPath"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "길 따라 움직이기 (모션 패스)",
+   "short": "길 따라 움직이기",
+   "cat": "technique",
+   "plain": "물건(배·트럭·돈 아이콘)이 그려진 경로를 따라 실제로 이동하는 것",
+   "look": "공급망 지도 위로 컨테이너 아이콘이 대만 → 미국 길을 따라 미끄러짐",
+   "how": "journey 는 경로를 그리고 핀을 찍음. GSAP MotionPathPlugin(무료) 로 아이콘을 경로에 태움",
+   "use_when": "공급망·자금 흐름·전파 — '어디서 어디로'",
+   "group": "선·모양",
+   "tech_status": "partial",
+   "tech_status_label": "비슷한 것 있음",
+   "tools": [
+    {
+     "name": "GSAP MotionPathPlugin",
+     "url": "https://gsap.com/docs/v3/Plugins/MotionPathPlugin/",
+     "license": "GSAP standard no-charge license",
+     "checked": "gsap npm README"
+    }
+   ],
+   "anim": "draw",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "길 따라 움직이기 (모션 패스)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:journey",
+    "term:map_causal"
+   ],
+   "mentioned_in": []
+  },
+  {
+   "id": "term:tech-match-move",
+   "kind": "term",
+   "key": "tech-match-move",
+   "aliases": [
+    "매치 무브",
+    "매치 컷",
+    "match cut",
+    "GSAP Flip"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "같은 것이 다음 화면으로 이어짐 (매치 무브·Flip)",
+   "short": "같은 것이 다음 화면으로 이어짐",
+   "cat": "technique",
+   "plain": "앞 장면의 한 요소(숫자·로고·도형)가 사라지지 않고 다음 장면의 제자리로 옮겨 가며 장면이 바뀌는 것 — 그래픽판 매치 컷",
+   "look": "표지의 '631억' 카드가 작아지며 다음 장면 표의 한 칸으로 들어가 앉음",
+   "how": "GSAP Flip(무료) — 이전 위치를 기록하고 새 레이아웃으로 옮김. 장면 경계에서 두 장면을 겹쳐 렌더해야 함 (edit10 전환 구간 0.3초 활용)",
+   "caution": "화면 전체를 움직이는 카메라가 아님 — 요소 하나만 이동 (v12·v30 억지 움직임과 다름)",
+   "use_when": "앞 장면의 결론이 다음 장면의 출발점일 때 — 장면이 '넘어가는' 게 아니라 '이어지는' 느낌 (README §2-1 진행 멘트 대신)",
+   "group": "이어 주기",
+   "tech_status": "candidate",
+   "tech_status_label": "후보 (아직 없음)",
+   "tools": [
+    {
+     "name": "GSAP Flip",
+     "url": "https://gsap.com/docs/v3/Plugins/Flip/",
+     "license": "GSAP standard no-charge license",
+     "checked": "gsap npm README"
+    },
+    {
+     "name": "Manim TransformMatchingShapes (같은 개념)",
+     "url": "https://docs.manim.community/",
+     "license": "MIT",
+     "checked": "manim.community"
+    }
+   ],
+   "anim": "flip",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "같은 것이 다음 화면으로 이어짐 (매치 무브·Flip)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:transition"
+   ],
+   "mentioned_in": []
+  },
+  {
+   "id": "term:tech-j-l-cut",
+   "kind": "term",
+   "key": "tech-j-l-cut",
+   "aliases": [
+    "J컷",
+    "L컷",
+    "J-cut",
+    "L-cut"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "소리 먼저·소리 남기 (J컷·L컷)",
+   "short": "소리 먼저·소리 남기",
+   "cat": "technique",
+   "plain": "다음 장면의 소리가 화면보다 먼저 들리기 시작하거나(J), 화면이 바뀐 뒤에도 앞 장면 소리가 조금 이어지는(L) 편집",
+   "look": "CEO 얼굴이 나오기 0.5초 전부터 그의 목소리가 들리기 시작함",
+   "how": "cutedit·footage 의 오디오 시작을 화면 경계보다 0.3~0.8초 앞(J)·뒤(L)로 — ffmpeg adelay/atrim, 내레이션은 그 구간 낮춤",
+   "use_when": "원본 발언(bite)·자료 영상으로 넘어갈 때 — 하드 컷의 덜컥거림 없이",
+   "group": "이어 주기",
+   "tech_status": "candidate",
+   "tech_status_label": "후보 (아직 없음)",
+   "tools": [
+    {
+     "name": "ffmpeg (adelay·amix)",
+     "url": "https://ffmpeg.org/ffmpeg-filters.html",
+     "license": "LGPL/GPL (도구로만 사용)",
+     "checked": "공식 문서"
+    }
+   ],
+   "anim": "jcut",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "소리 먼저·소리 남기 (J컷·L컷)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:bite",
+    "term:footage",
+    "term:hard-cut"
+   ],
+   "mentioned_in": []
+  },
+  {
+   "id": "term:tech-xfade-pack",
+   "kind": "term",
+   "key": "tech-xfade-pack",
+   "aliases": [
+    "xfade"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "장면 전환 묶음 (xfade)",
+   "short": "장면 전환 묶음",
+   "cat": "technique",
+   "plain": "겹침·지우개(wipe)·밀기(slide)·원 열기·픽셀 등 ffmpeg 에 들어 있는 장면 전환 수십 가지",
+   "look": "앞 장면이 원으로 오므라들며 다음 장면이 드러남 (circleopen)",
+   "how": "지금 edit10 이 HTML 안에서 wipe·push·zoom·iris 를 돌려 씀. 영상 조각을 이을 땐 ffmpeg xfade=transition=fade|dissolve|wipeleft|slideup|circleopen|pixelize…",
+   "caution": "v12 기각 '매 장면 휙 전환은 정신없다' — 보통 장면은 부드러운 겹침(fade) 하나만",
+   "use_when": "장 표지 앞뒤처럼 '단락이 바뀐다' 를 보여 줄 때만",
+   "group": "이어 주기",
+   "tech_status": "partial",
+   "tech_status_label": "비슷한 것 있음",
+   "tools": [
+    {
+     "name": "FFmpeg xfade",
+     "url": "https://trac.ffmpeg.org/wiki/Xfade",
+     "license": "LGPL/GPL (도구로만 사용)",
+     "checked": "공식 위키"
+    },
+    {
+     "name": "Motion Canvas transitions (fade·slide·zoomIn 개념)",
+     "url": "https://motioncanvas.io/docs/transitions",
+     "license": "MIT (저장소 원문 미확인)",
+     "checked": "공식 문서"
+    }
+   ],
+   "anim": "crossfade",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "장면 전환 묶음 (xfade)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:transition",
+    "term:hard-cut"
+   ],
+   "mentioned_in": []
+  },
+  {
+   "id": "term:tech-zoom-into",
+   "kind": "term",
+   "key": "tech-zoom-into",
+   "aliases": [
+    "줌 인 전환",
+    "zoomInTransition"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "확대해 들어가며 다음 장면 (줌 인 전환)",
+   "short": "확대해 들어가며 다음 장면",
+   "cat": "technique",
+   "plain": "화면의 한 곳으로 확대해 들어가면 그 안이 다음 장면이 되는 전환",
+   "look": "지도 위 한 도시로 들어가면 그 도시의 거리 사진이 펼쳐짐",
+   "how": "Motion Canvas zoomInTransition 개념을 GSAP 로 — 앞 장면 scale 확대 + 다음 장면 페이드",
+   "caution": "시장 채널 v31 '확대·축소 쓰지 않음' 과 충돌 — 시장 채널은 쓰지 않음. 다른 채널도 한 영상 1번 이하",
+   "use_when": "전체 → 한 부분으로 '들어가는' 이야기 (호기심·역사)",
+   "group": "이어 주기",
+   "tech_status": "hold",
+   "tech_status_label": "보류",
+   "tools": [
+    {
+     "name": "Motion Canvas zoomInTransition",
+     "url": "https://motioncanvas.io/api/core/transitions",
+     "license": "MIT (저장소 원문 미확인)",
+     "checked": "공식 문서"
+    }
+   ],
+   "anim": "pullback",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "확대해 들어가며 다음 장면 (줌 인 전환)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:zoomshot",
+    "term:slow-push"
+   ],
+   "mentioned_in": []
+  },
+  {
+   "id": "term:tech-whip-pan",
+   "kind": "term",
+   "key": "tech-whip-pan",
+   "aliases": [
+    "휩 팬",
+    "whip pan"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "휙 넘기기 (휩 팬)",
+   "short": "휙 넘기기",
+   "cat": "technique",
+   "plain": "화면이 번지며 옆으로 휙 지나가는 사이에 다음 장면으로 바뀌는 전환",
+   "look": "가로로 흐려진 띠가 지나가며 장면이 바뀜",
+   "how": "앞 장면 끝·다음 장면 처음에 가로 이동 + 가로 흐림(ffmpeg xfade hblur 또는 CSS blur)",
+   "caution": "v12 기각('매 장면 휙 전환·휙 소리 — 정신없다')과 정면 충돌 — 롱폼에서는 쓰지 않음",
+   "use_when": "빠른 쇼츠의 시간·장소 점프",
+   "group": "이어 주기",
+   "tech_status": "hold",
+   "tech_status_label": "보류",
+   "tools": [
+    {
+     "name": "FFmpeg xfade hblur",
+     "url": "https://trac.ffmpeg.org/wiki/Xfade",
+     "license": "LGPL/GPL (도구로만 사용)",
+     "checked": "공식 위키"
+    }
+   ],
+   "anim": "whip",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "휙 넘기기 (휩 팬)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:transition"
+   ],
+   "mentioned_in": []
+  },
+  {
+   "id": "term:tech-gl-transitions",
+   "kind": "term",
+   "key": "tech-gl-transitions",
+   "aliases": [
+    "gl-transitions"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "셰이더 전환 모음 (gl-transitions)",
+   "short": "셰이더 전환 모음",
+   "cat": "technique",
+   "plain": "GPU 셰이더로 만든 화려한 전환(물결·큐브·조각 나기 등) 수백 가지 모음",
+   "look": "장면이 물결처럼 일렁이며 바뀜",
+   "how": "ffmpeg-gl-transition 이나 브라우저 WebGL 로 렌더",
+   "caution": "전환마다 라이선스가 따로 적혀 있음(한 줄로 정리 안 됨) + 화려한 전환은 v12 '정신없다' 기각과 충돌 — 보류",
+   "group": "이어 주기",
+   "tech_status": "hold",
+   "tech_status_label": "보류",
+   "tools": [
+    {
+     "name": "gl-transitions/gl-transitions",
+     "url": "https://github.com/gl-transitions/gl-transitions",
+     "license": "전환마다 다름 (license 칸 확인 필요)",
+     "checked": "npm·목록 사이트"
+    }
+   ],
+   "anim": "crossfade",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "셰이더 전환 모음 (gl-transitions)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:transition"
+   ],
+   "mentioned_in": []
+  },
+  {
+   "id": "term:tech-parallax-photo",
+   "kind": "term",
+   "key": "tech-parallax-photo",
+   "aliases": [
+    "2.5D 시차",
+    "패럴랙스",
+    "parallax"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "사진에 깊이 (2.5D 시차)",
+   "short": "사진에 깊이",
+   "cat": "technique",
+   "plain": "사진 한 장을 앞·뒤 층으로 나눠, 앞은 조금 더 움직이고 뒤는 덜 움직이게 해 입체처럼 보이게 하는 것",
+   "look": "옛 사진 속 사람이 배경에서 살짝 떠 보이며 아주 천천히 깊어짐",
+   "how": "깊이 추정(Depth Anything) → 깊이에 따라 층을 나눠 GSAP 로 다른 속도 이동. 브라우저만으로 되는 render-image-depth(MIT) 방식이 렌더러와 맞음",
+   "caution": "카메라를 억지로 움직이는 것과 같은 계열(v30) — 사진이 이야기의 증거로 오래 머물 때만, 한 영상 몇 장. 시장 채널은 v31 로 쓰지 않음",
+   "use_when": "역사·인물 사진이 오래 머무는 장 표지·여는 장면 (호기심·시사)",
+   "group": "사진·깊이",
+   "tech_status": "candidate",
+   "tech_status_label": "후보 (아직 없음)",
+   "tools": [
+    {
+     "name": "activeguild/render-image-depth",
+     "url": "https://github.com/activeguild/render-image-depth",
+     "license": "MIT",
+     "checked": "목록 사이트"
+    },
+    {
+     "name": "DepthFlow",
+     "url": "https://github.com/BrokenSource/DepthFlow",
+     "license": "AGPLv3 또는 상업(별도) — 그대로 쓰지 않음",
+     "checked": "PyPI 설명"
+    }
+   ],
+   "anim": "parallax",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "사진에 깊이 (2.5D 시차)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:kb",
+    "term:perspective-paper"
+   ],
+   "mentioned_in": [
+    "code:ytflow/stages/story.py:88"
+   ]
+  },
+  {
+   "id": "term:tech-pull-back",
+   "kind": "term",
+   "key": "tech-pull-back",
+   "aliases": [
+    "풀백",
+    "pull-back"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "한 점에서 물러나며 전체 보기 (풀백 리빌)",
+   "short": "한 점에서 물러나며 전체 보기",
+   "cat": "technique",
+   "plain": "아주 가까이 보이던 한 부분(숫자·얼굴)에서 시작해 물러나면 그것이 큰 그림의 일부였음이 드러나는 것",
+   "look": "\"0.3%\" 한 칸에서 물러나면 수천 칸짜리 표 전체가 보임",
+   "how": "HyperFrames 레지스트리 블록 pull-back-reveal 아이디어 (Apache-2.0, 설치됨, docs/17 후보) — GSAP scale 1 → 큰 값의 역방향",
+   "caution": "카메라 이동이므로 한 영상 1번, 시장 채널은 v31(확대·축소 없음) 확인 후",
+   "use_when": "훅 — 작은 것이 사실은 큰 것의 일부라는 반전 (시장·호기심)",
+   "group": "사진·깊이",
+   "tech_status": "candidate",
+   "tech_status_label": "후보 (아직 없음)",
+   "tools": [
+    {
+     "name": "HyperFrames pull-back-reveal",
+     "url": "https://github.com/heygen-com/hyperframes",
+     "license": "Apache-2.0",
+     "checked": "tools/external.json"
+    }
+   ],
+   "anim": "pullback",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "한 점에서 물러나며 전체 보기 (풀백 리빌)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:zoomshot"
+   ],
+   "mentioned_in": []
+  },
+  {
+   "id": "term:tech-bar-race",
+   "kind": "term",
+   "key": "tech-bar-race",
+   "aliases": [
+    "바 차트 레이스",
+    "bar chart race"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "순위가 바뀌는 막대 (바 차트 레이스)",
+   "short": "순위가 바뀌는 막대",
+   "cat": "technique",
+   "plain": "시간이 흐르며 막대 길이가 바뀌고 순위가 엎치락뒤치락 자리를 바꾸는 차트",
+   "look": "2015 → 2025 시가총액 순위에서 엔비디아 막대가 아래에서 1위로 올라옴",
+   "how": "HyperFrames bar-chart-race 블록(설치됨) 또는 Python dexplo/bar_chart_race(MIT) 로 영상 조각",
+   "caution": "숫자가 많아 읽기 바쁨 — 막대 10개 이하, 15초 안팎",
+   "use_when": "순위·점유율이 시간에 따라 바뀐 이야기 (시장) — 데이터 출처 필수",
+   "group": "데이터",
+   "tech_status": "candidate",
+   "tech_status_label": "후보 (아직 없음)",
+   "tools": [
+    {
+     "name": "dexplo/bar_chart_race",
+     "url": "https://github.com/dexplo/bar_chart_race",
+     "license": "MIT",
+     "checked": "목록 사이트"
+    },
+    {
+     "name": "HyperFrames bar-chart-race",
+     "url": "https://github.com/heygen-com/hyperframes",
+     "license": "Apache-2.0",
+     "checked": "tools/external.json"
+    }
+   ],
+   "anim": "race",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "순위가 바뀌는 막대 (바 차트 레이스)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:bars"
+   ],
+   "mentioned_in": []
+  },
+  {
+   "id": "term:tech-chart-morph",
+   "kind": "term",
+   "key": "tech-chart-morph",
+   "aliases": [
+    "차트 모프"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "차트가 다른 차트로 바뀜",
+   "short": "차트가 다른 차트로 바뀜",
+   "cat": "technique",
+   "plain": "막대 차트가 원 그래프로, 꺾은선이 막대로 — 같은 숫자를 다른 눈으로 보게 바뀌는 것",
+   "look": "매출 막대 5개가 모여 하나의 원이 되며 비중이 보임",
+   "how": "각 막대·조각을 SVG 경로로 그리고 MorphSVG(무료)·flubber(MIT) 로 보간",
+   "use_when": "\"그런데 비중으로 보면\" 처럼 관점이 바뀌는 문장",
+   "group": "데이터",
+   "tech_status": "candidate",
+   "tech_status_label": "후보 (아직 없음)",
+   "tools": [
+    {
+     "name": "veltman/flubber",
+     "url": "https://github.com/veltman/flubber",
+     "license": "MIT",
+     "checked": "목록 사이트"
+    }
+   ],
+   "anim": "morph",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "차트가 다른 차트로 바뀜",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:bars",
+    "term:chart",
+    "term:compare"
+   ],
+   "mentioned_in": []
+  },
+  {
+   "id": "term:tech-split-screen",
+   "kind": "term",
+   "key": "tech-split-screen",
+   "aliases": [
+    "스플릿 스크린",
+    "화면 나누기",
+    "맞대기"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "나란히 맞대기 (스플릿 스크린)",
+   "short": "나란히 맞대기",
+   "cat": "technique",
+   "plain": "화면을 둘로 나눠 두 자료(말과 행동, 전과 후, 두 회사)를 동시에 보여 주는 것",
+   "look": "왼쪽엔 CEO 발언 자막, 오른쪽엔 같은 날 공시 문장 — 말과 행동이 나란히",
+   "how": "versus·compare 는 도식으로 비교. 영상·캡처 두 개를 나란히 놓는 장면은 layers 두 칸 배치로 확장",
+   "caution": "양쪽 크기·색·길이를 같게 (한쪽 편들기 금지 — 영구 원칙)",
+   "use_when": "시장 v26 '말과 행동 맞대기', 시사 '양쪽 입장 같은 틀(08 §4)'",
+   "group": "화면 나누기",
+   "tech_status": "partial",
+   "tech_status_label": "비슷한 것 있음",
+   "anim": "split",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "나란히 맞대기 (스플릿 스크린)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:versus",
+    "term:compare",
+    "term:bite"
+   ],
+   "mentioned_in": [
+    "sec:03§0-2",
+    "sec:05§0-2",
+    "sec:09§5",
+    "ver:26",
+    "check:264"
+   ]
+  },
+  {
+   "id": "term:tech-spotlight",
+   "kind": "term",
+   "key": "tech-spotlight",
+   "aliases": [
+    "스포트라이트",
+    "나머지 어둡게"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "나머지 어둡게 (스포트라이트)",
+   "short": "나머지 어둡게",
+   "cat": "technique",
+   "plain": "화면의 여러 요소 중 지금 말하는 하나만 밝게 두고 나머지를 흐리게 하는 것",
+   "look": "인과 지도 칸 7개 중 지금 말하는 칸만 진하고 나머지는 옅어짐",
+   "how": "map_causal 의 dim·on·active 상태 (hybrid.py)",
+   "use_when": "복잡한 도식에서 지금 어디를 보는지 알려 줄 때 — 카메라 이동 대신",
+   "group": "화면 나누기",
+   "tech_status": "have",
+   "tech_status_label": "이미 있음",
+   "anim": "spotlight",
+   "doc": "styles/techniques.yaml · docs/32-technique-research.md",
+   "label": "나머지 어둡게 (스포트라이트)",
+   "cat_label": "연출 기법",
+   "related": [
+    "term:map_causal"
+   ],
    "mentioned_in": []
   },
   {
@@ -15835,6 +16831,7 @@
    "curated": true,
    "label": "박자 카메라",
    "cat_label": "움직임",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-5",
     "sec:05§0-4",
@@ -15888,6 +16885,7 @@
    "curated": true,
    "label": "장면 안 느린 확대 (확대·축소)",
    "cat_label": "움직임",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-5",
     "sec:05§0-4",
@@ -15899,6 +16897,9 @@
     "code:ytflow/stages/edit10.py:82",
     "code:ytflow/stages/edit10.py:155",
     "code:ytflow/stages/hybrid.py:1043"
+   ],
+   "techniques": [
+    "term:tech-zoom-into"
    ]
   },
   {
@@ -15930,6 +16931,7 @@
    "curated": true,
    "label": "대기 동작 (그림이 숨 쉼)",
    "cat_label": "움직임",
+   "related": [],
    "mentioned_in": [
     "sec:README§2-5",
     "ver:25"
@@ -15963,9 +16965,13 @@
    "curated": true,
    "label": "원근 종이 (2.5D)",
    "cat_label": "움직임",
+   "related": [],
    "mentioned_in": [
     "sec:README§2-5",
     "ver:25"
+   ],
+   "techniques": [
+    "term:tech-parallax-photo"
    ]
   },
   {
@@ -15996,6 +17002,7 @@
    "curated": true,
    "label": "걸어 들어오기",
    "cat_label": "움직임",
+   "related": [],
    "mentioned_in": [
     "sec:README§2-5",
     "ver:25",
@@ -16038,6 +17045,7 @@
    "curated": true,
    "label": "말에 맞춰 생기는 사물 (박자 motion)",
    "cat_label": "움직임",
+   "related": [],
    "mentioned_in": [
     "sec:04§0-4",
     "sec:09§6",
@@ -16046,6 +17054,10 @@
     "ver:27",
     "ver:30",
     "ver:31"
+   ],
+   "techniques": [
+    "term:tech-scramble",
+    "term:tech-count-up"
    ]
   },
   {
@@ -16082,6 +17094,7 @@
    "curated": true,
    "label": "정지 화면 비율",
    "cat_label": "측정값",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-4",
     "sec:06§G6",
@@ -16122,6 +17135,7 @@
    "curated": true,
    "label": "화면 변화 (회/분)",
    "cat_label": "측정값",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-5",
     "sec:05§0-4",
@@ -16166,6 +17180,7 @@
    "curated": true,
    "label": "장면 전환 (겹침·밀기)",
    "cat_label": "움직임",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-5",
     "sec:05§0-4",
@@ -16179,6 +17194,12 @@
     "rev:14",
     "code:ytflow/stages/edit10.py:22",
     "intent:ea14e9be"
+   ],
+   "techniques": [
+    "term:tech-match-move",
+    "term:tech-xfade-pack",
+    "term:tech-whip-pan",
+    "term:tech-gl-transitions"
    ]
   },
   {
@@ -16201,8 +17222,13 @@
    "curated": true,
    "label": "하드 컷",
    "cat_label": "움직임",
+   "related": [],
    "mentioned_in": [
     "sec:README§2-5"
+   ],
+   "techniques": [
+    "term:tech-j-l-cut",
+    "term:tech-xfade-pack"
    ]
   },
   {
@@ -16233,6 +17259,7 @@
    "curated": true,
    "label": "장면 안 겹치기 (layers)",
    "cat_label": "움직임",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-1",
     "sec:05§h19",
@@ -16245,6 +17272,9 @@
     "ver:4",
     "rule:G5:1",
     "check:407"
+   ],
+   "techniques": [
+    "term:tech-rough-highlight"
    ]
   },
   {
@@ -16275,6 +17305,7 @@
    "curated": true,
    "label": "그래픽 팩·바탕 (look)",
    "cat_label": "그래픽 팩",
+   "related": [],
    "mentioned_in": [
     "sec:05§0-1",
     "sec:05§0-7",

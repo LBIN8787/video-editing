@@ -46,3 +46,4 @@
 - [charlie947/motion-graphics-skills](https://github.com/charlie947/motion-graphics-skills), [haidrrrry/claude-remotion-skill](https://github.com/haidrrrry/claude-remotion-skill), [JakeB-5/motion-graphic-skill LICENSE](https://raw.githubusercontent.com/JakeB-5/motion-graphic-skill/main/LICENSE), [mattypark/Motion-graphics-skill](https://github.com/mattypark/Motion-graphics-skill)
 - 경향: [Hatch Studios](https://hatchstudios.com/top-video-and-animation-trends-to-know-in-2026/), [AdWave](https://adwave.com/resources/explainer-video-styles), [Async](https://async.com/blog/youtube-trends/), [Offshore Clipping](https://offshoreclipping.com/blog/video-editing-trends/), [Visionedge](https://visionedgeofficial.com/best-video-editing-styles-for-youtube/)
 - Codex 쇼츠: Drive 'AI 실전노트 — 쇼츠 자동화 보관' / '00-쇼츠자동화-재사용안내-v1.0.0.md'
+- 기법(화면 문법) 단위 조사는 [docs/32](32-technique-research.md) · `styles/techniques.yaml` (2026-11-15).
