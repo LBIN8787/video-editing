@@ -135,6 +135,7 @@ python -m ytflow styles | schemas | status <프로젝트>
   1) 영상 판정은 `python -m ytflow review <프로젝트> --pass | --reject "원문"`, 그 밖의 말(방향 요청·"그런 뜻이 아니었다"·도구 요청)은 `python -m ytflow feedback "원문" --kind direction|clarify|tool [--about intent:xxxx] [--pending]` — 둘 다 `manual/graph.json` 을 자동으로 다시 만듭니다.
   2) 모델 해석이 틀렸다는 말이면 `manual/intents.yaml` 에 뜻한 것·뜻하지 않은 것·판정도 적습니다(`manual-ui` '의도 정렬').
   3) `python -m ytflow manual-graph --artifact <스크래치>/manual-graph.html` → Artifact 도구로 **같은 공유 페이지**(`ytflow/stages/manualgraph.py` 의 `ARTIFACT_URL`)에 다시 올리고 → 커밋·push. 매뉴얼을 고쳤는데 그래프가 옛것이면 `check` G0 SHOULD 가 알려 줍니다.
+- **규칙의 네 층 (2026-11-15 사용자 요청, manual/README §3-1):** 영구 원칙(사실·법·권리·안전 — 진짜 금지) · 작업 기준(제작 방법) · 스타일 기본값(소리·카메라·바탕·비율 — 금지라고 쓰지 않고 켬/끔 기본값과 범위로) · 실험 기록(한 영상의 반응 — 매뉴얼 금지·MUST 로 옮기지 않음). 피드백을 매뉴얼로 옮기기 전에 `feedback --scope` 로 층부터 정하고, 애매하면 실험 기록으로 둡니다. 스타일 층을 MUST 검사로 만들지 않습니다. 분류: `manual/rule_tiers.yaml`, 확인: 매뉴얼 그래프 '한눈에 → 과적합 후보'.
 - **쉬운 대본:** 시청자는 일반인입니다. 핵심 한 문장(`core_message`), 논리 구조(`logic`), 숫자마다 비교 기준(`compare_to`), 비유 2개 이상, 과거 사례 1개 이상, 어려운 말 풀이(`glossary`)를 넣습니다. `prompts/script.md`, `validate` 가 점검합니다.
 - **사실:** 숫자와 발언은 출처로 확인된 것만 씁니다. '재확인 필요'는 단정하지 않습니다. 투자 권유 표현은 금지합니다.
 - **소스:** YouTube 봇 확인이나 사이트 접근 차단을 **우회하지 않습니다.** 막히면 임시 화면을 두고 사용자 PC 에서 `rebuild` 하게 안내합니다.

@@ -290,6 +290,8 @@ def main(argv: list[str] | None = None) -> None:
     fb.add_argument("quote"); fb.add_argument("--kind", default="direction", choices=["direction", "clarify", "tool", "review"])
     fb.add_argument("--project", default=""); fb.add_argument("--about", default="", help="바로잡는 의도 ID (intent:xxxx)")
     fb.add_argument("--note", default=""); fb.add_argument("--pending", action="store_true", help="매뉴얼 '반영 대기'에도 넣기 (check G0)")
+    fb.add_argument("--scope", default="", choices=["", "principle", "standard", "style", "trial"],
+                    help="이 말의 층: principle 영구 원칙 · standard 작업 기준 · style 스타일 기본값 · trial 실험 기록(금지로 만들지 않음)")
     mu = sub.add_parser("manual-ui", help="매뉴얼 그래프 보기·고치기 도구 (로컬 서버): 검토 기록·반영 대기·버전 올리기·md 편집")
     mu.add_argument("--port", type=int, default=8770); mu.add_argument("--host", default="127.0.0.1")
     sq = sub.add_parser("sync-qa", help="완성 영상의 자막·목소리·화면 싱크를 받아쓰기로 재기 → 05_edit/sync_qa.json")
@@ -466,7 +468,7 @@ def main(argv: list[str] | None = None) -> None:
         manualgraph.write(a.html, a.artifact)
     elif a.cmd == "feedback":
         from .stages import manualgraph
-        it = manualgraph.add_feedback(a.quote, a.kind, a.project, a.about, a.note, a.pending)
+        it = manualgraph.add_feedback(a.quote, a.kind, a.project, a.about, a.note, a.pending, a.scope)
         print(f"[feedback] {it['date']} · {manualgraph.FB_KIND.get(a.kind)} 기록 → manual/feedback.yaml" + (" + 반영 대기" if a.pending else ""))
     elif a.cmd == "manual-ui":
         from .stages import manualgraph

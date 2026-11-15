@@ -217,6 +217,87 @@ def git_versions() -> dict[int, dict]:
 
 
 
+# ------------------------------------------------------------------ 규칙의 네 층: 영구 원칙 · 작업 기준 · 스타일 기본값 · 실험 기록
+TIERS_FILE = MANUAL / "rule_tiers.yaml"
+TIER = {
+    "principle": "영구 원칙",      # 사실·법·권리·안전 — 어떤 지시가 와도. 진짜 금지, MUST
+    "standard": "작업 기준",       # 품질을 위한 제작 방법 — 버전으로 바뀔 수 있음. MUST·SHOULD
+    "style": "스타일 기본값",      # 소리·카메라·바탕·스타일 비율 — 금지가 아니라 켜고 끄는 기본값. SHOULD 까지
+    "trial": "실험 기록",          # 한 영상·한 시도의 반응 — 다음 시도의 참고, 금지·MUST 로 만들지 않음
+}
+PRINCIPLE_W = ["투자 권유", "권유", "사세요", "매수", "라이선스", "저작권", "우회", "봇 확인", "API 키", "사적 인물", "사생활", "실명",
+               "비하", "범인", "단정 금지어", "유사투자", "복제", "확인 안 된", "확인 실패", "소문", "CC BY-SA", "라이선스 불명", "퍼블릭 도메인",
+               "조롱", "편을 들지", "의혹", "커밋", "로고", "제휴", "목표가", "합성이면"]
+STYLE_W = ["효과음", "배경음", "타격음", "카메라", "확대", "축소", "바탕", "배경색", "스타일", "3연속", "연속 금지", "type", "강조",
+           "키네틱", "전환", "fx", "tilt", "dolly", "NASA", "움직임", "정지 화면", "정지 비율", "화면 변화", "장 표지", "막대 인물",
+           "photofill", "words", "곡이", "스킨", "그래픽 팩", "40%", "3종", "4종", "겹친 장면", "plain 장면", "글씨·도형", "콜라주", "boil"]
+
+
+def _tkey(prefix: str, text: str) -> str:
+    import hashlib
+    return f"{prefix}:" + hashlib.sha1(_norm(text).encode("utf-8")).hexdigest()[:8]
+
+
+def load_tiers() -> dict:
+    try:
+        import yaml
+        return (yaml.safe_load(_read(TIERS_FILE)) or {}).get("tiers", {}) or {}
+    except Exception:
+        return {}
+
+
+def save_tier(key: str, tier: str, note: str = "", by: str = "사용자", text: str = "") -> None:
+    import yaml
+    if tier not in TIER and tier != "auto":
+        raise ValueError("알 수 없는 층")
+    doc = (yaml.safe_load(_read(TIERS_FILE)) or {}) if TIERS_FILE.exists() else {}
+    doc.setdefault("tiers", {})
+    if tier == "auto":
+        doc["tiers"].pop(key, None)
+    else:
+        doc["tiers"][key] = {k: v for k, v in {"tier": tier, "note": note, "by": by, "text": text[:120],
+                                                 "date": dt.date.today().isoformat()}.items() if v}
+    head = ("# 규칙의 네 층 — 사람이 확정한 분류 (자동 추정을 덮어씀). manual-ui '한눈에 → 규칙의 층'에서 고칩니다. (docs/31 §9, manual/README §3-1)\n"
+            "# principle 영구 원칙(사실·법·권리·안전, 진짜 금지) · standard 작업 기준(품질 방법, 버전으로 바뀜)\n"
+            "# style 스타일 기본값(소리·카메라·바탕·비율 — 금지 아님, 켜고 끔) · trial 실험 기록(한 영상의 반응 — 금지·MUST 로 만들지 않음)\n"
+            "# key 는 그 줄 글자에서 자동으로 만들어짐 — 글자를 고치면 key 가 바뀌어 자동 추정으로 돌아갑니다 (text 는 알아보기용).\n")
+    TIERS_FILE.write_text(head + yaml.safe_dump(doc, allow_unicode=True, sort_keys=False, width=110), encoding="utf-8")
+
+
+def classify(text: str, absolute: bool = False, vers_applied: dict | None = None, hard: bool | None = None) -> dict:
+    """자동 추정: 어느 층인가 + 과적합 후보인가 (스타일 층인데 금지·MUST, 근거가 영상 한 편의 반응)."""
+    t = text or ""
+    vs = [int(v) for v in re.findall(r"\bv(\d{1,2})\b", t)]
+    projects = set()
+    for v in vs:
+        projects |= set((vers_applied or {}).get(v, []))
+    single = bool(vs) and len(projects) == 1 or ("사용자" in t and len(projects) <= 1 and re.search(r"\d{4}-\d\d-\d\d", t))
+    hardness = hard if hard is not None else ("MUST" in t or any(w in t for w in ["금지", "쓰지 않", "하지 않", "끈다", "아예 뺌"]))
+    if absolute or any(w in t for w in PRINCIPLE_W):
+        return {"tier": "principle", "why": "사실·법·권리·안전에 관한 말" if not absolute else "README §3 절대 하지 않는 것", "overfit": False,
+                "single": bool(single)}
+    if any(w in t for w in STYLE_W):
+        of = bool(hardness and single)
+        return {"tier": "trial" if of else "style",
+                "why": ("스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨" if of else "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값"),
+                "overfit": bool(hardness), "single": bool(single)}
+    return {"tier": "standard", "why": "제작 방법·품질 기준", "overfit": False, "single": bool(single)}
+
+
+def apply_tier(item: dict, key: str, text: str, ov: dict, **kw) -> None:
+    c = classify(text, **kw)
+    o = ov.get(key)
+    item.update(tier_key=key, tier_auto=c["tier"], why=c["why"], overfit=c["overfit"], single=c["single"])
+    if o:
+        item.update(tier=o.get("tier", c["tier"]), tier_by=o.get("by", "사용자"), tier_note=o.get("note", ""), tier_fixed=True)
+    else:
+        item.update(tier=c["tier"], tier_by="자동 추정", tier_note="", tier_fixed=False)
+    item["tier_label"] = TIER.get(item["tier"], item["tier"])
+    # 과적합 후보: 스타일·실험 층인데 금지·MUST 로 적혀 있음 (사람이 원칙·기준으로 확정했으면 아님)
+    # 사람이 스타일로 확정했으면 후보에서 뺌 (실험으로 확정됐는데 금지·MUST 로 적혀 있으면 계속 후보)
+    item["overfit"] = c["overfit"] and (item["tier"] == "trial" or (item["tier"] == "style" and not item["tier_fixed"]))
+
+
 # ------------------------------------------------------------------ 사용자 피드백 기록 (영상 검토가 아닌 말도)
 FEEDBACK = MANUAL / "feedback.yaml"
 FB_KIND = {"review": "영상 검토", "direction": "방향·기준 요청", "clarify": "뜻 바로잡기", "tool": "도구 요청"}
@@ -236,12 +317,12 @@ def parse_feedback() -> list[dict]:
         out.append({"id": f"fb:{i + 1}", "kind": "feedback", "date": str(f.get("date", "")), "quote": q, "label": q[:60],
                     "fb_kind": f.get("kind", "direction"), "fb_kind_label": FB_KIND.get(f.get("kind", "direction"), f.get("kind", "")),
                     "project": f.get("project", "") or "", "about": str(f.get("about", "") or ""), "note": f.get("note", "") or "",
-                    "pending": bool(f.get("pending")), "themes": _themes(q)})
+                    "pending": bool(f.get("pending")), "themes": _themes(q), "scope": f.get("scope", "")})
     return out
 
 
 def add_feedback(quote: str, kind: str = "direction", project: str = "", about: str = "", note: str = "",
-                 pending: bool = False) -> dict:
+                 pending: bool = False, scope: str = "") -> dict:
     """사용자가 한 말을 그대로 기록 → (선택) 반영 대기 → 그래프 다시 만들기."""
     import yaml
     doc = (yaml.safe_load(_read(FEEDBACK)) or {}) if FEEDBACK.exists() else {}
@@ -255,15 +336,20 @@ def add_feedback(quote: str, kind: str = "direction", project: str = "", about: 
         item["note"] = note
     if pending:
         item["pending"] = True
+    if scope:
+        if scope not in TIER:
+            raise ValueError("scope 는 principle·standard·style·trial 중 하나")
+        item["scope"] = scope
     doc["feedback"].append(item)
     head = ("# 사용자 피드백 기록 — 영상 검토(reviews.md) 밖에서 한 말도 원문 그대로 남깁니다. 그래프의 '사용자 원문'이 됩니다.\n"
             "# python -m ytflow feedback \"원문\" [--kind direction|clarify|tool|review] [--project P] [--about 의도ID] [--pending]\n"
             "# kind: direction 방향·기준 요청 · clarify 뜻 바로잡기(모델 해석이 틀렸을 때) · tool 도구 요청 · review 영상에 대한 말\n"
-            "# about: 이 말이 바로잡는 의도 ID (manual-ui '의도 정렬'의 intent:xxxx 에서 xxxx) · pending: 매뉴얼 '반영 대기'에도 넣음\n")
+            "# about: 이 말이 바로잡는 의도 ID (manual-ui '의도 정렬'의 intent:xxxx 에서 xxxx) · pending: 매뉴얼 '반영 대기'에도 넣음\n"
+            "# scope: 이 말이 어느 층인가 — principle 영구 원칙 · standard 작업 기준 · style 스타일 기본값 · trial 실험 기록(금지로 만들지 않음)\n")
     FEEDBACK.write_text(head + yaml.safe_dump(doc, allow_unicode=True, sort_keys=False, width=110), encoding="utf-8")
     if pending:
         cl = MANUAL / "CHANGELOG.md"
-        line = f"- [{item['date']} · 사용자 피드백{' · ' + project if project else ''}] {quote.strip()}"
+        line = f"- [{item['date']} · 사용자 피드백{' · ' + project if project else ''}{' · 층: ' + TIER[scope] if scope else ''}] {quote.strip()}"
         cl.write_text(_read(cl).replace("## 반영 대기\n", f"## 반영 대기\n{line}\n", 1), encoding="utf-8")
     write()
     return item
@@ -840,6 +926,27 @@ def build() -> dict:
         t["scenes"] = [f"term:{x}" for x in t.get("scenes", []) if f"term:{x}" in tnode]
     lex = [t for t in lex if t["mentioned_in"] or t["cat"] in ("style", "motion", "measure", "fx") or t["used_by"]]
     bans = prohibitions(secs)
+    tiers_ov = load_tiers()
+    vers_applied = {v["v"]: sorted({a["project"] for a in v["applied"]}) for v in versions}
+    for b in bans:
+        sec = next((x for x in secs if x["id"] == b["section"]), {})
+        ctx = b["text"] + (f" (v{sec['tag_version']})" if sec.get("tag_version") and "v" not in b["text"][:0] else "")
+        apply_tier(b, _tkey("ban", b["text"]), ctx + " " + sec.get("title", ""), tiers_ov, absolute=b["absolute"], vers_applied=vers_applied)
+    for r in rules:
+        apply_tier(r, _tkey("rule", r["label"]), f"{r['level']} {r['label']}", tiers_ov, vers_applied=vers_applied,
+                   hard=r["level"] == "MUST")
+    for c in checks:   # 검사 코드 줄도 — 스타일 말인데 MUST 로 막는 검사가 과적합 후보
+        apply_tier(c, _tkey("check", c["label"]), f"{c['level']} {c['label']}", tiers_ov, vers_applied=vers_applied,
+                   hard=c["level"] == "MUST")
+    for rv in reviews:
+        if rv["reason"]:
+            apply_tier(rv, _tkey("rev", rv["reason"]), rv["reason"], tiers_ov, vers_applied=vers_applied)
+            rv["overfit"] = False
+    for f in fbs:
+        apply_tier(f, _tkey("fb", f["quote"]), f["quote"], tiers_ov, vers_applied=vers_applied)
+        if f.get("scope") and not f.get("tier_fixed"):
+            f.update(tier=f["scope"], tier_label=TIER[f["scope"]], tier_by="기록할 때 지정", tier_fixed=True)
+        f["overfit"] = False
 
     for f in fbs:
         for t in f["themes"]:
@@ -857,9 +964,12 @@ def build() -> dict:
         "intents": len(intent_nodes), "misaligned": sum(i["status"] == "misaligned" for i in intent_nodes),
         "intents_reviewed": sum(i["annotated"] for i in intent_nodes), "conflicts": len(conflicts), "code": len(codes),
         "terms": len(lex), "bans": len(bans), "feedback": len(fbs),
+        "tiers": {k: sum(1 for x in bans + rules if x.get("tier") == k) for k in TIER},
+        "overfit": sum(1 for x in bans + rules + checks if x.get("overfit")),
+        "principle_bans": sum(1 for b in bans if b.get("tier") == "principle"),
     }
     return {"schema": SCHEMA_VERSION, "generated": dt.datetime.now().isoformat(timespec="seconds"), "source_hash": source_hash(),
-            "stats": stats, "pending": pending, "status_labels": STATUS, "conflicts": conflicts, "bans": bans,
+            "stats": stats, "pending": pending, "status_labels": STATUS, "conflicts": conflicts, "bans": bans, "tier_labels": TIER,
             "nodes": nodes, "edges": edges}
 
 
@@ -1015,6 +1125,10 @@ def serve(port: int = 8770, host: str = "127.0.0.1") -> None:
                     save_annotation(iid, body)
                     write()
                     return self._json({"ok": True})
+                if u.path == "/api/tier":
+                    save_tier(body.get("key", ""), body.get("tier", ""), (body.get("note") or "").strip(), "사용자", body.get("text", ""))
+                    write()
+                    return self._json({"ok": True})
                 if u.path == "/api/feedback":
                     q = (body.get("quote") or "").strip()
                     if not q:
@@ -1022,7 +1136,8 @@ def serve(port: int = 8770, host: str = "127.0.0.1") -> None:
                     if body.get("kind", "direction") not in FB_KIND:
                         raise ValueError("알 수 없는 종류")
                     add_feedback(q, body.get("kind", "direction"), (body.get("project") or "").strip(),
-                                 (body.get("about") or "").strip(), (body.get("note") or "").strip(), bool(body.get("pending")))
+                                 (body.get("about") or "").strip(), (body.get("note") or "").strip(), bool(body.get("pending")),
+                                 (body.get("scope") or "").strip())
                     return self._json({"ok": True})
                 if u.path == "/api/intent-pending":
                     text = (body.get("text") or "").strip()

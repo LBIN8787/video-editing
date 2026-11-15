@@ -183,6 +183,18 @@ svg .muted{fill:var(--muted)}
 .st-step > span:first-child{font-family:var(--mono);font-size:10px;color:var(--muted);text-align:center;padding-top:2px}
 .st-step .q{font-size:14px;border-left:3px solid var(--fg);padding-left:8px}
 .st-arrow{color:var(--muted);font-size:11px;padding-left:30px}
+/* 규칙의 층 */
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:6px}
+.tierbtn{all:unset;box-sizing:border-box;cursor:pointer;padding:8px 10px;border-radius:5px;border:1px solid var(--line);border-top:4px solid var(--line);font-size:12px;display:flex;flex-direction:column;gap:2px}
+.tierbtn b{font-size:13px} .tierbtn span{color:var(--muted)}
+.tierbtn[aria-pressed="true"]{outline:2px solid var(--accent)}
+.t-principle{border-top-color:var(--reject)} .t-standard{border-top-color:var(--accent)} .t-style{border-top-color:var(--pass)} .t-trial{border-top-color:var(--pend)}
+.tchip-tier{font-size:11px;padding:1px 7px;border-radius:10px;border:1px solid var(--line);white-space:nowrap}
+.tchip-tier.principle{color:var(--reject);border-color:var(--reject)} .tchip-tier.standard{color:var(--accent);border-color:var(--accent)}
+.tchip-tier.style{color:var(--pass);border-color:var(--pass)} .tchip-tier.trial{color:var(--pend);border-color:var(--pend)}
+.item.principle{border-color:var(--reject)} .item.standard{border-color:var(--accent)} .item.style{border-color:var(--pass)} .item.trial{border-color:var(--pend)}
+.item.of{background:var(--pend-soft)}
+.item select{font-size:11.5px;border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:1px 4px;margin-top:4px}
 /* 한눈에 */
 .now{padding:14px;display:flex;flex-direction:column;gap:18px}
 .now section{display:flex;flex-direction:column;gap:8px;scroll-margin-top:12px}
@@ -339,7 +351,8 @@ function renderTiles(){
     [s.rejects + s.passes + (s.feedback || 0), "내 피드백 (검토 + 말)", "", "now:fb"],
     [s.conflicts, "충돌 후보 — 반대 방향 규칙", s.conflicts ? "warn" : "", "now:conf"],
     [`${s.misaligned} / ${s.intents}`, "어긋난 의도 / 사용자 원문", s.misaligned ? "warn" : "", "now:mis"],
-    [s.bans, "금지·하지 않는 것", "", "now:ban"],
+    [s.principle_bans, "영구 금지 (원칙만)", "", "now:ban"],
+    [s.overfit, "과적합 후보 — 스타일인데 금지·MUST", s.overfit ? "warn" : "", "now:of"],
     [s.passes, "통과한 영상", "", "now:pass"],
     [s.rejects, "기각한 영상", "", "now:rej"],
     [s.pending, "반영 대기", s.pending ? "warn" : "", "edit"],
@@ -513,6 +526,7 @@ function renderEdit(){
       <div class="card"><h3>0. 내 말 기록 (영상 검토 밖)</h3><p>방향 요청·뜻 바로잡기처럼 영상 하나에 대한 판정이 아닌 말. 원문 그대로 manual/feedback.yaml 에 남고 그래프가 바로 바뀝니다.</p>
         <label class="field">한 말 (원문 그대로) <textarea id="fb-q" rows="3" placeholder="예: 반드시 카메라를 움직이라는 뜻이 아니었다"></textarea></label>
         <label class="field">종류 <select id="fb-k"><option value="direction">방향·기준 요청</option><option value="clarify">뜻 바로잡기 (모델 해석이 틀림)</option><option value="review">영상에 대한 말</option><option value="tool">도구 요청</option></select></label>
+        <label class="field">이 말의 층 <select id="fb-s"><option value="">정하지 않음</option><option value="principle">영구 원칙 (진짜 금지)</option><option value="standard">작업 기준</option><option value="style">스타일 기본값 (금지 아님)</option><option value="trial">실험 기록 (이번 시도만)</option></select></label>
         <label class="field">바로잡는 의도 ID (선택) <input id="fb-a" placeholder="intent:759c49eb"></label>
         <label class="field" style="flex-direction:row;align-items:center;gap:6px"><input type="checkbox" id="fb-p"> 매뉴얼 '반영 대기'에도 넣기</label>
         <div class="row"><button class="btn primary" id="fb-go" ${dis}>기록</button></div><div id="fb-cmd"></div></div>
@@ -543,13 +557,14 @@ function renderEdit(){
     $("#bp-cmd").innerHTML = LIVE ? "" : cmdBox(`python -m ytflow manual-bump "${s || "바꾼 기준 요약"}"\npython -m ytflow manual-graph`);
   };
   const fbCmd = () => { if (LIVE) return; const q = $("#fb-q").value.trim().replace(/"/g, "'"), k = $("#fb-k").value, a = $("#fb-a").value.trim();
-    $("#fb-cmd").innerHTML = cmdBox(`python -m ytflow feedback "${q || "한 말"}" --kind ${k}${a ? " --about " + a : ""}${$("#fb-p").checked ? " --pending" : ""}`); };
-  ["#fb-q", "#fb-k", "#fb-a", "#fb-p"].forEach(s => $(s).addEventListener("input", fbCmd)); fbCmd();
+    const sc = $("#fb-s").value;
+    $("#fb-cmd").innerHTML = cmdBox(`python -m ytflow feedback "${q || "한 말"}" --kind ${k}${sc ? " --scope " + sc : ""}${a ? " --about " + a : ""}${$("#fb-p").checked ? " --pending" : ""}`); };
+  ["#fb-q", "#fb-k", "#fb-s", "#fb-a", "#fb-p"].forEach(s => $(s).addEventListener("input", fbCmd)); fbCmd();
   ["#rv-proj", "#rv-res", "#rv-reason", "#bp-sum"].forEach(s => $(s).addEventListener("input", showCmd)); showCmd();
   $("#view").addEventListener("click", ev => { const b = ev.target.closest(".copy"); if (!b) return;
     navigator.clipboard.writeText(b.dataset.c).then(() => toast("복사했습니다"), () => toast("복사하지 못했습니다. 글자를 직접 선택하세요")); });
   if (!LIVE) return;
-  $("#fb-go").onclick = async () => { try { await api("/api/feedback", {quote: $("#fb-q").value, kind: $("#fb-k").value, about: $("#fb-a").value, pending: $("#fb-p").checked});
+  $("#fb-go").onclick = async () => { try { await api("/api/feedback", {quote: $("#fb-q").value, kind: $("#fb-k").value, scope: $("#fb-s").value, about: $("#fb-a").value, pending: $("#fb-p").checked});
     toast("기록했습니다. 그래프를 다시 만들었습니다"); await reload(); } catch (e) { toast(e.message); } };
   $("#rv-go").onclick = async () => { try { await api("/api/review", {project: $("#rv-proj").value, result: $("#rv-res").value, reason: $("#rv-reason").value});
     toast("검토를 기록했습니다"); await reload(); } catch (e) { toast(e.message); } };
@@ -785,14 +800,24 @@ function feedbackStories(){
 
 /* ---------- 한눈에: 통과·금지·충돌 후보·어긋난 의도·기각 ---------- */
 let nowFocus = null, banTheme = "all";
-let fbMore = false;
+let fbMore = false, banTier = "principle";
+const TIER_DESC = {principle: "사실·법·권리·안전 — 진짜 금지, 어떤 지시가 와도", standard: "품질을 위한 제작 방법 — 버전으로 바뀔 수 있음",
+  style: "소리·카메라·바탕·비율 — 금지 아님, 켜고 끄는 기본값", trial: "한 영상·한 시도의 반응 — 금지·MUST 로 만들지 않음"};
+function tierItem(x){
+  const TL = G.tier_labels || {};
+  const where = x._k === "ban" ? cut(nodeName(N[x.section]) || x.section, 36) : x._k === "rule" ? `06 체크리스트 ${x.gate.replace("gate:", "")} · ${x.level}` : `검사 코드 ${x.file.replace("ytflow/stages/", "")}:${x.line} · ${x.level}`;
+  const go = x._k === "ban" ? x.section : x.id;
+  const sel = LIVE ? `<select data-tk="${esc(x.tier_key)}" data-tt="${esc((x.text || x.label || "").slice(0, 120))}" aria-label="층">${["auto", ...Object.keys(TL)].map(k => `<option value="${k}" ${(!x.tier_fixed && k === "auto") || (x.tier_fixed && k === x.tier) ? "selected" : ""}>${k === "auto" ? `자동 추정 (${TL[x.tier_auto] || ""})` : TL[k]}</option>`).join("")}</select>` : "";
+  return `<div class="item ${x.tier} ${x.overfit ? "of" : ""}" role="button" tabindex="0" data-go="${esc(go)}"><small><span class="tchip-tier ${x.tier}">${esc(x.tier_label)}</span> ${x.tier_fixed ? esc(x.tier_by) : "자동 추정"} · ${esc(where)}</small>
+    <span>${hl(x.text || x.label)}</span><span style="color:var(--muted)">${esc(x.tier_note || x.why || "")}${x.single ? " · 근거가 영상 한 편" : ""}</span>${sel}</div>`;
+}
 function fbItem(x){
   if (x.kind === "review") { const e = (OUT[x.id] || []).find(y => y.kind === "applied_in");
     const where = x.result === "pass" ? `v${x.manual_version} 기준 검증` : x.status === "pending" ? "반영 대기 중" : e ? `→ ${e.t.replace("ver:", "v")} 에 반영` : "-";
-    return `<div class="item ${x.result === "pass" ? "pass" : "rej"}" role="button" tabindex="0" data-go="${esc(x.id)}"><small>${esc(x.date)} · 영상 검토 ${x.result === "pass" ? "통과" : "기각"} · ${esc(x.project.replace(/^\d{8}-/, ""))} · ${esc(where)}</small>${x.reason ? `<span>“${hl(cut(x.reason, 160))}”</span>` : ""}</div>`; }
+    return `<div class="item ${x.result === "pass" ? "pass" : "rej"}" role="button" tabindex="0" data-go="${esc(x.id)}"><small>${x.tier_label && x.result !== "pass" ? `<span class="tchip-tier ${x.tier}">${esc(x.tier_label)}${x.tier_fixed ? "" : "?"}</span> ` : ""}${esc(x.date)} · 영상 검토 ${x.result === "pass" ? "통과" : "기각"} · ${esc(x.project.replace(/^\d{8}-/, ""))} · ${esc(where)}</small>${x.reason ? `<span>“${hl(cut(x.reason, 160))}”</span>` : ""}</div>`; }
   const it = x.intent && N[x.intent];
   const where = [x.pending ? "반영 대기" : "", it ? (x.about ? "의도를 바로잡음" : "사용자 원문으로 추가") : ""].filter(Boolean).join(" · ") || "기록됨";
-  return `<div class="item ${x.fb_kind === "clarify" ? "mis" : "ban"}" role="button" tabindex="0" ${it ? `data-al="${esc(it.id)}"` : `data-go="${esc(x.id)}"`}><small>${esc(x.date)} · ${esc(x.fb_kind_label)}${x.project ? " · " + esc(x.project) : ""} · ${esc(where)}</small><span>“${hl(cut(x.quote, 180))}”</span>${x.note ? `<span style="color:var(--muted)">${hl(x.note)}</span>` : ""}</div>`;
+  return `<div class="item ${x.fb_kind === "clarify" ? "mis" : "ban"}" role="button" tabindex="0" ${it ? `data-al="${esc(it.id)}"` : `data-go="${esc(x.id)}"`}><small>${x.tier_label ? `<span class="tchip-tier ${x.tier}">${esc(x.tier_label)}</span> ` : ""}${esc(x.date)} · ${esc(x.fb_kind_label)}${x.project ? " · " + esc(x.project) : ""} · ${esc(where)}</small><span>“${hl(cut(x.quote, 180))}”</span>${x.note ? `<span style="color:var(--muted)">${hl(x.note)}</span>` : ""}</div>`;
 }
 function renderNow(){
   const S = G.stats, themes = G.nodes.filter(n => n.kind === "theme");
@@ -801,7 +826,10 @@ function renderNow(){
   const reviews = G.nodes.filter(n => n.kind === "review").sort((a, b) => b.date.localeCompare(a.date));
   const pass = reviews.filter(r => r.result === "pass"), rej = reviews.filter(r => r.result === "reject");
   const mis = G.nodes.filter(n => n.kind === "intent" && n.status === "misaligned");
-  const bans = (G.bans || []).filter(b => banTheme === "all" || (banTheme === "abs" ? b.absolute : b.themes.includes(banTheme)));
+  const TL = G.tier_labels || {};
+  const tierAll = [...(G.bans || []).map(b => ({...b, _k: "ban"})), ...G.nodes.filter(n => (n.kind === "rule" || n.kind === "check") && n.tier).map(n => ({...n, _k: n.kind}))];
+  const ofs = tierAll.filter(x => x.overfit);
+  const tierShown = tierAll.filter(x => x.tier === banTier && (banTheme === "all" || (x.themes || []).includes(banTheme) || (!x.themes && banTheme === "all")));
   const secName = id => cut(nodeName(N[id]) || id, 34);
   const conf = (G.conflicts || []).map(c => `<div class="callout" style="background:transparent;border:0;padding:0"><b>${esc(tl(c.theme))}</b> — 같은 매뉴얼 안에서 한쪽은 '더 하라', 다른 쪽은 '덜 하라·끈다'고 말합니다. 채널마다 적용 범위가 다르면 충돌이 아닐 수 있지만, 그 범위가 매뉴얼에 적혀 있는지 확인하세요.</div>
     <div class="conf"><div><span class="side" style="color:var(--reject)">▲ 더 하라</span>${c.plus.map(p => `<div class="item conf-p" role="button" tabindex="0" data-go="${esc(p.section)}"><small>${esc(secName(p.section))}</small>${hl(p.text)}</div>`).join("")}</div>
@@ -812,7 +840,7 @@ function renderNow(){
       <div class="key">
         <div class="k-conf"><b>충돌 후보</b><br>같은 주제를 반대로 말하는 규칙이 함께 살아 있음</div>
         <div class="k-mis"><b>어긋난 의도</b><br>내가 한 말과 모델의 해석이 다르다고 판정한 것</div>
-        <div class="k-ban"><b>금지</b><br>지금 매뉴얼이 '하지 않는다'고 적은 것 (진한 칸은 절대 금지)</div>
+        <div class="k-ban"><b>금지·규칙의 층</b><br>영구 원칙만 진짜 금지. 작업 기준·스타일 기본값·실험 기록으로 나눠 봄</div>
         <div class="k-pass"><b>통과</b><br>사용자가 통과시킨 영상 = 그때 매뉴얼 버전이 검증됨</div>
         <div class="k-rej"><b>기각</b><br>사용자가 돌려보낸 영상 → 반영된 버전</div>
       </div>
@@ -825,9 +853,14 @@ function renderNow(){
       <section id="now-mis"><h3><span class="chip reject">어긋난 의도 ${mis.length}</span> 내가 한 말 ≠ 모델 해석</h3>
         <div class="items">${mis.map(i => `<button class="item mis" data-al="${esc(i.id)}"><small>${esc(i.date || "")} · ${i.versions.map(v => "v" + v).join(",")}</small>“${esc(i.quote)}”${i.meaning ? `<span>뜻한 것: ${esc(i.meaning)}</span>` : ""}${(i.not_meant || []).length ? `<span style="color:var(--reject)">뜻하지 않은 것: ${esc(i.not_meant.join(" · "))}</span>` : ""}
           <span>${i.readings.filter(r => ["over","under","drift","conflict"].includes(r.status)).map(r => `<span class="chip ${r.status === "conflict" ? "pend" : "reject"}">${esc((G.status_labels || {})[r.status])} · ${esc(cut(nodeName(N[r.ref]) || r.ref, 26))}</span>`).join(" ")}</span></button>`).join("") || `<p class="empty">판정한 어긋남이 없습니다. '의도 정렬' 탭에서 판정하세요.</p>`}</div></section>
-      <section id="now-ban"><h3><span class="chip reject">금지 ${(G.bans || []).length}</span> 하지 않는 것</h3>
-        <div class="al-filter" style="padding:0;border:0"><button data-bt="all" aria-pressed="${banTheme === "all"}">전체</button><button data-bt="abs" aria-pressed="${banTheme === "abs"}">절대 금지</button>${themes.map(t => `<button data-bt="${t.key}" aria-pressed="${banTheme === t.key}">${esc(t.label)}</button>`).join("")}</div>
-        <div class="items">${bans.map(b => `<div class="item ban ${b.absolute ? "abs" : ""}" role="button" tabindex="0" data-go="${esc(b.section)}"><small>${b.absolute ? "절대 · " : ""}${esc(secName(b.section))}${b.must ? " · MUST" : ""}</small>${hl(b.text)}</div>`).join("") || `<p class="empty">이 주제의 금지 줄이 없습니다.</p>`}</div></section>
+      <section id="now-of"><h3><span class="chip pend">과적합 후보 ${ofs.length}</span> 스타일·실험인데 금지·MUST 로 적힌 것</h3>
+        <p class="lead">소리·카메라·바탕·스타일 비율처럼 바꿔 볼 수 있는 것이 영상 한두 편의 반응에서 '금지'나 MUST 검사가 된 줄입니다. 영구 원칙이면 '영구 원칙'으로, 기본값이면 '스타일 기본값'으로, 한 번의 시도였으면 '실험 기록'으로 확정하세요. 매뉴얼 글은 확정한 뒤 버전을 올려 고칩니다.</p>
+        <div class="items">${ofs.map(tierItem).join("") || `<p class="empty">없음</p>`}</div></section>
+      <section id="now-ban"><h3>규칙의 네 층</h3>
+        <p class="lead">같은 '하지 않는다'도 무게가 다릅니다. 영구 원칙만 진짜 금지이고, 스타일 기본값과 실험 기록은 금지가 아닙니다.</p>
+        <div class="tiers">${Object.entries(TL).map(([k, lab]) => `<button class="tierbtn t-${k}" data-tier="${k}" aria-pressed="${banTier === k}"><b>${esc(lab)} ${tierAll.filter(x => x.tier === k).length}</b><span>${esc(TIER_DESC[k])}</span></button>`).join("")}</div>
+        <div class="al-filter" style="padding:0;border:0"><button data-bt="all" aria-pressed="${banTheme === "all"}">모든 주제</button>${themes.map(t => `<button data-bt="${t.key}" aria-pressed="${banTheme === t.key}">${esc(t.label)}</button>`).join("")}</div>
+        <div class="items">${tierShown.map(tierItem).join("") || `<p class="empty">이 층·주제의 줄이 없습니다.</p>`}</div></section>
       <section id="now-pass"><h3><span class="chip pass">통과 ${pass.length}</span> 통과한 영상과 검증된 버전</h3>
         <div class="items">${pass.map(r => { const v = N["ver:" + r.manual_version]; return `<div class="item pass" role="button" tabindex="0" data-go="${esc(r.id)}"><small>${esc(r.date)} · v${r.manual_version} 기준으로 통과</small><b>${esc(r.project)}</b>${r.reason ? `<span>${esc(r.reason)}</span>` : ""}${v ? `<span style="color:var(--muted)">그때 매뉴얼: ${hl(cut(v.summary, 140))}</span>` : ""}</div>`; }).join("")}</div></section>
       <section id="now-rej"><h3><span class="chip">기각 ${rej.length}</span> 돌려보낸 영상 → 반영된 버전</h3>
@@ -837,6 +870,9 @@ function renderNow(){
   V.querySelectorAll("[data-go]").forEach(b => b.onclick = ev => { if (ev.target.closest(".term")) return; inspect(b.dataset.go); });
   V.querySelectorAll("[data-al]").forEach(b => b.onclick = ev => { if (ev.target.closest(".term")) return; alSel = b.dataset.al; location.hash = "align"; });
   V.querySelectorAll("[data-bt]").forEach(b => b.onclick = () => { banTheme = b.dataset.bt; nowFocus = "ban"; renderNow(); });
+  V.querySelectorAll("[data-tier]").forEach(b => b.onclick = () => { banTier = b.dataset.tier; nowFocus = "ban"; renderNow(); });
+  V.querySelectorAll("select[data-tk]").forEach(sel => { sel.onclick = ev => ev.stopPropagation(); sel.onchange = async () => { try {
+    await api("/api/tier", {key: sel.dataset.tk, tier: sel.value, text: sel.dataset.tt}); toast("층을 manual/rule_tiers.yaml 에 저장했습니다"); nowFocus = "of"; await reload(); } catch (e) { toast(e.message); } }; });
   const fm = $("#fb-more"); if (fm) fm.onclick = () => { fbMore = !fbMore; nowFocus = "fb"; renderNow(); };
   wireTerms(V);
   if (nowFocus) { const el = document.getElementById("now-" + nowFocus); if (el) el.scrollIntoView({block: "start"}); nowFocus = null; }
