@@ -919,7 +919,7 @@ function feedbackStories(){
 /* ---------- 한눈에: 통과·금지·충돌 후보·어긋난 의도·기각 ---------- */
 let nowFocus = null, banTheme = "all";
 let fbMore = false, banTier = "principle";
-const AKIND = {conflict: "충돌 후보", overfit: "과적합 후보", pending: "반영 대기", untiered: "층 미정 피드백", misaligned: "어긋난 해석",
+const AKIND = {proposal: "제안함", nousage: "용도 미정 기능", conflict: "충돌 후보", overfit: "과적합 후보", pending: "반영 대기", untiered: "층 미정 피드백", misaligned: "어긋난 해석",
   retired: "폐지된 기준이 남음", ref: "깨진 참조", coderef: "코드 위치 바뀜", topic: "주제 레포 오류", stale: "옛 그래프"};
 function auditCard(){
   const A = G.audit;

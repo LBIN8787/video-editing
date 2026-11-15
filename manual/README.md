@@ -150,6 +150,7 @@ python -m ytflow check <프로젝트> --upto G4   # 대본까지만 검사 (렌�
 | (기각 후) | 이유를 **기준으로 바꿔** 매뉴얼(01~06)·프롬프트·검사기(`ytflow/stages/checklist.py`)를 고침 → `python -m ytflow manual-bump "바꾼 기준 요약"` → 커밋 → `git push origin HEAD:refs/heads/manual/vN` |
 | **그 밖의 말** (방향 요청·"그런 뜻이 아니었다") | `python -m ytflow feedback "원문" --kind direction\|clarify [--about intent:xxxx] [--pending]` → `manual/feedback.yaml` (원문 그대로). 해석이 틀렸다는 말이면 '의도 정렬'에서 판정 |
 | (기록할 때마다) | 매뉴얼 그래프(`manual/graph.json`)가 자동으로 다시 만들어짐 → 공유 페이지도 다시 올림 (docs/31 §8) |
+| (병렬로 일할 때) | 매뉴얼은 **잠금을 가진 한 명(매뉴얼 담당)만** 고칩니다. 다른 에이전트의 검토·피드백은 제안함(`proposals/manual/`)으로 가고 담당이 반영 (docs/35) |
 | (매일 밤 자동) | 정기 검토가 매뉴얼을 같은 기준으로 재고(`manual-audit`), 판단이 필요 없는 것은 고치고, 판단이 필요한 것은 질문으로 남겨 알림 (docs/34, `skills/manual-review`) |
 | (그동안) | '반영 대기'가 비기 전에는 `check` 가 G0 에서 실패 → 같은 실수가 다음 영상에 반복되지 않음 |
 

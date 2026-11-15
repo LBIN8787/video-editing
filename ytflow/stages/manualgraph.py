@@ -1158,12 +1158,22 @@ def usage_md() -> str:
 
 
 def write(html_out: str | None = None, artifact_out: str | None = None) -> Path:
-    try:
-        (MANUAL / "10-when-to-use.md").write_text(usage_md(), encoding="utf-8")
-    except Exception as e:  # noqa: BLE001
-        print(f"[manual-graph] 용도표 만들기 실패: {e}")
+    from . import governance as _gv
+    own = _gv.can_write()   # 매뉴얼 파일(graph.json·10-when-to-use.md)은 잠금을 가진 쪽만 다시 씀 (docs/35)
+    if own:
+        try:
+            (MANUAL / "10-when-to-use.md").write_text(usage_md(), encoding="utf-8")
+        except Exception as e:  # noqa: BLE001
+            print(f"[manual-graph] 용도표 만들기 실패: {e}")
     g = build()
     out = MANUAL / "graph.json"
+    if not own:
+        print("[manual-graph] 매뉴얼 담당(잠금)이 아니라 manual/graph.json 은 다시 쓰지 않음 — 보기용 --html·--artifact 만 (docs/35)")
+        if artifact_out:
+            Path(artifact_out).write_text(page(g, standalone=True, wrap=False), encoding="utf-8")
+        if html_out:
+            Path(html_out).write_text(page(g, standalone=True, wrap=True), encoding="utf-8")
+        return out
     slim = json.loads(json.dumps(g))
     for n in slim["nodes"]:
         n.pop("body", None)          # 본문은 md 가 원본 — json 에는 구조만
@@ -1254,6 +1264,9 @@ def serve(port: int = 8770, host: str = "127.0.0.1") -> None:
             n = int(self.headers.get("Content-Length") or 0)
             try:
                 body = json.loads(self.rfile.read(n) or b"{}")
+                from . import governance as _gv
+                if not _gv.can_write() and u.path not in ("/api/rebuild",):
+                    raise ValueError("매뉴얼은 한 번에 한 명만 고칩니다 — " + _gv.holder_ok()[1])
                 if u.path == "/api/file":
                     p = manual_file(body["path"])
                     p.write_text(body["text"].replace("\r\n", "\n"), encoding="utf-8")

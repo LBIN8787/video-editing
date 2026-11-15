@@ -284,6 +284,13 @@ def main(argv: list[str] | None = None) -> None:
     spk.add_argument("project")
     mb = sub.add_parser("manual-bump", help="기각 사유를 반영해 매뉴얼을 고친 뒤 버전 올리기 (manual/VERSION, CHANGELOG)")
     mb.add_argument("summary")
+    ml = sub.add_parser("manual-lock", help="매뉴얼 잠금 — 한 번에 한 명만 매뉴얼·규칙 파일을 고친다 (status|acquire|release|check, docs/35)")
+    ml.add_argument("action", choices=["status", "acquire", "release", "check"])
+    ml.add_argument("--purpose", default=""); ml.add_argument("--force", action="store_true"); ml.add_argument("--reason", default="")
+    ml.add_argument("--hours", type=float, default=None); ml.add_argument("--path", default="")
+    mp = sub.add_parser("manual-propose", help="담당이 아닐 때 매뉴얼에 넣을 것을 제안함에 남기기 → proposals/manual/ (docs/35)")
+    mp.add_argument("text"); mp.add_argument("--kind", default="fix", choices=["feedback", "review", "fix", "rule", "tool"])
+    mp.add_argument("--project", default=""); mp.add_argument("--source", default="")
     au = sub.add_parser("manual-audit", help="매뉴얼 정기 검토: 충돌·과적합·폐지된 기준 잔재·깨진 참조·층 미정 피드백 → manual/audit.md (docs/34)")
     au.add_argument("--quiet", action="store_true"); au.add_argument("--note", default="")
     au.add_argument("--fixed", action="append", default=[], help="이번 검토에서 고친 것 한 줄 (여러 번)")
@@ -453,9 +460,14 @@ def main(argv: list[str] | None = None) -> None:
         from .stages import checklist
         if not a.passed and not a.reject:
             raise SystemExit("--pass 또는 --reject \"이유\" 중 하나를 주세요")
-        checklist.review(Project.open(a.project).path, a.passed, a.reject or a.note)
-        from .stages import manualgraph
-        manualgraph.write()
+        from .stages import governance as gv
+        if not gv.can_write():   # 매뉴얼 담당이 아니면 제안함으로 (docs/35)
+            gv.propose(("통과" if a.passed else "기각") + f": {a.reject or a.note}", "review", a.project,
+                       f"python -m ytflow review {a.project} " + ("--pass" if a.passed else f'--reject "{a.reject}"'))
+        else:
+            checklist.review(Project.open(a.project).path, a.passed, a.reject or a.note)
+            from .stages import manualgraph
+            manualgraph.write()
     elif a.cmd == "short":
         from .stages import shorts_hf
         shorts_hf.make(Project.open(a.project))
@@ -466,9 +478,24 @@ def main(argv: list[str] | None = None) -> None:
         from .stages import stylepick
         print(stylepick.run(Project.open(a.project).path).read_text(encoding="utf-8"))
     elif a.cmd == "manual-bump":
-        from .stages import checklist, manualgraph
+        from .stages import checklist, manualgraph, governance as gv
+        gv.guard_or_exit("manual-bump")
         checklist.bump(a.summary)
         manualgraph.write()
+    elif a.cmd == "manual-lock":
+        from .stages import governance as gv
+        if a.action == "status":
+            print(gv.status())
+        elif a.action == "acquire":
+            gv.acquire(a.purpose or "매뉴얼 작업", a.force, a.reason, a.hours)
+        elif a.action == "release":
+            gv.release()
+        else:
+            ok = (not a.path or not gv.is_protected(a.path)) or gv.can_write()
+            print(gv.holder_ok()[1]); raise SystemExit(0 if ok else 2)
+    elif a.cmd == "manual-propose":
+        from .stages import governance as gv
+        gv.propose(a.text, a.kind, a.project, a.source)
     elif a.cmd == "manual-audit":
         from .stages import audit
         audit.write(a.quiet, a.note, a.fixed)
@@ -483,6 +510,10 @@ def main(argv: list[str] | None = None) -> None:
         manualgraph.write(a.html, a.artifact)
     elif a.cmd == "feedback":
         from .stages import manualgraph
+        from .stages import governance as gv
+        if not gv.can_write():   # 매뉴얼 담당이 아니면 제안함으로 (docs/35)
+            gv.propose(a.quote, "feedback", a.project, f"feedback --kind {a.kind} --scope {a.scope} --about {a.about} --note {a.note}")
+            return
         it = manualgraph.add_feedback(a.quote, a.kind, a.project, a.about, a.note, a.pending, a.scope)
         print(f"[feedback] {it['date']} · {manualgraph.FB_KIND.get(a.kind)} 기록 → manual/feedback.yaml" + (" + 반영 대기" if a.pending else ""))
     elif a.cmd == "manual-ui":
