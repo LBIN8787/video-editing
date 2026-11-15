@@ -74,7 +74,8 @@ class HDoc(hyper.Doc):
                 f'style="width:100%;height:100%;object-fit:cover"></video></div>'
                 f'<div style="position:absolute;left:{x + w / 2 - 90}px;top:{y - 40}px;width:180px;height:46px;background:rgba(236,220,170,.85);transform:rotate(3deg)"></div>')
             self.js.append(f'tl.fromTo("#{i}f,#{i}w",{{opacity:0,y:40}},{{opacity:1,y:0,duration:0.5,ease:"power2.out"}},{at:.2f});')
-            self.js.append(f'tl.fromTo("#{i}",{{scale:1.0}},{{scale:{1 + push:.3f},duration:{dur:.2f},ease:"none"}},0);')
+            if not getattr(self, "no_zoom", False):
+                self.js.append(f'tl.fromTo("#{i}",{{scale:1.0}},{{scale:{1 + push:.3f},duration:{dur:.2f},ease:"none"}},0);')
         else:
             self.media.append(
                 f'<div id="{i}w" style="position:absolute;inset:0;overflow:hidden">'
@@ -82,7 +83,8 @@ class HDoc(hyper.Doc):
                 f'style="width:100%;height:100%;object-fit:cover"></video></div>'
                 f'<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 62%,rgba(0,0,0,.55) 100%)"></div>'
                 f'<div style="position:absolute;inset:0;box-shadow:inset 0 0 0 14px #EEE7DA, inset 0 0 0 16px rgba(0,0,0,.15)"></div>')
-            self.js.append(f'tl.fromTo("#{i}",{{scale:1.0}},{{scale:{1 + push:.3f},duration:{dur:.2f},ease:"none"}},0);')
+            if not getattr(self, "no_zoom", False):
+                self.js.append(f'tl.fromTo("#{i}",{{scale:1.0}},{{scale:{1 + push:.3f},duration:{dur:.2f},ease:"none"}},0);')
         return i
 
     # 이름 자막 (lower third) ------------------------------------
@@ -289,10 +291,12 @@ def s_chart(D: HDoc, sc: dict, bt: list, dur: float):
     if b0.get("mark"):
         mx, my = _free_spot(pts, used, (seg[0][0] + seg[-1][0]) / 2, min(p[1] for p in seg), len(b0["mark"]) * 40, 60, y0, y1 + 10)
         D.text(mx, my, b0["mark"], FT("note"), 50, accent_text(D), at=t0 + 2.2, anchor="rm")
-    D.js.append(f'tl.to("#layer",{{scale:1.18,x:-230,y:40,duration:1.6,ease:"power2.inOut"}},{t0 + 1.0:.2f});')
+    if not getattr(D, "no_zoom", False):
+        D.js.append(f'tl.to("#layer",{{scale:1.18,x:-230,y:40,duration:1.6,ease:"power2.inOut"}},{t0 + 1.0:.2f});')
     D.sfx.append(("pencil", t0 + 1.2))
     if len(sc["beats"]) > 1 and sc["beats"][1].get("stamp"):
-        D.js.append(f'tl.to("#layer",{{scale:1,x:0,y:0,duration:0.8,ease:"power2.inOut"}},{bt[1][0] - 0.2:.2f});')
+        if not getattr(D, "no_zoom", False):
+            D.js.append(f'tl.to("#layer",{{scale:1,x:0,y:0,duration:0.8,ease:"power2.inOut"}},{bt[1][0] - 0.2:.2f});')
         D.stamp(sc["beats"][1]["stamp"], 820, 520, bt[1][0] + 0.7)
 
 
@@ -1036,6 +1040,8 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
         D = HDoc(sc["id"] * 7 + 3)
         # v27 박자 카메라 (manual/09 §6): spec camera: "beat" 일 때만
         D.cam = spec.get("camera", "calm") == "beat" and sc.get("type") not in CAM_SKIP   # v30: 기본 끔 (2026-11-15 사용자: 억지 미세 움직임 필요 없음)
+        # v31 확대·축소 없음 (2026-11-15 사용자: "자꾸 화면을 확대하고 축소하고 웅웅거리는 거 쓰지 말아 주세요"): 시장 브랜드 기본 — 장면 안 느린 확대·tilt·dolly·차트 확대·사진 밀기 끔
+        D.no_zoom = spec.get("zoom", "off" if spec.get("brand") == "market" else "on") == "off"
     finally:
         if _env_skin is None:
             os.environ.pop("YTFLOW_SKIN", None)

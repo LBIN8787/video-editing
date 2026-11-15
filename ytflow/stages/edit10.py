@@ -79,7 +79,8 @@ def apply(D, spec: dict, sc: dict, bt: list, dur: float):
             n = int(bd // 4.5)
             marks += [b0 + bd * (j + 1) / (n + 1) for j in range(n)] if bd > 5 else []
         # v12: 장면 내내 한 방향으로 아주 천천히 다가가기만 (박자마다 흔들지 않음)
-        D.js.append(f'tl.fromTo("#layer",{{scale:1}},{{scale:1.025,duration:{max(1.0, dur - 0.3):.2f},ease:"none"}},0);')
+        if not getattr(D, "no_zoom", False):   # v31 확대·축소 없음
+            D.js.append(f'tl.fromTo("#layer",{{scale:1}},{{scale:1.025,duration:{max(1.0, dur - 0.3):.2f},ease:"none"}},0);')
 
 
 # ---------------------------------------------------------------- B11 정리판
@@ -151,7 +152,8 @@ def chapter_photo(D, sc, bt, dur):
     D.rough("line", [W / 2 - w / 2, 630, W / 2 + w / 2, 634], D.red, 5, at=0.95, dur=0.45)
     i = D._id()
     D.items.append(f'<div id="{i}" style="position:absolute;left:0;right:0;top:0;bottom:0;box-shadow:inset 0 0 220px rgba(0,0,0,.6)"></div>')
-    D.js.append('tl.fromTo("#layer",{scale:1.08},{scale:1,duration:%.2f,ease:"none"},0);' % dur)
+    if not getattr(D, "no_zoom", False):   # v31 확대·축소 없음
+        D.js.append('tl.fromTo("#layer",{scale:1.08},{scale:1,duration:%.2f,ease:"none"},0);' % dur)
 
 
 def register():

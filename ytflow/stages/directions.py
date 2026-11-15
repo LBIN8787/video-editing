@@ -653,6 +653,8 @@ def apply_fx(D, project, spec, sc, bt, dur, adir):
     if not fx:
         return
     R = _rnd(sc["id"] * 31 + 7)
+    if getattr(D, "no_zoom", False):   # v31 확대·축소 없음 (2026-11-15 사용자) — tilt·dolly 는 쓰지 않고 scan(빛 훑기)만
+        fx = [f for f in fx if f not in ("tilt", "dolly")]
     if "tilt" in fx or "dolly" in fx:
         D.css.append("#root{perspective:1800px}#layer{transform-origin:50% 55%;will-change:transform}")
     if "tilt" in fx:
