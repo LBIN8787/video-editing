@@ -41,6 +41,9 @@ def _e(s) -> str:
 
 
 # ---------------------------------------------------------------- 문서 (hyper.Doc 확장)
+CAM_SKIP = {"footage", "outro", "intro", "bite", "stage", "story", "kb", "journey", "zoomshot", "newsdesk"}   # 영상·자체 카메라가 있는 장면은 박자 카메라 없음
+
+
 class HDoc(hyper.Doc):
     def __init__(self, seed: int):
         from . import skin as _skin
@@ -138,13 +141,21 @@ class HDoc(hyper.Doc):
         self.js.append(f'tl.fromTo("#{i}",{{opacity:0,scale:1.8}},{{opacity:1,scale:1,duration:0.28,ease:"power4.in"}},{at:.2f});')
         self.sfx.append(("impact-bass-1", at + 0.25))
 
+    def _hud_or_items(self) -> list:
+        """출처 줄·장 꼬리표는 박자 카메라(#cam) 밖에 둔다 — 카메라가 다가가도 잘리지 않게 (v27)."""
+        if getattr(self, "cam", False):
+            if not hasattr(self, "hud"):
+                self.hud = []
+            return self.hud
+        return self.items
+
     def label(self, text: str, dark: bool = False):
         if not text:
             return
         i = self._id()
         col = "#FFFFFF" if dark else "#5a5f6a"
         bg = "rgba(0,0,0,.45)" if dark else "rgba(251,248,241,.85)"
-        self.items.append(f'<div id="{i}" style="position:absolute;right:56px;top:40px;padding:6px 14px;background:{bg};border-radius:6px;'
+        self._hud_or_items().append(f'<div id="{i}" style="position:absolute;right:56px;top:40px;padding:6px 14px;background:{bg};border-radius:6px;'
                           f'font-family:sans;font-size:24px;color:{col};white-space:nowrap">{_e(text)}</div>')
         self.js.append(f'tl.fromTo("#{i}",{{opacity:0}},{{opacity:1,duration:0.4}},0.2);')
 
@@ -157,7 +168,7 @@ class HDoc(hyper.Doc):
         lum = sum(int(acc[k:k + 2], 16) * w for k, w in ((0, .299), (2, .587), (4, .114)))
         on_acc = "#111111" if lum > 150 else "#fff"   # 밝은 강조색(청사진의 노랑) 위에는 검은 글자
         back = "background:rgba(12,12,14,.55);padding:4px 14px 4px 4px;border-radius:6px;" if dark else ""   # 밝은 영상 위에서도 읽히게
-        self.items.append(f'<div id="{i}" style="position:absolute;left:56px;top:38px;font-family:sans-x;font-size:26px;color:{col};white-space:nowrap;{back}">'
+        self._hud_or_items().append(f'<div id="{i}" style="position:absolute;left:56px;top:38px;font-family:sans-x;font-size:26px;color:{col};white-space:nowrap;{back}">'
                           f'<span style="background:{self.red};color:{on_acc};padding:2px 12px;border-radius:4px;margin-right:12px">{_e(num)}</span>{_e(title)}</div>')
         self.js.append(f'tl.fromTo("#{i}",{{opacity:0,x:-20}},{{opacity:1,x:0,duration:0.4}},0.15);')
 
@@ -170,7 +181,17 @@ class HDoc(hyper.Doc):
         self.rough("line", [W / 2 - w / 2, y + size * 0.72, W / 2 + w / 2, y + size * 0.72 + 3], self.red, 3.5, at=at + 0.3, dur=0.35, roughness=1.0)
 
     def html(self, duration: float, bg_name: str) -> str:
-        base = super().html(duration, bg_name)
+        cam = getattr(self, "cam", False)
+        keep = self.items
+        if cam:
+            self.items = keep + ["<!--CAMEND-->"] + list(getattr(self, "hud", []))
+        try:
+            base = super().html(duration, bg_name)
+        finally:
+            self.items = keep
+        if cam:   # 박자 카메라: 그림(잉크 SVG + 요소)만 #cam 안에, 출처 줄·꼬리표는 밖에
+            base = base.replace('<svg id="ink"', f'<div id="cam" style="position:absolute;left:0;top:0;width:{W}px;height:{HH}px;transform-origin:50% 50%">'
+                                + '<svg id="ink"', 1).replace("<!--CAMEND-->", "</div>", 1)
         media = "".join(self.media)
         base = base.replace('<div id="layer"', media + '<div id="layer"', 1)
         if getattr(self, "top", None):   # 겹치기(layers)의 영상 액자: 렌더러가 찾도록 #layer 밖, 그 위에
@@ -1013,6 +1034,8 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
         os.environ["YTFLOW_SKIN"] = scene_skin
     try:
         D = HDoc(sc["id"] * 7 + 3)
+        # v27 박자 카메라 (manual/09 §6, 2026-11-15 사용자: "영상이 정적이다, 멈춰 있는 부분이 많다"): 시장 브랜드 기본 켬, spec camera: "calm" 이면 끔
+        D.cam = spec.get("camera", "beat" if spec.get("brand") == "market" else "calm") == "beat" and sc.get("type") not in CAM_SKIP
     finally:
         if _env_skin is None:
             os.environ.pop("YTFLOW_SKIN", None)

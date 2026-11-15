@@ -64,6 +64,10 @@ def apply(D, spec: dict, sc: dict, bt: list, dur: float):
             D.js.append(f'tl.to("#root",{{clipPath:"circle(0% at 50% 50%)",duration:0.3,ease:"power2.in"}},{t:.2f});')
         if k == "push":   # 소리는 장이 바뀔 때만, 작게 (v12)
             D.sfx.append(("whoosh-short", max(0.0, dur - 0.25)))
+    # ---- v27 박자 카메라 (manual/09 §6): 박자마다 밀고 당기며 옮겨 가고, 머무는 동안에도 계속 움직임 — 멈춘 화면 없게
+    if getattr(D, "cam", False):
+        _beat_camera(D, sc, bt, dur)
+        return
     # ---- 장면 안 움직임 (카메라가 박자마다 다가감)
     fx = sc.get("fx") or []
     if sc.get("type") not in NO_PULSE and not ({"tilt", "dolly"} & set(fx if isinstance(fx, list) else [fx])):
@@ -246,3 +250,23 @@ def situation_skin(sc: dict, base_skin: str) -> str | None:
                 if cand != base_skin:
                     return cand
     return None
+
+
+def _beat_camera(D, sc: dict, bt: list, dur: float) -> None:
+    """시장 채널 v27 (2026-11-15 사용자: "영상이 정적이다 — 하는 말은 많은데 45일·60일만 강조된 채 멈춰 있다").
+    #cam(그림만, 출처 줄 밖)을 박자마다 새 구도로 옮긴다: 밀기(1.07)·당기기(1.0)를 번갈아, 좌우·상하로 조금씩.
+    2.6초 넘게 한 구도에 머물지 않도록 박자를 2~3초 조각으로 나눠 계속 이동 (호기심 stage 카메라의 가벼운 판, README §2-5)."""
+    D.css.append("#cam{will-change:transform}")
+    # 폭은 작게: 확대 ≤4.5%, 좌우 ±22px, 위로는 올리지 않음 — 제목이 출처 줄에 닿거나 오른쪽 숫자 카드가 잘리지 않게 (2026-11-15 프레임 확인)
+    shots = [(1.00, 0, 0), (1.045, -22, 14), (1.02, 18, 6), (1.04, 20, 18), (1.012, -16, 8), (1.035, 0, 20)]
+    k_shot = (sc.get("id", 0) * 2) % len(shots)
+    D.js.append(f'tl.set("#cam",{{scale:{shots[k_shot][0]},x:{shots[k_shot][1]},y:{shots[k_shot][2]}}},0);')
+    segs = []
+    for b0, bd in bt:
+        n = max(1, round(bd / 2.6))
+        segs += [(b0 + bd * j / n, bd / n) for j in range(n)]
+    for t0, d in segs:
+        k_shot = (k_shot + 1) % len(shots)
+        z, x, y = shots[k_shot]
+        D.js.append(f'tl.to("#cam",{{scale:{z},x:{x},y:{y},duration:{max(0.8, d):.2f},ease:"sine.inOut"}},{max(0.0, t0 - 0.1):.2f});')
+

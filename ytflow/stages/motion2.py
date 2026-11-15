@@ -81,8 +81,8 @@ class Stage:
         do = m["do"]
         x, y = m.get("x", 540), m.get("y", 760)
         lab = m.get("label", "")
-        lab_html = (f'<div style="position:absolute;left:-60px;right:-60px;bottom:-58px;text-align:center;white-space:nowrap;font-family:gx,sans-x;font-size:{m.get("lfs", 34)}px;color:{self.th["label"]};'
-                    f'-webkit-text-stroke:2px #000;paint-order:stroke fill">{_e(lab)}</div>') if lab else ""
+        lab_html = (f'<div style="position:absolute;left:-60px;right:-60px;bottom:-62px;text-align:center;white-space:nowrap;font-family:gx,sans-x;font-size:{m.get("lfs", 34)}px">'
+                    f'<span style="display:inline-block;padding:2px 12px;border-radius:8px;background:rgba(10,12,16,.62);color:#F4F6FA">{_e(lab)}</span></div>') if lab else ""   # 바탕을 깔아 어떤 배경에서도 대비 확보 (2026-11-15 layout_qa 대비 2.19:1)
         if do == "folder":
             inner = (f'<div style="position:absolute;inset:0;perspective:700px">'
                      f'<div style="position:absolute;left:0;top:20px;width:124px;height:52px;background:#E9A92E;border-radius:14px 14px 0 0"></div>'
@@ -110,7 +110,7 @@ class Stage:
             self.js.append(f'tl.fromTo("#{did} .gr",{{rotation:-120}},{{rotation:240,duration:1.0,ease:"power2.out"}},{t:.3f});')   # 한 바퀴 돌고 멈춤 (계속 돌면 산만)
         elif do == "icon":
             inner = (f'<div style="position:absolute;inset:0;border-radius:50%;background:{m.get("bg", self.th["icon_bg"])};{("border:5px solid " + self.th["ring"] + ";") if self.th["ring"] else ""}display:flex;align-items:center;'
-                     f'justify-content:center;font-size:{m.get("size", 110)}px;box-shadow:0 12px 30px rgba(0,0,0,.45)">{_e(m.get("icon", "★"))}</div>{lab_html}')
+                     f'justify-content:center;font-size:{m.get("size", 110)}px;color:#FFFFFF;box-shadow:0 12px 30px rgba(0,0,0,.45)">{_e(m.get("icon", "★"))}</div>{lab_html}')   # color: 이모지 글자색 기본 검정 → 대비 검사 오탐 (2026-11-15)
             did = self._box(m["id"], x, y, m.get("d", 240), m.get("d", 240), inner)
             self._enter(did, t, m.get("from"), x, y)
         elif do == "count":
