@@ -7,12 +7,15 @@
 - NASA images-api (퍼블릭 도메인) — media.py/clips 쪽에서 사용.
 - 위키미디어 공용(Commons) API: 주제에 맞는 사진 (v15 — 장 표지가 늘 NASA 사진이 되지 않게).
   라이선스는 퍼블릭 도메인·CC0·CC BY 만 (CC BY-SA·NC·ND 는 거름). 출처 표기(credit)를 함께 저장.
+- 스미스소니언 Open Access API (2026-11-15): 박물관 소장품 사진. 이미지마다 usage.access 가 'CC0' 인 것만.
+  키: 환경변수 SI_API_KEY (api.data.gov 무료 키). 없으면 DEMO_KEY (시간당 30회 정도 — 가끔 쓰기엔 충분).
 
 사진은 still_to_clip() 으로 16:9 무음 영상(세로 사진은 흐린 배경 채움)으로 바꿔
 hybrid.json 의 footage 에 넣습니다. 하이브리드 렌더러가 천천히 다가가는 움직임을 더합니다.
 
     python -m ytflow archive search "influenza 1918" [--films]
     python -m ytflow archive commons "exam classroom"
+    python -m ytflow archive si "steam locomotive"
 """
 from __future__ import annotations
 
@@ -137,7 +140,41 @@ def commons_file(title: str, width: int = 1920) -> dict | None:
     return None
 
 
+def si_search(term: str, n: int = 12) -> list[dict]:
+    """스미스소니언 Open Access — CC0 이미지만. [{title, license, url, page, unit, credit}]"""
+    import os
+    key = os.environ.get("SI_API_KEY") or "DEMO_KEY"
+    q = urllib.parse.urlencode({"q": f"{term} AND online_media_type:Images", "rows": min(100, n * 4), "api_key": key})
+    d = json.loads(_get("https://api.si.edu/openaccess/api/v1.0/search?" + q))
+    out = []
+    for x in (d.get("response") or {}).get("rows", []):
+        dn = (x.get("content") or {}).get("descriptiveNonRepeating") or {}
+        for m in (dn.get("online_media") or {}).get("media", []):
+            if m.get("type") != "Images" or (m.get("usage") or {}).get("access") != "CC0":
+                continue
+            res = {r.get("label", ""): r.get("url", "") for r in m.get("resources", [])}
+            url = res.get("High-resolution JPEG") or res.get("Screen Image") or m.get("content", "")
+            if not url:
+                continue
+            import re as _re
+            title = _re.sub(r"<[^>]+>", "", x.get("title") or "").strip()[:80]
+            unit = dn.get("data_source") or dn.get("unit_code", "")
+            out.append({"title": title, "license": "CC0", "url": url, "page": dn.get("record_link", ""), "unit": unit,
+                        "size": f"{m.get('width', '')}x{m.get('height', '')}",
+                        "credit": f"CC0 · {unit} · 스미스소니언 Open Access · {title[:50]}"})
+            break   # 한 소장품에 사진 한 장
+        if len(out) >= n:
+            break
+    return out
+
+
 def main(argv: list[str]) -> None:
+    if argv and argv[0] == "si":
+        for t in argv[1:]:
+            print("#", t)
+            for r in si_search(t):
+                print(f"  CC0 | {r['size']:10s} | {r['title'][:60]} | {r['unit'][:30]} | {r['url']}")
+        return
     if argv and argv[0] == "commons":
         for k, t in enumerate(argv[1:]):
             if k:

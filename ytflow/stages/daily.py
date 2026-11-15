@@ -256,7 +256,13 @@ def run(brand: str = "market", day: str = "", project: str = "") -> Path:
     print(f"[daily] {brand} · {day} 기준")
     b = market(day, rdir / "prices") if brand == "market" else issues(day)
     (rdir / "daily_brief.json").write_text(json.dumps(b, ensure_ascii=False, indent=1), encoding="utf-8")
-    (rdir / "daily_brief.md").write_text(to_md(b), encoding="utf-8")
+    md = to_md(b)
+    try:   # 뉴스레터 화제 (2026-11-15) — inbox/newsletters/<영상 날짜>.json 에서 이 채널 몫 (단서, docs/36)
+        from . import newsletters
+        md += newsletters.section(("market",) if brand == "market" else ("issues",), day)
+    except Exception as e:  # noqa: BLE001 — 뉴스레터가 없어도 브리핑은 나와야 함
+        md += f"\n## ⑦ 뉴스레터 화제\n(읽기 실패: {e})\n"
+    (rdir / "daily_brief.md").write_text(md, encoding="utf-8")
     print(f"[daily] → {rdir / 'daily_brief.md'}")
     if brand == "market":   # SAVE(오선) 소식은 기본 확인 (2026-11-14 사용자) — 사람이 앱/웹에서 보고 표를 채움 (savecheck.py)
         from . import savecheck

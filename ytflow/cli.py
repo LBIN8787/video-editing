@@ -348,7 +348,9 @@ def main(argv: list[str] | None = None) -> None:
     ec.add_argument("source", help="공식 녹취록 PDF·텍스트 경로 또는 주소 (IR 우선)")
     ec.add_argument("--ticker", default="")
     ec.add_argument("--period", default="", help="예: 3Q26")
-    ar = sub.add_parser("archive", help="공공 기록 사진·영상 찾기 (미국 의회도서관, 퍼블릭 도메인)")
+    nl = sub.add_parser("newsletters", help="뉴스레터 → 채널별 소재 목록 (ingest 메일JSON… | rss | show [--brand b --days n] | sources), docs/36")
+    nl.add_argument("args", nargs=argparse.REMAINDER)
+    ar = sub.add_parser("archive", help="공공 기록 사진·영상 찾기: search(미국 의회도서관)·commons(위키미디어)·si(스미스소니언 CC0)")
     ar.add_argument("args", nargs="*")
     hb = sub.add_parser("hybrid", help="하이브리드 스타일 영상 만들기 (02_script/hybrid.json → final.mp4)")
     hb.add_argument("project")
@@ -565,6 +567,9 @@ def main(argv: list[str] | None = None) -> None:
     elif a.cmd == "daily":
         from .stages import daily
         daily.run(a.brand, a.date, a.project)
+    elif a.cmd == "newsletters":
+        from .stages import newsletters
+        newsletters.main(a.args)
     elif a.cmd == "archive":
         from .stages import archive
         archive.main(a.args)
