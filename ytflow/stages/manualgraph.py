@@ -363,7 +363,7 @@ def source_hash() -> str:
                     *(ROOT / "styles" / "recipes").glob("*.yaml"), *(ROOT / "skins").glob("*/skin.yaml"), TECHNIQUES,
                     *(ROOT / "topics").glob("*/topic.yaml")])
     for f in files:
-        if f.name == "audit.md":   # 검토 보고서는 그래프 원본이 아님
+        if f.name in ("audit.md", "10-when-to-use.md"):   # 검토 보고서·용도표(생성물)는 그래프 원본이 아님
             continue
         if f.exists():
             h.update(f.name.encode()); h.update(f.read_bytes())
@@ -470,7 +470,7 @@ def polarity_lines(secs: list[dict]) -> list[dict]:
     out = []
     for s in secs:
         body = s.get("body", "")
-        if "규칙의 네 층" in s.get("title", "") or "기록용 — 지금 기본값이 아닙니다" in body:   # 설명·기록용 절은 지금 규칙이 아님
+        if "규칙의 네 층" in s.get("title", "") or "기록용 — 지금 기본값이 아닙니다" in body or s["doc"] == "doc:10":   # 설명·기록용·용도표는 규칙 줄이 아님
             continue
         for ln in body.splitlines():
             if ln.lstrip().startswith(">"):   # 인용(사용자 원문·옛 기준)은 규칙 줄이 아님
@@ -488,6 +488,7 @@ def polarity_lines(secs: list[dict]) -> list[dict]:
 # ------------------------------------------------------------------ 용어 층: '그래서 저게 뭐야?' — 스타일·장면 종류·효과·그래픽 팩·움직임 용어
 GLOSSARY = MANUAL / "glossary.yaml"
 TECHNIQUES = ROOT / "styles" / "techniques.yaml"
+USAGE = MANUAL / "usage.yaml"
 TECH_STATUS = {"have": "이미 있음", "partial": "비슷한 것 있음", "candidate": "후보 (아직 없음)", "hold": "보류"}
 CAT_LABEL = {"technique": "연출 기법", "style": "편집 스타일", "scene": "장면 종류", "fx": "시각 효과", "skin": "그래픽 팩", "motion": "움직임", "measure": "측정값"}
 ANIM_BY_KEY = {"kb": "kenburns", "zoomshot": "zoomshot", "kinetic": "kinetic", "stage": "walk", "story": "draw", "journey": "draw",
@@ -635,12 +636,36 @@ def parse_lexicon() -> list[dict]:
         if g.get("code"):
             t["code"] = [c for c in (_code_ref(x) for x in g["code"]) if c]
         t["curated"] = True
+    # 용도표 (manual/usage.yaml) — 기능마다 언제 쓰나·쓰지 않나·대신 (2026-11-15 사용자 요청, manual/10)
+    try:
+        us = yaml.safe_load(_read(USAGE)) or {}
+    except Exception:
+        us = {}
+    groups = us.get("groups") or {}
+    for k, u in (us.get("items") or {}).items():
+        t = terms.get(k) or terms.get(f"fx-{k}") or terms.get(f"skin-{k}")
+        if not t:
+            continue
+        g_ = groups.get(u.get("group"), {})
+        t.update(group=g_.get("name", u.get("group", "")), group_key=u.get("group", ""), use_when=u.get("when", ""),
+                 not_when=u.get("not_when", ""), instead_keys=u.get("instead") or [], usage_situations=u.get("situations") or [],
+                 does=u.get("does", ""))
+        if u.get("does") and (not t.get("plain") or t["plain"].startswith("장면 종류")):
+            t["plain"] = u["does"]
+    for t in terms.values():   # 편집 스타일: 레시피의 fits·roles·avoid 로 '언제'
+        if t.get("cat") == "style" and not t.get("use_when"):
+            fits = t.get("fits", "")
+            t["use_when"] = (t.get("plain") if t.get("plain") and t.get("plain") != t.get("name") and t.get("plain") != t.get("intro") else "") or \
+                f"맞는 곳 — {fits}" if fits else ""
+            t["not_when"] = t.get("not_when") or t.get("avoid", "")
+            t["group"] = t.get("group") or "편집 스타일 (장면 묶음)"
     out = []
     for t in terms.values():
         t.setdefault("name", t["key"]); t.setdefault("cat", "scene"); t.setdefault("plain", "")
         t["label"] = t["name"]
         t["cat_label"] = CAT_LABEL.get(t["cat"], t["cat"])
         t["related"] = [f"term:{r}" for r in t.pop("related_keys", []) if r in terms]
+        t["instead"] = [f"term:{r}" for r in t.pop("instead_keys", []) if r in terms]
         out.append(t)
     return out
 
@@ -679,13 +704,13 @@ def prohibitions(secs: list[dict]) -> list[dict]:
     out, seen = [], set()
     for s in secs:
         lines = s.get("body", "").splitlines()
-        if "규칙의 네 층" in s.get("title", ""):   # 층을 설명하는 절 자체는 규칙 줄이 아님
+        if "규칙의 네 층" in s.get("title", "") or s["doc"] == "doc:10":   # 층 설명 절·용도표(생성)는 규칙 줄이 아님
             continue
         whole = s["id"] == "sec:README§3"
         for ln in lines:
             t = ln.strip()
-            if not t or t.startswith("|---") or t.startswith("```"):
-                continue
+            if not t or t.startswith("|---") or t.startswith("```") or t.startswith(">") or "10-when-to-use" in t:
+                continue   # 인용(사용자 원문·옛 기준)·용도표 안내는 규칙 줄이 아님
             if whole and re.match(r"^\d+\.", t) or (not whole and any(w in t for w in PROHIBIT)):
                 clean = re.sub(r"\*\*|`", "", t).strip("|- ").strip()
                 k = _norm(clean)[:60]
@@ -1074,7 +1099,69 @@ def _steps_text(steps):
 ARTIFACT_URL = "https://claude.ai/artifact/8iBFUN2XD5j4SxtLain5uR"   # 공유 페이지 (읽기 전용) — 피드백 뒤 다시 올림 (docs/31 §8)
 
 
+def usage_md() -> str:
+    """manual/10-when-to-use.md — 용도표 (원본: manual/usage.yaml · styles/recipes · styles/techniques.yaml · manual/situations.yaml)."""
+    import yaml
+    us = yaml.safe_load(_read(USAGE)) or {}
+    groups, items = us.get("groups") or {}, us.get("items") or {}
+    from . import layers as _ly
+    sits = _ly.main_situations()
+    for tid in _ly.topic_ids():
+        for k, v in ((_ly.load_topic(tid).get("situations") or {}).get("add") or {}).items():
+            sits.setdefault(k, {**v, "_topic": tid})
+    first = {}
+    for k, v in sits.items():
+        for i, sc in enumerate(v.get("scenes") or []):
+            first.setdefault(sc, []).append(("1순위 " if i == 0 else "") + v.get("name", k) + (f" ({v['_topic']})" if v.get("_topic") else ""))
+    L = ["# 10. 언제 무엇을 쓰나 — 기능·연출·편집법 용도표", "",
+         "> 2026-11-15 사용자: \"어떤 상황에서 애니메이션을 넣고 언제 그림판을 넣는지 — 기능에 맞추어 그 기능들·연출들·편집법들이 언제 쓰이는지 먼저 정리. 이 둘만이 아니라 전체 모두.\"",
+         "> **자동 생성** (`python -m ytflow manual-graph`). 고칠 곳: 장면·움직임·효과·그래픽 팩 `manual/usage.yaml` · 편집 스타일 `styles/recipes/*.yaml`(when·fits·avoid) · 연출 기법 `styles/techniques.yaml` · 상황 `manual/situations.yaml`·`topics/`.",
+         "> 모두 '스타일 기본값' 층의 **고르는 기준**이지 금지·필수가 아닙니다 (README §3-1). 원칙(사실·라이선스·권리)은 따로 지킵니다.", "",
+         "## 1. 애니메이션 무대(`stage`) vs 이야기 그림판(`story`)", ""]
+    cs = us.get("compare_stage_story") or {}
+    for key, title in (("stage", "애니메이션 무대 `stage`"), ("story", "이야기 그림판 `story`")):
+        c = cs.get(key) or {}
+        L += [f"### {title} — {c.get('한마디', '')}", "**쓰는 때**"] + [f"- {x}" for x in c.get("쓰는 때", [])] + \
+             ["**쓰지 않는 때**"] + [f"- {x}" for x in c.get("쓰지 않는 때", [])] + [""]
+    if cs.get("둘 다"):
+        L += [f"**함께:** {cs['둘 다']}", ""]
+    L += ["## 2. 기능별 — 장면 종류·움직임·효과·겉모습", "",
+          "고르는 순서: 대본의 박자가 **하는 일**(상황) → 그 기능 묶음 → 아래 '언제'가 맞는 것 → '쓰지 않을 때'에 걸리면 '대신'.", ""]
+    for gk, g in groups.items():
+        rows = [(k, v) for k, v in items.items() if v.get("group") == gk]
+        if not rows:
+            continue
+        L += [f"### {g.get('name', gk)}", f"_{g.get('why', '')}_", "", "| 기능 | 무엇 | 언제 쓰나 | 쓰지 않을 때 | 대신 | 이 기능이 나오는 상황 |", "|---|---|---|---|---|---|"]
+        for k, v in rows:
+            key = k.replace("fx-", "").replace("skin-", "")
+            st = "; ".join(first.get(key, [])[:4])
+            L.append(f"| `{key}` | {v.get('does', '')} | {v.get('when', '')} | {v.get('not_when', '')} | {', '.join(v.get('instead') or [])} | {st} |")
+        L.append("")
+    L += ["## 3. 편집 스타일 (장면을 묶은 레시피) — `styles/recipes`", "", "| 스타일 | 상태 | 언제 (맞는 곳) | 영상 안 자리 | 쓰지 않을 때 |", "|---|---|---|---|---|"]
+    for rp in sorted((ROOT / "styles" / "recipes").glob("*.yaml")):
+        if rp.name.startswith("_"):
+            continue
+        try:
+            y = yaml.safe_load(_read(rp)) or {}
+        except Exception:
+            continue
+        fits = y.get("fits") or {}
+        when = y.get("when") or " · ".join(f"{'·'.join(map(str, v))}" for k2, v in fits.items() if v)
+        L.append(f"| `{y.get('id', rp.stem)}` {str(y.get('name', ''))[:30]} | {y.get('status', '')} | {str(when)[:120]} | {', '.join(y.get('roles') or [])} | {str(y.get('avoid', ''))[:90]} |")
+    L += ["", "## 4. 연출 기법 (화면 문법) — `styles/techniques.yaml`, docs/32", "", "| 기법 | 상태 | 언제 쓰나 | 주의 (내 피드백) |", "|---|---|---|---|"]
+    for k, v in (yaml.safe_load(_read(TECHNIQUES)) or {}).get("techniques", {}).items():
+        L.append(f"| {v.get('name', k)} | {TECH_STATUS.get(v.get('status'), '')} | {v.get('use_when', '')} | {v.get('caution', '')} |")
+    L += ["", "## 5. 상황 → 기능 (메인 + 주제 레포) — `manual/situations.yaml`, `topics/`", "", "| 상황 | 1순위 → 2순위 장면 | 함께 쓸 기법 | 피할 것 |", "|---|---|---|---|"]
+    for k, v in sits.items():
+        L.append(f"| {v.get('name', k)}{' (' + v['_topic'] + ')' if v.get('_topic') else ''} | {' → '.join(v.get('scenes') or [])} | {', '.join(v.get('techniques') or [])} | {v.get('avoid', '')} |")
+    return "\n".join(L) + "\n"
+
+
 def write(html_out: str | None = None, artifact_out: str | None = None) -> Path:
+    try:
+        (MANUAL / "10-when-to-use.md").write_text(usage_md(), encoding="utf-8")
+    except Exception as e:  # noqa: BLE001
+        print(f"[manual-graph] 용도표 만들기 실패: {e}")
     g = build()
     out = MANUAL / "graph.json"
     slim = json.loads(json.dumps(g))

@@ -20,9 +20,9 @@
 
 ## 2. 주제 `curiosity` 가 바꾸는 것
 - 매뉴얼: manual/04-curiosity.md · 화면 개성: 칠판·종이 무대 (05 §0-7)
-- 스타일 기본값 (금지 아님): `backbone: ['story', 'stage']`, `camera: fixed`, `script_review: True`, `knowledge_ratio: 0.3`
+- 스타일 기본값 (금지 아님): `camera: fixed`, `script_review: True`, `knowledge_ratio: 0.3`
 - 이 주제에서 기본으로 쓰지 않는 기법: gl-transitions, whip-pan
-- 더한 상황: character-acts, reveal, scale · 바꾼 상황: open-scene, change · 뺀 상황: command, ai-ask, rank
+- 더한 상황: character-acts, build-up, reveal, scale · 바꾼 상황: open-scene, change · 뺀 상황: command, ai-ask, rank
 
 ## 3. 상황 → 화면 (이 주제의 유효 표)
 | 상황 | 출처 | 1순위 → 2순위 장면 | 연출 기법 (상태) | 피할 것 |
@@ -40,7 +40,8 @@
 | 바뀌었다·변했다 (동사) | 주제가 바꿈 | stage | morph(후보), match-move(후보) | 바뀐 전후를 글자로만 |
 | 화면의 한 곳을 가리킨다 | 메인 | zoomshot | rough-highlight(비슷한 것 있음), spotlight(있음) | 줌 3번 이상 |
 | 꼭 기억할 한 문장 (결론·훅) | 메인 | kinetic → card_type → recap | split-reveal(비슷한 것 있음), match-move(후보) | 영상 내내 키네틱, 자막과 같은 문장 다시 쓰기 |
-| 주인공이 무언가를 한다 | 주제가 더함 | stage → story | stagger(있음), draw-on(있음) | 사진·쪽지를 쌓기, 소제목 글자 |
+| 주인공이 무언가를 한다 | 주제가 더함 | stage → illust | stagger(있음), draw-on(있음) | 사진·쪽지를 쌓기, 소제목 글자 |
+| 여러 장소·인물·날짜를 엮어 한 장으로 | 주제가 더함 | story → timeline → map_causal | draw-on(있음), stagger(있음) | 요소 6개 넘게 쌓기 (콜라주, v22 기각) |
 | 답을 밝히는 순간 (반전) | 주제가 더함 | stage → card_type | morph(후보), match-move(후보), pull-back(후보) | 답을 앞에서 미리 말하기 |
 | 크기·시간의 규모를 느낀다 | 주제가 더함 | stage → people → timeline | stagger(있음), pull-back(후보) | 큰 숫자 글자만 |
 
@@ -66,7 +67,7 @@
 | 16 | stage | 답을 밝히는 순간 (반전) | stage → card_type | morph(후보), match-move(후보), pull-back(후보) |
 | 17 | bignum | 숫자·지표가 움직였다 | chart → bignum → bars | count-up(있음), scramble(후보) |
 | 18 | stage ⚠ | 둘을 비교한다 | versus → bars → compare | split-screen(비슷한 것 있음), chart-morph(후보) |
-| 19 | stage | 주인공이 무언가를 한다 | stage → story | stagger(있음), draw-on(있음) |
+| 19 | stage | 주인공이 무언가를 한다 | stage → illust | stagger(있음), draw-on(있음) |
 | 20 | bignum | (못 찾음) | | |
 | 21 | stage ⚠ | 어디서 어디로 움직였다 | journey → usmap | motion-path(비슷한 것 있음), draw-on(있음) |
 | 22 | kinetic | (못 찾음) | | |

@@ -6,7 +6,8 @@ channels: [ch-knowledge]
 manual: [manual/04-curiosity.md]
 look: 칠판·종이 무대 (05 §0-7)
 defaults:
-  backbone: [stage]         # v34: 애니메이션 무대가 기본, 이야기 그림판(story)은 쌓지 않을 때만 보조 (04 §0-4·0-5)
+  # 뼈대를 하나로 고정하지 않음 (2026-11-15 사용자: "언제 애니메이션을, 언제 그림판을 — 기능에 맞추어 먼저 정리") → 박자가 하는 일이 고름 (manual/10 §1)
+  #   주인공이 무언가를 한다 → stage · 여러 장소·인물·날짜를 엮어 한 장으로 → story
   camera: fixed             # 04 §0-5: 카메라는 고정이 기본, 시간·공간 이동일 때만
   script_review: true       # v23 편집 전 대본만 사용자 검토
   knowledge_ratio: 0.3      # v23 지식 문장 ≤30%
@@ -24,10 +25,17 @@ situations:
     character-acts:
       name: 주인공이 무언가를 한다
       signals: ['걸어', '앉', '일어나', '집어', '닫', '열었', '쓰러', '들고', '만들었', '시도했']
-      scenes: [stage, story]
+      scenes: [stage, illust]
       techniques: [stagger, draw-on]
       avoid: 사진·쪽지를 쌓기, 소제목 글자
       why: 한 화면 한 생각, 대본의 동사를 그림이 (v22)
+    build-up:
+      name: 여러 장소·인물·날짜를 엮어 한 장으로
+      signals: ['그 사이', '한편', '그러는 동안', '이렇게 해서', '지금까지', '모두 모으면', '이어졌', '이어집니다', '연결']
+      scenes: [story, timeline, map_causal]
+      techniques: [draw-on, stagger]
+      avoid: 요소 6개 넘게 쌓기 (콜라주, v22 기각)
+      why: 앞에 그린 것이 뒤의 의미가 될 때 — 마지막에 한 화면으로 모아 대비·질문 (manual/10 §1)
     reveal:
       name: 답을 밝히는 순간 (반전)
       signals: ['사실은', '알고 보니', '바로', '그 답은', '이름이 붙', '역설']

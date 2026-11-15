@@ -20,7 +20,7 @@
 | 16 | stage | 답을 밝히는 순간 (반전) | stage → card_type | morph(후보), match-move(후보), pull-back(후보) |
 | 17 | bignum | 숫자·지표가 움직였다 | chart → bignum → bars | count-up(있음), scramble(후보) |
 | 18 | stage ⚠ | 둘을 비교한다 | versus → bars → compare | split-screen(비슷한 것 있음), chart-morph(후보) |
-| 19 | stage | 주인공이 무언가를 한다 | stage → story | stagger(있음), draw-on(있음) |
+| 19 | stage | 주인공이 무언가를 한다 | stage → illust | stagger(있음), draw-on(있음) |
 | 20 | bignum | (못 찾음) | | |
 | 21 | stage ⚠ | 어디서 어디로 움직였다 | journey → usmap | motion-path(비슷한 것 있음), draw-on(있음) |
 | 22 | kinetic | (못 찾음) | | |

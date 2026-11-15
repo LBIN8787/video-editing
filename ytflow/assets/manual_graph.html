@@ -1099,7 +1099,7 @@ function renderTerms(){
     ${lexCat === "technique" ? `<div class="al-filter"><span class="empty">연출 기법 — 깃허브 등 열린 구현을 조사한 카탈로그 (styles/techniques.yaml, docs/32). 모두 '스타일 기본값' 층이라 금지도 MUST 도 아닙니다.</span>
       ${[["all", "모두"], ["have", "이미 있음"], ["partial", "비슷한 것 있음"], ["candidate", "후보"], ["hold", "보류"]].map(([k, l]) => `<button data-ls="${k}" aria-pressed="${lexSt === k}">${l} ${k === "all" ? terms.filter(t => t.cat === "technique").length : terms.filter(t => t.tech_status === k).length}</button>`).join("")}</div>` : ""}
     <div class="lex">${list.map(t => `<button class="lexcard" data-term="${esc(t.id)}"><span class="chips">${t.tech_status ? `<span class="chip ${t.tech_status === "have" ? "pass" : t.tech_status === "hold" ? "reject" : t.tech_status === "candidate" ? "pend" : ""}">${esc(t.tech_status_label)}</span>` : ""}<span class="chip">${esc(t.cat_label)}</span>${t.status ? `<span class="chip ${t.status === "approved" ? "pass" : ""}">${esc(STATUS_WORD[t.status] || t.status)}</span>` : ""}<span class="chip">매뉴얼·코드 ${t.mentioned_in.length}곳</span></span>
-      <b>${esc(t.short || t.name)}</b>${demo(t.anim)}<p>${esc(t.plain)}</p></button>`).join("") || `<p class="empty">찾는 말이 없습니다.</p>`}</div>`;
+      <b>${esc(t.short || t.name)}</b>${demo(t.anim)}<p>${esc(t.plain)}</p>${t.use_when ? `<p style="color:var(--pass)">언제: ${esc(t.use_when)}</p>` : `<p style="color:var(--pend)">언제 쓰는지 아직 정하지 않음</p>`}</button>`).join("") || `<p class="empty">찾는 말이 없습니다.</p>`}</div>`;
   const qi = $("#lex-q"); qi.oninput = () => { lexQ = qi.value; const pos = qi.selectionStart; renderTerms(); const n = $("#lex-q"); n.focus(); n.setSelectionRange(pos, pos); };
   $("#view").querySelectorAll("[data-lc]").forEach(b => b.onclick = () => { lexCat = b.dataset.lc; lexSt = "all"; renderTerms(); });
   $("#view").querySelectorAll("[data-ls]").forEach(b => b.onclick = () => { lexSt = b.dataset.ls; renderTerms(); });
@@ -1115,7 +1115,11 @@ function termCard(n){
   if (n.look && n.look !== n.name && n.look !== n.plain) h += `<div><div class="label">화면에서는</div><p style="margin:2px 0 0">${esc(n.look)}</p></div>`;
   if (n.intro && n.intro !== n.plain) h += `<div><div class="label">스타일 문서 첫 줄</div><p style="margin:2px 0 0">${esc(n.intro)}</p></div>`;
   if (n.tech_status) h = h.replace('<div class="chips">', `<div class="chips"><span class="chip ${n.tech_status === "have" ? "pass" : n.tech_status === "hold" ? "reject" : n.tech_status === "candidate" ? "pend" : ""}">${esc(n.tech_status_label)}</span>${n.group ? `<span class="chip">${esc(n.group)}</span>` : ""}<span class="chip">스타일 기본값 층 — 금지 아님</span>`);
-  if (n.use_when) h += `<div><div class="label">언제 쓰나</div><p style="margin:2px 0 0">${hl(n.use_when)}</p></div>`;
+  if (n.group) h = h.replace('<div class="chips">', `<div class="chips"><span class="chip">기능: ${esc(n.group)}</span>`);
+  if (n.does && n.does !== n.plain) h += `<div><div class="label">무엇을 하나</div><p style="margin:2px 0 0">${hl(n.does)}</p></div>`;
+  if (n.use_when) h += `<div class="callout" style="background:var(--pass-soft);border-color:var(--pass)"><b>언제 쓰나</b><br>${hl(n.use_when)}</div>`;
+  if (n.not_when) h += `<div class="callout"><b>쓰지 않을 때</b><br>${hl(n.not_when)}</div>`;
+  if ((n.instead || []).length) h += `<div><div class="label">그럴 때 대신</div><div class="chips">${n.instead.map(id => N[id] ? `<button class="tchip" data-term="${esc(id)}"><i>${esc(N[id].cat_label)}</i>${esc(N[id].short || N[id].name)}</button>` : "").join("")}</div></div>`;
   if (n.caution) h += `<div class="callout"><b>${n.cat === "technique" ? "내 피드백과 부딪히는 점·주의" : "헷갈리기 쉬운 점"}</b><br>${hl(n.caution)}</div>`;
   if (n.how) h += `<div><div class="label">어떻게 만들어지나</div><p style="margin:2px 0 0">${esc(n.how)}</p></div>`;
   (n.code || []).forEach(c => h += `<div class="codeln"><small>${esc(c.file)}${c.line ? ":" + c.line : ""}</small>${esc(c.src)}</div>`);
@@ -1123,7 +1127,7 @@ function termCard(n){
   if ((n.related || []).length) h += `<div><div class="label">닮은 기존 용어 (이미 있는 것)</div><div class="chips">${n.related.map(id => N[id] ? `<button class="tchip" data-term="${esc(id)}"><i>${esc(N[id].cat_label)}</i>${esc(N[id].short || N[id].name)}</button>` : "").join("")}</div></div>`;
   if ((n.techniques || []).length) h += `<div><div class="label">이것과 닮은 연출 기법 (조사한 후보 포함)</div><div class="chips">${n.techniques.map(id => N[id] ? `<button class="tchip" data-term="${esc(id)}"><i>${esc(N[id].tech_status_label)}</i>${esc(N[id].short || N[id].name)}</button>` : "").join("")}</div></div>`;
   if (n.enable) h += `<div><div class="label">켜고 끄는 법</div><p style="margin:2px 0 0;font-family:var(--mono);font-size:12px">${esc(n.enable)}</p></div>`;
-  if (n.avoid) h += `<div><div class="label">쓰면 안 되는 때</div><p style="margin:2px 0 0">${esc(n.avoid)}</p></div>`;
+  if (n.avoid && n.avoid !== n.not_when) h += `<div><div class="label">쓰면 안 되는 때</div><p style="margin:2px 0 0">${esc(n.avoid)}</p></div>`;
   if (n.fits) h += `<dl class="kv"><dt>맞는 곳</dt><dd>${esc(n.fits)}</dd>${n.demo ? `<dt>시험작</dt><dd>${esc(n.demo)}</dd>` : ""}${n.doc ? `<dt>문서</dt><dd>${esc(n.doc)}</dd>` : ""}${n.skill ? `<dt>스킬</dt><dd>skills/${esc(n.skill)}</dd>` : ""}</dl>`;
   if ((n.scenes || []).length) h += `<div><div class="label">이 스타일이 쓰는 장면 종류</div><div class="chips">${n.scenes.map(id => `<button class="tchip" data-term="${esc(id)}">${esc(N[id]?.name || id)}</button>`).join("")}</div></div>`;
   if ((n.used_by || []).length) h += `<div><div class="label">이 장면을 쓰는 편집 스타일</div><div class="chips">${n.used_by.map(id => `<button class="tchip" data-term="${esc(id)}">${esc(N[id]?.short || N[id]?.name || id)}</button>`).join("")}</div></div>`;

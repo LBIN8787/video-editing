@@ -172,6 +172,11 @@ def build() -> dict:
                 if c.get("line") is None:
                     items.append({"kind": "coderef", "level": "fix", "file": "manual/glossary.yaml", "line": 0,
                                   "text": f"{n['name']} → {c['file']}", "why": "용어 사전의 code 글자를 그 파일에서 못 찾음"})
+    # 용도가 정해지지 않은 기능 (2026-11-15 사용자: 기능마다 언제 쓰는지 먼저 정리) — 새 장면·움직임·효과·팩이 생기면 잡힘
+    for t in g["nodes"]:
+        if t["kind"] == "term" and t["cat"] in ("scene", "motion", "fx", "skin", "measure", "technique", "style") and not t.get("use_when"):
+            items.append({"kind": "nousage", "level": "ask", "file": "manual/usage.yaml", "line": 0, "text": f"{t['cat_label']}: {t['name']}",
+                          "why": "언제 쓰나·쓰지 않나·대신이 정해지지 않음 — usage.yaml (스타일은 레시피 when·fits, 기법은 techniques.yaml) 에 초안을 써서 확인받기"})
     # 주제 레포가 가리키는 장면·기법이 있나
     scene_ok = {t["key"] for t in g["nodes"] if t["kind"] == "term"}
     tech_ok = set(ly.techniques())
@@ -212,7 +217,7 @@ def build() -> dict:
             "items": items, "resolved": resolved, "log": log, "fixed_by_agent": []}
 
 
-KIND = {"conflict": "충돌 후보", "overfit": "과적합 후보", "pending": "반영 대기", "untiered": "층 미정 피드백", "misaligned": "어긋난 해석",
+KIND = {"nousage": "용도 미정 기능", "conflict": "충돌 후보", "overfit": "과적합 후보", "pending": "반영 대기", "untiered": "층 미정 피드백", "misaligned": "어긋난 해석",
         "retired": "폐지된 기준이 남음", "ref": "깨진 참조", "coderef": "코드 위치 바뀜", "topic": "주제 레포 오류", "stale": "옛 그래프"}
 
 

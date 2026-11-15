@@ -181,7 +181,7 @@ python -m ytflow style-pick <프로젝트>   # topic_brief.json → 영상 전�
 미리 비교: `python -m ytflow skin-preview <프로젝트> --skins paper-sketch,dark-doc,newsprint`.
 
 ## 2. 장면 단위: 연출 type 고르기 (말하는 내용 → 화면)
-> 이 표의 **기계가 읽는 원본은 `manual/situations.yaml`** (메인 공통 상황)이고, 주제마다 다른 것은 `topics/<brand>/topic.yaml` 에 있습니다. 영상 한 편은 `python -m ytflow edit-plan <프로젝트>` 가 박자마다 상황을 찾아 이 표대로 채웁니다 (docs/33). 둘이 다르면 yaml 이 우선입니다.
+> 기능마다 **언제 쓰고·쓰지 않고·대신 무엇을** 은 `manual/10-when-to-use.md` (원본 `manual/usage.yaml`). 이 표의 **기계가 읽는 원본은 `manual/situations.yaml`** (메인 공통 상황)이고, 주제마다 다른 것은 `topics/<brand>/topic.yaml` 에 있습니다. 영상 한 편은 `python -m ytflow edit-plan <프로젝트>` 가 박자마다 상황을 찾아 이 표대로 채웁니다 (docs/33). 둘이 다르면 yaml 이 우선입니다.
 | 이 문장이 하는 일 | 1순위 type | 2순위 | 피할 것 |
 |---|---|---|---|
 | 사건의 **장면**을 연다 (사람·장소·날짜) | `kb` (자료 화면 켄 번스 + 도장) | `footage` | 글자 카드 |
