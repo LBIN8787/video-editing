@@ -61,6 +61,16 @@
         "steps",
         "scripts"
       ]
+    },
+    {
+      "name": "rea-video",
+      "kind": "git",
+      "repo": "https://github.com/JuneYaooo/rea-video",
+      "commit": "5b09832ab64c334045b99aaaeb8207e86da765e8",
+      "install": "python -m venv <D 드라이브 경로>\\reavenv && pip install \"rea-video[ocr] @ git+https://github.com/JuneYaooo/rea-video@5b09832ab64c334045b99aaaeb8207e86da765e8\"",
+      "license": "Apache-2.0",
+      "used_by": "레퍼런스 영상 역분석 — 장면(샷)별 화면 종류(2D 애니메이션·코드 렌더·사진 밀기 등)·자막·효과음·편집 리듬을 VIDEO.md 로 정리. 움직임 문법 분석(docs/31)",
+      "network": "첫 실행 때 분리·인식 모델만 내려받음(GitHub releases·modelscope). VLM 은 --vlm 과 키가 있을 때만 호출(쓰지 않음, 에이전트가 직접 보고 review/apply-review). 유료 생성(remake-run)은 쓰지 않음"
     }
   ]
 }
