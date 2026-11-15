@@ -654,6 +654,8 @@ def prohibitions(secs: list[dict]) -> list[dict]:
     out, seen = [], set()
     for s in secs:
         lines = s.get("body", "").splitlines()
+        if "규칙의 네 층" in s.get("title", ""):   # 층을 설명하는 절 자체는 규칙 줄이 아님
+            continue
         whole = s["id"] == "sec:README§3"
         for ln in lines:
             t = ln.strip()

@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-11-15T06:28:45",
+ "generated": "2026-11-15T06:28:57",
  "source_hash": "4dd51d6b0d47",
  "stats": {
   "manual_version": 31,
@@ -20,16 +20,16 @@
   "conflicts": 3,
   "code": 58,
   "terms": 99,
-  "bans": 115,
+  "bans": 110,
   "feedback": 1,
   "tiers": {
-   "principle": 46,
+   "principle": 45,
    "standard": 77,
    "style": 39,
-   "trial": 10
+   "trial": 6
   },
-  "overfit": 39,
-  "principle_bans": 40
+  "overfit": 35,
+  "principle_bans": 39
  },
  "pending": [],
  "status_labels": {
@@ -2174,101 +2174,6 @@
    "tier_note": "",
    "tier_fixed": false,
    "tier_label": "영구 원칙"
-  },
-  {
-   "section": "sec:README§3-1",
-   "text": "영구 원칙 | 사실·법·권리·안전 (§3 의 7가지, 투자 권유·사적 인물·라이선스·우회) | \"하지 않는다\" — 진짜 금지 | MUST",
-   "themes": [],
-   "absolute": false,
-   "must": true,
-   "tier_key": "ban:17297c3b",
-   "tier_auto": "principle",
-   "why": "사실·법·권리·안전에 관한 말",
-   "overfit": false,
-   "single": true,
-   "tier": "principle",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "영구 원칙"
-  },
-  {
-   "section": "sec:README§3-1",
-   "text": "스타일 기본값 | 소리·카메라·바탕·효과·스타일 비율 (배경음 없음, 확대 끔, 저음 타격음 끔) | \"기본은 켬/끔, 대본에서 바꿀 수 있음\" — 금지라고 쓰지 않음, 범위(채널·스타일)를 적음 | SHOULD 까지",
-   "themes": [
-    "motion",
-    "sound",
-    "background",
-    "variety",
-    "script"
-   ],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:6a9c13c0",
-   "tier_auto": "trial",
-   "why": "스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨",
-   "overfit": true,
-   "single": true,
-   "tier": "trial",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "실험 기록"
-  },
-  {
-   "section": "sec:README§3-1",
-   "text": "실험 기록 | 영상 한 편·한 시도에 대한 반응 (\"이 영상의 반짝 효과음은 빼기\") | 매뉴얼 금지·MUST 로 옮기지 않음 — feedback.yaml·reviews.md 에 남고 다음 시도의 참고 | 없음",
-   "themes": [
-    "sound"
-   ],
-   "absolute": false,
-   "must": true,
-   "tier_key": "ban:7ede675c",
-   "tier_auto": "trial",
-   "why": "스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨",
-   "overfit": true,
-   "single": true,
-   "tier": "trial",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "실험 기록"
-  },
-  {
-   "section": "sec:README§3-1",
-   "text": "기각·피드백을 매뉴얼로 옮기기 전에 층부터 정합니다: python -m ytflow feedback \"원문\" --scope principle|standard|style|trial. 애매하면 사용자에게 묻고, 묻지 못하면 실험 기록으로 둡니다(한 번의 반응을 영구 금지로 만들지 않음).",
-   "themes": [],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:341460a2",
-   "tier_auto": "trial",
-   "why": "스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨",
-   "overfit": true,
-   "single": true,
-   "tier": "trial",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "실험 기록"
-  },
-  {
-   "section": "sec:README§3-1",
-   "text": "같은 스타일 주제가 '더 하라'↔'덜 하라'로 두 번 이상 오가면 그 주제는 금지가 아니라 기본값으로 둡니다.",
-   "themes": [
-    "variety"
-   ],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:6e67ab11",
-   "tier_auto": "trial",
-   "why": "스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨",
-   "overfit": true,
-   "single": true,
-   "tier": "trial",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "실험 기록"
   }
  ],
  "tier_labels": {
