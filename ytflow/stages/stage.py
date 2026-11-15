@@ -488,8 +488,13 @@ class Stage:
         if self.hud:
             D.items.append(f'<div id="{self.p}hud" style="position:absolute;left:0;top:0;width:{W}px;height:{H_}px;pointer-events:none">' + "".join(self.hud) + '</div>')
         D.js.extend(self.js)
-        # ① 대기 동작: 등장한 그림은 끝까지 숨 쉬듯 위아래·좌우로 (그림마다 박자 다르게)
-        for i, (did, t, kind) in enumerate(self.idle):
+        # v32 (2026-11-15 사용자: "동영상의 이점 = 말하는 것이 화면에 생긴다, 카메라를 반드시 움직이라는 뜻이 아니었다"):
+        # 카메라·원근·대기 동작은 금지도 필수도 아닌 '스타일 기본값' — 기본 끔, 장면이나 대본 맨 위에서 켬 (manual/README §2-5)
+        #   "camera": "fixed"(기본) | "move"(박자마다 주인공 쪽으로)   "perspective": true   "idle": true
+        opt = {**(self.sc.get("_spec_stage") or {}), **{k: self.sc[k] for k in ("camera", "perspective", "idle") if k in self.sc}}
+        cam_move = opt.get("camera", "fixed") in ("move", "beat")
+        # ① 대기 동작(켰을 때만): 등장한 그림이 숨 쉬듯 위아래·좌우로 (그림마다 박자 다르게)
+        for i, (did, t, kind) in enumerate(self.idle if opt.get("idle") else []):
             per = 1.7 + (i % 5) * 0.23
             n = int((dur - t - 0.8) / per)
             if n < 1:
@@ -504,16 +509,17 @@ class Stage:
             x = min(0.0, max(W - W * z, W / 2 - cx * z))
             y = min(0.0, max(H_ - H_ * z, H_ / 2 - cy * z))
             return f"scale:{z:.4f},x:{x:.1f},y:{y:.1f}"
-        D.js.append(f'tl.set("{cam}",{{{view(W / 2, H_ / 2, 1.07)}}},0);')
+        D.js.append(f'tl.set("{cam}",{{{view(W / 2, H_ / 2, 1.07 if cam_move else 1.0)}}},0);')
         # ④ 원근: 종이가 살짝 누운 채(rotationX) 박자마다 좌우로 천천히 돌아감(rotationY) — 2.5D 깊이 (미주일기 '원근 바닥')
         tilt = f"#{self.p}tilt"
-        D.js.append(f'tl.set("{tilt}",{{rotationX:7,rotationY:-3}},0);')
-        for k, b in enumerate(self.beats):
+        if opt.get("perspective"):
+            D.js.append(f'tl.set("{tilt}",{{rotationX:7,rotationY:-3}},0);')
+        for k, b in enumerate(self.beats if opt.get("perspective") else []):
             ry = (3.5 if k % 2 == 0 else -3.5)
             rx = 6 + (k % 3)
             D.js.append(f'tl.to("{tilt}",{{rotationX:{rx},rotationY:{ry},duration:{max(1.5, b["d"] + 0.5):.2f},ease:"sine.inOut"}},{max(b["t0"] - 0.2, 0):.2f});')
         cx, cy, z = W / 2, H_ / 2, 1.07
-        for k, b in enumerate(self.beats):
+        for k, b in enumerate(self.beats if cam_move else []):
             f = b["focus"]
             if f:
                 fx = sum(p[0] for p in f) / len(f)
@@ -553,8 +559,8 @@ class Stage:
         if nowhy:
             q.append(f"stage/no_why: 박자 {nowhy} 에 why(이 그림·움직임의 의도) 없음")
         static = [k + 1 for k, b in enumerate(beats) if not any(a["do"] in MOTION for a in b.get("act", []))]
-        if beats and len(static) / len(beats) > 0.3:
-            q.append(f"stage/static: 움직임 없는 박자 {static} ({len(static)}/{len(beats)})")
+        if beats and len(static) / len(beats) > 0.3:   # v32: 렌더를 막는 검사가 아니라 참고 (스타일 기본값)
+            print(f"[stage] 참고: 움직임 없는 박자 {static} ({len(static)}/{len(beats)}) — 그 박자에 말하는 것이 화면에 생기는지 확인")
         vis, worst, wt = {}, 0, 0.0
         txt_worst = 0
         for t, sgn, mid, kind in sorted(self.events, key=lambda e: (e[0], e[1] == "+")):

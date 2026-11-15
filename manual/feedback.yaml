@@ -2,9 +2,31 @@
 # python -m ytflow feedback "원문" [--kind direction|clarify|tool|review] [--project P] [--about 의도ID] [--pending]
 # kind: direction 방향·기준 요청 · clarify 뜻 바로잡기(모델 해석이 틀렸을 때) · tool 도구 요청 · review 영상에 대한 말
 # about: 이 말이 바로잡는 의도 ID (manual-ui '의도 정렬'의 intent:xxxx 에서 xxxx) · pending: 매뉴얼 '반영 대기'에도 넣음
+# scope: 이 말이 어느 층인가 — principle 영구 원칙 · standard 작업 기준 · style 스타일 기본값 · trial 실험 기록(금지로 만들지 않음)
 feedback:
 - date: '2026-11-15'
   kind: clarify
   quote: 나는 동영상의 이점을 살린다 즉 정적인 단순 다음 ppt 다음 ppt가 아니라 영상의 이점을 살려라 라고 했지 반드시 카메라를 움직여라 라고 하려고 했던게 아닌데
   about: 759c49eb
   note: v25 해석(README §2-5 카메라 계속 움직임·정지 비율 ≤0.3)이 뜻과 다름 — 의도 정렬에 과잉 해석으로 판정 (사용자 확인 대기)
+- date: '2026-11-15'
+  kind: direction
+  quote: '움직임 규칙: 말이 화면에 생기는 쪽으로 (카메라 고정이 기본, 정지 비율은 참고)'
+  about: 759c49eb
+  note: 매뉴얼 검토 질문 1 답 — README §2-5 v32
+  scope: standard
+- date: '2026-11-15'
+  kind: direction
+  quote: 스타일 MUST 들은 전부 굳이 필요하지 않다고 생각합니다. 고정규칙이 아니라 필요에 따라 유동적으로 할 수 있도록 해주세요
+  note: 매뉴얼 검토 질문 2 답 — check G5 스타일 MUST 11줄·호기심 정지 비율 → SHOULD, 05·06 v32
+  scope: style
+- date: '2026-11-15'
+  kind: direction
+  quote: '영상 길이: 모든 롱폼 10분+, 시사 빠른 정리만 예외(5~8분), 많이 짧으면 쇼츠로 하세요'
+  note: 매뉴얼 검토 질문 3 답 — README §2-4·08 §3·check G6 v32
+  scope: standard
+- date: '2026-11-15'
+  kind: direction
+  quote: '호기심 채널 화면 뼈대: 애니메이션 무대가 기본'
+  note: 매뉴얼 검토 질문 4 답 — 04 §0-4 이야기 그림판은 보조로, topics/curiosity v32
+  scope: style

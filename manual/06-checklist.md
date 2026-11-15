@@ -15,7 +15,7 @@ python -m ytflow check <프로젝트> --upto G4    # 대본까지만
 ## G1 주제 (`01_research/topic_brief.json`, 스키마 `schemas/topic_brief.schema.json`)
 | 등급 | 항목 | 자동 |
 |---|---|---|
-| MUST | `brand` 가 ai/market/curiosity 중 하나, `desire` 와 `viewer_question` 이 채워짐 | ✅ |
+| MUST | `brand` 가 ai/market/curiosity/issues 중 하나, `desire` 와 `viewer_question` 이 채워짐 | ✅ |
 | MUST | `trigger` (무엇이 이 주제를 지금 건드렸나)와 `why_now` 가 있음 | ✅ |
 | MUST | 욕망 점수 합계 ≥ 12, 욕망 강도 ≥ 2, 보여 줄 자료 ≥ 2 (01-desire-map §3) | ✅ |
 | MUST | 수요 증거 1개 이상 (`demand_evidence`: 검색·아웃라이어·뉴스 순위) | ✅ |
@@ -44,7 +44,7 @@ python -m ytflow check <프로젝트> --upto G4    # 대본까지만
 |---|---|---|
 | MUST | `core_message`, `question`, `logic` 이 있음 | ✅ |
 | MUST | **인트로 없음**: 첫 장면이 인사·순서 예고 `intro` 가 아니고, 인사·채널 소개·구독 부탁 문구 없음 — README §2-1 (v24) | ✅ |
-| SHOULD | 장 표지마다 진행 멘트(앞 장 한 줄 정리 + 다음 질문) | EYE |
+| SHOULD | 장 표지에서 앞 장의 결론 → 다음 질문으로 이어짐 (순서 예고·번호 세기 없이, README §2-1) | EYE |
 | MUST | 숫자 비교 기준 `compare_to` ≥ 1, 비유 `analogies` ≥ 2, 과거 사례 `past_cases` ≥ 1, `glossary` ≥ 1 | ✅ |
 | MUST | **투자 권유 표현 0개** (사세요·매수 추천·지금이 기회·무조건 오른다·수익 보장 …) | ✅ |
 | MUST | 레퍼런스 채널 이름 0개 | ✅ |
@@ -55,22 +55,22 @@ python -m ytflow check <프로젝트> --upto G4    # 대본까지만
 | SHOULD | issues: 말하듯 쓴 대본 — 묻는 문장(?) 3개 이상, 보도문 말투('~것으로 알려졌다') 비율 낮게 (08 §0-1) | ✅ |
 
 ## G5 연출
+> **v32 (2026-11-15 사용자: "고정 규칙이 아니라 필요에 따라 유동적으로")** — 스타일·연출의 숫자 규칙은 모두 **권고(SHOULD)** 입니다. 렌더를 막지 않고, 어기면 이유를 `style_pick.md` 에 한 줄 (README §3-1 규칙의 네 층 — 스타일 기본값).
+
 | 등급 | 항목 | 자동 |
 |---|---|---|
-| MUST | 같은 type 3연속 없음 (chapter 제외) | ✅ |
-| MUST | **배경 바꿔 쓰기**: 장면 목적에 맞는 바탕 3종 이상 (photo·grid·spot·tint·film, 05 §0-2) | ✅ |
-| SHOULD | 같은 바탕 3장면 연속 없음 (film 제외) | ✅ |
-| SHOULD | **v15 카테고리 개성**: `hybrid.json` 에 `brand` — 장 표지·인과 지도·듀오톤이 카테고리답게 (05 §0-7) | ✅ |
-| SHOULD | **v15 장 표지 사진은 주제에 맞게**: 같은 사진 두 번·NASA 사진 2장 이상 없음, 출처(credit) 표시 | ✅ |
-| SHOULD | v10: 장식 효과(dust·leak) 2장면 이하 — 내용이 담긴 볼거리 먼저 (05 §0-4) | ✅ |
-| MUST | **반복 피로**: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기 = 자료·지도·사진 겹치기·시각 효과 fx, 05 §0-3) | ✅ |
-| SHOULD | 눈요기 장면 60% 이상 · 같은 효과 3연속 없음 · 효과 3종 이상 · 같은 채널 직전 편과 구성 겹침 70% 이하 | ✅ |
-| MUST | **강조 아껴 쓰기**: 강조(words·number·vox·kinetic) 1분에 1번 이하, 한 장면에 1개까지, words 는 핵심 단어 1~3개만 — 자막과 같은 문장을 위에 반복하면 불합격 | ✅ |
-| MUST | **스타일 조합**: 롱폼 4종 이상(쇼츠 2종), 한 스타일 40% 이하(쇼츠 60%), 겹친 장면(`layers`) 3개 이상(쇼츠 1개), 같은 스타일 3장면 연속 없음 — 한 스타일로만 만들면 불합격 | ✅ |
+| SHOULD | 같은 type 3연속 없음 (chapter 제외) | ✅ |
+| SHOULD | 배경 바꿔 쓰기: 장면 목적에 맞는 바탕 여러 가지 (권고 3종, 05 §0-2) · 같은 바탕 3장면 연속 없음 (film 제외) | ✅ |
+| SHOULD | v15 카테고리 개성: `hybrid.json` 에 `brand` — 장 표지·인과 지도·듀오톤이 카테고리답게 (05 §0-7) | ✅ |
+| SHOULD | v15 장 표지 사진은 주제에 맞게: 같은 사진 두 번·NASA 사진 2장 이상 없음, 출처(credit) 표시 | ✅ |
+| SHOULD | 장식 효과(dust·leak) 2장면 안팎 — 내용이 담긴 볼거리 먼저 (05 §0-4) | ✅ |
+| SHOULD | 반복 피로: 글씨·도형뿐인 장면이 길게 이어지지 않게 · 눈요기 장면 60% 안팎 · 같은 효과 3연속 없음 · 같은 채널 직전 편과 구성 겹침 70% 이하 (05 §0-3) | ✅ |
+| SHOULD | 강조 아껴 쓰기: 1분에 1번 안팎, 한 장면에 1개, words 는 핵심 단어 1~3개 — 자막과 같은 문장을 위에 반복하지 않음 (05 §0-1) | ✅ |
+| SHOULD | 스타일 조합: 상황에 맞춰 섞기 (권고 롱폼 4종·한 스타일 40%·겹친 장면 3개·같은 스타일 3장면 연속 없음, 뼈대 스타일은 예외) | ✅ |
 | SHOULD | 자료 화면 공백 ≤ 45초 (렌더 후 `hybrid_timeline.json` 으로 계산) | ✅ |
 | SHOULD | 약 3분마다 장 표지/질문 (최장 간격 ≤ 200초) | ✅ |
 | SHOULD | 그래픽 팩이 브랜드에 맞는 등록부 레시피의 팩 (`styles/recipes`, `edit.yaml` 의 skin) | ✅ |
-| SHOULD | `style-pick` 기록이 있음 (`01_research/style_pick.json`) — 상황에 맞춰 골랐다는 증거 | ✅ |
+| SHOULD | `style-pick` 기록 (`01_research/style_pick.json`) · `edit-plan` 기록 (`02_script/EDIT_CONTEXT.md`, 메인 → 주제 레포 → 상황별 장면·기법, docs/33) | ✅ |
 
 ## G6 완성본
 | 등급 | 항목 | 자동 |
@@ -79,9 +79,10 @@ python -m ytflow check <프로젝트> --upto G4    # 대본까지만
 | MUST | 레이아웃 점검 비어 있음 (`04_assets/layout_qa.json`: 화살표·글자 겹침) | ✅ |
 | MUST | 싱크: 자막 0.5초 안 ≥ 95%, 화면−소리 ≤ 0.1초 (`sync_qa.json`), 중앙값 ≤ 0.2초 | ✅ |
 | MUST | 프레임 시트를 눈으로 확인 (`final_sheet.png`): 잘린 글자·겹침·빈 화면 | EYE |
-| SHOULD | **움직임(v12)**: 완성본 측정 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (`motion.json`) — 숫자를 채우려 움직임을 더하지 않음 | ✅ |
+| MUST | 길이: 롱폼 10분 이상 (시사 빠른 정리 `"format": "quick"` 은 5분 이상, 그보다 짧으면 쇼츠로 — README §2-4) | ✅ |
+| SHOULD | **움직임 (참고값)**: 완성본 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5, 호기심 ≤0.3 (`motion.json`) — 숫자를 채우려 화면을 흔들지 않음. 기준은 '말하는 것이 그 순간 화면에 생기나' (README §2-5 v32) | ✅ |
 | EYE | 화면이 정신없지 않은가 · 배경음이 억지스럽지 않은가 (애매하면 빼기) | 사람 눈 |
-| SHOULD | 바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(미색 종이 등) 연속 금지 (05 §0-6) | ✅ |
+| SHOULD | 바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(미색 종이 등)이 이어지지 않게 (05 §0-6, 권고) | ✅ |
 | SHOULD | 음량 −14 LUFS 근처 (`delivery_check.json`) | ✅ |
 | SHOULD | 업로드 최종본은 ElevenLabs 목소리 (edge-tts 는 초안) | ✅ (`03_voice/el` 또는 channel tts) |
 

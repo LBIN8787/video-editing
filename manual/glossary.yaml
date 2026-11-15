@@ -20,7 +20,7 @@ terms:
     look: 화면 전체가 박자마다 조금씩 밀리고 당겨지며, 지금 말하는 대상 쪽으로 다가감. 머무는 동안에도 아주 천천히 움직임
     how: 렌더러가 박자 시각마다 화면 묶음(cam)에 이동·확대 애니메이션을 붙임. 자료 화면·지도·키네틱·장 표지 같은 장면은 빼고 적용
     code: ["ytflow/stages/hybrid.py::D.cam = spec.get(\"camera\"", "ytflow/stages/edit10.py::def _beat_camera", "ytflow/stages/hybrid.py::CAM_SKIP ="]
-    enable: 'hybrid.json 에 "camera": "beat" 를 적을 때만 켜짐 (v30부터 기본 끔)'
+    enable: '기본 끔 — 시장·하이브리드 장면은 "camera": "beat", 애니메이션 무대(stage)는 "camera": "move" (v30·v32)'
     anim: camera-beat
     caution: 화면이 움직인다고 '말하는 내용이 화면에 생기는' 것은 아님 — 정지 비율 숫자는 좋아지지만 의미는 그대로일 수 있음 (v30)
 
@@ -41,9 +41,9 @@ terms:
     aliases: [대기 동작, 숨 쉰다, 숨 쉬듯]
     plain: 화면에 나온 사람·사물 그림이 가만히 있지 않고 아주 조금씩 위아래·좌우로 흔들리는 것
     look: 멈춘 것처럼 보이는 그림도 1~2픽셀씩 계속 들썩임
-    how: 애니메이션 무대(stage) 렌더러가 등장한 그림마다 끝까지 반복 움직임을 붙임
-    code: ["ytflow/stages/stage.py::self.idle: list"]
-    enable: stage 장면에서 자동
+    how: 애니메이션 무대(stage) 렌더러가 켜졌을 때 등장한 그림마다 끝까지 반복 움직임을 붙임
+    code: ["ytflow/stages/stage.py::self.idle: list", "ytflow/stages/stage.py::cam_move = opt.get"]
+    enable: '기본 끔 (v32) — 장면이나 대본 맨 위 "idle": true'
     anim: idle
     caution: "'완전히 멈춘 프레임 없음'을 만들기 위한 장치 — 정지 비율은 낮아지지만 내용이 바뀌는 것은 아님"
 
@@ -55,7 +55,7 @@ terms:
     look: 화면이 평평한 종이가 아니라 책상 위 종이를 비스듬히 보는 듯한 깊이
     how: 무대 전체에 CSS 원근(perspective)과 rotationX·rotationY 애니메이션
     code: ["ytflow/stages/stage.py::# ④ 원근"]
-    enable: stage 장면에서 자동
+    enable: '기본 끔 (v32) — 장면이나 대본 맨 위 "perspective": true'
     anim: perspective
 
   walk-in:

@@ -466,7 +466,12 @@ def polarity_lines(secs: list[dict]) -> list[dict]:
     """지금 매뉴얼에서 같은 주제를 '더 하라'·'덜 하라'로 말하는 줄 (충돌 후보, 자동 추정)."""
     out = []
     for s in secs:
-        for ln in s.get("body", "").splitlines():
+        body = s.get("body", "")
+        if "규칙의 네 층" in s.get("title", "") or "기록용 — 지금 기본값이 아닙니다" in body:   # 설명·기록용 절은 지금 규칙이 아님
+            continue
+        for ln in body.splitlines():
+            if ln.lstrip().startswith(">"):   # 인용(사용자 원문·옛 기준)은 규칙 줄이 아님
+                continue
             th = _themes(ln)
             if not th:
                 continue
