@@ -161,7 +161,115 @@ svg .muted{fill:var(--muted)}
 @media (max-width:640px){.pol{grid-template-columns:minmax(0,1fr)}}
 .pol div{font-size:12px;display:flex;flex-direction:column;gap:6px;min-width:0}
 .pol p{margin:0;padding:6px 8px;border-radius:4px;background:var(--sunk)}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+/* 작업 절차 */
+.proc-wrap{padding:10px 8px 16px;display:flex;justify-content:center}
+.proc-wrap svg{width:100%;max-width:560px;height:auto;display:block}
+.pnode{cursor:pointer}
+.pnode:focus-visible rect,.pnode:focus-visible polygon{stroke:var(--accent);stroke-width:2.5}
+.pnode:hover rect,.pnode:hover polygon{stroke:var(--accent)}
+.pbox{fill:var(--panel);stroke:var(--line);stroke-width:1.2}
+.pbox.start{fill:var(--sunk)} .pbox.gate{fill:var(--panel)} .pbox.dec{fill:var(--accent-soft);stroke:var(--accent)}
+.pbox.pass{fill:var(--pass-soft);stroke:var(--pass)} .pbox.rej{fill:var(--reject-soft);stroke:var(--reject)} .pbox.loop{fill:var(--pend-soft);stroke:var(--pend)}
+.parr{stroke:var(--muted);fill:none;stroke-width:1.3}
+.parr.back{stroke:var(--reject);stroke-dasharray:4 3}
+.parr.loop{stroke:var(--pend)}
+.ptxt{font-size:12px;font-weight:700;fill:var(--fg)} .psub{font-size:9.5px;fill:var(--muted)} .plab{font-size:10px;fill:var(--muted)}
+.pbadge{fill:var(--reject)} .pbadge-t{fill:#fff;font-size:9px;font-weight:700}
+.pgate{fill:var(--sunk);stroke:var(--line)} .pgate-t{font-size:9px;fill:var(--muted);font-family:var(--mono)}
+/* 피드백 이야기 */
+.story{display:flex;flex-direction:column;gap:12px;padding:14px}
+.st-card{border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.st-step{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;font-size:12.5px;align-items:start}
+.st-step > span:first-child{font-family:var(--mono);font-size:10px;color:var(--muted);text-align:center;padding-top:2px}
+.st-step .q{font-size:14px;border-left:3px solid var(--fg);padding-left:8px}
+.st-arrow{color:var(--muted);font-size:11px;padding-left:30px}
+/* 한눈에 */
+.now{padding:14px;display:flex;flex-direction:column;gap:18px}
+.now section{display:flex;flex-direction:column;gap:8px;scroll-margin-top:12px}
+.now h3{margin:0;font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.now .lead{margin:0;font-size:12.5px;color:var(--muted)}
+.key{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px}
+.key div{font-size:12px;padding:6px 8px;border-radius:4px;border-left:4px solid var(--line);background:var(--sunk)}
+.key .k-pass{border-color:var(--pass)} .key .k-ban{border-color:var(--reject)} .key .k-conf{border-color:var(--pend)} .key .k-mis{border-color:var(--reject);border-left-style:dashed} .key .k-rej{border-color:var(--muted)}
+.item{all:unset;box-sizing:border-box;display:flex;flex-direction:column;gap:3px;padding:8px 10px;border-radius:5px;border-left:4px solid var(--line);background:var(--sunk);cursor:pointer;font-size:12.5px;min-width:0;overflow-wrap:anywhere}
+.item:hover,.item:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.item{display:block} .item > small,.item > b,.item > span{display:block;margin-top:2px} .item .term{display:inline}
+.item.pass{border-color:var(--pass)} .item.ban{border-color:var(--reject)} .item.ban.abs{background:var(--reject-soft)} .item.conf-p{border-color:var(--reject)} .item.conf-m{border-color:var(--accent)} .item.mis{border-color:var(--reject);border-left-style:dashed} .item.rej{border-color:var(--muted)}
+.item small{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.items{display:flex;flex-direction:column;gap:6px}
+.conf{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+@media (max-width:700px){.conf{grid-template-columns:minmax(0,1fr)}}
+.conf > div{display:flex;flex-direction:column;gap:6px;min-width:0}
+.side{font-size:12px;font-weight:700}
+button.tile{all:unset;box-sizing:border-box;cursor:pointer;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:8px 12px}
+button.tile:hover,button.tile:focus-visible{border-color:var(--accent)}
+/* 용어 */
+.term{all:unset;cursor:pointer;border-bottom:1.5px dotted var(--accent);color:inherit}
+.term:hover,.term:focus-visible{background:var(--accent-soft)}
+.tchip{cursor:pointer;font:inherit;font-size:11.5px;padding:2px 8px;border-radius:10px;border:1px solid var(--accent);background:var(--accent-soft);color:var(--fg);white-space:nowrap}
+.tchip i{font-style:normal;color:var(--muted);font-size:10.5px;margin-right:4px}
+.lex{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;padding:14px}
+.lexcard{all:unset;box-sizing:border-box;cursor:pointer;border:1px solid var(--line);border-radius:6px;padding:10px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.lexcard:hover,.lexcard:focus-visible{border-color:var(--accent)}
+.lexcard b{font-size:13.5px} .lexcard p{margin:0;font-size:12px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.codeln{font-family:var(--mono);font-size:11px;background:var(--sunk);border-radius:4px;padding:6px 8px;overflow-x:auto;white-space:pre}
+.codeln small{display:block;color:var(--muted);margin-bottom:2px}
+.callout{font-size:12.5px;padding:8px 10px;border-radius:4px;background:var(--pend-soft);border-left:3px solid var(--pend)}
+.in-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.in-head .btns{display:flex;gap:6px}
+.in-head button{font-size:12px;padding:2px 8px}
+#in-close{display:none}
+/* 작은 움직임 예시 */
+.demo{display:flex;flex-direction:column;gap:4px}
+.demo .screen{position:relative;width:100%;max-width:320px;aspect-ratio:16/9;background:var(--sunk);border:1px solid var(--line);border-radius:4px;overflow:hidden;perspective:300px}
+.demo svg{width:100%;height:100%;display:block}
+.demo .cap{font-size:11px;color:var(--muted)}
+.demo .ink{fill:var(--fg)} .demo .acc{fill:var(--accent)} .demo .red{fill:var(--reject)} .demo .soft{fill:var(--line)}
+.demo .stk{stroke:var(--fg);fill:none;stroke-width:2}
+.d-cam{transform-origin:80px 45px;animation:dcam 6s ease-in-out infinite}
+@keyframes dcam{0%,10%{transform:translate(28px,6px) scale(1.5)}33%,43%{transform:translate(0,-4px) scale(1.5)}66%,76%{transform:translate(-30px,6px) scale(1.5)}100%{transform:translate(28px,6px) scale(1.5)}}
+.d-push{transform-origin:80px 45px;animation:dpush 5s linear infinite alternate}
+@keyframes dpush{from{transform:scale(1)}to{transform:scale(1.14)}}
+.d-kb{transform-origin:60px 40px;animation:dkb 7s ease-in-out infinite alternate}
+@keyframes dkb{from{transform:scale(1.05) translate(4px,0)}to{transform:scale(1.25) translate(-8px,-3px)}}
+.d-tilt{position:absolute;inset:12% 18%;background:var(--panel);border:1px solid var(--line);border-radius:3px;transform-origin:50% 100%;animation:dtilt 3.5s cubic-bezier(.2,.7,.2,1) infinite;display:grid;place-items:center;font-weight:700;font-size:20px}
+@keyframes dtilt{0%{transform:rotateX(70deg);opacity:0}40%,85%{transform:rotateX(0);opacity:1}100%{transform:rotateX(0);opacity:0}}
+.d-persp{position:absolute;inset:14% 14%;background:var(--panel);border:1px solid var(--line);border-radius:3px;animation:dpersp 6s ease-in-out infinite alternate;display:grid;place-items:center;font-size:12px}
+@keyframes dpersp{from{transform:rotateX(18deg) rotateY(-10deg)}to{transform:rotateX(18deg) rotateY(10deg)}}
+.d-idle1{animation:didle 1.8s ease-in-out infinite alternate}.d-idle2{animation:didle 2.3s ease-in-out .4s infinite alternate}
+@keyframes didle{from{transform:translateY(0)}to{transform:translateY(-3px)}}
+.d-walk{animation:dwalk 4s ease-out infinite}
+@keyframes dwalk{0%{transform:translateX(-70px)}10%{transform:translateX(-60px) translateY(-3px)}20%{transform:translateX(-48px)}30%{transform:translateX(-36px) translateY(-3px)}40%{transform:translateX(-24px)}50%{transform:translateX(-12px) translateY(-3px)}60%,100%{transform:translateX(0)}}
+.d-zoom{transform-origin:112px 30px;animation:dzoom 4s ease-in-out infinite}
+@keyframes dzoom{0%,20%{transform:scale(1)}50%,85%{transform:scale(2.2)}100%{transform:scale(1)}}
+.d-box{animation:dbox 4s ease-in-out infinite}
+@keyframes dbox{0%,40%{opacity:0}55%,85%{opacity:1}100%{opacity:0}}
+.d-pop{opacity:0;animation:dpop 6s infinite}
+@keyframes dpop{0%{opacity:0;transform:scale(.6)}6%{opacity:1;transform:scale(1.08)}10%,92%{opacity:1;transform:scale(1)}100%{opacity:0}}
+.d-pop{transform-box:fill-box;transform-origin:center}
+.d-say{animation:dsay 6s linear infinite}
+@keyframes dsay{from{width:0}to{width:150px}}
+.d-a{animation:dfadeA 4s ease-in-out infinite}.d-b{animation:dfadeB 4s ease-in-out infinite}
+@keyframes dfadeA{0%,40%{opacity:1}60%,100%{opacity:0}}@keyframes dfadeB{0%,40%{opacity:0}60%,100%{opacity:1}}
+.d-ca{animation:dcutA 3s steps(1) infinite}.d-cb{animation:dcutB 3s steps(1) infinite}
+@keyframes dcutA{0%{opacity:1}50%{opacity:0}}@keyframes dcutB{0%{opacity:0}50%{opacity:1}}
+.d-draw{stroke-dasharray:260;stroke-dashoffset:260;animation:ddraw 4s ease-in-out infinite}
+@keyframes ddraw{0%{stroke-dashoffset:260}60%,90%{stroke-dashoffset:0}100%{stroke-dashoffset:0;opacity:0}}
+.d-scan{animation:dscan 3s linear infinite}
+@keyframes dscan{from{transform:translateY(-20px)}to{transform:translateY(100px)}}
+.d-dust{animation:ddust 5s linear infinite}
+@keyframes ddust{from{transform:translateY(10px);opacity:0}30%{opacity:.8}to{transform:translateY(-60px);opacity:0}}
+.d-leak{animation:dleak 4s ease-in-out infinite}
+@keyframes dleak{from{transform:translateX(-120px)}to{transform:translateX(180px)}}
+.d-layer{animation:dlayer 4s cubic-bezier(.2,.7,.2,1) infinite}
+@keyframes dlayer{0%{transform:translate(40px,-30px) rotate(12deg);opacity:0}30%,90%{transform:translate(0,0) rotate(-4deg);opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.demo *{animation:none!important;opacity:1!important}}
+/* 휴대폰: 속성은 아래에서 올라오는 창 */
+@media (max-width:980px){
+  aside.inspector{position:fixed;left:0;right:0;bottom:0;top:auto;max-height:78vh;border-radius:12px 12px 0 0;z-index:30;box-shadow:0 -8px 30px rgba(0,0,0,.25);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+  aside.inspector[data-empty]{display:none}
+  #in-close{display:inline-block}
+}
 </style>
 <!--DATA-->
 <div class="wrap">
@@ -174,11 +282,11 @@ svg .muted{fill:var(--muted)}
   </header>
   <div class="tiles" id="tiles"></div>
   <nav class="tabs" aria-label="보기">
-    <a href="#align">의도 정렬</a><a href="#flow">피드백 → 매뉴얼</a><a href="#map">매뉴얼 구조</a><a href="#timeline">버전 타임라인</a><a href="#edit">고치기·제어</a>
+    <a href="#now">한눈에</a><a href="#proc">작업 절차</a><a href="#align">의도 정렬</a><a href="#flow">내 피드백 → 매뉴얼</a><a href="#map">매뉴얼 구조</a><a href="#timeline">버전 타임라인</a><a href="#terms">용어 사전</a><a href="#edit">고치기·제어</a>
   </nav>
   <div class="grid">
     <main id="view" class="stage"></main>
-    <aside class="inspector" aria-live="polite"><div class="in-head">속성</div><div class="in-body" id="insp"><p class="empty">노드를 누르면 연결과 내용이 여기 나옵니다.</p></div></aside>
+    <aside class="inspector" aria-live="polite" data-empty><div class="in-head"><span>속성 · 누른 것의 뜻과 연결</span><span class="btns"><button class="btn" id="in-back" hidden>← 뒤로</button><button class="btn" id="in-close">닫기</button></span></div><div class="in-body" id="insp"><p class="empty">노드를 누르면 연결과 내용이 여기 나옵니다.</p></div></aside>
   </div>
 </div>
 <div class="toast" id="toast" hidden></div>
@@ -206,7 +314,7 @@ async function api(path, body){
   const r = await fetch(path, body ? {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(body)} : {});
   const j = await r.json(); if (!r.ok || j.error) throw new Error(j.error || r.statusText); return j;
 }
-async function reload(){ G = await api("/api/graph"); index(); renderTiles(); route(); if (selected && N[selected]) inspect(selected); }
+async function reload(){ G = await api("/api/graph"); TERMPAT = null; index(); renderTiles(); route(); if (selected && N[selected]) inspect(selected); }
 
 function nodeName(n){
   if (!n) return "";
@@ -219,6 +327,7 @@ function nodeName(n){
     case "step": return `${n.n}. ${n.label}`;
     case "code": return `${n.file.replace("ytflow/stages/","")}:${n.line}`;
     case "intent": return `“${n.quote}”`;
+    case "term": return n.name;
     default: return n.label || n.id;
   }
 }
@@ -227,19 +336,33 @@ function nodeName(n){
 function renderTiles(){
   const s = G.stats;
   const T = [
-    [`v${s.manual_version}`, "지금 매뉴얼 버전"],
-    [`${s.rejects} / ${s.passes}`, "기각 / 통과 검토"],
-    [s.pending, "반영 대기", s.pending ? "warn" : ""],
-    [`${s.rules}`, `규칙 (MUST ${s.must})`],
-    [`${s.auto} / ${s.rules}`, "자동으로 재는 규칙"],
-    [`${s.misaligned} / ${s.intents}`, "어긋난 의도 / 사용자 원문", s.misaligned ? "warn" : ""],
-    [s.conflicts, "지금 매뉴얼의 충돌 후보", s.conflicts ? "warn" : ""],
+    [s.conflicts, "충돌 후보 — 반대 방향 규칙", s.conflicts ? "warn" : "", "now:conf"],
+    [`${s.misaligned} / ${s.intents}`, "어긋난 의도 / 사용자 원문", s.misaligned ? "warn" : "", "now:mis"],
+    [s.bans, "금지·하지 않는 것", "", "now:ban"],
+    [s.passes, "통과한 영상", "", "now:pass"],
+    [s.rejects, "기각한 영상", "", "now:rej"],
+    [s.pending, "반영 대기", s.pending ? "warn" : "", "edit"],
+    [`v${s.manual_version}`, "지금 매뉴얼 버전", "", "timeline"],
+    [s.terms, "용어 (스타일·장면·움직임)", "", "terms"],
   ];
-  $("#tiles").innerHTML = T.map(([b, l, c]) => `<div class="tile ${c||""}"><b>${esc(b)}</b><span>${esc(l)}</span></div>`).join("");
+  $("#tiles").innerHTML = T.map(([b, l, c, go]) => `<button class="tile ${c||""}" data-goto="${go}"><b>${esc(b)}</b><span>${esc(l)}</span></button>`).join("");
+  $("#tiles").querySelectorAll("[data-goto]").forEach(t => t.onclick = () => { const [h, a] = t.dataset.goto.split(":"); nowFocus = a || null;
+    if (location.hash === "#" + h) route(); else location.hash = h; });
 }
 
 /* ---------- 흐름: 검토 → 버전 → 절·게이트 ---------- */
 function renderFlow(){
+  if (flowMode === "story") {
+    $("#view").innerHTML = `<div class="stage-head"><h2>내 피드백이 매뉴얼이 된 과정</h2>
+      <span class="hint">기각 하나마다: 내 말 → 모델이 옮긴 버전 → 바뀐 절·게이트 → 코드 → 그 뒤 같은 영상의 결과. 밑줄 친 말을 누르면 뜻과 구현이 나옵니다.</span>
+      <button class="btn" id="fm">연결 그림으로 보기</button></div><div class="story">${feedbackStories()}</div>`;
+    const V = $("#view");
+    $("#fm").onclick = () => { flowMode = "graph"; renderFlow(); };
+    V.querySelectorAll("[data-go]").forEach(b => b.onclick = ev => { if (ev.target.closest(".term")) return; inspect(b.dataset.go); });
+    V.querySelectorAll("[data-al]").forEach(b => b.onclick = () => { alSel = b.dataset.al; location.hash = "align"; });
+    wireTerms(V);
+    return;
+  }
   const reviews = G.nodes.filter(n => n.kind === "review");
   const versions = G.nodes.filter(n => n.kind === "version");
   const tset = new Set(G.edges.filter(e => e.kind === "touched").map(e => e.t));
@@ -276,7 +399,7 @@ function renderFlow(){
   const head = (x, t) => `<text x="${x}" y="18" font-size="11" class="muted" letter-spacing=".06em">${t}</text>`;
   $("#view").innerHTML = `
     <div class="stage-head"><h2>사용자 피드백이 매뉴얼을 바꾼 흐름</h2>
-      <span class="hint">검토 → 반영된 버전 → 그 버전이 고친 절·게이트. 줄에 올리거나 누르면 연결만 남습니다.</span></div>
+      <span class="hint">검토 → 반영된 버전 → 그 버전이 고친 절·게이트. 줄에 올리거나 누르면 연결만 남습니다.</span><button class="btn" id="fm">카드로 보기</button></div>
     <div class="stage-head legend">
       <span><i style="background:var(--reject)"></i>기각 → 반영</span><span><i style="background:var(--pass)"></i>통과 (그 버전 유지)</span>
       <span><i style="background:var(--accent)"></i>버전이 고친 곳</span>
@@ -286,16 +409,17 @@ function renderFlow(){
       ${head(xR, "검토 (날짜 · 프로젝트 · 당시 버전)")}${head(xV, "매뉴얼 버전")}${head(xT, "고친 절 · 게이트")}
       <g id="edges">${edges}</g><g id="nodes">${nodes}</g></svg></div>`;
   wireGraph();
+  $("#fm").onclick = () => { flowMode = "story"; renderFlow(); };
 }
 function connected(id){
   const set = new Set([id]);
-  const walk = (id, dir, depth) => { if (depth > 2) return; (dir === "out" ? OUT[id] : IN[id] || []).forEach(e => {
+  const walk = (id, dir, depth) => { if (depth > 2) return; ((dir === "out" ? OUT[id] : IN[id]) || []).forEach(e => {
     if (!["applied_in","approved_in","touched"].includes(e.kind)) return;
     const o = dir === "out" ? e.t : e.s; if (!set.has(o)) { set.add(o); walk(o, dir, depth + 1); } }); };
   walk(id, "out", 1); walk(id, "in", 1); return set;
 }
 function highlight(id){
-  const svg = $("#view svg"); if (!svg) return;
+  const svg = $("#view svg"); if (!svg || !svg.querySelector(".edge")) return;
   const set = id ? connected(id) : null;
   svg.querySelectorAll(".edge").forEach(p => { const on = set && set.has(p.dataset.s) && set.has(p.dataset.t);
     p.classList.toggle("hot", !!on); p.classList.toggle("dim", !!set && !on); });
@@ -401,7 +525,7 @@ function renderEdit(){
     </div>
     <div class="stage-head"><h2>매뉴얼 파일 편집</h2>
       <select id="ed-file" aria-label="파일">${docs.map(d => `<option value="${esc(d.file)}">${esc(d.file)}</option>`).join("")}
-        <option value="manual/CHANGELOG.md">manual/CHANGELOG.md</option><option value="manual/reviews.md">manual/reviews.md</option></select>
+        <option value="manual/CHANGELOG.md">manual/CHANGELOG.md</option><option value="manual/reviews.md">manual/reviews.md</option><option value="manual/glossary.yaml">manual/glossary.yaml (용어 설명)</option><option value="manual/intents.yaml">manual/intents.yaml (의도 판정)</option></select>
       <button class="btn" id="ed-load" ${dis}>열기</button><button class="btn primary" id="ed-save" ${dis}>저장</button>
       <span class="hint">절의 머리말에 (vN, 날짜 사용자: "…") 를 붙이면 그래프가 그 절과 버전을 잇습니다.</span></div>
     <div class="editor"><textarea id="ed-text" spellcheck="false" ${dis} placeholder="${LIVE ? "파일을 열면 여기서 고칩니다." : "로컬 도구(manual-ui)에서만 편집할 수 있습니다."}"></textarea></div>`;
@@ -467,7 +591,7 @@ function renderAlign(){
       return `<div class="reading ${esc(st.status)}" data-ref="${esc(r.ref)}">
         <div class="rhead"><button class="btn" data-go="${esc(r.ref)}" style="font-size:12px;padding:2px 8px"><span class="chip">${esc(kindLab)}</span> ${esc(cut(n ? nodeName(n) : r.ref, 56))}</button>
           <select data-st="${esc(r.ref)}" ${dis} aria-label="정렬 상태">${ST_ORDER.map(k => `<option value="${k}" ${st.status === k ? "selected" : ""}>${esc(S[k] || k)}</option>`).join("")}</select></div>
-        <pre class="ex ${n && n.kind === "code" ? "code" : ""}">${esc(excerpt(n, it.themes)) || "(내용을 찾지 못함 — 줄이 옮겨졌을 수 있음)"}</pre>
+        <pre class="ex ${n && n.kind === "code" ? "code" : ""}">${hl(excerpt(n, it.themes)) || "(내용을 찾지 못함 — 줄이 옮겨졌을 수 있음)"}</pre>
         <input data-note="${esc(r.ref)}" ${dis} value="${esc(st.note || "")}" placeholder="왜 그렇게 판정했나 (예: 뜻은 X 인데 Y 로 옮김)">
         ${st.by ? `<span class="by">판정: ${esc(st.by)}</span>` : ""}</div>`; };
     const manualReads = it.readings.filter(r => !r.ref.startsWith("ver:") && !(N[r.ref] && N[r.ref].kind === "code"));
@@ -519,6 +643,7 @@ function renderAlign(){
   V.querySelectorAll(".al-item").forEach(b => b.onclick = () => { alSel = b.dataset.id; renderAlign(); inspect(alSel); });
   V.querySelectorAll("[data-al]").forEach(b => b.onclick = () => { alSel = b.dataset.al; renderAlign(); });
   V.querySelectorAll("[data-go]").forEach(b => b.onclick = () => inspect(b.dataset.go));
+  wireTerms(V);
   if (!it) return;
   const d = alDraft[it.id];
   V.querySelectorAll("[data-st]").forEach(sel => sel.onchange = () => { d.readings[sel.dataset.st] = {...(d.readings[sel.dataset.st] || {}), status: sel.value, by: "사용자"}; sel.closest(".reading").className = "reading " + sel.value; });
@@ -537,6 +662,254 @@ function renderAlign(){
     try { await api("/api/intent-pending", {text}); toast("반영 대기에 넣었습니다. 고치기 전까지 check G0 가 실패합니다"); await reload(); } catch (e) { toast(e.message); } };
 }
 
+/* ---------- 작업 절차 (매뉴얼 README §2·§5 그대로) ---------- */
+const PROC = [
+  {id: "start", label: "요청 · 매일 06:05 자동", sub: "주제 또는 조사 글", kind: "start", does: "사용자가 주제·조사 글을 주거나, 매일 브리핑 채널은 06:05 KST 에 자동으로 시작합니다.", cmd: "python -m ytflow make --channel <채널> [--topic …]\npython -m ytflow daily --brand market", themes: []},
+  {id: "s1", step: 1, gate: "G1", themes: ["depth", "intent"]},
+  {id: "s2", step: 2, gate: "G2", themes: []},
+  {id: "s3", step: 3, gate: "G3", themes: ["depth"]},
+  {id: "s4", step: 4, gate: "G4", themes: ["script", "length", "intent"], cmd: "python -m ytflow validate <프로젝트>\npython -m ytflow check <프로젝트> --upto G4"},
+  {id: "d1", label: "대본만 먼저 검토", sub: "호기심 채널 · 편집 전 (v23)", kind: "dec", back: "s4", no: "고쳐서 다시", does: "호기심 채널은 편집에 들어가기 전에 대본만 사용자가 먼저 봅니다 (manual/04 §0-6). 통과해야 연출로 넘어갑니다.", themes: ["script", "intent"], sec: "sec:04§0-6"},
+  {id: "s5", step: 5, gate: "G5", themes: ["variety", "background", "emphasis", "motion"], cmd: "python -m ytflow style-pick <프로젝트>"},
+  {id: "s6", step: 6, gate: "G6", themes: ["motion", "sound", "length"], cmd: "python -m ytflow hybrid <프로젝트>\npython -m ytflow sync-qa <프로젝트>"},
+  {id: "d2", label: "check — MUST 모두 통과?", sub: "자동 검사 (manual/06)", kind: "dec", back: "s5", no: "고친 곳부터 다시", does: "python -m ytflow check 가 G0~G8 규칙을 잽니다. MUST 가 하나라도 실패하면 렌더·업로드하지 않고 고칩니다. 반영 대기가 남아 있으면 G0 에서 실패합니다.", cmd: "python -m ytflow check <프로젝트>", themes: []},
+  {id: "s7", step: 7, gate: "G7", themes: ["depth"], cmd: "python -m ytflow thumbnail <프로젝트>"},
+  {id: "s8", step: 8, gate: "G8", themes: [], cmd: "python -m ytflow upload <프로젝트> --archive"},
+  {id: "d3", label: "내 검토 — 통과? 기각?", sub: "reviews.md 에 기록", kind: "dec", does: "완성본을 보고 통과 또는 기각을 남깁니다. 통과는 그 매뉴얼 버전이 검증됐다는 뜻이고, 기각 이유는 매뉴얼을 고칠 근거가 됩니다.", cmd: "python -m ytflow review <프로젝트> --pass\npython -m ytflow review <프로젝트> --reject \"이유\"", themes: []},
+  {id: "pass", label: "통과 → 그 버전 검증", sub: "매뉴얼 그대로", kind: "pass", does: "통과한 영상의 매뉴얼 버전은 그대로 씁니다. 상태: '한눈에' 탭의 통과 목록.", themes: []},
+  {id: "r1", label: "반영 대기", sub: "CHANGELOG '반영 대기'", kind: "rej", does: "기각 이유가 CHANGELOG 의 '반영 대기'에 쌓입니다. 비우기 전에는 check G0 가 실패해서 같은 실수로 다음 영상을 만들 수 없습니다.", themes: []},
+  {id: "r2", label: "의도 확인", sub: "내 말 = 모델 해석?", kind: "rej", does: "기각 이유를 규칙으로 옮기기 전에, 내가 한 말의 뜻과 뜻하지 않은 것을 적고 모델의 해석이 맞는지 판정합니다 ('의도 정렬' 탭, manual/intents.yaml).", themes: []},
+  {id: "r3", label: "매뉴얼·코드 고치기", sub: "절 · 검사 · 렌더러", kind: "rej", does: "이유를 검사 가능한 기준으로 바꿔 매뉴얼 절·검사(checklist.py)·렌더러 기본값을 고칩니다.", themes: []},
+  {id: "r4", label: "버전 올리기 vN+1", sub: "manual-bump → 다음 영상은 새 기준", kind: "loop", does: "manual-bump 로 버전을 올리면 반영 대기가 비고, 다음 영상부터 새 기준을 씁니다. 스냅샷 브랜치 manual/vN 으로 백업합니다.", cmd: "python -m ytflow manual-bump \"요약 (고친 곳: 09 §6, G4)\"", themes: []},
+];
+function procFeedback(p){
+  const rej = G.nodes.filter(n => n.kind === "review" && n.result === "reject");
+  const gid = p.gate ? "gate:" + p.gate : null;
+  const step = p.step ? N["step:" + p.step] : null;
+  return rej.filter(r => { const e = (OUT[r.id] || []).find(x => x.kind === "applied_in"); const vid = e && e.t;
+    const touchGate = vid && gid && (OUT[vid] || []).some(x => x.kind === "touched" && x.t === gid);
+    return touchGate || (p.themes || []).some(t => r.themes.includes(t)); });
+}
+function renderProc(){
+  PROC.forEach(p => { const st = p.step ? N["step:" + p.step] : null;
+    if (st) { p.label = `${p.step}. ${st.label}`; p.sub = st.outputs; p.does = st.does; p.kind = "gate"; }
+    p.fb = procFeedback(p); N["proc:" + p.id] = {...p, id: "proc:" + p.id, kind: "proc"}; });
+  const W = 360, cx = 165, bw = 250, bh = 44, gap = 22, dh = 58;
+  let y = 10; const pos = {};
+  const main = PROC.filter(p => !["pass", "r1", "r2", "r3", "r4"].includes(p.id));
+  main.forEach(p => { const h = p.kind === "dec" ? dh : bh; pos[p.id] = {x: cx - bw / 2, y, w: bw, h, cx}; y += h + gap; });
+  y += 10;
+  pos.pass = {x: 8, y, w: 130, h: bh, cx: 73};
+  let ry = y; ["r1", "r2", "r3", "r4"].forEach(id => { pos[id] = {x: 150, y: ry, w: 180, h: bh, cx: 240}; ry += bh + gap; });
+  const H = ry + 6;
+  let g = "";
+  const arr = (x1, y1, x2, y2, cls = "") => `<path class="parr ${cls}" d="M${x1},${y1} L${x2},${y2}" marker-end="url(#ah${cls ? "-" + cls : ""})"/>`;
+  for (let i = 0; i < main.length - 1; i++) { const a = pos[main[i].id], b = pos[main[i + 1].id]; g += arr(a.cx, a.y + a.h, b.cx, b.y - 2); }
+  const d3 = pos.d3;
+  g += `<path class="parr" d="M${d3.cx - 40},${d3.y + d3.h - 14} L${pos.pass.cx},${pos.pass.y - 2}" marker-end="url(#ah)"/><text class="plab" x="${pos.pass.cx + 4}" y="${pos.pass.y - 8}">통과</text>`;
+  g += `<path class="parr back" d="M${d3.cx + 40},${d3.y + d3.h - 14} L${pos.r1.cx},${pos.r1.y - 2}" marker-end="url(#ah-back)"/><text class="plab" x="${pos.r1.cx + 6}" y="${pos.r1.y - 8}" style="fill:var(--reject)">기각</text>`;
+  ["r1", "r2", "r3"].forEach((id, i) => { const a = pos[id], b = pos[["r2", "r3", "r4"][i]]; g += arr(a.cx, a.y + a.h, b.cx, b.y - 2); });
+  const r4 = pos.r4, s1 = pos.s1;
+  g += `<path class="parr loop" d="M${r4.x + r4.w},${r4.y + r4.h / 2} H${W - 6} V${s1.y + s1.h / 2} H${s1.x + s1.w + 2}" marker-end="url(#ah-loop)"/><text class="plab" x="${W - 10}" y="${s1.y + s1.h / 2 - 6}" text-anchor="end" style="fill:var(--pend)">다음 영상</text>`;
+  PROC.filter(p => p.back).forEach(p => { const a = pos[p.id], b = pos[p.back];
+    g += `<path class="parr back" d="M${a.x + a.w - 40},${a.y + a.h / 2} H${W - 22} V${b.y + b.h / 2 + 8} H${b.x + b.w + 2}" marker-end="url(#ah-back)"/><text class="plab" x="${a.x + a.w - 30}" y="${a.y + a.h / 2 - 6}" style="fill:var(--reject)">아니요 · ${esc(p.no)}</text>`; });
+  PROC.forEach(p => { const b = pos[p.id]; const n = p.fb.length;
+    const shape = p.kind === "dec" ? `<polygon class="pbox dec" points="${b.cx},${b.y} ${b.x + b.w},${b.y + b.h / 2} ${b.cx},${b.y + b.h} ${b.x},${b.y + b.h / 2}"/>`
+      : `<rect class="pbox ${p.kind}" x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" rx="${p.kind === "start" ? 22 : 6}"/>`;
+    const gate = p.gate ? `<rect class="pgate" x="${b.x + 6}" y="${b.y + 6}" width="22" height="14" rx="3"/><text class="pgate-t" x="${b.x + 17}" y="${b.y + 16}" text-anchor="middle">${p.gate}</text>` : "";
+    const tx = p.gate ? b.x + 34 : b.cx, anchor = p.gate ? "start" : "middle";
+    const badge = n ? `<g><circle class="pbadge" cx="${b.x + b.w - 4}" cy="${b.y + 4}" r="10"/><text class="pbadge-t" x="${b.x + b.w - 4}" y="${b.y + 7.5}" text-anchor="middle">${n}</text></g>` : "";
+    g += `<g class="pnode" tabindex="0" role="button" data-p="proc:${p.id}" aria-label="${esc(p.label)}${n ? `, 내 피드백 ${n}건으로 바뀜` : ""}">${shape}${gate}
+      <text class="ptxt" x="${tx}" y="${b.y + (p.kind === "dec" ? b.h / 2 - 1 : 19)}" text-anchor="${anchor}">${esc(cut(p.label, p.kind === "dec" ? 18 : 26))}</text>
+      <text class="psub" x="${tx}" y="${b.y + (p.kind === "dec" ? b.h / 2 + 12 : 34)}" text-anchor="${anchor}">${esc(cut(p.sub || "", p.kind === "dec" ? 22 : 38))}</text>${badge}</g>`; });
+  const mk = (id, c) => `<marker id="${id}" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" style="fill:var(${c})"/></marker>`;
+  $("#view").innerHTML = `
+    <div class="stage-head"><h2>한 편을 만드는 작업 절차</h2><span class="hint">매뉴얼(README §2·§5)에 정해진 순서 그대로입니다. 빨간 숫자 = 이 단계를 바꾼 내 기각 피드백 수. 상자를 누르면 하는 일·명령·규칙·바꾼 피드백이 나옵니다.</span></div>
+    <div class="stage-head legend"><span><i style="background:var(--muted)"></i>다음 단계</span><span><i style="background:var(--reject)"></i>아니요·기각 (되돌아감)</span><span><i style="background:var(--pend)"></i>새 기준으로 다음 영상</span><span><i style="background:var(--reject);border-radius:50%"></i>내 피드백 수</span></div>
+    <div class="proc-wrap"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="작업 절차 흐름도"><defs>${mk("ah", "--muted")}${mk("ah-back", "--reject")}${mk("ah-loop", "--pend")}</defs>${g}</svg></div>`;
+  $("#view").querySelectorAll(".pnode").forEach(el => { el.onclick = () => inspect(el.dataset.p); el.onkeydown = ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); inspect(el.dataset.p); } }; });
+}
+function procCard(p){
+  const st = p.step ? N["step:" + p.step] : null;
+  let h = `<div class="chips"><span class="chip">작업 절차</span>${p.gate ? `<span class="chip">${p.gate} 게이트</span>` : ""}${p.fb.length ? `<span class="chip reject">내 피드백 ${p.fb.length}건으로 바뀜</span>` : ""}</div><h3>${esc(p.label)}</h3>`;
+  if (st) h += termChips(st);
+  h += `<div><div class="label">하는 일</div><p style="margin:2px 0 0">${hl(p.does || "")}</p></div>`;
+  if (st) h += `<dl class="kv"><dt>남는 파일</dt><dd>${esc(st.outputs)}</dd></dl>`;
+  if (p.cmd) h += `<div class="codeln"><small>명령</small>${esc(p.cmd)}</div>`;
+  if (p.sec && N[p.sec]) h += `<div class="row"><button class="btn" data-go="${esc(p.sec)}">매뉴얼 원문 보기</button></div>`;
+  if (p.gate) { const rs = G.nodes.filter(r => r.kind === "rule" && r.gate === "gate:" + p.gate);
+    h += `<div><div class="label">이 단계를 통과하려면 (${p.gate} 규칙 ${rs.length})</div>${rs.map(r => `<div style="font-size:12.5px;display:flex;gap:6px;align-items:flex-start;margin-top:4px"><span class="chip ${r.level.toLowerCase()}">${r.level}${r.auto ? " 자동" : ""}</span><span>${hl(r.label.replace(/\*\*/g, "").replace(/`/g, ""))}</span></div>`).join("")}</div>`; }
+  if (p.fb.length) h += `<div><div class="label">이 단계를 바꾼 내 피드백</div><div class="items" style="margin-top:4px">${p.fb.map(r => { const e = (OUT[r.id] || []).find(x => x.kind === "applied_in"), v = e && N[e.t];
+    return `<div class="item rej" role="button" tabindex="0" data-go="${esc(r.id)}"><small>${esc(r.date)} · ${esc(r.project.replace(/^\d{8}-/, ""))}${v ? ` → v${v.v}` : ""}</small><span>“${esc(cut(r.reason, 110))}”</span>${v ? `<span style="color:var(--muted)">→ ${hl(cut(v.summary.replace(/^v\d+:\s*/, ""), 120))}</span>` : ""}</div>`; }).join("")}</div></div>`;
+  return h;
+}
+
+/* ---------- 피드백 이야기: 내 말 → 매뉴얼 → 바뀐 곳 → 코드 → 그 뒤 ---------- */
+let flowMode = "story";
+function feedbackStories(){
+  const rej = G.nodes.filter(n => n.kind === "review" && n.result === "reject").sort((a, b) => a.date.localeCompare(b.date) || a.id.localeCompare(b.id));
+  const all = G.nodes.filter(n => n.kind === "review");
+  const intentOf = r => G.nodes.find(n => n.kind === "intent" && n.sources.some(s => s.ref === r.id));
+  return rej.map((r, i) => {
+    const e = (OUT[r.id] || []).find(x => x.kind === "applied_in"), v = e && N[e.t];
+    const touched = v ? (OUT[v.id] || []).filter(x => x.kind === "touched").map(x => x.t) : [];
+    const code = v ? (OUT[v.id] || []).filter(x => x.kind === "implemented_by").map(x => x.t) : [];
+    const next = all.filter(x => x.project === r.project && (x.date > r.date || (x.date === r.date && x.manual_version > r.manual_version))).sort((a, b) => a.manual_version - b.manual_version)[0];
+    const it = intentOf(r);
+    return `<div class="st-card">
+      <small style="font-family:var(--mono);font-size:10.5px;color:var(--muted)">#${i + 1} · ${esc(r.date)} · ${esc(r.project)} · 당시 v${r.manual_version}</small>
+      <div class="st-step"><span>내 말</span><div class="q" role="button" tabindex="0" style="cursor:pointer;border-left:3px solid var(--fg);padding-left:8px;font-size:14px" data-go="${esc(r.id)}">“${hl(r.reason)}”</div></div>
+      <div class="st-arrow">↓ 모델이 매뉴얼로 옮김</div>
+      <div class="st-step"><span>${v ? "v" + v.v : "-"}</span><div>${v ? `<button class="btn" style="font-size:11.5px;padding:1px 6px" data-go="${esc(v.id)}">v${v.v} · ${esc(v.date)}</button> ${hl(v.summary.replace(/^v\d+:\s*/, ""))}` : `<span class="empty">반영 버전을 찾지 못함</span>`}${e && e.how === "inferred" ? ` <span class="chip pend">추정</span>` : ""}</div></div>
+      ${touched.length ? `<div class="st-step"><span>바뀐 곳</span><div class="chips">${touched.map(t => `<button class="chip" style="cursor:pointer" data-go="${esc(t)}">${esc(cut(nodeName(N[t]) || t, 32))}</button>`).join("")}</div></div>` : `<div class="st-step"><span>바뀐 곳</span><span class="empty">버전 요약에 고친 절이 적혀 있지 않아 이을 수 없음</span></div>`}
+      ${code.length ? `<div class="st-step"><span>코드</span><div class="chips">${code.slice(0, 8).map(t => `<button class="chip" style="cursor:pointer" data-go="${esc(t)}">${esc(nodeName(N[t]))}</button>`).join("")}${code.length > 8 ? `<span class="chip">+${code.length - 8}</span>` : ""}</div></div>` : ""}
+      ${it && it.status !== "unreviewed" ? `<div class="st-step"><span>의도</span><button class="chip ${it.status === "misaligned" ? "reject" : "pass"}" style="cursor:pointer" data-al="${esc(it.id)}">${it.status === "misaligned" ? "내 뜻과 어긋난 해석 있음" : "내 뜻과 맞음"} — 의도 정렬에서 보기</button></div>` : ""}
+      <div class="st-arrow">↓ 그 뒤 같은 영상</div>
+      <div class="st-step"><span>결과</span>${next ? `<button class="chip ${next.result === "pass" ? "pass" : "reject"}" style="cursor:pointer" data-go="${esc(next.id)}">${next.result === "pass" ? "통과" : "다시 기각"} · ${esc(next.date)} · v${next.manual_version}${next.reason ? " — " + esc(cut(next.reason, 50)) : ""}</button>` : `<span class="empty">같은 영상을 다시 검토한 기록 없음</span>`}</div>
+    </div>`;
+  }).join("");
+}
+
+/* ---------- 한눈에: 통과·금지·충돌 후보·어긋난 의도·기각 ---------- */
+let nowFocus = null, banTheme = "all";
+function renderNow(){
+  const S = G.stats, themes = G.nodes.filter(n => n.kind === "theme");
+  const tl = k => (N["theme:" + k] || {}).label || k;
+  const reviews = G.nodes.filter(n => n.kind === "review").sort((a, b) => b.date.localeCompare(a.date));
+  const pass = reviews.filter(r => r.result === "pass"), rej = reviews.filter(r => r.result === "reject");
+  const mis = G.nodes.filter(n => n.kind === "intent" && n.status === "misaligned");
+  const bans = (G.bans || []).filter(b => banTheme === "all" || (banTheme === "abs" ? b.absolute : b.themes.includes(banTheme)));
+  const secName = id => cut(nodeName(N[id]) || id, 34);
+  const conf = (G.conflicts || []).map(c => `<div class="callout" style="background:transparent;border:0;padding:0"><b>${esc(tl(c.theme))}</b> — 같은 매뉴얼 안에서 한쪽은 '더 하라', 다른 쪽은 '덜 하라·끈다'고 말합니다. 채널마다 적용 범위가 다르면 충돌이 아닐 수 있지만, 그 범위가 매뉴얼에 적혀 있는지 확인하세요.</div>
+    <div class="conf"><div><span class="side" style="color:var(--reject)">▲ 더 하라</span>${c.plus.map(p => `<div class="item conf-p" role="button" tabindex="0" data-go="${esc(p.section)}"><small>${esc(secName(p.section))}</small>${hl(p.text)}</div>`).join("")}</div>
+      <div><span class="side" style="color:var(--accent)">▼ 덜 하라 · 끈다</span>${c.minus.map(p => `<div class="item conf-m" role="button" tabindex="0" data-go="${esc(p.section)}"><small>${esc(secName(p.section))}</small>${hl(p.text)}</div>`).join("")}</div></div>`).join("");
+  $("#view").innerHTML = `
+    <div class="stage-head"><h2>지금 매뉴얼 한눈에</h2><span class="hint">무엇이 통과됐고, 무엇이 금지이고, 어디가 서로 부딪히는지. 줄을 누르면 매뉴얼 원문이 열립니다. 밑줄 친 말을 누르면 그 말의 뜻과 구현이 나옵니다.</span></div>
+    <div class="now">
+      <div class="key">
+        <div class="k-conf"><b>충돌 후보</b><br>같은 주제를 반대로 말하는 규칙이 함께 살아 있음</div>
+        <div class="k-mis"><b>어긋난 의도</b><br>내가 한 말과 모델의 해석이 다르다고 판정한 것</div>
+        <div class="k-ban"><b>금지</b><br>지금 매뉴얼이 '하지 않는다'고 적은 것 (진한 칸은 절대 금지)</div>
+        <div class="k-pass"><b>통과</b><br>사용자가 통과시킨 영상 = 그때 매뉴얼 버전이 검증됨</div>
+        <div class="k-rej"><b>기각</b><br>사용자가 돌려보낸 영상 → 반영된 버전</div>
+      </div>
+      <section id="now-conf"><h3><span class="chip pend">충돌 후보 ${S.conflicts}</span> 반대 방향 규칙</h3>
+        <p class="lead">낱말로 자동 추정한 후보입니다 ('계속·끊임없이·반드시' ↔ '끈다·쓰지 않음·고정이 기본').</p>${conf || `<p class="empty">없음</p>`}</section>
+      <section id="now-mis"><h3><span class="chip reject">어긋난 의도 ${mis.length}</span> 내가 한 말 ≠ 모델 해석</h3>
+        <div class="items">${mis.map(i => `<button class="item mis" data-al="${esc(i.id)}"><small>${esc(i.date || "")} · ${i.versions.map(v => "v" + v).join(",")}</small>“${esc(i.quote)}”${i.meaning ? `<span>뜻한 것: ${esc(i.meaning)}</span>` : ""}${(i.not_meant || []).length ? `<span style="color:var(--reject)">뜻하지 않은 것: ${esc(i.not_meant.join(" · "))}</span>` : ""}
+          <span>${i.readings.filter(r => ["over","under","drift","conflict"].includes(r.status)).map(r => `<span class="chip ${r.status === "conflict" ? "pend" : "reject"}">${esc((G.status_labels || {})[r.status])} · ${esc(cut(nodeName(N[r.ref]) || r.ref, 26))}</span>`).join(" ")}</span></button>`).join("") || `<p class="empty">판정한 어긋남이 없습니다. '의도 정렬' 탭에서 판정하세요.</p>`}</div></section>
+      <section id="now-ban"><h3><span class="chip reject">금지 ${(G.bans || []).length}</span> 하지 않는 것</h3>
+        <div class="al-filter" style="padding:0;border:0"><button data-bt="all" aria-pressed="${banTheme === "all"}">전체</button><button data-bt="abs" aria-pressed="${banTheme === "abs"}">절대 금지</button>${themes.map(t => `<button data-bt="${t.key}" aria-pressed="${banTheme === t.key}">${esc(t.label)}</button>`).join("")}</div>
+        <div class="items">${bans.map(b => `<div class="item ban ${b.absolute ? "abs" : ""}" role="button" tabindex="0" data-go="${esc(b.section)}"><small>${b.absolute ? "절대 · " : ""}${esc(secName(b.section))}${b.must ? " · MUST" : ""}</small>${hl(b.text)}</div>`).join("") || `<p class="empty">이 주제의 금지 줄이 없습니다.</p>`}</div></section>
+      <section id="now-pass"><h3><span class="chip pass">통과 ${pass.length}</span> 통과한 영상과 검증된 버전</h3>
+        <div class="items">${pass.map(r => { const v = N["ver:" + r.manual_version]; return `<div class="item pass" role="button" tabindex="0" data-go="${esc(r.id)}"><small>${esc(r.date)} · v${r.manual_version} 기준으로 통과</small><b>${esc(r.project)}</b>${r.reason ? `<span>${esc(r.reason)}</span>` : ""}${v ? `<span style="color:var(--muted)">그때 매뉴얼: ${hl(cut(v.summary, 140))}</span>` : ""}</div>`; }).join("")}</div></section>
+      <section id="now-rej"><h3><span class="chip">기각 ${rej.length}</span> 돌려보낸 영상 → 반영된 버전</h3>
+        <div class="items">${rej.map(r => { const e = (OUT[r.id] || []).find(x => x.kind === "applied_in"); return `<div class="item rej" role="button" tabindex="0" data-go="${esc(r.id)}"><small>${esc(r.date)} · v${r.manual_version} 에서 기각${e ? ` → ${esc(e.t.replace("ver:", "v"))} 에 반영` : ""}</small><b>${esc(r.project)}</b><span>${hl(r.reason)}</span></div>`; }).join("")}</div></section>
+    </div>`;
+  const V = $("#view");
+  V.querySelectorAll("[data-go]").forEach(b => b.onclick = ev => { if (ev.target.closest(".term")) return; inspect(b.dataset.go); });
+  V.querySelectorAll("[data-al]").forEach(b => b.onclick = ev => { if (ev.target.closest(".term")) return; alSel = b.dataset.al; location.hash = "align"; });
+  V.querySelectorAll("[data-bt]").forEach(b => b.onclick = () => { banTheme = b.dataset.bt; nowFocus = "ban"; renderNow(); });
+  wireTerms(V);
+  if (nowFocus) { const el = document.getElementById("now-" + nowFocus); if (el) el.scrollIntoView({block: "start"}); nowFocus = null; }
+}
+
+/* ---------- 용어: 하이라이트 · 사전 · 작은 움직임 예시 ---------- */
+let TERMPAT = null;
+function termPatterns(){
+  if (TERMPAT) return TERMPAT;
+  const list = [];
+  G.nodes.filter(n => n.kind === "term").forEach(t => (t.aliases || []).forEach(a => { a = String(a).trim(); if (!a) return;
+    const ascii = /^[A-Za-z0-9_\-]+$/.test(a); if (ascii && a.length < 2) return; list.push([a, t.id, ascii]); }));
+  list.sort((x, y) => y[0].length - x[0].length);
+  const rx = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const src = list.map(([a, , ascii]) => ascii ? `(?<![\\w./\\-])${rx(a)}(?![\\w/\\-]|\\.json|\\.py|\\.md)` : rx(a)).join("|");
+  const map = {}; list.forEach(([a, id]) => map[a] ||= id);
+  TERMPAT = {re: src ? new RegExp(src, "g") : null, map};
+  return TERMPAT;
+}
+function hl(text){
+  text = String(text ?? "").replace(/\*\*/g, "").replace(/`([^`]+)`/g, "$1"); const P = termPatterns(); if (!P.re) return esc(text);
+  let out = "", last = 0; P.re.lastIndex = 0; let m;
+  while ((m = P.re.exec(text))) { const id = P.map[m[0]]; if (!id) continue;
+    out += esc(text.slice(last, m.index)) + `<button class="term" data-term="${esc(id)}" title="${esc(N[id]?.name || "")}">${esc(m[0])}</button>`; last = m.index + m[0].length; }
+  return out + esc(text.slice(last));
+}
+function wireTerms(root){ root.querySelectorAll(".term,[data-term]").forEach(b => b.addEventListener("click", ev => { ev.stopPropagation(); inspect(b.dataset.term); })); }
+const STATUS_WORD = {idea: "아이디어", demo: "시험작 있음", approved: "사용자 승인"};
+function demo(kind, cap){
+  if (!kind) return "";
+  const fig = (x, cls = "") => `<g class="${cls}"><circle cx="${x}" cy="44" r="6" class="ink"/><rect x="${x - 5}" y="52" width="10" height="16" rx="3" class="ink"/></g>`;
+  const scene = `<circle cx="38" cy="50" r="10" class="acc"/><rect x="70" y="36" width="22" height="22" class="ink"/><polygon points="118,62 132,36 146,62" class="red"/>`;
+  const doc = `<rect x="20" y="12" width="120" height="66" rx="3" fill="var(--panel)" stroke="var(--line)"/>${[22,32,42,52,62].map(y => `<rect x="30" y="${y}" width="${y % 20 ? 90 : 70}" height="4" class="soft"/>`).join("")}`;
+  const S = {
+    "camera-beat": `<svg viewBox="0 0 160 90"><g class="d-cam">${scene}</g></svg>`,
+    "push": `<svg viewBox="0 0 160 90"><g class="d-push">${scene}</g></svg>`,
+    "kenburns": `<svg viewBox="0 0 160 90"><g class="d-kb"><rect width="160" height="90" fill="var(--accent-soft)"/><polygon points="0,90 50,35 90,70 120,45 160,80 160,90" class="soft"/><circle cx="125" cy="22" r="9" class="acc"/></g></svg>`,
+    "tilt": `<div class="d-tilt">631억</div>`,
+    "perspective": `<div class="d-persp"><svg viewBox="0 0 160 90" style="position:absolute;inset:0">${scene}</svg></div>`,
+    "idle": `<svg viewBox="0 0 160 90">${fig(55, "d-idle1")}${fig(105, "d-idle2")}<rect x="0" y="70" width="160" height="2" class="soft"/></svg>`,
+    "walk": `<svg viewBox="0 0 160 90"><rect x="0" y="70" width="160" height="2" class="soft"/><g class="d-walk">${fig(90)}</g></svg>`,
+    "zoomshot": `<svg viewBox="0 0 160 90"><g class="d-zoom">${doc}<rect x="100" y="24" width="26" height="12" fill="none" stroke="var(--reject)" stroke-width="1.5" class="d-box"/></g></svg>`,
+    "beat-motion": `<svg viewBox="0 0 160 90"><g class="d-pop" style="animation-delay:.6s"><rect x="14" y="14" width="40" height="24" rx="3" class="acc"/><text x="34" y="30" font-size="10" text-anchor="middle" fill="#fff">631억</text></g>
+      <g class="d-pop" style="animation-delay:2s"><rect x="62" y="14" width="40" height="24" rx="3" class="ink"/><text x="82" y="30" font-size="9" text-anchor="middle" fill="var(--bg)">회사채</text></g>
+      <g class="d-pop" style="animation-delay:3.4s"><rect x="110" y="18" width="34" height="18" class="red"/><polygon points="108,18 127,8 146,18" class="red"/></g>
+      <rect x="5" y="70" width="150" height="12" rx="2" class="soft"/><rect x="5" y="70" height="12" rx="2" class="acc d-say" style="opacity:.5"/><text x="9" y="79" font-size="7" class="ink">말: “631억 … 회사채 … 은행이 …”</text></svg>`,
+    "static": `<svg viewBox="0 0 160 90"><text x="80" y="42" font-size="20" font-weight="700" text-anchor="middle" class="ink">45일·60일</text><text x="80" y="64" font-size="8" text-anchor="middle" class="ink" opacity=".6">(말은 계속되는데 화면은 그대로)</text></svg>`,
+    "crossfade": `<svg viewBox="0 0 160 90"><g class="d-a">${scene}</g><g class="d-b"><rect x="30" y="20" width="100" height="50" rx="4" class="acc" opacity=".6"/></g></svg>`,
+    "cut": `<svg viewBox="0 0 160 90"><g class="d-ca">${scene}</g><g class="d-cb"><rect x="30" y="20" width="100" height="50" rx="4" class="acc" opacity=".6"/></g></svg>`,
+    "kinetic": `<svg viewBox="0 0 160 90"><g class="d-pop" style="animation-delay:.3s"><text x="40" y="48" font-size="16" font-weight="700" text-anchor="middle" class="ink">말하는</text></g><g class="d-pop" style="animation-delay:1.2s"><text x="104" y="48" font-size="22" font-weight="700" text-anchor="middle" class="acc">순간</text></g><g class="d-pop" style="animation-delay:2.1s"><text x="80" y="72" font-size="13" text-anchor="middle" class="ink">글자가 튀어나옴</text></g></svg>`,
+    "draw": `<svg viewBox="0 0 160 90"><circle cx="24" cy="60" r="5" class="acc"/><circle cx="136" cy="28" r="5" class="red"/><path d="M24 60 C 60 10, 100 90, 136 28" class="stk d-draw"/></svg>`,
+    "scan": `<svg viewBox="0 0 160 90">${doc}<rect x="0" y="0" width="160" height="10" class="acc d-scan" opacity=".35"/></svg>`,
+    "dust": `<svg viewBox="0 0 160 90">${scene}${[20,45,70,95,120,140].map((x, i) => `<circle cx="${x}" cy="${60 + (i % 3) * 8}" r="1.6" class="ink d-dust" style="animation-delay:${i * .7}s"/>`).join("")}</svg>`,
+    "leak": `<svg viewBox="0 0 160 90">${scene}<rect x="0" y="0" width="60" height="90" fill="#ffb347" opacity=".35" class="d-leak"/></svg>`,
+    "layers": `<svg viewBox="0 0 160 90"><rect x="16" y="40" width="40" height="18" rx="2" class="soft"/><rect x="104" y="40" width="40" height="18" rx="2" class="soft"/><path d="M56 49 H104" class="stk"/><g class="d-layer"><rect x="60" y="8" width="44" height="32" fill="var(--panel)" stroke="var(--fg)"/><rect x="64" y="12" width="36" height="20" class="acc" opacity=".5"/></g></svg>`,
+  };
+  if (!S[kind]) return "";
+  return `<div class="demo"><div class="screen" aria-hidden="true">${S[kind]}</div>${cap ? `<span class="cap">${esc(cap)}</span>` : ""}</div>`;
+}
+let lexCat = "all", lexQ = "";
+function renderTerms(){
+  const terms = G.nodes.filter(n => n.kind === "term");
+  const cats = [...new Set(terms.map(t => t.cat))];
+  const q = lexQ.trim().toLowerCase();
+  const list = terms.filter(t => (lexCat === "all" || t.cat === lexCat) && (!q || (t.name + " " + t.plain + " " + (t.aliases || []).join(" ")).toLowerCase().includes(q)))
+    .sort((a, b) => (b.mentioned_in.length - a.mentioned_in.length) || a.name.localeCompare(b.name));
+  $("#view").innerHTML = `
+    <div class="stage-head"><h2>용어 사전 — 그래서 저게 뭐야?</h2><span class="hint">매뉴얼·코드에 나오는 편집 스타일·장면 종류·효과·움직임을 쉬운 말로. 누르면 화면에서 어떻게 보이는지와 어떻게 만들어지는지가 나옵니다.</span></div>
+    <div class="al-filter"><input id="lex-q" aria-label="찾기" placeholder="찾기: 카메라, tilt, 무대 …" value="${esc(lexQ)}" style="flex:1;min-width:160px;border:1px solid var(--line);background:var(--bg);border-radius:4px;padding:4px 8px">
+      <button data-lc="all" aria-pressed="${lexCat === "all"}">전체 ${terms.length}</button>${cats.map(c => `<button data-lc="${c}" aria-pressed="${lexCat === c}">${esc(terms.find(t => t.cat === c).cat_label)} ${terms.filter(t => t.cat === c).length}</button>`).join("")}</div>
+    <div class="lex">${list.map(t => `<button class="lexcard" data-term="${esc(t.id)}"><span class="chips"><span class="chip">${esc(t.cat_label)}</span>${t.status ? `<span class="chip ${t.status === "approved" ? "pass" : ""}">${esc(STATUS_WORD[t.status] || t.status)}</span>` : ""}<span class="chip">매뉴얼·코드 ${t.mentioned_in.length}곳</span></span>
+      <b>${esc(t.short || t.name)}</b>${demo(t.anim)}<p>${esc(t.plain)}</p></button>`).join("") || `<p class="empty">찾는 말이 없습니다.</p>`}</div>`;
+  const qi = $("#lex-q"); qi.oninput = () => { lexQ = qi.value; const pos = qi.selectionStart; renderTerms(); const n = $("#lex-q"); n.focus(); n.setSelectionRange(pos, pos); };
+  $("#view").querySelectorAll("[data-lc]").forEach(b => b.onclick = () => { lexCat = b.dataset.lc; renderTerms(); });
+  $("#view").querySelectorAll("[data-term]").forEach(b => b.onclick = () => inspect(b.dataset.term));
+}
+function termCard(n){
+  const KIND = {section: "매뉴얼 절", version: "버전", review: "검토", intent: "사용자 원문", code: "코드", rule: "규칙", check: "검사", step: "단계"};
+  const groups = {};
+  (n.mentioned_in || []).forEach(id => { const k = N[id]?.kind || "?"; (groups[k] ||= []).push(id); });
+  let h = `<div class="chips"><span class="chip">${esc(n.cat_label)}</span>${n.status ? `<span class="chip ${n.status === "approved" ? "pass" : ""}">${esc(STATUS_WORD[n.status] || n.status)}</span>` : ""}${n.curated ? `<span class="chip">manual/glossary.yaml</span>` : ""}</div>
+    <h3>${esc(n.name)}</h3>${demo(n.anim, n.anim ? "움직임 예시 (실제 렌더 화면이 아니라 원리 그림)" : "")}
+    <div><div class="label">무엇인가요</div><p style="margin:2px 0 0">${esc(n.plain || "-")}</p></div>`;
+  if (n.look && n.look !== n.name && n.look !== n.plain) h += `<div><div class="label">화면에서는</div><p style="margin:2px 0 0">${esc(n.look)}</p></div>`;
+  if (n.intro && n.intro !== n.plain) h += `<div><div class="label">스타일 문서 첫 줄</div><p style="margin:2px 0 0">${esc(n.intro)}</p></div>`;
+  if (n.caution) h += `<div class="callout"><b>헷갈리기 쉬운 점</b><br>${esc(n.caution)}</div>`;
+  if (n.how) h += `<div><div class="label">어떻게 만들어지나</div><p style="margin:2px 0 0">${esc(n.how)}</p></div>`;
+  (n.code || []).forEach(c => h += `<div class="codeln"><small>${esc(c.file)}${c.line ? ":" + c.line : ""}</small>${esc(c.src)}</div>`);
+  if (n.enable) h += `<div><div class="label">켜고 끄는 법</div><p style="margin:2px 0 0;font-family:var(--mono);font-size:12px">${esc(n.enable)}</p></div>`;
+  if (n.avoid) h += `<div><div class="label">쓰면 안 되는 때</div><p style="margin:2px 0 0">${esc(n.avoid)}</p></div>`;
+  if (n.fits) h += `<dl class="kv"><dt>맞는 곳</dt><dd>${esc(n.fits)}</dd>${n.demo ? `<dt>시험작</dt><dd>${esc(n.demo)}</dd>` : ""}${n.doc ? `<dt>문서</dt><dd>${esc(n.doc)}</dd>` : ""}${n.skill ? `<dt>스킬</dt><dd>skills/${esc(n.skill)}</dd>` : ""}</dl>`;
+  if ((n.scenes || []).length) h += `<div><div class="label">이 스타일이 쓰는 장면 종류</div><div class="chips">${n.scenes.map(id => `<button class="tchip" data-term="${esc(id)}">${esc(N[id]?.name || id)}</button>`).join("")}</div></div>`;
+  if ((n.used_by || []).length) h += `<div><div class="label">이 장면을 쓰는 편집 스타일</div><div class="chips">${n.used_by.map(id => `<button class="tchip" data-term="${esc(id)}">${esc(N[id]?.short || N[id]?.name || id)}</button>`).join("")}</div></div>`;
+  Object.entries(groups).forEach(([k, ids]) => h += `<div><div class="label">${esc(KIND[k] || k)}에서 나옴 (${ids.length})</div><ul class="rel">${ids.slice(0, 30).map(id => `<li><button data-go="${esc(id)}">${esc(cut(nodeName(N[id]) || id, 70))}</button></li>`).join("")}</ul></div>`);
+  return h;
+}
+function termChips(n){
+  if (!(n.terms || []).length) return "";
+  return `<div><div class="label">이 안에 나오는 말 — 눌러서 뜻·구현 보기</div><div class="chips">${n.terms.map(id => N[id] ? `<button class="tchip" data-term="${esc(id)}"><i>${esc(N[id].cat_label)}</i>${esc(N[id].short || N[id].name)}</button>` : "").join("")}</div></div>`;
+}
+
 /* ---------- 속성 패널 ---------- */
 const EDGE_WORD = {interpreted_in:"해석한 버전", quoted_in:"원문이 적힌 곳", implemented_by:"구현", gated_by:"게이트", contains:"포함", defines:"정의", belongs_to:"규칙", enforces:"검사 코드", applied_in:"반영 버전", approved_in:"통과 버전", touched:"고친 곳", about:"주제", guided_by:"매뉴얼"};
 function relList(id){
@@ -548,11 +921,18 @@ function relList(id){
   return Object.entries(groups).map(([k, arr]) => `<div><div class="label">${esc(k)} (${arr.length})</div><ul class="rel">${arr.slice(0, 60).map(([e, o]) =>
     `<li><button data-go="${esc(o)}"><small>${esc(N[o]?.kind || "")}${e.via ? " · " + e.via.join("+") : ""}${e.how === "inferred" ? " · 추정" : ""}</small>${esc(cut(nodeName(N[o]) || o, 60))}</button></li>`).join("")}</ul></div>`).join("");
 }
-function inspect(id){
+let HIST = [];
+function inspect(id, back){
   const n = N[id]; if (!n) return; selected = id;
+  if (!back && HIST[HIST.length - 1] !== id) HIST.push(id);
+  const aside = document.querySelector("aside.inspector"); aside.removeAttribute("data-empty");
+  $("#in-back").hidden = HIST.length < 2;
   let h = `<span class="label">${esc(n.kind)}</span><h3>${esc(n.kind === "version" ? `v${n.v} · ${n.date}` : n.kind === "review" ? `${n.project}` : nodeName(n))}</h3>`;
+  if (n.kind === "term") { $("#insp").innerHTML = termCard(n); afterInspect(n, id); return; }
+  if (n.kind === "proc") { $("#insp").innerHTML = procCard(n); afterInspect(n, id); return; }
+  h += termChips(n);
   if (n.kind === "version") {
-    h += `<p style="margin:0">${esc(n.summary)}</p>`;
+    h += `<p style="margin:0">${hl(n.summary)}</p>`;
     if (n.applied.length) h += `<div class="label">반영한 사용자 기각</div>` + n.applied.map(a => `<div class="chip reject" style="white-space:normal;border-radius:4px;padding:4px 8px">${esc(a.date)} · ${esc(a.project)}<br>${esc(a.reason)}</div>`).join("");
     if (n.commit) h += `<dl class="kv"><dt>커밋</dt><dd style="font-family:var(--mono)">${esc(n.commit.sha.slice(0, 8))}</dd><dt>메시지</dt><dd>${esc(n.commit.subject)}</dd></dl>`;
     if (LIVE && n.commit) h += `<div class="row"><button class="btn" id="diff-go">이 버전에서 바뀐 매뉴얼 보기</button></div><div id="diff"></div>`;
@@ -560,11 +940,11 @@ function inspect(id){
   } else if (n.kind === "review") {
     h += `<div class="chips"><span class="chip ${n.result === "pass" ? "pass" : "reject"}">${n.result === "pass" ? "통과" : "기각"}</span><span class="chip">${esc(n.date)}</span><span class="chip">당시 v${n.manual_version}</span>
       ${n.status === "pending" ? '<span class="chip pend">반영 대기</span>' : n.status === "inferred" ? '<span class="chip pend">반영 버전 추정</span>' : ""}</div>`;
-    if (n.reason) h += `<p style="margin:0">${esc(n.reason)}</p>`;
+    if (n.reason) h += `<p style="margin:0">${hl(n.reason)}</p>`;
   } else if (n.kind === "section") {
     const d = N[n.doc];
     h += `<dl class="kv"><dt>파일</dt><dd>${esc(d.file)}:${n.line}</dd><dt>바꾼 버전</dt><dd>${n.versions.length ? n.versions.map(v => "v" + v).join(", ") : (n.tag_version ? "v" + n.tag_version : "기록 없음 (v1 기준)")}</dd></dl>`;
-    if (n.body) h += `<pre class="body">${esc(n.body)}</pre>`;
+    if (n.body) h += `<pre class="body">${hl(n.body)}</pre>`;
     h += `<div class="row"><button class="btn primary" id="edit-go">이 절 고치기</button></div>`;
   } else if (n.kind === "gate") {
     const rs = G.nodes.filter(r => r.kind === "rule" && r.gate === id);
@@ -584,9 +964,14 @@ function inspect(id){
   }
   h += relList(id);
   $("#insp").innerHTML = h;
+  afterInspect(n, id);
+}
+function afterInspect(n, id){
+  wireTerms($("#insp"));
+  $("#insp").scrollTop = 0; document.querySelector("aside.inspector").scrollTop = 0;
   $("#insp").querySelectorAll("[data-al]").forEach(a => a.addEventListener("click", () => { alSel = a.dataset.al; if (location.hash === "#align") route(); }));
   $("#insp").querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => inspect(b.dataset.go)));
-  const eg = $("#edit-go"); if (eg) eg.onclick = () => { const f = n.kind === "doc" ? n.file : N[n.doc].file;
+  const eg = $("#edit-go"); /* 고치기 버튼 */ if (eg) eg.onclick = () => { const f = n.kind === "doc" ? n.file : N[n.doc].file;
     editorState = {path: f, line: n.line || null}; if (!LIVE) toast("편집은 로컬 도구에서: python -m ytflow manual-ui"); location.hash = "edit"; if (location.hash === "#edit") route(); };
   const dg = $("#diff-go"); if (dg) dg.onclick = async () => { try { const j = await api("/api/diff?v=" + n.v); $("#diff").innerHTML = `<pre class="diff">${esc(j.diff)}</pre>`; } catch (e) { toast(e.message); } };
   highlight(id);
@@ -594,18 +979,22 @@ function inspect(id){
 
 /* ---------- 경로 ---------- */
 function route(){
-  const h = (location.hash || "#align").slice(1);
+  if (window.matchMedia("(max-width:980px)").matches) { document.querySelector("aside.inspector").setAttribute("data-empty", ""); HIST = []; }
+  const h = (location.hash || "#now").slice(1);
   document.querySelectorAll("nav.tabs a").forEach(a => a.getAttribute("href") === "#" + h ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
-  ({align: renderAlign, flow: renderFlow, map: renderMap, timeline: renderTimeline, edit: renderEdit}[h] || renderAlign)();
+  ({now: renderNow, proc: renderProc, terms: renderTerms, align: renderAlign, flow: renderFlow, map: renderMap, timeline: renderTimeline, edit: renderEdit}[h] || renderNow)();
 }
 window.addEventListener("hashchange", route);
+document.addEventListener("keydown", ev => { const t = ev.target; if ((ev.key === "Enter" || ev.key === " ") && t.matches && t.matches('div[role="button"]')) { ev.preventDefault(); t.click(); } });
+document.getElementById("in-close").onclick = () => { document.querySelector("aside.inspector").setAttribute("data-empty", ""); HIST = []; selected = null; highlight(null); };
+document.getElementById("in-back").onclick = () => { HIST.pop(); const prev = HIST[HIST.length - 1]; if (prev) inspect(prev, true); };
 
 async function boot(){
   if (!G || !STATIC) { try { G = await api("/api/graph"); LIVE = true; } catch (e) { if (!G) { $("#view").innerHTML = `<p style="padding:14px">그래프 데이터를 읽지 못했습니다: ${esc(e.message)}</p>`; return; } } }
   if (LIVE) { const m = $("#mode"); m.textContent = "로컬 도구 연결됨 · 편집 가능"; m.classList.add("live"); }
   else { $("#mode").textContent = `읽기 전용 · ${G.generated.replace("T", " ")} 기준`; }
   index(); renderTiles(); route();
-  if ((location.hash || "#align") !== "#align") { const first = G.nodes.find(n => n.kind === "version" && n.v === G.stats.manual_version); if (first) inspect(first.id); }
+  if (["#flow", "#map", "#timeline"].includes(location.hash)) { const first = G.nodes.find(n => n.kind === "version" && n.v === G.stats.manual_version); if (first) inspect(first.id); }
 }
 boot();
 })();

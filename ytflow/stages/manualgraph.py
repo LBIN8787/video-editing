@@ -317,6 +317,200 @@ def polarity_lines(secs: list[dict]) -> list[dict]:
                     out.append({"section": s["id"], "theme": t, "pol": pol, "text": ln.strip()[:200]})
     return out
 
+
+# ------------------------------------------------------------------ 용어 층: '그래서 저게 뭐야?' — 스타일·장면 종류·효과·그래픽 팩·움직임 용어
+GLOSSARY = MANUAL / "glossary.yaml"
+CAT_LABEL = {"style": "편집 스타일", "scene": "장면 종류", "fx": "시각 효과", "skin": "그래픽 팩", "motion": "움직임", "measure": "측정값"}
+ANIM_BY_KEY = {"kb": "kenburns", "zoomshot": "zoomshot", "kinetic": "kinetic", "stage": "walk", "story": "draw", "journey": "draw",
+               "tilt": "tilt", "dolly": "push", "scan": "scan", "dust": "dust", "leak": "leak", "terminal": "kinetic",
+               "chat": "kinetic", "bignum": "beat-motion", "map_causal": "draw", "chapter": "crossfade", "illust": "push",
+               "metaphor": "walk", "bite": "cut", "footage": "kenburns", "newsdesk": "layers", "recap": "layers", "isotype": "beat-motion"}
+
+
+def _code_ref(spec: str) -> dict | None:
+    """'파일::그 줄의 글자' → 지금 줄 번호."""
+    f, _, needle = spec.partition("::")
+    lines = _read(ROOT / f).splitlines()
+    for i, l in enumerate(lines):
+        if not needle or needle in l:
+            return {"file": f, "line": i + 1, "src": l.strip()[:220]}
+    return {"file": f, "line": None, "src": "(그 글자를 찾지 못함 — 코드가 바뀌었을 수 있음)"}
+
+
+def parse_lexicon() -> list[dict]:
+    import yaml
+    terms: dict[str, dict] = {}
+
+    def T(key, **kw):
+        t = terms.setdefault(key, {"id": f"term:{key}", "kind": "term", "key": key, "aliases": [], "code": [],
+                                   "scenes": [], "used_by": []})
+        for k, v in kw.items():
+            if v not in (None, "", []):
+                t[k] = v
+        return t
+
+    # 장면 종류: 렌더 함수 표 (hybrid.RENDER 와 각 모듈의 등록)
+    defs: dict[str, dict] = {}
+    for py in sorted((ROOT / "ytflow" / "stages").glob("*.py")):
+        rel = py.relative_to(ROOT).as_posix()
+        lines = _read(py).splitlines()
+        for i, l in enumerate(lines):
+            m = re.match(r"\s*def (s_\w+)\(", l)
+            if m:
+                doc = ""
+                if i + 1 < len(lines) and '"""' in lines[i + 1]:
+                    doc = lines[i + 1].strip().strip('"').strip()
+                defs.setdefault(m.group(1), {"file": rel, "line": i + 1, "src": l.strip(), "doc": doc})
+        txt = "\n".join(lines)
+        for m in re.finditer(r"\"(\w+)\"\s*:\s*(s_\w+)", txt):
+            if m.group(2) in defs or True:
+                T(m.group(1), _fn=m.group(2))
+        for m in re.finditer(r"RENDER\[\"(\w+)\"\]\s*=\s*(s_\w+)", txt):
+            T(m.group(1), _fn=m.group(2))
+    for k, t in list(terms.items()):
+        fn = t.pop("_fn", None)
+        d = defs.get(fn)
+        if not d:
+            terms.pop(k)
+            continue
+        t.update(name=k, cat="scene", plain=d["doc"] or f"장면 종류 {k}", aliases=[k],
+                 code=[{"file": d["file"], "line": d["line"], "src": d["src"]}],
+                 how=f"렌더 함수 {fn}() 가 이 장면을 그림 ({d['file']})", enable=f"hybrid.json 장면의 \"type\": \"{k}\"",
+                 anim=ANIM_BY_KEY.get(k))
+
+    # 시각 효과 fx
+    dsrc = _read(ROOT / "ytflow" / "stages" / "directions.py")
+    fxm = re.search(r"^FX = \{(.*?)^\}", dsrc, re.S | re.M)
+    if fxm:
+        base = dsrc[:fxm.start()].count("\n")
+        for j, l in enumerate(fxm.group(1).splitlines()):
+            m = re.match(r"\s*\"(\w+)\":\s*\"([^\"]+)\"", l)
+            if m:
+                T(f"fx-{m.group(1)}", name=f"{m.group(1)} (시각 효과)", cat="fx", plain=m.group(2), aliases=[m.group(1)],
+                  how="장면 그림 위에 효과를 덧붙이는 함수 apply_fx 가 처리", enable=f"hybrid.json 장면의 \"fx\": [\"{m.group(1)}\"]",
+                  code=[{"file": "ytflow/stages/directions.py", "line": base + j + 2, "src": l.strip()[:200]},
+                        _code_ref("ytflow/stages/directions.py::def apply_fx")], anim=ANIM_BY_KEY.get(m.group(1)))
+
+    # 그래픽 팩 skins
+    for sk in sorted((ROOT / "skins").glob("*/skin.yaml")):
+        raw = _read(sk)
+        first = next((l.lstrip("# ").strip() for l in raw.splitlines() if l.startswith("#")), "")
+        try:
+            y = yaml.safe_load(raw) or {}
+        except Exception:
+            y = {}
+        k = sk.parent.name
+        T(f"skin-{k}", name=f"{y.get('title', k)} ({k})", cat="skin", plain=first or y.get("title", k), aliases=[k],
+          how=f"색·글꼴·배경 토큰 묶음 skins/{k}/skin.yaml — 연출은 그대로, 겉모습만 바뀜",
+          enable=f"edit.yaml 의 skin: {k}, 또는 장면의 look", code=[{"file": f"skins/{k}/skin.yaml", "line": 1, "src": first[:200]}],
+          anim="layers")
+
+    # 편집 스타일 (레시피)
+    for rp in sorted((ROOT / "styles" / "recipes").glob("*.yaml")):
+        if rp.name.startswith("_"):
+            continue
+        try:
+            y = yaml.safe_load(_read(rp)) or {}
+        except Exception:
+            continue
+        k = y.get("id", rp.stem)
+        name = str(y.get("name", k))
+        short = re.split(r"\s*[(（]", name)[0].strip()
+        sty = ROOT / "styles" / k / "STYLE.md"
+        intro = ""
+        if sty.exists():
+            for l in _read(sty).splitlines()[1:]:
+                l2 = l.strip().lstrip(">").strip()
+                if l2 and not l2.startswith("#"):
+                    intro = l2[:300]
+                    break
+        scenes = list(dict.fromkeys((y.get("scene_types") or []) + (y.get("owns") or [])))
+        fits = y.get("fits") or {}
+        T(f"style-{k}", name=name, short=short, cat="style", plain=y.get("when") or intro or name,
+          look=name, status=y.get("status", ""), renderer=y.get("renderer", ""), skin=y.get("skin", ""),
+          aliases=[k, short] if len(short) >= 4 else [k], scenes=scenes, avoid=y.get("avoid", ""),
+          fits=", ".join(f"{a}: {'·'.join(map(str, b))}" for a, b in fits.items() if b), demo=y.get("demo", ""),
+          skill=y.get("skill", ""), doc=f"styles/{k}/STYLE.md" if sty.exists() else "", intro=intro,
+          how=f"렌더러 {y.get('renderer', '?')} · 장면 종류 {', '.join(scenes) or '-'} · 그래픽 팩 {y.get('skin', '-')}",
+          enable=f"style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"{k}\"",
+          code=[{"file": f"styles/recipes/{rp.name}", "line": 1, "src": name[:200]}],
+          anim=next((ANIM_BY_KEY[s2] for s2 in scenes if s2 in ANIM_BY_KEY), None))
+        for s2 in scenes:
+            if s2 in terms:
+                terms[s2]["used_by"].append(f"term:style-{k}")
+
+    # 사람이 쓴 용어 사전 (덮어쓰기·추가)
+    try:
+        gl = (yaml.safe_load(_read(GLOSSARY)) or {}).get("terms", {}) or {}
+    except Exception:
+        gl = {}
+    for k, g in gl.items():
+        t = T(k)
+        for f in ("name", "cat", "plain", "look", "how", "enable", "anim", "caution"):
+            if g.get(f):
+                t[f] = g[f]
+        t["aliases"] = list(dict.fromkeys((g.get("aliases") or []) + t["aliases"]))
+        if g.get("code"):
+            t["code"] = [c for c in (_code_ref(x) for x in g["code"]) if c]
+        t["curated"] = True
+    out = []
+    for t in terms.values():
+        t.setdefault("name", t["key"]); t.setdefault("cat", "scene"); t.setdefault("plain", "")
+        t["label"] = t["name"]
+        t["cat_label"] = CAT_LABEL.get(t["cat"], t["cat"])
+        out.append(t)
+    return out
+
+
+def _alias_re(a: str):
+    a = a.strip()
+    if not a:
+        return None
+    if re.fullmatch(r"[A-Za-z0-9_\-]+", a):
+        if len(a) < 2:
+            return None
+        return re.compile(r"(?<![\w./\-])" + re.escape(a) + r"(?![\w/\-]|\.json|\.py|\.md)")
+    return re.compile(re.escape(a))
+
+
+def term_matcher(terms: list[dict]):
+    pats = []
+    for t in terms:
+        for a in t["aliases"]:
+            r = _alias_re(a)
+            if r:
+                pats.append((t["id"], r))
+
+    def find(text: str) -> list[str]:
+        if not text:
+            return []
+        return list(dict.fromkeys(tid for tid, r in pats if r.search(text)))
+    return find
+
+
+PROHIBIT = ["금지", "쓰지 않", "하지 않", "넣지 않", "끈다", "기본 끔", "말 것", "하지 말", "않는다", "복제하지", "우회하지"]
+
+
+def prohibitions(secs: list[dict]) -> list[dict]:
+    """지금 매뉴얼에서 '하지 않는 것' 줄 — 절마다 (README §3 은 통째로)."""
+    out, seen = [], set()
+    for s in secs:
+        lines = s.get("body", "").splitlines()
+        whole = s["id"] == "sec:README§3"
+        for ln in lines:
+            t = ln.strip()
+            if not t or t.startswith("|---") or t.startswith("```"):
+                continue
+            if whole and re.match(r"^\d+\.", t) or (not whole and any(w in t for w in PROHIBIT)):
+                clean = re.sub(r"\*\*|`", "", t).strip("|- ").strip()
+                k = _norm(clean)[:60]
+                if k in seen:
+                    continue
+                seen.add(k)
+                out.append({"section": s["id"], "text": clean[:260], "themes": _themes(clean), "absolute": whole,
+                            "must": "MUST" in t})
+    return out
+
 # ------------------------------------------------------------------ 그래프 조립
 def build() -> dict:
     docs, secs = parse_docs()
@@ -538,7 +732,25 @@ def build() -> dict:
         if plus and minus:
             conflicts.append({"theme": t, "plus": plus[:8], "minus": minus[:8]})
 
-    nodes = steps + gates + channels + docs + secs + rules + checks + versions + reviews + themes + codes + intent_nodes
+    # ---- 용어 층: 노드마다 그 안에 나오는 스타일·장면·효과·움직임 용어
+    lex = parse_lexicon()
+    find = term_matcher(lex)
+    tnode = {t["id"]: t for t in lex}
+    mention: dict[str, list[str]] = {}
+    for n in secs + versions + reviews + codes + rules + checks + intent_nodes + list(_steps_text(steps)):
+        text = " ".join(str(n.get(k, "")) for k in ("title", "body", "summary", "reason", "label", "src", "quote", "does"))
+        ts = find(text)
+        if ts:
+            n["terms"] = ts
+            for tid in ts:
+                mention.setdefault(tid, []).append(n["id"])
+    for t in lex:
+        t["mentioned_in"] = mention.get(t["id"], [])
+        t["scenes"] = [f"term:{x}" for x in t.get("scenes", []) if f"term:{x}" in tnode]
+    lex = [t for t in lex if t["mentioned_in"] or t["cat"] in ("style", "motion", "measure", "fx") or t["used_by"]]
+    bans = prohibitions(secs)
+
+    nodes = steps + gates + channels + docs + secs + rules + checks + versions + reviews + themes + codes + intent_nodes + lex
     cur = _read(MANUAL / "VERSION").strip() or "0"
     stats = {
         "manual_version": int(cur),
@@ -548,10 +760,15 @@ def build() -> dict:
         "must": sum(r["level"] == "MUST" for r in rules), "auto": sum(r["auto"] for r in rules),
         "intents": len(intent_nodes), "misaligned": sum(i["status"] == "misaligned" for i in intent_nodes),
         "intents_reviewed": sum(i["annotated"] for i in intent_nodes), "conflicts": len(conflicts), "code": len(codes),
+        "terms": len(lex), "bans": len(bans),
     }
     return {"schema": SCHEMA_VERSION, "generated": dt.datetime.now().isoformat(timespec="seconds"),
-            "stats": stats, "pending": pending, "status_labels": STATUS, "conflicts": conflicts,
+            "stats": stats, "pending": pending, "status_labels": STATUS, "conflicts": conflicts, "bans": bans,
             "nodes": nodes, "edges": edges}
+
+
+def _steps_text(steps):
+    return steps
 
 
 def write(html_out: str | None = None) -> Path:
@@ -593,8 +810,8 @@ def serve(port: int = 8770, host: str = "127.0.0.1") -> None:
 
     def manual_file(rel: str) -> Path:
         p = (ROOT / rel).resolve()
-        if p.parent != MANUAL.resolve() or p.suffix != ".md":
-            raise ValueError("manual/*.md 만 열고 고칠 수 있습니다")
+        if p.parent != MANUAL.resolve() or p.suffix not in (".md", ".yaml"):
+            raise ValueError("manual/*.md · manual/*.yaml 만 열고 고칠 수 있습니다")
         return p
 
     class H(BaseHTTPRequestHandler):

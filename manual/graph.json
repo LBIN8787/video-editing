@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-11-15T05:06:58",
+ "generated": "2026-11-15T05:23:51",
  "stats": {
   "manual_version": 31,
   "versions": 31,
@@ -17,7 +17,9 @@
   "misaligned": 1,
   "intents_reviewed": 2,
   "conflicts": 2,
-  "code": 58
+  "code": 58,
+  "terms": 99,
+  "bans": 110
  },
  "pending": [],
  "status_labels": {
@@ -122,6 +124,911 @@
    ]
   }
  ],
+ "bans": [
+  {
+   "section": "sec:01§4",
+   "text": "1. 제목·썸네일에 소문을 사실처럼 쓰지 않는다 (\"~라는 소문, 확인해 봤습니다\" 형태만).",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:01§4",
+   "text": "4. 소문의 출처가 개인 SNS 라면 계정을 화면에 노출하지 않는다.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:01§5",
+   "text": "공통 금지: 사실이 아닌 과장, '충격·소름·경악'(분석에서 평균 이하), 영상에 없는 내용.",
+   "themes": [
+    "depth"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:02§2",
+   "text": "④ 한계 | 무엇은 안 되나, 주의할 점 | 문서의 제한 사항, 직접 실패 사례 | 1개 이상 (없다고 쓰지 않음)",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:02§3",
+   "text": "> 연출은 조합(05 §0-1) · 강조 아껴 쓰기 · 장면 목적별 배경(§0-2) · 반복 피로 막기(§0-3) · 편집 기준 v10(§0-4: 전환·카메라·사진 장 표지·소리, 그래프보다 사물 그림·정리판) · 소리 기준(저음 타격음 금지, 음질 좋은 배경음)을 따릅니다.",
+   "themes": [
+    "motion",
+    "sound",
+    "background",
+    "emphasis",
+    "variety"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:02§h51",
+   "text": "과장 금지: \"이거면 끝\", \"개발자 다 망함\", \"무조건\" 금지. 직접 확인한 것만 \"됩니다\".",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:02§5",
+   "text": "회사 로고는 사실 전달 범위(제품 이름 표시)에서만, 공식 제휴처럼 보이게 하지 않음.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:03§0",
+   "text": "하지 않는 것: 장중(마감 전) 값을 '마감'으로 말하기 · 하루 움직임으로 장기 결론 · 보고서 목표가를 권유처럼 · 확인 안 된 원인 단정(“~때문으로 보입니다”는 출처가 있을 때만).",
+   "themes": [
+    "motion",
+    "depth",
+    "intent"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:03§0-1",
+   "text": "1. 원문 확보 (우선순위): ① 회사 IR 공식 녹취록(Proofread transcript)·웹캐스트 ② SEC 8-K 실적 보도자료(숫자 대조) ③ 녹취록 사이트(이름 오타 주의). 막힌 곳은 우회하지 않음.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:03§0-1",
+   "text": "사실과 해석을 나눕니다: 해석 장 첫머리에 \"여기서부터는 해석입니다\", 팩트시트 ## 해석 에 💬 + 근거 번호. 해석은 \"~로 볼 수 있습니다 / ~라고 봅니다\"로, 단정·권유 금지.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:03§0-2",
+   "text": "제목·훅·썸네일 A 는 new_angle 에서 만듭니다. known 을 그대로 질문으로 바꾼 제목('왜 ○○했나')은 쓰지 않습니다.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:03§0-2",
+   "text": "매체끼리 다르게 읽으면 그 차이 자체가 이야기입니다. 매체 판단을 틀렸다고 단정하지 않고 '무엇을 더 볼 수 있나'로.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:03§0-2",
+   "text": "5. 장마다 의미로 닫기 — 장의 마지막 문장은 사실 요약이 아니라 \"그래서 이 자료들이 함께 말하는 것\"(해석, 근거 번호). 해석은 '해석입니다'라고 밝히고 단정·권유하지 않습니다.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:03§0-3",
+   "text": "6. 사적 인물·사생활: 사임 사유가 사생활 보도와 얽혀도 개인 이름·세부 내용은 쓰지 않고 \"이사회 조사·사임\"이라는 공시 사실과 사업 영향만.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:03§3",
+   "text": "사실마다 ✅(1차 출처 확인) / ⚠️(2차 출처만) / ❌(확인 실패) 를 붙입니다. ⚠️ 는 \"~로 알려졌다\", ❌ 는 쓰지 않습니다.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:03§4",
+   "text": "금지 표현 (자동 검사): 사세요·파세요·매수 추천·매도 추천·지금이 기회·무조건·확실히 오른다·목표가 ○○원 단정·수익 보장·따라 사면.",
+   "themes": [
+    "intent"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:03§5",
+   "text": "공시·보도 | 기사·공시 헤드라인 캡처 (clips) | 지면 전체 복제 금지, 제목·핵심 줄만",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:03§6",
+   "text": "소문 주제는 썸네일에 소문 내용을 단정 문장으로 쓰지 않습니다.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§0",
+   "text": "순서 (v23·v24, 2026-11-14 사용자: \"인트로는 빼 주세요\"): 첫 문장부터 훅(장면 하나 → 질문) → 이야기. 시청자에게 말 걸기(\"~하실 분?\")로 여는 것도 하지 않음 (README §2-3). 인사·채널 이름·채널 약속·순서 예고를 넣지 않습니다.",
+   "themes": [
+    "script",
+    "intent"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§0-1",
+   "text": "15~40초, 박자 2~4개. 답은 말하지 않습니다 (withheld — 답이 나오는 장면을 정해 두고 그때 회수, payoff_scene).",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§0-1",
+   "text": "설명 낱말(원리·정의·배경 설명, \"~란 ~입니다\")로 시작하지 않습니다. 사실 하나 + 이상한 점.",
+   "themes": [
+    "background"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§0-1",
+   "text": "과장 금지: 놀라움은 장면과 숫자가 만듭니다. 훅의 사실도 팩트시트로 확인한 것만.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§0-2",
+   "text": "연결이 자연스럽게: 소개 → 훅은 \"그런데 말이죠\", \"이런 일이 있었습니다\"처럼 이야기로 넘어갑니다. 소개 문장에서 답을 미리 말하지 않습니다.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§0-3",
+   "text": "제목 = 훅의 틈(gap)을 그대로 쓰되 답은 숨김. 훅에 없는 약속을 제목에 넣지 않습니다(낚시 금지).",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§0-3",
+   "text": "썸네일 글자는 제목을 반복하지 않고 훅의 장면·감정을 보탭니다. title_why 에 \"훅의 어느 부분에서 왔는지\"를 적습니다.",
+   "themes": [
+    "variety"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§0-4",
+   "text": "2. 설명은 이야기 속 인물의 입으로 (\"모라벡은 1988년 책에 이렇게 썼습니다\"), 정의 문장(\"~란 ~이다\")은 쓰지 않는다.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§0-4",
+   "text": "6. story-board 는 뼈대 스타일 — 한 스타일 상한 40% 대신 85% (check 가 레시피의 backbone 으로 판단). 같은 type 3연속 금지는 그대로.",
+   "themes": [
+    "variety"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§0-4",
+   "text": "7. 재료 (v2, docs/26): 사람은 실제 사진(CC0·CC BY·PD) 또는 이름 카드 — 막대 인물 금지. 증거는 기사·논문 캡처 + 말할 때 형광펜. 아이콘은 스티커. 한 장면에 같은 재료 50% 이하, 배경(밝은 종이·어두운 종이·사진 전체)을 장면마다 바꾼다.",
+   "themes": [
+    "background"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§0-5",
+   "text": "기각 원인 (v21·v3): ① 한 장의 큰 종이에 사진·문서·쪽지·도장·그림을 계속 쌓아 화면이 콜라주가 됨 ② 대본을 글자 쪽지로 다시 씀(자막과 중복) ③ 그림이 '나타나기'만 하고 대본의 행동을 하지 않음 ④ 무엇을 위해 그 그림을 넣었는지 적은 곳이 없음.",
+   "themes": [
+    "emphasis",
+    "script"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§0-5",
+   "text": "#### A. 만들기 전에 정한다 (02_script/intent.md, 없으면 렌더하지 않음)",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§0-5",
+   "text": "화면 글자는 하나만, 자막이 말하는 문장을 다시 쓰지 않음 — 연도·숫자·이름·핵심어만 (검사: stage/text) | 자막과 같은 글은 읽을 거리만 늘림. 쪽지·소제목·말풍선 질문 나열 금지",
+   "themes": [
+    "emphasis"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§0-6",
+   "text": "audience.md 에는 이 영상의 주 시청자·유입 경로·유입 이유·끝까지 보는 이유·다시 볼 곳·하지 않을 것·제목 후보를 쓴다 (check G1 MUST).",
+   "themes": [
+    "intent"
+   ],
+   "absolute": false,
+   "must": true
+  },
+  {
+   "section": "sec:04§0-6",
+   "text": "2. 형식·진행·말투는 README §2-3 (미주일기 문법): 때·곳·사람이 있는 여는 장면 → 질문 하나 → 한 줄기 이야기를 시간 순서로 → 처음 장면으로 돌아와 닫기. 시청자에게 말 걸기(\"~하실 분?\", \"손을 펴 보세요\")로 열지 않는다 (v24 에서 바뀜).",
+   "themes": [
+    "script",
+    "intent"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§0-6",
+   "text": "3. 감정은 디테일에서: 사람의 사연·뜻밖의 일화·숫자의 대비가 놀라움과 여운을 만든다. 말투로 흥분을 만들지 않는다 (억텐 금지).",
+   "themes": [
+    "script"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§0-6",
+   "text": "5. 연도·기관·인명은 이야기에 꼭 필요할 때만, 하나씩. 출처는 말로 읽지 않고 화면 아래·설명란으로. 인용문 낭독 장면·목차(\"첫째·둘째\") 쓰지 않음.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§0-6",
+   "text": "대본(script_vN.md)을 먼저 사용자에게 보내 통과를 받는다 → 02_script/script_review.md 에 '통과 (날짜·사용자 의견)'를 적는다 (check G4 MUST). 통과 전에는 그림 주문·렌더를 하지 않는다.",
+   "themes": [
+    "script"
+   ],
+   "absolute": false,
+   "must": true
+  },
+  {
+   "section": "sec:04§2",
+   "text": "분야를 돌려 가며: 역사 → 심리 → 생활 속 과학 → AI·기술과 미래 → 지리·도시 → 물건·음식의 기원. 같은 분야 3회 연속 금지.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§3",
+   "text": "장면 · 원리 · 비교 · 규모(숫자를 사람 수로) · 연결. 통념 하나를 바로잡고, '쓰지 않는 것'(확인 안 된 유명한 이야기)을 팩트시트 끝에 적습니다.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§4",
+   "text": "말투: 이야기하듯(\"~죠\", \"~거든요\"를 한 장면에 하나), 한 문장에 정보 하나, 장 첫 문장은 질문, 장 끝은 다음 장을 여는 다리 문장. 과장 단어 금지 — 장면과 숫자가 놀라게.",
+   "themes": [
+    "script"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§5",
+   "text": "공공 기록(미국 의회도서관·NASA·정부 기록, 1930년 이전 퍼블릭 도메인), 위키미디어 CC BY/CC0, 직접 그린 도식. 사진 원래 설명(캡션)은 좋은 대사가 되지만 날짜·장소를 그대로 지킵니다 (다른 장소 사진에 다른 지명 붙이기 금지).",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:04§6",
+   "text": "제목: 훅에서 (§0-3). [누구나 아는 것] + [모르는 이유 질문], 앞 22자 안에 질문이 끝나게. 답은 제목에 넣지 않음.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:05§h19",
+   "text": "아래 자막과 같은 문장을 화면 위에 다시 쓰지 않는다. words 는 문장이 아니라 핵심 단어 1~3개만, 그 말을 하는 순간 한 번 띄웠다 사라진다.",
+   "themes": [
+    "emphasis"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:05§h25",
+   "text": "words | 핵심 단어 1~3개만 한 번 띄움 (문장 전체 금지 · 강조 예산에 포함) | 키네틱 | beat, hit[1~3], y(0~1, 기본 0.16)",
+   "themes": [
+    "emphasis"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:05§0-7",
+   "text": "> \"화면 전환 배경이 전부 NASA 사진 — 고정하지 말고 상황·카테고리·주제에 따라.\"",
+   "themes": [
+    "motion",
+    "background"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:05§0-7",
+   "text": "장 표지 사진은 주제에 맞게 (NASA 위성 사진 고정 금지): 사건 현장·기관·거래소·회사·연구소 사진을 python -m ytflow archive commons \"검색어\" (위키미디어 공용, PD·CC0·CC BY 만, SA·NC·ND 제외)나 의회도서관·정부 공개 사진에서 고르고, footage 에 credit 을 적습니다 → 표지 오른쪽 위에 출처가 나옴. 같은 사진을 두 번 표지로 쓰지 않습니다. 표지로 쓰지 않을 자료는 \"cover\": false.",
+   "themes": [
+    "depth"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:05§0-7",
+   "text": "이 장면이 하는 일 | look | 어느 카테고리든 | 쓰지 않을 때",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:05§0-7",
+   "text": "카테고리 모양을 쓰지 않음 | plain | — | —",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:05§0-2",
+   "text": "롱폼은 3종 이상(MUST), 같은 바탕 3장면 연속 금지(SHOULD, film 제외). check G5.",
+   "themes": [
+    "background"
+   ],
+   "absolute": false,
+   "must": true
+  },
+  {
+   "section": "sec:05§0-6",
+   "text": "바탕(그래픽 팩의 색)은 영상 하나에 고정하지 않고, 장면이 하는 일에 맞춰 바뀝니다 (코드 edit10.SITUATION, 기본으로 켜짐 — 끄려면 대본에 \"bg_mode\": \"fixed\").",
+   "themes": [
+    "background",
+    "script"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:05§0-6",
+   "text": "영상 기본 팩도 편마다 돌려 씁니다 — 직전 두 편과 같은 바탕 계열 연속 금지 (check G5 SHOULD).",
+   "themes": [
+    "background"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:05§0-5",
+   "text": "배경음 | 기본으로 깔림 | 기본 없음. 영상 분위기에 맞는 곡이 확실할 때만 대본에 \"bgm\" — 애매하면 넣지 않음",
+   "themes": [
+    "sound",
+    "script"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:05§0-5",
+   "text": "움직임 검사 | MUST: 화면 변화 ≥10/분 | SHOULD: ≥8/분 — 숫자를 채우려고 움직임을 더하지 않음",
+   "themes": [
+    "motion"
+   ],
+   "absolute": false,
+   "must": true
+  },
+  {
+   "section": "sec:05§0-4",
+   "text": "저음 타격음(impact-bass, '두웅')은 쓰지 않음 — 분위기 문제가 아니라 소리 자체가 싫다는 판정. 코드에서 아예 뺌.",
+   "themes": [
+    "sound"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:05§0-4",
+   "text": "곡이 영상보다 짧으면 이음매를 3초 겹쳐 이어 붙임(딱 끊기는 반복 금지).",
+   "themes": [
+    "variety"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:05§0-3",
+   "text": "MUST: plain 장면 3개 연속 금지 (장 표지·오프닝·끝 제외).",
+   "themes": [
+    "script"
+   ],
+   "absolute": false,
+   "must": true
+  },
+  {
+   "section": "sec:05§0-3",
+   "text": "고르는 요령: 숫자 하나 → photofill(그 숫자의 장소 사진으로 채움) · 연표·인과 지도 → tilt · 비유·인용 → dust/dolly · 전환·대비 → leak · 자료·목록 → scan. 효과는 내용과 어울려야 하며, 강조(05 §0-1)와 달리 정보를 더하지 않는 '분위기'라서 강조 예산에 들어가지 않습니다. 대신 과하면 산만하므로 한 장면 2개까지.",
+   "themes": [
+    "motion",
+    "emphasis",
+    "variety"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:05§3",
+   "text": "같은 type 연속 금지 (chapter 제외 3연속은 실패).",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:06§h3",
+   "text": "MUST = 반드시. 실패하면 고치기 전에는 렌더·업로드 금지.",
+   "themes": [],
+   "absolute": false,
+   "must": true
+  },
+  {
+   "section": "sec:06§h3",
+   "text": "> 시사(issues) 채널은 아래에 더해 manual/08-issues.md §6 의 전용 항목(기준 시각·양쪽 입장·단정 금지어·출처 다양성)을 check 가 함께 검사합니다.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:06§G2",
+   "text": "MUST | 라이선스가 CC BY·CC0·퍼블릭 도메인·공식 자료·직접 제작 (CC BY-SA·NC·ND, 다른 유튜버 영상 금지) | ✅ (credit 단어 검사) + EYE",
+   "themes": [],
+   "absolute": false,
+   "must": true
+  },
+  {
+   "section": "sec:06§G3",
+   "text": "SHOULD | '쓰지 않는 것' 목록 | ✅",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:06§G5",
+   "text": "MUST | 반복 피로: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기 = 자료·지도·사진 겹치기·시각 효과 fx, 05 §0-3) | ✅",
+   "themes": [
+    "variety"
+   ],
+   "absolute": false,
+   "must": true
+  },
+  {
+   "section": "sec:06§G6",
+   "text": "SHOULD | 움직임(v12): 완성본 측정 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (motion.json) — 숫자를 채우려 움직임을 더하지 않음 | ✅",
+   "themes": [
+    "motion"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:06§G6",
+   "text": "SHOULD | 바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(미색 종이 등) 연속 금지 (05 §0-6) | ✅",
+   "themes": [
+    "background"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:08§0-1",
+   "text": "재미가 사실을 이기지 않습니다: 과장어·낚시 금지, 양쪽 입장·기준 시각·'아직 모른다'는 그대로 지킵니다(§6). 재미는 말투와 순서에서 나오지, 사실을 부풀려서 나오지 않습니다.",
+   "themes": [
+    "script"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:08§0-2",
+   "text": "2. 구조가 있는 이슈 하나를 고릅니다 (정책·제도·국제·기업). 개인 피해 사건·사고는 제도·구조 문제로 이어질 때만, 사적 인물 실명 금지.",
+   "themes": [
+    "depth"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:08§h101",
+   "text": "훅(사건 + 수수께끼, 인트로 없음 v24) → 무슨 일 → 왜 지금 → 양쪽 말 → 우리에게 → 볼 신호. 장마다 한 줄 결론. 3분 미만 롱폼은 만들지 않는다(0.77배).",
+   "themes": [
+    "script",
+    "depth"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:08§4",
+   "text": "인물 사진: 공식·퍼블릭 도메인·CC BY 만 쓴다. 표정을 골라 조롱하는 사진은 쓰지 않는다. 합성이면 '재구성 이미지'라고 표시한다.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:08§4",
+   "text": "양쪽 입장은 같은 틀로 보여 준다. 크기·색·길이를 같게 해서, 연출로 한쪽 편을 들지 않는다.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:08§5",
+   "text": "'진짜·속내·숨은'은 효과가 없다(0.95배). 감정어(충격·소름)는 금지다.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:08§5",
+   "text": "썸네일 문구도 같은 사실 규칙을 따른다. 의혹을 사실처럼 쓰지 않는다.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:08§6",
+   "text": "MUST | 단정 금지어 없음: \"범인은\", \"확실히 ~했다(의혹 사안)\", \"~충\", 집단 비하 | ✅ (목록 검사) + EYE",
+   "themes": [],
+   "absolute": false,
+   "must": true
+  },
+  {
+   "section": "sec:08§6",
+   "text": "EYE | 수사 중인 사건에서 누구를 범인으로 단정하지 않았는가 | 사람 눈",
+   "themes": [
+    "depth"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§0",
+   "text": "전날 시장(미국·한국)을 움직인 것을 1차 출처로 확인하고, 그것이 무엇으로 이어지고 무슨 뜻인지까지 깊게 설명한다 — 10분 안팎이 기본, 주제가 깊으면 더 길게 (v24 최소 10분은 깊이의 최소선, 맞출 숫자가 아님 — README §2-4). 투자 권유는 하지 않는다.",
+   "themes": [
+    "motion",
+    "length"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§0",
+   "text": "하는 것 | 하지 않는 것",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§2",
+   "text": "어떻게: 일정마다 \"왜 중요한가 → 지난번 숫자·회사 가이던스(전망) → 무엇을 보면 되나(볼 숫자 1~2개) → 결과가 위/아래면 무엇으로 이어지나(해석) → 한국 시장 연결\". 시장 컨센서스 숫자는 매체마다 다르면 쓰지 않고 회사가 낸 가이던스를 기준으로.",
+   "themes": [
+    "length"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§2",
+   "text": "출처: 회사 IR 일정·8-K 보도자료(실적일), BLS·BEA·연준·한국은행·관세청 공식 일정표, DART. 일정표 사이트 한 곳만 보고 쓰지 않음.",
+   "themes": [
+    "length"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§3-0",
+   "text": "어떻게: 사람이 앱/웹에서 본다. 웹은 Cloudflare 봇 확인이 걸려 있고 robots.txt 가 AI 수집기를 막으며(ai-train=no, use=reference), 그래서 자동 수집·우회·비공개 API 호출은 하지 않는다.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§3-0",
+   "text": "쓰는 법: SAVE 소식은 단서. 이야기 고르기(§2)의 후보에 더하고, 영상에 넣는 것은 아래 §3-1 의 1차 출처로 다시 확인해 factsheet 에 쓴다. SAVE 요약 문장을 대본에 그대로 옮기지 않는다.",
+   "themes": [
+    "script"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§3-1",
+   "text": "막힌 곳(403·봇 확인)은 우회하지 않음 — 다른 1차 출처나 보도 2곳 일치로.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§3-2",
+   "text": "## 쓰지 않는 것: 매체마다 다른 숫자, 1곳뿐인 주장, 사적 인물, 목표가",
+   "themes": [
+    "intent"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§6",
+   "text": "사진: 주제에 맞게 (회사 간판·건물·데이터센터·거래소), 위키미디어 공용 PD·CC0·CC BY 만 — python -m ytflow archive commons \"검색어\". 출처 표시 자동. NASA 위성 사진 반복 금지.",
+   "themes": [
+    "variety"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§6",
+   "text": "눈요기(05 §0-3, check MUST): 글씨·도형뿐인 장면 3연속 금지 → 사진(layers photo)·지도(locator)·카메라 효과(fx: tilt·dolly·scan) 섞기. 겹친 장면(layers) 3개 이상.",
+   "themes": [
+    "motion",
+    "variety"
+   ],
+   "absolute": false,
+   "must": true
+  },
+  {
+   "section": "sec:09§6",
+   "text": "같은 스타일 3연속 금지, 한 스타일 40% 이하 (막대·숫자·차트는 data-report 로 묶여 셈).",
+   "themes": [
+    "variety"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§6",
+   "text": "확대·축소 쓰지 않음 (v31, 2026-11-15 사용자: \"자꾸 화면을 확대하고 축소하고 웅웅거리는 거 쓰지 말아 주세요\") — 시장 채널은 장면 안 느린 확대, fx tilt·dolly, 차트 확대, 사진 밀기(ken burns), 박자 카메라를 모두 끈다 (hybrid.json \"zoom\": \"off\" 가 기본, 렌더러 D.no_zoom). 화면 변화는 말에 맞춰 생기는 그림·숫자·줄(박자 motion, 체크리스트 t)과 장면 전환으로만.",
+   "themes": [
+    "motion",
+    "sound"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§6",
+   "text": "배경음 기본 없음. 카메라는 억지로 흔들지 않는다 (v30, 2026-11-15 사용자: \"정적이라고 했다고 정지 화면에서 굳이 억지로 화면을 웅웅거리며 미세하게 움직이지 않아도 됩니다\") — v27 박자 카메라는 기본 끔(\"camera\": \"beat\" 로만 켬). '정적'의 뜻은 화면이 흔들리지 않는다는 것이 아니라 말하는 내용이 화면에 나타나지 않는다는 것 → 아래 '말하는 것이 화면에 생긴다' 규칙으로 해결.",
+   "themes": [
+    "motion",
+    "sound"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§6",
+   "text": "말하는 것이 화면에 생긴다 — 멈춘 화면 금지 (v27, 2026-11-15 사용자 기각: \"영상이 정적이다, 멈춰 있는 부분이 많다 — 하는 말은 많은데 45일·60일만 강조돼 있다\")",
+   "themes": [
+    "motion",
+    "emphasis"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§6",
+   "text": "렌더 전 G4 MUST: 화면에 없는 숫자를 2개 이상 말하면서 motion 이 없는 박자 0개. 정지 화면 비율(motion.json)은 참고만 — 카메라를 흔들어 숫자를 맞추지 않는다 (v30).",
+   "themes": [
+    "motion"
+   ],
+   "absolute": false,
+   "must": true
+  },
+  {
+   "section": "sec:09§7",
+   "text": "제목 3개: ① 훅(질문, 답 숨김) + \"| ○월 ○일\" ② 숫자 대비 ③ 장면 + 다룬 종목. 과장어·권유어 금지.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§12",
+   "text": "출처가 막힘 (403·봇 확인) | 우회하지 않음. 다른 1차 출처 또는 보도 2곳 일치, 안 되면 그 원인을 빼기",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§13",
+   "text": "투자 권유 금지 (check 가 단어 검사). 마지막은 늘 '확인할 것'.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§13",
+   "text": "유사투자자문업: 무료 정보·해설은 해당 없음. 유료로 종목을 추천하는 멤버십·리딩방을 열면 신고 대상 — 하지 않음.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§13",
+   "text": "사적 인물: 의혹·사생활 관련 실명 금지 (공인 직함은 가능).",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:09§13",
+   "text": "저작권: 뉴스 사진·방송 화면 쓰지 않음. 위키미디어 PD·CC0·CC BY + 출처 표시, 직접 그린 도식, 공시 문장 인용.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:README§1-1",
+   "text": "curiosity | 우연히 마주침 (원래 궁금하지 않았음) | 듣는 순간 생긴 궁금증을 풀고 싶다 | 이야기가 목적, 정보는 그 안에 | 이야기를 풀어내듯: 장면 → 인물 → 사건 → 반전 → 답 (§04 §0) | 이야기를 연기하는 애니메이션 (§04 §0-5, stage) — 정보 카드·요약판·글자 쪽지를 쓰지 않음",
+   "themes": [
+    "depth"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:README§2-1",
+   "text": "인사·채널 소개·채널 약속·순서 예고·\"본격적인 시작 전에 구독과 좋아요\"를 넣지 않습니다. 첫 장면은 intro 가 아니라 본론입니다.",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:README§2-1",
+   "text": "장 표지는 그대로 쓰되 진행 멘트(\"첫 번째, 이런 순서로…\")는 하지 않고, 앞 장의 결론에서 다음 질문이 자연스럽게 나오게 잇습니다.",
+   "themes": [
+    "script"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:README§2-2",
+   "text": "쓰지 않음 (MUST, check G4 자동) | 이렇게",
+   "themes": [],
+   "absolute": false,
+   "must": true
+  },
+  {
+   "section": "sec:README§2-4",
+   "text": "늘릴 때는 같은 말을 반복하지 않고 §2-3 의 뼈대를 채운다: 여는 장면의 일화 하나 더 · 그 전의 문제를 당사자의 회고로 · 전환점의 장면 · 원리의 생활 속 예 · 퍼져 나감의 장면(시간 순서) · 반론과 한계 · 수미상관. 대본 기준 약 4,600자(미주일기 말 빠르기 약 460자/분) 이상.",
+   "themes": [
+    "motion",
+    "variety",
+    "script"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:README§2-5",
+   "text": "2. 자르지 말고 흐른다 — 4초 넘는 문장은 중간에 주인공 쪽으로 깊게 밀고 들어갔다가 빠져나온다. 하드 컷은 거의 쓰지 않는다 (미주일기 측정: 하드 컷 분당 1.35회, 화면 변화 분당 22.7회 = 2초마다 무언가 바뀜, 정지 비율 0.26 — styles/mijudiary/STYLE.md).",
+   "themes": [],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:README§2-5",
+   "text": "5. 글자(연도·이름·숫자)는 카메라 밖 위층에 둬서 잘리지 않는다.",
+   "themes": [
+    "motion"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:README§2-5",
+   "text": "6. 효과음은 절제 — 반짝이는 소리(chime) 쓰지 않음 (2026-11-14 사용자).",
+   "themes": [
+    "sound"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:README§2-5",
+   "text": "기준 채널: 미주일기 최신 영상 (2026-11-14 사용자: \"동적인 동영상의 미감 — 예시는 미주일기 채널의 최신 영상들\"). 영상 파일은 클라우드에서 봇 확인에 막혀 받지 않는다(우회 금지) → 사용자 PC 에서 python -m ytflow style mijudiary-<날짜> 영상.mp4 로 다시 재거나, 영상 파일을 Google Drive 에 올리면 분석한다.",
+   "themes": [
+    "motion",
+    "depth"
+   ],
+   "absolute": false,
+   "must": false
+  },
+  {
+   "section": "sec:README§3",
+   "text": "1. 확인 안 된 숫자·발언을 단정하기. 소문(찌라시)은 '소문'이라고 밝히고 사실 확인 결과와 함께만.",
+   "themes": [],
+   "absolute": true,
+   "must": false
+  },
+  {
+   "section": "sec:README§3",
+   "text": "2. 투자 권유 (\"사세요\", \"지금이 기회\", \"무조건 오른다\", 목표가 단정).",
+   "themes": [
+    "intent"
+   ],
+   "absolute": true,
+   "must": false
+  },
+  {
+   "section": "sec:README§3",
+   "text": "3. YouTube 봇 확인·사이트 차단 우회. 막히면 임시 화면 + 사용자 PC rebuild.",
+   "themes": [],
+   "absolute": true,
+   "must": false
+  },
+  {
+   "section": "sec:README§3",
+   "text": "4. 레퍼런스 채널의 대사·캐릭터·로고·썸네일 복제. 구조와 기법만.",
+   "themes": [],
+   "absolute": true,
+   "must": false
+  },
+  {
+   "section": "sec:README§3",
+   "text": "5. 라이선스 불명 자료 화면. CC BY·CC0·퍼블릭 도메인·공식 보도 자료·직접 만든 것만, 출처는 footage.credit 에.",
+   "themes": [],
+   "absolute": true,
+   "must": false
+  },
+  {
+   "section": "sec:README§3",
+   "text": "6. API 키를 채팅에 쓰기.",
+   "themes": [],
+   "absolute": true,
+   "must": false
+  },
+  {
+   "section": "sec:README§3",
+   "text": "7. 미디어 파일(mp4·wav·png·jpg) 커밋. 완성본은 Release 로.",
+   "themes": [],
+   "absolute": true,
+   "must": false
+  }
+ ],
  "nodes": [
   {
    "id": "step:1",
@@ -166,7 +1073,10 @@
    "label": "연출·그래픽",
    "does": "`python -m ytflow style-pick` 추천 → `05-style-matching.md` 로 장면마다 연출 type 과 그래픽 팩 결정",
    "outputs": "edit.yaml, hybrid.json 의 type·look",
-   "gate": "gate:G5"
+   "gate": "gate:G5",
+   "terms": [
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "step:6",
@@ -598,7 +1508,17 @@
    "end": 50,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:kinetic",
+    "term:intro",
+    "term:footage",
+    "term:versus",
+    "term:checklist",
+    "term:analogy",
+    "term:bignum",
+    "term:outro"
+   ]
   },
   {
    "id": "sec:02§h51",
@@ -670,7 +1590,15 @@
    "versions": [
     17
    ],
-   "last_version": 17
+   "last_version": 17,
+   "terms": [
+    "term:chart",
+    "term:versus",
+    "term:chapter",
+    "term:checklist",
+    "term:bars",
+    "term:outro"
+   ]
   },
   {
    "id": "sec:03§0-1",
@@ -686,7 +1614,16 @@
    "versions": [
     18
    ],
-   "last_version": 18
+   "last_version": 18,
+   "terms": [
+    "term:versus",
+    "term:quote",
+    "term:checklist",
+    "term:analogy",
+    "term:bars",
+    "term:bignum",
+    "term:board"
+   ]
   },
   {
    "id": "sec:03§0-2",
@@ -702,7 +1639,13 @@
    "versions": [
     26
    ],
-   "last_version": 26
+   "last_version": 26,
+   "terms": [
+    "term:versus",
+    "term:checklist",
+    "term:newspapers",
+    "term:board"
+   ]
   },
   {
    "id": "sec:03§0-3",
@@ -746,7 +1689,16 @@
    "end": 121,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:footage",
+    "term:chart",
+    "term:map_causal",
+    "term:quote",
+    "term:bars",
+    "term:compare",
+    "term:board"
+   ]
   },
   {
    "id": "sec:03§3",
@@ -774,7 +1726,20 @@
    "end": 157,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:intro",
+    "term:footage",
+    "term:chart",
+    "term:versus",
+    "term:map_causal",
+    "term:quote",
+    "term:checklist",
+    "term:timeline",
+    "term:bignum",
+    "term:compare",
+    "term:outro"
+   ]
   },
   {
    "id": "sec:03§5",
@@ -788,7 +1753,10 @@
    "end": 165,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:chart"
+   ]
   },
   {
    "id": "sec:03§6",
@@ -890,7 +1858,16 @@
    "versions": [
     21
    ],
-   "last_version": 21
+   "last_version": 21,
+   "terms": [
+    "term:kinetic",
+    "term:versus",
+    "term:quote",
+    "term:board",
+    "term:story",
+    "term:style-story-board",
+    "term:beat-motion"
+   ]
   },
   {
    "id": "sec:04§0-5",
@@ -906,7 +1883,11 @@
    "versions": [
     22
    ],
-   "last_version": 22
+   "last_version": 22,
+   "terms": [
+    "term:stage",
+    "term:style-anim-stage"
+   ]
   },
   {
    "id": "sec:04§0-6",
@@ -979,7 +1960,24 @@
    "end": 180,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:kb",
+    "term:journey",
+    "term:kinetic",
+    "term:intro",
+    "term:isotype",
+    "term:footage",
+    "term:versus",
+    "term:quote",
+    "term:checklist",
+    "term:analogy",
+    "term:timeline",
+    "term:bars",
+    "term:outro",
+    "term:newspapers",
+    "term:style-map-journey"
+   ]
   },
   {
    "id": "sec:04§5",
@@ -1035,7 +2033,13 @@
    "end": 18,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:skin-dark-doc",
+    "term:skin-newsprint",
+    "term:layers",
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "sec:05§h19",
@@ -1049,7 +2053,11 @@
    "end": 24,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:kinetic",
+    "term:layers"
+   ]
   },
   {
    "id": "sec:05§h25",
@@ -1063,7 +2071,14 @@
    "end": 38,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:journey",
+    "term:footage",
+    "term:bars",
+    "term:style-map-journey",
+    "term:layers"
+   ]
   },
   {
    "id": "sec:05§0-7",
@@ -1079,7 +2094,28 @@
    "versions": [
     15
    ],
-   "last_version": 15
+   "last_version": 15,
+   "terms": [
+    "term:footage",
+    "term:chapter",
+    "term:map_causal",
+    "term:analogy",
+    "term:board",
+    "term:skin-clean-white",
+    "term:skin-dark-doc",
+    "term:skin-midnight",
+    "term:skin-slate",
+    "term:style-ai-chat",
+    "term:style-app-window-cover",
+    "term:style-archive-doc",
+    "term:style-chalk-lesson",
+    "term:style-dash-cover",
+    "term:style-duotone-cover",
+    "term:style-evidence-board",
+    "term:style-map-journey",
+    "term:style-paper-column",
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "sec:05§0-2",
@@ -1095,7 +2131,23 @@
    "versions": [
     8
    ],
-   "last_version": 8
+   "last_version": 8,
+   "terms": [
+    "term:card_type",
+    "term:kinetic",
+    "term:intro",
+    "term:chart",
+    "term:versus",
+    "term:map_causal",
+    "term:quote",
+    "term:checklist",
+    "term:analogy",
+    "term:timeline",
+    "term:bars",
+    "term:bignum",
+    "term:outro",
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "sec:05§0-6",
@@ -1111,7 +2163,31 @@
    "versions": [
     14
    ],
-   "last_version": 14
+   "last_version": 14,
+   "terms": [
+    "term:recap",
+    "term:isotype",
+    "term:chart",
+    "term:versus",
+    "term:map_causal",
+    "term:quote",
+    "term:checklist",
+    "term:analogy",
+    "term:timeline",
+    "term:bars",
+    "term:bignum",
+    "term:skin-blueprint",
+    "term:skin-clean-flat",
+    "term:skin-clean-white",
+    "term:skin-dark-doc",
+    "term:skin-forest",
+    "term:skin-kinetic-poster",
+    "term:skin-midnight",
+    "term:skin-newsprint",
+    "term:skin-paper-sketch",
+    "term:skin-slate",
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "sec:05§0-5",
@@ -1127,7 +2203,13 @@
    "versions": [
     12
    ],
-   "last_version": 12
+   "last_version": 12,
+   "terms": [
+    "term:beat-camera",
+    "term:slow-push",
+    "term:change-rate",
+    "term:transition"
+   ]
   },
   {
    "id": "sec:05§0-4",
@@ -1141,7 +2223,18 @@
    "end": 138,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:recap",
+    "term:isotype",
+    "term:fx-dust",
+    "term:fx-leak",
+    "term:beat-camera",
+    "term:slow-push",
+    "term:static-ratio",
+    "term:change-rate",
+    "term:transition"
+   ]
   },
   {
    "id": "sec:05§0-3",
@@ -1157,7 +2250,26 @@
    "versions": [
     9
    ],
-   "last_version": 9
+   "last_version": 9,
+   "terms": [
+    "term:kb",
+    "term:journey",
+    "term:chat",
+    "term:terminal",
+    "term:zoomshot",
+    "term:choropleth",
+    "term:footage",
+    "term:fx-tilt",
+    "term:fx-dolly",
+    "term:fx-dust",
+    "term:fx-leak",
+    "term:fx-photofill",
+    "term:fx-scan",
+    "term:style-hand-annotate",
+    "term:style-map-journey",
+    "term:layers",
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "sec:05§0",
@@ -1185,7 +2297,17 @@
    "end": 180,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:skin-blueprint",
+    "term:skin-clean-flat",
+    "term:skin-dark-doc",
+    "term:skin-kinetic-poster",
+    "term:skin-newsprint",
+    "term:skin-paper-sketch",
+    "term:style-data-report",
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "sec:05§2",
@@ -1199,7 +2321,36 @@
    "end": 201,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:kb",
+    "term:card_type",
+    "term:journey",
+    "term:kinetic",
+    "term:chat",
+    "term:terminal",
+    "term:zoomshot",
+    "term:choropleth",
+    "term:footage",
+    "term:chart",
+    "term:versus",
+    "term:chapter",
+    "term:map_causal",
+    "term:usmap",
+    "term:quote",
+    "term:checklist",
+    "term:analogy",
+    "term:timeline",
+    "term:bars",
+    "term:bignum",
+    "term:parking",
+    "term:compare",
+    "term:people",
+    "term:newspapers",
+    "term:shape",
+    "term:style-map-journey",
+    "term:layers"
+   ]
   },
   {
    "id": "sec:05§3",
@@ -1213,7 +2364,13 @@
    "end": 208,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:kb",
+    "term:journey",
+    "term:footage",
+    "term:chapter"
+   ]
   },
   {
    "id": "sec:05§4",
@@ -1227,7 +2384,24 @@
    "end": 215,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:kb",
+    "term:card_type",
+    "term:journey",
+    "term:kinetic",
+    "term:footage",
+    "term:chart",
+    "term:versus",
+    "term:map_causal",
+    "term:checklist",
+    "term:analogy",
+    "term:timeline",
+    "term:compare",
+    "term:outro",
+    "term:people",
+    "term:newspapers"
+   ]
   },
   {
    "id": "sec:05§5",
@@ -1241,7 +2415,15 @@
    "end": 218,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:skin-dark-doc",
+    "term:skin-kinetic-poster",
+    "term:skin-newsprint",
+    "term:style-archive-doc",
+    "term:style-kinetic-type",
+    "term:style-map-journey"
+   ]
   },
   {
    "id": "sec:06§h3",
@@ -1311,7 +2493,11 @@
    "end": 56,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:intro",
+    "term:checklist"
+   ]
   },
   {
    "id": "sec:06§G5",
@@ -1325,7 +2511,15 @@
    "end": 74,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:kinetic",
+    "term:chapter",
+    "term:fx-dust",
+    "term:fx-leak",
+    "term:layers",
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "sec:06§G6",
@@ -1339,7 +2533,12 @@
    "end": 87,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:static-ratio",
+    "term:change-rate",
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "sec:06§G7",
@@ -1539,7 +2738,19 @@
    "end": 100,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:kb",
+    "term:card_type",
+    "term:journey",
+    "term:choropleth",
+    "term:intro",
+    "term:map_causal",
+    "term:quote",
+    "term:checklist",
+    "term:timeline",
+    "term:bars"
+   ]
   },
   {
    "id": "sec:08§h101",
@@ -1567,7 +2778,13 @@
    "end": 110,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:skin-clean-flat",
+    "term:skin-dark-doc",
+    "term:style-issue-dark-montage",
+    "term:style-issue-quick-brief"
+   ]
   },
   {
    "id": "sec:08§5",
@@ -1595,7 +2812,11 @@
    "end": 132,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:footage",
+    "term:quote"
+   ]
   },
   {
    "id": "sec:09§0",
@@ -1724,7 +2945,21 @@
    "end": 129,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:kinetic",
+    "term:intro",
+    "term:chart",
+    "term:versus",
+    "term:chapter",
+    "term:map_causal",
+    "term:quote",
+    "term:checklist",
+    "term:analogy",
+    "term:bars",
+    "term:outro",
+    "term:board"
+   ]
   },
   {
    "id": "sec:09§5",
@@ -1741,7 +2976,11 @@
     26,
     28
    ],
-   "last_version": 28
+   "last_version": 28,
+   "terms": [
+    "term:recap",
+    "term:quote"
+   ]
   },
   {
    "id": "sec:09§6",
@@ -1757,7 +2996,22 @@
    "versions": [
     27
    ],
-   "last_version": 27
+   "last_version": 27,
+   "terms": [
+    "term:board",
+    "term:fx-tilt",
+    "term:fx-dolly",
+    "term:fx-scan",
+    "term:skin-slate",
+    "term:style-data-report",
+    "term:beat-camera",
+    "term:slow-push",
+    "term:beat-motion",
+    "term:static-ratio",
+    "term:change-rate",
+    "term:transition",
+    "term:layers"
+   ]
   },
   {
    "id": "sec:09§7",
@@ -1773,7 +3027,10 @@
    "versions": [
     27
    ],
-   "last_version": 27
+   "last_version": 27,
+   "terms": [
+    "term:versus"
+   ]
   },
   {
    "id": "sec:09§8",
@@ -1899,7 +3156,11 @@
    "end": 221,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:beat-motion",
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "sec:README§0",
@@ -1913,7 +3174,10 @@
    "end": 14,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "sec:README§1",
@@ -1943,7 +3207,11 @@
    "versions": [
     21
    ],
-   "last_version": 21
+   "last_version": 21,
+   "terms": [
+    "term:stage",
+    "term:transition"
+   ]
   },
   {
    "id": "sec:README§2",
@@ -1957,7 +3225,10 @@
    "end": 57,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "sec:README§2-1",
@@ -1974,7 +3245,10 @@
     23,
     24
    ],
-   "last_version": 24
+   "last_version": 24,
+   "terms": [
+    "term:intro"
+   ]
   },
   {
    "id": "sec:README§2-2",
@@ -2039,7 +3313,16 @@
    "versions": [
     25
    ],
-   "last_version": 25
+   "last_version": 25,
+   "terms": [
+    "term:stage",
+    "term:idle",
+    "term:perspective-paper",
+    "term:walk-in",
+    "term:static-ratio",
+    "term:change-rate",
+    "term:hard-cut"
+   ]
   },
   {
    "id": "sec:README§3",
@@ -2053,7 +3336,10 @@
    "end": 110,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:footage"
+   ]
   },
   {
    "id": "sec:README§4",
@@ -2268,7 +3554,10 @@
    "label": "**인트로 없음**: 첫 장면이 인사·순서 예고 `intro` 가 아니고, 인사·채널 소개·구독 부탁 문구 없음 — README §2-1 (v24)",
    "auto": true,
    "eye": false,
-   "line": 46
+   "line": 46,
+   "terms": [
+    "term:intro"
+   ]
   },
   {
    "id": "rule:G4:1",
@@ -2356,7 +3645,10 @@
    "label": "market: 마지막 2장면 안에 확인할 신호(checklist)",
    "auto": true,
    "eye": false,
-   "line": 54
+   "line": 54,
+   "terms": [
+    "term:checklist"
+   ]
   },
   {
    "id": "rule:G4:1",
@@ -2378,7 +3670,10 @@
    "label": "같은 type 3연속 없음 (chapter 제외)",
    "auto": true,
    "eye": false,
-   "line": 60
+   "line": 60,
+   "terms": [
+    "term:chapter"
+   ]
   },
   {
    "id": "rule:G5:1",
@@ -2433,7 +3728,11 @@
    "label": "v10: 장식 효과(dust·leak) 2장면 이하 — 내용이 담긴 볼거리 먼저 (05 §0-4)",
    "auto": true,
    "eye": false,
-   "line": 65
+   "line": 65,
+   "terms": [
+    "term:fx-dust",
+    "term:fx-leak"
+   ]
   },
   {
    "id": "rule:G5:1",
@@ -2466,7 +3765,10 @@
    "label": "**강조 아껴 쓰기**: 강조(words·number·vox·kinetic) 1분에 1번 이하, 한 장면에 1개까지, words 는 핵심 단어 1~3개만 — 자막과 같은 문장을 위에 반복하면 불합격",
    "auto": true,
    "eye": false,
-   "line": 68
+   "line": 68,
+   "terms": [
+    "term:kinetic"
+   ]
   },
   {
    "id": "rule:G5:1",
@@ -2477,7 +3779,10 @@
    "label": "**스타일 조합**: 롱폼 4종 이상(쇼츠 2종), 한 스타일 40% 이하(쇼츠 60%), 겹친 장면(`layers`) 3개 이상(쇼츠 1개), 같은 스타일 3장면 연속 없음 — 한 스타일로만 만들면 불합격",
    "auto": true,
    "eye": false,
-   "line": 69
+   "line": 69,
+   "terms": [
+    "term:layers"
+   ]
   },
   {
    "id": "rule:G5:1",
@@ -2510,7 +3815,10 @@
    "label": "그래픽 팩이 브랜드에 맞는 등록부 레시피의 팩 (`styles/recipes`, `edit.yaml` 의 skin)",
    "auto": true,
    "eye": false,
-   "line": 72
+   "line": 72,
+   "terms": [
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "rule:G5:1",
@@ -2576,7 +3884,11 @@
    "label": "**움직임(v12)**: 완성본 측정 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (`motion.json`) — 숫자를 채우려 움직임을 더하지 않음",
    "auto": true,
    "eye": false,
-   "line": 82
+   "line": 82,
+   "terms": [
+    "term:static-ratio",
+    "term:change-rate"
+   ]
   },
   {
    "id": "rule:G6:1",
@@ -2598,7 +3910,10 @@
    "label": "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(미색 종이 등) 연속 금지 (05 §0-6)",
    "auto": true,
    "eye": false,
-   "line": 84
+   "line": 84,
+   "terms": [
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "rule:G6:1",
@@ -3149,7 +4464,10 @@
    "level": "SHOULD",
    "label": "market: 끝에 확인할 신호(checklist)",
    "file": "ytflow/stages/checklist.py",
-   "line": 283
+   "line": 283,
+   "terms": [
+    "term:checklist"
+   ]
   },
   {
    "id": "check:286",
@@ -3212,7 +4530,10 @@
    "level": "SHOULD",
    "label": "issues: 사람의 목소리 장면 1개 이상 (quote·이름 자막)",
    "file": "ytflow/stages/checklist.py",
-   "line": 299
+   "line": 299,
+   "terms": [
+    "term:quote"
+   ]
   },
   {
    "id": "check:303",
@@ -3248,7 +4569,10 @@
    "level": "MUST",
    "label": "인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1)",
    "file": "ytflow/stages/checklist.py",
-   "line": 313
+   "line": 313,
+   "terms": [
+    "term:intro"
+   ]
   },
   {
    "id": "check:316",
@@ -3311,7 +4635,11 @@
    "level": "SHOULD",
    "label": "v10: 장식 효과(dust·leak)는 2장면 이하 — 내용이 담긴 볼거리(사진·지도·사물 그림·정리판) 먼저",
    "file": "ytflow/stages/checklist.py",
-   "line": 339
+   "line": 339,
+   "terms": [
+    "term:fx-dust",
+    "term:fx-leak"
+   ]
   },
   {
    "id": "check:340",
@@ -3338,7 +4666,10 @@
    "level": "SHOULD",
    "label": "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6)",
    "file": "ytflow/stages/checklist.py",
-   "line": 357
+   "line": 357,
+   "terms": [
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "check:362",
@@ -3419,7 +4750,10 @@
    "level": "MUST",
    "label": "한 장면 안에서 겹친 장면(layers) {rule['min_layered']}개 이상",
    "file": "ytflow/stages/checklist.py",
-   "line": 402
+   "line": 402,
+   "terms": [
+    "term:layers"
+   ]
   },
   {
    "id": "check:403",
@@ -3464,7 +4798,10 @@
    "level": "SHOULD",
    "label": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
    "file": "ytflow/stages/checklist.py",
-   "line": 410
+   "line": 410,
+   "terms": [
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "check:412",
@@ -3518,7 +4855,11 @@
    "level": "SHOULD",
    "label": "움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선)",
    "file": "ytflow/stages/checklist.py",
-   "line": 429
+   "line": 429,
+   "terms": [
+    "term:static-ratio",
+    "term:change-rate"
+   ]
   },
   {
    "id": "check:433",
@@ -3527,7 +4868,10 @@
    "level": "MUST",
    "label": "curiosity 움직임: 정지 화면 비율 ≤0.3 (README §2-5)",
    "file": "ytflow/stages/checklist.py",
-   "line": 433
+   "line": 433,
+   "terms": [
+    "term:static-ratio"
+   ]
   },
   {
    "id": "check:439",
@@ -3633,6 +4977,10 @@
    ],
    "themes": [
     "variety"
+   ],
+   "terms": [
+    "term:layers",
+    "term:graphic-pack"
    ]
   },
   {
@@ -3657,6 +5005,9 @@
    "themes": [
     "emphasis",
     "variety"
+   ],
+   "terms": [
+    "term:layers"
    ]
   },
   {
@@ -3733,6 +5084,14 @@
    "themes": [
     "motion",
     "variety"
+   ],
+   "terms": [
+    "term:fx-tilt",
+    "term:fx-dolly",
+    "term:fx-dust",
+    "term:fx-leak",
+    "term:fx-photofill",
+    "term:fx-scan"
    ]
   },
   {
@@ -3746,6 +5105,12 @@
    "themes": [
     "motion",
     "sound"
+   ],
+   "terms": [
+    "term:recap",
+    "term:isotype",
+    "term:beat-camera",
+    "term:transition"
    ]
   },
   {
@@ -3799,6 +5164,10 @@
    "themes": [
     "motion",
     "sound"
+   ],
+   "terms": [
+    "term:slow-push",
+    "term:transition"
    ]
   },
   {
@@ -3817,6 +5186,9 @@
    ],
    "themes": [
     "background"
+   ],
+   "terms": [
+    "term:graphic-pack"
    ]
   },
   {
@@ -3927,7 +5299,14 @@
     "subject": "anim-stage 스타일 문서·썸네일 그림 조각(cutouts)·AGENTS 안내",
     "date": "2026-11-14",
     "other_files": []
-   }
+   },
+   "terms": [
+    "term:bite",
+    "term:illust",
+    "term:style-hand-annotate",
+    "term:style-illustrated",
+    "term:style-source-cut"
+   ]
   },
   {
    "id": "ver:21",
@@ -3965,7 +5344,11 @@
      "projects/20261113-curiosity-moravec/05_edit/subs.ass",
      "projects/20261113-curiosity-moravec/05_edit/sync_qa.json"
     ]
-   }
+   },
+   "terms": [
+    "term:stage",
+    "term:style-anim-stage"
+   ]
   },
   {
    "id": "ver:22",
@@ -4091,7 +5474,13 @@
      "projects/20261113-curiosity-moravec/05_edit/subs.ass",
      "projects/20261113-curiosity-moravec/05_edit/sync_qa.json"
     ]
-   }
+   },
+   "terms": [
+    "term:idle",
+    "term:perspective-paper",
+    "term:walk-in",
+    "term:static-ratio"
+   ]
   },
   {
    "id": "ver:26",
@@ -4151,7 +5540,11 @@
      "projects/20261115-market-analysis/05_edit/checklist.md",
      "ytflow/stages/checklist.py"
     ]
-   }
+   },
+   "terms": [
+    "term:beat-motion",
+    "term:static-ratio"
+   ]
   },
   {
    "id": "ver:28",
@@ -4222,7 +5615,12 @@
      "ytflow/stages/hybrid.py",
      "ytflow/stages/ytpublish.py"
     ]
-   }
+   },
+   "terms": [
+    "term:beat-camera",
+    "term:beat-motion",
+    "term:static-ratio"
+   ]
   },
   {
    "id": "ver:31",
@@ -4244,7 +5642,15 @@
      "ytflow/stages/edit10.py",
      "ytflow/stages/hybrid.py"
     ]
-   }
+   },
+   "terms": [
+    "term:fx-tilt",
+    "term:fx-dolly",
+    "term:beat-camera",
+    "term:slow-push",
+    "term:beat-motion",
+    "term:change-rate"
+   ]
   },
   {
    "id": "rev:1",
@@ -4385,7 +5791,11 @@
     "motion",
     "sound"
    ],
-   "status": "applied"
+   "status": "applied",
+   "terms": [
+    "term:beat-camera",
+    "term:transition"
+   ]
   },
   {
    "id": "rev:12",
@@ -4399,7 +5809,11 @@
     "motion",
     "sound"
    ],
-   "status": "applied"
+   "status": "applied",
+   "terms": [
+    "term:beat-camera",
+    "term:transition"
+   ]
   },
   {
    "id": "rev:13",
@@ -4413,7 +5827,11 @@
     "motion",
     "sound"
    ],
-   "status": "applied"
+   "status": "applied",
+   "terms": [
+    "term:beat-camera",
+    "term:transition"
+   ]
   },
   {
    "id": "rev:14",
@@ -4427,7 +5845,11 @@
     "motion",
     "sound"
    ],
-   "status": "applied"
+   "status": "applied",
+   "terms": [
+    "term:beat-camera",
+    "term:transition"
+   ]
   },
   {
    "id": "rev:15",
@@ -4440,7 +5862,10 @@
    "themes": [
     "background"
    ],
-   "status": "applied"
+   "status": "applied",
+   "terms": [
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "rev:16",
@@ -4821,7 +6246,10 @@
     13
    ],
    "label": "바탕색 돌려 쓰기 (v13): 미색 종이 계열만 계속 쓰지 않기 — 직전 두 프로젝트와 같은 바탕 계열이면 경고",
-   "src": "# 바탕색 돌려 쓰기 (v13): 미색 종이 계열만 계속 쓰지 않기 — 직전 두 프로젝트와 같은 바탕 계열이면 경고"
+   "src": "# 바탕색 돌려 쓰기 (v13): 미색 종이 계열만 계속 쓰지 않기 — 직전 두 프로젝트와 같은 바탕 계열이면 경고",
+   "terms": [
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "code:ytflow/stages/checklist.py:361",
@@ -4898,7 +6326,13 @@
     31
    ],
    "label": "v31 확대·축소 없음 (2026-11-15 사용자) — tilt·dolly 는 쓰지 않고 scan(빛 훑기)만",
-   "src": "if getattr(D, \"no_zoom\", False):   # v31 확대·축소 없음 (2026-11-15 사용자) — tilt·dolly 는 쓰지 않고 scan(빛 훑기)만"
+   "src": "if getattr(D, \"no_zoom\", False):   # v31 확대·축소 없음 (2026-11-15 사용자) — tilt·dolly 는 쓰지 않고 scan(빛 훑기)만",
+   "terms": [
+    "term:fx-tilt",
+    "term:fx-dolly",
+    "term:fx-scan",
+    "term:slow-push"
+   ]
   },
   {
    "id": "code:ytflow/stages/directions.py:661",
@@ -4954,7 +6388,10 @@
     12
    ],
    "label": "v12 (사용자 판정 '너무 정신없다'): 보통 장면 사이는 부드러운 겹침(fade), 장 표지로 들어갈 때만 밀기(push).",
-   "src": "\"\"\"v12 (사용자 판정 '너무 정신없다'): 보통 장면 사이는 부드러운 겹침(fade), 장 표지로 들어갈 때만 밀기(push).\"\"\""
+   "src": "\"\"\"v12 (사용자 판정 '너무 정신없다'): 보통 장면 사이는 부드러운 겹침(fade), 장 표지로 들어갈 때만 밀기(push).\"\"\"",
+   "terms": [
+    "term:transition"
+   ]
   },
   {
    "id": "code:ytflow/stages/edit10.py:65",
@@ -4976,7 +6413,10 @@
     27
    ],
    "label": "---- v27 박자 카메라 (manual/09 §6): 박자마다 밀고 당기며 옮겨 가고, 머무는 동안에도 계속 움직임 — 멈춘 화면 없게",
-   "src": "# ---- v27 박자 카메라 (manual/09 §6): 박자마다 밀고 당기며 옮겨 가고, 머무는 동안에도 계속 움직임 — 멈춘 화면 없게"
+   "src": "# ---- v27 박자 카메라 (manual/09 §6): 박자마다 밀고 당기며 옮겨 가고, 머무는 동안에도 계속 움직임 — 멈춘 화면 없게",
+   "terms": [
+    "term:beat-camera"
+   ]
   },
   {
    "id": "code:ytflow/stages/edit10.py:81",
@@ -4987,7 +6427,10 @@
     12
    ],
    "label": "v12: 장면 내내 한 방향으로 아주 천천히 다가가기만 (박자마다 흔들지 않음)",
-   "src": "# v12: 장면 내내 한 방향으로 아주 천천히 다가가기만 (박자마다 흔들지 않음)"
+   "src": "# v12: 장면 내내 한 방향으로 아주 천천히 다가가기만 (박자마다 흔들지 않음)",
+   "terms": [
+    "term:slow-push"
+   ]
   },
   {
    "id": "code:ytflow/stages/edit10.py:82",
@@ -4998,7 +6441,10 @@
     31
    ],
    "label": "v31 확대·축소 없음",
-   "src": "if not getattr(D, \"no_zoom\", False):   # v31 확대·축소 없음"
+   "src": "if not getattr(D, \"no_zoom\", False):   # v31 확대·축소 없음",
+   "terms": [
+    "term:slow-push"
+   ]
   },
   {
    "id": "code:ytflow/stages/edit10.py:155",
@@ -5009,7 +6455,10 @@
     31
    ],
    "label": "v31 확대·축소 없음",
-   "src": "if not getattr(D, \"no_zoom\", False):   # v31 확대·축소 없음"
+   "src": "if not getattr(D, \"no_zoom\", False):   # v31 확대·축소 없음",
+   "terms": [
+    "term:slow-push"
+   ]
   },
   {
    "id": "code:ytflow/stages/edit10.py:233",
@@ -5042,7 +6491,10 @@
     27
    ],
    "label": "cam) 밖에 둔다 — 카메라가 다가가도 잘리지 않게 (v27).\"\"\"",
-   "src": "\"\"\"출처 줄·장 꼬리표는 박자 카메라(#cam) 밖에 둔다 — 카메라가 다가가도 잘리지 않게 (v27).\"\"\""
+   "src": "\"\"\"출처 줄·장 꼬리표는 박자 카메라(#cam) 밖에 둔다 — 카메라가 다가가도 잘리지 않게 (v27).\"\"\"",
+   "terms": [
+    "term:beat-camera"
+   ]
   },
   {
    "id": "code:ytflow/stages/hybrid.py:544",
@@ -5097,7 +6549,10 @@
     27
    ],
    "label": "v27 박자 카메라 (manual/09 §6): spec camera: \"beat\" 일 때만",
-   "src": "# v27 박자 카메라 (manual/09 §6): spec camera: \"beat\" 일 때만"
+   "src": "# v27 박자 카메라 (manual/09 §6): spec camera: \"beat\" 일 때만",
+   "terms": [
+    "term:beat-camera"
+   ]
   },
   {
    "id": "code:ytflow/stages/hybrid.py:1042",
@@ -5119,7 +6574,12 @@
     31
    ],
    "label": "v31 확대·축소 없음 (2026-11-15 사용자: \"자꾸 화면을 확대하고 축소하고 웅웅거리는 거 쓰지 말아 주세요\"): 시장 브랜드 기본 — 장면 안 느린 확대·tilt·dolly·차트 확대·사진 밀기 끔",
-   "src": "# v31 확대·축소 없음 (2026-11-15 사용자: \"자꾸 화면을 확대하고 축소하고 웅웅거리는 거 쓰지 말아 주세요\"): 시장 브랜드 기본 — 장면 안 느린 확대·tilt·dolly·차트 확대·사진 밀기 끔"
+   "src": "# v31 확대·축소 없음 (2026-11-15 사용자: \"자꾸 화면을 확대하고 축소하고 웅웅거리는 거 쓰지 말아 주세요\"): 시장 브랜드 기본 — 장면 안 느린 확대·tilt·dolly·차트 확대·사진 밀기 끔",
+   "terms": [
+    "term:fx-tilt",
+    "term:fx-dolly",
+    "term:slow-push"
+   ]
   },
   {
    "id": "code:ytflow/stages/hybrid.py:1056",
@@ -5185,7 +6645,11 @@
     2
    ],
    "label": "어두운 스튜디오 3D 물체 (studio3d 장면, motion-metaphor v2 · docs/22)",
-   "src": "from . import studio3d as _studio3d   # 어두운 스튜디오 3D 물체 (studio3d 장면, motion-metaphor v2 · docs/22)"
+   "src": "from . import studio3d as _studio3d   # 어두운 스튜디오 3D 물체 (studio3d 장면, motion-metaphor v2 · docs/22)",
+   "terms": [
+    "term:studio3d",
+    "term:style-motion-metaphor"
+   ]
   },
   {
    "id": "code:ytflow/stages/hybrid.py:1446",
@@ -5196,7 +6660,11 @@
     22
    ],
    "label": "애니메이션 무대 (stage 장면, styles/anim-stage) — 호기심 채널 v22, manual/04 §0-5",
-   "src": "from . import stage as _stage        # 애니메이션 무대 (stage 장면, styles/anim-stage) — 호기심 채널 v22, manual/04 §0-5"
+   "src": "from . import stage as _stage        # 애니메이션 무대 (stage 장면, styles/anim-stage) — 호기심 채널 v22, manual/04 §0-5",
+   "terms": [
+    "term:stage",
+    "term:style-anim-stage"
+   ]
   },
   {
    "id": "code:ytflow/stages/identity.py:1",
@@ -5218,7 +6686,11 @@
     22
    ],
    "label": "애니메이션 무대 (`stage`) — 호기심 채널 이야기형 v22 (2026-11-14 사용자 기각 반영, manual/04 §0-5).",
-   "src": "\"\"\"애니메이션 무대 (`stage`) — 호기심 채널 이야기형 v22 (2026-11-14 사용자 기각 반영, manual/04 §0-5)."
+   "src": "\"\"\"애니메이션 무대 (`stage`) — 호기심 채널 이야기형 v22 (2026-11-14 사용자 기각 반영, manual/04 §0-5).",
+   "terms": [
+    "term:stage",
+    "term:style-anim-stage"
+   ]
   },
   {
    "id": "code:ytflow/stages/stage.py:61",
@@ -5240,7 +6712,10 @@
     25
    ],
    "label": "v25 걸어서(굴러서) 화면 밖에서 들어옴 — 나타나기 대신 움직임",
-   "src": "if m.get(\"from\") == \"walk\":   # v25 걸어서(굴러서) 화면 밖에서 들어옴 — 나타나기 대신 움직임"
+   "src": "if m.get(\"from\") == \"walk\":   # v25 걸어서(굴러서) 화면 밖에서 들어옴 — 나타나기 대신 움직임",
+   "terms": [
+    "term:walk-in"
+   ]
   },
   {
    "id": "code:ytflow/stages/story.py:88",
@@ -5262,7 +6737,10 @@
     2
    ],
    "label": "이야기 그림판 v2 — 재료와 움직임 (2026-11-13 사용자: \"졸라맨·애니메이션 품질이 너무 낮고, 그림 패턴이 매번 똑같다\").",
-   "src": "\"\"\"이야기 그림판 v2 — 재료와 움직임 (2026-11-13 사용자: \"졸라맨·애니메이션 품질이 너무 낮고, 그림 패턴이 매번 똑같다\")."
+   "src": "\"\"\"이야기 그림판 v2 — 재료와 움직임 (2026-11-13 사용자: \"졸라맨·애니메이션 품질이 너무 낮고, 그림 패턴이 매번 똑같다\").",
+   "terms": [
+    "term:style-story-board"
+   ]
   },
   {
    "id": "code:ytflow/stages/studio3d.py:1",
@@ -5273,7 +6751,11 @@
     2
    ],
    "label": "어두운 스튜디오 3D 장면 (studio3d) — motion-metaphor v2 (docs/22: 레퍼런스 재분석).",
-   "src": "\"\"\"어두운 스튜디오 3D 장면 (studio3d) — motion-metaphor v2 (docs/22: 레퍼런스 재분석)."
+   "src": "\"\"\"어두운 스튜디오 3D 장면 (studio3d) — motion-metaphor v2 (docs/22: 레퍼런스 재분석).",
+   "terms": [
+    "term:studio3d",
+    "term:style-motion-metaphor"
+   ]
   },
   {
    "id": "code:ytflow/stages/stylepick.py:212",
@@ -5295,7 +6777,10 @@
     22
    ],
    "label": "그림 조각 (영상의 stage 주인공과 같은 그림, 배경 투명) — 2026-11-14 v22",
-   "src": "for ct in v.get(\"cutouts\", []):   # 그림 조각 (영상의 stage 주인공과 같은 그림, 배경 투명) — 2026-11-14 v22"
+   "src": "for ct in v.get(\"cutouts\", []):   # 그림 조각 (영상의 stage 주인공과 같은 그림, 배경 투명) — 2026-11-14 v22",
+   "terms": [
+    "term:stage"
+   ]
   },
   {
    "id": "code:ytflow/stages/trends.py:90",
@@ -5812,7 +7297,10 @@
     }
    ],
    "status": "unreviewed",
-   "annotated": false
+   "annotated": false,
+   "terms": [
+    "term:graphic-pack"
+   ]
   },
   {
    "id": "intent:7efa00c0",
@@ -5972,7 +7460,11 @@
     }
    ],
    "status": "unreviewed",
-   "annotated": false
+   "annotated": false,
+   "terms": [
+    "term:beat-camera",
+    "term:transition"
+   ]
   },
   {
    "id": "intent:fec0e40f",
@@ -8072,6 +9564,3680 @@
    ],
    "status": "unreviewed",
    "annotated": false
+  },
+  {
+   "id": "term:bite",
+   "kind": "term",
+   "key": "bite",
+   "aliases": [
+    "bite"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/cutedit.py",
+     "line": 154,
+     "src": "def s_bite(D, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-source-cut"
+   ],
+   "name": "bite",
+   "cat": "scene",
+   "plain": "앞 내레이션 동안: 원본 첫 화면을 멈춘 사진으로(어둡게, 천천히 당김) + 이름 카드 →",
+   "how": "렌더 함수 s_bite() 가 이 장면을 그림 (ytflow/stages/cutedit.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"bite\"",
+   "anim": "cut",
+   "label": "bite",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "ver:20"
+   ]
+  },
+  {
+   "id": "term:kb",
+   "kind": "term",
+   "key": "kb",
+   "aliases": [
+    "kb"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 57,
+     "src": "def s_kb(D, sc, bt, dur):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-archive-doc",
+    "term:style-issue-dark-montage",
+    "term:style-issue-quick-brief"
+   ],
+   "name": "kb",
+   "cat": "scene",
+   "plain": "자료 화면 가득 + 켄 번스 움직임 + 필름 가장자리 어둡게 + 타자기 날짜·장소.",
+   "how": "렌더 함수 s_kb() 가 이 장면을 그림 (ytflow/stages/directions.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"kb\"",
+   "anim": "kenburns",
+   "label": "kb",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:04§4",
+    "sec:05§0-3",
+    "sec:05§2",
+    "sec:05§3",
+    "sec:05§4",
+    "sec:08§h89"
+   ]
+  },
+  {
+   "id": "term:card_type",
+   "kind": "term",
+   "key": "card_type",
+   "aliases": [
+    "card_type"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 76,
+     "src": "def s_card_type(D, sc, bt, dur):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-archive-doc",
+    "term:style-issue-dark-montage",
+    "term:style-kinetic-type"
+   ],
+   "name": "card_type",
+   "cat": "scene",
+   "plain": "검은 카드 + 타자기 글줄 (인용·핵심 문장). 박자마다 한 줄.",
+   "how": "렌더 함수 s_card_type() 가 이 장면을 그림 (ytflow/stages/directions.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"card_type\"",
+   "anim": null,
+   "label": "card_type",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:05§0-2",
+    "sec:05§2",
+    "sec:05§4",
+    "sec:08§h89"
+   ]
+  },
+  {
+   "id": "term:journey",
+   "kind": "term",
+   "key": "journey",
+   "aliases": [
+    "journey"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 132,
+     "src": "def s_journey(D, sc, bt, dur):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-issue-dark-montage",
+    "term:style-map-journey"
+   ],
+   "name": "journey",
+   "cat": "scene",
+   "plain": "세계 지도(직사각형, 화면 꽉 채움): 박자마다 카메라 이동(goto+zoom), 경로선 그리기(route), 핀(pin).",
+   "how": "렌더 함수 s_journey() 가 이 장면을 그림 (ytflow/stages/directions.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"journey\"",
+   "anim": "draw",
+   "label": "journey",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:04§4",
+    "sec:05§h25",
+    "sec:05§0-3",
+    "sec:05§2",
+    "sec:05§3",
+    "sec:05§4",
+    "sec:08§h89"
+   ]
+  },
+  {
+   "id": "term:kinetic",
+   "kind": "term",
+   "key": "kinetic",
+   "aliases": [
+    "kinetic"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 336,
+     "src": "def s_kinetic(D, sc, bt, dur):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-kinetic-type"
+   ],
+   "name": "kinetic",
+   "cat": "scene",
+   "plain": "목소리가 말하는 순간 단어가 화면에 박힌다. 덩어리(한 줄) 단위로 위로 밀려 올라가며 바뀜. 강조 단어·숫자는 크게, 강조색.",
+   "how": "렌더 함수 s_kinetic() 가 이 장면을 그림 (ytflow/stages/directions.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"kinetic\"",
+   "anim": "kinetic",
+   "label": "kinetic",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:02§h40",
+    "sec:04§0-4",
+    "sec:04§4",
+    "sec:05§h19",
+    "sec:05§0-2",
+    "sec:05§2",
+    "sec:05§4",
+    "sec:06§G5",
+    "sec:09§4",
+    "rule:G5:1"
+   ]
+  },
+  {
+   "id": "term:chat",
+   "kind": "term",
+   "key": "chat",
+   "aliases": [
+    "chat"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 461,
+     "src": "def s_chat(D, sc, bt, dur):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-ai-chat"
+   ],
+   "name": "chat",
+   "cat": "scene",
+   "plain": "AI 대화 화면: 질문이 타자로 쳐지고, 답이 단어 단위로 흘러나온다 (상표·로고 없이 '예시(재구성)'로 표시).",
+   "how": "렌더 함수 s_chat() 가 이 장면을 그림 (ytflow/stages/directions.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"chat\"",
+   "anim": "kinetic",
+   "label": "chat",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:05§0-3",
+    "sec:05§2"
+   ]
+  },
+  {
+   "id": "term:terminal",
+   "kind": "term",
+   "key": "terminal",
+   "aliases": [
+    "terminal"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 499,
+     "src": "def s_terminal(D, sc, bt, dur):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-terminal-typing"
+   ],
+   "name": "terminal",
+   "cat": "scene",
+   "plain": "터미널: 명령이 타자로, 결과가 줄 단위로. lines: [{cmd|out, beat}] — 실제 실행 기록만 (설명용이면 label 에 '재구성').",
+   "how": "렌더 함수 s_terminal() 가 이 장면을 그림 (ytflow/stages/directions.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"terminal\"",
+   "anim": "kinetic",
+   "label": "terminal",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:05§0-3",
+    "sec:05§2"
+   ]
+  },
+  {
+   "id": "term:zoomshot",
+   "kind": "term",
+   "key": "zoomshot",
+   "aliases": [
+    "zoomshot"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 521,
+     "src": "def s_zoomshot(D, sc, bt, dur):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-issue-quick-brief",
+    "term:style-screen-zoom"
+   ],
+   "name": "zoomshot",
+   "cat": "scene",
+   "plain": "화면 녹화 자동 줌: 자료 화면 위에서 카메라가 박자마다 지정한 네모로 다가가고, 그 자리를 얇은 선으로 표시.",
+   "how": "렌더 함수 s_zoomshot() 가 이 장면을 그림 (ytflow/stages/directions.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"zoomshot\"",
+   "anim": "zoomshot",
+   "label": "zoomshot",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:05§0-3",
+    "sec:05§2"
+   ]
+  },
+  {
+   "id": "term:choropleth",
+   "kind": "term",
+   "key": "choropleth",
+   "aliases": [
+    "choropleth"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 552,
+     "src": "def s_choropleth(D, sc, bt, dur):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-data-choropleth",
+    "term:style-issue-dark-montage"
+   ],
+   "name": "choropleth",
+   "cat": "scene",
+   "plain": "나라별 색칠 지도: values{나라 영문명: 숫자}, 박자마다 show[나라] 를 색칠, 범례. (world-atlas, 직사각형 지도)",
+   "how": "렌더 함수 s_choropleth() 가 이 장면을 그림 (ytflow/stages/directions.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"choropleth\"",
+   "anim": null,
+   "label": "choropleth",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:05§0-3",
+    "sec:05§2",
+    "sec:08§h89"
+   ]
+  },
+  {
+   "id": "term:intro",
+   "kind": "term",
+   "key": "intro",
+   "aliases": [
+    "intro"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 597,
+     "src": "def s_intro(D, sc, bt, dur):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "intro",
+   "cat": "scene",
+   "plain": "본론 전 MC 오프닝: 시리즈 배지·기준 시각 → 오늘의 제목 → 오늘 순서(장 제목을 대본에서 자동으로).",
+   "how": "렌더 함수 s_intro() 가 이 장면을 그림 (ytflow/stages/directions.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"intro\"",
+   "anim": null,
+   "label": "intro",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:02§h40",
+    "sec:03§4",
+    "sec:04§4",
+    "sec:05§0-2",
+    "sec:06§G4",
+    "sec:08§h89",
+    "sec:09§4",
+    "sec:README§2-1",
+    "rule:G4:1",
+    "check:313"
+   ]
+  },
+  {
+   "id": "term:recap",
+   "kind": "term",
+   "key": "recap",
+   "aliases": [
+    "recap"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/edit10.py",
+     "line": 87,
+     "src": "def s_recap(D, sc, bt, dur):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "recap",
+   "cat": "scene",
+   "plain": "장 끝 정리판: 지금까지의 한 줄 결론을 쌓는다. 이전 줄은 흐리게, 이번 줄은 밝게 타자.",
+   "how": "렌더 함수 s_recap() 가 이 장면을 그림 (ytflow/stages/edit10.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"recap\"",
+   "anim": "layers",
+   "label": "recap",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:05§0-6",
+    "sec:05§0-4",
+    "sec:09§5",
+    "ver:10"
+   ]
+  },
+  {
+   "id": "term:isotype",
+   "kind": "term",
+   "key": "isotype",
+   "aliases": [
+    "isotype"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/edit10.py",
+     "line": 118,
+     "src": "def s_isotype(D, sc, bt, dur):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "isotype",
+   "cat": "scene",
+   "plain": "사물 아이콘 줄: total 개 중 lost 개가 흐려지며 빠진다 (예: 기름통 10통 중 3통). 숫자 라벨 2개.",
+   "how": "렌더 함수 s_isotype() 가 이 장면을 그림 (ytflow/stages/edit10.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"isotype\"",
+   "anim": "beat-motion",
+   "label": "isotype",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:04§4",
+    "sec:05§0-6",
+    "sec:05§0-4",
+    "ver:10"
+   ]
+  },
+  {
+   "id": "term:footage",
+   "kind": "term",
+   "key": "footage",
+   "aliases": [
+    "footage"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 213,
+     "src": "def s_footage(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-archive-doc",
+    "term:style-hybrid-causal",
+    "term:style-map-journey",
+    "term:style-screen-demo",
+    "term:style-statement-brief"
+   ],
+   "name": "footage",
+   "cat": "scene",
+   "plain": "장면 종류 footage",
+   "how": "렌더 함수 s_footage() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"footage\"",
+   "anim": "kenburns",
+   "label": "footage",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:02§h40",
+    "sec:03§2",
+    "sec:03§4",
+    "sec:04§4",
+    "sec:05§h25",
+    "sec:05§0-7",
+    "sec:05§0-3",
+    "sec:05§2",
+    "sec:05§3",
+    "sec:05§4",
+    "sec:08§6",
+    "sec:README§3"
+   ]
+  },
+  {
+   "id": "term:chart",
+   "kind": "term",
+   "key": "chart",
+   "aliases": [
+    "chart"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 249,
+     "src": "def s_chart(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-data-report"
+   ],
+   "name": "chart",
+   "cat": "scene",
+   "plain": "장면 종류 chart",
+   "how": "렌더 함수 s_chart() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"chart\"",
+   "anim": null,
+   "label": "chart",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:03§0",
+    "sec:03§2",
+    "sec:03§4",
+    "sec:03§5",
+    "sec:05§0-2",
+    "sec:05§0-6",
+    "sec:05§2",
+    "sec:05§4",
+    "sec:09§4"
+   ]
+  },
+  {
+   "id": "term:versus",
+   "kind": "term",
+   "key": "versus",
+   "aliases": [
+    "versus"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 303,
+     "src": "def s_versus(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-hybrid-causal",
+    "term:style-screen-demo"
+   ],
+   "name": "versus",
+   "cat": "scene",
+   "plain": "장면 종류 versus",
+   "how": "렌더 함수 s_versus() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"versus\"",
+   "anim": null,
+   "label": "versus",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:02§h40",
+    "sec:03§0",
+    "sec:03§0-1",
+    "sec:03§0-2",
+    "sec:03§4",
+    "sec:04§0-4",
+    "sec:04§4",
+    "sec:05§0-2",
+    "sec:05§0-6",
+    "sec:05§2",
+    "sec:05§4",
+    "sec:09§4",
+    "sec:09§7"
+   ]
+  },
+  {
+   "id": "term:chapter",
+   "kind": "term",
+   "key": "chapter",
+   "aliases": [
+    "chapter"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 322,
+     "src": "def s_chapter(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-app-window-cover",
+    "term:style-chalk-lesson",
+    "term:style-dash-cover",
+    "term:style-duotone-cover",
+    "term:style-hybrid-causal"
+   ],
+   "name": "chapter",
+   "cat": "scene",
+   "plain": "장면 종류 chapter",
+   "how": "렌더 함수 s_chapter() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"chapter\"",
+   "anim": "crossfade",
+   "label": "chapter",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:03§0",
+    "sec:05§0-7",
+    "sec:05§2",
+    "sec:05§3",
+    "sec:06§G5",
+    "sec:09§4",
+    "rule:G5:1"
+   ]
+  },
+  {
+   "id": "term:map_causal",
+   "kind": "term",
+   "key": "map_causal",
+   "aliases": [
+    "map_causal"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 433,
+     "src": "def s_map_causal(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-blueprint-explainer",
+    "term:style-chalk-lesson",
+    "term:style-evidence-board",
+    "term:style-hybrid-causal",
+    "term:style-issue-dark-montage",
+    "term:style-paper-column"
+   ],
+   "name": "map_causal",
+   "cat": "scene",
+   "plain": "장면 종류 map_causal",
+   "how": "렌더 함수 s_map_causal() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"map_causal\"",
+   "anim": "draw",
+   "label": "map_causal",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:03§2",
+    "sec:03§4",
+    "sec:05§0-7",
+    "sec:05§0-2",
+    "sec:05§0-6",
+    "sec:05§2",
+    "sec:05§4",
+    "sec:08§h89",
+    "sec:09§4"
+   ]
+  },
+  {
+   "id": "term:usmap",
+   "kind": "term",
+   "key": "usmap",
+   "aliases": [
+    "usmap"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 473,
+     "src": "def s_usmap(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-map-journey"
+   ],
+   "name": "usmap",
+   "cat": "scene",
+   "plain": "장면 종류 usmap",
+   "how": "렌더 함수 s_usmap() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"usmap\"",
+   "anim": null,
+   "label": "usmap",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:05§2"
+   ]
+  },
+  {
+   "id": "term:quote",
+   "kind": "term",
+   "key": "quote",
+   "aliases": [
+    "quote"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 509,
+     "src": "def s_quote(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-archive-doc",
+    "term:style-hybrid-causal",
+    "term:style-issue-dark-montage",
+    "term:style-statement-brief"
+   ],
+   "name": "quote",
+   "cat": "scene",
+   "plain": "장면 종류 quote",
+   "how": "렌더 함수 s_quote() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"quote\"",
+   "anim": null,
+   "label": "quote",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:03§0-1",
+    "sec:03§2",
+    "sec:03§4",
+    "sec:04§0-4",
+    "sec:04§4",
+    "sec:05§0-2",
+    "sec:05§0-6",
+    "sec:05§2",
+    "sec:08§h89",
+    "sec:08§6",
+    "sec:09§4",
+    "sec:09§5",
+    "check:299"
+   ]
+  },
+  {
+   "id": "term:checklist",
+   "kind": "term",
+   "key": "checklist",
+   "aliases": [
+    "checklist"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 559,
+     "src": "def s_checklist(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-blueprint-explainer",
+    "term:style-issue-quick-brief",
+    "term:style-paper-column",
+    "term:style-screen-demo"
+   ],
+   "name": "checklist",
+   "cat": "scene",
+   "plain": "장면 종류 checklist",
+   "how": "렌더 함수 s_checklist() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"checklist\"",
+   "anim": null,
+   "label": "checklist",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:02§h40",
+    "sec:03§0",
+    "sec:03§0-1",
+    "sec:03§0-2",
+    "sec:03§4",
+    "sec:04§4",
+    "sec:05§0-2",
+    "sec:05§0-6",
+    "sec:05§2",
+    "sec:05§4",
+    "sec:06§G4",
+    "sec:08§h89",
+    "sec:09§4",
+    "rule:G4:1",
+    "check:283"
+   ]
+  },
+  {
+   "id": "term:analogy",
+   "kind": "term",
+   "key": "analogy",
+   "aliases": [
+    "analogy"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 595,
+     "src": "def s_analogy(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-blueprint-explainer",
+    "term:style-chalk-lesson",
+    "term:style-paper-column"
+   ],
+   "name": "analogy",
+   "cat": "scene",
+   "plain": "장면 종류 analogy",
+   "how": "렌더 함수 s_analogy() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"analogy\"",
+   "anim": null,
+   "label": "analogy",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:02§h40",
+    "sec:03§0-1",
+    "sec:04§4",
+    "sec:05§0-7",
+    "sec:05§0-2",
+    "sec:05§0-6",
+    "sec:05§2",
+    "sec:05§4",
+    "sec:09§4"
+   ]
+  },
+  {
+   "id": "term:funnel",
+   "kind": "term",
+   "key": "funnel",
+   "aliases": [
+    "funnel"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 614,
+     "src": "def s_funnel(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-data-report"
+   ],
+   "name": "funnel",
+   "cat": "scene",
+   "plain": "장면 종류 funnel",
+   "how": "렌더 함수 s_funnel() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"funnel\"",
+   "anim": null,
+   "label": "funnel",
+   "cat_label": "장면 종류",
+   "mentioned_in": []
+  },
+  {
+   "id": "term:apartments",
+   "kind": "term",
+   "key": "apartments",
+   "aliases": [
+    "apartments"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 640,
+     "src": "def s_apartments(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-paper-column"
+   ],
+   "name": "apartments",
+   "cat": "scene",
+   "plain": "장면 종류 apartments",
+   "how": "렌더 함수 s_apartments() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"apartments\"",
+   "anim": null,
+   "label": "apartments",
+   "cat_label": "장면 종류",
+   "mentioned_in": []
+  },
+  {
+   "id": "term:timeline",
+   "kind": "term",
+   "key": "timeline",
+   "aliases": [
+    "timeline"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 673,
+     "src": "def s_timeline(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-hybrid-causal",
+    "term:style-issue-quick-brief",
+    "term:style-map-journey",
+    "term:style-paper-column"
+   ],
+   "name": "timeline",
+   "cat": "scene",
+   "plain": "장면 종류 timeline",
+   "how": "렌더 함수 s_timeline() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"timeline\"",
+   "anim": null,
+   "label": "timeline",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:03§4",
+    "sec:04§4",
+    "sec:05§0-2",
+    "sec:05§0-6",
+    "sec:05§2",
+    "sec:05§4",
+    "sec:08§h89"
+   ]
+  },
+  {
+   "id": "term:bars",
+   "kind": "term",
+   "key": "bars",
+   "aliases": [
+    "bars"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 710,
+     "src": "def s_bars(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-blueprint-explainer",
+    "term:style-data-report",
+    "term:style-issue-quick-brief"
+   ],
+   "name": "bars",
+   "cat": "scene",
+   "plain": "장면 종류 bars",
+   "how": "렌더 함수 s_bars() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"bars\"",
+   "anim": null,
+   "label": "bars",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:03§0",
+    "sec:03§0-1",
+    "sec:03§2",
+    "sec:04§4",
+    "sec:05§h25",
+    "sec:05§0-2",
+    "sec:05§0-6",
+    "sec:05§2",
+    "sec:08§h89",
+    "sec:09§4"
+   ]
+  },
+  {
+   "id": "term:bignum",
+   "kind": "term",
+   "key": "bignum",
+   "aliases": [
+    "bignum"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 761,
+     "src": "def s_bignum(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-data-report",
+    "term:style-paper-column",
+    "term:style-statement-brief"
+   ],
+   "name": "bignum",
+   "cat": "scene",
+   "plain": "장면 종류 bignum",
+   "how": "렌더 함수 s_bignum() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"bignum\"",
+   "anim": "beat-motion",
+   "label": "bignum",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:02§h40",
+    "sec:03§0-1",
+    "sec:03§4",
+    "sec:05§0-2",
+    "sec:05§0-6",
+    "sec:05§2"
+   ]
+  },
+  {
+   "id": "term:parking",
+   "kind": "term",
+   "key": "parking",
+   "aliases": [
+    "parking"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 778,
+     "src": "def s_parking(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-paper-column"
+   ],
+   "name": "parking",
+   "cat": "scene",
+   "plain": "장면 종류 parking",
+   "how": "렌더 함수 s_parking() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"parking\"",
+   "anim": null,
+   "label": "parking",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:05§2"
+   ]
+  },
+  {
+   "id": "term:compare",
+   "kind": "term",
+   "key": "compare",
+   "aliases": [
+    "compare"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 802,
+     "src": "def s_compare(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-data-report"
+   ],
+   "name": "compare",
+   "cat": "scene",
+   "plain": "장면 종류 compare",
+   "how": "렌더 함수 s_compare() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"compare\"",
+   "anim": null,
+   "label": "compare",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:03§2",
+    "sec:03§4",
+    "sec:05§2",
+    "sec:05§4"
+   ]
+  },
+  {
+   "id": "term:outro",
+   "kind": "term",
+   "key": "outro",
+   "aliases": [
+    "outro"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 825,
+     "src": "def s_outro(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "outro",
+   "cat": "scene",
+   "plain": "장면 종류 outro",
+   "how": "렌더 함수 s_outro() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"outro\"",
+   "anim": null,
+   "label": "outro",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:02§h40",
+    "sec:03§0",
+    "sec:03§4",
+    "sec:04§4",
+    "sec:05§0-2",
+    "sec:05§4",
+    "sec:09§4"
+   ]
+  },
+  {
+   "id": "term:people",
+   "kind": "term",
+   "key": "people",
+   "aliases": [
+    "people"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 840,
+     "src": "def s_people(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-paper-column"
+   ],
+   "name": "people",
+   "cat": "scene",
+   "plain": "100명 그림: 그중 count 명이 빨갛게. 비율을 '사람'으로 느끼게 (3명 중 1명, 10명 중 4명).",
+   "how": "렌더 함수 s_people() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"people\"",
+   "anim": null,
+   "label": "people",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:05§2",
+    "sec:05§4"
+   ]
+  },
+  {
+   "id": "term:newspapers",
+   "kind": "term",
+   "key": "newspapers",
+   "aliases": [
+    "newspapers"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 870,
+     "src": "def s_newspapers(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-paper-column"
+   ],
+   "name": "newspapers",
+   "cat": "scene",
+   "plain": "두 나라 신문 비교: 왼쪽은 검은 줄로 지워진(검열) 지면, 오른쪽은 큰 제목으로 보도한 지면. 재구성 그림.",
+   "how": "렌더 함수 s_newspapers() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"newspapers\"",
+   "anim": null,
+   "label": "newspapers",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:03§0-2",
+    "sec:04§4",
+    "sec:05§2",
+    "sec:05§4"
+   ]
+  },
+  {
+   "id": "term:shape",
+   "kind": "term",
+   "key": "shape",
+   "aliases": [
+    "shape"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 908,
+     "src": "def s_shape(D: HDoc, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-paper-column"
+   ],
+   "name": "shape",
+   "cat": "scene",
+   "plain": "모양 비교 개념도 (숫자 축 없음): 보통은 U자, 그때는 W자. 박자마다 곡선 하나씩.",
+   "how": "렌더 함수 s_shape() 가 이 장면을 그림 (ytflow/stages/hybrid.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"shape\"",
+   "anim": null,
+   "label": "shape",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:05§2"
+   ]
+  },
+  {
+   "id": "term:board",
+   "kind": "term",
+   "key": "board",
+   "aliases": [
+    "board"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/identity.py",
+     "line": 190,
+     "src": "def s_board(D, sc, bt, dur):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "board",
+   "cat": "scene",
+   "plain": "map_causal 과 같은 대본(reveal·draw·active)을 코르크 판 위 카드 + 붉은 실로.",
+   "how": "렌더 함수 s_board() 가 이 장면을 그림 (ytflow/stages/identity.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"board\"",
+   "anim": null,
+   "label": "board",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:03§0-1",
+    "sec:03§0-2",
+    "sec:03§2",
+    "sec:04§0-4",
+    "sec:05§0-7",
+    "sec:09§4",
+    "sec:09§6"
+   ]
+  },
+  {
+   "id": "term:illust",
+   "kind": "term",
+   "key": "illust",
+   "aliases": [
+    "illust"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/illust.py",
+     "line": 96,
+     "src": "def s_illust(D, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-illustrated"
+   ],
+   "name": "illust",
+   "cat": "scene",
+   "plain": "장면 종류 illust",
+   "how": "렌더 함수 s_illust() 가 이 장면을 그림 (ytflow/stages/illust.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"illust\"",
+   "anim": "push",
+   "label": "illust",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "ver:20"
+   ]
+  },
+  {
+   "id": "term:metaphor",
+   "kind": "term",
+   "key": "metaphor",
+   "aliases": [
+    "metaphor"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/motion.py",
+     "line": 125,
+     "src": "def s_metaphor(D, sc, bt, dur):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-motion-metaphor"
+   ],
+   "name": "metaphor",
+   "cat": "scene",
+   "plain": "장면 종류 metaphor",
+   "how": "렌더 함수 s_metaphor() 가 이 장면을 그림 (ytflow/stages/motion.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"metaphor\"",
+   "anim": "walk",
+   "label": "metaphor",
+   "cat_label": "장면 종류",
+   "mentioned_in": []
+  },
+  {
+   "id": "term:newsdesk",
+   "kind": "term",
+   "key": "newsdesk",
+   "aliases": [
+    "newsdesk"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/newsdesk.py",
+     "line": 33,
+     "src": "def s_newsdesk(D, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-news-desk"
+   ],
+   "name": "newsdesk",
+   "cat": "scene",
+   "plain": "장면 종류 newsdesk",
+   "how": "렌더 함수 s_newsdesk() 가 이 장면을 그림 (ytflow/stages/newsdesk.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"newsdesk\"",
+   "anim": "layers",
+   "label": "newsdesk",
+   "cat_label": "장면 종류",
+   "mentioned_in": []
+  },
+  {
+   "id": "term:stage",
+   "kind": "term",
+   "key": "stage",
+   "aliases": [
+    "stage"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/stage.py",
+     "line": 576,
+     "src": "def s_stage(D, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-anim-stage"
+   ],
+   "name": "stage",
+   "cat": "scene",
+   "plain": "장면 종류 stage",
+   "how": "렌더 함수 s_stage() 가 이 장면을 그림 (ytflow/stages/stage.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"stage\"",
+   "anim": "walk",
+   "label": "stage",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:04§0-5",
+    "sec:README§1-1",
+    "sec:README§2-5",
+    "ver:21",
+    "code:ytflow/stages/hybrid.py:1446",
+    "code:ytflow/stages/stage.py:1",
+    "code:ytflow/stages/thumbnail.py:154"
+   ]
+  },
+  {
+   "id": "term:story",
+   "kind": "term",
+   "key": "story",
+   "aliases": [
+    "story"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/story.py",
+     "line": 428,
+     "src": "def s_story(D, sc: dict, bt: list, dur: float):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-story-board"
+   ],
+   "name": "story",
+   "cat": "scene",
+   "plain": "장면 종류 story",
+   "how": "렌더 함수 s_story() 가 이 장면을 그림 (ytflow/stages/story.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"story\"",
+   "anim": "draw",
+   "label": "story",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "sec:04§0-4"
+   ]
+  },
+  {
+   "id": "term:studio3d",
+   "kind": "term",
+   "key": "studio3d",
+   "aliases": [
+    "studio3d"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/studio3d.py",
+     "line": 157,
+     "src": "def s_studio3d(D, sc, bt, dur):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [
+    "term:style-motion-metaphor"
+   ],
+   "name": "studio3d",
+   "cat": "scene",
+   "plain": "3D 무대 장면. hybrid 의 HDoc 안에 캔버스 + 모듈 스크립트를 넣고, 메인 시간축이 t 를 넘겨 매 프레임을 다시 그린다.",
+   "how": "렌더 함수 s_studio3d() 가 이 장면을 그림 (ytflow/stages/studio3d.py)",
+   "enable": "hybrid.json 장면의 \"type\": \"studio3d\"",
+   "anim": null,
+   "label": "studio3d",
+   "cat_label": "장면 종류",
+   "mentioned_in": [
+    "code:ytflow/stages/hybrid.py:1436",
+    "code:ytflow/stages/studio3d.py:1"
+   ]
+  },
+  {
+   "id": "term:fx-tilt",
+   "kind": "term",
+   "key": "fx-tilt",
+   "aliases": [
+    "tilt"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 636,
+     "src": "\"tilt\": \"3D 기울기로 들어와 펴지는 카메라 (도형·글씨 장면을 '물체'처럼)\","
+    },
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 649,
+     "src": "def apply_fx(D, project, spec, sc, bt, dur, adir):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "tilt (시각 효과)",
+   "cat": "fx",
+   "plain": "3D 기울기로 들어와 펴지는 카메라 (도형·글씨 장면을 '물체'처럼)",
+   "how": "장면 그림 위에 효과를 덧붙이는 함수 apply_fx 가 처리",
+   "enable": "hybrid.json 장면의 \"fx\": [\"tilt\"]",
+   "anim": "tilt",
+   "label": "tilt (시각 효과)",
+   "cat_label": "시각 효과",
+   "mentioned_in": [
+    "sec:05§0-3",
+    "sec:09§6",
+    "ver:9",
+    "ver:31",
+    "code:ytflow/stages/directions.py:656",
+    "code:ytflow/stages/hybrid.py:1043"
+   ]
+  },
+  {
+   "id": "term:fx-dolly",
+   "kind": "term",
+   "key": "fx-dolly",
+   "aliases": [
+    "dolly"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 637,
+     "src": "\"dolly\": \"장면 내내 천천히 밀고 들어가며 옆으로 흐르는 카메라\","
+    },
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 649,
+     "src": "def apply_fx(D, project, spec, sc, bt, dur, adir):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "dolly (시각 효과)",
+   "cat": "fx",
+   "plain": "장면 내내 천천히 밀고 들어가며 옆으로 흐르는 카메라",
+   "how": "장면 그림 위에 효과를 덧붙이는 함수 apply_fx 가 처리",
+   "enable": "hybrid.json 장면의 \"fx\": [\"dolly\"]",
+   "anim": "push",
+   "label": "dolly (시각 효과)",
+   "cat_label": "시각 효과",
+   "mentioned_in": [
+    "sec:05§0-3",
+    "sec:09§6",
+    "ver:9",
+    "ver:31",
+    "code:ytflow/stages/directions.py:656",
+    "code:ytflow/stages/hybrid.py:1043"
+   ]
+  },
+  {
+   "id": "term:fx-dust",
+   "kind": "term",
+   "key": "fx-dust",
+   "aliases": [
+    "dust"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 638,
+     "src": "\"dust\": \"빛 속 먼지 입자가 떠다님 (깊이감)\","
+    },
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 649,
+     "src": "def apply_fx(D, project, spec, sc, bt, dur, adir):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "dust (시각 효과)",
+   "cat": "fx",
+   "plain": "빛 속 먼지 입자가 떠다님 (깊이감)",
+   "how": "장면 그림 위에 효과를 덧붙이는 함수 apply_fx 가 처리",
+   "enable": "hybrid.json 장면의 \"fx\": [\"dust\"]",
+   "anim": "dust",
+   "label": "dust (시각 효과)",
+   "cat_label": "시각 효과",
+   "mentioned_in": [
+    "sec:05§0-4",
+    "sec:05§0-3",
+    "sec:06§G5",
+    "ver:9",
+    "rule:G5:1",
+    "check:339"
+   ]
+  },
+  {
+   "id": "term:fx-leak",
+   "kind": "term",
+   "key": "fx-leak",
+   "aliases": [
+    "leak"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 639,
+     "src": "\"leak\": \"필름 빛샘이 화면을 쓸고 지나감 (따뜻한 전환감)\","
+    },
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 649,
+     "src": "def apply_fx(D, project, spec, sc, bt, dur, adir):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "leak (시각 효과)",
+   "cat": "fx",
+   "plain": "필름 빛샘이 화면을 쓸고 지나감 (따뜻한 전환감)",
+   "how": "장면 그림 위에 효과를 덧붙이는 함수 apply_fx 가 처리",
+   "enable": "hybrid.json 장면의 \"fx\": [\"leak\"]",
+   "anim": "leak",
+   "label": "leak (시각 효과)",
+   "cat_label": "시각 효과",
+   "mentioned_in": [
+    "sec:05§0-4",
+    "sec:05§0-3",
+    "sec:06§G5",
+    "ver:9",
+    "rule:G5:1",
+    "check:339"
+   ]
+  },
+  {
+   "id": "term:fx-photofill",
+   "kind": "term",
+   "key": "fx-photofill",
+   "aliases": [
+    "photofill"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 640,
+     "src": "\"photofill\": \"큰 숫자·글자 안을 자료 사진으로 채움 (bignum·card_type, fill_src)\","
+    },
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 649,
+     "src": "def apply_fx(D, project, spec, sc, bt, dur, adir):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "photofill (시각 효과)",
+   "cat": "fx",
+   "plain": "큰 숫자·글자 안을 자료 사진으로 채움 (bignum·card_type, fill_src)",
+   "how": "장면 그림 위에 효과를 덧붙이는 함수 apply_fx 가 처리",
+   "enable": "hybrid.json 장면의 \"fx\": [\"photofill\"]",
+   "label": "photofill (시각 효과)",
+   "cat_label": "시각 효과",
+   "mentioned_in": [
+    "sec:05§0-3",
+    "ver:9"
+   ]
+  },
+  {
+   "id": "term:fx-scan",
+   "kind": "term",
+   "key": "fx-scan",
+   "aliases": [
+    "scan"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 641,
+     "src": "\"scan\": \"위에서 아래로 훑는 스캔 빛줄기 (자료·문서 느낌)\","
+    },
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 649,
+     "src": "def apply_fx(D, project, spec, sc, bt, dur, adir):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "scan (시각 효과)",
+   "cat": "fx",
+   "plain": "위에서 아래로 훑는 스캔 빛줄기 (자료·문서 느낌)",
+   "how": "장면 그림 위에 효과를 덧붙이는 함수 apply_fx 가 처리",
+   "enable": "hybrid.json 장면의 \"fx\": [\"scan\"]",
+   "anim": "scan",
+   "label": "scan (시각 효과)",
+   "cat_label": "시각 효과",
+   "mentioned_in": [
+    "sec:05§0-3",
+    "sec:09§6",
+    "ver:9",
+    "code:ytflow/stages/directions.py:656"
+   ]
+  },
+  {
+   "id": "term:skin-blueprint",
+   "kind": "term",
+   "key": "skin-blueprint",
+   "aliases": [
+    "blueprint"
+   ],
+   "code": [
+    {
+     "file": "skins/blueprint/skin.yaml",
+     "line": 1,
+     "src": "청사진 — 짙은 남색 모눈, 흰 선, 노란 강조 (설계도·분석 느낌)"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "청사진 (blueprint)",
+   "cat": "skin",
+   "plain": "청사진 — 짙은 남색 모눈, 흰 선, 노란 강조 (설계도·분석 느낌)",
+   "how": "색·글꼴·배경 토큰 묶음 skins/blueprint/skin.yaml — 연출은 그대로, 겉모습만 바뀜",
+   "enable": "edit.yaml 의 skin: blueprint, 또는 장면의 look",
+   "anim": "layers",
+   "label": "청사진 (blueprint)",
+   "cat_label": "그래픽 팩",
+   "mentioned_in": [
+    "sec:05§0-6",
+    "sec:05§1"
+   ]
+  },
+  {
+   "id": "term:skin-clean-flat",
+   "kind": "term",
+   "key": "skin-clean-flat",
+   "aliases": [
+    "clean-flat"
+   ],
+   "code": [
+    {
+     "file": "skins/clean-flat/skin.yaml",
+     "line": 1,
+     "src": "깔끔한 평면 인포그래픽 — 무늬 없는 미색 바탕, 곧은 선, 면 채우기, 고딕 (머니크루풍 질감)"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "평면 인포그래픽 (clean-flat)",
+   "cat": "skin",
+   "plain": "깔끔한 평면 인포그래픽 — 무늬 없는 미색 바탕, 곧은 선, 면 채우기, 고딕 (머니크루풍 질감)",
+   "how": "색·글꼴·배경 토큰 묶음 skins/clean-flat/skin.yaml — 연출은 그대로, 겉모습만 바뀜",
+   "enable": "edit.yaml 의 skin: clean-flat, 또는 장면의 look",
+   "anim": "layers",
+   "label": "평면 인포그래픽 (clean-flat)",
+   "cat_label": "그래픽 팩",
+   "mentioned_in": [
+    "sec:05§0-6",
+    "sec:05§1",
+    "sec:08§4"
+   ]
+  },
+  {
+   "id": "term:skin-clean-white",
+   "kind": "term",
+   "key": "skin-clean-white",
+   "aliases": [
+    "clean-white"
+   ],
+   "code": [
+    {
+     "file": "skins/clean-white/skin.yaml",
+     "line": 1,
+     "src": "깨끗한 흰 바탕 + 진한 남색 글씨 + 파란 강조 — 기술·설명용 (2026-11-11: 미색 종이 바탕만 쓰지 않도록 추가)"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "하얀 평면 (clean-white)",
+   "cat": "skin",
+   "plain": "깨끗한 흰 바탕 + 진한 남색 글씨 + 파란 강조 — 기술·설명용 (2026-11-11: 미색 종이 바탕만 쓰지 않도록 추가)",
+   "how": "색·글꼴·배경 토큰 묶음 skins/clean-white/skin.yaml — 연출은 그대로, 겉모습만 바뀜",
+   "enable": "edit.yaml 의 skin: clean-white, 또는 장면의 look",
+   "anim": "layers",
+   "label": "하얀 평면 (clean-white)",
+   "cat_label": "그래픽 팩",
+   "mentioned_in": [
+    "sec:05§0-7",
+    "sec:05§0-6"
+   ]
+  },
+  {
+   "id": "term:skin-dark-doc",
+   "kind": "term",
+   "key": "skin-dark-doc",
+   "aliases": [
+    "dark-doc"
+   ],
+   "code": [
+    {
+     "file": "skins/dark-doc/skin.yaml",
+     "line": 1,
+     "src": "어두운 다큐 — 먹색 필름 바탕(알갱이·가장자리 어둡게), 밝은 글씨, 호박색 강조, 흑백 자료 화면 (방송 다큐·식스시그마풍 질감)"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "어두운 다큐 (dark-doc)",
+   "cat": "skin",
+   "plain": "어두운 다큐 — 먹색 필름 바탕(알갱이·가장자리 어둡게), 밝은 글씨, 호박색 강조, 흑백 자료 화면 (방송 다큐·식스시그마풍 질감)",
+   "how": "색·글꼴·배경 토큰 묶음 skins/dark-doc/skin.yaml — 연출은 그대로, 겉모습만 바뀜",
+   "enable": "edit.yaml 의 skin: dark-doc, 또는 장면의 look",
+   "anim": "layers",
+   "label": "어두운 다큐 (dark-doc)",
+   "cat_label": "그래픽 팩",
+   "mentioned_in": [
+    "sec:05§0-1",
+    "sec:05§0-7",
+    "sec:05§0-6",
+    "sec:05§1",
+    "sec:05§5",
+    "sec:08§4"
+   ]
+  },
+  {
+   "id": "term:skin-forest",
+   "kind": "term",
+   "key": "skin-forest",
+   "aliases": [
+    "forest"
+   ],
+   "code": [
+    {
+     "file": "skins/forest/skin.yaml",
+     "line": 1,
+     "src": "짙은 초록 바탕 + 상아색 글씨 + 금빛 강조 — 역사·이야기용"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "포레스트 (forest)",
+   "cat": "skin",
+   "plain": "짙은 초록 바탕 + 상아색 글씨 + 금빛 강조 — 역사·이야기용",
+   "how": "색·글꼴·배경 토큰 묶음 skins/forest/skin.yaml — 연출은 그대로, 겉모습만 바뀜",
+   "enable": "edit.yaml 의 skin: forest, 또는 장면의 look",
+   "anim": "layers",
+   "label": "포레스트 (forest)",
+   "cat_label": "그래픽 팩",
+   "mentioned_in": [
+    "sec:05§0-6"
+   ]
+  },
+  {
+   "id": "term:skin-kinetic-poster",
+   "kind": "term",
+   "key": "skin-kinetic-poster",
+   "aliases": [
+    "kinetic-poster"
+   ],
+   "code": [
+    {
+     "file": "skins/kinetic-poster/skin.yaml",
+     "line": 1,
+     "src": "키네틱 포스터 — 크림 바탕, 검정 굵은 글자, 빨강 강조, 화면 글자가 곧 자막이라 아래 자막은 숨김(투명)"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "키네틱 포스터 (kinetic-poster)",
+   "cat": "skin",
+   "plain": "키네틱 포스터 — 크림 바탕, 검정 굵은 글자, 빨강 강조, 화면 글자가 곧 자막이라 아래 자막은 숨김(투명)",
+   "how": "색·글꼴·배경 토큰 묶음 skins/kinetic-poster/skin.yaml — 연출은 그대로, 겉모습만 바뀜",
+   "enable": "edit.yaml 의 skin: kinetic-poster, 또는 장면의 look",
+   "anim": "layers",
+   "label": "키네틱 포스터 (kinetic-poster)",
+   "cat_label": "그래픽 팩",
+   "mentioned_in": [
+    "sec:05§0-6",
+    "sec:05§1",
+    "sec:05§5"
+   ]
+  },
+  {
+   "id": "term:skin-midnight",
+   "kind": "term",
+   "key": "skin-midnight",
+   "aliases": [
+    "midnight"
+   ],
+   "code": [
+    {
+     "file": "skins/midnight/skin.yaml",
+     "line": 1,
+     "src": "짙은 남색 바탕 + 밝은 글씨 + 청록 강조 — AI·기술 최전선용"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "미드나이트 (midnight)",
+   "cat": "skin",
+   "plain": "짙은 남색 바탕 + 밝은 글씨 + 청록 강조 — AI·기술 최전선용",
+   "how": "색·글꼴·배경 토큰 묶음 skins/midnight/skin.yaml — 연출은 그대로, 겉모습만 바뀜",
+   "enable": "edit.yaml 의 skin: midnight, 또는 장면의 look",
+   "anim": "layers",
+   "label": "미드나이트 (midnight)",
+   "cat_label": "그래픽 팩",
+   "mentioned_in": [
+    "sec:05§0-7",
+    "sec:05§0-6"
+   ]
+  },
+  {
+   "id": "term:skin-newsprint",
+   "kind": "term",
+   "key": "skin-newsprint",
+   "aliases": [
+    "newsprint"
+   ],
+   "code": [
+    {
+     "file": "skins/newsprint/skin.yaml",
+     "line": 1,
+     "src": "신문지 — 누런 신문 종이, 먹색 활자, 진한 빨강 강조, 흑백 사진, 곧은 선 (옛날 신문·지도 느낌)"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "신문지 (newsprint)",
+   "cat": "skin",
+   "plain": "신문지 — 누런 신문 종이, 먹색 활자, 진한 빨강 강조, 흑백 사진, 곧은 선 (옛날 신문·지도 느낌)",
+   "how": "색·글꼴·배경 토큰 묶음 skins/newsprint/skin.yaml — 연출은 그대로, 겉모습만 바뀜",
+   "enable": "edit.yaml 의 skin: newsprint, 또는 장면의 look",
+   "anim": "layers",
+   "label": "신문지 (newsprint)",
+   "cat_label": "그래픽 팩",
+   "mentioned_in": [
+    "sec:05§0-1",
+    "sec:05§0-6",
+    "sec:05§1",
+    "sec:05§5"
+   ]
+  },
+  {
+   "id": "term:skin-paper-sketch",
+   "kind": "term",
+   "key": "skin-paper-sketch",
+   "aliases": [
+    "paper-sketch"
+   ],
+   "code": [
+    {
+     "file": "skins/paper-sketch/skin.yaml",
+     "line": 1,
+     "src": "종이·손그림 (기본) — 구겨진 크림색 종이, 남색 잉크, 빨간 펜, rough.js 손그림 선과 빗금 (미주일기풍 질감)"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "종이 위 손그림 (paper-sketch)",
+   "cat": "skin",
+   "plain": "종이·손그림 (기본) — 구겨진 크림색 종이, 남색 잉크, 빨간 펜, rough.js 손그림 선과 빗금 (미주일기풍 질감)",
+   "how": "색·글꼴·배경 토큰 묶음 skins/paper-sketch/skin.yaml — 연출은 그대로, 겉모습만 바뀜",
+   "enable": "edit.yaml 의 skin: paper-sketch, 또는 장면의 look",
+   "anim": "layers",
+   "label": "종이 위 손그림 (paper-sketch)",
+   "cat_label": "그래픽 팩",
+   "mentioned_in": [
+    "sec:05§0-6",
+    "sec:05§1"
+   ]
+  },
+  {
+   "id": "term:skin-slate",
+   "kind": "term",
+   "key": "skin-slate",
+   "aliases": [
+    "slate"
+   ],
+   "code": [
+    {
+     "file": "skins/slate/skin.yaml",
+     "line": 1,
+     "src": "차가운 회청색 바탕 + 먹색 글씨 + 주홍 강조 — 경제·데이터용 (미색 아님)"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "슬레이트 (slate)",
+   "cat": "skin",
+   "plain": "차가운 회청색 바탕 + 먹색 글씨 + 주홍 강조 — 경제·데이터용 (미색 아님)",
+   "how": "색·글꼴·배경 토큰 묶음 skins/slate/skin.yaml — 연출은 그대로, 겉모습만 바뀜",
+   "enable": "edit.yaml 의 skin: slate, 또는 장면의 look",
+   "anim": "layers",
+   "label": "슬레이트 (slate)",
+   "cat_label": "그래픽 팩",
+   "mentioned_in": [
+    "sec:05§0-7",
+    "sec:05§0-6",
+    "sec:09§6"
+   ]
+  },
+  {
+   "id": "term:style-ai-chat",
+   "kind": "term",
+   "key": "style-ai-chat",
+   "aliases": [
+    "ai-chat",
+    "AI 대화 화면"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/ai-chat.yaml",
+     "line": 1,
+     "src": "AI 대화 화면 (질문 타자 + 답이 흘러나옴)"
+    }
+   ],
+   "scenes": [
+    "term:chat"
+   ],
+   "used_by": [],
+   "name": "AI 대화 화면 (질문 타자 + 답이 흘러나옴)",
+   "short": "AI 대화 화면",
+   "cat": "style",
+   "plain": "AI 대화 화면 (질문 타자 + 답이 흘러나옴)",
+   "look": "AI 대화 화면 (질문 타자 + 답이 흘러나옴)",
+   "status": "demo",
+   "renderer": "hybrid",
+   "skin": "clean-flat",
+   "avoid": "실제 서비스 화면처럼 보이게 하기 (상표·로고 금지, label 에 '재구성 예시') / 대화를 지어내기 — 실제 쓴 프롬프트·답 또는 공식 문서의 절차만",
+   "fits": "brands: ai, questions: 방법·정체·비교, moods: 실용",
+   "demo": "20261109-pool-ai (장면 1)",
+   "skill": "edit-style-pool",
+   "how": "렌더러 hybrid · 장면 종류 chat · 그래픽 팩 clean-flat",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"ai-chat\"",
+   "anim": "kinetic",
+   "label": "AI 대화 화면 (질문 타자 + 답이 흘러나옴)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "sec:05§0-7"
+   ]
+  },
+  {
+   "id": "term:style-anim-stage",
+   "kind": "term",
+   "key": "style-anim-stage",
+   "aliases": [
+    "anim-stage",
+    "애니메이션 무대"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/anim-stage.yaml",
+     "line": 1,
+     "src": "애니메이션 무대 (주인공 그림이 대본의 동사를 연기, 한 화면 한 생각, 의도표 필수)"
+    }
+   ],
+   "scenes": [
+    "term:stage"
+   ],
+   "used_by": [],
+   "name": "애니메이션 무대 (주인공 그림이 대본의 동사를 연기, 한 화면 한 생각, 의도표 필수)",
+   "short": "애니메이션 무대",
+   "cat": "style",
+   "plain": "사람·사물이 무언가를 '하는' 이야기 — 대본의 동사(걷다·쓰러지다·집다·미끄러지다·닫다)를 그림이 연기할 수 있을 때. 02_script/intent.md(목표·욕망·장면 목표)와 박자별 why 를 먼저 쓴다",
+   "look": "애니메이션 무대 (주인공 그림이 대본의 동사를 연기, 한 화면 한 생각, 의도표 필수)",
+   "status": "demo",
+   "renderer": "hybrid",
+   "skin": "paper-sketch",
+   "avoid": "숫자 표가 주인공 / 매일 시장 브리핑(정보형) / 실존 인물 얼굴을 그림으로 닮게(실제 사진으로) / 사진·문서·쪽지를 쌓기",
+   "fits": "brands: curiosity, questions: 행동의 이유·그때 무슨 일이·이름의 유래·오늘과 연결, moods: 차분·과거·미래",
+   "demo": "20261113-curiosity-moravec",
+   "skill": "edit-style-story-board",
+   "doc": "styles/anim-stage/STYLE.md",
+   "intro": "2026-11-14 사용자 기각(v3 이야기 그림판): \"중간중간 너무 난잡하다. 목표·시청자 욕망을 먼저 정의하고 매뉴얼을 쓴 뒤 시도하라.",
+   "how": "렌더러 hybrid · 장면 종류 stage · 그래픽 팩 paper-sketch",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"anim-stage\"",
+   "anim": "walk",
+   "label": "애니메이션 무대 (주인공 그림이 대본의 동사를 연기, 한 화면 한 생각, 의도표 필수)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "sec:04§0-5",
+    "ver:21",
+    "code:ytflow/stages/hybrid.py:1446",
+    "code:ytflow/stages/stage.py:1"
+   ]
+  },
+  {
+   "id": "term:style-app-window-cover",
+   "kind": "term",
+   "key": "style-app-window-cover",
+   "aliases": [
+    "app-window-cover",
+    "앱 창 장 표지"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/app-window-cover.yaml",
+     "line": 1,
+     "src": "앱 창 장 표지 (은은한 빛 위에 뜬 창 + 탭 이름)"
+    }
+   ],
+   "scenes": [
+    "term:chapter"
+   ],
+   "used_by": [],
+   "name": "앱 창 장 표지 (은은한 빛 위에 뜬 창 + 탭 이름)",
+   "short": "앱 창 장 표지",
+   "cat": "style",
+   "plain": "제품·서비스·도구 이야기로 넘어갈 때",
+   "look": "앱 창 장 표지 (은은한 빛 위에 뜬 창 + 탭 이름)",
+   "status": "approved",
+   "renderer": "hybrid",
+   "skin": "midnight",
+   "avoid": "제품·서비스와 무관한 장(규제·사건) → 듀오톤 사진이나 증거판",
+   "fits": "brands: ai, questions: 정체·방법·오늘과 연결, moods: 미래·실용",
+   "demo": "20261112-bg-trials",
+   "how": "렌더러 hybrid · 장면 종류 chapter · 그래픽 팩 midnight",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"app-window-cover\"",
+   "anim": "crossfade",
+   "label": "앱 창 장 표지 (은은한 빛 위에 뜬 창 + 탭 이름)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "sec:05§0-7"
+   ]
+  },
+  {
+   "id": "term:style-archive-doc",
+   "kind": "term",
+   "key": "style-archive-doc",
+   "aliases": [
+    "archive-doc",
+    "아카이브 다큐"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/archive-doc.yaml",
+     "line": 1,
+     "src": "아카이브 다큐 (자료 화면 켄 번스 + 타자기 문장)"
+    }
+   ],
+   "scenes": [
+    "term:kb",
+    "term:card_type",
+    "term:footage",
+    "term:quote"
+   ],
+   "used_by": [],
+   "name": "아카이브 다큐 (자료 화면 켄 번스 + 타자기 문장)",
+   "short": "아카이브 다큐",
+   "cat": "style",
+   "plain": "아카이브 다큐 (자료 화면 켄 번스 + 타자기 문장)",
+   "look": "아카이브 다큐 (자료 화면 켄 번스 + 타자기 문장)",
+   "status": "demo",
+   "renderer": "hybrid",
+   "skin": "dark-doc",
+   "avoid": "자료 사진·영상이 5개 미만 / 숫자 비교가 핵심인 주제(차트 장면을 섞을 것)",
+   "fits": "brands: curiosity·market·issues, questions: 숨은 장면·이름의 이유·과거 사례·비교, moods: 위기·과거·긴장, needs: archive",
+   "demo": "20261107-style-archive",
+   "skill": "edit-style-archive",
+   "how": "렌더러 hybrid · 장면 종류 kb, card_type, footage, quote · 그래픽 팩 dark-doc",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"archive-doc\"",
+   "anim": "kenburns",
+   "label": "아카이브 다큐 (자료 화면 켄 번스 + 타자기 문장)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "sec:05§0-7",
+    "sec:05§5"
+   ]
+  },
+  {
+   "id": "term:style-blueprint-explainer",
+   "kind": "term",
+   "key": "style-blueprint-explainer",
+   "aliases": [
+    "blueprint-explainer",
+    "청사진 설명"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/blueprint-explainer.yaml",
+     "line": 1,
+     "src": "청사진 설명 (남색 모눈 + 흰 선 구조도)"
+    }
+   ],
+   "scenes": [
+    "term:map_causal",
+    "term:analogy",
+    "term:bars",
+    "term:checklist"
+   ],
+   "used_by": [],
+   "name": "청사진 설명 (남색 모눈 + 흰 선 구조도)",
+   "short": "청사진 설명",
+   "cat": "style",
+   "plain": "청사진 설명 (남색 모눈 + 흰 선 구조도)",
+   "look": "청사진 설명 (남색 모눈 + 흰 선 구조도)",
+   "status": "demo",
+   "renderer": "hybrid",
+   "skin": "blueprint",
+   "avoid": "역사·감성 주제 (차가운 느낌)",
+   "fits": "brands: ai·market, questions: 정체·개념·연결·방법, moods: 미래·차분",
+   "demo": "20261109-ai-unslop (장면 10·14·15), 20261106-hybrid-데이터센터 (skin-preview)",
+   "skill": "edit-style-hybrid",
+   "how": "렌더러 hybrid · 장면 종류 map_causal, analogy, bars, checklist · 그래픽 팩 blueprint",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"blueprint-explainer\"",
+   "anim": "draw",
+   "label": "청사진 설명 (남색 모눈 + 흰 선 구조도)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": []
+  },
+  {
+   "id": "term:style-chalk-lesson",
+   "kind": "term",
+   "key": "style-chalk-lesson",
+   "aliases": [
+    "chalk-lesson",
+    "칠판 판서"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/chalk-lesson.yaml",
+     "line": 1,
+     "src": "칠판 판서 (분필 글씨 인과 지도·비유, 칠판 장 표지)"
+    }
+   ],
+   "scenes": [
+    "term:map_causal",
+    "term:analogy",
+    "term:chapter"
+   ],
+   "used_by": [],
+   "name": "칠판 판서 (분필 글씨 인과 지도·비유, 칠판 장 표지)",
+   "short": "칠판 판서",
+   "cat": "style",
+   "plain": "원리를 배운다 — 왜 그렇게 되는지 과정·구조를 설명할 때. AI 채널은 기술 원리 설명 장면에서만",
+   "look": "칠판 판서 (분필 글씨 인과 지도·비유, 칠판 장 표지)",
+   "status": "approved",
+   "renderer": "hybrid",
+   "skin": "chalkboard",
+   "avoid": "사람·기관 관계도(→ 증거판) / 숫자 비교(→ 차트·막대) / 한 영상에 3번 넘게",
+   "fits": "brands: curiosity·ai, questions: 개념·원인·이름의 이유·행동의 이유·정체, moods: 차분·과거",
+   "demo": "20261112-bg-trials",
+   "how": "렌더러 hybrid · 장면 종류 map_causal, analogy, chapter · 그래픽 팩 chalkboard",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"chalk-lesson\"",
+   "anim": "draw",
+   "label": "칠판 판서 (분필 글씨 인과 지도·비유, 칠판 장 표지)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "sec:05§0-7"
+   ]
+  },
+  {
+   "id": "term:style-dash-cover",
+   "kind": "term",
+   "key": "style-dash-cover",
+   "aliases": [
+    "dash-cover",
+    "대시보드 장 표지"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/dash-cover.yaml",
+     "line": 1,
+     "src": "대시보드 장 표지 (짙은 남색 모눈 + CHAPTER 번호 + 강조선)"
+    }
+   ],
+   "scenes": [
+    "term:chapter"
+   ],
+   "used_by": [],
+   "name": "대시보드 장 표지 (짙은 남색 모눈 + CHAPTER 번호 + 강조선)",
+   "short": "대시보드 장 표지",
+   "cat": "style",
+   "plain": "다음 장이 숫자로 시작할 때 — 시세·실적·규모. AI 채널은 돈 이야기(상장·투자) 장에서",
+   "look": "대시보드 장 표지 (짙은 남색 모눈 + CHAPTER 번호 + 강조선)",
+   "status": "approved",
+   "renderer": "hybrid",
+   "skin": "midnight",
+   "avoid": "숫자가 나오지 않는 장(사람 이야기·역사) / 가짜 수치·그래프 장식",
+   "fits": "brands: market·ai, questions: 비교·원인·과거 사례, moods: 긴장·빠름",
+   "demo": "20261112-bg-trials",
+   "how": "렌더러 hybrid · 장면 종류 chapter · 그래픽 팩 midnight",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"dash-cover\"",
+   "anim": "crossfade",
+   "label": "대시보드 장 표지 (짙은 남색 모눈 + CHAPTER 번호 + 강조선)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "sec:05§0-7"
+   ]
+  },
+  {
+   "id": "term:style-data-choropleth",
+   "kind": "term",
+   "key": "style-data-choropleth",
+   "aliases": [
+    "data-choropleth",
+    "나라 색칠 지도"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/data-choropleth.yaml",
+     "line": 1,
+     "src": "나라 색칠 지도 (값이나 '다룬 나라'를 색으로)"
+    }
+   ],
+   "scenes": [
+    "term:choropleth"
+   ],
+   "used_by": [],
+   "name": "나라 색칠 지도 (값이나 '다룬 나라'를 색으로)",
+   "short": "나라 색칠 지도",
+   "cat": "style",
+   "plain": "나라 색칠 지도 (값이나 '다룬 나라'를 색으로)",
+   "look": "나라 색칠 지도 (값이나 '다룬 나라'를 색으로)",
+   "status": "demo",
+   "renderer": "hybrid",
+   "skin": "paper-sketch",
+   "avoid": "출처 없는 값으로 색칠 (값이 없으면 legend 에 '값 아님'으로 정직하게)",
+   "fits": "brands: curiosity·market·issues, questions: 연결·비교·과거 사례, moods: 차분·과거, needs: map",
+   "demo": "20261109-pool-map",
+   "skill": "edit-style-pool",
+   "how": "렌더러 hybrid · 장면 종류 choropleth · 그래픽 팩 paper-sketch",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"data-choropleth\"",
+   "label": "나라 색칠 지도 (값이나 '다룬 나라'를 색으로)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": []
+  },
+  {
+   "id": "term:style-data-report",
+   "kind": "term",
+   "key": "style-data-report",
+   "aliases": [
+    "data-report",
+    "데이터 리포트"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/data-report.yaml",
+     "line": 1,
+     "src": "데이터 리포트 (실제 시세·막대·비교표)"
+    }
+   ],
+   "scenes": [
+    "term:chart",
+    "term:bars",
+    "term:compare",
+    "term:bignum",
+    "term:funnel"
+   ],
+   "used_by": [],
+   "name": "데이터 리포트 (실제 시세·막대·비교표)",
+   "short": "데이터 리포트",
+   "cat": "style",
+   "plain": "데이터 리포트 (실제 시세·막대·비교표)",
+   "look": "데이터 리포트 (실제 시세·막대·비교표)",
+   "status": "approved",
+   "renderer": "flat",
+   "skin": "clean-flat",
+   "avoid": "숫자가 3개 미만인 이야기",
+   "fits": "brands: market·ai·issues, questions: 비교·과거 사례·원인, moods: 차분·긴장, needs: price",
+   "demo": "20261106-머니크루-dram",
+   "skill": "edit-style-moneycrew",
+   "how": "렌더러 flat · 장면 종류 chart, bars, compare, bignum, funnel · 그래픽 팩 clean-flat",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"data-report\"",
+   "anim": "beat-motion",
+   "label": "데이터 리포트 (실제 시세·막대·비교표)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "sec:05§1",
+    "sec:09§6"
+   ]
+  },
+  {
+   "id": "term:style-duotone-cover",
+   "kind": "term",
+   "key": "style-duotone-cover",
+   "aliases": [
+    "duotone-cover",
+    "듀오톤 사진 표지"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/duotone-cover.yaml",
+     "line": 1,
+     "src": "듀오톤 사진 표지 (주제 사진을 카테고리 두 색으로 물들인 장 표지)"
+    }
+   ],
+   "scenes": [
+    "term:chapter"
+   ],
+   "used_by": [],
+   "name": "듀오톤 사진 표지 (주제 사진을 카테고리 두 색으로 물들인 장 표지)",
+   "short": "듀오톤 사진 표지",
+   "cat": "style",
+   "plain": "그 장의 장소·사물이 분명할 때 — 시험장·거래소·데이터센터처럼 '바로 그곳'. 위키미디어 공용 PD·CC BY (archive commons)",
+   "look": "듀오톤 사진 표지 (주제 사진을 카테고리 두 색으로 물들인 장 표지)",
+   "status": "approved",
+   "renderer": "hybrid",
+   "skin": "dark-doc",
+   "avoid": "주제와 상관없는 사진(같은 위성 사진 반복) / 글자가 많은 그림(지도·인포그래픽) / 같은 사진 두 번",
+   "fits": "brands: issues·market·curiosity·ai, questions: 연결·숨은 장면·원인·정체·과거 사례, moods: 차분·긴장·과거·미래, needs: footage",
+   "demo": "20261112-bg-trials",
+   "how": "렌더러 hybrid · 장면 종류 chapter · 그래픽 팩 dark-doc",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"duotone-cover\"",
+   "anim": "crossfade",
+   "label": "듀오톤 사진 표지 (주제 사진을 카테고리 두 색으로 물들인 장 표지)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "sec:05§0-7"
+   ]
+  },
+  {
+   "id": "term:style-evidence-board",
+   "kind": "term",
+   "key": "style-evidence-board",
+   "aliases": [
+    "evidence-board"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/evidence-board.yaml",
+     "line": 1,
+     "src": "증거판 (코르크 판 + 핀 꽂은 카드 + 붉은 실)"
+    }
+   ],
+   "scenes": [
+    "term:map_causal"
+   ],
+   "used_by": [],
+   "name": "증거판 (코르크 판 + 핀 꽂은 카드 + 붉은 실)",
+   "short": "증거판",
+   "cat": "style",
+   "plain": "누가 누구와 엮였나 — 인물·기관·회사·사건이 서로 이어지는 관계도. 시사는 기본, 시장은 소송·조사·거래처럼 '주체' 관계일 때",
+   "look": "증거판 (코르크 판 + 핀 꽂은 카드 + 붉은 실)",
+   "status": "approved",
+   "renderer": "hybrid",
+   "skin": "corkboard",
+   "avoid": "사람·기관·회사가 아니라 원리·과정을 잇는 지도(→ 칠판) / 한 영상에 2번 넘게",
+   "fits": "brands: issues·market, questions: 연결·원인·숨은 장면·소문 확인, moods: 긴장·위기",
+   "demo": "20261112-bg-trials",
+   "how": "렌더러 hybrid · 장면 종류 map_causal · 그래픽 팩 corkboard",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"evidence-board\"",
+   "anim": "draw",
+   "label": "증거판 (코르크 판 + 핀 꽂은 카드 + 붉은 실)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "sec:05§0-7"
+   ]
+  },
+  {
+   "id": "term:style-hand-annotate",
+   "kind": "term",
+   "key": "style-hand-annotate",
+   "aliases": [
+    "hand-annotate",
+    "손그림 표시"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/hand-annotate.yaml",
+     "line": 1,
+     "src": "손그림 표시 (동그라미·밑줄·화살표를 한 번)"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "손그림 표시 (동그라미·밑줄·화살표를 한 번)",
+   "short": "손그림 표시",
+   "cat": "style",
+   "plain": "손그림 표시 (동그라미·밑줄·화살표를 한 번)",
+   "look": "손그림 표시 (동그라미·밑줄·화살표를 한 번)",
+   "status": "demo",
+   "renderer": "hybrid",
+   "skin": "paper-sketch",
+   "avoid": "강조 예산에 포함 — 영상에서 가장 중요한 숫자·한 곳에만 (1분에 1번 이하)",
+   "fits": "brands: ai·market·curiosity, questions: 비교·원인·정체, moods: 차분",
+   "demo": "20261109-pool-ai (장면 4, 막대 위 동그라미)",
+   "skill": "edit-style-pool",
+   "how": "렌더러 hybrid · 장면 종류 - · 그래픽 팩 paper-sketch",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"hand-annotate\"",
+   "label": "손그림 표시 (동그라미·밑줄·화살표를 한 번)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "sec:05§0-3",
+    "ver:20"
+   ]
+  },
+  {
+   "id": "term:style-hook-shorts",
+   "kind": "term",
+   "key": "style-hook-shorts",
+   "aliases": [
+    "hook-shorts",
+    "훅 쇼츠"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/hook-shorts.yaml",
+     "line": 1,
+     "src": "훅 쇼츠 (얼굴 없이: 실제 화면 꽉 채움 + 훅 제목 + 큰 자막 + 튀어나오는 카드 + 빠른 박자)"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "훅 쇼츠 (얼굴 없이: 실제 화면 꽉 채움 + 훅 제목 + 큰 자막 + 튀어나오는 카드 + 빠른 박자)",
+   "short": "훅 쇼츠",
+   "cat": "style",
+   "plain": "AI 도구·저장소·기능 하나를 30~45초로 — 화면 캡처·녹화가 있고, 숫자 하나·목록 하나·명령어 하나로 정리될 때",
+   "look": "훅 쇼츠 (얼굴 없이: 실제 화면 꽉 채움 + 훅 제목 + 큰 자막 + 튀어나오는 카드 + 빠른 박자)",
+   "status": "demo",
+   "renderer": "hookshort",
+   "skin": "none",
+   "avoid": "실제 화면(캡처·녹화)이 없을 때 (→ shorts-card) / 설명할 것이 많을 때 (→ 롱폼)",
+   "fits": "brands: ai·market·curiosity, questions: 한 가지 알려 주기·추천·놀라운 사실·사용법, moods: 빠름·실용, needs: screen",
+   "demo": "20261113-style-hookshort",
+   "skill": "edit-style-hook-shorts",
+   "how": "렌더러 hookshort · 장면 종류 - · 그래픽 팩 none",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"hook-shorts\"",
+   "label": "훅 쇼츠 (얼굴 없이: 실제 화면 꽉 채움 + 훅 제목 + 큰 자막 + 튀어나오는 카드 + 빠른 박자)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": []
+  },
+  {
+   "id": "term:style-hybrid-causal",
+   "kind": "term",
+   "key": "style-hybrid-causal",
+   "aliases": [
+    "hybrid-causal",
+    "하이브리드 인과"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/hybrid-causal.yaml",
+     "line": 1,
+     "src": "하이브리드 인과 (원본 영상 + 손그림 인과 지도)"
+    }
+   ],
+   "scenes": [
+    "term:footage",
+    "term:map_causal",
+    "term:versus",
+    "term:quote",
+    "term:chapter",
+    "term:timeline"
+   ],
+   "used_by": [],
+   "name": "하이브리드 인과 (원본 영상 + 손그림 인과 지도)",
+   "short": "하이브리드 인과",
+   "cat": "style",
+   "plain": "하이브리드 인과 (원본 영상 + 손그림 인과 지도)",
+   "look": "하이브리드 인과 (원본 영상 + 손그림 인과 지도)",
+   "status": "approved",
+   "renderer": "hybrid",
+   "skin": "paper-sketch",
+   "avoid": "원인→결과 화살표가 3개 미만인 단순 소식 (쇼츠로)",
+   "fits": "brands: market·curiosity·ai·issues, questions: 원인·연결·이름의 이유·영향·행동의 이유, moods: 차분·긴장, needs: footage",
+   "demo": "20261106-hybrid-데이터센터, 20261107-knowledge-스페인독감",
+   "skill": "edit-style-hybrid",
+   "how": "렌더러 hybrid · 장면 종류 footage, map_causal, versus, quote, chapter, timeline · 그래픽 팩 paper-sketch",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"hybrid-causal\"",
+   "anim": "kenburns",
+   "label": "하이브리드 인과 (원본 영상 + 손그림 인과 지도)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": []
+  },
+  {
+   "id": "term:style-illustrated",
+   "kind": "term",
+   "key": "style-illustrated",
+   "aliases": [
+    "illustrated",
+    "손그림 삽화"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/illustrated.yaml",
+     "line": 1,
+     "src": "손그림 삽화 (삽화 한 장 위를 카메라가 옮겨 가며 설명)"
+    }
+   ],
+   "scenes": [
+    "term:illust"
+   ],
+   "used_by": [],
+   "name": "손그림 삽화 (삽화 한 장 위를 카메라가 옮겨 가며 설명)",
+   "short": "손그림 삽화",
+   "cat": "style",
+   "plain": "사람들의 생각·행동·상황을 '그려서' 보여 줄 때 — 소비자가 망설임, 회의실의 고민, 두 갈래 선택, 옛날 사례 재현, 비유 장면",
+   "look": "손그림 삽화 (삽화 한 장 위를 카메라가 옮겨 가며 설명)",
+   "status": "demo",
+   "renderer": "hybrid",
+   "skin": "clean-flat",
+   "avoid": "숫자가 주인공(→ 차트) / 실제 사건 현장(→ 사진·원본 영상: 그림은 사실처럼 보이면 안 됨) / 실존 인물을 닮게 그리기 / 시사의 피해 장면",
+   "fits": "brands: curiosity·market·ai·issues, questions: 개념·행동의 이유·비유·상황 그려 보기·오늘과 연결, moods: 차분·과거·미래·실용, needs: art",
+   "demo": "20261113-style-cut",
+   "skill": "edit-style-illustrated",
+   "doc": "styles/illustrated/STYLE.md",
+   "intro": "레시피 `styles/recipes/illustrated.yaml` · 장면 type `illust` · 코드 `ytflow/stages/illust.py` · 시험작 `projects/20261113-style-cut`",
+   "how": "렌더러 hybrid · 장면 종류 illust · 그래픽 팩 clean-flat",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"illustrated\"",
+   "anim": "push",
+   "label": "손그림 삽화 (삽화 한 장 위를 카메라가 옮겨 가며 설명)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "ver:20"
+   ]
+  },
+  {
+   "id": "term:style-issue-dark-montage",
+   "kind": "term",
+   "key": "style-issue-dark-montage",
+   "aliases": [
+    "issue-dark-montage",
+    "시사 심층"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/issue-dark-montage.yaml",
+     "line": 1,
+     "src": "시사 심층 (어두운 영화 톤 + 실사 사진 몽타주 + 지도·인과 결론)"
+    }
+   ],
+   "scenes": [
+    "term:kb",
+    "term:journey",
+    "term:choropleth",
+    "term:map_causal",
+    "term:card_type",
+    "term:quote"
+   ],
+   "used_by": [],
+   "name": "시사 심층 (어두운 영화 톤 + 실사 사진 몽타주 + 지도·인과 결론)",
+   "short": "시사 심층",
+   "cat": "style",
+   "plain": "시사 심층 (어두운 영화 톤 + 실사 사진 몽타주 + 지도·인과 결론)",
+   "look": "시사 심층 (어두운 영화 톤 + 실사 사진 몽타주 + 지도·인과 결론)",
+   "status": "approved",
+   "renderer": "hybrid",
+   "skin": "dark-doc",
+   "avoid": "조롱·공포 조장 연출, 특정 인물을 악당처럼 꾸미는 합성 (사실 사진 그대로, 합성이면 '재구성' 표시)",
+   "fits": "brands: issues·curiosity·market, questions: 원인·연결·숨은 장면·과거 사례, moods: 긴장·위기, needs: archive·map",
+   "skill": "edit-style-pool",
+   "how": "렌더러 hybrid · 장면 종류 kb, journey, choropleth, map_causal, card_type, quote · 그래픽 팩 dark-doc",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"issue-dark-montage\"",
+   "anim": "kenburns",
+   "label": "시사 심층 (어두운 영화 톤 + 실사 사진 몽타주 + 지도·인과 결론)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "sec:08§4"
+   ]
+  },
+  {
+   "id": "term:style-issue-quick-brief",
+   "kind": "term",
+   "key": "style-issue-quick-brief",
+   "aliases": [
+    "issue-quick-brief",
+    "시사 빠른 정리 5~8분"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/issue-quick-brief.yaml",
+     "line": 1,
+     "src": "시사 빠른 정리 5~8분 (밝은 사진 콜라주 + 장 구분 + 숫자 하나)"
+    }
+   ],
+   "scenes": [
+    "term:kb",
+    "term:checklist",
+    "term:bars",
+    "term:timeline",
+    "term:zoomshot"
+   ],
+   "used_by": [],
+   "name": "시사 빠른 정리 5~8분 (밝은 사진 콜라주 + 장 구분 + 숫자 하나)",
+   "short": "시사 빠른 정리 5~8분",
+   "cat": "style",
+   "plain": "시사 빠른 정리 5~8분 (밝은 사진 콜라주 + 장 구분 + 숫자 하나)",
+   "look": "시사 빠른 정리 5~8분 (밝은 사진 콜라주 + 장 구분 + 숫자 하나)",
+   "status": "idea",
+   "renderer": "hybrid",
+   "skin": "clean-flat",
+   "avoid": "3분 미만 롱폼 (성과 0.77) / 정리 없이 사실 나열",
+   "fits": "brands: issues·market, questions: 정체·원인·비교, moods: 빠름·실용, needs: archive",
+   "skill": "edit-style-pool",
+   "how": "렌더러 hybrid · 장면 종류 kb, checklist, bars, timeline, zoomshot · 그래픽 팩 clean-flat",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"issue-quick-brief\"",
+   "anim": "kenburns",
+   "label": "시사 빠른 정리 5~8분 (밝은 사진 콜라주 + 장 구분 + 숫자 하나)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "sec:08§4"
+   ]
+  },
+  {
+   "id": "term:style-kinetic-type",
+   "kind": "term",
+   "key": "style-kinetic-type",
+   "aliases": [
+    "kinetic-type",
+    "키네틱 타이포"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/kinetic-type.yaml",
+     "line": 1,
+     "src": "키네틱 타이포 (말하는 순간 단어가 튀어나옴)"
+    }
+   ],
+   "scenes": [
+    "term:kinetic",
+    "term:card_type"
+   ],
+   "used_by": [],
+   "name": "키네틱 타이포 (말하는 순간 단어가 튀어나옴)",
+   "short": "키네틱 타이포",
+   "cat": "style",
+   "plain": "키네틱 타이포 (말하는 순간 단어가 튀어나옴)",
+   "look": "키네틱 타이포 (말하는 순간 단어가 튀어나옴)",
+   "status": "demo",
+   "renderer": "hybrid",
+   "skin": "kinetic-poster",
+   "avoid": "롱폼 전체를 키네틱으로 (피로) — 훅·장 전환·결론에만",
+   "fits": "brands: ai·market·curiosity·issues, questions: 정체·개념·방법·오늘과 연결, moods: 빠름·실용",
+   "demo": "20261107-style-kinetic",
+   "skill": "edit-style-kinetic",
+   "how": "렌더러 hybrid · 장면 종류 kinetic, card_type · 그래픽 팩 kinetic-poster",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"kinetic-type\"",
+   "anim": "kinetic",
+   "label": "키네틱 타이포 (말하는 순간 단어가 튀어나옴)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "sec:05§5"
+   ]
+  },
+  {
+   "id": "term:style-map-journey",
+   "kind": "term",
+   "key": "style-map-journey",
+   "aliases": [
+    "map-journey",
+    "지도 여정"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/map-journey.yaml",
+     "line": 1,
+     "src": "지도 여정 (세계 지도 카메라 이동 + 경로 + 핀)"
+    }
+   ],
+   "scenes": [
+    "term:journey",
+    "term:footage",
+    "term:timeline",
+    "term:usmap"
+   ],
+   "used_by": [],
+   "name": "지도 여정 (세계 지도 카메라 이동 + 경로 + 핀)",
+   "short": "지도 여정",
+   "cat": "style",
+   "plain": "지도 여정 (세계 지도 카메라 이동 + 경로 + 핀)",
+   "look": "지도 여정 (세계 지도 카메라 이동 + 경로 + 핀)",
+   "status": "demo",
+   "renderer": "hybrid",
+   "skin": "newsprint",
+   "avoid": "장소가 1~2곳뿐인 이야기 / 한 영상에 지도 장면 5번 이상",
+   "fits": "brands: curiosity·market·issues, questions: 연결·숨은 장면·원인, moods: 과거·차분, needs: map",
+   "demo": "20261107-style-journey",
+   "skill": "edit-style-journey",
+   "how": "렌더러 hybrid · 장면 종류 journey, footage, timeline, usmap · 그래픽 팩 newsprint",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"map-journey\"",
+   "anim": "draw",
+   "label": "지도 여정 (세계 지도 카메라 이동 + 경로 + 핀)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "sec:04§4",
+    "sec:05§h25",
+    "sec:05§0-7",
+    "sec:05§0-3",
+    "sec:05§2",
+    "sec:05§5"
+   ]
+  },
+  {
+   "id": "term:style-motion-metaphor",
+   "kind": "term",
+   "key": "style-motion-metaphor",
+   "aliases": [
+    "motion-metaphor",
+    "움직이는 비유 애니메이션"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/motion-metaphor.yaml",
+     "line": 1,
+     "src": "움직이는 비유 애니메이션 (무리가 옮겨 가고, 의태어가 튀어나오는 비유 장면)"
+    }
+   ],
+   "scenes": [
+    "term:studio3d",
+    "term:metaphor"
+   ],
+   "used_by": [],
+   "name": "움직이는 비유 애니메이션 (무리가 옮겨 가고, 의태어가 튀어나오는 비유 장면)",
+   "short": "움직이는 비유 애니메이션",
+   "cat": "style",
+   "plain": "추상적인 흐름을 '무엇이 어디로 몰리나'로 보여 줄 때 — 개발자가 한 언어로 몰림, 돈이 먼저 들어옴, 수요가 공급보다 많음, 옛 물건 값이 오름",
+   "look": "움직이는 비유 애니메이션 (무리가 옮겨 가고, 의태어가 튀어나오는 비유 장면)",
+   "status": "idea",
+   "renderer": "hybrid",
+   "skin": "clean-white",
+   "avoid": "숫자 자체가 주인공인 장면(→ 차트) / 사람·기관 관계(→ 증거판) / 한 영상에 4번 넘게 (비유가 흔해지면 힘이 빠짐) / 시사의 피해·사건(가벼워 보임)",
+   "fits": "brands: ai·curiosity·market, questions: 정체·개념·원인·비교·행동의 이유·오늘과 연결, moods: 빠름·실용·미래",
+   "demo": "20261112-style-3d",
+   "doc": "styles/motion-metaphor/STYLE.md",
+   "intro": "**위치 (2026-11-12 사용자 판정):** 기존 영상·매뉴얼의 기준이 아니라, **나중에 따로 골라 쓰는 스타일**입니다. `style-pick` 자동 추천에서도 빠져 있습니다(`standalone: true`).",
+   "how": "렌더러 hybrid · 장면 종류 studio3d, metaphor · 그래픽 팩 clean-white",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"motion-metaphor\"",
+   "anim": "walk",
+   "label": "움직이는 비유 애니메이션 (무리가 옮겨 가고, 의태어가 튀어나오는 비유 장면)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "code:ytflow/stages/hybrid.py:1436",
+    "code:ytflow/stages/studio3d.py:1"
+   ]
+  },
+  {
+   "id": "term:style-news-desk",
+   "kind": "term",
+   "key": "style-news-desk",
+   "aliases": [
+    "news-desk",
+    "뉴스 데스크 카드"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/news-desk.yaml",
+     "line": 1,
+     "src": "뉴스 데스크 카드 (한 소식 = 한 장: 순번·꼬리표·강조 제목·숫자 3칸·증거 패널)"
+    }
+   ],
+   "scenes": [
+    "term:newsdesk"
+   ],
+   "used_by": [],
+   "name": "뉴스 데스크 카드 (한 소식 = 한 장: 순번·꼬리표·강조 제목·숫자 3칸·증거 패널)",
+   "short": "뉴스 데스크 카드",
+   "cat": "style",
+   "plain": "여러 소식을 차례로 — 주간 정리, 매일 브리핑의 소식 2~3개, AI 업계 위클리. 소식마다 '그래서 무엇(꼬리표)'·숫자·증거 하나",
+   "look": "뉴스 데스크 카드 (한 소식 = 한 장: 순번·꼬리표·강조 제목·숫자 3칸·증거 패널)",
+   "status": "demo",
+   "renderer": "hybrid",
+   "skin": "midnight",
+   "avoid": "인과·연결이 주인공인 장면(→ 인과 지도) / 한 영상 전체를 이 틀만으로 (화면 변화 4.6회/분 — 지루함) / 소식 하나뿐인 영상",
+   "fits": "brands: market·ai·issues, questions: 무슨 일·요약·지금 할 일·여러 소식, moods: 빠름·실용·차분, needs: statement·price",
+   "demo": "20261113-style-ref2",
+   "skill": "edit-style-news-desk",
+   "doc": "styles/news-desk/STYLE.md",
+   "intro": "레퍼런스 분석·장단점: `docs/25-reference-2611.md` §1 · 장면 `newsdesk` (`ytflow/stages/newsdesk.py`) · 시험작 `projects/20261113-style-ref2`",
+   "how": "렌더러 hybrid · 장면 종류 newsdesk · 그래픽 팩 midnight",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"news-desk\"",
+   "anim": "layers",
+   "label": "뉴스 데스크 카드 (한 소식 = 한 장: 순번·꼬리표·강조 제목·숫자 3칸·증거 패널)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": []
+  },
+  {
+   "id": "term:style-paper-column",
+   "kind": "term",
+   "key": "style-paper-column",
+   "aliases": [
+    "paper-column",
+    "종이 칼럼"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/paper-column.yaml",
+     "line": 1,
+     "src": "종이 칼럼 (구겨진 종이 + 손그림 + 콜라주)"
+    }
+   ],
+   "scenes": [
+    "term:analogy",
+    "term:map_causal",
+    "term:bignum",
+    "term:timeline",
+    "term:people",
+    "term:parking",
+    "term:apartments",
+    "term:newspapers",
+    "term:shape",
+    "term:checklist"
+   ],
+   "used_by": [],
+   "name": "종이 칼럼 (구겨진 종이 + 손그림 + 콜라주)",
+   "short": "종이 칼럼",
+   "cat": "style",
+   "plain": "종이 칼럼 (구겨진 종이 + 손그림 + 콜라주)",
+   "look": "종이 칼럼 (구겨진 종이 + 손그림 + 콜라주)",
+   "status": "approved",
+   "renderer": "paper",
+   "skin": "paper-sketch",
+   "avoid": "원본 발언이 핵심인 뉴스",
+   "fits": "brands: market·curiosity·issues, questions: 개념·원인·행동의 이유, moods: 차분",
+   "demo": "20261106-미주일기-현금흐름",
+   "skill": "edit-style-mijudiary",
+   "how": "렌더러 paper · 장면 종류 analogy, map_causal, bignum, timeline, people, parking, apartments, newspapers, shape, checklist · 그래픽 팩 paper-sketch",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"paper-column\"",
+   "anim": "draw",
+   "label": "종이 칼럼 (구겨진 종이 + 손그림 + 콜라주)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "sec:05§0-7"
+   ]
+  },
+  {
+   "id": "term:style-presenter-shorts",
+   "kind": "term",
+   "key": "style-presenter-shorts",
+   "aliases": [
+    "presenter-shorts",
+    "말하는 사람 쇼츠"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/presenter-shorts.yaml",
+     "line": 1,
+     "src": "말하는 사람 쇼츠 (본인 촬영 → 점프 컷·펀치 인·훅 제목·큰 자막·끼워 넣는 카드)"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "말하는 사람 쇼츠 (본인 촬영 → 점프 컷·펀치 인·훅 제목·큰 자막·끼워 넣는 카드)",
+   "short": "말하는 사람 쇼츠",
+   "cat": "style",
+   "plain": "본인이 1분 안팎으로 카메라에 대고 말한 영상이 있을 때 — 롱폼 하이라이트, 도구 추천, 한 줄 의견 (주 1~2편)",
+   "look": "말하는 사람 쇼츠 (본인 촬영 → 점프 컷·펀치 인·훅 제목·큰 자막·끼워 넣는 카드)",
+   "status": "demo",
+   "renderer": "presenter",
+   "skin": "none",
+   "avoid": "촬영 영상이 없을 때 / 공시·차트 근거를 길게 보여 줘야 할 때(→ 롱폼) / 권리 없는 남의 영상",
+   "fits": "brands: ai·market·curiosity, questions: 의견·추천·한 가지 알려 주기·놀라운 사실, moods: 빠름·실용, needs: selfie",
+   "demo": "20261113-style-presenter",
+   "skill": "edit-style-presenter-shorts",
+   "doc": "styles/presenter-shorts/STYLE.md",
+   "intro": "레퍼런스 분석·장단점: `docs/25-reference-2611.md` §2 · `python -m ytflow presenter <프로젝트>` (`ytflow/stages/presenter.py`) · 시험작 `projects/20261113-style-presenter`",
+   "how": "렌더러 presenter · 장면 종류 - · 그래픽 팩 none",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"presenter-shorts\"",
+   "label": "말하는 사람 쇼츠 (본인 촬영 → 점프 컷·펀치 인·훅 제목·큰 자막·끼워 넣는 카드)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": []
+  },
+  {
+   "id": "term:style-screen-demo",
+   "kind": "term",
+   "key": "style-screen-demo",
+   "aliases": [
+    "screen-demo",
+    "화면 따라 하기"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/screen-demo.yaml",
+     "line": 1,
+     "src": "화면 따라 하기 (직접 실행 화면 녹화 + 주석 + 단계 번호)"
+    }
+   ],
+   "scenes": [
+    "term:footage",
+    "term:checklist",
+    "term:versus"
+   ],
+   "used_by": [],
+   "name": "화면 따라 하기 (직접 실행 화면 녹화 + 주석 + 단계 번호)",
+   "short": "화면 따라 하기",
+   "cat": "style",
+   "plain": "화면 따라 하기 (직접 실행 화면 녹화 + 주석 + 단계 번호)",
+   "look": "화면 따라 하기 (직접 실행 화면 녹화 + 주석 + 단계 번호)",
+   "status": "demo",
+   "renderer": "hybrid",
+   "skin": "clean-flat",
+   "avoid": "직접 실행 결과가 없을 때 / 개인정보·키가 화면에 보일 때",
+   "fits": "brands: ai, questions: 방법·비교·정체, moods: 실용·빠름, needs: screen",
+   "demo": "20261109-ai-unslop",
+   "skill": "edit-style-hybrid",
+   "how": "렌더러 hybrid · 장면 종류 footage, checklist, versus · 그래픽 팩 clean-flat",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"screen-demo\"",
+   "anim": "kenburns",
+   "label": "화면 따라 하기 (직접 실행 화면 녹화 + 주석 + 단계 번호)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": []
+  },
+  {
+   "id": "term:style-screen-zoom",
+   "kind": "term",
+   "key": "style-screen-zoom",
+   "aliases": [
+    "screen-zoom",
+    "화면 자동 줌"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/screen-zoom.yaml",
+     "line": 1,
+     "src": "화면 자동 줌 (가리키는 곳으로 카메라가 다가감 + 얇은 테두리)"
+    }
+   ],
+   "scenes": [
+    "term:zoomshot"
+   ],
+   "used_by": [],
+   "name": "화면 자동 줌 (가리키는 곳으로 카메라가 다가감 + 얇은 테두리)",
+   "short": "화면 자동 줌",
+   "cat": "style",
+   "plain": "화면 자동 줌 (가리키는 곳으로 카메라가 다가감 + 얇은 테두리)",
+   "look": "화면 자동 줌 (가리키는 곳으로 카메라가 다가감 + 얇은 테두리)",
+   "status": "demo",
+   "renderer": "hybrid",
+   "skin": "clean-flat",
+   "avoid": "한 장면에 줌 3번 이상 (어지러움) / 테두리 박스 좌표를 눈으로 확인하지 않고 쓰기",
+   "fits": "brands: ai·market, questions: 방법·정체·개념, moods: 실용·차분, needs: screen",
+   "demo": "20261109-pool-ai (장면 3)",
+   "skill": "edit-style-pool",
+   "how": "렌더러 hybrid · 장면 종류 zoomshot · 그래픽 팩 clean-flat",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"screen-zoom\"",
+   "anim": "zoomshot",
+   "label": "화면 자동 줌 (가리키는 곳으로 카메라가 다가감 + 얇은 테두리)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": []
+  },
+  {
+   "id": "term:style-shorts-card",
+   "kind": "term",
+   "key": "style-shorts-card",
+   "aliases": [
+    "shorts-card",
+    "쇼츠 카드"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/shorts-card.yaml",
+     "line": 1,
+     "src": "쇼츠 카드 (9:16 고정 훅 + 큰 자막)"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "쇼츠 카드 (9:16 고정 훅 + 큰 자막)",
+   "short": "쇼츠 카드",
+   "cat": "style",
+   "plain": "쇼츠 카드 (9:16 고정 훅 + 큰 자막)",
+   "look": "쇼츠 카드 (9:16 고정 훅 + 큰 자막)",
+   "status": "approved",
+   "renderer": "shorts",
+   "skin": "clean-flat",
+   "avoid": "설명할 것이 많은 분석 (롱폼으로)",
+   "fits": "brands: ai·market·curiosity, questions: 정체·방법·개념, moods: 빠름·실용",
+   "demo": "20261106-쇼츠1",
+   "skill": "shorts-ai",
+   "how": "렌더러 shorts · 장면 종류 - · 그래픽 팩 clean-flat",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"shorts-card\"",
+   "label": "쇼츠 카드 (9:16 고정 훅 + 큰 자막)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": []
+  },
+  {
+   "id": "term:style-shorts-claude",
+   "kind": "term",
+   "key": "style-shorts-claude",
+   "aliases": [
+    "shorts-claude",
+    "쇼츠 Claude 판"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/shorts-claude.yaml",
+     "line": 1,
+     "src": "쇼츠 Claude 판 (실제 녹화 화면 중심, 고정 배치)"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "쇼츠 Claude 판 (실제 녹화 화면 중심, 고정 배치)",
+   "short": "쇼츠 Claude 판",
+   "cat": "style",
+   "plain": "쇼츠 Claude 판 (실제 녹화 화면 중심, 고정 배치)",
+   "look": "쇼츠 Claude 판 (실제 녹화 화면 중심, 고정 배치)",
+   "status": "demo",
+   "renderer": "shorts_hf",
+   "skin": "clean-flat",
+   "avoid": "실제 화면이 없을 때 (그때는 shorts-guide-codex 처럼 설명 카드형이 낫다)",
+   "fits": "brands: ai·market·curiosity, questions: 정체·방법·개념, moods: 실용·빠름, needs: screen",
+   "demo": "20261109-short-unslop",
+   "skill": "edit-style-pool",
+   "how": "렌더러 shorts_hf · 장면 종류 - · 그래픽 팩 clean-flat",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"shorts-claude\"",
+   "label": "쇼츠 Claude 판 (실제 녹화 화면 중심, 고정 배치)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": []
+  },
+  {
+   "id": "term:style-shorts-guide-codex",
+   "kind": "term",
+   "key": "style-shorts-guide-codex",
+   "aliases": [
+    "shorts-guide-codex",
+    "쇼츠 설명 카드형 — Codex 'AI 실전노트'"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/shorts-guide-codex.yaml",
+     "line": 1,
+     "src": "쇼츠 설명 카드형 — Codex 'AI 실전노트' (종이색·짙은 녹색·라임 한 곳)"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "쇼츠 설명 카드형 — Codex 'AI 실전노트' (종이색·짙은 녹색·라임 한 곳)",
+   "short": "쇼츠 설명 카드형 — Codex 'AI 실전노트'",
+   "cat": "style",
+   "plain": "쇼츠 설명 카드형 — Codex 'AI 실전노트' (종이색·짙은 녹색·라임 한 곳)",
+   "look": "쇼츠 설명 카드형 — Codex 'AI 실전노트' (종이색·짙은 녹색·라임 한 곳)",
+   "status": "approved",
+   "renderer": "codex-remotion",
+   "skin": "codex-ai-note",
+   "avoid": "이 저장소 렌더러로는 만들 수 없음 — Codex 쪽 보관본(Remotion 템플릿)으로 제작",
+   "fits": "brands: ai, questions: 방법·정체, moods: 실용·차분",
+   "demo": "Google Drive 'AI 실전노트 — 쇼츠 자동화 보관' (AI-Shorts-003/005/006 Visual-v2)",
+   "how": "렌더러 codex-remotion · 장면 종류 - · 그래픽 팩 codex-ai-note",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"shorts-guide-codex\"",
+   "label": "쇼츠 설명 카드형 — Codex 'AI 실전노트' (종이색·짙은 녹색·라임 한 곳)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": []
+  },
+  {
+   "id": "term:style-source-cut",
+   "kind": "term",
+   "key": "style-source-cut",
+   "aliases": [
+    "source-cut",
+    "원본 발언 컷편집"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/source-cut.yaml",
+     "line": 1,
+     "src": "원본 발언 컷편집 (그 사람이 직접 말하는 부분만 잘라 넣기)"
+    }
+   ],
+   "scenes": [
+    "term:bite"
+   ],
+   "used_by": [],
+   "name": "원본 발언 컷편집 (그 사람이 직접 말하는 부분만 잘라 넣기)",
+   "short": "원본 발언 컷편집",
+   "cat": "style",
+   "plain": "어닝콜 경영진의 약속·답변, 연준·정부 기자회견, 청문회, CEO 인터뷰 — 내레이션이 '이렇게 말했다'고 전하는 대신 그 사람의 목소리로 3~20초",
+   "look": "원본 발언 컷편집 (그 사람이 직접 말하는 부분만 잘라 넣기)",
+   "status": "demo",
+   "renderer": "hybrid",
+   "skin": "clean-flat",
+   "avoid": "라이선스가 확인 안 된 원본(뉴스 채널 화면 등) / 한 번에 25초 넘게 (요점만) / 발언 앞뒤를 잘라 뜻을 바꾸는 편집 / 사인(私人)의 발언",
+   "fits": "brands: market·issues·ai, questions: 약속·원인·전망·발언 확인·누가 무엇을 말했나, moods: 긴장·차분·실용, needs: footage·statement",
+   "demo": "20261113-style-cut",
+   "skill": "edit-style-source-cut",
+   "doc": "styles/source-cut/STYLE.md",
+   "intro": "레시피 `styles/recipes/source-cut.yaml` · 장면 type `bite` · 코드 `ytflow/stages/cutedit.py` · 시험작 `projects/20261113-style-cut`",
+   "how": "렌더러 hybrid · 장면 종류 bite · 그래픽 팩 clean-flat",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"source-cut\"",
+   "anim": "cut",
+   "label": "원본 발언 컷편집 (그 사람이 직접 말하는 부분만 잘라 넣기)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "ver:20"
+   ]
+  },
+  {
+   "id": "term:style-statement-brief",
+   "kind": "term",
+   "key": "style-statement-brief",
+   "aliases": [
+    "statement-brief",
+    "발언 원본 브리핑"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/statement-brief.yaml",
+     "line": 1,
+     "src": "발언 원본 브리핑 (원본 인터뷰 + 원문·번역 자막 + 요약 카드)"
+    }
+   ],
+   "scenes": [
+    "term:footage",
+    "term:quote",
+    "term:bignum"
+   ],
+   "used_by": [],
+   "name": "발언 원본 브리핑 (원본 인터뷰 + 원문·번역 자막 + 요약 카드)",
+   "short": "발언 원본 브리핑",
+   "cat": "style",
+   "plain": "발언 원본 브리핑 (원본 인터뷰 + 원문·번역 자막 + 요약 카드)",
+   "look": "발언 원본 브리핑 (원본 인터뷰 + 원문·번역 자막 + 요약 카드)",
+   "status": "approved",
+   "renderer": "cards",
+   "skin": "dark-doc",
+   "avoid": "발언 원본 영상을 받을 수 없을 때 (클라우드는 PC rebuild 필요)",
+   "fits": "brands: market·ai·issues, questions: 발언·정체·소문 확인, moods: 긴장·차분, needs: statement",
+   "demo": "20261106-식스시그마-젠슨황",
+   "skill": "edit-style-sixsigma",
+   "how": "렌더러 cards · 장면 종류 footage, quote, bignum · 그래픽 팩 dark-doc",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"statement-brief\"",
+   "anim": "kenburns",
+   "label": "발언 원본 브리핑 (원본 인터뷰 + 원문·번역 자막 + 요약 카드)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": []
+  },
+  {
+   "id": "term:style-story-board",
+   "kind": "term",
+   "key": "style-story-board",
+   "aliases": [
+    "story-board",
+    "이야기 그림판"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/story-board.yaml",
+     "line": 1,
+     "src": "이야기 그림판 (말하는 순간 종이 위에 사람·사물이 그려지고 카메라가 따라감)"
+    }
+   ],
+   "scenes": [
+    "term:story"
+   ],
+   "used_by": [],
+   "name": "이야기 그림판 (말하는 순간 종이 위에 사람·사물이 그려지고 카메라가 따라감)",
+   "short": "이야기 그림판",
+   "cat": "style",
+   "plain": "사람·장소·날짜가 있는 이야기 — 누가, 언제, 어디서, 무엇을 했고 그래서 어떻게 됐나. 장면 → 인물 → 사건 → 반전을 한 장의 종이 위에 쌓을 때",
+   "look": "이야기 그림판 (말하는 순간 종이 위에 사람·사물이 그려지고 카메라가 따라감)",
+   "status": "demo",
+   "renderer": "hybrid",
+   "skin": "paper-sketch",
+   "avoid": "숫자 표가 주인공(→ 차트·뉴스 데스크) / 매일 시장 브리핑(정보형 → 요약판 + motion) / 실존 인물 얼굴을 닮게 그리기(막대 인물 + 이름표로)",
+   "fits": "brands: curiosity, questions: 행동의 이유·그때 무슨 일이·이름의 유래·오늘과 연결, moods: 차분·과거·미래",
+   "demo": "20261113-curiosity-moravec",
+   "skill": "edit-style-story-board",
+   "doc": "styles/story-board/STYLE.md",
+   "intro": "id: story-board",
+   "how": "렌더러 hybrid · 장면 종류 story · 그래픽 팩 paper-sketch",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"story-board\"",
+   "anim": "draw",
+   "label": "이야기 그림판 (말하는 순간 종이 위에 사람·사물이 그려지고 카메라가 따라감)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": [
+    "sec:04§0-4",
+    "code:ytflow/stages/story_kit.py:1"
+   ]
+  },
+  {
+   "id": "term:style-terminal-typing",
+   "kind": "term",
+   "key": "style-terminal-typing",
+   "aliases": [
+    "terminal-typing",
+    "터미널 타자"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/terminal-typing.yaml",
+     "line": 1,
+     "src": "터미널 타자 (명령이 쳐지고 결과가 나옴)"
+    }
+   ],
+   "scenes": [
+    "term:terminal"
+   ],
+   "used_by": [],
+   "name": "터미널 타자 (명령이 쳐지고 결과가 나옴)",
+   "short": "터미널 타자",
+   "cat": "style",
+   "plain": "터미널 타자 (명령이 쳐지고 결과가 나옴)",
+   "look": "터미널 타자 (명령이 쳐지고 결과가 나옴)",
+   "status": "demo",
+   "renderer": "hybrid",
+   "skin": "clean-flat",
+   "avoid": "실행해 보지 않은 명령·결과 (실제 실행 기록만, term_log 처럼 남겨 두기)",
+   "fits": "brands: ai, questions: 방법, moods: 실용",
+   "demo": "20261109-pool-ai (장면 2)",
+   "skill": "edit-style-pool",
+   "how": "렌더러 hybrid · 장면 종류 terminal · 그래픽 팩 clean-flat",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"terminal-typing\"",
+   "anim": "kinetic",
+   "label": "터미널 타자 (명령이 쳐지고 결과가 나옴)",
+   "cat_label": "편집 스타일",
+   "mentioned_in": []
+  },
+  {
+   "id": "term:beat-camera",
+   "kind": "term",
+   "key": "beat-camera",
+   "aliases": [
+    "박자 카메라",
+    "박자마다 카메라",
+    "박자마다 방향을 바꾸며",
+    "\"camera\": \"beat\""
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 1042,
+     "src": "D.cam = spec.get(\"camera\", \"calm\") == \"beat\" and sc.get(\"type\") not in CAM_SKIP   # v30: 기본 끔 (2026-11-15 사용자: 억지 미세 움직임 필요 없음)"
+    },
+    {
+     "file": "ytflow/stages/edit10.py",
+     "line": 257,
+     "src": "def _beat_camera(D, sc: dict, bt: list, dur: float) -> None:"
+    },
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 44,
+     "src": "CAM_SKIP = {\"footage\", \"outro\", \"intro\", \"bite\", \"stage\", \"story\", \"kb\", \"journey\", \"zoomshot\", \"newsdesk\"}   # 영상·자체 카메라가 있는 장면은 박자 카메라 없음"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "박자 카메라",
+   "cat": "motion",
+   "plain": "대본이 한 박자(문장 한 토막) 넘어갈 때마다 카메라가 그 박자의 주인공 쪽으로 옮겨 가는 움직임",
+   "look": "화면 전체가 박자마다 조금씩 밀리고 당겨지며, 지금 말하는 대상 쪽으로 다가감. 머무는 동안에도 아주 천천히 움직임",
+   "how": "렌더러가 박자 시각마다 화면 묶음(cam)에 이동·확대 애니메이션을 붙임. 자료 화면·지도·키네틱·장 표지 같은 장면은 빼고 적용",
+   "enable": "hybrid.json 에 \"camera\": \"beat\" 를 적을 때만 켜짐 (v30부터 기본 끔)",
+   "anim": "camera-beat",
+   "caution": "화면이 움직인다고 '말하는 내용이 화면에 생기는' 것은 아님 — 정지 비율 숫자는 좋아지지만 의미는 그대로일 수 있음 (v30)",
+   "curated": true,
+   "label": "박자 카메라",
+   "cat_label": "움직임",
+   "mentioned_in": [
+    "sec:05§0-5",
+    "sec:05§0-4",
+    "sec:09§6",
+    "ver:10",
+    "ver:30",
+    "ver:31",
+    "rev:11",
+    "rev:12",
+    "rev:13",
+    "rev:14",
+    "code:ytflow/stages/edit10.py:67",
+    "code:ytflow/stages/hybrid.py:147",
+    "code:ytflow/stages/hybrid.py:1041",
+    "intent:ea14e9be"
+   ]
+  },
+  {
+   "id": "term:slow-push",
+   "kind": "term",
+   "key": "slow-push",
+   "aliases": [
+    "느린 확대",
+    "천천히 다가가",
+    "한 방향 느린 카메라",
+    "확대·축소",
+    "no_zoom",
+    "\"zoom\": \"off\""
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/edit10.py",
+     "line": 82,
+     "src": "if not getattr(D, \"no_zoom\", False):   # v31 확대·축소 없음"
+    },
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 1043,
+     "src": "# v31 확대·축소 없음 (2026-11-15 사용자: \"자꾸 화면을 확대하고 축소하고 웅웅거리는 거 쓰지 말아 주세요\"): 시장 브랜드 기본 — 장면 안 느린 확대·tilt·dolly·차트 확대·사진 밀기 끔"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "장면 안 느린 확대 (확대·축소)",
+   "cat": "motion",
+   "plain": "한 장면이 이어지는 동안 화면 전체가 아주 천천히 커지는(다가가는) 움직임",
+   "look": "장면 내내 2~3% 정도 서서히 확대됨. 길게 보면 '웅웅거리는' 느낌이 날 수 있음",
+   "how": "장면 묶음에 시작→끝 확대 애니메이션을 붙임. 시장 채널은 D.no_zoom 으로 끔",
+   "enable": "기본 켬, 시장 채널은 hybrid.json \"zoom\": \"off\" 가 기본 (v31)",
+   "anim": "push",
+   "curated": true,
+   "label": "장면 안 느린 확대 (확대·축소)",
+   "cat_label": "움직임",
+   "mentioned_in": [
+    "sec:05§0-5",
+    "sec:05§0-4",
+    "sec:09§6",
+    "ver:12",
+    "ver:31",
+    "code:ytflow/stages/directions.py:656",
+    "code:ytflow/stages/edit10.py:81",
+    "code:ytflow/stages/edit10.py:82",
+    "code:ytflow/stages/edit10.py:155",
+    "code:ytflow/stages/hybrid.py:1043"
+   ]
+  },
+  {
+   "id": "term:idle",
+   "kind": "term",
+   "key": "idle",
+   "aliases": [
+    "대기 동작",
+    "숨 쉰다",
+    "숨 쉬듯"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/stage.py",
+     "line": 64,
+     "src": "self.idle: list = []      # 등장한 모든 그림은 숨 쉬듯 계속 움직임 (완전히 멈춘 프레임 없음)"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "대기 동작 (그림이 숨 쉼)",
+   "cat": "motion",
+   "plain": "화면에 나온 사람·사물 그림이 가만히 있지 않고 아주 조금씩 위아래·좌우로 흔들리는 것",
+   "look": "멈춘 것처럼 보이는 그림도 1~2픽셀씩 계속 들썩임",
+   "how": "애니메이션 무대(stage) 렌더러가 등장한 그림마다 끝까지 반복 움직임을 붙임",
+   "enable": "stage 장면에서 자동",
+   "anim": "idle",
+   "caution": "'완전히 멈춘 프레임 없음'을 만들기 위한 장치 — 정지 비율은 낮아지지만 내용이 바뀌는 것은 아님",
+   "curated": true,
+   "label": "대기 동작 (그림이 숨 쉼)",
+   "cat_label": "움직임",
+   "mentioned_in": [
+    "sec:README§2-5",
+    "ver:25"
+   ]
+  },
+  {
+   "id": "term:perspective-paper",
+   "kind": "term",
+   "key": "perspective-paper",
+   "aliases": [
+    "원근 종이",
+    "원근 바닥",
+    "2.5D"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/stage.py",
+     "line": 508,
+     "src": "# ④ 원근: 종이가 살짝 누운 채(rotationX) 박자마다 좌우로 천천히 돌아감(rotationY) — 2.5D 깊이 (미주일기 '원근 바닥')"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "원근 종이 (2.5D)",
+   "cat": "motion",
+   "plain": "그림이 그려진 종이가 살짝 누운 채 박자마다 좌우로 천천히 돌아가는 연출",
+   "look": "화면이 평평한 종이가 아니라 책상 위 종이를 비스듬히 보는 듯한 깊이",
+   "how": "무대 전체에 CSS 원근(perspective)과 rotationX·rotationY 애니메이션",
+   "enable": "stage 장면에서 자동",
+   "anim": "perspective",
+   "curated": true,
+   "label": "원근 종이 (2.5D)",
+   "cat_label": "움직임",
+   "mentioned_in": [
+    "sec:README§2-5",
+    "ver:25"
+   ]
+  },
+  {
+   "id": "term:walk-in",
+   "kind": "term",
+   "key": "walk-in",
+   "aliases": [
+    "걸어 들어",
+    "from: walk",
+    "걸어서(굴러서)"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/stage.py",
+     "line": 182,
+     "src": "if m.get(\"from\") == \"walk\":   # v25 걸어서(굴러서) 화면 밖에서 들어옴 — 나타나기 대신 움직임"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "걸어 들어오기",
+   "cat": "motion",
+   "plain": "사람·로봇·수레가 갑자기 나타나지 않고 화면 밖에서 걸어(굴러) 들어오는 것",
+   "look": "그림이 왼쪽(또는 오른쪽) 밖에서 통통 튀며 자리까지 이동",
+   "how": "stage 장면 박자에 from: walk 를 적으면 시작 위치를 화면 밖에 두고 이동 애니메이션",
+   "enable": "hybrid.json stage 박자의 \"from\": \"walk\"",
+   "anim": "walk",
+   "curated": true,
+   "label": "걸어 들어오기",
+   "cat_label": "움직임",
+   "mentioned_in": [
+    "sec:README§2-5",
+    "ver:25",
+    "code:ytflow/stages/stage.py:182"
+   ]
+  },
+  {
+   "id": "term:beat-motion",
+   "kind": "term",
+   "key": "beat-motion",
+   "aliases": [
+    "박자 motion",
+    "말에 맞춰 생기는",
+    "말하는 것이 화면에 생긴다",
+    "말하는 숫자가",
+    "`motion`"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 1092,
+     "src": "motion2.apply(D, sc, bt, dur)"
+    },
+    {
+     "file": "ytflow/stages/motion2.py",
+     "line": 212,
+     "src": "def apply(D, sc: dict, bt: list, dur: float, w: int = 1920, h: int = 1080, keep: bool = True) -> None:"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "말에 맞춰 생기는 사물 (박자 motion)",
+   "cat": "motion",
+   "plain": "내레이션이 숫자·사물을 말하는 바로 그 순간 그 숫자·아이콘·화살표가 화면에 생기는 것",
+   "look": "'631억'이라고 말하는 순간 631억 카드가 튀어나오고, '은행'이라고 하면 은행 아이콘이 나타남",
+   "how": "박자마다 적은 motion 항목(count·icon·arrow·pulse)을 그 낱말을 말하는 시각(받아쓰기 시각)에 맞춰 등장시킴",
+   "enable": "hybrid.json 박자의 \"motion\": [...] (시장 채널 v27부터 G4 MUST)",
+   "anim": "beat-motion",
+   "caution": "사용자가 말한 '동영상의 이점'(말하는 것이 화면에 생긴다)에 가장 가까운 장치 (09 §6 v30)",
+   "curated": true,
+   "label": "말에 맞춰 생기는 사물 (박자 motion)",
+   "cat_label": "움직임",
+   "mentioned_in": [
+    "sec:04§0-4",
+    "sec:09§6",
+    "sec:09§h216",
+    "ver:27",
+    "ver:30",
+    "ver:31"
+   ]
+  },
+  {
+   "id": "term:static-ratio",
+   "kind": "term",
+   "key": "static-ratio",
+   "aliases": [
+    "정지 화면 비율",
+    "정지 비율",
+    "static_ratio"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/style.py",
+     "line": 89,
+     "src": "\"static_ratio\": round(float((d < 0.6).mean()), 2),"
+    },
+    {
+     "file": "ytflow/stages/hybrid.py",
+     "line": 1414,
+     "src": "project.write_json(\"edit\", \"motion.json\", {k: m[k] for k in (\"change_events_per_min\", \"median_change_gap_s\", \"static_ratio\", \"hard_cuts_per_min\", \"audio\") if k in m})"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "정지 화면 비율",
+   "cat": "measure",
+   "plain": "완성 영상에서 앞 프레임과 거의 똑같은(차이 0.6 미만) 순간이 몇 %인지",
+   "look": "숫자 하나 (0.26 = 영상의 26% 동안 화면이 거의 안 바뀜)",
+   "how": "완성본 프레임을 뽑아 이웃 프레임 사이 밝기 차이를 재고, 작은 차이의 비율을 셈 → 05_edit/motion.json",
+   "enable": "렌더 끝에 자동 측정, check G6 이 읽음 (호기심 ≤0.3 MUST, 시장은 참고만)",
+   "anim": "static",
+   "caution": "무엇이 바뀌었는지(의미)는 모름 — 카메라를 흔들거나 그림을 들썩이게 하면 내용 변화 없이도 숫자가 좋아짐",
+   "curated": true,
+   "label": "정지 화면 비율",
+   "cat_label": "측정값",
+   "mentioned_in": [
+    "sec:05§0-4",
+    "sec:06§G6",
+    "sec:09§6",
+    "sec:README§2-5",
+    "ver:25",
+    "ver:27",
+    "ver:30",
+    "rule:G6:1",
+    "check:429",
+    "check:433"
+   ]
+  },
+  {
+   "id": "term:change-rate",
+   "kind": "term",
+   "key": "change-rate",
+   "aliases": [
+    "화면 변화",
+    "change_events_per_min"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/style.py",
+     "line": 87,
+     "src": "m.update({\"change_events_per_min\": round(len(ev) / max(dur / 60, 1e-6), 1),"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "화면 변화 (회/분)",
+   "cat": "measure",
+   "plain": "완성 영상에서 화면이 눈에 띄게 바뀌는 순간이 1분에 몇 번인지",
+   "look": "숫자 하나 (22.7/분 ≈ 2.6초마다 무언가 바뀜)",
+   "how": "이웃 프레임 차이가 큰 순간(변화 사건)을 세어 분당으로 나눔",
+   "anim": "crossfade",
+   "caution": "정지 비율과 같은 한계 — '왜' 바뀌는지는 재지 않음",
+   "curated": true,
+   "label": "화면 변화 (회/분)",
+   "cat_label": "측정값",
+   "mentioned_in": [
+    "sec:05§0-5",
+    "sec:05§0-4",
+    "sec:06§G6",
+    "sec:09§6",
+    "sec:README§2-5",
+    "ver:31",
+    "rule:G6:1",
+    "check:429"
+   ]
+  },
+  {
+   "id": "term:transition",
+   "kind": "term",
+   "key": "transition",
+   "aliases": [
+    "장면 전환",
+    "겹침 전환",
+    "휙 전환",
+    "부드러운 겹침"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/edit10.py",
+     "line": 4,
+     "src": "A2 장면 전환   : 딱 자르기 대신 앞 장면 끝 0.3초 + 다음 장면 처음 0.35초에 걸친 전환 (wipe·push·zoom·iris 를 돌려 씀)"
+    },
+    {
+     "file": "ytflow/stages/edit10.py",
+     "line": 48,
+     "src": "# ---- 나가기 (마지막 장면 제외) — 다음 장면의 전환과 이어지게"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "장면 전환 (겹침·밀기)",
+   "cat": "motion",
+   "plain": "한 장면에서 다음 장면으로 넘어갈 때 딱 자르지 않고 0.3초쯤 겹치거나 밀며 넘어가는 것",
+   "look": "앞 장면이 흐려지며 다음 장면이 겹쳐 나타남 (장 표지만 옆으로 밀기)",
+   "how": "앞 장면 끝 0.3초 + 다음 장면 처음 0.35초에 걸친 전환을 렌더러가 붙임",
+   "anim": "crossfade",
+   "curated": true,
+   "label": "장면 전환 (겹침·밀기)",
+   "cat_label": "움직임",
+   "mentioned_in": [
+    "sec:05§0-5",
+    "sec:05§0-4",
+    "sec:09§6",
+    "sec:README§1-1",
+    "ver:10",
+    "ver:12",
+    "rev:11",
+    "rev:12",
+    "rev:13",
+    "rev:14",
+    "code:ytflow/stages/edit10.py:22",
+    "intent:ea14e9be"
+   ]
+  },
+  {
+   "id": "term:hard-cut",
+   "kind": "term",
+   "key": "hard-cut",
+   "aliases": [
+    "하드 컷",
+    "딱 자르기"
+   ],
+   "code": [],
+   "scenes": [],
+   "used_by": [],
+   "name": "하드 컷",
+   "cat": "motion",
+   "plain": "전환 효과 없이 한 프레임에 다음 장면으로 바로 바뀌는 것",
+   "look": "앞 장면이 그대로 끊기고 다음 장면이 바로 나옴",
+   "how": "전환을 붙이지 않은 장면 경계",
+   "anim": "cut",
+   "curated": true,
+   "label": "하드 컷",
+   "cat_label": "움직임",
+   "mentioned_in": [
+    "sec:README§2-5"
+   ]
+  },
+  {
+   "id": "term:layers",
+   "kind": "term",
+   "key": "layers",
+   "aliases": [
+    "layers",
+    "겹친 장면",
+    "장면 안 겹치기"
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/directions.py",
+     "line": 359,
+     "src": "def apply_layers(D, project, spec, sc, bt, dur, adir: Path):"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "장면 안 겹치기 (layers)",
+   "cat": "motion",
+   "plain": "한 장면 위에 사진·지도·도장·표시 같은 층을 하나 더 얹는 것",
+   "look": "도식 위에 자료 사진이 비스듬히 붙거나, 지도 조각·도장이 찍힘",
+   "how": "장면의 layers 목록을 렌더러가 장면 그림 위에 차례로 얹음",
+   "enable": "hybrid.json 장면의 \"layers\": [...]",
+   "anim": "layers",
+   "curated": true,
+   "label": "장면 안 겹치기 (layers)",
+   "cat_label": "움직임",
+   "mentioned_in": [
+    "sec:05§0-1",
+    "sec:05§h19",
+    "sec:05§h25",
+    "sec:05§0-3",
+    "sec:05§2",
+    "sec:06§G5",
+    "sec:09§6",
+    "ver:3",
+    "ver:4",
+    "rule:G5:1",
+    "check:402"
+   ]
+  },
+  {
+   "id": "term:graphic-pack",
+   "kind": "term",
+   "key": "graphic-pack",
+   "aliases": [
+    "그래픽 팩",
+    "바탕색",
+    "\"look\""
+   ],
+   "code": [
+    {
+     "file": "ytflow/stages/skin.py",
+     "line": 27,
+     "src": "TOKENS = {"
+    }
+   ],
+   "scenes": [],
+   "used_by": [],
+   "name": "그래픽 팩·바탕 (look)",
+   "cat": "skin",
+   "plain": "연출은 그대로 두고 색·글꼴·배경 질감만 바꾸는 겉옷 (스킨)",
+   "look": "같은 장면이 미색 종이·칠판·남색 대시보드 등으로 옷만 바뀜",
+   "how": "skins/<id>/skin.yaml 의 색 토큰·글꼴·배경을 렌더러가 읽음. 장면마다 look 으로 바꿀 수 있음",
+   "enable": "edit.yaml 의 skin, 장면의 \"look\"",
+   "anim": "layers",
+   "curated": true,
+   "label": "그래픽 팩·바탕 (look)",
+   "cat_label": "그래픽 팩",
+   "mentioned_in": [
+    "sec:05§0-1",
+    "sec:05§0-7",
+    "sec:05§0-2",
+    "sec:05§0-6",
+    "sec:05§0-3",
+    "sec:05§1",
+    "sec:06§G5",
+    "sec:06§G6",
+    "sec:09§h216",
+    "sec:README§0",
+    "sec:README§2",
+    "ver:3",
+    "ver:13",
+    "rev:15",
+    "code:ytflow/stages/checklist.py:343",
+    "rule:G5:1",
+    "rule:G6:1",
+    "check:357",
+    "check:410",
+    "intent:00ba80c7",
+    "step:5"
+   ]
   }
  ],
  "edges": [
