@@ -221,13 +221,21 @@ def propose(text: str, kind: str = "fix", project: str = "", source: str = "") -
     return f
 
 
+CLOSED = {"done", "rejected", "declined", "closed", "merged"}
+
+
 def proposals(status: str | None = "new") -> list[dict]:
     out = []
     for f in sorted(PROPOSALS.glob("*.md")) if PROPOSALS.exists() else []:
         s = f.read_text(encoding="utf-8")
         m = re.match(r"---\n(.*?)\n---\n(.*)", s, re.S)
         meta = (yaml.safe_load(m.group(1)) or {}) if m else {}
-        if status and meta.get("status", "new") != status:
+        st = str(meta.get("status") or "new")
+        # 'open' = 아직 반영 안 된 것 전부 (new·pending 등 — 다른 에이전트가 다른 이름을 써도 놓치지 않게)
+        if status == "open":
+            if st in CLOSED:
+                continue
+        elif status and st != status:
             continue
         out.append({"file": str(f.relative_to(ROOT)), **meta, "text": (m.group(2) if m else s).strip()})
     return out
