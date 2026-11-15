@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-11-15T08:34:16",
+ "generated": "2026-11-15T08:34:47",
  "source_hash": "295a40216551",
  "audit": {
   "date": "2026-11-15T08:34",
@@ -2293,9 +2293,10 @@
    "versions": [
     23,
     24,
-    32
+    32,
+    34
    ],
-   "last_version": 32
+   "last_version": 34
   },
   {
    "id": "doc:04",
@@ -2330,9 +2331,10 @@
    "lines": 110,
    "versions": [
     23,
-    32
+    32,
+    34
    ],
-   "last_version": 32
+   "last_version": 34
   },
   {
    "id": "doc:07",
@@ -2355,9 +2357,10 @@
    "lines": 132,
    "versions": [
     23,
-    32
+    32,
+    34
    ],
-   "last_version": 32
+   "last_version": 34
   },
   {
    "id": "doc:09",
@@ -8428,7 +8431,17 @@
    "applied": [],
    "themes": [
     "script"
-   ]
+   ],
+   "commit": {
+    "sha": "3f0e88e32f977daccae8f10defc0ee7808cc8834",
+    "subject": "머니크루 리버스 엔지니어링(docs/31) + 매뉴얼 v33: 주제 선정·대본 뼈대·깊이 기법, check 직접 계산·틀리는 경우·기준선 신호",
+    "date": "2026-11-15",
+    "other_files": [
+     "AGENTS.md",
+     "docs/31-moneycrew-reverse.md",
+     "ytflow/stages/checklist.py"
+    ]
+   }
   },
   {
    "id": "ver:34",
@@ -8445,6 +8458,23 @@
     "intent",
     "length"
    ],
+   "commit": {
+    "sha": "73fcbf2271fc44e2cffda8e4ac71f887947780d6",
+    "subject": "main(매뉴얼 v32 스캔·반짝이 없음·시장·산업별 영향 장, v33 머니크루 깊이) 합침 — 이 브랜치의 매뉴얼 정리를 v34 로 번호 바꿈, 09 §6 눈요기에서 scan 뺌, 충돌 감지를 스타일 주제로 좁힘, 의도 판정 코드 위치 갱신",
+    "date": "2026-11-15",
+    "other_files": [
+     "AGENTS.md",
+     "docs/31-manual-graph.md",
+     "docs/34-manual-review.md",
+     "styles/recipes/story-board.yaml",
+     "topics/curiosity/topic.yaml",
+     "ytflow/stages/audit.py",
+     "ytflow/stages/checklist.py",
+     "ytflow/stages/hybrid.py",
+     "ytflow/stages/manualgraph.py",
+     "ytflow/stages/stage.py"
+    ]
+   },
    "terms": [
     "term:style-anim-stage",
     "term:idle",
@@ -11746,6 +11776,24 @@
      "by": ""
     },
     {
+     "ref": "doc:03",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:06",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:08",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
      "ref": "code:ytflow/stages/checklist.py:340",
      "status": "unreviewed",
      "note": "",
@@ -12866,6 +12914,24 @@
      "by": ""
     },
     {
+     "ref": "doc:03",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:06",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:08",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
      "ref": "code:ytflow/stages/checklist.py:340",
      "status": "unreviewed",
      "note": "",
@@ -13562,6 +13628,24 @@
      "by": ""
     },
     {
+     "ref": "doc:03",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:06",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:08",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
      "ref": "code:ytflow/stages/checklist.py:340",
      "status": "unreviewed",
      "note": "",
@@ -13761,6 +13845,24 @@
     },
     {
      "ref": "sec:05§4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:03",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:06",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:08",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -35845,6 +35947,30 @@
    "kind": "touched",
    "via": [
     "tag"
+   ]
+  },
+  {
+   "s": "ver:34",
+   "t": "doc:03",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:34",
+   "t": "doc:06",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:34",
+   "t": "doc:08",
+   "kind": "touched",
+   "via": [
+    "git"
    ]
   },
   {
