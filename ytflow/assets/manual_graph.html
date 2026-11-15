@@ -122,6 +122,45 @@ svg .muted{fill:var(--muted)}
 .pend-list li span{flex:1;min-width:0;overflow-wrap:anywhere}
 .toast{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:6px;font-size:13px;max-width:min(480px,calc(100vw - 32px))}
 .empty{color:var(--muted);font-size:12.5px}
+/* 의도 정렬 */
+.al{display:grid;grid-template-columns:300px minmax(0,1fr);min-height:600px}
+@media (max-width:820px){.al{grid-template-columns:minmax(0,1fr)}}
+.al-list{border-right:1px solid var(--line);max-height:860px;overflow:auto;min-width:0}
+@media (max-width:820px){.al-list{border-right:0;border-bottom:1px solid var(--line);max-height:320px}}
+.al-filter{display:flex;flex-wrap:wrap;gap:4px;padding:10px;border-bottom:1px solid var(--line)}
+.al-filter button{cursor:pointer;border:1px solid var(--line);background:var(--panel);border-radius:10px;font-size:11.5px;padding:1px 8px}
+.al-filter button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.al-item{all:unset;box-sizing:border-box;display:flex;flex-direction:column;gap:3px;width:100%;padding:8px 10px;border-bottom:1px solid var(--line);cursor:pointer;border-left:3px solid transparent}
+.al-item:hover,.al-item:focus-visible{background:var(--sunk)}
+.al-item[aria-current="true"]{background:var(--accent-soft);border-left-color:var(--accent)}
+.al-item q{font-size:12.5px;quotes:none;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.al-item small{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.st{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:0}
+.st.aligned{background:var(--pass)} .st.misaligned{background:var(--reject)} .st.unreviewed{background:var(--line);outline:1px solid var(--muted)}
+.chain{padding:14px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.link{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px}
+.link .num{font-family:var(--mono);font-size:12px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--sunk);color:var(--muted)}
+.link .box{display:flex;flex-direction:column;gap:8px;min-width:0}
+.link h3{margin:0;font-size:13px}
+.quote{font-size:16px;line-height:1.55;margin:0;padding:10px 12px;border-left:3px solid var(--fg);background:var(--sunk);border-radius:0 4px 4px 0}
+.reading{border:1px solid var(--line);border-radius:6px;padding:8px 10px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.reading.over,.reading.drift,.reading.under{border-color:var(--reject);background:var(--reject-soft)}
+.reading.conflict{border-color:var(--pend);background:var(--pend-soft)}
+.reading.aligned{border-color:var(--pass);background:var(--pass-soft)}
+.reading .rhead{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;justify-content:space-between}
+.reading .ex{font-size:12px;white-space:pre-wrap;color:var(--fg);max-height:150px;overflow:auto;margin:0;font-family:var(--font)}
+.reading .ex.code{font-family:var(--mono);font-size:11px}
+.reading .by{font-size:11px;color:var(--muted)}
+.reading select,.reading input{border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:3px 6px;font-size:12px}
+.reading input{width:100%}
+.drift-row{display:grid;grid-template-columns:76px minmax(0,1fr) minmax(0,1fr);gap:10px;font-size:12px;padding:6px 0;border-top:1px solid var(--line)}
+@media (max-width:640px){.drift-row{grid-template-columns:minmax(0,1fr)}}
+.drift-row .u{border-left:3px solid var(--fg);padding-left:8px}
+.drift-row .m{border-left:3px solid var(--accent);padding-left:8px;color:var(--muted)}
+.pol{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+@media (max-width:640px){.pol{grid-template-columns:minmax(0,1fr)}}
+.pol div{font-size:12px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.pol p{margin:0;padding:6px 8px;border-radius:4px;background:var(--sunk)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 <!--DATA-->
@@ -135,7 +174,7 @@ svg .muted{fill:var(--muted)}
   </header>
   <div class="tiles" id="tiles"></div>
   <nav class="tabs" aria-label="보기">
-    <a href="#flow">피드백 → 매뉴얼</a><a href="#map">매뉴얼 구조</a><a href="#timeline">버전 타임라인</a><a href="#edit">고치기·제어</a>
+    <a href="#align">의도 정렬</a><a href="#flow">피드백 → 매뉴얼</a><a href="#map">매뉴얼 구조</a><a href="#timeline">버전 타임라인</a><a href="#edit">고치기·제어</a>
   </nav>
   <div class="grid">
     <main id="view" class="stage"></main>
@@ -178,6 +217,8 @@ function nodeName(n){
     case "doc": return `${n.key} ${n.label}`;
     case "gate": return `${n.key} ${n.label}`;
     case "step": return `${n.n}. ${n.label}`;
+    case "code": return `${n.file.replace("ytflow/stages/","")}:${n.line}`;
+    case "intent": return `“${n.quote}”`;
     default: return n.label || n.id;
   }
 }
@@ -191,7 +232,8 @@ function renderTiles(){
     [s.pending, "반영 대기", s.pending ? "warn" : ""],
     [`${s.rules}`, `규칙 (MUST ${s.must})`],
     [`${s.auto} / ${s.rules}`, "자동으로 재는 규칙"],
-    [s.checks, "검사 코드 줄"],
+    [`${s.misaligned} / ${s.intents}`, "어긋난 의도 / 사용자 원문", s.misaligned ? "warn" : ""],
+    [s.conflicts, "지금 매뉴얼의 충돌 후보", s.conflicts ? "warn" : ""],
   ];
   $("#tiles").innerHTML = T.map(([b, l, c]) => `<div class="tile ${c||""}"><b>${esc(b)}</b><span>${esc(l)}</span></div>`).join("");
 }
@@ -389,8 +431,114 @@ function renderEdit(){
   if (editorState.path) load(editorState.path, editorState.line);
 }
 
+/* ---------- 의도 정렬: 사용자 원문 → 모델 해석 → 매뉴얼·코드 → 결과 ---------- */
+let alSel = null, alTheme = "all", alStatus = "all", alDraft = {};
+const ST_ORDER = ["unreviewed", "aligned", "over", "under", "drift", "conflict"];
+function excerpt(n, themes){
+  if (!n) return "";
+  if (n.kind === "code") return n.src;
+  if (n.kind === "version") return n.summary;
+  if (n.kind === "check") return n.label;
+  const body = n.body || "";
+  const words = Object.entries({motion:["움직","카메라","정적","멈","확대","동적","전환"],sound:["소리","음"],background:["배경","바탕"],emphasis:["강조","자막"],variety:["스타일","반복"],script:["대본","말투","인트로"],depth:["분석","사건"],intent:["의도","시청자"],length:["분"]})
+    .filter(([k]) => themes.includes(k)).flatMap(([, w]) => w);
+  const lines = body.split("\n").filter(l => l.trim());
+  const hit = words.length ? lines.filter(l => words.some(w => l.includes(w))) : [];
+  return (hit.length ? hit : lines).slice(0, 6).join("\n");
+}
+function renderAlign(){
+  const intents = G.nodes.filter(n => n.kind === "intent");
+  const S = G.status_labels || {};
+  const list = intents.filter(i => (alTheme === "all" || i.themes.includes(alTheme)) && (alStatus === "all" || i.status === alStatus))
+    .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  if (!alSel || !N[alSel]) alSel = (intents.find(i => i.status === "misaligned") || list[0] || {}).id;
+  const it = N[alSel];
+  const themes = G.nodes.filter(n => n.kind === "theme");
+  const fbtn = (k, v, lab, cur) => `<button data-${k}="${esc(v)}" aria-pressed="${cur === v}">${esc(lab)}</button>`;
+  const items = list.map(i => `<button class="al-item" data-id="${esc(i.id)}" aria-current="${i.id === alSel}">
+      <small><span class="st ${i.status}"></span>${esc(i.date || "")} · ${i.versions.map(v => "v" + v).join(",") || "버전 없음"}${i.variants.length ? ` · 비슷한 원문 ${i.variants.length + 1}개` : ""}</small><q>${esc(i.quote)}</q></button>`).join("") || `<p class="empty" style="padding:10px">조건에 맞는 원문이 없습니다.</p>`;
+  let chain = `<p class="empty" style="padding:14px">왼쪽에서 사용자 원문을 고르세요.</p>`;
+  if (it) {
+    const d = alDraft[it.id] || (alDraft[it.id] = {meaning: it.meaning || "", not_meant: (it.not_meant || []).join("\n"), readings: Object.fromEntries(it.readings.map(r => [r.ref, {status: r.status, note: r.note, by: r.by}]))});
+    const dis = LIVE ? "" : "disabled";
+    const vers = it.versions.map(v => N["ver:" + v]).filter(Boolean);
+    const readingRow = r => { const n = N[r.ref], st = d.readings[r.ref] || {status: "unreviewed"};
+      const kindLab = !n ? "위치 바뀜" : n.kind === "section" ? "매뉴얼 절" : n.kind === "doc" ? "매뉴얼 문서" : n.kind === "code" ? "코드" : n.kind === "check" ? "검사" : n.kind === "version" ? "버전" : n.kind;
+      return `<div class="reading ${esc(st.status)}" data-ref="${esc(r.ref)}">
+        <div class="rhead"><button class="btn" data-go="${esc(r.ref)}" style="font-size:12px;padding:2px 8px"><span class="chip">${esc(kindLab)}</span> ${esc(cut(n ? nodeName(n) : r.ref, 56))}</button>
+          <select data-st="${esc(r.ref)}" ${dis} aria-label="정렬 상태">${ST_ORDER.map(k => `<option value="${k}" ${st.status === k ? "selected" : ""}>${esc(S[k] || k)}</option>`).join("")}</select></div>
+        <pre class="ex ${n && n.kind === "code" ? "code" : ""}">${esc(excerpt(n, it.themes)) || "(내용을 찾지 못함 — 줄이 옮겨졌을 수 있음)"}</pre>
+        <input data-note="${esc(r.ref)}" ${dis} value="${esc(st.note || "")}" placeholder="왜 그렇게 판정했나 (예: 뜻은 X 인데 Y 로 옮김)">
+        ${st.by ? `<span class="by">판정: ${esc(st.by)}</span>` : ""}</div>`; };
+    const manualReads = it.readings.filter(r => !r.ref.startsWith("ver:") && !(N[r.ref] && N[r.ref].kind === "code"));
+    const codeReads = it.readings.filter(r => N[r.ref] && N[r.ref].kind === "code");
+    const v0 = vers[0];
+    const after = v0 ? G.nodes.filter(n => n.kind === "review" && n.date >= v0.date && n.manual_version >= v0.v && n.themes.some(t => it.themes.includes(t))) : [];
+    // 주제 흐름: 같은 주제의 원문과 모델 해석을 날짜 순으로
+    const th = it.themes[0];
+    const flow = th ? intents.filter(x => x.themes.includes(th)).sort((a, b) => (a.date || "").localeCompare(b.date || "")) : [];
+    const conf = (G.conflicts || []).filter(c => it.themes.includes(c.theme));
+    chain = `
+      <div class="link"><span class="num">1</span><div class="box"><h3>사용자가 한 말 (원문)</h3>
+        <blockquote class="quote">${esc(it.quote)}</blockquote>
+        ${it.variants.length ? `<details><summary class="empty">비슷하게 옮겨 적힌 원문 ${it.variants.length}개</summary>${it.variants.map(v => `<p class="empty" style="margin:4px 0">“${esc(v)}”</p>`).join("")}</details>` : ""}
+        <div class="chips">${it.sources.map(s => `<button class="chip" style="cursor:pointer" data-go="${esc(s.ref)}">${esc(s.kind === "review" ? "검토" : s.kind === "code" ? "코드 주석" : "매뉴얼")} · ${esc(cut(nodeName(N[s.ref]) || s.ref, 30))}</button>`).join("")}</div>
+        <label class="field">내가 뜻한 것 <textarea id="al-meaning" rows="2" ${dis} placeholder="이 말로 정말 원했던 것">${esc(d.meaning)}</textarea></label>
+        <label class="field">뜻하지 않은 것 (한 줄에 하나) <textarea id="al-not" rows="2" ${dis} placeholder="예: 카메라를 반드시 움직여라">${esc(d.not_meant)}</textarea></label>
+        ${it.note ? `<p class="empty" style="margin:0">${esc(it.note)}</p>` : ""}</div></div>
+      <div class="link"><span class="num">2</span><div class="box"><h3>모델이 옮긴 해석 (버전)</h3>
+        ${vers.map(v => `<div class="reading"><div class="rhead"><button class="btn" data-go="${esc(v.id)}" style="font-size:12px;padding:2px 8px">v${v.v} · ${esc(v.date)}</button></div><p class="ex">${esc(v.summary)}</p></div>`).join("") || `<p class="empty">이 원문과 이어진 버전이 없습니다.</p>`}</div></div>
+      <div class="link"><span class="num">3</span><div class="box"><h3>매뉴얼에 적힌 규칙 <span class="empty">— 원문의 뜻과 맞나요?</span></h3>${manualReads.map(readingRow).join("") || `<p class="empty">이어진 절이 없습니다.</p>`}</div></div>
+      <div class="link"><span class="num">4</span><div class="box"><h3>코드·검사로 옮긴 것</h3>${codeReads.map(readingRow).join("") || `<p class="empty">이 버전을 표시한 코드 주석이 없습니다.</p>`}</div></div>
+      <div class="link"><span class="num">5</span><div class="box"><h3>그 뒤 같은 주제의 검토 결과</h3>
+        ${after.map(r => `<button class="reading ${r.result === "pass" ? "aligned" : "over"}" style="cursor:pointer;text-align:left;font:inherit;color:inherit" data-go="${esc(r.id)}"><span class="chips"><span class="chip ${r.result === "pass" ? "pass" : "reject"}">${r.result === "pass" ? "통과" : "기각"}</span><span class="chip">${esc(r.date)} · v${r.manual_version}</span><span class="chip">${esc(r.project)}</span></span>${r.reason ? `<span style="font-size:12px">${esc(r.reason)}</span>` : ""}</button>`).join("") || `<p class="empty">아직 이 주제로 다시 검토된 영상이 없습니다.</p>`}</div></div>
+      <div class="row" style="padding-left:38px">
+        <button class="btn primary" id="al-save" ${dis}>판정 저장</button>
+        <button class="btn" id="al-pend" ${dis}>어긋난 해석을 반영 대기로 보내기</button>
+        ${LIVE ? "" : `<span class="hint empty">판정 저장은 로컬 도구(python -m ytflow manual-ui)에서 합니다. 판정은 manual/intents.yaml 에 남습니다.</span>`}</div>
+      ${th ? `<div class="link"><span class="num">↺</span><div class="box"><h3>‘${esc(N["theme:" + th].label)}’ 주제에서 사용자의 말과 모델 해석이 오간 흐름</h3>
+        <p class="empty" style="margin:0">왼쪽은 사용자 원문, 오른쪽은 그 말을 옮긴 버전 요약입니다. 같은 주제가 '더 하라'·'덜 하라'로 오가면 해석이 흔들린 것입니다.</p>
+        ${flow.map(x => `<div class="drift-row"><span style="font-family:var(--mono);font-size:11px;color:var(--muted)">${esc(x.date || "")}<br>${x.versions.map(v => "v" + v).join(",")}</span>
+          <button class="u" data-al="${esc(x.id)}" style="all:unset;cursor:pointer;border-left:3px solid var(--fg);padding-left:8px">“${esc(cut(x.quote, 140))}”</button>
+          <span class="m">${x.versions.map(v => esc(cut((N["ver:" + v] || {}).summary || "", 140))).join("<br>")}</span></div>`).join("")}</div></div>` : ""}
+      ${conf.length ? `<div class="link"><span class="num">!</span><div class="box"><h3>지금 매뉴얼에 함께 살아 있는 반대 방향 규칙 (자동 추정 후보)</h3>
+        ${conf.map(c => `<div class="label">${esc(N["theme:" + c.theme].label)}</div><div class="pol"><div><b style="color:var(--reject)">더 하라</b>${c.plus.map(p => `<p><button class="chip" style="cursor:pointer" data-go="${esc(p.section)}">${esc(cut(nodeName(N[p.section]), 30))}</button> ${esc(p.text)}</p>`).join("")}</div>
+          <div><b style="color:var(--accent)">덜 하라 · 끈다</b>${c.minus.map(p => `<p><button class="chip" style="cursor:pointer" data-go="${esc(p.section)}">${esc(cut(nodeName(N[p.section]), 30))}</button> ${esc(p.text)}</p>`).join("")}</div></div>`).join("")}
+        <p class="empty" style="margin:0">채널마다 범위가 다르면 충돌이 아닐 수 있습니다. 범위와 우선순위가 매뉴얼에 적혀 있는지 확인하세요.</p></div></div>` : ""}`;
+  }
+  $("#view").innerHTML = `
+    <div class="stage-head"><h2>내가 한 말과 모델의 해석이 맞는지</h2>
+      <span class="hint">사용자 원문 → 모델이 옮긴 버전 → 매뉴얼 규칙 → 코드·검사 → 그 뒤 검토 결과. 각 해석에 정렬 상태를 판정해 남깁니다.</span></div>
+    <div class="al"><div class="al-list">
+      <div class="al-filter">${fbtn("th", "all", "모든 주제", alTheme)}${themes.map(t => fbtn("th", t.key, t.label, alTheme)).join("")}</div>
+      <div class="al-filter">${fbtn("sf", "all", "전체", alStatus)}${fbtn("sf", "misaligned", "어긋남", alStatus)}${fbtn("sf", "unreviewed", "미검토", alStatus)}${fbtn("sf", "aligned", "정렬됨", alStatus)}</div>
+      ${items}</div><div class="chain">${chain}</div></div>`;
+  const V = $("#view");
+  V.querySelectorAll("[data-th]").forEach(b => b.onclick = () => { alTheme = b.dataset.th; renderAlign(); });
+  V.querySelectorAll("[data-sf]").forEach(b => b.onclick = () => { alStatus = b.dataset.sf; renderAlign(); });
+  V.querySelectorAll(".al-item").forEach(b => b.onclick = () => { alSel = b.dataset.id; renderAlign(); inspect(alSel); });
+  V.querySelectorAll("[data-al]").forEach(b => b.onclick = () => { alSel = b.dataset.al; renderAlign(); });
+  V.querySelectorAll("[data-go]").forEach(b => b.onclick = () => inspect(b.dataset.go));
+  if (!it) return;
+  const d = alDraft[it.id];
+  V.querySelectorAll("[data-st]").forEach(sel => sel.onchange = () => { d.readings[sel.dataset.st] = {...(d.readings[sel.dataset.st] || {}), status: sel.value, by: "사용자"}; sel.closest(".reading").className = "reading " + sel.value; });
+  V.querySelectorAll("[data-note]").forEach(inp => inp.oninput = () => { d.readings[inp.dataset.note] = {...(d.readings[inp.dataset.note] || {status: "unreviewed"}), note: inp.value, by: "사용자"}; });
+  const mi = $("#al-meaning"), ni = $("#al-not");
+  if (mi) mi.oninput = () => d.meaning = mi.value;
+  if (ni) ni.oninput = () => d.not_meant = ni.value;
+  if (!LIVE) return;
+  $("#al-save").onclick = async () => { try {
+    await api("/api/intent", {id: it.ann_key || it.id, quote: it.quote, meaning: d.meaning, not_meant: d.not_meant.split("\n").map(x => x.trim()).filter(Boolean), readings: d.readings});
+    delete alDraft[it.id]; toast("판정을 manual/intents.yaml 에 저장했습니다"); await reload(); } catch (e) { toast(e.message); } };
+  $("#al-pend").onclick = async () => { const bad = Object.entries(d.readings).filter(([, v]) => ["over", "under", "drift", "conflict"].includes(v.status));
+    if (!bad.length) return toast("어긋남으로 판정한 해석이 없습니다");
+    const text = `“${cut(it.quote, 80)}” — 뜻: ${d.meaning || "(미기재)"}${d.not_meant ? ` / 뜻하지 않음: ${d.not_meant.split("\n").filter(Boolean).join(", ")}` : ""} → ` +
+      bad.map(([ref, v]) => `${cut(nodeName(N[ref]) || ref, 40)} ${S[v.status]}${v.note ? `(${cut(v.note, 60)})` : ""}`).join("; ");
+    try { await api("/api/intent-pending", {text}); toast("반영 대기에 넣었습니다. 고치기 전까지 check G0 가 실패합니다"); await reload(); } catch (e) { toast(e.message); } };
+}
+
 /* ---------- 속성 패널 ---------- */
-const EDGE_WORD = {gated_by:"게이트", contains:"포함", defines:"정의", belongs_to:"규칙", enforces:"검사 코드", applied_in:"반영 버전", approved_in:"통과 버전", touched:"고친 곳", about:"주제", guided_by:"매뉴얼"};
+const EDGE_WORD = {interpreted_in:"해석한 버전", quoted_in:"원문이 적힌 곳", implemented_by:"구현", gated_by:"게이트", contains:"포함", defines:"정의", belongs_to:"규칙", enforces:"검사 코드", applied_in:"반영 버전", approved_in:"통과 버전", touched:"고친 곳", about:"주제", guided_by:"매뉴얼"};
 function relList(id){
   const out = (OUT[id] || []).map(e => [e, e.t, "→"]), inn = (IN[id] || []).map(e => [e, e.s, "←"]);
   const all = [...out, ...inn].filter(([e]) => !["contains"].includes(e.kind) || N[id].kind !== "doc");
@@ -427,11 +575,16 @@ function inspect(id){
     h += `<dl class="kv"><dt>등급</dt><dd>${esc(n.level)}</dd><dt>위치</dt><dd>${esc(n.file || "manual/06-checklist.md")}:${n.line}</dd></dl><p style="margin:0">${esc(n.label)}</p>`;
   } else if (n.kind === "theme") {
     h += `<p class="empty" style="margin:0">이 주제에 걸린 검토와 버전입니다.</p>`;
+  } else if (n.kind === "code") {
+    h += `<dl class="kv"><dt>위치</dt><dd>${esc(n.file)}:${n.line}</dd><dt>버전</dt><dd>${n.versions.map(v => "v" + v).join(", ")}</dd></dl><pre class="diff" style="white-space:pre-wrap">${esc(n.src)}</pre>`;
+  } else if (n.kind === "intent") {
+    h += `<p style="margin:0">${esc(n.quote)}</p>${n.meaning ? `<dl class="kv"><dt>뜻한 것</dt><dd>${esc(n.meaning)}</dd></dl>` : ""}<div class="row"><a class="btn" href="#align" data-al="${esc(n.id)}">의도 정렬에서 보기</a></div>`;
   } else if (n.kind === "step") {
     h += `<p style="margin:0">${esc(n.does)}</p><dl class="kv"><dt>남는 파일</dt><dd>${esc(n.outputs)}</dd></dl>`;
   }
   h += relList(id);
   $("#insp").innerHTML = h;
+  $("#insp").querySelectorAll("[data-al]").forEach(a => a.addEventListener("click", () => { alSel = a.dataset.al; if (location.hash === "#align") route(); }));
   $("#insp").querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => inspect(b.dataset.go)));
   const eg = $("#edit-go"); if (eg) eg.onclick = () => { const f = n.kind === "doc" ? n.file : N[n.doc].file;
     editorState = {path: f, line: n.line || null}; if (!LIVE) toast("편집은 로컬 도구에서: python -m ytflow manual-ui"); location.hash = "edit"; if (location.hash === "#edit") route(); };
@@ -441,9 +594,9 @@ function inspect(id){
 
 /* ---------- 경로 ---------- */
 function route(){
-  const h = (location.hash || "#flow").slice(1);
+  const h = (location.hash || "#align").slice(1);
   document.querySelectorAll("nav.tabs a").forEach(a => a.getAttribute("href") === "#" + h ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
-  ({flow: renderFlow, map: renderMap, timeline: renderTimeline, edit: renderEdit}[h] || renderFlow)();
+  ({align: renderAlign, flow: renderFlow, map: renderMap, timeline: renderTimeline, edit: renderEdit}[h] || renderAlign)();
 }
 window.addEventListener("hashchange", route);
 
@@ -452,8 +605,7 @@ async function boot(){
   if (LIVE) { const m = $("#mode"); m.textContent = "로컬 도구 연결됨 · 편집 가능"; m.classList.add("live"); }
   else { $("#mode").textContent = `읽기 전용 · ${G.generated.replace("T", " ")} 기준`; }
   index(); renderTiles(); route();
-  const first = G.nodes.find(n => n.kind === "version" && n.v === G.stats.manual_version);
-  if (first) inspect(first.id);
+  if ((location.hash || "#align") !== "#align") { const first = G.nodes.find(n => n.kind === "version" && n.v === G.stats.manual_version); if (first) inspect(first.id); }
 }
 boot();
 })();

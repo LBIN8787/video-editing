@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-11-15T05:00:51",
+ "generated": "2026-11-15T05:06:58",
  "stats": {
   "manual_version": 31,
   "versions": 31,
@@ -12,9 +12,116 @@
   "checks": 97,
   "sections": 116,
   "must": 29,
-  "auto": 49
+  "auto": 49,
+  "intents": 40,
+  "misaligned": 1,
+  "intents_reviewed": 2,
+  "conflicts": 2,
+  "code": 58
  },
  "pending": [],
+ "status_labels": {
+  "aligned": "정렬됨",
+  "over": "과잉 해석",
+  "under": "덜 반영",
+  "drift": "다른 뜻으로",
+  "conflict": "다른 규칙과 충돌",
+  "unreviewed": "미검토"
+ },
+ "conflicts": [
+  {
+   "theme": "motion",
+   "plus": [
+    {
+     "section": "sec:05§0-4",
+     "theme": "motion",
+     "pol": "+",
+     "text": "| **장면 안 카메라** | 박자마다 방향을 바꾸며 끊임없이 천천히 다가가거나 옮겨 감 (멈춘 화면 없음) | 자동 (자료 화면·지도·키네틱·장 표지 제외) |"
+    },
+    {
+     "section": "sec:README§2-5",
+     "theme": "motion",
+     "pol": "+",
+     "text": "화면에 **완전히 멈춘 순간이 없게** 한다. 그림의 품질보다 움직임이 먼저다. 자체 렌더러(`stage`)가 자동으로:"
+    },
+    {
+     "section": "sec:README§2-5",
+     "theme": "motion",
+     "pol": "+",
+     "text": "1. **카메라가 계속 움직인다** — 박자마다 그 문장의 주인공 쪽으로 밀고 들어가며 옮겨 가고, 머무는 동안에도 천천히 다가간다."
+    },
+    {
+     "section": "sec:README§2-5",
+     "theme": "motion",
+     "pol": "+",
+     "text": "3. **모든 그림이 숨 쉰다** — 등장한 사람·사물은 끝까지 아주 조금씩 위아래·좌우로 움직인다 (대기 동작)."
+    }
+   ],
+   "minus": [
+    {
+     "section": "sec:04§0-5",
+     "theme": "motion",
+     "pol": "-",
+     "text": "| 카메라는 고정이 기본, 움직일 때는 **시간·공간 이동**(진화의 긴 길을 따라감)일 때만 | 의미 없는 줌은 어지러움 |"
+    },
+    {
+     "section": "sec:05§0-5",
+     "theme": "motion",
+     "pol": "-",
+     "text": "> \"화면을 너무 정신없이 움직이고, 배경음도 꼭 안 넣어도 되는데 안 어울리는 걸 억지로 넣는 것 같다.\""
+    },
+    {
+     "section": "sec:05§0-5",
+     "theme": "motion",
+     "pol": "-",
+     "text": "v10(§0-4)의 전환·카메라·소리를 **아래로 낮춥니다** (코드 `edit10.py`, 기본값):"
+    },
+    {
+     "section": "sec:09§6",
+     "theme": "motion",
+     "pol": "-",
+     "text": "- **확대·축소 쓰지 않음 (v31, 2026-11-15 사용자: \"자꾸 화면을 확대하고 축소하고 웅웅거리는 거 쓰지 말아 주세요\")** — 시장 채널은 장면 안 느린 확대, `fx` tilt·dolly, 차트 확대, 사진 밀기(ken burns), 박자 카메라를 모두 끈다 (hybrid.json `\"zoom\": \"off\"` 가 기본, 렌더러 `D.no_"
+    },
+    {
+     "section": "sec:09§6",
+     "theme": "motion",
+     "pol": "-",
+     "text": "- 배경음 기본 없음. **카메라는 억지로 흔들지 않는다 (v30, 2026-11-15 사용자: \"정적이라고 했다고 정지 화면에서 굳이 억지로 화면을 웅웅거리며 미세하게 움직이지 않아도 됩니다\")** — v27 박자 카메라는 기본 끔(`\"camera\": \"beat\"` 로만 켬). '정적'의 뜻은 화면이 흔들리지 않는다는 것이 아니라 **말하는 내용이 화면에"
+    },
+    {
+     "section": "sec:09§6",
+     "theme": "motion",
+     "pol": "-",
+     "text": "- 렌더 전 G4 MUST: 화면에 없는 숫자를 2개 이상 말하면서 `motion` 이 없는 박자 0개. 정지 화면 비율(`motion.json`)은 참고만 — 카메라를 흔들어 숫자를 맞추지 않는다 (v30)."
+    }
+   ]
+  },
+  {
+   "theme": "emphasis",
+   "plus": [
+    {
+     "section": "sec:05§0-4",
+     "theme": "emphasis",
+     "pol": "+",
+     "text": "| **장면 안 카메라** | 박자마다 방향을 바꾸며 끊임없이 천천히 다가가거나 옮겨 감 (멈춘 화면 없음) | 자동 (자료 화면·지도·키네틱·장 표지 제외) |"
+    }
+   ],
+   "minus": [
+    {
+     "section": "sec:04§0-5",
+     "theme": "emphasis",
+     "pol": "-",
+     "text": "| **화면 글자는 하나만**, 자막이 말하는 문장을 다시 쓰지 않음 — 연도·숫자·이름·핵심어만 (검사: `stage/text`) | 자막과 같은 글은 읽을 거리만 늘림. 쪽지·소제목·말풍선 질문 나열 금지 |"
+    },
+    {
+     "section": "sec:05§h19",
+     "theme": "emphasis",
+     "pol": "-",
+     "text": "- **아래 자막과 같은 문장을 화면 위에 다시 쓰지 않는다.** `words` 는 문장이 아니라 핵심 단어 1~3개만, 그 말을 하는 순간 한 번 띄웠다 사라진다."
+    }
+   ]
+  }
+ ],
  "nodes": [
   {
    "id": "step:1",
@@ -4571,6 +4678,3400 @@
    "kind": "theme",
    "key": "length",
    "label": "길이·운영"
+  },
+  {
+   "id": "code:ytflow/stages/backdrop.py:1",
+   "kind": "code",
+   "file": "ytflow/stages/backdrop.py",
+   "line": 1,
+   "versions": [
+    8
+   ],
+   "label": "장면 배경(바탕) — 상황에 맞춰 바꿔 쓴다 (manual v8, 사용자 기각: '배경색이 한 가지라 단조롭다').",
+   "src": "\"\"\"장면 배경(바탕) — 상황에 맞춰 바꿔 쓴다 (manual v8, 사용자 기각: '배경색이 한 가지라 단조롭다')."
+  },
+  {
+   "id": "code:ytflow/stages/backdrop.py:64",
+   "kind": "code",
+   "file": "ytflow/stages/backdrop.py",
+   "line": 64,
+   "versions": [
+    12,
+    15
+   ],
+   "label": "v15 카테고리 바탕. 움직이지 않는 그림 한 장 (v12 '차분하게').",
+   "src": "\"\"\"v15 카테고리 바탕. 움직이지 않는 그림 한 장 (v12 '차분하게').\"\"\""
+  },
+  {
+   "id": "code:ytflow/stages/checklist.py:165",
+   "kind": "code",
+   "file": "ytflow/stages/checklist.py",
+   "line": 165,
+   "versions": [
+    16
+   ],
+   "label": "v16 진행 말투: 연결어미로 문장을 끝내지 않기 (README §2-2)",
+   "src": "import re as _re2   # v16 진행 말투: 연결어미로 문장을 끝내지 않기 (README §2-2)"
+  },
+  {
+   "id": "code:ytflow/stages/checklist.py:171",
+   "kind": "code",
+   "file": "ytflow/stages/checklist.py",
+   "line": 171,
+   "versions": [
+    17
+   ],
+   "label": "v17 호기심 먼저 (04 §0)",
+   "src": "if brand == \"curiosity\" and longform and spec.get(\"scenes\"):   # v17 호기심 먼저 (04 §0)"
+  },
+  {
+   "id": "code:ytflow/stages/checklist.py:184",
+   "kind": "code",
+   "file": "ytflow/stages/checklist.py",
+   "line": 184,
+   "versions": [
+    24
+   ],
+   "label": "v24 미주일기 문법: 여는 장면 → 그 일의 크기 → 질문 (첫 네 장면 안)",
+   "src": "hk.get(\"gap\", \"\")[:40])   # v24 미주일기 문법: 여는 장면 → 그 일의 크기 → 질문 (첫 네 장면 안)"
+  },
+  {
+   "id": "code:ytflow/stages/checklist.py:185",
+   "kind": "code",
+   "file": "ytflow/stages/checklist.py",
+   "line": 185,
+   "versions": [
+    23
+   ],
+   "label": "v23 시청자 먼저 (04 §0-6, docs/29): 상권 조사처럼 시청자를 먼저 알고, 대본이 지식 습득으로 치우치지 않게",
+   "src": "# v23 시청자 먼저 (04 §0-6, docs/29): 상권 조사처럼 시청자를 먼저 알고, 대본이 지식 습득으로 치우치지 않게"
+  },
+  {
+   "id": "code:ytflow/stages/checklist.py:212",
+   "kind": "code",
+   "file": "ytflow/stages/checklist.py",
+   "line": 212,
+   "versions": [
+    18
+   ],
+   "label": "v18 연결·의미 (03 §0-1)",
+   "src": "if brand in (\"market\", \"issues\") and spec.get(\"scenes\"):   # v18 연결·의미 (03 §0-1)"
+  },
+  {
+   "id": "code:ytflow/stages/checklist.py:219",
+   "kind": "code",
+   "file": "ytflow/stages/checklist.py",
+   "line": 219,
+   "versions": [
+    17
+   ],
+   "label": "v17 매일 브리핑 (03 §0, 08 §0-2)",
+   "src": "if ch in (\"ch-market-daily\", \"ch-issues-daily\"):   # v17 매일 브리핑 (03 §0, 08 §0-2)"
+  },
+  {
+   "id": "code:ytflow/stages/checklist.py:228",
+   "kind": "code",
+   "file": "ytflow/stages/checklist.py",
+   "line": 228,
+   "versions": [
+    26
+   ],
+   "label": "v26 (03 §0-2, 2026-11-15 사용자): 뻔한 사실 말고 자료를 엮어야 보이는 것 — 자료 지도·말과 행동·매체 프레임",
+   "src": "# v26 (03 §0-2, 2026-11-15 사용자): 뻔한 사실 말고 자료를 엮어야 보이는 것 — 자료 지도·말과 행동·매체 프레임"
+  },
+  {
+   "id": "code:ytflow/stages/checklist.py:261",
+   "kind": "code",
+   "file": "ytflow/stages/checklist.py",
+   "line": 261,
+   "versions": [
+    27
+   ],
+   "label": "v27 (manual/09 §6, 2026-11-15 사용자: \"말은 많은데 45일·60일만 강조된 채 멈춰 있다\")",
+   "src": "if ch == \"ch-market-daily\" and spec.get(\"scenes\"):   # v27 (manual/09 §6, 2026-11-15 사용자: \"말은 많은데 45일·60일만 강조된 채 멈춰 있다\")"
+  },
+  {
+   "id": "code:ytflow/stages/checklist.py:309",
+   "kind": "code",
+   "file": "ytflow/stages/checklist.py",
+   "line": 309,
+   "versions": [
+    24
+   ],
+   "label": "v24 인트로 없음 (README §2-1) · 말투 (README §2-3, 미주일기식)",
+   "src": "if last >= 3:  # v24 인트로 없음 (README §2-1) · 말투 (README §2-3, 미주일기식)"
+  },
+  {
+   "id": "code:ytflow/stages/checklist.py:322",
+   "kind": "code",
+   "file": "ytflow/stages/checklist.py",
+   "line": 322,
+   "versions": [
+    24
+   ],
+   "label": "v24 길이: 롱폼 최소 10분 (README §2-4)",
+   "src": "if last >= 6 and longform:  # v24 길이: 롱폼 최소 10분 (README §2-4)"
+  },
+  {
+   "id": "code:ytflow/stages/checklist.py:343",
+   "kind": "code",
+   "file": "ytflow/stages/checklist.py",
+   "line": 343,
+   "versions": [
+    13
+   ],
+   "label": "바탕색 돌려 쓰기 (v13): 미색 종이 계열만 계속 쓰지 않기 — 직전 두 프로젝트와 같은 바탕 계열이면 경고",
+   "src": "# 바탕색 돌려 쓰기 (v13): 미색 종이 계열만 계속 쓰지 않기 — 직전 두 프로젝트와 같은 바탕 계열이면 경고"
+  },
+  {
+   "id": "code:ytflow/stages/checklist.py:361",
+   "kind": "code",
+   "file": "ytflow/stages/checklist.py",
+   "line": 361,
+   "versions": [
+    15
+   ],
+   "label": "v15 카테고리 개성 (05 §0-7)",
+   "src": "if spec.get(\"scenes\"):   # v15 카테고리 개성 (05 §0-7)"
+  },
+  {
+   "id": "code:ytflow/stages/checklist.py:432",
+   "kind": "code",
+   "file": "ytflow/stages/checklist.py",
+   "line": 432,
+   "versions": [
+    25
+   ],
+   "label": "v25 (2026-11-14 사용자: \"사진을 잘 뽑은 정적인 동영상 같다 — 동적인 움직임을 살려라\", README §2-5)",
+   "src": "if brand == \"curiosity\":   # v25 (2026-11-14 사용자: \"사진을 잘 뽑은 정적인 동영상 같다 — 동적인 움직임을 살려라\", README §2-5)"
+  },
+  {
+   "id": "code:ytflow/stages/daily.py:1",
+   "kind": "code",
+   "file": "ytflow/stages/daily.py",
+   "line": 1,
+   "versions": [
+    17
+   ],
+   "label": "매일 시장·시사 브리핑의 주제 찾기 (v17, 사용자 요청 2026-11-12):",
+   "src": "\"\"\"매일 시장·시사 브리핑의 주제 찾기 (v17, 사용자 요청 2026-11-12):"
+  },
+  {
+   "id": "code:ytflow/stages/daily.py:248",
+   "kind": "code",
+   "file": "ytflow/stages/daily.py",
+   "line": 248,
+   "versions": [
+    17
+   ],
+   "label": "매일 브리핑 ({brand}) — manual v17\\nedit:\\n  style: hybrid\\n  style_ref: hybrid\\n  family: source\\n\"",
+   "src": "(root / \"edit.yaml\").write_text(f\"# 매일 브리핑 ({brand}) — manual v17\\nedit:\\n  style: hybrid\\n  style_ref: hybrid\\n  family: source\\n\""
+  },
+  {
+   "id": "code:ytflow/stages/directions.py:596",
+   "kind": "code",
+   "file": "ytflow/stages/directions.py",
+   "line": 596,
+   "versions": [
+    8
+   ],
+   "label": "---------------------------------------------------------------- 오프닝 (MC 진행) — manual v8",
+   "src": "# ---------------------------------------------------------------- 오프닝 (MC 진행) — manual v8"
+  },
+  {
+   "id": "code:ytflow/stages/directions.py:633",
+   "kind": "code",
+   "file": "ytflow/stages/directions.py",
+   "line": 633,
+   "versions": [
+    9
+   ],
+   "label": "---------------------------------------------------------------- 시각 효과 (manual v9: 반복 피로 막기)",
+   "src": "# ---------------------------------------------------------------- 시각 효과 (manual v9: 반복 피로 막기)"
+  },
+  {
+   "id": "code:ytflow/stages/directions.py:656",
+   "kind": "code",
+   "file": "ytflow/stages/directions.py",
+   "line": 656,
+   "versions": [
+    31
+   ],
+   "label": "v31 확대·축소 없음 (2026-11-15 사용자) — tilt·dolly 는 쓰지 않고 scan(빛 훑기)만",
+   "src": "if getattr(D, \"no_zoom\", False):   # v31 확대·축소 없음 (2026-11-15 사용자) — tilt·dolly 는 쓰지 않고 scan(빛 훑기)만"
+  },
+  {
+   "id": "code:ytflow/stages/directions.py:661",
+   "kind": "code",
+   "file": "ytflow/stages/directions.py",
+   "line": 661,
+   "versions": [
+    12
+   ],
+   "label": "v12: 기울기 약하게",
+   "src": "rx, ry = R.choice([5, -4, 6]), R.choice([-6, 5, -5])   # v12: 기울기 약하게"
+  },
+  {
+   "id": "code:ytflow/stages/directions.py:670",
+   "kind": "code",
+   "file": "ytflow/stages/directions.py",
+   "line": 670,
+   "versions": [
+    12
+   ],
+   "label": "v12: 먼지 적게",
+   "src": "for k in range(18):   # v12: 먼지 적게"
+  },
+  {
+   "id": "code:ytflow/stages/earnings.py:1",
+   "kind": "code",
+   "file": "ytflow/stages/earnings.py",
+   "line": 1,
+   "versions": [
+    18
+   ],
+   "label": "어닝콜(실적 발표 뒤 경영진·애널리스트 통화) 정리 — v18, 사용자 요청 2026-11-12:",
+   "src": "\"\"\"어닝콜(실적 발표 뒤 경영진·애널리스트 통화) 정리 — v18, 사용자 요청 2026-11-12:"
+  },
+  {
+   "id": "code:ytflow/stages/edit10.py:1",
+   "kind": "code",
+   "file": "ytflow/stages/edit10.py",
+   "line": 1,
+   "versions": [
+    10,
+    12
+   ],
+   "label": "편집 기준 v10→v12 (manual 05 §0-4) — 기본으로 켜짐. 끄려면 대본 맨 위 \"edit_v10\": false.",
+   "src": "\"\"\"편집 기준 v10→v12 (manual 05 §0-4) — 기본으로 켜짐. 끄려면 대본 맨 위 \"edit_v10\": false."
+  },
+  {
+   "id": "code:ytflow/stages/edit10.py:22",
+   "kind": "code",
+   "file": "ytflow/stages/edit10.py",
+   "line": 22,
+   "versions": [
+    12
+   ],
+   "label": "v12 (사용자 판정 '너무 정신없다'): 보통 장면 사이는 부드러운 겹침(fade), 장 표지로 들어갈 때만 밀기(push).",
+   "src": "\"\"\"v12 (사용자 판정 '너무 정신없다'): 보통 장면 사이는 부드러운 겹침(fade), 장 표지로 들어갈 때만 밀기(push).\"\"\""
+  },
+  {
+   "id": "code:ytflow/stages/edit10.py:65",
+   "kind": "code",
+   "file": "ytflow/stages/edit10.py",
+   "line": 65,
+   "versions": [
+    12
+   ],
+   "label": "소리는 장이 바뀔 때만, 작게 (v12)",
+   "src": "if k == \"push\":   # 소리는 장이 바뀔 때만, 작게 (v12)"
+  },
+  {
+   "id": "code:ytflow/stages/edit10.py:67",
+   "kind": "code",
+   "file": "ytflow/stages/edit10.py",
+   "line": 67,
+   "versions": [
+    27
+   ],
+   "label": "---- v27 박자 카메라 (manual/09 §6): 박자마다 밀고 당기며 옮겨 가고, 머무는 동안에도 계속 움직임 — 멈춘 화면 없게",
+   "src": "# ---- v27 박자 카메라 (manual/09 §6): 박자마다 밀고 당기며 옮겨 가고, 머무는 동안에도 계속 움직임 — 멈춘 화면 없게"
+  },
+  {
+   "id": "code:ytflow/stages/edit10.py:81",
+   "kind": "code",
+   "file": "ytflow/stages/edit10.py",
+   "line": 81,
+   "versions": [
+    12
+   ],
+   "label": "v12: 장면 내내 한 방향으로 아주 천천히 다가가기만 (박자마다 흔들지 않음)",
+   "src": "# v12: 장면 내내 한 방향으로 아주 천천히 다가가기만 (박자마다 흔들지 않음)"
+  },
+  {
+   "id": "code:ytflow/stages/edit10.py:82",
+   "kind": "code",
+   "file": "ytflow/stages/edit10.py",
+   "line": 82,
+   "versions": [
+    31
+   ],
+   "label": "v31 확대·축소 없음",
+   "src": "if not getattr(D, \"no_zoom\", False):   # v31 확대·축소 없음"
+  },
+  {
+   "id": "code:ytflow/stages/edit10.py:155",
+   "kind": "code",
+   "file": "ytflow/stages/edit10.py",
+   "line": 155,
+   "versions": [
+    31
+   ],
+   "label": "v31 확대·축소 없음",
+   "src": "if not getattr(D, \"no_zoom\", False):   # v31 확대·축소 없음"
+  },
+  {
+   "id": "code:ytflow/stages/edit10.py:233",
+   "kind": "code",
+   "file": "ytflow/stages/edit10.py",
+   "line": 233,
+   "versions": [
+    14
+   ],
+   "label": "---------------------------------------------------------------- 상황별 바탕 (v14, 2026-11-11 사용자 판정)",
+   "src": "# ---------------------------------------------------------------- 상황별 바탕 (v14, 2026-11-11 사용자 판정)"
+  },
+  {
+   "id": "code:ytflow/stages/edit10.py:258",
+   "kind": "code",
+   "file": "ytflow/stages/edit10.py",
+   "line": 258,
+   "versions": [
+    27
+   ],
+   "label": "시장 채널 v27 (2026-11-15 사용자: \"영상이 정적이다 — 하는 말은 많은데 45일·60일만 강조된 채 멈춰 있다\").",
+   "src": "\"\"\"시장 채널 v27 (2026-11-15 사용자: \"영상이 정적이다 — 하는 말은 많은데 45일·60일만 강조된 채 멈춰 있다\")."
+  },
+  {
+   "id": "code:ytflow/stages/hybrid.py:147",
+   "kind": "code",
+   "file": "ytflow/stages/hybrid.py",
+   "line": 147,
+   "versions": [
+    27
+   ],
+   "label": "cam) 밖에 둔다 — 카메라가 다가가도 잘리지 않게 (v27).\"\"\"",
+   "src": "\"\"\"출처 줄·장 꼬리표는 박자 카메라(#cam) 밖에 둔다 — 카메라가 다가가도 잘리지 않게 (v27).\"\"\""
+  },
+  {
+   "id": "code:ytflow/stages/hybrid.py:544",
+   "kind": "code",
+   "file": "ytflow/stages/hybrid.py",
+   "line": 544,
+   "versions": [
+    18
+   ],
+   "label": "v18 원문(영어) 한 줄 — 번역 아래, 카드 맨 아래 (어닝콜·발언 원본: 원문·번역 2단)",
+   "src": "if sc.get(\"orig\"):   # v18 원문(영어) 한 줄 — 번역 아래, 카드 맨 아래 (어닝콜·발언 원본: 원문·번역 2단)"
+  },
+  {
+   "id": "code:ytflow/stages/hybrid.py:966",
+   "kind": "code",
+   "file": "ytflow/stages/hybrid.py",
+   "line": 966,
+   "versions": [
+    24
+   ],
+   "label": "v24: 영상마다 말 빠르기 (다큐 내레이션은 차분하게, README §2-3·§2-4)",
+   "src": "if spec.get(\"tts_rate\"):   # v24: 영상마다 말 빠르기 (다큐 내레이션은 차분하게, README §2-3·§2-4)"
+  },
+  {
+   "id": "code:ytflow/stages/hybrid.py:1011",
+   "kind": "code",
+   "file": "ytflow/stages/hybrid.py",
+   "line": 1011,
+   "versions": [
+    24
+   ],
+   "label": "v24: 장면마다 문장 사이 쉼 (다큐 내레이션은 길게)",
+   "src": "gap = sc.get(\"gap\", GAP)   # v24: 장면마다 문장 사이 쉼 (다큐 내레이션은 길게)"
+  },
+  {
+   "id": "code:ytflow/stages/hybrid.py:1031",
+   "kind": "code",
+   "file": "ytflow/stages/hybrid.py",
+   "line": 1031,
+   "versions": [
+    15
+   ],
+   "label": "v15 카테고리 개성: 장 표지 모양·증거판·칠판 (brand 가 있을 때만)",
+   "src": "from . import identity   # v15 카테고리 개성: 장 표지 모양·증거판·칠판 (brand 가 있을 때만)"
+  },
+  {
+   "id": "code:ytflow/stages/hybrid.py:1041",
+   "kind": "code",
+   "file": "ytflow/stages/hybrid.py",
+   "line": 1041,
+   "versions": [
+    27
+   ],
+   "label": "v27 박자 카메라 (manual/09 §6): spec camera: \"beat\" 일 때만",
+   "src": "# v27 박자 카메라 (manual/09 §6): spec camera: \"beat\" 일 때만"
+  },
+  {
+   "id": "code:ytflow/stages/hybrid.py:1042",
+   "kind": "code",
+   "file": "ytflow/stages/hybrid.py",
+   "line": 1042,
+   "versions": [
+    30
+   ],
+   "label": "v30: 기본 끔 (2026-11-15 사용자: 억지 미세 움직임 필요 없음)",
+   "src": "D.cam = spec.get(\"camera\", \"calm\") == \"beat\" and sc.get(\"type\") not in CAM_SKIP   # v30: 기본 끔 (2026-11-15 사용자: 억지 미세 움직임 필요 없음)"
+  },
+  {
+   "id": "code:ytflow/stages/hybrid.py:1043",
+   "kind": "code",
+   "file": "ytflow/stages/hybrid.py",
+   "line": 1043,
+   "versions": [
+    31
+   ],
+   "label": "v31 확대·축소 없음 (2026-11-15 사용자: \"자꾸 화면을 확대하고 축소하고 웅웅거리는 거 쓰지 말아 주세요\"): 시장 브랜드 기본 — 장면 안 느린 확대·tilt·dolly·차트 확대·사진 밀기 끔",
+   "src": "# v31 확대·축소 없음 (2026-11-15 사용자: \"자꾸 화면을 확대하고 축소하고 웅웅거리는 거 쓰지 말아 주세요\"): 시장 브랜드 기본 — 장면 안 느린 확대·tilt·dolly·차트 확대·사진 밀기 끔"
+  },
+  {
+   "id": "code:ytflow/stages/hybrid.py:1056",
+   "kind": "code",
+   "file": "ytflow/stages/hybrid.py",
+   "line": 1056,
+   "versions": [
+    10
+   ],
+   "label": "v10: 장 표지는 그 장의 자료 사진을 깐 표지가 기본",
+   "src": "if spec.get(\"edit_v10\", True):   # v10: 장 표지는 그 장의 자료 사진을 깐 표지가 기본"
+  },
+  {
+   "id": "code:ytflow/stages/hybrid.py:1096",
+   "kind": "code",
+   "file": "ytflow/stages/hybrid.py",
+   "line": 1096,
+   "versions": [
+    10
+   ],
+   "label": "편집 기준 v10 (기본 켬): 전환·장면 안 움직임·소리 (docs/19, manual 05 §0-4)",
+   "src": "if spec.get(\"edit_v10\", True):   # 편집 기준 v10 (기본 켬): 전환·장면 안 움직임·소리 (docs/19, manual 05 §0-4)"
+  },
+  {
+   "id": "code:ytflow/stages/hybrid.py:1279",
+   "kind": "code",
+   "file": "ytflow/stages/hybrid.py",
+   "line": 1279,
+   "versions": [
+    16
+   ],
+   "label": "v16: 대본에 brand 가 없으면 프로젝트 채널(edit.yaml channel → channels/<id>/channel.yaml brand)에서",
+   "src": "if \"brand\" not in spec:   # v16: 대본에 brand 가 없으면 프로젝트 채널(edit.yaml channel → channels/<id>/channel.yaml brand)에서"
+  },
+  {
+   "id": "code:ytflow/stages/hybrid.py:1289",
+   "kind": "code",
+   "file": "ytflow/stages/hybrid.py",
+   "line": 1289,
+   "versions": [
+    15
+   ],
+   "label": "v15 카테고리 개성: 기본 팩을 따로 정하지 않았으면 카테고리의 기본 팩",
+   "src": "if spec.get(\"brand\"):   # v15 카테고리 개성: 기본 팩을 따로 정하지 않았으면 카테고리의 기본 팩"
+  },
+  {
+   "id": "code:ytflow/stages/hybrid.py:1392",
+   "kind": "code",
+   "file": "ytflow/stages/hybrid.py",
+   "line": 1392,
+   "versions": [
+    12
+   ],
+   "label": "v12: 기본은 배경음 없음 — 어울리는 곡이 확실할 때만 대본에 \"bgm\": \"<등록부 id>\"",
+   "src": "bgm = spec.get(\"bgm\")   # v12: 기본은 배경음 없음 — 어울리는 곡이 확실할 때만 대본에 \"bgm\": \"<등록부 id>\""
+  },
+  {
+   "id": "code:ytflow/stages/hybrid.py:1436",
+   "kind": "code",
+   "file": "ytflow/stages/hybrid.py",
+   "line": 1436,
+   "versions": [
+    2
+   ],
+   "label": "어두운 스튜디오 3D 물체 (studio3d 장면, motion-metaphor v2 · docs/22)",
+   "src": "from . import studio3d as _studio3d   # 어두운 스튜디오 3D 물체 (studio3d 장면, motion-metaphor v2 · docs/22)"
+  },
+  {
+   "id": "code:ytflow/stages/hybrid.py:1446",
+   "kind": "code",
+   "file": "ytflow/stages/hybrid.py",
+   "line": 1446,
+   "versions": [
+    22
+   ],
+   "label": "애니메이션 무대 (stage 장면, styles/anim-stage) — 호기심 채널 v22, manual/04 §0-5",
+   "src": "from . import stage as _stage        # 애니메이션 무대 (stage 장면, styles/anim-stage) — 호기심 채널 v22, manual/04 §0-5"
+  },
+  {
+   "id": "code:ytflow/stages/identity.py:1",
+   "kind": "code",
+   "file": "ytflow/stages/identity.py",
+   "line": 1,
+   "versions": [
+    15
+   ],
+   "label": "v15 카테고리 개성 (사용자 요청 2026-11-12: '채널을 묶어 운영해도 카테고리마다 특색이 있었으면',",
+   "src": "\"\"\"v15 카테고리 개성 (사용자 요청 2026-11-12: '채널을 묶어 운영해도 카테고리마다 특색이 있었으면',"
+  },
+  {
+   "id": "code:ytflow/stages/stage.py:1",
+   "kind": "code",
+   "file": "ytflow/stages/stage.py",
+   "line": 1,
+   "versions": [
+    22
+   ],
+   "label": "애니메이션 무대 (`stage`) — 호기심 채널 이야기형 v22 (2026-11-14 사용자 기각 반영, manual/04 §0-5).",
+   "src": "\"\"\"애니메이션 무대 (`stage`) — 호기심 채널 이야기형 v22 (2026-11-14 사용자 기각 반영, manual/04 §0-5)."
+  },
+  {
+   "id": "code:ytflow/stages/stage.py:61",
+   "kind": "code",
+   "file": "ytflow/stages/stage.py",
+   "line": 61,
+   "versions": [
+    25
+   ],
+   "label": "v25 움직임 (2026-11-14 사용자: \"사진을 잘 뽑은 정적인 동영상 같다 — 동영상이라는 동적인 움직임을 살려라\")",
+   "src": "# v25 움직임 (2026-11-14 사용자: \"사진을 잘 뽑은 정적인 동영상 같다 — 동영상이라는 동적인 움직임을 살려라\")"
+  },
+  {
+   "id": "code:ytflow/stages/stage.py:182",
+   "kind": "code",
+   "file": "ytflow/stages/stage.py",
+   "line": 182,
+   "versions": [
+    25
+   ],
+   "label": "v25 걸어서(굴러서) 화면 밖에서 들어옴 — 나타나기 대신 움직임",
+   "src": "if m.get(\"from\") == \"walk\":   # v25 걸어서(굴러서) 화면 밖에서 들어옴 — 나타나기 대신 움직임"
+  },
+  {
+   "id": "code:ytflow/stages/story.py:88",
+   "kind": "code",
+   "file": "ytflow/stages/story.py",
+   "line": 88,
+   "versions": [
+    2
+   ],
+   "label": "v2: 뒤·가운데·앞 (패럴랙스, story_kit)",
+   "src": "self.layers = {0: [], 1: [], 2: []}   # v2: 뒤·가운데·앞 (패럴랙스, story_kit)"
+  },
+  {
+   "id": "code:ytflow/stages/story_kit.py:1",
+   "kind": "code",
+   "file": "ytflow/stages/story_kit.py",
+   "line": 1,
+   "versions": [
+    2
+   ],
+   "label": "이야기 그림판 v2 — 재료와 움직임 (2026-11-13 사용자: \"졸라맨·애니메이션 품질이 너무 낮고, 그림 패턴이 매번 똑같다\").",
+   "src": "\"\"\"이야기 그림판 v2 — 재료와 움직임 (2026-11-13 사용자: \"졸라맨·애니메이션 품질이 너무 낮고, 그림 패턴이 매번 똑같다\")."
+  },
+  {
+   "id": "code:ytflow/stages/studio3d.py:1",
+   "kind": "code",
+   "file": "ytflow/stages/studio3d.py",
+   "line": 1,
+   "versions": [
+    2
+   ],
+   "label": "어두운 스튜디오 3D 장면 (studio3d) — motion-metaphor v2 (docs/22: 레퍼런스 재분석).",
+   "src": "\"\"\"어두운 스튜디오 3D 장면 (studio3d) — motion-metaphor v2 (docs/22: 레퍼런스 재분석)."
+  },
+  {
+   "id": "code:ytflow/stages/stylepick.py:212",
+   "kind": "code",
+   "file": "ytflow/stages/stylepick.py",
+   "line": 212,
+   "versions": [
+    9
+   ],
+   "label": "---------------------------------------------------------------- 반복 피로 (manual v9, 05 §0-3)",
+   "src": "# ---------------------------------------------------------------- 반복 피로 (manual v9, 05 §0-3)"
+  },
+  {
+   "id": "code:ytflow/stages/thumbnail.py:154",
+   "kind": "code",
+   "file": "ytflow/stages/thumbnail.py",
+   "line": 154,
+   "versions": [
+    22
+   ],
+   "label": "그림 조각 (영상의 stage 주인공과 같은 그림, 배경 투명) — 2026-11-14 v22",
+   "src": "for ct in v.get(\"cutouts\", []):   # 그림 조각 (영상의 stage 주인공과 같은 그림, 배경 투명) — 2026-11-14 v22"
+  },
+  {
+   "id": "code:ytflow/stages/trends.py:90",
+   "kind": "code",
+   "file": "ytflow/stages/trends.py",
+   "line": 90,
+   "versions": [
+    2
+   ],
+   "label": "X API v2 최근 검색. 키가 없거나 권한이 없으면 한 번 알리고 이번 실행에서는 끈다.",
+   "src": "\"\"\"X API v2 최근 검색. 키가 없거나 권한이 없으면 한 번 알리고 이번 실행에서는 끈다.\"\"\""
+  },
+  {
+   "id": "code:ytflow/stages/ytpublish.py:1",
+   "kind": "code",
+   "file": "ytflow/stages/ytpublish.py",
+   "line": 1,
+   "versions": [
+    3
+   ],
+   "label": "유튜브 올리기·관리 (공식 YouTube Data API v3, docs/24-youtube-publish.md).",
+   "src": "\"\"\"유튜브 올리기·관리 (공식 YouTube Data API v3, docs/24-youtube-publish.md)."
+  },
+  {
+   "id": "intent:217f99af",
+   "kind": "intent",
+   "quote": "스타일 자체는 합격. 그러나 한 스타일로만 영상 전체를 만들면 불합격 — 상황에 맞춰 섞어야 함 (장면마다 다른 스타일, 한 장면 안에서도 여러 스타일 조합)",
+   "label": "스타일 자체는 합격. 그러나 한 스타일로만 영상 전체를 만들면 불합격 — 상황에 맞춰 섞어야 함 (장면마다 ",
+   "versions": [
+    3
+   ],
+   "date": "2026-11-09",
+   "sources": [
+    {
+     "ref": "rev:2",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:217f99af"
+   ],
+   "themes": [
+    "variety"
+   ],
+   "ann_key": "intent:217f99af",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:3",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/ytpublish.py:1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:454c07ad",
+   "kind": "intent",
+   "quote": "남용은 안 쓰는 것만 못하다",
+   "label": "남용은 안 쓰는 것만 못하다",
+   "versions": [],
+   "date": "2026-11-09",
+   "sources": [
+    {
+     "ref": "sec:05§h19",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:454c07ad"
+   ],
+   "themes": [],
+   "ann_key": "intent:454c07ad",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:05§h19",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:4f6397bd",
+   "kind": "intent",
+   "quote": "반복 피로: 같은 편집 패턴(글씨·도형 인포그래픽)이 반복되면 금방 지루함. 자체 제작 장면일수록 지도처럼 특별한 시각 효과·그림체·자료가 필요",
+   "label": "반복 피로: 같은 편집 패턴(글씨·도형 인포그래픽)이 반복되면 금방 지루함. 자체 제작 장면일수록 지도처럼 ",
+   "versions": [
+    9
+   ],
+   "date": "2026-11-09",
+   "sources": [
+    {
+     "ref": "rev:7",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:4f6397bd"
+   ],
+   "themes": [
+    "variety"
+   ],
+   "ann_key": "intent:4f6397bd",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:9",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:05§0-3",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/directions.py:633",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/stylepick.py:212",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:6f245754",
+   "kind": "intent",
+   "quote": "배경색이 너무 단조롭다, 상황에 맞추어 쓰자",
+   "label": "배경색이 너무 단조롭다, 상황에 맞추어 쓰자",
+   "versions": [
+    8
+   ],
+   "date": "2026-11-09",
+   "sources": [
+    {
+     "ref": "sec:05§0-2",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:6f245754"
+   ],
+   "themes": [
+    "background",
+    "variety"
+   ],
+   "ann_key": "intent:6f245754",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:8",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:05§0-2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/backdrop.py:1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/directions.py:596",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:abbe3e51",
+   "kind": "intent",
+   "quote": "스타일 단독 품질 합격 (단독 영상 금지 규칙은 archive 기각 사유로 반영)",
+   "label": "스타일 단독 품질 합격 (단독 영상 금지 규칙은 archive 기각 사유로 반영)",
+   "versions": [],
+   "date": "2026-11-09",
+   "sources": [
+    {
+     "ref": "rev:3",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:abbe3e51"
+   ],
+   "themes": [
+    "variety"
+   ],
+   "ann_key": "intent:abbe3e51",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:b138c882",
+   "kind": "intent",
+   "quote": "같은 이유: 강조(키네틱 단어 띠 등) 남용, 자막과 같은 내용 반복",
+   "label": "같은 이유: 강조(키네틱 단어 띠 등) 남용, 자막과 같은 내용 반복",
+   "versions": [
+    4
+   ],
+   "date": "2026-11-09",
+   "sources": [
+    {
+     "ref": "rev:5",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:b138c882"
+   ],
+   "themes": [
+    "emphasis",
+    "variety"
+   ],
+   "ann_key": "intent:b138c882",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:b19eb7da",
+   "kind": "intent",
+   "quote": "지도가 보기 불편함: 양 끝이 둥근 타원 투영 + 디자인이 허전하고 밋밋함",
+   "label": "지도가 보기 불편함: 양 끝이 둥근 타원 투영 + 디자인이 허전하고 밋밋함",
+   "versions": [
+    3
+   ],
+   "date": "2026-11-09",
+   "sources": [
+    {
+     "ref": "rev:1",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:b19eb7da"
+   ],
+   "themes": [
+    "variety"
+   ],
+   "ann_key": "intent:b19eb7da",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:3",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/ytpublish.py:1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:bbab729f",
+   "kind": "intent",
+   "quote": "반 통과: 스타일은 통과. 1) 배경색이 한 가지로 단조로움 → 장면 상황에 맞춰 배경을 바꿔 쓸 것 2) 본론부터 바로 시작해 '뭘 말하려는 거지?' 느낌 → 본론 전에 MC처럼 오늘 무엇을 말할지 매끄럽게 여는 오프닝과 진행 멘트",
+   "label": "반 통과: 스타일은 통과. 1) 배경색이 한 가지로 단조로움 → 장면 상황에 맞춰 배경을 바꿔 쓸 것 2) ",
+   "versions": [
+    8
+   ],
+   "date": "2026-11-09",
+   "sources": [
+    {
+     "ref": "rev:6",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:bbab729f"
+   ],
+   "themes": [
+    "background",
+    "variety",
+    "script"
+   ],
+   "ann_key": "intent:bbab729f",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:8",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:05§0-2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/backdrop.py:1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/directions.py:596",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:f976ad69",
+   "kind": "intent",
+   "quote": "강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)",
+   "label": "강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말",
+   "versions": [
+    4
+   ],
+   "date": "2026-11-09",
+   "sources": [
+    {
+     "ref": "rev:4",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:f976ad69"
+   ],
+   "themes": [
+    "emphasis",
+    "variety"
+   ],
+   "ann_key": "intent:f976ad69",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:50e32be0",
+   "kind": "intent",
+   "quote": "배경음 음질이 낮게 들림(분위기는 괜찮음) + 1분01초 저음 타격음('두웅') 소리 자체가 싫음",
+   "label": "배경음 음질이 낮게 들림(분위기는 괜찮음) + 1분01초 저음 타격음('두웅') 소리 자체가 싫음",
+   "versions": [
+    11
+   ],
+   "date": "2026-11-10",
+   "sources": [
+    {
+     "ref": "rev:10",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:50e32be0"
+   ],
+   "themes": [
+    "sound"
+   ],
+   "ann_key": "intent:50e32be0",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:11",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:00ba80c7",
+   "kind": "intent",
+   "quote": "바탕색을 매번 같은 미색 종이색으로 씀 — 돌려 써도 됨",
+   "label": "바탕색을 매번 같은 미색 종이색으로 씀 — 돌려 써도 됨",
+   "versions": [
+    13
+   ],
+   "date": "2026-11-11",
+   "sources": [
+    {
+     "ref": "rev:15",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:00ba80c7"
+   ],
+   "themes": [
+    "background"
+   ],
+   "ann_key": "intent:00ba80c7",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:13",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:343",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:7efa00c0",
+   "kind": "intent",
+   "quote": "진행 말투: 장 표지 '여기까지가 ~였고요.' 같은 끝맺음이 부자연스러워 흐름이 깸 (스타일·화면은 모두 합격)",
+   "label": "진행 말투: 장 표지 '여기까지가 ~였고요.' 같은 끝맺음이 부자연스러워 흐름이 깸 (스타일·화면은 모두 합",
+   "versions": [
+    16
+   ],
+   "date": "2026-11-11",
+   "sources": [
+    {
+     "ref": "rev:21",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:7efa00c0"
+   ],
+   "themes": [
+    "variety",
+    "script"
+   ],
+   "ann_key": "intent:7efa00c0",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:16",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:165",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1279",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:ea14e9be",
+   "kind": "intent",
+   "quote": "화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌",
+   "label": "화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어",
+   "versions": [
+    12
+   ],
+   "date": "2026-11-11",
+   "sources": [
+    {
+     "ref": "rev:11",
+     "kind": "review"
+    },
+    {
+     "ref": "rev:12",
+     "kind": "review"
+    },
+    {
+     "ref": "rev:13",
+     "kind": "review"
+    },
+    {
+     "ref": "rev:14",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:ea14e9be"
+   ],
+   "themes": [
+    "motion",
+    "sound"
+   ],
+   "ann_key": "intent:ea14e9be",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:12",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:05§0-5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/backdrop.py:64",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/directions.py:661",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/directions.py:670",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/edit10.py:1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/edit10.py:22",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/edit10.py:65",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/edit10.py:81",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1392",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:fec0e40f",
+   "kind": "intent",
+   "quote": "바탕은 영상마다 고정이 아니라 장면 상황에 맞춰 — 스타일 조합의 일부",
+   "label": "바탕은 영상마다 고정이 아니라 장면 상황에 맞춰 — 스타일 조합의 일부",
+   "versions": [
+    14
+   ],
+   "date": "2026-11-11",
+   "sources": [
+    {
+     "ref": "rev:16",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:fec0e40f"
+   ],
+   "themes": [
+    "background",
+    "variety"
+   ],
+   "ann_key": "intent:fec0e40f",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:14",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:05§0-6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/edit10.py:233",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:2f0d9a43",
+   "kind": "intent",
+   "quote": "'였고요' 같은 말투가 부자연스러워 진행이 깬다",
+   "label": "'였고요' 같은 말투가 부자연스러워 진행이 깬다",
+   "versions": [
+    16
+   ],
+   "date": "2026-11-12",
+   "sources": [
+    {
+     "ref": "sec:README§2-2",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:2f0d9a43"
+   ],
+   "themes": [
+    "script"
+   ],
+   "ann_key": "intent:2f0d9a43",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:16",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:165",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1279",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:6748eb95",
+   "kind": "intent",
+   "quote": "시사도 매일 실시간 분석이 중요",
+   "label": "시사도 매일 실시간 분석이 중요",
+   "versions": [
+    17
+   ],
+   "date": "2026-11-12",
+   "sources": [
+    {
+     "ref": "sec:08§0-2",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:6748eb95"
+   ],
+   "themes": [
+    "depth"
+   ],
+   "ann_key": "intent:6748eb95",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:17",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:03§0",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:08§0-2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:171",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:219",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/daily.py:1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/daily.py:248",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:ac4a4963",
+   "kind": "intent",
+   "quote": "스타일은 모두 합격 — 알맞은 상황에 쓰이게",
+   "label": "스타일은 모두 합격 — 알맞은 상황에 쓰이게",
+   "versions": [
+    16
+   ],
+   "date": "2026-11-12",
+   "sources": [
+    {
+     "ref": "sec:05§0-7",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:ac4a4963"
+   ],
+   "themes": [
+    "variety"
+   ],
+   "ann_key": "intent:ac4a4963",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:16",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:165",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1279",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:05§0-7",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:1d93a95e",
+   "kind": "intent",
+   "quote": "졸라맨·애니메이션 품질이 너무 낮고, 그림 패턴이 매번 똑같다",
+   "label": "졸라맨·애니메이션 품질이 너무 낮고, 그림 패턴이 매번 똑같다",
+   "versions": [
+    2
+   ],
+   "date": "2026-11-13",
+   "sources": [
+    {
+     "ref": "code:ytflow/stages/story_kit.py:1",
+     "kind": "code"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:1d93a95e"
+   ],
+   "themes": [
+    "variety"
+   ],
+   "ann_key": "intent:1d93a95e",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:01§2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:07",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1436",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/story.py:88",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/story_kit.py:1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/studio3d.py:1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/trends.py:90",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:10d399cf",
+   "kind": "intent",
+   "quote": "모든 채널 그냥 인트로 일단 빼 주세요",
+   "label": "모든 채널 그냥 인트로 일단 빼 주세요",
+   "versions": [
+    24
+   ],
+   "date": "2026-11-14",
+   "sources": [
+    {
+     "ref": "sec:README§2-1",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:10d399cf"
+   ],
+   "themes": [
+    "script"
+   ],
+   "ann_key": "intent:10d399cf",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:24",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-3",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:03",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:09",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:184",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:309",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:322",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:966",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1011",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:176c4b63",
+   "kind": "intent",
+   "quote": "대본 구성부터 문제. 주 시청자층·유입 경로·유입 이유를 상권 조사처럼 먼저 알고 니즈에 맞춰 대본을 짜야 하는데, 대본 자체가 설명·서술·지식 욱여넣기 — 지식 습득 쪽으로 치우침. 편집은 대본을 바탕으로",
+   "label": "대본 구성부터 문제. 주 시청자층·유입 경로·유입 이유를 상권 조사처럼 먼저 알고 니즈에 맞춰 대본을 짜야 ",
+   "versions": [
+    22
+   ],
+   "date": "2026-11-14",
+   "sources": [
+    {
+     "ref": "rev:26",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:176c4b63"
+   ],
+   "themes": [
+    "background",
+    "script",
+    "intent"
+   ],
+   "ann_key": "intent:176c4b63",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:22",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0-6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0-5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1446",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/stage.py:1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/thumbnail.py:154",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:1e0daf2b",
+   "kind": "intent",
+   "quote": "비싼 유료가 아니어도 된다 — 인포그래픽·자체 생성도 괜찮다. 핵심은 동적인 동영상, 그림체는 부가 요소",
+   "label": "비싼 유료가 아니어도 된다 — 인포그래픽·자체 생성도 괜찮다. 핵심은 동적인 동영상, 그림체는 부가 요소",
+   "versions": [
+    25
+   ],
+   "date": "2026-11-14",
+   "sources": [
+    {
+     "ref": "sec:README§2-5",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:1e0daf2b"
+   ],
+   "themes": [
+    "motion"
+   ],
+   "ann_key": "intent:1e0daf2b",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:25",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:432",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/stage.py:61",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/stage.py:182",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:504fb425",
+   "kind": "intent",
+   "quote": "동적인 동영상의 미감 — 예시는 미주일기 채널의 최신 영상들",
+   "label": "동적인 동영상의 미감 — 예시는 미주일기 채널의 최신 영상들",
+   "versions": [
+    25
+   ],
+   "date": "2026-11-14",
+   "sources": [
+    {
+     "ref": "sec:README§2-5",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:504fb425"
+   ],
+   "themes": [
+    "motion"
+   ],
+   "ann_key": "intent:504fb425",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:25",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:432",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/stage.py:61",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/stage.py:182",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:58b6a8db",
+   "kind": "intent",
+   "quote": "제목·썸네일 A('엔비디아는 왜 고객의 빚까지 보증하나')는 이미 너무 알려진 사실이라 뻔함. 그동안 나온 보고서·주요 내용을 분석해 더 심도 있게 엮을 것 — 발언·행동 자료가 어떤 의미를 가지는지, 매체는 이를 어떻게 다루는지까지",
+   "label": "제목·썸네일 A('엔비디아는 왜 고객의 빚까지 보증하나')는 이미 너무 알려진 사실이라 뻔함. 그동안 나온 ",
+   "versions": [
+    26
+   ],
+   "date": "2026-11-14",
+   "sources": [
+    {
+     "ref": "rev:28",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:58b6a8db"
+   ],
+   "themes": [
+    "depth"
+   ],
+   "ann_key": "intent:58b6a8db",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:26",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:03§0-2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G3",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:228",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:236",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:241",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:254",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:259",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:759c49eb",
+   "kind": "intent",
+   "quote": "반짝 효과음은 빼기. 동영상이라는 동적인 움직임을 살리는 것이 목표인데, 지금은 사진을 잘 뽑은 정적인 동영상 같음",
+   "label": "반짝 효과음은 빼기. 동영상이라는 동적인 움직임을 살리는 것이 목표인데, 지금은 사진을 잘 뽑은 정적인 동영",
+   "versions": [
+    25
+   ],
+   "date": "2026-11-14",
+   "sources": [
+    {
+     "ref": "rev:27",
+     "kind": "review"
+    },
+    {
+     "ref": "sec:README§2-5",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "동영상이라는 동적인 움직임을 살려라. 지금은 사진을 잘 뽑은 정적인 동영상 같다"
+   ],
+   "member_ids": [
+    "intent:759c49eb",
+    "intent:4300a065"
+   ],
+   "themes": [
+    "motion",
+    "sound",
+    "intent"
+   ],
+   "ann_key": "intent:759c49eb",
+   "meaning": "영상의 이점을 살린다 — '다음 PPT, 다음 PPT'처럼 멈춘 장면이 넘어가는 게 아니라, 말하는 내용이 그 순간 화면에 생기고 바뀌는 영상",
+   "not_meant": [
+    "카메라를 반드시(계속) 움직여라",
+    "정지 화면 비율 같은 숫자를 맞추려고 화면을 흔들거나 확대·축소하라"
+   ],
+   "note": "2026-11-15 사용자: \"나는 동영상의 이점을 살린다 즉 정적인 단순 다음 ppt 다음 ppt가 아니라 영상의 이점을 살려라 라고 했지 반드시 카메라를 움직여라 라고 하려고 했던게 아닌데\"",
+   "readings": [
+    {
+     "ref": "ver:25",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-5",
+     "status": "over",
+     "note": "'1. 카메라가 계속 움직인다', '완전히 멈춘 순간이 없게', '모든 그림이 숨 쉰다'는 카메라·미세 움직임으로 옮긴 해석. 뜻은 '말하는 것이 화면에 생긴다'(09 §6 v30 해석)에 가까움",
+     "by": "Claude 기록 — 2026-11-15 사용자 설명('카메라를 반드시 움직이라는 뜻이 아니었다') 기준, 사용자 확인 필요"
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:432",
+     "status": "over",
+     "note": "정지 화면 비율 ≤0.3 MUST 는 프레임 차이만 재므로 카메라를 흔들면 통과 — 의도(말하는 내용이 화면에 생김)를 재지 않음. v30 은 시장 채널에서 같은 숫자를 '참고만'으로 내림",
+     "by": "Claude 기록 — 2026-11-15 사용자 설명('카메라를 반드시 움직이라는 뜻이 아니었다') 기준, 사용자 확인 필요"
+    },
+    {
+     "ref": "code:ytflow/stages/stage.py:61",
+     "status": "over",
+     "note": "박자마다 카메라가 다가가며 계속 움직임 + 모든 그림 대기 동작(완전히 멈춘 프레임 없음)을 렌더러 기본으로 구현",
+     "by": "Claude 기록 — 2026-11-15 사용자 설명('카메라를 반드시 움직이라는 뜻이 아니었다') 기준, 사용자 확인 필요"
+    },
+    {
+     "ref": "code:ytflow/stages/stage.py:182",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§6",
+     "status": "conflict",
+     "note": "같은 매뉴얼 안에서 09 §6(v30·v31: 억지 미세 움직임·확대·축소 끔)과 README §2-5(카메라 계속 움직임)가 함께 살아 있음 — 채널 범위 우선순위가 적혀 있지 않음",
+     "by": "Claude 기록 — 2026-11-15 사용자 설명('카메라를 반드시 움직이라는 뜻이 아니었다') 기준, 사용자 확인 필요"
+    }
+   ],
+   "status": "misaligned",
+   "annotated": true
+  },
+  {
+   "id": "intent:88b07e08",
+   "kind": "intent",
+   "quote": "인트로는 빼 주세요",
+   "label": "인트로는 빼 주세요",
+   "versions": [
+    24
+   ],
+   "date": "2026-11-14",
+   "sources": [
+    {
+     "ref": "sec:04§0",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:88b07e08"
+   ],
+   "themes": [
+    "script"
+   ],
+   "ann_key": "intent:88b07e08",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:24",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-3",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:03",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:09",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:184",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:309",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:322",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:966",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1011",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:8ecb5021",
+   "kind": "intent",
+   "quote": "사진을 잘 뽑은 정적인 동영상 같다 — 동영상이라는 동적인 움직임을 살려라",
+   "label": "사진을 잘 뽑은 정적인 동영상 같다 — 동영상이라는 동적인 움직임을 살려라",
+   "versions": [
+    25
+   ],
+   "date": "2026-11-14",
+   "sources": [
+    {
+     "ref": "code:ytflow/stages/stage.py:61",
+     "kind": "code"
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:432",
+     "kind": "code"
+    }
+   ],
+   "variants": [
+    "사진을 잘 뽑은 정적인 동영상 같다 — 동적인 움직임을 살려라"
+   ],
+   "member_ids": [
+    "intent:8ecb5021",
+    "intent:792c61be"
+   ],
+   "themes": [
+    "motion"
+   ],
+   "ann_key": "intent:8ecb5021",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:25",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:432",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/stage.py:61",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/stage.py:182",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:97937dfb",
+   "kind": "intent",
+   "quote": "영상들 5분 단위가 아니라 못해도 10분, 길면 그 이상으로",
+   "label": "영상들 5분 단위가 아니라 못해도 10분, 길면 그 이상으로",
+   "versions": [
+    24
+   ],
+   "date": "2026-11-14",
+   "sources": [
+    {
+     "ref": "sec:README§2-4",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:97937dfb"
+   ],
+   "themes": [
+    "length"
+   ],
+   "ann_key": "intent:97937dfb",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:24",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-3",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:03",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:09",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:184",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:309",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:322",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:966",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1011",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:98a46673",
+   "kind": "intent",
+   "quote": "중간중간 너무 난잡함. 목표·시청자 욕망을 먼저 정의하지 않고 만듦. 대본을 소제목처럼 글로 쓰거나 사진·그림을 붙여 넣기만 함 — 대본에 따른 애니메이션이 아님. 각 연출의 의도가 불분명",
+   "label": "중간중간 너무 난잡함. 목표·시청자 욕망을 먼저 정의하지 않고 만듦. 대본을 소제목처럼 글로 쓰거나 사진·그",
+   "versions": [
+    21
+   ],
+   "date": "2026-11-14",
+   "sources": [
+    {
+     "ref": "rev:25",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:98a46673"
+   ],
+   "themes": [
+    "variety",
+    "script",
+    "intent"
+   ],
+   "ann_key": "intent:98a46673",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:21",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§1-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0-4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:abf4f743",
+   "kind": "intent",
+   "quote": "대본이 억지스럽고 억텐 같다, 미주일기 형식이 더 자연스럽다",
+   "label": "대본이 억지스럽고 억텐 같다, 미주일기 형식이 더 자연스럽다",
+   "versions": [
+    24
+   ],
+   "date": "2026-11-14",
+   "sources": [
+    {
+     "ref": "sec:README§2-3",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:abf4f743"
+   ],
+   "themes": [
+    "script"
+   ],
+   "ann_key": "intent:abf4f743",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:24",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-3",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:03",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:09",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:184",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:309",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:322",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:966",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1011",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:eedd9deb",
+   "kind": "intent",
+   "quote": "사소한 문장보다 형식·진행 방식·말투에 집중",
+   "label": "사소한 문장보다 형식·진행 방식·말투에 집중",
+   "versions": [
+    24
+   ],
+   "date": "2026-11-14",
+   "sources": [
+    {
+     "ref": "sec:README§2-3",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:eedd9deb"
+   ],
+   "themes": [
+    "script"
+   ],
+   "ann_key": "intent:eedd9deb",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:24",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-3",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:03",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:09",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:184",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:309",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:322",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:966",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1011",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:fadf1ace",
+   "kind": "intent",
+   "quote": "영상이 정적임 — 멈춰 있는 부분이 많음. 특히 매출채권 45일·60일 장면: 하는 말(631억·250억 회사채·은행 비유)은 많은데 화면에는 45일·60일만 강조된 채 오래 멈춰 있음",
+   "label": "영상이 정적임 — 멈춰 있는 부분이 많음. 특히 매출채권 45일·60일 장면: 하는 말(631억·250억 회",
+   "versions": [
+    27
+   ],
+   "date": "2026-11-14",
+   "sources": [
+    {
+     "ref": "rev:29",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:fadf1ace"
+   ],
+   "themes": [
+    "motion",
+    "emphasis"
+   ],
+   "ann_key": "intent:fadf1ace",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:27",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§7",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:261",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/edit10.py:67",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/edit10.py:258",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:147",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1041",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:275",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:05d09fee",
+   "kind": "intent",
+   "quote": "정적이라고 했다고 정지 화면에서 굳이 억지로 화면을 웅웅거리며 미세하게 움직이지 않아도 됩니다",
+   "label": "정적이라고 했다고 정지 화면에서 굳이 억지로 화면을 웅웅거리며 미세하게 움직이지 않아도 됩니다",
+   "versions": [
+    30
+   ],
+   "date": "2026-11-15",
+   "sources": [
+    {
+     "ref": "sec:09§6",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:05d09fee"
+   ],
+   "themes": [
+    "motion",
+    "sound"
+   ],
+   "ann_key": "intent:05d09fee",
+   "meaning": "'정적'은 화면이 흔들리지 않는다는 뜻이 아니라 말하는 내용이 화면에 나타나지 않는다는 뜻",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:30",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:09",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1042",
+     "status": "aligned",
+     "note": "시장 채널 박자 카메라 기본 끔",
+     "by": "Claude 기록 — 2026-11-15 사용자 설명('카메라를 반드시 움직이라는 뜻이 아니었다') 기준, 사용자 확인 필요"
+    },
+    {
+     "ref": "sec:09§6",
+     "status": "aligned",
+     "note": "'정적의 뜻은 말하는 내용이 화면에 나타나지 않는다는 것 → 말하는 것이 화면에 생긴다'로 옮김",
+     "by": "Claude 기록 — 2026-11-15 사용자 설명('카메라를 반드시 움직이라는 뜻이 아니었다') 기준, 사용자 확인 필요"
+    }
+   ],
+   "status": "aligned",
+   "annotated": true
+  },
+  {
+   "id": "intent:195f9882",
+   "kind": "intent",
+   "quote": "이번 주 가장 큰 이슈이자 시장을 흔든 젠슨 황 사임이 별도로 다뤄지지 않음. 시장을 흔든 사건을 중심축으로 분석하며 뻗어 나가 순환 금융·연준과 엮어 서술할 것 — 그 사건으로 무엇이 어떻게 되는지(파급효과), 주의할 점, 사람들·매체·인사이트는 어떻게 해석하는지",
+   "label": "이번 주 가장 큰 이슈이자 시장을 흔든 젠슨 황 사임이 별도로 다뤄지지 않음. 시장을 흔든 사건을 중심축으로",
+   "versions": [
+    28
+   ],
+   "date": "2026-11-15",
+   "sources": [
+    {
+     "ref": "rev:30",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:195f9882"
+   ],
+   "themes": [
+    "depth"
+   ],
+   "ann_key": "intent:195f9882",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:28",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:03§0-3",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G3",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:248",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:249",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:252",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:256",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:299d787a",
+   "kind": "intent",
+   "quote": "11월 15일만 남기고 이어 읽는 시장은 빼 주세요, 앞으로도",
+   "label": "11월 15일만 남기고 이어 읽는 시장은 빼 주세요, 앞으로도",
+   "versions": [],
+   "date": "2026-11-15",
+   "sources": [
+    {
+     "ref": "sec:09§7",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:299d787a"
+   ],
+   "themes": [],
+   "ann_key": "intent:299d787a",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§7",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:56bf140d",
+   "kind": "intent",
+   "quote": "시장이 열리는 날에는 그날의 시장 브리핑과 시장을 흔든 이슈들을 정리하고 관련 인사이트나 매체·인물들의 인사이트 등을 분석·조사하고 보고합니다. 장이 열리지 않는 날에는 종합적으로 한 주의 이슈들과 인사이트들을 점검할 수 있도록 운영합니다",
+   "label": "시장이 열리는 날에는 그날의 시장 브리핑과 시장을 흔든 이슈들을 정리하고 관련 인사이트나 매체·인물들의 인사",
+   "versions": [
+    30
+   ],
+   "date": "2026-11-15",
+   "sources": [
+    {
+     "ref": "sec:09§2",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:56bf140d"
+   ],
+   "themes": [
+    "depth",
+    "length"
+   ],
+   "ann_key": "intent:56bf140d",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:30",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:09",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1042",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:7be96777",
+   "kind": "intent",
+   "quote": "어지간하면 10분 정도로 깊게 분석·조사하고 관련 인사이트를 분석·소개하라는 의미지, 꼭 10분으로 하라는 건 아닙니다. 대본과 주제에 따라 더 길어질 수도 있습니다.",
+   "label": "어지간하면 10분 정도로 깊게 분석·조사하고 관련 인사이트를 분석·소개하라는 의미지, 꼭 10분으로 하라는 ",
+   "versions": [
+    24
+   ],
+   "date": "2026-11-15",
+   "sources": [
+    {
+     "ref": "sec:README§2-4",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:7be96777"
+   ],
+   "themes": [
+    "script",
+    "depth",
+    "length"
+   ],
+   "ann_key": "intent:7be96777",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:24",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-3",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:03",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:09",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:184",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:309",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:322",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:966",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1011",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:93f69885",
+   "kind": "intent",
+   "quote": "영상이 정적이다, 멈춰 있는 부분이 많다 — 하는 말은 많은데 45일·60일만 강조돼 있다",
+   "label": "영상이 정적이다, 멈춰 있는 부분이 많다 — 하는 말은 많은데 45일·60일만 강조돼 있다",
+   "versions": [
+    27
+   ],
+   "date": "2026-11-15",
+   "sources": [
+    {
+     "ref": "sec:09§6",
+     "kind": "manual"
+    },
+    {
+     "ref": "code:ytflow/stages/edit10.py:258",
+     "kind": "code"
+    }
+   ],
+   "variants": [
+    "영상이 정적이다 — 하는 말은 많은데 45일·60일만 강조된 채 멈춰 있다"
+   ],
+   "member_ids": [
+    "intent:93f69885",
+    "intent:acfc4dc8"
+   ],
+   "themes": [
+    "motion",
+    "emphasis"
+   ],
+   "ann_key": "intent:93f69885",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:27",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§7",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:261",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/edit10.py:67",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/edit10.py:258",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:147",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1041",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:275",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:99b74c20",
+   "kind": "intent",
+   "quote": "말은 많은데 45일·60일만 강조된 채 멈춰 있다",
+   "label": "말은 많은데 45일·60일만 강조된 채 멈춰 있다",
+   "versions": [
+    27
+   ],
+   "date": "2026-11-15",
+   "sources": [
+    {
+     "ref": "code:ytflow/stages/checklist.py:261",
+     "kind": "code"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:99b74c20"
+   ],
+   "themes": [
+    "motion",
+    "emphasis"
+   ],
+   "ann_key": "intent:99b74c20",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:27",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§7",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:261",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/edit10.py:67",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/edit10.py:258",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:147",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1041",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:275",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:a21b07e5",
+   "kind": "intent",
+   "quote": "자꾸 화면을 확대하고 축소하고 웅웅거리는 거 쓰지 말아 주세요",
+   "label": "자꾸 화면을 확대하고 축소하고 웅웅거리는 거 쓰지 말아 주세요",
+   "versions": [
+    31
+   ],
+   "date": "2026-11-15",
+   "sources": [
+    {
+     "ref": "sec:09§6",
+     "kind": "manual"
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1043",
+     "kind": "code"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:a21b07e5"
+   ],
+   "themes": [
+    "motion",
+    "sound"
+   ],
+   "ann_key": "intent:a21b07e5",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:31",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:09",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/directions.py:656",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/edit10.py:82",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/edit10.py:155",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1043",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:adc35a90",
+   "kind": "intent",
+   "quote": "앞으로의 시장에서 주목해야 할 일정들이나 실적발표 등은 무엇이 있는지 등도 매주 브리핑하고 분석·설명할 수 있도록",
+   "label": "앞으로의 시장에서 주목해야 할 일정들이나 실적발표 등은 무엇이 있는지 등도 매주 브리핑하고 분석·설명할 수 ",
+   "versions": [],
+   "date": "2026-11-15",
+   "sources": [
+    {
+     "ref": "sec:09§2",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:adc35a90"
+   ],
+   "themes": [
+    "depth",
+    "length"
+   ],
+   "ann_key": "intent:adc35a90",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
   }
  ],
  "edges": [
@@ -7138,6 +10639,1086 @@
   {
    "s": "ver:31",
    "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "ver:8",
+   "t": "code:ytflow/stages/backdrop.py:1",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:12",
+   "t": "code:ytflow/stages/backdrop.py:64",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:15",
+   "t": "code:ytflow/stages/backdrop.py:64",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:16",
+   "t": "code:ytflow/stages/checklist.py:165",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:17",
+   "t": "code:ytflow/stages/checklist.py:171",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:24",
+   "t": "code:ytflow/stages/checklist.py:184",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:23",
+   "t": "code:ytflow/stages/checklist.py:185",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:18",
+   "t": "code:ytflow/stages/checklist.py:212",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:17",
+   "t": "code:ytflow/stages/checklist.py:219",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:26",
+   "t": "code:ytflow/stages/checklist.py:228",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:27",
+   "t": "code:ytflow/stages/checklist.py:261",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:24",
+   "t": "code:ytflow/stages/checklist.py:309",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:24",
+   "t": "code:ytflow/stages/checklist.py:322",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:13",
+   "t": "code:ytflow/stages/checklist.py:343",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:15",
+   "t": "code:ytflow/stages/checklist.py:361",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:25",
+   "t": "code:ytflow/stages/checklist.py:432",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:17",
+   "t": "code:ytflow/stages/daily.py:1",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:17",
+   "t": "code:ytflow/stages/daily.py:248",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:8",
+   "t": "code:ytflow/stages/directions.py:596",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:9",
+   "t": "code:ytflow/stages/directions.py:633",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:31",
+   "t": "code:ytflow/stages/directions.py:656",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:12",
+   "t": "code:ytflow/stages/directions.py:661",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:12",
+   "t": "code:ytflow/stages/directions.py:670",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:18",
+   "t": "code:ytflow/stages/earnings.py:1",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:10",
+   "t": "code:ytflow/stages/edit10.py:1",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:12",
+   "t": "code:ytflow/stages/edit10.py:1",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:12",
+   "t": "code:ytflow/stages/edit10.py:22",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:12",
+   "t": "code:ytflow/stages/edit10.py:65",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:27",
+   "t": "code:ytflow/stages/edit10.py:67",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:12",
+   "t": "code:ytflow/stages/edit10.py:81",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:31",
+   "t": "code:ytflow/stages/edit10.py:82",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:31",
+   "t": "code:ytflow/stages/edit10.py:155",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:14",
+   "t": "code:ytflow/stages/edit10.py:233",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:27",
+   "t": "code:ytflow/stages/edit10.py:258",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:27",
+   "t": "code:ytflow/stages/hybrid.py:147",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:18",
+   "t": "code:ytflow/stages/hybrid.py:544",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:24",
+   "t": "code:ytflow/stages/hybrid.py:966",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:24",
+   "t": "code:ytflow/stages/hybrid.py:1011",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:15",
+   "t": "code:ytflow/stages/hybrid.py:1031",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:27",
+   "t": "code:ytflow/stages/hybrid.py:1041",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:30",
+   "t": "code:ytflow/stages/hybrid.py:1042",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:31",
+   "t": "code:ytflow/stages/hybrid.py:1043",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:10",
+   "t": "code:ytflow/stages/hybrid.py:1056",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:10",
+   "t": "code:ytflow/stages/hybrid.py:1096",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:16",
+   "t": "code:ytflow/stages/hybrid.py:1279",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:15",
+   "t": "code:ytflow/stages/hybrid.py:1289",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:12",
+   "t": "code:ytflow/stages/hybrid.py:1392",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:2",
+   "t": "code:ytflow/stages/hybrid.py:1436",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:22",
+   "t": "code:ytflow/stages/hybrid.py:1446",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:15",
+   "t": "code:ytflow/stages/identity.py:1",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:22",
+   "t": "code:ytflow/stages/stage.py:1",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:25",
+   "t": "code:ytflow/stages/stage.py:61",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:25",
+   "t": "code:ytflow/stages/stage.py:182",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:2",
+   "t": "code:ytflow/stages/story.py:88",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:2",
+   "t": "code:ytflow/stages/story_kit.py:1",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:2",
+   "t": "code:ytflow/stages/studio3d.py:1",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:9",
+   "t": "code:ytflow/stages/stylepick.py:212",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:22",
+   "t": "code:ytflow/stages/thumbnail.py:154",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:2",
+   "t": "code:ytflow/stages/trends.py:90",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:3",
+   "t": "code:ytflow/stages/ytpublish.py:1",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:26",
+   "t": "check:236",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:26",
+   "t": "check:241",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:28",
+   "t": "check:248",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:28",
+   "t": "check:249",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:28",
+   "t": "check:252",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:26",
+   "t": "check:254",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:28",
+   "t": "check:256",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:26",
+   "t": "check:259",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:27",
+   "t": "check:275",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:10",
+   "t": "check:339",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:15",
+   "t": "check:362",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:15",
+   "t": "check:370",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "intent:195f9882",
+   "t": "ver:28",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:195f9882",
+   "t": "rev:30",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:195f9882",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "intent:56bf140d",
+   "t": "ver:30",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:56bf140d",
+   "t": "sec:09§2",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:56bf140d",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "intent:56bf140d",
+   "t": "theme:length",
+   "kind": "about"
+  },
+  {
+   "s": "intent:58b6a8db",
+   "t": "ver:26",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:58b6a8db",
+   "t": "rev:28",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:58b6a8db",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "intent:bbab729f",
+   "t": "ver:8",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:bbab729f",
+   "t": "rev:6",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:bbab729f",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "intent:bbab729f",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:bbab729f",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "intent:176c4b63",
+   "t": "ver:22",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:176c4b63",
+   "t": "rev:26",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:176c4b63",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "intent:176c4b63",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "intent:176c4b63",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
+   "s": "intent:98a46673",
+   "t": "ver:21",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:98a46673",
+   "t": "rev:25",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:98a46673",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:98a46673",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "intent:98a46673",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
+   "s": "intent:fadf1ace",
+   "t": "ver:27",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:fadf1ace",
+   "t": "rev:29",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:fadf1ace",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "intent:fadf1ace",
+   "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "intent:7be96777",
+   "t": "ver:24",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:7be96777",
+   "t": "sec:README§2-4",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:7be96777",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "intent:7be96777",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "intent:7be96777",
+   "t": "theme:length",
+   "kind": "about"
+  },
+  {
+   "s": "intent:f976ad69",
+   "t": "ver:4",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:f976ad69",
+   "t": "rev:4",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:f976ad69",
+   "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "intent:f976ad69",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:217f99af",
+   "t": "ver:3",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:217f99af",
+   "t": "rev:2",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:217f99af",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:4f6397bd",
+   "t": "ver:9",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:4f6397bd",
+   "t": "rev:7",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:4f6397bd",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:ea14e9be",
+   "t": "ver:12",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:ea14e9be",
+   "t": "rev:11",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:ea14e9be",
+   "t": "rev:12",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:ea14e9be",
+   "t": "rev:13",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:ea14e9be",
+   "t": "rev:14",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:ea14e9be",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "intent:ea14e9be",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "intent:adc35a90",
+   "t": "sec:09§2",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:adc35a90",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "intent:adc35a90",
+   "t": "theme:length",
+   "kind": "about"
+  },
+  {
+   "s": "intent:759c49eb",
+   "t": "ver:25",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:759c49eb",
+   "t": "rev:27",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:759c49eb",
+   "t": "sec:README§2-5",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:759c49eb",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "intent:759c49eb",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "intent:759c49eb",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
+   "s": "intent:05d09fee",
+   "t": "ver:30",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:05d09fee",
+   "t": "sec:09§6",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:05d09fee",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "intent:05d09fee",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "intent:1e0daf2b",
+   "t": "ver:25",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:1e0daf2b",
+   "t": "sec:README§2-5",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:1e0daf2b",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "intent:7efa00c0",
+   "t": "ver:16",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:7efa00c0",
+   "t": "rev:21",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:7efa00c0",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:7efa00c0",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "intent:50e32be0",
+   "t": "ver:11",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:50e32be0",
+   "t": "rev:10",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:50e32be0",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "intent:93f69885",
+   "t": "ver:27",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:93f69885",
+   "t": "sec:09§6",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:93f69885",
+   "t": "code:ytflow/stages/edit10.py:258",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:93f69885",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "intent:93f69885",
+   "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "intent:abbe3e51",
+   "t": "rev:3",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:abbe3e51",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:8ecb5021",
+   "t": "ver:25",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:8ecb5021",
+   "t": "code:ytflow/stages/stage.py:61",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:8ecb5021",
+   "t": "code:ytflow/stages/checklist.py:432",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:8ecb5021",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "intent:b19eb7da",
+   "t": "ver:3",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:b19eb7da",
+   "t": "rev:1",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:b19eb7da",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:fec0e40f",
+   "t": "ver:14",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:fec0e40f",
+   "t": "rev:16",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:fec0e40f",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "intent:fec0e40f",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:a21b07e5",
+   "t": "ver:31",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:a21b07e5",
+   "t": "sec:09§6",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:a21b07e5",
+   "t": "code:ytflow/stages/hybrid.py:1043",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:a21b07e5",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "intent:a21b07e5",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "intent:299d787a",
+   "t": "sec:09§7",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:abf4f743",
+   "t": "ver:24",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:abf4f743",
+   "t": "sec:README§2-3",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:abf4f743",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "intent:1d93a95e",
+   "t": "ver:2",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:1d93a95e",
+   "t": "code:ytflow/stages/story_kit.py:1",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:1d93a95e",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:97937dfb",
+   "t": "ver:24",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:97937dfb",
+   "t": "sec:README§2-4",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:97937dfb",
+   "t": "theme:length",
+   "kind": "about"
+  },
+  {
+   "s": "intent:504fb425",
+   "t": "ver:25",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:504fb425",
+   "t": "sec:README§2-5",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:504fb425",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "intent:b138c882",
+   "t": "ver:4",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:b138c882",
+   "t": "rev:5",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:b138c882",
+   "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "intent:b138c882",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:00ba80c7",
+   "t": "ver:13",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:00ba80c7",
+   "t": "rev:15",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:00ba80c7",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "intent:99b74c20",
+   "t": "ver:27",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:99b74c20",
+   "t": "code:ytflow/stages/checklist.py:261",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:99b74c20",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "intent:99b74c20",
+   "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "intent:2f0d9a43",
+   "t": "ver:16",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:2f0d9a43",
+   "t": "sec:README§2-2",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:2f0d9a43",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "intent:6f245754",
+   "t": "ver:8",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:6f245754",
+   "t": "sec:05§0-2",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:6f245754",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "intent:6f245754",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:eedd9deb",
+   "t": "ver:24",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:eedd9deb",
+   "t": "sec:README§2-3",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:eedd9deb",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "intent:ac4a4963",
+   "t": "ver:16",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:ac4a4963",
+   "t": "sec:05§0-7",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:ac4a4963",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:10d399cf",
+   "t": "ver:24",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:10d399cf",
+   "t": "sec:README§2-1",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:10d399cf",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "intent:6748eb95",
+   "t": "ver:17",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:6748eb95",
+   "t": "sec:08§0-2",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:6748eb95",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "intent:454c07ad",
+   "t": "sec:05§h19",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:88b07e08",
+   "t": "ver:24",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:88b07e08",
+   "t": "sec:04§0",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:88b07e08",
+   "t": "theme:script",
    "kind": "about"
   }
  ]

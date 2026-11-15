@@ -216,6 +216,107 @@ def git_versions() -> dict[int, dict]:
     return out
 
 
+
+# ------------------------------------------------------------------ 의도 정렬: 사용자 원문 → 모델 해석 → 규칙 → 코드 → 결과
+INTENTS = MANUAL / "intents.yaml"
+STATUS = {"aligned": "정렬됨", "over": "과잉 해석", "under": "덜 반영", "drift": "다른 뜻으로", "conflict": "다른 규칙과 충돌",
+          "unreviewed": "미검토"}
+QUOTE = re.compile(r"[\"“]([^\"”]{6,300})[\"”]")
+
+
+def _norm(t: str) -> str:
+    return re.sub(r"[\s\W_]+", "", t)
+
+
+def _iid(t: str) -> str:
+    import hashlib
+    return "intent:" + hashlib.sha1(_norm(t).encode("utf-8")).hexdigest()[:8]
+
+
+def _user_quotes(line: str) -> list[tuple[str, int | None, str | None]]:
+    """한 줄에서 '사용자' 뒤에 오는 따옴표 원문들 → [(원문, 버전, 날짜)]."""
+    k = line.find("사용자")
+    if k < 0:
+        return []
+    head = line[:k + 40]
+    vm = re.findall(r"\bv(\d+)\b", line[:k + 20])
+    dm = re.search(r"\d{4}-\d\d-\d\d", line)
+    return [(q.group(1).strip(), int(vm[-1]) if vm else None, dm.group(0) if dm else None)
+            for q in QUOTE.finditer(line, k)]
+
+
+def parse_code() -> list[dict]:
+    """ytflow/**/*.py 의 '# vN …' 주석 — 버전이 실제로 구현된 곳."""
+    out = []
+    for p in sorted((ROOT / "ytflow").rglob("*.py")):
+        rel = p.relative_to(ROOT).as_posix()
+        for i, l in enumerate(_read(p).splitlines()):
+            c = l.find("#")
+            doc = l.strip().startswith('"""')
+            if c < 0 and not doc:
+                continue
+            txt = l[c + 1:].strip() if c >= 0 else l.strip().strip('"')
+            vs = sorted({int(v) for v in re.findall(r"\bv(\d{1,2})\b", txt) if 1 <= int(v) <= 99})
+            if vs:
+                out.append({"id": f"code:{rel}:{i + 1}", "kind": "code", "file": rel, "line": i + 1, "versions": vs,
+                            "label": txt[:160], "src": l.strip()[:220]})
+    return out
+
+
+def load_annotations() -> dict:
+    try:
+        import yaml
+        return (yaml.safe_load(_read(INTENTS)) or {}).get("intents", {}) or {}
+    except Exception:
+        return {}
+
+
+def save_annotation(iid: str, data: dict) -> None:
+    """intents.yaml 의 한 의도만 바꿔 씀 (사람이 고치는 원본)."""
+    import yaml
+    doc = {}
+    if INTENTS.exists():
+        doc = yaml.safe_load(_read(INTENTS)) or {}
+    doc.setdefault("intents", {})
+    key = iid.replace("intent:", "")
+    cur = doc["intents"].get(key, {}) or {}
+    for k in ("quote", "meaning", "not_meant", "note"):
+        if k in data:
+            cur[k] = data[k]
+    if "readings" in data:
+        rd = cur.get("readings", {}) or {}
+        for ref, v in data["readings"].items():
+            if not v or v.get("status", "unreviewed") == "unreviewed" and not v.get("note"):
+                rd.pop(ref, None)
+            else:
+                rd[ref] = {k2: v[k2] for k2 in ("status", "note", "by") if v.get(k2)}
+        cur["readings"] = rd
+    cur["updated"] = dt.date.today().isoformat()
+    doc["intents"][key] = cur
+    head = ("# 의도 정렬 — 사용자가 말한 뜻(원문)과 모델이 매뉴얼·코드로 옮긴 해석이 맞는지 사람이 판정해 둔 곳.\n"
+            "# 의도 ID 는 원문에서 자동으로 만들어짐 (python -m ytflow manual-graph). 이 파일은 manual-ui '의도 정렬' 탭에서 고칩니다.\n"
+            "# status: aligned 정렬됨 · over 과잉 해석 · under 덜 반영 · drift 다른 뜻으로 · conflict 다른 규칙과 충돌 · unreviewed 미검토\n")
+    INTENTS.write_text(head + yaml.safe_dump(doc, allow_unicode=True, sort_keys=False, width=110), encoding="utf-8")
+
+
+PLUS = ["계속 움직", "끊임없", "완전히 멈춘 순간이 없", "멈춘 화면 없", "다가간다", "밀고 들어", "숨 쉰다", "반드시", "켠다"]
+MINUS = ["끈다", "기본 끔", "쓰지 않", "고정이 기본", "억지로", "흔들지 않", "덜'이 기본", "낮춥니다", "카메라를 흔들어"]
+
+
+def polarity_lines(secs: list[dict]) -> list[dict]:
+    """지금 매뉴얼에서 같은 주제를 '더 하라'·'덜 하라'로 말하는 줄 (충돌 후보, 자동 추정)."""
+    out = []
+    for s in secs:
+        for ln in s.get("body", "").splitlines():
+            th = _themes(ln)
+            if not th:
+                continue
+            pol = "+" if any(w in ln for w in PLUS) else "-" if any(w in ln for w in MINUS) else None
+            if pol:
+                for t in th:
+                    out.append({"section": s["id"], "theme": t, "pol": pol, "text": ln.strip()[:200]})
+    return out
+
 # ------------------------------------------------------------------ 그래프 조립
 def build() -> dict:
     docs, secs = parse_docs()
@@ -329,7 +430,115 @@ def build() -> dict:
         s["versions"] = tv
         s["last_version"] = tv[-1] if tv else None
 
-    nodes = steps + gates + channels + docs + secs + rules + checks + versions + reviews + themes
+    # ---- 코드 구현 · 사용자 원문(의도) · 정렬 판정
+    codes = parse_code()
+    vids = {v["v"] for v in versions}
+    for c in codes:
+        for vv in c["versions"]:
+            if vv in vids:
+                E(f"ver:{vv}", c["id"], "implemented_by")
+    for c in checks:
+        m2 = re.match(r"v(\d+):", c["label"])
+        if m2 and int(m2.group(1)) in vids:
+            E(f"ver:{m2.group(1)}", c["id"], "implemented_by")
+
+    intents: dict[str, dict] = {}
+
+    def add_intent(quote, ver, date, where, kind):
+        if len(re.findall(r"[가-힣]", quote)) < 8:   # 사용자 말이 아닌 따옴표(코드 값·양식 글자)는 빼기
+            return
+        iid = _iid(quote)
+        it = intents.setdefault(iid, {"id": iid, "kind": "intent", "quote": quote, "label": quote[:60], "versions": [],
+                                      "date": date, "sources": []})
+        if ver and ver in vids and ver not in it["versions"]:
+            it["versions"].append(ver)
+        if date and (not it["date"] or date < it["date"]):
+            it["date"] = date
+        if where not in [x["ref"] for x in it["sources"]]:
+            it["sources"].append({"ref": where, "kind": kind})
+
+    for sc in secs:
+        for k, ln in enumerate([sc["title"]] + sc.get("body", "").splitlines()):
+            for q, vv, d in _user_quotes(ln):
+                add_intent(q, vv or sc["tag_version"], d, sc["id"], "manual")
+    for rv in reviews:
+        if rv["reason"]:
+            av = next((int(e["t"][4:]) for e in edges if e["s"] == rv["id"] and e["kind"] == "applied_in"), None)
+            add_intent(rv["reason"], av, rv["date"], rv["id"], "review")
+    for c in codes:
+        for q, vv, d in _user_quotes(c["src"]):
+            add_intent(q, vv or (c["versions"][-1] if c["versions"] else None), d, c["id"], "code")
+
+    # 같은 말을 조금씩 다르게 옮긴 원문은 한 의도로 묶음 (한쪽이 다른 쪽을 품거나 거의 같으면)
+    import difflib
+    groups: list[list[dict]] = []
+    for it in sorted(intents.values(), key=lambda x: -len(_norm(x["quote"]))):
+        a = _norm(it["quote"])
+        for gr in groups:
+            b = _norm(gr[0]["quote"])
+            if a in b or difflib.SequenceMatcher(None, a, b).ratio() >= 0.72:
+                gr.append(it)
+                break
+        else:
+            groups.append([it])
+    merged: dict[str, dict] = {}
+    for gr in groups:
+        head = gr[0]
+        head["variants"] = [x["quote"] for x in gr[1:]]
+        head["member_ids"] = [x["id"] for x in gr]
+        for x in gr[1:]:
+            head["versions"] = sorted(set(head["versions"]) | set(x["versions"]))
+            if x["date"] and (not head["date"] or x["date"] < head["date"]):
+                head["date"] = x["date"]
+            head["sources"] += [s2 for s2 in x["sources"] if s2["ref"] not in [y["ref"] for y in head["sources"]]]
+        merged[head["id"]] = head
+    intents = merged
+
+    ann = load_annotations()
+    by_ver_targets: dict[int, list[str]] = {}
+    for e in edges:
+        if e["kind"] in ("touched", "implemented_by") and e["s"].startswith("ver:"):
+            by_ver_targets.setdefault(int(e["s"][4:]), []).append(e["t"])
+    for it in intents.values():
+        it["versions"].sort()
+        it["themes"] = _themes(it["quote"])
+        a = next((ann[m[7:]] for m in it["member_ids"] if ann.get(m[7:])), {}) or {}
+        it["ann_key"] = next((m for m in it["member_ids"] if ann.get(m[7:])), it["id"])
+        it["meaning"] = a.get("meaning", "")
+        it["not_meant"] = a.get("not_meant", []) or []
+        it["note"] = a.get("note", "")
+        refs = []
+        for vv in it["versions"]:
+            E(it["id"], f"ver:{vv}", "interpreted_in")
+            refs.append(f"ver:{vv}")
+            refs += by_ver_targets.get(vv, [])
+        for src in it["sources"]:
+            E(it["id"], src["ref"], "quoted_in")
+            if src["kind"] in ("manual", "code"):
+                refs.append(src["ref"])
+        refs += [r for r in (a.get("readings") or {}) if r not in refs]
+        it["readings"] = []
+        for r in dict.fromkeys(refs):
+            ra = (a.get("readings") or {}).get(r, {}) or {}
+            it["readings"].append({"ref": r, "status": ra.get("status", "unreviewed"), "note": ra.get("note", ""),
+                                   "by": ra.get("by", "")})
+        bad = [x for x in it["readings"] if x["status"] in ("over", "under", "drift", "conflict")]
+        it["status"] = ("misaligned" if bad else "aligned" if any(x["status"] == "aligned" for x in it["readings"])
+                        else "unreviewed")
+        it["annotated"] = bool(a)
+        for t in it["themes"]:
+            E(it["id"], f"theme:{t}", "about")
+    intent_nodes = sorted(intents.values(), key=lambda x: (x["date"] or "", x["id"]))
+
+    pol = polarity_lines(secs)
+    conflicts = []
+    for t in THEMES:
+        plus = [p for p in pol if p["theme"] == t and p["pol"] == "+"]
+        minus = [p for p in pol if p["theme"] == t and p["pol"] == "-"]
+        if plus and minus:
+            conflicts.append({"theme": t, "plus": plus[:8], "minus": minus[:8]})
+
+    nodes = steps + gates + channels + docs + secs + rules + checks + versions + reviews + themes + codes + intent_nodes
     cur = _read(MANUAL / "VERSION").strip() or "0"
     stats = {
         "manual_version": int(cur),
@@ -337,9 +546,12 @@ def build() -> dict:
         "rejects": sum(r["result"] == "reject" for r in reviews), "passes": sum(r["result"] == "pass" for r in reviews),
         "pending": len(pending), "rules": len(rules), "checks": len(checks), "sections": len(secs),
         "must": sum(r["level"] == "MUST" for r in rules), "auto": sum(r["auto"] for r in rules),
+        "intents": len(intent_nodes), "misaligned": sum(i["status"] == "misaligned" for i in intent_nodes),
+        "intents_reviewed": sum(i["annotated"] for i in intent_nodes), "conflicts": len(conflicts), "code": len(codes),
     }
     return {"schema": SCHEMA_VERSION, "generated": dt.datetime.now().isoformat(timespec="seconds"),
-            "stats": stats, "pending": pending, "nodes": nodes, "edges": edges}
+            "stats": stats, "pending": pending, "status_labels": STATUS, "conflicts": conflicts,
+            "nodes": nodes, "edges": edges}
 
 
 def write(html_out: str | None = None) -> Path:
@@ -472,6 +684,25 @@ def serve(port: int = 8770, host: str = "127.0.0.1") -> None:
                     v = checklist.bump(summary, tag=False)
                     return self._json({"ok": True, "version": int(v),
                                        "next": f"git add manual && git commit -m \"매뉴얼 v{v}: {summary}\" && git push origin HEAD:refs/heads/manual/v{v}"})
+                if u.path == "/api/intent":
+                    iid = body.get("id", "")
+                    if not iid.startswith("intent:"):
+                        raise ValueError("의도 ID 가 없습니다")
+                    for r in (body.get("readings") or {}).values():
+                        if r and r.get("status", "unreviewed") not in STATUS:
+                            raise ValueError("알 수 없는 상태")
+                    save_annotation(iid, body)
+                    write()
+                    return self._json({"ok": True})
+                if u.path == "/api/intent-pending":
+                    text = (body.get("text") or "").strip()
+                    if not text:
+                        raise ValueError("내용이 비었습니다")
+                    cl = MANUAL / "CHANGELOG.md"
+                    item = f"- [{dt.date.today().isoformat()} · 의도 정렬] {text}"
+                    cl.write_text(_read(cl).replace("## 반영 대기\n", f"## 반영 대기\n{item}\n", 1), encoding="utf-8")
+                    write()
+                    return self._json({"ok": True})
                 if u.path == "/api/rebuild":
                     write()
                     return self._json({"ok": True})
