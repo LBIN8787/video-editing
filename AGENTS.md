@@ -139,7 +139,7 @@ python -m ytflow styles | schemas | status <프로젝트>
 - **결과 확인:** `layout_qa.json` 이 비어 있는지(화살표·글자 겹침, 대비) 보고, 영상을 만든 뒤에는 프레임을 뽑아 직접 확인하고(`skills/video-edit`), `REPORT.md` 의 남은 일을 사용자에게 알립니다.
 - **목소리:** 초안은 edge-tts, **업로드 최종본은 ElevenLabs**(영상 확정 후 채널별 voice_id 지정). API 키는 채팅에 쓰지 않고 환경변수·네트워크 비밀값으로.
 - **외부 도구:** 버전은 `tools/external.json` 에 고정합니다. 올릴 때는 그 도구의 SKILL.md·스크립트를 다시 읽고(네트워크 호출·자동 설치 확인) `docs/05-skills-review.md` 에 기록합니다.
-- **저장 위치 (사용자 PC):** C 드라이브는 쓰지 않습니다. 저장소는 `D:\ytflow\video-editing`, 캐시는 D 의 환경변수 경로(`YTFLOW_CACHE_DIR`·`HF_HOME`·`PLAYWRIGHT_BROWSERS_PATH` 등, `docs/09-storage.md`). C 아래 경로에 큰 파일을 만들지 말고, 필요하면 사용자에게 D 경로를 확인합니다.
+- **저장 위치 (2026-11-15~ Google Drive):** 내려받은 자료·레퍼런스 캡처·분석 결과·완성 영상 같은 **파일은 Google Drive 에서 관리**합니다. PC 는 Google Drive for desktop 의 `ytflow` 폴더를 환경변수 `YTFLOW_DRIVE`(예: `G:\내 드라이브\ytflow`)로 지정해 그 아래에 저장하고(`refs\`·`cache\`·`영상\`), 클라우드 세션은 Drive 커넥터(파일당 10MB 까지)·rclone 으로 올립니다. D 드라이브에 새 파일을 만들지 않고, C 드라이브도 쓰지 않습니다. 동기화하면 깨지는 git 저장소·가상환경·설치 도구는 예외(`docs/09-storage.md` §0).
 - **스키마:** 에이전트가 직접 쓰는 JSON 은 `schemas/*.schema.json` 을 따릅니다(`python -m ytflow schemas` 로 갱신).
 
 ## 폴더

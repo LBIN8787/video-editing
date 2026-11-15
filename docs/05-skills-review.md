@@ -90,7 +90,7 @@
 ## 2026-11-15 rea-video (레퍼런스 영상 역분석)
 - **무엇:** `JuneYaooo/rea-video` (Apache-2.0, 커밋 `5b09832`). 영상 한 편을 장면(샷)마다 나눠 화면이 어떻게 만들어졌는지(실사·2D 애니메이션·코드 렌더·사진 밀기·정지 화면 등 11종), 위에 얹은 자막·글자·스티커, 효과음 위치, 편집 리듬을 정리해 `VIDEO.md`·`report.html`·`storyboard.jpg` 로 냄.
 - **읽은 것:** SKILL.md, references/setup.md, 네트워크 호출(`util.py` 모델 내려받기, `vlm.py` 는 키가 있을 때만). 설치 스크립트는 pip/pipx 만 씀. 자동 유료 호출 없음(`remake-run` 은 쓰지 않음).
-- **쓰는 법:** 영상 파일이 있어야 함. 클라우드는 YouTube 봇 확인으로 내려받기가 막히므로(우회하지 않음) 사용자가 PC 에서 받은 mp4 를 Drive 에 올리거나, PC 에서 직접 `rea-video decompose` 를 돌림(D 드라이브 캐시: `REA_VIDEO_MODELS=D:\ytflow\cache\rea-video`).
+- **쓰는 법:** 영상 파일이 있어야 함. 클라우드는 YouTube 봇 확인으로 내려받기가 막히므로(우회하지 않음) 사용자가 받은 mp4 는 Google Drive(`%YTFLOW_DRIVE%\refs\`)에 두고, PC 에서 `rea-video decompose` 를 돌리거나 클라우드가 Drive 커넥터로 가져옴(2026-11-15~, docs/09 §0).
 - **절차:** `decompose ref.mp4 -o out/ref --lang en` → `review out/ref` → 에이전트가 장면 그림을 보고 `review_answers.json` 작성 → `apply-review` → `VIDEO.md` 를 읽고 움직임 문법을 매뉴얼로.
 
 ## 2026-11-15 ego lite (사용자 PC 의 AI 에이전트용 브라우저)

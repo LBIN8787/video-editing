@@ -6,11 +6,12 @@ description: 사용자 PC 의 ego lite 브라우저(로그인된 사용자 브�
 # 레퍼런스 영상 보기 — ego lite + rea-video (사용자 PC 전용)
 
 클라우드 세션은 YouTube 봇 확인에 막히고(우회하지 않음), ego lite 는 Windows·macOS 에서만 돕니다.
-그래서 **이 스킬은 사용자 PC 의 Claude Code(또는 Codex) 가 `D:\ytflow\video-editing` 에서 실행**합니다.
+그래서 **이 스킬은 사용자 PC 의 Claude Code(또는 Codex) 가 저장소 폴더에서 실행**합니다.
 영상 파일을 내려받지 않습니다. 사용자가 브라우저로 보는 것과 같이 **재생 화면을 보고 캡처**만 합니다.
 
 ## 0. 지킬 것
-- **저장 위치는 D 드라이브만.** 캡처: `D:\ytflow\cache\refs\<영상ID>\`, rea-video 모델: `REA_VIDEO_MODELS=D:\ytflow\cache\rea-video\models`, 가상환경: `D:\ytflow\cache\reavenv`.
+- **캡처·분석 결과는 Google Drive 에** (2026-11-15~, `docs/09-storage.md` §0): `%YTFLOW_DRIVE%\refs\<영상ID>\` (예: `G:\내 드라이브\ytflow\refs\EV8NmofeWPk\`). `YTFLOW_DRIVE` 가 없으면 만들지 말고 사용자에게 Drive 경로를 묻습니다.
+- 가상환경·모델처럼 동기화하면 깨지는 것은 Drive 밖, 저장소 옆 기존 위치에 둡니다(D·C 에 새 폴더를 만들지 않음): 가상환경 `..\reavenv`, 모델 `REA_VIDEO_MODELS=..\rea-models`.
 - **ego lite 는 사용자 로그인 상태를 씁니다.** youtube.com 영상 페이지만 엽니다. 다른 사이트, 댓글 작성·구독·좋아요·설정 변경은 하지 않습니다.
 - 다운로드 도구(yt-dlp 등)에 브라우저 쿠키를 넘기지 않습니다. 광고는 끝날 때까지 기다리고 건너뛰기 버튼만 누릅니다.
 - 캡처·분석 결과(이미지·mp4)는 커밋하지 않습니다. 커밋하는 것은 분석 문서(md/json)뿐입니다.
@@ -21,9 +22,9 @@ description: 사용자 PC 의 ego lite 브라우저(로그인된 사용자 브�
 2. 새 터미널에서 확인: `ego-browser nodejs -e "console.log('ego-browser ready')"` → `ego-browser skill` 을 실행해 **출력된 사용법을 끝까지 읽습니다**(마지막 줄 `[ego-browser:skill] end of guide`). 아래 2단계의 함수 이름은 이 안내를 따릅니다.
 3. rea-video (버전은 `tools/external.json`):
    ```powershell
-   py -3.12 -m venv D:\ytflow\cache\reavenv
-   D:\ytflow\cache\reavenv\Scripts\pip install "rea-video[ocr] @ git+https://github.com/JuneYaooo/rea-video@5b09832ab64c334045b99aaaeb8207e86da765e8"
-   $env:REA_VIDEO_MODELS = "D:\ytflow\cache\rea-video\models"
+   py -3.12 -m venv ..\reavenv
+   ..\reavenv\Scripts\pip install "rea-video[ocr] @ git+https://github.com/JuneYaooo/rea-video@5b09832ab64c334045b99aaaeb8207e86da765e8"
+   $env:REA_VIDEO_MODELS = (Resolve-Path ..).Path + "\rea-models"
    ```
 
 ## 2. 영상 보기 → 캡처 (ego-browser)
@@ -31,16 +32,16 @@ description: 사용자 PC 의 ego lite 브라우저(로그인된 사용자 브�
 1. `https://www.youtube.com/watch?v=<ID>` 를 열고 광고가 끝나 본편이 재생될 때까지 기다립니다.
 2. 화질을 1080p(없으면 720p)로, 영상 영역만 보이게 합니다(극장 모드 또는 `video` 요소 크기·위치로 잘라 캡처).
 3. **재생하면서 찍지 말고 '정지 → 이동 → 찍기'** 를 반복합니다. 시간이 정확합니다.
-   - `video.pause()` → `video.currentTime = t` → `seeked` 이벤트를 기다림 → 한 프레임 더 그려질 때까지 대기 → `video` 영역 캡처 → `D:\ytflow\cache\refs\<ID>\frames\f_<t*1000 을 6자리>.png`
+   - `video.pause()` → `video.currentTime = t` → `seeked` 이벤트를 기다림 → 한 프레임 더 그려질 때까지 대기 → `video` 영역 캡처 → `%YTFLOW_DRIVE%\refs\<ID>\frames\f_<t*1000 을 6자리>.png`
    - 기본 간격 **0.25초**(초당 4장). 5분 영상이면 약 1,200장.
    - 이해를 돕는 애니메이션 구간(정보 장면)은 사용자 지정 구간이나 1차 분석에서 고른 구간을 **0.1초** 간격으로 다시 찍습니다 → `frames_fine\`.
 4. 같은 페이지에서 제목·채널·길이·공개일과, 있으면 자막(스크립트 표시) 문장·시각을 `meta.json`, `transcript.txt` 로 저장합니다.
 
 ## 3. 캡처 묶음 → 영상 → rea-video
 ```powershell
-python scripts/frames_to_clip.py D:\ytflow\cache\refs\<ID>\frames --fps 4 -o D:\ytflow\cache\refs\<ID>\ref.mp4
-D:\ytflow\cache\reavenv\Scripts\rea-video decompose D:\ytflow\cache\refs\<ID>\ref.mp4 -o D:\ytflow\cache\refs\<ID>\rea --lang en --no-asr
-D:\ytflow\cache\reavenv\Scripts\rea-video review D:\ytflow\cache\refs\<ID>\rea
+python scripts/frames_to_clip.py $env:YTFLOW_DRIVE\refs\<ID>\frames --fps 4 -o $env:YTFLOW_DRIVE\refs\<ID>\ref.mp4
+..\reavenv\Scripts\rea-video decompose $env:YTFLOW_DRIVE\refs\<ID>\ref.mp4 -o $env:YTFLOW_DRIVE\refs\<ID>\rea --lang en --no-asr
+..\reavenv\Scripts\rea-video review $env:YTFLOW_DRIVE\refs\<ID>\rea
 ```
 - 소리가 없는 캡처라 효과음·목소리 분석은 건너뜁니다(소리는 `transcript.txt` 로 대신).
 - `review_tasks.json` 의 장면 그림을 **직접 보고** `review_answers.json` 을 채운 뒤 `rea-video apply-review ... --by claude` 를 실행합니다.
@@ -56,4 +57,4 @@ D:\ytflow\cache\reavenv\Scripts\rea-video review D:\ytflow\cache\refs\<ID>\rea
 - 끝에 "우리 stage 엔진에 없는 움직임" 목록과 구현 제안을 씁니다.
 
 ## 5. 마무리
-`docs/31-motion-grammar.md` 만 커밋·푸시합니다. 캡처 폴더 경로와 장 수를 보고합니다. 클라우드 세션은 이 문서를 읽고 매뉴얼과 `ytflow/stages/stage.py` 를 고칩니다.
+`docs/31-motion-grammar.md` 만 커밋·푸시합니다. Google Drive 의 캡처 폴더 경로와 장 수를 보고합니다(클라우드 세션은 Drive 커넥터로 장면 그림을 볼 수 있음). 클라우드 세션은 이 문서를 읽고 매뉴얼과 `ytflow/stages/stage.py` 를 고칩니다.

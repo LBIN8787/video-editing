@@ -9,9 +9,17 @@ ROOT = Path(__file__).resolve().parent.parent
 CONFIG_DIR = ROOT / "config"
 PROMPT_DIR = ROOT / "prompts"
 DATA_DIR = ROOT / "data"          # 벤치마킹 원자료 / 스타일 프로필
-PROJECTS_DIR = ROOT / "projects"  # 영상 1편 = 프로젝트 폴더 1개 (기획 문서가 git 에 남도록 저장소 안 — 큰 드라이브를 쓰려면 저장소째 D: 에, docs/09-storage.md)
-# 캐시(받은 자료·음성 캐시·측정 결과)만 다른 곳에: 환경변수 YTFLOW_CACHE_DIR (예: D:\ytflow-cache)
-CACHE_DIR = Path(os.environ["YTFLOW_CACHE_DIR"]).expanduser() if os.environ.get("YTFLOW_CACHE_DIR") else ROOT / ".cache"
+PROJECTS_DIR = ROOT / "projects"  # 영상 1편 = 프로젝트 폴더 1개 (기획 문서가 git 에 남도록 저장소 안, docs/09-storage.md)
+# 내려받은 자료·캡처·완성 영상은 Google Drive (2026-11-15~): 환경변수 YTFLOW_DRIVE = Drive 안 ytflow 폴더
+# (PC: Google Drive for desktop 의 예 "G:\내 드라이브\ytflow"). 없으면 None.
+DRIVE_DIR = Path(os.environ["YTFLOW_DRIVE"]).expanduser() if os.environ.get("YTFLOW_DRIVE") else None
+# 캐시(받은 자료·음성 캐시·측정 결과): YTFLOW_CACHE_DIR > YTFLOW_DRIVE\cache > 저장소 .cache
+if os.environ.get("YTFLOW_CACHE_DIR"):
+    CACHE_DIR = Path(os.environ["YTFLOW_CACHE_DIR"]).expanduser()
+elif DRIVE_DIR:
+    CACHE_DIR = DRIVE_DIR / "cache"
+else:
+    CACHE_DIR = ROOT / ".cache"
 STYLES_DIR = ROOT / "styles"      # 편집 스타일 라이브러리 (스타일 1개 = 폴더 1개)
 CHANNELS_DIR = ROOT / "channels"  # 운영 채널 (채널 1개 = 폴더 1개: channel.yaml · episodes.md)
 FORMATS_DIR = ROOT / "formats"    # 영상 형식: longform(장편 칼럼·보고서) | shorts(짧은 안내)

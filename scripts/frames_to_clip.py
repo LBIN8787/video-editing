@@ -3,7 +3,7 @@
 ego lite 로 '정지 → 이동 → 찍기' 한 레퍼런스 화면을 rea-video 같은 영상 분석 도구에 넣기 위한 것.
 파일 이름의 숫자(밀리초)로 정렬하고, 빠진 시각은 앞 프레임을 반복해 원래 시간축을 지킨다.
 
-    python scripts/frames_to_clip.py D:\\ytflow\\cache\\refs\\<ID>\\frames --fps 4 -o ref.mp4
+    python scripts/frames_to_clip.py %YTFLOW_DRIVE%\\refs\\<ID>\\frames --fps 4 -o ref.mp4
 """
 from __future__ import annotations
 
