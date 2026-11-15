@@ -1,7 +1,7 @@
 {
  "project": "20261116-market-daily",
  "manual_version": "34",
- "checked": "2026-11-15T21:18:06",
+ "checked": "2026-11-15T21:45:19",
  "pass": true,
  "rows": [
   {
@@ -365,8 +365,8 @@
    "gate": "G5",
    "level": "SHOULD",
    "item": "반복 피로: 글씨·도형뿐인 장면이 길게 이어지지 않게 (권고 2장면까지, 05 §0-3 — v34 유동)",
-   "ok": true,
-   "detail": "최장 2연속 (장면 2)"
+   "ok": false,
+   "detail": "최장 4연속 (장면 15)"
   },
   {
    "gate": "G5",
@@ -380,7 +380,7 @@
    "level": "SHOULD",
    "item": "반복 피로: 눈요기 있는 장면 60% 이상",
    "ok": false,
-   "detail": "10/17"
+   "detail": "8/17"
   },
   {
    "gate": "G5",
@@ -427,6 +427,20 @@
   {
    "gate": "G5",
    "level": "SHOULD",
+   "item": "자료 화면 공백 ≤45초",
+   "ok": false,
+   "detail": "최장 527초"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "장 표지 간격 ≤200초",
+   "ok": true,
+   "detail": "최장 145초"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
    "item": "스타일 조합: 상황에 맞춰 섞기 (권고 4종, v34 유동)",
    "ok": true,
    "detail": "7종 ['archive-doc', 'data-report', 'hybrid-causal', 'kinetic-type', 'map-journey', 'paper-column', 'statement-brief']"
@@ -436,14 +450,14 @@
    "level": "SHOULD",
    "item": "한 스타일이 40% 넘지 않음 (권고, v34 유동)",
    "ok": true,
-   "detail": "paper-column 0.32"
+   "detail": "paper-column 0.33"
   },
   {
    "gate": "G5",
    "level": "SHOULD",
    "item": "한 장면 안에서 겹친 장면(layers) 3개 안팎 (권고, v34 유동)",
-   "ok": true,
-   "detail": "4"
+   "ok": false,
+   "detail": "2"
   },
   {
    "gate": "G5",
@@ -455,7 +469,7 @@
   {
    "gate": "G5",
    "level": "SHOULD",
-   "item": "강조는 아껴서: 1분에 1번 안팎 (이 영상 3번, v34 유동)",
+   "item": "강조는 아껴서: 1분에 1번 안팎 (이 영상 9번, v34 유동)",
    "ok": true,
    "detail": "1번 [(22, 'kinetic')]"
   },
