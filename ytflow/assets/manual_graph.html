@@ -1,0 +1,460 @@
+<title>ytflow 매뉴얼 그래프</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* 편집 프로그램처럼: 위에 상태 줄, 가운데 작업 화면(흐름·구조·타임라인·편집), 오른쪽 속성 패널 */
+:root{
+  --bg:#f4f5f8; --panel:#ffffff; --sunk:#eceef3; --fg:#161a23; --muted:#5d6577; --line:#d8dce5;
+  --accent:#3358d4; --accent-soft:#e3e9fb;
+  --reject:#c8372d; --reject-soft:#fbe5e2; --pass:#1f8a4c; --pass-soft:#ddf3e6; --pend:#b26b00; --pend-soft:#fdf0d9;
+  --t1:#d0453a; --t2:#2f7fd1; --t3:#8a5bd6; --t4:#c78a00; --t5:#1f9c8a; --t6:#d4558f; --t7:#5f7a12; --t8:#c4612a; --t9:#64748b;
+  --font:"IBM Plex Sans KR",system-ui,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12151c; --panel:#1a1e27; --sunk:#151820; --fg:#e7eaf1; --muted:#9aa3b5; --line:#2d3342;
+  --accent:#7c9bff; --accent-soft:#232c48;
+  --reject:#ff7a6e; --reject-soft:#3a201e; --pass:#5fd394; --pass-soft:#16301f; --pend:#f0b04f; --pend-soft:#35280f;
+  --t1:#ff7a6e; --t2:#6aaeff; --t3:#b593ff; --t4:#f0c04f; --t5:#4fd4c0; --t6:#ff8cc0; --t7:#a8c64a; --t8:#ff9a5f; --t9:#a0aec0;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12151c; --panel:#1a1e27; --sunk:#151820; --fg:#e7eaf1; --muted:#9aa3b5; --line:#2d3342;
+  --accent:#7c9bff; --accent-soft:#232c48;
+  --reject:#ff7a6e; --reject-soft:#3a201e; --pass:#5fd394; --pass-soft:#16301f; --pend:#f0b04f; --pend-soft:#35280f;
+  --t1:#ff7a6e; --t2:#6aaeff; --t3:#b593ff; --t4:#f0c04f; --t5:#4fd4c0; --t6:#ff8cc0; --t7:#a8c64a; --t8:#ff9a5f; --t9:#a0aec0;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:14px;line-height:1.5;margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 40px;max-width:1440px;margin:0 auto}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 24px;margin-bottom:14px}
+header.top h1{font-size:20px;margin:0;font-weight:700;letter-spacing:-.01em}
+header.top p{margin:2px 0 0;color:var(--muted);font-size:13px;max-width:62ch}
+.mode{font-family:var(--mono);font-size:11px;padding:3px 8px;border-radius:4px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.mode.live{border-color:var(--pass);color:var(--pass)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:14px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:8px 12px}
+.tile b{display:block;font-family:var(--mono);font-size:20px;font-variant-numeric:tabular-nums}
+.tile span{font-size:12px;color:var(--muted)}
+.tile.warn b{color:var(--pend)}
+nav.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:14px;overflow-x:auto}
+nav.tabs a{padding:8px 14px;text-decoration:none;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap;font-weight:500}
+nav.tabs a[aria-current="page"]{color:var(--fg);border-bottom-color:var(--accent)}
+nav.tabs a:focus-visible,button:focus-visible,.hit:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:14px;align-items:start}
+@media (max-width:980px){.grid{grid-template-columns:minmax(0,1fr)}}
+.stage{background:var(--panel);border:1px solid var(--line);border-radius:6px;min-width:0}
+.stage-head{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line)}
+.stage-head h2{font-size:14px;margin:0;font-weight:700}
+.stage-head .hint{color:var(--muted);font-size:12px}
+.scroll{overflow-x:auto}
+aside.inspector{background:var(--panel);border:1px solid var(--line);border-radius:6px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);max-height:calc(100vh - 24px);overflow:auto}
+aside.inspector .in-head{padding:10px 14px;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted);font-family:var(--mono);letter-spacing:.04em}
+aside.inspector .in-body{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+aside.inspector h3{margin:0;font-size:16px;line-height:1.35;text-wrap:balance}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:12.5px}
+.kv dt{color:var(--muted)} .kv dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;padding:1px 7px;border-radius:10px;border:1px solid var(--line);white-space:nowrap}
+.chip.reject{background:var(--reject-soft);color:var(--reject);border-color:transparent}
+.chip.pass{background:var(--pass-soft);color:var(--pass);border-color:transparent}
+.chip.pend{background:var(--pend-soft);color:var(--pend);border-color:transparent}
+.chip.must{color:var(--reject);border-color:var(--reject)} .chip.should{color:var(--accent);border-color:var(--accent)} .chip.eye{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.rel{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.rel li button{all:unset;cursor:pointer;display:block;padding:3px 6px;border-radius:4px;font-size:12.5px;width:100%;box-sizing:border-box}
+.rel li button:hover,.rel li button:focus-visible{background:var(--sunk)}
+.rel small{color:var(--muted);font-family:var(--mono);font-size:10.5px;margin-right:6px}
+pre.body{white-space:pre-wrap;font-family:var(--font);font-size:12.5px;background:var(--sunk);padding:10px;border-radius:4px;margin:0;max-height:340px;overflow:auto}
+pre.diff{white-space:pre;font-family:var(--mono);font-size:11px;background:var(--sunk);padding:10px;border-radius:4px;margin:0;max-height:420px;overflow:auto}
+.btn{cursor:pointer;border:1px solid var(--line);background:var(--panel);border-radius:5px;padding:5px 11px;font-size:13px}
+.btn:hover{background:var(--sunk)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.label{font-size:11px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;font-family:var(--mono)}
+/* 흐름 */
+svg text{fill:var(--fg);font-family:var(--font)}
+svg .muted{fill:var(--muted)}
+.edge{fill:none;stroke-width:1.4;opacity:.38;transition:opacity .15s}
+.edge.dim{opacity:.06} .edge.hot{opacity:.95;stroke-width:2.2}
+.hit{cursor:pointer}
+.node-dim{opacity:.25}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+/* 구조 */
+.pipe{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:14px}
+@media (max-width:700px){.pipe{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.step{border:1px solid var(--line);border-radius:6px;padding:10px;display:flex;flex-direction:column;gap:6px;background:var(--panel);text-align:left;cursor:pointer;min-width:0}
+.step:hover{border-color:var(--accent)}
+.step .n{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.step strong{font-size:14px}
+.step .out{font-size:11.5px;color:var(--muted);overflow-wrap:anywhere}
+.bar{display:flex;height:6px;border-radius:3px;overflow:hidden;background:var(--sunk)}
+.bar span{display:block;height:100%}
+.docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;padding:0 14px 14px}
+.doc{border:1px solid var(--line);border-radius:6px;min-width:0}
+.doc h4{margin:0;padding:8px 10px;font-size:13px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:8px}
+.doc h4 small{font-family:var(--mono);color:var(--muted);font-weight:400}
+.doc ul{list-style:none;margin:0;padding:4px}
+.doc li button{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:8px;width:100%;padding:3px 6px;border-radius:4px;font-size:12.5px}
+.doc li button:hover,.doc li button:focus-visible{background:var(--sunk)}
+.doc li.sub button{padding-left:18px}
+.doc li .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.heat{font-family:var(--mono);font-size:10.5px;padding:0 5px;border-radius:3px;color:var(--muted)}
+.heat.h1{background:var(--accent-soft);color:var(--accent)}
+.heat.h2{background:var(--accent);color:#fff}
+/* 타임라인 */
+.tl-wrap{padding:10px 14px 14px}
+/* 편집 */
+.forms{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;padding:14px}
+.card{border:1px solid var(--line);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card h3{margin:0;font-size:14px}
+.card p{margin:0;font-size:12.5px;color:var(--muted)}
+.field{display:flex;flex-direction:column;gap:3px;font-size:12.5px}
+.field input,.field select,.field textarea{border:1px solid var(--line);background:var(--bg);border-radius:4px;padding:6px 8px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.editor{padding:0 14px 14px}
+.editor textarea{width:100%;min-height:460px;font-family:var(--mono);font-size:12.5px;line-height:1.55;border:1px solid var(--line);background:var(--bg);border-radius:4px;padding:10px;resize:vertical}
+.cmd{font-family:var(--mono);font-size:12px;background:var(--sunk);border-radius:4px;padding:8px;overflow-x:auto;white-space:pre}
+.pend-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.pend-list li{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;background:var(--pend-soft);padding:6px 8px;border-radius:4px}
+.pend-list li span{flex:1;min-width:0;overflow-wrap:anywhere}
+.toast{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:6px;font-size:13px;max-width:min(480px,calc(100vw - 32px))}
+.empty{color:var(--muted);font-size:12.5px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<!--DATA-->
+<div class="wrap">
+  <header class="top">
+    <div style="flex:1;min-width:240px">
+      <h1>ytflow 매뉴얼 그래프</h1>
+      <p>영상편집 에이전트가 따르는 매뉴얼을 그래프로 봅니다. 사용자 기각이 어느 버전에서 어떤 절·게이트를 바꿨는지 따라가고, 매뉴얼을 직접 고칩니다.</p>
+    </div>
+    <span id="mode" class="mode">읽기 전용</span>
+  </header>
+  <div class="tiles" id="tiles"></div>
+  <nav class="tabs" aria-label="보기">
+    <a href="#flow">피드백 → 매뉴얼</a><a href="#map">매뉴얼 구조</a><a href="#timeline">버전 타임라인</a><a href="#edit">고치기·제어</a>
+  </nav>
+  <div class="grid">
+    <main id="view" class="stage"></main>
+    <aside class="inspector" aria-live="polite"><div class="in-head">속성</div><div class="in-body" id="insp"><p class="empty">노드를 누르면 연결과 내용이 여기 나옵니다.</p></div></aside>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+<script>
+(function(){
+"use strict";
+let G = window.__MANUAL_GRAPH__ || null;
+const STATIC = window.__STATIC__ !== false && !!G;
+let LIVE = false;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const cut = (s, n) => { s = String(s ?? ""); return s.length > n ? s.slice(0, n - 1) + "…" : s; };
+const THEME_VAR = {motion:"--t1",sound:"--t2",background:"--t3",emphasis:"--t4",variety:"--t5",script:"--t6",depth:"--t7",intent:"--t8",length:"--t9"};
+const tc = k => `var(${THEME_VAR[k] || "--t9"})`;
+let N = {}, OUT = {}, IN = {}, selected = null;
+let editorState = {path:null, line:null};
+
+function index(){
+  N = {}; OUT = {}; IN = {};
+  G.nodes.forEach(n => N[n.id] = n);
+  G.edges.forEach(e => { (OUT[e.s] ||= []).push(e); (IN[e.t] ||= []).push(e); });
+}
+function toast(msg){ const t = $("#toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(() => t.hidden = true, 3200); }
+async function api(path, body){
+  const r = await fetch(path, body ? {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(body)} : {});
+  const j = await r.json(); if (!r.ok || j.error) throw new Error(j.error || r.statusText); return j;
+}
+async function reload(){ G = await api("/api/graph"); index(); renderTiles(); route(); if (selected && N[selected]) inspect(selected); }
+
+function nodeName(n){
+  if (!n) return "";
+  switch(n.kind){
+    case "version": return `v${n.v}`;
+    case "review": return `${n.date.slice(5)} ${n.project.replace(/^\d{8}-/,"")}`;
+    case "section": { const d = N[n.doc]; return `${d ? d.key : ""} §${n.num.startsWith("h") ? "" : n.num} ${n.label}`.replace("§ ", ""); }
+    case "doc": return `${n.key} ${n.label}`;
+    case "gate": return `${n.key} ${n.label}`;
+    case "step": return `${n.n}. ${n.label}`;
+    default: return n.label || n.id;
+  }
+}
+
+/* ---------- 요약 ---------- */
+function renderTiles(){
+  const s = G.stats;
+  const T = [
+    [`v${s.manual_version}`, "지금 매뉴얼 버전"],
+    [`${s.rejects} / ${s.passes}`, "기각 / 통과 검토"],
+    [s.pending, "반영 대기", s.pending ? "warn" : ""],
+    [`${s.rules}`, `규칙 (MUST ${s.must})`],
+    [`${s.auto} / ${s.rules}`, "자동으로 재는 규칙"],
+    [s.checks, "검사 코드 줄"],
+  ];
+  $("#tiles").innerHTML = T.map(([b, l, c]) => `<div class="tile ${c||""}"><b>${esc(b)}</b><span>${esc(l)}</span></div>`).join("");
+}
+
+/* ---------- 흐름: 검토 → 버전 → 절·게이트 ---------- */
+function renderFlow(){
+  const reviews = G.nodes.filter(n => n.kind === "review");
+  const versions = G.nodes.filter(n => n.kind === "version");
+  const tset = new Set(G.edges.filter(e => e.kind === "touched").map(e => e.t));
+  const order = id => { const n = N[id]; if (n.kind === "gate") return [9, 0, n.key];
+    const dk = n.kind === "doc" ? n.key : (N[n.doc]?.key || ""); return [0, dk === "README" ? "00" : dk, n.line || 0]; };
+  const targets = [...tset].map(id => N[id]).filter(Boolean).sort((a, b) => { const x = order(a.id), y = order(b.id);
+    return x[0] - y[0] || String(x[1]).localeCompare(String(y[1])) || (x[2] > y[2] ? 1 : x[2] < y[2] ? -1 : 0); });
+  const RH = 24, top = 34;
+  const H = top + Math.max(reviews.length, versions.length, targets.length) * RH + 10;
+  const W = 1100, xR = 10, wR = 250, xV = 420, wV = 250, xT = 840, wT = 250;
+  const pos = {};
+  const place = (arr, x, w) => { const off = top + (Math.max(reviews.length, versions.length, targets.length) - arr.length) * RH / 2;
+    arr.forEach((n, i) => pos[n.id] = {x, w, y: off + i * RH}); };
+  place(reviews, xR, wR); place(versions, xV, wV); place(targets, xT, wT);
+  let edges = "", nodes = "";
+  G.edges.forEach((e, i) => {
+    if (!["applied_in", "approved_in", "touched"].includes(e.kind)) return;
+    const a = pos[e.s], b = pos[e.t]; if (!a || !b) return;
+    const x1 = a.x + a.w, y1 = a.y + 9, x2 = b.x, y2 = b.y + 9, mx = (x1 + x2) / 2;
+    const col = e.kind === "approved_in" ? "var(--pass)" : e.kind === "applied_in" ? (e.how === "inferred" ? "var(--pend)" : "var(--reject)") : "var(--accent)";
+    edges += `<path class="edge" data-s="${esc(e.s)}" data-t="${esc(e.t)}" d="M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}" stroke="${col}"${e.how === "inferred" ? ' stroke-dasharray="4 3"' : ""}/>`;
+  });
+  const box = (n, label, fill, stroke, extra = "") => { const p = pos[n.id];
+    return `<g class="hit" tabindex="0" role="button" data-id="${esc(n.id)}" aria-label="${esc(label)}">
+      <rect x="${p.x}" y="${p.y}" width="${p.w}" height="18" rx="3" fill="${fill}" stroke="${stroke}"/>
+      ${extra}<text x="${p.x + 8}" y="${p.y + 13}" font-size="11.5">${esc(label)}</text></g>`; };
+  reviews.forEach(n => {
+    const lab = cut(`${n.date.slice(5)} ${n.project.replace(/^\d{8}-/, "")} · v${n.manual_version}`, 38);
+    const dots = (n.themes || []).slice(0, 3).map((t, i) => `<circle cx="${pos[n.id].x + wR - 8 - i * 9}" cy="${pos[n.id].y + 9}" r="3.2" fill="${tc(t)}"/>`).join("");
+    nodes += box(n, lab, n.result === "pass" ? "var(--pass-soft)" : "var(--reject-soft)", "none", dots);
+  });
+  versions.forEach(n => nodes += box(n, cut(`v${n.v}  ${n.summary.replace(/^v\d+:\s*/, "")}`, 40), "var(--accent-soft)", "none"));
+  targets.forEach(n => nodes += box(n, cut(nodeName(n), 38), "var(--sunk)", "var(--line)"));
+  const head = (x, t) => `<text x="${x}" y="18" font-size="11" class="muted" letter-spacing=".06em">${t}</text>`;
+  $("#view").innerHTML = `
+    <div class="stage-head"><h2>사용자 피드백이 매뉴얼을 바꾼 흐름</h2>
+      <span class="hint">검토 → 반영된 버전 → 그 버전이 고친 절·게이트. 줄에 올리거나 누르면 연결만 남습니다.</span></div>
+    <div class="stage-head legend">
+      <span><i style="background:var(--reject)"></i>기각 → 반영</span><span><i style="background:var(--pass)"></i>통과 (그 버전 유지)</span>
+      <span><i style="background:var(--accent)"></i>버전이 고친 곳</span>
+      ${Object.keys(THEME_VAR).map(k => `<span><i style="background:${tc(k)};border-radius:50%"></i>${esc((N["theme:" + k] || {}).label || k)}</span>`).join("")}
+    </div>
+    <div class="scroll"><svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:820px;display:block" role="img" aria-label="검토에서 버전, 버전에서 매뉴얼 절로 가는 연결 그림">
+      ${head(xR, "검토 (날짜 · 프로젝트 · 당시 버전)")}${head(xV, "매뉴얼 버전")}${head(xT, "고친 절 · 게이트")}
+      <g id="edges">${edges}</g><g id="nodes">${nodes}</g></svg></div>`;
+  wireGraph();
+}
+function connected(id){
+  const set = new Set([id]);
+  const walk = (id, dir, depth) => { if (depth > 2) return; (dir === "out" ? OUT[id] : IN[id] || []).forEach(e => {
+    if (!["applied_in","approved_in","touched"].includes(e.kind)) return;
+    const o = dir === "out" ? e.t : e.s; if (!set.has(o)) { set.add(o); walk(o, dir, depth + 1); } }); };
+  walk(id, "out", 1); walk(id, "in", 1); return set;
+}
+function highlight(id){
+  const svg = $("#view svg"); if (!svg) return;
+  const set = id ? connected(id) : null;
+  svg.querySelectorAll(".edge").forEach(p => { const on = set && set.has(p.dataset.s) && set.has(p.dataset.t);
+    p.classList.toggle("hot", !!on); p.classList.toggle("dim", !!set && !on); });
+  svg.querySelectorAll(".hit").forEach(g => g.classList.toggle("node-dim", !!set && !set.has(g.dataset.id)));
+}
+function wireGraph(){
+  document.querySelectorAll("#view .hit").forEach(g => {
+    g.addEventListener("mouseenter", () => highlight(g.dataset.id));
+    g.addEventListener("mouseleave", () => highlight(selected));
+    g.addEventListener("click", () => inspect(g.dataset.id));
+    g.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); inspect(g.dataset.id); } });
+  });
+  if (selected) highlight(selected);
+}
+
+/* ---------- 구조: 8단계·게이트·문서·절 ---------- */
+function renderMap(){
+  const steps = G.nodes.filter(n => n.kind === "step").sort((a, b) => a.n - b.n);
+  const rulesBy = g => G.nodes.filter(n => n.kind === "rule" && n.gate === g);
+  const checksBy = g => G.nodes.filter(n => n.kind === "check" && n.gate === g).length;
+  const cur = G.stats.manual_version;
+  const stepHtml = steps.map(s => { const rs = rulesBy(s.gate), m = rs.filter(r => r.level === "MUST").length,
+      sh = rs.filter(r => r.level === "SHOULD").length, ey = rs.filter(r => r.level === "EYE").length, t = rs.length || 1, gate = N[s.gate];
+    return `<button class="step" data-id="${esc(s.gate)}"><span class="n">${s.n}단계 · ${esc(gate.key)} ${esc(gate.label)}</span>
+      <strong>${esc(s.label)}</strong><span class="out">${esc(s.outputs)}</span>
+      <div class="bar" title="MUST ${m} · SHOULD ${sh} · EYE ${ey}"><span style="width:${m/t*100}%;background:var(--reject)"></span><span style="width:${sh/t*100}%;background:var(--accent)"></span><span style="width:${ey/t*100}%;background:var(--muted)"></span></div>
+      <span class="out">규칙 ${rs.length} (MUST ${m}) · 검사 코드 ${checksBy(s.gate)}</span></button>`; }).join("");
+  const docs = G.nodes.filter(n => n.kind === "doc").sort((a, b) => (a.key === "README" ? "00" : a.key).localeCompare(b.key === "README" ? "00" : b.key));
+  const docHtml = docs.map(d => {
+    const secs = G.nodes.filter(n => n.kind === "section" && n.doc === d.id).sort((a, b) => a.line - b.line);
+    const items = secs.map(s => { const lv = s.last_version || s.tag_version; const age = lv ? cur - lv : 99;
+      const cls = lv == null ? "" : age <= 3 ? "h2" : age <= 10 ? "h1" : "";
+      return `<li class="${s.level === 3 ? "sub" : ""}"><button data-id="${esc(s.id)}"><span class="t">${esc(s.num.startsWith("h") ? "" : s.num + " ")}${esc(s.label)}</span><span class="heat ${cls}">${lv ? "v" + lv : ""}</span></button></li>`; }).join("");
+    return `<div class="doc"><h4><button class="btn" style="all:unset;cursor:pointer" data-id="${esc(d.id)}">${esc(d.key)} · ${esc(cut(d.label.replace(/^\d+\.\s*/, ""), 34))}</button><small>${d.lines}줄</small></h4><ul>${items}</ul></div>`;
+  }).join("");
+  $("#view").innerHTML = `
+    <div class="stage-head"><h2>한 편을 만드는 8단계와 게이트</h2><span class="hint">막대: MUST · SHOULD · 사람 눈(EYE) 비율. 누르면 그 게이트의 규칙과 검사 코드.</span></div>
+    <div class="pipe">${stepHtml}</div>
+    <div class="stage-head"><h2>매뉴얼 문서와 절</h2><span class="hint">오른쪽 표시는 그 절을 마지막으로 바꾼 버전 (진할수록 최근).</span></div>
+    <div class="docs">${docHtml}</div>`;
+  document.querySelectorAll("#view [data-id]").forEach(b => b.addEventListener("click", () => inspect(b.dataset.id)));
+}
+
+/* ---------- 타임라인: 버전 × 피드백 주제 ---------- */
+function renderTimeline(){
+  const versions = G.nodes.filter(n => n.kind === "version");
+  const reviews = G.nodes.filter(n => n.kind === "review");
+  const themes = G.nodes.filter(n => n.kind === "theme");
+  const L = 150, CW = 28, W = L + versions.length * CW + 20, rowH = 22;
+  const rows = [["검토 기각", "rev-r"], ["검토 통과", "rev-p"], ...themes.map(t => [t.label, t.id])];
+  const H = 46 + rows.length * rowH + 10;
+  const x = v => L + (v - 1) * CW + CW / 2;
+  let g = "";
+  rows.forEach((r, i) => { const y = 46 + i * rowH;
+    g += `<rect x="0" y="${y}" width="${W}" height="${rowH}" fill="${i % 2 ? "var(--sunk)" : "transparent"}"/>
+      <text x="8" y="${y + 15}" font-size="11.5" class="${i < 2 ? "" : "muted"}">${esc(r[0])}</text>`; });
+  versions.forEach(v => { const xx = x(v.v);
+    g += `<text x="${xx}" y="22" font-size="10" text-anchor="middle" font-family="var(--mono)" class="muted">v${v.v}</text>`;
+    if (v.v === 1 || versions[v.v - 2]?.date !== v.date) g += `<text x="${xx - CW/2 + 2}" y="38" font-size="9.5" class="muted">${esc(v.date.slice(5))}</text><line x1="${xx - CW/2}" x2="${xx - CW/2}" y1="28" y2="${H}" stroke="var(--line)"/>`;
+    v.themes.forEach(t => { const ri = rows.findIndex(r => r[1] === "theme:" + t), y = 46 + ri * rowH;
+      g += `<rect class="hit" data-id="${esc(v.id)}" x="${xx - 10}" y="${y + 4}" width="20" height="${rowH - 8}" rx="3" fill="${tc(t)}" opacity=".85"><title>v${v.v} · ${esc(N["theme:" + t].label)}</title></rect>`; });
+  });
+  const stack = {};
+  reviews.forEach(r => { const target = r.result === "pass" ? r.manual_version : ((OUT[r.id] || []).find(e => e.kind === "applied_in")?.t || "").replace("ver:", "") || r.manual_version;
+    const ri = r.result === "pass" ? 1 : 0, key = ri + ":" + target, k = stack[key] = (stack[key] || 0) + 1, y = 46 + ri * rowH + rowH / 2;
+    g += `<circle class="hit" data-id="${esc(r.id)}" cx="${x(+target) - 8 + (k - 1) * 6}" cy="${y}" r="4.5" fill="${r.result === "pass" ? "var(--pass)" : "var(--reject)"}" stroke="var(--panel)"><title>${esc(r.date + " " + r.project + " " + (r.result === "pass" ? "통과" : "기각 → 반영 버전"))}</title></circle>`; });
+  const cur = x(G.stats.manual_version);
+  g += `<line x1="${cur}" x2="${cur}" y1="26" y2="${H}" stroke="var(--accent)" stroke-width="2"/><polygon points="${cur - 5},26 ${cur + 5},26 ${cur},33" fill="var(--accent)"/>`;
+  const counts = themes.map(t => ({t, n: reviews.filter(r => r.result === "reject" && r.themes.includes(t.key)).length})).sort((a, b) => b.n - a.n);
+  const max = Math.max(1, ...counts.map(c => c.n));
+  $("#view").innerHTML = `
+    <div class="stage-head"><h2>버전 타임라인</h2><span class="hint">편집 프로그램의 트랙처럼: 가로는 버전, 세로는 피드백 주제. 기각 점은 그 기각이 반영된 버전에, 통과 점은 통과한 버전에 찍힙니다. 파란 막대는 지금 버전.</span></div>
+    <div class="scroll tl-wrap"><svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:${Math.min(W, 900)}px;display:block" role="img" aria-label="버전별 피드백 주제 타임라인">${g}</svg></div>
+    <div class="stage-head"><h2>기각 사유가 가장 많이 겨눈 곳</h2><span class="hint">한 기각이 여러 주제에 걸칠 수 있습니다.</span></div>
+    <div class="tl-wrap" style="display:grid;gap:6px">${counts.map(c => `<div style="display:grid;grid-template-columns:130px 1fr 28px;gap:10px;align-items:center;font-size:12.5px">
+      <span>${esc(c.t.label)}</span><div class="bar" style="height:12px"><span style="width:${c.n / max * 100}%;background:${tc(c.t.key)}"></span></div><b style="font-family:var(--mono);text-align:right">${c.n}</b></div>`).join("")}</div>`;
+  document.querySelectorAll("#view .hit").forEach(b => b.addEventListener("click", () => inspect(b.dataset.id)));
+}
+
+/* ---------- 고치기·제어 ---------- */
+function cmdBox(c){ return `<div class="row"><div class="cmd" style="flex:1;min-width:0">${esc(c)}</div><button class="btn copy" data-c="${esc(c)}">복사</button></div>`; }
+function renderEdit(){
+  const docs = G.nodes.filter(n => n.kind === "doc");
+  const pend = G.pending || [];
+  const dis = LIVE ? "" : "disabled";
+  $("#view").innerHTML = `
+    <div class="stage-head"><h2>매뉴얼 고치기와 버전 제어</h2>
+      <span class="hint">${LIVE ? "로컬 서버에 연결됨: 저장하면 바로 manual/ 파일이 바뀝니다." : "읽기 전용 화면입니다. 저장소에서 <code>python -m ytflow manual-ui</code> 를 켜면 여기서 바로 고칩니다. 지금은 같은 일을 하는 명령을 복사해 쓰세요."}</span></div>
+    <div class="forms">
+      <div class="card"><h3>1. 검토 기록</h3><p>영상을 보고 통과·기각을 남깁니다. 기각은 '반영 대기'에 쌓이고, 비우기 전까지 check G0 가 실패합니다.</p>
+        <label class="field">프로젝트 <input id="rv-proj" placeholder="20261115-market-fsr"></label>
+        <label class="field">결과 <select id="rv-res"><option value="reject">기각</option><option value="pass">통과</option></select></label>
+        <label class="field">이유 (기각은 필수) <textarea id="rv-reason" rows="3" placeholder="예: 화면이 멈춘 구간이 길다 — 말하는 숫자가 그 순간 화면에 생겨야 함"></textarea></label>
+        <div class="row"><button class="btn primary" id="rv-go" ${dis}>기록</button></div><div id="rv-cmd"></div></div>
+      <div class="card"><h3>2. 반영 대기 <span class="chip ${pend.length ? "pend" : "pass"}">${pend.length}건</span></h3>
+        <p>기각 사유를 매뉴얼 기준으로 바꿀 목록입니다. 해당 절을 고친 뒤 3에서 버전을 올리면 비워집니다.</p>
+        <ul class="pend-list">${pend.map(p => `<li><span>${esc(p)}</span>${LIVE ? `<button class="btn rm" data-p="${esc(p)}">빼기</button>` : ""}</li>`).join("") || `<li style="background:var(--pass-soft)"><span>비어 있음. 모든 기각이 매뉴얼에 반영됐습니다.</span></li>`}</ul>
+        <label class="field">직접 추가 <input id="pd-text" placeholder="사용자 검토 없이 바꿀 기준"></label>
+        <div class="row"><button class="btn" id="pd-go" ${dis}>추가</button></div></div>
+      <div class="card"><h3>3. 버전 올리기</h3><p>반영 대기를 v${G.stats.manual_version + 1} 로 확정하고 CHANGELOG 에 적습니다. 그다음 커밋과 스냅샷 브랜치 manual/v${G.stats.manual_version + 1} 를 올립니다.</p>
+        <label class="field">바꾼 기준 요약 <textarea id="bp-sum" rows="3" placeholder="v${G.stats.manual_version + 1}: 무엇을 어떤 기준으로 바꿨나 — 고친 절(예: 09 §6, check G4)"></textarea></label>
+        <div class="row"><button class="btn primary" id="bp-go" ${dis}>v${G.stats.manual_version + 1} 로 올리기</button></div><div id="bp-cmd"></div></div>
+    </div>
+    <div class="stage-head"><h2>매뉴얼 파일 편집</h2>
+      <select id="ed-file" aria-label="파일">${docs.map(d => `<option value="${esc(d.file)}">${esc(d.file)}</option>`).join("")}
+        <option value="manual/CHANGELOG.md">manual/CHANGELOG.md</option><option value="manual/reviews.md">manual/reviews.md</option></select>
+      <button class="btn" id="ed-load" ${dis}>열기</button><button class="btn primary" id="ed-save" ${dis}>저장</button>
+      <span class="hint">절의 머리말에 (vN, 날짜 사용자: "…") 를 붙이면 그래프가 그 절과 버전을 잇습니다.</span></div>
+    <div class="editor"><textarea id="ed-text" spellcheck="false" ${dis} placeholder="${LIVE ? "파일을 열면 여기서 고칩니다." : "로컬 도구(manual-ui)에서만 편집할 수 있습니다."}"></textarea></div>`;
+  const showCmd = () => {
+    const p = $("#rv-proj").value.trim() || "<프로젝트>", r = $("#rv-res").value, why = $("#rv-reason").value.trim().replace(/"/g, "'");
+    $("#rv-cmd").innerHTML = LIVE ? "" : cmdBox(r === "pass" ? `python -m ytflow review ${p} --pass` : `python -m ytflow review ${p} --reject "${why || "이유"}"`);
+    const s = $("#bp-sum").value.trim().replace(/"/g, "'");
+    $("#bp-cmd").innerHTML = LIVE ? "" : cmdBox(`python -m ytflow manual-bump "${s || "바꾼 기준 요약"}"\npython -m ytflow manual-graph`);
+  };
+  ["#rv-proj", "#rv-res", "#rv-reason", "#bp-sum"].forEach(s => $(s).addEventListener("input", showCmd)); showCmd();
+  $("#view").addEventListener("click", ev => { const b = ev.target.closest(".copy"); if (!b) return;
+    navigator.clipboard.writeText(b.dataset.c).then(() => toast("복사했습니다"), () => toast("복사하지 못했습니다. 글자를 직접 선택하세요")); });
+  if (!LIVE) return;
+  $("#rv-go").onclick = async () => { try { await api("/api/review", {project: $("#rv-proj").value, result: $("#rv-res").value, reason: $("#rv-reason").value});
+    toast("검토를 기록했습니다"); await reload(); } catch (e) { toast(e.message); } };
+  $("#pd-go").onclick = async () => { try { await api("/api/pending", {text: $("#pd-text").value}); toast("반영 대기에 추가했습니다"); await reload(); } catch (e) { toast(e.message); } };
+  document.querySelectorAll(".rm").forEach(b => b.onclick = async () => { try { await api("/api/pending", {remove: b.dataset.p}); toast("반영 대기에서 뺐습니다"); await reload(); } catch (e) { toast(e.message); } });
+  $("#bp-go").onclick = async () => { try { const j = await api("/api/bump", {summary: $("#bp-sum").value}); await api("/api/rebuild", {});
+    toast(`v${j.version} 로 올렸습니다`); await reload(); $("#bp-cmd").innerHTML = `<p>다음으로 커밋과 백업:</p>` + cmdBox(j.next); } catch (e) { toast(e.message); } };
+  const load = async (path, line) => { try { const j = await api("/api/file?path=" + encodeURIComponent(path)); const ta = $("#ed-text");
+    $("#ed-file").value = path; ta.value = j.text; editorState = {path, line: null};
+    if (line) { const pos = j.text.split("\n").slice(0, line - 1).join("\n").length + (line > 1 ? 1 : 0);
+      ta.focus(); ta.setSelectionRange(pos, pos); ta.scrollTop = Math.max(0, (line - 4) * 19.4); } } catch (e) { toast(e.message); } };
+  $("#ed-load").onclick = () => load($("#ed-file").value);
+  $("#ed-save").onclick = async () => { try { await api("/api/file", {path: $("#ed-file").value, text: $("#ed-text").value}); await api("/api/rebuild", {});
+    toast(`${$("#ed-file").value} 저장, 그래프를 다시 만들었습니다`); await reload(); } catch (e) { toast(e.message); } };
+  if (editorState.path) load(editorState.path, editorState.line);
+}
+
+/* ---------- 속성 패널 ---------- */
+const EDGE_WORD = {gated_by:"게이트", contains:"포함", defines:"정의", belongs_to:"규칙", enforces:"검사 코드", applied_in:"반영 버전", approved_in:"통과 버전", touched:"고친 곳", about:"주제", guided_by:"매뉴얼"};
+function relList(id){
+  const out = (OUT[id] || []).map(e => [e, e.t, "→"]), inn = (IN[id] || []).map(e => [e, e.s, "←"]);
+  const all = [...out, ...inn].filter(([e]) => !["contains"].includes(e.kind) || N[id].kind !== "doc");
+  if (!all.length) return "";
+  const groups = {};
+  all.forEach(([e, o, d]) => (groups[`${d} ${EDGE_WORD[e.kind] || e.kind}`] ||= []).push([e, o]));
+  return Object.entries(groups).map(([k, arr]) => `<div><div class="label">${esc(k)} (${arr.length})</div><ul class="rel">${arr.slice(0, 60).map(([e, o]) =>
+    `<li><button data-go="${esc(o)}"><small>${esc(N[o]?.kind || "")}${e.via ? " · " + e.via.join("+") : ""}${e.how === "inferred" ? " · 추정" : ""}</small>${esc(cut(nodeName(N[o]) || o, 60))}</button></li>`).join("")}</ul></div>`).join("");
+}
+function inspect(id){
+  const n = N[id]; if (!n) return; selected = id;
+  let h = `<span class="label">${esc(n.kind)}</span><h3>${esc(n.kind === "version" ? `v${n.v} · ${n.date}` : n.kind === "review" ? `${n.project}` : nodeName(n))}</h3>`;
+  if (n.kind === "version") {
+    h += `<p style="margin:0">${esc(n.summary)}</p>`;
+    if (n.applied.length) h += `<div class="label">반영한 사용자 기각</div>` + n.applied.map(a => `<div class="chip reject" style="white-space:normal;border-radius:4px;padding:4px 8px">${esc(a.date)} · ${esc(a.project)}<br>${esc(a.reason)}</div>`).join("");
+    if (n.commit) h += `<dl class="kv"><dt>커밋</dt><dd style="font-family:var(--mono)">${esc(n.commit.sha.slice(0, 8))}</dd><dt>메시지</dt><dd>${esc(n.commit.subject)}</dd></dl>`;
+    if (LIVE && n.commit) h += `<div class="row"><button class="btn" id="diff-go">이 버전에서 바뀐 매뉴얼 보기</button></div><div id="diff"></div>`;
+    h += `<div class="chips">${n.themes.map(t => `<span class="chip"><i style="width:8px;height:8px;border-radius:50%;background:${tc(t)};display:inline-block"></i>${esc(N["theme:" + t].label)}</span>`).join("")}</div>`;
+  } else if (n.kind === "review") {
+    h += `<div class="chips"><span class="chip ${n.result === "pass" ? "pass" : "reject"}">${n.result === "pass" ? "통과" : "기각"}</span><span class="chip">${esc(n.date)}</span><span class="chip">당시 v${n.manual_version}</span>
+      ${n.status === "pending" ? '<span class="chip pend">반영 대기</span>' : n.status === "inferred" ? '<span class="chip pend">반영 버전 추정</span>' : ""}</div>`;
+    if (n.reason) h += `<p style="margin:0">${esc(n.reason)}</p>`;
+  } else if (n.kind === "section") {
+    const d = N[n.doc];
+    h += `<dl class="kv"><dt>파일</dt><dd>${esc(d.file)}:${n.line}</dd><dt>바꾼 버전</dt><dd>${n.versions.length ? n.versions.map(v => "v" + v).join(", ") : (n.tag_version ? "v" + n.tag_version : "기록 없음 (v1 기준)")}</dd></dl>`;
+    if (n.body) h += `<pre class="body">${esc(n.body)}</pre>`;
+    h += `<div class="row"><button class="btn primary" id="edit-go">이 절 고치기</button></div>`;
+  } else if (n.kind === "gate") {
+    const rs = G.nodes.filter(r => r.kind === "rule" && r.gate === id);
+    h += rs.map(r => `<div style="font-size:12.5px;display:flex;gap:6px;align-items:flex-start"><span class="chip ${r.level.toLowerCase()}">${r.level}${r.auto ? " 자동" : ""}</span><span>${esc(r.label.replace(/\*\*/g, "").replace(/`/g, ""))}</span></div>`).join("") || `<p class="empty">06-checklist 에 표가 없는 게이트입니다.</p>`;
+  } else if (n.kind === "doc") {
+    h += `<dl class="kv"><dt>파일</dt><dd>${esc(n.file)}</dd><dt>길이</dt><dd>${n.lines}줄</dd><dt>바꾼 버전</dt><dd>${(n.versions || []).map(v => "v" + v).join(", ") || "-"}</dd></dl><div class="row"><button class="btn primary" id="edit-go">이 문서 고치기</button></div>`;
+  } else if (n.kind === "rule" || n.kind === "check") {
+    h += `<dl class="kv"><dt>등급</dt><dd>${esc(n.level)}</dd><dt>위치</dt><dd>${esc(n.file || "manual/06-checklist.md")}:${n.line}</dd></dl><p style="margin:0">${esc(n.label)}</p>`;
+  } else if (n.kind === "theme") {
+    h += `<p class="empty" style="margin:0">이 주제에 걸린 검토와 버전입니다.</p>`;
+  } else if (n.kind === "step") {
+    h += `<p style="margin:0">${esc(n.does)}</p><dl class="kv"><dt>남는 파일</dt><dd>${esc(n.outputs)}</dd></dl>`;
+  }
+  h += relList(id);
+  $("#insp").innerHTML = h;
+  $("#insp").querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => inspect(b.dataset.go)));
+  const eg = $("#edit-go"); if (eg) eg.onclick = () => { const f = n.kind === "doc" ? n.file : N[n.doc].file;
+    editorState = {path: f, line: n.line || null}; if (!LIVE) toast("편집은 로컬 도구에서: python -m ytflow manual-ui"); location.hash = "edit"; if (location.hash === "#edit") route(); };
+  const dg = $("#diff-go"); if (dg) dg.onclick = async () => { try { const j = await api("/api/diff?v=" + n.v); $("#diff").innerHTML = `<pre class="diff">${esc(j.diff)}</pre>`; } catch (e) { toast(e.message); } };
+  highlight(id);
+}
+
+/* ---------- 경로 ---------- */
+function route(){
+  const h = (location.hash || "#flow").slice(1);
+  document.querySelectorAll("nav.tabs a").forEach(a => a.getAttribute("href") === "#" + h ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+  ({flow: renderFlow, map: renderMap, timeline: renderTimeline, edit: renderEdit}[h] || renderFlow)();
+}
+window.addEventListener("hashchange", route);
+
+async function boot(){
+  if (!G || !STATIC) { try { G = await api("/api/graph"); LIVE = true; } catch (e) { if (!G) { $("#view").innerHTML = `<p style="padding:14px">그래프 데이터를 읽지 못했습니다: ${esc(e.message)}</p>`; return; } } }
+  if (LIVE) { const m = $("#mode"); m.textContent = "로컬 도구 연결됨 · 편집 가능"; m.classList.add("live"); }
+  else { $("#mode").textContent = `읽기 전용 · ${G.generated.replace("T", " ")} 기준`; }
+  index(); renderTiles(); route();
+  const first = G.nodes.find(n => n.kind === "version" && n.v === G.stats.manual_version);
+  if (first) inspect(first.id);
+}
+boot();
+})();
+</script>

@@ -130,3 +130,4 @@ python -m ytflow check <프로젝트> --upto G4   # 대본까지만 검사 (렌�
 - 매뉴얼 버전은 `manual/VERSION`, 바뀐 내용은 `manual/CHANGELOG.md`, 결정 기록은 `manual/reviews.md`. 모두 GitHub 에 커밋되어 백업됩니다.
 - 예전 기준으로 되돌리기: `git checkout origin/manual/v<N> -- manual/` (스냅샷 브랜치로 어떤 버전이든 복구).
 - 각 영상의 `05_edit/checklist.json` 에 그때의 매뉴얼 버전이 남습니다 → 어떤 기준으로 만든 영상인지 추적.
+- `manual-bump` 요약에는 **고친 곳을 `09 §6`·`README §2-5`·`G4` 처럼** 적습니다 → 매뉴얼 그래프(`manual/graph.json`, `python -m ytflow manual-ui`)에서 기각 → 버전 → 고친 절이 이어집니다 (docs/31).

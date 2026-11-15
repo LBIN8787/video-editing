@@ -1,0 +1,7144 @@
+{
+ "schema": 1,
+ "generated": "2026-11-15T05:00:51",
+ "stats": {
+  "manual_version": 31,
+  "versions": 31,
+  "reviews": 30,
+  "rejects": 20,
+  "passes": 10,
+  "pending": 0,
+  "rules": 57,
+  "checks": 97,
+  "sections": 116,
+  "must": 29,
+  "auto": 49
+ },
+ "pending": [],
+ "nodes": [
+  {
+   "id": "step:1",
+   "kind": "step",
+   "n": 1,
+   "label": "욕망 → 주제",
+   "does": "트리거(뉴스·급등락·발표·수요 아웃라이어)를 모아 **욕망 점수표**로 후보 3개 → 1개",
+   "outputs": "01_research/topic_brief.json",
+   "gate": "gate:G1"
+  },
+  {
+   "id": "step:2",
+   "kind": "step",
+   "n": 2,
+   "label": "소스 먼저",
+   "does": "이 주제를 **보여 줄** 자료(발언 원본·공식 화면·공공 기록·데이터)가 있는지",
+   "outputs": "01_research/sources.md 또는 loc_items.json",
+   "gate": "gate:G2"
+  },
+  {
+   "id": "step:3",
+   "kind": "step",
+   "n": 3,
+   "label": "깊은 조사",
+   "does": "1차 출처로 숫자·발언·날짜를 확인, 교차 확인 상태 표시",
+   "outputs": "01_research/factsheet.md",
+   "gate": "gate:G3"
+  },
+  {
+   "id": "step:4",
+   "kind": "step",
+   "n": 4,
+   "label": "대본",
+   "does": "채널 대본 공식(각 채널 문서 §4)대로. 쉬운 말·비유·과거 사례·비교 기준",
+   "outputs": "02_script/hybrid.json (또는 scenes.json)",
+   "gate": "gate:G4"
+  },
+  {
+   "id": "step:5",
+   "kind": "step",
+   "n": 5,
+   "label": "연출·그래픽",
+   "does": "`python -m ytflow style-pick` 추천 → `05-style-matching.md` 로 장면마다 연출 type 과 그래픽 팩 결정",
+   "outputs": "edit.yaml, hybrid.json 의 type·look",
+   "gate": "gate:G5"
+  },
+  {
+   "id": "step:6",
+   "kind": "step",
+   "n": 6,
+   "label": "목소리·렌더",
+   "does": "초안 edge-tts → 확정 후 ElevenLabs, `python -m ytflow hybrid <프로젝트>`",
+   "outputs": "05_edit/final.mp4, sync_qa.json, 04_assets/layout_qa.json",
+   "gate": "gate:G6"
+  },
+  {
+   "id": "step:7",
+   "kind": "step",
+   "n": 7,
+   "label": "제목·썸네일",
+   "does": "제목 3개 + 썸네일 A/B/C, 이유 기록",
+   "outputs": "05_edit/package.md, thumbnail_*.png",
+   "gate": "gate:G7"
+  },
+  {
+   "id": "step:8",
+   "kind": "step",
+   "n": 8,
+   "label": "보관·기록",
+   "does": "GitHub Release 업로드, 회차 기록, 남은 일 보고",
+   "outputs": "05_edit/release.json, channels/<id>/episodes.md",
+   "gate": "gate:G8"
+  },
+  {
+   "id": "gate:G0",
+   "kind": "gate",
+   "key": "G0",
+   "label": "기각 반영",
+   "section": null
+  },
+  {
+   "id": "gate:G1",
+   "kind": "gate",
+   "key": "G1",
+   "label": "주제",
+   "section": "sec:06§G1"
+  },
+  {
+   "id": "gate:G2",
+   "kind": "gate",
+   "key": "G2",
+   "label": "소스",
+   "section": "sec:06§G2"
+  },
+  {
+   "id": "gate:G3",
+   "kind": "gate",
+   "key": "G3",
+   "label": "사실",
+   "section": "sec:06§G3"
+  },
+  {
+   "id": "gate:G4",
+   "kind": "gate",
+   "key": "G4",
+   "label": "대본",
+   "section": "sec:06§G4"
+  },
+  {
+   "id": "gate:G5",
+   "kind": "gate",
+   "key": "G5",
+   "label": "연출",
+   "section": "sec:06§G5"
+  },
+  {
+   "id": "gate:G6",
+   "kind": "gate",
+   "key": "G6",
+   "label": "완성본",
+   "section": "sec:06§G6"
+  },
+  {
+   "id": "gate:G7",
+   "kind": "gate",
+   "key": "G7",
+   "label": "포장",
+   "section": "sec:06§G7"
+  },
+  {
+   "id": "gate:G8",
+   "kind": "gate",
+   "key": "G8",
+   "label": "보관",
+   "section": "sec:06§G8"
+  },
+  {
+   "id": "ch:ai",
+   "kind": "channel",
+   "key": "ai",
+   "label": "(가칭) AI 더 잘 쓰기",
+   "desire": "AI 를 더 잘 알고, 더 잘 다루고 싶다 (뒤처지기 싫다 · 일을 덜고 싶다 · 남보다 먼저 쓰고 싶다)"
+  },
+  {
+   "id": "ch:market",
+   "kind": "channel",
+   "key": "market",
+   "label": "(가칭) 시장의 이유",
+   "desire": "돈의 흐름을 더 잘 알아서 투자에서 이기고(잃지 않고) 싶다 — '왜 움직였나'를 남보다 먼저, 정확히"
+  },
+  {
+   "id": "ch:curiosity",
+   "kind": "channel",
+   "key": "curiosity",
+   "label": "(가칭) 몰랐던 이유",
+   "desire": "궁금증을 풀고 싶다 — 평소엔 몰랐지만, 듣는 순간 '어? 왜지?' 하고 끝까지 알고 싶어지는 것"
+  },
+  {
+   "id": "ch:issues",
+   "kind": "channel",
+   "key": "issues",
+   "label": "(가칭) 이슈의 구조",
+   "desire": "세상이 어떻게 돌아가는지 알고 싶다 — 뉴스 속 큰 사건을 '왜·어디로'까지 이해해서 불안을 줄이고, 대화에서 뒤처지지 않고, 내 삶에 올 영향을 미리 알고 싶다"
+  },
+  {
+   "id": "doc:01",
+   "kind": "doc",
+   "key": "01",
+   "file": "manual/01-desire-map.md",
+   "label": "01. 욕망 지도 — 주제보다 먼저 '왜 보는가'를 정한다",
+   "lines": 93,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "doc:02",
+   "kind": "doc",
+   "key": "02",
+   "file": "manual/02-ai.md",
+   "label": "02. ai — AI 더 잘 쓰기 (AI 트렌드와 활용법)",
+   "lines": 74,
+   "versions": [
+    23
+   ],
+   "last_version": 23
+  },
+  {
+   "id": "doc:03",
+   "kind": "doc",
+   "key": "03",
+   "file": "manual/03-market.md",
+   "label": "03. market — 시장의 이유 (경제·주식·산업·기술을 연결해 깊이 있게)",
+   "lines": 176,
+   "versions": [
+    23,
+    24
+   ],
+   "last_version": 24
+  },
+  {
+   "id": "doc:04",
+   "kind": "doc",
+   "key": "04",
+   "file": "manual/04-curiosity.md",
+   "label": "04. curiosity — 몰랐던 이유 (다양한 지식과 호기심)",
+   "lines": 196,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "doc:05",
+   "kind": "doc",
+   "key": "05",
+   "file": "manual/05-style-matching.md",
+   "label": "05. 편집 스타일 고르기 — 영상마다, 장면마다",
+   "lines": 218,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "doc:06",
+   "kind": "doc",
+   "key": "06",
+   "file": "manual/06-checklist.md",
+   "label": "06. 체크리스트와 검사안 — 반드시 지킬 것",
+   "lines": 109,
+   "versions": [
+    23
+   ],
+   "last_version": 23
+  },
+  {
+   "id": "doc:07",
+   "kind": "doc",
+   "key": "07",
+   "file": "manual/07-extend.md",
+   "label": "07. 늘리기 — 채널·스타일·상황을 파일 하나로 추가",
+   "lines": 34,
+   "versions": [
+    2
+   ],
+   "last_version": 2
+  },
+  {
+   "id": "doc:08",
+   "kind": "doc",
+   "key": "08",
+   "file": "manual/08-issues.md",
+   "label": "08. issues — 이슈의 구조 (시사·사회 이슈 해설)",
+   "lines": 132,
+   "versions": [
+    23
+   ],
+   "last_version": 23
+  },
+  {
+   "id": "doc:09",
+   "kind": "doc",
+   "key": "09",
+   "file": "manual/09-market-daily.md",
+   "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13)",
+   "lines": 221,
+   "versions": [
+    24,
+    29,
+    30,
+    31
+   ],
+   "last_version": 31
+  },
+  {
+   "id": "doc:README",
+   "kind": "doc",
+   "key": "README",
+   "file": "manual/README.md",
+   "label": "제작 매뉴얼 — 처음 온 사람(새 세션·새 모델)이 여기서 시작합니다",
+   "lines": 133,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:01§1",
+   "kind": "section",
+   "doc": "doc:01",
+   "num": "1",
+   "level": 2,
+   "label": "세 가지 상위 욕망",
+   "title": "1. 세 가지 상위 욕망",
+   "line": 10,
+   "end": 16,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:01§h17",
+   "kind": "section",
+   "doc": "doc:01",
+   "num": "h17",
+   "level": 3,
+   "label": "issues — 세상이 어떻게 돌아가는지 알고 싶다 (2026-11-09 추가, 근거 docs/18)",
+   "title": "issues — 세상이 어떻게 돌아가는지 알고 싶다 (2026-11-09 추가, 근거 docs/18)",
+   "line": 17,
+   "end": 23,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:01§2",
+   "kind": "section",
+   "doc": "doc:01",
+   "num": "2",
+   "level": 2,
+   "label": "욕망별 '시청자 질문' 유형 (주제는 이 중 하나여야 함)",
+   "title": "2. 욕망별 '시청자 질문' 유형 (주제는 이 중 하나여야 함)",
+   "line": 24,
+   "end": 25,
+   "tag_version": null,
+   "versions": [
+    2
+   ],
+   "last_version": 2
+  },
+  {
+   "id": "sec:01§h26",
+   "kind": "section",
+   "doc": "doc:01",
+   "num": "h26",
+   "level": 3,
+   "label": "ai — 유능해지고 싶다",
+   "title": "ai — 유능해지고 싶다",
+   "line": 26,
+   "end": 33,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:01§h34",
+   "kind": "section",
+   "doc": "doc:01",
+   "num": "h34",
+   "level": 3,
+   "label": "market — 이기고 싶다",
+   "title": "market — 이기고 싶다",
+   "line": 34,
+   "end": 43,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:01§h44",
+   "kind": "section",
+   "doc": "doc:01",
+   "num": "h44",
+   "level": 3,
+   "label": "curiosity — 알고 싶다",
+   "title": "curiosity — 알고 싶다",
+   "line": 44,
+   "end": 53,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:01§3",
+   "kind": "section",
+   "doc": "doc:01",
+   "num": "3",
+   "level": 2,
+   "label": "욕망 점수표 (주제 후보마다 채움 → `topic_brief.json` 의 `score`)",
+   "title": "3. 욕망 점수표 (주제 후보마다 채움 → `topic_brief.json` 의 `score`)",
+   "line": 54,
+   "end": 66,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:01§4",
+   "kind": "section",
+   "doc": "doc:01",
+   "num": "4",
+   "level": 2,
+   "label": "소문(찌라시)을 다루는 규칙 — market 만",
+   "title": "4. 소문(찌라시)을 다루는 규칙 — market 만",
+   "line": 67,
+   "end": 73,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:01§4-1",
+   "kind": "section",
+   "doc": "doc:01",
+   "num": "4-1",
+   "level": 2,
+   "label": "성공 원인 나누기 — 모든 채널 공통 (근거: docs/18 §6)",
+   "title": "4-1. 성공 원인 나누기 — 모든 채널 공통 (근거: docs/18 §6)",
+   "line": 74,
+   "end": 85,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:01§5",
+   "kind": "section",
+   "doc": "doc:01",
+   "num": "5",
+   "level": 2,
+   "label": "제목 공식 (욕망별)",
+   "title": "5. 제목 공식 (욕망별)",
+   "line": 86,
+   "end": 93,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:02§1",
+   "kind": "section",
+   "doc": "doc:02",
+   "num": "1",
+   "level": 2,
+   "label": "주제 찾기",
+   "title": "1. 주제 찾기",
+   "line": 10,
+   "end": 22,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:02§2",
+   "kind": "section",
+   "doc": "doc:02",
+   "num": "2",
+   "level": 2,
+   "label": "깊은 조사 — 네 층",
+   "title": "2. 깊은 조사 — 네 층",
+   "line": 23,
+   "end": 32,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:02§3",
+   "kind": "section",
+   "doc": "doc:02",
+   "num": "3",
+   "level": 2,
+   "label": "대본 공식",
+   "title": "3. 대본 공식",
+   "line": 33,
+   "end": 39,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:02§h40",
+   "kind": "section",
+   "doc": "doc:02",
+   "num": "h40",
+   "level": 3,
+   "label": "롱폼 (8~12분)",
+   "title": "롱폼 (8~12분)",
+   "line": 40,
+   "end": 50,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:02§h51",
+   "kind": "section",
+   "doc": "doc:02",
+   "num": "h51",
+   "level": 3,
+   "label": "쇼츠 (30~45초) — `ch-ai-shorts`",
+   "title": "쇼츠 (30~45초) — `ch-ai-shorts`",
+   "line": 51,
+   "end": 56,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:02§4",
+   "kind": "section",
+   "doc": "doc:02",
+   "num": "4",
+   "level": 2,
+   "label": "소스",
+   "title": "4. 소스",
+   "line": 57,
+   "end": 63,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:02§5",
+   "kind": "section",
+   "doc": "doc:02",
+   "num": "5",
+   "level": 2,
+   "label": "포장",
+   "title": "5. 포장",
+   "line": 64,
+   "end": 68,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:02§6",
+   "kind": "section",
+   "doc": "doc:02",
+   "num": "6",
+   "level": 2,
+   "label": "이 채널만의 검사",
+   "title": "6. 이 채널만의 검사",
+   "line": 69,
+   "end": 74,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:03§0",
+   "kind": "section",
+   "doc": "doc:03",
+   "num": "0",
+   "level": 2,
+   "label": "매일 아침 시장 브리핑 — 기본 운영",
+   "title": "0. 매일 아침 시장 브리핑 — 기본 운영 (v17, 2026-11-12 사용자 요청)",
+   "line": 7,
+   "end": 39,
+   "tag_version": 17,
+   "versions": [
+    17
+   ],
+   "last_version": 17
+  },
+  {
+   "id": "sec:03§0-1",
+   "kind": "section",
+   "doc": "doc:03",
+   "num": "0-1",
+   "level": 2,
+   "label": "어닝콜은 자세히, 그리고 '무엇으로 이어지나·무슨 뜻인가'까지",
+   "title": "0-1. 어닝콜은 자세히, 그리고 '무엇으로 이어지나·무슨 뜻인가'까지 (v18, 2026-11-12 사용자 요청)",
+   "line": 40,
+   "end": 61,
+   "tag_version": 18,
+   "versions": [
+    18
+   ],
+   "last_version": 18
+  },
+  {
+   "id": "sec:03§0-2",
+   "kind": "section",
+   "doc": "doc:03",
+   "num": "0-2",
+   "level": 2,
+   "label": "뻔한 사실 말고, 자료를 엮어야 보이는 것 — 분석·심층·주간",
+   "title": "0-2. 뻔한 사실 말고, 자료를 엮어야 보이는 것 — 분석·심층·주간 (v26, 2026-11-15 사용자 기각)",
+   "line": 62,
+   "end": 82,
+   "tag_version": 26,
+   "versions": [
+    26
+   ],
+   "last_version": 26
+  },
+  {
+   "id": "sec:03§0-3",
+   "kind": "section",
+   "doc": "doc:03",
+   "num": "0-3",
+   "level": 2,
+   "label": "시장을 흔든 사건을 중심축으로 — 파급효과·주의할 점·해석",
+   "title": "0-3. 시장을 흔든 사건을 중심축으로 — 파급효과·주의할 점·해석 (v28, 2026-11-15 사용자 기각)",
+   "line": 83,
+   "end": 95,
+   "tag_version": 28,
+   "versions": [
+    28
+   ],
+   "last_version": 28
+  },
+  {
+   "id": "sec:03§1",
+   "kind": "section",
+   "doc": "doc:03",
+   "num": "1",
+   "level": 2,
+   "label": "주제 찾기 — 트리거에서 질문으로",
+   "title": "1. 주제 찾기 — 트리거에서 질문으로",
+   "line": 96,
+   "end": 112,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:03§2",
+   "kind": "section",
+   "doc": "doc:03",
+   "num": "2",
+   "level": 2,
+   "label": "라인 고르기 (같은 브랜드, 다른 형식)",
+   "title": "2. 라인 고르기 (같은 브랜드, 다른 형식)",
+   "line": 113,
+   "end": 121,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:03§3",
+   "kind": "section",
+   "doc": "doc:03",
+   "num": "3",
+   "level": 2,
+   "label": "깊은 조사 — 다섯 층 (한 층이라도 비면 아직 얕다)",
+   "title": "3. 깊은 조사 — 다섯 층 (한 층이라도 비면 아직 얕다)",
+   "line": 122,
+   "end": 134,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:03§4",
+   "kind": "section",
+   "doc": "doc:03",
+   "num": "4",
+   "level": 2,
+   "label": "대본 공식",
+   "title": "4. 대본 공식",
+   "line": 135,
+   "end": 157,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:03§5",
+   "kind": "section",
+   "doc": "doc:03",
+   "num": "5",
+   "level": 2,
+   "label": "소스 (보여 줄 것)",
+   "title": "5. 소스 (보여 줄 것)",
+   "line": 158,
+   "end": 165,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:03§6",
+   "kind": "section",
+   "doc": "doc:03",
+   "num": "6",
+   "level": 2,
+   "label": "포장 (제목·썸네일)",
+   "title": "6. 포장 (제목·썸네일)",
+   "line": 166,
+   "end": 170,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:03§7",
+   "kind": "section",
+   "doc": "doc:03",
+   "num": "7",
+   "level": 2,
+   "label": "이 채널만의 검사 (06-checklist 에 추가로)",
+   "title": "7. 이 채널만의 검사 (06-checklist 에 추가로)",
+   "line": 171,
+   "end": 176,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:04§0",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "0",
+   "level": 2,
+   "label": "설명보다 호기심이 먼저 — 콜드 오픈",
+   "title": "0. 설명보다 호기심이 먼저 — 콜드 오픈 (v17, 2026-11-12 사용자 요청)",
+   "line": 8,
+   "end": 14,
+   "tag_version": 17,
+   "versions": [
+    17
+   ],
+   "last_version": 17
+  },
+  {
+   "id": "sec:04§0-1",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "0-1",
+   "level": 3,
+   "label": "훅을 먼저 정한다 (대본보다 먼저, `topic_brief.json` 의 `hook`)",
+   "title": "0-1. 훅을 먼저 정한다 (대본보다 먼저, `topic_brief.json` 의 `hook`)",
+   "line": 15,
+   "end": 34,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:04§0-2",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "0-2",
+   "level": 3,
+   "label": "대본은 훅에 매달린다",
+   "title": "0-2. 대본은 훅에 매달린다",
+   "line": 35,
+   "end": 40,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:04§0-3",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "0-3",
+   "level": 3,
+   "label": "제목은 훅에서 나온다",
+   "title": "0-3. 제목은 훅에서 나온다",
+   "line": 41,
+   "end": 48,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:04§0-4",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "0-4",
+   "level": 3,
+   "label": "이야기를 들려주듯 — 정보형(주식)과 다른 양식",
+   "title": "0-4. 이야기를 들려주듯 — 정보형(주식)과 다른 양식 (v21, 2026-11-13 사용자 요청)",
+   "line": 49,
+   "end": 71,
+   "tag_version": 21,
+   "versions": [
+    21
+   ],
+   "last_version": 21
+  },
+  {
+   "id": "sec:04§0-5",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "0-5",
+   "level": 3,
+   "label": "의도 먼저 — 애니메이션 무대",
+   "title": "0-5. 의도 먼저 — 애니메이션 무대 (v22, 2026-11-14 사용자 기각 반영)",
+   "line": 72,
+   "end": 107,
+   "tag_version": 22,
+   "versions": [
+    22
+   ],
+   "last_version": 22
+  },
+  {
+   "id": "sec:04§0-6",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "0-6",
+   "level": 3,
+   "label": "시청자 먼저 — 상권 조사 → 대본 → 편집",
+   "title": "0-6. 시청자 먼저 — 상권 조사 → 대본 → 편집 (v23, 2026-11-14 사용자 기각 반영)",
+   "line": 108,
+   "end": 135,
+   "tag_version": 23,
+   "versions": [
+    22,
+    23
+   ],
+   "last_version": 23
+  },
+  {
+   "id": "sec:04§1",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "1",
+   "level": 2,
+   "label": "호기심을 '만드는' 주제의 조건 (모두 충족)",
+   "title": "1. 호기심을 '만드는' 주제의 조건 (모두 충족)",
+   "line": 136,
+   "end": 147,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:04§2",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "2",
+   "level": 2,
+   "label": "주제 찾기",
+   "title": "2. 주제 찾기",
+   "line": 148,
+   "end": 157,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:04§3",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "3",
+   "level": 2,
+   "label": "깊은 조사 — 다섯 층 (자세히는 `prompts/script_knowledge.md` A)",
+   "title": "3. 깊은 조사 — 다섯 층 (자세히는 `prompts/script_knowledge.md` A)",
+   "line": 158,
+   "end": 160,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:04§4",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "4",
+   "level": 2,
+   "label": "대본 공식",
+   "title": "4. 대본 공식",
+   "line": 161,
+   "end": 180,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:04§5",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "5",
+   "level": 2,
+   "label": "소스",
+   "title": "5. 소스",
+   "line": 181,
+   "end": 183,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:04§6",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "6",
+   "level": 2,
+   "label": "포장",
+   "title": "6. 포장",
+   "line": 184,
+   "end": 187,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:04§7",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "7",
+   "level": 2,
+   "label": "이 채널만의 검사",
+   "title": "7. 이 채널만의 검사",
+   "line": 188,
+   "end": 196,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:05§0-1",
+   "kind": "section",
+   "doc": "doc:05",
+   "num": "0-1",
+   "level": 2,
+   "label": "조합 원칙 (가장 중요 — 2026-11-09 사용자 판정)",
+   "title": "0-1. 조합 원칙 (가장 중요 — 2026-11-09 사용자 판정)",
+   "line": 6,
+   "end": 18,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:05§h19",
+   "kind": "section",
+   "doc": "doc:05",
+   "num": "h19",
+   "level": 3,
+   "label": "강조는 아껴 쓰기 (2026-11-09 사용자 판정: \"남용은 안 쓰는 것만 못하다\")",
+   "title": "강조는 아껴 쓰기 (2026-11-09 사용자 판정: \"남용은 안 쓰는 것만 못하다\")",
+   "line": 19,
+   "end": 24,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:05§h25",
+   "kind": "section",
+   "doc": "doc:05",
+   "num": "h25",
+   "level": 3,
+   "label": "겹치기 요소 (`hybrid.json` 의 장면에 `\"layers\": [...]`, 코드 `ytflow/stages/directions.py` 의 `apply_layers`)",
+   "title": "겹치기 요소 (`hybrid.json` 의 장면에 `\"layers\": [...]`, 코드 `ytflow/stages/directions.py` 의 `apply_layers`)",
+   "line": 25,
+   "end": 38,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:05§0-7",
+   "kind": "section",
+   "doc": "doc:05",
+   "num": "0-7",
+   "level": 2,
+   "label": "카테고리마다 개성 — 채널을 묶어도 '보는 순간 어느 카테고리인지'",
+   "title": "0-7. 카테고리마다 개성 — 채널을 묶어도 '보는 순간 어느 카테고리인지' (v15, 2026-11-12 사용자 요청)",
+   "line": 39,
+   "end": 69,
+   "tag_version": 15,
+   "versions": [
+    15
+   ],
+   "last_version": 15
+  },
+  {
+   "id": "sec:05§0-2",
+   "kind": "section",
+   "doc": "doc:05",
+   "num": "0-2",
+   "level": 2,
+   "label": "배경은 장면 목적에 맞춰 바꾼다",
+   "title": "0-2. 배경은 장면 목적에 맞춰 바꾼다 (v8, 2026-11-09 사용자 판정: \"배경색이 너무 단조롭다, 상황에 맞추어 쓰자\")",
+   "line": 70,
+   "end": 83,
+   "tag_version": 8,
+   "versions": [
+    8
+   ],
+   "last_version": 8
+  },
+  {
+   "id": "sec:05§0-6",
+   "kind": "section",
+   "doc": "doc:05",
+   "num": "0-6",
+   "level": 2,
+   "label": "바탕은 상황이 고른다 — 스타일의 일부",
+   "title": "0-6. 바탕은 상황이 고른다 — 스타일의 일부 (v14, 2026-11-11 사용자 판정)",
+   "line": 84,
+   "end": 97,
+   "tag_version": 14,
+   "versions": [
+    14
+   ],
+   "last_version": 14
+  },
+  {
+   "id": "sec:05§0-5",
+   "kind": "section",
+   "doc": "doc:05",
+   "num": "0-5",
+   "level": 2,
+   "label": "차분하게 — 움직임과 소리는 '덜'이 기본",
+   "title": "0-5. 차분하게 — 움직임과 소리는 '덜'이 기본 (v12, 2026-11-11 사용자 판정)",
+   "line": 98,
+   "end": 111,
+   "tag_version": 12,
+   "versions": [
+    12
+   ],
+   "last_version": 12
+  },
+  {
+   "id": "sec:05§0-4",
+   "kind": "section",
+   "doc": "doc:05",
+   "num": "0-4",
+   "level": 2,
+   "label": "편집 기준 v10 — 연출로 보여 준다 (2026-11-10 사용자 판정: 전후 비교에서 '후' 채택)",
+   "title": "0-4. 편집 기준 v10 — 연출로 보여 준다 (2026-11-10 사용자 판정: 전후 비교에서 '후' 채택)",
+   "line": 112,
+   "end": 138,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:05§0-3",
+   "kind": "section",
+   "doc": "doc:05",
+   "num": "0-3",
+   "level": 2,
+   "label": "반복 피로 막기 — 글씨·도형만 반복하면 금방 지루하다",
+   "title": "0-3. 반복 피로 막기 — 글씨·도형만 반복하면 금방 지루하다 (v9, 2026-11-09 사용자 판정)",
+   "line": 139,
+   "end": 160,
+   "tag_version": 9,
+   "versions": [
+    9
+   ],
+   "last_version": 9
+  },
+  {
+   "id": "sec:05§0",
+   "kind": "section",
+   "doc": "doc:05",
+   "num": "0",
+   "level": 2,
+   "label": "먼저 자동 추천을 받습니다",
+   "title": "0. 먼저 자동 추천을 받습니다",
+   "line": 161,
+   "end": 167,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:05§1",
+   "kind": "section",
+   "doc": "doc:05",
+   "num": "1",
+   "level": 2,
+   "label": "영상 단위: 그래픽 팩 고르기",
+   "title": "1. 영상 단위: 그래픽 팩 고르기",
+   "line": 168,
+   "end": 180,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:05§2",
+   "kind": "section",
+   "doc": "doc:05",
+   "num": "2",
+   "level": 2,
+   "label": "장면 단위: 연출 type 고르기 (말하는 내용 → 화면)",
+   "title": "2. 장면 단위: 연출 type 고르기 (말하는 내용 → 화면)",
+   "line": 181,
+   "end": 201,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:05§3",
+   "kind": "section",
+   "doc": "doc:05",
+   "num": "3",
+   "level": 2,
+   "label": "리듬 규칙 (docs/15 근거, `check` 가 일부 자동 검사)",
+   "title": "3. 리듬 규칙 (docs/15 근거, `check` 가 일부 자동 검사)",
+   "line": 202,
+   "end": 208,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:05§4",
+   "kind": "section",
+   "doc": "doc:05",
+   "num": "4",
+   "level": 2,
+   "label": "브랜드별 추천 조합 (출발점)",
+   "title": "4. 브랜드별 추천 조합 (출발점)",
+   "line": 209,
+   "end": 215,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:05§5",
+   "kind": "section",
+   "doc": "doc:05",
+   "num": "5",
+   "level": 2,
+   "label": "시험작 (같은 이야기를 다른 연출로)",
+   "title": "5. 시험작 (같은 이야기를 다른 연출로)",
+   "line": 216,
+   "end": 218,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:06§h3",
+   "kind": "section",
+   "doc": "doc:06",
+   "num": "h3",
+   "level": 2,
+   "label": "검사 방법",
+   "title": "검사 방법",
+   "line": 3,
+   "end": 14,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:06§G1",
+   "kind": "section",
+   "doc": "doc:06",
+   "num": "G1",
+   "level": 2,
+   "label": "주제 (`01_research/topic_brief.json`, 스키마 `schemas/topic_brief.schema.json`)",
+   "title": "G1 주제 (`01_research/topic_brief.json`, 스키마 `schemas/topic_brief.schema.json`)",
+   "line": 15,
+   "end": 25,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:06§G2",
+   "kind": "section",
+   "doc": "doc:06",
+   "num": "G2",
+   "level": 2,
+   "label": "소스",
+   "title": "G2 소스",
+   "line": 26,
+   "end": 33,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:06§G3",
+   "kind": "section",
+   "doc": "doc:06",
+   "num": "G3",
+   "level": 2,
+   "label": "사실 (`01_research/factsheet.md`)",
+   "title": "G3 사실 (`01_research/factsheet.md`)",
+   "line": 34,
+   "end": 41,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:06§G4",
+   "kind": "section",
+   "doc": "doc:06",
+   "num": "G4",
+   "level": 2,
+   "label": "대본 (`02_script/hybrid.json`)",
+   "title": "G4 대본 (`02_script/hybrid.json`)",
+   "line": 42,
+   "end": 56,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:06§G5",
+   "kind": "section",
+   "doc": "doc:06",
+   "num": "G5",
+   "level": 2,
+   "label": "연출",
+   "title": "G5 연출",
+   "line": 57,
+   "end": 74,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:06§G6",
+   "kind": "section",
+   "doc": "doc:06",
+   "num": "G6",
+   "level": 2,
+   "label": "완성본",
+   "title": "G6 완성본",
+   "line": 75,
+   "end": 87,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:06§G7",
+   "kind": "section",
+   "doc": "doc:06",
+   "num": "G7",
+   "level": 2,
+   "label": "포장",
+   "title": "G7 포장",
+   "line": 88,
+   "end": 95,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:06§G8",
+   "kind": "section",
+   "doc": "doc:06",
+   "num": "G8",
+   "level": 2,
+   "label": "보관·기록",
+   "title": "G8 보관·기록",
+   "line": 96,
+   "end": 103,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:06§h104",
+   "kind": "section",
+   "doc": "doc:06",
+   "num": "h104",
+   "level": 2,
+   "label": "마지막 사람 눈 검사 (EYE) — 3분 안에",
+   "title": "마지막 사람 눈 검사 (EYE) — 3분 안에",
+   "line": 104,
+   "end": 109,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:07§1",
+   "kind": "section",
+   "doc": "doc:07",
+   "num": "1",
+   "level": 2,
+   "label": "편집 스타일(레시피) 추가 — 상황에 맞춰 쓰이게",
+   "title": "1. 편집 스타일(레시피) 추가 — 상황에 맞춰 쓰이게",
+   "line": 14,
+   "end": 22,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:07§2",
+   "kind": "section",
+   "doc": "doc:07",
+   "num": "2",
+   "level": 2,
+   "label": "채널(브랜드) 추가",
+   "title": "2. 채널(브랜드) 추가",
+   "line": 23,
+   "end": 29,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:07§3",
+   "kind": "section",
+   "doc": "doc:07",
+   "num": "3",
+   "level": 2,
+   "label": "질문 유형·분위기 추가",
+   "title": "3. 질문 유형·분위기 추가",
+   "line": 30,
+   "end": 32,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:07§4",
+   "kind": "section",
+   "doc": "doc:07",
+   "num": "4",
+   "level": 2,
+   "label": "늘린 뒤",
+   "title": "4. 늘린 뒤",
+   "line": 33,
+   "end": 34,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:08§0",
+   "kind": "section",
+   "doc": "doc:08",
+   "num": "0",
+   "level": 2,
+   "label": "무엇이 영상을 띄우나 (docs/18 §6 — 640편 원인 나누기)",
+   "title": "0. 무엇이 영상을 띄우나 (docs/18 §6 — 640편 원인 나누기)",
+   "line": 14,
+   "end": 29,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:08§0-1",
+   "kind": "section",
+   "doc": "doc:08",
+   "num": "0-1",
+   "level": 2,
+   "label": "시사는 '재미있게 보는 뉴스'다",
+   "title": "0-1. 시사는 '재미있게 보는 뉴스'다 (v7, 사용자 판단 + docs/18 근거)",
+   "line": 30,
+   "end": 44,
+   "tag_version": 7,
+   "versions": [
+    7
+   ],
+   "last_version": 7
+  },
+  {
+   "id": "sec:08§0-2",
+   "kind": "section",
+   "doc": "doc:08",
+   "num": "0-2",
+   "level": 2,
+   "label": "매일 이슈 정리",
+   "title": "0-2. 매일 이슈 정리 (v17, 2026-11-12 사용자 요청: \"시사도 매일 실시간 분석이 중요\")",
+   "line": 45,
+   "end": 52,
+   "tag_version": 17,
+   "versions": [
+    17
+   ],
+   "last_version": 17
+  },
+  {
+   "id": "sec:08§1",
+   "kind": "section",
+   "doc": "doc:08",
+   "num": "1",
+   "level": 2,
+   "label": "주제 찾기",
+   "title": "1. 주제 찾기",
+   "line": 53,
+   "end": 69,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:08§2",
+   "kind": "section",
+   "doc": "doc:08",
+   "num": "2",
+   "level": 2,
+   "label": "깊은 조사 — 다섯 층",
+   "title": "2. 깊은 조사 — 다섯 층",
+   "line": 70,
+   "end": 84,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:08§3",
+   "kind": "section",
+   "doc": "doc:08",
+   "num": "3",
+   "level": 2,
+   "label": "대본 공식",
+   "title": "3. 대본 공식",
+   "line": 85,
+   "end": 88,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:08§h89",
+   "kind": "section",
+   "doc": "doc:08",
+   "num": "h89",
+   "level": 3,
+   "label": "심층 12~15분",
+   "title": "심층 12~15분",
+   "line": 89,
+   "end": 100,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:08§h101",
+   "kind": "section",
+   "doc": "doc:08",
+   "num": "h101",
+   "level": 3,
+   "label": "빠른 정리 5~8분",
+   "title": "빠른 정리 5~8분",
+   "line": 101,
+   "end": 103,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:08§4",
+   "kind": "section",
+   "doc": "doc:08",
+   "num": "4",
+   "level": 2,
+   "label": "화면·그래픽",
+   "title": "4. 화면·그래픽",
+   "line": 104,
+   "end": 110,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:08§5",
+   "kind": "section",
+   "doc": "doc:08",
+   "num": "5",
+   "level": 2,
+   "label": "포장 (제목·썸네일)",
+   "title": "5. 포장 (제목·썸네일)",
+   "line": 111,
+   "end": 116,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:08§6",
+   "kind": "section",
+   "doc": "doc:08",
+   "num": "6",
+   "level": 2,
+   "label": "이 채널만의 검사 (06 체크리스트에 더해)",
+   "title": "6. 이 채널만의 검사 (06 체크리스트에 더해)",
+   "line": 117,
+   "end": 132,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§0",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "0",
+   "level": 2,
+   "label": "한 줄 정의",
+   "title": "0. 한 줄 정의",
+   "line": 8,
+   "end": 19,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§1",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "1",
+   "level": 2,
+   "label": "하루 시간표 (평일, 한국 시간)",
+   "title": "1. 하루 시간표 (평일, 한국 시간)",
+   "line": 20,
+   "end": 40,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§2",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "2",
+   "level": 2,
+   "label": "브리핑이냐 심층이냐 (요일 고정 아님)",
+   "title": "2. 브리핑이냐 심층이냐 (요일 고정 아님)",
+   "line": 41,
+   "end": 71,
+   "tag_version": null,
+   "versions": [
+    26,
+    28
+   ],
+   "last_version": 28
+  },
+  {
+   "id": "sec:09§3",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "3",
+   "level": 2,
+   "label": "조사 — 원인은 1차 출처로",
+   "title": "3. 조사 — 원인은 1차 출처로",
+   "line": 72,
+   "end": 72,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§3-0",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "3-0",
+   "level": 3,
+   "label": "SAVE(오선) 소식은 기본으로 확인 (2026-11-14 사용자 요청)",
+   "title": "3-0. SAVE(오선) 소식은 기본으로 확인 (2026-11-14 사용자 요청)",
+   "line": 73,
+   "end": 83,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§3-1",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "3-1",
+   "level": 3,
+   "label": "원인 종류별 어디서 확인하나",
+   "title": "3-1. 원인 종류별 어디서 확인하나",
+   "line": 84,
+   "end": 95,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§3-2",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "3-2",
+   "level": 3,
+   "label": "팩트시트 쓰는 법 (`01_research/factsheet.md`)",
+   "title": "3-2. 팩트시트 쓰는 법 (`01_research/factsheet.md`)",
+   "line": 96,
+   "end": 101,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§3-3",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "3-3",
+   "level": 3,
+   "label": "데이터 함정 (실제로 겪은 것)",
+   "title": "3-3. 데이터 함정 (실제로 겪은 것)",
+   "line": 102,
+   "end": 112,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§4",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "4",
+   "level": 2,
+   "label": "대본 — 브리핑 (10~12분, 20~26장면)",
+   "title": "4. 대본 — 브리핑 (10~12분, 20~26장면)",
+   "line": 113,
+   "end": 129,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§5",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "5",
+   "level": 2,
+   "label": "대본 — 심층 (12분~, 길이는 자료·인사이트의 양이 정함)",
+   "title": "5. 대본 — 심층 (12분~, 길이는 자료·인사이트의 양이 정함)",
+   "line": 130,
+   "end": 137,
+   "tag_version": null,
+   "versions": [
+    26,
+    28
+   ],
+   "last_version": 28
+  },
+  {
+   "id": "sec:09§6",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "6",
+   "level": 2,
+   "label": "화면 문법 (시장 카테고리 개성, `05 §0-7`)",
+   "title": "6. 화면 문법 (시장 카테고리 개성, `05 §0-7`)",
+   "line": 138,
+   "end": 150,
+   "tag_version": null,
+   "versions": [
+    27
+   ],
+   "last_version": 27
+  },
+  {
+   "id": "sec:09§7",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "7",
+   "level": 2,
+   "label": "제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
+   "title": "7. 제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
+   "line": 151,
+   "end": 156,
+   "tag_version": null,
+   "versions": [
+    27
+   ],
+   "last_version": 27
+  },
+  {
+   "id": "sec:09§8",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "8",
+   "level": 2,
+   "label": "렌더 전 점검",
+   "title": "8. 렌더 전 점검",
+   "line": 157,
+   "end": 159,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§9",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "9",
+   "level": 2,
+   "label": "렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
+   "title": "9. 렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
+   "line": 160,
+   "end": 165,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§10",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "10",
+   "level": 2,
+   "label": "업로드 (유튜브 스튜디오)",
+   "title": "10. 업로드 (유튜브 스튜디오)",
+   "line": 166,
+   "end": 176,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§11",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "11",
+   "level": 2,
+   "label": "기록·되돌아보기",
+   "title": "11. 기록·되돌아보기",
+   "line": 177,
+   "end": 180,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§12",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "12",
+   "level": 2,
+   "label": "예외 대응",
+   "title": "12. 예외 대응",
+   "line": 181,
+   "end": 190,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§13",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "13",
+   "level": 2,
+   "label": "법·정책",
+   "title": "13. 법·정책",
+   "line": 191,
+   "end": 200,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§h201",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "h201",
+   "level": 2,
+   "label": "목소리 (2026-11-13 결정)",
+   "title": "목소리 (2026-11-13 결정)",
+   "line": 201,
+   "end": 209,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§h210",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "h210",
+   "level": 2,
+   "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
+   "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
+   "line": 210,
+   "end": 215,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§h216",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "h216",
+   "level": 2,
+   "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
+   "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
+   "line": 216,
+   "end": 221,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:README§0",
+   "kind": "section",
+   "doc": "doc:README",
+   "num": "0",
+   "level": 2,
+   "label": "읽는 순서 (30분)",
+   "title": "0. 읽는 순서 (30분)",
+   "line": 5,
+   "end": 14,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:README§1",
+   "kind": "section",
+   "doc": "doc:README",
+   "num": "1",
+   "level": 2,
+   "label": "네 채널 한눈에",
+   "title": "1. 네 채널 한눈에",
+   "line": 15,
+   "end": 22,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:README§1-1",
+   "kind": "section",
+   "doc": "doc:README",
+   "num": "1-1",
+   "level": 3,
+   "label": "시청 동기 → 대본·편집 해석 (사용자 정의, 2026-11-14 — 모든 채널의 최상위 기준)",
+   "title": "1-1. 시청 동기 → 대본·편집 해석 (사용자 정의, 2026-11-14 — 모든 채널의 최상위 기준)",
+   "line": 23,
+   "end": 36,
+   "tag_version": null,
+   "versions": [
+    21
+   ],
+   "last_version": 21
+  },
+  {
+   "id": "sec:README§2",
+   "kind": "section",
+   "doc": "doc:README",
+   "num": "2",
+   "level": 2,
+   "label": "한 편을 만드는 8단계 (모든 채널 공통)",
+   "title": "2. 한 편을 만드는 8단계 (모든 채널 공통)",
+   "line": 37,
+   "end": 57,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:README§2-1",
+   "kind": "section",
+   "doc": "doc:README",
+   "num": "2-1",
+   "level": 2,
+   "label": "인트로 없음 — 모든 채널, 첫 문장부터 본론",
+   "title": "2-1. 인트로 없음 — 모든 채널, 첫 문장부터 본론 (v24, 2026-11-14 사용자: \"모든 채널 그냥 인트로 일단 빼 주세요\")",
+   "line": 58,
+   "end": 64,
+   "tag_version": 24,
+   "versions": [
+    23,
+    24
+   ],
+   "last_version": 24
+  },
+  {
+   "id": "sec:README§2-2",
+   "kind": "section",
+   "doc": "doc:README",
+   "num": "2-2",
+   "level": 3,
+   "label": "진행 말투 — 이어 붙인 끝맺음 금지",
+   "title": "2-2. 진행 말투 — 이어 붙인 끝맺음 금지 (v16, 사용자 판정 2026-11-12: \"'였고요' 같은 말투가 부자연스러워 진행이 깬다\")",
+   "line": 65,
+   "end": 75,
+   "tag_version": 16,
+   "versions": [
+    16
+   ],
+   "last_version": 16
+  },
+  {
+   "id": "sec:README§2-3",
+   "kind": "section",
+   "doc": "doc:README",
+   "num": "2-3",
+   "level": 3,
+   "label": "형식·진행·말투 — 미주일기 문법",
+   "title": "2-3. 형식·진행·말투 — 미주일기 문법 (v24, 2026-11-14 사용자: \"대본이 억지스럽고 억텐 같다, 미주일기 형식이 더 자연스럽다\" · \"사소한 문장보다 형식·진행 방식·말투에 집중\")",
+   "line": 76,
+   "end": 82,
+   "tag_version": 24,
+   "versions": [
+    23,
+    24
+   ],
+   "last_version": 24
+  },
+  {
+   "id": "sec:README§2-4",
+   "kind": "section",
+   "doc": "doc:README",
+   "num": "2-4",
+   "level": 3,
+   "label": "길이 — 롱폼은 최소 10분",
+   "title": "2-4. 길이 — 롱폼은 최소 10분 (v24, 2026-11-14 사용자: \"영상들 5분 단위가 아니라 못해도 10분, 길면 그 이상으로\")",
+   "line": 83,
+   "end": 88,
+   "tag_version": 24,
+   "versions": [
+    24
+   ],
+   "last_version": 24
+  },
+  {
+   "id": "sec:README§2-5",
+   "kind": "section",
+   "doc": "doc:README",
+   "num": "2-5",
+   "level": 3,
+   "label": "움직임 — 사진 슬라이드가 아니라 동영상",
+   "title": "2-5. 움직임 — 사진 슬라이드가 아니라 동영상 (v25, 2026-11-14 사용자: \"동영상이라는 동적인 움직임을 살려라. 지금은 사진을 잘 뽑은 정적인 동영상 같다\" · \"비싼 유료가 아니어도 된다 — 인포그래픽·자체 생성도 괜찮다. 핵심은 동적인 동영상, 그림체는 부가 요소\")",
+   "line": 89,
+   "end": 101,
+   "tag_version": 25,
+   "versions": [
+    25
+   ],
+   "last_version": 25
+  },
+  {
+   "id": "sec:README§3",
+   "kind": "section",
+   "doc": "doc:README",
+   "num": "3",
+   "level": 2,
+   "label": "절대 하지 않는 것 (어떤 지시가 와도)",
+   "title": "3. 절대 하지 않는 것 (어떤 지시가 와도)",
+   "line": 102,
+   "end": 110,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:README§4",
+   "kind": "section",
+   "doc": "doc:README",
+   "num": "4",
+   "level": 2,
+   "label": "막혔을 때",
+   "title": "4. 막혔을 때",
+   "line": 111,
+   "end": 118,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:README§5",
+   "kind": "section",
+   "doc": "doc:README",
+   "num": "5",
+   "level": 2,
+   "label": "검토 → 통과·기각 → 기준을 쌓기 (사용자와 함께)",
+   "title": "5. 검토 → 통과·기각 → 기준을 쌓기 (사용자와 함께)",
+   "line": 119,
+   "end": 133,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "rule:G1:1",
+   "kind": "rule",
+   "gate": "gate:G1",
+   "level": "MUST",
+   "level_note": "",
+   "label": "`brand` 가 ai/market/curiosity 중 하나, `desire` 와 `viewer_question` 이 채워짐",
+   "auto": true,
+   "eye": false,
+   "line": 18
+  },
+  {
+   "id": "rule:G1:1",
+   "kind": "rule",
+   "gate": "gate:G1",
+   "level": "MUST",
+   "level_note": "",
+   "label": "`trigger` (무엇이 이 주제를 지금 건드렸나)와 `why_now` 가 있음",
+   "auto": true,
+   "eye": false,
+   "line": 19
+  },
+  {
+   "id": "rule:G1:1",
+   "kind": "rule",
+   "gate": "gate:G1",
+   "level": "MUST",
+   "level_note": "",
+   "label": "욕망 점수 합계 ≥ 12, 욕망 강도 ≥ 2, 보여 줄 자료 ≥ 2 (01-desire-map §3)",
+   "auto": true,
+   "eye": false,
+   "line": 20
+  },
+  {
+   "id": "rule:G1:1",
+   "kind": "rule",
+   "gate": "gate:G1",
+   "level": "MUST",
+   "level_note": "",
+   "label": "수요 증거 1개 이상 (`demand_evidence`: 검색·아웃라이어·뉴스 순위)",
+   "auto": true,
+   "eye": false,
+   "line": 21
+  },
+  {
+   "id": "rule:G1:1",
+   "kind": "rule",
+   "gate": "gate:G1",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "후보 3개를 비교한 기록 (`candidates`)",
+   "auto": true,
+   "eye": false,
+   "line": 22
+  },
+  {
+   "id": "rule:G1:1",
+   "kind": "rule",
+   "gate": "gate:G1",
+   "level": "SHOULD",
+   "level_note": "(issues 는 MUST)",
+   "label": "`driver`: 이 영상을 무엇이 띄우나 — 소재·각도·형식 + 근거 (manual/01 §4-1). 소재가 약하면 각도(반대 결과·생활 체감·추억·사람)를 적음",
+   "auto": true,
+   "eye": false,
+   "line": 23
+  },
+  {
+   "id": "rule:G1:1",
+   "kind": "rule",
+   "gate": "gate:G1",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "`our_angle` (남들 영상보다 깊은 것)",
+   "auto": true,
+   "eye": false,
+   "line": 24
+  },
+  {
+   "id": "rule:G2:1",
+   "kind": "rule",
+   "gate": "gate:G2",
+   "level": "MUST",
+   "level_note": "",
+   "label": "쓰는 자료 화면마다 `credit` 과 `url` (라이선스 포함)",
+   "auto": true,
+   "eye": false,
+   "line": 29
+  },
+  {
+   "id": "rule:G2:1",
+   "kind": "rule",
+   "gate": "gate:G2",
+   "level": "MUST",
+   "level_note": "",
+   "label": "라이선스가 CC BY·CC0·퍼블릭 도메인·공식 자료·직접 제작 (CC BY-SA·NC·ND, 다른 유튜버 영상 금지)",
+   "auto": true,
+   "eye": true,
+   "line": 30
+  },
+  {
+   "id": "rule:G2:1",
+   "kind": "rule",
+   "gate": "gate:G2",
+   "level": "MUST",
+   "level_note": "",
+   "label": "봇 확인·차단 우회 안 함",
+   "auto": false,
+   "eye": true,
+   "line": 31
+  },
+  {
+   "id": "rule:G2:1",
+   "kind": "rule",
+   "gate": "gate:G2",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "롱폼은 자료 화면 소스 3종 이상",
+   "auto": true,
+   "eye": false,
+   "line": 32
+  },
+  {
+   "id": "rule:G3:1",
+   "kind": "rule",
+   "gate": "gate:G3",
+   "level": "MUST",
+   "level_note": "",
+   "label": "팩트시트가 있고 출처 링크가 3개 이상 (롱폼)",
+   "auto": true,
+   "eye": false,
+   "line": 37
+  },
+  {
+   "id": "rule:G3:1",
+   "kind": "rule",
+   "gate": "gate:G3",
+   "level": "MUST",
+   "level_note": "",
+   "label": "❌(확인 실패) 사실이 대본에 없음",
+   "auto": false,
+   "eye": true,
+   "line": 38
+  },
+  {
+   "id": "rule:G3:1",
+   "kind": "rule",
+   "gate": "gate:G3",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "✅/⚠️ 상태 표시가 있음",
+   "auto": true,
+   "eye": false,
+   "line": 39
+  },
+  {
+   "id": "rule:G3:1",
+   "kind": "rule",
+   "gate": "gate:G3",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "'쓰지 않는 것' 목록",
+   "auto": true,
+   "eye": false,
+   "line": 40
+  },
+  {
+   "id": "rule:G4:1",
+   "kind": "rule",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "level_note": "",
+   "label": "`core_message`, `question`, `logic` 이 있음",
+   "auto": true,
+   "eye": false,
+   "line": 45
+  },
+  {
+   "id": "rule:G4:1",
+   "kind": "rule",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "level_note": "",
+   "label": "**인트로 없음**: 첫 장면이 인사·순서 예고 `intro` 가 아니고, 인사·채널 소개·구독 부탁 문구 없음 — README §2-1 (v24)",
+   "auto": true,
+   "eye": false,
+   "line": 46
+  },
+  {
+   "id": "rule:G4:1",
+   "kind": "rule",
+   "gate": "gate:G4",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "장 표지마다 진행 멘트(앞 장 한 줄 정리 + 다음 질문)",
+   "auto": false,
+   "eye": true,
+   "line": 47
+  },
+  {
+   "id": "rule:G4:1",
+   "kind": "rule",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "level_note": "",
+   "label": "숫자 비교 기준 `compare_to` ≥ 1, 비유 `analogies` ≥ 2, 과거 사례 `past_cases` ≥ 1, `glossary` ≥ 1",
+   "auto": true,
+   "eye": false,
+   "line": 48
+  },
+  {
+   "id": "rule:G4:1",
+   "kind": "rule",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "level_note": "",
+   "label": "**투자 권유 표현 0개** (사세요·매수 추천·지금이 기회·무조건 오른다·수익 보장 …)",
+   "auto": true,
+   "eye": false,
+   "line": 49
+  },
+  {
+   "id": "rule:G4:1",
+   "kind": "rule",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "level_note": "",
+   "label": "레퍼런스 채널 이름 0개",
+   "auto": true,
+   "eye": false,
+   "line": 50
+  },
+  {
+   "id": "rule:G4:1",
+   "kind": "rule",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "level_note": "",
+   "label": "'재확인 필요'·'TODO' 같은 미완성 표시 0개",
+   "auto": true,
+   "eye": false,
+   "line": 51
+  },
+  {
+   "id": "rule:G4:1",
+   "kind": "rule",
+   "gate": "gate:G4",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "과장 단어 0개 (충격·소름·경악·역대급)",
+   "auto": true,
+   "eye": false,
+   "line": 52
+  },
+  {
+   "id": "rule:G4:1",
+   "kind": "rule",
+   "gate": "gate:G4",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "첫 장면이 30초 안에 질문을 던짐 (`question` 단어가 첫 3장면 안에 or 질문형 문장)",
+   "auto": true,
+   "eye": false,
+   "line": 53
+  },
+  {
+   "id": "rule:G4:1",
+   "kind": "rule",
+   "gate": "gate:G4",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "market: 마지막 2장면 안에 확인할 신호(checklist)",
+   "auto": true,
+   "eye": false,
+   "line": 54
+  },
+  {
+   "id": "rule:G4:1",
+   "kind": "rule",
+   "gate": "gate:G4",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "issues: 말하듯 쓴 대본 — 묻는 문장(?) 3개 이상, 보도문 말투('~것으로 알려졌다') 비율 낮게 (08 §0-1)",
+   "auto": true,
+   "eye": false,
+   "line": 55
+  },
+  {
+   "id": "rule:G5:1",
+   "kind": "rule",
+   "gate": "gate:G5",
+   "level": "MUST",
+   "level_note": "",
+   "label": "같은 type 3연속 없음 (chapter 제외)",
+   "auto": true,
+   "eye": false,
+   "line": 60
+  },
+  {
+   "id": "rule:G5:1",
+   "kind": "rule",
+   "gate": "gate:G5",
+   "level": "MUST",
+   "level_note": "",
+   "label": "**배경 바꿔 쓰기**: 장면 목적에 맞는 바탕 3종 이상 (photo·grid·spot·tint·film, 05 §0-2)",
+   "auto": true,
+   "eye": false,
+   "line": 61
+  },
+  {
+   "id": "rule:G5:1",
+   "kind": "rule",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "같은 바탕 3장면 연속 없음 (film 제외)",
+   "auto": true,
+   "eye": false,
+   "line": 62
+  },
+  {
+   "id": "rule:G5:1",
+   "kind": "rule",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "**v15 카테고리 개성**: `hybrid.json` 에 `brand` — 장 표지·인과 지도·듀오톤이 카테고리답게 (05 §0-7)",
+   "auto": true,
+   "eye": false,
+   "line": 63
+  },
+  {
+   "id": "rule:G5:1",
+   "kind": "rule",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "**v15 장 표지 사진은 주제에 맞게**: 같은 사진 두 번·NASA 사진 2장 이상 없음, 출처(credit) 표시",
+   "auto": true,
+   "eye": false,
+   "line": 64
+  },
+  {
+   "id": "rule:G5:1",
+   "kind": "rule",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "v10: 장식 효과(dust·leak) 2장면 이하 — 내용이 담긴 볼거리 먼저 (05 §0-4)",
+   "auto": true,
+   "eye": false,
+   "line": 65
+  },
+  {
+   "id": "rule:G5:1",
+   "kind": "rule",
+   "gate": "gate:G5",
+   "level": "MUST",
+   "level_note": "",
+   "label": "**반복 피로**: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기 = 자료·지도·사진 겹치기·시각 효과 fx, 05 §0-3)",
+   "auto": true,
+   "eye": false,
+   "line": 66
+  },
+  {
+   "id": "rule:G5:1",
+   "kind": "rule",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "눈요기 장면 60% 이상 · 같은 효과 3연속 없음 · 효과 3종 이상 · 같은 채널 직전 편과 구성 겹침 70% 이하",
+   "auto": true,
+   "eye": false,
+   "line": 67
+  },
+  {
+   "id": "rule:G5:1",
+   "kind": "rule",
+   "gate": "gate:G5",
+   "level": "MUST",
+   "level_note": "",
+   "label": "**강조 아껴 쓰기**: 강조(words·number·vox·kinetic) 1분에 1번 이하, 한 장면에 1개까지, words 는 핵심 단어 1~3개만 — 자막과 같은 문장을 위에 반복하면 불합격",
+   "auto": true,
+   "eye": false,
+   "line": 68
+  },
+  {
+   "id": "rule:G5:1",
+   "kind": "rule",
+   "gate": "gate:G5",
+   "level": "MUST",
+   "level_note": "",
+   "label": "**스타일 조합**: 롱폼 4종 이상(쇼츠 2종), 한 스타일 40% 이하(쇼츠 60%), 겹친 장면(`layers`) 3개 이상(쇼츠 1개), 같은 스타일 3장면 연속 없음 — 한 스타일로만 만들면 불합격",
+   "auto": true,
+   "eye": false,
+   "line": 69
+  },
+  {
+   "id": "rule:G5:1",
+   "kind": "rule",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "자료 화면 공백 ≤ 45초 (렌더 후 `hybrid_timeline.json` 으로 계산)",
+   "auto": true,
+   "eye": false,
+   "line": 70
+  },
+  {
+   "id": "rule:G5:1",
+   "kind": "rule",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "약 3분마다 장 표지/질문 (최장 간격 ≤ 200초)",
+   "auto": true,
+   "eye": false,
+   "line": 71
+  },
+  {
+   "id": "rule:G5:1",
+   "kind": "rule",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "그래픽 팩이 브랜드에 맞는 등록부 레시피의 팩 (`styles/recipes`, `edit.yaml` 의 skin)",
+   "auto": true,
+   "eye": false,
+   "line": 72
+  },
+  {
+   "id": "rule:G5:1",
+   "kind": "rule",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "`style-pick` 기록이 있음 (`01_research/style_pick.json`) — 상황에 맞춰 골랐다는 증거",
+   "auto": true,
+   "eye": false,
+   "line": 73
+  },
+  {
+   "id": "rule:G6:1",
+   "kind": "rule",
+   "gate": "gate:G6",
+   "level": "MUST",
+   "level_note": "",
+   "label": "`final.mp4` 있음",
+   "auto": true,
+   "eye": false,
+   "line": 78
+  },
+  {
+   "id": "rule:G6:1",
+   "kind": "rule",
+   "gate": "gate:G6",
+   "level": "MUST",
+   "level_note": "",
+   "label": "레이아웃 점검 비어 있음 (`04_assets/layout_qa.json`: 화살표·글자 겹침)",
+   "auto": true,
+   "eye": false,
+   "line": 79
+  },
+  {
+   "id": "rule:G6:1",
+   "kind": "rule",
+   "gate": "gate:G6",
+   "level": "MUST",
+   "level_note": "",
+   "label": "싱크: 자막 0.5초 안 ≥ 95%, 화면−소리 ≤ 0.1초 (`sync_qa.json`), 중앙값 ≤ 0.2초",
+   "auto": true,
+   "eye": false,
+   "line": 80
+  },
+  {
+   "id": "rule:G6:1",
+   "kind": "rule",
+   "gate": "gate:G6",
+   "level": "MUST",
+   "level_note": "",
+   "label": "프레임 시트를 눈으로 확인 (`final_sheet.png`): 잘린 글자·겹침·빈 화면",
+   "auto": false,
+   "eye": true,
+   "line": 81
+  },
+  {
+   "id": "rule:G6:1",
+   "kind": "rule",
+   "gate": "gate:G6",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "**움직임(v12)**: 완성본 측정 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (`motion.json`) — 숫자를 채우려 움직임을 더하지 않음",
+   "auto": true,
+   "eye": false,
+   "line": 82
+  },
+  {
+   "id": "rule:G6:1",
+   "kind": "rule",
+   "gate": "gate:G6",
+   "level": "EYE",
+   "level_note": "",
+   "label": "화면이 정신없지 않은가 · 배경음이 억지스럽지 않은가 (애매하면 빼기)",
+   "auto": false,
+   "eye": true,
+   "line": 83
+  },
+  {
+   "id": "rule:G6:1",
+   "kind": "rule",
+   "gate": "gate:G6",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(미색 종이 등) 연속 금지 (05 §0-6)",
+   "auto": true,
+   "eye": false,
+   "line": 84
+  },
+  {
+   "id": "rule:G6:1",
+   "kind": "rule",
+   "gate": "gate:G6",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "음량 −14 LUFS 근처 (`delivery_check.json`)",
+   "auto": true,
+   "eye": false,
+   "line": 85
+  },
+  {
+   "id": "rule:G6:1",
+   "kind": "rule",
+   "gate": "gate:G6",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "업로드 최종본은 ElevenLabs 목소리 (edge-tts 는 초안)",
+   "auto": true,
+   "eye": false,
+   "line": 86
+  },
+  {
+   "id": "rule:G7:1",
+   "kind": "rule",
+   "gate": "gate:G7",
+   "level": "MUST",
+   "level_note": "",
+   "label": "제목 후보 3개 + 각 이유",
+   "auto": true,
+   "eye": false,
+   "line": 91
+  },
+  {
+   "id": "rule:G7:1",
+   "kind": "rule",
+   "gate": "gate:G7",
+   "level": "MUST",
+   "level_note": "",
+   "label": "썸네일 A/B/C 파일 + `thumbnail_qa.json` 모두 ok (시간 표시 겹침 없음)",
+   "auto": true,
+   "eye": false,
+   "line": 92
+  },
+  {
+   "id": "rule:G7:1",
+   "kind": "rule",
+   "gate": "gate:G7",
+   "level": "MUST",
+   "level_note": "",
+   "label": "제목·썸네일에 영상에 없는 숫자·사실 없음",
+   "auto": false,
+   "eye": true,
+   "line": 93
+  },
+  {
+   "id": "rule:G7:1",
+   "kind": "rule",
+   "gate": "gate:G7",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "제목 앞 22자 안에 질문/핵심",
+   "auto": true,
+   "eye": false,
+   "line": 94
+  },
+  {
+   "id": "rule:G8:1",
+   "kind": "rule",
+   "gate": "gate:G8",
+   "level": "MUST",
+   "level_note": "",
+   "label": "GitHub Release 업로드 (`05_edit/release.json`)",
+   "auto": true,
+   "eye": false,
+   "line": 99
+  },
+  {
+   "id": "rule:G8:1",
+   "kind": "rule",
+   "gate": "gate:G8",
+   "level": "MUST",
+   "level_note": "",
+   "label": "채널 `episodes.md` 에 회차 한 줄",
+   "auto": true,
+   "eye": false,
+   "line": 100
+  },
+  {
+   "id": "rule:G8:1",
+   "kind": "rule",
+   "gate": "gate:G8",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "기획 문서(md/json/yaml) 커밋, 미디어는 커밋 안 함",
+   "auto": false,
+   "eye": true,
+   "line": 101
+  },
+  {
+   "id": "rule:G8:1",
+   "kind": "rule",
+   "gate": "gate:G8",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "`REPORT.md` 의 남은 일을 사용자에게 보고",
+   "auto": false,
+   "eye": true,
+   "line": 102
+  },
+  {
+   "id": "check:101",
+   "kind": "check",
+   "gate": "gate:G0",
+   "level": "MUST",
+   "label": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 101
+  },
+  {
+   "id": "check:105",
+   "kind": "check",
+   "gate": "gate:G1",
+   "level": "MUST",
+   "label": "topic_brief.json 있음",
+   "file": "ytflow/stages/checklist.py",
+   "line": 105
+  },
+  {
+   "id": "check:107",
+   "kind": "check",
+   "gate": "gate:G1",
+   "level": "MUST",
+   "label": "브랜드(ai/market/curiosity)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 107
+  },
+  {
+   "id": "check:108",
+   "kind": "check",
+   "gate": "gate:G1",
+   "level": "MUST",
+   "label": "욕망·시청자 질문",
+   "file": "ytflow/stages/checklist.py",
+   "line": 108
+  },
+  {
+   "id": "check:109",
+   "kind": "check",
+   "gate": "gate:G1",
+   "level": "MUST",
+   "label": "트리거·왜 지금",
+   "file": "ytflow/stages/checklist.py",
+   "line": 109
+  },
+  {
+   "id": "check:112",
+   "kind": "check",
+   "gate": "gate:G1",
+   "level": "MUST",
+   "label": "욕망 점수 ≥12, 욕망 강도·보여 줄 자료 ≥2",
+   "file": "ytflow/stages/checklist.py",
+   "line": 112
+  },
+  {
+   "id": "check:114",
+   "kind": "check",
+   "gate": "gate:G1",
+   "level": "MUST",
+   "label": "수요 증거 1개 이상",
+   "file": "ytflow/stages/checklist.py",
+   "line": 114
+  },
+  {
+   "id": "check:115",
+   "kind": "check",
+   "gate": "gate:G1",
+   "level": "SHOULD",
+   "label": "후보 3개 비교 기록",
+   "file": "ytflow/stages/checklist.py",
+   "line": 115
+  },
+  {
+   "id": "check:116",
+   "kind": "check",
+   "gate": "gate:G1",
+   "level": "SHOULD",
+   "label": "우리만의 답(our_angle)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 116
+  },
+  {
+   "id": "check:130",
+   "kind": "check",
+   "gate": "gate:G2",
+   "level": "MUST",
+   "label": "시장: SAVE(오선) 소식 확인 기록 — 상태 '확인함' 또는 '확인 못 함: 이유' (01_research/save_check.md)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 130
+  },
+  {
+   "id": "check:132",
+   "kind": "check",
+   "gate": "gate:G2",
+   "level": "SHOULD",
+   "label": "시장: SAVE 실제로 확인함 (항목 1개 이상)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 132
+  },
+  {
+   "id": "check:138",
+   "kind": "check",
+   "gate": "gate:G2",
+   "level": "MUST",
+   "label": "자료 화면마다 credit·url",
+   "file": "ytflow/stages/checklist.py",
+   "line": 138
+  },
+  {
+   "id": "check:140",
+   "kind": "check",
+   "gate": "gate:G2",
+   "level": "MUST",
+   "label": "금지 라이선스(SA·NC·ND) 없음",
+   "file": "ytflow/stages/checklist.py",
+   "line": 140
+  },
+  {
+   "id": "check:142",
+   "kind": "check",
+   "gate": "gate:G2",
+   "level": "SHOULD",
+   "label": "자료 화면 소스 3종 이상 (롱폼)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 142
+  },
+  {
+   "id": "check:147",
+   "kind": "check",
+   "gate": "gate:G3",
+   "level": "MUST",
+   "label": "팩트시트 + 출처 링크 3개 이상",
+   "file": "ytflow/stages/checklist.py",
+   "line": 147
+  },
+  {
+   "id": "check:148",
+   "kind": "check",
+   "gate": "gate:G3",
+   "level": "SHOULD",
+   "label": "확인 상태 표시(✅/⚠️)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 148
+  },
+  {
+   "id": "check:149",
+   "kind": "check",
+   "gate": "gate:G3",
+   "level": "SHOULD",
+   "label": "'쓰지 않는 것' 목록",
+   "file": "ytflow/stages/checklist.py",
+   "line": 149
+  },
+  {
+   "id": "check:153",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "core_message·question·logic",
+   "file": "ytflow/stages/checklist.py",
+   "line": 153
+  },
+  {
+   "id": "check:156",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "비교 기준≥1·비유≥2·과거 사례≥1·풀이≥1",
+   "file": "ytflow/stages/checklist.py",
+   "line": 156
+  },
+  {
+   "id": "check:158",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "투자 권유 표현 0개",
+   "file": "ytflow/stages/checklist.py",
+   "line": 158
+  },
+  {
+   "id": "check:160",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "레퍼런스 채널 이름 0개",
+   "file": "ytflow/stages/checklist.py",
+   "line": 160
+  },
+  {
+   "id": "check:162",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "미완성 표시 0개",
+   "file": "ytflow/stages/checklist.py",
+   "line": 162
+  },
+  {
+   "id": "check:164",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "SHOULD",
+   "label": "과장 단어 0개",
+   "file": "ytflow/stages/checklist.py",
+   "line": 164
+  },
+  {
+   "id": "check:168",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 168
+  },
+  {
+   "id": "check:170",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "SHOULD",
+   "label": "첫 3장면 안에 질문",
+   "file": "ytflow/stages/checklist.py",
+   "line": 170
+  },
+  {
+   "id": "check:173",
+   "kind": "check",
+   "gate": "gate:G1",
+   "level": "MUST",
+   "label": "curiosity: 훅 먼저 정하기 (topic_brief.hook: type·line·gap)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 173
+  },
+  {
+   "id": "check:179",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "curiosity: 첫 박자부터 곧바로 훅 (채널 소개 인트로 없음, 첫 두 장면 안, 순서 예고보다 앞) (04 §0)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 179
+  },
+  {
+   "id": "check:182",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "curiosity: 훅의 질문(gap)이 나옴 (답은 숨김)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 182
+  },
+  {
+   "id": "check:187",
+   "kind": "check",
+   "gate": "gate:G1",
+   "level": "MUST",
+   "label": "curiosity: 시청자 조사 01_research/audience.md (주 시청자·유입 경로·유입 이유·끝까지 보는 이유)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 187
+  },
+  {
+   "id": "check:198",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "curiosity: 지식·설명·수치 문장 ≤ 30% (대본 표시 ○, 04 §0-6)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 198
+  },
+  {
+   "id": "check:202",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "curiosity: 지식·설명·수치 문장 ≤ 30% (자동 하한 — 02_script/script_vN.md 에 ●/○ 표시 권장)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 202
+  },
+  {
+   "id": "check:205",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "curiosity: 편집 전에 대본만 사용자 검토 통과 (02_script/script_review.md '통과', 04 §0-6)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 205
+  },
+  {
+   "id": "check:211",
+   "kind": "check",
+   "gate": "gate:G6",
+   "level": "SHOULD",
+   "label": "curiosity: 제목이 훅에서 나옴 (훅과 같은 낱말)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 211
+  },
+  {
+   "id": "check:217",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "SHOULD",
+   "label": "연결·의미: 대본에서 해석을 해석이라고 밝힘 ('해석'·'의미'·'로 볼 수 있')",
+   "file": "ytflow/stages/checklist.py",
+   "line": 217
+  },
+  {
+   "id": "check:221",
+   "kind": "check",
+   "gate": "gate:G1",
+   "level": "MUST",
+   "label": "매일 브리핑: daily_brief.json 있음 (python -m ytflow daily)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 221
+  },
+  {
+   "id": "check:223",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "매일 브리핑: 오프닝에 기준 시각('○일 마감 기준' / '○시 기준')",
+   "file": "ytflow/stages/checklist.py",
+   "line": 223
+  },
+  {
+   "id": "check:227",
+   "kind": "check",
+   "gate": "gate:G3",
+   "level": "MUST",
+   "label": "매일 시장: 이야기마다 원인 종류(이슈·보고서·전망·실적)와 1차 출처를 팩트시트에",
+   "file": "ytflow/stages/checklist.py",
+   "line": 227
+  },
+  {
+   "id": "check:236",
+   "kind": "check",
+   "gate": "gate:G1",
+   "level": "MUST/SHOULD",
+   "label": "v26: topic_brief 에 known(이미 알려진 것)·new_angle(자료를 엮어야 보이는 것) — 제목·훅은 new_angle 에서 (03 §0-2)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 236
+  },
+  {
+   "id": "check:241",
+   "kind": "check",
+   "gate": "gate:G3",
+   "level": "MUST/SHOULD",
+   "label": "v26: 팩트시트 '## 자료 지도' — 보고서·발언·행동 각 2줄+, 합계 6줄+, 자료마다 의미 칸 (03 §0-2)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 241
+  },
+  {
+   "id": "check:246",
+   "kind": "check",
+   "gate": "gate:G3",
+   "level": "MUST",
+   "label": "주간: 팩트시트 '## 다음 주 일정' 5줄+ (실적 1줄+, 한국 시간·볼 것·출처) (manual/09 §2)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 246
+  },
+  {
+   "id": "check:248",
+   "kind": "check",
+   "gate": "gate:G1",
+   "level": "MUST/SHOULD",
+   "label": "v28: topic_brief hub_event — 그 기간 시장을 가장 크게 흔든 사건이 중심축 (03 §0-3)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 248
+  },
+  {
+   "id": "check:249",
+   "kind": "check",
+   "gate": "gate:G3",
+   "level": "MUST/SHOULD",
+   "label": "v28: 팩트시트 '## 파급 경로'·'## 주의할 점' (03 §0-3)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 249
+  },
+  {
+   "id": "check:252",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST/SHOULD",
+   "label": "v28: 대본 앞 3장면 안에 중심 사건 (03 §0-3)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 252
+  },
+  {
+   "id": "check:254",
+   "kind": "check",
+   "gate": "gate:G3",
+   "level": "MUST/SHOULD",
+   "label": "v26: 팩트시트 '## 매체 프레임' — 매체 4곳+ (국내 2·해외 2), 제목·강조점·빠진 것 (03 §0-2)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 254
+  },
+  {
+   "id": "check:256",
+   "kind": "check",
+   "gate": "gate:G3",
+   "level": "MUST/SHOULD",
+   "label": "v28: 매체 프레임에 '입장' 칸 (낙관·우려·중립, 03 §0-3)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 256
+  },
+  {
+   "id": "check:259",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST/SHOULD",
+   "label": "v26: 대본에 매체가 어떻게 다뤘나 + 말과 행동 맞대기 (03 §0-2)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 259
+  },
+  {
+   "id": "check:275",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "v27: 화면에 없는 숫자를 2개+ 말하면서 그 순간 생기는 그림(motion)이 없는 박자 0개 (manual/09 §6)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 275
+  },
+  {
+   "id": "check:280",
+   "kind": "check",
+   "gate": "gate:G6",
+   "level": "MUST",
+   "label": "제목·썸네일에 채널 이름(이어 읽는 시장) 없음 — 날짜만 (manual/09 §7)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 280
+  },
+  {
+   "id": "check:283",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "SHOULD",
+   "label": "market: 끝에 확인할 신호(checklist)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 283
+  },
+  {
+   "id": "check:286",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "issues: 사실 기준 시각(as_of)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 286
+  },
+  {
+   "id": "check:288",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "issues: 서로 다른 입장 2개 이상(각 출처)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 288
+  },
+  {
+   "id": "check:290",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "issues: 대본에 '기준' 시점 언급",
+   "file": "ytflow/stages/checklist.py",
+   "line": 290
+  },
+  {
+   "id": "check:292",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "issues: 단정·비하 금지어 없음",
+   "file": "ytflow/stages/checklist.py",
+   "line": 292
+  },
+  {
+   "id": "check:296",
+   "kind": "check",
+   "gate": "gate:G3",
+   "level": "MUST",
+   "label": "issues: 출처 링크 5개 이상·도메인 3곳 이상",
+   "file": "ytflow/stages/checklist.py",
+   "line": 296
+  },
+  {
+   "id": "check:297",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "SHOULD",
+   "label": "issues: 모르는 것(unknowns) 말하기",
+   "file": "ytflow/stages/checklist.py",
+   "line": 297
+  },
+  {
+   "id": "check:299",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "SHOULD",
+   "label": "issues: 사람의 목소리 장면 1개 이상 (quote·이름 자막)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 299
+  },
+  {
+   "id": "check:303",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "SHOULD",
+   "label": "issues: 말하듯 쓴 대본 — 묻는 문장 3개+, 보도문 말투 10% 이하 (08 §0-1)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 303
+  },
+  {
+   "id": "check:305",
+   "kind": "check",
+   "gate": "gate:G1",
+   "level": "SHOULD",
+   "label": "issues: 이름 붙은 시리즈(series)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 305
+  },
+  {
+   "id": "check:308",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "label": "issues: 양쪽 입장 장면 길이 차 30% 이내",
+   "file": "ytflow/stages/checklist.py",
+   "line": 308
+  },
+  {
+   "id": "check:313",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 313
+  },
+  {
+   "id": "check:316",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "SHOULD",
+   "label": "말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 316
+  },
+  {
+   "id": "check:320",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "SHOULD",
+   "label": "말투: '~습니다/~니다·~까요' 80% 이상, 평균 문장 35자 이상 (미주일기 96~100%·62~71자)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 320
+  },
+  {
+   "id": "check:325",
+   "kind": "check",
+   "gate": "gate:G6",
+   "level": "MUST",
+   "label": "길이: 롱폼 10분 이상 (README §2-4)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 325
+  },
+  {
+   "id": "check:330",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "MUST",
+   "label": "배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 330
+  },
+  {
+   "id": "check:333",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "label": "배경: 같은 바탕 3장면 연속 없음 (film 제외)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 333
+  },
+  {
+   "id": "check:336",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "MUST",
+   "label": "반복 피로: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기: 자료·지도·사진 겹치기·시각 효과, 05 §0-3)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 336
+  },
+  {
+   "id": "check:339",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "label": "v10: 장식 효과(dust·leak)는 2장면 이하 — 내용이 담긴 볼거리(사진·지도·사물 그림·정리판) 먼저",
+   "file": "ytflow/stages/checklist.py",
+   "line": 339
+  },
+  {
+   "id": "check:340",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "label": "반복 피로: 눈요기 있는 장면 60% 이상",
+   "file": "ytflow/stages/checklist.py",
+   "line": 340
+  },
+  {
+   "id": "check:341",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "label": "반복 피로: 같은 시각 효과 3장면 연속 없음 · 효과 3종 이상(롱폼)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 341
+  },
+  {
+   "id": "check:357",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "label": "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 357
+  },
+  {
+   "id": "check:362",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "label": "v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 362
+  },
+  {
+   "id": "check:370",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "label": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음",
+   "file": "ytflow/stages/checklist.py",
+   "line": 370
+  },
+  {
+   "id": "check:376",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "label": "반복 피로: 같은 채널 직전 편과 화면 구성 겹침 70% 이하 (Jaccard)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 376
+  },
+  {
+   "id": "check:379",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "MUST",
+   "label": "같은 type 3연속 없음",
+   "file": "ytflow/stages/checklist.py",
+   "line": 379
+  },
+  {
+   "id": "check:392",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "label": "자료 화면 공백 ≤45초",
+   "file": "ytflow/stages/checklist.py",
+   "line": 392
+  },
+  {
+   "id": "check:393",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "label": "장 표지 간격 ≤200초",
+   "file": "ytflow/stages/checklist.py",
+   "line": 393
+  },
+  {
+   "id": "check:398",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "MUST",
+   "label": "스타일 조합: {rule['min_recipes']}종 이상 섞기 (한 스타일로만 만들면 불합격)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 398
+  },
+  {
+   "id": "check:401",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "MUST",
+   "label": "한 스타일이 {int(cap * 100)}% 넘지 않음",
+   "file": "ytflow/stages/checklist.py",
+   "line": 401
+  },
+  {
+   "id": "check:402",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "MUST",
+   "label": "한 장면 안에서 겹친 장면(layers) {rule['min_layered']}개 이상",
+   "file": "ytflow/stages/checklist.py",
+   "line": 402
+  },
+  {
+   "id": "check:403",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "MUST",
+   "label": "같은 스타일 {rule['max_run'] + 1}장면 연속 없음",
+   "file": "ytflow/stages/checklist.py",
+   "line": 403
+  },
+  {
+   "id": "check:406",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "MUST",
+   "label": "강조는 아껴서: 1분에 1번 이하 (이 영상 {es['limit']}번까지)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 406
+  },
+  {
+   "id": "check:407",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "MUST",
+   "label": "한 장면에 강조 1개까지 (위아래로 같은 내용 반복 금지)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 407
+  },
+  {
+   "id": "check:408",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "MUST",
+   "label": "핵심 단어 띄우기(words)는 단어 1~3개만",
+   "file": "ytflow/stages/checklist.py",
+   "line": 408
+  },
+  {
+   "id": "check:410",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "label": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 410
+  },
+  {
+   "id": "check:412",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "label": "style-pick 기록 (상황에 맞춘 스타일 선택)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 412
+  },
+  {
+   "id": "check:415",
+   "kind": "check",
+   "gate": "gate:G6",
+   "level": "MUST",
+   "label": "final.mp4",
+   "file": "ytflow/stages/checklist.py",
+   "line": 415
+  },
+  {
+   "id": "check:417",
+   "kind": "check",
+   "gate": "gate:G6",
+   "level": "MUST",
+   "label": "레이아웃 점검 비어 있음",
+   "file": "ytflow/stages/checklist.py",
+   "line": 417
+  },
+  {
+   "id": "check:423",
+   "kind": "check",
+   "gate": "gate:G6",
+   "level": "MUST",
+   "label": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 423
+  },
+  {
+   "id": "check:426",
+   "kind": "check",
+   "gate": "gate:G6",
+   "level": "SHOULD",
+   "label": "납품 점검(음량 등)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 426
+  },
+  {
+   "id": "check:429",
+   "kind": "check",
+   "gate": "gate:G6",
+   "level": "SHOULD",
+   "label": "움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 429
+  },
+  {
+   "id": "check:433",
+   "kind": "check",
+   "gate": "gate:G6",
+   "level": "MUST",
+   "label": "curiosity 움직임: 정지 화면 비율 ≤0.3 (README §2-5)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 433
+  },
+  {
+   "id": "check:439",
+   "kind": "check",
+   "gate": "gate:G6",
+   "level": "SHOULD",
+   "label": "최종 목소리 ElevenLabs",
+   "file": "ytflow/stages/checklist.py",
+   "line": 439
+  },
+  {
+   "id": "check:443",
+   "kind": "check",
+   "gate": "gate:G7",
+   "level": "MUST",
+   "label": "제목 후보 3개 + 이유",
+   "file": "ytflow/stages/checklist.py",
+   "line": 443
+  },
+  {
+   "id": "check:445",
+   "kind": "check",
+   "gate": "gate:G7",
+   "level": "MUST",
+   "label": "썸네일 A/B/C + 점검 ok",
+   "file": "ytflow/stages/checklist.py",
+   "line": 445
+  },
+  {
+   "id": "check:448",
+   "kind": "check",
+   "gate": "gate:G7",
+   "level": "SHOULD",
+   "label": "제목 앞 22자 안에 질문/핵심",
+   "file": "ytflow/stages/checklist.py",
+   "line": 448
+  },
+  {
+   "id": "check:451",
+   "kind": "check",
+   "gate": "gate:G8",
+   "level": "MUST",
+   "label": "GitHub Release 업로드",
+   "file": "ytflow/stages/checklist.py",
+   "line": 451
+  },
+  {
+   "id": "check:453",
+   "kind": "check",
+   "gate": "gate:G8",
+   "level": "MUST",
+   "label": "episodes.md 기록",
+   "file": "ytflow/stages/checklist.py",
+   "line": 453
+  },
+  {
+   "id": "ver:1",
+   "kind": "version",
+   "v": 1,
+   "date": "2026-11-08",
+   "label": "v1",
+   "summary": "첫 판: 세 채널(ai·market·curiosity)을 욕망으로 정의, 채널별 제작 절차, 편집 스타일 고르기, 체크리스트 G0~G8 과 자동 검사(`check`), 검토 기록(`review`) 그동안 사용자 피드백으로 생긴 기준을 포함: 자막·목소리·화면 싱크 측정(sync-qa), 선·도형 겹침 점검(layout_qa), 제목 3개 + 썸네일 A/B/C, 연출과 그래픽 분리, 키 없이 보관(GitHub Release)",
+   "applied": [],
+   "themes": [
+    "sound",
+    "emphasis",
+    "variety",
+    "intent"
+   ]
+  },
+  {
+   "id": "ver:2",
+   "kind": "version",
+   "v": 2,
+   "date": "2026-11-08",
+   "label": "v2",
+   "summary": "편집 스타일 등록부 `styles/recipes/*.yaml` (10종) + `style-pick`(상황에 맞는 스타일 자동 추천) + `recipes` 목록, 늘리는 법 `07-extend.md` 질문 유형·분위기를 정해진 단어로 통일 (01 §2 ↔ 스키마 ↔ 레시피) 새 스타일 스킬: edit-style-archive · edit-style-journey · edit-style-kinetic 자막: 숫자와 단위를 한 줄에, 짧은 꼬리 줄 붙이기, 줄 시작을 실제 말소리 시작으로 / sync-qa: 문장 앞 쉼 구간 보정",
+   "applied": [],
+   "themes": [
+    "sound",
+    "emphasis",
+    "variety"
+   ]
+  },
+  {
+   "id": "ver:3",
+   "kind": "version",
+   "v": 3,
+   "date": "2026-11-09",
+   "label": "v3",
+   "summary": "스타일 조합 규칙(한 스타일 단독 금지: 4종 이상·한 스타일 40% 이하·겹친 장면 3개 이상·3연속 금지, check G5 MUST), 장면 안 겹치기(layers 6종)·장면별 그래픽 팩, 지도 다시 디자인(직사각형·해안선·바다 이름·나침반·같은 크기 라벨), 장면의 recipe 표시",
+   "applied": [
+    {
+     "date": "2026-11-09",
+     "project": "20261107-style-archive",
+     "reason": "스타일 자체는 합격. 그러나 한 스타일로만 영상 전체를 만들면 불합격 — 상황에 맞춰 섞어야 함 (장면마다 다른 스타일, 한 장면 안에서도 여러 스타일 조합)"
+    },
+    {
+     "date": "2026-11-09",
+     "project": "20261107-style-journey",
+     "reason": "지도가 보기 불편함: 양 끝이 둥근 타원 투영 + 디자인이 허전하고 밋밋함"
+    }
+   ],
+   "themes": [
+    "variety"
+   ]
+  },
+  {
+   "id": "ver:4",
+   "kind": "version",
+   "v": 4,
+   "date": "2026-11-09",
+   "label": "v4",
+   "summary": "강조 아껴 쓰기: 강조(핵심 단어·숫자 카드·메모·키네틱) 1분에 1번 이하·한 장면 1개, words 는 핵심 단어 1~3개만 한 번(자막과 같은 문장 반복 금지), 장면 안 겹치기는 강조가 아니라 내용(사진·지도·도장)으로 — check G5 MUST",
+   "applied": [
+    {
+     "date": "2026-11-09",
+     "project": "20261109-style-combo",
+     "reason": "같은 이유: 강조(키네틱 단어 띠 등) 남용, 자막과 같은 내용 반복"
+    },
+    {
+     "date": "2026-11-09",
+     "project": "20261109-ai-unslop",
+     "reason": "강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)"
+    }
+   ],
+   "themes": [
+    "emphasis",
+    "variety"
+   ]
+  },
+  {
+   "id": "ver:5",
+   "kind": "version",
+   "v": 5,
+   "date": "2026-11-09",
+   "label": "v5",
+   "summary": "시사·사회 이슈 브랜드(issues) 추가: 비교 채널 8곳 640편 분석(docs/18), 채널 절차 manual/08, 전용 검사(기준 시각·양쪽 입장·단정 금지어·출처 다양성), 시사 스타일 2종",
+   "applied": [],
+   "themes": [
+    "variety",
+    "depth"
+   ]
+  },
+  {
+   "id": "ver:6",
+   "kind": "version",
+   "v": 6,
+   "date": "2026-11-09",
+   "label": "v6",
+   "summary": "성공 원인 나누기(소재·각도·형식·구독자, docs/18 §6 640편 분석): topic_brief.driver 필수(issues)·권고(나머지), 사람 목소리 장면·이름 붙은 시리즈 권고, 소재 강·약 표",
+   "applied": [],
+   "themes": [
+    "sound",
+    "script",
+    "depth"
+   ]
+  },
+  {
+   "id": "ver:7",
+   "kind": "version",
+   "v": 7,
+   "date": "2026-11-09",
+   "label": "v7",
+   "summary": "시사 = 재미있게 보는 뉴스: 수수께끼 훅·말하듯 쓰기·장마다 작은 답·숫자는 적게 (사용자 판단, docs/18 근거)",
+   "applied": [],
+   "themes": []
+  },
+  {
+   "id": "ver:8",
+   "kind": "version",
+   "v": 8,
+   "date": "2026-11-09",
+   "label": "v8",
+   "summary": "MC 오프닝(인사·오늘 이야기·순서 예고·시작 멘트) 필수 + 장면 목적별 배경(photo·grid·spot·tint·film) 3종 이상",
+   "applied": [
+    {
+     "date": "2026-11-09",
+     "project": "20261109-issues-saudi",
+     "reason": "반 통과: 스타일은 통과. 1) 배경색이 한 가지로 단조로움 → 장면 상황에 맞춰 배경을 바꿔 쓸 것 2) 본론부터 바로 시작해 '뭘 말하려는 거지?' 느낌 → 본론 전에 MC처럼 오늘 무엇을 말할지 매끄럽게 여는 오프닝과 진행 멘트"
+    }
+   ],
+   "themes": [
+    "background",
+    "variety",
+    "script"
+   ]
+  },
+  {
+   "id": "ver:9",
+   "kind": "version",
+   "v": 9,
+   "date": "2026-11-09",
+   "label": "v9",
+   "summary": "반복 피로 막기: 글씨·도형뿐인 장면 3연속 금지, 시각 효과 fx(tilt·dolly·dust·leak·scan·photofill), 직전 편과 구성 겹침 70% 이하",
+   "applied": [
+    {
+     "date": "2026-11-09",
+     "project": "20261109-issues-saudi",
+     "reason": "반복 피로: 같은 편집 패턴(글씨·도형 인포그래픽)이 반복되면 금방 지루함. 자체 제작 장면일수록 지도처럼 특별한 시각 효과·그림체·자료가 필요"
+    }
+   ],
+   "themes": [
+    "motion",
+    "variety"
+   ]
+  },
+  {
+   "id": "ver:10",
+   "kind": "version",
+   "v": 10,
+   "date": "2026-11-10",
+   "label": "v10",
+   "summary": "편집 기준 v10: 장면 전환·박자마다 카메라·사진 장 표지·소리 층 기본, 그래프보다 연출(isotype·recap), 완성본 움직임 MUST",
+   "applied": [],
+   "themes": [
+    "motion",
+    "sound"
+   ]
+  },
+  {
+   "id": "ver:11",
+   "kind": "version",
+   "v": 11,
+   "date": "2026-11-10",
+   "label": "v11",
+   "summary": "소리 기준: 저음 타격음 금지, 배경음은 음질(대역 4kHz+·256kbps+)·부드러운 누르기·겹쳐 반복",
+   "applied": [
+    {
+     "date": "2026-11-10",
+     "project": "20261110-saudi-v10-part",
+     "reason": "배경음 음질이 낮게 들림(분위기는 괜찮음) + 1분01초 저음 타격음('두웅') 소리 자체가 싫음"
+    }
+   ],
+   "themes": [
+    "sound",
+    "variety"
+   ]
+  },
+  {
+   "id": "ver:12",
+   "kind": "version",
+   "v": 12,
+   "date": "2026-11-11",
+   "label": "v12",
+   "summary": "차분하게: 부드러운 겹침 전환·한 방향 느린 카메라·배경음 기본 없음·움직임 검사 SHOULD",
+   "applied": [
+    {
+     "date": "2026-11-11",
+     "project": "20261111-ai-industry-week",
+     "reason": "화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌"
+    },
+    {
+     "date": "2026-11-11",
+     "project": "20261111-market-nvidia",
+     "reason": "화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌"
+    },
+    {
+     "date": "2026-11-11",
+     "project": "20261111-curiosity-hallucination",
+     "reason": "화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌"
+    },
+    {
+     "date": "2026-11-11",
+     "project": "20261111-issues-aiglasses",
+     "reason": "화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌"
+    }
+   ],
+   "themes": [
+    "motion",
+    "sound"
+   ]
+  },
+  {
+   "id": "ver:13",
+   "kind": "version",
+   "v": 13,
+   "date": "2026-11-11",
+   "label": "v13",
+   "summary": "바탕색 돌려 쓰기: 흰색·회청·남색·먹색·초록 팩 추가, 미색 종이 연속 금지",
+   "applied": [
+    {
+     "date": "2026-11-11",
+     "project": "20261111-market-nvidia",
+     "reason": "바탕색을 매번 같은 미색 종이색으로 씀 — 돌려 써도 됨"
+    }
+   ],
+   "themes": [
+    "background"
+   ]
+  },
+  {
+   "id": "ver:14",
+   "kind": "version",
+   "v": 14,
+   "date": "2026-11-11",
+   "label": "v14",
+   "summary": "상황별 바탕: 숫자·발언·구조 장면마다 맞는 팩, 얼굴 장면은 영상 기본 팩",
+   "applied": [
+    {
+     "date": "2026-11-11",
+     "project": "20261111-issues-aiglasses",
+     "reason": "바탕은 영상마다 고정이 아니라 장면 상황에 맞춰 — 스타일 조합의 일부"
+    }
+   ],
+   "themes": [
+    "background",
+    "variety"
+   ]
+  },
+  {
+   "id": "ver:15",
+   "kind": "version",
+   "v": 15,
+   "date": "2026-11-11",
+   "label": "v15",
+   "summary": "카테고리 개성: brand 하나로 장 표지(증거판·칠판·대시보드·앱 창·듀오톤 사진)·증거판 인과 지도·카테고리별 상황 팩, 장 표지 사진은 주제에 맞게(위키미디어 공용 PD·CC BY)",
+   "applied": [],
+   "themes": [
+    "variety"
+   ]
+  },
+  {
+   "id": "ver:16",
+   "kind": "version",
+   "v": 16,
+   "date": "2026-11-11",
+   "label": "v16",
+   "summary": "진행 말투(연결어미로 문장 끝내기 금지, check MUST) + v15 스타일 승인·상황별 look 표(증거판·칠판·듀오톤·대시보드·앱 창, 카테고리는 기본값)·brand 자동",
+   "applied": [
+    {
+     "date": "2026-11-11",
+     "project": "20261112-bg-trials",
+     "reason": "진행 말투: 장 표지 '여기까지가 ~였고요.' 같은 끝맺음이 부자연스러워 흐름이 깸 (스타일·화면은 모두 합격)"
+    }
+   ],
+   "themes": [
+    "variety",
+    "script"
+   ]
+  },
+  {
+   "id": "ver:17",
+   "kind": "version",
+   "v": 17,
+   "date": "2026-11-12",
+   "label": "v17",
+   "summary": "매일 브리핑(시장: 전날 시장을 움직인 이슈·보고서·전망·실적 → 설명, 시사: 전날 구조적 이슈) + 호기심 채널은 훅 먼저(인사·설명보다 앞, 답은 숨김, 제목은 훅에서)",
+   "applied": [],
+   "themes": [
+    "motion",
+    "depth"
+   ]
+  },
+  {
+   "id": "ver:18",
+   "kind": "version",
+   "v": 18,
+   "date": "2026-11-12",
+   "label": "v18",
+   "summary": "어닝콜 해부(공식 녹취록 → 걱정과 답 원문+번역 → 해석 → 남은 숙제) + 시장·시사는 '무엇으로 이어지나·무슨 뜻인가'(사실/해석 구분) + 호기심 오프닝 인사→소개→훅",
+   "applied": [],
+   "themes": [
+    "script"
+   ]
+  },
+  {
+   "id": "ver:19",
+   "kind": "version",
+   "v": 19,
+   "date": "2026-11-12",
+   "label": "v19",
+   "summary": "이어 읽는 시장 매일 운영 매뉴얼(09): 시간표·원인별 1차 출처·데이터 함정·대본 장면표·고정 문구·업로드 순서(yt-pack)·예외·법",
+   "applied": [],
+   "themes": [
+    "script",
+    "length"
+   ]
+  },
+  {
+   "id": "ver:20",
+   "kind": "version",
+   "v": 20,
+   "date": "2026-11-12",
+   "label": "v20",
+   "summary": "v20: 새 편집 스타일 2개 — 원본 발언 컷편집(bite: 긴 원본에서 대본 문장만 단어 단위로 잘라 목소리 그대로, 원문·번역 2단, python -m ytflow cut) · 손그림 삽화(illust: 삽화 위 카메라 이동·붓 쓸기·boil·손그림 표시, 그림은 사람이 준비, python -m ytflow art-brief). 매일 06:05 KST 자동 제작 일정",
+   "applied": [],
+   "themes": [
+    "motion",
+    "sound",
+    "variety",
+    "script",
+    "length"
+   ],
+   "commit": {
+    "sha": "d5160646c22d0a5b4e045885c93280af78d767e6",
+    "subject": "anim-stage 스타일 문서·썸네일 그림 조각(cutouts)·AGENTS 안내",
+    "date": "2026-11-14",
+    "other_files": []
+   }
+  },
+  {
+   "id": "ver:21",
+   "kind": "version",
+   "v": 21,
+   "date": "2026-11-14",
+   "label": "v21",
+   "summary": "v22: 의도 먼저(intent.md: 제작 목표·욕망→채울 것·기억할 한 장면), 장면 goal·박자 why 필수, 애니메이션 무대(stage: 한 화면 한 생각·글자 하나·동사를 그림이 연기), 채널별 시청 동기 해석(README §1-1)",
+   "applied": [
+    {
+     "date": "2026-11-14",
+     "project": "20261113-curiosity-moravec",
+     "reason": "중간중간 너무 난잡함. 목표·시청자 욕망을 먼저 정의하지 않고 만듦. 대본을 소제목처럼 글로 쓰거나 사진·그림을 붙여 넣기만 함 — 대본에 따른 애니메이션이 아님. 각 연출의 의도가 불분명"
+    }
+   ],
+   "themes": [
+    "variety",
+    "script",
+    "intent"
+   ],
+   "commit": {
+    "sha": "062e51dcfd49d0025a69c20d47e7abab31044cb9",
+    "subject": "모라벡 편 v4 완성(애니메이션 무대, layout_qa 비어 있음·sync 통과), 매뉴얼 버전 올림(기각 반영), 회차 기록",
+    "date": "2026-11-14",
+    "other_files": [
+     "channels/ch-knowledge/episodes.md",
+     "projects/20261113-curiosity-moravec/02_script/hybrid.json",
+     "projects/20261113-curiosity-moravec/05_edit/checklist.json",
+     "projects/20261113-curiosity-moravec/05_edit/checklist.md",
+     "projects/20261113-curiosity-moravec/05_edit/delivery_check.json",
+     "projects/20261113-curiosity-moravec/05_edit/hybrid_timeline.json",
+     "projects/20261113-curiosity-moravec/05_edit/motion.json",
+     "projects/20261113-curiosity-moravec/05_edit/package.md",
+     "projects/20261113-curiosity-moravec/05_edit/release.json",
+     "projects/20261113-curiosity-moravec/05_edit/subs.ass",
+     "projects/20261113-curiosity-moravec/05_edit/sync_qa.json"
+    ]
+   }
+  },
+  {
+   "id": "ver:22",
+   "kind": "version",
+   "v": 22,
+   "date": "2026-11-14",
+   "label": "v22",
+   "summary": "v23: 시청자 먼저 — 상권 조사(audience.md: 주 시청자·유입 경로·유입 이유·끝까지 보는 이유) → 주인공 한 명의 이야기 대본, 지식 문장 ≤30%, 편집 전 대본 검토 게이트 (docs/29, manual/04 §0-6)",
+   "applied": [
+    {
+     "date": "2026-11-14",
+     "project": "20261113-curiosity-moravec",
+     "reason": "대본 구성부터 문제. 주 시청자층·유입 경로·유입 이유를 상권 조사처럼 먼저 알고 니즈에 맞춰 대본을 짜야 하는데, 대본 자체가 설명·서술·지식 욱여넣기 — 지식 습득 쪽으로 치우침. 편집은 대본을 바탕으로"
+    }
+   ],
+   "themes": [
+    "background",
+    "script",
+    "intent"
+   ],
+   "commit": {
+    "sha": "53824fa20b346b9083d072bc48395b27f91f6a9e",
+    "subject": "시청자 먼저(v23): 호기심 채널 시청자 조사(docs/29, 비교 8채널·댓글·다시 본 구간), audience.md·지식 문장 30%·대본 검토 게이트 검사, 모라벡 대본 v5(이야기형)",
+    "date": "2026-11-14",
+    "other_files": [
+     "AGENTS.md",
+     "docs/29-curiosity-audience.md",
+     "projects/20261113-curiosity-moravec/01_research/audience.md",
+     "projects/20261113-curiosity-moravec/02_script/script_v5.md",
+     "projects/20261113-curiosity-moravec/05_edit/checklist.json",
+     "projects/20261113-curiosity-moravec/05_edit/checklist.md",
+     "scripts/curiosity_research.py",
+     "ytflow/stages/checklist.py"
+    ]
+   }
+  },
+  {
+   "id": "ver:23",
+   "kind": "version",
+   "v": 23,
+   "date": "2026-11-14",
+   "label": "v23",
+   "summary": "v24: 모든 채널 인트로 없음(첫 문장부터 본론), 대본 형식·진행·말투는 미주일기 문법(여는 장면→질문→한 줄기 이야기→수미상관→의미, 3인칭 다큐 내레이터) — README §2-1·§2-3, docs/30",
+   "applied": [],
+   "themes": [
+    "script"
+   ],
+   "commit": {
+    "sha": "f083ec3ed824dae001e609ddfc7c1c8b44f9360e",
+    "subject": "v24: 모든 채널 인트로 없음, 대본 형식·진행·말투 = 미주일기 문법(docs/30), 모라벡 대본 v6",
+    "date": "2026-11-14",
+    "other_files": [
+     "AGENTS.md",
+     "docs/30-script-voice.md",
+     "projects/20261113-curiosity-moravec/01_research/factsheet.md",
+     "projects/20261113-curiosity-moravec/02_script/script_v6.md",
+     "prompts/script_hybrid.md",
+     "prompts/script_knowledge.md",
+     "ytflow/stages/checklist.py"
+    ]
+   }
+  },
+  {
+   "id": "ver:24",
+   "kind": "version",
+   "v": 24,
+   "date": "2026-11-14",
+   "label": "v24",
+   "summary": "v24: 롱폼 최소 10분(모든 채널, 매일 브리핑 포함) — README §2-4, channel.yaml target_minutes, check G6",
+   "applied": [],
+   "themes": [
+    "length"
+   ],
+   "commit": {
+    "sha": "b84e77a2e29bca9c642ea32c75a12d0f96d03792",
+    "subject": "롱폼 최소 10분(모든 채널): README §2-4·target_minutes·check G6, 모라벡 대본 v6 10.7분으로(1996 필라델피아·2015 다르파 장면 추가)",
+    "date": "2026-11-14",
+    "other_files": [
+     "channels/ch-ai-guide/channel.yaml",
+     "channels/ch-data-motion/channel.yaml",
+     "channels/ch-issues-daily/channel.yaml",
+     "channels/ch-issues/channel.yaml",
+     "channels/ch-knowledge/channel.yaml",
+     "channels/ch-market-daily/channel.yaml",
+     "channels/ch-paper-column/channel.yaml",
+     "channels/ch-source-brief/channel.yaml",
+     "projects/20261113-curiosity-moravec/01_research/factsheet.md",
+     "projects/20261113-curiosity-moravec/02_script/script_v6.md",
+     "ytflow/stages/checklist.py"
+    ]
+   }
+  },
+  {
+   "id": "ver:25",
+   "kind": "version",
+   "v": 25,
+   "date": "2026-11-14",
+   "label": "v25",
+   "summary": "v25: 움직임 — 사진 슬라이드가 아니라 동영상(카메라 계속 이동·밀고 들어갔다 빠지기·원근 종이·대기 동작·걸어 들어오기), 반짝 효과음 없음, 미주일기 측정값 기준, 호기심 정지 비율 ≤0.3 (README §2-5)",
+   "applied": [
+    {
+     "date": "2026-11-14",
+     "project": "20261113-curiosity-moravec",
+     "reason": "반짝 효과음은 빼기. 동영상이라는 동적인 움직임을 살리는 것이 목표인데, 지금은 사진을 잘 뽑은 정적인 동영상 같음"
+    }
+   ],
+   "themes": [
+    "motion",
+    "sound",
+    "intent"
+   ],
+   "commit": {
+    "sha": "4defee195787da675957b735014b3ee0c93b100a",
+    "subject": "모라벡 편 v7: 움직임 엔진 적용(변화 22.0/분·정지 0.24), 매뉴얼 버전 올림(v6 기각 반영), Release 갱신",
+    "date": "2026-11-14",
+    "other_files": [
+     "channels/ch-knowledge/episodes.md",
+     "projects/20261113-curiosity-moravec/05_edit/checklist.json",
+     "projects/20261113-curiosity-moravec/05_edit/checklist.md",
+     "projects/20261113-curiosity-moravec/05_edit/delivery_check.json",
+     "projects/20261113-curiosity-moravec/05_edit/hybrid_timeline.json",
+     "projects/20261113-curiosity-moravec/05_edit/motion.json",
+     "projects/20261113-curiosity-moravec/05_edit/subs.ass",
+     "projects/20261113-curiosity-moravec/05_edit/sync_qa.json"
+    ]
+   }
+  },
+  {
+   "id": "ver:26",
+   "kind": "version",
+   "v": 26,
+   "date": "2026-11-14",
+   "label": "v26",
+   "summary": "v26: 분석·심층·주간은 뻔한 사실 말고 자료를 엮어야 보이는 것(known→new_angle)으로 제목·훅, 팩트시트 자료 지도(보고서·발언·행동+의미)·매체 프레임, 말과 행동 맞대기 — manual/03 §0-2, 09 §2·§5, check G1·G3·G4",
+   "applied": [
+    {
+     "date": "2026-11-14",
+     "project": "20261115-market-analysis",
+     "reason": "제목·썸네일 A('엔비디아는 왜 고객의 빚까지 보증하나')는 이미 너무 알려진 사실이라 뻔함. 그동안 나온 보고서·주요 내용을 분석해 더 심도 있게 엮을 것 — 발언·행동 자료가 어떤 의미를 가지는지, 매체는 이를 어떻게 다루는지까지"
+    }
+   ],
+   "themes": [
+    "variety",
+    "depth"
+   ],
+   "commit": {
+    "sha": "047026e533eaf71e694b128b5b07f9007ec10df0",
+    "subject": "매뉴얼 v26: 분석·심층·주간은 뻔한 사실 말고 자료를 엮어야 보이는 것 — 자료 지도(보고서·발언·행동+의미)·매체 프레임·말과 행동 맞대기, check G1·G3·G4 (11/15 분석 사용자 기각 반영)",
+    "date": "2026-11-14",
+    "other_files": [
+     "AGENTS.md",
+     "projects/20261115-market-analysis/05_edit/checklist.json",
+     "projects/20261115-market-analysis/05_edit/checklist.md",
+     "schemas/topic_brief.schema.json",
+     "ytflow/stages/checklist.py"
+    ]
+   }
+  },
+  {
+   "id": "ver:27",
+   "kind": "version",
+   "v": 27,
+   "date": "2026-11-14",
+   "label": "v27",
+   "summary": "v27: 시장 채널 — 말하는 숫자·사실이 그 순간 화면에 생긴다(박자 motion: count·icon·arrow·pulse), 25초 넘는 장면은 6초 안팎마다 새 요소, 정지 화면 비율 ≤0.45 MUST (manual/09 §6, check G4·G6) · 제목·썸네일에 채널 이름 없이 날짜만 (09 §7, G6)",
+   "applied": [
+    {
+     "date": "2026-11-14",
+     "project": "20261115-market-analysis",
+     "reason": "영상이 정적임 — 멈춰 있는 부분이 많음. 특히 매출채권 45일·60일 장면: 하는 말(631억·250억 회사채·은행 비유)은 많은데 화면에는 45일·60일만 강조된 채 오래 멈춰 있음"
+    }
+   ],
+   "themes": [
+    "motion",
+    "emphasis"
+   ],
+   "commit": {
+    "sha": "15aa6310363f81ec43faec167cf718901a35bd7e",
+    "subject": "매뉴얼 v27: 시장 채널 멈춘 화면 금지 — 말하는 숫자가 그 순간 화면에(박자 motion), 정지 비율 ≤0.45 MUST (11/15 분석 사용자 기각 반영)",
+    "date": "2026-11-14",
+    "other_files": [
+     "projects/20261115-market-analysis/05_edit/checklist.json",
+     "projects/20261115-market-analysis/05_edit/checklist.md",
+     "ytflow/stages/checklist.py"
+    ]
+   }
+  },
+  {
+   "id": "ver:28",
+   "kind": "version",
+   "v": 28,
+   "date": "2026-11-15",
+   "label": "v28",
+   "summary": "v28: 심층·주간·분석은 시장을 가장 크게 흔든 사건을 중심축으로 — 파급효과(회사→업종→순환 금융·연준→한국)·주의할 점·입장별 해석(매체·인사이트), 구조 이야기는 사건의 파급 경로 위에서 (03 §0-3, 09 §2·§5, check G1·G3·G4)",
+   "applied": [
+    {
+     "date": "2026-11-15",
+     "project": "20261115-market-fsr",
+     "reason": "이번 주 가장 큰 이슈이자 시장을 흔든 젠슨 황 사임이 별도로 다뤄지지 않음. 시장을 흔든 사건을 중심축으로 분석하며 뻗어 나가 순환 금융·연준과 엮어 서술할 것 — 그 사건으로 무엇이 어떻게 되는지(파급효과), 주의할 점, 사람들·매체·인사이트는 어떻게 해석하는지"
+    }
+   ],
+   "themes": [
+    "depth"
+   ],
+   "commit": {
+    "sha": "4792f9644141d52670b091e50da732a78d651535",
+    "subject": "매뉴얼 v28: 심층·주간·분석은 시장을 흔든 사건이 중심축 — 파급효과·주의할 점·입장별 해석, 구조(순환 금융·연준)는 사건의 파급 경로 위에서 (사용자 기각 반영)",
+    "date": "2026-11-15",
+    "other_files": [
+     "ytflow/stages/checklist.py"
+    ]
+   }
+  },
+  {
+   "id": "ver:29",
+   "kind": "version",
+   "v": 29,
+   "date": "2026-11-15",
+   "label": "v29",
+   "summary": "v29: 매주 '다음 주 볼 것' 장 — 경제 지표·중앙은행·실적 발표·정책 일정을 한국 시간과 함께, 일정마다 왜 중요·지난번/가이던스·볼 숫자·결과별 해석·한국 연결, 팩트시트 '## 다음 주 일정'(주간 MUST)",
+   "applied": [],
+   "themes": [
+    "length"
+   ],
+   "commit": {
+    "sha": "e76434ee6a73de070810c8f1c24c0c1ebb5ccaf9",
+    "subject": "매뉴얼 v29: 매주 다음 주 일정·실적 발표 브리핑과 분석 (사용자 요청, check 주간 MUST)",
+    "date": "2026-11-15",
+    "other_files": [
+     "ytflow/stages/checklist.py"
+    ]
+   }
+  },
+  {
+   "id": "ver:30",
+   "kind": "version",
+   "v": 30,
+   "date": "2026-11-15",
+   "label": "v30",
+   "summary": "v30: 운영 — 장이 열린 다음 날: 시장 브리핑 + 시장을 흔든 이슈 + 매체·인물 인사이트 / 장이 닫힌 날: 한 주 종합 점검(토 weekly 이슈 종합, 일 review 인사이트 점검 + 다음 주 일정·실적), 일요일 산업·테마 분석글은 기본에서 뺌 · 카메라 억지 미세 움직임 없음(박자 카메라 기본 끔, 정지 비율 MUST 삭제, '말하는 것이 화면에 생긴다'는 유지)",
+   "applied": [],
+   "themes": [
+    "motion",
+    "depth",
+    "length"
+   ],
+   "commit": {
+    "sha": "347d65b9f9fd7b33ffea3dee078d22febc1d6450",
+    "subject": "매뉴얼 v30: 장 여는 날 브리핑+이슈+인사이트 / 장 닫힌 날 한 주 종합 점검(weekly·review), 박자 카메라 기본 끔(억지 미세 움직임 없음) — 사용자 요청",
+    "date": "2026-11-15",
+    "other_files": [
+     "channels/ch-market-daily/channel.yaml",
+     "ytflow/stages/checklist.py",
+     "ytflow/stages/hybrid.py",
+     "ytflow/stages/ytpublish.py"
+    ]
+   }
+  },
+  {
+   "id": "ver:31",
+   "kind": "version",
+   "v": 31,
+   "date": "2026-11-15",
+   "label": "v31",
+   "summary": "v31: 시장 채널 확대·축소 없음 — 장면 안 확대·tilt·dolly·차트 확대·사진 밀기·박자 카메라 모두 끔(렌더러 기본), 화면 변화는 말에 맞춰 생기는 그림·숫자와 전환으로만",
+   "applied": [],
+   "themes": [
+    "motion"
+   ],
+   "commit": {
+    "sha": "63531c2834015da78863ae22f19b9639df3e243a",
+    "subject": "v31: 시장 채널 확대·축소·웅웅거림 없음 (사용자 요청) — 렌더러 no_zoom 기본",
+    "date": "2026-11-15",
+    "other_files": [
+     "ytflow/stages/directions.py",
+     "ytflow/stages/edit10.py",
+     "ytflow/stages/hybrid.py"
+    ]
+   }
+  },
+  {
+   "id": "rev:1",
+   "kind": "review",
+   "date": "2026-11-09",
+   "project": "20261107-style-journey",
+   "manual_version": 2,
+   "result": "reject",
+   "reason": "지도가 보기 불편함: 양 끝이 둥근 타원 투영 + 디자인이 허전하고 밋밋함",
+   "themes": [
+    "variety"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:2",
+   "kind": "review",
+   "date": "2026-11-09",
+   "project": "20261107-style-archive",
+   "manual_version": 2,
+   "result": "reject",
+   "reason": "스타일 자체는 합격. 그러나 한 스타일로만 영상 전체를 만들면 불합격 — 상황에 맞춰 섞어야 함 (장면마다 다른 스타일, 한 장면 안에서도 여러 스타일 조합)",
+   "themes": [
+    "variety"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:3",
+   "kind": "review",
+   "date": "2026-11-09",
+   "project": "20261107-style-kinetic",
+   "manual_version": 2,
+   "result": "pass",
+   "reason": "스타일 단독 품질 합격 (단독 영상 금지 규칙은 archive 기각 사유로 반영)",
+   "themes": [
+    "variety"
+   ]
+  },
+  {
+   "id": "rev:4",
+   "kind": "review",
+   "date": "2026-11-09",
+   "project": "20261109-ai-unslop",
+   "manual_version": 3,
+   "result": "reject",
+   "reason": "강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)",
+   "themes": [
+    "emphasis",
+    "variety"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:5",
+   "kind": "review",
+   "date": "2026-11-09",
+   "project": "20261109-style-combo",
+   "manual_version": 3,
+   "result": "reject",
+   "reason": "같은 이유: 강조(키네틱 단어 띠 등) 남용, 자막과 같은 내용 반복",
+   "themes": [
+    "emphasis",
+    "variety"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:6",
+   "kind": "review",
+   "date": "2026-11-09",
+   "project": "20261109-issues-saudi",
+   "manual_version": 7,
+   "result": "reject",
+   "reason": "반 통과: 스타일은 통과. 1) 배경색이 한 가지로 단조로움 → 장면 상황에 맞춰 배경을 바꿔 쓸 것 2) 본론부터 바로 시작해 '뭘 말하려는 거지?' 느낌 → 본론 전에 MC처럼 오늘 무엇을 말할지 매끄럽게 여는 오프닝과 진행 멘트",
+   "themes": [
+    "background",
+    "variety",
+    "script"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:7",
+   "kind": "review",
+   "date": "2026-11-09",
+   "project": "20261109-issues-saudi",
+   "manual_version": 8,
+   "result": "reject",
+   "reason": "반복 피로: 같은 편집 패턴(글씨·도형 인포그래픽)이 반복되면 금방 지루함. 자체 제작 장면일수록 지도처럼 특별한 시각 효과·그림체·자료가 필요",
+   "themes": [
+    "variety"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:8",
+   "kind": "review",
+   "date": "2026-11-09",
+   "project": "20261109-issues-saudi",
+   "manual_version": 9,
+   "result": "pass",
+   "reason": "",
+   "themes": []
+  },
+  {
+   "id": "rev:9",
+   "kind": "review",
+   "date": "2026-11-10",
+   "project": "20261110-v10-after",
+   "manual_version": 9,
+   "result": "pass",
+   "reason": "",
+   "themes": []
+  },
+  {
+   "id": "rev:10",
+   "kind": "review",
+   "date": "2026-11-10",
+   "project": "20261110-saudi-v10-part",
+   "manual_version": 10,
+   "result": "reject",
+   "reason": "배경음 음질이 낮게 들림(분위기는 괜찮음) + 1분01초 저음 타격음('두웅') 소리 자체가 싫음",
+   "themes": [
+    "sound"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:11",
+   "kind": "review",
+   "date": "2026-11-11",
+   "project": "20261111-issues-aiglasses",
+   "manual_version": 11,
+   "result": "reject",
+   "reason": "화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌",
+   "themes": [
+    "motion",
+    "sound"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:12",
+   "kind": "review",
+   "date": "2026-11-11",
+   "project": "20261111-curiosity-hallucination",
+   "manual_version": 11,
+   "result": "reject",
+   "reason": "화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌",
+   "themes": [
+    "motion",
+    "sound"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:13",
+   "kind": "review",
+   "date": "2026-11-11",
+   "project": "20261111-market-nvidia",
+   "manual_version": 11,
+   "result": "reject",
+   "reason": "화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌",
+   "themes": [
+    "motion",
+    "sound"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:14",
+   "kind": "review",
+   "date": "2026-11-11",
+   "project": "20261111-ai-industry-week",
+   "manual_version": 11,
+   "result": "reject",
+   "reason": "화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌",
+   "themes": [
+    "motion",
+    "sound"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:15",
+   "kind": "review",
+   "date": "2026-11-11",
+   "project": "20261111-market-nvidia",
+   "manual_version": 12,
+   "result": "reject",
+   "reason": "바탕색을 매번 같은 미색 종이색으로 씀 — 돌려 써도 됨",
+   "themes": [
+    "background"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:16",
+   "kind": "review",
+   "date": "2026-11-11",
+   "project": "20261111-issues-aiglasses",
+   "manual_version": 13,
+   "result": "reject",
+   "reason": "바탕은 영상마다 고정이 아니라 장면 상황에 맞춰 — 스타일 조합의 일부",
+   "themes": [
+    "background",
+    "variety"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:17",
+   "kind": "review",
+   "date": "2026-11-11",
+   "project": "20261111-issues-aiglasses",
+   "manual_version": 14,
+   "result": "pass",
+   "reason": "",
+   "themes": []
+  },
+  {
+   "id": "rev:18",
+   "kind": "review",
+   "date": "2026-11-11",
+   "project": "20261111-curiosity-hallucination",
+   "manual_version": 14,
+   "result": "pass",
+   "reason": "",
+   "themes": []
+  },
+  {
+   "id": "rev:19",
+   "kind": "review",
+   "date": "2026-11-11",
+   "project": "20261111-market-nvidia",
+   "manual_version": 14,
+   "result": "pass",
+   "reason": "",
+   "themes": []
+  },
+  {
+   "id": "rev:20",
+   "kind": "review",
+   "date": "2026-11-11",
+   "project": "20261111-ai-industry-week",
+   "manual_version": 14,
+   "result": "pass",
+   "reason": "",
+   "themes": []
+  },
+  {
+   "id": "rev:21",
+   "kind": "review",
+   "date": "2026-11-11",
+   "project": "20261112-bg-trials",
+   "manual_version": 15,
+   "result": "reject",
+   "reason": "진행 말투: 장 표지 '여기까지가 ~였고요.' 같은 끝맺음이 부자연스러워 흐름이 깸 (스타일·화면은 모두 합격)",
+   "themes": [
+    "variety",
+    "script"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:22",
+   "kind": "review",
+   "date": "2026-11-12",
+   "project": "20261112-bg-trials",
+   "manual_version": 16,
+   "result": "pass",
+   "reason": "",
+   "themes": []
+  },
+  {
+   "id": "rev:23",
+   "kind": "review",
+   "date": "2026-11-12",
+   "project": "20261112-market-daily",
+   "manual_version": 17,
+   "result": "pass",
+   "reason": "",
+   "themes": []
+  },
+  {
+   "id": "rev:24",
+   "kind": "review",
+   "date": "2026-11-12",
+   "project": "20261112-market-call",
+   "manual_version": 18,
+   "result": "pass",
+   "reason": "",
+   "themes": []
+  },
+  {
+   "id": "rev:25",
+   "kind": "review",
+   "date": "2026-11-14",
+   "project": "20261113-curiosity-moravec",
+   "manual_version": 20,
+   "result": "reject",
+   "reason": "중간중간 너무 난잡함. 목표·시청자 욕망을 먼저 정의하지 않고 만듦. 대본을 소제목처럼 글로 쓰거나 사진·그림을 붙여 넣기만 함 — 대본에 따른 애니메이션이 아님. 각 연출의 의도가 불분명",
+   "themes": [
+    "variety",
+    "script",
+    "intent"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:26",
+   "kind": "review",
+   "date": "2026-11-14",
+   "project": "20261113-curiosity-moravec",
+   "manual_version": 21,
+   "result": "reject",
+   "reason": "대본 구성부터 문제. 주 시청자층·유입 경로·유입 이유를 상권 조사처럼 먼저 알고 니즈에 맞춰 대본을 짜야 하는데, 대본 자체가 설명·서술·지식 욱여넣기 — 지식 습득 쪽으로 치우침. 편집은 대본을 바탕으로",
+   "themes": [
+    "background",
+    "script",
+    "intent"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:27",
+   "kind": "review",
+   "date": "2026-11-14",
+   "project": "20261113-curiosity-moravec",
+   "manual_version": 24,
+   "result": "reject",
+   "reason": "반짝 효과음은 빼기. 동영상이라는 동적인 움직임을 살리는 것이 목표인데, 지금은 사진을 잘 뽑은 정적인 동영상 같음",
+   "themes": [
+    "motion",
+    "sound",
+    "intent"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:28",
+   "kind": "review",
+   "date": "2026-11-14",
+   "project": "20261115-market-analysis",
+   "manual_version": 25,
+   "result": "reject",
+   "reason": "제목·썸네일 A('엔비디아는 왜 고객의 빚까지 보증하나')는 이미 너무 알려진 사실이라 뻔함. 그동안 나온 보고서·주요 내용을 분석해 더 심도 있게 엮을 것 — 발언·행동 자료가 어떤 의미를 가지는지, 매체는 이를 어떻게 다루는지까지",
+   "themes": [
+    "depth"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:29",
+   "kind": "review",
+   "date": "2026-11-14",
+   "project": "20261115-market-analysis",
+   "manual_version": 26,
+   "result": "reject",
+   "reason": "영상이 정적임 — 멈춰 있는 부분이 많음. 특히 매출채권 45일·60일 장면: 하는 말(631억·250억 회사채·은행 비유)은 많은데 화면에는 45일·60일만 강조된 채 오래 멈춰 있음",
+   "themes": [
+    "motion",
+    "emphasis"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "rev:30",
+   "kind": "review",
+   "date": "2026-11-15",
+   "project": "20261115-market-fsr",
+   "manual_version": 27,
+   "result": "reject",
+   "reason": "이번 주 가장 큰 이슈이자 시장을 흔든 젠슨 황 사임이 별도로 다뤄지지 않음. 시장을 흔든 사건을 중심축으로 분석하며 뻗어 나가 순환 금융·연준과 엮어 서술할 것 — 그 사건으로 무엇이 어떻게 되는지(파급효과), 주의할 점, 사람들·매체·인사이트는 어떻게 해석하는지",
+   "themes": [
+    "depth"
+   ],
+   "status": "applied"
+  },
+  {
+   "id": "theme:motion",
+   "kind": "theme",
+   "key": "motion",
+   "label": "움직임·카메라"
+  },
+  {
+   "id": "theme:sound",
+   "kind": "theme",
+   "key": "sound",
+   "label": "소리·배경음"
+  },
+  {
+   "id": "theme:background",
+   "kind": "theme",
+   "key": "background",
+   "label": "배경·바탕색"
+  },
+  {
+   "id": "theme:emphasis",
+   "kind": "theme",
+   "key": "emphasis",
+   "label": "강조·자막"
+  },
+  {
+   "id": "theme:variety",
+   "kind": "theme",
+   "key": "variety",
+   "label": "스타일 조합·반복"
+  },
+  {
+   "id": "theme:script",
+   "kind": "theme",
+   "key": "script",
+   "label": "대본·말투·형식"
+  },
+  {
+   "id": "theme:depth",
+   "kind": "theme",
+   "key": "depth",
+   "label": "주제·분석 깊이"
+  },
+  {
+   "id": "theme:intent",
+   "kind": "theme",
+   "key": "intent",
+   "label": "의도·시청자"
+  },
+  {
+   "id": "theme:length",
+   "kind": "theme",
+   "key": "length",
+   "label": "길이·운영"
+  }
+ ],
+ "edges": [
+  {
+   "s": "step:1",
+   "t": "gate:G1",
+   "kind": "gated_by"
+  },
+  {
+   "s": "step:2",
+   "t": "gate:G2",
+   "kind": "gated_by"
+  },
+  {
+   "s": "step:3",
+   "t": "gate:G3",
+   "kind": "gated_by"
+  },
+  {
+   "s": "step:4",
+   "t": "gate:G4",
+   "kind": "gated_by"
+  },
+  {
+   "s": "step:5",
+   "t": "gate:G5",
+   "kind": "gated_by"
+  },
+  {
+   "s": "step:6",
+   "t": "gate:G6",
+   "kind": "gated_by"
+  },
+  {
+   "s": "step:7",
+   "t": "gate:G7",
+   "kind": "gated_by"
+  },
+  {
+   "s": "step:8",
+   "t": "gate:G8",
+   "kind": "gated_by"
+  },
+  {
+   "s": "doc:01",
+   "t": "sec:01§1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:01",
+   "t": "sec:01§h17",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:01",
+   "t": "sec:01§2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:01",
+   "t": "sec:01§h26",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:01",
+   "t": "sec:01§h34",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:01",
+   "t": "sec:01§h44",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:01",
+   "t": "sec:01§3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:01",
+   "t": "sec:01§4",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:01",
+   "t": "sec:01§4-1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:01",
+   "t": "sec:01§5",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:02",
+   "t": "sec:02§1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:02",
+   "t": "sec:02§2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:02",
+   "t": "sec:02§3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:02",
+   "t": "sec:02§h40",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:02",
+   "t": "sec:02§h51",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:02",
+   "t": "sec:02§4",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:02",
+   "t": "sec:02§5",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:02",
+   "t": "sec:02§6",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:03",
+   "t": "sec:03§0",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:03",
+   "t": "sec:03§0-1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:03",
+   "t": "sec:03§0-2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:03",
+   "t": "sec:03§0-3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:03",
+   "t": "sec:03§1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:03",
+   "t": "sec:03§2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:03",
+   "t": "sec:03§3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:03",
+   "t": "sec:03§4",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:03",
+   "t": "sec:03§5",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:03",
+   "t": "sec:03§6",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:03",
+   "t": "sec:03§7",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
+   "t": "sec:04§0",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
+   "t": "sec:04§0-1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
+   "t": "sec:04§0-2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
+   "t": "sec:04§0-3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
+   "t": "sec:04§0-4",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
+   "t": "sec:04§0-5",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
+   "t": "sec:04§0-6",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
+   "t": "sec:04§1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
+   "t": "sec:04§2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
+   "t": "sec:04§3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
+   "t": "sec:04§4",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
+   "t": "sec:04§5",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
+   "t": "sec:04§6",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
+   "t": "sec:04§7",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:05",
+   "t": "sec:05§0-1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:05",
+   "t": "sec:05§h19",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:05",
+   "t": "sec:05§h25",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:05",
+   "t": "sec:05§0-7",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:05",
+   "t": "sec:05§0-2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:05",
+   "t": "sec:05§0-6",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:05",
+   "t": "sec:05§0-5",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:05",
+   "t": "sec:05§0-4",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:05",
+   "t": "sec:05§0-3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:05",
+   "t": "sec:05§0",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:05",
+   "t": "sec:05§1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:05",
+   "t": "sec:05§2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:05",
+   "t": "sec:05§3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:05",
+   "t": "sec:05§4",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:05",
+   "t": "sec:05§5",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:06",
+   "t": "sec:06§h3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:06",
+   "t": "sec:06§G1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:06",
+   "t": "sec:06§G2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:06",
+   "t": "sec:06§G3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:06",
+   "t": "sec:06§G4",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:06",
+   "t": "sec:06§G5",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:06",
+   "t": "sec:06§G6",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:06",
+   "t": "sec:06§G7",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:06",
+   "t": "sec:06§G8",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:06",
+   "t": "sec:06§h104",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:07",
+   "t": "sec:07§1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:07",
+   "t": "sec:07§2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:07",
+   "t": "sec:07§3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:07",
+   "t": "sec:07§4",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:08",
+   "t": "sec:08§0",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:08",
+   "t": "sec:08§0-1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:08",
+   "t": "sec:08§0-2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:08",
+   "t": "sec:08§1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:08",
+   "t": "sec:08§2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:08",
+   "t": "sec:08§3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:08",
+   "t": "sec:08§h89",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:08",
+   "t": "sec:08§h101",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:08",
+   "t": "sec:08§4",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:08",
+   "t": "sec:08§5",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:08",
+   "t": "sec:08§6",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§0",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§3-0",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§3-1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§3-2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§3-3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§4",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§5",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§6",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§7",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§8",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§9",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§10",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§11",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§12",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§13",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§h201",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§h210",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§h216",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:README",
+   "t": "sec:README§0",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:README",
+   "t": "sec:README§1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:README",
+   "t": "sec:README§1-1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:README",
+   "t": "sec:README§2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:README",
+   "t": "sec:README§2-1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:README",
+   "t": "sec:README§2-2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:README",
+   "t": "sec:README§2-3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:README",
+   "t": "sec:README§2-4",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:README",
+   "t": "sec:README§2-5",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:README",
+   "t": "sec:README§3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:README",
+   "t": "sec:README§4",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:README",
+   "t": "sec:README§5",
+   "kind": "contains"
+  },
+  {
+   "s": "sec:06§G1",
+   "t": "gate:G1",
+   "kind": "defines"
+  },
+  {
+   "s": "sec:06§G2",
+   "t": "gate:G2",
+   "kind": "defines"
+  },
+  {
+   "s": "sec:06§G3",
+   "t": "gate:G3",
+   "kind": "defines"
+  },
+  {
+   "s": "sec:06§G4",
+   "t": "gate:G4",
+   "kind": "defines"
+  },
+  {
+   "s": "sec:06§G5",
+   "t": "gate:G5",
+   "kind": "defines"
+  },
+  {
+   "s": "sec:06§G6",
+   "t": "gate:G6",
+   "kind": "defines"
+  },
+  {
+   "s": "sec:06§G7",
+   "t": "gate:G7",
+   "kind": "defines"
+  },
+  {
+   "s": "sec:06§G8",
+   "t": "gate:G8",
+   "kind": "defines"
+  },
+  {
+   "s": "rule:G1:1",
+   "t": "gate:G1",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G1:1",
+   "t": "gate:G1",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G1:1",
+   "t": "gate:G1",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G1:1",
+   "t": "gate:G1",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G1:1",
+   "t": "gate:G1",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G1:1",
+   "t": "gate:G1",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G1:1",
+   "t": "gate:G1",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G2:1",
+   "t": "gate:G2",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G2:1",
+   "t": "gate:G2",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G2:1",
+   "t": "gate:G2",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G2:1",
+   "t": "gate:G2",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G3:1",
+   "t": "gate:G3",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G3:1",
+   "t": "gate:G3",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G3:1",
+   "t": "gate:G3",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G3:1",
+   "t": "gate:G3",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G4:1",
+   "t": "gate:G4",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G4:1",
+   "t": "gate:G4",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G4:1",
+   "t": "gate:G4",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G4:1",
+   "t": "gate:G4",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G4:1",
+   "t": "gate:G4",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G4:1",
+   "t": "gate:G4",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G4:1",
+   "t": "gate:G4",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G4:1",
+   "t": "gate:G4",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G4:1",
+   "t": "gate:G4",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G4:1",
+   "t": "gate:G4",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G4:1",
+   "t": "gate:G4",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G5:1",
+   "t": "gate:G5",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G5:1",
+   "t": "gate:G5",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G5:1",
+   "t": "gate:G5",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G5:1",
+   "t": "gate:G5",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G5:1",
+   "t": "gate:G5",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G5:1",
+   "t": "gate:G5",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G5:1",
+   "t": "gate:G5",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G5:1",
+   "t": "gate:G5",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G5:1",
+   "t": "gate:G5",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G5:1",
+   "t": "gate:G5",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G5:1",
+   "t": "gate:G5",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G5:1",
+   "t": "gate:G5",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G5:1",
+   "t": "gate:G5",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G5:1",
+   "t": "gate:G5",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G6:1",
+   "t": "gate:G6",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G6:1",
+   "t": "gate:G6",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G6:1",
+   "t": "gate:G6",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G6:1",
+   "t": "gate:G6",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G6:1",
+   "t": "gate:G6",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G6:1",
+   "t": "gate:G6",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G6:1",
+   "t": "gate:G6",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G6:1",
+   "t": "gate:G6",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G6:1",
+   "t": "gate:G6",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G7:1",
+   "t": "gate:G7",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G7:1",
+   "t": "gate:G7",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G7:1",
+   "t": "gate:G7",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G7:1",
+   "t": "gate:G7",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G8:1",
+   "t": "gate:G8",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G8:1",
+   "t": "gate:G8",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G8:1",
+   "t": "gate:G8",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G8:1",
+   "t": "gate:G8",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "check:101",
+   "t": "gate:G0",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:105",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:107",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:108",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:109",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:112",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:114",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:115",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:116",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:130",
+   "t": "gate:G2",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:132",
+   "t": "gate:G2",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:138",
+   "t": "gate:G2",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:140",
+   "t": "gate:G2",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:142",
+   "t": "gate:G2",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:147",
+   "t": "gate:G3",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:148",
+   "t": "gate:G3",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:149",
+   "t": "gate:G3",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:153",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:156",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:158",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:160",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:162",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:164",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:168",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:170",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:173",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:179",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:182",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:187",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:198",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:202",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:205",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:211",
+   "t": "gate:G6",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:217",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:221",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:223",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:227",
+   "t": "gate:G3",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:236",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:241",
+   "t": "gate:G3",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:246",
+   "t": "gate:G3",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:248",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:249",
+   "t": "gate:G3",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:252",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:254",
+   "t": "gate:G3",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:256",
+   "t": "gate:G3",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:259",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:275",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:280",
+   "t": "gate:G6",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:283",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:286",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:288",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:290",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:292",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:296",
+   "t": "gate:G3",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:297",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:299",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:303",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:305",
+   "t": "gate:G1",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:308",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:313",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:316",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:320",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:325",
+   "t": "gate:G6",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:330",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:333",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:336",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:339",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:340",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:341",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:357",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:362",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:370",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:376",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:379",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:392",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:393",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:398",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:401",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:402",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:403",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:406",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:407",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:408",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:410",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:412",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:415",
+   "t": "gate:G6",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:417",
+   "t": "gate:G6",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:423",
+   "t": "gate:G6",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:426",
+   "t": "gate:G6",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:429",
+   "t": "gate:G6",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:433",
+   "t": "gate:G6",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:439",
+   "t": "gate:G6",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:443",
+   "t": "gate:G7",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:445",
+   "t": "gate:G7",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:448",
+   "t": "gate:G7",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:451",
+   "t": "gate:G8",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:453",
+   "t": "gate:G8",
+   "kind": "enforces"
+  },
+  {
+   "s": "ch:ai",
+   "t": "doc:02",
+   "kind": "guided_by"
+  },
+  {
+   "s": "ch:market",
+   "t": "doc:03",
+   "kind": "guided_by"
+  },
+  {
+   "s": "ch:curiosity",
+   "t": "doc:04",
+   "kind": "guided_by"
+  },
+  {
+   "s": "ch:issues",
+   "t": "doc:08",
+   "kind": "guided_by"
+  },
+  {
+   "s": "ch:market",
+   "t": "doc:09",
+   "kind": "guided_by"
+  },
+  {
+   "s": "ver:1",
+   "t": "gate:G0",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:1",
+   "t": "gate:G8",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:2",
+   "t": "sec:01§2",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:2",
+   "t": "doc:07",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:3",
+   "t": "gate:G5",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:4",
+   "t": "gate:G5",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:7",
+   "t": "sec:08§0-1",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:8",
+   "t": "sec:05§0-2",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:9",
+   "t": "sec:05§0-3",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:12",
+   "t": "sec:05§0-5",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:14",
+   "t": "sec:05§0-6",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:15",
+   "t": "sec:05§0-7",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:16",
+   "t": "sec:README§2-2",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:17",
+   "t": "sec:03§0",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:17",
+   "t": "sec:04§0",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:17",
+   "t": "sec:08§0-2",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:18",
+   "t": "sec:03§0-1",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:21",
+   "t": "sec:README§1-1",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:21",
+   "t": "sec:04§0-4",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:22",
+   "t": "sec:04§0-6",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:22",
+   "t": "sec:04§0-5",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:23",
+   "t": "sec:README§2-1",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:23",
+   "t": "sec:README§2-3",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:23",
+   "t": "sec:04§0-6",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:23",
+   "t": "doc:02",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:23",
+   "t": "doc:03",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:23",
+   "t": "doc:06",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:23",
+   "t": "doc:08",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:24",
+   "t": "sec:README§2-4",
+   "kind": "touched",
+   "via": [
+    "changelog",
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:24",
+   "t": "gate:G6",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:24",
+   "t": "sec:README§2-1",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:24",
+   "t": "sec:README§2-3",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:24",
+   "t": "doc:03",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:24",
+   "t": "doc:09",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:25",
+   "t": "sec:README§2-5",
+   "kind": "touched",
+   "via": [
+    "changelog",
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:26",
+   "t": "sec:03§0-2",
+   "kind": "touched",
+   "via": [
+    "changelog",
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:26",
+   "t": "sec:09§2",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:26",
+   "t": "sec:09§5",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:26",
+   "t": "gate:G1",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:26",
+   "t": "gate:G3",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:26",
+   "t": "gate:G4",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:27",
+   "t": "sec:09§6",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:27",
+   "t": "sec:09§7",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:27",
+   "t": "gate:G4",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:27",
+   "t": "gate:G6",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:28",
+   "t": "sec:03§0-3",
+   "kind": "touched",
+   "via": [
+    "changelog",
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:28",
+   "t": "sec:09§2",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:28",
+   "t": "sec:09§5",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:28",
+   "t": "gate:G1",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:28",
+   "t": "gate:G3",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:28",
+   "t": "gate:G4",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:29",
+   "t": "doc:09",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:30",
+   "t": "doc:09",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:31",
+   "t": "doc:09",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "rev:1",
+   "t": "ver:3",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:2",
+   "t": "ver:3",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:3",
+   "t": "ver:2",
+   "kind": "approved_in"
+  },
+  {
+   "s": "rev:4",
+   "t": "ver:4",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:5",
+   "t": "ver:4",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:6",
+   "t": "ver:8",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:7",
+   "t": "ver:9",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:8",
+   "t": "ver:9",
+   "kind": "approved_in"
+  },
+  {
+   "s": "rev:9",
+   "t": "ver:9",
+   "kind": "approved_in"
+  },
+  {
+   "s": "rev:10",
+   "t": "ver:11",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:11",
+   "t": "ver:12",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:12",
+   "t": "ver:12",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:13",
+   "t": "ver:12",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:14",
+   "t": "ver:12",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:15",
+   "t": "ver:13",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:16",
+   "t": "ver:14",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:17",
+   "t": "ver:14",
+   "kind": "approved_in"
+  },
+  {
+   "s": "rev:18",
+   "t": "ver:14",
+   "kind": "approved_in"
+  },
+  {
+   "s": "rev:19",
+   "t": "ver:14",
+   "kind": "approved_in"
+  },
+  {
+   "s": "rev:20",
+   "t": "ver:14",
+   "kind": "approved_in"
+  },
+  {
+   "s": "rev:21",
+   "t": "ver:16",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:22",
+   "t": "ver:16",
+   "kind": "approved_in"
+  },
+  {
+   "s": "rev:23",
+   "t": "ver:17",
+   "kind": "approved_in"
+  },
+  {
+   "s": "rev:24",
+   "t": "ver:18",
+   "kind": "approved_in"
+  },
+  {
+   "s": "rev:25",
+   "t": "ver:21",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:26",
+   "t": "ver:22",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:27",
+   "t": "ver:25",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:28",
+   "t": "ver:26",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:29",
+   "t": "ver:27",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:30",
+   "t": "ver:28",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:1",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "rev:2",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "rev:3",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "rev:4",
+   "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "rev:4",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "rev:5",
+   "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "rev:5",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "rev:6",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "rev:6",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "rev:6",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "rev:7",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "rev:10",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "rev:11",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "rev:11",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "rev:12",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "rev:12",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "rev:13",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "rev:13",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "rev:14",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "rev:14",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "rev:15",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "rev:16",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "rev:16",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "rev:21",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "rev:21",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "rev:25",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "rev:25",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "rev:25",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
+   "s": "rev:26",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "rev:26",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "rev:26",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
+   "s": "rev:27",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "rev:27",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "rev:27",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
+   "s": "rev:28",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "rev:29",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "rev:29",
+   "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "rev:30",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "ver:1",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "ver:1",
+   "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "ver:1",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:1",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
+   "s": "ver:2",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "ver:2",
+   "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "ver:2",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:3",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:4",
+   "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "ver:4",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:5",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:5",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "ver:6",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "ver:6",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "ver:6",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "ver:8",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "ver:8",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:8",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "ver:9",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "ver:9",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:10",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "ver:10",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "ver:11",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "ver:11",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:12",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "ver:12",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "ver:13",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "ver:14",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "ver:14",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:15",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:16",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:16",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "ver:17",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "ver:17",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "ver:18",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "ver:19",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "ver:19",
+   "t": "theme:length",
+   "kind": "about"
+  },
+  {
+   "s": "ver:20",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "ver:20",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "ver:20",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:20",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "ver:20",
+   "t": "theme:length",
+   "kind": "about"
+  },
+  {
+   "s": "ver:21",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:21",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "ver:21",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
+   "s": "ver:22",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "ver:22",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "ver:22",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
+   "s": "ver:23",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "ver:24",
+   "t": "theme:length",
+   "kind": "about"
+  },
+  {
+   "s": "ver:25",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "ver:25",
+   "t": "theme:sound",
+   "kind": "about"
+  },
+  {
+   "s": "ver:25",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
+   "s": "ver:26",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:26",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "ver:27",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "ver:27",
+   "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "ver:28",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "ver:29",
+   "t": "theme:length",
+   "kind": "about"
+  },
+  {
+   "s": "ver:30",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "ver:30",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "ver:30",
+   "t": "theme:length",
+   "kind": "about"
+  },
+  {
+   "s": "ver:31",
+   "t": "theme:motion",
+   "kind": "about"
+  }
+ ]
+}

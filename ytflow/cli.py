@@ -284,6 +284,10 @@ def main(argv: list[str] | None = None) -> None:
     spk.add_argument("project")
     mb = sub.add_parser("manual-bump", help="기각 사유를 반영해 매뉴얼을 고친 뒤 버전 올리기 (manual/VERSION, CHANGELOG)")
     mb.add_argument("summary")
+    mg = sub.add_parser("manual-graph", help="매뉴얼 지식 그래프 → manual/graph.json (검토→버전→절·게이트·규칙·검사 코드), --html 로 보기 전용 페이지")
+    mg.add_argument("--html", default=None)
+    mu = sub.add_parser("manual-ui", help="매뉴얼 그래프 보기·고치기 도구 (로컬 서버): 검토 기록·반영 대기·버전 올리기·md 편집")
+    mu.add_argument("--port", type=int, default=8770); mu.add_argument("--host", default="127.0.0.1")
     sq = sub.add_parser("sync-qa", help="완성 영상의 자막·목소리·화면 싱크를 받아쓰기로 재기 → 05_edit/sync_qa.json")
     sq.add_argument("project")
     vi = sub.add_parser("voice-import", help="긴 내레이션 음성(ElevenLabs 웹·커넥터 mp3)을 대본 박자별로 잘라 03_voice 에 넣기")
@@ -448,8 +452,15 @@ def main(argv: list[str] | None = None) -> None:
         from .stages import stylepick
         print(stylepick.run(Project.open(a.project).path).read_text(encoding="utf-8"))
     elif a.cmd == "manual-bump":
-        from .stages import checklist
+        from .stages import checklist, manualgraph
         checklist.bump(a.summary)
+        manualgraph.write()
+    elif a.cmd == "manual-graph":
+        from .stages import manualgraph
+        manualgraph.write(a.html)
+    elif a.cmd == "manual-ui":
+        from .stages import manualgraph
+        manualgraph.serve(a.port, a.host)
     elif a.cmd == "sync-qa":
         from .stages import syncqa
         syncqa.run(Project.open(a.project))
