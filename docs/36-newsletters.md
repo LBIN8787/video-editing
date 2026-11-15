@@ -15,7 +15,7 @@
 |---|---|---|
 | 시장 | Axios (AM·Markets) · The Daily Upside · 어피티 머니레터 | `subscribed` — 웰컴 메일 확인 |
 | 시장 | KDI 경제정보센터 | `planned` — 본인인증 링크 완료. 본편 첫 발송 대기 |
-| 시장 | Bloomberg 아침 판 · WSJ The 10-Point | `blocked` — Bloomberg 는 신청 버튼이 동작하지 않음, WSJ 는 봇 차단+로그인. **우회하지 않음** |
+| 시장 | Bloomberg 아침 판 · WSJ The 10-Point | `blocked` — Bloomberg 는 신청 버튼이 동작하지 않음, WSJ 는 봇 차단+로그인. **우회하지 않음** → `inbox/requests/` 에 `browser-task` 요청 (피클이 사람 승인 받아 처리) |
 | AI | TLDR AI | `subscribed` — 웰컴 메일 확인 |
 | AI | TLDR Tech | `subscribed` — 신청 완료. 본편 첫 발송 확인 대기 |
 | AI | The Batch (DeepLearning.AI) | `planned` — 접수 완료. 주간 첫 호로 확인 |
@@ -64,6 +64,8 @@ python -m ytflow daily --project <YYYYMMDD>-market-daily     # 시장 브리핑 
 - **링크 종류:** 도메인으로 원문(1차: sec.gov·DART·연준·arXiv·GitHub·회사 IR…) / 원자료(OWID·FRED·KOSIS·Pew…) / 영상·이미지(LoC·NASA·Commons·스미스소니언…) / 보도·글. 'See the data' 같은 짧은 링크는 바로 앞 소재에 붙음.
 - **재사용 조건:** 도메인마다 한 줄 (`reuse`). 없으면 "보도·글: 단서만". OWID 는 CC BY 지만 원자료로 다시 그리기를 권장, Pew 는 차트 이미지를 그대로 쓰지 않음.
 - **중복:** 최근 14일 안에 나온 주소는 새로 넣지 않고 '같이 다룸'에 뉴스레터를 더함 → 여러 곳이 다룬 소재가 위로.
+
+**막히면 (2026-11-15 사용자):** "유튜브나 브라우저 막히는 건 inbox/requests/README.md 규격대로 요청 올려" — 유튜브·로그인 사이트·봇 확인 페이지는 우회하지 말고 `main` 의 `inbox/requests/<YYYYMMDD-HHMM>-<slug>.md` 로 요청합니다(한 파일 = 한 요청, 비밀값 금지, 결과는 `done/`). 사용자 개인 에이전트(피클)가 브라우저·예매·유튜브 접근을 맡습니다.
 
 ## 4. 자료실 — 스미스소니언 추가
 GPT 가 권한 자료실 셋 중 미국 의회도서관(`archive search`)·NASA(`media.py`)·위키미디어 공용(`archive commons`)은 이미 있었고, **스미스소니언 Open Access** 를 더했습니다.
