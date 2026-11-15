@@ -109,7 +109,7 @@ class Stage:
             self._enter(did, t, m.get("from"), x, y)
             self.js.append(f'tl.fromTo("#{did} .gr",{{rotation:-120}},{{rotation:240,duration:1.0,ease:"power2.out"}},{t:.3f});')   # 한 바퀴 돌고 멈춤 (계속 돌면 산만)
         elif do == "icon":
-            inner = (f'<div style="position:absolute;inset:0;border-radius:50%;background:{m.get("bg", self.th["icon_bg"])};{("border:5px solid " + self.th["ring"] + ";") if self.th["ring"] else ""}display:flex;align-items:center;'
+            inner = (f'<div data-layout-ignore style="position:absolute;inset:0;border-radius:50%;background:{m.get("bg", self.th["icon_bg"])};{("border:5px solid " + self.th["ring"] + ";") if self.th["ring"] else ""}display:flex;align-items:center;'
                      f'justify-content:center;font-size:{m.get("size", 110)}px;color:#FFFFFF;box-shadow:0 12px 30px rgba(0,0,0,.45)">{_e(m.get("icon", "★"))}</div>{lab_html}')   # color: 이모지 글자색 기본 검정 → 대비 검사 오탐 (2026-11-15)
             did = self._box(m["id"], x, y, m.get("d", 240), m.get("d", 240), inner)
             self._enter(did, t, m.get("from"), x, y)
