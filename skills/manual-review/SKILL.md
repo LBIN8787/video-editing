@@ -8,8 +8,8 @@ description: 매뉴얼 정기 검토(매일 밤 자동 실행·사람이 "매뉴
 사용자 결정 (2026-11-15): **매일 밤 · 분명한 것만 고침 · 휴대폰 알림 + 그래프**. 매뉴얼 버전은 올리지 않는다 (규칙의 뜻을 바꾸지 않으므로).
 
 ## 순서
-0. **잠금**: `python -m ytflow manual-lock acquire --purpose "정기 검토 YYYY-MM-DD"` — 담당이니 다시 잡아 26시간 연장. 남이 사용자 허락으로 잡고 있으면(유효) **고치지 말고** 보고만 하고 끝낸다 (docs/35).
-1. 최신으로: `git fetch origin` 후 작업 브랜치를 최신으로 (`git pull --rebase`). 작업 트리에 남의 변경이 있으면 건드리지 않는다.
+0. **잠금**: `python -m ytflow manual-lock acquire --purpose "정기 검토 YYYY-MM-DD"` — 정해진 담당은 없고 이 검토도 한 작업일 뿐 (2시간, 잡자마자 main 을 합침). 다른 세션이 잡고 있으면 `manual-lock request "정기 검토 YYYY-MM-DD"` 를 남기고 audit 보고서만 읽어 알림으로 보고하고 끝낸다 (docs/35).
+1. 최신으로: `git fetch origin` 후 작업 브랜치를 최신으로 (`git pull --rebase`). 작업 트리에 남의 변경이 있으면 건드리지 않는다. (acquire 가 main 을 이미 합쳤으면 아래 merge 는 할 것 없음)
    - **main 도 합친다** (`git merge origin/main`): 다른 세션이 main 에서 매뉴얼을 고치거나 버전을 올리므로, 검토는 둘을 합친 매뉴얼에 한다. 충돌은 **양쪽 내용을 모두 살려** 푼다. main 이 매뉴얼 버전을 이미 올렸으면 이 브랜치에서 새로 올린 버전은 그 뒤 번호로 바꾼다 (2026-11-15 v32 → v34 처럼, CHANGELOG·본문 표기 모두). 내용이 서로 반대면 고치지 말고 ask 로 남긴다.
    - 원격 `manual/vN` 스냅샷 브랜치는 **덮어쓰지 않는다** (force push 금지). 이미 있는 번호면 새 번호로.
 2. 재기: `python -m ytflow manual-graph` → `python -m ytflow manual-audit`. `manual/audit.md` 를 읽는다.
@@ -28,7 +28,8 @@ description: 매뉴얼 정기 검토(매일 밤 자동 실행·사람이 "매뉴
    - `python -m ytflow manual-audit --note "정기 검토" --fixed "고친 것 한 줄" --fixed "…"` — 다시 재서 해결 여부를 기록하고, 고친 것을 보고서·그래프('지난 검토에서 고친 것')에 남긴다.
    - `python -m ytflow manual-graph --artifact <스크래치>/manual-graph.html` → Artifact 도구로 **같은 공유 페이지**(`ytflow/stages/manualgraph.py` 의 `ARTIFACT_URL`)에 다시 올린다.
    - 바뀐 것이 있으면 커밋·푸시 (커밋 메시지: `정기 검토 YYYY-MM-DD: 고친 것 N · 물어볼 것 M`).
-   - **main 반영**: 담당 브랜치에서 main 으로 PR 을 만들어 합친다 (사용자 허락 2026-11-15, docs/35). 충돌이 있으면 합치지 말고 보고.
+   - **main 반영**: 작업 브랜치에서 main 으로 PR 을 만들어 합친다 (사용자 허락 2026-11-15, docs/35). 충돌이 있으면 합치지 말고 보고.
+   - **잠금 풀기**: `python -m ytflow manual-lock release` — 다음 세션이 바로 이 결과 위에서 고칠 수 있게. 기다리던 요청(`kind: request`)이 있으면 처리했거나 알림에 적는다.
 6. 알림 (PushNotification 도구): `매뉴얼 검토 MM/DD — 고친 것 N · 물어볼 것 M` + 물어볼 것 첫 1~2개 한 줄씩 + 공유 페이지 '한눈에 → 정기 검토'. 물어볼 것도 고친 것도 없으면 짧게 "깨끗함".
 
 ## 하지 않는 것

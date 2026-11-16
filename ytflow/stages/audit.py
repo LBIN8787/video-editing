@@ -177,11 +177,11 @@ def build() -> dict:
         if t["kind"] == "term" and t["cat"] in ("scene", "motion", "fx", "skin", "measure", "technique", "style") and not t.get("use_when"):
             items.append({"kind": "nousage", "level": "ask", "file": "manual/usage.yaml", "line": 0, "text": f"{t['cat_label']}: {t['name']}",
                           "why": "언제 쓰나·쓰지 않나·대신이 정해지지 않음 — usage.yaml (스타일은 레시피 when·fits, 기법은 techniques.yaml) 에 초안을 써서 확인받기"})
-    # 제안함 (담당이 아닌 에이전트가 남긴 것, docs/35) — 담당이 반영하거나 사용자에게 묻는다
+    # 제안함 (잠금 없이 남긴 것·잠금 중 요청, docs/35) — 잠금을 잡은 쪽이 반영하거나 사용자에게 묻는다
     from . import governance as gv
     for p in gv.proposals("open"):
         items.append({"kind": "proposal", "level": "ask", "file": p["file"], "line": 0, "text": f"[{p.get('kind')}] {p['text'][:140]}",
-                      "why": f"{p.get('from_branch')} 의 제안 — 담당이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로"})
+                      "why": f"{p.get('from_branch')} 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로"})
     # 주제 레포가 가리키는 장면·기법이 있나
     scene_ok = {t["key"] for t in g["nodes"] if t["kind"] == "term"}
     tech_ok = set(ly.techniques())
@@ -228,9 +228,9 @@ KIND = {"proposal": "제안함", "nousage": "용도 미정 기능", "conflict": 
 
 def write(quiet: bool = False, note: str = "", fixed: list[str] | None = None) -> dict:
     from . import governance as gv
-    if not gv.can_write():   # 보고서(manual/audit.*)는 담당만 씀 — 다른 세션은 읽기만
+    if not gv.can_write():   # 보고서(manual/audit.*)는 잠금을 가진 쪽만 씀 — 다른 세션은 읽기만
         a = build()
-        print(f"[manual-audit] (읽기만 — 담당이 아님) 고칠 것 {a['counts']['fix']} · 물어볼 것 {a['counts']['ask']}")
+        print(f"[manual-audit] (읽기만 — 잠금 없음) 고칠 것 {a['counts']['fix']} · 물어볼 것 {a['counts']['ask']}")
         return a
     a = build()
     a["fixed_by_agent"] = [f for f in (fixed or []) if f.strip()]

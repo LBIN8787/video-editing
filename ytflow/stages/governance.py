@@ -1,11 +1,15 @@
-"""매뉴얼 관리: 담당자 1명 + 잠금 — 한 번에 한 명만 매뉴얼·규칙 파일을 고친다 (docs/35, manual/OWNERS.yaml).
+"""매뉴얼 관리: 고칠 때만 잠그고 순서대로 — 한 번에 한 명만 매뉴얼·규칙 파일을 고친다 (docs/35, manual/OWNERS.yaml).
 
-    python -m ytflow manual-lock status                    지금 누가 잡고 있나
-    python -m ytflow manual-lock acquire --purpose "…"     잡기 (담당이거나, 비어 있거나, 유효 시간이 지났을 때)
-    python -m ytflow manual-lock acquire --force --reason "사용자 허락: …"   사용자가 넘기라고 했을 때만
-    python -m ytflow manual-lock release                   풀기
+2026-11-16 사용자: "담당 세션이 하는게 아니라 그냥 순차적으로 서로 메뉴얼 관리할때만 잠금하고
+잠금도중에 누군가 사용하려하면 그냥 요청하면 되는거 아니야?" → 정해진 담당 없음. 누구든 비어 있으면 잡는다.
+
+    python -m ytflow manual-lock status                    지금 누가 잡고 있나 (+ 기다리는 요청)
+    python -m ytflow manual-lock acquire --purpose "…"     잡기 (비어 있거나 만료됐으면 누구나) → 바로 main 을 합쳐 최신 위에서 고침
+    python -m ytflow manual-lock request "내용"            잠겨 있을 때: 요청 남기기 (풀리면 직접 잡거나, 잡은 쪽이 처리)
+    python -m ytflow manual-lock release                   풀기 — 고친 것이 main 에 합쳐졌는지 확인한 뒤 (안 됐으면 거절, --anyway)
+    python -m ytflow manual-lock acquire --force --reason "사용자 허락: …"   잡고 있는 쪽을 사용자가 비키게 할 때만
     python -m ytflow manual-lock check [--path 파일]        지금 이 브랜치가 고쳐도 되나 (hook 용, 안 되면 종료 코드 2)
-    python -m ytflow manual-propose "내용" [--kind …]       담당이 아니면: 제안함에 남기기 (proposals/manual/)
+    python -m ytflow manual-propose "내용" [--kind …]       급하지 않은 것: 제안함에 남기기 (proposals/manual/)
 
 잠금은 원격 브랜치 `locks` 의 `manual-lock.json` 한 파일. 잡기·풀기는 그 파일만 바꾼 커밋을 push 하고,
 두 세션이 동시에 잡으려 하면 늦은 쪽의 push 가 거절돼(빨리 감기 아님) 다시 읽고 포기한다 — git 이 순서를 정한다.
@@ -117,8 +121,8 @@ def holder_ok(lock: dict | None = None, me: str | None = None) -> tuple[bool, st
         return True, f"잠금 보유 ({lock.get('purpose', '')})"
     if expired(lock):
         return False, f"잠금이 {lock.get('branch')} 에게 있었지만 만료됨 — 다시 잡기(acquire)"
-    return False, (f"지금 매뉴얼은 '{lock.get('who', lock['branch'])}' 가 고치는 중 ({lock.get('purpose', '')}, {lock.get('expires', '')[:16]} 까지). "
-                   f"매뉴얼에 넣을 것은 python -m ytflow manual-propose \"…\" 로 제안함에 남기세요 (docs/35)")
+    return False, (f"지금 매뉴얼은 '{lock.get('who', lock['branch'])}' 가 고치는 중 ({lock.get('purpose', '')}, {lock.get('expires', '')[:16]} UTC 까지). "
+                   f"python -m ytflow manual-lock request \"…\" 로 요청을 남기고, 풀리면 잡으세요 (docs/35)")
 
 
 def _write_lock(new: dict | None, msg: str, force: bool = False) -> None:
@@ -168,45 +172,93 @@ def _write_lock(new: dict | None, msg: str, force: bool = False) -> None:
         pass
 
 
-def acquire(purpose: str, force: bool = False, reason: str = "", hours: float | None = None) -> dict:
+def acquire(purpose: str, force: bool = False, reason: str = "", hours: float | None = None, sync: bool = True) -> dict:
     o = owners()
     me = branch()
     cur = read_lock()
-    steward = (o.get("steward") or {}).get("branch")
     if cur.get("branch") and cur["branch"] != me and not expired(cur) and not force:
         raise SystemExit(f"[manual-lock] 못 잡음 — {cur.get('who', cur['branch'])} 가 '{cur.get('purpose', '')}' 중 ({cur.get('expires', '')[:16]} UTC 까지).\n"
-                         f"  매뉴얼에 넣을 것은 python -m ytflow manual-propose \"…\" 로. 사용자가 넘기라고 했으면 --force --reason \"사용자 허락: …\"")
+                         f"  요청 남기기: python -m ytflow manual-lock request \"…\"  — 풀리거나 만료되면 다시 acquire.\n"
+                         f"  사용자가 비키게 하라고 했으면 --force --reason \"사용자 허락: …\"")
     if force and not reason:
         raise SystemExit("[manual-lock] --force 는 --reason \"사용자 허락: …\" 과 함께만")
-    h = hours or float((o.get("lock") or {}).get("hours", 26))
-    new = {"branch": me, "who": "매뉴얼 담당" if me == steward else f"세션 {me}", "steward": me == steward,
-           "purpose": purpose, "since": _now().isoformat(timespec="minutes"),
+    h = hours or float((o.get("lock") or {}).get("hours", 2))
+    renew = cur.get("branch") == me and not expired(cur)
+    new = {"branch": me, "who": f"세션 {me}", "purpose": purpose,
+           "since": cur.get("since") if renew else _now().isoformat(timespec="minutes"),
            "expires": (_now() + dt.timedelta(hours=h)).isoformat(timespec="minutes"),
            "taken_from": cur.get("branch") if force and cur.get("branch") != me else None, "reason": reason or None}
     _write_lock(new, f"잠금: {new['who']} — {purpose}" + (f" (넘겨받음: {reason})" if force else ""), force=force)
-    print(f"[manual-lock] 잡음 — {new['who']} · {purpose} · {new['expires'][:16]} UTC 까지")
+    print(f"[manual-lock] {'연장' if renew else '잡음'} — {new['who']} · {purpose} · {new['expires'][:16]} UTC 까지 (다 고치면 main 에 합치고 release)")
+    if sync and not renew:
+        sync_main()
+    reqs = [p for p in proposals("open") if p.get("kind") == "request"]
+    if reqs:
+        print(f"[manual-lock] 기다리던 요청 {len(reqs)}건 — 처리할 수 있으면 같이: " + " · ".join(p["file"] for p in reqs[:5]))
     return new
 
 
-def release() -> None:
+def sync_main() -> bool:
+    """잡자마자 main 의 최신 매뉴얼을 이 브랜치에 합친다 — 앞 사람이 고친 것을 덮어쓰지 않게."""
+    try:
+        _git("fetch", "-q", "origin", "main")
+    except Exception as e:
+        print(f"[manual-lock] main 을 받지 못함 ({e}) — 고치기 전에 직접 git merge origin/main"); return False
+    r = subprocess.run(["git", "merge", "--no-edit", "FETCH_HEAD"], cwd=ROOT, capture_output=True, text=True, timeout=120)
+    if r.returncode != 0:
+        subprocess.run(["git", "merge", "--abort"], cwd=ROOT, capture_output=True)
+        print("[manual-lock] main 합치기가 충돌·작업 중 변경으로 멈춤 — 직접 git merge origin/main 으로 양쪽을 살려 푼 뒤 고치세요\n  "
+              + (r.stderr or r.stdout).strip()[-200:]); return False
+    print("[manual-lock] main 최신 매뉴얼을 합침 — 이 위에서 고치세요"); return True
+
+
+def unmerged() -> list[str]:
+    """이 브랜치에만 있고 main 에는 아직 없는 매뉴얼·규칙 파일 변경."""
+    files = []
+    try:   # 아직 커밋하지 않은 것도 (작업 트리·스테이지)
+        files += [l[3:].split(" -> ")[-1] for l in _git("status", "--porcelain").splitlines() if l.strip()]
+    except Exception:
+        pass
+    try:
+        _git("fetch", "-q", "origin", "main")
+        files += _git("diff", "--name-only", "FETCH_HEAD...HEAD").split()
+    except Exception:
+        pass
+    return sorted({f for f in files if is_protected(f)})
+
+
+def release(anyway: bool = False) -> None:
     cur = read_lock()
     if cur.get("branch") and cur["branch"] != branch():
         raise SystemExit(f"[manual-lock] 내 잠금이 아님 ({cur.get('who')})")
+    left = unmerged()
+    if left and not anyway:
+        raise SystemExit(f"[manual-lock] 아직 main 에 안 합친 매뉴얼 변경이 있어 풀지 않음: {', '.join(left[:6])}{' …' if len(left) > 6 else ''}\n"
+                         f"  push → PR 로 main 에 합친 뒤 다시 release (그대로 두려면 --anyway — 다음 사람이 이 변경을 못 봄)")
     _write_lock(None, f"잠금 풀기: {branch()}")
-    print("[manual-lock] 풀었음")
+    reqs = [p for p in proposals("open") if p.get("kind") == "request"]
+    print("[manual-lock] 풀었음" + (f" — 기다리는 요청 {len(reqs)}건 (다음에 잡는 세션이 처리)" if reqs else ""))
+
+
+def request(text: str) -> Path:
+    """잠겨 있을 때 요청 남기기 — 제안함(병렬로 써도 충돌 없음)에 kind: request 로."""
+    cur = read_lock()
+    f = propose(text, "request", source=f"잠금 중 요청 (잠금: {cur.get('who', '-')}, {cur.get('expires', '')[:16]} UTC 까지)")
+    print("  풀리면(release·만료) 직접 manual-lock acquire 로 잡아 처리하거나, 지금 잡은 세션이 처리합니다.")
+    return f
 
 
 def status() -> str:
     cur = read_lock()
-    o = owners()
-    st = (o.get("steward") or {}).get("branch")
     if not cur.get("branch"):
         s = "잠금 없음 (아무도 매뉴얼을 고치는 중이 아님)"
     else:
         s = (f"{cur.get('who')} ({cur['branch']}) — {cur.get('purpose', '')} · {cur.get('since', '')[:16]} ~ {cur.get('expires', '')[:16]} UTC"
              + (" · 만료됨" if expired(cur) else ""))
     ok, why = holder_ok(cur)
-    return f"매뉴얼 담당: {st}\n지금 잠금: {s}\n이 브랜치({branch()}): {'고칠 수 있음' if ok else '고칠 수 없음'} — {why}"
+    reqs = [p for p in proposals("open") if p.get("kind") == "request"]
+    return (f"지금 잠금: {s}\n이 브랜치({branch()}): {'고칠 수 있음' if ok else '고칠 수 없음'} — {why}"
+            + (f"\n기다리는 요청: {len(reqs)}건 ({', '.join(p['file'].split('/')[-1] for p in reqs[:3])})" if reqs else ""))
 
 
 def propose(text: str, kind: str = "fix", project: str = "", source: str = "") -> Path:
@@ -217,7 +269,7 @@ def propose(text: str, kind: str = "fix", project: str = "", source: str = "") -
     f.write_text("---\n" + yaml.safe_dump({"kind": kind, "project": project or None, "from_branch": branch(), "date": ts,
                                            "source": source or None, "status": "new"}, allow_unicode=True, sort_keys=False)
                  + "---\n" + text.strip() + "\n", encoding="utf-8")
-    print(f"[manual-propose] 제안함에 남김 → {f.relative_to(ROOT)} (매뉴얼 담당이 다음 정기 검토에서 반영)")
+    print(f"[manual-propose] 제안함에 남김 → {f.relative_to(ROOT)} (다음에 잠금을 잡는 세션·정기 검토가 반영)")
     return f
 
 

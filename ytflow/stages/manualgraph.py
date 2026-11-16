@@ -1168,7 +1168,7 @@ def write(html_out: str | None = None, artifact_out: str | None = None) -> Path:
     g = build()
     out = MANUAL / "graph.json"
     if not own:
-        print("[manual-graph] 매뉴얼 담당(잠금)이 아니라 manual/graph.json 은 다시 쓰지 않음 — 보기용 --html·--artifact 만 (docs/35)")
+        print("[manual-graph] 잠금이 없어 manual/graph.json 은 다시 쓰지 않음 — 보기용 --html·--artifact 만 (docs/35)")
         if artifact_out:
             Path(artifact_out).write_text(page(g, standalone=True, wrap=False), encoding="utf-8")
         if html_out:
