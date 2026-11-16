@@ -51,7 +51,7 @@ def main():
             fam_of[s["id"]] = f["name"]
     cnt = Counter(s["status"] for s in by_id.values())
     L = [HEAD]
-    L.append(f"- 그래픽 종류 **{len(c['families'])}** · 모션그래픽 스타일 **{len(by_id)}** — "
+    L.append(f"- 그래픽 종류 **{len(c['families'])}** · 모션그래픽 스타일 **{len(by_id)}** · 그림체 **{len(c.get('looks') or [])}** (§6) — "
              + " · ".join(f"{STATUS[k]} {cnt.get(k, 0)}" for k in STATUS))
     L.append("- ✅ 우리 렌더러에 있음 · ◐ 비슷한 것 있음 · 📦 HyperFrames 블록으로 바로 가능(설치됨, 연결만) · ○ 만들어야 함 · ⏸ 지금까지 피드백과 부딪혀 보류")
     L.append("- 모두 '스타일 기본값' 층 — 금지·MUST 아님. 강조 예산(1분 1번)·카메라 계열 횟수 안에서.\n")
@@ -84,6 +84,18 @@ def main():
     for s in sorted(todo, key=lambda s: (s["id"] not in first_ids, s["status"] != "registry")):
         L.append(f"- **{s['name']}** ({fam_of[s['id']]}, {STATUS[s['status']]}) — {', '.join(s.get('hf', [])[:3]) or '블록 없음'}"
                  + (" · *상황 1순위*" if s["id"] in first_ids else ""))
+    looks = c.get("looks") or []
+    if looks:
+        L.append("\n## 6. 그림체 (애니메이션 스타일) — 두 번째 축\n"
+                 "위 §4 는 **무엇을** 그리나(글자·숫자·지도…), 여기는 **어떤 그림체로** 그리나. 둘을 곱해 화면 하나: 예) 숫자·데이터 × 아이소메트릭, 그림·인물 × 클레이.\n"
+                 "견본: `python scripts/motion_styles_reel.py` — 같은 장면(동전이 떨어져 성장 탑이 쌓인다)을 12가지 그림체로 렌더 (43초, 1080p).\n"
+                 "'끊는 움직임'(⏯)은 일부러 프레임을 끊는 그림체라 `motion-qa` 의 멈칫·점프가 정상이다.\n")
+        L.append("| 그림체 | 생김새 | 언제 | 채널 | 제작 부담 | 상태 |\n|---|---|---|---|---|---|")
+        for lk in looks:
+            st = lk.get("status") or ("have" if lk.get("have") else "candidate")
+            extra = (f"<br>⚠ {lk['caution']}" if lk.get("caution") else "") + (" ⏯" if lk.get("stepped") else "")
+            have = (" · 우리: " + ", ".join(f"`{h}`" for h in lk["have"])) if lk.get("have") else ""
+            L.append(f"| **{lk['name']}** `{lk['id']}` | {lk['look']}{extra} | {lk['when']} | {', '.join(lk.get('fit', []))} | {lk.get('cost', '')} | {STATUS[st]}{have} |")
     L.append(SOURCES)
     OUT.write_text("\n".join(L) + "\n", encoding="utf-8")
     print(f"→ {OUT.relative_to(ROOT)} ({len(by_id)} 스타일)")

@@ -479,3 +479,21 @@ pick_order:
   - 가진 소스 — 실사·원문이 있으면 footage·screen 이 먼저, 없을 때 그림·도식
   - 채널 얼굴 — 같은 상황이라도 채널의 lean 쪽을 먼저
   - 예산 — 강조(1분 1번), 카메라 계열(한 영상 몇 번), 같은 스타일이 3박자 넘게 이어지면 바꿔 보기 (기본값, 금지 아님)
+
+# 그림체(애니메이션 스타일) — 위의 '그래픽 종류'와 다른 축. 같은 내용(예: 동전이 쌓여 성장)을 어떤 그림체로 그리나.
+#   그래픽 종류 × 그림체 = 화면 하나. 예: 숫자·데이터 × 아이소메트릭, 그림·인물 × 클레이.
+#   견본: python scripts/motion_styles_reel.py → 12가지를 같은 장면으로 (docs/38 §6)
+#   stepped: true = 일부러 끊는 움직임(boil·스톱모션·픽셀·깜빡임) — motion-qa 의 '멈칫·점프'가 정상이므로 그 구간은 판정에서 뺀다
+looks:
+  - {id: flat, name: "플랫 2D", look: "단순한 면·그림자 없는 색 면", when: "무엇이든 — 가장 흔한 설명 애니메이션", cost: 낮음, fit: [curiosity, market, ai], have: [stage, anim-stage], caution: "흔해서 개성은 색·비율로"}
+  - {id: line, name: "라인 아트 (모노라인)", look: "같은 굵기 선만·면 없음", when: "기술·개념·구조 설명, 선이 그려지는 과정이 곧 설명", cost: 낮음, fit: [ai, market], have: [chart, map_causal]}
+  - {id: whiteboard, name: "화이트보드 손그림", look: "떨리는 펜 선(boil 8fps)·손글씨", when: "강의·원리·긴 해설을 싸게", cost: 낮음, fit: [curiosity], have: [mijudiary, story-board, illust], stepped: true}
+  - {id: isometric, name: "아이소메트릭", look: "30° 비스듬한 입체 블록", when: "공장·도시·데이터센터·공급망의 '구조'", cost: 중간, fit: [market, issues, ai], status: candidate}
+  - {id: liquid, name: "리퀴드 모션", look: "물방울이 합쳐지고 늘어남 (goo 필터)", when: "흐름·흡수·합병·자금 유입, 장 표지", cost: 중간, fit: [market], status: candidate, caution: "정보 전달보다 분위기 — 한 영상 1~2번"}
+  - {id: paper, name: "종이 컷아웃 (스톱모션)", look: "종이 질감·그림자·두 프레임에 한 번 끊는 움직임", when: "따뜻한 이야기·옛 사례·시사의 손맛", cost: 중간, fit: [curiosity, issues], have: [newspapers], stepped: true}
+  - {id: parallax, name: "2.5D 시차", look: "평면 그림 층이 카메라에 따라 다르게 움직여 깊이", when: "장면 열기·풍경·사진에 공간감", cost: 중간, fit: [issues, curiosity], status: registry, caution: "카메라 계열 — 한 영상 몇 번 (v31)"}
+  - {id: pixel, name: "픽셀 / 8비트", look: "큰 네모 픽셀·칸 단위 이동", when: "레트로·게임·가벼운 쇼츠", cost: 낮음, fit: [ai], status: candidate, stepped: true, caution: "진지한 시사·시장엔 맞지 않음"}
+  - {id: neon, name: "네온 글로우", look: "어두운 바탕에 빛나는 선", when: "AI·테크·밤·데이터 흐름", cost: 낮음, fit: [ai], status: candidate, stepped: true, caution: "정보 많은 화면은 눈이 피곤"}
+  - {id: halftone, name: "하프톤 레트로 인쇄", look: "망점·색 어긋남(CMYK)", when: "옛 신문·만화·경제사, 시대 표시", cost: 낮음, fit: [issues, market], status: registry, have: [archive]}
+  - {id: css3d, name: "3D (CSS·three.js)", look: "진짜 입체가 회전", when: "제품·물체·데이터 구조를 돌려 보기", cost: 중간~높음, fit: [ai, market], have: [studio3d]}
+  - {id: clay, name: "클레이 (말랑한 입체)", look: "부푼 입체 + 크게 눌리고 튕김(스쿼시·스트레치)", when: "친근·귀여움·생활·캐릭터 감정", cost: 중간, fit: [curiosity], status: candidate}
