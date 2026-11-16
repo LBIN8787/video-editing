@@ -46,7 +46,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **연출 기법 카탈로그** (깃허브 등 열린 구현 조사: 글자 쪼개기·스크램블·모프·매치 무브·J/L컷·사진 깊이·순위 막대·맞대기 …, 이미 있음/후보/보류·라이선스·내 피드백과 부딪히는 점) — GSAP 3.13 플러그인 전부 무료 | `docs/32-technique-research.md`, `styles/techniques.yaml`, 매뉴얼 그래프 '용어 사전 → 연출 기법' |
 | **매뉴얼 정기 검토 (매일 밤 자동, 2026-11-15)** — 충돌·과적합·폐지된 기준 잔재·깨진 참조·층 미정 피드백을 재고, 판단이 필요 없는 것만 고쳐 커밋, 판단이 필요한 것은 질문으로 (그래프 '한눈에 → 정기 검토' + 휴대폰 알림). 매뉴얼 버전은 올리지 않음 | `docs/34-manual-review.md`, `skills/manual-review/SKILL.md`, `python -m ytflow manual-audit`, `manual/audit.md` |
 | **레퍼런스 영상 움직임 분석 — PC 의 ego lite + rea-video** — 클라우드는 YouTube 에 막히므로 사용자 PC 의 에이전트가 ego lite 로 재생 화면을 '정지 → 이동 → 찍기' 캡처(내려받기 없음) → rea-video 장면 분석 → 요소가 대본의 동사를 연기하는 움직임 문법 정리 | `skills/ref-watch-ego/SKILL.md`, `scripts/frames_to_clip.py`, `docs/31-motion-grammar.md`(결과) |
-| **매뉴얼 관리 — 한 번에 한 명만 (2026-11-15)** — 매뉴얼 담당 1명 + 잠금(`locks` 브랜치), 다른 에이전트는 제안함, 막는 장치 세 겹(명령·Claude hook·git pre-commit) | `docs/35-manual-ownership.md`, `manual/OWNERS.yaml`, `python -m ytflow manual-lock status`, `python -m ytflow manual-propose "…"` |
+| **매뉴얼 관리 — 한 번에 한 명만, 고칠 때만 잠금 (2026-11-16)** — 정해진 담당 없음: 고칠 세션이 짧게(2시간) 잠금(`locks` 브랜치) → 잡자마자 main 합침 → 고치고 main 에 합침 → 풂. 잠겨 있으면 `manual-lock request`. 막는 장치 세 겹(명령·Claude hook·git pre-commit) | `docs/35-manual-ownership.md`, `manual/OWNERS.yaml`, `python -m ytflow manual-lock status` |
 | **반드시 지킬 것·검사** | `manual/06-checklist.md`, `python -m ytflow check <프로젝트>` |
 | 채널 회차 만들기 (반복 운영) | `skills/channel-run/SKILL.md`, `channels/README.md`, `docs/06-operations.md` |
 | 영상 1편 만들기 | `skills/video-make/SKILL.md` |
@@ -140,7 +140,7 @@ python -m ytflow styles | schemas | status <프로젝트>
 | `shorts` 쇼츠 | 9:16 고정 훅 + 큰 자막 | shorts-aitips | `prompts/shorts_script.md` |
 
 ## 규칙 (모든 에이전트 공통)
-- **매뉴얼은 한 번에 한 명만 (2026-11-15 사용자 요청, docs/35):** 매뉴얼·규칙 파일(`manual/OWNERS.yaml` 의 protected — manual/, topics/, styles/recipes·techniques, skills/, AGENTS.md, 검사 코드)은 **잠금을 가진 한 명(평소에는 매뉴얼 담당)만** 고칩니다. 작업 전에 `python -m ytflow manual-lock status`. 담당이 아니면 고치지 말고 `python -m ytflow manual-propose "내용"` 으로 제안함(`proposals/manual/`)에 남기세요 — `review`·`feedback` 도 자동으로 제안함으로 갑니다. 사용자가 매뉴얼 작업을 맡겼을 때만 `manual-lock acquire --force --reason "사용자 허락: …"`, 끝나면 `release`. 처음 클론하면 `git config core.hooksPath .githooks`. 영상 프로젝트·렌더러·자료는 각자 브랜치에서 자유롭게.
+- **매뉴얼은 한 번에 한 명만 — 고칠 때만 잠그고 순서대로 (2026-11-15·16 사용자 요청, docs/35):** 매뉴얼·규칙 파일(`manual/OWNERS.yaml` 의 protected — manual/, topics/, styles/recipes·techniques, skills/, AGENTS.md, 검사 코드)은 **잠금을 가진 한 명만** 고칩니다. 정해진 담당은 없습니다. 고칠 일이 생기면 `python -m ytflow manual-lock acquire --purpose "…"`(비어 있으면 누구나, 2시간, 잡자마자 main 을 합침) → 고치기 → push·PR 로 **main 에 합치기** → `manual-lock release`(안 합쳤으면 거절). 잠겨 있으면 `manual-lock request "내용"` 으로 요청을 남기고 풀린 뒤 잡거나, 잡은 세션이 처리합니다. 급하지 않은 것은 `manual-propose`. 잠금이 없을 때 `review`·`feedback` 은 자동으로 제안함으로 갑니다. 처음 클론하면 `git config core.hooksPath .githooks`. 영상 프로젝트·렌더러·자료는 각자 브랜치에서 자유롭게.
 - **피드백 → 그래프 (2026-11-15 사용자 요청):** 사용자가 피드백하면 원문 그대로 기록하고 매뉴얼 그래프와 공유 페이지를 갱신합니다.
   1) 영상 판정은 `python -m ytflow review <프로젝트> --pass | --reject "원문"`, 그 밖의 말(방향 요청·"그런 뜻이 아니었다"·도구 요청)은 `python -m ytflow feedback "원문" --kind direction|clarify|tool [--about intent:xxxx] [--pending]` — 둘 다 `manual/graph.json` 을 자동으로 다시 만듭니다.
   2) 모델 해석이 틀렸다는 말이면 `manual/intents.yaml` 에 뜻한 것·뜻하지 않은 것·판정도 적습니다(`manual-ui` '의도 정렬').

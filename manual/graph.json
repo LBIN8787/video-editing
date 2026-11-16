@@ -1,9 +1,9 @@
 {
  "schema": 1,
- "generated": "2026-11-16T13:25:07",
- "source_hash": "ac02656f27d4",
+ "generated": "2026-11-16T16:56:05",
+ "source_hash": "d505c0abb5ac",
  "audit": {
-  "date": "2026-11-16T13:25",
+  "date": "2026-11-16T16:55",
   "counts": {
    "fix": 0,
    "ask": 0,
@@ -13,14 +13,6 @@
   "items": [],
   "resolved": [],
   "log": [
-   {
-    "date": "2026-11-15T08:39",
-    "fix": 0,
-    "ask": 2,
-    "new": 2,
-    "resolved": 1,
-    "note": ""
-   },
    {
     "date": "2026-11-15T08:39",
     "fix": 0,
@@ -92,6 +84,14 @@
     "new": 0,
     "resolved": 0,
     "note": "정기 검토"
+   },
+   {
+    "date": "2026-11-16T16:55",
+    "fix": 0,
+    "ask": 0,
+    "new": 0,
+    "resolved": 0,
+    "note": ""
    }
   ],
   "fixed": []
@@ -108,14 +108,14 @@
   "sections": 137,
   "must": 25,
   "auto": 48,
-  "intents": 53,
+  "intents": 54,
   "misaligned": 0,
   "intents_reviewed": 2,
   "conflicts": 0,
   "code": 66,
   "terms": 119,
   "bans": 103,
-  "feedback": 7,
+  "feedback": 8,
   "topics": 4,
   "episodes": 30,
   "main_situations": 16,
@@ -14556,6 +14556,34 @@
    "annotated": false
   },
   {
+   "id": "intent:8022eb31",
+   "kind": "intent",
+   "quote": "담당 세션이 하는게 아니라 그냥 순차적으로 서로 메뉴얼 관리할때만 잠금하고 잠금도중에 누군가 사용하려하면 그냥 요청하면 되는거 아니야? / 왜냐면 바뀐 메뉴얼을 바탕으로 또 다음메뉴얼이 작성되기도 하는데 지금은 텀이 너무 길잖아 / 내가 말한 방식으로 바꿔줘",
+   "label": "담당 세션이 하는게 아니라 그냥 순차적으로 서로 메뉴얼 관리할때만 잠금하고 잠금도중에 누군가 사용하려하면 그",
+   "versions": [],
+   "date": "2026-11-16",
+   "sources": [
+    {
+     "ref": "fb:8",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:8022eb31"
+   ],
+   "themes": [
+    "background"
+   ],
+   "ann_key": "intent:8022eb31",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:e04498a3",
    "kind": "intent",
    "quote": "1.네 2.네 — 뉴스레터 화제를 시장 매일 단서로(manual/09 §3-0-1), 저장 위치 Git+Drive 역할 나누기(\"깃에 보관하되 깃에 보관하기 힘든 부분은 드라이브쪽을 활용하라는거야 로컬드라이브 부담을 줄이는게 목적이고\")",
@@ -20508,6 +20536,34 @@
    "tier_key": "fb:e04498a3",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:8",
+   "kind": "feedback",
+   "date": "2026-11-16",
+   "quote": "담당 세션이 하는게 아니라 그냥 순차적으로 서로 메뉴얼 관리할때만 잠금하고 잠금도중에 누군가 사용하려하면 그냥 요청하면 되는거 아니야? / 왜냐면 바뀐 메뉴얼을 바탕으로 또 다음메뉴얼이 작성되기도 하는데 지금은 텀이 너무 길잖아 / 내가 말한 방식으로 바꿔줘",
+   "label": "담당 세션이 하는게 아니라 그냥 순차적으로 서로 메뉴얼 관리할때만 잠금하고 잠금도중에 누군가 사용하려하면 그",
+   "fb_kind": "tool",
+   "fb_kind_label": "도구 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "background"
+   ],
+   "scope": "standard",
+   "intent": "intent:8022eb31",
+   "tier_key": "fb:8022eb31",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
    "overfit": false,
    "single": false,
    "tier": "standard",
@@ -39916,6 +39972,16 @@
    "kind": "implemented_by"
   },
   {
+   "s": "intent:8022eb31",
+   "t": "fb:8",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:8022eb31",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
    "s": "intent:195f9882",
    "t": "ver:28",
    "kind": "interpreted_in"
@@ -43598,6 +43664,16 @@
   {
    "s": "fb:7",
    "t": "intent:e04498a3",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:8",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "fb:8",
+   "t": "intent:8022eb31",
    "kind": "quoted_as"
   }
  ]
