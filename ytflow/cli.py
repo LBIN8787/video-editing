@@ -309,6 +309,8 @@ def main(argv: list[str] | None = None) -> None:
     mu.add_argument("--port", type=int, default=8770); mu.add_argument("--host", default="127.0.0.1")
     sq = sub.add_parser("sync-qa", help="완성 영상의 자막·목소리·화면 싱크를 받아쓰기로 재기 → 05_edit/sync_qa.json")
     sq.add_argument("project")
+    mq = sub.add_parser("motion-qa", help="완성 영상의 움직임 품질(멈칫·덜컥·규격)과 GSAP 타임라인을 재기 → 05_edit/motion_qa.json (docs/37)")
+    mq.add_argument("target", help="프로젝트 또는 영상 파일"); mq.add_argument("--html-dir", default=None)
     vi = sub.add_parser("voice-import", help="긴 내레이션 음성(ElevenLabs 웹·커넥터 mp3)을 대본 박자별로 잘라 03_voice 에 넣기")
     vi.add_argument("project")
     vi.add_argument("parts", nargs="+")
@@ -521,6 +523,9 @@ def main(argv: list[str] | None = None) -> None:
     elif a.cmd == "manual-ui":
         from .stages import manualgraph
         manualgraph.serve(a.port, a.host)
+    elif a.cmd == "motion-qa":
+        from .stages import motionqa
+        motionqa.run(a.target, a.html_dir)
     elif a.cmd == "sync-qa":
         from .stages import syncqa
         syncqa.run(Project.open(a.project))

@@ -247,10 +247,10 @@ def render_scene(project: Project, scene: dict, hook: list[str], out: Path, d: f
         f = paper.fit(paper.SANS_X, t, 120, mw - 40)
         dr.text((W / 2, my0 + mh * (0.62 if s.get("icon") else 0.5)), t, font=f, fill=(255, 255, 255), anchor="mm")
     im.save(base)
-    # 살짝 다가가는 움직임 + 페이드
-    _ff(["-loop", "1", "-i", str(base), "-t", f"{d:.3f}", "-vf",
-         f"scale=w='{W}*(1+0.04*t/{d:.3f})':h=-2:eval=frame,crop={W}:{H},fade=t=in:st=0:d=0.15,format=yuv420p",
-         "-r", "30", "-c:v", "libx264", "-preset", "veryfast", str(out)])
+    # 살짝 다가가는 움직임 + 페이드 — 실수 좌표로 그려 떨림 없이 (예전 scale(eval=frame)+crop 은 정수 반올림으로
+    # 프레임 절반이 멈추고 절반이 점프했다: motion-qa 고름 42% → 100%, docs/37)
+    from .motionkit import smooth_zoom
+    smooth_zoom(base, out, W, H, d, 30, 1.0, 1.04, vf="fade=t=in:st=0:d=0.15", enc="draft")
 
 
 def assets(project: Project) -> None:
