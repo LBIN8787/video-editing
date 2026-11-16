@@ -31,7 +31,7 @@ PATTERNS = {
 
 def _search(q: str) -> list[dict]:
     try:
-        return yt.flat_playlist(f"ytsearch40:{q}", 40).get("entries", []) or []
+        return [e for e in (yt.flat_playlist(f"ytsearch40:{q}", 40).get("entries", []) or []) if e]
     except Exception:  # noqa: BLE001
         return []
 
@@ -42,7 +42,7 @@ def _channel(cid: str, n: int) -> dict:
     except Exception:  # noqa: BLE001
         return {}
     vids = [{"title": e.get("title"), "views": e.get("view_count") or 0, "dur": e.get("duration") or 0, "id": e.get("id")}
-            for e in j.get("entries", []) or []]
+            for e in j.get("entries", []) or [] if e]
     v = [x["views"] for x in vids if x["views"]]
     med = statistics.median(v) if v else 0
     for x in vids:
