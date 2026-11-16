@@ -1,0 +1,481 @@
+# 모션그래픽 카탈로그 — 어떤 모션그래픽이 있고, 어떤 상황에 쓰나 (2026-11-16 사용자: "모션그래픽도 그래픽별로 스타일을 조사하고
+#   분류해줘 … 즉 어떤 상황에 어떤 모션그래픽을 사용하고 어떤 모션그래픽들이 존재하는지 정리하고싶어")
+#
+# 읽는 법: docs/38-motion-catalog.md (이 파일에서 python scripts/motion_catalog.py 로 만듦 — 고칠 때는 이 파일만)
+# 단위:  family(그래픽 종류 10) → style(모션그래픽 스타일) → 상황(manual/situations.yaml id)
+#   docs/32·styles/techniques.yaml 은 더 작은 '연출 기법'(글자 쪼개기·모프…), 여기는 화면 한 장을 채우는 '모션그래픽 스타일'.
+#   기법은 스타일 안에서 쓰인다 (techniques 칸).
+#
+# status: have 우리 렌더러에 있음 · partial 비슷한 것 있음 · registry HyperFrames 블록으로 바로 가능(설치됨, 연결만) ·
+#         candidate 만들어야 함 · hold 지금까지 피드백과 부딪혀 보류
+# have:   우리 장면 종류(hybrid.json type)·스타일 id     hf: HyperFrames 레지스트리 블록 이름 (hyperframes add <이름>)
+# 층:     모두 '스타일 기본값'(manual/README §3-1) — 금지·MUST 아님. 강조 예산(v4)·카메라 횟수(v31) 안에서.
+
+families:
+  type:
+    name: 글자 (키네틱 타이포)
+    plain: 글자 자체가 움직이며 말을 대신한다. 가장 싸고 빠르고, 숫자·결론·훅에 강하다.
+    styles:
+      - id: word-reveal
+        name: 말하는 순간 단어 등장
+        look: 내레이션 단어가 말하는 순간 하나씩 떠오르고 핵심어만 크게·강조색
+        when: [conclusion, question]
+        avoid: 롱폼 전체 (지루함) · 자막과 같은 글자를 두 번
+        have: [kinetic]
+        hf: [per-word-rise, soft-blur-in, per-word-crossfade, kinetic-center-build, text-stagger]
+        techniques: [split-reveal, stagger]
+        status: have
+      - id: headline-slam
+        name: 한 줄 박기
+        look: 짧은 문장이 크게 '쾅' 들어와 멈춤 (흐림→또렷 0.13초, 착지 후 정지)
+        when: [conclusion, question]
+        avoid: 1분에 2번 이상
+        have: [card_type, chapter]
+        hf: [headline-slam, caption-kinetic-slam, titlecard-calm, focus-blur-resolve]
+        status: have
+      - id: type-swap
+        name: 단어 바꿔 끼우기
+        look: 문장은 그대로, 한 단어만 슬롯머신·줄긋기로 바뀜 ("예상 → 실제")
+        when: [change, compare]
+        avoid: 바뀌는 단어가 둘 이상
+        hf: [slot-machine-roll, strikethrough-replace, kinetic-type-swap, text-state-swap, caret-swap, morph-text]
+        techniques: [morph]
+        status: registry
+      - id: decode
+        name: 섞였다 풀리는 글자
+        look: 글자가 무작위로 돌다가 정답으로 고정 — 숨긴 답·코드·이름 밝히기
+        when: [metric, ai-ask]
+        avoid: 시사 채널 진지한 장면 (장난스러움)
+        hf: [scramble-reveal, matrix-decode, split-flap-board]
+        techniques: [scramble]
+        status: registry
+      - id: handwritten-title
+        name: 손글씨로 써지는 제목·표시
+        look: 펜이 지나가며 글씨·밑줄·동그라미가 그려짐 (boil 로 살아 있는 선)
+        when: [point, open-scene]
+        have: [mijudiary, story, illust]
+        hf: [hw-write-title, hw-underline, hw-callout-circle, hw-arrow, hw-box-label, marker-highlight]
+        techniques: [rough-highlight, draw-on]
+        status: have
+      - id: quote-type
+        name: 인용문 타자
+        look: 원문 한 문장이 타자처럼 찍히고 출처 줄이 붙음, 핵심 구절만 형광펜
+        when: [said, media]
+        have: [quote, bite]
+        hf: [typewriter, inline-highlight, vox-annotate]
+        status: have
+
+  data:
+    name: 숫자·데이터
+    plain: 말한 숫자가 그 순간 화면에 생긴다 — 시장 채널의 뼈대.
+    styles:
+      - id: big-number
+        name: 큰 숫자 하나
+        look: 화면 가운데 숫자 하나가 세며 오르고 목표값에 '착' (expo.out), 아래에 비교 기준 한 줄
+        when: [metric]
+        avoid: 비교 기준(compare_to) 없는 숫자
+        have: [bignum]
+        hf: [count-up, apple-money-count, number-wheel, number-pop-in, mk-progress-stat]
+        techniques: [count-up]
+        status: have
+      - id: stat-tiles
+        name: 숫자 칸 대시보드
+        look: 숫자 칸 2~4개가 차례로(40~80ms) 들어오고 각 칸 숫자가 세어짐, 변화율 색
+        when: [metric, compare]
+        avoid: 5칸 이상 (한 화면 한 생각)
+        have: [newsdesk, recap]
+        hf: [mk-specs-list, mk-usage-arc, conic-progress-ring]
+        status: partial
+        note: scripts/motion_demo.py 초안
+      - id: line-draw
+        name: 선 그래프 그려지기
+        look: 선이 왼쪽에서 그려지고 끝점이 따라감, 사건 시점에 깃발
+        when: [metric, timeline]
+        avoid: 손그림 가짜 그래프 (실제 데이터만)
+        have: [chart]
+        hf: [mk-line-graph, decline-chart, chart-story, data-chart]
+        techniques: [draw-on]
+        status: have
+      - id: bars
+        name: 막대 비교
+        look: 막대가 바닥에서 차례로 자라고 강조 막대만 색·살짝 튕김
+        when: [compare, rank]
+        have: [bars, versus]
+        hf: [animated-bar-chart]
+        techniques: [stagger]
+        status: have
+      - id: bar-race
+        name: 순위 바뀌는 막대
+        look: 시간이 흐르며 막대가 자리를 바꿈
+        when: [rank, timeline]
+        avoid: 10초 넘게 (지루함)
+        hf: [bar-chart-race]
+        techniques: [bar-race]
+        status: registry
+      - id: chart-morph
+        name: 차트가 다른 차트로
+        look: 같은 숫자가 막대 → 비율 원 → 선으로 모양을 바꾸며 '다른 관점'
+        when: [ratio, change]
+        hf: [facet-morph]
+        techniques: [chart-morph, morph]
+        status: candidate
+      - id: isotype
+        name: 사람·물건 아이콘으로 세기
+        look: 100명 중 몇 명이 색이 바뀜 — 비율을 몸으로 느끼게
+        when: [ratio]
+        have: [isotype, people, parking]
+        hf: [stagger-lattice, grid-card-assemble]
+        status: have
+
+  map:
+    name: 지도
+    plain: "'어디서 어디로'가 이야기의 뼈대일 때. 시사·공급망·전쟁·무역."
+    styles:
+      - id: route-map
+        name: 경로 지도 여정
+        look: 지도 위를 카메라가 옮겨 가며 경로 곡선이 그려지고 핀·라벨
+        when: [route]
+        avoid: 표로 보여 주기 · 매 장면 지도
+        have: [journey]
+        hf: [nyc-paris-flight, us-map-flow, world-map]
+        techniques: [motion-path, draw-on]
+        status: have
+      - id: choropleth
+        name: 나라 색칠 지도
+        look: 해당 나라·주가 차례로 색칠됨, 범례 한 줄
+        when: [ratio, compare]
+        have: [usmap, choropleth]
+        hf: [us-map, us-map-hex, us-map-bubble, spain-map]
+        status: have
+      - id: locator
+        name: 위치 짚기
+        look: 넓은 지도에서 한 점으로 다가가 동그라미·이름표 (장면 여는 '어디서')
+        when: [open-scene]
+        avoid: 확대 남용 (v31)
+        hf: [north-korea-locked-down, pull-back-reveal]
+        status: partial
+
+  diagram:
+    name: 도식·관계
+    plain: 원인 → 결과, 구조, 흐름. 화살표가 말과 함께 그어져야 '이어진다'가 보인다.
+    styles:
+      - id: causal-map
+        name: 인과 지도
+        look: 칸들이 같은 자리에 있고 말할 때마다 화살표가 그어지며 나머지는 어두워짐
+        when: [cause]
+        avoid: 장면마다 새 도식 (칸 위치 유지)
+        have: [map_causal, hybrid]
+        hf: [flowchart, constellation-hub]
+        techniques: [draw-on, spotlight]
+        status: have
+      - id: flow-steps
+        name: 단계 흐름
+        look: 1→2→3 상자가 차례로 켜지고 진행 막대가 따라감
+        when: [timeline, command]
+        have: [timeline, checklist]
+        hf: [flowchart-vertical, onboarding-stepper-flow, beat-timeline, marker-checklist-card]
+        status: have
+      - id: exploded
+        name: 분해도·층 쌓기
+        look: 한 덩어리가 층별로 벌어지며 각 층 이름 (공급망 층, 비용 구조)
+        when: [ratio, cause]
+        hf: [exploded-stack, camera-rig-depth-stack]
+        status: registry
+      - id: shape-morph
+        name: 도형이 변신
+        look: 원이 쪼개지고 합쳐지고 모양을 바꿈 — 추상 개념(분산·집중·흡수)
+        when: [change]
+        have: [shape, analogy]
+        hf: [morph-swap, goo, facet-morph]
+        techniques: [morph]
+        status: partial
+
+  illust:
+    name: 그림·인물
+    plain: 사람의 행동·마음·이야기. 호기심 채널의 몸. 동사를 그림이 연기한다.
+    styles:
+      - id: story-board
+        name: 이야기 그림판 (선으로 그려지는 장면)
+        look: 큰 종이 위에 말하는 순간 사람·사물이 선으로 그려지고 카메라가 이야기를 따라감
+        when: [open-scene, timeline]
+        have: [story, story-board]
+        hf: [whiteboard-ink, svg-stroke-trace, outline-draw, stitched-text-draw]
+        status: have
+      - id: anim-stage
+        name: 애니메이션 무대 (동사 연기)
+        look: 인물·물체가 걷고 떨어지고 부딪힘 — 한 화면 한 생각
+        when: [change, cause]
+        have: [stage, anim-stage]
+        hf: [lottie-character-walk, pendulum-swing, physical-exit, velocity-throw-snap, spring-pop]
+        status: have
+      - id: illustrated-pan
+        name: 삽화 한 장 위 카메라
+        look: 큰 삽화 위를 박자마다 카메라가 옮겨 가고 붓 쓸기 등장·생각 풍선
+        when: [open-scene, change]
+        have: [illust, illustrated]
+        hf: [pan-stations, push-in]
+        status: have
+      - id: metaphor
+        name: 움직이는 비유
+        look: 무리가 한쪽으로 옮겨 가고 의태어가 튀어나옴
+        when: [change, ratio]
+        have: [metaphor]
+        status: partial
+        note: 사용자가 고를 때만 (매뉴얼 기준 아님·품질 보완 필요)
+      - id: collage
+        name: 종이 콜라주 (컷아웃)
+        look: 사진 오려 붙이기·찢긴 종이·도장이 겹겹이 — 다큐·시사의 손맛
+        when: [media, open-scene]
+        have: [mijudiary, newspapers]
+        hf: [paper-collage-reveal, torn-paper-rip, halftone-field]
+        status: partial
+      - id: isometric
+        name: 아이소메트릭 (비스듬한 입체 도시·공장)
+        look: 30° 기울인 평면 입체 — 공장·데이터센터·물류를 구조로 보여 줌
+        when: [cause, ratio]
+        status: candidate
+        note: 그림 자산이 필요 (art-gen 으로 조각 생성 후 조립)
+
+  footage:
+    name: 사진·영상 자료
+    plain: 증거·현장. 실사가 있으면 실사가 이긴다.
+    styles:
+      - id: ken-burns
+        name: 사진 천천히 움직이기
+        look: 자료 사진이 아주 느리게 확대·이동 (실수 좌표, 떨림 없이 — docs/37)
+        when: [open-scene, media]
+        have: [kb, archive]
+        hf: [drift-hold, push-in]
+        status: have
+      - id: parallax-photo
+        name: 사진에 깊이 (2.5D)
+        look: 사진을 앞·뒤 층으로 나눠 카메라가 움직일 때 층이 다르게 움직임
+        when: [open-scene]
+        avoid: 한 영상 몇 번만 (카메라 계열)
+        hf: [parallax-zoom, parallax-unzoom, camera-rig-depth-stack]
+        techniques: [parallax-photo]
+        status: registry
+      - id: archive-stamp
+        name: 아카이브 도장
+        look: 흑백 자료 + 시간·장소 타자기 도장 + 검은 화면 한 줄
+        when: [open-scene, timeline]
+        have: [archive]
+        hf: [freeze-frame-dressing, grain-overlay]
+        status: have
+      - id: source-bite
+        name: 원본 발언 + 2단 자막
+        look: 그 사람의 목소리 구간만 잘라 원문·번역 2단, 이름 자막
+        when: [said]
+        have: [bite, source-cut, sixsigma]
+        hf: [lt-kicker-name, lt-clean-bar]
+        techniques: [j-l-cut]
+        status: have
+      - id: doc-highlight
+        name: 문서·기사 캡처 형광펜
+        look: 실제 기사·공시 캡처 위에 해당 줄만 형광펜이 그어지고 나머지 어두워짐
+        when: [media, point]
+        have: [zoomshot, newspapers]
+        hf: [yt-feather-highlight, marker-highlight, ui-focus-zoom]
+        techniques: [rough-highlight, spotlight]
+        status: have
+
+  screen:
+    name: 화면·UI
+    plain: AI·도구 사용법. 실제 화면이 증거, 모형 UI 는 보조.
+    styles:
+      - id: chat
+        name: AI 대화 화면
+        look: 질문이 타자로 쳐지고 답이 흘러나옴 (스트리밍 글자)
+        when: [ai-ask]
+        have: [chat]
+        hf: [claude-exchange, chatgpt-exchange, ai-chat-reveal, streaming-text, typed-prompt]
+        status: have
+      - id: terminal
+        name: 터미널 타자
+        look: 명령이 쳐지고 결과가 줄줄이 찍힘
+        when: [command]
+        have: [terminal]
+        hf: [terminal-simulator, code-terminal-run, code-typing]
+        status: have
+      - id: screen-zoom
+        name: 화면 자동 줌·커서
+        look: 실제 화면 녹화에서 클릭하는 곳으로 다가가고 커서가 강조됨
+        when: [point, ai-ask]
+        have: [zoomshot, hookshort]
+        hf: [cursor-zoom-follow, agent-cursor, oversized-cursor, press-ripple, ui-focus-zoom]
+        status: have
+      - id: code-diff
+        name: 코드 바뀌는 부분
+        look: 코드에서 바뀐 줄만 빨강→초록으로 바뀌고 나머지 흐림
+        when: [change, command]
+        hf: [code-diff, code-highlight, code-morph]
+        status: registry
+      - id: device-stage
+        name: 기기 틀 위 화면
+        look: 노트북·휴대폰 틀 안에 화면, 살짝 기울어 들어옴
+        when: [ai-ask]
+        avoid: 제품 광고처럼 보이기 (화려한 회전)
+        hf: [browser-device-stage, device-frame-stage, multi-device-splay]
+        status: registry
+      - id: social-card
+        name: 게시물·알림 카드
+        look: X 게시물·댓글·알림이 튀어나와 쌓임 (발언 증거, 반응 모음)
+        when: [said, media]
+        have: [screenshot]   # X 게시물은 공식 임베드 캡처 (capture.js --embed)
+        hf: [x-post, reddit-post, yt-comment-card, notification-stack, notification-cascade]
+        status: partial
+
+  overlay:
+    name: 정보 겹치기 (자막·이름표·표시)
+    plain: 화면 위에 얹는 것. 내용을 돕되 주인공이 되지 않는다.
+    styles:
+      - id: lower-third
+        name: 이름 자막 (로어 서드)
+        look: 화면 아래 이름·직함이 선과 함께 밀려 들어오고 3~4초 뒤 퇴장
+        when: [said]
+        have: [bite, sixsigma]
+        hf: [lt-kicker-name, lt-side-rule, lt-accent-underline, lt-dark-card, yt-lower-third]
+        status: have
+      - id: big-caption
+        name: 큰 자막 (쇼츠)
+        look: 말하는 순간 바뀌는 큰 자막, 핵심어만 색
+        when: [conclusion]
+        have: [hookshort, presenter, shorts-aitips]
+        hf: [caption-highlight, caption-pill-karaoke, caption-editorial-emphasis, caption-weight-shift]
+        status: have
+      - id: source-line
+        name: 출처 줄
+        look: "화면 구석 작은 '출처: …' — 숫자·인용마다"
+        when: [metric, said, media]
+        have: [newsdesk, sixsigma]
+        status: have
+      - id: callout
+        name: 가리키는 표시
+        look: 동그라미·화살표·밑줄이 말과 함께 그려짐
+        when: [point]
+        have: [zoomshot]
+        hf: [yt-circle-pointer, cursor-annotate, hw-callout-circle, mk-callout-highlight]
+        techniques: [rough-highlight]
+        status: have
+      - id: ticker
+        name: 뉴스 띠
+        look: 아래쪽 흐르는 띠·속보 표시
+        when: [media]
+        avoid: 매일 브리핑 외에는 산만함
+        hf: [news-ticker, ticker-takeover]
+        status: registry
+
+  transition:
+    name: 장면 이어 주기
+    plain: 장면과 장면 사이. 눈에 띄지 않는 것이 기본 — 화려한 전환은 피드백과 부딪힌다(v12 '정신없다').
+    styles:
+      - id: cut
+        name: 그냥 자르기 (박자 위에서)
+        look: 움직임이 가장 빠른 프레임에서 자름, 방향·속도가 이어지게
+        when: [conclusion, change]
+        have: [all]
+        status: have
+      - id: crossfade
+        name: 겹쳐 바뀌기
+        look: 0.3~0.5초 겹쳐 사라짐 — 장 바뀜·시간 흐름
+        when: [timeline]
+        have: [chapter, edit10.py]
+        hf: [fade-through, transitions-dissolve]
+        techniques: [xfade-pack]
+        status: have
+      - id: match-move
+        name: 같은 것이 다음 화면으로
+        look: 앞 장면의 숫자·도형이 그대로 다음 장면 자리로 옮겨 가며 장면이 바뀜
+        when: [change, cause]
+        hf: [match-cut, text-match-cut, type-match-cut, morph-swap]
+        techniques: [match-move]
+        status: registry
+      - id: wipe
+        name: 밀어내기·닦기
+        look: 한 방향으로 새 장면이 밀고 들어옴 (비교 '이전 → 이후')
+        when: [compare, change]
+        hf: [before-after-wipe, directional-wipe, page-slide, panel-reveal, curtain-reveal]
+        status: registry
+      - id: flashy
+        name: 화려한 전환 (휙·글리치·셰이더)
+        look: 휩 팬·글리치·빛 번짐·소용돌이
+        when: []
+        avoid: 기본으로 쓰지 않음 (v12 '정신없다', v31 확대 금지)
+        hf: [whip-pan, glitch, light-leak, swirl-vortex, cinematic-zoom, zoom-through-transition]
+        techniques: [whip-pan, gl-transitions, zoom-into]
+        status: hold
+
+  world:
+    name: 배경·질감·카메라·3D
+    plain: 바탕과 공기. 채널 정체성(시사 증거판·시장 대시보드·호기심 칠판·AI 앱 창)을 만든다.
+    styles:
+      - id: paper-bg
+        name: 종이·칠판 질감
+        look: 구겨진 종이·칠판·격자 노트 — 손그림 계열의 바탕
+        when: [all]
+        have: [mijudiary, story-board, skins]
+        hf: [grain-field, halftone-field]
+        status: have
+      - id: dark-dashboard
+        name: 어두운 대시보드 바탕
+        look: 어두운 남색 + 은은한 중심 빛 + 격자선 — 시장·AI 채널
+        when: [metric, compare]
+        have: [newsdesk, identity]
+        hf: [mesh-gradient-bg, vignette, grain-overlay]
+        status: have
+      - id: slow-camera
+        name: 아주 느린 카메라
+        look: 박자 하나 내내 1~3% 확대·이동 (sine.inOut) — 정지 화면에 숨
+        when: [all]
+        avoid: 빠른 확대·줌인 전환 (v31)
+        have: [identity, edit10.py]
+        hf: [drift-hold, push-in, rack-focus]
+        status: have
+      - id: studio-3d
+        name: 어두운 스튜디오 3D 물체
+        look: 칩·서버·지폐 같은 물체가 조명 아래 천천히 돎
+        when: [open-scene, conclusion]
+        avoid: 정보 없이 멋만 (한 영상 1~2번)
+        have: [studio3d]
+        hf: [product-turntable, ui-3d-reveal, chrome-orb]
+        status: have
+      - id: abstract-bg
+        name: 추상 움직이는 배경 (셰이더)
+        look: 오로라·물결·입자 — 장 표지·쇼츠 훅 뒤
+        when: [question]
+        avoid: 글자 뒤에서 대비를 깎음 · 정보 화면 뒤
+        hf: [aurora, flowing-gradient, mesh-gradient, plasma]
+        status: registry
+
+# 상황 → 모션그래픽 (1순위 → 2순위). manual/situations.yaml 의 scenes 는 '장면 종류', 여기는 그 장면을 어떤 모션 스타일로 채우나.
+situations:
+  open-scene: [ken-burns, archive-stamp, story-board, locator, parallax-photo]
+  question: [headline-slam, word-reveal, abstract-bg]
+  said: [source-bite, lower-third, quote-type, social-card]
+  cause: [causal-map, anim-stage, exploded, match-move]
+  route: [route-map, locator]
+  metric: [big-number, line-draw, stat-tiles, decode]
+  compare: [bars, wipe, stat-tiles, choropleth]
+  ratio: [isotype, chart-morph, choropleth, exploded]
+  timeline: [flow-steps, line-draw, bar-race, crossfade]
+  media: [doc-highlight, collage, social-card, quote-type]
+  rank: [bar-race, bars]
+  change: [type-swap, shape-morph, anim-stage, match-move, code-diff]
+  point: [callout, doc-highlight, screen-zoom, handwritten-title]
+  conclusion: [headline-slam, word-reveal, big-caption]
+  ai-ask: [chat, screen-zoom, device-stage]
+  command: [terminal, code-diff, flow-steps]
+
+# 채널(욕망)마다 기본 얼굴 — channels/brands.yaml identity 와 같은 뜻
+channels:
+  market: {face: 시장 대시보드, lean: [big-number, stat-tiles, line-draw, bars, dark-dashboard, source-line], less: [anim-stage, abstract-bg]}
+  issues: {face: 시사 증거판, lean: [doc-highlight, source-bite, route-map, choropleth, causal-map, archive-stamp], less: [decode, abstract-bg]}
+  curiosity: {face: 호기심 칠판, lean: [story-board, anim-stage, illustrated-pan, handwritten-title, isotype, paper-bg], less: [stat-tiles, ticker]}
+  ai: {face: AI 앱 창, lean: [chat, terminal, screen-zoom, code-diff, word-reveal, big-caption], less: [archive-stamp, collage]}
+
+# 고르는 순서 (docs/38 §1)
+pick_order:
+  - 박자가 하는 일 (상황) — 대본 문장의 동사가 정한다
+  - 가진 소스 — 실사·원문이 있으면 footage·screen 이 먼저, 없을 때 그림·도식
+  - 채널 얼굴 — 같은 상황이라도 채널의 lean 쪽을 먼저
+  - 예산 — 강조(1분 1번), 카메라 계열(한 영상 몇 번), 같은 스타일이 3박자 넘게 이어지면 바꿔 보기 (기본값, 금지 아님)
