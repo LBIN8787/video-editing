@@ -27,6 +27,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **이어 읽는 시장 — 매일 운영 매뉴얼 (v19)** — 하루 시간표(06:05→08:00), **SAVE(오선) 소식 기본 확인(§3-0, `inbox/save/`, 메모 없이: MacroDroid → Gmail `[save알림]` → 30분마다 자동 커밋 — Apps Script 안 씀, docs/28 §1)**, 원인별 1차 출처, 대본 장면표·고정 문구, 업로드 순서, 예외 대응 | `manual/09-market-daily.md`, `python -m ytflow yt-pack <프로젝트>` |
 | **머니크루 수준의 깊이 (v33)** — 주제 선정(다른 층·한국 계좌로 귀결·큰 사건은 각도별 연속), 대본 뼈대 11단계(반전 숫자→원문 해부→메커니즘→계산→같은 틀 역사 비교→틀리는 경우→기준선 신호), 깊이 기법 7 | `docs/31-moneycrew-reverse.md`, `manual/03-market.md` §0-4 |
 | **뻔한 사실 말고 자료를 엮어서 (v26, 시장 분석·심층·주간)** — 알려진 것(`known`) 대신 엮어야 보이는 것(`new_angle`)으로 제목·훅, 팩트시트 `## 자료 지도`(보고서·발언·행동을 날짜 순, 자료마다 의미)·`## 매체 프레임`(국내·해외 매체가 어떻게 다뤘나), 말과 행동 맞대기 | `manual/03-market.md` §0-2, `manual/09-market-daily.md` §2·§5 |
+| **뉴스레터 소재 (2026-11-15)** — 구독한 무료 뉴스레터를 매일 모아 채널별 소재 목록(제목·링크·분류만). SAVE 와 같은 '단서' 자리: 문장을 옮기지 않고 숫자·발언은 1차 출처로 | `docs/36-newsletters.md`, `manual/09-market-daily.md` §3-0-1, `inbox/newsletters/`, `python -m ytflow newsletters` |
 | **유튜브 올리기·관리 자동화** — 업로드·설명란(더보기)·태그·카테고리·예약 공개·썸네일·자막·재생목록 (공식 API, GitHub Actions) | `docs/24-youtube-publish.md`, `python -m ytflow yt-publish <프로젝트>`, `scripts/youtube_auth.py`, `.github/workflows/youtube-publish.yml` |
 | **주식 채널 개설 계획** — 이름 후보(겹침 확인)·1일 1영상 운영(평일 아침 브리핑·심층·주말 분석) | `docs/23-stock-channel-plan.md`, `channels/ch-market-daily/channel.yaml` |
 | **어닝콜 해부·연결과 의미 (v18)** — 숫자·약속 → 시장의 걱정과 경영진의 답(원문+번역) → 무엇으로 이어지나(해석) → 남은 숙제 | `manual/03-market.md` §0-1, `ytflow/stages/earnings.py` |
@@ -149,12 +150,12 @@ python -m ytflow styles | schemas | status <프로젝트>
 - **사실:** 숫자와 발언은 출처로 확인된 것만 씁니다. '재확인 필요'는 단정하지 않습니다. 투자 권유 표현은 금지합니다.
 - **소스:** YouTube 봇 확인이나 사이트 접근 차단을 **우회하지 않습니다.** 막히면 임시 화면을 두고 사용자 PC 에서 `rebuild` 하게 안내합니다.
 - **스타일:** 레퍼런스 채널의 대사, 고유 캐릭터, 로고, 썸네일을 복제하지 않습니다. 구조와 기법만 가져옵니다.
-- **커밋 대상:** 기획 문서(md/json/csv/yaml)는 커밋합니다. 미디어(mp4/wav/png/jpg), 타 채널 자막, `styles/**/work/`, `.llm/` 은 커밋하지 않습니다(.gitignore). 완성 영상과 다시 만들 수 없는 자료 화면은 **GitHub Release** 에 보관합니다(`upload <프로젝트> --archive`, 키 불필요, `docs/09-storage.md`·`docs/11-playbook.md`).
+- **커밋 대상:** 기획 문서(md/json/csv/yaml)는 커밋합니다. 미디어(mp4/wav/png/jpg), 타 채널 자막, `styles/**/work/`, `.llm/` 은 커밋하지 않습니다(.gitignore). 완성 영상과 다시 만들 수 없는 자료 화면은 **Google Drive**(기본) 또는 공개해도 되는 것만 **GitHub Release** 에 보관합니다(`upload <프로젝트> --archive`, 키 불필요, `docs/09-storage.md`·`docs/11-playbook.md`).
 - **제목·썸네일:** 모든 영상은 제목(후보 3개)과 썸네일 3장(A/B/C)을 함께 만듭니다(`prompts/thumbnail.md`). 사진 장소·숫자는 영상과 같은 사실 규칙.
 - **결과 확인:** `layout_qa.json` 이 비어 있는지(화살표·글자 겹침, 대비) 보고, 영상을 만든 뒤에는 프레임을 뽑아 직접 확인하고(`skills/video-edit`), `REPORT.md` 의 남은 일을 사용자에게 알립니다.
 - **목소리:** 초안은 edge-tts, **업로드 최종본은 ElevenLabs**(영상 확정 후 채널별 voice_id 지정). API 키는 채팅에 쓰지 않고 환경변수·네트워크 비밀값으로.
 - **외부 도구:** 버전은 `tools/external.json` 에 고정합니다. 올릴 때는 그 도구의 SKILL.md·스크립트를 다시 읽고(네트워크 호출·자동 설치 확인) `docs/05-skills-review.md` 에 기록합니다.
-- **저장 위치 (2026-11-15~ Google Drive):** 내려받은 자료·레퍼런스 캡처·분석 결과·완성 영상 같은 **파일은 Google Drive 에서 관리**합니다. PC 는 Google Drive for desktop 의 `ytflow` 폴더를 환경변수 `YTFLOW_DRIVE`(예: `G:\내 드라이브\ytflow`)로 지정해 그 아래에 저장하고(`refs\`·`cache\`·`영상\`), 클라우드 세션은 Drive 커넥터(파일당 10MB 까지)·rclone 으로 올립니다. D 드라이브에 새 파일을 만들지 않고, C 드라이브도 쓰지 않습니다. 동기화하면 깨지는 git 저장소·가상환경·설치 도구는 예외(`docs/09-storage.md` §0).
+- **저장 위치 — Git 과 Drive 를 나눠서 (2026-11-16 사용자: "깃에 보관하되 깃에 보관하기 힘든 부분은 드라이브쪽을 활용하라는거야 로컬드라이브 부담을 줄이는게 목적이고"):** 코드·문서·설정·기획·작은 분석 결과(md/json/csv/yaml)는 **Git** 에 둡니다. 큰 영상·오디오·프레임 묶음·원자료처럼 Git 이력에 부담이 되는 **파일은 Google Drive** 에 두고, Git 에는 위치·판본·크기 같은 최소 메타데이터만 남깁니다(접근 토큰이 든 링크·비공개 자료는 공개 Git 금지). 모든 파일을 두 곳에 두라는 뜻은 아니며, 목적은 **PC 저장공간 부담 줄이기**입니다. 올리고 다시 열어 확인하기 전에는 PC 원본을 지우지 않습니다. PC 는 Google Drive for desktop 의 `ytflow` 폴더를 환경변수 `YTFLOW_DRIVE`(예: `G:\내 드라이브\ytflow`)로 지정해 그 아래에 저장하고(`refs\`·`cache\`·`영상\`), 클라우드 세션은 Drive 커넥터(파일당 10MB 까지)·rclone 으로 올립니다. D 드라이브에 새 파일을 만들지 않고, C 드라이브도 쓰지 않습니다. 동기화하면 깨지는 git 저장소·가상환경·설치 도구는 예외(`docs/09-storage.md` §0).
 - **스키마:** 에이전트가 직접 쓰는 JSON 은 `schemas/*.schema.json` 을 따릅니다(`python -m ytflow schemas` 로 갱신).
 
 ## 폴더
