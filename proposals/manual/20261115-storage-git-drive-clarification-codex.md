@@ -1,6 +1,6 @@
 ---
 kind: rule
-status: pending
+status: done
 from: codex
 date: 2026-11-15
 scope: storage

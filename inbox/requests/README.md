@@ -75,7 +75,7 @@ status: pending
 
 - 같은 파일 끝에 `## 결과` 섹션이 붙습니다.
 - 파일은 `inbox/requests/done/<원본파일명>` 으로 **이동**합니다(원래 경로에는 남지 않음). frontmatter `status` 는 `done` 이 됩니다.
-- 스크린샷·CSV 같은 첨부는 `inbox/requests/done/artifacts/<slug>/` 에 함께 커밋되고, `## 결과` 에 경로가 적힙니다.
+- 첨부: **작고 공개해도 되는** CSV·캡처만 `inbox/requests/done/artifacts/<slug>/` 에 함께 커밋할 수 있습니다. 크거나 민감한 것(로그인 화면·비공개 스튜디오 자료·개인정보)은 비공개 Google Drive 에 두고 `## 결과` 에는 위치만 적습니다 (`docs/09-storage.md` §0-0).
 
 ```markdown
 ## 결과

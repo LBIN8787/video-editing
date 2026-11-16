@@ -1,16 +1,17 @@
 {
  "schema": 1,
- "generated": "2026-11-15T13:18:25",
- "source_hash": "f8f2511d163f",
+ "generated": "2026-11-16T06:04:33",
+ "source_hash": "ac02656f27d4",
  "audit": {
-  "date": "2026-11-15T13:18",
+  "date": "2026-11-16T06:04",
   "counts": {
    "fix": 0,
-   "ask": 2,
+   "ask": 0,
    "new": 0,
-   "resolved": 0
+   "resolved": 2
   },
-  "items": [
+  "items": [],
+  "resolved": [
    {
     "kind": "proposal",
     "level": "ask",
@@ -20,7 +21,8 @@
     "why": "ccr-28400ba3-s13cmo 의 제안 — 담당이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
     "id": "dfd5f5aad0",
     "new": false,
-    "since": "2026-11-15"
+    "since": "2026-11-15",
+    "resolved": "2026-11-16"
    },
    {
     "kind": "proposal",
@@ -31,19 +33,11 @@
     "why": "None 의 제안 — 담당이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
     "id": "ce7dbaceb8",
     "new": false,
-    "since": "2026-11-15"
+    "since": "2026-11-15",
+    "resolved": "2026-11-16"
    }
   ],
-  "resolved": [],
   "log": [
-   {
-    "date": "2026-11-15T08:33",
-    "fix": 1,
-    "ask": 3,
-    "new": 4,
-    "resolved": 0,
-    "note": ""
-   },
    {
     "date": "2026-11-15T08:34",
     "fix": 0,
@@ -115,34 +109,40 @@
     "new": 0,
     "resolved": 0,
     "note": "정기 검토"
+   },
+   {
+    "date": "2026-11-16T06:04",
+    "fix": 0,
+    "ask": 0,
+    "new": 0,
+    "resolved": 2,
+    "note": ""
    }
   ],
-  "fixed": [
-   "제안함 읽기: status 가 new 가 아닌 제안(pending 등)도 열린 제안으로 잡도록 고침 — Codex 저장 위치 제안을 놓치던 문제"
-  ]
+  "fixed": []
  },
  "stats": {
-  "manual_version": 34,
-  "versions": 34,
+  "manual_version": 35,
+  "versions": 35,
   "reviews": 30,
   "rejects": 20,
   "passes": 10,
   "pending": 0,
   "rules": 56,
   "checks": 102,
-  "sections": 136,
+  "sections": 137,
   "must": 25,
   "auto": 48,
-  "intents": 52,
+  "intents": 53,
   "misaligned": 0,
   "intents_reviewed": 2,
   "conflicts": 0,
   "code": 66,
   "terms": 119,
   "bans": 103,
-  "feedback": 6,
+  "feedback": 7,
   "topics": 4,
-  "episodes": 29,
+  "episodes": 30,
   "main_situations": 16,
   "tiers": {
    "principle": 45,
@@ -2326,15 +2326,16 @@
    "key": "09",
    "file": "manual/09-market-daily.md",
    "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13)",
-   "lines": 222,
+   "lines": 231,
    "versions": [
     24,
     29,
     30,
     31,
-    32
+    32,
+    35
    ],
-   "last_version": 32
+   "last_version": 35
   },
   {
    "id": "doc:10",
@@ -3907,7 +3908,7 @@
    "label": "하루 시간표 (평일, 한국 시간)",
    "title": "1. 하루 시간표 (평일, 한국 시간)",
    "line": 20,
-   "end": 40,
+   "end": 41,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3920,8 +3921,8 @@
    "level": 2,
    "label": "브리핑이냐 심층이냐 (요일 고정 아님)",
    "title": "2. 브리핑이냐 심층이냐 (요일 고정 아님)",
-   "line": 41,
-   "end": 71,
+   "line": 42,
+   "end": 72,
    "tag_version": null,
    "versions": [
     26,
@@ -3937,8 +3938,8 @@
    "level": 2,
    "label": "조사 — 원인은 1차 출처로",
    "title": "3. 조사 — 원인은 1차 출처로",
-   "line": 72,
-   "end": 72,
+   "line": 73,
+   "end": 73,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3951,11 +3952,27 @@
    "level": 3,
    "label": "SAVE(오선) 소식은 기본으로 확인 (2026-11-14 사용자 요청)",
    "title": "3-0. SAVE(오선) 소식은 기본으로 확인 (2026-11-14 사용자 요청)",
-   "line": 73,
-   "end": 83,
+   "line": 74,
+   "end": 84,
    "tag_version": null,
    "versions": [],
    "last_version": null
+  },
+  {
+   "id": "sec:09§3-0-1",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "3-0-1",
+   "level": 3,
+   "label": "뉴스레터 화제도 같은 '단서' 자리 (2026-11-16 사용자 승인, docs/36)",
+   "title": "3-0-1. 뉴스레터 화제도 같은 '단서' 자리 (2026-11-16 사용자 승인, docs/36)",
+   "line": 85,
+   "end": 92,
+   "tag_version": null,
+   "versions": [
+    35
+   ],
+   "last_version": 35
   },
   {
    "id": "sec:09§3-1",
@@ -3965,8 +3982,8 @@
    "level": 3,
    "label": "원인 종류별 어디서 확인하나",
    "title": "3-1. 원인 종류별 어디서 확인하나",
-   "line": 84,
-   "end": 95,
+   "line": 93,
+   "end": 104,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3979,8 +3996,8 @@
    "level": 3,
    "label": "팩트시트 쓰는 법 (`01_research/factsheet.md`)",
    "title": "3-2. 팩트시트 쓰는 법 (`01_research/factsheet.md`)",
-   "line": 96,
-   "end": 101,
+   "line": 105,
+   "end": 110,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3993,8 +4010,8 @@
    "level": 3,
    "label": "데이터 함정 (실제로 겪은 것)",
    "title": "3-3. 데이터 함정 (실제로 겪은 것)",
-   "line": 102,
-   "end": 112,
+   "line": 111,
+   "end": 121,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4007,8 +4024,8 @@
    "level": 2,
    "label": "대본 — 브리핑 (10~12분, 20~26장면)",
    "title": "4. 대본 — 브리핑 (10~12분, 20~26장면)",
-   "line": 113,
-   "end": 129,
+   "line": 122,
+   "end": 138,
    "tag_version": null,
    "versions": [
     34
@@ -4037,8 +4054,8 @@
    "level": 2,
    "label": "대본 — 심층 (12분~, 길이는 자료·인사이트의 양이 정함)",
    "title": "5. 대본 — 심층 (12분~, 길이는 자료·인사이트의 양이 정함)",
-   "line": 130,
-   "end": 137,
+   "line": 139,
+   "end": 146,
    "tag_version": null,
    "versions": [
     26,
@@ -4059,8 +4076,8 @@
    "level": 2,
    "label": "화면 문법 (시장 카테고리 개성, `05 §0-7`)",
    "title": "6. 화면 문법 (시장 카테고리 개성, `05 §0-7`)",
-   "line": 138,
-   "end": 152,
+   "line": 147,
+   "end": 161,
    "tag_version": null,
    "versions": [
     27,
@@ -4091,8 +4108,8 @@
    "level": 2,
    "label": "제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
    "title": "7. 제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
-   "line": 153,
-   "end": 158,
+   "line": 162,
+   "end": 167,
    "tag_version": null,
    "versions": [
     27
@@ -4110,8 +4127,8 @@
    "level": 2,
    "label": "렌더 전 점검",
    "title": "8. 렌더 전 점검",
-   "line": 159,
-   "end": 161,
+   "line": 168,
+   "end": 170,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4124,8 +4141,8 @@
    "level": 2,
    "label": "렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
    "title": "9. 렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
-   "line": 162,
-   "end": 167,
+   "line": 171,
+   "end": 176,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4138,8 +4155,8 @@
    "level": 2,
    "label": "업로드 (유튜브 스튜디오)",
    "title": "10. 업로드 (유튜브 스튜디오)",
-   "line": 168,
-   "end": 178,
+   "line": 177,
+   "end": 187,
    "tag_version": null,
    "versions": [
     34
@@ -4154,8 +4171,8 @@
    "level": 2,
    "label": "기록·되돌아보기",
    "title": "11. 기록·되돌아보기",
-   "line": 179,
-   "end": 182,
+   "line": 188,
+   "end": 191,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4168,8 +4185,8 @@
    "level": 2,
    "label": "예외 대응",
    "title": "12. 예외 대응",
-   "line": 183,
-   "end": 192,
+   "line": 192,
+   "end": 201,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4182,8 +4199,8 @@
    "level": 2,
    "label": "법·정책",
    "title": "13. 법·정책",
-   "line": 193,
-   "end": 202,
+   "line": 202,
+   "end": 211,
    "tag_version": null,
    "versions": [
     34
@@ -4191,43 +4208,43 @@
    "last_version": 34
   },
   {
-   "id": "sec:09§h203",
+   "id": "sec:09§h212",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h203",
+   "num": "h212",
    "level": 2,
    "label": "목소리 (2026-11-13 결정)",
    "title": "목소리 (2026-11-13 결정)",
-   "line": 203,
-   "end": 210,
+   "line": 212,
+   "end": 219,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h211",
+   "id": "sec:09§h220",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h211",
+   "num": "h220",
    "level": 2,
    "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
    "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
-   "line": 211,
-   "end": 216,
+   "line": 220,
+   "end": 225,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h217",
+   "id": "sec:09§h226",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h217",
+   "num": "h226",
    "level": 2,
    "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
    "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
-   "line": 217,
-   "end": 222,
+   "line": 226,
+   "end": 231,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -8913,6 +8930,16 @@
     "term:beat-motion",
     "term:static-ratio"
    ]
+  },
+  {
+   "id": "ver:35",
+   "kind": "version",
+   "v": 35,
+   "date": "2026-11-16",
+   "label": "v35",
+   "summary": "뉴스레터 화제를 시장 매일 '단서'로(09 §3-0-1) · 저장 위치 Git+Drive 역할 분담(AGENTS·docs/09 §0-0·ref-watch-ego·requests 첨부)",
+   "applied": [],
+   "themes": []
   },
   {
    "id": "rev:1",
@@ -14539,6 +14566,32 @@
    "annotated": false
   },
   {
+   "id": "intent:e04498a3",
+   "kind": "intent",
+   "quote": "1.네 2.네 — 뉴스레터 화제를 시장 매일 단서로(manual/09 §3-0-1), 저장 위치 Git+Drive 역할 나누기(\"깃에 보관하되 깃에 보관하기 힘든 부분은 드라이브쪽을 활용하라는거야 로컬드라이브 부담을 줄이는게 목적이고\")",
+   "label": "1.네 2.네 — 뉴스레터 화제를 시장 매일 단서로(manual/09 §3-0-1), 저장 위치 Git+Dr",
+   "versions": [],
+   "date": "2026-11-16",
+   "sources": [
+    {
+     "ref": "fb:7",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:e04498a3"
+   ],
+   "themes": [],
+   "ann_key": "intent:e04498a3",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "term:bite",
    "kind": "term",
    "key": "bite",
@@ -19931,7 +19984,7 @@
     "sec:04§0-4",
     "sec:05§0-4",
     "sec:09§6",
-    "sec:09§h217",
+    "sec:09§h226",
     "sec:README§2-5",
     "sec:README§3-1",
     "ver:27",
@@ -20261,7 +20314,7 @@
     "sec:05§1",
     "sec:06§G5",
     "sec:06§G6",
-    "sec:09§h217",
+    "sec:09§h226",
     "sec:README§0",
     "sec:README§2",
     "ver:3",
@@ -20437,6 +20490,32 @@
    "scope": "standard",
    "intent": "intent:9b14a944",
    "tier_key": "fb:9b14a944",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:7",
+   "kind": "feedback",
+   "date": "2026-11-16",
+   "quote": "1.네 2.네 — 뉴스레터 화제를 시장 매일 단서로(manual/09 §3-0-1), 저장 위치 Git+Drive 역할 나누기(\"깃에 보관하되 깃에 보관하기 힘든 부분은 드라이브쪽을 활용하라는거야 로컬드라이브 부담을 줄이는게 목적이고\")",
+   "label": "1.네 2.네 — 뉴스레터 화제를 시장 매일 단서로(manual/09 §3-0-1), 저장 위치 Git+Dr",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "standard",
+   "intent": "intent:e04498a3",
+   "tier_key": "fb:e04498a3",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -31963,6 +32042,299 @@
        "say": "11월 10일 보먼 부의장이 꺼낸 4분의 1이라는 숫자는, 결국 이 고리의 첫 칸이었습니다. AI의 위험은 기술주 안에만 있지 않고, 물가와 금리를 거쳐 모두의 "
       }
      ]
+    },
+    {
+     "project": "20261116-market-daily",
+     "scenes": 25,
+     "coverage": 0.96,
+     "fit": 0.38,
+     "rows": [
+      {
+       "s": 1,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "11월 13일 금요일 미국 장 마감 기준, AMD는 8.75%, 브로드컴은 4.76% 내렸고 반도체 지수는 3.43% 빠졌습니다. 그런데 다우 지수는 0.10% "
+      },
+      {
+       "s": 2,
+       "type": "quote",
+       "sit": "question",
+       "fit": false,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "일요일, 미국 재무장관이 방송에서 엔비디아 이사회를 향해 말했습니다. 앞으로 10일 안에, 이사회와 외부 변호인으로부터 답을 들어야 한다고 말입니다."
+      },
+      {
+       "s": 3,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "먼저 금요일 장부터 보겠습니다."
+      },
+      {
+       "s": 4,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "업종으로 나눠 보면 더 분명합니다. 기술 업종은 2.01% 내렸지만, 생활필수품 회사들이 모인 필수소비재는 1.42%, 커뮤니케이션은 1.05%, 에너지는 0.9"
+      },
+      {
+       "s": 5,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "AMD와 브로드컴이 크게 빠진 이유는 그 앞의 며칠에 있습니다. 엔비디아 창업자의 사임 소식 속에 돈이 대안을 찾아 몰리면서, AMD는 6일 종가에서 12일까지 "
+      },
+      {
+       "s": 6,
+       "type": "chapter",
+       "sit": "change",
+       "fit": true,
+       "rec": [
+        "stage",
+        "analogy",
+        "shape"
+       ],
+       "say": "그리고 주말 사이, 이 사건의 무대가 바뀌었습니다."
+      },
+      {
+       "s": 7,
+       "type": "checklist",
+       "sit": "said",
+       "fit": false,
+       "rec": [
+        "bite",
+        "footage",
+        "quote"
+       ],
+       "say": "날짜 순서로 보면 이렇습니다. 12일, 미국 법무부가 엔비디아와 관련된 조사를 여러 건 하고 있다는 보도가 나왔습니다. 다만 같은 보도는 지금으로선 형사 기소를 "
+      },
+      {
+       "s": 8,
+       "type": "quote",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "재무장관이 던진 질문 가운데 시장에 가장 무거운 것은 이것입니다. 엔비디아가 매출과 이익을 부풀리려고, 불법으로 보이는 판매를 밀어붙였느냐는 질문입니다. 결론이 "
+      },
+      {
+       "s": 9,
+       "type": "checklist",
+       "sit": "route",
+       "fit": false,
+       "rec": [
+        "journey",
+        "usmap"
+       ],
+       "say": "의회에는 수출 규제 법안 세 개가 올라 있습니다. 첫째는 수출한 칩이 실제로 어디에 있는지 확인하게 하는 법, 둘째는 반도체 장비와 동맹국 규정의 빈틈을 막는 법"
+      },
+      {
+       "s": 10,
+       "type": "checklist",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "같은 발언을 매체들은 다르게 뽑았습니다. 미국 경제 매체 다수는 '크게 흔들어야 한다', '외부에서 최고경영자를 찾으라'는 인사 문제를 제목에 올렸고, 악시오스는"
+      },
+      {
+       "s": 11,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "그렇다면 재무장관의 질문에, 엔비디아의 장부는 무엇이라고 답할 수 있을까요?"
+      },
+      {
+       "s": 12,
+       "type": "bars",
+       "sit": "earnings",
+       "fit": true,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "엔비디아가 8월에 낸 분기 보고서를 보면, 5월부터 7월까지 2분기 매출 962억 달러 가운데 미국이 600억 달러, 대만이 270억 달러, 중국은 홍콩을 포함해"
+      },
+      {
+       "s": 13,
+       "type": "quote",
+       "sit": "route",
+       "fit": false,
+       "rec": [
+        "journey",
+        "usmap"
+       ],
+       "say": "그런데 같은 보고서에는 이런 문장이 붙어 있습니다. 지역은 직접 고객의 본사 위치로 나눈 것이고, 최종 고객과 배송지는 그와 다를 수 있다는 문장입니다."
+      },
+      {
+       "s": 14,
+       "type": "map_causal",
+       "sit": "point",
+       "fit": false,
+       "rec": [
+        "zoomshot"
+       ],
+       "say": "여기서부터는 해석입니다. 재무장관의 질문은 장부 속 8.2%라는 숫자만으로는 답할 수 없습니다. 장부는 주문한 회사를 적고, 질문은 칩이 결국 어디로 갔느냐를 묻"
+      },
+      {
+       "s": 15,
+       "type": "quote",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "엔비디아도 이 위험을 알고 있었습니다. 같은 보고서의 위험 요인에, 수출 통제법 위반이 확인되면 회사가 모르는 사이에 일어난 일이라도 처벌을 받을 수 있다고 적었"
+      },
+      {
+       "s": 16,
+       "type": "analogy",
+       "sit": "route",
+       "fit": false,
+       "rec": [
+        "journey",
+        "usmap"
+       ],
+       "say": "재무장관의 비유를 빌리면, 은행에는 감독 당국이 들어와 내부 통제를 들여다봅니다. 지금까지 칩 회사의 수출 규정 준수는 대부분 회사 스스로의 몫이었습니다."
+      },
+      {
+       "s": 17,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "한국 장은 금요일에 어떻게 반응했을까요?"
+      },
+      {
+       "s": 18,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "11월 13일 한국 장 마감 기준, 코스피는 0.98% 내린 5,290.53이었습니다. 보도에 따르면 장중 한때 3%까지 올랐다가 외국인이 팔면서 하락으로 돌아섰"
+      },
+      {
+       "s": 19,
+       "type": "quote",
+       "sit": "point",
+       "fit": false,
+       "rec": [
+        "zoomshot"
+       ],
+       "say": "한국과의 연결은 엔비디아의 보고서에 직접 적혀 있습니다. 엔비디아의 사업은 해외 협력사, 특히 대만과 한국으로부터 꾸준한 공급을 받는 데 달려 있다는 문장입니다."
+      },
+      {
+       "s": 20,
+       "type": "chapter",
+       "sit": "next-week",
+       "fit": true,
+       "rec": [
+        "timeline",
+        "checklist"
+       ],
+       "say": "이번 주에는 큰 일정이 몰려 있습니다."
+      },
+      {
+       "s": 21,
+       "type": "checklist",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "첫째, 한국 시간 18일 수요일 새벽 6시 20분, 엔비디아의 3분기 실적입니다. 창업자 없이 내는 첫 실적이고, 회사가 내놓은 매출 가이던스는 1,058억에서 "
+      },
+      {
+       "s": 22,
+       "type": "checklist",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "실적에서는 세 가지를 보면 됩니다. 매출이 가이던스 범위 안에 드는지, 중국 매출이 2분기 78억 8천만 달러보다 줄었는지, 그리고 임시 경영진이 수출 규정 점검"
+      },
+      {
+       "s": 23,
+       "type": "checklist",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "이 영상의 해석이 틀릴 수 있는 경우도 적어 둡니다. 첫째, 18일 실적에서 중국 매출이 크게 줄지 않고 새 경영진이 수출 점검 결과를 분명히 내놓으면, '무엇을"
+      },
+      {
+       "s": 24,
+       "type": "kinetic",
+       "sit": "change",
+       "fit": false,
+       "rec": [
+        "stage",
+        "analogy",
+        "shape"
+       ],
+       "say": "질문은 '누가 이끄나'에서, '무엇을 팔았나'로 바뀌었습니다."
+      },
+      {
+       "s": 25,
+       "type": "outro",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "딱 하나만 기억한다면 이것입니다. 누가 이끄느냐는 이사회가 정하지만, 무엇을 어디에 팔 수 있느냐는 이제 워싱턴이 정하려 합니다. 18일 새벽, 엔비디아의 첫 실"
+      }
+     ]
     }
    ]
   },
@@ -32047,8 +32419,8 @@
     "일까요",
     "을까요"
    ],
-   "count": 24,
-   "fit": 18,
+   "count": 27,
+   "fit": 20,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -32101,7 +32473,7 @@
     "답했",
     "라고 했"
    ],
-   "count": 6,
+   "count": 7,
    "fit": 4,
    "examples": [
     {
@@ -32208,7 +32580,7 @@
     "옮겨",
     "퍼졌"
    ],
-   "count": 1,
+   "count": 4,
    "fit": 0,
    "examples": [
     {
@@ -32216,6 +32588,20 @@
      "scene": 36,
      "type": "map_causal",
      "say": "국내 매체들은 질문을 이렇게 정리했습니다. 젠슨 황이 이끌던 중국 수출 협상과 고객 관계, 투자 지원 전략이 바뀌면 삼성전자와 SK하이닉스에도 영향이 갈 수 있다는 것입니다. 반면 미래에셋증권은 주문이 다른 칩으로 ",
+     "fit": false
+    },
+    {
+     "project": "20261116-market-daily",
+     "scene": 9,
+     "type": "checklist",
+     "say": "의회에는 수출 규제 법안 세 개가 올라 있습니다. 첫째는 수출한 칩이 실제로 어디에 있는지 확인하게 하는 법, 둘째는 반도체 장비와 동맹국 규정의 빈틈을 막는 법입니다.",
+     "fit": false
+    },
+    {
+     "project": "20261116-market-daily",
+     "scene": 13,
+     "type": "quote",
+     "say": "택배로 비유하면, 장부에 적힌 지역은 주문한 회사의 본사 주소이고, 물건이 실제로 간 배송지는 아닙니다. 싱가포르처럼 다른 나라 회사를 거쳐 간 칩은, 이 표에서 '중국'으로 잡히지 않습니다.",
      "fit": false
     }
    ]
@@ -32252,8 +32638,8 @@
     "하락",
     "급등"
    ],
-   "count": 88,
-   "fit": 43,
+   "count": 92,
+   "fit": 47,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -32516,8 +32902,8 @@
     "달라졌",
     "탈바꿈"
    ],
-   "count": 1,
-   "fit": 1,
+   "count": 3,
+   "fit": 2,
    "examples": [
     {
      "project": "20261112-market-daily",
@@ -32525,6 +32911,20 @@
      "type": "chapter",
      "say": "그런데 장이 끝나고 몇 시간 뒤, 분위기가 바뀌었습니다.",
      "fit": true
+    },
+    {
+     "project": "20261116-market-daily",
+     "scene": 6,
+     "type": "chapter",
+     "say": "그리고 주말 사이, 이 사건의 무대가 바뀌었습니다.",
+     "fit": true
+    },
+    {
+     "project": "20261116-market-daily",
+     "scene": 24,
+     "type": "kinetic",
+     "say": "질문은 '누가 이끄나'에서, '무엇을 팔았나'로 바뀌었습니다.",
+     "fit": false
     }
    ]
   },
@@ -32554,7 +32954,7 @@
     "이 대목",
     "이 문장"
    ],
-   "count": 12,
+   "count": 14,
    "fit": 0,
    "examples": [
     {
@@ -32749,8 +33149,8 @@
     "분기",
     "EPS"
    ],
-   "count": 28,
-   "fit": 10,
+   "count": 36,
+   "fit": 11,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -32852,8 +33252,8 @@
     "일정",
     "한국 시간"
    ],
-   "count": 2,
-   "fit": 0,
+   "count": 3,
+   "fit": 1,
    "examples": [
     {
      "project": "20261113-market-daily",
@@ -32868,6 +33268,13 @@
      "type": "quote",
      "say": "시장이 가장 걱정할 질문, 그러니까 칩 공급과 신제품 일정이 흔들리느냐에 먼저 답한 셈이죠.",
      "fit": false
+    },
+    {
+     "project": "20261116-market-daily",
+     "scene": 20,
+     "type": "chapter",
+     "say": "이번 주에는 큰 일정이 몰려 있습니다.",
+     "fit": true
     }
    ]
   },
@@ -35821,6 +36228,303 @@
      "say": "11월 10일 보먼 부의장이 꺼낸 4분의 1이라는 숫자는, 결국 이 고리의 첫 칸이었습니다. AI의 위험은 기술주 안에만 있지 않고, 물가와 금리를 거쳐 모두의 "
     }
    ]
+  },
+  {
+   "id": "ep:20261116-market-daily",
+   "kind": "episode",
+   "topic": "market",
+   "label": "20261116-market-daily",
+   "project": "20261116-market-daily",
+   "scenes": 25,
+   "coverage": 0.96,
+   "fit": 0.38,
+   "rows": [
+    {
+     "s": 1,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "11월 13일 금요일 미국 장 마감 기준, AMD는 8.75%, 브로드컴은 4.76% 내렸고 반도체 지수는 3.43% 빠졌습니다. 그런데 다우 지수는 0.10% "
+    },
+    {
+     "s": 2,
+     "type": "quote",
+     "sit": "question",
+     "fit": false,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "일요일, 미국 재무장관이 방송에서 엔비디아 이사회를 향해 말했습니다. 앞으로 10일 안에, 이사회와 외부 변호인으로부터 답을 들어야 한다고 말입니다."
+    },
+    {
+     "s": 3,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "먼저 금요일 장부터 보겠습니다."
+    },
+    {
+     "s": 4,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "업종으로 나눠 보면 더 분명합니다. 기술 업종은 2.01% 내렸지만, 생활필수품 회사들이 모인 필수소비재는 1.42%, 커뮤니케이션은 1.05%, 에너지는 0.9"
+    },
+    {
+     "s": 5,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "AMD와 브로드컴이 크게 빠진 이유는 그 앞의 며칠에 있습니다. 엔비디아 창업자의 사임 소식 속에 돈이 대안을 찾아 몰리면서, AMD는 6일 종가에서 12일까지 "
+    },
+    {
+     "s": 6,
+     "type": "chapter",
+     "sit": "change",
+     "fit": true,
+     "rec": [
+      "stage",
+      "analogy",
+      "shape"
+     ],
+     "say": "그리고 주말 사이, 이 사건의 무대가 바뀌었습니다."
+    },
+    {
+     "s": 7,
+     "type": "checklist",
+     "sit": "said",
+     "fit": false,
+     "rec": [
+      "bite",
+      "footage",
+      "quote"
+     ],
+     "say": "날짜 순서로 보면 이렇습니다. 12일, 미국 법무부가 엔비디아와 관련된 조사를 여러 건 하고 있다는 보도가 나왔습니다. 다만 같은 보도는 지금으로선 형사 기소를 "
+    },
+    {
+     "s": 8,
+     "type": "quote",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "재무장관이 던진 질문 가운데 시장에 가장 무거운 것은 이것입니다. 엔비디아가 매출과 이익을 부풀리려고, 불법으로 보이는 판매를 밀어붙였느냐는 질문입니다. 결론이 "
+    },
+    {
+     "s": 9,
+     "type": "checklist",
+     "sit": "route",
+     "fit": false,
+     "rec": [
+      "journey",
+      "usmap"
+     ],
+     "say": "의회에는 수출 규제 법안 세 개가 올라 있습니다. 첫째는 수출한 칩이 실제로 어디에 있는지 확인하게 하는 법, 둘째는 반도체 장비와 동맹국 규정의 빈틈을 막는 법"
+    },
+    {
+     "s": 10,
+     "type": "checklist",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "같은 발언을 매체들은 다르게 뽑았습니다. 미국 경제 매체 다수는 '크게 흔들어야 한다', '외부에서 최고경영자를 찾으라'는 인사 문제를 제목에 올렸고, 악시오스는"
+    },
+    {
+     "s": 11,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "그렇다면 재무장관의 질문에, 엔비디아의 장부는 무엇이라고 답할 수 있을까요?"
+    },
+    {
+     "s": 12,
+     "type": "bars",
+     "sit": "earnings",
+     "fit": true,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "엔비디아가 8월에 낸 분기 보고서를 보면, 5월부터 7월까지 2분기 매출 962억 달러 가운데 미국이 600억 달러, 대만이 270억 달러, 중국은 홍콩을 포함해"
+    },
+    {
+     "s": 13,
+     "type": "quote",
+     "sit": "route",
+     "fit": false,
+     "rec": [
+      "journey",
+      "usmap"
+     ],
+     "say": "그런데 같은 보고서에는 이런 문장이 붙어 있습니다. 지역은 직접 고객의 본사 위치로 나눈 것이고, 최종 고객과 배송지는 그와 다를 수 있다는 문장입니다."
+    },
+    {
+     "s": 14,
+     "type": "map_causal",
+     "sit": "point",
+     "fit": false,
+     "rec": [
+      "zoomshot"
+     ],
+     "say": "여기서부터는 해석입니다. 재무장관의 질문은 장부 속 8.2%라는 숫자만으로는 답할 수 없습니다. 장부는 주문한 회사를 적고, 질문은 칩이 결국 어디로 갔느냐를 묻"
+    },
+    {
+     "s": 15,
+     "type": "quote",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "엔비디아도 이 위험을 알고 있었습니다. 같은 보고서의 위험 요인에, 수출 통제법 위반이 확인되면 회사가 모르는 사이에 일어난 일이라도 처벌을 받을 수 있다고 적었"
+    },
+    {
+     "s": 16,
+     "type": "analogy",
+     "sit": "route",
+     "fit": false,
+     "rec": [
+      "journey",
+      "usmap"
+     ],
+     "say": "재무장관의 비유를 빌리면, 은행에는 감독 당국이 들어와 내부 통제를 들여다봅니다. 지금까지 칩 회사의 수출 규정 준수는 대부분 회사 스스로의 몫이었습니다."
+    },
+    {
+     "s": 17,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "한국 장은 금요일에 어떻게 반응했을까요?"
+    },
+    {
+     "s": 18,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "11월 13일 한국 장 마감 기준, 코스피는 0.98% 내린 5,290.53이었습니다. 보도에 따르면 장중 한때 3%까지 올랐다가 외국인이 팔면서 하락으로 돌아섰"
+    },
+    {
+     "s": 19,
+     "type": "quote",
+     "sit": "point",
+     "fit": false,
+     "rec": [
+      "zoomshot"
+     ],
+     "say": "한국과의 연결은 엔비디아의 보고서에 직접 적혀 있습니다. 엔비디아의 사업은 해외 협력사, 특히 대만과 한국으로부터 꾸준한 공급을 받는 데 달려 있다는 문장입니다."
+    },
+    {
+     "s": 20,
+     "type": "chapter",
+     "sit": "next-week",
+     "fit": true,
+     "rec": [
+      "timeline",
+      "checklist"
+     ],
+     "say": "이번 주에는 큰 일정이 몰려 있습니다."
+    },
+    {
+     "s": 21,
+     "type": "checklist",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "첫째, 한국 시간 18일 수요일 새벽 6시 20분, 엔비디아의 3분기 실적입니다. 창업자 없이 내는 첫 실적이고, 회사가 내놓은 매출 가이던스는 1,058억에서 "
+    },
+    {
+     "s": 22,
+     "type": "checklist",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "실적에서는 세 가지를 보면 됩니다. 매출이 가이던스 범위 안에 드는지, 중국 매출이 2분기 78억 8천만 달러보다 줄었는지, 그리고 임시 경영진이 수출 규정 점검"
+    },
+    {
+     "s": 23,
+     "type": "checklist",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "이 영상의 해석이 틀릴 수 있는 경우도 적어 둡니다. 첫째, 18일 실적에서 중국 매출이 크게 줄지 않고 새 경영진이 수출 점검 결과를 분명히 내놓으면, '무엇을"
+    },
+    {
+     "s": 24,
+     "type": "kinetic",
+     "sit": "change",
+     "fit": false,
+     "rec": [
+      "stage",
+      "analogy",
+      "shape"
+     ],
+     "say": "질문은 '누가 이끄나'에서, '무엇을 팔았나'로 바뀌었습니다."
+    },
+    {
+     "s": 25,
+     "type": "outro",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "딱 하나만 기억한다면 이것입니다. 누가 이끄느냐는 이사회가 정하지만, 무엇을 어디에 팔 수 있느냐는 이제 워싱턴이 정하려 합니다. 18일 새벽, 엔비디아의 첫 실"
+    }
+   ]
   }
  ],
  "edges": [
@@ -36311,6 +37015,11 @@
   },
   {
    "s": "doc:09",
+   "t": "sec:09§3-0-1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
    "t": "sec:09§3-1",
    "kind": "contains"
   },
@@ -36376,17 +37085,17 @@
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h203",
+   "t": "sec:09§h212",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h211",
+   "t": "sec:09§h220",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h217",
+   "t": "sec:09§h226",
    "kind": "contains"
   },
   {
@@ -38076,6 +38785,22 @@
    ]
   },
   {
+   "s": "ver:35",
+   "t": "sec:09§3-0-1",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:35",
+   "t": "doc:09",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -39238,6 +39963,11 @@
   {
    "s": "intent:9b14a944",
    "t": "fb:6",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:e04498a3",
+   "t": "fb:7",
    "kind": "quoted_in"
   },
   {
@@ -40968,6 +41698,11 @@
   {
    "s": "topic:market",
    "t": "ep:20261115-market-fsr",
+   "kind": "episode"
+  },
+  {
+   "s": "topic:market",
+   "t": "ep:20261116-market-daily",
    "kind": "episode"
   },
   {
@@ -42868,6 +43603,11 @@
   {
    "s": "fb:6",
    "t": "intent:9b14a944",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:7",
+   "t": "intent:e04498a3",
    "kind": "quoted_as"
   }
  ]
