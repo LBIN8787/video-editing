@@ -1,0 +1,300 @@
+"""이어 읽는 시장 — 11월 17일(화) 아침 심층형 브리핑: 16일 칩 급락 + 미 상무부 원격 접근 규칙(원문 해부) + 한국 + 18일 실적.
+    python scripts/daily_20261117/make.py && python -m ytflow hybrid 20261117-market-daily
+"""
+import json
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+from ytflow.stages import archive  # noqa: E402
+
+P = ROOT / "projects" / "20261117-market-daily"
+DS, NP = "dark-doc", "newsprint"
+YH = "야후 파이낸스 종가 · 11월 16일(월) 마감 기준 · 13일 대비 계산"
+Q10 = "엔비디아 10-Q (2026.8.26 제출, 2분기 FY2027) · SEC"
+BES = "인베스팅닷컴(로이터)·포천 보도 (2026.11.15) · 방송 원문은 확인 못 함"
+FR = "미 상무부 BIS 규칙 공개 열람본 2026-23529 (관보 게재 예정 11.19)"
+PR = "미 상무부 BIS 보도자료 (2026.11.16)"
+
+PHOTOS = {
+    "nyse": "New York Stock Exchange Facade 2015.jpg",
+    "seoul": "Skyline of Yeouido, a prominent finance district in Seoul.jpg",
+    "dc": "Microsoft Data Center Middenmeer, the Netherlands - 1.jpg",
+    "capitol": "United States Capitol west front edit2.jpg",
+}
+KNOWN = {
+    "nyse": {"license": "CC BY 2.0", "artist": "작자 미상"},
+    "seoul": {"license": "CC BY 4.0", "artist": "작자 미상"},
+    "dc": {"license": "CC BY 4.0", "artist": "Hay Kranen"},
+    "capitol": {"license": "Public domain", "artist": "Architect of the Capitol"},
+}
+
+
+def photos() -> dict:
+    fdir = P / "04_assets" / "footage"
+    (fdir / "raw").mkdir(parents=True, exist_ok=True)
+    out = {}
+    for key, title in PHOTOS.items():
+        meta = fdir / "raw" / f"{key}.json"
+        if meta.exists():
+            r = json.loads(meta.read_text(encoding="utf-8"))
+        else:
+            try:
+                r = archive.commons_file(title)
+            except Exception:  # noqa: BLE001
+                r = None
+            if not r:
+                k = KNOWN[key]
+                r = {"title": title, "license": k["license"], "artist": k["artist"], "page": "https://commons.wikimedia.org/wiki/File:" + title.replace(" ", "_"),
+                     "url": "", "credit": f"{k['license']} · {k['artist']} · 위키미디어 공용 · {title.rsplit('.', 1)[0][:50]}"}
+            meta.write_text(json.dumps(r, ensure_ascii=False, indent=1), encoding="utf-8")
+        jpg = fdir / "raw" / f"{key}.jpg"
+        if not jpg.exists():
+            url = "https://commons.wikimedia.org/wiki/Special:FilePath/" + title.replace(" ", "_") + "?width=1920"
+            for _ in range(3):
+                subprocess.run(["curl", "-sSL", "-A", "ytflow/1.0 (video research tool)", "-o", str(jpg), url], check=True)
+                if jpg.read_bytes()[:2] == b"\xff\xd8":
+                    break
+                time.sleep(8)
+            else:
+                jpg.unlink()
+                raise SystemExit(f"사진 받기 실패: {title}")
+        mp4 = fdir / f"{key}.mp4"
+        if not mp4.exists():
+            archive.still_to_clip(jpg, mp4, dur=12)
+        out[key] = {"file": mp4.name, "credit": r["credit"], "url": r["page"], "license": r["license"]}
+    return out
+
+
+def B(*s):
+    return [{"say": x} for x in s]
+
+
+def M(t, do, **kw):
+    return dict(t=t, do=do, **kw)
+
+
+def main():
+    for d in ("01_research", "02_script", "05_edit"):
+        (P / d).mkdir(parents=True, exist_ok=True)
+    fo = photos()
+    cr = {k: v["credit"].split(" · 위키미디어")[0] for k, v in fo.items()}
+    S = []
+    s = S.append
+
+    # ── 여는 장면 ──
+    s(dict(type="bars", chapter=0, label=YH, title="16일(월) 미국 장 · 칩이 가장 크게 (%)", unit="", emph=0, skin=DS,
+           items=[{"label": "반도체 지수", "value": -5.28, "text": "-5.28", "t": "반도체 지수는"}, {"label": "나스닥", "value": -2.49, "text": "-2.49", "t": "나스닥"},
+                  {"label": "S&P 500", "value": -1.92, "text": "-1.92", "t": "S&P 500"}, {"label": "다우", "value": -1.41, "text": "-1.41", "t": "다우"}],
+           beats=B("11월 16일 월요일 미국 장 마감 기준, 반도체 지수는 5.28% 빠졌습니다. 나스닥은 2.49%, S&P 500은 1.92%, 다우는 1.41% 내렸습니다. 엔비디아 실적 발표를 하루 앞둔 날이었습니다.",
+                   "그런데 이날 칩을 흔든 것은 실적 숫자가 아니었습니다. 워싱턴에서 나온 문서 한 장이었습니다.")))
+    s(dict(type="quote", chapter=0, label=PR, who="미국 상무부 산업안보국", role="보도자료 · 11월 16일",
+           quote="제3국 데이터센터를 통한 원격 컴퓨팅으로, 기존의 제한을 피해 갈 수 없게 한다.", keyword="원격",
+           orig="ensure that existing restrictions on access to sensitive American technology cannot be circumvented through remote computing arrangements involving data centers in third countries.",
+           layers=[{"kind": "photo", "src": "dc", "beat": 1, "side": "right", "w": 420, "top": 640, "caption": f"데이터센터 (예시 사진) · {cr['dc']}"}],
+           beats=B("미국 상무부는 이날 새 규칙을 내놓으며 목적을 이렇게 적었습니다. 다른 나라에 있는 데이터센터에 원격 접근하는 방식으로, 기존의 수출 제한을 피해 갈 수 없게 하겠다는 겁니다.",
+                   "미국은 지금까지 칩을 '파는 것'을 막아 왔습니다. 그런데 이번에는 칩을 팔지 않아도, 멀리서 빌려 쓰는 것까지 막겠다고 나섰습니다. 왜 '접속'까지 막아야 했을까요?")))
+
+    # ── 1. 16일 장 ──
+    s(dict(type="chapter", chapter=1, num="1", title="실적 하루 전, 칩이 먼저 무너졌다", icon="trending-down", look="photo", bg_src="nyse",
+           beats=B("먼저 16일 장이 어땠는지부터 보겠습니다.")))
+    s(dict(type="bars", chapter=1, label=YH, title="16일 칩 회사 등락 (%)", unit="", emph=0, skin=DS,
+           items=[{"label": "Arm", "value": -8.12, "text": "-8.12", "t": "Arm"}, {"label": "마이크론", "value": -7.62, "text": "-7.62", "t": "마이크론"},
+                  {"label": "인텔", "value": -7.02, "text": "-7.02", "t": "인텔"}, {"label": "TSMC", "value": -6.34, "text": "-6.34", "t": "TSMC"},
+                  {"label": "AMD", "value": -5.58, "text": "-5.58", "t": "AMD"}, {"label": "엔비디아", "value": -4.12, "text": "-4.12", "t": "엔비디아는"}],
+           beats=[{"say": "칩 회사들의 하락 폭은 지수보다 컸습니다. 설계 회사 Arm이 8.12%, 메모리를 만드는 마이크론이 7.62%, 인텔이 7.02%, 미국에 상장된 TSMC가 6.34%, AMD가 5.58% 내렸습니다."},
+                  {"say": "정작 실적을 앞둔 엔비디아는 4.12% 내려 156.14달러에 마감했습니다. 직접 계산해 보면, 창업자의 사임이 발표되기 전인 11일 종가보다 10.12% 낮은 값입니다.",
+                   "motion": [M("10.12%", "count", id="nv", value="-10.12%", label="엔비디아 11일 종가 대비 (계산)", x=1480, y=820, w=460, h=170, fs=64)]}]))
+    s(dict(type="bars", chapter=1, label=YH + " · 업종은 섹터 ETF", title="16일 업종별 등락 (%)", unit="", emph=0, skin=DS,
+           items=[{"label": "기술", "value": -3.24, "text": "-3.24", "t": "기술 업종은"}, {"label": "에너지", "value": -1.91, "text": "-1.91", "t": "에너지"},
+                  {"label": "금융", "value": -0.87, "text": "-0.87", "t": "금융"}, {"label": "유틸리티", "value": 0.18, "text": "+0.18", "t": "유틸리티"},
+                  {"label": "필수소비재", "value": 0.27, "text": "+0.27", "t": "필수소비재는"}],
+           beats=[{"say": "업종으로 보면 기술 업종이 3.24%로 가장 많이 빠졌고, 에너지와 금융도 내렸습니다. 반면 유틸리티와 필수소비재는 조금 올랐습니다. 시장 전체가 내렸지만, 크기는 칩이 가장 컸던 하루입니다."},
+                  {"say": "같은 날 겹친 일도 있습니다. 뉴욕 지역 제조업 지수가 11월 7.8로 한 달 새 18포인트 떨어졌고, 미국 10년물 국채 금리는 5.12%로 높은 자리에 머물렀습니다. 그래서 하루 하락을 모두 한 가지 이유로 돌릴 수는 없습니다.",
+                   "motion": [M("7.8", "count", id="es", value="7.8", label="뉴욕 제조업 지수 11월 (보도)", x=1480, y=760, w=400, h=160, fs=60),
+                              M("5.12%", "count", id="tn", value="5.12%", label="미 10년물 금리", x=1480, y=940, w=400, h=160, fs=60)]}]))
+
+    # ── 2. 규칙 원문 ──
+    s(dict(type="chapter", chapter=2, num="2", title="칩이 아니라 '접속'을 막는 규칙", icon="file-text", look="board",
+           beats=B("그렇다면 이 규칙에는 정확히 무엇이 적혀 있을까요?")))
+    s(dict(type="analogy", chapter=2, label="비유 · 이 영상의 설명", title="도서관으로 보면",
+           left={"icon": "book", "label": "책 반출 금지", "sub": "지금까지: 칩을 어디에 파는지 통제"}, right={"icon": "building", "label": "다른 동네 열람실", "sub": "해외 데이터센터에서 원격으로 빌려 쓰기"},
+           result={"icon": "id-card", "label": "이제는 열람실 출입증까지 확인"},
+           beats=[{"say": "도서관으로 비유해 보겠습니다. 귀한 책을 밖으로 못 가져가게 막아 왔는데, 다른 동네 열람실에 같은 책이 있어서 누구든 들어가 읽을 수 있었다면 어떨까요? 반출 금지는 반쪽짜리가 됩니다."},
+                  {"say": "보도에 따르면 이번 규칙이 겨냥한 것은 해외 데이터센터에서 엔비디아 칩의 계산 능력을 빌려 쓰는 중국 회사들입니다. 열람실 출입증까지 확인하겠다는 겁니다.", "show_result": True}]))
+    s(dict(type="checklist", chapter=2, label=FR + " · 요약은 이 영상의 번역", title="규칙에 적힌 네 가지", x=150, text_w=880, skin=NP,
+           rows=[{"label": "① 중국·마카오 본사 회사에 대규모 계산을 빌려주는 해외 데이터센터 → 허가", "state": "warn", "t": "첫째"},
+                 {"label": "② 인도네시아·말레이시아·싱가포르·태국·브라질로 가는 첨단 칩 → 허가", "state": "warn", "t": "둘째"},
+                 {"label": "③ 파운드리·패키징 회사의 첨단 칩 수출 규정 강화", "state": "warn", "t": "셋째"},
+                 {"label": "④ 2025년 'AI 확산 규칙' 공식 폐지", "state": "ok", "t": "넷째"}],
+           beats=[{"say": "관보에 실릴 규칙 원문을 보면 네 가지가 적혀 있습니다. 첫째, 중국이나 마카오에 본사를 둔 회사에 계산 능력을 대규모로 빌려주는 해외 데이터센터는, 그곳으로 가는 첨단 칩에 허가를 받아야 합니다.", "upto": 1},
+                  {"say": "둘째, 인도네시아, 말레이시아, 싱가포르, 태국, 브라질 다섯 나라로 가는 첨단 칩은 허가가 필요합니다. 셋째, 칩을 대신 만들어 주는 파운드리와 패키징 회사의 수출 규정도 강해집니다.", "upto": 3},
+                  {"say": "넷째, 2025년 1월 발표됐다가 시행 전에 철회된 바이든 정부의 'AI 확산 규칙'을 공식적으로 지웁니다. 규칙 스스로 그 규칙은 한 번도 집행된 적이 없다고 적었습니다. 발표된 규칙도 시행 전에 사라질 수 있다는 과거 사례입니다.", "upto": 4}]))
+    s(dict(type="bignum", chapter=2, label=FR + " · 환산은 이 영상의 계산", small="허가가 필요한 원격 제공 규모 · 합산 성능(TPP)", value="1,200만",
+           compare={"label": "규제 최저 성능 칩(4,800)으로 환산", "value": "2,500개분"},
+           beats=B("'대규모'의 기준도 숫자로 적혀 있습니다. 한 데이터센터나 서로 연결된 데이터센터들이 합쳐서 성능 점수 1,200만이 넘는 계산을 빌려주면 허가 대상입니다.",
+                   "직접 계산해 보면, 규제 대상이 되는 가장 낮은 성능의 칩, 점수 4,800짜리로 2,500개분입니다. 최신 칩은 성능이 훨씬 높아서, 실제로는 그보다 적은 수로도 기준을 넘습니다.")))
+    s(dict(type="checklist", chapter=2, label=FR, title="다섯 나라 · 예외와 시간표", x=150, text_w=860, skin=NP,
+           layers=[{"kind": "locator", "at": [103.82, 1.35], "label": "싱가포르", "beat": 0, "side": "right", "top": 200, "scale": 2.2}],
+           rows=[{"label": "이유: '보통보다 높은 전용(轉用) 위험'", "state": "warn", "t": "이유"},
+                 {"label": "예외: 미국 본사 회사로 가는 칩 (매달 보고하면)", "state": "ok", "t": "예외"},
+                 {"label": "효력: 관보 게재일 19일(목)부터", "state": "warn", "t": "19일"},
+                 {"label": "이미 빌려주던 곳: 90일 안에 허가", "state": "warn", "t": "90일"}],
+           beats=[{"say": "규칙은 다섯 나라를 고른 이유를, 칩이 다른 곳으로 새어 나갈 위험이 보통보다 높기 때문이라고 적었습니다. 다만 미국에 본사를 둔 회사로 가는 칩은, 매달 보고를 하면 허가가 필요 없습니다.", "upto": 2},
+                  {"say": "시간표도 있습니다. 효력은 관보에 실리는 19일 목요일부터이고, 이미 그런 서비스를 하던 데이터센터는 90일 안에 허가를 받아야 합니다. 그러니 오늘 당장 모든 칩이 막히는 것은 아닙니다.", "upto": 4}]))
+
+    # ── 3. 말과 행동 ──
+    s(dict(type="chapter", chapter=3, num="3", title="재무장관의 '10일', 그다음 날", icon="landmark", look="photo", bg_src="capitol",
+           beats=B("그런데 이 규칙을 누가 썼는지를 보면, 이야기가 하나로 이어집니다.")))
+    s(dict(type="quote", chapter=3, label=PR, who="미국 상무부 산업안보국", role="보도자료 · 11월 16일",
+           quote="재무부와 국가안보회의가 직접 쓰고 지시한 규칙", keyword="재무부",
+           orig="written by and at the direction of the Department of Treasury and the National Security Council",
+           beats=B("상무부 보도자료에는 이런 문장이 있습니다. 이 규칙은 재무부와 국가안보회의가 직접 쓰고, 그 지시에 따라 나왔다는 문장입니다.",
+                   "수출 규제는 보통 상무부의 일입니다. 이번에는 재무부가 앞에 섰습니다. 바로 하루 전, 방송에서 엔비디아를 향해 말한 사람이 재무장관이었습니다.")))
+    s(dict(type="checklist", chapter=3, label="엔비디아 10-Q · 세마포(11.12) · " + BES + " · " + FR, title="날짜 순서로 보면", x=150, text_w=900, skin=NP,
+           rows=[{"label": "8월 26일 · 엔비디아 장부: 지역은 '고객 본사' 기준", "state": "ok", "t": "8월"},
+                 {"label": "11월 12일 · 법무부 조사 보도 (기소 징후는 없음)", "state": "warn", "t": "12일"},
+                 {"label": "11월 15일 · 재무장관 '10일 안에 답을'", "state": "warn", "t": "15일"},
+                 {"label": "11월 16일 · 재무부가 지시한 규칙 발표", "state": "warn", "t": "16일"},
+                 {"label": "11월 19일 · 관보 게재, 효력 시작", "state": "warn", "t": "19일"}],
+           beats=[{"say": "날짜 순서로 놓아 보겠습니다. 8월, 엔비디아는 분기 보고서에 지역별 매출을 고객의 본사 기준으로 적었습니다. 12일에는 법무부가 엔비디아와 관련된 조사를 여러 건 하고 있다는 보도가 나왔습니다. 다만 형사 기소 징후는 없다고 했습니다.", "upto": 2},
+                  {"say": "15일 일요일, 재무장관은 이사회와 외부 변호인에게 10일 안에 답을 들어야 한다고 말했습니다. 그리고 16일, 재무부가 지시한 규칙이 나왔습니다. 말이 하루 만에 문서가 된 겁니다.", "upto": 4,
+                   "motion": [M("10일", "count", id="ten", value="10일", label="재무장관이 준 시간 (보도)", x=1480, y=820, w=400, h=170, fs=72)]},
+                  {"say": "그리고 19일 목요일, 이 규칙은 관보에 실려 효력을 갖습니다.", "upto": 5}]))
+    s(dict(type="versus", chapter=3, label=Q10 + " · " + FR,
+           left={"value": "본사", "label": "엔비디아 장부: 주문한 회사의 본사", "icon": "file-text"}, right={"value": "모회사", "label": "새 규칙: 쓰는 회사의 최종 모회사", "icon": "landmark"},
+           beats=B("두 문서를 나란히 놓으면 흥미로운 점이 보입니다. 엔비디아 장부의 지역은 칩을 주문한 회사의 본사 기준입니다. 실제 배송지와 최종 고객은 다를 수 있다고 적혀 있습니다.",
+                   "새 규칙도 본사를 봅니다. 다만 칩이 놓인 나라가 아니라, 그 칩을 쓰는 회사의 최종 모회사가 어디냐를 묻습니다. 칩이 싱가포르에 있어도, 쓰는 회사의 모회사가 중국이면 허가 대상입니다.")))
+    s(dict(type="map_causal", chapter=3, look="board", label="자체 해석 · 근거: 10-Q 지역 매출 주석, BIS 보도자료·규칙 원문, 재무장관 발언(보도)",
+           map={"nodes": {"q": {"label": "질문: 칩은 결국 누구에게 갔나?", "icon": "circle-alert", "x": 960, "y": 280},
+                          "book": {"label": "지난주: 장부로는 답 못 함 (본사 기준)", "icon": "file-text", "x": 420, "y": 600},
+                          "rule": {"label": "이번 주: 규칙이 '최종 모회사'를 물음", "icon": "landmark", "x": 1500, "y": 600},
+                          "seller": {"label": "답할 책임: 파는 쪽의 고객 실사", "icon": "search", "x": 960, "y": 860}},
+                "edges": [["q", "book"], ["q", "rule"], ["rule", "seller"], ["book", "seller"]]},
+           beats=[{"say": "여기서부터는 해석입니다. 지난주 재무장관의 질문은, 칩이 결국 누구에게 갔느냐였습니다. 엔비디아의 장부는 주문한 회사를 적기 때문에, 그 숫자만으로는 이 질문에 답할 수 없었습니다.",
+                   "reveal": ["q", "book"], "draw": [["q", "book"]], "active": "book"},
+                  {"say": "새 규칙은 그 질문을 문장으로 옮겼습니다. 칩을 파는 회사와 데이터센터가, 고객의 직접·간접 지분과 지배 관계까지 확인하라는 겁니다. 규칙은 특정 회사를 이름으로 겨냥하지 않았습니다. 그러나 답할 책임은, 이제 파는 쪽으로 넘어왔습니다.",
+                   "reveal": ["rule", "seller"], "draw": [["q", "rule"], ["rule", "seller"], ["book", "seller"]], "active": "seller"}]))
+
+    # ── 4. 어디까지 번지나 ──
+    s(dict(type="checklist", chapter=3, label=YH + " · 같은 날 겹친 일 포함 · 인과는 단정하지 않음", title="어디까지 번지나 — 칩의 길을 따라", x=150, text_w=880, skin=NP,
+           rows=[{"label": "설계: 엔비디아 -4.12 · AMD -5.58 · Arm -8.12", "state": "warn", "t": "설계"},
+                 {"label": "메모리: 마이크론 -7.62 (한국은 규칙 발표 전)", "state": "warn", "t": "메모리"},
+                 {"label": "생산: TSMC -6.34 · 인텔 -7.02 — 규칙 ③과 직접 연결", "state": "warn", "t": "생산"},
+                 {"label": "빌려주는 쪽: 오라클 -5.03", "state": "warn", "t": "빌려주는"},
+                 {"label": "겹친 일: 실적 경계 · 제조업 지수 · 고금리", "state": "ok", "t": "겹친"}],
+           beats=[{"say": "칩이 만들어져 쓰이기까지의 길을 따라가 보겠습니다. 칩을 설계하는 엔비디아, AMD, Arm이 모두 내렸고, 메모리의 마이크론은 7.62% 빠졌습니다.", "upto": 2},
+                  {"say": "칩을 만드는 TSMC와 인텔도 6~7% 내렸습니다. 규칙의 세 번째, 파운드리 규정과 바로 이어지는 곳입니다. 계산 능력을 빌려주는 쪽인 오라클도 5.03% 떨어졌습니다.", "upto": 4},
+                  {"say": "다만 같은 날 실적 경계와 제조업 지수 부진, 높은 금리도 겹쳤습니다. 이 하락이 얼마만큼 규칙 때문인지는, 하루의 숫자로는 나눌 수 없습니다.", "upto": 5}]))
+    s(dict(type="checklist", chapter=3, label="벤징가·스톡타이탄(11.16) 제목 · 파이낸셜뉴스·마이데일리(11.16) 제목 · 비교는 이 영상의 정리", title="같은 날, 매체마다 다른 제목", x=150, text_w=900, skin=NP,
+           rows=[{"label": "해외: '칩 빈틈을 막자 기술주 급락' — 손실 크기", "state": "warn", "t": "해외"},
+                 {"label": "해외: '엔비디아 실적 앞두고 기술주 하락' — 실적 경계", "state": "ok", "t": "실적"},
+                 {"label": "국내: '외국인 매도에 코스피 5,100선' — 수급", "state": "ok", "t": "국내"},
+                 {"label": "빠진 것: 규칙을 누가 썼고, 무엇을 묻나", "state": "warn", "t": "빠진"}],
+           beats=[{"say": "매체들은 이날을 다르게 읽었습니다. 해외 매체 일부는 미국이 중국의 칩 빈틈을 막자 기술주가 급락했다며 손실 크기를 앞세웠고, 다른 매체는 엔비디아 실적을 앞둔 경계를 제목에 올렸습니다.", "upto": 2},
+                  {"say": "국내 매체는 외국인 매도와 코스피 5,100선을 앞세웠습니다. 잘 보이지 않는 것은, 이 규칙을 누가 썼고 무엇을 묻느냐입니다.", "upto": 4}]))
+
+    # ── 5. 한국 ──
+    s(dict(type="chapter", chapter=4, num="4", title="한국은 규칙보다 먼저 빠졌다", icon="map-pin", look="photo", bg_src="seoul",
+           beats=B("그렇다면 한국 시장은 이 규칙에 반응한 걸까요?")))
+    s(dict(type="bars", chapter=4, label="한국거래소 지수(네이버 증권) · 종목은 마이데일리·파이낸셜뉴스 보도 · 11월 16일 한국 마감 기준", title="16일 한국 시장 (%)", unit="", emph=0, skin=DS,
+           layers=[{"kind": "locator", "at": [126.92, 37.52], "label": "서울 여의도", "beat": 0, "side": "left", "top": 170, "scale": 2.2}],
+           items=[{"label": "하이닉스(약)", "value": -7.9, "text": "약 -7.9", "t": "SK하이닉스는"}, {"label": "코스닥", "value": -4.86, "text": "-4.86", "t": "코스닥은"},
+                  {"label": "삼성전자(약)", "value": -4.5, "text": "약 -4.5", "t": "삼성전자는"}, {"label": "코스피", "value": -3.59, "text": "-3.59", "t": "코스피는"}],
+           beats=[{"say": "11월 16일 한국 장 마감 기준, 코스피는 3.59% 내린 5,100.50, 코스닥은 4.86% 내렸습니다. SK하이닉스는 약 8%, 삼성전자는 약 4.5% 빠졌습니다.",
+                   "motion": [M("5,100.50", "count", id="ks", value="5,100.50", label="코스피 16일 종가", x=1480, y=860, w=400, h=170, fs=64)]},
+                  {"say": "그런데 순서를 보면 이상합니다. 한국 장은 오후 3시 반에 닫혔고, 미국 규칙은 그보다 뒤인 한국 시간 밤에 알려졌습니다. 한국은 규칙이 나오기 전에 이미 빠진 겁니다."}]))
+    s(dict(type="map_causal", chapter=4, look="board", label="자체 해석 · 근거: 한국거래소 지수, 파이낸셜뉴스·마이데일리 보도, BIS 규칙 발표 시점(보도·알림 시각)",
+           map={"nodes": {"fri": {"label": "13일 미국 칩 약세", "icon": "trending-down", "x": 400, "y": 300},
+                          "nv": {"label": "엔비디아 경영 불확실성", "icon": "circle-alert", "x": 960, "y": 300},
+                          "fund": {"label": "AI 데이터센터 자금 조달 우려", "icon": "banknote", "x": 1520, "y": 300},
+                          "kr": {"label": "16일 오후 코스피 -3.59%", "icon": "map-pin", "x": 960, "y": 600},
+                          "rule": {"label": "16일 밤 규칙 → 17일 한국 장이 처음 반영", "icon": "landmark", "x": 960, "y": 880}},
+                "edges": [["fri", "kr"], ["nv", "kr"], ["fund", "kr"], ["kr", "rule"]]},
+           beats=[{"say": "국내 증권가가 꼽은 이유는 이렇습니다. 금요일 미국 칩 약세, 엔비디아 경영의 불확실성, 그리고 AI 데이터센터 회사들의 자금 조달 부담입니다. 한 선물사 연구원은 사임 이후 '순환금융' 구조에 대한 불확실성이 투자 심리를 눌렀다고 짚었습니다.",
+                   "reveal": ["fri", "nv", "fund", "kr"], "draw": [["fri", "kr"], ["nv", "kr"], ["fund", "kr"]], "active": "kr"},
+                  {"say": "여기서부터는 해석입니다. 규칙은 한국 장이 닫힌 뒤에 나왔으니, 오늘 17일 한국 장이 이 규칙을 처음 반영하는 날입니다. 다섯 나라에 한국은 없지만, 한국 칩은 엔비디아라는 고객을 통해 이 규칙과 이어져 있습니다.",
+                   "reveal": ["rule"], "draw": [["kr", "rule"]], "active": "rule"}]))
+    s(dict(type="quote", chapter=4, label=Q10 + " · 위험 요인", who="엔비디아 분기 보고서", role="위험 요인 · 2026년 8월",
+           quote="우리 사업은 해외 협력사, 특히 대만과 한국으로부터 꾸준하고 믿을 수 있는 공급을 받는 데 달려 있다.", keyword="한국",
+           orig="our business depends on our ability to receive consistent and reliable supply from our overseas partners, especially in Taiwan and South Korea.",
+           beats=B("그 연결은 엔비디아 보고서에 적혀 있습니다. 엔비디아의 사업은 해외 협력사, 특히 대만과 한국으로부터 꾸준한 공급을 받는 데 달려 있다는 문장입니다.",
+                   "한국은 엔비디아가 무엇을 '사느냐'로 이어져 있고, 새 규칙은 엔비디아의 칩이 어디서 '쓰이느냐'를 바꿉니다. 그 변화가 한국 메모리 주문으로 어떻게 이어질지는 아직 숫자가 없어, 지금 단정할 수는 없습니다.")))
+
+    # ── 6. 볼 것 ──
+    s(dict(type="chapter", chapter=5, num="5", title="오늘과 내일 볼 것", icon="calendar", look="board",
+           beats=B("이제 숫자로 확인할 시간이 다가옵니다.")))
+    s(dict(type="checklist", chapter=5, label="엔비디아 보도자료(11.12) · BIS 규칙 열람본 · 앤트로픽 S-1/A · 상장일은 보도 · 투자 권유가 아닙니다", title="일정 (한국 시간)", x=150, text_w=900, skin=NP,
+           rows=[{"label": "17일(화) · 한국 장이 규칙을 처음 반영", "state": "warn", "t": "17일"},
+                 {"label": "17일(화) 22:30 · 미국 10월 소매판매", "state": "warn", "t": "소매판매"},
+                 {"label": "18일(수) 06:20 · 엔비디아 3분기 실적 (07:00 콜)", "state": "warn", "t": "18일"},
+                 {"label": "19일(목) · 규칙 관보 게재·효력, 90일 시작", "state": "warn", "t": "19일"},
+                 {"label": "이번 주 · 앤트로픽 상장 / 25일 무렵 · 재무장관의 '10일'", "state": "warn", "t": "앤트로픽"}],
+           beats=[{"say": "먼저 오늘 한국 장이 규칙을 어떻게 받아들이는지, 그리고 오늘 밤 10시 반 미국 소매판매입니다.", "upto": 2},
+                  {"say": "한국 시간 18일 수요일 새벽 6시 20분, 엔비디아의 3분기 실적이 나옵니다. 회사가 내놓은 매출 가이던스는 1,058억에서 1,102억 달러입니다.", "upto": 3,
+                   "motion": [M("1,058억", "count", id="g1", value="1,058~1,102억", label="3분기 매출 가이던스 (달러)", x=1440, y=760, w=500, h=170, fs=58)]},
+                  {"say": "19일 목요일에는 규칙이 관보에 실려 효력이 생기고, 이번 주에는 앤트로픽 상장, 25일 무렵에는 재무장관이 말한 10일이 끝납니다.", "upto": 5}]))
+    s(dict(type="checklist", chapter=5, label="팩트시트 '신호'·'틀리는 경우' · 투자 권유가 아닙니다", title="18일 실적에서 볼 것, 그리고 틀리는 경우", x=150, text_w=920, skin=NP,
+           rows=[{"label": "볼 것: 매출이 가이던스 범위 안인가", "state": "ok", "t": "범위"},
+                 {"label": "볼 것: 새 경영진이 '고객이 누구인지'를 어떻게 설명하나", "state": "ok", "t": "고객"},
+                 {"label": "틀리는 경우: 5개국 비중이 작고 미국 본사 고객이 대부분이라면", "state": "warn", "t": "다섯"},
+                 {"label": "틀리는 경우: 의견 수렴 뒤 기준이 완화되거나 늦어지면", "state": "warn", "t": "완화"}],
+           beats=[{"say": "실적에서는 숫자만 볼 것이 아닙니다. 매출이 가이던스 범위 안에 드는지와 함께, 새 경영진이 고객이 누구인지를 어떻게 설명하는지가 이번에는 더 중요할 수 있습니다.", "upto": 2},
+                  {"say": "이 해석이 틀리는 경우도 적어 둡니다. 엔비디아가 다섯 나라의 비중이 작고 고객 대부분이 미국 본사 회사라고 밝히면, 규칙의 매출 영향은 작고 16일 하락은 실적 경계가 컸던 셈입니다. 60일 의견 수렴 뒤 기준이 느슨해져도, 이 규칙은 말에 가까워집니다.", "upto": 4}]))
+    s(dict(type="kinetic", chapter=5, beats=[{"say": "칩을 막던 미국이, 이제 접속을 막습니다.", "hit": ["칩을", "접속을"]}]))
+    s(dict(type="outro", chapter=5, title="17일 아침까지의 소식", sub="출처는 설명란에", clip={"src": "dc", "start": 0},
+           beats=B("딱 하나만 기억한다면 이것입니다. 지난주까지 질문은 칩을 어디에 팔았느냐였지만, 이제는 그 칩을 누가 쓰느냐입니다. 내일 새벽 엔비디아는, 자기 고객이 누구인지 얼마나 분명하게 말할 수 있을까요?")))
+    for i, x in enumerate(S, 1):
+        x["id"] = i
+    spec = {
+        "title": "실적 하루 전, 칩을 흔든 '원격 접근' 규칙 — 원문 해부·재무장관의 10일·한국은 먼저 빠졌다",
+        "brand": "market",
+        "zoom": "off",
+        "core_message": "16일 반도체 지수는 5.28% 빠졌다. 그날 미 상무부는 재무부·국가안보회의가 지시해 쓴 규칙으로, 칩 판매가 아니라 해외 데이터센터를 통한 '원격 접근'까지 허가 대상으로 묶었다(중국·마카오 본사 회사에 1,200만 TPP 넘게 제공, 5개국 허가, 90일 유예, 19일 효력). 규칙은 칩이 놓인 나라가 아니라 쓰는 회사의 최종 모회사를 묻는다 — 엔비디아 장부(본사 기준)로는 답할 수 없던 질문을 파는 쪽의 고객 실사로 옮긴 것. 한국은 규칙 전에 이미 3.59% 빠졌고, 오늘 장이 규칙을 처음 반영한다.",
+        "question": "칩을 팔지도 않았는데, 왜 '빌려 쓰는 것'까지 막았을까?",
+        "logic": ["여는 장면: 16일 반도체 -5.28%·나스닥 -2.49% → 원인은 실적이 아니라 문서 한 장 → 상무부 '원격 컴퓨팅으로 피해 갈 수 없게'",
+                  "1) 16일: Arm -8.12·마이크론 -7.62·인텔 -7.02·TSMC -6.34·AMD -5.58·엔비디아 -4.12(11일 대비 -10.12%) · 기술 -3.24 vs 필수소비재 +0.27 · 겹친 일(제조업 지수 7.8, 10년물 5.12%)",
+                  "2) 규칙 원문: 도서관 비유 → 네 가지 → 1,200만 TPP(최저 성능 칩 2,500개분) → 5개국·미국 본사 예외·19일 효력·90일",
+                  "3) 말과 행동: 재무부·NSC가 쓴 규칙 → 날짜 순서(8월 장부 → 12일 조사 보도 → 15일 '10일' → 16일 규칙 → 19일 효력) → 본사 vs 최종 모회사 → 해석: 답할 책임이 파는 쪽으로 · 업종별 영향 · 매체 프레임",
+                  "4) 한국: 코스피 -3.59%·하이닉스 약 -8% — 규칙 전에 이미 → 이유(보도) → 해석: 오늘이 첫 반영 · 10-Q '대만과 한국 공급'",
+                  "5) 볼 것: 17일 한국 장·22:30 소매판매 · 18일 06:20 실적(1,058억~1,102억) · 19일 효력 · 틀리는 경우",
+                  "마무리: 질문은 '어디에 팔았나'에서 '누가 쓰나'로"],
+        "compare_to": [{"value": "반도체 지수 -5.28%", "to": "다우 -1.41%·필수소비재 +0.27%"},
+                       {"value": "엔비디아 156.14달러", "to": "11일 종가 173.73달러(-10.12%)"},
+                       {"value": "1,200만 TPP", "to": "최저 성능 칩 4,800 기준 2,500개분"},
+                       {"value": "코스피 -3.59%", "to": "규칙 발표 전 마감"}],
+        "analogies": [{"a": "도서관 열람실", "b": "책 반출을 막아도 다른 동네 열람실에서 읽을 수 있으면 반쪽 — 규칙은 열람실 출입증(원격 접근)까지 확인"},
+                      {"a": "본사 주소", "b": "장부는 주문한 회사의 본사, 규칙은 쓰는 회사의 최종 모회사를 봄"}],
+        "past_cases": [{"case": "2025년 1월 'AI 확산 규칙' 발표 → 5월 철회 발표 → 이번 규칙으로 공식 폐지 (규칙 원문)", "lesson": "발표된 규칙도 시행 전에 사라질 수 있다 — 60일 의견 수렴 뒤를 봐야 함"}],
+        "glossary": [{"term": "원격 접근", "plain": "칩을 사지 않고, 다른 나라 데이터센터의 계산 능력을 인터넷으로 빌려 쓰는 것"},
+                     {"term": "관보", "plain": "미국 정부가 규칙을 공식으로 싣는 공보. 실리는 날 효력이 생김"},
+                     {"term": "TPP", "plain": "칩 성능 점수(총 처리 성능). 규칙은 여러 칩의 점수를 합쳐 기준을 정함"},
+                     {"term": "파운드리", "plain": "다른 회사가 설계한 칩을 대신 만들어 주는 공장"},
+                     {"term": "가이던스", "plain": "회사가 미리 내놓는 다음 분기 실적 전망"}],
+        "scenes": S,
+        "footage": fo,
+        "package": {
+            "title": "칩을 팔지도 않았는데, 왜 '빌려 쓰기'까지 막았나 | 11월 17일",
+            "title_options": ["칩을 팔지도 않았는데, 왜 '빌려 쓰기'까지 막았나 | 11월 17일",
+                              "반도체 -5.28%, 그날 나온 규칙 속 숫자 1,200만 | 11월 17일",
+                              "재무장관의 '10일' 다음 날 나온 규칙 — 엔비디아·마이크론·코스피 | 11월 17일"],
+            "title_why": ["훅(질문, 답 숨김) + 날짜", "숫자 대비 + 원문 숫자", "장면 + 다룬 종목"],
+            "thumbnails": [
+                {"id": "A", "name": "데이터센터 + 질문", "layout": "photo", "photo_side": "full", "image": {"file": "04_assets/footage/raw/dc.jpg", "focus": [0.5, 0.5]},
+                 "top": "11월 17일 · 아침 브리핑", "lines": ["칩이 아니라", "'접속'을 막았다"], "hl": ["접속"], "sub": "실적 하루 전 나온 규칙", "size": 112, "text_y": 330, "marks": [],
+                 "why": ["사건 + 질문"]},
+                {"id": "B", "name": "숫자 대비", "layout": "versus", "left": {"value": "-5.28%", "label": "16일 반도체 지수"},
+                 "right": {"value": "90일", "label": "이미 빌려주던 곳의 유예"}, "headline": "그날 나온 규칙 한 장", "hl": [], "marks": [], "why": ["숫자 둘 대비"]},
+                {"id": "C", "name": "다음 일정", "layout": "photo", "photo_side": "full", "image": {"file": "04_assets/footage/raw/nyse.jpg", "focus": [0.5, 0.5]},
+                 "top": "11월 17일 · 볼 것", "lines": ["18일 06:20 실적", "19일 규칙 효력"], "hl": ["18일"], "sub": "엔비디아·한국 장", "size": 104, "text_y": 330, "marks": [],
+                 "why": ["다음 일정"]}]},
+    }
+    (P / "02_script" / "hybrid.json").write_text(json.dumps(spec, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(P, len(S))
+
+
+if __name__ == "__main__":
+    main()
