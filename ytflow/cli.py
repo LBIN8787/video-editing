@@ -330,6 +330,12 @@ def main(argv: list[str] | None = None) -> None:
     ac.add_argument("args", nargs="*")
     hs = sub.add_parser("hookshort", help="훅 쇼츠 (얼굴 없이): AI 목소리 + 실제 화면 꽉 채움 · 훅 제목 · 큰 자막 · 튀어나오는 카드 (02_script/hookshort.json)")
     hs.add_argument("project")
+    rc = sub.add_parser("recap", help="애니 소개형: 에피소드 받아쓰기(--transcribe) → 핵심 장면·내레이션 초안(--plan) → 규칙 검사(--check) → 렌더 (02_script/recap.json, docs/37)")
+    rc.add_argument("project")
+    rc.add_argument("--transcribe", action="store_true")
+    rc.add_argument("--plan", action="store_true")
+    rc.add_argument("--check", action="store_true")
+    rc.add_argument("--force", action="store_true", help="규칙 위반이어도 렌더 (검토용 초안만)")
     pz = sub.add_parser("presenter", help="말하는 사람 쇼츠: 본인 촬영 영상 → 점프 컷·펀치 인·훅 제목·큰 자막·끼워 넣는 카드 (02_script/presenter.json)")
     pz.add_argument("project")
     yu = sub.add_parser("yt-publish", help="유튜브 올리기·관리: 업로드(예약 공개)·썸네일·자막·재생목록 (공식 API, docs/24-youtube-publish.md)")
@@ -548,6 +554,10 @@ def main(argv: list[str] | None = None) -> None:
         from .project import Project as _P
         from .stages import hookshort
         hookshort.make(_P.open(a.project))
+    elif a.cmd == "recap":
+        from .project import Project as _P
+        from .stages import recap
+        recap.main(_P.open(a.project), "transcribe" if a.transcribe else "plan" if a.plan else "check" if a.check else "render", a.force)
     elif a.cmd == "presenter":
         from .project import Project as _P
         from .stages import presenter
