@@ -6,7 +6,7 @@
 1. 프레임마다 앞 프레임과의 차이(움직임 양) d[i] 를 잰다 (흑백, 가로 960).
 2. 차이가 갑자기 아주 크면 장면 바뀜(컷) — 구간을 나눈다.
 3. 움직이는 구간마다
-   - 멈칫(stall): 움직이는 중간에 거의 같은 프레임 (주변 9프레임 윗사분위의 30% 미만) → 프레임 중복·정수 픽셀 반올림
+   - 멈칫(stall): 앞뒤 3프레임에 큰 움직임이 있는데 그 사이 거의 같은 프레임 (30% 미만) → 프레임 중복·정수 픽셀 반올림 (곡선의 느린 시작·착지는 제외)
    - 점프(jump): 움직임 양이 주변의 1.5배 넘게 튐 → 프레임 빠짐(fps 변환·렌더 누락)·정수 픽셀 확대
    - smoothness: 움직이는 프레임 중 멈칫·점프가 아닌 비율 (1.0 이 완벽)
 4. 영상 규격: fps(정수)·픽셀 형식(yuv420p)·코덱 (비트레이트는 기록만 — CRF 인코딩은 단순한 화면에서 낮게 나오는 게 정상)
@@ -74,7 +74,10 @@ def analyze(d: np.ndarray, fps: float) -> dict:
     local = _roll(np.where(is_cut, np.nan, d), 9, lambda w: np.nanpercentile(w, 75) if np.isfinite(w).any() else 0.0)  # 주변 9프레임의 윗사분위 = 이 구간의 '정상 움직임'
     near = _roll(d, 5, np.max) > still              # 근처에서 움직이는 중
     active = near & ~is_cut & (local > 0.25)         # 아주 느린 움직임(배경 숨쉬기)은 판정하지 않음
-    stall = active & (d < local * 0.3)               # 움직이는 중에 거의 같은 프레임 → 프레임 중복·멈춤
+    # 멈칫 = 앞뒤 3프레임 안에 둘 다 큰 움직임이 있는 '골짜기' — 곡선의 시작·끝(천천히 출발·착지)은 골짜기가 아니다
+    before = np.array([d[max(0, i - 3):i].max() if i else 0.0 for i in range(n)])
+    after = np.array([d[i + 1:i + 4].max() if i + 1 < n else 0.0 for i in range(n)])
+    stall = active & (d < local * 0.3) & (d < 0.3 * np.minimum(before, after))
     jump = active & (d > local * 1.5) & (d - local > 0.3)   # 갑자기 많이 움직임 → 프레임 빠짐·정수 픽셀 점프
     # 같은 종류가 반복되면 문제 구간 (한두 번은 연출일 수 있음): 15프레임 안에 붙은 표시를 묶는다
     flagged = np.where(stall | jump)[0]

@@ -21,22 +21,23 @@ from pathlib import Path
 # 영상(시청 거리·1x 재생) 기준. UI 보다 조금 길다: 화면 글자는 읽혀야 하고, 등장은 말의 박자에 붙는다.
 DUR = {
     "micro": 0.18,     # 강조 깜빡임·작은 튕김
-    "enter": 0.45,     # 글자·카드 등장 (0.35~0.6)
-    "exit": 0.3,       # 퇴장은 등장의 약 2/3 — 사라지는 것은 시선을 붙잡지 않는다
+    "enter": 0.5,      # 글자·카드 등장 (0.35~0.6) — 착지는 긴 꼬리로
+    "exit": 0.28,      # 퇴장은 등장보다 40~50% 짧게 (HyperFrames 런치 필름 측정값) — 사라지는 것은 시선을 붙잡지 않는다
     "move": 0.8,       # 화면 안 이동·매치 무브 (거리 클수록 길게, 1.2 이하)
     "draw": 1.1,       # 선·차트 그려지기
     "camera": 2.5,     # 카메라 이동·확대 (느리게, 박자 하나 내내)
 }
 EASE = {
-    "enter": "power3.out",     # 빠르게 들어와 부드럽게 멈춤 (expo.out 은 더 급함)
-    "exit": "power2.in",       # 천천히 출발해 빠르게 사라짐
+    "enter": "expo.out",       # 빠르게 들어와 긴 꼬리로 착지 (같은 power2.out 을 모든 곳에 쓰면 '기계가 만든' 느낌)
+    "exit": "power3.in",       # 천천히 출발해 빠르게 사라짐 — 한 번에, 미끄러지다 멈췄다 나가지 않기
     "move": "power2.inOut",    # 화면 안에서 A→B
     "draw": "power1.inOut",    # 선 그리기: 펜 속도가 거의 일정
-    "pop": "back.out(1.7)",    # 튕김은 10~20% 넘침까지 (back.out(1.7) ≈ 10%)
+    "pop": "back.out(1.4)",    # 튕김은 '고급' 감쇠비 0.7~0.85 수준 — 위치·크기만 튕기고 투명도·색은 튕기지 않음
     "settle": "expo.out",      # 숫자·막대가 목표값에 '착' 붙음
     "camera": "sine.inOut",    # 카메라는 가속이 눈에 띄지 않게
 }
-STAGGER = {"tight": 0.04, "normal": 0.07, "loose": 0.12, "max_total": 0.8}  # 차례 간격 + 전체 상한
+STAGGER = {"tight": 0.033, "normal": 0.06, "loose": 0.1, "max_total": 0.8}  # 글자 1프레임·항목 40~80ms·단어 60~120ms + 전체 상한
+OVERLAP = 0.4   # 다음 요소는 앞 요소가 30~50% 진행됐을 때 시작 (완전히 차례면 로봇 같고, 한꺼번에면 싸 보임)
 
 
 def stagger(n: int, kind: str = "normal") -> float:
@@ -143,7 +144,7 @@ def lint_gsap(html: str) -> list[dict]:
         moves = bool(re.search(r"(?<![A-Za-z])(x|y)\s*:", props))
         if _LAYOUT.search(props):
             out.append({"code": "layout-prop", "at": at, "msg": f"{target}: left/top/width/height 를 움직임 → transform(x·y·scale)으로 (계산이 무겁고 픽셀 단위로 떨림)"})
-        if "filter" in props and "blur" in props:
+        if "filter" in props and "blur" in props and dur > 0.3:   # 0.13~0.25s 흐림 등장·퇴장은 정상 기법
             out.append({"code": "blur-anim", "at": at, "msg": f"{target}: filter:blur 애니메이션은 프레임마다 다시 그려 느림 — 짧게만"})
         if moves and ease in ("none", "linear") and "repeat" not in vars_:
             out.append({"code": "linear-move", "at": at, "msg": f"{target}: 위치 이동에 직선 곡선 → 기계적으로 보임 (걷기·흐르는 배경이 아니면 {EASE['move']})"})
