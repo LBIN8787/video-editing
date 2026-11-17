@@ -266,7 +266,11 @@ def rss() -> list[Path]:
             try:
                 t = datetime.fromisoformat(date.replace("Z", "+00:00"))
             except ValueError:
-                continue
+                try:   # RSS 2.0 pubDate (RFC 822: "Thu, 12 Nov 2026 18:06:26 GMT") — 2026-11-17 SemiAnalysis 피드에서 발견
+                    from email.utils import parsedate_to_datetime
+                    t = parsedate_to_datetime(date)
+                except (TypeError, ValueError):
+                    continue
             if datetime.now(timezone.utc) - t > timedelta(days=2) or not title or not url:
                 continue
             items.append({"title": _clean(title), "url": url, "kind": kind(url, c), "reuse": reuse(url, c), "brand": route(title, s, c),
