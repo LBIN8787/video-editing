@@ -214,6 +214,22 @@ AI·도구 사용법. 실제 화면이 증거, 모형 UI 는 보조.
 | **3D (CSS·three.js)** `css3d` | 진짜 입체가 회전 | 제품·물체·데이터 구조를 돌려 보기 | ai, market | 중간~높음 | ✅ 있음 · 우리: `studio3d` |
 | **클레이 (말랑한 입체)** `clay` | 부푼 입체 + 크게 눌리고 튕김(스쿼시·스트레치) | 친근·귀여움·생활·캐릭터 감정 | curiosity | 중간 | ○ 만들어야 |
 
+## 7. 입체감 — 2.5D 를 만드는 다섯 가지 방법
+견본: `python scripts/depth25d_reel.py` (30초, 진짜 CSS 3D: 원근 `perspective` + 깊이 `translateZ`, 시차는 계산이 아니라 깊이에서 저절로 생김).
+
+| 방법 | 원리 | 언제 | 채널 |
+|---|---|---|---|
+| **멀티플레인 풍경** | 평면 그림 여러 층을 깊이만 다르게 두고 (먼 층은 `(P-z)/P` 배로 키워 화면을 채움) 카메라가 다가감 → 가까운 층이 빨리 지나감 | 장면 열기·시대·장소 | 시사·호기심 |
+| **공간 속 카드** | 숫자·차트·발언 카드를 깊이가 다른 자리에 띄우고 카메라가 카드에서 카드로, 초점 밖은 흐림(피사계 심도) | 자료를 엮는 장면, 말과 행동 맞대기 | 시장·AI |
+| **기울인 지도 + 기둥** | 지도를 바닥처럼 눕히고(rotateX 54°) 도시마다 5면 입체 기둥이 `scaleZ` 로 자람 | 어디에 얼마나 — 지역 비교·공급망 | 시사·시장 |
+| **2.5D 막대 차트** | 격자 바닥 위 입체 막대 + 바닥 그림자, 카메라가 천천히 돎(rotateZ) | 규모 비교 — 평면 막대보다 크기가 느껴짐 | 시장 |
+| **팝업북** | 종이 바닥에 누운 오림판이 rotateX 0→-90° 로 일어서고, 닿는 그림자가 진해짐 | 이야기·옛 사례 | 호기심 |
+
+- 렌더 시 모션 블러(`data-motion-blur="on"`)·`motion-qa` 고름 99%. 카메라 계열이라 한 편에 몇 번만 (v31).
+- 만들며 배운 것: ① 가까운 층이 너무 크면 먼 층을 다 가려 깊이가 사라진다 ② 원근 거리(`perspective`)가 짧으면 기둥이 광각 렌즈처럼 벌어진다 — 2000px 이상 ③ 서 있는 물체는 **바닥에 닿는 그림자**가 있어야 서 있는 것으로 읽힌다 ④ 3D 회전은 '카메라 기울기(바깥, 고정)'와 '돌기(안쪽, 움직임)'를 나눠야 기울지 않는다.
+- 아직 없는 것: **사진 2.5D**(실사 사진을 앞·뒤 층으로 오려 시차) — 사진과 오려 내기(배경 제거)가 필요하다. HyperFrames `parallax-zoom`·`camera-rig-depth-stack` 블록, 그리고 `ytflow archive` 의 공공 기록 사진으로 다음에 만든다.
+
+
 ## 출처
 - HyperFrames 레지스트리 0.8.190 (`hyperframes catalog --json`, 448개, Apache-2.0) — 블록 이름은 `hyperframes add <이름>` 로 설치
 - 모션그래픽 스타일 분류: [b2w — 12 motion graphics styles](https://www.b2w.tv/blog/types-of-motion-graphics), [Yans Media — motion graphics styles](https://www.yansmedia.com/blog/best-motion-graphics-styles), [Yans Media — types & use cases](https://www.yansmedia.com/blog/types-of-motion-graphics), [ManyPixels — 9 types](https://www.manypixels.co/blog/motion-design/types), [Blue Forest — animation styles](https://blueforeststudios.squarespace.com/definitive-guide-to-animation-styles), [Biteable — animation styles](https://biteable.com/blog/animation-styles-types/), [moonb — 12 animation styles](https://www.moonb.io/blog/animation-styles), [Yum Yum Videos — animation styles](https://www.yumyumvideos.com/types_of_animation_styles)
