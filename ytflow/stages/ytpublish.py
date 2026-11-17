@@ -176,9 +176,39 @@ def playlist(tok, vid: str, title: str) -> str:
 
 
 # ---------------------------------------------------------------- 실행
+def slot_at(pr: Project, s: dict) -> str | None:
+    """같은 날 같은 채널에서 이미 올린 영상 수 n → n 번째 공개 시각 (2026-11-17 사용자: "하루에 세개까지 올려도 됩니다, 제한을 두지는 않는다").
+    channel.yaml youtube.publish_slots (예: ["08:00", "12:00", "18:00"]), 칸을 넘으면 마지막 칸 뒤로 2시간씩. 첫 영상은 None(기존 publish_time)."""
+    import re as _re
+    day = pr.path.name[:8]
+    slots = [str(x) for x in (s.get("publish_slots") or [])]
+    if not (day.isdigit() and slots):
+        return None
+    ch = _re.search(r"^channel:\s*(\S+)", (pr.path / "edit.yaml").read_text(encoding="utf-8"), _re.M) if (pr.path / "edit.yaml").exists() else None
+    n = 0
+    for q in sorted(pr.path.parent.glob(f"{day}-*")):
+        if q == pr.path or not (q / "05_edit" / "youtube_publish.json").exists():
+            continue
+        try:
+            if not json.loads((q / "05_edit" / "youtube_publish.json").read_text(encoding="utf-8")).get("video_id"):
+                continue
+        except ValueError:
+            continue
+        qc = _re.search(r"^channel:\s*(\S+)", (q / "edit.yaml").read_text(encoding="utf-8"), _re.M) if (q / "edit.yaml").exists() else None
+        if (qc and qc.group(1)) == (ch and ch.group(1)):
+            n += 1
+    if n == 0:
+        return None
+    h, m = map(int, slots[min(n, len(slots) - 1)].split(":"))
+    h += 2 * max(0, n - (len(slots) - 1))
+    if h > 23:
+        h, m = 23, 30
+    return f"{day[:4]}-{day[4:6]}-{day[6:8]}T{h:02d}:{m:02d}"
+
+
 def build_meta(pr: Project, at: str | None = None, privacy: str | None = None) -> tuple[dict, dict]:
     s, p = settings(pr), pack(pr)
-    when = publish_at(s, at)
+    when = publish_at(s, at or slot_at(pr, s))
     status = {"privacyStatus": "private" if when else (privacy or s["privacy"]), "selfDeclaredMadeForKids": bool(s["made_for_kids"]),
               "license": s["license"], "embeddable": bool(s["embeddable"]), "publicStatsViewable": bool(s["public_stats"])}
     if s.get("synthetic_media"):   # '변경되거나 합성된 콘텐츠' 고지 (실제처럼 보이는 합성이 있을 때만)
