@@ -43,13 +43,13 @@ def cfg() -> dict:
     return yaml.safe_load(CFG.read_text(encoding="utf-8"))
 
 
-# ── 날짜: 한국 06:00 이후 도착은 다음 날 영상 몫 (inbox/save 와 같은 규칙) ──
+# ── 날짜: 한국 08:00 제작 시작 이후 도착은 다음 날 영상 몫 (SAVE 규칙과 별개) ──
 def video_day(iso: str) -> str:
     try:
         t = datetime.fromisoformat(iso.replace("Z", "+00:00")).astimezone(KST)
     except ValueError:
         t = datetime.now(KST)
-    d = t.date() + (timedelta(days=1) if t.hour >= 6 else timedelta(0))
+    d = t.date() + (timedelta(days=1) if t.hour >= 8 else timedelta(0))
     return d.strftime("%Y%m%d")
 
 
@@ -285,7 +285,7 @@ def to_md(d: dict) -> str:
     day = d["day"]
     L = [f"# 뉴스레터 소재 — {day[:4]}-{day[4:6]}-{day[6:]} 영상 몫", "",
          "> 자동 정리한 **단서**입니다. 문장을 대본·화면에 옮기지 않고, 숫자·발언은 링크를 따라 1차 출처로 확인합니다 (docs/36).",
-         f"> 메일 {len(d['messages'])}통 · 소재 {len(d['items'])}개 · 한국 06:00 이후 도착분은 다음 날 파일", ""]
+         f"> 메일 {len(d['messages'])}통 · 소재 {len(d['items'])}개 · 한국 08:00 이후 도착분은 다음 날 파일", ""]
     for b in BRANDS:
         its = [x for x in d["items"] if x["brand"] == b]
         if not its:
