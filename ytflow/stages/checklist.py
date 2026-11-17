@@ -302,6 +302,8 @@ def run(path: Path, upto: str = "G8") -> Report:
                     vrows = _rows("영상 소스")
                     R.add("G3", "MUST", "v36: 팩트시트 '## 영상 소스' — 인터뷰·방송 원본 후보 1줄+ (못 찾으면 '없음: 이유') (09 §3-5)",
                           bool(vrows) or bool(vm and "없음" in vm.group(1)), f"{len(vrows)}줄")
+                    ceo = _rows("CEO 소식")
+                    R.add("G3", "SHOULD", "v42: 팩트시트 '## CEO 소식' — 오늘 이야기와 이어지는 경영진의 말·행동 1줄+, 원문·공시 출처 (09 §3-4-2)", len(ceo) >= 1, f"{len(ceo)}줄")
                     if spec.get("scenes"):
                         n_ins = sum(1 for s_ in spec["scenes"] if s_.get("insight"))
                         R.add("G4", "MUST", "v36: 대본에 인사이트 장면 (\"insight\": true — 화면에 '의견' 표시, 사실과 구분) (09 §3-4)", n_ins >= 1, f"{n_ins}개")

@@ -130,6 +130,21 @@ def market(day: str, cache: Path) -> dict:
     for q, lang in MARKET_NEWS:
         for n in _news(q, lang)[:6]:
             out["market_news"].append({"q": q, "title": n["title"], "source": n["source"], "url": n["url"], "driver": driver(n["title"])})
+    # CEO 소식·기술 소식 (manual/09 §3-4-2·§2-2, 2026-11-17 사용자) — config/ceo_watch.yaml, 사람·검색어마다 상위 몇 개만 (구글 뉴스 429 주의)
+    out["ceo_news"], out["tech_news"] = [], []
+    try:
+        import yaml as _yaml
+        from .. import config as _config
+        w = _yaml.safe_load((_config.ROOT / "config" / "ceo_watch.yaml").read_text(encoding="utf-8")) or {}
+    except Exception:  # noqa: BLE001
+        w = {}
+    for c in w.get("ceos") or []:
+        for n in _news(c["q"], c.get("lang", "en"))[:3]:
+            out["ceo_news"].append({"name": c["name"], "company": c["company"], "ticker": c.get("ticker", ""), "title": n["title"],
+                                    "source": n["source"], "url": n["url"], "published": n["published"], "driver": driver(n["title"])})
+    for q in w.get("tech") or []:
+        for n in _news(q["q"], q.get("lang", "en"))[:4]:
+            out["tech_news"].append({"q": q["q"], "title": n["title"], "source": n["source"], "url": n["url"], "published": n["published"]})
     # 시장 전체 뉴스에서 되풀이되는 고유 낱말 = 그날의 주제 (예: 코어위브 실적, 엔비디아 CEO) — 관심 종목 밖의 이야기도 잡기
     stop = {"뉴욕증시", "증시", "마감", "상승", "하락", "코스피", "코스닥", "나스닥", "다우", "일제히", "속보", "오늘", "종합", "리포트",
             "브리핑", "목표가", "투자증권", "증권", "글로벌마켓", "Stock", "Market", "Today", "News", "and", "the", "for", "stock", "market",
@@ -234,6 +249,14 @@ def to_md(b: dict) -> str:
     L += ["", "## ⑤ 그날의 주제어 (시장 전체 뉴스에 3번 이상) — 관심 종목 밖의 이야기도 여기서", ", ".join(f"{t['word']}({t['count']})" for t in b.get("themes", [])) or "(없음)"]
     L += ["", "## ⑥ 시장 전체 뉴스 (보고서·전망·마감 시황)"]
     L += [f"- [{n['driver']}] {n['title']} — {n['source']}" for n in b["market_news"][:24]]
+    if b.get("ceo_news"):   # manual/09 §3-4-2 — 단서. 발언·행동은 1차 출처로, 사생활 보도는 쓰지 않음
+        L += ["", "## ⑥-1 CEO 소식 (config/ceo_watch.yaml) — 단서, 1차 출처(보도자료·8-K·Form 4·공식 영상·본인 계정)로 확인"]
+        for name in dict.fromkeys(n["name"] for n in b["ceo_news"]):
+            ns = [n for n in b["ceo_news"] if n["name"] == name]
+            L += [f"- **{name}** ({ns[0]['company']}): " + " / ".join(f"{n['title']} — {n['source']}" for n in ns)]
+    if b.get("tech_news"):   # manual/09 §2-2 기술 분석·미래 전망
+        L += ["", "## ⑥-2 기술 소식 (기술 분석·미래 전망 후보, manual/09 §2-2)"]
+        L += [f"- [{n['q']}] {n['title']} — {n['source']}" for n in b["tech_news"][:16]]
     return "\n".join(L) + "\n"
 
 

@@ -1,0 +1,30 @@
+# CEO 소식 — 매일 브리핑이 따로 모으는 경영진 목록 (2026-11-17 사용자: "각 기업의 ceo들에 대한 내용과 소식들도 소스로서 다뤄주세요 이번에도 리사수가 무엇을 햇고 젠슨에 대한 내용 등등")
+# 쓰는 곳: ytflow/stages/daily.py → daily_brief.md '⑥-1 CEO 소식'. 규칙: manual/09 §3-4-2
+# 소식은 '단서' — 영상에 넣는 발언·행동은 1차 출처(보도자료·8-K·Form 4·공식 영상·본인 계정)로 확인. 사생활 보도는 쓰지 않음.
+# q: 구글 뉴스 검색어(영어, 사람 이름 + 회사). 바뀌면(인사) 여기만 고치기.
+ceos:
+  - {name: 젠슨 황, en: "Jensen Huang", company: 엔비디아(전 CEO), ticker: NVDA, q: "\"Jensen Huang\""}
+  - {name: 콜레트 크레스, en: "Colette Kress", company: 엔비디아(임시 CEO), ticker: NVDA, q: "\"Colette Kress\" Nvidia"}
+  - {name: 리사 수, en: "Lisa Su", company: AMD, ticker: AMD, q: "\"Lisa Su\" AMD"}
+  - {name: 웨이저자, en: "C.C. Wei", company: TSMC, ticker: TSM, q: "\"C.C. Wei\" TSMC"}
+  - {name: 혹 탄, en: "Hock Tan", company: 브로드컴, ticker: AVGO, q: "\"Hock Tan\" Broadcom"}
+  - {name: 립부 탄, en: "Lip-Bu Tan", company: 인텔, ticker: INTC, q: "\"Lip-Bu Tan\" Intel"}
+  - {name: 산제이 메흐로트라, en: "Sanjay Mehrotra", company: 마이크론, ticker: MU, q: "\"Sanjay Mehrotra\" Micron"}
+  - {name: 사티아 나델라, en: "Satya Nadella", company: 마이크로소프트, ticker: MSFT, q: "\"Satya Nadella\""}
+  - {name: 순다르 피차이, en: "Sundar Pichai", company: 알파벳, ticker: GOOGL, q: "\"Sundar Pichai\""}
+  - {name: 앤디 재시, en: "Andy Jassy", company: 아마존, ticker: AMZN, q: "\"Andy Jassy\""}
+  - {name: 마크 저커버그, en: "Mark Zuckerberg", company: 메타, ticker: META, q: "\"Mark Zuckerberg\" Meta"}
+  - {name: 샘 올트먼, en: "Sam Altman", company: 오픈AI, ticker: "", q: "\"Sam Altman\""}
+  - {name: 다리오 아모데이, en: "Dario Amodei", company: 앤트로픽, ticker: "", q: "\"Dario Amodei\""}
+  - {name: 일론 머스크, en: "Elon Musk", company: 테슬라·스페이스X·xAI, ticker: TSLA, q: "\"Elon Musk\" Tesla OR xAI"}
+  - {name: 래리 엘리슨, en: "Larry Ellison", company: 오라클, ticker: ORCL, q: "\"Larry Ellison\" Oracle"}
+  - {name: SK하이닉스 경영진, en: "SK hynix CEO", company: SK하이닉스, ticker: 000660.KS, q: "SK하이닉스 사장", lang: ko}
+  - {name: 삼성전자 경영진, en: "Samsung Electronics CEO", company: 삼성전자, ticker: 005930.KS, q: "삼성전자 대표이사", lang: ko}
+
+# 기술 소식 — 기술 분석·미래 전망 (2026-11-17 사용자: "단순 시장분석만이 아니라 기술분석 기술의 미래 전망 변화 분석도"). daily_brief '⑥-2 기술 소식'. 규칙: manual/09 §2-2
+tech:
+  - {q: "AI chip roadmap", lang: en}
+  - {q: "HBM4 OR HBM5", lang: en}
+  - {q: "advanced packaging CoWoS", lang: en}
+  - {q: "data center power AI gigawatt", lang: en}
+  - {q: "반도체 기술 로드맵", lang: ko}
