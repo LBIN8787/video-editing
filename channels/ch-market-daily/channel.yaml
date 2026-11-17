@@ -14,7 +14,7 @@ seed_keywords: ["뉴욕증시 마감", "코스피 마감", "특징주", "증권�
 target_minutes: 10            # v24: 롱폼 최소 10분
 cadence: "하루 1편 이상 (상한 없음, 2026-11-17 사용자: 소스·인터뷰·주제가 많으면 하루 세 편까지도 — manual/09 §2-1) — 장이 열린 다음 날 아침: 시장 브리핑 + 시장을 흔든 이슈 + 매체·인물 인사이트 분석(복잡하면 심층) / 장이 닫힌 날(토·일·휴장): 한 주 종합 점검 — 토 이슈 종합(weekly), 일 인사이트 점검(review) + 다음 주 일정·실적 (manual/09 §2, v30)"
 schedule:
-  weekday: {kind: briefing, minutes: [10, 12], upload: "08:00 KST 전후"}
+  weekday: {kind: briefing, minutes: [10, 12], upload: "09:00 KST (자동 제작 07:00 시작)"}
   deep_dive: {kind: deep_dive, minutes: [12, 15], when: "요일 고정 아님 — 주제의 복잡도로 매일 정함 (docs/23 §2 신호 둘 이상), 그날의 1편을 대신하고 앞 1분은 시장 요약"}
   saturday: {kind: weekly_review, minutes: [10, 15]}
   sunday: {kind: analysis, minutes: [10, 15]}
@@ -42,8 +42,8 @@ youtube:   # 유튜브 올리기·관리 (python -m ytflow yt-publish, docs/24-y
   category_id: "25"          # 뉴스/정치 (시장 브리핑)
   default_language: ko
   made_for_kids: false
-  publish_time: "08:00"      # 한국 시간 예약 공개 (지났으면 바로 공개)
-  publish_slots: ["08:00", "12:00", "18:00"]   # 같은 날 2·3번째 영상 (2026-11-17 사용자: 하루 여러 편 가능, 상한 없음 — 넘으면 2시간씩 뒤로)
+  publish_time: "09:00"      # 한국 시간 예약 공개 (지났으면 바로 공개) — 2026-11-17 08:00→09:00 (제작 시작 07:00)
+  publish_slots: ["09:00", "12:00", "18:00"]   # 같은 날 2·3번째 영상 (2026-11-17 사용자: 하루 여러 편 가능, 상한 없음 — 넘으면 2시간씩 뒤로)
   privacy: public
   captions: true             # subs.ass → 한국어 자막 트랙
   synthetic_media: false     # 실제 인물·사건처럼 보이는 합성 없음 (AI 목소리 내레이션은 채널 정보에 밝힘)

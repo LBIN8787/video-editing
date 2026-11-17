@@ -37,7 +37,7 @@ DEFAULTS = {
     "embeddable": True,
     "public_stats": True,
     "notify_subscribers": True,
-    "publish_time": "08:00",        # 한국 시간. 이미 지났으면 바로 공개
+    "publish_time": "09:00",        # 한국 시간. 이미 지났으면 바로 공개
     "privacy": "public",            # 예약 시간이 지났을 때의 공개 상태 (public | unlisted | private)
     "playlists": {},                 # 종류 → 재생목록 이름 (없으면 만든다)
     "captions": True,
@@ -82,7 +82,7 @@ def publish_at(s: dict, at: str | None, now: dt.datetime | None = None) -> str |
         t = dt.datetime.fromisoformat(at)
         t = t if t.tzinfo else t.replace(tzinfo=KST)
     else:
-        h, m = map(int, str(s.get("publish_time", "08:00")).split(":"))
+        h, m = map(int, str(s.get("publish_time", "09:00")).split(":"))
         t = now.astimezone(KST).replace(hour=h, minute=m, second=0, microsecond=0)
     if t <= now + dt.timedelta(minutes=5):
         return None
@@ -178,7 +178,7 @@ def playlist(tok, vid: str, title: str) -> str:
 # ---------------------------------------------------------------- 실행
 def slot_at(pr: Project, s: dict) -> str | None:
     """같은 날 같은 채널에서 이미 올린 영상 수 n → n 번째 공개 시각 (2026-11-17 사용자: "하루에 세개까지 올려도 됩니다, 제한을 두지는 않는다").
-    channel.yaml youtube.publish_slots (예: ["08:00", "12:00", "18:00"]), 칸을 넘으면 마지막 칸 뒤로 2시간씩. 첫 영상은 None(기존 publish_time)."""
+    channel.yaml youtube.publish_slots (예: ["09:00", "12:00", "18:00"]), 칸을 넘으면 마지막 칸 뒤로 2시간씩. 첫 영상은 None(기존 publish_time)."""
     import re as _re
     day = pr.path.name[:8]
     slots = [str(x) for x in (s.get("publish_slots") or [])]
