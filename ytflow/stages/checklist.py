@@ -65,6 +65,13 @@ def _load(p: Path):
     return json.loads(p.read_text(encoding="utf-8")) if p.suffix == ".json" else p.read_text(encoding="utf-8")
 
 
+def _opening(spec: dict) -> list:
+    """여는 부분: 첫 장 표지(chapter) 앞의 장면들. 장 표지가 없으면 앞 3장면 (v38 — '첫 N장면' 같은 숫자 대신 이야기 구조로)."""
+    sc = spec.get("scenes", [])
+    idx = next((i for i, x in enumerate(sc) if i > 0 and x.get("type") == "chapter"), None)
+    return sc[:idx] if idx else sc[:3]
+
+
 def _texts(spec: dict) -> str:
     out = []
     for s in spec.get("scenes", []):
@@ -114,8 +121,9 @@ def run(path: Path, upto: str = "G8") -> Report:
     R.add("G1", "MUST", "트리거·왜 지금", tb.get("trigger") and tb.get("why_now"), tb.get("trigger", ""))
     sc = tb.get("score") or {}
     tot = sum(int(v) for v in sc.values() if isinstance(v, (int, float)))
-    R.add("G1", "MUST", "욕망 점수 ≥12, 욕망 강도·보여 줄 자료 ≥2",
-          tot >= 12 and sc.get("desire", 0) >= 2 and sc.get("visuals", 0) >= 2, f"합계 {tot} {sc}")
+    R.add("G1", "MUST", "욕망을 분명히 건드리고, 보여 줄 자료가 있다 (둘 중 하나라도 약하면 만들지 않음, 01 §3)",
+          sc.get("desire", 0) >= 2 and sc.get("visuals", 0) >= 2, f"강도 {sc.get('desire')} · 자료 {sc.get('visuals')}")
+    R.add("G1", "참고", "욕망 점수 합계 (후보끼리 비교할 때 씀)", True, f"합계 {tot} {sc}")
     R.add("G1", "MUST", "수요 증거 1개 이상", len(tb.get("demand_evidence") or []) >= 1, len(tb.get("demand_evidence") or []))
     R.add("G1", "SHOULD", "후보 3개 비교 기록", len(tb.get("candidates") or []) >= 3, len(tb.get("candidates") or []))
     R.add("G1", "SHOULD", "우리만의 답(our_angle)", bool(tb.get("our_angle")), tb.get("our_angle", ""))
@@ -144,7 +152,7 @@ def run(path: Path, upto: str = "G8") -> Report:
         bad = [k for k, v in foot.items() if any(b.lower() in (v.get("credit", "")).lower() for b in BAD_LICENSE)]
         R.add("G2", "MUST", "금지 라이선스(SA·NC·ND) 없음", not bad, bad)
         srcs = {v.get("url") for v in foot.values()}
-        R.add("G2", "SHOULD", "자료 화면 소스 3종 이상 (롱폼)", not longform or len(srcs) >= 3, f"{len(srcs)}종")
+        R.add("G2", "참고", "자료 화면 소스 종류 (한 곳에서만 가져오면 화면이 단조로워짐)", not longform or len(srcs) >= 3, f"{len(srcs)}종")
 
     if last >= 2:  # G3 사실
         fs = _load(res / "factsheet.md") or ""
@@ -157,8 +165,10 @@ def run(path: Path, upto: str = "G8") -> Report:
         txt = _texts(spec)
         R.add("G4", "MUST", "core_message·question·logic", all(spec.get(k) for k in ("core_message", "question", "logic")), "")
         cnt = {k: len(spec.get(k) or []) for k in ("compare_to", "analogies", "past_cases", "glossary")}
-        need = {"compare_to": 1, "analogies": 2, "past_cases": 1, "glossary": 1}
-        R.add("G4", "MUST", "비교 기준≥1·비유≥2·과거 사례≥1·풀이≥1", all(cnt[k] >= n for k, n in need.items()), cnt)
+        if brand == "curiosity":   # v38: 호기심은 사실이 이야기 속에 (04 §0-6) — 비유와 대비 숫자만, SHOULD
+            R.add("G4", "SHOULD", "curiosity: 비유와 대비가 되는 숫자 — 사실은 이야기 속에서 (04 §0-6)", cnt["analogies"] >= 1 and cnt["compare_to"] >= 1, cnt)
+        else:
+            R.add("G4", "MUST", "쉬운 대본: 숫자엔 비교 기준, 낯선 개념엔 비유, 과거 사례, 어려운 말 풀이가 있다", all(cnt[k] >= 1 for k in cnt), cnt)
         inv = [w for w in INVEST if w in txt]
         R.add("G4", "MUST", "투자 권유 표현 0개", not inv, inv)
         ref = [w for w in REF_NAMES if w in txt]
@@ -171,8 +181,8 @@ def run(path: Path, upto: str = "G8") -> Report:
         _says = [b.get("say", "") for s in spec.get("scenes", []) for b in s.get("beats", [])]
         awk = [m.group(0) for t in _says for m in _re2.finditer(r"[^.?!]{0,14}(?:였|이었|했|었|았|였었)고요[.!]", t)]
         R.add("G4", "MUST", "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2)", not awk, awk[:3])
-        first = " ".join(b.get("say", "") for s in spec.get("scenes", [])[:3] for b in s.get("beats", []))
-        R.add("G4", "SHOULD", "첫 3장면 안에 질문", "?" in first or "까요" in first or "일까" in first, "")
+        first = " ".join(b.get("say", "") for s in _opening(spec) for b in s.get("beats", []))
+        R.add("G4", "SHOULD", "여는 부분에 이 영상의 질문 하나 (시청자가 무엇을 따라가는지 알게)", "?" in first or "까요" in first or "일까" in first, "")
         if brand == "curiosity" and longform and spec.get("scenes"):   # v17 호기심 먼저 (04 §0)
             hk = tb.get("hook") or {}
             R.add("G1", "MUST", "curiosity: 훅 먼저 정하기 (topic_brief.hook: type·line·gap)", bool(hk.get("line") and hk.get("gap")), hk.get("type", ""))
@@ -181,7 +191,7 @@ def run(path: Path, upto: str = "G8") -> Report:
             hw0 = words(hk.get("line", ""))
             hit = next((i for i, t in enumerate(beats2) if hw0 and len(words(t) & hw0) >= max(2, len(hw0) // 3)), None)
             agenda = next((i for i, t in enumerate(beats2) if "순서" in t), None)
-            R.add("G4", "MUST", "curiosity: 첫 박자부터 곧바로 훅 (채널 소개 인트로 없음, 첫 두 장면 안, 순서 예고보다 앞) (04 §0)",
+            R.add("G4", "MUST", "curiosity: 여는 장면이 곧 훅 — 소개·순서 예고·설명보다 앞 (04 §0)",
                   hit is not None and hit <= 3 and (agenda is None or hit < agenda), f"훅 박자 {hit} · 순서 예고 {agenda}")
             gap_w = words(hk.get("gap", ""))
             R.add("G4", "MUST", "curiosity: 훅의 질문(gap)이 나옴 (답은 숨김)",
@@ -200,11 +210,11 @@ def run(path: Path, upto: str = "G8") -> Report:
                     if ln[:1] in cnt:
                         cnt[ln[0]] += len([x for x in _re2.split(r"(?<=[.?!])\s+", ln[1:].strip()) if x])
                 tot = sum(cnt.values()) or 1
-                R.add("G4", "MUST", "curiosity: 지식·설명·수치 문장 ≤ 30% (대본 표시 ○, 04 §0-6)", cnt["○"] / tot <= 0.30, f"{cnt['○']}/{tot} = {cnt['○'] / tot:.0%} ({sv[-1].name})")
+                R.add("G4", "참고", "curiosity: 지식·설명 문장의 몫 (사실이 사람·사건 속에 있는지 — 판단은 대본 검토 D2, 04 §0-6)", cnt["○"] / tot <= 0.30, f"{cnt['○']}/{tot} = {cnt['○'] / tot:.0%} ({sv[-1].name})")
             else:   # 표시가 없으면 낱말로 센 하한 (실제보다 낮게 나옴)
                 sents = [x for t in _says for x in _re2.split(r"(?<=[.?!])\s+", t) if x.strip()]
                 kn = [x for x in sents if _re2.search(r"\d{4}년|\d|대학|박사|교수|학자|논문|책에|이라고 부릅|알려져|정리했|순서로|첫 번째|두 번째|세 번째", x)]
-                R.add("G4", "MUST", "curiosity: 지식·설명·수치 문장 ≤ 30% (자동 하한 — 02_script/script_vN.md 에 ●/○ 표시 권장)",
+                R.add("G4", "참고", "curiosity: 지식·설명 문장의 몫 (자동 추정 — 판단은 대본 검토 D2)",
                       len(kn) / max(len(sents), 1) <= 0.30, f"{len(kn)}/{len(sents)}")
             rvw = (Path(path) / "02_script" / "script_review.md")
             R.add("G4", "MUST", "curiosity: 편집 전에 대본만 사용자 검토 통과 (02_script/script_review.md '통과', 04 §0-6)",
@@ -243,12 +253,14 @@ def run(path: Path, upto: str = "G8") -> Report:
                 amap = _rows("자료 지도")
                 kinds_ = {k: sum(1 for r_ in amap if any(k in c for c in r_[:3])) for k in ("보고서", "발언", "행동")}
                 meant = all(len(r_) >= 5 and r_[4] not in ("", "-") for r_ in amap)
-                R.add("G3", lvl, "v26: 팩트시트 '## 자료 지도' — 보고서·발언·행동 각 2줄+, 합계 6줄+, 자료마다 의미 칸 (03 §0-2)",
-                      len(amap) >= 6 and all(v >= 2 for v in kinds_.values()) and meant, f"{len(amap)}줄 {kinds_} 의미{'✓' if meant else '빈칸'}")
+                # v38: 원리(서로 다른 종류의 자료를 맞대 의미를 찾음)는 lvl, 분량은 참고 — 보고서가 없는 주제에 칸 채우기를 막음
+                R.add("G3", lvl, "v26: 팩트시트 '## 자료 지도' — 서로 다른 종류(보고서·발언·행동)를 맞대고, 자료마다 의미 칸 (03 §0-2)",
+                      len(amap) >= 2 and sum(1 for v in kinds_.values() if v) >= 2 and meant, f"{len(amap)}줄 {kinds_} 의미{'✓' if meant else '빈칸'}")
+                R.add("G3", "참고", "v26: 자료 지도 분량 (종류별 줄 수)", len(amap) >= 6 and all(v >= 2 for v in kinds_.values()), f"{len(amap)}줄 {kinds_}")
                 if path.name.endswith(("-weekly", "-review")):   # 2026-11-15 사용자: 매주 다음 주 일정·실적 브리핑·분석 (manual/09 §2)
                     sched = _rows("다음 주 일정")
                     has_earn = any("실적" in " ".join(r_) for r_ in sched)
-                    R.add("G3", "MUST", "주간: 팩트시트 '## 다음 주 일정' 5줄+ (실적 1줄+, 한국 시간·볼 것·출처) (manual/09 §2)", len(sched) >= 5 and has_earn, f"{len(sched)}줄 · 실적 {'있음' if has_earn else '없음'}")
+                    R.add("G3", "MUST", "주간: 팩트시트 '## 다음 주 일정' — 한국 시간·볼 것·출처가 있는 지표·실적 일정 (manual/09 §2)", len(sched) >= 1, f"{len(sched)}줄 · 실적 {'있음' if has_earn else '없음'}")
                 # v33 머니크루 수준의 깊이 (03 §0-4, docs/31)
                 calc_m = re.search(r"^## 직접 계산[^\n]*\n(.*?)(?=^## |\Z)", fs, re.S | re.M)
                 wrong_m = re.search(r"^## 틀리는 경우[^\n]*\n(.*?)(?=^## |\Z)", fs, re.S | re.M)
@@ -257,16 +269,21 @@ def run(path: Path, upto: str = "G8") -> Report:
                 n_wrong = len(re.findall(r"^\s*(?:[-*]|\d+[.)])\s*\S", wrong_m.group(1), re.M)) if wrong_m else 0
                 n_sig = len([ln for ln in (sig_m.group(1).splitlines() if sig_m else []) if re.search(r"\d", ln) and re.search(r"(?:[-*]|\d+[.)]|\|)\s*\S", ln)])
                 R.add("G3", lvl, "v33: 팩트시트 '## 직접 계산' 1개+ (식·출처 숫자) — 연결 비율·민감도 (03 §0-4)", n_calc >= 1, f"{n_calc}개")
-                R.add("G3", lvl, "v33: 팩트시트 '## 틀리는 경우' 3개 (03 §0-4)", n_wrong >= 3, f"{n_wrong}개")
-                R.add("G3", lvl, "v33: 팩트시트 '## 신호' 숫자 기준선·날짜 3개+ (03 §0-4)", n_sig >= 3, f"{n_sig}개")
+                # v38: 있어야 하는 것은 lvl, 셋을 채우는 것은 참고 — 약한 것을 채워 넣지 않게
+                R.add("G3", lvl, "v33: 팩트시트 '## 틀리는 경우' — 이 판단이 틀리는 조건 (03 §0-4)", n_wrong >= 1, f"{n_wrong}개")
+                R.add("G3", lvl, "v33: 팩트시트 '## 신호' — 숫자 기준선·날짜가 있는 확인 신호 (03 §0-4)", n_sig >= 1, f"{n_sig}개")
+                R.add("G3", "참고", "v33: 틀리는 경우·신호 개수", n_wrong >= 3 and n_sig >= 3, f"틀림 {n_wrong} · 신호 {n_sig}")
                 hub = tb.get("hub_event") or {}
-                R.add("G1", lvl, "v28: topic_brief hub_event — 그 기간 시장을 가장 크게 흔든 사건이 중심축 (03 §0-3)", bool(hub), str(hub.get("name", ""))[:40] if isinstance(hub, dict) else str(hub)[:40])
-                R.add("G3", lvl, "v28: 팩트시트 '## 파급 경로'·'## 주의할 점' (03 §0-3)", "## 파급 경로" in fs and "## 주의할 점" in fs, "")
+                no_hub = isinstance(hub, str) and hub.strip().startswith("없음") and len(hub.strip()) > 4   # v38: 흔든 사건이 없는 기간은 "없음: 이유" — 지어내지 않음
+                R.add("G1", lvl, "v28: topic_brief hub_event — 시장을 흔든 사건이 있으면 중심축, 없으면 '없음: 이유' (03 §0-3)", bool(hub), str(hub.get("name", ""))[:40] if isinstance(hub, dict) else str(hub)[:40])
+                if not no_hub:
+                    R.add("G3", lvl, "v28: 팩트시트 '## 파급 경로'·'## 주의할 점' (03 §0-3)", "## 파급 경로" in fs and "## 주의할 점" in fs, "")
                 if spec.get("scenes") and isinstance(hub, dict) and hub.get("keyword"):
-                    head_say = " ".join(b.get("say", "") for s_ in spec["scenes"][:3] for b in s_.get("beats", []))
-                    R.add("G4", lvl, "v28: 대본 앞 3장면 안에 중심 사건 (03 §0-3)", hub["keyword"] in head_say, hub["keyword"])
+                    head_say = " ".join(b.get("say", "") for s_ in _opening(spec) for b in s_.get("beats", []))
+                    R.add("G4", lvl, "v28: 여는 부분에 중심 사건 (03 §0-3)", hub["keyword"] in head_say, hub["keyword"])
                 media = _rows("매체 프레임")
-                R.add("G3", lvl, "v26: 팩트시트 '## 매체 프레임' — 매체 4곳+ (국내 2·해외 2), 제목·강조점·빠진 것 (03 §0-2)", len(media) >= 4, f"{len(media)}곳")
+                R.add("G3", lvl, "v26: 팩트시트 '## 매체 프레임' — 매체끼리 어떻게 다르게 읽었나 (제목·강조점·빠진 것, 03 §0-2)", len(media) >= 2, f"{len(media)}곳")
+                R.add("G3", "참고", "v26: 매체 프레임 범위 (국내·해외를 함께 보면 프레임 차이가 더 잘 보임)", len(media) >= 4, f"{len(media)}곳")
                 mhead = re.search(r"^## 매체 프레임[^\n]*\n(?:[^|\n][^\n]*\n)*?(\|[^\n]*)", fs, re.M)
                 R.add("G3", lvl, "v28: 매체 프레임에 '입장' 칸 (낙관·우려·중립, 03 §0-3)", bool(mhead and "입장" in mhead.group(1)), "")
                 if spec.get("scenes"):
@@ -279,15 +296,16 @@ def run(path: Path, upto: str = "G8") -> Report:
                     st_ = {k for r_ in ins for k in ("낙관", "우려", "중립") if any(k in c for c in r_)}
                     dom = any(any("국내" in c for c in r_) for r_ in ins)
                     abroad = any(any("해외" in c for c in r_) for r_ in ins)
-                    R.add("G3", "MUST", "v36: 팩트시트 '## 인사이트' — 이름·직함 있는 사람·매체 4줄+, 입장 2가지+, 국내·해외 각 1+, 원문·근거·출처 (09 §3-4)",
-                          len(ins) >= 4 and len(st_) >= 2 and dom and abroad, f"{len(ins)}줄 · 입장 {sorted(st_)} · 국내 {'✓' if dom else '✗'} 해외 {'✓' if abroad else '✗'}")
+                    R.add("G3", "MUST", "v36: 팩트시트 '## 인사이트' — 이름·직함 있는 사람·매체의 엇갈리는 해석(입장이 갈림), 원문·근거·출처 (09 §3-4)",
+                          len(ins) >= 2 and len(st_) >= 2, f"{len(ins)}줄 · 입장 {sorted(st_)} · 국내 {'✓' if dom else '✗'} 해외 {'✓' if abroad else '✗'}")
                     vm = re.search(r"^## 영상 소스[^\n]*\n(.*?)(?=^## |\Z)", fs, re.S | re.M)
                     vrows = _rows("영상 소스")
                     R.add("G3", "MUST", "v36: 팩트시트 '## 영상 소스' — 인터뷰·방송 원본 후보 1줄+ (못 찾으면 '없음: 이유') (09 §3-5)",
                           bool(vrows) or bool(vm and "없음" in vm.group(1)), f"{len(vrows)}줄")
                     if spec.get("scenes"):
                         n_ins = sum(1 for s_ in spec["scenes"] if s_.get("insight"))
-                        R.add("G4", "MUST", "v36: 대본에 인사이트 장면 2개+ (\"insight\": true — 화면에 '의견' 표시, 사실과 구분) (09 §3-4)", n_ins >= 2, f"{n_ins}개")
+                        R.add("G4", "MUST", "v36: 대본에 인사이트 장면 (\"insight\": true — 화면에 '의견' 표시, 사실과 구분) (09 §3-4)", n_ins >= 1, f"{n_ins}개")
+                        R.add("G4", "참고", "v36: 인사이트 분량 — 사람·매체의 해석을 넉넉히 다뤘나, 국내·해외를 함께 봤나", n_ins >= 2 and dom and abroad, f"장면 {n_ins} · 팩트시트 {len(ins)}줄 · 국내 {'✓' if dom else '✗'} 해외 {'✓' if abroad else '✗'}")
                         R.add("G4", "SHOULD", "v36: 매체·인물의 원본 발언 장면(bite) 1개+ — 원본이 없으면 인용 카드로 그려짐 (09 §3-5)",
                               any(s_.get("type") == "bite" for s_ in spec["scenes"]), "")
         if ch == "ch-market-daily" and spec.get("scenes"):   # v27 (manual/09 §6, 2026-11-15 사용자: "말은 많은데 45일·60일만 강조된 채 멈춰 있다")
@@ -304,7 +322,7 @@ def run(path: Path, upto: str = "G8") -> Report:
                     extra = _nums(b_.get("say", "")) - shown
                     if len(extra) >= 2:
                         bare.append(f"{s_.get('id')}-{k_ + 1}")
-            R.add("G4", "MUST", "v27: 화면에 없는 숫자를 2개+ 말하면서 그 순간 생기는 그림(motion)이 없는 박자 0개 (manual/09 §6)", not bare, bare[:8])
+            R.add("G4", "MUST", "v27: 말로 숫자를 늘어놓는 순간 화면이 따라 바뀜 — 말은 많은데 화면이 멈춘 박자 없음 (manual/09 §6)", not bare, bare[:8])
         if ch == "ch-market-daily":   # 2026-11-15 사용자: 제목·썸네일에 채널 이름 붙이지 않음, 날짜만 (manual/09 §7)
             pk_ = spec.get("package") or {}
             txts_ = [pk_.get("title", "")] + list(pk_.get("title_options") or []) + [" ".join([th.get("top", ""), *th.get("lines", []), th.get("sub", ""), th.get("headline", "")]) for th in pk_.get("thumbnails") or []]
@@ -325,19 +343,19 @@ def run(path: Path, upto: str = "G8") -> Report:
         fs2 = _load(res / "factsheet.md") or ""
         links2 = set(re.findall(r"https?://[^\s)>\]]+", fs2))
         doms = {re.sub(r"^https?://(www\.)?", "", u).split("/")[0] for u in links2}
-        R.add("G3", "MUST", "issues: 출처 링크 5개 이상·도메인 3곳 이상", len(links2) >= 5 and len(doms) >= 3, f"{len(links2)}개 / {len(doms)}곳")
+        R.add("G3", "MUST", "issues: 교차 확인 — 당사자 원문과 성향이 다른 매체 등 서로 다른 출처 (08 §2)", len(doms) >= 3, f"{len(links2)}개 / {len(doms)}곳")
         R.add("G4", "SHOULD", "issues: 모르는 것(unknowns) 말하기", bool(tb.get("unknowns")) and "확인되지 않" in txt_all, "")
         voice_sc = [x for x in spec.get("scenes", []) if x.get("type") == "quote" or any(bb.get("lower") for bb in x.get("beats", []))]
         R.add("G4", "SHOULD", "issues: 사람의 목소리 장면 1개 이상 (quote·이름 자막)", bool(voice_sc), len(voice_sc))
         says = [bb.get("say", "") for x in spec.get("scenes", []) for bb in x.get("beats", [])]
         asks = sum(t.count("?") for t in says)
         formal = sum(any(w in t for w in ("것으로 알려졌다", "것으로 전해졌다", "것으로 나타났다")) for t in says)
-        R.add("G4", "SHOULD", "issues: 말하듯 쓴 대본 — 묻는 문장 3개+, 보도문 말투 10% 이하 (08 §0-1)",
-              asks >= 3 and formal <= max(1, len(says) // 10), f"물음 {asks} · 보도문 {formal}/{len(says)}")
+        R.add("G4", "참고", "issues: 보도문 말투('~것으로 알려졌다')·물음 개수 — 딱딱한 나열·반복 질문 패턴이 아닌지 (11-workflow §3-2)",
+              formal <= max(1, len(says) // 10), f"물음 {asks} · 보도문 {formal}/{len(says)}")
         R.add("G1", "SHOULD", "issues: 이름 붙은 시리즈(series)", bool(tb.get("series")), tb.get("series", ""))
         qd = [x["dur"] for x in tl if x.get("type") == "quote"]
         if len(qd) >= 2:
-            R.add("G5", "SHOULD", "issues: 양쪽 입장 장면 길이 차 30% 이내", min(qd) / max(qd) >= 0.7, [round(x, 1) for x in qd])
+            R.add("G5", "참고", "issues: 양쪽 입장 장면 길이 (같은 무게로 보이는지 눈으로)", min(qd) / max(qd) >= 0.7, [round(x, 1) for x in qd])
     if last >= 3:  # v24 인트로 없음 (README §2-1) · 말투 (README §2-3, 미주일기식)
         sc0 = spec.get("scenes", [])[:1]
         _all = [b.get("say", "") for s in spec.get("scenes", []) for b in s.get("beats", [])]
@@ -349,7 +367,8 @@ def run(path: Path, upto: str = "G8") -> Report:
         sents = [x for t in _all for x in re.split(r"(?<=[.?!])\s+", t) if len(x.strip()) > 3]
         formal = sum(1 for x in sents if re.search(r"(습니다|니다|까요)[.?!]?$", x.strip()))
         avg = sum(len(x) for x in sents) / max(len(sents), 1)
-        R.add("G4", "SHOULD", "말투: '~습니다/~니다·~까요' 80% 이상, 평균 문장 35자 이상 (미주일기 96~100%·62~71자)",
+        if brand == "curiosity":   # v38: 어미 비율은 이야기형(호기심)만 — 정보 채널은 어미 혼합 (11-workflow §3-2, 2026-11-17 사용자)
+          R.add("G4", "참고", "말투(호기심): '~습니다/~니다' 끝맺음 몫·평균 문장 길이 (차분한 이야기 내레이터인지)",
               formal / max(len(sents), 1) >= 0.8 and avg >= 35, f"{formal / max(len(sents), 1):.0%} · {avg:.0f}자")
     if last >= 6 and longform:  # v24 길이: 롱폼 최소 10분 (README §2-4)
         tl_ = Path(path) / "05_edit" / "hybrid_timeline.json"
@@ -361,19 +380,19 @@ def run(path: Path, upto: str = "G8") -> Report:
         from . import backdrop
         bgs = backdrop.plan(spec)
         kinds = set(bgs)
-        R.add("G5", "SHOULD", "배경: 장면 목적에 맞춰 여러 가지 (권고 3종, 05 §0-2 — v34 유동)",
-              not longform or len(kinds) >= 3, sorted(kinds))
+        R.add("G5", "SHOULD", "배경: 한 가지 바탕으로 고정하지 않음 — 장면이 하는 일이 바뀌면 바탕도 바뀜 (05 §0-2)",
+              len(kinds) >= 2, sorted(kinds))
         runs = [bgs[i] for i in range(len(bgs) - 2) if bgs[i] != "film" and bgs[i] == bgs[i + 1] == bgs[i + 2]]
-        R.add("G5", "SHOULD", "배경: 같은 바탕 3장면 연속 없음 (film 제외)", not runs, runs)
+        R.add("G5", "참고", "배경: 같은 바탕이 이어지는 구간", not runs, runs)
         from . import stylepick as _sp
         vs = _sp.variety_stats(spec)
-        R.add("G5", "SHOULD", "반복 피로: 글씨·도형뿐인 장면이 길게 이어지지 않게 (권고 2장면까지, 05 §0-3 — v34 유동)",
+        R.add("G5", "참고", "반복 피로: 글씨·도형뿐인 장면이 이어지는 구간 — 자료·지도·그림으로 보여 줄 수 있는지 다시 볼 곳 (05 §0-3)",
               vs["plain_run"] <= 2, f"최장 {vs['plain_run']}연속 (장면 {vs['plain_run_at']})")
         deco = [s.get("id") for s in spec.get("scenes", []) if set(s.get("fx") or []) & {"dust", "leak"}]
-        R.add("G5", "SHOULD", "v10: 장식 효과(dust·leak)는 2장면 이하 — 내용이 담긴 볼거리(사진·지도·사물 그림·정리판) 먼저", len(deco) <= 2, deco)
-        R.add("G5", "SHOULD", "반복 피로: 눈요기 있는 장면 60% 이상", vs["ratio"] >= 0.6, f"{vs['hooked']}/{vs['n']}")
-        R.add("G5", "SHOULD", "반복 피로: 같은 시각 효과 3장면 연속 없음 · 효과 3종 이상(롱폼)",
-              not vs["fx_runs"] and (not longform or len(vs["fx_kinds"]) >= 3), f"{vs['fx_kinds']} 연속 {vs['fx_runs']}")
+        R.add("G5", "참고", "장식 효과(dust·leak)를 쓴 장면 — 내용이 담긴 볼거리 대신 쓰지 않았는지 (05 §0-4)", len(deco) <= 2, deco)
+        R.add("G5", "참고", "반복 피로: 볼거리(자료·지도·그림)가 있는 장면의 몫", vs["ratio"] >= 0.6, f"{vs['hooked']}/{vs['n']}")
+        R.add("G5", "참고", "반복 피로: 같은 시각 효과가 이어지는 구간 (효과 종류 수는 채우지 않음 — 05 §0-5)",
+              not vs["fx_runs"], f"{vs['fx_kinds']} 연속 {vs['fx_runs']}")
         # 바탕색 돌려 쓰기 (v13): 미색 종이 계열만 계속 쓰지 않기 — 직전 두 프로젝트와 같은 바탕 계열이면 경고
         try:
             from . import skin as _skin
@@ -407,10 +426,10 @@ def run(path: Path, upto: str = "G8") -> Report:
         if prev is not None:
             cur = set(vs["signature"])
             jac = len(cur & prev) / max(1, len(cur | prev))
-            R.add("G5", "SHOULD", "반복 피로: 같은 채널 직전 편과 화면 구성 겹침 70% 이하 (Jaccard)", jac <= 0.7, f"{jac:.0%}")
+            R.add("G5", "참고", "반복 피로: 같은 채널 직전 편과 화면 구성이 얼마나 겹치나", jac <= 0.7, f"{jac:.0%}")
         types = [s.get("type") for s in spec.get("scenes", [])]
         run3 = [types[i] for i in range(len(types) - 2) if types[i] == types[i + 1] == types[i + 2] and types[i] != "chapter"]
-        R.add("G5", "SHOULD", "같은 type 3연속 없음 (권고, v34 유동)", not run3, run3)
+        R.add("G5", "참고", "같은 장면 type 이 이어지는 구간 — 하는 일이 바뀌었는데 화면이 같지 않나", not run3, run3)
         tl = _load(edt / "hybrid_timeline.json") or []
         if tl:
             t, last_f, gap, chap, last_c, cgap = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
@@ -423,23 +442,24 @@ def run(path: Path, upto: str = "G8") -> Report:
                     last_c = t
                 t += s["dur"]
             gap, cgap = max(gap, t - last_f), max(cgap, t - last_c)
-            R.add("G5", "SHOULD", "자료 화면 공백 ≤45초", gap <= 45, f"최장 {gap:.0f}초")
-            R.add("G5", "SHOULD", "장 표지 간격 ≤200초", not longform or cgap <= 200, f"최장 {cgap:.0f}초")
+            R.add("G5", "참고", "자료 화면 없이 그래픽만 이어지는 가장 긴 구간", gap <= 45, f"최장 {gap:.0f}초")
+            R.add("G5", "참고", "장 전환 없이 이어지는 가장 긴 구간", not longform or cgap <= 200, f"최장 {cgap:.0f}초")
         skin = (ed.get("edit") or {}).get("skin", "paper-sketch")
         from . import stylepick
         ms = stylepick.mix_stats(spec, tl)
         rule = stylepick.MIX_RULES["longform" if longform else "shorts"]
-        R.add("G5", "SHOULD", f"스타일 조합: 상황에 맞춰 섞기 (권고 {rule['min_recipes']}종, v34 유동)", ms["n_recipes"] >= rule["min_recipes"],
+        bb = bool(ms.get("backbone"))   # 뼈대 스타일(무대·이야기 그림판) 영상은 한 스타일이 이끄는 것이 정상
+        R.add("G5", "SHOULD", "스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1)", ms["n_recipes"] >= 2,
               f"{ms['n_recipes']}종 {ms['recipes']}")
-        cap = 0.85 if ms.get("backbone") else rule["max_share"]   # 뼈대 스타일(story-board 등)은 85%까지 (manual/04 §0-4, 참고 영상은 거의 한 장의 캔버스)
-        R.add("G5", "SHOULD", f"한 스타일이 {int(cap * 100)}% 넘지 않음 (권고, v34 유동)", ms["top_share"] <= cap, f"{ms['top']} {ms['top_share']}")
-        R.add("G5", "SHOULD", f"한 장면 안에서 겹친 장면(layers) {rule['min_layered']}개 안팎 (권고, v34 유동)", ms["layered_scenes"] >= rule["min_layered"], ms["layered_scenes"])
-        R.add("G5", "SHOULD", f"같은 스타일 {rule['max_run'] + 1}장면 연속 없음 (권고, v34 유동)", ms["max_run"] <= rule["max_run"], f"최장 {ms['max_run']}")
+        cap = 0.85 if bb else rule["max_share"]
+        R.add("G5", "참고", "스타일 조합: 가장 많이 쓴 스타일의 몫·겹친 장면·같은 스타일 연속" + (" (뼈대 스타일 영상)" if bb else ""),
+              ms["top_share"] <= cap and (bb or (ms["layered_scenes"] >= rule["min_layered"] and ms["max_run"] <= rule["max_run"])),
+              f"{ms['top']} {ms['top_share']} · 겹침 {ms['layered_scenes']} · 최장 연속 {ms['max_run']}")
         total = sum(x["dur"] for x in tl) if tl else 5.0 * sum(len(x.get("beats", [])) for x in spec.get("scenes", []))
         es = stylepick.emphasis_stats(spec, total)
-        R.add("G5", "SHOULD", f"강조는 아껴서: 1분에 1번 안팎 (이 영상 {es['limit']}번, v34 유동)", es["count"] <= es["limit"], f"{es['count']}번 {es['items']}")
-        R.add("G5", "SHOULD", "한 장면에 강조 1개까지 (위아래로 같은 내용 반복 피하기, v34 유동)", not es["crowded"], f"넘친 장면 {es['crowded']}")
-        R.add("G5", "SHOULD", "핵심 단어 띄우기(words)는 단어 1~3개 (v34 유동)", not es["bad_words"], es["bad_words"])
+        R.add("G5", "참고", "강조 횟수·강조가 겹친 장면 — 기억할 숫자·반전·결론에만 썼는지 (05 §0-1)", es["count"] <= es["limit"] and not es["crowded"],
+              f"{es['count']}번 {es['items']} · 겹친 장면 {es['crowded']}")
+        R.add("G5", "SHOULD", "핵심 단어 띄우기에 문장을 쓰지 않음 — 자막과 같은 내용을 위에 반복하지 않음 (v3)", not es["bad_words"], es["bad_words"])
         rec = stylepick.skins_for(brand) if brand else set()
         R.add("G5", "SHOULD", "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)", not rec or skin in rec, f"{skin} / 등록부 {sorted(rec)}")
         sp = path / "01_research" / "style_pick.json"
@@ -451,8 +471,22 @@ def run(path: Path, upto: str = "G8") -> Report:
     if last >= 5:  # G6 완성본
         R.add("G6", "MUST", "final.mp4", (edt / "final.mp4").exists(), "")
         lq = _load(path / "04_assets" / "layout_qa.json")
-        R.add("G6", "MUST", "레이아웃 점검 비어 있음", lq is not None and not any(lq.values()) if isinstance(lq, dict) else lq == [],
-              "" if lq is None else {k: v for k, v in (lq or {}).items() if v} if isinstance(lq, dict) else lq)
+        _soft = ("stage/crowded", "stage/text", "stage/static")   # v38: 숫자로 감지하는 '붐빔·글자 수·정지'는 참고 — 판단은 D3 화면 확인
+        def _split(v):
+            v = v if isinstance(v, list) else [v] if v else []
+            return [x for x in v if not str(x).startswith(_soft)], [x for x in v if str(x).startswith(_soft)]
+        hard, soft = {}, {}
+        if isinstance(lq, dict):
+            for k, v in lq.items():
+                h_, s_ = _split(v)
+                if h_: hard[k] = h_
+                if s_: soft[k] = s_
+        elif isinstance(lq, list):
+            h_, s_ = _split(lq)
+            if h_: hard["all"] = h_
+            if s_: soft["all"] = s_
+        R.add("G6", "MUST", "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)", lq is not None and not hard, hard)
+        R.add("G6", "참고", "무대 화면: 한꺼번에 보이는 것·글자·멈춘 박자 (한 화면 한 생각인지 눈으로, 04 §0-5)", not soft, soft)
         sq = _load(edt / "sync_qa.json") or {}
         w5 = sq.get("within_0_5s")
         w5_ok = w5 >= 0.95 if w5 is not None else (sq.get("p95_abs_offset") or 9) <= 0.5  # 예전 기록은 p95 로 판정
@@ -463,11 +497,11 @@ def run(path: Path, upto: str = "G8") -> Report:
         R.add("G6", "SHOULD", "납품 점검(음량 등)", dc.get("status") == "completed", dc.get("status"))
         mo = _load(edt / "motion.json") or {}
         if mo:  # 완성본을 실제로 잰 움직임 (docs/19 A4) — 대본에 효과를 적은 것만으로는 통과 못 함
-            R.add("G6", "SHOULD", "움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선)",
+            R.add("G6", "참고", "움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5)",
                   mo.get("change_events_per_min", 0) >= 8 and mo.get("static_ratio", 1) <= 0.5,
                   f"변화 {mo.get('change_events_per_min')}/분 · 정지 {mo.get('static_ratio')}")
             if brand == "curiosity":   # v25 (2026-11-14 사용자: "사진을 잘 뽑은 정적인 동영상 같다 — 동적인 움직임을 살려라", README §2-5)
-                R.add("G6", "SHOULD", "curiosity 움직임: 정지 화면 비율 참고 ≤0.3 (README §2-5 v34 — 숫자를 맞추려 화면을 흔들지 않음)", mo.get("static_ratio", 1) <= 0.3, f"정지 {mo.get('static_ratio')}")
+                R.add("G6", "참고", "curiosity 움직임: 정지 화면 몫 (사진 슬라이드처럼 멈춰 보이지 않는지 — 숫자를 맞추려 화면을 흔들지 않음)", mo.get("static_ratio", 1) <= 0.3, f"정지 {mo.get('static_ratio')}")
         el = any((path / "03_voice").glob("el*")) or any((path / "03_voice").glob("*eleven*"))
         try:
             el = el or (config.channel(ch).get("tts") or {}).get("backend") == "elevenlabs"
@@ -482,7 +516,7 @@ def run(path: Path, upto: str = "G8") -> Report:
         R.add("G7", "MUST", "썸네일 A/B/C + 점검 ok",
               all((edt / f"thumbnail_{k}.png").exists() and (tq.get(k) or {}).get("ok") for k in "ABC"), "")
         title = pk.get("title", "")
-        R.add("G7", "SHOULD", "제목 앞 22자 안에 질문/핵심", bool(re.search(r"[?？]|왜|까", title[:22])), title[:22])
+        R.add("G7", "참고", "제목 앞부분에 질문·핵심 (목록에서 잘려도 무슨 영상인지 보이게)", bool(re.search(r"[?？]|왜|까", title[:22])), title[:22])
 
     if last >= 7:  # G8 보관
         R.add("G8", "MUST", "GitHub Release 업로드", (edt / "release.json").exists(), "")
@@ -503,9 +537,10 @@ def write(path: Path, R: Report) -> Path:
              f"매뉴얼 v{meta['manual_version']} · {meta['checked']} · **{'통과' if meta['pass'] else f'MUST 실패 {len(mf)}개'}**", "",
              "| 게이트 | 등급 | 항목 | 결과 | 내용 |", "|---|---|---|---|---|"]
     for r in R.rows:
-        mark = "✅" if r["ok"] else ("❌" if r["level"] == "MUST" else "⚠️")
+        mark = "✅" if r["ok"] else ("❌" if r["level"] == "MUST" else "ℹ️" if r["level"] == "참고" else "⚠️")
         lines.append(f"| {r['gate']} | {r['level']} | {r['item']} | {mark} | {r['detail'][:80].replace('|', '/')} |")
-    lines += ["", "사람 눈 검사(EYE)는 manual/06-checklist.md 끝의 5가지를 확인하세요."]
+    lines += ["", "**참고**(ℹ️)는 실패가 아니라 측정값입니다 — 숫자를 맞추지 말고, 표시된 곳이 그 연출의 원리(manual/05 §0-0)에 맞는지 화면 확인(D3)에서 봅니다.",
+              "사람 눈 검사(EYE)는 manual/06-checklist.md 끝의 5가지를 확인하세요."]
     (out / "checklist.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     return out / "checklist.md"
 

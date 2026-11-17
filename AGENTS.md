@@ -49,6 +49,8 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **레퍼런스 영상 움직임 분석 — PC 의 ego lite + rea-video** — 클라우드는 YouTube 에 막히므로 사용자 PC 의 에이전트가 ego lite 로 재생 화면을 '정지 → 이동 → 찍기' 캡처(내려받기 없음) → rea-video 장면 분석 → 요소가 대본의 동사를 연기하는 움직임 문법 정리 | `skills/ref-watch-ego/SKILL.md`, `scripts/frames_to_clip.py`, `docs/31-motion-grammar.md`(결과) |
 | **매뉴얼 관리 — 한 번에 한 명만, 고칠 때만 잠금 (2026-11-16)** — 정해진 담당 없음: 고칠 세션이 짧게(2시간) 잠금(`locks` 브랜치) → 잡자마자 main 합침 → 고치고 main 에 합침 → 풂. 잠겨 있으면 `manual-lock request`. 막는 장치 세 겹(명령·Claude hook·git pre-commit) | `docs/35-manual-ownership.md`, `manual/OWNERS.yaml`, `python -m ytflow manual-lock status` |
 | **반드시 지킬 것·검사** | `manual/06-checklist.md`, `python -m ytflow check <프로젝트>` |
+| **제작 업무 체계 (v38)** — 단계 S0~S9 · 사용자 결정 지점 D1~D4(**최종 승인은 사용자만**) · 한 편씩 진행 · 뉴스레터로 주제 탐색 · AI 롱폼 네 형식 · 분석형 내레이션 | `manual/11-workflow.md` |
+| **연출의 원리 (v38)** — 숫자 상한·하한 대신 목적·상황·넘치면/모자라면, `check` 의 참고(ℹ️)는 측정값일 뿐 | `manual/05-style-matching.md` §0-0, README §5 |
 | 채널 회차 만들기 (반복 운영) | `skills/channel-run/SKILL.md`, `channels/README.md`, `docs/06-operations.md` |
 | 영상 1편 만들기 | `skills/video-make/SKILL.md` |
 | 형식: 롱폼 칼럼·보고서 / 쇼츠 안내 | `formats/README.md` |
