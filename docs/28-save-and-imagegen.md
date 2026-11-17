@@ -20,7 +20,7 @@
 | 1 | SAVE 앱 알림 켜기 (관심 기업·키워드·경제지표·리포트) | 휴대폰 SAVE 앱 설정 |
 | 2 | **MacroDroid** 매크로 — 트리거 `알림을 받으면`(앱 `SAVE`, 조건 없음) → 동작 `이메일 보내기`(본인 Gmail 계정), 제목 `[save알림]`, 본문 `[app_name] \| [notification_title] \| [notification]` (MacroDroid 변수는 대괄호 — 중괄호 `{notification}` 는 글자 그대로 나감, 2026-11-14 수정) | 휴대폰(Android) |
 | 3 | **30분마다 Gmail 감시** — `[save알림]` 메일(**스팸함 포함**, `in:anywhere`)을 읽어 `LBIN8787/video-editing` `main` 의 `inbox/save/<YYYYMMDD>.md` 에 `- <내용> (알림 MM-dd HH:mm)` 로 덧붙임 (이미 적힌 알림은 건너뜀) | Pickle 정기 작업 `📈 SAVE 알림 메일 감시` |
-| 4 | `daily` 가 `01_research/save_check.md` 표로 옮기고 상태 '확인함 (사용자 메모: …)' | 아침 07:00 자동 제작 |
+| 4 | `daily` 가 `01_research/save_check.md` 표로 옮기고 상태 '확인함 (사용자 메모: …)' | 아침 08:00 자동 제작 |
 
 - **확인한 것 (2026-11-14 13:17 KST):** MacroDroid 시험 알림이 본인 Gmail 받은편지함(INBOX)에 `[save알림]` 제목으로 도착. 스팸함을 거치지 않았다.
 - 날짜 규칙: **한국 06:00 이후 알림은 다음 날 파일**(`tools/save-forward/Code.gs` 의 `kstDay_` 와 같음).
@@ -34,7 +34,7 @@
 3. **Gmail 필터:** 제목 `[SAVE알림]` → 라벨 `SAVE알림` 붙이기 (받은편지함 건너뛰기 선택 가능).
 4. **Apps Script** (`tools/save-forward/Code.gs`): script.google.com 새 프로젝트에 붙여넣기 → 매니페스트 `appsscript.json` → 스크립트 속성 `GH_TOKEN`(GitHub 세분화 토큰, 이 저장소 Contents 읽기·쓰기만) → `setup` 실행.
    10분마다 새 알림을 `inbox/save/<영상 날짜>.md` 에 한 줄씩 커밋 (한국 06:00 이후 알림은 다음 날 영상 몫).
-5. 끝. 아침 07:00 자동 제작이 `daily` 로 `save_check.md` 표에 옮기고 상태 '확인함 (사용자 메모: …)'. 메모를 손으로 쓸 일이 없음.
+5. 끝. 아침 08:00 자동 제작이 `daily` 로 `save_check.md` 표에 옮기고 상태 '확인함 (사용자 메모: …)'. 메모를 손으로 쓸 일이 없음.
 
 ## 2. 그림 생성 — 여러 길 (`python -m ytflow art-gen`, `ytflow/stages/imagegen.py`)
 같은 '모델 시트'(한 장에 같은 인물의 자세 여러 개) 프롬프트를 어느 길로든 보내고, `art-cut` 이 배경(흰색·크림·투명)을 지워 조각으로 자른다.

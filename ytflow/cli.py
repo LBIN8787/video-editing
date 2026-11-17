@@ -338,7 +338,7 @@ def main(argv: list[str] | None = None) -> None:
     yu = sub.add_parser("yt-publish", help="유튜브 올리기·관리: 업로드(예약 공개)·썸네일·자막·재생목록 (공식 API, docs/24-youtube-publish.md)")
     yu.add_argument("project")
     yu.add_argument("--via", choices=["github", "here"], default="github", help="github: Actions 가 올림(기본, 키는 저장소 비밀값) / here: 이 컴퓨터에서 (YT_* 환경변수)")
-    yu.add_argument("--at", default=None, help="공개 시각 (예: 2026-11-14T09:00, 한국 시간). 없으면 채널 publish_time, 지났으면 바로 공개")
+    yu.add_argument("--at", default=None, help="공개 시각 (예: 2026-11-14T10:00, 한국 시간). 없으면 채널 publish_time, 지났으면 바로 공개")
     yu.add_argument("--privacy", choices=["public", "unlisted", "private"], default=None)
     yu.add_argument("--thumb", default="A", help="썸네일 A/B/C (API 는 한 장만 — 테스트 및 비교는 Studio 에서)")
     yu.add_argument("--dry-run", action="store_true", help="올리지 않고 무엇을 할지만 보기")

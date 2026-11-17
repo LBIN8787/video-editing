@@ -87,7 +87,7 @@ python -m ytflow archive si "steam locomotive"     # CC0 이미지만, 소장처
 ### 5-2. 다른 에이전트로 대체할 때 필요한 것
 1. Gmail **읽기 + 라벨 정리** 권한 (클라우드 Python 은 Gmail 에 직접 들어가지 못함 — Gmail 커넥터를 가진 쪽이 맡아야 함)
 2. `LBIN8787/video-editing` **`main` 푸시** 권한
-3. 매일 **05:40 KST** 실행 스케줄 — 07:00 `daily` 보다 먼저 끝나야 그날 브리핑에 들어감
+3. 매일 **05:40 KST** 실행 스케줄 — 08:00 `daily` 보다 먼저 끝나야 그날 브리핑에 들어감
 
 ### 5-3. 남은 일
 - Gmail 필터 (사람, 한 번): `from:(tldrnewsletter.com OR simonsfoundation.org OR aeon.co OR axios.com OR thedailyupside.com OR uppity.co.kr OR kdi.re.kr OR deeplearning.ai OR jstor.org OR publicdomainreview.org OR ourworldindata OR pewresearch.org)` → 받은편지함 건너뛰기 + `뉴스레터` 라벨. 첫 메일이 오면 실제 보낸 주소로 맞추기.

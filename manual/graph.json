@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-17T15:11:38",
- "source_hash": "0ddcd066c6d5",
+ "generated": "2026-11-17T15:16:53",
+ "source_hash": "0c3a83323f47",
  "audit": {
   "date": "2026-11-17T13:22",
   "counts": {
@@ -298,8 +298,8 @@
   ]
  },
  "stats": {
-  "manual_version": 40,
-  "versions": 40,
+  "manual_version": 41,
+  "versions": 41,
   "reviews": 30,
   "rejects": 20,
   "passes": 10,
@@ -309,7 +309,7 @@
   "sections": 155,
   "must": 26,
   "auto": 41,
-  "intents": 62,
+  "intents": 63,
   "misaligned": 0,
   "intents_reviewed": 2,
   "conflicts": 0,
@@ -1883,11 +1883,11 @@
   },
   {
    "section": "sec:09§2-1",
-   "text": "확인 필요 (2026-11-17): manual/11-workflow.md(v38)는 \"최종 승인은 사용자만, 에이전트는 업로드·공개하지 않음\"인데, 매일 시장 루틴은 자동 제작(07:00 시작) → 예약 공개(09:00)를 해 왔다. 매일 시장 채널에 어느 쪽을 적용할지 사용자 결정 전까지는, 더 만드는 편(두 번째 이후)은 올리지 않고 완성본·포장을 보고해 승인을 받은 뒤 올린다.",
+   "text": "확인 필요 (2026-11-17): manual/11-workflow.md(v38)는 \"최종 승인은 사용자만, 에이전트는 업로드·공개하지 않음\"인데, 매일 시장 루틴은 자동 제작(08:00 시작) → 예약 공개(10:00)를 해 왔다. 매일 시장 채널에 어느 쪽을 적용할지 사용자 결정 전까지는, 더 만드는 편(두 번째 이후)은 올리지 않고 완성본·포장을 보고해 승인을 받은 뒤 올린다.",
    "themes": [],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:67de9138",
+   "tier_key": "ban:0828bc85",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -3128,9 +3128,10 @@
     32,
     35,
     37,
-    38
+    38,
+    40
    ],
-   "last_version": 38
+   "last_version": 40
   },
   {
    "id": "doc:10",
@@ -10135,6 +10136,34 @@
    "label": "v40",
    "summary": "v40: 이어 읽는 시장 자동 제작 시작 06:05→07:00(장 마감 뒤 실적 발표까지 잡기), 예약 공개 08:00→09:00, 하루 시간표·channel.yaml publish_time/slots·문서 시각 갱신. 2026-11-17 사용자 요청",
    "applied": [],
+   "themes": [],
+   "commit": {
+    "sha": "fd5b0ccd08b9e5a46c957cbf31e13e71fbcc79c6",
+    "subject": "이어 읽는 시장: 자동 제작 07:00 시작·예약 공개 09:00 (매뉴얼 v40)",
+    "date": "2026-11-17",
+    "other_files": [
+     "channels/ch-market-daily/channel.yaml",
+     "config/newsletters.yaml",
+     "docs/08-voice.md",
+     "docs/24-youtube-publish.md",
+     "docs/25-reference-2611.md",
+     "docs/28-save-and-imagegen.md",
+     "docs/34-manual-review.md",
+     "docs/36-newsletters.md",
+     "ytflow/cli.py",
+     "ytflow/stages/ytpack.py",
+     "ytflow/stages/ytpublish.py"
+    ]
+   }
+  },
+  {
+   "id": "ver:41",
+   "kind": "version",
+   "v": 41,
+   "date": "2026-11-17",
+   "label": "v41",
+   "summary": "v41: 이어 읽는 시장 자동 제작 08:00 시작·예약 공개 10:00 (v40 의 07:00·09:00 대신, 장 마감 뒤 실적·어닝콜을 여유 있게). 2026-11-17 사용자 요청",
+   "applied": [],
    "themes": []
   },
   {
@@ -16589,6 +16618,47 @@
     },
     {
      "ref": "code:ytflow/stages/checklist.py:474",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:485e3413",
+   "kind": "intent",
+   "quote": "엔비디아 어닝콜도 있으니까 여유롭게 8시에 작업하시고 10시에 업로드하세요 앞으로도요",
+   "label": "엔비디아 어닝콜도 있으니까 여유롭게 8시에 작업하시고 10시에 업로드하세요 앞으로도요",
+   "versions": [
+    41
+   ],
+   "date": "2026-11-17",
+   "sources": [
+    {
+     "ref": "sec:09§1",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:485e3413"
+   ],
+   "themes": [],
+   "ann_key": "intent:485e3413",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:41",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§1",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -42344,6 +42414,14 @@
    ]
   },
   {
+   "s": "ver:40",
+   "t": "doc:09",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -44042,6 +44120,16 @@
    "s": "intent:7efa00c0",
    "t": "theme:script",
    "kind": "about"
+  },
+  {
+   "s": "intent:485e3413",
+   "t": "ver:41",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:485e3413",
+   "t": "sec:09§1",
+   "kind": "quoted_in"
   },
   {
    "s": "intent:50e32be0",

@@ -11,7 +11,7 @@
 | 설명란(더보기): 요약·기준 시각·챕터·출처·면책·해시태그 | ✅ | `youtube.md` 설명란 블록 |
 | 태그 | ✅ | `youtube.md` 태그 |
 | 카테고리·언어·아동용 아님·라이선스·퍼가기·통계 공개 | ✅ | `channels/ch-market-daily/channel.yaml` → `youtube:` |
-| 공개 예약 (평일 09:00 KST, 지났으면 바로 공개) | ✅ | `youtube.publish_time` 또는 `--at` |
+| 공개 예약 (평일 10:00 KST, 지났으면 바로 공개) | ✅ | `youtube.publish_time` 또는 `--at` |
 | 썸네일 | ✅ 한 장(A) | `--thumb A|B|C` · **채널 전화 인증 필요** |
 | 자막(한국어 트랙) | ✅ | `subs.ass` → SRT |
 | 재생목록 (아침 브리핑/심층/주간/주말 분석, 없으면 만듦) | ✅ | `youtube.playlists` |
@@ -41,13 +41,13 @@
 python -m ytflow upload <프로젝트>                 # 영상 → GitHub Release (기존)
 python -m ytflow yt-publish <프로젝트> --dry-run    # 무엇을 올릴지 미리 보기 (제목·공개 상태·예약 시각·재생목록)
 python -m ytflow yt-publish <프로젝트>              # GitHub Actions 가 올림 → 몇 분 뒤 05_edit/youtube_publish.json
-python -m ytflow yt-publish <프로젝트> --at 2026-11-17T09:00 --thumb B   # 시각·썸네일 지정
+python -m ytflow yt-publish <프로젝트> --at 2026-11-17T10:00 --thumb B   # 시각·썸네일 지정
 python -m ytflow yt-publish <프로젝트> --update-meta   # 이미 올린 영상의 제목·설명란·태그를 youtube.md(제목 1번)로 다시 맞춤
 python -m ytflow yt-publish <프로젝트> --update-meta --privacy unlisted   # 공개 상태 바꾸기 (public·unlisted·private)
 ```
 - 같은 프로젝트를 두 번 올리지 않는다(`youtube_publish.json` 에 video_id 가 있으면 멈춤).
 - 썸네일이 거절되면(전화 인증 안 된 채널) 영상은 그대로 두고 `warnings` 에 남긴다.
-- 자동 제작 일정(매일 07:00)도 마지막에 이 명령을 부른다.
+- 자동 제작 일정(매일 08:00)도 마지막에 이 명령을 부른다.
 
 ## 3. 목소리 (같은 날 정함)
 - 채널 목소리는 `channel.yaml` 의 `tts`(Teo, ElevenLabs)를 렌더가 바로 쓴다. 키는 클라우드 환경의 네트워크 비밀값(api.elevenlabs.io, `xi-api-key`).

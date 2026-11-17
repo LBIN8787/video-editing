@@ -96,7 +96,7 @@ ElevenLabs 음성은 박자 앞에 숨소리(약 -40dB)가 있어 -45dB 기준�
 ### 운영
 - 설정: `channels/ch-market-daily/channel.yaml` 의 `tts` (eleven_v4, stability 0.55, speed 1.0).
 - **크레딧:** 한국어 1글자 ≈ 0.83 크레딧(이번 시험 실측 192/232자). 한 편 2,500~3,300자 → 테이크 1개 ≈ 2,100~2,800, 매일이면 **월 7만~9만 크레딧**. 지금 계정 한도는 월 1만(2026-11-13 소진)이라 매일 운영은 불가 → 월 10만 크레딧 이상 요금제가 필요. 무료 등급은 상업 이용(수익 채널)에 쓸 수 없으니 요금제 조건을 ElevenLabs 요금 페이지에서 확인.
-- **자동 제작(매일 07:00)**: 키가 없으면 edge 초안으로 만든다. 자동으로 ElevenLabs 를 쓰려면 이 환경에 `api.elevenlabs.io` 키를 네트워크 비밀값(헤더 `xi-api-key`)으로 저장하고 `config/pipeline.yaml` → `tts.backend: elevenlabs`.
+- **자동 제작(매일 08:00)**: 키가 없으면 edge 초안으로 만든다. 자동으로 ElevenLabs 를 쓰려면 이 환경에 `api.elevenlabs.io` 키를 네트워크 비밀값(헤더 `xi-api-key`)으로 저장하고 `config/pipeline.yaml` → `tts.backend: elevenlabs`.
 - 같은 문장 재시험(크레딧 충전 뒤): Jun Lee·JaeGyu 를 같은 문장으로 읽혀 위 표에 추가.
 
 ### 3목소리 비교 (2026-11-13, 요금제 올린 뒤 · 같은 문장 · 각 2테이크 · eleven_v4)
