@@ -161,6 +161,15 @@ class HDoc(hyper.Doc):
                           f'font-family:sans;font-size:24px;color:{col};white-space:nowrap">{_e(text)}</div>')
         self.js.append(f'tl.fromTo("#{i}",{{opacity:0}},{{opacity:1,duration:0.4}},0.2);')
 
+    def opinion_tag(self, dark: bool = False):
+        """v36 인사이트 장면 표시 (2026-11-17 사용자: "사실과 인사이트는 별개로 구분해야") — 왼쪽 위 장 표시 아래."""
+        i = self._id()
+        col = "#FFFFFF" if dark else self.ink
+        bg = "rgba(12,12,14,.55)" if dark else "rgba(251,248,241,.9)"
+        self._hud_or_items().append(f'<div id="{i}" style="position:absolute;left:56px;top:84px;padding:4px 14px;background:{bg};border:2px solid {self.red};'
+                          f'border-radius:6px;font-family:sans-x;font-size:24px;color:{col};white-space:nowrap">💭 의견 · 사실이 아닌 한 사람의 시각</div>')
+        self.js.append(f'tl.fromTo("#{i}",{{opacity:0}},{{opacity:1,duration:0.4}},0.3);')
+
     def chapter_tag(self, num: str, title: str, dark: bool = False):
         if not num:
             return
@@ -1005,6 +1014,32 @@ def voice(project: Project, spec: dict) -> dict:
     return durs
 
 
+def bite_fallback(project, spec: dict) -> None:
+    """bite 장면의 원본 영상이 아직 없으면(클라우드는 YouTube 봇 확인으로 못 받음) 인용 카드(quote)로 바꿔 그린다.
+    PC 에서 원본을 04_assets/footage/ 에 넣고 다시 렌더하면 원래 bite 로 돌아간다 (manual/09 §3-5, v36)."""
+    fdir = project.dir("assets") / "footage"
+    for sc in spec["scenes"]:
+        if sc.get("type") != "bite":
+            continue
+        src = (sc.get("clip") or {}).get("src", "")
+        meta = (spec.get("footage") or {}).get(src) or {}
+        if meta.get("file") and (fdir / meta["file"]).exists():
+            continue
+        cuts = (sc.get("clip") or {}).get("cuts", [])
+        ko = " ".join(c.get("ko", "") for c in cuts).strip()
+        en = " ".join(c.get("find") or f"{c.get('from', '')} … {c.get('to', '')}" for c in cuts).strip()
+        where = meta.get("credit") or meta.get("url") or ""
+        sc["type"] = "quote"
+        sc["quote"] = ko or sc.get("quote", "")
+        sc["orig"] = en
+        sc.setdefault("keyword", "")
+        sc["label"] = " · ".join(x for x in (sc.get("label", ""), where, "원본 영상: PC 에서 채움") if x)
+        sc["beats"] = list(sc.get("beats") or [{"say": f"{sc.get('who', '')}의 말입니다."}])
+        if ko:   # 원본 목소리 대신 번역을 내레이터가 읽음
+            sc["beats"].append({"say": f"우리말로 옮기면 이렇습니다. {ko}"})
+        print(f"[hybrid] #{sc.get('id')} 원본 영상 없음 → 인용 카드로 그림 ({src or '소스 미지정'}) — PC 에서 footage 를 넣고 다시 렌더하면 원본으로")
+
+
 def timing(sc: dict, durs: dict) -> tuple[list, float]:
     t = LEAD + (0.9 if sc["type"] == "chapter" else 0.0)
     bt = []
@@ -1088,6 +1123,8 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     from . import graphics
     if not graphics.dispatch(D, sc, bt, dur, RENDER):   # 그래픽 팩이 다른 컴포넌트(그림)를 고르면 그걸로
         RENDER[sc["type"]](D, sc, bt, dur)
+        if sc.get("insight"):   # v36: 사람·매체의 시각은 사실과 다르게 표시
+            D.opinion_tag(dark=sc["type"] in ("bite", "versus") or D.skin.get("dark", False))
     if sc["type"] != "newsdesk":   # 요약 장면 위에 '말에 맞춰 생기는 사물' (박자 motion, docs/25 §8)
         from . import motion2
         motion2.apply(D, sc, bt, dur)
@@ -1298,6 +1335,7 @@ def make(project: Project, workers: int = 3) -> Path:
         ch = chapters.get(sc.get("chapter"))
         if ch and sc["type"] != "chapter":
             sc["_chnum"], sc["_chtitle"] = ch["num"], ch["title"]
+    bite_fallback(project, spec)   # v36: 원본 영상이 없으면 렌더를 멈추지 않고 인용 카드로 (목소리 만들기 전에 — 번역 박자를 읽게)
     print("[hybrid] 음성")
     durs = voice(project, spec)
     if any(sc.get("type") == "bite" for sc in spec["scenes"]):   # 원본 발언 컷편집: 대본과 맞는 구간만 잘라 이어 붙임

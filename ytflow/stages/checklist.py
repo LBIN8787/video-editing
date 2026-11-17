@@ -273,6 +273,23 @@ def run(path: Path, upto: str = "G8") -> Report:
                     says_m = " ".join(b.get("say", "") for s_ in spec["scenes"] for b in s_.get("beats", []))
                     R.add("G4", lvl, "v26: 대본에 매체가 어떻게 다뤘나 + 말과 행동 맞대기 (03 §0-2)",
                           any(s_.get("type") == "newspapers" for s_ in spec["scenes"]) or ("매체" in says_m and ("보도" in says_m or "기사" in says_m)), "")
+                # v36 (manual/09 §3-4·§3-5, 2026-11-17 사용자: "여러 인사이트들 … 부실" · "인터뷰·방송 내용을 영상소스로") — 11/18 회차부터
+                if path.name[:8].isdigit() and path.name[:8] >= "20261118":
+                    ins = _rows("인사이트")
+                    st_ = {k for r_ in ins for k in ("낙관", "우려", "중립") if any(k in c for c in r_)}
+                    dom = any(any("국내" in c for c in r_) for r_ in ins)
+                    abroad = any(any("해외" in c for c in r_) for r_ in ins)
+                    R.add("G3", "MUST", "v36: 팩트시트 '## 인사이트' — 이름·직함 있는 사람·매체 4줄+, 입장 2가지+, 국내·해외 각 1+, 원문·근거·출처 (09 §3-4)",
+                          len(ins) >= 4 and len(st_) >= 2 and dom and abroad, f"{len(ins)}줄 · 입장 {sorted(st_)} · 국내 {'✓' if dom else '✗'} 해외 {'✓' if abroad else '✗'}")
+                    vm = re.search(r"^## 영상 소스[^\n]*\n(.*?)(?=^## |\Z)", fs, re.S | re.M)
+                    vrows = _rows("영상 소스")
+                    R.add("G3", "MUST", "v36: 팩트시트 '## 영상 소스' — 인터뷰·방송 원본 후보 1줄+ (못 찾으면 '없음: 이유') (09 §3-5)",
+                          bool(vrows) or bool(vm and "없음" in vm.group(1)), f"{len(vrows)}줄")
+                    if spec.get("scenes"):
+                        n_ins = sum(1 for s_ in spec["scenes"] if s_.get("insight"))
+                        R.add("G4", "MUST", "v36: 대본에 인사이트 장면 2개+ (\"insight\": true — 화면에 '의견' 표시, 사실과 구분) (09 §3-4)", n_ins >= 2, f"{n_ins}개")
+                        R.add("G4", "SHOULD", "v36: 매체·인물의 원본 발언 장면(bite) 1개+ — 원본이 없으면 인용 카드로 그려짐 (09 §3-5)",
+                              any(s_.get("type") == "bite" for s_ in spec["scenes"]), "")
         if ch == "ch-market-daily" and spec.get("scenes"):   # v27 (manual/09 §6, 2026-11-15 사용자: "말은 많은데 45일·60일만 강조된 채 멈춰 있다")
             def _nums(s_):
                 return {re.sub(r"[,\s]", "", m_) for m_ in re.findall(r"\d[\d,]*(?:\.\d+)?", s_)}
