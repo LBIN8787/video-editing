@@ -1,6 +1,6 @@
 # 뉴스레터 소재가 쌓이는 곳
 
-`<YYYYMMDD>.md` (사람이 읽는 표) · `<YYYYMMDD>.json` (기계용) — 그날 영상 몫. 한국 06:00 이후 도착분은 다음 날 파일.
+`<YYYYMMDD>.md` (사람이 읽는 표) · `<YYYYMMDD>.json` (기계용) — 그날 영상 몫. 한국 08:00 이후 도착분은 다음 날 파일. 변경 전 과거 파일은 자동 소급 이동하지 않습니다.
 만드는 법·규칙: `docs/36-newsletters.md`. 명령: `python -m ytflow newsletters ingest|rss|show|sources`.
 
 - 소재마다: 원래 제목 · 원문·기사 · 원자료·통계 · 영상·이미지 · 재사용 조건 · 뉴스레터 (채널별: 시장·AI·호기심·시사)
