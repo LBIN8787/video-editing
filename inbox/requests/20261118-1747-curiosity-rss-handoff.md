@@ -1,7 +1,7 @@
 ---
 from: codex
 type: research
-status: pending
+status: needs_approval
 title: 피클 소재 정리·분류 6시간 주기 인계 및 설정 확인
 ---
 
