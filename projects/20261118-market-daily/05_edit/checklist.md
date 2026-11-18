@@ -1,6 +1,6 @@
 # 체크리스트 — 20261118-market-daily
 
-매뉴얼 v43 · 2026-11-18T00:47:03 · **MUST 실패 1개**
+매뉴얼 v43 · 2026-11-18T01:13:42 · **통과**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
@@ -84,7 +84,7 @@
 | G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ✅ | python -m ytflow style-pick <프로젝트> |
 | G5 | SHOULD | edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움) | ✅ | python -m ytflow edit-plan <프로젝트> → 02_script/EDIT_CONTEXT.md |
 | G6 | MUST | final.mp4 | ✅ |  |
-| G6 | MUST | 레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why) | ❌ | {'6': ['layout/text_occluded: Text is hidden beneath an opaque element.', 'layou |
+| G6 | MUST | 레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why) | ✅ | {} |
 | G6 | 참고 | 무대 화면: 한꺼번에 보이는 것·글자·멈춘 박자 (한 화면 한 생각인지 눈으로, 04 §0-5) | ✅ | {} |
 | G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 0.996, 'p95_abs_offset': 0.09, 'median_abs_offset': 0.05, 'video |
 | G6 | SHOULD | 납품 점검(음량 등) | ✅ | completed |
