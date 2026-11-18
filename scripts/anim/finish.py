@@ -4,7 +4,9 @@ from pathlib import Path
 vid, voice, ass, sfx, end, out = sys.argv[1:7]
 SFX = Path(__file__).resolve().parents[2] / ".claude/skills/media-use/audio/assets/sfx"
 FONTS = Path(__file__).resolve().parents[2] / "ytflow/assets/fonts"
-ev = json.loads(Path(sfx).read_text(encoding="utf-8"))
+import os
+# 효과음은 기본으로 넣지 않음 (2026-11-19 사용자: "효과음들이 전체적으로 별로 듣기 좋은 효과음이 아니야") — 넣으려면 YTFLOW_SFX=1
+ev = json.loads(Path(sfx).read_text(encoding="utf-8")) if os.environ.get("YTFLOW_SFX") == "1" else []
 ins = ["-i", vid, "-i", voice]
 flt = [f"[1:a]atrim=0:{end},aresample=48000[v]"]
 for k, (n, t, v) in enumerate(ev):

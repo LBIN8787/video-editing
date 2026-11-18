@@ -189,9 +189,10 @@ class Film:
         p = ",".join(f"{k}:{json.dumps(v)}" for k, v in props.items())
         self._js(f"tl.set('{sel}',{{{p}}},{t:.3f});")
 
-    def _count(self, t, cid, a, b, dur=1.2, pre="", suf="", dec=0):
+    def _count(self, t, cid, a, b, dur=1.2, pre="", suf="", dec=0, grp=True):
+        """grp=False: 천 단위 쉼표 없이 (연도 등)."""
         self._js(f"tl.set('#{cid}',{{opacity:1}},{t:.3f}); (()=>{{const o={{v:{a}}}, el=$('#{cid}');"
-                 f"tl.to(o,{{v:{b},duration:{dur},ease:'power2.out',onUpdate:()=>{{el.textContent='{pre}'+o.v.toLocaleString('en-US',{{minimumFractionDigits:{dec},maximumFractionDigits:{dec}}})+'{suf}';}}}},{t:.3f});}})();")
+                 f"tl.to(o,{{v:{b},duration:{dur},ease:'power2.out',onUpdate:()=>{{el.textContent='{pre}'+o.v.toLocaleString('en-US',{{minimumFractionDigits:{dec},maximumFractionDigits:{dec},useGrouping:{str(grp).lower()}}})+'{suf}';}}}},{t:.3f});}})();")
 
     def _grade(self, t, sid, filt, dur=1.0):
         """색 바꾸기 (회상·현재 대비): 예 'saturate(.35) brightness(.95)'."""
@@ -212,7 +213,7 @@ html,body{{margin:0;background:#000;overflow:hidden}}
 .plate{{position:absolute;left:0;top:0;display:block}}
 .actor,.prop,.txt{{position:absolute}}
 .mv,.sq{{position:absolute;left:0;top:0}}
-.sq{{transform-origin:0 0}} .sq.flip{{transform:scaleX(-1)}}
+.sq{{transform-origin:0 0}}
 .pose,.prop img{{position:absolute;display:block}}
 .txt{{white-space:nowrap;line-height:1.15}} .txt .ch{{display:inline-block;opacity:0}}
 .vign{{position:absolute;inset:0;pointer-events:none;z-index:50;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 62%,rgba(0,0,0,.22) 100%)}}
@@ -224,6 +225,7 @@ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const tl=gsap.timeline({{paused:true,defaults:{{ease:'power2.inOut'}}}});
 const CAM={{}};
+$$('.sq.flip').forEach(q=>gsap.set(q,{{scaleX:-1}}));  // 뒤집기는 GSAP 값으로 (CSS 로 두면 자세를 바꿀 때 180도 회전으로 읽혀 위아래가 뒤집힘)
 $$('.set').forEach(s=>{{CAM[s.id]={{x:+s.dataset.cx,y:+s.dataset.cy,s:+s.dataset.s}};}});
 function applyCam(){{ $$('.set').forEach(s=>{{ const c=CAM[s.id], pw=+s.dataset.pw, ph=+s.dataset.ph;
   // 판 밖이 보이지 않게 가두기
