@@ -254,8 +254,12 @@ def rss() -> list[Path]:
     import xml.etree.ElementTree as ET
     c = cfg()
     items = []
-    for s in (s for s in c["sources"] if s.get("rss")):
-        root = ET.fromstring(urllib.request.urlopen(urllib.request.Request(s["rss"], headers=UA), timeout=30).read())
+    for s in (s for s in c["sources"] if s.get("rss") and s.get("status", "subscribed") == "subscribed"):
+        try:   # 피드 하나가 막혀도(403·형식 오류) 나머지는 모음 — 2026-11-18 기술·사업 RSS 11개 추가
+            root = ET.fromstring(urllib.request.urlopen(urllib.request.Request(s["rss"], headers=UA), timeout=30).read())
+        except Exception as e:  # noqa: BLE001
+            print(f"[newsletters] RSS 건너뜀 {s['id']}: {str(e)[:80]}")
+            continue
         ns = {"a": "http://www.w3.org/2005/Atom"}
         ents = root.findall("a:entry", ns) or root.findall(".//item")
         for e in ents:
@@ -271,6 +275,8 @@ def rss() -> list[Path]:
                     t = parsedate_to_datetime(date)
                 except (TypeError, ValueError):
                     continue
+            if t.tzinfo is None:   # 시간대 없는 날짜 (디일렉 등 국내 피드) → 한국 시간으로 봄
+                t = t.replace(tzinfo=timezone(timedelta(hours=9)))
             if datetime.now(timezone.utc) - t > timedelta(days=2) or not title or not url:
                 continue
             items.append({"title": _clean(title), "url": url, "kind": kind(url, c), "reuse": reuse(url, c), "brand": route(title, s, c),
