@@ -193,16 +193,16 @@ def git_versions() -> dict[int, dict]:
     out: dict[int, dict] = {}
     try:
         log = subprocess.run(["git", "log", "--format=%H\t%ad\t%s", "--date=short", "--", "manual/VERSION"],
-                             cwd=ROOT, capture_output=True, text=True, timeout=30).stdout
+                             cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30).stdout
     except Exception:
         return out
-    for line in log.splitlines():
+    for line in (log or "").splitlines():   # Windows 기본 인코딩(cp949)으로 한국어 커밋 제목을 못 읽던 문제 (2026-11-18)
         sha, date, subj = line.split("\t", 2)
         try:
             v = int(subprocess.run(["git", "show", f"{sha}:manual/VERSION"], cwd=ROOT, capture_output=True,
-                                   text=True, timeout=10).stdout.strip())
+                                   text=True, encoding="utf-8", errors="replace", timeout=10).stdout.strip())
             files = subprocess.run(["git", "show", "--name-only", "--format=", sha], cwd=ROOT, capture_output=True,
-                                   text=True, timeout=10).stdout.split()
+                                   text=True, encoding="utf-8", errors="replace", timeout=10).stdout.split()
             if subprocess.run(["git", "rev-parse", "-q", "--verify", f"{sha}^"], cwd=ROOT, capture_output=True,
                               timeout=10).returncode != 0:
                 files = []   # 얕은 클론의 첫 커밋은 모든 파일을 '추가'로 보여 줘서 쓰지 않음

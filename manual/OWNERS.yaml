@@ -8,6 +8,7 @@
 lock:                          # 지금 매뉴얼을 고치고 있는 한 명 — 원격 브랜치 'locks' 의 manual-lock.json
   branch: locks
   file: manual-lock.json
+  auto_hours: 0.5              # 비어 있어서 명령이 자동으로 잡을 때 (2026-11-18 사용자: 비었는데 아무도 못 쓰는 일이 없게) — 짧게 잡고 저절로 풀림
   hours: 2                     # 짧게. 다 고치면 main 에 합치고 바로 release. 세션이 끊겨도 2시간 뒤 저절로 풀림 (길면 acquire 다시 = 연장)
 
 # 순서: acquire(잡자마자 main 합침) → 고치기 → push·PR 로 main 에 합치기 → release(main 에 안 합친 매뉴얼 변경이 있으면 거절)

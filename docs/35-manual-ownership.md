@@ -36,3 +36,11 @@ manual-lock release                 ← main 에 안 합친 매뉴얼 변경이 
 
 ## 보호 범위 바꾸기
 `manual/OWNERS.yaml` 의 `protected`·`open`. 저장소 전체를 한 명만 고치게 하려면 `protected` 에 `"**"` — 단, 매일 아침 시장 브리핑·30분마다 오는 SAVE 알림 커밋도 잠금을 기다리게 되어 병목이 생긴다.
+
+
+## 2026-11-18 바뀜 — 비어 있으면 바로 잡아 쓴다
+> 사용자: "저는 깃을 무조건 잠근다가 아니라 한번에 한명만 사용한다 입니다. 즉 깃이 비었는데도 아무도 사용 안하는데 락을 걸어서 깃을 사용하지 않는 상황이 이루어지지 않도록 해주세요"
+
+- 전: 잠금이 없으면 `review`·`feedback` 은 제안함으로만 가고, 보호 파일 편집·커밋은 막혔다 → 아무도 안 쓰는데 매뉴얼이 멈춰 있었다.
+- 지금: `governance.ensure_lock()` — 비어 있거나 만료됐으면 그 명령이 바로 잡는다(`OWNERS.yaml` 의 `lock.auto_hours`, 짧게 → 저절로 풀림). 다른 사람이 쓰는 중일 때만 요청·제안함.
+- 적용: `review`, `feedback`, `manual-bump`, Claude 편집 hook, git pre-commit.

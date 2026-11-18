@@ -1,0 +1,735 @@
+{
+ "_note": "2026-11-18 사용자: Codex 세션 영상은 전부 불합격, 화풍만 합격. 합격한 화풍 그림을 참조(ref)로 붙여 같은 그림체로 새 원화를 만든다. plate = 사람 없는 배경, sheet = 흰 배경 위 조각 여러 개(art-cut 으로 자름).",
+ "styles": {
+  "curiosity": {
+   "ref": [
+    "cel-ordinary.png",
+    "stop.png"
+   ],
+   "text": "Match the attached reference images exactly in art style: hand-painted Japanese casual cel animation look, soft painted backgrounds with visible gouache texture, clean thin dark-brown character line art, warm natural light, gentle muted palette."
+  },
+  "ai-guide": {
+   "ref": [
+    "product.png"
+   ],
+   "text": "Match the attached reference image exactly in art style: friendly flat vector product illustration, mint and teal palette with warm peach and navy accents, soft grain texture, rounded chunky shapes, subtle soft shadows, no outlines-heavy look."
+  },
+  "issues": {
+   "ref": [
+    "industry.png"
+   ],
+   "text": "Match the attached reference image exactly in art style: detailed editorial illustration with clean ink linework and flat warm color fills, slight paper grain, Korean news-magazine illustration feel, calm documentary tone."
+  }
+ },
+ "orders": [
+  {
+   "video": "curiosity",
+   "id": "paris",
+   "kind": "plate",
+   "prompt": "Wide establishing background, no people: a Paris street in 1877 at golden late afternoon, Haussmann-style cream stone buildings with iron balconies, a small bookshop and print shop with a stack of journals in the window, gas street lamps, cobblestones, a horse carriage far in the background, warm sky. Leave the lower middle of the street open for a character to stand."
+  },
+  {
+   "video": "curiosity",
+   "id": "janet",
+   "kind": "sheet",
+   "pieces": [
+    "janet_walk",
+    "janet_read",
+    "janet_think",
+    "janet_point"
+   ],
+   "prompt": "Character model sheet of the SAME man: a 54-year-old French philosopher in 1877, neat grey beard, kind thoughtful eyes, dark frock coat, waistcoat, holding a thin journal. Four full-body poses side by side, all facing slightly right, same scale: (1) walking mid-stride holding the journal at his side; (2) standing and reading the open journal; (3) standing, one hand on his chin, thinking with eyes looking up; (4) standing, raising one finger as if explaining an idea, slight smile."
+  },
+  {
+   "video": "curiosity",
+   "id": "props1",
+   "kind": "sheet",
+   "pieces": [
+    "journal",
+    "calpage",
+    "clockface",
+    "calendar"
+   ],
+   "prompt": "Prop sheet, four separate objects side by side: (1) a thin 19th-century French philosophy journal lying flat, cream paper cover with a simple ornamental border and no readable text; (2) a single torn-off paper calendar page curling slightly, no numbers; (3) a round wall clock with a wooden rim and a cream face with simple tick marks but NO hands; (4) a modern paper wall calendar showing a month grid with no readable text, hanging on a nail."
+  },
+  {
+   "video": "curiosity",
+   "id": "room",
+   "kind": "plate",
+   "prompt": "Background, no people: a cozy small modern Korean apartment room in mid-November at dusk, a desk by the window with a lamp, a mug and books, city lights outside, a bare wall area on the right side where a calendar and a clock will be placed later. Leave the left-center open for a person."
+  },
+  {
+   "video": "curiosity",
+   "id": "woman",
+   "kind": "sheet",
+   "pieces": [
+    "woman_look",
+    "woman_sigh",
+    "woman_turn",
+    "woman_flip"
+   ],
+   "prompt": "Character model sheet of the SAME young Korean woman in her early thirties, shoulder-length black hair loosely tied, navy knit sweater, jeans. Four full-body standing poses side by side, same scale: (1) looking up and to the right at a wall, hands by her side; (2) shoulders dropped, eyes half closed, sighing; (3) turning her head back over her shoulder with a puzzled face; (4) reaching up with her right hand as if to lift a calendar page."
+  },
+  {
+   "video": "curiosity",
+   "id": "summer",
+   "kind": "plate",
+   "prompt": "Extra wide panoramic background, no people: an endless Korean countryside summer in late July seen from a low hill, a dirt road winding from the foreground far to the distant horizon, a sparkling sea and small beach on the left, rice paddies and tall grass with wildflowers, a rural bus stop sign by the road in the middle distance, towering cumulus clouds, bright nostalgic light."
+  },
+  {
+   "video": "curiosity",
+   "id": "kid",
+   "kind": "sheet",
+   "pieces": [
+    "kid_run",
+    "kid_wow",
+    "kid_dragonfly",
+    "kid_wave"
+   ],
+   "prompt": "Character model sheet of the SAME 10-year-old Korean boy in summer: messy short black hair, sun-tanned, white t-shirt, blue shorts, red sneakers, a straw hat. Four full-body poses side by side, same scale: (1) running joyfully to the right; (2) standing amazed with mouth open, pointing ahead; (3) holding up one finger with a red dragonfly resting on it, eyes wide with delight; (4) standing with a small backpack, waving goodbye happily."
+  },
+  {
+   "video": "curiosity",
+   "id": "office",
+   "kind": "plate",
+   "prompt": "Background, no people: a plain open-plan Korean office in grey weekday morning light, rows of identical desks and monitors, a window with grey city buildings, fluorescent ceiling lights, a desk in the foreground center with an empty office chair and a monitor, a bare partition wall on the right for a calendar. Slightly desaturated, repetitive, quiet mood."
+  },
+  {
+   "video": "curiosity",
+   "id": "worker",
+   "kind": "sheet",
+   "pieces": [
+    "worker_type",
+    "worker_tired",
+    "worker_look",
+    "worker_rush"
+   ],
+   "prompt": "Character model sheet of the SAME Korean office worker in his late thirties: short black hair, white shirt with a loose grey tie, lanyard ID badge, tired eyes. Four full-body poses side by side, same scale: (1) sitting on an office chair typing on a keyboard (chair included); (2) standing, slumped shoulders, holding a coffee cup, tired; (3) standing, looking surprised at something on his right; (4) walking quickly to the right holding a laptop bag."
+  },
+  {
+   "video": "ai-guide",
+   "id": "airport",
+   "kind": "plate",
+   "prompt": "Wide background, no people: a bright airport boarding gate hall, a check-in counter with a closed retractable belt barrier in front of the boarding door, large windows with a parked airplane outside, departure board with blank panels, potted plants. Leave the floor in the lower middle open for a small character."
+  },
+  {
+   "video": "ai-guide",
+   "id": "agent",
+   "kind": "sheet",
+   "pieces": [
+    "agent_walk",
+    "agent_stop",
+    "agent_proud",
+    "agent_work"
+   ],
+   "prompt": "Character model sheet of the SAME small friendly AI assistant robot mascot: a rounded cream-white body like a smooth pebble, a dark navy screen face with two simple glowing mint eyes, small rounded arms and short legs, a tiny antenna with a peach light. Four full-body poses side by side, same scale: (1) walking happily to the right holding a paper plane ticket; (2) stopped, standing still and drooping, ticket lowered, eyes sad; (3) standing proudly holding a small green wallet up with both hands; (4) sitting and typing busily on a small laptop, little motion sparkles around it."
+  },
+  {
+   "video": "ai-guide",
+   "id": "aiprops",
+   "kind": "sheet",
+   "pieces": [
+    "ticket",
+    "card",
+    "wallet",
+    "padlock"
+   ],
+   "prompt": "Prop sheet, four separate objects side by side, same style: (1) a peach paper airline boarding ticket with a small airplane icon and barcode stripes; (2) a dark green credit card with a gold chip, no numbers; (3) an open dark green leather wallet; (4) a big round navy padlock, closed."
+  },
+  {
+   "video": "ai-guide",
+   "id": "street",
+   "kind": "plate",
+   "prompt": "Wide background, no people: a cheerful shopping street with five small shop fronts in a row, awnings in mint, peach and navy; the two shops on the left have open glass doors with warm light inside, the three shops on the right have their roll-down shutters closed. Sidewalk in front, sky above."
+  },
+  {
+   "video": "ai-guide",
+   "id": "night",
+   "kind": "plate",
+   "prompt": "Wide background: a calm bedroom-study at night, a person asleep in bed on the left under a blanket (seen from behind, face not visible), a desk on the right with an open laptop glowing mint, a window with a moon and city lights, a wall clock. Leave space on the desk next to the laptop for a small robot."
+  },
+  {
+   "video": "ai-guide",
+   "id": "hands",
+   "kind": "sheet",
+   "pieces": [
+    "hand_give",
+    "hand_phone",
+    "hand_stop",
+    "handshake"
+   ],
+   "prompt": "Sheet of four separate hand illustrations side by side in the same chunky flat style with navy suit cuffs: (1) a hand holding out a green wallet, offering it; (2) a hand holding a smartphone showing a blank glowing screen; (3) an open palm raised in a stop gesture; (4) a handshake between a human hand and a small rounded cream-white robot hand."
+  },
+  {
+   "video": "issues",
+   "id": "briefing",
+   "kind": "plate",
+   "prompt": "Wide background: a central bank press briefing room in Seoul, a wooden podium with microphones on the right, a large blank presentation screen on the wall, rows of reporters seen from behind with laptops and cameras in the foreground, neutral institutional interior, no logos, no text."
+  },
+  {
+   "video": "issues",
+   "id": "sky",
+   "kind": "plate",
+   "prompt": "Wide background, no people, no kites: a calm sky over the sea at early morning seen from a coastal hill in East Asia, layered islands and a distant harbor city, soft clouds, lots of open sky in the upper two thirds for objects to fly."
+  },
+  {
+   "video": "issues",
+   "id": "kites",
+   "kind": "sheet",
+   "pieces": [
+    "kite_a",
+    "kite_b",
+    "kite_c",
+    "kite_d"
+   ],
+   "prompt": "Sheet of four separate traditional East Asian dragon kites side by side, each with a long fluttering tail, same size and same craftsmanship but different color schemes: (1) deep blue and white; (2) crimson red and gold; (3) jade green and cream; (4) orange and black. No flags, no symbols, no text."
+  },
+  {
+   "video": "issues",
+   "id": "exchange",
+   "kind": "plate",
+   "prompt": "Wide background, no people: a bank currency exchange counter seen from the customer side, a clean counter top in the foreground with an empty tray, a teller window, a blank exchange rate board on the wall, soft daylight. Leave the counter top empty for objects."
+  },
+  {
+   "video": "issues",
+   "id": "money",
+   "kind": "sheet",
+   "pieces": [
+    "won",
+    "dollar",
+    "coins",
+    "receipt"
+   ],
+   "prompt": "Prop sheet of four separate objects side by side: (1) a neat tall stack of Korean won banknotes in green and yellow tones, no readable text or faces; (2) a neat small stack of US dollar banknotes in green, no readable text or faces; (3) a small pile of coins; (4) a paper bank receipt slip with blank lines, no readable text."
+  },
+  {
+   "video": "issues",
+   "id": "cities",
+   "kind": "plate",
+   "prompt": "Extra wide panoramic background at dusk, no text: on the left the Seoul skyline with the Han River, bridges, apartment towers and Namsan tower; on the right the Taipei skyline with the tall segmented Taipei 101 tower and mountains behind; the two cities blend in the middle across the sea under one continuous sky with a strong wind sweeping clouds."
+  },
+  {
+   "video": "issues",
+   "id": "fab",
+   "kind": "plate",
+   "prompt": "Wide background: inside a semiconductor memory chip factory clean room, long rows of wafer processing machines and overhead wafer transport rails, a few workers in white clean-room suits at a distance, yellow lighting, a strong sense of scale and depth."
+  },
+  {
+   "video": "issues",
+   "id": "chips",
+   "kind": "sheet",
+   "pieces": [
+    "dram",
+    "wafer",
+    "gpu",
+    "pricetag"
+   ],
+   "prompt": "Prop sheet of four separate objects side by side: (1) a green memory module stick with black chips; (2) a shiny silicon wafer with a grid of dies; (3) a large square AI accelerator chip package with a metal lid; (4) a paper price tag with a string, blank."
+  },
+  {
+   "video": "curiosity",
+   "id": "study",
+   "kind": "plate",
+   "prompt": "Background, no people: a philosopher's study in Paris in 1877 at dusk, a wooden writing desk with manuscripts, an inkwell and a quill, tall bookshelves, a window showing Paris rooftops and chimneys, warm oil lamp light. Leave the right half of the floor open for a standing person."
+  },
+  {
+   "video": "curiosity",
+   "id": "kitchen",
+   "kind": "plate",
+   "prompt": "Background, no people: a warm Korean family dining room in the evening, a long wooden table in the middle with nothing on it, a window with soft light, a few plants. Leave the table top empty and open space at both sides of the table for people."
+  },
+  {
+   "video": "curiosity",
+   "id": "road",
+   "kind": "plate",
+   "prompt": "Extra wide background, no people, no vehicles: a side view of a long straight countryside road running left to right across the frame, rice fields and distant mountains behind, guard rail, telephone poles, clear sky."
+  },
+  {
+   "video": "curiosity",
+   "id": "jamesroom",
+   "kind": "plate",
+   "prompt": "Background, no people: William James's study in Cambridge, Massachusetts in 1890, Victorian interior, a desk piled with thick manuscript pages, a green-shaded lamp, bookshelves, a window with snowy trees outside. Leave the left half of the floor open for a standing person."
+  },
+  {
+   "video": "curiosity",
+   "id": "lecture",
+   "kind": "plate",
+   "prompt": "Background seen from the back of the room: a modern lecture hall, rows of audience members seen from behind, a large blank projection screen at the front, a lectern. No text on the screen."
+  },
+  {
+   "video": "curiosity",
+   "id": "lab2005",
+   "kind": "plate",
+   "prompt": "Background, no people: a German university psychology office in 2005, a desk with a bulky CRT monitor, tall stacks of paper questionnaires and brown envelopes, filing cabinets, a window with a European city. Leave open floor space in the center for two people."
+  },
+  {
+   "video": "curiosity",
+   "id": "hall",
+   "kind": "plate",
+   "prompt": "Background, no people: a quiet community hall with a long low table facing the viewer, two empty chairs placed in front of the table facing the viewer, pencils and blank paper on the table, sunlight from tall windows."
+  },
+  {
+   "video": "curiosity",
+   "id": "busstop",
+   "kind": "plate",
+   "prompt": "Background, no people: a rural Korean bus stop in late morning, a wooden shelter with an empty bench, a bus stop sign, a two-lane road stretching to the right, trees, a quiet sleepy mood."
+  },
+  {
+   "video": "curiosity",
+   "id": "meeting",
+   "kind": "plate",
+   "prompt": "Background, no people: a dull corporate meeting room, a long table with empty chairs, a projector screen showing nothing, a plain wall clock, grey daylight, very still and boring mood."
+  },
+  {
+   "video": "curiosity",
+   "id": "alley",
+   "kind": "plate",
+   "prompt": "Background, no people: a sunny unfamiliar old European town, a winding cobblestone alley with colorful houses, flower pots, a confusing fork in the road, morning light."
+  },
+  {
+   "video": "curiosity",
+   "id": "market",
+   "kind": "plate",
+   "prompt": "Background, no people: a bustling foreign street food market at noon seen from the aisle, colorful stalls with steaming pots and hanging lanterns, empty aisle in the foreground for a person."
+  },
+  {
+   "video": "curiosity",
+   "id": "evening",
+   "kind": "plate",
+   "prompt": "Background, no people: a narrow unfamiliar alley at evening with warm lanterns, small shops, a cat on a step, blue dusk sky, empty path in the foreground."
+  },
+  {
+   "video": "curiosity",
+   "id": "autumn",
+   "kind": "plate",
+   "prompt": "Background, no people: a quiet Korean residential street in late November at dusk, golden ginkgo leaves on the ground, warm windows, a small path leading away into the distance."
+  },
+  {
+   "video": "curiosity",
+   "id": "man50",
+   "kind": "sheet",
+   "pieces": [
+    "man50_look",
+    "man50_sigh",
+    "man50_nod",
+    "man50_point"
+   ],
+   "prompt": "Character model sheet of the SAME Korean man aged 50: short greying hair, glasses, beige cardigan over a shirt, slacks. Four full-body standing poses side by side, same scale: (1) looking down and to the right with mild curiosity; (2) shoulders dropped, sighing; (3) nodding with a small smile, hands together; (4) pointing up with one finger, explaining."
+  },
+  {
+   "video": "curiosity",
+   "id": "teen",
+   "kind": "sheet",
+   "pieces": [
+    "teen_write",
+    "teen_think",
+    "teen_watch",
+    "teen_bored"
+   ],
+   "prompt": "Character model sheet of the SAME 14-year-old Korean middle-school girl in a navy school uniform with a cardigan, short black hair. Four full-body poses side by side, same scale: (1) sitting on a simple chair writing on a clipboard on her lap; (2) sitting on a simple chair, pencil on chin, looking up thinking; (3) standing, raising her wrist to check her wristwatch; (4) standing, bored, hands in pockets, looking to the right."
+  },
+  {
+   "video": "curiosity",
+   "id": "grandma",
+   "kind": "sheet",
+   "pieces": [
+    "gma_write",
+    "gma_think",
+    "gma_watch",
+    "gma_smile"
+   ],
+   "prompt": "Character model sheet of the SAME 94-year-old Korean grandmother, white hair in a bun, soft lavender cardigan, long skirt, a wooden cane. Four full-body poses side by side, same scale: (1) sitting on a simple chair writing on a clipboard on her lap with reading glasses; (2) sitting on a simple chair, looking up thinking, gentle face; (3) standing with her cane, checking a small wristwatch; (4) standing with her cane, smiling warmly."
+  },
+  {
+   "video": "curiosity",
+   "id": "james",
+   "kind": "sheet",
+   "pieces": [
+    "james_read",
+    "james_think",
+    "james_point",
+    "james_write"
+   ],
+   "prompt": "Character model sheet of the SAME man: the American psychologist William James in 1890, age 48, full brown beard, kind sharp eyes, tweed three-piece suit with a bow tie. Four full-body standing poses side by side, same scale, all facing slightly left: (1) reading a thick manuscript; (2) hand on chin, thinking; (3) raising one finger, gently making a point; (4) writing in a notebook held in one hand."
+  },
+  {
+   "video": "curiosity",
+   "id": "research",
+   "kind": "sheet",
+   "pieces": [
+    "res_m_stack",
+    "res_w_paper",
+    "res_m_surprise",
+    "res_w_point"
+   ],
+   "prompt": "Character sheet of TWO German researchers in 2005, same scale, four full-body standing poses side by side: (1) a man in his late thirties with short hair, rimless glasses and a grey sweater, carrying a tall stack of paper questionnaires; (2) a woman in her early thirties with a blonde ponytail and a blue blouse, holding up one questionnaire sheet; (3) the same man reading a printout with surprised raised eyebrows; (4) the same woman pointing at a sheet of paper in her other hand, explaining."
+  },
+  {
+   "video": "curiosity",
+   "id": "traveler",
+   "kind": "sheet",
+   "pieces": [
+    "tr_map",
+    "tr_eat",
+    "tr_walk",
+    "tr_album"
+   ],
+   "prompt": "Character model sheet of the SAME young Korean woman as in the attached character reference sheet (shoulder-length black hair loosely tied), now in travel clothes: light denim jacket, white t-shirt, beige trousers, a small backpack, sneakers. Four full-body poses side by side, same scale: (1) standing holding an unfolded paper map, confused, scratching her head; (2) standing eating street food from a skewer, delighted; (3) walking to the right, looking around with wonder; (4) sitting cross-legged holding an open photo album, smiling softly.",
+   "ref": [
+    "woman_sheet.png"
+   ]
+  },
+  {
+   "video": "curiosity",
+   "id": "cakes",
+   "kind": "sheet",
+   "pieces": [
+    "cake_small",
+    "cake_big",
+    "slice_thick",
+    "slice_thin"
+   ],
+   "prompt": "Prop sheet, four separate objects side by side, same style: (1) a small round two-layer cream cake with strawberries; (2) a very large tall many-layered cream cake with strawberries (the same cake design, much bigger); (3) one thick triangular slice of that cake lying on its side; (4) one very thin slice of that same cake, paper-thin, standing upright."
+  },
+  {
+   "video": "curiosity",
+   "id": "props2",
+   "kind": "sheet",
+   "pieces": [
+    "ruler",
+    "survey",
+    "envelope",
+    "boxempty"
+   ],
+   "prompt": "Prop sheet, four separate objects side by side: (1) a long old wooden measuring ruler with simple tick marks and no numbers; (2) a single paper questionnaire sheet with blank lines and empty checkboxes, no readable text; (3) a brown paper envelope; (4) an empty open cardboard box, dented and caving in."
+  },
+  {
+   "video": "curiosity",
+   "id": "props3",
+   "kind": "sheet",
+   "pieces": [
+    "arrow_out",
+    "arrow_in",
+    "pol_beach",
+    "pol_dragonfly"
+   ],
+   "prompt": "Prop sheet, four separate objects side by side: (1) a horizontal paper strip with one straight ink line whose two ends have outward-pointing fins like >-----<; (2) a horizontal paper strip of the same length with a straight ink line ending in arrowheads at both ends like <----->; (3) a polaroid photo of a boy running on a summer beach; (4) a polaroid photo of a red dragonfly on a child's fingertip in rice fields."
+  },
+  {
+   "video": "curiosity",
+   "id": "props4",
+   "kind": "sheet",
+   "pieces": [
+    "pol_bus",
+    "pol_office",
+    "album",
+    "pol_alley"
+   ],
+   "prompt": "Prop sheet, four separate objects side by side: (1) a polaroid photo of a boy waving from a rural bus window; (2) a polaroid photo of a plain grey office desk with a monitor; (3) an open empty photo album lying flat with cream pages; (4) a polaroid photo of a colorful cobblestone alley in a foreign town."
+  },
+  {
+   "video": "curiosity",
+   "id": "vehicles",
+   "kind": "sheet",
+   "pieces": [
+    "bike",
+    "car"
+   ],
+   "prompt": "Prop sheet, two separate vehicles side by side, both seen exactly from the side facing right: (1) a young man in his twenties riding an old bicycle leisurely; (2) a small old-fashioned car driven fast by a man in his sixties with grey hair."
+  },
+  {
+   "video": "ai-guide",
+   "id": "cardlab",
+   "kind": "plate",
+   "prompt": "Wide background, no people: a friendly card company token workshop, a mint-colored room with a big machine that has an input slot on the left and an output tray on the right, conveyor belt, small lights and pipes. Leave space in front of the machine."
+  },
+  {
+   "video": "ai-guide",
+   "id": "hotel",
+   "kind": "plate",
+   "prompt": "Wide background, no people: a cheerful hotel front desk, a counter with a small key card tray, room key cabinet behind, potted plants, warm lobby light."
+  },
+  {
+   "video": "ai-guide",
+   "id": "gates",
+   "kind": "plate",
+   "prompt": "Wide background, no people: a pathway leading to an entrance with four small turnstile gates in a row, each gate with a little blank sign post, velvet ropes."
+  },
+  {
+   "video": "ai-guide",
+   "id": "shopwindow",
+   "kind": "plate",
+   "prompt": "Wide background, no people: a single shop front seen from outside on the sidewalk, a big glass display window with shelves of products, the cash counter visible inside, the door closed."
+  },
+  {
+   "video": "ai-guide",
+   "id": "shopopen",
+   "kind": "plate",
+   "prompt": "Wide background, no people: a shop with its door wide open, a welcome mat, warm light inside, shelves of products, sidewalk in front."
+  },
+  {
+   "video": "ai-guide",
+   "id": "mall",
+   "kind": "plate",
+   "prompt": "Wide background, no people: a large bright shopping mall atrium with dozens of small storefronts on several floors, each with a dark doorway. Symmetrical, lots of doors."
+  },
+  {
+   "video": "ai-guide",
+   "id": "doorstep",
+   "kind": "plate",
+   "prompt": "Wide background, no people: an apartment front door at night, a doorstep with space for a parcel, a small lamp, a mailbox on the wall."
+  },
+  {
+   "video": "ai-guide",
+   "id": "locker",
+   "kind": "plate",
+   "prompt": "Wide background, no people: a tidy room with a wall of small safe-deposit lockers, one locker door slightly open with a soft glow, a counter in front."
+  },
+  {
+   "video": "ai-guide",
+   "id": "team",
+   "kind": "plate",
+   "prompt": "Wide background, no people: a small startup team office with a big table, several monitors, sticky notes on a glass wall, plants; daytime."
+  },
+  {
+   "video": "ai-guide",
+   "id": "court",
+   "kind": "plate",
+   "prompt": "Wide background, no people: a classical courthouse exterior with columns and stairs, a clear sky."
+  },
+  {
+   "video": "ai-guide",
+   "id": "bank",
+   "kind": "plate",
+   "prompt": "Wide background, no people: a modern bank and brokerage building entrance with glass doors closed, a security turnstile inside visible."
+  },
+  {
+   "video": "ai-guide",
+   "id": "crossroad",
+   "kind": "plate",
+   "prompt": "Wide background, no people: a crossroads in a small town with a wooden signpost in the middle holding three blank arrow signs pointing to three different paths: one to a shop, one to a tall tech office tower, one to a home."
+  },
+  {
+   "video": "ai-guide",
+   "id": "airport2",
+   "kind": "plate",
+   "prompt": "Wide background, no people: an airport concourse with three boarding gates side by side; the left two gates have open doors with green lights, the right gate has a closed barrier with a red light."
+  },
+  {
+   "video": "ai-guide",
+   "id": "aprops2",
+   "kind": "sheet",
+   "pieces": [
+    "token",
+    "keycard",
+    "housekey",
+    "phone_fp"
+   ],
+   "prompt": "Prop sheet, four separate objects side by side: (1) a shiny mint payment token card with a sparkle and a small clock icon, no numbers; (2) a hotel room key card, peach with a wave pattern; (3) a brass house key on a ring; (4) a smartphone showing a large glowing fingerprint on its screen."
+  },
+  {
+   "video": "ai-guide",
+   "id": "aprops3",
+   "kind": "sheet",
+   "pieces": [
+    "cart",
+    "parcel",
+    "mail",
+    "alarm"
+   ],
+   "prompt": "Prop sheet, four separate objects side by side: (1) a shopping cart full of products; (2) a cardboard parcel box with tape; (3) a white envelope with a red seal; (4) a round alarm clock ringing."
+  },
+  {
+   "video": "ai-guide",
+   "id": "aprops4",
+   "kind": "sheet",
+   "pieces": [
+    "perm_view",
+    "perm_buy",
+    "shield",
+    "signin"
+   ],
+   "prompt": "Prop sheet, four separate objects side by side: (1) a round permission badge showing an eye symbol; (2) a round permission badge showing a shopping cart symbol; (3) a navy safety shield with a check mark; (4) a generic sign-in button card with a simple key symbol, no brand, no text."
+  },
+  {
+   "video": "ai-guide",
+   "id": "pieces",
+   "kind": "sheet",
+   "pieces": [
+    "pc_wallet",
+    "pc_talk",
+    "pc_always",
+    "pc_empty"
+   ],
+   "prompt": "Prop sheet, four big rounded jigsaw puzzle pieces side by side: (1) mint piece with a wallet symbol; (2) peach piece with a speech bubble symbol; (3) navy piece with a moon-and-clock symbol; (4) a dashed outline of an empty piece with a question mark, the same shape."
+  },
+  {
+   "video": "ai-guide",
+   "id": "owner",
+   "kind": "sheet",
+   "pieces": [
+    "own_welcome",
+    "own_refuse",
+    "own_shake",
+    "own_think"
+   ],
+   "prompt": "Character model sheet of the SAME friendly shop owner, a middle-aged woman with a mint apron and rolled sleeves. Four full-body standing poses side by side, same scale: (1) arms open in welcome; (2) arms crossed refusing, frowning; (3) reaching out a hand to shake; (4) hand on chin, thinking."
+  },
+  {
+   "video": "ai-guide",
+   "id": "user",
+   "kind": "sheet",
+   "pieces": [
+    "usr_phone",
+    "usr_approve",
+    "usr_relax",
+    "usr_worry"
+   ],
+   "prompt": "Character model sheet of the SAME young customer, a man in his twenties with a peach hoodie. Four full-body standing poses side by side, same scale: (1) looking at his smartphone; (2) pressing his thumb on the phone to approve, satisfied; (3) relaxed, hands behind his head; (4) worried, hand on cheek, looking at his phone."
+  },
+  {
+   "video": "issues",
+   "id": "foundry",
+   "kind": "plate",
+   "prompt": "Wide background: a huge semiconductor foundry campus in Hsinchu, Taiwan, modern fab buildings, cooling towers, palm trees, clean roads, a few workers walking, morning light, no logos."
+  },
+  {
+   "video": "issues",
+   "id": "server",
+   "kind": "plate",
+   "prompt": "Wide background: a server assembly factory line, workers in blue uniforms assembling AI server racks on long conveyor lines, bright, orderly, sense of volume."
+  },
+  {
+   "video": "issues",
+   "id": "ricemarket",
+   "kind": "plate",
+   "prompt": "Wide background, no people: a traditional Korean outdoor market lane, an empty rice stall with open sacks of rice and a blank price board, awnings, morning light. Leave the stall front open for a farmer."
+  },
+  {
+   "video": "issues",
+   "id": "restaurant",
+   "kind": "plate",
+   "prompt": "Wide background, no people: the back door of a busy large restaurant kitchen, a loading area with stacked rice sacks, a delivery dolly, warm kitchen light inside, steam."
+  },
+  {
+   "video": "issues",
+   "id": "port",
+   "kind": "plate",
+   "prompt": "Wide background: the Kaohsiung container port in Taiwan, huge container ships, cranes loading containers, sunny day, sense of record exports."
+  },
+  {
+   "video": "issues",
+   "id": "bok",
+   "kind": "plate",
+   "prompt": "Wide background: a classic stone central bank headquarters building in Seoul with a domed roof, plaza in front, autumn trees, no text."
+  },
+  {
+   "video": "issues",
+   "id": "taipei_street",
+   "kind": "plate",
+   "prompt": "Wide background: a Taipei street with shining new glass tech office towers rising behind on the right, and an old row of small shops in the foreground left with half-closed shutters, scooters parked."
+  },
+  {
+   "video": "issues",
+   "id": "shiftgate",
+   "kind": "plate",
+   "prompt": "Wide background: a factory gate in Taiwan at shift change in the evening, many workers in uniforms walking out through the gate toward food stalls, lights on."
+  },
+  {
+   "video": "issues",
+   "id": "neighborhood",
+   "kind": "plate",
+   "prompt": "Wide background: a Korean neighborhood street at evening, small restaurants and shops with warm light, a few people walking, factory and office buildings visible in the distance."
+  },
+  {
+   "video": "issues",
+   "id": "hbm",
+   "kind": "plate",
+   "prompt": "Wide background: a clean technical illustration of a semiconductor package on a board seen in a 3/4 isometric view: a large AI processor chip in the center and several empty square pads beside it where memory stacks will go, soft studio lighting, no text."
+  },
+  {
+   "video": "issues",
+   "id": "hynix",
+   "kind": "plate",
+   "prompt": "Wide background: a large Korean memory chip factory complex at dusk, fab buildings with lit windows, a highway, no logos, no text."
+  },
+  {
+   "video": "issues",
+   "id": "fork",
+   "kind": "plate",
+   "prompt": "Wide background, no people: a road fork on a hill at golden hour, two paths going in different directions with two blank wooden signposts, wide sky."
+  },
+  {
+   "video": "issues",
+   "id": "living",
+   "kind": "plate",
+   "prompt": "Wide background, no people: a Korean apartment living room at night, a TV on the wall with a blank glowing screen, a sofa, a coffee table."
+  },
+  {
+   "video": "issues",
+   "id": "wall",
+   "kind": "plate",
+   "prompt": "Wide background: a long factory wall at evening seen from the neighborhood side, warm light spilling over the top of the wall from the factory, the darker quiet residential street outside, a few shops with dim lights."
+  },
+  {
+   "video": "issues",
+   "id": "farmers",
+   "kind": "sheet",
+   "pieces": [
+    "farmer_sell",
+    "farmer_shake",
+    "farmer_cart",
+    "chef"
+   ],
+   "prompt": "Character sheet, same scale, four full-body standing poses side by side: (1) a Korean farmer in his fifties with a straw hat and work vest, calling out to sell rice with one hand raised; (2) the same farmer reaching out to shake hands, holding a contract paper; (3) the same farmer pushing a hand cart loaded with rice sacks; (4) a restaurant chef in white uniform with folded arms, smiling."
+  },
+  {
+   "video": "issues",
+   "id": "iprops2",
+   "kind": "sheet",
+   "pieces": [
+    "scale",
+    "ricesack",
+    "contract",
+    "magnifier"
+   ],
+   "prompt": "Prop sheet, four separate objects side by side: (1) an old brass balance scale with two empty pans, level; (2) a full rice sack; (3) a thick stack of contract papers bound with a clip and a red seal stamp, no readable text; (4) a large magnifying glass."
+  },
+  {
+   "video": "issues",
+   "id": "iprops3",
+   "kind": "sheet",
+   "pieces": [
+    "hbmstack",
+    "container",
+    "rack",
+    "coinsack"
+   ],
+   "prompt": "Prop sheet, four separate objects side by side: (1) a single HBM memory stack: eight thin silicon dies stacked like a tiny tower on a base, visible layers; (2) a shipping container; (3) a black AI server rack; (4) a small sack of coins."
+  },
+  {
+   "video": "issues",
+   "id": "crowd",
+   "kind": "sheet",
+   "pieces": [
+    "fig_worker",
+    "fig_a",
+    "fig_b",
+    "fig_c"
+   ],
+   "prompt": "Sheet of four small separate standing people figures side by side, all the same height, front view: (1) a factory worker in a bright blue uniform and white helmet; (2) an ordinary person in a grey coat; (3) an ordinary person in a brown jacket; (4) an ordinary person in a dark green sweater."
+  },
+  {
+   "video": "issues",
+   "id": "iwho",
+   "kind": "sheet",
+   "pieces": [
+    "clerk_phone",
+    "owner_cook",
+    "worker_tw",
+    "analyst"
+   ],
+   "prompt": "Character sheet, same scale, four full-body standing poses side by side: (1) a Korean office worker woman in her thirties looking at her salary on her phone, puzzled; (2) a Korean neighborhood restaurant owner in an apron, waiting at the counter; (3) a Taiwanese tech factory worker in a clean-room suit with the hood down, smiling; (4) an analyst in a suit holding a report, explaining."
+  }
+ ]
+}
