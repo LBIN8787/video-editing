@@ -42,9 +42,16 @@ def one(o: dict, style: dict, out: Path, refs: Path) -> str:
             cmd += ["-i", str((out / o["video"] / r).resolve())]
         for attempt in range(2):   # 한 장이 실패해도 나머지는 계속 (한 번 다시 시도)
             try:
-                subprocess.run(cmd, input=task, text=True, encoding="utf-8", check=True, timeout=1200,
-                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                break
+                r = subprocess.run(cmd, input=task, text=True, encoding="utf-8", errors="replace", check=True, timeout=1200,
+                                   capture_output=True)
+                # Codex 쪽 로컬 도구가 막혀 저장을 못 해도 그림은 ~/.codex/generated_images 에 남는다 → 출력의 경로를 읽어 직접 복사
+                if not png.exists():
+                    import re
+                    hits = re.findall(r"[A-Za-z]:[^\s()\[\]]*generated_images[^\s()\[\]]*?\.png", (r.stdout or "") + (r.stderr or ""))
+                    if hits and Path(hits[-1]).exists():
+                        shutil.copy2(hits[-1], png)
+                if png.exists():
+                    break
             except Exception as e:
                 if attempt:
                     return f"FAIL {o['id']}: {e}"

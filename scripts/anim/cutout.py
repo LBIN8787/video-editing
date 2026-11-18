@@ -13,7 +13,7 @@ import numpy as np
 
 
 def cut(sheet: Path, outdir: Path, names: list[str], tol: int = 26) -> list[Path]:
-    a = cv2.imread(str(sheet), cv2.IMREAD_UNCHANGED)
+    a = cv2.imdecode(np.fromfile(str(sheet), np.uint8), cv2.IMREAD_UNCHANGED)   # 한글 경로도 읽히게
     if a.shape[2] == 3:
         a = cv2.cvtColor(a, cv2.COLOR_BGR2BGRA)
     rgb = a[..., :3].astype(int)
@@ -52,6 +52,13 @@ def cut(sheet: Path, outdir: Path, names: list[str], tol: int = 26) -> list[Path
         m = [s for s in m if s[1] - s[0] > 40]
         if len(m) == len(names):
             break
+    colsum = fg.sum(axis=0)
+    while len(m) < len(names):   # 붙어 있는 두 조각: 가장 넓은 덩어리를 가운데쯤 가장 얇은 세로줄에서 나눔
+        w = max(range(len(m)), key=lambda i: m[i][1] - m[i][0])
+        x0, x1 = m[w]
+        lo, hi = x0 + (x1 - x0) * 3 // 10, x0 + (x1 - x0) * 7 // 10
+        sx = lo + int(np.argmin(colsum[lo:hi]))
+        m[w:w + 1] = [[x0, sx], [sx, x1]]
     if len(m) != len(names):
         raise RuntimeError(f"조각 {len(m)}개 ≠ 이름 {len(names)}개: {sheet}")
     soft = cv2.GaussianBlur(fg.astype(np.float32), (0, 0), 0.8)
@@ -64,7 +71,7 @@ def cut(sheet: Path, outdir: Path, names: list[str], tol: int = 26) -> list[Path
         ys = np.where(fg[:, x0:x1].any(axis=1))[0]
         y0, y1 = max(0, ys[0] - 6), min(a.shape[0], ys[-1] + 6)
         p = outdir / f"{nm}.png"
-        cv2.imwrite(str(p), out[y0:y1, max(0, x0 - 6):x1 + 6])
+        cv2.imencode('.png', out[y0:y1, max(0, x0 - 6):x1 + 6])[1].tofile(str(p))
         res.append(p)
     return res
 
