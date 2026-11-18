@@ -260,6 +260,21 @@ def to_md(b: dict) -> str:
     return "\n".join(L) + "\n"
 
 
+
+def _source_backlog() -> str:
+    """⑧ 소스 영상 대기 목록 (manual/09 §3-5 v45, 2026-11-18 사용자) — 당일 못 넣은 원본 발언 영상, 같은 사건이 다시 나오면 넣기."""
+    f = Path(__file__).resolve().parents[2] / "inbox" / "research" / "source-backlog.md"
+    if not f.exists():
+        return ""
+    rows = [ln for ln in f.read_text(encoding="utf-8").splitlines()
+            if ln.startswith("|") and ln.rstrip().endswith("| 대기 |") or (ln.startswith("|") and "| 대기 (" in ln)]
+    if not rows:
+        return ""
+    out = "\n## ⑧ 소스 영상 대기 목록 (inbox/research/source-backlog.md) — 오늘 같은 사건·인물을 다루면 원본을 찾아 bite 로 넣기\n"
+    out += "| 처음 나온 회차 | 누가 | 무엇 (쓸 문장) | 원본 후보 (공식) | 다시 다룰 때 | 받는 길 | 상태 |\n|---|---|---|---|---|---|---|\n"
+    return out + "\n".join(rows) + "\n"
+
+
 def run(brand: str = "market", day: str = "", project: str = "") -> Path:
     from ..project import Project
     day = day or datetime.now(KST).date().isoformat()   # 시장마다 '장이 끝난 가장 최근 거래일'을 씀 (_closed)
@@ -285,6 +300,7 @@ def run(brand: str = "market", day: str = "", project: str = "") -> Path:
         md += newsletters.section(("market",) if brand == "market" else ("issues",), day)
     except Exception as e:  # noqa: BLE001 — 뉴스레터가 없어도 브리핑은 나와야 함
         md += f"\n## ⑦ 뉴스레터 화제\n(읽기 실패: {e})\n"
+    md += _source_backlog()
     (rdir / "daily_brief.md").write_text(md, encoding="utf-8")
     print(f"[daily] → {rdir / 'daily_brief.md'}")
     if brand == "market":   # SAVE(오선) 소식은 기본 확인 (2026-11-14 사용자) — 사람이 앱/웹에서 보고 표를 채움 (savecheck.py)
