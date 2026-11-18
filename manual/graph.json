@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-18T06:35:15",
- "source_hash": "aa224e50e2e2",
+ "generated": "2026-11-18T06:37:24",
+ "source_hash": "f9631b345471",
  "audit": {
   "date": "2026-11-17T13:22",
   "counts": {
@@ -298,8 +298,8 @@
   ]
  },
  "stats": {
-  "manual_version": 45,
-  "versions": 45,
+  "manual_version": 46,
+  "versions": 46,
   "reviews": 33,
   "rejects": 23,
   "passes": 10,
@@ -309,20 +309,20 @@
   "sections": 157,
   "must": 26,
   "auto": 41,
-  "intents": 75,
+  "intents": 77,
   "misaligned": 0,
   "intents_reviewed": 3,
   "conflicts": 0,
   "code": 78,
   "terms": 119,
-  "bans": 136,
-  "feedback": 21,
+  "bans": 137,
+  "feedback": 23,
   "topics": 4,
   "episodes": 32,
   "main_situations": 16,
   "tiers": {
    "principle": 49,
-   "standard": 98,
+   "standard": 99,
    "style": 31,
    "trial": 7
   },
@@ -1900,6 +1900,25 @@
   },
   {
    "section": "sec:09§2-2",
+   "text": "얼마나 자주: 기본 주 1편 이상(신호가 있는 날 18:00 칸, 없으면 그 주 가장 큰 변화로) — 큰 변화가 생기면 그날 바로. 이름 <YYYYMMDD>-market-tech-<주제>(기술) · <YYYYMMDD>-market-biz-<주제>(사업) → 재생목록 '기술과 미래' · '사업 분석'. 아침 브리핑을 대신하지 않음(§2-1 우선순위).",
+   "themes": [
+    "depth"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:7224ec0d",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§2-2",
    "text": "어떻게: 일정마다 \"왜 중요한가 → 지난번 숫자·회사 가이던스(전망) → 무엇을 보면 되나(볼 숫자 1~2개) → 결과가 위/아래면 무엇으로 이어지나(해석) → 한국 시장 연결\". 시장 컨센서스 숫자는 매체마다 다르면 쓰지 않고 회사가 낸 가이던스를 기준으로.",
    "themes": [
     "length"
@@ -3102,16 +3121,17 @@
    "key": "09",
    "file": "manual/09-market-daily.md",
    "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13 · v36 인사이트·영상 소스 · v42 기술 분석·CEO 소식 2026-11-17)",
-   "lines": 315,
+   "lines": 325,
    "versions": [
     35,
     37,
     38,
     40,
     41,
-    43
+    43,
+    45
    ],
-   "last_version": 43
+   "last_version": 45
   },
   {
    "id": "doc:10",
@@ -4754,7 +4774,7 @@
    "label": "기술 분석·기술의 미래 전망",
    "title": "2-2. 기술 분석·기술의 미래 전망 (v42, 2026-11-17 사용자)",
    "line": 71,
-   "end": 101,
+   "end": 111,
    "tag_version": 42,
    "versions": [
     42
@@ -4769,8 +4789,8 @@
    "level": 2,
    "label": "조사 — 원인은 1차 출처로",
    "title": "3. 조사 — 원인은 1차 출처로",
-   "line": 102,
-   "end": 102,
+   "line": 112,
+   "end": 112,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4783,8 +4803,8 @@
    "level": 3,
    "label": "SAVE(오선) 소식은 기본으로 확인 (2026-11-14 사용자 요청)",
    "title": "3-0. SAVE(오선) 소식은 기본으로 확인 (2026-11-14 사용자 요청)",
-   "line": 103,
-   "end": 113,
+   "line": 113,
+   "end": 123,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4797,8 +4817,8 @@
    "level": 3,
    "label": "뉴스레터 화제도 같은 '단서' 자리 (2026-11-16 사용자 승인, docs/36)",
    "title": "3-0-1. 뉴스레터 화제도 같은 '단서' 자리 (2026-11-16 사용자 승인, docs/36)",
-   "line": 114,
-   "end": 121,
+   "line": 124,
+   "end": 131,
    "tag_version": null,
    "versions": [
     35
@@ -4813,8 +4833,8 @@
    "level": 3,
    "label": "원인 종류별 어디서 확인하나",
    "title": "3-1. 원인 종류별 어디서 확인하나",
-   "line": 122,
-   "end": 133,
+   "line": 132,
+   "end": 143,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4827,8 +4847,8 @@
    "level": 3,
    "label": "팩트시트 쓰는 법 (`01_research/factsheet.md`)",
    "title": "3-2. 팩트시트 쓰는 법 (`01_research/factsheet.md`)",
-   "line": 134,
-   "end": 139,
+   "line": 144,
+   "end": 149,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4841,8 +4861,8 @@
    "level": 3,
    "label": "데이터 함정 (실제로 겪은 것)",
    "title": "3-3. 데이터 함정 (실제로 겪은 것)",
-   "line": 140,
-   "end": 148,
+   "line": 150,
+   "end": 158,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4855,8 +4875,8 @@
    "level": 3,
    "label": "사람·매체의 인사이트 — 사실과 나눠서, 넉넉하게",
    "title": "3-4. 사람·매체의 인사이트 — 사실과 나눠서, 넉넉하게 (v36, 2026-11-17 사용자 요청)",
-   "line": 149,
-   "end": 181,
+   "line": 159,
+   "end": 191,
    "tag_version": 36,
    "versions": [
     36
@@ -4877,8 +4897,8 @@
    "level": 3,
    "label": "매체·인물의 인터뷰·방송을 영상 소스로",
    "title": "3-5. 매체·인물의 인터뷰·방송을 영상 소스로 (v36, 2026-11-17 사용자 요청)",
-   "line": 182,
-   "end": 204,
+   "line": 192,
+   "end": 214,
    "tag_version": 36,
    "versions": [
     36
@@ -4897,8 +4917,8 @@
    "level": 2,
    "label": "대본 — 브리핑 (10~12분, 20~26장면)",
    "title": "4. 대본 — 브리핑 (10~12분, 20~26장면)",
-   "line": 205,
-   "end": 222,
+   "line": 215,
+   "end": 232,
    "tag_version": null,
    "versions": [
     34
@@ -4928,8 +4948,8 @@
    "level": 2,
    "label": "대본 — 심층 (12분~, 길이는 자료·인사이트의 양이 정함)",
    "title": "5. 대본 — 심층 (12분~, 길이는 자료·인사이트의 양이 정함)",
-   "line": 223,
-   "end": 230,
+   "line": 233,
+   "end": 240,
    "tag_version": null,
    "versions": [
     26,
@@ -4950,8 +4970,8 @@
    "level": 2,
    "label": "화면 문법 (시장 카테고리 개성, `05 §0-7`)",
    "title": "6. 화면 문법 (시장 카테고리 개성, `05 §0-7`)",
-   "line": 231,
-   "end": 245,
+   "line": 241,
+   "end": 255,
    "tag_version": null,
    "versions": [
     27,
@@ -4982,8 +5002,8 @@
    "level": 2,
    "label": "제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
    "title": "7. 제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
-   "line": 246,
-   "end": 251,
+   "line": 256,
+   "end": 261,
    "tag_version": null,
    "versions": [
     27
@@ -5001,8 +5021,8 @@
    "level": 2,
    "label": "렌더 전 점검",
    "title": "8. 렌더 전 점검",
-   "line": 252,
-   "end": 254,
+   "line": 262,
+   "end": 264,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5015,8 +5035,8 @@
    "level": 2,
    "label": "렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
    "title": "9. 렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
-   "line": 255,
-   "end": 260,
+   "line": 265,
+   "end": 270,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5029,8 +5049,8 @@
    "level": 2,
    "label": "업로드 (유튜브 스튜디오)",
    "title": "10. 업로드 (유튜브 스튜디오)",
-   "line": 261,
-   "end": 271,
+   "line": 271,
+   "end": 281,
    "tag_version": null,
    "versions": [
     34
@@ -5045,8 +5065,8 @@
    "level": 2,
    "label": "기록·되돌아보기",
    "title": "11. 기록·되돌아보기",
-   "line": 272,
-   "end": 275,
+   "line": 282,
+   "end": 285,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5059,8 +5079,8 @@
    "level": 2,
    "label": "예외 대응",
    "title": "12. 예외 대응",
-   "line": 276,
-   "end": 285,
+   "line": 286,
+   "end": 295,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5073,8 +5093,8 @@
    "level": 2,
    "label": "법·정책",
    "title": "13. 법·정책",
-   "line": 286,
-   "end": 295,
+   "line": 296,
+   "end": 305,
    "tag_version": null,
    "versions": [
     34
@@ -5082,43 +5102,43 @@
    "last_version": 34
   },
   {
-   "id": "sec:09§h296",
+   "id": "sec:09§h306",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h296",
+   "num": "h306",
    "level": 2,
    "label": "목소리 (2026-11-13 결정)",
    "title": "목소리 (2026-11-13 결정)",
-   "line": 296,
-   "end": 303,
+   "line": 306,
+   "end": 313,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h304",
+   "id": "sec:09§h314",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h304",
+   "num": "h314",
    "level": 2,
    "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
    "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
-   "line": 304,
-   "end": 309,
+   "line": 314,
+   "end": 319,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h310",
+   "id": "sec:09§h320",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h310",
+   "num": "h320",
    "level": 2,
    "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
    "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
-   "line": 310,
-   "end": 315,
+   "line": 320,
+   "end": 325,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9604,7 +9624,27 @@
    "label": "v45",
    "summary": "시장 채널 원본 발언 영상: A(공식 원본을 클라우드가 매 회 먼저 받음, 등록·봇 확인은 대기 목록) 기본 + 큰 내용은 C(원본 해설 편 따로, PC 원본) · 당일 못 넣은 원본은 다음 회차에 · daily_brief ⑧ 대기 목록",
    "applied": [],
-   "themes": []
+   "themes": [],
+   "commit": {
+    "sha": "13b755c979d9eeb61f1be5919fa90899c5e83b08",
+    "subject": "매뉴얼 v45: 시장 채널 원본 발언 영상 — A(공식 원본을 매 회 먼저 받기) 기본 + 큰 내용은 C(원본 해설 편 따로) · daily_brief ⑧ 소스 영상 대기 목록",
+    "date": "2026-11-18",
+    "other_files": [
+     "ytflow/stages/daily.py"
+    ]
+   }
+  },
+  {
+   "id": "ver:46",
+   "kind": "version",
+   "v": 46,
+   "date": "2026-11-18",
+   "label": "v46",
+   "summary": "시장 채널 기술·사업 분석 편(§2-2-1): 사업 분석 추가, '눈에 띄는 변화' 신호 6가지, 주 1편 이상(-market-tech-·-market-biz-, 재생목록 '사업 분석')",
+   "applied": [],
+   "themes": [
+    "depth"
+   ]
   },
   {
    "id": "rev:1",
@@ -16417,6 +16457,12 @@
      "by": ""
     },
     {
+     "ref": "doc:09",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
      "ref": "code:ytflow/stages/daily.py:265",
      "status": "unreviewed",
      "note": "",
@@ -16453,6 +16499,34 @@
     "background"
    ],
    "ann_key": "intent:978a840f",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:afdf4214",
+   "kind": "intent",
+   "quote": "그리고 내가 기술관련 테크관련이나 신 사업 등등 이런 변화에 대해서도 알려달라 했잖아 이런 주제들도 영상으로 만들어줘 기술분석 사업분석 이런거 말이야 관련한 뉴스레터도 조사하고 더 구독할게 있다면 구독하려고",
+   "label": "그리고 내가 기술관련 테크관련이나 신 사업 등등 이런 변화에 대해서도 알려달라 했잖아 이런 주제들도 영상으로",
+   "versions": [],
+   "date": "2026-11-18",
+   "sources": [
+    {
+     "ref": "fb:22",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:afdf4214"
+   ],
+   "themes": [
+    "depth"
+   ],
+   "ann_key": "intent:afdf4214",
    "meaning": "",
    "not_meant": [],
    "note": "",
@@ -16668,6 +16742,32 @@
      "by": ""
     }
    ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:f27a31f5",
+   "kind": "intent",
+   "quote": "산업 기술 등에서 눈에 띄는 변화나 혁명 새로운 테크기술 등등 이런게 있다면 주목하고싶거든",
+   "label": "산업 기술 등에서 눈에 띄는 변화나 혁명 새로운 테크기술 등등 이런게 있다면 주목하고싶거든",
+   "versions": [],
+   "date": "2026-11-18",
+   "sources": [
+    {
+     "ref": "fb:23",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:f27a31f5"
+   ],
+   "themes": [],
+   "ann_key": "intent:f27a31f5",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
    "status": "unreviewed",
    "annotated": false
   },
@@ -22065,7 +22165,7 @@
     "sec:04§0-4",
     "sec:05§0-4",
     "sec:09§6",
-    "sec:09§h310",
+    "sec:09§h320",
     "sec:README§2-5",
     "sec:README§3-1",
     "ver:27",
@@ -22388,7 +22488,7 @@
     "sec:05§1",
     "sec:06§G5",
     "sec:06§G6",
-    "sec:09§h310",
+    "sec:09§h320",
     "sec:README§0",
     "sec:README§2",
     "ver:3",
@@ -22964,6 +23064,60 @@
    "scope": "standard",
    "intent": "intent:7316f63d",
    "tier_key": "fb:7316f63d",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:22",
+   "kind": "feedback",
+   "date": "2026-11-18",
+   "quote": "그리고 내가 기술관련 테크관련이나 신 사업 등등 이런 변화에 대해서도 알려달라 했잖아 이런 주제들도 영상으로 만들어줘 기술분석 사업분석 이런거 말이야 관련한 뉴스레터도 조사하고 더 구독할게 있다면 구독하려고",
+   "label": "그리고 내가 기술관련 테크관련이나 신 사업 등등 이런 변화에 대해서도 알려달라 했잖아 이런 주제들도 영상으로",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "depth"
+   ],
+   "scope": "standard",
+   "intent": "intent:afdf4214",
+   "tier_key": "fb:afdf4214",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:23",
+   "kind": "feedback",
+   "date": "2026-11-18",
+   "quote": "산업 기술 등에서 눈에 띄는 변화나 혁명 새로운 테크기술 등등 이런게 있다면 주목하고싶거든",
+   "label": "산업 기술 등에서 눈에 띄는 변화나 혁명 새로운 테크기술 등등 이런게 있다면 주목하고싶거든",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "standard",
+   "intent": "intent:f27a31f5",
+   "tier_key": "fb:f27a31f5",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -40837,17 +40991,17 @@
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h296",
+   "t": "sec:09§h306",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h304",
+   "t": "sec:09§h314",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h310",
+   "t": "sec:09§h320",
    "kind": "contains"
   },
   {
@@ -42573,6 +42727,14 @@
    ]
   },
   {
+   "s": "ver:45",
+   "t": "doc:09",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -43336,6 +43498,11 @@
    "kind": "about"
   },
   {
+   "s": "ver:46",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
    "s": "ver:8",
    "t": "code:ytflow/stages/backdrop.py:1",
    "kind": "implemented_by"
@@ -43911,6 +44078,16 @@
    "kind": "about"
   },
   {
+   "s": "intent:afdf4214",
+   "t": "fb:22",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:afdf4214",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
    "s": "intent:c72c65f6",
    "t": "fb:9",
    "kind": "quoted_in"
@@ -44378,6 +44555,11 @@
   {
    "s": "intent:28ae7f7c",
    "t": "fb:19",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:f27a31f5",
+   "t": "fb:23",
    "kind": "quoted_in"
   },
   {
@@ -47858,6 +48040,21 @@
   {
    "s": "fb:21",
    "t": "intent:7316f63d",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:22",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "fb:22",
+   "t": "intent:afdf4214",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:23",
+   "t": "intent:f27a31f5",
    "kind": "quoted_as"
   }
  ]
