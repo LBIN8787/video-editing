@@ -1313,6 +1313,10 @@ def sfx_files() -> dict:
 
 
 def make(project: Project, workers: int = 3) -> Path:
+    from . import pinned_motion
+    replay = pinned_motion.render(project)
+    if replay is not None:
+        return replay
     spec = json.loads((project.dir("script") / "hybrid.json").read_text(encoding="utf-8"))
     if "brand" not in spec:   # v16: 대본에 brand 가 없으면 프로젝트 채널(edit.yaml channel → channels/<id>/channel.yaml brand)에서
         try:

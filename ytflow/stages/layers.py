@@ -188,8 +188,20 @@ def write_plan(path: Path) -> Path:
     eff = resolve(p["topic"] if p["topic"] != "main" else None)
     d = path / "02_script"
     d.mkdir(parents=True, exist_ok=True)
-    (d / "edit_plan.json").write_text(json.dumps(p, ensure_ascii=False, indent=1), encoding="utf-8")
     md = context_md(eff, p)
+    guide = "[대본별 화풍과 움직임](../../../docs/42-script-to-motion.md)"
+    pinned = d / "motion_edition.json"
+    if pinned.is_file():
+        edition = json.loads(pinned.read_text(encoding="utf-8-sig"))
+        p["visual_handoff"] = {"source": pinned.name, "style": edition["style"], "shots": len(edition["shots"])}
+        handoff = (f"**이 편의 연출 판본** · {edition['style']} · [발화별 실제 장면표]({pinned.name})\n\n"
+                   f"해당 장면표의 순서·원화·동작을 기본 제작 명령으로 재생한다. 아래 자동 추천은 기획 참고 자료다. {guide}")
+    else:
+        handoff = (f"**S5 연출 선택** · {guide}에 따라 대본에서 핵심 동사를 골라 시작 상태, 행동을 일으키는 말, 도착 상태와 "
+                   "다음 컷의 첫 자세를 기록한다. D3에는 이 장면들이 이어지는 동영상과 화풍 승인 범위를 함께 제시한다.")
+    first, _, rest = md.partition("\n")
+    md = f"{first}\n\n{handoff}\n\n{rest}"
+    (d / "edit_plan.json").write_text(json.dumps(p, ensure_ascii=False, indent=1), encoding="utf-8")
     (d / "EDIT_CONTEXT.md").write_text(md, encoding="utf-8")
     (d / "edit_plan.md").write_text(md.split("## 4.", 1)[-1].join(["## 4.", ""]) if "## 4." in md else md, encoding="utf-8")
     print(f"[edit-plan] {path.name} · 주제 {p['topic']} · 장면 {len(p['scenes'])} · 상황 찾음 {int(p['coverage'] * 100)}% · "
