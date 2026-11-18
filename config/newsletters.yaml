@@ -40,6 +40,11 @@ sources:
   - {id: batch, name: The Batch (DeepLearning.AI), match: [deeplearning.ai], brands: [ai], cadence: 주간, arrives: 수시, status: planned}
   - {id: simonw, name: Simon Willison (블로그 RSS), rss: "https://simonwillison.net/atom/everything/", brands: [ai], cadence: 수시, arrives: RSS, status: subscribed}
   # ── 호기심 ──
+  # 심리·행동 RSS: 메일 가입이 아니라 공개 피드 수집. 보도/에세이는 연구 원문이 아님.
+  - {id: psyche-rss, name: Psyche (심리·철학·삶의 경험), rss: "https://psyche.co/feed.rss", brands: [curiosity], cadence: 수시, arrives: RSS, status: subscribed}
+  - {id: aps-rss, name: APS (심리과학 연구소식), rss: "https://www.psychologicalscience.org/feed", brands: [curiosity], cadence: 수시, arrives: RSS, status: subscribed}
+  - {id: greatergood-rss, name: Greater Good (관계·행복·사회심리), rss: "https://greatergood.berkeley.edu/site/rss/articles", brands: [curiosity], cadence: 수시, arrives: RSS, status: subscribed}
+  - {id: psypost-rss, name: PsyPost (심리학 연구보도), rss: "https://www.psypost.org/feed/", brands: [curiosity], cadence: 매일, arrives: RSS, status: blocked} # 현재 검증 환경 HTTP403, 우회 없이 비활성
   - {id: quanta, name: Quanta Magazine, match: [simonsfoundation.org, quantamagazine.org], brands: [curiosity], cadence: 주간, arrives: 수시, status: subscribed}
   - {id: aeon, name: Aeon, match: [aeon.co], brands: [curiosity], cadence: 주간, arrives: 수시, status: subscribed}
   - {id: jstor, name: JSTOR Daily, match: [jstor.org, ithaka.org], brands: [curiosity, issues], cadence: "주간(목)", arrives: 수시, status: planned}
@@ -148,3 +153,4 @@ skip:
   - view in browser
   - viewinbrowser
   - list-manage.com
+
