@@ -11,3 +11,5 @@
 | 20261118-market-daily | 하비 존스 (엔비디아 이사회 의장) | 콜 "does not intend to reinstate Jensen as CEO" | 같은 웹캐스트 | 리더십·CEO 선임 소식 | 위와 같음 | 대기 |
 | 20261118-market-daily | 젠슨 황 (엔비디아 전 CEO) | 복귀 의향 "If the Board of Directors decides that my return is in the best interest of our shareholders" | CBS 뉴스 공식 영상 'Jensen Huang says he's willing to return as Nvidia CEO' (2026-11-17) | 황 복귀·의회 증언·재무장관 '10일'(25일 무렵) | PC (YouTube·방송사) | 대기 |
 | 20261118-market-daily | 크리스 롤런드 (서스퀘해나 애널리스트) | CNBC Fast Money 실적 반응 | CNBC Television 공식 채널 (2026-11-17) | 엔비디아 실적 뒤 점검(일요일 review) | PC | 대기 (문장 전체 미확인) |
+| 20261119-market-daily | 콜레트 크레스 (엔비디아 임시 CEO) | CNBC 매드 머니 "This concept that anything is changing in terms of any of our types of customers — that is just not true." | CNBC Television 공식 채널 (2026-11-18) · 기사 https://www.cnbc.com/2026/11/18/nvidia-stock-earnings.html | 엔비디아 CEO 선임·10-Q·다음 실적 | PC (YouTube·방송사) | 대기 (이번 편은 인용 카드) |
+| 20261119-market-daily | 다리오 아모데이 (앤트로픽 CEO) | 로드쇼 영상 "we can create an age of miracles where humanity is able to solve problems that have eluded us for millennia" (CNBC 인용) | 앤트로픽 IPO 로드쇼 영상 (회사 공식, 주소 미확인) | 앤트로픽 첫 실적·락업 해제 | PC (영상 주소·문장 전체 확인) | 대기 |
