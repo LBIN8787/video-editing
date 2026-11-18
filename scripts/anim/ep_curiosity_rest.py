@@ -156,25 +156,40 @@ def rest(f, A):
         f._leave(t - .2 + i * .12, f"env{i}", "fade", .3)
     f._sound(t - 1.2, "whoosh", .2)
 
+    # ── 실험은 칸 만화로 (docs/47: Sprouts 처럼 실험 순서 = 칸 순서) ────────────
+    # 사용자 11-18 "반영해 주세요" — 실험 사례 장면: 흰 종이 위 칸이 말에 맞춰 하나씩 그려지고 채워진다
+    from comic import Page
+    pg = Page(f, "page")
+    pg.panel("c1", 70, 70, 880, 440, "lab2005.png", crop=(0.5, 0.55, 1.15),
+             actors=[("res_m_stack", 300, 430, 330), ("res_w_paper", 560, 430, 320)], caption="2005 · 독일 — 직접 물어보기")
+    pg.panel("c2", 970, 70, 880, 440, "hall.png", crop=(0.5, 0.6, 1.0),
+             props=[("envelope", 200 + i * 120, 140 + (i % 2) * 70, 110) for i in range(5)], caption="14살부터 94살까지 499명")
+    pg.panel("c3", 70, 530, 880, 480, None, survey=["지금 이 한 시간은?", "지난 한 주는?", "지난 한 해는?", "지난 10년은?"],
+             caption="질문")
+    pg.panel("c4", 970, 530, 880, 480, "hall.png", crop=(0.5, 0.75, 1.25),
+             actors=[("teen_write", 300, 470, 380), ("gma_write", 620, 470, 380)], caption="같은 질문지 앞의 열네 살과 아흔네 살")
+    t = f.cue("방법은", after=241)
+    f._show(t, "page", "push", .8, "lab")
+    f._sound(t, "whoosh", .2)
+    pg.draw(t + .3, "c1")
+    pg.draw(f.cue("499명에게") - .6, "c2")
+    pg.draw(f.cue("질문은", after=253), "c3")
+    pg.focus(f.cue("질문은", after=253) + .4, "c3", s=1.9)
+    for i, w in enumerate(["1시간은", "주는", "해는", "10년은"]):
+        pg.line(f.cue(w, after=255), "c3", i)
+    pg.draw(f.cue("14살", after=266), "c4")
+    pg.focus(f.cue("14살", after=266) + .3, "c4")
+
     # ── 설문지 앞의 열네 살과 아흔네 살 ─────────────────────────
     h = f.set("hall", "hall.png", focus=(960, 560, 1.0))
     h.actor("teen", ["teen_write", "teen_think", "teen_watch", "teen_bored"], x=600, y=1060, h=620)
     h.actor("gma", ["gma_write", "gma_think", "gma_watch", "gma_smile"], x=1240, y=1060, h=620)
-    qs = ["지금 이 한 시간은?", "지난 한 주는?", "지난 한 해는?", "지난 10년은?"]
-    for i, q in enumerate(qs):
-        say(h, f"q{i}", q, 960, 140 + i * 95, 66, "#2b2118", 0)
     h.prop("hcs", "cake_small", 600, 300, 150, z=7)
     h.prop("hcb", "cake_big", 1240, 280, 170, z=7)
-    t = show("hall", "질문은", "dissolve", .8, "lab")
-    for i, w in enumerate(["1시간은", "주는", "해는", "10년은"]):
-        f._enter(f.cue(w, after=t if i == 0 else None), f"q{i}", "write", .6)
-        f._sound(f.cue(w), "click-soft", .15)
-    A("14살", after=266).cam("hall", 960, 600, 1.1, 2)
-    A("앉았습니다").pose("teen", "teen_think")
-    A("앉았습니다", d=.3).pose("gma", "gma_think")
     t = f.cue("케이크가", after=272)
-    for i in range(4):
-        f._leave(t, f"q{i}", "fade", .4)
+    f._show(t - .9, "hall", "dissolve", .8, "page")
+    f._pose(t - .9, "teen", "teen_think")
+    f._pose(t - .6, "gma", "gma_think")
     f._enter(t + .2, "hcs", "pop", .5)
     f._enter(t + .4, "hcb", "pop", .5)
     A("갈라져야").cam("hall", 1300, 520, 1.25, 1.4)
