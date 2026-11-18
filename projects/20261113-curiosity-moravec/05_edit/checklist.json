@@ -1,15 +1,22 @@
 {
  "project": "20261113-curiosity-moravec",
- "manual_version": "24",
- "checked": "2026-11-14T13:13:33",
- "pass": false,
+ "manual_version": "47",
+ "checked": "2026-11-18T13:28:38",
+ "pass": true,
  "rows": [
   {
    "gate": "G0",
    "level": "MUST",
    "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G0",
+   "level": "SHOULD",
+   "item": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
    "ok": false,
-   "detail": "[2026-11-14 · 20261113-curiosity-moravec 기각] 반짝 효과음은 빼기. 동영상이라는 동적인 움직임을 살리는 것이 목표인데, 지금은 사진을 잘 뽑은 정적인 동영상 같음"
+   "detail": "manual/graph.json"
   },
   {
    "gate": "G1",
@@ -42,7 +49,14 @@
   {
    "gate": "G1",
    "level": "MUST",
-   "item": "욕망 점수 ≥12, 욕망 강도·보여 줄 자료 ≥2",
+   "item": "욕망을 분명히 건드리고, 보여 줄 자료가 있다 (둘 중 하나라도 약하면 만들지 않음, 01 §3)",
+   "ok": true,
+   "detail": "강도 3 · 자료 2"
+  },
+  {
+   "gate": "G1",
+   "level": "참고",
+   "item": "욕망 점수 합계 (후보끼리 비교할 때 씀)",
    "ok": true,
    "detail": "합계 15 {'desire': 3, 'clarity': 3, 'timeliness': 2, 'demand': 2, 'visuals': 2, 'angle': 3}"
   },
@@ -90,8 +104,8 @@
   },
   {
    "gate": "G2",
-   "level": "SHOULD",
-   "item": "자료 화면 소스 3종 이상 (롱폼)",
+   "level": "참고",
+   "item": "자료 화면 소스 종류 (한 곳에서만 가져오면 화면이 단조로워짐)",
    "ok": false,
    "detail": "0종"
   },
@@ -118,6 +132,13 @@
   },
   {
    "gate": "G4",
+   "level": "SHOULD",
+   "item": "목적 분간: intent.md 에 '목적:' 정보 습득형/즐길거리형 + 세 질문 (11 §2-4)",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
    "level": "MUST",
    "item": "core_message·question·logic",
    "ok": true,
@@ -125,8 +146,8 @@
   },
   {
    "gate": "G4",
-   "level": "MUST",
-   "item": "비교 기준≥1·비유≥2·과거 사례≥1·풀이≥1",
+   "level": "SHOULD",
+   "item": "curiosity: 비유와 대비가 되는 숫자 — 사실은 이야기 속에서 (04 §0-6)",
    "ok": true,
    "detail": "{'compare_to': 3, 'analogies': 3, 'past_cases': 2, 'glossary': 3}"
   },
@@ -168,7 +189,7 @@
   {
    "gate": "G4",
    "level": "SHOULD",
-   "item": "첫 3장면 안에 질문",
+   "item": "여는 부분에 이 영상의 질문 하나 (시청자가 무엇을 따라가는지 알게)",
    "ok": true,
    "detail": ""
   },
@@ -182,7 +203,7 @@
   {
    "gate": "G4",
    "level": "MUST",
-   "item": "curiosity: 첫 박자부터 곧바로 훅 (채널 소개 인트로 없음, 첫 두 장면 안, 순서 예고보다 앞) (04 §0)",
+   "item": "curiosity: 여는 장면이 곧 훅 — 소개·순서 예고·설명보다 앞 (04 §0)",
    "ok": true,
    "detail": "훅 박자 0 · 순서 예고 None"
   },
@@ -202,8 +223,8 @@
   },
   {
    "gate": "G4",
-   "level": "MUST",
-   "item": "curiosity: 지식·설명·수치 문장 ≤ 30% (대본 표시 ○, 04 §0-6)",
+   "level": "참고",
+   "item": "curiosity: 지식·설명 문장의 몫 (사실이 사람·사건 속에 있는지 — 판단은 대본 검토 D2, 04 §0-6)",
    "ok": true,
    "detail": "0/1 = 0% (script_v6.md)"
   },
@@ -237,255 +258,10 @@
   },
   {
    "gate": "G4",
-   "level": "SHOULD",
-   "item": "말투: '~습니다/~니다·~까요' 80% 이상, 평균 문장 35자 이상 (미주일기 96~100%·62~71자)",
+   "level": "참고",
+   "item": "말투(호기심): '~습니다/~니다' 끝맺음 몫·평균 문장 길이 (차분한 이야기 내레이터인지)",
    "ok": true,
    "detail": "100% · 63자"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "길이: 롱폼 10분 이상 (README §2-4)",
-   "ok": true,
-   "detail": "10.4분"
-  },
-  {
-   "gate": "G5",
-   "level": "MUST",
-   "item": "배경: 장면 목적에 맞춰 3종 이상 (한 가지 바탕만 쓰면 불합격, manual 05 §0-2)",
-   "ok": true,
-   "detail": "['dark', 'film', 'grid', 'spot', 'tint']"
-  },
-  {
-   "gate": "G5",
-   "level": "SHOULD",
-   "item": "배경: 같은 바탕 3장면 연속 없음 (film 제외)",
-   "ok": false,
-   "detail": "['spot', 'spot']"
-  },
-  {
-   "gate": "G5",
-   "level": "MUST",
-   "item": "반복 피로: 글씨·도형뿐인 장면 3개 연속 금지 (눈요기: 자료·지도·사진 겹치기·시각 효과, 05 §0-3)",
-   "ok": true,
-   "detail": "최장 1연속 (장면 2)"
-  },
-  {
-   "gate": "G5",
-   "level": "SHOULD",
-   "item": "v10: 장식 효과(dust·leak)는 2장면 이하 — 내용이 담긴 볼거리(사진·지도·사물 그림·정리판) 먼저",
-   "ok": true,
-   "detail": "[]"
-  },
-  {
-   "gate": "G5",
-   "level": "SHOULD",
-   "item": "반복 피로: 눈요기 있는 장면 60% 이상",
-   "ok": true,
-   "detail": "17/23"
-  },
-  {
-   "gate": "G5",
-   "level": "SHOULD",
-   "item": "반복 피로: 같은 시각 효과 3장면 연속 없음 · 효과 3종 이상(롱폼)",
-   "ok": false,
-   "detail": "[] 연속 []"
-  },
-  {
-   "gate": "G5",
-   "level": "SHOULD",
-   "item": "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6)",
-   "ok": true,
-   "detail": "이번 cream · 직전 ['dark:midnight', 'light:clean-white']"
-  },
-  {
-   "gate": "G5",
-   "level": "SHOULD",
-   "item": "v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게)",
-   "ok": true,
-   "detail": "curiosity"
-  },
-  {
-   "gate": "G5",
-   "level": "SHOULD",
-   "item": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음",
-   "ok": true,
-   "detail": "표지 [] · NASA 0"
-  },
-  {
-   "gate": "G5",
-   "level": "SHOULD",
-   "item": "반복 피로: 같은 채널 직전 편과 화면 구성 겹침 70% 이하 (Jaccard)",
-   "ok": true,
-   "detail": "22%"
-  },
-  {
-   "gate": "G5",
-   "level": "MUST",
-   "item": "같은 type 3연속 없음",
-   "ok": true,
-   "detail": "[]"
-  },
-  {
-   "gate": "G5",
-   "level": "SHOULD",
-   "item": "자료 화면 공백 ≤45초",
-   "ok": false,
-   "detail": "최장 622초"
-  },
-  {
-   "gate": "G5",
-   "level": "SHOULD",
-   "item": "장 표지 간격 ≤200초",
-   "ok": false,
-   "detail": "최장 622초"
-  },
-  {
-   "gate": "G5",
-   "level": "MUST",
-   "item": "스타일 조합: 4종 이상 섞기 (한 스타일로만 만들면 불합격)",
-   "ok": true,
-   "detail": "5종 ['anim-stage', 'data-report', 'hybrid-causal', 'kinetic-type', 'statement-brief']"
-  },
-  {
-   "gate": "G5",
-   "level": "MUST",
-   "item": "한 스타일이 85% 넘지 않음",
-   "ok": true,
-   "detail": "anim-stage 0.85"
-  },
-  {
-   "gate": "G5",
-   "level": "MUST",
-   "item": "한 장면 안에서 겹친 장면(layers) 3개 이상",
-   "ok": true,
-   "detail": "14"
-  },
-  {
-   "gate": "G5",
-   "level": "MUST",
-   "item": "같은 스타일 3장면 연속 없음",
-   "ok": true,
-   "detail": "최장 2"
-  },
-  {
-   "gate": "G5",
-   "level": "MUST",
-   "item": "강조는 아껴서: 1분에 1번 이하 (이 영상 10번까지)",
-   "ok": true,
-   "detail": "3번 [(7, 'kinetic'), (12, 'kinetic'), (22, 'kinetic')]"
-  },
-  {
-   "gate": "G5",
-   "level": "MUST",
-   "item": "한 장면에 강조 1개까지 (위아래로 같은 내용 반복 금지)",
-   "ok": true,
-   "detail": "넘친 장면 []"
-  },
-  {
-   "gate": "G5",
-   "level": "MUST",
-   "item": "핵심 단어 띄우기(words)는 단어 1~3개만",
-   "ok": true,
-   "detail": "[]"
-  },
-  {
-   "gate": "G5",
-   "level": "SHOULD",
-   "item": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
-   "ok": true,
-   "detail": "paper-sketch / 등록부 ['chalkboard', 'clean-flat', 'clean-white', 'dark-doc', 'kinetic-poster', 'newsprint', 'none', 'paper-sketch']"
-  },
-  {
-   "gate": "G5",
-   "level": "SHOULD",
-   "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
-   "ok": true,
-   "detail": "python -m ytflow style-pick <프로젝트>"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "final.mp4",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "레이아웃 점검 비어 있음",
-   "ok": true,
-   "detail": "{}"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
-   "ok": true,
-   "detail": "{'within_0_5s': 0.995, 'p95_abs_offset': 0.1, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.1}"
-  },
-  {
-   "gate": "G6",
-   "level": "SHOULD",
-   "item": "납품 점검(음량 등)",
-   "ok": true,
-   "detail": "completed"
-  },
-  {
-   "gate": "G6",
-   "level": "SHOULD",
-   "item": "움직임: 화면 변화 ≥8회/분 · 정지 화면 비율 ≤0.5 (완성본 측정, v12 — 차분함이 우선)",
-   "ok": true,
-   "detail": "변화 22.0/분 · 정지 0.24"
-  },
-  {
-   "gate": "G6",
-   "level": "MUST",
-   "item": "curiosity 움직임: 정지 화면 비율 ≤0.3 (README §2-5)",
-   "ok": true,
-   "detail": "정지 0.24"
-  },
-  {
-   "gate": "G6",
-   "level": "SHOULD",
-   "item": "최종 목소리 ElevenLabs",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "MUST",
-   "item": "제목 후보 3개 + 이유",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "MUST",
-   "item": "썸네일 A/B/C + 점검 ok",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "SHOULD",
-   "item": "제목 앞 22자 안에 질문/핵심",
-   "ok": true,
-   "detail": "체스 챔피언을 이긴 AI는 왜 빨래를 못"
-  },
-  {
-   "gate": "G8",
-   "level": "MUST",
-   "item": "GitHub Release 업로드",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G8",
-   "level": "MUST",
-   "item": "episodes.md 기록",
-   "ok": true,
-   "detail": "ch-knowledge"
   }
  ]
 }

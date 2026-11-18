@@ -163,6 +163,10 @@ def run(path: Path, upto: str = "G8") -> Report:
 
     if last >= 3:  # G4 대본
         txt = _texts(spec)
+        _it = path / "02_script" / "intent.md"
+        if _it.exists():   # 목적 분간 (11 §2-4, 2026-11-18 사용자) — 있는지만 봄, 어느 쪽인지는 D2 에서 사람이
+            R.add("G4", "SHOULD", "목적 분간: intent.md 에 '목적:' 정보 습득형/즐길거리형 + 세 질문 (11 §2-4)",
+                  bool(re.search(r"^\s*목적\s*:", _it.read_text(encoding="utf-8"), re.M)), "")
         R.add("G4", "MUST", "core_message·question·logic", all(spec.get(k) for k in ("core_message", "question", "logic")), "")
         cnt = {k: len(spec.get(k) or []) for k in ("compare_to", "analogies", "past_cases", "glossary")}
         if brand == "curiosity":   # v38: 호기심은 사실이 이야기 속에 (04 §0-6) — 비유와 대비 숫자만, SHOULD
