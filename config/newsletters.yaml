@@ -22,6 +22,7 @@ sources:
   - {id: stratechery, name: Stratechery (무료 주간 글), rss: "https://stratechery.com/feed/", brands: [market, ai], cadence: 주 1회 무료, arrives: RSS, status: subscribed}
   - {id: benevans, name: Benedict Evans (에세이 RSS), rss: "https://www.ben-evans.com/benedictevans?format=rss", brands: [market, ai], cadence: 수시, arrives: RSS, status: subscribed}
   - {id: fabknow, name: Fabricated Knowledge (반도체 사업 분석), rss: "https://www.fabricatedknowledge.com/feed", brands: [market], cadence: "주 1~2회", arrives: RSS, status: subscribed}
+  - {id: trendforce-insights, name: TrendForce Insights (메모리·반도체·데이터센터 수급 리서치), match: [trendforceinsights], brands: [market, ai], cadence: "주 3~4회", arrives: "19시 전후 (Weekly Radar 는 월요일)", status: subscribed}   # 2026-11-18 발신 확인: TrendForce Insights <trendforceinsights@substack.com>·<trendforceinsights+weekly-radar@substack.com>·<trendforceinsights+data-center-tracker@substack.com>
   - {id: mittr, name: MIT Technology Review, rss: "https://www.technologyreview.com/feed/", brands: [market, ai], cadence: 매일, arrives: RSS, status: subscribed}
   - {id: latitude, name: Latitude Media (데이터센터 전력·에너지 전환), rss: "https://www.latitudemedia.com/rss", brands: [market], cadence: 주 1회+, arrives: RSS, status: subscribed}
   - {id: thelec, name: 디일렉 THE ELEC (국내 반도체·배터리 공급망), rss: "https://www.thelec.kr/rss/allArticle.xml", brands: [market], cadence: 매일, arrives: RSS, status: subscribed}
@@ -38,6 +39,7 @@ sources:
   - {id: tldr-ai, name: TLDR AI, match: [tldrnewsletter.com, tldr.tech], subject: "(?i)TLDR AI", brands: [ai], cadence: 평일, arrives: "21시 전후", status: subscribed}
   - {id: tldr-tech, name: TLDR Tech, match: [tldrnewsletter.com, tldr.tech], subject: "(?i)^(?!.*TLDR AI)", brands: [ai, market], cadence: 평일, arrives: "21시 전후", status: subscribed}
   - {id: batch, name: The Batch (DeepLearning.AI), match: [deeplearning.ai], brands: [ai], cadence: 주간, arrives: 수시, status: planned}
+  - {id: dwarkesh-patel, name: Dwarkesh Patel (AI·기술 인터뷰·에세이), match: [dwarkesh], brands: [ai, curiosity], cadence: "주 1~2회", arrives: "새벽 01~06시", status: subscribed}   # 2026-11-18 발신 확인: Dwarkesh Patel <dwarkesh@substack.com>·<dwarkesh+blog@substack.com>
   - {id: simonw, name: Simon Willison (블로그 RSS), rss: "https://simonwillison.net/atom/everything/", brands: [ai], cadence: 수시, arrives: RSS, status: subscribed}
   # ── 호기심 ──
   # 심리·행동 RSS: 메일 가입이 아니라 공개 피드 수집. 보도/에세이는 연구 원문이 아님.
