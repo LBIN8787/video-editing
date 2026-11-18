@@ -11,6 +11,9 @@
     python -m ytflow manual-lock check [--path 파일]        지금 이 브랜치가 고쳐도 되나 (hook 용, 안 되면 종료 코드 2)
     python -m ytflow manual-propose "내용" [--kind …]       급하지 않은 것: 제안함에 남기기 (proposals/manual/)
 
+2026-11-18: 잠금은 '한 번에 한 명'만 지킨다 — 비어 있으면 review·feedback·편집·커밋이 그 자리에서 자동으로 잡는다(ensure_lock).
+다른 사람이 쓰는 중일 때만 요청·제안함으로 간다.
+
 잠금은 원격 브랜치 `locks` 의 `manual-lock.json` 한 파일. 잡기·풀기는 그 파일만 바꾼 커밋을 push 하고,
 두 세션이 동시에 잡으려 하면 늦은 쪽의 push 가 거절돼(빨리 감기 아님) 다시 읽고 포기한다 — git 이 순서를 정한다.
 """
@@ -293,16 +296,42 @@ def proposals(status: str | None = "new") -> list[dict]:
     return out
 
 
-def can_write() -> bool:
-    """매뉴얼을 바꾸는 명령(review·feedback·bump·graph 저장)이 쓰기 전에 묻는다. YTFLOW_MANUAL_GUARD=off 면 끔(혼자 쓸 때)."""
+def ensure_lock(purpose: str = "자동: 비어 있어서 잡음") -> bool:
+    """비어 있으면(또는 만료됐으면) 바로 잡는다 — 다른 사람이 쓰는 중일 때만 False.
+
+    2026-11-18 사용자: "저는 깃을 무조건 잠근다가 아니라 한번에 한명만 사용한다 입니다. 즉 깃이 비었는데도
+    아무도 사용 안하는데 락을 걸어서 깃을 사용하지 않는 상황이 이루어지지 않도록 해주세요"
+    → 잠금은 '동시에 둘이 고치는 것'만 막는다. 아무도 안 쓰면 기다리거나 제안함으로 돌리지 않고 지금 쓰는 쪽이 잡는다.
+    자동으로 잡은 잠금은 짧게(owners lock.auto_hours) — 오래 붙들고 있지 않게.
+    """
+    ok, _ = holder_ok()
+    if ok:
+        return True
+    cur = read_lock()
+    if cur.get("branch") and cur["branch"] != branch() and not expired(cur):
+        return False   # 다른 사람이 쓰는 중 → 그때만 요청·제안함
+    try:
+        h = float((owners().get("lock") or {}).get("auto_hours", 0.5))
+        acquire(purpose, hours=h, sync=True)
+    except SystemExit as e:   # 같은 순간 다른 쪽이 먼저 잡음 (push 거절)
+        print(e)
+        return False
+    except Exception as e:     # 네트워크가 없을 때 등
+        print(f"[manual-lock] 자동으로 잡지 못함 ({e})")
+        return False
+    return holder_ok()[0]
+
+
+def can_write(purpose: str = "자동: 비어 있어서 잡음") -> bool:
+    """매뉴얼을 바꾸는 명령(review·feedback·bump·graph 저장)이 쓰기 전에 묻는다. 비어 있으면 잡고 쓴다(ensure_lock).
+    YTFLOW_MANUAL_GUARD=off 면 끔(혼자 쓸 때)."""
     if os.environ.get("YTFLOW_MANUAL_GUARD", "").lower() == "off":
         return True
-    ok, _ = holder_ok()
-    return ok
+    return ensure_lock(purpose)
 
 
 def guard_or_exit(what: str) -> None:
-    if not can_write():
+    if not can_write(f"자동: {what}"):
         ok, why = holder_ok()
         raise SystemExit(f"[{what}] 매뉴얼은 지금 이 브랜치가 고칠 수 없습니다 — {why}")
 
@@ -318,7 +347,7 @@ def hook_check_stdin() -> int:
     paths = [ti.get("file_path") or ti.get("notebook_path") or ""]
     paths = [p for p in paths if p]
     bad = [p for p in paths if is_protected(p)]
-    if not bad or can_write():
+    if not bad or can_write(f"자동: {Path(bad[0]).name} 고치기"):
         return 0
     ok, why = holder_ok()
     print(f"매뉴얼·규칙 파일({', '.join(Path(p).name for p in bad)})은 한 번에 한 명만 고칩니다 (docs/35). {why}", file=sys.stderr)
@@ -330,7 +359,7 @@ def precommit() -> int:
     import sys
     staged = _git("diff", "--cached", "--name-only").split()
     bad = [p for p in staged if is_protected(p)]
-    if not bad or can_write():
+    if not bad or can_write("자동: 매뉴얼 변경 커밋"):
         return 0
     ok, why = holder_ok()
     print(f"[pre-commit] 매뉴얼·규칙 파일은 한 번에 한 명만 (docs/35): {', '.join(bad[:5])}\n  {why}\n"

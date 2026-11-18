@@ -466,7 +466,7 @@ def main(argv: list[str] | None = None) -> None:
         if not a.passed and not a.reject:
             raise SystemExit("--pass 또는 --reject \"이유\" 중 하나를 주세요")
         from .stages import governance as gv
-        if not gv.can_write():   # 잠금이 없으면 제안함으로 (docs/35)
+        if not gv.can_write("자동: 영상 검토 기록"):   # 비어 있으면 잡고, 다른 사람이 쓰는 중일 때만 제안함 (docs/35)
             gv.propose(("통과" if a.passed else "기각") + f": {a.reject or a.note}", "review", a.project,
                        f"python -m ytflow review {a.project} " + ("--pass" if a.passed else f'--reject "{a.reject}"'))
         else:
@@ -520,7 +520,7 @@ def main(argv: list[str] | None = None) -> None:
     elif a.cmd == "feedback":
         from .stages import manualgraph
         from .stages import governance as gv
-        if not gv.can_write():   # 잠금이 없으면 제안함으로 (docs/35)
+        if not gv.can_write("자동: 피드백 기록"):   # 비어 있으면 잡고, 다른 사람이 쓰는 중일 때만 제안함 (docs/35)
             gv.propose(a.quote, "feedback", a.project, f"feedback --kind {a.kind} --scope {a.scope} --about {a.about} --note {a.note}")
             return
         it = manualgraph.add_feedback(a.quote, a.kind, a.project, a.about, a.note, a.pending, a.scope)
