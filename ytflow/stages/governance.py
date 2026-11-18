@@ -38,7 +38,7 @@ PROPOSALS = ROOT / "proposals" / "manual"
 def _cache() -> Path:
     """마지막으로 읽은 잠금 (오프라인 hook 용) — 여러 작업 폴더(worktree)가 함께 보는 git 공용 폴더에."""
     try:
-        d = subprocess.run(["git", "rev-parse", "--git-common-dir"], cwd=ROOT, capture_output=True, text=True, timeout=10).stdout.strip()
+        d = subprocess.run(["git", "rev-parse", "--git-common-dir"], cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=10).stdout.strip()
         base = (ROOT / d) if d and not Path(d).is_absolute() else Path(d or ROOT / ".git")
         return base / "manual-lock.json"
     except Exception:
@@ -46,7 +46,7 @@ def _cache() -> Path:
 
 
 def _git(*a, check=True, cwd=None) -> str:
-    r = subprocess.run(["git", *a], cwd=cwd or ROOT, capture_output=True, text=True, timeout=60)
+    r = subprocess.run(["git", *a], cwd=cwd or ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60)
     if check and r.returncode != 0:
         raise RuntimeError((r.stderr or r.stdout).strip()[:300])
     return r.stdout
@@ -164,7 +164,7 @@ def _write_lock(new: dict | None, msg: str, force: bool = False) -> None:
             _git("add", fn, cwd=wt)
             _git("-c", "user.name=ytflow-lock", "-c", "user.email=ytflow-lock@users.noreply.github.com",
                  "commit", "-q", "-m", msg, cwd=wt)
-            r = subprocess.run(["git", "push", "origin", f"HEAD:refs/heads/{br}"], cwd=wt, capture_output=True, text=True, timeout=120)
+            r = subprocess.run(["git", "push", "origin", f"HEAD:refs/heads/{br}"], cwd=wt, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120)
             if r.returncode != 0:
                 raise RuntimeError("다른 세션이 먼저 잠금을 바꿈 — status 로 다시 확인하세요\n" + r.stderr[-300:])
         finally:
@@ -207,7 +207,7 @@ def sync_main() -> bool:
         _git("fetch", "-q", "origin", "main")
     except Exception as e:
         print(f"[manual-lock] main 을 받지 못함 ({e}) — 고치기 전에 직접 git merge origin/main"); return False
-    r = subprocess.run(["git", "merge", "--no-edit", "FETCH_HEAD"], cwd=ROOT, capture_output=True, text=True, timeout=120)
+    r = subprocess.run(["git", "merge", "--no-edit", "FETCH_HEAD"], cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120)
     if r.returncode != 0:
         subprocess.run(["git", "merge", "--abort"], cwd=ROOT, capture_output=True)
         print("[manual-lock] main 합치기가 충돌·작업 중 변경으로 멈춤 — 직접 git merge origin/main 으로 양쪽을 살려 푼 뒤 고치세요\n  "
@@ -319,7 +319,7 @@ def ensure_lock(purpose: str = "자동: 비어 있어서 잡음") -> bool:
     except Exception as e:     # 네트워크가 없을 때 등
         print(f"[manual-lock] 자동으로 잡지 못함 ({e})")
         return False
-    return holder_ok()[0]
+    return True   # acquire 가 실패하면 위에서 걸림 — 잡은 직후 캐시를 다시 읽으면 늦게 반영돼 거절하는 일이 있었음
 
 
 def can_write(purpose: str = "자동: 비어 있어서 잡음") -> bool:

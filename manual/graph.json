@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-18T17:44:08",
- "source_hash": "74e1b28e86fd",
+ "generated": "2026-11-18T20:06:45",
+ "source_hash": "9ca5fbcf8ceb",
  "audit": {
   "date": "2026-11-17T13:22",
   "counts": {
@@ -306,23 +306,23 @@
   "pending": 0,
   "rules": 49,
   "checks": 85,
-  "sections": 157,
+  "sections": 158,
   "must": 26,
   "auto": 41,
-  "intents": 82,
+  "intents": 84,
   "misaligned": 0,
   "intents_reviewed": 3,
   "conflicts": 0,
   "code": 78,
   "terms": 119,
-  "bans": 137,
-  "feedback": 28,
+  "bans": 138,
+  "feedback": 29,
   "topics": 4,
   "episodes": 32,
   "main_situations": 16,
   "tiers": {
    "principle": 49,
-   "standard": 99,
+   "standard": 100,
    "style": 31,
    "trial": 7
   },
@@ -1054,6 +1054,25 @@
    "absolute": false,
    "must": true,
    "tier_key": "ban:a48fadcf",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:04§0-7",
+   "text": "실험 — 실험의 순서가 곧 화면의 순서가 되게(칸 만화처럼 한 칸씩). 대본에 실험이 없으면 쓰지 않는다.",
+   "themes": [
+    "script"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:05d772ef",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -3076,7 +3095,7 @@
    "key": "04",
    "file": "manual/04-curiosity.md",
    "label": "04. curiosity — 몰랐던 이유 (다양한 지식과 호기심)",
-   "lines": 196,
+   "lines": 206,
    "versions": [
     1,
     32,
@@ -3848,6 +3867,20 @@
    "last_version": 23
   },
   {
+   "id": "sec:04§0-7",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "0-7",
+   "level": 3,
+   "label": "화면의 자리 나누기 — 이야기는 그림, 증거는 실제, 정리는 여백 (2026-11-18 사용자 요청, docs/47)",
+   "title": "0-7. 화면의 자리 나누기 — 이야기는 그림, 증거는 실제, 정리는 여백 (2026-11-18 사용자 요청, docs/47)",
+   "line": 137,
+   "end": 146,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
    "id": "sec:04§1",
    "kind": "section",
    "doc": "doc:04",
@@ -3855,8 +3888,8 @@
    "level": 2,
    "label": "호기심을 '만드는' 주제의 조건 (모두 충족)",
    "title": "1. 호기심을 '만드는' 주제의 조건 (모두 충족)",
-   "line": 137,
-   "end": 148,
+   "line": 147,
+   "end": 158,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3869,8 +3902,8 @@
    "level": 2,
    "label": "주제 찾기",
    "title": "2. 주제 찾기",
-   "line": 149,
-   "end": 158,
+   "line": 159,
+   "end": 168,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3883,8 +3916,8 @@
    "level": 2,
    "label": "깊은 조사 — 다섯 층 (자세히는 `prompts/script_knowledge.md` A)",
    "title": "3. 깊은 조사 — 다섯 층 (자세히는 `prompts/script_knowledge.md` A)",
-   "line": 159,
-   "end": 161,
+   "line": 169,
+   "end": 171,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3897,8 +3930,8 @@
    "level": 2,
    "label": "대본 공식",
    "title": "4. 대본 공식",
-   "line": 162,
-   "end": 180,
+   "line": 172,
+   "end": 190,
    "tag_version": null,
    "versions": [
     34
@@ -3930,8 +3963,8 @@
    "level": 2,
    "label": "소스",
    "title": "5. 소스",
-   "line": 181,
-   "end": 183,
+   "line": 191,
+   "end": 193,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3944,8 +3977,8 @@
    "level": 2,
    "label": "포장",
    "title": "6. 포장",
-   "line": 184,
-   "end": 187,
+   "line": 194,
+   "end": 197,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3958,8 +3991,8 @@
    "level": 2,
    "label": "이 채널만의 검사",
    "title": "7. 이 채널만의 검사",
-   "line": 188,
-   "end": 196,
+   "line": 198,
+   "end": 206,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -12090,6 +12123,41 @@
    "src": "\"\"\"유튜브 올리기·관리 (공식 YouTube Data API v3, docs/24-youtube-publish.md)."
   },
   {
+   "id": "intent:11202d21",
+   "kind": "intent",
+   "quote": "유명한 호기심 심리, 인지과학 … 채널들을 20개 조사하세요 … 특히 심리학에서는 심리학 고양이 라는 사람의 편집스타일을 크게 참조해주세요",
+   "label": "유명한 호기심 심리, 인지과학 … 채널들을 20개 조사하세요 … 특히 심리학에서는 심리학 고양이 라는 사람의",
+   "versions": [],
+   "date": null,
+   "sources": [
+    {
+     "ref": "sec:04§0-7",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:11202d21"
+   ],
+   "themes": [
+    "variety"
+   ],
+   "ann_key": "intent:11202d21",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:04§0-7",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:4675a826",
    "kind": "intent",
    "quote": "이 사태가 어떤 시장과 어떤 산업이 어떤 영향을 받는지",
@@ -17666,6 +17734,35 @@
    ],
    "themes": [],
    "ann_key": "intent:23479b78",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:267de7a0",
+   "kind": "intent",
+   "quote": "유명한 호기심 심리, 인지과학(일상생활 속 뇌과학 심리학 인지과학 등등 자연스레 엮어주세요 아니면 실험사례나요), 과거 역사기록 등등 호기심과 관련된 채널들을 20개 조사하세요 이후 그 특징들과 영상스타일을 분석 벤치마킹하세요. 특히 심리학에서는 심리학 고양이 라는 사람의 편집스타일을 크게 참조해주세요 / 네, 반영해 주세요",
+   "label": "유명한 호기심 심리, 인지과학(일상생활 속 뇌과학 심리학 인지과학 등등 자연스레 엮어주세요 아니면 실험사례나",
+   "versions": [],
+   "date": "2026-11-18",
+   "sources": [
+    {
+     "ref": "fb:29",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:267de7a0"
+   ],
+   "themes": [
+    "variety",
+    "depth"
+   ],
+   "ann_key": "intent:267de7a0",
    "meaning": "",
    "not_meant": [],
    "note": "",
@@ -24671,6 +24768,35 @@
    "tier_note": "",
    "tier_fixed": false,
    "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:29",
+   "kind": "feedback",
+   "date": "2026-11-18",
+   "quote": "유명한 호기심 심리, 인지과학(일상생활 속 뇌과학 심리학 인지과학 등등 자연스레 엮어주세요 아니면 실험사례나요), 과거 역사기록 등등 호기심과 관련된 채널들을 20개 조사하세요 이후 그 특징들과 영상스타일을 분석 벤치마킹하세요. 특히 심리학에서는 심리학 고양이 라는 사람의 편집스타일을 크게 참조해주세요 / 네, 반영해 주세요",
+   "label": "유명한 호기심 심리, 인지과학(일상생활 속 뇌과학 심리학 인지과학 등등 자연스레 엮어주세요 아니면 실험사례나",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "variety",
+    "depth"
+   ],
+   "scope": "",
+   "intent": "intent:267de7a0",
+   "tier_key": "fb:267de7a0",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": false,
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
   },
   {
    "id": "layer:main",
@@ -42180,6 +42306,11 @@
   },
   {
    "s": "doc:04",
+   "t": "sec:04§0-7",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
    "t": "sec:04§1",
    "kind": "contains"
   },
@@ -46028,6 +46159,21 @@
    "kind": "implemented_by"
   },
   {
+   "s": "intent:267de7a0",
+   "t": "fb:29",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:267de7a0",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:267de7a0",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
    "s": "intent:c7688ffb",
    "t": "fb:16",
    "kind": "quoted_in"
@@ -46344,6 +46490,16 @@
   },
   {
    "s": "intent:217f99af",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:11202d21",
+   "t": "sec:04§0-7",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:11202d21",
    "t": "theme:variety",
    "kind": "about"
   },
@@ -50155,6 +50311,21 @@
   {
    "s": "fb:28",
    "t": "intent:197cff99",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:29",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "fb:29",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "fb:29",
+   "t": "intent:267de7a0",
    "kind": "quoted_as"
   }
  ]

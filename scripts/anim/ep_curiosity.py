@@ -183,6 +183,8 @@ f._tween(t - .1, "#summer", {"clipPath": "inset(0 3% 0 0)"}, .35, "power3.in")
 f._sound(t - .1, "whoosh-short", .3)
 from ep_curiosity_rest import rest  # noqa: E402
 rest(f, A)
+from bench_cur import apply as bench  # noqa: E402  (docs/47 반영: 검은 화면 한 줄·번호 정리·실제 인물 사진)
+bench(f, A, Path("G:/내 드라이브/ytflow/refs/people"))
 
 f.html(out)
 print("ok", out)
