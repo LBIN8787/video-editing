@@ -30,10 +30,10 @@ sources:
   - {id: chipletter, name: The Chip Letter, rss: "https://thechipletter.substack.com/feed", brands: [market], cadence: 주 1회, arrives: RSS, status: subscribed}
   - {id: canary, name: Canary Media (청정에너지·배터리·전력망), rss: "https://www.canarymedia.com/rss.rss", brands: [market], cadence: 매일, arrives: RSS, status: subscribed}
   - {id: utilitydive, name: Utility Dive (전력망·데이터센터 전력 수요), rss: "https://www.utilitydive.com/feeds/news/", brands: [market], cadence: 매일, arrives: RSS, status: subscribed}
-  - {id: semafor-tech, name: Semafor Technology, match: [semafor.com], brands: [market, ai], cadence: 주 2회, arrives: 확인 필요, status: planned}   # 이메일 — https://www.semafor.com/newsletters/tech
-  - {id: a16z, name: a16z newsletters (신사업·AI·바이오·국방), match: [a16z.com], brands: [market, ai], cadence: 주 1회 안팎, arrives: 확인 필요, status: planned}   # https://a16z.com/newsletters/
-  - {id: outstanding, name: 아웃스탠딩 (국내 IT·스타트업 사업 모델), match: [outstanding.kr], brands: [market, ai], cadence: 확인 필요, arrives: 확인 필요, status: planned}   # https://outstanding.kr/newsletter
-  - {id: miracle, name: 미라클레터 (매일경제 실리콘밸리), match: [mk.co.kr, stibee.com], brands: [market, ai], cadence: 확인 필요, arrives: 확인 필요, status: blocked}   # 구독 주소를 클라우드에서 못 찾음 — PC 브라우저에서
+  - {id: semafor-tech, name: Semafor Technology, match: [semafor.com], brands: [market, ai], cadence: 주 2회, arrives: 확인 필요, status: subscribed}   # 이메일 — https://www.semafor.com/newsletters/tech
+  - {id: a16z, name: a16z newsletters (신사업·AI·바이오·국방), match: [a16z@substack.com, a16z.com], brands: [market, ai], cadence: 주 1회 안팎, arrives: 확인 필요, status: subscribed}   # https://a16z.com/newsletters/
+  - {id: outstanding, name: 아웃스탠딩 (국내 IT·스타트업 사업 모델), match: [outstanding.kr], brands: [market, ai], cadence: 확인 필요, arrives: 확인 필요, status: subscribed}   # https://outstanding.kr/newsletter
+  - {id: miracle, name: 미라클레터 (매일경제 실리콘밸리), match: [miraklelab@mk.co.kr, mk.co.kr], brands: [market, ai], cadence: 확인 필요, arrives: 확인 필요, status: subscribed}   # 구독 완료 (https://page.stibee.com/subscriptions/33271)
   # ── AI ──
   - {id: tldr-ai, name: TLDR AI, match: [tldrnewsletter.com, tldr.tech], subject: "(?i)TLDR AI", brands: [ai], cadence: 평일, arrives: "21시 전후", status: subscribed}
   - {id: tldr-tech, name: TLDR Tech, match: [tldrnewsletter.com, tldr.tech], subject: "(?i)^(?!.*TLDR AI)", brands: [ai, market], cadence: 평일, arrives: "21시 전후", status: subscribed}
