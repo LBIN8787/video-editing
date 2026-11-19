@@ -1,8 +1,7 @@
-# ch-knowledge — 교양·상식·역사·심리 롱폼 (하이브리드 스타일)
+# ch-knowledge — 몰랐던 이유
 
-- 왜 만들었나: 주식·경제 밖의 '잡학 지식' 수요 (docs/10-knowledge-demand.md).
-- 형식: 롱폼 8~10분, 질문 하나 → 이야기 → 반전 → 숫자는 사람 수로 → 한국 연결 → 오늘의 교훈.
-- 스타일: `styles/hybrid` (공공 기록 사진·영상 + 인과 지도 + 손그림 도식). 대본 규칙: `prompts/script_hybrid.md` + `prompts/script_knowledge.md`.
-- 소스: `python -m ytflow archive search "<영문 검색어>"` (미국 의회도서관), NASA.
-- 수요 다시 보기: `python -m ytflow demand` → `docs/10-knowledge-demand.md` 갱신, `queue.md` 정리.
-- 회차 기록: `episodes.md`.
+심리학과 현대인의 일상을 다루는 호기심 롱폼입니다. 직장·학교·가정·온라인에서 익숙한 행동 하나로 질문을 열고, 원 연구와 후속 자료로 이유를 설명합니다.
+
+- 제작은 [호기심 매뉴얼](../../manual/04-curiosity.md)과 [대본 규칙](../../prompts/script_knowledge.md)을 따릅니다.
+- 잼 편은 인물의 선택과 행동을, 기억 편은 실험이 남긴 질문을 따라갑니다. 장면이 해야 할 일로 두 편의 기법을 고릅니다. [편집 매뉴얼](../../manual/12-visual-storytelling.md)
+- 주제는 [대기열](queue.md), 과거 제작 편은 [회차 기록](episodes.md)에 있습니다.

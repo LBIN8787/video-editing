@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-20T03:41:03",
- "source_hash": "40f7610ed6a4",
+ "generated": "2026-11-20T04:00:31",
+ "source_hash": "60ba57ccd533",
  "audit": {
   "date": "2026-11-19T13:54",
   "counts": {
@@ -110,36 +110,36 @@
   "fixed": []
  },
  "stats": {
-  "manual_version": 56,
-  "versions": 56,
+  "manual_version": 57,
+  "versions": 57,
   "reviews": 36,
   "rejects": 25,
   "passes": 11,
   "pending": 0,
   "rules": 49,
   "checks": 86,
-  "sections": 162,
+  "sections": 167,
   "must": 26,
   "auto": 41,
-  "intents": 117,
+  "intents": 121,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 78,
   "terms": 127,
   "bans": 149,
-  "feedback": 62,
+  "feedback": 66,
   "topics": 4,
   "episodes": 33,
   "main_situations": 16,
   "tiers": {
-   "principle": 54,
+   "principle": 53,
    "standard": 115,
-   "style": 29,
+   "style": 30,
    "trial": 0
   },
-  "overfit": 0,
-  "principle_bans": 48
+  "overfit": 1,
+  "principle_bans": 47
  },
  "pending": [],
  "status_labels": {
@@ -951,23 +951,6 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:04§5",
-   "text": "공공 기록(미국 의회도서관·NASA·정부 기록, 1930년 이전 퍼블릭 도메인), 위키미디어 CC BY/CC0, 직접 그린 도식. 사진 원래 설명(캡션)은 좋은 대사가 되지만 날짜·장소를 그대로 지킵니다 (다른 장소 사진에 다른 지명 붙이기 금지).",
-   "themes": [],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:95f03897",
-   "tier_auto": "principle",
-   "why": "사실·법·권리·안전에 관한 말",
-   "overfit": false,
-   "single": false,
-   "tier": "principle",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "영구 원칙"
-  },
-  {
    "section": "sec:04§6",
    "text": "제목: 훅에서 (§0-3). [누구나 아는 것] + [모르는 이유 질문], 질문이 제목 앞부분에서 끝나게 (목록에서 잘려도 보이게). 답은 제목에 넣지 않음.",
    "themes": [],
@@ -1610,7 +1593,7 @@
    "tier_label": "영구 원칙"
   },
   {
-   "section": "sec:08§h89",
+   "section": "sec:08§h109",
    "text": "오프닝 | 없음 (v24) | 인사·순서 예고 없이 첫 문장부터 사건 장면 (README §2-1) | 본론 장면으로 시작 (kb·footage — intro 장면은 쓰지 않음, check G4)",
    "themes": [
     "script",
@@ -2593,14 +2576,34 @@
    "tier_label": "작업 기준"
   },
   {
+   "section": "sec:12§1",
+   "text": "실제 인물·현장 자료 영상 | 당사자의 발언·제스처, 현장의 실제 움직임과 당시 상황 | 원본에 담긴 말과 행동으로 장면을 이끈다. 발언이나 행동의 전후를 이해할 만큼 컷을 유지하고, 자막과 내레이션이 원본의 맥락을 살린다. | footage, 원본 발언은 bite. [원본 발언 컷편집](../styles/source-cut/STYLE.md)",
+   "themes": [
+    "motion",
+    "emphasis"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:78b5e33f",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": true,
+   "single": false,
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
+  },
+  {
    "section": "sec:README§1-1",
-   "text": "curiosity | 우연히 마주침 (원래 궁금하지 않았음) | 듣는 순간 생긴 궁금증을 풀고 싶다 | 이야기가 목적, 정보는 그 안에 | 이야기를 풀어내듯: 장면 → 인물 → 사건 → 반전 → 답 (§04 §0) | 이야기를 연기하는 애니메이션 (§04 §0-5, stage) — 정보 카드·요약판·글자 쪽지를 쓰지 않음",
+   "text": "curiosity | 우연히 마주침 (원래 궁금하지 않았음) | 듣는 순간 생긴 궁금증을 풀고 싶다 | 이야기가 목적, 정보는 그 안에 | 이야기를 풀어내듯: 장면 → 인물 → 사건 → 반전 → 답 (§04 §0) | 인물의 행동이나 실험을 따라가는 삽화·애니메이션 (04 §0-6·§0-7). 실험 도식과 실제 자료는 근거가 필요할 때",
    "themes": [
     "depth"
    ],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:0c4b8f0a",
+   "tier_key": "ban:c66f3a56",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -3065,7 +3068,7 @@
    "key": "01",
    "file": "manual/01-desire-map.md",
    "label": "01. 욕망 지도 — 주제보다 먼저 '왜 보는가'를 정한다",
-   "lines": 93,
+   "lines": 92,
    "versions": [
     1,
     5,
@@ -3114,8 +3117,8 @@
    "kind": "doc",
    "key": "04",
    "file": "manual/04-curiosity.md",
-   "label": "04. curiosity — 몰랐던 이유 (다양한 지식과 호기심)",
-   "lines": 220,
+   "label": "04. curiosity — 몰랐던 이유 (심리학과 현대인의 일상)",
+   "lines": 219,
    "versions": [
     1,
     32,
@@ -3129,7 +3132,7 @@
    "key": "05",
    "file": "manual/05-style-matching.md",
    "label": "05. 편집 스타일 고르기 — 영상마다, 장면마다",
-   "lines": 260,
+   "lines": 262,
    "versions": [
     1,
     2,
@@ -3186,8 +3189,8 @@
    "kind": "doc",
    "key": "08",
    "file": "manual/08-issues.md",
-   "label": "08. issues — 이슈의 구조 (시사·사회 이슈 해설)",
-   "lines": 132,
+   "label": "08. issues — 이슈의 구조 (시사·사회 이슈·역사 해설)",
+   "lines": 155,
    "versions": [
     5,
     6,
@@ -3234,7 +3237,7 @@
    "key": "10",
    "file": "manual/10-when-to-use.md",
    "label": "10. 언제 무엇을 쓰나 — 기능·연출·편집법 용도표",
-   "lines": 273,
+   "lines": 274,
    "versions": [
     50
    ],
@@ -3252,9 +3255,20 @@
     44,
     48,
     54,
-    55
+    55,
+    56
    ],
-   "last_version": 55
+   "last_version": 56
+  },
+  {
+   "id": "doc:12",
+   "kind": "doc",
+   "key": "12",
+   "file": "manual/12-visual-storytelling.md",
+   "label": "12. 편집 매뉴얼 — 인포그래픽·삽화·인물 사진·자료 영상",
+   "lines": 34,
+   "versions": [],
+   "last_version": null
   },
   {
    "id": "doc:README",
@@ -3262,7 +3276,7 @@
    "key": "README",
    "file": "manual/README.md",
    "label": "제작 매뉴얼 — 처음 온 사람(새 세션·새 모델)이 여기서 시작합니다",
-   "lines": 165,
+   "lines": 166,
    "versions": [
     1,
     2,
@@ -3356,7 +3370,7 @@
    "label": "curiosity — 알고 싶다",
    "title": "curiosity — 알고 싶다",
    "line": 44,
-   "end": 53,
+   "end": 52,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3369,8 +3383,8 @@
    "level": 2,
    "label": "욕망 점수표 (주제 후보마다 채움 → `topic_brief.json` 의 `score`)",
    "title": "3. 욕망 점수표 (주제 후보마다 채움 → `topic_brief.json` 의 `score`)",
-   "line": 54,
-   "end": 66,
+   "line": 53,
+   "end": 65,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3383,8 +3397,8 @@
    "level": 2,
    "label": "소문(찌라시)을 다루는 규칙 — market 만",
    "title": "4. 소문(찌라시)을 다루는 규칙 — market 만",
-   "line": 67,
-   "end": 73,
+   "line": 66,
+   "end": 72,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3397,8 +3411,8 @@
    "level": 2,
    "label": "성공 원인 나누기 — 모든 채널 공통 (근거: docs/18 §6)",
    "title": "4-1. 성공 원인 나누기 — 모든 채널 공통 (근거: docs/18 §6)",
-   "line": 74,
-   "end": 85,
+   "line": 73,
+   "end": 84,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3411,8 +3425,8 @@
    "level": 2,
    "label": "제목 공식 (욕망별)",
    "title": "5. 제목 공식 (욕망별)",
-   "line": 86,
-   "end": 93,
+   "line": 85,
+   "end": 92,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3776,8 +3790,8 @@
    "level": 2,
    "label": "설명보다 호기심이 먼저 — 콜드 오픈",
    "title": "0. 설명보다 호기심이 먼저 — 콜드 오픈 (v17, 2026-11-12 사용자 요청)",
-   "line": 8,
-   "end": 14,
+   "line": 10,
+   "end": 16,
    "tag_version": 17,
    "versions": [
     17
@@ -3792,8 +3806,8 @@
    "level": 3,
    "label": "훅을 먼저 정한다 (대본보다 먼저, `topic_brief.json` 의 `hook`)",
    "title": "0-1. 훅을 먼저 정한다 (대본보다 먼저, `topic_brief.json` 의 `hook`)",
-   "line": 15,
-   "end": 34,
+   "line": 17,
+   "end": 36,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3806,8 +3820,8 @@
    "level": 3,
    "label": "대본은 훅에 매달린다",
    "title": "0-2. 대본은 훅에 매달린다",
-   "line": 35,
-   "end": 39,
+   "line": 37,
+   "end": 41,
    "tag_version": null,
    "versions": [
     34
@@ -3822,8 +3836,8 @@
    "level": 3,
    "label": "제목은 훅에서 나온다",
    "title": "0-3. 제목은 훅에서 나온다",
-   "line": 40,
-   "end": 47,
+   "line": 42,
+   "end": 49,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3836,8 +3850,8 @@
    "level": 3,
    "label": "이야기를 들려주듯 — 정보형(주식)과 다른 양식",
    "title": "0-4. 이야기를 들려주듯 — 정보형(주식)과 다른 양식 (v21, 2026-11-13 사용자 요청)",
-   "line": 48,
-   "end": 72,
+   "line": 50,
+   "end": 74,
    "tag_version": 21,
    "versions": [
     21,
@@ -3864,8 +3878,8 @@
    "level": 3,
    "label": "의도 먼저 — 애니메이션 무대",
    "title": "0-5. 의도 먼저 — 애니메이션 무대 (v22, 2026-11-14 사용자 기각 반영)",
-   "line": 73,
-   "end": 108,
+   "line": 75,
+   "end": 110,
    "tag_version": 22,
    "versions": [
     22
@@ -3885,8 +3899,8 @@
    "level": 3,
    "label": "시청자 먼저 — 상권 조사 → 대본 → 편집",
    "title": "0-6. 시청자 먼저 — 상권 조사 → 대본 → 편집 (v23, 2026-11-14 사용자 기각 반영)",
-   "line": 109,
-   "end": 149,
+   "line": 111,
+   "end": 151,
    "tag_version": 23,
    "versions": [
     22,
@@ -3904,8 +3918,8 @@
    "level": 3,
    "label": "화면의 자리 나누기 — 이야기는 그림, 증거는 실제, 정리는 여백 (2026-11-18 사용자 요청, docs/47)",
    "title": "0-7. 화면의 자리 나누기 — 이야기는 그림, 증거는 실제, 정리는 여백 (2026-11-18 사용자 요청, docs/47)",
-   "line": 150,
-   "end": 159,
+   "line": 152,
+   "end": 161,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3918,8 +3932,8 @@
    "level": 2,
    "label": "호기심을 '만드는' 주제의 조건 (모두 충족)",
    "title": "1. 호기심을 '만드는' 주제의 조건 (모두 충족)",
-   "line": 160,
-   "end": 172,
+   "line": 162,
+   "end": 174,
    "tag_version": null,
    "versions": [
     53
@@ -3934,8 +3948,8 @@
    "level": 2,
    "label": "주제 찾기",
    "title": "2. 주제 찾기",
-   "line": 173,
-   "end": 182,
+   "line": 175,
+   "end": 183,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3948,8 +3962,8 @@
    "level": 2,
    "label": "깊은 조사 — 다섯 층 (자세히는 `prompts/script_knowledge.md` A)",
    "title": "3. 깊은 조사 — 다섯 층 (자세히는 `prompts/script_knowledge.md` A)",
-   "line": 183,
-   "end": 185,
+   "line": 184,
+   "end": 186,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3962,8 +3976,8 @@
    "level": 2,
    "label": "대본 공식",
    "title": "4. 대본 공식",
-   "line": 186,
-   "end": 204,
+   "line": 187,
+   "end": 203,
    "tag_version": null,
    "versions": [
     34
@@ -3971,20 +3985,13 @@
    "last_version": 34,
    "terms": [
     "term:kb",
-    "term:journey",
     "term:kinetic",
-    "term:isotype",
-    "term:footage",
     "term:versus",
-    "term:quote",
-    "term:checklist",
-    "term:analogy",
-    "term:timeline",
     "term:bars",
     "term:outro",
-    "term:newspapers",
+    "term:illust",
     "term:stage",
-    "term:style-map-journey"
+    "term:story"
    ]
   },
   {
@@ -3995,8 +4002,8 @@
    "level": 2,
    "label": "소스",
    "title": "5. 소스",
-   "line": 205,
-   "end": 207,
+   "line": 204,
+   "end": 206,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4009,8 +4016,8 @@
    "level": 2,
    "label": "포장",
    "title": "6. 포장",
-   "line": 208,
-   "end": 211,
+   "line": 207,
+   "end": 210,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4023,8 +4030,8 @@
    "level": 2,
    "label": "이 채널만의 검사",
    "title": "7. 이 채널만의 검사",
-   "line": 212,
-   "end": 220,
+   "line": 211,
+   "end": 219,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4371,7 +4378,7 @@
    "label": "장면 단위: 연출 type 고르기 (말하는 내용 → 화면)",
    "title": "2. 장면 단위: 연출 type 고르기 (말하는 내용 → 화면)",
    "line": 209,
-   "end": 230,
+   "end": 232,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -4413,8 +4420,8 @@
    "level": 2,
    "label": "리듬 규칙 (docs/15 근거, `check` 가 일부 자동 검사)",
    "title": "3. 리듬 규칙 (docs/15 근거, `check` 가 일부 자동 검사)",
-   "line": 231,
-   "end": 237,
+   "line": 233,
+   "end": 239,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4427,8 +4434,8 @@
    "level": 2,
    "label": "주제별 조합 (출발점) — 주제 레포로 옮김",
    "title": "4. 주제별 조합 (출발점) — 주제 레포로 옮김 (v34)",
-   "line": 238,
-   "end": 240,
+   "line": 240,
+   "end": 242,
    "tag_version": 34,
    "versions": [
     34
@@ -4443,8 +4450,8 @@
    "level": 2,
    "label": "시험작 (같은 이야기를 다른 연출로)",
    "title": "5. 시험작 (같은 이야기를 다른 연출로)",
-   "line": 241,
-   "end": 245,
+   "line": 243,
+   "end": 247,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -4465,8 +4472,8 @@
    "level": 2,
    "label": "UI 재연·문서 강조 도구",
    "title": "6. UI 재연·문서 강조 도구 (v50, 2026-11-19)",
-   "line": 246,
-   "end": 260,
+   "line": 248,
+   "end": 262,
    "tag_version": 50,
    "versions": [
     50
@@ -4698,8 +4705,8 @@
    "level": 2,
    "label": "무엇이 영상을 띄우나 (docs/18 §6 — 640편 원인 나누기)",
    "title": "0. 무엇이 영상을 띄우나 (docs/18 §6 — 640편 원인 나누기)",
-   "line": 14,
-   "end": 29,
+   "line": 16,
+   "end": 31,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4712,8 +4719,8 @@
    "level": 2,
    "label": "시사는 '재미있게 보는 뉴스'다",
    "title": "0-1. 시사는 '재미있게 보는 뉴스'다 (v7, 사용자 판단 + docs/18 근거)",
-   "line": 30,
-   "end": 44,
+   "line": 32,
+   "end": 46,
    "tag_version": 7,
    "versions": [
     7
@@ -4728,13 +4735,27 @@
    "level": 2,
    "label": "매일 이슈 정리",
    "title": "0-2. 매일 이슈 정리 (v17, 2026-11-12 사용자 요청: \"시사도 매일 실시간 분석이 중요\")",
-   "line": 45,
-   "end": 52,
+   "line": 47,
+   "end": 54,
    "tag_version": 17,
    "versions": [
     17
    ],
    "last_version": 17
+  },
+  {
+   "id": "sec:08§0-3",
+   "kind": "section",
+   "doc": "doc:08",
+   "num": "0-3",
+   "level": 2,
+   "label": "시사·역사 편집의 기준 — 기존 스페인독감 편",
+   "title": "0-3. 시사·역사 편집의 기준 — 기존 스페인독감 편",
+   "line": 55,
+   "end": 65,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
   },
   {
    "id": "sec:08§1",
@@ -4744,8 +4765,8 @@
    "level": 2,
    "label": "주제 찾기",
    "title": "1. 주제 찾기",
-   "line": 53,
-   "end": 69,
+   "line": 66,
+   "end": 83,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4758,8 +4779,8 @@
    "level": 2,
    "label": "깊은 조사 — 다섯 층",
    "title": "2. 깊은 조사 — 다섯 층",
-   "line": 70,
-   "end": 84,
+   "line": 84,
+   "end": 100,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4772,22 +4793,36 @@
    "level": 2,
    "label": "대본 공식",
    "title": "3. 대본 공식",
-   "line": 85,
-   "end": 88,
+   "line": 101,
+   "end": 104,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:08§h89",
+   "id": "sec:08§h105",
    "kind": "section",
    "doc": "doc:08",
-   "num": "h89",
+   "num": "h105",
    "level": 3,
-   "label": "심층 (길이는 README §2-4)",
-   "title": "심층 (길이는 README §2-4)",
-   "line": 89,
-   "end": 100,
+   "label": "역사 심층",
+   "title": "역사 심층",
+   "line": 105,
+   "end": 108,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:08§h109",
+   "kind": "section",
+   "doc": "doc:08",
+   "num": "h109",
+   "level": 3,
+   "label": "시사 심층 (길이는 README §2-4)",
+   "title": "시사 심층 (길이는 README §2-4)",
+   "line": 109,
+   "end": 120,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -4802,19 +4837,20 @@
     "term:quote",
     "term:checklist",
     "term:timeline",
-    "term:bars"
+    "term:bars",
+    "term:style-issue-dark-montage"
    ]
   },
   {
-   "id": "sec:08§h101",
+   "id": "sec:08§h121",
    "kind": "section",
    "doc": "doc:08",
-   "num": "h101",
+   "num": "h121",
    "level": 3,
    "label": "빠른 정리 (길이는 README §2-4)",
    "title": "빠른 정리 (길이는 README §2-4)",
-   "line": 101,
-   "end": 103,
+   "line": 121,
+   "end": 123,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4827,8 +4863,8 @@
    "level": 2,
    "label": "화면·그래픽",
    "title": "4. 화면·그래픽",
-   "line": 104,
-   "end": 110,
+   "line": 124,
+   "end": 132,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -4836,7 +4872,8 @@
     "term:skin-clean-flat",
     "term:skin-dark-doc",
     "term:style-issue-dark-montage",
-    "term:style-issue-quick-brief"
+    "term:style-issue-quick-brief",
+    "term:graphic-pack"
    ]
   },
   {
@@ -4847,8 +4884,8 @@
    "level": 2,
    "label": "포장 (제목·썸네일)",
    "title": "5. 포장 (제목·썸네일)",
-   "line": 111,
-   "end": 116,
+   "line": 133,
+   "end": 138,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4861,8 +4898,8 @@
    "level": 2,
    "label": "이 채널만의 검사 (06 체크리스트에 더해)",
    "title": "6. 이 채널만의 검사 (06 체크리스트에 더해)",
-   "line": 117,
-   "end": 132,
+   "line": 139,
+   "end": 155,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -5767,7 +5804,7 @@
    "label": "상황 → 기능 (메인 + 주제 레포) — `manual/situations.yaml`, `topics/`",
    "title": "5. 상황 → 기능 (메인 + 주제 레포) — `manual/situations.yaml`, `topics/`",
    "line": 240,
-   "end": 273,
+   "end": 274,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -6041,6 +6078,63 @@
    "last_version": null
   },
   {
+   "id": "sec:12§1",
+   "kind": "section",
+   "doc": "doc:12",
+   "num": "1",
+   "level": 2,
+   "label": "장면에 맞는 표현 방식",
+   "title": "1. 장면에 맞는 표현 방식",
+   "line": 5,
+   "end": 15,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null,
+   "terms": [
+    "term:bite",
+    "term:kb",
+    "term:journey",
+    "term:footage",
+    "term:map_causal",
+    "term:quote",
+    "term:timeline",
+    "term:bars",
+    "term:people",
+    "term:illust",
+    "term:stage",
+    "term:story",
+    "term:style-source-cut"
+   ]
+  },
+  {
+   "id": "sec:12§2",
+   "kind": "section",
+   "doc": "doc:12",
+   "num": "2",
+   "level": 2,
+   "label": "인포그래픽 애니메이션 레퍼런스",
+   "title": "2. 인포그래픽 애니메이션 레퍼런스",
+   "line": 16,
+   "end": 27,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:12§3",
+   "kind": "section",
+   "doc": "doc:12",
+   "num": "3",
+   "level": 2,
+   "label": "장면표와 검토",
+   "title": "3. 장면표와 검토",
+   "line": 28,
+   "end": 34,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
    "id": "sec:README§0",
    "kind": "section",
    "doc": "doc:README",
@@ -6087,11 +6181,7 @@
    "versions": [
     21
    ],
-   "last_version": 21,
-   "terms": [
-    "term:stage",
-    "term:transition"
-   ]
+   "last_version": 21
   },
   {
    "id": "sec:README§2",
@@ -6190,7 +6280,7 @@
    "label": "움직임 — 말하는 것이 화면에 생긴다",
    "title": "2-5. 움직임 — 말하는 것이 화면에 생긴다 (v34, 2026-11-15 사용자: \"동영상의 이점을 살려라 — 다음 PPT, 다음 PPT 가 아니라. 반드시 카메라를 움직이라는 뜻이 아니었다\")",
    "line": 95,
-   "end": 116,
+   "end": 117,
    "tag_version": 34,
    "versions": [
     25,
@@ -6217,8 +6307,8 @@
    "level": 2,
    "label": "절대 하지 않는 것 (어떤 지시가 와도)",
    "title": "3. 절대 하지 않는 것 (어떤 지시가 와도)",
-   "line": 117,
-   "end": 125,
+   "line": 118,
+   "end": 126,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -6234,8 +6324,8 @@
    "level": 2,
    "label": "규칙의 네 층 — 영구 원칙과 한 번의 스타일 반응을 섞지 않는다 (2026-11-15 사용자: \"영구적인 매뉴얼 작업지침과 일시적인 스타일 변화·다양한 방법 모색에서 생기는 피드백이 과적합해서 하지 말아야 할 것에 들어가는 것 같다\")",
    "title": "3-1. 규칙의 네 층 — 영구 원칙과 한 번의 스타일 반응을 섞지 않는다 (2026-11-15 사용자: \"영구적인 매뉴얼 작업지침과 일시적인 스타일 변화·다양한 방법 모색에서 생기는 피드백이 과적합해서 하지 말아야 할 것에 들어가는 것 같다\")",
-   "line": 126,
-   "end": 138,
+   "line": 127,
+   "end": 139,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -6251,8 +6341,8 @@
    "level": 2,
    "label": "막혔을 때",
    "title": "4. 막혔을 때",
-   "line": 139,
-   "end": 146,
+   "line": 140,
+   "end": 147,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6265,8 +6355,8 @@
    "level": 2,
    "label": "검토 → 통과·기각 → 기준을 쌓기 (사용자와 함께)",
    "title": "5. 검토 → 통과·기각 → 기준을 쌓기 (사용자와 함께)",
-   "line": 147,
-   "end": 165,
+   "line": 148,
+   "end": 166,
    "tag_version": null,
    "versions": [
     38
@@ -8410,13 +8500,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:328",
+   "id": "check:331",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "issues: 사실 기준 시각(as_of)",
    "file": "ytflow/stages/checklist.py",
-   "line": 328,
+   "line": 331,
    "tier_key": "check:8745b5ff",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8429,33 +8519,14 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:330",
+   "id": "check:333",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "issues: 서로 다른 입장 2개 이상(각 출처)",
    "file": "ytflow/stages/checklist.py",
-   "line": 330,
+   "line": 333,
    "tier_key": "check:54636780",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "id": "check:332",
-   "kind": "check",
-   "gate": "gate:G4",
-   "level": "MUST",
-   "label": "issues: 대본에 '기준' 시점 언급",
-   "file": "ytflow/stages/checklist.py",
-   "line": 332,
-   "tier_key": "check:b2bb6398",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -8471,9 +8542,28 @@
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
-   "label": "issues: 단정·비하 금지어 없음",
+   "label": "issues: 대본에 '기준' 시점 언급",
    "file": "ytflow/stages/checklist.py",
    "line": 334,
+   "tier_key": "check:b2bb6398",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "check:338",
+   "kind": "check",
+   "gate": "gate:G4",
+   "level": "MUST",
+   "label": "issues: 단정·비하 금지어 없음",
+   "file": "ytflow/stages/checklist.py",
+   "line": 338,
    "tier_key": "check:e655dacb",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
@@ -8486,14 +8576,14 @@
    "tier_label": "영구 원칙"
   },
   {
-   "id": "check:338",
+   "id": "check:343",
    "kind": "check",
    "gate": "gate:G3",
    "level": "MUST",
-   "label": "issues: 교차 확인 — 당사자 원문과 성향이 다른 매체 등 서로 다른 출처 (08 §2)",
+   "label": "issues: 교차 확인 — {sources} (08 §2)",
    "file": "ytflow/stages/checklist.py",
-   "line": 338,
-   "tier_key": "check:4a807575",
+   "line": 343,
+   "tier_key": "check:3c4c63ff",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -8505,13 +8595,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:339",
+   "id": "check:344",
    "kind": "check",
    "gate": "gate:G4",
    "level": "SHOULD",
    "label": "issues: 모르는 것(unknowns) 말하기",
    "file": "ytflow/stages/checklist.py",
-   "line": 339,
+   "line": 344,
    "tier_key": "check:43d9ec14",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8524,13 +8614,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:341",
+   "id": "check:346",
    "kind": "check",
    "gate": "gate:G4",
    "level": "SHOULD",
    "label": "issues: 사람의 목소리 장면 1개 이상 (quote·이름 자막)",
    "file": "ytflow/stages/checklist.py",
-   "line": 341,
+   "line": 346,
    "terms": [
     "term:quote"
    ],
@@ -8546,13 +8636,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:347",
+   "id": "check:352",
    "kind": "check",
    "gate": "gate:G1",
    "level": "SHOULD",
    "label": "issues: 이름 붙은 시리즈(series)",
    "file": "ytflow/stages/checklist.py",
-   "line": 347,
+   "line": 352,
    "tier_key": "check:37b2f474",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8565,13 +8655,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:355",
+   "id": "check:360",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1)",
    "file": "ytflow/stages/checklist.py",
-   "line": 355,
+   "line": 360,
    "terms": [
     "term:intro"
    ],
@@ -8587,33 +8677,14 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:358",
+   "id": "check:363",
    "kind": "check",
    "gate": "gate:G4",
    "level": "SHOULD",
    "label": "말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용)",
    "file": "ytflow/stages/checklist.py",
-   "line": 358,
+   "line": 363,
    "tier_key": "check:9f786482",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "id": "check:370",
-   "kind": "check",
-   "gate": "gate:G6",
-   "level": "MUST",
-   "label": "길이: {'빠른 정리 5분' if quick_ else '롱폼 10분'} 이상 — 많이 짧으면 쇼츠로 (README §2-4)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 370,
-   "tier_key": "check:b171b181",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -8627,34 +8698,31 @@
   {
    "id": "check:375",
    "kind": "check",
+   "gate": "gate:G6",
+   "level": "MUST",
+   "label": "길이: {'빠른 정리 5분' if quick_ else '롱폼 10분'} 이상 — 많이 짧으면 쇼츠로 (README §2-4)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 375,
+   "tier_key": "check:b171b181",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "check:380",
+   "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "배경: 한 가지 바탕으로 고정하지 않음 — 장면이 하는 일이 바뀌면 바탕도 바뀜 (05 §0-2)",
    "file": "ytflow/stages/checklist.py",
-   "line": 375,
+   "line": 380,
    "tier_key": "check:2c299e6d",
-   "tier_auto": "style",
-   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
-   "overfit": false,
-   "single": false,
-   "tier": "style",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "스타일 기본값"
-  },
-  {
-   "id": "check:402",
-   "kind": "check",
-   "gate": "gate:G5",
-   "level": "SHOULD",
-   "label": "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 402,
-   "terms": [
-    "term:graphic-pack"
-   ],
-   "tier_key": "check:c8434068",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
    "overfit": false,
@@ -8670,9 +8738,31 @@
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
-   "label": "v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게)",
+   "label": "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6)",
    "file": "ytflow/stages/checklist.py",
    "line": 407,
+   "terms": [
+    "term:graphic-pack"
+   ],
+   "tier_key": "check:c8434068",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": false,
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
+  },
+  {
+   "id": "check:412",
+   "kind": "check",
+   "gate": "gate:G5",
+   "level": "SHOULD",
+   "label": "v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 412,
    "tier_key": "check:aab08acb",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -8685,13 +8775,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:415",
+   "id": "check:420",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음",
    "file": "ytflow/stages/checklist.py",
-   "line": 415,
+   "line": 420,
    "tier_key": "check:920783ec",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -8704,13 +8794,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:444",
+   "id": "check:449",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1)",
    "file": "ytflow/stages/checklist.py",
-   "line": 444,
+   "line": 449,
    "tier_key": "check:99b8b152",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -8723,13 +8813,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:454",
+   "id": "check:459",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "핵심 단어 띄우기에 문장을 쓰지 않음 — 자막과 같은 내용을 위에 반복하지 않음 (v3)",
    "file": "ytflow/stages/checklist.py",
-   "line": 454,
+   "line": 459,
    "tier_key": "check:1aff01bf",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8742,13 +8832,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:456",
+   "id": "check:461",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
    "file": "ytflow/stages/checklist.py",
-   "line": 456,
+   "line": 461,
    "terms": [
     "term:graphic-pack"
    ],
@@ -8764,13 +8854,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:458",
+   "id": "check:463",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "style-pick 기록 (상황에 맞춘 스타일 선택)",
    "file": "ytflow/stages/checklist.py",
-   "line": 458,
+   "line": 463,
    "tier_key": "check:9bfba96b",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -8783,13 +8873,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:460",
+   "id": "check:465",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움)",
    "file": "ytflow/stages/checklist.py",
-   "line": 460,
+   "line": 465,
    "tier_key": "check:949b9462",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8802,13 +8892,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:464",
+   "id": "check:469",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "final.mp4",
    "file": "ytflow/stages/checklist.py",
-   "line": 464,
+   "line": 469,
    "tier_key": "check:502a31b3",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8821,13 +8911,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:480",
+   "id": "check:485",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)",
    "file": "ytflow/stages/checklist.py",
-   "line": 480,
+   "line": 485,
    "tier_key": "check:4f448879",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8840,13 +8930,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:486",
+   "id": "check:491",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
    "file": "ytflow/stages/checklist.py",
-   "line": 486,
+   "line": 491,
    "tier_key": "check:79a7c86e",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8859,13 +8949,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:489",
+   "id": "check:494",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "납품 점검(음량 등)",
    "file": "ytflow/stages/checklist.py",
-   "line": 489,
+   "line": 494,
    "tier_key": "check:5e0947d1",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8878,13 +8968,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:502",
+   "id": "check:507",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "최종 목소리 ElevenLabs",
    "file": "ytflow/stages/checklist.py",
-   "line": 502,
+   "line": 507,
    "tier_key": "check:91c4c655",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8897,13 +8987,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:506",
+   "id": "check:511",
    "kind": "check",
    "gate": "gate:G7",
    "level": "MUST",
    "label": "제목 후보 3개 + 이유",
    "file": "ytflow/stages/checklist.py",
-   "line": 506,
+   "line": 511,
    "tier_key": "check:533d8276",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8916,13 +9006,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:508",
+   "id": "check:513",
    "kind": "check",
    "gate": "gate:G7",
    "level": "MUST",
    "label": "썸네일 A/B/C + 점검 ok",
    "file": "ytflow/stages/checklist.py",
-   "line": 508,
+   "line": 513,
    "tier_key": "check:a992f8cd",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8935,13 +9025,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:514",
+   "id": "check:519",
    "kind": "check",
    "gate": "gate:G8",
    "level": "MUST",
    "label": "GitHub Release 업로드",
    "file": "ytflow/stages/checklist.py",
-   "line": 514,
+   "line": 519,
    "tier_key": "check:58879465",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8954,13 +9044,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:516",
+   "id": "check:521",
    "kind": "check",
    "gate": "gate:G8",
    "level": "MUST",
    "label": "episodes.md 기록",
    "file": "ytflow/stages/checklist.py",
-   "line": 516,
+   "line": 521,
    "tier_key": "check:45482bc9",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -10800,7 +10890,23 @@
    ],
    "themes": [
     "variety"
-   ]
+   ],
+   "commit": {
+    "sha": "6034c2fa5e13fd4c9ef2aa67a3c40dbec1847fa9",
+    "subject": "Record rejected cuts and anchor revisions to the named reference",
+    "date": "2026-11-20",
+    "other_files": []
+   }
+  },
+  {
+   "id": "ver:57",
+   "kind": "version",
+   "v": 57,
+   "date": "2026-11-20",
+   "label": "v57",
+   "summary": "호기심은 심리와 현대인의 일상, 시사·역사는 기존 스페인독감 편 제작 방식. 장면별 표현 방식과 인포그래픽 레퍼런스 매뉴얼 추가",
+   "applied": [],
+   "themes": []
   },
   {
    "id": "rev:1",
@@ -11786,10 +11892,10 @@
    "src": "if ch == \"ch-market-daily\" and spec.get(\"scenes\"):   # v27 (manual/09 §6, 2026-11-15 사용자: \"말은 많은데 45일·60일만 강조된 채 멈춰 있다\")"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:351",
+   "id": "code:ytflow/stages/checklist.py:356",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 351,
+   "line": 356,
    "versions": [
     24
    ],
@@ -11797,10 +11903,10 @@
    "src": "if last >= 3:  # v24 인트로 없음 (README §2-1) · 말투 (README §2-3, 미주일기식)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:362",
+   "id": "code:ytflow/stages/checklist.py:367",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 362,
+   "line": 367,
    "versions": [
     38
    ],
@@ -11808,10 +11914,10 @@
    "src": "if brand == \"curiosity\":   # v38: 어미 비율은 이야기형(호기심)만 — 정보 채널은 어미 혼합 (11-workflow §3-2, 2026-11-17 사용자)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:365",
+   "id": "code:ytflow/stages/checklist.py:370",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 365,
+   "line": 370,
    "versions": [
     24
    ],
@@ -11819,10 +11925,10 @@
    "src": "if last >= 6 and longform:  # v24 길이: 롱폼 최소 10분 (README §2-4)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:368",
+   "id": "code:ytflow/stages/checklist.py:373",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 368,
+   "line": 373,
    "versions": [
     34
    ],
@@ -11830,10 +11936,10 @@
    "src": "quick_ = spec.get(\"format\") == \"quick\"   # 시사 48시간 안 빠른 정리 (08 §1, v34): 5~8분 예외"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:388",
+   "id": "code:ytflow/stages/checklist.py:393",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 388,
+   "line": 393,
    "versions": [
     13
    ],
@@ -11844,10 +11950,10 @@
    ]
   },
   {
-   "id": "code:ytflow/stages/checklist.py:406",
+   "id": "code:ytflow/stages/checklist.py:411",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 406,
+   "line": 411,
    "versions": [
     15
    ],
@@ -11855,10 +11961,10 @@
    "src": "if spec.get(\"scenes\"):   # v15 카테고리 개성 (05 §0-7)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:466",
+   "id": "code:ytflow/stages/checklist.py:471",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 466,
+   "line": 471,
    "versions": [
     38
    ],
@@ -11866,10 +11972,10 @@
    "src": "_soft = (\"stage/crowded\", \"stage/text\", \"stage/static\")   # v38: 숫자로 감지하는 '붐빔·글자 수·정지'는 참고 — 판단은 D3 화면 확인"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:495",
+   "id": "code:ytflow/stages/checklist.py:500",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 495,
+   "line": 500,
    "versions": [
     25
    ],
@@ -13347,7 +13453,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:388",
+     "ref": "code:ytflow/stages/checklist.py:393",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -13977,13 +14083,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:351",
+     "ref": "code:ytflow/stages/checklist.py:356",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:365",
+     "ref": "code:ytflow/stages/checklist.py:370",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -14241,7 +14347,7 @@
      "by": "사용자 결정 2026-11-15 (매뉴얼 v34 — '말이 화면에 생기는 쪽', 스타일 규칙 유동)"
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:495",
+     "ref": "code:ytflow/stages/checklist.py:500",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -14344,13 +14450,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:351",
+     "ref": "code:ytflow/stages/checklist.py:356",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:365",
+     "ref": "code:ytflow/stages/checklist.py:370",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -14392,7 +14498,7 @@
      "kind": "code"
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:495",
+     "ref": "code:ytflow/stages/checklist.py:500",
      "kind": "code"
     }
    ],
@@ -14424,7 +14530,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:495",
+     "ref": "code:ytflow/stages/checklist.py:500",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -14599,7 +14705,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:368",
+     "ref": "code:ytflow/stages/checklist.py:373",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -14702,13 +14808,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:351",
+     "ref": "code:ytflow/stages/checklist.py:356",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:365",
+     "ref": "code:ytflow/stages/checklist.py:370",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -14856,13 +14962,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:351",
+     "ref": "code:ytflow/stages/checklist.py:356",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:365",
+     "ref": "code:ytflow/stages/checklist.py:370",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -14959,13 +15065,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:351",
+     "ref": "code:ytflow/stages/checklist.py:356",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:365",
+     "ref": "code:ytflow/stages/checklist.py:370",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -15564,7 +15670,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:368",
+     "ref": "code:ytflow/stages/checklist.py:373",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -15916,7 +16022,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:368",
+     "ref": "code:ytflow/stages/checklist.py:373",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -16024,13 +16130,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:351",
+     "ref": "code:ytflow/stages/checklist.py:356",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:365",
+     "ref": "code:ytflow/stages/checklist.py:370",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -16211,7 +16317,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:368",
+     "ref": "code:ytflow/stages/checklist.py:373",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -16337,13 +16443,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:362",
+     "ref": "code:ytflow/stages/checklist.py:367",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:466",
+     "ref": "code:ytflow/stages/checklist.py:471",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -16977,7 +17083,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:368",
+     "ref": "code:ytflow/stages/checklist.py:373",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -17205,7 +17311,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:368",
+     "ref": "code:ytflow/stages/checklist.py:373",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -17482,13 +17588,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:362",
+     "ref": "code:ytflow/stages/checklist.py:367",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:466",
+     "ref": "code:ytflow/stages/checklist.py:471",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -19637,6 +19743,32 @@
    "annotated": false
   },
   {
+   "id": "intent:6750cd32",
+   "kind": "intent",
+   "quote": "기존 호기심 채널은 심리학이나 일상생활속 현대인속 사례들을 다루기로 하겠습니다. 그리고 시사나 역사 이런쪽은 기존 스페인독감과 같은 메뉴얼을 사용하고자 합니다.",
+   "label": "기존 호기심 채널은 심리학이나 일상생활속 현대인속 사례들을 다루기로 하겠습니다. 그리고 시사나 역사 이런쪽은",
+   "versions": [],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "fb:63",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:6750cd32"
+   ],
+   "themes": [],
+   "ann_key": "intent:6750cd32",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:9096500d",
    "kind": "intent",
    "quote": "탈락입니다. 스페인 독감편은 차라리 기존 스페임독감편 메뉴얼을 사용하세요",
@@ -19663,6 +19795,12 @@
    "readings": [
     {
      "ref": "ver:56",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:11",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -19729,8 +19867,43 @@
      "status": "unreviewed",
      "note": "",
      "by": ""
+    },
+    {
+     "ref": "doc:11",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
     }
    ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:a5ecd3e7",
+   "kind": "intent",
+   "quote": "그리고 새 편집메뉴얼로 인포그래픽 애니메이션을 다루고자 합니다. 미주일기와 같은 인포그래픽 애니메이션을 다루거나 삽화형식을 다루거나 실제 인물사진이나 인물자료 영상 움직임을 다루거나 등 분류하고자 합니다.",
+   "label": "그리고 새 편집메뉴얼로 인포그래픽 애니메이션을 다루고자 합니다. 미주일기와 같은 인포그래픽 애니메이션을 다루",
+   "versions": [],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "fb:65",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:a5ecd3e7"
+   ],
+   "themes": [
+    "motion",
+    "script"
+   ],
+   "ann_key": "intent:a5ecd3e7",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
    "status": "unreviewed",
    "annotated": false
   },
@@ -19779,6 +19952,62 @@
    ],
    "themes": [],
    "ann_key": "intent:abd2ec25",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:ccde1780",
+   "kind": "intent",
+   "quote": "편집스타일이 호기심채널에 올린 두 편집스타일이랑 역사 시사는 너무 편집에서 중요한 부분이 다르다고 판단되어서 입니다.",
+   "label": "편집스타일이 호기심채널에 올린 두 편집스타일이랑 역사 시사는 너무 편집에서 중요한 부분이 다르다고 판단되어서",
+   "versions": [],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "fb:64",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:ccde1780"
+   ],
+   "themes": [
+    "variety"
+   ],
+   "ann_key": "intent:ccde1780",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:dc0efbcf",
+   "kind": "intent",
+   "quote": "인포그래픽 애니메이션 레퍼런스 스타일도 조사해주세요",
+   "label": "인포그래픽 애니메이션 레퍼런스 스타일도 조사해주세요",
+   "versions": [],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "fb:66",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:dc0efbcf"
+   ],
+   "themes": [
+    "variety"
+   ],
+   "ann_key": "intent:dc0efbcf",
    "meaning": "",
    "not_meant": [],
    "note": "",
@@ -19861,6 +20090,7 @@
     "sec:10§h37",
     "sec:10§4",
     "sec:10§5",
+    "sec:12§1",
     "ver:20",
     "check:301"
    ],
@@ -19915,11 +20145,12 @@
     "sec:04§4",
     "sec:05§0-3",
     "sec:05§2",
-    "sec:08§h89",
+    "sec:08§h109",
     "sec:09§4",
     "sec:10§h37",
     "sec:10§h103",
-    "sec:10§5"
+    "sec:10§5",
+    "sec:12§1"
    ],
    "techniques": [
     "term:tech-parallax-photo"
@@ -19969,7 +20200,7 @@
    "mentioned_in": [
     "sec:05§0-2",
     "sec:05§2",
-    "sec:08§h89",
+    "sec:08§h109",
     "sec:10§h103",
     "sec:10§5"
    ]
@@ -20015,13 +20246,13 @@
     "term:usmap"
    ],
    "mentioned_in": [
-    "sec:04§4",
     "sec:05§h50",
     "sec:05§0-3",
     "sec:05§2",
-    "sec:08§h89",
+    "sec:08§h109",
     "sec:10§h71",
-    "sec:10§5"
+    "sec:10§5",
+    "sec:12§1"
    ],
    "techniques": [
     "term:tech-draw-on",
@@ -20270,7 +20501,7 @@
    "mentioned_in": [
     "sec:05§0-3",
     "sec:05§2",
-    "sec:08§h89",
+    "sec:08§h109",
     "sec:10§h71"
    ]
   },
@@ -20314,11 +20545,11 @@
     "sec:02§h40",
     "sec:03§4",
     "sec:06§G4",
-    "sec:08§h89",
+    "sec:08§h109",
     "sec:10§h103",
     "sec:README§2-1",
     "rule:G4:1",
-    "check:355"
+    "check:360"
    ]
   },
   {
@@ -20403,7 +20634,6 @@
     "term:bars"
    ],
    "mentioned_in": [
-    "sec:04§4",
     "sec:05§0-6",
     "sec:05§0-4",
     "sec:10§h80",
@@ -20463,17 +20693,17 @@
     "sec:02§h40",
     "sec:03§2",
     "sec:03§4",
-    "sec:04§4",
     "sec:05§h50",
     "sec:05§0-7",
     "sec:05§0-3",
     "sec:05§2",
-    "sec:08§h89",
+    "sec:08§h109",
     "sec:08§6",
     "sec:10§h37",
     "sec:10§h116",
     "sec:10§3",
     "sec:10§5",
+    "sec:12§1",
     "sec:README§3"
    ],
    "techniques": [
@@ -20710,12 +20940,13 @@
     "sec:05§0-6",
     "sec:05§2",
     "sec:05§6",
-    "sec:08§h89",
+    "sec:08§h109",
     "sec:09§4",
     "sec:10§h50",
     "sec:10§h61",
     "sec:10§h125",
-    "sec:10§5"
+    "sec:10§5",
+    "sec:12§1"
    ],
    "techniques": [
     "term:tech-draw-on",
@@ -20816,18 +21047,18 @@
     "sec:03§2",
     "sec:03§4",
     "sec:04§0-4",
-    "sec:04§4",
     "sec:05§0-2",
     "sec:05§0-6",
     "sec:05§2",
-    "sec:08§h89",
+    "sec:08§h109",
     "sec:08§6",
     "sec:09§3-4",
     "sec:09§4",
     "sec:09§5",
     "sec:10§h37",
     "sec:10§5",
-    "check:341"
+    "sec:12§1",
+    "check:346"
    ]
   },
   {
@@ -20879,12 +21110,11 @@
     "sec:03§0-1",
     "sec:03§0-2",
     "sec:03§4",
-    "sec:04§4",
     "sec:05§0-2",
     "sec:05§0-6",
     "sec:05§2",
     "sec:06§G4",
-    "sec:08§h89",
+    "sec:08§h109",
     "sec:09§4",
     "sec:10§h96",
     "sec:10§h103",
@@ -20938,7 +21168,6 @@
    "mentioned_in": [
     "sec:02§h40",
     "sec:03§0-1",
-    "sec:04§4",
     "sec:05§0-7",
     "sec:05§0-2",
     "sec:05§0-6",
@@ -21077,14 +21306,14 @@
    ],
    "mentioned_in": [
     "sec:03§4",
-    "sec:04§4",
     "sec:05§0-2",
     "sec:05§0-6",
     "sec:05§2",
-    "sec:08§h89",
+    "sec:08§h109",
     "sec:10§h96",
     "sec:10§h103",
-    "sec:10§5"
+    "sec:10§5",
+    "sec:12§1"
    ]
   },
   {
@@ -21140,13 +21369,14 @@
     "sec:05§0-2",
     "sec:05§0-6",
     "sec:05§2",
-    "sec:08§h89",
+    "sec:08§h109",
     "sec:09§4",
     "sec:10§h50",
     "sec:10§h61",
     "sec:10§h80",
     "sec:10§h125",
-    "sec:10§5"
+    "sec:10§5",
+    "sec:12§1"
    ],
    "techniques": [
     "term:tech-bar-race",
@@ -21394,7 +21624,8 @@
    "mentioned_in": [
     "sec:05§2",
     "sec:10§h80",
-    "sec:10§5"
+    "sec:10§5",
+    "sec:12§1"
    ],
    "techniques": [
     "term:tech-stagger"
@@ -21441,7 +21672,6 @@
    ],
    "mentioned_in": [
     "sec:03§0-2",
-    "sec:04§4",
     "sec:05§2",
     "sec:10§h37",
     "sec:10§5"
@@ -21577,8 +21807,10 @@
     "term:stage"
    ],
    "mentioned_in": [
+    "sec:04§4",
     "sec:10§h50",
     "sec:10§5",
+    "sec:12§1",
     "ver:20"
    ]
   },
@@ -21726,7 +21958,7 @@
     "sec:10§h61",
     "sec:10§h103",
     "sec:10§5",
-    "sec:README§1-1",
+    "sec:12§1",
     "sec:README§2-5",
     "ver:21",
     "code:ytflow/stages/hybrid.py:1152",
@@ -21780,13 +22012,15 @@
    ],
    "mentioned_in": [
     "sec:04§0-4",
+    "sec:04§4",
     "sec:10§1",
     "sec:10§h9",
     "sec:10§h20",
     "sec:10§h50",
     "sec:10§h61",
     "sec:10§h96",
-    "sec:10§5"
+    "sec:10§5",
+    "sec:12§1"
    ],
    "techniques": [
     "term:tech-draw-on"
@@ -23358,6 +23592,7 @@
    "related": [],
    "instead": [],
    "mentioned_in": [
+    "sec:08§h109",
     "sec:08§4",
     "sec:10§3"
    ]
@@ -23503,7 +23738,6 @@
    "related": [],
    "instead": [],
    "mentioned_in": [
-    "sec:04§4",
     "sec:05§h50",
     "sec:05§0-7",
     "sec:05§0-3",
@@ -23959,6 +24193,7 @@
    "related": [],
    "instead": [],
    "mentioned_in": [
+    "sec:12§1",
     "ver:20"
    ]
   },
@@ -25657,7 +25892,6 @@
     "sec:09§6",
     "sec:10§h132",
     "sec:10§4",
-    "sec:README§1-1",
     "ver:10",
     "ver:12",
     "rev:11",
@@ -25817,6 +26051,7 @@
     "sec:05§6",
     "sec:06§G5",
     "sec:06§G6",
+    "sec:08§4",
     "sec:09§h338",
     "sec:10§4",
     "sec:README§0",
@@ -25825,11 +26060,11 @@
     "ver:13",
     "ver:50",
     "rev:15",
-    "code:ytflow/stages/checklist.py:388",
+    "code:ytflow/stages/checklist.py:393",
     "rule:G5:1",
     "rule:G6:1",
-    "check:402",
-    "check:456",
+    "check:407",
+    "check:461",
     "intent:00ba80c7",
     "step:5"
    ]
@@ -27511,6 +27746,117 @@
    "tier_note": "",
    "tier_fixed": true,
    "tier_label": "실험 기록"
+  },
+  {
+   "id": "fb:63",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "기존 호기심 채널은 심리학이나 일상생활속 현대인속 사례들을 다루기로 하겠습니다. 그리고 시사나 역사 이런쪽은 기존 스페인독감과 같은 메뉴얼을 사용하고자 합니다.",
+   "label": "기존 호기심 채널은 심리학이나 일상생활속 현대인속 사례들을 다루기로 하겠습니다. 그리고 시사나 역사 이런쪽은",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "호기심 매뉴얼 04와 시사·역사 매뉴얼 08 §0-3, 채널 설정과 대기열에 반영.",
+   "pending": false,
+   "themes": [],
+   "scope": "standard",
+   "intent": "intent:6750cd32",
+   "tier_key": "fb:6750cd32",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:64",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "편집스타일이 호기심채널에 올린 두 편집스타일이랑 역사 시사는 너무 편집에서 중요한 부분이 다르다고 판단되어서 입니다.",
+   "label": "편집스타일이 호기심채널에 올린 두 편집스타일이랑 역사 시사는 너무 편집에서 중요한 부분이 다르다고 판단되어서",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "잼 편의 행동·기억 편의 실험 흐름과 스페인독감 편의 기록·비교 중심 편집을 각각 제작 기준으로 기록.",
+   "pending": false,
+   "themes": [
+    "variety"
+   ],
+   "scope": "standard",
+   "intent": "intent:ccde1780",
+   "tier_key": "fb:ccde1780",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:65",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "그리고 새 편집메뉴얼로 인포그래픽 애니메이션을 다루고자 합니다. 미주일기와 같은 인포그래픽 애니메이션을 다루거나 삽화형식을 다루거나 실제 인물사진이나 인물자료 영상 움직임을 다루거나 등 분류하고자 합니다.",
+   "label": "그리고 새 편집메뉴얼로 인포그래픽 애니메이션을 다루고자 합니다. 미주일기와 같은 인포그래픽 애니메이션을 다루",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "매뉴얼 12에서 장면이 하는 일에 따라 인포그래픽·삽화·실제 사진·자료 영상을 선택하도록 정리.",
+   "pending": false,
+   "themes": [
+    "motion",
+    "script"
+   ],
+   "scope": "standard",
+   "intent": "intent:a5ecd3e7",
+   "tier_key": "fb:a5ecd3e7",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:66",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "인포그래픽 애니메이션 레퍼런스 스타일도 조사해주세요",
+   "label": "인포그래픽 애니메이션 레퍼런스 스타일도 조사해주세요",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "매뉴얼 12 §2에 미주일기·Kurzgesagt·3Blue1Brown·Vox Atlas·The Pudding의 적용 장면과 출처 기록.",
+   "pending": false,
+   "themes": [
+    "variety"
+   ],
+   "scope": "standard",
+   "intent": "intent:dc0efbcf",
+   "tier_key": "fb:dc0efbcf",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
   },
   {
    "id": "layer:main",
@@ -29660,7 +30006,7 @@
    "id": "topic:curiosity",
    "kind": "topic",
    "key": "curiosity",
-   "label": "호기심 · 이야기",
+   "label": "호기심 · 심리와 현대 일상",
    "look": "칠판·종이 무대 (05 §0-7)",
    "defaults": {
     "camera": "fixed",
@@ -29671,7 +30017,8 @@
     "whip-pan"
    ],
    "manual": [
-    "manual/04-curiosity.md"
+    "manual/04-curiosity.md",
+    "manual/12-visual-storytelling.md"
    ],
    "channels": [
     "ch-knowledge"
@@ -29791,8 +30138,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "이 사진은 1918년 영국 글래스고의 한 병원입니다. 사진 설명에는 이렇게 적혀 있습니다."
       },
@@ -29811,8 +30158,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "병은 세 번에 걸쳐 밀려왔습니다. 봄의 첫 물결은 비교적 약했습니다. 독한 감기 정도로 여겨졌죠."
       },
@@ -29834,8 +30181,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "1918년은 1차 세계대전의 마지막 해입니다. 미국, 영국, 프랑스, 독일. 큰 나라들은 모두 전쟁 중이었죠."
       },
@@ -29857,8 +30204,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "결정적인 건 1918년 5월이었습니다. 스페인 국왕 알폰소 13세가 이 병에 걸린 겁니다."
       },
@@ -29910,8 +30257,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "1918년 9월 28일, 미국 필라델피아. 전쟁 비용을 모으는 자유공채 퍼레이드가 열렸습니다."
       },
@@ -29944,8 +30291,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "결과는 어땠을까요. 2007년 미국 과학원 회보에 실린 연구가 같은 석 달 반 동안의 사망을 비교했습니다."
       },
@@ -29995,8 +30342,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "더 무서운 건 누가 죽었느냐입니다. 보통 독감은 아기와 노인에게 위험합니다. 그래프로 그리면 양 끝이 높은 U자 모양이죠."
       },
@@ -30007,8 +30354,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "미국의 기대수명은 1917년 50.9세에서, 1918년 39.1세로 떨어졌습니다. 1년 만에 11.8년이 줄어든 겁니다."
       },
@@ -30027,8 +30374,8 @@
        "fit": true,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "1918년은 무오년입니다. 조선에서는 이 병을 '무오년 독감', 또는 스페인의 옛 이름을 따 '서반아 감기'라고 불렀습니다."
       },
@@ -30039,8 +30386,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "기록에 따르면 1918년 9월, 평안북도 강계에서 환자 300명이 나왔다는 기사가 처음 보입니다."
       },
@@ -30086,8 +30433,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "독립운동가 김구 선생도 이 병을 앓았습니다. 백범일지에 상하이에 온 뒤 '서반아 감기'로 20일을 치료받았다고 적었죠."
       },
@@ -30109,8 +30456,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "1918년 11월, 알래스카의 작은 마을 브레빅 미션. 닷새 동안 주민 80명 가운데 72명이 숨졌습니다."
       },
@@ -30121,8 +30468,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "1951년, 대학원생 요한 헐틴이 이 무덤을 찾아갔지만, 당시 기술로는 바이러스를 찾지 못했습니다."
       },
@@ -30173,7 +30520,7 @@
      "project": "20261107-style-archive",
      "scenes": 9,
      "coverage": 0.78,
-     "fit": 0.57,
+     "fit": 0.14,
      "rows": [
       {
        "s": 1,
@@ -30232,11 +30579,11 @@
        "s": 6,
        "type": "kb",
        "sit": "open-scene",
-       "fit": true,
+       "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "이 사진은 1918년 영국 글래스고의 한 병원입니다. 사진 설명에는 이렇게 적혀 있습니다."
       },
@@ -30252,11 +30599,11 @@
        "s": 8,
        "type": "kb",
        "sit": "open-scene",
-       "fit": true,
+       "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "1918년은 1차 세계대전의 마지막 해입니다. 미국, 영국, 프랑스, 독일. 큰 나라들은 모두 전쟁 중이었죠."
       },
@@ -30264,11 +30611,11 @@
        "s": 9,
        "type": "kb",
        "sit": "open-scene",
-       "fit": true,
+       "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "결정적인 건 1918년 5월이었습니다. 스페인 국왕 알폰소 13세가 이 병에 걸린 겁니다."
       }
@@ -30320,8 +30667,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "그런데 스페인은 이 전쟁에 끼지 않은 중립국이었습니다. 전시 검열이 없었죠. 스페인 신문들은 병이 퍼지는 걸 있는 그대로 썼습니다."
       },
@@ -30332,8 +30679,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "1918년은 무오년입니다. 조선에서는 이 병을 '무오년 독감', 또는 스페인의 옛 이름을 따 '서반아 감기'라고 불렀습니다."
       },
@@ -30344,8 +30691,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "1918년 11월, 알래스카의 작은 마을 브레빅 미션. 닷새 동안 주민 80명 가운데 72명이 숨졌습니다."
       }
@@ -30435,7 +30782,7 @@
      "project": "20261109-style-combo",
      "scenes": 14,
      "coverage": 0.93,
-     "fit": 0.23,
+     "fit": 0.15,
      "rows": [
       {
        "s": 1,
@@ -30508,8 +30855,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "1918년은 1차 세계대전의 마지막 해입니다. 미국, 영국, 프랑스, 독일. 큰 나라들은 모두 전쟁 중이었죠."
       },
@@ -30528,11 +30875,11 @@
        "s": 9,
        "type": "kb",
        "sit": "open-scene",
-       "fit": true,
+       "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "결정적인 건 1918년 5월이었습니다. 스페인 국왕 알폰소 13세가 이 병에 걸린 겁니다."
       },
@@ -30554,8 +30901,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "결과는 어땠을까요. 2007년 미국 과학원 회보에 실린 연구가 같은 석 달 반 동안의 사망을 비교했습니다."
       },
@@ -30578,8 +30925,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "1918년은 무오년입니다. 조선에서는 이 병을 '무오년 독감', 또는 스페인의 옛 이름을 따 '서반아 감기'라고 불렀습니다."
       },
@@ -30600,7 +30947,7 @@
      "project": "20261111-curiosity-hallucination",
      "scenes": 17,
      "coverage": 0.94,
-     "fit": 0.44,
+     "fit": 0.31,
      "rows": [
       {
        "s": 1,
@@ -30617,11 +30964,11 @@
        "s": 2,
        "type": "kb",
        "sit": "open-scene",
-       "fit": true,
+       "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "2023년 미국 뉴욕의 한 법정. 변호사들이 낸 서류에 판례가 여러 개 적혀 있었습니다."
       },
@@ -30654,8 +31001,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "시작은 평범한 소송이었습니다. 비행기 안에서 서빙 카트에 무릎을 다쳤다는 거였죠."
       },
@@ -30751,11 +31098,11 @@
        "s": 14,
        "type": "kb",
        "sit": "open-scene",
-       "fit": true,
+       "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "사실 AI는 처음부터 실제보다 더 아는 것처럼 보였습니다. 1957년, 이 IBM 704 같은 기종에서 '퍼셉트론'이라는 초기 인공 신경망이 처음 돌아갔는데요."
       },
@@ -30802,8 +31149,8 @@
        "fit": true,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "2015년 10월, 일본 도쿄에서 열린 가전 전시회에서 냉장고만 한 기계 하나가 관람객의 발길을 붙잡았습니다."
       },
@@ -30837,8 +31184,8 @@
        "fit": true,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "컴퓨터가 처음 등장했을 때부터 연구자들은 기계의 지능을 체스로 시험하고 싶어 했습니다."
       },
@@ -30857,8 +31204,8 @@
        "fit": true,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "1997년 5월 11일 뉴욕에서 열린 재대결의 마지막 여섯 번째 대국에서 카스파로프는 19수 만에 자리에서 일어났고, 기계는 처음으로 현역 세계 챔피언을 상대로 "
       },
@@ -30888,8 +31235,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "훗날 카네기멜런 대학으로 옮긴 모라벡은 1988년 펴낸 책에 이 경험을 이렇게 정리했습니다."
       },
@@ -30911,8 +31258,8 @@
        "fit": true,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "모라벡의 수레가 방을 건넌 지 36년이 지난 2015년에도 이 벽은 크게 낮아지지 않았습니다."
       },
@@ -30956,8 +31303,8 @@
        "fit": false,
        "rec": [
         "stage",
-        "story",
-        "kb"
+        "illust",
+        "story"
        ],
        "say": "1994년 심리학자 스티븐 핑커는 35년에 걸친 인공지능 연구의 가장 큰 교훈을 어려운 문제는 쉽고, 쉬운 문제는 어렵다는 한 문장으로 정리했습니다."
       },
@@ -31120,12 +31467,12 @@
    "origin": "override",
    "scenes": [
     "stage",
-    "story",
-    "kb"
+    "illust",
+    "story"
    ],
    "techniques": [
     "draw-on",
-    "parallax-photo"
+    "match-move"
    ],
    "blocked": [],
    "base_scenes": [
@@ -31144,7 +31491,7 @@
     "아침"
    ],
    "count": 32,
-   "fit": 11,
+   "fit": 5,
    "examples": [
     {
      "project": "20261107-knowledge-스페인독감",
@@ -32017,8 +32364,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "이 사진은 1918년 영국 글래스고의 한 병원입니다. 사진 설명에는 이렇게 적혀 있습니다."
     },
@@ -32037,8 +32384,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "병은 세 번에 걸쳐 밀려왔습니다. 봄의 첫 물결은 비교적 약했습니다. 독한 감기 정도로 여겨졌죠."
     },
@@ -32060,8 +32407,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "1918년은 1차 세계대전의 마지막 해입니다. 미국, 영국, 프랑스, 독일. 큰 나라들은 모두 전쟁 중이었죠."
     },
@@ -32083,8 +32430,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "결정적인 건 1918년 5월이었습니다. 스페인 국왕 알폰소 13세가 이 병에 걸린 겁니다."
     },
@@ -32136,8 +32483,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "1918년 9월 28일, 미국 필라델피아. 전쟁 비용을 모으는 자유공채 퍼레이드가 열렸습니다."
     },
@@ -32170,8 +32517,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "결과는 어땠을까요. 2007년 미국 과학원 회보에 실린 연구가 같은 석 달 반 동안의 사망을 비교했습니다."
     },
@@ -32221,8 +32568,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "더 무서운 건 누가 죽었느냐입니다. 보통 독감은 아기와 노인에게 위험합니다. 그래프로 그리면 양 끝이 높은 U자 모양이죠."
     },
@@ -32233,8 +32580,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "미국의 기대수명은 1917년 50.9세에서, 1918년 39.1세로 떨어졌습니다. 1년 만에 11.8년이 줄어든 겁니다."
     },
@@ -32253,8 +32600,8 @@
      "fit": true,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "1918년은 무오년입니다. 조선에서는 이 병을 '무오년 독감', 또는 스페인의 옛 이름을 따 '서반아 감기'라고 불렀습니다."
     },
@@ -32265,8 +32612,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "기록에 따르면 1918년 9월, 평안북도 강계에서 환자 300명이 나왔다는 기사가 처음 보입니다."
     },
@@ -32312,8 +32659,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "독립운동가 김구 선생도 이 병을 앓았습니다. 백범일지에 상하이에 온 뒤 '서반아 감기'로 20일을 치료받았다고 적었죠."
     },
@@ -32335,8 +32682,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "1918년 11월, 알래스카의 작은 마을 브레빅 미션. 닷새 동안 주민 80명 가운데 72명이 숨졌습니다."
     },
@@ -32347,8 +32694,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "1951년, 대학원생 요한 헐틴이 이 무덤을 찾아갔지만, 당시 기술로는 바이러스를 찾지 못했습니다."
     },
@@ -32403,7 +32750,7 @@
    "project": "20261107-style-archive",
    "scenes": 9,
    "coverage": 0.78,
-   "fit": 0.57,
+   "fit": 0.14,
    "rows": [
     {
      "s": 1,
@@ -32462,11 +32809,11 @@
      "s": 6,
      "type": "kb",
      "sit": "open-scene",
-     "fit": true,
+     "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "이 사진은 1918년 영국 글래스고의 한 병원입니다. 사진 설명에는 이렇게 적혀 있습니다."
     },
@@ -32482,11 +32829,11 @@
      "s": 8,
      "type": "kb",
      "sit": "open-scene",
-     "fit": true,
+     "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "1918년은 1차 세계대전의 마지막 해입니다. 미국, 영국, 프랑스, 독일. 큰 나라들은 모두 전쟁 중이었죠."
     },
@@ -32494,11 +32841,11 @@
      "s": 9,
      "type": "kb",
      "sit": "open-scene",
-     "fit": true,
+     "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "결정적인 건 1918년 5월이었습니다. 스페인 국왕 알폰소 13세가 이 병에 걸린 겁니다."
     }
@@ -32554,8 +32901,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "그런데 스페인은 이 전쟁에 끼지 않은 중립국이었습니다. 전시 검열이 없었죠. 스페인 신문들은 병이 퍼지는 걸 있는 그대로 썼습니다."
     },
@@ -32566,8 +32913,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "1918년은 무오년입니다. 조선에서는 이 병을 '무오년 독감', 또는 스페인의 옛 이름을 따 '서반아 감기'라고 불렀습니다."
     },
@@ -32578,8 +32925,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "1918년 11월, 알래스카의 작은 마을 브레빅 미션. 닷새 동안 주민 80명 가운데 72명이 숨졌습니다."
     }
@@ -32681,7 +33028,7 @@
    "project": "20261109-style-combo",
    "scenes": 14,
    "coverage": 0.93,
-   "fit": 0.23,
+   "fit": 0.15,
    "rows": [
     {
      "s": 1,
@@ -32754,8 +33101,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "1918년은 1차 세계대전의 마지막 해입니다. 미국, 영국, 프랑스, 독일. 큰 나라들은 모두 전쟁 중이었죠."
     },
@@ -32774,11 +33121,11 @@
      "s": 9,
      "type": "kb",
      "sit": "open-scene",
-     "fit": true,
+     "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "결정적인 건 1918년 5월이었습니다. 스페인 국왕 알폰소 13세가 이 병에 걸린 겁니다."
     },
@@ -32800,8 +33147,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "결과는 어땠을까요. 2007년 미국 과학원 회보에 실린 연구가 같은 석 달 반 동안의 사망을 비교했습니다."
     },
@@ -32824,8 +33171,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "1918년은 무오년입니다. 조선에서는 이 병을 '무오년 독감', 또는 스페인의 옛 이름을 따 '서반아 감기'라고 불렀습니다."
     },
@@ -32850,7 +33197,7 @@
    "project": "20261111-curiosity-hallucination",
    "scenes": 17,
    "coverage": 0.94,
-   "fit": 0.44,
+   "fit": 0.31,
    "rows": [
     {
      "s": 1,
@@ -32867,11 +33214,11 @@
      "s": 2,
      "type": "kb",
      "sit": "open-scene",
-     "fit": true,
+     "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "2023년 미국 뉴욕의 한 법정. 변호사들이 낸 서류에 판례가 여러 개 적혀 있었습니다."
     },
@@ -32904,8 +33251,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "시작은 평범한 소송이었습니다. 비행기 안에서 서빙 카트에 무릎을 다쳤다는 거였죠."
     },
@@ -33001,11 +33348,11 @@
      "s": 14,
      "type": "kb",
      "sit": "open-scene",
-     "fit": true,
+     "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "사실 AI는 처음부터 실제보다 더 아는 것처럼 보였습니다. 1957년, 이 IBM 704 같은 기종에서 '퍼셉트론'이라는 초기 인공 신경망이 처음 돌아갔는데요."
     },
@@ -33056,8 +33403,8 @@
      "fit": true,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "2015년 10월, 일본 도쿄에서 열린 가전 전시회에서 냉장고만 한 기계 하나가 관람객의 발길을 붙잡았습니다."
     },
@@ -33091,8 +33438,8 @@
      "fit": true,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "컴퓨터가 처음 등장했을 때부터 연구자들은 기계의 지능을 체스로 시험하고 싶어 했습니다."
     },
@@ -33111,8 +33458,8 @@
      "fit": true,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "1997년 5월 11일 뉴욕에서 열린 재대결의 마지막 여섯 번째 대국에서 카스파로프는 19수 만에 자리에서 일어났고, 기계는 처음으로 현역 세계 챔피언을 상대로 "
     },
@@ -33142,8 +33489,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "훗날 카네기멜런 대학으로 옮긴 모라벡은 1988년 펴낸 책에 이 경험을 이렇게 정리했습니다."
     },
@@ -33165,8 +33512,8 @@
      "fit": true,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "모라벡의 수레가 방을 건넌 지 36년이 지난 2015년에도 이 벽은 크게 낮아지지 않았습니다."
     },
@@ -33210,8 +33557,8 @@
      "fit": false,
      "rec": [
       "stage",
-      "story",
-      "kb"
+      "illust",
+      "story"
      ],
      "say": "1994년 심리학자 스티븐 핑커는 35년에 걸친 인공지능 연구의 가장 큰 교훈을 어려운 문제는 쉽고, 쉬운 문제는 어렵다는 한 문장으로 정리했습니다."
     },
@@ -33375,29 +33722,34 @@
    "id": "topic:issues",
    "kind": "topic",
    "key": "issues",
-   "label": "시사 · 이슈",
-   "look": "증거판 (05 §0-7)",
+   "label": "시사 · 역사",
+   "look": "실제 자료와 읽기 쉬운 지도·연표·비교 화면 (08 §0-3)",
    "defaults": {
-    "both_sides_equal": true,
-    "timestamp": true
+    "both_sides_equal": "시사 양쪽 입장에 같은 틀 (08 §4)",
+    "timestamp": "시사는 기준 시각, 역사는 사건 시점·자료 작성 시점 (08 §0-3)"
    },
    "avoid_techniques": [
     "gl-transitions",
     "whip-pan"
    ],
    "manual": [
-    "manual/08-issues.md"
+    "manual/08-issues.md",
+    "manual/12-visual-storytelling.md"
    ],
    "channels": [
     "ch-issues",
     "ch-issues-daily"
    ],
    "added": [
+    "archive-evidence",
     "both-sides",
     "not-known",
     "us-link"
    ],
-   "overridden": [],
+   "overridden": [
+    "open-scene",
+    "compare"
+   ],
    "dropped": [
     "command",
     "ai-ask"
@@ -33417,6 +33769,7 @@
     "change",
     "point",
     "conclusion",
+    "archive-evidence",
     "both-sides",
     "not-known",
     "us-link"
@@ -33532,12 +33885,12 @@
       {
        "s": 10,
        "type": "bars",
-       "sit": "metric",
+       "sit": "compare",
        "fit": true,
        "rec": [
-        "chart",
-        "bignum",
-        "bars"
+        "versus",
+        "bars",
+        "compare"
        ],
        "say": "생산도 크게 줄었습니다. 2월 하루 1,040만 배럴이던 생산이 3월엔 725만 배럴로 떨어졌고,"
       },
@@ -34374,20 +34727,24 @@
    "topic": "issues",
    "key": "open-scene",
    "label": "장면을 연다 (사람·장소·날짜)",
-   "origin": "main",
+   "origin": "override",
    "scenes": [
-    "kb",
     "footage",
-    "stage"
+    "kb",
+    "newspapers"
    ],
    "techniques": [
     "parallax-photo",
     "draw-on"
    ],
    "blocked": [],
-   "base_scenes": null,
+   "base_scenes": [
+    "kb",
+    "footage",
+    "stage"
+   ],
    "avoid": "글자 카드로 열기",
-   "why": "인트로 없이 첫 문장부터 장면 (README §2-1·§2-3)",
+   "why": "실제 사건의 사람·장소·시점을 자료로 보여 준 뒤 질문 하나 (08 §0-3)",
    "signals": [
     "\\d{4}년",
     "그날",
@@ -34620,8 +34977,8 @@
     "하락",
     "급등"
    ],
-   "count": 15,
-   "fit": 3,
+   "count": 14,
+   "fit": 2,
    "examples": [
     {
      "project": "20261109-issues-saudi",
@@ -34652,7 +35009,7 @@
    "topic": "issues",
    "key": "compare",
    "label": "둘을 비교한다",
-   "origin": "main",
+   "origin": "override",
    "scenes": [
     "versus",
     "bars",
@@ -34663,9 +35020,13 @@
     "chart-morph"
    ],
    "blocked": [],
-   "base_scenes": null,
+   "base_scenes": [
+    "versus",
+    "bars",
+    "compare"
+   ],
    "avoid": "숫자 나열",
-   "why": "같은 틀에 나란히",
+   "why": "기간·단위·집계 범위를 먼저 놓고 차이를 읽을 시간 확보 (08 §0-3)",
    "signals": [
     "보다 ",
     "비교",
@@ -34674,9 +35035,17 @@
     "와 달리",
     "에 비해"
    ],
-   "count": 0,
-   "fit": 0,
-   "examples": []
+   "count": 1,
+   "fit": 1,
+   "examples": [
+    {
+     "project": "20261109-issues-saudi",
+     "scene": 10,
+     "type": "bars",
+     "say": "9월에도 800만 배럴 안팎으로, 전쟁 전보다 하루 200만 배럴가량 적었습니다.",
+     "fit": true
+    }
+   ]
   },
   {
    "id": "sit:issues:ratio",
@@ -34934,6 +35303,38 @@
      "fit": true
     }
    ]
+  },
+  {
+   "id": "sit:issues:archive-evidence",
+   "kind": "situation",
+   "topic": "issues",
+   "key": "archive-evidence",
+   "label": "현장과 당대 기록",
+   "origin": "add",
+   "scenes": [
+    "footage",
+    "kb",
+    "newspapers"
+   ],
+   "techniques": [
+    "draw-on",
+    "parallax-photo"
+   ],
+   "blocked": [],
+   "base_scenes": null,
+   "avoid": "다른 시기·장소의 자료를 해당 사건 화면처럼 쓰기",
+   "why": "자료의 실제 날짜·장소·출처가 사건을 뒷받침 (08 §0-3)",
+   "signals": [
+    "당시 신문",
+    "당시 사진",
+    "기록 영상",
+    "원본 영상",
+    "기록 문서",
+    "보도 화면"
+   ],
+   "count": 0,
+   "fit": 0,
+   "examples": []
   },
   {
    "id": "sit:issues:both-sides",
@@ -35198,12 +35599,12 @@
     {
      "s": 10,
      "type": "bars",
-     "sit": "metric",
+     "sit": "compare",
      "fit": true,
      "rec": [
-      "chart",
-      "bignum",
-      "bars"
+      "versus",
+      "bars",
+      "compare"
      ],
      "say": "생산도 크게 줄었습니다. 2월 하루 1,040만 배럴이던 생산이 3월엔 725만 배럴로 떨어졌고,"
     },
@@ -45899,6 +46300,11 @@
   },
   {
    "s": "doc:08",
+   "t": "sec:08§0-3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:08",
    "t": "sec:08§1",
    "kind": "contains"
   },
@@ -45914,12 +46320,17 @@
   },
   {
    "s": "doc:08",
-   "t": "sec:08§h89",
+   "t": "sec:08§h105",
    "kind": "contains"
   },
   {
    "s": "doc:08",
-   "t": "sec:08§h101",
+   "t": "sec:08§h109",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:08",
+   "t": "sec:08§h121",
    "kind": "contains"
   },
   {
@@ -46240,6 +46651,21 @@
   {
    "s": "doc:11",
    "t": "sec:11§7",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:12",
+   "t": "sec:12§1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:12",
+   "t": "sec:12§2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:12",
+   "t": "sec:12§3",
    "kind": "contains"
   },
   {
@@ -46878,17 +47304,12 @@
    "kind": "enforces"
   },
   {
-   "s": "check:328",
+   "s": "check:331",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:330",
-   "t": "gate:G4",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:332",
+   "s": "check:333",
    "t": "gate:G4",
    "kind": "enforces"
   },
@@ -46899,46 +47320,46 @@
   },
   {
    "s": "check:338",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:343",
    "t": "gate:G3",
    "kind": "enforces"
   },
   {
-   "s": "check:339",
+   "s": "check:344",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:341",
+   "s": "check:346",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:347",
+   "s": "check:352",
    "t": "gate:G1",
    "kind": "enforces"
   },
   {
-   "s": "check:355",
+   "s": "check:360",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:358",
+   "s": "check:363",
    "t": "gate:G4",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:370",
-   "t": "gate:G6",
    "kind": "enforces"
   },
   {
    "s": "check:375",
-   "t": "gate:G5",
+   "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:402",
+   "s": "check:380",
    "t": "gate:G5",
    "kind": "enforces"
   },
@@ -46948,77 +47369,82 @@
    "kind": "enforces"
   },
   {
-   "s": "check:415",
+   "s": "check:412",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:444",
+   "s": "check:420",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:454",
+   "s": "check:449",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:456",
+   "s": "check:459",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:458",
+   "s": "check:461",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:460",
+   "s": "check:463",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:464",
+   "s": "check:465",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:469",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:480",
+   "s": "check:485",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:486",
+   "s": "check:491",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:489",
+   "s": "check:494",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:502",
+   "s": "check:507",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:506",
+   "s": "check:511",
    "t": "gate:G7",
    "kind": "enforces"
   },
   {
-   "s": "check:508",
+   "s": "check:513",
    "t": "gate:G7",
    "kind": "enforces"
   },
   {
-   "s": "check:514",
+   "s": "check:519",
    "t": "gate:G8",
    "kind": "enforces"
   },
   {
-   "s": "check:516",
+   "s": "check:521",
    "t": "gate:G8",
    "kind": "enforces"
   },
@@ -48422,6 +48848,14 @@
    ]
   },
   {
+   "s": "ver:56",
+   "t": "doc:11",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -49358,42 +49792,42 @@
   },
   {
    "s": "ver:24",
-   "t": "code:ytflow/stages/checklist.py:351",
+   "t": "code:ytflow/stages/checklist.py:356",
    "kind": "implemented_by"
   },
   {
    "s": "ver:38",
-   "t": "code:ytflow/stages/checklist.py:362",
+   "t": "code:ytflow/stages/checklist.py:367",
    "kind": "implemented_by"
   },
   {
    "s": "ver:24",
-   "t": "code:ytflow/stages/checklist.py:365",
+   "t": "code:ytflow/stages/checklist.py:370",
    "kind": "implemented_by"
   },
   {
    "s": "ver:34",
-   "t": "code:ytflow/stages/checklist.py:368",
+   "t": "code:ytflow/stages/checklist.py:373",
    "kind": "implemented_by"
   },
   {
    "s": "ver:13",
-   "t": "code:ytflow/stages/checklist.py:388",
+   "t": "code:ytflow/stages/checklist.py:393",
    "kind": "implemented_by"
   },
   {
    "s": "ver:15",
-   "t": "code:ytflow/stages/checklist.py:406",
+   "t": "code:ytflow/stages/checklist.py:411",
    "kind": "implemented_by"
   },
   {
    "s": "ver:38",
-   "t": "code:ytflow/stages/checklist.py:466",
+   "t": "code:ytflow/stages/checklist.py:471",
    "kind": "implemented_by"
   },
   {
    "s": "ver:25",
-   "t": "code:ytflow/stages/checklist.py:495",
+   "t": "code:ytflow/stages/checklist.py:500",
    "kind": "implemented_by"
   },
   {
@@ -49753,12 +50187,12 @@
   },
   {
    "s": "ver:15",
-   "t": "check:407",
+   "t": "check:412",
    "kind": "implemented_by"
   },
   {
    "s": "ver:15",
-   "t": "check:415",
+   "t": "check:420",
    "kind": "implemented_by"
   },
   {
@@ -49934,6 +50368,21 @@
   {
    "s": "intent:58b6a8db",
    "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "intent:a5ecd3e7",
+   "t": "fb:65",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:a5ecd3e7",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "intent:a5ecd3e7",
+   "t": "theme:script",
    "kind": "about"
   },
   {
@@ -50145,6 +50594,11 @@
    "s": "intent:70303e4c",
    "t": "theme:script",
    "kind": "about"
+  },
+  {
+   "s": "intent:6750cd32",
+   "t": "fb:63",
+   "kind": "quoted_in"
   },
   {
    "s": "intent:7be96777",
@@ -50410,6 +50864,16 @@
    "s": "intent:d66e0681",
    "t": "sec:09§3-5",
    "kind": "quoted_in"
+  },
+  {
+   "s": "intent:ccde1780",
+   "t": "fb:64",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:ccde1780",
+   "t": "theme:variety",
+   "kind": "about"
   },
   {
    "s": "intent:adc35a90",
@@ -50788,7 +51252,7 @@
   },
   {
    "s": "intent:8ecb5021",
-   "t": "code:ytflow/stages/checklist.py:495",
+   "t": "code:ytflow/stages/checklist.py:500",
    "kind": "quoted_in"
   },
   {
@@ -51005,6 +51469,16 @@
    "s": "intent:95ab4b99",
    "t": "fb:61",
    "kind": "quoted_in"
+  },
+  {
+   "s": "intent:dc0efbcf",
+   "t": "fb:66",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:dc0efbcf",
+   "t": "theme:variety",
+   "kind": "about"
   },
   {
    "s": "intent:8fab3ca0",
@@ -51593,6 +52067,11 @@
   },
   {
    "s": "topic:curiosity",
+   "t": "doc:12",
+   "kind": "guided_by"
+  },
+  {
+   "s": "topic:curiosity",
    "t": "sit:curiosity:open-scene",
    "kind": "has"
   },
@@ -51803,6 +52282,11 @@
   },
   {
    "s": "topic:issues",
+   "t": "doc:12",
+   "kind": "guided_by"
+  },
+  {
+   "s": "topic:issues",
    "t": "sit:issues:open-scene",
    "kind": "has"
   },
@@ -51940,6 +52424,11 @@
    "s": "sit:issues:conclusion",
    "t": "sit:main:conclusion",
    "kind": "from_main"
+  },
+  {
+   "s": "topic:issues",
+   "t": "sit:issues:archive-evidence",
+   "kind": "has"
   },
   {
    "s": "topic:issues",
@@ -52928,12 +53417,12 @@
   },
   {
    "s": "sit:curiosity:open-scene",
-   "t": "term:story",
+   "t": "term:illust",
    "kind": "uses"
   },
   {
    "s": "sit:curiosity:open-scene",
-   "t": "term:kb",
+   "t": "term:story",
    "kind": "uses"
   },
   {
@@ -52943,7 +53432,7 @@
   },
   {
    "s": "sit:curiosity:open-scene",
-   "t": "term:tech-parallax-photo",
+   "t": "term:tech-match-move",
    "kind": "uses"
   },
   {
@@ -53298,17 +53787,17 @@
   },
   {
    "s": "sit:issues:open-scene",
-   "t": "term:kb",
-   "kind": "uses"
-  },
-  {
-   "s": "sit:issues:open-scene",
    "t": "term:footage",
    "kind": "uses"
   },
   {
    "s": "sit:issues:open-scene",
-   "t": "term:stage",
+   "t": "term:kb",
+   "kind": "uses"
+  },
+  {
+   "s": "sit:issues:open-scene",
+   "t": "term:newspapers",
    "kind": "uses"
   },
   {
@@ -53604,6 +54093,31 @@
   {
    "s": "sit:issues:conclusion",
    "t": "term:tech-match-move",
+   "kind": "uses"
+  },
+  {
+   "s": "sit:issues:archive-evidence",
+   "t": "term:footage",
+   "kind": "uses"
+  },
+  {
+   "s": "sit:issues:archive-evidence",
+   "t": "term:kb",
+   "kind": "uses"
+  },
+  {
+   "s": "sit:issues:archive-evidence",
+   "t": "term:newspapers",
+   "kind": "uses"
+  },
+  {
+   "s": "sit:issues:archive-evidence",
+   "t": "term:tech-draw-on",
+   "kind": "uses"
+  },
+  {
+   "s": "sit:issues:archive-evidence",
+   "t": "term:tech-parallax-photo",
    "kind": "uses"
   },
   {
@@ -54559,6 +55073,46 @@
   {
    "s": "fb:62",
    "t": "intent:1f7745a1",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:63",
+   "t": "intent:6750cd32",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:64",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "fb:64",
+   "t": "intent:ccde1780",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:65",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "fb:65",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "fb:65",
+   "t": "intent:a5ecd3e7",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:66",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "fb:66",
+   "t": "intent:dc0efbcf",
    "kind": "quoted_as"
   }
  ]
