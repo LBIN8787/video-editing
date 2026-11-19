@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -902,6 +903,48 @@ bline("bend2", "몇 번째로 다시 쓴 원고일까요", 580, 76, GOLD)
 go(T(147) - .3, "blk", "dissolve", .9)
 bshow(T(147), ["bend1"], 1.6)
 bshow(W("몇", 147), ["bend2"], 1.4)
+
+# ───────────────────────────────── 보완 (2026-11-19): 가까운 샷 완성 장면
+# 사용자: "전체적인 화면 퀄리티 자체는 codex가 우세하지만 편집법 연출법 자체는 클로드가 좋았다" — 연출은 그대로 두고,
+# 이야기의 핵심 순간에 인물·배경·빛이 한 장에 그려진 가까운 샷(손·어깨 너머·표정)을 끼워 넓은 '무대' 장면만 이어지지 않게.
+SHOTS = os.environ.get("YTFLOW_MEMORY_SHOTS", "1") == "1"
+
+
+def insert(name, t0, t1, back, how_in="dissolve", how_out="dissolve", push=(0.5, 0.5, 1.0, 0.5, 0.45, 1.08), grade=None, texts=()):
+    if not (art / f"{name}.png").exists():
+        print(f"[shot] 없음: {name} — 건너뜀")
+        return
+    sid = "x_" + name
+    s = f.set(sid, f"{name}.png")
+    for tid, txt, x, y, size, color in texts:
+        s.text(tid, txt, x, y, size=size, color=color, rot=-2, card=True)
+    f._show(t0, sid, how_in, .5 if how_in != "cut" else 0, back)
+    x0, y0, s0, x1, y1, s1 = push
+    f._cam(t0, sid, s.pw * x0, s.ph * y0, s0, .05)
+    f._cam(t0 + .05, sid, s.pw * x1, s.ph * y1, s1, max(.5, t1 - t0), "sine.inOut")
+    if grade:
+        f._grade(t0, sid, grade, .05)
+    for k, (tid, *_r) in enumerate(texts):
+        f._enter(t0 + .6 + k * 1.2, tid, "write", .7)
+    f._show(t1, back, how_out, .4 if how_out != "cut" else 0, sid)
+
+
+if SHOTS:
+    insert("sh_hand86", T(2, .5), E(2) + .25, "cls")
+    insert("sh_write86", T(5) - .1, E(5) + .1, "cls", push=(0.45, 0.5, 1.0, 0.55, 0.5, 1.1))
+    insert("sh_shock88", T(13) + .5, T(15) - .2, "cls", how_out="cut", push=(0.5, 0.45, 1.0, 0.5, 0.4, 1.12))
+    insert("sh_bart32", T(25) - .1, E(25) + .1, "c32")
+    insert("sh_film74", T(32, .15), W("짧은", 32) - .05, "lab", how_out="cut", push=(0.5, 0.5, 1.0, 0.55, 0.45, 1.1))
+    insert("sh_check74", T(44) - .1, T(45) - .3, "lab", how_out="cut", push=(0.5, 0.5, 1.0, 0.5, 0.5, 1.15))
+    insert("sh_interview95", T(56, .3), E(56) + .1, "r95")
+    insert("sh_mall", T(57) + .85, E(57) + .15, "mall", grade="sepia(.4) saturate(.85)", push=(0.5, 0.5, 1.0, 0.48, 0.5, 1.1))
+    insert("sh_rat00", T(76, .45), E(76) + .1, "rl")
+    insert("sh_write01", T(104, .5), E(104) + .1, "lg")
+    insert("sh_lineup84", T(117) - .1, E(117) + .1, "ct", grade="saturate(.75) brightness(.92)")
+    insert("sh_family", T(129) - .1, E(130) + .1, "hm")
+    insert("sh_ask", T(139) + .35, E(139) + .15, "hm",
+           texts=[("aq1", "'그 사람이 때렸지?'", 470, 700, 58, "#8a8a8a"), ("aq2", "'무슨 일이 있었어?'", 1250, 560, 64, "#2f5d8a")])
+    insert("sh_drawer", T(143, .3), E(143) + .1, "dn", push=(0.5, 0.55, 1.0, 0.5, 0.6, 1.12))
 
 f.html(a.out)
 print("ok", a.out, END)

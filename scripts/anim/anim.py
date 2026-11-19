@@ -59,8 +59,25 @@ class Set:
         self.ph = round(im.height * w / im.width)
         self.items = []                   # html 조각
         self.cam0 = focus or (self.pw / 2, self.ph / 2, max(W / self.pw, HH / self.ph))
+        self.tone = self._tone(im)
 
-    def actor(self, aid, poses, x, y, h, par=1.0, flip=False, z=5, show=None):
+    @staticmethod
+    def _tone(im):
+        """배경 판의 밝기·색온도에 인물·소품을 맞추는 CSS 필터 (2026-11-19 화면 완성도 보완: 자른 인물이 떠 보이지 않게)."""
+        try:
+            sm = im.convert("RGB").resize((32, 18))
+        except Exception:
+            return ""
+        px = list(sm.getdata())
+        r = sum(p[0] for p in px) / len(px); g = sum(p[1] for p in px) / len(px); b = sum(p[2] for p in px) / len(px)
+        lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+        if lum < 0.08:          # 검은 화면 등은 그대로
+            return ""
+        br = min(1.02, max(0.72, 0.74 + 0.42 * lum))
+        warm = min(0.22, max(0.0, (r - b) / 255 * 0.7))
+        return f"filter:brightness({br:.3f}) sepia({warm:.3f}) saturate({1 - warm * 0.5:.3f});"
+
+    def actor(self, aid, poses, x, y, h, par=1.0, flip=False, z=5, show=None, shadow=True):
         """발끝 (x, y), 첫 자세의 키 h. 같은 시트의 조각은 같은 비율로 (자세마다 키가 달라도 실제 크기 유지)."""
         sizes = {p: Image.open(self.f.art / f"{p}.png").size for p in poses}
         k = h / sizes[poses[0]][1]
@@ -68,7 +85,9 @@ class Set:
             f'<img class="pose" data-p="{p}" src="{(self.f.art / (p + ".png")).as_uri()}" '
             f'style="width:{sizes[p][0]*k:.0f}px;height:{sizes[p][1]*k:.0f}px;left:{-sizes[p][0]*k/2:.0f}px;top:{-sizes[p][1]*k:.0f}px;'
             f'opacity:{1 if p == (show or poses[0]) else 0}">' for p in poses)
-        self.items.append((par, z, f'<div class="actor" id="{aid}" style="left:{x}px;top:{y}px"><div class="mv"><div class="sq{" flip" if flip else ""}">{imgs}</div></div></div>'))
+        sw = sizes[poses[0]][0] * k * 0.62
+        shd = (f'<div class="shd" style="left:{-sw/2:.0f}px;top:{-sw*0.07:.0f}px;width:{sw:.0f}px;height:{sw*0.14:.0f}px"></div>' if shadow else "")
+        self.items.append((par, z, f'<div class="actor" id="{aid}" style="left:{x}px;top:{y}px"><div class="mv">{shd}<div class="sq{" flip" if flip else ""}" style="{self.tone}">{imgs}</div></div></div>'))
         return self
 
     def prop(self, pid, piece, x, y, w, par=1.0, z=6, rot=0, hidden=True, anchor="center"):
@@ -77,7 +96,7 @@ class Set:
         top = -h if anchor == "bottom" else -h / 2
         self.items.append((par, z, f'<div class="prop" id="{pid}" style="left:{x}px;top:{y}px;opacity:{0 if hidden else 1}">'
                                    f'<div class="mv" style="transform:rotate({rot}deg)"><img src="{(self.f.art / (piece + ".png")).as_uri()}" '
-                                   f'style="width:{w:.0f}px;height:{h:.0f}px;left:{-w/2:.0f}px;top:{top:.0f}px"></div></div>'))
+                                   f'style="width:{w:.0f}px;height:{h:.0f}px;left:{-w/2:.0f}px;top:{top:.0f}px;{self.tone}"></div></div>'))
         return self
 
     def raw(self, html, par=1.0, z=7):
@@ -215,6 +234,7 @@ html,body{{margin:0;background:#000;overflow:hidden}}
 .mv,.sq{{position:absolute;left:0;top:0}}
 .sq{{transform-origin:0 0}}
 .pose,.prop img{{position:absolute;display:block}}
+.shd{{position:absolute;border-radius:50%;background:radial-gradient(ellipse at center,rgba(30,20,10,.32) 0%,rgba(30,20,10,.14) 45%,rgba(30,20,10,0) 72%);pointer-events:none}}
 .txt{{white-space:nowrap;line-height:1.15}} .txt .ch{{display:inline-block;opacity:0}}
 .vign{{position:absolute;inset:0;pointer-events:none;z-index:50;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 62%,rgba(0,0,0,.22) 100%)}}
 .grain{{position:absolute;inset:-50%;z-index:51;pointer-events:none;opacity:.05;

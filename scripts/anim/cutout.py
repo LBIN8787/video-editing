@@ -25,6 +25,22 @@ def cut(sheet: Path, outdir: Path, names: list[str], tol: int = 26) -> list[Path
     border = border[border != 0] if near[0, 0] == 0 else border
     bgmask = np.isin(lab, border) & (near == 1)
     fg = (~bgmask).astype(np.uint8)
+    # 머리카락 사이처럼 바깥과 막힌 흰 틈: 윤곽 가까이(눈 흰자처럼 안쪽 깊은 곳은 그대로)에 있는 순백 덩어리는 배경으로
+    dist_out = cv2.distanceTransform(fg, cv2.DIST_L2, 3)
+    holes = ((near == 1) & ~bgmask).astype(np.uint8)
+    hn, hl, hs, _ = cv2.connectedComponentsWithStats(holes, connectivity=4)
+    diff0 = np.abs(rgb - bg).max(axis=2)
+    total = max(1, int(fg.sum()))
+    for i in range(1, hn):
+        ar = hs[i, cv2.CC_STAT_AREA]
+        if ar < 6:
+            continue
+        sel = hl == i
+        if diff0[sel].mean() >= 12:
+            continue
+        # 윤곽 가까운 틈(머리카락 사이) 또는 팔·다리 사이처럼 눈 흰자보다 큰 틈 → 배경. 말풍선 속처럼 아주 큰 흰 면은 그대로
+        if dist_out[sel].min() < 22 and ar <= 15000 or 250 <= ar <= min(15000, total * 0.03):
+            fg[sel] = 0
     fg = cv2.morphologyEx(fg, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
     # 작은 부스러기 지우기
     k, cl, st, _ = cv2.connectedComponentsWithStats(fg, connectivity=8)
@@ -61,17 +77,42 @@ def cut(sheet: Path, outdir: Path, names: list[str], tol: int = 26) -> list[Path
         m[w:w + 1] = [[x0, sx], [sx, x1]]
     if len(m) != len(names):
         raise RuntimeError(f"조각 {len(m)}개 ≠ 이름 {len(names)}개: {sheet}")
-    soft = cv2.GaussianBlur(fg.astype(np.float32), (0, 0), 0.8)
-    # 배경색이 섞인 가장자리 색 빼기(흰 테두리 줄이기)
+    # 흰 테두리 없애기 (2026-11-19 사용자: "그림을 누끼 딸 때 흰부분이 있는점")
+    # ① 가장자리를 1px 안으로 ② 가장자리 몇 px 는 '배경색과 얼마나 다른가'로 투명도를 다시 셈
+    # ③ 반투명 픽셀에 섞인 배경색을 빼서 원래 색으로 (색 되돌리기)
+    fg_in = cv2.erode(fg, np.ones((3, 3), np.uint8), iterations=1)
+    soft = cv2.GaussianBlur(fg_in.astype(np.float32), (0, 0), 0.7)
+    dist = cv2.distanceTransform(fg_in, cv2.DIST_L2, 3)
+    diff = np.abs(rgb - bg).max(axis=2).astype(np.float32)
+    est = np.clip((diff - 8) / 100.0, 0, 1)
+    alpha = np.where(dist < 3.5, soft * est, soft)
+    alpha = np.where(dist >= 3.5, np.maximum(alpha, soft), alpha)
     out = a.copy()
-    out[..., 3] = (soft * 255).clip(0, 255).astype(np.uint8)
+    al = np.clip(alpha, 0, 1)[..., None]
+    col = (a[..., :3].astype(np.float32) - (1 - al) * bg.reshape(1, 1, 3)) / np.maximum(al, 0.05)
+    out[..., :3] = np.where(al > 0.02, np.clip(col, 0, 255), a[..., :3]).astype(np.uint8)
+    out[..., 3] = (al[..., 0] * 255).clip(0, 255).astype(np.uint8)
     outdir.mkdir(parents=True, exist_ok=True)
     res = []
     for (x0, x1), nm in zip(m, names):
+        # 옆 조각에서 넘어온 작은 부스러기 지우기: 이 칸에서 가장 큰 덩어리의 3% 보다 작은 덩어리는 투명하게
+        sub = (fg[:, x0:x1] > 0).astype(np.uint8)
+        kn, kl, ks, _ = cv2.connectedComponentsWithStats(sub, connectivity=8)
+        if kn > 2:
+            big = ks[1:, cv2.CC_STAT_AREA].max()
+            for j in range(1, kn):
+                if ks[j, cv2.CC_STAT_AREA] < big * 0.03:
+                    blk = kl == j
+                    out[:, x0:x1, 3][blk] = 0
+                    fg[:, x0:x1][blk] = 0
         ys = np.where(fg[:, x0:x1].any(axis=1))[0]
         y0, y1 = max(0, ys[0] - 6), min(a.shape[0], ys[-1] + 6)
         p = outdir / f"{nm}.png"
-        cv2.imencode('.png', out[y0:y1, max(0, x0 - 6):x1 + 6])[1].tofile(str(p))
+        lx = max(0, x0 - 6)
+        crop = out[y0:y1, lx:x1 + 6].copy()
+        crop[:, :x0 - lx, 3] = 0          # 여백(양옆 6px)에 들어온 옆 조각은 투명하게
+        crop[:, x1 - lx:, 3] = 0
+        cv2.imencode('.png', crop)[1].tofile(str(p))
         res.append(p)
     return res
 
