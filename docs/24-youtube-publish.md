@@ -11,7 +11,7 @@
 | 설명란(더보기): 요약·기준 시각·챕터·출처·면책·해시태그 | ✅ | `youtube.md` 설명란 블록 |
 | 태그 | ✅ | `youtube.md` 태그 |
 | 카테고리·언어·아동용 아님·라이선스·퍼가기·통계 공개 | ✅ | `channels/ch-market-daily/channel.yaml` → `youtube:` |
-| 공개 예약 (평일 10:00 KST, 지났으면 바로 공개) | ✅ | `youtube.publish_time` 또는 `--at` |
+| 공개 예약 (평일 08:30 KST — 2026-11-19 변경, 지났으면 바로 공개) | ✅ | `youtube.publish_time` 또는 `--at` |
 | 썸네일 | ✅ 한 장(A) | `--thumb A|B|C` · **채널 전화 인증 필요** |
 | 자막(한국어 트랙) | ✅ | `subs.ass` → SRT |
 | 재생목록 (아침 브리핑/심층/주간/주말 분석, 없으면 만듦) | ✅ | `youtube.playlists` |
