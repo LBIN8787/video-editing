@@ -208,7 +208,7 @@ python -m ytflow style-pick <프로젝트>   # topic_brief.json → 영상 전�
 
 ## 2. 장면 단위: 연출 type 고르기 (말하는 내용 → 화면)
 
-[표현 방식 매뉴얼](12-visual-storytelling.md)에서 장면이 맡은 역할을 보고 인포그래픽·삽화·실제 인물 사진·자료 영상 중 주된 화면을 정한 뒤 type을 고릅니다.
+[표현 방식 매뉴얼](12-visual-storytelling.md)에서 대사에 어울리는 실제 인물·자료를 먼저 살핍니다. 관계나 변화 자체를 설명할 때는 인포그래픽, 두 방식으로 상황을 보여 주기 어려울 때는 삽화를 고른 뒤 장면 type을 정합니다.
 > 기능마다 **언제 쓰고·쓰지 않고·대신 무엇을** 은 `manual/10-when-to-use.md` (원본 `manual/usage.yaml`). 이 표의 **기계가 읽는 원본은 `manual/situations.yaml`** (메인 공통 상황)이고, 주제마다 다른 것은 `topics/<brand>/topic.yaml` 에 있습니다. 영상 한 편은 `python -m ytflow edit-plan <프로젝트>` 가 박자마다 상황을 찾아 이 표대로 채웁니다 (docs/33). 둘이 다르면 yaml 이 우선입니다.
 | 이 문장이 하는 일 | 1순위 type | 2순위 | 피할 것 |
 |---|---|---|---|
