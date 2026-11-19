@@ -205,21 +205,7 @@ def run(path: Path, upto: str = "G8") -> Report:
             aud = (res / "audience.md").read_text(encoding="utf-8") if (res / "audience.md").exists() else ""
             R.add("G1", "MUST", "curiosity: 시청자 조사 01_research/audience.md (주 시청자·유입 경로·유입 이유·끝까지 보는 이유)",
                   all(k in aud for k in ("주 시청자", "유입 경로", "유입 이유", "끝까지 보는 이유")), "docs/29")
-            sv = sorted((Path(path) / "02_script").glob("script_v*.md"))
-            if sv:   # 사람이 문장마다 ●이야기 / ○지식 으로 표시한 대본
-                body = sv[-1].read_text(encoding="utf-8")
-                body = body[body.find("## 2."):body.find("## 3.")] if "## 2." in body else body
-                cnt = {"●": 0, "○": 0}
-                for ln in body.splitlines():
-                    if ln[:1] in cnt:
-                        cnt[ln[0]] += len([x for x in _re2.split(r"(?<=[.?!])\s+", ln[1:].strip()) if x])
-                tot = sum(cnt.values()) or 1
-                R.add("G4", "참고", "curiosity: 지식·설명 문장의 몫 (사실이 사람·사건 속에 있는지 — 판단은 대본 검토 D2, 04 §0-6)", cnt["○"] / tot <= 0.30, f"{cnt['○']}/{tot} = {cnt['○'] / tot:.0%} ({sv[-1].name})")
-            else:   # 표시가 없으면 낱말로 센 하한 (실제보다 낮게 나옴)
-                sents = [x for t in _says for x in _re2.split(r"(?<=[.?!])\s+", t) if x.strip()]
-                kn = [x for x in sents if _re2.search(r"\d{4}년|\d|대학|박사|교수|학자|논문|책에|이라고 부릅|알려져|정리했|순서로|첫 번째|두 번째|세 번째", x)]
-                R.add("G4", "참고", "curiosity: 지식·설명 문장의 몫 (자동 추정 — 판단은 대본 검토 D2)",
-                      len(kn) / max(len(sents), 1) <= 0.30, f"{len(kn)}/{len(sents)}")
+            # 지식 문장 비율(≤30%) 검사는 없앰 — 2026-11-19 사용자: "너무 과적합", 균형은 D2 에서 사람이 본다 (04 §0-6)
             rvw = (Path(path) / "02_script" / "script_review.md")
             R.add("G4", "MUST", "curiosity: 편집 전에 대본만 사용자 검토 통과 (02_script/script_review.md '통과', 04 §0-6)",
                   rvw.exists() and "통과" in rvw.read_text(encoding="utf-8"), "")
