@@ -312,3 +312,79 @@ techniques:
     tools: []
     related: [map_causal]
     anim: spotlight
+
+  card-state:
+    name: 카드 상태 변화
+    group: 관계·상태
+    status: have
+    plain: 같은 카드가 대기 → 진행 → 성공·실패로 바뀜
+    look: 같은 카드가 대기 → 진행 → 성공·실패로 바뀜
+    use_when: 예약·결제·처리 결과가 시간 순서로 달라지는 박자
+    caution: 실제 화면이 있으면 먼저 보여 주고, 목업에는 연출 고지를 유지
+    how: statecard 장면 cards·hub와 박자 show·state·text 사용 — docs/43-reference-pickle-explainer.md §6
+    related:
+    - statecard
+    - chat
+
+  link-break:
+    name: 연결선 끊김
+    group: 선·모양
+    status: have
+    plain: 이미 그린 선을 빨간 점선과 X로 바꿔 차단을 남김
+    look: 이미 그린 선을 빨간 점선과 X로 바꿔 차단을 남김
+    use_when: 서비스 차단·흐름 중단처럼 연결이 실패하는 순간
+    caution: 실패가 확인된 연결에만 쓰고 빨강과 X를 함께 사용
+    how: 'statecard 박자 cut: [카드id], map_causal 박자 cut: [[출발id,도착id]] — docs/43-reference-pickle-explainer.md §6'
+    related:
+    - statecard
+    - map_causal
+
+  footage-chips:
+    name: 실사 위 요청 칩
+    group: 겹치기
+    status: have
+    plain: 실사 위에 짧은 요청 칩이 차례로 떠오름
+    look: 실사 위에 짧은 요청 칩이 차례로 떠오름
+    use_when: 같은 장소의 여러 요청·사용 사례를 소개할 때
+    caution: 얼굴·핵심 동작·자막을 가리지 않게 위치 조정; 실제 발언처럼 보이는 예시에는 고지
+    how: footage 박자 chips 배열과 chip_gap 사용 — docs/43-reference-pickle-explainer.md §6
+    related:
+    - footage
+
+  document-spotlight:
+    name: 문서 스포트라이트
+    group: 증거
+    status: have
+    plain: 본문 나머지를 어둡게 하고 읽는 문단만 밝게 남김
+    look: 본문 나머지를 어둡게 하고 읽는 문단만 밝게 남김
+    use_when: 기사·공식 문서에서 근거 문장을 짚을 때
+    caution: 원문·출처를 확인; 텍스트 재구성은 실제 캡처와 구별; 어둡힌 문단 대비 경고는 수동 검토
+    how: docspot 장면 paras 또는 img, 박자 spot·mark·num 사용 — docs/43-reference-pickle-explainer.md §6
+    related:
+    - docspot
+    - newsdesk
+
+  chapter-two-line:
+    name: 두 줄 장 표지
+    group: 글자
+    status: have
+    plain: 작은 흰 줄 다음 큰 강조색 줄이 뜸
+    look: 작은 흰 줄 다음 큰 강조색 줄이 뜸
+    use_when: 앞 장의 결론에서 다음 질문으로 넘어가는 자리
+    caution: 매 장면에 반복하지 않고 읽을 시간·배경 대비를 확보
+    how: 'chapter 장면 look: two-line, kicker·title·clip 사용 — docs/43-reference-pickle-explainer.md §6'
+    related:
+    - chapter
+
+  shape-iris:
+    name: 원 모양을 잇는 아이리스
+    group: 전환
+    status: have
+    plain: 앞 장면의 원이 확대되어 덮고 다음 장면이 같은 색에서 원으로 열림
+    look: 앞 장면의 원이 확대되어 덮고 다음 장면이 같은 색에서 원으로 열림
+    use_when: 금고 보호 범위 등 원 모양이 다음 이야기로 이어질 때
+    caution: 현 구현은 바탕색을 거쳐 열림; 원 안에 다음 장면이 곧바로 보이는 합성은 미구현
+    how: '앞 장면 iris_out: {x, y, r, color, to}; edit10 전환이 켜져 있어야 함 — docs/43-reference-pickle-explainer.md §6'
+    related:
+    - chapter
+    - statecard

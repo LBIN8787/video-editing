@@ -230,6 +230,9 @@ def s_footage(D: HDoc, sc: dict, bt: list, dur: float):
             D.lower(b["lower"]["name"], b["lower"]["role"], t0 + 0.2, dark=full)
         if b.get("vox"):
             D.vox(b["vox"]["text"], b["vox"].get("note", ""), t0 + 0.4, x=1000 if full else 1120, y=140 if full else 110, on_paper=not full)
+        if b.get("chips"):   # 실사 위 말 칩 (docs/43 §4-3, uiflow.chips)
+            from . import uiflow
+            uiflow.chips(D, b["chips"], t0 + 0.3, b.get("chip_gap", 0.6))
 
 
 def _free_spot(pts: list, used: list, ax: float, ay: float, w: float, h: float, top: float, bottom: float) -> tuple[float, float]:
@@ -427,6 +430,15 @@ def _route(a: dict, b: dict, others: list) -> tuple[list, bool]:
 
 
 def _edge(D: HDoc, a: dict, b: dict, at: float, instant: bool, col: str, others: list | None = None):
+    """화살표 하나 → (감싼 <g> id, 경로 점들). 나중에 '막힘'(uiflow.cut_link)으로 바꿀 수 있게 묶어 둠."""
+    gid = D._id()
+    D.svg.append(f'<g id="{gid}">')
+    pts = _edge_draw(D, a, b, at, instant, col, others)
+    D.svg.append("</g>")
+    return gid, pts
+
+
+def _edge_draw(D: HDoc, a: dict, b: dict, at: float, instant: bool, col: str, others: list | None = None):
     pts, ok = _route(a, b, others or [])
     if not ok:
         D.qa.append(f"인과 지도: '{a['label']}' → '{b['label']}' 화살표가 다른 칸을 지납니다 (칸 위치를 옮기세요)")
@@ -437,6 +449,7 @@ def _edge(D: HDoc, a: dict, b: dict, at: float, instant: bool, col: str, others:
     head = [[x1 - 22 * math.cos(ang - 0.45), y1 - 22 * math.sin(ang - 0.45)], [x1, y1],
             [x1 - 22 * math.cos(ang + 0.45), y1 - 22 * math.sin(ang + 0.45)]]
     D.rough("linearPath", [head], col, 3.5, at=at + d_body, dur=d_head, roughness=0.5)
+    return pts
 
 
 def s_map_causal(D: HDoc, sc: dict, bt: list, dur: float):
@@ -444,7 +457,7 @@ def s_map_causal(D: HDoc, sc: dict, bt: list, dur: float):
     D.label(sc.get("label", ""))
     D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
     D.h1(sc.get("title", ""), y=150, size=58)
-    shown, drawn = [], set()
+    shown, drawn = [], {}
     # 장면 시작 때 이미 있던 것: 첫 박자의 instant
     first = sc["beats"][0]
     for k in first.get("reveal", []) if first.get("instant") else []:
@@ -459,19 +472,24 @@ def s_map_causal(D: HDoc, sc: dict, bt: list, dur: float):
             shown.append(k)
         for e in b.get("instant", []):
             if tuple(e) not in drawn:
-                _edge(D, mp["nodes"][e[0]], mp["nodes"][e[1]], 0.35, True, D.ink, [v for k2, v in mp["nodes"].items() if k2 not in e])
-                drawn.add(tuple(e))
+                drawn[tuple(e)] = _edge(D, mp["nodes"][e[0]], mp["nodes"][e[1]], 0.35, True, D.ink, [v for k2, v in mp["nodes"].items() if k2 not in e])
         for e_i, e in enumerate(b.get("draw", [])):
             if tuple(e) not in drawn:
-                _edge(D, mp["nodes"][e[0]], mp["nodes"][e[1]], t0 + 0.6 + 0.55 * e_i, False, D.red if b.get("active") == e[1] else D.ink,
-                      [v for k2, v in mp["nodes"].items() if k2 not in e])
-                drawn.add(tuple(e))
+                drawn[tuple(e)] = _edge(D, mp["nodes"][e[0]], mp["nodes"][e[1]], t0 + 0.6 + 0.55 * e_i, False, D.red if b.get("active") == e[1] else D.ink,
+                                        [v for k2, v in mp["nodes"].items() if k2 not in e])
                 D.sfx.append(("pencil", t0 + 0.6 + 0.55 * e_i))
         if b.get("active") and b["active"] != active:
             k = b["active"]
             nd = mp["nodes"][k]
             _node_box(D, k, nd, "active", t0 + 0.9, False)
             active = k
+        for c_i, e in enumerate(b.get("cut", [])):   # 선 상태 바꾸기: 지우지 않고 빨간 점선 + X (docs/43 §4-2)
+            if tuple(e) in drawn:
+                from . import uiflow
+                gid, pts = drawn[tuple(e)]
+                uiflow.cut_link(D, gid, pts, t0 + 0.5 + 0.4 * c_i)
+            else:
+                D.qa.append(f"인과 지도: cut {e} — 아직 그리지 않은 화살표입니다")
         if b.get("tag"):
             nd = mp["nodes"][b["tag"]["node"]]
             ty = nd["y"] + 120 if nd["y"] < 600 else nd["y"] - 125
@@ -1484,6 +1502,8 @@ try:  # 새 연출 문법(아카이브 다큐·지도 여정·키네틱 타이�
     _illust.register()
     from . import newsdesk as _newsdesk  # 뉴스 데스크 카드 (newsdesk 장면, styles/news-desk)
     _newsdesk.register()
+    from . import uiflow as _uiflow      # UI 재연·증거 (statecard·docspot 장면, 두 줄 장 표지, 칩, 선 끊김, 모양 매치 아이리스 — docs/43)
+    _uiflow.register()
     from . import story as _story        # 이야기 그림판 (story 장면, styles/story-board) — 호기심 채널
     _story.register()
     from . import stage as _stage        # 애니메이션 무대 (stage 장면, styles/anim-stage) — 호기심 채널 v22, manual/04 §0-5
