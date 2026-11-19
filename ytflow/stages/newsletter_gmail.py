@@ -68,7 +68,7 @@ def ingest_exports(directory: Path, config: dict, label_id: str) -> dict:
     seen_sources = {item["source"] for day in days for item in day["items"] if item.get("msg") != "rss"}
     cutoff = datetime.now(timezone.utc) - timedelta(days=2)
     for path in sorted(directory.glob("*.json")):
-        mail = json.loads(path.read_text(encoding="utf-8"))
+        mail = json.loads(path.read_text(encoding="utf-8-sig"))
         counts["candidates"] += 1
         labels = set(mail.get("labels", []))
         source_msg_id = mail["id"]
