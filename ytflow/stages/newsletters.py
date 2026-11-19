@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import json
 import re
+from hashlib import sha256
 import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -33,7 +34,8 @@ OUT = config.ROOT / "inbox" / "newsletters"
 BRANDS = ("market", "ai", "curiosity", "issues")
 BRAND_KO = {"market": "시장", "ai": "AI", "curiosity": "호기심", "issues": "시사"}
 KIND_KO = {"primary": "원문", "data": "원자료·통계", "media": "영상·이미지", "news": "보도·글"}
-NOISE_SUBJ = re.compile(r"(?i)confirm|welcome|verify|subscription|preferences|update profile|구독 확인|인증|가입")
+NOISE_SUBJ = re.compile(r"(?i)confirm|welcome|verify|subscription|preferences|update profile|구독 확인|구독해|환영|인증|가입")
+EMAIL_ADDRESS = re.compile(r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}")
 GENERIC = re.compile(r"(?i)^(read more|more|here|click here|link|learn more|full story|continue reading|read|sign up|subscribe|"
                      r"view online|this|website|자세히|더 보기|원문|바로가기|기사 보기)\W*$")
 UA = {"User-Agent": "ytflow-newsletters (research)"}
@@ -81,19 +83,49 @@ def unwrap(url: str) -> str:
     return urllib.parse.urlunsplit((p.scheme, p.netloc, p.path, urllib.parse.urlencode(keep), ""))
 
 
-OPAQUE = ("beehiiv.com", "substack.com/redirect", "list-manage.com/track", "links.", "click.", "email.", "r.", "trk.", "go.")
+# Ingestion never dereferences email links. Even HEAD can trigger an action.
+MANAGEMENT = re.compile(
+    r"unsubscribe|subscription|preferences|opt[-_ ]?out|manage[-_ /]?profile|"
+    r"confirm|verification|verify|sign[-_ ]?in|log[-_ ]?in|password|"
+    r"change[-_ /]?email|update[-_ /]?email|email[-_ /]?change|account[-_ /]?settings|"
+    r"구독.?해지|수신.?거부|환경.?설정|본인.?인증", re.I)
+PUBLIC_QUERY = {"id", "v", "q", "s", "page", "lang", "language", "year", "month"}
+SENSITIVE_QUERY = re.compile(
+    r"token|secret|email|recipient|subscriber|signature|auth|session|hash|"
+    r"^key$|^code$|^uid$|^cid$|^mid$", re.I)
+
+
+def public_link(url: str) -> bool:
+    """Conservative publication gate, not proof that a URL is safe to visit."""
+    try:
+        p = urllib.parse.urlsplit(url)
+        host = (p.hostname or "").lower()
+        if p.scheme not in ("http", "https") or not host or p.username or p.password:
+            return False
+        decoded = urllib.parse.unquote(url)
+        if MANAGEMENT.search(decoded) or EMAIL_ADDRESS.search(decoded):
+            return False
+        if (host == "beehiiv.com" or host.endswith(".beehiiv.com") or
+                host.startswith(("links.", "click.", "email.", "r.", "trk.", "go.")) or
+                (host.endswith("substack.com") and p.path.startswith("/redirect")) or
+                (host.endswith("list-manage.com") and p.path.startswith("/track"))):
+            return False
+        # Unknown query keys can be per-recipient identifiers: retain privately
+        # for manual canonical-source lookup, never publish or request them.
+        pairs = urllib.parse.parse_qsl(p.query, keep_blank_values=True)
+        if any(SENSITIVE_QUERY.search(k) or k.lower() not in PUBLIC_QUERY or
+               len(v) > 80 or "@" in v for k, v in pairs):
+            return False
+        if re.search(r"(?:^|/)[A-Za-z0-9_=-]{48,}(?:/|$)", urllib.parse.unquote(p.path)):
+            return False
+        return True
+    except ValueError:
+        return False
 
 
 def resolve(url: str, timeout: int = 8) -> str:
-    """열어 봐야 아는 짧은 추적 주소(beehiiv·substack 등) → 따라가서 최종 주소. 실패하면 그대로."""
-    host = urllib.parse.urlsplit(url).netloc
-    if not any(o in url or host.startswith(o) for o in OPAQUE):
-        return url
-    try:
-        r = urllib.request.urlopen(urllib.request.Request(url, headers=UA, method="HEAD"), timeout=timeout)
-        return unwrap(r.geturl())
-    except Exception:  # noqa: BLE001
-        return url
+    """Compatibility helper: offline unwrap only; never follows redirects."""
+    return unwrap(url)
 
 
 def kind(url: str, c: dict) -> str:
@@ -178,10 +210,17 @@ def items_from(msg: dict, c: dict, do_resolve: bool = True) -> list[dict]:
     own = [m.lower() for m in src.get("match", [])]
     out, urls = [], set()
     for title, url in extract(msg.get("body", "")):
-        url = unwrap(url)
-        if do_resolve:
-            url = resolve(url)
-        if len(title) < 8 or skip(url, title, c, own) or url in urls:
+        # Filter raw link/label BEFORE unwrapping. No email-link HTTP requests,
+        # including when do_resolve=True (legacy API compatibility).
+        if len(title) < 8 or EMAIL_ADDRESS.search(title) or MANAGEMENT.search(urllib.parse.unquote(url) + " " + title):
+            continue
+        try:
+            if skip(url, title, c, own):
+                continue
+            url = unwrap(url)
+        except ValueError:
+            continue
+        if not public_link(url) or skip(url, title, c, own) or url in urls:
             continue
         urls.add(url)
         k = kind(url, c)
@@ -207,6 +246,10 @@ def _save(d: dict) -> Path:
     return p
 
 
+def message_key(message_id: str) -> str:
+    return sha256(message_id.encode("utf-8")).hexdigest() if message_id else ""
+
+
 def add(items: list[dict], msgs: list[dict]) -> list[Path]:
     """날짜 파일에 덧붙임. 최근 2주에 이미 나온 주소는 새로 넣지 않고 '같이 다룸'에 뉴스레터만 더함."""
     days: dict[str, dict] = {}
@@ -216,8 +259,9 @@ def add(items: list[dict], msgs: list[dict]) -> list[Path]:
     touched = set()
     for m in msgs:
         d = days.setdefault(video_day(m.get("date", "")), _load(video_day(m.get("date", ""))))
-        if m.get("id") and m["id"] not in {x["id"] for x in d["messages"]}:
-            d["messages"].append({"id": m["id"], "subject": m.get("subject", "")[:120], "sender": m.get("sender", ""), "date": m.get("date", "")})
+        keys = {m.get("id"), m.get("legacy_id")}
+        if m.get("id") and keys.isdisjoint(x["id"] for x in d["messages"]):
+            d["messages"].append({"id": m["id"], "source": m.get("source", ""), "date": m.get("date", "")})
             touched.add(d["day"])
     for it in items:
         old = next(((dd, x) for dd in days.values() for x in dd["items"] if x["url"] == it["url"]), None)
@@ -233,20 +277,28 @@ def add(items: list[dict], msgs: list[dict]) -> list[Path]:
     return [_save(days[k]) for k in sorted(touched)]
 
 
-def ingest(paths: list[str], do_resolve: bool = True) -> list[Path]:
-    c = cfg()
-    msgs = []
-    for p in paths:
-        x = json.loads(Path(p).read_text(encoding="utf-8"))
-        msgs += x if isinstance(x, list) else [x]
-    items = [it for m in msgs for it in items_from(m, c, do_resolve)]
-    known = [m for m in msgs if which(m, c) and not NOISE_SUBJ.search(m.get("subject", ""))]
+def ingest_messages(msgs: list[dict], c: dict, do_resolve: bool = True) -> list[Path]:
+    items, known = [], []
+    for m in msgs:
+        source = which(m, c)
+        if not source or NOISE_SUBJ.search(m.get("subject", "")):
+            continue
+        key = message_key(m.get("id", ""))
+        known.append({"id": key, "legacy_id": m.get("id"), "source": source["id"], "date": m.get("date", "")})
+        items.extend(items_from({**m, "id": key}, c, do_resolve))
     out = add(items, known)
-    skipped = [m.get("subject", "")[:50] for m in msgs if m not in known]
-    print(f"[newsletters] 메일 {len(msgs)}통 → 뉴스레터 {len(known)}통 · 소재 {len(items)}개" + (f" · 건너뜀(구독 확인·모르는 보낸 사람): {skipped}" if skipped else ""))
+    print(f"[newsletters] 메일 {len(msgs)}통 → 뉴스레터 {len(known)}통 · 소재 {len(items)}개")
     for p in out:
         print(f"[newsletters] → {p}")
     return out
+
+
+def ingest(paths: list[str], do_resolve: bool = True) -> list[Path]:
+    msgs = []
+    for p in paths:
+        x = json.loads(Path(p).read_text(encoding="utf-8"))
+        msgs.extend(x if isinstance(x, list) else [x])
+    return ingest_messages(msgs, cfg(), do_resolve)
 
 
 def rss() -> list[Path]:
@@ -278,6 +330,12 @@ def rss() -> list[Path]:
             if t.tzinfo is None:   # 시간대 없는 날짜 (디일렉 등 국내 피드) → 한국 시간으로 봄
                 t = t.replace(tzinfo=timezone(timedelta(hours=9)))
             if datetime.now(timezone.utc) - t > timedelta(days=2) or not title or not url:
+                continue
+            try:
+                url = unwrap(url)
+            except ValueError:
+                continue
+            if not public_link(url) or EMAIL_ADDRESS.search(title):
                 continue
             items.append({"title": _clean(title), "url": url, "kind": kind(url, c), "reuse": reuse(url, c), "brand": route(title, s, c),
                           "source": s["id"], "source_name": s["name"], "msg": "rss", "date": t.isoformat()})
