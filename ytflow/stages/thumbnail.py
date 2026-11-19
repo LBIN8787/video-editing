@@ -11,6 +11,9 @@
 - versus: 종이 바탕에 두 숫자 맞대기 (채널의 종이·손그림 정체성).
 - board : 이야기 그림판(story 장면)과 같은 얼굴 — 종이 바탕 + 선으로 그린 사람·사물(drawings) + 큰 두 줄 글씨 + 빨간 펜 표시.
           호기심 채널(이야기형)용. drawings: [{"icon": "chess"|"shirt"|"bot"|… , "pose": "think"(사람), "x", "y", "s", "color"}]
+- punch : (시장, 2026-11-19 사용자 "썸네일 스타일을 좀 더 눈에 들어오게") 컬러 사진 꽉 채움 + 아주 큰 두 줄 글씨 +
+          강조 단어는 노란 상자 위 검은 글씨 + 큰 숫자 칩(▲초록·▼빨강). 작은 손글씨 줄 대신 칩. "theme": "dark" 인 versus 도 같은 결.
+          chips: [{"text": "엔비디아 ▼2.89%", "color": "down"|"up"|"yellow"}]
 공통: 굵은 고딕 + 두꺼운 테두리, 강조 단어 하나만 색, 오른쪽 아래(재생 시간 표시 자리) 비움.
 """
 from __future__ import annotations
@@ -31,6 +34,7 @@ GOTHIC_X = FONTS / "NanumGothic-ExtraBold.ttf"
 MYEONGJO_X = FONTS / "NanumMyeongjo-ExtraBold.ttf"
 PEN = FONTS / "NanumPenScript-Regular.ttf"
 PAPER, INK, RED, YELLOW = (238, 231, 218), (34, 48, 77), (214, 58, 42), (255, 214, 64)
+UP, DOWN, NAVY = (22, 168, 92), (226, 38, 38), (12, 18, 34)
 TIMESTAMP_BOX = (1080, 630, W, H)   # 유튜브가 재생 시간을 덮는 자리
 
 
@@ -194,7 +198,91 @@ def _board(base: Image.Image, v: dict) -> Image.Image:
     return base
 
 
+def _punch(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
+    """눈에 띄는 시장 썸네일: 컬러 사진 + 큰 글씨 + 노란 상자 강조 + 숫자 칩."""
+    boxes = []
+    im = _cover(_image(project, spec, v["image"]), W, H, *v["image"].get("focus", [0.5, 0.4]))
+    im = ImageEnhance.Color(im).enhance(v.get("saturate", 1.35))
+    im = ImageEnhance.Contrast(im).enhance(1.15)
+    im = ImageEnhance.Brightness(im).enhance(0.62)
+    base = im.convert("RGBA")
+    # 왼쪽·아래를 더 어둡게 (글씨 자리)
+    sh = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    sd = ImageDraw.Draw(sh)
+    for x in range(W):
+        a = int(170 * max(0.0, 1 - x / (W * 0.85)) ** 1.2)
+        sd.line([(x, 0), (x, H)], fill=(0, 0, 0, a))
+    base.alpha_composite(sh)
+    d = ImageDraw.Draw(base)
+    tx, y = 56, v.get("text_y", 120)
+    if v.get("top"):
+        ft = _font(GOTHIC_X, 38)
+        d.rounded_rectangle([tx - 4, y - 66, tx + ft.getlength(v["top"]) + 24, y - 14], 8, fill=RED)
+        d.text((tx + 10, y - 62), v["top"], font=ft, fill=(255, 255, 255))
+        boxes.append((tx, y - 66, tx + ft.getlength(v["top"]) + 24, y - 14))
+    maxw = v.get("text_w", 1060)
+    for ln in v["lines"]:
+        s = v.get("size", 170)
+        while _font(GOTHIC_X, s).getlength(ln) > maxw and s > 60:
+            s -= 4
+        f = _font(GOTHIC_X, s)
+        cx = tx
+        toks = ln.split(" ")
+        for i, tok in enumerate(toks):
+            word = tok + (" " if i < len(toks) - 1 else "")
+            wl = f.getlength(tok)
+            if any(h in tok for h in v.get("hl", [])):
+                pad = s * 0.08
+                d.rectangle([cx - pad, y + s * 0.02, cx + wl + pad, y + s * 1.08], fill=YELLOW)
+                d.text((cx, y), tok, font=f, fill=(10, 10, 10))
+            else:
+                d.text((cx, y), tok, font=f, fill=(255, 255, 255), stroke_width=max(9, s // 10), stroke_fill=(0, 0, 0))
+            cx += f.getlength(word)
+        boxes.append((tx, y, cx, y + s))
+        y += int(s * 1.16)
+    chips = v.get("chips", [])
+    if chips:
+        y += 18
+        cx = tx
+        for c in chips:
+            fs = c.get("size", v.get("chip_size", 64))
+            f = _font(GOTHIC_X, fs)
+            col = {"up": UP, "down": DOWN, "yellow": YELLOW}.get(c.get("color", "yellow"), YELLOW)
+            fg = (10, 10, 10) if col == YELLOW else (255, 255, 255)
+            w = f.getlength(c["text"]) + fs * 0.7
+            d.rounded_rectangle([cx, y, cx + w, y + fs * 1.45], int(fs * 0.25), fill=col, outline=(0, 0, 0), width=4)
+            d.text((cx + fs * 0.35, y + fs * 0.2), c["text"], font=f, fill=fg)
+            boxes.append((cx, y, cx + w, y + fs * 1.45))
+            cx += w + 24
+    return base.convert("RGB"), boxes
+
+
+def _versus_dark(v: dict) -> tuple[Image.Image, list]:
+    """versus 의 눈에 띄는 판: 짙은 남색 + 노랑·빨강 큰 숫자 + 흰 제목."""
+    base = Image.new("RGB", (W, H), NAVY)
+    d = ImageDraw.Draw(base)
+    boxes = []
+    if v.get("headline"):
+        boxes += _text_block(d, [v["headline"]], v.get("hl", []), 640, 46, 1180, 104, align="center")
+    L, R = v["left"], v["right"]
+    for (it, cx, col) in ((L, 330, YELLOW), (R, 950, DOWN)):
+        sz = it.get("size", 230)
+        while _font(GOTHIC_X, sz).getlength(it["value"]) > 520 and sz > 80:
+            sz -= 8
+        f = _font(GOTHIC_X, sz)
+        d.text((cx, 360), it["value"], font=f, fill=col, anchor="mm", stroke_width=10, stroke_fill=(0, 0, 0))
+        fl = _font(GOTHIC_X, 52)
+        d.text((cx, 540), it["label"], font=fl, fill=(255, 255, 255), anchor="mm")
+        boxes.append((cx - f.getlength(it["value"]) / 2, 240, cx + f.getlength(it["value"]) / 2, 570))
+    d.polygon([(600, 330), (680, 360), (600, 390)], fill=(255, 255, 255))
+    return base, boxes
+
+
 def render(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
+    if v.get("layout") == "punch":
+        return _punch(project, spec, v)
+    if v.get("layout") == "versus" and v.get("theme") == "dark":
+        return _versus_dark(v)
     base = Image.new("RGBA", (W, H), PAPER + (255,))
     boxes = []
     if v.get("layout", "photo") == "photo":
@@ -291,6 +379,7 @@ def run(project: Project) -> dict:
     spec = json.loads(raw)
     pkg = spec["package"]
     for v in pkg["thumbnails"]:  # 글자 기호 정리
+        v["chips"] = [{**c, "text": _fix(c["text"])} for c in v.get("chips", [])]
         for k in ("top", "sub", "headline"):
             if v.get(k):
                 v[k] = _fix(v[k])

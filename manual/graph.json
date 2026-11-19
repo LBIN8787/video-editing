@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-19T00:41:40",
- "source_hash": "b84eb0c18440",
+ "generated": "2026-11-19T03:22:34",
+ "source_hash": "34356231cb53",
  "audit": {
   "date": "2026-11-18T13:33",
   "counts": {
@@ -162,16 +162,16 @@
   "sections": 160,
   "must": 26,
   "auto": 41,
-  "intents": 93,
+  "intents": 94,
   "misaligned": 0,
   "intents_reviewed": 3,
   "conflicts": 0,
   "code": 78,
   "terms": 119,
   "bans": 141,
-  "feedback": 41,
+  "feedback": 42,
   "topics": 4,
-  "episodes": 32,
+  "episodes": 33,
   "main_situations": 16,
   "tiers": {
    "principle": 49,
@@ -12107,10 +12107,10 @@
    ]
   },
   {
-   "id": "code:ytflow/stages/thumbnail.py:154",
+   "id": "code:ytflow/stages/thumbnail.py:158",
    "kind": "code",
    "file": "ytflow/stages/thumbnail.py",
-   "line": 154,
+   "line": 158,
    "versions": [
     22
    ],
@@ -13625,7 +13625,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/thumbnail.py:154",
+     "ref": "code:ytflow/stages/thumbnail.py:158",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -18594,6 +18594,34 @@
    "annotated": false
   },
   {
+   "id": "intent:b55a4bd6",
+   "kind": "intent",
+   "quote": "제가보기엔 3번째가 더 어그로가 잘끌릴 것 같아요  그리고 썸네일 스타일을 좀 더 눈에 들어오게 바꿀 필요가 있을거같기도 해요",
+   "label": "제가보기엔 3번째가 더 어그로가 잘끌릴 것 같아요  그리고 썸네일 스타일을 좀 더 눈에 들어오게 바꿀 필요가",
+   "versions": [],
+   "date": "2026-11-19",
+   "sources": [
+    {
+     "ref": "fb:42",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:b55a4bd6"
+   ],
+   "themes": [
+    "variety"
+   ],
+   "ann_key": "intent:b55a4bd6",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "term:bite",
    "kind": "term",
    "key": "bite",
@@ -20494,7 +20522,7 @@
     "code:ytflow/stages/hybrid.py:1117",
     "code:ytflow/stages/hybrid.py:1489",
     "code:ytflow/stages/stage.py:1",
-    "code:ytflow/stages/thumbnail.py:154"
+    "code:ytflow/stages/thumbnail.py:158"
    ],
    "techniques": [
     "term:tech-morph"
@@ -25445,6 +25473,34 @@
    "tier_note": "",
    "tier_fixed": true,
    "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:42",
+   "kind": "feedback",
+   "date": "2026-11-19",
+   "quote": "제가보기엔 3번째가 더 어그로가 잘끌릴 것 같아요  그리고 썸네일 스타일을 좀 더 눈에 들어오게 바꿀 필요가 있을거같기도 해요",
+   "label": "제가보기엔 3번째가 더 어그로가 잘끌릴 것 같아요  그리고 썸네일 스타일을 좀 더 눈에 들어오게 바꿀 필요가",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261119-market-daily",
+   "about": "",
+   "note": "제목 후보 3(장면+종목: 연준이 '순환 금융'을 적은 날 — 엔비디아·아마존·SK하이닉스)을 1번으로 올려 업로드본 제목 교체. 썸네일: thumbnail.py 에 punch 레이아웃(컬러 사진·큰 두 줄·노란 상자 강조·▲▼ 숫자 칩)과 versus theme dark 추가, 11/19 A·B·C 를 새 결로. 시장 채널 기본값으로 굳힐지는 사용자 반응 보고 결정(스타일 층, MUST 아님)",
+   "pending": false,
+   "themes": [
+    "variety"
+   ],
+   "scope": "style",
+   "intent": "intent:b55a4bd6",
+   "tier_key": "fb:b55a4bd6",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": false,
+   "tier": "style",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "스타일 기본값"
   },
   {
    "id": "layer:main",
@@ -37887,6 +37943,333 @@
        "say": "딱 하나만 기억한다면 이것입니다. 엔비디아는 한 사람 없이도 숫자를 냈지만, 그 숫자를 받치는 약속은 점점 길어지고 있습니다. 이 고리를 끝까지 지탱하는 것은 칩"
       }
      ]
+    },
+    {
+     "project": "20261119-market-daily",
+     "scenes": 28,
+     "coverage": 0.89,
+     "fit": 0.36,
+     "rows": [
+      {
+       "s": 1,
+       "type": "bignum",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "11월 18일 수요일 미국 장 마감 기준, 엔비디아는 2.89% 내린 150.96달러에 장을 마쳤습니다. 하루 전 매출 1,158억 달러로 시장 예상을 넘는 성적"
+      },
+      {
+       "s": 2,
+       "type": "quote",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "같은 날 오후, 미국 중앙은행인 연준이 지난달 회의의 의사록을 공개했습니다. 금융 안정을 다룬 부분에 이런 문장이 있습니다. AI 관련 회사들 사이의 순환 금융은"
+      },
+      {
+       "s": 3,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "먼저 시장 한 장입니다. 다우는 1.11% 내렸고, S&P 500은 0.23% 내려 닷새 연속 하락했습니다. 반면 나스닥은 0.42% 올랐습니다. 세 지수가 서로"
+      },
+      {
+       "s": 4,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "먼저 엔비디아입니다. 성적표는 좋았는데, 왜 주가는 계속 빠질까요?"
+      },
+      {
+       "s": 5,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "같은 날 AI 회사들의 성적을 나란히 놓아 보겠습니다. 아마존과 브로드컴은 3% 넘게 올랐고, 알파벳과 AMD도 조금 올랐습니다. 엔비디아만 2.89% 내렸습니다"
+      },
+      {
+       "s": 6,
+       "type": "quote",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "임시 대표 콜레트 크레스는 이날 미국 방송 인터뷰에서 이렇게 말했습니다. 어떤 고객이든 무언가 바뀌고 있다는 생각, 그건 사실이 아니라는 겁니다."
+      },
+      {
+       "s": 7,
+       "type": "versus",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "시장이 지금 묻는 건 숫자가 아닌 것 같습니다. 오펜하이머의 애널리스트 리치 셰이퍼는, 황의 사임이 리더십 공백을 만들었고 자연도 투자자도 공백을 싫어한다고 적었"
+      },
+      {
+       "s": 8,
+       "type": "chapter",
+       "sit": "hub-event",
+       "fit": true,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "이제 같은 날 나온 연준의 문서를 열어 보겠습니다."
+      },
+      {
+       "s": 9,
+       "type": "checklist",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "10월 회의에서 연준은 기준금리를 3.75에서 4% 사이로 묶었습니다. 하지만 위원 두 명은 0.25%포인트 올리자며 반대했습니다. 그리고 거의 모든 위원이, 앞"
+      },
+      {
+       "s": 10,
+       "type": "quote",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "몇몇 위원은 한 걸음 더 나갔습니다. AI 관련 위험이 소수의 회사에 점점 더 몰리고 있다는 겁니다."
+      },
+      {
+       "s": 11,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "그럼 그 '몇몇 회사'의 모습을, 오늘 상장하는 회사의 서류로 보겠습니다."
+      },
+      {
+       "s": 12,
+       "type": "bignum",
+       "sit": "next-week",
+       "fit": false,
+       "rec": [
+        "timeline",
+        "checklist"
+       ],
+       "say": "클로드를 만드는 AI 회사 앤트로픽의 공모가는, 보도에 따르면 주당 83달러입니다. 회사가 내놓은 희망 범위 70~78달러의 가장 높은 값보다도 5달러 높습니다."
+      },
+      {
+       "s": 13,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "그런데 신고서에는 공모와 별도로 눈에 띄는 표가 있습니다. 상장 직후, 일곱 회사가 같은 값에 모두 260억 달러어치 주식을 사기로 했습니다. 구글과 엔비디아가 "
+      },
+      {
+       "s": 14,
+       "type": "checklist",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "앤트로픽은 네 가지 칩을 섞어 씁니다. 아마존의 트레이니엄, 구글의 TPU, 엔비디아와 AMD의 GPU입니다. 클라우드는 아마존·구글·마이크로소프트에 기대고, 부"
+      },
+      {
+       "s": 15,
+       "type": "quote",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "회사 스스로도 위험 요인에 이렇게 적었습니다. 실현되지 않을 수도 있는 매출 기대를 바탕으로, 이런 의무를 질 수 있다."
+      },
+      {
+       "s": 16,
+       "type": "analogy",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "동네 가게로 비유해 보겠습니다. 빵집이 밀가루 가게와 10년 치 밀가루를 사기로 약속합니다. 그리고 밀가루 가게는 그 빵집의 지분을 삽니다. 빵집이 낸 주문서가,"
+      },
+      {
+       "s": 17,
+       "type": "map_causal",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "여기서부터는 해석입니다. 앤트로픽은 공급자들에게 9,009억 달러어치를 사기로 약속했고, 그 공급자들은 앤트로픽의 주식을 260억 달러어치 삽니다. 파는 쪽과 사"
+      },
+      {
+       "s": 18,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "이 공모를 국내 증권가는 어떻게 봤을까요?"
+      },
+      {
+       "s": 19,
+       "type": "versus",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "KB증권 임정은 연구원은 공모가가 희망 범위 상단을 넘는지가 AI 투자 심리 회복의 주요 변수라고 봤습니다. 사실이 아니라 한 사람의 시각입니다. 보도대로라면 공"
+      },
+      {
+       "s": 20,
+       "type": "quote",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "KB증권 김동원 리서치본부장 등은, 고대역폭 메모리 생산이 늘면서 일반 메모리 공급이 막히고, AI 데이터센터에 들어가는 메모리도 늘어 2028년까지 메모리 부족"
+      },
+      {
+       "s": 21,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "그렇다면 한국 시장은 이 고리의 어디에 있을까요?"
+      },
+      {
+       "s": 22,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "11월 18일 한국 장 마감 기준, 코스피는 1.99% 오른 5,067.44로 하루 만에 5천 선을 되찾았습니다. 나흘 연속 하락을 끊었습니다. 엔비디아 실적이 "
+      },
+      {
+       "s": 23,
+       "type": "map_causal",
+       "sit": "timeline",
+       "fit": false,
+       "rec": [
+        "timeline",
+        "checklist"
+       ],
+       "say": "여기서부터는 해석입니다. 한국 장은 엔비디아 실적은 반영했지만, 그 뒤 미국에서 일어난 엔비디아의 하락과 연준 의사록, 앤트로픽 공모가는 반영하지 못했습니다. 오"
+      },
+      {
+       "s": 24,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "이제 이 해석을 확인할 날짜들입니다."
+      },
+      {
+       "s": 25,
+       "type": "checklist",
+       "sit": "open-scene",
+       "fit": false,
+       "rec": [
+        "kb",
+        "footage",
+        "stage"
+       ],
+       "say": "오늘 아침 9시 한국 장에서는 코스피가 5천 선을 지키는지, 외국인 매도가 줄어드는지를 봅니다. 한국 시간 오늘 밤부터 내일 새벽 사이에는 앤트로픽의 첫 거래 가"
+      },
+      {
+       "s": 26,
+       "type": "checklist",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "이 해석이 틀리는 경우도 적어 둡니다. 앤트로픽이 상장 뒤 분기마다 매출을 크게 늘려, 12개월 약속 707억 달러를 넉넉히 덮는다면, 순환이라는 걱정은 성장 초"
+      },
+      {
+       "s": 27,
+       "type": "kinetic",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "돈은 떠나지 않았고, 고리 안에서 자리를 옮겼습니다."
+      },
+      {
+       "s": 28,
+       "type": "outro",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "딱 하나만 기억한다면 이것입니다. 같은 날 연준은 AI의 순환 금융을 위험으로 적었고, 시장은 그 고리의 한가운데 있는 회사에 1조 5천억 달러를 매겼습니다. 이"
+      }
+     ]
     }
    ]
   },
@@ -37919,7 +38302,7 @@
     "새벽",
     "아침"
    ],
-   "count": 5,
+   "count": 6,
    "fit": 1,
    "examples": [
     {
@@ -37971,8 +38354,8 @@
     "일까요",
     "을까요"
    ],
-   "count": 36,
-   "fit": 25,
+   "count": 39,
+   "fit": 28,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -38190,8 +38573,8 @@
     "하락",
     "급등"
    ],
-   "count": 104,
-   "fit": 53,
+   "count": 113,
+   "fit": 58,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -38337,7 +38720,7 @@
     "처음",
     "마침내"
    ],
-   "count": 1,
+   "count": 2,
    "fit": 1,
    "examples": [
     {
@@ -38346,6 +38729,13 @@
      "type": "chapter",
      "say": "창업자가 최고경영자 자리에서 물러난 날은 처음이 아닙니다. 과거의 세 번을 같은 틀로 재 보겠습니다.",
      "fit": true
+    },
+    {
+     "project": "20261119-market-daily",
+     "scene": 23,
+     "type": "map_causal",
+     "say": "여기서부터는 해석입니다. 한국 장은 엔비디아 실적은 반영했지만, 그 뒤 미국에서 일어난 엔비디아의 하락과 연준 의사록, 앤트로픽 공모가는 반영하지 못했습니다. 오늘 19일 장이 이것들을 처음 받습니다.",
+     "fit": false
     }
    ]
   },
@@ -38654,8 +39044,8 @@
     "여파",
     "연준"
    ],
-   "count": 22,
-   "fit": 10,
+   "count": 29,
+   "fit": 11,
    "examples": [
     {
      "project": "20261112-market-daily",
@@ -38708,7 +39098,7 @@
     "분기",
     "EPS"
    ],
-   "count": 51,
+   "count": 54,
    "fit": 16,
    "examples": [
     {
@@ -38811,7 +39201,7 @@
     "일정",
     "한국 시간"
    ],
-   "count": 4,
+   "count": 5,
    "fit": 1,
    "examples": [
     {
@@ -42722,6 +43112,337 @@
       "chapter"
      ],
      "say": "딱 하나만 기억한다면 이것입니다. 엔비디아는 한 사람 없이도 숫자를 냈지만, 그 숫자를 받치는 약속은 점점 길어지고 있습니다. 이 고리를 끝까지 지탱하는 것은 칩"
+    }
+   ]
+  },
+  {
+   "id": "ep:20261119-market-daily",
+   "kind": "episode",
+   "topic": "market",
+   "label": "20261119-market-daily",
+   "project": "20261119-market-daily",
+   "scenes": 28,
+   "coverage": 0.89,
+   "fit": 0.36,
+   "rows": [
+    {
+     "s": 1,
+     "type": "bignum",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "11월 18일 수요일 미국 장 마감 기준, 엔비디아는 2.89% 내린 150.96달러에 장을 마쳤습니다. 하루 전 매출 1,158억 달러로 시장 예상을 넘는 성적"
+    },
+    {
+     "s": 2,
+     "type": "quote",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "같은 날 오후, 미국 중앙은행인 연준이 지난달 회의의 의사록을 공개했습니다. 금융 안정을 다룬 부분에 이런 문장이 있습니다. AI 관련 회사들 사이의 순환 금융은"
+    },
+    {
+     "s": 3,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "먼저 시장 한 장입니다. 다우는 1.11% 내렸고, S&P 500은 0.23% 내려 닷새 연속 하락했습니다. 반면 나스닥은 0.42% 올랐습니다. 세 지수가 서로"
+    },
+    {
+     "s": 4,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "먼저 엔비디아입니다. 성적표는 좋았는데, 왜 주가는 계속 빠질까요?"
+    },
+    {
+     "s": 5,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "같은 날 AI 회사들의 성적을 나란히 놓아 보겠습니다. 아마존과 브로드컴은 3% 넘게 올랐고, 알파벳과 AMD도 조금 올랐습니다. 엔비디아만 2.89% 내렸습니다"
+    },
+    {
+     "s": 6,
+     "type": "quote",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "임시 대표 콜레트 크레스는 이날 미국 방송 인터뷰에서 이렇게 말했습니다. 어떤 고객이든 무언가 바뀌고 있다는 생각, 그건 사실이 아니라는 겁니다."
+    },
+    {
+     "s": 7,
+     "type": "versus",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "시장이 지금 묻는 건 숫자가 아닌 것 같습니다. 오펜하이머의 애널리스트 리치 셰이퍼는, 황의 사임이 리더십 공백을 만들었고 자연도 투자자도 공백을 싫어한다고 적었"
+    },
+    {
+     "s": 8,
+     "type": "chapter",
+     "sit": "hub-event",
+     "fit": true,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "이제 같은 날 나온 연준의 문서를 열어 보겠습니다."
+    },
+    {
+     "s": 9,
+     "type": "checklist",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "10월 회의에서 연준은 기준금리를 3.75에서 4% 사이로 묶었습니다. 하지만 위원 두 명은 0.25%포인트 올리자며 반대했습니다. 그리고 거의 모든 위원이, 앞"
+    },
+    {
+     "s": 10,
+     "type": "quote",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "몇몇 위원은 한 걸음 더 나갔습니다. AI 관련 위험이 소수의 회사에 점점 더 몰리고 있다는 겁니다."
+    },
+    {
+     "s": 11,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "그럼 그 '몇몇 회사'의 모습을, 오늘 상장하는 회사의 서류로 보겠습니다."
+    },
+    {
+     "s": 12,
+     "type": "bignum",
+     "sit": "next-week",
+     "fit": false,
+     "rec": [
+      "timeline",
+      "checklist"
+     ],
+     "say": "클로드를 만드는 AI 회사 앤트로픽의 공모가는, 보도에 따르면 주당 83달러입니다. 회사가 내놓은 희망 범위 70~78달러의 가장 높은 값보다도 5달러 높습니다."
+    },
+    {
+     "s": 13,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "그런데 신고서에는 공모와 별도로 눈에 띄는 표가 있습니다. 상장 직후, 일곱 회사가 같은 값에 모두 260억 달러어치 주식을 사기로 했습니다. 구글과 엔비디아가 "
+    },
+    {
+     "s": 14,
+     "type": "checklist",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "앤트로픽은 네 가지 칩을 섞어 씁니다. 아마존의 트레이니엄, 구글의 TPU, 엔비디아와 AMD의 GPU입니다. 클라우드는 아마존·구글·마이크로소프트에 기대고, 부"
+    },
+    {
+     "s": 15,
+     "type": "quote",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "회사 스스로도 위험 요인에 이렇게 적었습니다. 실현되지 않을 수도 있는 매출 기대를 바탕으로, 이런 의무를 질 수 있다."
+    },
+    {
+     "s": 16,
+     "type": "analogy",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "동네 가게로 비유해 보겠습니다. 빵집이 밀가루 가게와 10년 치 밀가루를 사기로 약속합니다. 그리고 밀가루 가게는 그 빵집의 지분을 삽니다. 빵집이 낸 주문서가,"
+    },
+    {
+     "s": 17,
+     "type": "map_causal",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "여기서부터는 해석입니다. 앤트로픽은 공급자들에게 9,009억 달러어치를 사기로 약속했고, 그 공급자들은 앤트로픽의 주식을 260억 달러어치 삽니다. 파는 쪽과 사"
+    },
+    {
+     "s": 18,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "이 공모를 국내 증권가는 어떻게 봤을까요?"
+    },
+    {
+     "s": 19,
+     "type": "versus",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "KB증권 임정은 연구원은 공모가가 희망 범위 상단을 넘는지가 AI 투자 심리 회복의 주요 변수라고 봤습니다. 사실이 아니라 한 사람의 시각입니다. 보도대로라면 공"
+    },
+    {
+     "s": 20,
+     "type": "quote",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "KB증권 김동원 리서치본부장 등은, 고대역폭 메모리 생산이 늘면서 일반 메모리 공급이 막히고, AI 데이터센터에 들어가는 메모리도 늘어 2028년까지 메모리 부족"
+    },
+    {
+     "s": 21,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "그렇다면 한국 시장은 이 고리의 어디에 있을까요?"
+    },
+    {
+     "s": 22,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "11월 18일 한국 장 마감 기준, 코스피는 1.99% 오른 5,067.44로 하루 만에 5천 선을 되찾았습니다. 나흘 연속 하락을 끊었습니다. 엔비디아 실적이 "
+    },
+    {
+     "s": 23,
+     "type": "map_causal",
+     "sit": "timeline",
+     "fit": false,
+     "rec": [
+      "timeline",
+      "checklist"
+     ],
+     "say": "여기서부터는 해석입니다. 한국 장은 엔비디아 실적은 반영했지만, 그 뒤 미국에서 일어난 엔비디아의 하락과 연준 의사록, 앤트로픽 공모가는 반영하지 못했습니다. 오"
+    },
+    {
+     "s": 24,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "이제 이 해석을 확인할 날짜들입니다."
+    },
+    {
+     "s": 25,
+     "type": "checklist",
+     "sit": "open-scene",
+     "fit": false,
+     "rec": [
+      "kb",
+      "footage",
+      "stage"
+     ],
+     "say": "오늘 아침 9시 한국 장에서는 코스피가 5천 선을 지키는지, 외국인 매도가 줄어드는지를 봅니다. 한국 시간 오늘 밤부터 내일 새벽 사이에는 앤트로픽의 첫 거래 가"
+    },
+    {
+     "s": 26,
+     "type": "checklist",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "이 해석이 틀리는 경우도 적어 둡니다. 앤트로픽이 상장 뒤 분기마다 매출을 크게 늘려, 12개월 약속 707억 달러를 넉넉히 덮는다면, 순환이라는 걱정은 성장 초"
+    },
+    {
+     "s": 27,
+     "type": "kinetic",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "돈은 떠나지 않았고, 고리 안에서 자리를 옮겼습니다."
+    },
+    {
+     "s": 28,
+     "type": "outro",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "딱 하나만 기억한다면 이것입니다. 같은 날 연준은 AI의 순환 금융을 위험으로 적었고, 시장은 그 고리의 한가운데 있는 회사에 1조 5천억 달러를 매겼습니다. 이"
     }
    ]
   }
@@ -46773,7 +47494,7 @@
   },
   {
    "s": "ver:22",
-   "t": "code:ytflow/stages/thumbnail.py:154",
+   "t": "code:ytflow/stages/thumbnail.py:158",
    "kind": "implemented_by"
   },
   {
@@ -47438,6 +48159,16 @@
   },
   {
    "s": "intent:baa867a3",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:b55a4bd6",
+   "t": "fb:42",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:b55a4bd6",
    "t": "theme:variety",
    "kind": "about"
   },
@@ -49124,6 +49855,11 @@
   {
    "s": "topic:market",
    "t": "ep:20261118-market-daily",
+   "kind": "episode"
+  },
+  {
+   "s": "topic:market",
+   "t": "ep:20261119-market-daily",
    "kind": "episode"
   },
   {
@@ -51309,6 +52045,16 @@
   {
    "s": "fb:41",
    "t": "intent:1e0ff9b1",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:42",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "fb:42",
+   "t": "intent:b55a4bd6",
    "kind": "quoted_as"
   }
  ]
