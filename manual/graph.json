@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-20T03:05:36",
- "source_hash": "b5bfcceb230a",
+ "generated": "2026-11-20T03:20:59",
+ "source_hash": "3e50956e65fa",
  "audit": {
   "date": "2026-11-19T13:54",
   "counts": {
@@ -121,14 +121,14 @@
   "sections": 162,
   "must": 26,
   "auto": 41,
-  "intents": 112,
+  "intents": 115,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 78,
   "terms": 127,
   "bans": 149,
-  "feedback": 59,
+  "feedback": 62,
   "topics": 4,
   "episodes": 33,
   "main_situations": 16,
@@ -19466,6 +19466,32 @@
    "annotated": false
   },
   {
+   "id": "intent:1f7745a1",
+   "kind": "intent",
+   "quote": "메뉴얼을 보고 영상을 만든 것이 맞나요? 상황에 맞는 연출을 한 느낌이 아닙니다",
+   "label": "메뉴얼을 보고 영상을 만든 것이 맞나요? 상황에 맞는 연출을 한 느낌이 아닙니다",
+   "versions": [],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "fb:62",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:1f7745a1"
+   ],
+   "themes": [],
+   "ann_key": "intent:1f7745a1",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:2925f768",
    "kind": "intent",
    "quote": "메모리 연출과 대조해서 비교해주세요",
@@ -19510,6 +19536,58 @@
    ],
    "themes": [],
    "ann_key": "intent:52540171",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:64998b79",
+   "kind": "intent",
+   "quote": "폰트 전부 메모리편처럼 다뤄주세요 그리고 스페인독감편 왜이리 렉걸리는 것 같은 연출인가요",
+   "label": "폰트 전부 메모리편처럼 다뤄주세요 그리고 스페인독감편 왜이리 렉걸리는 것 같은 연출인가요",
+   "versions": [],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "fb:60",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:64998b79"
+   ],
+   "themes": [],
+   "ann_key": "intent:64998b79",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:95ab4b99",
+   "kind": "intent",
+   "quote": "오히려 스페인독감은 기존 스페인독감 영상이 더 낫습니다",
+   "label": "오히려 스페인독감은 기존 스페인독감 영상이 더 낫습니다",
+   "versions": [],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "fb:61",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:95ab4b99"
+   ],
+   "themes": [],
+   "ann_key": "intent:95ab4b99",
    "meaning": "",
    "not_meant": [],
    "note": "",
@@ -27207,6 +27285,84 @@
    "scope": "trial",
    "intent": "intent:abd2ec25",
    "tier_key": "fb:abd2ec25",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "trial",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "실험 기록"
+  },
+  {
+   "id": "fb:60",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "폰트 전부 메모리편처럼 다뤄주세요 그리고 스페인독감편 왜이리 렉걸리는 것 같은 연출인가요",
+   "label": "폰트 전부 메모리편처럼 다뤄주세요 그리고 스페인독감편 왜이리 렉걸리는 것 같은 연출인가요",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261120-spanish-flu",
+   "about": "",
+   "note": "두 편의 글꼴 역할과 하단 자막을 메모리 승인본과 대조. 독감의 이전 렌더에서 15fps 복제와 대사별 23단계 움직임을 확인하고 연출과 프레임 샘플링을 고침.",
+   "pending": false,
+   "themes": [],
+   "scope": "trial",
+   "intent": "intent:64998b79",
+   "tier_key": "fb:64998b79",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "trial",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "실험 기록"
+  },
+  {
+   "id": "fb:61",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "오히려 스페인독감은 기존 스페인독감 영상이 더 낫습니다",
+   "label": "오히려 스페인독감은 기존 스페인독감 영상이 더 낫습니다",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261120-spanish-flu",
+   "about": "",
+   "note": "기존 독감 편의 자료 사진, 실제 기록 영상, 읽을 시간을 주는 미색 비교 화면을 v2 재편집 기준으로 적용.",
+   "pending": false,
+   "themes": [],
+   "scope": "trial",
+   "intent": "intent:95ab4b99",
+   "tier_key": "fb:95ab4b99",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "trial",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "실험 기록"
+  },
+  {
+   "id": "fb:62",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "메뉴얼을 보고 영상을 만든 것이 맞나요? 상황에 맞는 연출을 한 느낌이 아닙니다",
+   "label": "메뉴얼을 보고 영상을 만든 것이 맞나요? 상황에 맞는 연출을 한 느낌이 아닙니다",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261120-spanish-flu",
+   "about": "",
+   "note": "대본과 컷의 목적을 대조해 신문은 지면, 수치 비교는 집계 범위, 장소와 시대는 출처 있는 사진과 영상으로 배치한 회차 기록.",
+   "pending": false,
+   "themes": [],
+   "scope": "trial",
+   "intent": "intent:1f7745a1",
+   "tier_key": "fb:1f7745a1",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -50285,6 +50441,11 @@
    "kind": "quoted_in"
   },
   {
+   "s": "intent:64998b79",
+   "t": "fb:60",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:f27a31f5",
    "t": "fb:23",
    "kind": "quoted_in"
@@ -50398,6 +50559,11 @@
    "s": "intent:abbe3e51",
    "t": "theme:variety",
    "kind": "about"
+  },
+  {
+   "s": "intent:1f7745a1",
+   "t": "fb:62",
+   "kind": "quoted_in"
   },
   {
    "s": "intent:69ba832e",
@@ -50648,6 +50814,11 @@
    "s": "intent:b138c882",
    "t": "theme:variety",
    "kind": "about"
+  },
+  {
+   "s": "intent:95ab4b99",
+   "t": "fb:61",
+   "kind": "quoted_in"
   },
   {
    "s": "intent:8fab3ca0",
@@ -54187,6 +54358,21 @@
   {
    "s": "fb:59",
    "t": "intent:abd2ec25",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:60",
+   "t": "intent:64998b79",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:61",
+   "t": "intent:95ab4b99",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:62",
+   "t": "intent:1f7745a1",
    "kind": "quoted_as"
   }
  ]
