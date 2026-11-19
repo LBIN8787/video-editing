@@ -95,13 +95,12 @@ def main():
     s(dict(type="bignum", chapter=0, label=YH + " · 실적 수치는 엔비디아 8-K 보도자료(11.17)", small="엔비디아 종가 · 11월 18일 미국 장 마감 기준", value="150.96달러",
            compare={"label": "닷새 전 (11일 종가)", "value": "173.73달러"},
            beats=[{"say": "11월 18일 수요일 미국 장 마감 기준, 엔비디아는 2.89% 내린 150.96달러에 장을 마쳤습니다. 하루 전 매출 1,158억 달러로 시장 예상을 넘는 성적표를 냈는데도, 닷새 연속 하락입니다. 닷새 사이 13% 넘게 빠졌습니다.",
-                   "motion": [M("13%", "count", id="d5", value="-13.1%", label="닷새 사이 (11일 → 18일)", x=1660, y=690, w=400, h=140, fs=52)]},
+                   "motion": [M("13%", "count", id="d5", value="-13.1%", label="11일 → 18일", x=1660, y=690, w=400, h=140, fs=52)]},
                   {"say": "그런데 같은 날, 같은 AI 쪽에서 반대로 움직인 회사들이 있습니다. 아마존은 3.82%, 브로드컴은 3.64% 올랐습니다.",
                    "motion": [M("아마존", "count", id="amz", value="+3.82%", label="아마존 18일", x=1660, y=860, w=400, h=140, fs=52)]}]))
     s(dict(type="quote", chapter=0, label=FOMC, who="미국 연준 직원 평가", role="10월 회의 의사록 · 금융 안정 부분",
            quote="AI 관련 회사들 사이의 순환 금융은, AI 투자 수익이 실망스러우면 손실을 키울 수 있다.", keyword="순환 금융",
            orig="circular financing arrangements among AI-related firms could amplify losses if returns on AI investment were to disappoint",
-           layers=[{"kind": "photo", "src": "fed", "beat": 0, "side": "right", "w": 420, "top": 640, "caption": f"미국 연준 건물 · {cr['fed']}"}],
            beats=B("같은 날 오후, 미국 중앙은행인 연준이 지난달 회의의 의사록을 공개했습니다. 금융 안정을 다룬 부분에 이런 문장이 있습니다. AI 관련 회사들 사이의 순환 금융은, AI 투자 수익이 실망스러우면 손실을 키울 수 있다.",
                    "그리고 그날 밤, AI 회사 앤트로픽의 공모가가 83달러로 정해졌다는 보도가 나왔습니다. 엔비디아는 빠지고, 아마존은 올랐습니다. 돈은 AI를 떠난 걸까요, 아니면 자리를 옮긴 걸까요?")))
 
@@ -162,7 +161,7 @@ def main():
            compare={"label": "회사가 낸 희망 범위", "value": "70~78달러"},
            beats=[{"say": "클로드를 만드는 AI 회사 앤트로픽의 공모가는, 보도에 따르면 주당 83달러입니다. 회사가 내놓은 희망 범위 70~78달러의 가장 높은 값보다도 5달러 높습니다. 회사의 공식 발표는 아직 아니고, 소식통을 인용한 보도입니다."},
                   {"say": "공모 주식 8억 2,500만 주에 83달러를 곱하면 약 685억 달러입니다. 보도된 기업가치는 약 1조 5천억 달러. 한국 시간으로 오늘 밤, 나스닥에서 첫 거래가 시작될 예정입니다.",
-                   "motion": [M("685억", "count", id="raise", value="약 685억 달러", label="공모 규모 (계산, 추가 배정 제외)", x=1660, y=860, w=440, h=140, fs=50)]}]))
+                   "motion": [M("685억", "count", id="raise", value="약 685억 달러", label="공모 규모 (계산)", x=1660, y=860, w=440, h=140, fs=50)]}]))
     s(dict(type="bars", chapter=3, label=S1 + " · 회사별 금액은 희망 범위 중간값 74달러 가정 시 신고서 숫자", title="공모 직후 주식을 사기로 한 일곱 곳 (억 달러)", unit="", emph=1, skin=DS,
            items=[{"label": "구글", "value": 100, "text": "100", "t": "구글"}, {"label": "엔비디아", "value": 100, "text": "100", "t": "엔비디아가"},
                   {"label": "AMD", "value": 25, "text": "25", "t": "AMD"}, {"label": "브로드컴", "value": 10, "text": "10", "t": "브로드컴"},
@@ -184,7 +183,6 @@ def main():
     s(dict(type="quote", chapter=3, label=S1 + " · 위험 요인", who="앤트로픽 신고서", role="위험 요인 · 컴퓨트 약속",
            quote="실현되지 않을 수도 있는 매출 기대를 바탕으로, 이런 의무를 질 수 있다.", keyword="실현되지",
            orig="we may enter into these obligations based on revenue expectations that may not be realized.",
-           layers=[{"kind": "photo", "src": "dc", "beat": 0, "side": "right", "w": 420, "top": 640, "caption": f"데이터센터 (예시 사진) · {cr['dc']}"}],
            beats=B("회사 스스로도 위험 요인에 이렇게 적었습니다. 실현되지 않을 수도 있는 매출 기대를 바탕으로, 이런 의무를 질 수 있다.",
                    "매출은 대부분 쓴 만큼 받는 방식이라 길게 묶여 있지 않은데, 컴퓨트 약속은 여러 해에 걸쳐 있다는 겁니다. 들어올 돈은 짧고, 나갈 돈은 깁니다.")))
     s(dict(type="analogy", chapter=3, label="비유 · 이 영상의 설명", title="빵집과 밀가루 가게",
@@ -211,7 +209,7 @@ def main():
            right={"value": "6/8", "label": "하장권(한화투자증권): 상장 뒤 오른 경우", "icon": "trending-up"},
            beats=[{"say": "KB증권 임정은 연구원은 공모가가 희망 범위 상단을 넘는지가 AI 투자 심리 회복의 주요 변수라고 봤습니다. 사실이 아니라 한 사람의 시각입니다. 보도대로라면 공모가는 상단을 넘었습니다. 다만 18일 한국 장은 그 소식 전에 닫혔습니다."},
                   {"say": "한화투자증권 하장권 연구원은 과거 해외 대형 공모 8건을 살폈습니다. 상장 전 열흘 동안 코스피는 평균 3% 내렸고, 상장 뒤 20거래일 동안은 8건 가운데 6건에서 올랐다는 겁니다. 공모로 쏠린 돈이 상장 뒤 풀린다는 해석입니다. 다만 이번 공모는 사모까지 합치면 900억 달러가 넘어, 과거와 크기가 다릅니다.",
-                   "motion": [M("8건", "count", id="ipo8", value="6 / 8", label="상장 뒤 20일 코스피 상승 (하장권)", x=960, y=880, w=460, h=140, fs=52)]}]))
+                   "motion": [M("8건", "count", id="ipo8", value="6 / 8", label="상장 뒤 코스피 상승", x=960, y=880, w=460, h=140, fs=52)]}]))
     s(dict(type="quote", chapter=4, insight=True, label=ETD + " · 앤트로픽 S-1/A 위험 요인 · 의견이며 사실이 아닙니다", who="김동원 외", role="KB증권 리서치본부장",
            quote="2028년까지 구조적인 메모리 수급 불균형이 한층 심화될 전망.", keyword="2028년",
            layers=[{"kind": "photo", "src": "mem", "beat": 1, "side": "right", "w": 420, "top": 640, "caption": f"메모리 모듈 (예시 사진) · {cr['mem']}"}],
@@ -221,17 +219,17 @@ def main():
     # ── 5. 한국 ──
     s(dict(type="chapter", chapter=5, num="5", title="한국은 공급으로 이 고리에", icon="map-pin", look="photo", bg_src="seoul",
            beats=B("그렇다면 한국 시장은 이 고리의 어디에 있을까요?")))
-    s(dict(type="bars", chapter=5, label="코스피는 마감 보도(KBS·MBC·연합뉴스TV, 한국거래소 기준) · 종목은 한국거래소 종가(야후 파이낸스) · 수급은 이투데이 · 11월 18일 한국 마감 기준", title="18일 한국 시장 (%)", unit="", emph=0, skin=DS,
+    s(dict(type="bars", chapter=5, label="코스피 마감 보도(KBS·MBC) · 종목 한국거래소 종가(야후) · 수급 이투데이 · 18일 마감 기준", title="18일 한국 시장 (%)", unit="", emph=0, skin=DS,
            layers=[{"kind": "locator", "at": [126.92, 37.52], "label": "서울 여의도", "beat": 0, "side": "left", "top": 170, "scale": 2.2}],
            items=[{"label": "SK하이닉스", "value": 4.19, "text": "+4.19", "t": "SK하이닉스는"}, {"label": "삼성전자", "value": 2.31, "text": "+2.31", "t": "삼성전자는"},
                   {"label": "코스피", "value": 1.99, "text": "+1.99", "t": "코스피는"}, {"label": "삼성바이오로직스", "value": -3.39, "text": "-3.39", "t": "삼성바이오로직스는"}],
            beats=[{"say": "11월 18일 한국 장 마감 기준, 코스피는 1.99% 오른 5,067.44로 하루 만에 5천 선을 되찾았습니다. 나흘 연속 하락을 끊었습니다. 엔비디아 실적이 나온 뒤 처음 열린 장이었습니다.",
-                   "motion": [M("5,067.44", "count", id="ks", value="5,067.44", label="코스피 18일 종가", x=1700, y=760, w=400, h=130, fs=52)]},
+                   "motion": [M("5,067.44", "count", id="ks", value="5,067.44", label="코스피 18일 종가", x=1700, y=250, w=400, h=130, fs=52)]},
                   {"say": "SK하이닉스는 4.19% 오른 114만 4천 원, 삼성전자는 2.31% 오른 19만 4,700원이었습니다. 반면 삼성바이오로직스는 3.39% 내렸습니다. 기관이 5천억 원대를 사들였고, 외국인은 3천억 원대를 팔아 매도가 나흘째 이어졌습니다.",
-                   "motion": [M("외국인", "count", id="fx", value="3천억 원대", label="외국인 순매도 (보도)", x=1700, y=900, w=400, h=130, fs=48)]}]))
+                   "motion": [M("외국인", "count", id="fx", value="3천억 원대", label="외국인 순매도 (보도)", x=1700, y=400, w=400, h=130, fs=48)]}]))
     s(dict(type="map_causal", chapter=5, look="board", label="자체 해석 · 근거: 앤트로픽 S-1/A(HBM 제조사·사모 7곳), 한국거래소 종가, 연준 의사록",
            map={"nodes": {"kr": {"label": "18일 한국: 실적만 반영 (5,067.44)", "icon": "map-pin", "x": 960, "y": 260},
-                          "us": {"label": "18일 밤: 엔비디아 -2.89% · 의사록 · 공모가", "icon": "clock", "x": 400, "y": 600},
+                          "us": {"label": "18일 밤: 엔비디아·의사록·공모가", "icon": "clock", "x": 400, "y": 600},
                           "mem": {"label": "한국 메모리: 지분 아닌 공급으로", "icon": "hard-drive", "x": 1520, "y": 600},
                           "today": {"label": "19일 한국 장이 처음 반영", "icon": "calendar", "x": 960, "y": 880}},
                 "edges": [["kr", "today"], ["us", "today"], ["mem", "today"]]},
