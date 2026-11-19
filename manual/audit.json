@@ -1,13 +1,35 @@
 {
- "date": "2026-11-18T13:33",
- "manual_version": 48,
+ "date": "2026-11-19T13:22",
+ "manual_version": 52,
  "counts": {
-  "fix": 1,
-  "ask": 0,
+  "fix": 2,
+  "ask": 5,
   "new": 0,
-  "resolved": 3
+  "resolved": 1
  },
  "items": [
+  {
+   "kind": "overfit",
+   "level": "ask",
+   "file": "manual/05-style-matching.md",
+   "line": 246,
+   "text": "아래 도구는 장면의 상황에 맞춰 선택하는 스타일 기본값입니다. 채널 전체의 필수 양식으로 쓰지 않습니다.",
+   "why": "스타일 기본값 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
+   "id": "b38c1dc4bf",
+   "new": false,
+   "since": "2026-11-19"
+  },
+  {
+   "kind": "overfit",
+   "level": "ask",
+   "file": "manual/05-style-matching.md",
+   "line": 246,
+   "text": "AI 사용 사례·시사 근거 설명에 특히 맞습니다. 시장 영상에서는 문서 강조와 연결 차단에 쓰고, 호기심 영상은 주인공의 행동을 카드로 대체하지 않도록 장면 목적을 먼저 봅니다.",
+   "why": "스타일 기본값 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
+   "id": "c063a93c7b",
+   "new": false,
+   "since": "2026-11-19"
+  },
   {
    "kind": "coderef",
    "level": "fix",
@@ -18,71 +40,67 @@
    "id": "6fc4e08f8e",
    "new": false,
    "since": "2026-11-17"
+  },
+  {
+   "kind": "coderef",
+   "level": "fix",
+   "file": "manual/intents.yaml",
+   "line": 0,
+   "text": "intent:05d09fee → code:ytflow/stages/hybrid.py:1077",
+   "why": "판정이 가리키는 절·코드 줄이 없음 (줄이 옮겨짐) — 새 위치로 다시 판정",
+   "id": "0b369e530e",
+   "new": false,
+   "since": "2026-11-19"
+  },
+  {
+   "kind": "misaligned",
+   "level": "ask",
+   "file": "manual/intents.yaml",
+   "line": 0,
+   "text": "“제가보기엔 3번째가 더 어그로가 잘끌릴 것 같아요  그리고 썸네일 스타일을 좀 더 눈에 들어오게 바꿀 필요가 있을거같기도 해요” → fb:42",
+   "why": "다른 뜻으로 판정이 남아 있음 — 고쳤으면 '정렬됨'으로",
+   "id": "76390bff99",
+   "new": false,
+   "since": "2026-11-19"
+  },
+  {
+   "kind": "untiered",
+   "level": "ask",
+   "file": "manual/feedback.yaml",
+   "line": 0,
+   "text": "그냥 호기심 이라고 아무거나 하는 것이 아니라 그 이유와 원리 과학적 내용 심리 등등 사람들이 듣자마자 궁금하거나 알고싶은 주제와 이를 과학적으로 등 분석하면서 상세히 서술해주세요. 꼭 10분이 아니라 10분 이상의 깊이를 선호해요. 우선 c로 해주시고 바뀌는 기억 이라는 제목 자체는 ",
+   "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+   "id": "63c6bfef9c",
+   "new": false,
+   "since": "2026-11-19"
+  },
+  {
+   "kind": "untiered",
+   "level": "ask",
+   "file": "manual/feedback.yaml",
+   "line": 0,
+   "text": "단순 호기심이라고 호기심 채널이 아닌 과학과 논리 근거 실험 등과 엮어서 상세히 설명하는 호기심 채널입니다.",
+   "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+   "id": "9b12335cf3",
+   "new": false,
+   "since": "2026-11-19"
   }
  ],
  "resolved": [
   {
-   "kind": "proposal",
+   "kind": "untiered",
    "level": "ask",
-   "file": "proposals/manual/20261118-004922-video-20261117-three.md",
+   "file": "manual/feedback.yaml",
    "line": 0,
-   "text": "[rule] 영상의 목적부터 분간한다 (2026-11-18 사용자: \"목적성 자체가 정보제공 목적이 큰지 아니면 취미나 유흥 즐길거리 목적인지 분간해야 해요. 그에 따라 연출이 달라지는 거구요\" · \"호기심 채널은 모션그래픽 애니메이션을 적극 활용 — 이야기를 잘",
-   "why": "video-20261117-three 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
-   "id": "3e12e4d110",
+   "text": "제안3건 반영해줘 피드백들은 정리하고 내 피드백을 어떻게 수용했는지 서술해줘 과적합인지 아닌지도 체크하고 목적과 의도를 바탕으로 작성했는지 이를 어떻게 구현할건지 적혀있는지 체크해줘",
+   "why": "이 말의 층이 정해지지 않음 (자동 추정: 스타일 기본값) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+   "id": "4906ca7931",
    "new": false,
-   "since": "2026-11-18",
-   "resolved": "2026-11-18"
-  },
-  {
-   "kind": "proposal",
-   "level": "ask",
-   "file": "proposals/manual/20261118-010158-video-20261117-three.md",
-   "line": 0,
-   "text": "[rule] 매체 질문과 목적 분간을 매뉴얼에 (근거 docs/37-medium-and-needs.md, 2026-11-18 사용자: \"글과 PPT와 PDF 그리고 동영상의 특징과 차이점, 그리고 정보습득형·즐길거리형 등 시청자의 니즈를 생각해서 작업\").\n1) ",
-   "why": "video-20261117-three 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
-   "id": "3b7142f13f",
-   "new": false,
-   "since": "2026-11-18",
-   "resolved": "2026-11-18"
-  },
-  {
-   "kind": "proposal",
-   "level": "ask",
-   "file": "proposals/manual/20261118-063159-main.md",
-   "line": 0,
-   "text": "[request] 09 §3-5 보강 요청(사용자 11/18 피드백): 당일 원본 영상을 못 넣으면 inbox/research/source-backlog.md 에 남기고, 같은 사건·인물을 다시 다루는 회차에서 찾아 bite 로 넣는 절차 + daily 가 대기 목록을",
-   "why": "main 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
-   "id": "71756ab51b",
-   "new": false,
-   "since": "2026-11-18",
-   "resolved": "2026-11-18"
+   "since": "2026-11-19",
+   "resolved": "2026-11-19"
   }
  ],
  "log": [
-  {
-   "date": "2026-11-15T08:38",
-   "fix": 0,
-   "ask": 1,
-   "new": 1,
-   "resolved": 0,
-   "note": ""
-  },
-  {
-   "date": "2026-11-15T08:39",
-   "fix": 0,
-   "ask": 2,
-   "new": 2,
-   "resolved": 1,
-   "note": ""
-  },
-  {
-   "date": "2026-11-15T08:39",
-   "fix": 0,
-   "ask": 0,
-   "new": 0,
-   "resolved": 2,
-   "note": ""
-  },
   {
    "date": "2026-11-15T08:40",
    "fix": 0,
@@ -306,12 +324,33 @@
    "new": 0,
    "resolved": 3,
    "note": "사용자 요청 정리"
+  },
+  {
+   "date": "2026-11-19T13:21",
+   "fix": 2,
+   "ask": 6,
+   "new": 7,
+   "resolved": 0,
+   "note": ""
+  },
+  {
+   "date": "2026-11-19T13:21",
+   "fix": 2,
+   "ask": 6,
+   "new": 0,
+   "resolved": 0,
+   "note": ""
+  },
+  {
+   "date": "2026-11-19T13:22",
+   "fix": 2,
+   "ask": 5,
+   "new": 0,
+   "resolved": 1,
+   "note": "정기 검토"
   }
  ],
  "fixed_by_agent": [
-  "제안 3건 반영(11 §2-4·05 §0-0·09 §3-5 확인)",
-  "층 미정 피드백 8건 층 정함",
-  "과적합 후보 16건 판정(진짜 과적합 0) — rule_tiers",
-  "05 §0-8 화풍·연출 절 추가, 문서-코드 불일치 2곳 맞춤"
+  "11-18 도구 요청 피드백의 층(작업 기준)이 빠져 있어 기록대로 되돌림"
  ]
 }
