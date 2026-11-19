@@ -10,7 +10,11 @@ niche: "전날 주요 뉴스 중 구조가 있는 이슈. 개인 사건·사고�
 seed_keywords: ["정부 발표", "국회", "국제", "제재", "선거", "제도 변화"]
 target_minutes: 10            # v24: 롱폼 최소 10분
 cadence: "평일 매일"
-tone: "재미있게 보는 뉴스 (08 §0-1), 진행자 말투 (README §2-2)."
+tone: "실제 자료로 전날 이슈를 설명하는 빠른 정리 (manual/08 §0-2·§0-3)."
+script_guide: manual/08-issues.md
+sourcing:
+  start_from: document
+  verify_with: ["기관 공식 발표·발언 영상", "당사자 입장", "별개 언론의 확인 보도"]
 daily:
   scan: "python -m ytflow daily --brand issues --project <YYYYMMDD>-issues-daily"
   stories: [1, 1]

@@ -276,6 +276,15 @@ def script(project: Project) -> None:
     addendum = config.STYLES_DIR / ref / "script.md" if ref else None
     if addendum and addendum.exists():  # 편집 스타일별 대본 규칙 (styles/<id>/script.md)
         user += f"\n\n# 이 영상의 편집 스타일({ref}) 대본 규칙\n" + addendum.read_text(encoding="utf-8")
+    channel_id = config.load("pipeline").get("channel")
+    channel_file = config.CHANNELS_DIR / str(channel_id) / "channel.yaml"
+    channel = config.channel(channel_id) if channel_id and channel_file.is_file() else {}
+    if script_guide := channel.get("script_guide"):
+        guide = (config.ROOT / script_guide).read_text(encoding="utf-8")
+        user += f"\n\n# 제작 라인 {channel_id}\n{channel.get('concept', '')}\n\n# 채널 대본 규칙\n{guide}"
+        brief = project.dir("research") / "topic_brief.json"
+        if brief.is_file():
+            user += f"\n\n# 이번 회차 주제 선정 기록\n{brief.read_text(encoding='utf-8')}"
     family = config.style_family()
     system = config.prompt("script") + "\n\n" + config.prompt(f"script_{family}") if family != "shorts" else config.prompt("script")
     res = llm.structured(system, user, Script, max_tokens=32000)

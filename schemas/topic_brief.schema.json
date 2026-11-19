@@ -204,13 +204,17 @@
       },
       "description": "주제 분위기 (style-pick 이 씀)"
     },
+    "issue_kind": {
+      "enum": ["current", "history"],
+      "description": "issues: 시사는 current(생략 가능), ch-issues 역사 심층은 history (manual/08 §0-3)"
+    },
     "as_of": {
       "type": "string",
-      "description": "issues: 사실 기준 날짜·시각 (YYYY-MM-DD HH:MM KST) — 영상에 '○월 ○일 기준'으로 말한다"
+      "description": "issues 시사: 사실 기준 날짜·시각 (YYYY-MM-DD HH:MM KST) — 영상에 '○월 ○일 기준'으로 말한다"
     },
     "sides": {
       "type": "array",
-      "description": "issues: 서로 다른 입장 2개 이상, 각자 출처",
+      "description": "issues 시사: 서로 다른 입장 2개 이상, 각자 출처. 역사는 기록·해석이 갈릴 때 사용",
       "items": {
         "type": "object",
         "properties": {

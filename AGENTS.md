@@ -20,7 +20,8 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **제작 매뉴얼 (욕망 → 주제 → 조사 → 대본 → 연출 → 검사)** | `manual/README.md` → `manual/01~06` |
 | **편집 스타일 등록부·자동 추천** (상황에 맞는 스타일, 파일 하나로 늘림) | `styles/recipes/`, `python -m ytflow style-pick <프로젝트>`, `manual/07-extend.md` |
 | **스타일 풀 늘리기** (조사·후보·라이선스, 새 장면 chat·terminal·zoomshot·choropleth·mark, 세로 쇼츠 Claude 판) | `docs/17-style-pool.md`, `skills/edit-style-pool`, `python -m ytflow short <프로젝트>` |
-| **시사·사회 이슈 채널** (비교 채널 8곳 640편 분석: 좋아하는 편집·이유·욕망, 절차·전용 검사) | `docs/18-issues-research.md`, `manual/08-issues.md`, `channels/ch-issues/`, `scripts/issues_research.py` |
+| **시사·역사 채널** — 기존 스페인독감 편처럼 실제 자료·지도·연표·비교로 사건을 설명 | `manual/08-issues.md` §0-3, `channels/ch-issues/` |
+| **표현 방식과 인포그래픽 레퍼런스** — 인포그래픽·삽화·인물 사진·자료 영상 선택 | `manual/12-visual-storytelling.md`, `manual/05-style-matching.md` §2 |
 | **매뉴얼 점검·편집 기준 v10·채널별 검토·배경 후보** (v9 약점 측정, 전후 비교, v10 연출, 채널마다 더할 연출, 상황별 배경 조사) | `docs/21-background-styles.md`, `docs/20-channel-review.md`, `docs/19-manual-gaps.md`, `manual/05-style-matching.md` §0-4, `ytflow/stages/edit10.py` |
 | **카테고리 개성 (v15)** — 채널을 묶어도 카테고리마다 다른 화면: 시사 증거판·시장 대시보드·호기심 칠판·AI 앱 창, 장 표지 사진은 주제에 맞게 듀오톤 | `channels/brands.yaml` 의 `identity`, `manual/05-style-matching.md` §0-7, `ytflow/stages/identity.py`, `python -m ytflow archive commons "검색어"` |
 | **매일 브리핑 (v17)** — 시장: 전날 시장을 크게 움직인 이슈·보고서·전망·실적 / 시사: 전날 구조적 이슈 하나 | `manual/03-market.md` §0, `manual/08-issues.md` §0-2, `channels/ch-market-daily`, `ch-issues-daily`, `ytflow/stages/daily.py` |
@@ -58,7 +59,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | 영상 1편 만들기 | `skills/video-make/SKILL.md` |
 | 형식: 롱폼 칼럼·보고서 / 쇼츠 안내 | `formats/README.md` |
 | 자료조사 / 대본 / 소스 / 편집만 | `skills/video-research`, `video-script`, `video-sources`, `video-edit` |
-| **교양·상식·역사·심리 채널** (수요 분석 → 주제 → 깊은 조사 → 이야기 대본) | `docs/10-knowledge-demand.md`, `channels/ch-knowledge/`, `prompts/script_knowledge.md` |
+| **호기심 채널 — 심리학·현대인의 일상** (잼 편의 행동 중심, 기억 편의 실험 중심) | `manual/04-curiosity.md` §0-6·§0-7, `channels/ch-knowledge/`, `prompts/script_knowledge.md` |
 | 하이브리드 (식스시그마 영상 + 머니크루 논리 + 미주일기 손그림) | `styles/hybrid/STYLE.md`, `prompts/script_hybrid.md`, `skills/edit-style-hybrid` |
 | 편집 스타일 고르기·적용 | `styles/README.md`(계열 구분), `styles/<id>/STYLE.md`, `skills/edit-style-<id>` |
 | 새 편집 스타일 추가 (레퍼런스 영상 분석) | `skills/edit-style-new/SKILL.md` |

@@ -1,9 +1,9 @@
 # 주제 레포: 호기심 (curiosity) — "궁금증을 풀고 싶다". 이야기가 목적, 정보는 그 안에 (README §1-1).
 id: curiosity
-name: 호기심 · 이야기
+name: 호기심 · 심리와 현대 일상
 inherits: main
 channels: [ch-knowledge]
-manual: [manual/04-curiosity.md]
+manual: [manual/04-curiosity.md, manual/12-visual-storytelling.md]
 look: 칠판·종이 무대 (05 §0-7)
 defaults:
   # 뼈대를 하나로 고정하지 않음 (2026-11-15 사용자: "언제 애니메이션을, 언제 그림판을 — 기능에 맞추어 먼저 정리") → 박자가 하는 일이 고름 (manual/10 §1)
@@ -13,8 +13,8 @@ defaults:
 situations:
   override:
     open-scene:
-      scenes: [stage, story, kb]
-      techniques: [draw-on, parallax-photo]
+      scenes: [stage, illust, story]
+      techniques: [draw-on, match-move]
       why: 때·곳·사람이 있는 여는 장면 → 질문 하나 (README §2-3, 04 §0-6)
     change:
       scenes: [stage]

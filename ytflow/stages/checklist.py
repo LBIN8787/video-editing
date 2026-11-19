@@ -325,17 +325,22 @@ def run(path: Path, upto: str = "G8") -> Report:
             R.add("G4", "SHOULD", "market: 끝에 확인할 신호(checklist)", "checklist" in tail, tail)
 
     if brand == "issues" and last >= 3:   # 시사 채널 전용 (manual/08-issues.md §6)
-        R.add("G4", "MUST", "issues: 사실 기준 시각(as_of)", bool(tb.get("as_of")), tb.get("as_of", ""))
-        sides = [x for x in tb.get("sides") or [] if x.get("source")]
-        R.add("G4", "MUST", "issues: 서로 다른 입장 2개 이상(각 출처)", len(sides) >= 2, len(sides))
+        history = ch == "ch-issues" and tb.get("issue_kind") == "history"
         txt_all = _texts(spec)
-        R.add("G4", "MUST", "issues: 대본에 '기준' 시점 언급", "기준" in txt_all, "")
+        if not history:
+            R.add("G4", "MUST", "issues: 사실 기준 시각(as_of)", bool(tb.get("as_of")), tb.get("as_of", ""))
+            sides = [x for x in tb.get("sides") or [] if x.get("source")]
+            R.add("G4", "MUST", "issues: 서로 다른 입장 2개 이상(각 출처)", len(sides) >= 2, len(sides))
+            R.add("G4", "MUST", "issues: 대본에 '기준' 시점 언급", "기준" in txt_all, "")
+        else:
+            R.add("G4", "EYE", "issues 역사: 사건 시기·장소와 사용 자료의 작성 시점을 구별", None, "08 §0-3")
         bad = [w for w in ISSUE_BANNED if w in txt_all]
         R.add("G4", "MUST", "issues: 단정·비하 금지어 없음", not bad, bad)
         fs2 = _load(res / "factsheet.md") or ""
         links2 = set(re.findall(r"https?://[^\s)>\]]+", fs2))
         doms = {re.sub(r"^https?://(www\.)?", "", u).split("/")[0] for u in links2}
-        R.add("G3", "MUST", "issues: 교차 확인 — 당사자 원문과 성향이 다른 매체 등 서로 다른 출처 (08 §2)", len(doms) >= 3, f"{len(links2)}개 / {len(doms)}곳")
+        sources = "당대 기록과 독립 조사·연구" if history else "당사자 원문과 성향이 다른 매체 등 서로 다른 출처"
+        R.add("G3", "MUST", f"issues: 교차 확인 — {sources} (08 §2)", len(doms) >= 3, f"{len(links2)}개 / {len(doms)}곳")
         R.add("G4", "SHOULD", "issues: 모르는 것(unknowns) 말하기", bool(tb.get("unknowns")) and "확인되지 않" in txt_all, "")
         voice_sc = [x for x in spec.get("scenes", []) if x.get("type") == "quote" or any(bb.get("lower") for bb in x.get("beats", []))]
         R.add("G4", "SHOULD", "issues: 사람의 목소리 장면 1개 이상 (quote·이름 자막)", bool(voice_sc), len(voice_sc))
@@ -346,7 +351,7 @@ def run(path: Path, upto: str = "G8") -> Report:
               formal <= max(1, len(says) // 10), f"물음 {asks} · 보도문 {formal}/{len(says)}")
         R.add("G1", "SHOULD", "issues: 이름 붙은 시리즈(series)", bool(tb.get("series")), tb.get("series", ""))
         qd = [x["dur"] for x in tl if x.get("type") == "quote"]
-        if len(qd) >= 2:
+        if not history and len(qd) >= 2:
             R.add("G5", "참고", "issues: 양쪽 입장 장면 길이 (같은 무게로 보이는지 눈으로)", min(qd) / max(qd) >= 0.7, [round(x, 1) for x in qd])
     if last >= 3:  # v24 인트로 없음 (README §2-1) · 말투 (README §2-3, 미주일기식)
         sc0 = spec.get("scenes", [])[:1]
