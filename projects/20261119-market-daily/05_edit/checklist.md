@@ -1,6 +1,6 @@
 # 체크리스트 — 20261119-market-daily
 
-매뉴얼 v48 · 2026-11-19T00:12:35 · **MUST 실패 1개**
+매뉴얼 v48 · 2026-11-19T00:42:30 · **MUST 실패 1개**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
@@ -62,6 +62,7 @@
 | G4 | SHOULD | market: 끝에 확인할 신호(checklist) | ✅ | ['checklist', 'kinetic', 'outro'] |
 | G4 | MUST | 인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1) | ✅ | [] |
 | G4 | SHOULD | 말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용) | ✅ | [] |
+| G6 | MUST | 길이: 롱폼 10분 이상 — 많이 짧으면 쇼츠로 (README §2-4) | ✅ | 12.5분 |
 | G5 | SHOULD | 배경: 한 가지 바탕으로 고정하지 않음 — 장면이 하는 일이 바뀌면 바탕도 바뀜 (05 §0-2) | ✅ | ['film', 'grid', 'photo', 'spot', 'tint'] |
 | G5 | 참고 | 배경: 같은 바탕이 이어지는 구간 | ✅ | [] |
 | G5 | 참고 | 반복 피로: 글씨·도형뿐인 장면이 이어지는 구간 — 자료·지도·그림으로 보여 줄 수 있는지 다시 볼 곳 (05 §0-3) | ℹ️ | 최장 3연속 (장면 17) |
@@ -82,6 +83,18 @@
 | G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ✅ | paper-sketch / 등록부 ['blueprint', 'clean-flat', 'clean-white', 'corkboard', 'dark |
 | G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ✅ | python -m ytflow style-pick <프로젝트> |
 | G5 | SHOULD | edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움) | ✅ | python -m ytflow edit-plan <프로젝트> → 02_script/EDIT_CONTEXT.md |
+| G6 | MUST | final.mp4 | ✅ |  |
+| G6 | MUST | 레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why) | ✅ | {} |
+| G6 | 참고 | 무대 화면: 한꺼번에 보이는 것·글자·멈춘 박자 (한 화면 한 생각인지 눈으로, 04 §0-5) | ✅ | {} |
+| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 0.985, 'p95_abs_offset': 0.09, 'median_abs_offset': 0.05, 'video |
+| G6 | SHOULD | 납품 점검(음량 등) | ✅ | completed |
+| G6 | 참고 | 움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5) | ℹ️ | 변화 6.5/분 · 정지 0.74 |
+| G6 | SHOULD | 최종 목소리 ElevenLabs | ✅ |  |
+| G7 | MUST | 제목 후보 3개 + 이유 | ✅ |  |
+| G7 | MUST | 썸네일 A/B/C + 점검 ok | ✅ |  |
+| G7 | 참고 | 제목 앞부분에 질문·핵심 (목록에서 잘려도 무슨 영상인지 보이게) | ℹ️ | 엔비디아는 빠지고 아마존은 올랐다, 돈은 |
+| G8 | MUST | GitHub Release 업로드 | ✅ |  |
+| G8 | MUST | episodes.md 기록 | ✅ | ch-market-daily |
 
 **참고**(ℹ️)는 실패가 아니라 측정값입니다 — 숫자를 맞추지 말고, 표시된 곳이 그 연출의 원리(manual/05 §0-0)에 맞는지 화면 확인(D3)에서 봅니다.
 사람 눈 검사(EYE)는 manual/06-checklist.md 끝의 5가지를 확인하세요.
