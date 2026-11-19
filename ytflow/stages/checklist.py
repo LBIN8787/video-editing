@@ -311,7 +311,7 @@ def run(path: Path, upto: str = "G8") -> Report:
                     if spec.get("scenes"):
                         n_ins = sum(1 for s_ in spec["scenes"] if s_.get("insight"))
                         R.add("G4", "MUST", "v36: 대본에 인사이트 장면 (\"insight\": true — 화면에 '의견' 표시, 사실과 구분) (09 §3-4)", n_ins >= 1, f"{n_ins}개")
-                        R.add("G4", "참고", "v36: 인사이트 분량 — 사람·매체의 해석을 넉넉히 다뤘나, 국내·해외를 함께 봤나", n_ins >= 2 and dom and abroad, f"장면 {n_ins} · 팩트시트 {len(ins)}줄 · 국내 {'✓' if dom else '✗'} 해외 {'✓' if abroad else '✗'}")
+                        R.add("G4", "참고", "v36·v52: 인사이트 분량 — 유명인(이름난 투자자·경영자·당국자·석학)의 분석을 넉넉히 다뤘나 (국내 증권사는 필수 아님)", n_ins >= 2 and abroad, f"장면 {n_ins} · 팩트시트 {len(ins)}줄 · 국내 {'✓' if dom else '✗'} 해외 {'✓' if abroad else '✗'}")
                         R.add("G4", "SHOULD", "v36: 매체·인물의 원본 발언 장면(bite) 1개+ — 원본이 없으면 인용 카드로 그려짐 (09 §3-5)",
                               any(s_.get("type") == "bite" for s_ in spec["scenes"]), "")
         if ch == "ch-market-daily" and spec.get("scenes"):   # v27 (manual/09 §6, 2026-11-15 사용자: "말은 많은데 45일·60일만 강조된 채 멈춰 있다")
