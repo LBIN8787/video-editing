@@ -628,8 +628,25 @@ def s_analogy(D: HDoc, sc: dict, bt: list, dur: float):
     for x, it, col, at in ((W * 0.3, L, D.ink, t0 + 0.2), (W * 0.7, R, D.red, t0 + 1.4)):
         D.rough("rectangle", [x - 230, 260, 460, 340], col, 3, at=at, dur=0.4)
         D.icon(it["icon"], x, 370, 130, col, at=at + 0.2)
-        D.text(x, 500, it["label"], FT("title"), 58, col, at=at + 0.3)
-        D.text(x, 560, it["sub"], FT("note"), fit(FT("note"), it["sub"], 44, 420).size, "#5a5f6a", at=at + 0.4)   # 상자(460) 안에 맞춤
+        # 글자가 상자(460) 밖으로 삐져나오지 않게 (2026-11-19 사용자: "이런거 주의해줘 삐져나와")
+        # 한 줄로 42 이상이면 한 줄, 아니면 ':'·가운데 띄어쓰기에서 두 줄로 나눠 각 줄을 상자 안(420)에 맞춘다.
+        lab = it["label"]
+        if fit(FT("title"), lab, 58, 420).size >= 42:
+            D.text(x, 500, lab, FT("title"), fit(FT("title"), lab, 58, 420).size, col, at=at + 0.3)
+            sub_y = 560
+        else:
+            if ": " in lab:
+                a, b = lab.split(": ", 1)
+                a += ":"
+            else:
+                ws = lab.split(" ")
+                k = max(1, len(ws) // 2)
+                a, b = " ".join(ws[:k]), " ".join(ws[k:])
+            sz = min(fit(FT("title"), a, 50, 420).size, fit(FT("title"), b, 50, 420).size)
+            D.text(x, 472, a, FT("title"), sz, col, at=at + 0.3)
+            D.text(x, 528, b, FT("title"), sz, col, at=at + 0.35)
+            sub_y = 576
+        D.text(x, sub_y, it["sub"], FT("note"), fit(FT("note"), it["sub"], 40, 420).size, "#5a5f6a", at=at + 0.4)   # 상자(460) 안에 맞춤
     D.text(W / 2, 430, "≈", FT("value"), 120, D.red, at=t0 + 1.2)
     if len(bt) > 1 and sc.get("result"):
         t1 = bt[1][0]
