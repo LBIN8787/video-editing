@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-19T05:40:00",
- "source_hash": "bf1f89395f38",
+ "generated": "2026-11-19T05:45:16",
+ "source_hash": "36439da54896",
  "audit": {
   "date": "2026-11-18T13:33",
   "counts": {
@@ -151,36 +151,36 @@
   ]
  },
  "stats": {
-  "manual_version": 50,
-  "versions": 50,
+  "manual_version": 51,
+  "versions": 51,
   "reviews": 34,
   "rejects": 23,
   "passes": 11,
   "pending": 1,
   "rules": 49,
   "checks": 86,
-  "sections": 161,
+  "sections": 162,
   "must": 26,
   "auto": 41,
-  "intents": 96,
+  "intents": 100,
   "misaligned": 1,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 78,
   "terms": 127,
-  "bans": 143,
-  "feedback": 44,
+  "bans": 148,
+  "feedback": 48,
   "topics": 4,
   "episodes": 33,
   "main_situations": 16,
   "tiers": {
-   "principle": 49,
+   "principle": 54,
    "standard": 114,
    "style": 29,
    "trial": 0
   },
   "overfit": 2,
-  "principle_bans": 43
+  "principle_bans": 48
  },
  "pending": [
   "[2026-11-19 · 사용자 피드백 · projects/20261118-curiosity-next · 층: 작업 기준] 나중에 이 메뉴얼을 토대로 그림체 화풍 스타일과 그림을 누끼 딸 때 흰부분이 있는점 등만 보완하면 될 것 같습니다."
@@ -2289,6 +2289,100 @@
    "tier_label": "영구 원칙"
   },
   {
+   "section": "sec:09§7-1",
+   "text": "1. 핫 키워드 확인 (썸네일·제목을 쓰기 전에, 팩트시트 ## 핫 키워드 3~5줄): ① daily_brief.md ⑤ 그날의 주제어(뉴스에 많이 나온 낱말) ② ⑥-1 CEO 소식에 반복된 이름 ③ ⑦ 뉴스레터 화제 ④ 유튜브 검색 결과에서 같은 낱말 최근 영상이 많이 보였나(python scripts/thumb_research.py 와 같은 방식의 검색, 막히면 피클 요청). 영상이 실제로 다루는 낱말 가운데 가장 뜨거운 것을 썸네일 큰 글씨와 제목 앞 2",
+   "themes": [
+    "variety"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:41951216",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
+   "section": "sec:09§7-1",
+   "text": "2. 문구: 질문(?)보다 단정 한 마디 + 숫자·기간 하나, 또는 이름 있는 사람·기관의 따옴표 발언. 피하기: 물음표 추측, 그날 지수 숫자만 있는 시황형, 사라/팔라 명령(채널 규칙으로도 금지). (docs/49 §3: 시황형 3배+ 3.7%, 물음표 5.3%, 유명인 이름 22.7%, 따옴표 발언 채널 안 1.23배)",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:4d3f292c",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
+   "section": "sec:09§7-1",
+   "text": "3. 기본 모양 (사용자 선택 — 11/19 '검은 바탕 연준 썸네일'): layout: photo, photo_side: full — 사건의 기관·장소·인물 사진을 꽉 채우고 어둡게(흑백·검은 톤), 위에 빨간 띠(날짜 · 출처 이름, 예 \"11월 19일 · 연준 의사록\"), 큰 두 줄(핫 키워드 한 낱말만 노랑), 아래 작은 손글씨 한 줄(다음 일정). 컬러 사진 + 노란 상자 + 숫자 칩(layout: punch)과 짙은 남색 숫자 대비(versus the",
+   "themes": [
+    "background",
+    "variety",
+    "depth",
+    "length"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:4532528c",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
+   "section": "sec:09§7-1",
+   "text": "4. 사진: 누구나 아는 얼굴·회사·기관 하나를 크게 (위키미디어 공용 PD·CC0·CC BY 만, 뉴스 사진 금지 §13). 모르는 사람 얼굴은 효과 없음.",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:ced00b86",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
+   "section": "sec:09§7-1",
+   "text": "5. 제목은 썸네일과 같은 말을 반복하지 않는다 — 제목 = 질문·장면, 썸네일 = 단정·숫자. 올린 뒤 제목은 사용자가 바꾸라고 할 때만 바꾼다(11/19: '3번째'를 제목으로 잘못 읽어 바꿨다가 되돌림 — 'N번째'가 제목·썸네일·장면 중 무엇인지 애매하면 확인).",
+   "themes": [
+    "variety"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:da1b4ef4",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
    "section": "sec:09§12",
    "text": "출처가 막힘 (403·봇 확인) | 우회하지 않음. 다른 1차 출처 또는 보도 2곳 일치, 안 되면 그 원인을 빼기",
    "themes": [],
@@ -3136,7 +3230,7 @@
    "key": "09",
    "file": "manual/09-market-daily.md",
    "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13 · v36 인사이트·영상 소스 · v42 기술 분석·CEO 소식 2026-11-17)",
-   "lines": 333,
+   "lines": 342,
    "versions": [
     19,
     24,
@@ -5107,6 +5201,25 @@
    ]
   },
   {
+   "id": "sec:09§7-1",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "7-1",
+   "level": 3,
+   "label": "썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
+   "title": "7-1. 썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
+   "line": 270,
+   "end": 277,
+   "tag_version": null,
+   "versions": [
+    51
+   ],
+   "last_version": 51,
+   "terms": [
+    "term:versus"
+   ]
+  },
+  {
    "id": "sec:09§8",
    "kind": "section",
    "doc": "doc:09",
@@ -5114,8 +5227,8 @@
    "level": 2,
    "label": "렌더 전 점검",
    "title": "8. 렌더 전 점검",
-   "line": 270,
-   "end": 272,
+   "line": 278,
+   "end": 280,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5128,11 +5241,14 @@
    "level": 2,
    "label": "렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
    "title": "9. 렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
-   "line": 273,
-   "end": 278,
+   "line": 281,
+   "end": 287,
    "tag_version": null,
    "versions": [],
-   "last_version": null
+   "last_version": null,
+   "terms": [
+    "term:analogy"
+   ]
   },
   {
    "id": "sec:09§10",
@@ -5142,8 +5258,8 @@
    "level": 2,
    "label": "업로드 (유튜브 스튜디오)",
    "title": "10. 업로드 (유튜브 스튜디오)",
-   "line": 279,
-   "end": 289,
+   "line": 288,
+   "end": 298,
    "tag_version": null,
    "versions": [
     34
@@ -5158,8 +5274,8 @@
    "level": 2,
    "label": "기록·되돌아보기",
    "title": "11. 기록·되돌아보기",
-   "line": 290,
-   "end": 293,
+   "line": 299,
+   "end": 302,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5172,8 +5288,8 @@
    "level": 2,
    "label": "예외 대응",
    "title": "12. 예외 대응",
-   "line": 294,
-   "end": 303,
+   "line": 303,
+   "end": 312,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5186,8 +5302,8 @@
    "level": 2,
    "label": "법·정책",
    "title": "13. 법·정책",
-   "line": 304,
-   "end": 313,
+   "line": 313,
+   "end": 322,
    "tag_version": null,
    "versions": [
     34
@@ -5195,43 +5311,43 @@
    "last_version": 34
   },
   {
-   "id": "sec:09§h314",
+   "id": "sec:09§h323",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h314",
+   "num": "h323",
    "level": 2,
    "label": "목소리 (2026-11-13 결정)",
    "title": "목소리 (2026-11-13 결정)",
-   "line": 314,
-   "end": 321,
+   "line": 323,
+   "end": 330,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h322",
+   "id": "sec:09§h331",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h322",
+   "num": "h331",
    "level": 2,
    "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
    "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
-   "line": 322,
-   "end": 327,
+   "line": 331,
+   "end": 336,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h328",
+   "id": "sec:09§h337",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h328",
+   "num": "h337",
    "level": 2,
    "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
    "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
-   "line": 328,
-   "end": 333,
+   "line": 337,
+   "end": 342,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -10571,6 +10687,16 @@
     "term:tech-spotlight",
     "term:graphic-pack"
    ]
+  },
+  {
+   "id": "ver:51",
+   "kind": "version",
+   "v": 51,
+   "date": "2026-11-19",
+   "label": "v51",
+   "summary": "시장 썸네일 방식(09 §7-1: 핫 키워드 먼저·단정+숫자·검은 톤 사진 기본)·글자 넘침 프레임 확인(§9)·막히면 피클 요청(AGENTS) (2026-11-19 사용자)",
+   "applied": [],
+   "themes": []
   },
   {
    "id": "rev:1",
@@ -18713,6 +18839,32 @@
    "annotated": false
   },
   {
+   "id": "intent:171a8717",
+   "kind": "intent",
+   "quote": "작업에서 막히는 일은 피클에게 요청하시면 됩니다.",
+   "label": "작업에서 막히는 일은 피클에게 요청하시면 됩니다.",
+   "versions": [],
+   "date": "2026-11-19",
+   "sources": [
+    {
+     "ref": "fb:48",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:171a8717"
+   ],
+   "themes": [],
+   "ann_key": "intent:171a8717",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:1e0ff9b1",
    "kind": "intent",
    "quote": "사용자: 이부분 효과음 없애줘 효과음들이 전체적으로 별로 듣기 좋은 효과음이 아니야 일단 영상은 합격입니다. 나중에 이 메뉴얼을 토대로 그림체 화풍 스타일과 그림을 누끼 딸 때 흰부분이 있는점 등만 보완하면 될 것 같습니다.",
@@ -18755,6 +18907,46 @@
    "annotated": false
   },
   {
+   "id": "intent:226480d6",
+   "kind": "intent",
+   "quote": "벡그라운더 렌더는 돌리고  앞으로 이런거 주의하세요 또 앞으로 썸네일 방식 커밋하세요",
+   "label": "벡그라운더 렌더는 돌리고  앞으로 이런거 주의하세요 또 앞으로 썸네일 방식 커밋하세요",
+   "versions": [],
+   "date": "2026-11-19",
+   "sources": [
+    {
+     "ref": "fb:45",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:09§7-1",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "썸네일 방식 커밋하세요"
+   ],
+   "member_ids": [
+    "intent:226480d6",
+    "intent:8dd0b129"
+   ],
+   "themes": [],
+   "ann_key": "intent:226480d6",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§7-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:652fc668",
    "kind": "intent",
    "quote": "내가 말한 썸네일은 연준썸네일이야 유튜브 보니까 이상한 썸네일이길래 그리고 이런거 주의해줘 삐져나와",
@@ -18765,18 +18957,71 @@
     {
      "ref": "fb:44",
      "kind": "feedback"
+    },
+    {
+     "ref": "sec:09§9",
+     "kind": "manual"
     }
    ],
-   "variants": [],
+   "variants": [
+    "이런거 주의해줘 삐져나와"
+   ],
    "member_ids": [
-    "intent:652fc668"
+    "intent:652fc668",
+    "intent:1a22f259"
    ],
    "themes": [],
    "ann_key": "intent:652fc668",
    "meaning": "",
    "not_meant": [],
    "note": "",
-   "readings": [],
+   "readings": [
+    {
+     "ref": "sec:09§9",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:69ba832e",
+   "kind": "intent",
+   "quote": "앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도",
+   "label": "앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도",
+   "versions": [],
+   "date": "2026-11-19",
+   "sources": [
+    {
+     "ref": "sec:09§7-1",
+     "kind": "manual"
+    },
+    {
+     "ref": "fb:46",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:69ba832e"
+   ],
+   "themes": [
+    "background"
+   ],
+   "ann_key": "intent:69ba832e",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§7-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -18816,6 +19061,32 @@
    ],
    "status": "misaligned",
    "annotated": true
+  },
+  {
+   "id": "intent:b775bfca",
+   "kind": "intent",
+   "quote": "조회수가 높은 썸네일들을 조사해주세요 썸네일과 그에 따른 내부 편집법 연출법에 따라 조회수가 확 달라지더라구요",
+   "label": "조회수가 높은 썸네일들을 조사해주세요 썸네일과 그에 따른 내부 편집법 연출법에 따라 조회수가 확 달라지더라구",
+   "versions": [],
+   "date": "2026-11-19",
+   "sources": [
+    {
+     "ref": "fb:47",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:b775bfca"
+   ],
+   "themes": [],
+   "ann_key": "intent:b775bfca",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
   },
   {
    "id": "term:bite",
@@ -19596,6 +19867,7 @@
     "sec:09§3-4",
     "sec:09§4",
     "sec:09§7",
+    "sec:09§7-1",
     "sec:10§h37",
     "sec:10§h80",
     "sec:10§5"
@@ -19946,6 +20218,7 @@
     "sec:05§0-6",
     "sec:05§2",
     "sec:09§4",
+    "sec:09§9",
     "sec:10§h50",
     "sec:10§h61",
     "sec:10§5"
@@ -24493,7 +24766,7 @@
     "sec:04§0-4",
     "sec:05§0-4",
     "sec:09§6",
-    "sec:09§h328",
+    "sec:09§h337",
     "sec:11§2-4",
     "sec:README§2-5",
     "sec:README§3-1",
@@ -24818,7 +25091,7 @@
     "sec:05§6",
     "sec:06§G5",
     "sec:06§G6",
-    "sec:09§h328",
+    "sec:09§h337",
     "sec:10§4",
     "sec:README§0",
     "sec:README§2",
@@ -26024,6 +26297,112 @@
    "scope": "standard",
    "intent": "intent:652fc668",
    "tier_key": "fb:652fc668",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:45",
+   "kind": "feedback",
+   "date": "2026-11-19",
+   "quote": "벡그라운더 렌더는 돌리고  앞으로 이런거 주의하세요 또 앞으로 썸네일 방식 커밋하세요",
+   "label": "벡그라운더 렌더는 돌리고  앞으로 이런거 주의하세요 또 앞으로 썸네일 방식 커밋하세요",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261119-market-daily",
+   "about": "",
+   "note": "09 §7-1 썸네일 방식(핫 키워드 먼저·단정+숫자·검은 톤 사진 꽉 채움 기본, punch·versus dark 변형, 제목은 사용자 요청 때만 변경) + §9 글자가 상자 밖으로 넘치는지 프레임 확인. prompts/thumbnail.md 시장 절",
+   "pending": false,
+   "themes": [],
+   "scope": "standard",
+   "intent": "intent:226480d6",
+   "tier_key": "fb:226480d6",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:46",
+   "kind": "feedback",
+   "date": "2026-11-19",
+   "quote": "앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도",
+   "label": "앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261119-market-daily",
+   "about": "",
+   "note": "09 §7-1 ① 팩트시트 '## 핫 키워드' 3~5줄을 쓰고 썸네일 큰 글씨·제목 앞 20자에",
+   "pending": false,
+   "themes": [
+    "background"
+   ],
+   "scope": "standard",
+   "intent": "intent:69ba832e",
+   "tier_key": "fb:69ba832e",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:47",
+   "kind": "feedback",
+   "date": "2026-11-19",
+   "quote": "조회수가 높은 썸네일들을 조사해주세요 썸네일과 그에 따른 내부 편집법 연출법에 따라 조회수가 확 달라지더라구요",
+   "label": "조회수가 높은 썸네일들을 조사해주세요 썸네일과 그에 따른 내부 편집법 연출법에 따라 조회수가 확 달라지더라구",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "docs/49-thumbnail-research.md → 09 §7-1 썸네일 방식에 반영. 영상 속 편집 짝 비교는 피클 요청(thumb-hook·thumb-edit)",
+   "pending": false,
+   "themes": [],
+   "scope": "standard",
+   "intent": "intent:b775bfca",
+   "tier_key": "fb:b775bfca",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:48",
+   "kind": "feedback",
+   "date": "2026-11-19",
+   "quote": "작업에서 막히는 일은 피클에게 요청하시면 됩니다.",
+   "label": "작업에서 막히는 일은 피클에게 요청하시면 됩니다.",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "막히면(유튜브 재생·자막·봇 확인·로그인 필요) 우회하지 않고 inbox/requests/<KST>-<slug>.md 로 피클에게(한 파일=한 요청, main 푸시), 결과는 done/ 에서. AGENTS.md 소스 규칙에 반영",
+   "pending": false,
+   "themes": [],
+   "scope": "standard",
+   "intent": "intent:171a8717",
+   "tier_key": "fb:171a8717",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -44547,6 +44926,11 @@
   },
   {
    "s": "doc:09",
+   "t": "sec:09§7-1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
    "t": "sec:09§8",
    "kind": "contains"
   },
@@ -44577,17 +44961,17 @@
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h314",
+   "t": "sec:09§h323",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h322",
+   "t": "sec:09§h331",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h328",
+   "t": "sec:09§h337",
    "kind": "contains"
   },
   {
@@ -46876,6 +47260,14 @@
    ]
   },
   {
+   "s": "ver:51",
+   "t": "sec:09§7-1",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -48779,6 +49171,11 @@
    "kind": "about"
   },
   {
+   "s": "intent:b775bfca",
+   "t": "fb:47",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:759c49eb",
    "t": "ver:25",
    "kind": "interpreted_in"
@@ -48841,6 +49238,11 @@
   {
    "s": "intent:652fc668",
    "t": "fb:44",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:652fc668",
+   "t": "sec:09§9",
    "kind": "quoted_in"
   },
   {
@@ -48954,6 +49356,16 @@
    "kind": "about"
   },
   {
+   "s": "intent:226480d6",
+   "t": "fb:45",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:226480d6",
+   "t": "sec:09§7-1",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:93f69885",
    "t": "ver:27",
    "kind": "interpreted_in"
@@ -49031,6 +49443,21 @@
   {
    "s": "intent:abbe3e51",
    "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:69ba832e",
+   "t": "sec:09§7-1",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:69ba832e",
+   "t": "fb:46",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:69ba832e",
+   "t": "theme:background",
    "kind": "about"
   },
   {
@@ -49332,6 +49759,11 @@
    "s": "intent:00ba80c7",
    "t": "theme:background",
    "kind": "about"
+  },
+  {
+   "s": "intent:171a8717",
+   "t": "fb:48",
+   "kind": "quoted_in"
   },
   {
    "s": "intent:99b74c20",
@@ -52651,6 +53083,31 @@
   {
    "s": "fb:44",
    "t": "intent:652fc668",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:45",
+   "t": "intent:226480d6",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:46",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "fb:46",
+   "t": "intent:69ba832e",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:47",
+   "t": "intent:b775bfca",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:48",
+   "t": "intent:171a8717",
    "kind": "quoted_as"
   }
  ]

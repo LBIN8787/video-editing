@@ -26,6 +26,9 @@
 배치: `layout: board` (**호기심 채널 이야기형 기본** — 종이 바탕 + 영상 그림판과 같은 선 그림 `drawings[{icon|pose, x, y, s, color, label}]` + 큰 두 줄 글씨, 강조 단어는 빨강, 2026-11-13) · `layout: photo` (사진 한쪽 + 반대쪽 큰 글씨, `photo_side: right|left|full`) 또는 `layout: versus` (종이 바탕 숫자 둘).
 표시: `marks: [{type: circle|arrow|x|stamp, ...}]`. 변형마다 `why` 2~3줄.
 
+### 시장 채널 (2026-11-19)
+`manual/09-market-daily.md` §7-1 — **핫 키워드 먼저**(팩트시트 `## 핫 키워드`), 단정 한 마디 + 숫자, 기본은 검은 톤 사진 꽉 채움(`photo` `full`), `punch`·`versus theme: dark` 는 변형. 근거 `docs/49-thumbnail-research.md`.
+
 ### 만들기·점검
 `python -m ytflow thumbnail <프로젝트>` (hybrid 만들기 끝에 자동) → `05_edit/thumbnail_A~C.png`, `thumbnail_preview.png`(실제·목록·휴대폰 크기),
 `package.md`(제목·이유), `thumbnail_qa.json`. 미리보기를 **직접 눈으로** 보고 고친다. `upload` 가 릴리스에 함께 붙인다.
