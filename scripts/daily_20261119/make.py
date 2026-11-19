@@ -303,10 +303,9 @@ def main():
                  "why": ["질문 + 숫자 대비 — 제목(연준·순환 금융)과 겹치지 않게 '돈의 자리'를 물음", "사용자 2026-11-19: 더 눈에 들어오게 → 컬러 사진·큰 글씨·노란 상자·숫자 칩"]},
                 {"id": "B", "name": "숫자 대비 (dark)", "layout": "versus", "theme": "dark", "left": {"value": "260억", "label": "공급자 7곳이 살 주식"},
                  "right": {"value": "9,009억", "label": "앤트로픽이 살 컴퓨트"}, "headline": "파는 쪽이 사는 쪽이 될 때", "hl": ["사는"], "marks": [], "why": ["숫자 둘 대비"]},
-                {"id": "C", "name": "연준 + 경고 (punch)", "layout": "punch", "image": {"file": "04_assets/footage/raw/fed.jpg", "focus": [0.5, 0.45]},
-                 "top": "11월 19일 · 연준 의사록", "lines": ["연준의 경고", "'순환 금융'"], "hl": ["'순환"], "size": 160, "text_y": 140,
-                 "chips": [{"text": "같은 날 앤트로픽 1.5조", "color": "yellow"}],
-                 "why": ["공시·당국 문서 + 같은 날 숫자"]}]},
+                {"id": "C", "name": "연준 문서 (검은 바탕)", "layout": "photo", "photo_side": "full", "image": {"file": "04_assets/footage/raw/fed.jpg", "focus": [0.5, 0.5]},
+                 "top": "11월 19일 · 연준 의사록", "lines": ["'순환 금융'", "같은 날 1.5조"], "hl": ["순환"], "sub": "오늘 밤 앤트로픽 첫 거래", "size": 104, "text_y": 330, "marks": [],
+                 "why": ["공시·다음 일정", "2026-11-19 사용자: 검은 바탕 연준 썸네일로 (유튜브 적용)"]}]},
     }
     (P / "02_script" / "hybrid.json").write_text(json.dumps(spec, ensure_ascii=False, indent=1), encoding="utf-8")
     print(P, len(S))
