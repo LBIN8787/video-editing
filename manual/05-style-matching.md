@@ -241,3 +241,20 @@ python -m ytflow style-pick <프로젝트>   # topic_brief.json → 영상 전�
 ## 5. 시험작 (같은 이야기를 다른 연출로)
 `docs/16-new-styles.md` — 아카이브 다큐(dark-doc) · 지도 여정(newsprint) · 키네틱 타이포(kinetic-poster).
 새 스타일을 시험할 때도 같은 방법: `python scripts/style_demo.py <원본> <시험작> <스펙.json>` (같은 문장·목소리 재사용, 비용 0).
+
+
+## 6. UI 재연·문서 강조 도구 (v50, 2026-11-19)
+사용자 요청: “커밋하고 매뉴얼이랑 기법 카탈로그에도 반영해줘.”
+아래 도구는 장면의 상황에 맞춰 선택하는 스타일 기본값입니다. 채널 전체의 필수 양식으로 쓰지 않습니다.
+
+| 상황 | 장면·기법 | 선택과 대체 |
+|---|---|---|
+| 처리 중 → 결과가 바뀜 | `statecard` · `card-state` | 실제 조작 화면 우선. 화면이 없을 때 재연 고지를 붙여 상태 변화 설명 |
+| 연결이 막히거나 끊김 | `link-break` | 이미 그린 연결을 빨간 점선과 X로 바꿈. 일반 인과 설명은 기존 `map_causal` |
+| 실사 속 여러 요청 | `footage-chips` | 칩은 짧게, 인물·핵심 동작·자막을 피해서 등장 |
+| 기사·문서 근거 읽기 | `docspot` · `document-spotlight` | 출처와 원문을 확인하고 문단 강조. 실제 캡처는 `img`, 재구성 문서는 `paras`로 구별 |
+| 다음 문제로 장 구분 | `chapter-two-line` | `chapter`의 `look: two-line`; 작은 줄 다음 큰 제목. 다음 질문이 생기는 자리에서 사용 |
+| 원 모양을 다음 장면에 연결 | `shape-iris` | `iris_out`의 중심·반지름을 앞 장면 원에 맞춤. 바탕색을 거쳐 열리는 구현이며 다음 영상이 원 안에 직접 보이는 합성과 구별 |
+
+AI 사용 사례·시사 근거 설명에 특히 맞습니다. 시장 영상에서는 문서 강조와 연결 차단에 쓰고, 호기심 영상은 주인공의 행동을 카드로 대체하지 않도록 장면 목적을 먼저 봅니다.
+구현: `ytflow/stages/uiflow.py`, `hybrid.py`, `edit10.py`. 정확한 JSON 키·시험 결과·제약은 [분석 문서 §6](../docs/43-reference-pickle-explainer.md#6-구현-2026-11-18--ytflowstagesuiflowpy), 기법 선택은 `styles/techniques.yaml`.

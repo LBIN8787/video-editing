@@ -30,8 +30,22 @@ def apply(D, spec: dict, sc: dict, bt: list, dur: float):
     ids = [s["id"] for s in spec["scenes"]]
     first, last = sc["id"] == ids[0], sc["id"] == ids[-1]
     acc = D.red
+    # ---- 모양 매치 아이리스 (docs/43 §4-6): 앞 장면에 iris_out 이 있으면 그 원이 덮고 → 이 장면은 같은 색에서 원으로 열림
+    from . import uiflow
+    pos = ids.index(sc["id"])
+    prev = spec["scenes"][pos - 1] if pos > 0 else None
+    match_in = bool(prev and prev.get("iris_out"))
+    match_out = bool(sc.get("iris_out")) and not last
+    if match_in or match_out:   # 두 장면이 따로(병렬로) 렌더돼도 같은 색이 되게: 지정 색 → 영상 전체 팩의 바탕색
+        from . import skin as _sk
+        base = (_sk.load().get("palette") or {}).get("base") or "#F3EFE6"
+    if match_in:
+        io = prev["iris_out"]
+        uiflow.iris_in(D, io.get("color") or base, tuple(io["to"]) if io.get("to") else None)
+    if match_out:
+        uiflow.iris_out(D, sc, dur, sc["iris_out"].get("color") or base)
     # ---- 들어오기 (첫 장면 제외)
-    if not first:
+    if not first and not match_in:
         k = kind_of(spec, sc["id"])
         if k == "fade":
             D.js.append('tl.fromTo("#root",{opacity:0},{opacity:1,duration:0.35,ease:"power1.out"},0);')
@@ -46,7 +60,7 @@ def apply(D, spec: dict, sc: dict, bt: list, dur: float):
         elif k == "iris":
             D.js.append('tl.fromTo("#root",{clipPath:"circle(0% at 50% 50%)"},{clipPath:"circle(80% at 50% 50%)",duration:0.5,ease:"power2.out"},0);')
     # ---- 나가기 (마지막 장면 제외) — 다음 장면의 전환과 이어지게
-    if not last:
+    if not last and not match_out:
         nxt = ids[ids.index(sc["id"]) + 1]
         k = kind_of(spec, nxt)
         t = max(0.0, dur - 0.3)
