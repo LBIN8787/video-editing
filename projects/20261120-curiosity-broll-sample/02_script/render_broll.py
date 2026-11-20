@@ -14,6 +14,13 @@ W, H, FPS = 1920, 1080, 30
 LEAD, GAP, TAIL = 0.35, 0.35, 0.6
 KW = {6: {1: ["3%", "30%"]}, 7: {1: ["선택"]}, 8: {0: ["창을 닫는"]}, 9: {1: ["50개", "평균"]},
       10: {0: ["좋아하는", "비교하기"]}}
+try:   # 실사 색보정은 화풍 목록에서 (edit.yaml look.footage, 기본 warm-doc — styles/looks.yaml)
+    sys.path.insert(0, str(ROOT))
+    from ytflow.stages import looks as _looks
+    GRADE = _looks.footage_vf(HERE.parent)
+except Exception:
+    GRADE = ""
+GRADE = GRADE or "eq=contrast=1.06:saturation=0.82:gamma=0.97,colorbalance=rs=0.03:bs=-0.03:rh=0.02:bh=-0.03,vignette=PI/4.5,noise=alls=5:allf=t"
 EXTRA = {3: (0.3, 0.9), 4: (0.6, 0.6), 6: (0.2, 0.9), 9: (0.1, 0.5), 11: (0.2, 2.6)}   # 장면별 (앞, 뒤) 여유 더하기
 
 
@@ -74,8 +81,7 @@ def footage(sc, clips, work):
         x = f"(iw-{W})/2+{dirn}*(iw-{W})/2*(t/{d:.2f}-0.5)"
         vf = (f"{pre}setpts={slow}*PTS,fps={FPS},scale=2040:1148:force_original_aspect_ratio=increase,"
               f"crop={W}:{H}:'{x}':(ih-{H})/2,"
-              "eq=contrast=1.06:saturation=0.82:gamma=0.97,colorbalance=rs=0.03:gs=0.0:bs=-0.03:rh=0.02:bh=-0.03,"
-              "vignette=PI/4.5,noise=alls=5:allf=t")
+              + GRADE)
         if sc.get("blur"):
             vf += f",boxblur={sc['blur']}"
         if sc.get("dim"):

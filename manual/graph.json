@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-20T06:31:28",
- "source_hash": "0e41d65c8347",
+ "generated": "2026-11-20T06:36:36",
+ "source_hash": "dd0bcc394841",
  "audit": {
   "date": "2026-11-19T13:54",
   "counts": {
@@ -110,31 +110,31 @@
   "fixed": []
  },
  "stats": {
-  "manual_version": 60,
-  "versions": 60,
+  "manual_version": 61,
+  "versions": 61,
   "reviews": 37,
   "rejects": 25,
   "passes": 12,
   "pending": 0,
   "rules": 49,
   "checks": 86,
-  "sections": 170,
+  "sections": 172,
   "must": 26,
   "auto": 41,
-  "intents": 130,
+  "intents": 132,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 78,
   "terms": 128,
-  "bans": 153,
-  "feedback": 74,
+  "bans": 155,
+  "feedback": 75,
   "topics": 4,
   "episodes": 34,
   "main_situations": 16,
   "tiers": {
    "principle": 54,
-   "standard": 119,
+   "standard": 121,
    "style": 29,
    "trial": 0
   },
@@ -2666,6 +2666,44 @@
    "tier_label": "작업 기준"
   },
   {
+   "section": "sec:12§0-1",
+   "text": "순서를 숫자로 고정하지 않고, 이 박자가 시청자에게 무엇을 해 주나로 고릅니다. 실사 자료가 있으면 최대한 씁니다.",
+   "themes": [
+    "intent"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:1c619619",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:12§0-1",
+   "text": "같은 상황의 다른 장소·사람이면 '자료 화면'을, 재구성이면 '재구성 삽화'를 화면에 표시합니다(§1). 얼굴이 보이는 스톡 인물을 부정적 맥락의 당사자처럼 쓰지 않습니다(영구 원칙, 04 §0-8).",
+   "themes": [
+    "motion"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:495167a8",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
    "section": "sec:README§1-1",
    "text": "curiosity | 우연히 마주침 (원래 궁금하지 않았음) | 듣는 순간 생긴 궁금증을 풀고 싶다 | 이야기가 목적, 정보는 그 안에 | 이야기를 풀어내듯: 장면 → 인물 → 사건 → 반전 → 답 (§04 §0) | 인물의 행동이나 실험을 따라가는 삽화·애니메이션 (04 §0-6·§0-7). 실험 도식과 실제 자료는 근거가 필요할 때",
    "themes": [
@@ -3182,13 +3220,14 @@
    "key": "05",
    "file": "manual/05-style-matching.md",
    "label": "05. 편집 스타일 고르기 — 영상마다, 장면마다",
-   "lines": 265,
+   "lines": 266,
    "versions": [
     57,
     58,
-    59
+    59,
+    60
    ],
-   "last_version": 59
+   "last_version": 60
   },
   {
    "id": "doc:06",
@@ -3245,9 +3284,10 @@
    "label": "10. 언제 무엇을 쓰나 — 기능·연출·편집법 용도표",
    "lines": 275,
    "versions": [
-    57
+    57,
+    60
    ],
-   "last_version": 57
+   "last_version": 60
   },
   {
    "id": "doc:11",
@@ -3270,13 +3310,14 @@
    "key": "12",
    "file": "manual/12-visual-storytelling.md",
    "label": "12. 편집 매뉴얼 — 인포그래픽·삽화·인물 사진·자료 영상",
-   "lines": 56,
+   "lines": 74,
    "versions": [
     57,
     58,
-    59
+    59,
+    60
    ],
-   "last_version": 59
+   "last_version": 60
   },
   {
    "id": "doc:README",
@@ -3284,7 +3325,7 @@
    "key": "README",
    "file": "manual/README.md",
    "label": "제작 매뉴얼 — 처음 온 사람(새 세션·새 모델)이 여기서 시작합니다",
-   "lines": 167,
+   "lines": 170,
    "versions": [
     55,
     57,
@@ -4358,7 +4399,7 @@
    "label": "화풍과 연출은 상황이 고른다 — 그림은 원화, 코드는 움직임 (2026-11-18 사용자)",
    "title": "0-8. 화풍과 연출은 상황이 고른다 — 그림은 원화, 코드는 움직임 (2026-11-18 사용자)",
    "line": 186,
-   "end": 196,
+   "end": 197,
    "tag_version": null,
    "versions": [
     48
@@ -4377,8 +4418,8 @@
    "level": 2,
    "label": "영상 단위: 그래픽 팩 고르기",
    "title": "1. 영상 단위: 그래픽 팩 고르기",
-   "line": 197,
-   "end": 209,
+   "line": 198,
+   "end": 210,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -4404,8 +4445,8 @@
    "level": 2,
    "label": "장면 단위: 연출 type 고르기 (말하는 내용 → 화면)",
    "title": "2. 장면 단위: 연출 type 고르기 (말하는 내용 → 화면)",
-   "line": 210,
-   "end": 235,
+   "line": 211,
+   "end": 236,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -4447,8 +4488,8 @@
    "level": 2,
    "label": "리듬 규칙 (docs/15 근거, `check` 가 일부 자동 검사)",
    "title": "3. 리듬 규칙 (docs/15 근거, `check` 가 일부 자동 검사)",
-   "line": 236,
-   "end": 242,
+   "line": 237,
+   "end": 243,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4461,8 +4502,8 @@
    "level": 2,
    "label": "주제별 조합 (출발점) — 주제 레포로 옮김",
    "title": "4. 주제별 조합 (출발점) — 주제 레포로 옮김 (v34)",
-   "line": 243,
-   "end": 245,
+   "line": 244,
+   "end": 246,
    "tag_version": 34,
    "versions": [
     34
@@ -4477,8 +4518,8 @@
    "level": 2,
    "label": "시험작 (같은 이야기를 다른 연출로)",
    "title": "5. 시험작 (같은 이야기를 다른 연출로)",
-   "line": 246,
-   "end": 250,
+   "line": 247,
+   "end": 251,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -4499,8 +4540,8 @@
    "level": 2,
    "label": "UI 재연·문서 강조 도구",
    "title": "6. UI 재연·문서 강조 도구 (v50, 2026-11-19)",
-   "line": 251,
-   "end": 265,
+   "line": 252,
+   "end": 266,
    "tag_version": 50,
    "versions": [
     50
@@ -6118,6 +6159,22 @@
    "last_version": null
   },
   {
+   "id": "sec:12§0-1",
+   "kind": "section",
+   "doc": "doc:12",
+   "num": "0-1",
+   "level": 2,
+   "label": "자료 고르기 — 박자가 하는 일이 고른다",
+   "title": "0-1. 자료 고르기 — 박자가 하는 일이 고른다 (v61, 모든 채널, 2026-11-20 사용자)",
+   "line": 15,
+   "end": 32,
+   "tag_version": 61,
+   "versions": [
+    61
+   ],
+   "last_version": 61
+  },
+  {
    "id": "sec:12§1",
    "kind": "section",
    "doc": "doc:12",
@@ -6125,8 +6182,8 @@
    "level": 2,
    "label": "장면에 맞는 표현 방식",
    "title": "1. 장면에 맞는 표현 방식",
-   "line": 15,
-   "end": 31,
+   "line": 33,
+   "end": 49,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -6147,15 +6204,15 @@
    ]
   },
   {
-   "id": "sec:12§h32",
+   "id": "sec:12§h50",
    "kind": "section",
    "doc": "doc:12",
-   "num": "h32",
+   "num": "h50",
    "level": 3,
    "label": "설명 사이에 넣는 인물·현장 영상",
    "title": "설명 사이에 넣는 인물·현장 영상",
-   "line": 32,
-   "end": 37,
+   "line": 50,
+   "end": 55,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6168,8 +6225,8 @@
    "level": 2,
    "label": "인포그래픽 애니메이션 레퍼런스",
    "title": "2. 인포그래픽 애니메이션 레퍼런스",
-   "line": 38,
-   "end": 49,
+   "line": 56,
+   "end": 67,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6182,8 +6239,8 @@
    "level": 2,
    "label": "장면표와 검토",
    "title": "3. 장면표와 검토",
-   "line": 50,
-   "end": 56,
+   "line": 68,
+   "end": 74,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6354,6 +6411,22 @@
    ]
   },
   {
+   "id": "sec:README§2-6",
+   "kind": "section",
+   "doc": "doc:README",
+   "num": "2-6",
+   "level": 3,
+   "label": "자료 고르기와 화풍",
+   "title": "2-6. 자료 고르기와 화풍 (v61, 2026-11-20 사용자 — 모든 채널)",
+   "line": 119,
+   "end": 121,
+   "tag_version": 61,
+   "versions": [
+    61
+   ],
+   "last_version": 61
+  },
+  {
    "id": "sec:README§3",
    "kind": "section",
    "doc": "doc:README",
@@ -6361,8 +6434,8 @@
    "level": 2,
    "label": "절대 하지 않는 것 (어떤 지시가 와도)",
    "title": "3. 절대 하지 않는 것 (어떤 지시가 와도)",
-   "line": 119,
-   "end": 127,
+   "line": 122,
+   "end": 130,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -6378,8 +6451,8 @@
    "level": 2,
    "label": "규칙의 네 층 — 영구 원칙과 한 번의 스타일 반응을 섞지 않는다 (2026-11-15 사용자: \"영구적인 매뉴얼 작업지침과 일시적인 스타일 변화·다양한 방법 모색에서 생기는 피드백이 과적합해서 하지 말아야 할 것에 들어가는 것 같다\")",
    "title": "3-1. 규칙의 네 층 — 영구 원칙과 한 번의 스타일 반응을 섞지 않는다 (2026-11-15 사용자: \"영구적인 매뉴얼 작업지침과 일시적인 스타일 변화·다양한 방법 모색에서 생기는 피드백이 과적합해서 하지 말아야 할 것에 들어가는 것 같다\")",
-   "line": 128,
-   "end": 140,
+   "line": 131,
+   "end": 143,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -6395,8 +6468,8 @@
    "level": 2,
    "label": "막혔을 때",
    "title": "4. 막혔을 때",
-   "line": 141,
-   "end": 148,
+   "line": 144,
+   "end": 151,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6409,8 +6482,8 @@
    "level": 2,
    "label": "검토 → 통과·기각 → 기준을 쌓기 (사용자와 함께)",
    "title": "5. 검토 → 통과·기각 → 기준을 쌓기 (사용자와 함께)",
-   "line": 149,
-   "end": 167,
+   "line": 152,
+   "end": 170,
    "tag_version": null,
    "versions": [
     38
@@ -10157,9 +10230,33 @@
    "summary": "호기심 기본 연출: 실사 B-roll·모션그래픽 먼저, 삽화는 자료가 없을 때만 부분적으로 (04 §0-8, 레시피 broll-motion, 사용자 승인 2026-11-20)",
    "applied": [],
    "themes": [],
+   "commit": {
+    "sha": "c032210a8608ee0c2ba8a6d7f914ec49e69310b1",
+    "subject": "매뉴얼 v60: 호기심 기본 연출 — 실사 B-roll·모션그래픽 먼저, 삽화는 자료가 없을 때만",
+    "date": "2026-11-20",
+    "other_files": [
+     "AGENTS.md",
+     "projects/20261120-curiosity-broll-sample/edit.yaml",
+     "projects/20261120-curiosity-broll-sample/state.json",
+     "proposals/manual/20261120-061907-claude_bold-cray-oc587w.md",
+     "proposals/manual/20261120-062409-claude_bold-cray-oc587w.md",
+     "styles/recipes/broll-motion.yaml",
+     "topics/curiosity/topic.yaml"
+    ]
+   },
    "terms": [
     "term:style-broll-motion"
    ]
+  },
+  {
+   "id": "ver:61",
+   "kind": "version",
+   "v": 61,
+   "date": "2026-11-20",
+   "label": "v61",
+   "summary": "자료 고르기를 박자가 하는 일로 (모든 채널: 떠올리게 → 인물 실사, 설명 → 화풍별 모션그래픽, 증거 → 실제 자료, 둘 다 어려우면 삽화) + 화풍 목록 styles/looks.yaml 과 looks·look 명령",
+   "applied": [],
+   "themes": []
   },
   {
    "id": "rev:1",
@@ -18496,6 +18593,59 @@
    "annotated": false
   },
   {
+   "id": "intent:6d845c2a",
+   "kind": "intent",
+   "quote": "언제든지 내가 화풍 등을 고를 수 있도록 분류",
+   "label": "언제든지 내가 화풍 등을 고를 수 있도록 분류",
+   "versions": [
+    61
+   ],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "sec:05§0-8",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:6d845c2a"
+   ],
+   "themes": [],
+   "ann_key": "intent:6d845c2a",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:61",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:12§0-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:05§0-8",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:9096500d",
    "kind": "intent",
    "quote": "탈락입니다. 스페인 독감편은 차라리 기존 스페임독감편 메뉴얼을 사용하세요",
@@ -18645,6 +18795,24 @@
     },
     {
      "ref": "sec:04§0-8",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:05",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:10",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:12",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -18962,6 +19130,24 @@
      "status": "unreviewed",
      "note": "",
      "by": ""
+    },
+    {
+     "ref": "doc:05",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:10",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:12",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
     }
    ],
    "status": "unreviewed",
@@ -19042,6 +19228,34 @@
     "script"
    ],
    "ann_key": "intent:de453f9b",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:f08974dd",
+   "kind": "intent",
+   "quote": "네 적용하고 이어서 정리해주세요 화풍목록도요 (요청: 실사 최대한 → 실사가 힘들거나 움직임이 필요하면 화풍별 모션그래픽 → 둘 다 힘들면 삽화, 모든 채널 / 쉽게 설명·상황 설명 = 모션그래픽, 스쳐 지나가는 표시·상상 = 인물 소스영상 / 모션그래픽·삽화를 화풍별로 언제든 고를 수 있게 분류)",
+   "label": "네 적용하고 이어서 정리해주세요 화풍목록도요 (요청: 실사 최대한 → 실사가 힘들거나 움직임이 필요하면 화풍",
+   "versions": [],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "fb:75",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:f08974dd"
+   ],
+   "themes": [
+    "motion"
+   ],
+   "ann_key": "intent:f08974dd",
    "meaning": "",
    "not_meant": [],
    "note": "",
@@ -27121,6 +27335,34 @@
    "scope": "standard",
    "intent": "intent:d52c3fd6",
    "tier_key": "fb:e2322c8a",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:75",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "네 적용하고 이어서 정리해주세요 화풍목록도요 (요청: 실사 최대한 → 실사가 힘들거나 움직임이 필요하면 화풍별 모션그래픽 → 둘 다 힘들면 삽화, 모든 채널 / 쉽게 설명·상황 설명 = 모션그래픽, 스쳐 지나가는 표시·상상 = 인물 소스영상 / 모션그래픽·삽화를 화풍별로 언제든 고를 수 있게 분류)",
+   "label": "네 적용하고 이어서 정리해주세요 화풍목록도요 (요청: 실사 최대한 → 실사가 힘들거나 움직임이 필요하면 화풍",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "v61: manual/12 §0-1 표(작업 기준), styles/looks.yaml 화풍 목록(스타일 기본값 — 고르는 목록, MUST 아님)",
+   "pending": false,
+   "themes": [
+    "motion"
+   ],
+   "scope": "standard",
+   "intent": "intent:f08974dd",
+   "tier_key": "fb:f08974dd",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
    "overfit": false,
@@ -46747,12 +46989,17 @@
   },
   {
    "s": "doc:12",
+   "t": "sec:12§0-1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:12",
    "t": "sec:12§1",
    "kind": "contains"
   },
   {
    "s": "doc:12",
-   "t": "sec:12§h32",
+   "t": "sec:12§h50",
    "kind": "contains"
   },
   {
@@ -46808,6 +47055,11 @@
   {
    "s": "doc:README",
    "t": "sec:README§2-5",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:README",
+   "t": "sec:README§2-6",
    "kind": "contains"
   },
   {
@@ -48441,6 +48693,46 @@
    ]
   },
   {
+   "s": "ver:60",
+   "t": "doc:05",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:60",
+   "t": "doc:10",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:60",
+   "t": "doc:12",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:61",
+   "t": "sec:12§0-1",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:61",
+   "t": "sec:README§2-6",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -49891,6 +50183,16 @@
    "kind": "about"
   },
   {
+   "s": "intent:f08974dd",
+   "t": "fb:75",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:f08974dd",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
    "s": "intent:8022eb31",
    "t": "fb:8",
    "kind": "quoted_in"
@@ -51299,6 +51601,16 @@
    "s": "intent:6f245754",
    "t": "theme:variety",
    "kind": "about"
+  },
+  {
+   "s": "intent:6d845c2a",
+   "t": "ver:61",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:6d845c2a",
+   "t": "sec:05§0-8",
+   "kind": "quoted_in"
   },
   {
    "s": "intent:eedd9deb",
@@ -54858,6 +55170,16 @@
   {
    "s": "fb:74",
    "t": "intent:d52c3fd6",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:75",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "fb:75",
+   "t": "intent:f08974dd",
    "kind": "quoted_as"
   }
  ]

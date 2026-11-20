@@ -150,6 +150,9 @@ def cut(sheet: Path, outdir: Path, names: list[str], white: int = 232, gap: int 
 
 def run(project, backend: str = "manual", only: list[str] | None = None) -> Path:
     spec = plan(project)
+    if not spec.get("style"):   # 화풍 목록에서 고른 삽화 화풍 (edit.yaml look.illust, styles/looks.yaml)
+        from . import looks
+        spec["style"] = looks.illust_prompt(project.path)
     gdir = project.dir("assets") / "story" / "gen"
     gdir.mkdir(parents=True, exist_ok=True)
     logp = gdir / "art_log.json"
