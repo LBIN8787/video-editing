@@ -1349,7 +1349,8 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     path.write_text(head + "\n".join(lines) + "\n", encoding="utf-8")
 
 
-def sfx_files() -> dict:
+def sfx_files(project_dir=None) -> dict:
+    """사건 이름 → 소리 파일. project_dir 를 주면 그 영상이 고른 효과음 묶음(edit.yaml look.sfx, assets/sfx/sfx.yaml)으로 바꿔 줌."""
     base = config.ROOT / ".claude" / "skills" / "media-use" / "audio" / "assets" / "sfx"
     if not base.exists():
         base = config.ROOT / ".agents" / "skills" / "media-use" / "audio" / "assets" / "sfx"
@@ -1365,7 +1366,32 @@ def sfx_files() -> dict:
                         "-ar", "48000", "-ac", "2", str(pen)], check=False)
     if pen.exists() and pen.stat().st_size > 1000:
         files["pencil"] = pen
-    return {k: v for k, v in files.items() if v.exists()}
+    # 효과음 묶음용 합성 소리 (2026-11-20, assets/sfx/sfx.yaml): 종이 바스락 · 마커 끽끽 — 내려받지 않음
+    synth = {"paper": "anoisesrc=color=brown:duration=0.45:amplitude=0.8:seed=3",
+             "marker": "anoisesrc=color=white:duration=0.8:amplitude=0.5:seed=11"}
+    synth_af = {"paper": "highpass=f=700,lowpass=f=5200,tremolo=f=23:d=0.8,volume=4,afade=t=in:d=0.02,afade=t=out:st=0.2:d=0.25",
+                "marker": "bandpass=f=2600:width_type=q:w=3,tremolo=f=7:d=0.85,volume=1.6,afade=t=in:d=0.04,afade=t=out:st=0.5:d=0.3"}
+    for k, src in synth.items():
+        f = config.CACHE_DIR / "sfx" / f"{k}.wav"
+        if not f.exists() or f.stat().st_size < 1000:
+            subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", src, "-af", synth_af[k],
+                            "-ar", "48000", "-ac", "2", str(f)], check=False)
+        if f.exists() and f.stat().st_size > 1000:
+            files[k] = f
+    files = {k: v for k, v in files.items() if v.exists()}
+    if project_dir is None:
+        return files
+    from . import looks
+    mp = looks.sfx_palette(project_dir).get("map") or {}
+    out = {}
+    for ev in set(files) | set(mp):
+        tgt = mp[ev] if ev in mp else ev
+        if tgt is None:
+            continue
+        tgt = str(tgt).removeprefix("synth:")
+        if tgt in files:
+            out[ev] = files[tgt]
+    return out
 
 
 def make(project: Project, workers: int = 3) -> Path:
@@ -1477,15 +1503,17 @@ def make(project: Project, workers: int = 3) -> Path:
     subprocess.run(ff + ["-f", "concat", "-safe", "0", "-i", str(work / "a.txt"), "-c", "copy", str(work / "voice.wav")], check=True)
     subtitles(subs, edir / "subs.ass")
     # 효과음 섞기 (작게)
-    files = sfx_files()
-    ev = [(n, t) for n, t in sfx_events if n in files]
+    files = sfx_files(project.path)   # 이 영상이 고른 효과음 묶음 (edit.yaml look.sfx)
+    from . import looks as _looks
+    sgain = float(_looks.sfx_palette(project.path).get("gain", 1.0))
+    ev = [(n, t) for n, t in sfx_events if n in files] if sgain > 0 else []
     sfx_wav = work / "sfx.wav"
     if ev:
         inputs, filt = [], []
         vol = {"pencil": 0.12, "whoosh": 0.35, "pop": 0.3, "click-soft": 0.25, "impact-bass-1": 0.3, "whoosh-short": 0.3, "riser": 0.18, "chime": 0.22}
         for k, (n, t) in enumerate(ev[:180]):
             inputs += (["-ss", "7.0"] if n == "riser" else []) + ["-i", str(files[n])]
-            filt.append(f"[{k}:a]atrim=0:{1.4 if n == 'pencil' else (3.0 if n == 'riser' else 2.5)},volume={vol.get(n, 0.3)},adelay={int(t * 1000)}|{int(t * 1000)}[s{k}]")
+            filt.append(f"[{k}:a]atrim=0:{1.4 if n == 'pencil' else (3.0 if n == 'riser' else 2.5)},volume={vol.get(n, 0.3) * sgain:.3f},adelay={int(t * 1000)}|{int(t * 1000)}[s{k}]")
         mix = "".join(f"[s{k}]" for k in range(len(filt)))
         subprocess.run(ff + inputs + ["-filter_complex", ";".join(filt) + f";{mix}amix=inputs={len(filt)}:normalize=0[o]",
                                       "-map", "[o]", "-ar", "48000", "-ac", "2", "-t", f"{t_acc:.2f}", str(sfx_wav)], check=True)

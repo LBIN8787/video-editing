@@ -114,6 +114,30 @@ def _skin_vars(lid: str, d: dict, frames: dict) -> dict:
     return {"base": p["base"], "ink": p["ink"], "acc": p["accent"], "card": p["card"], "font": fam, "bg": f"{layer}{p['base']}"}
 
 
+FIT = {"good": ("바로 맞음", "ok"), "adapt": ("고쳐 쓰면", "av"), "hold": ("보류", "hold")}
+
+
+def _demo_frame(lid: str, d: dict) -> str:
+    """looks.yaml 의 demo 프로젝트가 렌더한 프레임 05_edit/<id>_7.6.jpg (커밋 안 함 — 없으면 빈 문자열)."""
+    if not d.get("demo"):
+        return ""
+    f = ROOT / "projects" / d["demo"] / "05_edit" / f"{lid}_7.6.jpg"
+    return looks._b64_jpg(f) if f.exists() else ""
+
+
+def _blocks_html(blocks: dict) -> str:
+    """이 카테고리에 맞는 HyperFrames 블록 (styles/hyperframes_blocks.yaml) — 접힌 목록."""
+    if not blocks:
+        return ""
+    rows = "".join(
+        f'<li><code>{H.escape(b)}</code> <span class="st {FIT.get(v.get("fit"), ("", ""))[1]}">{FIT.get(v.get("fit"), (v.get("fit", ""), ""))[0]}</span> '
+        f'{H.escape(str(v.get("what", "")))}' + (f' <small>→ {H.escape(v["maps_to"])}</small>' if v.get("maps_to") else "")
+        + (f' <small class="cau">{H.escape(str(v.get("caution") or v.get("note")))}</small>' if (v.get("caution") or v.get("note")) else "") + "</li>"
+        for b, v in blocks.items())
+    return (f'<details class="blocks"><summary>이미 설치된 HyperFrames 블록 {len(blocks)}개 — 구현할 때 먼저 열어 볼 원본</summary>'
+            f'<ul>{rows}</ul><p class="lead">넣기: <code>npx hyperframes add &lt;이름&gt;</code> (tools/hyperframes) · 목록 원본 styles/hyperframes_blocks.yaml</p></details>')
+
+
 def _vars_css(v: dict) -> str:
     return f"--base:{v['base']};--ink:{v['ink']};--acc:{v['acc']};--card:{v['card']};--font:{v['font']};background:{v['bg']}"
 
@@ -145,7 +169,9 @@ def build(out: Path, examples: Path | None = None) -> Path:
         k, cards = c["key"], []
         for lid, d in c["options"].items():
             if k == "motion":
-                vis = f'<figure class="stage look" style="{_vars_css(pal[lid])}">{scene}</figure>'
+                shot = _demo_frame(lid, d)   # 시안 프로젝트가 렌더한 실제 프레임이 있으면 그것 (그 화풍만의 그림 — 아이소메트릭·디오라마 등)
+                vis = (f'<figure class="pic"><img src="{shot}" alt=""></figure>' if shot
+                       else f'<figure class="stage look" style="{_vars_css(pal[lid])}">{scene}</figure>')
             elif k == "illust":
                 img = next((p for p in (ex / f"{lid}.png", ex / f"{lid}.jpg", ex / f"{lid}.jpeg") if p.exists()), None)
                 if lid == "doc-collage":
@@ -160,7 +186,7 @@ def build(out: Path, examples: Path | None = None) -> Path:
                 vis = f'<figure class="pic" data-thumb="{k}:{lid}">{inner}</figure>'
             elif k == "footage":
                 vis = f'<figure class="pic" data-thumb="{k}:{lid}"><img src="{frames[lid]}" alt=""></figure>'
-            elif k == "bgm":
+            elif k in ("bgm", "sfx"):
                 vis = ('<figure class="stage snd"><svg viewBox="0 0 320 180">' + "".join(
                     f'<rect x="{20 + i * 12}" y="{90 - h}" width="7" height="{2 * h}" rx="3" class="wave" style="--i:{i}"/>'
                     for i, h in enumerate([10, 24, 40, 18, 52, 30, 14, 44, 26, 12, 36, 48, 20, 30, 16, 40, 22, 10, 28, 34, 18, 12, 8])) + '</svg></figure>')
@@ -172,7 +198,7 @@ def build(out: Path, examples: Path | None = None) -> Path:
         n = len(c["options"])
         extra = f' · 예시 {have}/{n}' if k == "illust" else ""
         sections.append(f'<section class="cat" id="cat-{k}"><h2><span class="axis {c.get("axis", "")}">{H.escape(c.get("axis", ""))}</span>{H.escape(c["name"])} <small>{n}가지{extra}</small></h2>'
-                        f'<p class="lead">{H.escape(c.get("what", ""))}</p><div class="grid">{"".join(cards)}</div></section>')
+                        f'<p class="lead">{H.escape(c.get("what", ""))}</p><div class="grid">{"".join(cards)}</div>{_blocks_html(c.get("blocks") or {})}</section>')
         opts = "".join(f'<option value="{lid}">{H.escape(d.get("name", lid))}</option>' for lid, d in c["options"].items())
         selects.append(f'<label><span class="axis {c.get("axis", "")}">{H.escape(c.get("axis", ""))}</span>{H.escape(c["name"])}<select data-cat="{k}">{opts}</select></label>')
 
@@ -181,7 +207,7 @@ def build(out: Path, examples: Path | None = None) -> Path:
 <div class="mixgrid"><div class="sels">{''.join(selects)}</div>
 <div class="pv"><figure class="stage big" id="pv"><div class="lay" data-step="text"></div><div class="lay" data-step="graphic"></div><div class="lay" data-step="camera"></div><div class="lay" data-step="transition"></div></figure>
 <ol class="tl"><li data-step="text">① 글자 연출</li><li data-step="graphic">② 그래픽 연출</li><li data-step="camera">③ 카메라</li><li data-step="transition">④ 장면 전환</li></ol>
-<div class="side"><div><small>삽화 화풍</small><div class="thumb" id="th-illust"></div></div><div><small>실사 색보정</small><div class="thumb" id="th-footage"></div></div><div><small>배경음</small><b id="th-bgm"></b></div></div>
+<div class="side"><div><small>삽화 화풍</small><div class="thumb" id="th-illust"></div></div><div><small>실사 색보정</small><div class="thumb" id="th-footage"></div></div><div><small>배경음</small><b id="th-bgm"></b></div><div><small>효과음</small><b id="th-sfx"></b></div></div>
 <pre class="cmd" id="cmd"></pre></div></div></section>"""
     nav = "".join(f'<a href="#cat-{c["key"]}">{H.escape(c["name"])}</a>' for c in cats)
     body = composer + f'<nav class="cats">{nav}</nav>' + "".join(sections) + "".join(tpls)
@@ -281,9 +307,10 @@ nav.cats{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 0;position:sticky;top
 .pickbtn{align-self:flex-start;margin-top:4px;font:inherit;font-size:12.5px;background:none;border:1px solid var(--line);border-radius:6px;padding:3px 9px;color:var(--fg);cursor:pointer}
 .card.chosen{outline:2.5px solid var(--av);outline-offset:-1px}.card.chosen .pickbtn{background:var(--av);color:#fff;border-color:var(--av)}
 .snd .wave{fill:var(--acc);transform-box:fill-box;transform-origin:center;animation:wv 1.2s ease-in-out infinite alternate;animation-delay:calc(var(--i)*-.13s)}@keyframes wv{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+.blocks{margin-top:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px}.blocks summary{cursor:pointer;font-weight:600}.blocks ul{margin:8px 0 4px;padding-left:18px;display:grid;gap:4px}.blocks small{color:var(--muted)}.blocks .cau{display:block}.blocks code{background:var(--bg);padding:0 5px;border-radius:4px}
 .how{margin-top:28px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:13.5px}.how code{background:var(--bg);padding:1px 6px;border-radius:4px}
 </style></head><body><div class="wrap">
-<header><h1>영상 구성요소 · 스타일 목록</h1><p>영상은 <b>구성요소 {{NC}}가지</b>(화면 화풍·삽화 화풍·실사 색보정·글자 연출·그래픽 연출·카메라·장면 전환·배경음)를 카테고리마다 하나씩 골라 <b>조합</b>한 것입니다. 스타일은 모두 {{NS}}가지. 화풍(어떻게 보이나)과 연출(어떻게 움직이나)은 다른 축이라 서로 섞을 수 있고, 같은 모션그래픽이라도 연출이 다르면 전혀 다른 장면이 됩니다.</p></header>
+<header><h1>영상 구성요소 · 스타일 목록</h1><p>영상은 <b>구성요소 {{NC}}가지</b>(화면 화풍·삽화 화풍·실사 색보정·글자 연출·그래픽 연출·카메라·장면 전환·배경음·효과음)를 카테고리마다 하나씩 골라 <b>조합</b>한 것입니다. 스타일은 모두 {{NS}}가지. 화풍(어떻게 보이나)과 연출(어떻게 움직이나)은 다른 축이라 서로 섞을 수 있고, 같은 모션그래픽이라도 연출이 다르면 전혀 다른 장면이 됩니다.</p></header>
 {{BODY}}
 <div class="how"><b>정하는 법</b> — <code>python -m ytflow look &lt;프로젝트&gt; --set motion=chalkboard --set text=count-up --set graphic=stagger --set transition=match-move</code> (조합 판 아래 명령을 그대로 복사). 화풍 3종은 렌더에 바로 쓰이고, 연출은 이 영상의 기본값 — 장면마다 바꿀 수 있습니다. 대화로 "칠판 화풍에 카운트업, 전환은 매치 무브"처럼 말해도 됩니다. 원본: <code>styles/components.yaml</code></div>
 </div>
@@ -291,13 +318,13 @@ nav.cats{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 0;position:sticky;top
 (function(){
 var PAL={{PAL}};var STEPS=['text','graphic','camera','transition'];
 var sel={};document.querySelectorAll('.sels select').forEach(function(x){sel[x.dataset.cat]=x});
-var DEF={motion:'clean-flat',illust:'cute-casual',footage:'warm-doc',text:'count-up',graphic:'stagger',camera:'pull-back',transition:'match-move',bgm:'rest-now'};
+var DEF={motion:'clean-flat',illust:'cute-casual',footage:'warm-doc',text:'count-up',graphic:'stagger',camera:'pull-back',transition:'match-move',bgm:'rest-now',sfx:'default'};
 try{var saved=JSON.parse(localStorage.getItem('mix')||'{}');for(var k in saved)DEF[k]=saved[k]}catch(e){}
 for(var k in DEF){if(sel[k]&&[].some.call(sel[k].options,function(o){return o.value===DEF[k]}))sel[k].value=DEF[k]}
 function paintAll(){var v=PAL[sel.motion.value];if(!v)return;var css='--base:'+v.base+';--ink:'+v.ink+';--acc:'+v.acc+';--card:'+v.card+';--font:'+v.font+';background:'+v.bg;document.querySelectorAll('.dir,.snd,#pv').forEach(function(d){d.style.cssText=css})}
 function thumb(cat){var t=document.querySelector('[data-thumb="'+cat+':'+sel[cat].value+'"]');document.getElementById('th-'+cat).innerHTML=t?t.innerHTML:''}
 function fill(){STEPS.forEach(function(s){var t=document.getElementById('tpl-'+sel[s].value);document.querySelector('#pv .lay[data-step='+s+']').innerHTML=t?t.innerHTML:''});
- thumb('illust');thumb('footage');document.getElementById('th-bgm').textContent=sel.bgm.options[sel.bgm.selectedIndex].text;
+ thumb('illust');thumb('footage');document.getElementById('th-bgm').textContent=sel.bgm.options[sel.bgm.selectedIndex].text;if(sel.sfx)document.getElementById('th-sfx').textContent=sel.sfx.options[sel.sfx.selectedIndex].text;
  document.querySelectorAll('article.card').forEach(function(c){var p=c.dataset.card.split(':');c.classList.toggle('chosen',sel[p[0]]&&sel[p[0]].value===p[1])});
  document.getElementById('cmd').textContent='python -m ytflow look <프로젝트> '+Object.keys(sel).map(function(k){return '--set '+k+'='+sel[k].value}).join(' ');
  var o={};for(var k in sel)o[k]=sel[k].value;try{localStorage.setItem('mix',JSON.stringify(o))}catch(e){}

@@ -77,10 +77,36 @@ def components() -> list[dict]:
             c["options"] = data.get(src["looks"]) or {}
         elif "techniques" in src:
             c["options"] = {k: v for k, v in tech.items() if v.get("group") in src["techniques"]}
+        elif "sfx" in src:
+            c["options"] = sfx_palettes()
         elif "bgm" in src:
             c["options"] = {k: {"name": k, "look": v.get("mood", ""), "fits": ", ".join(v.get("fits") or []) or "쓰지 않음(판정)",
                                 "source": v.get("source") or v.get("credit", "")} for k, v in bgm.items()}
+        c["blocks"] = hf_blocks().get(c["key"]) or {}   # 이미 설치된 HyperFrames 블록 중 이 카테고리에 맞는 것 (styles/hyperframes_blocks.yaml)
     return cats
+
+
+def hf_blocks() -> dict:
+    """styles/hyperframes_blocks.yaml {카테고리 key: {블록 이름: {what, maps_to, fit, ...}}} (docs/53 §1)."""
+    f = ROOT / "styles" / "hyperframes_blocks.yaml"
+    return (yaml.safe_load(f.read_text(encoding="utf-8")) or {}) if f.exists() else {}
+
+
+SFX = ROOT / "assets" / "sfx" / "sfx.yaml"
+
+
+def sfx_palettes() -> dict:
+    """효과음 묶음 (assets/sfx/sfx.yaml) {id: {name, look, fits, gain, map, status}}."""
+    if not SFX.exists():
+        return {}
+    return (yaml.safe_load(SFX.read_text(encoding="utf-8")) or {}).get("palettes") or {}
+
+
+def sfx_palette(project_dir: Path) -> dict:
+    """이 영상이 고른 효과음 묶음 (edit.yaml look.sfx, 없으면 default)."""
+    pals = sfx_palettes()
+    sid = (project_look(project_dir) or {}).get("sfx") or "default"
+    return pals.get(sid) or pals.get("default") or {"gain": 1.0, "map": {}}
 
 
 def choose_any(project_dir: Path, pairs: list[str]) -> dict:

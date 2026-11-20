@@ -5,7 +5,8 @@
 # 보기: python -m ytflow looks --gallery <out.html>  ('화풍목록 보여줘', skills/looks-gallery)
 # 고르기: python -m ytflow look <프로젝트> --set text=count-up --set transition=match-move … → edit.yaml look.<key>
 #   key 가 motion·illust·footage 면 렌더에 바로 쓰임(스킨·그림 주문서·색보정). 연출 key 는 이 영상의 '기본 연출' — 장면마다 바꿀 수 있음(장면표·edit-plan).
-# 스타일을 더할 때: 화풍은 styles/looks.yaml, 연출은 styles/techniques.yaml, 배경음은 assets/bgm/bgm.yaml 에 항목 하나.
+# 스타일을 더할 때: 화풍은 styles/looks.yaml, 연출은 styles/techniques.yaml, 배경음은 assets/bgm/bgm.yaml, 효과음 묶음은 assets/sfx/sfx.yaml 에 항목 하나.
+# 이미 설치된 HyperFrames 블록(약 450개)을 카테고리별로 고른 목록: styles/hyperframes_blocks.yaml (docs/53 §1, 2026-11-20) — 카테고리의 blocks 칸
 
 categories:
   - key: motion
@@ -48,3 +49,9 @@ categories:
     name: 배경음
     what: 내레이션 밑에 까는 음악의 분위기
     source: {bgm: assets/bgm/bgm.yaml}
+  - key: sfx
+    axis: 소리
+    name: 효과음
+    what: 튀어나옴·그려짐·넘어감 같은 사건에 붙는 작은 소리의 묶음 (2026-11-20 사용자 "응" — docs/53 §2-8)
+    source: {sfx: assets/sfx/sfx.yaml}
+

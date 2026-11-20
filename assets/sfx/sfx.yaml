@@ -1,0 +1,56 @@
+# 효과음 묶음 — 구성요소 카테고리 '효과음'(styles/components.yaml)에서 영상마다 하나 고름 (2026-11-20 사용자: 효과음 카테고리 추가 "응")
+#
+# 렌더러는 장면에서 '사건 이름'으로 효과음을 부릅니다: pop(튀어나옴) · pencil(선이 그려짐) · whoosh-short(넘어감)
+#   · whoosh(큰 넘어감) · click-soft(누름·선택) · riser(긴장 오름) · chime(맞음·완성)
+# 묶음은 그 사건 이름을 '어떤 소리로 낼지'(map)와 전체 크기(gain)를 정합니다. map 에서 null = 그 사건은 소리 없음.
+# 고르기: python -m ytflow look <프로젝트> --set sfx=paper-pencil   → edit.yaml look.sfx → hybrid·hookshort 렌더가 읽음
+# 고르지 않으면 지금까지와 같음(default).
+#
+# 소리 파일 (내려받지 않음):
+#   - HyperFrames media-use 묶음 .claude/skills/media-use/audio/assets/sfx/ — Pixabay Content License(상업 가능·출처 불요), CREDITS.md
+#   - synth:* = ffmpeg 로 직접 합성 (라이선스 문제 없음) — ytflow/stages/hybrid.py sfx_files()
+# 쓰지 않는 소리: impact-bass(2026-11-10 사용자 '소리 자체가 싫다'), glitch(정보형에 거슬림 — 쇼츠에서만 따로 판단)
+
+palettes:
+  default:
+    name: 기본 (지금까지)
+    look: 튀어나올 때 '톡', 선이 그려질 때 연필, 넘어갈 때 짧은 '휙'
+    fits: 고르지 않았을 때
+    gain: 1.0
+    map: {}
+    status: approved
+  paper-pencil:
+    name: 종이와 연필
+    look: 연필 긁는 소리 + 종이 바스락 — 손그림·종이 화풍과 짝
+    fits: 미주일기·종이 위 손그림·종이 디오라마·이야기 그림판 (호기심)
+    gain: 0.9
+    map: {pop: synth:paper, whoosh-short: synth:paper, whoosh: synth:paper, click-soft: synth:paper}
+    status: trial
+  marker:
+    name: 화이트보드 마커
+    look: 마커 끽끽 소리 + 펜 뚜껑 '딸깍'
+    fits: 화이트보드 화풍, 원리 설명
+    gain: 0.85
+    map: {pencil: synth:marker, pop: click-soft, whoosh-short: synth:paper}
+    status: trial
+  soft-ui:
+    name: 부드러운 앱 소리
+    look: 작은 클릭·톡·짧은 휙, 완성에 맑은 '딩'
+    fits: AI 채널(앱·도구 화면), 실사 위 칩
+    gain: 0.9
+    map: {pencil: click-soft}
+    status: available
+  doc-quiet:
+    name: 다큐 조용히
+    look: 넘어갈 때만 아주 작게, 나머지는 없음 — 내레이션과 자료가 주인공
+    fits: 시사·역사 다큐, 무거운 주제
+    gain: 0.6
+    map: {pop: null, pencil: null, click-soft: null, chime: null, riser: null}
+    status: available
+  none:
+    name: 효과음 없음
+    look: 내레이션(과 배경음)만
+    fits: 인터뷰 원본이 길게 나오는 편, 피해자가 있는 사건
+    gain: 0.0
+    map: {pop: null, pencil: null, whoosh-short: null, whoosh: null, click-soft: null, riser: null, chime: null}
+    status: available

@@ -107,6 +107,35 @@ motion:   # 모션그래픽 화풍 — 도형·글자·막대·지도가 천천�
     status: approved
     demo: 20261120-curiosity-broll-sample
 
+  whiteboard:
+    name: 화이트보드
+    skin: whiteboard
+    look: 윤나는 흰 판, 검정 마커 손글씨, 파랑 화살표·빨강 동그라미, 펜촉이 선을 따라감, 지워진 판서 흔적
+    fits: 원리·과정 설명, 강의처럼 차근차근 (호기심·AI 개념)
+    avoid: 실제 사건의 무게가 필요한 시사, 숫자가 많은 표
+    status: trial
+    demo: 20261120-looks-trial
+    blocks: [whiteboard-ink, hw-callout-circle, hw-arrow, hw-scribble-transition]   # styles/hyperframes_blocks.yaml
+  isometric:
+    name: 아이소메트릭
+    skin: isometric
+    look: 연회색 바닥 격자 위 세 면이 보이는 상자 건물, 길 따라 움직이는 소포, 굵은 고딕 라벨
+    fits: 공급망·물류·시스템 구조, 여러 곳을 잇는 흐름 (시사·시장·AI 결제 흐름)
+    avoid: 사람의 감정·이야기, 한 사람의 하루
+    status: trial
+    demo: 20261120-looks-trial
+    note: 상자·길 투영은 시안 렌더러(projects/20261120-looks-trial/02_script/render_trial.py)에만 — 장면 종류로 만들기 전까지 시안
+    blocks: [exploded-stack, offset-path-traveler, pan-stations]
+  paper-diorama:
+    name: 종이 디오라마
+    skin: paper-diorama
+    look: 찢은 색종이 층이 겹친 무대, 팝업북처럼 세워지는 건물, 크림 쪽지 라벨, 뚝뚝 끊기는 움직임
+    fits: 옛날이야기·장소 이야기, 마을·도시의 하루, 가벼운 호기심
+    avoid: 정밀한 수치·차트, 무거운 사건
+    status: trial
+    demo: 20261120-looks-trial
+    blocks: [stop-motion-cadence, torn-paper-rip, paper-collage-reveal]
+
 illust:   # 삽화 화풍 — 실사도 모션그래픽도 어려운 박자에만 (그림은 원화, 코드는 움직임 — 05 §0-8)
   casual-cel:
     name: 캐주얼 셀 애니메이션
@@ -164,6 +193,21 @@ illust:   # 삽화 화풍 — 실사도 모션그래픽도 어려운 박자에�
     avoid: 이야기 몰입 구간
     status: approved
     prompt: ""   # 그림 생성이 아니라 실제 자료를 오려 붙임
+
+  isometric-illust:
+    name: 아이소메트릭 삽화
+    look: 30도 위에서 내려다본 작은 세계, 세 면 명암, 차분한 남색·청록·산호
+    fits: 공장·항구·데이터센터처럼 '구조'를 한 장에 (모션그래픽 아이소메트릭과 짝)
+    avoid: 인물 표정이 중요한 장면
+    status: trial
+    prompt: "Clean isometric illustration, true 30-degree isometric projection, small miniature world on a light grey tiled ground, simple geometric buildings with three flat-shaded faces, muted palette of navy, teal, sand and coral, soft ambient occlusion, no outlines, crisp vector look, tiny simplified people. Original design, no logos, no text."
+  paper-diorama-illust:
+    name: 종이 디오라마 삽화
+    look: 오려 붙인 색종이 층, 종이 결과 그림자, 팝업북 같은 깊이
+    fits: 옛날이야기·장소 이야기 (모션그래픽 종이 디오라마와 짝)
+    avoid: 정밀한 기계 구조·데이터
+    status: trial
+    prompt: "Layered cut-paper diorama illustration: torn colored paper layers stacked with soft drop shadows between them, visible paper fibers and grain, pop-up book depth, warm cream sky, sage green hills, simple paper-cut buildings and people, gentle handmade feel, shot straight-on like a shadow box. Original design, no logos, no text."
 
 footage:  # 실사 클립 색보정 — 한 편의 클립을 같은 값으로 묶음 (04 §0-8)
   warm-doc:
