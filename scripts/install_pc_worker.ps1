@@ -1,4 +1,4 @@
-# PC 자동 일꾼 설치 — 한 번만 실행 (2026-11-20 사용자: "손수 명령 안해도 되도록 자동화 세팅")
+﻿# PC 자동 일꾼 설치 — 한 번만 실행 (2026-11-20 사용자: "손수 명령 안해도 되도록 자동화 세팅")
 # Windows 작업 스케줄러에 'ytflow-pc-worker' 를 등록: 로그인해 있는 동안 10분마다 scripts/pc_worker.py 실행.
 # 실행:  PowerShell 에서 저장소 폴더로 가서
 #   powershell -ExecutionPolicy Bypass -File scripts\install_pc_worker.ps1

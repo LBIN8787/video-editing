@@ -1,4 +1,4 @@
-# 로컬 정기 작업 설치 — 한 번만 실행 (docs/56-local-routines.md)
+﻿# 로컬 정기 작업 설치 — 한 번만 실행 (docs/56-local-routines.md)
 # config/local_routines.yaml 의 작업마다 Windows 작업 스케줄러에 'ytflow-<작업>' 을 매일 그 시각으로 등록하고,
 # 호기심 그림·렌더를 맡는 PC 일꾼(ytflow-pc-worker, 10분마다)도 함께 등록합니다.
 # 실행기는 사용자 폴더(브랜치가 바뀜)가 아니라 E:\ytflow-local\runner (늘 최신 origin/main) 에서 돕니다.
@@ -12,6 +12,10 @@ $repo = (Resolve-Path "$PSScriptRoot\..").Path
 $py = (Get-Command python -ErrorAction SilentlyContinue).Source
 if (-not $py) { $py = (Get-Command py -ErrorAction Stop).Source }
 $drive = [Environment]::GetEnvironmentVariable("YTFLOW_DRIVE", "User")
+if (-not $drive -and $env:YTFLOW_DRIVE) {   # 이 창에서만 잡혀 있으면 사용자 환경변수로 저장 (예약 작업이 읽도록)
+  $drive = $env:YTFLOW_DRIVE
+  [Environment]::SetEnvironmentVariable("YTFLOW_DRIVE", $drive, "User")
+}
 if (-not $drive) { throw "YTFLOW_DRIVE 가 없습니다: setx YTFLOW_DRIVE `"G:\내 드라이브\ytflow`" 후 새 PowerShell 에서 다시" }
 New-Item -ItemType Directory -Force "$drive\_local\logs", "$drive\_local\reports" | Out-Null
 $work = [Environment]::GetEnvironmentVariable("YTFLOW_WORK", "User")
