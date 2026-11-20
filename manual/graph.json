@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-20T10:26:11",
- "source_hash": "de14e818933d",
+ "generated": "2026-11-20T10:38:03",
+ "source_hash": "ed318cf1dad7",
  "audit": {
   "date": "2026-11-20T10:26",
   "counts": {
@@ -368,30 +368,30 @@
   "rejects": 25,
   "passes": 12,
   "pending": 0,
-  "rules": 49,
-  "checks": 86,
+  "rules": 48,
+  "checks": 85,
   "sections": 174,
   "must": 26,
-  "auto": 41,
+  "auto": 40,
   "intents": 153,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 81,
   "terms": 139,
-  "bans": 163,
+  "bans": 159,
   "feedback": 95,
   "topics": 4,
   "episodes": 35,
   "main_situations": 17,
   "tiers": {
-   "principle": 54,
-   "standard": 129,
-   "style": 29,
-   "trial": 0
+   "principle": 47,
+   "standard": 133,
+   "style": 25,
+   "trial": 2
   },
-  "overfit": 0,
-  "principle_bans": 48
+  "overfit": 3,
+  "principle_bans": 41
  },
  "pending": [],
  "status_labels": {
@@ -436,11 +436,11 @@
    "why": "제작 방법·품질 기준",
    "overfit": false,
    "single": true,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
+   "tier": "principle",
+   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
+   "tier_note": "사람을 다루는 원칙 — 본문이 스스로 영구 원칙이라 함(안전·인격)",
+   "tier_fixed": true,
+   "tier_label": "영구 원칙"
   },
   {
    "section": "sec:01§4",
@@ -685,19 +685,21 @@
    "why": "사실·법·권리·안전에 관한 말",
    "overfit": false,
    "single": true,
-   "tier": "principle",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "영구 원칙"
+   "tier": "standard",
+   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
+   "tier_note": "시장 분석의 제작 방법 (v26 기각 한 편에서) — 해석 표시·권유 금지는 §13 영구 원칙이 맡음",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
   },
   {
    "section": "sec:03§0-3",
-   "text": "6. 사적 인물·사생활: 사임 사유가 사생활 보도와 얽혀도 개인 이름·세부 내용은 쓰지 않고 \"이사회 조사·사임\"이라는 공시 사실과 사업 영향만.",
-   "themes": [],
+   "text": "6. 사적 인물·사생활: 사건이 사생활 보도와 얽혀도 관련 개인의 이름·세부 내용은 쓰지 않고, 공시·공식 발표 사실과 사업 영향만 (예: 2026-11 CEO 사임 → \"이사회 조사·사임\").",
+   "themes": [
+    "depth"
+   ],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:bf0a7fa9",
+   "tier_key": "ban:d1c0ac7b",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
    "overfit": false,
@@ -1000,23 +1002,6 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:04§0-4",
-   "text": "7. 재료: 실존 인물·기사·논문은 증거의 순간에만 한 장면에 하나, 가운데 크게, 말이 끝나면 퇴장 (§0-5 C — v22 가 v21 의 '쌓아 올리는 콜라주'를 대체). 막대 인물 금지.",
-   "themes": [],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:28afe785",
-   "tier_auto": "trial",
-   "why": "스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨",
-   "overfit": false,
-   "single": true,
-   "tier": "style",
-   "tier_by": "Claude 판정 (2026-11-18 사용자 요청 '과적합인지 아닌지 체크') — 사용자 확인 필요",
-   "tier_note": "호기심 증거 재료의 기본값(한 장면에 하나) — 금지가 아니라 기본, 넘치면 콜라주가 됨",
-   "tier_fixed": true,
-   "tier_label": "스타일 기본값"
-  },
-  {
    "section": "sec:04§0-5",
    "text": "기각 원인 (v21·v3): ① 한 장의 큰 종이에 사진·문서·쪽지·도장·그림을 계속 쌓아 화면이 콜라주가 됨 ② 대본을 글자 쪽지로 다시 씀(자막과 중복) ③ 그림이 '나타나기'만 하고 대본의 행동을 하지 않음 ④ 무엇을 위해 그 그림을 넣었는지 적은 곳이 없음.",
    "themes": [
@@ -1271,11 +1256,11 @@
    "why": "제작 방법·품질 기준",
    "overfit": false,
    "single": true,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
+   "tier": "principle",
+   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
+   "tier_note": "초상·인격권 — 본문이 영구 원칙이라 함",
+   "tier_fixed": true,
+   "tier_label": "영구 원칙"
   },
   {
    "section": "sec:04§2",
@@ -1322,11 +1307,11 @@
    "why": "사실·법·권리·안전에 관한 말",
    "overfit": false,
    "single": false,
-   "tier": "principle",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "영구 원칙"
+   "tier": "standard",
+   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
+   "tier_note": "조사 방법(다섯 층) — 사실 원칙이 아님",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
   },
   {
    "section": "sec:04§4",
@@ -1461,21 +1446,21 @@
   },
   {
    "section": "sec:05§0-7",
-   "text": "장 표지 사진은 주제에 맞게 (NASA 위성 사진 고정 금지): 사건 현장·기관·거래소·회사·연구소 사진을 python -m ytflow archive commons \"검색어\" (위키미디어 공용, PD·CC0·CC BY 만, SA·NC·ND 제외)나 의회도서관·정부 공개 사진에서 고르고, footage 에 credit 을 적습니다 → 표지 오른쪽 위에 출처가 나옴. 같은 사진을 두 번 표지로 쓰지 않습니다. 표지로 쓰지 않을 자료는 \"cover\": false.",
+   "text": "장 표지 사진은 주제에 맞게 (주제와 무관한 기본 사진으로 때우지 않음 — v15 당시 표지가 모두 NASA 위성 사진이었음): 사건 현장·기관·거래소·회사·연구소 사진을 python -m ytflow archive commons \"검색어\" (위키미디어 공용, PD·CC0·CC BY 만, SA·NC·ND 제외)나 의회도서관·정부 공개 사진에서 고르고, footage 에 credit 을 적습니다 → 표지 오른쪽 위에 출처가 나옴. 같은 사진을 두 번 표지로 쓰지 ",
    "themes": [
     "depth"
    ],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:6893c28a",
-   "tier_auto": "trial",
-   "why": "스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨",
+   "tier_key": "ban:f0c0f5c7",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
    "overfit": false,
    "single": true,
    "tier": "style",
-   "tier_by": "Claude 제안 (2026-11-15) — 사용자 확인 필요",
-   "tier_note": "장 표지 사진 고르기 — 스타일 기본값 (라이선스는 원칙이 따로 지킴)",
-   "tier_fixed": true,
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
    "tier_label": "스타일 기본값"
   },
   {
@@ -1634,25 +1619,6 @@
   },
   {
    "section": "sec:05§0-4",
-   "text": "곡이 영상보다 짧으면 이음매를 3초 겹쳐 이어 붙임(딱 끊기는 반복 금지).",
-   "themes": [
-    "variety"
-   ],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:209190c5",
-   "tier_auto": "trial",
-   "why": "스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨",
-   "overfit": false,
-   "single": true,
-   "tier": "style",
-   "tier_by": "Claude 제안 (2026-11-15) — 사용자 확인 필요",
-   "tier_note": "배경음 이어 붙이기 방법 — 기본값",
-   "tier_fixed": true,
-   "tier_label": "스타일 기본값"
-  },
-  {
-   "section": "sec:05§0-4",
    "text": "장식 효과(dust·leak)는 드물게. 분위기 효과는 정보를 더하지 않으므로, 내용이 담긴 볼거리(그 장소 사진·지도·사물 그림·정리판)를 먼저 씁니다 (멀티미디어 학습 '일관성 원칙', docs/19 §1-9).",
    "themes": [
     "variety"
@@ -1709,7 +1675,7 @@
   },
   {
    "section": "sec:05§0-3",
-   "text": "고르는 요령: 숫자 하나 → photofill(그 숫자의 장소 사진으로 채움) · 연표·인과 지도 → tilt · 비유·인용 → dolly. 장식 효과(dust·leak)는 내용이 담긴 볼거리가 없을 때만 드물게(§0-4), scan(빛 훑기)은 쓰지 않음 (v32 판정 '과하고 분위기와 안 맞음'을 모든 채널에). 효과는 내용과 어울려야 하며, 강조(05 §0-1)와 달리 정보를 더하지 않는 '분위기'라서 강조 예산에 들어가지 않습니다. 대신 과하면 산만하므로",
+   "text": "고르는 요령: 숫자 하나 → photofill(그 숫자의 장소 사진으로 채움) · 연표·인과 지도 → tilt · 비유·인용 → dolly. 장식 효과(dust·leak)는 내용이 담긴 볼거리가 없을 때만 드물게(§0-4), scan(빛 훑기)은 시장 채널에서 기본 끔 (v32, 09 §6) — 다른 채널은 자료·문서 장면에서 드물게, 분위기와 맞을 때만. 효과는 내용과 어울려야 하며, 강조(05 §0-1)와 달리 정보를 더하지 않는 '분위기'라서 강조 예산에 ",
    "themes": [
     "motion",
     "emphasis",
@@ -1717,16 +1683,16 @@
    ],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:d4e33035",
+   "tier_key": "ban:bb9705f6",
    "tier_auto": "trial",
    "why": "스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨",
-   "overfit": false,
+   "overfit": true,
    "single": true,
-   "tier": "style",
-   "tier_by": "Claude 판정 (2026-11-18 사용자 요청 '과적합인지 아닌지 체크') — 사용자 확인 필요",
-   "tier_note": "효과 고르는 요령 — 기본값",
-   "tier_fixed": true,
-   "tier_label": "스타일 기본값"
+   "tier": "trial",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "실험 기록"
   },
   {
    "section": "sec:05§3",
@@ -1878,20 +1844,20 @@
   },
   {
    "section": "sec:06§G5",
-   "text": "SHOULD | v15 장 표지 사진은 주제에 맞게: 같은 사진을 다시 표지로 쓰지 않고, 주제와 무관한 기본 사진(NASA 위성 등)으로 때우지 않음, 출처(credit) 표시 | ✅",
+   "text": "SHOULD | v15 장 표지 사진은 주제에 맞게: 같은 사진을 다시 표지로 쓰지 않고, 주제와 무관한 기본 사진으로 때우지 않음(한 출처로 표지를 모두 채우지 않음), 출처(credit) 표시 | ✅",
    "themes": [],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:f4e8a5af",
+   "tier_key": "ban:02b1cbcd",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
-   "overfit": false,
+   "overfit": true,
    "single": false,
-   "tier": "standard",
-   "tier_by": "Claude 판정 (2026-11-18 사용자 요청 '과적합인지 아닌지 체크') — 사용자 확인 필요",
-   "tier_note": "장 표지 사진은 주제와 맞아야 함 — 사실·관련성 기준",
-   "tier_fixed": true,
-   "tier_label": "작업 기준"
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
   },
   {
    "section": "sec:06§G5",
@@ -2127,11 +2093,11 @@
    "why": "사실·법·권리·안전에 관한 말",
    "overfit": false,
    "single": false,
-   "tier": "principle",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "영구 원칙"
+   "tier": "standard",
+   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
+   "tier_note": "채널 정의·분량(v63 심층 기본) — 권유 금지 낱말 때문에 원칙으로 오분류, 권유 금지는 §13",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
   },
   {
    "section": "sec:09§0",
@@ -2545,22 +2511,20 @@
   },
   {
    "section": "sec:09§6",
-   "text": "사진: 주제에 맞게 (회사 간판·건물·데이터센터·거래소), 위키미디어 공용 PD·CC0·CC BY 만 — python -m ytflow archive commons \"검색어\". 출처 표시 자동. NASA 위성 사진 반복 금지.",
-   "themes": [
-    "variety"
-   ],
+   "text": "사진: 주제에 맞게 (회사 간판·건물·데이터센터·거래소), 위키미디어 공용 PD·CC0·CC BY 만 — python -m ytflow archive commons \"검색어\". 출처 표시 자동. 주제와 무관한 기본 사진으로 때우거나 같은 사진을 다시 쓰지 않는다 (v15).",
+   "themes": [],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:c3b596b7",
-   "tier_auto": "style",
-   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "tier_key": "ban:36ad701d",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
    "overfit": false,
    "single": false,
-   "tier": "style",
-   "tier_by": "사용자 결정 2026-11-15 ('스타일 규칙은 고정이 아니라 필요에 따라 유동적으로') — 매뉴얼 검토에서 확정",
-   "tier_note": "검토함 — 스타일 기본값(권고)으로 확정, 금지 아님",
-   "tier_fixed": true,
-   "tier_label": "스타일 기본값"
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
   },
   {
    "section": "sec:09§6",
@@ -2643,26 +2607,6 @@
   },
   {
    "section": "sec:09§6",
-   "text": "말하는 것이 화면에 생긴다 — 멈춘 화면 금지 (v27, 2026-11-15 사용자 기각: \"영상이 정적이다, 멈춰 있는 부분이 많다 — 하는 말은 많은데 45일·60일만 강조돼 있다\")",
-   "themes": [
-    "motion",
-    "emphasis"
-   ],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:f11b5c70",
-   "tier_auto": "trial",
-   "why": "스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨",
-   "overfit": false,
-   "single": true,
-   "tier": "standard",
-   "tier_by": "Claude 제안 (2026-11-15) — 사용자 확인 필요",
-   "tier_note": "사용자의 핵심 뜻('동영상의 이점 — 말하는 것이 화면에 생긴다')이라 작업 기준. 어떤 수단(숫자 카드·그림·카메라)으로 할지는 스타일",
-   "tier_fixed": true,
-   "tier_label": "작업 기준"
-  },
-  {
-   "section": "sec:09§6",
    "text": "렌더 전 G4 MUST: 화면에 없는 숫자를 2개 이상 말하면서 motion 이 없는 박자 0개. 정지 화면 비율(motion.json)은 참고만 — 카메라를 흔들어 숫자를 맞추지 않는다 (v30).",
    "themes": [
     "motion"
@@ -2691,11 +2635,11 @@
    "why": "사실·법·권리·안전에 관한 말",
    "overfit": false,
    "single": false,
-   "tier": "principle",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "영구 원칙"
+   "tier": "standard",
+   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
+   "tier_note": "제목 형식 — 권유어 금지는 §13·README §3 이 맡음",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
   },
   {
    "section": "sec:09§7-1",
@@ -2710,11 +2654,11 @@
    "why": "사실·법·권리·안전에 관한 말",
    "overfit": false,
    "single": true,
-   "tier": "principle",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "영구 원칙"
+   "tier": "standard",
+   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
+   "tier_note": "시장 썸네일 방법(2026-11-19 사용자 \"앞으로\") — 시장 채널 작업 기준",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
   },
   {
    "section": "sec:09§7-1",
@@ -2727,11 +2671,11 @@
    "why": "사실·법·권리·안전에 관한 말",
    "overfit": false,
    "single": true,
-   "tier": "principle",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "영구 원칙"
+   "tier": "standard",
+   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
+   "tier_note": "시장 썸네일 문구 방법 — 시장 채널 작업 기준",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
   },
   {
    "section": "sec:09§7-1",
@@ -2749,11 +2693,11 @@
    "why": "사실·법·권리·안전에 관한 말",
    "overfit": false,
    "single": true,
-   "tier": "principle",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "영구 원칙"
+   "tier": "style",
+   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
+   "tier_note": "시장 썸네일 기본 모양 — 11/19 한 편에서 고른 모양, 고정 아님(스타일 기본값)",
+   "tier_fixed": true,
+   "tier_label": "스타일 기본값"
   },
   {
    "section": "sec:09§7-1",
@@ -2774,22 +2718,22 @@
   },
   {
    "section": "sec:09§7-1",
-   "text": "5. 제목은 썸네일과 같은 말을 반복하지 않는다 — 제목 = 질문·장면, 썸네일 = 단정·숫자. 올린 뒤 제목은 사용자가 바꾸라고 할 때만 바꾼다(11/19: '3번째'를 제목으로 잘못 읽어 바꿨다가 되돌림 — 'N번째'가 제목·썸네일·장면 중 무엇인지 애매하면 확인).",
+   "text": "5. 제목은 썸네일과 같은 말을 반복하지 않는다 — 제목 = 질문·장면, 썸네일 = 단정·숫자. 올린 뒤 제목은 사용자가 바꾸라고 할 때만 바꾼다.",
    "themes": [
     "variety"
    ],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:da1b4ef4",
+   "tier_key": "ban:96e33798",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
    "overfit": false,
    "single": true,
-   "tier": "principle",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "영구 원칙"
+   "tier": "standard",
+   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
+   "tier_note": "제목·썸네일 역할 나누기 — 작업 기준",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
   },
   {
    "section": "sec:09§10",
@@ -3091,11 +3035,11 @@
    "why": "제작 방법·품질 기준",
    "overfit": false,
    "single": true,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
+   "tier": "principle",
+   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
+   "tier_note": "초상·인격권 (04 §0-8 과 같음)",
+   "tier_fixed": true,
+   "tier_label": "영구 원칙"
   },
   {
    "section": "sec:README§1-1",
@@ -3191,23 +3135,23 @@
   },
   {
    "section": "sec:README§2-4",
-   "text": "늘릴 때는 같은 말을 반복하지 않고 §2-3 의 뼈대를 채운다: 여는 장면의 일화 하나 더 · 그 전의 문제를 당사자의 회고로 · 전환점의 장면 · 원리의 생활 속 예 · 퍼져 나감의 장면(시간 순서) · 반론과 한계 · 수미상관.",
+   "text": "늘릴 때는 같은 말을 반복하지 않고 그 채널의 뼈대를 채운다 — 호기심은 §2-3(여는 장면의 일화 하나 더 · 당사자의 회고 · 전환점의 장면 · 원리의 생활 속 예 · 퍼져 나감 · 반론과 한계 · 수미상관), 시장은 03 §0-4, 시사는 08, AI 는 11 §3-1.",
    "themes": [
     "motion",
     "variety"
    ],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:88b7303b",
+   "tier_key": "ban:a3b92ffe",
    "tier_auto": "trial",
    "why": "스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨",
-   "overfit": false,
+   "overfit": true,
    "single": true,
-   "tier": "standard",
-   "tier_by": "Claude 판정 (2026-11-18 사용자 요청 '과적합인지 아닌지 체크') — 사용자 확인 필요",
-   "tier_note": "길이를 채우는 방법 — 작업 기준 (전에 같은 판정, 문장이 바뀌어 다시)",
-   "tier_fixed": true,
-   "tier_label": "작업 기준"
+   "tier": "trial",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "실험 기록"
   },
   {
    "section": "sec:README§2-5",
@@ -3231,43 +3175,23 @@
   },
   {
    "section": "sec:README§2-5",
-   "text": "효과음 | 절제 — 반짝 소리(chime)는 쓰지 않는 쪽이 기본 (실험 기록 2026-11-14) | 대본 sfx | 꼭 필요할 때",
-   "themes": [
-    "sound",
-    "script"
-   ],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:50a471c5",
-   "tier_auto": "trial",
-   "why": "스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨",
-   "overfit": false,
-   "single": true,
-   "tier": "style",
-   "tier_by": "Claude (2026-11-15 매뉴얼 검토, v34 사용자 결정 기준)",
-   "tier_note": "v34 에서 이미 '기본값(켜고 끔)'으로 다시 쓴 문장 — 금지 아님",
-   "tier_fixed": true,
-   "tier_label": "스타일 기본값"
-  },
-  {
-   "section": "sec:README§2-5",
-   "text": "참고 채널: 미주일기 최신 영상 (2026-11-14 사용자: \"동적인 동영상의 미감\"). 영상 파일은 클라우드에서 봇 확인에 막혀 받지 않습니다(우회 금지) → 사용자 PC 에서 python -m ytflow style mijudiary-<날짜> 영상.mp4 로 재거나, 영상을 Google Drive 에 올리면 분석합니다.",
+   "text": "움직임 레퍼런스(예: 미주일기 최신 영상, 2026-11-14 사용자 \"동적인 동영상의 미감\" — 채널마다 다름, 시장은 09 §6)의 분석은 사용자 PC 에서 (우회 금지, skills/ref-watch-ego).",
    "themes": [
     "motion",
     "depth"
    ],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:6303192b",
+   "tier_key": "ban:fc3174ce",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
    "overfit": false,
    "single": true,
-   "tier": "principle",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "영구 원칙"
+   "tier": "standard",
+   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
+   "tier_note": "움직임 레퍼런스 안내 — 우회 금지 낱말 때문에 원칙으로 오분류",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
   },
   {
    "section": "sec:README§3",
@@ -3307,11 +3231,11 @@
   },
   {
    "section": "sec:README§3",
-   "text": "3. YouTube 봇 확인·사이트 차단 우회. 막히면 임시 화면 + 사용자 PC rebuild.",
+   "text": "3. YouTube 봇 확인·사이트 차단 우회. 막히면 임시 화면 + 사용자 PC(clip-fetch·rebuild) 또는 피클 요청(inbox/requests/).",
    "themes": [],
    "absolute": true,
    "must": false,
-   "tier_key": "ban:c4b0a633",
+   "tier_key": "ban:c9eadaf4",
    "tier_auto": "principle",
    "why": "README §3 절대 하지 않는 것",
    "overfit": false,
@@ -3375,20 +3299,20 @@
   },
   {
    "section": "sec:README§3",
-   "text": "7. 미디어 파일(mp4·wav·png·jpg) 커밋. 완성본은 Release 로.",
+   "text": "7. 미디어 파일(mp4·wav·png·jpg)을 Git 에 커밋하기. 큰 파일은 Google Drive, 공개해도 되는 완성본만 GitHub Release (docs/09).",
    "themes": [],
    "absolute": true,
    "must": false,
-   "tier_key": "ban:efd8377e",
+   "tier_key": "ban:54354d2a",
    "tier_auto": "principle",
    "why": "README §3 절대 하지 않는 것",
    "overfit": false,
    "single": false,
-   "tier": "principle",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "영구 원칙"
+   "tier": "standard",
+   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
+   "tier_note": "저장소 관리(미디어 커밋 안 함, Drive·Release) — 원칙이 아니라 작업 기준",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
   }
  ],
  "tier_labels": {
@@ -3625,7 +3549,7 @@
    "key": "06",
    "file": "manual/06-checklist.md",
    "label": "06. 체크리스트와 검사안 — 반드시 지킬 것",
-   "lines": 114,
+   "lines": 115,
    "versions": [],
    "last_version": null
   },
@@ -3683,7 +3607,7 @@
    "key": "11",
    "file": "manual/11-workflow.md",
    "label": "11. 제작 업무 체계 — 한 편을 처음부터 끝까지 (매뉴얼 v38, 2026-11-17 확정)",
-   "lines": 192,
+   "lines": 194,
    "versions": [],
    "last_version": null
   },
@@ -4969,7 +4893,7 @@
    "label": "검사 방법",
    "title": "검사 방법",
    "line": 3,
-   "end": 15,
+   "end": 16,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4982,8 +4906,8 @@
    "level": 2,
    "label": "주제 (`01_research/topic_brief.json`, 스키마 `schemas/topic_brief.schema.json`)",
    "title": "G1 주제 (`01_research/topic_brief.json`, 스키마 `schemas/topic_brief.schema.json`)",
-   "line": 16,
-   "end": 26,
+   "line": 17,
+   "end": 27,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4996,8 +4920,8 @@
    "level": 2,
    "label": "소스",
    "title": "G2 소스",
-   "line": 27,
-   "end": 34,
+   "line": 28,
+   "end": 35,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5010,8 +4934,8 @@
    "level": 2,
    "label": "사실 (`01_research/factsheet.md`)",
    "title": "G3 사실 (`01_research/factsheet.md`)",
-   "line": 35,
-   "end": 42,
+   "line": 36,
+   "end": 43,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5024,8 +4948,8 @@
    "level": 2,
    "label": "대본 (`02_script/hybrid.json`)",
    "title": "G4 대본 (`02_script/hybrid.json`)",
-   "line": 43,
-   "end": 58,
+   "line": 44,
+   "end": 59,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -5042,8 +4966,8 @@
    "level": 2,
    "label": "연출",
    "title": "G5 연출",
-   "line": 59,
-   "end": 77,
+   "line": 60,
+   "end": 78,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -5062,14 +4986,13 @@
    "level": 2,
    "label": "완성본",
    "title": "G6 완성본",
-   "line": 78,
-   "end": 92,
+   "line": 79,
+   "end": 93,
    "tag_version": null,
    "versions": [],
    "last_version": null,
    "terms": [
-    "term:change-rate",
-    "term:graphic-pack"
+    "term:change-rate"
    ]
   },
   {
@@ -5080,8 +5003,8 @@
    "level": 2,
    "label": "포장",
    "title": "G7 포장",
-   "line": 93,
-   "end": 100,
+   "line": 94,
+   "end": 101,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5094,22 +5017,22 @@
    "level": 2,
    "label": "보관·기록",
    "title": "G8 보관·기록",
-   "line": 101,
-   "end": 108,
+   "line": 102,
+   "end": 109,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:06§h109",
+   "id": "sec:06§h110",
    "kind": "section",
    "doc": "doc:06",
-   "num": "h109",
+   "num": "h110",
    "level": 2,
    "label": "마지막 사람 눈 검사 (EYE) — 3분 안에",
    "title": "마지막 사람 눈 검사 (EYE) — 3분 안에",
-   "line": 109,
-   "end": 114,
+   "line": 110,
+   "end": 115,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6421,7 +6344,7 @@
    "label": "역할",
    "title": "1. 역할",
    "line": 47,
-   "end": 55,
+   "end": 57,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6434,8 +6357,8 @@
    "level": 2,
    "label": "단계표",
    "title": "2. 단계표",
-   "line": 56,
-   "end": 77,
+   "line": 58,
+   "end": 79,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6448,8 +6371,8 @@
    "level": 3,
    "label": "한 편씩 따로 진행",
    "title": "2-1. 한 편씩 따로 진행 (v2)",
-   "line": 78,
-   "end": 87,
+   "line": 80,
+   "end": 89,
    "tag_version": 2,
    "versions": [
     2
@@ -6464,8 +6387,8 @@
    "level": 3,
    "label": "결정 지점 — 보여 주는 것 · 묻는 것 · 기각되면 돌아갈 곳",
    "title": "2-2. 결정 지점 — 보여 주는 것 · 묻는 것 · 기각되면 돌아갈 곳",
-   "line": 88,
-   "end": 99,
+   "line": 90,
+   "end": 101,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6478,8 +6401,8 @@
    "level": 3,
    "label": "작업 기록 — 수정하면서 작업하기",
    "title": "2-3. 작업 기록 — 수정하면서 작업하기",
-   "line": 100,
-   "end": 108,
+   "line": 102,
+   "end": 110,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6492,8 +6415,8 @@
    "level": 3,
    "label": "S3 첫 칸 — 목적 분간과 매체 질문 (2026-11-18 사용자, 근거 `docs/37`)",
    "title": "2-4. S3 첫 칸 — 목적 분간과 매체 질문 (2026-11-18 사용자, 근거 `docs/37`)",
-   "line": 109,
-   "end": 128,
+   "line": 111,
+   "end": 130,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -6509,8 +6432,8 @@
    "level": 2,
    "label": "채널별 차이 (같은 단계표, 다른 내용)",
    "title": "3. 채널별 차이 (같은 단계표, 다른 내용)",
-   "line": 129,
-   "end": 144,
+   "line": 131,
+   "end": 146,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6523,8 +6446,8 @@
    "level": 3,
    "label": "AI 롱폼 — 형식을 주제가 고른다 (2026-11-17 사용자)",
    "title": "3-1. AI 롱폼 — 형식을 주제가 고른다 (2026-11-17 사용자)",
-   "line": 145,
-   "end": 157,
+   "line": 147,
+   "end": 159,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -6540,8 +6463,8 @@
    "level": 3,
    "label": "이슈·경제·주식 내레이션 (2026-11-17 사용자)",
    "title": "3-2. 이슈·경제·주식 내레이션 (2026-11-17 사용자)",
-   "line": 158,
-   "end": 167,
+   "line": 160,
+   "end": 169,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6554,8 +6477,8 @@
    "level": 2,
    "label": "(기록) 2026-11-17 세 편 진행",
    "title": "4. (기록) 2026-11-17 세 편 진행",
-   "line": 168,
-   "end": 172,
+   "line": 170,
+   "end": 174,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6568,8 +6491,8 @@
    "level": 2,
    "label": "개정 기록 (작업하면서 채움)",
    "title": "5. 개정 기록 (작업하면서 채움)",
-   "line": 173,
-   "end": 179,
+   "line": 175,
+   "end": 181,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6582,8 +6505,8 @@
    "level": 2,
    "label": "시작 전에 확인할 것",
    "title": "6. 시작 전에 확인할 것",
-   "line": 180,
-   "end": 185,
+   "line": 182,
+   "end": 187,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6596,8 +6519,8 @@
    "level": 2,
    "label": "연출 인계와 화면 검토",
    "title": "7. 연출 인계와 화면 검토",
-   "line": 186,
-   "end": 192,
+   "line": 188,
+   "end": 194,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6974,7 +6897,7 @@
    "label": "`brand` 가 ai/market/curiosity/issues 중 하나, `desire` 와 `viewer_question` 이 채워짐",
    "auto": true,
    "eye": false,
-   "line": 19,
+   "line": 20,
    "tier_key": "rule:f2610538",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -6995,7 +6918,7 @@
    "label": "`trigger` (무엇이 이 주제를 지금 건드렸나)와 `why_now` 가 있음",
    "auto": true,
    "eye": false,
-   "line": 20,
+   "line": 21,
    "tier_key": "rule:1c1eb102",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7016,7 +6939,7 @@
    "label": "욕망을 분명히 건드리고 보여 줄 자료가 있다 (둘 중 하나라도 약하면 만들지 않음, 01 §3). 점수 합계는 후보 비교용 참고",
    "auto": true,
    "eye": false,
-   "line": 21,
+   "line": 22,
    "tier_key": "rule:1daf1e08",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7037,7 +6960,7 @@
    "label": "수요 증거 1개 이상 (`demand_evidence`: 검색·아웃라이어·뉴스 순위)",
    "auto": true,
    "eye": false,
-   "line": 22,
+   "line": 23,
    "tier_key": "rule:3d7cada2",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7058,7 +6981,7 @@
    "label": "후보 3개를 비교한 기록 (`candidates`)",
    "auto": true,
    "eye": false,
-   "line": 23,
+   "line": 24,
    "tier_key": "rule:34822847",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7079,7 +7002,7 @@
    "label": "`driver`: 이 영상을 무엇이 띄우나 — 소재·각도·형식 + 근거 (manual/01 §4-1). 소재가 약하면 각도(반대 결과·생활 체감·추억·사람)를 적음",
    "auto": true,
    "eye": false,
-   "line": 24,
+   "line": 25,
    "tier_key": "rule:8ae0ed7c",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7100,7 +7023,7 @@
    "label": "`our_angle` (남들 영상보다 깊은 것)",
    "auto": true,
    "eye": false,
-   "line": 25,
+   "line": 26,
    "tier_key": "rule:90122665",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7121,7 +7044,7 @@
    "label": "쓰는 자료 화면마다 `credit` 과 `url` (라이선스 포함)",
    "auto": true,
    "eye": false,
-   "line": 30,
+   "line": 31,
    "tier_key": "rule:abb3dc65",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
@@ -7142,7 +7065,7 @@
    "label": "라이선스가 CC BY·CC0·퍼블릭 도메인·공식 자료·직접 제작 (CC BY-SA·NC·ND, 다른 유튜버 영상 금지)",
    "auto": true,
    "eye": true,
-   "line": 31,
+   "line": 32,
    "tier_key": "rule:7a8a9309",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
@@ -7163,7 +7086,7 @@
    "label": "봇 확인·차단 우회 안 함",
    "auto": false,
    "eye": true,
-   "line": 32,
+   "line": 33,
    "tier_key": "rule:f2d8638b",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
@@ -7184,7 +7107,7 @@
    "label": "팩트시트가 있고 출처 링크가 3개 이상 (롱폼)",
    "auto": true,
    "eye": false,
-   "line": 38,
+   "line": 39,
    "tier_key": "rule:827fdada",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7205,7 +7128,7 @@
    "label": "❌(확인 실패) 사실이 대본에 없음",
    "auto": false,
    "eye": true,
-   "line": 39,
+   "line": 40,
    "tier_key": "rule:530f2348",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
@@ -7226,7 +7149,7 @@
    "label": "✅/⚠️ 상태 표시가 있음",
    "auto": true,
    "eye": false,
-   "line": 40,
+   "line": 41,
    "tier_key": "rule:162b1b20",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7247,7 +7170,7 @@
    "label": "'쓰지 않는 것' 목록",
    "auto": true,
    "eye": false,
-   "line": 41,
+   "line": 42,
    "tier_key": "rule:acd52f3c",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7268,7 +7191,7 @@
    "label": "`core_message`, `question`, `logic` 이 있음",
    "auto": true,
    "eye": false,
-   "line": 46,
+   "line": 47,
    "tier_key": "rule:bc651458",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7289,7 +7212,7 @@
    "label": "**인트로 없음**: 첫 장면이 인사·순서 예고 `intro` 가 아니고, 인사·채널 소개·구독 부탁 문구 없음 — README §2-1 (v24)",
    "auto": true,
    "eye": false,
-   "line": 47,
+   "line": 48,
    "terms": [
     "term:intro"
    ],
@@ -7313,7 +7236,7 @@
    "label": "장 표지에서 앞 장의 결론 → 다음 질문으로 이어짐 (순서 예고·번호 세기 없이, README §2-1)",
    "auto": false,
    "eye": true,
-   "line": 48,
+   "line": 49,
    "tier_key": "rule:489d9927",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -7334,7 +7257,7 @@
    "label": "(ai·market·issues) 쉬운 대본: 숫자엔 비교 기준(`compare_to`), 낯선 개념엔 비유(`analogies`), 과거 사례(`past_cases`), 어려운 말 풀이(`glossary`)가 있다",
    "auto": true,
    "eye": false,
-   "line": 49,
+   "line": 50,
    "tier_key": "rule:c0943101",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7355,7 +7278,7 @@
    "label": "(curiosity) 비유와 대비가 되는 숫자 — 사실은 이야기 속에서 (04 §0-6)",
    "auto": true,
    "eye": false,
-   "line": 50,
+   "line": 51,
    "tier_key": "rule:70132dca",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7376,7 +7299,7 @@
    "label": "**투자 권유 표현 0개** (사세요·매수 추천·지금이 기회·무조건 오른다·수익 보장 …)",
    "auto": true,
    "eye": false,
-   "line": 51,
+   "line": 52,
    "tier_key": "rule:e1d75a05",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
@@ -7397,7 +7320,7 @@
    "label": "레퍼런스 채널 이름 0개",
    "auto": true,
    "eye": false,
-   "line": 52,
+   "line": 53,
    "tier_key": "rule:375c93ea",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7418,7 +7341,7 @@
    "label": "'재확인 필요'·'TODO' 같은 미완성 표시 0개",
    "auto": true,
    "eye": false,
-   "line": 53,
+   "line": 54,
    "tier_key": "rule:ce22d3bc",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7439,7 +7362,7 @@
    "label": "과장 단어 0개 (충격·소름·경악·역대급)",
    "auto": true,
    "eye": false,
-   "line": 54,
+   "line": 55,
    "tier_key": "rule:eb72b51e",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7460,7 +7383,7 @@
    "label": "여는 부분(첫 장 표지 앞)에 이 영상의 질문 하나 — 시청자가 무엇을 따라가는지 알게",
    "auto": true,
    "eye": false,
-   "line": 55,
+   "line": 56,
    "tier_key": "rule:ad95df83",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -7481,7 +7404,7 @@
    "label": "market: 끝부분에 확인할 신호(checklist)",
    "auto": true,
    "eye": false,
-   "line": 56,
+   "line": 57,
    "terms": [
     "term:checklist"
    ],
@@ -7505,7 +7428,7 @@
    "label": "issues: 보도문 말투('~것으로 알려졌다') 비율 낮게 (08 §0-1). 묻는 문장 개수는 참고 표시만 (질문 패턴 강제 금지, 11-workflow §3-2)",
    "auto": true,
    "eye": false,
-   "line": 57,
+   "line": 58,
    "tier_key": "rule:c8a478fc",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7526,7 +7449,7 @@
    "label": "배경 바꿔 쓰기: 바탕 하나로 고정하지 않음 — 장면이 하는 일이 바뀌면 바탕도 (05 §0-2)",
    "auto": true,
    "eye": false,
-   "line": 65,
+   "line": 66,
    "tier_key": "rule:1c653d80",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -7547,7 +7470,7 @@
    "label": "v15 카테고리 개성: `hybrid.json` 에 `brand` — 장 표지·인과 지도·듀오톤이 카테고리답게 (05 §0-7)",
    "auto": true,
    "eye": false,
-   "line": 67,
+   "line": 68,
    "tier_key": "rule:82786a6f",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -7565,11 +7488,11 @@
    "gate": "gate:G5",
    "level": "SHOULD",
    "level_note": "",
-   "label": "v15 장 표지 사진은 주제에 맞게: 같은 사진을 다시 표지로 쓰지 않고, 주제와 무관한 기본 사진(NASA 위성 등)으로 때우지 않음, 출처(credit) 표시",
+   "label": "v15 장 표지 사진은 주제에 맞게: 같은 사진을 다시 표지로 쓰지 않고, 주제와 무관한 기본 사진으로 때우지 않음(한 출처로 표지를 모두 채우지 않음), 출처(credit) 표시",
    "auto": true,
    "eye": false,
-   "line": 68,
-   "tier_key": "rule:834054d7",
+   "line": 69,
+   "tier_key": "rule:7fb5653e",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
    "overfit": false,
@@ -7589,7 +7512,7 @@
    "label": "강조 아껴 쓰기: 핵심 단어 띄우기에 문장을 쓰지 않음 — 자막과 같은 문장을 위에 반복하지 않음 (v3, 05 §0-1)",
    "auto": true,
    "eye": false,
-   "line": 71,
+   "line": 72,
    "tier_key": "rule:938a2161",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -7610,7 +7533,7 @@
    "label": "스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1). 몫·겹친 장면·연속은 참고 표시 (뼈대 스타일은 한 스타일이 이끄는 것이 정상)",
    "auto": true,
    "eye": false,
-   "line": 73,
+   "line": 74,
    "terms": [
     "term:layers"
    ],
@@ -7634,7 +7557,7 @@
    "label": "그래픽 팩이 브랜드에 맞는 등록부 레시피의 팩 (`styles/recipes`, `edit.yaml` 의 skin)",
    "auto": true,
    "eye": false,
-   "line": 75,
+   "line": 76,
    "terms": [
     "term:graphic-pack"
    ],
@@ -7658,7 +7581,7 @@
    "label": "`style-pick` 기록 (`01_research/style_pick.json`) · `edit-plan` 기록 (`02_script/EDIT_CONTEXT.md`, 메인 → 주제 레포 → 상황별 장면·기법, docs/33)",
    "auto": true,
    "eye": false,
-   "line": 76,
+   "line": 77,
    "tier_key": "rule:c07ee1cf",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7679,7 +7602,7 @@
    "label": "`final.mp4` 있음",
    "auto": true,
    "eye": false,
-   "line": 81,
+   "line": 82,
    "tier_key": "rule:cbf6bfc7",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7700,7 +7623,7 @@
    "label": "레이아웃 결함 없음 (`04_assets/layout_qa.json`: 화살표·글자 겹침·잘림·대비·장면 의도 goal/why)",
    "auto": true,
    "eye": false,
-   "line": 82,
+   "line": 83,
    "tier_key": "rule:8632c9eb",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7721,7 +7644,7 @@
    "label": "싱크: 자막 0.5초 안 ≥ 95%, 화면−소리 ≤ 0.1초 (`sync_qa.json`), 중앙값 ≤ 0.2초",
    "auto": true,
    "eye": false,
-   "line": 84,
+   "line": 85,
    "tier_key": "rule:3665ef36",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7742,7 +7665,7 @@
    "label": "프레임 시트를 눈으로 확인 (`final_sheet.png`): 잘린 글자·겹침·빈 화면",
    "auto": false,
    "eye": true,
-   "line": 85,
+   "line": 86,
    "tier_key": "rule:d6610df3",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7763,7 +7686,7 @@
    "label": "길이: 롱폼 10분 이상 (시사 빠른 정리 `\"format\": \"quick\"` 은 5분 이상, 그보다 짧으면 쇼츠로 — README §2-4)",
    "auto": true,
    "eye": false,
-   "line": 86,
+   "line": 87,
    "tier_key": "rule:dff52f0e",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7784,32 +7707,8 @@
    "label": "화면이 정신없지 않은가 · 배경음이 억지스럽지 않은가 (애매하면 빼기)",
    "auto": false,
    "eye": true,
-   "line": 88,
-   "tier_key": "rule:093d66dd",
-   "tier_auto": "style",
-   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
-   "overfit": false,
-   "single": false,
-   "tier": "style",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "스타일 기본값"
-  },
-  {
-   "id": "rule:G6:1",
-   "kind": "rule",
-   "gate": "gate:G6",
-   "level": "SHOULD",
-   "level_note": "",
-   "label": "바탕색 돌려 쓰기: 직전 편들과 같은 바탕 계열(미색 종이 등)이 이어지지 않게 — 매번 같은 바탕이면 채널이 단조로워짐 (05 §0-6)",
-   "auto": true,
-   "eye": false,
    "line": 89,
-   "terms": [
-    "term:graphic-pack"
-   ],
-   "tier_key": "rule:60b0356e",
+   "tier_key": "rule:093d66dd",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
    "overfit": false,
@@ -7829,7 +7728,7 @@
    "label": "음량 −14 LUFS 근처 (`delivery_check.json`)",
    "auto": true,
    "eye": false,
-   "line": 90,
+   "line": 91,
    "tier_key": "rule:80ce4857",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7850,7 +7749,7 @@
    "label": "업로드 최종본은 ElevenLabs 목소리 (edge-tts 는 초안)",
    "auto": true,
    "eye": false,
-   "line": 91,
+   "line": 92,
    "tier_key": "rule:e4b06efb",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7871,7 +7770,7 @@
    "label": "제목 후보 3개 + 각 이유",
    "auto": true,
    "eye": false,
-   "line": 96,
+   "line": 97,
    "tier_key": "rule:4d902abe",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7892,7 +7791,7 @@
    "label": "썸네일 A/B/C 파일 + `thumbnail_qa.json` 모두 ok (시간 표시 겹침 없음)",
    "auto": true,
    "eye": false,
-   "line": 97,
+   "line": 98,
    "tier_key": "rule:204a234c",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7913,7 +7812,7 @@
    "label": "제목·썸네일에 영상에 없는 숫자·사실 없음",
    "auto": false,
    "eye": true,
-   "line": 98,
+   "line": 99,
    "tier_key": "rule:b1a63f42",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7934,7 +7833,7 @@
    "label": "GitHub Release 업로드 (`05_edit/release.json`)",
    "auto": true,
    "eye": false,
-   "line": 104,
+   "line": 105,
    "tier_key": "rule:dd23aba9",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7955,7 +7854,7 @@
    "label": "채널 `episodes.md` 에 회차 한 줄",
    "auto": true,
    "eye": false,
-   "line": 105,
+   "line": 106,
    "tier_key": "rule:9b1d069c",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7976,7 +7875,7 @@
    "label": "기획 문서(md/json/yaml) 커밋, 미디어는 커밋 안 함",
    "auto": false,
    "eye": true,
-   "line": 106,
+   "line": 107,
    "tier_key": "rule:132842eb",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
@@ -7997,7 +7896,7 @@
    "label": "`REPORT.md` 의 남은 일을 사용자에게 보고",
    "auto": false,
    "eye": true,
-   "line": 107,
+   "line": 108,
    "tier_key": "rule:69794b14",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8896,11 +8795,11 @@
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
    "overfit": false,
    "single": true,
-   "tier": "style",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "스타일 기본값"
+   "tier": "standard",
+   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
+   "tier_note": "조사 방법(매체 프레임) — 스타일이 아님",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
   },
   {
    "id": "check:278",
@@ -9336,35 +9235,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:407",
-   "kind": "check",
-   "gate": "gate:G5",
-   "level": "SHOULD",
-   "label": "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 407,
-   "terms": [
-    "term:graphic-pack"
-   ],
-   "tier_key": "check:c8434068",
-   "tier_auto": "style",
-   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
-   "overfit": false,
-   "single": false,
-   "tier": "style",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "스타일 기본값"
-  },
-  {
-   "id": "check:412",
+   "id": "check:416",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게)",
    "file": "ytflow/stages/checklist.py",
-   "line": 412,
+   "line": 416,
    "tier_key": "check:aab08acb",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -9377,14 +9254,14 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:420",
+   "id": "check:427",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
-   "label": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음",
+   "label": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번 없음, 한 출처로 표지를 모두 때우지 않음",
    "file": "ytflow/stages/checklist.py",
-   "line": 420,
-   "tier_key": "check:920783ec",
+   "line": 427,
+   "tier_key": "check:02c1078e",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
    "overfit": false,
@@ -9396,13 +9273,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:449",
+   "id": "check:456",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1)",
    "file": "ytflow/stages/checklist.py",
-   "line": 449,
+   "line": 456,
    "tier_key": "check:99b8b152",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -9415,13 +9292,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:459",
+   "id": "check:466",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "핵심 단어 띄우기에 문장을 쓰지 않음 — 자막과 같은 내용을 위에 반복하지 않음 (v3)",
    "file": "ytflow/stages/checklist.py",
-   "line": 459,
+   "line": 466,
    "tier_key": "check:1aff01bf",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9434,13 +9311,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:461",
+   "id": "check:468",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
    "file": "ytflow/stages/checklist.py",
-   "line": 461,
+   "line": 468,
    "terms": [
     "term:graphic-pack"
    ],
@@ -9456,13 +9333,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:463",
+   "id": "check:470",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "style-pick 기록 (상황에 맞춘 스타일 선택)",
    "file": "ytflow/stages/checklist.py",
-   "line": 463,
+   "line": 470,
    "tier_key": "check:9bfba96b",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -9475,13 +9352,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:465",
+   "id": "check:472",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움)",
    "file": "ytflow/stages/checklist.py",
-   "line": 465,
+   "line": 472,
    "tier_key": "check:949b9462",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9494,13 +9371,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:469",
+   "id": "check:476",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "final.mp4",
    "file": "ytflow/stages/checklist.py",
-   "line": 469,
+   "line": 476,
    "tier_key": "check:502a31b3",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9513,13 +9390,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:485",
+   "id": "check:492",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)",
    "file": "ytflow/stages/checklist.py",
-   "line": 485,
+   "line": 492,
    "tier_key": "check:4f448879",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9532,13 +9409,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:491",
+   "id": "check:498",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
    "file": "ytflow/stages/checklist.py",
-   "line": 491,
+   "line": 498,
    "tier_key": "check:79a7c86e",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9551,13 +9428,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:494",
+   "id": "check:501",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "납품 점검(음량 등)",
    "file": "ytflow/stages/checklist.py",
-   "line": 494,
+   "line": 501,
    "tier_key": "check:5e0947d1",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9570,13 +9447,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:507",
+   "id": "check:514",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "최종 목소리 ElevenLabs",
    "file": "ytflow/stages/checklist.py",
-   "line": 507,
+   "line": 514,
    "tier_key": "check:91c4c655",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9589,13 +9466,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:511",
+   "id": "check:518",
    "kind": "check",
    "gate": "gate:G7",
    "level": "MUST",
    "label": "제목 후보 3개 + 이유",
    "file": "ytflow/stages/checklist.py",
-   "line": 511,
+   "line": 518,
    "tier_key": "check:533d8276",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9608,13 +9485,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:513",
+   "id": "check:520",
    "kind": "check",
    "gate": "gate:G7",
    "level": "MUST",
    "label": "썸네일 A/B/C + 점검 ok",
    "file": "ytflow/stages/checklist.py",
-   "line": 513,
+   "line": 520,
    "tier_key": "check:a992f8cd",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9627,13 +9504,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:519",
+   "id": "check:526",
    "kind": "check",
    "gate": "gate:G8",
    "level": "MUST",
    "label": "GitHub Release 업로드",
    "file": "ytflow/stages/checklist.py",
-   "line": 519,
+   "line": 526,
    "tier_key": "check:58879465",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9646,13 +9523,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:521",
+   "id": "check:528",
    "kind": "check",
    "gate": "gate:G8",
    "level": "MUST",
    "label": "episodes.md 기록",
    "file": "ytflow/stages/checklist.py",
-   "line": 521,
+   "line": 528,
    "tier_key": "check:45482bc9",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -11918,17 +11795,14 @@
    "versions": [
     13
    ],
-   "label": "바탕색 돌려 쓰기 (v13): 미색 종이 계열만 계속 쓰지 않기 — 직전 두 프로젝트와 같은 바탕 계열이면 경고",
-   "src": "# 바탕색 돌려 쓰기 (v13): 미색 종이 계열만 계속 쓰지 않기 — 직전 두 프로젝트와 같은 바탕 계열이면 경고",
-   "terms": [
-    "term:graphic-pack"
-   ]
+   "label": "바탕 계열 (v13, 2026-11-11 한 편 판정 \"돌려 써도 됨\" — 허락이지 명령이 아님): 같은 채널 직전 두 편과 같은 바탕 계열이면 참고로 표시",
+   "src": "# 바탕 계열 (v13, 2026-11-11 한 편 판정 \"돌려 써도 됨\" — 허락이지 명령이 아님): 같은 채널 직전 두 편과 같은 바탕 계열이면 참고로 표시"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:411",
+   "id": "code:ytflow/stages/checklist.py:415",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 411,
+   "line": 415,
    "versions": [
     15
    ],
@@ -11936,10 +11810,10 @@
    "src": "if spec.get(\"scenes\"):   # v15 카테고리 개성 (05 §0-7)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:471",
+   "id": "code:ytflow/stages/checklist.py:478",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 471,
+   "line": 478,
    "versions": [
     38
    ],
@@ -11947,10 +11821,10 @@
    "src": "_soft = (\"stage/crowded\", \"stage/text\", \"stage/static\")   # v38: 숫자로 감지하는 '붐빔·글자 수·정지'는 참고 — 판단은 D3 화면 확인"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:500",
+   "id": "code:ytflow/stages/checklist.py:507",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 500,
+   "line": 507,
    "versions": [
     25
    ],
@@ -14151,7 +14025,7 @@
      "by": "사용자 결정 2026-11-15 (매뉴얼 v34 — '말이 화면에 생기는 쪽', 스타일 규칙 유동)"
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:500",
+     "ref": "code:ytflow/stages/checklist.py:507",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -14290,7 +14164,7 @@
      "kind": "code"
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:500",
+     "ref": "code:ytflow/stages/checklist.py:507",
      "kind": "code"
     }
    ],
@@ -14322,7 +14196,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:500",
+     "ref": "code:ytflow/stages/checklist.py:507",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -15977,7 +15851,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:471",
+     "ref": "code:ytflow/stages/checklist.py:478",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -17038,7 +16912,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:471",
+     "ref": "code:ytflow/stages/checklist.py:478",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -24430,14 +24304,14 @@
    "status": "demo",
    "renderer": "hybrid",
    "skin": "paper-sketch",
-   "avoid": "강조 예산에 포함 — 영상에서 가장 중요한 숫자·한 곳에만 (1분에 1번 이하)",
+   "avoid": "강조 예산에 포함 — 영상에서 가장 중요한 숫자·한 곳에만 (기억할 곳에만 — 05 §0-0)",
    "fits": "brands: ai·market·curiosity, questions: 비교·원인·정체, moods: 차분",
    "demo": "20261109-pool-ai (장면 4, 막대 위 동그라미)",
    "skill": "edit-style-pool",
    "how": "렌더러 hybrid · 장면 종류 - · 그래픽 팩 paper-sketch",
    "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"hand-annotate\"",
    "use_when": "맞는 곳 — brands: ai·market·curiosity, questions: 비교·원인·정체, moods: 차분",
-   "not_when": "강조 예산에 포함 — 영상에서 가장 중요한 숫자·한 곳에만 (1분에 1번 이하)",
+   "not_when": "강조 예산에 포함 — 영상에서 가장 중요한 숫자·한 곳에만 (기억할 곳에만 — 05 §0-0)",
    "group": "편집 스타일 (장면 묶음)",
    "label": "손그림 표시 (동그라미·밑줄·화살표를 한 번)",
    "cat_label": "편집 스타일",
@@ -27251,7 +27125,6 @@
     "sec:05§1",
     "sec:05§6",
     "sec:06§G5",
-    "sec:06§G6",
     "sec:08§4",
     "sec:09§h370",
     "sec:10§4",
@@ -27261,11 +27134,8 @@
     "ver:13",
     "ver:50",
     "rev:15",
-    "code:ytflow/stages/checklist.py:393",
     "rule:G5:1",
-    "rule:G6:1",
-    "check:407",
-    "check:461",
+    "check:468",
     "intent:00ba80c7",
     "step:5"
    ]
@@ -50384,7 +50254,7 @@
   },
   {
    "s": "doc:06",
-   "t": "sec:06§h109",
+   "t": "sec:06§h110",
    "kind": "contains"
   },
   {
@@ -51128,11 +50998,6 @@
    "kind": "belongs_to"
   },
   {
-   "s": "rule:G6:1",
-   "t": "gate:G6",
-   "kind": "belongs_to"
-  },
-  {
    "s": "rule:G7:1",
    "t": "gate:G7",
    "kind": "belongs_to"
@@ -51513,87 +51378,82 @@
    "kind": "enforces"
   },
   {
-   "s": "check:407",
+   "s": "check:416",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:412",
+   "s": "check:427",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:420",
+   "s": "check:456",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:449",
+   "s": "check:466",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:459",
+   "s": "check:468",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:461",
+   "s": "check:470",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:463",
+   "s": "check:472",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:465",
-   "t": "gate:G5",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:469",
+   "s": "check:476",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:485",
+   "s": "check:492",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:491",
+   "s": "check:498",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:494",
+   "s": "check:501",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:507",
+   "s": "check:514",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:511",
+   "s": "check:518",
    "t": "gate:G7",
    "kind": "enforces"
   },
   {
-   "s": "check:513",
+   "s": "check:520",
    "t": "gate:G7",
    "kind": "enforces"
   },
   {
-   "s": "check:519",
+   "s": "check:526",
    "t": "gate:G8",
    "kind": "enforces"
   },
   {
-   "s": "check:521",
+   "s": "check:528",
    "t": "gate:G8",
    "kind": "enforces"
   },
@@ -53480,17 +53340,17 @@
   },
   {
    "s": "ver:15",
-   "t": "code:ytflow/stages/checklist.py:411",
+   "t": "code:ytflow/stages/checklist.py:415",
    "kind": "implemented_by"
   },
   {
    "s": "ver:38",
-   "t": "code:ytflow/stages/checklist.py:471",
+   "t": "code:ytflow/stages/checklist.py:478",
    "kind": "implemented_by"
   },
   {
    "s": "ver:25",
-   "t": "code:ytflow/stages/checklist.py:500",
+   "t": "code:ytflow/stages/checklist.py:507",
    "kind": "implemented_by"
   },
   {
@@ -53865,12 +53725,12 @@
   },
   {
    "s": "ver:15",
-   "t": "check:412",
+   "t": "check:416",
    "kind": "implemented_by"
   },
   {
    "s": "ver:15",
-   "t": "check:420",
+   "t": "check:427",
    "kind": "implemented_by"
   },
   {
@@ -55190,7 +55050,7 @@
   },
   {
    "s": "intent:8ecb5021",
-   "t": "code:ytflow/stages/checklist.py:500",
+   "t": "code:ytflow/stages/checklist.py:507",
    "kind": "quoted_in"
   },
   {

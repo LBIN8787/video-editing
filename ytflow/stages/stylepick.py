@@ -177,7 +177,7 @@ def plan_text(res: dict) -> list[str]:
     L += [f"- `{a}` + `{b}`: {why}" for a, b, why in GOOD_LAYERS]
     r = MIX_RULES["longform"]
     L += ["", f"규칙(롱폼): 스타일 {r['min_recipes']}종 이상 · 한 스타일이 {int(r['max_share'] * 100)}% 넘지 않게 · 겹친 장면 {r['min_layered']}개 이상 · "
-          f"같은 스타일 {r['max_run'] + 1}장면 연속 금지 · 강조는 1분에 1번 이하, 자막과 같은 문장 반복 금지 (`check` G5 가 검사)"]
+          f"같은 스타일 {r['max_run'] + 1}장면 연속을 넘지 않는 쪽 · 강조는 기억할 곳에만 (모두 `check` 참고값, 05 §0-0) · 자막과 같은 문장 반복 금지"]
     return L
 
 

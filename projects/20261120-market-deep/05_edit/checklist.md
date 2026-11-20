@@ -1,11 +1,11 @@
 # 체크리스트 — 20261120-market-deep
 
-매뉴얼 v67 · 2026-11-20T10:25:41 · **통과**
+매뉴얼 v67 · 2026-11-20T10:37:55 · **통과**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
 | G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ✅ |  |
-| G0 | SHOULD | 매뉴얼 그래프가 최신 (python -m ytflow manual-graph) | ✅ | manual/graph.json |
+| G0 | SHOULD | 매뉴얼 그래프가 최신 (python -m ytflow manual-graph) | ⚠️ | manual/graph.json |
 | G1 | MUST | topic_brief.json 있음 | ✅ | 01_research/topic_brief.json (schemas/topic_brief.schema.json) |
 | G1 | MUST | 브랜드(ai/market/curiosity) | ✅ | market |
 | G1 | MUST | 욕망·시청자 질문 | ✅ | 앤트로픽은 17% 올랐는데, 시장은 왜 2% 빠졌을까? |
@@ -62,6 +62,26 @@
 | G4 | SHOULD | market: 끝에 확인할 신호(checklist) | ✅ | ['checklist', 'kinetic', 'outro'] |
 | G4 | MUST | 인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1) | ✅ | [] |
 | G4 | SHOULD | 말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용) | ⚠️ | ['미쳤'] |
+| G5 | SHOULD | 배경: 한 가지 바탕으로 고정하지 않음 — 장면이 하는 일이 바뀌면 바탕도 바뀜 (05 §0-2) | ✅ | ['film', 'grid', 'photo', 'spot', 'tint'] |
+| G5 | 참고 | 배경: 같은 바탕이 이어지는 구간 | ℹ️ | ['tint'] |
+| G5 | 참고 | 반복 피로: 글씨·도형뿐인 장면이 이어지는 구간 — 자료·지도·그림으로 보여 줄 수 있는지 다시 볼 곳 (05 §0-3) | ℹ️ | 최장 3연속 (장면 35) |
+| G5 | 참고 | 장식 효과(dust·leak)를 쓴 장면 — 내용이 담긴 볼거리 대신 쓰지 않았는지 (05 §0-4) | ✅ | [] |
+| G5 | 참고 | 반복 피로: 볼거리(자료·지도·그림)가 있는 장면의 몫 | ✅ | 21/30 |
+| G5 | 참고 | 반복 피로: 같은 시각 효과가 이어지는 구간 (효과 종류 수는 채우지 않음 — 05 §0-5) | ✅ | [] 연속 [] |
+| G5 | 참고 | 바탕 계열: 같은 채널 직전 두 편과 같은 바탕 계열인지 (바꿔도 되고 이어 써도 됨 — 카테고리 얼굴 05 §0-7 이 먼저) | ✅ | 이번 cream · 직전 [] |
+| G5 | SHOULD | v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게) | ✅ | market |
+| G5 | SHOULD | v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번 없음, 한 출처로 표지를 모두 때우지 않음 | ✅ | 표지 ['nyse', 'dc', 'seoul'] · 가장 많은 출처 ('CC BY 2.0 · Jeffrey Zeldman from Manhatt |
+| G5 | 참고 | 반복 피로: 같은 채널 직전 편과 화면 구성이 얼마나 겹치나 | ℹ️ | 83% |
+| G5 | 참고 | 같은 장면 type 이 이어지는 구간 — 하는 일이 바뀌었는데 화면이 같지 않나 | ℹ️ | ['checklist'] |
+| G5 | 참고 | 자료 화면 없이 그래픽만 이어지는 가장 긴 구간 | ℹ️ | 최장 1090초 |
+| G5 | 참고 | 장 전환 없이 이어지는 가장 긴 구간 | ℹ️ | 최장 270초 |
+| G5 | SHOULD | 스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1) | ✅ | 7종 ['data-report', 'hybrid-causal', 'kinetic-type', 'map-journey', 'paper-column |
+| G5 | 참고 | 스타일 조합: 가장 많이 쓴 스타일의 몫·겹친 장면·같은 스타일 연속 | ℹ️ | data-report 0.31 · 겹침 1 · 최장 연속 3 |
+| G5 | 참고 | 강조 횟수·강조가 겹친 장면 — 기억할 숫자·반전·결론에만 썼는지 (05 §0-1) | ✅ | 1번 [(36, 'kinetic')] · 겹친 장면 [] |
+| G5 | SHOULD | 핵심 단어 띄우기에 문장을 쓰지 않음 — 자막과 같은 내용을 위에 반복하지 않음 (v3) | ✅ | [] |
+| G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ✅ | paper-sketch / 등록부 ['blueprint', 'clean-flat', 'clean-white', 'corkboard', 'crum |
+| G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ✅ | python -m ytflow style-pick <프로젝트> |
+| G5 | SHOULD | edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움) | ✅ | python -m ytflow edit-plan <프로젝트> → 02_script/EDIT_CONTEXT.md |
 
 **참고**(ℹ️)는 실패가 아니라 측정값입니다 — 숫자를 맞추지 말고, 표시된 곳이 그 연출의 원리(manual/05 §0-0)에 맞는지 화면 확인(D3)에서 봅니다.
 사람 눈 검사(EYE)는 manual/06-checklist.md 끝의 5가지를 확인하세요.
