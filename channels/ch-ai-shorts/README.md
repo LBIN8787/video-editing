@@ -1,5 +1,7 @@
 # (가칭) AI 꿀팁 1분 (`ch-ai-shorts`)
 
+> **보류 (2026-11-20 사용자: "쇼츠채널은 일단은 보류입니다 … 나중에 만들면 다시 재개할게요")** — 재개할 때 기본 스타일(AI 꿀팁 쇼츠 `shorts-aitips` 또는 훅 쇼츠 `hook-shorts`)을 정합니다.
+
 - **형식:** shorts — 짧은 주제 안내 (formats/shorts.md)
 - **편집 스타일:** 쇼츠 · AI 꿀팁 쇼츠 스타일 (9:16) → `styles/shorts-aitips/`
 - **콘셉트:** GitHub 에서 뜨는 AI 도구·Claude/Codex 스킬·MCP 서버 하나를 30~45초에 '무엇이고 어떻게 쓰나'만 안내하는 쇼츠 채널.

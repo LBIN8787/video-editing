@@ -1173,10 +1173,10 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     from . import backdrop   # 장면 목적에 맞는 바탕 (film·grid·spot·tint·photo, manual 05 §0-2)
     kind = backdrop.auto(sc, bool(spec.get("footage")))
     chap = int(sc.get("chapter", 0) or 0)
-    tag = {"tint": f"_c{chap}", "photo": f"_{sc.get('bg_src', '')}",
+    tag = {"tint": f"_c{chap}", "photo": f"_{sc.get('bg_src', '')}", "illust": f"_a{sc.get('bg_src', '')}",
            "duotone": f"_{sc.get('bg_src', '')}_{''.join(c.strip('#') for c in (sc.get('_duo') or []))}",
            "glow": f"_{''.join(c.strip('#') for c in (sc.get('_duo') or []))}", "cork": f"_c{chap}", "chalk": f"_c{chap}", "dash": f"_c{chap}"}.get(kind, "")
-    still = backdrop.photo_still(project, spec, sc.get("bg_src")) if kind in ("photo", "duotone") else None
+    still = backdrop.photo_still(project, spec, sc.get("bg_src")) if kind in ("photo", "duotone", "illust") else None
     if still is not None and still.exists():   # 같은 키라도 사진을 바꾸면 바탕도 새로 (파일 크기로 구분)
         tag += f"_{still.stat().st_size % 100000}"
     bg_name = f"bg_{D.skin['id']}_{kind}{tag}_b3.jpg"   # _b3: 바탕 밝기 규칙 판 (바꾸면 올림) — b3: 밝은 팩 사진 바탕을 옅게

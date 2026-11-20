@@ -67,10 +67,17 @@ def prepare(spec: dict, sc: dict) -> None:
             looks = idn.get("chapter_looks") or ["photo"]
             n = int(sc.get("chapter", 1) or 1)
             look = looks[(n - 1) % len(looks)]
-            if look == "photo" and not fo:
-                look = next((x for x in looks if x != "photo"), "window")
+            if look in ("photo", "illust") and not fo:
+                look = next((x for x in looks if x not in ("photo", "illust")), "plain")
             sc["look"] = look
         look = sc["look"]
+        if look == "illust":   # v73 호기심: 장 표지는 그 편의 삽화 한 장 (footage 에서 "art": true 인 것 먼저)
+            arts = [k for k in fo if fo[k].get("art")] or list(fo)
+            n = int(sc.get("chapter", 1) or 1)
+            sc.setdefault("bg", "illust")
+            sc.setdefault("bg_src", arts[(n - 1) % len(arts)])
+            sc.setdefault("skin", "dark-doc")
+            return
         if look == "photo":
             sc.setdefault("bg", "duotone")
             if fo:

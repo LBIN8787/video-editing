@@ -13,12 +13,12 @@ concept: >
 niche: "미국·한국 시장 전날 마감 해설. 실제 시세와 1차 출처(회사 발표·공시·보고서 원문·연준·통계)만. 투자 권유는 하지 않는다."
 seed_keywords: ["AI 반도체 기술 전망", "HBM", "CEO 발언", "뉴욕증시 마감", "코스피 마감", "특징주", "증권사 리포트", "목표가", "가이던스", "연준", "실적 발표"]
 target_minutes: 10            # v24: 롱폼 최소 10분
-cadence: "하루 1편 이상 (상한 없음, 2026-11-17 사용자: 소스·인터뷰·주제가 많으면 하루 세 편까지도 — manual/09 §2-1) — 장이 열린 다음 날 아침: 심층이 기본(v63 — 앞 1분 시장 요약 + 시장을 흔든 이슈 + 매체·인물 인사이트, 심층거리가 없을 때만 브리핑) / 장이 닫힌 날(토·일·휴장): 한 주 종합 점검 — 토 이슈 종합(weekly), 일 인사이트 점검(review) + 다음 주 일정·실적 (manual/09 §2, v30)"
+cadence: "하루 1편 이상 (상한 없음, 2026-11-17 사용자: 소스·인터뷰·주제가 많으면 하루 세 편까지도 — manual/09 §2-1) — 장이 열린 다음 날 아침: 심층이 기본(v63 — 앞 1분 시장 요약 + 시장을 흔든 이슈 + 매체·인물 인사이트, 심층거리가 없을 때만 브리핑) (화~토 아침 = 전날 장, 토요일은 금요일 미국 장) / 일요일: 한 주 종합(weekly — 이슈 종합 + 인사이트 점검 + 다음 주 일정·실적). 요일과 상관없이 매 편 투자자·CEO 등의 인사이트·분석을 다룸 (2026-11-20 사용자, manual/09 §2)"
 schedule:
   weekday: {kind: deep_dive, minutes: [12, 20], fallback: {kind: briefing, minutes: [10, 12]}, upload: "08:30 KST (자동 제작 07:00 시작)"}
   deep_dive: {kind: deep_dive, minutes: [12, 20], when: "기본 (v63, 2026-11-20 사용자: 어지간하면 항상 심층) — 장이 열린 다음 날은 심층이 그날의 1편, 앞 1분은 시장 요약. 심층거리가 없는 날만 브리핑 (manual/09 §2)"}
-  saturday: {kind: weekly_review, minutes: [10, 15]}
-  sunday: {kind: review, minutes: [10, 15]}   # 한 주 인사이트 점검 -market-review (v30, manual/09 §2). 옛 analysis(일요일 분석글)는 기본에서 뺌
+  saturday: {kind: deep_dive, minutes: [12, 20], note: "금요일 미국 장 — 평일과 같음 (2026-11-20 사용자)"}
+  sunday: {kind: weekly_review, minutes: [12, 20]}   # 한 주 종합 -market-weekly (이슈 종합 + 인사이트 점검 + 다음 주 볼 것, 2026-11-20 사용자: "일요일에 주간 종합")
   holidays: "미국·한국 휴장일은 쉬거나 주간 분석으로"
 explain_motion:   # 2026-11-20 사용자: "쉽게 설명해야 하는 부분이다, 상황 설명이 필요하다 = 모션그래픽을 주로 사용합니다"
   style: explain-stage            # styles/explain-stage/STYLE.md — afterline·spread·share·motionboard 장면
@@ -57,6 +57,6 @@ youtube:   # 유튜브 올리기·관리 (python -m ytflow yt-publish, docs/24-y
     briefing: "아침 시장 브리핑"
     deep: "심층 분석"
     weekly: "주간 시장 정리"
-    analysis: "주말 분석"          # 옛 일요일 분석글(-analysis, 20261115 편) 재생목록 — v30 부터 기본에서 뺌, 일요일은 -review(한 주 점검 → weekly)
+    analysis: "주말 분석"          # 옛 일요일 분석글(-analysis, 20261115 편) 재생목록 — 기본에서 뺌, 일요일은 -weekly
     tech: "기술과 미래"           # <날짜>-market-tech-<주제> (manual/09 §2-2)
     biz: "사업 분석"              # <날짜>-market-biz-<주제> (manual/09 §2-2-1, v46)
