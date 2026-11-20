@@ -31,8 +31,8 @@ from .. import config
 KST = timezone(timedelta(hours=9))
 CFG = config.ROOT / "config" / "newsletters.yaml"
 OUT = config.ROOT / "inbox" / "newsletters"
-BRANDS = ("market", "ai", "curiosity", "issues")
-BRAND_KO = {"market": "시장", "ai": "AI", "curiosity": "호기심", "issues": "시사"}
+BRANDS = ("market", "ai", "curiosity", "history", "issues")
+BRAND_KO = {"market": "시장", "ai": "AI", "curiosity": "일상·심리·뇌과학", "history": "역사", "issues": "시사"}
 KIND_KO = {"primary": "원문", "data": "원자료·통계", "media": "영상·이미지", "news": "보도·글"}
 NOISE_SUBJ = re.compile(r"(?i)confirm|welcome|verify|subscription|preferences|update profile|구독 확인|구독해|환영|인증|가입")
 EMAIL_ADDRESS = re.compile(r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}")
@@ -79,7 +79,9 @@ def unwrap(url: str) -> str:
                 url = q[k][0]
                 break
     p = urllib.parse.urlsplit(url)
-    keep = [(k, v) for k, v in urllib.parse.parse_qsl(p.query) if not k.lower().startswith(("utm_", "mc_", "ref", "_hs", "mkt_"))]
+    # xy: FinancialJuice 피드가 모든 기사 주소에 붙이는 피드 출처 표식(?xy=rss) — 사람마다 다른 값이 아니라 공개 표식
+    keep = [(k, v) for k, v in urllib.parse.parse_qsl(p.query)
+            if k.lower() != "xy" and not k.lower().startswith(("utm_", "mc_", "ref", "_hs", "mkt_"))]
     return urllib.parse.urlunsplit((p.scheme, p.netloc, p.path, urllib.parse.urlencode(keep), ""))
 
 
@@ -95,8 +97,14 @@ SENSITIVE_QUERY = re.compile(
     r"^key$|^code$|^uid$|^cid$|^mid$", re.I)
 
 
-def public_link(url: str) -> bool:
-    """Conservative publication gate, not proof that a URL is safe to visit."""
+def public_link(url: str, strict: bool = True) -> bool:
+    """Conservative publication gate, not proof that a URL is safe to visit.
+
+    strict=True (메일): 긴 경로 한 덩이나 낯선 쿼리도 수신자별 식별자로 본다.
+    strict=False (RSS): 공개 피드의 주소는 모든 구독자에게 같다 — 긴 경로는 사람이 읽는
+    기사 슬러그일 뿐이라(예: smithsonianmag.com/history/…-crusades-took-form) 그 규칙만 빼고,
+    관리·탈퇴 주소·추적 호스트·민감한 쿼리는 그대로 막는다. 2026-11-20 역사 RSS 추가 때 확인.
+    """
     try:
         p = urllib.parse.urlsplit(url)
         host = (p.hostname or "").lower()
@@ -116,7 +124,7 @@ def public_link(url: str) -> bool:
         if any(SENSITIVE_QUERY.search(k) or k.lower() not in PUBLIC_QUERY or
                len(v) > 80 or "@" in v for k, v in pairs):
             return False
-        if re.search(r"(?:^|/)[A-Za-z0-9_=-]{48,}(?:/|$)", urllib.parse.unquote(p.path)):
+        if strict and re.search(r"(?:^|/)[A-Za-z0-9_=-]{48,}(?:/|$)", urllib.parse.unquote(p.path)):
             return False
         return True
     except ValueError:
@@ -254,7 +262,7 @@ def add(items: list[dict], msgs: list[dict]) -> list[Path]:
     """날짜 파일에 덧붙임. 최근 2주에 이미 나온 주소는 새로 넣지 않고 '같이 다룸'에 뉴스레터만 더함."""
     days: dict[str, dict] = {}
     if OUT.exists():
-        for p in sorted(OUT.glob("*.json"))[-14:]:
+        for p in sorted(p for p in OUT.glob("*.json") if not p.name.startswith("."))[-14:]:   # .lock.json 같은 잠금·보조 파일 제외 (2026-11-20)
             days[p.stem] = _load(p.stem)
     touched = set()
     for m in msgs:
@@ -335,7 +343,7 @@ def rss() -> list[Path]:
                 url = unwrap(url)
             except ValueError:
                 continue
-            if not public_link(url) or EMAIL_ADDRESS.search(title):
+            if not public_link(url, strict=False) or EMAIL_ADDRESS.search(title):
                 continue
             items.append({"title": _clean(title), "url": url, "kind": kind(url, c), "reuse": reuse(url, c), "brand": route(title, s, c),
                           "source": s["id"], "source_name": s["name"], "msg": "rss", "date": t.isoformat()})

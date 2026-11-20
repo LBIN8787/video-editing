@@ -17,6 +17,7 @@ sources:
   - {id: kdi, name: KDI 경제정보센터, match: [kdi.re.kr], brands: [market, issues], cadence: 수시, arrives: 수시, status: planned}
   - {id: bloomberg, name: Bloomberg 아침 판, match: [bloomberg.com, bloomberg.net], brands: [market], cadence: 평일, arrives: "확인 필요", status: blocked}
   - {id: wsj, name: WSJ The 10-Point, match: [wsj.com, dowjones.com], brands: [market, issues], cadence: 평일, arrives: "확인 필요", status: blocked}
+  - {id: financialjuice, name: FinancialJuice (실시간 시장·거시 속보), rss: "https://www.financialjuice.com/feed.ashx?xy=rss", brands: [market, issues], cadence: 수시, arrives: RSS, status: subscribed}
   # ── 기술·사업 분석 (2026-11-18 사용자: "산업 기술 등에서 눈에 띄는 변화나 혁명 새로운 테크기술 … 주목하고싶거든", manual/09 §2-2-1) ──
   # RSS 는 구독 없이 바로 모음(subscribed). 이메일만 있는 것은 planned — 사람이 구독하면 subscribed 로.
   - {id: stratechery, name: Stratechery (무료 주간 글), rss: "https://stratechery.com/feed/", brands: [market, ai], cadence: 주 1회 무료, arrives: RSS, status: subscribed}
@@ -48,9 +49,13 @@ sources:
   - {id: greatergood-rss, name: Greater Good (관계·행복·사회심리), rss: "https://greatergood.berkeley.edu/site/rss/articles", brands: [curiosity], cadence: 수시, arrives: RSS, status: subscribed}
   - {id: psypost-rss, name: PsyPost (심리학 연구보도), rss: "https://www.psypost.org/feed/", brands: [curiosity], cadence: 매일, arrives: RSS, status: blocked} # 현재 검증 환경 HTTP403, 우회 없이 비활성
   - {id: quanta, name: Quanta Magazine, match: [simonsfoundation.org, quantamagazine.org], brands: [curiosity], cadence: 주간, arrives: 수시, status: subscribed}
-  - {id: aeon, name: Aeon, match: [aeon.co], brands: [curiosity], cadence: 주간, arrives: 수시, status: subscribed}
-  - {id: jstor, name: JSTOR Daily, match: [jstor.org, ithaka.org], brands: [curiosity, issues], cadence: "주간(목)", arrives: 수시, status: planned}
-  - {id: pdr, name: The Public Domain Review, match: [publicdomainreview.org], brands: [curiosity], cadence: 격주, arrives: 수시, status: subscribed}
+  - {id: aeon, name: Aeon, match: [aeon.co], brands: [curiosity, history], cadence: 주간, arrives: 수시, status: subscribed}
+  - {id: pdr, name: The Public Domain Review, match: [publicdomainreview.org], brands: [history, curiosity], cadence: 격주, arrives: 수시, status: subscribed}
+  # ── 역사 (2026-11-20 사용자 승인: 5개 카테고리 개편 — 역사 소재를 따로 쌓기) ──
+  - {id: smithsonian-history, name: Smithsonian History (역사·고고학·문화사), rss: "https://www.smithsonianmag.com/rss/history/", brands: [history], cadence: 매일, arrives: RSS, status: subscribed}
+  - {id: historyextra, name: HistoryExtra (BBC History Magazine — 세계사·고고학), rss: "https://www.historyextra.com/feed/", brands: [history], cadence: "주 3~5회", arrives: RSS, status: subscribed}
+  - {id: medievalists, name: Medievalists.net (중세사 연구·논문 소개), rss: "https://www.medievalists.net/feed/", brands: [history], cadence: 수시, arrives: RSS, status: subscribed}
+  - {id: jstor, name: JSTOR Daily, match: [jstor.org, ithaka.org], brands: [history, curiosity, issues], cadence: "주간(목)", arrives: 수시, status: planned}
   # ── 시사 (+ 데이터) ──
   - {id: owid, name: Our World in Data Brief, match: [ourworldindata], brands: [issues, curiosity, market], cadence: "월 2회", arrives: 수시, status: subscribed}
   - {id: pew, name: Pew Research Center, match: [pewresearch.org], brands: [issues, curiosity], cadence: 주간, arrives: 수시, status: subscribed}
@@ -61,7 +66,8 @@ route:
   market: [stock, shares, earnings, revenue, guidance, fed, rate, inflation, cpi, bond, yield, ipo, tariff, nasdaq, s&p, dow, oil, dollar, valuation, investor, 주가, 증시, 실적, 금리, 물가, 환율, 코스피, 투자, 매출, 관세, 연준]
   ai: [" ai ", "ai,", "ai.", "ai's", llm, gpt, claude, gemini, openai, anthropic, model, agent, chatbot, neural, 인공지능, 에이전트]
   issues: [election, court, law, policy, war, government, congress, senate, poll, survey, protest, 정책, 정부, 국회, 선거, 법원, 전쟁, 여론]
-  curiosity: [history, ancient, brain, physics, math, universe, species, evolution, why, 역사, 우주, 뇌, 진화]
+  history: [history, ancient, empire, dynasty, war, century, medieval, archaeology, historical, 역사, 고대, 중세, 왕조, 제국, 근현대, 발굴]
+  curiosity: [brain, psychology, neuroscience, habit, sleep, behavior, cognitive, stress, dopamine, science, physics, biology, health, why, 뇌, 심리, 습관, 수면, 행동, 인지, 도파민, 과학, 우주, 진화]
 
 # 링크 종류 — 주소의 도메인으로 1차 분류 (사람이 확인)
 links:

@@ -309,7 +309,7 @@ def run(path: Path, upto: str = "G8") -> Report:
                     continue
                 shown = _nums(json.dumps({k_: v_ for k_, v_ in s_.items() if k_ not in ("beats", "label", "id", "chapter")}, ensure_ascii=False))
                 for k_, b_ in enumerate(s_.get("beats", [])):
-                    if b_.get("motion") or b_.get("reveal") or b_.get("upto") or b_.get("show_result") or b_.get("show"):
+                    if b_.get("motion") or b_.get("reveal") or b_.get("upto") or b_.get("show_result") or b_.get("show") or b_.get("do"):   # do: 설명 무대 motionboard
                         continue
                     extra = _nums(b_.get("say", "")) - shown
                     if len(extra) >= 2:

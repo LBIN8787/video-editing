@@ -156,7 +156,7 @@ def market(day: str, cache: Path) -> dict:
     for m in ranked:
         lead = max(m["driver_counts"], key=m["driver_counts"].get) if m["driver_counts"] else "이슈"
         alone = abs(m["rel"]) >= 2
-        # 브리핑이냐 심층이냐 (docs/23 §2): 신호 둘 이상이면 심층 후보 — 최종 판단은 사람
+        # 심층 신호 (manual/09 §2, v63): 기본은 심층 — 신호가 가장 많은 이야기가 그날 심층의 중심축, 신호가 하나도 없을 때만 브리핑
         sig = []
         if len([k for k, v in m["driver_counts"].items() if k != "이슈" and v >= 3]) >= 1 and m["driver_counts"].get("이슈", 0) >= 5:
             sig.append("원인 종류 여러 갈래")
@@ -171,7 +171,12 @@ def market(day: str, cache: Path) -> dict:
             "angle": ("업종·지수와 따로 움직임 → 회사만의 이유" if alone else "업종·지수와 같이 움직임 → 시장 전체의 이유"),
             "question": f"{m['name']}는 왜 {'올랐' if m['pct'] > 0 else '떨어졌'}을까?",
             "headlines": [n["title"] for n in m["news"][:4]], "check_first": "회사 발표·공시·보고서 원문·당국 발표로 원인 확인",
-            "depth": "심층 후보" if len(sig) >= 2 else "브리핑", "depth_why": sig})
+            "depth": "심층 후보" if sig else "브리핑", "depth_why": sig})
+    # 2026-11-20 사용자: "앞으로 어지간하면 항상 오늘과 같은 심층분석이 가능하게 해주세요 심층분석거리가 없다면 어쩔 수 없구요"
+    cand = sorted([s for s in out["stories"] if s["depth_why"]], key=lambda s: -len(s["depth_why"]))
+    if cand:
+        cand[0]["depth"] = "심층 중심축"
+    out["format"] = ("심층 — 중심축: " + cand[0]["name"]) if cand else "브리핑 (자동 신호 없음 — ⑤⑥·SAVE·뉴스레터에서 심층거리를 한 번 더 찾고, 없으면 브리핑)"
     return out
 
 
@@ -241,7 +246,8 @@ def to_md(b: dict) -> str:
     L += ["", "## ③ 대형주 큰 움직임 (지수 대비 = 회사만의 움직임)", "| 종목 | 등락 | 기준 지수 대비 | 원인 종류(뉴스 제목 분류) |", "|---|---|---|---|"]
     L += [f"| {m['name']} ({m['ticker']}) | {f(m)} | {(format(m['rel'], '+.2f') + '%p') if m.get('rel_ok', True) else '— (지수 갱신 늦음)'} ({m['bench']}) | {', '.join(f'{k} {v}' for k, v in (m.get('driver_counts') or {}).items())} |"
           for m in b["movers"][:12]]
-    L += ["", "## ④ 시장을 크게 움직인 이야기 — 상위 3개 (움직임 × 보도량)"]
+    L += ["", "## ④ 시장을 크게 움직인 이야기 — 상위 3개 (움직임 × 보도량)",
+          f"**오늘 형식: {b.get('format', '심층')}** (manual/09 §2 — 기본은 심층, 심층거리가 없을 때만 브리핑)"]
     for i, s in enumerate(b["stories"], 1):
         L += ["", f"### {i}. {s['name']} {s['pct']:+.2f}% — 원인 종류: **{s['driver']}** · **{s.get('depth', '브리핑')}**{' (' + ', '.join(s.get('depth_why') or []) + ')' if s.get('depth_why') else ''}",
               f"- 각도: {s['angle']}", f"- 질문: {s['question']}",

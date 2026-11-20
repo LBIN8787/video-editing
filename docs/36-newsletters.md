@@ -2,26 +2,32 @@
 
 > 사용자: "save 를 포함하여 소스탐색겸 참조용으로 무료 뉴스레터를 구독한 상황" → GPT 안 두 개 검토 → "진행해주세요".
 > 코드 `ytflow/stages/newsletters.py` · 목록·분류 규칙 `config/newsletters.yaml` · 결과 `inbox/newsletters/<YYYYMMDD>.md|json`
+>
+> **수집 주기:** 05:40 KST(오전 창)·17:40 KST(오후 창) 12시간 주기, 한 번에 한 에이전트만(잠금 `inbox/newsletters/.lock.json` — §5-1). 카테고리 5개: 시장·AI·일상·심리·뇌과학·역사·시사(§3).
 
 ## 0. 원칙
 - 뉴스레터는 **단서**입니다. "어제 무엇이 화제였나"만 얻고, 영상에 넣을 숫자·발언은 링크를 따라 **1차 출처**(공시·당국·논문·회사 발표)로 확인합니다 (manual/09 §3, SAVE 와 같은 자리).
 - 뉴스레터 문장을 대본·화면에 옮기지 않습니다. 저장소에는 **제목·링크·분류만** 커밋하고, 메일 본문은 `.cache/` 에만 둡니다.
 - 메일을 그대로 쌓지 않고 소재마다 다섯 칸으로 나눕니다: **소재(원래 제목) · 원문·기사 · 원자료·통계 · 영상·이미지 · 재사용 조건** (+ 어느 뉴스레터, 여러 곳이 같이 다뤘는지).
 
-## 1. 구독 상태 (2026-11-15 확인 · `config/newsletters.yaml` 의 `status` 와 같음)
+## 1. 구독 상태 (2026-11-20 확인 · `config/newsletters.yaml` 의 `status` 와 같음)
 상태 값: `subscribed`(구독 확정 — 웰컴 메일 확인) · `planned`(신청·인증은 끝났고 본편 첫 발송 확인 대기) · `blocked`(가입 막힘 — **우회하지 않음**, 사람이 휴대폰에서 가입).
 
-| 채널 | 뉴스레터 | 상태 |
+**카테고리 5개 (2026-11-20 사용자 승인):** `시장`(market) · `AI`(ai) · `일상·심리·뇌과학`(curiosity — 예전 이름 '호기심', 키는 그대로) · `역사`(history) · `시사`(issues).
+
+| 카테고리 | 뉴스레터 | 상태 |
 |---|---|---|
 | 시장 | Axios (AM·Markets) · The Daily Upside · 어피티 머니레터 | `subscribed` — 웰컴 메일 확인 |
+| 시장 | FinancialJuice 실시간 시장·거시 속보 (RSS) | `subscribed` — 공개 RSS, 2026-11-20 추가 |
 | 시장 | KDI 경제정보센터 | `planned` — 본인인증 링크 완료. 본편 첫 발송 대기 |
 | 시장 | Bloomberg 아침 판 · WSJ The 10-Point | `blocked` — Bloomberg 는 신청 버튼이 동작하지 않음, WSJ 는 봇 차단+로그인. **우회하지 않음** |
 | AI | TLDR AI | `subscribed` — 웰컴 메일 확인 |
 | AI | TLDR Tech | `subscribed` — 신청 완료. 본편 첫 발송 확인 대기 |
 | AI | The Batch (DeepLearning.AI) | `planned` — 접수 완료. 주간 첫 호로 확인 |
 | AI | Simon Willison | `subscribed` — 메일이 아니라 블로그 RSS |
-| 호기심 | Quanta · Aeon · The Public Domain Review | `subscribed` — 웰컴 메일 확인 |
-| 호기심 | JSTOR Daily | `planned` — ITHAKA 확인 링크 완료. 본편 첫 발송 대기 |
+| 일상·심리·뇌과학 | Quanta · Aeon (역사도 같이) · 심리 RSS 3곳 (Psyche·APS·Greater Good) | `subscribed` — 웰컴 메일 확인 |
+| 역사 | Smithsonian History · HistoryExtra · Medievalists.net (RSS) | `subscribed` — 2026-11-20 추가 |
+| 역사 | The Public Domain Review · Aeon · JSTOR Daily | `subscribed`/`planned` — 역사·일상 소재를 함께 냄 |
 | 시사 | Our World in Data Brief · Pew Research (KDI 도 같이) | `subscribed` — 웰컴 메일 확인 |
 | 시사 | 뉴닉 | `blocked` — 비밀번호+본인인증 |
 
@@ -35,12 +41,13 @@
 ## 2. 흐름
 ```
 Gmail '뉴스레터' 라벨 ─(에이전트, Gmail 커넥터)→ .cache/newsletters/raw/*.json ─ newsletters ingest ─┐
-블로그 RSS ──────────────────────────────────────────────────── newsletters rss ──────┤
-                                                                                        ▼
-                                              inbox/newsletters/<YYYYMMDD>.md|json (채널별 표, 2주 안 중복 제거)
-                                                                                        ▼
-                         daily (시장·시사) → daily_brief.md 끝 '⑦ 뉴스레터 화제'  ·  호기심·AI 는 show 로 주간 소재 고르기
+공개 RSS (시장·기술·심리·역사) ───────────────────── newsletters rss ──────┼→ inbox/newsletters/<YYYYMMDD>.md|json (5개 카테고리 표, 2주 안 중복 제거)
+X 공개 포스트 (속보·인사이트 계정, 하루 1회) ─(에이전트, x-search)────────────┘        ▼
+
+                         daily (시장·시사) → daily_brief.md 끝 '⑦ 뉴스레터 화제'  ·  일상·AI·역사는 show 로 소재 고르기
 ```
+
+**한 번에 한 수집자만:** 수집 창마다 `inbox/newsletters/.lock.json` 을 먼저 선점한 한 에이전트만 돌립니다 (§5-1).
 
 ### 메일 가져오기 (에이전트가 할 일)
 클라우드의 Python 은 Gmail 에 직접 들어가지 못합니다(프록시 키는 Gmail 범위가 아님). Gmail 커넥터를 가진 에이전트가 합니다.
@@ -60,7 +67,10 @@ python -m ytflow daily --project <YYYYMMDD>-market-daily     # 시장 브리핑 
 ```
 
 ## 3. 분류 규칙 (`config/newsletters.yaml`)
-- **채널:** 뉴스레터마다 기본 채널(`brands`). 여러 개면 소재 제목의 낱말(`route`)로 나눔 — 예: TLDR Tech 의 실적 기사 → 시장.
+- **카테고리 5개:** `market`(시장) · `ai`(AI) · `curiosity`(일상·심리·뇌과학) · `history`(역사) · `issues`(시사). `curiosity` 키는 기존 호환을 위해 이름만 바꿔 유지.
+- **채널:** 뉴스레터마다 기본 채널(`brands`). 여러 개면 소재 제목의 낱말(`route`)로 나눔 — 예: TLDR Tech 의 실적 기사 → 시장, Smithsonian History 의 전쟁사 기사 → 역사.
+  - `history` 낱말: history·ancient·empire·dynasty·war·century·medieval·archaeology·historical·역사·고대·중세·왕조·제국·근현대·발굴
+  - `curiosity` 낱말: brain·psychology·neuroscience·habit·sleep·behavior·cognitive·stress·dopamine·science·physics·biology·health·why·뇌·심리·습관·수면·행동·인지·도파민·과학·우주·진화 (2026-11-20 역사 낱말을 `history` 로 떼어 냄)
 - **링크 종류:** 도메인으로 원문(1차: sec.gov·DART·연준·arXiv·GitHub·회사 IR…) / 원자료(OWID·FRED·KOSIS·Pew…) / 영상·이미지(LoC·NASA·Commons·스미스소니언…) / 보도·글. 'See the data' 같은 짧은 링크는 바로 앞 소재에 붙음.
 - **재사용 조건:** 도메인마다 한 줄 (`reuse`). 없으면 "보도·글: 단서만". OWID 는 CC BY 지만 원자료로 다시 그리기를 권장, Pew 는 차트 이미지를 그대로 쓰지 않음.
 - **중복:** 최근 14일 안에 나온 주소는 새로 넣지 않고 '같이 다룸'에 뉴스레터를 더함 → 여러 곳이 다룬 소재가 위로.
@@ -72,9 +82,37 @@ python -m ytflow archive si "steam locomotive"     # CC0 이미지만, 소장처
 ```
 키: 환경변수 `SI_API_KEY`(api.data.gov 무료 키). 없으면 `DEMO_KEY`(시간당 약 30회).
 
-## 5. 남은 일 / 현재 운영 체계
+## 5. 남은 일 / 현재 운영 체계 (2026-11-20 개편)
 
-### 5-1. Codex 예약 실행
+### 5-1. 정기 수집 창(12시간 주기)과 단일 수집자 잠금
+
+정기 수집 창은 하루 두 번, **05:40 KST(오전 창 `YYYY-MM-DD-0540`)** 과 **17:40 KST(오후 창 `YYYY-MM-DD-1740`)** 입니다. 07:50 보충 수집은 오전 창에 딸린 보충입니다.
+
+**목적:** Super의 크레딧 한도가 다해도 다른 에이전트(Codex·Claude Code 등)가 이어서 수집할 수 있도록 하되, **수집은 한 번에 한 에이전트만** 하고 같은 회차를 두 번 돌리지 않는다.
+
+**잠금 파일:** `inbox/newsletters/.lock.json` (추적·커밋 대상, 초기값)
+```json
+{"window": null, "owner": null, "status": "idle", "started_at": null, "finished_at": null}
+```
+
+**수집 전 절차 (어떤 에이전트든 같은 순서)**
+1. 전용 클론에서 `git pull --rebase` 로 `main` 최신을 받는다. 공용 작업 사본을 직접 쓰지 않는다.
+2. `.lock.json` 을 확인한다.
+   - 현재 창(`window`)이 이미 `status: "done"` → **즉시 중단**(이미 수집됨).
+   - `status: "running"` 이고 `started_at` 이 **30분 이내** → **즉시 중단**(다른 에이전트가 진행 중).
+   - `running` 인데 `started_at` 이 30분을 넘었으면 끊긴 회차로 보고 선점한다.
+3. **선점 커밋:** 수집 실행 **전에** `.lock.json` 을 `{"window": "YYYY-MM-DD-0540 또는 -1740", "owner": "<agent>", "status": "running", "started_at": "<ISO8601 KST>"}` 로 바꿔 **커밋·푸시**한다.
+   - 푸시가 `non-fast-forward` 로 실패하면 다른 에이전트가 먼저 선점한 것이다 → **재시도하지 않고 즉시 중단**한다.
+4. 수집(`newsletter_gmail` · `ytflow newsletters rss` · X 검색)을 실행한다.
+5. 끝나면(성공·부분 성공 모두) `.lock.json` 을 `status: "done", finished_at: <ISO8601 KST>` 로 바꿔 `inbox/newsletters/` 변경분과 **함께** 커밋·푸시한다. 실패로 끝냈으면 `status: "failed"` 와 `finished_at` 을 남긴다(다음 창에서 다시 시도).
+
+**1순위·폴백 규칙**
+- 기본 수집자는 **Super**(05:40 · 17:40 정시).
+- Super가 크레딧 소진 등으로 못 돌아 **창 시작 20분 후(06:00 · 18:00 KST)까지 `.lock.json` 에 해당 창 선점 기록이 없으면**, 다른 에이전트(Codex · Claude Code 등) 중 **먼저 확인한 단 1개만** 위 3번 선점 커밋 후 수집을 대행하고, 끝나면 `done` 으로 갱신한다.
+- 이미 `done` 인 창은 누구도 다시 돌리지 않는다. 늦게 확인한 에이전트가 있더라도 마찬가지다.
+- 기존 Codex `05:40` · `07:50` 상시 병렬 실행도 이 잠금 규칙을 따른다(창은 `-0540` 하나로 보며, 07:50 은 05:40 창이 `done` 일 때만 보충으로 돈다).
+
+### 5-2. Codex 예약 실행 (같은 잠금 규칙을 따른다)
 
 매일 **05:40 KST** 기본 수집, **07:50 KST** 보충 수집입니다. 두 실행은 같은 방법을 사용합니다. 로컬 Codex 실행 환경은 Gmail 커넥터 읽기·라벨 정리 권한, Windows GitHub CLI 로그인과 `LBIN8787/video-editing`의 `main` 쓰기 권한이 필요합니다.
 
@@ -138,3 +176,30 @@ Greater Good는 피드는 정상이나 최근 2일 항목 0건. 전체 시장/AI
 - [예술가는 기억에 남는 것에 직관이 있는가](https://www.psychologicalscience.org/news/2026-nov-artists-memorable.html)
 - [외딴 섬 공동체에서 사는 것의 절충](https://psyche.co/videos/the-trade-offs-of-life-in-a-remote-off-the-grid-island-community)
 - [부모가 떠난 뒤 집을 놓지 못한 경험](https://psyche.co/turning-points/after-my-parents-died-why-did-i-hold-on-to-their-home)
+
+## 7. 역사 RSS · FinancialJuice · X 통합 수집 (2026-11-20 사용자 승인)
+
+### 7-1. 새로 넣은 공개 소스
+| id | 이름 | 주소 | brands | 성격 |
+|---|---|---|---|---|
+| `financialjuice` | FinancialJuice (실시간 시장·거시 속보) | `https://www.financialjuice.com/feed.ashx?xy=rss` | 시장·시사 | 수시 — 하루 100건 안팎, 경제지표·중앙은행 발언·지정학 속보 |
+| `smithsonian-history` | Smithsonian History | `https://www.smithsonianmag.com/rss/history/` | 역사 | 매일 — 역사·고고학·문화사 |
+| `historyextra` | HistoryExtra (BBC History Magazine) | `https://www.historyextra.com/feed/` | 역사 | 주 3~5회 — 세계사·고고학 (일부 글은 회원 전용 표기) |
+| `medievalists` | Medievalists.net | `https://www.medievalists.net/feed/` | 역사 | 수시 — 중세사 연구·논문 소개 |
+
+- 선별 기준: 실제로 HTTP 200 + 유효 RSS 로 열리는 것만 넣었습니다. `History Today`(`https://www.historytoday.com/feed/rss.xml`)는 Cloudflare 403, `Ancient Origins`는 최신 글이 2026-08 에 멈춰 제외했습니다(우회하지 않음).
+- 브랜드 조정: `pdr` → `[history, curiosity]`, `jstor` → `[history, curiosity, issues]`, `aeon` → `[curiosity, history]`. `curiosity`(일상·심리·뇌과학)에서는 역사 낱말을 빼고 `history` 로 옮겼습니다(§3).
+- X(트위터) 공개 포스트는 저장소 코드가 아니라 **수집 에이전트가 `x-search`로 확인**해 같은 카테고리로 `inbox/newsletters/` 에 합칩니다(예약 실행 정의 참조). X API 키가 없어도 RSS·메일 경로는 그대로 돕니다.
+
+### 7-2. 수집기가 걸러 내던 두 가지 (같은 날 고침)
+- **FinancialJuice `?xy=rss`**: 피드가 모든 기사 주소에 붙이는 공개 표식인데 `public_link` 의 "낯선 쿼리 키" 규칙에 걸려 **100건 전부 제외**되고 있었습니다. `unwrap()` 에서 `xy` 키만 떼어 내 정규 기사 주소로 저장합니다(사람마다 다른 값이 아님).
+- **긴 기사 슬러그**: `public_link` 의 "48자 이상 경로 한 덩이 = 수신자별 식별자" 규칙이 Smithsonian·Medievalists·HistoryExtra 의 정상 슬러그까지 막아 역사 피드가 0건이었습니다. RSS 경로는 `public_link(url, strict=False)` 로 그 규칙만 빼고, 관리·탈퇴 주소·추적 호스트·민감 쿼리 차단은 그대로 둡니다(메일 경로는 기존 그대로 엄격).
+
+### 7-3. 검증 기록 (2026-11-20 KST)
+- `python -m ytflow newsletters rss` 1회 실행: 오류 없이 **RSS 소재 150개**.
+  - FinancialJuice **100건** 수집 → `시장` 86 · `시사` 14, 모두 `보도·글`.
+  - 역사 3개 피드 **6건** 수집 → 모두 `역사`(smithsonian-history 1 · historyextra 3 · medievalists 2).
+- `python -m ytflow newsletters show --brand history --days 2` 로 역사 소재 확인, `section(("history",))` 로 `daily_brief` ⑦ 붙임 문구 확인.
+- `tests/test_newsletters_security.py` · `tests/test_newsletters_cutoff.py` 13개 통과, `py_compile` 통과.
+- **FinancialJuice 는 같은 IP 에서 짧은 시간에 여러 번 부르면 HTTP 429** 를 돌려줍니다(수 분 쉬면 다시 200). 수집기는 피드 하나가 막히면 `RSS 건너뜀 …` 한 줄만 남기고 나머지를 계속 모으므로 창이 깨지지 않습니다. 창마다 **한 번만** 부르는 것이 원칙입니다(§5-1 잠금).
+- 테스트로 생긴 `inbox/newsletters/<날짜>.md|json` 변경분은 되돌리고, 잠금 파일 · 설정 · 코드 · 이 문서만 커밋했습니다.
