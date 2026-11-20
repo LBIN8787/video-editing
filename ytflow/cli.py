@@ -282,10 +282,13 @@ def main(argv: list[str] | None = None) -> None:
     lk = sub.add_parser("looks", help="화풍 목록 — 모션그래픽·삽화·실사 색보정 (styles/looks.yaml, 영상마다 고름)")
     lk.add_argument("--kind", choices=["motion", "illust", "footage"], default=None)
     lk.add_argument("--gallery", default="", help="눈으로 고르는 예시 페이지(HTML)를 이 경로에 만듦 — '화풍목록 보여줘' (skills/looks-gallery)")
-    lk.add_argument("--draw", default="", choices=["", "codex", "manual"], help="예시 없는 삽화 화풍을 같은 장면으로 그리기 (codex = PC 의 Codex 구독, manual = 주문서만)")
+    lk.add_argument("--draw", default="", choices=["", "auto", "codex", "gemini", "manual"], help="예시 없는 삽화 화풍을 같은 장면으로 그리기 (auto: Codex 구독 → Gemini 키 → 주문서만)")
+    lk.add_argument("--order", action="store_true", help="클라우드: 예시 그림을 PC 할 일로 (inbox/pc-tasks)")
+    lk.add_argument("--register", action="store_true", help="예시 폴더에 직접 넣은 그림을 목록(styles/looks_examples.json)에 올림")
     lk.add_argument("--examples", default="", help="삽화 예시 그림 폴더 (<화풍 id>.png) — 기본 YTFLOW_DRIVE/looks 또는 ~/.cache/ytflow/looks")
     lc = sub.add_parser("look", help="이 영상의 화풍 고르기/보기 → edit.yaml look (styles/looks.yaml)")
     lc.add_argument("project"); lc.add_argument("--motion", default=""); lc.add_argument("--illust", default=""); lc.add_argument("--footage", default="")
+    lc.add_argument("--set", action="append", default=[], help="구성요소 카테고리=스타일 (styles/components.yaml): text=count-up graphic=stagger transition=match-move bgm=rest-now …")
     sub.add_parser("recipes", help="편집 스타일 등록부 목록 (styles/recipes/*.yaml — 파일 하나 추가로 늘림)")
     spk = sub.add_parser("style-pick", help="topic_brief 에 맞는 편집 스타일 추천 (영상 전체·훅·결론) → 01_research/style_pick.md")
     spk.add_argument("project")
@@ -492,17 +495,23 @@ def main(argv: list[str] | None = None) -> None:
         shorts_hf.make(Project.open(a.project))
     elif a.cmd == "looks":
         from .stages import looks
+        if a.order:
+            looks.order()
+        if a.register:
+            print("[looks] 등록:", looks.register())
         if a.draw:
             print("[looks] 그림:", looks.draw_examples(a.draw) or f"주문서만 → {looks.examples_dir() / 'ORDERS.md'}")
         if a.gallery:
             from pathlib import Path as _P
             out = looks.gallery(_P(a.gallery), _P(a.examples) if a.examples else None)
             print(f"[looks] 화풍 목록 페이지 → {out}" + (f" (공유 페이지 {looks.GALLERY_URL} 에 다시 올림)" if looks.GALLERY_URL else ""))
-        elif not a.draw:
+        elif not (a.draw or a.order or a.register):
             print(looks.listing(a.kind))
     elif a.cmd == "look":
         from .stages import looks
         cur = looks.choose(Project.open(a.project).path, a.motion, a.illust, a.footage)
+        if a.set:
+            cur = looks.choose_any(Project.open(a.project).path, a.set)
         print("화풍:", ", ".join(f"{k}={v}" for k, v in cur.items()) or "고르지 않음 (python -m ytflow looks 로 목록)")
     elif a.cmd == "recipes":
         from .stages import stylepick

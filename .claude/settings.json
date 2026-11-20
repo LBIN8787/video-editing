@@ -17,6 +17,10 @@
           {
             "type": "command",
             "command": "cd \"$CLAUDE_PROJECT_DIR\" && git config core.hooksPath .githooks && python3 scripts/manual_guard.py status 2>/dev/null | head -3 || true"
+          },
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR\" && python3 scripts/pc_tasks.py 2>/dev/null || true"
           }
         ]
       }

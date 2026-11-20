@@ -1,0 +1,50 @@
+# 영상의 구성요소 — 카테고리별로 나눈 스타일 (2026-11-20 사용자: "영상의 구성요소를 카테고리별로 나눠서 그 카테고리 안에서 이제 화풍? 스타일? 별로
+#   또 나눠달라는거지 그래서 그 각 카테고리에서 각 화풍? 스타일? 들을 조합하여서 영상이 나타난다 이런 원리 느낌으로")
+#
+# 영상 = 카테고리마다 하나씩 고른 스타일의 조합. 화풍(어떻게 보이나)과 연출(어떻게 움직이고 보여 주나)은 다른 축이라 서로 섞을 수 있음.
+# 보기: python -m ytflow looks --gallery <out.html>  ('화풍목록 보여줘', skills/looks-gallery)
+# 고르기: python -m ytflow look <프로젝트> --set text=count-up --set transition=match-move … → edit.yaml look.<key>
+#   key 가 motion·illust·footage 면 렌더에 바로 쓰임(스킨·그림 주문서·색보정). 연출 key 는 이 영상의 '기본 연출' — 장면마다 바꿀 수 있음(장면표·edit-plan).
+# 스타일을 더할 때: 화풍은 styles/looks.yaml, 연출은 styles/techniques.yaml, 배경음은 assets/bgm/bgm.yaml 에 항목 하나.
+
+categories:
+  - key: motion
+    axis: 화풍
+    name: 화면 화풍 (모션그래픽)
+    what: 바탕·색·글꼴·선 — 도형·글자·막대가 '어떻게 보이나'
+    source: {looks: motion}
+  - key: illust
+    axis: 화풍
+    name: 삽화 화풍
+    what: 실사도 모션그래픽도 어려운 박자에 부분적으로 쓰는 그림의 그림체
+    source: {looks: illust}
+  - key: footage
+    axis: 화풍
+    name: 실사 색보정
+    what: 인물 실사 소스영상을 한 편 안에서 같은 색으로 묶는 보정
+    source: {looks: footage}
+  - key: text
+    axis: 연출
+    name: 글자 연출
+    what: 제목·숫자·핵심어가 어떻게 나타나나
+    source: {techniques: [글자]}
+  - key: graphic
+    axis: 연출
+    name: 그래픽 연출
+    what: 사물·도형·데이터·관계가 어떻게 움직이며 설명하나
+    source: {techniques: [선·모양, 데이터, 관계·상태, 화면 나누기, 증거, 겹치기]}
+  - key: camera
+    axis: 연출
+    name: 카메라·깊이
+    what: 화면을 어디서 보고 어떻게 다가가나
+    source: {techniques: [사진·깊이]}
+  - key: transition
+    axis: 연출
+    name: 장면 전환
+    what: 한 장면에서 다음 장면으로 어떻게 넘어가나
+    source: {techniques: [이어 주기, 전환]}
+  - key: bgm
+    axis: 소리
+    name: 배경음
+    what: 내레이션 밑에 까는 음악의 분위기
+    source: {bgm: assets/bgm/bgm.yaml}
