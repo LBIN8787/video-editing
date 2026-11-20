@@ -36,7 +36,8 @@ CARD_INK = "#1E2330"   # 카드 안 그림·글자 (밝은 카드 위라 테마�
 THEMES = {
     "dark": {"#1F242E": "#ECE8E0", "#20242C": "#D9D5CC", "#55595f": "#A8ACB3", "#3A3F48": "#C9CCD2", "#4A4E55": "#B4B8BF",
              "#B8322E": "#E5533F", "#B5302B": "#F0614C", "#C33A31": "#E2483A", "#C2463C": "#E0503F", "#8E2420": "#9E2A22",
-             "#7E1C18": "#8C241C", "rgba(30,24,16,": "rgba(0,0,0,", "rgba(238,233,223,.94)": "rgba(34,36,42,.94)"},
+             "#7E1C18": "#8C241C", "rgba(30,24,16,": "rgba(0,0,0,", "rgba(238,233,223,.94)": "rgba(34,36,42,.94)",
+             "#2E7D4F": "#62C98A"},
 }
 
 
@@ -527,7 +528,7 @@ def _el_html(D, sc, key: str, el: dict) -> tuple[str, float, float]:
         return inner, w, el.get("h", w)
     if k == "text":
         size = el.get("size", 56)
-        col = {"red": "#B5302B", "ink": INK, "muted": MUTED, "navy": NAVY}.get(el.get("color", "ink"), el.get("color", INK))
+        col = {"red": "#B5302B", "ink": INK, "muted": MUTED, "navy": NAVY, "green": "#2E7D4F"}.get(el.get("color", "ink"), el.get("color", INK))
         font = paper.PEN if el.get("pen") else HEAVY
         if el.get("pen") and getattr(D, "typeset", None):   # 글꼴 체계가 펜을 고딕으로 바꾸면 폭도 고딕으로 잼
             font = D.typeset["alias"].get("pen", paper.PEN)
