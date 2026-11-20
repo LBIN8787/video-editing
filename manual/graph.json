@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-20T08:50:08",
- "source_hash": "a69c616dac63",
+ "generated": "2026-11-20T08:52:54",
+ "source_hash": "4bdc4a4283ad",
  "audit": {
   "date": "2026-11-19T13:54",
   "counts": {
@@ -121,14 +121,14 @@
   "sections": 174,
   "must": 26,
   "auto": 41,
-  "intents": 149,
+  "intents": 150,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 81,
   "terms": 135,
   "bans": 160,
-  "feedback": 91,
+  "feedback": 92,
   "topics": 4,
   "episodes": 35,
   "main_situations": 17,
@@ -10529,7 +10529,15 @@
    "label": "v65",
    "summary": "지금의 고리: 모든 채널 주제 후보에 최신 시사·핫 키워드(why_now) — 01 §3-1, 04 §2",
    "applied": [],
-   "themes": []
+   "themes": [],
+   "commit": {
+    "sha": "2f4dcefee68491ca905e47d047259f661e01b6d4",
+    "subject": "매뉴얼 v65 지금의 고리: 모든 채널 주제 후보에 최신 시사·핫 키워드(why_now) — 01 §3-1, 04 §2, AGENTS, 피드백 기록·그래프",
+    "date": "2026-11-20",
+    "other_files": [
+     "AGENTS.md"
+    ]
+   }
   },
   {
    "id": "rev:1",
@@ -19090,6 +19098,34 @@
    ],
    "themes": [],
    "ann_key": "intent:6750cd32",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:683aa512",
+   "kind": "intent",
+   "quote": "주제 자체를 최근 시사나 사람들의 유행 이런걸 바탕으로 다시 선정해줘 솔직히 이번 주제 사람들이 별로 안궁금할거같아",
+   "label": "주제 자체를 최근 시사나 사람들의 유행 이런걸 바탕으로 다시 선정해줘 솔직히 이번 주제 사람들이 별로 안궁금",
+   "versions": [],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "fb:92",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:683aa512"
+   ],
+   "themes": [
+    "background"
+   ],
+   "ann_key": "intent:683aa512",
    "meaning": "",
    "not_meant": [],
    "note": "",
@@ -28976,6 +29012,34 @@
    "tier_note": "",
    "tier_fixed": true,
    "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:92",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "주제 자체를 최근 시사나 사람들의 유행 이런걸 바탕으로 다시 선정해줘 솔직히 이번 주제 사람들이 별로 안궁금할거같아",
+   "label": "주제 자체를 최근 시사나 사람들의 유행 이런걸 바탕으로 다시 선정해줘 솔직히 이번 주제 사람들이 별로 안궁금",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261120-curiosity-nextlane",
+   "about": "",
+   "note": "옆 줄 편 D1 다시: 시사·유행 고리가 없는(why_now 약함, 지금성 1) 주제는 사용자 판단으로 보류 → v65 '지금의 고리'로 후보 다시 찾기. 마트 줄·차선 이야기가 따로 논다는 지적도 함께(같은 날)",
+   "pending": false,
+   "themes": [
+    "background"
+   ],
+   "scope": "trial",
+   "intent": "intent:683aa512",
+   "tier_key": "fb:683aa512",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": false,
+   "tier": "trial",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "실험 기록"
   },
   {
    "id": "layer:main",
@@ -53892,6 +53956,16 @@
    "kind": "about"
   },
   {
+   "s": "intent:683aa512",
+   "t": "fb:92",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:683aa512",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
    "s": "intent:adc35a90",
    "t": "ver:42",
    "kind": "interpreted_in"
@@ -58634,6 +58708,16 @@
   {
    "s": "fb:91",
    "t": "intent:ec33d0e9",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:92",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "fb:92",
+   "t": "intent:683aa512",
    "kind": "quoted_as"
   }
  ]
