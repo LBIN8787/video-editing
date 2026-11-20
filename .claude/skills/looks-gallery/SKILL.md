@@ -6,6 +6,7 @@ description: 영상 구성요소·화풍·연출 목록을 눈으로 보여 준�
 # 화풍 목록 보여 주기 (2026-11-20 사용자: "나중에 화풍목록 보여줘 하면 화풍목록의 예시를 볼 수 있도록 — 시각적으로")
 
 공유 페이지: https://claude.ai/artifact/K4CRgsyTYsWGCDw5RoCtam (`ytflow/stages/looks.py` 의 `GALLERY_URL`)
+함께 보여 줄 것: 장면 종류·전환·겹치기의 **연출 예시 목록** https://claude.ai/artifact/SPHyXdpGmcdPwMQu7cpMdP (`scripts/visual_page.py`) · 만드는 법 `styles/hybrid/scenes/`(실제 완성본 예시 `real-examples.md`)·`styles/looks/README.md`·`styles/components.md`
 
 ## 원리 (2026-11-20 사용자)
 영상 = 구성요소 카테고리마다 고른 스타일의 **조합**(`styles/components.yaml`). 화풍(어떻게 보이나)과 연출(어떻게 움직이고 보여 주나)은 다른 축이라 서로 섞는다 — 같은 모션그래픽도 연출이 다르면 전혀 다른 장면이 된다.
