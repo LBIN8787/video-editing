@@ -525,6 +525,8 @@ def _el_html(D, sc, key: str, el: dict) -> tuple[str, float, float]:
         size = el.get("size", 56)
         col = {"red": "#B5302B", "ink": INK, "muted": MUTED, "navy": NAVY}.get(el.get("color", "ink"), el.get("color", INK))
         font = paper.PEN if el.get("pen") else HEAVY
+        if el.get("pen") and getattr(D, "typeset", None):   # 글꼴 체계가 펜을 고딕으로 바꾸면 폭도 고딕으로 잼
+            font = D.typeset["alias"].get("pen", paper.PEN)
         fam = "pen" if el.get("pen") else "heavy"
         w = paper.F(font, size).getlength(el.get("text", "")) + 10
         inner = (f'<div style="font-family:{fam};font-size:{size}px;color:{col};white-space:nowrap;line-height:1.1;'
@@ -558,6 +560,7 @@ def s_board(D, sc: dict, bt: list, dur: float):
             continue
         inner, w, h = _el_html(D, sc, key, el)
         x, y = el["x"], el["y"]
+        x = min(max(x, w / 2 + 30), 1920 - w / 2 - 30)   # 화면 밖으로 나가지 않게 (2026-11-20 겹침 점검: 글꼴을 바꾸자 주석이 오른쪽 끝에서 잘림)
         if y + h / 2 > SAFE_BOTTOM:   # 자막 자리 위로 끌어올림 (2026-11-20 사용자: "자막이랑 영상 글씨가 겹치거나 … 잦습니다")
             y = SAFE_BOTTOM - h / 2
         i = D._id()

@@ -541,7 +541,10 @@ def s_quote(D: HDoc, sc: dict, bt: list, dur: float):
     D.items.append(f'<div id="{i}" style="position:absolute;left:250px;top:200px;width:1420px;height:540px;background:#FBF8F1;'
                    f'box-shadow:0 14px 34px rgba(0,0,0,.2);transform:rotate(-0.8deg)"></div>')
     D.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:30}},{{opacity:1,y:0,duration:0.5}},0.15);')
-    D.text(330, 290, "“", FT("value"), 160, D.red, at=0.4, anchor="lm")
+    if getattr(D, "typeset", None):   # 글꼴 체계(블랙한산스)의 따옴표는 크고 낮게 그려져 첫 줄에 닿음 → 왼쪽 위 여백으로 (2026-11-20 겹침 점검)
+        D.text(300, 250, "“", FT("value"), 110, D.red, at=0.4, anchor="lm")
+    else:
+        D.text(330, 290, "“", FT("value"), 160, D.red, at=0.4, anchor="lm")
     q = sc["quote"]
     lines, cur = [], ""
     for wd in q.split(" "):
