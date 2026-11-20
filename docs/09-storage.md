@@ -35,7 +35,7 @@ setx YTFLOW_DRIVE "G:\내 드라이브\ytflow"
 | 레퍼런스 영상 캡처·rea-video 분석 결과 (`skills/ref-watch-ego`) | `%YTFLOW_DRIVE%\refs\<영상ID>\` |
 | 사용자가 받은 원본 영상·자료 화면 | `%YTFLOW_DRIVE%\refs\` 또는 `%YTFLOW_DRIVE%\cache\` |
 | ytflow 캐시 (받은 자료·측정) | `YTFLOW_DRIVE` 가 있으면 자동으로 `%YTFLOW_DRIVE%\cache` (`ytflow/config.py`) |
-| 완성 영상·자막·업로드 문구 | `%YTFLOW_DRIVE%\영상\` (+ GitHub Release 보관은 그대로) |
+| 완성 영상·자막·업로드 문구 | `%YTFLOW_DRIVE%\영상\` (GitHub Release 는 공개해도 되는 것만 선택) |
 | 클라우드 세션에서 만든 파일 | Drive 커넥터로 `ytflow` 폴더에 업로드(파일당 10MB). 큰 영상은 rclone(§2 표) 또는 GitHub Release |
 
 ### 3) 예외 — Drive 동기화 폴더에 두면 안 되는 것
@@ -50,7 +50,7 @@ Drive 동기화는 파일 수만 개짜리 폴더와 계속 바뀌는 잠금 파
 코드(`ytflow/`), 문서(`docs/`, `AGENTS.md`), 절차서(`skills/`), 설정(`config/`, `channels/`, `styles/*/` 의 md·yaml·json),
 프로젝트 기획 파일(`projects/*/` 의 md·json·csv·srt·ass·yaml: 소스 목록·팩트시트·원고·대본·업로드 문구·보고서).
 
-## 2. 영상 보관 — GitHub Release (기본, 키 불필요) — 2026-11-07부터
+## 2. 영상 보관 — GitHub Release (선택: 공개해도 되는 것만, 키 불필요) — 2026-11-07부터 · 2026-11-20 사용자 "깃과 드라이브로 나눠서 해줘" 로 기본은 Drive(§0)
 `python -m ytflow upload <프로젝트> [--archive]` → 릴리스 `video-<프로젝트>` 에 final.mp4·자막·업로드 문구(+ footage.zip).
 임시 브랜치 `media/<프로젝트>` 를 push 하면 `.github/workflows/media-release.yml` 이 릴리스에 붙이고 브랜치를 지웁니다.
 Drive 토큰처럼 1시간마다 만료되는 키가 없습니다. 주소는 `05_edit/release.json`. 자세한 절차: `docs/11-playbook.md`.

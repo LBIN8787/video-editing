@@ -48,7 +48,7 @@
 | 5. 연출·그래픽 | `python -m ytflow style-pick` 추천 → **`python -m ytflow edit-plan`(메인 → 주제 레포 `topics/<brand>` → 박자마다 상황 → 장면·기법, `02_script/EDIT_CONTEXT.md`)** → `05-style-matching.md` 로 장면마다 연출 type 과 그래픽 팩 결정 | `edit.yaml`, `hybrid.json` 의 type·look | G5 연출 |
 | 6. 목소리·렌더 | 초안 edge-tts → 확정 후 ElevenLabs, `python -m ytflow hybrid <프로젝트>` | `05_edit/final.mp4`, `sync_qa.json`, `04_assets/layout_qa.json` | G6 완성본 |
 | 7. 제목·썸네일 | 제목 3개 + 썸네일 A/B/C, 이유 기록 | `05_edit/package.md`, `thumbnail_*.png` | G7 포장 |
-| 8. 보관·기록 | GitHub Release 업로드, 회차 기록, 남은 일 보고 | `05_edit/release.json`, `channels/<id>/episodes.md` | G8 보관 |
+| 8. 보관·기록 | 완성본은 Google Drive(`upload <프로젝트>`), Git 에는 기획·메타데이터. GitHub Release 는 공개해도 되는 것만 선택 (2026-11-20 사용자: "깃과 드라이브로 나눠서 해줘") · 회차 기록 · 남은 일 보고 | `05_edit/drive.json`(또는 `release.json`), `channels/<id>/episodes.md` | G8 보관 |
 
 ```bash
 python -m ytflow check <프로젝트>             # 지금까지 만든 단계의 게이트를 검사 → 05_edit/checklist.md
@@ -82,7 +82,7 @@ python -m ytflow check <프로젝트> --upto G4   # 대본까지만 검사 (렌�
 > 2026-11-15 사용자: "어지간하면 10분 정도로 깊게 분석·조사하고 관련 인사이트를 분석·소개하라는 의미지, 꼭 10분으로 하라는 건 아닙니다. 대본과 주제에 따라 더 길어질 수도 있습니다." → **10분은 맞춰야 할 숫자가 아니라 깊이의 최소선**입니다. 길이는 조사한 자료·해석·인사이트의 양이 정합니다. 할 이야기가 많으면 15분·20분도 괜찮고, 10분을 넘기려고 같은 말을 늘이지 않습니다.
 늘릴 때는 같은 말을 반복하지 않고 그 채널의 뼈대를 채운다 (호기심 §2-3, 시장 03 §0-4, 시사 08, AI 11 §3-1).
 **예외 (v34, 2026-11-15 사용자):** 시사의 '48시간 안 빠른 정리'만 5~8분을 허용합니다 (`hybrid.json` 에 `"format": "quick"`). 그보다 **많이 짧은(5분 미만) 이야기는 롱폼이 아니라 쇼츠**로 만듭니다.
-채널별 목표는 `channels/<id>/channel.yaml` 의 `target_minutes`. `check` G6 MUST: 완성본 10분 이상 (빠른 정리 5분 이상).
+**심층 우선 (2026-11-20 사용자: "심층이 가능하면 심층으로 안되면 일반으로 해줘 심층이 가능한데도 일반으로 하지 말라는 의미야 이에 따라서 영상길이도 결정해줘"):** 자료(1차 출처·원본 발언·인사이트)로 깊게 갈 수 있으면 심층으로 만들고, 그럴 수 없을 때만 일반(브리핑·빠른 정리)으로. 길이는 그 판단의 결과 — 심층은 길게, 일반은 그 형식의 길이(시장 09 §2). 채널별 목표는 `channels/<id>/channel.yaml` 의 `target_minutes`. `check` G6 MUST: 완성본 10분 이상 (빠른 정리 5분 이상).
 
 ### 2-5. 움직임 — 말하는 것이 화면에 생긴다 (v34, 2026-11-15 사용자: "동영상의 이점을 살려라 — 다음 PPT, 다음 PPT 가 아니라. 반드시 카메라를 움직이라는 뜻이 아니었다")
 > 처음 요청 (v25, 2026-11-14): "동영상이라는 동적인 움직임을 살려라. 지금은 사진을 잘 뽑은 정적인 동영상 같다" · "비싼 유료가 아니어도 된다 — 인포그래픽·자체 생성도 괜찮다. 핵심은 동적인 동영상, 그림체는 부가 요소".

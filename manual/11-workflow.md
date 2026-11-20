@@ -50,7 +50,7 @@
 | **S7 전체 렌더** | hybrid.json | 초안 목소리(edge-tts) → `hybrid` → `sync-qa` → 프레임 직접 확인 | `final.mp4`, `sync_qa.json`, `layout_qa.json`, `motion.json`, `final_sheet.png` | G6 MUST 전부 | G6 |
 | **S8 포장** | 완성본 | 제목 3 + 썸네일 A/B/C + `yt-pack` 설명란 | `package.md`, `thumbnail_*.png`, `youtube.md` | G7 | G7 |
 | **★D4 최종 승인** | 완성본 + 포장 | §2-2 — **사용자만** | `review` 기록(사용자 말을 그대로) | | |
-| **S9 마무리** | 승인 후 | ElevenLabs 최종 목소리 교체(승인 조건이면) · Release · `episodes.md` · 커밋 · **개정 제안**(작업 기록에서 '혼자 판단한 것') | `release.json`, §5 개정 기록 | G8 | G8 |
+| **S9 마무리** | 승인 후 | ElevenLabs 최종 목소리 교체(승인 조건이면) · 완성본 Drive 보관(`upload`, Release 는 공개 가능한 것만 선택) · `episodes.md` · 커밋 · **개정 제안**(작업 기록에서 '혼자 판단한 것') | `drive.json`(또는 `release.json`), §5 개정 기록 | G8 | G8 |
 
 ### 2-1. 한 편씩 따로 진행 (v2)
 - 세 편은 **각자의 S0~S9** 를 따로 갑니다. 다른 편의 결정을 기다리느라 멈추지 않습니다.
