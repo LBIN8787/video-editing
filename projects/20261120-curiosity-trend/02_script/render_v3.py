@@ -1,11 +1,9 @@
-"""넘기기 편 v3 렌더러 (v3.json, v3_overlay.html) — 삽화 칸·실제 사진·마디(무음 검은 화면) (20261120-curiosity-broll-sample 의 렌더러를 장면 kw 를 json 에서 읽게 고침)
-실사 B-roll + 모션그래픽 (삽화는 자료 화면이 없는 장면에만).
+"""넘기기 편 v3 렌더러 — 삽화, 모션그래픽, 실제 사진, 무음 마디.
 
-python render_broll.py <클립 폴더> <TTS 폴더> <BGM mp3> <작업 폴더> <출력 mp4>
-  클립 폴더: Mixkit 클립 <id>.mp4 (sample.json 의 clip), TTS 폴더: s<장면>_<박자>.mp3
-화면 = ffmpeg 로 자르고 색을 맞춘 실사 바탕 + Playwright 로 그린 투명 그래픽 층(sample_overlay.html) + 자막.
+python render_v3.py <클립 폴더> <TTS 폴더> none <작업 폴더> <출력 mp4>
+  TTS 폴더: s<장면>_<박자>.mp3. 삽화와 사진: ARTDIR.
 """
-import json, re, subprocess, sys
+import json, os, re, subprocess, sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -127,15 +125,24 @@ def footage(sc, clips, work):
 
 
 def main(clips, tts, bgm, work, out):
-    clips, tts, work, out = Path(clips), Path(tts), Path(work), Path(out)
+    clips, tts, work, out = (Path(path).resolve() for path in (clips, tts, work, out))
     work.mkdir(parents=True, exist_ok=True)
+    out.parent.mkdir(parents=True, exist_ok=True)
     spec = json.loads((HERE / "v3.json").read_text(encoding="utf-8"))
+    art_dir = Path(os.environ.get("ARTDIR", ".")).resolve()
+    for scene in spec["scenes"]:
+        if art := scene.get("art"):
+            art["ok"] = (art_dir / f"{art['sheet']}_{art['q']}.jpg").is_file()
+        if photo := scene.get("photo"):
+            scene["photoOk"] = (art_dir / photo).is_file()
     total = timeline(spec, tts)
-    print(f"총 {total:.1f}초")
-    bgs = [footage(sc, clips, work) for sc in spec["scenes"]]
-    (work / "bg.txt").write_text("".join(f"file '{b}'\n" for b in bgs))
+    print(f"총 {total:.1f}초", flush=True)
+    flat = all(scene["kind"] != "footage" and not scene.get("feed") for scene in spec["scenes"])
     base = work / "base.mp4"
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(work / "bg.txt"), "-c", "copy", str(base)], check=True)
+    if not flat:
+        bgs = [footage(sc, clips, work) for sc in spec["scenes"]]
+        (work / "bg.txt").write_text("".join(f"file '{b.as_posix()}'\n" for b in bgs), encoding="utf-8")
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(work / "bg.txt"), "-c", "copy", str(base)], check=True)
 
     # 소리: 내레이션 + 잔잔한 배경음(목소리 밑으로 낮춤)
     narr_in, flt = [], []
@@ -160,7 +167,9 @@ def main(clips, tts, bgm, work, out):
                     "-map", "[aout]", "-t", f"{total:.3f}", "-c:a", "aac", "-b:a", "192k", str(audio)], check=True)
 
     # 그래픽 층: 프레임마다 그려서 실사 위에 겹침
-    html = (HERE / "v3_overlay.html").read_text(encoding="utf-8").replace("FONTDIR", FONTS.as_uri()).replace("THUMBDIR", Path(__import__("os").environ.get("THUMBDIR", ".")).resolve().as_uri()).replace("ARTDIR", Path(__import__("os").environ.get("ARTDIR", ".")).resolve().as_uri())
+    html = (HERE / "v3_overlay.html").read_text(encoding="utf-8")
+    html = html.replace("FONTDIR", FONTS.as_uri()).replace("ARTDIR", art_dir.as_uri())
+    html = html.replace("THUMBDIR", Path(os.environ.get("THUMBDIR", ".")).resolve().as_uri())
     page_file = work / "overlay.html"
     page_file.write_text(html, encoding="utf-8")
     scenes = spec["scenes"]
@@ -180,14 +189,29 @@ def main(clips, tts, bgm, work, out):
         frames.append([si, round(t, 4), sub])
     job = {"frames": frames, "scenes": [{"data": {k: v for k, v in s.items() if not k.startswith("_")}, "B": s["_B"], "D": s["_D"]} for s in scenes]}
     (work / "frames.json").write_text(json.dumps(job, ensure_ascii=False), encoding="utf-8")
-    shot = subprocess.Popen(["node", str(HERE / "sample_frames.mjs"), str(work / "frames.json"), str(page_file)], stdout=subprocess.PIPE)
-    enc = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-i", str(base), "-f", "image2pipe", "-framerate", str(FPS), "-i", "-",
-                            "-i", str(audio), "-filter_complex", "[0:v][1:v]overlay=0:0:format=auto,format=yuv420p[v]",
-                            "-map", "[v]", "-map", "2:a", "-c:v", "libx264", "-preset", "medium", "-crf", "18",
-                            "-c:a", "copy", "-shortest", "-movflags", "+faststart", str(out)], stdin=shot.stdout)
-    shot.stdout.close()
-    shot.wait()
-    enc.wait()
+    image_input = ["-f", "image2pipe", "-framerate", str(FPS)]
+    if flat:
+        image_input += ["-c:v", "mjpeg"]
+        inputs = [*image_input, "-i", "-", "-i", str(audio), "-map", "0:v", "-map", "1:a",
+                  "-vf", "scale=in_range=pc:out_range=tv,format=yuv420p"]
+    else:
+        inputs = ["-i", str(base), *image_input, "-i", "-", "-i", str(audio),
+                  "-filter_complex", "[0:v][1:v]overlay=0:0:format=auto,format=yuv420p[v]",
+                  "-map", "[v]", "-map", "2:a"]
+    pending = out.with_name(f"{out.stem}.rendering{out.suffix}")
+    command = ["node", str(HERE / "sample_frames.mjs"), str(work / "frames.json"), str(page_file)]
+    if flat:
+        command.append("jpeg")
+    with subprocess.Popen(command, stdout=subprocess.PIPE) as shot:
+        enc = subprocess.run(["ffmpeg", "-v", "error", "-y", *inputs, "-c:v", "libx264", "-preset", "fast",
+                              "-crf", "18", "-c:a", "copy", "-shortest", "-movflags", "+faststart", str(pending)],
+                             stdin=shot.stdout)
+        shot.stdout.close()
+        shot_status = shot.wait()
+    enc.check_returncode()
+    if shot_status:
+        raise subprocess.CalledProcessError(shot_status, command)
+    pending.replace(out)
     # 장면 시각 기록 (검토용)
     (work / "timeline.json").write_text(json.dumps([{"id": s["id"], "t0": round(s["_T0"], 2), "dur": round(s["_D"], 2),
                                                      "kind": s["kind"], "mg": s.get("mg")} for s in scenes], ensure_ascii=False, indent=1))
