@@ -1181,6 +1181,9 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     D._work = work
     from . import graphics
     if not graphics.dispatch(D, sc, bt, dur, RENDER):   # 그래픽 팩이 다른 컴포넌트(그림)를 고르면 그걸로
+        if sc["type"] in ("afterline", "spread", "share", "motionboard") and not sc.get("theme"):
+            # 설명 무대 바탕 기본값: 시장은 어두운 무대 (2026-11-20 사용자: "설명부분은 배경 공통으로 해주세요 어두운걸로요")
+            sc["theme"] = spec.get("explain_theme") or {"market": "dark"}.get(spec.get("brand", ""), "paper")
         RENDER[sc["type"]](D, sc, bt, dur)
         if sc.get("insight"):   # v36: 사람·매체의 시각은 사실과 다르게 표시
             D.opinion_tag(dark=sc["type"] in ("bite", "versus") or D.skin.get("dark", False))
