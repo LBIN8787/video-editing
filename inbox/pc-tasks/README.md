@@ -17,7 +17,7 @@ PC 에서 **한 번만** 설치하면, 로그인해 있는 동안 10분마다 �
 ```powershell
 # 저장소 폴더에서 (PowerShell) — 한 번만
 powershell -ExecutionPolicy Bypass -File scripts\install_pc_worker.ps1
-# 끄기: Unregister-ScheduledTask -TaskName ytflow-pc-worker -Confirm:$false     로그: %LOCALAPPDATA%\ytflow\pc_worker.log
+# 끄기: Unregister-ScheduledTask -TaskName ytflow-pc-worker -Confirm:$false     로그: %YTFLOW_DRIVE%\_local\pc-worker\pc_worker.log
 ```
 필요한 것: `codex login`(ChatGPT 구독 — GPT 이미지), `YTFLOW_DRIVE`(Drive for desktop 의 ytflow 폴더), Git Bash·ffmpeg·node(렌더), 목소리 최종본은 `ELEVENLABS_API_KEY`(없으면 edge-tts 초안).
 
