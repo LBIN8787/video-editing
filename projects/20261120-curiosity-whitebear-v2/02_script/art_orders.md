@@ -46,3 +46,30 @@
 ## 확인할 것 (PC)
 - 칸 경계가 정확히 가운데(2×2)인지, 글자·숫자·로고가 없는지, 지우·참가자·일꾼의 얼굴·옷이 칸마다 같은지.
 - 실패한 칸만 다시 그리고, 결과를 아래 pc-task 파일에 적기.
+
+## v4 추가 시트 (2026-11-20 사용자: "영상길이 좀 더 길게 해줘")
+공통 앞부분은 위와 같음. 지우·참가자·연구자는 위 시트와 같은 인물로(이미 그린 시트를 참조 그림으로 함께 붙여 주세요).
+
+### room.png — 지우의 방, 같은 밤
+1. 왼쪽 위 — Medium shot: Jiu (same as night.png) turned onto her side in bed, staring at the sheer curtains where a thin line of blue city light comes through.
+2. 오른쪽 위 — Point-of-view shot from the bed looking up at a dim ceiling with a small faint water stain and the shadow of the curtain.
+3. 왼쪽 아래 — Close-up of the curtain edge glowing with streetlight, nothing else.
+4. 오른쪽 아래 — Medium shot: Jiu pulling the blanket over her head in frustration, the room dark.
+
+### lab3.png — 녹음기와 혼자 남은 학생 (1987)
+1. 왼쪽 위 — Close-up: a hand pressing the record button on a 1980s cassette tape recorder, the reels starting to turn.
+2. 오른쪽 위 — Medium shot from the doorway: the researcher stepping out and closing the door, the student sitting alone at the table with the bell and recorder.
+3. 왼쪽 아래 — Medium shot: the student alone, mid-sentence, then pausing with his mouth closed and eyes drifting, a quiet empty moment.
+4. 오른쪽 아래 — Medium shot: the student glancing around the room — at the plain wall, the empty chair, the sleeve of his own shirt — searching for something to think about.
+
+### assoc.png — 방 안의 모든 것이 흰 곰이 된다 (비유)
+1. 왼쪽 위 — The same 1987 lab room, empty of people, calm and ordinary.
+2. 오른쪽 위 — The same room, but on the wall, the chair and a sweater hanging on the chair there are very faint pale outlines of a white polar bear, like ghostly watermarks (subtle, painterly, no text).
+3. 왼쪽 아래 — Jiu's bedroom (same as night.png) with very faint pale outlines of a presentation slide and an audience silhouette on the curtain and ceiling, like ghostly watermarks.
+4. 오른쪽 아래 — A single small red Volkswagen Beetle toy on a plain wooden table in soft light, the only object in focus.
+
+### sleep.png — 1996 잠 연구 (재구성)
+1. 왼쪽 위 — Wide shot: a quiet 1990s sleep study bedroom, a person lying in bed wearing over-ear headphones, a small bedside lamp, a researcher's clipboard on a chair.
+2. 오른쪽 위 — Close-up: the person in bed with headphones, eyes closed, peaceful, soft blue light (gentle music).
+3. 왼쪽 아래 — Close-up: the same person in bed with headphones, eyes squeezed shut, brow tense, a faint painted impression of a brass marching band parading in the dark behind the bed (dreamlike, no text).
+4. 오른쪽 아래 — Close-up of an analog bedside clock face with hands but no numbers, late at night.
