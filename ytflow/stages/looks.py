@@ -102,6 +102,32 @@ SCENE_NAMES = {
 }
 
 
+# ---------------------------------------------------------------- 연출 예시 렌더 (styles/visuals.yaml, scripts/visual_catalog.py) — 구성요소 목록과 잇기
+VISUALS = ROOT / "styles" / "visuals.yaml"
+
+
+def visual_media() -> dict:
+    """연출 예시 렌더 영상: {'scene:<id>' | 'tech:<기법 id>': (Drive 의 영상 파일, 갤러리 media 경로)}.
+    아직 영상에 한 번도 안 쓴 장면(statecard·docspot …)과 기법 카드(card-state …)에 실제 렌더를 붙이려고 (2026-11-20 사용자: "넣어줘")."""
+    if not VISUALS.exists():
+        return {}
+    v = yaml.safe_load(VISUALS.read_text(encoding="utf-8")) or {}
+    clips = examples_dir() / "scenes" / "clips"
+    out = {}
+    for kind in ("scene", "transition", "overlay"):
+        for vid, d in (v.get(kind) or {}).items():
+            key = (f"tr_{vid}" if kind == "transition" else vid).replace("@", "_")
+            f = clips / f"{key}.mp4"
+            if not f.exists():
+                continue
+            m = f"scenes/v-{key}.mp4"
+            if kind == "scene" and "@" not in vid:
+                out[f"scene:{vid}"] = (f, m, d)
+            if d.get("technique"):
+                out[f"tech:{d['technique']}"] = (f, m, d)
+    return out
+
+
 def scene_options() -> dict:
     """장면 종류 — 렌더한 예시(scenes.json)와 쓰임새(manual/usage.yaml)를 합침. 많이 쓴 순서."""
     import json as _j
@@ -131,6 +157,15 @@ def scene_options() -> dict:
                   "media": f"scenes/{t}.mp4" if r.get("file") else (f"scenes/explain-{t}.mp4" if (sp.parent / f"explain-{t}.mp4").exists() else ""),
                   "from": r.get("project", "") + (" (자료 화면은 대체 영상)" if r.get("placeholder") else ""),
                   "status": "hold" if t == "intro" else ""}
+    for key, (f, m, d) in visual_media().items():   # 연출 예시 렌더 — 실제 쓴 장면 렌더가 없거나 아직 안 쓴 장면
+        t = key[6:] if key.startswith("scene:") else None
+        if not t or t not in SCENE_NAMES:
+            continue
+        if t in out and out[t].get("media"):
+            continue
+        base = out.get(t) or {"name": SCENE_NAMES[t], "look": d.get("what", ""), "fits": d.get("fits", ""), "avoid": d.get("avoid", ""),
+                              "group": "", "used": "아직 영상에 안 씀", "status": ""}
+        out[t] = {**base, "media": m, "from": "예시 대본 렌더 (styles/hybrid/scenes/" + t + ".md)"}
     return out
 
 

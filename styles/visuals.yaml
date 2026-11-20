@@ -13,6 +13,7 @@
 # group: 박자가 '무엇을 보여 줘야 하나'로 묶음 (docs/45 §1 원칙: 감정 → 인물, 동작 → 연속 동작, 구조 → 모션그래픽, 크기 → 데이터, 증거 → 실제 자료)
 # key:   대본에 쓰는 법 (type 또는 키)
 # note:  예시 그림에 대한 주의 (실사 자리 등)
+# technique: 같은 연출의 기법 id (styles/techniques.yaml) — 구성요소 목록의 그 카드가 그림 대신 이 실제 렌더 영상을 보여 줌
 
 groups:
   data: 숫자·크기 비교
@@ -150,6 +151,7 @@ scene:
       - "박자마다 reveal(칸 등장) → draw(손그림 화살표, 다른 칸을 피해 ㄱ자·우회 경로) → active(지금 칸 강조색) → tag(칸 옆 형광펜 메모)"
       - "cut: 그린 화살표를 지우지 않고 빨간 점선 + X 로 (uiflow.cut_link)"
   statecard:
+    technique: card-state   # 구성요소 목록의 연출 카드(styles/techniques.yaml)에 이 실제 렌더 예시를 붙임
     name: 상태 카드 (+ 가운데 주체)
     group: structure
     key: '"type": "statecard"'
@@ -245,6 +247,7 @@ scene:
       - "장면 시작 0.9초 쉬고 내레이션. 들어올 때 push 전환이 기본"
       - "다른 모양: look: photo(장 사진 표지, edit10)·two-line(uiflow)·그래픽 팩 type"
   chapter@two-line:
+    technique: chapter-two-line   # 구성요소 목록의 연출 카드(styles/techniques.yaml)에 이 실제 렌더 예시를 붙임
     name: 두 줄 장 표지
     group: chapter
     key: '"type": "chapter", "look": "two-line", "kicker", "title"'
@@ -265,6 +268,7 @@ scene:
       - "살짝 기운 종이 카드 → 큰 따옴표 → 발언(quote) 줄 단위로 → 말한 사람 띠(who·role)가 왼쪽에서 펼쳐짐"
       - "keyword 에 형광펜, orig 가 있으면 아래에 원문, note 는 작은 메모. 박자 mark 로 표시 시점"
   docspot:
+    technique: document-spotlight   # 구성요소 목록의 연출 카드(styles/techniques.yaml)에 이 실제 렌더 예시를 붙임
     name: 기사 스포트라이트
     group: evidence
     key: '"type": "docspot"'
@@ -488,6 +492,7 @@ transition:
     build:
       - "앞 장면 끝에 clip-path 원이 가운데로 닫히고, 다음 장면이 가운데 원으로 열림"
   iris_out:
+    technique: shape-iris   # 구성요소 목록의 연출 카드(styles/techniques.yaml)에 이 실제 렌더 예시를 붙임
     name: 모양 매치 아이리스
     group: transition
     key: '앞 장면에 "iris_out": {"x", "y", "r"}'
@@ -500,6 +505,7 @@ transition:
 
 overlay:
   footage@chips:
+    technique: footage-chips   # 구성요소 목록의 연출 카드(styles/techniques.yaml)에 이 실제 렌더 예시를 붙임
     name: 실사 위 말 칩
     group: overlay
     key: 'footage 박자 "chips": ["…", …]'
@@ -509,6 +515,7 @@ overlay:
     build:
       - "실사 위 정해진 자리 6곳(CHIP_SLOTS) 또는 x·y 에 흰 둥근 칩(색 점 + 굵은 글자)이 chip_gap(0.6초) 간격으로 튀어나오고 위아래로 살짝 둥실, 칩마다 pop"
   map_causal@cut:
+    technique: link-break   # 구성요소 목록의 연출 카드(styles/techniques.yaml)에 이 실제 렌더 예시를 붙임
     name: 선 끊김 (빨간 점선 + X)
     group: overlay
     key: 'map_causal·statecard 박자 "cut"'
