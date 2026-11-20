@@ -20,6 +20,11 @@ schedule:
   saturday: {kind: weekly_review, minutes: [10, 15]}
   sunday: {kind: analysis, minutes: [10, 15]}
   holidays: "미국·한국 휴장일은 쉬거나 주간 분석으로"
+explain_motion:   # 2026-11-20 사용자: "쉽게 설명해야 하는 부분이다, 상황 설명이 필요하다 = 모션그래픽을 주로 사용합니다"
+  style: explain-stage            # styles/explain-stage/STYLE.md — afterline·spread·share·motionboard 장면
+  use_when: "상황 설명·원리·구조를 쉽게 풀어야 하는 박자 (보호예수·공매도·정제마진·매출 비중·공급망·제재 이후 등)"
+  flow: "자료(차트·기사·발언)로 질문 → 설명 무대로 원리 → 다시 자료로 확인"
+  theme: paper                    # paper | dark | light
 tone: "아침 시황 진행자. 숫자에는 비교 기준, 원인에는 출처, 끝에는 '오늘 볼 것'."
 daily:
   scan: "python -m ytflow daily --project <YYYYMMDD>-market-daily"   # 전날 시장 → 01_research/daily_brief.md

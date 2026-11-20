@@ -279,6 +279,10 @@ def main(argv: list[str] | None = None) -> None:
     rv.add_argument("--reject", default=""); rv.add_argument("--note", default="")
     so = sub.add_parser("short", help="세로 쇼츠 (Claude 판, HyperFrames): 02_script/short.json → 05_edit/final.mp4")
     so.add_argument("project")
+    lk = sub.add_parser("looks", help="화풍 목록 — 모션그래픽·삽화·실사 색보정 (styles/looks.yaml, 영상마다 고름)")
+    lk.add_argument("--kind", choices=["motion", "illust", "footage"], default=None)
+    lc = sub.add_parser("look", help="이 영상의 화풍 고르기/보기 → edit.yaml look (styles/looks.yaml)")
+    lc.add_argument("project"); lc.add_argument("--motion", default=""); lc.add_argument("--illust", default=""); lc.add_argument("--footage", default="")
     sub.add_parser("recipes", help="편집 스타일 등록부 목록 (styles/recipes/*.yaml — 파일 하나 추가로 늘림)")
     spk = sub.add_parser("style-pick", help="topic_brief 에 맞는 편집 스타일 추천 (영상 전체·훅·결론) → 01_research/style_pick.md")
     spk.add_argument("project")
@@ -483,6 +487,13 @@ def main(argv: list[str] | None = None) -> None:
     elif a.cmd == "short":
         from .stages import shorts_hf
         shorts_hf.make(Project.open(a.project))
+    elif a.cmd == "looks":
+        from .stages import looks
+        print(looks.listing(a.kind))
+    elif a.cmd == "look":
+        from .stages import looks
+        cur = looks.choose(Project.open(a.project).path, a.motion, a.illust, a.footage)
+        print("화풍:", ", ".join(f"{k}={v}" for k, v in cur.items()) or "고르지 않음 (python -m ytflow looks 로 목록)")
     elif a.cmd == "recipes":
         from .stages import stylepick
         print(stylepick.listing())

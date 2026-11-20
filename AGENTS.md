@@ -54,6 +54,8 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **원본 발언 영상 — 필요할 때만 PC 에서 받기 (2026-11-20)** — 피클이 위치(주소·구간) → 클라우드 `clip-order` 주문서 + `inbox/pc-tasks/` → PC `clip-fetch`(본인 브라우저 로그인, 20초 이내 구간만, Drive 보관) → `hybrid`. 클라우드 로그인은 하지 않음 | `docs/50-clip-lane.md`, `python -m ytflow clip-order|clip-fetch|clip-pull <프로젝트>`, `ytflow/stages/cliplane.py` |
 | **반드시 지킬 것·검사** | `manual/06-checklist.md`, `python -m ytflow check <프로젝트>` |
 | **제작 업무 체계 (v38)** — 단계 S0~S9 · 사용자 결정 지점 D1~D4(**최종 승인은 사용자만**) · 한 편씩 진행 · 뉴스레터로 주제 탐색 · AI 롱폼 네 형식 · 분석형 내레이션 | `manual/11-workflow.md` |
+| **자료 고르기·화풍 목록 (v61, 2026-11-20, 모든 채널)** — 박자가 하는 일로: 스쳐 지나가며 떠올리게 → 인물 실사 소스영상, 쉽게 설명·상황 설명 → 화풍별 모션그래픽(천천히 나타나고 움직임), 증거 → 실제 자료, 둘 다 어려우면 삽화. 모션그래픽·삽화·실사 색보정 화풍은 목록에서 영상마다 고름 | `manual/12-visual-storytelling.md` §0-1, `styles/looks.yaml`, `python -m ytflow looks`, `python -m ytflow look <프로젝트> --motion --illust --footage` |
+| **호기심: 실사 B-roll + 모션그래픽 먼저, 삽화는 대체 (v60, 2026-11-20)** — 사람이 나오는 짧은 실사 컷(무료 스톡, 같은 색보정) 위에 콜아웃·데이터·핵심어, 데이터가 주인공이면 모션그래픽만, 기록 없는 장면만 '재구성 삽화'. 얼굴이 보이는 스톡 인물을 부정적 맥락의 당사자로 쓰지 않음 | `manual/04-curiosity.md` §0-8, `styles/recipes/broll-motion.yaml`, `projects/20261120-curiosity-broll-sample/`(예시·레퍼런스·렌더러) |
 | **화풍·연출을 상황에 맞춰 (2026-11-18)** — 그림은 원화, 코드는 움직임(그림판·도형 느낌 탈락), 화풍은 편 단위·연출은 장면마다, 화풍 승인과 영상 판정 분리, 귀여운 캐주얼·플랫 벡터·2.5D 등 화풍 표 | `manual/05-style-matching.md` §0-8, `docs/45-style-and-direction-map.md`, `docs/44-painted-layer-animation.md`, `docs/42-script-to-motion.md`, `docs/47-curiosity-channel-benchmark.md` |
 | **연출의 원리 (v38)** — 숫자 상한·하한 대신 목적·상황·넘치면/모자라면, `check` 의 참고(ℹ️)는 측정값일 뿐 | `manual/05-style-matching.md` §0-0, README §5 |
 | 채널 회차 만들기 (반복 운영) | `skills/channel-run/SKILL.md`, `channels/README.md`, `docs/06-operations.md` |

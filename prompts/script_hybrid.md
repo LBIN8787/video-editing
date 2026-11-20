@@ -45,6 +45,20 @@
 | people | 사람 100명 그림, 그중 N명 빨갛게 (비율을 사람 수로) | count, value, caption, sub, scatter, 박자 fill |
 | newspapers | 두 신문 비교: 검은 줄로 지워진 지면 vs 큰 제목 지면 (재구성 그림) | left{name,sub,stamp}, right{name,sub,headline,note}, 박자 show: left/right |
 | shape | 곡선 모양 비교 개념도 (U자 vs W자 등, 숫자 축 없음 — label 에 '개념도') | ticks[{at,label}], 박자 curve{tone,label,label_at,points[[x,y]...],circle,note} |
+| afterline | **설명 무대** 사건 이후 누적: 시간선 + 붓 금지 표시 → 붉은 '이후' 구간 → 카드가 하나씩 쌓임 → 수량 문구 | event{name,date,tag,mark}, items{count 또는 labels[], icon(chip·lucide)}, headline{pre,emph}, 박자 show[event·after·items·headline], at{부품:단어} |
+| spread | **설명 무대** 두 값의 차이: 재료→공정→제품 소품 → 두 가격 막대·점선 → 괄호로 차이 → 한쪽 값이 바뀌면 간격이 줄어듦 | steps[{icon,label}], low/high{label,value,text}, diff{label,formula}, change{value,text,label}, 박자 show[steps·low·high·diff·change] |
+| share | **설명 무대** 전체 중 몫: 전체 막대 → 부분 채움 → 비교 눈금 → 합계 괄호 | total, of, parts[{label,value}], mark{value,label}, sum{parts[],label}, 박자 show[total·p0·p1…·mark·sum] |
+| motionboard | **설명 무대** 자유 무대: 인물(사진·실루엣)·소품 카드·글자·화살표·붓·금지·점선을 놓고 박자마다 나타남·옮김·강조·흐리게 | els{이름:{kind:person|card|img|text|arrow|brush|ban|dashed,…}}, 박자 do["이름", {move,to}, {hi}, {dim}, {hide}, {swap,text}], at{이름:단어} |
+
+### 3-1. 쉽게 설명해야 하는 곳 = 모션그래픽 (설명 무대, 2026-11-20 사용자)
+> "쉽게 설명해야 하는 부분이다, 상황 설명이 필요하다 = 모션그래픽을 주로 사용합니다."
+
+- **상황 설명이 필요한 박자**(누가 무엇을 누구에게 넘기나 · 어떤 사건 뒤에 무엇이 늘었나 · 두 값의 차이가 왜 줄었나 · 전체 중 몫이 얼마인가 · 제도·구조가 어떻게 작동하나)에는 글·숫자 카드(bignum·checklist·quote) 대신 **설명 무대 장면**(afterline·spread·share·motionboard)을 먼저 씁니다. 맞는 틀이 없으면 motionboard.
+- 순서: 자료(차트·기사·발언)로 질문을 열고 → 설명 무대로 원리를 풀고 → 다시 자료에서 그 원리를 확인합니다 (docs/31).
+- 한 무대 안에서 앞에 나온 인물·물체·기준선은 남기고, 대사의 **동사**(판다·풀린다·옮긴다·줄어든다)를 말할 때 요소가 바뀌게 `at` 으로 맞춥니다.
+- 화면 글자는 주체·단위·날짜·결론만. 나머지는 위치·높이·색이 말하게 합니다. 보고서의 주장이면 title 에 출처('○○ 보고서의 주장')를 남깁니다.
+- 실제 인물은 권리가 확인된 사진(`photo`)만, 없으면 얼굴 없는 실루엣 + 이름표. 바탕은 `theme`: paper(기본)·dark·light.
+- 스타일 문서: `styles/explain-stage/STYLE.md` (필드·예시), 장면 문서 `docs/51-explain-stage.md`.
 
 **스타일 조합 (필수):** 한 스타일로만 쓰지 않습니다. 새 장면 type `kb`·`card_type`·`journey`·`kinetic`(docs/16)을 섞고, 장면에 `"layers"`(words·photo·stamp·line·locator·number)로 다른 스타일 요소를 겹치며, 필요한 장면만 `"skin"` 으로 그래픽 팩을 바꿉니다. 규칙과 필드는 `manual/05-style-matching.md` §0-1.
 
