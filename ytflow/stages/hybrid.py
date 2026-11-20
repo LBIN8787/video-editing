@@ -867,7 +867,8 @@ def s_compare(D: HDoc, sc: dict, bt: list, dur: float):
 
 
 def s_outro(D: HDoc, sc: dict, bt: list, dur: float):
-    D.video(sc["_clipfile"], dur, "photo", push=0.04)
+    if sc.get("_clipfile"):   # 자료 영상이 없으면(클라우드에 파일 없음) 팩 바탕 위에 카드만 (2026-11-20 개정판 렌더)
+        D.video(sc["_clipfile"], dur, "photo", push=0.04)
     i = D._id()
     # 사진 위 글자가 읽히도록: 뒤를 살짝 흐리게 + 가운데 종이 카드
     D.items.append(f'<div id="{i}" style="position:absolute;inset:0;background:rgba(238,231,218,.35);backdrop-filter:blur(3px)"></div>')
