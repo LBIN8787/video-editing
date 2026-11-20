@@ -12,3 +12,8 @@ Mixkit 에 '계산대 줄' 클립이 없어 줄의 상황은 모션그래픽(줄
 | 5 | 24797 | mixkit.co/free-stock-video/waiting-in-a-traffic-jam-24797/ | 보조 화면: 정체 속 운전자(어둡게) |
 | 6 | 36371 | mixkit.co/free-stock-video/traffic-jam-on-a-highway-taken-from-above-36371/ | 바탕(흐리게·어둡게) |
 | 음악 | 724 | Mixkit "Rest Now" (assets/bgm/bgm.yaml `rest-now`) | 배경음 |
+| 8 (v2) | 36371 | 위와 같음 | 박자 1: '막힌 곳'·'뚫린 곳' 괄호 |
+| 8 (v2) | 24723 | mixkit.co/free-stock-video/tapping-on-a-steering-wheel-24723/ | 박자 2: 운전대를 두드리는 손(얼굴 없음) |
+| 8 (v2) | 47615 | mixkit.co/free-stock-video/fast-driving-on-a-highway-at-night-47615/ | 박자 3: 빠르게 달리는 주행 시점 |
+
+v2 부터 배경음은 쓰지 않음 (사용자 2026-11-20).
