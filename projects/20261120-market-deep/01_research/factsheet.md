@@ -59,6 +59,7 @@
 - C3 공모 9억 8,000만 주 × 83달러 = 813억 4,000만 달러 · 회사 몫 9억 5,635만 주 × 83 = 약 793억 8천만 달러 (A1)
 - C4 공모 813억 + 동시 사모 260억 = 약 1,073억 달러 (A1·A2) — 보도의 '약 1,070억'과 일치
 - C5 회사에 들어오는 돈 793.8 + 260 = 약 1,054억 달러(수수료 전) ÷ 12개월 약속 707억 = 약 1.5배 (A2·C3)
+- C10 종가 97.17 ÷ 첫 거래 111.50 − 1 = -12.9% — 공모가로 받은 쪽 +17.1%, 장에서 첫 값에 산 쪽 -12.9% (2026-11-20 사용자: "시작에는 높게 시작했지만 이후 계속해서 내려갔는데 17%상승 하면 좀 이상하게 느껴져요" → 영상에서 두 숫자를 함께)
 - C6 첫 거래 111.50 ÷ 83 − 1 = +34.3% · 종가 97.17 ÷ 83 − 1 = +17.1% · 종가는 장중 최고 114.99 보다 -15.5% (A3)
 - C7 코스피 70.45 ÷ 5,067.44 = +1.39% (K1)
 
@@ -82,11 +83,17 @@
 | AMD (회사 대변인) | 로이터 인용 | 해외 | 2026-11-19 | "The claims misrepresent AMD's business practices and relationships" | 반박(낙관) | 수출 통제법 준수 | https://www.aol.com/articles/amd-shares-slide-short-seller-174947000.html |
 | 윌리엄 라인시 (전 미 상무부 수출관리 차관, CSIS 선임 고문) | 헌터브룩 보고서 인터뷰 | 해외 | 2026-11-19 | "it's a lot harder to enforce software transfers than it is hardware transfers" · "The fact that you have to get a license does not mean automatically that the license will be denied." | 중립 | 소프트웨어 이전은 단속이 어렵다 / 허가 대상이라고 곧 거절은 아님 | https://hntrbrk.com/investigations/amd-china |
 | 샘 윈터-레비 (카네기 국제평화재단 선임 연구원) | 헌터브룩 보고서 인터뷰 | 해외 | 2026-11-19 | "My guess is that this is a real turning point." | 우려 | 누구에게나 팔던 시대가 끝나 감 | https://hntrbrk.com/investigations/amd-china |
+| 폴 미크스 (프리덤 캐피털 마켓 기술 리서치 책임자) | CNBC 인터뷰 (19일 장 전, 야후 파이낸스·스톡트위츠 인용) | 해외 | 2026-11-19 | "I would expect that you get some sort of relief rally in all these stocks based on this IPO" · "I don't think that we will push by the end of trading day one a $2 trillion market cap" | 낙관 | 공모 흥행·AI 인프라주 과매도 | https://finance.yahoo.com/technology/ai/articles/anthropic-ipo-spark-relief-rally-123705829.html |
+| 라이언 디트릭 (카슨 그룹 수석 시장 전략가) | 야후 파이낸스(스톡트위츠) 인용 | 해외 | 2026-11-19 | "Looking at previous major IPOs shows that a pop on Day 1 is common. But so is a massive correction at some point over the next year" | 우려 | 과거 대형 상장 | https://finance.yahoo.com/markets/stocks/articles/anthropic-defies-tech-rout-debut-051858481.html |
+| 톰 리 (펀드스트랫) | CNBC 인터뷰 (야후 파이낸스 인용) | 해외 | 2026-11-19 | "I think that we are at that moment where it feels like max pain" · "but for the patient investor, this is going to have a big payoff" · "if we limit hardware, we can't necessarily limit software" | 낙관 | 수요·소프트웨어 | 위와 같음 |
+| 고든 존슨 (GLJ 리서치 애널리스트) | 야후 파이낸스(스톡트위츠) 인용 | 해외 | 2026-11-19 | "The AI revolution is real. So is the wall of paper." | 우려 | 쏟아지는 새 주식 | 위와 같음 |
 | CNBC (매체) | 마감 기사 | 해외 | 2026-11-19 | Anthropic's IPO "had failed to revive enthusiasm for artificial intelligence stocks" | 우려 | 상장 날 3대 지수 하락 | https://www.stocktitan.net/articles/stock-market-today-live-november-19-2026 |
 
 - 맞대기: 엘에리언 '자리 만들기' ↔ 받치는 숫자: 대리주 아마존 -3.87%·알파벳 -3.46% (앤트로픽 +17%) / 어긋나는 숫자: AI 와 무관한 헬스케어 -2.05%·소재 -2.06% 도 내림 — 공모 하나로 다 설명되지 않음
 - 맞대기: 먼스터 'AI 에 대한 판결이 아님' ↔ 받치는 숫자: 앤트로픽 자체는 +17%, 공모가는 범위 상단 위 / 어긋나는 숫자: 나스닥 한 달 최고 대비 -10.6%
 - 맞대기: 라인시 '허가 대상이 곧 거절은 아님' ↔ 보고서 D10(허가 여부 모름) — 같은 사실을 두고 위반도 무죄도 단정할 수 없음
+- 맞대기: 미크스 '안도 랠리' ↔ 어긋나는 숫자: 3대 지수 -2%대, 앤트로픽도 첫 거래 대비 -12.9% / 받치는 숫자: 공모가 대비 +17%, 시총 2조 미만(그의 예상과 같음)
+- 맞대기: 존슨 'wall of paper' ↔ 받치는 숫자: 새 주식 약 1,070억(C4) / 어긋나는 숫자: 공모가 대비 +17%
 - 맞대기: 헌터브룩 ↔ 받치는 사실: IEIT 는 실제로 2025년 3월 명단에 오름(보고서·보도 일치) / 어긋나는 점: 공매도 포지션 보유, 로이터·CNBC 독자 확인 못 함, AMD 부인, 당국 조치 없음
 
 ## CEO 소식
