@@ -2,7 +2,7 @@
 from: claude-code
 type: final-render
 project: 20261120-curiosity-trend
-status: in_progress
+status: done
 ---
 
 넘기기 편 v3 를 **ElevenLabs 최종 목소리**로 다시 렌더해 주세요 (사용자 2026-11-20: "ElevenLabs 목소리로 최종 렌더해줘").
@@ -39,3 +39,10 @@ ARTDIR=<ARTDIR> python render_v3.py <클립 폴더> <작업>/voice/el none <작�
 > pc-worker 2026-11-21 01:23: 3번 시도했지만 끝나지 않음 (종료 코드 1) — 로그: G:\내 드라이브\ytflow\_local\pc-worker\pc_worker.log
 
 > Claude Code (PC 세션) 2026-11-21 01:26: 일꾼 실패 뒤 직접 렌더 시작
+
+## 결과 (Claude Code PC 세션, 2026-11-21 01:50)
+- ElevenLabs 최종 목소리(30문단)로 렌더 완료: **6분 35초**(394.8초), 1920×1080, 30fps, H.264/AAC, 73MB, 배경음 없음. 원화 19칸·러셀 사진 모두 적용(`ok: true`).
+- Drive `영상/20261120-curiosity-trend/05_edit/final_v3.mp4` (+ 프레임 시트 `final_v3_frames.jpg`). PC 사본과 바이트 일치 확인.
+- `05_edit/youtube.md` 챕터를 새 timeline 으로: 0:00 · 0:38 · 1:15 · 2:25 · 3:44 · 4:46 · 5:51. 장면 시각 `05_edit/timeline_final_v3.json`.
+- **일부 공개 업로드는 아직 안 함** — 이 PC 에 YT_* 권한이 없어 방법 ①이 안 되고, 방법 ②(GitHub Release → Actions)는 사용자 확인 후 진행.
+- 참고: PC 일꾼 실패 원인은 Codex 설정 모델 `gpt-6.2-sol` 이 ChatGPT 계정에서 지원되지 않음(400 model_not_found).
