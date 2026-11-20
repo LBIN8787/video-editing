@@ -27,7 +27,7 @@ def _fam(role: str) -> str:
     """역할 글꼴(그래픽 팩이 정함) → HTML 글꼴 이름."""
     from . import paper
     return {paper.SERIF: "serif-x", paper.SERIF_B: "serif-b", paper.PEN: "pen", paper.SANS: "sans",
-            paper.SANS_X: "sans-x"}.get(Path(FT(role)), "sans")
+            paper.SANS_X: "sans-x"}.get(Path(FT(role))) or __import__("ytflow.stages.typeset", fromlist=["family"]).family(FT(role)) or "sans"
 
 
 # ---------------------------------------------------------------- 1) 아카이브 다큐

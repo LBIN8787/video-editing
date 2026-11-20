@@ -82,7 +82,10 @@ class Doc:
     def text(self, x, y, s, font_path, size, color, at=None, gap=0.12, dur=0.45, anchor="mm", counter=False):
         i = self._id()
         fam = {paper.SERIF: "serif-x", paper.SERIF_B: "serif-b", paper.PEN: "pen", paper.SANS: "sans",
-               paper.SANS_X: "sans-x"}.get(Path(font_path), "sans")
+               paper.SANS_X: "sans-x"}.get(Path(font_path))
+        if fam is None:   # 글꼴 체계(typeset)의 굵은 제목 글꼴 등
+            from . import typeset
+            fam = typeset.family(font_path) or "sans"
         ax = {"m": "-50%", "l": "0", "r": "-100%"}[anchor[0]]
         style = (f"left:{x:.0f}px;top:{y:.0f}px;font-family:{fam};font-size:{size:.0f}px;color:{color};"
                  f"transform:translate({ax},-50%)")
