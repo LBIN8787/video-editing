@@ -104,6 +104,11 @@
 | 립부 탄 (인텔 CEO) | 2026-11-19 | 말 | 18A 첫 외부 고객 계약 (CNBC 제목) | https://www.cnbc.com/ (제목만, 원문 미확인) | 오늘 이야기와 약함 → 쓰지 않음 |
 
 ## 영상 소스
+> 2026-11-20 피클이 공식 채널 구간 확인 (inbox/requests/done/20261120-1453-*) → 원본판은 PC 가 받음 (inbox/pc-tasks, docs/50)
+
+| 다리오 아모데이 | Nasdaq 공식 채널 | Anthropic IPO: Co-Founder & CEO Dario Amodei speaks at the Nasdaq opening bell | 2026-11-19 | https://www.youtube.com/watch?v=FgAtTAgBT2Q | 3:50~4:05 "And to state it unequivocally, we will pace the training and deployment of AI systems … We will not bend to either business nor political pressure." | 거래소 공식 — 15초 인용 | PC 필요 (clip-fetch) |
+| 폴 미크스 | CNBC Television 공식 | Anthropic's IPO should lift the AI trade, says Paul Meeks | 2026-11-19 | https://www.youtube.com/watch?v=i58L0YVXq_w | 3:29~3:45 "So I would expect that you get some sort of relief rally …" | 방송사 — 16초 인용 | PC 필요 (clip-fetch) |
+| 톰 리 | CNBC Television 공식 | This is a pretty health correction in tech, says Fundstrat's Tom Lee | 2026-11-19 | https://www.youtube.com/watch?v=DvJ6rp5Rwo4 | 1:11~1:20 "I think that we are at that moment where it feels like max pain …" | 방송사 — 9초 인용 | PC 필요 (clip-fetch) |
 | 누가 | 채널 (공식) | 영상 제목 | 날짜 | 주소 | 쓸 문장 (원문) | 권리 | 상태 |
 |---|---|---|---|---|---|---|---|
 | 다리오 아모데이 | 나스닥 상장 행사 (CNBC Television 등 방송사 공식) | Nasdaq 상장 연설 | 2026-11-19 | CNBC 기사(제목) — 영상 주소 미확인 | 미확인 | 방송사 — 20초 이내 인용 | PC 필요 (YouTube 봇 확인 — 클라우드에서 받지 않음) → 이번 편은 쓰지 않음, source-backlog 에 남김 |

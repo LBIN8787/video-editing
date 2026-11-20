@@ -174,11 +174,11 @@
        "do": "count",
        "id": "sec",
        "value": "9 / 11",
-       "label": "내린 업종 (섹터 ETF)",
-       "x": 1765,
+       "label": "내린 업종",
+       "x": 1800,
        "y": 560,
-       "w": 290,
-       "h": 150,
+       "w": 230,
+       "h": 140,
        "fs": 46
       },
       {
@@ -186,11 +186,11 @@
        "do": "count",
        "id": "vix",
        "value": "28.44",
-       "label": "VIX (+15.80%)",
-       "x": 1765,
+       "label": "VIX",
+       "x": 1800,
        "y": 740,
-       "w": 290,
-       "h": 150,
+       "w": 230,
+       "h": 140,
        "fs": 46
       }
      ]
@@ -203,12 +203,12 @@
        "do": "count",
        "id": "ixic",
        "value": "-10.6%",
-       "label": "나스닥 · 10월 21일 대비 (계산)",
-       "x": 1765,
+       "label": "나스닥 · 한 달",
+       "x": 1800,
        "y": 380,
-       "w": 290,
-       "h": 150,
-       "fs": 46
+       "w": 230,
+       "h": 140,
+       "fs": 42
       }
      ]
     }
@@ -284,12 +284,12 @@
        "do": "count",
        "id": "nv1m",
        "value": "221.97 → 145.98",
-       "label": "엔비디아 · 10/21 → 11/19 (달러)",
-       "x": 1765,
+       "label": "엔비디아 (달러)",
+       "x": 1800,
        "y": 440,
-       "w": 290,
+       "w": 230,
        "h": 170,
-       "fs": 36
+       "fs": 30
       }
      ]
     },
@@ -302,11 +302,11 @@
        "id": "avgo1m",
        "value": "+2.6%",
        "label": "브로드컴 · 한 달",
-       "x": 1765,
+       "x": 1800,
        "y": 660,
-       "w": 290,
+       "w": 230,
        "h": 150,
-       "fs": 46
+       "fs": 44
       }
      ]
     }
@@ -524,6 +524,29 @@
    "id": 8
   },
   {
+   "type": "bite",
+   "chapter": 2,
+   "who": "다리오 아모데이",
+   "role": "앤트로픽 CEO · 11월 19일 나스닥 상장 행사",
+   "label": "Nasdaq 공식 채널 (YouTube) · 2026.11.19 상장 행사 · 인용",
+   "beats": [
+    {
+     "say": "상장 종이 울리기 전, 다리오 아모데이 대표는 나스닥 단상에서 이렇게 말했습니다."
+    }
+   ],
+   "clip": {
+    "src": "amodei",
+    "lang": "en",
+    "cuts": [
+     {
+      "find": "And to state it unequivocally, we will pace the training and deployment of AI systems, taking as long as is necessary to have confidence that they are safe and will remain under human control. We will not bend to either business nor political pressure.",
+      "ko": "분명히 말씀드립니다. 우리는 AI가 안전하고 사람의 통제 아래 있다고 확신할 때까지, 필요한 만큼 시간을 들여 훈련과 배포의 속도를 조절하겠습니다. 사업의 압력에도 정치의 압력에도 굽히지 않겠습니다."
+     }
+    ]
+   },
+   "id": 9
+  },
+  {
    "type": "bars",
    "chapter": 2,
    "label": "야후 파이낸스 종가 · 11월 19일(목) 마감 기준 · 18일 대비 · '대리주' 표현은 CNBC(스톡타이탄 인용)",
@@ -575,17 +598,17 @@
        "do": "count",
        "id": "goog",
        "value": "+4.04% → -3.46%",
-       "label": "알파벳 장중 → 종가 (보도·야후)",
-       "x": 1765,
+       "label": "알파벳 장중→종가",
+       "x": 1800,
        "y": 420,
-       "w": 290,
+       "w": 230,
        "h": 190,
-       "fs": 34
+       "fs": 30
       }
      ]
     }
    ],
-   "id": 9
+   "id": 10
   },
   {
    "type": "analogy",
@@ -615,7 +638,7 @@
      "show_result": true
     }
    ],
-   "id": 10
+   "id": 11
   },
   {
    "type": "bignum",
@@ -663,7 +686,7 @@
      ]
     }
    ],
-   "id": 11
+   "id": 12
   },
   {
    "type": "bignum",
@@ -711,7 +734,7 @@
      ]
     }
    ],
-   "id": 12
+   "id": 13
   },
   {
    "type": "map_causal",
@@ -794,7 +817,7 @@
      "active": "other"
     }
    ],
-   "id": 13
+   "id": 14
   },
   {
    "type": "chapter",
@@ -809,7 +832,7 @@
      "say": "같은 날 반도체에서 가장 크게 빠진 회사는 AMD입니다."
     }
    ],
-   "id": 14
+   "id": 15
   },
   {
    "type": "bars",
@@ -855,7 +878,7 @@
      ]
     }
    ],
-   "id": 15
+   "id": 16
   },
   {
    "type": "quote",
@@ -889,7 +912,7 @@
      "say": "중요한 점이 하나 있습니다. 같은 보고서에, 계열사인 헌터브룩 캐피털이 AMD 주가가 내리는 쪽에 돈을 걸었다는 공시가 적혀 있습니다. 공매도 포지션을 가진 쪽의 주장이라는 겁니다."
     }
    ],
-   "id": 16
+   "id": 17
   },
   {
    "type": "checklist",
@@ -945,7 +968,7 @@
      ]
     }
    ],
-   "id": 17
+   "id": 18
   },
   {
    "type": "checklist",
@@ -987,7 +1010,7 @@
      "upto": 4
     }
    ],
-   "id": 18
+   "id": 19
   },
   {
    "type": "checklist",
@@ -1043,7 +1066,7 @@
      ]
     }
    ],
-   "id": 19
+   "id": 20
   },
   {
    "type": "quote",
@@ -1063,7 +1086,7 @@
      "say": "반면 카네기 국제평화재단의 샘 윈터-레비는, 이번이 진짜 전환점일 것 같다며 누구에게나 팔던 시대가 끝나 가고 있다고 봤습니다. 위반이냐 아니냐는 아직 모릅니다. 하지만 미국 칩 회사의 중국 노출에 매겨지는 값이 바뀌고 있다는 데에는, 이 두 사람의 말과 19일의 주가가 같은 쪽을 가리킵니다."
     }
    ],
-   "id": 20
+   "id": 21
   },
   {
    "type": "versus",
@@ -1102,7 +1125,7 @@
      ]
     }
    ],
-   "id": 21
+   "id": 22
   },
   {
    "type": "chapter",
@@ -1116,7 +1139,7 @@
      "say": "이 하루를 이름난 투자자들은 어떻게 읽었을까요?"
     }
    ],
-   "id": 22
+   "id": 23
   },
   {
    "type": "quote",
@@ -1136,7 +1159,7 @@
      "say": "채권 시장에서도 큰 발행이 한꺼번에 나오면, 사려는 돈이 그대로인 한 다른 채권값이 눌립니다. 이 시각을 받치는 숫자는 대리주의 하락입니다. 어긋나는 숫자는, AI와 상관없는 업종도 함께 내렸다는 점입니다."
     }
    ],
-   "id": 23
+   "id": 24
   },
   {
    "type": "versus",
@@ -1175,7 +1198,31 @@
      ]
     }
    ],
-   "id": 24
+   "id": 25
+  },
+  {
+   "type": "bite",
+   "chapter": 4,
+   "who": "폴 미크스",
+   "role": "프리덤 캐피털 마켓 기술 리서치 책임자 · CNBC 19일 장 전",
+   "label": "CNBC Television 공식 채널 (YouTube) · 2026.11.19 Squawk Box · 인용",
+   "beats": [
+    {
+     "say": "상장 전 기대부터 들어 보겠습니다. 19일 장 전, 프리덤 캐피털 마켓의 폴 미크스입니다."
+    }
+   ],
+   "clip": {
+    "src": "meeks",
+    "lang": "en",
+    "cuts": [
+     {
+      "find": "So I would expect that you get some sort of relief rally in all these stocks based on this IPO, and I expect it to be up modestly. I don't think that we will push by the end of trading day one, a $2 trillion market cap,",
+      "ko": "이번 상장으로 이 종목들 전반에 일종의 안도 랠리가 올 거라 봅니다. 상장 첫날은 적당히 오를 것이고, 첫날 마감까지 시가총액 2조 달러에 닿지는 않을 겁니다."
+     }
+    ]
+   },
+   "insight": true,
+   "id": 26
   },
   {
    "type": "versus",
@@ -1184,12 +1231,12 @@
    "label": "CNBC 인터뷰(미크스·19일 장 전) · 디트릭 발언 — 야후 파이낸스(스톡트위츠) 인용 · 의견이며 사실이 아닙니다",
    "left": {
     "value": "안도",
-    "label": "폴 미크스(프리덤 캐피털): 장 전 '안도 랠리' 기대",
+    "label": "미크스: 장 전 '안도 랠리'",
     "icon": "trending-up"
    },
    "right": {
     "value": "조정",
-    "label": "라이언 디트릭(카슨 그룹): 첫날 급등 뒤 큰 조정도 흔했다",
+    "label": "디트릭: 급등 뒤 조정도 흔해",
     "icon": "trending-down"
    },
    "beats": [
@@ -1228,7 +1275,31 @@
      ]
     }
    ],
-   "id": 25
+   "id": 27
+  },
+  {
+   "type": "bite",
+   "chapter": 4,
+   "who": "톰 리",
+   "role": "펀드스트랫 · CNBC 19일 클로징 벨",
+   "label": "CNBC Television 공식 채널 (YouTube) · 2026.11.19 Closing Bell · 인용",
+   "beats": [
+    {
+     "say": "장이 끝난 뒤, 펀드스트랫의 톰 리는 이렇게 말했습니다."
+    }
+   ],
+   "clip": {
+    "src": "tomlee",
+    "lang": "en",
+    "cuts": [
+     {
+      "find": "I think that we are at that moment where it feels like max pain. But for the patient investor, this is going to have a big payoff.",
+      "ko": "지금이 고통이 가장 큰 순간처럼 느껴집니다. 하지만 인내하는 투자자에게는 큰 보상이 될 겁니다."
+     }
+    ]
+   },
+   "insight": true,
+   "id": 28
   },
   {
    "type": "versus",
@@ -1237,12 +1308,12 @@
    "label": "CNBC 인터뷰(톰 리) · 존슨 발언 — 야후 파이낸스(스톡트위츠, 11.20) 인용 · 의견이며 사실이 아닙니다",
    "left": {
     "value": "보상",
-    "label": "톰 리(펀드스트랫): 고통이 가장 클 때, 인내하면 큰 보상",
+    "label": "톰 리: 인내하면 큰 보상",
     "icon": "hourglass"
    },
    "right": {
     "value": "종이",
-    "label": "고든 존슨(GLJ 리서치): AI 혁명도 진짜, 쏟아지는 주식도 진짜",
+    "label": "존슨: 쏟아지는 주식도 진짜",
     "icon": "layers"
    },
    "beats": [
@@ -1267,7 +1338,7 @@
      ]
     }
    ],
-   "id": 26
+   "id": 29
   },
   {
    "type": "chapter",
@@ -1282,7 +1353,7 @@
      "say": "그렇다면 한국 시장은 이 하루를 얼마나 반영했을까요?"
     }
    ],
-   "id": 27
+   "id": 30
   },
   {
    "type": "bars",
@@ -1385,7 +1456,7 @@
      ]
     }
    ],
-   "id": 28
+   "id": 31
   },
   {
    "type": "map_causal",
@@ -1468,7 +1539,7 @@
      "active": "today"
     }
    ],
-   "id": 29
+   "id": 32
   },
   {
    "type": "chapter",
@@ -1482,7 +1553,7 @@
      "say": "이제 이 해석을 확인할 신호들입니다."
     }
    ],
-   "id": 30
+   "id": 33
   },
   {
    "type": "checklist",
@@ -1524,7 +1595,7 @@
      "upto": 4
     }
    ],
-   "id": 31
+   "id": 34
   },
   {
    "type": "checklist",
@@ -1561,7 +1632,7 @@
      "upto": 3
     }
    ],
-   "id": 32
+   "id": 35
   },
   {
    "type": "kinetic",
@@ -1575,7 +1646,7 @@
      ]
     }
    ],
-   "id": 33
+   "id": 36
   },
   {
    "type": "outro",
@@ -1591,7 +1662,7 @@
      "say": "딱 하나만 기억한다면 이것입니다. 같은 날, 앤트로픽은 공모가보다 높게 마쳤지만 첫 거래 뒤로는 계속 밀렸고, 앤트로픽을 대신 사던 주식들도 내렸습니다. 새 주식 1,070억 달러가 들어설 자리를 시장이 만든 하루였습니다. 그렇다면 다음에 자리를 내줄 곳은 어디일까요?"
     }
    ],
-   "id": 34
+   "id": 37
   }
  ],
  "footage": {
@@ -1618,6 +1689,33 @@
    "credit": "CC BY 2.0 · Carl Lender from Sunrise, USA · 위키미디어 공용 · Datacenter Server Racks (22370909788)",
    "url": "https://commons.wikimedia.org/wiki/File:Datacenter_Server_Racks_(22370909788).jpg",
    "license": "CC BY 2.0"
+  },
+  "amodei": {
+   "file": "amodei_nasdaq_20261119.mp4",
+   "url": "https://www.youtube.com/watch?v=FgAtTAgBT2Q",
+   "start": "3:50",
+   "end": "4:05",
+   "who": "다리오 아모데이",
+   "credit": "Nasdaq 공식 채널 (YouTube) · 2026.11.19 상장 행사",
+   "license": "인용(20초 이내)"
+  },
+  "meeks": {
+   "file": "meeks_cnbc_20261119.mp4",
+   "url": "https://www.youtube.com/watch?v=i58L0YVXq_w",
+   "start": "3:29",
+   "end": "3:45",
+   "who": "폴 미크스",
+   "credit": "CNBC Television 공식 채널 (YouTube) · 2026.11.19 Squawk Box",
+   "license": "인용(20초 이내)"
+  },
+  "tomlee": {
+   "file": "tomlee_cnbc_20261119.mp4",
+   "url": "https://www.youtube.com/watch?v=DvJ6rp5Rwo4",
+   "start": "1:11",
+   "end": "1:20",
+   "who": "톰 리",
+   "credit": "CNBC Television 공식 채널 (YouTube) · 2026.11.19 Closing Bell",
+   "license": "인용(20초 이내)"
   }
  },
  "package": {

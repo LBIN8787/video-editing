@@ -1012,18 +1012,38 @@ def voice(project: Project, spec: dict) -> dict:
     el = cfg.get("backend") == "elevenlabs"
     tag = f"\n#voice={(cfg.get('elevenlabs') or {}).get('voice_id', '')}" if el else (f"\n#rate={cfg['rate']}" if spec.get("tts_rate") else "")   # 목소리·빠르기를 바꾸면 박자 음성을 다시 만듦
     durs = {}
+    # 2026-11-20: 장면이 끼어들어 번호가 밀려도 같은 대사(+같은 목소리)는 다시 녹음하지 않고 옮겨 씀 (ElevenLabs 크레딧 절약)
+    import tempfile as _tf
+    pool = _tf.mkdtemp(prefix="hbvoice-", dir=vdir)
+    have = {}
+    for t in vdir.glob("hb_*.txt"):
+        w = t.with_suffix(".wav")
+        if w.exists():
+            txt = t.read_text(encoding="utf-8")
+            for ext in (".wav", ".mp3", ".words.json", ".align.json"):
+                f = t.with_suffix(ext)
+                if f.exists():
+                    shutil.copy2(f, Path(pool) / f.name)
+            have.setdefault(txt, t.stem)
     for sc in spec["scenes"]:
         for k, b in enumerate(sc["beats"]):
             key = f"{sc['id']:03d}_{k}"
             wav = vdir / f"hb_{key}.wav"
             side = vdir / f"hb_{key}.txt"   # 대사가 바뀌면(장면 번호가 밀려도) 다시 만든다
             if wav.exists() and (not side.exists() or side.read_text(encoding="utf-8") != b["say"] + tag):
-                for ext in (".wav", ".mp3", ".words.json"):
+                for ext in (".wav", ".mp3", ".words.json", ".align.json"):
                     (vdir / f"hb_{key}{ext}").unlink(missing_ok=True)
+            if not wav.exists() and (b["say"] + tag) in have:   # 같은 대사의 녹음이 다른 번호로 있으면 옮겨 씀
+                old = have[b["say"] + tag]
+                for ext in (".wav", ".mp3", ".words.json", ".align.json"):
+                    f = Path(pool) / f"{old}{ext}"
+                    if f.exists():
+                        shutil.copy2(f, vdir / f"hb_{key}{ext}")
             if not wav.exists():
                 mp3 = vdir / f"hb_{key}.mp3"
-                done = False
-                if el:
+                # mp3 와 대사 기록이 맞으면 녹음은 있음 → wav 만 다시 만듦 (PC 로 mp3 만 보낼 때, docs/50)
+                done = mp3.exists() and mp3.stat().st_size > 1000 and side.exists() and side.read_text(encoding="utf-8") == b["say"] + tag
+                if el and not done:
                     from .media import _elevenlabs
                     try:
                         _elevenlabs(b["say"], mp3, cfg.get("elevenlabs") or {})
@@ -1046,6 +1066,7 @@ def voice(project: Project, spec: dict) -> dict:
             side.write_text(b["say"] + tag, encoding="utf-8")
             durs[key] = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(wav)],
                                              capture_output=True, text=True).stdout)
+    shutil.rmtree(pool, ignore_errors=True)
     return durs
 
 

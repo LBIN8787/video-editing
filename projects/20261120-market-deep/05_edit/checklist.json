@@ -1,7 +1,7 @@
 {
  "project": "20261120-market-deep",
  "manual_version": "59",
- "checked": "2026-11-20T05:53:03",
+ "checked": "2026-11-20T06:40:19",
  "pass": true,
  "rows": [
   {
@@ -107,7 +107,7 @@
    "level": "MUST",
    "item": "자료 화면마다 credit·url",
    "ok": true,
-   "detail": "4개, 빠짐 []"
+   "detail": "7개, 빠짐 []"
   },
   {
    "gate": "G2",
@@ -121,7 +121,7 @@
    "level": "참고",
    "item": "자료 화면 소스 종류 (한 곳에서만 가져오면 화면이 단조로워짐)",
    "ok": true,
-   "detail": "4종"
+   "detail": "7종"
   },
   {
    "gate": "G3",
@@ -359,20 +359,20 @@
    "level": "MUST",
    "item": "v36: 대본에 인사이트 장면 (\"insight\": true — 화면에 '의견' 표시, 사실과 구분) (09 §3-4)",
    "ok": true,
-   "detail": "7개"
+   "detail": "9개"
   },
   {
    "gate": "G4",
    "level": "참고",
    "item": "v36·v52: 인사이트 분량 — 유명인(이름난 투자자·경영자·당국자·석학)의 분석을 넉넉히 다뤘나 (국내 증권사는 필수 아님)",
    "ok": true,
-   "detail": "장면 7 · 팩트시트 11줄 · 국내 ✗ 해외 ✓"
+   "detail": "장면 9 · 팩트시트 11줄 · 국내 ✗ 해외 ✓"
   },
   {
    "gate": "G4",
    "level": "SHOULD",
    "item": "v36: 매체·인물의 원본 발언 장면(bite) 1개+ — 원본이 없으면 인용 카드로 그려짐 (09 §3-5)",
-   "ok": false,
+   "ok": true,
    "detail": ""
   },
   {
@@ -422,14 +422,14 @@
    "level": "참고",
    "item": "배경: 같은 바탕이 이어지는 구간",
    "ok": false,
-   "detail": "['tint', 'grid']"
+   "detail": "['tint']"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "반복 피로: 글씨·도형뿐인 장면이 이어지는 구간 — 자료·지도·그림으로 보여 줄 수 있는지 다시 볼 곳 (05 §0-3)",
    "ok": false,
-   "detail": "최장 3연속 (장면 32)"
+   "detail": "최장 3연속 (장면 35)"
   },
   {
    "gate": "G5",
@@ -443,7 +443,7 @@
    "level": "참고",
    "item": "반복 피로: 볼거리(자료·지도·그림)가 있는 장면의 몫",
    "ok": true,
-   "detail": "18/27"
+   "detail": "21/30"
   },
   {
    "gate": "G5",
@@ -478,21 +478,21 @@
    "level": "참고",
    "item": "반복 피로: 같은 채널 직전 편과 화면 구성이 얼마나 겹치나",
    "ok": false,
-   "detail": "91%"
+   "detail": "83%"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "같은 장면 type 이 이어지는 구간 — 하는 일이 바뀌었는데 화면이 같지 않나",
    "ok": false,
-   "detail": "['checklist', 'versus']"
+   "detail": "['checklist']"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "자료 화면 없이 그래픽만 이어지는 가장 긴 구간",
    "ok": false,
-   "detail": "최장 899초"
+   "detail": "최장 1020초"
   },
   {
    "gate": "G5",
@@ -506,21 +506,21 @@
    "level": "SHOULD",
    "item": "스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1)",
    "ok": true,
-   "detail": "6종 ['data-report', 'hybrid-causal', 'kinetic-type', 'map-journey', 'paper-column', 'statement-brief']"
+   "detail": "7종 ['data-report', 'hybrid-causal', 'kinetic-type', 'map-journey', 'paper-column', 'source-cut', 'statement-brief']"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "스타일 조합: 가장 많이 쓴 스타일의 몫·겹친 장면·같은 스타일 연속",
    "ok": false,
-   "detail": "data-report 0.3 · 겹침 1 · 최장 연속 3"
+   "detail": "paper-column 0.28 · 겹침 1 · 최장 연속 3"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "강조 횟수·강조가 겹친 장면 — 기억할 숫자·반전·결론에만 썼는지 (05 §0-1)",
    "ok": true,
-   "detail": "1번 [(33, 'kinetic')] · 겹친 장면 []"
+   "detail": "1번 [(36, 'kinetic')] · 겹친 장면 []"
   },
   {
    "gate": "G5",
