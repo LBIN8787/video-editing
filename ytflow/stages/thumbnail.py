@@ -538,6 +538,10 @@ def run(project: Project) -> dict:
     edir = project.dir("edit")
     edir.mkdir(parents=True, exist_ok=True)
     qa, made = {}, []
+    waiting = [v for v in pkg["thumbnails"] if (v.get("image") or {}).get("file") and not (project.path / v["image"]["file"]).exists()]
+    for v in waiting:   # 그림·사진이 아직 없는 변형(PC 에서 그리는 초상 등)은 건너뛰고 나머지로 계속
+        print(f"[thumbnail] {v['id']} 건너뜀 — 그림 없음: {v['image']['file']}")
+    pkg["thumbnails"] = [v for v in pkg["thumbnails"] if v not in waiting]
     for v in pkg["thumbnails"]:
         im, boxes = render(project, spec, v)
         out = edir / f"thumbnail_{v['id']}.png"
