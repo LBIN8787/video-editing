@@ -125,7 +125,7 @@ def main(clips, tts, bgm, work, out):
         flt.append(f"[{n}:a]aresample=48000,volume=0.16,afade=t=in:d=1.5,afade=t=out:st={total - 3:.2f}:d=3[bgm]")
         flt.append("[nar][bgm]amix=inputs=2:normalize=0,loudnorm=I=-15:TP=-1.5:LRA=9[aout]")
     else:
-        flt.append("[nar]loudnorm=I=-15:TP=-1.5:LRA=9[aout]")
+        flt.append("[nar]loudnorm=I=-15:TP=-1.5:LRA=9,apad[aout]")
     audio = work / "audio.m4a"
     subprocess.run(["ffmpeg", "-v", "error", "-y", *narr_in, *(["-stream_loop", "-1", "-i", str(bgm)] if use_bgm else []), "-filter_complex", ";".join(flt),
                     "-map", "[aout]", "-t", f"{total:.3f}", "-c:a", "aac", "-b:a", "192k", str(audio)], check=True)
