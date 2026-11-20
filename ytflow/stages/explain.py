@@ -29,6 +29,32 @@ NAVY = "#23418C"
 HEAVY = paper.FONT_DIR / "BlackHanSans-Regular.ttf"   # 굵은 제목·숫자 (OFL)
 BOLD = paper.SANS_X                                     # 라벨 (나눔고딕 ExtraBold)
 FAM = {str(HEAVY): "heavy", str(BOLD): "sans-x", str(paper.PEN): "pen", str(paper.SANS): "sans"}
+CARD_INK = "#1E2330"   # 카드 안 그림·글자 (밝은 카드 위라 테마가 바뀌어도 그대로)
+
+# 테마: 바탕만 바꾸고 연출은 그대로 (2026-11-20 사용자: "화면이 꼭 종이가 아니어도")
+#   paper  실사 구겨진 종이 (기본)   light  그래픽 팩(스킨)의 바탕 그대로, 색은 종이와 같음   dark  숯색 무대, 글자·선은 밝게
+THEMES = {
+    "dark": {"#1F242E": "#ECE8E0", "#20242C": "#D9D5CC", "#55595f": "#A8ACB3", "#3A3F48": "#C9CCD2", "#4A4E55": "#B4B8BF",
+             "#B8322E": "#E5533F", "#B5302B": "#F0614C", "#C33A31": "#E2483A", "#C2463C": "#E0503F", "#8E2420": "#9E2A22",
+             "#7E1C18": "#8C241C", "rgba(30,24,16,": "rgba(0,0,0,"},
+}
+
+
+def _apply_theme(D, theme: str):
+    m = THEMES.get(theme)
+    if not m:
+        return
+    def sub(x: str) -> str:
+        for a, b in m.items():
+            x = x.replace(a, b)
+        return x
+    D.items[:] = [sub(x) for x in D.items]
+    D.svg[:] = [sub(x) for x in D.svg]
+    for q in D.rq:
+        for k in ("stroke", "fill"):
+            if isinstance(q["opts"].get(k), str):
+                q["opts"][k] = sub(q["opts"][k])
+
 SHADOW = "0 1px 1px rgba(30,24,16,.18),0 4px 6px rgba(30,24,16,.14),0 14px 24px rgba(30,24,16,.18)"
 
 # 붓 자국: 가장자리를 흔들고(변위) 마른 붓 결(가로 줄무늬 투명도)을 입힌다
@@ -58,10 +84,13 @@ def _setup(D, sc: dict, title: bool = True):
         (a / "fonts").mkdir(parents=True, exist_ok=True)
         if not (a / "fonts" / HEAVY.name).exists():
             shutil.copy(HEAVY, a / "fonts" / HEAVY.name)
-        bg = crumple.background(config.CACHE_DIR, seed=int(sc.get("paper_seed", 7)))
-        if not (a / bg.name).exists():
-            shutil.copy(bg, a / bg.name)
-        D.media.insert(0, f'<img src="assets/{bg.name}" style="position:absolute;left:0;top:0;width:{W}px;height:{HH}px">')
+        theme = sc.get("theme", "paper")
+        bg = (crumple.dark(config.CACHE_DIR) if theme == "dark" else
+              crumple.background(config.CACHE_DIR, seed=int(sc.get("paper_seed", 7))) if theme == "paper" else None)
+        if bg is not None:   # light: 그래픽 팩 바탕 그대로
+            if not (a / bg.name).exists():
+                shutil.copy(bg, a / bg.name)
+            D.media.insert(0, f'<img src="assets/{bg.name}" style="position:absolute;left:0;top:0;width:{W}px;height:{HH}px">')
     D.css.append(f"@font-face{{font-family:heavy;src:url('assets/fonts/{HEAVY.name}')}}")
     D.svg.insert(0, DEFS)
     D.label(sc.get("label", ""))
@@ -227,7 +256,7 @@ def s_afterline(D, sc: dict, bt: list, dur: float):
             mk = _chip(int(cw * 0.66), f"{sc.get('id', 0)}_{k}")
         else:
             from .icons import svg_markup
-            mk = svg_markup(ic, int(cw * 0.55), INK) or ""
+            mk = svg_markup(ic, int(cw * 0.55), CARD_INK) or ""
         lsz = fit(HEAVY, lab, 56, cw - 20).size
         rot = rr.uniform(-1.6, 1.6)
         card = (f'<div style="width:{cw:.0f}px;height:{chh:.0f}px;background:linear-gradient(180deg,#FFFEFB,#F1EEE6);'
@@ -270,7 +299,7 @@ def s_spread(D, sc: dict, bt: list, dur: float):
                     at = max(tb, motion2.row_time(sc, kb, b, tb, db, st["word"]) - 0.1)
                     break
         from .icons import svg_markup
-        mk = svg_markup(st.get("icon", "package"), 112, INK) or ""
+        mk = svg_markup(st.get("icon", "package"), 112, CARD_INK) or ""
         rot = (-1.4, 1.1, -0.8, 1.5)[k % 4]
         sid = _div(D, f"left:{x - 92}px;top:{yi - 92}px;width:184px;height:184px;border-radius:14px;"
                       f"background:linear-gradient(180deg,#FFFEFB,#EFEBE2);box-shadow:{SHADOW};display:flex;align-items:center;"
@@ -395,8 +424,224 @@ def s_share(D, sc: dict, bt: list, dur: float):
 
 
 # ---------------------------------------------------------------- 등록
+# ---------------------------------------------------------------- motionboard: 자유 무대 (인물·물체·글자·선을 놓고 박자마다 움직임)
+TONES = {"navy": ("#4C6AA8", "#22345F"), "red": ("#D4644F", "#8E2E22"), "gray": ("#8C929C", "#4A505A"),
+         "green": ("#5E9A6E", "#2C5A3A"), "gold": ("#D7A94B", "#8A6418")}
+
+
+def _person_svg(size: int, uid: str, tone: str = "navy") -> str:
+    """얼굴 없는 인물 실루엣 (상반신, 면 음영). 특정인을 그리지 않는다 — 실제 인물은 photo 로."""
+    a, b = TONES.get(tone, TONES["navy"])
+    return (f'<svg width="{size}" height="{size}" viewBox="0 0 100 100"><defs>'
+            f'<linearGradient id="pb{uid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{a}"/><stop offset="1" stop-color="{b}"/></linearGradient>'
+            f'<radialGradient id="ph{uid}" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="{a}"/><stop offset="1" stop-color="{b}"/></radialGradient></defs>'
+            f'<path d="M14 100 C14 74 30 63 50 63 C70 63 86 74 86 100 Z" fill="url(#pb{uid})"/>'
+            f'<path d="M42 63 L50 76 L58 63 Z" fill="#F4F1EA" opacity=".9"/>'
+            f'<rect x="44" y="52" width="12" height="13" rx="4" fill="{b}"/>'
+            f'<ellipse cx="50" cy="37" rx="17" ry="19" fill="url(#ph{uid})"/>'
+            f'<path d="M37 30 C40 18 60 16 64 30" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="3" stroke-linecap="round"/></svg>')
+
+
+def _asset(D, sc, src: str) -> str | None:
+    """프로젝트 안 그림(인물 사진·소품 컷아웃)을 장면 assets 로 복사하고 상대 경로를 돌려준다."""
+    import shutil
+    from pathlib import Path
+    p = Path(src)
+    if not p.is_absolute() and sc.get("_project_dir"):
+        p = Path(sc["_project_dir"]) / src
+    if not p.exists() or getattr(D, "_work", None) is None:
+        return None
+    dst = D._work / "assets" / f"b_{p.name}"
+    if not dst.exists():
+        shutil.copy(p, dst)
+    return f"assets/{dst.name}"
+
+
+def _el_html(D, sc, key: str, el: dict) -> tuple[str, float, float]:
+    """요소 하나의 HTML 과 크기(w,h). 위치는 바깥 div 가 잡는다."""
+    k = el.get("kind", "card")
+    uid = f"{sc.get('id', 0)}_{key}"
+    rot = el.get("rot", 0)
+    if k == "person":
+        w = el.get("w", 230)
+        ph = _asset(D, sc, el["photo"]) if el.get("photo") else None
+        pic_h = w * 1.05
+        pic = (f'<img src="{ph}" style="width:{w - 24:.0f}px;height:{pic_h:.0f}px;object-fit:cover;border-radius:4px;'
+               f'filter:{el.get("filter", "grayscale(.15) contrast(1.05)")}">' if ph else
+               f'<div style="width:{w - 24:.0f}px;height:{pic_h:.0f}px;border-radius:4px;background:linear-gradient(180deg,#E9E5DC,#D9D4C8);'
+               f'display:flex;align-items:flex-end;justify-content:center;overflow:hidden">{_person_svg(int(w - 30), uid, el.get("tone", "navy"))}</div>')
+        name = H.escape(el.get("name", ""))
+        role = H.escape(el.get("role", ""))
+        nsz = fit(HEAVY, el.get("name", ""), 40, w - 30).size
+        rsz = fit(BOLD, el.get("role", ""), 24, w - 30).size
+        h = pic_h + 24 + (nsz + 8 if name else 0) + (rsz + 8 if role else 0) + 8
+        inner = (f'<div style="width:{w}px;padding:12px 12px 10px;background:linear-gradient(180deg,#FFFEFB,#F1EEE6);border-radius:6px;'
+                 f'box-shadow:{SHADOW};transform:rotate({rot}deg);display:flex;flex-direction:column;align-items:center;gap:4px">{pic}'
+                 + (f'<div style="font-family:heavy;font-size:{nsz}px;color:{CARD_INK};line-height:1.1;margin-top:6px">{name}</div>' if name else "")
+                 + (f'<div style="font-family:sans-x;font-size:{rsz}px;color:#5B606A;line-height:1.1">{role}</div>' if role else "")
+                 + "</div>")
+        return inner, w, h
+    if k == "card":
+        w = el.get("w", 180)
+        h = el.get("h", w * (1.2 if el.get("label") else 1.0))
+        if el.get("img"):
+            ph = _asset(D, sc, el["img"])
+            mk = f'<img src="{ph}" style="width:{w * 0.78:.0f}px;height:{w * 0.78:.0f}px;object-fit:contain">' if ph else ""
+        elif el.get("icon") == "chip":
+            mk = _chip(int(w * 0.66), uid)
+        else:
+            from .icons import svg_markup
+            mk = svg_markup(el.get("icon", "package"), int(w * 0.58), CARD_INK) or ""
+        lab = el.get("label", "")
+        lsz = fit(HEAVY, lab, el.get("size", 46), w - 20).size if lab else 0
+        col = {"red": "#B5302B", "navy": NAVY}.get(el.get("color", "navy"), el.get("color", NAVY))
+        inner = (f'<div style="width:{w:.0f}px;height:{h:.0f}px;background:linear-gradient(180deg,#FFFEFB,#F1EEE6);border-radius:8px;'
+                 f'box-shadow:{SHADOW};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;'
+                 f'transform:rotate({rot}deg)">{mk}'
+                 + (f'<div style="font-family:heavy;font-size:{lsz}px;color:{col};line-height:1">{H.escape(lab)}</div>' if lab else "")
+                 + "</div>")
+        return inner, w, h
+    if k == "img":   # 투명 PNG 소품 그대로 (그림자만)
+        w = el.get("w", 260)
+        ph = _asset(D, sc, el["img"])
+        inner = (f'<img src="{ph}" style="width:{w}px;filter:drop-shadow(0 6px 8px rgba(30,24,16,.25));transform:rotate({rot}deg)">'
+                 if ph else "")
+        return inner, w, el.get("h", w)
+    if k == "text":
+        size = el.get("size", 56)
+        col = {"red": "#B5302B", "ink": INK, "muted": MUTED, "navy": NAVY}.get(el.get("color", "ink"), el.get("color", INK))
+        font = paper.PEN if el.get("pen") else HEAVY
+        fam = "pen" if el.get("pen") else "heavy"
+        w = paper.F(font, size).getlength(el.get("text", "")) + 10
+        inner = (f'<div style="font-family:{fam};font-size:{size}px;color:{col};white-space:nowrap;line-height:1.1;'
+                 f'transform:rotate({rot}deg)">{H.escape(el.get("text", ""))}</div>')
+        return inner, w, size * 1.15
+    return "", 0, 0
+
+
+def s_board(D, sc: dict, bt: list, dur: float):
+    """자유 무대: 인물·소품 카드·글자·붓 선·화살표·금지 표시를 놓고, 박자마다 보이기·옮기기·강조·흐리게.
+
+    els: {이름: {kind: person|card|img|text|arrow|brush|ban|dashed, x, y, ...}}
+    beats[].do: ["이름", {"move": "이름", "to": [x, y]}, {"hi": "이름"}, {"dim": "이름"}, {"hide": "이름"}, {"swap": "이름", "text": "새 글자"}]
+    beats[].at: {"이름": "대사 속 단어"} — 그 단어를 말할 때
+    """
+    from . import motion2
+    _head(D, sc)
+    els = sc.get("els", {})
+    box = {}
+    first = bt[0][0]
+    # 1) 위치를 가진 요소는 미리 만들어 두고(숨김), 등장 시각에 나타낸다
+    for key, el in els.items():
+        if el.get("kind") in ("arrow", "brush", "ban", "dashed"):
+            continue
+        inner, w, h = _el_html(D, sc, key, el)
+        x, y = el["x"], el["y"]
+        i = D._id()
+        D.items.append(f'<div id="{i}" style="position:absolute;left:{x - w / 2:.0f}px;top:{y - h / 2:.0f}px;opacity:0">{inner}</div>')
+        box[key] = {"id": i, "x": x, "y": y, "w": w, "h": h}
+    # 2) 박자별 동작
+    shown = set()
+    for k, (b, (t0, d)) in enumerate(zip(sc["beats"], bt)):
+        words = b.get("at") or {}
+        t = t0 + 0.15
+        for act in b.get("do") or []:
+            name = act if isinstance(act, str) else next((act[x] for x in ("move", "hi", "dim", "hide", "swap") if x in act), None)
+            if name in words and sc.get("_project_dir"):
+                t = max(t0, motion2.row_time(sc, k, b, t0, d, words[name]) - 0.1)
+            el = els.get(name, {})
+            bx = box.get(name)
+            if isinstance(act, str):
+                kind = el.get("kind")
+                if bx:
+                    frm = {"person": "opacity:0,y:40,scale:0.9", "text": "opacity:0,y:20"}.get(kind, "opacity:0,y:-34,scale:0.86")
+                    _pop(D, bx["id"], t, frm, "opacity:1,y:0,scale:1", 0.42, "back.out(1.7)")
+                    D.sfx.append(("click-soft" if kind != "text" else "pop", t))
+                elif kind == "arrow":
+                    a_, b_ = box.get(el["from"]), box.get(el["to"])
+                    if a_ and b_:
+                        import math
+                        dx, dy = b_["x"] - a_["x"], b_["y"] - a_["y"]
+                        L = math.hypot(dx, dy) or 1
+                        ux, uy = dx / L, dy / L
+                        ra = min(a_["w"], a_["h"]) / 2 + 22
+                        rb = min(b_["w"], b_["h"]) / 2 + 26
+                        sx, sy, ex, ey = a_["x"] + ux * ra, a_["y"] + uy * ra, b_["x"] - ux * rb, b_["y"] - uy * rb
+                        bend = el.get("bend", 0.12)
+                        cx, cy = (sx + ex) / 2 - uy * L * bend, (sy + ey) / 2 + ux * L * bend
+                        col = "#B5302B" if el.get("color") == "red" else "#20242C"
+                        _path_draw(D, f"M{sx:.0f} {sy:.0f} Q{cx:.0f} {cy:.0f} {ex:.0f} {ey:.0f}", col, 6, t, 0.45, "xink")
+                        hx, hy = ex - cx, ey - cy
+                        hl = math.hypot(hx, hy) or 1
+                        hx, hy = hx / hl, hy / hl
+                        p1 = (ex - hx * 24 - hy * 14, ey - hy * 24 + hx * 14)
+                        p2 = (ex - hx * 24 + hy * 14, ey - hy * 24 - hx * 14)
+                        _path_draw(D, f"M{p1[0]:.0f} {p1[1]:.0f} L{ex:.0f} {ey:.0f} L{p2[0]:.0f} {p2[1]:.0f}", col, 6, t + 0.4, 0.12, "xink")
+                        if el.get("label"):   # 곡선 꼭대기 바깥쪽
+                            mx, my = 0.25 * sx + 0.5 * cx + 0.25 * ex, 0.25 * sy + 0.5 * cy + 0.25 * ey
+                            sgn = -1 if bend >= 0 else 1
+                            _txt(D, mx + uy * 42 * sgn, my - ux * 42 * sgn, el["label"], paper.PEN, el.get("size", 44),
+                                 "#B5302B" if el.get("color") == "red" else INK, at=t + 0.3)
+                        D.sfx.append(("pencil", t))
+                elif kind == "brush":
+                    pts = el["pts"]
+                    dpath = "M" + " L".join(f"{x:.0f} {y:.0f}" for x, y in pts)
+                    w_ = el.get("width", 22)
+                    _path_draw(D, dpath, "#8E2420", w_ + 6, t + 0.03, el.get("dur", 0.8), "xbrush", 0.6)
+                    _path_draw(D, dpath, "#C2463C", w_, t, el.get("dur", 0.8), "xbrush")
+                    D.sfx.append(("whoosh-short", t))
+                elif kind == "ban":
+                    x, y, r = el["x"], el["y"], el.get("r", 62)
+                    circ = f"M{x} {y - r} A{r} {r} 0 1 1 {x - 0.1} {y - r}"
+                    _path_draw(D, circ, "#7E1C18", 24, t + 0.02, 0.5, "xbrush", 0.55)
+                    _path_draw(D, circ, "#C33A31", 17, t, 0.5, "xbrush")
+                    q = r * 0.7
+                    _path_draw(D, f"M{x - q} {y - q} L{x + q} {y + q}", "#C33A31", 17, t + 0.45, 0.22, "xbrush")
+                    D.sfx.append(("pop", t))
+                elif kind == "dashed":
+                    (x0, y0), (x1, y1) = el["pts"]
+                    _dashed(D, x0, y0, x1, y1, "#20242C", t, el.get("width", 3), 0.5)
+                shown.add(name)
+            elif bx and "move" in act:
+                tx, ty = act["to"]
+                ox, oy = bx.get("x0", bx["x"]), bx.get("y0", bx["y"])
+                D.js.append(f'tl.to("#{bx["id"]}",{{x:{tx - ox:.0f},y:{ty - oy:.0f},duration:{act.get("dur", 0.9)},'
+                            f'ease:"power2.inOut"}},{t:.2f});')
+                bx.setdefault("x0", ox), bx.setdefault("y0", oy)
+                bx["x"], bx["y"] = tx, ty   # 뒤 동작(강조·화살표)은 옮긴 자리 기준
+                D.sfx.append(("whoosh-short", t))
+            elif bx and "hi" in act:
+                j = D._id()
+                pad = 16
+                D.items.append(f'<div id="{j}" style="position:absolute;left:{bx["x"] - bx["w"] / 2 - pad:.0f}px;top:{bx["y"] - bx["h"] / 2 - pad:.0f}px;'
+                               f'width:{bx["w"] + 2 * pad:.0f}px;height:{bx["h"] + 2 * pad:.0f}px;border:6px solid #C33A31;border-radius:14px;opacity:0"></div>')
+                _pop(D, j, t, "opacity:0,scale:1.15", "opacity:1,scale:1", 0.35, "back.out(2)")
+                D.js.append(f'tl.to("#{bx["id"]}",{{scale:1.06,duration:.18,yoyo:true,repeat:1}},{t:.2f});')
+            elif bx and "dim" in act:
+                D.js.append(f'tl.to("#{bx["id"]}",{{opacity:.28,filter:"grayscale(1)",duration:.4}},{t:.2f});')
+            elif bx and "hide" in act:
+                D.js.append(f'tl.to("#{bx["id"]}",{{opacity:0,y:20,duration:.35}},{t:.2f});')
+            elif bx and "swap" in act:
+                D.js.append(f'tl.to("#{bx["id"]} div",{{opacity:0,duration:.15}},{t:.2f});'
+                            f'tl.call(()=>{{document.querySelector("#{bx["id"]} div").textContent={json_str(act["text"])}}},null,{t + 0.15:.2f});'
+                            f'tl.to("#{bx["id"]} div",{{opacity:1,duration:.2}},{t + 0.16:.2f});')
+            t += act.get("gap", 0.45) if isinstance(act, dict) else 0.45
+
+
+def json_str(x: str) -> str:
+    import json
+    return json.dumps(x, ensure_ascii=False)
+
+
+def _themed(fn):
+    def run(D, sc, bt, dur):
+        fn(D, sc, bt, dur)
+        _apply_theme(D, sc.get("theme", "paper"))
+    run.__name__ = fn.__name__
+    return run
+
+
 def register():
     from . import hybrid
-    hybrid.RENDER["afterline"] = s_afterline
-    hybrid.RENDER["spread"] = s_spread
-    hybrid.RENDER["share"] = s_share
+    for k, fn in (("afterline", s_afterline), ("spread", s_spread), ("share", s_share), ("motionboard", s_board)):
+        hybrid.RENDER[k] = _themed(fn)

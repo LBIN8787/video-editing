@@ -132,3 +132,21 @@ def background(cache_dir: Path, seed: int = 7, base: str = "#E8E3D9") -> Path:
         p.parent.mkdir(parents=True, exist_ok=True)
         (make_photo(src, seed=seed, base=base) if src else make(seed=seed, base=base)).save(p, quality=90)
     return p
+
+
+def dark(cache_dir: Path, seed: int = 7, base: str = "#1B1D22") -> Path:
+    """어두운 무대 바탕: 가운데가 조금 밝은 숯색 + 고운 결 (종이 대신, 설명 무대 theme=dark)."""
+    p = Path(cache_dir) / f"dark_{seed}_{base.strip('#')}_v1.jpg"
+    if p.exists():
+        return p
+    W, H = 1920, 1080
+    rng = np.random.default_rng(seed)
+    Y, X = np.mgrid[0:H, 0:W].astype(np.float32)
+    r = np.sqrt(((X - W * 0.48) / (W * 0.62)) ** 2 + ((Y - H * 0.42) / (H * 0.7)) ** 2)
+    glow = np.clip(1.45 - r, 0, 1) ** 1.6 * 0.55
+    grain = rng.standard_normal((H, W)).astype(np.float32) * 0.035 + _noise(rng, W, H, 180) * 0.05
+    b = np.array([int(base[i:i + 2], 16) for i in (1, 3, 5)], np.float32)
+    img = b[None, None] * (1 + glow + grain)[..., None]
+    p.parent.mkdir(parents=True, exist_ok=True)
+    Image.fromarray(np.clip(img, 0, 255).astype(np.uint8)).save(p, quality=90)
+    return p
