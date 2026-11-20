@@ -26,7 +26,7 @@ from . import paper
 from .paper import FT, fit, ellipse_path, rect_path, arrow_path, wobble
 
 TOOLS = config.ROOT / "tools" / "hyperframes"
-BIN = TOOLS / "node_modules" / ".bin" / "hyperframes"
+BIN = TOOLS / "node_modules" / ".bin" / ("hyperframes.cmd" if os.name == "nt" else "hyperframes")   # Windows 는 npm 이 .cmd 실행 파일을 만듦
 GSAP = TOOLS / "node_modules" / "gsap" / "dist" / "gsap.min.js"
 ROUGH = TOOLS / "node_modules" / "roughjs" / "bundled" / "rough.cjs.js"   # rough.js (MIT): 손그림 선·빗금 채우기
 ROUGH_JS = config.ROOT / "ytflow" / "assets" / "rough_paths.mjs"

@@ -1,0 +1,163 @@
+{
+ "id": "zoomshot",
+ "type": "zoomshot",
+ "example_source": "projects\\20261109-pool-ai\\02_script\\hybrid.json",
+ "renderer": "ytflow/stages/directions.py:521",
+ "function": "s_zoomshot",
+ "scene_fields": [
+  "focus",
+  "label"
+ ],
+ "beat_fields": [],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only zoomshot --force",
+ "spec_common": {
+  "edit_v10": true,
+  "map": {
+   "nodes": {
+    "ask": {
+     "label": "'/unslop 이 화면'",
+     "icon": "message-circle",
+     "x": 250,
+     "y": 400
+    },
+    "desc": {
+     "label": "이름·한 줄 설명으로 판단",
+     "icon": "tag",
+     "x": 710,
+     "y": 400
+    },
+    "body": {
+     "label": "SKILL.md 본문 펼치기",
+     "icon": "file-text",
+     "x": 1170,
+     "y": 400
+    },
+    "refs": {
+     "label": "참고 파일은 필요할 때만",
+     "icon": "files",
+     "x": 1630,
+     "y": 400
+    },
+    "audit": {
+     "label": "진단: AI 티 목록",
+     "icon": "search",
+     "x": 250,
+     "y": 720
+    },
+    "dir": {
+     "label": "방향 5줄 → 먼저 묻기",
+     "icon": "compass",
+     "x": 710,
+     "y": 720
+    },
+    "passes": {
+     "label": "9단계 수정",
+     "icon": "layers",
+     "x": 1170,
+     "y": 720
+    },
+    "check": {
+     "label": "점검표로 다시 보기",
+     "icon": "circle-check",
+     "x": 1630,
+     "y": 720
+    }
+   },
+   "edges": [
+    [
+     "ask",
+     "desc"
+    ],
+    [
+     "desc",
+     "body"
+    ],
+    [
+     "body",
+     "refs"
+    ],
+    [
+     "body",
+     "audit"
+    ],
+    [
+     "audit",
+     "dir"
+    ],
+    [
+     "dir",
+     "passes"
+    ],
+    [
+     "refs",
+     "passes"
+    ],
+    [
+     "passes",
+     "check"
+    ]
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "type": "zoomshot",
+   "clip": {
+    "src": "before",
+    "start": 0
+   },
+   "label": "고치기 전 · unslop 예제 대시보드 (CC BY 4.0)",
+   "focus": [
+    {
+     "beat": 0,
+     "box": [
+      700,
+      70,
+      540,
+      80
+     ],
+     "label": "글자 그라데이션"
+    },
+    {
+     "beat": 1,
+     "box": [
+      395,
+      230,
+      300,
+      330
+     ],
+     "label": "이모지 아이콘"
+    }
+   ],
+   "beats": [
+    {
+     "say": "예제로는 언슬롭에 같이 들어 있는, 일부러 AI처럼 만든 대시보드를 썼습니다."
+    },
+    {
+     "say": "이 영상을 만든 클로드 코드 세션에서, 설명서의 절차를 그대로 따라 적용했습니다."
+    }
+   ],
+   "id": 1,
+   "chapter": 0
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "zoomshot",
+   "events": [
+    " 0.20s 「고치기 전 · unslop 예제 대시보드 (CC B…」 아래에서 떠오름",
+    " 0.55s 요소 움직임",
+    " 1.45s 요소 나타남",
+    " 1.55s 「글자 그라데이션」 나타남",
+    " 5.01s 요소 사라짐",
+    " 5.01s 「글자 그라데이션」 사라짐",
+    " 5.49s 요소 움직임",
+    " 6.39s 요소 나타남",
+    " 6.49s 「이모지 아이콘」 나타남",
+    "10.56s 요소 사라짐",
+    "10.56s 「이모지 아이콘」 사라짐"
+   ]
+  }
+ ]
+}

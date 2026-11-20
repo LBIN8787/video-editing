@@ -1,0 +1,158 @@
+{
+ "id": "newspapers",
+ "type": "newspapers",
+ "example_source": "projects\\20261107-knowledge-스페인독감\\02_script\\hybrid.json",
+ "renderer": "ytflow/stages/hybrid.py:914",
+ "function": "s_newspapers",
+ "scene_fields": [
+  "label",
+  "left",
+  "right"
+ ],
+ "beat_fields": [
+  "show"
+ ],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only newspapers --force",
+ "spec_common": {
+  "edit_v10": true,
+  "map": {
+   "nodes": {
+    "war": {
+     "label": "1차 세계대전",
+     "icon": "shield-alert",
+     "x": 250,
+     "y": 400
+    },
+    "troops": {
+     "label": "군대 이동·밀집 막사",
+     "icon": "ship",
+     "x": 710,
+     "y": 400
+    },
+    "spread": {
+     "label": "독감이 세계로",
+     "icon": "globe",
+     "x": 1170,
+     "y": 400
+    },
+    "deaths": {
+     "label": "최소 5천만 명 사망",
+     "icon": "heart-pulse",
+     "x": 1630,
+     "y": 400
+    },
+    "censor": {
+     "label": "전쟁국: 나쁜 소식 검열",
+     "icon": "lock",
+     "x": 250,
+     "y": 720
+    },
+    "late": {
+     "label": "숨긴 곳은 대비가 늦음",
+     "icon": "hourglass",
+     "x": 710,
+     "y": 720
+    },
+    "spain": {
+     "label": "중립국 스페인: 보도",
+     "icon": "newspaper",
+     "x": 1170,
+     "y": 720
+    },
+    "name": {
+     "label": "'스페인 독감'이란 이름",
+     "icon": "tag",
+     "x": 1630,
+     "y": 720
+    }
+   },
+   "edges": [
+    [
+     "war",
+     "troops"
+    ],
+    [
+     "troops",
+     "spread"
+    ],
+    [
+     "spread",
+     "deaths"
+    ],
+    [
+     "war",
+     "censor"
+    ],
+    [
+     "censor",
+     "late"
+    ],
+    [
+     "late",
+     "spread"
+    ],
+    [
+     "spread",
+     "spain"
+    ],
+    [
+     "spain",
+     "name"
+    ]
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": 1,
+   "type": "newspapers",
+   "chapter": 2,
+   "label": "재구성 그림 · HISTORY, 위키백과 종합",
+   "left": {
+    "name": "전쟁 중인 나라의 신문",
+    "sub": "1918 · 미국 · 영국 · 프랑스 · 독일",
+    "stamp": "검열"
+   },
+   "right": {
+    "name": "중립국 스페인의 신문",
+    "sub": "1918 · 마드리드",
+    "headline": "정체 모를 병이 도시를 덮치다",
+    "note": "있는 그대로 보도"
+   },
+   "beats": [
+    {
+     "say": "그래서 전쟁 중인 나라의 신문은 침묵했습니다. 정부가 지우기도 했고, 신문사가 알아서 쓰지 않기도 했습니다.",
+     "show": "left"
+    },
+    {
+     "say": "그런데 스페인은 이 전쟁에 끼지 않은 중립국이었습니다. 전시 검열이 없었죠. 스페인 신문들은 병이 퍼지는 걸 있는 그대로 썼습니다.",
+     "show": "right"
+    }
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "newspapers",
+   "events": [
+    " 0.00s 화면 전체(카메라) 확대·이동",
+    " 0.20s 「재구성 그림 · HISTORY, 위키백과 종합」 아래에서 떠오름",
+    " 0.55s 요소 아래에서 떠오름",
+    " 0.75s 「전쟁 중인 나라의 신문」 아래에서 떠오름",
+    " 0.85s 손그림 선 그려짐",
+    " 0.85s 「1918 · 미국 · 영국 · 프랑스 · 독일」 아래에서 떠오름",
+    " 0.95s 요소 옆으로 펼쳐짐",
+    " 2.75s 「검열」 크게서 찍힘(도장)",
+    " 8.58s 요소 아래에서 떠오름",
+    " 8.78s 「중립국 스페인의 신문」 아래에서 떠오름",
+    " 8.88s 손그림 선 그려짐",
+    " 8.88s 「1918 · 마드리드」 아래에서 떠오름",
+    " 8.98s 요소 옆으로 펼쳐짐",
+    " 9.08s 「정체 모를 병이 도시를 덮치다」 아래에서 떠오름",
+    " 9.58s 요소 옆으로 펼쳐짐",
+    " 9.98s 「있는 그대로 보도」 아래에서 떠오름"
+   ]
+  }
+ ]
+}

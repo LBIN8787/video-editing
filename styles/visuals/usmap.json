@@ -1,0 +1,162 @@
+{
+ "id": "usmap",
+ "type": "usmap",
+ "example_source": "projects\\20261106-hybrid-데이터센터\\02_script\\hybrid.json",
+ "renderer": "ytflow/stages/hybrid.py:500",
+ "function": "s_usmap",
+ "scene_fields": [
+  "label",
+  "title"
+ ],
+ "beat_fields": [
+  "counter",
+  "counter2",
+  "highlight",
+  "note"
+ ],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only usmap --force",
+ "spec_common": {
+  "edit_v10": true,
+  "map": {
+   "nodes": {
+    "vote": {
+     "label": "미국 선거·주민투표",
+     "icon": "flag",
+     "x": 250,
+     "y": 400
+    },
+    "permit": {
+     "label": "AI 공장 허가 막힘",
+     "icon": "ban",
+     "x": 710,
+     "y": 400
+    },
+    "build": {
+     "label": "새 공장 덜 짓기",
+     "icon": "construction",
+     "x": 1170,
+     "y": 400
+    },
+    "chips": {
+     "label": "칩·메모리 주문 ↓?",
+     "icon": "memory-stick",
+     "x": 1630,
+     "y": 400
+    },
+    "kospi": {
+     "label": "한국 반도체 주가 ↓",
+     "icon": "trending-down",
+     "x": 1630,
+     "y": 720
+    },
+    "money": {
+     "label": "빅테크 돈은 그대로",
+     "icon": "dollar-sign",
+     "x": 1170,
+     "y": 720
+    },
+    "old": {
+     "label": "기존 공장 몸값 ↑",
+     "icon": "building-2",
+     "x": 710,
+     "y": 720
+    },
+    "fx": {
+     "label": "환율·미국 반도체",
+     "icon": "globe",
+     "x": 250,
+     "y": 720
+    }
+   },
+   "edges": [
+    [
+     "vote",
+     "permit"
+    ],
+    [
+     "permit",
+     "build"
+    ],
+    [
+     "build",
+     "chips"
+    ],
+    [
+     "chips",
+     "kospi"
+    ],
+    [
+     "money",
+     "build"
+    ],
+    [
+     "permit",
+     "old"
+    ],
+    [
+     "fx",
+     "kospi"
+    ]
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": 1,
+   "type": "usmap",
+   "chapter": 1,
+   "label": "2026.11.05 · The Next Web, GovTech",
+   "title": "데이터센터 주민투표 41건",
+   "beats": [
+    {
+     "say": "11월 3일 미국 중간선거 날, 데이터센터를 두고 주민투표가 41건 열렸습니다.",
+     "counter": {
+      "value": 41,
+      "suffix": "건",
+      "label": "주민투표"
+     }
+    },
+    {
+     "say": "열 개 주에서 열렸는데, 오하이오 한 곳에서만 21건이었습니다.",
+     "highlight": [
+      "Ohio"
+     ],
+     "note": {
+      "state": "Ohio",
+      "text": "오하이오 21건"
+     }
+    },
+    {
+     "say": "결과는 41건 중 40건, '짓지 말자' 쪽의 승리였습니다.",
+     "counter2": {
+      "value": 40,
+      "of": 41,
+      "label": "제한 쪽 승리"
+     }
+    }
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "usmap",
+   "events": [
+    " 0.00s 화면 전체(카메라) 확대·이동",
+    " 0.20s 「2026.11.05 · The Next Web, G…」 아래에서 떠오름",
+    " 0.20s 「데이터센터 주민투표 41건」 아래에서 떠오름",
+    " 0.20s 요소 그려짐",
+    " 0.50s 손그림 선 그려짐",
+    " 0.65s 「41건」 아래에서 떠오름",
+    " 0.65s 숫자가 41.0 까지 세어 올라감",
+    " 0.85s 「주민투표」 아래에서 떠오름",
+    " 6.71s 선 아래에서 떠오름",
+    " 7.01s 손그림 선 그려짐",
+    " 7.21s 「오하이오 21건」 아래에서 떠오름",
+    "11.01s 「형광펜」 옆으로 펼쳐짐",
+    "11.11s 「40 / 41」 아래에서 떠오름",
+    "11.31s 「제한 쪽 승리」 아래에서 떠오름"
+   ]
+  }
+ ]
+}

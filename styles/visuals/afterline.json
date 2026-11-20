@@ -1,0 +1,85 @@
+{
+ "id": "afterline",
+ "type": "afterline",
+ "example_source": "scripts/visual_catalog.py DEMO",
+ "renderer": "ytflow/stages/explain.py:208",
+ "function": "s_afterline",
+ "scene_fields": [
+  "event",
+  "headline",
+  "id",
+  "items"
+ ],
+ "beat_fields": [],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only afterline --force",
+ "spec_common": {
+  "edit_v10": true
+ },
+ "scenes": [
+  {
+   "type": "afterline",
+   "title": "제재 뒤에도 계속 나온 것",
+   "event": {
+    "name": "어느 회사",
+    "date": "2025년 3월 제재",
+    "tag": "제재 뒤",
+    "mark": "ban"
+   },
+   "items": {
+    "count": 6,
+    "icon": "cpu"
+   },
+   "headline": {
+    "pre": "새 버전",
+    "emph": "6개 이상"
+   },
+   "beats": [
+    {
+     "say": "한 회사가 제재 명단에 올랐습니다.",
+     "show": [
+      "event"
+     ]
+    },
+    {
+     "say": "그런데 제재 뒤에도 새 버전은 계속 나왔습니다.",
+     "show": [
+      "after",
+      "items"
+     ]
+    },
+    {
+     "say": "여섯 개가 넘습니다.",
+     "show": [
+      "headline"
+     ]
+    }
+   ],
+   "id": 1,
+   "chapter": 0
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "afterline",
+   "events": [
+    " 0.00s 화면 전체(카메라) 확대·이동",
+    " 0.15s 「제재 뒤에도 계속 나온 것」 아래에서 떠오름",
+    " 0.40s 선 그려짐",
+    " 0.85s 「어느 회사」 아래에서 떠오름",
+    " 1.00s 선 그려짐",
+    " 1.00s 「2025년 3월 제재」 아래에서 떠오름",
+    " 2.85s 선 그려짐",
+    " 3.15s 「제재 뒤」 아래에서 떠오름",
+    " 3.35s 「1」 튀어나옴",
+    " 3.75s 「2」 튀어나옴",
+    " 4.15s 「3」 튀어나옴",
+    " 4.55s 「4」 튀어나옴",
+    " 4.95s 「5」 튀어나옴",
+    " 5.35s 「6」 튀어나옴",
+    " 5.79s 「새 버전」 아래에서 떠오름",
+    " 5.99s 「6개 이상」 아래에서 떠오름"
+   ]
+  }
+ ]
+}

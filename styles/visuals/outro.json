@@ -1,0 +1,132 @@
+{
+ "id": "outro",
+ "type": "outro",
+ "example_source": "projects\\20261106-hybrid-데이터센터\\02_script\\hybrid.json",
+ "renderer": "ytflow/stages/hybrid.py:869",
+ "function": "s_outro",
+ "scene_fields": [
+  "sub",
+  "title"
+ ],
+ "beat_fields": [],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only outro --force",
+ "spec_common": {
+  "edit_v10": true,
+  "map": {
+   "nodes": {
+    "vote": {
+     "label": "미국 선거·주민투표",
+     "icon": "flag",
+     "x": 250,
+     "y": 400
+    },
+    "permit": {
+     "label": "AI 공장 허가 막힘",
+     "icon": "ban",
+     "x": 710,
+     "y": 400
+    },
+    "build": {
+     "label": "새 공장 덜 짓기",
+     "icon": "construction",
+     "x": 1170,
+     "y": 400
+    },
+    "chips": {
+     "label": "칩·메모리 주문 ↓?",
+     "icon": "memory-stick",
+     "x": 1630,
+     "y": 400
+    },
+    "kospi": {
+     "label": "한국 반도체 주가 ↓",
+     "icon": "trending-down",
+     "x": 1630,
+     "y": 720
+    },
+    "money": {
+     "label": "빅테크 돈은 그대로",
+     "icon": "dollar-sign",
+     "x": 1170,
+     "y": 720
+    },
+    "old": {
+     "label": "기존 공장 몸값 ↑",
+     "icon": "building-2",
+     "x": 710,
+     "y": 720
+    },
+    "fx": {
+     "label": "환율·미국 반도체",
+     "icon": "globe",
+     "x": 250,
+     "y": 720
+    }
+   },
+   "edges": [
+    [
+     "vote",
+     "permit"
+    ],
+    [
+     "permit",
+     "build"
+    ],
+    [
+     "build",
+     "chips"
+    ],
+    [
+     "chips",
+     "kospi"
+    ],
+    [
+     "money",
+     "build"
+    ],
+    [
+     "permit",
+     "old"
+    ],
+    [
+     "fx",
+     "kospi"
+    ]
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": 1,
+   "type": "outro",
+   "chapter": 6,
+   "label": "",
+   "title": "8% 위험에 11%",
+   "sub": "다음 숫자가 나오면 다시 재 보겠습니다",
+   "clip": {
+    "src": "supercomp",
+    "start": 40
+   },
+   "beats": [
+    {
+     "say": "8% 위험에 11%를 판 시장. 다음 숫자가 나오면 다시 재 보겠습니다."
+    }
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "outro",
+   "events": [
+    " 0.00s 영상 아래에서 떠오름",
+    " 0.00s 영상 움직임",
+    " 0.60s 「화면 덮개」 아래에서 떠오름",
+    " 0.70s 요소 아래에서 떠오름",
+    " 0.90s 「8% 위험에 11%」 아래에서 떠오름",
+    " 1.40s 손그림 선 그려짐",
+    " 1.80s 「다음 숫자가 나오면 다시 재 보겠습니다」 아래에서 떠오름"
+   ]
+  }
+ ]
+}

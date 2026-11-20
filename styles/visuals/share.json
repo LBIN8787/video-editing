@@ -1,0 +1,94 @@
+{
+ "id": "share",
+ "type": "share",
+ "example_source": "scripts/visual_catalog.py DEMO",
+ "renderer": "ytflow/stages/explain.py:376",
+ "function": "s_share",
+ "scene_fields": [
+  "mark",
+  "of",
+  "parts",
+  "sum",
+  "total"
+ ],
+ "beat_fields": [],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only share --force",
+ "spec_common": {
+  "edit_v10": true
+ },
+ "scenes": [
+  {
+   "type": "share",
+   "title": "매출 중 두 지역의 몫",
+   "total": "매출 전체",
+   "of": 100,
+   "parts": [
+    {
+     "label": "중국·홍콩",
+     "value": 22
+    },
+    {
+     "label": "싱가포르",
+     "value": 14
+    }
+   ],
+   "mark": {
+    "value": 33.3,
+    "label": "3분의 1"
+   },
+   "sum": {
+    "parts": [
+     0,
+     1
+    ],
+    "label": "합치면 3분의 1 넘게"
+   },
+   "beats": [
+    {
+     "say": "매출 전체를 막대 하나로 놓습니다.",
+     "show": [
+      "total",
+      "p0"
+     ]
+    },
+    {
+     "say": "싱가포르를 더합니다.",
+     "show": [
+      "p1"
+     ]
+    },
+    {
+     "say": "합치면 3분의 1이 넘습니다.",
+     "show": [
+      "mark",
+      "sum"
+     ]
+    }
+   ],
+   "id": 1,
+   "chapter": 0
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "share",
+   "events": [
+    " 0.00s 화면 전체(카메라) 확대·이동",
+    " 0.15s 「매출 중 두 지역의 몫」 아래에서 떠오름",
+    " 0.55s 요소 옆으로 펼쳐짐",
+    " 0.95s 「매출 전체」 아래에서 떠오름",
+    " 0.95s 「0」 아래에서 떠오름",
+    " 0.95s 「100%」 아래에서 떠오름",
+    " 1.05s 요소 옆으로 펼쳐짐",
+    " 1.45s 「중국·홍콩」 아래에서 떠오름",
+    " 2.89s 요소 옆으로 펼쳐짐",
+    " 3.29s 「싱가포르」 아래에서 떠오름",
+    " 4.37s 선 나타남",
+    " 4.57s 「3분의 1」 아래에서 떠오름",
+    " 4.87s 손그림 선 그려짐",
+    " 5.17s 「합치면 3분의 1 넘게」 아래에서 떠오름"
+   ]
+  }
+ ]
+}

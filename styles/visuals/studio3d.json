@@ -1,0 +1,53 @@
+{
+ "id": "studio3d",
+ "type": "studio3d",
+ "example_source": "projects\\20261112-style-3d\\02_script\\hybrid.json",
+ "renderer": "ytflow/stages/studio3d.py:157",
+ "function": "s_studio3d",
+ "scene_fields": [
+  "in",
+  "label",
+  "left",
+  "n",
+  "object",
+  "out",
+  "preset",
+  "right",
+  "tag"
+ ],
+ "beat_fields": [],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only studio3d --force",
+ "spec_common": {
+  "edit_v10": true
+ },
+ "scenes": [
+  {
+   "type": "studio3d",
+   "preset": "stack",
+   "left": "공급 가능한 용량",
+   "right": "검증된 수요",
+   "n": 10,
+   "label": "코어위브 3분기 어닝콜 공식 녹취록 (2026.11.10) · 회사 발표",
+   "chapter": 0,
+   "beats": [
+    {
+     "say": "코어위브 CEO는 2027년 말까지 공급할 수 있는 용량보다,"
+    },
+    {
+     "say": "검증된 수요가 10배 많다고 했습니다."
+    }
+   ],
+   "id": 1
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "studio3d",
+   "events": [
+    " 0.00s 화면 전체(카메라) 확대·이동",
+    " 0.20s 「코어위브 3분기 어닝콜 공식 녹취록 (2026.11…」 아래에서 떠오름"
+   ]
+  }
+ ]
+}
