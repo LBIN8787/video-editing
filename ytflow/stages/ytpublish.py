@@ -291,7 +291,7 @@ def run(project: str, at: str | None = None, privacy: str | None = None, dry_run
         me, _ = _req(tok, "GET", "https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true")
         got = [(it.get("snippet") or {}).get("title", "") for it in me.get("items", [])]
         rec["authorized_channel"] = got
-        if want not in got:
+        if want.replace(" ", "") not in [g.replace(" ", "") for g in got]:   # 띄어쓰기 차이는 같은 채널 (실제 이름 '한 겹 더 보면')
             rec["blocked"] = f"권한이 가리키는 채널 {got} ≠ 올릴 채널 '{want}' — 올리지 않음 (scripts/youtube_auth.py 로 '{want}' 권한을 따로 받아야 함)"
             rec_p.write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
             raise SystemExit("[yt-publish] " + rec["blocked"])
