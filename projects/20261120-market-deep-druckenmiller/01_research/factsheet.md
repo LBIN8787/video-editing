@@ -7,7 +7,7 @@
 
 ## 그는 누구인가 (⚠️ 널리 보도된 이력)
 - P1 ⚠️ 1981년 듀케인 캐피털 설립, 1988~2000년 조지 소로스의 퀀텀 펀드 운용, 1992년 파운드화 하락에 건 거래로 알려짐, 2010년 외부 자금 반환 → 지금은 자기 돈을 굴리는 패밀리 오피스(듀케인 패밀리 오피스) — https://www.fool.com/investing/how-to-invest/famous-investors/stanley-druckenmiller
-- P2 ⚠️ "운용 기간 동안 손실 난 해가 없었다"는 평가가 널리 인용됨 — 위 출처. 화면에는 '알려진'으로만
+- P2 ✅ 1981~2010년 연평균 약 30%, 손실 난 해 없음 — 모건스탠리 'Hard Lessons' 진행 소개(영상 27.9~40.2초) https://prod-mssip.morganstanley.com/insights/videos/hard-lessons/duquesne-stan-druckenmiller-iliana-bouzali
 
 ## 그가 한 말 (11월 17일 대담)
 - S1 ✅ "We're trying to not lose money, as opposed to make money." — 모틀리풀·머니와이즈(야후) 일치 https://www.mitrade.com/insights/news/live-news/article-8-2260800-20261118
@@ -66,7 +66,22 @@
 
 | 누가 | 채널 (공식) | 영상 제목 | 날짜 | 주소 | 쓸 문장 (원문) | 권리 | 상태 |
 |---|---|---|---|---|---|---|---|
+| 스탠리 드러켄밀러 | Morgan Stanley 공식 (Hard Lessons) | Hard Lessons: Duquesne's Stan Druckenmiller with Iliana Bouzali (1705초) | 2026년 초 (오디오 파일 2026-02-27) | https://prod-mssip.morganstanley.com/insights/videos/hard-lessons/duquesne-stan-druckenmiller-iliana-bouzali | 490.8~496.6 · "What I learned from him was sizing. It's not whether you're right or wrong…" | 공식 영상 인용 (각 20초 이내, 합계 약 43초) | 클라우드에서 받음·받아쓰기 대조 ✅ |
+| 스탠리 드러켄밀러 | Morgan Stanley 공식 (Hard Lessons) | Hard Lessons: Duquesne's Stan Druckenmiller with Iliana Bouzali (1705초) | 2026년 초 (오디오 파일 2026-02-27) | https://prod-mssip.morganstanley.com/insights/videos/hard-lessons/duquesne-stan-druckenmiller-iliana-bouzali | 778~785 · "Most trades I've put on, I think in terms of 18 months to three years" | 공식 영상 인용 (각 20초 이내, 합계 약 43초) | 클라우드에서 받음·받아쓰기 대조 ✅ |
+| 스탠리 드러켄밀러 | Morgan Stanley 공식 (Hard Lessons) | Hard Lessons: Duquesne's Stan Druckenmiller with Iliana Bouzali (1705초) | 2026년 초 (오디오 파일 2026-02-27) | https://prod-mssip.morganstanley.com/insights/videos/hard-lessons/duquesne-stan-druckenmiller-iliana-bouzali | 666.3~672.7 · "and we own copper it's not a genius trade it's a big consensus trade" | 공식 영상 인용 (각 20초 이내, 합계 약 43초) | 클라우드에서 받음·받아쓰기 대조 ✅ |
+| 스탠리 드러켄밀러 | Morgan Stanley 공식 (Hard Lessons) | Hard Lessons: Duquesne's Stan Druckenmiller with Iliana Bouzali (1705초) | 2026년 초 (오디오 파일 2026-02-27) | https://prod-mssip.morganstanley.com/insights/videos/hard-lessons/duquesne-stan-druckenmiller-iliana-bouzali | 606.0~608.0 · "I tend to change my mind every three weeks." | 공식 영상 인용 (각 20초 이내, 합계 약 43초) | 클라우드에서 받음·받아쓰기 대조 ✅ |
+| 스탠리 드러켄밀러 | Morgan Stanley 공식 (Hard Lessons) | Hard Lessons: Duquesne's Stan Druckenmiller with Iliana Bouzali (1705초) | 2026년 초 (오디오 파일 2026-02-27) | https://prod-mssip.morganstanley.com/insights/videos/hard-lessons/duquesne-stan-druckenmiller-iliana-bouzali | 86.5~97.5 · "the AI things started to get… disturbingly heated… rhyme with… 99, 2000" | 공식 영상 인용 (각 20초 이내, 합계 약 43초) | 클라우드에서 받음·받아쓰기 대조 ✅ |
+| 스탠리 드러켄밀러 | Morgan Stanley 공식 (Hard Lessons) | Hard Lessons: Duquesne's Stan Druckenmiller with Iliana Bouzali (1705초) | 2026년 초 (오디오 파일 2026-02-27) | https://prod-mssip.morganstanley.com/insights/videos/hard-lessons/duquesne-stan-druckenmiller-iliana-bouzali | 616~622.7 · "…our portfolio was very much AI driven… it's not driving the engine anymore." | 공식 영상 인용 (각 20초 이내, 합계 약 43초) | 클라우드에서 받음·받아쓰기 대조 ✅ |
 | 스탠리 드러켄밀러 | iConnections 공식 채널 (행사 주최) | Stan Druckenmiller: Why He's "Not Playing" Right Now \| TomorrowX Summit (1417초, 약 41만 회) | 2026-11-17 | https://www.youtube.com/watch?v=6r3D-CMJkuI | "We're trying to not lose money, as opposed to make money." · "…the second half of '27 could be economically disappointing" · "I'm just taking a break, which could last two days or six months." | 주최 측 공식 영상 인용 (각 20초 이내) | 구간 PC 확인 대기 · 장면 bite 3개 (지금은 인용 카드) |
+
+## 같은 사람, 다른 때 (모건스탠리 'Hard Lessons', 2026년 초 — ✅ 영상 받아쓰기)
+- H1 연준은 "certainly not going to hike and probably going to cut" · 미국 경제는 "going to get much stronger" (568~578초)
+- H2 "we own copper … a big consensus trade" (666~673초) ↔ 11월: 구리 숏(⚠️ 보도) — 1년이 안 돼 정반대
+- H3 "I tend to change my mind every three weeks." (606~608초)
+- H4 지난 여름부터 AI 가 "disturbingly heated", 1999~2000년과 "rhyme" (86~97초) · AI 가 "not driving the engine anymore" (616~623초) → 13F 의 칩·플랫폼 매도와 맞음
+- H5 소로스에게 배운 것: "sizing … how much you make when you're right and how much you lose when you're wrong" (491~497초) → '안 잃기'의 뿌리
+- H6 거래는 대부분 "18 months to three years" (778~785초)
+- 썸네일 A·B 얼굴: 같은 영상 1184초 화면 (2026-11-21 사용자: "그냥 실제 그의 초상화나 사진을 사용하세요" — 자유 사진이 없어 공식 영상 화면, 출처 표기)
 
 ## 비유·과거 사례
 - 비유 1: 안개 낀 고속도로 — 사고를 예언해서가 아니라 앞이 안 보여서 속도를 줄인다

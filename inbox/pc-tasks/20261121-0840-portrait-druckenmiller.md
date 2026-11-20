@@ -2,7 +2,7 @@
 from: claude-code
 type: art
 project: 20261120-market-deep-druckenmiller
-status: pending
+status: cancelled
 ---
 
 드러켄밀러 썸네일용 **손그림 초상 삽화** 한 장을 그려 주세요 (2026-11-21 사용자 선택: "손그림 초상 삽화").
@@ -20,3 +20,5 @@ status: pending
 python -m ytflow thumbnail 20261120-market-deep-druckenmiller
 ```
 썸네일 A 가 초상 + '벌기보다 안 잃기' 로 만들어집니다. 끝나면 status 를 done 으로 바꾸고 결과를 적어 주세요.
+
+취소 (2026-11-21): 사용자 "아니면 그냥 실제 그의 초상화나 사진을 사용하세요" → 공식 인터뷰 화면 한 장면을 씀.
