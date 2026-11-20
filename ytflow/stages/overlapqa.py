@@ -83,7 +83,9 @@ JS = r"""
     // (2026-11-20 사용자: "옮겨감 이런 글씨가 선에 겹쳣어요")
     const LINE = /^(path|line|polyline|polygon|circle|ellipse)$/i;
     let crossed = false;
-    for (const fy of [0.3, 0.7]) {
+    const ownBg = getComputedStyle(it._el).backgroundColor;
+    const backed = ownBg && !/rgba\(\d+, \d+, \d+, 0(\.[0-4]\d*)?\)|transparent/.test(ownBg);   // 글자 자신에 진한 받침이 있으면 아래 선은 안 보임
+    for (const fy of (backed ? [] : [0.3, 0.7])) {
       for (const fx of [0.1, 0.3, 0.5, 0.7, 0.9]) {
         for (const e of document.elementsFromPoint(it.x + it.w * fx, it.y + it.h * fy)) {
           if (e === it._el || e.contains(it._el)) { if (e === it._el || e.tagName === 'SPAN') continue; }

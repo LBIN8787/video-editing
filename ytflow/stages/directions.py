@@ -417,7 +417,7 @@ def apply_layers(D, project, spec, sc, bt, dur, adir: Path):
             y = L.get("top", 120)
             i = D._id()
             lab = (f'<div style="position:absolute;left:0;right:0;bottom:0;height:40px;line-height:40px;text-align:center;font-family:sans;'
-                   f'font-size:24px;color:#FFFFFF;background:rgba(12,12,14,.66)">{_e(L.get("label", ""))}</div>') if L.get("label") else ""
+                   f'font-size:24px;color:#FFFFFF;background:rgba(12,12,14,.88)">{_e(L.get("label", ""))}</div>') if L.get("label") else ""
             D.items.append(f'<div id="{i}" style="position:absolute;left:{x}px;top:{y}px;width:{mw}px;height:{mh}px;border:4px solid #FBF8F1;'
                            f'box-shadow:0 14px 34px rgba(0,0,0,.4);background:{C["sea"]}">'
                            f'<svg width="{mw}" height="{mh}" viewBox="0 0 {mw} {mh}" style="position:absolute;inset:0">'
