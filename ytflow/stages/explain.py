@@ -50,6 +50,10 @@ def _apply_theme(D, theme: str):
         return x
     D.items[:] = [sub(x) for x in D.items]
     D.svg[:] = [sub(x) for x in D.svg]
+    if theme == "dark":   # 장 꼬리표(왼쪽 위)는 스킨 잉크색 그대로라 숯색 무대 위에서 안 보였음 (대비 1.1:1) → 밝게
+        ink = f"color:{getattr(D, 'ink', '')};"
+        for lst in (D.items, getattr(D, "hud", [])):
+            lst[:] = [x.replace(ink, "color:#ECE8E0;", 1) if "left:56px;top:38px" in x else x for x in lst]
     for q in D.rq:
         for k in ("stroke", "fill"):
             if isinstance(q["opts"].get(k), str):
