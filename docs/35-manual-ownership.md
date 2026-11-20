@@ -26,7 +26,7 @@ manual-lock release                 ← main 에 안 합친 매뉴얼 변경이 
 - `locks` 브랜치에 잠금 커밋을 올리는 것은 사용자가 허락함 (2026-11-15). 잠금 파일 말고는 아무것도 올리지 않는다.
 
 ## 막는 장치 (세 겹)
-1. **명령**: `manual-bump` 은 잠금 없으면 멈춤. `review`·`feedback` 은 제안함으로. `manual-graph`·`manual-audit` 은 매뉴얼 파일을 다시 쓰지 않고 보기만. `manual-ui` 저장 버튼은 거절.
+1. **명령**: 잠금이 비어 있으면 `review`·`feedback`·`manual-bump`·`manual-ui` 저장이 그 자리에서 짧게 잡고(`auto_hours`) 씀. 다른 사람이 잡고 있을 때만 멈추고 요청·제안함으로 (2026-11-18, 아래). `manual-graph`·`manual-audit` 은 잠금이 없으면 보기만.
 2. **Claude Code hook** (`.claude/settings.json` PreToolUse): 보호 파일을 Edit·Write 하려 하면 잠금을 확인하고, 없으면 이유와 함께 막음. 세션이 시작될 때 잠금 상태를 보여 주고 git hook 을 켬.
 3. **git pre-commit** (`.githooks/pre-commit`, `git config core.hooksPath .githooks`): 보호 파일이 든 커밋을 잠금 없이 하면 거절. Codex 등 다른 에이전트도 이 hook 과 AGENTS.md 규칙을 따른다.
 급히 혼자 쓸 때만 `YTFLOW_MANUAL_GUARD=off` (사용자가 직접 할 때).

@@ -15,8 +15,6 @@ python -m ytflow stage <프로젝트> assemble    # 05_edit/draft.mp4 · timelin
 
 assemble 끝에 ffmpeg-skill 로 마스터링합니다(`ytflow/stages/finish.py`): 유튜브 음량 −14 LUFS(`final.mp4`), 유튜브 규격 점검(`delivery_check.json`), 프레임 시트(`final_sheet.png`).
 배경음은 `edit.bgm` 에 음원 경로를 주면 내레이션 아래로 자동으로 낮춰 깝니다. 업로드는 `final.mp4` 로 합니다.
-```bash
-```
 - **스타일 적용:** 프로젝트 폴더의 `edit.yaml` 이 `styles/<id>/edit.yaml` 을 따릅니다. `make --style-ref` 가 복사합니다.
 - **스타일 바꾸기:** `edit.yaml` 의 내용을 다른 스타일 것으로 바꾸고 assets 부터 다시 돌립니다(음성은 재사용).
 - **화면 우선순위:** 직접 넣은 파일(`scene_XXX.png/.mp4`) > 받은 클립 > 카드/애니메이션 > 기사 캡처 > 임시 썸네일 > 자리표시

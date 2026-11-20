@@ -1,8 +1,8 @@
-# 매뉴얼 정기 검토 — 2026-11-20T10:16 (매뉴얼 v67)
+# 매뉴얼 정기 검토 — 2026-11-20T10:25 (매뉴얼 v67)
 
 > 자동 생성 (`python -m ytflow manual-audit`, docs/34). **fix** = 판단 없이 고칠 수 있음 → 정기 검토가 고침 · **ask** = 사용자 판단 필요 → 질문으로 남김.
 
-**고칠 것 2 · 물어볼 것 13 · 새로 생김 0 · 지난번 뒤 해결됨 4**
+**고칠 것 0 · 물어볼 것 23 · 새로 생김 0 · 지난번 뒤 해결됨 2**
 
 ## 물어볼 것 (사용자 판단)
 
@@ -21,28 +21,30 @@
 | 제안함 | proposals/manual/20261119-230847-video-20261117-three.md | [review] 본편 v7 최종 통과. 사용자 원문 “합격입니다. 커밋해주세요” | video-20261117-three 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로 | 2026-11-20 |
 | 제안함 | proposals/manual/20261120-035314-op-infographic-direction.md | [feedback] 제가 강조하려는건 인포그래픽을 이용한 연출과 애니메이션효과에요 | codex/hangeop-infographic-direction 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로 | 2026-11-20 |
 | 제안함 | proposals/manual/20261120-083425-ectionate-faraday-8bp5bx.md | [feedback] 배경음은 그냥 빼줘 여기는 너무 연출이 허접해 다른거로 해줘 | claude/affectionate-faraday-8bp5bx 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로 | 2026-11-20 |
+| 모순 | manual/06 G8 MUST·README §3-7·11 S9·cli upload 기본 | c-20261120-24: manual/06 G8 MUST·README §3-7·11 S9·cli upload 기본 ↔ AGENTS.md 저장 규칙·docs/09 §0 (2026-11-16 사용자) | 어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided | 2026-11-20 |
+| 모순 | channels/ch-issues-daily/channel.yaml 제목·설명, 08 §0-2 | c-20261120-25: channels/ch-issues-daily/channel.yaml 제목·설명, 08 §0-2 ↔ 같은 파일 target_minutes 10, README §2-4 — 매 | 어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided | 2026-11-20 |
+| 모순 | manual/09 §1 시간표 | c-20261120-26: manual/09 §1 시간표 ↔ manual/09 §2 (v63) — 심층 기본과 90분 제작 시간 | 어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided | 2026-11-20 |
+| 모순 | manual/09 §2 표 | c-20261120-27: manual/09 §2 표 ↔ 같은 표 — 토요일 아침 | 어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided | 2026-11-20 |
+| 모순 | channels/brands.yaml identity·05 §0-7 | c-20261120-28: channels/brands.yaml identity·05 §0-7 ↔ 04 §0-8 (v57·v60) — 호기심 채널 정체성 | 어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided | 2026-11-20 |
+| 모순 | skills/video-sources §3 | c-20261120-29: skills/video-sources §3 ↔ docs/50 §0·AGENTS 소스 규칙 — PC 쿠키 사용과 우회 금지 | 어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided | 2026-11-20 |
+| 모순 | data/style_profile.json (writing.py 가 모든 make 대본 프롬프트에 넣음) | c-20261120-30: data/style_profile.json (writing.py 가 모든 make 대본 프롬프트에 넣음) ↔ manual/README §2-1·§2-4, 12 §0 — m | 어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided | 2026-11-20 |
+| 모순 | manual/04 §0-6 순서 | c-20261120-31: manual/04 §0-6 순서 ↔ manual/11 단계표·04 v55 — 호기심 intent.md 순서 | 어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided | 2026-11-20 |
+| 모순 | 정기 작업 "뉴스레터 소재 수집" 05:40 | c-20261120-32: 정기 작업 "뉴스레터 소재 수집" 05:40 ↔ docs/36 §5-1 — 뉴스레터 정기 작업 역할 | 어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided | 2026-11-20 |
+| 모순 | channels/ch-ai-shorts/README.md | c-20261120-33: channels/ch-ai-shorts/README.md ↔ channels/ch-ai-shorts/channel.yaml — AI 쇼츠 기본 스타일 | 어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided | 2026-11-20 |
 
 ## 고칠 것 (판단 불필요)
 
-| 종류 | 위치 | 내용 | 왜 | 처음 본 날 |
-|---|---|---|---|---|
-| 모순 점검 차례 | manual/contradictions.yaml | 전체 모순 점검 차례 (지난 점검 없음) | skills/manual-review §모순 점검 — 주제별(대본·화면·운영·정기 작업)로 지침 전체를 맞대고 장부에 적은 뒤 manual-audit --checked --full | 2026-11-20 |
-| 옛 그래프 | manual/graph.json | 매뉴얼 그래프가 옛것 | python -m ytflow manual-graph | 2026-11-20 |
+없음
 
 ## 지난 검토 뒤 해결됨
 
-- 폐지된 기준이 남음: | **주식 채널 개설 계획** — 이름 후보(겹침 확인)·1일 1영상 운영(평일 아침 브리핑·심층·주말 분석) | `docs/23-stock-channel-plan.md`, `c
-- 폐지된 기준이 남음: - 장면 길이 6~20초, 영상 전체 6~9분.
-- 폐지된 기준이 남음: # 크레딧: 한 편(6~8분, 2,500~3,300자) ≈ 2,100~2,800 크레딧/테이크 → 매일이면 월 7만~9만 (월 1만 무료 한도로는 부족)
-- 폐지된 기준이 남음: analysis: "주말 분석"
+- 과적합 후보: 전환·카메라·소리의 양은 §0-5(v12, 차분하게)와 README §2-5(호기심 움직임)가 v10 을 대체합니다 — v10 의 '박자마다 방향 바꾸는 카메라·전환 4종 돌려 쓰
+- 옛 그래프: 매뉴얼 그래프가 옛것
 
 ## 검토 기록
 
 | 날짜 | 고칠 것 | 물어볼 것 | 새로 | 해결 | 메모 |
 |---|---|---|---|---|---|
-| 2026-11-19T13:22 | 2 | 5 | 0 | 1 | 정기 검토 |
-| 2026-11-19T13:27 | 0 | 0 | 0 | 7 |  |
-| 2026-11-19T13:27 | 0 | 0 | 0 | 0 |  |
 | 2026-11-19T13:28 | 0 | 0 | 0 | 0 | 사용자 답 반영 |
 | 2026-11-19T13:52 | 0 | 1 | 1 | 0 |  |
 | 2026-11-19T13:52 | 0 | 1 | 0 | 0 |  |
@@ -54,3 +56,6 @@
 | 2026-11-20T10:12 | 0 | 13 | 0 | 0 |  |
 | 2026-11-20T10:15 | 6 | 13 | 6 | 0 |  |
 | 2026-11-20T10:16 | 2 | 13 | 0 | 4 |  |
+| 2026-11-20T10:21 | 2 | 13 | 0 | 0 |  |
+| 2026-11-20T10:25 | 1 | 24 | 11 | 1 | 모순·낡은 문장 전체 점검 (사용자 요청) |
+| 2026-11-20T10:25 | 0 | 23 | 0 | 2 | 모순·낡은 문장 전체 점검 (사용자 요청) |

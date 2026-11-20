@@ -5,7 +5,7 @@ description: 이야기 그림판 스타일(큰 종이 한 장 위에 내레이�
 
 # 이야기 그림판 (`styles/story-board/STYLE.md`, 장면 type `story`)
 
-1. 대본을 **이야기**로 쓴다 (manual/04 §0-4): 장면(때·곳·사람) → 사건 → 이상한 점 → 질문. 보도문 말투 대신 "~였습니다 / ~였죠 / ~거든요".
+1. 대본을 **이야기**로 쓴다 (manual/04 §0-4): 장면(때·곳·사람) → 사건 → 이상한 점 → 질문. 말투는 README §2-3 (3인칭 다큐 내레이터, '~습니다' 기본, 말 걸기 없음).
 2. `story` 장면의 박자마다 `draw` 목록을 쓴다:
    - `{"t": "말하는 낱말", "do": "figure|draw|stamp|chip|note|count|bubble|arrow|circle|cross|check|hl|dim|cam", "id", "x", "y", ...}`
    - 좌표는 그림판 3840×2160. `cam: [x, y, 확대]` (0.5 = 전체, 0.85 = 한 구역), `"full"`.
@@ -19,4 +19,4 @@ description: 이야기 그림판 스타일(큰 종이 한 장 위에 내레이�
 5. 썸네일은 `layout: board` (종이 + 같은 선 그림 + 큰 글씨, prompts/thumbnail.md).
 
 - **재료 (v2, docs/26-story-craft.md):** photo(polaroid·cut·round) · doc + mark · sticker · card · big · bg(paper·dark·photo). 사진은 04_assets/story/ 에, 라이선스는 credit 에.
-- **규칙:** 실존 인물은 실제 사진(허용 라이선스) 또는 이름 카드(막대 인물 금지). 영상의 60~85%까지 이 스타일을 뼈대로 쓰고, 나머지는 kinetic(질문·결론 한 줄)·quote(인용)·versus(숫자 대비)로 숨을 쉰다.
+- **규칙:** 실존 인물은 실제 사진(허용 라이선스) 또는 이름 카드(막대 인물 금지). 자료(실사·사진)가 없는 구간에서 여러 장소·인물·날짜를 한 장으로 엮을 때 쓴다 (v60 이후 호기심의 뼈대는 실사 B-roll + 모션그래픽, manual/04 §0-8). 그 구간 안에서는 길게 이어져도 되고, 사이사이 kinetic(질문·결론 한 줄)·quote(인용)·versus(숫자 대비)로 숨을 쉰다.

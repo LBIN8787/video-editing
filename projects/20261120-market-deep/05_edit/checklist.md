@@ -1,11 +1,11 @@
 # 체크리스트 — 20261120-market-deep
 
-매뉴얼 v62 · 2026-11-20T16:53:36 · **통과**
+매뉴얼 v67 · 2026-11-20T10:25:41 · **통과**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
 | G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ✅ |  |
-| G0 | SHOULD | 매뉴얼 그래프가 최신 (python -m ytflow manual-graph) | ⚠️ | manual/graph.json |
+| G0 | SHOULD | 매뉴얼 그래프가 최신 (python -m ytflow manual-graph) | ✅ | manual/graph.json |
 | G1 | MUST | topic_brief.json 있음 | ✅ | 01_research/topic_brief.json (schemas/topic_brief.schema.json) |
 | G1 | MUST | 브랜드(ai/market/curiosity) | ✅ | market |
 | G1 | MUST | 욕망·시청자 질문 | ✅ | 앤트로픽은 17% 올랐는데, 시장은 왜 2% 빠졌을까? |
@@ -62,39 +62,6 @@
 | G4 | SHOULD | market: 끝에 확인할 신호(checklist) | ✅ | ['checklist', 'kinetic', 'outro'] |
 | G4 | MUST | 인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1) | ✅ | [] |
 | G4 | SHOULD | 말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용) | ⚠️ | ['미쳤'] |
-| G6 | MUST | 길이: 롱폼 10분 이상 — 많이 짧으면 쇼츠로 (README §2-4) | ✅ | 18.5분 |
-| G5 | SHOULD | 배경: 한 가지 바탕으로 고정하지 않음 — 장면이 하는 일이 바뀌면 바탕도 바뀜 (05 §0-2) | ✅ | ['film', 'grid', 'photo', 'spot', 'tint'] |
-| G5 | 참고 | 배경: 같은 바탕이 이어지는 구간 | ℹ️ | ['tint'] |
-| G5 | 참고 | 반복 피로: 글씨·도형뿐인 장면이 이어지는 구간 — 자료·지도·그림으로 보여 줄 수 있는지 다시 볼 곳 (05 §0-3) | ℹ️ | 최장 3연속 (장면 35) |
-| G5 | 참고 | 장식 효과(dust·leak)를 쓴 장면 — 내용이 담긴 볼거리 대신 쓰지 않았는지 (05 §0-4) | ✅ | [] |
-| G5 | 참고 | 반복 피로: 볼거리(자료·지도·그림)가 있는 장면의 몫 | ✅ | 21/30 |
-| G5 | 참고 | 반복 피로: 같은 시각 효과가 이어지는 구간 (효과 종류 수는 채우지 않음 — 05 §0-5) | ✅ | [] 연속 [] |
-| G5 | SHOULD | 바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6) | ✅ | 이번 cream · 직전 [] |
-| G5 | SHOULD | v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게) | ✅ | market |
-| G5 | SHOULD | v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음 | ✅ | 표지 ['nyse', 'dc', 'seoul'] · NASA 0 |
-| G5 | 참고 | 반복 피로: 같은 채널 직전 편과 화면 구성이 얼마나 겹치나 | ℹ️ | 83% |
-| G5 | 참고 | 같은 장면 type 이 이어지는 구간 — 하는 일이 바뀌었는데 화면이 같지 않나 | ℹ️ | ['checklist'] |
-| G5 | 참고 | 자료 화면 없이 그래픽만 이어지는 가장 긴 구간 | ℹ️ | 최장 1090초 |
-| G5 | 참고 | 장 전환 없이 이어지는 가장 긴 구간 | ℹ️ | 최장 270초 |
-| G5 | SHOULD | 스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1) | ✅ | 7종 ['data-report', 'hybrid-causal', 'kinetic-type', 'map-journey', 'paper-column |
-| G5 | 참고 | 스타일 조합: 가장 많이 쓴 스타일의 몫·겹친 장면·같은 스타일 연속 | ℹ️ | data-report 0.31 · 겹침 1 · 최장 연속 3 |
-| G5 | 참고 | 강조 횟수·강조가 겹친 장면 — 기억할 숫자·반전·결론에만 썼는지 (05 §0-1) | ✅ | 1번 [(36, 'kinetic')] · 겹친 장면 [] |
-| G5 | SHOULD | 핵심 단어 띄우기에 문장을 쓰지 않음 — 자막과 같은 내용을 위에 반복하지 않음 (v3) | ✅ | [] |
-| G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ✅ | paper-sketch / 등록부 ['blueprint', 'clean-flat', 'clean-white', 'corkboard', 'crum |
-| G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ✅ | python -m ytflow style-pick <프로젝트> |
-| G5 | SHOULD | edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움) | ✅ | python -m ytflow edit-plan <프로젝트> → 02_script/EDIT_CONTEXT.md |
-| G6 | MUST | final.mp4 | ✅ |  |
-| G6 | MUST | 레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why) | ✅ | {} |
-| G6 | 참고 | 무대 화면: 한꺼번에 보이는 것·글자·멈춘 박자 (한 화면 한 생각인지 눈으로, 04 §0-5) | ✅ | {} |
-| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 0.989, 'p95_abs_offset': 0.11, 'median_abs_offset': 0.05, 'video |
-| G6 | SHOULD | 납품 점검(음량 등) | ✅ | completed |
-| G6 | 참고 | 움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5) | ℹ️ | 변화 6.9/분 · 정지 0.72 |
-| G6 | SHOULD | 최종 목소리 ElevenLabs | ✅ |  |
-| G7 | MUST | 제목 후보 3개 + 이유 | ✅ |  |
-| G7 | MUST | 썸네일 A/B/C + 점검 ok | ✅ |  |
-| G7 | 참고 | 제목 앞부분에 질문·핵심 (목록에서 잘려도 무슨 영상인지 보이게) | ✅ | 앤트로픽 상장 날, 시장은 왜 2% 빠졌 |
-| G8 | MUST | GitHub Release 업로드 | ✅ |  |
-| G8 | MUST | episodes.md 기록 | ✅ | ch-market-daily |
 
 **참고**(ℹ️)는 실패가 아니라 측정값입니다 — 숫자를 맞추지 말고, 표시된 곳이 그 연출의 원리(manual/05 §0-0)에 맞는지 화면 확인(D3)에서 봅니다.
 사람 눈 검사(EYE)는 manual/06-checklist.md 끝의 5가지를 확인하세요.

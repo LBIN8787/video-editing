@@ -127,7 +127,7 @@ python -m ytflow archive si "steam locomotive"     # CC0 이미지만, 소장처
 ### 5-3. 남은 일
 - Gmail 필터 (사람, 한 번): `from:(tldrnewsletter.com OR simonsfoundation.org OR aeon.co OR axios.com OR thedailyupside.com OR uppity.co.kr OR kdi.re.kr OR deeplearning.ai OR jstor.org OR publicdomainreview.org OR ourworldindata OR pewresearch.org)` → 받은편지함 건너뛰기 + `뉴스레터` 라벨. 첫 메일이 오면 실제 보낸 주소로 맞추기.
 - 첫 본편 확인되면 `config/newsletters.yaml` 상태 올리기: KDI·JSTOR Daily·The Batch(`planned` → `subscribed`) · TLDR Tech(첫 발송 확인) · 그때 실제 도착 시각으로 `arrives` 채우기.
-- 매뉴얼 반영(manual/09 §3-0 옆에 '뉴스레터 화제'): 매뉴얼 담당에게 제안함으로 남김 (`proposals/manual/`).
+- 매뉴얼 반영: v35 에서 manual/09 §3-0-1 '뉴스레터 화제'로 반영됨.
 
 ## 6. 호기심·심리 RSS 공통 소스 (2026-11-18)
 
@@ -157,7 +157,7 @@ Git 저장소 접근·동기화가 허용된 Claude/Codex/다른 에이전트가
 수집 역할은 한 곳에서 실행하고 변경된 공용 결과만 기존 권한 범위로 공유한다. 각 모델이 별도 수집 예약을 만들지 않는다.
 
 ### 수집 주기와 보관
-§5의 05:40·07:50 KST 수집 결과를 공용 소재 목록에서 읽는다.
+§5-1 의 05:40·17:40 KST 수집 창(07:50 보충) 결과를 공용 소재 목록에서 읽는다.
 기존 수집기는 최근 2일 게시물을 수집하므로 긴 중단 후 복구나 오래된 배경 소재 전수수집은 별도 범위다.
 호기심은 기존 `show --brand curiosity` 소재 검토 경로를 사용한다. `daily`는 시장/시사 경로이며 호기심 자동 영상 제작을 새로 연결한 것이 아니다.
 작은 설정·제목·링크·검증 기록은 Git, 큰 원자료·미디어는 Drive라는 docs/09 §0-0 방침을 유지한다. 이번에는 큰 파일·새 설치가 없다.

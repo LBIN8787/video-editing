@@ -1,5 +1,7 @@
 # 03. 벤치마킹 결과 (2026-11-05)
 
+> **처음 설계 기록 (2026-11 초).** 지금 제작 기준은 `manual/` 과 `channels/brands.yaml` 입니다. 이 결과는 `make` 파이프라인의 `data/style_profile.json` 에만 쓰입니다.
+
 `python -m ytflow benchmark --no-llm` 로 낸 수치와, 아웃라이어 상위 영상 자막을 직접 읽고 분석한 결과입니다.
 규칙 원본은 `data/style_profile.json` 에 있고, 이후 대본·편집 단계가 이 파일을 그대로 참조합니다.
 
@@ -107,5 +109,4 @@
 ## 다음 단계
 
 1. **컷 속도 측정:** 개인 PC에서 `benchmark --video` 를 돌려 `cut_rhythm` 과 `targets.cuts_per_minute` 를 채웁니다.
-2. **로제타 추가:** 채널 주소가 확인되면 `channels.yaml` 에 추가하고 다시 돌립니다.
 3. **소스 탐색 키워드:** `config/pipeline.yaml` 의 `seed_keywords` 를 두 채널이 터뜨린 주제 쪽으로 바꿔 두었습니다.

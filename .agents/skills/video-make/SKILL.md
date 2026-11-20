@@ -5,6 +5,8 @@ description: 주제 선정부터 자료조사, 대본, 소스 탐색, 편집, �
 
 # 영상 1편 전체 제작 (ytflow make)
 
+> 먼저 `manual/README.md` 와 `manual/11-workflow.md` 단계표를 따릅니다. `make` 는 `--plan` 으로 D1(주제)까지만 돌리고 사용자 결정 뒤 이어 갑니다. 대본은 D2(사용자 대본 검토) 통과 전에 렌더하지 않습니다 (매일 시장 채널만 예외, manual/09 §2-1).
+
 ## 준비 (처음 한 번)
 1. `pip install -r requirements.txt` 를 실행하고, ffmpeg·node(22+)를 설치합니다. 그다음 `python scripts/install_tools.py` 로 외부 편집 도구(HyperFrames, ffmpeg-skill)를 고정 버전으로 설치합니다.
 2. LLM 백엔드를 고릅니다 (`config/pipeline.yaml` → `llm.backend`, 또는 환경변수 `YTFLOW_LLM_BACKEND`).
@@ -19,7 +21,7 @@ description: 주제 선정부터 자료조사, 대본, 소스 탐색, 편집, �
 
 ## 실행
 ```bash
-python -m ytflow make --style-ref <스타일id>                     # 주제 자동 선정
+python -m ytflow make --style-ref <스타일id> --plan              # 주제 후보까지 (D1 사용자 결정 뒤 이어 감)
 python -m ytflow make --topic "주제" --angle "관점" --style-ref <id>
 ```
 주제는 **트렌드 우선**으로 고릅니다. discover 가 최근 48시간의 여러 매체(Google News 국문·영문, Hacker News, X API 선택)와 이번 주 YouTube 아웃라이어를 모아 `00_source/trends.json` 을 만들고, select 는 여러 매체가 동시에 다루는 가장 새로운 소재를 1순위로 둡니다.

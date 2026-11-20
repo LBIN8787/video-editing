@@ -81,7 +81,7 @@ table(표) / headline(기사·공시 제목) / text(한 문장) / analogy(실제
 - kind=quote 는 팩트시트 '인물 발언'에 원문과 출처 영상이 확인된 경우에만. quote_en 에 원문, narration 에 번역.
 
 ## 4. 구조
-- hook(0~30초): 숫자 사실(비교 기준 포함) → 질문 하나 → 오늘 따라갈 길(logic 을 한 문장으로).
+- hook(0~30초): 장면 또는 숫자 사실(비교 기준 포함) → 질문 하나 (순서 예고·'오늘 따라갈 길' 없음, manual/README §2-1).
 - body-N: 계열별 화면 문법에 따라. 각 body 는 끝에 so_what 또는 summary 장면.
 - 반론 섹션 1개, takeaway(core_message 를 다시 한 번), outro(다음에 볼 일정·지표).
 

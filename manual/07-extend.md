@@ -19,6 +19,7 @@ skins/<id>/skin.yaml      그래픽 팩 등록부              ▼
 5. 시험작: `styles/demos/<id>.json` 스펙 → `python scripts/style_demo.py <원본> <시험작> styles/demos/<id>.json` → `python -m ytflow hybrid <시험작>` (같은 문장·목소리 재사용, 비용 0).
 6. `status`: idea → demo(시험작 있음) → approved(사용자가 `review --pass`). 상태가 높을수록 style-pick 이 우선합니다.
 7. 스킬 문서가 필요하면 `skills/edit-style-<id>/SKILL.md` → `python scripts/sync_skills.py`.
+8. 새 장면·효과·화풍은 **목록 + 움직이는 예시 + 제작 명세**를 함께 더합니다 — `styles/visuals.yaml`·`styles/components.yaml`·`styles/looks.yaml` (12 §0-1, v66).
 
 ## 2. 채널(브랜드) 추가
 1. `channels/brands.yaml` 에 항목: `desire`(상위 욕망 한 줄), `viewer_questions`, `triggers`, `lines`, `manual`.

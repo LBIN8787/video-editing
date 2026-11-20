@@ -1,6 +1,6 @@
 ## 주제 고르기 — 욕망 → 트리거 → 질문 → 주제 (manual/01-desire-map.md)
 
-입력: 브랜드(ai/market/curiosity), 트렌드·수요·시세에서 모은 트리거 목록.
+입력: 브랜드(ai/market/curiosity/issues), 트렌드·수요·시세에서 모은 트리거 목록.
 출력: `01_research/topic_brief.json` (스키마 `schemas/topic_brief.schema.json`).
 
 1. 트리거마다 "시청자가 머릿속에 떠올린 질문"을 15자 안팎으로 하나 적는다. 질문이 안 나오면 버린다.
