@@ -14,7 +14,7 @@ Windows 작업 스케줄러가 10분마다 실행한다 (설치: scripts/install
     `after: <다른 할 일 파일>` 이 있으면 그 할 일이 done 이 된 뒤에 시작한다 (원화 → 빌드 순서).
     결과는 일꾼이 할 일 파일에 '## 결과' + status: done|failed 로 적어 main 에 푸시.
  4. 실패하면 status: pending 으로 되돌리고 시도 횟수를 남긴다. 2번 실패하면 status: failed 로 두고 멈춘다(무한 반복 방지).
-로그: %LOCALAPPDATA%/ytflow/pc_worker.log · 잠금: %LOCALAPPDATA%/ytflow/pc_worker.lock (겹쳐 돌지 않게)
+로그: %YTFLOW_DRIVE%/_local/pc-worker/pc_worker.log · 잠금: 같은 폴더 pc_worker.lock (YTFLOW_DRIVE 없으면 %LOCALAPPDATA%/ytflow) (겹쳐 돌지 않게)
 
 클라우드 세션은 이 파일을 실행하지 않는다(CLAUDE_CODE_REMOTE=true 면 바로 끝남).
 """
@@ -31,7 +31,9 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-HOME = Path(os.environ.get("LOCALAPPDATA") or Path.home() / ".local" / "share") / "ytflow"
+# 로그·잠금은 Google Drive(_local) — 2026-11-21 사용자: "작업파일은 c드라이브에 두지 말고 구글드라이브에 보관해줘"
+HOME = (Path(os.environ["YTFLOW_DRIVE"]) / "_local" / "pc-worker") if os.environ.get("YTFLOW_DRIVE") else \
+    Path(os.environ.get("LOCALAPPDATA") or Path.home() / ".local" / "share") / "ytflow"
 LOG = HOME / "pc_worker.log"
 LOCK = HOME / "pc_worker.lock"
 MAX_TRY = 2

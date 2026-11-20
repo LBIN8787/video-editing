@@ -3,7 +3,7 @@
 # 실행:  PowerShell 에서 저장소 폴더로 가서
 #   powershell -ExecutionPolicy Bypass -File scripts\install_pc_worker.ps1
 # 끄기:  Unregister-ScheduledTask -TaskName ytflow-pc-worker -Confirm:$false
-# 로그:  %LOCALAPPDATA%\ytflow\pc_worker.log
+# 로그:  %YTFLOW_DRIVE%\_local\pc-worker\pc_worker.log
 $ErrorActionPreference = "Stop"
 $repo = (Resolve-Path "$PSScriptRoot\..").Path
 $py = (Get-Command python -ErrorAction SilentlyContinue).Source
@@ -21,5 +21,5 @@ $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -DontStopIfGoingOnB
   -MultipleInstances IgnoreNew -ExecutionTimeLimit (New-TimeSpan -Hours 3)
 Register-ScheduledTask -TaskName "ytflow-pc-worker" -Action $action -Trigger $trigger -Settings $settings `
   -Description "ytflow: inbox/pc-tasks 의 pending 할 일을 Codex(GPT 이미지)·Claude 로 자동 처리 (scripts/pc_worker.py)" -Force | Out-Null
-Write-Host "등록됨: ytflow-pc-worker (10분마다). 첫 실행은 1분 뒤. 로그: $env:LOCALAPPDATA\ytflow\pc_worker.log"
+Write-Host "등록됨: ytflow-pc-worker (10분마다). 첫 실행은 1분 뒤. 로그: $env:YTFLOW_DRIVE\_local\pc-worker\pc_worker.log"
 & $py "$repo\scripts\pc_worker.py" --dry-run
