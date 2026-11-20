@@ -9,7 +9,7 @@ description: 하이브리드 편집 스타일(실제 인터뷰·자료 영상 + 
 - **대본:** `projects/<프로젝트>/02_script/hybrid.json` — 질문(question)·핵심 한 문장·인과 지도(map)·장면(scenes: type + beats[say…])·footage(출처·라이선스)
 - **원본 영상 확보:** `04_assets/footage/<키>.mp4` 에 넣고 hybrid.json 의 footage 에 credit·url 을 적습니다.
   - 클라우드에서 되는 곳: NASA 이미지·영상 라이브러리(퍼블릭 도메인, images-api.nasa.gov). 위키미디어 공용(CC BY)은 클라우드 IP 가 자주 429 로 막힘 → PC 에서.
-  - YouTube 공식 채널 영상은 사용자 PC 에서(yt-dlp, 봇 확인 우회 금지).
+  - YouTube 공식 채널 영상 구간은 `python -m ytflow clip-order <프로젝트>`(클라우드 주문서) → 사용자 PC 에서 `clip-fetch` (20초 이내 구간만, docs/50). 봇 확인 우회 금지, 막힌 페이지는 `inbox/requests/` 로 피클에게.
 - **만들기:** `python -m ytflow hybrid <프로젝트>` → 박자별 음성 → 장면별 HyperFrames 렌더(병렬) → 이어 붙이기·자막·효과음 → 마스터링(final.mp4)
 - **점검:** 장면마다 `hyperframes check` 결과가 `04_assets/layout_qa.json` 에. 프레임을 뽑아 직접 확인(`skills/video-edit`).
   - 같은 type 연속, 20~30초 넘게 원본 영상 없음, 숫자만 나열된 박자가 없는지.

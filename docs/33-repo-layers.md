@@ -7,14 +7,14 @@
 
 | 맷 포콕 방식 | 우리 편집 |
 |---|---|
-| 공용 스킬 저장소 | **메인 레포** = `manual/`(원칙·작업 기준·작업 절차) + `manual/situations.yaml`(공통 상황 16) + `styles/techniques.yaml`(연출 기법) + `manual/glossary.yaml`(용어) |
+| 공용 스킬 저장소 | **메인 레포** = `manual/`(원칙·작업 기준·작업 절차) + `manual/situations.yaml`(공통 상황) + `styles/techniques.yaml`(연출 기법) + `manual/glossary.yaml`(용어) |
 | 프로젝트 종류별 설정 | **주제 레포** = `topics/<brand>/topic.yaml` — 주식·호기심·AI·시사. `inherits: main` + 스타일 기본값 덮어쓰기 + 상황 더하기·바꾸기·빼기 + 기본으로 안 쓰는 기법 |
 | 프로젝트마다 셋업 → CLAUDE.md | **영상 한 편** = `python -m ytflow edit-plan <영상>` → `02_script/EDIT_CONTEXT.md`(이 영상에 적용되는 규칙 묶음, 에이전트가 편집 전에 먼저 읽음) + `edit_plan.json` |
 
 ## 상황이란
 대본의 한 박자(문장)가 **하는 일** — 장면을 연다, 누가 말했다, 숫자가 움직였다, 원인 → 결과, 말과 행동을 맞댄다 … (`manual/05-style-matching.md` §2 표를 기계가 읽게 옮긴 것). 상황마다 1순위 → 2순위 장면 종류, 함께 쓸 연출 기법, 피할 것, 그 이유(사용자 뜻·매뉴얼 근거), 알아보는 말(signals)이 있다. 주제 레포는 그 주제에만 있는 상황을 더한다:
 - **주식**: 말과 행동 맞대기(v26) · 시장을 흔든 사건과 파급(v28) · 실적·가이던스 · 어닝콜 발언 · 다음 주 일정(v29). 기본값 zoom off(v31) · camera calm(v30) · bgm none · motion_beats. 기본으로 안 쓰는 기법: 확대 전환·풀백·사진 깊이·휩 팬.
-- **호기심**: 주인공이 무언가를 한다(v22) · 답을 밝히는 순간 · 규모를 느낀다. 장면을 연다·바뀌었다는 stage·story 로 바꿈. 기본값 backbone story·stage · camera fixed · 대본 검토(v23).
+- **호기심**: 주인공이 무언가를 한다(v22) · 답을 밝히는 순간 · 규모를 느낀다. 장면을 연다·바뀌었다는 stage·story 로 바꿈. 기본값 backbone broll-motion(실사 B-roll + 모션그래픽, v60) · 삽화·stage·story 는 자료가 없는 구간만 · camera fixed · 대본 검토(v23).
 - **AI**: 새 도구 소개 · 쓰기 전과 후. 화면의 한 곳은 실제 화면 위 표시.
 - **시사**: 양쪽 입장(같은 틀, 영구 원칙) · 아직 모르는 것 · 우리에게 무슨 뜻.
 

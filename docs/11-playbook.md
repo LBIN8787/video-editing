@@ -1,5 +1,7 @@
 # 11. 제작 플레이북 — 다음에도 똑같이 만드는 법 (하이브리드 롱폼 기준, 2026-11-07)
 
+> **현재 기준:** 단계·결정 지점은 `manual/11-workflow.md`, 단계마다 `python -m ytflow check`, 편집 전 `edit-plan`. 이 문서는 hybrid 렌더·보관 실무 메모(2026-11-07)입니다.
+
 이 문서 하나만 따라 하면 Claude Code 든 Codex 든 같은 품질로 한 편을 만들고, 영상과 작업 기록을 보관할 수 있습니다.
 실제 예: `projects/20261107-knowledge-스페인독감` (교양), `projects/20261106-hybrid-데이터센터` (경제).
 
@@ -33,7 +35,7 @@ python -m ytflow archive search "world war 1918" --films                  # 영�
 ## 4. 대본 (`02_script/hybrid.json`)
 - 장면 type·필드: `prompts/script_hybrid.md` 표. 서술 규칙: `prompts/script_knowledge.md` B·C절.
 - 인과 지도 칸은 2줄 × 4칸(x = 250/710/1170/1630, y = 400/720)에 둠. 화살표는 렌더러가 다른 칸을 피해 돌려 그림.
-- 같은 type 연속 금지, 자료 화면 20~30초마다, 영상 8~10분.
+- 같은 type 연속 금지, 자료 화면 20~30초마다, 영상 10분 이상 (깊이의 최소선, manual/README §2-4).
 
 ## 4-1. 목소리 (영상 확정 후, 키 없이)
 - 초안은 edge-tts(자동). 최종은 ElevenLabs: 커넥터/웹으로 장 단위 긴 음성 → `python -m ytflow voice-import <프로젝트> part1.mp3 part2.mp3` (docs/08-voice.md).

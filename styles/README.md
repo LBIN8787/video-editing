@@ -1,5 +1,8 @@
 # 편집 스타일 라이브러리
 
+> **지금 고르는 법 (2026-11-20):** 영상마다 상황에 맞춰 고릅니다 — 스타일 등록부·추천 `python -m ytflow recipes` · `style-pick <프로젝트>` (`styles/recipes/`), 박자별 장면 `edit-plan <프로젝트>`, 화풍 `looks` · `look <프로젝트>` (`styles/looks.yaml`), 구성요소 조합 `look <프로젝트> --set 카테고리=스타일` (`styles/components.yaml`), 눈으로 보는 목록은 `skills/looks-gallery`.
+> 새 시각효과는 **목록 + 움직이는 예시 + 제작 명세**를 함께 둡니다 (manual/12 §0-1, v66). 아래 계열 표는 폴더 스타일의 길잡이입니다.
+
 스타일 하나는 폴더 하나입니다. 어떤 에이전트(Claude Code, Codex)든 같은 파일을 읽고 같은 결과를 냅니다.
 
 스타일은 **계열(family)** 로 나뉩니다. 계열이 다르면 대본의 화면 문법, 소스를 찾는 방법, 점검 기준이 다릅니다.
@@ -10,12 +13,13 @@
 원래 목소리에 원문·번역 자막을 달고, 발언 2~3개마다 **핵심 요약 애니메이션 카드**로 편집점을 넣습니다.
 - 대본 화면 문법: `prompts/script_source.md`
 - 화면 비율: 원본 영상 40~55% · 요약·숫자 카드 30~40% · 기사 캡처 10~20%
-- 소스 확보가 품질을 좌우합니다: YouTube 클립은 사용자 PC 에서 `rebuild` 로 받습니다.
+- 소스 확보가 품질을 좌우합니다: YouTube 원본 구간은 `clip-order`(클라우드) → 사용자 PC `clip-fetch` 로 받습니다 (docs/50).
 
 | id | 이름 | 렌더러 | 상태 | 쓰는 곳 |
 |---|---|---|---|---|
 | `hybrid` | 하이브리드 (사용자 요청 조합) | hybrid (원본 영상 + 인과 지도 + 손그림 도식) | draft | 원본 영상이 있는 경제·산업 분석 롱폼 |
-| `sixsigma` | 식스시그마 | sixsigma (카드는 검은 배경 애니메이션) | reviewed | 기업·투자 뉴스, 실적·지분·딜 해설 |
+| `sixsigma` | 식스시그마 | sixsigma (카드는 검은 배경 애니메이션) | reviewed | 기업·투자 뉴스, 실적·지분·딜 해설 (`ch-source-brief`) |
+| `source-cut` | 원본 발언 컷편집 | hybrid 장면 `bite` (`cutedit.py`) | — | 어닝콜·기자회견에서 대본과 맞는 문장만 그 사람의 목소리로 |
 
 ### B. 자체 제작 인포그래픽형 (`family: infographic`)
 **직접 그린 도식·차트·비유 그림**이 뼈대입니다. 원본 영상은 분위기용으로만 조금 씁니다. 클립 다운로드가 필요 없어 클라우드에서 끝까지 완성됩니다.
@@ -26,11 +30,19 @@
 |---|---|---|---|---|
 | `mijudiary` | 미주일기 | paper | reviewed | 개념·원리·역사 해설 (종이 콜라주 + 손그림 애니메이션) |
 | `moneycrew` | 머니크루 | flat | reviewed | 산업·공급망·실적 해설 (평면 인포그래픽 모션, 차트) |
+| `explain-stage` | 설명 무대 | hybrid 장면 `afterline`·`spread`·`share`·`motionboard` (`explain.py`) | demo | 상황 설명 박자 — 시장 채널 상황 설명 기본 |
+| `news-desk` | 뉴스 데스크 카드 | hybrid 장면 `newsdesk` | — | 한 소식 = 한 장 (주간 정리·매일 소식 2~3개) |
+| `story-board` | 이야기 그림판 | hybrid 장면 `story` | demo | 호기심 — 자료가 없는 구간의 이야기 (v60 이후 대체 수단) |
+| `illustrated` | 손그림 삽화 | hybrid 장면 `illust` | — | 재구성 삽화 (자료가 없을 때, 그림은 `art-gen`·사람) |
+| `anim-stage` | 애니메이션 무대 | hybrid 장면 `stage` | — | 한 화면 한 생각 — 자료가 없는 구간의 인물 행동 |
+| `motion-metaphor` | 움직이는 비유 | hybrid 장면 `metaphor` | — | 사용자가 고를 때만 (매뉴얼 기준 아님) |
 
 ### C. 쇼츠 (`family: shorts`)
 | id | 이름 | 렌더러 | 상태 | 쓰는 곳 |
 |---|---|---|---|---|
 | `shorts-aitips` | AI 꿀팁 쇼츠 | shorts | reviewed | 9:16: GitHub·AI 활용 소재 (`python -m ytflow shorts`) |
+| `hook-shorts` (레시피) | 훅 쇼츠 (얼굴 없이) | `python -m ytflow hookshort` | — | 실제 화면 꽉 채움·훅 제목·큰 자막 |
+| `presenter-shorts` | 말하는 사람 쇼츠 | `python -m ytflow presenter` | — | 본인 촬영 영상이 있을 때만 |
 
 ### 어느 계열을 쓸까
 | 주제 | 계열 |

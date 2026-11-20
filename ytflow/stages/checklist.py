@@ -390,7 +390,7 @@ def run(path: Path, upto: str = "G8") -> Report:
         R.add("G5", "참고", "반복 피로: 볼거리(자료·지도·그림)가 있는 장면의 몫", vs["ratio"] >= 0.6, f"{vs['hooked']}/{vs['n']}")
         R.add("G5", "참고", "반복 피로: 같은 시각 효과가 이어지는 구간 (효과 종류 수는 채우지 않음 — 05 §0-5)",
               not vs["fx_runs"], f"{vs['fx_kinds']} 연속 {vs['fx_runs']}")
-        # 바탕색 돌려 쓰기 (v13): 미색 종이 계열만 계속 쓰지 않기 — 직전 두 프로젝트와 같은 바탕 계열이면 경고
+        # 바탕 계열 (v13, 2026-11-11 한 편 판정 "돌려 써도 됨" — 허락이지 명령이 아님): 같은 채널 직전 두 편과 같은 바탕 계열이면 참고로 표시
         try:
             from . import skin as _skin
             def _fam(sid):
@@ -399,12 +399,16 @@ def run(path: Path, upto: str = "G8") -> Report:
                 if r + g + bb < 300: return f"dark:{sid}"
                 return "cream" if r - bb > 12 else f"light:{sid}"
             cur = _fam((ed.get("edit") or {}).get("skin", "paper-sketch"))
+            my_ch = ed.get("channel", "")
             prevs = []
             for q in sorted(Path(path).parent.iterdir()):
                 if q.name < Path(path).name and (q / "edit.yaml").exists() and (q / "05_edit" / "final.mp4").exists():
-                    prevs.append(_fam(((yaml.safe_load((q / "edit.yaml").read_text(encoding="utf-8")) or {}).get("edit") or {}).get("skin", "paper-sketch")))
+                    qe = yaml.safe_load((q / "edit.yaml").read_text(encoding="utf-8")) or {}
+                    if my_ch and qe.get("channel") != my_ch:   # 다른 채널 영상과 비교하지 않음 (2026-11-20 범위 점검)
+                        continue
+                    prevs.append(_fam((qe.get("edit") or {}).get("skin", "paper-sketch")))
             last2 = prevs[-2:]
-            R.add("G5", "SHOULD", "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6)",
+            R.add("G5", "참고", "바탕 계열: 같은 채널 직전 두 편과 같은 바탕 계열인지 (바꿔도 되고 이어 써도 됨 — 카테고리 얼굴 05 §0-7 이 먼저)",
                   not (len(last2) == 2 and all(x == cur for x in last2)), f"이번 {cur} · 직전 {last2}")
         except Exception:
             pass
@@ -416,9 +420,12 @@ def run(path: Path, upto: str = "G8") -> Report:
             covers = [s.get("bg_src") or (keys[(int(s.get("chapter", 1) or 1) - 1) % len(keys)] if keys and not s.get("look") else None)
                       for s in spec["scenes"] if s.get("type") == "chapter"]   # 대본에 없으면 렌더러가 고르는 것(edit10.prepare)과 같게
             covers = [c for c in covers if c]
-            nasa = [c for c in covers if "NASA" in (fo.get(c, {}).get("credit") or "")]
-            R.add("G5", "SHOULD", "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음",
-                  len(covers) == len(set(covers)) and len(nasa) <= 1, f"표지 {covers} · NASA {len(nasa)}")
+            from collections import Counter as _C
+            cred = _C((fo.get(c, {}).get("credit") or "").split(",")[0].strip() for c in covers)
+            cred.pop("", None)
+            top = cred.most_common(1)[0] if cred else ("", 0)
+            R.add("G5", "SHOULD", "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번 없음, 한 출처로 표지를 모두 때우지 않음",
+                  len(covers) == len(set(covers)) and not (len(covers) >= 3 and top[1] == len(covers)), f"표지 {covers} · 가장 많은 출처 {top}")
         prev = _prev_episode_signature(path, spec)
         if prev is not None:
             cur = set(vs["signature"])

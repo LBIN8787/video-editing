@@ -13,7 +13,7 @@ python -m ytflow make --channel ch-source-brief                          # 트�
 python -m ytflow make --channel ch-source-brief --topic "주제"            # 주제 지정
 python -m ytflow make --channel ch-source-brief --from-text 조사글.md      # 대화형 LLM 답·메모를 영상으로
 ```
-YouTube 원본 클립은 클라우드에서 받을 수 없어 **사용자 PC 에서 `python -m ytflow rebuild <프로젝트>`** 로 채웁니다.
+YouTube 원본 발언 구간은 클라우드에서 받을 수 없어, 클라우드가 `python -m ytflow clip-order <프로젝트>` 로 주문서를 쓰고 **사용자 PC 가 `clip-fetch`** 로 받습니다 (docs/50). 받기 전에는 인용 카드로 그립니다. (옛 make 파이프라인 scenes.json 은 PC `rebuild`)
 
 ## 올리기 전 점검
 - 원본 발언(quote) 4개 이상, 발언 2~3개마다 핵심 요약 카드가 있는가

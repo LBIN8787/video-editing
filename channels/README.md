@@ -1,13 +1,13 @@
 # 운영 채널
 
-편집 스타일 하나 = 유튜브 채널 하나로 운영합니다. 채널 폴더에는 그 채널의 **설정(channel.yaml)·운영 안내(README.md)·에피소드 기록(episodes.md)** 이 있습니다.
+채널은 욕망 하나 = 브랜드 하나(`brands.yaml`)이고, 아래 폴더는 그 브랜드 아래의 제작 라인입니다. 라인 폴더에는 그 채널의 **설정(channel.yaml)·운영 안내(README.md)·에피소드 기록(episodes.md)** 이 있습니다.
 영상 한 편의 작업 파일은 `projects/<날짜>-<채널>-<주제>/` 에 쌓이고, 완성되면 `episodes.md` 에 한 줄이 자동으로 추가됩니다.
 
 ## 네 브랜드 (욕망 하나 = 채널 하나) — `brands.yaml`, `../manual/01-desire-map.md`
 | 브랜드 | 욕망 | 제작 라인 |
 |---|---|---|
 | **ai** — AI 더 잘 쓰기 | AI 를 더 잘 알고 다루고 싶다 | `ch-ai-guide`(롱폼) · `ch-ai-shorts` |
-| **market** — 시장의 이유 | 돈의 흐름을 알아 이기고 싶다 | `ch-source-brief` · `ch-paper-column` · `ch-data-motion` · `ch-money-shorts` |
+| **market** — 시장의 이유 | 돈의 흐름을 알아 이기고 싶다 | `ch-market-daily`(매일, 주력) · `ch-source-brief` · `ch-paper-column` · `ch-data-motion` · `ch-money-shorts` |
 | **curiosity** — 몰랐던 이유 | 현대인의 행동과 일상이 궁금하다 | `ch-knowledge` |
 | **issues** — 이슈의 구조 | 세상이 어떻게 돌아가는지 알고 싶다 | `ch-issues` (시사·역사 심층, 시사 빠른 정리) · `ch-issues-daily` |
 
@@ -15,14 +15,16 @@
 
 | 채널 | 형식 | 편집 스타일 | 계열 | 주기 |
 |---|---|---|---|---|
+| `ch-market-daily` 이어 읽는 시장 | 롱폼 매일 (기본 심층, 없으면 브리핑) | 하이브리드 (`hybrid`), 상황 설명은 설명 무대 (`explain-stage`) | 원본 소스 + 모션그래픽 | 하루 1편 이상 (`manual/09-market-daily.md`) |
 | [`ch-paper-column`](ch-paper-column/README.md) (가칭) 종이 위의 경제 | 롱폼 칼럼 | 미주일기 (`mijudiary`) | 자체 제작 인포그래픽 | 주 1편 |
 | [`ch-source-brief`](ch-source-brief/README.md) (가칭) 원본으로 보는 기업 | 롱폼 보고서 | 식스시그마 (`sixsigma`) | 원본 소스 | 주 1~2편 |
 | [`ch-data-motion`](ch-data-motion/README.md) (가칭) 숫자로 보는 산업 | 롱폼 데이터 리포트 | 머니크루 (`moneycrew`) | 자체 제작 인포그래픽 | 격주 1편 |
 | [`ch-ai-guide`](ch-ai-guide/README.md) (가칭) AI 더 잘 쓰기 | 롱폼 (트렌드 해설·따라 하기) | 하이브리드 (`hybrid`) | 원본 소스 (화면 녹화·공식 발표) | 주 1편 |
 | [`ch-ai-shorts`](ch-ai-shorts/README.md) (가칭) AI 꿀팁 1분 | 쇼츠 안내 | AI 꿀팁 쇼츠 (`shorts-aitips`) | 쇼츠 | 주 3~5편 |
 | [`ch-money-shorts`](ch-money-shorts/README.md) (가칭) 1분 경제 상식 | 쇼츠 안내 (정보형) | 쇼츠 (`shorts-aitips`, 카드·큰 글씨) | 쇼츠 | 대기열에서 주 3~5편 |
-| [`ch-knowledge`](ch-knowledge/README.md) (가칭) 몰랐던 이유 | 롱폼 이야기 (심리·현대 일상) | 하이브리드 (`hybrid`) | 삽화·실험 시각화 | 주 1편 + 몰아보기 |
+| [`ch-knowledge`](ch-knowledge/README.md) (가칭) 몰랐던 이유 | 롱폼 이야기 (심리·현대 일상) | 하이브리드 (`hybrid`) | 실사 B-roll·모션그래픽 (삽화는 대체, 04 §0-8) | 주 1편 + 몰아보기 |
 | [`ch-issues`](ch-issues/README.md) 이슈의 구조 | 롱폼 시사·역사 | 하이브리드 (`hybrid`) | 기록 사진·영상, 지도·연표·비교 | 주 1~2편 |
+| `ch-issues-daily` 어제 세상 | 롱폼 매일 시사 | 하이브리드 (`hybrid`) | 기록 사진·영상, 지도·연표·비교 | 평일 매일 |
 
 ## 소스 찾는 법 (채널마다 출발점이 다름 — docs/07-sourcing.md)
 | 채널 | 출발점 | 무엇부터 찾나 |
@@ -30,7 +32,7 @@
 | ch-source-brief | 발언 원본 | 방송·IR·기관 공식 채널의 최근 10일 인터뷰·실적 콜 → 발언 → 공시로 확인·정정 |
 | ch-paper-column | 1차 문서 | 연구·논문·IR·SEC·정부 문서 → 개념 칼럼, 사진은 위키미디어 CC |
 | ch-data-motion | 숫자 계열 | 시세·통계 + 비교할 과거 시기 → 직접 계산 |
-| ch-knowledge | 일상 사례·연구 | `demand` 로 질문 유형 → 심리학 원 연구·후속 결과 → 삽화와 실험 장면 |
+| ch-knowledge | 일상 사례·연구 | `demand` 로 질문 유형 → 심리학 원 연구·후속 결과 → 실사 B-roll·실험 모션그래픽 (기록 없는 장면만 삽화) |
 | ch-issues | 실제 사건의 기록 | 공식 발언·보도자료, 당시 신문과 사진·영상 → 사건의 흐름과 근거 비교 |
 | ch-ai-shorts | 저장소 | GitHub 최근 14일 별 증가 + README |
 | ch-money-shorts | 대기열 | 롱폼 주제 선정에서 '안내'형으로 판단된 소재 |
