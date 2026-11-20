@@ -71,6 +71,9 @@ def footage(sc, clips, work):
                         "-c:v", "libx264", "-pix_fmt", "yuv420p", str(out)], check=True)
         return out
     parts = sc.get("clips") or [[sc["clip"], sc["start"], 1.0]]
+    if sc.get("beat_clips"):   # 박자마다 클립: 박자 시작 시각으로 나눔
+        cuts = [0.0] + [b["t"] - 0.15 for b in sc["_B"][1:]] + [D]
+        parts = [[c[0], c[1], (cuts[i + 1] - cuts[i]) / D] for i, c in enumerate(sc["beat_clips"])]
     segs = []
     for j, (cid, st, share) in enumerate(parts):
         d = D * share
@@ -117,10 +120,14 @@ def main(clips, tts, bgm, work, out):
             flt.append(f"[{k}:a]aresample=48000,adelay={ms}|{ms}[a{k}]")
     n = len(narr_in) // 2
     flt.append("".join(f"[a{k}]" for k in range(n)) + f"amix=inputs={n}:normalize=0,volume=1.0[nar]")
-    flt.append(f"[{n}:a]aresample=48000,volume=0.16,afade=t=in:d=1.5,afade=t=out:st={total - 3:.2f}:d=3[bgm]")
-    flt.append("[nar][bgm]amix=inputs=2:normalize=0,loudnorm=I=-15:TP=-1.5:LRA=9[aout]")
+    use_bgm = str(bgm).lower() != "none"   # 배경음 없음이 기본 (사용자 2026-11-20: "배경음은 그냥 빼줘")
+    if use_bgm:
+        flt.append(f"[{n}:a]aresample=48000,volume=0.16,afade=t=in:d=1.5,afade=t=out:st={total - 3:.2f}:d=3[bgm]")
+        flt.append("[nar][bgm]amix=inputs=2:normalize=0,loudnorm=I=-15:TP=-1.5:LRA=9[aout]")
+    else:
+        flt.append("[nar]loudnorm=I=-15:TP=-1.5:LRA=9[aout]")
     audio = work / "audio.m4a"
-    subprocess.run(["ffmpeg", "-v", "error", "-y", *narr_in, "-stream_loop", "-1", "-i", str(bgm), "-filter_complex", ";".join(flt),
+    subprocess.run(["ffmpeg", "-v", "error", "-y", *narr_in, *(["-stream_loop", "-1", "-i", str(bgm)] if use_bgm else []), "-filter_complex", ";".join(flt),
                     "-map", "[aout]", "-t", f"{total:.3f}", "-c:a", "aac", "-b:a", "192k", str(audio)], check=True)
 
     # 그래픽 층: 프레임마다 그려서 실사 위에 겹침
