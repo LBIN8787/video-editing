@@ -44,6 +44,9 @@ jobs:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          YT_CLIENT_ID_KNOWLEDGE: ${{ secrets.YT_CLIENT_ID_KNOWLEDGE }}          # 호기심 '한겹 더 보면' (channel.yaml youtube.credentials)
+          YT_CLIENT_SECRET_KNOWLEDGE: ${{ secrets.YT_CLIENT_SECRET_KNOWLEDGE }}
+          YT_REFRESH_TOKEN_KNOWLEDGE: ${{ secrets.YT_REFRESH_TOKEN_KNOWLEDGE }}
         run: |
           pip install -q pyyaml pillow
           python - <<'PY'

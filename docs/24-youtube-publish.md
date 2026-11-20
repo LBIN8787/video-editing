@@ -36,6 +36,14 @@
    YouTube API Services 감사 양식(https://support.google.com/youtube/contact/yt_api_form)으로 '내 채널에 내 영상을 올리는 개인용 도구' 라고 신청. 통과 전까지는:
    업로드·설명란·자막·재생목록은 자동으로 되고, **공개 전환만 Studio 에서 손으로**(또는 통과 뒤 자동).
 
+### 1-1. 채널이 여럿일 때 (2026-11-21)
+채널(브랜드 계정)마다 토큰이 따로입니다. `channel.yaml` 의 `youtube.credentials`(예: `knowledge` = 호기심 '한겹 더 보면')가 어느 권한을 쓸지 정합니다.
+```bash
+python scripts/youtube_auth.py client_secret.json --name knowledge --to-github   # 브라우저에서 '한겹 더 보면' 고르고 허용
+python -m ytflow yt-publish <프로젝트> --via here    # 이 PC 에서 바로 (원본 그대로, 100MB 압축 없음)
+```
+권한은 PC 의 `%YTFLOW_SECRETS%\youtube_<이름>.json`(이 PC: `E:\ytflow-local\.secrets`, 커밋 안 됨)과 GitHub 비밀값 `YT_*_<이름>` 두 곳에 저장됩니다.
+
 ## 2. 매일 쓰는 법
 ```bash
 python -m ytflow upload <프로젝트>                 # 영상 → GitHub Release (기존)

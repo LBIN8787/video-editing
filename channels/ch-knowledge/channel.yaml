@@ -40,6 +40,7 @@ demand:
 
 youtube:   # 유튜브 올리기 (python -m ytflow yt-publish, docs/24) — 2026-11-20 사용자: "한겹 더 보면" 채널, 일부 공개(링크가 있는 사용자)로
   expected_channel: "한겹 더 보면"   # 권한이 가리키는 채널 이름이 다르면 올리지 않고 멈춤
+  credentials: knowledge     # 이 채널 전용 권한 (YT_*_KNOWLEDGE 또는 PC 의 youtube_knowledge.json) — scripts/youtube_auth.py --name knowledge
   category_id: "27"          # 교육
   default_language: ko
   made_for_kids: false
