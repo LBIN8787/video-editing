@@ -519,6 +519,13 @@ def _el_html(D, sc, key: str, el: dict) -> tuple[str, float, float]:
     return "", 0, 0
 
 
+SAFE_BOTTOM = 925   # 자막 상자(아래 여백 48 + 글자 52 + 테두리 14) 위쪽 약 953 — 장면 요소는 이 선 위에서 끝남
+
+
+def _safe_pts(pts):
+    return [[x, min(y, SAFE_BOTTOM - 10)] for x, y in pts]
+
+
 def s_board(D, sc: dict, bt: list, dur: float):
     """자유 무대: 인물·소품 카드·글자·붓 선·화살표·금지 표시를 놓고, 박자마다 보이기·옮기기·강조·흐리게.
 
@@ -537,6 +544,8 @@ def s_board(D, sc: dict, bt: list, dur: float):
             continue
         inner, w, h = _el_html(D, sc, key, el)
         x, y = el["x"], el["y"]
+        if y + h / 2 > SAFE_BOTTOM:   # 자막 자리 위로 끌어올림 (2026-11-20 사용자: "자막이랑 영상 글씨가 겹치거나 … 잦습니다")
+            y = SAFE_BOTTOM - h / 2
         i = D._id()
         D.items.append(f'<div id="{i}" style="position:absolute;left:{x - w / 2:.0f}px;top:{y - h / 2:.0f}px;opacity:0">{inner}</div>')
         box[key] = {"id": i, "x": x, "y": y, "w": w, "h": h}
@@ -584,7 +593,7 @@ def s_board(D, sc: dict, bt: list, dur: float):
                                  "#B5302B" if el.get("color") == "red" else INK, at=t + 0.3)
                         D.sfx.append(("pencil", t))
                 elif kind == "brush":
-                    pts = el["pts"]
+                    pts = _safe_pts(el["pts"])
                     dpath = "M" + " L".join(f"{x:.0f} {y:.0f}" for x, y in pts)
                     w_ = el.get("width", 22)
                     _path_draw(D, dpath, "#8E2420", w_ + 6, t + 0.03, el.get("dur", 0.8), "xbrush", 0.6)
@@ -599,7 +608,7 @@ def s_board(D, sc: dict, bt: list, dur: float):
                     _path_draw(D, f"M{x - q} {y - q} L{x + q} {y + q}", "#C33A31", 17, t + 0.45, 0.22, "xbrush")
                     D.sfx.append(("pop", t))
                 elif kind == "dashed":
-                    (x0, y0), (x1, y1) = el["pts"]
+                    (x0, y0), (x1, y1) = _safe_pts(el["pts"])
                     _dashed(D, x0, y0, x1, y1, "#20242C", t, el.get("width", 3), 0.5)
                 shown.add(name)
             elif bx and "move" in act:
