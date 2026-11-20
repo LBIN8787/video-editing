@@ -1374,8 +1374,11 @@ def sfx_files() -> dict:
     base = config.ROOT / ".claude" / "skills" / "media-use" / "audio" / "assets" / "sfx"
     if not base.exists():
         base = config.ROOT / ".agents" / "skills" / "media-use" / "audio" / "assets" / "sfx"
-    # impact-bass(저음 '두웅')는 쓰지 않음 — 2026-11-10 사용자 판정 '소리 자체가 싫다'
-    files = {k: base / f"{k}.mp3" for k in ("whoosh", "pop", "click-soft", "whoosh-short", "riser", "chime")}
+    # impact-bass(저음 '두웅')는 기본 끔 — 켜려면 YTFLOW_SFX_BASS=1 (2026-11-20 사용자: "기본은 끄되 켤 수 있게")
+    names = ["whoosh", "pop", "click-soft", "whoosh-short", "riser", "chime"]
+    if os.environ.get("YTFLOW_SFX_BASS") == "1":
+        names.append("impact-bass-1")
+    files = {k: base / f"{k}.mp3" for k in names}
     pen = config.CACHE_DIR / "sfx" / "pencil.wav"
     if not pen.exists() or pen.stat().st_size < 1000:
         # 연필 긁는 소리: 내려받지 않고 직접 만듦 (분홍 잡음 → 대역 통과 → 빠른 떨림 → 페이드)

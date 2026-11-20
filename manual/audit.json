@@ -1,43 +1,43 @@
 {
- "date": "2026-11-20T10:38",
- "manual_version": 67,
+ "date": "2026-11-20T11:46",
+ "manual_version": 70,
  "counts": {
   "fix": 1,
-  "ask": 33,
+  "ask": 27,
   "new": 1,
-  "resolved": 0
+  "resolved": 8
  },
  "items": [
   {
    "kind": "overfit",
    "level": "ask",
    "file": "manual/05-style-matching.md",
-   "line": 155,
-   "text": "고르는 요령: 숫자 하나 → photofill(그 숫자의 장소 사진으로 채움) · 연표·인과 지도 → tilt · 비유·인용 → dolly. 장식 효과(dust·leak)는 내용이 담긴 볼거리가 없을 때만 드물게(§0-4), scan(빛 훑기)은 시장 채널에서 기본 끔 (v32, 09 ",
+   "line": 7,
+   "text": "자동 검사: 스타일 항목은 SHOULD(권고)·참고뿐입니다 (v34 사용자: \"스타일 MUST 들은 전부 굳이 필요하지 않다\"). MUST 는 원리를 분명히 어긴 경우만(시장 채널: 말로 숫자를 늘어놓는데 화면이 멈춘 박자, 09 §9).",
    "why": "실험 기록 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
-   "id": "3dbd455b2f",
+   "id": "adcf82530b",
    "new": false,
    "since": "2026-11-20"
   },
   {
    "kind": "overfit",
    "level": "ask",
-   "file": "manual/06-checklist.md",
-   "line": 60,
-   "text": "SHOULD | v15 장 표지 사진은 주제에 맞게: 같은 사진을 다시 표지로 쓰지 않고, 주제와 무관한 기본 사진으로 때우지 않음(한 출처로 표지를 모두 채우지 않음), 출처(credit) 표시 | ✅",
-   "why": "스타일 기본값 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
-   "id": "627ad5cf13",
+   "file": "manual/05-style-matching.md",
+   "line": 56,
+   "text": "장 표지 사진은 주제에 맞게 (주제와 무관한 기본 사진으로 때우지 않음, 같은 사진 두 번 없음): python -m ytflow archive commons \"검색어\" (PD·CC0·CC BY 만)나 의회도서관·정부 공개 사진에서 고르고 footage 에 credit 을 적습니다. 표",
+   "why": "실험 기록 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
+   "id": "1ca6c55d1e",
    "new": false,
    "since": "2026-11-20"
   },
   {
    "kind": "overfit",
    "level": "ask",
-   "file": "manual/README.md",
-   "line": 88,
-   "text": "늘릴 때는 같은 말을 반복하지 않고 그 채널의 뼈대를 채운다 — 호기심은 §2-3(여는 장면의 일화 하나 더 · 당사자의 회고 · 전환점의 장면 · 원리의 생활 속 예 · 퍼져 나감 · 반론과 한계 · 수미상관), 시장은 03 §0-4, 시사는 08, AI 는 11 §3-1.",
+   "file": "manual/05-style-matching.md",
+   "line": 142,
+   "text": "고르는 요령 (예): 숫자 하나 → photofill · 연표·인과 지도 → tilt · 비유·인용 → dolly. 장식 효과(dust·leak)·scan 은 드물게(시장 채널은 끔, 09 §6). 효과는 정보를 더하지 않는 분위기라 한 장면에 쌓지 않습니다.",
    "why": "실험 기록 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
-   "id": "3a65fd2d42",
+   "id": "5d3e05518c",
    "new": false,
    "since": "2026-11-20"
   },
@@ -185,6 +185,17 @@
    "since": "2026-11-20"
   },
   {
+   "kind": "proposal",
+   "level": "ask",
+   "file": "proposals/manual/20261120-110411-ccr-6309f6dc-9b0iae.md",
+   "line": 0,
+   "text": "[request] 과적합 지침 정리 (사용자: 규칙이 너무 많아지는 걸 막고 정말 중요한 것만) — ccr-6309f6dc-9b0iae",
+   "why": "ccr-6309f6dc-9b0iae 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
+   "id": "1916dbffb4",
+   "new": false,
+   "since": "2026-11-20"
+  },
+  {
    "kind": "contra",
    "level": "ask",
    "file": "manual/06 G8 MUST·README §3-7·11 S9·cli upload 기본",
@@ -295,83 +306,6 @@
    "since": "2026-11-20"
   },
   {
-   "kind": "contra",
-   "level": "ask",
-   "file": "README §2-2·checklist.py G4 MUST(모든 롱폼)",
-   "line": 0,
-   "text": "c-20261120-46: README §2-2·checklist.py G4 MUST(모든 롱폼) ↔ reviews v16 한 편(20261112-bg-trials) 장 표지 문구, 11 §3-2(어미 섞음) — \"~였고요\" 끝맺음 MUST",
-   "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
-   "id": "652154e6a1",
-   "new": false,
-   "since": "2026-11-20"
-  },
-  {
-   "kind": "contra",
-   "level": "ask",
-   "file": "05 §0-5",
-   "line": 0,
-   "text": "c-20261120-47: 05 §0-5 ↔ v11 한 편 기각 \"소리 자체가 싫음\" — 저음 타격음 코드에서 삭제",
-   "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
-   "id": "ec684fd4ee",
-   "new": false,
-   "since": "2026-11-20"
-  },
-  {
-   "kind": "contra",
-   "level": "ask",
-   "file": "checklist.py G3 MUST",
-   "line": 0,
-   "text": "c-20261120-48: checklist.py G3 MUST ↔ 09 §3-0 2026-11-14 \"주식 … 기본적으로 확인\" — SAVE 확인 MUST 범위",
-   "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
-   "id": "29c42a6c42",
-   "new": false,
-   "since": "2026-11-20"
-  },
-  {
-   "kind": "contra",
-   "level": "ask",
-   "file": "09 §5-1",
-   "line": 0,
-   "text": "c-20261120-49: 09 §5-1 ↔ 11/20 개정판 한 편 편집 지시 — 시장 장마다 순서·도입 문구",
-   "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
-   "id": "8befb376eb",
-   "new": false,
-   "since": "2026-11-20"
-  },
-  {
-   "kind": "contra",
-   "level": "ask",
-   "file": "AGENTS·05 §0-8",
-   "line": 0,
-   "text": "c-20261120-50: AGENTS·05 §0-8 ↔ fb:18·19 (스타일 층) — 그림판·도형 느낌 탈락",
-   "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
-   "id": "c53bc37196",
-   "new": false,
-   "since": "2026-11-20"
-  },
-  {
-   "kind": "contra",
-   "level": "ask",
-   "file": "prompts/script.md:93",
-   "line": 0,
-   "text": "c-20261120-51: prompts/script.md:93 ↔ README §2-5 — 공통 대본 프롬프트의 전면 금지",
-   "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
-   "id": "dab1a2cc31",
-   "new": false,
-   "since": "2026-11-20"
-  },
-  {
-   "kind": "contra",
-   "level": "ask",
-   "file": "06 G5·05 §0-0",
-   "line": 0,
-   "text": "c-20261120-52: 06 G5·05 §0-0 ↔ checklist.py — 강조 아껴 쓰기 단계",
-   "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
-   "id": "a1de758325",
-   "new": false,
-   "since": "2026-11-20"
-  },
-  {
    "kind": "stale",
    "level": "fix",
    "file": "manual/graph.json",
@@ -383,24 +317,105 @@
    "since": "2026-11-20"
   }
  ],
- "resolved": [],
+ "resolved": [
+  {
+   "kind": "contra",
+   "level": "ask",
+   "file": "README §2-2·checklist.py G4 MUST(모든 롱폼)",
+   "line": 0,
+   "text": "c-20261120-46: README §2-2·checklist.py G4 MUST(모든 롱폼) ↔ reviews v16 한 편(20261112-bg-trials) 장 표지 문구, 11 §3-2(어미 섞음) — \"~였고요\" 끝맺음 MUST",
+   "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
+   "id": "652154e6a1",
+   "new": false,
+   "since": "2026-11-20",
+   "resolved": "2026-11-20"
+  },
+  {
+   "kind": "contra",
+   "level": "ask",
+   "file": "05 §0-5",
+   "line": 0,
+   "text": "c-20261120-47: 05 §0-5 ↔ v11 한 편 기각 \"소리 자체가 싫음\" — 저음 타격음 코드에서 삭제",
+   "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
+   "id": "ec684fd4ee",
+   "new": false,
+   "since": "2026-11-20",
+   "resolved": "2026-11-20"
+  },
+  {
+   "kind": "contra",
+   "level": "ask",
+   "file": "checklist.py G3 MUST",
+   "line": 0,
+   "text": "c-20261120-48: checklist.py G3 MUST ↔ 09 §3-0 2026-11-14 \"주식 … 기본적으로 확인\" — SAVE 확인 MUST 범위",
+   "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
+   "id": "29c42a6c42",
+   "new": false,
+   "since": "2026-11-20",
+   "resolved": "2026-11-20"
+  },
+  {
+   "kind": "contra",
+   "level": "ask",
+   "file": "09 §5-1",
+   "line": 0,
+   "text": "c-20261120-49: 09 §5-1 ↔ 11/20 개정판 한 편 편집 지시 — 시장 장마다 순서·도입 문구",
+   "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
+   "id": "8befb376eb",
+   "new": false,
+   "since": "2026-11-20",
+   "resolved": "2026-11-20"
+  },
+  {
+   "kind": "contra",
+   "level": "ask",
+   "file": "AGENTS·05 §0-8",
+   "line": 0,
+   "text": "c-20261120-50: AGENTS·05 §0-8 ↔ fb:18·19 (스타일 층) — 그림판·도형 느낌 탈락",
+   "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
+   "id": "c53bc37196",
+   "new": false,
+   "since": "2026-11-20",
+   "resolved": "2026-11-20"
+  },
+  {
+   "kind": "contra",
+   "level": "ask",
+   "file": "prompts/script.md:93",
+   "line": 0,
+   "text": "c-20261120-51: prompts/script.md:93 ↔ README §2-5 — 공통 대본 프롬프트의 전면 금지",
+   "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
+   "id": "dab1a2cc31",
+   "new": false,
+   "since": "2026-11-20",
+   "resolved": "2026-11-20"
+  },
+  {
+   "kind": "contra",
+   "level": "ask",
+   "file": "06 G5·05 §0-0",
+   "line": 0,
+   "text": "c-20261120-52: 06 G5·05 §0-0 ↔ checklist.py — 강조 아껴 쓰기 단계",
+   "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
+   "id": "a1de758325",
+   "new": false,
+   "since": "2026-11-20",
+   "resolved": "2026-11-20"
+  },
+  {
+   "kind": "sweep",
+   "level": "fix",
+   "file": "manual/contradictions.yaml",
+   "line": 0,
+   "text": "바뀐 지침 3개 모순 점검: manual/06-checklist.md, manual/09-market-daily.md, styles/explain-stage/STYLE.md",
+   "why": "바뀐 줄이 다른 지침·정기 작업 지시문과 반대인지 확인 → 장부에 적고 manual-audit --checked",
+   "id": "629da4582e",
+   "new": true,
+   "since": "2026-11-20",
+   "resolved": "2026-11-20"
+  }
+ ],
  "log": [
-  {
-   "date": "2026-11-18T13:23",
-   "fix": 1,
-   "ask": 27,
-   "new": 2,
-   "resolved": 7,
-   "note": ""
-  },
-  {
-   "date": "2026-11-18T13:23",
-   "fix": 1,
-   "ask": 27,
-   "new": 0,
-   "resolved": 0,
-   "note": ""
-  },
   {
    "date": "2026-11-18T13:23",
    "fix": 1,
@@ -632,6 +647,22 @@
    "new": 1,
    "resolved": 0,
    "note": "범위 점검 기준 커밋"
+  },
+  {
+   "date": "2026-11-20T11:45",
+   "fix": 1,
+   "ask": 34,
+   "new": 5,
+   "resolved": 4,
+   "note": ""
+  },
+  {
+   "date": "2026-11-20T11:46",
+   "fix": 1,
+   "ask": 27,
+   "new": 1,
+   "resolved": 8,
+   "note": "과적합 정리"
   }
  ],
  "fixed_by_agent": []

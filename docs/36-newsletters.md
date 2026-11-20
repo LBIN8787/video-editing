@@ -4,6 +4,8 @@
 > 코드 `ytflow/stages/newsletters.py` · 목록·분류 규칙 `config/newsletters.yaml` · 결과 `inbox/newsletters/<YYYYMMDD>.md|json`
 >
 > **수집 주기:** 05:40 KST(오전 창)·17:40 KST(오후 창) 12시간 주기, 한 번에 한 에이전트만(잠금 `inbox/newsletters/.lock.json` — §5-1). 카테고리 5개: 시장·AI·일상·심리·뇌과학·역사·시사(§3).
+>
+> **SAVE(오선) 알림 통합 (2026-11-20 개편, §8):** `[save알림]` 은 `inbox/save/` 에 따로 쌓지 않고 **같은 파일의 5개 카테고리**로 들어갑니다. 원문 링크가 없는 속보 단신 행을 허용하고, 30분 Gmail 감시는 멈췄습니다.
 
 ## 0. 원칙
 - 뉴스레터는 **단서**입니다. "어제 무엇이 화제였나"만 얻고, 영상에 넣을 숫자·발언은 링크를 따라 **1차 출처**(공시·당국·논문·회사 발표)로 확인합니다 (manual/09 §3, SAVE 와 같은 자리).
@@ -41,11 +43,14 @@
 ## 2. 흐름
 ```
 Gmail '뉴스레터' 라벨 ─(에이전트, Gmail 커넥터)→ .cache/newsletters/raw/*.json ─ newsletters ingest ─┐
+Gmail `[save알림]` 단신 (링크 없음, §8) ─(에이전트)───────────────────────────────┤
 공개 RSS (시장·기술·심리·역사) ───────────────────── newsletters rss ──────┼→ inbox/newsletters/<YYYYMMDD>.md|json (5개 카테고리 표, 2주 안 중복 제거)
 X 공개 포스트 (속보·인사이트 계정, 하루 1회) ─(에이전트, x-search)────────────┘        ▼
 
                          daily (시장·시사) → daily_brief.md 끝 '⑦ 뉴스레터 화제'  ·  일상·AI·역사는 show 로 소재 고르기
 ```
+
+**`inbox/save/` 는 더 쌓지 않습니다:** 30분 Gmail 감시(`scheduled-actions/📈-save-알림-메일-감시`)는 2026-11-20 개편으로 일시정지 상태입니다. `daily` 의 `savecheck` 는 사람이 손으로 올린 메모가 있으면 그대로 읽으므로 남겨 두었습니다.
 
 **한 번에 한 수집자만:** 수집 창마다 `inbox/newsletters/.lock.json` 을 먼저 선점한 한 에이전트만 돌립니다 (§5-1).
 
@@ -125,6 +130,7 @@ python -m ytflow archive si "steam locomotive"     # CC0 이미지만, 소장처
 기존 외부 예약에 같은 회차가 남아 있으면 이관 시 한 쪽만 사용합니다. 뉴스레터 외의 자동화는 각 운영 절차를 따릅니다.
 
 ### 5-3. 남은 일
+- **`inbox/save/` 마감:** 30분 감시를 다시 켜지 않습니다(§8). 손으로 적을 것이 있으면 그 폴더에 그대로 올려도 `daily` 가 읽습니다.
 - Gmail 필터 (사람, 한 번): `from:(tldrnewsletter.com OR simonsfoundation.org OR aeon.co OR axios.com OR thedailyupside.com OR uppity.co.kr OR kdi.re.kr OR deeplearning.ai OR jstor.org OR publicdomainreview.org OR ourworldindata OR pewresearch.org)` → 받은편지함 건너뛰기 + `뉴스레터` 라벨. 첫 메일이 오면 실제 보낸 주소로 맞추기.
 - 첫 본편 확인되면 `config/newsletters.yaml` 상태 올리기: KDI·JSTOR Daily·The Batch(`planned` → `subscribed`) · TLDR Tech(첫 발송 확인) · 그때 실제 도착 시각으로 `arrives` 채우기.
 - 매뉴얼 반영: v35 에서 manual/09 §3-0-1 '뉴스레터 화제'로 반영됨.
@@ -203,3 +209,61 @@ Greater Good는 피드는 정상이나 최근 2일 항목 0건. 전체 시장/AI
 - `tests/test_newsletters_security.py` · `tests/test_newsletters_cutoff.py` 13개 통과, `py_compile` 통과.
 - **FinancialJuice 는 같은 IP 에서 짧은 시간에 여러 번 부르면 HTTP 429** 를 돌려줍니다(수 분 쉬면 다시 200). 수집기는 피드 하나가 막히면 `RSS 건너뜀 …` 한 줄만 남기고 나머지를 계속 모으므로 창이 깨지지 않습니다. 창마다 **한 번만** 부르는 것이 원칙입니다(§5-1 잠금).
 - 테스트로 생긴 `inbox/newsletters/<날짜>.md|json` 변경분은 되돌리고, 잠금 파일 · 설정 · 코드 · 이 문서만 커밋했습니다.
+
+## 8. SAVE(오선) 알림 → 5개 카테고리 통합 (2026-11-20 개편)
+
+사용자 지시(2026-11-20 17:18 KST) — *"굳이 세이브따로 뭐 따로 저장하지 말고 카테고리별로 분류해줘"*, 이어 *"역사도 추가하고 심리학 과학 뇌과학 … 그리고 시사"* 로 카테고리가 5개로 확정(17:20). 같은 날 17:40 창부터 12시간 수집(05:40·17:40)으로 바뀌면서 30분 감시가 멈춘 뒤 들어온 단신이 비어 있던 것을 이 개편으로 메웠습니다.
+
+### 8-1. 무엇이 바뀌었나
+| 항목 | 이전 (2026-11-14~20 오전) | 지금 (2026-11-20 개편) |
+|---|---|---|
+| 저장 위치 | `inbox/save/<YYYYMMDD>.md` 별도 파일 | `inbox/newsletters/<YYYYMMDD>.md|json` 의 5개 카테고리 표 |
+| 수집 | Pickle 30분 Gmail 감시(`📈-save-알림-메일-감시`) | 12시간 창 안에서 뉴스레터와 **같은 `ingest` 경로** |
+| 형식 | `- <알림 내용> (알림 MM-dd HH:mm)` | 표 한 행 — 소재 칸에 제목 + `(알림 MM-dd HH:mm)`, 원문 칸 `—` |
+| 원문 링크 | 없음(앱 알림 문구만) | 없음 — **링크 없는 단신 행을 허용** (빈 링크 괄호를 만들지 않음) |
+
+- 30분 Gmail 감시는 **일시정지**했습니다(`scheduled-actions/📈-save-알림-메일-감시/action.md` 의 `paused: true`). 다시 켜면 같은 알림이 두 곳에 쌓이므로 켜지 않습니다.
+- `inbox/save/` 폴더는 지난 기록 보관용으로 남깁니다. `daily` 의 `savecheck` 는 사람이 손으로 올린 메모가 있으면 그대로 읽습니다.
+- SAVE 앱 알림이 유료화된 뒤로는 같은 자리를 **FinancialJuice RSS**(시장·시사)와 X 공개 포스트가 함께 채웁니다(§7).
+
+### 8-2. 코드·설정
+- `config/newsletters.yaml` 에 소스 하나를 더했습니다.
+  ```yaml
+  - {id: save, name: SAVE 알림 (오선 단신), subject: "(?i)save알림", headline: true,
+     brands: [market, ai, curiosity, history, issues], cadence: 수시, arrives: 수시, status: subscribed}
+  ```
+  보낸 사람이 **본인 Gmail 주소**라(공개 저장소에 둘 수 없음) `match` 없이 **제목으로만** 알아봅니다 — `which()` 가 `match` 없이 `subject` 만 있는 소스를 허용합니다.
+- `ytflow/stages/newsletters.py`
+  - `headline_line()` — MacroDroid 본문 `[app_name] | [notification_title] | 소식` 에서 마지막 칸(소식)만. 템플릿이 빈 채로 온 줄(`[app_name] | [notification_title] |`)은 버립니다.
+  - `headlines_from()` — 본문 한 줄 = 소재 하나. `url: ""`, `kind: "news"`, 재사용 조건 `알림 단신: 원문 링크 없음 — 1차 출처로 직접 확인`, `alarm: "MM-dd HH:mm"`(KST).
+  - `item_key()` — 중복 판정: 주소가 있으면 주소, **링크 없는 단신은 제목+날짜**. (예전에는 빈 `url` 끼리 모두 같은 소재로 뭉개졌습니다.)
+  - `to_md()` 는 빈 주소를 건너뛰어 `—` 로 두고, 제목 칸에 `(알림 MM-dd HH:mm)` 을 붙입니다. `section()`·`show()` 도 주소가 없으면 `링크 없음`·알림 시각으로 적습니다.
+- 카테고리 낱말(`route`)에 한국어를 보강했습니다 — 시장: 기술주·채권·유가·원화·암호화폐·비트코인·상장·매도세·순환매·밸류에이션 / AI: 반도체·데이터센터 / 시사: 상원·하원·의회·법안·백악관·대통령·규제·협상·제재. 낱말이 하나도 없으면 `brands` 첫 칸인 **시장**으로 갑니다(SAVE 는 증시 알림이 대부분).
+
+### 8-3. 에이전트가 단신을 넣는 법
+```bash
+# 1) Gmail 커넥터로 [save알림] 메일 본문을 그대로 받아 raw JSON 으로 둔다 (본문·메일 ID 는 .cache 에만, 커밋 안 함)
+#    {"id": "<messageId>", "sender": "", "subject": "[save알림]", "date": "<KST ISO8601>", "body": "<본문>"}
+python -m ytflow newsletters ingest .cache/newsletters/raw/*.json --no-resolve
+python -m ytflow newsletters show --brand market --days 1
+```
+- `sender` 는 비워 두어도 됩니다(제목으로 알아봄). 개인 주소·메일 본문은 커밋하지 않고, 저장되는 것은 해시된 메일 ID·제목·분류뿐입니다.
+- 날짜 규칙은 뉴스레터와 같습니다: **한국 08:00 이후 도착분은 다음 날 파일**.
+
+### 8-4. 소급 반영 (2026-11-20)
+30분 감시가 멈춘 16:51 이후 아직 어디에도 들어가지 않았던 `[save알림]` **17건**을 `inbox/newsletters/20261121.{md,json}` 에 넣었습니다.
+- 17:18~19:34 **15건**(이 중 2건은 18:03·19:03·… 시간 순 그대로) + 20:44·21:20 **2건**.
+- 카테고리 분포: **시장 15 · AI 1 · 시사 1 · 역사 0 · 일상·심리·뇌과학 0**.
+  - AI 로 간 것: 모건스탠리 "통신사들, AI 에이전트로 경쟁사 전략 예측…"(20:44)
+  - 시사로 간 것: 금일 백악관 일정(19:03)
+  - 나머지는 증시·기술주·유가·채권·암호화폐 단신이라 시장.
+- 같은 파일에 이미 있던 FinancialJuice·KDI·RSS 소재는 그대로 두고 덧붙이기만 했습니다(메일 2통 → 19통, 소재 152 → 169개).
+
+### 8-5. 검증 (2026-11-20 KST)
+- `python -m unittest discover -s tests` — **22개 통과**(기존 13 + 새 `tests/test_newsletters_save.py` 9). 네트워크·실제 메일 없이 돌고, `urlopen` 호출이 없음을 확인합니다.
+- 새 테스트가 보는 것: 제목만으로 소스 인식 / 템플릿 칸 자르기 / 빈 템플릿 줄 버리기 / 5개 카테고리 배정 / 링크 없는 단신 여러 건이 한 건으로 뭉개지지 않음 / 같은 소식 재수집 시 한 번만 / 표에 **빈 링크 괄호(`](`) 없음** / 개인 주소·원본 메일 ID 미포함.
+- 실제 파일 확인: `inbox/newsletters/20261121.md` 에 빈 링크 0건, 개인 주소 0건, 단신 행 17개 모두 `—` 링크 칸과 `(알림 MM-dd HH:mm)`.
+
+### 8-6. 한계
+- 단신에는 **원문 링크가 없습니다.** 영상에 쓸 숫자·발언은 같은 날 `inbox/newsletters` 의 FinancialJuice·RSS 행이나 1차 출처에서 다시 확인해야 합니다(§0 원칙 그대로).
+- SAVE 앱 알림 문구를 그대로 옮기지 않고 제목만 씁니다. `(카더라)` 처럼 출처가 흐린 표기는 그대로 남겨 두었으니 인용 전에 확인합니다.
