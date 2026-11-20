@@ -1530,5 +1530,7 @@ try:  # 새 연출 문법(아카이브 다큐·지도 여정·키네틱 타이�
     _story.register()
     from . import stage as _stage        # 애니메이션 무대 (stage 장면, styles/anim-stage) — 호기심 채널 v22, manual/04 §0-5
     _stage.register()
+    from . import explain as _explain    # 설명 무대 (afterline·spread·share 장면) — 월텍남 벤치마크 docs/31·docs/51
+    _explain.register()
 except Exception as _e_dir:  # noqa: BLE001
     print(f"[hybrid] 새 연출 장면 등록 건너뜀: {_e_dir}")

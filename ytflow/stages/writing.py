@@ -285,6 +285,10 @@ def script(project: Project) -> None:
         brief = project.dir("research") / "topic_brief.json"
         if brief.is_file():
             user += f"\n\n# 이번 회차 주제 선정 기록\n{brief.read_text(encoding='utf-8')}"
+    if em := channel.get("explain_motion"):   # 2026-11-20 사용자: 쉽게 설명해야 하는 곳·상황 설명 = 모션그래픽(설명 무대)
+        sty = config.STYLES_DIR / em.get("style", "explain-stage") / "STYLE.md"
+        user += (f"\n\n# 상황 설명은 모션그래픽으로 (채널 기본 연출)\n쓸 때: {em.get('use_when', '')}\n흐름: {em.get('flow', '')}\n"
+                 f"바탕 theme: {em.get('theme', 'paper')}\n" + (sty.read_text(encoding="utf-8") if sty.is_file() else ""))
     family = config.style_family()
     system = config.prompt("script") + "\n\n" + config.prompt(f"script_{family}") if family != "shorts" else config.prompt("script")
     res = llm.structured(system, user, Script, max_tokens=32000)
