@@ -27,8 +27,8 @@ PC 가 꺼져 있던 시각은 켜지자마자 실행하고(StartWhenAvailable),
 ## 2. 파일은 어디에 — C 드라이브는 쓰지 않음
 | 무엇 | 위치 |
 |---|---|
-| 실행기·작업 폴더 (git worktree) | `E:\ytflow-localunner`(실행기, 실행 직전 최신 main) · `routine-<작업>`(작업마다) · `runner-worker*`(PC 일꾼) — git 저장소는 Drive 동기화에서 깨지므로 Drive 대신 E:(`docs/09` §0). 바꾸려면 환경변수 `YTFLOW_WORK` |
-| 임시 파일 (TEMP) | `E:\ytflow-local	mp\<작업>` — 매 실행 시작 때 비움 |
+| 실행기·작업 폴더 (git worktree) | `E:\ytflow-local\runner`(실행기, 실행 직전 최신 main) · `routine-<작업>`(작업마다) · `runner-worker*`(PC 일꾼) — git 저장소는 Drive 동기화에서 깨지므로 Drive 대신 E:(`docs/09` §0). 바꾸려면 환경변수 `YTFLOW_WORK` |
+| 임시 파일 (TEMP) | `E:\ytflow-local\tmp\<작업>` — 매 실행 시작 때 비움 |
 | 완성 영상·음성·그림 | 끝날 때 Drive `영상\<프로젝트>\` 로 복사·크기 확인. 7일 지난 것은 작업 폴더에서 지우고 Drive 사본만 |
 | 보고 | Drive `_local\reports\<YYYYMMDD-HHMM>-<작업>.md` (첫 줄 = 한 줄 요약, Windows 알림으로도 뜸) |
 | 로그 | Drive `_local\logs\` (작업 로그·에이전트 전체 출력), PC 일꾼은 `_local\pc-worker\` |
