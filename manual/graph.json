@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-20T06:36:36",
- "source_hash": "dd0bcc394841",
+ "generated": "2026-11-20T06:42:53",
+ "source_hash": "64e133670998",
  "audit": {
   "date": "2026-11-19T13:54",
   "counts": {
@@ -121,14 +121,14 @@
   "sections": 172,
   "must": 26,
   "auto": 41,
-  "intents": 132,
+  "intents": 133,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 78,
   "terms": 128,
   "bans": 155,
-  "feedback": 75,
+  "feedback": 76,
   "topics": 4,
   "episodes": 34,
   "main_situations": 16,
@@ -3210,9 +3210,10 @@
    "label": "04. curiosity — 몰랐던 이유 (심리학과 현대인의 일상)",
    "lines": 242,
    "versions": [
-    57
+    57,
+    61
    ],
-   "last_version": 57
+   "last_version": 61
   },
   {
    "id": "doc:05",
@@ -3225,9 +3226,10 @@
     57,
     58,
     59,
-    60
+    60,
+    61
    ],
-   "last_version": 60
+   "last_version": 61
   },
   {
    "id": "doc:06",
@@ -10256,7 +10258,25 @@
    "label": "v61",
    "summary": "자료 고르기를 박자가 하는 일로 (모든 채널: 떠올리게 → 인물 실사, 설명 → 화풍별 모션그래픽, 증거 → 실제 자료, 둘 다 어려우면 삽화) + 화풍 목록 styles/looks.yaml 과 looks·look 명령",
    "applied": [],
-   "themes": []
+   "themes": [],
+   "commit": {
+    "sha": "e35bd75cdc3a023a876d1b21c7c73b0cde010a7a",
+    "subject": "매뉴얼 v61: 자료 고르기를 박자가 하는 일로(모든 채널) + 화풍 목록",
+    "date": "2026-11-20",
+    "other_files": [
+     "AGENTS.md",
+     "docs/45-style-and-direction-map.md",
+     "projects/20261120-curiosity-broll-sample/02_script/render_broll.py",
+     "projects/20261120-curiosity-broll-sample/edit.yaml",
+     "proposals/manual/20261120-063016-ccr-a5c429db-8v4dhx.md",
+     "proposals/manual/20261120-063239-ccr-a5c429db-8v4dhx.md",
+     "styles/looks.yaml",
+     "ytflow/cli.py",
+     "ytflow/config.py",
+     "ytflow/stages/imagegen.py",
+     "ytflow/stages/looks.py"
+    ]
+   }
   },
   {
    "id": "rev:1",
@@ -18636,6 +18656,18 @@
      "by": ""
     },
     {
+     "ref": "doc:04",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:05",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
      "ref": "sec:05§0-8",
      "status": "unreviewed",
      "note": "",
@@ -19256,6 +19288,32 @@
     "motion"
    ],
    "ann_key": "intent:f08974dd",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:f5e6aecc",
+   "kind": "intent",
+   "quote": "일레븐랩스는 이미지 생성으로 사용하지 말아주세요",
+   "label": "일레븐랩스는 이미지 생성으로 사용하지 말아주세요",
+   "versions": [],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "fb:76",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:f5e6aecc"
+   ],
+   "themes": [],
+   "ann_key": "intent:f5e6aecc",
    "meaning": "",
    "not_meant": [],
    "note": "",
@@ -27365,6 +27423,32 @@
    "tier_key": "fb:f08974dd",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:76",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "일레븐랩스는 이미지 생성으로 사용하지 말아주세요",
+   "label": "일레븐랩스는 이미지 생성으로 사용하지 말아주세요",
+   "fb_kind": "tool",
+   "fb_kind_label": "도구 요청",
+   "project": "",
+   "about": "",
+   "note": "그림 생성 길에서 ElevenLabs 를 쓰지 않음 (art-gen backend·화풍 예시 포함). 목소리(TTS)는 그대로",
+   "pending": false,
+   "themes": [],
+   "scope": "standard",
+   "intent": "intent:f5e6aecc",
+   "tier_key": "fb:f5e6aecc",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
    "overfit": false,
    "single": false,
    "tier": "standard",
@@ -48733,6 +48817,22 @@
    ]
   },
   {
+   "s": "ver:61",
+   "t": "doc:04",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:61",
+   "t": "doc:05",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -51490,6 +51590,11 @@
   {
    "s": "intent:4675a826",
    "t": "sec:09§6",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:f5e6aecc",
+   "t": "fb:76",
    "kind": "quoted_in"
   },
   {
@@ -55180,6 +55285,11 @@
   {
    "s": "fb:75",
    "t": "intent:f08974dd",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:76",
+   "t": "intent:f5e6aecc",
    "kind": "quoted_as"
   }
  ]
