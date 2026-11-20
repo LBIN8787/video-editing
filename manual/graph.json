@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated": "2026-11-20T16:06:21",
+ "generated": "2026-11-20T16:06:59",
  "source_hash": "868b4341090d",
  "audit": {
   "date": "2026-11-20T23:13",
@@ -3334,9 +3334,10 @@
     68,
     69,
     70,
-    74
+    74,
+    75
    ],
-   "last_version": 74
+   "last_version": 75
   },
   {
    "id": "doc:10",
@@ -10634,7 +10635,21 @@
    "label": "v75",
    "summary": "시장 썸네일 자동 선택: A/B/C 근거 점수 → thumbnail_pick.json, yt-publish 기본 auto",
    "applied": [],
-   "themes": []
+   "themes": [],
+   "commit": {
+    "sha": "3c6ab044268fd10b7ff69c1792616612be54364c",
+    "subject": "v75 시장 썸네일 자동 선택: A/B/C 근거 점수 → thumbnail_pick.json, yt-publish 기본 auto",
+    "date": "2026-11-20",
+    "other_files": [
+     "config/local_routines/market-daily.md",
+     "projects/20261120-market-deep-remix/05_edit/package.md",
+     "projects/20261120-market-deep-remix/05_edit/thumbnail_pick.json",
+     "prompts/thumbnail.md",
+     "ytflow/cli.py",
+     "ytflow/stages/thumbnail.py",
+     "ytflow/stages/ytpublish.py"
+    ]
+   }
   },
   {
    "id": "rev:1",
@@ -52711,6 +52726,14 @@
   },
   {
    "s": "ver:74",
+   "t": "doc:09",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:75",
    "t": "doc:09",
    "kind": "touched",
    "via": [
