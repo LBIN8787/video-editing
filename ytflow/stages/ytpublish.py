@@ -223,9 +223,21 @@ def build_meta(pr: Project, at: str | None = None, privacy: str | None = None) -
     return meta, s
 
 
-def run(project: str, at: str | None = None, privacy: str | None = None, dry_run: bool = False, thumb: str = "A", resume: bool = False,
+def auto_thumb(pr: Project, thumb: str) -> str:
+    """--thumb auto: thumbnail 단계가 고른 것(05_edit/thumbnail_pick.json, docs/49·55 근거 점수), 없으면 A (2026-11-20 사용자)."""
+    if thumb != "auto":
+        return thumb
+    f = pr.dir("edit") / "thumbnail_pick.json"
+    try:
+        return json.loads(f.read_text(encoding="utf-8")).get("pick") or "A"
+    except Exception:  # noqa: BLE001
+        return "A"
+
+
+def run(project: str, at: str | None = None, privacy: str | None = None, dry_run: bool = False, thumb: str = "auto", resume: bool = False,
         update_meta: bool = False) -> dict:
     pr = Project.open(project)
+    thumb = auto_thumb(pr, thumb)
     edir = pr.dir("edit")
     rec_p = edir / "youtube_publish.json"
     old = json.loads(rec_p.read_text(encoding="utf-8")) if rec_p.exists() else {}
@@ -330,13 +342,14 @@ def _resume(pr: Project, rec: dict, rec_p: Path, thumb: str) -> dict:
     return rec
 
 
-def request_github(project: str, at: str | None = None, privacy: str | None = None, thumb: str = "A", resume: bool = False,
+def request_github(project: str, at: str | None = None, privacy: str | None = None, thumb: str = "auto", resume: bool = False,
                    update_meta: bool = False) -> None:
     """GitHub Actions 에 올리기를 맡긴다: publish/<프로젝트> 브랜치에 요청 파일 하나를 올리면 워크플로가 Release 영상을 받아 올린다."""
     import subprocess
     import tempfile
     root = config.ROOT
     pr = Project.open(project)
+    thumb = auto_thumb(pr, thumb)   # 요청 파일에 실제로 올릴 썸네일 글자를 남김
     name = pr.path.name
     if not (pr.dir("edit") / "youtube.md").exists():
         raise SystemExit("[yt-publish] 05_edit/youtube.md 가 없습니다 — 먼저 python -m ytflow yt-pack " + name)

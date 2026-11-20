@@ -359,7 +359,7 @@ def main(argv: list[str] | None = None) -> None:
     yu.add_argument("--via", choices=["github", "here"], default="github", help="github: Actions 가 올림(기본, 키는 저장소 비밀값) / here: 이 컴퓨터에서 (YT_* 환경변수)")
     yu.add_argument("--at", default=None, help="공개 시각 (예: 2026-11-14T10:00, 한국 시간). 없으면 채널 publish_time, 지났으면 바로 공개")
     yu.add_argument("--privacy", choices=["public", "unlisted", "private"], default=None)
-    yu.add_argument("--thumb", default="A", help="썸네일 A/B/C (API 는 한 장만 — 테스트 및 비교는 Studio 에서)")
+    yu.add_argument("--thumb", default="auto", help="썸네일 A/B/C 또는 auto(기본: thumbnail 단계가 docs/49·55 근거 점수로 고른 것 05_edit/thumbnail_pick.json)")
     yu.add_argument("--dry-run", action="store_true", help="올리지 않고 무엇을 할지만 보기")
     yu.add_argument("--resume", action="store_true", help="이미 올린 영상에 빠진 단계(썸네일·자막·재생목록)만 다시")
     yu.add_argument("--update-meta", action="store_true", help="이미 올린 영상의 제목·설명란·태그를 youtube.md(제목 1번)로 다시 맞추기")

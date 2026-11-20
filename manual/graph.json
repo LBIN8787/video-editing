@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-20T16:01:15",
- "source_hash": "c421cec7ef97",
+ "generated": "2026-11-20T16:06:21",
+ "source_hash": "868b4341090d",
  "audit": {
   "date": "2026-11-20T23:13",
   "counts": {
@@ -566,8 +566,8 @@
   "fixed": []
  },
  "stats": {
-  "manual_version": 74,
-  "versions": 74,
+  "manual_version": 75,
+  "versions": 75,
   "reviews": 37,
   "rejects": 25,
   "passes": 12,
@@ -577,14 +577,14 @@
   "sections": 171,
   "must": 26,
   "auto": 39,
-  "intents": 161,
+  "intents": 162,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 81,
   "terms": 139,
   "bans": 134,
-  "feedback": 107,
+  "feedback": 108,
   "topics": 4,
   "episodes": 35,
   "main_situations": 17,
@@ -2488,6 +2488,25 @@
   },
   {
    "section": "sec:09§7-1",
+   "text": "5. 제목은 썸네일과 같은 말을 반복하지 않는다 — 제목 = 질문·장면, 썸네일 = 단정·숫자. 올린 뒤 제목은 사용자가 바꾸라고 할 때만 바꾼다.",
+   "themes": [
+    "variety"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:96e33798",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
+   "tier_note": "제목·썸네일 역할 나누기 — 작업 기준",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§7-1",
    "text": "정치인(트럼프 등)을 배경으로 붙이지 않는다 — 시황에 이름만 얹은 제목은 0.82배·터진 비율 3%. 그 사람의 결정이 이야기의 축일 때만.",
    "themes": [
     "background"
@@ -2521,25 +2540,6 @@
    "tier_note": "",
    "tier_fixed": false,
    "tier_label": "영구 원칙"
-  },
-  {
-   "section": "sec:09§7-1",
-   "text": "5. 제목은 썸네일과 같은 말을 반복하지 않는다 — 제목 = 질문·장면, 썸네일 = 단정·숫자. 올린 뒤 제목은 사용자가 바꾸라고 할 때만 바꾼다.",
-   "themes": [
-    "variety"
-   ],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:96e33798",
-   "tier_auto": "principle",
-   "why": "사실·법·권리·안전에 관한 말",
-   "overfit": false,
-   "single": true,
-   "tier": "standard",
-   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
-   "tier_note": "제목·썸네일 역할 나누기 — 작업 기준",
-   "tier_fixed": true,
-   "tier_label": "작업 기준"
   },
   {
    "section": "sec:09§10",
@@ -2627,7 +2627,7 @@
    "tier_label": "영구 원칙"
   },
   {
-   "section": "sec:09§h351",
+   "section": "sec:09§h352",
    "text": "ElevenLabs 를 쓸 수 없는 날은 edge 초안으로 만들되 올리지 않는다 (v43, §2-1 — 공개본은 Teo). 크레딧이 모자라면 그날 편을 미루거나 voice-import 로 Teo 테이크를 만든다.",
    "themes": [],
    "absolute": false,
@@ -3326,7 +3326,7 @@
    "key": "09",
    "file": "manual/09-market-daily.md",
    "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13 · v36 인사이트·영상 소스 · v42 기술 분석·CEO 소식 2026-11-17)",
-   "lines": 370,
+   "lines": 371,
    "versions": [
     35,
     64,
@@ -5378,7 +5378,7 @@
    "label": "썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
    "title": "7-1. 썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
    "line": 292,
-   "end": 304,
+   "end": 305,
    "tag_version": null,
    "versions": [
     51
@@ -5396,8 +5396,8 @@
    "level": 2,
    "label": "렌더 전 점검",
    "title": "8. 렌더 전 점검",
-   "line": 305,
-   "end": 307,
+   "line": 306,
+   "end": 308,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5410,8 +5410,8 @@
    "level": 2,
    "label": "렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
    "title": "9. 렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
-   "line": 308,
-   "end": 315,
+   "line": 309,
+   "end": 316,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5424,8 +5424,8 @@
    "level": 2,
    "label": "업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
    "title": "10. 업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
-   "line": 316,
-   "end": 328,
+   "line": 317,
+   "end": 329,
    "tag_version": null,
    "versions": [
     34
@@ -5440,8 +5440,8 @@
    "level": 2,
    "label": "기록·되돌아보기",
    "title": "11. 기록·되돌아보기",
-   "line": 329,
-   "end": 332,
+   "line": 330,
+   "end": 333,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5454,8 +5454,8 @@
    "level": 2,
    "label": "예외 대응",
    "title": "12. 예외 대응",
-   "line": 333,
-   "end": 342,
+   "line": 334,
+   "end": 343,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5468,8 +5468,8 @@
    "level": 2,
    "label": "법·정책",
    "title": "13. 법·정책",
-   "line": 343,
-   "end": 350,
+   "line": 344,
+   "end": 351,
    "tag_version": null,
    "versions": [
     34
@@ -5477,43 +5477,43 @@
    "last_version": 34
   },
   {
-   "id": "sec:09§h351",
+   "id": "sec:09§h352",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h351",
+   "num": "h352",
    "level": 2,
    "label": "목소리 (2026-11-13 결정)",
    "title": "목소리 (2026-11-13 결정)",
-   "line": 351,
-   "end": 358,
+   "line": 352,
+   "end": 359,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h359",
+   "id": "sec:09§h360",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h359",
+   "num": "h360",
    "level": 2,
    "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
    "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
-   "line": 359,
-   "end": 364,
+   "line": 360,
+   "end": 365,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h365",
+   "id": "sec:09§h366",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h365",
+   "num": "h366",
    "level": 2,
    "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
    "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
-   "line": 365,
-   "end": 370,
+   "line": 366,
+   "end": 371,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -10625,6 +10625,16 @@
      "ytflow/stages/thumbnail.py"
     ]
    }
+  },
+  {
+   "id": "ver:75",
+   "kind": "version",
+   "v": 75,
+   "date": "2026-11-20",
+   "label": "v75",
+   "summary": "시장 썸네일 자동 선택: A/B/C 근거 점수 → thumbnail_pick.json, yt-publish 기본 auto",
+   "applied": [],
+   "themes": []
   },
   {
    "id": "rev:1",
@@ -18189,6 +18199,43 @@
    "not_meant": [],
    "note": "",
    "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:00a3ea43",
+   "kind": "intent",
+   "quote": "썸네일은 abc중에서 최대한 시장반응을 고려하여 조회수가 높게 나올 썸네일로 정해주세요 앞으로 말이죠",
+   "label": "썸네일은 abc중에서 최대한 시장반응을 고려하여 조회수가 높게 나올 썸네일로 정해주세요 앞으로 말이죠",
+   "versions": [],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "sec:09§7-1",
+     "kind": "manual"
+    },
+    {
+     "ref": "fb:108",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:00a3ea43"
+   ],
+   "themes": [],
+   "ann_key": "intent:00a3ea43",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§7-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -26556,7 +26603,7 @@
    "mentioned_in": [
     "sec:04§0-4",
     "sec:09§6",
-    "sec:09§h365",
+    "sec:09§h366",
     "sec:11§2-4",
     "sec:README§2-5",
     "sec:README§3-1",
@@ -26879,7 +26926,7 @@
     "sec:06§G6",
     "sec:08§4",
     "sec:09§6",
-    "sec:09§h365",
+    "sec:09§h366",
     "sec:10§4",
     "sec:README§0",
     "sec:README§2",
@@ -29796,6 +29843,32 @@
    "scope": "standard",
    "intent": "intent:6ad350f7",
    "tier_key": "fb:6ad350f7",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:108",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "썸네일은 abc중에서 최대한 시장반응을 고려하여 조회수가 높게 나올 썸네일로 정해주세요 앞으로 말이죠",
+   "label": "썸네일은 abc중에서 최대한 시장반응을 고려하여 조회수가 높게 나올 썸네일로 정해주세요 앞으로 말이죠",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "manual/09 §7-1 ⑦: thumbnail 단계가 docs/49·55 근거 점수로 A/B/C 중 하나를 골라 05_edit/thumbnail_pick.json, yt-publish --thumb auto(기본)가 그것을 올림. 매일 예약 지시문 3-1 에도. 11/20 개정판: A 8.0점(당사자 얼굴·핫 키워드·숫자) > C 7.5 > B 2.0",
+   "pending": false,
+   "themes": [],
+   "scope": "standard",
+   "intent": "intent:00a3ea43",
+   "tier_key": "fb:00a3ea43",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -50560,17 +50633,17 @@
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h351",
+   "t": "sec:09§h352",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h359",
+   "t": "sec:09§h360",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h365",
+   "t": "sec:09§h366",
    "kind": "contains"
   },
   {
@@ -55078,6 +55151,16 @@
    "s": "intent:4eb4260c",
    "t": "theme:script",
    "kind": "about"
+  },
+  {
+   "s": "intent:00a3ea43",
+   "t": "sec:09§7-1",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:00a3ea43",
+   "t": "fb:108",
+   "kind": "quoted_in"
   },
   {
    "s": "intent:de7e2c97",
@@ -59962,6 +60045,11 @@
   {
    "s": "fb:107",
    "t": "intent:6ad350f7",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:108",
+   "t": "intent:00a3ea43",
    "kind": "quoted_as"
   }
  ]

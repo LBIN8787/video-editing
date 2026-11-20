@@ -32,6 +32,7 @@
    - 제목 후보 1번 앞 20자 안에 그 이름 + 그 사람의 결정·말 + 숨은 계산(또는 내 계좌로 번역). 정치인 이름을 배경으로 붙이지 않습니다(트럼프를 얹은 시황 제목은 같은 채널 기준 0.82배).
    - 썸네일 A 는 `layout: person`(얼굴 크게 + 이름표 + 큰 두 줄 숫자, 따옴표 한 마디는 영상 속 원본 발언과 같은 말). 사진은 `python -m ytflow archive commons "영문 이름"` 의 PD·CC0·CC BY 만 받아 `04_assets/footage/raw/` 에 두고, `credit` 에 출처를 적습니다. 자유 사진이 없으면 인물 썸네일을 만들지 않고 숫자 대비(versus)로.
    - 사생활·소문은 쓰지 않습니다. `thumbnail_qa.json` 의 `face_area` ≥ 0.06·`ok` 를 확인합니다.
+   - **올릴 썸네일은 자동으로 고릅니다** (manual/09 §7-1 ⑦, 2026-11-20 사용자): `thumbnail` 단계가 A/B/C 에 근거 점수를 매겨 `05_edit/thumbnail_pick.json` 을 남기고, `yt-publish` 가 기본으로 그것을 올립니다. `thumbnail_pick.json` 도 기획 문서와 함께 커밋해야 Actions 가 읽습니다. 보고에 고른 썸네일과 점수 이유 한 줄, Studio '테스트 및 비교'에 넣을 나머지 둘을 적습니다.
 4. **묶음·보관**: `yt-pack` → `upload` → `channels/ch-market-daily/episodes.md` 한 줄 → `check <프로젝트>` → 기획 문서만 커밋해 main 에 푸시.
    큰 파일(영상·음성·그림)은 git 에 넣지 않습니다. 실행기가 끝난 뒤 Google Drive `영상/<프로젝트>/` 로 옮깁니다.
 5. **유튜브 올리기** (docs/24): `yt-publish <프로젝트> --dry-run` 으로 제목·예약 시각·재생목록 확인 → `yt-publish <프로젝트>`. 몇 분 뒤 `git pull` 해서 `05_edit/youtube_publish.json`(영상 주소·경고) 확인. Actions 실패·비밀값 없음이면 보고만.

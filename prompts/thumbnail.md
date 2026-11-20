@@ -43,6 +43,9 @@
 `{"layout": "person", "image": {"file": "04_assets/footage/raw/<이름>.jpg"}, "person": {"name": "젠슨 황", "role": "엔비디아 CEO"}, "top": "날짜 · 사건", "lines": ["두 줄", "숫자 하나"], "hl": ["숫자"], "quote": "원본 발언 한 마디(선택)", "credit": "사진: 저작자 · CC BY 2.0"}`.
 얼굴은 렌더러가 찾아 화면 높이의 40~50% 로 자름(`face_h`). 제목 후보 1번은 그 이름을 앞 20자 안에. 정치인을 배경으로 붙이지 않음, 사생활 금지, 사진은 PD·CC0·CC BY 만.
 
+### 올릴 썸네일 고르기 (2026-11-20)
+`thumbnail` 단계가 A/B/C 에 근거 점수(docs/49·55)를 매겨 `05_edit/thumbnail_pick.json` 에 남기고 `yt-publish` 가 기본으로 그것을 올림 — 규칙 `manual/09-market-daily.md` §7-1 ⑦. 사람이 정하려면 `package.thumb_pick`.
+
 ### 만들기·점검
 `python -m ytflow thumbnail <프로젝트>` (hybrid 만들기 끝에 자동) → `05_edit/thumbnail_A~C.png`, `thumbnail_preview.png`(실제·목록·휴대폰 크기),
 `package.md`(제목·이유), `thumbnail_qa.json`. 미리보기를 **직접 눈으로** 보고 고친다. `upload` 가 릴리스에 함께 붙인다.
