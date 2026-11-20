@@ -77,7 +77,7 @@ def components() -> list[dict]:
             c["options"] = data.get(src["looks"]) or {}
         elif "techniques" in src:
             c["options"] = {k: v for k, v in tech.items() if v.get("group") in src["techniques"]}
-        elif "sfx" in src:
+        elif "sfx_sets" in src:
             c["options"] = sfx_palettes()
         elif "bgm" in src:
             c["options"] = {k: {"name": k, "look": v.get("mood", ""), "fits": ", ".join(v.get("fits") or []) or "쓰지 않음(판정)",
@@ -103,9 +103,9 @@ def sfx_palettes() -> dict:
 
 
 def sfx_palette(project_dir: Path) -> dict:
-    """이 영상이 고른 효과음 묶음 (edit.yaml look.sfx, 없으면 default)."""
+    """이 영상이 고른 효과음 묶음 (edit.yaml look.sfx_set, 없으면 default)."""
     pals = sfx_palettes()
-    sid = (project_look(project_dir) or {}).get("sfx") or "default"
+    sid = (project_look(project_dir) or {}).get("sfx_set") or "default"
     return pals.get(sid) or pals.get("default") or {"gain": 1.0, "map": {}}
 
 

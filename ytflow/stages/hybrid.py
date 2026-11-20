@@ -1350,7 +1350,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 
 
 def sfx_files(project_dir=None) -> dict:
-    """사건 이름 → 소리 파일. project_dir 를 주면 그 영상이 고른 효과음 묶음(edit.yaml look.sfx, assets/sfx/sfx.yaml)으로 바꿔 줌."""
+    """사건 이름 → 소리 파일. project_dir 를 주면 그 영상이 고른 효과음 묶음(edit.yaml look.sfx_set, assets/sfx/sfx.yaml)으로 바꿔 줌."""
     base = config.ROOT / ".claude" / "skills" / "media-use" / "audio" / "assets" / "sfx"
     if not base.exists():
         base = config.ROOT / ".agents" / "skills" / "media-use" / "audio" / "assets" / "sfx"
@@ -1503,7 +1503,7 @@ def make(project: Project, workers: int = 3) -> Path:
     subprocess.run(ff + ["-f", "concat", "-safe", "0", "-i", str(work / "a.txt"), "-c", "copy", str(work / "voice.wav")], check=True)
     subtitles(subs, edir / "subs.ass")
     # 효과음 섞기 (작게)
-    files = sfx_files(project.path)   # 이 영상이 고른 효과음 묶음 (edit.yaml look.sfx)
+    files = sfx_files(project.path)   # 이 영상이 고른 효과음 묶음 (edit.yaml look.sfx_set)
     from . import looks as _looks
     sgain = float(_looks.sfx_palette(project.path).get("gain", 1.0))
     ev = [(n, t) for n, t in sfx_events if n in files] if sgain > 0 else []

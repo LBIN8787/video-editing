@@ -1,9 +1,9 @@
-# 효과음 묶음 — 구성요소 카테고리 '효과음'(styles/components.yaml)에서 영상마다 하나 고름 (2026-11-20 사용자: 효과음 카테고리 추가 "응")
+# 효과음 묶음 — 구성요소 카테고리 '효과음 묶음'(styles/components.yaml 의 sfx_set)에서 영상마다 하나 고름 (2026-11-20 사용자: 효과음 카테고리 추가 "응")
 #
 # 렌더러는 장면에서 '사건 이름'으로 효과음을 부릅니다: pop(튀어나옴) · pencil(선이 그려짐) · whoosh-short(넘어감)
 #   · whoosh(큰 넘어감) · click-soft(누름·선택) · riser(긴장 오름) · chime(맞음·완성)
 # 묶음은 그 사건 이름을 '어떤 소리로 낼지'(map)와 전체 크기(gain)를 정합니다. map 에서 null = 그 사건은 소리 없음.
-# 고르기: python -m ytflow look <프로젝트> --set sfx=paper-pencil   → edit.yaml look.sfx → hybrid·hookshort 렌더가 읽음
+# 고르기: python -m ytflow look <프로젝트> --set sfx_set=paper-pencil   → edit.yaml look.sfx_set → hybrid·hookshort 렌더가 읽음
 # 고르지 않으면 지금까지와 같음(default).
 #
 # 소리 파일 (내려받지 않음):

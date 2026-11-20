@@ -134,7 +134,7 @@
 | 결정 | 한 일 | 파일 |
 |---|---|---|
 | 1. HyperFrames 블록 정리 | 설치된 v0.8.190 registry 456개를 읽어, 설명형에 맞는 **76개**를 우리 카테고리(글자 18·그래픽 25·카메라 9·전환 13·바탕 6·예시 5)로 고르고 기법 id(`maps_to`)·맞음 정도(바로 맞음/고쳐 쓰면/보류)를 붙임. 화풍 목록 페이지의 각 카테고리 아래 '이미 설치된 HyperFrames 블록' 접힌 목록으로 보임. 전체 456개는 부록 A | `styles/hyperframes_blocks.yaml`, `looks.components()` 의 `blocks` |
-| 2. 효과음 카테고리 | 구성요소 9번째 '효과음'(소리 축). 묶음 6개: 기본 · 종이와 연필 · 화이트보드 마커 · 부드러운 앱 소리 · 다큐 조용히 · 없음. 새 소리는 내려받지 않고 이미 있는 Pixabay 묶음(상업·출처 불요)과 ffmpeg 합성(종이 바스락·마커 끽끽). `look <프로젝트> --set sfx=<id>` → hybrid·hookshort 렌더가 사건 소리를 그 묶음으로 바꾸고 크기(gain)를 곱함 | `assets/sfx/sfx.yaml`, `styles/components.yaml`, `ytflow/stages/hybrid.py` `sfx_files(project_dir)`, `looks.sfx_palette` |
+| 2. 효과음 카테고리 | 구성요소 '효과음 묶음'(`sfx_set`, 소리 축 — 소리 하나하나의 목록 `sfx` 와 별개). 묶음 6개: 기본 · 종이와 연필 · 화이트보드 마커 · 부드러운 앱 소리 · 다큐 조용히 · 없음. 새 소리는 내려받지 않고 이미 있는 Pixabay 묶음(상업·출처 불요)과 ffmpeg 합성(종이 바스락·마커 끽끽). `look <프로젝트> --set sfx_set=<id>` → hybrid·hookshort 렌더가 사건 소리를 그 묶음으로 바꾸고 크기(gain)를 곱함 | `assets/sfx/sfx.yaml`, `styles/components.yaml`, `ytflow/stages/hybrid.py` `sfx_files(project_dir)`, `looks.sfx_palette` |
 | 3. 새 화풍 3종 시안 | 같은 내용(물건이 집 앞까지 오는 길)을 화이트보드·아이소메트릭·종이 디오라마로 8초씩 렌더(HyperFrames), 짝인 효과음 묶음을 입힘. 화면 화풍 3개(status: trial, 스킨 포함) + 삽화 화풍 2개(아이소메트릭·종이 디오라마 그림 생성 문장) 등록 | `projects/20261120-looks-trial/`, `skins/{whiteboard,isometric,paper-diorama}/`, `styles/looks.yaml` |
 
 **남은 것**

@@ -209,7 +209,7 @@ tl.seek(0);
         inputs += ["-i", str(project.dir("voice") / f"hb_{sc['id']:03d}_{k}.wav")]
         ms = int(round(t0 * 1000))
         filt.append(f"[{i}:a]adelay={ms}|{ms}[a{i}]")
-    files = hybrid.sfx_files(project.path)   # 효과음 (사물이 튀어나올 때 pop·whoosh — 작게), 고른 효과음 묶음(look.sfx) 적용
+    files = hybrid.sfx_files(project.path)   # 효과음 (사물이 튀어나올 때 pop·whoosh — 작게), 고른 효과음 묶음(look.sfx_set) 적용
     sgain = float(looks.sfx_palette(project.path).get("gain", 1.0))
     nv = len(plan)
     ev = [(nm, tt) for nm, tt in sfx if nm in files][:60] if sgain > 0 else []
