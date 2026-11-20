@@ -1,6 +1,6 @@
 // 장면 html → 무음 mp4 (프레임마다 seek → 스크린샷 → ffmpeg). node render.js scene.html out.mp4 [start] [end]
 const { chromium } = require('playwright'); const { pathToFileURL } = require('url'); const { spawn } = require('child_process');
-(async () => { const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1920, height: 1080 } });
+(async () => { const b = await chromium.launch({ executablePath: process.env.YTFLOW_CHROMIUM || undefined }); const p = await b.newPage({ viewport: { width: 1920, height: 1080 } });
   await p.goto(pathToFileURL(process.argv[2]).href); await p.waitForTimeout(1500);
   await p.evaluate(() => document.fonts.ready);
   const total = await p.evaluate(() => window.TOTAL), fps = 30;
