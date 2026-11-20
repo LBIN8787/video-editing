@@ -1,0 +1,18 @@
+{
+ "_doc": "PC 자동 빌드 설정 — scripts/curiosity_build.py (2026-11-20 사용자: 호기심 채널 영상 제작 자동화, 로컬에서)",
+ "narration": "02_script/narration_v4.md",
+ "channel": "ch-knowledge",
+ "voice_dir": "v4",
+ "ep_script": "scripts/anim/ep_whitebear_v4.py",
+ "prep": ["scripts/anim/prep_whitebear.py", "{art}", "--paper", "{art}/paper_crop.png"],
+ "art_sheets": ["night", "lab", "lab2", "mind", "end", "room", "lab3", "assoc", "sleep"],
+ "assets": [
+  {"pdf": "https://dtg.sites.fas.harvard.edu/DANWEGNER/pub/Wegner,Schneider,Carter,&White%201987.pdf", "page": 1, "crop": [0.2, 0.16, 0.86, 0.43], "out": "paper_crop.png", "_src": "Wegner 외(1987) 첫 장 — 제목·저자·요약"},
+  {"pdf": "https://dtg.sites.fas.harvard.edu/DANWEGNER/pub/Wegner,Schneider,Carter,&White%201987.pdf", "page": 4, "crop": [0.05, 0.0775, 0.52, 0.479], "out": "ev_fig1.png", "_src": "같은 논문 8쪽 그림 1"},
+  {"pdf": "https://dtg.sites.fas.harvard.edu/DANWEGNER/pub/Wegner,Schneider,Carter,&White%201987.pdf", "page": 6, "crop": [0.04, 0.05, 0.5, 0.3], "out": "ev_tab2.png", "_src": "같은 논문 10쪽 표 2"},
+  {"url": "https://commons.wikimedia.org/wiki/Special:FilePath/LewisCarrollSelfPhoto.jpg?width=900", "out": "carroll_src.jpg", "_src": "루이스 캐럴 1857 사진, 퍼블릭 도메인"}
+ ],
+ "edit_dir": "v4",
+ "output": "whitebear_v4.mp4",
+ "parts": 4
+}
