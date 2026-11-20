@@ -43,7 +43,7 @@ tts:   # 2026-11-13 사용자 선택 (docs/08-voice.md §2차 후보 8명): Teo 
   backend: elevenlabs
   elevenlabs: {voice_id: 0mlAtfsvMzFpppUuNWkV, model_id: eleven_v4, language_code: ko, stability: 0.55, speed: 1.0}
   # 키 없이: ElevenLabs 커넥터로 장(章)별 2~3덩어리 생성 → python -m ytflow voice-import <프로젝트> part1.mp3 part2.mp3 (테이크 중 대본과 다 맞는 것)
-  # 크레딧: 한 편(6~8분, 2,500~3,300자) ≈ 2,100~2,800 크레딧/테이크 → 매일이면 월 7만~9만 (월 1만 무료 한도로는 부족)
+  # 크레딧: 원고 1자 ≈ 0.85 크레딧/테이크 (2,500~3,300자에서 2,100~2,800 측정). 롱폼 10분 이상(manual/README §2-4)을 매일 만들면 월 1만 무료 한도로는 부족
 youtube:   # 유튜브 올리기·관리 (python -m ytflow yt-publish, docs/24-youtube-publish.md)
   category_id: "25"          # 뉴스/정치 (시장 브리핑)
   default_language: ko
@@ -57,6 +57,6 @@ youtube:   # 유튜브 올리기·관리 (python -m ytflow yt-publish, docs/24-y
     briefing: "아침 시장 브리핑"
     deep: "심층 분석"
     weekly: "주간 시장 정리"
-    analysis: "주말 분석"
+    analysis: "주말 분석"          # 옛 일요일 분석글(-analysis, 20261115 편) 재생목록 — v30 부터 기본에서 뺌, 일요일은 -review(한 주 점검 → weekly)
     tech: "기술과 미래"           # <날짜>-market-tech-<주제> (manual/09 §2-2)
     biz: "사업 분석"              # <날짜>-market-biz-<주제> (manual/09 §2-2-1, v46)

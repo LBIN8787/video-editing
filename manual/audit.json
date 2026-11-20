@@ -1,11 +1,11 @@
 {
- "date": "2026-11-20T10:12",
+ "date": "2026-11-20T10:16",
  "manual_version": 67,
  "counts": {
-  "fix": 0,
+  "fix": 2,
   "ask": 13,
   "new": 0,
-  "resolved": 0
+  "resolved": 4
  },
  "items": [
   {
@@ -150,26 +150,81 @@
    "id": "d68385f161",
    "new": false,
    "since": "2026-11-20"
+  },
+  {
+   "kind": "sweep",
+   "level": "fix",
+   "file": "manual/contradictions.yaml",
+   "line": 0,
+   "text": "전체 모순 점검 차례 (지난 점검 없음)",
+   "why": "skills/manual-review §모순 점검 — 주제별(대본·화면·운영·정기 작업)로 지침 전체를 맞대고 장부에 적은 뒤 manual-audit --checked --full",
+   "id": "6e4e9da9e9",
+   "new": false,
+   "since": "2026-11-20"
+  },
+  {
+   "kind": "stale",
+   "level": "fix",
+   "file": "manual/graph.json",
+   "line": 0,
+   "text": "매뉴얼 그래프가 옛것",
+   "why": "python -m ytflow manual-graph",
+   "id": "9e7e585dd5",
+   "new": false,
+   "since": "2026-11-20"
   }
  ],
- "resolved": [],
+ "resolved": [
+  {
+   "kind": "retired",
+   "level": "fix",
+   "file": "AGENTS.md",
+   "line": 35,
+   "text": "| **주식 채널 개설 계획** — 이름 후보(겹침 확인)·1일 1영상 운영(평일 아침 브리핑·심층·주말 분석) | `docs/23-stock-channel-plan.md`, `channels/ch-market-daily/channel.yaml` |",
+   "why": "09 §2 v30: 일요일 분석글은 기본에서 뺌 — 주간 분석(토)·한 주 점검(일)",
+   "id": "ec6d31a9e5",
+   "new": true,
+   "since": "2026-11-20",
+   "resolved": "2026-11-20"
+  },
+  {
+   "kind": "retired",
+   "level": "fix",
+   "file": "prompts/script_hybrid.md",
+   "line": 23,
+   "text": "- 장면 길이 6~20초, 영상 전체 6~9분.",
+   "why": "README §2-4: 롱폼은 10분 이상 (시사 빠른 정리만 5~8분, 짧으면 쇼츠)",
+   "id": "b78a7c4ab2",
+   "new": true,
+   "since": "2026-11-20",
+   "resolved": "2026-11-20"
+  },
+  {
+   "kind": "retired",
+   "level": "fix",
+   "file": "channels/ch-market-daily/channel.yaml",
+   "line": 46,
+   "text": "# 크레딧: 한 편(6~8분, 2,500~3,300자) ≈ 2,100~2,800 크레딧/테이크 → 매일이면 월 7만~9만 (월 1만 무료 한도로는 부족)",
+   "why": "README §2-4: 롱폼은 10분 이상 (시사 빠른 정리만 5~8분, 짧으면 쇼츠)",
+   "id": "d3e4662a1e",
+   "new": true,
+   "since": "2026-11-20",
+   "resolved": "2026-11-20"
+  },
+  {
+   "kind": "retired",
+   "level": "fix",
+   "file": "channels/ch-market-daily/channel.yaml",
+   "line": 60,
+   "text": "analysis: \"주말 분석\"",
+   "why": "09 §2 v30: 일요일 분석글은 기본에서 뺌 — 주간 분석(토)·한 주 점검(일)",
+   "id": "e55ecc8c24",
+   "new": true,
+   "since": "2026-11-20",
+   "resolved": "2026-11-20"
+  }
+ ],
  "log": [
-  {
-   "date": "2026-11-17T13:22",
-   "fix": 2,
-   "ask": 17,
-   "new": 0,
-   "resolved": 0,
-   "note": ""
-  },
-  {
-   "date": "2026-11-17T13:22",
-   "fix": 2,
-   "ask": 17,
-   "new": 0,
-   "resolved": 0,
-   "note": ""
-  },
   {
    "date": "2026-11-17T13:22",
    "fix": 2,
@@ -400,6 +455,22 @@
    "ask": 13,
    "new": 0,
    "resolved": 0,
+   "note": ""
+  },
+  {
+   "date": "2026-11-20T10:15",
+   "fix": 6,
+   "ask": 13,
+   "new": 6,
+   "resolved": 0,
+   "note": ""
+  },
+  {
+   "date": "2026-11-20T10:16",
+   "fix": 2,
+   "ask": 13,
+   "new": 0,
+   "resolved": 4,
    "note": ""
   }
  ],

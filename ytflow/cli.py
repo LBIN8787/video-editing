@@ -307,6 +307,8 @@ def main(argv: list[str] | None = None) -> None:
     au = sub.add_parser("manual-audit", help="매뉴얼 정기 검토: 충돌·과적합·폐지된 기준 잔재·깨진 참조·층 미정 피드백 → manual/audit.md (docs/34)")
     au.add_argument("--quiet", action="store_true"); au.add_argument("--note", default="")
     au.add_argument("--fixed", action="append", default=[], help="이번 검토에서 고친 것 한 줄 (여러 번)")
+    au.add_argument("--checked", action="store_true", help="모순 점검을 마침 → contradictions.yaml 의 기준 커밋을 지금으로 (변경분 점검 끝)")
+    au.add_argument("--full", action="store_true", help="--checked 와 함께: 전체 모순 점검도 마침 (다음은 7일 뒤)")
     ep = sub.add_parser("edit-plan", help="메인 → 주제 레포 → 이 영상: 박자마다 상황을 찾아 장면 종류·연출 기법 채우기 → 02_script/EDIT_CONTEXT.md·edit_plan.json (docs/33)")
     ep.add_argument("project")
     sub.add_parser("topics", help="주제 레포(topics/<brand>) 목록 — 메인에서 물려받고 바꾸고 더한 상황")
@@ -544,6 +546,8 @@ def main(argv: list[str] | None = None) -> None:
         gv.propose(a.text, a.kind, a.project, a.source)
     elif a.cmd == "manual-audit":
         from .stages import audit
+        if a.checked:
+            audit.mark_checked(a.full)
         audit.write(a.quiet, a.note, a.fixed)
     elif a.cmd == "edit-plan":
         from .stages import layers

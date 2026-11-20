@@ -14,6 +14,9 @@
   coderef    용어 사전·의도 판정이 가리키는 코드 줄을 못 찾음                           fix
   topic      주제 레포가 없는 장면 종류·연출 기법을 가리킴                              fix
   stale      매뉴얼 그래프가 옛것                                                      fix
+  contra     모순 장부(manual/contradictions.yaml)에 열린 모순 — open 은 ask, decided 는 fix
+  sweep      모순 점검 차례: 지난 점검 뒤 바뀐 지침 파일(변경분) · 7일 지난 전체 점검        fix
+지침 파일(AGENTS·README·skills·prompts·styles STYLE)에도 폐지된 기준·깨진 참조를 잽니다 (2026-11-20).
 결과는 지난번 검토와 비교해 '새로 생김'·'해결됨'을 남깁니다.
 """
 from __future__ import annotations
@@ -30,6 +33,12 @@ ROOT = config.ROOT
 MANUAL = ROOT / "manual"
 OUT_JSON = MANUAL / "audit.json"
 OUT_MD = MANUAL / "audit.md"
+CONTRA = MANUAL / "contradictions.yaml"   # 모순 장부 (docs/34 §모순 관리)
+SWEEP_DAYS = 7                            # 전체 모순 점검 간격
+
+# 매뉴얼 밖의 지침 파일 — 에이전트가 따라 하는 글이라 매뉴얼과 어긋나면 모순이 됨 (2026-11-20 사용자: "모순되는 지침은 없는지 … 주기적으로")
+INSTR_GLOBS = ["AGENTS.md", "README.md", "CLAUDE.md", "skills/*/SKILL.md", "prompts/*.md", "styles/*/STYLE.md",
+               "styles/README.md", "channels/*/channel.yaml", "topics/*/topic.yaml", "formats/*.md"]
 
 # 폐지된 기준 — (정규식, 왜 폐지됐나, 예외로 볼 줄의 낱말)
 RETIRED = [
@@ -130,6 +139,85 @@ def scan_refs(docs, secs) -> list[dict]:
     return out
 
 
+def instr_files() -> list[str]:
+    out = []
+    for g in INSTR_GLOBS:
+        out += sorted(p.relative_to(ROOT).as_posix() for p in ROOT.glob(g) if p.is_file())
+    return out
+
+
+def load_contra() -> dict:
+    import yaml
+    try:
+        d = yaml.safe_load(CONTRA.read_text(encoding="utf-8")) or {}
+    except FileNotFoundError:
+        d = {}
+    d.setdefault("items", [])
+    return d
+
+
+def _git(*args) -> str:
+    import subprocess
+    try:
+        return subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, timeout=30).stdout.strip()
+    except Exception:
+        return ""
+
+
+def changed_instr(since: str) -> list[str]:
+    """지난 모순 점검(커밋) 뒤 바뀐 지침·매뉴얼 파일."""
+    if not since or not _git("cat-file", "-t", since):
+        return []
+    names = _git("diff", "--name-only", f"{since}..HEAD").splitlines()
+    watch = set(instr_files())
+    return [n for n in names if n in watch or (n.startswith("manual/") and n.endswith(".md")
+            and n not in ("manual/CHANGELOG.md", "manual/reviews.md", "manual/audit.md"))]
+
+
+def scan_contra() -> list[dict]:
+    d = load_contra()
+    out = []
+    for c in d["items"]:
+        st = c.get("status", "open")
+        if st not in ("open", "decided"):
+            continue
+        a, b = c.get("a") or {}, c.get("b") or {}
+        out.append({"kind": "contra", "level": "ask" if st == "open" else "fix", "file": a.get("file", ""), "line": a.get("line", 0),
+                    "text": f"{c.get('id')}: {a.get('file')} ↔ {b.get('file')} — {str(c.get('topic') or c.get('why', ''))[:90]}",
+                    "why": ("어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided" if st == "open"
+                            else f"결정됨: {str(c.get('decision', ''))[:80]} → 낡은 쪽을 고치고 status: resolved")})
+    today = dt.date.today()
+    last = d.get("last_sweep")
+    try:
+        last_d = dt.date.fromisoformat(str(last)) if last else None
+    except ValueError:
+        last_d = None
+    if not last_d or (today - last_d).days >= SWEEP_DAYS:
+        out.append({"kind": "sweep", "level": "fix", "file": "manual/contradictions.yaml", "line": 0,
+                    "text": f"전체 모순 점검 차례 (지난 점검 {last or '없음'})",
+                    "why": "skills/manual-review §모순 점검 — 주제별(대본·화면·운영·정기 작업)로 지침 전체를 맞대고 장부에 적은 뒤 manual-audit --checked --full"})
+    ch = changed_instr(d.get("last_commit", ""))
+    if ch:
+        out.append({"kind": "sweep", "level": "fix", "file": "manual/contradictions.yaml", "line": 0,
+                    "text": f"바뀐 지침 {len(ch)}개 모순 점검: " + ", ".join(ch[:6]) + (" …" if len(ch) > 6 else ""),
+                    "why": "바뀐 줄이 다른 지침·정기 작업 지시문과 반대인지 확인 → 장부에 적고 manual-audit --checked"})
+    return out
+
+
+def mark_checked(full: bool = False) -> None:
+    """모순 점검을 마쳤다고 장부에 남김 (변경분 기준 커밋 = 지금 HEAD, --full 이면 전체 점검 날짜도)."""
+    import yaml
+    d = load_contra()
+    d["last_commit"] = _git("rev-parse", "HEAD")
+    if full:
+        d["last_sweep"] = dt.date.today().isoformat()
+    head = "\n".join(l for l in CONTRA.read_text(encoding="utf-8").splitlines() if l.startswith("#")) + "\n" if CONTRA.exists() else ""
+    body = {k: d[k] for k in ("last_sweep", "last_commit") if d.get(k)}
+    body["items"] = d["items"]
+    CONTRA.write_text(head + yaml.safe_dump(body, allow_unicode=True, sort_keys=False, width=200), encoding="utf-8")
+    print(f"[manual-audit] 모순 점검 기록: 커밋 {d['last_commit'][:8]}" + (f" · 전체 점검 {d['last_sweep']}" if full else ""))
+
+
 def build() -> dict:
     from . import layers as ly
     from . import manualgraph as mg
@@ -199,6 +287,11 @@ def build() -> dict:
                                   "text": f"{k} → 기법 {t}", "why": "styles/techniques.yaml 에 없는 기법"})
     items += scan_retired(docs, secs)
     items += scan_refs(docs, secs)
+    # 매뉴얼 밖 지침 파일에도 같은 잣대 (절 구분이 없으므로 절 예외 없이)
+    instr = [{"file": f, "key": f"instr:{f}"} for f in instr_files()]
+    items += [dict(x, kind="retired") for x in scan_retired(instr, secs)]
+    items += scan_refs(instr, secs)
+    items += scan_contra()
     if mg.is_stale():
         items.append({"kind": "stale", "level": "fix", "file": "manual/graph.json", "line": 0, "text": "매뉴얼 그래프가 옛것",
                       "why": "python -m ytflow manual-graph"})
@@ -224,7 +317,8 @@ def build() -> dict:
 
 
 KIND = {"proposal": "제안함", "nousage": "용도 미정 기능", "conflict": "충돌 후보", "overfit": "과적합 후보", "pending": "반영 대기", "untiered": "층 미정 피드백", "misaligned": "어긋난 해석",
-        "retired": "폐지된 기준이 남음", "ref": "깨진 참조", "coderef": "코드 위치 바뀜", "topic": "주제 레포 오류", "stale": "옛 그래프"}
+        "retired": "폐지된 기준이 남음", "ref": "깨진 참조", "coderef": "코드 위치 바뀜", "topic": "주제 레포 오류", "stale": "옛 그래프",
+        "contra": "모순", "sweep": "모순 점검 차례"}
 
 
 def write(quiet: bool = False, note: str = "", fixed: list[str] | None = None) -> dict:
