@@ -279,6 +279,10 @@ def main(argv: list[str] | None = None) -> None:
     rv.add_argument("--reject", default=""); rv.add_argument("--note", default="")
     so = sub.add_parser("short", help="세로 쇼츠 (Claude 판, HyperFrames): 02_script/short.json → 05_edit/final.mp4")
     so.add_argument("project")
+    lk = sub.add_parser("looks", help="화풍 목록 — 모션그래픽·삽화·실사 색보정 (styles/looks.yaml, 영상마다 고름)")
+    lk.add_argument("--kind", choices=["motion", "illust", "footage"], default=None)
+    lc = sub.add_parser("look", help="이 영상의 화풍 고르기/보기 → edit.yaml look (styles/looks.yaml)")
+    lc.add_argument("project"); lc.add_argument("--motion", default=""); lc.add_argument("--illust", default=""); lc.add_argument("--footage", default="")
     sub.add_parser("recipes", help="편집 스타일 등록부 목록 (styles/recipes/*.yaml — 파일 하나 추가로 늘림)")
     spk = sub.add_parser("style-pick", help="topic_brief 에 맞는 편집 스타일 추천 (영상 전체·훅·결론) → 01_research/style_pick.md")
     spk.add_argument("project")
@@ -325,6 +329,13 @@ def main(argv: list[str] | None = None) -> None:
     cu = sub.add_parser("cut", help="원본 발언 컷편집: bite 장면의 문장을 긴 원본(어닝콜·기자회견)에서 찾아 구간 목록 → 02_script/cuts.json")
     cu.add_argument("project")
     cu.add_argument("--force", action="store_true", help="이미 찾은(사람이 고친) 구간도 다시 찾기")
+    for _n, _h in (("clip-order", "원본 발언 구간 주문서(클라우드): bite 원본의 주소·구간 → 02_script/clip_orders.json + inbox/pc-tasks (docs/50)"),
+                   ("clip-fetch", "PC 에서 주문서 구간만 받기(본인 브라우저 로그인) → 04_assets/footage + Drive + clip_manifest.json (docs/50)"),
+                   ("clip-pull", "Drive 가 붙은 환경에서 clip_manifest 대로 원본 구간 가져오기 (docs/50)")):
+        _c = sub.add_parser(_n, help=_h)
+        _c.add_argument("project")
+        if _n == "clip-fetch":
+            _c.add_argument("--force", action="store_true", help="이미 받은 구간도 다시 받기")
     ab = sub.add_parser("art-brief", help="손그림 삽화 주문서: illust 장면마다 그릴 내용·파일 이름·카메라가 볼 곳 → 02_script/art_brief.md")
     ab.add_argument("project")
     ag = sub.add_parser("art-gen", help="그림 생성 (02_script/art_plan.json 시트 → 조각): --backend openai|gemini|codex|manual (docs/28)")
@@ -476,6 +487,13 @@ def main(argv: list[str] | None = None) -> None:
     elif a.cmd == "short":
         from .stages import shorts_hf
         shorts_hf.make(Project.open(a.project))
+    elif a.cmd == "looks":
+        from .stages import looks
+        print(looks.listing(a.kind))
+    elif a.cmd == "look":
+        from .stages import looks
+        cur = looks.choose(Project.open(a.project).path, a.motion, a.illust, a.footage)
+        print("화풍:", ", ".join(f"{k}={v}" for k, v in cur.items()) or "고르지 않음 (python -m ytflow looks 로 목록)")
     elif a.cmd == "recipes":
         from .stages import stylepick
         print(stylepick.listing())
@@ -541,6 +559,12 @@ def main(argv: list[str] | None = None) -> None:
         from .project import Project as _P
         from .stages import cutedit
         cutedit.find(_P.open(a.project), force=a.force)
+    elif a.cmd in ("clip-order", "clip-fetch", "clip-pull"):
+        from .project import Project as _P
+        from .stages import cliplane
+        pr = _P.open(a.project)
+        {"clip-order": lambda: cliplane.order(pr), "clip-fetch": lambda: cliplane.fetch(pr, force=a.force),
+         "clip-pull": lambda: cliplane.pull(pr)}[a.cmd]()
     elif a.cmd == "art-brief":
         from .project import Project as _P
         from .stages import illust

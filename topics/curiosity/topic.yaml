@@ -4,8 +4,10 @@ name: 호기심 · 심리와 현대 일상
 inherits: main
 channels: [ch-knowledge]
 manual: [manual/04-curiosity.md, manual/12-visual-storytelling.md]
-look: 칠판·종이 무대 (05 §0-7)
+look: 실사 B-roll + 모션그래픽 (v60, 04 §0-8) — 삽화(칠판·종이 무대, 05 §0-7)는 자료가 없는 구간만
 defaults:
+  # v60 (2026-11-20 사용자 승인): 실사 B-roll·모션그래픽 먼저, 삽화는 자료를 구하기 어렵거나 넣기 힘든 장면에만 (04 §0-8)
+  backbone: broll-motion
   # 뼈대를 하나로 고정하지 않음 (2026-11-15 사용자: "언제 애니메이션을, 언제 그림판을 — 기능에 맞추어 먼저 정리") → 박자가 하는 일이 고름 (manual/10 §1)
   #   주인공이 무언가를 한다 → stage · 여러 장소·인물·날짜를 엮어 한 장으로 → story
   camera: fixed             # 04 §0-5: 카메라는 고정이 기본, 시간·공간 이동일 때만
@@ -13,9 +15,9 @@ defaults:
 situations:
   override:
     open-scene:
-      scenes: [stage, illust, story]
+      scenes: [footage, stage, illust, story]
       techniques: [draw-on, match-move]
-      why: 때·곳·사람이 있는 여는 장면 → 질문 하나 (README §2-3, 04 §0-6)
+      why: v60 사람이 나오는 실사 컷이 먼저 — 때·곳·사람이 있는 여는 장면 → 질문 하나 (README §2-3, 04 §0-6)
     change:
       scenes: [stage]
       techniques: [morph, match-move]
@@ -24,10 +26,10 @@ situations:
     character-acts:
       name: 주인공이 무언가를 한다
       signals: ['걸어', '앉', '일어나', '집어', '닫', '열었', '쓰러', '들고', '만들었', '시도했']
-      scenes: [stage, illust]
+      scenes: [footage, stage, illust]
       techniques: [stagger, draw-on]
-      avoid: 사진·쪽지를 쌓기, 소제목 글자
-      why: 한 화면 한 생각, 대본의 동사를 그림이 (v22)
+      avoid: 사진·쪽지를 쌓기, 소제목 글자, 얼굴이 보이는 스톡 인물을 부정적 맥락의 당사자처럼 (04 §0-8)
+      why: v60 같은 행동을 하는 사람의 실사 컷 먼저, 없으면 그림이 동사를 연기 — 한 화면 한 생각, 대본의 동사를 그림이 (v22)
     build-up:
       name: 여러 장소·인물·날짜를 엮어 한 장으로
       signals: ['그 사이', '한편', '그러는 동안', '이렇게 해서', '지금까지', '모두 모으면', '이어졌', '이어집니다', '연결']

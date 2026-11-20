@@ -50,6 +50,13 @@ def load(name: str) -> dict:
         # styles.<이름> 블록이 있으면 edit 위에 겹친다 → 스타일 전환이 한 줄로 끝난다
         data["edit"] = _merge(data.get("edit") or {}, (data.get("styles") or {}).get(style) or {})
         data["edit"]["style"] = style
+        # 화풍 목록 (styles/looks.yaml): edit.yaml 의 look.motion → 그래픽 스킨. skin 을 직접 적은 프로젝트는 그대로
+        lk = _OVERRIDE.get("look") or (_OVERRIDE.get("edit") or {}).get("look") or {}
+        if lk.get("motion") and not (_OVERRIDE.get("edit") or {}).get("skin"):
+            from .stages import looks as _looks
+            sk = _looks.skin_for(lk["motion"])
+            if sk:
+                data["edit"]["skin"] = sk
     return data
 
 
