@@ -82,6 +82,8 @@ def publish_at(s: dict, at: str | None, now: dt.datetime | None = None) -> str |
         t = dt.datetime.fromisoformat(at)
         t = t if t.tzinfo else t.replace(tzinfo=KST)
     else:
+        if s.get("publish_time") in (None, "", "none", False):   # 예약 없이 바로 (privacy 그대로 — 일부 공개 검토용 채널 등)
+            return None
         h, m = map(int, str(s.get("publish_time", "10:00")).split(":"))
         t = now.astimezone(KST).replace(hour=h, minute=m, second=0, microsecond=0)
     if t <= now + dt.timedelta(minutes=5):
@@ -247,6 +249,15 @@ def run(project: str, at: str | None = None, privacy: str | None = None, dry_run
         raise SystemExit(f"[yt-publish] 영상 없음: {video}")
     tok = _token()
     rec = {"project": pr.path.name, **plan, "steps": []}
+    want = s.get("expected_channel")
+    if want:   # 권한이 가리키는 채널 확인 — 다른 채널에 잘못 올리지 않게 (2026-11-20: 호기심 편은 '한겹 더 보면')
+        me, _ = _req(tok, "GET", "https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true")
+        got = [(it.get("snippet") or {}).get("title", "") for it in me.get("items", [])]
+        rec["authorized_channel"] = got
+        if want not in got:
+            rec["blocked"] = f"권한이 가리키는 채널 {got} ≠ 올릴 채널 '{want}' — 올리지 않음 (scripts/youtube_auth.py 로 '{want}' 권한을 따로 받아야 함)"
+            rec_p.write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
+            raise SystemExit("[yt-publish] " + rec["blocked"])
     vid = upload(tok, video, meta)
     rec.update(video_id=vid, url=f"https://youtu.be/{vid}", studio=f"https://studio.youtube.com/video/{vid}/edit")
     rec["steps"].append("upload")

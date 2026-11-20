@@ -1,0 +1,266 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- 넘기기 편 그래픽 층: 실사 위에 얹는 모션그래픽 (휴대폰 테두리·시계·셈·실험 계획판·결과·확인 목록)
+     실사가 상황을, 그래픽은 숫자·관계만. 화면 글자는 숫자·이름표 위주, 대사를 다시 쓰지 않음 (manual/04 §0-8, 12 §0-1) -->
+<style>
+@font-face{font-family:G;src:url("FONTDIR/NanumGothic-Bold.ttf")}
+@font-face{font-family:GX;src:url("FONTDIR/NanumGothic-ExtraBold.ttf")}
+@font-face{font-family:GR;src:url("FONTDIR/NanumGothic-Regular.ttf")}
+html,body{margin:0;width:1920px;height:1080px;background:transparent;overflow:hidden}
+#root{position:absolute;inset:0;font-family:G;color:#fff}
+.abs{position:absolute}
+.sub{position:absolute;left:0;right:0;bottom:64px;text-align:center;font-family:G;font-size:46px;line-height:1.35;
+  text-shadow:0 2px 6px rgba(0,0,0,.85),0 0 22px rgba(0,0,0,.55)}
+.tag{position:absolute;left:56px;top:48px;font-family:G;font-size:24px;padding:7px 14px;border-radius:4px;
+  background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.35);letter-spacing:.5px}
+.src{position:absolute;right:56px;bottom:22px;font-family:GR;font-size:22px;opacity:.75;text-shadow:0 1px 4px #000}
+.glass{background:rgba(12,14,18,.62);border:1px solid rgba(255,255,255,.14);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.45);backdrop-filter:blur(2px)}
+.y{color:#FFD23F}
+</style></head><body><div id="root"></div>
+<script>
+const Y="#FFD23F";
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const eo=x=>1-Math.pow(1-cl(x),3);
+const eio=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const eb=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const P=(t,t0,d)=>cl((t-t0)/d);
+const TH=i=>`THUMBDIR/t${i}.jpg`;
+const root=document.getElementById('root');
+
+function feed(sc,t,B){
+  const f=sc.feed, o=eo(P(t,0,0.5));
+  let n=0; (B[0].kw||[]).forEach(k=>{if(t>=k+0.2)n++});
+  const sw=B[0].kw.map(k=>P(t,k+0.05,0.35)).find(p=>p>0&&p<1);
+  return `<div class="abs" style="left:${f.x-16}px;top:${f.y-16}px;width:${f.w+32}px;height:${f.h+32}px;border-radius:54px;border:16px solid #0d0f12;opacity:${o};
+      box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 0 0 2px rgba(255,255,255,.08)"></div>
+    <div class="abs" style="left:${f.x+f.w/2-70}px;top:${f.y+10}px;width:140px;height:30px;border-radius:15px;background:#0d0f12;opacity:${o}"></div>
+    <div class="abs" style="left:${f.x+f.w+60}px;top:${f.y+f.h/2-80}px;opacity:${o}">
+      <div style="font-size:30px;opacity:.85">넘긴 영상</div>
+      <div style="font-family:GX;font-size:110px;line-height:1.1">${n}</div></div>
+    ${sw!==undefined?`<div class="abs" style="left:${f.x+f.w/2-36}px;top:${f.y+f.h-140-(sw*260)}px;width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,${.55*(1-sw)});box-shadow:0 0 0 10px rgba(255,255,255,${.15*(1-sw)})"></div>`:""}`;
+}
+function elapsed(sc,t,B){
+  const k0=B[0].kw[0], k1=B[0].kw[1], o=eo(P(t,B[0].t,0.5));
+  const p=eio(P(t,k0-0.3,Math.max(0.5,k1-k0-0.2)));
+  const min=Math.round(40*p), hh=1, mm=String(min).padStart(2,'0');
+  const cnt=Math.round(12+300*p);
+  const stop=t>k1-0.1;
+  return `<div class="abs" style="right:80px;top:70px;text-align:right;opacity:${o};text-shadow:0 2px 14px rgba(0,0,0,.7)">
+     <div style="font-family:GX;font-size:96px;letter-spacing:2px">${hh}:${mm}<span style="font-size:36px;opacity:${p>0&&!stop?.85:0};margin-left:10px">▶▶</span></div>
+     <div style="font-size:30px;margin-top:6px;opacity:.9">넘긴 영상 <span style="font-family:GX;font-size:44px">${cnt}</span></div></div>`;
+}
+function kinetic(sc,t,B){return sc.words.map(([w,o],i)=>{const p=P(t,B[0].t+o,0.45);
+  return `<div class="abs" style="left:0;right:0;top:${380+i*130}px;text-align:center;font-family:GX;font-size:${i?100:70}px;
+    color:${i?Y:'#fff'};opacity:${cl(p*3)};transform:translateY(${(1-eo(p))*28}px);text-shadow:0 6px 30px rgba(0,0,0,.75)">${w}</div>`}).join("")}
+
+// 같은 10분, 두 가지 보는 법
+const PX=1180, X0=370;
+function planBase(t,B,a1,a2){
+  let h=`<div class="abs glass" style="left:${X0-60}px;top:150px;width:${PX+150}px;height:600px;opacity:${eo(P(t,0,0.5))}"></div>`;
+  // 10분 눈금
+  const ru=eo(P(t,0.2,0.8));
+  h+=`<div class="abs" style="left:${X0}px;top:205px;width:${PX*ru}px;height:2px;background:rgba(255,255,255,.5)"></div>`;
+  [0,5,10].forEach(m=>{h+=`<div class="abs" style="left:${X0+PX*m/10-40}px;top:170px;width:80px;text-align:center;font-size:24px;opacity:${ru*.8}">${m}분</div>`});
+  // 줄 A: 한 편
+  const A=eo(P(t,a1-0.2,0.7));
+  h+=`<div class="abs" style="left:${X0}px;top:250px;font-size:30px;opacity:${A}">10분 영상 <span class="y" style="font-family:GX">1편</span> · 넘기기 <span style="font-family:GX">✕</span></div>
+    <div class="abs" style="left:${X0}px;top:300px;width:${PX*A}px;height:150px;border-radius:10px;overflow:hidden;border:2px solid rgba(255,255,255,.7);opacity:${cl(A*4)}">
+      <div style="width:${PX}px;height:150px;background:linear-gradient(110deg,#334d60,#62869d);display:grid;place-items:center;color:#f1f4f9;font-size:48px">▶</div></div>`;
+  return h;
+}
+function rowB(t,t0,cuts){
+  const B2=eo(P(t,t0-0.2,0.7)); let h="";
+  h+=`<div class="abs" style="left:${X0}px;top:490px;font-size:30px;opacity:${B2}">5분 영상 <span class="y" style="font-family:GX">7편</span> · 넘기기 <span style="font-family:GX">○</span></div>`;
+  const tw=PX/7;
+  for(let i=0;i<7;i++){const p=eo(P(t,t0+i*0.09,0.4));
+    h+=`<div class="abs" style="left:${X0+i*tw+3}px;top:${540+(1-p)*30}px;width:${tw-6}px;height:150px;border-radius:8px;opacity:${p};
+      background:hsl(${195+i*24} 24% 34%);border:2px solid rgba(255,255,255,.6);display:grid;place-items:center;font-size:38px">▶</div>`}
+  for(let c=0;c<cuts;c++){const x=X0+((c*0.618034)%1)*PX;
+    h+=`<div class="abs" style="left:${x}px;top:532px;width:4px;height:166px;background:${Y};box-shadow:0 0 8px ${Y}"></div>`}
+  return h;
+}
+function plan(sc,t,B){return planBase(t,B,B[0].kw[0])+(t>B[0].kw[1]-0.4?rowB(t,B[0].kw[1],0):"")}
+function plan2(sc,t,B){
+  const k0=B[0].kw[0], cuts=Math.round(35*eio(P(t,B[0].t+0.3,Math.max(0.6,k0-B[0].t))));
+  let h=planBase(t,B,-5)+rowB(t,-5,cuts);
+  h+=`<div class="abs" style="left:${X0+PX-260}px;top:470px;width:260px;text-align:right;font-size:30px">넘긴 횟수 <span style="font-family:GX;font-size:48px" class="y">1~${Math.max(1,cuts)}</span></div>`;
+  if(B[1]){const q=eb(P(t,B[1].kw[0]-0.1,0.5));
+    h+=`<div class="abs" style="left:${X0+PX+20}px;top:420px;font-family:GX;font-size:${60*cl(q)}px;opacity:${cl(q)};color:#fff">?</div>`}
+  return h;
+}
+// 결과: 7점 척도 위 두 막대
+function result(sc,t,B){
+  const k=B[0].kw, X1=560, L=1000, sc7=v=>X1+L*(v-1)/6;
+  let h=`<div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 42%,#1d242d,#0b0e12)"></div>`;
+  const a=eo(P(t,B[0].t,0.6));
+  h+=`<div class="abs" style="left:0;right:0;top:130px;text-align:center;font-size:36px;opacity:${a}">10분 뒤, 얼마나 지루했나 <span style="opacity:.6;font-size:28px">(1~7점)</span></div>`;
+  h+=`<div class="abs" style="left:${X1}px;top:470px;width:${L*a}px;height:2px;background:rgba(255,255,255,.4)"></div>`;
+  [1,2,3,4,5,6,7].forEach(v=>h+=`<div class="abs" style="left:${sc7(v)-20}px;top:480px;width:40px;text-align:center;font-size:24px;opacity:${a*.7}">${v}</div>`);
+  const bar=(y,lab,v,col,t0)=>{const p=eio(P(t,t0,1.0));return `<div class="abs" style="left:${X1-330}px;top:${y+10}px;width:300px;text-align:right;font-size:32px;opacity:${cl(p*3)}">${lab}</div>
+    <div class="abs" style="left:${X1}px;top:${y}px;width:${(sc7(v)-X1)*p}px;height:64px;background:${col};border-radius:4px"></div>
+    <div class="abs" style="left:${X1+(sc7(v)-X1)*p+18}px;top:${y+4}px;font-family:GX;font-size:52px;color:${col};opacity:${cl(p*2)}">${(1+(v-1)*p).toFixed(2)}</div>`};
+  h+=bar(250,"한 편 · 못 넘김",3.26,"#e9edf2",B[0].t+0.2);
+  h+=bar(350,"일곱 편 · 넘김",3.72,Y,k[0]-0.3);
+  ["만족","몰입","의미"].forEach((w,i)=>{const p=eb(P(t,k[1+i]-0.15,0.4));
+    h+=`<div class="abs" style="left:${X1+i*250}px;top:${590+(1-cl(p))*20}px;opacity:${cl(p)};font-size:38px;padding:10px 26px;border-radius:40px;border:2px solid ${Y}">${w} <span class="y" style="font-family:GX">↓</span></div>`});
+  const r=eb(P(t,k[4]-0.6,0.5));
+  h+=`<div class="abs" style="left:0;right:0;top:730px;text-align:center;opacity:${cl(r)};transform:scale(${0.8+0.2*cl(r)})">
+     <span style="font-family:GX;font-size:44px;padding:10px 30px;border:4px solid #fff;border-radius:8px;transform:rotate(-3deg);display:inline-block">예상과 정반대</span></div>`;
+  return h;
+}
+function checks(sc,t,B){
+  return `<div class="abs" style="left:0;top:0;bottom:0;width:1050px;background:linear-gradient(90deg,rgba(6,8,12,.78),rgba(6,8,12,0))"></div>`+
+  sc.checks.map((c,i)=>{const p=eb(P(t,B[0].kw[i]-0.15,0.45));
+    return `<div class="abs" style="left:90px;top:${250+i*130}px;opacity:${cl(p)};transform:translateX(${(1-cl(p))*-40}px);display:flex;align-items:center">
+      <div style="width:64px;height:64px;border-radius:50%;background:${Y};color:#111;font-family:GX;font-size:40px;line-height:64px;text-align:center;margin-right:26px">✓</div>
+      <div style="font-size:40px;text-shadow:0 2px 10px #000">${c}</div></div>`}).join("")+
+  `<div class="abs" style="left:90px;top:640px;font-size:30px;opacity:${cl(P(t,B[0].kw[1],0.4))*.85}">→ 결과는 같았다: 넘긴 쪽이 더 지루</div>`;
+}
+
+// ---------------- 전체 편 공용 구성요소
+const K=(B,i,n)=>{const b=B[0];return (b.kw&&b.kw[i]!==undefined)?b.kw[i]:b.t+b.d*(i+1)/((n||3)+1)};
+const AT=(B,o)=>o<0?B[0].t+B[0].d+o:B[0].t+o;
+const STAGE=`<div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 42%,#1d242d,#0b0e12)"></div>`;
+function kin2(sc,t,B){return sc.words.map(([w,o],i)=>{const p=P(t,AT(B,o),0.45);
+  return `<div class="abs" style="left:0;right:0;top:${380+i*130}px;text-align:center;font-family:GX;font-size:${i?100:70}px;
+    color:${i?Y:'#fff'};opacity:${cl(p*3)};transform:translateY(${(1-eo(p))*28}px);text-shadow:0 6px 30px rgba(0,0,0,.75)">${w}</div>`}).join("")}
+function chips(sc,t,B){const n=sc.chips.length,top=sc.top||230;
+  let h=sc.shade===false?"":`<div class="abs" style="left:0;top:0;bottom:0;width:1100px;background:linear-gradient(90deg,rgba(6,8,12,.75),rgba(6,8,12,0))"></div>`;
+  if(sc.head){const a=eo(P(t,B[0].t,0.5));h+=`<div class="abs" style="left:90px;top:${top-90}px;font-family:GX;font-size:56px;color:${Y};opacity:${a};text-shadow:0 2px 12px #000">${sc.head}</div>`}
+  sc.chips.forEach((c,i)=>{const p=eb(P(t,K(B,i,n)-0.15,0.45));
+    h+=`<div class="abs" style="left:90px;top:${top+i*105}px;opacity:${cl(p)};transform:translateX(${(1-cl(p))*-40}px);
+      font-size:40px;background:rgba(10,12,16,.72);border-left:8px solid ${Y};padding:14px 26px 14px 22px;max-width:1300px">${c}</div>`});
+  return h;}
+function term(sc,t,B){const k=K(B,0,1),n=sc.term.length;let s="";
+  for(let i=0;i<n;i++){const p=P(t,k-0.1+i*0.08,0.35);s+=`<span style="display:inline-block;opacity:${p};transform:translateY(${(1-eb(p))*40}px)">${sc.term[i]}</span>`}
+  const u=eo(P(t,k+0.4,0.6)),e=P(t,k+0.7,0.4);
+  return `<div class="abs" style="left:0;top:0;bottom:0;width:1100px;background:linear-gradient(90deg,rgba(0,0,0,.65),rgba(0,0,0,0))"></div>
+   <div class="abs" style="left:110px;top:360px"><div style="font-family:GX;font-size:140px;text-shadow:0 4px 20px rgba(0,0,0,.5)">${s}</div>
+   <div style="height:8px;width:${560*u}px;background:${Y};margin-top:6px"></div>
+   <div style="font-size:38px;margin-top:22px;opacity:${e*.92}">${sc.sub||""}</div></div>`}
+function expcard(sc,t,B){const a=eo(P(t,B[0].t,0.6)),n=sc.rows.length;
+  let h=`<div class="abs glass" style="left:300px;top:${200+(1-a)*20}px;width:1320px;padding:46px 60px;opacity:${a}">
+    <div style="font-size:30px;letter-spacing:2px;opacity:.8">${sc.kicker||"실험"}</div>
+    <div style="font-family:GX;font-size:60px;margin:10px 0 30px;color:${Y}">${sc.title}</div>`;
+  sc.rows.forEach(([k,v],i)=>{const p=eo(P(t,K(B,i,n)-0.2,0.5));
+    h+=`<div style="display:flex;font-size:38px;margin:16px 0;opacity:${p};transform:translateX(${(1-p)*-20}px)"><div style="width:180px;opacity:.65">${k}</div><div>${v}</div></div>`});
+  return h+`</div>`}
+function dots(sc,t,B){let h=STAGE;const a=eo(P(t,B[0].t,0.5));
+  if(sc.head)h+=`<div class="abs" style="left:0;right:0;top:110px;text-align:center;font-size:36px;opacity:${a}">${sc.head}</div>`;
+  sc.groups.forEach((g,gi)=>{const t0=K(B,gi,sc.groups.length),p=eo(P(t,t0-0.3,0.6)),q=eio(P(t,t0+0.2,1.2)),on=Math.round(g.on*q);
+    const cols=g.cols||6,x=gi?1060:300;let d="";
+    for(let i=0;i<g.total;i++){d+=`<div style="width:62px;height:62px;border-radius:50%;margin:9px;background:${i<on?Y:'rgba(255,255,255,.14)'};box-shadow:${i<on?'0 0 16px rgba(255,210,63,.5)':'none'}"></div>`}
+    h+=`<div class="abs" style="left:${x}px;top:230px;opacity:${p}"><div style="font-size:40px;margin-bottom:16px">${g.label}</div>
+      <div style="display:flex;flex-wrap:wrap;width:${cols*80}px">${d}</div>
+      <div style="font-family:GX;font-size:72px;margin-top:14px;color:${Y}">${on}<span style="font-size:36px;color:#fff;opacity:.8"> / ${g.total}명</span></div></div>`});
+  if(sc.counter){const k=K(B,sc.groups.length,sc.groups.length+1),p=eb(P(t,k-0.2,0.5)),c=Math.round(sc.counter*eio(P(t,k,1.6)));
+    h+=`<div class="abs" style="right:120px;bottom:180px;text-align:right;opacity:${cl(p)}"><div style="font-size:32px">${sc.counterLabel}</div><div style="font-family:GX;font-size:130px;color:${Y}">${c}번</div></div>`}
+  return h}
+function dots100(sc,t,B){let h=STAGE;const a=eo(P(t,B[0].t,0.5)),k=K(B,1,2),q=eio(P(t,k-0.2,1.4)),on=Math.round(sc.on*q);
+  h+=`<div class="abs" style="left:0;right:0;top:100px;text-align:center;font-size:36px;opacity:${a}">${sc.head}</div>`;
+  let d="";for(let i=0;i<100;i++)d+=`<div style="width:44px;height:44px;border-radius:50%;margin:6px;background:${i<on?Y:'rgba(255,255,255,.75)'};opacity:${cl(P(t,K(B,0,2)+i*0.01,0.2))}"></div>`;
+  h+=`<div class="abs" style="left:420px;top:190px;display:flex;flex-wrap:wrap;width:560px">${d}</div>
+   <div class="abs" style="left:1080px;top:330px;opacity:${cl(q*2)}"><div style="font-family:GX;font-size:110px;color:${Y}">${on}%</div><div style="font-size:38px">${sc.onLabel}</div>
+   <div style="font-family:GX;font-size:64px;margin-top:40px">${100-on}%</div><div style="font-size:34px;opacity:.85">${sc.offLabel}</div></div>`;
+  return h}
+function skips(sc,t,B){let h=STAGE;const a=eo(P(t,B[0].t,0.5));
+  h+=`<div class="abs" style="left:0;right:0;top:110px;text-align:center;font-size:36px;opacity:${a}">${sc.head}</div>`;
+  sc.rows.forEach(([lab,n],ri)=>{const k=K(B,ri+1,3);let ic="";
+    for(let i=0;i<n;i++){const p=eb(P(t,k+i*0.18,0.3));ic+=`<div style="width:96px;height:96px;margin:8px;border-radius:18px;background:${ri?Y:'#e9edf2'};color:#111;font-family:GX;font-size:48px;line-height:96px;text-align:center;opacity:${cl(p)};transform:scale(${0.5+0.5*cl(p)})">▶▶</div>`}
+    h+=`<div class="abs" style="left:240px;top:${280+ri*220}px;opacity:${cl(P(t,k-0.4,0.4))}"><div style="font-size:36px;margin-bottom:10px">${lab} <span style="font-family:GX;font-size:46px;color:${ri?Y:'#fff'}">${n}번</span></div><div style="display:flex">${ic}</div></div>`});
+  return h}
+function card(sc,t,B){const a=eo(P(t,B[0].t,0.6)),n=sc.lines.length;
+  let h=`<div class="abs glass" style="left:360px;top:${210+(1-a)*20}px;width:1200px;padding:46px 60px;opacity:${a}">
+    <div style="font-family:GX;font-size:46px;color:${Y};margin-bottom:24px">${sc.title}</div>`;
+  sc.lines.forEach((l,i)=>{const p=eo(P(t,K(B,i+1,n+1)-0.2,0.5));h+=`<div style="font-size:40px;margin:18px 0;opacity:${p}">${l}</div>`});
+  return h+`</div>`}
+function quote(sc,t,B){let h=STAGE;const p=eo(P(t,B[0].t+0.6,1.2));
+  return h+`<div class="abs" style="left:240px;right:240px;top:300px;text-align:center;opacity:${p}">
+    <div style="font-family:GX;font-size:160px;color:${Y};line-height:.6;opacity:.6">“</div>
+    <div style="font-family:GX;font-size:64px;line-height:1.5">${sc.quote}</div>
+    <div style="font-size:30px;margin-top:40px;opacity:.75">— ${sc.by}</div></div>`}
+function list(sc,t,B){let h=STAGE;const n=sc.items.length;
+  if(sc.head)h+=`<div class="abs" style="left:0;right:0;top:120px;text-align:center;font-size:40px;opacity:${eo(P(t,B[0].t,0.5))}">${sc.head}</div>`;
+  sc.items.forEach((it,i)=>{const act=sc.actions?sc.actions[i]:null;
+    const p=act?eo(P(t,B[0].t-0.3+i*0.08,0.4)):eb(P(t,K(B,i,n)-0.15,0.45));
+    const q=act?eb(P(t,K(B,i,n)-0.15,0.45)):0;
+    h+=`<div class="abs" style="left:${act?260:420}px;top:${240+i*150}px;display:flex;align-items:center;opacity:${cl(p)};transform:translateX(${(1-cl(p))*-40}px)">
+      <div style="width:76px;height:76px;border-radius:50%;border:4px solid ${Y};font-family:GX;font-size:40px;line-height:68px;text-align:center;margin-right:30px">${i+1}</div>
+      <div style="font-size:44px;width:${act?760:1100}px">${it}</div>
+      ${act?`<div style="font-size:50px;opacity:${cl(q)};margin:0 30px">→</div><div style="font-family:GX;font-size:64px;color:${Y};opacity:${cl(q)};transform:scale(${0.7+0.3*cl(q)})">${act}</div>`:""}</div>`});
+  return h}
+function split(sc,t,B){const a=eo(P(t,B[0].t,0.5));let h=`<div class="abs" style="left:90px;top:120px;font-family:GX;font-size:60px;color:${Y};opacity:${a};text-shadow:0 2px 12px #000">${sc.head}</div>`;
+  sc.parts.forEach(([lab,sub],i)=>{const p=eo(P(t,K(B,i,2)-0.2,0.6)),x=90+i*620;
+    h+=`<div class="abs glass" style="left:${x}px;top:${720+(1-p)*20}px;width:560px;padding:26px 34px;opacity:${p};border-top:6px solid ${i?Y:'#e9edf2'}">
+      <div style="font-family:GX;font-size:44px">${lab}</div><div style="font-size:32px;margin-top:8px;opacity:.85">${sub}</div></div>`});
+  return h}
+function notes(sc,t,B){const a=eo(P(t,B[0].t,0.6));let h=`<div class="abs" style="left:90px;top:120px;font-family:GX;font-size:60px;color:${Y};opacity:${a};text-shadow:0 2px 12px #000">${sc.head}</div>
+   <div class="abs" style="left:1180px;top:${170+(1-a)*30}px;width:600px;height:640px;background:#fbf7ec;border-radius:10px;box-shadow:0 20px 50px rgba(0,0,0,.5);opacity:${a};
+     background-image:repeating-linear-gradient(180deg,transparent 0 78px,#c9d6e8 78px 80px)"></div>
+   <div class="abs" style="left:1240px;top:200px;font-family:GX;font-size:34px;color:#c0392b;opacity:${a}">떠올리면 즐거운 것</div>`;
+  sc.items.forEach((it,i)=>{const k=K(B,i,sc.items.length),n=it.length,c=Math.round(n*cl((t-k+0.2)/0.9));
+    h+=`<div class="abs" style="left:1240px;top:${300+i*130}px;font-family:G;font-size:46px;color:#222">${c>0?(i+1)+'. ':''}${it.slice(0,c)}</div>`});
+  return h}
+function immerse(sc,t,B){const resets=sc.resets||[];const T=t-B[0].t,d=B[0].d;let last=0,flash=0;
+  resets.forEach(r=>{const rt=r*d;if(T>=rt){last=rt;flash=P(T,rt,0.5)}});
+  const v=sc.full?eio(P(T,0.5,d*0.8)):cl((T-last)/(d*0.32));
+  return `<div class="abs" style="left:0;right:0;bottom:0;height:420px;background:linear-gradient(0deg,rgba(6,8,12,.75),rgba(6,8,12,0))"></div>
+   <div class="abs" style="left:320px;top:770px;font-size:36px">빠져드는 정도</div>
+   <div class="abs" style="left:620px;top:776px;width:980px;height:30px;border-radius:15px;background:rgba(255,255,255,.18)"></div>
+   <div class="abs" style="left:620px;top:776px;width:${980*v}px;height:30px;border-radius:15px;background:${Y};box-shadow:0 0 18px rgba(255,210,63,.5)"></div>
+   ${flash>0&&flash<1?`<div class="abs" style="left:1500px;top:690px;font-family:GX;font-size:44px;opacity:${1-flash}">넘김 ↺</div>`:""}`}
+function bubble(sc,t,B){const p=eb(P(t,K(B,0,2)-0.2,0.5)),q=eo(P(t,K(B,1,2)-0.2,0.5));
+  return `<div class="abs" style="left:980px;top:170px;opacity:${cl(p)};transform:scale(${0.7+0.3*cl(p)})">
+    <div style="background:#fff;color:#111;border-radius:60px;padding:34px 50px;font-family:GX;font-size:46px;box-shadow:0 14px 40px rgba(0,0,0,.4)">${sc.bubble}</div>
+    <div style="width:34px;height:34px;border-radius:50%;background:#fff;margin:14px 0 0 90px"></div><div style="width:20px;height:20px;border-radius:50%;background:#fff;margin:8px 0 0 70px"></div></div>
+   <div class="abs" style="left:110px;top:700px;opacity:${q}"><span style="font-family:GX;font-size:58px;color:${Y}">${sc.term2}</span><span style="font-size:36px;margin-left:20px">${sc.term2sub}</span></div>`}
+function ask(sc,t,B){const a=eo(P(t,B[0].t,0.5));let h=sc.head?`<div class="abs" style="left:90px;top:120px;font-family:GX;font-size:60px;color:${Y};opacity:${a};text-shadow:0 2px 12px #000">${sc.head}</div>`:"";
+  sc.opts.forEach((o,i)=>{const p=eb(P(t,K(B,i,2)-0.15,0.45));
+    h+=`<div class="abs" style="left:${620+i*420}px;top:${700}px;opacity:${cl(p)};transform:scale(${0.7+0.3*cl(p)});font-family:GX;font-size:52px;padding:18px 40px;border-radius:50px;
+      background:${i?Y:'rgba(255,255,255,.92)'};color:#111;box-shadow:0 10px 30px rgba(0,0,0,.4)">${o}</div>`});
+  return h}
+function recap(sc,t,B){let h=STAGE;const n=sc.words.length;
+  sc.words.forEach((w,i)=>{const p=eb(P(t,K(B,i,n+1)-0.15,0.45));
+    h+=`<div class="abs" style="left:${220+i*380}px;top:${380+(1-cl(p))*30}px;width:340px;text-align:center;opacity:${cl(p)}">
+      <div style="font-family:GX;font-size:96px;color:${Y}">${w[0]}</div><div style="font-size:30px;margin-top:14px;opacity:.85">${w[1]}</div></div>`});
+  const q=eo(P(t,K(B,n,n+1)-0.3,0.8));
+  h+=`<div class="abs" style="left:0;right:0;top:700px;text-align:center;font-size:44px;opacity:${q}">한 가지에 <span class="y" style="font-family:GX">머무를 이유</span></div>`;
+  return h}
+function endcard(sc,t,B,D){const p=eo(P(t,AT(B,-3.2),1.2)),f=P(t,D-2.2,2.0);
+  return `<div class="abs" style="inset:0;background:rgba(0,0,0,${0.35*p+0.65*f})"></div>
+   <div class="abs" style="left:0;right:0;top:470px;text-align:center;font-family:GX;font-size:80px;opacity:${p*(1-f)}">${sc.end}</div>`}
+
+// ---------------- v3: 마디 · 삽화 칸 · 실제 사진
+function madi(sc,t,B,D){const p=eo(P(t,0.3,0.9)),f=P(t,D-0.6,0.5);
+  return `<div class="abs" style="inset:0;background:#050506"></div>
+   <div class="abs" style="left:0;right:0;top:470px;text-align:center;opacity:${p*(1-f)};transform:translateY(${(1-p)*14}px)">
+     ${sc.kicker?`<div style="font-size:30px;letter-spacing:6px;opacity:.6;margin-bottom:22px">${sc.kicker}</div>`:""}
+     <div style="font-family:GX;font-size:${sc.size||72}px;line-height:1.35">${sc.line}</div></div>`}
+function artLayer(sc,t,B,D){const a=sc.art,z=1.04+0.06*cl(t/Math.max(D,1)),ox=(a.pan||0)*cl(t/Math.max(D,1))*40;
+  if(a.ok) return `<div class="abs" style="inset:0;background:#000"></div><img class="abs" src="ARTDIR/${a.sheet}_${a.q}.jpg" style="left:0;top:0;width:1920px;height:1080px;object-fit:cover;transform:scale(${z}) translateX(${ox}px);transform-origin:50% 45%">`;
+  return `<div class="abs" style="inset:0;background:#2a2622"></div>
+   <div class="abs" style="left:160px;top:120px;width:1600px;height:720px;border:3px dashed rgba(255,255,255,.35);border-radius:18px;background:rgba(255,255,255,.04)"></div>
+   <div class="abs" style="left:220px;top:170px;font-size:30px;letter-spacing:3px;opacity:.6">원화 대기 · ${a.sheet} ${a.q}</div>
+   <div class="abs" style="left:220px;top:240px;width:1480px;font-family:G;font-size:44px;line-height:1.5;opacity:.85">${a.desc}</div>`}
+function photo(sc,t,B){const p=eo(P(t,B[0].t-0.2,0.8)),z=1+0.05*cl((t-B[0].t)/8);
+  return `<div class="abs" style="inset:0;background:#0b0b0c"></div>
+   <div class="abs" style="left:300px;top:${150+(1-p)*20}px;width:560px;height:700px;overflow:hidden;opacity:${p};box-shadow:0 20px 60px rgba(0,0,0,.6)">
+     ${sc.photoOk?`<img src="ARTDIR/${sc.photo}" style="width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.05);transform:scale(${z});transform-origin:50% 20%">`:`<div style="width:100%;height:100%;background:#333;display:flex;align-items:center;justify-content:center;font-size:30px;opacity:.6">사진 대기</div>`}</div>
+   <div class="abs" style="left:940px;top:330px;opacity:${eo(P(t,B[0].t+0.4,0.8))}">
+     <div style="font-family:GX;font-size:72px">${sc.name}</div><div style="font-size:36px;margin-top:12px;opacity:.8">${sc.who}</div>
+     ${sc.quote?`<div style="font-family:GX;font-size:46px;line-height:1.45;margin-top:56px;width:820px;color:${Y};opacity:${eo(P(t,K(B,0,1)-0.2,0.8))}">“${sc.quote}”</div>`:""}</div>`}
+function namecard(sc,t,B){const p=eo(P(t,K(B,0,1)-0.2,0.6));
+  return `<div class="abs" style="left:90px;bottom:200px;opacity:${p};transform:translateX(${(1-p)*-30}px);background:rgba(8,10,14,.78);border-left:8px solid ${Y};padding:18px 30px">
+    <div style="font-family:GX;font-size:46px">${sc.name}</div><div style="font-size:30px;opacity:.85;margin-top:6px">${sc.who}</div></div>`}
+const MG={none:()=>"",night:()=>"",feed,elapsed,kinetic,plan,plan2,result,checks,madi,photo,namecard,kin2,chips,term,expcard,dots,dots100,skips,card,quote,list,split,notes,immerse,bubble,ask,recap,endcard};
+window.R=function(sc,t,B,D,sub){
+  let h=sc.art?artLayer(sc,t,B,D):"";
+  if(sc.stamp){const p=P(t,0.15,0.5),f=1-P(t,D-0.8,0.6);
+    h+=`<div class="abs" style="left:64px;top:60px;opacity:${p*f};font-family:GX;font-size:52px;letter-spacing:2px;text-shadow:0 2px 12px #000">${sc.stamp}</div>`}
+  h+=(MG[sc.mg||"none"]||MG.none)(sc,t,B,D);
+  if(sc.role==="자료 화면") h+=`<div class="tag">자료 화면 · 실험 장면 아님</div>`;
+  if(sc.src) h+=`<div class="src">출처: ${sc.src}</div>`;
+  if(sub) h+=`<div class="sub">${sub}</div>`;
+  root.innerHTML=h;
+};
+</script></body></html>

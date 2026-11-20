@@ -367,11 +367,11 @@ items:
     file: channels/brands.yaml identity·05 §0-7
     text: 교실과 기록 보관소, 세피아 기록 사진, 아카이브·지도 대표 연출
   b:
-    file: 04 §0-8 (v57·v60)
-    text: 심리·현대 일상, 실사 B-roll·모션그래픽
+    file: 04 §0-7 (v73, 04 §0-8 v60 을 바꿈)
+    text: 심리·현대 일상, 이야기는 삽화·증거는 실제 사진
   current: unknown
   why: 'brand: curiosity 를 쓰면 기록 사진 표지·아카이브 연출이 자동으로 들어감 (스타일 층, v15·v16 합격분)'
-  fix: 정체성을 "일상 관찰 노트"로 바꾸고 signature·photo_hint 를 B-roll 쪽으로
+  fix: 기록 사진은 '증거' 자리로 남기고, 표지·대표 연출을 삽화 이야기 쪽으로 (v73 뒤 사용자 확인)
   status: open
 - id: c-20261120-29
   found: '2026-11-20'
@@ -384,8 +384,8 @@ items:
     text: 봇 확인을 계정으로 넘는 것은 우회 금지와 부딪힘 (PC 본인 로그인은 2026-11-20 허용)
   current: unknown
   why: '"봇 확인이 뜨면" 이라는 조건이 우회처럼 읽힘'
-  fix: PC 본인 로그인으로 평소처럼 받기(공식 채널·20초 이내)로 문장만 바꿀지
-  status: open
+  fix: video-sources §3 문장을 'PC 본인 로그인으로 평소처럼, 봇 확인을 넘기는 수단으로 쓰지 않음'으로 (v73)
+  status: resolved
 - id: c-20261120-30
   found: '2026-11-20'
   topic: make 경로의 style_profile
@@ -410,8 +410,8 @@ items:
     text: S3 의도 intent.md → S4 대본
   current: unknown
   why: intent.md 를 언제 쓰는지 두 가지
-  fix: ④ 를 "장면 의도표(S5)" 로 이름을 바꿔 구분
-  status: open
+  fix: ④ 를 '장면 의도표(S5, §0-5 B)'로 이름을 바꿔 S3 intent.md 와 구분 (v73)
+  status: resolved
 - id: c-20261120-32
   found: '2026-11-20'
   topic: 뉴스레터 정기 작업 역할
@@ -711,3 +711,16 @@ items:
   fix: MUST(코드 고침) 또는 SHOULD(문서 고침)
   status: resolved
   decision: '2026-11-20 사용자: "7. 권장으로 하세요"'
+- id: c-20261120-90
+  found: '2026-11-20'
+  topic: 화면 자료 고르기 (모든 채널)
+  a:
+    file: manual/12 §0-1 (v61) · 04 §0-8 (v60) · 05·10·11·README·AGENTS·topics/curiosity·channels/ch-knowledge·prompts/script_knowledge·recipes·presets
+    text: 실사가 있으면 최대한 · 떠올리게 하는 장면은 인물 실사(B-roll) · 호기심은 B-roll 먼저, 삽화는 대체
+  b:
+    file: manual/12 §0-1 · 04 §0-7 (v73)
+    text: 이야기는 삽화, 설명은 모션그래픽, 증거는 실제 자료, 마디는 검은 화면 — 모든 채널 공통, 채널마다 자리의 비중만 다름
+  current: b
+  why: 사용자 2026-11-20 "이야기는 삽화로 … 마디로 해주세요" → "네, 공통으로" (docs/54 §5)
+  fix: a 쪽 문장을 모두 b 로 바꾸고 04 §0-7·§0-8 을 한 절로 합침, broll-motion 은 사용자가 고를 때만
+  status: resolved

@@ -8,7 +8,7 @@
 #          → 프로젝트 edit.yaml 의 look: {motion, illust, footage} 에 적힘
 # 적용:    motion → 그래픽 스킨(skins/<skin>)으로 렌더 (edit.yaml 에 skin 을 따로 적으면 그것이 우선)
 #          illust → 그림 주문서(art-gen)의 화풍 문장 (art_plan.json 에 style 을 적으면 그것이 우선)
-#          footage → 실사 클립 색보정 (실사 B-roll 렌더러가 읽음)
+#          footage → 실사 클립 색보정 (실제 자료 영상 렌더러가 읽음)
 # 새 화풍 더하기: 아래 형식으로 한 항목 추가 (motion 은 skins/<id>/skin.yaml 도 함께).
 #
 # status: approved = 사용자 합격 · trial = 시안 있음(판정 전) · available = 바로 렌더 가능(따로 판정 기록 없음)
@@ -182,7 +182,7 @@ illust:   # 삽화 화풍 — 실사도 모션그래픽도 어려운 박자에�
     status: approved
     prompt: ""   # 그림 생성이 아니라 실제 자료를 오려 붙임
 
-footage:  # 실사 클립 색보정 — 한 편의 클립을 같은 값으로 묶음 (04 §0-8)
+footage:  # 실사 클립 색보정 — 한 편의 클립을 같은 값으로 묶음
   warm-doc:
     name: 따뜻한 다큐
     look: 채도 조금 낮춤, 따뜻한 중간톤, 비네트, 옅은 필름 입자
