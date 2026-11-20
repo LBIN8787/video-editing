@@ -1,7 +1,7 @@
 {
  "project": "20261120-market-deep",
  "manual_version": "62",
- "checked": "2026-11-20T07:10:48",
+ "checked": "2026-11-20T16:49:26",
  "pass": true,
  "rows": [
   {
@@ -15,7 +15,7 @@
    "gate": "G0",
    "level": "SHOULD",
    "item": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
-   "ok": true,
+   "ok": false,
    "detail": "manual/graph.json"
   },
   {
@@ -233,7 +233,7 @@
    "level": "MUST",
    "item": "매일 시장: 이야기마다 원인 종류(이슈·보고서·전망·실적)와 1차 출처를 팩트시트에",
    "ok": true,
-   "detail": "['이슈', '보고서', '실적']"
+   "detail": "['이슈', '보고서', '전망', '실적']"
   },
   {
    "gate": "G1",
@@ -345,7 +345,7 @@
    "level": "MUST",
    "item": "v36: 팩트시트 '## 영상 소스' — 인터뷰·방송 원본 후보 1줄+ (못 찾으면 '없음: 이유') (09 §3-5)",
    "ok": true,
-   "detail": "6줄"
+   "detail": "5줄"
   },
   {
    "gate": "G3",
@@ -409,6 +409,13 @@
    "item": "말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용)",
    "ok": false,
    "detail": "['미쳤']"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "길이: 롱폼 10분 이상 — 많이 짧으면 쇼츠로 (README §2-4)",
+   "ok": true,
+   "detail": "18.5분"
   },
   {
    "gate": "G5",
@@ -492,7 +499,7 @@
    "level": "참고",
    "item": "자료 화면 없이 그래픽만 이어지는 가장 긴 구간",
    "ok": false,
-   "detail": "최장 1020초"
+   "detail": "최장 1090초"
   },
   {
    "gate": "G5",
@@ -513,7 +520,7 @@
    "level": "참고",
    "item": "스타일 조합: 가장 많이 쓴 스타일의 몫·겹친 장면·같은 스타일 연속",
    "ok": false,
-   "detail": "paper-column 0.28 · 겹침 1 · 최장 연속 3"
+   "detail": "data-report 0.31 · 겹침 1 · 최장 연속 3"
   },
   {
    "gate": "G5",
@@ -549,6 +556,76 @@
    "item": "edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움)",
    "ok": true,
    "detail": "python -m ytflow edit-plan <프로젝트> → 02_script/EDIT_CONTEXT.md"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "final.mp4",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "참고",
+   "item": "무대 화면: 한꺼번에 보이는 것·글자·멈춘 박자 (한 화면 한 생각인지 눈으로, 04 §0-5)",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
+   "ok": true,
+   "detail": "{'within_0_5s': 0.989, 'p95_abs_offset': 0.11, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.067}"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "납품 점검(음량 등)",
+   "ok": true,
+   "detail": "completed"
+  },
+  {
+   "gate": "G6",
+   "level": "참고",
+   "item": "움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5)",
+   "ok": false,
+   "detail": "변화 5.6/분 · 정지 0.75"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "최종 목소리 ElevenLabs",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "제목 후보 3개 + 이유",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "썸네일 A/B/C + 점검 ok",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "참고",
+   "item": "제목 앞부분에 질문·핵심 (목록에서 잘려도 무슨 영상인지 보이게)",
+   "ok": true,
+   "detail": "앤트로픽 상장 날, 시장은 왜 2% 빠졌"
   }
  ]
 }

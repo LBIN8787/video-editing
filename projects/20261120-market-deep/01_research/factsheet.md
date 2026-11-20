@@ -100,18 +100,17 @@
 | CEO (회사) | 날짜 | 말했나·했나 | 원문 한 줄 또는 공시 | 출처 주소 | 오늘 이야기와의 연결 |
 |---|---|---|---|---|---|
 | AMD (리사 수 CEO 의 회사 — 대변인 답) | 2026-11-19 | 말 | "The claims misrepresent AMD's business practices and relationships" | https://www.aol.com/articles/amd-shares-slide-short-seller-174947000.html | 보고서 부인 — 주가는 -7.72% |
-| 다리오 아모데이 (앤트로픽 CEO) | 2026-11-19 | 했나 | 나스닥 상장 첫날 (회사 발표: 83달러·9억 8천만 주) | https://www.anthropic.com/news/anthropic-prices-initial-public-offering | 상장 연설 내용(CNBC 제목 'AI 개발 속도 조절 약속 재확인')은 원문 미확인 → 영상에 쓰지 않음 |
+| 다리오 아모데이 (앤트로픽 CEO) | 2026-11-19 | 했나 | 나스닥 상장 첫날 (회사 발표: 83달러·9억 8천만 주) | https://www.anthropic.com/news/anthropic-prices-initial-public-offering | 상장 연설은 Nasdaq 공식 영상에서 확인 → 장면 9 |
 | 립부 탄 (인텔 CEO) | 2026-11-19 | 말 | 18A 첫 외부 고객 계약 (CNBC 제목) | https://www.cnbc.com/ (제목만, 원문 미확인) | 오늘 이야기와 약함 → 쓰지 않음 |
 
 ## 영상 소스
-> 2026-11-20 피클이 공식 채널 구간 확인 (inbox/requests/done/20261120-1453-*) → 원본판은 PC 가 받음 (inbox/pc-tasks, docs/50)
+> 2026-11-20 PC에서 공식 영상의 영어 원음과 대본을 대조했습니다. CNBC 두 장면은 방송사 웹사이트에서 실제 발언 구간을 다시 찾았습니다. 아래 시각은 확보한 원본 구간입니다.
 
-| 다리오 아모데이 | Nasdaq 공식 채널 | Anthropic IPO: Co-Founder & CEO Dario Amodei speaks at the Nasdaq opening bell | 2026-11-19 | https://www.youtube.com/watch?v=FgAtTAgBT2Q | 3:50~4:05 "And to state it unequivocally, we will pace the training and deployment of AI systems … We will not bend to either business nor political pressure." | 거래소 공식 — 15초 인용 | PC 필요 (clip-fetch) |
-| 폴 미크스 | CNBC Television 공식 | Anthropic's IPO should lift the AI trade, says Paul Meeks | 2026-11-19 | https://www.youtube.com/watch?v=i58L0YVXq_w | 3:29~3:45 "So I would expect that you get some sort of relief rally …" | 방송사 — 16초 인용 | PC 필요 (clip-fetch) |
-| 톰 리 | CNBC Television 공식 | This is a pretty health correction in tech, says Fundstrat's Tom Lee | 2026-11-19 | https://www.youtube.com/watch?v=DvJ6rp5Rwo4 | 1:11~1:20 "I think that we are at that moment where it feels like max pain …" | 방송사 — 9초 인용 | PC 필요 (clip-fetch) |
 | 누가 | 채널 (공식) | 영상 제목 | 날짜 | 주소 | 쓸 문장 (원문) | 권리 | 상태 |
 |---|---|---|---|---|---|---|---|
-| 다리오 아모데이 | 나스닥 상장 행사 (CNBC Television 등 방송사 공식) | Nasdaq 상장 연설 | 2026-11-19 | CNBC 기사(제목) — 영상 주소 미확인 | 미확인 | 방송사 — 20초 이내 인용 | PC 필요 (YouTube 봇 확인 — 클라우드에서 받지 않음) → 이번 편은 쓰지 않음, source-backlog 에 남김 |
+| 다리오 아모데이 | Nasdaq 공식 채널 | Anthropic IPO: Co-Founder & CEO Dario Amodei speaks at the Nasdaq opening bell | 2026-11-19 | https://www.youtube.com/watch?v=FgAtTAgBT2Q | 3:50~4:05 · AI 훈련·배포 속도와 안전 약속 | 거래소 공식 영상 인용 | PC 확인 · 장면 9 |
+| 폴 미크스 | CNBC 공식 사이트 | Anthropic's IPO should lift the AI trade, says Paul Meeks | 2026-11-19 | https://www.cnbc.com/video/2026/11/19/anthropics-ipo-should-lift-the-ai-trade-says-paul-meeks.html | 3:16~3:35 · 공모 뒤 안도 랠리와 시가총액 전망 | 방송사 공식 영상 인용 | PC 확인 · 장면 26 |
+| 톰 리 | CNBC 공식 사이트 | This is a pretty health correction in tech, says Fundstrat's Tom Lee | 2026-11-19 | https://www.cnbc.com/video/2026/11/19/this-is-a-pretty-health-correction-in-tech-says-fundstrats-tom-lee.html | 0:54~1:13 · 고통이 가장 큰 시점이라는 의견 | 방송사 공식 영상 인용 | PC 확인 · 장면 28 |
 | 모하메드 엘에리언 | 본인 X | 게시물 | 2026-11-19 | 야후 파이낸스 기사 인용 | "making room for it" | 공식 임베드 캡처 가능 | 게시물 주소 미확인 → 인용 카드 |
 | 헌터브룩 | hntrbrk.com | 보고서(문서, 영상 없음) | 2026-11-19 | https://hntrbrk.com/investigations/amd-china | "Is AMD really a safer alternative to Nvidia?" | 짧은 인용 | 인용 카드 |
 

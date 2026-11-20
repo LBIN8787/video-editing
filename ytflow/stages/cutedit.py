@@ -100,7 +100,12 @@ def prepare(project, spec: dict) -> None:
         if not segs:
             raise SystemExit(f"[cut] #{sc['id']} 쓸 구간이 없습니다 — 02_script/cuts.json 에 start/end 를 직접 넣거나 find 문장을 고치세요")
         src = _src(project, spec, sc["clip"]["src"])
+        contain = sc["clip"].get("fit") == "contain"
+        framing = ("scale=1920:1080:force_original_aspect_ratio=decrease:force_divisible_by=2,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=0x161a20"
+                   if contain else "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080")
         sig = json.dumps([(s["start"], s["end"]) for s in segs]) + str(src.stat().st_size)
+        if contain:
+            sig += framing
         vid, wav, side = bdir / f"bite_{sc['id']:03d}.mp4", bdir / f"bite_{sc['id']:03d}.wav", bdir / f"bite_{sc['id']:03d}.txt"
         if not (vid.exists() and wav.exists() and side.exists() and side.read_text(encoding="utf-8") == sig):
             parts_v, parts_a, n = [], [], len(segs)
@@ -109,7 +114,7 @@ def prepare(project, spec: dict) -> None:
                 d = s["end"] - s["start"]
                 fade = f",fade=t=in:st=0:d={JOIN}:color=white" if k else ""
                 subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-ss", f"{s['start']:.3f}", "-i", str(src), "-t", f"{d:.3f}",
-                                "-an", "-vf", "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=30" + fade,
+                                "-an", "-vf", f"{framing},fps=30{fade}",
                                 "-c:v", "libx264", "-preset", "veryfast", "-crf", "19", "-pix_fmt", "yuv420p", str(pv)], check=True)
                 af = f"afade=t=in:d=0.06,afade=t=out:st={max(d - 0.12, 0):.3f}:d=0.12"
                 subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-ss", f"{s['start']:.3f}", "-i", str(src), "-t", f"{d:.3f}",
@@ -193,7 +198,8 @@ def s_bite(D, sc: dict, bt: list, dur: float):
     D.js.append(f'tl.fromTo("#{i}",{{scale:1.0}},{{scale:1.04,duration:{bd:.2f},ease:"none"}},{tb:.2f});')
     D.label(" · ".join(x for x in (sc.get("label", ""), b.get("credit", "")) if x), dark=True)
     D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""), dark=True)
-    D.lower(sc.get("who", ""), sc.get("role", ""), tb + 0.4, dark=True)
+    if sc.get("show_lower", True):
+        D.lower(sc.get("who", ""), sc.get("role", ""), tb + 0.4, dark=True)
     if sc.get("show_en", True):   # 원문 한 줄 (번역 자막 위, 작게): 원문·번역 2단
         for s in b["segs"]:
             parts = _en_chunks(s.get("en", ""))

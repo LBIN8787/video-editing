@@ -13,12 +13,12 @@
 
 📌 챕터
 0:00 오프닝
-1:10 1. 한 달 사이, 갈라진 AI
-3:02 2. 정품이 진열된 날
-6:36 3. '승자'에게 온 질문
-11:06 4. 같은 날, 두 가지 읽기
-12:19 5. 한국은 첫 거래 전에 닫혔다
-13:51 6. 다음 볼 것
+1:20 1. 한 달 사이, 갈라진 AI
+3:11 2. 정품이 진열된 날
+7:39 3. '승자'에게 온 질문
+12:09 4. 같은 날, 두 가지 읽기
+15:31 5. 한국은 첫 거래 전에 닫혔다
+17:02 6. 다음 볼 것
 
 📚 출처
 - https://finance.yahoo.com/quote/%5EGSPC/history
@@ -35,9 +35,12 @@
 - https://finance.yahoo.com/quote/%5ESOX/history
 - https://hntrbrk.com/investigations/bank-of-amd
 - https://finance.yahoo.com/markets/stocks/articles/anthropic-closes-17-while-nasdaq-220152540.html
+- https://finance.yahoo.com/technology/ai/articles/anthropic-ipo-spark-relief-rally-123705829.html
+- https://finance.yahoo.com/markets/stocks/articles/anthropic-defies-tech-rout-debut-051858481.html
 - https://www.cnbc.com/
-- https://view.asiae.co.kr/article/2026111916492474833
-- https://www.etoday.co.kr/news/view/2649940
+- https://www.youtube.com/watch?v=FgAtTAgBT2Q
+- https://www.cnbc.com/video/2026/11/19/anthropics-ipo-should-lift-the-ai-trade-says-paul-meeks.html
+- https://www.cnbc.com/video/2026/11/19/this-is-a-pretty-health-correction-in-tech-says-fundstrats-tom-lee.html
 
 ※ 정보 제공 목적이며 투자 권유가 아닙니다. 사실과 해석을 구분해 전달하며, 해석은 영상에서 '해석'이라고 밝힙니다.
 #주식시황 #미국주식 #뉴욕증시

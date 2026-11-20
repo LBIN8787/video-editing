@@ -84,10 +84,10 @@ BITES = "--bites" in sys.argv
 CLIPS = {
     "amodei": {"file": "amodei_nasdaq_20261119.mp4", "url": "https://www.youtube.com/watch?v=FgAtTAgBT2Q", "start": "3:50", "end": "4:05",
                "who": "다리오 아모데이", "credit": "Nasdaq 공식 채널 (YouTube) · 2026.11.19 상장 행사", "license": "인용(20초 이내)"},
-    "meeks": {"file": "meeks_cnbc_20261119.mp4", "url": "https://www.youtube.com/watch?v=i58L0YVXq_w", "start": "3:29", "end": "3:45",
-              "who": "폴 미크스", "credit": "CNBC Television 공식 채널 (YouTube) · 2026.11.19 Squawk Box", "license": "인용(20초 이내)"},
-    "tomlee": {"file": "tomlee_cnbc_20261119.mp4", "url": "https://www.youtube.com/watch?v=DvJ6rp5Rwo4", "start": "1:11", "end": "1:20",
-               "who": "톰 리", "credit": "CNBC Television 공식 채널 (YouTube) · 2026.11.19 Closing Bell", "license": "인용(20초 이내)"},
+    "meeks": {"file": "meeks_cnbc_site_20261119.mp4", "url": "https://www.cnbc.com/video/2026/11/19/anthropics-ipo-should-lift-the-ai-trade-says-paul-meeks.html", "start": "3:16", "end": "3:35",
+              "who": "폴 미크스", "credit": "CNBC 공식 영상 · 2026.11.19 Squawk Box", "license": "인용(20초 이내)"},
+    "tomlee": {"file": "tomlee_cnbc_site_20261119.mp4", "url": "https://www.cnbc.com/video/2026/11/19/this-is-a-pretty-health-correction-in-tech-says-fundstrats-tom-lee.html", "start": "0:54", "end": "1:13",
+               "who": "톰 리", "credit": "CNBC 공식 영상 · 2026.11.19 Closing Bell", "license": "인용(20초 이내)"},
 }
 
 
@@ -95,6 +95,14 @@ def bite(key, chapter, who, role, lead, find, ko, insight=False):
     c = CLIPS[key]
     d = dict(type="bite", chapter=chapter, who=who, role=role, label=f"{c['credit']} · 인용", beats=[{"say": lead}],
              clip={"src": key, "lang": "en", "cuts": [{"find": find, "ko": ko}]})
+    if key == "amodei":
+        # 나스닥 세로 영상은 발표자의 얼굴과 원본 영어 자막이 보이도록 비율 유지.
+        d["clip"]["fit"] = "contain"
+        d["show_en"] = False
+    else:
+        # CNBC 자체 하단 띠와 이름이 겹치지 않게, 이름은 앞 내레이션에서 소개.
+        d["show_lower"] = False
+        d["label"] = "인용"
     if insight:
         d["insight"] = True
     return d
@@ -272,9 +280,9 @@ def main():
     s(dict(type="versus", chapter=4, insight=True, label="CNBC 인터뷰(미크스·19일 장 전) · 디트릭 발언 — 야후 파이낸스(스톡트위츠) 인용 · 의견이며 사실이 아닙니다",
            left={"value": "안도", "label": "미크스: 장 전 '안도 랠리'", "icon": "trending-up"},
            right={"value": "조정", "label": "디트릭: 급등 뒤 조정도 흔해", "icon": "trending-down"},
-           beats=[{"say": "상장 전 기대도 엇갈렸습니다. 프리덤 캐피털 마켓의 기술 리서치 책임자 폴 미크스는 19일 장 전 미국 방송 인터뷰에서, 이 공모가 AI 주식 전체에 안도 랠리를 불러올 것이고 첫날은 적당히 오를 것이라고 봤습니다. 시가총액 2조 달러까지는 못 갈 거라고도 했습니다.", "motion": [M("2조", "count", id="mk2e", value="2조 달러 미만", label="미크스의 첫날 예상", x=960, y=860, w=460, h=140, fs=48)]},
+           beats=[{"say": "상장 전 기대도 엇갈렸습니다. 프리덤 캐피털 마켓의 기술 리서치 책임자 폴 미크스는 19일 장 전 미국 방송 인터뷰에서, 이 공모가 AI 주식 전체에 안도 랠리를 불러올 것이고 첫날은 적당히 오를 것이라고 봤습니다. 시가총액 2조 달러까지는 못 갈 거라고도 했습니다.", "motion": [M("2조", "count", id="mk2e", value="2조 달러 미만", label="미크스의 첫날 예상", x=590, y=860, w=460, h=140, fs=48)]},
                   {"say": "카슨 그룹의 라이언 디트릭은 과거 대형 상장을 보면 첫날 급등은 흔하지만, 그다음 1년 안에 큰 조정이 오는 것도 흔했다고 짚었습니다. 결과는 반반이었습니다. 앤트로픽은 공모가보다 높게 마쳤고 2조 달러에는 못 미쳤지만, 기대했던 AI 주식 전체의 안도 랠리는 오지 않았습니다. 둘 다 사실이 아니라 한 사람의 시각입니다.",
-                   "motion": [M("2조", "count", id="mk2t", value="약 1.77조 달러", label="첫날 시가총액 (보도)", x=960, y=860, w=460, h=140, fs=48)]}]))
+                   "motion": [M("2조", "count", id="mk2t", value="약 1.77조 달러", label="첫날 시가총액 (보도)", x=1330, y=860, w=460, h=140, fs=48)]}]))
     if BITES:
         s(bite("tomlee", 4, "톰 리", "펀드스트랫 · CNBC 19일 클로징 벨", "장이 끝난 뒤, 펀드스트랫의 톰 리는 이렇게 말했습니다.",
                "I think that we are at that moment where it feels like max pain. But for the patient investor, this is going to have a big payoff.",
