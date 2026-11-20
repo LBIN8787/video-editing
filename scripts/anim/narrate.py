@@ -87,6 +87,7 @@ def main():
     ap.add_argument("out", type=Path)
     ap.add_argument("--voice", default="ko-KR-InJoonNeural")
     ap.add_argument("--rate", default="+0%")
+    ap.add_argument("--channel", default="", help="channels/<id> 의 tts.elevenlabs 로 읽음 (클라우드는 edge-tts 가 프록시에 막혀 이쪽)")
     a = ap.parse_args()
     out = a.out
     seg = out / "seg"
@@ -102,7 +103,24 @@ def main():
                 async with sem:
                     await tts(s, p, a.voice, a.rate)
         await asyncio.gather(*(one(i, s) for i, (_, _, s) in enumerate(items)))
-    asyncio.run(run_all())
+    if a.channel:   # ElevenLabs (채널 목소리) — 문장마다, 같은 문장은 캐시
+        import sys
+        import yaml
+        from concurrent.futures import ThreadPoolExecutor
+        root = Path(__file__).resolve().parents[2]
+        sys.path.insert(0, str(root))
+        from ytflow.stages.media import _elevenlabs
+        ec = (yaml.safe_load((root / "channels" / a.channel / "channel.yaml").read_text(encoding="utf-8"))["tts"]["elevenlabs"])
+
+        def one_el(i_s):
+            i, s = i_s
+            p = seg / f"{i:03d}.mp3"
+            if not p.exists():
+                _elevenlabs(s, p, ec)
+        with ThreadPoolExecutor(4) as ex:
+            list(ex.map(one_el, [(i, s) for i, (_, _, s) in enumerate(items)]))
+    else:
+        asyncio.run(run_all())
 
     # 이어 붙이기: 문장 사이·문단 사이·장 사이 쉼
     t, sents, lst, chap_t = 0.4, [], [], {}
@@ -186,7 +204,6 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             ev.append(f"Dialogue: 0,{ass_t(x)},{ass_t(y + 0.05)},Sub,,0,0,0,,{p}")
             x = y
     (out / "captions.ass").write_text(head + "\n".join(ev) + "\n", encoding="utf-8-sig")
-    print(f"ok {len(sents)} sentences, {len(words)} words, {total:.1f}s")
 
 
 if __name__ == "__main__":
