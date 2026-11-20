@@ -262,7 +262,7 @@ def add(items: list[dict], msgs: list[dict]) -> list[Path]:
     """날짜 파일에 덧붙임. 최근 2주에 이미 나온 주소는 새로 넣지 않고 '같이 다룸'에 뉴스레터만 더함."""
     days: dict[str, dict] = {}
     if OUT.exists():
-        for p in sorted(OUT.glob("*.json"))[-14:]:
+        for p in sorted(p for p in OUT.glob("*.json") if not p.name.startswith("."))[-14:]:   # .lock.json 같은 잠금·보조 파일 제외 (2026-11-20)
             days[p.stem] = _load(p.stem)
     touched = set()
     for m in msgs:
