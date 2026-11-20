@@ -123,7 +123,7 @@ def choose(project_dir: Path, motion: str = "", illust: str = "", footage: str =
 # ---------------------------------------------------------------- 화풍 목록 갤러리 (2026-11-20 사용자: "화풍목록 보여줘 하면 … 예시를 볼 수 있도록 — 시각적으로")
 GALLERY_URL = "https://claude.ai/artifact/K4CRgsyTYsWGCDw5RoCtam"   # 공유 페이지 — 다시 만들면 같은 주소에 올림 (skills/looks-gallery)
 FOOTAGE_SRC = "https://assets.mixkit.co/videos/49137/49137-720.mp4"   # 색보정 비교용 실사 (Mixkit 무료 라이선스)
-FONT_FAMILY = {"NanumGothic": "'Nanum Gothic'", "NanumMyeongjo": "'Nanum Myeongjo'", "NanumPenScript": "'Nanum Pen Script'"}
+FONT_FAMILY = {"BlackHanSans": "'Black Han Sans'", "NanumGothic": "'Nanum Gothic'", "NanumMyeongjo": "'Nanum Myeongjo'", "NanumPenScript": "'Nanum Pen Script'"}
 
 
 def examples_dir() -> Path:

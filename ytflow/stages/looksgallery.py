@@ -58,6 +58,41 @@ def look_scene() -> str:
 # ---------------------------------------------------------------- 연출 예시 — 기법마다 하나의 움직임 (.go 가 붙으면 처음부터)
 def demo(tid: str) -> str:
     J = lambda n, y=118, w=20, gap=30, x0=40, cls="": "".join(jar(x0 + (i % 8) * gap, y + (i // 8) * 40, w, i, cls) for i in range(n))
+    # 설명 무대 (styles/explain-stage, docs/51) — 2026-11-20
+    pcard = lambda x, y, lab, cls="", i=0: (f'<g class="xc {cls}" style="--i:{i}"><rect x="{x}" y="{y}" width="30" height="36" rx="3" class="xcard"/>'
+                                           f'<rect x="{x + 8}" y="{y + 6}" width="14" height="14" rx="2" class="xchip"/>'
+                                           f'<text x="{x + 15}" y="{y + 32}" class="xnum">{lab}</text></g>')
+    person_ = lambda x, y, cls="", name="": (f'<g class="{cls}"><rect x="{x}" y="{y}" width="56" height="70" rx="4" class="xcard"/>'
+                                            f'<circle cx="{x + 28}" cy="{y + 24}" r="10" class="xpp"/><path d="M{x + 10} {y + 54} q18 -22 36 0 z" class="xpp"/>'
+                                            f'<text x="{x + 28}" y="{y + 66}" class="xnum s">{name}</text></g>')
+    explain = {
+        "afterline": ('<svg viewBox="0 0 320 180"><text class="sm" x="16" y="26">사건 뒤에도 쌓인다</text>'
+                      '<line x1="14" y1="112" x2="60" y2="112" class="xink"/>'
+                      '<circle cx="54" cy="112" r="16" class="xban"/><line x1="43" y1="101" x2="65" y2="123" class="xban"/>'
+                      '<rect x="72" y="108" width="236" height="8" rx="4" class="xbar"/>'
+                      + "".join(pcard(84 + k * 37, 64, k + 1, "", k) for k in range(6))
+                      + '<text x="190" y="152" class="xbig">6개 이상</text></svg>'),
+        "spread": ('<svg viewBox="0 0 320 180"><text class="sm" x="16" y="26">두 값의 차이 = 마진</text>'
+                   '<line x1="20" y1="160" x2="300" y2="160" class="xink"/>'
+                   '<rect x="44" y="96" width="44" height="64" class="xblk lo"/>'
+                   '<rect x="200" y="56" width="44" height="104" class="xblk hi"/>'
+                   '<rect x="200" y="56" width="44" height="104" class="xghost"/>'
+                   '<line x1="88" y1="96" x2="258" y2="96" class="xdash"/>'
+                   '<path d="M252 58 q8 0 8 10 v6 q0 6 6 6 q-6 0 -6 6 v6 q0 10 -8 10" class="xbr"/>'
+                   '<text x="272" y="82" class="xbig s">마진</text></svg>'),
+        "share": ('<svg viewBox="0 0 320 180"><text class="sm" x="16" y="26">전체 중 몫</text>'
+                  '<rect x="20" y="86" width="280" height="40" rx="5" class="xcard"/>'
+                  '<rect x="24" y="90" width="60" height="32" rx="3" class="xseg a"/>'
+                  '<rect x="84" y="90" width="40" height="32" rx="3" class="xseg b"/>'
+                  '<line x1="113" y1="64" x2="113" y2="134" class="xdash v"/>'
+                  '<path d="M24 82 q0 -10 10 -10 h30 q10 0 12 -10 q2 10 12 10 h26 q10 0 10 10" class="xbr h"/>'
+                  '<text x="60" y="52" class="xbig s">3분의 1 넘게</text></svg>'),
+        "motionboard": ('<svg viewBox="0 0 320 180"><text class="sm" x="16" y="26">인물·물체가 움직이며 설명</text>'
+                        + person_(20, 70, "xp1", "판 사람") + person_(244, 70, "xp2", "산 사람")
+                        + '<path d="M80 96 Q160 40 238 96" class="xarr"/>'
+                        '<g class="xmove"><rect x="92" y="112" width="32" height="34" rx="3" class="xcard"/><rect x="100" y="118" width="16" height="12" rx="2" class="xchip"/></g>'
+                        '<text x="160" y="58" class="xlab">매도</text></svg>'),
+    }
     d = {
         "split-reveal": f'<svg viewBox="0 0 320 180"><text class="big" x="24" y="88"><tspan class="w" style="--i:0">고를 게</tspan> <tspan class="w" style="--i:1">많으면</tspan></text><text class="big" x="24" y="128"><tspan class="w acc" style="--i:2">덜 산다?</tspan></text></svg>',
         "scramble": f'<svg viewBox="0 0 320 180">{T("발표된 숫자", "sm", 24, 52, 14)}<text class="big" x="24" y="112" data-scramble="631억 원">631억 원</text></svg>',
@@ -93,6 +128,7 @@ def demo(tid: str) -> str:
         "chapter-two-line": '<svg viewBox="0 0 320 180"><rect width="320" height="180" class="bgA"/><text x="24" y="80" class="sm l1">2장</text><text x="24" y="118" class="big acc l2">그런데 결과는 반대였다</text></svg>',
         "shape-iris": f'<svg viewBox="0 0 320 180"><g>{J(8, 120, 20, 32, 40)}</g><circle class="iris" cx="160" cy="90" r="0"/><g class="irisB">{T("다음 이야기", "big", 90, 100, 24)}</g></svg>',
     }
+    d.update(explain)
     return d.get(tid, f'<svg viewBox="0 0 320 180">{T(H.escape(tid), "sm", 24, 90, 14)}</svg>')
 
 
@@ -111,6 +147,16 @@ def _skin_vars(lid: str, d: dict, frames: dict) -> dict:
              "dark": "radial-gradient(ellipse at 50% 45%,rgba(255,255,255,.07),rgba(0,0,0,.45)),",
              "grain": "radial-gradient(ellipse at 50% 45%,rgba(255,255,255,.18),rgba(0,0,0,.12)),",
              "paper": "radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.5),rgba(0,0,0,.08)),"}.get(t, "")
+    pv = bg.get("preview")   # 실제 바탕 그림으로 미리보기 (설명 무대: 구겨진 종이·어두운 무대)
+    if pv:
+        try:
+            from .. import config
+            from . import crumple
+            img = crumple.dark(config.CACHE_DIR) if pv == "dark-stage" else crumple.background(config.CACHE_DIR)
+            return {"base": p["base"], "ink": p["ink"], "acc": p["accent"], "card": p["card"], "font": fam,
+                    "bg": f"url({looks._b64_jpg(img, 640)}) center/cover", "dark": pv == "dark-stage"}
+        except Exception:  # noqa: BLE001
+            pass
     return {"base": p["base"], "ink": p["ink"], "acc": p["accent"], "card": p["card"], "font": fam, "bg": f"{layer}{p['base']}"}
 
 
@@ -195,7 +241,7 @@ def build(out: Path, examples: Path | None = None) -> Path:
 PAGE = r"""<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>영상 구성요소 목록</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Nanum+Myeongjo:wght@700;800&family=Nanum+Pen+Script&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Gothic:wght@400;700;800&family=Nanum+Myeongjo:wght@700;800&family=Nanum+Pen+Script&display=swap">
 <style>
 :root{--bg:#f5f4f0;--panel:#fff;--fg:#1b1d22;--muted:#5f6470;--line:#dedbd3;--ok:#1f8a4c;--trial:#b26b00;--av:#3358d4;--hold:#8a8f99;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14161b;--panel:#1d2027;--fg:#e9eaee;--muted:#a0a6b3;--line:#2e333e;--ok:#5fd394;--trial:#f0b04f;--av:#7c9bff;--hold:#8a8f99;color-scheme:dark}}
@@ -282,6 +328,26 @@ nav.cats{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 0;position:sticky;top
 .card.chosen{outline:2.5px solid var(--av);outline-offset:-1px}.card.chosen .pickbtn{background:var(--av);color:#fff;border-color:var(--av)}
 .snd .wave{fill:var(--acc);transform-box:fill-box;transform-origin:center;animation:wv 1.2s ease-in-out infinite alternate;animation-delay:calc(var(--i)*-.13s)}@keyframes wv{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
 .how{margin-top:28px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:13.5px}.how code{background:var(--bg);padding:1px 6px;border-radius:4px}
+
+/* 설명 무대 (styles/explain-stage) */
+.xcard{fill:#FDFCF8;filter:drop-shadow(0 2px 3px rgba(0,0,0,.25))}.xchip{fill:#23418C;stroke:#C9962E;stroke-width:2}
+.xnum{font:700 13px 'Black Han Sans','Nanum Gothic';fill:#23418C;text-anchor:middle}.xnum.s{font-size:9px;fill:#1F242E}
+.xink{stroke:var(--ink);stroke-width:3}.xban{fill:none;stroke:#C33A31;stroke-width:6;stroke-dasharray:110;stroke-dashoffset:110}
+.go .xban{animation:dash .5s .2s forwards}
+.xbar{fill:#C2463C;transform-box:fill-box;transform-origin:left;transform:scaleX(0)}.go .xbar{animation:sx .8s .7s cubic-bezier(.2,.8,.2,1) forwards}
+.xc{opacity:0}.go .xc{animation:up .35s forwards;animation-delay:calc(1.2s + var(--i)*.22s)}
+.xbig{font:700 22px 'Black Han Sans','Nanum Gothic';fill:#C33A31;opacity:0}.xbig.s{font-size:15px}.go .xbig{animation:fadein .4s 2.7s forwards}
+.xblk{transform-box:fill-box;transform-origin:bottom;transform:scaleY(0)}.xblk.lo{fill:var(--ink)}.xblk.hi{fill:#C33A31}
+.go .xblk.lo{animation:sy .5s .2s forwards}.go .xblk.hi{animation:sy .5s .6s forwards,shr .8s 2.4s forwards}@keyframes sy{to{transform:scaleY(1)}}@keyframes shr{from{transform:scaleY(1)}to{transform:scaleY(.8)}}
+.xghost{fill:none;stroke:#C33A31;stroke-width:2;stroke-dasharray:4 4;opacity:0}.go .xghost{animation:fadein .2s 2.4s forwards}
+.xdash{stroke:var(--ink);stroke-width:2;stroke-dasharray:6 5;opacity:0}.go .xdash{animation:fadein .4s 1.1s forwards}.xdash.v{stroke-width:2.5}
+.xbr{fill:none;stroke:#C33A31;stroke-width:3;stroke-dasharray:120;stroke-dashoffset:120}.go .xbr{animation:dash .5s 1.6s forwards}
+.xseg{transform-box:fill-box;transform-origin:left;transform:scaleX(0)}.xseg.a{fill:#B8322E}.xseg.b{fill:#E08A3C}
+.go .xseg.a{animation:sx .6s .3s forwards}.go .xseg.b{animation:sx .6s .9s forwards}
+.xpp{fill:#4C6AA8}.xp1,.xp2{opacity:0}.go .xp1{animation:up .4s .2s forwards}.go .xp2{animation:up .4s 1.6s forwards}
+.xarr{fill:none;stroke:#C33A31;stroke-width:3;stroke-dasharray:200;stroke-dashoffset:200}.go .xarr{animation:dash .6s 1.9s forwards}
+.xlab{font:22px 'Nanum Pen Script';fill:#C33A31;text-anchor:middle;opacity:0}.go .xlab{animation:fadein .3s 2.3s forwards}
+.xmove{opacity:0}.go .xmove{animation:fadein .3s .6s forwards,mv 1s 1s cubic-bezier(.4,0,.2,1) forwards}@keyframes mv{to{transform:translateX(100px)}}
 </style></head><body><div class="wrap">
 <header><h1>영상 구성요소 · 스타일 목록</h1><p>영상은 <b>구성요소 {{NC}}가지</b>(화면 화풍·삽화 화풍·실사 색보정·글자 연출·그래픽 연출·카메라·장면 전환·배경음)를 카테고리마다 하나씩 골라 <b>조합</b>한 것입니다. 스타일은 모두 {{NS}}가지. 화풍(어떻게 보이나)과 연출(어떻게 움직이나)은 다른 축이라 서로 섞을 수 있고, 같은 모션그래픽이라도 연출이 다르면 전혀 다른 장면이 됩니다.</p></header>
 {{BODY}}
