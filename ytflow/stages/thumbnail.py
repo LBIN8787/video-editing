@@ -14,6 +14,9 @@
 - punch : (시장, 2026-11-19 사용자 "썸네일 스타일을 좀 더 눈에 들어오게") 컬러 사진 꽉 채움 + 아주 큰 두 줄 글씨 +
           강조 단어는 노란 상자 위 검은 글씨 + 큰 숫자 칩(▲초록·▼빨강). 작은 손글씨 줄 대신 칩. "theme": "dark" 인 versus 도 같은 결.
           chips: [{"text": "엔비디아 ▼2.89%", "color": "down"|"up"|"yellow"}]
+- person: (시장, 2026-11-20 사용자: "유명인사가 썸네일에 나오거나 유명인사를 다룬 주제 내용들이 조회수가 높은 것 같은데")
+          사건의 당사자 얼굴을 오른쪽에 크게(얼굴을 찾아 화면 높이의 40~50% 로 자름, 컬러) + 이름표(이름 · 직함) + 왼쪽 큰 두 줄.
+          "person": {"name": "젠슨 황", "role": "엔비디아 CEO"}, "quote": "따옴표 한 마디"(선택). 근거 docs/55-celebrity-effect.md
 공통: 굵은 고딕 + 두꺼운 테두리, 강조 단어 하나만 색, 오른쪽 아래(재생 시간 표시 자리) 비움.
 """
 from __future__ import annotations
@@ -278,7 +281,82 @@ def _versus_dark(v: dict) -> tuple[Image.Image, list]:
     return base, boxes
 
 
+def _face_box(im: Image.Image):
+    """가장 큰 얼굴 (x, y, w, h) — opencv 가 없거나 못 찾으면 None."""
+    try:
+        import cv2
+        import numpy as np
+    except ImportError:
+        return None
+    g = cv2.cvtColor(np.asarray(im.convert("RGB")), cv2.COLOR_RGB2GRAY)
+    casc = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+    fs = casc.detectMultiScale(g, 1.1, 5, minSize=(max(40, g.shape[1] // 20),) * 2)
+    return max(fs, key=lambda f: f[2] * f[3]) if len(fs) else None
+
+
+def _person_crop(im: Image.Image, w: int, h: int, face_h: float = 0.46) -> Image.Image:
+    """얼굴이 칸 높이의 face_h 가 되고, 얼굴 가운데가 칸의 (0.5, 0.40) 에 오도록 자름. 얼굴을 못 찾으면 위쪽 가운데."""
+    f = _face_box(im)
+    if f is None:
+        return _cover(im, w, h, 0.5, 0.25)
+    fx, fy, fw, fh = (int(x) for x in f)
+    s = max(face_h * h / fh, w / im.width, h / im.height)
+    im2 = im.resize((math.ceil(im.width * s), math.ceil(im.height * s)), Image.LANCZOS)
+    cx, cy = (fx + fw / 2) * s, (fy + fh / 2) * s
+    x = int(min(max(cx - w * 0.5, 0), im2.width - w))
+    y = int(min(max(cy - h * 0.40, 0), im2.height - h))
+    return im2.crop((x, y, x + w, y + h))
+
+
+def _person(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
+    """인물 썸네일: 오른쪽 얼굴 크게(컬러) + 이름표, 왼쪽 검은 바탕 큰 두 줄 (+ 따옴표 한 마디)."""
+    base = Image.new("RGBA", (W, H), (12, 14, 20, 255))
+    pw = int(W * v.get("photo_width", 0.56))
+    im = _person_crop(_image(project, spec, v["image"]), pw, H, v.get("face_h", 0.46))
+    im = ImageEnhance.Contrast(im).enhance(1.08)
+    base.paste(im, (W - pw, 0))
+    g = Image.new("L", (W, H), 0)   # 사진 왼쪽 가장자리를 검은 바탕으로 부드럽게
+    gd = ImageDraw.Draw(g)
+    for i in range(260):
+        gd.line([(W - pw + i, 0), (W - pw + i, H)], fill=int(255 * (1 - i / 260) ** 1.5))
+    gd.rectangle([0, 0, W - pw, H], fill=255)
+    base = Image.composite(Image.new("RGBA", (W, H), (12, 14, 20, 255)), base, g)
+    d = ImageDraw.Draw(base)
+    boxes = []
+    per = v.get("person") or {}
+    if per.get("name"):   # 이름표: 얼굴 아래, 재생 시간 자리(오른쪽 아래) 피해서
+        fn, fr = _font(GOTHIC_X, 46), _font(GOTHIC_X, 30)
+        nx, ny = W - pw + 60, H - 170
+        nw = max(fn.getlength(per["name"]), fr.getlength(per.get("role", ""))) + 40
+        d.rounded_rectangle([nx, ny, nx + nw, ny + 104], 10, fill=(12, 14, 20, 235))
+        d.rectangle([nx, ny, nx + 8, ny + 104], fill=RED)
+        d.text((nx + 22, ny + 8), per["name"], font=fn, fill=(255, 255, 255))
+        d.text((nx + 22, ny + 62), per.get("role", ""), font=fr, fill=(210, 214, 222))
+        boxes.append((nx, ny, nx + nw, ny + 104))
+    tx, y = 50, v.get("text_y", 120)
+    if v.get("top"):
+        ft = _font(GOTHIC_X, 38)
+        d.rounded_rectangle([tx - 6, y - 66, tx + ft.getlength(v["top"]) + 26, y - 14], 10, fill=RED)
+        d.text((tx + 10, y - 62), v["top"], font=ft, fill=(255, 255, 255))
+        boxes.append((tx, y - 66, tx + ft.getlength(v["top"]) + 26, y - 14))
+    boxes += _text_block(d, v["lines"], v.get("hl", []), tx, y, W - pw + 120, v.get("size", 132))
+    if v.get("quote"):
+        fq = _font(GOTHIC_X, 56)   # 휴대폰 목록(가로 168px)에서도 6px 넘게
+        q = f"\u201c{v['quote']}\u201d"
+        while fq.getlength(q) > W - pw + 90 and fq.size > 46:
+            fq = _font(GOTHIC_X, fq.size - 2)
+        yy = boxes[-1][3] + 34
+        d.text((tx, yy), q, font=fq, fill=(255, 238, 190), stroke_width=4, stroke_fill=(10, 10, 10))
+        boxes.append((tx, yy, tx + fq.getlength(q), yy + fq.size))
+    if v.get("credit"):   # 사진 출처 (CC BY 표시 의무 — 작게)
+        fc = _font(GOTHIC_X, 18)
+        d.text((W - pw + 12, 10), v["credit"], font=fc, fill=(235, 235, 235), stroke_width=2, stroke_fill=(0, 0, 0))
+    return base.convert("RGB"), boxes
+
+
 def render(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
+    if v.get("layout") == "person":
+        return _person(project, spec, v)
     if v.get("layout") == "punch":
         return _punch(project, spec, v)
     if v.get("layout") == "versus" and v.get("theme") == "dark":
@@ -400,6 +478,11 @@ def run(project: Project) -> dict:
         small = min((b[3] - b[1]) for b in boxes) * 168 / W if boxes else 0     # 휴대폰 목록(가로 168px)에서 가장 작은 글자 높이
         qa[v["id"]] = {"timestamp_overlap": bool(clash), "smallest_text_px_at_168w": round(small, 1),
                        "ok": not clash and small >= 6}
+        if v.get("layout") == "person":   # 얼굴이 휴대폰 목록에서도 알아볼 만큼 큰가 (docs/55: 인물 제목의 터진 영상 42% 가 큰 얼굴)
+            fb = _face_box(im)
+            fa = round(float(fb[2] * fb[3]) / (W * H), 3) if fb is not None else 0
+            qa[v["id"]]["face_area"] = fa
+            qa[v["id"]]["ok"] = qa[v["id"]]["ok"] and fa >= 0.06
     # 미리보기: 실제 크기(1280) 옆에 유튜브 목록 크기 360 / 휴대폰 168
     sheet = Image.new("RGB", (1280 + 380, 720 * len(made) + 20 * (len(made) - 1)), (24, 24, 24))
     for i, (v, out, im) in enumerate(made):
