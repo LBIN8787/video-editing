@@ -24,5 +24,6 @@ python projects/20261120-looks-trial/02_script/render_trial.py isometric  # 하�
 > "화이트보드랑 아이소메트릭은 합격, 종이 디오라마는 다시"
 
 - `whiteboard`·`isometric` → `styles/looks.yaml` status **approved**
-- `paper-diorama` → v2 다시 만듦(위 표). v1 의 약점(종이 결이 안 보임·층이 평면으로 미끄러짐·건물이 클립아트 같음)을 고침. 판정 대기.
+- `paper-diorama` → v2 다시 만듦(위 표). v1 의 약점(종이 결이 안 보임·층이 평면으로 미끄러짐·건물이 클립아트 같음)을 고침.
+  → 사용자 "종이 디오라마도 합격" (v2) → status **approved**
 - 기록: `review --pass --note …` 가 잠금 중이라 제안함 `proposals/manual/20261120-074846-vigilant-lovelace-1uahwn.md` 로 감.
