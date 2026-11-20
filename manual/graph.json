@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-20T10:55:57",
- "source_hash": "3590243f96cb",
+ "generated": "2026-11-20T10:56:45",
+ "source_hash": "b05bc46937c5",
  "audit": {
   "date": "2026-11-20T10:38",
   "counts": {
@@ -472,32 +472,32 @@
   "fixed": []
  },
  "stats": {
-  "manual_version": 67,
-  "versions": 67,
+  "manual_version": 68,
+  "versions": 68,
   "reviews": 37,
   "rejects": 25,
   "passes": 12,
   "pending": 0,
-  "rules": 48,
+  "rules": 50,
   "checks": 88,
   "sections": 174,
-  "must": 26,
-  "auto": 40,
-  "intents": 153,
+  "must": 27,
+  "auto": 42,
+  "intents": 154,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 81,
   "terms": 139,
-  "bans": 159,
-  "feedback": 95,
+  "bans": 160,
+  "feedback": 96,
   "topics": 4,
   "episodes": 35,
   "main_situations": 17,
   "tiers": {
    "principle": 47,
-   "standard": 133,
-   "style": 25,
+   "standard": 135,
+   "style": 26,
    "trial": 2
   },
   "overfit": 3,
@@ -2846,6 +2846,25 @@
    "tier_label": "작업 기준"
   },
   {
+   "section": "sec:09§9",
+   "text": "글자 겹침 (2026-11-20): 렌더 끝에 05_edit/overlap_qa.json 이 자동으로 생긴다(다시 재기: python scripts/overlap_scan.py <프로젝트>). 화면 요소는 자막 자리(y≈925 위)에서 끝나게 — 설명 무대는 렌더러가 자동으로 끌어올리지만, 그 바람에 다른 요소와 겹칠 수 있으니 결과를 본다. 큰 숫자 장면에 덧붙이는 숫자 카드(motion count)는 오른쪽 끝 열(x≈1690)에, 장면 글자와 같은 높이에 ",
+   "themes": [
+    "emphasis"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:f9129da4",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
    "section": "sec:09§10",
    "text": "9. 업로드 뒤: python -m ytflow upload <프로젝트> (완성본만. 받은 원본 발언 구간이 있으면 --archive 를 쓰지 않음 — 원본은 Drive 에만, docs/50 §3), episodes.md 한 줄, git commit.",
    "themes": [],
@@ -2948,7 +2967,7 @@
    "tier_label": "영구 원칙"
   },
   {
-   "section": "sec:09§h356",
+   "section": "sec:09§h357",
    "text": "ElevenLabs 를 쓸 수 없는 날은 edge 초안으로 만들되 올리지 않는다 (v43, §2-1 — 공개본은 Teo). 크레딧이 모자라면 그날 편을 미루거나 voice-import 로 Teo 테이크를 만든다.",
    "themes": [],
    "absolute": false,
@@ -3665,7 +3684,7 @@
    "key": "06",
    "file": "manual/06-checklist.md",
    "label": "06. 체크리스트와 검사안 — 반드시 지킬 것",
-   "lines": 115,
+   "lines": 117,
    "versions": [],
    "last_version": null
   },
@@ -3700,7 +3719,7 @@
    "key": "09",
    "file": "manual/09-market-daily.md",
    "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13 · v36 인사이트·영상 소스 · v42 기술 분석·CEO 소식 2026-11-17)",
-   "lines": 375,
+   "lines": 376,
    "versions": [
     35,
     64,
@@ -5115,7 +5134,7 @@
    "label": "완성본",
    "title": "G6 완성본",
    "line": 79,
-   "end": 93,
+   "end": 95,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -5131,8 +5150,8 @@
    "level": 2,
    "label": "포장",
    "title": "G7 포장",
-   "line": 94,
-   "end": 101,
+   "line": 96,
+   "end": 103,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5145,22 +5164,22 @@
    "level": 2,
    "label": "보관·기록",
    "title": "G8 보관·기록",
-   "line": 102,
-   "end": 109,
+   "line": 104,
+   "end": 111,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:06§h110",
+   "id": "sec:06§h112",
    "kind": "section",
    "doc": "doc:06",
-   "num": "h110",
+   "num": "h112",
    "level": 2,
    "label": "마지막 사람 눈 검사 (EYE) — 3분 안에",
    "title": "마지막 사람 눈 검사 (EYE) — 3분 안에",
-   "line": 110,
-   "end": 115,
+   "line": 112,
+   "end": 117,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5819,12 +5838,14 @@
    "label": "렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
    "title": "9. 렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
    "line": 312,
-   "end": 318,
+   "end": 319,
    "tag_version": null,
    "versions": [],
    "last_version": null,
    "terms": [
-    "term:analogy"
+    "term:analogy",
+    "term:style-explain-stage",
+    "term:beat-motion"
    ]
   },
   {
@@ -5835,8 +5856,8 @@
    "level": 2,
    "label": "업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
    "title": "10. 업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
-   "line": 319,
-   "end": 331,
+   "line": 320,
+   "end": 332,
    "tag_version": null,
    "versions": [
     34
@@ -5851,8 +5872,8 @@
    "level": 2,
    "label": "기록·되돌아보기",
    "title": "11. 기록·되돌아보기",
-   "line": 332,
-   "end": 335,
+   "line": 333,
+   "end": 336,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5865,8 +5886,8 @@
    "level": 2,
    "label": "예외 대응",
    "title": "12. 예외 대응",
-   "line": 336,
-   "end": 345,
+   "line": 337,
+   "end": 346,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5879,8 +5900,8 @@
    "level": 2,
    "label": "법·정책",
    "title": "13. 법·정책",
-   "line": 346,
-   "end": 355,
+   "line": 347,
+   "end": 356,
    "tag_version": null,
    "versions": [
     34
@@ -5888,43 +5909,43 @@
    "last_version": 34
   },
   {
-   "id": "sec:09§h356",
+   "id": "sec:09§h357",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h356",
+   "num": "h357",
    "level": 2,
    "label": "목소리 (2026-11-13 결정)",
    "title": "목소리 (2026-11-13 결정)",
-   "line": 356,
-   "end": 363,
+   "line": 357,
+   "end": 364,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h364",
+   "id": "sec:09§h365",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h364",
+   "num": "h365",
    "level": 2,
    "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
    "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
-   "line": 364,
-   "end": 369,
+   "line": 365,
+   "end": 370,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h370",
+   "id": "sec:09§h371",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h370",
+   "num": "h371",
    "level": 2,
    "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
    "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
-   "line": 370,
-   "end": 375,
+   "line": 371,
+   "end": 376,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7769,10 +7790,52 @@
    "gate": "gate:G6",
    "level": "MUST",
    "level_note": "",
-   "label": "싱크: 자막 0.5초 안 ≥ 95%, 화면−소리 ≤ 0.1초 (`sync_qa.json`), 중앙값 ≤ 0.2초",
+   "label": "**화면 글자 겹침 없음** (`05_edit/overlap_qa.json`, 렌더 끝에 자동 — 렌더된 장면을 박자 끝마다 멈춰 실제 글자 상자로 잼): 글자끼리 · 카드·그림에 가려짐 · 카드 밖으로 넘침 · **자막 자리(화면 아래 y≈953 아래)에 닿음**. 2026-11-20 사용자: \"자막이랑 영상 글씨가 겹치거나 전체적으로 글씨들이 겹치는 경우가 잦습니다\"",
+   "auto": true,
+   "eye": false,
+   "line": 84,
+   "tier_key": "rule:36e9e944",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "rule:G6:1",
+   "kind": "rule",
+   "gate": "gate:G6",
+   "level": "SHOULD",
+   "level_note": "",
+   "label": "글자가 카드·강조 상자 가장자리에 걸치지 않음 (`overlap_qa.json` 의 '걸침')",
    "auto": true,
    "eye": false,
    "line": 85,
+   "tier_key": "rule:70f520ce",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": false,
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
+  },
+  {
+   "id": "rule:G6:1",
+   "kind": "rule",
+   "gate": "gate:G6",
+   "level": "MUST",
+   "level_note": "",
+   "label": "싱크: 자막 0.5초 안 ≥ 95%, 화면−소리 ≤ 0.1초 (`sync_qa.json`), 중앙값 ≤ 0.2초",
+   "auto": true,
+   "eye": false,
+   "line": 87,
    "tier_key": "rule:3665ef36",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7793,7 +7856,7 @@
    "label": "프레임 시트를 눈으로 확인 (`final_sheet.png`): 잘린 글자·겹침·빈 화면",
    "auto": false,
    "eye": true,
-   "line": 86,
+   "line": 88,
    "tier_key": "rule:d6610df3",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7814,7 +7877,7 @@
    "label": "길이: 롱폼 10분 이상 (시사 빠른 정리 `\"format\": \"quick\"` 은 5분 이상, 그보다 짧으면 쇼츠로 — README §2-4)",
    "auto": true,
    "eye": false,
-   "line": 87,
+   "line": 89,
    "tier_key": "rule:dff52f0e",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7835,7 +7898,7 @@
    "label": "화면이 정신없지 않은가 · 배경음이 억지스럽지 않은가 (애매하면 빼기)",
    "auto": false,
    "eye": true,
-   "line": 89,
+   "line": 91,
    "tier_key": "rule:093d66dd",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -7856,7 +7919,7 @@
    "label": "음량 −14 LUFS 근처 (`delivery_check.json`)",
    "auto": true,
    "eye": false,
-   "line": 91,
+   "line": 93,
    "tier_key": "rule:80ce4857",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7877,7 +7940,7 @@
    "label": "업로드 최종본은 ElevenLabs 목소리 (edge-tts 는 초안)",
    "auto": true,
    "eye": false,
-   "line": 92,
+   "line": 94,
    "tier_key": "rule:e4b06efb",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7898,7 +7961,7 @@
    "label": "제목 후보 3개 + 각 이유",
    "auto": true,
    "eye": false,
-   "line": 97,
+   "line": 99,
    "tier_key": "rule:4d902abe",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7919,7 +7982,7 @@
    "label": "썸네일 A/B/C 파일 + `thumbnail_qa.json` 모두 ok (시간 표시 겹침 없음)",
    "auto": true,
    "eye": false,
-   "line": 98,
+   "line": 100,
    "tier_key": "rule:204a234c",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7940,7 +8003,7 @@
    "label": "제목·썸네일에 영상에 없는 숫자·사실 없음",
    "auto": false,
    "eye": true,
-   "line": 99,
+   "line": 101,
    "tier_key": "rule:b1a63f42",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7961,7 +8024,7 @@
    "label": "GitHub Release 업로드 (`05_edit/release.json`)",
    "auto": true,
    "eye": false,
-   "line": 105,
+   "line": 107,
    "tier_key": "rule:dd23aba9",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -7982,7 +8045,7 @@
    "label": "채널 `episodes.md` 에 회차 한 줄",
    "auto": true,
    "eye": false,
-   "line": 106,
+   "line": 108,
    "tier_key": "rule:9b1d069c",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8003,7 +8066,7 @@
    "label": "기획 문서(md/json/yaml) 커밋, 미디어는 커밋 안 함",
    "auto": false,
    "eye": true,
-   "line": 107,
+   "line": 109,
    "tier_key": "rule:132842eb",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
@@ -8024,7 +8087,7 @@
    "label": "`REPORT.md` 의 남은 일을 사용자에게 보고",
    "auto": false,
    "eye": true,
-   "line": 108,
+   "line": 110,
    "tier_key": "rule:69794b14",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -10960,6 +11023,18 @@
      "projects/20261120-market-deep-remix/CHANGES.md"
     ]
    }
+  },
+  {
+   "id": "ver:68",
+   "kind": "version",
+   "v": 68,
+   "date": "2026-11-20",
+   "label": "v68",
+   "summary": "화면 글자 겹침 점검(overlap_qa, 렌더 끝 자동): 글자끼리·가려짐·넘침·자막 자리 → G6 MUST, 렌더러가 자막 자리 위로 끌어올림",
+   "applied": [],
+   "themes": [
+    "emphasis"
+   ]
   },
   {
    "id": "rev:1",
@@ -19400,6 +19475,45 @@
    "annotated": false
   },
   {
+   "id": "intent:355d192f",
+   "kind": "intent",
+   "quote": "자막이랑 영상 글씨가 겹치거나 전체적으로 글씨들이 겹치는 경우가 잦습니다",
+   "label": "자막이랑 영상 글씨가 겹치거나 전체적으로 글씨들이 겹치는 경우가 잦습니다",
+   "versions": [],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "sec:06§G6",
+     "kind": "manual"
+    },
+    {
+     "ref": "fb:96",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:355d192f"
+   ],
+   "themes": [
+    "emphasis"
+   ],
+   "ann_key": "intent:355d192f",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:06§G6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:44bc811c",
    "kind": "intent",
    "quote": "영상 구성요소 · 스타일 목록에 이를 올려주세요 (설명 무대)",
@@ -24487,6 +24601,7 @@
    "mentioned_in": [
     "sec:03§2",
     "sec:05§2",
+    "sec:09§9",
     "sec:10§3",
     "sec:12§0-1",
     "sec:README§4",
@@ -27023,7 +27138,8 @@
     "sec:04§0-4",
     "sec:05§0-4",
     "sec:09§6",
-    "sec:09§h370",
+    "sec:09§9",
+    "sec:09§h371",
     "sec:11§2-4",
     "sec:README§2-5",
     "sec:README§3-1",
@@ -27347,7 +27463,7 @@
     "sec:05§6",
     "sec:06§G5",
     "sec:08§4",
-    "sec:09§h370",
+    "sec:09§h371",
     "sec:10§4",
     "sec:README§0",
     "sec:README§2",
@@ -29939,6 +30055,34 @@
    "scope": "standard",
    "intent": "intent:d869b54f",
    "tier_key": "fb:d869b54f",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:96",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "자막이랑 영상 글씨가 겹치거나 전체적으로 글씨들이 겹치는 경우가 잦습니다.",
+   "label": "자막이랑 영상 글씨가 겹치거나 전체적으로 글씨들이 겹치는 경우가 잦습니다.",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261120-market-deep-remix",
+   "about": "",
+   "note": "v68: 렌더된 장면을 박자 끝마다 멈춰 글자끼리·카드에 가려짐·카드 밖 넘침·자막 자리 겹침을 재는 overlapqa(렌더 끝 자동) + check G6 MUST, 설명 무대 자막 자리 끌어올림, 숫자 카드 너비 자동. 11/20 개정판에서 겹침 10건(자막 6·가려짐 1·걸침 3) 찾아 고침",
+   "pending": false,
+   "themes": [
+    "emphasis"
+   ],
+   "scope": "standard",
+   "intent": "intent:355d192f",
+   "tier_key": "fb:355d192f",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -50475,7 +50619,7 @@
   },
   {
    "s": "doc:06",
-   "t": "sec:06§h110",
+   "t": "sec:06§h112",
    "kind": "contains"
   },
   {
@@ -50690,17 +50834,17 @@
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h356",
+   "t": "sec:09§h357",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h364",
+   "t": "sec:09§h365",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h370",
+   "t": "sec:09§h371",
    "kind": "contains"
   },
   {
@@ -51176,6 +51320,16 @@
   {
    "s": "rule:G5:1",
    "t": "gate:G5",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G6:1",
+   "t": "gate:G6",
+   "kind": "belongs_to"
+  },
+  {
+   "s": "rule:G6:1",
+   "t": "gate:G6",
    "kind": "belongs_to"
   },
   {
@@ -52687,6 +52841,14 @@
    ]
   },
   {
+   "s": "ver:68",
+   "t": "gate:G6",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -53569,6 +53731,11 @@
   {
    "s": "ver:67",
    "t": "theme:length",
+   "kind": "about"
+  },
+  {
+   "s": "ver:68",
+   "t": "theme:emphasis",
    "kind": "about"
   },
   {
@@ -55315,6 +55482,21 @@
    "s": "intent:627fec5b",
    "t": "fb:70",
    "kind": "quoted_in"
+  },
+  {
+   "s": "intent:355d192f",
+   "t": "sec:06§G6",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:355d192f",
+   "t": "fb:96",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:355d192f",
+   "t": "theme:emphasis",
+   "kind": "about"
   },
   {
    "s": "intent:abbe3e51",
@@ -59839,6 +60021,16 @@
   {
    "s": "fb:95",
    "t": "intent:d869b54f",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:96",
+   "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "fb:96",
+   "t": "intent:355d192f",
    "kind": "quoted_as"
   }
  ]
