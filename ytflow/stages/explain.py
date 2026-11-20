@@ -633,24 +633,22 @@ def json_str(x: str) -> str:
     return json.dumps(x, ensure_ascii=False)
 
 
-def _dark_skin() -> bool:
-    """theme light 의 바탕은 그래픽 팩(스킨) — 칠판·청사진처럼 어두운 스킨이면 글자·선도 밝게 (2026-11-20 샘플에서 먹색 글자가 묻힘)."""
-    import os
-    import yaml
-    from .. import config
-    sid = os.environ.get("YTFLOW_SKIN", "")
-    f = config.ROOT / "skins" / sid / "skin.yaml"
+def _dark_skin(D) -> bool:
+    """theme light 의 바탕은 그래픽 팩(스킨) — 칠판·청사진처럼 어두운 스킨이면 글자·선도 밝게 (2026-11-20 샘플에서 먹색 글자가 묻힘).
+    스킨의 글자색(palette.ink)이 밝으면 어두운 스킨으로 본다."""
+    ink = str(((getattr(D, "skin", None) or {}).get("palette") or {}).get("ink", "#000000")).lstrip("#")
     try:
-        return bool(sid) and ((yaml.safe_load(f.read_text(encoding="utf-8")) or {}).get("background") or {}).get("type") == "dark"
-    except Exception:  # noqa: BLE001
+        r, g, b = (int(ink[k:k + 2], 16) for k in (0, 2, 4))
+    except ValueError:
         return False
+    return 0.299 * r + 0.587 * g + 0.114 * b > 150
 
 
 def _themed(fn):
     def run(D, sc, bt, dur):
         fn(D, sc, bt, dur)
         th = sc.get("theme", "paper")
-        _apply_theme(D, "dark" if th == "light" and _dark_skin() else th)
+        _apply_theme(D, "dark" if th == "light" and _dark_skin(D) else th)
     run.__name__ = fn.__name__
     return run
 
