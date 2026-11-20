@@ -1,6 +1,6 @@
 ﻿# 로컬 정기 작업 설치 — 한 번만 실행 (docs/56-local-routines.md)
 # config/local_routines.yaml 의 작업마다 Windows 작업 스케줄러에 'ytflow-<작업>' 을 매일 그 시각으로 등록하고,
-# 호기심 그림·렌더를 맡는 PC 일꾼(ytflow-pc-worker, 10분마다)도 함께 등록합니다.
+# (PC 일꾼 ytflow-pc-worker 는 뺐습니다 — 2026-11-21 사용자: "자동일꾼 그냥 빼 나 그냥 로컬에서 전부 영상작업 할테니까". 호기심 그림·렌더는 호기심 예약 작업이 직접 합니다.)
 # 실행기는 사용자 폴더(브랜치가 바뀜)가 아니라 E:\ytflow-local\runner (늘 최신 origin/main) 에서 돕니다.
 # 실행:  PowerShell 에서 저장소 폴더로 가서
 #   powershell -ExecutionPolicy Bypass -File scripts\install_local_routines.ps1
@@ -47,8 +47,8 @@ foreach ($line in $(if ($Windows) { $jobs } else { @() })) {
   Write-Host "등록됨: ytflow-$name — 매일 $time"
 }
 
-# 호기심 그림·렌더를 맡는 PC 일꾼 (실행기 폴더 기준으로 등록)
-& "$runner\scripts\install_pc_worker.ps1"
+# PC 일꾼은 뺌 (2026-11-21 사용자: "자동일꾼 그냥 빼 나 그냥 로컬에서 전부 영상작업 할테니까") — 예전에 등록됐으면 지움
+Unregister-ScheduledTask -TaskName "ytflow-pc-worker" -Confirm:$false -ErrorAction SilentlyContinue
 
 Write-Host ""
 Write-Host "확인(실행 안 함):"
