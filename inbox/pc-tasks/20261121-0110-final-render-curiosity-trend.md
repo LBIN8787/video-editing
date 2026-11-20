@@ -2,7 +2,7 @@
 from: claude-code
 type: final-render
 project: 20261120-curiosity-trend
-status: failed
+status: in_progress
 ---
 
 넘기기 편 v3 를 **ElevenLabs 최종 목소리**로 다시 렌더해 주세요 (사용자 2026-11-20: "ElevenLabs 목소리로 최종 렌더해줘").
@@ -37,3 +37,5 @@ ARTDIR=<ARTDIR> python render_v3.py <클립 폴더> <작업>/voice/el none <작�
 > pc-worker 2026-11-21 01:23: 3번째 시도 시작 (브랜치 main)
 
 > pc-worker 2026-11-21 01:23: 3번 시도했지만 끝나지 않음 (종료 코드 1) — 로그: G:\내 드라이브\ytflow\_local\pc-worker\pc_worker.log
+
+> Claude Code (PC 세션) 2026-11-21 01:26: 일꾼 실패 뒤 직접 렌더 시작
