@@ -3,7 +3,7 @@ from: claude-code
 type: curiosity-build
 project: 20261120-curiosity-whitebear-v2
 branch: ccr-8d1b9648-0fm4oq
-status: pending
+status: in_progress
 ---
 
 흰 곰 편 v4 다시 렌더 — **ElevenLabs 채널 목소리**로 (2026-11-20 사용자: "목소리 파일 드라이브로 넘겨서 다시 렌더해줘" → "권장으로").
@@ -19,3 +19,5 @@ status: pending
 > 2026-11-21 클라우드: 1차는 목소리 조각이 PC 에 아직 동기화되지 않아 멈춤 → 다시 대기로. 이제 조각이 없으면 실패가 아니라 기다렸다가 다음 차례에 다시 함.
 
 > 2026-11-21 클라우드: PC 일꾼을 뺐습니다(2026-11-21 사용자: "자동일꾼 그냥 빼 나 그냥 로컬에서 전부 영상작업 할테니까"). PC 의 Claude 세션이 이 할 일을 처리합니다 — `python scripts/curiosity_build.py projects/20261120-curiosity-whitebear-v2` (작업 브랜치 ccr-8d1b9648-0fm4oq 에서).
+
+> pc-worker 2026-11-21 01:33: 2번째 시도 시작 (브랜치 ccr-8d1b9648-0fm4oq)
