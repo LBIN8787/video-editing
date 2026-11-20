@@ -3,7 +3,7 @@ from: claude-code
 type: curiosity-build
 project: 20261120-curiosity-whitebear-v2
 branch: ccr-8d1b9648-0fm4oq
-status: in_progress
+status: failed
 ---
 
 흰 곰 편 v4 다시 렌더 — **ElevenLabs 채널 목소리**로 (2026-11-20 사용자: "목소리 파일 드라이브로 넘겨서 다시 렌더해줘" → "권장으로").
@@ -21,3 +21,10 @@ status: in_progress
 > 2026-11-21 클라우드: PC 일꾼을 뺐습니다(2026-11-21 사용자: "자동일꾼 그냥 빼 나 그냥 로컬에서 전부 영상작업 할테니까"). PC 의 Claude 세션이 이 할 일을 처리합니다 — `python scripts/curiosity_build.py projects/20261120-curiosity-whitebear-v2` (작업 브랜치 ccr-8d1b9648-0fm4oq 에서).
 
 > pc-worker 2026-11-21 01:33: 2번째 시도 시작 (브랜치 ccr-8d1b9648-0fm4oq)
+
+## 결과 (pc-worker)
+
+$ C:\Users\s9907\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\python.exe scripts/anim/prep_whitebear.py E:\ytflow-local\runner-worker-task\projects\20261120-curiosity-whitebear-v2\04_assets\art --paper E:\ytflow-local\runner-worker-task\projects\20261120-curiosity-whitebear-v2\04_assets\art/paper_crop.png
+��Ҹ� ������ ���� PC �� ���� (Drive ����ȭ ���): G:\�� ����̺�\ytflow\cache\whitebear_v4_voice_elevenlabs.mp3.part0, G:\�� ����̺�\ytflow\cache\whitebear_v4_voice_elevenlabs.mp3.part1, G:\�� ����̺�\ytflow\cache\whitebear_v4_voice_elevenlabs.mp3.part2
+
+> pc-worker 2026-11-21 01:33: 끝 (종료 코드 75)
