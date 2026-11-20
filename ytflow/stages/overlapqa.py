@@ -67,7 +67,8 @@ JS = r"""
         if (top && (bx.el === top || bx.el.contains(top)) && !(it._el === top || it._el.contains(top) || top.contains(it._el))) { hidden = true; break; }
       }
       // 카드 위에 온전히 얹힌 글자(f ≥ 0.9)는 정상, 가장자리에 걸치면(0.2~0.9) 문제
-      if (hidden || (f >= 0.2 && f < 0.9)) {
+      const marker = !hidden && bx.h < it.h * 1.6;   // 글자 뒤에 깐 형광펜 강조 — 글자가 위에 보이면 정상
+      if (hidden || (f >= 0.2 && f < 0.9 && !marker)) {
         const t = (bx.el.innerText || bx.el.getAttribute('src') || bx.el.id || bx.el.tagName).replace(/\s+/g, ' ').trim().slice(0, 24);
         it.cover.push((hidden ? '가려짐: ' : '걸침: ') + t);
       }
@@ -78,6 +79,27 @@ JS = r"""
         it.cover.push('넘침: 카드 밖으로 ' + (bx.el.id || bx.el.className || bx.el.tagName));
       }
     }
+    // 글자 위·아래로 그려진 선(화살표·붓선 등)이 지나가는지: 글자 상자 안 여러 점에서 겹친 요소를 위에서부터 훑음
+    // (2026-11-20 사용자: "옮겨감 이런 글씨가 선에 겹쳣어요")
+    const LINE = /^(path|line|polyline|polygon|circle|ellipse)$/i;
+    let crossed = false;
+    const ownBg = getComputedStyle(it._el).backgroundColor;
+    const backed = ownBg && !/rgba\(\d+, \d+, \d+, 0(\.[0-4]\d*)?\)|transparent/.test(ownBg);   // 글자 자신에 진한 받침이 있으면 아래 선은 안 보임
+    for (const fy of (backed ? [] : [0.3, 0.7])) {
+      for (const fx of [0.1, 0.3, 0.5, 0.7, 0.9]) {
+        for (const e of document.elementsFromPoint(it.x + it.w * fx, it.y + it.h * fy)) {
+          if (e === it._el || e.contains(it._el)) { if (e === it._el || e.tagName === 'SPAN') continue; }
+          if (LINE.test(e.tagName)) { if (op(e) > 0.15) { crossed = true; } break; }
+          const cs = getComputedStyle(e);
+          const opaque = (cs.backgroundColor && !/rgba\(\d+, \d+, \d+, 0\)|transparent/.test(cs.backgroundColor)) || e.tagName === 'IMG' || e.tagName === 'VIDEO';
+          if (opaque && !(e.contains(it._el))) break;   // 글자 아래 카드·바탕이 먼저 나오면 그 아래 선은 안 보임
+          if (opaque && e.contains(it._el) && e !== document.body && e.id !== 'root') break;   // 글자 받침·카드 위에 쓴 글자
+        }
+        if (crossed) break;
+      }
+      if (crossed) break;
+    }
+    if (crossed) it.cover.push('선: 글자 위나 아래로 선이 지나감');
     it.bottomBox = Math.max(...boxes.filter(bx => bx.el.contains(it._el)).map(bx => bx.y + bx.h), it.y + it.h);
     delete it._el;
   }
@@ -127,6 +149,8 @@ def scan(project: str, only: set[int] | None = None) -> dict:
                 for i in items:   # ② 자막 자리 (글자를 감싼 카드의 아래쪽까지)
                     if i.get("bottomBox", i["y"] + i["h"]) > top + 4:
                         probs.append({"t": round(t, 1), "kind": "자막과 겹침", "text": i["text"], "bottom": round(i.get("bottomBox", i["y"] + i["h"]))})
+                    if not i.get("box") and (i["x"] < -2 or i["x"] + i["w"] > 1922 or i["y"] < -2):   # ④ 화면 밖으로 잘림
+                        probs.append({"t": round(t, 1), "kind": "화면 밖 잘림", "text": i["text"]})
                     for c in i.get("cover", []):   # ③ 글자 위·아래로 다른 카드·그림이 겹침
                         probs.append({"t": round(t, 1), "kind": "글자와 카드 겹침", "text": f'{i["text"]} ↔ {c}'})
                 items = [i for i in items if not i.get("box")]

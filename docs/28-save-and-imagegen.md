@@ -5,6 +5,8 @@
 
 ## 1. SAVE(오선) — 메모 없이 받는 법
 
+> **2026-11-20 개편 — 이 절의 3단계는 멈췄습니다.** `[save알림]` 은 이제 `inbox/save/` 가 아니라 뉴스레터와 같은 `inbox/newsletters/<YYYYMMDD>.md|json` 의 5개 카테고리(시장·AI·일상·심리·뇌과학·역사·시사)로 들어갑니다. 30분 감시 정기 작업은 일시정지 상태입니다. 수집·분류 규칙과 소급 반영 기록은 **docs/36 §8** 을 보세요. 아래는 그때의 조사·설정 기록입니다(1·2단계 MacroDroid 설정은 지금도 그대로 씀).
+
 ### 조사 결과
 | 길 | 됨? | 이유·조건 |
 |---|---|---|
@@ -19,13 +21,13 @@
 |---|---|---|
 | 1 | SAVE 앱 알림 켜기 (관심 기업·키워드·경제지표·리포트) | 휴대폰 SAVE 앱 설정 |
 | 2 | **MacroDroid** 매크로 — 트리거 `알림을 받으면`(앱 `SAVE`, 조건 없음) → 동작 `이메일 보내기`(본인 Gmail 계정), 제목 `[save알림]`, 본문 `[app_name] \| [notification_title] \| [notification]` (MacroDroid 변수는 대괄호 — 중괄호 `{notification}` 는 글자 그대로 나감, 2026-11-14 수정) | 휴대폰(Android) |
-| 3 | **30분마다 Gmail 감시** — `[save알림]` 메일(**스팸함 포함**, `in:anywhere`)을 읽어 `LBIN8787/video-editing` `main` 의 `inbox/save/<YYYYMMDD>.md` 에 `- <내용> (알림 MM-dd HH:mm)` 로 덧붙임 (이미 적힌 알림은 건너뜀) | Pickle 정기 작업 `📈 SAVE 알림 메일 감시` |
+| 3 | **30분마다 Gmail 감시** — `[save알림]` 메일(**스팸함 포함**, `in:anywhere`)을 읽어 `inbox/save/<YYYYMMDD>.md` 에 `- <내용> (알림 MM-dd HH:mm)` 로 덧붙임 (이미 적힌 알림은 건너뜀). **2026-11-20 부터 멈춤 — 같은 알림이 docs/36 §8 의 `inbox/newsletters` 5개 카테고리로 들어감** | (일시정지) `📈 SAVE 알림 메일 감시` |
 | 4 | `daily` 가 `01_research/save_check.md` 표로 옮기고 상태 '확인함 (사용자 메모: …)' | 아침 07:00 자동 제작 |
 
 - **확인한 것 (2026-11-14 13:17 KST):** MacroDroid 시험 알림이 본인 Gmail 받은편지함(INBOX)에 `[save알림]` 제목으로 도착. 스팸함을 거치지 않았다.
 - 날짜 규칙: **한국 06:00 이후 알림은 다음 날 파일**(`tools/save-forward/Code.gs` 의 `kstDay_` 와 같음).
 - **`tools/save-forward/Code.gs`(Google Apps Script) 는 참고·백업용으로만 두고 켜지 않는다.** 30분 감시와 Apps Script 를 같이 켜면 같은 알림이 두 줄로 쌓인다. `script.google.com` 설치나 `GH_TOKEN` 발급을 사용자에게 다시 요청하지 않는다.
-- **다른 에이전트(Claude Code·Codex)가 할 일은 없다** — 따로 설치·수집을 붙이지 말고 `inbox/save/<YYYYMMDD>.md` 를 지금처럼 읽는다 (`daily` 가 자동으로 표에 옮김, manual/09 §3-0).
+- **다른 에이전트(Claude Code·Codex)가 할 일은 없다** — 따로 설치·수집을 붙이지 말고 공용 소재 목록을 그대로 읽는다. 2026-11-20 부터는 `inbox/save/<YYYYMMDD>.md` 대신 `inbox/newsletters/<YYYYMMDD>.md` 의 시장·시사 칸에서 단신을 본다 (docs/36 §8).
 - 알림은 **단서** — 영상에 넣을 것은 1차 출처로 재확인 (manual/09 §3-0). SAVE 문장을 대본에 그대로 쓰지 않음.
 
 ### (지금은 안 쓰는 길) Apps Script 로 직접 — 30분 감시를 멈출 때만

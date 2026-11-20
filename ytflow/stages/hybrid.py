@@ -779,8 +779,23 @@ def s_bars(D: HDoc, sc: dict, bt: list, dur: float):
     if n > 3 and off:
         step = (1550 - (370 + off)) / (n - 1)
         bw = min(220, step * 0.55)
+    # 말에 맞춰 생기는 숫자 카드(motion count)가 놓일 자리는 비워 둠 (2026-11-20 겹침 점검: 카드가 '브로드컴'·'셀트리온' 이름을 가림)
+    from . import motion2 as _m2
+    _cards = [_m2.count_rect(m_) for b_ in sc.get("beats", []) for m_ in (b_.get("motion") or []) if m_.get("do") == "count"]
+    _lo, _hi = (520 if n <= 3 else 370) + off, (1400 if n <= 3 else 1550)
+    for cx_, cy_, cw_, ch_ in _cards:
+        if cy_ - ch_ / 2 < base + 120 and cy_ + ch_ / 2 > base - 520:   # 막대 높이대에 걸치는 카드만
+            if cx_ >= 960:
+                _hi = min(_hi, cx_ - cw_ / 2 - bw / 2 - 40)
+            else:
+                _lo = max(_lo, cx_ + cw_ / 2 + bw / 2 + 40)
+    _reserve = _cards and (_hi < (1400 if n <= 3 else 1550) or _lo > (520 if n <= 3 else 370) + off)
+    if _reserve and n > 1:
+        step = (_hi - _lo) / (n - 1)
+        bw = min(bw, step * 0.55)
     for k, it in enumerate(items):
-        x = 520 + off + k * (440 - off / 2) if n <= 3 else 370 + off + k * step if off else 960 + (k - (n - 1) / 2) * step
+        x = (_lo + k * step if n > 1 else (_lo + _hi) / 2) if _reserve else \
+            520 + off + k * (440 - off / 2) if n <= 3 else 370 + off + k * step if off else 960 + (k - (n - 1) / 2) * step
         v = it["value"]
         h = max(abs(v) * scale, 6)
         at = t0 + 0.4 + k * stagger
@@ -1142,6 +1157,10 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
             os.environ.pop("YTFLOW_SKIN", None)
         else:
             os.environ["YTFLOW_SKIN"] = _env_skin
+    from . import typeset   # 한 편 안의 글꼴 통일 (2026-11-20 사용자: "화면 전환마다 제각각") — 시장 기본, "type": "pack" 이면 팩 글꼴
+    _ts = typeset.for_spec(spec)
+    if _ts:
+        typeset.apply(D, a, _ts)
     for p in (paper.SERIF, paper.SERIF_B, paper.PEN, paper.SANS, paper.SANS_X, paper.FONT_DIR / "NanumGothic-Regular.ttf"):
         if not (a / "fonts" / p.name).exists():   # 글꼴은 그래픽 팩(장면별일 수 있음)이 정한 뒤에 연결
             try:

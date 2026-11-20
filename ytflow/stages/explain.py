@@ -36,7 +36,7 @@ CARD_INK = "#1E2330"   # 카드 안 그림·글자 (밝은 카드 위라 테마�
 THEMES = {
     "dark": {"#1F242E": "#ECE8E0", "#20242C": "#D9D5CC", "#55595f": "#A8ACB3", "#3A3F48": "#C9CCD2", "#4A4E55": "#B4B8BF",
              "#B8322E": "#E5533F", "#B5302B": "#F0614C", "#C33A31": "#E2483A", "#C2463C": "#E0503F", "#8E2420": "#9E2A22",
-             "#7E1C18": "#8C241C", "rgba(30,24,16,": "rgba(0,0,0,"},
+             "#7E1C18": "#8C241C", "rgba(30,24,16,": "rgba(0,0,0,", "rgba(238,233,223,.94)": "rgba(34,36,42,.94)"},
 }
 
 
@@ -99,14 +99,21 @@ def _setup(D, sc: dict, title: bool = True):
         _txt(D, 150, 112, sc["title"], HEAVY, 44, "#3A3F48", at=0.15, anchor="lm")
 
 
-def _txt(D, x, y, s, font, size, color, at=None, gap=0.12, dur=0.45, anchor="mm", ls=0.0, shadow=False):
-    """글자 하나 (굵은 글꼴 포함). hyper.Doc.text 와 같은 등장 방식, id 도 같은 규칙."""
+PAD = "rgba(238,233,223,.94)"   # 글자 받침(무대 바탕색) — 어두운 무대에서는 THEMES 가 어두운 색으로 바꿈
+
+
+def _txt(D, x, y, s, font, size, color, at=None, gap=0.12, dur=0.45, anchor="mm", ls=0.0, shadow=False, pad=False):
+    """글자 하나 (굵은 글꼴 포함). hyper.Doc.text 와 같은 등장 방식, id 도 같은 규칙.
+    pad: 글자 뒤에 무대 바탕색 받침을 깔고 선보다 위에 그림 — 화살표 이름표가 다른 선에 겹쳐 읽히지 않던 문제 (2026-11-20 사용자: "옮겨감 이런 글씨가 선에 겹쳣어요")."""
     i = D._id()
     fam = FAM.get(str(font), "sans")
     ax = {"m": "-50%", "l": "0", "r": "-100%"}[anchor[0]]
     sh = ";text-shadow:0 2px 3px rgba(30,24,16,.18)" if shadow else ""
+    pd = f";z-index:6;background:{PAD};padding:2px 12px;border-radius:10px" if pad else ""
     D.items.append(f'<div id="{i}w" class="t" style="left:{x:.0f}px;top:{y:.0f}px;font-family:{fam};font-size:{size:.0f}px;'
-                   f'color:{color};letter-spacing:{ls}px;transform:translate({ax},-50%){sh}"><span id="{i}">{H.escape(s)}</span></div>')
+                   f'color:{color};letter-spacing:{ls}px;transform:translate({ax},-50%){sh}{pd}"><span id="{i}">{H.escape(s)}</span></div>')
+    if pad:   # 받침도 글자와 함께 나타남
+        D.js.append(f'tl.set("#{i}w",{{opacity:0}},0);tl.to("#{i}w",{{opacity:1,duration:0.2}},{D.at(at, 0):.2f});')
     t = D.at(at, gap)
     D.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:18}},{{opacity:1,y:0,duration:{dur},ease:"power2.out"}},{t:.2f});')
     return t
@@ -596,8 +603,8 @@ def s_board(D, sc: dict, bt: list, dur: float):
                         if el.get("label"):   # 곡선 꼭대기 바깥쪽
                             mx, my = 0.25 * sx + 0.5 * cx + 0.25 * ex, 0.25 * sy + 0.5 * cy + 0.25 * ey
                             sgn = -1 if bend >= 0 else 1
-                            _txt(D, mx + uy * 42 * sgn, my - ux * 42 * sgn, el["label"], paper.PEN, el.get("size", 44),
-                                 "#B5302B" if el.get("color") == "red" else INK, at=t + 0.3)
+                            _txt(D, mx + uy * 46 * sgn, my - ux * 46 * sgn, el["label"], paper.PEN, el.get("size", 44),
+                                 "#B5302B" if el.get("color") == "red" else INK, at=t + 0.3, pad=True)
                         D.sfx.append(("pencil", t))
                 elif kind == "brush":
                     pts = _safe_pts(el["pts"])

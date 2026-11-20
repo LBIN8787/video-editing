@@ -19,4 +19,4 @@ description: 이야기 그림판 스타일(큰 종이 한 장 위에 내레이�
 5. 썸네일은 `layout: board` (종이 + 같은 선 그림 + 큰 글씨, prompts/thumbnail.md).
 
 - **재료 (v2, docs/26-story-craft.md):** photo(polaroid·cut·round) · doc + mark · sticker · card · big · bg(paper·dark·photo). 사진은 04_assets/story/ 에, 라이선스는 credit 에.
-- **규칙:** 실존 인물은 실제 사진(허용 라이선스) 또는 이름 카드. 자료(실사·사진)가 없는 구간에서 여러 장소·인물·날짜를 한 장으로 엮을 때 쓴다 (v60 이후 호기심의 뼈대는 실사 B-roll + 모션그래픽, manual/04 §0-8). 그 구간 안에서는 길게 이어져도 되고, 사이사이 kinetic(질문·결론 한 줄)·quote(인용)·versus(숫자 대비)로 숨을 쉰다.
+- **규칙:** 실존 인물은 실제 사진(허용 라이선스) 또는 이름 카드. 이야기 자리에서 여러 장소·인물·날짜를 한 장으로 엮을 때 쓴다 (manual/04 §0-7). 그 구간 안에서는 길게 이어져도 되고, 사이사이 kinetic(질문·결론 한 줄)·quote(인용)·versus(숫자 대비)로 숨을 쉰다.

@@ -1,15 +1,15 @@
 {
  "project": "20261119-curiosity-choice-blindness",
- "manual_version": "44",
- "checked": "2026-11-19T15:46:21",
+ "manual_version": "73",
+ "checked": "2026-11-20T23:13:35",
  "pass": false,
  "rows": [
   {
    "gate": "G0",
    "level": "MUST",
    "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
-   "ok": false,
-   "detail": "[2026-11-19 · 사용자 피드백 · projects/20261118-curiosity-next · 층: 작업 기준] 나중에 이 메뉴얼을 토대로 그림체 화풍 스타일과 그림을 누끼 딸 때 흰부분이 있는점 등만 보완하면 될 것 같습니다."
+   "ok": true,
+   "detail": ""
   },
   {
    "gate": "G0",
@@ -132,6 +132,13 @@
   },
   {
    "gate": "G4",
+   "level": "SHOULD",
+   "item": "목적 분간: intent.md 에 '목적:' 정보 습득형/즐길거리형 + 세 질문 (11 §2-4)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
    "level": "MUST",
    "item": "core_message·question·logic",
    "ok": true,
@@ -174,8 +181,8 @@
   },
   {
    "gate": "G4",
-   "level": "MUST",
-   "item": "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2)",
+   "level": "SHOULD",
+   "item": "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2, 2026-11-20 사용자: 필수 아님)",
    "ok": true,
    "detail": "[]"
   },
@@ -213,13 +220,6 @@
    "item": "curiosity: 시청자 조사 01_research/audience.md (주 시청자·유입 경로·유입 이유·끝까지 보는 이유)",
    "ok": true,
    "detail": "docs/29"
-  },
-  {
-   "gate": "G4",
-   "level": "참고",
-   "item": "curiosity: 지식·설명 문장의 몫 (사실이 사람·사건 속에 있는지 — 판단은 대본 검토 D2, 04 §0-6)",
-   "ok": true,
-   "detail": "25/151 = 17% (script_v2.md)"
   },
   {
    "gate": "G4",
@@ -307,10 +307,10 @@
   },
   {
    "gate": "G5",
-   "level": "SHOULD",
-   "item": "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6)",
+   "level": "참고",
+   "item": "바탕 계열: 같은 채널 직전 두 편과 같은 바탕 계열인지 (바꿔도 되고 이어 써도 됨 — 카테고리 얼굴 05 §0-7 이 먼저)",
    "ok": true,
-   "detail": "이번 cream · 직전 ['cream']"
+   "detail": "이번 cream · 직전 []"
   },
   {
    "gate": "G5",
@@ -322,9 +322,16 @@
   {
    "gate": "G5",
    "level": "SHOULD",
-   "item": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음",
+   "item": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번 없음, 한 출처로 표지를 모두 때우지 않음",
    "ok": true,
-   "detail": "표지 [] · NASA 0"
+   "detail": "표지 [] · 가장 많은 출처 ('', 0)"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "반복 피로: 같은 채널 직전 편과 화면 구성이 얼마나 겹치나",
+   "ok": true,
+   "detail": "0%"
   },
   {
    "gate": "G5",
@@ -380,7 +387,7 @@
    "level": "SHOULD",
    "item": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
    "ok": true,
-   "detail": "paper-sketch / 등록부 ['chalkboard', 'clean-flat', 'clean-white', 'dark-doc', 'kinetic-poster', 'newsprint', 'none', 'paper-sketch']"
+   "detail": "paper-sketch / 등록부 ['chalkboard', 'clean-flat', 'clean-white', 'crumpled-paper', 'dark-doc', 'kinetic-poster', 'newsprint', 'none', 'paper-sketch']"
   },
   {
    "gate": "G5",
@@ -400,15 +407,22 @@
    "gate": "G6",
    "level": "MUST",
    "item": "final.mp4",
-   "ok": true,
+   "ok": false,
    "detail": ""
   },
   {
    "gate": "G6",
    "level": "MUST",
    "item": "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)",
-   "ok": true,
+   "ok": false,
    "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "글자 겹침 점검 기록 (05_edit/overlap_qa.json)",
+   "ok": false,
+   "detail": "python scripts/overlap_scan.py <프로젝트>"
   },
   {
    "gate": "G6",
@@ -428,8 +442,8 @@
    "gate": "G6",
    "level": "SHOULD",
    "item": "납품 점검(음량 등)",
-   "ok": true,
-   "detail": "completed"
+   "ok": false,
+   "detail": "None"
   },
   {
    "gate": "G6",
@@ -449,7 +463,7 @@
    "gate": "G7",
    "level": "MUST",
    "item": "썸네일 A/B/C + 점검 ok",
-   "ok": true,
+   "ok": false,
    "detail": ""
   },
   {
@@ -458,6 +472,20 @@
    "item": "제목 앞부분에 질문·핵심 (목록에서 잘려도 무슨 영상인지 보이게)",
    "ok": true,
    "detail": "내가 고르지 않은 잼을 왜 골랐다고 했을"
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "완성본 보관 기록 — Drive(drive.json·drive_archive.json) 또는 공개 가능한 것만 GitHub Release(release.json)",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "episodes.md 기록",
+   "ok": false,
+   "detail": "ch-knowledge"
   }
  ]
 }
