@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-20T16:00:25",
- "source_hash": "c421cec7ef97",
+ "generated": "2026-11-20T16:20:22",
+ "source_hash": "974f905099d2",
  "audit": {
   "date": "2026-11-20T23:13",
   "counts": {
@@ -566,8 +566,8 @@
   "fixed": []
  },
  "stats": {
-  "manual_version": 74,
-  "versions": 74,
+  "manual_version": 77,
+  "versions": 77,
   "reviews": 37,
   "rejects": 25,
   "passes": 12,
@@ -577,25 +577,25 @@
   "sections": 171,
   "must": 26,
   "auto": 39,
-  "intents": 161,
+  "intents": 165,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
-  "code": 81,
+  "code": 83,
   "terms": 139,
-  "bans": 134,
-  "feedback": 107,
+  "bans": 137,
+  "feedback": 110,
   "topics": 4,
   "episodes": 35,
   "main_situations": 17,
   "tiers": {
-   "principle": 45,
-   "standard": 113,
+   "principle": 46,
+   "standard": 115,
    "style": 16,
    "trial": 6
   },
   "overfit": 6,
-  "principle_bans": 39
+  "principle_bans": 40
  },
  "pending": [],
  "status_labels": {
@@ -1863,23 +1863,23 @@
   },
   {
    "section": "sec:09§0",
-   "text": "전날 시장(미국·한국)을 움직인 것을 1차 출처로 확인하고, 그것이 무엇으로 이어지고 무슨 뜻인지까지 깊게 설명한다 — 심층 12분~이 기본(v63, §2), 심층거리가 없는 날 브리핑은 10분 안팎~ (v24 최소 10분은 깊이의 최소선, 맞출 숫자가 아님 — README §2-4). 투자 권유는 하지 않는다.",
+   "text": "전날 시장(미국·한국)을 움직인 것을 1차 출처로 확인하고, 그것이 무엇으로 이어지고 무슨 뜻인지까지 깊게 설명한다 — 아침 브리핑 7~10분은 매일, 심층(12분~)은 원본 발언을 붙일 수 있는 날 따로 (v76, §2. 길이는 깊이의 결과이지 맞출 숫자가 아님 — README §2-4). 투자 권유는 하지 않는다.",
    "themes": [
     "motion",
     "length"
    ],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:013c4f5a",
+   "tier_key": "ban:464de632",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
    "overfit": false,
    "single": false,
-   "tier": "standard",
-   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
-   "tier_note": "채널 정의·분량(v63 심층 기본) — 권유 금지 낱말 때문에 원칙으로 오분류, 권유 금지는 §13",
-   "tier_fixed": true,
-   "tier_label": "작업 기준"
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
   },
   {
    "section": "sec:09§0",
@@ -1892,6 +1892,62 @@
    "why": "제작 방법·품질 기준",
    "overfit": false,
    "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§2",
+   "text": "아침 브리핑 (매일, 7~10분, <YYYYMMDD>-market-daily): 시장 한 장 → 그날 시장을 움직인 보도 2~3개를 가볍게 분석(무엇이 나왔나·어디서·매체는 어떻게 읽었나·숫자 하나) → 한국 → 오늘 볼 것. 심층거리가 있으면 그 이야기는 한 장으로 짧게 다루고 \"이 이야기는 오늘 ○시 심층에서 자세히\"로 넘긴다(같은 장면·문장을 두 편에 반복하지 않음 — §13). 제목·썸네일은 시황 나열이 아니라 핫 키워드·사건 당사자로 시작(§7-1 — ",
+   "themes": [
+    "motion",
+    "variety",
+    "depth",
+    "length"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:106c1d75",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§2",
+   "text": "하루 편수 | 매일 1편 | 0~2편 (§2-1), 브리핑을 대신하지 않음",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:e2595ce4",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§2-1",
+   "text": "5. 인물 인사이트 편 (2026-11-20 사용자: \"드라켄밀러 인터뷰 영상같이 여러 인사이트에 관해서 처럼 유명인사들의 인사이트나 인터뷰나 발언 인사이트 등을 다루는게 조회수가 높더라구여\") — 이름 있는 투자 대가·CEO 가 새 인터뷰·연설·주주 서한·공개 발언을 내면(daily_brief ⑥-1, config/ceo_watch.yaml), 그 사람을 주인공으로 따로 한 편: 그가 무엇을 말했나(원본 발언 bite 2~3번, 공식 채널, 한 장면 20초·한",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:47acfe39",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
    "tier": "standard",
    "tier_by": "자동 추정",
    "tier_note": "",
@@ -2488,6 +2544,25 @@
   },
   {
    "section": "sec:09§7-1",
+   "text": "5. 제목은 썸네일과 같은 말을 반복하지 않는다 — 제목 = 질문·장면, 썸네일 = 단정·숫자. 올린 뒤 제목은 사용자가 바꾸라고 할 때만 바꾼다.",
+   "themes": [
+    "variety"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:96e33798",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
+   "tier_note": "제목·썸네일 역할 나누기 — 작업 기준",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§7-1",
    "text": "정치인(트럼프 등)을 배경으로 붙이지 않는다 — 시황에 이름만 얹은 제목은 0.82배·터진 비율 3%. 그 사람의 결정이 이야기의 축일 때만.",
    "themes": [
     "background"
@@ -2521,25 +2596,6 @@
    "tier_note": "",
    "tier_fixed": false,
    "tier_label": "영구 원칙"
-  },
-  {
-   "section": "sec:09§7-1",
-   "text": "5. 제목은 썸네일과 같은 말을 반복하지 않는다 — 제목 = 질문·장면, 썸네일 = 단정·숫자. 올린 뒤 제목은 사용자가 바꾸라고 할 때만 바꾼다.",
-   "themes": [
-    "variety"
-   ],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:96e33798",
-   "tier_auto": "principle",
-   "why": "사실·법·권리·안전에 관한 말",
-   "overfit": false,
-   "single": true,
-   "tier": "standard",
-   "tier_by": "Claude 판정 (2026-11-20 범위 점검) — 사용자 확인 필요",
-   "tier_note": "제목·썸네일 역할 나누기 — 작업 기준",
-   "tier_fixed": true,
-   "tier_label": "작업 기준"
   },
   {
    "section": "sec:09§10",
@@ -2627,7 +2683,7 @@
    "tier_label": "영구 원칙"
   },
   {
-   "section": "sec:09§h351",
+   "section": "sec:09§h355",
    "text": "ElevenLabs 를 쓸 수 없는 날은 edge 초안으로 만들되 올리지 않는다 (v43, §2-1 — 공개본은 Teo). 크레딧이 모자라면 그날 편을 미루거나 voice-import 로 Teo 테이크를 만든다.",
    "themes": [],
    "absolute": false,
@@ -3248,8 +3304,10 @@
    "file": "manual/03-market.md",
    "label": "03. market — 시장의 이유 (경제·주식·산업·기술을 연결해 깊이 있게)",
    "lines": 174,
-   "versions": [],
-   "last_version": null
+   "versions": [
+    76
+   ],
+   "last_version": 76
   },
   {
    "id": "doc:04",
@@ -3291,9 +3349,10 @@
    "label": "06. 체크리스트와 검사안 — 반드시 지킬 것",
    "lines": 103,
    "versions": [
-    68
+    68,
+    76
    ],
-   "last_version": 68
+   "last_version": 76
   },
   {
    "id": "doc:07",
@@ -3326,16 +3385,18 @@
    "key": "09",
    "file": "manual/09-market-daily.md",
    "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13 · v36 인사이트·영상 소스 · v42 기술 분석·CEO 소식 2026-11-17)",
-   "lines": 370,
+   "lines": 374,
    "versions": [
     35,
     64,
     67,
     68,
     69,
-    70
+    70,
+    74,
+    75
    ],
-   "last_version": 70
+   "last_version": 75
   },
   {
    "id": "doc:10",
@@ -3683,7 +3744,7 @@
    "num": "0",
    "level": 2,
    "label": "매일 아침 시장 영상 — 기본 운영",
-   "title": "0. 매일 아침 시장 영상 — 기본 운영 (v17, 2026-11-12 사용자 요청 · v63 부터 기본은 심층, 09 §2)",
+   "title": "0. 매일 아침 시장 영상 — 기본 운영 (v17, 2026-11-12 사용자 요청 · v76 부터 아침 가벼운 브리핑 + 원본 발언이 있을 때 따로 심층, 09 §2)",
    "line": 7,
    "end": 28,
    "tag_version": 17,
@@ -5056,17 +5117,21 @@
    "doc": "doc:09",
    "num": "2",
    "level": 2,
-   "label": "기본은 심층 — 심층거리가 없는 날만 브리핑",
-   "title": "2. 기본은 심층 — 심층거리가 없는 날만 브리핑 (v63, 2026-11-20)",
+   "label": "아침은 가벼운 브리핑, 심층은 따로 — 원본 발언이 있을 때",
+   "title": "2. 아침은 가벼운 브리핑, 심층은 따로 — 원본 발언이 있을 때 (v76, 2026-11-20)",
    "line": 52,
-   "end": 65,
-   "tag_version": 63,
+   "end": 67,
+   "tag_version": 76,
    "versions": [
     26,
     28,
-    63
+    63,
+    76
    ],
-   "last_version": 63
+   "last_version": 76,
+   "terms": [
+    "term:bite"
+   ]
   },
   {
    "id": "sec:09§2-1",
@@ -5076,8 +5141,8 @@
    "level": 3,
    "label": "하루 여러 편 — 상한 없음",
    "title": "2-1. 하루 여러 편 — 상한 없음 (v39, 2026-11-17 사용자)",
-   "line": 66,
-   "end": 81,
+   "line": 68,
+   "end": 84,
    "tag_version": 39,
    "versions": [
     39
@@ -5095,8 +5160,8 @@
    "level": 3,
    "label": "기술 분석·기술의 미래 전망",
    "title": "2-2. 기술 분석·기술의 미래 전망 (v42, 2026-11-17 사용자)",
-   "line": 82,
-   "end": 121,
+   "line": 85,
+   "end": 124,
    "tag_version": 42,
    "versions": [
     42
@@ -5111,8 +5176,8 @@
    "level": 2,
    "label": "조사 — 원인은 1차 출처로",
    "title": "3. 조사 — 원인은 1차 출처로",
-   "line": 122,
-   "end": 122,
+   "line": 125,
+   "end": 125,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5125,8 +5190,8 @@
    "level": 3,
    "label": "SAVE(오선) 소식은 기본으로 확인 (2026-11-14 사용자 요청)",
    "title": "3-0. SAVE(오선) 소식은 기본으로 확인 (2026-11-14 사용자 요청)",
-   "line": 123,
-   "end": 132,
+   "line": 126,
+   "end": 135,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5139,8 +5204,8 @@
    "level": 3,
    "label": "뉴스레터 화제도 같은 '단서' 자리 (2026-11-16 사용자 승인, docs/36)",
    "title": "3-0-1. 뉴스레터 화제도 같은 '단서' 자리 (2026-11-16 사용자 승인, docs/36)",
-   "line": 133,
-   "end": 138,
+   "line": 136,
+   "end": 141,
    "tag_version": null,
    "versions": [
     35
@@ -5155,8 +5220,8 @@
    "level": 3,
    "label": "원인 종류별 어디서 확인하나",
    "title": "3-1. 원인 종류별 어디서 확인하나",
-   "line": 139,
-   "end": 150,
+   "line": 142,
+   "end": 153,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5169,8 +5234,8 @@
    "level": 3,
    "label": "팩트시트 쓰는 법 (`01_research/factsheet.md`)",
    "title": "3-2. 팩트시트 쓰는 법 (`01_research/factsheet.md`)",
-   "line": 151,
-   "end": 156,
+   "line": 154,
+   "end": 159,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5183,8 +5248,8 @@
    "level": 3,
    "label": "데이터 함정 (실제로 겪은 것)",
    "title": "3-3. 데이터 함정 (실제로 겪은 것)",
-   "line": 157,
-   "end": 165,
+   "line": 160,
+   "end": 168,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5197,8 +5262,8 @@
    "level": 3,
    "label": "사람·매체의 인사이트 — 사실과 나눠서, 넉넉하게",
    "title": "3-4. 사람·매체의 인사이트 — 사실과 나눠서, 넉넉하게 (v36, 2026-11-17 사용자 요청)",
-   "line": 166,
-   "end": 197,
+   "line": 169,
+   "end": 200,
    "tag_version": 36,
    "versions": [
     36,
@@ -5220,8 +5285,8 @@
    "level": 3,
    "label": "매체·인물의 인터뷰·방송을 영상 소스로",
    "title": "3-5. 매체·인물의 인터뷰·방송을 영상 소스로 (v36, 2026-11-17 사용자 요청)",
-   "line": 198,
-   "end": 220,
+   "line": 201,
+   "end": 223,
    "tag_version": 36,
    "versions": [
     36
@@ -5240,8 +5305,8 @@
    "level": 2,
    "label": "대본 — 브리핑 (10~12분, 20~26장면)",
    "title": "4. 대본 — 브리핑 (10~12분, 20~26장면)",
-   "line": 221,
-   "end": 238,
+   "line": 224,
+   "end": 241,
    "tag_version": null,
    "versions": [
     34
@@ -5271,8 +5336,8 @@
    "level": 2,
    "label": "대본 — 심층 (12분~, 길이는 자료·인사이트의 양이 정함)",
    "title": "5. 대본 — 심층 (12분~, 길이는 자료·인사이트의 양이 정함)",
-   "line": 239,
-   "end": 244,
+   "line": 242,
+   "end": 247,
    "tag_version": null,
    "versions": [
     26,
@@ -5293,8 +5358,8 @@
    "level": 3,
    "label": "나열하지 말고 풀어서 — 설명은 움직이는 장면으로",
    "title": "5-1. 나열하지 말고 풀어서 — 설명은 움직이는 장면으로 (v63, 2026-11-20)",
-   "line": 245,
-   "end": 272,
+   "line": 248,
+   "end": 275,
    "tag_version": 63,
    "versions": [
     63
@@ -5324,8 +5389,8 @@
    "level": 2,
    "label": "화면 문법 (시장 카테고리 개성, `05 §0-7`)",
    "title": "6. 화면 문법 (시장 카테고리 개성, `05 §0-7`)",
-   "line": 273,
-   "end": 286,
+   "line": 276,
+   "end": 289,
    "tag_version": null,
    "versions": [
     27,
@@ -5357,8 +5422,8 @@
    "level": 2,
    "label": "제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
    "title": "7. 제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
-   "line": 287,
-   "end": 291,
+   "line": 290,
+   "end": 294,
    "tag_version": null,
    "versions": [
     27
@@ -5376,8 +5441,8 @@
    "level": 3,
    "label": "썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
    "title": "7-1. 썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
-   "line": 292,
-   "end": 304,
+   "line": 295,
+   "end": 308,
    "tag_version": null,
    "versions": [
     51
@@ -5395,8 +5460,8 @@
    "level": 2,
    "label": "렌더 전 점검",
    "title": "8. 렌더 전 점검",
-   "line": 305,
-   "end": 307,
+   "line": 309,
+   "end": 311,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5409,8 +5474,8 @@
    "level": 2,
    "label": "렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
    "title": "9. 렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
-   "line": 308,
-   "end": 315,
+   "line": 312,
+   "end": 319,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5423,8 +5488,8 @@
    "level": 2,
    "label": "업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
    "title": "10. 업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
-   "line": 316,
-   "end": 328,
+   "line": 320,
+   "end": 332,
    "tag_version": null,
    "versions": [
     34
@@ -5439,8 +5504,8 @@
    "level": 2,
    "label": "기록·되돌아보기",
    "title": "11. 기록·되돌아보기",
-   "line": 329,
-   "end": 332,
+   "line": 333,
+   "end": 336,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5453,8 +5518,8 @@
    "level": 2,
    "label": "예외 대응",
    "title": "12. 예외 대응",
-   "line": 333,
-   "end": 342,
+   "line": 337,
+   "end": 346,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5467,8 +5532,8 @@
    "level": 2,
    "label": "법·정책",
    "title": "13. 법·정책",
-   "line": 343,
-   "end": 350,
+   "line": 347,
+   "end": 354,
    "tag_version": null,
    "versions": [
     34
@@ -5476,43 +5541,43 @@
    "last_version": 34
   },
   {
-   "id": "sec:09§h351",
+   "id": "sec:09§h355",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h351",
+   "num": "h355",
    "level": 2,
    "label": "목소리 (2026-11-13 결정)",
    "title": "목소리 (2026-11-13 결정)",
-   "line": 351,
-   "end": 358,
+   "line": 355,
+   "end": 362,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h359",
+   "id": "sec:09§h363",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h359",
+   "num": "h363",
    "level": 2,
    "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
    "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
-   "line": 359,
-   "end": 364,
+   "line": 363,
+   "end": 368,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h365",
+   "id": "sec:09§h369",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h365",
+   "num": "h369",
    "level": 2,
    "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
    "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
-   "line": 365,
-   "end": 370,
+   "line": 369,
+   "end": 374,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7324,11 +7389,11 @@
    "gate": "gate:G6",
    "level": "MUST",
    "level_note": "",
-   "label": "길이: 롱폼 10분 이상 (시사 빠른 정리 `\"format\": \"quick\"` 은 5분 이상, 그보다 짧으면 쇼츠로 — README §2-4)",
+   "label": "길이: 롱폼 10분 이상 (시사 빠른 정리 `\"format\": \"quick\"` 은 5분 이상, 시장 아침 브리핑 `-market-daily`·`\"format\": \"brief\"` 는 7분 이상 — 09 §2 v76, 그보다 짧으면 쇼츠로 — README §2-4)",
    "auto": true,
    "eye": false,
    "line": 77,
-   "tier_key": "rule:dff52f0e",
+   "tier_key": "rule:c460e40d",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -8819,14 +8884,14 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:375",
+   "id": "check:377",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
-   "label": "길이: {'빠른 정리 5분' if quick_ else '롱폼 10분'} 이상 — 많이 짧으면 쇼츠로 (README §2-4)",
+   "label": "길이: {lab_} 이상 — 많이 짧으면 쇼츠로 (README §2-4)",
    "file": "ytflow/stages/checklist.py",
-   "line": 375,
-   "tier_key": "check:b171b181",
+   "line": 377,
+   "tier_key": "check:2af9e439",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -8838,13 +8903,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:380",
+   "id": "check:382",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "배경: 한 가지 바탕으로 고정하지 않음 — 장면이 하는 일이 바뀌면 바탕도 바뀜 (05 §0-2)",
    "file": "ytflow/stages/checklist.py",
-   "line": 380,
+   "line": 382,
    "tier_key": "check:2c299e6d",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -8857,13 +8922,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:416",
+   "id": "check:418",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게)",
    "file": "ytflow/stages/checklist.py",
-   "line": 416,
+   "line": 418,
    "tier_key": "check:aab08acb",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -8876,13 +8941,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:427",
+   "id": "check:429",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번 없음, 한 출처로 표지를 모두 때우지 않음",
    "file": "ytflow/stages/checklist.py",
-   "line": 427,
+   "line": 429,
    "tier_key": "check:02c1078e",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -8895,13 +8960,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:456",
+   "id": "check:458",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1)",
    "file": "ytflow/stages/checklist.py",
-   "line": 456,
+   "line": 458,
    "tier_key": "check:99b8b152",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -8914,13 +8979,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:466",
+   "id": "check:468",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "핵심 단어 띄우기에 문장을 쓰지 않음 — 자막과 같은 내용을 위에 반복하지 않음 (v3)",
    "file": "ytflow/stages/checklist.py",
-   "line": 466,
+   "line": 468,
    "tier_key": "check:1aff01bf",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8933,13 +8998,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:468",
+   "id": "check:470",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
    "file": "ytflow/stages/checklist.py",
-   "line": 468,
+   "line": 470,
    "terms": [
     "term:graphic-pack"
    ],
@@ -8955,13 +9020,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:470",
+   "id": "check:472",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "style-pick 기록 (상황에 맞춘 스타일 선택)",
    "file": "ytflow/stages/checklist.py",
-   "line": 470,
+   "line": 472,
    "tier_key": "check:9bfba96b",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -8974,13 +9039,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:472",
+   "id": "check:474",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움)",
    "file": "ytflow/stages/checklist.py",
-   "line": 472,
+   "line": 474,
    "tier_key": "check:949b9462",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -8993,13 +9058,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:476",
+   "id": "check:478",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "final.mp4",
    "file": "ytflow/stages/checklist.py",
-   "line": 476,
+   "line": 478,
    "tier_key": "check:502a31b3",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9012,13 +9077,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:492",
+   "id": "check:494",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)",
    "file": "ytflow/stages/checklist.py",
-   "line": 492,
+   "line": 494,
    "tier_key": "check:4f448879",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9031,13 +9096,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:497",
+   "id": "check:499",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "글자 겹침 점검 기록 (05_edit/overlap_qa.json)",
    "file": "ytflow/stages/checklist.py",
-   "line": 497,
+   "line": 499,
    "tier_key": "check:6265c603",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9050,13 +9115,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:502",
+   "id": "check:504",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "화면 글자 겹침 없음 — 글자끼리·카드에 가려짐·카드 밖 넘침·자막 자리 (overlap_qa)",
    "file": "ytflow/stages/checklist.py",
-   "line": 502,
+   "line": 504,
    "tier_key": "check:287f0a57",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9069,13 +9134,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:503",
+   "id": "check:505",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "글자가 카드·강조 상자 가장자리에 걸치지 않음 (overlap_qa)",
    "file": "ytflow/stages/checklist.py",
-   "line": 503,
+   "line": 505,
    "tier_key": "check:65538b9a",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -9088,13 +9153,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:509",
+   "id": "check:511",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
    "file": "ytflow/stages/checklist.py",
-   "line": 509,
+   "line": 511,
    "tier_key": "check:79a7c86e",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9107,13 +9172,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:512",
+   "id": "check:514",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "납품 점검(음량 등)",
    "file": "ytflow/stages/checklist.py",
-   "line": 512,
+   "line": 514,
    "tier_key": "check:5e0947d1",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9126,33 +9191,14 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:525",
+   "id": "check:527",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "최종 목소리 ElevenLabs",
    "file": "ytflow/stages/checklist.py",
-   "line": 525,
+   "line": 527,
    "tier_key": "check:91c4c655",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "id": "check:529",
-   "kind": "check",
-   "gate": "gate:G7",
-   "level": "MUST",
-   "label": "제목 후보 3개 + 이유",
-   "file": "ytflow/stages/checklist.py",
-   "line": 529,
-   "tier_key": "check:533d8276",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -9168,9 +9214,28 @@
    "kind": "check",
    "gate": "gate:G7",
    "level": "MUST",
-   "label": "썸네일 A/B/C + 점검 ok",
+   "label": "제목 후보 3개 + 이유",
    "file": "ytflow/stages/checklist.py",
    "line": 531,
+   "tier_key": "check:533d8276",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "check:533",
+   "kind": "check",
+   "gate": "gate:G7",
+   "level": "MUST",
+   "label": "썸네일 A/B/C + 점검 ok",
+   "file": "ytflow/stages/checklist.py",
+   "line": 533,
    "tier_key": "check:a992f8cd",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9183,13 +9248,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:537",
+   "id": "check:539",
    "kind": "check",
    "gate": "gate:G8",
    "level": "MUST",
    "label": "완성본 보관 기록 — Drive(drive.json·drive_archive.json) 또는 공개 가능한 것만 GitHub Release(release.json)",
    "file": "ytflow/stages/checklist.py",
-   "line": 537,
+   "line": 539,
    "tier_key": "check:3d8271a6",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -9202,13 +9267,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:540",
+   "id": "check:542",
    "kind": "check",
    "gate": "gate:G8",
    "level": "MUST",
    "label": "episodes.md 기록",
    "file": "ytflow/stages/checklist.py",
-   "line": 540,
+   "line": 542,
    "tier_key": "check:45482bc9",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -10607,7 +10672,81 @@
    "applied": [],
    "themes": [
     "background"
-   ]
+   ],
+   "commit": {
+    "sha": "d5a59afd74ebdb25d93e3f8b111fa6e133778d72",
+    "subject": "v73+ 시장 유명 인물 효과: 조사(docs/55) → 썸네일 person·제목·주제·매일 예약 작업",
+    "date": "2026-11-20",
+    "other_files": [
+     "config/ceo_watch.yaml",
+     "config/local_routines/market-daily.md",
+     "docs/55-celebrity-effect.md",
+     "projects/20261120-market-deep-remix/02_script/hybrid.json",
+     "projects/20261120-market-deep-remix/05_edit/package.md",
+     "projects/20261120-market-deep-remix/05_edit/thumbnail_qa.json",
+     "prompts/thumbnail.md",
+     "scripts/celeb_research.py",
+     "ytflow/stages/thumbnail.py"
+    ]
+   }
+  },
+  {
+   "id": "ver:75",
+   "kind": "version",
+   "v": 75,
+   "date": "2026-11-20",
+   "label": "v75",
+   "summary": "시장 썸네일 자동 선택: A/B/C 근거 점수 → thumbnail_pick.json, yt-publish 기본 auto",
+   "applied": [],
+   "themes": [],
+   "commit": {
+    "sha": "3c6ab044268fd10b7ff69c1792616612be54364c",
+    "subject": "v75 시장 썸네일 자동 선택: A/B/C 근거 점수 → thumbnail_pick.json, yt-publish 기본 auto",
+    "date": "2026-11-20",
+    "other_files": [
+     "config/local_routines/market-daily.md",
+     "projects/20261120-market-deep-remix/05_edit/package.md",
+     "projects/20261120-market-deep-remix/05_edit/thumbnail_pick.json",
+     "prompts/thumbnail.md",
+     "ytflow/cli.py",
+     "ytflow/stages/thumbnail.py",
+     "ytflow/stages/ytpublish.py"
+    ]
+   }
+  },
+  {
+   "id": "ver:76",
+   "kind": "version",
+   "v": 76,
+   "date": "2026-11-20",
+   "label": "v76",
+   "summary": "시장 하루 구성: 아침 가벼운 브리핑 7~10분 + 원본 발언이 있을 때 따로 심층 (v63 기본 심층을 대신함)",
+   "applied": [],
+   "themes": [
+    "length"
+   ],
+   "commit": {
+    "sha": "f69cc636b063a6df9f76941adaee4822c63b65cf",
+    "subject": "v76 시장 하루 구성: 아침 가벼운 브리핑 7~10분 + 원본 발언이 있을 때 따로 심층",
+    "date": "2026-11-20",
+    "other_files": [
+     "AGENTS.md",
+     "channels/ch-market-daily/channel.yaml",
+     "config/local_routines/market-daily.md",
+     "ytflow/stages/checklist.py",
+     "ytflow/stages/daily.py"
+    ]
+   }
+  },
+  {
+   "id": "ver:77",
+   "kind": "version",
+   "v": 77,
+   "date": "2026-11-20",
+   "label": "v77",
+   "summary": "시장 인물 인사이트 편: 투자 대가·CEO 새 인터뷰·연설·서한 → 원본 짧은 인용 + 해설 따로 한 편",
+   "applied": [],
+   "themes": []
   },
   {
    "id": "rev:1",
@@ -11657,10 +11796,21 @@
    "src": "quick_ = spec.get(\"format\") == \"quick\"   # 시사 48시간 안 빠른 정리 (08 §1, v34): 5~8분 예외"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:393",
+   "id": "code:ytflow/stages/checklist.py:374",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 393,
+   "line": 374,
+   "versions": [
+    76
+   ],
+   "label": "시장 아침 브리핑 7~10분 (09 §2, v76)",
+   "src": "brief_ = spec.get(\"format\") == \"brief\" or path.name.endswith(\"-market-daily\")   # 시장 아침 브리핑 7~10분 (09 §2, v76)"
+  },
+  {
+   "id": "code:ytflow/stages/checklist.py:395",
+   "kind": "code",
+   "file": "ytflow/stages/checklist.py",
+   "line": 395,
    "versions": [
     13
    ],
@@ -11668,10 +11818,10 @@
    "src": "# 바탕 계열 (v13, 2026-11-11 한 편 판정 \"돌려 써도 됨\" — 허락이지 명령이 아님): 같은 채널 직전 두 편과 같은 바탕 계열이면 참고로 표시"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:415",
+   "id": "code:ytflow/stages/checklist.py:417",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 415,
+   "line": 417,
    "versions": [
     15
    ],
@@ -11679,10 +11829,10 @@
    "src": "if spec.get(\"scenes\"):   # v15 카테고리 개성 (05 §0-7)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:478",
+   "id": "code:ytflow/stages/checklist.py:480",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 478,
+   "line": 480,
    "versions": [
     38
    ],
@@ -11690,10 +11840,10 @@
    "src": "_soft = (\"stage/crowded\", \"stage/text\", \"stage/static\")   # v38: 숫자로 감지하는 '붐빔·글자 수·정지'는 참고 — 판단은 D3 화면 확인"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:518",
+   "id": "code:ytflow/stages/checklist.py:520",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 518,
+   "line": 520,
    "versions": [
     25
    ],
@@ -11717,16 +11867,27 @@
    "file": "ytflow/stages/daily.py",
    "line": 159,
    "versions": [
-    63
+    76
    ],
-   "label": "심층 신호 (manual/09 §2, v63): 기본은 심층 — 신호가 가장 많은 이야기가 그날 심층의 중심축, 신호가 하나도 없을 때만 브리핑",
-   "src": "# 심층 신호 (manual/09 §2, v63): 기본은 심층 — 신호가 가장 많은 이야기가 그날 심층의 중심축, 신호가 하나도 없을 때만 브리핑"
+   "label": "심층 신호 (manual/09 §2, v76): 신호가 가장 많은 이야기가 그날 '따로 심층' 후보 — 아침 브리핑은 매일, 심층은 원본 발언을 붙일 수 있을 때만",
+   "src": "# 심층 신호 (manual/09 §2, v76): 신호가 가장 많은 이야기가 그날 '따로 심층' 후보 — 아침 브리핑은 매일, 심층은 원본 발언을 붙일 수 있을 때만"
   },
   {
-   "id": "code:ytflow/stages/daily.py:271",
+   "id": "code:ytflow/stages/daily.py:179",
    "kind": "code",
    "file": "ytflow/stages/daily.py",
-   "line": 271,
+   "line": 179,
+   "versions": [
+    76
+   ],
+   "label": "v76 (2026-11-20 사용자: 아침은 가볍게 보도 분석, 심층거리가 있으면 인터뷰 원본을 붙여 따로): 브리핑은 매일, 심층은 후보만 표시",
+   "src": "# v76 (2026-11-20 사용자: 아침은 가볍게 보도 분석, 심층거리가 있으면 인터뷰 원본을 붙여 따로): 브리핑은 매일, 심층은 후보만 표시"
+  },
+  {
+   "id": "code:ytflow/stages/daily.py:273",
+   "kind": "code",
+   "file": "ytflow/stages/daily.py",
+   "line": 273,
    "versions": [
     45
    ],
@@ -11734,10 +11895,10 @@
    "src": "\"\"\"⑧ 소스 영상 대기 목록 (manual/09 §3-5 v45, 2026-11-18 사용자) — 당일 못 넣은 원본 발언 영상, 같은 사건이 다시 나오면 넣기.\"\"\""
   },
   {
-   "id": "code:ytflow/stages/daily.py:292",
+   "id": "code:ytflow/stages/daily.py:294",
    "kind": "code",
    "file": "ytflow/stages/daily.py",
-   "line": 292,
+   "line": 294,
    "versions": [
     17
    ],
@@ -13063,7 +13224,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:393",
+     "ref": "code:ytflow/stages/checklist.py:395",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -13414,7 +13575,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/daily.py:292",
+     "ref": "code:ytflow/stages/daily.py:294",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -13897,7 +14058,7 @@
      "by": "사용자 결정 2026-11-15 (매뉴얼 v34 — '말이 화면에 생기는 쪽', 스타일 규칙 유동)"
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:518",
+     "ref": "code:ytflow/stages/checklist.py:520",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -13939,7 +14100,7 @@
      "kind": "code"
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:518",
+     "ref": "code:ytflow/stages/checklist.py:520",
      "kind": "code"
     }
    ],
@@ -13971,7 +14132,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:518",
+     "ref": "code:ytflow/stages/checklist.py:520",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -16088,7 +16249,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:478",
+     "ref": "code:ytflow/stages/checklist.py:480",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -16253,7 +16414,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:478",
+     "ref": "code:ytflow/stages/checklist.py:480",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -17062,7 +17223,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/daily.py:271",
+     "ref": "code:ytflow/stages/daily.py:273",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -18176,6 +18337,43 @@
    "annotated": false
   },
   {
+   "id": "intent:00a3ea43",
+   "kind": "intent",
+   "quote": "썸네일은 abc중에서 최대한 시장반응을 고려하여 조회수가 높게 나올 썸네일로 정해주세요 앞으로 말이죠",
+   "label": "썸네일은 abc중에서 최대한 시장반응을 고려하여 조회수가 높게 나올 썸네일로 정해주세요 앞으로 말이죠",
+   "versions": [],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "sec:09§7-1",
+     "kind": "manual"
+    },
+    {
+     "ref": "fb:108",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:00a3ea43"
+   ],
+   "themes": [],
+   "ann_key": "intent:00a3ea43",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§7-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:062b5464",
    "kind": "intent",
    "quote": "사운드를 입혀주시고 엣지로 말이죠 테오말고 임시로요 모션그래픽을 다른 모션그래픽과 연출로도 다양하게 샘플을뽑아주세요 / 그리고 모든 부분에 모션 그래픽을 쓰기보다는 모션그래픽을 써야하는 상황에서만 사용해주세요 / 쉽고 명확한 상황설명이 필요 할 때 말이죠 이해를 돕기 위해서요 / 정보전달 > 이후 상황설명이 필요하다면 상황설명이 필요한 경우 이를 사용해주세요",
@@ -18225,12 +18423,6 @@
     },
     {
      "ref": "sec:09§5-1",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/daily.py:159",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -18550,12 +18742,6 @@
     },
     {
      "ref": "sec:09§5-1",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/daily.py:159",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -18927,6 +19113,35 @@
    "annotated": false
   },
   {
+   "id": "intent:68ce58c7",
+   "kind": "intent",
+   "quote": "그리고 고민인 점이 시장 브리핑에서 가볍게 보도 분석을 하고 또 그날 심층분석거리가 있다면 영상을 따로 제작할까 합니다. 물론 여기에는 인터뷰 소스영상 등 이런걸 첨부해서요 (질문 답: 브리핑 + 따로 심층(추천) · 브리핑 길이 7~10분(추천))",
+   "label": "그리고 고민인 점이 시장 브리핑에서 가볍게 보도 분석을 하고 또 그날 심층분석거리가 있다면 영상을 따로 제작",
+   "versions": [],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "fb:109",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:68ce58c7"
+   ],
+   "themes": [
+    "depth",
+    "length"
+   ],
+   "ann_key": "intent:68ce58c7",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:6ad350f7",
    "kind": "intent",
    "quote": "이 시장 관련해서 말이야 보면 유명인사가 썸네일에 나오거나 유명인사를 다룬 주제 내용들이 조회수가 높은 것 같은데 이 특징들을 조사하고 이를 반영해서 분석하고 썸네일이랑 썸네일 제목 생성에 고려해줘 / 앞으로 예약작업이나 메뉴얼에 이를 반영해주세요 / 보면 그리고 유명한 투자자들이나 ceo들에 대한 주제나 썸네일 이런게 조회수가 높은거같더라구요 사람들 반응이 좋고",
@@ -19083,12 +19298,6 @@
     },
     {
      "ref": "sec:09§5-1",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/daily.py:159",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -19479,6 +19688,54 @@
    "annotated": false
   },
   {
+   "id": "intent:aeda10c1",
+   "kind": "intent",
+   "quote": "보면 드라켄밀러 인터뷰 영상같이 여러 인사이트에 관해서 처럼 유명인사들의 인사이트나 인터뷰나 발언 인사이트 등을 다루는게 조회수가 높더라구여",
+   "label": "보면 드라켄밀러 인터뷰 영상같이 여러 인사이트에 관해서 처럼 유명인사들의 인사이트나 인터뷰나 발언 인사이트 ",
+   "versions": [
+    39
+   ],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "fb:110",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:09§2-1",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "드라켄밀러 인터뷰 영상같이 여러 인사이트에 관해서 처럼 유명인사들의 인사이트나 인터뷰나 발언 인사이트 등을 다루는게 조회수가 높더라구여"
+   ],
+   "member_ids": [
+    "intent:aeda10c1",
+    "intent:7eea5aaf"
+   ],
+   "themes": [],
+   "ann_key": "intent:aeda10c1",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:39",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§2-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:ba263867",
    "kind": "intent",
    "quote": "썸네일은 셋다 별로인거같아요 그리고 세번째 썸네일은 너무 싼티나요 저 빨간색이랑 초록색이 말이죠",
@@ -19727,6 +19984,47 @@
    "not_meant": [],
    "note": "",
    "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:d6885aa4",
+   "kind": "intent",
+   "quote": "○○가 말하는 □□ / ○○의 경고 + 개수·숫자",
+   "label": "○○가 말하는 □□ / ○○의 경고 + 개수·숫자",
+   "versions": [
+    39
+   ],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "sec:09§2-1",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:d6885aa4"
+   ],
+   "themes": [],
+   "ann_key": "intent:d6885aa4",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:39",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§2-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -20106,12 +20404,6 @@
      "status": "unreviewed",
      "note": "",
      "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/daily.py:159",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
     }
    ],
    "status": "unreviewed",
@@ -20362,6 +20654,7 @@
     "term:quote"
    ],
    "mentioned_in": [
+    "sec:09§2",
     "sec:09§2-1",
     "sec:09§3-4",
     "sec:09§3-5",
@@ -26539,7 +26832,7 @@
    "mentioned_in": [
     "sec:04§0-4",
     "sec:09§6",
-    "sec:09§h365",
+    "sec:09§h369",
     "sec:11§2-4",
     "sec:README§2-5",
     "sec:README§3-1",
@@ -26862,7 +27155,7 @@
     "sec:06§G6",
     "sec:08§4",
     "sec:09§6",
-    "sec:09§h365",
+    "sec:09§h369",
     "sec:10§4",
     "sec:README§0",
     "sec:README§2",
@@ -26871,7 +27164,7 @@
     "ver:50",
     "rev:15",
     "rule:G6:1",
-    "check:468",
+    "check:470",
     "intent:00ba80c7",
     "step:5"
    ]
@@ -29779,6 +30072,87 @@
    "scope": "standard",
    "intent": "intent:6ad350f7",
    "tier_key": "fb:6ad350f7",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:108",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "썸네일은 abc중에서 최대한 시장반응을 고려하여 조회수가 높게 나올 썸네일로 정해주세요 앞으로 말이죠",
+   "label": "썸네일은 abc중에서 최대한 시장반응을 고려하여 조회수가 높게 나올 썸네일로 정해주세요 앞으로 말이죠",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "manual/09 §7-1 ⑦: thumbnail 단계가 docs/49·55 근거 점수로 A/B/C 중 하나를 골라 05_edit/thumbnail_pick.json, yt-publish --thumb auto(기본)가 그것을 올림. 매일 예약 지시문 3-1 에도. 11/20 개정판: A 8.0점(당사자 얼굴·핫 키워드·숫자) > C 7.5 > B 2.0",
+   "pending": false,
+   "themes": [],
+   "scope": "standard",
+   "intent": "intent:00a3ea43",
+   "tier_key": "fb:00a3ea43",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:109",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "그리고 고민인 점이 시장 브리핑에서 가볍게 보도 분석을 하고 또 그날 심층분석거리가 있다면 영상을 따로 제작할까 합니다. 물론 여기에는 인터뷰 소스영상 등 이런걸 첨부해서요 (질문 답: 브리핑 + 따로 심층(추천) · 브리핑 길이 7~10분(추천))",
+   "label": "그리고 고민인 점이 시장 브리핑에서 가볍게 보도 분석을 하고 또 그날 심층분석거리가 있다면 영상을 따로 제작",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "v76 manual/09 §2: 아침 브리핑 7~10분 매일(보도 2~3개 가볍게 분석) + 심층거리와 당사자 원본 발언이 있을 때만 따로 심층 12:00·18:00(원본 없으면 보류). v63 '아침 기본 심층'을 대신함. daily_brief 오늘 형식, check 길이 브리핑 7분, channel.yaml, 매일 예약 지시문(PC clip-fetch), 06·03·AGENTS 참조",
+   "pending": false,
+   "themes": [
+    "depth",
+    "length"
+   ],
+   "scope": "standard",
+   "intent": "intent:68ce58c7",
+   "tier_key": "fb:68ce58c7",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:110",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "보면 드라켄밀러 인터뷰 영상같이 여러 인사이트에 관해서 처럼 유명인사들의 인사이트나 인터뷰나 발언 인사이트 등을 다루는게 조회수가 높더라구여",
+   "label": "보면 드라켄밀러 인터뷰 영상같이 여러 인사이트에 관해서 처럼 유명인사들의 인사이트나 인터뷰나 발언 인사이트 ",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "docs/55 §5(scripts/insight_research.py, 371편·223채널, 검색 선택 편향 주의): 채널 평소 중앙 2.4배, 누구나 아는 이름일수록 큼. manual/09 §2-1 ⑤ 인물 인사이트 편, ceo_watch 4명 추가, 매일 예약 지시문 2-1",
+   "pending": false,
+   "themes": [],
+   "scope": "standard",
+   "intent": "intent:aeda10c1",
+   "tier_key": "fb:aeda10c1",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -50543,17 +50917,17 @@
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h351",
+   "t": "sec:09§h355",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h359",
+   "t": "sec:09§h363",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h365",
+   "t": "sec:09§h369",
    "kind": "contains"
   },
   {
@@ -51417,32 +51791,27 @@
    "kind": "enforces"
   },
   {
-   "s": "check:375",
+   "s": "check:377",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:380",
+   "s": "check:382",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:416",
+   "s": "check:418",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:427",
+   "s": "check:429",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:456",
-   "t": "gate:G5",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:466",
+   "s": "check:458",
    "t": "gate:G5",
    "kind": "enforces"
   },
@@ -51462,48 +51831,48 @@
    "kind": "enforces"
   },
   {
-   "s": "check:476",
+   "s": "check:474",
+   "t": "gate:G5",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:478",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:492",
+   "s": "check:494",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:497",
+   "s": "check:499",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:502",
+   "s": "check:504",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:503",
+   "s": "check:505",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:509",
+   "s": "check:511",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:512",
+   "s": "check:514",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:525",
+   "s": "check:527",
    "t": "gate:G6",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:529",
-   "t": "gate:G7",
    "kind": "enforces"
   },
   {
@@ -51512,12 +51881,17 @@
    "kind": "enforces"
   },
   {
-   "s": "check:537",
+   "s": "check:533",
+   "t": "gate:G7",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:539",
    "t": "gate:G8",
    "kind": "enforces"
   },
   {
-   "s": "check:540",
+   "s": "check:542",
    "t": "gate:G8",
    "kind": "enforces"
   },
@@ -52453,8 +52827,7 @@
    "t": "sec:09§2",
    "kind": "touched",
    "via": [
-    "changelog",
-    "tag"
+    "changelog"
    ]
   },
   {
@@ -52614,6 +52987,46 @@
   {
    "s": "ver:73",
    "t": "doc:README",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:74",
+   "t": "doc:09",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:75",
+   "t": "doc:09",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:76",
+   "t": "sec:09§2",
+   "kind": "touched",
+   "via": [
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:76",
+   "t": "doc:03",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:76",
+   "t": "doc:06",
    "kind": "touched",
    "via": [
     "git"
@@ -53530,6 +53943,11 @@
    "kind": "about"
   },
   {
+   "s": "ver:76",
+   "t": "theme:length",
+   "kind": "about"
+  },
+  {
    "s": "ver:8",
    "t": "code:ytflow/stages/backdrop.py:1",
    "kind": "implemented_by"
@@ -53640,23 +54058,28 @@
    "kind": "implemented_by"
   },
   {
+   "s": "ver:76",
+   "t": "code:ytflow/stages/checklist.py:374",
+   "kind": "implemented_by"
+  },
+  {
    "s": "ver:13",
-   "t": "code:ytflow/stages/checklist.py:393",
+   "t": "code:ytflow/stages/checklist.py:395",
    "kind": "implemented_by"
   },
   {
    "s": "ver:15",
-   "t": "code:ytflow/stages/checklist.py:415",
+   "t": "code:ytflow/stages/checklist.py:417",
    "kind": "implemented_by"
   },
   {
    "s": "ver:38",
-   "t": "code:ytflow/stages/checklist.py:478",
+   "t": "code:ytflow/stages/checklist.py:480",
    "kind": "implemented_by"
   },
   {
    "s": "ver:25",
-   "t": "code:ytflow/stages/checklist.py:518",
+   "t": "code:ytflow/stages/checklist.py:520",
    "kind": "implemented_by"
   },
   {
@@ -53665,18 +54088,23 @@
    "kind": "implemented_by"
   },
   {
-   "s": "ver:63",
+   "s": "ver:76",
    "t": "code:ytflow/stages/daily.py:159",
    "kind": "implemented_by"
   },
   {
+   "s": "ver:76",
+   "t": "code:ytflow/stages/daily.py:179",
+   "kind": "implemented_by"
+  },
+  {
    "s": "ver:45",
-   "t": "code:ytflow/stages/daily.py:271",
+   "t": "code:ytflow/stages/daily.py:273",
    "kind": "implemented_by"
   },
   {
    "s": "ver:17",
-   "t": "code:ytflow/stages/daily.py:292",
+   "t": "code:ytflow/stages/daily.py:294",
    "kind": "implemented_by"
   },
   {
@@ -54031,12 +54459,12 @@
   },
   {
    "s": "ver:15",
-   "t": "check:416",
+   "t": "check:418",
    "kind": "implemented_by"
   },
   {
    "s": "ver:15",
-   "t": "check:427",
+   "t": "check:429",
    "kind": "implemented_by"
   },
   {
@@ -54282,6 +54710,21 @@
   {
    "s": "intent:e7ae7fdc",
    "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:68ce58c7",
+   "t": "fb:109",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:68ce58c7",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "intent:68ce58c7",
+   "t": "theme:length",
    "kind": "about"
   },
   {
@@ -54720,6 +55163,21 @@
    "kind": "quoted_in"
   },
   {
+   "s": "intent:aeda10c1",
+   "t": "ver:39",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:aeda10c1",
+   "t": "fb:110",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:aeda10c1",
+   "t": "sec:09§2-1",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:df9de51b",
    "t": "fb:20",
    "kind": "quoted_in"
@@ -55053,6 +55511,16 @@
    "s": "intent:4eb4260c",
    "t": "theme:script",
    "kind": "about"
+  },
+  {
+   "s": "intent:00a3ea43",
+   "t": "sec:09§7-1",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:00a3ea43",
+   "t": "fb:108",
+   "kind": "quoted_in"
   },
   {
    "s": "intent:de7e2c97",
@@ -55451,7 +55919,7 @@
   },
   {
    "s": "intent:8ecb5021",
-   "t": "code:ytflow/stages/checklist.py:518",
+   "t": "code:ytflow/stages/checklist.py:520",
    "kind": "quoted_in"
   },
   {
@@ -55962,6 +56430,16 @@
   {
    "s": "intent:454c07ad",
    "t": "sec:05§h38",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:d6885aa4",
+   "t": "ver:39",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:d6885aa4",
+   "t": "sec:09§2-1",
    "kind": "quoted_in"
   },
   {
@@ -59937,6 +60415,31 @@
   {
    "s": "fb:107",
    "t": "intent:6ad350f7",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:108",
+   "t": "intent:00a3ea43",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:109",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "fb:109",
+   "t": "theme:length",
+   "kind": "about"
+  },
+  {
+   "s": "fb:109",
+   "t": "intent:68ce58c7",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:110",
+   "t": "intent:aeda10c1",
    "kind": "quoted_as"
   }
  ]

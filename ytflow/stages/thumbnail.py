@@ -452,6 +452,76 @@ def render(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
     return base.convert("RGB"), boxes
 
 
+# ── 올릴 썸네일 고르기 (2026-11-20 사용자: "썸네일은 abc중에서 최대한 시장반응을 고려하여 조회수가 높게 나올 썸네일로 정해주세요 앞으로 말이죠")
+# 근거: docs/49(같은 채널 안 터진/안 된 썸네일·제목 비교) · docs/55(유명 인물 효과). 점수는 그 조사에서 차이가 난 특징만 쓴다.
+POLITICIANS = ("트럼프", "바이든", "시진핑", "푸틴", "이재명", "윤석열", "젤렌스키", "네타냐후")
+COMMAND = ("사세요", "파세요", "사라", "팔아라", "지금 사", "무조건", "당장")
+
+
+def _hot_words(project: Project) -> list[str]:
+    """팩트시트 '## 핫 키워드'의 각 줄 첫 낱말 (manual/09 §7-1 ①)."""
+    import re
+    fs = project.dir("research") / "factsheet.md"
+    if not fs.exists():
+        return []
+    m = re.search(r"## 핫 키워드[^\n]*\n(.*?)(?:\n## |\Z)", fs.read_text(encoding="utf-8"), re.S)
+    if not m:
+        return []
+    out = []
+    for ln in m.group(1).splitlines():
+        ln = ln.strip("- ").strip()
+        if not ln or ln.startswith("썸네일"):
+            continue
+        head = re.split(r"\s[—\-–(]|\(", ln)[0].strip()
+        out += [w for w in re.split(r"[·,/ ]+", head) if len(w) >= 2]
+    return out
+
+
+def score(v: dict, qa: dict, hot: list[str], title: str = "") -> tuple[float, list[str]]:
+    """한 변형의 점수와 이유. 높을수록 조회수 쪽 근거가 많음 (인과 증명이 아니라 같은 채널 안 비교의 경향)."""
+    import re
+    text = " ".join(v.get("lines", []) + [v.get("headline", ""), v.get("top", "")] +
+                    [x.get("value", "") for x in (v.get("left") or {}, v.get("right") or {})])
+    sc, why = 0.0, []
+    if not qa.get("ok"):
+        sc -= 5; why.append("점검 실패(글자 크기·재생 시간 자리) −5")
+    per = (v.get("person") or {}).get("name")
+    if v.get("layout") == "person" and per and qa.get("face_area", 0) >= 0.06:
+        sc += 3; why.append(f"사건 당사자 얼굴 크게({per}) +3 — 인물 제목의 터진 영상 42% vs 안 된 10% (docs/55)")
+        if per.split()[-1] in title or per in title:
+            sc += 1; why.append("제목 앞에도 같은 이름 +1")
+    hits = [w for w in hot if w in text]
+    if hits:
+        sc += 2; why.append(f"핫 키워드 큰 글씨({', '.join(hits[:2])}) +2 (manual/09 §7-1 ①)")
+    if re.search(r"\d", text):
+        sc += 1.5; why.append("구체적 숫자 +1.5 (docs/49 §3)")
+    if v.get("quote"):
+        sc += 0.5; why.append("당사자 따옴표 발언 +0.5")
+    if "?" in text or "？" in text:
+        sc -= 1.5; why.append("물음표 추측 −1.5 (docs/49)")
+    if any(n in text for n in POLITICIANS) and not per:
+        sc -= 1.5; why.append("정치인 이름만 −1.5 (docs/55: 0.82배)")
+    if any(c in text for c in COMMAND):
+        sc -= 2; why.append("사라·팔라 명령 −2")
+    small = qa.get("smallest_text_px_at_168w", 0)
+    if small >= 10:
+        sc += 0.5; why.append("휴대폰 목록에서도 큰 글씨 +0.5")
+    return round(sc, 2), why
+
+
+def pick(project: Project, pkg: dict, qa: dict) -> dict:
+    """올릴 썸네일 하나 → 05_edit/thumbnail_pick.json (yt-publish 의 --thumb auto 가 읽음). package.thumb_pick 이 있으면 그대로."""
+    hot = _hot_words(project)
+    title = pkg.get("title", "")
+    scores = {v["id"]: score(v, qa.get(v["id"], {}), hot, title) for v in pkg["thumbnails"]}
+    forced = pkg.get("thumb_pick")
+    best = forced if forced in scores else max(scores, key=lambda k: (scores[k][0], -ord(k[0])))
+    res = {"pick": best, "forced": bool(forced in scores), "hot": hot,
+           "scores": {k: {"score": s_, "why": w} for k, (s_, w) in scores.items()}}
+    (project.dir("edit") / "thumbnail_pick.json").write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
+    return res
+
+
 def run(project: Project) -> dict:
     raw = (project.dir("script") / "hybrid.json").read_text(encoding="utf-8")
     spec = json.loads(raw)
@@ -498,7 +568,11 @@ def run(project: Project) -> dict:
     md += ["", "**제목을 이렇게 정한 이유**"] + [f"- {r}" for r in pkg.get("title_why", [])] + ["", "## 썸네일"]
     for v, out, _ in made:
         md += [f"### {v['id']} — {v.get('name', '')}", f"![{v['id']}]({out.name})", ""] + [f"- {r}" for r in v.get("why", [])] + [""]
-    md += ["## 점검", "```json", json.dumps(qa, ensure_ascii=False, indent=1), "```"]
+    pk_ = pick(project, pkg, qa)
+    md += ["## 올릴 썸네일 (자동 선택 — docs/49·55 근거 점수, `--thumb` 로 바꿀 수 있음)", f"**{pk_['pick']}**" + (" (대본에서 지정)" if pk_["forced"] else ""), ""]
+    for k, v_ in pk_["scores"].items():
+        md += [f"- {k}: {v_['score']}점 — " + " · ".join(v_["why"])]
+    md += ["", "## 점검", "```json", json.dumps(qa, ensure_ascii=False, indent=1), "```"]
     (edir / "package.md").write_text("\n".join(md) + "\n", encoding="utf-8")
-    print(f"[thumbnail] {len(made)}장 → {edir} (미리보기 thumbnail_preview.png, 점검 {qa})")
+    print(f"[thumbnail] {len(made)}장 → {edir} (미리보기 thumbnail_preview.png, 점검 {qa}) · 올릴 것 {pk_['pick']} {pk_['scores'][pk_['pick']]['score']}점")
     return qa
