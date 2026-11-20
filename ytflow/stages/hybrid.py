@@ -1154,6 +1154,10 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
             os.environ.pop("YTFLOW_SKIN", None)
         else:
             os.environ["YTFLOW_SKIN"] = _env_skin
+    from . import typeset   # 한 편 안의 글꼴 통일 (2026-11-20 사용자: "화면 전환마다 제각각") — 시장 기본, "type": "pack" 이면 팩 글꼴
+    _ts = typeset.for_spec(spec)
+    if _ts:
+        typeset.apply(D, a, _ts)
     for p in (paper.SERIF, paper.SERIF_B, paper.PEN, paper.SANS, paper.SANS_X, paper.FONT_DIR / "NanumGothic-Regular.ttf"):
         if not (a / "fonts" / p.name).exists():   # 글꼴은 그래픽 팩(장면별일 수 있음)이 정한 뒤에 연결
             try:
