@@ -155,6 +155,9 @@ class HDoc(hyper.Doc):
         if not text:
             return
         i = self._id()
+        ink = str(getattr(self, "ink", "#000000")).lstrip("#")
+        if len(ink) == 6 and sum(int(ink[k:k + 2], 16) for k in (0, 2, 4)) > 3 * 150:
+            dark = True   # 어두운 바탕 스킨(잉크가 밝음)에서는 밝은 상자 위 회색 글씨가 안 읽힘 → 어두운 띠 (docs/53 §8 예시 영상에서 발견)
         col = "#FFFFFF" if dark else "#5a5f6a"
         bg = "rgba(0,0,0,.45)" if dark else "rgba(251,248,241,.85)"
         self._hud_or_items().append(f'<div id="{i}" style="position:absolute;right:56px;top:40px;padding:6px 14px;background:{bg};border-radius:6px;'
