@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-20T06:28:02",
- "source_hash": "ebc47ca86246",
+ "generated": "2026-11-20T06:31:28",
+ "source_hash": "0e41d65c8347",
  "audit": {
   "date": "2026-11-19T13:54",
   "counts": {
@@ -110,36 +110,36 @@
   "fixed": []
  },
  "stats": {
-  "manual_version": 59,
-  "versions": 59,
-  "reviews": 36,
+  "manual_version": 60,
+  "versions": 60,
+  "reviews": 37,
   "rejects": 25,
-  "passes": 11,
+  "passes": 12,
   "pending": 0,
   "rules": 49,
   "checks": 86,
-  "sections": 169,
+  "sections": 170,
   "must": 26,
   "auto": 41,
-  "intents": 128,
+  "intents": 130,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 78,
-  "terms": 127,
-  "bans": 149,
-  "feedback": 73,
+  "terms": 128,
+  "bans": 153,
+  "feedback": 74,
   "topics": 4,
   "episodes": 34,
   "main_situations": 16,
   "tiers": {
-   "principle": 53,
-   "standard": 116,
+   "principle": 54,
+   "standard": 119,
    "style": 29,
    "trial": 0
   },
   "overfit": 0,
-  "principle_bans": 47
+  "principle_bans": 48
  },
  "pending": [],
  "status_labels": {
@@ -904,6 +904,79 @@
    "absolute": false,
    "must": false,
    "tier_key": "ban:05d772ef",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:04§0-8",
+   "text": "왜: 삽화만 이어지면 지어낸 이야기처럼 보이고, 그림을 만들고 움직이는 데 품이 많이 듭니다. 사람이 나오는 짧은 실사 컷은 따로 설명하지 않아도 '지금 이 상황'을 떠올리게 하고, 모션그래픽은 그 위에서 수치·관계·용어를 정확히 보여 줍니다. 레퍼런스: EBS 지식채널e(일상 실사 + 가운데 핵심어), 북툰(실사 위 라벨 콜아웃), Aperture(한 가지 색보정으로 묶기) — projects/20261120-curiosity-broll-sample/01_re",
+   "themes": [
+    "motion"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:e0bb7e92",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:04§0-8",
+   "text": "넘치면 / 모자라면: 실사만 이어지고 그래픽이 없으면 '분위기 영상'이 되어 정보가 남지 않는다. 그래픽이 실사를 덮으면 사람이 사라진다 — 콜아웃은 화면 한쪽, 데이터 패널은 화면의 절반 이하가 기본.",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:04727b1e",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:04§0-8",
+   "text": "클립마다 출처·라이선스·내려받은 날짜를 04_assets/clips.md 에 남긴다. 영상 파일은 커밋하지 않는다(docs/09).",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:936d9259",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
+   "section": "sec:04§0-8",
+   "text": "사람을 다루는 원칙 (영구 원칙): 얼굴을 알아볼 수 있는 스톡 인물을 질환·중독·범죄·우울 같은 부정적 맥락의 '당사자'처럼 쓰지 않는다(Pexels 약관 5조 등). 그런 대사에는 뒷모습·손·실루엣·흐린 군중을 쓰거나 블러를 넣고, 맞는 컷이 없으면 삽화로 대체한다. AI 로 만든 인물 클립(Coverr 일부 등)을 실제 사건 기록처럼 쓰지 않는다.",
+   "themes": [
+    "motion",
+    "depth"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:9a31b689",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -3097,7 +3170,7 @@
    "key": "04",
    "file": "manual/04-curiosity.md",
    "label": "04. curiosity — 몰랐던 이유 (심리학과 현대인의 일상)",
-   "lines": 219,
+   "lines": 242,
    "versions": [
     57
    ],
@@ -3109,7 +3182,7 @@
    "key": "05",
    "file": "manual/05-style-matching.md",
    "label": "05. 편집 스타일 고르기 — 영상마다, 장면마다",
-   "lines": 264,
+   "lines": 265,
    "versions": [
     57,
     58,
@@ -3170,7 +3243,7 @@
    "key": "10",
    "file": "manual/10-when-to-use.md",
    "label": "10. 언제 무엇을 쓰나 — 기능·연출·편집법 용도표",
-   "lines": 274,
+   "lines": 275,
    "versions": [
     57
    ],
@@ -3197,7 +3270,7 @@
    "key": "12",
    "file": "manual/12-visual-storytelling.md",
    "label": "12. 편집 매뉴얼 — 인포그래픽·삽화·인물 사진·자료 영상",
-   "lines": 54,
+   "lines": 56,
    "versions": [
     57,
     58,
@@ -3796,6 +3869,7 @@
     "term:stage",
     "term:story",
     "term:style-anim-stage",
+    "term:style-broll-motion",
     "term:style-story-board",
     "term:beat-motion"
    ]
@@ -3855,6 +3929,28 @@
    "last_version": null
   },
   {
+   "id": "sec:04§0-8",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "0-8",
+   "level": 3,
+   "label": "실사 B-roll·모션그래픽이 먼저, 삽화는 자료가 없을 때만",
+   "title": "0-8. 실사 B-roll·모션그래픽이 먼저, 삽화는 자료가 없을 때만 (v60, 2026-11-20 사용자 승인)",
+   "line": 162,
+   "end": 184,
+   "tag_version": 60,
+   "versions": [
+    60
+   ],
+   "last_version": 60,
+   "terms": [
+    "term:footage",
+    "term:stage",
+    "term:story",
+    "term:slow-push"
+   ]
+  },
+  {
    "id": "sec:04§1",
    "kind": "section",
    "doc": "doc:04",
@@ -3862,8 +3958,8 @@
    "level": 2,
    "label": "호기심을 '만드는' 주제의 조건 (모두 충족)",
    "title": "1. 호기심을 '만드는' 주제의 조건 (모두 충족)",
-   "line": 162,
-   "end": 174,
+   "line": 185,
+   "end": 197,
    "tag_version": null,
    "versions": [
     53
@@ -3878,8 +3974,8 @@
    "level": 2,
    "label": "주제 찾기",
    "title": "2. 주제 찾기",
-   "line": 175,
-   "end": 183,
+   "line": 198,
+   "end": 206,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3892,8 +3988,8 @@
    "level": 2,
    "label": "깊은 조사 — 다섯 층 (자세히는 `prompts/script_knowledge.md` A)",
    "title": "3. 깊은 조사 — 다섯 층 (자세히는 `prompts/script_knowledge.md` A)",
-   "line": 184,
-   "end": 186,
+   "line": 207,
+   "end": 209,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3906,8 +4002,8 @@
    "level": 2,
    "label": "대본 공식",
    "title": "4. 대본 공식",
-   "line": 187,
-   "end": 203,
+   "line": 210,
+   "end": 226,
    "tag_version": null,
    "versions": [
     34
@@ -3932,8 +4028,8 @@
    "level": 2,
    "label": "소스",
    "title": "5. 소스",
-   "line": 204,
-   "end": 206,
+   "line": 227,
+   "end": 229,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3946,8 +4042,8 @@
    "level": 2,
    "label": "포장",
    "title": "6. 포장",
-   "line": 207,
-   "end": 210,
+   "line": 230,
+   "end": 233,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -3960,8 +4056,8 @@
    "level": 2,
    "label": "이 채널만의 검사",
    "title": "7. 이 채널만의 검사",
-   "line": 211,
-   "end": 219,
+   "line": 234,
+   "end": 242,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4262,13 +4358,14 @@
    "label": "화풍과 연출은 상황이 고른다 — 그림은 원화, 코드는 움직임 (2026-11-18 사용자)",
    "title": "0-8. 화풍과 연출은 상황이 고른다 — 그림은 원화, 코드는 움직임 (2026-11-18 사용자)",
    "line": 186,
-   "end": 195,
+   "end": 196,
    "tag_version": null,
    "versions": [
     48
    ],
    "last_version": 48,
    "terms": [
+    "term:style-broll-motion",
     "term:perspective-paper"
    ]
   },
@@ -4280,8 +4377,8 @@
    "level": 2,
    "label": "영상 단위: 그래픽 팩 고르기",
    "title": "1. 영상 단위: 그래픽 팩 고르기",
-   "line": 196,
-   "end": 208,
+   "line": 197,
+   "end": 209,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -4307,8 +4404,8 @@
    "level": 2,
    "label": "장면 단위: 연출 type 고르기 (말하는 내용 → 화면)",
    "title": "2. 장면 단위: 연출 type 고르기 (말하는 내용 → 화면)",
-   "line": 209,
-   "end": 234,
+   "line": 210,
+   "end": 235,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -4350,8 +4447,8 @@
    "level": 2,
    "label": "리듬 규칙 (docs/15 근거, `check` 가 일부 자동 검사)",
    "title": "3. 리듬 규칙 (docs/15 근거, `check` 가 일부 자동 검사)",
-   "line": 235,
-   "end": 241,
+   "line": 236,
+   "end": 242,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -4364,8 +4461,8 @@
    "level": 2,
    "label": "주제별 조합 (출발점) — 주제 레포로 옮김",
    "title": "4. 주제별 조합 (출발점) — 주제 레포로 옮김 (v34)",
-   "line": 242,
-   "end": 244,
+   "line": 243,
+   "end": 245,
    "tag_version": 34,
    "versions": [
     34
@@ -4380,8 +4477,8 @@
    "level": 2,
    "label": "시험작 (같은 이야기를 다른 연출로)",
    "title": "5. 시험작 (같은 이야기를 다른 연출로)",
-   "line": 245,
-   "end": 249,
+   "line": 246,
+   "end": 250,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -4402,8 +4499,8 @@
    "level": 2,
    "label": "UI 재연·문서 강조 도구",
    "title": "6. UI 재연·문서 강조 도구 (v50, 2026-11-19)",
-   "line": 250,
-   "end": 264,
+   "line": 251,
+   "end": 265,
    "tag_version": 50,
    "versions": [
     50
@@ -5652,7 +5749,7 @@
    "label": "편집 스타일 (장면을 묶은 레시피) — `styles/recipes`",
    "title": "3. 편집 스타일 (장면을 묶은 레시피) — `styles/recipes`",
    "line": 172,
-   "end": 208,
+   "end": 209,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -5663,6 +5760,7 @@
     "term:style-app-window-cover",
     "term:style-archive-doc",
     "term:style-blueprint-explainer",
+    "term:style-broll-motion",
     "term:style-chalk-lesson",
     "term:style-dash-cover",
     "term:style-data-choropleth",
@@ -5679,9 +5777,7 @@
     "term:style-map-journey",
     "term:style-motion-metaphor",
     "term:style-news-desk",
-    "term:style-paper-column",
-    "term:style-shorts-card",
-    "term:change-rate"
+    "term:style-shorts-card"
    ]
   },
   {
@@ -5692,8 +5788,8 @@
    "level": 2,
    "label": "연출 기법 (화면 문법) — `styles/techniques.yaml`, docs/32",
    "title": "4. 연출 기법 (화면 문법) — `styles/techniques.yaml`, docs/32",
-   "line": 209,
-   "end": 239,
+   "line": 210,
+   "end": 240,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -5733,8 +5829,8 @@
    "level": 2,
    "label": "상황 → 기능 (메인 + 주제 레포) — `manual/situations.yaml`, `topics/`",
    "title": "5. 상황 → 기능 (메인 + 주제 레포) — `manual/situations.yaml`, `topics/`",
-   "line": 240,
-   "end": 274,
+   "line": 241,
+   "end": 275,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -6030,7 +6126,7 @@
    "label": "장면에 맞는 표현 방식",
    "title": "1. 장면에 맞는 표현 방식",
    "line": 15,
-   "end": 29,
+   "end": 31,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -6051,15 +6147,15 @@
    ]
   },
   {
-   "id": "sec:12§h30",
+   "id": "sec:12§h32",
    "kind": "section",
    "doc": "doc:12",
-   "num": "h30",
+   "num": "h32",
    "level": 3,
    "label": "설명 사이에 넣는 인물·현장 영상",
    "title": "설명 사이에 넣는 인물·현장 영상",
-   "line": 30,
-   "end": 35,
+   "line": 32,
+   "end": 37,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6072,8 +6168,8 @@
    "level": 2,
    "label": "인포그래픽 애니메이션 레퍼런스",
    "title": "2. 인포그래픽 애니메이션 레퍼런스",
-   "line": 36,
-   "end": 47,
+   "line": 38,
+   "end": 49,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6086,8 +6182,8 @@
    "level": 2,
    "label": "장면표와 검토",
    "title": "3. 장면표와 검토",
-   "line": 48,
-   "end": 54,
+   "line": 50,
+   "end": 56,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -9848,12 +9944,6 @@
     "background",
     "intent"
    ],
-   "commit": {
-    "sha": "dfb19682f2ecd34f4a39fe1de89708f44be26cce",
-    "subject": "11/19: 썸네일 C 를 검은 바탕 연준 판으로 되돌림 (파일만, 유튜브 적용 전)",
-    "date": "2026-11-19",
-    "other_files": []
-   },
    "terms": [
     "term:tech-spotlight",
     "term:graphic-pack"
@@ -9869,15 +9959,10 @@
    "applied": [],
    "themes": [],
    "commit": {
-    "sha": "39ae971d0acf3e9f8fca02f844df6f92d08c4ee3",
-    "subject": "매뉴얼 v51: 시장 썸네일 방식(핫 키워드 먼저·단정+숫자·검은 톤 사진 기본)·글자 넘침 확인·막히면 피클 요청 (2026-11-19 사용자)",
+    "sha": "745314e9aa82dc1097b2289992888d3bf84c5775",
+    "subject": "Merge branch 'main' of https://github.com/LBIN8787/video-editing",
     "date": "2026-11-19",
-    "other_files": [
-     "AGENTS.md",
-     "prompts/thumbnail.md",
-     "proposals/manual/20261119-051753-main.md",
-     "proposals/manual/20261119-052219-main.md"
-    ]
+    "other_files": []
    }
   },
   {
@@ -10062,6 +10147,19 @@
     "date": "2026-11-20",
     "other_files": []
    }
+  },
+  {
+   "id": "ver:60",
+   "kind": "version",
+   "v": 60,
+   "date": "2026-11-20",
+   "label": "v60",
+   "summary": "호기심 기본 연출: 실사 B-roll·모션그래픽 먼저, 삽화는 자료가 없을 때만 부분적으로 (04 §0-8, 레시피 broll-motion, 사용자 승인 2026-11-20)",
+   "applied": [],
+   "themes": [],
+   "terms": [
+    "term:style-broll-motion"
+   ]
   },
   {
    "id": "rev:1",
@@ -10800,6 +10898,26 @@
    "tier_note": "",
    "tier_fixed": false,
    "tier_label": "스타일 기본값"
+  },
+  {
+   "id": "rev:37",
+   "kind": "review",
+   "date": "2026-11-20",
+   "project": "20261120-curiosity-broll-sample",
+   "manual_version": 59,
+   "result": "pass",
+   "reason": "이 방향으로 매뉴얼에 반영해줘 — 실사 B-roll·모션그래픽 먼저, 삽화는 대체 (예시 broll_v1)",
+   "themes": [],
+   "tier_key": "rev:979d488c",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
   },
   {
    "id": "theme:motion",
@@ -18488,6 +18606,54 @@
    "annotated": false
   },
   {
+   "id": "intent:979d488c",
+   "kind": "intent",
+   "quote": "이 방향으로 매뉴얼에 반영해줘 — 실사 B-roll·모션그래픽 먼저, 삽화는 대체 (예시 broll_v1)",
+   "label": "이 방향으로 매뉴얼에 반영해줘 — 실사 B-roll·모션그래픽 먼저, 삽화는 대체 (예시 broll_v1)",
+   "versions": [
+    60
+   ],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "rev:37",
+     "kind": "review"
+    },
+    {
+     "ref": "sec:04§0-8",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "이 방향으로 매뉴얼에 반영해줘"
+   ],
+   "member_ids": [
+    "intent:979d488c",
+    "intent:eb25c059"
+   ],
+   "themes": [],
+   "ann_key": "intent:979d488c",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:60",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0-8",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:a5ecd3e7",
    "kind": "intent",
    "quote": "그리고 새 편집메뉴얼로 인포그래픽 애니메이션을 다루고자 합니다. 미주일기와 같은 인포그래픽 애니메이션을 다루거나 삽화형식을 다루거나 실제 인물사진이나 인물자료 영상 움직임을 다루거나 등 분류하고자 합니다.",
@@ -18747,6 +18913,57 @@
    "not_meant": [],
    "note": "",
    "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:d52c3fd6",
+   "kind": "intent",
+   "quote": "기존의 젬 영상이랑 메모리 영상같은 편집스타일이 아니라 … 사람들이 인물들? 짧은 영상 별 의미없어보이는데 이런거 중간중간 넣잖아 이런 사람 연출 즉 단순 삽화가 아니라 인물들 영상이나 모션그래픽? 등으로 설명하고 중간중간 이런 자료들을 구하기 힘들고 넣기 힘든 상황일때만 삽화를 부분적으로 사용하는 형식으로 하고싶어",
+   "label": "기존의 젬 영상이랑 메모리 영상같은 편집스타일이 아니라 … 사람들이 인물들? 짧은 영상 별 의미없어보이는데 ",
+   "versions": [
+    60
+   ],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "sec:04§0-8",
+     "kind": "manual"
+    },
+    {
+     "ref": "fb:74",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [
+    "기존의 젬 영상이랑 메모리 영상같은 편집스타일이 아니라 … 단순 삽화가 아니라 인물들 영상이나 모션그래픽? 등으로 설명하고 중간중간 이런 자료들을 구하기 힘들고 넣기 힘든 상황일때만 삽화를 부분적으로 사용하는 형식으로 하고싶어 → (예시를 보고) 이 방향으로 매뉴얼에 반영해줘"
+   ],
+   "member_ids": [
+    "intent:d52c3fd6",
+    "intent:e2322c8a"
+   ],
+   "themes": [
+    "variety",
+    "script"
+   ],
+   "ann_key": "intent:d52c3fd6",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:60",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0-8",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -19064,6 +19281,7 @@
    ],
    "scenes": [],
    "used_by": [
+    "term:style-broll-motion",
     "term:style-kinetic-type"
    ],
    "name": "kinetic",
@@ -19451,6 +19669,7 @@
    "scenes": [],
    "used_by": [
     "term:style-archive-doc",
+    "term:style-broll-motion",
     "term:style-hybrid-causal",
     "term:style-map-journey",
     "term:style-screen-demo",
@@ -19482,6 +19701,7 @@
     "sec:02§h40",
     "sec:03§2",
     "sec:03§4",
+    "sec:04§0-8",
     "sec:05§h50",
     "sec:05§0-7",
     "sec:05§0-3",
@@ -20122,6 +20342,7 @@
    "scenes": [],
    "used_by": [
     "term:style-blueprint-explainer",
+    "term:style-broll-motion",
     "term:style-data-report",
     "term:style-issue-quick-brief"
    ],
@@ -20387,6 +20608,7 @@
    ],
    "scenes": [],
    "used_by": [
+    "term:style-broll-motion",
     "term:style-paper-column"
    ],
    "name": "people",
@@ -20738,6 +20960,7 @@
    "mentioned_in": [
     "sec:04§0-4",
     "sec:04§0-5",
+    "sec:04§0-8",
     "sec:04§4",
     "sec:10§1",
     "sec:10§h9",
@@ -20801,6 +21024,7 @@
    ],
    "mentioned_in": [
     "sec:04§0-4",
+    "sec:04§0-8",
     "sec:04§4",
     "sec:10§1",
     "sec:10§h9",
@@ -21874,6 +22098,56 @@
    ]
   },
   {
+   "id": "term:style-broll-motion",
+   "kind": "term",
+   "key": "style-broll-motion",
+   "aliases": [
+    "broll-motion",
+    "실사 B-roll + 모션그래픽"
+   ],
+   "code": [
+    {
+     "file": "styles/recipes/broll-motion.yaml",
+     "line": 1,
+     "src": "실사 B-roll + 모션그래픽 (사람 컷 위 콜아웃·데이터·핵심어, 삽화는 대체)"
+    }
+   ],
+   "scenes": [
+    "term:footage",
+    "term:people",
+    "term:bars",
+    "term:kinetic"
+   ],
+   "used_by": [],
+   "name": "실사 B-roll + 모션그래픽 (사람 컷 위 콜아웃·데이터·핵심어, 삽화는 대체)",
+   "short": "실사 B-roll + 모션그래픽",
+   "cat": "style",
+   "plain": "생활 속 행동·장소가 나오는 이야기 — 대사의 상황을 공유하는 사람·손·공간 컷을 무료 스톡에서 찾을 수 있을 때. 수치는 실사 위 막대·축, 데이터가 주인공이면 모션그래픽만, 기록 없는 과거 현장만 삽화",
+   "look": "실사 B-roll + 모션그래픽 (사람 컷 위 콜아웃·데이터·핵심어, 삽화는 대체)",
+   "status": "approved",
+   "renderer": "hybrid",
+   "skin": "dark-doc",
+   "avoid": "얼굴이 보이는 스톡 인물을 질환·중독·범죄 같은 부정적 맥락의 당사자처럼 / 실험 현장 기록처럼 보이는 다른 장소 컷에 '자료 화면' 표시 없이 / 그래픽이 실사를 덮어 사람이 안 보이게",
+   "fits": "brands: curiosity, questions: 행동의 이유·오늘과 연결·원인·비교, moods: 차분·실용·미래, needs: footage",
+   "demo": "20261120-curiosity-broll-sample",
+   "how": "렌더러 hybrid · 장면 종류 footage, people, bars, kinetic · 그래픽 팩 dark-doc",
+   "enable": "style-pick 이 추천하거나 hybrid.json 장면의 \"recipe\": \"broll-motion\"",
+   "anim": "kenburns",
+   "use_when": "생활 속 행동·장소가 나오는 이야기 — 대사의 상황을 공유하는 사람·손·공간 컷을 무료 스톡에서 찾을 수 있을 때. 수치는 실사 위 막대·축, 데이터가 주인공이면 모션그래픽만, 기록 없는 과거 현장만 삽화",
+   "not_when": "얼굴이 보이는 스톡 인물을 질환·중독·범죄 같은 부정적 맥락의 당사자처럼 / 실험 현장 기록처럼 보이는 다른 장소 컷에 '자료 화면' 표시 없이 / 그래픽이 실사를 덮어 사람이 안 보이게",
+   "group": "편집 스타일 (장면 묶음)",
+   "label": "실사 B-roll + 모션그래픽 (사람 컷 위 콜아웃·데이터·핵심어, 삽화는 대체)",
+   "cat_label": "편집 스타일",
+   "related": [],
+   "instead": [],
+   "mentioned_in": [
+    "sec:04§0-4",
+    "sec:05§0-8",
+    "sec:10§3",
+    "ver:60"
+   ]
+  },
+  {
    "id": "term:style-chalk-lesson",
    "kind": "term",
    "key": "style-chalk-lesson",
@@ -22683,8 +22957,7 @@
    "related": [],
    "instead": [],
    "mentioned_in": [
-    "sec:05§0-7",
-    "sec:10§3"
+    "sec:05§0-7"
    ]
   },
   {
@@ -24311,6 +24584,7 @@
    "related": [],
    "instead": [],
    "mentioned_in": [
+    "sec:04§0-8",
     "sec:09§6",
     "sec:10§4",
     "ver:12",
@@ -24629,7 +24903,6 @@
     "sec:05§0-4",
     "sec:06§G6",
     "sec:09§6",
-    "sec:10§3",
     "ver:31"
    ]
   },
@@ -26830,6 +27103,35 @@
    "tier_label": "작업 기준"
   },
   {
+   "id": "fb:74",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "기존의 젬 영상이랑 메모리 영상같은 편집스타일이 아니라 … 단순 삽화가 아니라 인물들 영상이나 모션그래픽? 등으로 설명하고 중간중간 이런 자료들을 구하기 힘들고 넣기 힘든 상황일때만 삽화를 부분적으로 사용하는 형식으로 하고싶어 → (예시를 보고) 이 방향으로 매뉴얼에 반영해줘",
+   "label": "기존의 젬 영상이랑 메모리 영상같은 편집스타일이 아니라 … 단순 삽화가 아니라 인물들 영상이나 모션그래픽? ",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261120-curiosity-broll-sample",
+   "about": "",
+   "note": "v60: manual/04 §0-8 (작업 기준: 실사·모션그래픽 먼저, 삽화 대체·role 기록 / 영구 원칙: 스톡 인물을 부정적 맥락 당사자로 쓰지 않음 / 스타일 기본값: 색보정·콜아웃·컷 길이)",
+   "pending": false,
+   "themes": [
+    "variety",
+    "script"
+   ],
+   "scope": "standard",
+   "intent": "intent:d52c3fd6",
+   "tier_key": "fb:e2322c8a",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
    "id": "layer:main",
    "kind": "layer",
    "label": "메인 레포 — 편집 매뉴얼",
@@ -28978,8 +29280,9 @@
    "kind": "topic",
    "key": "curiosity",
    "label": "호기심 · 심리와 현대 일상",
-   "look": "칠판·종이 무대 (05 §0-7)",
+   "look": "실사 B-roll + 모션그래픽 (v60, 04 §0-8) — 삽화(칠판·종이 무대, 05 §0-7)는 자료가 없는 구간만",
    "defaults": {
+    "backbone": "broll-motion",
     "camera": "fixed",
     "script_review": true
    },
@@ -29033,7 +29336,7 @@
      "project": "20261107-knowledge-스페인독감",
      "scenes": 41,
      "coverage": 0.85,
-     "fit": 0.26,
+     "fit": 0.43,
      "rows": [
       {
        "s": 1,
@@ -29064,6 +29367,7 @@
        "sit": "character-acts",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
         "illust"
        ],
@@ -29086,6 +29390,7 @@
        "sit": "character-acts",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
         "illust"
        ],
@@ -29106,11 +29411,11 @@
        "s": 7,
        "type": "footage",
        "sit": "open-scene",
-       "fit": false,
+       "fit": true,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "이 사진은 1918년 영국 글래스고의 한 병원입니다. 사진 설명에는 이렇게 적혀 있습니다."
       },
@@ -29128,9 +29433,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "병은 세 번에 걸쳐 밀려왔습니다. 봄의 첫 물결은 비교적 약했습니다. 독한 감기 정도로 여겨졌죠."
       },
@@ -29149,11 +29454,11 @@
        "s": 11,
        "type": "footage",
        "sit": "open-scene",
-       "fit": false,
+       "fit": true,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "1918년은 1차 세계대전의 마지막 해입니다. 미국, 영국, 프랑스, 독일. 큰 나라들은 모두 전쟁 중이었죠."
       },
@@ -29172,11 +29477,11 @@
        "s": 13,
        "type": "footage",
        "sit": "open-scene",
-       "fit": false,
+       "fit": true,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "결정적인 건 1918년 5월이었습니다. 스페인 국왕 알폰소 13세가 이 병에 걸린 겁니다."
       },
@@ -29205,6 +29510,7 @@
        "sit": "character-acts",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
         "illust"
        ],
@@ -29225,11 +29531,11 @@
        "s": 18,
        "type": "footage",
        "sit": "open-scene",
-       "fit": false,
+       "fit": true,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "1918년 9월 28일, 미국 필라델피아. 전쟁 비용을 모으는 자유공채 퍼레이드가 열렸습니다."
       },
@@ -29248,8 +29554,9 @@
        "s": 20,
        "type": "footage",
        "sit": "character-acts",
-       "fit": false,
+       "fit": true,
        "rec": [
+        "footage",
         "stage",
         "illust"
        ],
@@ -29261,9 +29568,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "결과는 어땠을까요. 2007년 미국 과학원 회보에 실린 연구가 같은 석 달 반 동안의 사망을 비교했습니다."
       },
@@ -29312,9 +29619,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "더 무서운 건 누가 죽었느냐입니다. 보통 독감은 아기와 노인에게 위험합니다. 그래프로 그리면 양 끝이 높은 U자 모양이죠."
       },
@@ -29324,9 +29631,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "미국의 기대수명은 1917년 50.9세에서, 1918년 39.1세로 떨어졌습니다. 1년 만에 11.8년이 줄어든 겁니다."
       },
@@ -29344,9 +29651,9 @@
        "sit": "open-scene",
        "fit": true,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "1918년은 무오년입니다. 조선에서는 이 병을 '무오년 독감', 또는 스페인의 옛 이름을 따 '서반아 감기'라고 불렀습니다."
       },
@@ -29354,11 +29661,11 @@
        "s": 30,
        "type": "footage",
        "sit": "open-scene",
-       "fit": false,
+       "fit": true,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "기록에 따르면 1918년 9월, 평안북도 강계에서 환자 300명이 나왔다는 기사가 처음 보입니다."
       },
@@ -29403,9 +29710,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "독립운동가 김구 선생도 이 병을 앓았습니다. 백범일지에 상하이에 온 뒤 '서반아 감기'로 20일을 치료받았다고 적었죠."
       },
@@ -29426,9 +29733,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "1918년 11월, 알래스카의 작은 마을 브레빅 미션. 닷새 동안 주민 80명 가운데 72명이 숨졌습니다."
       },
@@ -29438,9 +29745,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "1951년, 대학원생 요한 헐틴이 이 무덤을 찾아갔지만, 당시 기술로는 바이러스를 찾지 못했습니다."
       },
@@ -29530,6 +29837,7 @@
        "sit": "character-acts",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
         "illust"
        ],
@@ -29552,9 +29860,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "이 사진은 1918년 영국 글래스고의 한 병원입니다. 사진 설명에는 이렇게 적혀 있습니다."
       },
@@ -29572,9 +29880,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "1918년은 1차 세계대전의 마지막 해입니다. 미국, 영국, 프랑스, 독일. 큰 나라들은 모두 전쟁 중이었죠."
       },
@@ -29584,9 +29892,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "결정적인 건 1918년 5월이었습니다. 스페인 국왕 알폰소 13세가 이 병에 걸린 겁니다."
       }
@@ -29604,6 +29912,7 @@
        "sit": "character-acts",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
         "illust"
        ],
@@ -29615,6 +29924,7 @@
        "sit": "character-acts",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
         "illust"
        ],
@@ -29637,9 +29947,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "그런데 스페인은 이 전쟁에 끼지 않은 중립국이었습니다. 전시 검열이 없었죠. 스페인 신문들은 병이 퍼지는 걸 있는 그대로 썼습니다."
       },
@@ -29649,9 +29959,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "1918년은 무오년입니다. 조선에서는 이 병을 '무오년 독감', 또는 스페인의 옛 이름을 따 '서반아 감기'라고 불렀습니다."
       },
@@ -29661,9 +29971,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "1918년 11월, 알래스카의 작은 마을 브레빅 미션. 닷새 동안 주민 80명 가운데 72명이 숨졌습니다."
       }
@@ -29704,6 +30014,7 @@
        "sit": "character-acts",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
         "illust"
        ],
@@ -29742,6 +30053,7 @@
        "sit": "character-acts",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
         "illust"
        ],
@@ -29753,7 +30065,7 @@
      "project": "20261109-style-combo",
      "scenes": 14,
      "coverage": 0.93,
-     "fit": 0.15,
+     "fit": 0.23,
      "rows": [
       {
        "s": 1,
@@ -29784,6 +30096,7 @@
        "sit": "character-acts",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
         "illust"
        ],
@@ -29795,6 +30108,7 @@
        "sit": "character-acts",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
         "illust"
        ],
@@ -29823,11 +30137,11 @@
        "s": 7,
        "type": "footage",
        "sit": "open-scene",
-       "fit": false,
+       "fit": true,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "1918년은 1차 세계대전의 마지막 해입니다. 미국, 영국, 프랑스, 독일. 큰 나라들은 모두 전쟁 중이었죠."
       },
@@ -29848,9 +30162,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "결정적인 건 1918년 5월이었습니다. 스페인 국왕 알폰소 13세가 이 병에 걸린 겁니다."
       },
@@ -29871,9 +30185,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "결과는 어땠을까요. 2007년 미국 과학원 회보에 실린 연구가 같은 석 달 반 동안의 사망을 비교했습니다."
       },
@@ -29895,9 +30209,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "1918년은 무오년입니다. 조선에서는 이 병을 '무오년 독감', 또는 스페인의 옛 이름을 따 '서반아 감기'라고 불렀습니다."
       },
@@ -29937,9 +30251,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "2023년 미국 뉴욕의 한 법정. 변호사들이 낸 서류에 판례가 여러 개 적혀 있었습니다."
       },
@@ -29971,9 +30285,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "시작은 평범한 소송이었습니다. 비행기 안에서 서빙 카트에 무릎을 다쳤다는 거였죠."
       },
@@ -30071,9 +30385,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "사실 AI는 처음부터 실제보다 더 아는 것처럼 보였습니다. 1957년, 이 IBM 704 같은 기종에서 '퍼셉트론'이라는 초기 인공 신경망이 처음 돌아갔는데요."
       },
@@ -30119,9 +30433,9 @@
        "sit": "open-scene",
        "fit": true,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "2015년 10월, 일본 도쿄에서 열린 가전 전시회에서 냉장고만 한 기계 하나가 관람객의 발길을 붙잡았습니다."
       },
@@ -30154,9 +30468,9 @@
        "sit": "open-scene",
        "fit": true,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "컴퓨터가 처음 등장했을 때부터 연구자들은 기계의 지능을 체스로 시험하고 싶어 했습니다."
       },
@@ -30174,9 +30488,9 @@
        "sit": "open-scene",
        "fit": true,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "1997년 5월 11일 뉴욕에서 열린 재대결의 마지막 여섯 번째 대국에서 카스파로프는 19수 만에 자리에서 일어났고, 기계는 처음으로 현역 세계 챔피언을 상대로 "
       },
@@ -30205,9 +30519,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "훗날 카네기멜런 대학으로 옮긴 모라벡은 1988년 펴낸 책에 이 경험을 이렇게 정리했습니다."
       },
@@ -30228,9 +30542,9 @@
        "sit": "open-scene",
        "fit": true,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "모라벡의 수레가 방을 건넌 지 36년이 지난 2015년에도 이 벽은 크게 낮아지지 않았습니다."
       },
@@ -30273,9 +30587,9 @@
        "sit": "open-scene",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
-        "illust",
-        "story"
+        "illust"
        ],
        "say": "1994년 심리학자 스티븐 핑커는 35년에 걸친 인공지능 연구의 가장 큰 교훈을 어려운 문제는 쉽고, 쉬운 문제는 어렵다는 한 문장으로 정리했습니다."
       },
@@ -30320,6 +30634,7 @@
        "sit": "character-acts",
        "fit": true,
        "rec": [
+        "footage",
         "stage",
         "illust"
        ],
@@ -30377,6 +30692,7 @@
        "sit": "character-acts",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
         "illust"
        ],
@@ -30408,6 +30724,7 @@
        "sit": "character-acts",
        "fit": false,
        "rec": [
+        "footage",
         "stage",
         "illust"
        ],
@@ -30437,6 +30754,7 @@
    "label": "장면을 연다 (사람·장소·날짜)",
    "origin": "override",
    "scenes": [
+    "footage",
     "stage",
     "illust",
     "story"
@@ -30452,7 +30770,7 @@
     "stage"
    ],
    "avoid": "글자 카드로 열기",
-   "why": "때·곳·사람이 있는 여는 장면 → 질문 하나 (README §2-3, 04 §0-6)",
+   "why": "v60 사람이 나오는 실사 컷이 먼저 — 때·곳·사람이 있는 여는 장면 → 질문 하나 (README §2-3, 04 §0-6)",
    "signals": [
     "\\d{4}년",
     "그날",
@@ -30462,14 +30780,14 @@
     "아침"
    ],
    "count": 32,
-   "fit": 5,
+   "fit": 11,
    "examples": [
     {
      "project": "20261107-knowledge-스페인독감",
      "scene": 7,
      "type": "footage",
      "say": "이 사진은 1918년 영국 글래스고의 한 병원입니다. 사진 설명에는 이렇게 적혀 있습니다.",
-     "fit": false
+     "fit": true
     },
     {
      "project": "20261107-knowledge-스페인독감",
@@ -30483,7 +30801,7 @@
      "scene": 11,
      "type": "footage",
      "say": "1918년은 1차 세계대전의 마지막 해입니다. 미국, 영국, 프랑스, 독일. 큰 나라들은 모두 전쟁 중이었죠.",
-     "fit": false
+     "fit": true
     }
    ]
   },
@@ -31066,6 +31384,7 @@
    "label": "주인공이 무언가를 한다",
    "origin": "add",
    "scenes": [
+    "footage",
     "stage",
     "illust"
    ],
@@ -31075,8 +31394,8 @@
    ],
    "blocked": [],
    "base_scenes": null,
-   "avoid": "사진·쪽지를 쌓기, 소제목 글자",
-   "why": "한 화면 한 생각, 대본의 동사를 그림이 (v22)",
+   "avoid": "사진·쪽지를 쌓기, 소제목 글자, 얼굴이 보이는 스톡 인물을 부정적 맥락의 당사자처럼 (04 §0-8)",
+   "why": "v60 같은 행동을 하는 사람의 실사 컷 먼저, 없으면 그림이 동사를 연기 — 한 화면 한 생각, 대본의 동사를 그림이 (v22)",
    "signals": [
     "걸어",
     "앉",
@@ -31086,7 +31405,7 @@
     "열었"
    ],
    "count": 14,
-   "fit": 1,
+   "fit": 2,
    "examples": [
     {
      "project": "20261107-knowledge-스페인독감",
@@ -31259,7 +31578,7 @@
    "project": "20261107-knowledge-스페인독감",
    "scenes": 41,
    "coverage": 0.85,
-   "fit": 0.26,
+   "fit": 0.43,
    "rows": [
     {
      "s": 1,
@@ -31290,6 +31609,7 @@
      "sit": "character-acts",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
       "illust"
      ],
@@ -31312,6 +31632,7 @@
      "sit": "character-acts",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
       "illust"
      ],
@@ -31332,11 +31653,11 @@
      "s": 7,
      "type": "footage",
      "sit": "open-scene",
-     "fit": false,
+     "fit": true,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "이 사진은 1918년 영국 글래스고의 한 병원입니다. 사진 설명에는 이렇게 적혀 있습니다."
     },
@@ -31354,9 +31675,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "병은 세 번에 걸쳐 밀려왔습니다. 봄의 첫 물결은 비교적 약했습니다. 독한 감기 정도로 여겨졌죠."
     },
@@ -31375,11 +31696,11 @@
      "s": 11,
      "type": "footage",
      "sit": "open-scene",
-     "fit": false,
+     "fit": true,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "1918년은 1차 세계대전의 마지막 해입니다. 미국, 영국, 프랑스, 독일. 큰 나라들은 모두 전쟁 중이었죠."
     },
@@ -31398,11 +31719,11 @@
      "s": 13,
      "type": "footage",
      "sit": "open-scene",
-     "fit": false,
+     "fit": true,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "결정적인 건 1918년 5월이었습니다. 스페인 국왕 알폰소 13세가 이 병에 걸린 겁니다."
     },
@@ -31431,6 +31752,7 @@
      "sit": "character-acts",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
       "illust"
      ],
@@ -31451,11 +31773,11 @@
      "s": 18,
      "type": "footage",
      "sit": "open-scene",
-     "fit": false,
+     "fit": true,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "1918년 9월 28일, 미국 필라델피아. 전쟁 비용을 모으는 자유공채 퍼레이드가 열렸습니다."
     },
@@ -31474,8 +31796,9 @@
      "s": 20,
      "type": "footage",
      "sit": "character-acts",
-     "fit": false,
+     "fit": true,
      "rec": [
+      "footage",
       "stage",
       "illust"
      ],
@@ -31487,9 +31810,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "결과는 어땠을까요. 2007년 미국 과학원 회보에 실린 연구가 같은 석 달 반 동안의 사망을 비교했습니다."
     },
@@ -31538,9 +31861,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "더 무서운 건 누가 죽었느냐입니다. 보통 독감은 아기와 노인에게 위험합니다. 그래프로 그리면 양 끝이 높은 U자 모양이죠."
     },
@@ -31550,9 +31873,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "미국의 기대수명은 1917년 50.9세에서, 1918년 39.1세로 떨어졌습니다. 1년 만에 11.8년이 줄어든 겁니다."
     },
@@ -31570,9 +31893,9 @@
      "sit": "open-scene",
      "fit": true,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "1918년은 무오년입니다. 조선에서는 이 병을 '무오년 독감', 또는 스페인의 옛 이름을 따 '서반아 감기'라고 불렀습니다."
     },
@@ -31580,11 +31903,11 @@
      "s": 30,
      "type": "footage",
      "sit": "open-scene",
-     "fit": false,
+     "fit": true,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "기록에 따르면 1918년 9월, 평안북도 강계에서 환자 300명이 나왔다는 기사가 처음 보입니다."
     },
@@ -31629,9 +31952,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "독립운동가 김구 선생도 이 병을 앓았습니다. 백범일지에 상하이에 온 뒤 '서반아 감기'로 20일을 치료받았다고 적었죠."
     },
@@ -31652,9 +31975,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "1918년 11월, 알래스카의 작은 마을 브레빅 미션. 닷새 동안 주민 80명 가운데 72명이 숨졌습니다."
     },
@@ -31664,9 +31987,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "1951년, 대학원생 요한 헐틴이 이 무덤을 찾아갔지만, 당시 기술로는 바이러스를 찾지 못했습니다."
     },
@@ -31760,6 +32083,7 @@
      "sit": "character-acts",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
       "illust"
      ],
@@ -31782,9 +32106,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "이 사진은 1918년 영국 글래스고의 한 병원입니다. 사진 설명에는 이렇게 적혀 있습니다."
     },
@@ -31802,9 +32126,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "1918년은 1차 세계대전의 마지막 해입니다. 미국, 영국, 프랑스, 독일. 큰 나라들은 모두 전쟁 중이었죠."
     },
@@ -31814,9 +32138,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "결정적인 건 1918년 5월이었습니다. 스페인 국왕 알폰소 13세가 이 병에 걸린 겁니다."
     }
@@ -31838,6 +32162,7 @@
      "sit": "character-acts",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
       "illust"
      ],
@@ -31849,6 +32174,7 @@
      "sit": "character-acts",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
       "illust"
      ],
@@ -31871,9 +32197,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "그런데 스페인은 이 전쟁에 끼지 않은 중립국이었습니다. 전시 검열이 없었죠. 스페인 신문들은 병이 퍼지는 걸 있는 그대로 썼습니다."
     },
@@ -31883,9 +32209,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "1918년은 무오년입니다. 조선에서는 이 병을 '무오년 독감', 또는 스페인의 옛 이름을 따 '서반아 감기'라고 불렀습니다."
     },
@@ -31895,9 +32221,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "1918년 11월, 알래스카의 작은 마을 브레빅 미션. 닷새 동안 주민 80명 가운데 72명이 숨졌습니다."
     }
@@ -31942,6 +32268,7 @@
      "sit": "character-acts",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
       "illust"
      ],
@@ -31984,6 +32311,7 @@
      "sit": "character-acts",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
       "illust"
      ],
@@ -31999,7 +32327,7 @@
    "project": "20261109-style-combo",
    "scenes": 14,
    "coverage": 0.93,
-   "fit": 0.15,
+   "fit": 0.23,
    "rows": [
     {
      "s": 1,
@@ -32030,6 +32358,7 @@
      "sit": "character-acts",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
       "illust"
      ],
@@ -32041,6 +32370,7 @@
      "sit": "character-acts",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
       "illust"
      ],
@@ -32069,11 +32399,11 @@
      "s": 7,
      "type": "footage",
      "sit": "open-scene",
-     "fit": false,
+     "fit": true,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "1918년은 1차 세계대전의 마지막 해입니다. 미국, 영국, 프랑스, 독일. 큰 나라들은 모두 전쟁 중이었죠."
     },
@@ -32094,9 +32424,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "결정적인 건 1918년 5월이었습니다. 스페인 국왕 알폰소 13세가 이 병에 걸린 겁니다."
     },
@@ -32117,9 +32447,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "결과는 어땠을까요. 2007년 미국 과학원 회보에 실린 연구가 같은 석 달 반 동안의 사망을 비교했습니다."
     },
@@ -32141,9 +32471,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "1918년은 무오년입니다. 조선에서는 이 병을 '무오년 독감', 또는 스페인의 옛 이름을 따 '서반아 감기'라고 불렀습니다."
     },
@@ -32187,9 +32517,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "2023년 미국 뉴욕의 한 법정. 변호사들이 낸 서류에 판례가 여러 개 적혀 있었습니다."
     },
@@ -32221,9 +32551,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "시작은 평범한 소송이었습니다. 비행기 안에서 서빙 카트에 무릎을 다쳤다는 거였죠."
     },
@@ -32321,9 +32651,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "사실 AI는 처음부터 실제보다 더 아는 것처럼 보였습니다. 1957년, 이 IBM 704 같은 기종에서 '퍼셉트론'이라는 초기 인공 신경망이 처음 돌아갔는데요."
     },
@@ -32373,9 +32703,9 @@
      "sit": "open-scene",
      "fit": true,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "2015년 10월, 일본 도쿄에서 열린 가전 전시회에서 냉장고만 한 기계 하나가 관람객의 발길을 붙잡았습니다."
     },
@@ -32408,9 +32738,9 @@
      "sit": "open-scene",
      "fit": true,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "컴퓨터가 처음 등장했을 때부터 연구자들은 기계의 지능을 체스로 시험하고 싶어 했습니다."
     },
@@ -32428,9 +32758,9 @@
      "sit": "open-scene",
      "fit": true,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "1997년 5월 11일 뉴욕에서 열린 재대결의 마지막 여섯 번째 대국에서 카스파로프는 19수 만에 자리에서 일어났고, 기계는 처음으로 현역 세계 챔피언을 상대로 "
     },
@@ -32459,9 +32789,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "훗날 카네기멜런 대학으로 옮긴 모라벡은 1988년 펴낸 책에 이 경험을 이렇게 정리했습니다."
     },
@@ -32482,9 +32812,9 @@
      "sit": "open-scene",
      "fit": true,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "모라벡의 수레가 방을 건넌 지 36년이 지난 2015년에도 이 벽은 크게 낮아지지 않았습니다."
     },
@@ -32527,9 +32857,9 @@
      "sit": "open-scene",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
-      "illust",
-      "story"
+      "illust"
      ],
      "say": "1994년 심리학자 스티븐 핑커는 35년에 걸친 인공지능 연구의 가장 큰 교훈을 어려운 문제는 쉽고, 쉬운 문제는 어렵다는 한 문장으로 정리했습니다."
     },
@@ -32574,6 +32904,7 @@
      "sit": "character-acts",
      "fit": true,
      "rec": [
+      "footage",
       "stage",
       "illust"
      ],
@@ -32635,6 +32966,7 @@
      "sit": "character-acts",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
       "illust"
      ],
@@ -32670,6 +33002,7 @@
      "sit": "character-acts",
      "fit": false,
      "rec": [
+      "footage",
       "stage",
       "illust"
      ],
@@ -45839,6 +46172,11 @@
   },
   {
    "s": "doc:04",
+   "t": "sec:04§0-8",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
    "t": "sec:04§1",
    "kind": "contains"
   },
@@ -46414,7 +46752,7 @@
   },
   {
    "s": "doc:12",
-   "t": "sec:12§h30",
+   "t": "sec:12§h32",
    "kind": "contains"
   },
   {
@@ -48094,6 +48432,15 @@
    ]
   },
   {
+   "s": "ver:60",
+   "t": "sec:04§0-8",
+   "kind": "touched",
+   "via": [
+    "changelog",
+    "tag"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -48297,6 +48644,11 @@
    "t": "ver:56",
    "kind": "applied_in",
    "how": "changelog"
+  },
+  {
+   "s": "rev:37",
+   "t": "ver:59",
+   "kind": "approved_in"
   },
   {
    "s": "rev:1",
@@ -49504,6 +49856,31 @@
    "kind": "about"
   },
   {
+   "s": "intent:d52c3fd6",
+   "t": "ver:60",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:d52c3fd6",
+   "t": "sec:04§0-8",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:d52c3fd6",
+   "t": "fb:74",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:d52c3fd6",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:d52c3fd6",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
    "s": "intent:c7688ffb",
    "t": "fb:16",
    "kind": "quoted_in"
@@ -50302,6 +50679,21 @@
    "s": "intent:7efa00c0",
    "t": "theme:script",
    "kind": "about"
+  },
+  {
+   "s": "intent:979d488c",
+   "t": "ver:60",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:979d488c",
+   "t": "rev:37",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:979d488c",
+   "t": "sec:04§0-8",
+   "kind": "quoted_in"
   },
   {
    "s": "intent:3ffec795",
@@ -52705,6 +53097,11 @@
   },
   {
    "s": "sit:curiosity:open-scene",
+   "t": "term:footage",
+   "kind": "uses"
+  },
+  {
+   "s": "sit:curiosity:open-scene",
    "t": "term:stage",
    "kind": "uses"
   },
@@ -52981,6 +53378,11 @@
   {
    "s": "sit:curiosity:conclusion",
    "t": "term:tech-match-move",
+   "kind": "uses"
+  },
+  {
+   "s": "sit:curiosity:character-acts",
+   "t": "term:footage",
    "kind": "uses"
   },
   {
@@ -54441,6 +54843,21 @@
   {
    "s": "fb:73",
    "t": "intent:d6ecaa95",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:74",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "fb:74",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "fb:74",
+   "t": "intent:d52c3fd6",
    "kind": "quoted_as"
   }
  ]
