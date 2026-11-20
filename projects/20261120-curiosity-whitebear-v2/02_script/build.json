@@ -4,15 +4,77 @@
  "channel": "ch-knowledge",
  "voice_dir": "v4",
  "ep_script": "scripts/anim/ep_whitebear_v4.py",
- "prep": ["scripts/anim/prep_whitebear.py", "{art}", "--paper", "{art}/paper_crop.png"],
- "art_sheets": ["night", "lab", "lab2", "mind", "end", "room", "lab3", "assoc", "sleep"],
+ "prep": [
+  "scripts/anim/prep_whitebear.py",
+  "{art}",
+  "--paper",
+  "{art}/paper_crop.png"
+ ],
+ "art_sheets": [
+  "night",
+  "lab",
+  "lab2",
+  "mind",
+  "end",
+  "room",
+  "lab3",
+  "assoc",
+  "sleep"
+ ],
  "assets": [
-  {"pdf": "https://dtg.sites.fas.harvard.edu/DANWEGNER/pub/Wegner,Schneider,Carter,&White%201987.pdf", "page": 1, "crop": [0.2, 0.16, 0.86, 0.43], "out": "paper_crop.png", "_src": "Wegner 외(1987) 첫 장 — 제목·저자·요약"},
-  {"pdf": "https://dtg.sites.fas.harvard.edu/DANWEGNER/pub/Wegner,Schneider,Carter,&White%201987.pdf", "page": 4, "crop": [0.05, 0.0775, 0.52, 0.479], "out": "ev_fig1.png", "_src": "같은 논문 8쪽 그림 1"},
-  {"pdf": "https://dtg.sites.fas.harvard.edu/DANWEGNER/pub/Wegner,Schneider,Carter,&White%201987.pdf", "page": 6, "crop": [0.04, 0.05, 0.5, 0.3], "out": "ev_tab2.png", "_src": "같은 논문 10쪽 표 2"},
-  {"url": "https://commons.wikimedia.org/wiki/Special:FilePath/LewisCarrollSelfPhoto.jpg?width=900", "out": "carroll_src.jpg", "_src": "루이스 캐럴 1857 사진, 퍼블릭 도메인"}
+  {
+   "pdf": "https://dtg.sites.fas.harvard.edu/DANWEGNER/pub/Wegner,Schneider,Carter,&White%201987.pdf",
+   "page": 1,
+   "crop": [
+    0.2,
+    0.16,
+    0.86,
+    0.43
+   ],
+   "out": "paper_crop.png",
+   "_src": "Wegner 외(1987) 첫 장 — 제목·저자·요약"
+  },
+  {
+   "pdf": "https://dtg.sites.fas.harvard.edu/DANWEGNER/pub/Wegner,Schneider,Carter,&White%201987.pdf",
+   "page": 4,
+   "crop": [
+    0.05,
+    0.0775,
+    0.52,
+    0.479
+   ],
+   "out": "ev_fig1.png",
+   "_src": "같은 논문 8쪽 그림 1"
+  },
+  {
+   "pdf": "https://dtg.sites.fas.harvard.edu/DANWEGNER/pub/Wegner,Schneider,Carter,&White%201987.pdf",
+   "page": 6,
+   "crop": [
+    0.04,
+    0.05,
+    0.5,
+    0.3
+   ],
+   "out": "ev_tab2.png",
+   "_src": "같은 논문 10쪽 표 2"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/Special:FilePath/LewisCarrollSelfPhoto.jpg?width=900",
+   "out": "carroll_src.jpg",
+   "_src": "루이스 캐럴 1857 사진, 퍼블릭 도메인"
+  }
  ],
  "edit_dir": "v4",
- "output": "whitebear_v4.mp4",
- "parts": 4
+ "output": "whitebear_v4_elevenlabs.mp4",
+ "parts": 4,
+ "voice_parts": {
+  "_doc": "클라우드에서 만든 ElevenLabs 채널 목소리(ch-knowledge, eleven_v4, 558.79초)를 Drive 연결 한도(3MB) 때문에 세 조각으로 넘김 — 2026-11-20 사용자 '권장으로'",
+  "dir": "cache",
+  "files": [
+   "whitebear_v4_voice_elevenlabs.mp3.part0",
+   "whitebear_v4_voice_elevenlabs.mp3.part1",
+   "whitebear_v4_voice_elevenlabs.mp3.part2"
+  ],
+  "sha256": "6cfa475fc158edd338e47229dc6a43b043604bd75ddb66fa11523e40f488659e"
+ }
 }

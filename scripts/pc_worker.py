@@ -106,7 +106,8 @@ def task_tree(branch: str) -> Path:
     if not (wt / ".git").exists():
         git(ROOT, "worktree", "add", "-f", "--detach", str(wt))
     git(wt, "fetch", "origin", branch)
-    git(wt, "checkout", "-B", f"pcw-{branch}"[:60], f"origin/{branch}")
+    git(wt, "checkout", "-f", "-B", f"pcw-{branch}"[:60], f"origin/{branch}")
+    git(wt, "reset", "--hard", f"origin/{branch}")   # 지난 시도가 고친 추적 파일(예: 초안 목소리의 sentences.json)을 브랜치 그대로로
     git(wt, "branch", f"--set-upstream-to=origin/{branch}", check=False)
     git(wt, "clean", "-fd", "-e", "projects/*/04_assets", "-e", "projects/*/03_voice", check=False)
     return wt

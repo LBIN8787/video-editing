@@ -107,6 +107,16 @@ def main() -> None:
 
     # 4) 목소리 (이미 있으면 그대로 — 같은 문장은 ElevenLabs 캐시)
     vdir = proj / "03_voice" / cfg.get("voice_dir", "v")
+    vp = cfg.get("voice_parts")   # 클라우드에서 만든 목소리를 Drive(3MB 조각)로 넘겨받은 경우: 이어 붙여 해시 확인
+    import hashlib
+    have = (vdir / "voice.mp3").read_bytes() if (vdir / "voice.mp3").exists() else b""
+    if vp and hashlib.sha256(have).hexdigest() != vp["sha256"]:   # 없거나 다른 목소리(예: 초안)면 바꿈
+        data = b"".join((Path(drive) / vp["dir"] / n).read_bytes() for n in vp["files"])
+        if hashlib.sha256(data).hexdigest() != vp["sha256"]:
+            raise SystemExit("목소리 조각을 이어 붙인 해시가 다릅니다 — Drive 동기화가 끝났는지 확인")
+        vdir.mkdir(parents=True, exist_ok=True)
+        (vdir / "voice.mp3").write_bytes(data)
+        print("목소리: Drive 조각에서 이어 붙임", len(data), "bytes")
     if not (vdir / "voice.mp3").exists():
         cmd = [sys.executable, ROOT / "scripts/anim/narrate.py", proj / cfg["narration"], vdir]
         if not a.draft_voice and (os.environ.get("ELEVENLABS_API_KEY") or cfg.get("force_elevenlabs")):

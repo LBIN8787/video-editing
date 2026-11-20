@@ -81,6 +81,8 @@ def note(s, text, x, y, t, size=78, color=INK, rot=-3, card=True, how="write", f
     """원화 위 손글씨 쪽지 (설명 자리 — 그림 위에 얹음)."""
     NID[0] += 1
     tid = f"n{NID[0]}"
+    if y >= 900:   # 자막 자리 위로 (PC 렌더 보정 868c763 반영)
+        y = 820
     s.text(tid, text, x, y, size=size, color=color, rot=rot, card=card, font=font)
     f._enter(t, tid, how, min(1.0, 0.05 * len(text) + 0.3))
     return tid
@@ -158,8 +160,8 @@ def evidence(sid, img, width=1300, bg="black.png", label="", cx=960):
     from PIL import Image
     iw, ih = Image.open(art / img).size
     h = width * ih / iw
-    if h > 900:
-        width, h = width * 900 / h, 900
+    if h > 800:   # 자막 자리 위로 (PC 렌더 보정 868c763 반영)
+        width, h = width * 800 / h, 800
     s.raw(f'<div style="position:absolute;left:{cx - width / 2 - 18:.0f}px;top:{520 - h / 2 - 18:.0f}px;width:{width + 36:.0f}px;'
           f'height:{h + 36:.0f}px;background:#fcfaf4;box-shadow:0 18px 40px rgba(0,0,0,.45)"><img src="{(art / img).as_uri()}" '
           f'style="position:absolute;left:18px;top:18px;width:{width:.0f}px;height:{h:.0f}px"></div>', z=5)
