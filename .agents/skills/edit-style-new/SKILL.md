@@ -29,7 +29,7 @@ manual 백엔드라면 `rules.json` 요청이 `.llm/requests/` 에 남습니다.
 4. STYLE.md 의 '구현 상태' 표에 지금 렌더러로 되는 것과 안 되는 것을 나눕니다.
 
 ## 4. 렌더러 정하기
-- **기존 렌더러로 충분하면:** `edit.yaml` 의 `style: sixsigma | paper` 와 색·속도만 바꿉니다.
+- **기존 렌더러로 충분하면:** `edit.yaml` 의 `style: sixsigma | paper | flat | hybrid` 와 색·속도만 바꿉니다.
 - **새 렌더러가 필요하면** `ytflow/stages/<renderer>.py` 를 만듭니다.
   - 인터페이스: `render_card(card, out_mp4_or_png, duration, seed)`, `render_paste(image, out, duration, caption, seed)`, `render_placeholder(out, duration, note, seed)`
   - 연결: `media.assets()` 와 `media.subtitles()` 에서 `edit.style` 로 분기합니다.
@@ -37,7 +37,7 @@ manual 백엔드라면 `rules.json` 요청이 `.llm/requests/` 에 남습니다.
 
 ## 5. 확인과 등록
 1. **시험 렌더링:** 기존 프로젝트를 복사하고 `edit.yaml` 을 새 스타일로 바꾼 뒤 `assets → subtitles → assemble` 을 돌립니다. 프레임을 뽑아 레퍼런스 시트와 나란히 비교합니다.
-2. **등록:** STYLE.md 의 `status` 를 `reviewed` 로 바꾸고, `styles/README.md` 표에 줄을 추가합니다.
+2. **등록:** STYLE.md 의 `status` 를 `reviewed` 로 바꾸고, `styles/recipes/_template.yaml` 로 레시피를 더하고(manual/07 §1), `styles/README.md` 표에 줄을 추가합니다. 움직이는 예시와 제작 명세도 함께 둡니다 (manual/12 §0-1, v66 — looks-gallery 다시 만들기).
 3. **스킬 추가:** `skills/edit-style-<id>/SKILL.md` 를 만든 뒤 `python scripts/sync_skills.py` 를 실행합니다.
 
 ## 지킬 것

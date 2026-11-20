@@ -12,9 +12,9 @@ seed_keywords: ["국제 정세", "지정학", "역사 사건", "당시 기록", 
 script_guide: manual/08-issues.md
 target_minutes: 13            # 심층 13~18분 / 빠른 정리 10~12분 (v24: 롱폼 최소 10분)
 cadence: "주 1~2편 (큰 사건은 48시간 안 빠른 정리 → 1주 안 심층)"
-voice: "미정 — ElevenLabs 로 정함 (차분하고 신뢰감 있는 30~40대 톤 권장)"
+voice: "ElevenLabs · Mina (aiUUgjHa4mpHf6UenZuf) — 아래 tts"
 tone: "실제 장면으로 시작 → 질문 하나 → 시간과 인과 → 자료 비교 → 결과와 의미. 시사는 기준 시각·당사자 입장, 역사는 자료의 작성 시기와 해석 범위를 밝힌다."
-needs_pc_rebuild: true        # 뉴스 영상 원본은 PC rebuild, 클라우드에서는 사진·지도·도식 중심
+needs_pc_rebuild: true        # 뉴스 영상 원본 구간은 clip-order → PC clip-fetch (docs/50), 클라우드에서는 사진·지도·도식 중심
 
 sourcing:
   start_from: document
@@ -33,7 +33,7 @@ demand:
   per_channel: 60
 
 # 목소리·배경음 (2026-11-10 시험 적용: 사우디 앞부분) — docs/08-voice.md, assets/bgm/bgm.yaml
-# 목소리: Mina (ElevenLabs 라이브러리) — 또렷·따뜻·차분, 친근하고 신뢰감 있는 대화체 → '재미있게 보는 뉴스' MC 톤. 다른 채널(남성)과 구분.
+# 목소리: Mina (ElevenLabs 라이브러리) — 또렷·따뜻·차분, 차분하고 신뢰감 있는 분석형 진행(manual/11-workflow §3-2, 인트로·MC 오프닝 없음 v24). 다른 채널(남성)과 구분.
 tts:
   backend: elevenlabs
   elevenlabs: {voice_id: aiUUgjHa4mpHf6UenZuf, model_id: eleven_v4, language_code: ko}

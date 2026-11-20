@@ -1,76 +1,63 @@
 # 영상편집 — ytflow
 
-유튜브 채널 **식스시그마**를 기준으로 하고 **AI비즈PT**와 **로제타**를 보조 기준으로 삼아,
-"영상 하나를 따라 만드는 것"이 아니라 **기획부터 편집까지 제작 시스템 전체를 벤치마킹해 자동화**하는 파이프라인입니다.
+조사해서 정리한 글을 **원고 → 대본 → 화면 → 영상**으로 바꾸는 유튜브 반복 제작 라인입니다.
+기준은 특정 레퍼런스 채널이 아니라 **제작 매뉴얼(`manual/`)과 네 채널**입니다. 채널은 사람의 욕망으로 나눕니다 (`channels/brands.yaml`).
+
+| 채널 | 욕망 | 매뉴얼 |
+|---|---|---|
+| ai | AI 를 더 잘 다루고 싶다 | `manual/02-ai.md` |
+| market | 돈의 흐름을 알아 이기고 싶다 | `manual/03-market.md`, 매일 운영 `manual/09-market-daily.md` |
+| curiosity | 궁금증을 풀고 싶다 | `manual/04-curiosity.md` |
+| issues | 세상이 어떻게 돌아가는지 알고 싶다 | `manual/08-issues.md` |
+
+레퍼런스 채널(식스시그마·머니크루·미주일기 등)은 **편집 스타일 하나하나의 출처**로만 씁니다 (`styles/<id>/STYLE.md`). 구조와 기법만 가져오고 대사·캐릭터·로고·썸네일은 복제하지 않습니다.
 
 ```
-벤치마킹(월1) → 소스탐색 → 주제선정⏸ → 리서치 → 대본⏸ → 음성 → 자막 → 화면소스 → 가편집⏸ → 업로드 패키지
+주제(욕망 → 트리거 → 질문, 지금의 고리) → 소스 → 자료조사 → 대본 ⏸사용자 → 편집점·연출 → 화면 → 자막·목소리 → check → 검토 ⏸사용자 → 업로드
 ```
 
-> **에이전트(Claude Code · Codex)로 작업한다면 [`AGENTS.md`](AGENTS.md) 부터 읽으세요.**
-> 단계별 절차는 [`skills/`](skills), 편집 스타일은 [`styles/`](styles), 에이전트별 차이는 [`docs/04-agents.md`](docs/04-agents.md) 에 있습니다.
-
-- **docs/01-benchmark.md**: 무엇을 어떻게 벤치마킹하나 (측정 틀, 장르 가설 체크리스트, 주의점)
-- **docs/02-workflow-sop.md**: 단계별 SOP, 사람과 자동화의 역할 분담, 크론 운영, 품질 체크리스트
-- **docs/03-benchmark-result.md**: 식스시그마·AI비즈PT 실제 벤치마킹 결과 (규칙 원본: `data/style_profile.json`)
+> **에이전트(Claude Code · Codex)라면 [`AGENTS.md`](AGENTS.md) → [`manual/README.md`](manual/README.md) 순서로 읽으세요.**
+> 단계별 절차는 [`skills/`](skills), 편집 스타일은 [`styles/`](styles), 업무 체계(단계·결정 지점)는 [`manual/11-workflow.md`](manual/11-workflow.md) 에 있습니다.
 
 ## 설치
 
 ```bash
-cd video-editing
-pip install -r requirements.txt     # ffmpeg/ffprobe 는 OS 패키지로 설치
+pip install -r requirements.txt      # Python 3.10+, ffmpeg·node 는 따로 설치
+python scripts/install_tools.py      # 외부 편집 도구 고정 버전 (tools/external.json)
+git config core.hooksPath .githooks  # 매뉴얼 잠금 검사 (docs/35)
+python -m ytflow --help
 ```
 
-**Claude 연결 방식** (`config/pipeline.yaml` → `llm.backend`)
-- `claude-cli` (기본): Claude Pro/Max **구독**으로 동작합니다. API 키가 필요 없습니다.
-  `npm install -g @anthropic-ai/claude-code` 로 설치하고, `claude` 를 한 번 실행해 구독 계정으로 로그인하세요. 구독 사용량 한도를 함께 씁니다.
-- `api`: Anthropic API를 씁니다. `export ANTHROPIC_API_KEY=...` 가 필요하고, 쓴 만큼 과금됩니다.
+LLM 연결은 `config/pipeline.yaml` 의 `llm.backend` 로 고릅니다: `claude-cli`(Claude 구독) · `codex-cli`(ChatGPT 구독) · `api`(API 키, 사용량 과금) · `manual`(에이전트가 대화 안에서 직접 판단). 자세한 표는 `AGENTS.md` '환경'.
 
-1. `config/channels.yaml`: 벤치마킹 채널 목록입니다. 식스시그마(기준)와 AI비즈PT가 들어 있고, 로제타는 주소를 확인하면 추가합니다.
-2. `config/pipeline.yaml`: 채널 분야, 시드 키워드, TTS 목소리, 폰트, BGM, 게이트를 설정합니다.
-
-## 빠른 시작
+## 한 편 만드는 흐름 (요약)
 
 ```bash
-python -m ytflow benchmark --video        # data/style_profile.json 생성
-python -m ytflow new "첫-영상"
-python -m ytflow run 첫-영상                # 게이트마다 멈추면 approve 후 다시 run
+python -m ytflow daily --brand market --project 20261120-market-daily   # 매일 브리핑 주제 찾기 (시장·시사)
+python -m ytflow edit-plan <프로젝트>      # 박자마다 상황 → 장면·연출 (편집 전에 EDIT_CONTEXT.md 먼저 읽기)
+python -m ytflow hybrid <프로젝트>         # 02_script/hybrid.json → final.mp4 (끝에 sync-qa 자동)
+python -m ytflow check <프로젝트>          # 매뉴얼 체크리스트 (MUST 실패 시 종료 코드 1)
+python -m ytflow review <프로젝트> --pass | --reject "이유"
+python -m ytflow yt-pack <프로젝트>        # 설명란·제목 후보·태그
+python -m ytflow yt-publish <프로젝트>     # 업로드·예약 공개·썸네일·자막 (공식 API, docs/24)
 ```
 
-## 구성
+명령 전체와 '하려는 일 → 읽을 파일' 표는 `AGENTS.md` 에 있습니다.
 
-| 경로 | 내용 |
-|---|---|
-| `ytflow/stages/benchmark.py` | 채널 outlier, 제목, 자막 훅, 말 속도, 컷 속도 측정 → Claude가 스타일 규칙 추출 |
-| `ytflow/stages/discover.py` | 키워드 최신 영상 + 구독자 대비 조회수 아웃라이어 + RSS |
-| `ytflow/stages/writing.py` | 주제 선정, 팩트시트, 씬 단위 대본, 업로드 패키지 (Claude 구조화 출력) |
-| `ytflow/stages/media.py` | TTS/녹음 정리, ASS/SRT 자막(강조색, 큰글씨), 샷리스트, ffmpeg 가편집, 타임라인 CSV |
-| `prompts/*.md` | 각 단계 프롬프트. 채널 톤에 맞게 자유롭게 고치세요 |
-| `data/`, `projects/` | 실행 결과 (git 제외) |
+## 어디에 무엇을 두나
 
-## 편집 스타일 라이브러리 (`styles/`)
+- **Git:** 코드·매뉴얼·설정·기획 문서(md/json/csv/yaml). `projects/<영상>/` 의 기획 문서도 커밋합니다.
+- **Google Drive:** 완성 영상·음성·원자료처럼 큰 파일. Git 에는 위치·판본만 남깁니다 (`docs/09-storage.md` §0).
+- 미디어(mp4/wav/png/jpg)와 `.llm/` 은 커밋하지 않습니다 (`.gitignore`).
 
-| id | 기준 채널 | 화면 | 사용 |
-|---|---|---|---|
-| `sixsigma` | 식스시그마 | 원본 영상 중심, 검은 배경 인포 카드, 출처 라벨, 원문+번역 2단 자막 | `make --style-ref sixsigma` |
-| `mijudiary` | 미주일기 | 종이 질감, 손그림 선이 그려지는 애니메이션, 숫자 카운트업, 콜라주, 상자 자막 | `make --style-ref mijudiary` |
+## 클라우드에서 안 되는 일
 
-새 스타일은 레퍼런스 영상으로 `python -m ytflow style <id> <파일> --title <이름>` 을 실행해 추가합니다(`skills/edit-style-new`).
+YouTube 는 클라우드 서버의 영상 받기·재생을 막습니다. 우회하지 않습니다.
+- 원본 발언 구간은 클라우드가 주문서를 쓰고(`clip-order`) 사용자 PC 가 받습니다(`clip-fetch`, `docs/50-clip-lane.md`). PC 할 일은 `inbox/pc-tasks/` 에 쌓입니다.
+- 그 밖에 막히는 일(재생·자막·로그인 페이지)은 `inbox/requests/` 로 피클에게 요청합니다.
+- 클립이 아직 없는 장면은 노란 '임시' 표시 화면이 들어갑니다. 업로드 전에 실제 자료로 바꿔야 합니다.
 
-## 원본 클립 넣기 (본인 PC)
+## 처음 설계 (기록)
 
-YouTube 는 클라우드 서버의 영상 다운로드를 막습니다. 그래서 실제 클립은 본인 PC에서 받아야 합니다.
-```bash
-python -m ytflow rebuild 20261105-첫영상-a     # 클립 받기 → 음성 → 화면 → 자막 → 가편집
-```
-- **봇 확인이 뜨면:** `config/pipeline.yaml` → `clips.cookies_from_browser: chrome` 으로 설정합니다.
-- **받기 실패한 구간:** `04_assets/clips.csv` 에 URL·구간이 남습니다. 직접 받은 파일을 `04_assets/scene_XXX.mp4` 로 넣고 다시 `rebuild` 하면 됩니다.
-- **임시 화면:** 클립이 없는 장면은 그 영상의 공개 썸네일로 만든 **임시 화면**(노란 '임시' 표시)이 들어갑니다. 업로드 전에 반드시 실제 클립으로 바꿔야 합니다.
-
-## 한계 (솔직하게)
-
-- 이 도구를 만든 환경에서는 YouTube에 접속할 수 없어서, **세 채널의 실제 측정은 아직 하지 않았습니다**.
-  처음 `benchmark` 를 돌렸을 때 나오는 결과가 진짜 벤치마킹입니다.
-- `draft.mp4` 는 **가편집**입니다. 밈 삽입, 정밀한 효과음 위치, 색보정은 편집자가 `timeline.csv` 를 보며 마무리합니다.
-- YouTube 페이지 구조가 바뀌면 yt-dlp를 업데이트해야 할 수 있습니다 (`pip install -U yt-dlp`).
-- 업로드는 자동화하지 않았습니다 (최종 확인은 사람이 하도록).
+처음(2026-11 초)에는 식스시그마를 기준 채널, AI비즈PT를 보조로 삼아 `benchmark` 로 대본 규칙(`data/style_profile.json`)을 뽑는 구조였습니다.
+지금은 매뉴얼과 채널별 기준이 그 역할을 하고, 벤치마킹 기록은 `docs/01-benchmark.md`·`docs/03-benchmark-result.md` 에 남아 있습니다. 로제타는 채널을 특정하지 못해 제외했습니다.

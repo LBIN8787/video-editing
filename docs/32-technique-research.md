@@ -7,7 +7,7 @@
 ## 가장 큰 발견: GSAP 플러그인이 모두 무료
 우리가 이미 고정해 쓰는 `gsap@3.13.0`(tools/external.json)부터 SplitText·MorphSVG·DrawSVG·ScrambleText·Flip·MotionPath 등 예전 유료(Club) 플러그인이 **모두 무료, 상업 사용 가능**(GreenSock standard no-charge license, Webflow 인수 후). → 새 의존성 없이 글자 쪼개기·스크램블·모프·매치 무브·모션 패스를 렌더러에 더할 수 있다. (클라우드에는 tools/ 가 설치돼 있지 않아 플러그인 파일 존재는 PC 에서 `python scripts/install_tools.py` 후 확인.)
 
-## 카탈로그 (20개, 모두 '스타일 기본값' 층 — 금지·MUST 아님)
+## 카탈로그 (처음 20개로 시작 — 지금 목록은 `styles/techniques.yaml` 이 원본, 모두 '스타일 기본값' 층 — 금지·MUST 아님)
 | 묶음 | 기법 | 상태 | 쓸 도구 (라이선스) |
 |---|---|---|---|
 | 글자 | 글자 쪼개 등장 | 비슷한 것 있음 (kinetic) | GSAP SplitText (무료) |

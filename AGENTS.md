@@ -2,7 +2,7 @@
 
 이 저장소는 **유튜브 영상 제작 워크플로우**를 코드와 문서로 담은 것입니다.
 조사해서 글로 정리하던 일(대화형 LLM 의 답을 다듬던 일)을 이어서, 그 글을 **원고 → 대본 → 화면 → 영상**으로 바꾸는 반복 제작 라인입니다.
-롱폼은 장편 칼럼·보고서 분석, 쇼츠는 짧은 주제 안내입니다. 편집 스타일 하나가 유튜브 채널 하나입니다(`channels/`).
+롱폼은 장편 칼럼·보고서 분석, 쇼츠는 짧은 주제 안내입니다. 채널은 사람의 욕망 하나로 나뉘고(`channels/brands.yaml`), `channels/<id>/` 는 그 아래의 제작 라인(형식 + 기본 편집 스타일)입니다.
 **순서: 소스 먼저 → 소스가 강한 주제·형식 결정 → 글(원고) → 소스에 맞춘 편집 → 편집 스타일은 그 위에.**
 서술할 내용이 많고 자세한 분석이면 롱폼, 한 가지를 알려 주는 정보형이면 쇼츠로 나눕니다(다른 형식 소재는 그 채널 대기열로).
 주제 선정 → 소스 탐색 → 자료조사 → 대본 → 편집점 → 편집 스타일 → 자막 → 업로드 준비 순서로 진행합니다.
@@ -17,7 +17,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 ## 먼저 읽을 것
 | 하려는 일 | 읽을 파일 |
 |---|---|
-| **제작 매뉴얼 (욕망 → 주제 → 조사 → 대본 → 연출 → 검사)** | `manual/README.md` → `manual/01~06` |
+| **제작 매뉴얼 (욕망 → 주제 → 조사 → 대본 → 연출 → 검사)** | `manual/README.md` → `manual/01~12` |
 | **편집 스타일 등록부·자동 추천** (상황에 맞는 스타일, 파일 하나로 늘림) | `styles/recipes/`, `python -m ytflow style-pick <프로젝트>`, `manual/07-extend.md` |
 | **스타일 풀 늘리기** (조사·후보·라이선스, 새 장면 chat·terminal·zoomshot·choropleth·mark, 세로 쇼츠 Claude 판) | `docs/17-style-pool.md`, `skills/edit-style-pool`, `python -m ytflow short <프로젝트>` |
 | **시사·역사 채널** — 기존 스페인독감 편처럼 실제 자료·지도·연표·비교로 사건을 설명 | `manual/08-issues.md` §0-3, `channels/ch-issues/` |
@@ -32,17 +32,17 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **기술 분석·미래 전망 + CEO 소식 (v42, 2026-11-17)** — 시장 채널이 기술이 어디로 가는지도 다룸(로드맵·학회·리서치 → 누가 이기나·시간표·틀리는 경우), CEO 의 말과 행동을 매일 모음(`config/ceo_watch.yaml` → daily_brief ⑥-1·⑥-2, 팩트시트 `## CEO 소식`) | `manual/09-market-daily.md` §2-2·§3-4-2 |
 | **뉴스레터 소재 (2026-11-15)** — 구독한 무료 뉴스레터를 매일 모아 채널별 소재 목록(제목·링크·분류만). SAVE 와 같은 '단서' 자리: 문장을 옮기지 않고 숫자·발언은 1차 출처로 | `docs/36-newsletters.md`, `manual/09-market-daily.md` §3-0-1, `inbox/newsletters/`, `python -m ytflow newsletters` |
 | **유튜브 올리기·관리 자동화** — 업로드·설명란(더보기)·태그·카테고리·예약 공개·썸네일·자막·재생목록 (공식 API, GitHub Actions) | `docs/24-youtube-publish.md`, `python -m ytflow yt-publish <프로젝트>`, `scripts/youtube_auth.py`, `.github/workflows/youtube-publish.yml` |
-| **주식 채널 개설 계획** — 이름 후보(겹침 확인)·1일 1영상 운영(평일 아침 브리핑·심층·주말 분석) | `docs/23-stock-channel-plan.md`, `channels/ch-market-daily/channel.yaml` |
+| **주식 채널 개설 계획** — 이름 후보(겹침 확인)·1일 1영상 운영(처음 계획 — 지금 운영은 `manual/09-market-daily.md`: 기본 심층, 토 주간 종합·일 한 주 점검) | `docs/23-stock-channel-plan.md`, `channels/ch-market-daily/channel.yaml` |
 | **어닝콜 해부·연결과 의미 (v18)** — 숫자·약속 → 시장의 걱정과 경영진의 답(원문+번역) → 무엇으로 이어지나(해석) → 남은 숙제 | `manual/03-market.md` §0-1, `ytflow/stages/earnings.py` |
 | **호기심 채널: 설명보다 호기심 먼저 (v18)** — 첫 문장부터 훅(답은 숨김, 인트로 없음 v24) → 이야기, 제목은 훅에서 | `manual/04-curiosity.md` §0, `topic_brief.hook` |
 | **원본 발언 컷편집 (v20)** — 어닝콜·기자회견 긴 원본에서 대본과 맞는 문장만 단어 단위로 잘라 그 사람의 목소리로 (`bite` 장면, 원문·번역 2단) | `styles/source-cut/STYLE.md`, `skills/edit-style-source-cut`, `python -m ytflow cut <프로젝트>`, `ytflow/stages/cutedit.py` |
 | **손그림 삽화 (v20)** — 삽화 한 장 위를 카메라가 박자마다 옮겨 가며 설명 (붓 쓸기 등장·boil·손그림 표시·생각 풍선, 그림체는 자유). 그림은 사람이 준비 | `styles/illustrated/STYLE.md`, `skills/edit-style-illustrated`, `python -m ytflow art-brief <프로젝트>`, `ytflow/stages/illust.py` |
 | **레퍼런스 2편 분석 (2026-11-13)** — 뉴스 데스크 카드(한 소식 = 한 장, `newsdesk` 장면) · 훅 쇼츠(얼굴 없이: 실제 화면 꽉 채움·훅 제목·큰 자막·튀어나오는 카드) · 말하는 사람 쇼츠(본인 촬영 있을 때만), 기존 스타일과 차이·장단점, AI 채널 적용 | `docs/25-reference-2611.md`, `styles/news-desk/`, `styles/recipes/hook-shorts.yaml`, `python -m ytflow hookshort <프로젝트>`, `python -m ytflow presenter <프로젝트>` |
 | **이야기 그림판 — 호기심 채널 이야기형 (v21)** — 말하는 순간 종이 위에 사람·사물이 선으로 그려지고 카메라가 따라감, 정보형(주식)과 다른 양식, 썸네일 `board` | `manual/04-curiosity.md` §0-4, `styles/story-board/STYLE.md`, `skills/edit-style-story-board`, `ytflow/stages/story.py`, `scripts/curiosity_story/make.py` |
-| **인트로 없음·대본 형식/진행/말투 (v24, 모든 채널)** — 인사·채널 소개·순서 예고 없이 첫 문장부터 본론, 미주일기 문법(여는 장면 → 질문 → 한 줄기 이야기를 시간 순서로 → 수미상관 → 의미), 3인칭 다큐 내레이터 '~습니다' | `manual/README.md` §2-1·§2-3, `docs/30-script-voice.md` |
+| **인트로 없음·대본 형식/진행/말투 (v24, 모든 채널)** — 인사·채널 소개·순서 예고 없이 첫 문장부터 본론, 미주일기 문법(여는 장면 → 질문 → 한 줄기 이야기를 시간 순서로 → 수미상관 → 의미), 말투는 호기심 = 3인칭 다큐 내레이터 '~습니다', 시장·시사·AI = 분석형 어미 혼합(`manual/11-workflow.md` §3-2) | `manual/README.md` §2-1·§2-3, `docs/30-script-voice.md` |
 | **시청자 먼저 — 호기심 채널 (v23)** — 상권 조사처럼 주 시청자·유입 경로·유입 이유를 먼저(`01_research/audience.md`), 대본에서 인물의 행동 또는 실험이 남긴 질문을 따라갈 이유를 찾아 `intent.md`에 기록, **편집 전에 대본만 사용자 검토** | `docs/29-curiosity-audience.md`, `manual/04-curiosity.md` §0-6, `scripts/curiosity_research.py` |
 | **의도 먼저 — 애니메이션 무대 (v22)** — 만들기 전에 제작 목표·시청자 욕망·기억할 한 장면(`02_script/intent.md`), 장면 goal·박자 why 필수, 한 화면 한 생각·글자 하나·대본의 동사를 그림이 연기 (`stage` 장면) | `manual/04-curiosity.md` §0-5, `styles/anim-stage/STYLE.md`, `ytflow/stages/stage.py` |
-| **대본 → 그림·애니메이션 (호기심)** — AI 그림 조각(cut·pose·move) vs 관절 인형(puppet), 그림 생성 여러 길(ElevenLabs·OpenAI GPT Image·Gemini·Codex 구독·수동) | `docs/27-story-animation.md`, `docs/28-save-and-imagegen.md` §2, `python -m ytflow art-gen <프로젝트> --backend ...`, `python -m ytflow art-cut`, `ytflow/stages/imagegen.py`, `ytflow/stages/puppet.py` |
+| **대본 → 그림·애니메이션 (호기심)** — AI 그림 조각(cut·pose·move) vs 관절 인형(puppet), 그림 생성 여러 길(OpenAI GPT Image·Gemini·Codex 구독·수동 — ElevenLabs 로는 그리지 않음, 2026-11-20 사용자) | `docs/27-story-animation.md`, `docs/28-save-and-imagegen.md` §2, `python -m ytflow art-gen <프로젝트> --backend ...`, `python -m ytflow art-cut`, `ytflow/stages/imagegen.py`, `ytflow/stages/puppet.py` |
 | **움직이는 비유 애니메이션 (따로 쓰는 스타일, 매뉴얼 기준 아님·품질 보완 필요)** — 무리가 한쪽으로 옮겨 가고 의태어가 튀어나오는 비유 장면 (`metaphor` 장면, migrate·pop). 사용자가 고를 때만 | `styles/motion-metaphor/STYLE.md`, `docs/22-motion-reference.md`(레퍼런스 재분석·v2 방향), `styles/recipes/motion-metaphor.yaml`, `ytflow/stages/motion.py` |
 | **매뉴얼 그래프·의도 정렬·고치기 도구** — 한눈에(통과·금지·충돌 후보)·작업 절차 흐름도·내 피드백 → 매뉴얼 카드·용어 사전(스타일·장면·효과·움직임이 무엇이고 어떻게 구현됐나, `manual/glossary.yaml`), 내가 한 말(원문) → 모델 해석(버전) → 매뉴얼 규칙 → 코드·검사 → 검토 결과가 맞는지 판정(`manual/intents.yaml`: 뜻한 것·뜻하지 않은 것·과잉 해석/충돌), 검토 → 반영 버전 → 고친 절·게이트·규칙·검사 코드를 그래프로(`manual/graph.json`, 에이전트가 읽는 정책 그래프), 브라우저에서 매뉴얼 편집·검토 기록·버전 올리기 | `docs/31-manual-graph.md`, `python -m ytflow manual-graph`, `python -m ytflow manual-ui`, `ytflow/stages/manualgraph.py` |
 | **레포 구조: 메인 → 주제 레포 → 상황 → 영상 (2026-11-15)** — 매뉴얼이 메인 레포, `topics/<brand>/topic.yaml`(주식·호기심·AI·시사)이 메인을 물려받아 기본값·상황을 바꾸고 더함. 영상마다 `edit-plan` 으로 박자별 상황 → 장면 종류·연출 기법을 채우고 `02_script/EDIT_CONTEXT.md` 를 **편집 전에 먼저 읽음** | `docs/33-repo-layers.md`, `topics/README.md`, `manual/situations.yaml`, `python -m ytflow topics`, `python -m ytflow edit-plan <프로젝트>`, `ytflow/stages/layers.py` |

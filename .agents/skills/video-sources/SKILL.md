@@ -41,6 +41,7 @@ quote 장면 클립은 앞뒤 3초 여유로 받은 뒤 `ytflow/stages/align.py`
 모델은 `config/pipeline.yaml` 의 `align.model`(기본 small). 처음 실행 때 모델을 내려받습니다.
 
 ## 3. PC 에서 실제 클립 채우기
+> hybrid 영상(`02_script/hybrid.json`)의 원본 발언 구간은 `clip-order` → PC `clip-fetch` (docs/50). 아래는 옛 make 파이프라인(scenes.json)의 `rebuild` 입니다.
 - 클라우드 서버에서는 YouTube 가 영상 다운로드를 봇 확인으로 막습니다. **우회하지 않습니다.**
 - 사용자 PC 에서 `python -m ytflow rebuild <프로젝트>` 를 실행하게 합니다.
 - 봇 확인이 뜨면 `clips.cookies_from_browser: chrome` 을 설정합니다.

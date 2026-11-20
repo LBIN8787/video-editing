@@ -20,7 +20,7 @@
 | WhisperX | (선택) BSD-2 | 음소 단위가 더 필요할 때 `align.engine` 확장 예정. torch 가 필요해 기본 설치에서 뺌 | — |
 | **hand-drawn-diagrams** (시범) | commit `c8ffd6c`, MIT (원본 muthuishere) | 에이전트 skill 로 설치(`.claude/skills`, `.agents/skills`). 복잡한 구조도(공급망·지배구조)를 Excalidraw 손그림으로 그려 PNG 를 `04_assets/scene_XXX_shot.png` 로 넣고 rebuild → 미주일기 종이 콜라주로 들어감 | ⚠ 렌더 스크립트가 **스스로 `uv run playwright install chromium` 으로 브라우저를 내려받음** → PC 에서만 렌더. 편집 링크는 작성자 GitHub Pages 주소에 그림 데이터를 URL 로 실어 엶(서버 업로드 아님) |
 | 효과음 skill (vibe-motion/sound) | — | **보류 유지**: 저장소에 LICENSE 파일이 없음(=사용 허락 없음). Freesound API 키 필요. ElevenLabs 를 쓰게 되면 ElevenLabs 효과음 생성 API 가 대안 | |
-| **목소리** | ElevenLabs | `tts.backend: elevenlabs` 구현(캐시·글자별 시각). **영상 확정 후 목소리를 골라 적용** → `docs/08-voice.md` | 가짜 응답으로 요청 형식·캐시 확인(실제 호출 안 함) |
+| **목소리** | ElevenLabs | `tts.backend: elevenlabs` 구현(캐시·글자별 시각). **영상 확정 후 목소리를 골라 적용** → `docs/08-voice.md` | 실제 생성·voice-import 로 운영 중 (docs/08) |
 
 ## 2차 조사: 지금 파이프라인에 맞는 후보
 | 후보 | ★ / 라이선스 | 채우는 빈칸 | 판단 |
@@ -29,7 +29,7 @@
 | [hand-drawn-diagrams](https://skills.sh/nexu-io/open-design/hand-drawn-diagrams) (open-design) | 106k / Apache-2.0 (모음 저장소) | 글 → Excalidraw 손그림 도식 + 애니메이션 SVG | 시범 가치 있음: 복잡한 구조도(공급망·지배구조)를 손그림으로. 원본(upstream) 라이선스는 미확인 |
 | [faster-whisper](https://github.com/SYSTRAN/faster-whisper) / [WhisperX](https://github.com/m-bain/whisperX) | 26.5k MIT / 25.1k BSD-2 | 단어 단위 시각: 원본 소스형(식스시그마)의 발언 구간 정밀 자르기, 원본 발언 자막 | **원본 소스형에 도입 권장** (사용자 PC rebuild 때 로컬 실행). video-use 의 유료 받아쓰기 대신 |
 | [vibe-motion/sound](https://github.com/vibe-motion/sound) | 291 / 라이선스 표기 없음 | Freesound 효과음 검색·다운로드(펜 긋는 소리·종이 소리·팝) | 보류: 저장소 라이선스 표기가 없고 Freesound API 키(무료) 필요. 효과음 파일마다 라이선스 확인 필요 |
-| 한국어 TTS: [MeloTTS](https://github.com/myshell-ai/MeloTTS)(MIT), CosyVoice(Apache-2.0) | 7.7k / MIT | 지금 쓰는 edge-tts 는 비공식 경로라 **수익 채널에서는 약관 위험** | 운영 전 결정 필요: ① 본인 녹음(manual) ② Azure 공식 TTS(유료, 저렴) ③ 오픈 모델(품질 시험 필요) |
+| 한국어 TTS: [MeloTTS](https://github.com/myshell-ai/MeloTTS)(MIT), CosyVoice(Apache-2.0) | 7.7k / MIT | 지금 쓰는 edge-tts 는 비공식 경로라 **수익 채널에서는 약관 위험** | 결정됨: 초안 edge, 공개 최종본 ElevenLabs (docs/08, AGENTS '목소리') |
 | vidIQ (이 세션에 연결된 커넥터) | — | 제목 점수·썸네일 생성·키워드·경쟁 채널 분석 | 업로드 패키지 단계에 활용 가능 (크레딧 차감) |
 | 썸네일 skill (ez-thumb, claude-thumbnails 등) | 수십 개 / Gemini 유료 | 썸네일 생성 | 보류: 대부분 유료 이미지 API 필요, 검증된 것이 적음 |
 | HyperFrames registry (약 450 블록) | 위와 같음 | 전환 효과·차트·키네틱 타이포 | 시범: `hyperframes add` 로 장 전환 블록 1~2개 |

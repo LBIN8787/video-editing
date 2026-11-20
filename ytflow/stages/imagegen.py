@@ -15,7 +15,7 @@
 | openai | OpenAI Images API (gpt-image-2 계열, OPENAI_API_KEY) — 투명 배경 지원, 품질 low/medium/high 로 값 조절 |
 | gemini | Google Gemini API 이미지 (Nano Banana 계열, GEMINI_API_KEY) — 참조 그림으로 같은 인물 유지에 강함 |
 | codex  | 사용자 PC 의 Codex CLI($imagegen, ChatGPT 구독 한도 안) — 로그인된 PC 에서만, 추가 요금 없음 |
-| manual | 주문서(02_script/art_orders.md)만 씀 → 에이전트가 ElevenLabs 커넥터(GPT Image 2.6·Seedream 등)로 만들거나 사람이 그림을 넣음 |
+| manual | 주문서(02_script/art_orders.md)만 씀 → 사람이 ChatGPT 웹·Canva 등으로 만들어 넣음 (ElevenLabs 로는 그리지 않음, 2026-11-20 사용자) |
 키는 채팅에 쓰지 않고 환경변수·네트워크 비밀값으로 (AGENTS.md 규칙).
 """
 from __future__ import annotations
