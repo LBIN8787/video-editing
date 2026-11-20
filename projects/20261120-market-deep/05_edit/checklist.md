@@ -1,6 +1,6 @@
 # 체크리스트 — 20261120-market-deep
 
-매뉴얼 v62 · 2026-11-20T16:49:26 · **통과**
+매뉴얼 v62 · 2026-11-20T16:53:36 · **통과**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
@@ -80,7 +80,7 @@
 | G5 | 참고 | 스타일 조합: 가장 많이 쓴 스타일의 몫·겹친 장면·같은 스타일 연속 | ℹ️ | data-report 0.31 · 겹침 1 · 최장 연속 3 |
 | G5 | 참고 | 강조 횟수·강조가 겹친 장면 — 기억할 숫자·반전·결론에만 썼는지 (05 §0-1) | ✅ | 1번 [(36, 'kinetic')] · 겹친 장면 [] |
 | G5 | SHOULD | 핵심 단어 띄우기에 문장을 쓰지 않음 — 자막과 같은 내용을 위에 반복하지 않음 (v3) | ✅ | [] |
-| G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ✅ | paper-sketch / 등록부 ['blueprint', 'clean-flat', 'clean-white', 'corkboard', 'dark |
+| G5 | SHOULD | 그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes) | ✅ | paper-sketch / 등록부 ['blueprint', 'clean-flat', 'clean-white', 'corkboard', 'crum |
 | G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ✅ | python -m ytflow style-pick <프로젝트> |
 | G5 | SHOULD | edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움) | ✅ | python -m ytflow edit-plan <프로젝트> → 02_script/EDIT_CONTEXT.md |
 | G6 | MUST | final.mp4 | ✅ |  |
@@ -88,11 +88,13 @@
 | G6 | 참고 | 무대 화면: 한꺼번에 보이는 것·글자·멈춘 박자 (한 화면 한 생각인지 눈으로, 04 §0-5) | ✅ | {} |
 | G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 0.989, 'p95_abs_offset': 0.11, 'median_abs_offset': 0.05, 'video |
 | G6 | SHOULD | 납품 점검(음량 등) | ✅ | completed |
-| G6 | 참고 | 움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5) | ℹ️ | 변화 5.6/분 · 정지 0.75 |
+| G6 | 참고 | 움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5) | ℹ️ | 변화 6.9/분 · 정지 0.72 |
 | G6 | SHOULD | 최종 목소리 ElevenLabs | ✅ |  |
 | G7 | MUST | 제목 후보 3개 + 이유 | ✅ |  |
 | G7 | MUST | 썸네일 A/B/C + 점검 ok | ✅ |  |
 | G7 | 참고 | 제목 앞부분에 질문·핵심 (목록에서 잘려도 무슨 영상인지 보이게) | ✅ | 앤트로픽 상장 날, 시장은 왜 2% 빠졌 |
+| G8 | MUST | GitHub Release 업로드 | ✅ |  |
+| G8 | MUST | episodes.md 기록 | ✅ | ch-market-daily |
 
 **참고**(ℹ️)는 실패가 아니라 측정값입니다 — 숫자를 맞추지 말고, 표시된 곳이 그 연출의 원리(manual/05 §0-0)에 맞는지 화면 확인(D3)에서 봅니다.
 사람 눈 검사(EYE)는 manual/06-checklist.md 끝의 5가지를 확인하세요.
