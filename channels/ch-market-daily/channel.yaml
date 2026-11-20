@@ -16,7 +16,7 @@ target_minutes: 10            # v24: 롱폼 최소 10분
 cadence: "하루 1편 이상 (상한 없음, 2026-11-17 사용자: 소스·인터뷰·주제가 많으면 하루 세 편까지도 — manual/09 §2-1) — 장이 열린 다음 날 아침: 시장 브리핑 + 시장을 흔든 이슈 + 매체·인물 인사이트 분석(복잡하면 심층) / 장이 닫힌 날(토·일·휴장): 한 주 종합 점검 — 토 이슈 종합(weekly), 일 인사이트 점검(review) + 다음 주 일정·실적 (manual/09 §2, v30)"
 schedule:
   weekday: {kind: briefing, minutes: [10, 12], upload: "08:30 KST (자동 제작 07:00 시작)"}
-  deep_dive: {kind: deep_dive, minutes: [12, 15], when: "요일 고정 아님 — 주제의 복잡도로 매일 정함 (docs/23 §2 신호 둘 이상), 그날의 1편을 대신하고 앞 1분은 시장 요약"}
+  deep_dive: {kind: deep_dive, minutes: [12, 20], when: "기본 (v63, 2026-11-20 사용자: 어지간하면 항상 심층) — 장이 열린 다음 날은 심층이 그날의 1편, 앞 1분은 시장 요약. 심층거리가 없는 날만 브리핑 (manual/09 §2)"}
   saturday: {kind: weekly_review, minutes: [10, 15]}
   sunday: {kind: analysis, minutes: [10, 15]}
   holidays: "미국·한국 휴장일은 쉬거나 주간 분석으로"
