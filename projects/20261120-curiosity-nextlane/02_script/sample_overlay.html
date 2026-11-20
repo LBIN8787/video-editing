@@ -71,7 +71,7 @@ function queue(sc,t,B){
     h+=`<div class="abs" style="left:${meX-60}px;top:${TOP+meY*STEP+42}px;width:120px;text-align:center;font-family:GX;font-size:28px;color:${Y};opacity:${me}">나</div>`}
   // 장면 2: 세 줄 모두 '4명' (같은 출발선)
   if(q===2){[[1,B[0].kw[1]],[0,B[1].kw[0]],[2,B[1].kw[1]]].forEach(([k,t0])=>{const p=eb(P(t,t0-0.1,0.4));
-    h+=`<div class="abs" style="left:${LX[k]-50}px;top:${TOP+3*STEP+52}px;width:100px;text-align:center;font-family:GX;font-size:34px;opacity:${cl(p)};transform:scale(${.6+.4*p})">4명</div>`})}
+    h+=`<div class="abs" style="left:${LX[k]-50}px;top:${TOP-178}px;width:100px;text-align:center;font-family:GX;font-size:34px;opacity:${cl(p)};transform:scale(${.6+.4*p})">4명</div>`})}
   // 장면 3: 2분이 흐르는 시계 (빠르게 감기)
   if(q===3){const c0=B[0].kw[0], p=P(t,c0,2.4), o=cl(P(t,c0-0.2,0.3));
     h+=`<div class="abs" style="left:1180px;top:40px;opacity:${o};font-family:GX;font-size:60px;text-shadow:0 2px 10px #000">${mmss(120*eio(p))}
