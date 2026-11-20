@@ -377,7 +377,7 @@ def main():
             "title_why": ["훅(역설 질문, 답 숨김) + 핫 키워드 '앤트로픽' 앞 20자 안", "장면 + 다룬 종목", "숫자 대비"],
             "thumbnails": [
                 {"id": "A", "name": "유명인 따옴표 발언 + 검은 거래소 사진 (photo full)", "layout": "photo", "photo_side": "full", "image": {"file": "04_assets/footage/raw/nyse.jpg", "focus": [0.5, 0.5]},
-                 "top": "11월 20일 · 엘에리언", "lines": ["\"AI를 위해", "자리를 만든다\""], "hl": ["자리를"], "sub": "앤트로픽 상장 날, 시장은 -2%", "size": 118, "text_y": 330, "marks": [],
+                 "top": "11월 20일 · 심층 분석", "lines": ["앤트로픽 상장·", "AMD 공매도"], "hl": ["AMD"], "sub": "한 달 새 바뀐 AI 시장", "size": 124, "text_y": 330, "marks": [],
                  "why": ["2026-11-20 사용자: 세 장 다 별로 → 다시 만듦", "docs/49: 이름 있는 사람의 따옴표 발언(채널 안 1.23배)", "검은 사진·빨간 띠·노랑 한 낱말(§7-1 기본 모양)"]},
                 {"id": "B", "name": "숫자 대비 (dark)", "layout": "versus", "theme": "dark", "left": {"value": "111.50", "label": "앤트로픽 첫 거래 (달러)"},
                  "right": {"value": "97.17", "label": "종가 (-12.9%)"}, "headline": "첫 값에서 13% 밀린 상장", "hl": ["13%"], "marks": [], "why": ["숫자 둘 대비"]},
