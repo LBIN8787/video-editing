@@ -325,6 +325,13 @@ def main(argv: list[str] | None = None) -> None:
     cu = sub.add_parser("cut", help="원본 발언 컷편집: bite 장면의 문장을 긴 원본(어닝콜·기자회견)에서 찾아 구간 목록 → 02_script/cuts.json")
     cu.add_argument("project")
     cu.add_argument("--force", action="store_true", help="이미 찾은(사람이 고친) 구간도 다시 찾기")
+    for _n, _h in (("clip-order", "원본 발언 구간 주문서(클라우드): bite 원본의 주소·구간 → 02_script/clip_orders.json + inbox/pc-tasks (docs/50)"),
+                   ("clip-fetch", "PC 에서 주문서 구간만 받기(본인 브라우저 로그인) → 04_assets/footage + Drive + clip_manifest.json (docs/50)"),
+                   ("clip-pull", "Drive 가 붙은 환경에서 clip_manifest 대로 원본 구간 가져오기 (docs/50)")):
+        _c = sub.add_parser(_n, help=_h)
+        _c.add_argument("project")
+        if _n == "clip-fetch":
+            _c.add_argument("--force", action="store_true", help="이미 받은 구간도 다시 받기")
     ab = sub.add_parser("art-brief", help="손그림 삽화 주문서: illust 장면마다 그릴 내용·파일 이름·카메라가 볼 곳 → 02_script/art_brief.md")
     ab.add_argument("project")
     ag = sub.add_parser("art-gen", help="그림 생성 (02_script/art_plan.json 시트 → 조각): --backend openai|gemini|codex|manual (docs/28)")
@@ -541,6 +548,12 @@ def main(argv: list[str] | None = None) -> None:
         from .project import Project as _P
         from .stages import cutedit
         cutedit.find(_P.open(a.project), force=a.force)
+    elif a.cmd in ("clip-order", "clip-fetch", "clip-pull"):
+        from .project import Project as _P
+        from .stages import cliplane
+        pr = _P.open(a.project)
+        {"clip-order": lambda: cliplane.order(pr), "clip-fetch": lambda: cliplane.fetch(pr, force=a.force),
+         "clip-pull": lambda: cliplane.pull(pr)}[a.cmd]()
     elif a.cmd == "art-brief":
         from .project import Project as _P
         from .stages import illust

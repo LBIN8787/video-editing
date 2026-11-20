@@ -1374,6 +1374,11 @@ def make(project: Project, workers: int = 3) -> Path:
         ch = chapters.get(sc.get("chapter"))
         if ch and sc["type"] != "chapter":
             sc["_chnum"], sc["_chtitle"] = ch["num"], ch["title"]
+    try:   # docs/50: PC 에서 받은 원본 구간이 Drive 에 있으면 먼저 가져옴 (없으면 조용히 넘어가고 인용 카드)
+        from . import cliplane
+        cliplane.pull(project)
+    except Exception as e:  # noqa: BLE001
+        print(f"[hybrid] clip-pull 건너뜀: {e}")
     bite_fallback(project, spec)   # v36: 원본 영상이 없으면 렌더를 멈추지 않고 인용 카드로 (목소리 만들기 전에 — 번역 박자를 읽게)
     print("[hybrid] 음성")
     durs = voice(project, spec)
