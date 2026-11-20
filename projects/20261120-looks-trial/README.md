@@ -7,7 +7,8 @@
 |---|---|---|---|---|
 | `whiteboard` | 흰 판, 검정 마커 손글씨, 파랑 화살표, 빨강 동그라미, 지워진 판서 흔적 | 두 번 그은 선이 한 획씩, 펜촉이 끝을 따라감 | `marker` | whiteboard-ink, hw-callout-circle |
 | `isometric` | 격자 바닥 위 세 면 상자 건물, 꺾이는 길 | 건물이 차례로 솟고 소포가 길을 따라감, 카메라 아주 천천히 다가감 | `soft-ui` | exploded-stack, offset-path-traveler |
-| `paper-diorama` | 찢은 색종이 층, 팝업 건물, 크림 쪽지 | 층마다 다른 속도로 옆으로(시차), 건물이 세워지고, 트럭이 뚝뚝 끊기며 감 | `paper-pencil` | stop-motion-cadence, torn-paper-rip |
+| `paper-diorama` (v2) | 찢긴 흰 단면이 보이는 종이 층(얼룩 섬유 결), 흰 오림 테두리 + 접는 탭 건물, 이쑤시개 깃발, 실에 매단 구름·종이 해, 테이프 붙인 제목 | 층을 실제 원근 깊이에 세우고 카메라가 옆으로 돌며 시차, 건물이 팝업, 모든 소품이 초당 12장 떨림, 트럭·바퀴도 12장 끊기 | `paper-pencil` | stop-motion-cadence, torn-paper-rip |
+| `paper-diorama-v1` | (첫 시안 — 비교용) 평면 층, 쪽지 라벨 | 층이 옆으로 미끄러짐 | `paper-pencil` | |
 
 다시 만들기:
 ```bash
@@ -18,3 +19,10 @@ python projects/20261120-looks-trial/02_script/render_trial.py isometric  # 하�
 화풍 목록 페이지의 화면 화풍 카드는 `05_edit/<id>_7.6.jpg` 가 있으면 그 프레임을 씁니다.
 
 판정: `python -m ytflow review projects/20261120-looks-trial --pass | --reject "이유"` → 합격한 화풍은 `styles/looks.yaml` status 를 approved 로.
+
+## 판정 (2026-11-20 사용자)
+> "화이트보드랑 아이소메트릭은 합격, 종이 디오라마는 다시"
+
+- `whiteboard`·`isometric` → `styles/looks.yaml` status **approved**
+- `paper-diorama` → v2 다시 만듦(위 표). v1 의 약점(종이 결이 안 보임·층이 평면으로 미끄러짐·건물이 클립아트 같음)을 고침. 판정 대기.
+- 기록: `review --pass --note …` 가 잠금 중이라 제안함 `proposals/manual/20261120-074846-vigilant-lovelace-1uahwn.md` 로 감.

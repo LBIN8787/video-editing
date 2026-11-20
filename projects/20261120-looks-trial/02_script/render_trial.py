@@ -31,7 +31,7 @@ FONTS = ROOT / "ytflow" / "assets" / "fonts"
 W, H, DUR = 1280, 720, 8.0
 STOPS = ["공장", "물류센터", "트럭", "문 앞"]
 EV: dict[str, list] = {}   # 화풍마다 효과음 사건 (이름, 초) — 짝인 효과음 묶음(assets/sfx/sfx.yaml)으로 섞음
-SFX = {"whiteboard": "marker", "isometric": "soft-ui", "paper-diorama": "paper-pencil"}
+SFX = {"whiteboard": "marker", "isometric": "soft-ui", "paper-diorama": "paper-pencil", "paper-diorama-v1": "paper-pencil"}
 TITLE = "물건이 집 앞까지 오는 길"
 
 
@@ -253,7 +253,8 @@ def torn(y, rnd, amp=7, step=26, x0=-120, x1=W + 320, wave=0.0, ph=0.0):
     return d
 
 
-def paper_diorama() -> tuple[str, str, str, str]:
+def paper_diorama_v1() -> tuple[str, str, str, str]:
+    """v1 — 2026-11-20 사용자 '종이 디오라마는 다시'. 비교용으로 남김."""
     rnd = random.Random(9)
     layers = [("far", torn(330, rnd, 6, wave=38, ph=0.3), "#b8cfc3", -28),
               ("mid", torn(420, rnd, 7, wave=24, ph=2.0), "#8fb39e", -60),
@@ -310,8 +311,119 @@ def paper_diorama() -> tuple[str, str, str, str]:
     js.append("tl.from('#truck',{opacity:0,duration:0.2},2.8);tl.to('#truck',{x:760,duration:3.6,ease:'steps(40)'},3.0);"
               "tl.to('#truck',{y:-4,duration:0.25,ease:'steps(2)',yoyo:true,repeat:13},3.0);")
     js.append("tl.to('#t3',{scale:1.15,duration:0.3,ease:'back.out(2)'},6.7);")
-    EV["paper-diorama"] = [("whoosh-short", 0.2), ("pop", 1.0), ("pop", 1.5), ("pop", 2.0), ("whoosh-short", 3.0), ("pop", 6.7)]
+    EV["paper-diorama-v1"] = [("whoosh-short", 0.2), ("pop", 1.0), ("pop", 1.5), ("pop", 2.0), ("whoosh-short", 3.0), ("pop", 6.7)]
     return body, css, "\n".join(js), "#efdcbc"
+
+
+def paper_diorama() -> tuple[str, str, str, str]:
+    """v2 (2026-11-20 '다시' 뒤): v1 은 종이 결이 안 보이고 층이 평면으로 미끄러지며 건물이 클립아트 같았음.
+    → 찢긴 흰 단면이 보이는 층을 실제 원근 깊이(translateZ)에 세우고 카메라가 옆으로 움직여 진짜 시차,
+      건물은 흰 오림 테두리 + 접는 탭으로 팝업, 모든 소품이 초당 12장 떨림(boil), 실에 매단 구름, 이쑤시개 깃발 이름표."""
+    rnd = random.Random(21)
+    P = 1400   # 원근 거리
+    fiber = """<filter id="fib" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.035 0.05" numOctaves="4" seed="{s}" result="n"/>
+<feColorMatrix in="n" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .30 -.08" result="f"/><feComposite in="f" in2="SourceGraphic" operator="in" result="fi"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="{s}" result="g"/><feColorMatrix in="g" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .10 0" result="w"/>
+<feComposite in="w" in2="SourceGraphic" operator="in" result="wi"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="fi"/><feMergeNode in="wi"/></feMerge></filter>"""
+
+    def torn_top(y, amp, wave, ph, x0=-700, x1=W + 700):
+        pts, x = [], x0
+        while x <= x1:
+            pts.append((x, y + wave * math.sin(x / 230 + ph) + rnd.uniform(-amp, amp)))
+            x += rnd.uniform(9, 26)
+        return pts
+
+    def layer(name, y, col, z, amp=6, wave=20, ph=0.0):
+        top = torn_top(y, amp, wave, ph)
+        d = "M" + " L".join(f"{a:.0f} {b:.0f}" for a, b in top) + f" L{W + 700} {H + 400} L-700 {H + 400} Z"
+        core = "M" + " L".join(f"{a:.0f} {b - rnd.uniform(2, 6):.0f}" for a, b in top) + f" L{W + 700} {H + 400} L-700 {H + 400} Z"
+        sc = (P - z) / P   # 깊이에 둬도 화면 크기는 맞게
+        return (f'<div class="ly" id="{name}" style="transform:translateZ({z}px) scale({sc:.3f})"><svg width="{W + 1400}" height="{H + 400}" viewBox="-700 0 {W + 1400} {H + 400}">'
+                f'<defs>{fiber.format(s=rnd.randint(1, 99))}</defs><path d="{core}" fill="#fbf6ea"/><path d="{d}" fill="{col}" filter="url(#fib)"/></svg></div>')
+
+    layers = [layer("far", 300, "#bcd3c6", -520, 5, 40, 0.3), layer("mid", 395, "#97b9a3", -300, 6, 26, 2.0),
+              layer("road", 520, "#dcc7a2", -120, 4, 5, 0.0), layer("front", 640, "#6e977c", 0, 7, 14, 1.1)]
+
+    def cut(inner, w, h, pid, x, y, z):
+        sc = (P - z) / P
+        return (f'<div class="popw" style="left:{x}px;top:{y}px;transform:translateZ({z}px) scale({sc:.3f})"><div class="pop" id="{pid}" style="width:{w}px;height:{h}px">'
+                f'<svg width="{w}" height="{h + 14}" viewBox="-8 -8 {w + 16} {h + 22}"><defs>{fiber.format(s=rnd.randint(1, 99))}</defs>'
+                f'<g class="cutg" filter="url(#fib)">{inner}</g><path d="M6 {h} L{w - 6} {h} L{w - 18} {h + 12} L18 {h + 12} Z" fill="#00000022"/></svg></div></div>')
+    factory = ('<path d="M4 176 V70 L52 40 V70 L100 40 V70 L148 40 V176 Z" fill="#7d8aa6"/><rect x="118" y="2" width="22" height="64" fill="#6b7792"/>'
+               '<rect x="22" y="104" width="28" height="34" fill="#f4e6c8"/><rect x="74" y="104" width="28" height="34" fill="#f4e6c8"/>')
+    ware = '<path d="M4 150 V64 L110 18 L216 64 V150 Z" fill="#c98b5a"/><path d="M78 150 V88 H138 V150" fill="#8a5a36"/><path d="M78 104 H138 M78 120 H138 M78 136 H138" stroke="#6d4528" stroke-width="3"/>'
+    house = ('<path d="M6 72 L80 6 L154 72 Z" fill="#d0645a"/><rect x="22" y="68" width="116" height="94" fill="#f2e5cf"/>'
+             '<rect x="66" y="104" width="30" height="58" fill="#8a5a36"/><rect x="34" y="86" width="24" height="24" fill="#9cc3d5"/>')
+    props = (cut(factory, 152, 176, "pp0", 70, 300, -300) + cut(ware, 220, 150, "pp1", 470, 330, -300) + cut(house, 160, 162, "pp2", 1010, 362, -300))
+    truck = ('<div class="popw" style="left:0;top:0;transform:translateZ(-60px) scale(1.043)"><div id="truck"><div id="truckb">'
+             f'<svg width="190" height="110" viewBox="-8 -8 190 110"><defs>{fiber.format(s=5)}</defs><g class="cutg" filter="url(#fib)">'
+             '<rect x="4" y="8" width="104" height="62" rx="4" fill="#f2c14e"/><path d="M108 28 H140 L162 50 V70 H108 Z" fill="#e07a5f"/>'
+             '<rect x="118" y="34" width="20" height="16" fill="#cfe6f0"/></g>'
+             '<g class="wh" id="wh0"><circle cx="34" cy="76" r="14" fill="#3b3b3b"/><path d="M24 76 H44 M34 66 V86" stroke="#d9d9d9" stroke-width="3"/></g>'
+             '<g class="wh" id="wh1"><circle cx="132" cy="76" r="14" fill="#3b3b3b"/><path d="M122 76 H142 M132 66 V86" stroke="#d9d9d9" stroke-width="3"/></g></svg>'
+             '<div class="flag" style="left:20px;top:-58px"><i></i><b>트럭</b></div></div></div></div>')
+    flags = "".join(f'<div class="popw" style="left:{x}px;top:{y}px;transform:translateZ(-300px) scale(1.214)"><div class="flag fl" id="f{k}"><i></i><b>{t}</b></div></div>'
+                    for k, (t, x, y) in enumerate((("공장", 40, 250), ("물류센터", 600, 268), ("문 앞", 1150, 318))))
+    clouds = "".join(f'<div class="popw" style="left:{x}px;top:-40px;transform:translateZ(-560px) scale(1.4)"><div class="cl" id="c{k}">'
+                     f'<svg width="{w}" height="{int(w * (.45 + ln / 100))}" viewBox="0 {-ln} 100 {45 + ln}"><defs>{fiber.format(s=k + 40)}</defs>'
+                     f'<path d="M50 {-ln} V14" stroke="#7a6248" stroke-opacity=".55" stroke-width=".8"/>'
+                     '<path d="M8 40 C0 40 0 26 12 26 C12 12 30 8 38 18 C44 4 70 4 74 20 C88 14 100 26 92 40 Z" fill="#fffaf0" filter="url(#fib)"/></svg></div></div>'
+                     for k, (x, w, ln) in enumerate(((140, 150, 70), (700, 190, 40), (1090, 120, 95))))
+    sun = (f'<div class="popw" style="left:930px;top:40px;transform:translateZ(-560px) scale(1.4)"><div id="sun"><svg width="130" height="130" viewBox="-65 -65 130 130">'
+           f'<defs>{fiber.format(s=77)}</defs><g filter="url(#fib)">'
+           + "".join(f'<path d="M0 -62 L7 -44 L-7 -44 Z" fill="#f3a95b" transform="rotate({a})"/>' for a in range(0, 360, 30))
+           + '<circle r="40" fill="#f3a95b"/></g></svg></div></div>')
+    title = (f'<div id="title"><svg width="620" height="96" viewBox="0 0 620 96"><defs>{fiber.format(s=3)}</defs>'
+             '<path d="M6 14 L40 8 L80 13 L130 6 L200 12 L260 7 L330 13 L400 6 L470 12 L540 7 L612 12 L606 50 L614 88 L560 82 L480 90 L400 84 L320 90 L240 84 L160 90 L90 83 L20 90 L10 52 Z" fill="#fffaf0" filter="url(#fib)"/>'
+             f'<text x="310" y="62" text-anchor="middle">{TITLE}</text></svg><i class="tp l"></i><i class="tp r"></i></div>')
+    body = (f'<div id="sky"></div><div id="world">{"".join([sun, clouds, layers[0], layers[1], props, flags, layers[2], truck, layers[3]])}</div>'
+            f'{title}<div id="light"></div>')
+    css = f"""
+#sky{{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 10%,#fbf1dc,#ecd6b0 70%)}}
+#world{{position:absolute;inset:0;perspective:{P}px;perspective-origin:50% 40%;transform-style:preserve-3d}}
+.ly{{position:absolute;left:-700px;top:0;transform-origin:{700 + W / 2}px 40%;filter:drop-shadow(0 -2px 0 rgba(255,255,255,.4)) drop-shadow(4px 10px 8px rgba(70,45,20,.35))}}
+.popw{{position:absolute;transform-origin:50% 100%}}
+.pop{{position:relative;transform-origin:50% 100%;filter:drop-shadow(6px 9px 5px rgba(70,45,20,.35))}}
+.cutg{{stroke:#fffdf6;stroke-width:7;paint-order:stroke;stroke-linejoin:round}}
+#truck{{position:absolute;left:120px;top:470px}}#truckb{{filter:drop-shadow(5px 8px 4px rgba(70,45,20,.35))}}
+.flag{{position:absolute;width:10px;height:10px}}.flag i{{position:absolute;left:0;top:0;width:3px;height:74px;background:#b58a55;border-radius:2px}}
+.flag b{{position:absolute;left:3px;top:0;white-space:nowrap;background:#fffaf0;color:#4b3a2a;font:30px sansx;padding:4px 16px 4px 10px;clip-path:polygon(0 0,100% 0,88% 50%,100% 100%,0 100%);
+  filter:drop-shadow(2px 3px 0 rgba(70,45,20,.25))}}
+.fl{{transform-origin:0 74px}}
+.cl{{position:relative;transform-origin:50% 0}}.cl svg{{filter:drop-shadow(3px 5px 3px rgba(70,45,20,.2))}}
+#sun svg{{filter:drop-shadow(4px 6px 3px rgba(70,45,20,.22))}}
+#title{{position:absolute;left:330px;top:22px;filter:drop-shadow(4px 6px 3px rgba(70,45,20,.3))}}#title text{{font:46px sansx;fill:#4b3a2a}}
+.tp{{position:absolute;top:-6px;width:84px;height:26px;background:rgba(238,214,150,.82)}}.tp.l{{left:-24px;transform:rotate(-14deg)}}.tp.r{{right:-24px;transform:rotate(12deg)}}
+#light{{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 25% 15%,rgba(255,240,200,.25),rgba(60,35,10,.28) 95%)}}
+"""
+    FPS = 12   # 스톱모션: 모든 '떨림'은 초당 12장으로 끊음
+    js = ["tl.from('#title',{y:-130,rotation:-4,duration:0.7,ease:'back.out(1.3)'},0.1);"]
+    for k, n in enumerate(("far", "mid", "road", "front")):
+        js.append(f"tl.from('#{n}',{{yPercent:40,duration:0.8,ease:'power3.out'}},{0.15 + k * 0.12:.2f});")
+    # 카메라: 진짜 원근 위에서 옆으로 + 아주 살짝 돌기 → 층마다 다른 속도
+    js.append("tl.fromTo('#world',{x:70,rotationY:2.2},{x:-90,rotationY:-2.2,duration:7.6,ease:'sine.inOut'},0.2);")
+    for k, t0 in enumerate((1.0, 1.45, 1.9)):
+        js.append(f"tl.fromTo('#pp{k}',{{rotationX:-90}},{{rotationX:0,duration:0.75,ease:'back.out(1.8)'}},{t0});")
+    for k, t0 in enumerate((1.5, 1.95, 2.4)):
+        js.append(f"tl.fromTo('#f{k}',{{rotation:-90,opacity:0}},{{rotation:0,opacity:1,duration:0.45,ease:'back.out(2.4)'}},{t0});")
+    for k in range(3):
+        js.append(f"tl.fromTo('#c{k}',{{rotation:{-3 + k * 2.5}}},{{rotation:{3 - k * 2},duration:{2.6 + k * .5:.1f},ease:'steps({int((2.6 + k * .5) * FPS)})',yoyo:true,repeat:2}},0);")
+    js.append(f"tl.to('#sun',{{rotation:30,duration:8,ease:'steps({8 * FPS})'}},0);")
+    # 트럭: 12장 끊기 이동 + 바퀴 + 위아래 들썩
+    js.append("tl.from('#truck',{opacity:0,duration:0.01},2.7);"
+              f"tl.to('#truck',{{x:820,duration:3.8,ease:'steps({int(3.8 * FPS)})'}},2.8);"
+              f"tl.to('#wh0',{{rotation:720,svgOrigin:'34 76',duration:3.8,ease:'steps({int(3.8 * FPS)})'}},2.8);"
+              f"tl.to('#wh1',{{rotation:720,svgOrigin:'132 76',duration:3.8,ease:'steps({int(3.8 * FPS)})'}},2.8);"
+              f"tl.to('#truckb',{{y:-3,duration:{1 / FPS * 2:.3f},ease:'steps(1)',yoyo:true,repeat:{int(3.8 * FPS / 2)}}},2.8);")
+    # 손으로 만진 듯한 떨림 (boil) — 정해진 값, 초당 12장
+    boil = rnd
+    for sel in ("#pp0", "#pp1", "#pp2", "#title"):
+        for i in range(int(2.6 * FPS), int(DUR * FPS)):
+            js.append(f"tl.set('{sel}',{{rotation:{boil.uniform(-0.7, 0.7):.2f}}},{i / FPS:.3f});")
+    js.append("tl.to('#f2',{scale:1.18,duration:0.3,ease:'back.out(2.5)'},6.75);")
+    EV["paper-diorama"] = [("whoosh-short", 0.2), ("pop", 1.0), ("pop", 1.45), ("pop", 1.9), ("click-soft", 1.5), ("click-soft", 1.95),
+                           ("click-soft", 2.4), ("whoosh-short", 2.8), ("pop", 6.75)]
+    return body, css, "\n".join(js), "#ecd6b0"
 
 
 def _add_sfx(lid: str, out: Path) -> None:
@@ -342,7 +454,7 @@ def _add_sfx(lid: str, out: Path) -> None:
     tmp.replace(out)
 
 
-LOOKS = {"whiteboard": whiteboard, "isometric": isometric, "paper-diorama": paper_diorama}
+LOOKS = {"whiteboard": whiteboard, "isometric": isometric, "paper-diorama": paper_diorama, "paper-diorama-v1": paper_diorama_v1}
 
 
 def render(lid: str) -> Path:
