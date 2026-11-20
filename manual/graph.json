@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-20T06:57:15",
- "source_hash": "def78104c27e",
+ "generated": "2026-11-20T07:12:02",
+ "source_hash": "6192129dedb9",
  "audit": {
   "date": "2026-11-19T13:54",
   "counts": {
@@ -121,14 +121,14 @@
   "sections": 172,
   "must": 26,
   "auto": 41,
-  "intents": 134,
+  "intents": 135,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 78,
   "terms": 128,
   "bans": 155,
-  "feedback": 77,
+  "feedback": 78,
   "topics": 4,
   "episodes": 34,
   "main_situations": 16,
@@ -3317,9 +3317,10 @@
     57,
     58,
     59,
-    60
+    60,
+    62
    ],
-   "last_version": 60
+   "last_version": 62
   },
   {
    "id": "doc:README",
@@ -10022,6 +10023,12 @@
     "background",
     "intent"
    ],
+   "commit": {
+    "sha": "dfb19682f2ecd34f4a39fe1de89708f44be26cce",
+    "subject": "11/19: 썸네일 C 를 검은 바탕 연준 판으로 되돌림 (파일만, 유튜브 적용 전)",
+    "date": "2026-11-19",
+    "other_files": []
+   },
    "terms": [
     "term:tech-spotlight",
     "term:graphic-pack"
@@ -10037,10 +10044,15 @@
    "applied": [],
    "themes": [],
    "commit": {
-    "sha": "745314e9aa82dc1097b2289992888d3bf84c5775",
-    "subject": "Merge branch 'main' of https://github.com/LBIN8787/video-editing",
+    "sha": "39ae971d0acf3e9f8fca02f844df6f92d08c4ee3",
+    "subject": "매뉴얼 v51: 시장 썸네일 방식(핫 키워드 먼저·단정+숫자·검은 톤 사진 기본)·글자 넘침 확인·막히면 피클 요청 (2026-11-19 사용자)",
     "date": "2026-11-19",
-    "other_files": []
+    "other_files": [
+     "AGENTS.md",
+     "prompts/thumbnail.md",
+     "proposals/manual/20261119-051753-main.md",
+     "proposals/manual/20261119-052219-main.md"
+    ]
    }
   },
   {
@@ -10292,7 +10304,27 @@
    "themes": [
     "sound",
     "variety"
-   ]
+   ],
+   "commit": {
+    "sha": "9f45a013001becb7daec92f31d2c14e8ef60b255",
+    "subject": "매뉴얼 v62: 영상 = 구성요소 카테고리별 스타일의 조합 + 삽화 예시는 PC 에서",
+    "date": "2026-11-20",
+    "other_files": [
+     ".agents/skills/looks-gallery/SKILL.md",
+     ".claude/settings.json",
+     ".claude/skills/looks-gallery/SKILL.md",
+     "AGENTS.md",
+     "inbox/pc-tasks/20261120-1548-looks-draw.md",
+     "inbox/pc-tasks/README.md",
+     "projects/20261120-curiosity-broll-sample/edit.yaml",
+     "scripts/pc_tasks.py",
+     "skills/looks-gallery/SKILL.md",
+     "styles/components.yaml",
+     "ytflow/cli.py",
+     "ytflow/stages/looks.py",
+     "ytflow/stages/looksgallery.py"
+    ]
+   }
   },
   {
    "id": "rev:1",
@@ -18545,6 +18577,34 @@
    ],
    "themes": [],
    "ann_key": "intent:2eac1fb6",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:5040bd1c",
+   "kind": "intent",
+   "quote": "앞으로브리핑은 매번 심층으로할거고 오늘같은 일 없이 가능하도록 세팅해줘 원본영상 허가할테니까 일단 그냥 진행해줘",
+   "label": "앞으로브리핑은 매번 심층으로할거고 오늘같은 일 없이 가능하도록 세팅해줘 원본영상 허가할테니까 일단 그냥 진행",
+   "versions": [],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "fb:78",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:5040bd1c"
+   ],
+   "themes": [
+    "script"
+   ],
+   "ann_key": "intent:5040bd1c",
    "meaning": "",
    "not_meant": [],
    "note": "",
@@ -27528,6 +27588,34 @@
    "tier_by": "기록할 때 지정",
    "tier_note": "",
    "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:78",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "앞으로브리핑은 매번 심층으로할거고 오늘같은 일 없이 가능하도록 세팅해줘 원본영상 허가할테니까 일단 그냥 진행해줘",
+   "label": "앞으로브리핑은 매번 심층으로할거고 오늘같은 일 없이 가능하도록 세팅해줘 원본영상 허가할테니까 일단 그냥 진행",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "script"
+   ],
+   "scope": "",
+   "intent": "intent:5040bd1c",
+   "tier_key": "fb:5040bd1c",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
    "tier_label": "작업 기준"
   },
   {
@@ -40799,7 +40887,7 @@
         "card_type",
         "chapter"
        ],
-       "say": "딱 하나만 기억한다면 이것입니다. 같은 날, 앤트로픽은 공모가보다 높게 마쳤지만 첫 거래 뒤로는 계속 밀렸고, 앤트로픽을 대신 사던 주식들도 내렸습니다. 새 주식"
+       "say": "딱 하나만 기억한다면 이것입니다. 같은 날, 앤트로픽은 공모가보다 높게 마쳤지만 첫 거래 뒤 잠깐 오른 다음 밀렸고, 앤트로픽을 대신 사던 주식들도 내렸습니다. "
       }
      ]
     }
@@ -46397,7 +46485,7 @@
       "card_type",
       "chapter"
      ],
-     "say": "딱 하나만 기억한다면 이것입니다. 같은 날, 앤트로픽은 공모가보다 높게 마쳤지만 첫 거래 뒤로는 계속 밀렸고, 앤트로픽을 대신 사던 주식들도 내렸습니다. 새 주식"
+     "say": "딱 하나만 기억한다면 이것입니다. 같은 날, 앤트로픽은 공모가보다 높게 마쳤지만 첫 거래 뒤 잠깐 오른 다음 밀렸고, 앤트로픽을 대신 사던 주식들도 내렸습니다. "
     }
    ]
   }
@@ -48970,6 +49058,14 @@
    ]
   },
   {
+   "s": "ver:62",
+   "t": "doc:12",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -51077,6 +51173,16 @@
   {
    "s": "intent:ccde1780",
    "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:5040bd1c",
+   "t": "fb:78",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:5040bd1c",
+   "t": "theme:script",
    "kind": "about"
   },
   {
@@ -55457,6 +55563,16 @@
   {
    "s": "fb:77",
    "t": "intent:17c5de91",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:78",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "fb:78",
+   "t": "intent:5040bd1c",
    "kind": "quoted_as"
   }
  ]
