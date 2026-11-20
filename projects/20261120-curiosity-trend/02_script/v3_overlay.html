@@ -65,7 +65,7 @@ function planBase(t,B,a1,a2){
   const A=eo(P(t,a1-0.2,0.7));
   h+=`<div class="abs" style="left:${X0}px;top:250px;font-size:30px;opacity:${A}">10분 영상 <span class="y" style="font-family:GX">1편</span> · 넘기기 <span style="font-family:GX">✕</span></div>
     <div class="abs" style="left:${X0}px;top:300px;width:${PX*A}px;height:150px;border-radius:10px;overflow:hidden;border:2px solid rgba(255,255,255,.7);opacity:${cl(A*4)}">
-      <div style="width:${PX}px;height:150px;background:url(${TH(5)}) center/cover"></div></div>`;
+      <div style="width:${PX}px;height:150px;background:linear-gradient(110deg,#334d60,#62869d);display:grid;place-items:center;color:#f1f4f9;font-size:48px">▶</div></div>`;
   return h;
 }
 function rowB(t,t0,cuts){
@@ -74,7 +74,7 @@ function rowB(t,t0,cuts){
   const tw=PX/7;
   for(let i=0;i<7;i++){const p=eo(P(t,t0+i*0.09,0.4));
     h+=`<div class="abs" style="left:${X0+i*tw+3}px;top:${540+(1-p)*30}px;width:${tw-6}px;height:150px;border-radius:8px;opacity:${p};
-      background:url(${TH(i)}) center/cover;border:2px solid rgba(255,255,255,.6)"></div>`}
+      background:hsl(${195+i*24} 24% 34%);border:2px solid rgba(255,255,255,.6);display:grid;place-items:center;font-size:38px">▶</div>`}
   for(let c=0;c<cuts;c++){const x=X0+((c*0.618034)%1)*PX;
     h+=`<div class="abs" style="left:${x}px;top:532px;width:4px;height:166px;background:${Y};box-shadow:0 0 8px ${Y}"></div>`}
   return h;
@@ -245,7 +245,7 @@ function artLayer(sc,t,B,D){const a=sc.art,z=1.04+0.06*cl(t/Math.max(D,1)),ox=(a
 function photo(sc,t,B){const p=eo(P(t,B[0].t-0.2,0.8)),z=1+0.05*cl((t-B[0].t)/8);
   return `<div class="abs" style="inset:0;background:#0b0b0c"></div>
    <div class="abs" style="left:300px;top:${150+(1-p)*20}px;width:560px;height:700px;overflow:hidden;opacity:${p};box-shadow:0 20px 60px rgba(0,0,0,.6)">
-     ${sc.photoOk?`<img src="ARTDIR/${sc.photo}" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);transform:scale(${z})">`:`<div style="width:100%;height:100%;background:#333;display:flex;align-items:center;justify-content:center;font-size:30px;opacity:.6">사진 대기</div>`}</div>
+     ${sc.photoOk?`<img src="ARTDIR/${sc.photo}" style="width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.05);transform:scale(${z});transform-origin:50% 20%">`:`<div style="width:100%;height:100%;background:#333;display:flex;align-items:center;justify-content:center;font-size:30px;opacity:.6">사진 대기</div>`}</div>
    <div class="abs" style="left:940px;top:330px;opacity:${eo(P(t,B[0].t+0.4,0.8))}">
      <div style="font-family:GX;font-size:72px">${sc.name}</div><div style="font-size:36px;margin-top:12px;opacity:.8">${sc.who}</div>
      ${sc.quote?`<div style="font-family:GX;font-size:46px;line-height:1.45;margin-top:56px;width:820px;color:${Y};opacity:${eo(P(t,K(B,0,1)-0.2,0.8))}">“${sc.quote}”</div>`:""}</div>`}
