@@ -1,7 +1,7 @@
 {
  "project": "20261120-market-deep-druckenmiller",
  "manual_version": "77",
- "checked": "2026-11-20T16:56:46",
+ "checked": "2026-11-20T17:41:40",
  "pass": false,
  "rows": [
   {
@@ -414,8 +414,8 @@
    "gate": "G6",
    "level": "MUST",
    "item": "길이: 롱폼 10분 이상 — 많이 짧으면 쇼츠로 (README §2-4)",
-   "ok": false,
-   "detail": "7.5분"
+   "ok": true,
+   "detail": "10.1분"
   },
   {
    "gate": "G5",
@@ -428,15 +428,15 @@
    "gate": "G5",
    "level": "참고",
    "item": "배경: 같은 바탕이 이어지는 구간",
-   "ok": true,
-   "detail": "[]"
+   "ok": false,
+   "detail": "['tint']"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "반복 피로: 글씨·도형뿐인 장면이 이어지는 구간 — 자료·지도·그림으로 보여 줄 수 있는지 다시 볼 곳 (05 §0-3)",
    "ok": false,
-   "detail": "최장 3연속 (장면 7)"
+   "detail": "최장 7연속 (장면 21)"
   },
   {
    "gate": "G5",
@@ -450,7 +450,7 @@
    "level": "참고",
    "item": "반복 피로: 볼거리(자료·지도·그림)가 있는 장면의 몫",
    "ok": false,
-   "detail": "10/24"
+   "detail": "8/26"
   },
   {
    "gate": "G5",
@@ -491,22 +491,22 @@
    "gate": "G5",
    "level": "참고",
    "item": "같은 장면 type 이 이어지는 구간 — 하는 일이 바뀌었는데 화면이 같지 않나",
-   "ok": true,
-   "detail": "[]"
+   "ok": false,
+   "detail": "['checklist']"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "자료 화면 없이 그래픽만 이어지는 가장 긴 구간",
    "ok": false,
-   "detail": "최장 432초"
+   "detail": "최장 585초"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "장 전환 없이 이어지는 가장 긴 구간",
    "ok": true,
-   "detail": "최장 133초"
+   "detail": "최장 141초"
   },
   {
    "gate": "G5",
@@ -520,14 +520,14 @@
    "level": "참고",
    "item": "스타일 조합: 가장 많이 쓴 스타일의 몫·겹친 장면·같은 스타일 연속",
    "ok": false,
-   "detail": "explain-stage 0.27 · 겹침 0 · 최장 연속 2"
+   "detail": "paper-column 0.26 · 겹침 0 · 최장 연속 3"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "강조 횟수·강조가 겹친 장면 — 기억할 숫자·반전·결론에만 썼는지 (05 §0-1)",
    "ok": true,
-   "detail": "3번 [(3, 'kinetic'), (8, 'kinetic'), (27, 'kinetic')] · 겹친 장면 []"
+   "detail": "3번 [(3, 'kinetic'), (8, 'kinetic'), (28, 'kinetic')] · 겹친 장면 []"
   },
   {
    "gate": "G5",
@@ -569,21 +569,21 @@
    "level": "MUST",
    "item": "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)",
    "ok": false,
-   "detail": "{'9': ['contrast/contrast_aa_failure: Contrast is 1.09:1; WCAG AA requires 3:1.'], '14': ['contrast/contrast_aa_failure: Contrast is 1.1:1; WCAG AA requires 3:1.'], '15': ['layout/text_occluded: Text is hidden beneath an opaque element.', 'layout/text_occluded: Text is hidden beneath an opaque element.', 'layout/text_occluded: Text is hidden beneath an opaque element.', 'layout/text_occluded: Text is hidden beneath an opaque element.', 'layout/text_occluded: Text is hidden beneath an opaque element.', 'layout/text_occluded: Text is hidden beneath an opaque element.', 'layout/text_occluded: Text is hidden beneath an opaque element.', 'contrast/contrast_aa_failure: Contrast is 1.1:1; WCAG AA requires 3:1.'], '19': ['contrast/contrast_aa_failure: Contrast is 1.09:1; WCAG AA requires 3:1.']}"
+   "detail": "{'7': ['contrast/contrast_aa_failure: Contrast is 2.75:1; WCAG AA requires 3:1.'], '18': ['layout/text_occluded: Text is hidden beneath an opaque element.'], '20': ['contrast/contrast_aa_failure: Contrast is 2.8:1; WCAG AA requires 3:1.']}"
   },
   {
    "gate": "G6",
    "level": "MUST",
    "item": "화면 글자 겹침 없음 — 글자끼리·카드에 가려짐·카드 밖 넘침·자막 자리 (overlap_qa)",
    "ok": false,
-   "detail": "['#9 글자와 카드 겹침: 드러켄밀러 ↔ 선: 글자 위나 아래로 선이 지나감', '#15 글자와 카드 겹침: 알파벳·AMD·TSMC ↔ 가려짐: 지수 콜옵션 약 3.41억 → 0', '#15 글자와 카드 겹침: 채운 칸 ↔ 가려짐: 저장장치 +180%', '#15 글자와 카드 겹침: 3곳 새로 ↔ 선: 글자 위나 아래로 선이 지나감']"
+   "detail": "['#14 글자끼리 겹침: 7,417 ↔ 8,200', '#14 글자끼리 겹침: 8,200 ↔ 8,700', '#14 글자끼리 겹침: 8,700 ↔ 8,700', '#14 글자끼리 겹침: 8,700 ↔ 8,900', '#18 글자끼리 겹침: 시게이트 (+180%) ↔ 시게이트 콜옵션', '#18 글자와 카드 겹침: 시게이트 (+180%) ↔ 가려짐: 금광 3곳 합계 (백만 달러, 계산) 129', '#18 글자와 카드 겹침: 12.2만 → 34.2만 주 ↔ 가려짐: 금광 3곳 합계 (백만 달러, 계산) 129', '#18 글자끼리 겹침: 시게이트 콜옵션 ↔ 뉴몬트 (새로)']"
   },
   {
    "gate": "G6",
    "level": "SHOULD",
    "item": "글자가 카드·강조 상자 가장자리에 걸치지 않음 (overlap_qa)",
-   "ok": false,
-   "detail": "['#15 덜어 낸 칸 ↔ 걸침: 칩·플랫폼 알파벳·AMD·TSMC', '#15 칩·플랫폼 ↔ 걸침: 지수 콜옵션 약 3.41억 → 0', '#15 금광 ↔ 걸침: 저장장치 +180%', '#19 AI: 일을 대신 하는 회사 ↔ 걸침: 전기로 공장을 바꾼 회사 응용']"
+   "ok": true,
+   "detail": "[]"
   },
   {
    "gate": "G6",
@@ -597,7 +597,7 @@
    "level": "MUST",
    "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
    "ok": true,
-   "detail": "{'within_0_5s': 0.981, 'p95_abs_offset': 0.1, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.067}"
+   "detail": "{'within_0_5s': 0.981, 'p95_abs_offset': 0.09, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.067}"
   },
   {
    "gate": "G6",
@@ -611,7 +611,7 @@
    "level": "참고",
    "item": "움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5)",
    "ok": false,
-   "detail": "변화 10.1/분 · 정지 0.68"
+   "detail": "변화 8.8/분 · 정지 0.69"
   },
   {
    "gate": "G6",
