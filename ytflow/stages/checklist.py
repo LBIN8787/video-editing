@@ -371,8 +371,10 @@ def run(path: Path, upto: str = "G8") -> Report:
         tl_ = Path(path) / "05_edit" / "hybrid_timeline.json"
         tot_ = sum(x.get("dur", 0) for x in json.loads(tl_.read_text(encoding="utf-8"))) if tl_.exists() else 0
         quick_ = spec.get("format") == "quick"   # 시사 48시간 안 빠른 정리 (08 §1, v34): 5~8분 예외
-        min_ = 300 if quick_ else 600
-        R.add("G6", "MUST", f"길이: {'빠른 정리 5분' if quick_ else '롱폼 10분'} 이상 — 많이 짧으면 쇼츠로 (README §2-4)", tot_ >= min_, f"{tot_ / 60:.1f}분")
+        brief_ = spec.get("format") == "brief" or path.name.endswith("-market-daily")   # 시장 아침 브리핑 7~10분 (09 §2, v76)
+        min_ = 300 if quick_ else 420 if brief_ else 600
+        lab_ = "빠른 정리 5분" if quick_ else "아침 브리핑 7분" if brief_ else "롱폼 10분"
+        R.add("G6", "MUST", f"길이: {lab_} 이상 — 많이 짧으면 쇼츠로 (README §2-4)", tot_ >= min_, f"{tot_ / 60:.1f}분")
     if last >= 4:  # G5 연출
         from . import backdrop
         bgs = backdrop.plan(spec)
