@@ -111,7 +111,7 @@
 5. **두 줄 장 표지** — 어두운 실사 + 작은 줄 → 큰 강조색 줄.
 6. **모양 매치 아이리스** — 앞 장면 원을 키워 전환.
 
-이 목록을 매뉴얼·`styles/techniques.yaml` 에 옮기는 일은 매뉴얼 잠금(`manual-lock`)이 필요하므로 이 문서에서는 하지 않았습니다.
+→ §6 에서 구현했고, v50(2026-11-19)에서 매뉴얼·`styles/techniques.yaml` 에 반영했습니다.
 
 ## 5. rea-video 자동 분해 결과 (참고용)
 `rea-video decompose ref.mp4 --lang en --ocr-lang ko --no-asr --no-stems` (커밋 `5b09832`, VLM 없음, 12분). 결과는 Drive `refs/BS8s9fWXlQY/rea/`(`VIDEO.md`·`report.html`·`storyboard.jpg`).

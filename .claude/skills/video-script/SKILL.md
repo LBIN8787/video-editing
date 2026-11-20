@@ -32,7 +32,7 @@ description: 팩트시트와 편집 스타일 규칙으로 장면(scene) 단위 
    - `styles/<id>/STYLE.md`, `styles/<id>/script.md`
 2. `02_script/scenes.json` 을 씁니다(스키마 `schemas/scenes.schema.json`). 장면 하나의 필드는 다음과 같습니다.
    - `id`: 1부터 순서대로
-   - `section`: hook / intro / body-N / turn / takeaway / outro
+   - `section`: hook / body-N / turn / takeaway / outro (intro 는 쓰지 않음 — manual/README §2-1, check G4)
    - `kind`: narration 또는 quote
    - `narration`: 읽을 문장. quote 장면이면 원문의 한국어 번역
    - `quote_en`: quote 일 때 원문

@@ -1,0 +1,713 @@
+# 모순 장부 — 서로 반대로 말하는 지침 쌍을 적고 끝까지 관리합니다 (docs/34 §모순 관리, 2026-11-20 사용자 요청).
+# 사용자: "모순되는 지침은 없는지 체크하고 주기적으로 이를 관리 할 수 있도록 해줘"
+#
+# 누가 쓰나: 매일 밤 정기 검토(skills/manual-review §2-1) — 바뀐 지침만 / 7일마다 전체 / 정기 작업 지시문.
+# 항목: id · found(찾은 날) · topic(무엇에 대해) · a·b {file, line, text} · current(a|b|unknown, 근거 버전·날짜) · why · fix(고칠 문장 제안)
+#       status: open(사용자 판단 필요 → manual-audit 의 '물어볼 것') | decided(답을 decision 에 적음 → '고칠 것') | resolved(고침) | kept(범위가 달라 둘 다 유지, 사용자 확인)
+# 낡은 쪽이 분명하면(더 새 버전·날짜의 매뉴얼 규칙이 대체) 바로 고치고 resolved 로 적습니다. 사용자 원문(feedback·reviews·인용)은 고치지 않습니다.
+# 정기 작업(예약된 작업) 지시문은 저장소 밖에 있으므로 file 에 "schedule:<작업 이름>" 으로 적습니다.
+last_sweep: '2026-11-20'
+last_commit: 30038d15234204bdc592e87badf64a5855644882
+items:
+- id: c-20261120-01
+  found: '2026-11-20'
+  topic: 구독·좋아요 카드·채널명 엔딩
+  a:
+    file: styles/mijudiary/script.md·STYLE.md, styles/story-board/STYLE.md
+    text: 1분 20초 구독·좋아요 카드 / 구독 부탁 → 채널 이름
+  b:
+    file: manual/README.md §2-1
+    text: v24 인트로·구독 부탁·채널명 엔딩 없음 (check G4)
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 v24 (2026-11-14)
+  fix: 레퍼런스 측정값으로 표시, 마무리는 의미 + 조용한 질문
+  status: resolved
+- id: c-20261120-02
+  found: '2026-11-20'
+  topic: 훅의 순서 예고
+  a:
+    file: prompts/script.md·styles/sixsigma/STYLE.md
+    text: 오늘 따라갈 길 / ~의 말로 따라가 보겠습니다
+  b:
+    file: manual/README.md §2-1, 05 §2
+    text: 순서 예고·오늘의 지도 없음
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 v24
+  fix: 질문으로 닫음
+  status: resolved
+- id: c-20261120-03
+  found: '2026-11-20'
+  topic: 말투 '~습니다' 80%
+  a:
+    file: prompts/script_hybrid.md·AGENTS.md
+    text: '''~습니다'' 80% 이상 (모든 채널)'
+  b:
+    file: manual/11-workflow.md §3-2
+    text: 시장·시사·AI 는 어미 혼합, 강제 없음
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 v38 (2026-11-17)
+  fix: 호기심 = 다큐 내레이터, 나머지 = 분석형
+  status: resolved
+- id: c-20261120-04
+  found: '2026-11-20'
+  topic: 시장 아침 기본 형식
+  a:
+    file: manual/09 §2 표·03 §0·channel.yaml weekday
+    text: 브리핑이 기본 (복잡하면 심층)
+  b:
+    file: manual/09 §2
+    text: 기본은 심층 (v63)
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 v63 (2026-11-20)
+  fix: 심층 기본, 심층거리가 없을 때만 브리핑
+  status: resolved
+- id: c-20261120-05
+  found: '2026-11-20'
+  topic: 일요일 형식
+  a:
+    file: channels/ch-market-daily/channel.yaml sunday·AGENTS
+    text: 일요일 분석글 / 주말 분석
+  b:
+    file: manual/09 §2
+    text: 일 = 한 주 점검(-review), 분석글은 기본에서 뺌
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 v30
+  fix: 'sunday: review'
+  status: resolved
+- id: c-20261120-06
+  found: '2026-11-20'
+  topic: edge 초안 공개
+  a:
+    file: manual/09 목소리 절
+    text: 요금제 전까지 edge 초안으로 운영
+  b:
+    file: manual/09 §2-1
+    text: edge 면 올리지 않음
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 v43 (2026-11-17)
+  fix: edge 는 초안만, 공개본 Teo
+  status: resolved
+- id: c-20261120-07
+  found: '2026-11-20'
+  topic: 롱폼 길이
+  a:
+    file: formats/README.md·config/pipeline.yaml·prompts/script_hybrid.md
+    text: 8~12분 / target 9 / 6~9분
+  b:
+    file: manual/README.md §2-4
+    text: 롱폼 최소 10분
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 v24
+  fix: 10분~
+  status: resolved
+- id: c-20261120-08
+  found: '2026-11-20'
+  topic: 카메라 기본
+  a:
+    file: manual/05 §0-5 표
+    text: 장면 내내 한 방향으로 천천히
+  b:
+    file: manual/README.md §2-5
+    text: 고정이 기본
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 v34
+  fix: 고정 기본, 필요할 때만 move
+  status: resolved
+- id: c-20261120-09
+  found: '2026-11-20'
+  topic: 시사 배경음
+  a:
+    file: manual/08-issues.md
+    text: 배경음 digital-clouds
+  b:
+    file: channels/ch-issues/channel.yaml·05 §0-5
+    text: 배경음 기본 없음
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 2026-11-11 사용자
+  fix: 기본 없음
+  status: resolved
+- id: c-20261120-10
+  found: '2026-11-20'
+  topic: ElevenLabs 그림 생성
+  a:
+    file: AGENTS.md·imagegen.py·docs/27·28
+    text: 그림 생성 길에 ElevenLabs
+  b:
+    file: 사용자 2026-11-20
+    text: ElevenLabs 로 이미지 생성하지 말 것
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 2026-11-20
+  fix: 목록에서 빼고 기록용 표시
+  status: resolved
+- id: c-20261120-11
+  found: '2026-11-20'
+  topic: 호기심 화면 순서
+  a:
+    file: channels/ch-knowledge/channel.yaml·prompts/script_knowledge.md·04 §4 표·11 S5·12·README §1-1·anim-stage 레시피
+    text: 삽화가 기본·뼈대
+  b:
+    file: manual/04 §0-8
+    text: 실사 B-roll·모션그래픽 먼저, 삽화는 대체
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 v60
+  fix: B-roll·모션그래픽 먼저
+  status: resolved
+- id: c-20261120-12
+  found: '2026-11-20'
+  topic: 채널 공통 연출 상자
+  a:
+    file: manual/02·03·04·08 머리 상자
+    text: 편집 기준 v10(카메라·전환·소리)·음질 좋은 배경음
+  b:
+    file: manual/05 §0-4 기록용, §0-5
+    text: 덜이 기본, 배경음 없음
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 v12·v34
+  fix: 지금도 쓰는 v10 만 남김
+  status: resolved
+- id: c-20261120-13
+  found: '2026-11-20'
+  topic: 원본 구간을 공개 Release 에
+  a:
+    file: manual/09 §10-9
+    text: upload --archive (자료를 Release 에)
+  b:
+    file: docs/50 §3, 09 §3
+    text: 받은 원본은 Drive 에만
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 2026-11-20 (권리)
+  fix: 원본이 있으면 --archive 쓰지 않음
+  status: resolved
+- id: c-20261120-14
+  found: '2026-11-20'
+  topic: 결정 지점 건너뛰기
+  a:
+    file: skills/video-make·channel-run
+    text: make 로 주제 자동 선정
+  b:
+    file: manual/11-workflow.md §2-2
+    text: D1·D2 는 건너뛰지 않음
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 v38
+  fix: --plan 으로 D1 까지
+  status: resolved
+- id: c-20261120-15
+  found: '2026-11-20'
+  topic: upload 기본값 설명
+  a:
+    file: skills/channel-run·docs/06
+    text: upload → Google Drive
+  b:
+    file: ytflow/cli.py upload --to github
+    text: 기본은 GitHub Release
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 코드
+  fix: 설명을 코드에 맞춤 (기본 위치 자체는 ASK c-…-24)
+  status: resolved
+- id: c-20261120-16
+  found: '2026-11-20'
+  topic: 잠금 없을 때 명령
+  a:
+    file: docs/35 §막는 장치
+    text: review·feedback 은 제안함으로
+  b:
+    file: docs/35 2026-11-18
+    text: 비어 있으면 자동으로 잡음
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 2026-11-18 사용자
+  fix: 자동으로 잡음
+  status: resolved
+- id: c-20261120-17
+  found: '2026-11-20'
+  topic: 시장 제작 시각 (문서)
+  a:
+    file: docs/08·24·28·34
+    text: 매일 08:00 자동 제작
+  b:
+    file: manual/09 §1
+    text: 07:00 제작 · 08:30 공개
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 2026-11-19 사용자
+  fix: 07:00
+  status: resolved
+- id: c-20261120-18
+  found: '2026-11-20'
+  topic: 시장 업로드 절차
+  a:
+    file: manual/09 §10
+    text: 유튜브 스튜디오에서 손으로
+  b:
+    file: manual/09 §2-1·docs/24
+    text: yt-publish 자동 예약 공개
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 v43
+  fix: 자동, 손 절차는 실패했을 때만
+  status: resolved
+- id: c-20261120-19
+  found: '2026-11-20'
+  topic: 싱크 기준
+  a:
+    file: manual/09 §9
+    text: 95% 0.3초
+  b:
+    file: ytflow/stages/syncqa.py·06
+    text: 95% 0.5초
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 코드
+  fix: 0.5초
+  status: resolved
+- id: c-20261120-20
+  found: '2026-11-20'
+  topic: 05 권고 숫자 표
+  a:
+    file: manual/05 §0-1 표
+    text: 4종 이상·40% 이하 (G5 SHOULD)
+  b:
+    file: manual/05 §0-0, checklist G5
+    text: 숫자 상한·하한 없음, 참고값
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 v38
+  fix: 표를 지우고 참고값으로
+  status: resolved
+- id: c-20261120-21
+  found: '2026-11-20'
+  topic: 스타일 하나 = 채널 하나
+  a:
+    file: AGENTS.md·channels/README.md
+    text: 편집 스타일 하나가 유튜브 채널 하나
+  b:
+    file: channels/brands.yaml
+    text: 욕망 하나 = 채널, 폴더는 제작 라인
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 v14
+  fix: 라인으로 고침
+  status: resolved
+- id: c-20261120-22
+  found: '2026-11-20'
+  topic: 시사 목소리·톤
+  a:
+    file: channels/ch-issues/channel.yaml
+    text: voice 미정 / MC 톤
+  b:
+    file: 같은 파일 tts·11 §3-2
+    text: Mina, 분석형
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 2026-11-10
+  fix: Mina·분석형
+  status: resolved
+- id: c-20261120-23
+  found: '2026-11-20'
+  topic: AI 결과 화면 필수
+  a:
+    file: manual/02-ai.md 체크
+    text: 롱폼 필수
+  b:
+    file: manual/02 머리·11 §3-1
+    text: 도구 심층·활용 사례만
+  current: b
+  why: 같은 범위에 반대 지시 — 근거 v38
+  fix: 형식 한정
+  status: resolved
+- id: c-20261120-24
+  found: '2026-11-20'
+  topic: 완성본 기본 보관 위치
+  a:
+    file: manual/06 G8 MUST·README §3-7·11 S9·cli upload 기본
+    text: GitHub Release 업로드 필수
+  b:
+    file: AGENTS.md 저장 규칙·docs/09 §0 (2026-11-16 사용자)
+    text: Google Drive 기본, 공개 가능한 것만 Release
+  current: unknown
+  why: 모든 편에 G8 이 걸려 비공개여야 할 편도 Release 해야 통과
+  fix: G8 을 "보관 기록 — Drive 또는 공개 가능한 것만 Release" 로 바꾸고 upload 기본값도 정함
+  status: open
+- id: c-20261120-25
+  found: '2026-11-20'
+  topic: 매일 시사 영상 길이
+  a:
+    file: channels/ch-issues-daily/channel.yaml 제목·설명, 08 §0-2
+    text: 5분 정리·5~8분, 빠른 정리 틀
+  b:
+    file: 같은 파일 target_minutes 10, README §2-4
+    text: 롱폼 최소 10분 (48시간 빠른 정리만 5~8분)
+  current: unknown
+  why: 매일 시사가 빠른 정리 예외인지 불분명. ch-issues 빠른 정리 10~12분 ↔ 08 의 5~8분도 함께
+  fix: 예외면 5~8분·format quick, 아니면 제목·설명을 10분~으로
+  status: open
+- id: c-20261120-26
+  found: '2026-11-20'
+  topic: 심층 기본과 90분 제작 시간
+  a:
+    file: manual/09 §1 시간표
+    text: 07:00 시작 · 08:30 공개, 90분 안에
+  b:
+    file: manual/09 §2 (v63)
+    text: 12~20분 심층이 기본
+  current: unknown
+  why: 심층 한 편(18분대)이 90분 시간표에 맞는지
+  fix: 08:30 유지하고 심층 크기를 맞추거나, 심층 날은 공개를 늦춤
+  status: open
+- id: c-20261120-27
+  found: '2026-11-20'
+  topic: 토요일 아침
+  a:
+    file: manual/09 §2 표
+    text: 화~토 아침 = 전날 장 (매일 영상)
+  b:
+    file: 같은 표
+    text: 토 = 장이 열리지 않는 날 → -market-weekly
+  current: unknown
+  why: 토요일에 금요일 미국 장 영상과 주간 종합이 함께 걸림
+  fix: 토요일은 주간 종합 하나로 (금요일 장은 그 안에), 또는 둘 다
+  status: open
+- id: c-20261120-28
+  found: '2026-11-20'
+  topic: 호기심 채널 정체성
+  a:
+    file: channels/brands.yaml identity·05 §0-7
+    text: 교실과 기록 보관소, 세피아 기록 사진, 아카이브·지도 대표 연출
+  b:
+    file: 04 §0-8 (v57·v60)
+    text: 심리·현대 일상, 실사 B-roll·모션그래픽
+  current: unknown
+  why: 'brand: curiosity 를 쓰면 기록 사진 표지·아카이브 연출이 자동으로 들어감 (스타일 층, v15·v16 합격분)'
+  fix: 정체성을 "일상 관찰 노트"로 바꾸고 signature·photo_hint 를 B-roll 쪽으로
+  status: open
+- id: c-20261120-29
+  found: '2026-11-20'
+  topic: PC 쿠키 사용과 우회 금지
+  a:
+    file: skills/video-sources §3
+    text: 봇 확인이 뜨면 cookies_from_browser
+  b:
+    file: docs/50 §0·AGENTS 소스 규칙
+    text: 봇 확인을 계정으로 넘는 것은 우회 금지와 부딪힘 (PC 본인 로그인은 2026-11-20 허용)
+  current: unknown
+  why: '"봇 확인이 뜨면" 이라는 조건이 우회처럼 읽힘'
+  fix: PC 본인 로그인으로 평소처럼 받기(공식 채널·20초 이내)로 문장만 바꿀지
+  status: open
+- id: c-20261120-30
+  found: '2026-11-20'
+  topic: make 경로의 style_profile
+  a:
+    file: data/style_profile.json (writing.py 가 모든 make 대본 프롬프트에 넣음)
+    text: frame 30~60초·여정 예고·9분·켄번스 금지
+  b:
+    file: manual/README §2-1·§2-4, 12 §0
+    text: 인트로 없음·10분~·모션그래픽 기본
+  current: unknown
+  why: make 로 만드는 대본은 아직 식스시그마·AI비즈PT 통계를 따름
+  fix: (가) sixsigma 스타일일 때만 넣기 (나) 파일에서 낡은 줄을 지우기
+  status: open
+- id: c-20261120-31
+  found: '2026-11-20'
+  topic: 호기심 intent.md 순서
+  a:
+    file: manual/04 §0-6 순서
+    text: 대본 → 대본 검토 → ④ 편집 의도 → 렌더
+  b:
+    file: manual/11 단계표·04 v55
+    text: S3 의도 intent.md → S4 대본
+  current: unknown
+  why: intent.md 를 언제 쓰는지 두 가지
+  fix: ④ 를 "장면 의도표(S5)" 로 이름을 바꿔 구분
+  status: open
+- id: c-20261120-32
+  found: '2026-11-20'
+  topic: 뉴스레터 정기 작업 역할
+  a:
+    file: 정기 작업 "뉴스레터 소재 수집" 05:40
+    text: 잠금 없이 바로 수집, 옛 브랜치 분기
+  b:
+    file: docs/36 §5-1
+    text: 수집 창 잠금(.lock.json), 기본 수집자는 Super, 다른 에이전트는 06:00 까지 선점 없을 때만
+  current: unknown
+  why: 같은 창을 두 번 수집할 수 있음
+  fix: 이 작업을 대행(06:00)으로 옮기고 잠금 단계 추가, 17:40 창도 맡을지
+  status: open
+- id: c-20261120-33
+  found: '2026-11-20'
+  topic: AI 쇼츠 기본 스타일
+  a:
+    file: channels/ch-ai-shorts/README.md
+    text: shorts-aitips
+  b:
+    file: channels/ch-ai-shorts/channel.yaml
+    text: hook-shorts (hookshort)
+  current: unknown
+  why: 같은 라인에 기본이 둘
+  fix: 어느 쪽이 지금 기본인지
+  status: open
+- id: c-20261120-34
+  found: '2026-11-20'
+  kind: scope
+  topic: scan 을 모든 채널에서 끔
+  a:
+    file: manual/05 §0-3 고르는 요령
+    text: scan 은 쓰지 않음 (모든 채널에)
+  b:
+    file: 09 §6 v32 사용자 원문
+    text: 시장 영상 한 편에 대한 말
+  current: b
+  why: 한 채널 판정이 모든 채널로
+  fix: 시장 기본 끔, 다른 채널은 드물게
+  status: resolved
+- id: c-20261120-35
+  found: '2026-11-20'
+  kind: scope
+  topic: NASA 사진 금지
+  a:
+    file: 05·06 G5·09 §6·checklist.py
+    text: NASA 위성 사진 고정·반복 금지, NASA 2장 이상 실패
+  b:
+    file: v15 한 묶음의 표지
+    text: 원리는 주제와 무관한 기본 사진 금지
+  current: b
+  why: 출처 하나를 규칙에 박음
+  fix: 같은 사진·한 출처로 표지를 모두 채우지 않음
+  status: resolved
+- id: c-20261120-36
+  found: '2026-11-20'
+  kind: scope
+  topic: 바탕 돌려 쓰기 SHOULD
+  a:
+    file: 06 G5·checklist.py
+    text: 직전 두 편과 같은 바탕 금지 (모든 채널 비교)
+  b:
+    file: reviews v13 한 편
+    text: '"돌려 써도 됨" — 허락'
+  current: b
+  why: 허락이 금지가 됐고 다른 채널과 비교
+  fix: 같은 채널만, 참고값
+  status: resolved
+- id: c-20261120-37
+  found: '2026-11-20'
+  kind: scope
+  topic: 막대 인물 금지
+  a:
+    file: 04 §0-6 7번
+    text: 막대 인물 금지
+  b:
+    file: docs/26 v2 시험작 반응
+    text: 스타일 반응
+  current: b
+  why: 시험작 반응이 금지로
+  fix: 사진·이름 카드 기본, 막대 인물은 도식에서만
+  status: resolved
+- id: c-20261120-38
+  found: '2026-11-20'
+  kind: scope
+  topic: CEO 사임 한 사건 문장
+  a:
+    file: 03 §0-3 6번
+    text: 사임 사유가 사생활 보도와 얽혀도
+  b:
+    file: v28 한 사건
+    text: 원칙은 일반
+  current: b
+  why: 한 사건에 맞춘 문장
+  fix: 일반 문장 + 예
+  status: resolved
+- id: c-20261120-39
+  found: '2026-11-20'
+  kind: scope
+  topic: 멈춘 화면 금지 소제목
+  a:
+    file: 09 §6
+    text: 멈춘 화면 금지 (v27)
+  b:
+    file: v30·v34 사용자 바로잡기
+    text: 카메라가 멈춘 것이 문제가 아님
+  current: b
+  why: 한 편 기각이 금지로 남음
+  fix: 말하는 것이 화면에 생긴다
+  status: resolved
+- id: c-20261120-40
+  found: '2026-11-20'
+  kind: scope
+  topic: 제목 잘못 바꾼 일
+  a:
+    file: 09 §7-1 5번
+    text: 11/19 3번째를 제목으로 잘못 읽음
+  b:
+    file: 작업 교훈
+    text: 썸네일 규칙이 아님
+  current: b
+  why: 한 번의 일이 규칙 문장 안에
+  fix: 11-workflow §1 일반 문장으로
+  status: resolved
+- id: c-20261120-41
+  found: '2026-11-20'
+  kind: scope
+  topic: 늘릴 때 뼈대
+  a:
+    file: README §2-4
+    text: §2-3(이야기형) 뼈대를 채운다 — 모든 채널
+  b:
+    file: v38 채널별 뼈대
+    text: 시장 03 §0-4, 시사 08, AI 11 §3-1
+  current: b
+  why: 호기심 뼈대가 모든 채널에
+  fix: 채널별 뼈대
+  status: resolved
+- id: c-20261120-42
+  found: '2026-11-20'
+  kind: scope
+  topic: 호기심 화면 머리말
+  a:
+    file: 04 머리·README §2-5
+    text: 잼 편 편집 레퍼런스 / 주인공 그림이 동사를 연기
+  b:
+    file: 04 §0-8 v60
+    text: B-roll·모션그래픽 먼저
+  current: b
+  why: 두 편의 편집이 레퍼런스로 남음
+  fix: 대본 흐름 레퍼런스로
+  status: resolved
+- id: c-20261120-43
+  found: '2026-11-20'
+  kind: scope
+  topic: 강조 1분에 1번
+  a:
+    file: 10-when-to-use·edit-style-pool·hand-annotate 레시피
+    text: 1분에 1번 이하
+  b:
+    file: 05 §0-0 v38
+    text: 숫자 상한 없음
+  current: b
+  why: 숫자 상한
+  fix: 기억할 곳에만
+  status: resolved
+- id: c-20261120-44
+  found: '2026-11-20'
+  kind: scope
+  topic: 공통 대본 프롬프트의 옛 필수
+  a:
+    file: prompts/script_hybrid.md
+    text: 글씨·도형 3개 이어지면 안 됨·fx(scan 포함)·스타일 조합 필수·v10 자동
+  b:
+    file: v34 스타일 MUST 해제, 05 §0-4 기록용
+    text: 권고
+  current: b
+  why: 한두 편 기각이 모든 영상 필수로
+  fix: 권고·시장 끔 명시
+  status: resolved
+- id: c-20261120-45
+  found: '2026-11-20'
+  kind: scope
+  topic: 자동 층 추정이 틀린 영구 원칙
+  a:
+    file: graph 자동 추정
+    text: 시장 썸네일 방법·채널 정의 분량·제목 형식·조사 다섯 층·미디어 커밋·레퍼런스 안내
+  b:
+    file: README §3-1
+    text: 영구 원칙 = 사실·법·권리·안전
+  current: b
+  why: 낱말(권유·우회·커밋) 하나로 원칙이 됨
+  fix: rule_tiers.yaml 에 작업 기준·스타일로 (Claude 판정, 확인 필요)
+  status: resolved
+- id: c-20261120-46
+  found: '2026-11-20'
+  kind: scope
+  topic: '"~였고요" 끝맺음 MUST'
+  a:
+    file: README §2-2·checklist.py G4 MUST(모든 롱폼)
+    text: 연결어미(~고요·~는데요)로 끝내지 않음
+  b:
+    file: reviews v16 한 편(20261112-bg-trials) 장 표지 문구, 11 §3-2(어미 섞음)
+    text: 한 편 반응, 넓힌 말 없음
+  current: unknown
+  why: 모든 영상 MUST — "~는데요"까지 금지로 넓어짐
+  fix: SHOULD 로 낮추고 "장 표지를 ~였고요로 닫지 않음"만, ~는데요·~거든요 제한은 지움
+  status: resolved
+  decision: '2026-11-20 사용자: "1. 굳이 필수로 두지 말아주세요"'
+- id: c-20261120-47
+  found: '2026-11-20'
+  kind: scope
+  topic: 저음 타격음 코드에서 삭제
+  a:
+    file: 05 §0-5
+    text: 쓰지 않음 — 코드에서 아예 뺌
+  b:
+    file: v11 한 편 기각 "소리 자체가 싫음"
+    text: 취향일 수 있음
+  current: unknown
+  why: 켤 수도 없게 됨
+  fix: 영구히 뺄지, 기본 끔(켤 수 있게)으로 둘지
+  status: resolved
+  decision: '2026-11-20 사용자: "2. 기본은 끄되 켤 수 있게"'
+- id: c-20261120-48
+  found: '2026-11-20'
+  kind: scope
+  topic: SAVE 확인 MUST 범위
+  a:
+    file: checklist.py G3 MUST
+    text: market 브랜드 모든 라인(쇼츠 포함)
+  b:
+    file: 09 §3-0 2026-11-14 "주식 … 기본적으로 확인"
+    text: 매일 시장 작업 흐름의 save_check.md
+  current: unknown
+  why: 칼럼·쇼츠도 막힘
+  fix: 매일 시장 MUST, 그 밖의 시장 라인 SHOULD
+  status: resolved
+  decision: '2026-11-20 사용자: "3. 세이브는 시장관련 소식알람이애요"'
+- id: c-20261120-49
+  found: '2026-11-20'
+  kind: scope
+  topic: 시장 장마다 순서·도입 문구
+  a:
+    file: 09 §5-1
+    text: 질문 → 비유 → 움직이는 설명 → 인사이트, "그림으로 보면/정리하면"으로 시작
+  b:
+    file: 11/20 개정판 한 편 편집 지시
+    text: '"방법 자체를 고정하지 말아주세요"(fb:54)'
+  current: unknown
+  why: 한 편의 편집 지시가 고정 순서로
+  fix: 순서·문구는 예시로
+  status: resolved
+  decision: '2026-11-20 사용자: "4. 네"'
+- id: c-20261120-50
+  found: '2026-11-20'
+  kind: scope
+  topic: 그림판·도형 느낌 탈락
+  a:
+    file: AGENTS·05 §0-8
+    text: 그림판·도형 느낌 탈락
+  b:
+    file: fb:18·19 (스타일 층)
+    text: '"전부 탈락"'
+  current: unknown
+  why: 금지로 읽힘
+  fix: 모든 채널 금지인지, "모션그래픽이 기본"(스타일 기본값)인지
+  status: resolved
+  decision: '2026-11-20 사용자: "5. 모션그래픽을 최우선으로 해주세요"'
+- id: c-20261120-51
+  found: '2026-11-20'
+  kind: scope
+  topic: 공통 대본 프롬프트의 전면 금지
+  a:
+    file: prompts/script.md:93
+    text: 확대·화면 흔들기·효과음·이모지·장식 그래픽은 쓰지 않음
+  b:
+    file: README §2-5
+    text: 기본 끔, 대본에서 켬
+  current: unknown
+  why: 출처를 찾을 수 없음
+  fix: 기본값 문구로 바꿀지
+  status: resolved
+  decision: '2026-11-20 사용자: "6. 그냥 빼주세요"'
+- id: c-20261120-52
+  found: '2026-11-20'
+  kind: scope
+  topic: 강조 아껴 쓰기 단계
+  a:
+    file: 06 G5·05 §0-0
+    text: MUST
+  b:
+    file: checklist.py
+    text: SHOULD 로 기록
+  current: unknown
+  why: 문서와 코드가 다름
+  fix: MUST(코드 고침) 또는 SHOULD(문서 고침)
+  status: resolved
+  decision: '2026-11-20 사용자: "7. 권장으로 하세요"'

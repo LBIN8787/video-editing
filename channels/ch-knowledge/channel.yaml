@@ -2,7 +2,7 @@ id: ch-knowledge
 brand: curiosity                               # channels/brands.yaml (욕망 = 채널)
 title: "(가칭) 몰랐던 이유"
 format: longform
-style_ref: hybrid                        # 삽화·실험 도식·자료를 장면마다 조합 (manual/04 §0-6·§0-7)
+style_ref: hybrid                        # 실사 B-roll + 모션그래픽이 먼저, 기록 없는 장면만 재구성 삽화 (manual/04 §0-8, 레시피 broll-motion)
 family: source
 concept: >
   심리학과 현대인의 일상. 익숙한 행동과 선택에서 질문을 열고, 인물의 행동이나
@@ -18,7 +18,7 @@ tts:
   elevenlabs: {voice_id: YBRudLRm83BV5Mazcr42, model_id: eleven_v4, language_code: ko}
   # API 키 없이: ElevenLabs 커넥터(또는 웹)로 장 단위 긴 음성 생성 → python -m ytflow voice-import <프로젝트> part1.mp3 part2.mp3
 tone: "차분한 이야기. 일상 장면 → 질문 → 행동 또는 실험 → 처음 장면을 새롭게 이해."
-needs_pc_rebuild: false                  # 자체 삽화·연구 자료 중심
+needs_pc_rebuild: false                  # 무료 스톡 실사·모션그래픽·연구 자료 중심 (방송 원본 구간이 필요하면 clip-order, docs/50)
 
 topic_rules:
   - "현대인이 겪는 행동·관계·습관에서 구체적인 질문을 고른다."
@@ -28,7 +28,7 @@ topic_rules:
 sourcing:
   start_from: document
   verify_with: ["심리학·인지과학 원 논문", "후속 연구·재현 연구", "연구팀·기관의 공식 자료"]
-  visuals: "생활과 실험은 직접 만든 삽화, 실제 연구자·실험 사진은 출처를 확인해 사용"
+  visuals: "생활 장면은 사람이 나오는 실사 B-roll(무료 스톡, 출처·라이선스 기록) + 모션그래픽, 실험 조건·결과는 모션그래픽, 실제 연구자·실험 사진은 출처를 확인해 사용, 기록 없는 장면만 재구성 삽화 (04 §0-8)"
 
 demand:
   queries:

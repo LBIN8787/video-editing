@@ -47,7 +47,7 @@ python -m ytflow yt-publish <프로젝트> --update-meta --privacy unlisted   # 
 ```
 - 같은 프로젝트를 두 번 올리지 않는다(`youtube_publish.json` 에 video_id 가 있으면 멈춤).
 - 썸네일이 거절되면(전화 인증 안 된 채널) 영상은 그대로 두고 `warnings` 에 남긴다.
-- 자동 제작 일정(매일 08:00)도 마지막에 이 명령을 부른다.
+- 자동 제작 일정(매일 07:00, manual/09 §1)도 마지막에 이 명령을 부른다.
 
 ## 3. 목소리 (같은 날 정함)
 - 채널 목소리는 `channel.yaml` 의 `tts`(Teo, ElevenLabs)를 렌더가 바로 쓴다. 키는 클라우드 환경의 네트워크 비밀값(api.elevenlabs.io, `xi-api-key`).

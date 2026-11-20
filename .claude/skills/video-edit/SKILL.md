@@ -15,8 +15,6 @@ python -m ytflow stage <프로젝트> assemble    # 05_edit/draft.mp4 · timelin
 
 assemble 끝에 ffmpeg-skill 로 마스터링합니다(`ytflow/stages/finish.py`): 유튜브 음량 −14 LUFS(`final.mp4`), 유튜브 규격 점검(`delivery_check.json`), 프레임 시트(`final_sheet.png`).
 배경음은 `edit.bgm` 에 음원 경로를 주면 내레이션 아래로 자동으로 낮춰 깝니다. 업로드는 `final.mp4` 로 합니다.
-```bash
-```
 - **스타일 적용:** 프로젝트 폴더의 `edit.yaml` 이 `styles/<id>/edit.yaml` 을 따릅니다. `make --style-ref` 가 복사합니다.
 - **스타일 바꾸기:** `edit.yaml` 의 내용을 다른 스타일 것으로 바꾸고 assets 부터 다시 돌립니다(음성은 재사용).
 - **화면 우선순위:** 직접 넣은 파일(`scene_XXX.png/.mp4`) > 받은 클립 > 카드/애니메이션 > 기사 캡처 > 임시 썸네일 > 자리표시
@@ -28,6 +26,7 @@ assemble 끝에 ffmpeg-skill 로 마스터링합니다(`ytflow/stages/finish.py`
    - 글자가 잘리거나 겹치지 않는가
    - 자막이 화면 요소를 가리지 않는가
    - 애니메이션이 끝까지 그려진 상태로 멈추는가 (장면 끝 0.3초 전 프레임으로 확인)
+   - 글자가 상자·칸·화면 밖으로 삐져나오지 않는가 — `layout_qa` 가 못 잡는 상자 안 글자는 눈으로 (2026-11-19 사용자 "앞으로 이런거 주의", 모든 채널)
    - 빠진 글자(□)가 없는가 (폰트에 없는 기호)
    - 스타일 문서(`styles/<id>/STYLE.md`)의 품질 체크리스트
 3. **수정:** 문제가 있으면 렌더러(`ytflow/stages/cards.py`, `paper.py`)나 대본을 고치고 해당 단계부터 다시 돌립니다.

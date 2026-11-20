@@ -537,6 +537,9 @@ def parse_lexicon() -> list[dict]:
                 T(m.group(1), _fn=m.group(2))
         for m in re.finditer(r"RENDER\[\"(\w+)\"\]\s*=\s*(s_\w+)", txt):
             T(m.group(1), _fn=m.group(2))
+        # 반복문으로 등록하는 모듈 (explain.py: for k, fn in (("afterline", s_afterline), ...))
+        for m in re.finditer(r"\(\"(\w+)\"\s*,\s*(s_\w+)\)", txt):
+            T(m.group(1), _fn=m.group(2))
     for k, t in list(terms.items()):
         fn = t.pop("_fn", None)
         d = defs.get(fn)

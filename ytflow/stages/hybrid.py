@@ -776,8 +776,23 @@ def s_bars(D: HDoc, sc: dict, bt: list, dur: float):
     if n > 3 and off:
         step = (1550 - (370 + off)) / (n - 1)
         bw = min(220, step * 0.55)
+    # 말에 맞춰 생기는 숫자 카드(motion count)가 놓일 자리는 비워 둠 (2026-11-20 겹침 점검: 카드가 '브로드컴'·'셀트리온' 이름을 가림)
+    from . import motion2 as _m2
+    _cards = [_m2.count_rect(m_) for b_ in sc.get("beats", []) for m_ in (b_.get("motion") or []) if m_.get("do") == "count"]
+    _lo, _hi = (520 if n <= 3 else 370) + off, (1400 if n <= 3 else 1550)
+    for cx_, cy_, cw_, ch_ in _cards:
+        if cy_ - ch_ / 2 < base + 120 and cy_ + ch_ / 2 > base - 520:   # 막대 높이대에 걸치는 카드만
+            if cx_ >= 960:
+                _hi = min(_hi, cx_ - cw_ / 2 - bw / 2 - 40)
+            else:
+                _lo = max(_lo, cx_ + cw_ / 2 + bw / 2 + 40)
+    _reserve = _cards and (_hi < (1400 if n <= 3 else 1550) or _lo > (520 if n <= 3 else 370) + off)
+    if _reserve and n > 1:
+        step = (_hi - _lo) / (n - 1)
+        bw = min(bw, step * 0.55)
     for k, it in enumerate(items):
-        x = 520 + off + k * (440 - off / 2) if n <= 3 else 370 + off + k * step if off else 960 + (k - (n - 1) / 2) * step
+        x = (_lo + k * step if n > 1 else (_lo + _hi) / 2) if _reserve else \
+            520 + off + k * (440 - off / 2) if n <= 3 else 370 + off + k * step if off else 960 + (k - (n - 1) / 2) * step
         v = it["value"]
         h = max(abs(v) * scale, 6)
         at = t0 + 0.4 + k * stagger
@@ -867,7 +882,8 @@ def s_compare(D: HDoc, sc: dict, bt: list, dur: float):
 
 
 def s_outro(D: HDoc, sc: dict, bt: list, dur: float):
-    D.video(sc["_clipfile"], dur, "photo", push=0.04)
+    if sc.get("_clipfile"):   # 자료 영상이 없으면(클라우드에 파일 없음) 팩 바탕 위에 카드만 (2026-11-20 개정판 렌더)
+        D.video(sc["_clipfile"], dur, "photo", push=0.04)
     i = D._id()
     # 사진 위 글자가 읽히도록: 뒤를 살짝 흐리게 + 가운데 종이 카드
     D.items.append(f'<div id="{i}" style="position:absolute;inset:0;background:rgba(238,231,218,.35);backdrop-filter:blur(3px)"></div>')
@@ -1138,6 +1154,10 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
             os.environ.pop("YTFLOW_SKIN", None)
         else:
             os.environ["YTFLOW_SKIN"] = _env_skin
+    from . import typeset   # 한 편 안의 글꼴 통일 (2026-11-20 사용자: "화면 전환마다 제각각") — 시장 기본, "type": "pack" 이면 팩 글꼴
+    _ts = typeset.for_spec(spec)
+    if _ts:
+        typeset.apply(D, a, _ts)
     for p in (paper.SERIF, paper.SERIF_B, paper.PEN, paper.SANS, paper.SANS_X, paper.FONT_DIR / "NanumGothic-Regular.ttf"):
         if not (a / "fonts" / p.name).exists():   # 글꼴은 그래픽 팩(장면별일 수 있음)이 정한 뒤에 연결
             try:
@@ -1160,8 +1180,10 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     bg = a / bg_name
     if not bg.exists():
         backdrop.make(D.skin, kind, W, HH, chap, still, sc.get("_duo")).save(bg, quality=92)
-    if sc.get("clip") and sc["type"] != "bite":  # 원본 영상 구간을 장면 길이만큼 잘라 넣는다 (소리 없음) — bite 는 cutedit 이 따로
-        src = project.dir("assets") / "footage" / spec["footage"][sc["clip"]["src"]]["file"]
+    _clip_src = (project.dir("assets") / "footage" / spec["footage"][sc["clip"]["src"]]["file"]) if sc.get("clip") and sc["clip"].get("src") in (spec.get("footage") or {}) else None
+    # bite 가 원본 없이 인용 카드로 바뀌면 clip 에 start 가 없다 (2026-11-20 개정판 렌더에서 KeyError) — 구간·파일이 있을 때만 자름
+    if sc.get("clip") and sc["type"] != "bite" and "start" in sc["clip"] and _clip_src is not None and _clip_src.exists():
+        src = _clip_src
         out = a / f"clip_{sc['id']:03d}.mp4"
         subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-ss", str(sc["clip"]["start"]), "-i", str(src),
                         "-t", f"{dur + 0.5:.2f}", "-an", "-vf", "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=30",
@@ -1178,6 +1200,9 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     D._work = work
     from . import graphics
     if not graphics.dispatch(D, sc, bt, dur, RENDER):   # 그래픽 팩이 다른 컴포넌트(그림)를 고르면 그걸로
+        if sc["type"] in ("afterline", "spread", "share", "motionboard") and not sc.get("theme"):
+            # 설명 무대 바탕 기본값: 시장은 어두운 무대 (2026-11-20 사용자: "설명부분은 배경 공통으로 해주세요 어두운걸로요")
+            sc["theme"] = spec.get("explain_theme") or {"market": "dark"}.get(spec.get("brand", ""), "paper")
         RENDER[sc["type"]](D, sc, bt, dur)
         if sc.get("insight"):   # v36: 사람·매체의 시각은 사실과 다르게 표시
             D.opinion_tag(dark=sc["type"] in ("bite", "versus") or D.skin.get("dark", False))
@@ -1353,8 +1378,11 @@ def sfx_files() -> dict:
     base = config.ROOT / ".claude" / "skills" / "media-use" / "audio" / "assets" / "sfx"
     if not base.exists():
         base = config.ROOT / ".agents" / "skills" / "media-use" / "audio" / "assets" / "sfx"
-    # impact-bass(저음 '두웅')는 쓰지 않음 — 2026-11-10 사용자 판정 '소리 자체가 싫다'
-    files = {k: base / f"{k}.mp3" for k in ("whoosh", "pop", "click-soft", "whoosh-short", "riser", "chime")}
+    # impact-bass(저음 '두웅')는 기본 끔 — 켜려면 YTFLOW_SFX_BASS=1 (2026-11-20 사용자: "기본은 끄되 켤 수 있게")
+    names = ["whoosh", "pop", "click-soft", "whoosh-short", "riser", "chime"]
+    if os.environ.get("YTFLOW_SFX_BASS") == "1":
+        names.append("impact-bass-1")
+    files = {k: base / f"{k}.mp3" for k in names}
     pen = config.CACHE_DIR / "sfx" / "pencil.wav"
     if not pen.exists() or pen.stat().st_size < 1000:
         # 연필 긁는 소리: 내려받지 않고 직접 만듦 (분홍 잡음 → 대역 통과 → 빠른 떨림 → 페이드)
@@ -1519,9 +1547,17 @@ def make(project: Project, workers: int = 3) -> Path:
         print(f"[hybrid] 움직임: 화면 변화 {m.get('change_events_per_min')}/분 · 정지 비율 {m.get('static_ratio')}")
     except Exception as e:  # noqa: BLE001
         print(f"[hybrid] 움직임 측정 건너뜀: {e}")
+    try:  # 글자 겹침 점검: 장면 HTML 을 박자 끝마다 멈춰 글자끼리·카드·자막 자리 겹침을 잼 → 05_edit/overlap_qa.json
+        from . import overlapqa   # (2026-11-20 사용자: "자막이랑 영상 글씨가 겹치거나 전체적으로 글씨들이 겹치는 경우가 잦습니다")
+        overlapqa.run(project.path.name)
+    except Exception as e:  # noqa: BLE001
+        print(f"[hybrid] 겹침 점검 건너뜀: {e}")
     if spec.get("package"):  # 제목·썸네일 (영상과 함께 만든다 — prompts/thumbnail.md)
-        from . import thumbnail
-        thumbnail.run(project)
+        try:
+            from . import thumbnail
+            thumbnail.run(project)
+        except Exception as e:  # noqa: BLE001 — 사진 파일이 없어도 싱크 점검까지는 간다
+            print(f"[hybrid] 썸네일 건너뜀: {e}")
     try:  # 완성본 싱크를 받아쓰기로 재서 05_edit/sync_qa.json 에 (자막·목소리 0.3초 이내 95% 이상이면 통과)
         from . import syncqa
         syncqa.run(project)

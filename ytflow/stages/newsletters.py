@@ -3,7 +3,12 @@
 뉴스레터는 **단서**입니다. 문장을 대본·화면에 옮기지 않고, 영상에 넣을 숫자·발언은 링크를 따라 1차 출처로 확인합니다.
 메일 하나를 그대로 쌓지 않고, 소재마다 다섯 칸으로 나눕니다:
     소재(원래 제목) · 원문 링크 · 원자료·통계 · 영상·이미지 출처 · 재사용 조건
-그리고 채널(market·ai·curiosity·issues)별로 모아 `inbox/newsletters/<YYYYMMDD>.md|json` 에 씁니다.
+그리고 카테고리(market·ai·curiosity·history·issues — 시장·AI·일상·심리·뇌과학·역사·시사)별로 모아
+`inbox/newsletters/<YYYYMMDD>.md|json` 에 씁니다.
+
+SAVE(오선) 알림(`[save알림]` 메일, 2026-11-20 개편)은 원문 링크가 없는 **단신 한 줄**이라 따로
+`inbox/save/` 에 쌓지 않고, 같은 파일의 다섯 카테고리 중 하나로 들어갑니다(config 의 `headline: true` 소스).
+그 행은 원문·기사 칸이 비고 제목에 알림 시각을 붙입니다 — 빈 링크 괄호를 만들지 않습니다.
 시장·시사 매일 브리핑은 `daily` 가 그날 파일을 `daily_brief.md` 끝 '⑦ 뉴스레터 화제'로 붙입니다.
 
 메일 가져오기 (클라우드 Python 은 Gmail 에 직접 못 들어감 → 에이전트가 Gmail 커넥터로):
@@ -59,10 +64,16 @@ def video_day(iso: str) -> str:
 def which(msg: dict, c: dict) -> dict | None:
     who = (msg.get("sender", "") + " " + msg.get("name", "")).lower()
     for s in c["sources"]:
-        if any(m.lower() in who for m in s.get("match", [])):
-            if s.get("subject") and not re.search(s["subject"], msg.get("subject", "")):
+        match = s.get("match") or []
+        subject = s.get("subject")
+        if match:
+            if not any(m.lower() in who for m in match):
                 continue
-            return s
+        elif not subject:   # 보낸 사람도 제목도 없으면 알아볼 수 없음
+            continue
+        if subject and not re.search(subject, msg.get("subject", "")):
+            continue
+        return s
     return None
 
 
@@ -211,10 +222,57 @@ def route(title: str, src: dict, c: dict) -> str:
     return best if score[best] else bs[0]
 
 
+# ── 링크 없는 단신 (SAVE 알림) — 한 줄이 소재 하나 ──
+# MacroDroid 가 보내는 본문은 `[app_name] | [notification_title] | 소식` 한 줄입니다.
+PIPE_TEMPLATE = re.compile(r"^\s*\[[^\]]*\]\s*\|")
+PLACEHOLDER = re.compile(r"\[(?:app_name|notification_title|package_name|text)\]")
+NO_LINK_REUSE = "알림 단신: 원문 링크 없음 — 1차 출처로 직접 확인"
+
+
+def headline_line(line: str) -> str:
+    """`[app_name] | [notification_title] | 소식` 에서 소식만. 템플릿이 빈 채로 온 줄은 빈 글자."""
+    t = line.strip()
+    if PIPE_TEMPLATE.match(t):
+        t = t.rsplit("|", 1)[-1].strip()
+    if not t or PLACEHOLDER.search(t):
+        return ""
+    return _clean(t)
+
+
+def alarm_stamp(iso: str) -> str:
+    """표에 적을 알림 시각 `MM-dd HH:mm` (KST)."""
+    try:
+        return datetime.fromisoformat(iso.replace("Z", "+00:00")).astimezone(KST).strftime("%m-%d %H:%M")
+    except ValueError:
+        return ""
+
+
+def headlines_from(msg: dict, src: dict, c: dict) -> list[dict]:
+    """링크 없는 단신: 본문 한 줄 = 소재 하나.
+
+    원문 주소가 없으므로 `url` 은 빈 글자로 두고 표에는 제목·출처·알림 시각만 적습니다
+    (빈 링크 괄호를 만들지 않음). 카테고리는 제목 낱말(`route`)로 다섯 칸 중 하나에 넣습니다.
+    """
+    out, seen = [], set()
+    for raw in msg.get("body", "").splitlines():
+        title = headline_line(raw)
+        key = re.sub(r"\s+", " ", title).lower()
+        if len(title) < 4 or EMAIL_ADDRESS.search(title) or key in seen:
+            continue
+        seen.add(key)
+        out.append({"title": title, "url": "", "kind": "news", "reuse": NO_LINK_REUSE,
+                    "brand": route(title, src, c), "source": src["id"], "source_name": src["name"],
+                    "msg": msg.get("id", ""), "date": msg.get("date", ""),
+                    "alarm": alarm_stamp(msg.get("date", ""))})
+    return out
+
+
 def items_from(msg: dict, c: dict, do_resolve: bool = True) -> list[dict]:
     src = which(msg, c)
     if not src or NOISE_SUBJ.search(msg.get("subject", "")):
         return []
+    if src.get("headline"):   # SAVE 알림 — 본문이 링크 없는 한 줄
+        return headlines_from(msg, src, c)
     own = [m.lower() for m in src.get("match", [])]
     out, urls = [], set()
     for title, url in extract(msg.get("body", "")):
@@ -258,6 +316,15 @@ def message_key(message_id: str) -> str:
     return sha256(message_id.encode("utf-8")).hexdigest() if message_id else ""
 
 
+def item_key(it: dict) -> tuple:
+    """같은 소재인가 — 주소가 있으면 주소, 링크 없는 단신은 제목+날짜."""
+    url = (it.get("url") or "").strip()
+    if url:
+        return ("url", url)
+    return ("title", re.sub(r"\s+", " ", (it.get("title") or "")).strip().lower(),
+            str(it.get("date") or "")[:10])
+
+
 def add(items: list[dict], msgs: list[dict]) -> list[Path]:
     """날짜 파일에 덧붙임. 최근 2주에 이미 나온 주소는 새로 넣지 않고 '같이 다룸'에 뉴스레터만 더함."""
     days: dict[str, dict] = {}
@@ -272,7 +339,8 @@ def add(items: list[dict], msgs: list[dict]) -> list[Path]:
             d["messages"].append({"id": m["id"], "source": m.get("source", ""), "date": m.get("date", "")})
             touched.add(d["day"])
     for it in items:
-        old = next(((dd, x) for dd in days.values() for x in dd["items"] if x["url"] == it["url"]), None)
+        key = item_key(it)
+        old = next(((dd, x) for dd in days.values() for x in dd["items"] if item_key(x) == key), None)
         if old:
             dd, x = old
             if it["source"] != x["source"] and it["source"] not in x.setdefault("also", []):
@@ -353,6 +421,17 @@ def rss() -> list[Path]:
 
 
 # ── 보기 ──
+def alarm_suffix(x: dict) -> str:
+    """링크 없는 단신 행의 꼬리: ` (알림 11-20 17:18)`."""
+    if (x.get("url") or "").strip() or not x.get("alarm"):
+        return ""
+    return f" (알림 {x['alarm']})"
+
+
+def title_cell(x: dict) -> str:
+    return f"{x['title'].replace('|', '/')}{alarm_suffix(x)}"
+
+
 def to_md(d: dict) -> str:
     day = d["day"]
     L = [f"# 뉴스레터 소재 — {day[:4]}-{day[4:6]}-{day[6:]} 영상 몫", "",
@@ -367,12 +446,14 @@ def to_md(d: dict) -> str:
         for x in its:
             col = {"primary": [], "news": [], "data": [], "media": []}
             for lk in [x] + x.get("extra", []):
+                if not (lk.get("url") or "").strip():
+                    continue   # 링크 없는 단신 — 빈 링크 괄호를 만들지 않는다
                 host = urllib.parse.urlsplit(lk["url"]).netloc.removeprefix("www.")
                 col[lk["kind"]].append(f"[{host}{' (1차)' if lk['kind'] == 'primary' else ''}]({lk['url']})")
             cell = lambda *ks: " ".join(v for k in ks for v in col[k]) or "—"
             rs = " / ".join(dict.fromkeys([x["reuse"]] + [e["reuse"] for e in x.get("extra", [])]))
             also = f" (+{', '.join(x['also'])})" if x.get("also") else ""
-            L.append(f"| {x['title'].replace('|', '/')} | {cell('primary', 'news')} | {cell('data')} | {cell('media')} | {rs.replace('|', '/')} | {x['source_name']}{also} |")
+            L.append(f"| {title_cell(x)} | {cell('primary', 'news')} | {cell('data')} | {cell('media')} | {rs.replace('|', '/')} | {x['source_name']}{also} |")
         L.append("")
     return "\n".join(L)
 
@@ -388,7 +469,8 @@ def section(brands: tuple[str, ...], day: str, n: int = 15) -> str:
     its.sort(key=lambda x: (-len(x.get("also", [])), ["primary", "data", "media", "news"].index(x["kind"])))
     for x in its[:n]:
         also = f", 같이 다룸: {', '.join(x['also'])}" if x.get("also") else ""
-        L.append(f"- [{KIND_KO[x['kind']]}] {x['title']} — {x['source_name']}{also} · {x['url']}")
+        tail = f" · {x['url']}" if (x.get("url") or "").strip() else alarm_suffix(x)
+        L.append(f"- [{KIND_KO[x['kind']]}] {x['title']} — {x['source_name']}{also}{tail}")
     if len(its) > n:
         L.append(f"- … 나머지 {len(its) - n}개: `inbox/newsletters/{d['day']}.md`")
     return "\n".join(L) + "\n"
@@ -404,7 +486,8 @@ def show(brand: str = "", days: int = 1) -> None:
             continue
         print(f"# {day} ({len(its)})")
         for x in its:
-            print(f"  [{BRAND_KO[x['brand']]}/{KIND_KO[x['kind']]}] {x['title'][:80]} — {x['source']} · {x['url']}")
+            print(f"  [{BRAND_KO[x['brand']]}/{KIND_KO[x['kind']]}] {x['title'][:80]} — {x['source']} · "
+                  f"{x['url'] or '링크 없음'}")
 
 
 def sources() -> None:

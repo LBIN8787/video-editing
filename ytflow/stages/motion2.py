@@ -30,6 +30,25 @@ def _e(s) -> str:
     return H.escape(str(s))
 
 
+def _est(txt, px) -> float:
+    return sum(px * (1.0 if ord(c) > 0x2E80 else 0.58) for c in str(txt))
+
+
+def count_rect(m: dict) -> tuple:
+    """숫자 카드(count)가 실제로 차지할 자리 (x, y, w, h) — 글자에 맞춘 너비 + 화면 안·자막 자리 위로 (2026-11-20 겹침 점검:
+    너비를 넓히자 오른쪽 끝 카드가 화면 밖으로 잘림). 막대 장면이 이 자리를 비워 둘 때도 쓴다."""
+    lab, val = m.get("label", ""), str(m.get("value", ""))
+    w = max(m.get("w", 900), _est(lab, 38) + 64, _est(val, m.get("fs", 190)) * 0.95 + 64)
+    h = m.get("h", 420)
+    return clamp_box(m.get("x", 960), m.get("y", 540), w, h) + (w, h)
+
+
+def clamp_box(x, y, w, h, safe_bottom: float = 925) -> tuple:
+    x = min(max(x, w / 2 + 30), 1920 - w / 2 - 30)
+    y = min(max(y, h / 2 + 60), safe_bottom - h / 2)
+    return x, y
+
+
 def word_time(words: list, say: str, target: str, dur: float) -> float:
     """박자 음성 받아쓰기(words)에서 target 을 말하기 시작하는 시각(박자 안 초). 못 찾으면 글자 위치 비율."""
     norm = lambda s: re.sub(r"[^0-9a-z가-힣]", "", s.lower())
@@ -118,9 +137,10 @@ class Stage:
             num = re.sub(r"[^\d.]", "", val)
             inner = (f'<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;'
                      f'background:{self.th["card"]};border-radius:32px;box-shadow:0 20px 60px rgba(0,0,0,.5)">'
-                     f'<div style="font-family:gr,sans;font-size:38px;color:{self.th["card_ink"]};opacity:.75">{_e(lab)}</div>'
+                     f'<div style="font-family:gr,sans;font-size:38px;color:{self.th["card_ink"]};opacity:.75;white-space:nowrap">{_e(lab)}</div>'
                      f'<div id="{self.p}_{m["id"]}_n" style="font-family:gx,sans-x;font-size:{m.get("fs", 190)}px;line-height:1.05;color:{self.th["card_ink"]}">{_e(val)}</div></div>')
-            cw, ch = m.get("w", 900), m.get("h", 420)
+            # 글자에 맞춘 너비 + 화면 안·자막 자리 위로 (2026-11-20 겹침 점검: '(계산)' 줄바꿈, 오른쪽 끝 잘림)
+            x, y, cw, ch = count_rect(m)
             did = self._box(m["id"], x, y, cw, ch, inner)
             self._enter(did, t)
             mm = re.search(r"\d[\d,]*(\.\d+)?", val)

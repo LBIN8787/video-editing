@@ -4,6 +4,9 @@
 # 뉴스레터는 '단서'입니다. 문장을 대본·화면에 옮기지 않고, 영상에 넣을 숫자·발언은 링크를 따라 1차 출처로 확인합니다.
 # match: 보낸 사람 주소(또는 표시 이름)에 들어 있는 글자 — 하나라도 맞으면 이 뉴스레터
 # subject: (선택) 제목 정규식 — 같은 보낸 사람이 여러 뉴스레터를 보낼 때 (TLDR AI / TLDR Tech)
+#          match 없이 subject 만 있으면 제목만으로 알아봅니다 (SAVE 알림 — 보낸 사람이 본인 주소)
+# headline: true — 본문 링크 대신 한 줄 단신(SAVE 알림). 원문 주소 없이 제목·출처·알림 시각만 적고
+#          제목 낱말(route)로 다섯 카테고리 중 하나에 넣습니다 (2026-11-20 개편)
 # brands: 이 뉴스레터 소재가 기본으로 갈 채널 (market·ai·curiosity·issues). 여러 개면 소재마다 낱말로 나눔
 # arrives: 한국 시간 대략 도착 시각 (구독 1주 뒤 실제 시각으로 고치기) — 08:00 아침 제작에 쓸 수 있나 판단
 # status: subscribed(구독함) · planned(구독 예정) · blocked(가입 막힘 — 사람이 휴대폰에서)
@@ -60,12 +63,16 @@ sources:
   - {id: owid, name: Our World in Data Brief, match: [ourworldindata], brands: [issues, curiosity, market], cadence: "월 2회", arrives: 수시, status: subscribed}
   - {id: pew, name: Pew Research Center, match: [pewresearch.org], brands: [issues, curiosity], cadence: 주간, arrives: 수시, status: subscribed}
   - {id: newneek, name: 뉴닉, match: [newneek.co], brands: [issues], cadence: 평일, arrives: "07시 전후", status: blocked}
+  # ── SAVE(오선) 알림 — 2026-11-20 개편: `inbox/save/` 따로 저장 폐지, 같은 5개 카테고리로 통합 ──
+  # 휴대폰 MacroDroid → 본인 Gmail 로 오는 `[save알림]` 메일. 본문은 `[app_name] | [notification_title] | 소식` 한 줄이라
+  # 원문 링크가 없음(headline: true). 보낸 사람이 본인 주소라 match 없이 제목으로만 알아본다.
+  - {id: save, name: SAVE 알림 (오선 단신), subject: "(?i)save알림", headline: true, brands: [market, ai, curiosity, history, issues], cadence: 수시, arrives: 수시, status: subscribed}
 
 # 소재마다 채널을 나눌 때 쓰는 낱말 (뉴스레터의 brands 가 여러 개일 때만). 소문자로 비교
 route:
-  market: [stock, shares, earnings, revenue, guidance, fed, rate, inflation, cpi, bond, yield, ipo, tariff, nasdaq, s&p, dow, oil, dollar, valuation, investor, 주가, 증시, 실적, 금리, 물가, 환율, 코스피, 투자, 매출, 관세, 연준]
-  ai: [" ai ", "ai,", "ai.", "ai's", llm, gpt, claude, gemini, openai, anthropic, model, agent, chatbot, neural, 인공지능, 에이전트]
-  issues: [election, court, law, policy, war, government, congress, senate, poll, survey, protest, 정책, 정부, 국회, 선거, 법원, 전쟁, 여론]
+  market: [stock, shares, earnings, revenue, guidance, fed, rate, inflation, cpi, bond, yield, ipo, tariff, nasdaq, s&p, dow, oil, dollar, valuation, investor, 주가, 증시, 실적, 금리, 물가, 환율, 코스피, 투자, 매출, 관세, 연준, 기술주, 채권, 유가, 원화, 암호화폐, 비트코인, 상장, 매도세, 순환매, 밸류에이션]
+  ai: [" ai ", "ai,", "ai.", "ai's", llm, gpt, claude, gemini, openai, anthropic, model, agent, chatbot, neural, 인공지능, 에이전트, 반도체, 데이터센터]
+  issues: [election, court, law, policy, war, government, congress, senate, poll, survey, protest, 정책, 정부, 국회, 선거, 법원, 전쟁, 여론, 상원, 하원, 의회, 법안, 백악관, 대통령, 규제, 협상, 제재]
   history: [history, ancient, empire, dynasty, war, century, medieval, archaeology, historical, 역사, 고대, 중세, 왕조, 제국, 근현대, 발굴]
   curiosity: [brain, psychology, neuroscience, habit, sleep, behavior, cognitive, stress, dopamine, science, physics, biology, health, why, 뇌, 심리, 습관, 수면, 행동, 인지, 도파민, 과학, 우주, 진화]
 

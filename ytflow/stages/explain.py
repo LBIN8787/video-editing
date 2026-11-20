@@ -36,7 +36,7 @@ CARD_INK = "#1E2330"   # 카드 안 그림·글자 (밝은 카드 위라 테마�
 THEMES = {
     "dark": {"#1F242E": "#ECE8E0", "#20242C": "#D9D5CC", "#55595f": "#A8ACB3", "#3A3F48": "#C9CCD2", "#4A4E55": "#B4B8BF",
              "#B8322E": "#E5533F", "#B5302B": "#F0614C", "#C33A31": "#E2483A", "#C2463C": "#E0503F", "#8E2420": "#9E2A22",
-             "#7E1C18": "#8C241C", "rgba(30,24,16,": "rgba(0,0,0,"},
+             "#7E1C18": "#8C241C", "rgba(30,24,16,": "rgba(0,0,0,", "rgba(238,233,223,.94)": "rgba(34,36,42,.94)"},
 }
 
 
@@ -99,14 +99,21 @@ def _setup(D, sc: dict, title: bool = True):
         _txt(D, 150, 112, sc["title"], HEAVY, 44, "#3A3F48", at=0.15, anchor="lm")
 
 
-def _txt(D, x, y, s, font, size, color, at=None, gap=0.12, dur=0.45, anchor="mm", ls=0.0, shadow=False):
-    """글자 하나 (굵은 글꼴 포함). hyper.Doc.text 와 같은 등장 방식, id 도 같은 규칙."""
+PAD = "rgba(238,233,223,.94)"   # 글자 받침(무대 바탕색) — 어두운 무대에서는 THEMES 가 어두운 색으로 바꿈
+
+
+def _txt(D, x, y, s, font, size, color, at=None, gap=0.12, dur=0.45, anchor="mm", ls=0.0, shadow=False, pad=False):
+    """글자 하나 (굵은 글꼴 포함). hyper.Doc.text 와 같은 등장 방식, id 도 같은 규칙.
+    pad: 글자 뒤에 무대 바탕색 받침을 깔고 선보다 위에 그림 — 화살표 이름표가 다른 선에 겹쳐 읽히지 않던 문제 (2026-11-20 사용자: "옮겨감 이런 글씨가 선에 겹쳣어요")."""
     i = D._id()
     fam = FAM.get(str(font), "sans")
     ax = {"m": "-50%", "l": "0", "r": "-100%"}[anchor[0]]
     sh = ";text-shadow:0 2px 3px rgba(30,24,16,.18)" if shadow else ""
+    pd = f";z-index:6;background:{PAD};padding:2px 12px;border-radius:10px" if pad else ""
     D.items.append(f'<div id="{i}w" class="t" style="left:{x:.0f}px;top:{y:.0f}px;font-family:{fam};font-size:{size:.0f}px;'
-                   f'color:{color};letter-spacing:{ls}px;transform:translate({ax},-50%){sh}"><span id="{i}">{H.escape(s)}</span></div>')
+                   f'color:{color};letter-spacing:{ls}px;transform:translate({ax},-50%){sh}{pd}"><span id="{i}">{H.escape(s)}</span></div>')
+    if pad:   # 받침도 글자와 함께 나타남
+        D.js.append(f'tl.set("#{i}w",{{opacity:0}},0);tl.to("#{i}w",{{opacity:1,duration:0.2}},{D.at(at, 0):.2f});')
     t = D.at(at, gap)
     D.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:18}},{{opacity:1,y:0,duration:{dur},ease:"power2.out"}},{t:.2f});')
     return t
@@ -495,10 +502,17 @@ def _el_html(D, sc, key: str, el: dict) -> tuple[str, float, float]:
         lab = el.get("label", "")
         lsz = fit(HEAVY, lab, el.get("size", 46), w - 20).size if lab else 0
         col = {"red": "#B5302B", "navy": NAVY}.get(el.get("color", "navy"), el.get("color", NAVY))
+        # 카드 아래 큰 숫자 (2026-11-20 사용자: "숫자가 안보입니다" · "2~4% 뭉뚱그리지 말고 제대로 각각") — 음수 빨강·양수 초록
+        val = str(el.get("value", ""))
+        vcol = {"-": "#B5302B", "−": "#B5302B", "+": "#1E7A46"}.get(val[:1], CARD_INK)
+        vsz = fit(HEAVY, val, el.get("vsize", 50), w - 16).size if val else 0
+        if val:
+            h += vsz * 1.1 + 6
         inner = (f'<div style="width:{w:.0f}px;height:{h:.0f}px;background:linear-gradient(180deg,#FFFEFB,#F1EEE6);border-radius:8px;'
                  f'box-shadow:{SHADOW};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;'
                  f'transform:rotate({rot}deg)">{mk}'
                  + (f'<div style="font-family:heavy;font-size:{lsz}px;color:{col};line-height:1">{H.escape(lab)}</div>' if lab else "")
+                 + (f'<div style="font-family:heavy;font-size:{vsz}px;color:{vcol};line-height:1.05;white-space:nowrap">{H.escape(val)}</div>' if val else "")
                  + "</div>")
         return inner, w, h
     if k == "img":   # 투명 PNG 소품 그대로 (그림자만)
@@ -519,6 +533,13 @@ def _el_html(D, sc, key: str, el: dict) -> tuple[str, float, float]:
     return "", 0, 0
 
 
+SAFE_BOTTOM = 925   # 자막 상자(아래 여백 48 + 글자 52 + 테두리 14) 위쪽 약 953 — 장면 요소는 이 선 위에서 끝남
+
+
+def _safe_pts(pts):
+    return [[x, min(y, SAFE_BOTTOM - 10)] for x, y in pts]
+
+
 def s_board(D, sc: dict, bt: list, dur: float):
     """자유 무대: 인물·소품 카드·글자·붓 선·화살표·금지 표시를 놓고, 박자마다 보이기·옮기기·강조·흐리게.
 
@@ -537,6 +558,8 @@ def s_board(D, sc: dict, bt: list, dur: float):
             continue
         inner, w, h = _el_html(D, sc, key, el)
         x, y = el["x"], el["y"]
+        if y + h / 2 > SAFE_BOTTOM:   # 자막 자리 위로 끌어올림 (2026-11-20 사용자: "자막이랑 영상 글씨가 겹치거나 … 잦습니다")
+            y = SAFE_BOTTOM - h / 2
         i = D._id()
         D.items.append(f'<div id="{i}" style="position:absolute;left:{x - w / 2:.0f}px;top:{y - h / 2:.0f}px;opacity:0">{inner}</div>')
         box[key] = {"id": i, "x": x, "y": y, "w": w, "h": h}
@@ -580,11 +603,11 @@ def s_board(D, sc: dict, bt: list, dur: float):
                         if el.get("label"):   # 곡선 꼭대기 바깥쪽
                             mx, my = 0.25 * sx + 0.5 * cx + 0.25 * ex, 0.25 * sy + 0.5 * cy + 0.25 * ey
                             sgn = -1 if bend >= 0 else 1
-                            _txt(D, mx + uy * 42 * sgn, my - ux * 42 * sgn, el["label"], paper.PEN, el.get("size", 44),
-                                 "#B5302B" if el.get("color") == "red" else INK, at=t + 0.3)
+                            _txt(D, mx + uy * 46 * sgn, my - ux * 46 * sgn, el["label"], paper.PEN, el.get("size", 44),
+                                 "#B5302B" if el.get("color") == "red" else INK, at=t + 0.3, pad=True)
                         D.sfx.append(("pencil", t))
                 elif kind == "brush":
-                    pts = el["pts"]
+                    pts = _safe_pts(el["pts"])
                     dpath = "M" + " L".join(f"{x:.0f} {y:.0f}" for x, y in pts)
                     w_ = el.get("width", 22)
                     _path_draw(D, dpath, "#8E2420", w_ + 6, t + 0.03, el.get("dur", 0.8), "xbrush", 0.6)
@@ -599,7 +622,7 @@ def s_board(D, sc: dict, bt: list, dur: float):
                     _path_draw(D, f"M{x - q} {y - q} L{x + q} {y + q}", "#C33A31", 17, t + 0.45, 0.22, "xbrush")
                     D.sfx.append(("pop", t))
                 elif kind == "dashed":
-                    (x0, y0), (x1, y1) = el["pts"]
+                    (x0, y0), (x1, y1) = _safe_pts(el["pts"])
                     _dashed(D, x0, y0, x1, y1, "#20242C", t, el.get("width", 3), 0.5)
                 shown.add(name)
             elif bx and "move" in act:
@@ -633,10 +656,22 @@ def json_str(x: str) -> str:
     return json.dumps(x, ensure_ascii=False)
 
 
+def _dark_skin(D) -> bool:
+    """theme light 의 바탕은 그래픽 팩(스킨) — 칠판·청사진처럼 어두운 스킨이면 글자·선도 밝게 (2026-11-20 샘플에서 먹색 글자가 묻힘).
+    스킨의 글자색(palette.ink)이 밝으면 어두운 스킨으로 본다."""
+    ink = str(((getattr(D, "skin", None) or {}).get("palette") or {}).get("ink", "#000000")).lstrip("#")
+    try:
+        r, g, b = (int(ink[k:k + 2], 16) for k in (0, 2, 4))
+    except ValueError:
+        return False
+    return 0.299 * r + 0.587 * g + 0.114 * b > 150
+
+
 def _themed(fn):
     def run(D, sc, bt, dur):
         fn(D, sc, bt, dur)
-        _apply_theme(D, sc.get("theme", "paper"))
+        th = sc.get("theme", "paper")
+        _apply_theme(D, "dark" if th == "light" and _dark_skin(D) else th)
     run.__name__ = fn.__name__
     return run
 

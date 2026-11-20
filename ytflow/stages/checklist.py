@@ -140,7 +140,7 @@ def run(path: Path, upto: str = "G8") -> Report:
     if last >= 1 and (ed_ch == "ch-market-daily" or brand == "market"):   # SAVE(오선) 소식 기본 확인 (2026-11-14 사용자, manual/09 §3-0)
         from . import savecheck
         sv = savecheck.read(Path(path) / "01_research")
-        R.add("G2", "MUST", "시장: SAVE(오선) 소식 확인 기록 — 상태 '확인함' 또는 '확인 못 함: 이유' (01_research/save_check.md)",
+        R.add("G2", "MUST" if ed_ch == "ch-market-daily" else "SHOULD", "시장: SAVE(오선) 시장 소식 알림 확인 기록 — 상태 '확인함' 또는 '확인 못 함: 이유' (01_research/save_check.md)",
               sv["done"], sv["status"] or "save_check.md 없음 (python -m ytflow daily 가 만듦)")
         R.add("G2", "SHOULD", "시장: SAVE 실제로 확인함 (항목 1개 이상)", sv["done"] and sv["status"].startswith("확인함") and sv["items"] >= 1,
               f"{sv['status']} · 항목 {sv['items']}")
@@ -184,7 +184,7 @@ def run(path: Path, upto: str = "G8") -> Report:
         import re as _re2   # v16 진행 말투: 연결어미로 문장을 끝내지 않기 (README §2-2)
         _says = [b.get("say", "") for s in spec.get("scenes", []) for b in s.get("beats", [])]
         awk = [m.group(0) for t in _says for m in _re2.finditer(r"[^.?!]{0,14}(?:였|이었|했|었|았|였었)고요[.!]", t)]
-        R.add("G4", "MUST", "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2)", not awk, awk[:3])
+        R.add("G4", "SHOULD", "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2, 2026-11-20 사용자: 필수 아님)", not awk, awk[:3])
         first = " ".join(b.get("say", "") for s in _opening(spec) for b in s.get("beats", []))
         R.add("G4", "SHOULD", "여는 부분에 이 영상의 질문 하나 (시청자가 무엇을 따라가는지 알게)", "?" in first or "까요" in first or "일까" in first, "")
         if brand == "curiosity" and longform and spec.get("scenes"):   # v17 호기심 먼저 (04 §0)
@@ -390,7 +390,7 @@ def run(path: Path, upto: str = "G8") -> Report:
         R.add("G5", "참고", "반복 피로: 볼거리(자료·지도·그림)가 있는 장면의 몫", vs["ratio"] >= 0.6, f"{vs['hooked']}/{vs['n']}")
         R.add("G5", "참고", "반복 피로: 같은 시각 효과가 이어지는 구간 (효과 종류 수는 채우지 않음 — 05 §0-5)",
               not vs["fx_runs"], f"{vs['fx_kinds']} 연속 {vs['fx_runs']}")
-        # 바탕색 돌려 쓰기 (v13): 미색 종이 계열만 계속 쓰지 않기 — 직전 두 프로젝트와 같은 바탕 계열이면 경고
+        # 바탕 계열 (v13, 2026-11-11 한 편 판정 "돌려 써도 됨" — 허락이지 명령이 아님): 같은 채널 직전 두 편과 같은 바탕 계열이면 참고로 표시
         try:
             from . import skin as _skin
             def _fam(sid):
@@ -399,12 +399,16 @@ def run(path: Path, upto: str = "G8") -> Report:
                 if r + g + bb < 300: return f"dark:{sid}"
                 return "cream" if r - bb > 12 else f"light:{sid}"
             cur = _fam((ed.get("edit") or {}).get("skin", "paper-sketch"))
+            my_ch = ed.get("channel", "")
             prevs = []
             for q in sorted(Path(path).parent.iterdir()):
                 if q.name < Path(path).name and (q / "edit.yaml").exists() and (q / "05_edit" / "final.mp4").exists():
-                    prevs.append(_fam(((yaml.safe_load((q / "edit.yaml").read_text(encoding="utf-8")) or {}).get("edit") or {}).get("skin", "paper-sketch")))
+                    qe = yaml.safe_load((q / "edit.yaml").read_text(encoding="utf-8")) or {}
+                    if my_ch and qe.get("channel") != my_ch:   # 다른 채널 영상과 비교하지 않음 (2026-11-20 범위 점검)
+                        continue
+                    prevs.append(_fam((qe.get("edit") or {}).get("skin", "paper-sketch")))
             last2 = prevs[-2:]
-            R.add("G5", "SHOULD", "바탕색 돌려 쓰기: 직전 두 편과 같은 바탕 계열(특히 미색 종이)이 아님 (05 §0-6)",
+            R.add("G5", "참고", "바탕 계열: 같은 채널 직전 두 편과 같은 바탕 계열인지 (바꿔도 되고 이어 써도 됨 — 카테고리 얼굴 05 §0-7 이 먼저)",
                   not (len(last2) == 2 and all(x == cur for x in last2)), f"이번 {cur} · 직전 {last2}")
         except Exception:
             pass
@@ -416,9 +420,12 @@ def run(path: Path, upto: str = "G8") -> Report:
             covers = [s.get("bg_src") or (keys[(int(s.get("chapter", 1) or 1) - 1) % len(keys)] if keys and not s.get("look") else None)
                       for s in spec["scenes"] if s.get("type") == "chapter"]   # 대본에 없으면 렌더러가 고르는 것(edit10.prepare)과 같게
             covers = [c for c in covers if c]
-            nasa = [c for c in covers if "NASA" in (fo.get(c, {}).get("credit") or "")]
-            R.add("G5", "SHOULD", "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번·NASA 사진 2장 이상 없음",
-                  len(covers) == len(set(covers)) and len(nasa) <= 1, f"표지 {covers} · NASA {len(nasa)}")
+            from collections import Counter as _C
+            cred = _C((fo.get(c, {}).get("credit") or "").split(",")[0].strip() for c in covers)
+            cred.pop("", None)
+            top = cred.most_common(1)[0] if cred else ("", 0)
+            R.add("G5", "SHOULD", "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번 없음, 한 출처로 표지를 모두 때우지 않음",
+                  len(covers) == len(set(covers)) and not (len(covers) >= 3 and top[1] == len(covers)), f"표지 {covers} · 가장 많은 출처 {top}")
         prev = _prev_episode_signature(path, spec)
         if prev is not None:
             cur = set(vs["signature"])
@@ -483,6 +490,17 @@ def run(path: Path, upto: str = "G8") -> Report:
             if h_: hard["all"] = h_
             if s_: soft["all"] = s_
         R.add("G6", "MUST", "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)", lq is not None and not hard, hard)
+        # 2026-11-20 사용자: "자막이랑 영상 글씨가 겹치거나 전체적으로 글씨들이 겹치는 경우가 잦습니다"
+        # → 렌더된 장면을 박자 끝마다 멈춰 실제 글자 상자로 잰 결과 (hybrid 렌더 끝에 자동, ytflow/stages/overlapqa.py)
+        oq = _load(edt / "overlap_qa.json")
+        if oq is None:
+            R.add("G6", "SHOULD", "글자 겹침 점검 기록 (05_edit/overlap_qa.json)", False, "python scripts/overlap_scan.py <프로젝트>")
+        else:
+            iss = [(sid, q) for sid, v in (oq.get("scenes") or {}).items() for q in v.get("issues", [])]
+            bad = [f"#{sid} {q['kind']}: {q['text']}" for sid, q in iss if "걸침:" not in q["text"]]
+            edge = [f"#{sid} {q['text']}" for sid, q in iss if "걸침:" in q["text"]]
+            R.add("G6", "MUST", "화면 글자 겹침 없음 — 글자끼리·카드에 가려짐·카드 밖 넘침·자막 자리 (overlap_qa)", not bad, bad[:8])
+            R.add("G6", "SHOULD", "글자가 카드·강조 상자 가장자리에 걸치지 않음 (overlap_qa)", not edge, edge[:6])
         R.add("G6", "참고", "무대 화면: 한꺼번에 보이는 것·글자·멈춘 박자 (한 화면 한 생각인지 눈으로, 04 §0-5)", not soft, soft)
         sq = _load(edt / "sync_qa.json") or {}
         w5 = sq.get("within_0_5s")
@@ -516,7 +534,8 @@ def run(path: Path, upto: str = "G8") -> Report:
         R.add("G7", "참고", "제목 앞부분에 질문·핵심 (목록에서 잘려도 무슨 영상인지 보이게)", bool(re.search(r"[?？]|왜|까", title[:22])), title[:22])
 
     if last >= 7:  # G8 보관
-        R.add("G8", "MUST", "GitHub Release 업로드", (edt / "release.json").exists(), "")
+        R.add("G8", "MUST", "완성본 보관 기록 — Drive(drive.json·drive_archive.json) 또는 공개 가능한 것만 GitHub Release(release.json)",
+              any((edt / f).exists() for f in ("release.json", "drive.json", "drive_archive.json")), "")
         epi = config.CHANNELS_DIR / ch / "episodes.md"
         R.add("G8", "MUST", "episodes.md 기록", epi.exists() and path.name in epi.read_text(encoding="utf-8"), ch)
 

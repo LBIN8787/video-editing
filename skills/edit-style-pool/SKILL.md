@@ -5,7 +5,7 @@ description: 스타일 풀에 추가된 장면·겹치기(AI 대화 화면, 터�
 
 # 스타일 풀 (등록부 `styles/recipes/*.yaml`, 코드 `ytflow/stages/directions.py`·`shorts_hf.py`)
 
-먼저 `python -m ytflow style-pick <프로젝트>` 로 추천을 보고, 영상 하나에 여러 스타일을 섞습니다 (`manual/05-style-matching.md` §0-1, 강조는 1분에 1번 이하).
+먼저 `python -m ytflow style-pick <프로젝트>` 로 추천을 보고, 영상 하나에 여러 스타일을 섞습니다 (`manual/05-style-matching.md` §0-1, 강조는 기억할 곳에만 — 05 §0-0).
 
 | 장면 type / 겹치기 | 필드 | 쓸 때 |
 |---|---|---|
