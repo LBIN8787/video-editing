@@ -64,7 +64,8 @@ def render(out: Path, ids: list[int] | None = None) -> list[Path]:
 def gallery(out: Path) -> None:
     """구성요소 목록 페이지가 CSS 흉내 대신 실제 렌더를 보여 주도록 짧은 클립·정지 화면을 캐시에 둔다."""
     from ytflow.stages import looks
-    ex = looks.examples_dir()
+    ex = looks.examples_dir() / "scenes"   # 목록 페이지가 media: scenes/<이름>.mp4 로 찾는 곳 (looksgallery._media)
+    ex.mkdir(parents=True, exist_ok=True)
     for tid, (sid, ss, t) in GALLERY.items():
         src = out / f"s{sid}.mp4"
         if src.exists():
@@ -72,12 +73,13 @@ def gallery(out: Path) -> None:
                             "-vf", "fps=15,scale=480:-2", "-c:v", "libx264", "-crf", "30", "-pix_fmt", "yuv420p",
                             "-movflags", "+faststart", str(ex / f"explain-{tid}.mp4")], check=True)
             print(f"  목록 클립 → {ex / f'explain-{tid}.mp4'}")
-    for lid, (sid, at) in LOOK_STILL.items():
+    for lid, (sid, at) in LOOK_STILL.items():   # 화풍 카드: 완성 구도 4초 (마지막 장면을 천천히)
         src = out / f"s{sid}.mp4"
         if src.exists():
-            subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", str(at), "-i", str(src), "-frames:v", "1",
-                            "-vf", "scale=640:-2", "-q:v", "4", str(ex / f"explain-look-{lid}.jpg")], check=True)
-            print(f"  목록 정지 화면 → {ex / f'explain-look-{lid}.jpg'}")
+            subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", str(max(at - 4, 0)), "-t", "4", "-i", str(src), "-an",
+                            "-vf", "fps=15,scale=480:-2", "-c:v", "libx264", "-crf", "30", "-pix_fmt", "yuv420p",
+                            "-movflags", "+faststart", str(ex / f"explain-look-{lid}.mp4")], check=True)
+            print(f"  목록 화풍 클립 → {ex / f'explain-look-{lid}.mp4'}")
 
 
 if __name__ == "__main__":

@@ -77,10 +77,60 @@ def components() -> list[dict]:
             c["options"] = data.get(src["looks"]) or {}
         elif "techniques" in src:
             c["options"] = {k: v for k, v in tech.items() if v.get("group") in src["techniques"]}
+        elif "list" in src:
+            c["options"] = src["list"]
+        elif src.get("scenes"):
+            c["options"] = scene_options()
         elif "bgm" in src:
             c["options"] = {k: {"name": k, "look": v.get("mood", ""), "fits": ", ".join(v.get("fits") or []) or "쓰지 않음(판정)",
                                 "source": v.get("source") or v.get("credit", "")} for k, v in bgm.items()}
     return cats
+
+
+SCENE_NAMES = {
+    "footage": "원본·실사 영상", "chart": "시세 선 그래프", "versus": "숫자 두 개 맞대기", "chapter": "장 표지", "map_causal": "인과 지도",
+    "usmap": "미국 지도", "quote": "발언 카드", "checklist": "체크 목록", "analogy": "비유 (익숙한 것 ↔ 낯선 것)", "funnel": "깔때기",
+    "apartments": "전체·대기·취소 칸", "timeline": "연표", "bars": "막대 비교", "bignum": "큰 숫자", "parking": "주차칸 비율",
+    "compare": "세 칸 비교", "outro": "마무리 카드", "people": "100명 중 N명", "newspapers": "두 나라 신문 지면", "shape": "U자·W자 모양",
+    "kb": "자료 화면 켄 번스", "card_type": "검은 카드 타자기 한 줄", "journey": "지도 여정", "kinetic": "키네틱 타이포", "chat": "AI 대화 재구성",
+    "terminal": "터미널 타자", "zoomshot": "화면 녹화 자동 줌", "choropleth": "나라 색칠 지도", "recap": "장 끝 정리판", "isotype": "아이콘 줄",
+    "board": "증거판", "afterline": "사건 이후 누적", "spread": "두 값 사이 간격", "share": "전체 중 몫", "motionboard": "자유 설명 무대",
+    "statecard": "카드 상태 변화", "docspot": "문서 스포트라이트", "newsdesk": "뉴스 데스크 카드", "stage": "애니메이션 무대",
+    "story": "이야기 그림판", "illust": "삽화 위 카메라", "metaphor": "움직이는 비유", "studio3d": "3D 스튜디오 물체", "bite": "원본 발언 컷편집",
+    "screenshot": "기사 캡처", "intro": "MC 오프닝",
+}
+
+
+def scene_options() -> dict:
+    """장면 종류 — 렌더한 예시(scenes.json)와 쓰임새(manual/usage.yaml)를 합침. 많이 쓴 순서."""
+    import json as _j
+    use = (yaml.safe_load((ROOT / "manual" / "usage.yaml").read_text(encoding="utf-8")) or {})
+    items, groups = use.get("items", {}), use.get("groups", {})
+    sp = Path.home() / ".cache" / "ytflow" / "looks" / "scenes" / "scenes.json"
+    rendered = _j.loads(sp.read_text(encoding="utf-8")) if sp.exists() else {}
+    import collections
+    cnt, eps = collections.Counter(), collections.defaultdict(set)
+    for f in ROOT.glob("projects/*/02_script/*.json"):
+        try:
+            d = _j.loads(f.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        for sc in (d.get("scenes") if isinstance(d, dict) else None) or []:
+            if isinstance(sc, dict) and sc.get("type"):
+                cnt[sc["type"]] += 1
+                eps[sc["type"]].add(f.parents[1].name)
+    out = {}
+    for t in sorted(set(cnt) | set(k for k in rendered if k in SCENE_NAMES), key=lambda k: -cnt[k]):
+        if t not in SCENE_NAMES:
+            continue
+        u = items.get(t, {})
+        r = rendered.get(t, {})
+        out[t] = {"name": SCENE_NAMES[t], "look": u.get("does", ""), "fits": u.get("when", ""), "avoid": u.get("not_when", ""),
+                  "group": groups.get(u.get("group", ""), {}).get("name", ""), "used": f"{cnt[t]}회 · {len(eps[t])}편",
+                  "media": f"scenes/{t}.mp4" if r.get("file") else "",
+                  "from": r.get("project", "") + (" (자료 화면은 대체 영상)" if r.get("placeholder") else ""),
+                  "status": "hold" if t == "intro" else ""}
+    return out
 
 
 def choose_any(project_dir: Path, pairs: list[str]) -> dict:
@@ -169,7 +219,7 @@ def _footage_frames() -> dict:
 def gallery(out: Path, examples: Path | None = None) -> Path:
     """화풍·연출 갤러리 (looksgallery.build) — 화풍 탭(같은 장면을 화풍마다) + 연출 탭(연출마다 움직이는 예시, 고른 화풍으로 칠함)."""
     from . import looksgallery
-    return looksgallery.build(out, examples)
+    return looksgallery.build(out, examples)[0]
 
 
 EXAMPLE_SCENE = ("A young woman stands in a supermarket aisle, hesitating in front of a long shelf crowded with dozens of colorful jam jars, "
