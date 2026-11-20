@@ -495,10 +495,17 @@ def _el_html(D, sc, key: str, el: dict) -> tuple[str, float, float]:
         lab = el.get("label", "")
         lsz = fit(HEAVY, lab, el.get("size", 46), w - 20).size if lab else 0
         col = {"red": "#B5302B", "navy": NAVY}.get(el.get("color", "navy"), el.get("color", NAVY))
+        # 카드 아래 큰 숫자 (2026-11-20 사용자: "숫자가 안보입니다" · "2~4% 뭉뚱그리지 말고 제대로 각각") — 음수 빨강·양수 초록
+        val = str(el.get("value", ""))
+        vcol = {"-": "#B5302B", "−": "#B5302B", "+": "#1E7A46"}.get(val[:1], CARD_INK)
+        vsz = fit(HEAVY, val, el.get("vsize", 50), w - 16).size if val else 0
+        if val:
+            h += vsz * 1.1 + 6
         inner = (f'<div style="width:{w:.0f}px;height:{h:.0f}px;background:linear-gradient(180deg,#FFFEFB,#F1EEE6);border-radius:8px;'
                  f'box-shadow:{SHADOW};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;'
                  f'transform:rotate({rot}deg)">{mk}'
                  + (f'<div style="font-family:heavy;font-size:{lsz}px;color:{col};line-height:1">{H.escape(lab)}</div>' if lab else "")
+                 + (f'<div style="font-family:heavy;font-size:{vsz}px;color:{vcol};line-height:1.05;white-space:nowrap">{H.escape(val)}</div>' if val else "")
                  + "</div>")
         return inner, w, h
     if k == "img":   # 투명 PNG 소품 그대로 (그림자만)

@@ -52,7 +52,7 @@ reference: "월텍남 — 앤트로픽 대실망에, AMD 공매도까지 (DsUWN5
 | 요소 `kind` | 무엇 | 주요 값 |
 |---|---|---|
 | `person` | 인물 카드(인화 사진처럼 흰 테두리·그림자·살짝 기울기) + 이름·역할 | `photo` 가 있으면 실제 사진, 없으면 **얼굴 없는 실루엣**(`tone`: navy·red·gray·green·gold) |
-| `card` | 소품 카드 | `icon`(lucide 이름 또는 `chip`) · `img`(투명 PNG) · `label` · `color` |
+| `card` | 소품 카드 | `icon`(lucide 이름 또는 `chip`) · `img`(투명 PNG) · `label` · `color` · **`value`**(카드 아래 큰 숫자, `-` 빨강·`+` 초록, `vsize`) — 2026-11-20 사용자: "숫자가 안보입니다" · "뭉뚱그리지 말고 각각" |
 | `img` | 투명 PNG 소품을 그대로(그림자만) | `img`, `w` |
 | `text` | 굵은 글자 / 손글씨(`pen: true`) | `size`, `color`(ink·red·muted·navy) |
 | `arrow` | 두 요소 사이 휘는 잉크 화살표 + 손글씨 이름 | `from`, `to`, `label`, `bend`, `color` |
@@ -78,6 +78,8 @@ reference: "월텍남 — 앤트로픽 대실망에, AMD 공매도까지 (DsUWN5
 | `paper` (기본) | 실사 구겨진 종이 (ambientCG Paper003, CC0 — 처음 한 번 캐시에 받음, 못 받으면 직접 만든 주름 종이) | 먹색·붉은색 |
 | `dark` | 숯색 무대, 가운데가 조금 밝음 | 밝은 회백색·밝은 붉은색 (카드 안은 그대로) |
 | `light` | 그 영상 그래픽 팩(스킨)의 바탕 그대로 | 먹색·붉은색 |
+
+**기본값:** `theme` 을 비우면 시장 채널은 `dark`(2026-11-20 사용자: "설명부분은 배경 공통으로 해주세요 어두운걸로요"), 그 밖의 채널은 `paper`. 편 전체를 바꾸려면 hybrid.json 에 `"explain_theme"`.
 
 연출(무엇이 언제 어떻게 움직이나)은 테마와 상관없이 같다. 새 테마는 `explain.py` 의 `THEMES`(색 바꾸기 표)와 `_setup` 의 바탕 한 줄을 더하면 된다.
 
