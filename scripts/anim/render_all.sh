@@ -5,7 +5,7 @@
 set -e
 H="$(cd "$(dirname "$0")" && pwd)"
 OUT="$1"; HTML="$2"; VOICE="$3"; ASS="$4"; END="$5"; RES="$6"; N="${7:-3}"
-export NODE_PATH="$H/../../tools/playwright/node_modules"
+export NODE_PATH="$H/../../tools/playwright/node_modules${NODE_PATH:+:$NODE_PATH}"   # 클라우드: 전역 playwright 는 바깥 NODE_PATH 로
 mkdir -p "$OUT"
 : > "$OUT/parts.txt"
 for ((i=0; i<N; i++)); do
