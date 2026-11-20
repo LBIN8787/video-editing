@@ -77,6 +77,29 @@ def M(t, do, **kw):
     return dict(t=t, do=do, **kw)
 
 
+# 원본 발언 장면(bite) — 2026-11-20 피클이 공식 채널 구간 확인 (inbox/requests/done/20261120-1453-*).
+# 클라우드는 유튜브를 못 받으므로 기본은 인용 카드판. PC 에서 원본을 받을 때: python scripts/daily_20261120/make.py --bites
+#   → python -m ytflow clip-order / clip-fetch 20261120-market-deep → hybrid (docs/50-clip-lane.md)
+BITES = "--bites" in sys.argv
+CLIPS = {
+    "amodei": {"file": "amodei_nasdaq_20261119.mp4", "url": "https://www.youtube.com/watch?v=FgAtTAgBT2Q", "start": "3:50", "end": "4:05",
+               "who": "다리오 아모데이", "credit": "Nasdaq 공식 채널 (YouTube) · 2026.11.19 상장 행사", "license": "인용(20초 이내)"},
+    "meeks": {"file": "meeks_cnbc_20261119.mp4", "url": "https://www.youtube.com/watch?v=i58L0YVXq_w", "start": "3:29", "end": "3:45",
+              "who": "폴 미크스", "credit": "CNBC Television 공식 채널 (YouTube) · 2026.11.19 Squawk Box", "license": "인용(20초 이내)"},
+    "tomlee": {"file": "tomlee_cnbc_20261119.mp4", "url": "https://www.youtube.com/watch?v=DvJ6rp5Rwo4", "start": "1:11", "end": "1:20",
+               "who": "톰 리", "credit": "CNBC Television 공식 채널 (YouTube) · 2026.11.19 Closing Bell", "license": "인용(20초 이내)"},
+}
+
+
+def bite(key, chapter, who, role, lead, find, ko, insight=False):
+    c = CLIPS[key]
+    d = dict(type="bite", chapter=chapter, who=who, role=role, label=f"{c['credit']} · 인용", beats=[{"say": lead}],
+             clip={"src": key, "lang": "en", "cuts": [{"find": find, "ko": ko}]})
+    if insight:
+        d["insight"] = True
+    return d
+
+
 def main():
     for d in ("01_research", "02_script", "05_edit"):
         (P / d).mkdir(parents=True, exist_ok=True)
@@ -99,10 +122,10 @@ def main():
                   {"label": "다우", "value": -2.19, "text": "-2.19", "t": "다우는"}, {"label": "S&P 500", "value": -2.02, "text": "-2.02", "t": "S&P 500"}],
            beats=[{"say": "먼저 시장 한 장입니다. 나스닥은 2.25%, 다우는 2.19%, S&P 500은 2.02% 내렸습니다. 반도체 지수는 2.41% 빠졌습니다."},
                   {"say": "한 업종의 일이 아니었습니다. 미국 업종 11개 가운데 9개가 내렸고, AI와 거리가 먼 헬스케어도 2% 넘게 빠졌습니다. 공포 지수라 불리는 변동성 지수는 28.44로 16% 가까이 뛰었습니다.",
-                   "motion": [M("11개", "count", id="sec", value="9 / 11", label="내린 업종 (섹터 ETF)", x=1765, y=560, w=290, h=150, fs=46),
-                              M("변동성", "count", id="vix", value="28.44", label="VIX (+15.80%)", x=1765, y=740, w=290, h=150, fs=46)]},
+                   "motion": [M("11개", "count", id="sec", value="9 / 11", label="내린 업종", x=1800, y=560, w=230, h=140, fs=46),
+                              M("변동성", "count", id="vix", value="28.44", label="VIX", x=1800, y=740, w=230, h=140, fs=46)]},
                   {"say": "나스닥은 최근 한 달 가장 높았던 10월 21일 종가보다 10.6% 낮아졌습니다. 흔히 조정이라고 부르는 10% 선을 넘은 겁니다.",
-                   "motion": [M("10.6%", "count", id="ixic", value="-10.6%", label="나스닥 · 10월 21일 대비 (계산)", x=1765, y=380, w=290, h=150, fs=46)]}]))
+                   "motion": [M("10.6%", "count", id="ixic", value="-10.6%", label="나스닥 · 한 달", x=1800, y=380, w=230, h=140, fs=42)]}]))
 
     # ── 1. 한 달 사이 바뀐 시장 ──
     s(dict(type="chapter", chapter=1, num="1", title="한 달 사이, 갈라진 AI", icon="trending-down", look="board",
@@ -111,9 +134,9 @@ def main():
            items=[{"label": "엔비디아", "value": -34.2, "text": "-34.2", "t": "엔비디아는"}, {"label": "마이크론", "value": -24.4, "text": "-24.4", "t": "마이크론"},
                   {"label": "반도체 지수", "value": -18.1, "text": "-18.1", "t": "반도체 지수"}, {"label": "AMD", "value": -11.5, "text": "-11.5", "t": "AMD는"},
                   {"label": "나스닥", "value": -10.6, "text": "-10.6", "t": "나스닥"}, {"label": "브로드컴", "value": 2.6, "text": "+2.6", "t": "브로드컴은"}],
-           beats=[{"say": "나스닥이 최근 가장 높았던 10월 21일부터 19일까지, 한 달의 성적입니다. 엔비디아는 34.2% 빠졌습니다. 메모리의 마이크론은 24.4%, 반도체 지수는 18.1% 내렸습니다.", "motion": [M("34.2%", "count", id="nv1m", value="221.97 → 145.98", label="엔비디아 · 10/21 → 11/19 (달러)", x=1765, y=440, w=290, h=170, fs=36)]},
+           beats=[{"say": "나스닥이 최근 가장 높았던 10월 21일부터 19일까지, 한 달의 성적입니다. 엔비디아는 34.2% 빠졌습니다. 메모리의 마이크론은 24.4%, 반도체 지수는 18.1% 내렸습니다.", "motion": [M("34.2%", "count", id="nv1m", value="221.97 → 145.98", label="엔비디아 (달러)", x=1800, y=440, w=230, h=170, fs=30)]},
                   {"say": "그런데 AMD는 11.5%로 덜 빠졌고, 나스닥은 10.6% 내렸습니다. 앤트로픽에 칩을 대는 브로드컴은 오히려 2.6% 올랐습니다. 같은 AI 안에서도 길이 갈라진 겁니다.",
-                   "motion": [M("2.6%", "count", id="avgo1m", value="+2.6%", label="브로드컴 · 한 달", x=1765, y=660, w=290, h=150, fs=46)]}]))
+                   "motion": [M("2.6%", "count", id="avgo1m", value="+2.6%", label="브로드컴 · 한 달", x=1800, y=660, w=230, h=150, fs=44)]}]))
     s(dict(type="checklist", chapter=1, label="11/15~11/19 회차 팩트시트(상무부 규칙·엔비디아 8-K·연준 의사록·앤트로픽 발표) · 지수는 야후 파이낸스", title="그 한 달에 있었던 일", x=150, text_w=900, skin=NP,
            rows=[{"label": "엔비디아 젠슨 황 사임 — 리더십 질문", "state": "warn", "t": "사임"},
                  {"label": "11월 16일 상무부 원격 접근 규칙 — 19일 효력", "state": "warn", "t": "규칙"},
@@ -144,12 +167,16 @@ def main():
            beats=[{"say": "회사 발표에 따르면 앤트로픽은 9억 8천만 주를 주당 83달러에 팔았습니다. 첫 거래는 미국 동부 시각 오전 11시 48분, 111.50달러였습니다. 공모가보다 34% 높게 시작한 겁니다.", "upto": 2},
                   {"say": "장중 한때 114.99달러까지 올랐다가 92.72달러까지 밀렸고, 97.17달러에 마쳤습니다. 가장 높았던 값보다는 15% 넘게, 첫 거래 가격보다는 13% 가까이 내려온 종가입니다. 보도된 시가총액은 약 1조 7,700억 달러, 메타보다 큽니다.", "upto": 4,
                    "motion": [M("1조 7,700억", "count", id="mcap", value="약 1.77조 달러", label="시가총액 (보도)", x=1440, y=820, w=480, h=170, fs=56)]}]))
+    if BITES:
+        s(bite("amodei", 2, "다리오 아모데이", "앤트로픽 CEO · 11월 19일 나스닥 상장 행사", "상장 종이 울리기 전, 다리오 아모데이 대표는 나스닥 단상에서 이렇게 말했습니다.",
+               "And to state it unequivocally, we will pace the training and deployment of AI systems, taking as long as is necessary to have confidence that they are safe and will remain under human control. We will not bend to either business nor political pressure.",
+               "분명히 말씀드립니다. 우리는 AI가 안전하고 사람의 통제 아래 있다고 확신할 때까지, 필요한 만큼 시간을 들여 훈련과 배포의 속도를 조절하겠습니다. 사업의 압력에도 정치의 압력에도 굽히지 않겠습니다."))
     s(dict(type="bars", chapter=2, label=YH + " · '대리주' 표현은 CNBC(스톡타이탄 인용)", title="같은 날, 앤트로픽과 '대리주'들 (%)", unit="", emph=0, skin=DS,
            items=[{"label": "앤트로픽 (공모가 대비)", "value": 17.1, "text": "+17.1", "t": "공모가로"}, {"label": "앤트로픽 (첫 거래 대비)", "value": -12.9, "text": "-12.9", "t": "첫 거래 값에"}, {"label": "브로드컴", "value": -2.09, "text": "-2.09", "t": "브로드컴"},
                   {"label": "알파벳", "value": -3.46, "text": "-3.46", "t": "알파벳"}, {"label": "아마존", "value": -3.87, "text": "-3.87", "t": "아마존은"}],
            beats=[{"say": "그런데 미국 방송 CNBC가 앤트로픽의 대리주라고 부른 회사들이 있습니다. 앤트로픽 지분을 크게 가진 아마존과 알파벳, 앤트로픽에 칩을 대는 브로드컴입니다. 상장 전에는 앤트로픽을 직접 살 수 없으니, 이 회사들을 대신 샀던 겁니다."},
                   {"say": "앤트로픽 자신부터 보면, 공모가로 주식을 받은 사람에게는 17% 이익이었지만, 장에서 첫 거래 값에 산 사람에게는 13% 가까운 손실이었습니다. 그리고 이 세 회사도 모두 내렸습니다. 아마존 3.87%, 알파벳 3.46%, 브로드컴 2.09%입니다. 알파벳은 오전 한때 4% 넘게 올랐다가 방향을 바꿨습니다. 하루 전만 해도 아마존은 3.82% 올랐던 회사입니다.",
-                   "motion": [M("4%", "count", id="goog", value="+4.04% → -3.46%", label="알파벳 장중 → 종가 (보도·야후)", x=1765, y=420, w=290, h=190, fs=34)]}]))
+                   "motion": [M("4%", "count", id="goog", value="+4.04% → -3.46%", label="알파벳 장중→종가", x=1800, y=420, w=230, h=190, fs=30)]}]))
     s(dict(type="analogy", chapter=2, label="비유 · 이 영상의 설명", title="정품이 진열되면",
            left={"icon": "package", "label": "정품이 없을 땐 비슷한 물건을", "sub": "아마존·알파벳·브로드컴"}, right={"icon": "store", "label": "정품이 진열되자 정품으로", "sub": "앤트로픽 직접 매수"},
            result={"icon": "wallet", "label": "지갑은 하나 — 대체품을 내놓고 정품을 산다"},
@@ -238,15 +265,23 @@ def main():
            beats=[{"say": "딥워터 자산운용의 진 먼스터는 조금 다르게 봤습니다. 상장이 AI 주식 전체를 띄울 거라는 기대가 전형적인 집단 사고였고, 오늘의 하락은 AI에 대한 판결이 아니라는 겁니다. 다들 같은 쪽에 서 있었다는 뜻입니다."},
                   {"say": "이 시각을 받치는 숫자는 앤트로픽이 공모가보다 17% 높게 마쳤다는 점입니다. 어긋나는 숫자는 그 앤트로픽도 첫 거래보다 13% 가까이 내렸고, 나스닥은 한 달 사이 10% 넘게 빠졌다는 점입니다. 국내 매체는 상장이 매도 신호였느냐고 물었고, 해외 매체는 자리 만들기라는 말을 제목에 올렸습니다.", "motion": [M("10%", "count", id="ix10", value="-10.6%", label="나스닥 · 한 달 최고 대비", x=960, y=880, w=460, h=140, fs=52)]}]))
 
+    if BITES:
+        s(bite("meeks", 4, "폴 미크스", "프리덤 캐피털 마켓 기술 리서치 책임자 · CNBC 19일 장 전", "상장 전 기대부터 들어 보겠습니다. 19일 장 전, 프리덤 캐피털 마켓의 폴 미크스입니다.",
+               "So I would expect that you get some sort of relief rally in all these stocks based on this IPO, and I expect it to be up modestly. I don't think that we will push by the end of trading day one, a $2 trillion market cap,",
+               "이번 상장으로 이 종목들 전반에 일종의 안도 랠리가 올 거라 봅니다. 상장 첫날은 적당히 오를 것이고, 첫날 마감까지 시가총액 2조 달러에 닿지는 않을 겁니다.", insight=True))
     s(dict(type="versus", chapter=4, insight=True, label="CNBC 인터뷰(미크스·19일 장 전) · 디트릭 발언 — 야후 파이낸스(스톡트위츠) 인용 · 의견이며 사실이 아닙니다",
-           left={"value": "안도", "label": "폴 미크스(프리덤 캐피털): 장 전 '안도 랠리' 기대", "icon": "trending-up"},
-           right={"value": "조정", "label": "라이언 디트릭(카슨 그룹): 첫날 급등 뒤 큰 조정도 흔했다", "icon": "trending-down"},
+           left={"value": "안도", "label": "미크스: 장 전 '안도 랠리'", "icon": "trending-up"},
+           right={"value": "조정", "label": "디트릭: 급등 뒤 조정도 흔해", "icon": "trending-down"},
            beats=[{"say": "상장 전 기대도 엇갈렸습니다. 프리덤 캐피털 마켓의 기술 리서치 책임자 폴 미크스는 19일 장 전 미국 방송 인터뷰에서, 이 공모가 AI 주식 전체에 안도 랠리를 불러올 것이고 첫날은 적당히 오를 것이라고 봤습니다. 시가총액 2조 달러까지는 못 갈 거라고도 했습니다.", "motion": [M("2조", "count", id="mk2e", value="2조 달러 미만", label="미크스의 첫날 예상", x=960, y=860, w=460, h=140, fs=48)]},
                   {"say": "카슨 그룹의 라이언 디트릭은 과거 대형 상장을 보면 첫날 급등은 흔하지만, 그다음 1년 안에 큰 조정이 오는 것도 흔했다고 짚었습니다. 결과는 반반이었습니다. 앤트로픽은 공모가보다 높게 마쳤고 2조 달러에는 못 미쳤지만, 기대했던 AI 주식 전체의 안도 랠리는 오지 않았습니다. 둘 다 사실이 아니라 한 사람의 시각입니다.",
                    "motion": [M("2조", "count", id="mk2t", value="약 1.77조 달러", label="첫날 시가총액 (보도)", x=960, y=860, w=460, h=140, fs=48)]}]))
+    if BITES:
+        s(bite("tomlee", 4, "톰 리", "펀드스트랫 · CNBC 19일 클로징 벨", "장이 끝난 뒤, 펀드스트랫의 톰 리는 이렇게 말했습니다.",
+               "I think that we are at that moment where it feels like max pain. But for the patient investor, this is going to have a big payoff.",
+               "지금이 고통이 가장 큰 순간처럼 느껴집니다. 하지만 인내하는 투자자에게는 큰 보상이 될 겁니다.", insight=True))
     s(dict(type="versus", chapter=4, insight=True, label="CNBC 인터뷰(톰 리) · 존슨 발언 — 야후 파이낸스(스톡트위츠, 11.20) 인용 · 의견이며 사실이 아닙니다",
-           left={"value": "보상", "label": "톰 리(펀드스트랫): 고통이 가장 클 때, 인내하면 큰 보상", "icon": "hourglass"},
-           right={"value": "종이", "label": "고든 존슨(GLJ 리서치): AI 혁명도 진짜, 쏟아지는 주식도 진짜", "icon": "layers"},
+           left={"value": "보상", "label": "톰 리: 인내하면 큰 보상", "icon": "hourglass"},
+           right={"value": "종이", "label": "존슨: 쏟아지는 주식도 진짜", "icon": "layers"},
            beats=[{"say": "상장 뒤에도 시각은 갈렸습니다. 펀드스트랫의 톰 리는 미국 방송에서, 지금이 고통이 가장 큰 순간처럼 느껴지지만 인내하는 투자자에게는 큰 보상이 있을 것이라고 말했습니다. 하드웨어는 막아도 소프트웨어는 막기 어렵다는 말도 했습니다."},
                   {"say": "반대로 GLJ 리서치의 고든 존슨은 짧게 말했습니다. AI 혁명은 진짜다, 쏟아지는 종이도 진짜다. 여기서 종이는 새로 찍혀 나오는 주식입니다. 이 시각을 받치는 숫자가 하루에 나온 새 주식 약 1,070억 달러입니다. 어긋나는 숫자는, 그 새 주식을 받은 쪽이 공모가보다 17% 높은 값에 첫날을 마쳤다는 점입니다.",
                    "motion": [M("1,070억", "count", id="paper", value="약 1,070억 달러", label="19일 나온 새 주식 (계산)", x=960, y=860, w=460, h=140, fs=48)]}]))
@@ -325,7 +360,7 @@ def main():
                      {"term": "펌웨어", "plain": "칩·기계를 움직이는 기본 소프트웨어"},
                      {"term": "거래 제한 명단(Entity List)", "plain": "미국 상무부가 허가 없이 미국 기술을 넘기지 못하게 정한 회사 목록"}],
         "scenes": S,
-        "footage": fo,
+        "footage": {**fo, **({k: {kk: vv for kk, vv in v.items()} for k, v in CLIPS.items()} if BITES else {})},
         "package": {
             "title": "앤트로픽 상장 날, 시장은 왜 2% 빠졌나 | 11월 20일",
             "title_options": ["앤트로픽 상장 날, 시장은 왜 2% 빠졌나 | 11월 20일",
