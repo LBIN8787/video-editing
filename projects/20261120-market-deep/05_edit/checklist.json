@@ -1,8 +1,8 @@
 {
  "project": "20261120-market-deep",
  "manual_version": "59",
- "checked": "2026-11-20T03:39:02",
- "pass": true,
+ "checked": "2026-11-20T04:50:13",
+ "pass": false,
  "rows": [
   {
    "gate": "G0",
@@ -411,6 +411,13 @@
    "detail": "[]"
   },
   {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "길이: 롱폼 10분 이상 — 많이 짧으면 쇼츠로 (README §2-4)",
+   "ok": true,
+   "detail": "15.3분"
+  },
+  {
    "gate": "G5",
    "level": "SHOULD",
    "item": "배경: 한 가지 바탕으로 고정하지 않음 — 장면이 하는 일이 바뀌면 바탕도 바뀜 (05 §0-2)",
@@ -489,6 +496,20 @@
   },
   {
    "gate": "G5",
+   "level": "참고",
+   "item": "자료 화면 없이 그래픽만 이어지는 가장 긴 구간",
+   "ok": false,
+   "detail": "최장 899초"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "장 전환 없이 이어지는 가장 긴 구간",
+   "ok": false,
+   "detail": "최장 270초"
+  },
+  {
+   "gate": "G5",
    "level": "SHOULD",
    "item": "스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1)",
    "ok": true,
@@ -499,7 +520,7 @@
    "level": "참고",
    "item": "스타일 조합: 가장 많이 쓴 스타일의 몫·겹친 장면·같은 스타일 연속",
    "ok": false,
-   "detail": "data-report 0.35 · 겹침 1 · 최장 연속 3"
+   "detail": "data-report 0.34 · 겹침 1 · 최장 연속 3"
   },
   {
    "gate": "G5",
@@ -535,6 +556,90 @@
    "item": "edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움)",
    "ok": true,
    "detail": "python -m ytflow edit-plan <프로젝트> → 02_script/EDIT_CONTEXT.md"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "final.mp4",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "참고",
+   "item": "무대 화면: 한꺼번에 보이는 것·글자·멈춘 박자 (한 화면 한 생각인지 눈으로, 04 §0-5)",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
+   "ok": true,
+   "detail": "{'within_0_5s': 0.994, 'p95_abs_offset': 0.11, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.1}"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "납품 점검(음량 등)",
+   "ok": true,
+   "detail": "completed"
+  },
+  {
+   "gate": "G6",
+   "level": "참고",
+   "item": "움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5)",
+   "ok": false,
+   "detail": "변화 6.1/분 · 정지 0.75"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "최종 목소리 ElevenLabs",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "제목 후보 3개 + 이유",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "썸네일 A/B/C + 점검 ok",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "참고",
+   "item": "제목 앞부분에 질문·핵심 (목록에서 잘려도 무슨 영상인지 보이게)",
+   "ok": true,
+   "detail": "앤트로픽은 17% 올랐는데, 시장은 왜 "
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "GitHub Release 업로드",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "episodes.md 기록",
+   "ok": true,
+   "detail": "ch-market-daily"
   }
  ]
 }
