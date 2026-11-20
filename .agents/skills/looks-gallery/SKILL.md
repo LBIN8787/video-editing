@@ -13,12 +13,24 @@ description: 영상 구성요소·화풍·연출 목록을 눈으로 보여 준�
 - 고르기: `python -m ytflow look <프로젝트> --set motion=chalkboard --set text=count-up --set transition=match-move …` → edit.yaml `look`. 화풍 3종은 렌더에 바로 쓰이고, 연출은 이 영상의 기본값(장면마다 바꿀 수 있음).
 
 ## 순서
-1. 페이지를 최신 목록으로 다시 만든다 (모션그래픽은 화풍마다 같은 장면이 움직이는 미리보기, 실사 색보정은 같은 클립에 보정을 바꾼 실제 화면, 삽화는 예시 그림):
+1. **예시 화면(진짜 렌더)이 캐시에 없으면 먼저 만든다** — 지금까지 영상에 쓴 장면을 그 편 대본 그대로 렌더러(hybrid → HyperFrames)로 다시 그림. 도구가 없으면 `python scripts/install_tools.py`.
    ```bash
-   python -m ytflow looks --gallery <스크래치>/looks.html
+   python scripts/looks_catalog.py --workers 4             # 장면 종류마다 (가장 최근 프로젝트의 그 장면)
+   python scripts/looks_catalog.py --variants --workers 4  # 장 표지 모양·증거판/칠판·그림 슬롯(막대/그림 기호, 사람/네모/도넛, 포스트잇/알약)
+   python scripts/looks_catalog.py --features --workers 4  # 겹치기·장면 효과·박자 motion 마다 그것을 쓴 장면
    ```
-2. Artifact 도구로 **같은 주소**(`GALLERY_URL`)에 다시 올리고(`url` 에 그 주소, 처음 읽지 않았으면 `action: read` 먼저), 사용자에게 링크를 준다. 목록이 바뀌지 않았으면 다시 올리지 않고 `action: open` 만.
-3. 터미널에도 한 줄 요약: 화풍 수(모션그래픽·삽화·실사), 삽화 예시가 몇 개 채워졌나, 고르는 법 `python -m ytflow look <프로젝트> --motion <id> --illust <id> --footage <id>`.
+   → `~/.cache/ytflow/looks/scenes/*.mp4` + `scenes.json`. 자료 영상이 이 컴퓨터에 없으면 Mixkit 대체 영상을 쓰고 카드에 '대체 영상'으로 표시된다. 새 장면 종류·편이 생기면 다시 돌린다(약 15분).
+2. 페이지 만들기 (폴더째 — 예시 영상·바탕 그림·효과음이 `media/` 에 같이 나옴):
+   ```bash
+   python -m ytflow looks --gallery <스크래치>/gal/index.html
+   ```
+3. Artifact 도구로 **같은 주소**(`GALLERY_URL`)에 다시 올린다 — `file_path` = index.html, `root` = 그 폴더, `files` = `media/` 아래 모든 파일(상대 경로 목록). 처음 읽지 않았으면 `action: read` 먼저. 목록이 바뀌지 않았으면 `action: open` 만.
+4. 터미널에도 한 줄 요약: 카테고리·스타일 수, 실제 렌더 예시 수, 삽화 예시가 몇 개 채워졌나, 고르는 법 `python -m ytflow look <프로젝트> --set 카테고리=스타일`.
+
+## 페이지에 있는 것
+- **조합 판**: 카테고리마다 하나씩 고르면 연출 4단계가 재생되고, 고른 장면·장 표지·바탕·삽화·실사·글꼴·자막·썸네일이 옆에 모이고, 저장 명령이 나옴.
+- **실제로 쓰인 조합** (`styles/presets.yaml`): 스페인독감·이어 읽는 시장·시장 심층·주간·호기심(잼·기억·모라벡·환각·B-roll) 편의 편집·연출·화풍과 장면 수 → '이 조합 불러오기'. 새 편이 승인되면 여기에 한 항목 더한다(장면 수는 그 편 hybrid.json 에서 셈).
+- **카테고리 21개** (`styles/components.yaml`): 화풍 9 · 구성 4 · 연출 4 · 소리 3 · 포장 1. 효과음은 페이지에서 바로 들을 수 있음.
 
 ## 삽화 예시 그림 — 클라우드는 주문, PC 가 그림
 - 클라우드 세션: `python -m ytflow looks --order` → `inbox/pc-tasks/<KST>-looks-draw.md` (main 에 올림). PC 의 Claude Code 세션은 시작할 때 이 할 일을 알림으로 봄(`.claude/settings.json` SessionStart → `scripts/pc_tasks.py`), Codex 는 AGENTS.md 의 안내로.
