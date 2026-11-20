@@ -177,6 +177,11 @@ def _media(out_dir: Path, frames: dict) -> dict:
     for f in src.glob("*.mp4"):
         shutil.copy(f, md / "scenes" / f.name)
         files[f"media/scenes/{f.name}"] = md / "scenes" / f.name
+    for _k, (f, m, _d) in looks.visual_media().items():   # 연출 예시 렌더 (scripts/visual_catalog.py, Drive looks/scenes/clips)
+        if _k.startswith("scene:") and (src / f"{_k[6:]}.mp4").exists():
+            continue   # 실제 영상에서 쓴 장면 렌더가 있으면 그쪽을 씀
+        shutil.copy(f, md / m)
+        files[f"media/{m}"] = md / m
     (md / "bg").mkdir(parents=True, exist_ok=True)
     skin_for = {"film": "dark-doc", "grid": "slate", "spot": "dark-doc", "tint": "paper-sketch", "photo": "dark-doc"}
     still = Path.home() / ".cache" / "ytflow" / "looks" / "still.jpg"
@@ -262,6 +267,7 @@ def build(out: Path, examples: Path | None = None) -> tuple[Path, dict]:
             if r and r.get("file") and not d.get("from"):
                 d["from"] = r.get("project", "") + (" (자료 화면은 대체 영상)" if r.get("placeholder") else "")
     scene = look_scene()
+    vmedia = looks.visual_media()
     sections, selects, tpls, have = [], [], [], 0
     for c in cats:
         k, cards = c["key"], []
@@ -315,7 +321,12 @@ def build(out: Path, examples: Path | None = None) -> tuple[Path, dict]:
                 vis = media_vis(k, lid, m)
             elif k in ("text", "graphic", "camera", "transition"):
                 demo_html = demo(lid).replace("{{FRAME}}", frames["_raw"])
-                vis = f'<figure class="stage dir t-{lid}">{demo_html}</figure>'
+                vm = vmedia.get(f"tech:{lid}")
+                if vm and f"media/{vm[1]}" in files:   # 실제 렌더 예시가 있으면 그것을 (조합 판 미리보기는 그림 그대로)
+                    vis = f'<figure class="pic" data-thumb="{k}:{lid}"><video src="media/{vm[1]}" muted loop playsinline preload="none"></video></figure>'
+                    d = {**d, "from": "실제 렌더 (styles/hybrid/scenes/)"}
+                else:
+                    vis = f'<figure class="stage dir t-{lid}">{demo_html}</figure>'
                 tpls.append(f'<template id="tpl-{lid}">{demo_html}</template>')
             else:
                 vis = '<figure class="pic"><div class="ph"><b>예시 화면 없음</b><span>아직 쓴 장면이 없어 렌더하지 못함</span></div></figure>'
