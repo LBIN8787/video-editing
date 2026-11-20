@@ -1,0 +1,183 @@
+{
+ "id": "map_causal",
+ "type": "map_causal",
+ "example_source": "projects\\20261106-hybrid-데이터센터\\02_script\\hybrid.json",
+ "renderer": "ytflow/stages/hybrid.py:455",
+ "function": "s_map_causal",
+ "scene_fields": [
+  "label",
+  "title"
+ ],
+ "beat_fields": [
+  "active",
+  "cut",
+  "draw",
+  "instant",
+  "reveal",
+  "tag"
+ ],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only map_causal --force",
+ "spec_common": {
+  "edit_v10": true,
+  "map": {
+   "nodes": {
+    "vote": {
+     "label": "미국 선거·주민투표",
+     "icon": "flag",
+     "x": 250,
+     "y": 400
+    },
+    "permit": {
+     "label": "AI 공장 허가 막힘",
+     "icon": "ban",
+     "x": 710,
+     "y": 400
+    },
+    "build": {
+     "label": "새 공장 덜 짓기",
+     "icon": "construction",
+     "x": 1170,
+     "y": 400
+    },
+    "chips": {
+     "label": "칩·메모리 주문 ↓?",
+     "icon": "memory-stick",
+     "x": 1630,
+     "y": 400
+    },
+    "kospi": {
+     "label": "한국 반도체 주가 ↓",
+     "icon": "trending-down",
+     "x": 1630,
+     "y": 720
+    },
+    "money": {
+     "label": "빅테크 돈은 그대로",
+     "icon": "dollar-sign",
+     "x": 1170,
+     "y": 720
+    },
+    "old": {
+     "label": "기존 공장 몸값 ↑",
+     "icon": "building-2",
+     "x": 710,
+     "y": 720
+    },
+    "fx": {
+     "label": "환율·미국 반도체",
+     "icon": "globe",
+     "x": 250,
+     "y": 720
+    }
+   },
+   "edges": [
+    [
+     "vote",
+     "permit"
+    ],
+    [
+     "permit",
+     "build"
+    ],
+    [
+     "build",
+     "chips"
+    ],
+    [
+     "chips",
+     "kospi"
+    ],
+    [
+     "money",
+     "build"
+    ],
+    [
+     "permit",
+     "old"
+    ],
+    [
+     "fx",
+     "kospi"
+    ]
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": 1,
+   "type": "map_causal",
+   "chapter": 0,
+   "label": "자체 정리",
+   "title": "오늘 따라갈 길",
+   "beats": [
+    {
+     "say": "길은 네 칸입니다. 미국 선거, 막히는 AI 공장, 줄어들지 모를 칩 주문, 그리고 한국 주가.",
+     "reveal": [
+      "vote",
+      "permit",
+      "build",
+      "chips",
+      "kospi"
+     ],
+     "draw": [
+      [
+       "vote",
+       "permit"
+      ],
+      [
+       "permit",
+       "build"
+      ],
+      [
+       "build",
+       "chips"
+      ],
+      [
+       "chips",
+       "kospi"
+      ]
+     ],
+     "outline_only": true
+    },
+    {
+     "say": "칸마다, 실제로 얼마나 이어져 있는지 재 보겠습니다.",
+     "active": "vote"
+    }
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "map_causal",
+   "events": [
+    " 0.00s 화면 전체(카메라) 확대·이동",
+    " 0.20s 「자체 정리」 아래에서 떠오름",
+    " 0.20s 「오늘 따라갈 길」 아래에서 떠오름",
+    " 0.35s 요소 아래에서 떠오름",
+    " 0.50s 손그림 선 그려짐",
+    " 0.50s 요소 튀어나옴",
+    " 0.55s 「미국 선거·주민투표」 아래에서 떠오름",
+    " 0.60s 요소 아래에서 떠오름",
+    " 0.75s 요소 튀어나옴",
+    " 0.80s 「AI 공장 허가 막힘」 아래에서 떠오름",
+    " 0.85s 요소 아래에서 떠오름",
+    " 0.95s 손그림 선 그려짐",
+    " 1.00s 요소 튀어나옴",
+    " 1.05s 「새 공장 덜 짓기」 아래에서 떠오름",
+    " 1.10s 요소 아래에서 떠오름",
+    " 1.25s 요소 튀어나옴",
+    " 1.30s 「칩·메모리 주문 ↓?」 아래에서 떠오름",
+    " 1.30s 손그림 선 그려짐",
+    " 1.35s 요소 아래에서 떠오름",
+    " 1.50s 요소 튀어나옴",
+    " 1.50s 손그림 선 그려짐",
+    " 1.55s 「한국 반도체 주가 ↓」 아래에서 떠오름",
+    " 1.85s 손그림 선 그려짐",
+    "10.33s 요소 아래에서 떠오름",
+    "10.48s 요소 튀어나옴",
+    "10.53s 「미국 선거·주민투표」 아래에서 떠오름"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,149 @@
+{
+ "id": "people",
+ "type": "people",
+ "example_source": "projects\\20261107-knowledge-스페인독감\\02_script\\hybrid.json",
+ "renderer": "ytflow/stages/hybrid.py:884",
+ "function": "s_people",
+ "scene_fields": [
+  "caption",
+  "count",
+  "id",
+  "label",
+  "scatter",
+  "sub",
+  "title",
+  "value"
+ ],
+ "beat_fields": [
+  "fill"
+ ],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only people --force",
+ "spec_common": {
+  "edit_v10": true,
+  "map": {
+   "nodes": {
+    "war": {
+     "label": "1차 세계대전",
+     "icon": "shield-alert",
+     "x": 250,
+     "y": 400
+    },
+    "troops": {
+     "label": "군대 이동·밀집 막사",
+     "icon": "ship",
+     "x": 710,
+     "y": 400
+    },
+    "spread": {
+     "label": "독감이 세계로",
+     "icon": "globe",
+     "x": 1170,
+     "y": 400
+    },
+    "deaths": {
+     "label": "최소 5천만 명 사망",
+     "icon": "heart-pulse",
+     "x": 1630,
+     "y": 400
+    },
+    "censor": {
+     "label": "전쟁국: 나쁜 소식 검열",
+     "icon": "lock",
+     "x": 250,
+     "y": 720
+    },
+    "late": {
+     "label": "숨긴 곳은 대비가 늦음",
+     "icon": "hourglass",
+     "x": 710,
+     "y": 720
+    },
+    "spain": {
+     "label": "중립국 스페인: 보도",
+     "icon": "newspaper",
+     "x": 1170,
+     "y": 720
+    },
+    "name": {
+     "label": "'스페인 독감'이란 이름",
+     "icon": "tag",
+     "x": 1630,
+     "y": 720
+    }
+   },
+   "edges": [
+    [
+     "war",
+     "troops"
+    ],
+    [
+     "troops",
+     "spread"
+    ],
+    [
+     "spread",
+     "deaths"
+    ],
+    [
+     "war",
+     "censor"
+    ],
+    [
+     "censor",
+     "late"
+    ],
+    [
+     "late",
+     "spread"
+    ],
+    [
+     "spread",
+     "spain"
+    ],
+    [
+     "spain",
+     "name"
+    ]
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": 1,
+   "type": "people",
+   "chapter": 4,
+   "label": "CDC · 1918 Pandemic (H1N1 virus)",
+   "title": "세계 인구 100명으로 줄이면",
+   "count": 33,
+   "value": "33명",
+   "caption": "이 병에 걸렸다",
+   "sub": "약 5억 명 = 당시 세계 인구의 3분의 1",
+   "beats": [
+    {
+     "say": "당시 세계 인구를 100명으로 줄여 볼까요."
+    },
+    {
+     "say": "그중 33명이 이 병에 걸렸습니다. 약 5억 명, 세계 인구의 3분의 1입니다.",
+     "fill": true
+    }
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "people",
+   "events": [
+    " 0.00s 화면 전체(카메라) 확대·이동",
+    " 0.20s 「CDC · 1918 Pandemic (H1N1 vi…」 아래에서 떠오름",
+    " 0.20s 「세계 인구 100명으로 줄이면」 아래에서 떠오름",
+    " 0.50s 손그림 선 그려짐",
+    " 0.65s 요소 나타남",
+    " 3.56s 「33명」 아래에서 떠오름",
+    " 3.56s 숫자가 33.0 까지 세어 올라감",
+    " 3.86s 「이 병에 걸렸다」 아래에서 떠오름",
+    " 4.06s 「약 5억 명 = 당시 세계 인구의 3분의 1」 아래에서 떠오름"
+   ]
+  }
+ ]
+}

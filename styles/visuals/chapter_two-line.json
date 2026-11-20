@@ -1,0 +1,50 @@
+{
+ "id": "chapter@two-line",
+ "type": "chapter",
+ "example_source": "scripts/visual_catalog.py VARIANTS",
+ "renderer": "ytflow/stages/uiflow.py:443",
+ "function": "chapter_two_line",
+ "scene_fields": [
+  "color",
+  "dim",
+  "kicker",
+  "lime",
+  "title"
+ ],
+ "beat_fields": [],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only chapter@two-line --force",
+ "spec_common": {
+  "edit_v10": true
+ },
+ "scenes": [
+  {
+   "type": "chapter",
+   "num": "1",
+   "look": "two-line",
+   "kicker": "묻지도 않고",
+   "title": "전화를 겁니다",
+   "clip": {
+    "src": "ph",
+    "start": 0
+   },
+   "beats": [
+    {
+     "say": "첫 번째 문제입니다."
+    }
+   ],
+   "id": 1,
+   "chapter": 0
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "chapter",
+   "events": [
+    " 0.00s 영상 움직임",
+    " 0.45s 「묻지도 않고」 아래에서 떠오름",
+    " 0.85s 「전화를 겁니다」 아래에서 떠오름"
+   ]
+  }
+ ]
+}

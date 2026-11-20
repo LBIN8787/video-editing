@@ -1,0 +1,123 @@
+{
+ "id": "spread",
+ "type": "spread",
+ "example_source": "scripts/visual_catalog.py DEMO",
+ "renderer": "ytflow/stages/explain.py:284",
+ "function": "s_spread",
+ "scene_fields": [
+  "change",
+  "diff",
+  "high",
+  "low",
+  "steps"
+ ],
+ "beat_fields": [],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only spread --force",
+ "spec_common": {
+  "edit_v10": true
+ },
+ "scenes": [
+  {
+   "type": "spread",
+   "title": "정제마진은 어디서 생기나",
+   "steps": [
+    {
+     "icon": "droplet",
+     "label": "원유"
+    },
+    {
+     "icon": "factory",
+     "label": "정유 공장"
+    },
+    {
+     "icon": "fuel",
+     "label": "휘발유·경유"
+    }
+   ],
+   "low": {
+    "label": "원유값",
+    "value": 70,
+    "text": "$70"
+   },
+   "high": {
+    "label": "제품값",
+    "value": 95,
+    "text": "$95"
+   },
+   "diff": {
+    "label": "정제마진",
+    "formula": "제품값 − 원유값"
+   },
+   "change": {
+    "value": 82,
+    "text": "$82",
+    "label": "제품값만 내려가면 간격이 줄어듦"
+   },
+   "beats": [
+    {
+     "say": "원유가 공장을 거쳐 기름이 됩니다.",
+     "show": [
+      "steps"
+     ]
+    },
+    {
+     "say": "두 값의 높이를 봅니다.",
+     "show": [
+      "low",
+      "high"
+     ]
+    },
+    {
+     "say": "그 차이가 정제마진입니다.",
+     "show": [
+      "diff"
+     ]
+    },
+    {
+     "say": "제품값이 내려가면 간격이 줄어듭니다.",
+     "show": [
+      "change"
+     ]
+    }
+   ],
+   "id": 1,
+   "chapter": 0
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "spread",
+   "events": [
+    " 0.00s 화면 전체(카메라) 확대·이동",
+    " 0.15s 「정제마진은 어디서 생기나」 아래에서 떠오름",
+    " 0.55s 요소 튀어나옴",
+    " 0.65s 「원유」 아래에서 떠오름",
+    " 0.85s 선 그려짐",
+    " 1.25s 요소 튀어나옴",
+    " 1.35s 「정유 공장」 아래에서 떠오름",
+    " 1.55s 선 그려짐",
+    " 1.95s 요소 튀어나옴",
+    " 2.05s 「휘발유·경유」 아래에서 떠오름",
+    " 2.66s 손그림 선 그려짐",
+    " 2.86s 요소 움직임",
+    " 3.06s 「원유값」 아래에서 떠오름",
+    " 3.26s 「$70」 아래에서 떠오름",
+    " 3.36s 요소 움직임",
+    " 3.46s 선 나타남",
+    " 3.56s 「제품값」 아래에서 떠오름",
+    " 3.76s 「$95」 아래에서 떠오름",
+    " 4.44s 손그림 선 그려짐",
+    " 4.74s 「정제마진」 아래에서 떠오름",
+    " 5.04s 「제품값 − 원유값」 아래에서 떠오름",
+    " 6.36s 요소 움직임",
+    " 6.36s 손그림 선 움직임",
+    " 6.46s 요소 움직임",
+    " 6.56s 손그림 선 그려짐",
+    " 7.36s 「$82」 아래에서 떠오름",
+    " 7.46s 손그림 선 그려짐",
+    " 7.66s 「제품값만 내려가면 간격이 줄어듦」 아래에서 떠오름"
+   ]
+  }
+ ]
+}

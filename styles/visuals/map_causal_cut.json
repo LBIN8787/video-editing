@@ -1,0 +1,126 @@
+{
+ "id": "map_causal@cut",
+ "type": "map_causal",
+ "example_source": "scripts/visual_catalog.py VARIANTS",
+ "renderer": "ytflow/stages/hybrid.py:455",
+ "function": "s_map_causal",
+ "scene_fields": [
+  "label",
+  "title"
+ ],
+ "beat_fields": [
+  "active",
+  "cut",
+  "draw",
+  "instant",
+  "reveal",
+  "tag"
+ ],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only map_causal@cut --force",
+ "spec_common": {
+  "edit_v10": true
+ },
+ "scenes": [
+  {
+   "type": "map_causal",
+   "title": "부탁에서 결제까지",
+   "map": {
+    "nodes": {
+     "ask": {
+      "label": "사용자 부탁",
+      "icon": "user",
+      "x": 400,
+      "y": 420
+     },
+     "bot": {
+      "label": "AI 비서",
+      "icon": "bot",
+      "x": 960,
+      "y": 420
+     },
+     "shop": {
+      "label": "쇼핑몰 결제",
+      "icon": "shopping-cart",
+      "x": 1520,
+      "y": 420
+     },
+     "msg": {
+      "label": "메신저",
+      "icon": "smartphone",
+      "x": 960,
+      "y": 760
+     }
+    }
+   },
+   "beats": [
+    {
+     "say": "부탁은 AI 비서를 거쳐 결제와 메시지로 이어집니다.",
+     "reveal": [
+      "ask",
+      "bot",
+      "shop",
+      "msg"
+     ],
+     "draw": [
+      [
+       "ask",
+       "bot"
+      ],
+      [
+       "bot",
+       "shop"
+      ],
+      [
+       "bot",
+       "msg"
+      ]
+     ]
+    },
+    {
+     "say": "그런데 메시지 쪽 길은 막혔습니다.",
+     "cut": [
+      [
+       "bot",
+       "msg"
+      ]
+     ],
+     "active": "shop"
+    }
+   ],
+   "id": 1,
+   "chapter": 0
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "map_causal",
+   "events": [
+    " 0.00s 화면 전체(카메라) 확대·이동",
+    " 0.20s 「부탁에서 결제까지」 아래에서 떠오름",
+    " 0.35s 요소 아래에서 떠오름",
+    " 0.50s 손그림 선 그려짐",
+    " 0.50s 요소 튀어나옴",
+    " 0.55s 「사용자 부탁」 아래에서 떠오름",
+    " 0.60s 요소 아래에서 떠오름",
+    " 0.75s 요소 튀어나옴",
+    " 0.80s 「AI 비서」 아래에서 떠오름",
+    " 0.85s 요소 아래에서 떠오름",
+    " 0.95s 손그림 선 그려짐",
+    " 1.00s 요소 튀어나옴",
+    " 1.05s 「쇼핑몰 결제」 아래에서 떠오름",
+    " 1.10s 요소 아래에서 떠오름",
+    " 1.25s 요소 튀어나옴",
+    " 1.30s 「메신저」 아래에서 떠오름",
+    " 1.30s 손그림 선 그려짐",
+    " 4.45s 선 묶음 사라짐",
+    " 4.45s 선 나타남",
+    " 4.45s 선 점선이 흐름",
+    " 4.60s 「✕」 크게서 찍힘(도장)",
+    " 4.85s 요소 아래에서 떠오름",
+    " 5.00s 요소 튀어나옴",
+    " 5.05s 「쇼핑몰 결제」 아래에서 떠오름"
+   ]
+  }
+ ]
+}
