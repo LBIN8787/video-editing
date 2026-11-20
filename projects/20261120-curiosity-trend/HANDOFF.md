@@ -6,7 +6,7 @@
 | 단계 | 상태 |
 |---|---|
 | D1 주제 | 통과 — '권태사회'·넘기기 (`01_research/topic_card.md`) |
-| 대본 | **v3 검토 대기** — `02_script/script_v3.md` (심리학 고양이 문법: 이야기 = 삽화, 설명 = 모션그래픽, 증거 = 실제 자료·인물 사진, 마디 = 검은 화면, 8~9분). v1(14분 30초, 실사 위주)은 사용자 기각 → v2(이야기형) → v3 |
+| 대본 | **v3 통과 (2026-11-20)** — `02_script/script_v3.md` (심리학 고양이 문법: 이야기 = 삽화, 설명 = 모션그래픽, 증거 = 실제 자료·인물 사진, 마디 = 검은 화면, 8~9분). v1(14분 30초, 실사 위주)은 사용자 기각 → v2(이야기형) → v3 |
 | 원화 | **PC 할 일** — `inbox/pc-tasks/20261120-2310-art-curiosity-trend.md` · 주문서 `02_script/art_orders.md` (잼 편 화풍, 2×2 시트 5장: night1·room·lab·night2·ending) |
 | 렌더 | v3 는 아직. v1 렌더러(`render_full.py`·`full_overlay.html`·`build_full.py`)의 모션그래픽 구성요소(점 그림·띠·막대·도장·빠져드는 막대·목록·끝 화면)를 그대로 쓰고, 실사 칸을 원화 칸으로 바꾸면 됨 |
 | 업로드 | '한겹 더 보면' 채널, **일부 공개** (`channels/ch-knowledge/channel.yaml` youtube: expected_channel·privacy unlisted·publish_time null). `yt-publish` 가 올리기 직전 권한 채널 이름을 확인하고 다르면 멈춤 |
