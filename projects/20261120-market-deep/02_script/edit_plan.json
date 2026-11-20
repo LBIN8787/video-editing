@@ -1,5 +1,5 @@
 {
- "project": "20261120-market-daily",
+ "project": "20261120-market-deep",
  "topic": "market",
  "topic_name": "주식 · 시장",
  "scenes": [
@@ -130,7 +130,7 @@
    "also": [],
    "beats": [
     {
-     "say": "먼저 앤트로픽의 첫날을 시간 순서대로 보겠습니다.",
+     "say": "하루만 보면 놓치는 것이 있습니다. 한 달 전으로 돌아가 보겠습니다.",
      "situations": [],
      "hits": []
     }
@@ -138,8 +138,180 @@
   },
   {
    "scene": 4,
+   "type": "bars",
+   "chapter": 1,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [],
+   "beats": [
+    {
+     "say": "나스닥이 최근 가장 높았던 10월 21일부터 19일까지, 한 달의 성적입니다. 엔비디아는 34.2% 빠졌습니다. 메모리의 마이크론은 24.4%, 반도체 지수는 18.1% 내렸습니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "34.2%",
+      "지수"
+     ]
+    },
+    {
+     "say": "그런데 AMD는 11.5%로 덜 빠졌고, 나스닥은 10.6% 내렸습니다. 앤트로픽에 칩을 대는 브로드컴은 오히려 2.6% 올랐습니다. 같은 AI 안에서도 길이 갈라진 겁니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "11.5%",
+      "올랐"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 5,
    "type": "checklist",
    "chapter": 1,
+   "situation": "hub-event",
+   "situation_name": "시장을 흔든 사건과 파급",
+   "origin": "add",
+   "also": [
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "그 한 달 동안 무슨 일이 있었는지 이 채널이 차례로 다뤘습니다. 엔비디아의 젠슨 황이 물러나며 리더십 질문이 생겼고, 미국 상무부는 중국이 AI 칩을 빌려 쓰는 길까지 막는 규칙을 냈습니다. 그 규칙이 효력을 가진 날이 바로 19일입니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "18일에는 연준 의사록이 금리를 더 올릴 수 있다는 뜻과 AI 회사들 사이의 순환 금융을 함께 적었습니다. 그리고 19일, 앤트로픽이 상장했고 AMD 보고서가 나왔습니다. 공포 지수는 한 달 전 16.68에서 28.44로 70% 뛰었습니다.",
+     "situations": [
+      "hub-event",
+      "metric"
+     ],
+     "hits": [
+      "연준",
+      "순환"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "map_causal",
+    "kb",
+    "chart"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "사건을 따로 떼어 나열",
+   "why": "v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로"
+  },
+  {
+   "scene": 6,
+   "type": "map_causal",
+   "chapter": 1,
+   "situation": "route",
+   "situation_name": "어디서 어디로 움직였다",
+   "origin": "main",
+   "also": [
+    "metric",
+    "point"
+   ],
+   "beats": [
+    {
+     "say": "여기서부터는 해석입니다. 지난 한 달, 돈은 AI를 통째로 버리지 않았습니다. 질문을 먼저 받은 엔비디아와 그 공급망에서 빠져, 대안으로 여겨진 AMD와 브로드컴 쪽으로 옮겨 갔습니다.",
+     "situations": [
+      "route",
+      "point"
+     ],
+     "hits": [
+      "에서 빠져, 대안으로 ",
+      "공급망",
+      "옮겨"
+     ]
+    },
+    {
+     "say": "19일은 그 흐름이 두 군데서 흔들린 날입니다. 대안이던 AMD에도 질문이 붙었고, 새 주식 1,070억 달러어치가 자리를 요구했습니다. 그리고 한 달 내내 0.8%밖에 안 빠졌던 헬스케어까지 이날은 2% 넘게 내렸습니다. 반도체의 일이 시장 전체로 번진 날입니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "0.8%",
+      "억 달러"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "journey",
+    "usmap"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "motion-path",
+     "status": "partial"
+    },
+    {
+     "id": "draw-on",
+     "status": "have"
+    }
+   ],
+   "blocked": [],
+   "avoid": "표로 보여 주기",
+   "why": "이동은 지도 위 경로로"
+  },
+  {
+   "scene": 7,
+   "type": "chapter",
+   "chapter": 2,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "먼저 앤트로픽의 첫날을 시간 순서대로 보겠습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 8,
+   "type": "checklist",
+   "chapter": 2,
    "situation": "metric",
    "situation_name": "숫자·지표가 움직였다",
    "origin": "override",
@@ -191,9 +363,9 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 5,
+   "scene": 9,
    "type": "bars",
-   "chapter": 1,
+   "chapter": 2,
    "situation": "metric",
    "situation_name": "숫자·지표가 움직였다",
    "origin": "override",
@@ -236,9 +408,9 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 6,
+   "scene": 10,
    "type": "analogy",
-   "chapter": 1,
+   "chapter": 2,
    "situation": null,
    "situation_name": null,
    "origin": null,
@@ -257,9 +429,9 @@
    ]
   },
   {
-   "scene": 7,
+   "scene": 11,
    "type": "bignum",
-   "chapter": 1,
+   "chapter": 2,
    "situation": "metric",
    "situation_name": "숫자·지표가 움직였다",
    "origin": "override",
@@ -308,9 +480,61 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 8,
+   "scene": 12,
+   "type": "bignum",
+   "chapter": 2,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "이제 값을 보겠습니다. 보도된 시가총액 1조 7,700억 달러를, 올해 1월부터 9월까지 매출 332억 달러를 1년으로 늘린 약 443억 달러로 나누면, 약 40배입니다. 1년 매출의 40년 치를 지금 값으로 매긴 겁니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    },
+    {
+     "say": "이 값을 받치려면 매출이 계속 빠르게 커져야 합니다. 앤트로픽은 앞으로 12개월 안에만 707억 달러어치 컴퓨트를 사기로 약속했고, 이번에 받은 돈으로 그 1년 치는 채웠습니다. 다음 1년부터는 매출이 그 몫을 해야 합니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 13,
    "type": "map_causal",
-   "chapter": 1,
+   "chapter": 2,
    "situation": "metric",
    "situation_name": "숫자·지표가 움직였다",
    "origin": "override",
@@ -363,9 +587,9 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 9,
+   "scene": 14,
    "type": "chapter",
-   "chapter": 2,
+   "chapter": 3,
    "situation": null,
    "situation_name": null,
    "origin": null,
@@ -379,9 +603,9 @@
    ]
   },
   {
-   "scene": 10,
+   "scene": 15,
    "type": "bars",
-   "chapter": 2,
+   "chapter": 3,
    "situation": "metric",
    "situation_name": "숫자·지표가 움직였다",
    "origin": "override",
@@ -434,9 +658,9 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 11,
+   "scene": 16,
    "type": "quote",
-   "chapter": 2,
+   "chapter": 3,
    "situation": "say-vs-do",
    "situation_name": "말과 행동을 맞댄다",
    "origin": "add",
@@ -487,9 +711,9 @@
    "why": "v26 자료를 엮어 — 말(발언)과 행동(공시·거래)을 나란히"
   },
   {
-   "scene": 12,
+   "scene": 17,
    "type": "checklist",
-   "chapter": 2,
+   "chapter": 3,
    "situation": "earnings",
    "situation_name": "실적·가이던스",
    "origin": "add",
@@ -540,9 +764,169 @@
    "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
   },
   {
-   "scene": 13,
+   "scene": 18,
+   "type": "checklist",
+   "chapter": 3,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "route",
+    "compare"
+   ],
+   "beats": [
+    {
+     "say": "그런데 이 보고서에는 시장이 덜 주목한 문장들이 있습니다. 보고서 스스로, 돈이 오간 것만으로 AMD가 수출 통제를 어겼다고 입증되지는 않는다고 적었습니다. IEIT가 AMD의 코드를 어떻게 얻었는지, 누가 허가를 받았는지도 모른다고 썼습니다.",
+     "situations": [
+      "route"
+     ],
+     "hits": [
+      "수출"
+     ]
+    },
+    {
+     "say": "통관 기록은 서버 안에 누구의 칩이 들어갔는지, 완성된 서버가 어디로 갔는지 보여 주지 않는다는 점, 그리고 이런 관계가 AMD 전체 사업에 비하면 비교적 작다는 점도 적었습니다. 주가 7.72%가 빠진 보고서가, 스스로는 위반을 단정하지 않은 겁니다.",
+     "situations": [
+      "metric",
+      "compare"
+     ],
+     "hits": [
+      "7.72%",
+      "주가"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 19,
+   "type": "checklist",
+   "chapter": 3,
+   "situation": "say-vs-do",
+   "situation_name": "말과 행동을 맞댄다",
+   "origin": "add",
+   "also": [
+    "earnings",
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "그렇다면 시장은 무엇에 값을 매겼을까요. 보고서가 AMD 공시를 인용해 짚은 숫자들입니다. 매출의 22.4%가 중국과 홍콩, 12.4%가 싱가포르에 청구됐습니다. 그리고 칩을 마무리하는 조립과 검사의 대부분을, 중국 퉁푸와 만든 합작사가 맡고 있습니다.",
+     "situations": [
+      "say-vs-do",
+      "earnings"
+     ],
+     "hits": [
+      "공시"
+     ]
+    },
+    {
+     "say": "바로 같은 19일, 싱가포르와 말레이시아 등 다섯 나라에 AI 칩과 서버를 보내려면 허가를 받도록 한 상무부 규칙이 효력을 가졌습니다. 같은 날 나온 두 번째 보고서는 AMD의 구매 약속이 작년 말 122억에서 9월 488억 달러로 늘었다고 주장했습니다. 다만 이 보고서의 숫자 상당수에",
+     "situations": [
+      "metric",
+      "route"
+     ],
+     "hits": [
+      "억 달러"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "versus",
+    "bite",
+    "compare"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-screen",
+     "status": "partial"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "한쪽만 크게",
+   "why": "v26 자료를 엮어 — 말(발언)과 행동(공시·거래)을 나란히"
+  },
+  {
+   "scene": 20,
+   "type": "quote",
+   "chapter": 3,
+   "situation": "said",
+   "situation_name": "누가 말했다",
+   "origin": "main",
+   "also": [
+    "metric",
+    "route"
+   ],
+   "beats": [
+    {
+     "say": "보고서 안에도 엇갈린 시각이 함께 실렸습니다. 미국 상무부에서 수출 관리를 맡았던 윌리엄 라인시는, 소프트웨어 이전은 하드웨어보다 단속하기가 훨씬 어렵다고 말했습니다. 동시에, 허가가 필요하다는 것이 곧 거절된다는 뜻은 아니라고 했습니다. 사실이 아니라 한 사람의 시각입니다.",
+     "situations": [
+      "said",
+      "route"
+     ],
+     "hits": [
+      "말했",
+      "라고 했"
+     ]
+    },
+    {
+     "say": "반면 카네기 국제평화재단의 샘 윈터-레비는, 이번이 진짜 전환점일 것 같다며 누구에게나 팔던 시대가 끝나 가고 있다고 봤습니다. 위반이냐 아니냐는 아직 모릅니다. 하지만 미국 칩 회사의 중국 노출에 매겨지는 값이 바뀌고 있다는 데에는, 이 두 사람의 말과 19일의 주가가 같은 쪽을 가리",
+     "situations": [
+      "metric",
+      "compare"
+     ],
+     "hits": [
+      "주가"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bite",
+    "footage",
+    "quote"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "j-l-cut",
+     "status": "candidate"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "내레이션으로만 전하기",
+   "why": "그 사람의 목소리·원문이 증거 (source-cut, 03 §0-1)"
+  },
+  {
+   "scene": 21,
    "type": "versus",
-   "chapter": 2,
+   "chapter": 3,
    "situation": "metric",
    "situation_name": "숫자·지표가 움직였다",
    "origin": "override",
@@ -593,9 +977,9 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 14,
+   "scene": 22,
    "type": "chapter",
-   "chapter": 3,
+   "chapter": 4,
    "situation": "question",
    "situation_name": "질문·명제 한 줄을 던진다",
    "origin": "main",
@@ -628,9 +1012,9 @@
    "why": "질문은 글자 하나로 — 강조 예산 안에서 (05 §0-1)"
   },
   {
-   "scene": 15,
+   "scene": 23,
    "type": "quote",
-   "chapter": 3,
+   "chapter": 4,
    "situation": "say-vs-do",
    "situation_name": "말과 행동을 맞댄다",
    "origin": "add",
@@ -675,9 +1059,9 @@
    "why": "v26 자료를 엮어 — 말(발언)과 행동(공시·거래)을 나란히"
   },
   {
-   "scene": 16,
+   "scene": 24,
    "type": "versus",
-   "chapter": 3,
+   "chapter": 4,
    "situation": "metric",
    "situation_name": "숫자·지표가 움직였다",
    "origin": "override",
@@ -727,9 +1111,9 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 17,
+   "scene": 25,
    "type": "chapter",
-   "chapter": 4,
+   "chapter": 5,
    "situation": "question",
    "situation_name": "질문·명제 한 줄을 던진다",
    "origin": "main",
@@ -762,9 +1146,9 @@
    "why": "질문은 글자 하나로 — 강조 예산 안에서 (05 §0-1)"
   },
   {
-   "scene": 18,
+   "scene": 26,
    "type": "bars",
-   "chapter": 4,
+   "chapter": 5,
    "situation": "metric",
    "situation_name": "숫자·지표가 움직였다",
    "origin": "override",
@@ -792,6 +1176,15 @@
       "올랐",
       "억 원"
      ]
+    },
+    {
+     "say": "한 달로 넓혀 보면 하루의 반등은 작습니다. 10월 21일부터 코스피는 10.4%, 삼성전자는 11.9%, SK하이닉스는 8.6% 내렸습니다. 나스닥의 10.6%와 거의 같은 폭입니다. 한국 시장은 미국 AI 주식과 같은 길을 걸어 왔습니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "10.4%"
+     ]
     }
    ],
    "recommended_scenes": [
@@ -815,9 +1208,9 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 19,
+   "scene": 27,
    "type": "map_causal",
-   "chapter": 4,
+   "chapter": 5,
    "situation": "metric",
    "situation_name": "숫자·지표가 움직였다",
    "origin": "override",
@@ -869,9 +1262,9 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 20,
+   "scene": 28,
    "type": "chapter",
-   "chapter": 5,
+   "chapter": 6,
    "situation": null,
    "situation_name": null,
    "origin": null,
@@ -885,9 +1278,9 @@
    ]
   },
   {
-   "scene": 21,
+   "scene": 29,
    "type": "checklist",
-   "chapter": 5,
+   "chapter": 6,
    "situation": "hub-event",
    "situation_name": "시장을 흔든 사건과 파급",
    "origin": "add",
@@ -941,9 +1334,9 @@
    "why": "v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로"
   },
   {
-   "scene": 22,
+   "scene": 30,
    "type": "checklist",
-   "chapter": 5,
+   "chapter": 6,
    "situation": "next-week",
    "situation_name": "다음 주 볼 일정",
    "origin": "add",
@@ -986,9 +1379,9 @@
    "why": "v29 일정마다 왜 중요·볼 숫자·결과별 해석"
   },
   {
-   "scene": 23,
+   "scene": 31,
    "type": "kinetic",
-   "chapter": 5,
+   "chapter": 6,
    "situation": null,
    "situation_name": null,
    "origin": null,
@@ -1002,9 +1395,9 @@
    ]
   },
   {
-   "scene": 24,
+   "scene": 32,
    "type": "outro",
-   "chapter": 5,
+   "chapter": 6,
    "situation": "metric",
    "situation_name": "숫자·지표가 움직였다",
    "origin": "override",
@@ -1046,14 +1439,16 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   }
  ],
- "coverage": 0.79,
- "fit": 0.47,
+ "coverage": 0.81,
+ "fit": 0.46,
  "counts": {
-  "metric": 12,
-  "say-vs-do": 2,
+  "metric": 14,
+  "say-vs-do": 3,
+  "hub-event": 2,
+  "earnings": 2,
   "question": 2,
-  "earnings": 1,
-  "hub-event": 1,
+  "route": 1,
+  "said": 1,
   "next-week": 1
  },
  "defaults": {

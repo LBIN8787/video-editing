@@ -1,11 +1,11 @@
-# 편집 맥락 — 20261120-market-daily
+# 편집 맥락 — 20261120-market-deep
 
 **S5 연출 선택** · [표현 방식과 인포그래픽 레퍼런스](../../../manual/12-visual-storytelling.md)로 장면의 표현 방식을 고른다. 행동 중심 장면은 [대본별 화풍과 움직임](../../../docs/42-script-to-motion.md)에 따라 시작 상태, 변화가 일어나는 말, 도착 상태와 다음 컷의 첫 자세를 기록한다. D3에는 이 장면들이 이어지는 동영상과 화풍 승인 범위를 함께 제시한다.
 
 
 > 자동 생성 (python -m ytflow edit-plan). 고치지 말고 메인(manual/·manual/situations.yaml·styles/techniques.yaml)이나 주제 레포(topics/market/topic.yaml)를 고친 뒤 다시 만드세요.
 
-**층:** 메인 → 주제 `market` (주식 · 시장) → 영상 `20261120-market-daily`
+**층:** 메인 → 주제 `market` (주식 · 시장) → 영상 `20261120-market-deep`
 
 ## 1. 메인에서 물려받는 것 (모든 영상)
 - 영구 원칙 = `manual/README.md` §3 (진짜 금지) · 규칙의 네 층 = §3-1 (스타일 기본값·실험 기록은 금지 아님)
@@ -50,33 +50,41 @@
 | 어닝콜·기자회견 발언 | 주제가 더함 | bite → quote | j-l-cut(후보), rough-highlight(비슷한 것 있음) | 번역만 읽기 |
 | 다음 주 볼 일정 | 주제가 더함 | timeline → checklist | stagger(있음) | 일정 나열만 |
 
-## 4. 이 영상에서 찾은 상황 (장면 24개 · 상황을 찾은 장면 79% · 지금 장면 종류가 추천과 맞는 비율 47%)
+## 4. 이 영상에서 찾은 상황 (장면 32개 · 상황을 찾은 장면 81% · 지금 장면 종류가 추천과 맞는 비율 46%)
 
 | 장면 | 지금 | 상황 | 추천 장면 | 기법 |
 |---|---|---|---|---|
 | 1 | bignum | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
 | 2 | bars | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
 | 3 | chapter | (못 찾음) | | |
-| 4 | checklist ⚠ | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
-| 5 | bars | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
-| 6 | analogy | (못 찾음) | | |
-| 7 | bignum | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
-| 8 | map_causal ⚠ | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
-| 9 | chapter | (못 찾음) | | |
-| 10 | bars | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
-| 11 | quote ⚠ | 말과 행동을 맞댄다 | versus → bite → compare | split-screen(비슷한 것 있음), rough-highlight(비슷한 것 있음) |
-| 12 | checklist ⚠ | 실적·가이던스 | bars → versus → bignum | count-up(있음), chart-morph(후보) |
-| 13 | versus ⚠ | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
-| 14 | chapter | 질문·명제 한 줄을 던진다 | card_type → chapter | split-reveal(비슷한 것 있음) |
-| 15 | quote ⚠ | 말과 행동을 맞댄다 | versus → bite → compare | split-screen(비슷한 것 있음), rough-highlight(비슷한 것 있음) |
-| 16 | versus ⚠ | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
-| 17 | chapter | 질문·명제 한 줄을 던진다 | card_type → chapter | split-reveal(비슷한 것 있음) |
-| 18 | bars | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
-| 19 | map_causal ⚠ | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
-| 20 | chapter | (못 찾음) | | |
-| 21 | checklist ⚠ | 시장을 흔든 사건과 파급 | map_causal → kb → chart | draw-on(있음), spotlight(있음), match-move(후보) |
-| 22 | checklist | 다음 주 볼 일정 | timeline → checklist | stagger(있음) |
-| 23 | kinetic | (못 찾음) | | |
-| 24 | outro ⚠ | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
+| 4 | bars | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
+| 5 | checklist ⚠ | 시장을 흔든 사건과 파급 | map_causal → kb → chart | draw-on(있음), spotlight(있음), match-move(후보) |
+| 6 | map_causal ⚠ | 어디서 어디로 움직였다 | journey → usmap | motion-path(비슷한 것 있음), draw-on(있음) |
+| 7 | chapter | (못 찾음) | | |
+| 8 | checklist ⚠ | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
+| 9 | bars | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
+| 10 | analogy | (못 찾음) | | |
+| 11 | bignum | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
+| 12 | bignum | 실적·가이던스 | bars → versus → bignum | count-up(있음), chart-morph(후보) |
+| 13 | map_causal ⚠ | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
+| 14 | chapter | (못 찾음) | | |
+| 15 | bars | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
+| 16 | quote ⚠ | 말과 행동을 맞댄다 | versus → bite → compare | split-screen(비슷한 것 있음), rough-highlight(비슷한 것 있음) |
+| 17 | checklist ⚠ | 실적·가이던스 | bars → versus → bignum | count-up(있음), chart-morph(후보) |
+| 18 | checklist ⚠ | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
+| 19 | checklist ⚠ | 말과 행동을 맞댄다 | versus → bite → compare | split-screen(비슷한 것 있음), rough-highlight(비슷한 것 있음) |
+| 20 | quote | 누가 말했다 | bite → footage → quote | j-l-cut(후보), rough-highlight(비슷한 것 있음) |
+| 21 | versus ⚠ | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
+| 22 | chapter | 질문·명제 한 줄을 던진다 | card_type → chapter | split-reveal(비슷한 것 있음) |
+| 23 | quote ⚠ | 말과 행동을 맞댄다 | versus → bite → compare | split-screen(비슷한 것 있음), rough-highlight(비슷한 것 있음) |
+| 24 | versus ⚠ | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
+| 25 | chapter | 질문·명제 한 줄을 던진다 | card_type → chapter | split-reveal(비슷한 것 있음) |
+| 26 | bars | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
+| 27 | map_causal ⚠ | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
+| 28 | chapter | (못 찾음) | | |
+| 29 | checklist ⚠ | 시장을 흔든 사건과 파급 | map_causal → kb → chart | draw-on(있음), spotlight(있음), match-move(후보) |
+| 30 | checklist | 다음 주 볼 일정 | timeline → checklist | stagger(있음) |
+| 31 | kinetic | (못 찾음) | | |
+| 32 | outro ⚠ | 숫자·지표가 움직였다 | bignum → chart → bars | count-up(있음), scramble(후보) |
 
 ⚠ = 지금 장면 종류가 상황의 추천 목록에 없음 — 틀린 게 아니라 다시 볼 곳. 기법이 '후보'면 아직 렌더러에 없음.

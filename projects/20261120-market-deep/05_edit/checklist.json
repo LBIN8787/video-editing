@@ -1,7 +1,7 @@
 {
- "project": "20261120-market-daily",
+ "project": "20261120-market-deep",
  "manual_version": "59",
- "checked": "2026-11-20T03:34:51",
+ "checked": "2026-11-20T03:39:02",
  "pass": true,
  "rows": [
   {
@@ -128,7 +128,7 @@
    "level": "MUST",
    "item": "팩트시트 + 출처 링크 3개 이상",
    "ok": true,
-   "detail": "링크 15개"
+   "detail": "링크 17개"
   },
   {
    "gate": "G3",
@@ -233,18 +233,18 @@
    "level": "MUST",
    "item": "매일 시장: 이야기마다 원인 종류(이슈·보고서·전망·실적)와 1차 출처를 팩트시트에",
    "ok": true,
-   "detail": "['이슈', '보고서']"
+   "detail": "['이슈', '보고서', '실적']"
   },
   {
    "gate": "G1",
-   "level": "SHOULD",
+   "level": "MUST",
    "item": "v26: topic_brief 에 known(이미 알려진 것)·new_angle(자료를 엮어야 보이는 것) — 제목·훅은 new_angle 에서 (03 §0-2)",
    "ok": true,
    "detail": "언론이 '앤트로픽 대리주'라 부르던 아마존·알파벳·브로드컴이 상장 날 일"
   },
   {
    "gate": "G3",
-   "level": "SHOULD",
+   "level": "MUST",
    "item": "v26: 팩트시트 '## 자료 지도' — 서로 다른 종류(보고서·발언·행동)를 맞대고, 자료마다 의미 칸 (03 §0-2)",
    "ok": true,
    "detail": "10줄 {'보고서': 2, '발언': 2, '행동': 6} 의미✓"
@@ -258,21 +258,21 @@
   },
   {
    "gate": "G3",
-   "level": "SHOULD",
+   "level": "MUST",
    "item": "v33: 팩트시트 '## 직접 계산' 1개+ (식·출처 숫자) — 연결 비율·민감도 (03 §0-4)",
    "ok": true,
    "detail": "7개"
   },
   {
    "gate": "G3",
-   "level": "SHOULD",
+   "level": "MUST",
    "item": "v33: 팩트시트 '## 틀리는 경우' — 이 판단이 틀리는 조건 (03 §0-4)",
    "ok": true,
    "detail": "3개"
   },
   {
    "gate": "G3",
-   "level": "SHOULD",
+   "level": "MUST",
    "item": "v33: 팩트시트 '## 신호' — 숫자 기준선·날짜가 있는 확인 신호 (03 §0-4)",
    "ok": true,
    "detail": "3개"
@@ -286,28 +286,28 @@
   },
   {
    "gate": "G1",
-   "level": "SHOULD",
+   "level": "MUST",
    "item": "v28: topic_brief hub_event — 시장을 흔든 사건이 있으면 중심축, 없으면 '없음: 이유' (03 §0-3)",
    "ok": true,
    "detail": "앤트로픽 나스닥 첫 거래(+17%)와 같은 날 3대 지수 -2%대, AM"
   },
   {
    "gate": "G3",
-   "level": "SHOULD",
+   "level": "MUST",
    "item": "v28: 팩트시트 '## 파급 경로'·'## 주의할 점' (03 §0-3)",
    "ok": true,
    "detail": ""
   },
   {
    "gate": "G4",
-   "level": "SHOULD",
+   "level": "MUST",
    "item": "v28: 여는 부분에 중심 사건 (03 §0-3)",
    "ok": true,
    "detail": "앤트로픽"
   },
   {
    "gate": "G3",
-   "level": "SHOULD",
+   "level": "MUST",
    "item": "v26: 팩트시트 '## 매체 프레임' — 매체끼리 어떻게 다르게 읽었나 (제목·강조점·빠진 것, 03 §0-2)",
    "ok": true,
    "detail": "6곳"
@@ -321,14 +321,14 @@
   },
   {
    "gate": "G3",
-   "level": "SHOULD",
+   "level": "MUST",
    "item": "v28: 매체 프레임에 '입장' 칸 (낙관·우려·중립, 03 §0-3)",
    "ok": true,
    "detail": ""
   },
   {
    "gate": "G4",
-   "level": "SHOULD",
+   "level": "MUST",
    "item": "v26: 대본에 매체가 어떻게 다뤘나 + 말과 행동 맞대기 (03 §0-2)",
    "ok": true,
    "detail": ""
@@ -338,7 +338,7 @@
    "level": "MUST",
    "item": "v36: 팩트시트 '## 인사이트' — 이름·직함 있는 사람·매체의 엇갈리는 해석(입장이 갈림), 원문·근거·출처 (09 §3-4)",
    "ok": true,
-   "detail": "5줄 · 입장 ['낙관', '우려', '중립'] · 국내 ✗ 해외 ✓"
+   "detail": "7줄 · 입장 ['낙관', '우려', '중립'] · 국내 ✗ 해외 ✓"
   },
   {
    "gate": "G3",
@@ -359,14 +359,14 @@
    "level": "MUST",
    "item": "v36: 대본에 인사이트 장면 (\"insight\": true — 화면에 '의견' 표시, 사실과 구분) (09 §3-4)",
    "ok": true,
-   "detail": "4개"
+   "detail": "5개"
   },
   {
    "gate": "G4",
    "level": "참고",
    "item": "v36·v52: 인사이트 분량 — 유명인(이름난 투자자·경영자·당국자·석학)의 분석을 넉넉히 다뤘나 (국내 증권사는 필수 아님)",
    "ok": true,
-   "detail": "장면 4 · 팩트시트 5줄 · 국내 ✗ 해외 ✓"
+   "detail": "장면 5 · 팩트시트 7줄 · 국내 ✗ 해외 ✓"
   },
   {
    "gate": "G4",
@@ -421,15 +421,15 @@
    "gate": "G5",
    "level": "참고",
    "item": "배경: 같은 바탕이 이어지는 구간",
-   "ok": true,
-   "detail": "[]"
+   "ok": false,
+   "detail": "['tint']"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "반복 피로: 글씨·도형뿐인 장면이 이어지는 구간 — 자료·지도·그림으로 보여 줄 수 있는지 다시 볼 곳 (05 §0-3)",
    "ok": false,
-   "detail": "최장 3연속 (장면 22)"
+   "detail": "최장 3연속 (장면 30)"
   },
   {
    "gate": "G5",
@@ -443,7 +443,7 @@
    "level": "참고",
    "item": "반복 피로: 볼거리(자료·지도·그림)가 있는 장면의 몫",
    "ok": true,
-   "detail": "12/18"
+   "detail": "16/25"
   },
   {
    "gate": "G5",
@@ -484,8 +484,8 @@
    "gate": "G5",
    "level": "참고",
    "item": "같은 장면 type 이 이어지는 구간 — 하는 일이 바뀌었는데 화면이 같지 않나",
-   "ok": true,
-   "detail": "[]"
+   "ok": false,
+   "detail": "['checklist']"
   },
   {
    "gate": "G5",
@@ -499,14 +499,14 @@
    "level": "참고",
    "item": "스타일 조합: 가장 많이 쓴 스타일의 몫·겹친 장면·같은 스타일 연속",
    "ok": false,
-   "detail": "data-report 0.36 · 겹침 1 · 최장 연속 2"
+   "detail": "data-report 0.35 · 겹침 1 · 최장 연속 3"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "강조 횟수·강조가 겹친 장면 — 기억할 숫자·반전·결론에만 썼는지 (05 §0-1)",
    "ok": true,
-   "detail": "1번 [(23, 'kinetic')] · 겹친 장면 []"
+   "detail": "1번 [(31, 'kinetic')] · 겹친 장면 []"
   },
   {
    "gate": "G5",
