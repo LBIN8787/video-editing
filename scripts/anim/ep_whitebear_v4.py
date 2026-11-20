@@ -152,7 +152,7 @@ def chapter(n, i_first, hold=1.2):
     return T(i_first) + hold
 
 
-def evidence(sid, img, width=1300, bg="black.png", label=""):
+def evidence(sid, img, width=1300, bg="black.png", label="", cx=960):
     """실제 자료 한 장을 가운데 흰 바탕 카드로 (증거 자리)."""
     s = f.set(sid, bg, focus=(960, 540, 1.0))
     from PIL import Image
@@ -160,12 +160,12 @@ def evidence(sid, img, width=1300, bg="black.png", label=""):
     h = width * ih / iw
     if h > 900:
         width, h = width * 900 / h, 900
-    s.raw(f'<div style="position:absolute;left:{960 - width / 2 - 18:.0f}px;top:{520 - h / 2 - 18:.0f}px;width:{width + 36:.0f}px;'
+    s.raw(f'<div style="position:absolute;left:{cx - width / 2 - 18:.0f}px;top:{520 - h / 2 - 18:.0f}px;width:{width + 36:.0f}px;'
           f'height:{h + 36:.0f}px;background:#fcfaf4;box-shadow:0 18px 40px rgba(0,0,0,.45)"><img src="{(art / img).as_uri()}" '
           f'style="position:absolute;left:18px;top:18px;width:{width:.0f}px;height:{h:.0f}px"></div>', z=5)
     if label:
-        s.text(f"{sid}_lb", label, 960, 1010, size=30, color="#d9d2c4", font="gothic", rot=0, shadow=False)
-    return s, (960 - width / 2, 520 - h / 2, width, h)
+        s.text(f"{sid}_lb", label, 960, 22, size=28, color="#d9d2c4", font="gothic", rot=0, shadow=False)
+    return s, (cx - width / 2, 520 - h / 2, width, h)
 
 
 def spot(s, sid, box, frac, z=8):
@@ -181,7 +181,7 @@ def spot(s, sid, box, frac, z=8):
 bline("q0", "흰 곰을 떠올리지 마세요.")
 go(0.0, "blk", "cut")
 bshow(T(0) + .05, "q0")
-bhide(E(0) + .8, ["q0"])
+bhide(E(0) + .15, ["q0"])   # 1장 제목과 겹치지 않게
 
 # ───────────────────────────────── 1장. 잠들기 전 10분 (이야기 → 증거)
 t = chapter(2, 1)
@@ -206,11 +206,11 @@ ok_c = photo_card(art / "carroll_src.jpg", art / "carroll_card.png")
 car = f.set("carroll", "paper.png", focus=(960, 540, 1.0))
 if ok_c:
     car.prop("ph_car", "carroll_card", 560, 520, 470, z=8, rot=-3)
-plain(car, "car_lb", "루이스 캐럴 (1832–1898) · 1857년 사진 · 퍼블릭 도메인", 560, 900, size=30)
+plain(car, "car_lb", "루이스 캐럴 (1832–1898) · 1857년 사진 · 퍼블릭 도메인", 560, 830, size=30)
 car.text("car_q1", "\"더는 생각하지 않겠다!", 1330, 330, size=74, color=INK, font="pen", rot=-2, card=True)
 car.text("car_q2", "다른 걸 생각하겠다!\"", 1330, 450, size=74, color=INK, font="pen", rot=-2, card=True)
 car.text("car_q3", "…10분쯤 지나면, 다시 그 일 한가운데", 1330, 620, size=64, color=RED, font="pen", rot=-1, card=True)
-plain(car, "car_src", "『Curiosa Mathematica』(1893) — Wenzlaff & Wegner(2000) 리뷰의 첫머리 인용", 1330, 790, size=28)
+plain(car, "car_src", "『Curiosa Mathematica』(1893) — Wenzlaff & Wegner(2000) 리뷰의 첫머리 인용", 1330, 730, size=28)
 go(T(12), "carroll", "dissolve", .6)
 if ok_c:
     f._enter(T(12) + .3, "ph_car", "pop", .6)
@@ -278,7 +278,7 @@ for r, (lab, n, y) in enumerate(ROWS):
     for k in range(n):
         s2.prop(f"b2_{r}_{k}", "bell", 760 + k * 150, y, 110, z=8)
 s2.prop("vwp", "vw", 230, 890, 220, z=8)
-plain(s2, "rnote", "종의 개수는 그림 표현 · 실제 수치는 뒤의 논문 표", 960, 1010, size=30)
+plain(s2, "rnote", "종의 개수는 그림 표현 · 실제 수치는 뒤의 논문 표", 960, 22, size=28)
 go(T(42), "pg2", "dissolve", .5)
 f._enter(T(42) + .2, "rnote", "fade", .4)
 f._enter(W("처음부터", 42), "rl0", "fade", .4)
@@ -288,14 +288,16 @@ f._enter(W("나머지", 42), "rl1", "fade", .4)
 for k in range(7):
     f._enter(T(43) + .3 + k * .25, f"b2_1_{k}", "pop", .4)
 
-fig, fb = evidence("fig1", "ev_fig1.png", width=1050, label="Wegner 외(1987) 그림 1 — 분당 종소리, 5분 동안 · 저자 공개 PDF")
-fig.text("fig_n1", "참은 뒤에 생각한 5분 → 갈수록 더 잦아짐", 1500, 170, size=58, color=RED, font="pen", rot=-2, card=True)
-fig.text("fig_n2", "다른 5분들 → 갈수록 뜸해짐", 1500, 860, size=54, color=INK, font="pen", rot=-1, card=True)
+fig, fb = evidence("fig1", "ev_fig1.png", width=900, cx=700, label="Wegner 외(1987) 그림 1 — 분당 종소리, 5분 동안 · 저자 공개 PDF")
+fig.text("fig_n1", "참은 뒤에 생각한 5분\n→ 갈수록 더 잦아짐".split("\n")[0], 1560, 200, size=58, color=RED, font="pen", rot=-2, card=True)
+fig.text("fig_n1b", "→ 갈수록 더 잦아짐", 1560, 300, size=58, color=RED, font="pen", rot=-2, card=True)
+fig.text("fig_n2", "다른 5분들: 뜸해짐", 1560, 640, size=54, color=INK, font="pen", rot=-1, card=True)
 go(T(44), "fig1", "dissolve", .5)
 f._enter(T(44) + .4, "fig1_lb", "fade", .4)
 f._enter(W("뜸해", 45), "fig_n2", "write", .8)
-f._enter(W("잦아", 45), "fig_n1", "write", .9)
-note(fig, "반동 효과", 1500, 330, W("반동", 47), size=96, color=RED)
+f._enter(W("잦아", 45), "fig_n1", "write", .7)
+f._enter(W("잦아", 45) + .7, "fig_n1b", "write", .7)
+note(fig, "반동 효과", 1560, 440, W("반동", 47), size=96, color=RED)
 
 doc, db = evidence("doc", "paper_crop.png", width=1500, label="Wegner, Schneider, Carter & White (1987) · JPSP 53(1) · 저자 공개 PDF")
 spot(doc, "sp_title", db, [0, 0, 1, .45])
@@ -367,7 +369,7 @@ for (r, c), (txt, col) in CELLS.items():
            f'border-radius:12px;background:rgba(255,253,247,.9);opacity:0"></div>', z=6)
     if txt:
         s3.text(f"gt{r}{c}", txt, x + CW / 2, y + CHH / 2 - 50, size=82, color=col, font="pen", rot=-2, card=True)
-plain(s3, "g_src", "Ansfield, Wegner & Bowser (1996) · Behaviour Research and Therapy 34(7) · 초록 기준", 960, 1010, size=30)
+plain(s3, "g_src", "Ansfield, Wegner & Bowser (1996) · Behaviour Research and Therapy 34(7) · 초록 기준", 960, 22, size=28)
 go(T(78), "pg3", "dissolve", .5)
 for k, el in enumerate(["gc00", "gc01", "gc10", "gc11"]):
     f._enter(T(78) + .2 + k * .15, el, "fade", .4)
@@ -405,7 +407,7 @@ f._enter(W("5분에", 92), "sp_tab", "fade", .4)
 
 bars = f.set("bars", "paper.png", focus=(960, 540, 1.0))
 BARS = [("처음부터 생각", 15.47, "#5a6b8c"), ("먼저 참음", 34.05, RED), ("빨간 차를 정해 둠", 21.00, "#c98a2b")]
-BASE, SCALE = 860, 17.0
+BASE, SCALE = 800, 15.5
 for k, (lab, v, col) in enumerate(BARS):
     x = 520 + k * 440
     bars.raw(f'<div id="bar_{k}" style="position:absolute;left:{x - 110}px;top:{BASE}px;width:220px;height:0px;background:{col};'
@@ -413,8 +415,8 @@ for k, (lab, v, col) in enumerate(BARS):
     bars.counter(f"bv_{k}", x, BASE - v * SCALE - 110, size=86, color=col, font="serif")
     plain(bars, f"bl_{k}", lab, x, BASE + 30, size=46, color=INK)
 bars.raw(f'<div style="position:absolute;left:300px;top:{BASE}px;width:1320px;height:6px;background:#2b2118"></div>', z=7)
-plain(bars, "bars_t", "생각해도 되는 5분 동안 흰 곰 횟수 (평균)", 960, 90, size=50, color=INK)
-plain(bars, "bars_s", "Wegner 외(1987) 표 2", 960, 1010, size=30)
+plain(bars, "bars_t", "생각해도 되는 5분 동안 흰 곰 횟수 (평균)", 960, 80, size=50, color=INK)
+plain(bars, "bars_s", "Wegner 외(1987) 표 2", 960, 22, size=28)
 go(T(93), "bars", "dissolve", .4)
 f._enter(T(93) + .2, "bars_t", "fade", .4)
 f._enter(T(93) + .3, "bars_s", "fade", .4)
