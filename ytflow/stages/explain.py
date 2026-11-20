@@ -590,8 +590,9 @@ def s_board(D, sc: dict, bt: list, dur: float):
                         dx, dy = b_["x"] - a_["x"], b_["y"] - a_["y"]
                         L = math.hypot(dx, dy) or 1
                         ux, uy = dx / L, dy / L
-                        ra = min(a_["w"], a_["h"]) / 2 + 22
-                        rb = min(b_["w"], b_["h"]) / 2 + 26
+                        # 화살표 끝은 상자(카드·글자) 가장자리에서 멈춤 — 방향에 따라 반폭·반높이 (2026-11-20 겹침 점검: '어디로?' 글자 안까지 들어감)
+                        ra = min(abs(ux) * a_["w"] / 2 + abs(uy) * a_["h"] / 2, math.hypot(a_["w"], a_["h"]) / 2) + 22
+                        rb = min(abs(ux) * b_["w"] / 2 + abs(uy) * b_["h"] / 2, math.hypot(b_["w"], b_["h"]) / 2) + 26
                         sx, sy, ex, ey = a_["x"] + ux * ra, a_["y"] + uy * ra, b_["x"] - ux * rb, b_["y"] - uy * rb
                         bend = el.get("bend", 0.12)
                         cx, cy = (sx + ex) / 2 - uy * L * bend, (sy + ey) / 2 + ux * L * bend
