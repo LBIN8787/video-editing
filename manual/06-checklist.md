@@ -74,7 +74,7 @@ python -m ytflow check <프로젝트> --upto G4    # 대본까지만
 | SHOULD | 글자가 카드·강조 상자 가장자리에 걸치지 않음 (`overlap_qa.json` 의 '걸침') | ✅ |
 | MUST | 싱크: 자막 0.5초 안 ≥ 95%, 화면−소리 ≤ 0.1초 (`sync_qa.json`), 중앙값 ≤ 0.2초 | ✅ |
 | MUST | 프레임 시트를 눈으로 확인 (`final_sheet.png`): 잘린 글자·겹침·빈 화면 | EYE |
-| MUST | 길이: 롱폼 10분 이상 (시사 빠른 정리 `"format": "quick"` 은 5분 이상, 그보다 짧으면 쇼츠로 — README §2-4) | ✅ |
+| MUST | 길이: 롱폼 10분 이상 (시사 빠른 정리 `"format": "quick"` 은 5분 이상, 시장 아침 브리핑 `-market-daily`·`"format": "brief"` 는 7분 이상 — 09 §2 v76, 그보다 짧으면 쇼츠로 — README §2-4) | ✅ |
 | 참고 | 움직임: 화면 변화·정지 화면 몫 (`motion.json`, README §2-5) | ✅ |
 | EYE | 화면이 정신없지 않은가 · 배경음이 억지스럽지 않은가 (애매하면 빼기) | 사람 눈 |
 | SHOULD | 음량 −14 LUFS 근처 (`delivery_check.json`) | ✅ |
