@@ -23,3 +23,5 @@ bash scripts/anim/render_all.sh <05_edit/v3/r> <ep.html> <voice.mp3> <captions.a
 ```
 - 목소리: ElevenLabs 채널 목소리(ch-knowledge, eleven_v4) 56문장 4:07 — 클라우드에서는 edge-tts 가 프록시에 막혀 `narrate.py --channel` 추가.
 - 논문 첫 장: 저자 공개 PDF(하버드 Wegner 아카이브) 1쪽을 잘라 씀 — PDF·그림은 커밋하지 않음.
+- PC 자동 빌드 완료: Drive `영상/20261120-curiosity-whitebear-v2/05_edit/whitebear_v4.mp4` (9.4분, 62MB) · 프레임 시트 `whitebear_v4_sheet.jpg`
+- 2026-11-20 클라우드에서 PC 자동 빌드를 흉내 내 끝까지 시험(가짜 Drive·자리 그림 시트) — 통과. 고친 것: PDF 쪽 기준(CropBox→MediaBox), 색 빼기 효과의 검은 깜빡임, 1장 끝 10초 검은 화면.

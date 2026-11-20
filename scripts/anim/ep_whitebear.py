@@ -237,6 +237,7 @@ note(S["mind-3"], "흰 곰 없나?", 1450, 190, W("확인", 35), size=86)
 go(T(36), "mind4", "cut")
 note(S["mind-4"], "확인하기 = 떠올리기", 960, 900, W("셈", 37) - .3, size=96, color=RED, rot=-2)
 go(T(38), "mind1b", "cut")                                   # 찾는 일꾼이 지치면 — 색을 빼서
+f._setv(T(38), "#mind1b", {"filter": "saturate(1) brightness(1)"})   # 시작값이 없으면 밝기 0 에서 시작해 검게 깜빡임
 f._grade(T(38) + .2, "mind1b", "saturate(.25) brightness(.8)", 1.2)
 go(T(39), "mind4", "cut")                                    # 흰 곰이 그대로 떠오름 (되짚기)
 note(S["mind-4"], "피곤할 때 · 머리가 바쁠 때", 960, 150, W("피곤", 40), size=74, rot=1)

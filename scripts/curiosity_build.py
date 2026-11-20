@@ -49,7 +49,9 @@ def pdf_crop(pdf: Path, page: int, crop: list[float], out: Path) -> None:
     from PIL import Image
     try:
         import pypdfium2 as pdfium
-        im = pdfium.PdfDocument(str(pdf))[page - 1].render(scale=220 / 72).to_pil()
+        pg = pdfium.PdfDocument(str(pdf))[page - 1]
+        pg.set_cropbox(*pg.get_mediabox())   # pdftoppm 과 같게 쪽 전체 기준 (이 논문은 쪽마다 CropBox 가 달라 비율이 어긋남)
+        im = pg.render(scale=220 / 72).to_pil()
     except ImportError:
         tmp = out.with_suffix("")
         sh(["pdftoppm", "-f", page, "-l", page, "-r", 220, "-png", "-singlefile", pdf, tmp])
