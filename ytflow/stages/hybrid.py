@@ -1160,8 +1160,10 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     bg = a / bg_name
     if not bg.exists():
         backdrop.make(D.skin, kind, W, HH, chap, still, sc.get("_duo")).save(bg, quality=92)
-    if sc.get("clip") and sc["type"] != "bite":  # 원본 영상 구간을 장면 길이만큼 잘라 넣는다 (소리 없음) — bite 는 cutedit 이 따로
-        src = project.dir("assets") / "footage" / spec["footage"][sc["clip"]["src"]]["file"]
+    _clip_src = (project.dir("assets") / "footage" / spec["footage"][sc["clip"]["src"]]["file"]) if sc.get("clip") and sc["clip"].get("src") in (spec.get("footage") or {}) else None
+    # bite 가 원본 없이 인용 카드로 바뀌면 clip 에 start 가 없다 (2026-11-20 개정판 렌더에서 KeyError) — 구간·파일이 있을 때만 자름
+    if sc.get("clip") and sc["type"] != "bite" and "start" in sc["clip"] and _clip_src is not None and _clip_src.exists():
+        src = _clip_src
         out = a / f"clip_{sc['id']:03d}.mp4"
         subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-ss", str(sc["clip"]["start"]), "-i", str(src),
                         "-t", f"{dur + 0.5:.2f}", "-an", "-vf", "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=30",

@@ -633,10 +633,24 @@ def json_str(x: str) -> str:
     return json.dumps(x, ensure_ascii=False)
 
 
+def _dark_skin() -> bool:
+    """theme light 의 바탕은 그래픽 팩(스킨) — 칠판·청사진처럼 어두운 스킨이면 글자·선도 밝게 (2026-11-20 샘플에서 먹색 글자가 묻힘)."""
+    import os
+    import yaml
+    from .. import config
+    sid = os.environ.get("YTFLOW_SKIN", "")
+    f = config.ROOT / "skins" / sid / "skin.yaml"
+    try:
+        return bool(sid) and ((yaml.safe_load(f.read_text(encoding="utf-8")) or {}).get("background") or {}).get("type") == "dark"
+    except Exception:  # noqa: BLE001
+        return False
+
+
 def _themed(fn):
     def run(D, sc, bt, dur):
         fn(D, sc, bt, dur)
-        _apply_theme(D, sc.get("theme", "paper"))
+        th = sc.get("theme", "paper")
+        _apply_theme(D, "dark" if th == "light" and _dark_skin() else th)
     run.__name__ = fn.__name__
     return run
 
