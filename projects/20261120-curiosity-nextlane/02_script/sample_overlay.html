@@ -1,0 +1,182 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- 옆 줄 편 그래픽 층: 실사 위 줄 판(queue) · 질문(kinetic) · 도로(road) · 시간 막대(timebars) · 두 차선(lanes)
+     화면 글자는 한 번에 하나(숫자·이름표 외), 앞에 나온 사람·줄은 남기고 대사의 동사에 맞춰 바뀌는 것만 움직임 (manual/12 §0-1, explain-stage) -->
+<style>
+@font-face{font-family:G;src:url("FONTDIR/NanumGothic-Bold.ttf")}
+@font-face{font-family:GX;src:url("FONTDIR/NanumGothic-ExtraBold.ttf")}
+@font-face{font-family:GR;src:url("FONTDIR/NanumGothic-Regular.ttf")}
+html,body{margin:0;width:1920px;height:1080px;background:transparent;overflow:hidden}
+#root{position:absolute;inset:0;font-family:G;color:#fff}
+.abs{position:absolute}
+.sub{position:absolute;left:0;right:0;bottom:70px;text-align:center;font-family:G;font-size:48px;line-height:1.35;
+  text-shadow:0 2px 6px rgba(0,0,0,.85),0 0 22px rgba(0,0,0,.55)}
+.tag{position:absolute;left:56px;top:48px;font-family:G;font-size:24px;padding:7px 14px;border-radius:4px;
+  background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.35);letter-spacing:.5px}
+.y{color:#FFD23F}
+</style></head><body><div id="root"></div>
+<script>
+const Y="#FFD23F",RED="#E2574C",GRN="#5BC08A";
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const eo=x=>1-Math.pow(1-cl(x),3);
+const eio=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const eb=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const P=(t,t0,d)=>cl((t-t0)/d);
+const root=document.getElementById('root');
+const mmss=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+const STAGE=`<div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 42%,#1d242d,#0b0e12)"></div>`;
+const EX=`<div class="tag">예시 계산</div>`;
+
+// 사람 하나 (머리 + 어깨)
+function person(x,y,o,col,s=1){return `<div class="abs" style="left:${x-28*s}px;top:${y-34*s}px;opacity:${o};width:${56*s}px;height:${70*s}px">
+  <div style="margin:0 auto;width:${30*s}px;height:${30*s}px;border-radius:50%;background:${col}"></div>
+  <div style="margin:${4*s}px auto 0;width:${56*s}px;height:${34*s}px;border-radius:${28*s}px ${28*s}px 6px 6px;background:${col}"></div></div>`}
+
+// ---------------------------------------------------------------- 줄 판 (장면 1~4 이어서)
+const LX=[1350,1565,1780], TOP=250, STEP=92;
+function queue(sc,t,B){
+  const q=sc.q; let h="", a=1;
+  if(q===1) a=eo(P(t,B[0].kw[0]-0.2,0.6));
+  h+=`<div class="abs" style="right:0;top:0;bottom:0;width:${800*a}px;background:linear-gradient(90deg,rgba(8,10,14,0),rgba(8,10,14,.8) 22%)"></div>`;
+  // 계산대 세 개
+  LX.forEach((x,i)=>{const p=q===1?eo(P(t,B[0].kw[0]+i*0.15,0.4)):1;
+    h+=`<div class="abs" style="left:${x-70}px;top:${TOP-120}px;width:140px;height:54px;border-radius:6px;background:rgba(255,255,255,${.16*p});border:3px solid rgba(255,255,255,${.85*p});
+      transform:translateY(${(1-p)*-20}px);text-align:center;line-height:54px;font-size:26px;opacity:${p}">계산대</div>`});
+  // 줄 상태: 각 줄의 사람 위치(칸 번호, 떠나는 중이면 음수 쪽으로)
+  let L=[0,1,2,3],M=[0,1,2,3],R=[0,1,2,3], me=null, lo=[1,1,1];
+  const ent=(i,t0)=>eo(P(t,t0+i*0.12,0.35));
+  if(q===1){
+    const t0=B[0].kw[0]+0.3;
+    LX.forEach((x,k)=>[0,1,2,3].forEach(i=>{const p=ent(i,t0+k*0.15);h+=person(x,TOP+i*STEP+(1-p)*40,p,"rgba(255,255,255,.92)")}));
+    return h;
+  }
+  const leave=(arr,t0,n)=>{ // 앞의 n 명이 계산을 마치고 나가고, 나머지가 앞으로
+    const p=eio(P(t,t0,0.9));
+    return arr.map(i=>i<n?{y:i-p*1.2,o:1-p}:{y:i-n*p,o:1});
+  };
+  let Ls=L.map(i=>({y:i,o:1})),Ms=M.map(i=>({y:i,o:1})),Rs=R.map(i=>({y:i,o:1}));
+  let meY=4, meX=LX[1];
+  if(q===2){const p=eo(P(t,B[0].kw[0]-0.2,0.6)); meY=4+(1-p)*2.2; me=p;}
+  if(q===3){me=1; Ls=leave(L,B[1].kw[0]+0.2,2);}
+  if(q===4){me=1; Ls=L.slice(2).map(i=>({y:i-2,o:1}));
+    const mv=eio(P(t,B[0].t+0.2,1.1));            // 카트를 돌려 왼쪽 줄 끝으로
+    meX=LX[1]+(LX[0]-LX[1])*mv; meY=4+(2-4)*mv + Math.sin(mv*Math.PI)*0.6;
+    Ms=leave(M,B[1].kw[0]-0.1,2);}
+  Ls.forEach(s=>h+=person(LX[0],TOP+s.y*STEP,s.o,"rgba(255,255,255,.92)"));
+  Ms.forEach((s,i)=>{let c="rgba(255,255,255,.92)";
+    if(q===3&&i===0){const pu=P(t,B[0].kw[1]-0.1,0.3);c=`rgba(255,${255-60*pu},${255-120*pu},.95)`}
+    h+=person(LX[1],TOP+s.y*STEP,s.o,c)});
+  Rs.forEach(s=>h+=person(LX[2],TOP+s.y*STEP,s.o,"rgba(255,255,255,.92)"));
+  if(me!==null){h+=person(meX,TOP+meY*STEP,me,Y);
+    h+=`<div class="abs" style="left:${meX-60}px;top:${TOP+meY*STEP+42}px;width:120px;text-align:center;font-family:GX;font-size:28px;color:${Y};opacity:${me}">나</div>`}
+  // 장면 2: 세 줄 모두 '4명' (같은 출발선)
+  if(q===2){[[1,B[0].kw[1]],[0,B[1].kw[0]],[2,B[1].kw[1]]].forEach(([k,t0])=>{const p=eb(P(t,t0-0.1,0.4));
+    h+=`<div class="abs" style="left:${LX[k]-50}px;top:${TOP+3*STEP+52}px;width:100px;text-align:center;font-family:GX;font-size:34px;opacity:${cl(p)};transform:scale(${.6+.4*p})">4명</div>`})}
+  // 장면 3: 2분이 흐르는 시계 (빠르게 감기)
+  if(q===3){const c0=B[0].kw[0], p=P(t,c0,2.4), o=cl(P(t,c0-0.2,0.3));
+    h+=`<div class="abs" style="left:1180px;top:40px;opacity:${o};font-family:GX;font-size:60px;text-shadow:0 2px 10px #000">${mmss(120*eio(p))}
+      <span style="font-size:30px;opacity:${p<1?.85:0};margin-left:8px">▶▶</span></div>`;}
+  return h;
+}
+
+// ---------------------------------------------------------------- 질문 한 줄
+function kinetic(sc,t,B){return sc.words.map(([w,o],i)=>{const p=P(t,B[0].t+o,0.4);
+  return `<div class="abs" style="left:0;right:0;top:${360+i*150}px;text-align:center;font-family:GX;font-size:${i?110:76}px;
+    color:${i?Y:'#fff'};opacity:${cl(p*3)};transform:translateY(${(1-eo(p))*30}px);text-shadow:0 6px 30px rgba(0,0,0,.7)">${w}</div>`}).join("")}
+
+// ---------------------------------------------------------------- 도로 한 줄: 막힌 1km + 뚫린 1km
+function road(sc,t,B){
+  const X0=180,XM=960,X1=1740,Yr=470, d=eo(P(t,B[0].t,0.9)), seg=eo(P(t,B[0].kw[0]-0.2,0.7));
+  let h=EX+`<div class="abs" style="left:${X0}px;top:${Yr}px;width:${(X1-X0)*d}px;height:120px;background:#2a2f37;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.5)"></div>`;
+  h+=`<div class="abs" style="left:${X0}px;top:${Yr}px;width:${(XM-X0)*seg}px;height:120px;background:rgba(226,87,76,.28);border-radius:8px 0 0 8px"></div>
+      <div class="abs" style="left:${XM}px;top:${Yr}px;width:${(X1-XM)*seg}px;height:120px;background:rgba(91,192,138,.22);border-radius:0 8px 8px 0"></div>`;
+  // 앞뒤로 같은 무늬가 이어진다는 표시 (번갈아)
+  [[X0-150,RED],[X1+10,RED]].forEach(([x,c])=>h+=`<div class="abs" style="left:${x}px;top:${Yr}px;width:140px;height:120px;opacity:${.35*seg};
+     background:linear-gradient(90deg,${x<X0?'transparent':'#3a2c2e'},${x<X0?'#2c3a31':'transparent'});border-radius:8px"></div>`);
+  // 차: 막힌 구간은 촘촘·느리게, 뚫린 구간은 듬성·빠르게 (시속 10 vs 50 → 간격도 5배)
+  const T=Math.max(0,t-B[0].t);
+  const cars=(xa,xb,gap,v)=>{let s="";const off=(T*v)%gap;for(let x=xa-gap+off;x<xb;x+=gap){if(x<xa-10)continue;
+    const fo=cl((xb-x)/40)*cl((x-xa+10)/40);s+=`<div class="abs" style="left:${x}px;top:${Yr+44}px;width:34px;height:32px;border-radius:6px;background:#e9edf2;opacity:${seg*fo}"></div>`}return s};
+  h+=cars(X0+6,XM-40,46,6)+cars(XM+6,X1-40,230,30);
+  const lab=(x,w,txt,col,t0)=>{const p=eb(P(t,t0-0.1,0.45));return `<div class="abs" style="left:${x}px;top:${Yr-120}px;width:${w}px;text-align:center;opacity:${cl(p)};transform:translateY(${(1-cl(p))*20}px)">
+     <div style="font-size:34px;opacity:.85">1km</div><div style="font-family:GX;font-size:58px;color:${col}">시속 ${txt}</div></div>`};
+  if(B[1]) h+=lab(X0,XM-X0,"10km",RED,B[1].kw[0])+lab(XM,X1-XM,"50km",GRN,B[1].kw[1]);
+  // 구간 이름
+  h+=`<div class="abs" style="left:${X0}px;top:${Yr+140}px;width:${XM-X0}px;text-align:center;font-size:34px;opacity:${seg}">막힌 구간</div>
+      <div class="abs" style="left:${XM}px;top:${Yr+140}px;width:${X1-XM}px;text-align:center;font-size:34px;opacity:${seg}">뚫린 구간</div>`;
+  return h;
+}
+
+// ---------------------------------------------------------------- 시간 막대: 6:00 vs 1:12 → 83%
+function timebars(sc,t,B){
+  const X0=360, PX=200;    // 1분 = 200px
+  let h=STAGE+EX;
+  const bar=(y,lab,sec,col,t0,dur)=>{const a=cl(P(t,t0-0.4,0.3)),p=eio(P(t,t0,dur));
+    return `<div class="abs" style="left:${X0-300}px;top:${y+8}px;width:270px;text-align:right;font-size:38px;opacity:${a}">${lab}</div>
+    <div class="abs" style="left:${X0}px;top:${y}px;width:${PX*sec/60*p}px;height:64px;background:${col};border-radius:4px"></div>
+    <div class="abs" style="left:${X0+PX*sec/60*p+22}px;top:${y-6}px;font-family:GX;font-size:64px;opacity:${a}">${mmss(sec*p)}</div>`};
+  h+=bar(300,"막힌 1km",360,RED,B[0].kw[0]-0.3,2.0);
+  h+=bar(440,"뚫린 1km",72,GRN,B[0].kw[1]-0.2,0.6);
+  // 전체 시간 중 느린 구간의 몫
+  if(B[1]){const t0=B[1].kw[0]-0.6,a=cl(P(t,t0,0.4)),p=eio(P(t,t0+0.2,1.0)),W=1440;
+    h+=`<div class="abs" style="left:${X0}px;top:660px;width:${W}px;height:44px;border:3px solid rgba(255,255,255,.7);border-radius:4px;opacity:${a}"></div>
+    <div class="abs" style="left:${X0+3}px;top:663px;width:${(W-6)*0.833*p}px;height:44px;background:${Y};border-radius:2px"></div>
+    <div class="abs" style="left:${X0}px;top:720px;font-size:32px;opacity:${a*.85}">길 위에 있는 시간 7분 12초 중</div>
+    <div class="abs" style="left:${X0+(W-6)*0.833*p-240}px;top:560px;width:240px;text-align:right;font-family:GX;font-size:84px;color:${Y};opacity:${cl(p*2)}">${Math.round(83*p)}%</div>`;}
+  return h;
+}
+
+// ---------------------------------------------------------------- 두 차선: 엇갈린 막힘 → 앞질러짐(길게) / 앞지름(짧게)
+function lanes(sc,t,B){
+  const Ytop=300,Ybot=520,LH=150,ME=760;
+  let h=STAGE;
+  const a=eo(P(t,B[0].t,0.6));
+  const b1=B[1].t, b1e=B[2].t, b2=B[2].t;
+  const slowMe = t<b2;               // 장면 앞부분: 내 차선이 막힘
+  const sw=eio(P(t,b2,0.6));         // 막힘이 옆 차선으로 넘어감
+  // 차선 바탕: 막힌 차선은 붉게
+  const tint=(y,red)=>`<div class="abs" style="left:0;top:${y}px;width:1920px;height:${LH}px;background:rgba(${red?'226,87,76,.20':'91,192,138,.14'});opacity:${a}"></div>`;
+  const sp=P(t,B[0].kw[0]-0.2,0.6);
+  h+=`<div class="abs" style="left:0;top:${Ytop}px;width:1920px;height:${Ybot+LH-Ytop}px;background:#262b33;opacity:${a}"></div>`;
+  h+=tint(Ytop,sw>.5)+tint(Ybot,sw<=.5);
+  // 내 속도에 맞춰 흐르는 차선 표시 (느릴 땐 천천히, 빠를 땐 빠르게)
+  const myV=sw<.5?40:260, phase=(t*myV)%160;
+  let dash="";for(let x=-phase;x<1920;x+=160)dash+=`<div class="abs" style="left:${x}px;top:${(Ytop+LH+Ybot)/2-4}px;width:80px;height:8px;background:rgba(255,255,255,.55)"></div>`;
+  h+=`<div style="opacity:${a}">${dash}</div>`;
+  h+=`<div class="abs" style="left:40px;top:${Ytop-58}px;font-size:32px;opacity:${a*.9}">옆 차선 <span style="font-family:GX;color:${sw>.5?RED:GRN};opacity:${cl(sp*2)}">${sw>.5?'막힘':'뚫림'}</span></div>
+        <div class="abs" style="left:40px;top:${Ybot+LH+16}px;font-size:32px;opacity:${a*.9}">내 차선 <span style="font-family:GX;color:${sw>.5?GRN:RED};opacity:${cl(sp*2)}">${sw>.5?'뚫림':'막힘'}</span></div>`;
+  // 옆 차선 차들: 내가 느린 동안 뒤에서 와서 나를 지나 앞으로(오래, 많이), 내가 빠를 땐 잠깐 뒤로 밀려남
+  const v1=150, d1=b1e-b1, v2=520, w2=1.4;
+  let over=0, mine=0;
+  for(let i=0;i<14;i++){
+    const x0=ME-260-i*240;
+    const xEnd1=x0+v1*cl(t-b1+0.3,0,d1+0.3);
+    const x=xEnd1 - v2*cl(t-b2-0.2,0,w2);
+    const was=x0+v1*(d1+0.3);
+    if(xEnd1>ME) over++;
+    if(was>ME && x<ME && t>b2) mine++;
+    if(x<-80||x>1960) continue;
+    h+=`<div class="abs" style="left:${x}px;top:${Ytop+46}px;width:110px;height:58px;border-radius:12px;background:#e9edf2;opacity:${a}"></div>`;
+  }
+  // 내 차
+  h+=`<div class="abs" style="left:${ME}px;top:${Ybot+44}px;width:120px;height:62px;border-radius:12px;background:${Y};opacity:${a};box-shadow:0 0 0 6px rgba(255,210,63,.18)"></div>
+      <div class="abs" style="left:${ME}px;top:${Ybot+52}px;width:120px;text-align:center;font-family:GX;font-size:32px;color:#111;opacity:${a}">나</div>`;
+  // 두 개의 셈: 나를 앞지른 차(길게 쌓임) / 내가 앞지른 차(잠깐)
+  const c1=cl(P(t,b1,0.4)), c2=cl(P(t,b2,0.4));
+  h+=`<div class="abs" style="left:1240px;top:780px;opacity:${c1};font-size:32px">나를 앞지른 차 <span style="font-family:GX;font-size:64px;margin-left:10px">${over}</span></div>
+      <div class="abs" style="left:1240px;top:850px;opacity:${c2};font-size:32px;color:${Y}">내가 앞지른 차 <span style="font-family:GX;font-size:64px;margin-left:10px">${mine}</span></div>`;
+  return h;
+}
+
+const MG={none:()=>"",queue,kinetic,road,timebars,lanes};
+window.R=function(sc,t,B,D,sub){
+  let h="";
+  if(sc.stamp){const p=P(t,0.15,0.5),f=1-P(t,B[0].t+B[0].d-0.3,0.5);
+    h+=`<div class="abs" style="left:64px;top:60px;opacity:${p*f};font-family:GX;font-size:44px;letter-spacing:1px;text-shadow:0 2px 10px #000">
+      ${sc.stamp.split('').map((c,i)=>`<span style="opacity:${cl(P(t,0.2+i*0.035,0.1))}">${c}</span>`).join('')}</div>`}
+  h+=(MG[sc.mg||"none"]||MG.none)(sc,t,B,D);
+  if(sc.role==="자료 화면") h+=`<div class="tag">자료 화면 · 실험 장소 아님</div>`;
+  if(sub) h+=`<div class="sub">${sub}</div>`;
+  root.innerHTML=h;
+};
+</script></body></html>
