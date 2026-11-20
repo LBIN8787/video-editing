@@ -118,32 +118,109 @@ def _vars_css(v: dict) -> str:
     return f"--base:{v['base']};--ink:{v['ink']};--acc:{v['acc']};--card:{v['card']};--font:{v['font']};background:{v['bg']}"
 
 
-def build(out: Path, examples: Path | None = None) -> Path:
-    """구성요소 카테고리(styles/components.yaml)마다 스타일 카드 + 맨 위 '조합' 판(카테고리마다 하나씩 → 한 영상처럼 재생)."""
+def _media(out_dir: Path, frames: dict) -> dict:
+    """예시 파일을 out_dir/media 로: 렌더한 장면(scenes/*.mp4)·바탕 그림(bg/*.jpg)·효과음(sfx/*.mp3). {상대경로: 파일}"""
+    import shutil
+    import subprocess
+    from . import backdrop, hybrid
+    from . import skin as _skin
+    md = out_dir / "media"
+    files = {}
+    src = Path.home() / ".cache" / "ytflow" / "looks" / "scenes"
+    (md / "scenes").mkdir(parents=True, exist_ok=True)
+    for f in src.glob("*.mp4"):
+        shutil.copy(f, md / "scenes" / f.name)
+        files[f"media/scenes/{f.name}"] = md / "scenes" / f.name
+    (md / "bg").mkdir(parents=True, exist_ok=True)
+    skin_for = {"film": "dark-doc", "grid": "slate", "spot": "dark-doc", "tint": "paper-sketch", "photo": "dark-doc"}
+    still = Path.home() / ".cache" / "ytflow" / "looks" / "still.jpg"
+    if not still.exists():
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", "3", "-i", str(Path.home() / ".cache" / "ytflow" / "looks" / "footage_src.mp4"),
+                        "-frames:v", "1", str(still)], check=False)
+    for k in backdrop.KINDS:
+        o = md / "bg" / f"{k}.jpg"
+        try:
+            img = backdrop.make(_skin.load(skin_for.get(k, "dark-doc")), k, 640, 360, 2, still if k in ("photo", "duotone") else None,
+                                ("#15171D", "#C9A66B") if k == "duotone" else None)
+            img.convert("RGB").save(o, quality=82)
+            files[f"media/bg/{k}.jpg"] = o
+        except Exception as e:   # noqa: BLE001
+            print(f"[gallery] 바탕 {k} 건너뜀: {e}")
+    (md / "sfx").mkdir(parents=True, exist_ok=True)
+    for k, f in hybrid.sfx_files().items():
+        o = md / "sfx" / f"{k}.mp3"
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(f), "-ac", "1", "-b:a", "64k", str(o)], check=False)
+        if o.exists():
+            files[f"media/sfx/{k}.mp3"] = o
+    return files
+
+
+def _thumb_mock(lid: str, frame: str) -> str:
+    """썸네일 레이아웃의 모양 (실제 썸네일이 아니라 틀)."""
+    if lid == "photo":
+        return (f'<div class="tm" style="background:url({frame}) center/cover;filter:grayscale(1)"></div><div class="tmt" style="left:6%;top:52%">진열대 앞<br><b style="color:#ff4a3d">3%</b>만 샀다</div>'
+                '<i class="tmc" style="left:62%;top:20%"></i>')
+    if lid == "versus":
+        return '<div class="tm" style="background:#efe8da"></div><div class="tmv"><b>24가지</b><span>vs</span><b style="color:#c4452f">6가지</b></div>'
+    if lid == "board":
+        return ('<div class="tm" style="background:#f4efe4"></div><svg viewBox="0 0 320 180" class="tms"><path d="M40 140 h120 v-60 h-120 z M60 80 v-20 h80 v20" '
+                'style="fill:none;stroke:#222;stroke-width:3"/><circle cx="230" cy="70" r="18" style="fill:none;stroke:#222;stroke-width:3"/><path d="M230 88 v40 M210 104 h40 M230 128 l-14 24 M230 128 l14 24" style="stroke:#222;stroke-width:3"/></svg>'
+                '<div class="tmt" style="left:6%;top:6%;color:#222;text-shadow:none">고를 게 많으면<br>왜 안 살까?</div>')
+    return (f'<div class="tm" style="background:url({frame}) center/cover"></div><div class="tmt" style="left:6%;top:50%"><span style="background:#FFD23F;color:#111;padding:0 6px">60%</span> 멈췄는데</div>'
+            '<b class="tmchip">▼ 3%</b>')
+
+
+def build(out: Path, examples: Path | None = None) -> tuple[Path, dict]:
+    """구성요소 카테고리(styles/components.yaml)마다 스타일 카드(진짜 렌더 예시) + 실제 쓰인 조합(styles/presets.yaml) + 조합 판."""
+    out = Path(out)
+    out.parent.mkdir(parents=True, exist_ok=True)
     cats = looks.components()
     frames = looks._footage_frames()
+    files = _media(out.parent, frames)
     ex = examples or looks.examples_dir()
     motion = next(c for c in cats if c["key"] == "motion")["options"]
     pal = {lid: _skin_vars(lid, d, frames) for lid, d in motion.items()}
+    presets = (yaml.safe_load((ROOT / "styles" / "presets.yaml").read_text(encoding="utf-8")) or {}).get("presets", {})
 
     def chip(st):
         lab, cls = TSTATUS.get(st) or (looks.STATUS.get(st, st), st)
+        if st == "hold":
+            lab, cls = "쓰지 않음·보류", "hold"
         return f'<span class="st {cls}">{H.escape(lab)}</span>' if st else ""
 
     def meta(key, lid, d):
         what = d.get("look") or d.get("plain") or ""
         when = d.get("fits") or d.get("use_when") or ""
         warn = d.get("avoid") or d.get("caution") or ""
+        extra = "".join(f'<small class="tag">{H.escape(x)}</small>' for x in (d.get("group"), d.get("used"), d.get("from") and f"예시: {d['from']}") if x)
         return (f'<figcaption><div class="row"><b>{H.escape(d.get("name", lid))}</b>{chip(d.get("status", ""))}</div><code>{lid}</code>'
-                f'<p>{H.escape(what)}</p>' + (f'<p class="fit"><span>언제</span>{H.escape(when)}</p>' if when else "")
-                + (f'<p class="avoid"><span>주의</span>{H.escape(warn)}</p>' if warn else "")
+                f'<p>{H.escape(str(what))}</p>' + (f'<p class="fit"><span>언제</span>{H.escape(str(when))}</p>' if when else "")
+                + (f'<p class="avoid"><span>주의</span>{H.escape(str(warn))}</p>' if warn else "") + (f'<div class="tags">{extra}</div>' if extra else "")
                 + f'<button class="pickbtn" data-cat="{key}" data-id="{lid}">조합에 넣기</button></figcaption>')
 
+    def media_vis(k, lid, m):
+        if m.endswith(".mp4"):
+            if f"media/{m}" not in files:
+                return '<figure class="pic"><div class="ph"><b>예시 화면 없음</b><span>이 컴퓨터에 그 장면의 자료가 없어 렌더하지 못함</span></div></figure>'
+            return f'<figure class="pic" data-thumb="{k}:{lid}"><video src="media/{m}" muted loop playsinline preload="none"></video></figure>'
+        if m.endswith(".jpg"):
+            return f'<figure class="pic" data-thumb="{k}:{lid}"><img src="media/{m}" alt="" loading="lazy"></figure>' if f"media/{m}" in files else ""
+        return ""
+
+    sp = Path.home() / ".cache" / "ytflow" / "looks" / "scenes" / "scenes.json"
+    rendered = json.loads(sp.read_text(encoding="utf-8")) if sp.exists() else {}
+    for c in cats:   # 렌더한 예시가 어느 편의 장면인지 표시
+        for lid, d in c["options"].items():
+            m = str(d.get("media") or "")
+            r = rendered.get(m[7:-4]) if m.startswith("scenes/") else None
+            if r and r.get("file") and not d.get("from"):
+                d["from"] = r.get("project", "") + (" (자료 화면은 대체 영상)" if r.get("placeholder") else "")
     scene = look_scene()
     sections, selects, tpls, have = [], [], [], 0
     for c in cats:
         k, cards = c["key"], []
         for lid, d in c["options"].items():
+            m = d.get("media") or ""
             if k == "motion":
                 vis = f'<figure class="stage look" style="{_vars_css(pal[lid])}">{scene}</figure>'
             elif k == "illust":
@@ -154,48 +231,91 @@ def build(out: Path, examples: Path | None = None) -> Path:
                              '<p>멈춘 손님 중 산 사람<br>6가지 <mark>30%</mark> · 24가지 <mark>3%</mark></p></div><i class="tape"></i></div>')
                 elif img:
                     have += 1
-                    inner = f'<img src="{looks._b64_jpg(img)}" alt="">'
+                    inner = f'<img src="{looks._b64_jpg(img, 640)}" alt="" loading="lazy">'
                 else:
                     inner = '<div class="ph"><b>예시 그림 준비 중</b><span>PC 에서 <code>python -m ytflow looks --draw auto</code></span></div>'
                 vis = f'<figure class="pic" data-thumb="{k}:{lid}">{inner}</figure>'
             elif k == "footage":
                 vis = f'<figure class="pic" data-thumb="{k}:{lid}"><img src="{frames[lid]}" alt=""></figure>'
-            elif k == "bgm":
+            elif k == "font":
+                vis = (f'<figure class="pic fontv" style="font-family:{d.get("family")};font-weight:{d.get("weight", 400)}">'
+                       f'<div><b>고를 게 많으면 왜 안 살까?</b><span>60% · 24가지 · 3%</span></div></figure>')
+            elif k == "subtitle":
+                sb = d.get("sub") or {}
+                if sb.get("hidden"):
+                    inner = '<div class="subk">많을수록 <b>좋을까?</b></div>'
+                else:
+                    pos = {"top": "top:8%", "mid": "top:42%", "bottom": "bottom:8%"}[sb.get("pos", "bottom")]
+                    outl = "text-shadow:-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000;font-size:22px;font-weight:800" if sb.get("outline") else ""
+                    orig = '<div class="subo">Thirty percent of them bought a jar.</div>' if sb.get("orig") else ""
+                    word = '<b style="color:#FFD23F">30%</b>' if sb.get("outline") else "30%"
+                    inner = (f'<div class="subw" style="{pos}">{orig}<span style="background:{sb.get("bg")};color:{sb.get("color")};{outl}">'
+                             f'멈춘 손님 가운데 {word}가 샀습니다</span></div>')
+                bgimg = "" if sb.get("pos") == "top" else f"background:url({frames['warm-doc']}) center/cover;"
+                vis = f'<figure class="pic sub" style="{bgimg}{"background:#F6F2EA;" if sb.get("pos") == "top" else ""}">{inner}</figure>'
+            elif k == "thumbnail":
+                vis = f'<figure class="pic thumbm">{_thumb_mock(lid, frames["_raw"])}<small class="mock">모양 미리보기</small></figure>'
+            elif k == "sfx":
+                au = f'<audio controls preload="none" src="media/sfx/{lid}.mp3"></audio>' if f"media/sfx/{lid}.mp3" in files else '<span class="na">파일 없음</span>'
+                vis = f'<figure class="stage snd"><svg viewBox="0 0 320 180">' + "".join(
+                    f'<rect x="{30 + i * 14}" y="{90 - h}" width="8" height="{2 * h}" rx="3" class="wave" style="--i:{i}"/>' for i, h in enumerate([6, 14, 30, 48, 34, 20, 12, 8, 26, 40, 22, 10, 6, 4, 8, 18, 12, 6, 4])) + f'</svg>{au}</figure>'
+            elif k in ("bgm", "voice"):
                 vis = ('<figure class="stage snd"><svg viewBox="0 0 320 180">' + "".join(
                     f'<rect x="{20 + i * 12}" y="{90 - h}" width="7" height="{2 * h}" rx="3" class="wave" style="--i:{i}"/>'
                     for i, h in enumerate([10, 24, 40, 18, 52, 30, 14, 44, 26, 12, 36, 48, 20, 30, 16, 40, 22, 10, 28, 34, 18, 12, 8])) + '</svg></figure>')
-            else:   # 연출 — 움직이는 예시, 고른 화풍으로 칠함
+            elif m:
+                vis = media_vis(k, lid, m)
+            elif k in ("text", "graphic", "camera", "transition"):
                 demo_html = demo(lid).replace("{{FRAME}}", frames["_raw"])
                 vis = f'<figure class="stage dir t-{lid}">{demo_html}</figure>'
                 tpls.append(f'<template id="tpl-{lid}">{demo_html}</template>')
+            else:
+                vis = '<figure class="pic"><div class="ph"><b>예시 화면 없음</b><span>아직 쓴 장면이 없어 렌더하지 못함</span></div></figure>'
             cards.append(f'<article class="card" data-card="{k}:{lid}">{vis}{meta(k, lid, d)}</article>')
         n = len(c["options"])
         extra = f' · 예시 {have}/{n}' if k == "illust" else ""
         sections.append(f'<section class="cat" id="cat-{k}"><h2><span class="axis {c.get("axis", "")}">{H.escape(c.get("axis", ""))}</span>{H.escape(c["name"])} <small>{n}가지{extra}</small></h2>'
                         f'<p class="lead">{H.escape(c.get("what", ""))}</p><div class="grid">{"".join(cards)}</div></section>')
-        opts = "".join(f'<option value="{lid}">{H.escape(d.get("name", lid))}</option>' for lid, d in c["options"].items())
+        opts = '<option value="">—</option>' + "".join(f'<option value="{lid}">{H.escape(d.get("name", lid))}</option>' for lid, d in c["options"].items())
         selects.append(f'<label><span class="axis {c.get("axis", "")}">{H.escape(c.get("axis", ""))}</span>{H.escape(c["name"])}<select data-cat="{k}">{opts}</select></label>')
 
+    # 실제 쓰인 조합
+    sc_names = next(c for c in cats if c["key"] == "scene")["options"]
+    pcards = []
+    for pid, p in presets.items():
+        pick = dict(p.get("pick") or {})
+        first = next((t for t in (p.get("scenes") or {}) if t in sc_names), "")
+        if first:
+            pick.setdefault("scene", first)
+        chips = " ".join(f'<span class="sc">{H.escape(sc_names.get(t, {}).get("name", t))} {v}</span>' for t, v in (p.get("scenes") or {}).items())
+        vid = f'<video src="media/scenes/{first}.mp4" muted loop playsinline preload="none"></video>' if first and f"media/scenes/{first}.mp4" in files else ""
+        pcards.append(f'<article class="preset"><div class="pv2">{vid}</div><div class="pbody"><div class="row"><b>{H.escape(p["name"])}</b><span class="st av">{H.escape(p.get("verdict", ""))}</span></div>'
+                      f'<code>{H.escape(str(p.get("project", "")))}</code><p><span class="lbl">편집·연출</span>{H.escape(p.get("edit", ""))}</p>'
+                      f'<p><span class="lbl">화풍</span>{H.escape(p.get("look", ""))}</p><div class="chips">{chips}</div>'
+                      f'<button class="applybtn" data-pick=\'{H.escape(json.dumps(pick, ensure_ascii=False))}\'>이 조합 불러오기</button></div></article>')
+    preset_html = (f'<section class="cat" id="presets"><h2><span class="axis 조합">조합</span>실제로 쓰인 조합 <small>{len(presets)}편</small></h2>'
+                   f'<p class="lead">스페인독감·시장·호기심 편이 실제로 쓴 편집·연출·화풍. 장면 수는 그 편 대본에서 센 것입니다. \'이 조합 불러오기\'를 누르면 아래 조합 판에 들어갑니다.</p>'
+                   f'<div class="pgrid">{"".join(pcards)}</div></section>')
+
     composer = f"""<section class="mix"><h2>조합 — 카테고리마다 하나씩 고르면 영상이 됩니다</h2>
-<p class="lead">아래 카테고리에서 '조합에 넣기'를 누르거나 여기서 고르세요. 미리보기는 고른 화면 화풍 위에서 ① 글자 연출 → ② 그래픽 연출 → ③ 카메라 → ④ 장면 전환 순서로 재생됩니다.</p>
+<p class="lead">카드의 '조합에 넣기'·위의 '이 조합 불러오기'를 누르거나 여기서 고르세요. 미리보기는 고른 화면 화풍 위에서 ① 글자 → ② 그래픽 → ③ 카메라 → ④ 전환 순서로 재생되고, 오른쪽에 고른 장면·장 표지·바탕·삽화·실사가 모입니다.</p>
 <div class="mixgrid"><div class="sels">{''.join(selects)}</div>
 <div class="pv"><figure class="stage big" id="pv"><div class="lay" data-step="text"></div><div class="lay" data-step="graphic"></div><div class="lay" data-step="camera"></div><div class="lay" data-step="transition"></div></figure>
 <ol class="tl"><li data-step="text">① 글자 연출</li><li data-step="graphic">② 그래픽 연출</li><li data-step="camera">③ 카메라</li><li data-step="transition">④ 장면 전환</li></ol>
-<div class="side"><div><small>삽화 화풍</small><div class="thumb" id="th-illust"></div></div><div><small>실사 색보정</small><div class="thumb" id="th-footage"></div></div><div><small>배경음</small><b id="th-bgm"></b></div></div>
+<div class="side" id="side"></div>
 <pre class="cmd" id="cmd"></pre></div></div></section>"""
-    nav = "".join(f'<a href="#cat-{c["key"]}">{H.escape(c["name"])}</a>' for c in cats)
-    body = composer + f'<nav class="cats">{nav}</nav>' + "".join(sections) + "".join(tpls)
+    nav = '<a href="#presets">실제 쓰인 조합</a>' + "".join(f'<a href="#cat-{c["key"]}">{H.escape(c["name"])}</a>' for c in cats)
+    body = composer + f'<nav class="cats">{nav}</nav>' + preset_html + "".join(sections) + "".join(tpls)
     page = PAGE.replace("{{BODY}}", body).replace("{{PAL}}", json.dumps(pal, ensure_ascii=False)) \
                .replace("{{NC}}", str(len(cats))).replace("{{NS}}", str(sum(len(c["options"]) for c in cats)))
-    out = Path(out)
     out.write_text(page, encoding="utf-8")
-    return out
+    return out, files
 
 
 PAGE = r"""<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>영상 구성요소 목록</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Nanum+Myeongjo:wght@700;800&family=Nanum+Pen+Script&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Gothic:wght@400;700;800&family=Nanum+Myeongjo:wght@700;800&family=Nanum+Pen+Script&display=swap">
 <style>
 :root{--bg:#f5f4f0;--panel:#fff;--fg:#1b1d22;--muted:#5f6470;--line:#dedbd3;--ok:#1f8a4c;--trial:#b26b00;--av:#3358d4;--hold:#8a8f99;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14161b;--panel:#1d2027;--fg:#e9eaee;--muted:#a0a6b3;--line:#2e333e;--ok:#5fd394;--trial:#f0b04f;--av:#7c9bff;--hold:#8a8f99;color-scheme:dark}}
@@ -281,29 +401,53 @@ nav.cats{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 0;position:sticky;top
 .pickbtn{align-self:flex-start;margin-top:4px;font:inherit;font-size:12.5px;background:none;border:1px solid var(--line);border-radius:6px;padding:3px 9px;color:var(--fg);cursor:pointer}
 .card.chosen{outline:2.5px solid var(--av);outline-offset:-1px}.card.chosen .pickbtn{background:var(--av);color:#fff;border-color:var(--av)}
 .snd .wave{fill:var(--acc);transform-box:fill-box;transform-origin:center;animation:wv 1.2s ease-in-out infinite alternate;animation-delay:calc(var(--i)*-.13s)}@keyframes wv{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+.pic video{width:100%;height:100%;object-fit:cover;display:block}
+.tags{display:flex;flex-wrap:wrap;gap:4px}.tag{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 5px}
+.fontv{background:#f6f2ea;color:#1e2a44;display:flex;align-items:center;justify-content:center;text-align:center}.fontv div{display:flex;flex-direction:column;gap:6px;padding:10px}.fontv b{font-size:24px;font-weight:inherit}.fontv span{font-size:30px;color:#c4452f}
+.pic.sub{position:relative}.subw{position:absolute;left:0;right:0;text-align:center;font-weight:700;font-size:15px}.subw span{padding:3px 9px;border-radius:3px}.subo{font-size:11px;color:#ddd;margin-bottom:3px}.subk{position:absolute;inset:0;display:grid;place-items:center;background:#F4EDE1;color:#111;font:800 34px 'Nanum Gothic'}.subk b{color:#E2381F}
+.thumbm{position:relative}.tm{position:absolute;inset:0}.tmt{position:absolute;color:#fff;font:800 22px/1.2 'Nanum Gothic';text-shadow:0 2px 6px #000}.tmc{position:absolute;width:70px;height:70px;border:4px solid #ff3b2f;border-radius:50%}
+.tmv{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:16px;font:800 34px 'Nanum Myeongjo';color:#22304D}.tmv span{font-size:18px;color:#888}.tms{position:absolute;inset:0;width:100%;height:100%}
+.tmchip{position:absolute;right:6%;top:10%;background:#e5382a;color:#fff;font:800 18px 'Nanum Gothic';padding:2px 8px;border-radius:4px}.mock{position:absolute;right:6px;bottom:4px;font-size:10px;color:#fff;background:rgba(0,0,0,.5);padding:0 4px;border-radius:3px}
+.snd audio{position:absolute;left:8%;right:8%;bottom:8%;width:84%;height:30px}.na{position:absolute;bottom:10%;left:10%;font-size:12px;color:var(--muted)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px}@media (max-width:420px){.pgrid{grid-template-columns:1fr}}
+.preset{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}.pv2{aspect-ratio:16/9;background:#111}.pv2 video{width:100%;height:100%;object-fit:cover}
+.pbody{padding:10px 12px 12px;display:flex;flex-direction:column;gap:5px}.pbody p{margin:0;font-size:13px}.lbl{display:inline-block;font-size:11px;border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-right:6px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:4px}.chips .sc{font-size:11.5px;background:var(--bg);border-radius:999px;padding:1px 8px}
+.applybtn{align-self:flex-start;font:inherit;font-size:13px;background:var(--fg);color:var(--bg);border:0;border-radius:6px;padding:5px 12px;cursor:pointer;margin-top:4px}
+.axis.구성{background:#8a5bd6}.axis.포장{background:#b26b00}.axis.조합{background:#1b1d22}
+#side{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}#side .it small{display:block;color:var(--muted);font-size:11px;margin-bottom:2px}#side .it .pic,#side .it .stage{border-radius:6px}#side .it b{font-size:12.5px}
 .how{margin-top:28px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:13.5px}.how code{background:var(--bg);padding:1px 6px;border-radius:4px}
 </style></head><body><div class="wrap">
-<header><h1>영상 구성요소 · 스타일 목록</h1><p>영상은 <b>구성요소 {{NC}}가지</b>(화면 화풍·삽화 화풍·실사 색보정·글자 연출·그래픽 연출·카메라·장면 전환·배경음)를 카테고리마다 하나씩 골라 <b>조합</b>한 것입니다. 스타일은 모두 {{NS}}가지. 화풍(어떻게 보이나)과 연출(어떻게 움직이나)은 다른 축이라 서로 섞을 수 있고, 같은 모션그래픽이라도 연출이 다르면 전혀 다른 장면이 됩니다.</p></header>
+<header><h1>영상 구성요소 · 스타일 목록</h1><p>영상은 <b>구성요소 {{NC}}가지</b>(화풍 · 구성 · 연출 · 소리 · 포장)를 카테고리마다 하나씩 골라 <b>조합</b>한 것입니다. 예시 화면은 지금까지 영상에 쓴 장면을 실제 렌더러로 다시 그린 것입니다. 스타일은 모두 {{NS}}가지. 화풍(어떻게 보이나)과 연출(어떻게 움직이나)은 다른 축이라 서로 섞을 수 있고, 같은 모션그래픽이라도 연출이 다르면 전혀 다른 장면이 됩니다.</p></header>
 {{BODY}}
 <div class="how"><b>정하는 법</b> — <code>python -m ytflow look &lt;프로젝트&gt; --set motion=chalkboard --set text=count-up --set graphic=stagger --set transition=match-move</code> (조합 판 아래 명령을 그대로 복사). 화풍 3종은 렌더에 바로 쓰이고, 연출은 이 영상의 기본값 — 장면마다 바꿀 수 있습니다. 대화로 "칠판 화풍에 카운트업, 전환은 매치 무브"처럼 말해도 됩니다. 원본: <code>styles/components.yaml</code></div>
 </div>
 <script>
 (function(){
 var PAL={{PAL}};var STEPS=['text','graphic','camera','transition'];
+var SIDE=['scene','chapter','background','structure','slots','layer','fx','beat','illust','footage','font','subtitle','thumbnail'];
 var sel={};document.querySelectorAll('.sels select').forEach(function(x){sel[x.dataset.cat]=x});
-var DEF={motion:'clean-flat',illust:'cute-casual',footage:'warm-doc',text:'count-up',graphic:'stagger',camera:'pull-back',transition:'match-move',bgm:'rest-now'};
-try{var saved=JSON.parse(localStorage.getItem('mix')||'{}');for(var k in saved)DEF[k]=saved[k]}catch(e){}
-for(var k in DEF){if(sel[k]&&[].some.call(sel[k].options,function(o){return o.value===DEF[k]}))sel[k].value=DEF[k]}
+var DEF={motion:'clean-flat',illust:'cute-casual',footage:'warm-doc',text:'count-up',graphic:'stagger',camera:'pull-back',transition:'match-move',bgm:'rest-now',scene:'bars',chapter:'photo',background:'film'};
+try{var saved=JSON.parse(localStorage.getItem('mix2')||'null');if(saved)DEF=saved}catch(e){}
+function setv(k,v){if(sel[k]&&[].some.call(sel[k].options,function(o){return o.value===v}))sel[k].value=v}
+for(var k in DEF)setv(k,DEF[k]);
 function paintAll(){var v=PAL[sel.motion.value];if(!v)return;var css='--base:'+v.base+';--ink:'+v.ink+';--acc:'+v.acc+';--card:'+v.card+';--font:'+v.font+';background:'+v.bg;document.querySelectorAll('.dir,.snd,#pv').forEach(function(d){d.style.cssText=css})}
-function thumb(cat){var t=document.querySelector('[data-thumb="'+cat+':'+sel[cat].value+'"]');document.getElementById('th-'+cat).innerHTML=t?t.innerHTML:''}
-function fill(){STEPS.forEach(function(s){var t=document.getElementById('tpl-'+sel[s].value);document.querySelector('#pv .lay[data-step='+s+']').innerHTML=t?t.innerHTML:''});
- thumb('illust');thumb('footage');document.getElementById('th-bgm').textContent=sel.bgm.options[sel.bgm.selectedIndex].text;
- document.querySelectorAll('article.card').forEach(function(c){var p=c.dataset.card.split(':');c.classList.toggle('chosen',sel[p[0]]&&sel[p[0]].value===p[1])});
- document.getElementById('cmd').textContent='python -m ytflow look <프로젝트> '+Object.keys(sel).map(function(k){return '--set '+k+'='+sel[k].value}).join(' ');
- var o={};for(var k in sel)o[k]=sel[k].value;try{localStorage.setItem('mix',JSON.stringify(o))}catch(e){}
+function name(k){var o=sel[k].options[sel[k].selectedIndex];return o?o.text:''}
+function fill(){STEPS.forEach(function(s){var t=sel[s].value&&document.getElementById('tpl-'+sel[s].value);document.querySelector('#pv .lay[data-step='+s+']').innerHTML=t?t.innerHTML:''});
+ var side=document.getElementById('side');side.innerHTML='';
+ SIDE.concat(['bgm','sfx','voice']).forEach(function(k){if(!sel[k]||!sel[k].value)return;var it=document.createElement('div');it.className='it';
+  var lab=document.querySelector('.sels select[data-cat='+k+']').parentNode.childNodes[1].textContent;it.innerHTML='<small>'+lab+'</small>';
+  var card=document.querySelector('article.card[data-card="'+k+':'+sel[k].value+'"] figure');
+  if(card&&SIDE.indexOf(k)>=0){var c=card.cloneNode(true);c.querySelectorAll('video').forEach(function(v){v.autoplay=true;v.preload='auto'});c.querySelectorAll('audio').forEach(function(a){a.remove()});it.appendChild(c)}
+  var b=document.createElement('b');b.textContent=name(k);it.appendChild(b);side.appendChild(it)});
+ side.querySelectorAll('video').forEach(function(v){v.play().catch(function(){})});
+ document.querySelectorAll('article.card').forEach(function(c){var p=c.dataset.card.split(':');c.classList.toggle('chosen',!!sel[p[0]]&&sel[p[0]].value===p[1])});
+ document.getElementById('cmd').textContent='python -m ytflow look <프로젝트> '+Object.keys(sel).filter(function(k){return sel[k].value}).map(function(k){return '--set '+k+'='+sel[k].value}).join(' ');
+ var o={};for(var k in sel)o[k]=sel[k].value;try{localStorage.setItem('mix2',JSON.stringify(o))}catch(e){}
  paintAll();}
 Object.keys(sel).forEach(function(k){sel[k].onchange=fill});
 document.querySelectorAll('.pickbtn').forEach(function(b){b.onclick=function(){sel[b.dataset.cat].value=b.dataset.id;fill();document.querySelector('.mix').scrollIntoView({behavior:'smooth'})}});
+document.querySelectorAll('.applybtn').forEach(function(b){b.onclick=function(){var p=JSON.parse(b.dataset.pick);for(var k in p)if(sel[k])sel[k].value=p[k]||'';fill();document.querySelector('.mix').scrollIntoView({behavior:'smooth'})}});
 var step=-1;
 function restart(el){el.classList.remove('go');void el.offsetWidth;el.classList.add('go');
  el.querySelectorAll('[data-scramble]').forEach(function(x){var t=x.dataset.scramble,n=0,CH='#%&@$*0123456789ABCDEFGHJK가나다라';var iv=setInterval(function(){n++;var k=Math.floor(n/3);x.textContent=t.split('').map(function(c,i){return i<k||c===' '?c:CH[Math.floor(Math.random()*CH.length)]}).join('');if(k>=t.length)clearInterval(iv)},45)});
@@ -312,6 +456,8 @@ function tick(){step=(step+1)%4;var s=STEPS[step];
  document.querySelectorAll('#pv .lay').forEach(function(l){var on=l.dataset.step===s;l.classList.toggle('on',on);l.classList.remove('go');if(on)restart(l)});
  document.querySelectorAll('.tl li').forEach(function(li){li.classList.toggle('on',li.dataset.step===s)});}
 function loopCards(){document.querySelectorAll('.cat .dir').forEach(restart)}
+var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){v.preload='auto';v.play().catch(function(){})}else v.pause()})},{rootMargin:'200px'}):null;
+document.querySelectorAll('.cat video').forEach(function(v){if(io)io.observe(v);else{v.autoplay=true}});
 fill();tick();loopCards();setInterval(tick,3800);setInterval(loopCards,4200);
 })();
 </script></body></html>"""
