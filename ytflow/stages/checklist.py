@@ -490,6 +490,17 @@ def run(path: Path, upto: str = "G8") -> Report:
             if h_: hard["all"] = h_
             if s_: soft["all"] = s_
         R.add("G6", "MUST", "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)", lq is not None and not hard, hard)
+        # 2026-11-20 사용자: "자막이랑 영상 글씨가 겹치거나 전체적으로 글씨들이 겹치는 경우가 잦습니다"
+        # → 렌더된 장면을 박자 끝마다 멈춰 실제 글자 상자로 잰 결과 (hybrid 렌더 끝에 자동, ytflow/stages/overlapqa.py)
+        oq = _load(edt / "overlap_qa.json")
+        if oq is None:
+            R.add("G6", "SHOULD", "글자 겹침 점검 기록 (05_edit/overlap_qa.json)", False, "python scripts/overlap_scan.py <프로젝트>")
+        else:
+            iss = [(sid, q) for sid, v in (oq.get("scenes") or {}).items() for q in v.get("issues", [])]
+            bad = [f"#{sid} {q['kind']}: {q['text']}" for sid, q in iss if "걸침:" not in q["text"]]
+            edge = [f"#{sid} {q['text']}" for sid, q in iss if "걸침:" in q["text"]]
+            R.add("G6", "MUST", "화면 글자 겹침 없음 — 글자끼리·카드에 가려짐·카드 밖 넘침·자막 자리 (overlap_qa)", not bad, bad[:8])
+            R.add("G6", "SHOULD", "글자가 카드·강조 상자 가장자리에 걸치지 않음 (overlap_qa)", not edge, edge[:6])
         R.add("G6", "참고", "무대 화면: 한꺼번에 보이는 것·글자·멈춘 박자 (한 화면 한 생각인지 눈으로, 04 §0-5)", not soft, soft)
         sq = _load(edt / "sync_qa.json") or {}
         w5 = sq.get("within_0_5s")

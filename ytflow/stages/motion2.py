@@ -118,9 +118,12 @@ class Stage:
             num = re.sub(r"[^\d.]", "", val)
             inner = (f'<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;'
                      f'background:{self.th["card"]};border-radius:32px;box-shadow:0 20px 60px rgba(0,0,0,.5)">'
-                     f'<div style="font-family:gr,sans;font-size:38px;color:{self.th["card_ink"]};opacity:.75">{_e(lab)}</div>'
+                     f'<div style="font-family:gr,sans;font-size:38px;color:{self.th["card_ink"]};opacity:.75;white-space:nowrap">{_e(lab)}</div>'
                      f'<div id="{self.p}_{m["id"]}_n" style="font-family:gx,sans-x;font-size:{m.get("fs", 190)}px;line-height:1.05;color:{self.th["card_ink"]}">{_e(val)}</div></div>')
             cw, ch = m.get("w", 900), m.get("h", 420)
+            # 글자가 카드 밖으로 넘치거나 두 줄로 꺾이지 않게 카드 너비를 글자에 맞춰 넓힘 (2026-11-20 겹침 점검: '(계산)'이 줄바꿈)
+            est = lambda txt, px: sum(px * (1.0 if ord(c) > 0x2E80 else 0.58) for c in str(txt))
+            cw = max(cw, est(lab, 38) + 64, est(val, m.get("fs", 190)) * 0.95 + 64)
             did = self._box(m["id"], x, y, cw, ch, inner)
             self._enter(did, t)
             mm = re.search(r"\d[\d,]*(\.\d+)?", val)

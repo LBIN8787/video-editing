@@ -867,7 +867,8 @@ def s_compare(D: HDoc, sc: dict, bt: list, dur: float):
 
 
 def s_outro(D: HDoc, sc: dict, bt: list, dur: float):
-    D.video(sc["_clipfile"], dur, "photo", push=0.04)
+    if sc.get("_clipfile"):   # 자료 영상이 없으면(클라우드에 파일 없음) 팩 바탕 위에 카드만 (2026-11-20 개정판 렌더)
+        D.video(sc["_clipfile"], dur, "photo", push=0.04)
     i = D._id()
     # 사진 위 글자가 읽히도록: 뒤를 살짝 흐리게 + 가운데 종이 카드
     D.items.append(f'<div id="{i}" style="position:absolute;inset:0;background:rgba(238,231,218,.35);backdrop-filter:blur(3px)"></div>')
@@ -1160,8 +1161,10 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     bg = a / bg_name
     if not bg.exists():
         backdrop.make(D.skin, kind, W, HH, chap, still, sc.get("_duo")).save(bg, quality=92)
-    if sc.get("clip") and sc["type"] != "bite":  # 원본 영상 구간을 장면 길이만큼 잘라 넣는다 (소리 없음) — bite 는 cutedit 이 따로
-        src = project.dir("assets") / "footage" / spec["footage"][sc["clip"]["src"]]["file"]
+    _clip_src = (project.dir("assets") / "footage" / spec["footage"][sc["clip"]["src"]]["file"]) if sc.get("clip") and sc["clip"].get("src") in (spec.get("footage") or {}) else None
+    # bite 가 원본 없이 인용 카드로 바뀌면 clip 에 start 가 없다 (2026-11-20 개정판 렌더에서 KeyError) — 구간·파일이 있을 때만 자름
+    if sc.get("clip") and sc["type"] != "bite" and "start" in sc["clip"] and _clip_src is not None and _clip_src.exists():
+        src = _clip_src
         out = a / f"clip_{sc['id']:03d}.mp4"
         subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-ss", str(sc["clip"]["start"]), "-i", str(src),
                         "-t", f"{dur + 0.5:.2f}", "-an", "-vf", "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=30",
@@ -1519,9 +1522,17 @@ def make(project: Project, workers: int = 3) -> Path:
         print(f"[hybrid] 움직임: 화면 변화 {m.get('change_events_per_min')}/분 · 정지 비율 {m.get('static_ratio')}")
     except Exception as e:  # noqa: BLE001
         print(f"[hybrid] 움직임 측정 건너뜀: {e}")
+    try:  # 글자 겹침 점검: 장면 HTML 을 박자 끝마다 멈춰 글자끼리·카드·자막 자리 겹침을 잼 → 05_edit/overlap_qa.json
+        from . import overlapqa   # (2026-11-20 사용자: "자막이랑 영상 글씨가 겹치거나 전체적으로 글씨들이 겹치는 경우가 잦습니다")
+        overlapqa.run(project.path.name)
+    except Exception as e:  # noqa: BLE001
+        print(f"[hybrid] 겹침 점검 건너뜀: {e}")
     if spec.get("package"):  # 제목·썸네일 (영상과 함께 만든다 — prompts/thumbnail.md)
-        from . import thumbnail
-        thumbnail.run(project)
+        try:
+            from . import thumbnail
+            thumbnail.run(project)
+        except Exception as e:  # noqa: BLE001 — 사진 파일이 없어도 싱크 점검까지는 간다
+            print(f"[hybrid] 썸네일 건너뜀: {e}")
     try:  # 완성본 싱크를 받아쓰기로 재서 05_edit/sync_qa.json 에 (자막·목소리 0.3초 이내 95% 이상이면 통과)
         from . import syncqa
         syncqa.run(project)
