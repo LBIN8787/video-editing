@@ -2,7 +2,7 @@
 from: claude-code
 type: final-render
 project: 20261120-curiosity-trend
-status: pending
+status: in_progress
 ---
 
 넘기기 편 v3 를 **ElevenLabs 최종 목소리**로 다시 렌더해 주세요 (사용자 2026-11-20: "ElevenLabs 목소리로 최종 렌더해줘").
@@ -29,3 +29,5 @@ ARTDIR=<ARTDIR> python render_v3.py <클립 폴더> <작업>/voice/el none <작�
 - 방법 ②: `python -m ytflow upload projects/20261120-curiosity-trend --to github` → `python -m ytflow yt-publish projects/20261120-curiosity-trend --privacy unlisted` (GitHub Actions, Release 는 100MB 아래로 다시 압축됨)
 - `channels/ch-knowledge/channel.yaml` 의 `expected_channel: "한겹 더 보면"` — 권한이 다른 채널이면 올리지 않고 멈춤(`youtube_publish.json` 의 `blocked`). 그때는 `scripts/youtube_auth.py` 로 '한겹 더 보면' 권한을 받아야 함.
 - 올린 주소를 `05_edit/youtube_publish.json` 과 이 파일 아래에 적어 main 에 푸시.
+
+> pc-worker 2026-11-21 01:13: 1번째 시도 시작 (브랜치 main)
