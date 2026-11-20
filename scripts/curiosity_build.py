@@ -111,7 +111,13 @@ def main() -> None:
     import hashlib
     have = (vdir / "voice.mp3").read_bytes() if (vdir / "voice.mp3").exists() else b""
     if vp and hashlib.sha256(have).hexdigest() != vp["sha256"]:   # 없거나 다른 목소리(예: 초안)면 바꿈
-        data = b"".join((Path(drive) / vp["dir"] / n).read_bytes() for n in vp["files"])
+        roots = [Path(drive)] + sorted(q for q in Path(drive).parent.glob("ytflow*") if q.is_dir() and q != Path(drive))   # 같은 이름 ytflow 폴더가 둘이면 'ytflow (1)' 쪽도
+        base = next((r / vp["dir"] for r in roots if all((r / vp["dir"] / n).exists() for n in vp["files"])), Path(drive) / vp["dir"])
+        parts = [base / n for n in vp["files"]]
+        if not all(p.exists() for p in parts):   # Drive 동기화가 아직 — 실패가 아니라 '기다림'(종료 코드 75)
+            print("목소리 조각이 아직 PC 에 없음 (Drive 동기화 대기):", ", ".join(str(p) for p in parts if not p.exists()))
+            sys.exit(75)
+        data = b"".join(p.read_bytes() for p in parts)
         if hashlib.sha256(data).hexdigest() != vp["sha256"]:
             raise SystemExit("목소리 조각을 이어 붙인 해시가 다릅니다 — Drive 동기화가 끝났는지 확인")
         vdir.mkdir(parents=True, exist_ok=True)

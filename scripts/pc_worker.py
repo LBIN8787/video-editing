@@ -142,6 +142,8 @@ def run_build(wt: Path, task_text: str, branch: str) -> tuple[int, str]:
     r = subprocess.run([sys.executable, "scripts/curiosity_build.py", f"projects/{proj}"], cwd=wt, capture_output=True,
                        text=True, encoding="utf-8", errors="replace", timeout=TASK_TIMEOUT)
     (HOME / f"build_{proj}.log").write_text((r.stdout or "") + "\n--- stderr ---\n" + (r.stderr or ""), encoding="utf-8")
+    if r.returncode == 75:   # 기다림(예: Drive 동기화 전) — 실패로 세지 않고 다음 차례에 다시
+        return 75, ""
     if r.returncode:
         return r.returncode, "status: failed\n" + ((r.stdout or "") + (r.stderr or ""))[-1500:]
     git(wt, "add", f"projects/{proj}/REPORT.md")
@@ -187,6 +189,11 @@ def one_pass(dry: bool) -> int:
             f.write_text(f.read_text(encoding="utf-8").rstrip() + "\n\n## 결과 (pc-worker)\n\n" + body + "\n", encoding="utf-8")
             set_status(wt, f, st, f"끝 (종료 코드 {rc})")
             log(f"끝: {f.name} → {st}")
+        elif rc == 75:
+            t2 = f.read_text(encoding="utf-8")
+            f.write_text(re.sub(r"^> pc-worker .*" + str(n) + "번째 시도 시작.*\n", "", t2, flags=re.M), encoding="utf-8")
+            set_status(wt, f, "pending", "자료가 아직 없어 기다림 (Drive 동기화) — 다음 차례에 다시")
+            log(f"기다림: {f.name}")
         elif n >= MAX_TRY:
             set_status(wt, f, "failed", f"{n}번 시도했지만 끝나지 않음 (종료 코드 {rc}) — 로그: {LOG}")
             log(f"실패로 멈춤: {f.name}")
