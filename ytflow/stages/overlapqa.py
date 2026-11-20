@@ -67,7 +67,8 @@ JS = r"""
         if (top && (bx.el === top || bx.el.contains(top)) && !(it._el === top || it._el.contains(top) || top.contains(it._el))) { hidden = true; break; }
       }
       // 카드 위에 온전히 얹힌 글자(f ≥ 0.9)는 정상, 가장자리에 걸치면(0.2~0.9) 문제
-      if (hidden || (f >= 0.2 && f < 0.9)) {
+      const marker = !hidden && bx.h < it.h * 1.6;   // 글자 뒤에 깐 형광펜 강조 — 글자가 위에 보이면 정상
+      if (hidden || (f >= 0.2 && f < 0.9 && !marker)) {
         const t = (bx.el.innerText || bx.el.getAttribute('src') || bx.el.id || bx.el.tagName).replace(/\s+/g, ' ').trim().slice(0, 24);
         it.cover.push((hidden ? '가려짐: ' : '걸침: ') + t);
       }
@@ -127,6 +128,8 @@ def scan(project: str, only: set[int] | None = None) -> dict:
                 for i in items:   # ② 자막 자리 (글자를 감싼 카드의 아래쪽까지)
                     if i.get("bottomBox", i["y"] + i["h"]) > top + 4:
                         probs.append({"t": round(t, 1), "kind": "자막과 겹침", "text": i["text"], "bottom": round(i.get("bottomBox", i["y"] + i["h"]))})
+                    if not i.get("box") and (i["x"] < -2 or i["x"] + i["w"] > 1922 or i["y"] < -2):   # ④ 화면 밖으로 잘림
+                        probs.append({"t": round(t, 1), "kind": "화면 밖 잘림", "text": i["text"]})
                     for c in i.get("cover", []):   # ③ 글자 위·아래로 다른 카드·그림이 겹침
                         probs.append({"t": round(t, 1), "kind": "글자와 카드 겹침", "text": f'{i["text"]} ↔ {c}'})
                 items = [i for i in items if not i.get("box")]
