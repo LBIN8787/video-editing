@@ -3,7 +3,7 @@ from: claude-code
 type: curiosity-build
 project: 20261120-curiosity-whitebear-v2
 branch: ccr-8d1b9648-0fm4oq
-status: failed
+status: done
 ---
 
 흰 곰 편 v4 다시 렌더 — **ElevenLabs 채널 목소리**로 (2026-11-20 사용자: "목소리 파일 드라이브로 넘겨서 다시 렌더해줘" → "권장으로").
@@ -28,3 +28,7 @@ $ C:\Users\s9907\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Py
 ��Ҹ� ������ ���� PC �� ���� (Drive ����ȭ ���): G:\�� ����̺�\ytflow\cache\whitebear_v4_voice_elevenlabs.mp3.part0, G:\�� ����̺�\ytflow\cache\whitebear_v4_voice_elevenlabs.mp3.part1, G:\�� ����̺�\ytflow\cache\whitebear_v4_voice_elevenlabs.mp3.part2
 
 > pc-worker 2026-11-21 01:33: 끝 (종료 코드 75)
+
+## 결과 (Claude Code PC 세션, 2026-11-21)
+- ElevenLabs 목소리로 렌더 완료: Drive `영상/20261120-curiosity-whitebear-v2/05_edit/whitebear_v4_elevenlabs.mp4` (9분 25초, 106MB) + 프레임 시트. 초안판 `whitebear_v4.mp4` 는 그대로.
+- 실패 원인과 해결: 목소리 조각이 Drive 의 다른 폴더 `ytflow (1)/cache` 에 올라가 PC 로 동기화되지 않음 → Drive 커넥터로 받아 `ytflow/cache` 에 두고 sha256 일치 확인. 렌더러가 설치 안 된 플레이라이트 브라우저를 찾던 것은 `YTFLOW_CHROMIUM` 을 쓰게 고침(작업 브랜치에 커밋).
