@@ -17,6 +17,10 @@
 | [`versus`](versus.md) | 맞대기 | 엇갈린 두 시각·주장 vs 부인·기대 vs 현실 | [영상](https://drive.google.com/file/d/1uze0c79ORRf8IRmXsjG541SM-n_fSjn9/view) |
 | [`kinetic`](kinetic.md) | 키네틱 글자 | 결론 한 문장·장 전환 한 줄. 목소리가 말하는 순간 낱말이 박힘 (화면 글자가 곧 자막) | [영상](https://drive.google.com/file/d/10QIVmNXXiB_opqz4RQsLb9J-HeiepuTS/view) |
 | [`outro`](outro.md) | 마무리 카드 | 영상 끝. 실사·자료 영상 위에 흐린 막 + 종이 카드 한 장 | [영상](https://drive.google.com/file/d/1LELn4La13CQ7QoulbhPu619tz6UtT8lp/view) |
+| [`afterline`](afterline.md) | 사건 이후 누적 (설명 무대) | 사건 뒤에도 계속됐다 — 시간선 위 금지 표시 → 붉은 이후 구간 → 카드가 하나씩 쌓임 → 수량 문구 | 구성요소 목록 (실제 렌더) |
+| [`spread`](spread.md) | 두 값 사이 간격 (설명 무대) | 두 값의 차이가 이름을 가진 개념(마진·스프레드) — 소품 → 두 막대·점선·괄호 → 값이 바뀌면 간격이 줄어듦 | 구성요소 목록 (실제 렌더) |
+| [`share`](share.md) | 전체 중 몫 (설명 무대) | 전체 중 얼마를 차지하나 — 막대 채움 → 비교 눈금 → 합계 괄호 | 구성요소 목록 (실제 렌더) |
+| [`motionboard`](motionboard.md) | 인물·물체 자유 무대 (설명 무대) | 누가 무엇을 누구에게 — 인물 카드·소품·화살표·붓을 놓고 박자마다 나타남·옮김·강조·흐리게 | 구성요소 목록 (실제 렌더) |
 
 ## 모든 장면에 공통
 - **박자(`beats`)**: 한 장면 = 박자 여러 개, 박자 하나 = 대사 한두 문장. 화면 요소는 박자 시작 시각에 맞춰 나타난다.

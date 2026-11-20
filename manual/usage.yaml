@@ -66,6 +66,11 @@ items:
   map_causal: {group: link, does: 칸과 화살표 인과 지도 — 같은 칸 위치를 유지하며 하나씩 켬, when: "원인 → 결과가 3단계 이상 이어질 때, 시장을 흔든 사건의 파급 경로", not_when: "화살표가 1~2개뿐 (말로 충분)", instead: [analogy, story], situations: [cause, hub-event]}
   board: {group: link, does: 같은 인과 지도를 코르크 판 카드 + 붉은 실로, when: "사람·기관·회사가 엮인 관계도 (시사·소송·조사)", not_when: "원리·과정 설명 → 칠판(chalk) 모양", instead: [map_causal], situations: [cause, say-vs-do]}
   analogy: {group: link, does: 왼쪽 익숙한 것 ↔ 오른쪽 낯선 것 비유 그림, when: "어려운 구조를 생활 속 하나로 바꿀 때 (원리)", not_when: "비유가 사실을 왜곡할 때", instead: [map_causal, stage], situations: [cause, us-link]}
+  # 설명 무대 (styles/explain-stage, 2026-11-20 사용자: 쉽게 설명·상황 설명 = 모션그래픽)
+  motionboard: {group: act, does: "인물(사진·실루엣)·소품 카드·글자·화살표·붓을 한 무대에 놓고 박자마다 나타남·옮김·강조·흐리게", when: "누가 무엇을 누구에게 넘기나, 제도·구조가 어떻게 작동하나 (보호예수·공매도·블록딜)", not_when: "캐릭터 몸짓 → stage, 지도 위 이동 → journey", instead: [map_causal, stage], situations: [explain, explain-market]}
+  afterline: {group: time, does: "시간선 위 사건 표식(붓 금지) → 붉은 '이후' 구간 → 카드가 하나씩 쌓임 → 수량 문구", when: "사건 뒤에도 계속됐다 — 시간 조건과 수량을 한 화면에", not_when: "날짜 간격이 중요 → timeline", instead: [timeline], situations: [explain, explain-market, timeline]}
+  spread: {group: number, does: "재료→공정→제품 소품, 두 가격 막대·점선·괄호로 차이, 한쪽 값이 바뀌면 간격이 줄어듦", when: "두 값의 차이가 이름을 가진 개념 (마진·스프레드·괴리)", not_when: "단순 두 숫자 비교 → versus", instead: [versus, bars], situations: [explain, explain-market]}
+  share: {group: number, does: "전체 막대 안에 부분이 차례로 채워짐 → 비교 눈금 → 합계 괄호", when: "전체 중 몫, 합치면 기준을 넘나 (매출 비중)", not_when: "사람 비율 → people", instead: [people, parking], situations: [explain, explain-market, ratio]}
   funnel: {group: link, does: 단계마다 줄어드는 깔때기 막대, when: "여러 단계를 거치며 수가 줄어드는 과정 (지원 → 합격, 주문 → 출하)", not_when: "단계가 없는 단순 비교", instead: [bars], situations: []}
 
   # ───────── 장소·이동
