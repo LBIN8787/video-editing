@@ -9,12 +9,12 @@ Windows 작업 스케줄러가 config/local_routines.yaml 의 시각마다 실�
     python scripts/local_routine.py --list            # 작업|시각 (설치 스크립트가 읽음)
 
 하는 일:
- 1. 전용 작업 폴더(E:\ytflow-local\routine-<작업>, git worktree)를 최신 origin/main 으로 맞춘다 — 사용자 폴더는 건드리지 않음.
+ 1. 전용 작업 폴더(E:/ytflow-local/routine-<작업>, git worktree)를 최신 origin/main 으로 맞춘다 — 사용자 폴더는 건드리지 않음.
  2. 그 폴더에서 Claude Code(`claude -p`, Claude 구독)에 config/local_routines/<작업>.md 지시를 맡긴다.
     Claude 가 로그인돼 있지 않으면 Codex(ChatGPT 구독)로 대신 돌리고 보고에 적는다.
  3. 끝나면 만든 큰 파일(영상·음성·그림)을 Google Drive `영상/<프로젝트>/` 로 복사·크기 확인하고,
     보고(LOCAL_RESULT.md)·로그를 Drive `_local/` 에 남기고, Windows 알림을 띄운다.
-작업 파일 위치: 로그·보고·잠금 = %YTFLOW_DRIVE%\\_local, 임시 파일 = 저장소 옆 작업 폴더(D:) — C 드라이브는 쓰지 않는다.
+작업 파일 위치: 로그·보고·잠금 = %YTFLOW_DRIVE%/_local, 작업 폴더·임시 파일 = E:/ytflow-local (YTFLOW_WORK) — C 드라이브는 쓰지 않는다.
 """
 from __future__ import annotations
 
