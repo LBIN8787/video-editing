@@ -7,6 +7,9 @@
 # 바로 한 번 돌리기: Start-ScheduledTask -TaskName ytflow-market-daily
 # 끄기:  Unregister-ScheduledTask -TaskName ytflow-market-daily -Confirm:$false
 # 로그·보고: %YTFLOW_DRIVE%\_local\logs, \_local\reports  (C 드라이브는 쓰지 않음)
+# 2026-11-21: 시장·호기심은 앱의 '예약된 작업'(사이드바 Scheduled)에서 따로 돌림 — 사용자: "예약된 작업에 안보이는데 호기심 따로 시장 따로 나눠줘".
+#   Windows 작업 스케줄러에 시장·호기심까지 등록하려면(앱을 안 켤 때) -Windows 를 붙임. 둘 다 켜면 두 번 돌므로 하나만.
+param([switch]$Windows)
 $ErrorActionPreference = "Stop"
 $repo = (Resolve-Path "$PSScriptRoot\..").Path
 $py = (Get-Command python -ErrorAction SilentlyContinue).Source
@@ -30,7 +33,7 @@ if (-not (Test-Path "$runner\.git")) { git -C $repo worktree add -f --detach $ru
 git -C $runner checkout -q -f -B local/runner origin/main
 
 $jobs = & $py "$runner\scripts\local_routine.py" --list
-foreach ($line in $jobs) {
+foreach ($line in $(if ($Windows) { $jobs } else { @() })) {
   $name, $time = $line -split "\|", 2
   # 실행 직전에 실행기 폴더를 최신 main 으로 맞춘 뒤 실행
   $cmd = "git -C '$runner' fetch -q origin main; git -C '$runner' checkout -q -f -B local/runner origin/main; & '$py' '$runner\scripts\local_routine.py' $name"
