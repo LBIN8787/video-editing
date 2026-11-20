@@ -39,6 +39,9 @@
 
 ### 시장 채널 (2026-11-19)
 `manual/09-market-daily.md` §7-1 — **핫 키워드 먼저**(팩트시트 `## 핫 키워드`), 단정 한 마디 + 숫자, 기본은 검은 톤 사진 꽉 채움(`photo` `full`), `punch`·`versus theme: dark` 는 변형. 근거 `docs/49-thumbnail-research.md`.
+**유명 인물 (2026-11-20, docs/55):** 사건의 당사자(CEO·창업자·투자 대가·중앙은행 수장)가 있으면 A 는 `layout: person` —
+`{"layout": "person", "image": {"file": "04_assets/footage/raw/<이름>.jpg"}, "person": {"name": "젠슨 황", "role": "엔비디아 CEO"}, "top": "날짜 · 사건", "lines": ["두 줄", "숫자 하나"], "hl": ["숫자"], "quote": "원본 발언 한 마디(선택)", "credit": "사진: 저작자 · CC BY 2.0"}`.
+얼굴은 렌더러가 찾아 화면 높이의 40~50% 로 자름(`face_h`). 제목 후보 1번은 그 이름을 앞 20자 안에. 정치인을 배경으로 붙이지 않음, 사생활 금지, 사진은 PD·CC0·CC BY 만.
 
 ### 만들기·점검
 `python -m ytflow thumbnail <프로젝트>` (hybrid 만들기 끝에 자동) → `05_edit/thumbnail_A~C.png`, `thumbnail_preview.png`(실제·목록·휴대폰 크기),
