@@ -52,7 +52,7 @@ reference: "월텍남 — 앤트로픽 대실망에, AMD 공매도까지 (DsUWN5
 | 요소 `kind` | 무엇 | 주요 값 |
 |---|---|---|
 | `person` | 인물 카드(인화 사진처럼 흰 테두리·그림자·살짝 기울기) + 이름·역할 | `photo` 가 있으면 실제 사진, 없으면 **얼굴 없는 실루엣**(`tone`: navy·red·gray·green·gold) |
-| `card` | 소품 카드 | `icon`(lucide 이름 또는 `chip`) · `img`(투명 PNG) · `label` · `color` |
+| `card` | 소품 카드 | `icon`(lucide 이름 또는 `chip`) · `img`(투명 PNG) · `label` · `color` · **`value`**(카드 아래 큰 숫자, `-` 빨강·`+` 초록, `vsize`) — 2026-11-20 사용자: "숫자가 안보입니다" · "뭉뚱그리지 말고 각각" |
 | `img` | 투명 PNG 소품을 그대로(그림자만) | `img`, `w` |
 | `text` | 굵은 글자 / 손글씨(`pen: true`) | `size`, `color`(ink·red·muted·navy) |
 | `arrow` | 두 요소 사이 휘는 잉크 화살표 + 손글씨 이름 | `from`, `to`, `label`, `bend`, `color` |
