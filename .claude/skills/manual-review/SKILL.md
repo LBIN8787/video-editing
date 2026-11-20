@@ -10,7 +10,7 @@ description: 매뉴얼 정기 검토(매일 밤 자동 실행·사람이 "매뉴
 ## 순서
 0. **잠금**: `python -m ytflow manual-lock acquire --purpose "정기 검토 YYYY-MM-DD"` — 정해진 담당은 없고 이 검토도 한 작업일 뿐 (2시간, 잡자마자 main 을 합침). 다른 세션이 잡고 있으면 `manual-lock request "정기 검토 YYYY-MM-DD"` 를 남기고 audit 보고서만 읽어 알림으로 보고하고 끝낸다 (docs/35).
 1. 최신으로: `git fetch origin` 후 작업 브랜치를 최신으로 (`git pull --rebase`). 작업 트리에 남의 변경이 있으면 건드리지 않는다. (acquire 가 main 을 이미 합쳤으면 아래 merge 는 할 것 없음)
-   - **main 도 합친다** (`git merge origin/main`): 다른 세션이 main 에서 매뉴얼을 고치거나 버전을 올리므로, 검토는 둘을 합친 매뉴얼에 한다. 충돌은 **양쪽 내용을 모두 살려** 푼다. main 이 매뉴얼 버전을 이미 올렸으면 이 브랜치에서 새로 올린 버전은 그 뒤 번호로 바꾼다 (2026-11-15 v32 → v34 처럼, CHANGELOG·본문 표기 모두). 내용이 서로 반대면 고치지 말고 ask 로 남긴다.
+   - **main 도 합친다** (`git merge origin/main`): 다른 세션이 main 에서 매뉴얼을 고치거나 버전을 올리므로, 검토는 둘을 합친 매뉴얼에 한다. 충돌은 **양쪽 내용을 모두 살려** 푼다. main 이 매뉴얼 버전을 이미 올렸으면 이 브랜치에서 새로 올린 버전은 그 뒤 번호로 바꾼다 (CHANGELOG·본문 표기 모두). 내용이 서로 반대면 고치지 말고 ask 로 남긴다.
    - 원격 `manual/vN` 스냅샷 브랜치는 **덮어쓰지 않는다** (force push 금지). 이미 있는 번호면 새 번호로.
 2. 재기: `python -m ytflow manual-graph` → `python -m ytflow manual-audit`. `manual/audit.md` 를 읽는다.
 2-1. **모순 점검** (2026-11-20 사용자: "모순되는 지침은 없는지 체크하고 주기적으로 이를 관리 할 수 있도록") — 장부 `manual/contradictions.yaml`.

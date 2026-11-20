@@ -140,7 +140,7 @@ def run(path: Path, upto: str = "G8") -> Report:
     if last >= 1 and (ed_ch == "ch-market-daily" or brand == "market"):   # SAVE(오선) 소식 기본 확인 (2026-11-14 사용자, manual/09 §3-0)
         from . import savecheck
         sv = savecheck.read(Path(path) / "01_research")
-        R.add("G2", "MUST", "시장: SAVE(오선) 소식 확인 기록 — 상태 '확인함' 또는 '확인 못 함: 이유' (01_research/save_check.md)",
+        R.add("G2", "MUST" if ed_ch == "ch-market-daily" else "SHOULD", "시장: SAVE(오선) 시장 소식 알림 확인 기록 — 상태 '확인함' 또는 '확인 못 함: 이유' (01_research/save_check.md)",
               sv["done"], sv["status"] or "save_check.md 없음 (python -m ytflow daily 가 만듦)")
         R.add("G2", "SHOULD", "시장: SAVE 실제로 확인함 (항목 1개 이상)", sv["done"] and sv["status"].startswith("확인함") and sv["items"] >= 1,
               f"{sv['status']} · 항목 {sv['items']}")
@@ -184,7 +184,7 @@ def run(path: Path, upto: str = "G8") -> Report:
         import re as _re2   # v16 진행 말투: 연결어미로 문장을 끝내지 않기 (README §2-2)
         _says = [b.get("say", "") for s in spec.get("scenes", []) for b in s.get("beats", [])]
         awk = [m.group(0) for t in _says for m in _re2.finditer(r"[^.?!]{0,14}(?:였|이었|했|었|았|였었)고요[.!]", t)]
-        R.add("G4", "MUST", "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2)", not awk, awk[:3])
+        R.add("G4", "SHOULD", "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2, 2026-11-20 사용자: 필수 아님)", not awk, awk[:3])
         first = " ".join(b.get("say", "") for s in _opening(spec) for b in s.get("beats", []))
         R.add("G4", "SHOULD", "여는 부분에 이 영상의 질문 하나 (시청자가 무엇을 따라가는지 알게)", "?" in first or "까요" in first or "일까" in first, "")
         if brand == "curiosity" and longform and spec.get("scenes"):   # v17 호기심 먼저 (04 §0)
@@ -534,7 +534,8 @@ def run(path: Path, upto: str = "G8") -> Report:
         R.add("G7", "참고", "제목 앞부분에 질문·핵심 (목록에서 잘려도 무슨 영상인지 보이게)", bool(re.search(r"[?？]|왜|까", title[:22])), title[:22])
 
     if last >= 7:  # G8 보관
-        R.add("G8", "MUST", "GitHub Release 업로드", (edt / "release.json").exists(), "")
+        R.add("G8", "MUST", "완성본 보관 기록 — Drive(drive.json·drive_archive.json) 또는 공개 가능한 것만 GitHub Release(release.json)",
+              any((edt / f).exists() for f in ("release.json", "drive.json", "drive_archive.json")), "")
         epi = config.CHANNELS_DIR / ch / "episodes.md"
         R.add("G8", "MUST", "episodes.md 기록", epi.exists() and path.name in epi.read_text(encoding="utf-8"), ch)
 
