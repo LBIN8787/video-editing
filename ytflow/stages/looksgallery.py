@@ -190,7 +190,10 @@ def build(out: Path, examples: Path | None = None) -> Path:
     for c in cats:
         k, cards = c["key"], []
         for lid, d in c["options"].items():
-            if k == "motion":
+            real = ex / f"explain-look-{lid}.jpg"   # 실제 렌더 정지 화면이 있으면 그것 (styles/explain-stage/demo/render.py --gallery)
+            if k == "motion" and real.exists():
+                vis = f'<figure class="pic" data-thumb="{k}:{lid}"><img src="{looks._b64_jpg(real, 640)}" alt=""><span class="real">실제 렌더</span></figure>'
+            elif k == "motion":
                 vis = f'<figure class="stage look" style="{_vars_css(pal[lid])}">{scene}</figure>'
             elif k == "illust":
                 img = next((p for p in (ex / f"{lid}.png", ex / f"{lid}.jpg", ex / f"{lid}.jpeg") if p.exists()), None)
@@ -210,6 +213,12 @@ def build(out: Path, examples: Path | None = None) -> Path:
                 vis = ('<figure class="stage snd"><svg viewBox="0 0 320 180">' + "".join(
                     f'<rect x="{20 + i * 12}" y="{90 - h}" width="7" height="{2 * h}" rx="3" class="wave" style="--i:{i}"/>'
                     for i, h in enumerate([10, 24, 40, 18, 52, 30, 14, 44, 26, 12, 36, 48, 20, 30, 16, 40, 22, 10, 28, 34, 18, 12, 8])) + '</svg></figure>')
+            elif (ex / f"explain-{lid}.mp4").exists():   # 실제 렌더 클립 (CSS 흉내 대신) — 설명 무대 연출
+                import base64
+                b = base64.b64encode((ex / f"explain-{lid}.mp4").read_bytes()).decode()
+                vis = (f'<figure class="pic vid"><video src="data:video/mp4;base64,{b}" autoplay muted loop playsinline></video>'
+                       f'<span class="real">실제 렌더</span></figure>')
+                tpls.append(f'<template id="tpl-{lid}">{demo(lid).replace("{{FRAME}}", frames["_raw"])}</template>')
             else:   # 연출 — 움직이는 예시, 고른 화풍으로 칠함
                 demo_html = demo(lid).replace("{{FRAME}}", frames["_raw"])
                 vis = f'<figure class="stage dir t-{lid}">{demo_html}</figure>'
@@ -330,6 +339,7 @@ nav.cats{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 0;position:sticky;top
 .how{margin-top:28px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:13.5px}.how code{background:var(--bg);padding:1px 6px;border-radius:4px}
 
 /* 설명 무대 (styles/explain-stage) */
+.pic{position:relative}.pic.vid video{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}.real{position:absolute;right:8px;top:8px;background:rgba(0,0,0,.6);color:#fff;font:700 11px 'Nanum Gothic';padding:3px 7px;border-radius:10px}
 .xcard{fill:#FDFCF8;filter:drop-shadow(0 2px 3px rgba(0,0,0,.25))}.xchip{fill:#23418C;stroke:#C9962E;stroke-width:2}
 .xnum{font:700 13px 'Black Han Sans','Nanum Gothic';fill:#23418C;text-anchor:middle}.xnum.s{font-size:9px;fill:#1F242E}
 .xink{stroke:var(--ink);stroke-width:3}.xban{fill:none;stroke:#C33A31;stroke-width:6;stroke-dasharray:110;stroke-dashoffset:110}

@@ -13,6 +13,8 @@ reference: "월텍남 — 앤트로픽 대실망에, AMD 공매도까지 (DsUWN5
 **한 줄 정의:** 한 장면 = 한 무대. 앞 박자에 나온 인물·물체·기준선은 남기고, 대사의 동사에 맞춰 다음 요소만 나타나거나·옮겨지거나·강조되거나·흐려진다.
 **언제 쓰나:** 숫자나 보도를 이해하는 데 **중간 과정**이 필요한 대목 — 누가 누구에게 무엇을 넘기나, 사건 이후 무엇이 늘었나, 두 값의 차이가 왜 줄었나, 전체 중 몫이 얼마인가. 진행자·기사·차트 화면 사이에 끼워 원리를 푸는 데 쓴다. 영상 전체를 이것만으로 만들지 않는다.
 
+**재구현:** 구성요소별 값(색·크기·위치·필터·시간·가속·소리)은 [`SPEC.md`](SPEC.md), 시험작은 `python styles/explain-stage/demo/render.py <출력> [--gallery]`(대본 [`demo/scenes.json`](demo/scenes.json)).
+
 코드 `ytflow/stages/explain.py`(장면), `ytflow/stages/crumple.py`(바탕) · 장면 문서 `docs/51-explain-stage.md` · 디테일 조사 `docs/52-motion-quality-references.md`
 
 ## 장면 네 가지
@@ -112,4 +114,4 @@ reference: "월텍남 — 앤트로픽 대실망에, AMD 공매도까지 (DsUWN5
 | 종이 질감을 모든 요소 위에 한 번 더(multiply), 선이 주름을 따라 휨 | 미구현 — docs/52 §디테일 2 |
 | 손그림·질감만 12fps로 끊기 | 미구현 — docs/52 |
 
-시험작: 스크래치에서 렌더한 5장면(사건 이후 누적·차이·몫·자유 무대·어두운 무대). 대본은 `docs/51-explain-stage.md` 예시.
+시험작: `demo/scenes.json` 5장면(사건 이후 누적·차이·몫·자유 무대·어두운 무대) → `demo/render.py`.
