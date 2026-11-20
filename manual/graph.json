@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-20T11:42:00",
- "source_hash": "9102f03a3252",
+ "generated": "2026-11-20T12:24:39",
+ "source_hash": "5868ff2c4f75",
  "audit": {
   "date": "2026-11-19T13:54",
   "counts": {
@@ -121,14 +121,14 @@
   "sections": 169,
   "must": 26,
   "auto": 41,
-  "intents": 124,
+  "intents": 125,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 78,
   "terms": 127,
   "bans": 148,
-  "feedback": 69,
+  "feedback": 70,
   "topics": 4,
   "episodes": 33,
   "main_situations": 16,
@@ -19850,6 +19850,32 @@
    "annotated": false
   },
   {
+   "id": "intent:627fec5b",
+   "kind": "intent",
+   "quote": "나쁘지는 않은데 기존 영상연출과 대조하면 퀄리티와  화풍 자체가 좀 미흡합니다",
+   "label": "나쁘지는 않은데 기존 영상연출과 대조하면 퀄리티와  화풍 자체가 좀 미흡합니다",
+   "versions": [],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "fb:70",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:627fec5b"
+   ],
+   "themes": [],
+   "ann_key": "intent:627fec5b",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:64998b79",
    "kind": "intent",
    "quote": "폰트 전부 메모리편처럼 다뤄주세요 그리고 스페인독감편 왜이리 렉걸리는 것 같은 연출인가요",
@@ -28094,6 +28120,32 @@
    "tier_note": "",
    "tier_fixed": true,
    "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:70",
+   "kind": "feedback",
+   "date": "2026-11-20",
+   "quote": "나쁘지는 않은데 기존 영상연출과 대조하면 퀄리티와  화풍 자체가 좀 미흡합니다",
+   "label": "나쁘지는 않은데 기존 영상연출과 대조하면 퀄리티와  화풍 자체가 좀 미흡합니다",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261120-inventory-motion",
+   "about": "",
+   "note": "초판의 화풍과 연출 완성도에 대한 개별 시안 피드백. 같은 소재의 개정판에서 소품의 재질과 장면별 시선 유도를 비교한다.",
+   "pending": false,
+   "themes": [],
+   "scope": "trial",
+   "intent": "intent:627fec5b",
+   "tier_key": "fb:627fec5b",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "trial",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "실험 기록"
   },
   {
    "id": "layer:main",
@@ -51565,6 +51617,11 @@
    "kind": "about"
   },
   {
+   "s": "intent:627fec5b",
+   "t": "fb:70",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:abbe3e51",
    "t": "rev:3",
    "kind": "quoted_in"
@@ -55507,6 +55564,11 @@
   {
    "s": "fb:69",
    "t": "intent:cc0965bc",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:70",
+   "t": "intent:627fec5b",
    "kind": "quoted_as"
   }
  ]
