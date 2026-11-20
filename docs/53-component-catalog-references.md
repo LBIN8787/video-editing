@@ -141,6 +141,7 @@
 - 시안 판정은 사용자 몫: `python -m ytflow review projects/20261120-looks-trial --pass | --reject "이유"` 후 looks.yaml status 를 approved 로.
 - 아이소메트릭·종이 디오라마의 '모양'(상자 투영·팝업 건물·찢은 종이 층)은 시안 렌더러에만 있습니다. 합격하면 장면 종류(렌더러)로 옮겨야 다른 영상에서 씁니다. 지금 스킨은 색·글꼴만 바꿉니다.
 - 삽화 화풍 2개의 예시 그림은 PC 에서 그립니다(`looks --order` → PC `looks --draw auto`). 이 세션은 main 에 올리지 않아 주문서를 만들지 않았습니다.
+- **공유 화풍 목록 페이지는 아직 갱신하지 않음**: 같은 시각 다른 세션(`claude/bold-cray-oc587w`, 잠금 '구성요소 목록 확장')이 구성요소 21가지·스타일 176가지 판을 올려 두어, 이 브랜치 판으로 올리면 그 작업을 덮어씀. 합치는 요청을 남김(`proposals/manual/20261120-074232-vigilant-lovelace-1uahwn.md`) — 시험 합치기에서 충돌 세 곳 모두 '둘 다 살림'으로 풀림. 그쪽 '효과음'(sfx)은 소리 하나하나의 목록, 이쪽 '효과음 묶음'(sfx_set)은 한 영상의 소리 한 벌이라 둘 다 둠.
 - `techniques.yaml`(잠금 대상)에 블록 이름을 tools 로 잇는 일, 목록에 없는 기법 후보(`strikethrough-replace` 정정 연출, `pan-stations` 정거장 카메라, `decline-chart` 하락 차트)는 잠금을 잡을 때 반영.
 
 ## 부록 A. HyperFrames v0.8.190 registry 전체 456개 — 태그로 나눈 목록 (자동 분류, 이름 = `npx hyperframes add <이름>`)
