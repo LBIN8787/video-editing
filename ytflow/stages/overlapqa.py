@@ -79,6 +79,25 @@ JS = r"""
         it.cover.push('넘침: 카드 밖으로 ' + (bx.el.id || bx.el.className || bx.el.tagName));
       }
     }
+    // 글자 위·아래로 그려진 선(화살표·붓선 등)이 지나가는지: 글자 상자 안 여러 점에서 겹친 요소를 위에서부터 훑음
+    // (2026-11-20 사용자: "옮겨감 이런 글씨가 선에 겹쳣어요")
+    const LINE = /^(path|line|polyline|polygon|circle|ellipse)$/i;
+    let crossed = false;
+    for (const fy of [0.3, 0.7]) {
+      for (const fx of [0.1, 0.3, 0.5, 0.7, 0.9]) {
+        for (const e of document.elementsFromPoint(it.x + it.w * fx, it.y + it.h * fy)) {
+          if (e === it._el || e.contains(it._el)) { if (e === it._el || e.tagName === 'SPAN') continue; }
+          if (LINE.test(e.tagName)) { if (op(e) > 0.15) { crossed = true; } break; }
+          const cs = getComputedStyle(e);
+          const opaque = (cs.backgroundColor && !/rgba\(\d+, \d+, \d+, 0\)|transparent/.test(cs.backgroundColor)) || e.tagName === 'IMG' || e.tagName === 'VIDEO';
+          if (opaque && !(e.contains(it._el))) break;   // 글자 아래 카드·바탕이 먼저 나오면 그 아래 선은 안 보임
+          if (opaque && e.contains(it._el) && e !== document.body && e.id !== 'root') break;   // 글자 받침·카드 위에 쓴 글자
+        }
+        if (crossed) break;
+      }
+      if (crossed) break;
+    }
+    if (crossed) it.cover.push('선: 글자 위나 아래로 선이 지나감');
     it.bottomBox = Math.max(...boxes.filter(bx => bx.el.contains(it._el)).map(bx => bx.y + bx.h), it.y + it.h);
     delete it._el;
   }
