@@ -22,7 +22,7 @@
 | [`ch-ai-guide`](ch-ai-guide/README.md) (가칭) AI 더 잘 쓰기 | 롱폼 (트렌드 해설·따라 하기) | 하이브리드 (`hybrid`) | 원본 소스 (화면 녹화·공식 발표) | 주 1편 |
 | [`ch-ai-shorts`](ch-ai-shorts/README.md) (가칭) AI 꿀팁 1분 | 쇼츠 안내 | AI 꿀팁 쇼츠 (`shorts-aitips`) | 쇼츠 | 주 3~5편 |
 | [`ch-money-shorts`](ch-money-shorts/README.md) (가칭) 1분 경제 상식 | 쇼츠 안내 (정보형) | 쇼츠 (`shorts-aitips`, 카드·큰 글씨) | 쇼츠 | 대기열에서 주 3~5편 |
-| [`ch-knowledge`](ch-knowledge/README.md) (가칭) 몰랐던 이유 | 롱폼 이야기 (심리·현대 일상) | 하이브리드 (`hybrid`) | 실사 B-roll·모션그래픽 (삽화는 대체, 04 §0-8) | 주 1편 + 몰아보기 |
+| [`ch-knowledge`](ch-knowledge/README.md) (가칭) 몰랐던 이유 | 롱폼 이야기 (심리·현대 일상) | 하이브리드 (`hybrid`) | 삽화 이야기 + 모션그래픽 설명 + 실제 자료 증거 (04 §0-7) | 주 1편 + 몰아보기 |
 | [`ch-issues`](ch-issues/README.md) 이슈의 구조 | 롱폼 시사·역사 | 하이브리드 (`hybrid`) | 기록 사진·영상, 지도·연표·비교 | 주 1~2편 |
 | `ch-issues-daily` 어제 세상 | 롱폼 매일 시사 | 하이브리드 (`hybrid`) | 기록 사진·영상, 지도·연표·비교 | 평일 매일 |
 
@@ -32,7 +32,7 @@
 | ch-source-brief | 발언 원본 | 방송·IR·기관 공식 채널의 최근 10일 인터뷰·실적 콜 → 발언 → 공시로 확인·정정 |
 | ch-paper-column | 1차 문서 | 연구·논문·IR·SEC·정부 문서 → 개념 칼럼, 사진은 위키미디어 CC |
 | ch-data-motion | 숫자 계열 | 시세·통계 + 비교할 과거 시기 → 직접 계산 |
-| ch-knowledge | 일상 사례·연구 | `demand` 로 질문 유형 → 심리학 원 연구·후속 결과 → 실사 B-roll·실험 모션그래픽 (기록 없는 장면만 삽화) |
+| ch-knowledge | 일상 사례·연구 | `demand` 로 질문 유형 → 심리학 원 연구·후속 결과 → 삽화 이야기·실험 모션그래픽·연구자 사진 |
 | ch-issues | 실제 사건의 기록 | 공식 발언·보도자료, 당시 신문과 사진·영상 → 사건의 흐름과 근거 비교 |
 | ch-ai-shorts | 저장소 | GitHub 최근 14일 별 증가 + README |
 | ch-money-shorts | 대기열 | 롱폼 주제 선정에서 '안내'형으로 판단된 소재 |

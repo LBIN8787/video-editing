@@ -32,7 +32,7 @@
 | `moneycrew` | 머니크루 | flat | reviewed | 산업·공급망·실적 해설 (평면 인포그래픽 모션, 차트) |
 | `explain-stage` | 설명 무대 | hybrid 장면 `afterline`·`spread`·`share`·`motionboard` (`explain.py`) | demo | 상황 설명 박자 — 시장 채널 상황 설명 기본 |
 | `news-desk` | 뉴스 데스크 카드 | hybrid 장면 `newsdesk` | — | 한 소식 = 한 장 (주간 정리·매일 소식 2~3개) |
-| `story-board` | 이야기 그림판 | hybrid 장면 `story` | demo | 호기심 — 자료가 없는 구간의 이야기 (v60 이후 대체 수단) |
+| `story-board` | 이야기 그림판 | hybrid 장면 `story` | demo | 호기심 — 이야기 자리, 여러 장소·인물을 한 장으로 (04 §0-7) |
 | `illustrated` | 손그림 삽화 | hybrid 장면 `illust` | — | 재구성 삽화 (자료가 없을 때, 그림은 `art-gen`·사람) |
 | `anim-stage` | 애니메이션 무대 | hybrid 장면 `stage` | — | 한 화면 한 생각 — 자료가 없는 구간의 인물 행동 |
 | `motion-metaphor` | 움직이는 비유 | hybrid 장면 `metaphor` | — | 사용자가 고를 때만 (매뉴얼 기준 아님) |

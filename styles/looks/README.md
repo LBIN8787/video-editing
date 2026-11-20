@@ -15,7 +15,7 @@
 | `chalkboard` | 칠판 | 원리·과정·구조 (호기심) | 관계도·숫자 비교, 너무 자주 | 화풍 목록 페이지 |
 | `corkboard` | 증거판 | 누가 누구와 연결 (시사) — `map_causal` 과 짝 | 숫자 비교 | [map_causal.mp4](https://drive.google.com/file/d/15-88mqDELcl3jkfHOidgv6lyztGGDkyk/view) (`look: board`) |
 | `dark-doc` | 어두운 다큐 | 원본 영상·발언 사이의 정리 화면, 역사·위기 | 밝은 생활 정보 | [bars.mp4](https://drive.google.com/file/d/1pnlWsrvCke45fr1kE6UkvVUm9OVZFfxx/view) · [versus.mp4](https://drive.google.com/file/d/1uze0c79ORRf8IRmXsjG541SM-n_fSjn9/view) |
-| `footage-overlay` | 실사 위 그래픽 | 실사 B-roll 위 콜아웃·막대·핵심어 (호기심 v60) | 그래픽이 실사를 덮을 때(패널은 화면 절반 이하) | 예시 프로젝트 `20261120-curiosity-broll-sample` |
+| `footage-overlay` | 실사 위 그래픽 | 실제 자료 영상 위 이름표·막대·핵심어 | 그래픽이 실사를 덮을 때(패널은 화면 절반 이하) | 예시 프로젝트 `20261120-curiosity-broll-sample` |
 
 (참고: `newsprint` 는 '사용 가능' 단계 — 11/20 심층의 `checklist` 가 이 스킨: [checklist.mp4](https://drive.google.com/file/d/1WB0v-x5RTestBbb7_GtmIbfVX0XSvXyf/view))
 

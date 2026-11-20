@@ -44,7 +44,7 @@ quote 장면 클립은 앞뒤 3초 여유로 받은 뒤 `ytflow/stages/align.py`
 > hybrid 영상(`02_script/hybrid.json`)의 원본 발언 구간은 `clip-order` → PC `clip-fetch` (docs/50). 아래는 옛 make 파이프라인(scenes.json)의 `rebuild` 입니다.
 - 클라우드 서버에서는 YouTube 가 영상 다운로드를 봇 확인으로 막습니다. **우회하지 않습니다.**
 - 사용자 PC 에서 `python -m ytflow rebuild <프로젝트>` 를 실행하게 합니다.
-- 봇 확인이 뜨면 `clips.cookies_from_browser: chrome` 을 설정합니다.
+- 사용자 PC 에서는 본인 로그인으로 평소처럼 받도록 `clips.cookies_from_browser: chrome` 을 설정할 수 있습니다(2026-11-20 허용). 봇 확인을 넘기 위한 수단으로 쓰지 않습니다.
 - 그래도 실패한 구간은 `04_assets/clips.csv` 의 URL·구간으로 직접 받아 `04_assets/scene_XXX.mp4` 로 넣고 다시 rebuild 합니다.
 
 ## 저작권·윤리
