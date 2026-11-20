@@ -88,6 +88,7 @@ def components() -> list[dict]:
 
 
 SCENE_NAMES = {
+    "afterline": "사건 이후 누적 (설명 무대)", "spread": "두 값 사이 간격 (설명 무대)", "share": "전체 중 몫 (설명 무대)", "motionboard": "인물·물체 자유 무대 (설명 무대)",
     "footage": "원본·실사 영상", "chart": "시세 선 그래프", "versus": "숫자 두 개 맞대기", "chapter": "장 표지", "map_causal": "인과 지도",
     "usmap": "미국 지도", "quote": "발언 카드", "checklist": "체크 목록", "analogy": "비유 (익숙한 것 ↔ 낯선 것)", "funnel": "깔때기",
     "apartments": "전체·대기·취소 칸", "timeline": "연표", "bars": "막대 비교", "bignum": "큰 숫자", "parking": "주차칸 비율",
@@ -120,14 +121,14 @@ def scene_options() -> dict:
                 cnt[sc["type"]] += 1
                 eps[sc["type"]].add(f.parents[1].name)
     out = {}
-    for t in sorted(set(cnt) | set(k for k in rendered if k in SCENE_NAMES), key=lambda k: -cnt[k]):
+    for t in sorted(set(cnt) | set(k for k in rendered if k in SCENE_NAMES) | {k for k in SCENE_NAMES if (sp.parent / f'explain-{k}.mp4').exists()}, key=lambda k: -cnt[k]):
         if t not in SCENE_NAMES:
             continue
         u = items.get(t, {})
         r = rendered.get(t, {})
         out[t] = {"name": SCENE_NAMES[t], "look": u.get("does", ""), "fits": u.get("when", ""), "avoid": u.get("not_when", ""),
                   "group": groups.get(u.get("group", ""), {}).get("name", ""), "used": f"{cnt[t]}회 · {len(eps[t])}편",
-                  "media": f"scenes/{t}.mp4" if r.get("file") else "",
+                  "media": f"scenes/{t}.mp4" if r.get("file") else (f"scenes/explain-{t}.mp4" if (sp.parent / f"explain-{t}.mp4").exists() else ""),
                   "from": r.get("project", "") + (" (자료 화면은 대체 영상)" if r.get("placeholder") else ""),
                   "status": "hold" if t == "intro" else ""}
     return out
@@ -173,7 +174,7 @@ def choose(project_dir: Path, motion: str = "", illust: str = "", footage: str =
 # ---------------------------------------------------------------- 화풍 목록 갤러리 (2026-11-20 사용자: "화풍목록 보여줘 하면 … 예시를 볼 수 있도록 — 시각적으로")
 GALLERY_URL = "https://claude.ai/artifact/K4CRgsyTYsWGCDw5RoCtam"   # 공유 페이지 — 다시 만들면 같은 주소에 올림 (skills/looks-gallery)
 FOOTAGE_SRC = "https://assets.mixkit.co/videos/49137/49137-720.mp4"   # 색보정 비교용 실사 (Mixkit 무료 라이선스)
-FONT_FAMILY = {"NanumGothic": "'Nanum Gothic'", "NanumMyeongjo": "'Nanum Myeongjo'", "NanumPenScript": "'Nanum Pen Script'"}
+FONT_FAMILY = {"BlackHanSans": "'Black Han Sans'", "NanumGothic": "'Nanum Gothic'", "NanumMyeongjo": "'Nanum Myeongjo'", "NanumPenScript": "'Nanum Pen Script'"}
 
 
 def examples_dir() -> Path:

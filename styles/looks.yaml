@@ -107,6 +107,23 @@ motion:   # 모션그래픽 화풍 — 도형·글자·막대·지도가 천천�
     status: approved
     demo: 20261120-curiosity-broll-sample
 
+  crumpled-paper:
+    name: 구겨진 종이 (설명 무대)
+    skin: crumpled-paper
+    look: 실사 구겨진 종이 바탕, 굵은 고딕(Black Han Sans), 흰 카드에 3겹 그림자, 붓으로 칠한 붉은 금지 표시·구간
+    fits: 상황 설명·원리 — 보호예수·공매도·제재 이후·마진·비중 (시장 채널 상황 설명 기본, styles/explain-stage)
+    avoid: 차가운 기술·앱 화면 이야기
+    status: approved   # 2026-11-20 사용자: "이 모션그래픽 스타일 커밋하겠습니다 … 주식채널에도 사용"
+    media: scenes/explain-look-crumpled-paper.mp4   # 실제 렌더 (styles/explain-stage/demo/render.py --gallery)
+  dark-stage:
+    name: 어두운 무대 (설명 무대)
+    skin: dark-stage
+    look: 숯색 무대에 가운데만 조금 밝게, 밝은 글씨·밝은 붉은 붓, 카드는 밝게 떠 있음
+    fits: 같은 설명 무대를 무겁고 긴장된 대목에 — 제재·위기·급락
+    avoid: 밝고 가벼운 생활 이야기
+    status: available
+    media: scenes/explain-look-dark-stage.mp4
+
 illust:   # 삽화 화풍 — 실사도 모션그래픽도 어려운 박자에만 (그림은 원화, 코드는 움직임 — 05 §0-8)
   casual-cel:
     name: 캐주얼 셀 애니메이션

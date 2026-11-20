@@ -1,0 +1,19 @@
+# 구겨진 실사 종이 + 굵은 고딕 + 붓 칠한 붉은 강조 — 설명 무대(styles/explain-stage) 기본 바탕 (2026-11-20, 월텍남 벤치마크 docs/31·51)
+# 설명 무대 장면(afterline·spread·share·motionboard)은 바탕·색을 스스로 칠하고(explain.py theme: paper),
+# 이 스킨은 같은 영상의 다른 장면(차트·인과 지도 등)을 같은 느낌으로 맞출 때 씁니다.
+id: crumpled-paper
+title: 구겨진 종이 (설명 무대)
+palette:
+  base: '#E8E3D9'
+  ink: '#1F242E'
+  accent: '#B5302B'
+  card: '#FDFCF8'
+  card2: '#F1EEE6'
+  muted_text: '#55595F'
+  marker: '#23418C'
+background: {type: paper, seed: 7, preview: crumple}
+strokes: {roughness_scale: 0.8, bowing: 1.0}
+photo: {tone: none}
+fonts: {title: BlackHanSans-Regular.ttf, value: BlackHanSans-Regular.ttf, box: NanumGothic-ExtraBold.ttf, note: NanumPenScript-Regular.ttf, label: NanumGothic-ExtraBold.ttf}
+subtitle: {font: NanumGothic, size: 50, box: "&H8A1E1E1E"}
+components: {flow: box, chapter: paper, lower: strip}
