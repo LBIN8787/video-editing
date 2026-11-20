@@ -1,6 +1,6 @@
 # 체크리스트 — 20261120-market-deep-druckenmiller
 
-매뉴얼 v77 · 2026-11-20T18:01:35 · **MUST 실패 3개**
+매뉴얼 v77 · 2026-11-20T18:15:53 · **MUST 실패 2개**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
@@ -84,7 +84,7 @@
 | G5 | SHOULD | style-pick 기록 (상황에 맞춘 스타일 선택) | ⚠️ | python -m ytflow style-pick <프로젝트> |
 | G5 | SHOULD | edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움) | ⚠️ | python -m ytflow edit-plan <프로젝트> → 02_script/EDIT_CONTEXT.md |
 | G6 | MUST | final.mp4 | ✅ |  |
-| G6 | MUST | 레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why) | ❌ | {'21': ['contrast/contrast_aa_failure: Contrast is 2.8:1; WCAG AA requires 3:1.' |
+| G6 | MUST | 레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why) | ✅ | {} |
 | G6 | MUST | 화면 글자 겹침 없음 — 글자끼리·카드에 가려짐·카드 밖 넘침·자막 자리 (overlap_qa) | ✅ | [] |
 | G6 | SHOULD | 글자가 카드·강조 상자 가장자리에 걸치지 않음 (overlap_qa) | ✅ | [] |
 | G6 | 참고 | 무대 화면: 한꺼번에 보이는 것·글자·멈춘 박자 (한 화면 한 생각인지 눈으로, 04 §0-5) | ✅ | {} |
