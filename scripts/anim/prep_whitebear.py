@@ -14,7 +14,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 ROOT = Path(__file__).resolve().parents[2]
 FONT = ROOT / "ytflow/assets/fonts/NanumGothic-ExtraBold.ttf"
-SHEETS = ["night", "lab", "lab2", "mind", "end"]
+SHEETS = ["night", "lab", "lab2", "mind", "end", "room", "lab3", "assoc", "sleep"]   # v4 에서 뒤 넷 추가
 W, H = 1920, 1080
 
 
