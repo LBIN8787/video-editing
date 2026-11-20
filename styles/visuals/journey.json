@@ -1,0 +1,173 @@
+{
+ "id": "journey",
+ "type": "journey",
+ "example_source": "projects\\20261107-style-journey\\02_script\\hybrid.json",
+ "renderer": "ytflow/stages/directions.py:132",
+ "function": "s_journey",
+ "scene_fields": [
+  "center",
+  "drawn",
+  "highlight",
+  "label",
+  "pins",
+  "places",
+  "projection",
+  "seas",
+  "start",
+  "title"
+ ],
+ "beat_fields": [
+  "goto",
+  "pin",
+  "route",
+  "zoom"
+ ],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only journey --force",
+ "spec_common": {
+  "edit_v10": true,
+  "map": {
+   "nodes": {
+    "war": {
+     "label": "1차 세계대전",
+     "icon": "shield-alert",
+     "x": 250,
+     "y": 400
+    },
+    "troops": {
+     "label": "군대 이동·밀집 막사",
+     "icon": "ship",
+     "x": 710,
+     "y": 400
+    },
+    "spread": {
+     "label": "독감이 세계로",
+     "icon": "globe",
+     "x": 1170,
+     "y": 400
+    },
+    "deaths": {
+     "label": "최소 5천만 명 사망",
+     "icon": "heart-pulse",
+     "x": 1630,
+     "y": 400
+    },
+    "censor": {
+     "label": "전쟁국: 나쁜 소식 검열",
+     "icon": "lock",
+     "x": 250,
+     "y": 720
+    },
+    "late": {
+     "label": "숨긴 곳은 대비가 늦음",
+     "icon": "hourglass",
+     "x": 710,
+     "y": 720
+    },
+    "spain": {
+     "label": "중립국 스페인: 보도",
+     "icon": "newspaper",
+     "x": 1170,
+     "y": 720
+    },
+    "name": {
+     "label": "'스페인 독감'이란 이름",
+     "icon": "tag",
+     "x": 1630,
+     "y": 720
+    }
+   },
+   "edges": [
+    [
+     "war",
+     "troops"
+    ],
+    [
+     "troops",
+     "spread"
+    ],
+    [
+     "spread",
+     "deaths"
+    ],
+    [
+     "war",
+     "censor"
+    ],
+    [
+     "censor",
+     "late"
+    ],
+    [
+     "late",
+     "spread"
+    ],
+    [
+     "spread",
+     "spain"
+    ],
+    [
+     "spain",
+     "name"
+    ]
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "type": "journey",
+   "places": {
+    "kansas": [
+     -96.8,
+     39.1
+    ],
+    "brest": [
+     -4.49,
+     48.39
+    ],
+    "glasgow": [
+     -4.25,
+     55.86
+    ],
+    "madrid": [
+     -3.7,
+     40.42
+    ],
+    "seoul": [
+     126.98,
+     37.57
+    ],
+    "brevig": [
+     -166.49,
+     65.33
+    ]
+   },
+   "title": "병이 지나간 길, 1918",
+   "label": "지도 · world-atlas (ISC)",
+   "start": {
+    "goto": null,
+    "zoom": 1
+   },
+   "beats": [
+    {
+     "say": "미리 말씀드리면, 답은 전쟁에 있습니다. 1차 세계대전이 병을 실어 날랐고,"
+    },
+    {
+     "say": "같은 전쟁이 신문의 입을 막았습니다. 그리고 입을 막지 않은 단 한 나라가, 병의 이름을 뒤집어썼습니다."
+    }
+   ],
+   "id": 1,
+   "chapter": 0
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "journey",
+   "events": [
+    " 0.00s 「<path d=\"M-53.333,1190.631L-…」 나타남",
+    " 0.20s 「지도 · world-atlas (ISC)」 아래에서 떠오름",
+    " 0.30s 「병이 지나간 길, 1918」 아래에서 떠오름"
+   ]
+  }
+ ]
+}

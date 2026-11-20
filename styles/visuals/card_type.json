@@ -1,0 +1,128 @@
+{
+ "id": "card_type",
+ "type": "card_type",
+ "example_source": "projects\\20261107-style-archive\\02_script\\hybrid.json",
+ "renderer": "ytflow/stages/directions.py:76",
+ "function": "s_card_type",
+ "scene_fields": [
+  "by",
+  "lines"
+ ],
+ "beat_fields": [],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only card_type --force",
+ "spec_common": {
+  "edit_v10": true,
+  "map": {
+   "nodes": {
+    "war": {
+     "label": "1차 세계대전",
+     "icon": "shield-alert",
+     "x": 250,
+     "y": 400
+    },
+    "troops": {
+     "label": "군대 이동·밀집 막사",
+     "icon": "ship",
+     "x": 710,
+     "y": 400
+    },
+    "spread": {
+     "label": "독감이 세계로",
+     "icon": "globe",
+     "x": 1170,
+     "y": 400
+    },
+    "deaths": {
+     "label": "최소 5천만 명 사망",
+     "icon": "heart-pulse",
+     "x": 1630,
+     "y": 400
+    },
+    "censor": {
+     "label": "전쟁국: 나쁜 소식 검열",
+     "icon": "lock",
+     "x": 250,
+     "y": 720
+    },
+    "late": {
+     "label": "숨긴 곳은 대비가 늦음",
+     "icon": "hourglass",
+     "x": 710,
+     "y": 720
+    },
+    "spain": {
+     "label": "중립국 스페인: 보도",
+     "icon": "newspaper",
+     "x": 1170,
+     "y": 720
+    },
+    "name": {
+     "label": "'스페인 독감'이란 이름",
+     "icon": "tag",
+     "x": 1630,
+     "y": 720
+    }
+   },
+   "edges": [
+    [
+     "war",
+     "troops"
+    ],
+    [
+     "troops",
+     "spread"
+    ],
+    [
+     "spread",
+     "deaths"
+    ],
+    [
+     "war",
+     "censor"
+    ],
+    [
+     "censor",
+     "late"
+    ],
+    [
+     "late",
+     "spread"
+    ],
+    [
+     "spread",
+     "spain"
+    ],
+    [
+     "spain",
+     "name"
+    ]
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "type": "card_type",
+   "lines": [
+    "이 병은",
+    "스페인에서 시작되지 않았다."
+   ],
+   "beats": [
+    {
+     "say": "이 병은 스페인에서 시작되지 않았습니다. 스페인이 가장 심하게 당한 나라도 아니었고요."
+    }
+   ],
+   "id": 1,
+   "chapter": 0
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "card_type",
+   "events": [
+    " 0.00s 화면 전체(카메라) 확대·이동",
+    " 0.55s 요소 나타남"
+   ]
+  }
+ ]
+}

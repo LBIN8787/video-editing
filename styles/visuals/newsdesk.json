@@ -1,0 +1,104 @@
+{
+ "id": "newsdesk",
+ "type": "newsdesk",
+ "example_source": "projects\\20261113-style-ref2\\02_script\\hybrid.json",
+ "renderer": "ytflow/stages/newsdesk.py:33",
+ "function": "s_newsdesk",
+ "scene_fields": [
+  "accent",
+  "brand",
+  "bullets",
+  "date",
+  "footer",
+  "handle",
+  "headline",
+  "hl",
+  "idx",
+  "panel",
+  "panel_beat",
+  "source",
+  "stats",
+  "sub",
+  "tag",
+  "tag_color",
+  "total"
+ ],
+ "beat_fields": [
+  "motion"
+ ],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only newsdesk --force",
+ "spec_common": {
+  "edit_v10": true
+ },
+ "scenes": [
+  {
+   "type": "newsdesk",
+   "chapter": 0,
+   "idx": 1,
+   "total": 3,
+   "source": "NVIDIA",
+   "tag": "이슈",
+   "tag_color": "red",
+   "date": "11월 11일 공시",
+   "headline": "창업자가 물러났다",
+   "hl": "물러났다",
+   "sub": "젠슨 황, 사장·CEO·이사직에서 즉시 사임",
+   "stats": [
+    {
+     "label": "주가 (11/12)",
+     "value": "-4.34%",
+     "color": "red"
+    },
+    {
+     "label": "임시 CEO",
+     "value": "크레스 CFO",
+     "color": "white"
+    },
+    {
+     "label": "첫 실적",
+     "value": "11/17",
+     "color": "yellow"
+    }
+   ],
+   "bullets": [
+    "이사회 의장은 하비 존스",
+    "정식 CEO는 안팎에서 찾는 중"
+   ],
+   "panel": {
+    "kind": "shot",
+    "src": "footage/nvidia.jpg",
+    "caption": "엔비디아 본사 간판 · CC BY 2.0 Will Buckner",
+    "pos": "50% 40%"
+   },
+   "footer": "출처: 엔비디아 8-K 공시·보도자료 (SEC, 2026.11.11)",
+   "beats": [
+    {
+     "say": "첫 번째 소식, 엔비디아입니다. 젠슨 황이 사장과 CEO, 이사직에서 즉시 물러났습니다."
+    },
+    {
+     "say": "주가는 4.34% 내렸고, 콜레트 크레스 CFO가 임시 CEO를 맡습니다. 첫 시험대는 11월 17일 실적입니다."
+    }
+   ],
+   "id": 1
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "newsdesk",
+   "events": [
+    " 0.00s 화면 전체(카메라) 확대·이동",
+    " 0.20s 「진행 막대」 움직임",
+    " 0.25s 「이슈」 아래에서 떠오름",
+    " 0.35s 「창업자가」 아래에서 떠오름",
+    " 0.70s 「젠슨 황, 사장·CEO·이사직에서 즉시 사임」 아래에서 떠오름",
+    " 8.06s 「주가 (11/12)」 아래에서 떠오름",
+    " 8.06s 「이사회 의장은 하비 존스」 옆에서 밀려 들어옴",
+    " 8.21s 「임시 CEO」 아래에서 떠오름",
+    " 8.26s 「정식 CEO는 안팎에서 찾는 중」 옆에서 밀려 들어옴",
+    " 8.26s 요소 옆에서 밀려 들어옴",
+    " 8.36s 「첫 실적」 아래에서 떠오름"
+   ]
+  }
+ ]
+}

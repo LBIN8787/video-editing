@@ -1,0 +1,173 @@
+{
+ "id": "funnel",
+ "type": "funnel",
+ "example_source": "projects\\20261106-hybrid-데이터센터\\02_script\\hybrid.json",
+ "renderer": "ytflow/stages/hybrid.py:658",
+ "function": "s_funnel",
+ "scene_fields": [
+  "bars",
+  "label",
+  "title",
+  "unit"
+ ],
+ "beat_fields": [
+  "upto",
+  "value"
+ ],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only funnel --force",
+ "spec_common": {
+  "edit_v10": true,
+  "map": {
+   "nodes": {
+    "vote": {
+     "label": "미국 선거·주민투표",
+     "icon": "flag",
+     "x": 250,
+     "y": 400
+    },
+    "permit": {
+     "label": "AI 공장 허가 막힘",
+     "icon": "ban",
+     "x": 710,
+     "y": 400
+    },
+    "build": {
+     "label": "새 공장 덜 짓기",
+     "icon": "construction",
+     "x": 1170,
+     "y": 400
+    },
+    "chips": {
+     "label": "칩·메모리 주문 ↓?",
+     "icon": "memory-stick",
+     "x": 1630,
+     "y": 400
+    },
+    "kospi": {
+     "label": "한국 반도체 주가 ↓",
+     "icon": "trending-down",
+     "x": 1630,
+     "y": 720
+    },
+    "money": {
+     "label": "빅테크 돈은 그대로",
+     "icon": "dollar-sign",
+     "x": 1170,
+     "y": 720
+    },
+    "old": {
+     "label": "기존 공장 몸값 ↑",
+     "icon": "building-2",
+     "x": 710,
+     "y": 720
+    },
+    "fx": {
+     "label": "환율·미국 반도체",
+     "icon": "globe",
+     "x": 250,
+     "y": 720
+    }
+   },
+   "edges": [
+    [
+     "vote",
+     "permit"
+    ],
+    [
+     "permit",
+     "build"
+    ],
+    [
+     "build",
+     "chips"
+    ],
+    [
+     "chips",
+     "kospi"
+    ],
+    [
+     "money",
+     "build"
+    ],
+    [
+     "permit",
+     "old"
+    ],
+    [
+     "fx",
+     "kospi"
+    ]
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": 1,
+   "type": "funnel",
+   "chapter": 3,
+   "label": "2026.11.06 · Investing.com (서스케하나 보고서 보도)",
+   "title": "AI 공장 계획, 전력으로 재면",
+   "unit": "GW",
+   "bars": [
+    {
+     "value": 148,
+     "label": "2025~2030 계획 전체",
+     "sub": "원전 약 148기 규모"
+    },
+    {
+     "value": 60,
+     "label": "아직 허가 대기",
+     "sub": "전체의 40%"
+    },
+    {
+     "value": 12,
+     "label": "최악이면 취소",
+     "sub": "전체의 8%",
+     "highlight": true
+    }
+   ],
+   "beats": [
+    {
+     "say": "서스케하나는 2030년까지 계획된 AI 학습용 데이터센터를 전력으로 셌습니다. 148기가와트, 원전 약 148기 규모입니다.",
+     "upto": 1
+    },
+    {
+     "say": "이 가운데 60기가와트가 아직 허가를 기다리고 있고,",
+     "upto": 2
+    },
+    {
+     "say": "최악의 경우 그중 12기가와트가 취소될 수 있다고 봤습니다. 전체의 8%입니다.",
+     "upto": 3
+    }
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "funnel",
+   "events": [
+    " 0.00s 화면 전체(카메라) 확대·이동",
+    " 0.20s 「2026.11.06 · Investing.com (…」 아래에서 떠오름",
+    " 0.20s 「AI 공장 계획, 전력으로 재면」 아래에서 떠오름",
+    " 0.50s 손그림 선 그려짐",
+    " 0.65s 「2025~2030 계획 전체」 아래에서 떠오름",
+    " 0.85s 손그림 선 그려짐",
+    " 1.45s 「148GW」 아래에서 떠오름",
+    " 1.45s 숫자가 148.0 까지 세어 올라감",
+    " 1.65s 「원전 약 148기 규모」 아래에서 떠오름",
+    "11.21s 「아직 허가 대기」 아래에서 떠오름",
+    "11.41s 손그림 선 그려짐",
+    "12.01s 「60GW」 아래에서 떠오름",
+    "12.01s 숫자가 60.0 까지 세어 올라감",
+    "12.21s 「전체의 40%」 아래에서 떠오름",
+    "14.53s 「최악이면 취소」 아래에서 떠오름",
+    "14.73s 손그림 선 그려짐",
+    "15.33s 「12GW」 아래에서 떠오름",
+    "15.33s 숫자가 12.0 까지 세어 올라감",
+    "15.53s 「전체의 8%」 아래에서 떠오름",
+    "16.03s 손그림 선 그려짐"
+   ]
+  }
+ ]
+}

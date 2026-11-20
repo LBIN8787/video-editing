@@ -1,0 +1,124 @@
+{
+ "id": "stage",
+ "type": "stage",
+ "example_source": "projects\\20261113-curiosity-moravec\\02_script\\hybrid.json",
+ "renderer": "ytflow/stages/stage.py:582",
+ "function": "s_stage",
+ "scene_fields": [],
+ "beat_fields": [
+  "act"
+ ],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only stage --force",
+ "spec_common": {
+  "edit_v10": true,
+  "brand": "curiosity"
+ },
+ "scenes": [
+  {
+   "id": 1,
+   "type": "stage",
+   "goal": "2015년 큰 기대를 받은 빨래 기계가 4년 만에 무너졌다는 것, 그리고 체스 챔피언을 이긴 기계와의 대비로 영상의 질문을 품는다",
+   "bg": "film",
+   "beats": [
+    {
+     "say": "2015년 10월, 일본 도쿄에서 열린 가전 전시회에서 냉장고만 한 기계 하나가 관람객의 발길을 붙잡았습니다.",
+     "why": "여는 장면(docs/30 ①): 전시장 한가운데의 기계와 그 앞에 모인 사람들 — 큰 기대의 순간",
+     "act": [
+      {
+       "t": "2015년",
+       "do": "text",
+       "id": "yr",
+       "kind": "year",
+       "text": "2015. 10 · 도쿄",
+       "y": 130
+      },
+      {
+       "t": "냉장고만",
+       "do": "in",
+       "id": "lr",
+       "src": "gen/laundroid.png",
+       "x": 1200,
+       "y": 850,
+       "h": 540,
+       "from": "rise"
+      },
+      {
+       "do": "in",
+       "id": "vs",
+       "src": "gen/visitors.png",
+       "x": 560,
+       "y": 900,
+       "h": 400,
+       "from": "walk",
+       "wdur": 2.6
+      }
+     ]
+    },
+    {
+     "say": "빨래를 넣고 기다리면 기계가 스스로 옷을 집어 반듯하게 개어 내놓는다는 '런드로이드'였습니다.",
+     "why": "기계가 약속한 것 = 반듯하게 갠 옷 더미가 나옴",
+     "act": [
+      {
+       "t": "빨래를",
+       "do": "in",
+       "id": "sh0",
+       "src": "gen/shirt_crumpled.png",
+       "x": 560,
+       "y": 560,
+       "h": 200,
+       "from": "pop"
+      },
+      {
+       "t": "기다리면",
+       "do": "into",
+       "on": "sh0",
+       "target": "lr"
+      },
+      {
+       "t": "반듯하게",
+       "do": "in",
+       "id": "fs",
+       "src": "gen/folded_stack.png",
+       "x": 1640,
+       "y": 860,
+       "h": 210,
+       "from": "right"
+      },
+      {
+       "t": "런드로이드",
+       "do": "fx",
+       "on": "lr",
+       "kind": "sparkle",
+       "dx": 0.2
+      }
+     ]
+    }
+   ],
+   "gap": 0.5,
+   "chapter": 0
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "stage",
+   "events": [
+    " 0.00s 요소 옆으로 펼쳐짐",
+    " 0.00s 요소 나타남",
+    " 0.02s 「화면 덮개」 사라짐",
+    " 0.35s 「2015. 10 · 도쿄」 아래에서 떠오름",
+    " 0.40s 요소 옆에서 밀려 들어옴",
+    " 0.40s 「화면 덮개」 둥실 움직임(반복)",
+    " 0.60s 요소 옆으로 펼쳐짐",
+    " 0.83s 「화면 덮개」 둥실 움직임(반복)",
+    " 3.89s 요소 아래에서 떠오름",
+    " 8.05s 요소 튀어나옴",
+    " 8.63s 요소 사라짐",
+    " 9.48s 「화면 덮개」 둥실 움직임(반복)",
+    "10.87s 요소 옆에서 밀려 들어옴",
+    "12.27s 그림 튀어나옴",
+    "13.87s 그림 사라짐"
+   ]
+  }
+ ]
+}
