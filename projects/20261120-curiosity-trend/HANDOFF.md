@@ -11,6 +11,14 @@
 | 렌더 | v3 는 아직. v1 렌더러(`render_full.py`·`full_overlay.html`·`build_full.py`)의 모션그래픽 구성요소(점 그림·띠·막대·도장·빠져드는 막대·목록·끝 화면)를 그대로 쓰고, 실사 칸을 원화 칸으로 바꾸면 됨 |
 | 업로드 | '한겹 더 보면' 채널, **일부 공개** (`channels/ch-knowledge/channel.yaml` youtube: expected_channel·privacy unlisted·publish_time null). `yt-publish` 가 올리기 직전 권한 채널 이름을 확인하고 다르면 멈춤 |
 
+## 클라우드에서 이어 한 것 (2026-11-20 저녁)
+- 대본 v3 초안 목소리(edge-tts) 길이: 낭독 6분 30초, 마디 포함 **약 7분 30초**
+- 장면표 v3: `02_script/build_v3.py [ARTDIR]` → `v3.json` (38장면: 삽화 칸 19 · 모션그래픽 · 이름 카드·사진 · 마디 9). 원화가 `ARTDIR/<시트>_<칸>.jpg`(칸: tl·tr·bl·br) 로 있으면 그 그림을, 없으면 '원화 대기' 판을 그림
+- 렌더러 v3: `02_script/render_v3.py <클립> <TTS(s<장면>_0.mp3)> none <작업> <출력>` + `v3_overlay.html` (마디 = 무음 검은 화면 `silent`, 삽화 칸 `art`, 사진 `photo`, 이름 카드 `namecard`). 환경변수 `ARTDIR`·`THUMBDIR`
+- 확인용 애니매틱(원화 대기 판): `05_edit/v3_animatic_preview.mp4` (클라우드에서 렌더, 커밋 안 함)
+- **러셀 사진은 못 받음** — 위키미디어가 클라우드 IP 를 막음. PC 에서 Commons 'Bertrand Russell, 1894.jpg'(퍼블릭 도메인)를 `ARTDIR/russell.jpg` 로
+- 원화 시트를 칸으로 자르기: 2×2 시트를 반씩 잘라 `<시트>_tl.jpg` 등으로 (예: `ffmpeg -i night1.png -vf "crop=iw/2:ih/2:0:0" night1_tl.jpg`, tr=`iw/2:0`, bl=`0:ih/2`, br=`iw/2:ih/2`) → `python build_v3.py <ARTDIR>` → 렌더
+
 ## 사용자가 정해 둔 것 (원문은 `manual/feedback.yaml`)
 - 이야기를 들려주듯, 학습형 금지, 길이는 짧게 (v1 은 너무 김)
 - 문제 → 왜 → 어떻게 극복으로 이어지게, 시청자가 "아 이래야겠구나"를 얻어 가게 (지우의 다음 날 밤: 묻기·머물기·나가기·챙기기)
