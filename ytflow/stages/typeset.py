@@ -29,11 +29,18 @@ SYSTEMS = {
                   "sans": paper.SANS, "sans-x": paper.SANS_X, "gr": paper.SANS, "gx": paper.SANS_X},
     },
 }
+GR = paper.FONT_DIR / "NanumGothic-Regular.ttf"
+# 나눔고딕 한 계열 — 호기심 채널처럼 깔끔하게 (2026-11-21 사용자: "호기심채널 연출처럼 좀 깔끔한 연출이 오히려 나은 것 같아서요 글씨체도 그렇구요")
+SYSTEMS["nanum"] = {
+    "roles": {"title": paper.SANS_X, "value": paper.SANS_X, "box": paper.SANS_X, "note": paper.SANS, "label": paper.SANS},
+    "alias": {"heavy": paper.SANS_X, "serif-x": paper.SANS_X, "serif-b": paper.SANS_X, "pen": paper.SANS,
+              "sans": paper.SANS, "sans-x": paper.SANS_X, "gr": GR, "gx": paper.SANS_X},
+}
 BRAND_DEFAULT = {"market": "gothic"}   # 시장 채널 기본 (2026-11-20 사용자 요청). 다른 채널은 그래픽 팩 글꼴 그대로
 
 
 def for_spec(spec: dict) -> dict | None:
-    name = spec.get("type") or BRAND_DEFAULT.get(spec.get("brand", ""), "pack")
+    name = spec.get("type") or ("nanum" if spec.get("calm") else BRAND_DEFAULT.get(spec.get("brand", ""), "pack"))
     return SYSTEMS.get(name)
 
 

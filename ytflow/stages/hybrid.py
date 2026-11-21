@@ -90,7 +90,7 @@ class HDoc(hyper.Doc):
     # 이름 자막 (lower third) ------------------------------------
     def lower(self, name: str, role: str, at: float, dark: bool = False):
         from . import graphics
-        if graphics.component(self, "lower") == "bar" and dark:   # 영상 위에서만 얇은 선 스타일 (종이 위는 띠 유지)
+        if graphics.component(self, "lower") == "bar" and (dark or getattr(self, "calm", False)):   # 영상 위에서만 얇은 선 스타일 (종이 위는 띠 유지) · 차분한 모드는 늘 얇은 선
             return graphics.lower_bar(self, name, role, at)
         i = self._id()
         f = fit(FT("title"), name, 46, 900)
@@ -154,6 +154,12 @@ class HDoc(hyper.Doc):
     def label(self, text: str, dark: bool = False):
         if not text:
             return
+        if getattr(self, "calm", False):   # 호기심 채널처럼: 상자 없는 작은 출처 글씨
+            i = self._id()
+            self._hud_or_items().append(f'<div id="{i}" style="position:absolute;right:56px;top:46px;font-family:gr,sans;font-size:22px;color:rgba(255,255,255,.72);'
+                                        f'white-space:nowrap;text-shadow:0 1px 4px #000">{_e(text)}</div>')
+            self.js.append(f'tl.fromTo("#{i}",{{opacity:0}},{{opacity:1,duration:0.5}},0.2);')
+            return
         i = self._id()
         col = "#FFFFFF" if dark else "#5a5f6a"
         bg = "rgba(0,0,0,.45)" if dark else "rgba(251,248,241,.85)"
@@ -172,6 +178,13 @@ class HDoc(hyper.Doc):
 
     def chapter_tag(self, num: str, title: str, dark: bool = False):
         if not num:
+            return
+        if getattr(self, "calm", False):   # 호기심 채널처럼: 얇은 테두리 알약 + 흰 글자 (2026-11-21)
+            i = self._id()
+            self._hud_or_items().append(f'<div id="{i}" style="position:absolute;left:56px;top:44px;font-family:sans;font-size:24px;color:#FFFFFF;white-space:nowrap;'
+                                        f'padding:7px 14px;border-radius:4px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.35);letter-spacing:.5px">'
+                                        f'{_e(num)} · {_e(title)}</div>')
+            self.js.append(f'tl.fromTo("#{i}",{{opacity:0}},{{opacity:1,duration:0.5}},0.15);')
             return
         i = self._id()
         col = "#FFFFFF" if dark else self.ink
@@ -280,7 +293,8 @@ def s_chart(D: HDoc, sc: dict, bt: list, dur: float):
     for k in range(5):  # 가격 눈금
         v = lo + (hi - lo) * k / 4
         yy = Y(v)
-        D.svg.append(f'<line x1="{x0}" y1="{yy:.0f}" x2="{x1}" y2="{yy:.0f}" stroke="{grid}" stroke-width="1.5" stroke-dasharray="6 8"/>')
+        D.svg.append(f'<line x1="{x0}" y1="{yy:.0f}" x2="{x1}" y2="{yy:.0f}" stroke="{grid}" stroke-width="1" opacity=".55"/>' if getattr(D, "chart_clean", False) else
+                     f'<line x1="{x0}" y1="{yy:.0f}" x2="{x1}" y2="{yy:.0f}" stroke="{grid}" stroke-width="1.5" stroke-dasharray="6 8"/>')
         D.items.append(f'<div style="position:absolute;left:{x1 + 20}px;top:{yy - 16:.0f}px;font-family:sans;font-size:24px;color:{axis}">{v:,.0f}</div>')
     pts = [(X(i), Y(r["close"])) for i, r in enumerate(rows)]
     D.stroke(pts, D.ink, 4, at=0.3, dur=1.4)
@@ -291,8 +305,14 @@ def s_chart(D: HDoc, sc: dict, bt: list, dur: float):
     n = b0.get("focus_last", 3)
     seg = pts[-n:]
     t0 = bt[0][0]
-    D.stroke(seg, D.red, 8, at=t0 + 1.2, dur=0.6)
-    D.circle(seg[-1][0], seg[-1][1], 26, 26, at=t0 + 1.7)
+    if getattr(D, "chart_clean", False):   # 깔끔한 그래프: 마지막 구간만 강조색으로 조금 굵게 + 끝점은 작은 점 (손그림 동그라미 없음)
+        D.stroke(seg, D.red, 5, at=t0 + 1.2, dur=0.6)
+        _d = D._id()
+        D.items.append(f'<div id="{_d}" style="position:absolute;left:{seg[-1][0] - 9:.0f}px;top:{seg[-1][1] - 9:.0f}px;width:18px;height:18px;border-radius:50%;background:{D.red};opacity:0"></div>')
+        D.js.append(f'tl.to("#{_d}",{{opacity:1,duration:0.4}},{t0 + 1.7:.2f});')
+    else:
+        D.stroke(seg, D.red, 8, at=t0 + 1.2, dur=0.6)
+        D.circle(seg[-1][0], seg[-1][1], 26, 26, at=t0 + 1.7)
     _fmt = ",.2f" if str(sc.get("ticker", "")).startswith("^") or rows[-1]["close"] < 1000 else ",.0f"   # 지수·1,000 미만 가격은 소수 둘째 자리까지 (반올림으로 숫자가 대사와 달라지지 않게, 2026-11-14 '163' vs 162.85)
     val_txt = format(rows[-1]['close'], _fmt)
     # 오른쪽 가격 눈금 글자 자리는 비워 둠 (2026-11-14 사용자: 글자 삐져나옴·겹침 주의 — '10,146.32'가 눈금 '9,519'에 겹침)
@@ -319,7 +339,7 @@ def s_versus(D: HDoc, sc: dict, bt: list, dur: float):
     t0 = bt[0][0]
     for x, it, col, at in ((W * 0.28, L, D.ink, t0 + 0.2), (W * 0.72, R, accent_text(D), t0 + 1.4)):
         D.icon(it["icon"], x, 300, 120, col, at=at)
-        D.text(x, 520, it["value"], FT("value"), 210, col, at=at + 0.2, counter=True)
+        D.text(x, 520, it["value"], FT("value"), min(150 if getattr(D, "calm", False) else 210, fit(FT("value"), it["value"], 210, 620).size), col, at=at + 0.2, counter=True)   # 긴 값(12만 2,000주)이 'vs'·화면 끝에 닿지 않게
         D.text(x, 680, it["label"], FT("label"), 40, "#5a5f6a", at=at + 0.4)
     D.text(W / 2, 520, "vs", FT("note"), 90, D.muted, at=t0 + 1.2)
     if len(bt) > 1:
@@ -334,6 +354,8 @@ def s_versus(D: HDoc, sc: dict, bt: list, dur: float):
 def s_chapter(D: HDoc, sc: dict, bt: list, dur: float):
     # 종이 한 장이 오른쪽에서 밀려 들어오며 장 제목 (그래픽 팩 chapter: paper). 'type' 이면 큰 글씨 판.
     from . import graphics
+    if graphics.component(D, "chapter", sc) == "quiet":
+        return graphics.chapter_quiet(D, sc)
     if graphics.component(D, "chapter", sc) == "type":
         return graphics.chapter_type(D, sc)
     i = D._id()
@@ -538,8 +560,12 @@ def s_quote(D: HDoc, sc: dict, bt: list, dur: float):
     D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
     i = D._id()
     D.under.append(i)
-    D.items.append(f'<div id="{i}" style="position:absolute;left:250px;top:200px;width:1420px;height:540px;background:#FBF8F1;'
-                   f'box-shadow:0 14px 34px rgba(0,0,0,.2);transform:rotate(-0.8deg)"></div>')
+    if getattr(D, "calm", False):   # 호기심 채널처럼: 어두운 반투명 판(글자는 밝게) — 밝은 종이 카드에 밝은 글자가 묻혀 보이지 않던 문제 (2026-11-21)
+        D.items.append(f'<div id="{i}" style="position:absolute;left:250px;top:200px;width:1420px;height:540px;background:rgba(12,14,18,.62);'
+                       f'border:1px solid rgba(255,255,255,.14);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.45)"></div>')
+    else:
+        D.items.append(f'<div id="{i}" style="position:absolute;left:250px;top:200px;width:1420px;height:540px;background:#FBF8F1;'
+                       f'box-shadow:0 14px 34px rgba(0,0,0,.2);transform:rotate(-0.8deg)"></div>')
     D.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:30}},{{opacity:1,y:0,duration:0.5}},0.15);')
     if getattr(D, "typeset", None):   # 글꼴 체계(블랙한산스)의 따옴표는 크고 낮게 그려져 첫 줄에 닿음 → 왼쪽 위 여백으로 (2026-11-20 겹침 점검)
         D.text(300, 250, "“", FT("value"), 110, D.red, at=0.4, anchor="lm")
@@ -774,7 +800,18 @@ def s_bars(D: HDoc, sc: dict, bt: list, dur: float):
     bw = 220 if n <= 3 else min(220, step * 0.55)
     stagger = 0.9 if n <= 3 else 0.6
     vsize = 72 if n <= 3 else 60
-    D.rough("line", [330 + (260 if any(L.get("side") == "left" for L in sc.get("layers") or []) else 0), base, 1600, base + 2], D.ink, 3.5, at=t0 + 0.1, dur=0.5)
+    clean = getattr(D, "chart_clean", False)
+    _pal = D.skin.get("palette", {})
+    _bb = (_pal.get("base") or "#F3EFE6").lstrip("#")
+    _dk = sum(int(_bb[i:i + 2], 16) for i in (0, 2, 4)) < 300
+    mute_bar = "#5C616B" if _dk else "#B9BEC6"            # 깔끔한 그래프: 강조 아닌 막대는 차분한 회색, 강조 하나만 강조색
+    if clean:
+        _x0 = 330 + (260 if any(L.get("side") == "left" for L in sc.get("layers") or []) else 0)
+        _ax = D._id()
+        D.items.append(f'<div id="{_ax}" style="position:absolute;left:{_x0}px;top:{base - 1:.0f}px;width:{1600 - _x0}px;height:2px;background:{"#6A6F78" if _dk else "#8A8F98"};transform-origin:left"></div>')
+        D.js.append(f'tl.fromTo("#{_ax}",{{scaleX:0}},{{scaleX:1,duration:0.6,ease:"power2.out"}},{t0 + 0.1:.2f});')
+    else:
+        D.rough("line", [330 + (260 if any(L.get("side") == "left" for L in sc.get("layers") or []) else 0), base, 1600, base + 2], D.ink, 3.5, at=t0 + 0.1, dur=0.5)
     off = 260 if any(L.get("side") == "left" for L in sc.get("layers") or []) else 0   # 왼쪽에 지도·사진이 있으면 막대를 오른쪽으로 (2026-11-14 지도가 막대를 가림)
     if n > 3 and off:
         step = (1550 - (370 + off)) / (n - 1)
@@ -805,18 +842,29 @@ def s_bars(D: HDoc, sc: dict, bt: list, dur: float):
                 if it["t"] in b_["say"]:
                     at = max(tb, motion2.row_time(sc, k_b, b_, tb, db, it["t"]) - 0.1)
                     break
-        c = D.red if k == em else D.ink
+        c = D.red if k == em else (mute_bar if clean else D.ink)
         txt = f'{it.get("text", v)}'
         lsize = fit(FT("box"), it["label"], 44, step - 20 if n > 3 else 400).size
+        vcol = (D.red if k == em else D.ink) if clean else c
+        if clean:   # 빗금 없는 면 막대가 기준선에서 자라 오름 (위쪽 모서리만 살짝 둥글게)
+            _b = D._id()
+            top_, org = (base - h, "bottom") if v >= 0 else (base, "top")
+            rad = "4px 4px 0 0" if v >= 0 else "0 0 4px 4px"
+            D.items.append(f'<div id="{_b}" style="position:absolute;left:{x - bw / 2:.0f}px;top:{top_:.0f}px;width:{bw:.0f}px;height:{h:.0f}px;background:{c};border-radius:{rad};'
+                           f'transform-origin:{org}"></div>')
+            D.js.append(f'tl.fromTo("#{_b}",{{scaleY:0}},{{scaleY:1,duration:0.7,ease:"power2.out"}},{at:.2f});')
         if v >= 0:
-            D.rough("rectangle", [x - bw / 2, base - h, bw, h], c, 2.5, fill=c, at=at, dur=0.6)
-            D.text(x, base - h - 50, txt, FT("value"), vsize, c, at=at + 0.4, counter=True)
+            if not clean:
+                D.rough("rectangle", [x - bw / 2, base - h, bw, h], c, 2.5, fill=c, at=at, dur=0.6)
+            D.text(x, base - h - 50, txt, FT("value"), vsize, vcol, at=at + 0.4, counter=True)
             D.text(x, base + 48, it["label"], FT("box"), lsize, D.ink, at=at)
         else:   # 아래로: 값은 막대 끝 아래, 이름은 기준선 위
-            D.rough("rectangle", [x - bw / 2, base, bw, h], c, 2.5, fill=c, at=at, dur=0.6)
-            D.text(x, base + h + 50, txt, FT("value"), vsize, c, at=at + 0.4, counter=True)
+            if not clean:
+                D.rough("rectangle", [x - bw / 2, base, bw, h], c, 2.5, fill=c, at=at, dur=0.6)
+            D.text(x, base + h + 50, txt, FT("value"), vsize, vcol, at=at + 0.4, counter=True)
             D.text(x, base - 40, it["label"], FT("box"), lsize, D.ink, at=at)
-        D.sfx.append(("pencil", at))
+        if not clean:
+            D.sfx.append(("pencil", at))
     D.text(1640, 270, sc.get("unit", ""), FT("note"), 40, "#5a5f6a", at=t0)
 
 
@@ -889,14 +937,21 @@ def s_outro(D: HDoc, sc: dict, bt: list, dur: float):
         D.video(sc["_clipfile"], dur, "photo", push=0.04)
     i = D._id()
     # 사진 위 글자가 읽히도록: 뒤를 살짝 흐리게 + 가운데 종이 카드
-    D.items.append(f'<div id="{i}" style="position:absolute;inset:0;background:rgba(238,231,218,.35);backdrop-filter:blur(3px)"></div>')
+    D.items.append(f'<div id="{i}" style="position:absolute;inset:0;background:{"rgba(0,0,0,.25)" if getattr(D, "calm", False) else "rgba(238,231,218,.35)"};backdrop-filter:blur(3px)"></div>')
     D.js.append(f'tl.fromTo("#{i}",{{opacity:0}},{{opacity:1,duration:0.8}},0.6);')
     j = D._id()
-    D.items.append(f'<div id="{j}" style="position:absolute;left:{W / 2 - 600:.0f}px;top:360px;width:1200px;height:380px;background:#FBF8F1;'
-                   f'box-shadow:0 18px 40px rgba(0,0,0,.28);transform:rotate(-0.8deg)"></div>')
+    calm = getattr(D, "calm", False)   # 차분한 모드: 어두운 반투명 판·흰 글자·곧은 가는 선 (밝은 종이에 밝은 글자가 묻히던 문제, 2026-11-21)
+    card = ("background:rgba(12,14,18,.62);border:1px solid rgba(255,255,255,.14);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.45)" if calm
+            else "background:#FBF8F1;box-shadow:0 18px 40px rgba(0,0,0,.28);transform:rotate(-0.8deg)")
+    D.items.append(f'<div id="{j}" style="position:absolute;left:{W / 2 - 600:.0f}px;top:360px;width:1200px;height:380px;{card}"></div>')
     D.js.append(f'tl.fromTo("#{j}",{{opacity:0,y:30}},{{opacity:1,y:0,duration:0.6,ease:"power2.out"}},0.7);')
-    D.text(W / 2, 470, sc["title"], FT("title"), 120, D.ink, at=0.9)
-    D.rough("line", [W / 2 - 420, 560, W / 2 + 420, 566], D.red, 6, at=1.4, dur=0.5)
+    D.text(W / 2, 470, sc["title"], FT("title"), min(120, fit(FT("title"), sc["title"], 120, 1080).size), D.ink, at=0.9)
+    if calm:
+        _u = D._id()
+        D.items.append(f'<div id="{_u}" style="position:absolute;left:{W / 2 - 200:.0f}px;top:560px;width:400px;height:3px;background:{D.red};transform-origin:center"></div>')
+        D.js.append(f'tl.fromTo("#{_u}",{{scaleX:0}},{{scaleX:1,duration:0.7,ease:"power2.out"}},1.4);')
+    else:
+        D.rough("line", [W / 2 - 420, 560, W / 2 + 420, 566], D.red, 6, at=1.4, dur=0.5)
     D.text(W / 2, 640, sc.get("sub", ""), FT("note"), 56, D.red, at=1.8)
 
 
@@ -1139,8 +1194,9 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     shutil.copy(hyper.GSAP, a / "gsap.min.js")
     _env_skin = os.environ.get("YTFLOW_SKIN")
     from . import identity   # v15 카테고리 개성: 장 표지 모양·증거판·칠판 (brand 가 있을 때만)
-    identity.prepare(spec, sc)
-    scene_skin = sc.get("skin")
+    if not spec.get("calm"):   # 차분한 모드는 카테고리 모양(대시보드 격자·장 표지 사진·쪽지)을 쓰지 않음
+        identity.prepare(spec, sc)
+    scene_skin = sc.get("skin") or ("calm" if spec.get("calm") else None)   # 차분한 모드: 모든 장면 한 바탕 (2026-11-21 사용자)
     if not scene_skin and spec.get("bg_mode", "situation") == "situation" and spec.get("edit_v10", True):
         from . import edit10, skin as _skin_m   # 상황별 바탕 (manual 05 §0-6): 장면이 하는 일에 맞는 팩
         scene_skin = identity.situation_skin(spec, sc, _skin_m.current()) or edit10.situation_skin(sc, _skin_m.current())
@@ -1171,7 +1227,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
         from . import edit10
         edit10.prepare(spec, sc)
     from . import backdrop   # 장면 목적에 맞는 바탕 (film·grid·spot·tint·photo, manual 05 §0-2)
-    kind = backdrop.auto(sc, bool(spec.get("footage")))
+    kind = "film" if spec.get("calm") else backdrop.auto(sc, bool(spec.get("footage")))   # 차분한 모드: 장면마다 바탕을 바꾸지 않음 (팩의 무늬 없는 바탕 하나)
     chap = int(sc.get("chapter", 0) or 0)
     tag = {"tint": f"_c{chap}", "photo": f"_{sc.get('bg_src', '')}", "illust": f"_a{sc.get('bg_src', '')}",
            "duotone": f"_{sc.get('bg_src', '')}_{''.join(c.strip('#') for c in (sc.get('_duo') or []))}",
@@ -1201,13 +1257,16 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
         sc["_states"] = us_states()
     D.bg_name = bg_name
     D._work = work
+    D.calm = bool(spec.get("calm"))
+    # 깔끔한 그래프 (2026-11-21 사용자: "그래프 스타일도 바꿔주세요 좀 깔끔하게요 브리핑이랑 분석 둘 다요") — 시장 기본: 빗금 없는 면 막대·가는 축·점선 없는 눈금
+    D.chart_clean = spec.get("chart_style", "clean" if spec.get("brand") == "market" else "rough") == "clean"   # 차분하고 깔끔한 모드 (2026-11-21 사용자) — 손그림 강조 없음, 아래 calm_pass 로 움직임·효과음 정리
     from . import graphics
     if not graphics.dispatch(D, sc, bt, dur, RENDER):   # 그래픽 팩이 다른 컴포넌트(그림)를 고르면 그걸로
         if sc["type"] in ("afterline", "spread", "share", "motionboard") and not sc.get("theme"):
             # 설명 무대 바탕 기본값: 시장은 어두운 무대 (2026-11-20 사용자: "설명부분은 배경 공통으로 해주세요 어두운걸로요")
             sc["theme"] = spec.get("explain_theme") or {"market": "dark"}.get(spec.get("brand", ""), "paper")
         RENDER[sc["type"]](D, sc, bt, dur)
-        if sc.get("insight"):   # v36: 사람·매체의 시각은 사실과 다르게 표시
+        if sc.get("insight") and spec.get("opinion_tag", True):   # v36: 사람·매체의 시각은 사실과 다르게 표시 (2026-11-21 사용자가 끄라고 한 편은 opinion_tag: false — 출처 줄로만)
             D.opinion_tag(dark=sc["type"] in ("bite", "versus") or D.skin.get("dark", False))
     if sc["type"] != "newsdesk":   # 요약 장면 위에 '말에 맞춰 생기는 사물' (박자 motion, docs/25 §8)
         from . import motion2
@@ -1225,6 +1284,10 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     if not idx.exists() or idx.read_text(encoding="utf-8") != html:  # 바뀐 장면만 다시 렌더
         idx.write_text(html, encoding="utf-8")
     (work / "hyperframes.json").write_text(json.dumps({"name": work.name}), encoding="utf-8")
+    if D.calm:   # 튀는 등장(back·elastic) → 부드러운 감속, 0에서 커지는 등장 → 거의 제자리에서, 효과음 없음
+        D.js[:] = [re.sub(r'scale:0(\.\d+)?(?=[,}])', 'scale:0.97', re.sub(r'(back|elastic)\.(in)?out\([^)]*\)|(back|elastic)\.(in)?out', 'power2.out', x)) for x in D.js]
+        D.sfx[:] = []
+        D.items[:] = [x.replace("#5a5f6a", "#A3A7AE") for x in D.items]   # 밝은 종이용 회색 글자 → 어두운 바탕에서 읽히는 옅은 회색
     return D
 
 
@@ -1594,5 +1657,7 @@ try:  # 새 연출 문법(아카이브 다큐·지도 여정·키네틱 타이�
     _explain.register()
     from . import noir as _noir          # 누아르 사건 보드 (hubweb 관계망·ledger 두 열 장부, 날짜 눈금) — docs/57
     _noir.register()
+    from . import noircase as _noircase  # 누아르 변형 (noirtitle·noircase·noirsides, 2026-11-21 드러켄밀러 편)
+    _noircase.register()
 except Exception as _e_dir:  # noqa: BLE001
     print(f"[hybrid] 새 연출 장면 등록 건너뜀: {_e_dir}")

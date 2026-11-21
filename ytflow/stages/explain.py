@@ -36,7 +36,8 @@ CARD_INK = "#1E2330"   # 카드 안 그림·글자 (밝은 카드 위라 테마�
 THEMES = {
     "dark": {"#1F242E": "#ECE8E0", "#20242C": "#D9D5CC", "#55595f": "#A8ACB3", "#3A3F48": "#C9CCD2", "#4A4E55": "#B4B8BF",
              "#B8322E": "#E5533F", "#B5302B": "#F0614C", "#C33A31": "#E2483A", "#C2463C": "#E0503F", "#8E2420": "#9E2A22",
-             "#7E1C18": "#8C241C", "rgba(30,24,16,": "rgba(0,0,0,", "rgba(238,233,223,.94)": "rgba(34,36,42,.94)"},
+             "#7E1C18": "#8C241C", "rgba(30,24,16,": "rgba(0,0,0,", "rgba(238,233,223,.94)": "rgba(34,36,42,.94)",
+             "#2E7D4F": "#62C98A"},
 }
 
 
@@ -50,6 +51,10 @@ def _apply_theme(D, theme: str):
         return x
     D.items[:] = [sub(x) for x in D.items]
     D.svg[:] = [sub(x) for x in D.svg]
+    if theme == "dark":   # 장 꼬리표(왼쪽 위)는 스킨 잉크색 그대로라 숯색 무대 위에서 안 보였음 (대비 1.1:1) → 밝게
+        ink = f"color:{getattr(D, 'ink', '')};"
+        for lst in (D.items, getattr(D, "hud", [])):
+            lst[:] = [x.replace(ink, "color:#ECE8E0;", 1) if "left:56px;top:38px" in x else x for x in lst]
     for q in D.rq:
         for k in ("stroke", "fill"):
             if isinstance(q["opts"].get(k), str):
@@ -91,7 +96,8 @@ def _setup(D, sc: dict, title: bool = True):
             if not (a / bg.name).exists():
                 shutil.copy(bg, a / bg.name)
             D.media.insert(0, f'<img src="assets/{bg.name}" style="position:absolute;left:0;top:0;width:{W}px;height:{HH}px">')
-    D.css.append(f"@font-face{{font-family:heavy;src:url('assets/fonts/{HEAVY.name}')}}")
+    if not getattr(D, "typeset", None):   # 글꼴 체계가 있으면 그쪽 'heavy' 를 덮어쓰지 않음 (2026-11-21: 차분한 모드에서 설명 무대만 블랙한산스로 남음)
+        D.css.append(f"@font-face{{font-family:heavy;src:url('assets/fonts/{HEAVY.name}')}}")
     D.svg.insert(0, DEFS)
     D.label(sc.get("label", ""))
     D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
@@ -523,7 +529,7 @@ def _el_html(D, sc, key: str, el: dict) -> tuple[str, float, float]:
         return inner, w, el.get("h", w)
     if k == "text":
         size = el.get("size", 56)
-        col = {"red": "#B5302B", "ink": INK, "muted": MUTED, "navy": NAVY}.get(el.get("color", "ink"), el.get("color", INK))
+        col = {"red": "#B5302B", "ink": INK, "muted": MUTED, "navy": NAVY, "green": "#2E7D4F"}.get(el.get("color", "ink"), el.get("color", INK))
         font = paper.PEN if el.get("pen") else HEAVY
         if el.get("pen") and getattr(D, "typeset", None):   # 글꼴 체계가 펜을 고딕으로 바꾸면 폭도 고딕으로 잼
             font = D.typeset["alias"].get("pen", paper.PEN)

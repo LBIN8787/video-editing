@@ -249,6 +249,20 @@ def chapter_type(D, sc: dict):
     D.rough("line", [560, 560, 560 + f.getlength(sc["title"]), 564], "#FBF8F1", 5, at=1.1, dur=0.4)
 
 
+def chapter_quiet(D, sc: dict):
+    """장 표지 'quiet' (2026-11-21 사용자: "좀 차분하고 깔끔한 스타일") — 바탕 그대로, 작은 번호 + 제목 + 가는 선이 천천히 나타남."""
+    from .hybrid import FT, W, fit, _e
+    i = D._id()
+    f = fit(FT("title"), sc["title"], 60, W - 400)
+    acc = D.red
+    D.items.append(
+        f'<div id="{i}" style="position:absolute;left:0;right:0;top:400px;text-align:center;opacity:0">'
+        f'<div style="font-family:gr,sans;font-size:30px;letter-spacing:.3em;color:{acc};opacity:.85">{_e(str(sc.get("num", "")).zfill(2))}</div>'
+        f'<div style="margin:22px auto 0;width:60px;height:2px;background:{acc};opacity:.7"></div>'
+        f'<div style="margin-top:30px;font-family:sans-x;font-size:{f.size}px;color:{D.ink};white-space:nowrap">{_e(sc["title"])}</div></div>')
+    D.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:14}},{{opacity:1,y:0,duration:1.0,ease:"power2.out"}},0.3);')
+
+
 # ---------------------------------------------------------------- lower third
 def lower_bar(D, name: str, role: str, at: float):
     """이름 자막 'bar': 카드 없이 얇은 강조선 + 굵은 이름 + 작은 설명."""

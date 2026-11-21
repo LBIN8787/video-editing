@@ -113,6 +113,8 @@ class Doc:
 
     def rough(self, kind, args, color, width=3, fill=None, at=None, gap=0.1, dur=0.5, roughness=1.3):
         """rough.js 도형 하나 (선 + 빗금 채우기). 모든 선이 펜으로 그려지듯 나타난다."""
+        if getattr(self, "calm", False) and kind == "ellipse":   # 차분한 모드: 손그림 동그라미 강조 없음 (2026-11-21)
+            return
         k = len(self.rq)
         opts = {"seed": int(self.seed * 97 + k + 1), "roughness": roughness, "bowing": 1.2, "stroke": color, "strokeWidth": width}
         if fill:
@@ -142,6 +144,8 @@ class Doc:
         return svg
 
     def underline(self, x0, x1, y, at=None):
+        if getattr(self, "calm", False):   # 차분한 모드: 밑줄·동그라미·형광펜 없음
+            return
         if self.use_rough:
             return self.rough("line", [x0, y, x1, y + self.rng.uniform(-3, 3)], self.red, 3.5, at=at, dur=0.35, roughness=1.0)
         return self.stroke(wobble([(x0, y), (x1, y + self.rng.uniform(-3, 3))], self.rng, amp=1.6), self.red, 4, at, 0.1, 0.35)
@@ -152,6 +156,8 @@ class Doc:
         return self.stroke(rect_path(x0, y0, x1, y1, self.rng), color, width, at, 0.1, 0.45)
 
     def circle(self, cx, cy, rx, ry, at=None):
+        if getattr(self, "calm", False):   # 차분한 모드: 밑줄·동그라미·형광펜 없음
+            return
         if self.use_rough:
             return self.rough("ellipse", [cx, cy, rx * 2, ry * 2], self.red, 3.5, at=at, dur=0.55, roughness=1.6)
         return self.stroke(ellipse_path(cx, cy, rx, ry, self.rng), self.red, 4, at, 0.1, 0.55)
@@ -167,6 +173,8 @@ class Doc:
         return t
 
     def marker(self, x0, cy, w, h, at=None, index=None):
+        if getattr(self, "calm", False):   # 차분한 모드: 밑줄·동그라미·형광펜 없음
+            return
         """형광펜: 왼쪽에서 오른쪽으로 칠해지는 반투명 노란 띠 (글자 뒤)."""
         i = self._id()
         el = (f'<div id="{i}" style="position:absolute;left:{x0:.0f}px;top:{cy - h / 2:.0f}px;width:{w:.0f}px;height:{h:.0f}px;'
