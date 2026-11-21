@@ -1,6 +1,6 @@
 # 제목·썸네일 — 20261121-market-daily
 
-**제목(기본):** 엔비디아 SEC 회계 조사 보도에 하루 -14%, 월요일 한국 장은? | 11월 21일
+**제목(기본):** 검은 금요일, 엔비디아·브로드컴·삼성전자가 같이 빠진 이유 | 11월 21일
 
 **제목 후보 (A/B 시험용)**
 1. 엔비디아 SEC 회계 조사 보도에 하루 -14%, 월요일 한국 장은? | 11월 21일
@@ -49,48 +49,48 @@
 - 'AI가 끝났나'보다 '누구 몫이 줄었나'(I3)
 
 ## 올릴 썸네일 (자동 선택 — docs/49·55 근거 점수, `--thumb` 로 바꿀 수 있음)
-**A** (대본에서 지정)
+**D** (대본에서 지정)
 
-- A: -1.5점 — 점검 실패(글자 크기·재생 시간 자리) −5 · 핫 키워드 큰 글씨(SEC) +2 (manual/09 §7-1 ①) · 구체적 숫자 +1.5 (docs/49 §3)
-- B: -3.5점 — 점검 실패(글자 크기·재생 시간 자리) −5 · 구체적 숫자 +1.5 (docs/49 §3)
-- C: -3.5점 — 점검 실패(글자 크기·재생 시간 자리) −5 · 구체적 숫자 +1.5 (docs/49 §3)
+- A: 3.5점 — 핫 키워드 큰 글씨(SEC) +2 (manual/09 §7-1 ①) · 구체적 숫자 +1.5 (docs/49 §3)
+- B: 2.0점 — 구체적 숫자 +1.5 (docs/49 §3) · 휴대폰 목록에서도 큰 글씨 +0.5
+- C: 1.5점 — 구체적 숫자 +1.5 (docs/49 §3)
 - D: -3.0점 — 점검 실패(글자 크기·재생 시간 자리) −5 · 구체적 숫자 +1.5 (docs/49 §3) · 당사자 따옴표 발언 +0.5
-- E: -3.5점 — 점검 실패(글자 크기·재생 시간 자리) −5 · 구체적 숫자 +1.5 (docs/49 §3)
-- F: -3.5점 — 점검 실패(글자 크기·재생 시간 자리) −5 · 구체적 숫자 +1.5 (docs/49 §3)
+- E: 1.5점 — 구체적 숫자 +1.5 (docs/49 §3)
+- F: 2.0점 — 구체적 숫자 +1.5 (docs/49 §3) · 휴대폰 목록에서도 큰 글씨 +0.5
 
 ## 점검
 ```json
 {
  "A": {
   "timestamp_overlap": false,
-  "smallest_text_px_at_168w": 3.9,
-  "ok": false
+  "smallest_text_px_at_168w": 7.3,
+  "ok": true
  },
  "B": {
   "timestamp_overlap": false,
-  "smallest_text_px_at_168w": 3.9,
-  "ok": false
+  "smallest_text_px_at_168w": 11.0,
+  "ok": true
  },
  "C": {
   "timestamp_overlap": false,
-  "smallest_text_px_at_168w": 3.9,
-  "ok": false
+  "smallest_text_px_at_168w": 7.3,
+  "ok": true
  },
  "D": {
   "timestamp_overlap": false,
-  "smallest_text_px_at_168w": 3.9,
+  "smallest_text_px_at_168w": 6.8,
   "ok": false,
   "face_area": 0
  },
  "E": {
   "timestamp_overlap": false,
-  "smallest_text_px_at_168w": 3.9,
-  "ok": false
+  "smallest_text_px_at_168w": 7.3,
+  "ok": true
  },
  "F": {
   "timestamp_overlap": false,
-  "smallest_text_px_at_168w": 3.9,
-  "ok": false
+  "smallest_text_px_at_168w": 11.6,
+  "ok": true
  }
 }
 ```

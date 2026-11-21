@@ -288,6 +288,8 @@ def _face_box(im: Image.Image):
         import numpy as np
     except ImportError:
         return None
+    if not hasattr(cv2, "CascadeClassifier"):   # OpenCV 5 에서 빠짐
+        return None
     g = cv2.cvtColor(np.asarray(im.convert("RGB")), cv2.COLOR_RGB2GRAY)
     casc = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
     fs = casc.detectMultiScale(g, 1.1, 5, minSize=(max(40, g.shape[1] // 20),) * 2)
@@ -355,6 +357,31 @@ def _person(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
 
 
 def render(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
+    im, boxes = _render_layout(project, spec, v)
+    tk = v.get("ticker") or (spec.get("package") or {}).get("ticker")
+    if tk:   # 아래 왼쪽 작은 지수 띠 [{"name": "S&P 500", "chg": "-3.70%"}] — 재생 시간 자리(TIMESTAMP_BOX)는 피함.
+        # 일부러 작은 글씨라 휴대폰 글씨 점검(boxes)에는 넣지 않음 (manual/09 §7-1 ⑧, 2026-11-21 사용자)
+        im = im.convert("RGBA")
+        ov = Image.new("RGBA", im.size, (0, 0, 0, 0))
+        d = ImageDraw.Draw(ov)
+        fs = v.get("ticker_size", 30)
+        fn, fc = _font(GOTHIC_X, fs), _font(GOTHIC_X, fs)
+        x0, y0 = 28, H - fs - 40
+        x = x0 + 16
+        parts = []
+        for t in tk:
+            parts.append((t["name"] + " ", (235, 235, 235)))
+            parts.append((t["chg"] + "   ", (255, 90, 80) if t["chg"].startswith("-") else (90, 220, 120)))
+        wtot = sum(fn.getlength(a) for a, _ in parts) - fn.getlength("   ")
+        d.rounded_rectangle([x0, y0 - 8, x0 + 32 + wtot, y0 + fs + 12], 10, fill=(0, 0, 0, 190))
+        for a, col in parts:
+            d.text((x, y0), a, font=fc, fill=col)
+            x += fn.getlength(a)
+        im = Image.alpha_composite(im, ov).convert("RGB")
+    return im, boxes
+
+
+def _render_layout(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
     if v.get("layout") == "person":
         return _person(project, spec, v)
     if v.get("layout") == "punch":
