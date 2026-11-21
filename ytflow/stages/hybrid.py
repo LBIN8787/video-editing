@@ -334,6 +334,8 @@ def s_versus(D: HDoc, sc: dict, bt: list, dur: float):
 def s_chapter(D: HDoc, sc: dict, bt: list, dur: float):
     # 종이 한 장이 오른쪽에서 밀려 들어오며 장 제목 (그래픽 팩 chapter: paper). 'type' 이면 큰 글씨 판.
     from . import graphics
+    if graphics.component(D, "chapter", sc) == "quiet":
+        return graphics.chapter_quiet(D, sc)
     if graphics.component(D, "chapter", sc) == "type":
         return graphics.chapter_type(D, sc)
     i = D._id()
@@ -1139,8 +1141,9 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     shutil.copy(hyper.GSAP, a / "gsap.min.js")
     _env_skin = os.environ.get("YTFLOW_SKIN")
     from . import identity   # v15 카테고리 개성: 장 표지 모양·증거판·칠판 (brand 가 있을 때만)
-    identity.prepare(spec, sc)
-    scene_skin = sc.get("skin")
+    if not spec.get("calm"):   # 차분한 모드는 카테고리 모양(대시보드 격자·장 표지 사진·쪽지)을 쓰지 않음
+        identity.prepare(spec, sc)
+    scene_skin = sc.get("skin") or ("calm" if spec.get("calm") else None)   # 차분한 모드: 모든 장면 한 바탕 (2026-11-21 사용자)
     if not scene_skin and spec.get("bg_mode", "situation") == "situation" and spec.get("edit_v10", True):
         from . import edit10, skin as _skin_m   # 상황별 바탕 (manual 05 §0-6): 장면이 하는 일에 맞는 팩
         scene_skin = identity.situation_skin(spec, sc, _skin_m.current()) or edit10.situation_skin(sc, _skin_m.current())
@@ -1171,7 +1174,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
         from . import edit10
         edit10.prepare(spec, sc)
     from . import backdrop   # 장면 목적에 맞는 바탕 (film·grid·spot·tint·photo, manual 05 §0-2)
-    kind = backdrop.auto(sc, bool(spec.get("footage")))
+    kind = "film" if spec.get("calm") else backdrop.auto(sc, bool(spec.get("footage")))   # 차분한 모드: 장면마다 바탕을 바꾸지 않음 (팩의 무늬 없는 바탕 하나)
     chap = int(sc.get("chapter", 0) or 0)
     tag = {"tint": f"_c{chap}", "photo": f"_{sc.get('bg_src', '')}",
            "duotone": f"_{sc.get('bg_src', '')}_{''.join(c.strip('#') for c in (sc.get('_duo') or []))}",
@@ -1201,6 +1204,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
         sc["_states"] = us_states()
     D.bg_name = bg_name
     D._work = work
+    D.calm = bool(spec.get("calm"))   # 차분하고 깔끔한 모드 (2026-11-21 사용자) — 손그림 강조 없음, 아래 calm_pass 로 움직임·효과음 정리
     from . import graphics
     if not graphics.dispatch(D, sc, bt, dur, RENDER):   # 그래픽 팩이 다른 컴포넌트(그림)를 고르면 그걸로
         if sc["type"] in ("afterline", "spread", "share", "motionboard") and not sc.get("theme"):
@@ -1225,6 +1229,9 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     if not idx.exists() or idx.read_text(encoding="utf-8") != html:  # 바뀐 장면만 다시 렌더
         idx.write_text(html, encoding="utf-8")
     (work / "hyperframes.json").write_text(json.dumps({"name": work.name}), encoding="utf-8")
+    if D.calm:   # 튀는 등장(back·elastic) → 부드러운 감속, 0에서 커지는 등장 → 거의 제자리에서, 효과음 없음
+        D.js[:] = [re.sub(r'scale:0(\.\d+)?(?=[,}])', 'scale:0.97', re.sub(r'(back|elastic)\.(in)?out\([^)]*\)|(back|elastic)\.(in)?out', 'power2.out', x)) for x in D.js]
+        D.sfx[:] = []
     return D
 
 

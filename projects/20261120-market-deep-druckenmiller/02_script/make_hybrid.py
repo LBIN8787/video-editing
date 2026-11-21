@@ -264,7 +264,7 @@ for s in S:
 
 spec = {
  "title": "드러켄밀러의 경고 '벌기보다 안 잃기' — 그가 판 것과 산 것",
- "brand": "market", "zoom": "off", "opinion_tag": False,
+ "brand": "market", "zoom": "off", "opinion_tag": False, "calm": True,
  "core_message": "11월 17일 드러켄밀러는 '돈을 벌기보다 잃지 않으려 한다', 주식은 '거의 없다', 2027년 하반기 경기가 실망스러울 수 있다고 했다. 이는 하락 예언이 아니라 앞이 안 보여 속도를 줄인 것(쉼은 이틀일 수도 여섯 달일 수도). 9월 말 13F 에서는 알파벳·AMD·샌디스크를 다 팔고 TSMC 를 94.5% 줄이는 대신 시게이트(+180%)·금광 3곳·나테라(29.2%)로 칸을 옮겼다 — AI 를 떠난 게 아니라 AI 안에서 칸을 고르는 중.",
  "question": "전설적인 투자자가 '지금은 안 한다'고 했다. 왜, 그리고 실제로는 무엇을 했을까?",
  "logic": ["여는 장면: '거의 없다' + 95→65개 + 원본 발언(안 잃기)", "1) 왜 이 사람인가: 이력", "2) 그가 한 말 네 가지 → 원본 발언(2027) → 비유(안개 낀 길) → 원본 발언(쉼)",
@@ -306,6 +306,10 @@ spec = {
       "why": ["위키미디어 공용에 쓸 수 있는 드러켄밀러 사진이 없음 → 인물 얼굴 대신 이름을 큰 글씨로 (docs/55 §3-4)"]},
      {"id": "B", "name": "인물 — 얼굴 + 알파벳 0", "layout": "person", "image": {"file": "04_assets/footage/raw/druckenmiller.jpg"}, "person": {"name": "스탠리 드러켄밀러", "role": "듀케인 패밀리 오피스"}, "top": "2월 → 11월, 9개월 사이", "lines": ["배짱에서", "쉼으로"], "hl": ["쉼으로"], "credit": "화면: Morgan Stanley 'Hard Lessons' 공식 영상"}]}
 }
+for s_ in S:   # 차분한 모드: 장면마다 다른 바탕(신문지·문서)·장 표지 쪽지 모양을 빼고 한 바탕으로 (2026-11-21 사용자)
+    s_.pop("skin", None)
+    if s_["type"] == "chapter":
+        s_.pop("look", None)
 spec["scenes"] = S
 (P/"02_script/hybrid.json").write_text(json.dumps(spec, ensure_ascii=False, indent=1), encoding="utf-8")
 chars = sum(len(b["say"]) for s in S for b in s["beats"])
