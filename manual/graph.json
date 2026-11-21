@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-21T10:12:05",
- "source_hash": "e21c2e8a2048",
+ "generated": "2026-11-21T10:15:53",
+ "source_hash": "0ce409f75808",
  "audit": {
   "date": "2026-11-20T23:13",
   "counts": {
@@ -566,8 +566,8 @@
   "fixed": []
  },
  "stats": {
-  "manual_version": 79,
-  "versions": 79,
+  "manual_version": 80,
+  "versions": 80,
   "reviews": 38,
   "rejects": 25,
   "passes": 13,
@@ -577,25 +577,25 @@
   "sections": 171,
   "must": 26,
   "auto": 39,
-  "intents": 182,
+  "intents": 183,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 85,
   "terms": 139,
-  "bans": 142,
-  "feedback": 125,
+  "bans": 146,
+  "feedback": 126,
   "topics": 4,
   "episodes": 36,
   "main_situations": 17,
   "tiers": {
-   "principle": 48,
-   "standard": 118,
+   "principle": 50,
+   "standard": 120,
    "style": 16,
    "trial": 6
   },
   "overfit": 7,
-  "principle_bans": 42
+  "principle_bans": 44
  },
  "pending": [],
  "status_labels": {
@@ -1977,11 +1977,11 @@
   },
   {
    "section": "sec:09§2-1",
-   "text": "5. 인물 인사이트 편 (2026-11-20 사용자: \"드라켄밀러 인터뷰 영상같이 여러 인사이트에 관해서 처럼 유명인사들의 인사이트나 인터뷰나 발언 인사이트 등을 다루는게 조회수가 높더라구여\") — 이름 있는 투자 대가·CEO 가 새 인터뷰·연설·주주 서한·공개 발언을 내면(daily_brief ⑥-1, config/ceo_watch.yaml), 그 사람을 주인공으로 따로 한 편: 그가 무엇을 말했나(원본 발언 bite 2~3번, 공식 채널, 한 장면 20초·한",
+   "text": "5. 인물 인사이트 편 (2026-11-20 사용자: \"드라켄밀러 인터뷰 영상같이 여러 인사이트에 관해서 처럼 유명인사들의 인사이트나 인터뷰나 발언 인사이트 등을 다루는게 조회수가 높더라구여\") — 이름 있는 투자 대가·CEO 가 새 인터뷰·연설·주주 서한·공개 발언을 내면(daily_brief ⑥-1, config/ceo_watch.yaml), 그 사람을 주인공으로 따로 한 편: 그가 무엇을 말했나(원본 발언 bite 2~3번, 공식 채널, 길이는 권리에 맞게",
    "themes": [],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:47acfe39",
+   "tier_key": "ban:755ea4d0",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -2286,6 +2286,93 @@
   },
   {
    "section": "sec:09§3-5",
+   "text": "길이 상한은 저작권 위험이 있는 곳에만 둔다. 지켜야 할 것은 숫자가 아니라 세 가지 결과다 — ① 저작권 경고(삭제 요청)를 받지 않는다 ② 채널이 '재사용 콘텐츠'로 수익 창출에서 빠지지 않는다 ③ Content ID 로 그 영상의 수익을 잃지 않는다. 경고 3번이면 채널이 삭제되고 되돌릴 수 없으므로 ①이 가장 무겁다.",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:1ca0ab91",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
+   "section": "sec:09§3-5",
+   "text": "어느 권리든 덧붙이기 (재사용 콘텐츠 판정을 피하는 장치): 원본이 나오는 동안에도 우리 쪽이 무언가를 더한다 — 원문·번역 2단 자막과 핵심어 칠하기, 문서·숫자와 맞대기, 앞뒤 해설(\"누가·언제·어디서 → 원본 → 이 말의 뜻은…\"). 영상의 주인공은 우리 해설이고 원본은 근거다. 원본을 줄줄이 이어 붙여 영상을 채우지 않는다 — 원본만 길게 이어지면 official 이라도 장면을 나누고 사이에 해설을 넣는다.",
+   "themes": [
+    "emphasis"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:66f16519",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§3-5",
+   "text": "남의 해설 영상은 어느 경우에도 쓰지 않는다 (다른 유튜버·해설 채널).",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:196b16fd",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§3-5",
+   "text": "권리가 애매하면(재업로드 채널, 누가 올렸는지 불분명) broadcast 로 다루거나 쓰지 않는다. official 로 올려 적으려면 그 채널이 회사·기관 본인 것인지 확인한 뒤에.",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:1196be3b",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§3-5",
+   "text": "저작권 경고(삭제 요청): 이의 제기는 사람이 정한다(에이전트가 혼자 하지 않음). 그 권리자를 config/rights_blocklist.yaml 의 strike 에 적고 그 권리자의 영상은 다시 쓰지 않는다. 채널에 살아 있는 경고가 하나라도 있으면 그 경고가 풀릴 때까지(유튜브 기준 90일, 저작권 교육 이수) 모든 broadcast 원본을 카드로 바꾼다 — 두 번째 경고는 채널을 크게 위험하게 하므로.",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:bcc1f98d",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
+   "section": "sec:09§3-5",
    "text": "등록(이름·이메일)·로그인·봇 확인이 있는 곳(예: events.q4inc.com 웹캐스트, YouTube)은 클라우드가 지어낸 정보로 등록하거나 우회하지 않는다 → 주소·구간·쓸 문장을 inbox/research/source-backlog.md 에 남긴다.",
    "themes": [],
    "absolute": false,
@@ -2317,23 +2404,6 @@
    "tier_note": "",
    "tier_fixed": false,
    "tier_label": "영구 원칙"
-  },
-  {
-   "section": "sec:09§3-5",
-   "text": "필요할 때만 PC 에서 받기 (2026-11-20 사용자: \"클라우드가 아니라 다운로드가 필요할 때만 뭐 따로 다운로드 하던지\", docs/50): 피클이 공식 영상 주소·구간을 찾고(inbox/requests/) → 클라우드가 clip-order 로 주문서와 inbox/pc-tasks/ 할 일을 올리고 → PC 가 clip-fetch(본인 브라우저 로그인, 그 구간만) → hybrid 로 원본판을 렌더해 올린다. 클라우드에 계정 로그인(쿠키)은 두지 않는다. ",
-   "themes": [],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:2a979e62",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": true,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
   },
   {
    "section": "sec:09§5-1",
@@ -2762,7 +2832,7 @@
    "tier_label": "영구 원칙"
   },
   {
-   "section": "sec:09§h363",
+   "section": "sec:09§h376",
    "text": "ElevenLabs 를 쓸 수 없는 날은 edge 초안으로 만들되 올리지 않는다 (v43, §2-1 — 공개본은 Teo). 크레딧이 모자라면 그날 편을 미루거나 voice-import 로 Teo 테이크를 만든다.",
    "themes": [],
    "absolute": false,
@@ -3542,7 +3612,7 @@
    "key": "09",
    "file": "manual/09-market-daily.md",
    "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13 · v36 인사이트·영상 소스 · v42 기술 분석·CEO 소식 2026-11-17)",
-   "lines": 382,
+   "lines": 395,
    "versions": [
     19,
     24,
@@ -5481,7 +5551,7 @@
    "label": "매체·인물의 인터뷰·방송을 영상 소스로",
    "title": "3-5. 매체·인물의 인터뷰·방송을 영상 소스로 (v36, 2026-11-17 사용자 요청)",
    "line": 207,
-   "end": 229,
+   "end": 242,
    "tag_version": 36,
    "versions": [
     36
@@ -5489,6 +5559,7 @@
    "last_version": 36,
    "terms": [
     "term:bite",
+    "term:footage",
     "term:tech-split-screen"
    ]
   },
@@ -5500,8 +5571,8 @@
    "level": 2,
    "label": "대본 — 브리핑 (10~12분, 20~26장면)",
    "title": "4. 대본 — 브리핑 (10~12분, 20~26장면)",
-   "line": 230,
-   "end": 247,
+   "line": 243,
+   "end": 260,
    "tag_version": null,
    "versions": [
     34
@@ -5531,8 +5602,8 @@
    "level": 2,
    "label": "대본 — 심층 (12분~, 길이는 자료·인사이트의 양이 정함)",
    "title": "5. 대본 — 심층 (12분~, 길이는 자료·인사이트의 양이 정함)",
-   "line": 248,
-   "end": 253,
+   "line": 261,
+   "end": 266,
    "tag_version": null,
    "versions": [
     26,
@@ -5553,8 +5624,8 @@
    "level": 3,
    "label": "나열하지 말고 풀어서 — 설명은 움직이는 장면으로",
    "title": "5-1. 나열하지 말고 풀어서 — 설명은 움직이는 장면으로 (v63, 2026-11-20)",
-   "line": 254,
-   "end": 281,
+   "line": 267,
+   "end": 294,
    "tag_version": 63,
    "versions": [
     63
@@ -5584,8 +5655,8 @@
    "level": 2,
    "label": "화면 문법 (시장 카테고리 개성, `05 §0-7`)",
    "title": "6. 화면 문법 (시장 카테고리 개성, `05 §0-7`)",
-   "line": 282,
-   "end": 295,
+   "line": 295,
+   "end": 308,
    "tag_version": null,
    "versions": [
     27,
@@ -5617,8 +5688,8 @@
    "level": 2,
    "label": "제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
    "title": "7. 제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
-   "line": 296,
-   "end": 300,
+   "line": 309,
+   "end": 313,
    "tag_version": null,
    "versions": [
     27
@@ -5636,8 +5707,8 @@
    "level": 3,
    "label": "썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
    "title": "7-1. 썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
-   "line": 301,
-   "end": 316,
+   "line": 314,
+   "end": 329,
    "tag_version": null,
    "versions": [
     51
@@ -5655,8 +5726,8 @@
    "level": 2,
    "label": "렌더 전 점검",
    "title": "8. 렌더 전 점검",
-   "line": 317,
-   "end": 319,
+   "line": 330,
+   "end": 332,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5669,8 +5740,8 @@
    "level": 2,
    "label": "렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
    "title": "9. 렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
-   "line": 320,
-   "end": 327,
+   "line": 333,
+   "end": 340,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5683,8 +5754,8 @@
    "level": 2,
    "label": "업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
    "title": "10. 업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
-   "line": 328,
-   "end": 340,
+   "line": 341,
+   "end": 353,
    "tag_version": null,
    "versions": [
     34
@@ -5699,8 +5770,8 @@
    "level": 2,
    "label": "기록·되돌아보기",
    "title": "11. 기록·되돌아보기",
-   "line": 341,
-   "end": 344,
+   "line": 354,
+   "end": 357,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5713,8 +5784,8 @@
    "level": 2,
    "label": "예외 대응",
    "title": "12. 예외 대응",
-   "line": 345,
-   "end": 354,
+   "line": 358,
+   "end": 367,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5727,8 +5798,8 @@
    "level": 2,
    "label": "법·정책",
    "title": "13. 법·정책",
-   "line": 355,
-   "end": 362,
+   "line": 368,
+   "end": 375,
    "tag_version": null,
    "versions": [
     34
@@ -5736,43 +5807,43 @@
    "last_version": 34
   },
   {
-   "id": "sec:09§h363",
+   "id": "sec:09§h376",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h363",
+   "num": "h376",
    "level": 2,
    "label": "목소리 (2026-11-13 결정)",
    "title": "목소리 (2026-11-13 결정)",
-   "line": 363,
-   "end": 370,
+   "line": 376,
+   "end": 383,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h371",
+   "id": "sec:09§h384",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h371",
+   "num": "h384",
    "level": 2,
    "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
    "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
-   "line": 371,
-   "end": 376,
+   "line": 384,
+   "end": 389,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h377",
+   "id": "sec:09§h390",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h377",
+   "num": "h390",
    "level": 2,
    "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
    "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
-   "line": 377,
-   "end": 382,
+   "line": 390,
+   "end": 395,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -11928,6 +11999,16 @@
      "ytflow/stages/upload.py"
     ]
    }
+  },
+  {
+   "id": "ver:80",
+   "kind": "version",
+   "v": 80,
+   "date": "2026-11-21",
+   "label": "v80",
+   "summary": "원본 영상 인용을 출처별로: 공공 저작물·본인/회사 공식은 길이 제한 없음, 방송사·언론사는 한 장면 20초·한 편 60초 안팎 유지, 어느 경우든 해설 덧붙이기. 신고·경고 권리자는 config/rights_blocklist.yaml 로 막고 살아 있는 경고 동안 방송사 원본은 카드로 (2026-11-21 사용자)",
+   "applied": [],
+   "themes": []
   },
   {
    "id": "rev:1",
@@ -23396,6 +23477,56 @@
    "annotated": false
   },
   {
+   "id": "intent:cb8ac7fa",
+   "kind": "intent",
+   "quote": "수익창출에 문제가 없다면 우리 인용규칙을 빼도 됩니다 / 네 매뉴얼 바꾸세요 경고먹거나 채널이 삭제되지 않도록 주의해주새여",
+   "label": "수익창출에 문제가 없다면 우리 인용규칙을 빼도 됩니다 / 네 매뉴얼 바꾸세요 경고먹거나 채널이 삭제되지 않도",
+   "versions": [
+    80
+   ],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:126",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:09§3-5",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "수익창출에 문제가 없다면 우리 인용규칙을 빼도 됩니다",
+    "경고먹거나 채널이 삭제되지 않도록 주의해주새여"
+   ],
+   "member_ids": [
+    "intent:cb8ac7fa",
+    "intent:9b6a4365",
+    "intent:8690859d"
+   ],
+   "themes": [],
+   "ann_key": "intent:cb8ac7fa",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:80",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§3-5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:dfa66488",
    "kind": "intent",
    "quote": "매일 시사: 10분 이상 / 호기심 표지: 표지도 삽화로 / 쇼츠채널은 일단은 보류입니다. 어... 훅쇼츠가 뭔지는 모르겠는데 일단은 이거 관련 영상은 아직 안만들거같아요 나중에 만들면 다시 재개할게요",
@@ -24325,6 +24456,7 @@
     "sec:05§0-3",
     "sec:05§2",
     "sec:08§6",
+    "sec:09§3-5",
     "sec:10§h37",
     "sec:10§h120",
     "sec:10§3",
@@ -29684,7 +29816,7 @@
    "mentioned_in": [
     "sec:04§0-4",
     "sec:09§6",
-    "sec:09§h377",
+    "sec:09§h390",
     "sec:11§2-4",
     "sec:README§2-5",
     "sec:README§3-1",
@@ -30007,7 +30139,7 @@
     "sec:06§G6",
     "sec:08§4",
     "sec:09§6",
-    "sec:09§h377",
+    "sec:09§h390",
     "sec:10§4",
     "sec:README§0",
     "sec:README§2",
@@ -33415,6 +33547,32 @@
    "scope": "",
    "intent": "intent:a76c24e8",
    "tier_key": "fb:a76c24e8",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:126",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "수익창출에 문제가 없다면 우리 인용규칙을 빼도 됩니다 / 네 매뉴얼 바꾸세요 경고먹거나 채널이 삭제되지 않도록 주의해주새여",
+   "label": "수익창출에 문제가 없다면 우리 인용규칙을 빼도 됩니다 / 네 매뉴얼 바꾸세요 경고먹거나 채널이 삭제되지 않도",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "intent": "intent:cb8ac7fa",
+   "tier_key": "fb:cb8ac7fa",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -54739,17 +54897,17 @@
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h363",
+   "t": "sec:09§h376",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h371",
+   "t": "sec:09§h384",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h377",
+   "t": "sec:09§h390",
    "kind": "contains"
   },
   {
@@ -60160,6 +60318,21 @@
    "kind": "quoted_in"
   },
   {
+   "s": "intent:cb8ac7fa",
+   "t": "ver:80",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:cb8ac7fa",
+   "t": "fb:126",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:cb8ac7fa",
+   "t": "sec:09§3-5",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:d66e0681",
    "t": "ver:36",
    "kind": "interpreted_in"
@@ -65417,6 +65590,11 @@
   {
    "s": "fb:125",
    "t": "intent:a76c24e8",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:126",
+   "t": "intent:cb8ac7fa",
    "kind": "quoted_as"
   }
  ]
