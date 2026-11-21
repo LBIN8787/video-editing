@@ -30,6 +30,10 @@ def _beats(project: Project) -> list[tuple[str, str]]:
 def run(project: Project, parts: list[str], beats: list[tuple[str, str]] | None = None) -> list[str]:
     beats = beats or _beats(project)
     vdir = project.dir("voice")
+    # hybrid.voice() 가 대사 기록을 '대사 + #voice=<id>' 로 비교함 — 꼬리표가 없으면 렌더가 이 녹음을 버리고 초안 목소리로 다시 만든다 (2026-11-21 발견)
+    from .hybrid import _channel_tts
+    vid = ((_channel_tts(project) or {}).get("elevenlabs") or {}).get("voice_id", "")
+    tag = f"\n#voice={vid}" if vid else ""
     work = vdir / "el"
     work.mkdir(parents=True, exist_ok=True)
     whole = work / "whole.wav"
@@ -69,10 +73,13 @@ def run(project: Project, parts: list[str], beats: list[tuple[str, str]] | None 
     for k in range(len(beats) - 1):
         r = min(max(s2r(ends[k]) - 1, 0), len(owner) - 1)
         i = owner[r]                                  # 이 박자의 마지막 단어
-        lo, hi = max(last + 1, i - 2), min(len(W) - 2, i + 2)
+        # 2026-11-21: 앞뒤 2단어 안에서 '가장 긴 쉼'을 고르면, 다음 박자가 짧은 문장("말은 엇갈립니다.")으로 시작할 때
+        # 그 문장 뒤의 쉼을 골라 다음 박자의 첫 문장이 앞 박자 끝에 붙었다 → 자막이 소리보다 2~3초 늦음 (사용자: "자막싱크가 살짝 밀리는 경우").
+        # 이제는 이 박자의 마지막 단어 바로 뒤(또는 한 단어 앞)만 본다 — 다음 박자의 단어를 넘어가지 않음.
+        lo, hi = max(last + 1, i - 1), min(len(W) - 2, i)
         if lo > hi:
             lo = hi = min(max(last + 1, i), len(W) - 2)
-        best = max(range(lo, hi + 1), key=lambda j: (W[j + 1][0] - W[j][1]) - 0.05 * abs(j - i))  # 가장 긴 쉼
+        best = max(range(lo, hi + 1), key=lambda j: (W[j + 1][0] - W[j][1]) - 0.3 * abs(j - i))  # 마지막 단어 뒤의 쉼을 먼저
         last = best
         cuts.append((W[best][1] + W[best + 1][0]) / 2)
     dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(whole)],
@@ -94,7 +101,7 @@ def run(project: Project, parts: list[str], beats: list[tuple[str, str]] | None 
                              "silenceremove=start_periods=1:start_threshold=-38dB:start_silence=0.05,areverse,"
                              "silenceremove=start_periods=1:start_threshold=-38dB:start_silence=0.05,areverse",
                              "-ar", "48000", "-ac", "2", str(wav)], check=True)
-        (vdir / f"hb_{key}.txt").write_text(say, encoding="utf-8")   # 대사 표시: 렌더가 이 음성을 대사에 맞는 것으로 알고 그대로 씀
+        (vdir / f"hb_{key}.txt").write_text(say + tag, encoding="utf-8")   # 대사 표시(+목소리 꼬리표): 렌더가 이 음성을 대사에 맞는 것으로 알고 그대로 씀
         out.append(f"{key}\t{a:7.2f}–{b:7.2f}\t{say[:30]}")
     (work / "cuts.txt").write_text("\n".join(out) + "\n", encoding="utf-8")
     print(f"[voice-import] {len(beats)}박자로 자름 → {vdir} (자른 위치: {work / 'cuts.txt'})")

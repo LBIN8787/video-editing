@@ -103,6 +103,19 @@ JS = r"""
     it.bottomBox = Math.max(...boxes.filter(bx => bx.el.contains(it._el)).map(bx => bx.y + bx.h), it.y + it.h);
     delete it._el;
   }
+  // 카드·그림끼리 겹침: 서로 품지 않는 두 상자가 작은 쪽의 8% 넘게 겹치면 (2026-11-21 사용자: "도형끼리 겹치거나")
+  for (let a = 0; a < boxes.length; a++) for (let b = a + 1; b < boxes.length; b++) {
+    const A = boxes[a], B = boxes[b];
+    if (A.el.contains(B.el) || B.el.contains(A.el)) continue;
+    if (A.el.tagName === 'VIDEO' || B.el.tagName === 'VIDEO' || A.el.tagName === 'IMG' && A.w > 1200 || B.el.tagName === 'IMG' && B.w > 1200) continue;   // 바탕 영상·큰 사진 위 카드는 정상
+    const ix = Math.max(0, Math.min(A.x + A.w, B.x + B.w) - Math.max(A.x, B.x));
+    const iy = Math.max(0, Math.min(A.y + A.h, B.y + B.h) - Math.max(A.y, B.y));
+    const small = Math.min(A.w * A.h, B.w * B.h);
+    if (small && ix * iy / small >= 0.08) {
+      const nm = (e) => (e.innerText || e.getAttribute('src') || e.id || e.tagName).replace(/\s+/g, ' ').trim().slice(0, 20);
+      out.push({text: nm(A.el) + ' ↔ ' + nm(B.el), x: 0, y: 0, w: 1, h: 1, label: false, boxpair: true, cover: [], bottomBox: 0});
+    }
+  }
   out.push(...boxes.filter(bx => !bx.el.innerText || !bx.el.innerText.trim()).map(bx => ({text: '[' + (bx.el.getAttribute('src') || bx.el.tagName) .split('/').pop().slice(0, 20) + ']',
            x: bx.x, y: bx.y, w: bx.w, h: bx.h, label: false, box: true, cover: [], bottomBox: bx.y + bx.h})));
   return out;
@@ -145,7 +158,22 @@ def scan(project: str, only: set[int] | None = None) -> dict:
             probs = []
             times = [b0 + bd - 0.05 for b0, bd in x.get("beats", [])] or [x["dur"] - 0.1]
             for t in times:
-                items = [i for i in pg.evaluate(JS, t) if not i["label"]]
+                allit = pg.evaluate(JS, t)
+                for i in allit:
+                    if i.get("boxpair"):
+                        probs.append({"t": round(t, 1), "kind": "그래픽끼리 겹침", "text": i["text"]})
+                labels = [i for i in allit if i["label"] and not i.get("boxpair") and not i.get("box")]
+                items = [i for i in allit if not i["label"] and not i.get("boxpair")]
+                for L in labels:   # ⑤ 위쪽 출처 줄·장 표시끼리 (2026-11-21: 긴 출처 줄이 장 표시를 덮음 — 예전에는 위쪽 50px 글자를 아예 안 봤음)
+                    for M in labels:
+                        if L is M or L["x"] > M["x"]:
+                            continue
+                        ix = max(0, min(L["x"] + L["w"], M["x"] + M["w"]) - max(L["x"], M["x"]))
+                        iy = max(0, min(L["y"] + L["h"], M["y"] + M["h"]) - max(L["y"], M["y"]))
+                        if ix * iy >= 60:
+                            probs.append({"t": round(t, 1), "kind": "글자끼리 겹침", "text": f'{L["text"]} ↔ {M["text"]}'})
+                    if L["x"] < -2 or L["x"] + L["w"] > 1922:
+                        probs.append({"t": round(t, 1), "kind": "화면 밖 잘림", "text": L["text"]})
                 for i in items:   # ② 자막 자리 (글자를 감싼 카드의 아래쪽까지)
                     if i.get("bottomBox", i["y"] + i["h"]) > top + 4:
                         probs.append({"t": round(t, 1), "kind": "자막과 겹침", "text": i["text"], "bottom": round(i.get("bottomBox", i["y"] + i["h"]))})
