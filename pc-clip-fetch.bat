@@ -6,7 +6,7 @@ REM  다른 영상: 이 파일을 터미널에서  pc-clip-fetch.bat <프로젝�
 REM  클라우드는 유튜브 봇 확인 때문에 못 받으므로 PC 가 대신 받습니다 (docs/50-clip-lane.md, 우회하지 않음)
 REM ============================================================================
 chcp 65001 >nul
-setlocal
+setlocal EnableDelayedExpansion
 cd /d "%~dp0"
 
 set "PROJ=%~1"
