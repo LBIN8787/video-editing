@@ -117,7 +117,7 @@ sources:
                     "KBS", "MBC", "SBS", "JTBC", "YTN", "연합뉴스", "한국경제TV", "매일경제TV", "서울경제TV"]
 
 clips:
-  format: "bv*[height<=1080]+ba/b[height<=1080]/b"
+  format: "b[ext=mp4][height<=720]/bv*[height<=1080]+ba/b[height<=1080]/b"   # 2026-11-21: 영상·음성 따로(DASH) 구간 받기가 ffmpeg 에서 멈춤 → 한 파일 720p 먼저
   cookies_from_browser: ""    # YouTube 봇 확인이 뜨면 "chrome" / "edge" / "firefox"
 
 # 사람이 확인해야 다음 단계로 넘어가는 지점.

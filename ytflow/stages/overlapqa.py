@@ -111,7 +111,7 @@ JS = r"""
     const ix = Math.max(0, Math.min(A.x + A.w, B.x + B.w) - Math.max(A.x, B.x));
     const iy = Math.max(0, Math.min(A.y + A.h, B.y + B.h) - Math.max(A.y, B.y));
     const small = Math.min(A.w * A.h, B.w * B.h);
-    if (small && ix * iy / small >= 0.08) {
+    if (small && ix * iy / small >= 0.08 && ix * iy / small < 0.95) {   // 작은 쪽이 큰 쪽 안에 통째로 얹힌 것(형광펜·사진 위 제목 카드)은 일부러 겹친 것
       const nm = (e) => (e.innerText || e.getAttribute('src') || e.id || e.tagName).replace(/\s+/g, ' ').trim().slice(0, 20);
       out.push({text: nm(A.el) + ' ↔ ' + nm(B.el), x: 0, y: 0, w: 1, h: 1, label: false, boxpair: true, cover: [], bottomBox: 0});
     }
