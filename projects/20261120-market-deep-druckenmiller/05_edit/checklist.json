@@ -1,7 +1,7 @@
 {
  "project": "20261120-market-deep-druckenmiller",
  "manual_version": "77",
- "checked": "2026-11-21T03:39:22",
+ "checked": "2026-11-21T04:04:45",
  "pass": false,
  "rows": [
   {
@@ -569,14 +569,14 @@
    "level": "MUST",
    "item": "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)",
    "ok": false,
-   "detail": "{'1': ['lint/gsap_css_transform_conflict: \"#mo1_yrs_bar\" has CSS `transform: scaleY(0)` and a GSAP tween animates scaleY. GSAP will overwrite the full CSS transfo', 'lint/gsap_css_transform_conflict: \"#mo1_pos_bar\" has CSS `transform: scaleY(0)` and a GSAP tween animates scaleY. GSAP will overwrite the full CSS transfo'], '24': ['layout/text_box_overflow: Text extends outside its nearest visual/container box.', 'layout/text_box_overflow: Text extends outside its nearest visual/container box.'], '25': ['lint/gsap_css_transform_conflict: \"#e4\" has CSS `transform: scaleX(0)` and a GSAP tween animates scaleX. GSAP will overwrite the full CSS transform, disca', 'lint/gsap_css_transform_conflict: \"#e5\" has CSS `transform: scaleY(0)` and a GSAP tween animates scaleY. GSAP will overwrite the full CSS transform, disca', 'lint/gsap_css_transform_conflict: \"#e8\" has CSS `transform: scaleY(0)` and a GSAP tween animates scaleY. GSAP will overwrite the full CSS transform, disca', 'lint/gsap_css_transform_conflict: \"#e11\" has CSS `transform: scaleY(0)` and a GSAP tween animates scaleY. GSAP will overwrite the full CSS transform, disc', 'lint/gsap_css_transform_conflict: \"#e14\" has CSS `transform: scaleY(0)` and a GSAP tween animates scaleY. GSAP will overwrite the full CSS transform, disc', 'lint/gsap_css_transform_conflict: \"#e17\" has CSS `transform: scaleY(0)` and a GSAP tween animates scaleY. GSAP will overwrite the full CSS transform, disc'], '28': ['lint/gsap_css_transform_conflict: \"#mo28_lag_bar\" has CSS `transform: scaleY(0)` and a GSAP tween animates scaleY. GSAP will overwrite the full CSS transf'], '35': ['lint/gsap_css_transform_conflict: \"#e1u\" has CSS `transform: scaleX(0)` and a GSAP tween animates scaleX. GSAP will overwrite the full CSS transform, disc'], '36': ['lint/gsap_non_transform_motion: GSAP tween on \"#e3dot\" uses motion that snaps to integer device pixels: left. Layout and text-reflow properties snap dur'], '37': ['lint/gsap_css_transform_conflict: \"#e3v\" has CSS `transform: scaleY(0)` and a GSAP tween animates scaleY. GSAP will overwrite the full CSS transform, disc', 'lint/gsap_css_transform_conflict: \"#e3r0\" has CSS `transform: scaleX(0)` and a GSAP tween animates scaleX. GSAP will overwrite the full CSS transform, dis', 'lint/gsap_css_transform_conflict: \"#e3r1\" has CSS `transform: scaleX(0)` and a GSAP tween animates scaleX. GSAP will overwrite the full CSS transform, dis', 'lint/gsap_css_transform_conflict: \"#e3i0_0x\" has CSS `transform: scaleX(0)` and a GSAP tween animates scaleX. GSAP will overwrite the full CSS transform, ', 'lint/gsap_css_transform_conflict: \"#e3i0_1x\" has CSS `transform: scaleX(0)` and a GSAP tween animates scaleX. GSAP will overwrite the full CSS transform, ', 'lint/gsap_css_transform_conflict: \"#e3i0_2x\" has CSS `transform: scaleX(0)` and a GSAP tween animates scaleX. GSAP will overwrite the full CSS transform, '], '41': ['lint/gsap_css_transform_conflict: \"#e4\" has CSS `transform: scaleX(0)` and a GSAP tween animates scaleX. GSAP will overwrite the full CSS transform, disca', 'lint/gsap_css_transform_conflict: \"#e5\" has CSS `transform: scaleY(0)` and a GSAP tween animates scaleY. GSAP will overwrite the full CSS transform, disca', 'lint/gsap_css_transform_conflict: \"#e8\" has CSS `transform: scaleY(0)` and a GSAP tween animates scaleY. GSAP will overwrite the full CSS transform, disca', 'lint/gsap_css_transform_conflict: \"#e11\" has CSS `transform: scaleY(0)` and a GSAP tween animates scaleY. GSAP will overwrite the full CSS transform, disc', 'lint/gsap_css_transform_conflict: \"#e14\" has CSS `transform: scaleY(0)` and a GSAP tween animates scaleY. GSAP will overwrite the full CSS transform, disc', 'lint/gsap_css_transform_conflict: \"#e17\" has CSS `transform: scaleY(0)` and a GSAP tween animates scaleY. GSAP will overwrite the full CSS transform, disc'], '48': ['contrast/contrast_aa_failure: Contrast is 1.01:1; WCAG AA requires 3:1.', 'contrast/contrast_aa_failure: Contrast is 1.27:1; WCAG AA requires 3:1.']}"
+   "detail": "{'35': ['runtime/http_error: 404 loading fonts/NanumGothic-ExtraBold.ttf', 'runtime/request_failed: Failed to load fonts/NanumGothic-ExtraBold.ttf: net::ERR_ABORTED'], '36': ['runtime/http_error: 404 loading fonts/NanumGothic-ExtraBold.ttf', 'runtime/request_failed: Failed to load fonts/NanumGothic-ExtraBold.ttf: net::ERR_ABORTED']}"
   },
   {
    "gate": "G6",
    "level": "MUST",
    "item": "화면 글자 겹침 없음 — 글자끼리·카드에 가려짐·카드 밖 넘침·자막 자리 (overlap_qa)",
-   "ok": false,
-   "detail": "['#24 화면 밖 잘림: 12만 2,000주', '#24 화면 밖 잘림: 34만 1,790주', '#24 글자끼리 겹침: 12만 2,000주 ↔ 34만 1,790주', '#24 글자끼리 겹침: 12만 2,000주 ↔ vs', '#24 글자끼리 겹침: 34만 1,790주 ↔ vs', '#42 글자끼리 겹침: 실망 가능 ↔ vs']"
+   "ok": true,
+   "detail": "[]"
   },
   {
    "gate": "G6",
