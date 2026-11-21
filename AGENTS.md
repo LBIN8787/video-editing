@@ -33,7 +33,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **기술 분석·미래 전망 + CEO 소식 (v42, 2026-11-17)** — 시장 채널이 기술이 어디로 가는지도 다룸(로드맵·학회·리서치 → 누가 이기나·시간표·틀리는 경우), CEO 의 공개 발언·공식 행동을 1차 출처로 모음(`config/ceo_watch.yaml`, 팩트시트 `## CEO 소식`) | `manual/09-market-daily.md` §2-2·§3-4-2 |
 | **뉴스레터 소재 (2026-11-15)** — 구독한 무료 뉴스레터를 매일 모아 채널별 소재 목록(제목·링크·분류만). SAVE 와 같은 '단서' 자리: 문장을 옮기지 않고 숫자·발언은 1차 출처로 | `docs/36-newsletters.md`, `manual/09-market-daily.md` §3-0-1, `inbox/newsletters/`, `python -m ytflow newsletters` |
 | **유튜브 올리기·관리 자동화** — 업로드·설명란(더보기)·태그·카테고리·예약 공개·썸네일·자막·재생목록 (공식 API, GitHub Actions) | `docs/24-youtube-publish.md`, `python -m ytflow yt-publish <프로젝트>`, `scripts/youtube_auth.py`, `.github/workflows/youtube-publish.yml` |
-| **주식 채널 개설 계획** — 이름 후보(겹침 확인)·1일 1영상 운영(처음 계획 — 지금 운영은 `manual/09-market-daily.md`: 아침 가벼운 브리핑 7~10분 + 원본 발언이 있을 때 따로 심층, 토 주간 종합·일 한 주 점검) | `docs/23-stock-channel-plan.md`, `channels/ch-market-daily/channel.yaml` |
+| **주식 채널 개설 계획** — 이름 후보(겹침 확인)·1일 1영상 운영(처음 계획 — 지금 운영은 `manual/09-market-daily.md`: 아침 브리핑 7~10분 + 매일 따로 심층(원본 발언은 붙일 수 있으면), 토요일은 금요일 장·일요일 한 주 종합) | `docs/23-stock-channel-plan.md`, `channels/ch-market-daily/channel.yaml` |
 | **어닝콜 해부·연결과 의미 (v18)** — 숫자·약속 → 시장의 걱정과 경영진의 답(원문+번역) → 무엇으로 이어지나(해석) → 남은 숙제 | `manual/03-market.md` §0-1, `ytflow/stages/earnings.py` |
 | **호기심 채널: 설명보다 호기심 먼저 (v18)** — 첫 문장부터 훅(답은 숨김, 인트로 없음 v24) → 이야기, 제목은 훅에서 | `manual/04-curiosity.md` §0, `topic_brief.hook` |
 | **원본 발언 컷편집 (v20)** — 어닝콜·기자회견 긴 원본에서 대본과 맞는 문장만 단어 단위로 잘라 그 사람의 목소리로 (`bite` 장면, 원문·번역 2단) | `styles/source-cut/STYLE.md`, `skills/edit-style-source-cut`, `python -m ytflow cut <프로젝트>`, `ytflow/stages/cutedit.py` |
@@ -127,7 +127,7 @@ python -m ytflow manual-audit [--fixed "고친 것"]                   # 매뉴�
 python -m ytflow manual-graph | manual-ui [--port 8770]           # 매뉴얼 지식 그래프(manual/graph.json) / 그래프 보기·매뉴얼 고치기 도구
 python -m ytflow sync-qa <프로젝트>                               # 완성본 자막·목소리·화면 싱크를 받아쓰기로 측정 → 05_edit/sync_qa.json
 python -m ytflow voice-import <프로젝트> part1.mp3 [...]          # ElevenLabs 긴 음성을 대본 박자별로 자르기 (키 없이)
-python -m ytflow upload <프로젝트> [--archive]                    # 완성 영상 → GitHub Release (키 불필요), --to drive 는 Drive (docs/09-storage.md)
+python -m ytflow upload <프로젝트> [--archive]                    # 완성 영상 → Google Drive (기본), --to github 는 공개해도 되는 것만 GitHub Release (docs/09-storage.md)
 python -m ytflow stage <프로젝트> <단계>                          # 단계 하나
 python -m ytflow rebuild <프로젝트>                               # 소스 넣은 뒤 재생성
 python -m ytflow validate <프로젝트>                              # 대본 점검 (직접 쓴 뒤 필수)
