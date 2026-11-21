@@ -96,7 +96,8 @@ def _setup(D, sc: dict, title: bool = True):
             if not (a / bg.name).exists():
                 shutil.copy(bg, a / bg.name)
             D.media.insert(0, f'<img src="assets/{bg.name}" style="position:absolute;left:0;top:0;width:{W}px;height:{HH}px">')
-    D.css.append(f"@font-face{{font-family:heavy;src:url('assets/fonts/{HEAVY.name}')}}")
+    if not getattr(D, "typeset", None):   # 글꼴 체계가 있으면 그쪽 'heavy' 를 덮어쓰지 않음 (2026-11-21: 차분한 모드에서 설명 무대만 블랙한산스로 남음)
+        D.css.append(f"@font-face{{font-family:heavy;src:url('assets/fonts/{HEAVY.name}')}}")
     D.svg.insert(0, DEFS)
     D.label(sc.get("label", ""))
     D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))

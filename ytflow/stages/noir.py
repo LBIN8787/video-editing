@@ -161,7 +161,8 @@ BG2, TXT, MUT, RED2, BOX, LINE = "#0C0C0E", "#ECEAE6", "#8E8E93", "#D42A2F", "#1
 
 
 def _room(D):
-    D.css.append("@font-face{font-family:noirserif;src:url(fonts/NanumMyeongjo-ExtraBold.ttf)}")
+    f = "NanumGothic-ExtraBold.ttf" if getattr(D, "calm", False) else "NanumMyeongjo-ExtraBold.ttf"   # 차분한 모드는 나눔고딕 한 계열
+    D.css.append(f"@font-face{{font-family:noirserif;src:url(fonts/{f})}}")
     D.items.append(
         f'<div data-layout-ignore style="position:absolute;inset:0;background:{BG2};z-index:0"></div>'
         '<svg data-layout-ignore style="position:absolute;inset:0;width:1920px;height:1080px;z-index:0;opacity:.10">'

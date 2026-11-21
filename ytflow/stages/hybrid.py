@@ -90,7 +90,7 @@ class HDoc(hyper.Doc):
     # 이름 자막 (lower third) ------------------------------------
     def lower(self, name: str, role: str, at: float, dark: bool = False):
         from . import graphics
-        if graphics.component(self, "lower") == "bar" and dark:   # 영상 위에서만 얇은 선 스타일 (종이 위는 띠 유지)
+        if graphics.component(self, "lower") == "bar" and (dark or getattr(self, "calm", False)):   # 영상 위에서만 얇은 선 스타일 (종이 위는 띠 유지) · 차분한 모드는 늘 얇은 선
             return graphics.lower_bar(self, name, role, at)
         i = self._id()
         f = fit(FT("title"), name, 46, 900)
@@ -154,6 +154,12 @@ class HDoc(hyper.Doc):
     def label(self, text: str, dark: bool = False):
         if not text:
             return
+        if getattr(self, "calm", False):   # 호기심 채널처럼: 상자 없는 작은 출처 글씨
+            i = self._id()
+            self._hud_or_items().append(f'<div id="{i}" style="position:absolute;right:56px;top:46px;font-family:gr,sans;font-size:22px;color:rgba(255,255,255,.72);'
+                                        f'white-space:nowrap;text-shadow:0 1px 4px #000">{_e(text)}</div>')
+            self.js.append(f'tl.fromTo("#{i}",{{opacity:0}},{{opacity:1,duration:0.5}},0.2);')
+            return
         i = self._id()
         col = "#FFFFFF" if dark else "#5a5f6a"
         bg = "rgba(0,0,0,.45)" if dark else "rgba(251,248,241,.85)"
@@ -172,6 +178,13 @@ class HDoc(hyper.Doc):
 
     def chapter_tag(self, num: str, title: str, dark: bool = False):
         if not num:
+            return
+        if getattr(self, "calm", False):   # 호기심 채널처럼: 얇은 테두리 알약 + 흰 글자 (2026-11-21)
+            i = self._id()
+            self._hud_or_items().append(f'<div id="{i}" style="position:absolute;left:56px;top:44px;font-family:sans;font-size:24px;color:#FFFFFF;white-space:nowrap;'
+                                        f'padding:7px 14px;border-radius:4px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.35);letter-spacing:.5px">'
+                                        f'{_e(num)} · {_e(title)}</div>')
+            self.js.append(f'tl.fromTo("#{i}",{{opacity:0}},{{opacity:1,duration:0.5}},0.15);')
             return
         i = self._id()
         col = "#FFFFFF" if dark else self.ink
@@ -547,8 +560,12 @@ def s_quote(D: HDoc, sc: dict, bt: list, dur: float):
     D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
     i = D._id()
     D.under.append(i)
-    D.items.append(f'<div id="{i}" style="position:absolute;left:250px;top:200px;width:1420px;height:540px;background:#FBF8F1;'
-                   f'box-shadow:0 14px 34px rgba(0,0,0,.2);transform:rotate(-0.8deg)"></div>')
+    if getattr(D, "calm", False):   # 호기심 채널처럼: 어두운 반투명 판(글자는 밝게) — 밝은 종이 카드에 밝은 글자가 묻혀 보이지 않던 문제 (2026-11-21)
+        D.items.append(f'<div id="{i}" style="position:absolute;left:250px;top:200px;width:1420px;height:540px;background:rgba(12,14,18,.62);'
+                       f'border:1px solid rgba(255,255,255,.14);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.45)"></div>')
+    else:
+        D.items.append(f'<div id="{i}" style="position:absolute;left:250px;top:200px;width:1420px;height:540px;background:#FBF8F1;'
+                       f'box-shadow:0 14px 34px rgba(0,0,0,.2);transform:rotate(-0.8deg)"></div>')
     D.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:30}},{{opacity:1,y:0,duration:0.5}},0.15);')
     if getattr(D, "typeset", None):   # 글꼴 체계(블랙한산스)의 따옴표는 크고 낮게 그려져 첫 줄에 닿음 → 왼쪽 위 여백으로 (2026-11-20 겹침 점검)
         D.text(300, 250, "“", FT("value"), 110, D.red, at=0.4, anchor="lm")
@@ -1263,6 +1280,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     if D.calm:   # 튀는 등장(back·elastic) → 부드러운 감속, 0에서 커지는 등장 → 거의 제자리에서, 효과음 없음
         D.js[:] = [re.sub(r'scale:0(\.\d+)?(?=[,}])', 'scale:0.97', re.sub(r'(back|elastic)\.(in)?out\([^)]*\)|(back|elastic)\.(in)?out', 'power2.out', x)) for x in D.js]
         D.sfx[:] = []
+        D.items[:] = [x.replace("#5a5f6a", "#A3A7AE") for x in D.items]   # 밝은 종이용 회색 글자 → 어두운 바탕에서 읽히는 옅은 회색
     return D
 
 
