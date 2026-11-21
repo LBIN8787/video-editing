@@ -160,6 +160,37 @@ class Stage:
                 self.items.append(f'<div id="{sid}" style="position:absolute;left:{x + dx - 30}px;top:{y + dy - 30}px;font-size:60px;opacity:0;z-index:6">✨</div>')
                 self.js.append(f'tl.fromTo("#{sid}",{{opacity:0,scale:0.2}},{{opacity:1,scale:1.2,duration:0.25}},{t + 0.5 + k * 0.08:.3f});'
                                f'tl.to("#{sid}",{{opacity:0,duration:0.3}},{t + 1.0 + k * 0.08:.3f});')
+        elif do == "stat":   # 상자 없는 지표 (2026-11-21 사용자: 숫자 카드가 "너무 싼티" — 얇은 강조 막대 + 작은 이름 + 큰 숫자 + 한 줄 설명)
+            val, sub = str(m.get("value", "")), m.get("sub", "")
+            fs = m.get("fs", 104)
+            acc = m.get("color") or self.th.get("accent", self.th["arrow"])
+            muted = self.th.get("muted", "#9AA4B2")
+            sw = max(_est(lab, 30) * 1.12, _est(val, fs) * 0.92, _est(sub, 28)) + 48
+            sh = 58 + fs * 1.05 + (44 if sub else 0)
+            x, y = clamp_box(m.get("x", 960), m.get("y", 540), sw, sh)
+            did = f"{self.p}_{m['id']}"
+            shadow = "text-shadow:0 2px 14px rgba(0,0,0,.55);"
+            self.items.append(
+                f'<div id="{did}" style="position:absolute;left:{x - sw / 2:.0f}px;top:{y - sh / 2:.0f}px;width:{sw:.0f}px;height:{sh:.0f}px;z-index:5">'
+                f'<div id="{did}_bar" style="position:absolute;left:0;top:6px;width:5px;height:{sh - 12:.0f}px;background:{acc};transform-origin:top;transform:scaleY(0)"></div>'
+                f'<div id="{did}_l" style="position:absolute;left:28px;top:0;font-family:gr,sans;font-size:30px;letter-spacing:.06em;color:{muted};white-space:nowrap;opacity:0;{shadow}">{_e(lab)}</div>'
+                f'<div id="{did}_n" style="position:absolute;left:24px;top:46px;font-family:gx,sans-x;font-size:{fs}px;line-height:1.05;color:{acc};white-space:nowrap;opacity:0;{shadow}">{_e(val)}</div>'
+                + (f'<div id="{did}_s" style="position:absolute;left:28px;top:{52 + fs * 1.05:.0f}px;font-family:gr,sans;font-size:28px;color:{muted};white-space:nowrap;opacity:0;{shadow}">{_e(sub)}</div>' if sub else "")
+                + '</div>')
+            self.pos[m["id"]] = (x, y, sw, sh)
+            self.js.append(f'tl.to("#{did}_bar",{{scaleY:1,duration:0.45,ease:"power3.out"}},{t:.3f});'
+                           f'tl.fromTo("#{did}_l",{{opacity:0,x:-14}},{{opacity:1,x:0,duration:0.4,ease:"power2.out"}},{t + 0.12:.3f});'
+                           f'tl.fromTo("#{did}_n",{{opacity:0,y:18}},{{opacity:1,y:0,duration:0.5,ease:"power3.out"}},{t + 0.2:.3f});'
+                           + (f'tl.fromTo("#{did}_s",{{opacity:0}},{{opacity:1,duration:0.4}},{t + 0.55:.3f});' if sub else ""))
+            mm = re.search(r"\d[\d,]*(\.\d+)?", val)
+            if mm and not m.get("static"):
+                core = mm.group(0); pre, post = val[:mm.start()], val[mm.end():]
+                numv = core.replace(",", ""); dec = len(numv.split(".")[1]) if "." in numv else 0
+                fmt = (f'Number(o.v.toFixed({dec})).toLocaleString("en-US",{{minimumFractionDigits:{dec},maximumFractionDigits:{dec}}})'
+                       if "," in core else f'o.v.toFixed({dec})')
+                self.js.append(f'(function(){{var o={{v:0}};tl.to(o,{{v:{numv},duration:1.1,ease:"power2.out",onUpdate:function(){{'
+                               f'document.getElementById("{did}_n").textContent="{_e(pre)}"+{fmt}+"{_e(post)}";}}}},{t + 0.2:.3f});}})();')
+            self.sfx.append(("click-soft", t))
         elif do == "type":
             text = m.get("text", "")
             inner = (f'<div style="position:absolute;inset:0;background:#0D1117;border-radius:22px;border:2px solid #30363D;box-shadow:0 20px 60px rgba(0,0,0,.6);'
@@ -239,7 +270,8 @@ def apply(D, sc: dict, bt: list, dur: float, w: int = 1920, h: int = 1080, keep:
     pal = D.skin.get("palette", {})
     acc = pal.get("accent", YEL)
     stg = Stage(f"mo{sc['id']}", w, h, theme={"icon_bg": pal.get("card2", pal.get("card", "#1C2E47")), "ring": acc, "arrow": acc,
-                                             "card": pal.get("card", "#16263C"), "card_ink": pal.get("ink", "#E8EEF6"), "label": pal.get("ink", "#E8EEF6")})
+                                             "card": pal.get("card", "#16263C"), "card_ink": pal.get("ink", "#E8EEF6"), "label": pal.get("ink", "#E8EEF6"),
+                                             "accent": acc, "muted": pal.get("muted", "#9AA4B2")})
     stg.no_sparkle = getattr(D, "no_zoom", False)
     for k, (b, (t0, d)) in enumerate(zip(sc["beats"], bt)):
         if not b.get("motion"):
