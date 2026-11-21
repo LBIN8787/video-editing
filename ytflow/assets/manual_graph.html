@@ -564,6 +564,7 @@ function renderEdit(){
       <div class="card"><h3>0. 내 말 기록 (영상 검토 밖)</h3><p>방향 요청·뜻 바로잡기처럼 영상 하나에 대한 판정이 아닌 말. 원문 그대로 manual/feedback.yaml 에 남고 그래프가 바로 바뀝니다.</p>
         <label class="field">한 말 (원문 그대로) <textarea id="fb-q" rows="3" placeholder="예: 반드시 카메라를 움직이라는 뜻이 아니었다"></textarea></label>
         <label class="field">종류 <select id="fb-k"><option value="direction">방향·기준 요청</option><option value="clarify">뜻 바로잡기 (모델 해석이 틀림)</option><option value="review">영상에 대한 말</option><option value="tool">도구 요청</option></select></label>
+        <label class="field">어느 레포의 말인가 <select id="fb-r"><option value="">영상 이름으로 추정 (없으면 메인)</option><option value="main">메인 (모든 채널 공통)</option><option value="market">시장</option><option value="curiosity">호기심</option><option value="issues">시사</option><option value="ai">AI</option></select></label>
         <label class="field">이 말의 층 <select id="fb-s"><option value="">정하지 않음</option><option value="principle">영구 원칙 (진짜 금지)</option><option value="standard">작업 기준</option><option value="style">스타일 기본값 (금지 아님)</option><option value="trial">실험 기록 (이번 시도만)</option></select></label>
         <label class="field">바로잡는 의도 ID (선택) <input id="fb-a" placeholder="intent:759c49eb"></label>
         <label class="field" style="flex-direction:row;align-items:center;gap:6px"><input type="checkbox" id="fb-p"> 매뉴얼 '반영 대기'에도 넣기</label>
@@ -595,14 +596,14 @@ function renderEdit(){
     $("#bp-cmd").innerHTML = LIVE ? "" : cmdBox(`python -m ytflow manual-bump "${s || "바꾼 기준 요약"}"\npython -m ytflow manual-graph`);
   };
   const fbCmd = () => { if (LIVE) return; const q = $("#fb-q").value.trim().replace(/"/g, "'"), k = $("#fb-k").value, a = $("#fb-a").value.trim();
-    const sc = $("#fb-s").value;
-    $("#fb-cmd").innerHTML = cmdBox(`python -m ytflow feedback "${q || "한 말"}" --kind ${k}${sc ? " --scope " + sc : ""}${a ? " --about " + a : ""}${$("#fb-p").checked ? " --pending" : ""}`); };
-  ["#fb-q", "#fb-k", "#fb-s", "#fb-a", "#fb-p"].forEach(s => $(s).addEventListener("input", fbCmd)); fbCmd();
+    const sc = $("#fb-s").value, rp = $("#fb-r").value;
+    $("#fb-cmd").innerHTML = cmdBox(`python -m ytflow feedback "${q || "한 말"}" --kind ${k}${rp ? " --repo " + rp : ""}${sc ? " --scope " + sc : ""}${a ? " --about " + a : ""}${$("#fb-p").checked ? " --pending" : ""}`); };
+  ["#fb-q", "#fb-k", "#fb-r", "#fb-s", "#fb-a", "#fb-p"].forEach(s => $(s).addEventListener("input", fbCmd)); fbCmd();
   ["#rv-proj", "#rv-res", "#rv-reason", "#bp-sum"].forEach(s => $(s).addEventListener("input", showCmd)); showCmd();
   $("#view").addEventListener("click", ev => { const b = ev.target.closest(".copy"); if (!b) return;
     navigator.clipboard.writeText(b.dataset.c).then(() => toast("복사했습니다"), () => toast("복사하지 못했습니다. 글자를 직접 선택하세요")); });
   if (!LIVE) return;
-  $("#fb-go").onclick = async () => { try { await api("/api/feedback", {quote: $("#fb-q").value, kind: $("#fb-k").value, scope: $("#fb-s").value, about: $("#fb-a").value, pending: $("#fb-p").checked});
+  $("#fb-go").onclick = async () => { try { await api("/api/feedback", {quote: $("#fb-q").value, kind: $("#fb-k").value, scope: $("#fb-s").value, repo: $("#fb-r").value, about: $("#fb-a").value, pending: $("#fb-p").checked});
     toast("기록했습니다. 그래프를 다시 만들었습니다"); await reload(); } catch (e) { toast(e.message); } };
   $("#rv-go").onclick = async () => { try { await api("/api/review", {project: $("#rv-proj").value, result: $("#rv-res").value, reason: $("#rv-reason").value});
     toast("검토를 기록했습니다"); await reload(); } catch (e) { toast(e.message); } };
@@ -918,7 +919,7 @@ function feedbackStories(){
 
 /* ---------- 한눈에: 통과·금지·충돌 후보·어긋난 의도·기각 ---------- */
 let nowFocus = null, banTheme = "all";
-let fbMore = false, banTier = "principle";
+let fbMore = false, fbRepo = "all", banTier = "principle";
 const AKIND = {proposal: "제안함", nousage: "용도 미정 기능", conflict: "충돌 후보", overfit: "과적합 후보", pending: "반영 대기", untiered: "층 미정 피드백", misaligned: "어긋난 해석",
   retired: "폐지된 기준이 남음", ref: "깨진 참조", coderef: "코드 위치 바뀜", topic: "주제 레포 오류", stale: "옛 그래프"};
 function auditCard(){
@@ -948,14 +949,16 @@ function tierItem(x){
 function fbItem(x){
   if (x.kind === "review") { const e = (OUT[x.id] || []).find(y => y.kind === "applied_in");
     const where = x.result === "pass" ? `v${x.manual_version} 기준 검증` : x.status === "pending" ? "반영 대기 중" : e ? `→ ${e.t.replace("ver:", "v")} 에 반영` : "-";
-    return `<div class="item ${x.result === "pass" ? "pass" : "rej"}" role="button" tabindex="0" data-go="${esc(x.id)}"><small>${x.tier_label && x.result !== "pass" ? `<span class="tchip-tier ${x.tier}">${esc(x.tier_label)}${x.tier_fixed ? "" : "?"}</span> ` : ""}${esc(x.date)} · 영상 검토 ${x.result === "pass" ? "통과" : "기각"} · ${esc(x.project.replace(/^\d{8}-/, ""))} · ${esc(where)}</small>${x.reason ? `<span>“${hl(cut(x.reason, 160))}”</span>` : ""}</div>`; }
+    return `<div class="item ${x.result === "pass" ? "pass" : "rej"}" role="button" tabindex="0" data-go="${esc(x.id)}"><small>${x.tier_label && x.result !== "pass" ? `<span class="tchip-tier ${x.tier}">${esc(x.tier_label)}${x.tier_fixed ? "" : "?"}</span> ` : ""}<span class="chip">${esc(x.repo_label || "")}</span> ${esc(x.date)} · 영상 검토 ${x.result === "pass" ? "통과" : "기각"} · ${esc(x.project.replace(/^\d{8}-/, ""))} · ${esc(where)}</small>${x.reason ? `<span>“${hl(cut(x.reason, 160))}”</span>` : ""}</div>`; }
   const it = x.intent && N[x.intent];
   const where = [x.pending ? "반영 대기" : "", it ? (x.about ? "의도를 바로잡음" : "사용자 원문으로 추가") : ""].filter(Boolean).join(" · ") || "기록됨";
-  return `<div class="item ${x.fb_kind === "clarify" ? "mis" : "ban"}" role="button" tabindex="0" ${it ? `data-al="${esc(it.id)}"` : `data-go="${esc(x.id)}"`}><small>${x.tier_label ? `<span class="tchip-tier ${x.tier}">${esc(x.tier_label)}</span> ` : ""}${esc(x.date)} · ${esc(x.fb_kind_label)}${x.project ? " · " + esc(x.project) : ""} · ${esc(where)}</small><span>“${hl(cut(x.quote, 180))}”</span>${x.note ? `<span style="color:var(--muted)">${hl(x.note)}</span>` : ""}</div>`;
+  return `<div class="item ${x.fb_kind === "clarify" ? "mis" : "ban"}" role="button" tabindex="0" ${it ? `data-al="${esc(it.id)}"` : `data-go="${esc(x.id)}"`}><small>${x.tier_label ? `<span class="tchip-tier ${x.tier}">${esc(x.tier_label)}</span> ` : ""}<span class="chip">${esc(x.repo_label || "")}</span> ${esc(x.date)} · ${esc(x.fb_kind_label)} · ${x.project ? "영상 " + esc(x.project.replace(/^projects\//, "").replace(/^\d{8}-/, "")) + " 에서" : "영상 밖에서"} · ${esc(where)}</small><span>“${hl(cut(x.quote, 180))}”</span>${x.note ? `<span style="color:var(--muted)">${hl(x.note)}</span>` : ""}</div>`;
 }
 function renderNow(){
   const S = G.stats, themes = G.nodes.filter(n => n.kind === "theme");
-  const fbAll = G.nodes.filter(n => n.kind === "review" || n.kind === "feedback").sort((a, b) => (b.date || "").localeCompare(a.date || "") || (b.kind === "feedback") - (a.kind === "feedback") || b.id.localeCompare(a.id, undefined, {numeric: true}));
+  const REPOS = [["all", "전체"], ["main", "메인(공통)"], ["market", "시장"], ["curiosity", "호기심"], ["issues", "시사"], ["ai", "AI"]];
+  const fbEvery = G.nodes.filter(n => n.kind === "review" || n.kind === "feedback");
+  const fbAll = fbEvery.filter(n => fbRepo === "all" || (n.repo || "main") === fbRepo).sort((a, b) => (b.date || "").localeCompare(a.date || "") || (b.kind === "feedback") - (a.kind === "feedback") || b.id.localeCompare(a.id, undefined, {numeric: true}));
   const tl = k => (N["theme:" + k] || {}).label || k;
   const reviews = G.nodes.filter(n => n.kind === "review").sort((a, b) => b.date.localeCompare(a.date));
   const pass = reviews.filter(r => r.result === "pass"), rej = reviews.filter(r => r.result === "reject");
@@ -980,7 +983,8 @@ function renderNow(){
       </div>
       ${auditCard()}
       <section id="now-fb"><h3><span class="chip">내 피드백 ${fbAll.length}</span> 최근에 한 말과 어디로 갔나</h3>
-        <p class="lead">영상 검토(통과·기각)와 그 밖에 한 말(방향 요청·뜻 바로잡기)을 날짜 순으로. 피드백을 기록하면 이 목록과 모든 탭이 함께 바뀝니다.</p>
+        <p class="lead">영상 검토(통과·기각)와 그 밖에 한 말(방향 요청·뜻 바로잡기)을 날짜 순으로. <b>레포</b>로 나눠 봅니다 — 메인(모든 채널 공통) · 시장 · 호기심 · 시사 · AI. 줄마다 '영상 ○○ 에서' 한 말인지 '영상 밖에서' 한 말인지 적혀 있습니다.</p>
+        <div class="row" style="flex-wrap:wrap;gap:6px;margin-bottom:8px">${REPOS.map(([k, l]) => `<button class="btn ${fbRepo === k ? "primary" : ""}" data-fbrepo="${k}">${l} ${k === "all" ? fbEvery.length : fbEvery.filter(n => (n.repo || "main") === k).length}</button>`).join("")}</div>
         <div class="items">${fbAll.slice(0, fbMore ? 999 : 8).map(fbItem).join("")}</div>
         ${fbAll.length > 8 ? `<button class="btn" id="fb-more">${fbMore ? "접기" : `전체 ${fbAll.length}개 보기`}</button>` : ""}</section>
       <section id="now-conf"><h3><span class="chip pend">충돌 후보 ${S.conflicts}</span> 반대 방향 규칙</h3>
@@ -1009,6 +1013,7 @@ function renderNow(){
   V.querySelectorAll("select[data-tk]").forEach(sel => { sel.onclick = ev => ev.stopPropagation(); sel.onchange = async () => { try {
     await api("/api/tier", {key: sel.dataset.tk, tier: sel.value, text: sel.dataset.tt}); toast("층을 manual/rule_tiers.yaml 에 저장했습니다"); nowFocus = "of"; await reload(); } catch (e) { toast(e.message); } }; });
   const fm = $("#fb-more"); if (fm) fm.onclick = () => { fbMore = !fbMore; nowFocus = "fb"; renderNow(); };
+  document.querySelectorAll("[data-fbrepo]").forEach(b => b.onclick = () => { fbRepo = b.dataset.fbrepo; fbMore = false; nowFocus = "fb"; renderNow(); });
   wireTerms(V);
   if (nowFocus) { const el = document.getElementById("now-" + nowFocus); if (el) el.scrollIntoView({block: "start"}); nowFocus = null; }
 }
@@ -1190,7 +1195,7 @@ function inspect(id, back){
   } else if (n.kind === "intent") {
     h += `<p style="margin:0">${esc(n.quote)}</p>${n.meaning ? `<dl class="kv"><dt>뜻한 것</dt><dd>${esc(n.meaning)}</dd></dl>` : ""}<div class="row"><a class="btn" href="#align" data-al="${esc(n.id)}">의도 정렬에서 보기</a></div>`;
   } else if (n.kind === "feedback") {
-    h += `<div class="chips"><span class="chip">${esc(n.fb_kind_label)}</span><span class="chip">${esc(n.date)}</span>${n.pending ? '<span class="chip pend">반영 대기</span>' : ""}</div><p style="margin:0">“${hl(n.quote)}”</p>${n.note ? `<p class="empty" style="margin:0">${esc(n.note)}</p>` : ""}${n.intent ? `<div class="row"><a class="btn" href="#align" data-al="${esc(n.intent)}">의도 정렬에서 보기</a></div>` : ""}`;
+    h += `<div class="chips"><span class="chip">${esc(n.repo_label || "")}</span><span class="chip">${esc(n.fb_kind_label)}</span><span class="chip">${esc(n.date)}</span>${n.pending ? '<span class="chip pend">반영 대기</span>' : ""}</div><p style="margin:0">“${hl(n.quote)}”</p>${n.note ? `<p class="empty" style="margin:0">${esc(n.note)}</p>` : ""}${n.intent ? `<div class="row"><a class="btn" href="#align" data-al="${esc(n.intent)}">의도 정렬에서 보기</a></div>` : ""}`;
   } else if (n.kind === "step") {
     h += `<p style="margin:0">${esc(n.does)}</p><dl class="kv"><dt>남는 파일</dt><dd>${esc(n.outputs)}</dd></dl>`;
   }
