@@ -253,7 +253,7 @@ def chapter_quiet(D, sc: dict):
     """장 표지 'quiet' (2026-11-21 사용자: "좀 차분하고 깔끔한 스타일") — 바탕 그대로, 작은 번호 + 제목 + 가는 선이 천천히 나타남."""
     from .hybrid import FT, W, fit, _e
     i = D._id()
-    f = fit(FT("title"), sc["title"], 76, W - 400)
+    f = fit(FT("title"), sc["title"], 60, W - 400)
     acc = D.red
     D.items.append(
         f'<div id="{i}" style="position:absolute;left:0;right:0;top:400px;text-align:center;opacity:0">'

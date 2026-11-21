@@ -339,7 +339,7 @@ def s_versus(D: HDoc, sc: dict, bt: list, dur: float):
     t0 = bt[0][0]
     for x, it, col, at in ((W * 0.28, L, D.ink, t0 + 0.2), (W * 0.72, R, accent_text(D), t0 + 1.4)):
         D.icon(it["icon"], x, 300, 120, col, at=at)
-        D.text(x, 520, it["value"], FT("value"), min(210, fit(FT("value"), it["value"], 210, 620).size), col, at=at + 0.2, counter=True)   # 긴 값(12만 2,000주)이 'vs'·화면 끝에 닿지 않게
+        D.text(x, 520, it["value"], FT("value"), min(150 if getattr(D, "calm", False) else 210, fit(FT("value"), it["value"], 210, 620).size), col, at=at + 0.2, counter=True)   # 긴 값(12만 2,000주)이 'vs'·화면 끝에 닿지 않게
         D.text(x, 680, it["label"], FT("label"), 40, "#5a5f6a", at=at + 0.4)
     D.text(W / 2, 520, "vs", FT("note"), 90, D.muted, at=t0 + 1.2)
     if len(bt) > 1:

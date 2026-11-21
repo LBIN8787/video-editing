@@ -40,15 +40,12 @@ def hbite(ch, beat, src, find, ko):
         label=HL, beats=[{"say": beat}], clip={"src": src, "lang": "en", "cuts": [{"find": find, "ko": ko}], "fit": "contain"}, show_en=False)
 
 # 0 여는 장면
-add(type="bignum", chapter=0, label=TALK + " · 머니와이즈(야후) 11.20",
-    small="스탠리 드러켄밀러 · 지금 주식에 얼마나 걸었나", value="“거의 없다”",
-    compare={"label": "13F 신고 항목 (6월 말 → 9월 말)", "value": "95 → 65개"},
-    beats=[{"say": "11월 17일, 텍사스 오스틴의 한 투자 행사. 30년 넘게 운용하며 손실 난 해가 없었다고 알려진 투자자, 스탠리 드러켄밀러에게 진행자가 물었습니다. 지금 주식에 얼마나 걸고 있습니까. 대답은 짧았습니다. 거의 없다.", "motion": [{"t": "30년", "do": "stat", "id": "yrs", "value": "30년", "label": "1981 – 2010 운용", "sub": "손실 난 해 0", "x": 300, "y": 200, "fs": 92}]},
-           {"say": "같은 주에 공개된 9월 30일 기준 장부, 13F에서는 6월 말 95개였던 신고 항목이 65개로 줄어 있었습니다. 구글의 모회사 알파벳은 한 주도 남기지 않았습니다.",
-            "motion": [{"t": "65개", "do": "stat", "id": "pos", "value": "-30개", "label": "13F 신고 항목", "sub": "6월 말 대비", "x": 1640, "y": 220, "fs": 92}]}])
+add(type="footage", chapter=0, label="화면: 모건스탠리 'Hard Lessons' 인터뷰(2026.2.27) · 말은 TomorrowX 대담(11.17)·13F(9.30) 기준", clip={"src": "hl_broll", "start": 0, "frame": "full"},
+    beats=[{"say": "11월 17일, 텍사스 오스틴의 한 투자 행사. 30년 넘게 운용하며 손실 난 해가 없었다고 알려진 투자자, 스탠리 드러켄밀러에게 진행자가 물었습니다. 지금 주식에 얼마나 걸고 있습니까. 대답은 짧았습니다. 거의 없다.", "lower": {"name": "스탠리 드러켄밀러", "role": "1981~2010년 운용 · 손실 난 해 0"}, "motion": [{"t": "30년", "do": "stat", "id": "yrs", "value": "30년", "label": "11월 17일 대담 · 운용", "sub": "손실 난 해 0", "x": 1660, "y": 230, "fs": 56, "static": True}]},
+           {"say": "같은 주에 공개된 9월 30일 기준 장부, 13F에서는 6월 말 95개였던 신고 항목이 65개로 줄어 있었습니다. 구글의 모회사 알파벳은 한 주도 남기지 않았습니다.", "motion": [{"t": "65개", "do": "stat", "id": "pos", "value": "95 → 65", "label": "13F 신고 항목", "sub": "6월 말 → 9월 말", "x": 300, "y": 230, "fs": 56, "static": True}]},
+           {"say": "그런데 이상한 점이 있습니다. 많이 정리했지만, 하드디스크 회사 시게이트는 오히려 180% 늘렸습니다. 그는 시장을 피하는 걸까요, 돈이 갈 곳을 바꾸는 걸까요? 그의 말과 장부를 맞대 보겠습니다."}])
 bite(0, "그가 지금의 자신을 설명한 한 문장입니다.", "We're trying to not lose money, as opposed to make money.",
      "우리는 지금, 돈을 벌기보다 잃지 않으려 하고 있습니다.")
-add(type="kinetic", chapter=0, beats=[{"say": "그런데 이상한 점이 있습니다. 많이 정리했지만, 하드디스크 회사 시게이트는 오히려 180% 늘렸습니다. 그는 시장을 피하는 걸까요, 돈이 갈 곳을 바꾸는 걸까요? 그의 말과 장부를 맞대 보겠습니다."}])
 add(type="chapter", chapter=1, num="1", title="왜 이 사람의 말을 듣나", icon="user-round", look="board",
     beats=[{"say": "먼저, 왜 이 사람의 말에 시장이 귀를 기울이는지부터 보겠습니다."}])
 add(type="checklist", chapter=1, label="모틀리풀 인물 소개 등 널리 보도된 이력 · '손실 난 해 없음'은 알려진 평가", title="스탠리 드러켄밀러",
@@ -62,7 +59,6 @@ add(type="checklist", chapter=1, label="모틀리풀 인물 소개 등 널리 �
 hbite(1, "소로스에게서 무엇을 배웠냐는 질문에, 그는 올해 초 모건스탠리 인터뷰에서 이렇게 답했습니다.", "hl_sizing",
       "What I learned from him was sizing. It's not whether you're right or wrong, it's how much you make when you're right and how much you lose when you're wrong.",
       "그에게서 배운 건 크기였습니다. 맞느냐 틀리느냐가 아니라, 맞았을 때 얼마나 벌고 틀렸을 때 얼마나 잃느냐입니다.")
-add(type="kinetic", chapter=1, beats=[{"say": "틀렸을 때 얼마나 잃느냐. 지금 그가 말하는 '안 잃기'의 뿌리가 이 문장입니다."}])
 add(type="quote", chapter=1, insight=True, label="널리 인용되는 그의 원칙 (구루포커스·인베스팅닷컴 등) · 정확한 문구·시점은 출처마다 조금 다름",
     who="스탠리 드러켄밀러", role="여러 강연·인터뷰에서 해 온 말로 알려짐", quote="전체 시장을 움직이는 건 실적이 아니라 연준이다",
     keyword="", orig="Earnings don't move the overall market; it's the Federal Reserve Board.",
@@ -78,8 +74,7 @@ add(type="motionboard", chapter=1, label="근거: 널리 인용되는 그의 원
          "shut": {"kind": "text", "x": 1180, "y": 800, "text": "수문을 닫으면 → 다 같이 내려감", "size": 52, "color": "red"}},
     beats=[{"say": "그림으로 보면 이렇습니다. 연준은 수문입니다. 시장의 배들은 각자 성능이 다르지만, 같은 물 위에 떠 있습니다.", "do": ["gate", "lv", "b1", "b2", "b3"], "at": {"b1": "배들은"}},
            {"say": "수문을 열어 돈이 풀리면 물이 차올라 좋은 배도 약한 배도 함께 뜹니다.", "do": ["open"], "at": {"open": "열어"}},
-           {"say": "수문을 닫으면 반대로 다 같이 내려갑니다. 그래서 그는 회사 하나보다, 연준과 회사들이 돈을 빌리는 금리를 먼저 봅니다.", "do": ["shut"], "at": {"shut": "닫으면"}}])
-add(type="kinetic", chapter=1, beats=[{"say": "그리고 그는 거래 대부분을 18개월에서 3년 앞을 보고 한다고 말합니다. 그래서 지금 그의 말은 늘 1, 2년 뒤를 향합니다."}])
+           {"say": "수문을 닫으면 반대로 다 같이 내려갑니다. 그래서 그는 회사 하나보다, 연준과 회사들이 돈을 빌리는 금리를 먼저 봅니다.", "do": ["shut"], "at": {"shut": "닫으면"}}, {"say": "그리고 그는 거래 대부분을 18개월에서 3년 앞을 보고 한다고 말합니다. 그래서 지금 그의 말은 늘 1, 2년 뒤를 향합니다.", "do": []}])
 add(type="chapter", chapter=2, num="2", title="생각의 흐름 ① 엔비디아, 2022~2024", icon="chip", look="board",
     beats=[{"say": "그의 생각이 흘러온 길, 그 출발점은 2022년의 엔비디아입니다."}])
 add(type="checklist", chapter=2, label="모건스탠리 'Hard Lessons' 인터뷰(2026년 초) 본인 회고 · 주가는 그의 말(분할 전 기준) · 매도 후회는 포춘 2024.10.18 보도와 일치", title="그가 직접 말한 엔비디아 이야기",
@@ -93,7 +88,7 @@ add(type="checklist", chapter=2, label="모건스탠리 'Hard Lessons' 인터뷰
 hbite(2, "그 순간을 그는 이렇게 기억합니다.", "hl_nvidia",
       "I violated everything I said in the interview. I couldn't stand success. It had gone from $150 to $800. I was long-term, and I couldn't deal with it, and I sold it, and then it was $1,400, like five weeks later, and I was sick.",
       "인터뷰에서 한 말을 전부 어겼습니다. 성공을 견디지 못한 거죠. 150달러에서 800달러가 됐고, 길게 보겠다던 저는 그걸 감당하지 못하고 팔았습니다. 그리고 5주 뒤 1,400달러가 됐고, 저는 속이 뒤집혔습니다.")
-add(type="kinetic", chapter=2, beats=[{"say": "너무 올랐다며 판 판단은 틀렸습니다. 그렇다면 이번에 위험을 줄이겠다는 판단도 틀릴 수 있지 않을까요? 그는 그 답을 미리 붙여 두었습니다. 이 쉼은 이틀일 수도, 여섯 달일 수도 있다고요."}])
+add(type="footage", chapter=2, label="화면: 모건스탠리 'Hard Lessons' 인터뷰(2026.2.27) · 말은 TomorrowX 대담(11.17)", clip={"src": "hl_broll", "start": 32, "frame": "full"}, beats=[{"say": "너무 올랐다며 판 판단은 틀렸습니다. 그렇다면 이번에 위험을 줄이겠다는 판단도 틀릴 수 있지 않을까요? 그는 그 답을 미리 붙여 두었습니다. 이 쉼은 이틀일 수도, 여섯 달일 수도 있다고요."}])
 add(type="chapter", chapter=3, num="3", title="생각의 흐름 ② 2026년 초, 과열을 보다", icon="flame", look="board",
     beats=[{"say": "그리고 2026년 초. 같은 인터뷰에서 그는 AI를 보는 눈이 바뀌었다고 말합니다."}])
 hbite(3, "작년 여름부터 가을 사이, AI 쪽이 이상하게 달아올랐다는 겁니다.", "hl_heated",
@@ -116,7 +111,6 @@ hbite(3, "한국 이야기는 그의 목소리로 들어 보겠습니다.", "hl_
 hbite(3, "그리고 이렇게 덧붙였습니다. 요즘 자신이 너무 겁을 낸다며,", "hl_nerve",
       "I'm trying to regain some of my nerve just because it's more fun.",
       "배짱을 좀 되찾으려고 합니다. 그게 더 재미있으니까요.")
-add(type="kinetic", chapter=3, beats=[{"say": "올해 초의 그는, 더 크게 걸고 싶어 하는 투자자였습니다."}])
 add(type="chapter", chapter=4, num="4", title="생각의 흐름 ③ 9월 말 장부", icon="file-text", look="board",
     beats=[{"say": "그 판은 실제 장부에서 어떻게 나타났을까요. 미국에서 큰 운용사는 분기마다 보유 주식을 13F라는 서류로 공개합니다."}])
 add(type="versus", chapter=4, insight=True, label="13F 는 분기 말 하루의 사진, 45일 뒤 공개 · 공매도·통화·채권·원자재는 나오지 않음",
@@ -225,8 +219,7 @@ add(type="noirsides", chapter=6, label="2월: 모건스탠리 'Hard Lessons'(202
            {"say": "구리는 값이 내리는 쪽에 걸었고,", "add": [{"side": 1, "tag": "11.17", "title": "구리 숏", "sub": "내리는 쪽에"}], "strike": [[0, 1]]},
            {"say": "배짱 대신 쉼을 택했습니다. 같은 사람이 1년도 안 돼 정반대 자리에 섰습니다.", "add": [{"side": 1, "tag": "11.17", "title": "쉼", "sub": "주식 거의 없음"}], "strike": [[0, 2]]}])
 hbite(2, "그 스스로도 이렇게 말합니다.", "hl_mind", "I tend to change my mind every three weeks.", "저는 3주마다 생각을 바꾸는 편입니다.")
-add(type="kinetic", chapter=6, beats=[{"say": "대가의 힘은 맞히는 데가 아니라, 틀렸다 싶으면 바로 바꾸는 데 있습니다."}])
-add(type="kinetic", chapter=6, beats=[{"say": "왜 바뀌었는지 그가 하나하나 설명하진 않았습니다. 다만 대담 정리를 보면, 회사들이 돈을 빌리는 금리 차이가 벌어지고 있다고 했습니다. 연준과 돈의 흐름을 먼저 보는 그의 원칙대로라면, 그 신호가 판을 바꾼 것으로 볼 수 있습니다."}])
+add(type="footage", chapter=6, label="화면: 모건스탠리 'Hard Lessons' 인터뷰(2026.2.27) · 말은 TomorrowX 대담 정리(번역본)", clip={"src": "hl_broll", "start": 46, "frame": "full"}, beats=[{"say": "왜 바뀌었는지 그가 하나하나 설명하진 않았습니다. 다만 대담 정리를 보면, 회사들이 돈을 빌리는 금리 차이가 벌어지고 있다고 했습니다. 연준과 돈의 흐름을 먼저 보는 그의 원칙대로라면, 그 신호가 판을 바꾼 것으로 볼 수 있습니다."}])
 add(type="bars", chapter=6, label="월가 전망 보도(11.13~18) · 오름폭은 계산",
     title="같은 때, 월가의 2027년 말 S&P 500 전망", unit="", emph=4, skin="dark-doc",
     items=[{"label": "11월 16일 종가", "value": 7416.59, "text": "7,416.59", "t": "16일"},
@@ -243,14 +236,13 @@ add(type="versus", chapter=6, insight=True, label="드러켄밀러: TomorrowX �
            {"say": "흥미로운 건 겹치는 부분입니다. 모건스탠리의 마이크 윌슨도 2027년에는 기업 이익 증가가 크게 느려진다고 봤습니다. 다만 이미 주가가 싸졌으니 위험을 더 질 만하다는 겁니다. 경기와 주가는 다른 것을 잽니다. 경기가 식어도 금리가 내리면 주가는 오를 수 있으니, 두 전망은 동시에 맞을 수도 있습니다. 둘을 가르는 건 회사들의 이익이 얼마나 버티는지, 그리고 돈을 빌리는 비용이 어디로 가는지입니다."}])
 add(type="chapter", chapter=7, num="7", title="내 계좌로 옮기면", icon="wallet", look="board",
     beats=[{"say": "이 이야기를 한국 계좌로 옮겨 보겠습니다. 투자 권유가 아니라, 질문을 옮기는 겁니다."}])
-add(type="kinetic", chapter=7, beats=[{"say": "한국 투자자에게 남는 질문이 하나 있습니다. 올해 초 그는 한국에 큰 포지션이 있다고 했습니다. 지금도 그런지는 알 수 없습니다. 13F에는 미국에 상장된 주식만 나오기 때문입니다."}])
 add(type="checklist", chapter=7, label="근거: 본인 발언(신용 스프레드·구리·2027 하반기, 번역본 포함)", title="그의 걱정이 맞는지 볼 신호",
     x=150, text_w=1000, skin="newsprint",
     rows=[{"label": "신용 스프레드 — 회사채와 국채 금리 차가 벌어지나", "state": "warn", "t": "신용"},
           {"label": "구리 가격 — 경기 기대의 온도계", "state": "warn", "t": "구리"},
           {"label": "12월 연준 회의 — 금리를 더 올리나", "state": "warn", "t": "연준"},
           {"label": "AI 회사들의 실제 매출 — 응용 쪽에서 돈이 벌리나", "state": "warn", "t": "AI"}],
-    beats=[{"say": "그의 걱정이 맞는지는 네 가지로 볼 수 있습니다. 회사들이 돈을 빌리는 금리와 국채 금리의 차이가 계속 벌어지는지, 그리고 경기 기대의 온도계인 구리 값이 어디로 가는지.", "upto": 2},
+    beats=[{"say": "한국 투자자에게 남는 질문이 하나 있습니다. 올해 초 그는 한국에 큰 포지션이 있다고 했습니다. 지금도 그런지는 알 수 없습니다. 13F에는 미국에 상장된 주식만 나오기 때문입니다.", "upto": 0}, {"say": "그의 걱정이 맞는지는 네 가지로 볼 수 있습니다. 회사들이 돈을 빌리는 금리와 국채 금리의 차이가 계속 벌어지는지, 그리고 경기 기대의 온도계인 구리 값이 어디로 가는지.", "upto": 2},
            {"say": "12월 연준 회의에서 금리를 더 올리는지, 그리고 AI를 써서 일을 해 주는 회사들이 실제 매출을 내기 시작하는지입니다. 그가 다시 주식을 늘렸는지는 내년 2월 중순 다음 장부에서 확인할 수 있습니다.", "upto": 4}])
 add(type="checklist", chapter=7, label="포춘 2024.10.18 · 13F 기준일 9월 30일 · 본인 발언(이틀일 수도)", title="틀릴 수 있는 경우",
     x=150, text_w=1000, skin="newsprint",
@@ -291,6 +283,7 @@ spec = {
               {"term": "콜옵션", "plain": "정해진 값에 살 권리 — 값이 오르면 버는 쪽에 거는 것"},
               {"term": "유동성", "plain": "시장에 풀린 돈의 양. 중앙은행이 금리와 돈 풀기로 조절"}, {"term": "신용 스프레드", "plain": "회사가 돈을 빌리는 금리와 국채 금리의 차이. 벌어지면 시장이 위험을 크게 본다는 뜻"}],
  "footage": {
+   "hl_broll": {"file": "hl_broll.mp4", "url": "https://prod-mssip.morganstanley.com/insights/videos/hard-lessons/duquesne-stan-druckenmiller-iliana-bouzali", "who": "스탠리 드러켄밀러", "credit": "Morgan Stanley 'Hard Lessons' 공식 영상 (2026.2.27) · 이미 인용한 구간의 화면만(소리 없음)", "license": "인용 구간 재사용", "cover": False},
    **{k: {"file": f"{k}.mp4", "url": "https://prod-mssip.morganstanley.com/insights/videos/hard-lessons/duquesne-stan-druckenmiller-iliana-bouzali",
           "start": st, "end": en, "who": "스탠리 드러켄밀러", "credit": "Morgan Stanley 'Hard Lessons' 공식 영상 (2026.2.27)", "license": "인용(20초 이내)"}
       for k, st, en in [("hl_sizing", 490.4, 497.0), ("hl_heated", 86.0, 97.9), ("hl_biotech", 310.3, 317.8), ("hl_korea", 626.4, 634.6),
