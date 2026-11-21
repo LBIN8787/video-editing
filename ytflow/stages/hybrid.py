@@ -1520,8 +1520,8 @@ def make(project: Project, workers: int = 3) -> Path:
         mix = "".join(f"[s{k}]" for k in range(len(filt)))
         subprocess.run(ff + inputs + ["-filter_complex", ";".join(filt) + f";{mix}amix=inputs={len(filt)}:normalize=0[o]",
                                       "-map", "[o]", "-ar", "48000", "-ac", "2", "-t", f"{t_acc:.2f}", str(sfx_wav)], check=True)
-    ass = str((edir / "subs.ass").resolve()).replace(":", "\\:")
-    fdir = str(paper.FONT_DIR).replace(":", "\\:")
+    ass = (edir / "subs.ass").resolve().as_posix().replace(":", "\\:")   # 윈도 경로의 역슬래시는 필터에서 지워짐 → / 로
+    fdir = Path(paper.FONT_DIR).as_posix().replace(":", "\\:")
     a_in = ["-i", str(work / "voice.wav")] + (["-i", str(sfx_wav)] if ev else [])
     amix = "[1:a][2:a]amix=inputs=2:normalize=0:duration=first[a]" if ev else "[1:a]anull[a]"
     bgm = spec.get("bgm")   # v12: 기본은 배경음 없음 — 어울리는 곡이 확실할 때만 대본에 "bgm": "<등록부 id>"
