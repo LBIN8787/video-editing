@@ -1,10 +1,10 @@
 # 체크리스트 — 20261120-market-deep-druckenmiller
 
-매뉴얼 v82 · 2026-11-21T07:45:11 · **MUST 실패 1개**
+매뉴얼 v83 · 2026-11-21T09:26:48 · **통과**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
-| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ❌ | [2026-11-21 · 사용자 피드백] 이는 두 영상에 대한 피드백입니다. Final2는 원래영상 final은 수정영상입니다. (외부 분석 요 |
+| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ✅ |  |
 | G0 | SHOULD | 매뉴얼 그래프가 최신 (python -m ytflow manual-graph) | ✅ | manual/graph.json |
 | G1 | MUST | topic_brief.json 있음 | ✅ | 01_research/topic_brief.json (schemas/topic_brief.schema.json) |
 | G1 | MUST | 브랜드(ai/market/curiosity) | ✅ | market |
@@ -18,12 +18,13 @@
 | G1 | SHOULD | 무엇이 띄우나(driver: 소재·각도·형식 + 근거) | ⚠️ | 인물 · 투자 대가의 공개 발언 + 공시 |
 | G2 | MUST | 시장: SAVE(오선) 시장 소식 알림 확인 기록 — 상태 '확인함' 또는 '확인 못 함: 이유' (01_research/save_check.md) | ✅ | 확인함 (inbox/save/20261117.md · 20261120.md · 20261121.md 에서 '드러켄밀러' 검색) |
 | G2 | SHOULD | 시장: SAVE 실제로 확인함 (항목 1개 이상) | ✅ | 확인함 (inbox/save/20261117.md · 20261120.md · 20261121.md 에서 '드러켄밀러' 검색) · 항목 1 |
-| G2 | MUST | 자료 화면마다 credit·url | ✅ | 9개, 빠짐 [] |
+| G2 | MUST | 자료 화면마다 credit·url | ✅ | 13개, 빠짐 [] |
 | G2 | MUST | 금지 라이선스(SA·NC·ND) 없음 | ✅ | [] |
 | G2 | 참고 | 자료 화면 소스 종류 (한 곳에서만 가져오면 화면이 단조로워짐) | ℹ️ | 2종 |
 | G3 | MUST | 팩트시트 + 출처 링크 3개 이상 | ✅ | 링크 18개 |
 | G3 | SHOULD | 확인 상태 표시(✅/⚠️) | ✅ |  |
 | G3 | SHOULD | '쓰지 않는 것' 목록 | ✅ |  |
+| G4 | SHOULD | 목적 분간: intent.md 에 '목적:' 정보 습득형/즐길거리형 + 세 질문 (11 §2-4) | ⚠️ |  |
 | G4 | MUST | core_message·question·logic | ✅ |  |
 | G4 | MUST | 쉬운 대본: 숫자엔 비교 기준, 낯선 개념엔 비유, 과거 사례, 어려운 말 풀이가 있다 | ✅ | {'compare_to': 4, 'analogies': 3, 'past_cases': 1, 'glossary': 6} |
 | G4 | MUST | 투자 권유 표현 0개 | ✅ | [] |
