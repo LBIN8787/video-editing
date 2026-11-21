@@ -2,7 +2,7 @@
 from: claude-code
 type: clip-fetch
 project: 20261120-market-deep-druckenmiller
-status: pending
+status: done
 ---
 
 드러켄밀러 인물 인사이트 편(샘플)의 원본 발언 구간을 PC 에서 찾아 받아 주세요 (docs/50-clip-lane.md). 클라우드는 유튜브 봇 확인 때문에 자막·구간을 받지 못합니다.
@@ -32,3 +32,7 @@ python -m ytflow hybrid 20261120-market-deep-druckenmiller
 ```
 
 끝나면 status 를 done 으로 바꾸고 결과(찾은 시각·받은 파일·실패 이유)를 적어 주세요.
+
+
+## 결과 (2026-11-21, 클라우드)
+- 시각은 피클이 찾음(`inbox/requests/done/20261121-1645-yt-times-6r3D-CMJkuI.md`). 구간 받기는 새 주문서 `inbox/pc-tasks/20261121-1717-clip-fetch-20261120-market-deep-druckenmiller.md` 로 넘김.

@@ -29,10 +29,12 @@ brief = {
 S = []
 def add(**k):
     k["id"] = len(S) + 1; S.append(k)
+DSRC = {"Basically": "druck_qa", "not lose money": "druck_notlose", "second half": "druck_2027", "taking a break": "druck_break"}
 def bite(ch, beat, find, ko, label=TALK):
+    src = next((v for k, v in DSRC.items() if k in find), "druck")
     add(type="bite", chapter=ch, who="스탠리 드러켄밀러", role="듀케인 패밀리 오피스 · TomorrowX 서밋 11월 17일",
         label="iConnections 공식 채널 (YouTube) · 2026.11.17 · 인용", beats=[{"say": beat}],
-        clip={"src": "druck", "lang": "en", "cuts": [{"find": find, "ko": ko}], "fit": "contain"}, show_en=False)
+        clip={"src": src, "lang": "en", "cuts": [{"find": find, "ko": ko}], "fit": "contain"}, show_en=False)
 
 HL = "모건스탠리 공식 'Hard Lessons' 인터뷰 (2026.2.27) · 인용"
 def hbite(ch, beat, src, find, ko):
@@ -40,8 +42,8 @@ def hbite(ch, beat, src, find, ko):
         label=HL, beats=[{"say": beat}], clip={"src": src, "lang": "en", "cuts": [{"find": find, "ko": ko}], "fit": "contain"}, show_en=False)
 
 # 0 여는 장면
-bite(0, "11월 17일, 텍사스 오스틴의 한 투자 행사. 1981년부터 2010년까지 30년 가까이 운용하며 손실 난 해가 없었던 투자자, 스탠리 드러켄밀러에게 진행자가 물었습니다. 지금 주식에 얼마나 걸고 있느냐고.",
-     "Basically, almost none.", "사실상 거의 없습니다.")
+bite(0, "11월 17일, 텍사스 오스틴의 한 투자 행사. 1981년부터 2010년까지 30년 가까이 운용하며 손실 난 해가 없었던 투자자, 스탠리 드러켄밀러에게 진행자가 물었습니다.",
+     "So, how much of that portfolio do you own today? Basically, almost none.", "그 포트폴리오를 지금은 얼마나 갖고 계십니까? — 사실상 거의 없습니다.")
 bite(0, "11월 17일 대담 기준, 그는 지금의 자신을 이렇게 설명했습니다.", "We're trying to not lose money, as opposed to make money.",
      "우리는 지금, 돈을 벌기보다 잃지 않으려 하고 있습니다.")
 add(type="checklist", chapter=0, label="말: TomorrowX 대담(11.17) · 장부: 13F(9.30 기준, 11.16 공개)", title="11월 17일, 그의 말과 장부", x=150, text_w=1100,
@@ -287,6 +289,10 @@ spec = {
               {"term": "콜옵션", "plain": "정해진 값에 살 권리 — 값이 오르면 버는 쪽에 거는 것"},
               {"term": "유동성", "plain": "시장에 풀린 돈의 양. 중앙은행이 금리와 돈 풀기로 조절"}, {"term": "신용 스프레드", "plain": "회사가 돈을 빌리는 금리와 국채 금리의 차이. 벌어지면 시장이 위험을 크게 본다는 뜻"}],
  "footage": {
+   "druck_qa": {"file": "druck_qa.mp4", "url": "https://www.youtube.com/watch?v=6r3D-CMJkuI", "start": "1:58.5", "end": "2:11.0", "who": "진행자 · 스탠리 드러켄밀러", "credit": "iConnections 공식 채널 (YouTube) · 2026.11.17 TomorrowX 서밋", "license": "인용(20초 이내)", "cover": False},
+   "druck_notlose": {"file": "druck_notlose.mp4", "url": "https://www.youtube.com/watch?v=6r3D-CMJkuI", "start": "8:10.5", "end": "8:16.8", "who": "스탠리 드러켄밀러", "credit": "iConnections 공식 채널 (YouTube) · 2026.11.17 TomorrowX 서밋", "license": "인용(20초 이내)", "cover": False},
+   "druck_2027": {"file": "druck_2027.mp4", "url": "https://www.youtube.com/watch?v=6r3D-CMJkuI", "start": "12:00.5", "end": "12:07.8", "who": "스탠리 드러켄밀러", "credit": "iConnections 공식 채널 (YouTube) · 2026.11.17 TomorrowX 서밋", "license": "인용(20초 이내)", "cover": False},
+   "druck_break": {"file": "druck_break.mp4", "url": "https://www.youtube.com/watch?v=6r3D-CMJkuI", "start": "9:15.5", "end": "9:22.8", "who": "스탠리 드러켄밀러", "credit": "iConnections 공식 채널 (YouTube) · 2026.11.17 TomorrowX 서밋", "license": "인용(20초 이내)", "cover": False},
    "hl_broll": {"file": "hl_broll.mp4", "url": "https://prod-mssip.morganstanley.com/insights/videos/hard-lessons/duquesne-stan-druckenmiller-iliana-bouzali", "who": "스탠리 드러켄밀러", "credit": "Morgan Stanley 'Hard Lessons' 공식 영상 (2026.2.27) · 이미 인용한 구간의 화면만(소리 없음)", "license": "인용 구간 재사용", "cover": False},
    **{k: {"file": f"{k}.mp4", "url": "https://prod-mssip.morganstanley.com/insights/videos/hard-lessons/duquesne-stan-druckenmiller-iliana-bouzali",
           "start": st, "end": en, "who": "스탠리 드러켄밀러", "credit": "Morgan Stanley 'Hard Lessons' 공식 영상 (2026.2.27)", "license": "인용(20초 이내)"}
