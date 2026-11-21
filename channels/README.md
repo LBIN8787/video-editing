@@ -20,7 +20,7 @@
 | [`ch-source-brief`](ch-source-brief/README.md) (가칭) 원본으로 보는 기업 | 롱폼 보고서 | 식스시그마 (`sixsigma`) | 원본 소스 | 주 1~2편 |
 | [`ch-data-motion`](ch-data-motion/README.md) (가칭) 숫자로 보는 산업 | 롱폼 데이터 리포트 | 머니크루 (`moneycrew`) | 자체 제작 인포그래픽 | 격주 1편 |
 | [`ch-ai-guide`](ch-ai-guide/README.md) (가칭) AI 더 잘 쓰기 | 롱폼 (트렌드 해설·따라 하기) | 하이브리드 (`hybrid`) | 원본 소스 (화면 녹화·공식 발표) | 주 1편 |
-| [`ch-ai-shorts`](ch-ai-shorts/README.md) (가칭) AI 꿀팁 1분 | 쇼츠 안내 | AI 꿀팁 쇼츠 (`shorts-aitips`) | 쇼츠 | 주 3~5편 |
+| [`ch-ai-shorts`](ch-ai-shorts/README.md) (가칭) AI 꿀팁 1분 | 쇼츠 안내 | AI 꿀팁 쇼츠 (`shorts-aitips`) | 쇼츠 | **보류** (2026-11-20) |
 | [`ch-money-shorts`](ch-money-shorts/README.md) (가칭) 1분 경제 상식 | 쇼츠 안내 (정보형) | 쇼츠 (`shorts-aitips`, 카드·큰 글씨) | 쇼츠 | 대기열에서 주 3~5편 |
 | [`ch-knowledge`](ch-knowledge/README.md) (가칭) 몰랐던 이유 | 롱폼 이야기 (심리·현대 일상) | 하이브리드 (`hybrid`) | 삽화 이야기 + 모션그래픽 설명 + 실제 자료 증거 (04 §0-7) | 주 1편 + 몰아보기 |
 | [`ch-issues`](ch-issues/README.md) 이슈의 구조 | 롱폼 시사·역사 | 하이브리드 (`hybrid`) | 기록 사진·영상, 지도·연표·비교 | 주 1~2편 |

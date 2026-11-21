@@ -11,12 +11,12 @@
 『트렌드 코리아 2027』의 '권태사회'에서 출발해, 빈 방의 전기 충격 실험(2014)과 영상 넘기기 실험(2024)을 따라가며 이유를 찾고, 오늘 밤 해 볼 수 있는 네 가지(묻기·머물기·나가기·챙기기)로 맺습니다.
 
 0:00 새벽 한 시
-0:44 지루함을 두려워하는 사람들
-1:26 아무것도 없는 방
-2:45 한 편과 일곱 편
-4:17 문만 여는 밤
-5:29 다음 날 밤
-6:41 다시, 새벽 한 시
+0:38 지루함을 두려워하는 사람들
+1:15 아무것도 없는 방
+2:25 한 편과 일곱 편
+3:44 문만 여는 밤
+4:46 다음 날 밤
+5:51 다시, 새벽 한 시
 
 출처
 - Tam, K. Y. Y., & Inzlicht, M. (2024). Fast-Forward to Boredom: How Switching Behavior on Digital Media Makes People More Bored. Journal of Experimental Psychology: General, 153(10), 2409–2426. https://doi.org/10.1037/xge0001639
@@ -42,4 +42,4 @@
 - B `한 편 vs 일곱 편 / 더 지루한 쪽은?` — 휴대폰과 실험 조건 대비.
 - C `넘겼더니 / 더 심심해졌다` — 넘기는 행동과 예상 밖 결과.
 
-파일은 Drive `ytflow/영상/20261120-curiosity-trend/05_edit/thumbnail_A.png`부터 `thumbnail_C.png`까지 있습니다. 챕터 위 시각은 v3 검토본 목소리 기준이며 최종 음성으로 렌더하면 다시 맞춥니다.
+파일은 Drive `ytflow/영상/20261120-curiosity-trend/05_edit/thumbnail_A.png`부터 `thumbnail_C.png`까지 있습니다. 챕터 시각은 ElevenLabs 최종 목소리 렌더(`final_v3.mp4`, 6분 35초)의 timeline 기준입니다 (2026-11-21).

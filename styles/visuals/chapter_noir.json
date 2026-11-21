@@ -1,0 +1,46 @@
+{
+ "id": "chapter@noir",
+ "type": "chapter",
+ "example_source": "scripts/visual_catalog.py VARIANTS",
+ "renderer": "ytflow/stages/hybrid.py:334",
+ "function": "s_chapter",
+ "scene_fields": [
+  "icon",
+  "title"
+ ],
+ "beat_fields": [],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only chapter@noir --force",
+ "spec_common": {
+  "edit_v10": true
+ },
+ "scenes": [
+  {
+   "type": "chapter",
+   "skin": "noir",
+   "look": "noir",
+   "kicker": "월요일 → 금요일",
+   "title": "닷새 동안 무슨 일이 있었나",
+   "sub": "가상의 예시",
+   "beats": [
+    {
+     "say": "닷새 동안 무슨 일이 있었는지 따라가 봅니다."
+    }
+   ],
+   "id": 1,
+   "chapter": 0
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "chapter",
+   "events": [
+    " 0.00s 장면 전체 확대·이동",
+    " 0.15s 「월요일 → 금요일」 아래에서 떠오름",
+    " 0.45s 「닷새 동안 무슨 일이 있었나」 아래에서 떠오름",
+    " 1.00s 선 그려짐",
+    " 1.20s 「가상의 예시」 아래에서 떠오름"
+   ]
+  }
+ ]
+}

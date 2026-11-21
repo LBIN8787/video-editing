@@ -1,6 +1,7 @@
 """2~4단계 + 9단계: 주제 선정 → 리서치 → 대본(씬 단위) → 업로드 패키지.
 
-모든 프롬프트에 data/style_profile.json 을 넣어 '식스시그마식' 규칙을 따르게 한다.
+data/style_profile.json(식스시그마 채널 통계)은 편집 스타일이 sixsigma 일 때만 프롬프트에 넣는다
+(모순 c-20261120-30: 그 밖의 채널은 manual/README 공통 기준 — 인트로 없음 §2-1, 10분~ §2-4, 모션그래픽 기본 12 §0).
 """
 from __future__ import annotations
 
@@ -12,7 +13,13 @@ from .. import config, llm, yt
 from ..project import Project
 
 
+def _sixsigma() -> bool:
+    return (config.load("pipeline").get("edit", {}) or {}).get("style_ref") == "sixsigma"
+
+
 def _style_block() -> str:
+    if not _sixsigma():
+        return "(채널 공통 기준: 인트로·순서 예고 없이 첫 문장부터 본론, 롱폼 10분 이상, 설명은 모션그래픽 — manual/README §2-1·§2-4, 12 §0-1)"
     prof = config.style_profile()
     if not prof:
         return "(스타일 프로필 없음: `ytflow benchmark` 를 먼저 실행하면 품질이 좋아집니다)"
@@ -259,7 +266,7 @@ class Script(BaseModel):
 def script(project: Project) -> None:
     topic = chosen_topic(project)
     pcfg = config.load("pipeline").get("script", {})
-    prof = config.style_profile()
+    prof = config.style_profile() if _sixsigma() else {}
     cpm = (prof.get("targets") or {}).get("chars_per_minute") or pcfg.get("chars_per_minute", 330)
     minutes = (prof.get("targets") or {}).get("video_minutes") or pcfg.get("target_minutes", 9)
     if config.load("pipeline").get("channel"):  # 채널 설정의 분량이 우선

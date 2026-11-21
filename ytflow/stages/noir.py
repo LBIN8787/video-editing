@@ -1,326 +1,372 @@
-"""누아르 사건 보드 (noirboard 장면) — 2026-11-21 사용자: "누아르사건보드 연출 이런걸 한번 사용해주세요".
+"""누아르 사건 보드 장면 (docs/57-osint-sixsigma-benchmark.md §4) — 오신트형 '흩어진 사실을 한 질문으로 잇기'의 구조만.
 
-어두운 방, 스탠드 불빛 한 줄기 아래 검은 보드. 흑백 사진(폴라로이드·테이프)과 타자 친 메모 카드가 박자마다 꽂히고,
-붉은 실이 핀에서 핀으로 이어진다. 카메라는 장면 내내 천천히 다가가고, 지금 말하는 카드 쪽으로 불빛이 옮겨 간다.
-대본 문법은 map_causal 과 같다(reveal·draw·active) — 증거판(코르크, identity.s_board)의 어두운 변형.
+  1. hubweb   질문 허브 관계망: 가운데 질문 원("누가?" 처럼 그 편의 질문)에서 박자마다 가지(사건·인물)가 하나씩 늘어남. 화면을 갈아 치우지 않고 쌓음.
+              지금 말하는 가지만 빨강, 앞 박자 가지는 회색으로 물러남. 위쪽 날짜 눈금(ruler)이 있으면 빨간 표시가 그 날짜로 이동.
+  2. ledger   두 열 장부: "끌어내리려는 자 / 다시 올리려는 자"처럼 맞서는 두 편을 왼쪽·오른쪽 열에 한 줄씩 적어 감.
+              지금 줄만 빨간 막대, 지운 줄(strike)은 빨간 줄로 긋고 흐리게, 마지막에 판정 한 줄(verdict).
 
-    {"type": "noirboard", "title": "사건: …",
-     "nodes": {"p": {"kind": "photo", "img": "04_assets/footage/raw/x.jpg", "cap": "…", "date": "2026.2.27", "x": 960, "y": 300, "w": 250},
-               "a": {"kind": "note", "title": "…", "text": "…", "date": "2022", "x": 260, "y": 700, "stamp": "쉼"}},
-     "edges": [["a", "b"], …],
-     "beats": [{"say": "…", "reveal": ["a"], "draw": [["a", "b"]], "active": "a"}]}
+스킨은 무엇이든 되지만 누아르(skins/noir)를 기준으로 만듦 — 장면에 "skin": "noir".
 
-강조는 덜어 냄(2026-11-21 사용자: "강조연출이 너무 많고") — 동그라미·형광펜 없이 불빛과 실로만.
+대본 예 (02_script/hybrid.json):
+  {"type": "hubweb", "skin": "noir", "title": "누가 움직였나",
+   "hub": {"label": "누가?", "sub": "이사회 뒤의 손"},
+   "ruler": ["11.10", "11.12", "11.14", "11.17"],
+   "nodes": [{"id": "a", "label": "대주주 펀드", "sub": "지분 12%", "date": "11.10", "rel": "지분 매각"},
+             {"id": "b", "label": "사외이사 2명", "sub": "동시 사임", "date": "11.12"},
+             {"id": "c", "label": "경쟁사 대표", "from": "a", "rel": "같은 날 매수", "date": "11.14"}],
+   "beats": [{"say": "...", "add": ["a"]}, {"say": "...", "add": ["b"]}, {"say": "...", "add": ["c"], "hi": "a"},
+             {"say": "...", "cut": ["b"]}]}
+  {"type": "ledger", "skin": "noir", "title": "두 편",
+   "left": {"head": "끌어내리려는 자", "sub": "사임 요구"}, "right": {"head": "다시 올리려는 자", "sub": "복귀 요구"},
+   "rows": [{"id": "l1", "side": "l", "name": "이사회", "note": "해임 의결", "date": "11.10"},
+            {"id": "r1", "side": "r", "name": "직원 700명", "note": "연판장", "date": "11.12"}],
+   "beats": [{"say": "...", "add": ["l1"]}, {"say": "...", "add": ["r1"]},
+             {"say": "...", "strike": ["l1"], "verdict": "닷새 만에 뒤집힘"}]}
 """
 from __future__ import annotations
 
 import html as H
+import math
 
-INK = "#1E1A16"
-PAPER = "#E9E2D2"
-RED = "#B0261E"
-
-
-def _h(key: str, lo: float, hi: float) -> float:
-    v = sum(ord(c) * (i + 3) for i, c in enumerate(key)) % 1000 / 1000
-    return lo + (hi - lo) * v
+W, HH = 1920, 1080
 
 
-def _asset(D, sc, src):
-    from .explain import _asset as a
-    return a(D, sc, src)
+def _e(s) -> str:
+    return H.escape(str(s))
 
 
-def _node_size(nd: dict) -> tuple[float, float]:
-    if nd.get("kind") == "photo":
-        w = nd.get("w", 250)
-        return w, w * 1.34
-    return nd.get("w", 320), nd.get("h", 190)
+def _pal(D) -> dict:
+    return D.skin.get("palette", {}) or {}
 
 
-def s_noirboard(D, sc: dict, bt: list, dur: float):
-    nodes, edges = sc["nodes"], sc.get("edges", [])
-    D.label(sc.get("label", ""), dark=True)
-    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
-    p = D._id()
-    when, strings, active = {}, [], []
-    for b, (t0, d) in zip(sc["beats"], bt):
-        for k_i, k in enumerate(b.get("reveal", [])):
-            when.setdefault(k, t0 + 0.3 + 0.35 * k_i)
-        for e_i, e in enumerate(b.get("draw", [])):
-            strings.append((tuple(e), t0 + 0.8 + 0.5 * e_i))
-        if b.get("active"):
-            active.append((b["active"], t0 + 0.2))
+def _c(D, k: str, dflt: str) -> str:
+    return _pal(D).get(k) or dflt
 
-    # 방: 거의 검은 바탕 + 위에서 떨어지는 스탠드 불빛 + 결 + 가장자리 어둡게
-    D.items.append(
-        f'<div data-layout-ignore style="position:absolute;inset:0;background:#0B0B0D;z-index:0"></div>'
-        f'<div id="{p}_glow" data-layout-ignore style="position:absolute;inset:0;z-index:0;'
-        f'background:radial-gradient(ellipse 62% 70% at 50% 34%,rgba(255,214,160,.20),rgba(255,214,160,.06) 45%,rgba(0,0,0,0) 72%)"></div>')
-    D.js.append(f'tl.fromTo("#{p}_glow",{{opacity:0}},{{opacity:1,duration:0.25}},0.05);'
-                f'tl.to("#{p}_glow",{{opacity:0.55,duration:0.06}},0.32);tl.to("#{p}_glow",{{opacity:1,duration:0.08}},0.40);')
 
-    inner = []
-    # 실 (카드 아래)
-    paths, sjs = [], []
-    for (a, b2), at in strings:
-        na, nb = nodes[a], nodes[b2]
-        _, ha = _node_size(na)
-        _, hb = _node_size(nb)
-        x1, y1, x2, y2 = na["x"], na["y"] - ha / 2 + 14, nb["x"], nb["y"] - hb / 2 + 14
-        mx, my = (x1 + x2) / 2, max(y1, y2) + 34
-        i = D._id()
-        paths.append(f'<path id="{i}" d="M{x1:.0f},{y1:.0f} Q{mx:.0f},{my:.0f} {x2:.0f},{y2:.0f}" fill="none" stroke="{RED}" stroke-width="3.2" '
-                     f'stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" style="filter:drop-shadow(2px 5px 3px rgba(0,0,0,.7))"/>')
-        sjs.append(f'tl.to("#{i}",{{strokeDashoffset:0,duration:0.6,ease:"power1.inOut"}},{at:.2f});')
-        D.sfx.append(("pencil", at))
-    inner.append(f'<svg data-layout-ignore style="position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:visible;z-index:1">{"".join(paths)}</svg>')
+def _ease_to(D, sel: str, props: str, t: float, d: float = 0.35):
+    D.js.append(f'tl.to("{sel}",{{{props},duration:{d},ease:"power2.out"}},{t:.2f});')
 
-    cjs = []
-    for k, at in when.items():
-        nd = nodes[k]
-        w, h = _node_size(nd)
-        x, y = nd["x"], nd["y"]
-        rot = nd.get("rot", _h(k, -4.0, 4.0))
-        c = f"{p}_{k}"
-        date = H.escape(nd.get("date", ""))
-        if nd.get("kind") == "photo":
-            src = _asset(D, sc, nd.get("img", ""))
-            img = (f'<div style="position:absolute;left:12px;top:12px;width:{w - 24:.0f}px;height:{w - 24:.0f}px;background:#222 url({src}) center/cover;'
-                   f'filter:grayscale(1) contrast(1.25) brightness(.92)"></div>') if src else ""
-            cap = H.escape(nd.get("cap", ""))
-            body = (img + f'<div style="position:absolute;left:12px;right:12px;top:{w - 2:.0f}px;font-family:pen,sans;font-size:24px;line-height:1.2;color:{INK};'
-                    f'text-align:center">{cap}</div>'
-                    f'<div style="position:absolute;left:50%;top:-14px;width:110px;height:30px;margin-left:-55px;background:rgba(220,210,180,.55);transform:rotate(-3deg)"></div>')
-            bg = "#F3EFE6"
+
+# ---------------------------------------------------------------- 날짜 눈금 (hubweb 의 ruler, 다른 장면에서도 부를 수 있게)
+def ruler(D, dates: list, marks: list, y: float = 70, x0: float = 220):
+    """화면 위쪽 날짜 눈금. marks: [(시각, 날짜)] — 그 시각에 빨간 표시가 그 날짜로 미끄러져 감."""
+    if not dates:
+        return
+    x1 = W - 220
+    xs = {d: (x0 + (x1 - x0) * k / max(1, len(dates) - 1)) if len(dates) > 1 else W / 2 for k, d in enumerate(dates)}
+    line, mut = _c(D, "line", "#55534F"), _c(D, "muted_text", "#9C9A96")
+    i = D._id()
+    D.svg.append(f'<path id="{i}" d="M{x0},{y} L{x1},{y}" stroke="{line}" stroke-width="2" fill="none" pathLength="1" '
+                 f'stroke-dasharray="1" stroke-dashoffset="1"/>')
+    D.js.append(f'tl.to("#{i}",{{strokeDashoffset:0,duration:.6,ease:"power2.out"}},0.05);')
+    for d, x in xs.items():
+        j = D._id()
+        D.items.append(f'<div id="{j}" style="position:absolute;left:{x - 60:.0f}px;top:{y + 14:.0f}px;width:120px;text-align:center;'
+                       f'font-family:sans;font-size:22px;letter-spacing:1px;color:{mut};opacity:0">'
+                       f'<div style="width:2px;height:14px;background:{line};margin:-14px auto 6px"></div>{_e(d)}</div>')
+        D.js.append(f'tl.to("#{j}",{{opacity:1,duration:.3}},0.25);')
+    m = D._id()
+    first = next((xs[d] for _, d in marks if d in xs), x0)
+    D.items.append(f'<div id="{m}" style="position:absolute;left:{first - 9:.0f}px;top:{y - 9:.0f}px;width:18px;height:18px;'
+                   f'border-radius:50%;background:{D.red};box-shadow:0 0 0 6px rgba(214,38,46,.22);opacity:0"></div>')
+    shown = False
+    for t, d in marks:
+        if d not in xs:
+            continue
+        if not shown:
+            D.js.append(f'tl.fromTo("#{m}",{{opacity:0,scale:2.2}},{{opacity:1,scale:1,duration:.35,ease:"power3.in"}},{t:.2f});')
+            shown = True
         else:
-            title, text = H.escape(nd.get("title", "")), H.escape(nd.get("text", ""))
-            body = (f'<div style="position:absolute;left:18px;right:18px;top:16px;height:3px;background:{RED};opacity:.75"></div>'
-                    f'<div style="position:absolute;left:20px;right:20px;top:34px;font-family:sans-x,sans;font-size:30px;line-height:1.2;color:{INK}">{title}</div>'
-                    f'<div style="position:absolute;left:20px;right:20px;top:{34 + 44 * max(1, round(len(nd.get("title", "")) / 11)):.0f}px;font-family:sans,sans;'
-                    f'font-size:24px;line-height:1.3;color:#3A332B">{text}</div>')
-            bg = PAPER
-        if date and nd.get("kind") == "photo":   # 사진은 날짜를 사진 귀퉁이에 (설명 글과 겹치지 않게)
-            body += (f'<div style="position:absolute;right:20px;top:20px;padding:1px 8px;background:rgba(243,239,230,.92);font-family:gx,sans-x;font-size:24px;'
-                     f'color:{RED};letter-spacing:.04em">{date}</div>')
-        elif date:
-            body += (f'<div style="position:absolute;right:14px;bottom:10px;font-family:gx,sans-x;font-size:26px;color:{RED};letter-spacing:.04em;'
-                     f'transform:rotate(-4deg)">{date}</div>')
-        if nd.get("stamp"):
-            body += (f'<div style="position:absolute;right:10px;top:22px;padding:2px 12px;border:3px solid {RED};color:{RED};font-family:gx,sans-x;'
-                     f'font-size:30px;transform:rotate(8deg);opacity:.85">{H.escape(nd["stamp"])}</div>')
-        inner.append(f'<div id="{c}" style="position:absolute;left:{x - w / 2:.0f}px;top:{y - h / 2:.0f}px;width:{w:.0f}px;height:{h:.0f}px;background:{bg};'
-                     f'box-shadow:0 14px 30px rgba(0,0,0,.75);transform:rotate({rot:.1f}deg);opacity:0;z-index:2;filter:brightness(.72)">{body}</div>')
-        cjs.append(f'tl.fromTo("#{c}",{{opacity:0,y:-18,scale:1.04}},{{opacity:1,y:0,scale:1,duration:0.45,ease:"power2.out"}},{at:.2f});')
-        D.sfx.append(("click-soft", at))
-        if nd.get("kind") != "photo":   # 메모는 핀, 사진은 테이프
-            pi = D._id()
-            inner.append(f'<div id="{pi}" data-layout-ignore style="position:absolute;left:{x - 13:.0f}px;top:{y - h / 2 + 1:.0f}px;width:26px;height:26px;border-radius:50%;'
-                         f'background:radial-gradient(circle at 35% 35%,#E2685A,#7E1810 72%);box-shadow:3px 6px 7px rgba(0,0,0,.7);opacity:0;z-index:3"></div>')
-            cjs.append(f'tl.to("#{pi}",{{opacity:1,duration:0.2}},{at + 0.3:.2f});')
+            _ease_to(D, f"#{m}", f"left:{xs[d] - 9:.0f}", t, 0.55)
 
-    # 지금 말하는 카드: 불빛이 옮겨 가고 그 카드만 밝아짐 (동그라미 없이)
-    spot = f"{p}_spot"
-    inner.append(f'<div id="{spot}" data-layout-ignore style="position:absolute;left:0;top:0;width:760px;height:760px;margin:-380px 0 0 -380px;z-index:4;pointer-events:none;'
-                 f'background:radial-gradient(circle,rgba(255,226,180,.16),rgba(255,226,180,0) 62%);opacity:0;mix-blend-mode:screen"></div>')
-    lit = None
-    for k, at in active:
-        nd = nodes[k]
-        cjs.append(f'tl.to("#{spot}",{{left:{nd["x"]},top:{nd["y"]},opacity:1,duration:0.7,ease:"power2.inOut"}},{at:.2f});')
-        if lit:
-            cjs.append(f'tl.to("#{p}_{lit}",{{filter:"brightness(.72)",duration:0.5}},{at:.2f});')
-        cjs.append(f'tl.to("#{p}_{k}",{{filter:"brightness(1)",duration:0.5}},{at:.2f});')
-        lit = k
+
+# ---------------------------------------------------------------- 1. hubweb
+HUB = (W / 2, 640, 118)
+
+
+def _layout(nodes: list) -> dict:
+    """가운데 원 둘레에 1차 가지(타원), 2차 가지는 부모 바깥쪽으로. 직접 준 x·y 가 있으면 그것."""
+    hx, hy, _ = HUB
+    first = [n for n in nodes if n.get("from", "hub") == "hub"]
+    pos = {}
+    k = len(first)
+    # 위쪽 날짜 눈금·제목을 피해 왼쪽 위에서 시작해 시계 방향으로
+    for j, n in enumerate(first):
+        a = math.radians(-150) + (math.radians(300) * j / (k - 1) if k > 1 else math.radians(60))
+        pos[n["id"]] = (hx + 560 * math.cos(a), hy + 280 * math.sin(a), a)
+    # 2차 가지: 부모 둘레 후보 자리 중 화면 안·다른 상자와 안 겹치고·가운데에서 가장 먼 곳 (겹치면 읽히지 않음)
+    taken = [(x, y) for x, y, _a in pos.values()] + [(hx, hy)]
+    for n in nodes:
+        p = n.get("from", "hub")
+        if p == "hub" or p not in pos:
+            continue
+        px, py, a = pos[p]
+        best = None
+        for dx, dy in ((430, 0), (-430, 0), (0, -175), (0, 175), (400, -170), (-400, -170), (400, 170), (-400, 170)):
+            x, y = px + dx, py + dy
+            if not (210 <= x <= W - 210 and 300 <= y <= HH - 110):
+                continue
+            if any(abs(x - qx) < 400 and abs(y - qy) < 150 for qx, qy in taken):
+                continue
+            if abs(x - hx) < 400 and abs(y - hy) < 200:   # 가운데 질문 원 둘레는 비워 둠
+                continue
+            score = math.hypot(x - hx, y - hy)
+            if best is None or score > best[0]:
+                best = (score, x, y)
+        x, y = (best[1], best[2]) if best else (px, py + 175)
+        pos[n["id"]] = (x, y, a)
+        taken.append((x, y))
+    out = {}
+    for n in nodes:
+        x, y, _a = pos.get(n["id"], (hx, hy, 0))
+        x, y = n.get("x", x), n.get("y", y)
+        out[n["id"]] = (min(W - 200, max(200, x)), min(HH - 110, max(300, y)))
+    return out
+
+
+def _edge_pts(a: tuple, b: tuple, ra: float, rb: tuple) -> tuple:
+    """a 중심(반지름 ra 원 또는 rb 상자)에서 b 상자 가장자리까지의 직선."""
+    (ax, ay), (bx, by) = a, b
+    dx, dy = bx - ax, by - ay
+    L = math.hypot(dx, dy) or 1
+    ux, uy = dx / L, dy / L
+    sx, sy = ax + ux * ra, ay + uy * ra
+    hw, hh = rb
+    s = min(hw / abs(ux) if ux else 1e9, hh / abs(uy) if uy else 1e9)
+    return (sx, sy), (bx - ux * s, by - uy * s)
+
+
+def s_hubweb(D, sc: dict, bt: list, dur: float):
+    from .hybrid import FT, fit
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    ink, mut, line, card = _c(D, "ink", "#E9E5DC"), _c(D, "muted_text", "#9C9A96"), _c(D, "line", "#55534F"), _c(D, "card", "#18181B")
+    red = D.red
+    nodes = sc.get("nodes", [])[:8]
+    N = {n["id"]: n for n in nodes}
+    P = _layout(nodes)
+    hx, hy, hr = HUB
     if sc.get("title"):
-        inner.append(f'<div id="{p}_t" style="position:absolute;left:0;right:0;top:96px;text-align:center;font-family:serif-x,heavy;font-size:50px;'
-                     f'color:#EDE5D4;letter-spacing:.02em;text-shadow:0 3px 18px rgba(0,0,0,.8);opacity:0;z-index:5">{H.escape(sc["title"])}</div>')
-        cjs.append(f'tl.to("#{p}_t",{{opacity:1,duration:0.6}},0.35);')
+        D.text(160, 158 if sc.get("ruler") else 120, sc["title"], FT("title"), 40, mut, at=0.1, anchor="lm")
+    # 가운데 질문 원
+    hub = sc.get("hub") or {"label": "?"}
+    i = D._id()
+    D.items.append(f'<div id="{i}" style="position:absolute;left:{hx - hr:.0f}px;top:{hy - hr:.0f}px;width:{2 * hr}px;height:{2 * hr}px;'
+                   f'border-radius:50%;border:4px solid {red};background:{card};opacity:0;display:flex;flex-direction:column;'
+                   f'align-items:center;justify-content:center">'
+                   f'<div style="font-family:serif-b;font-size:{fit(FT("value"), hub.get("label", ""), 52, 2 * hr - 30).size}px;color:{ink}">{_e(hub.get("label", ""))}</div>'
+                   + (f'<div style="font-family:sans;font-size:22px;color:{mut};margin-top:6px">{_e(hub["sub"])}</div>' if hub.get("sub") else "")
+                   + '</div>')
+    t0 = bt[0][0]
+    D.js.append(f'tl.fromTo("#{i}",{{opacity:0,scale:.7}},{{opacity:1,scale:1,duration:.5,ease:"power3.out"}},{t0 + 0.1:.2f});')
+    D.js.append(f'tl.to("#{i}",{{boxShadow:"0 0 0 14px rgba(214,38,46,.10)",duration:1.6,yoyo:true,repeat:{max(1, int(dur / 1.6))},ease:"sine.inOut"}},{t0 + 0.6:.2f});')
+    D.sfx.append(("pop", t0 + 0.15))
+    BOX = (190, 62)   # 상자 반폭·반높이
+    ids: dict = {}
+    live: list = []    # 지금 빨강인 것 (다음 박자에 회색으로)
+    marks = []
 
-    # 카메라: 장면 내내 천천히 다가감 (자막 자리는 그대로)
-    D.items.append(f'<div id="{p}_cam" style="position:absolute;inset:0;transform-origin:50% 45%;z-index:1">{"".join(inner)}</div>')
-    D.js.append(f'tl.fromTo("#{p}_cam",{{scale:1.0}},{{scale:1.06,duration:{max(dur, 1):.2f},ease:"none"}},0);')
-    # 결·가장자리 어둡게 (맨 위)
-    D.items.append(f'<div data-layout-ignore style="position:absolute;inset:0;z-index:6;pointer-events:none;box-shadow:inset 0 0 260px 90px rgba(0,0,0,.85)"></div>')
-    D.js.extend(sjs + cjs)
+    def node_html(n, x, y):
+        k = D._id()
+        f = fit(FT("title"), n.get("label", ""), 34, 2 * BOX[0] - 36)
+        date = (f'<div style="position:absolute;left:14px;top:-30px;font-family:sans;font-size:20px;letter-spacing:1px;color:{mut}">{_e(n["date"])}</div>'
+                if n.get("date") else "")
+        sub = (f'<div style="font-family:sans;font-size:22px;color:{mut};margin-top:4px">{_e(n["sub"])}</div>' if n.get("sub") else "")
+        D.items.append(f'<div id="{k}" style="position:absolute;left:{x - BOX[0]:.0f}px;top:{y - BOX[1]:.0f}px;width:{2 * BOX[0]}px;height:{2 * BOX[1]}px;'
+                       f'box-sizing:border-box;border:3px solid {red};background:{card};opacity:0;display:flex;flex-direction:column;'
+                       f'align-items:center;justify-content:center;box-shadow:0 14px 30px rgba(0,0,0,.45)">{date}'
+                       f'<div id="{k}t" style="font-family:sans-x;font-size:{f.size}px;color:{ink}">{_e(n.get("label", ""))}</div>{sub}</div>')
+        return k
+
+    for b, (tb, d) in zip(sc["beats"], bt):
+        # 앞 박자의 빨강 → 회색
+        for kind, el in live:
+            if kind == "box":
+                _ease_to(D, f"#{el}", f'borderColor:"{line}"', tb + 0.05)
+            else:
+                _ease_to(D, f"#{el}", f'stroke:"{line}"', tb + 0.05)
+        live = []
+        for j, nid in enumerate(b.get("add", [])):
+            if nid not in N or nid in ids:
+                continue
+            n = N[nid]
+            ta = tb + 0.2 + 0.55 * j
+            x, y = P[nid]
+            par = n.get("from", "hub")
+            if par == "hub":
+                (sx, sy), (ex, ey) = _edge_pts((hx, hy), (x, y), hr, BOX)
+            else:
+                px, py = P.get(par, (hx, hy))
+                _, (sx, sy) = _edge_pts((x, y), (px, py), 0, BOX)   # 부모 상자 가장자리에서
+                _, (ex, ey) = _edge_pts((px, py), (x, y), 0, BOX)   # 자식 상자 가장자리까지
+            e = D._id()
+            D.svg.append(f'<path id="{e}" d="M{sx:.0f},{sy:.0f} L{ex:.0f},{ey:.0f}" stroke="{red}" stroke-width="4" fill="none" '
+                         f'pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>')
+            D.js.append(f'tl.to("#{e}",{{strokeDashoffset:0,duration:.45,ease:"power2.inOut"}},{ta:.2f});')
+            if n.get("rel"):
+                r = D._id()
+                mx, my = (sx + ex) / 2, (sy + ey) / 2
+                D.items.append(f'<div id="{r}" style="position:absolute;left:{mx:.0f}px;top:{my:.0f}px;transform:translate(-50%,-50%);'
+                               f'padding:4px 12px;background:{_c(D, "base", "#0E0E10")};font-family:sans;font-size:22px;color:{ink};'
+                               f'white-space:nowrap;opacity:0">{_e(n["rel"])}</div>')
+                D.js.append(f'tl.to("#{r}",{{opacity:1,duration:.3}},{ta + 0.35:.2f});')
+            k = node_html(n, x, y)
+            D.js.append(f'tl.fromTo("#{k}",{{opacity:0,scale:.85}},{{opacity:1,scale:1,duration:.35,ease:"back.out(1.6)"}},{ta + 0.35:.2f});')
+            D.sfx.append(("pop", ta + 0.4))
+            ids[nid] = (k, e)
+            live += [("box", k), ("edge", e)]
+            if n.get("date"):
+                marks.append((ta + 0.3, n["date"]))
+        if b.get("date"):
+            marks.append((tb + 0.2, b["date"]))
+        hi = b.get("hi")
+        for nid in ([hi] if isinstance(hi, str) else (hi or [])):
+            if nid in ids:
+                k, e = ids[nid]
+                _ease_to(D, f"#{k}", f'borderColor:"{red}"', tb + 0.3)
+                _ease_to(D, f"#{e}", f'stroke:"{red}"', tb + 0.3)
+                D.js.append(f'tl.fromTo("#{k}",{{scale:1}},{{scale:1.08,duration:.25,yoyo:true,repeat:1}},{tb + 0.35:.2f});')
+                live += [("box", k), ("edge", e)]
+        for j, nid in enumerate(b.get("cut", [])):
+            if nid in ids:
+                k, e = ids[nid]
+                tc = tb + 0.4 + 0.3 * j
+                x, y = P[nid]
+                s = D._id()
+                D.items.append(f'<div id="{s}" style="position:absolute;left:{x - BOX[0] - 14:.0f}px;top:{y - 3:.0f}px;width:{2 * BOX[0] + 28}px;'
+                               f'height:6px;background:{red};transform-origin:left center;transform:scaleX(0) rotate(-6deg)"></div>')
+                D.js.append(f'tl.to("#{s}",{{scaleX:1,duration:.3,ease:"power3.in"}},{tc:.2f});')
+                _ease_to(D, f"#{k}", "opacity:.38", tc + 0.3)
+                _ease_to(D, f"#{e}", "opacity:.25", tc + 0.3)
+                D.sfx.append(("pop", tc + 0.3))
+    if sc.get("ruler"):
+        ruler(D, sc["ruler"], sorted(marks), x0=640 if sc.get("_chnum") else 220)   # 왼쪽 위 장 꼬리표를 비켜서
+    # 천천히 다가가는 카메라 (쌓이는 화면이 정지해 보이지 않게)
+    D.js.append(f'tl.fromTo("#root",{{scale:1}},{{scale:1.035,duration:{max(1.0, dur):.2f},ease:"none"}},0);')
 
 
+# ---------------------------------------------------------------- 2. ledger
+def s_ledger(D, sc: dict, bt: list, dur: float):
+    from .hybrid import FT, fit
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    ink, mut, line = _c(D, "ink", "#E9E5DC"), _c(D, "muted_text", "#9C9A96"), _c(D, "line", "#55534F")
+    red = D.red
+    t0 = bt[0][0]
+    top = 170
+    if sc.get("title"):
+        D.text(W / 2, 110, sc["title"], FT("title"), 40, mut, at=0.1)
+        top = 200
+    cols = {"l": (130, 900), "r": (1020, 1790)}
+    for side, key in (("l", "left"), ("r", "right")):
+        x0, x1 = cols[side]
+        hd = sc.get(key) or {}
+        f = fit(FT("title"), hd.get("head", ""), 54, x1 - x0)
+        D.text(x0, top + 40, hd.get("head", ""), FT("title"), f.size, ink, at=t0 + 0.1 + (0.3 if side == "r" else 0), anchor="lm")
+        if hd.get("sub"):
+            D.text(x0, top + 100, hd["sub"], FT("label"), 26, mut, at=t0 + 0.3 + (0.3 if side == "r" else 0), anchor="lm")
+        u = D._id()
+        D.svg.append(f'<path id="{u}" d="M{x0},{top + 140} L{x1},{top + 140}" stroke="{red}" stroke-width="4" fill="none" '
+                     f'pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>')
+        D.js.append(f'tl.to("#{u}",{{strokeDashoffset:0,duration:.5,ease:"power2.out"}},{t0 + 0.35 + (0.3 if side == "r" else 0):.2f});')
+    v = D._id()
+    D.svg.append(f'<path id="{v}" d="M{W / 2:.0f},{top + 10} L{W / 2:.0f},{HH - 150}" stroke="{line}" stroke-width="2" fill="none" '
+                 f'pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>')
+    D.js.append(f'tl.to("#{v}",{{strokeDashoffset:0,duration:.7,ease:"power2.out"}},{t0 + 0.2:.2f});')
+    D.sfx.append(("pencil", t0 + 0.3))
+    rows = {r["id"]: r for r in sc.get("rows", [])}
+    count = {"l": 0, "r": 0}
+    ids: dict = {}
+    live: list = []
+    RH = 118
+    for b, (tb, d) in zip(sc["beats"], bt):
+        for el in live:
+            _ease_to(D, f"#{el}b", f'background:"{line}"', tb + 0.05)
+        live = []
+        for j, rid in enumerate(b.get("add", [])):
+            if rid not in rows or rid in ids:
+                continue
+            r = rows[rid]
+            side = "r" if str(r.get("side", "l")).startswith("r") else "l"
+            if count[side] >= 5:
+                continue
+            x0, x1 = cols[side]
+            y = top + 175 + count[side] * RH
+            count[side] += 1
+            ta = tb + 0.2 + 0.45 * j
+            k = D._id()
+            fn = fit(FT("title"), r.get("name", ""), 40, x1 - x0 - 190)
+            date = (f'<div style="position:absolute;left:28px;top:12px;font-family:sans;font-size:22px;letter-spacing:1px;color:{mut}">{_e(r["date"])}</div>'
+                    if r.get("date") else "")
+            D.items.append(f'<div id="{k}" style="position:absolute;left:{x0}px;top:{y}px;width:{x1 - x0}px;height:{RH - 18}px;opacity:0">'
+                           f'<div id="{k}b" style="position:absolute;left:0;top:6px;width:8px;height:{RH - 30}px;background:{red}"></div>{date}'
+                           f'<div style="position:absolute;left:{150 if r.get("date") else 28}px;top:2px;font-family:sans-x;font-size:{fn.size}px;color:{ink};white-space:nowrap">{_e(r.get("name", ""))}</div>'
+                           f'<div style="position:absolute;left:{150 if r.get("date") else 28}px;top:{fn.size + 14}px;font-family:sans;font-size:25px;color:{mut};white-space:nowrap">{_e(r.get("note", ""))}</div>'
+                           f'<div style="position:absolute;left:0;right:0;bottom:0;height:1px;background:{_c(D, "line2", "#3D3C39")}"></div></div>')
+            D.js.append(f'tl.fromTo("#{k}",{{opacity:0,x:{-30 if side == "l" else 30}}},{{opacity:1,x:0,duration:.4,ease:"power3.out"}},{ta:.2f});')
+            D.sfx.append(("pop", ta + 0.05))
+            ids[rid] = (k, x1 - x0, y)
+            live.append(k)
+        for nid in ([b["hi"]] if isinstance(b.get("hi"), str) else (b.get("hi") or [])):
+            if nid in ids:
+                k = ids[nid][0]
+                _ease_to(D, f"#{k}b", f'background:"{red}"', tb + 0.3)
+                D.js.append(f'tl.fromTo("#{k}",{{x:0}},{{x:12,duration:.18,yoyo:true,repeat:1}},{tb + 0.3:.2f});')
+                live.append(k)
+        for j, rid in enumerate(b.get("strike", [])):
+            if rid in ids:
+                k, w, y = ids[rid]
+                tc = tb + 0.4 + 0.3 * j
+                s = D._id()
+                x0 = cols["r" if str(rows[rid].get("side", "l")).startswith("r") else "l"][0]
+                D.items.append(f'<div id="{s}l" style="position:absolute;left:{x0 + 20}px;top:{y + 44}px;width:{w - 40}px;height:5px;background:{red};'
+                               f'transform-origin:left center;transform:scaleX(0)"></div>')
+                D.js.append(f'tl.to("#{s}l",{{scaleX:1,duration:.32,ease:"power3.in"}},{tc:.2f});')
+                _ease_to(D, f"#{k}", "opacity:.4", tc + 0.3)
+                D.sfx.append(("pop", tc + 0.3))
+        if b.get("verdict"):
+            vv = D._id()
+            f = fit(FT("value"), b["verdict"], 56, W - 400)
+            D.items.append(f'<div id="{vv}" style="position:absolute;left:0;right:0;top:{HH - 128}px;text-align:center;opacity:0">'
+                           f'<span style="font-family:serif-b;font-size:{f.size}px;color:{ink};border-bottom:5px solid {red};padding:0 10px 6px">'
+                           f'{_e(b["verdict"])}</span></div>')
+            D.js.append(f'tl.fromTo("#{vv}",{{opacity:0,y:20}},{{opacity:1,y:0,duration:.5,ease:"power2.out"}},{tb + 0.4:.2f});')
+            D.sfx.append(("pop", tb + 0.45))
+
+
+# ---------------------------------------------------------------- 3. 누아르 장 표지 (스킨이 noir 이고 look 을 따로 안 정했을 때)
+def s_chapter_noir(D, sc: dict, bt: list, dur: float):
+    """빨간 전면 대신: 검은 바탕 + 작은 빨간 줄(날짜·번호 kicker) + 큰 회백색 명조 제목 + 짧은 빨간 선 (빨강은 한 곳만)."""
+    from .hybrid import FT, fit
+    ink, mut = _c(D, "ink", "#E9E5DC"), _c(D, "muted_text", "#9C9A96")
+    kick = sc.get("kicker") or sc.get("date") or (f"{sc['num']}" if sc.get("num") else "")
+    if kick:
+        k = D._id()
+        D.items.append(f'<div id="{k}" style="position:absolute;left:0;right:0;top:390px;text-align:center;font-family:sans-x;font-size:34px;'
+                       f'letter-spacing:6px;color:{D.red};opacity:0">{_e(kick)}</div>')
+        D.js.append(f'tl.fromTo("#{k}",{{opacity:0,letterSpacing:"18px"}},{{opacity:1,letterSpacing:"6px",duration:.7,ease:"power2.out"}},0.15);')
+    f = fit(FT("value"), sc.get("title", ""), 104, W - 320)
+    D.text(W / 2, 540, sc.get("title", ""), FT("value"), f.size, ink, at=0.45, dur=0.7)
+    w = min(f.getlength(sc.get("title", "")), W - 320)
+    u = D._id()
+    D.svg.append(f'<path id="{u}" d="M{W / 2 - w / 4:.0f},630 L{W / 2 + w / 4:.0f},630" stroke="{D.red}" stroke-width="5" fill="none" '
+                 f'pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>')
+    D.js.append(f'tl.to("#{u}",{{strokeDashoffset:0,duration:.5,ease:"power2.out"}},1.0);')
+    if sc.get("sub"):
+        D.text(W / 2, 700, sc["sub"], FT("label"), 30, mut, at=1.2)
+    D.js.append(f'tl.fromTo("#root",{{scale:1.04}},{{scale:1,duration:{max(1.0, dur):.2f},ease:"power1.out"}},0);')
+    D.sfx.append(("whoosh", 0.1))
+
+
+# ---------------------------------------------------------------- 등록
 def register():
     from . import hybrid
-    hybrid.RENDER["noirboard"] = s_noirboard
-    _register_v2()
-
-
-# ================================================================ 누아르 사건 보드 v2 — 레퍼런스(2026-11-21 사용자 제공 noir-case-board-demo.mp4)
-# 거의 검은 바탕 + 고운 결, 가는 붉은 선, 명조 제목. 세 장면:
-#   noirtitle  작은 붉은 머리말 + 큰 명조 제목 + 붉은 밑줄이 그어짐 + 작은 설명
-#   noircase   위쪽 가는 시간선(눈금·이름, 붉은 점이 지금 칸으로 이동) + 가운데 붉은 동그라미 + 박자마다 생기는 상자,
-#              상자와 동그라미를 잇는 선(지금 것은 붉게, 지난 것은 회색으로), 지난 상자는 흐려짐
-#   noirsides  '엇갈린 두 편': 두 칸(머리말·붉은 줄), 박자마다 줄이 쌓이고(왼쪽 붉은 막대), 뒤집힌 줄은 그어 지움
-# 강조는 이것뿐 — 튀는 등장·효과음·형광펜 없음 (2026-11-21 사용자: "차분하고 깔끔한")
-BG2, TXT, MUT, RED2, BOX, LINE = "#0C0C0E", "#ECEAE6", "#8E8E93", "#D42A2F", "#151517", "#55555B"
-
-
-def _room(D):
-    f = "NanumGothic-ExtraBold.ttf" if getattr(D, "calm", False) else "NanumMyeongjo-ExtraBold.ttf"   # 차분한 모드는 나눔고딕 한 계열
-    D.css.append(f"@font-face{{font-family:noirserif;src:url(assets/fonts/{f})}}")
-    D.items.append(
-        f'<div data-layout-ignore style="position:absolute;inset:0;background:{BG2};z-index:0"></div>'
-        '<svg data-layout-ignore style="position:absolute;inset:0;width:1920px;height:1080px;z-index:0;opacity:.10">'
-        '<filter id="nz"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/></filter>'
-        '<rect width="100%" height="100%" filter="url(#nz)"/></svg>'
-        '<div data-layout-ignore style="position:absolute;inset:0;z-index:0;box-shadow:inset 0 0 300px 80px rgba(0,0,0,.6)"></div>')
-
-
-def _fade(D, el, at, dur=0.6, dy=10):
-    D.js.append(f'tl.fromTo("#{el}",{{opacity:0,y:{dy}}},{{opacity:1,y:0,duration:{dur},ease:"power2.out"}},{at:.2f});')
-
-
-def s_noirtitle(D, sc, bt, dur):
-    _room(D)
-    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
-    p = D._id()
-    t0 = bt[0][0]
-    title = H.escape(sc.get("title", ""))
-    D.items.append(
-        f'<div id="{p}k" style="position:absolute;left:0;right:0;top:330px;text-align:center;font-family:sans,sans;font-size:30px;letter-spacing:.12em;color:{RED2};opacity:0;z-index:2">{H.escape(sc.get("kicker", ""))}</div>'
-        f'<div id="{p}t" style="position:absolute;left:0;right:0;top:390px;text-align:center;font-family:noirserif,serif;font-size:{sc.get("size", 92)}px;color:{TXT};opacity:0;z-index:2">{title}</div>'
-        f'<div id="{p}u" style="position:absolute;left:50%;top:{390 + sc.get("size", 92) * 1.35:.0f}px;width:{sc.get("rule", 520)}px;margin-left:-{sc.get("rule", 520) / 2:.0f}px;height:3px;background:{RED2};transform-origin:left;z-index:2"></div>'
-        f'<div id="{p}s" style="position:absolute;left:0;right:0;top:{430 + sc.get("size", 92) * 1.45:.0f}px;text-align:center;font-family:sans,sans;font-size:28px;color:{MUT};opacity:0;z-index:2">{H.escape(sc.get("sub", ""))}</div>')
-    _fade(D, f"{p}k", t0 + 0.2)
-    _fade(D, f"{p}t", t0 + 0.45, 0.9, 14)
-    D.js.append(f'tl.fromTo("#{p}u",{{scaleX:0}},{{scaleX:1,duration:0.9,ease:"power2.inOut"}},{t0 + 1.1:.2f});')
-    _fade(D, f"{p}s", t0 + 1.6)
-
-
-def s_noircase(D, sc, bt, dur):
-    _room(D)
-    D.label(sc.get("label", ""), dark=True)
-    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
-    p = D._id()
-    steps = sc.get("steps", [])
-    x0, x1, ty = 640, 1720, 118
-    sx = [x0 + (x1 - x0) * i / max(1, len(steps) - 1) for i in range(len(steps))]
-    parts = [f'<div style="position:absolute;left:{x0}px;top:{ty}px;width:{x1 - x0}px;height:2px;background:#4A4A50"></div>']
-    for i, (x, s) in enumerate(zip(sx, steps)):
-        parts.append(f'<div style="position:absolute;left:{x - 1:.0f}px;top:{ty - 6}px;width:2px;height:14px;background:#6A6A70"></div>'
-                     f'<div style="position:absolute;left:{x - 80:.0f}px;width:160px;top:{ty + 16}px;text-align:center;font-family:sans,sans;font-size:24px;color:{MUT}">{H.escape(s)}</div>')
-    parts.append(f'<div id="{p}dot" style="position:absolute;left:{x0 - 11}px;top:{ty - 10}px;width:22px;height:22px;border-radius:50%;background:{RED2};'
-                 f'box-shadow:0 0 14px rgba(212,42,47,.8);opacity:0"></div>')
-    D.items.append(f'<div id="{p}tl" style="position:absolute;inset:0;z-index:2;opacity:0">{"".join(parts)}</div>')
-    D.js.append(f'tl.to("#{p}tl",{{opacity:1,duration:0.6}},0.2);')
-    if sc.get("title"):
-        D.items.append(f'<div id="{p}h" style="position:absolute;left:144px;top:180px;font-family:sans-x,sans;font-size:46px;color:#A9A9AE;opacity:0;z-index:2">{H.escape(sc["title"])}</div>')
-        _fade(D, f"{p}h", 0.35)
-    c = sc["center"]
-    cx, cy, r = c.get("x", 960), c.get("y", 600), c.get("r", 118)
-    D.items.append(f'<div id="{p}c" style="position:absolute;left:{cx - r}px;top:{cy - r}px;width:{2 * r}px;height:{2 * r}px;border-radius:50%;border:4px solid {RED2};'
-                   f'background:{BOX};box-sizing:border-box;z-index:4;opacity:0;display:flex;flex-direction:column;align-items:center;justify-content:center">'
-                   f'<div style="font-family:noirserif,serif;font-size:{c.get("size", 58)}px;color:{TXT};line-height:1.1">{H.escape(c.get("title", ""))}</div>'
-                   f'<div style="margin-top:12px;font-family:sans,sans;font-size:24px;color:{MUT}">{H.escape(c.get("sub", ""))}</div></div>')
-    D.js.append(f'tl.fromTo("#{p}c",{{opacity:0,scale:0.96}},{{opacity:1,scale:1,duration:0.8,ease:"power2.out"}},{bt[0][0] + 0.3:.2f});')
-    boxes = sc["boxes"]
-    lines = []
-    shown, live = [], None
-    for b, (t0, d) in zip(sc["beats"], bt):
-        if b.get("step") is not None and steps:
-            D.js.append(f'tl.to("#{p}dot",{{opacity:1,x:{sx[b["step"]] - x0:.0f},duration:0.7,ease:"power2.inOut"}},{t0 + 0.1:.2f});')
-        for k in b.get("reveal", []):
-            bx = boxes[k]
-            w, h = bx.get("w", 380), bx.get("h", 124)
-            x, y = bx["x"], bx["y"]
-            bid = f"{p}_{k}"
-            D.items.append(
-                f'<div id="{bid}" style="position:absolute;left:{x - w / 2:.0f}px;top:{y - h / 2:.0f}px;width:{w}px;height:{h}px;z-index:4;opacity:0">'
-                f'<div style="position:absolute;left:0;top:-34px;font-family:sans,sans;font-size:22px;color:{MUT}">{H.escape(bx.get("tag", ""))}</div>'
-                f'<div id="{bid}b" style="position:absolute;inset:0;border:3px solid {RED2};background:{BOX};box-sizing:border-box;display:flex;flex-direction:column;'
-                f'align-items:center;justify-content:center"><div style="font-family:sans-x,sans;font-size:{bx.get("size", 38)}px;color:{TXT};white-space:nowrap">{H.escape(bx.get("title", ""))}</div>'
-                f'<div style="margin-top:6px;font-family:sans,sans;font-size:24px;color:{MUT};white-space:nowrap">{H.escape(bx.get("sub", ""))}</div></div></div>')
-            D.js.append(f'tl.fromTo("#{bid}",{{opacity:0}},{{opacity:1,duration:0.6,ease:"power2.out"}},{t0 + 0.3:.2f});')
-            # 상자 → 동그라미 선 (상자 가장자리에서 동그라미 가장자리까지)
-            import math
-            dx, dy = cx - x, cy - y
-            L = math.hypot(dx, dy) or 1
-            ux, uy = dx / L, dy / L
-            ra = min(abs(ux) * w / 2 + abs(uy) * h / 2, math.hypot(w, h) / 2)
-            ax, ay = x + ux * ra, y + uy * ra
-            bxx, byy = cx - ux * (r + 2), cy - uy * (r + 2)
-            lid = f"{bid}l"
-            lines.append(f'<line id="{lid}" x1="{ax:.0f}" y1="{ay:.0f}" x2="{bxx:.0f}" y2="{byy:.0f}" stroke="{RED2}" stroke-width="3" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>')
-            D.js.append(f'tl.to("#{lid}",{{strokeDashoffset:0,duration:0.7,ease:"power1.inOut"}},{t0 + 0.7:.2f});')
-            if bx.get("edge"):
-                mx, my = (ax + bxx) / 2, (ay + byy) / 2
-                D.items.append(f'<div id="{lid}t" style="position:absolute;left:{mx - 120:.0f}px;width:240px;top:{my - 34:.0f}px;text-align:center;font-family:sans-x,sans;'
-                               f'font-size:24px;color:{TXT};opacity:0;z-index:5"><span style="background:{BG2};padding:2px 8px">{H.escape(bx["edge"])}</span></div>')
-                D.js.append(f'tl.to("#{lid}t",{{opacity:1,duration:0.4}},{t0 + 1.2:.2f});')
-            # 지난 상자·선은 회색으로
-            for old in shown:
-                D.js.append(f'tl.to("#{p}_{old}b",{{borderColor:"{LINE}",duration:0.5}},{t0 + 0.3:.2f});'
-                            f'tl.to("#{p}_{old}l",{{stroke:"{LINE}",duration:0.5}},{t0 + 0.3:.2f});')
-            shown.append(k)
-        for k in b.get("dim", []):
-            D.js.append(f'tl.to("#{p}_{k}",{{opacity:0.28,duration:0.6}},{t0 + 0.4:.2f});tl.to("#{p}_{k}l",{{opacity:0.25,duration:0.6}},{t0 + 0.4:.2f});')
-    D.items.insert(len(D.items) - 0, f'<svg data-layout-ignore style="position:absolute;left:0;top:0;width:1920px;height:1080px;z-index:3">{"".join(lines)}</svg>')
-
-
-def s_noirsides(D, sc, bt, dur):
-    _room(D)
-    D.label(sc.get("label", ""), dark=True)
-    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
-    p = D._id()
-    if sc.get("title"):
-        D.items.append(f'<div id="{p}h" style="position:absolute;left:0;right:0;top:110px;text-align:center;font-family:sans-x,sans;font-size:44px;color:#A9A9AE;opacity:0;z-index:2">{H.escape(sc["title"])}</div>')
-        _fade(D, f"{p}h", 0.2)
-    D.items.append(f'<div id="{p}v" style="position:absolute;left:959px;top:210px;width:2px;height:720px;background:#38383D;transform-origin:top;z-index:2"></div>')
-    D.js.append(f'tl.fromTo("#{p}v",{{scaleY:0}},{{scaleY:1,duration:0.8,ease:"power2.inOut"}},0.3);')
-    cols = sc["sides"]
-    X = [122, 1020]
-    for i, s in enumerate(cols):
-        x = X[i]
-        D.items.append(f'<div id="{p}s{i}" style="position:absolute;left:{x}px;top:200px;width:778px;opacity:0;z-index:2">'
-                       f'<div style="font-family:sans-x,sans;font-size:58px;color:{TXT};white-space:nowrap">{H.escape(s.get("head", ""))}</div>'
-                       f'<div style="margin-top:6px;font-family:sans,sans;font-size:26px;color:{MUT}">{H.escape(s.get("sub", ""))}</div>'
-                       f'<div id="{p}r{i}" style="margin-top:24px;height:3px;background:{RED2};transform-origin:left"></div></div>')
-        _fade(D, f"{p}s{i}", 0.5 + 0.3 * i)
-        D.js.append(f'tl.fromTo("#{p}r{i}",{{scaleX:0}},{{scaleX:1,duration:0.8,ease:"power2.inOut"}},{0.9 + 0.3 * i:.2f});')
-    n = [0, 0]
-    rid = {}
-    last = None
-    for b, (t0, d) in zip(sc["beats"], bt):
-        for j, it in enumerate(b.get("add", [])):
-            si = it["side"]
-            k = n[si]
-            n[si] += 1
-            x, y = X[si], 375 + k * 120
-            e = f"{p}i{si}_{k}"
-            rid[(si, k)] = e
-            D.items.append(
-                f'<div id="{e}" style="position:absolute;left:{x}px;top:{y}px;width:778px;height:110px;opacity:0;z-index:2;border-bottom:1px solid #2A2A2E">'
-                f'<div id="{e}m" style="position:absolute;left:0;top:6px;width:7px;height:90px;background:{RED2}"></div>'
-                f'<div style="position:absolute;left:28px;top:14px;font-family:sans,sans;font-size:22px;color:{MUT}">{H.escape(it.get("tag", ""))}</div>'
-                f'<div id="{e}t" style="position:absolute;left:152px;top:2px;font-family:sans-x,sans;font-size:42px;color:{TXT};white-space:nowrap">{H.escape(it.get("title", ""))}</div>'
-                f'<div style="position:absolute;left:152px;top:58px;font-family:sans,sans;font-size:26px;color:{MUT};white-space:nowrap">{H.escape(it.get("sub", ""))}</div>'
-                f'<div id="{e}x" style="position:absolute;left:146px;top:30px;width:{min(620, 36 * len(it.get("title", "")) + 16)}px;height:3px;background:{RED2};transform-origin:left"></div></div>')
-            at = t0 + 0.3 + 0.4 * j
-            D.js.append(f'tl.fromTo("#{e}",{{opacity:0,x:-12}},{{opacity:1,x:0,duration:0.6,ease:"power2.out"}},{at:.2f});')
-            if last:
-                D.js.append(f'tl.to("#{last}m",{{background:"#4A4A50",duration:0.5}},{at:.2f});')
-            last = e
-        for (si, k) in b.get("strike", []):
-            e = rid.get((si, k))
-            if e:
-                D.js.append(f'tl.fromTo("#{e}x",{{scaleX:0}},{{scaleX:1,duration:0.6,ease:"power2.inOut"}},{t0 + 0.8:.2f});'
-                            f'tl.to("#{e}",{{opacity:0.45,duration:0.6}},{t0 + 1.2:.2f});')
-
-
-def _register_v2():
-    from . import hybrid
+    hybrid.RENDER["hubweb"] = s_hubweb
+    hybrid.RENDER["ledger"] = s_ledger
     orig = hybrid.RENDER["chapter"]
 
-    def chapter(D, sc, bt, dur):   # 장 표지에 "look": "noir" 면 누아르 제목 카드
-        if sc.get("look") == "noir":
-            return s_noirtitle(D, dict(sc, _chnum="", _chtitle=""), bt, dur)
+    def chapter(D, sc, bt, dur):
+        if sc.get("look") == "noir" or (D.skin.get("id") == "noir" and not sc.get("look")):
+            return s_chapter_noir(D, sc, bt, dur)
         return orig(D, sc, bt, dur)
     hybrid.RENDER["chapter"] = chapter
-    hybrid.RENDER["noirtitle"] = s_noirtitle
-    hybrid.RENDER["noircase"] = s_noircase
-    hybrid.RENDER["noirsides"] = s_noirsides

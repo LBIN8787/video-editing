@@ -5,6 +5,7 @@
 까지 한 번에 한다. 표준 라이브러리 + Pillow 만 쓴다 (GitHub Actions 에서도 그대로 돈다).
 
 인증 (키를 채팅에 쓰지 않음): 환경변수 YT_CLIENT_ID · YT_CLIENT_SECRET · YT_REFRESH_TOKEN
+  채널마다 토큰이 따로 (channel.yaml youtube.credentials: KNOWLEDGE → YT_*_KNOWLEDGE, 또는 PC 의 youtube_knowledge.json)
   - 한 번만: 사용자 PC 에서 python scripts/youtube_auth.py client_secret.json --to-github
     (이미 로그인된 브라우저에서 '허용' → 토큰이 GitHub 저장소 비밀값으로 바로 들어감)
   - 실제 올리기는 GitHub Actions(.github/workflows/youtube-publish.yml)가 한다:
@@ -106,12 +107,36 @@ def ass_to_srt(ass: Path) -> str:
 
 
 # ---------------------------------------------------------------- API
-def _token() -> str:
-    miss = [k for k in ("YT_CLIENT_ID", "YT_CLIENT_SECRET", "YT_REFRESH_TOKEN") if not os.environ.get(k)]
+KEYS = ("YT_CLIENT_ID", "YT_CLIENT_SECRET", "YT_REFRESH_TOKEN")
+
+
+def secrets_dir() -> Path:
+    """PC 에 둔 유튜브 권한 파일 위치 (커밋 안 됨). 환경변수 YTFLOW_SECRETS, 없으면 ~/.ytflow."""
+    return Path(os.environ.get("YTFLOW_SECRETS") or Path.home() / ".ytflow")
+
+
+def creds(name: str | None = None) -> dict:
+    """채널별 권한: 채널마다 브랜드 계정이 달라 토큰도 따로다 (channel.yaml youtube.credentials, 예: KNOWLEDGE).
+    찾는 순서 — 환경변수 YT_*_<이름> → (이름 없을 때) YT_* → PC 파일 <YTFLOW_SECRETS>/youtube_<이름|default>.json"""
+    sfx = f"_{name.upper()}" if name else ""
+    got = {k: os.environ.get(k + sfx) for k in KEYS}
+    if not all(got.values()) and not name:
+        got = {k: os.environ.get(k) for k in KEYS}
+    if not all(got.values()):
+        f = secrets_dir() / f"youtube_{(name or 'default').lower()}.json"
+        if f.exists():
+            got = json.loads(f.read_text(encoding="utf-8"))
+    miss = [k + sfx for k in KEYS if not got.get(k)]
     if miss:
-        raise SystemExit(f"[yt-publish] 인증 정보 없음: {', '.join(miss)} — docs/24-youtube-publish.md §1 (한 번만: scripts/youtube_auth.py)")
-    body = urllib.parse.urlencode({"client_id": os.environ["YT_CLIENT_ID"], "client_secret": os.environ["YT_CLIENT_SECRET"],
-                                   "refresh_token": os.environ["YT_REFRESH_TOKEN"], "grant_type": "refresh_token"}).encode()
+        raise SystemExit(f"[yt-publish] 인증 정보 없음: {', '.join(miss)} — 한 번만: python scripts/youtube_auth.py"
+                         + (f" --name {name}" if name else "") + " (docs/24-youtube-publish.md §1)")
+    return got
+
+
+def _token(name: str | None = None) -> str:
+    c = creds(name)
+    body = urllib.parse.urlencode({"client_id": c["YT_CLIENT_ID"], "client_secret": c["YT_CLIENT_SECRET"],
+                                   "refresh_token": c["YT_REFRESH_TOKEN"], "grant_type": "refresh_token"}).encode()
     with urllib.request.urlopen(urllib.request.Request("https://oauth2.googleapis.com/token", data=body), timeout=60) as r:
         return json.loads(r.read())["access_token"]
 
@@ -259,14 +284,14 @@ def run(project: str, at: str | None = None, privacy: str | None = None, dry_run
         return plan
     if not video.exists():
         raise SystemExit(f"[yt-publish] 영상 없음: {video}")
-    tok = _token()
+    tok = _token(s.get("credentials"))
     rec = {"project": pr.path.name, **plan, "steps": []}
     want = s.get("expected_channel")
     if want:   # 권한이 가리키는 채널 확인 — 다른 채널에 잘못 올리지 않게 (2026-11-20: 호기심 편은 '한겹 더 보면')
         me, _ = _req(tok, "GET", "https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true")
         got = [(it.get("snippet") or {}).get("title", "") for it in me.get("items", [])]
         rec["authorized_channel"] = got
-        if want not in got:
+        if want.replace(" ", "") not in [g.replace(" ", "") for g in got]:   # 띄어쓰기 차이는 같은 채널 (실제 이름 '한 겹 더 보면')
             rec["blocked"] = f"권한이 가리키는 채널 {got} ≠ 올릴 채널 '{want}' — 올리지 않음 (scripts/youtube_auth.py 로 '{want}' 권한을 따로 받아야 함)"
             rec_p.write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf-8")
             raise SystemExit("[yt-publish] " + rec["blocked"])
@@ -295,14 +320,14 @@ def _update_meta(pr: Project, rec: dict, rec_p: Path, dry_run: bool = False, pri
     if dry_run:
         print(f"[yt-publish] 제목·설명란·태그 바꾸기 미리 보기 (바꾸지 않음): {vid} → {p['title']}" + (f" · 공개 상태 → {privacy}" if privacy else ""))
         return {"video_id": vid, "title": p["title"], "privacy": privacy}
-    tok = _token()
+    tok = _token(settings(pr).get("credentials"))
     if privacy:   # 공개 상태 바꾸기 (2026-11-15 사용자: 기존 영상을 일부 공개로) — 예약 공개는 지움
         cur_s, _ = _req(tok, "GET", f"{API}/videos?part=status&id={vid}")
         if not cur_s.get("items"):
             raise SystemExit(f"[yt-publish] 영상을 찾지 못함: {vid}")
         st = cur_s["items"][0]["status"]
         st["privacyStatus"] = privacy
-        st.pop("publishAt", None), st.pop("uploadStatus", None), st.pop("failureReason", None), st.pop("rejectionReason", None)
+        st.update(publishAt=None), st.pop("uploadStatus", None), st.pop("failureReason", None), st.pop("rejectionReason", None)   # publishAt 을 빼기만 하면 예약이 남음 (2026-11-21)
         _req(tok, "PUT", f"{API}/videos?part=status", {"id": vid, "status": st})
         rec.setdefault("privacy_history", []).append(rec.get("privacy"))
         rec["privacy"] = privacy
@@ -323,7 +348,7 @@ def _update_meta(pr: Project, rec: dict, rec_p: Path, dry_run: bool = False, pri
 
 def _resume(pr: Project, rec: dict, rec_p: Path, thumb: str) -> dict:
     """이미 올린 영상에 빠진 단계(썸네일·자막·재생목록)만 다시."""
-    s, edir, vid, tok = settings(pr), pr.dir("edit"), rec["video_id"], _token()
+    s, edir, vid, tok = settings(pr), pr.dir("edit"), rec["video_id"], _token(settings(pr).get("credentials"))
     steps = {"thumbnail": lambda: thumbnail(tok, vid, edir / f"thumbnail_{thumb}.png"),
              "captions": lambda: captions(tok, vid, ass_to_srt(edir / "subs.ass")),
              "playlist": lambda: playlist(tok, vid, rec["playlist"]) if rec.get("playlist") else None}

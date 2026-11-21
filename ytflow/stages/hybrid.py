@@ -1229,10 +1229,10 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     from . import backdrop   # 장면 목적에 맞는 바탕 (film·grid·spot·tint·photo, manual 05 §0-2)
     kind = "film" if spec.get("calm") else backdrop.auto(sc, bool(spec.get("footage")))   # 차분한 모드: 장면마다 바탕을 바꾸지 않음 (팩의 무늬 없는 바탕 하나)
     chap = int(sc.get("chapter", 0) or 0)
-    tag = {"tint": f"_c{chap}", "photo": f"_{sc.get('bg_src', '')}",
+    tag = {"tint": f"_c{chap}", "photo": f"_{sc.get('bg_src', '')}", "illust": f"_a{sc.get('bg_src', '')}",
            "duotone": f"_{sc.get('bg_src', '')}_{''.join(c.strip('#') for c in (sc.get('_duo') or []))}",
            "glow": f"_{''.join(c.strip('#') for c in (sc.get('_duo') or []))}", "cork": f"_c{chap}", "chalk": f"_c{chap}", "dash": f"_c{chap}"}.get(kind, "")
-    still = backdrop.photo_still(project, spec, sc.get("bg_src")) if kind in ("photo", "duotone") else None
+    still = backdrop.photo_still(project, spec, sc.get("bg_src")) if kind in ("photo", "duotone", "illust") else None
     if still is not None and still.exists():   # 같은 키라도 사진을 바꾸면 바탕도 새로 (파일 크기로 구분)
         tag += f"_{still.stat().st_size % 100000}"
     bg_name = f"bg_{D.skin['id']}_{kind}{tag}_b3.jpg"   # _b3: 바탕 밝기 규칙 판 (바꾸면 올림) — b3: 밝은 팩 사진 바탕을 옅게
@@ -1583,8 +1583,8 @@ def make(project: Project, workers: int = 3) -> Path:
         mix = "".join(f"[s{k}]" for k in range(len(filt)))
         subprocess.run(ff + inputs + ["-filter_complex", ";".join(filt) + f";{mix}amix=inputs={len(filt)}:normalize=0[o]",
                                       "-map", "[o]", "-ar", "48000", "-ac", "2", "-t", f"{t_acc:.2f}", str(sfx_wav)], check=True)
-    ass = str((edir / "subs.ass").resolve()).replace(":", "\\:")
-    fdir = str(paper.FONT_DIR).replace(":", "\\:")
+    ass = (edir / "subs.ass").resolve().as_posix().replace(":", "\\:")   # 윈도 경로의 역슬래시는 필터에서 지워짐 → / 로
+    fdir = Path(paper.FONT_DIR).as_posix().replace(":", "\\:")
     a_in = ["-i", str(work / "voice.wav")] + (["-i", str(sfx_wav)] if ev else [])
     amix = "[1:a][2:a]amix=inputs=2:normalize=0:duration=first[a]" if ev else "[1:a]anull[a]"
     bgm = spec.get("bgm")   # v12: 기본은 배경음 없음 — 어울리는 곡이 확실할 때만 대본에 "bgm": "<등록부 id>"
@@ -1655,7 +1655,9 @@ try:  # 새 연출 문법(아카이브 다큐·지도 여정·키네틱 타이�
     _stage.register()
     from . import explain as _explain    # 설명 무대 (afterline·spread·share 장면) — 월텍남 벤치마크 docs/31·docs/51
     _explain.register()
-    from . import noir as _noir          # 누아르 사건 보드 (noirboard 장면) — 2026-11-21 사용자
+    from . import noir as _noir          # 누아르 사건 보드 (hubweb 관계망·ledger 두 열 장부, 날짜 눈금) — docs/57
     _noir.register()
+    from . import noircase as _noircase  # 누아르 변형 (noirtitle·noircase·noirsides, 2026-11-21 드러켄밀러 편)
+    _noircase.register()
 except Exception as _e_dir:  # noqa: BLE001
     print(f"[hybrid] 새 연출 장면 등록 건너뜀: {_e_dir}")

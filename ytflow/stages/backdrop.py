@@ -22,7 +22,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageFilter
 
-KINDS = ("film", "grid", "spot", "tint", "photo", "duotone", "cork", "chalk", "dash", "glow")
+KINDS = ("film", "grid", "spot", "tint", "photo", "duotone", "cork", "chalk", "dash", "glow", "illust")
 BY_TYPE = {
     "grid": {"bars", "chart", "versus", "timeline", "choropleth", "people", "compare_values", "proportion", "usmap"},
     "spot": {"quote", "statement", "bignum"},
@@ -135,8 +135,26 @@ def make_identity(kind: str, W: int, H: int, chapter: int = 0, photo: Path | Non
     return Image.fromarray(np.clip(arr, 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.4))
 
 
+def make_illust(W: int, H: int, art: Path) -> Image.Image:
+    """v73 호기심 장 표지: 그 편의 삽화 한 장을 색 그대로 (흐리지 않음), 가운데 글자 자리와 가장자리만 살짝 눌러 줌."""
+    im = Image.open(art).convert("RGB")
+    s = max(W / im.width, H / im.height)
+    im = im.resize((int(im.width * s) + 1, int(im.height * s) + 1))
+    im = im.crop(((im.width - W) // 2, (im.height - H) // 2, (im.width - W) // 2 + W, (im.height - H) // 2 + H))
+    arr = np.asarray(im, np.float32)
+    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+    r2 = ((xx - W / 2) / (W / 2)) ** 2 + ((yy - H / 2) / (H / 2)) ** 2
+    arr *= (1 - 0.35 * np.clip(r2, 0, 2) / 2)[..., None]       # 가장자리
+    arr *= (1 - 0.40 * np.exp(-r2 * 1.6))[..., None]             # 가운데 글자 자리
+    return Image.fromarray(np.clip(arr, 0, 255).astype(np.uint8))
+
+
 def make(sk: dict, kind: str, W: int, H: int, chapter: int = 0, photo: Path | None = None, duo=None) -> Image.Image:
     from . import skin as skm
+    if kind == "illust":
+        if photo and photo.exists():
+            return make_illust(W, H, photo)
+        kind = "film"
     if kind in ("duotone", "cork", "chalk", "dash", "glow"):
         if kind == "duotone" and not (photo and photo.exists()):
             kind = "glow"

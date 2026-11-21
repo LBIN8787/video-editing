@@ -17,6 +17,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 ## 먼저 읽을 것
 | 하려는 일 | 읽을 파일 |
 |---|---|
+| **대본 매뉴얼 — 대본이 언제나 1순위 (v82, 2026-11-21 사용자: "앞으로는 주제선정과 대본작성 자체를 1순위로 후에 그에 맞춘 연출을 하세요. 즉 언제나 가장 우선순위는 대본이며 대본의 메뉴얼을 구체화하세요")** — 쓰기 전 여섯 가지·전진하는 대본·사실과 해석 대조표·유형별 중심축·D2 반복, D2 통과 전 그림·음성·렌더 없음 | `manual/13-script.md` (채널 문서의 대본 절보다 먼저) |
 | **제작 매뉴얼 (욕망 → 주제 → 조사 → 대본 → 연출 → 검사)** | `manual/README.md` → `manual/01~12` |
 | **편집 스타일 등록부·자동 추천** (상황에 맞는 스타일, 파일 하나로 늘림) | `styles/recipes/`, `python -m ytflow style-pick <프로젝트>`, `manual/07-extend.md` |
 | **스타일 풀 늘리기** (조사·후보·라이선스, 새 장면 chat·terminal·zoomshot·choropleth·mark, 세로 쇼츠 Claude 판) | `docs/17-style-pool.md`, `skills/edit-style-pool`, `python -m ytflow short <프로젝트>` |
@@ -28,7 +29,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 | **이어 읽는 시장 — 매일 운영 매뉴얼 (v19)** — 하루 시간표, SAVE(오선) 소식 확인(§3-0, `inbox/save/`, docs/28 §1), 원인별 1차 출처, 대본 장면표·고정 문구, 업로드 순서, 예외 대응 | `manual/09-market-daily.md`, `python -m ytflow yt-pack <프로젝트>` |
 | **머니크루 수준의 깊이 (v33)** — 주제 선정(다른 층·한국 계좌로 귀결·큰 사건은 각도별 연속), 대본 뼈대 11단계(반전 숫자→원문 해부→메커니즘→계산→같은 틀 역사 비교→틀리는 경우→기준선 신호), 깊이 기법 7 | `docs/31-moneycrew-reverse.md`, `manual/03-market.md` §0-4 |
 | **뻔한 사실 말고 자료를 엮어서 (v26, 시장 분석·심층·주간)** — 알려진 것(`known`) 대신 엮어야 보이는 것(`new_angle`)으로 제목·훅, 팩트시트 `## 자료 지도`(보고서·발언·행동을 날짜 순, 자료마다 의미)·`## 매체 프레임`(국내·해외 매체가 어떻게 다뤘나), 말과 행동 맞대기 | `manual/03-market.md` §0-2, `manual/09-market-daily.md` §2·§5 |
-| **사람·매체 인사이트 + 인터뷰·방송 영상 소스 (v36, 2026-11-17)** — 사실 ✅ / 인사이트 💭 / 해석 💬 를 나눠 이름 있는 사람·매체의 시각을 모으고(`## 인사이트`), 인터뷰·방송은 공식 채널에서 짧게 인용(`## 영상 소스`, `bite`), 원본이 없으면 인용 카드로 | `manual/09-market-daily.md` §3-4·§3-5, `ytflow/stages/hybrid.py` `bite_fallback` |
+| **사람·매체 인사이트 + 인터뷰·방송 영상 소스 (v36, 2026-11-17)** — 사실 ✅ / 인사이트 💭 / 해석 💬 를 나눠 이름 있는 사람·매체의 시각을 모으고(`## 인사이트`), 인터뷰·방송은 공식 채널에서, 권리별 길이로 인용(v80: 공공·본인/회사 공식은 길이 제한 없음, 방송사는 짧게, 신고·경고 권리자는 `config/rights_blocklist.yaml` 로 막음 — `## 영상 소스`, `bite`), 원본이 없으면 인용 카드로 | `manual/09-market-daily.md` §3-4·§3-5, `ytflow/stages/hybrid.py` `bite_fallback` |
 | **기술 분석·미래 전망 + CEO 소식 (v42, 2026-11-17)** — 시장 채널이 기술이 어디로 가는지도 다룸(로드맵·학회·리서치 → 누가 이기나·시간표·틀리는 경우), CEO 의 공개 발언·공식 행동을 1차 출처로 모음(`config/ceo_watch.yaml`, 팩트시트 `## CEO 소식`) | `manual/09-market-daily.md` §2-2·§3-4-2 |
 | **뉴스레터 소재 (2026-11-15)** — 구독한 무료 뉴스레터를 매일 모아 채널별 소재 목록(제목·링크·분류만). SAVE 와 같은 '단서' 자리: 문장을 옮기지 않고 숫자·발언은 1차 출처로 | `docs/36-newsletters.md`, `manual/09-market-daily.md` §3-0-1, `inbox/newsletters/`, `python -m ytflow newsletters` |
 | **유튜브 올리기·관리 자동화** — 업로드·설명란(더보기)·태그·카테고리·예약 공개·썸네일·자막·재생목록 (공식 API, GitHub Actions) | `docs/24-youtube-publish.md`, `python -m ytflow yt-publish <프로젝트>`, `scripts/youtube_auth.py`, `.github/workflows/youtube-publish.yml` |
@@ -152,6 +153,7 @@ python -m ytflow styles | schemas | status <프로젝트>
 | `shorts` 쇼츠 | 9:16 고정 훅 + 큰 자막 | shorts-aitips | `prompts/shorts_script.md` |
 
 ## 규칙 (모든 에이전트 공통)
+- **main 에 직접 커밋·푸시 허용 — 모든 세션 (2026-11-21 사용자: "이 세션애서 main에 직접 커밋하고 푸쉬하는 것을 허용합니다" · "이 세션만이 아니라 모든 세션에서 이를 허용합니다"):** 작업 브랜치를 따로 만들지 않고 main 에서 커밋하고 `git push origin main` 해도 됩니다. 매뉴얼·규칙 파일은 그대로 잠금 절차(아래 '매뉴얼은 한 번에 한 명만')를 따르고, 미디어 커밋 금지·사실 규칙도 그대로입니다. 푸시 전에 `git fetch` 로 main 이 앞서 있지 않은지 확인합니다.
 - **PC(로컬)에서 시작하면 `inbox/pc-tasks/` 의 `status: pending` 부터 (2026-11-20 사용자):** 클라우드가 못 하는 일(원본 구간 받기·예시 그림 그리기)이 여기 쌓입니다. 파일의 명령을 실행하고 done 으로 바꿔 main 에 푸시. Claude Code 는 시작할 때 알림이 뜹니다(`scripts/pc_tasks.py`).
 - **매뉴얼은 한 번에 한 명만 — 고칠 때만 잠그고 순서대로 (2026-11-15·16 사용자 요청, docs/35):** 매뉴얼·규칙 파일(`manual/OWNERS.yaml` 의 protected — manual/, topics/, styles/recipes·techniques, skills/, AGENTS.md, 검사 코드)은 **잠금을 가진 한 명만** 고칩니다. 절차: `manual-lock acquire` → 고치기 → main 에 합치기 → `manual-lock release` (잠겨 있으면 `manual-lock request`, 자세한 것은 docs/35). **잠금은 '한 번에 한 명'만 지키는 장치이지 기본으로 잠가 두는 것이 아닙니다(2026-11-18 사용자: "깃이 비었는데도 아무도 사용 안하는데 락을 걸어서 깃을 사용하지 않는 상황이 이루어지지 않도록").** 비어 있으면 `review`·`feedback`·보호 파일 편집·커밋이 그 자리에서 자동으로 잡고(짧게, 저절로 풀림) 바로 씁니다. 다른 사람이 쓰는 중일 때만 요청·제안함으로 갑니다. 처음 클론하면 `git config core.hooksPath .githooks`. 영상 프로젝트·렌더러·자료는 각자 브랜치에서 자유롭게.
 - **트렌드·핫이슈와 이어진 주제 선정·제목·썸네일 (모든 채널 공통, 2026-11-20 사용자: "모든 공통규칙으로 트렌드 핫이슈 유행과 연관있는 주제선정 썸네일 생성으로 넣어주세요"):** 후보를 고르기 전에 이번 주 키워드(뉴스 상위·검색 급증·유튜브 아웃라이어·뉴스레터·계절 행사)를 모으고, 후보마다 '지금의 고리'(`topic_brief.json` 의 `why_now`: 키워드·날짜·출처)를 적어 고리가 있는 후보를 먼저 고릅니다. 그 키워드를 제목 앞 20자와 썸네일 큰 글씨에 넣습니다. 시사는 입구, 본론은 채널 기준대로. 영상에 없는 유행어로 낚거나 사고·재난 피해를 입구로 쓰지 않습니다 — `manual/01-desire-map.md` §3-1, `prompts/thumbnail.md` '지금의 고리', 시장은 `manual/09-market-daily.md` §7-1.
@@ -171,6 +173,7 @@ python -m ytflow styles | schemas | status <프로젝트>
 - **목소리:** 초안은 edge-tts, **업로드 최종본은 ElevenLabs**(영상 확정 후 채널별 voice_id 지정). API 키는 채팅에 쓰지 않고 환경변수·네트워크 비밀값으로.
 - **외부 도구:** 버전은 `tools/external.json` 에 고정합니다. 올릴 때는 그 도구의 SKILL.md·스크립트를 다시 읽고(네트워크 호출·자동 설치 확인) `docs/05-skills-review.md` 에 기록합니다.
 - **저장 위치 — Git 과 Drive 를 나눠서 (2026-11-16 사용자: "깃에 보관하되 깃에 보관하기 힘든 부분은 드라이브쪽을 활용하라는거야 로컬드라이브 부담을 줄이는게 목적이고"):** 코드·문서·설정·기획·작은 분석 결과(md/json/csv/yaml)는 **Git** 에 둡니다. 큰 영상·오디오·프레임 묶음·원자료처럼 Git 이력에 부담이 되는 **파일은 Google Drive** 에 두고, Git 에는 위치·판본·크기 같은 최소 메타데이터만 남깁니다(접근 토큰이 든 링크·비공개 자료는 공개 Git 금지). 모든 파일을 두 곳에 두라는 뜻은 아니며, 목적은 **PC 저장공간 부담 줄이기**입니다. 올리고 다시 열어 확인하기 전에는 PC 원본을 지우지 않습니다. PC 는 Google Drive for desktop 의 `ytflow` 폴더를 환경변수 `YTFLOW_DRIVE`(예: `G:\내 드라이브\ytflow`)로 지정해 그 아래에 저장하고(`refs\`·`cache\`·`영상\`), 클라우드 세션은 Drive 커넥터(파일당 10MB 까지)·rclone 으로 올립니다. D 드라이브에 새 파일을 만들지 않고, C 드라이브도 쓰지 않습니다. 동기화하면 깨지는 git 저장소·가상환경·설치 도구는 예외(`docs/09-storage.md` §0).
+- **올린 영상은 유튜브 링크로 대체, 재료는 그대로 (2026-11-21 사용자: "유튜브에 업로드하면 유튜브 링크를 올리고 드라이브에서 삭제" · "재료는 삭제하는걸 원하지 않아요 단지 영상을 이제 하이퍼링크처럼 대체한다 느낌"):** 유튜브에 올리고 처리(processed)가 끝난 것을 확인하면 Drive 에서 **완성본·중간 렌더 mp4 만** 지우고, 그 자리는 `05_edit/youtube_publish.json`(영상 주소, Git)이 대신합니다. 어떻게 만들었는지를 다시 만들 수 있는 **재료는 지우지 않습니다** — 대본·편집 계획(Git), 목소리 mp3 와 글자별 시각(`*.align.json`), 삽화·사진, 썸네일 A/B/C, 자막(ass). 고칠 때는 완성본이 아니라 재료로 다시 렌더합니다. 유튜브에서 내려받은 사본은 다시 압축된 것이라 확인·참고용입니다(`docs/09-storage.md` §0-4).
 - **스키마:** 에이전트가 직접 쓰는 JSON 은 `schemas/*.schema.json` 을 따릅니다(`python -m ytflow schemas` 로 갱신).
 
 ## 폴더

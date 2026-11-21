@@ -35,7 +35,7 @@ setx YTFLOW_DRIVE "G:\내 드라이브\ytflow"
 | 레퍼런스 영상 캡처·rea-video 분석 결과 (`skills/ref-watch-ego`) | `%YTFLOW_DRIVE%\refs\<영상ID>\` |
 | 사용자가 받은 원본 영상·자료 화면 | `%YTFLOW_DRIVE%\refs\` 또는 `%YTFLOW_DRIVE%\cache\` |
 | ytflow 캐시 (받은 자료·측정) | `YTFLOW_DRIVE` 가 있으면 자동으로 `%YTFLOW_DRIVE%\cache` (`ytflow/config.py`) |
-| 완성 영상·자막·업로드 문구 | `%YTFLOW_DRIVE%\영상\` (+ GitHub Release 보관은 그대로) |
+| 완성 영상·자막·업로드 문구 | `%YTFLOW_DRIVE%\영상\` (GitHub Release 는 공개해도 되는 것만 선택) |
 | 클라우드 세션에서 만든 파일 | Drive 커넥터로 `ytflow` 폴더에 업로드(파일당 10MB). 큰 영상은 rclone(§2 표) 또는 GitHub Release |
 
 ### 3) 예외 — Drive 동기화 폴더에 두면 안 되는 것
@@ -44,13 +44,29 @@ Drive 동기화는 파일 수만 개짜리 폴더와 계속 바뀌는 잠금 파
 - 파이썬 가상환경(`reavenv`)·pip/npm 캐시·Playwright 브라우저·받아쓰기 모델(`HF_HOME`)·`REA_VIDEO_MODELS`
 - 렌더 중간 파일(`04_assets/hb*`, `05_edit/*work/`) — 다시 만들 수 있으므로 저장소 안에 두고 Release 뒤 지웁니다.
 
+### 4) 유튜브에 올린 영상 — 완성본은 링크로 대체, 재료는 그대로 (2026-11-21 사용자)
+> "재료는 삭제하는걸 원하지 않아요 단지 영상을 이제 하이퍼링크처럼 대체한다 느낌인거지 어떻게 이 영상을 만들었는지에 대한 기준 메뉴얼 재료는 그대로 냅두는거죠"
+
+| 무엇 | 올린 뒤 |
+|---|---|
+| 완성본 mp4 (`final*.mp4`, `*_elevenlabs.mp4` 등)·중간 렌더(`*_art_review.mp4`, 이전 판) | **Drive 에서 지움** — `05_edit/youtube_publish.json` 의 주소가 대신함 |
+| 대본·편집 계획·의도·팩트시트·매뉴얼 | Git 그대로 |
+| 목소리 mp3·글자별 시각(`*.align.json`)·문장 시각(`sentences.json`) | Drive 그대로 (다시 렌더할 때 필요, 한 편 10MB 안팎) |
+| 삽화·사진·자료 화면 | Drive 그대로 |
+| 썸네일 A/B/C·자막(ass) | Drive 그대로 |
+
+- 지우기 전: 유튜브 상태가 `processed` 인지 확인하고 `youtube_publish.json` 이 Git 에 있는지 봅니다.
+- 고칠 때는 재료로 다시 렌더합니다 (2026-11-21 넘기기·흰곰 재업로드도 이렇게 함).
+- Studio 에서 내려받은 사본은 다시 압축된 것이라 확인·참고용으로만 씁니다.
+- 공개를 내리거나 바꾼 예전 영상도 유튜브에 비공개로 남아 있으면 그 주소를 `youtube_publish_v1.json` 처럼 함께 기록합니다.
+
 아래 'D 드라이브' 절은 이 예외 항목에만 해당하는 예전 기록입니다.
 
 ## 1. GitHub (git)
 코드(`ytflow/`), 문서(`docs/`, `AGENTS.md`), 절차서(`skills/`), 설정(`config/`, `channels/`, `styles/*/` 의 md·yaml·json),
 프로젝트 기획 파일(`projects/*/` 의 md·json·csv·srt·ass·yaml: 소스 목록·팩트시트·원고·대본·업로드 문구·보고서).
 
-## 2. 영상 보관 — GitHub Release (기본, 키 불필요) — 2026-11-07부터
+## 2. 영상 보관 — GitHub Release (선택: 공개해도 되는 것만, 키 불필요) — 2026-11-07부터 · 2026-11-20 사용자 "깃과 드라이브로 나눠서 해줘" 로 기본은 Drive(§0)
 `python -m ytflow upload <프로젝트> [--archive]` → 릴리스 `video-<프로젝트>` 에 final.mp4·자막·업로드 문구(+ footage.zip).
 임시 브랜치 `media/<프로젝트>` 를 push 하면 `.github/workflows/media-release.yml` 이 릴리스에 붙이고 브랜치를 지웁니다.
 Drive 토큰처럼 1시간마다 만료되는 키가 없습니다. 주소는 `05_edit/release.json`. 자세한 절차: `docs/11-playbook.md`.

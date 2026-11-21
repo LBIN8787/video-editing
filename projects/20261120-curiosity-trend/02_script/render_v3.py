@@ -38,6 +38,27 @@ def chunks(text, n=30):
     return out
 
 
+def sub_chunks(text, n=28):
+    out = []
+    for s in re.split(r"(?<=[.?!])\s+", text.strip()):   # 한 자막에 두 문장이 걸치지 않게
+        out += chunks(s, n)
+    return out
+
+
+def char_times(mp3, text):
+    """s02_0.mp3 옆 s02_0.align.json (ElevenLabs) → text 의 글자마다 (시작, 끝) 초. 글자가 안 맞으면 None."""
+    a = Path(mp3).with_name(Path(mp3).stem + ".align.json")
+    if not a.exists():
+        return None
+    d = json.loads(a.read_text(encoding="utf-8"))
+    s = "".join(d["characters"])
+    off = s.find(text)
+    if off < 0:
+        return None
+    st, en = d["character_start_times_seconds"], d["character_end_times_seconds"]
+    return [(st[off + i], en[off + i]) for i in range(len(text))]
+
+
 def timeline(spec, tts):
     t = 0.0
     for sc in spec["scenes"]:
@@ -53,10 +74,16 @@ def timeline(spec, tts):
         for i, text in enumerate(sc["beats"]):
             f = tts / f"s{sc['id']:02d}_{i}.mp3"
             d = dur(f)
-            kws = [lt + d * max(text.find(k), 0) / len(text) for k in (sc.get("kw") or [[]] * len(sc["beats"]))[i]]
-            subs, acc, parts = [], 0, chunks(text)
-            for p in parts:   # 자막: 글자 수 비례로 시각 나눔
-                subs.append([lt + d * acc / len(text), p]); acc += len(p) + 1
+            at = char_times(f, text)   # ElevenLabs 글자별 시각 (있으면 정확, 없으면 글자 수 비례)
+            pos = lambda k: (lt + at[k][0]) if at else lt + d * k / len(text)
+            kws = [pos(max(text.find(k), 0)) for k in (sc.get("kw") or [[]] * len(sc["beats"]))[i]]
+            subs, cur = [], 0
+            for p in sub_chunks(text):   # 자막: 문장을 넘지 않게 자르고, 실제로 그 말을 하는 동안만
+                k = text.find(p, cur); k = cur if k < 0 else k; e = k + len(p) - 1; cur = e + 1
+                end = (lt + at[e][1] + 0.2) if at else lt + d * cur / len(text)
+                subs.append([pos(k), p, end])
+            for a, b in zip(subs, subs[1:]):   # 다음 자막과 겹치지 않게
+                a[2] = min(a[2], b[0])
             sc["_B"].append({"t": lt, "d": d, "kw": kws, "file": str(f), "abs": t + lt, "subs": subs})
             lt += d + GAP
         sc["_D"] = lt - GAP + TAIL + post
@@ -183,8 +210,8 @@ def main(clips, tts, bgm, work, out):
         sub = ""
         for b in sc["_B"]:
             if b["t"] - 0.05 <= t <= b["t"] + b["d"] + 0.15:
-                for st, txt in b["subs"]:
-                    if t >= st - 0.05:
+                for st, txt, *en in b["subs"]:
+                    if st - 0.05 <= t <= (en[0] if en else 1e9):
                         sub = txt
         frames.append([si, round(t, 4), sub])
     job = {"frames": frames, "scenes": [{"data": {k: v for k, v in s.items() if not k.startswith("_")}, "B": s["_B"], "D": s["_D"]} for s in scenes]}

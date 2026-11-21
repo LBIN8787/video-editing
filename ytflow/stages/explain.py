@@ -507,10 +507,10 @@ def _el_html(D, sc, key: str, el: dict) -> tuple[str, float, float]:
             mk = svg_markup(el.get("icon", "package"), int(w * 0.58), CARD_INK) or ""
         lab = el.get("label", "")
         lsz = fit(HEAVY, lab, el.get("size", 46), w - 20).size if lab else 0
-        col = {"red": "#B5302B", "navy": NAVY}.get(el.get("color", "navy"), el.get("color", NAVY))
+        col = {"red": "#B5302A", "navy": NAVY}.get(el.get("color", "navy"), el.get("color", NAVY))   # 카드 안 빨강은 밝은 카드 위 — 어두운 테마 변환(#B5302B→밝은 빨강)에서 빼려고 한 자리 다른 값 (대비 2.9:1, 2026-11-21)
         # 카드 아래 큰 숫자 (2026-11-20 사용자: "숫자가 안보입니다" · "2~4% 뭉뚱그리지 말고 제대로 각각") — 음수 빨강·양수 초록
         val = str(el.get("value", ""))
-        vcol = {"-": "#B5302B", "−": "#B5302B", "+": "#1E7A46"}.get(val[:1], CARD_INK)
+        vcol = {"-": "#B5302A", "−": "#B5302A", "+": "#1E7A46"}.get(val[:1], CARD_INK)
         vsz = fit(HEAVY, val, el.get("vsize", 50), w - 16).size if val else 0
         if val:
             h += vsz * 1.1 + 6
@@ -681,7 +681,13 @@ def _themed(fn):
     def run(D, sc, bt, dur):
         fn(D, sc, bt, dur)
         th = sc.get("theme", "paper")
-        _apply_theme(D, "dark" if th == "light" and _dark_skin(D) else th)
+        th = "dark" if th == "light" and _dark_skin(D) else th
+        _apply_theme(D, th)
+        ink = getattr(D, "ink", None)
+        if th == "dark" and ink:   # 장 표시(chapter_tag)는 스킨 먹색 — 어두운 무대에서 묻힘(대비 1.1:1, 2026-11-21) → 밝게
+            D.items[:] = [x.replace(f"font-size:26px;color:{ink};", "font-size:26px;color:#ECE8E0;") for x in D.items]
+            if hasattr(D, "hud"):
+                D.hud[:] = [x.replace(f"font-size:26px;color:{ink};", "font-size:26px;color:#ECE8E0;") if isinstance(x, str) else x for x in D.hud]
     run.__name__ = fn.__name__
     return run
 

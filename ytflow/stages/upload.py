@@ -3,7 +3,7 @@
 - 올리는 파일: 05_edit/final.mp4 (없으면 draft.mp4) + 자막 subs.srt + 업로드 문구(upload.json 을 텍스트로)
 - 폴더: config/storage.yaml 의 drive.folders (채널 id → 폴더 id). 예전 프로젝트는 스타일로, 실험 프로젝트는 '실험' 폴더로.
 - 이미 올린 파일은 05_edit/drive.json 에 기록해 다시 올리지 않는다(파일이 바뀌면 크기로 알아채고 새로 올림).
-- **방법 0 (기본, 키 불필요): GitHub Release.** `upload <프로젝트> --to github` — 영상·자막·업로드 문구(+ --archive 면 자료 화면 묶음)를
+- **방법 0 (선택 — 공개해도 되는 것만, 키 불필요): GitHub Release.** 기본은 Drive(방법 1·2, 2026-11-20 사용자 "깃과 드라이브로 나눠서 해줘"). `upload <프로젝트> --to github` — 영상·자막·업로드 문구(+ --archive 면 자료 화면 묶음)를
   임시 브랜치 media/<프로젝트> 로 밀어 올리면 .github/workflows/media-release.yml 이 'video-<프로젝트>' 릴리스에 붙이고 브랜치를 지운다.
   git 자격 증명만 쓰므로 Drive 토큰이 필요 없다. 파일 하나 100MB 미만(넘으면 화질을 조금 낮춘 사본을 만든다).
 - 방법 1 (PC, 권장): config/storage.yaml 의 local_sync_dir 에 'Google Drive for desktop' 동기화 폴더를 적으면 복사만 한다.
@@ -13,6 +13,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 import os
 import urllib.parse
 import urllib.error
@@ -28,7 +29,10 @@ CHUNK = 8 * 1024 * 1024
 
 
 def _cfg() -> dict:
-    return yaml.safe_load((config.CONFIG_DIR / "storage.yaml").read_text(encoding="utf-8"))["drive"]
+    c = yaml.safe_load((config.CONFIG_DIR / "storage.yaml").read_text(encoding="utf-8"))["drive"]
+    if not c.get("local_sync_dir") and os.environ.get("YTFLOW_DRIVE"):  # PC: Drive for desktop 의 ytflow 폴더 (AGENTS 저장 규칙)
+        c["local_sync_dir"] = str(Path(os.environ["YTFLOW_DRIVE"]) / "영상")
+    return c
 
 
 def _auth() -> dict:
