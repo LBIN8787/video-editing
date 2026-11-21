@@ -281,6 +281,14 @@ def _versus_dark(v: dict) -> tuple[Image.Image, list]:
     return base, boxes
 
 
+def _face_detector_ok() -> bool:
+    try:
+        import cv2
+        return hasattr(cv2, "CascadeClassifier")
+    except ImportError:
+        return False
+
+
 def _face_box(im: Image.Image):
     """가장 큰 얼굴 (x, y, w, h) — opencv 가 없거나 못 찾으면 None."""
     try:
@@ -482,6 +490,10 @@ def _render_layout(project: Project, spec: dict, v: dict) -> tuple[Image.Image, 
 # ── 올릴 썸네일 고르기 (2026-11-20 사용자: "썸네일은 abc중에서 최대한 시장반응을 고려하여 조회수가 높게 나올 썸네일로 정해주세요 앞으로 말이죠")
 # 근거: docs/49(같은 채널 안 터진/안 된 썸네일·제목 비교) · docs/55(유명 인물 효과). 점수는 그 조사에서 차이가 난 특징만 쓴다.
 POLITICIANS = ("트럼프", "바이든", "시진핑", "푸틴", "이재명", "윤석열", "젤렌스키", "네타냐후")
+# 클릭을 부르는 민감한 말 (manual/09 §7-1 ①-1, 2026-11-21 사용자: "블랙 ㅁㅁㅁ 등 공포감이 있는 핫한 키워드와 금리 연준").
+# 근거 자료가 아니라 사용자 판단 — 반응(Studio 테스트 및 비교)을 보며 고친다. 팩트시트·매체 제목에 실제로 나온 말일 때만 점수.
+FEAR = ("검은", "블랙", "폭락", "급락", "붕괴", "공포", "패닉", "쇼크", "충격", "경고", "위기", "버블", "거품", "조사", "대학살", "증발")
+MACRO = ("금리", "연준", "인상", "인하", "파월", "FOMC", "국채", "환율")
 COMMAND = ("사세요", "파세요", "사라", "팔아라", "지금 사", "무조건", "당장")
 
 
@@ -504,6 +516,9 @@ def _hot_words(project: Project) -> list[str]:
     return out
 
 
+_src_text = ""
+
+
 def score(v: dict, qa: dict, hot: list[str], title: str = "") -> tuple[float, list[str]]:
     """한 변형의 점수와 이유. 높을수록 조회수 쪽 근거가 많음 (인과 증명이 아니라 같은 채널 안 비교의 경향)."""
     import re
@@ -513,13 +528,20 @@ def score(v: dict, qa: dict, hot: list[str], title: str = "") -> tuple[float, li
     if not qa.get("ok"):
         sc -= 5; why.append("점검 실패(글자 크기·재생 시간 자리) −5")
     per = (v.get("person") or {}).get("name")
-    if v.get("layout") == "person" and per and qa.get("face_area", 0) >= 0.06:
+    if v.get("layout") == "person" and per and (qa.get("face_area") is None or qa.get("face_area", 0) >= 0.06):
         sc += 3; why.append(f"사건 당사자 얼굴 크게({per}) +3 — 인물 제목의 터진 영상 42% vs 안 된 10% (docs/55)")
         if per.split()[-1] in title or per in title:
             sc += 1; why.append("제목 앞에도 같은 이름 +1")
     hits = [w for w in hot if w in text]
     if hits:
         sc += 2; why.append(f"핫 키워드 큰 글씨({', '.join(hits[:2])}) +2 (manual/09 §7-1 ①)")
+    src = _src_text  # 팩트시트 글 (낚시 막기: 거기 없는 말은 점수 없음)
+    fear = [w for w in FEAR if w in text and w in src]
+    if fear:
+        sc += 1; why.append(f"공포·민감 키워드({fear[0]}) +1 (사용자 판단 2026-11-21, §7-1 ①-1)")
+    mac = [w for w in MACRO if w in text and w in src]
+    if mac:
+        sc += 1; why.append(f"금리·연준 키워드({mac[0]}) +1 (사용자 판단 2026-11-21, §7-1 ①-1)")
     if re.search(r"\d", text):
         sc += 1.5; why.append("구체적 숫자 +1.5 (docs/49 §3)")
     if v.get("quote"):
@@ -539,6 +561,9 @@ def score(v: dict, qa: dict, hot: list[str], title: str = "") -> tuple[float, li
 def pick(project: Project, pkg: dict, qa: dict) -> dict:
     """올릴 썸네일 하나 → 05_edit/thumbnail_pick.json (yt-publish 의 --thumb auto 가 읽음). package.thumb_pick 이 있으면 그대로."""
     hot = _hot_words(project)
+    global _src_text
+    fs = project.dir("research") / "factsheet.md"
+    _src_text = fs.read_text(encoding="utf-8") if fs.exists() else ""
     title = pkg.get("title", "")
     scores = {v["id"]: score(v, qa.get(v["id"], {}), hot, title) for v in pkg["thumbnails"]}
     forced = pkg.get("thumb_pick")
@@ -576,6 +601,9 @@ def run(project: Project) -> dict:
         qa[v["id"]] = {"timestamp_overlap": bool(clash), "smallest_text_px_at_168w": round(small, 1),
                        "ok": not clash and small >= 6}
         if v.get("layout") == "person":   # 얼굴이 휴대폰 목록에서도 알아볼 만큼 큰가 (docs/55: 인물 제목의 터진 영상 42% 가 큰 얼굴)
+            if not _face_detector_ok():   # 얼굴 찾기가 없는 PC(OpenCV 5): 재지 못함 — 실패로 치지 않고 사람이 눈으로 (사진을 얼굴 중심으로 미리 자름)
+                qa[v["id"]]["face_area"] = None
+                continue
             fb = _face_box(im)
             fa = round(float(fb[2] * fb[3]) / (W * H), 3) if fb is not None else 0
             qa[v["id"]]["face_area"] = fa
