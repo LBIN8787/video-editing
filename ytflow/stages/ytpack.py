@@ -54,7 +54,18 @@ def run(project: str):
     desc = [spec.get("core_message", ""), ""]
     if as_of:
         desc += [f"📌 기준: {as_of}", ""]
-    desc += ["📌 챕터"] + [f"{a} {b}" for a, b in chapters] + ["", "📚 출처"] + [f"- {u}" for u in urls[:20]] + ["", DISCLAIMER, " ".join("#" + re.sub(r"\s+", "", x).lstrip("#") for x in hashtags[:3])]
+    # 원본 영상·사진 출처 (manual/09 §3-5 '설명란 [원본] 목록', CC BY 표시 의무 — 2026-11-21 빠져 있던 것 채움)
+    used = {sc.get("clip", {}).get("src") for sc in spec["scenes"] if isinstance(sc.get("clip"), dict)} | {sc.get("bg_src") for sc in spec["scenes"]}
+    clips_, photos_ = [], []
+    for k, f in (spec.get("footage") or {}).items():
+        if k not in used or not isinstance(f, dict):
+            continue
+        if f.get("who") and f.get("url"):
+            clips_.append(f"- {f['who']} — {f.get('credit', '')} {f['url']}".strip())
+        elif f.get("credit") and "CC BY" in f.get("license", f.get("credit", "")):
+            photos_.append(f"- {f['credit']}" + (f" {f['url']}" if f.get("url") else ""))
+    extra = (["", "🎬 원본 영상 (짧은 인용)"] + clips_ if clips_ else []) + (["", "📷 사진"] + photos_ if photos_ else [])
+    desc += ["📌 챕터"] + [f"{a} {b}" for a, b in chapters] + ["", "📚 출처"] + [f"- {u}" for u in urls[:20]] + extra + ["", DISCLAIMER, " ".join("#" + re.sub(r"\s+", "", x).lstrip("#") for x in hashtags[:3])]
     md = [f"# 유튜브 업로드 — {project}", "", "## 제목 (기본 → 테스트 및 비교 후보)"]
     md += [f"{i}. {x}" for i, x in enumerate([pk.get("title", spec.get("title", ""))] + [x for x in pk.get("title_options", []) if x != pk.get("title")], 1)]
     md += ["", "## 설명란 (그대로 붙여 넣기)", "```", *desc, "```", "", "## 태그", ", ".join(tags), "",

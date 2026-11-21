@@ -293,8 +293,8 @@
        "do": "count",
        "id": "tight",
        "value": "2027·28년",
-       "label": "더 빠듯해진다 (회사 전망)",
-       "x": 1080,
+       "label": "더 빠듯해진다 (회사)",
+       "x": 1010,
        "y": 880,
        "w": 420,
        "h": 140,
@@ -310,8 +310,8 @@
        "do": "count",
        "id": "nand",
        "value": "+30%",
-       "label": "낸드 값 (회계 4분기, 회사)",
-       "x": 1620,
+       "label": "낸드 값 (회사)",
+       "x": 1560,
        "y": 880,
        "w": 420,
        "h": 140,
@@ -544,7 +544,6 @@
      "kind": "arrow",
      "from": "pw",
      "to": "g",
-     "label": "한도",
      "color": "red"
     },
     "o1": {
@@ -743,15 +742,23 @@
    "id": 14
   },
   {
-   "type": "quote",
+   "type": "bite",
    "chapter": 3,
    "insight": true,
-   "label": "켄 그리핀 시타델 행사 발언 (2026.10.20, 뉴욕) · 디크립트 보도 (2026.10.21) · 의견이며 사실이 아닙니다",
+   "label": "의견이며 사실이 아닙니다",
    "who": "켄 그리핀",
-   "role": "시타델 CEO · 글로벌 시장의 미래 행사",
-   "quote": "경제의 급격한 변화는 대개 거품과 얽혀 있다.",
-   "keyword": "거품",
-   "orig": "Any radical transformation of our economy is generally intertwined with a bubble.",
+   "role": "시타델 CEO · 블룸버그 인터뷰",
+   "show_lower": false,
+   "clip": {
+    "src": "griffin",
+    "lang": "en",
+    "cuts": [
+     {
+      "find": "So the big picture is there's almost certainly bubbles within this moment in time. And any radical transformation of our economy is generally intertwined with a bubble.",
+      "ko": "큰 그림으로 보면, 지금 이 순간 안에는 거의 확실히 거품이 있습니다. 경제의 급격한 변화는 대개 거품과 얽혀 있습니다."
+     }
+    ]
+   },
    "beats": [
     {
      "say": "그리핀의 말을 그대로 옮기면, 경제의 급격한 변화는 대개 거품과 얽혀 있다는 겁니다. 그렇다고 AI를 깎아내린 건 아닙니다. 그는 거품 반대편에 서는 회사들이 앞으로 수십 년의 승자가 된다고도 했습니다."
@@ -878,15 +885,27 @@
    "id": 17
   },
   {
-   "type": "quote",
+   "type": "bite",
    "chapter": 4,
    "insight": true,
-   "label": "리사 쿡 연준 이사 연설 (2026.11.20, 칠레) · federalreserve.gov · 의견이며 사실이 아닙니다",
+   "label": "의견이며 사실이 아닙니다",
    "who": "리사 쿡",
    "role": "미국 연준 이사 · 칠레 중앙은행 연례 회의 연설",
-   "quote": "지금 금리로는 AI 건설이 줄지 않는 듯하다.",
-   "keyword": "줄지",
-   "orig": "The current stance of policy does not appear to be curtailing the AI buildout.",
+   "show_lower": false,
+   "clip": {
+    "src": "cook",
+    "lang": "en",
+    "cuts": [
+     {
+      "find": "The current stance of policy does not appear to be curtailing the AI buildout",
+      "ko": "지금의 통화정책은 AI 건설을 줄이고 있는 것 같지 않습니다."
+     },
+     {
+      "find": "waiting longer to implement rate increases risks getting behind the curve. If we fall behind, additional and larger rate increases may be required to catch up later",
+      "ko": "금리 인상을 늦출수록 뒤처질 위험이 있습니다. 뒤처지면 나중에 따라잡으려고 더 크고 잦은 인상이 필요할 수 있습니다."
+     }
+    ]
+   },
    "beats": [
     {
      "say": "리사 쿡 이사는 연설에서, 지금의 통화정책, 곧 지금 금리로는 AI 건설이 줄지 않는 것 같다고 말했습니다."
@@ -1114,7 +1133,7 @@
     "gold": {
      "kind": "card",
      "x": 1450,
-     "y": 360,
+     "y": 330,
      "icon": "gem",
      "label": "금광주",
      "value": "새로 삼",
@@ -1124,7 +1143,7 @@
     "stx": {
      "kind": "card",
      "x": 1450,
-     "y": 700,
+     "y": 760,
      "icon": "hard-drive",
      "label": "시게이트 (저장장치)",
      "value": "약 3배",
@@ -1146,10 +1165,10 @@
     },
     "note": {
      "kind": "text",
-     "x": 960,
-     "y": 240,
+     "x": 640,
+     "y": 250,
      "text": "9월 30일 기준 — 이번 폭락 전, 매수 포지션만",
-     "size": 40
+     "size": 36
     }
    },
    "beats": [
@@ -1286,9 +1305,9 @@
    "type": "bars",
    "chapter": 6,
    "label": "한국거래소 종가(야후) · 11월 20일(금) 마감 기준 — 미국 20일 폭락 전 · 한 달은 10월 21일 대비(계산)",
-   "title": "한국 메모리 두 회사 (%)",
+   "title": "한국 메모리 두 회사, 마이크론과 비교 (%)",
    "unit": "",
-   "emph": 0,
+   "emph": 1,
    "skin": "dark-doc",
    "layers": [
     {
@@ -1306,25 +1325,31 @@
    ],
    "items": [
     {
-     "label": "삼성전자 한 달",
+     "label": "마이크론 한 달",
+     "value": -34.9,
+     "text": "-34.9",
+     "t": "34.9%"
+    },
+    {
+     "label": "삼성 한 달",
      "value": -18.1,
      "text": "-18.1",
      "t": "18.1%"
     },
     {
-     "label": "SK하이닉스 한 달",
+     "label": "하이닉스 한 달",
      "value": -14.0,
      "text": "-14.0",
      "t": "14%"
     },
     {
-     "label": "삼성전자 20일",
+     "label": "삼성 20일",
      "value": -7.01,
      "text": "-7.01",
      "t": "삼성전자는"
     },
     {
-     "label": "SK하이닉스 20일",
+     "label": "하이닉스 20일",
      "value": -5.92,
      "text": "-5.92",
      "t": "SK하이닉스는"
@@ -1340,11 +1365,11 @@
        "id": "sec",
        "value": "183,100원",
        "label": "삼성전자 20일 종가",
-       "x": 1640,
-       "y": 300,
-       "w": 400,
-       "h": 130,
-       "fs": 46
+       "x": 270,
+       "y": 600,
+       "w": 380,
+       "h": 120,
+       "fs": 42
       },
       {
        "t": "111만",
@@ -1352,30 +1377,17 @@
        "id": "skh",
        "value": "1,113,000원",
        "label": "SK하이닉스 20일 종가",
-       "x": 1640,
-       "y": 460,
-       "w": 400,
-       "h": 130,
-       "fs": 44
+       "x": 270,
+       "y": 770,
+       "w": 380,
+       "h": 120,
+       "fs": 40
       }
      ]
     },
     {
      "say": "한 달로 보면 삼성전자는 18.1%, SK하이닉스는 14% 내렸습니다. 마이크론의 34.9%보다는 덜 빠졌지만, 같은 방향입니다.",
-     "motion": [
-      {
-       "t": "34.9%",
-       "do": "count",
-       "id": "mu2",
-       "value": "-34.9%",
-       "label": "마이크론 한 달 (비교)",
-       "x": 1640,
-       "y": 880,
-       "w": 380,
-       "h": 130,
-       "fs": 50
-      }
-     ]
+     "motion": []
     }
    ],
    "id": 26
@@ -1646,10 +1658,13 @@
    "license": "CC BY 4.0"
   },
   "cook": {
-   "file": "cook.mp4",
-   "credit": "Public domain · Federalreserve · 위키미디어 공용 · Lisa D. Cook, Federal Reserve Governor",
-   "url": "https://commons.wikimedia.org/wiki/File:Lisa_D._Cook,_Federal_Reserve_Governor.jpg",
-   "license": "Public domain"
+   "file": "cook_bcch_20261120.mp4",
+   "url": "https://www.youtube.com/watch?v=v_WEWJgJdHw",
+   "start": "5:57:55",
+   "end": "5:59:06",
+   "who": "리사 쿡",
+   "rights": "official",
+   "credit": "칠레 중앙은행 공식 채널 (YouTube) · 2026.11.20 제29회 연례 회의 · 연준 사이트 연설 영상 링크"
   },
   "wafer": {
    "file": "wafer.mp4",
@@ -1662,6 +1677,15 @@
    "credit": "CC BY 4.0 · S h y numis · 위키미디어 공용 · Skyline of Yeouido, a prominent finance district i",
    "url": "https://commons.wikimedia.org/wiki/File:Skyline_of_Yeouido,_a_prominent_finance_district_in_Seoul.jpg",
    "license": "CC BY 4.0"
+  },
+  "griffin": {
+   "file": "griffin_bloomberg_20261020.mp4",
+   "url": "https://www.youtube.com/watch?v=6mWxb7sqC7U",
+   "start": "0:44.8",
+   "end": "0:57.6",
+   "who": "켄 그리핀",
+   "rights": "broadcast",
+   "credit": "Bloomberg Television 공식 채널 (YouTube) · 2026.10.20 인터뷰"
   }
  },
  "package": {
@@ -1676,19 +1700,29 @@
    "숫자 대비(품절 vs -35%)",
    "연준 인사 따옴표 + 한국 계좌"
   ],
-  "ticker": [
-   {
-    "name": "S&P 500",
-    "chg": "-3.70%"
-   },
-   {
-    "name": "나스닥",
-    "chg": "-5.28%"
-   },
-   {
-    "name": "반도체(SOX)",
-    "chg": "-10.73%"
-   }
+  "thumb_pick": "D",
+  "tags": [
+   "반도체 폭락",
+   "AI 거품",
+   "메모리 품절",
+   "마이크론",
+   "SK하이닉스",
+   "삼성전자",
+   "엔비디아",
+   "브로드컴",
+   "구글 TPU",
+   "HBM",
+   "켄 그리핀",
+   "리사 쿡",
+   "연준",
+   "금리",
+   "드러켄밀러",
+   "AI 반도체"
+  ],
+  "hashtags": [
+   "AI거품",
+   "반도체폭락",
+   "메모리"
   ],
   "thumbnails": [
    {
@@ -1722,35 +1756,207 @@
    },
    {
     "id": "B",
-    "name": "쿡 연준 이사 얼굴 + 따옴표 (person)",
-    "layout": "person",
+    "name": "메모리 모듈 + AI 인프라 종말? / 메모리는 품절 (photo full)",
+    "layout": "photo",
+    "photo_side": "full",
     "image": {
-     "file": "04_assets/footage/raw/cook.jpg",
+     "file": "04_assets/footage/raw/memory.jpg",
      "focus": [
       0.5,
-      0.35
+      0.5
      ]
     },
-    "person": {
-     "name": "리사 쿡",
-     "role": "미국 연준 이사"
-    },
-    "top": "11월 21일 · 연준",
+    "top": "AI 반도체 대폭락 · 한 달",
     "lines": [
-     "반도체 폭락",
-     "다음은 금리"
+     "AI 인프라 종말?",
+     "메모리는 품절이다"
     ],
     "hl": [
-     "금리"
+     "종말?",
+     "품절"
     ],
-    "quote": "지금 금리로는 AI 건설이 줄지 않는 듯하다",
-    "size": 108,
-    "text_y": 230,
-    "photo_width": 0.5,
-    "credit": "Public domain · Federal Reserve · 위키미디어 공용",
+    "sub": "엔비디아 -43% · 마이크론 -35% (한 달)",
+    "size": 104,
+    "text_y": 320,
+    "marks": [],
+    "credit": "CC BY 4.0 · 4300streetcar · 위키미디어 공용",
     "why": [
-     "연준·금리 핫 키워드 + 연준 인사 얼굴 (§7-1 ①-1)",
-     "따옴표는 영상 속 쿡 이사 인용과 같은 말"
+     "시장 불안 키워드(AI 인프라 종말·대폭락) + 반전(품절) — 사용자 2026-11-21",
+     "브리핑 썸네일(쿡 이사 얼굴)과 겹치지 않게 메모리 사진"
+    ]
+   },
+   {
+    "id": "D",
+    "name": "데이터센터 + 거품인가 품절인가 (photo full)",
+    "layout": "photo",
+    "photo_side": "full",
+    "image": {
+     "file": "04_assets/footage/raw/dc.jpg",
+     "focus": [
+      0.5,
+      0.5
+     ]
+    },
+    "top": "AI 반도체 대폭락 · 그리핀 vs 마이크론",
+    "lines": [
+     "AI 거품인가",
+     "메모리 품절인가"
+    ],
+    "hl": [
+     "거품인가"
+    ],
+    "sub": "그리핀 'AI 는 거의 확실히 거품' · 마이크론 '2027년 물량 75% 약정'",
+    "size": 112,
+    "text_y": 300,
+    "marks": [],
+    "credit": "사진: Hay Kranen · CC BY 4.0",
+    "why": [
+     "2026-11-21 사용자: '거품이라는게 거품인지 구분이 안가' → 'AI 거품'·'메모리 품절'로 무엇의 거품인지 밝힘",
+     "엇갈린 두 시각을 큰 두 글자로 — 영상의 질문 그대로",
+     "공포 키워드 '거품'·'대폭락'"
+    ]
+   },
+   {
+    "id": "D2",
+    "name": "언 비눗방울(거품 비유, CC0) + 거품인가 품절인가 (photo full)",
+    "layout": "photo",
+    "photo_side": "full",
+    "image": {
+     "file": "04_assets/footage/raw/bubble2.jpg",
+     "focus": [
+      0.5,
+      0.5
+     ]
+    },
+    "top": "AI 반도체 대폭락 · 그리핀 vs 마이크론",
+    "lines": [
+     "거품인가",
+     "품절인가"
+    ],
+    "hl": [
+     "거품인가"
+    ],
+    "sub": "그리핀 '거의 확실히 거품' · 마이크론 '2027년 75% 약정'",
+    "size": 120,
+    "text_y": 300,
+    "marks": [],
+    "why": [
+     "D 문구 그대로, 사진만 바꾼 후보 (사용자 2026-11-21: d 말고 다른 사진)"
+    ]
+   },
+   {
+    "id": "D3",
+    "name": "비눗방울(거품 비유) + 거품인가 품절인가 (photo full)",
+    "layout": "photo",
+    "photo_side": "full",
+    "image": {
+     "file": "04_assets/footage/raw/bubble.jpg",
+     "focus": [
+      0.5,
+      0.5
+     ]
+    },
+    "top": "AI 반도체 대폭락 · 그리핀 vs 마이크론",
+    "lines": [
+     "거품인가",
+     "품절인가"
+    ],
+    "hl": [
+     "거품인가"
+    ],
+    "sub": "그리핀 '거의 확실히 거품' · 마이크론 '2027년 75% 약정'",
+    "size": 120,
+    "text_y": 300,
+    "marks": [],
+    "credit": "사진: Max Stotsky · CC BY 2.0",
+    "why": [
+     "D 문구 그대로, 사진만 바꾼 후보 (사용자 2026-11-21: d 말고 다른 사진)"
+    ]
+   },
+   {
+    "id": "D4",
+    "name": "서버 랙 + 거품인가 품절인가 (photo full)",
+    "layout": "photo",
+    "photo_side": "full",
+    "image": {
+     "file": "04_assets/footage/raw/racks.jpg",
+     "focus": [
+      0.5,
+      0.5
+     ]
+    },
+    "top": "AI 반도체 대폭락 · 그리핀 vs 마이크론",
+    "lines": [
+     "거품인가",
+     "품절인가"
+    ],
+    "hl": [
+     "거품인가"
+    ],
+    "sub": "그리핀 '거의 확실히 거품' · 마이크론 '2027년 75% 약정'",
+    "size": 120,
+    "text_y": 300,
+    "marks": [],
+    "credit": "사진: Carl Lender · CC BY 2.0",
+    "why": [
+     "D 문구 그대로, 사진만 바꾼 후보 (사용자 2026-11-21: d 말고 다른 사진)"
+    ]
+   },
+   {
+    "id": "D5",
+    "name": "반도체 웨이퍼 + 거품인가 품절인가 (photo full)",
+    "layout": "photo",
+    "photo_side": "full",
+    "image": {
+     "file": "04_assets/footage/raw/wafer.jpg",
+     "focus": [
+      0.5,
+      0.5
+     ]
+    },
+    "top": "AI 반도체 대폭락 · 그리핀 vs 마이크론",
+    "lines": [
+     "거품인가",
+     "품절인가"
+    ],
+    "hl": [
+     "거품인가"
+    ],
+    "sub": "그리핀 '거의 확실히 거품' · 마이크론 '2027년 75% 약정'",
+    "size": 120,
+    "text_y": 300,
+    "marks": [],
+    "why": [
+     "D 문구 그대로, 사진만 바꾼 후보 (사용자 2026-11-21: d 말고 다른 사진)"
+    ]
+   },
+   {
+    "id": "D6",
+    "name": "메모리 모듈 + 거품인가 품절인가 (photo full)",
+    "layout": "photo",
+    "photo_side": "full",
+    "image": {
+     "file": "04_assets/footage/raw/memory.jpg",
+     "focus": [
+      0.5,
+      0.5
+     ]
+    },
+    "top": "AI 반도체 대폭락 · 그리핀 vs 마이크론",
+    "lines": [
+     "거품인가",
+     "품절인가"
+    ],
+    "hl": [
+     "거품인가"
+    ],
+    "sub": "그리핀 '거의 확실히 거품' · 마이크론 '2027년 75% 약정'",
+    "size": 120,
+    "text_y": 300,
+    "marks": [],
+    "credit": "사진: 4300streetcar · CC BY 4.0",
+    "why": [
+     "D 문구 그대로, 사진만 바꾼 후보 (사용자 2026-11-21: d 말고 다른 사진)"
     ]
    },
    {
