@@ -1,7 +1,7 @@
 {
  "project": "20261121-market-deep-ai-chips",
- "manual_version": "80",
- "checked": "2026-11-21T20:17:28",
+ "manual_version": "89",
+ "checked": "2026-11-22T05:55:56",
  "pass": true,
  "rows": [
   {
@@ -15,7 +15,7 @@
    "gate": "G0",
    "level": "SHOULD",
    "item": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
-   "ok": true,
+   "ok": false,
    "detail": "manual/graph.json"
   },
   {
@@ -128,7 +128,7 @@
    "level": "MUST",
    "item": "팩트시트 + 출처 링크 3개 이상",
    "ok": true,
-   "detail": "링크 12개"
+   "detail": "링크 23개"
   },
   {
    "gate": "G3",
@@ -393,8 +393,8 @@
    "gate": "G4",
    "level": "SHOULD",
    "item": "market: 끝에 확인할 신호(checklist)",
-   "ok": true,
-   "detail": "['checklist', 'kinetic', 'outro']"
+   "ok": false,
+   "detail": "['motionboard', 'kinetic', 'outro']"
   },
   {
    "gate": "G4",
@@ -415,7 +415,7 @@
    "level": "MUST",
    "item": "길이: 롱폼 10분 이상 — 많이 짧으면 쇼츠로 (README §2-4)",
    "ok": true,
-   "detail": "13.5분"
+   "detail": "19.7분"
   },
   {
    "gate": "G5",
@@ -436,7 +436,7 @@
    "level": "참고",
    "item": "반복 피로: 글씨·도형뿐인 장면이 이어지는 구간 — 자료·지도·그림으로 보여 줄 수 있는지 다시 볼 곳 (05 §0-3)",
    "ok": false,
-   "detail": "최장 5연속 (장면 24)"
+   "detail": "최장 7연속 (장면 25)"
   },
   {
    "gate": "G5",
@@ -450,7 +450,7 @@
    "level": "참고",
    "item": "반복 피로: 볼거리(자료·지도·그림)가 있는 장면의 몫",
    "ok": false,
-   "detail": "9/25"
+   "detail": "10/26"
   },
   {
    "gate": "G5",
@@ -478,14 +478,14 @@
    "level": "SHOULD",
    "item": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번 없음, 한 출처로 표지를 모두 때우지 않음",
    "ok": true,
-   "detail": "표지 ['dc', 'chips', 'memory', 'cook', 'seoul'] · 가장 많은 출처 ('CC BY 4.0 · Hay Kranen · 위키미디어 공용 · Microsoft Data Center Middenmeer', 1)"
+   "detail": "표지 ['dc', 'memory', 'cook'] · 가장 많은 출처 ('CC BY 4.0 · Hay Kranen · 위키미디어 공용 · Microsoft Data Center Middenmeer', 1)"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "반복 피로: 같은 채널 직전 편과 화면 구성이 얼마나 겹치나",
    "ok": false,
-   "detail": "91%"
+   "detail": "73%"
   },
   {
    "gate": "G5",
@@ -499,28 +499,28 @@
    "level": "참고",
    "item": "자료 화면 없이 그래픽만 이어지는 가장 긴 구간",
    "ok": false,
-   "detail": "최장 797초"
+   "detail": "최장 1163초"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "장 전환 없이 이어지는 가장 긴 구간",
-   "ok": true,
-   "detail": "최장 138초"
+   "ok": false,
+   "detail": "최장 279초"
   },
   {
    "gate": "G5",
    "level": "SHOULD",
    "item": "스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1)",
    "ok": true,
-   "detail": "8종 ['data-report', 'explain-stage', 'hybrid-causal', 'kinetic-type', 'map-journey', 'paper-column', 'source-cut', 'statement-brief']"
+   "detail": "7종 ['data-report', 'explain-stage', 'hybrid-causal', 'kinetic-type', 'paper-column', 'source-cut', 'statement-brief']"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "스타일 조합: 가장 많이 쓴 스타일의 몫·겹친 장면·같은 스타일 연속",
    "ok": false,
-   "detail": "paper-column 0.28 · 겹침 1 · 최장 연속 2"
+   "detail": "explain-stage 0.42 · 겹침 0 · 최장 연속 3"
   },
   {
    "gate": "G5",
@@ -597,7 +597,7 @@
    "level": "MUST",
    "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
    "ok": true,
-   "detail": "{'within_0_5s': 0.981, 'p95_abs_offset': 0.21, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.1}"
+   "detail": "{'within_0_5s': 0.998, 'p95_abs_offset': 0.11, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.1}"
   },
   {
    "gate": "G6",
@@ -611,7 +611,7 @@
    "level": "참고",
    "item": "움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5)",
    "ok": false,
-   "detail": "변화 7.5/분 · 정지 0.66"
+   "detail": "변화 5.8/분 · 정지 0.7"
   },
   {
    "gate": "G6",
@@ -638,8 +638,8 @@
    "gate": "G7",
    "level": "참고",
    "item": "제목 앞부분에 질문·핵심 (목록에서 잘려도 무슨 영상인지 보이게)",
-   "ok": false,
-   "detail": "반도체 동반 폭락, 수요가 꺾였나 몫이 "
+   "ok": true,
+   "detail": "메모리는 품절인데 AI는 거품? 반도체 "
   },
   {
    "gate": "G8",

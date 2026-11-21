@@ -90,6 +90,17 @@
 - 맞대기: 크레스 '야망이 이보다 컸던 적 없다' ↔ 받치는 숫자: 4분기 전망 +12.3% (C2) / 어긋나는 숫자: 주가 한 달 -43.4% (M3)
 - 맞대기: 궈밍치 조사 ↔ 회사 확인 없음, 2027년 '계획' 숫자 (S1) — 브로드컴 한 달 -9.9%로 반도체 지수보다 덜 빠짐(C4)
 
+## 주장 해부 (2026-11-21 사용자: "거품이라는 주장을 뜯어보고 아니라는 주장도 심화적으로")
+| 주장 | 고리 | 받치는 사실 | 어긋나는 사실 | 판정 |
+|---|---|---|---|---|
+| 거품론(그리핀) | ① 큰 변화는 늘 과잉투자 | 2001년 광케이블 85~95% 미사용·대역폭 값 약 -90% (포춘 2025.9) https://fortune.com/2025/09/28/ai-dot-com-bubble-parallels-history-explained-companies-revenue-infrastructure/ | 그 광케이블은 결국 쓰였다(같은 기사) | 근거 있음 |
+| 거품론 | ② 투자가 매출보다 빠르다 | 2026 빅테크 설비투자 약 7,250억 달러(골드만삭스 추정, 추정치 6,300억~9,000억) · 세쿼이아 칸(2024) '연 6,000억 달러 매출 필요' · 버리: 칩 수명 5~6년 회계가 비용을 작게(2026~28 1,760억 달러, 그의 추정) | 엔비디아 '오래된 GPU 도 다 쓰인다' 반박 메모 · 메타 5.5년 연장, 아마존 6→5년 단축(2025) | 근거 있음(크기는 추정) |
+| 거품론 | ③ 칩이 남기 시작했다 | — | H100 임대료 중간값 약 3.9~4.1달러, 한 집계 1년 +52%(컴퓨트센서스·피니타이저, 11월) — 남는 물건 값이 오르는 중 | 근거 약함(지금은) |
+| 모자람론(메로트라·SK하이닉스) | ① 내년 물량이 팔렸다 | 마이크론 2027년 75%+ · SK하이닉스 2027·28 생산능력 50%+ 장기 계약 | 장기 계약도 재협상 가능 | 근거 있음 |
+| 모자람론 | ② 전기가 없어 더 못 짓는다 | 2026 계획 16GW 중 착공 5GW(사이트라인 클라이밋, 블룸버그 보도) · PJM 2027~28 6.6GW 부족 전망 | 현장 가스 발전으로 우회하는 사례 | 근거 있음 — 2000년 광케이블과 다른 점 |
+| 모자람론 | ③ 임대료가 오른다 | 위 임대료 집계 | 오른 건 오늘의 값 — 전기가 풀리면 공급이 한꺼번에 | 근거 있음(지금) |
+| **갈리는 곳** | 시간: 거품론은 몇 년 뒤 공급·회계, 모자람론은 오늘 주문·임대료 | 판가름: GPU 임대료 꺾임 · 메모리 장기 계약 재협상 · 빅테크 설비투자 하향 · 전력 연결 속도 | | |
+
 ## CEO 소식
 | CEO (회사) | 날짜 | 말했나·했나 | 원문 한 줄 또는 공시 | 출처 주소 | 오늘 이야기와의 연결 |
 |---|---|---|---|---|---|
@@ -179,3 +190,33 @@
 | 국내 특징주 기사 (국내) | [美특징주]마이크론 테크놀로지, AI 투자 우려에 7거래일 연속 하락…주가 14%↓ | AI 투자 우려 | 회사는 2027년 물량 75%+ 약정 | 우려 |
 | 국내 매체 (국내) | 마이크론 CTO "메모리 반도체 공급 제약 2027년에 더 심화" | 공급 부족 | 주가와의 어긋남 | 낙관 |
 | 연합뉴스 (국내) | 또 '검은 금요일'…코스피 4,800대로 후퇴, 10개월만 최저 | 한국 급락 | 메모리 이익 구조 | 우려 |
+
+## 추가 (2026-11-22) — 이익 -2/3 는 칩 값 얼마? 과거 하강기 값 하락과 공급 과잉 폭
+사용자 질문: "공급과 수요비가 어느정도여야 이정도로 낮아질건지 예측하고싶단거에요"
+- ✅ SK하이닉스 3분기 매출 104.6조·영업이익 83.3조 원 → 영업이익률 약 80% (앞 항목)
+- 💬 계산(가정: 파는 양·비용 그대로): 이익 -68% → 0.8×0.32=0.256, 비용 0.2 → 필요한 매출 0.456 → 값 약 -54%
+- ✅ 1996: "Prices for DRAM fell by more than 75% during our fiscal 1996" — 마이크론 연차보고서, Fabricated Knowledge 인용 https://www.fabricatedknowledge.com/p/lessons-from-history-the-1990s-semiconductor (가동률 95%→86%)
+- ⚠️ 2018~19: "DRAM prices fell roughly 60% over four quarters" — Chiplog(2차 자료) https://www.chiplog.io/p/dram-was-the-worst-business-in-chips · 마이크론 영업이익 2018 정점 대비 2020 -80% (Uncover Alpha) https://www.uncoveralpha.com/p/every-memory-cycle-ends-the-same
+- ✅ 2021~23: DDR4 8Gb PC 계약가 2021년 7월 4.10달러(DRAMeXchange, KED Global https://www.kedglobal.com/newsView/ked202107300012) → 2023년 10월 1.50달러(TrendForce https://www.trendforce.com/news/2023/12/26/news-improvement-in-memory-inventory-leads-to-first-price-increase-in-two-and-a-half-years/) = -63%
+- ⚠️ 2019 D램 공급 비트 +19.0% vs 수요 +14.6% (TrendForce 표, Evertiq 재인용 https://evertiq.com/news/52248 — 나중 발표 표라 2019년 당시 전망과 같은지 미확인)
+- ✅(전망) 2023 D램 수요 비트 +8.3% vs 공급 +14.1% "severely oversupplied" — TrendForce 2022.8 https://www.trendforce.com/presscenter/news/20220803-11328.html (낸드: 수요 +28.9% vs 공급 +32.1%)
+- 💬 해석: 공급이 수요보다 한 해 4~6%p 더 늘면 D램 값은 절반 넘게 빠졌다 (사례 셋, 법칙 아님). 메모리 수요는 값이 내려도 크게 늘지 않고 공장은 쉽게 멈추지 못해서.
+- 💭 반대 시각: 'HBM 이 2027년 웨이퍼 30%를 쓰고 미세화로 늘어나는 비트가 절반이라 2019년식 과잉은 와도 2029년' — Korea Invest Insights(서브스택) https://koreainvestinsights.substack.com/p/if-a-2019-style-dram-glut-returns (영상 미사용, 확인 필요)
+
+## 추가 (2026-11-22) — 메모리 P/E 와 그 뒤 1년 주가 (직접 계산)
+방법: 마이크론 분기 희석 EPS(SEC XBRL companyconcept EarningsPerShareDiluted, 4분기는 연간−3개 분기) 4분기 합 = 지난 1년 EPS. 분기 끝 30일 뒤(실적 발표 뒤) 야후 종가 ÷ EPS = P/E, 그 날부터 365일 뒤 종가로 1년 수익률. 2010.10~2025.9, 61번. 원자료: E:/ytflow-local/tmp/cmp/mu_pe.json (재현 스크립트는 세션 기록)
+- 💬 적자일 때 14번: 1년 뒤 중간값 +100%, 오른 비율 79%
+- 💬 P/E 20배+ 15번: 중간값 +75%, 87%
+- 💬 10~20배 11번: -16%, 45% · 7~10배 9번: +13%, 67%
+- 💬 7배 미만 12번: -10.5%, 42%(12번 중 5번)
+- 💬 사례: 2010.10 3.8배 → -38% · 2015.7 6.1배 → -35% · 2018.7 5.5배 → -26% · 예외 2018.12 2.6배 → +68% (주가 5월 정점 대비 약 절반)
+- ⚠️ 한계: 한 회사, 61번, 2025년 급등기 포함(20배+ 구간을 끌어올림 — 2024.9 전까지만 보면 20배+ 중간값 +58%, 82%). 투자 판단 근거 아님.
+- 참고(2차): Theta Research 2018.5 정점 trailing 7.3x·forward 5.6x → 7개월 -56% https://www.theta.md/research/mu-cycle-peak-anatomy · StockResearch 2018.8 trailing 5.2 → 10개월 -34% https://www.stockresearch.app/blog/memory-stocks-low-pe-cycle-peak
+
+## 추가 (2026-11-22) — 쿡 이사 연설 원문
+https://www.federalreserve.gov/newsevents/speech/cook20261120a.htm "The U.S. Economy in Global Context" (칠레 중앙은행 제29회 연례 회의)
+- ✅ "there is evidence of spillovers ... in the price of chips and high-tech equipment, construction wages, and electricity costs"
+- ✅ "The current stance of policy does not appear to be curtailing the AI buildout, and equity prices continue to support consumer spending"
+- ✅ 3분기 성장 연율 3.4%, AI 건설이 "a significant contributor to this acceleration" · PCE 3.8%, 근원 3.2%, 67개월 · 9월 인상 3.75~4%, 10월 동결 반대(0.25%p 인상)
+- ✅ 생산성: 효과는 "wider adoption" 에 달림 · 금융 여건 "too accommodative" · 중립금리 언급 없음
+- 💬 해석(이 채널): 투자는 지을 때 수요, 공급은 보급 뒤 → 그 사이 물가 / 금리 인상 세 경우(나머지 경제 조임·P/E 압박 / 생산성 먼저 1996~97 / 늦은 대응 1999.6 4.75%→2000.5 6.5%)
