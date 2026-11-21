@@ -1,5 +1,5 @@
 ---
-status: open
+status: answered
 project: 20261120-curiosity-whitebear-v2
 branch: ccr-8d1b9648-0fm4oq
 decision: D3
@@ -15,3 +15,6 @@ opened: 2026-11-21
 **묻는 것:** 늘린 v4 대본과 화면이 괜찮나요? (통과 → 포장·D4 / 고칠 곳)
 
 - 예상 소요: 영상 10분
+
+## 처리 (2026-11-22 자동 점검)
+- 이 편은 이미 유튜브 예약 공개까지 진행됨(`projects/20261120-curiosity-whitebear-v2/05_edit/youtube_publish.json`). 열린 요청이 남아 있어 닫음.
