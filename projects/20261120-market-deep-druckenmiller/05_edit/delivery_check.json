@@ -75,7 +75,7 @@
   {
    "check": "file size",
    "status": "PASS",
-   "value": "91.7 MB",
+   "value": "140.8 MB",
    "expected": "<= 262144 MB",
    "fix": "export.py --crf 24 or lower resolution",
    "reason": "",
@@ -102,7 +102,7 @@
   {
    "check": "loudness",
    "status": "PASS",
-   "value": "-14.0 LUFS",
+   "value": "-14.1 LUFS",
    "expected": "-14 ± 2 LUFS",
    "fix": "loudness.py -I -14 for speech or music; leave ambience/near-silence (<= -40 LUFS) alone and say so",
    "reason": "",
@@ -111,7 +111,7 @@
   {
    "check": "true peak",
    "status": "PASS",
-   "value": "-1.4 dBTP",
+   "value": "-1.8 dBTP",
    "expected": "<= -1 dBTP",
    "fix": "loudness.py --tp -1",
    "reason": "",
