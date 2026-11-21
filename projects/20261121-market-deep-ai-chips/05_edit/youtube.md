@@ -1,4 +1,4 @@
-# 유튜브 업로드 — 20261121-market-deep-ai-chips
+# 유튜브 업로드 — projects/20261121-market-deep-ai-chips
 
 ## 제목 (기본 → 테스트 및 비교 후보)
 1. 반도체 동반 폭락, 수요가 꺾였나 몫이 옮겨 갔나 | 11월 21일
@@ -14,10 +14,10 @@
 1:06 1. 수요는 정말 꺾였나
 3:21 2. 손님은 그대로, 주문을 고른다
 4:58 3. 모자람은 언제 끝나나
-7:04 4. AI 칩의 적은 금리일까
-8:39 5. 큰손은 말보다 먼저 움직였다
-10:11 6. 한국 메모리는 어느 편에 서 있나
-11:41 7. 확인할 날짜
+7:16 4. AI 칩의 적은 금리일까
+9:07 5. 큰손은 말보다 먼저 움직였다
+10:40 6. 한국 메모리는 어느 편에 서 있나
+12:10 7. 확인할 날짜
 
 📚 출처
 - https://finance.yahoo.com/quote/%5ESOX/history
@@ -33,12 +33,22 @@
 - https://www.newsquawk.com/headlines/druckenmiller-13-f-raises-stake-in-stx-cuts-tsm
 - https://www.northernminer.com/news/druckenmiller-exits-copper-steel-to-buy-gold-miners/1003897930/
 
+🎬 원본 영상 (짧은 인용)
+- 리사 쿡 — 칠레 중앙은행 공식 채널 (YouTube) · 2026.11.20 제29회 연례 회의 · 연준 사이트 연설 영상 링크 https://www.youtube.com/watch?v=v_WEWJgJdHw
+- 켄 그리핀 — Bloomberg Television 공식 채널 (YouTube) · 2026.10.20 인터뷰 https://www.youtube.com/watch?v=6mWxb7sqC7U
+
+📷 사진
+- CC BY 4.0 · Hay Kranen · 위키미디어 공용 · Microsoft Data Center Middenmeer, the Netherlands  https://commons.wikimedia.org/wiki/File:Microsoft_Data_Center_Middenmeer,_the_Netherlands_-_1.jpg
+- CC BY 4.0 · 4300streetcar · 위키미디어 공용 · SK Hynix DDR5 Tall MRDIMM https://commons.wikimedia.org/wiki/File:SK_Hynix_DDR5_Tall_MRDIMM.jpg
+- CC BY 4.0 · YouTube — Purdue Engineering · 위키미디어 공용 · A semiconductor wafer being removed from processin https://commons.wikimedia.org/wiki/File:A_semiconductor_wafer_being_removed_from_processing_equipment.jpg
+- CC BY 4.0 · S h y numis · 위키미디어 공용 · Skyline of Yeouido, a prominent finance district i https://commons.wikimedia.org/wiki/File:Skyline_of_Yeouido,_a_prominent_finance_district_in_Seoul.jpg
+
 ※ 정보 제공 목적이며 투자 권유가 아닙니다. 사실과 해석을 구분해 전달하며, 해석은 영상에서 '해석'이라고 밝힙니다.
-#주식시황 #미국주식 #뉴욕증시
+#AI거품 #반도체폭락 #메모리
 ```
 
 ## 태그
-주식 시황, 미국 주식, 뉴욕증시, 코스피, 반도체, 시장 브리핑, 경제 뉴스, 이어 읽는 시장
+반도체 폭락, AI 거품, 메모리 품절, 마이크론, SK하이닉스, 삼성전자, 엔비디아, 브로드컴, 구글 TPU, HBM, 켄 그리핀, 리사 쿡, 연준, 금리, 드러켄밀러, AI 반도체, 주식 시황, 미국 주식, 뉴욕증시, 코스피, 반도체, 시장 브리핑, 경제 뉴스, 이어 읽는 시장
 
 ## 썸네일
 05_edit/thumbnail_A.png · B · C → 유튜브 '테스트 및 비교'에 세 장 모두

@@ -1,21 +1,38 @@
 {
  "schema": 1,
- "generated": "2026-11-21T19:43:37",
- "source_hash": "ed39b34a39ce",
+ "generated": "2026-11-22T00:11:38",
+ "source_hash": "8899341eee86",
  "audit": {
-  "date": "2026-11-20T23:13",
+  "date": "2026-11-21T13:56",
   "counts": {
    "fix": 1,
-   "ask": 36,
-   "new": 1,
-   "resolved": 5
+   "ask": 76,
+   "new": 60,
+   "resolved": 20
   },
   "items": [
+   {
+    "kind": "conflict",
+    "level": "ask",
+    "file": "",
+    "line": 0,
+    "text": "움직임·카메라: 더 하라 1줄 ↔ 덜 하라 8줄",
+    "why": "같은 주제를 반대로 말하는 규칙이 함께 있음 — 범위(채널·장면)를 적거나 한쪽을 정리",
+    "detail": [
+     "sec:feedback§h38 - 2026-11-15 · 뜻 바로잡기 — “나는 동영상의 이점을 살린다 즉 정적인 단순 다음 ppt 다음 ppt가 아니라 영상의 이점을 살려라",
+     "sec:01§5 | market | [움직임 + 숫자] + [`new_angle` — 자료를 엮어야 보이는 것] (헤드라인으로 이미 알려진 사실을 질문으로 바꾼",
+     "sec:04§0-5 | 카메라는 고정이 기본, 움직일 때는 **시간·공간 이동**(진화의 긴 길을 따라감)일 때만 | 의미 없는 줌은 어지러움 |",
+     "sec:04§0-7 - 모션그래픽이 넘치면 — 글자가 아래 자막과 같은 문장을 반복하거나(unslop 기각), 글씨·도형만 이어져 지루해진다(사우디 v8 기각). "
+    ],
+    "id": "7ab0b33cef",
+    "new": true,
+    "since": "2026-11-21"
+   },
    {
     "kind": "overfit",
     "level": "ask",
     "file": "manual/04-curiosity.md",
-    "line": 141,
+    "line": 147,
     "text": "모션그래픽이 넘치면 — 글자가 아래 자막과 같은 문장을 반복하거나(unslop 기각), 글씨·도형만 이어져 지루해진다(사우디 v8 기각). 말이 설명하는 관계를 움직임으로 보여 줄 때만 쓰고, 글자를 띄우는 용도로 쓰지 않는다.",
     "why": "실험 기록 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
     "id": "962cee9ea8",
@@ -48,6 +65,17 @@
     "kind": "overfit",
     "level": "ask",
     "file": "manual/05-style-matching.md",
+    "line": 111,
+    "text": "배경음 | 기본으로 깔림 | 사용자가 상황에 따라 조절 (2026-11-20 사용자: \"배경음은 상황에 따라서 내가 조절할게\") — 규칙으로 정하지 않음. 에이전트는 넣지 않은 상태로 넘기고, 사용자가 넣으라 하면 대본에 \"bgm\". 한 편의 '빼라'(예: 2026-11-20 nextl",
+    "why": "스타일 기본값 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
+    "id": "450123c940",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "overfit",
+    "level": "ask",
+    "file": "manual/05-style-matching.md",
     "line": 142,
     "text": "고르는 요령 (예): 숫자 하나 → photofill · 연표·인과 지도 → tilt · 비유·인용 → dolly. 장식 효과(dust·leak)·scan 은 드물게(시장 채널은 끔, 09 §6). 효과는 정보를 더하지 않는 분위기라 한 장면에 쌓지 않습니다.",
     "why": "실험 기록 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
@@ -58,8 +86,19 @@
    {
     "kind": "overfit",
     "level": "ask",
+    "file": "manual/08-issues.md",
+    "line": 54,
+    "text": "7. 같은 화풍, 다른 연출. 종이 배경의 인용문·지도·통계·챕터가 같은 모양으로 되풀이되지 않게, 자료의 역할에 따라 연출을 고릅니다(신문 원문은 해당 부분을 따라 읽기, 확산은 이동 경로가 변하는 지도, 두 도시 비교는 조치 날짜와 사망률을 같은 시간축에). 한 화풍을 편 전체에 쓰",
+    "why": "스타일 기본값 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
+    "id": "1dde6ca332",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "overfit",
+    "level": "ask",
     "file": "manual/12-visual-storytelling.md",
-    "line": 15,
+    "line": 17,
     "text": "기록을 바탕으로 다시 그린 장면은 '재구성'이라고 화면에 표시합니다(§1). 실제 사건 당사자의 얼굴은 그리지 않고, 얼굴을 알아볼 수 있는 실제 인물 사진·영상을 질환·중독·범죄·우울 같은 부정적 맥락의 당사자처럼 쓰지 않으며, AI 로 만든 인물을 실제 기록처럼 쓰지 않습니다(영구 ",
     "why": "실험 기록 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
     "id": "7013308e81",
@@ -69,8 +108,74 @@
    {
     "kind": "overfit",
     "level": "ask",
+    "file": "manual/13-script.md",
+    "line": 42,
+    "text": "'어떻게 실험했나'는 행동과 모션그래픽, '실제로 무엇이 나왔나'는 원문과 수치, '왜 중요한가'는 인물의 일상(의지력 편 v3 검토). 한 편의 화풍은 하나여도 되지만 모든 장면에 같은 연출을 쓰지 않고, 움직임은 정보나 상태가 변하는 순간에 쓴다.",
+    "why": "스타일 기본값 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
+    "id": "46172b866a",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "overfit",
+    "level": "ask",
+    "file": "manual/feedback-by-repo.md",
+    "line": 17,
+    "text": "2026-11-09 · v2 통과 — “스타일 단독 품질 합격 (단독 영상 금지 규칙은 archive 기각 사유로 반영)”",
+    "why": "스타일 기본값 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
+    "id": "4d90615548",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "overfit",
+    "level": "ask",
+    "file": "manual/feedback-by-repo.md",
+    "line": 38,
+    "text": "2026-11-15 · 방향·기준 요청 — “스타일 MUST 들은 전부 굳이 필요하지 않다고 생각합니다. 고정규칙이 아니라 필요에 따라 유동적으로 할 수 있도록 해주세요”",
+    "why": "스타일 기본값 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
+    "id": "74f5db7510",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "overfit",
+    "level": "ask",
+    "file": "manual/feedback-by-repo.md",
+    "line": 116,
+    "text": "2026-11-11 · v11 기각 — “화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌”",
+    "why": "실험 기록 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
+    "id": "3359d61da7",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "overfit",
+    "level": "ask",
+    "file": "manual/feedback-by-repo.md",
+    "line": 203,
+    "text": "2026-11-21 · 영상 검토 — “대본의 피드백입니다 — (의지력 편 v2 검토) 방향 통과, 2025 효과 배수 비교 금지·대조 조건과 주 지표 설명·생활 조언을 근거 범위 안으로·4~7장 연구 나열 대신 증거 추적·8장 전환 문장”",
+    "why": "스타일 기본값 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
+    "id": "5f50c13cd0",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "overfit",
+    "level": "ask",
+    "file": "manual/feedback-by-repo.md",
+    "line": 318,
+    "text": "2026-11-09 · v3 기각 — “강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)”",
+    "why": "스타일 기본값 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
+    "id": "e9a26d8514",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "overfit",
+    "level": "ask",
     "file": "manual/06-checklist.md",
-    "line": 73,
+    "line": 78,
     "text": "MUST **화면 글자 겹침 없음** (`05_edit/overlap_qa.json`, 렌더 끝에 자동 — 렌더된 장면을 박자 끝마다 멈춰 실제 글자 상자로 잼): 글자끼리 · 카드·그림에 가려짐 · 카드 밖으로 넘침 · **화면 밖 잘림** · **글자 위·",
     "why": "실험 기록 층인데 MUST 검사 — 권고로 내릴지",
     "id": "38129265bd",
@@ -166,27 +271,414 @@
     "since": "2026-11-20"
    },
    {
-    "kind": "nousage",
+    "kind": "untiered",
     "level": "ask",
-    "file": "manual/usage.yaml",
+    "file": "manual/feedback.yaml",
     "line": 0,
-    "text": "그래픽 팩: 구겨진 종이 (설명 무대) (crumpled-paper)",
-    "why": "언제 쓰나·쓰지 않나·대신이 정해지지 않음 — usage.yaml (스타일은 레시피 when·fits, 기법은 techniques.yaml) 에 초안을 써서 확인받기",
-    "id": "0dc50c54fa",
-    "new": false,
-    "since": "2026-11-20"
+    "text": "강조연출이 너무 많고 자꾸 이건 이 채널의 의견 이런거 없애주세요 그리고 실제 인터뷰 소스영상이랑 최신 인터뷰 주식을 쉰더 이런 최신 인터뷰 소스영상도 포함해주세요",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 스타일 기본값) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "d0dd83cece",
+    "new": true,
+    "since": "2026-11-21"
    },
    {
-    "kind": "nousage",
+    "kind": "untiered",
     "level": "ask",
-    "file": "manual/usage.yaml",
+    "file": "manual/feedback.yaml",
     "line": 0,
-    "text": "그래픽 팩: 어두운 무대 (설명 무대) (dark-stage)",
-    "why": "언제 쓰나·쓰지 않나·대신이 정해지지 않음 — usage.yaml (스타일은 레시피 when·fits, 기법은 techniques.yaml) 에 초안을 써서 확인받기",
-    "id": "bbb9cbbc7d",
-    "new": false,
-    "since": "2026-11-20"
+    "text": "좀 차분하고 깔끔한 스타일로 한번 해보고자 합니다.",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 스타일 기본값) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "81356adfd7",
+    "new": true,
+    "since": "2026-11-21"
    },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "그래프  스타일도 바꿔주세요  좀 깔끔하게요 브리핑이랑 분석 둘 다요",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 스타일 기본값) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "ee539b3756",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "제가 의도한건 이런 연출인데  전혀 연출이 다른거같아요 (누아르 사건보드 레퍼런스 noir-case-board-demo.mp4)",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "a45d1ba7b3",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "약간 호기심채널 연출처럼 좀 깔끔한 연출이 오히려 나은 것 같아서요 글씨체도 그렇구요 한번 이렇게 해주세요",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "730aef9d7d",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "유튜브에 업로드하면 유튜브 링크를 올리 드라이브에서 삭제하는게 괜찮아 보이는데 / 재료는 삭제하는걸 원하지 않아요 단지 영상을 이제 하이퍼링크처럼 대체한다 느낌인거지 어떻게 이 영상을 만들었는지에 대한 기준 메뉴얼 재료는 그대로 냅두는거죠",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "4ea2d68901",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "넘기기편 자막싱크랑 글씨가 겹치는거 수정하고 재업로드 해주세요 / 북극곰 편도 마찬가지로 체크해주세요 앞으로 매번 이런거 주의 체크해주세요",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "104235776a",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "앞으로 매번 snp랑 나스닥 그리고 가장 많이 빠진 섹터지수 등을 썸네일에 넣어주세그리고 검은 금요일에서 금요일에 노란색으로 칠해주세요.",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "93f12c74a3",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "그리고 썸네일은 사람들이 보고 클릭할만한 핫한 키워드 민감한 키워드 이런걸 적어주세요 저는 블랙 ㅁㅁㅁ 등 공포감이 있는 핫한 키워드와 금리 연준 그리고 핫한 인물이나 기업사진 등이 핫한거같아서 썸네일을 이렇게 부탁한게 맥락이구요.",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "00b0be6fa3",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "어지간해서는 매일 각각영상1개씩 올리고싶습니다. (앞 말: 오늘 이런 시장에 대한 심층분석 인터뷰영상이나 시장 분석 해설 이런영상 필요없는지 체크해주세요 즉 시장을 브리핑해주는 영상과 그 브리핑속에서 여러 인사이트와 시장 그리고 수요 기술 등 산업 심층분석 영상을 따로 올리고자 합니다.",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "49412d061d",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "수익창출에 문제가 없다면 우리 인용규칙을 빼도 됩니다 / 네 매뉴얼 바꾸세요 경고먹거나 채널이 삭제되지 않도록 주의해주새여",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "32ee525ebc",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "사람들이 ai인프라나 반도체 폭락 이런거에 민감하니까요 사람들이 현재 시장에 대한 불안이 극도에 달해서 이를 이용하면 좋을 것 같습니다. 이게 제가 전에 트렌드와 핫한 키워드를 적극 활용하라 한 예시구요 (앞 말: 그리고 썸네일에도 반도체 폭락이나 ai infra종말인가 이런식으로 넣으",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "d74d003437",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "이건 그냥빼줘 (매뉴얼 그래프 댓글 — 03 §0-4 '근거: docs/31… 구조와 방법만 가져오고 문구는 복제하지 않는다.' 줄)",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 영구 원칙) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "ff941be10c",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "이번주의 이슈나 매일 브리핑에 있는 이슈들에 대해서 여러 인사이트를 다를 수 있도록 하세요. 이 인사이트는 사람들이 주목할만한 키워드나 인물 매체면 더 좋습니다. 여러 인물들의 인사이트와 주장들을 여러 인사이트로 확인하는 것 입니다. 단 사실과 주장은 분리해서 봐야합니다. 특정 인사이트",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "76d500a651",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "그리고 기존 영상에서 자막싱크가 살짝 밀리는 경우가 있습니다. 또한 업로드 하기 전 항상 글씨겹침 그래픽끼리 겹침 자막밀림 자막과 나레이션 싱크 화면과 자막이 일치하는지 등 종합적으로 검수하세요 이는 메뉴얼에 반영하세요",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "be11b63f0e",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "인터뷰 영상이 없는데요? 제가 첫장면같은 경우 인용의 경우 실제 소스를 담아달라 했잖아요 그리고 처음부터 다 적어놓고 설명하니가 너무 정적인 느낌이 강합나다.",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "3946774334",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "그리고 그냥 원래 편집스타일대로 해주세요",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 스타일 기본값) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "2268b389e3",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "(X 게시물 붙여 넣음: 에드 지트론의 엔비디아 순환 금융 주장 요약) 주제에 대해서도 심층 분석해줘 x에 이런 주제거리가 많은거같아",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "53e77aad58",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "이번에 일부공개한 영상에서 인사이트가 너무 옅어요 그 거품이라는 주장을 뜯어보고 아니라는 주장도 심화적으로 뜯어봐야하는데 근거를 너무 그냥 얘가 이랬어요 쟤가 저랬어요 로만 들립니다",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "b763caf3ce",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "그리고 인사이트에 대해서 여러가지를 인사이트와 함께 근거를 뜯어보고 해석해야하는데 지금 영상은 브리핑과 크게 다를바 없어보여요 심층분석이라기엔 브리핑과 별 차이점이없다 입니다.",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "968d41dcd9",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "심층분석에 대해서는 심층분석에 사용할 여러가지 주제들을 추가로 조사하세요 즉 미리 이메일이나 소스 등에서도 확인하고 나중에 이를 기반으로 영상을 만들 수 있으니 미리 한번 조사하라는 겁니다. 심층분석에는 굳이 주가변동폭을 안넣어도 될 것 같아요 일일브리핑에만 넣어주세요.",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "a7e59649a2",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "그리고 심층분석에는 소스영상들 자료영상들 있다면 이런거 올려줬으면 해 그 주장 발언부분 자료영상으로 올려주란거지 (같은 말: 너가 썸네일 배경에 거품을 추천햇는데 거품인게 티가안난단거야 구분이 안간단거지 저 배경이 거품인가? 하고)",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "2ac51b81f8",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "이미지제작은 말했지만 gpt로 합니다",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "11e84da9b0",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "연구의 흐름과 결론은 보존하고, 초반 약속을 앞당긴 다음 중반의 설명 카드들을 시청자가 직접 이해할 수 있는 실험 장면으로 바꾸는 것이 가장 가치 있는 수정입니다.",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "770ef231ba",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "연구목적보단 이야기 중심으로 풀어나가며 근거로 실제 사례를 곁들이는 방식으로 해주세요.  제가 느끼기엔 차라리 이전에 제작한 채널 영상들이 더 나았다고 느껴집니다. 그리고 의지력은 정말 바닥나는걸까요? 가 너무 뜬금없이 뒤에 나타나는 것 같아요",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "8b250643eb",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "삽화풍을 곁들여서 학습보다는 이야기를 들려주며 실제 있었던 일과 사례들을 집어넣는 느낌으로 해주세요",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "94aedd16da",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "우선 서윤이 갑자기 치킨을 먹으려 한다 라기보다는 다른사람들도 공감 가능한 이야기로 살을 덧붙여서 다이어트중이라는 설정을 넣는게 좋아보여요",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "b49d5720b7",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "그리고 보는 사람들에게 좀 유대감? 내 이야기구나 하고 몰입 가능하게끔 하는게 좋아보여요",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "fb79d9208b",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "솔직히 말하자면 중간중간 자꾸 뭐 이랬습니다. 근데 아니였습니다. 이랬습니다. 그런데 아니였습니다. 말하고싶은게 뭔지 자꾸 늘어지고 억지로 길이를 늘린거같아요. 그리고 하고싶은말을 참았다 라는거보단 다른 상황을 대입하는게 더 좋아보이네요 회의에서 하고싶은말을 참았다 이게 별로 의지력이랑",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "7ff2f22b3d",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "북극곰이랑 권태사회를 참조하세요 잼보다는",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "1cb439ded9",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "그리고 심리학고양이의 대본과 연출을 분석 대조하세요 심리학고양이의 영상이 솔직히 제가 생각하는 이상향입니다",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "00eebe847c",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "(질문 답) 주인공: '당신'으로 (추천) · 화면: 삽화 + 참여 화면 (추천)",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "27a89e41eb",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "결론을 말하는게 아니라 자꾸만 사실 다른실험은 아니였어요 사실 이 실험조건은 이런 사족 붙이지 말고 결론만 말해주세요 빙빙 돌려말하지 말구요",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "c60be342f3",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "그리고 냉장고 앞의 당신 이라고 다짜고짜 시작하는거도 좀 뭔가 그렇습니다. 심리학고양이의 채널을 다시 벤치마킹 해보세요",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "a86e5b18f2",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "재현 창작인물 서윤 이런 왼쪽 위 문구 없애주고 당신은이 아니라 서윤이라고 인물을 설정해서 한번 해주시고(물론 시청자의 몰입 대입은 유도하세요) 중간중간 e가 있으면 하라고 유도하는거 모든 단어에 e가 들어가는데 이거도 조금 바꿔주시고 매번 이런 유도마다 정답지를 유도해주는데 예시로 몇",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "d4ba9a5feb",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "이전보다 훨씬 좋아졌습니다.",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 작업 기준) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "424da34dd7",
+    "new": true,
+    "since": "2026-11-21"
+   },
+   {
+    "kind": "untiered",
+    "level": "ask",
+    "file": "manual/feedback.yaml",
+    "line": 0,
+    "text": "고민인 점이 세가지입니다. 서윤이라는 가상인물에 대해 미리 이런 가상의 인물이 있다고 가정을 하고 진행할지 그냥 서윤이라 할지 당신은 이라고할지 셋중 고민입니다 일단 영상 자체는 커밋으로 메뉴얼들과 파일들 반영해주세요",
+    "why": "이 말의 층이 정해지지 않음 (자동 추정: 영구 원칙) — 영구 원칙·작업 기준·스타일 기본값·실험 기록 중",
+    "id": "dfa7d6775f",
+    "new": true,
+    "since": "2026-11-21"
+   }
+  ],
+  "resolved": [
    {
     "kind": "proposal",
     "level": "ask",
@@ -196,7 +688,8 @@
     "why": "video-20261117-three 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
     "id": "904e97ce80",
     "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "proposal",
@@ -207,7 +700,8 @@
     "why": "codex/hangeop-infographic-direction 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
     "id": "22b4cbb93e",
     "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "proposal",
@@ -218,7 +712,8 @@
     "why": "claude/affectionate-faraday-8bp5bx 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
     "id": "e659f50c4d",
     "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "proposal",
@@ -229,7 +724,8 @@
     "why": "claude/affectionate-faraday-8bp5bx 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
     "id": "bf6cd074c7",
     "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "proposal",
@@ -240,7 +736,8 @@
     "why": "claude/affectionate-faraday-8bp5bx 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
     "id": "674c19f27f",
     "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "proposal",
@@ -251,7 +748,8 @@
     "why": "claude/affectionate-faraday-8bp5bx 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
     "id": "94d03ce088",
     "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "proposal",
@@ -262,7 +760,8 @@
     "why": "claude/affectionate-faraday-8bp5bx 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
     "id": "fe91979e17",
     "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "proposal",
@@ -273,7 +772,8 @@
     "why": "claude/affectionate-faraday-8bp5bx 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
     "id": "39ba24c2e8",
     "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "proposal",
@@ -284,7 +784,8 @@
     "why": "claude/affectionate-faraday-8bp5bx 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
     "id": "c7943916d9",
     "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "proposal",
@@ -295,7 +796,8 @@
     "why": "claude/affectionate-faraday-8bp5bx 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
     "id": "c83931b640",
     "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "proposal",
@@ -306,7 +808,8 @@
     "why": "claude/affectionate-faraday-8bp5bx 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
     "id": "690c597742",
     "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "proposal",
@@ -317,7 +820,8 @@
     "why": "claude/affectionate-faraday-8bp5bx 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
     "id": "d8b9461916",
     "new": true,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "contra",
@@ -328,7 +832,8 @@
     "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
     "id": "7a563f9bb8",
     "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "contra",
@@ -339,7 +844,8 @@
     "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
     "id": "596ca6808f",
     "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "contra",
@@ -350,7 +856,8 @@
     "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
     "id": "683a3d55c4",
     "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "contra",
@@ -361,7 +868,8 @@
     "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
     "id": "4b46e4b657",
     "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "contra",
@@ -372,7 +880,8 @@
     "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
     "id": "0dcf87b220",
     "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "contra",
@@ -383,18 +892,8 @@
     "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
     "id": "f46064840c",
     "new": false,
-    "since": "2026-11-20"
-   },
-   {
-    "kind": "contra",
-    "level": "ask",
-    "file": "정기 작업 \"뉴스레터 소재 수집\" 05:40",
-    "line": 0,
-    "text": "c-20261120-32: 정기 작업 \"뉴스레터 소재 수집\" 05:40 ↔ docs/36 §5-1 — 뉴스레터 정기 작업 역할",
-    "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
-    "id": "0cff7b9c94",
-    "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "contra",
@@ -405,7 +904,8 @@
     "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
     "id": "ed1e254d94",
     "new": false,
-    "since": "2026-11-20"
+    "since": "2026-11-20",
+    "resolved": "2026-11-21"
    },
    {
     "kind": "sweep",
@@ -416,80 +916,11 @@
     "why": "바뀐 줄이 다른 지침·정기 작업 지시문과 반대인지 확인 → 장부에 적고 manual-audit --checked",
     "id": "3461af09a1",
     "new": false,
-    "since": "2026-11-20"
-   }
-  ],
-  "resolved": [
-   {
-    "kind": "proposal",
-    "level": "ask",
-    "file": "proposals\\manual\\20261120-140056-ectionate-faraday-8bp5bx.md",
-    "line": 0,
-    "text": "[feedback] 심리학 고양이의 대본을참조해주세요 이야기는 삽화로 설명은 모션그래픽으로 증거는 실제 자료 인물사진 등으로 검은 화면이나 중간중간 연출은 마디로 해주세요. 삽화는 잼편처럼 말이죠 연출은 메모리처럼 그리고 실제 자료가 있다면 넣는 형식으로 해주세요",
-    "why": "claude/affectionate-faraday-8bp5bx 의 제안 — 잠금을 잡은 쪽이 반영(feedback·review·매뉴얼 수정) 뒤 제안 파일의 status 를 done 으로",
-    "id": "a40f401333",
-    "new": true,
     "since": "2026-11-20",
-    "resolved": "2026-11-20"
-   },
-   {
-    "kind": "ref",
-    "level": "fix",
-    "file": "AGENTS.md",
-    "line": 60,
-    "text": "docs/54-my-videos-vs-viral.md",
-    "why": "파일이 없음",
-    "id": "aab174ad72",
-    "new": true,
-    "since": "2026-11-20",
-    "resolved": "2026-11-20"
-   },
-   {
-    "kind": "contra",
-    "level": "ask",
-    "file": "skills/video-sources §3",
-    "line": 0,
-    "text": "c-20261120-29: skills/video-sources §3 ↔ docs/50 §0·AGENTS 소스 규칙 — PC 쿠키 사용과 우회 금지",
-    "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
-    "id": "6630d2dea5",
-    "new": false,
-    "since": "2026-11-20",
-    "resolved": "2026-11-20"
-   },
-   {
-    "kind": "contra",
-    "level": "ask",
-    "file": "manual/04 §0-6 순서",
-    "line": 0,
-    "text": "c-20261120-31: manual/04 §0-6 순서 ↔ manual/11 단계표·04 v55 — 호기심 intent.md 순서",
-    "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
-    "id": "8f7b6186cd",
-    "new": false,
-    "since": "2026-11-20",
-    "resolved": "2026-11-20"
-   },
-   {
-    "kind": "stale",
-    "level": "fix",
-    "file": "manual/graph.json",
-    "line": 0,
-    "text": "매뉴얼 그래프가 옛것",
-    "why": "python -m ytflow manual-graph",
-    "id": "9e7e585dd5",
-    "new": false,
-    "since": "2026-11-20",
-    "resolved": "2026-11-20"
+    "resolved": "2026-11-21"
    }
   ],
   "log": [
-   {
-    "date": "2026-11-20T10:21",
-    "fix": 2,
-    "ask": 13,
-    "new": 0,
-    "resolved": 0,
-    "note": ""
-   },
    {
     "date": "2026-11-20T10:25",
     "fix": 1,
@@ -561,41 +992,51 @@
     "new": 1,
     "resolved": 5,
     "note": ""
+   },
+   {
+    "date": "2026-11-21T13:56",
+    "fix": 1,
+    "ask": 76,
+    "new": 60,
+    "resolved": 20,
+    "note": "정기 검토"
    }
   ],
-  "fixed": []
+  "fixed": [
+   "AGENTS 시장 요일(일요일 주간 종합)·upload 기본(Drive) 문장, 09 심층 조건·표·요일표를 11/21 '매일 두 편'에 맞춤, ch-market-daily cadence 의 폐지된 v63 '심층이 기본' 문장 정리, 모순 c-20261121-01(브리핑 길이) 장부에 추가"
+  ]
  },
  "stats": {
-  "manual_version": 83,
-  "versions": 83,
-  "reviews": 39,
-  "rejects": 25,
-  "passes": 14,
+  "manual_version": 86,
+  "versions": 86,
+  "reviews": 41,
+  "rejects": 26,
+  "passes": 15,
   "pending": 0,
-  "rules": 54,
-  "checks": 87,
-  "sections": 195,
-  "must": 29,
-  "auto": 39,
-  "intents": 210,
+  "rules": 53,
+  "checks": 86,
+  "sections": 197,
+  "must": 28,
+  "auto": 38,
+  "intents": 240,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 1,
   "code": 86,
   "terms": 140,
-  "bans": 179,
-  "feedback": 152,
+  "bans": 182,
+  "feedback": 179,
   "topics": 4,
-  "episodes": 38,
+  "episodes": 39,
   "main_situations": 17,
   "tiers": {
-   "principle": 49,
-   "standard": 152,
+   "principle": 50,
+   "standard": 153,
    "style": 25,
    "trial": 7
   },
   "overfit": 14,
-  "principle_bans": 43
+  "principle_bans": 44
  },
  "pending": [],
  "status_labels": {
@@ -1310,6 +1751,42 @@
    "absolute": false,
    "must": false,
    "tier_key": "ban:4eaf359b",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
+   "section": "sec:04§0-8",
+   "text": "결론 | 장마다 결론 한 문장. 실험 조건·반론·한계를 덧붙이지 않는다(단언은 사실 범위 안에서 — 넘지 못하면 '…만이 아니다'처럼 범위를 문장 안에) | \"사족 붙이지 말고 결론만 말해주세요 빙빙 돌려말하지 말구요\", \"이랬습니다. 그런데 아니였습니다 … 억지로 길이를 늘린거같아요\" | 한계를 장마다 붙이면 말하려는 게 흐려지고 늘어진다",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:ae96aba2",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
+   "section": "sec:04§0-8",
+   "text": "화면(§0-7 보완): 화면에 장 제목·표지를 띄우지 않는다(장 이름은 설명란 챕터만). 검은 화면은 지금 읽는 핵심 문장 한 줄(작은 글씨, 핵심 낱말 하나만 강조색). 왼쪽 위 '재현·창작 인물' 꼬리표는 화면에 두지 않고 설명란에 적는다. 그래프·표 없음. (사용자: \"재현 창작인물 서윤 이런 왼쪽 위 문구 없애주고\", 심리학 고양이 장 경계 화면 확인)",
+   "themes": [
+    "emphasis"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:43ce3444",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
    "overfit": false,
@@ -2061,7 +2538,43 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:09§2",
+   "section": "sec:09§2-0",
+   "text": "넣지 않는 것 | 깊은 해부(→ 심층 예고) | 시세 막대 나열·다른 회사 소식 나열(→ 브리핑 몫), 브리핑과 같은 장면·문장(§13)",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:ac35b809",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§2-0",
+   "text": "주제: 미리 조사해 둔 inbox/research/deep-topics.md(메일함 뉴스레터·SAVE·X 북마크·사용자 요청)에서 고른다 (2026-11-21 사용자: \"심층분석에 사용할 여러가지 주제들을 추가로 조사하세요 … 미리 이메일이나 소스 등에서도 확인하고\"). X 는 사용자가 북마크한 글을 사용자가 있을 때 Claude in Chrome 으로 읽는다(로그인 없이 긁지 않음, 유료 API 쓰지 않음 — 2026-11-21 사용자 선택).",
+   "themes": [
+    "depth"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:18014d9f",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§2-0",
    "text": "브리핑과 같은 장면·문장을 반복하지 않는다(§13). 브리핑은 그날 전체를 짧게, 심층은 한 줄기를 깊게. 핵심 질문·제목·썸네일 주인공도 브리핑과 다르게 — 심층 제목은 그 편만의 역설 하나로(예: '물량 75% 약정인데 주가 −35%'), '반도체 동반 폭락'처럼 브리핑과 구분되지 않는 제목은 피함 (2026-11-21 사용자 제공 영상 진단·대본 검토). 한 제목에 여러 축(상장·공매도·시장 재편)을 다 넣지 않고 가장 강한 질문 하나를 가운데에.",
    "themes": [
     "variety",
@@ -2081,7 +2594,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:09§2",
+   "section": "sec:09§2-0",
    "text": "아침 브리핑 (매일, 7~10분, <YYYYMMDD>-market-daily): 시장 한 장 → 그날 시장을 움직인 보도 2~3개를 가볍게 분석(무엇이 나왔나·어디서·매체는 어떻게 읽었나·숫자 하나) → 한국 → 오늘 볼 것. 심층거리가 있으면 그 이야기는 한 장으로 짧게 다루고 \"이 이야기는 오늘 ○시 심층에서 자세히\"로 넘긴다(같은 장면·문장을 두 편에 반복하지 않음 — §13). 제목·썸네일은 시황 나열이 아니라 핫 키워드·사건 당사자로 시작(§7-1 — ",
    "themes": [
     "motion",
@@ -2095,7 +2608,7 @@
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
-   "single": false,
+   "single": true,
    "tier": "standard",
    "tier_by": "자동 추정",
    "tier_note": "",
@@ -2103,14 +2616,14 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:09§2",
-   "text": "심층이 가능하면 심층, 안 되면 일반 (2026-11-20 사용자: \"심층이 가능하면 심층으로 안되면 일반으로 해줘 심층이 가능한데도 일반으로 하지 말라는 의미야 이에 따라서 영상길이도 결정해줘\"): 심층 가능 = 아래 심층 신호가 있고 당사자 원본 발언을 붙일 수 있음. 가능한 날은 시간·편의 때문에 브리핑(일반)만으로 끝내지 않고 반드시 따로 심층을 만든다. 길이는 이 판단을 따른다 — 일반(브리핑) 7~10분, 심층 12분~(자료가 많으면 20분). 아침 ",
+   "section": "sec:09§2-0",
+   "text": "심층이 가능하면 심층, 안 되면 일반 (2026-11-20 사용자: \"심층이 가능하면 심층으로 안되면 일반으로 해줘 심층이 가능한데도 일반으로 하지 말라는 의미야 이에 따라서 영상길이도 결정해줘\"): 심층 가능 = 아래 심층 신호가 있음(원본 발언은 붙일 수 있으면 붙임 — 없으면 문서형 심층, 위 2026-11-21 '매일 두 편'). 가능한 날은 시간·편의 때문에 브리핑(일반)만으로 끝내지 않고 반드시 따로 심층을 만든다. 길이는 이 판단을 따른다 — 일반(",
    "themes": [
     "length"
    ],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:a2c1aa4f",
+   "tier_key": "ban:2636487e",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -2122,7 +2635,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:09§2",
+   "section": "sec:09§2-0",
    "text": "하루 편수 | 매일 1편 | 0~2편 (§2-1), 브리핑을 대신하지 않음",
    "themes": [],
    "absolute": false,
@@ -2131,7 +2644,7 @@
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
-   "single": false,
+   "single": true,
    "tier": "standard",
    "tier_by": "자동 추정",
    "tier_note": "",
@@ -2571,23 +3084,6 @@
    "tier_label": "영구 원칙"
   },
   {
-   "section": "sec:09§3-5",
-   "text": "받는 길: 클라우드는 YouTube 가 봇 확인으로 막음 — 우회하지 않음. 클라우드는 영상 찾기(제목·채널·길이 조회)·문장 확인(공식 녹취·기사 인용)·주소와 구간 기록까지 하고, 정부·IR 사이트에서 바로 받을 수 있는 것만 받는다.",
-   "themes": [],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:d850e34c",
-   "tier_auto": "principle",
-   "why": "사실·법·권리·안전에 관한 말",
-   "overfit": false,
-   "single": true,
-   "tier": "principle",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "영구 원칙"
-  },
-  {
    "section": "sec:09§5-1",
    "text": "2. 그다음, 상황 설명이 필요한 대목만 모션그래픽으로 짧게 푼다. 대사는 앞에서 말한 사실의 관계(어디서 어디로·뒤에도 계속·전체 중 몫·닫힌 사이·무엇이 증거가 아닌가)만 말하고 새 사실을 더하지 않는다.",
    "themes": [],
@@ -2928,7 +3424,7 @@
   },
   {
    "section": "sec:09§7-1",
-   "text": "8. 지수 띠를 작게, 매번 (스타일 기본값, 2026-11-21 사용자: \"썸네일에 그리고 snp나 나스닥 soxx하락률 등을 작게 적어주세요\" · \"앞으로 매번 snp랑 나스닥 그리고 가장 많이 빠진 섹터지수 등을 썸네일에 넣어주세요\"): 모든 변형의 아래 왼쪽에 작은 띠 하나 — S&P 500 · 나스닥 · 그날 가장 많이 움직인 섹터 지수(반도체 SOX·기술 XLK 등, 팩트시트 ## 시장 한 장 ✅ 숫자 그대로, 영상과 같은 날짜 기준). hybrid.",
+   "text": "8. 지수 띠를 작게, 매일 브리핑에만 (스타일 기본값 — 심층에는 넣지 않음, 2026-11-21 사용자: \"심층분석에는 굳이 주가변동폭을 안넣어도 될 것 같아요 일일브리핑에만 넣어주세요\"; 2026-11-21 사용자: \"썸네일에 그리고 snp나 나스닥 soxx하락률 등을 작게 적어주세요\" · \"앞으로 매번 snp랑 나스닥 그리고 가장 많이 빠진 섹터지수 등을 썸네일에 넣어주세요\"): 모든 변형의 아래 왼쪽에 작은 띠 하나 — S&P 500 · 나스닥 · 그날",
    "themes": [
     "motion",
     "variety",
@@ -2936,7 +3432,7 @@
    ],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:9c073a3c",
+   "tier_key": "ban:0a7cb6cb",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
    "overfit": false,
@@ -3067,7 +3563,7 @@
    "tier_label": "영구 원칙"
   },
   {
-   "section": "sec:09§h400",
+   "section": "sec:09§h417",
    "text": "ElevenLabs 를 쓸 수 없는 날은 edge 초안으로 만들되 올리지 않는다 (v43, §2-1 — 공개본은 Teo). 크레딧이 모자라면 그날 편을 미루거나 voice-import 로 Teo 테이크를 만든다.",
    "themes": [],
    "absolute": false,
@@ -3562,7 +4058,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h112",
+   "section": "sec:feedback§h116",
    "text": "2026-11-11 · v11 기각 — “화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌”",
    "themes": [
     "motion",
@@ -3582,7 +4078,7 @@
    "tier_label": "실험 기록"
   },
   {
-   "section": "sec:feedback§h166",
+   "section": "sec:feedback§h170",
    "text": "2026-11-17 · 방향·기준 요청 — “그리고 반드시 하루1편을 올리는 것이 아니라 각 소스영상 인터뷰영상 주제 등 할 이야기가 많다면 하루에 세개까지 영상을 올려도 됩니다 즉 제한을 두지는 않는다는거에요”",
    "themes": [],
    "absolute": false,
@@ -3599,7 +4095,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h199",
+   "section": "sec:feedback§h203",
    "text": "2026-11-14 · v20 기각 — “중간중간 너무 난잡함. 목표·시청자 욕망을 먼저 정의하지 않고 만듦. 대본을 소제목처럼 글로 쓰거나 사진·그림을 붙여 넣기만 함 — 대본에 따른 애니메이션이 아님. 각 연출의 의도가 불분명”",
    "themes": [
     "variety",
@@ -3620,7 +4116,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h199",
+   "section": "sec:feedback§h203",
    "text": "2026-11-21 · 영상 검토 — “대본의 피드백입니다 — (의지력 편 v2 검토) 방향 통과, 2025 효과 배수 비교 금지·대조 조건과 주 지표 설명·생활 조언을 근거 범위 안으로·4~7장 연구 나열 대신 증거 추적·8장 전환 문장”",
    "themes": [
     "motion",
@@ -3640,7 +4136,7 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "section": "sec:feedback§h253",
+   "section": "sec:feedback§h282",
    "text": "2026-11-19 · 방향·기준 요청 — “대본 단계에 \"호기심 대본은 설명·지식 문장 30% 이하\"라는 기준 이런 기준은 또 빼주세요 너무 과적합입니다. / \"설명은 이야기 속에 엮는다\"는 원리 이런식으로 원리주의적으로 가지 방법 자체를 고정하지 말아주세요”",
    "themes": [
     "script",
@@ -3660,7 +4156,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h296",
+   "section": "sec:feedback§h325",
    "text": "2026-11-09 · v3 기각 — “강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)”",
    "themes": [
     "emphasis",
@@ -3736,13 +4232,14 @@
   },
   {
    "section": "sec:README§2-4",
-   "text": "늘릴 때는 같은 말을 반복하지 않고 그 채널의 뼈대를 채운다 (호기심 §2-3, 시장 03 §0-4, 시사 08, AI 11 §3-1).",
+   "text": "늘리려고 같은 말을 반복하지 않는다 — 억지로 늘인 대본은 늘어지고 결론이 흐려진다 (2026-11-21 사용자: \"억지로 길이를 늘린거같아요\", 호기심 04 §0-8).",
    "themes": [
-    "variety"
+    "variety",
+    "script"
    ],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:1ca937a4",
+   "tier_key": "ban:c35bfeb7",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -3755,15 +4252,14 @@
   },
   {
    "section": "sec:README§2-4",
-   "text": "심층 우선 (2026-11-20 사용자: \"심층이 가능하면 심층으로 안되면 일반으로 해줘 심층이 가능한데도 일반으로 하지 말라는 의미야 이에 따라서 영상길이도 결정해줘\"): 자료(1차 출처·원본 발언·인사이트)로 깊게 갈 수 있으면 심층으로 만들고, 그럴 수 없을 때만 일반(브리핑·빠른 정리)으로. 길이는 그 판단의 결과 — 심층은 길게, 일반은 그 형식의 길이(시장 09 §2). 채널별 목표는 channels/<id>/channel.yaml 의 target_m",
+   "text": "깊이는 줄이지 않는다 — 짧게 끝내려고 근거·사례를 빼지 않는다 (2026-11-15 사용자: \"어지간하면 … 깊게 분석·조사하고 관련 인사이트를 분석·소개하라는 의미지, 꼭 10분으로 하라는 건 아닙니다\").",
    "themes": [
-    "script",
-    "intent",
+    "depth",
     "length"
    ],
    "absolute": false,
-   "must": true,
-   "tier_key": "ban:08f45bbb",
+   "must": false,
+   "tier_key": "ban:6483b6a7",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -4185,15 +4681,13 @@
    "key": "04",
    "file": "manual/04-curiosity.md",
    "label": "04. curiosity — 몰랐던 이유 (심리학과 현대인의 일상)",
-   "lines": 238,
+   "lines": 260,
    "versions": [
     1,
     32,
     38,
     57,
-    60,
     61,
-    73,
     79,
     83
    ],
@@ -4296,7 +4790,7 @@
    "key": "09",
    "file": "manual/09-market-daily.md",
    "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13 · v36 인사이트·영상 소스 · v42 기술 분석·CEO 소식 2026-11-17)",
-   "lines": 419,
+   "lines": 436,
    "versions": [
     19,
     24,
@@ -4326,9 +4820,10 @@
     78,
     79,
     80,
-    83
+    83,
+    84
    ],
-   "last_version": 83
+   "last_version": 84
   },
   {
    "id": "doc:10",
@@ -4405,11 +4900,13 @@
    "key": "feedback",
    "file": "manual/feedback-by-repo.md",
    "label": "내 피드백 — 레포별 (자동 생성: `python -m ytflow manual-graph`)",
-   "lines": 307,
+   "lines": 336,
    "versions": [
-    83
+    83,
+    84,
+    85
    ],
-   "last_version": 83
+   "last_version": 85
   },
   {
    "id": "doc:README",
@@ -4417,7 +4914,7 @@
    "key": "README",
    "file": "manual/README.md",
    "label": "제작 매뉴얼 — 처음 온 사람(새 세션·새 모델)이 여기서 시작합니다",
-   "lines": 157,
+   "lines": 159,
    "versions": [
     1,
     2,
@@ -5084,6 +5581,24 @@
    ]
   },
   {
+   "id": "sec:04§0-8",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "0-8",
+   "level": 3,
+   "label": "대본은 이렇게 — 의지력 편 v16 (2026-11-21 사용자: \"이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요\")",
+   "title": "0-8. 대본은 이렇게 — 의지력 편 v16 (2026-11-21 사용자: \"이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요\")",
+   "line": 175,
+   "end": 196,
+   "tag_version": null,
+   "versions": [
+    60,
+    73,
+    85
+   ],
+   "last_version": 85
+  },
+  {
    "id": "sec:04§1",
    "kind": "section",
    "doc": "doc:04",
@@ -5091,8 +5606,8 @@
    "level": 2,
    "label": "호기심을 '만드는' 주제의 조건 (모두 충족)",
    "title": "1. 호기심을 '만드는' 주제의 조건 (모두 충족)",
-   "line": 175,
-   "end": 187,
+   "line": 197,
+   "end": 209,
    "tag_version": null,
    "versions": [
     53
@@ -5107,8 +5622,8 @@
    "level": 2,
    "label": "주제 찾기",
    "title": "2. 주제 찾기",
-   "line": 188,
-   "end": 206,
+   "line": 210,
+   "end": 228,
    "tag_version": null,
    "versions": [
     65
@@ -5123,8 +5638,8 @@
    "level": 2,
    "label": "깊은 조사 — 다섯 층 (자세히는 `prompts/script_knowledge.md` A)",
    "title": "3. 깊은 조사 — 다섯 층 (자세히는 `prompts/script_knowledge.md` A)",
-   "line": 207,
-   "end": 209,
+   "line": 229,
+   "end": 231,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5137,8 +5652,8 @@
    "level": 2,
    "label": "대본 공식",
    "title": "4. 대본 공식",
-   "line": 210,
-   "end": 223,
+   "line": 232,
+   "end": 245,
    "tag_version": null,
    "versions": [
     34
@@ -5159,8 +5674,8 @@
    "level": 2,
    "label": "소스",
    "title": "5. 소스",
-   "line": 224,
-   "end": 226,
+   "line": 246,
+   "end": 248,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5173,8 +5688,8 @@
    "level": 2,
    "label": "포장",
    "title": "6. 포장",
-   "line": 227,
-   "end": 230,
+   "line": 249,
+   "end": 252,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5187,8 +5702,8 @@
    "level": 2,
    "label": "이 채널만의 검사",
    "title": "7. 이 채널만의 검사",
-   "line": 231,
-   "end": 238,
+   "line": 253,
+   "end": 260,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6100,7 +6615,7 @@
    "label": "아침은 가벼운 브리핑, 심층은 따로 — 원본 발언이 있을 때",
    "title": "2. 아침은 가벼운 브리핑, 심층은 따로 — 원본 발언이 있을 때 (v76, 2026-11-20)",
    "line": 52,
-   "end": 81,
+   "end": 65,
    "tag_version": 76,
    "versions": [
     26,
@@ -6108,9 +6623,24 @@
     63,
     76
    ],
-   "last_version": 76,
+   "last_version": 76
+  },
+  {
+   "id": "sec:09§2-0",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "2-0",
+   "level": 3,
+   "label": "브리핑과 심층은 다른 영상이다 (작업 기준, 2026-11-21 사용자: \"인사이트에 대해서 여러가지를 인사이트와 함께 근거를 뜯어보고 해석해야하는데 지금 영상은 브리핑과 크게 다를바 없어보여요 심층분석이라기엔 브리핑과 별 차이점이없다\")",
+   "title": "2-0. 브리핑과 심층은 다른 영상이다 (작업 기준, 2026-11-21 사용자: \"인사이트에 대해서 여러가지를 인사이트와 함께 근거를 뜯어보고 해석해야하는데 지금 영상은 브리핑과 크게 다를바 없어보여요 심층분석이라기엔 브리핑과 별 차이점이없다\")",
+   "line": 66,
+   "end": 96,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null,
    "terms": [
-    "term:bite"
+    "term:bite",
+    "term:style-explain-stage"
    ]
   },
   {
@@ -6121,8 +6651,8 @@
    "level": 3,
    "label": "하루 여러 편 — 상한 없음",
    "title": "2-1. 하루 여러 편 — 상한 없음 (v39, 2026-11-17 사용자)",
-   "line": 82,
-   "end": 98,
+   "line": 97,
+   "end": 113,
    "tag_version": 39,
    "versions": [
     39
@@ -6140,8 +6670,8 @@
    "level": 3,
    "label": "기술 분석·기술의 미래 전망",
    "title": "2-2. 기술 분석·기술의 미래 전망 (v42, 2026-11-17 사용자)",
-   "line": 99,
-   "end": 140,
+   "line": 114,
+   "end": 155,
    "tag_version": 42,
    "versions": [
     42
@@ -6156,8 +6686,8 @@
    "level": 2,
    "label": "조사 — 원인은 1차 출처로",
    "title": "3. 조사 — 원인은 1차 출처로",
-   "line": 141,
-   "end": 141,
+   "line": 156,
+   "end": 156,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6170,8 +6700,8 @@
    "level": 3,
    "label": "SAVE(오선) 소식은 기본으로 확인 (2026-11-14 사용자 요청)",
    "title": "3-0. SAVE(오선) 소식은 기본으로 확인 (2026-11-14 사용자 요청)",
-   "line": 142,
-   "end": 151,
+   "line": 157,
+   "end": 166,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6184,8 +6714,8 @@
    "level": 3,
    "label": "뉴스레터 화제도 같은 '단서' 자리 (2026-11-16 사용자 승인, docs/36)",
    "title": "3-0-1. 뉴스레터 화제도 같은 '단서' 자리 (2026-11-16 사용자 승인, docs/36)",
-   "line": 152,
-   "end": 157,
+   "line": 167,
+   "end": 172,
    "tag_version": null,
    "versions": [
     35
@@ -6200,8 +6730,8 @@
    "level": 3,
    "label": "원인 종류별 어디서 확인하나",
    "title": "3-1. 원인 종류별 어디서 확인하나",
-   "line": 158,
-   "end": 169,
+   "line": 173,
+   "end": 184,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6214,8 +6744,8 @@
    "level": 3,
    "label": "팩트시트 쓰는 법 (`01_research/factsheet.md`)",
    "title": "3-2. 팩트시트 쓰는 법 (`01_research/factsheet.md`)",
-   "line": 170,
-   "end": 175,
+   "line": 185,
+   "end": 190,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6228,8 +6758,8 @@
    "level": 3,
    "label": "데이터 함정 (실제로 겪은 것)",
    "title": "3-3. 데이터 함정 (실제로 겪은 것)",
-   "line": 176,
-   "end": 184,
+   "line": 191,
+   "end": 199,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6242,8 +6772,8 @@
    "level": 3,
    "label": "사람·매체의 인사이트 — 사실과 나눠서, 넉넉하게",
    "title": "3-4. 사람·매체의 인사이트 — 사실과 나눠서, 넉넉하게 (v36, 2026-11-17 사용자 요청)",
-   "line": 185,
-   "end": 220,
+   "line": 200,
+   "end": 236,
    "tag_version": 36,
    "versions": [
     36,
@@ -6253,7 +6783,9 @@
    "terms": [
     "term:bite",
     "term:versus",
+    "term:map_causal",
     "term:quote",
+    "term:board",
     "term:tech-split-screen"
    ]
   },
@@ -6265,8 +6797,8 @@
    "level": 3,
    "label": "매체·인물의 인터뷰·방송을 영상 소스로",
    "title": "3-5. 매체·인물의 인터뷰·방송을 영상 소스로 (v36, 2026-11-17 사용자 요청)",
-   "line": 221,
-   "end": 256,
+   "line": 237,
+   "end": 273,
    "tag_version": 36,
    "versions": [
     36
@@ -6286,8 +6818,8 @@
    "level": 2,
    "label": "대본 — 브리핑 (10~12분, 20~26장면)",
    "title": "4. 대본 — 브리핑 (10~12분, 20~26장면)",
-   "line": 257,
-   "end": 274,
+   "line": 274,
+   "end": 291,
    "tag_version": null,
    "versions": [
     34
@@ -6317,8 +6849,8 @@
    "level": 2,
    "label": "대본 — 심층 (12분~, 길이는 자료·인사이트의 양이 정함)",
    "title": "5. 대본 — 심층 (12분~, 길이는 자료·인사이트의 양이 정함)",
-   "line": 275,
-   "end": 281,
+   "line": 292,
+   "end": 298,
    "tag_version": null,
    "versions": [
     26,
@@ -6339,8 +6871,8 @@
    "level": 3,
    "label": "나열하지 말고 풀어서 — 설명은 움직이는 장면으로",
    "title": "5-1. 나열하지 말고 풀어서 — 설명은 움직이는 장면으로 (v63, 2026-11-20)",
-   "line": 282,
-   "end": 309,
+   "line": 299,
+   "end": 326,
    "tag_version": 63,
    "versions": [
     63
@@ -6370,8 +6902,8 @@
    "level": 2,
    "label": "화면 문법 (시장 카테고리 개성, `05 §0-7`)",
    "title": "6. 화면 문법 (시장 카테고리 개성, `05 §0-7`)",
-   "line": 310,
-   "end": 325,
+   "line": 327,
+   "end": 342,
    "tag_version": null,
    "versions": [
     27,
@@ -6404,8 +6936,8 @@
    "level": 2,
    "label": "제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
    "title": "7. 제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
-   "line": 326,
-   "end": 330,
+   "line": 343,
+   "end": 347,
    "tag_version": null,
    "versions": [
     27
@@ -6423,8 +6955,8 @@
    "level": 3,
    "label": "썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
    "title": "7-1. 썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
-   "line": 331,
-   "end": 346,
+   "line": 348,
+   "end": 363,
    "tag_version": null,
    "versions": [
     51
@@ -6442,8 +6974,8 @@
    "level": 2,
    "label": "렌더 전 점검",
    "title": "8. 렌더 전 점검",
-   "line": 347,
-   "end": 349,
+   "line": 364,
+   "end": 366,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6456,8 +6988,8 @@
    "level": 2,
    "label": "렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
    "title": "9. 렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
-   "line": 350,
-   "end": 357,
+   "line": 367,
+   "end": 374,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6470,8 +7002,8 @@
    "level": 3,
    "label": "업로드 전 종합 검수 — 통과해야 올린다 (작업 기준, 2026-11-21 사용자: \"업로드 하기 전 항상 글씨겹침 그래픽끼리 겹침 자막밀림 자막과 나레이션 싱크 화면과 자막이 일치하는지 등 종합적으로 검수하세요 이는 메뉴얼에 반영하세요\")",
    "title": "9-1. 업로드 전 종합 검수 — 통과해야 올린다 (작업 기준, 2026-11-21 사용자: \"업로드 하기 전 항상 글씨겹침 그래픽끼리 겹침 자막밀림 자막과 나레이션 싱크 화면과 자막이 일치하는지 등 종합적으로 검수하세요 이는 메뉴얼에 반영하세요\")",
-   "line": 358,
-   "end": 364,
+   "line": 375,
+   "end": 381,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6484,8 +7016,8 @@
    "level": 2,
    "label": "업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
    "title": "10. 업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
-   "line": 365,
-   "end": 377,
+   "line": 382,
+   "end": 394,
    "tag_version": null,
    "versions": [
     34
@@ -6500,8 +7032,8 @@
    "level": 2,
    "label": "기록·되돌아보기",
    "title": "11. 기록·되돌아보기",
-   "line": 378,
-   "end": 381,
+   "line": 395,
+   "end": 398,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6514,8 +7046,8 @@
    "level": 2,
    "label": "예외 대응",
    "title": "12. 예외 대응",
-   "line": 382,
-   "end": 391,
+   "line": 399,
+   "end": 408,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6528,8 +7060,8 @@
    "level": 2,
    "label": "법·정책",
    "title": "13. 법·정책",
-   "line": 392,
-   "end": 399,
+   "line": 409,
+   "end": 416,
    "tag_version": null,
    "versions": [
     34
@@ -6537,43 +7069,43 @@
    "last_version": 34
   },
   {
-   "id": "sec:09§h400",
+   "id": "sec:09§h417",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h400",
+   "num": "h417",
    "level": 2,
    "label": "목소리 (2026-11-13 결정)",
    "title": "목소리 (2026-11-13 결정)",
-   "line": 400,
-   "end": 407,
+   "line": 417,
+   "end": 424,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h408",
+   "id": "sec:09§h425",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h408",
+   "num": "h425",
    "level": 2,
    "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
    "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
-   "line": 408,
-   "end": 413,
+   "line": 425,
+   "end": 430,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h414",
+   "id": "sec:09§h431",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h414",
+   "num": "h431",
    "level": 2,
    "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
    "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
-   "line": 414,
-   "end": 419,
+   "line": 431,
+   "end": 436,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7569,7 +8101,7 @@
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
    "line": 38,
-   "end": 109,
+   "end": 113,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7578,29 +8110,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h110",
+   "id": "sec:feedback§h114",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h110",
+   "num": "h114",
    "level": 2,
    "label": "시장 — `topics/market`",
    "title": "시장 — `topics/market`",
-   "line": 110,
-   "end": 111,
+   "line": 114,
+   "end": 115,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h112",
+   "id": "sec:feedback§h116",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h112",
+   "num": "h116",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 112,
-   "end": 165,
+   "line": 116,
+   "end": 169,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7611,43 +8143,43 @@
    ]
   },
   {
-   "id": "sec:feedback§h166",
+   "id": "sec:feedback§h170",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h166",
+   "num": "h170",
    "level": 3,
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
-   "line": 166,
-   "end": 196,
+   "line": 170,
+   "end": 200,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h197",
+   "id": "sec:feedback§h201",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h197",
+   "num": "h201",
    "level": 2,
    "label": "호기심 — `topics/curiosity`",
    "title": "호기심 — `topics/curiosity`",
-   "line": 197,
-   "end": 198,
+   "line": 201,
+   "end": 202,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h199",
+   "id": "sec:feedback§h203",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h199",
+   "num": "h203",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 199,
-   "end": 252,
+   "line": 203,
+   "end": 281,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7658,15 +8190,15 @@
    ]
   },
   {
-   "id": "sec:feedback§h253",
+   "id": "sec:feedback§h282",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h253",
+   "num": "h282",
    "level": 3,
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
-   "line": 253,
-   "end": 263,
+   "line": 282,
+   "end": 292,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7675,29 +8207,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h264",
+   "id": "sec:feedback§h293",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h264",
+   "num": "h293",
    "level": 2,
    "label": "시사 — `topics/issues`",
    "title": "시사 — `topics/issues`",
-   "line": 264,
-   "end": 265,
+   "line": 293,
+   "end": 294,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h266",
+   "id": "sec:feedback§h295",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h266",
+   "num": "h295",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 266,
-   "end": 293,
+   "line": 295,
+   "end": 322,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7707,29 +8239,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h294",
+   "id": "sec:feedback§h323",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h294",
+   "num": "h323",
    "level": 2,
    "label": "AI — `topics/ai`",
    "title": "AI — `topics/ai`",
-   "line": 294,
-   "end": 295,
+   "line": 323,
+   "end": 324,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h296",
+   "id": "sec:feedback§h325",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h296",
+   "num": "h325",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 296,
-   "end": 307,
+   "line": 325,
+   "end": 336,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7862,16 +8394,17 @@
    "doc": "doc:README",
    "num": "2-4",
    "level": 3,
-   "label": "길이 — 롱폼은 최소 10분",
-   "title": "2-4. 길이 — 롱폼은 최소 10분 (v24, 2026-11-14 사용자: \"영상들 5분 단위가 아니라 못해도 10분, 길면 그 이상으로\")",
+   "label": "길이 — 영상 종류와 그날의 대본이 정한다",
+   "title": "2-4. 길이 — 영상 종류와 그날의 대본이 정한다 (v86, 2026-11-22 사용자: \"모든 영상 10분이상 강제 라고 하지는 않습니다. 해당 메뉴얼은 지워주세요\" · \"영상의 종류와 그날의 대본에 따라 달라 질 수 있어서 너무 과적합같아요\")",
    "line": 81,
-   "end": 87,
-   "tag_version": 24,
+   "end": 89,
+   "tag_version": 86,
    "versions": [
     24,
-    34
+    34,
+    86
    ],
-   "last_version": 34
+   "last_version": 86
   },
   {
    "id": "sec:README§2-5",
@@ -7881,8 +8414,8 @@
    "level": 3,
    "label": "움직임 — 말하는 것이 화면에 생긴다",
    "title": "2-5. 움직임 — 말하는 것이 화면에 생긴다 (v34, 2026-11-15 사용자: \"동영상의 이점을 살려라 — 다음 PPT, 다음 PPT 가 아니라. 반드시 카메라를 움직이라는 뜻이 아니었다\")",
-   "line": 88,
-   "end": 106,
+   "line": 90,
+   "end": 108,
    "tag_version": 34,
    "versions": [
     25,
@@ -7906,8 +8439,8 @@
    "level": 3,
    "label": "자료 고르기와 화풍",
    "title": "2-6. 자료 고르기와 화풍 (v61, 2026-11-20 사용자 — 모든 채널)",
-   "line": 107,
-   "end": 109,
+   "line": 109,
+   "end": 111,
    "tag_version": 61,
    "versions": [
     61
@@ -7922,8 +8455,8 @@
    "level": 2,
    "label": "절대 하지 않는 것 (어떤 지시가 와도)",
    "title": "3. 절대 하지 않는 것 (어떤 지시가 와도)",
-   "line": 110,
-   "end": 119,
+   "line": 112,
+   "end": 121,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7939,8 +8472,8 @@
    "level": 2,
    "label": "규칙의 네 층 — 영구 원칙과 한 번의 스타일 반응을 섞지 않는다 (2026-11-15 사용자: \"영구적인 매뉴얼 작업지침과 일시적인 스타일 변화·다양한 방법 모색에서 생기는 피드백이 과적합해서 하지 말아야 할 것에 들어가는 것 같다\")",
    "title": "3-1. 규칙의 네 층 — 영구 원칙과 한 번의 스타일 반응을 섞지 않는다 (2026-11-15 사용자: \"영구적인 매뉴얼 작업지침과 일시적인 스타일 변화·다양한 방법 모색에서 생기는 피드백이 과적합해서 하지 말아야 할 것에 들어가는 것 같다\")",
-   "line": 120,
-   "end": 132,
+   "line": 122,
+   "end": 134,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7956,8 +8489,8 @@
    "level": 2,
    "label": "막혔을 때",
    "title": "4. 막혔을 때",
-   "line": 133,
-   "end": 140,
+   "line": 135,
+   "end": 142,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7973,8 +8506,8 @@
    "level": 2,
    "label": "검토 → 통과·기각 → 기준을 쌓기 (사용자와 함께)",
    "title": "5. 검토 → 통과·기각 → 기준을 쌓기 (사용자와 함께)",
-   "line": 141,
-   "end": 157,
+   "line": 143,
+   "end": 159,
    "tag_version": null,
    "versions": [
     38
@@ -8874,27 +9407,6 @@
    "tier_note": "",
    "tier_fixed": false,
    "tier_label": "스타일 기본값"
-  },
-  {
-   "id": "rule:G6:1",
-   "kind": "rule",
-   "gate": "gate:G6",
-   "level": "MUST",
-   "level_note": "",
-   "label": "길이: 롱폼 10분 이상 (시사 빠른 정리 `\"format\": \"quick\"` 은 5분 이상, 시장 아침 브리핑 `-market-daily`·`\"format\": \"brief\"` 는 7분 이상 — 09 §2 v76, 그보다 짧으면 쇼츠로 — README §2-4)",
-   "auto": true,
-   "eye": false,
-   "line": 84,
-   "tier_key": "rule:c460e40d",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
   },
   {
    "id": "rule:G6:1",
@@ -10386,25 +10898,6 @@
    "file": "ytflow/stages/checklist.py",
    "line": 363,
    "tier_key": "check:9f786482",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "id": "check:377",
-   "kind": "check",
-   "gate": "gate:G6",
-   "level": "MUST",
-   "label": "길이: {lab_} 이상 — 많이 짧으면 쇼츠로 (README §2-4)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 377,
-   "tier_key": "check:2af9e439",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -13350,6 +13843,83 @@
    }
   },
   {
+   "id": "ver:84",
+   "kind": "version",
+   "v": 84,
+   "date": "2026-11-21",
+   "label": "v84",
+   "summary": "브리핑과 심층을 다른 영상으로(§2-0): 심층은 질문 하나·주장 3~4개 해부·계산 장, 주장 해부 표(§3-4), 심층은 주장마다 자료 영상(§3-5), 지수 띠는 브리핑만(§7-1 ⑧), 심층 주제는 미리 조사한 목록에서",
+   "applied": [],
+   "themes": [],
+   "commit": {
+    "sha": "4959f593c18a2c5aeeeebdd46fcbaaf43aae93b2",
+    "subject": "매뉴얼 v84: 브리핑과 심층은 다른 영상(§2-0) — 심층은 질문 하나·주장 3~4개 해부·계산 장, 주장 해부 표(§3-4), 주장마다 자료 영상(§3-5), 지수 띠는 브리핑만(§7-1 ⑧), 심층 주제 미리 조사",
+    "date": "2026-11-21",
+    "other_files": [
+     "proposals/manual/20261121-190230-local_thumb-hook.md",
+     "proposals/manual/20261121-190237-local_thumb-hook.md",
+     "proposals/manual/20261121-202739-local_thumb-hook.md",
+     "proposals/manual/20261121-202748-local_thumb-hook.md",
+     "proposals/manual/20261121-205131-local_thumb-hook.md",
+     "proposals/manual/20261121-205615-local_thumb-hook.md"
+    ]
+   }
+  },
+  {
+   "id": "ver:85",
+   "kind": "version",
+   "v": 85,
+   "date": "2026-11-21",
+   "label": "v85",
+   "summary": "호기심 대본 구성 기준 04 §0-8(의지력 편 v16): 시청자에게 먼저 묻고 인물 소개, 설정 있는 창작 인물 3인칭, 몰입 한 줄, 질문은 인물 말 뒤, 1분 안 단언, 실제 있었던 일로 들려주기, 장마다 결론만, 직접 해 보기 정답은 처음 몇 번만, 화면 장 표지·꼬리표 없음",
+   "applied": [
+    {
+     "date": "2026-11-21",
+     "project": "20261121-curiosity-willpower",
+     "reason": "기각입니다. 현재는 좋은 연구 해설을 보여주는 자료에 가깝습니다. 다음 버전의 목표는 좋은 연구 해설을 보게 되는 이야기로 만드는 것입니다. 연출 또한 마찬가지입니다. 이전보다 더 퇴화했다고 느껴지네요 그래프가 나오는거도 그렇고 이야기라기보단 연구같아요 배경도 검은색이 나은 것 같습니다"
+    }
+   ],
+   "themes": [
+    "background",
+    "script",
+    "intent"
+   ],
+   "commit": {
+    "sha": "fd9594683920da736b2603e7139f41b9b6dd668f",
+    "subject": "의지력 편 v16 확정·ElevenLabs 최종본, 매뉴얼 v85: 호기심 대본 구성 기준(04 §0-8)",
+    "date": "2026-11-21",
+    "other_files": [
+     "projects/20261121-curiosity-willpower/02_script/el_align.py",
+     "projects/20261121-curiosity-willpower/02_script/script_review.md",
+     "projects/20261121-curiosity-willpower/02_script/script_v16.md",
+     "projects/20261121-curiosity-willpower/02_script/v14_overlay.html",
+     "projects/20261121-curiosity-willpower/02_script/v15_overlay.html",
+     "projects/20261121-curiosity-willpower/02_script/v16.json",
+     "projects/20261121-curiosity-willpower/02_script/v16_beats.json",
+     "projects/20261121-curiosity-willpower/05_edit/sync_qa_v16.json",
+     "projects/20261121-curiosity-willpower/05_edit/sync_qa_v16_final.json",
+     "projects/20261121-curiosity-willpower/05_edit/v16_el_timeline.json",
+     "projects/20261121-curiosity-willpower/05_edit/v16_timeline.json",
+     "projects/20261121-curiosity-willpower/05_edit/youtube.md",
+     "projects/20261121-curiosity-willpower/REPORT.md"
+    ]
+   }
+  },
+  {
+   "id": "ver:86",
+   "kind": "version",
+   "v": 86,
+   "date": "2026-11-22",
+   "label": "v86",
+   "summary": "길이 최소선 삭제: 롱폼 10분 이상 MUST(README §2-4·06·check G6)를 지우고 '영상 종류와 그날 대본이 정한다, 늘리려 반복하지 않고 깊이는 줄이지 않는다'로 — 사용자: 과적합",
+   "applied": [],
+   "themes": [
+    "variety",
+    "script",
+    "length"
+   ]
+  },
+  {
    "id": "rev:1",
    "kind": "review",
    "date": "2026-11-09",
@@ -14226,6 +14796,44 @@
    "tier_note": "",
    "tier_fixed": false,
    "tier_label": "작업 기준"
+  },
+  {
+   "id": "rev:40",
+   "kind": "review",
+   "date": "2026-11-21",
+   "project": "20261121-curiosity-willpower",
+   "manual_version": 84,
+   "result": "reject",
+   "reason": "기각입니다. 현재는 좋은 연구 해설을 보여주는 자료에 가깝습니다. 다음 버전의 목표는 좋은 연구 해설을 보게 되는 이야기로 만드는 것입니다. 연출 또한 마찬가지입니다. 이전보다 더 퇴화했다고 느껴지네요 그래프가 나오는거도 그렇고 이야기라기보단 연구같아요 배경도 검은색이 나은 것 같습니다",
+   "themes": [
+    "background",
+    "intent"
+   ],
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "status": "applied",
+   "tier_key": "rev:104c731e",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "rev:41",
+   "kind": "review",
+   "date": "2026-11-21",
+   "project": "20261121-curiosity-willpower",
+   "manual_version": 85,
+   "result": "pass",
+   "reason": "",
+   "themes": [],
+   "repo": "curiosity",
+   "repo_label": "호기심"
   },
   {
    "id": "theme:motion",
@@ -15353,7 +15961,7 @@
      "by": ""
     },
     {
-     "ref": "doc:04",
+     "ref": "sec:04§0-8",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -17131,109 +17739,6 @@
    "annotated": false
   },
   {
-   "id": "intent:97937dfb",
-   "kind": "intent",
-   "quote": "영상들 5분 단위가 아니라 못해도 10분, 길면 그 이상으로",
-   "label": "영상들 5분 단위가 아니라 못해도 10분, 길면 그 이상으로",
-   "versions": [
-    24
-   ],
-   "date": "2026-11-14",
-   "sources": [
-    {
-     "ref": "sec:README§2-4",
-     "kind": "manual"
-    }
-   ],
-   "variants": [],
-   "member_ids": [
-    "intent:97937dfb"
-   ],
-   "themes": [
-    "length"
-   ],
-   "ann_key": "intent:97937dfb",
-   "meaning": "",
-   "not_meant": [],
-   "note": "",
-   "readings": [
-    {
-     "ref": "ver:24",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "sec:README§2-4",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "gate:G6",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "sec:README§2-1",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "sec:README§2-3",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:03",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:09",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/checklist.py:203",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/checklist.py:356",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/checklist.py:370",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/hybrid.py:1091",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/hybrid.py:1184",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    }
-   ],
-   "status": "unreviewed",
-   "annotated": false
-  },
-  {
    "id": "intent:98a46673",
    "kind": "intent",
    "quote": "중간중간 너무 난잡함. 목표·시청자 욕망을 먼저 정의하지 않고 만듦. 대본을 소제목처럼 글로 쓰거나 사진·그림을 붙여 넣기만 함 — 대본에 따른 애니메이션이 아님. 각 연출의 의도가 불분명",
@@ -18272,111 +18777,6 @@
    ]
   },
   {
-   "id": "intent:7be96777",
-   "kind": "intent",
-   "quote": "어지간하면 10분 정도로 깊게 분석·조사하고 관련 인사이트를 분석·소개하라는 의미지, 꼭 10분으로 하라는 건 아닙니다. 대본과 주제에 따라 더 길어질 수도 있습니다.",
-   "label": "어지간하면 10분 정도로 깊게 분석·조사하고 관련 인사이트를 분석·소개하라는 의미지, 꼭 10분으로 하라는 ",
-   "versions": [
-    24
-   ],
-   "date": "2026-11-15",
-   "sources": [
-    {
-     "ref": "sec:README§2-4",
-     "kind": "manual"
-    }
-   ],
-   "variants": [],
-   "member_ids": [
-    "intent:7be96777"
-   ],
-   "themes": [
-    "script",
-    "depth",
-    "length"
-   ],
-   "ann_key": "intent:7be96777",
-   "meaning": "",
-   "not_meant": [],
-   "note": "",
-   "readings": [
-    {
-     "ref": "ver:24",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "sec:README§2-4",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "gate:G6",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "sec:README§2-1",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "sec:README§2-3",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:03",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:09",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/checklist.py:203",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/checklist.py:356",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/checklist.py:370",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/hybrid.py:1091",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/hybrid.py:1184",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    }
-   ],
-   "status": "unreviewed",
-   "annotated": false
-  },
-  {
    "id": "intent:8fab3ca0",
    "kind": "intent",
    "quote": "분석의 깊이나 주제 선정은 머니크루 채널처럼 깊이 있게",
@@ -19049,6 +19449,56 @@
    "not_meant": [],
    "note": "",
    "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:de8a2919",
+   "kind": "intent",
+   "quote": "어지간하면 … 깊게 분석·조사하고 관련 인사이트를 분석·소개하라는 의미지, 꼭 10분으로 하라는 건 아닙니다",
+   "label": "어지간하면 … 깊게 분석·조사하고 관련 인사이트를 분석·소개하라는 의미지, 꼭 10분으로 하라는 건 아닙니다",
+   "versions": [
+    86
+   ],
+   "date": "2026-11-15",
+   "sources": [
+    {
+     "ref": "sec:README§2-4",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:de8a2919"
+   ],
+   "themes": [
+    "depth",
+    "length"
+   ],
+   "ann_key": "intent:de8a2919",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:86",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -21850,7 +22300,7 @@
      "by": ""
     },
     {
-     "ref": "doc:04",
+     "ref": "sec:04§0-8",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -22422,7 +22872,7 @@
      "by": ""
     },
     {
-     "ref": "doc:04",
+     "ref": "sec:04§0-8",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -22581,6 +23031,53 @@
    "terms": [
     "term:style-explain-stage"
    ]
+  },
+  {
+   "id": "intent:610916a6",
+   "kind": "intent",
+   "quote": "심층이 가능하면 심층으로 안되면 일반으로 해줘 … 이에 따라서 영상길이도 결정해줘",
+   "label": "심층이 가능하면 심층으로 안되면 일반으로 해줘 … 이에 따라서 영상길이도 결정해줘",
+   "versions": [
+    86
+   ],
+   "date": "2026-11-20",
+   "sources": [
+    {
+     "ref": "sec:README§2-4",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:610916a6"
+   ],
+   "themes": [],
+   "ann_key": "intent:610916a6",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:86",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
   },
   {
    "id": "intent:627fec5b",
@@ -22953,9 +23450,7 @@
    "quote": "깃과 드라이브로 나눠서 해줘 심층이 가능하면 심층으로 안되면 일반으로 해줘 심층이 가능한데도 일반으로 하지 말라는 의미야 이에 따라서 영상길이도 결정해줘  영상 소스 절차서의 PC쿠키 사용해도 돼 제안함 그대로 수용해줘 배경음은 상황에 따라서 내가 조절할게",
    "label": "깃과 드라이브로 나눠서 해줘 심층이 가능하면 심층으로 안되면 일반으로 해줘 심층이 가능한데도 일반으로 하지 ",
    "versions": [
-    12,
-    24,
-    76
+    12
    ],
    "date": "2026-11-20",
    "sources": [
@@ -22964,11 +23459,7 @@
      "kind": "feedback"
     },
     {
-     "ref": "sec:09§2",
-     "kind": "manual"
-    },
-    {
-     "ref": "sec:README§2-4",
+     "ref": "sec:09§2-0",
      "kind": "manual"
     },
     {
@@ -23066,103 +23557,7 @@
      "by": ""
     },
     {
-     "ref": "ver:24",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "sec:README§2-4",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "gate:G6",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "sec:README§2-1",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "sec:README§2-3",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:03",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:09",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/checklist.py:203",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/checklist.py:356",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/checklist.py:370",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/hybrid.py:1091",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/hybrid.py:1184",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "ver:76",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "sec:09§2",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/checklist.py:374",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/daily.py:159",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/daily.py:179",
+     "ref": "sec:09§2-0",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -23596,7 +23991,7 @@
      "kind": "review"
     },
     {
-     "ref": "sec:feedback§h199",
+     "ref": "sec:feedback§h203",
      "kind": "manual"
     }
    ],
@@ -23632,7 +24027,7 @@
      "by": ""
     },
     {
-     "ref": "sec:feedback§h199",
+     "ref": "sec:feedback§h203",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -23742,106 +24137,24 @@
    "kind": "intent",
    "quote": "앞으로 그럼 클라우드에서 제 계정으로 로그인하던지 클라우드가 아니라 다운로드가 필요할 때만 뭐 따로 다운로드 하던지 할 수 있도록 해주세요",
    "label": "앞으로 그럼 클라우드에서 제 계정으로 로그인하던지 클라우드가 아니라 다운로드가 필요할 때만 뭐 따로 다운로드",
-   "versions": [
-    36
-   ],
+   "versions": [],
    "date": "2026-11-20",
    "sources": [
     {
      "ref": "fb:72",
      "kind": "feedback"
-    },
-    {
-     "ref": "sec:09§3-5",
-     "kind": "manual"
     }
    ],
-   "variants": [
-    "클라우드가 아니라 다운로드가 필요할 때만 뭐 따로 다운로드 하던지"
-   ],
+   "variants": [],
    "member_ids": [
-    "intent:c4c678bf",
-    "intent:68cfb845"
+    "intent:c4c678bf"
    ],
    "themes": [],
    "ann_key": "intent:c4c678bf",
    "meaning": "",
    "not_meant": [],
    "note": "",
-   "readings": [
-    {
-     "ref": "ver:36",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "sec:09§3-4",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "sec:09§3-5",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:03",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/checklist.py:283",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/hybrid.py:173",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/hybrid.py:1277",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/hybrid.py:1505",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "check:289",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "check:293",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "check:299",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "check:301",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    }
-   ],
+   "readings": [],
    "status": "unreviewed",
    "annotated": false
   },
@@ -24247,7 +24560,7 @@
      "by": ""
     },
     {
-     "ref": "doc:04",
+     "ref": "sec:04§0-8",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -24534,7 +24847,7 @@
      "by": ""
     },
     {
-     "ref": "doc:04",
+     "ref": "sec:04§0-8",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -24750,6 +25063,43 @@
     },
     {
      "ref": "check:296",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:00574923",
+   "kind": "intent",
+   "quote": "이전보다 훨씬 좋아졌습니다",
+   "label": "이전보다 훨씬 좋아졌습니다",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "sec:04§0-8",
+     "kind": "manual"
+    },
+    {
+     "ref": "fb:170",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:00574923"
+   ],
+   "themes": [],
+   "ann_key": "intent:00574923",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:04§0-8",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -25021,6 +25371,32 @@
    "annotated": false
   },
   {
+   "id": "intent:0ddb3373",
+   "kind": "intent",
+   "quote": "삽화풍을 곁들여서 학습보다는 이야기를 들려주며 실제 있었던 일과 사례들을 집어넣는 느낌으로 해주세요",
+   "label": "삽화풍을 곁들여서 학습보다는 이야기를 들려주며 실제 있었던 일과 사례들을 집어넣는 느낌으로 해주세요",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:160",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:0ddb3373"
+   ],
+   "themes": [],
+   "ann_key": "intent:0ddb3373",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:104a07d3",
    "kind": "intent",
    "quote": "인터뷰 영상이 없는데요? 제가 첫장면같은 경우 인용의 경우 실제 소스를 담아달라 했잖아요 그리고 처음부터 다 적어놓고 설명하니가 너무 정적인 느낌이 강합나다.",
@@ -25045,6 +25421,56 @@
    "not_meant": [],
    "note": "",
    "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:104c731e",
+   "kind": "intent",
+   "quote": "기각입니다. 현재는 좋은 연구 해설을 보여주는 자료에 가깝습니다. 다음 버전의 목표는 좋은 연구 해설을 보게 되는 이야기로 만드는 것입니다. 연출 또한 마찬가지입니다. 이전보다 더 퇴화했다고 느껴지네요 그래프가 나오는거도 그렇고 이야기라기보단 연구같아요 배경도 검은색이 나은 것 같습니다",
+   "label": "기각입니다. 현재는 좋은 연구 해설을 보여주는 자료에 가깝습니다. 다음 버전의 목표는 좋은 연구 해설을 보게",
+   "versions": [
+    85
+   ],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "rev:40",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:104c731e"
+   ],
+   "themes": [
+    "background",
+    "intent"
+   ],
+   "ann_key": "intent:104c731e",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:85",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0-8",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:feedback",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -25078,6 +25504,67 @@
      "by": ""
     }
    ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:1d638f3e",
+   "kind": "intent",
+   "quote": "심층분석에 사용할 여러가지 주제들을 추가로 조사하세요 … 미리 이메일이나 소스 등에서도 확인하고",
+   "label": "심층분석에 사용할 여러가지 주제들을 추가로 조사하세요 … 미리 이메일이나 소스 등에서도 확인하고",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "sec:09§2-0",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:1d638f3e"
+   ],
+   "themes": [
+    "depth"
+   ],
+   "ann_key": "intent:1d638f3e",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§2-0",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:1e4c3b2d",
+   "kind": "intent",
+   "quote": "그리고 보는 사람들에게 좀 유대감? 내 이야기구나 하고 몰입 가능하게끔 하는게 좋아보여요",
+   "label": "그리고 보는 사람들에게 좀 유대감? 내 이야기구나 하고 몰입 가능하게끔 하는게 좋아보여요",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:162",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:1e4c3b2d"
+   ],
+   "themes": [],
+   "ann_key": "intent:1e4c3b2d",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
    "status": "unreviewed",
    "annotated": false
   },
@@ -25180,6 +25667,80 @@
    "annotated": false
   },
   {
+   "id": "intent:2be120db",
+   "kind": "intent",
+   "quote": "이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요. 이제 일레븐랩스 더빙 들어가세요",
+   "label": "이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요. 이제 일레븐랩스 더빙 들어가세요",
+   "versions": [
+    16
+   ],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:173",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:04§0-8",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요"
+   ],
+   "member_ids": [
+    "intent:2be120db",
+    "intent:a0d6a3ce"
+   ],
+   "themes": [
+    "script"
+   ],
+   "ann_key": "intent:2be120db",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:16",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:05",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:184",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1479",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0-8",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:2dab8053",
    "kind": "intent",
    "quote": "또한 제가 이전에 영상들에 대해 피드백한 내용을 메뉴얼에 반영해주세요",
@@ -25262,6 +25823,76 @@
    "annotated": false
   },
   {
+   "id": "intent:3ffba19c",
+   "kind": "intent",
+   "quote": "심층분석에 대해서는 심층분석에 사용할 여러가지 주제들을 추가로 조사하세요 즉 미리 이메일이나 소스 등에서도 확인하고 나중에 이를 기반으로 영상을 만들 수 있으니 미리 한번 조사하라는 겁니다. 심층분석에는 굳이 주가변동폭을 안넣어도 될 것 같아요 일일브리핑에만 넣어주세요.",
+   "label": "심층분석에 대해서는 심층분석에 사용할 여러가지 주제들을 추가로 조사하세요 즉 미리 이메일이나 소스 등에서도 ",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:155",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:09§7-1",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "심층분석에는 굳이 주가변동폭을 안넣어도 될 것 같아요 일일브리핑에만 넣어주세요"
+   ],
+   "member_ids": [
+    "intent:3ffba19c",
+    "intent:c79b1ef2"
+   ],
+   "themes": [
+    "depth"
+   ],
+   "ann_key": "intent:3ffba19c",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§7-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:44e96cb4",
+   "kind": "intent",
+   "quote": "연구의 흐름과 결론은 보존하고, 초반 약속을 앞당긴 다음 중반의 설명 카드들을 시청자가 직접 이해할 수 있는 실험 장면으로 바꾸는 것이 가장 가치 있는 수정입니다.",
+   "label": "연구의 흐름과 결론은 보존하고, 초반 약속을 앞당긴 다음 중반의 설명 카드들을 시청자가 직접 이해할 수 있는",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:158",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:44e96cb4"
+   ],
+   "themes": [
+    "intent"
+   ],
+   "ann_key": "intent:44e96cb4",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:48be8e8d",
    "kind": "intent",
    "quote": "제가 의도한건 이런 연출인데  전혀 연출이 다른거같아요 (누아르 사건보드 레퍼런스 noir-case-board-demo.mp4)",
@@ -25315,6 +25946,117 @@
    "not_meant": [],
    "note": "",
    "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:61c5de2a",
+   "kind": "intent",
+   "quote": "그리고 심층분석에는 소스영상들 자료영상들 있다면 이런거 올려줬으면 해 그 주장 발언부분 자료영상으로 올려주란거지 (같은 말: 너가 썸네일 배경에 거품을 추천햇는데 거품인게 티가안난단거야 구분이 안간단거지 저 배경이 거품인가? 하고)",
+   "label": "그리고 심층분석에는 소스영상들 자료영상들 있다면 이런거 올려줬으면 해 그 주장 발언부분 자료영상으로 올려주란",
+   "versions": [
+    36
+   ],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:156",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:09§3-5",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "심층분석에는 소스영상들 자료영상들 있다면 이런거 올려줬으면 해 그 주장 발언부분 자료영상으로 올려주란거지"
+   ],
+   "member_ids": [
+    "intent:61c5de2a",
+    "intent:1b2917c5"
+   ],
+   "themes": [
+    "background",
+    "depth"
+   ],
+   "ann_key": "intent:61c5de2a",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:36",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§3-4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§3-5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:03",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:283",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:173",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1277",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1505",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:289",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:293",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:299",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:301",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -25377,6 +26119,58 @@
    "annotated": false
   },
   {
+   "id": "intent:7044bf93",
+   "kind": "intent",
+   "quote": "결론을 말하는게 아니라 자꾸만 사실 다른실험은 아니였어요 사실 이 실험조건은 이런 사족 붙이지 말고 결론만 말해주세요 빙빙 돌려말하지 말구요",
+   "label": "결론을 말하는게 아니라 자꾸만 사실 다른실험은 아니였어요 사실 이 실험조건은 이런 사족 붙이지 말고 결론만 ",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:167",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:7044bf93"
+   ],
+   "themes": [],
+   "ann_key": "intent:7044bf93",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:71ae388e",
+   "kind": "intent",
+   "quote": "연구목적보단 이야기 중심으로 풀어나가며 근거로 실제 사례를 곁들이는 방식으로 해주세요.  제가 느끼기엔 차라리 이전에 제작한 채널 영상들이 더 나았다고 느껴집니다. 그리고 의지력은 정말 바닥나는걸까요? 가 너무 뜬금없이 뒤에 나타나는 것 같아요",
+   "label": "연구목적보단 이야기 중심으로 풀어나가며 근거로 실제 사례를 곁들이는 방식으로 해주세요.  제가 느끼기엔 차라",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:159",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:71ae388e"
+   ],
+   "themes": [],
+   "ann_key": "intent:71ae388e",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:73c323fc",
    "kind": "intent",
    "quote": "그리고 그냥 원래 편집스타일대로 해주세요",
@@ -25425,6 +26219,74 @@
     "script"
    ],
    "ann_key": "intent:862a9611",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:8d30c51b",
+   "kind": "intent",
+   "quote": "재현 창작인물 서윤 이런 왼쪽 위 문구 없애주고 당신은이 아니라 서윤이라고 인물을 설정해서 한번 해주시고(물론 시청자의 몰입 대입은 유도하세요) 중간중간 e가 있으면 하라고 유도하는거 모든 단어에 e가 들어가는데 이거도 조금 바꿔주시고 매번 이런 유도마다 정답지를 유도해주는데 예시로 몇번만 어떻게 하는지 알려주고 이후에는 정답을 나타내지 말아주세요",
+   "label": "재현 창작인물 서윤 이런 왼쪽 위 문구 없애주고 당신은이 아니라 서윤이라고 인물을 설정해서 한번 해주시고(물",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:169",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:04§0-8",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "재현 창작인물 서윤 이런 왼쪽 위 문구 없애주고"
+   ],
+   "member_ids": [
+    "intent:8d30c51b",
+    "intent:8e293481"
+   ],
+   "themes": [
+    "intent"
+   ],
+   "ann_key": "intent:8d30c51b",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:04§0-8",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:8e4d311c",
+   "kind": "intent",
+   "quote": "썸네일 만들어주시고 영상 통과입니다.",
+   "label": "썸네일 만들어주시고 영상 통과입니다.",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:174",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:8e4d311c"
+   ],
+   "themes": [],
+   "ann_key": "intent:8e4d311c",
    "meaning": "",
    "not_meant": [],
    "note": "",
@@ -25517,6 +26379,32 @@
    "annotated": false
   },
   {
+   "id": "intent:97989af7",
+   "kind": "intent",
+   "quote": "북극곰이랑 권태사회를 참조하세요 잼보다는",
+   "label": "북극곰이랑 권태사회를 참조하세요 잼보다는",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:164",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:97989af7"
+   ],
+   "themes": [],
+   "ann_key": "intent:97989af7",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:99f1214d",
    "kind": "intent",
    "quote": "제목·썸네일: 자동 점수로 확정하지 말고 휴대전화 크기로 축소해 확인, 첫 30초가 썸네일 약속을 이어받는지 검토 — 168픽셀 너비에서 약 6.8픽셀 글자도 ok 로 기록됨",
@@ -25595,13 +26483,40 @@
    "annotated": false
   },
   {
+   "id": "intent:a48a93aa",
+   "kind": "intent",
+   "quote": "그리고 심리학고양이의 대본과 연출을 분석 대조하세요 심리학고양이의 영상이 솔직히 제가 생각하는 이상향입니다",
+   "label": "그리고 심리학고양이의 대본과 연출을 분석 대조하세요 심리학고양이의 영상이 솔직히 제가 생각하는 이상향입니다",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:165",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:a48a93aa"
+   ],
+   "themes": [
+    "script",
+    "depth"
+   ],
+   "ann_key": "intent:a48a93aa",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:a76c24e8",
    "kind": "intent",
    "quote": "어지간해서는 매일 각각영상1개씩 올리고싶습니다. (앞 말: 오늘 이런 시장에 대한 심층분석 인터뷰영상이나 시장 분석 해설 이런영상 필요없는지 체크해주세요 즉 시장을 브리핑해주는 영상과 그 브리핑속에서 여러 인사이트와 시장 그리고 수요 기술 등 산업 심층분석 영상을 따로 올리고자 합니다.)",
    "label": "어지간해서는 매일 각각영상1개씩 올리고싶습니다. (앞 말: 오늘 이런 시장에 대한 심층분석 인터뷰영상이나 시",
-   "versions": [
-    76
-   ],
+   "versions": [],
    "date": "2026-11-21",
    "sources": [
     {
@@ -25609,7 +26524,7 @@
      "kind": "feedback"
     },
     {
-     "ref": "sec:09§2",
+     "ref": "sec:09§2-0",
      "kind": "manual"
     }
    ],
@@ -25631,13 +26546,122 @@
    "note": "",
    "readings": [
     {
-     "ref": "ver:76",
+     "ref": "sec:09§2-0",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:aa2a56ed",
+   "kind": "intent",
+   "quote": "그리고 인사이트에 대해서 여러가지를 인사이트와 함께 근거를 뜯어보고 해석해야하는데 지금 영상은 브리핑과 크게 다를바 없어보여요 심층분석이라기엔 브리핑과 별 차이점이없다 입니다.",
+   "label": "그리고 인사이트에 대해서 여러가지를 인사이트와 함께 근거를 뜯어보고 해석해야하는데 지금 영상은 브리핑과 크게",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:154",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:09§2-0",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "인사이트에 대해서 여러가지를 인사이트와 함께 근거를 뜯어보고 해석해야하는데 지금 영상은 브리핑과 크게 다를바 없어보여요 심층분석이라기엔 브리핑과 별 차이점이없다"
+   ],
+   "member_ids": [
+    "intent:aa2a56ed",
+    "intent:f8a11320"
+   ],
+   "themes": [
+    "depth"
+   ],
+   "ann_key": "intent:aa2a56ed",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§2-0",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:abf48aad",
+   "kind": "intent",
+   "quote": "아니면 여러분도 이런 적 있지 않으신가요? 하면서 이야기를 시작하는거죠",
+   "label": "아니면 여러분도 이런 적 있지 않으신가요? 하면서 이야기를 시작하는거죠",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:172",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:abf48aad"
+   ],
+   "themes": [],
+   "ann_key": "intent:abf48aad",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:b38fddb4",
+   "kind": "intent",
+   "quote": "이 고리는 숫자가 받칩니다 / 아직 약합니다",
+   "label": "이 고리는 숫자가 받칩니다 / 아직 약합니다",
+   "versions": [
+    36
+   ],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "sec:09§3-4",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:b38fddb4"
+   ],
+   "themes": [],
+   "ann_key": "intent:b38fddb4",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:36",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "sec:09§2",
+     "ref": "sec:09§3-4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§3-5",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -25649,25 +26673,49 @@
      "by": ""
     },
     {
-     "ref": "doc:06",
+     "ref": "code:ytflow/stages/checklist.py:283",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:374",
+     "ref": "code:ytflow/stages/hybrid.py:173",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/daily.py:159",
+     "ref": "code:ytflow/stages/hybrid.py:1277",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/daily.py:179",
+     "ref": "code:ytflow/stages/hybrid.py:1505",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:289",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:293",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:299",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:301",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -25699,6 +26747,60 @@
    "not_meant": [],
    "note": "",
    "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:c32dbf43",
+   "kind": "intent",
+   "quote": "솔직히 말하자면 중간중간 자꾸 뭐 이랬습니다. 근데 아니였습니다. 이랬습니다. 그런데 아니였습니다. 말하고싶은게 뭔지 자꾸 늘어지고 억지로 길이를 늘린거같아요. 그리고 하고싶은말을 참았다 라는거보단 다른 상황을 대입하는게 더 좋아보이네요 회의에서 하고싶은말을 참았다 이게 별로 의지력이랑 크게 연관깊다고 안느껴지거든요",
+   "label": "솔직히 말하자면 중간중간 자꾸 뭐 이랬습니다. 근데 아니였습니다. 이랬습니다. 그런데 아니였습니다. 말하고싶",
+   "versions": [
+    86
+   ],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:163",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:README§2-4",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "억지로 길이를 늘린거같아요"
+   ],
+   "member_ids": [
+    "intent:c32dbf43",
+    "intent:0ef64dad"
+   ],
+   "themes": [],
+   "ann_key": "intent:c32dbf43",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:86",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -25892,6 +26994,194 @@
    "annotated": false
   },
   {
+   "id": "intent:d8042c5d",
+   "kind": "intent",
+   "quote": "이미지제작은 말했지만 gpt로 합니다",
+   "label": "이미지제작은 말했지만 gpt로 합니다",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:157",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:d8042c5d"
+   ],
+   "themes": [],
+   "ann_key": "intent:d8042c5d",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:d91970ef",
+   "kind": "intent",
+   "quote": "고민인 점이 세가지입니다. 서윤이라는 가상인물에 대해 미리 이런 가상의 인물이 있다고 가정을 하고 진행할지 그냥 서윤이라 할지 당신은 이라고할지 셋중 고민입니다 일단 영상 자체는 커밋으로 메뉴얼들과 파일들 반영해주세요",
+   "label": "고민인 점이 세가지입니다. 서윤이라는 가상인물에 대해 미리 이런 가상의 인물이 있다고 가정을 하고 진행할지 ",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:171",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:d91970ef"
+   ],
+   "themes": [
+    "script"
+   ],
+   "ann_key": "intent:d91970ef",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:da378276",
+   "kind": "intent",
+   "quote": "이번에 일부공개한 영상에서 인사이트가 너무 옅어요 그 거품이라는 주장을 뜯어보고 아니라는 주장도 심화적으로 뜯어봐야하는데 근거를 너무 그냥 얘가 이랬어요 쟤가 저랬어요 로만 들립니다",
+   "label": "이번에 일부공개한 영상에서 인사이트가 너무 옅어요 그 거품이라는 주장을 뜯어보고 아니라는 주장도 심화적으로 ",
+   "versions": [
+    36
+   ],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:153",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:09§3-4",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "그 거품이라는 주장을 뜯어보고 아니라는 주장도 심화적으로 뜯어봐야하는데 근거를 너무 그냥 얘가 이랬어요 쟤가 저랬어요 로만 들립니다"
+   ],
+   "member_ids": [
+    "intent:da378276",
+    "intent:2b49b66b"
+   ],
+   "themes": [],
+   "ann_key": "intent:da378276",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:36",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§3-4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§3-5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:03",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:283",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:173",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1277",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1505",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:289",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:293",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:299",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:301",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:df9eb02a",
+   "kind": "intent",
+   "quote": "그리고 냉장고 앞의 당신 이라고 다짜고짜 시작하는거도 좀 뭔가 그렇습니다. 심리학고양이의 채널을 다시 벤치마킹 해보세요",
+   "label": "그리고 냉장고 앞의 당신 이라고 다짜고짜 시작하는거도 좀 뭔가 그렇습니다. 심리학고양이의 채널을 다시 벤치마",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:168",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:df9eb02a"
+   ],
+   "themes": [],
+   "ann_key": "intent:df9eb02a",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:dfa66488",
    "kind": "intent",
    "quote": "매일 시사: 10분 이상 / 호기심 표지: 표지도 삽화로 / 쇼츠채널은 일단은 보류입니다. 어... 훅쇼츠가 뭔지는 모르겠는데 일단은 이거 관련 영상은 아직 안만들거같아요 나중에 만들면 다시 재개할게요",
@@ -25961,6 +27251,58 @@
    "annotated": false
   },
   {
+   "id": "intent:e5f4cf43",
+   "kind": "intent",
+   "quote": "우선 서윤이 갑자기 치킨을 먹으려 한다 라기보다는 다른사람들도 공감 가능한 이야기로 살을 덧붙여서 다이어트중이라는 설정을 넣는게 좋아보여요",
+   "label": "우선 서윤이 갑자기 치킨을 먹으려 한다 라기보다는 다른사람들도 공감 가능한 이야기로 살을 덧붙여서 다이어트중",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:161",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:e5f4cf43"
+   ],
+   "themes": [],
+   "ann_key": "intent:e5f4cf43",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:faecb1a8",
+   "kind": "intent",
+   "quote": "(질문 답) 주인공: '당신'으로 (추천) · 화면: 삽화 + 참여 화면 (추천)",
+   "label": "(질문 답) 주인공: '당신'으로 (추천) · 화면: 삽화 + 참여 화면 (추천)",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:166",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:faecb1a8"
+   ],
+   "themes": [],
+   "ann_key": "intent:faecb1a8",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:fda27055",
    "kind": "intent",
    "quote": "이건 그냥빼줘 (매뉴얼 그래프 댓글 — 03 §0-4 '근거: docs/31… 구조와 방법만 가져오고 문구는 복제하지 않는다.' 줄)",
@@ -25979,6 +27321,192 @@
    ],
    "themes": [],
    "ann_key": "intent:fda27055",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:42ef45ae",
+   "kind": "intent",
+   "quote": "저는 의지력 탓은 반만 맞다가 좋아요 의지력 탓은 반만 맞다와 다이어트를 같이 연결짓는 것은 어떠한가요",
+   "label": "저는 의지력 탓은 반만 맞다가 좋아요 의지력 탓은 반만 맞다와 다이어트를 같이 연결짓는 것은 어떠한가요",
+   "versions": [],
+   "date": "2026-11-22",
+   "sources": [
+    {
+     "ref": "fb:175",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:42ef45ae"
+   ],
+   "themes": [],
+   "ann_key": "intent:42ef45ae",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:69796953",
+   "kind": "intent",
+   "quote": "영상의 종류와 그날의 대본에 따라 달라 질 수 있어서 너무 과적합같아요",
+   "label": "영상의 종류와 그날의 대본에 따라 달라 질 수 있어서 너무 과적합같아요",
+   "versions": [
+    86
+   ],
+   "date": "2026-11-22",
+   "sources": [
+    {
+     "ref": "sec:README§2-4",
+     "kind": "manual"
+    },
+    {
+     "ref": "fb:179",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:69796953"
+   ],
+   "themes": [
+    "script"
+   ],
+   "ann_key": "intent:69796953",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:86",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:bf4d0411",
+   "kind": "intent",
+   "quote": "모든 영상 10분이상 강제 라고 하지는 않습니다. 해당 메뉴얼은 지워주세요",
+   "label": "모든 영상 10분이상 강제 라고 하지는 않습니다. 해당 메뉴얼은 지워주세요",
+   "versions": [
+    86
+   ],
+   "date": "2026-11-22",
+   "sources": [
+    {
+     "ref": "sec:README§2-4",
+     "kind": "manual"
+    },
+    {
+     "ref": "fb:178",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:bf4d0411"
+   ],
+   "themes": [
+    "length"
+   ],
+   "ann_key": "intent:bf4d0411",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:86",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:d7f98aca",
+   "kind": "intent",
+   "quote": "(질문 답) 7분 10초로 올리기 (추천) — 롱폼 10분 이상 MUST 에 대해 사용자 승인 예외",
+   "label": "(질문 답) 7분 10초로 올리기 (추천) — 롱폼 10분 이상 MUST 에 대해 사용자 승인 예외",
+   "versions": [],
+   "date": "2026-11-22",
+   "sources": [
+    {
+     "ref": "fb:177",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:d7f98aca"
+   ],
+   "themes": [
+    "length"
+   ],
+   "ann_key": "intent:d7f98aca",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:dcfc6907",
+   "kind": "intent",
+   "quote": "c2로 해주세요 동영상은 내일 오후6시에 올리는걸로",
+   "label": "c2로 해주세요 동영상은 내일 오후6시에 올리는걸로",
+   "versions": [],
+   "date": "2026-11-22",
+   "sources": [
+    {
+     "ref": "fb:176",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:dcfc6907"
+   ],
+   "themes": [],
+   "ann_key": "intent:dcfc6907",
    "meaning": "",
    "not_meant": [],
    "note": "",
@@ -26026,7 +27554,7 @@
     "term:quote"
    ],
    "mentioned_in": [
-    "sec:09§2",
+    "sec:09§2-0",
     "sec:09§2-1",
     "sec:09§3-4",
     "sec:09§3-5",
@@ -27089,6 +28617,7 @@
     "sec:05§2",
     "sec:05§6",
     "sec:08§h112",
+    "sec:09§3-4",
     "sec:09§4",
     "sec:10§h50",
     "sec:10§h62",
@@ -27917,6 +29446,7 @@
     "sec:03§0-2",
     "sec:03§2",
     "sec:05§0-7",
+    "sec:09§3-4",
     "sec:09§4",
     "sec:09§6",
     "sec:10§h62"
@@ -29184,7 +30714,7 @@
     "sec:10§1",
     "sec:10§h9",
     "sec:10§3",
-    "sec:feedback§h253",
+    "sec:feedback§h282",
     "ver:21",
     "ver:34",
     "code:ytflow/stages/hybrid.py:1662",
@@ -29707,6 +31237,7 @@
    "mentioned_in": [
     "sec:03§2",
     "sec:05§2",
+    "sec:09§2-0",
     "sec:09§5-1",
     "sec:09§6",
     "sec:10§3",
@@ -31838,7 +33369,7 @@
     "sec:10§3",
     "sec:10§4",
     "sec:12§0-1",
-    "sec:feedback§h199",
+    "sec:feedback§h203",
     "intent:a9c58f2c",
     "intent:df69fddc",
     "fb:57",
@@ -31980,10 +33511,10 @@
     "sec:05§0-5",
     "sec:09§6",
     "sec:10§h136",
-    "sec:feedback§h112",
-    "sec:feedback§h199",
-    "sec:feedback§h266",
-    "sec:feedback§h296",
+    "sec:feedback§h116",
+    "sec:feedback§h203",
+    "sec:feedback§h295",
+    "sec:feedback§h325",
     "ver:10",
     "ver:30",
     "ver:31",
@@ -32211,7 +33742,7 @@
     },
     {
      "file": "ytflow/stages/motion2.py",
-     "line": 266,
+     "line": 268,
      "src": "def apply(D, sc: dict, bt: list, dur: float, w: int = 1920, h: int = 1080, keep: bool = True) -> None:"
     }
    ],
@@ -32242,7 +33773,7 @@
    "mentioned_in": [
     "sec:04§0-4",
     "sec:09§6",
-    "sec:09§h414",
+    "sec:09§h431",
     "sec:11§2-4",
     "sec:README§2-5",
     "sec:README§3-1",
@@ -32406,10 +33937,10 @@
     "sec:10§h136",
     "sec:10§4",
     "sec:12§0-1",
-    "sec:feedback§h112",
-    "sec:feedback§h199",
-    "sec:feedback§h266",
-    "sec:feedback§h296",
+    "sec:feedback§h116",
+    "sec:feedback§h203",
+    "sec:feedback§h295",
+    "sec:feedback§h325",
     "ver:10",
     "ver:12",
     "rev:11",
@@ -32570,9 +34101,9 @@
     "sec:06§G6",
     "sec:08§4",
     "sec:09§6",
-    "sec:09§h414",
+    "sec:09§h431",
     "sec:10§4",
-    "sec:feedback§h112",
+    "sec:feedback§h116",
     "sec:README§0",
     "sec:README§2",
     "ver:3",
@@ -37028,6 +38559,786 @@
    "repo_label": "메인(공통)",
    "intent": "intent:35a2146c",
    "tier_key": "fb:35a2146c",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:153",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "이번에 일부공개한 영상에서 인사이트가 너무 옅어요 그 거품이라는 주장을 뜯어보고 아니라는 주장도 심화적으로 뜯어봐야하는데 근거를 너무 그냥 얘가 이랬어요 쟤가 저랬어요 로만 들립니다",
+   "label": "이번에 일부공개한 영상에서 인사이트가 너무 옅어요 그 거품이라는 주장을 뜯어보고 아니라는 주장도 심화적으로 ",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "repo": "main",
+   "repo_label": "메인(공통)",
+   "intent": "intent:da378276",
+   "tier_key": "fb:da378276",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:154",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "그리고 인사이트에 대해서 여러가지를 인사이트와 함께 근거를 뜯어보고 해석해야하는데 지금 영상은 브리핑과 크게 다를바 없어보여요 심층분석이라기엔 브리핑과 별 차이점이없다 입니다.",
+   "label": "그리고 인사이트에 대해서 여러가지를 인사이트와 함께 근거를 뜯어보고 해석해야하는데 지금 영상은 브리핑과 크게",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "depth"
+   ],
+   "scope": "",
+   "repo": "main",
+   "repo_label": "메인(공통)",
+   "intent": "intent:aa2a56ed",
+   "tier_key": "fb:aa2a56ed",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:155",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "심층분석에 대해서는 심층분석에 사용할 여러가지 주제들을 추가로 조사하세요 즉 미리 이메일이나 소스 등에서도 확인하고 나중에 이를 기반으로 영상을 만들 수 있으니 미리 한번 조사하라는 겁니다. 심층분석에는 굳이 주가변동폭을 안넣어도 될 것 같아요 일일브리핑에만 넣어주세요.",
+   "label": "심층분석에 대해서는 심층분석에 사용할 여러가지 주제들을 추가로 조사하세요 즉 미리 이메일이나 소스 등에서도 ",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "depth"
+   ],
+   "scope": "",
+   "repo": "main",
+   "repo_label": "메인(공통)",
+   "intent": "intent:3ffba19c",
+   "tier_key": "fb:3ffba19c",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:156",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "그리고 심층분석에는 소스영상들 자료영상들 있다면 이런거 올려줬으면 해 그 주장 발언부분 자료영상으로 올려주란거지 (같은 말: 너가 썸네일 배경에 거품을 추천햇는데 거품인게 티가안난단거야 구분이 안간단거지 저 배경이 거품인가? 하고)",
+   "label": "그리고 심층분석에는 소스영상들 자료영상들 있다면 이런거 올려줬으면 해 그 주장 발언부분 자료영상으로 올려주란",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "background",
+    "depth"
+   ],
+   "scope": "",
+   "repo": "main",
+   "repo_label": "메인(공통)",
+   "intent": "intent:61c5de2a",
+   "tier_key": "fb:61c5de2a",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:157",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "이미지제작은 말했지만 gpt로 합니다",
+   "label": "이미지제작은 말했지만 gpt로 합니다",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "원화는 GPT 이미지 생성(이 PC 는 Codex $imagegen 경유)",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:d8042c5d",
+   "tier_key": "fb:d8042c5d",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:158",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "연구의 흐름과 결론은 보존하고, 초반 약속을 앞당긴 다음 중반의 설명 카드들을 시청자가 직접 이해할 수 있는 실험 장면으로 바꾸는 것이 가장 가치 있는 수정입니다.",
+   "label": "연구의 흐름과 결론은 보존하고, 초반 약속을 앞당긴 다음 중반의 설명 카드들을 시청자가 직접 이해할 수 있는",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "intent"
+   ],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:44e96cb4",
+   "tier_key": "fb:44e96cb4",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:159",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "연구목적보단 이야기 중심으로 풀어나가며 근거로 실제 사례를 곁들이는 방식으로 해주세요.  제가 느끼기엔 차라리 이전에 제작한 채널 영상들이 더 나았다고 느껴집니다. 그리고 의지력은 정말 바닥나는걸까요? 가 너무 뜬금없이 뒤에 나타나는 것 같아요",
+   "label": "연구목적보단 이야기 중심으로 풀어나가며 근거로 실제 사례를 곁들이는 방식으로 해주세요.  제가 느끼기엔 차라",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:71ae388e",
+   "tier_key": "fb:71ae388e",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:160",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "삽화풍을 곁들여서 학습보다는 이야기를 들려주며 실제 있었던 일과 사례들을 집어넣는 느낌으로 해주세요",
+   "label": "삽화풍을 곁들여서 학습보다는 이야기를 들려주며 실제 있었던 일과 사례들을 집어넣는 느낌으로 해주세요",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:0ddb3373",
+   "tier_key": "fb:0ddb3373",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:161",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "우선 서윤이 갑자기 치킨을 먹으려 한다 라기보다는 다른사람들도 공감 가능한 이야기로 살을 덧붙여서 다이어트중이라는 설정을 넣는게 좋아보여요",
+   "label": "우선 서윤이 갑자기 치킨을 먹으려 한다 라기보다는 다른사람들도 공감 가능한 이야기로 살을 덧붙여서 다이어트중",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:e5f4cf43",
+   "tier_key": "fb:e5f4cf43",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:162",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "그리고 보는 사람들에게 좀 유대감? 내 이야기구나 하고 몰입 가능하게끔 하는게 좋아보여요",
+   "label": "그리고 보는 사람들에게 좀 유대감? 내 이야기구나 하고 몰입 가능하게끔 하는게 좋아보여요",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:1e4c3b2d",
+   "tier_key": "fb:1e4c3b2d",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:163",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "솔직히 말하자면 중간중간 자꾸 뭐 이랬습니다. 근데 아니였습니다. 이랬습니다. 그런데 아니였습니다. 말하고싶은게 뭔지 자꾸 늘어지고 억지로 길이를 늘린거같아요. 그리고 하고싶은말을 참았다 라는거보단 다른 상황을 대입하는게 더 좋아보이네요 회의에서 하고싶은말을 참았다 이게 별로 의지력이랑 크게 연관깊다고 안느껴지거든요",
+   "label": "솔직히 말하자면 중간중간 자꾸 뭐 이랬습니다. 근데 아니였습니다. 이랬습니다. 그런데 아니였습니다. 말하고싶",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:c32dbf43",
+   "tier_key": "fb:c32dbf43",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:164",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "북극곰이랑 권태사회를 참조하세요 잼보다는",
+   "label": "북극곰이랑 권태사회를 참조하세요 잼보다는",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:97989af7",
+   "tier_key": "fb:97989af7",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:165",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "그리고 심리학고양이의 대본과 연출을 분석 대조하세요 심리학고양이의 영상이 솔직히 제가 생각하는 이상향입니다",
+   "label": "그리고 심리학고양이의 대본과 연출을 분석 대조하세요 심리학고양이의 영상이 솔직히 제가 생각하는 이상향입니다",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "script",
+    "depth"
+   ],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:a48a93aa",
+   "tier_key": "fb:a48a93aa",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:166",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "(질문 답) 주인공: '당신'으로 (추천) · 화면: 삽화 + 참여 화면 (추천)",
+   "label": "(질문 답) 주인공: '당신'으로 (추천) · 화면: 삽화 + 참여 화면 (추천)",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:faecb1a8",
+   "tier_key": "fb:faecb1a8",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:167",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "결론을 말하는게 아니라 자꾸만 사실 다른실험은 아니였어요 사실 이 실험조건은 이런 사족 붙이지 말고 결론만 말해주세요 빙빙 돌려말하지 말구요",
+   "label": "결론을 말하는게 아니라 자꾸만 사실 다른실험은 아니였어요 사실 이 실험조건은 이런 사족 붙이지 말고 결론만 ",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:7044bf93",
+   "tier_key": "fb:7044bf93",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:168",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "그리고 냉장고 앞의 당신 이라고 다짜고짜 시작하는거도 좀 뭔가 그렇습니다. 심리학고양이의 채널을 다시 벤치마킹 해보세요",
+   "label": "그리고 냉장고 앞의 당신 이라고 다짜고짜 시작하는거도 좀 뭔가 그렇습니다. 심리학고양이의 채널을 다시 벤치마",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:df9eb02a",
+   "tier_key": "fb:df9eb02a",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:169",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "재현 창작인물 서윤 이런 왼쪽 위 문구 없애주고 당신은이 아니라 서윤이라고 인물을 설정해서 한번 해주시고(물론 시청자의 몰입 대입은 유도하세요) 중간중간 e가 있으면 하라고 유도하는거 모든 단어에 e가 들어가는데 이거도 조금 바꿔주시고 매번 이런 유도마다 정답지를 유도해주는데 예시로 몇번만 어떻게 하는지 알려주고 이후에는 정답을 나타내지 말아주세요",
+   "label": "재현 창작인물 서윤 이런 왼쪽 위 문구 없애주고 당신은이 아니라 서윤이라고 인물을 설정해서 한번 해주시고(물",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "intent"
+   ],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:8d30c51b",
+   "tier_key": "fb:8d30c51b",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:170",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "이전보다 훨씬 좋아졌습니다.",
+   "label": "이전보다 훨씬 좋아졌습니다.",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "v14 시청 후",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:00574923",
+   "tier_key": "fb:00574923",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:171",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "고민인 점이 세가지입니다. 서윤이라는 가상인물에 대해 미리 이런 가상의 인물이 있다고 가정을 하고 진행할지 그냥 서윤이라 할지 당신은 이라고할지 셋중 고민입니다 일단 영상 자체는 커밋으로 메뉴얼들과 파일들 반영해주세요",
+   "label": "고민인 점이 세가지입니다. 서윤이라는 가상인물에 대해 미리 이런 가상의 인물이 있다고 가정을 하고 진행할지 ",
+   "fb_kind": "clarify",
+   "fb_kind_label": "뜻 바로잡기",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "v15 시청 후 — 주인공 호칭 결정 전",
+   "pending": false,
+   "themes": [
+    "script"
+   ],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:d91970ef",
+   "tier_key": "fb:d91970ef",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": false,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
+   "id": "fb:172",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "아니면 여러분도 이런 적 있지 않으신가요? 하면서 이야기를 시작하는거죠",
+   "label": "아니면 여러분도 이런 적 있지 않으신가요? 하면서 이야기를 시작하는거죠",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:abf48aad",
+   "tier_key": "fb:abf48aad",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:173",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요. 이제 일레븐랩스 더빙 들어가세요",
+   "label": "이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요. 이제 일레븐랩스 더빙 들어가세요",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "script"
+   ],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:2be120db",
+   "tier_key": "fb:2be120db",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": false,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
+   "id": "fb:174",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "썸네일 만들어주시고 영상 통과입니다.",
+   "label": "썸네일 만들어주시고 영상 통과입니다.",
+   "fb_kind": "review",
+   "fb_kind_label": "영상 검토",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "willpower_v16_final.mp4 (ElevenLabs)",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:8e4d311c",
+   "tier_key": "fb:8e4d311c",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:175",
+   "kind": "feedback",
+   "date": "2026-11-22",
+   "quote": "저는 의지력 탓은 반만 맞다가 좋아요 의지력 탓은 반만 맞다와 다이어트를 같이 연결짓는 것은 어떠한가요",
+   "label": "저는 의지력 탓은 반만 맞다가 좋아요 의지력 탓은 반만 맞다와 다이어트를 같이 연결짓는 것은 어떠한가요",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "썸네일",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:42ef45ae",
+   "tier_key": "fb:42ef45ae",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:176",
+   "kind": "feedback",
+   "date": "2026-11-22",
+   "quote": "c2로 해주세요 동영상은 내일 오후6시에 올리는걸로",
+   "label": "c2로 해주세요 동영상은 내일 오후6시에 올리는걸로",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "썸네일 C2 선택, 2026-11-23 18:00 KST 공개",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:dcfc6907",
+   "tier_key": "fb:dcfc6907",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:177",
+   "kind": "feedback",
+   "date": "2026-11-22",
+   "quote": "(질문 답) 7분 10초로 올리기 (추천) — 롱폼 10분 이상 MUST 에 대해 사용자 승인 예외",
+   "label": "(질문 답) 7분 10초로 올리기 (추천) — 롱폼 10분 이상 MUST 에 대해 사용자 승인 예외",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "README §2-4 길이 기준 예외, 호기심 편 길이 기준 재검토 거리",
+   "pending": false,
+   "themes": [
+    "length"
+   ],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:d7f98aca",
+   "tier_key": "fb:d7f98aca",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:178",
+   "kind": "feedback",
+   "date": "2026-11-22",
+   "quote": "모든 영상 10분이상 강제 라고 하지는 않습니다. 해당 메뉴얼은 지워주세요",
+   "label": "모든 영상 10분이상 강제 라고 하지는 않습니다. 해당 메뉴얼은 지워주세요",
+   "fb_kind": "clarify",
+   "fb_kind_label": "뜻 바로잡기",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "length"
+   ],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:bf4d0411",
+   "tier_key": "fb:bf4d0411",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:179",
+   "kind": "feedback",
+   "date": "2026-11-22",
+   "quote": "영상의 종류와 그날의 대본에 따라 달라 질 수 있어서 너무 과적합같아요",
+   "label": "영상의 종류와 그날의 대본에 따라 달라 질 수 있어서 너무 과적합같아요",
+   "fb_kind": "clarify",
+   "fb_kind_label": "뜻 바로잡기",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "script"
+   ],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:69796953",
+   "tier_key": "fb:69796953",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -51895,7 +54206,7 @@
       },
       {
        "s": 15,
-       "type": "quote",
+       "type": "bite",
        "sit": "open-scene",
        "fit": false,
        "rec": [
@@ -51931,7 +54242,7 @@
       },
       {
        "s": 18,
-       "type": "quote",
+       "type": "bite",
        "sit": "said",
        "fit": true,
        "rec": [
@@ -52109,6 +54420,323 @@
        "say": "딱 하나만 기억한다면 이것입니다. 품절이라는 말과 폭락이라는 숫자는 서로 모순이 아닙니다. 시장은 오늘의 품절이 아니라 내일의 품절을 삽니다. 그렇다면 그 내일은"
       }
      ]
+    },
+    {
+     "project": "20261121-market-deep-openai",
+     "scenes": 28,
+     "coverage": 0.86,
+     "fit": 0.46,
+     "rows": [
+      {
+       "s": 1,
+       "type": "bignum",
+       "sit": "media",
+       "fit": false,
+       "rec": [
+        "newspapers",
+        "quote"
+       ],
+       "say": "11월 21일 오전까지 나온 보도 기준으로, 이번 주 시장의 가장 큰 불안 가운데 하나는 오픈AI 자금난입니다. 11월 13일, 미국 CNBC의 데이비드 페이버 "
+      },
+      {
+       "s": 2,
+       "type": "versus",
+       "sit": "cause",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "analogy"
+       ],
+       "say": "답을 찾기 전에 먼저 짚어 둘 것이 있습니다. 앤트로픽은 상장하면서 감사받은 숫자를 공개했습니다. 하지만 오픈AI는 아직 비상장 회사라, 공개된 장부가 없습니다."
+      },
+      {
+       "s": 3,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "먼저 들어온 돈부터 보겠습니다. 오픈AI는 올해 역사상 가장 큰 투자 유치를 했습니다."
+      },
+      {
+       "s": 4,
+       "type": "checklist",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "보도에 따르면 오픈AI는 3월에 1,220억 달러를 모았고, 기업가치는 약 8,520억 달러로 매겨졌습니다. 다만 한 분석은, 이 가운데 실제 현금은 약 370억"
+      },
+      {
+       "s": 5,
+       "type": "quote",
+       "sit": "said",
+       "fit": true,
+       "rec": [
+        "bite",
+        "footage",
+        "quote"
+       ],
+       "say": "샘 올트먼 오픈AI CEO의 생각은 다릅니다. 이번 주 인터뷰에서 그는 투자하겠다는 돈이 너무 많아서 오히려 공급이 모자랐다고 말했고, 앤트로픽의 상장은 걱정거리"
+      },
+      {
+       "s": 6,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "이번에는 나갈 돈입니다. 오픈AI가 데이터센터를 빌려 쓰기로 약속한 돈은, 들어온 돈과 규모가 다릅니다."
+      },
+      {
+       "s": 7,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "보도된 계약을 더하면 이렇습니다. 오라클과 약 3,000억 달러, 마이크로소프트와 2,500억 달러, 아마존과 1,380억 달러, 코어위브와 최대 224억 달러입"
+      },
+      {
+       "s": 8,
+       "type": "bignum",
+       "sit": "earnings",
+       "fit": true,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "이 약정을 지금 매출과 견줘 보면 크기가 보입니다. FT 보도로 오픈AI의 9월 말 연환산 매출은 약 500억 달러였습니다. 약정 6,650억 달러는 지금 매출의"
+      },
+      {
+       "s": 9,
+       "type": "motionboard",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "쉽게 말해 이 약정은 쓸 돈이 아니라 갚을 약속입니다. 신용카드 한도를 미리 크게 받아 둔 가게와 비슷합니다."
+      },
+      {
+       "s": 10,
+       "type": "chapter",
+       "sit": "earnings",
+       "fit": true,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "그렇다면 매출은 어떨까요? 여기서 앤트로픽과 비교가 나옵니다."
+      },
+      {
+       "s": 11,
+       "type": "bars",
+       "sit": "earnings",
+       "fit": true,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "앤트로픽은 상장 서류에 따르면 3분기에 약 170억 달러를 벌었습니다. 오픈AI는 재무 책임자의 발언을 전한 보도로 약 100억 달러였습니다."
+      },
+      {
+       "s": 12,
+       "type": "checklist",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "앤트로픽의 숫자는 상장 서류에 있습니다. 1월부터 9월까지 매출 332억 달러, 6월 말 현금과 단기 투자는 약 1,317억 달러입니다."
+      },
+      {
+       "s": 13,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "이제 질문의 한가운데입니다. 오픈AI는 얼마나 버틸 수 있을까요? 답이 하나가 아닌 이유부터 보겠습니다."
+      },
+      {
+       "s": 14,
+       "type": "versus",
+       "sit": "cause",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "analogy"
+       ],
+       "say": "한 보도로는 오픈AI가 1분기 뒤 730억 달러 넘는 현금을 갖고 있었습니다. 분석 회사 사크라는 올해 쓰는 현금을 약 270억 달러로 봤습니다. 이 속도라면 2"
+      },
+      {
+       "s": 15,
+       "type": "map_causal",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "여기서부터는 해석입니다. 버티는 기간은 한 숫자가 아니라 세 가지 속도의 싸움입니다."
+      },
+      {
+       "s": 16,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "이 질문에 이름 있는 사람들은 어떻게 답했을까요? 걱정하는 쪽과 낙관하는 쪽을 같은 무게로 놓고, 그 말의 근거만 따져 보겠습니다."
+      },
+      {
+       "s": 17,
+       "type": "versus",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "걱정하는 쪽에는 영화 빅쇼트의 실제 인물 스티브 아이스먼, 소프트뱅크의 손정의, 기술 비평가 에드 지트론이 있습니다."
+      },
+      {
+       "s": 18,
+       "type": "bite",
+       "sit": "media",
+       "fit": false,
+       "rec": [
+        "newspapers",
+        "quote"
+       ],
+       "say": "아이스먼은 대형 클라우드 회사들의 AI 매출 약 70%가 오픈AI와 앤트로픽 두 곳에서 나온다고 짚었습니다. 많은 매체가 그의 말을 오픈AI 파산 경고라는 기사 "
+      },
+      {
+       "s": 19,
+       "type": "bite",
+       "sit": "said",
+       "fit": true,
+       "rec": [
+        "bite",
+        "footage",
+        "quote"
+       ],
+       "say": "반대편의 목소리입니다. 두 회사 모두에 투자한 알티미터 캐피털의 폴린 양 파트너는 지난 5월 CNBC에서 이렇게 말했습니다. 자기가 투자한 회사에 대한 말이라는 "
+      },
+      {
+       "s": 20,
+       "type": "checklist",
+       "sit": "said",
+       "fit": false,
+       "rec": [
+        "bite",
+        "footage",
+        "quote"
+       ],
+       "say": "한 장에 모아 보겠습니다. 올트먼의 말은 일부만 근거가 있고, 알티미터의 말은 먼 미래의 예측이라 지금은 확인할 수 없습니다. 오라클은 어제 오픈AI 계약에 필요"
+      },
+      {
+       "s": 21,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "마지막 질문입니다. 만약 오픈AI가 무너진다면, 또는 상장한다면, 시장의 어디가 먼저 흔들릴까요?"
+      },
+      {
+       "s": 22,
+       "type": "map_causal",
+       "sit": "point",
+       "fit": false,
+       "rec": [
+        "zoomshot"
+       ],
+       "say": "여기서부터는 가정에 대한 해석입니다. 오픈AI의 돈이 막힌다면, 충격은 오픈AI 한 회사가 아니라 약속의 반대편에서 먼저 옵니다."
+      },
+      {
+       "s": 23,
+       "type": "bignum",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "숫자로 보면, 오라클의 남은 계약은 8월 말 6,640억 달러입니다. S&P가 5월 기준으로 추정한 오픈AI 몫은 약 절반, 3,190억 달러 안팎입니다."
+      },
+      {
+       "s": 24,
+       "type": "checklist",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "반대로 상장한다면 어떨까요? 가장 큰 변화는 장부가 공개된다는 겁니다. 오늘 본 추정들이 좋든 나쁘든 사실로 바뀝니다. 그리고 1조 달러 안팎의 공모는 시장의 돈"
+      },
+      {
+       "s": 25,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "그렇다면 오늘의 걱정이 맞는지 틀린지는 무엇으로 확인할 수 있을까요?"
+      },
+      {
+       "s": 26,
+       "type": "checklist",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "걱정이 틀리는 경우도 분명합니다. 매출이 약정보다 빨리 늘거나, 마이크로소프트나 엔비디아 같은 전략 투자자가 다시 돈을 넣으면 시장 심리와 상관없이 버팁니다. 약"
+      },
+      {
+       "s": 27,
+       "type": "kinetic",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "아직 아무도 장부를 못 본 질문입니다."
+      },
+      {
+       "s": 28,
+       "type": "outro",
+       "sit": "question",
+       "fit": false,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "딱 하나만 기억한다면 이것입니다. 지금 시장이 걱정하는 건 오픈AI의 기술이 아니라 돈의 속도입니다. 쓰는 속도, 버는 속도, 새 돈이 들어오는 속도. 그 셋 가"
+      }
+     ]
     }
    ]
   },
@@ -52193,8 +54821,8 @@
     "일까요",
     "을까요"
    ],
-   "count": 57,
-   "fit": 39,
+   "count": 62,
+   "fit": 43,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -52247,8 +54875,8 @@
     "답했",
     "라고 했"
    ],
-   "count": 17,
-   "fit": 13,
+   "count": 20,
+   "fit": 15,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -52301,7 +54929,7 @@
     "파급",
     "결과"
    ],
-   "count": 8,
+   "count": 10,
    "fit": 3,
    "examples": [
     {
@@ -52412,8 +55040,8 @@
     "하락",
     "급등"
    ],
-   "count": 172,
-   "fit": 83,
+   "count": 176,
+   "fit": 85,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -52605,7 +55233,7 @@
     "헤드라인",
     "로이터"
    ],
-   "count": 6,
+   "count": 8,
    "fit": 2,
    "examples": [
     {
@@ -52742,7 +55370,7 @@
     "이 대목",
     "이 문장"
    ],
-   "count": 14,
+   "count": 15,
    "fit": 0,
    "examples": [
     {
@@ -53059,8 +55687,8 @@
     "분기",
     "EPS"
    ],
-   "count": 65,
-   "fit": 19,
+   "count": 72,
+   "fit": 22,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -59287,7 +61915,7 @@
     },
     {
      "s": 15,
-     "type": "quote",
+     "type": "bite",
      "sit": "open-scene",
      "fit": false,
      "rec": [
@@ -59323,7 +61951,7 @@
     },
     {
      "s": 18,
-     "type": "quote",
+     "type": "bite",
      "sit": "said",
      "fit": true,
      "rec": [
@@ -59499,6 +62127,327 @@
       "chapter"
      ],
      "say": "딱 하나만 기억한다면 이것입니다. 품절이라는 말과 폭락이라는 숫자는 서로 모순이 아닙니다. 시장은 오늘의 품절이 아니라 내일의 품절을 삽니다. 그렇다면 그 내일은"
+    }
+   ]
+  },
+  {
+   "id": "ep:20261121-market-deep-openai",
+   "kind": "episode",
+   "topic": "market",
+   "label": "20261121-market-deep-openai",
+   "project": "20261121-market-deep-openai",
+   "scenes": 28,
+   "coverage": 0.86,
+   "fit": 0.46,
+   "rows": [
+    {
+     "s": 1,
+     "type": "bignum",
+     "sit": "media",
+     "fit": false,
+     "rec": [
+      "newspapers",
+      "quote"
+     ],
+     "say": "11월 21일 오전까지 나온 보도 기준으로, 이번 주 시장의 가장 큰 불안 가운데 하나는 오픈AI 자금난입니다. 11월 13일, 미국 CNBC의 데이비드 페이버 "
+    },
+    {
+     "s": 2,
+     "type": "versus",
+     "sit": "cause",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "analogy"
+     ],
+     "say": "답을 찾기 전에 먼저 짚어 둘 것이 있습니다. 앤트로픽은 상장하면서 감사받은 숫자를 공개했습니다. 하지만 오픈AI는 아직 비상장 회사라, 공개된 장부가 없습니다."
+    },
+    {
+     "s": 3,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "먼저 들어온 돈부터 보겠습니다. 오픈AI는 올해 역사상 가장 큰 투자 유치를 했습니다."
+    },
+    {
+     "s": 4,
+     "type": "checklist",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "보도에 따르면 오픈AI는 3월에 1,220억 달러를 모았고, 기업가치는 약 8,520억 달러로 매겨졌습니다. 다만 한 분석은, 이 가운데 실제 현금은 약 370억"
+    },
+    {
+     "s": 5,
+     "type": "quote",
+     "sit": "said",
+     "fit": true,
+     "rec": [
+      "bite",
+      "footage",
+      "quote"
+     ],
+     "say": "샘 올트먼 오픈AI CEO의 생각은 다릅니다. 이번 주 인터뷰에서 그는 투자하겠다는 돈이 너무 많아서 오히려 공급이 모자랐다고 말했고, 앤트로픽의 상장은 걱정거리"
+    },
+    {
+     "s": 6,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "이번에는 나갈 돈입니다. 오픈AI가 데이터센터를 빌려 쓰기로 약속한 돈은, 들어온 돈과 규모가 다릅니다."
+    },
+    {
+     "s": 7,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "보도된 계약을 더하면 이렇습니다. 오라클과 약 3,000억 달러, 마이크로소프트와 2,500억 달러, 아마존과 1,380억 달러, 코어위브와 최대 224억 달러입"
+    },
+    {
+     "s": 8,
+     "type": "bignum",
+     "sit": "earnings",
+     "fit": true,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "이 약정을 지금 매출과 견줘 보면 크기가 보입니다. FT 보도로 오픈AI의 9월 말 연환산 매출은 약 500억 달러였습니다. 약정 6,650억 달러는 지금 매출의"
+    },
+    {
+     "s": 9,
+     "type": "motionboard",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "쉽게 말해 이 약정은 쓸 돈이 아니라 갚을 약속입니다. 신용카드 한도를 미리 크게 받아 둔 가게와 비슷합니다."
+    },
+    {
+     "s": 10,
+     "type": "chapter",
+     "sit": "earnings",
+     "fit": true,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "그렇다면 매출은 어떨까요? 여기서 앤트로픽과 비교가 나옵니다."
+    },
+    {
+     "s": 11,
+     "type": "bars",
+     "sit": "earnings",
+     "fit": true,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "앤트로픽은 상장 서류에 따르면 3분기에 약 170억 달러를 벌었습니다. 오픈AI는 재무 책임자의 발언을 전한 보도로 약 100억 달러였습니다."
+    },
+    {
+     "s": 12,
+     "type": "checklist",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "앤트로픽의 숫자는 상장 서류에 있습니다. 1월부터 9월까지 매출 332억 달러, 6월 말 현금과 단기 투자는 약 1,317억 달러입니다."
+    },
+    {
+     "s": 13,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "이제 질문의 한가운데입니다. 오픈AI는 얼마나 버틸 수 있을까요? 답이 하나가 아닌 이유부터 보겠습니다."
+    },
+    {
+     "s": 14,
+     "type": "versus",
+     "sit": "cause",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "analogy"
+     ],
+     "say": "한 보도로는 오픈AI가 1분기 뒤 730억 달러 넘는 현금을 갖고 있었습니다. 분석 회사 사크라는 올해 쓰는 현금을 약 270억 달러로 봤습니다. 이 속도라면 2"
+    },
+    {
+     "s": 15,
+     "type": "map_causal",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "여기서부터는 해석입니다. 버티는 기간은 한 숫자가 아니라 세 가지 속도의 싸움입니다."
+    },
+    {
+     "s": 16,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "이 질문에 이름 있는 사람들은 어떻게 답했을까요? 걱정하는 쪽과 낙관하는 쪽을 같은 무게로 놓고, 그 말의 근거만 따져 보겠습니다."
+    },
+    {
+     "s": 17,
+     "type": "versus",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "걱정하는 쪽에는 영화 빅쇼트의 실제 인물 스티브 아이스먼, 소프트뱅크의 손정의, 기술 비평가 에드 지트론이 있습니다."
+    },
+    {
+     "s": 18,
+     "type": "bite",
+     "sit": "media",
+     "fit": false,
+     "rec": [
+      "newspapers",
+      "quote"
+     ],
+     "say": "아이스먼은 대형 클라우드 회사들의 AI 매출 약 70%가 오픈AI와 앤트로픽 두 곳에서 나온다고 짚었습니다. 많은 매체가 그의 말을 오픈AI 파산 경고라는 기사 "
+    },
+    {
+     "s": 19,
+     "type": "bite",
+     "sit": "said",
+     "fit": true,
+     "rec": [
+      "bite",
+      "footage",
+      "quote"
+     ],
+     "say": "반대편의 목소리입니다. 두 회사 모두에 투자한 알티미터 캐피털의 폴린 양 파트너는 지난 5월 CNBC에서 이렇게 말했습니다. 자기가 투자한 회사에 대한 말이라는 "
+    },
+    {
+     "s": 20,
+     "type": "checklist",
+     "sit": "said",
+     "fit": false,
+     "rec": [
+      "bite",
+      "footage",
+      "quote"
+     ],
+     "say": "한 장에 모아 보겠습니다. 올트먼의 말은 일부만 근거가 있고, 알티미터의 말은 먼 미래의 예측이라 지금은 확인할 수 없습니다. 오라클은 어제 오픈AI 계약에 필요"
+    },
+    {
+     "s": 21,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "마지막 질문입니다. 만약 오픈AI가 무너진다면, 또는 상장한다면, 시장의 어디가 먼저 흔들릴까요?"
+    },
+    {
+     "s": 22,
+     "type": "map_causal",
+     "sit": "point",
+     "fit": false,
+     "rec": [
+      "zoomshot"
+     ],
+     "say": "여기서부터는 가정에 대한 해석입니다. 오픈AI의 돈이 막힌다면, 충격은 오픈AI 한 회사가 아니라 약속의 반대편에서 먼저 옵니다."
+    },
+    {
+     "s": 23,
+     "type": "bignum",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "숫자로 보면, 오라클의 남은 계약은 8월 말 6,640억 달러입니다. S&P가 5월 기준으로 추정한 오픈AI 몫은 약 절반, 3,190억 달러 안팎입니다."
+    },
+    {
+     "s": 24,
+     "type": "checklist",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "반대로 상장한다면 어떨까요? 가장 큰 변화는 장부가 공개된다는 겁니다. 오늘 본 추정들이 좋든 나쁘든 사실로 바뀝니다. 그리고 1조 달러 안팎의 공모는 시장의 돈"
+    },
+    {
+     "s": 25,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "그렇다면 오늘의 걱정이 맞는지 틀린지는 무엇으로 확인할 수 있을까요?"
+    },
+    {
+     "s": 26,
+     "type": "checklist",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "걱정이 틀리는 경우도 분명합니다. 매출이 약정보다 빨리 늘거나, 마이크로소프트나 엔비디아 같은 전략 투자자가 다시 돈을 넣으면 시장 심리와 상관없이 버팁니다. 약"
+    },
+    {
+     "s": 27,
+     "type": "kinetic",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "아직 아무도 장부를 못 본 질문입니다."
+    },
+    {
+     "s": 28,
+     "type": "outro",
+     "sit": "question",
+     "fit": false,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "딱 하나만 기억한다면 이것입니다. 지금 시장이 걱정하는 건 오픈AI의 기술이 아니라 돈의 속도입니다. 쓰는 속도, 버는 속도, 새 돈이 들어오는 속도. 그 셋 가"
     }
    ]
   }
@@ -59737,6 +62686,11 @@
   {
    "s": "doc:04",
    "t": "sec:04§0-7",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
+   "t": "sec:04§0-8",
    "kind": "contains"
   },
   {
@@ -60016,6 +62970,11 @@
   },
   {
    "s": "doc:09",
+   "t": "sec:09§2-0",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
    "t": "sec:09§2-1",
    "kind": "contains"
   },
@@ -60131,17 +63090,17 @@
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h400",
+   "t": "sec:09§h417",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h408",
+   "t": "sec:09§h425",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h414",
+   "t": "sec:09§h431",
    "kind": "contains"
   },
   {
@@ -60401,52 +63360,52 @@
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h110",
+   "t": "sec:feedback§h114",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h112",
+   "t": "sec:feedback§h116",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h166",
+   "t": "sec:feedback§h170",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h197",
+   "t": "sec:feedback§h201",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h199",
+   "t": "sec:feedback§h203",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h253",
+   "t": "sec:feedback§h282",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h264",
+   "t": "sec:feedback§h293",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h266",
+   "t": "sec:feedback§h295",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h294",
+   "t": "sec:feedback§h323",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h296",
+   "t": "sec:feedback§h325",
    "kind": "contains"
   },
   {
@@ -60727,11 +63686,6 @@
   {
    "s": "rule:G5:1",
    "t": "gate:G5",
-   "kind": "belongs_to"
-  },
-  {
-   "s": "rule:G6:1",
-   "t": "gate:G6",
    "kind": "belongs_to"
   },
   {
@@ -61157,11 +64111,6 @@
   {
    "s": "check:363",
    "t": "gate:G4",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:377",
-   "t": "gate:G6",
    "kind": "enforces"
   },
   {
@@ -61823,8 +64772,7 @@
    "t": "sec:README§2-4",
    "kind": "touched",
    "via": [
-    "changelog",
-    "tag"
+    "changelog"
    ]
   },
   {
@@ -62785,11 +65733,10 @@
   },
   {
    "s": "ver:60",
-   "t": "doc:04",
+   "t": "sec:04§0-8",
    "kind": "touched",
    "via": [
-    "changelog",
-    "git"
+    "changelog"
    ]
   },
   {
@@ -62980,7 +65927,7 @@
   },
   {
    "s": "ver:73",
-   "t": "doc:04",
+   "t": "sec:04§0-8",
    "kind": "touched",
    "via": [
     "changelog"
@@ -63299,6 +66246,55 @@
    ]
   },
   {
+   "s": "ver:84",
+   "t": "doc:09",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:84",
+   "t": "doc:feedback",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:85",
+   "t": "sec:04§0-8",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:85",
+   "t": "doc:feedback",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:86",
+   "t": "sec:README§2-4",
+   "kind": "touched",
+   "via": [
+    "changelog",
+    "tag"
+   ]
+  },
+  {
+   "s": "ver:86",
+   "t": "gate:G6",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -63519,6 +66515,17 @@
    "kind": "approved_in"
   },
   {
+   "s": "rev:40",
+   "t": "ver:85",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:41",
+   "t": "ver:85",
+   "kind": "approved_in"
+  },
+  {
    "s": "rev:1",
    "t": "theme:variety",
    "kind": "about"
@@ -63726,6 +66733,16 @@
   {
    "s": "rev:39",
    "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "rev:40",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "rev:40",
+   "t": "theme:intent",
    "kind": "about"
   },
   {
@@ -64276,6 +67293,36 @@
   {
    "s": "ver:83",
    "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "ver:85",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "ver:85",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "ver:85",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
+   "s": "ver:86",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:86",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "ver:86",
+   "t": "theme:length",
    "kind": "about"
   },
   {
@@ -64964,6 +68011,21 @@
    "kind": "about"
   },
   {
+   "s": "intent:8d30c51b",
+   "t": "fb:169",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:8d30c51b",
+   "t": "sec:04§0-8",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:8d30c51b",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
    "s": "intent:759054cb",
    "t": "ver:63",
    "kind": "interpreted_in"
@@ -64982,6 +68044,21 @@
    "s": "intent:759054cb",
    "t": "theme:background",
    "kind": "about"
+  },
+  {
+   "s": "intent:c32dbf43",
+   "t": "ver:86",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:c32dbf43",
+   "t": "fb:163",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:c32dbf43",
+   "t": "sec:README§2-4",
+   "kind": "quoted_in"
   },
   {
    "s": "intent:267de7a0",
@@ -65004,9 +68081,24 @@
    "kind": "quoted_in"
   },
   {
-   "s": "intent:a76c24e8",
-   "t": "ver:76",
+   "s": "intent:104c731e",
+   "t": "ver:85",
    "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:104c731e",
+   "t": "rev:40",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:104c731e",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "intent:104c731e",
+   "t": "theme:intent",
+   "kind": "about"
   },
   {
    "s": "intent:a76c24e8",
@@ -65015,11 +68107,26 @@
   },
   {
    "s": "intent:a76c24e8",
-   "t": "sec:09§2",
+   "t": "sec:09§2-0",
    "kind": "quoted_in"
   },
   {
    "s": "intent:a76c24e8",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "intent:3ffba19c",
+   "t": "fb:155",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:3ffba19c",
+   "t": "sec:09§7-1",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:3ffba19c",
    "t": "theme:depth",
    "kind": "about"
   },
@@ -65075,27 +68182,12 @@
   },
   {
    "s": "intent:7f2de7b8",
-   "t": "ver:24",
-   "kind": "interpreted_in"
-  },
-  {
-   "s": "intent:7f2de7b8",
-   "t": "ver:76",
-   "kind": "interpreted_in"
-  },
-  {
-   "s": "intent:7f2de7b8",
    "t": "fb:125",
    "kind": "quoted_in"
   },
   {
    "s": "intent:7f2de7b8",
-   "t": "sec:09§2",
-   "kind": "quoted_in"
-  },
-  {
-   "s": "intent:7f2de7b8",
-   "t": "sec:README§2-4",
+   "t": "sec:09§2-0",
    "kind": "quoted_in"
   },
   {
@@ -65146,6 +68238,11 @@
   {
    "s": "intent:cf1a47be",
    "t": "fb:136",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:71ae388e",
+   "t": "fb:159",
    "kind": "quoted_in"
   },
   {
@@ -65212,6 +68309,31 @@
    "s": "intent:e2cc0d3c",
    "t": "sec:09§7-1",
    "kind": "quoted_in"
+  },
+  {
+   "s": "intent:61c5de2a",
+   "t": "ver:36",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:61c5de2a",
+   "t": "fb:156",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:61c5de2a",
+   "t": "sec:09§3-5",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:61c5de2a",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "intent:61c5de2a",
+   "t": "theme:depth",
+   "kind": "about"
   },
   {
    "s": "intent:e7ae7fdc",
@@ -65291,6 +68413,16 @@
   {
    "s": "intent:24e67fca",
    "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "intent:d91970ef",
+   "t": "fb:171",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:d91970ef",
+   "t": "theme:script",
    "kind": "about"
   },
   {
@@ -65534,6 +68666,21 @@
    "kind": "about"
   },
   {
+   "s": "intent:da378276",
+   "t": "ver:36",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:da378276",
+   "t": "fb:153",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:da378276",
+   "t": "sec:09§3-4",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:dfa66488",
    "t": "fb:117",
    "kind": "quoted_in"
@@ -65546,6 +68693,21 @@
   {
    "s": "intent:dfa66488",
    "t": "theme:length",
+   "kind": "about"
+  },
+  {
+   "s": "intent:aa2a56ed",
+   "t": "fb:154",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:aa2a56ed",
+   "t": "sec:09§2-0",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:aa2a56ed",
+   "t": "theme:depth",
    "kind": "about"
   },
   {
@@ -65734,31 +68896,6 @@
    "kind": "about"
   },
   {
-   "s": "intent:7be96777",
-   "t": "ver:24",
-   "kind": "interpreted_in"
-  },
-  {
-   "s": "intent:7be96777",
-   "t": "sec:README§2-4",
-   "kind": "quoted_in"
-  },
-  {
-   "s": "intent:7be96777",
-   "t": "theme:script",
-   "kind": "about"
-  },
-  {
-   "s": "intent:7be96777",
-   "t": "theme:depth",
-   "kind": "about"
-  },
-  {
-   "s": "intent:7be96777",
-   "t": "theme:length",
-   "kind": "about"
-  },
-  {
    "s": "intent:1eee6b7a",
    "t": "fb:68",
    "kind": "quoted_in"
@@ -65806,6 +68943,16 @@
   {
    "s": "intent:104a07d3",
    "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "intent:44e96cb4",
+   "t": "fb:158",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:44e96cb4",
+   "t": "theme:intent",
    "kind": "about"
   },
   {
@@ -65859,6 +69006,11 @@
    "kind": "quoted_in"
   },
   {
+   "s": "intent:e5f4cf43",
+   "t": "fb:161",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:217f99af",
    "t": "ver:3",
    "kind": "interpreted_in"
@@ -65894,18 +69046,13 @@
    "kind": "about"
   },
   {
-   "s": "intent:c4c678bf",
-   "t": "ver:36",
-   "kind": "interpreted_in"
-  },
-  {
-   "s": "intent:c4c678bf",
-   "t": "fb:72",
+   "s": "intent:7044bf93",
+   "t": "fb:167",
    "kind": "quoted_in"
   },
   {
    "s": "intent:c4c678bf",
-   "t": "sec:09§3-5",
+   "t": "fb:72",
    "kind": "quoted_in"
   },
   {
@@ -66010,7 +69157,7 @@
   },
   {
    "s": "intent:b3682647",
-   "t": "sec:feedback§h199",
+   "t": "sec:feedback§h203",
    "kind": "quoted_in"
   },
   {
@@ -66184,6 +69331,11 @@
    "kind": "about"
   },
   {
+   "s": "intent:df9eb02a",
+   "t": "fb:168",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:5040bd1c",
    "t": "fb:78",
    "kind": "quoted_in"
@@ -66242,6 +69394,21 @@
    "s": "intent:bc28e516",
    "t": "fb:144",
    "kind": "quoted_in"
+  },
+  {
+   "s": "intent:a48a93aa",
+   "t": "fb:165",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:a48a93aa",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "intent:a48a93aa",
+   "t": "theme:depth",
+   "kind": "about"
   },
   {
    "s": "intent:dd7fcc43",
@@ -66364,6 +69531,26 @@
    "kind": "quoted_in"
   },
   {
+   "s": "intent:de8a2919",
+   "t": "ver:86",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:de8a2919",
+   "t": "sec:README§2-4",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:de8a2919",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "intent:de8a2919",
+   "t": "theme:length",
+   "kind": "about"
+  },
+  {
    "s": "intent:652fc668",
    "t": "fb:44",
    "kind": "quoted_in"
@@ -66371,6 +69558,16 @@
   {
    "s": "intent:652fc668",
    "t": "sec:09§9",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:0ddb3373",
+   "t": "fb:160",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:42ef45ae",
+   "t": "fb:175",
    "kind": "quoted_in"
   },
   {
@@ -66397,6 +69594,16 @@
    "s": "intent:24f4e157",
    "t": "fb:98",
    "kind": "quoted_in"
+  },
+  {
+   "s": "intent:1d638f3e",
+   "t": "sec:09§2-0",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:1d638f3e",
+   "t": "theme:depth",
+   "kind": "about"
   },
   {
    "s": "intent:05d09fee",
@@ -66442,6 +69649,26 @@
    "s": "intent:979d488c",
    "t": "rev:37",
    "kind": "quoted_in"
+  },
+  {
+   "s": "intent:2be120db",
+   "t": "ver:16",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:2be120db",
+   "t": "fb:173",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:2be120db",
+   "t": "sec:04§0-8",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:2be120db",
+   "t": "theme:script",
+   "kind": "about"
   },
   {
    "s": "intent:3ffec795",
@@ -66529,6 +69756,11 @@
    "kind": "quoted_in"
   },
   {
+   "s": "intent:1e4c3b2d",
+   "t": "fb:162",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:50e32be0",
    "t": "ver:11",
    "kind": "interpreted_in"
@@ -66607,6 +69839,26 @@
    "s": "intent:57ae38fe",
    "t": "theme:motion",
    "kind": "about"
+  },
+  {
+   "s": "intent:d7f98aca",
+   "t": "fb:177",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:d7f98aca",
+   "t": "theme:length",
+   "kind": "about"
+  },
+  {
+   "s": "intent:610916a6",
+   "t": "ver:86",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:610916a6",
+   "t": "sec:README§2-4",
+   "kind": "quoted_in"
   },
   {
    "s": "intent:d11bb724",
@@ -66691,6 +69943,26 @@
   {
    "s": "intent:e2de701c",
    "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "intent:bf4d0411",
+   "t": "ver:86",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:bf4d0411",
+   "t": "sec:README§2-4",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:bf4d0411",
+   "t": "fb:178",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:bf4d0411",
+   "t": "theme:length",
    "kind": "about"
   },
   {
@@ -66784,6 +70056,11 @@
    "kind": "quoted_in"
   },
   {
+   "s": "intent:abf48aad",
+   "t": "fb:172",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:e9208e10",
    "t": "sec:12§0",
    "kind": "quoted_in"
@@ -66796,6 +70073,26 @@
   {
    "s": "intent:e9208e10",
    "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "intent:69796953",
+   "t": "ver:86",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:69796953",
+   "t": "sec:README§2-4",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:69796953",
+   "t": "fb:179",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:69796953",
+   "t": "theme:script",
    "kind": "about"
   },
   {
@@ -66989,21 +70286,6 @@
    "kind": "quoted_in"
   },
   {
-   "s": "intent:97937dfb",
-   "t": "ver:24",
-   "kind": "interpreted_in"
-  },
-  {
-   "s": "intent:97937dfb",
-   "t": "sec:README§2-4",
-   "kind": "quoted_in"
-  },
-  {
-   "s": "intent:97937dfb",
-   "t": "theme:length",
-   "kind": "about"
-  },
-  {
    "s": "intent:b138c882",
    "t": "ver:4",
    "kind": "interpreted_in"
@@ -67079,6 +70361,11 @@
    "kind": "about"
   },
   {
+   "s": "intent:dcfc6907",
+   "t": "fb:176",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:4675a826",
    "t": "ver:32",
    "kind": "interpreted_in"
@@ -67091,6 +70378,11 @@
   {
    "s": "intent:f5e6aecc",
    "t": "fb:76",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:faecb1a8",
+   "t": "fb:166",
    "kind": "quoted_in"
   },
   {
@@ -67184,6 +70476,11 @@
    "kind": "quoted_in"
   },
   {
+   "s": "intent:97989af7",
+   "t": "fb:164",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:6f245754",
    "t": "ver:8",
    "kind": "interpreted_in"
@@ -67254,8 +70551,28 @@
    "kind": "about"
   },
   {
+   "s": "intent:b38fddb4",
+   "t": "ver:36",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:b38fddb4",
+   "t": "sec:09§3-4",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:d8042c5d",
+   "t": "fb:157",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:2925f768",
    "t": "fb:58",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:8e4d311c",
+   "t": "fb:174",
    "kind": "quoted_in"
   },
   {
@@ -67326,6 +70643,16 @@
   {
    "s": "intent:ca15e6d7",
    "t": "code:ytflow/stages/checklist.py:283",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:00574923",
+   "t": "sec:04§0-8",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:00574923",
+   "t": "fb:170",
    "kind": "quoted_in"
   },
   {
@@ -68391,6 +71718,11 @@
   {
    "s": "topic:market",
    "t": "ep:20261121-market-deep-ai-chips",
+   "kind": "episode"
+  },
+  {
+   "s": "topic:market",
+   "t": "ep:20261121-market-deep-openai",
    "kind": "episode"
   },
   {
@@ -71746,6 +75078,206 @@
   {
    "s": "fb:152",
    "t": "intent:35a2146c",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:153",
+   "t": "intent:da378276",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:154",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "fb:154",
+   "t": "intent:aa2a56ed",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:155",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "fb:155",
+   "t": "intent:3ffba19c",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:156",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "fb:156",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "fb:156",
+   "t": "intent:61c5de2a",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:157",
+   "t": "intent:d8042c5d",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:158",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
+   "s": "fb:158",
+   "t": "intent:44e96cb4",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:159",
+   "t": "intent:71ae388e",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:160",
+   "t": "intent:0ddb3373",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:161",
+   "t": "intent:e5f4cf43",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:162",
+   "t": "intent:1e4c3b2d",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:163",
+   "t": "intent:c32dbf43",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:164",
+   "t": "intent:97989af7",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:165",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "fb:165",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "fb:165",
+   "t": "intent:a48a93aa",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:166",
+   "t": "intent:faecb1a8",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:167",
+   "t": "intent:7044bf93",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:168",
+   "t": "intent:df9eb02a",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:169",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
+   "s": "fb:169",
+   "t": "intent:8d30c51b",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:170",
+   "t": "intent:00574923",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:171",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "fb:171",
+   "t": "intent:d91970ef",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:172",
+   "t": "intent:abf48aad",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:173",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "fb:173",
+   "t": "intent:2be120db",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:174",
+   "t": "intent:8e4d311c",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:175",
+   "t": "intent:42ef45ae",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:176",
+   "t": "intent:dcfc6907",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:177",
+   "t": "theme:length",
+   "kind": "about"
+  },
+  {
+   "s": "fb:177",
+   "t": "intent:d7f98aca",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:178",
+   "t": "theme:length",
+   "kind": "about"
+  },
+  {
+   "s": "fb:178",
+   "t": "intent:bf4d0411",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:179",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "fb:179",
+   "t": "intent:69796953",
    "kind": "quoted_as"
   }
  ]

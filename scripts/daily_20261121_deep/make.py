@@ -16,6 +16,15 @@ DS, NP = "dark-doc", "newsprint"
 YH = "야후 파이낸스 종가 · 11월 20일(금) 마감 기준 · 19일 대비"
 KUO = "궈밍치(TF 인터내셔널) 업계 조사 · 인베스팅닷컴 보도 (2026.11.20) — 구글·브로드컴 확인 없음"
 COOK = "리사 쿡 연준 이사 연설 (2026.11.20, 칠레) · federalreserve.gov"
+# 원본 발언 구간 (2026-11-21 사용자: "심층분석에서 이제 각 인사이트나 인터뷰영상 등 이슈소스를 찾아주세요") — manual/09 §3-5
+CLIPS = {
+    "cook": {"file": "cook_bcch_20261120.mp4", "url": "https://www.youtube.com/watch?v=v_WEWJgJdHw", "start": "5:57:55", "end": "5:59:06",
+             "who": "리사 쿡", "rights": "official",
+             "credit": "칠레 중앙은행 공식 채널 (YouTube) · 2026.11.20 제29회 연례 회의 · 연준 사이트 연설 영상 링크"},
+    "griffin": {"file": "griffin_bloomberg_20261020.mp4", "url": "https://www.youtube.com/watch?v=6mWxb7sqC7U", "start": "0:44.8", "end": "0:57.6",
+                "who": "켄 그리핀", "rights": "broadcast",
+                "credit": "Bloomberg Television 공식 채널 (YouTube) · 2026.10.20 인터뷰"},
+}
 NV = "엔비디아 3분기 실적 발표 (2026.11.17, 8-K) · investor.nvidia.com"
 MU = "마이크론 회계 4분기 실적 콜 (2026.9.30 무렵) · 컴퓨터월드 인용 (2026.10.1)"
 SKH = "SK하이닉스 3분기 실적 발표 (2026.10.28, 잠정) · news.skhynix.com"
@@ -124,9 +133,9 @@ def main():
            quote="공급과 수요가 언제 균형을 되찾을지, 아직 보이지 않는다.", keyword="보이지",
            orig="We do not have line of sight to when supply and demand will return to balance.",
            beats=[{"say": "마이크론의 산제이 메로트라 CEO는 실적 발표에서, 공급과 수요가 언제 균형을 되찾을지 아직 보이지 않는다고 말했습니다. 2027년과 2028년은 2026년보다 훨씬 더 빠듯할 거라고도 했습니다.",
-                   "motion": [M("2028년은", "count", id="tight", value="2027·28년", label="더 빠듯해진다 (회사 전망)", x=1080, y=880, w=420, h=140, fs=46)]},
+                   "motion": [M("2028년은", "count", id="tight", value="2027·28년", label="더 빠듯해진다 (회사)", x=1010, y=880, w=420, h=140, fs=46)]},
                   {"say": "물건을 파는 쪽의 말이니, 사실이 아니라 회사의 전망입니다. 다만 이 말을 받치는 숫자는 있습니다. 같은 분기 마이크론의 D램 값은 10%대 후반, 낸드 값은 30% 정도 올랐다고 회사 재무 책임자가 밝혔습니다. 모자라니까 값이 오른 겁니다.",
-                   "motion": [M("30%", "count", id="nand", value="+30%", label="낸드 값 (회계 4분기, 회사)", x=1620, y=880, w=420, h=140, fs=50)]}]))
+                   "motion": [M("30%", "count", id="nand", value="+30%", label="낸드 값 (회사)", x=1560, y=880, w=420, h=140, fs=50)]}]))
     s(dict(type="bignum", chapter=1, label=COOK, small="쿡 연준 이사가 꼽은 데이터센터 건설 계획 · 11월 20일 연설", value="2조 달러+",
            compare={"label": "그중 실제로 지어진 것", "value": "일부"},
            beats=[{"say": "연준도 같은 그림을 봤습니다. 리사 쿡 연준 이사는 금요일 연설에서, 기업들이 발표한 데이터센터 건설 계획만 2조 달러가 넘는다고 했습니다."},
@@ -158,7 +167,7 @@ def main():
                 "g": {"kind": "card", "x": 960, "y": 480, "icon": "server", "label": "구글 TPU 주문", "w": 260},
                 "b": {"kind": "card", "x": 420, "y": 740, "icon": "cpu", "label": "브로드컴 설계 (고급형)", "value": "약 -100만 개", "vsize": 40, "w": 280},
                 "m": {"kind": "card", "x": 1500, "y": 740, "icon": "cpu", "label": "미디어텍 설계", "value": "늘림", "vsize": 40, "w": 280},
-                "lim": {"kind": "arrow", "from": "pw", "to": "g", "label": "한도", "color": "red"},
+                "lim": {"kind": "arrow", "from": "pw", "to": "g", "color": "red"},
                 "o1": {"kind": "arrow", "from": "g", "to": "b", "bend": -0.15},
                 "o2": {"kind": "arrow", "from": "g", "to": "m", "bend": 0.15},
                 "mv": {"kind": "arrow", "from": "b", "to": "m", "label": "몫이 옮겨 감", "color": "red", "bend": 0.25}},
@@ -187,9 +196,11 @@ def main():
            right={"value": "거품", "label": "그리핀(시타델): 남으면 값이 무너진다", "icon": "circle-alert"},
            beats=[{"say": "그래서 시장이 사고파는 건 오늘의 품절이 아니라, 이 모자람이 언제까지 가느냐입니다. 여기서 시각이 갈립니다. 마이크론 CEO는 균형이 언제 올지 보이지 않는다고 했습니다."},
                   {"say": "반대편에는 미국 최대 헤지펀드 가운데 하나인 시타델의 켄 그리핀이 있습니다. 그는 10월 시타델 행사에서, 지금의 AI는 거의 확실히 거품이라고 말했습니다. 둘 다 사실이 아니라 한 사람의 시각입니다."}]))
-    s(dict(type="quote", chapter=3, insight=True, label=GR + " · 의견이며 사실이 아닙니다", who="켄 그리핀", role="시타델 CEO · 글로벌 시장의 미래 행사",
-           quote="경제의 급격한 변화는 대개 거품과 얽혀 있다.", keyword="거품",
-           orig="Any radical transformation of our economy is generally intertwined with a bubble.",
+    s(dict(type="bite", chapter=3, insight=True, label="의견이며 사실이 아닙니다", who="켄 그리핀", role="시타델 CEO · 블룸버그 인터뷰",
+           show_lower=False,
+           clip={"src": "griffin", "lang": "en", "cuts": [
+               {"find": "So the big picture is there's almost certainly bubbles within this moment in time. And any radical transformation of our economy is generally intertwined with a bubble.",
+                "ko": "큰 그림으로 보면, 지금 이 순간 안에는 거의 확실히 거품이 있습니다. 경제의 급격한 변화는 대개 거품과 얽혀 있습니다."}]},
            beats=[{"say": "그리핀의 말을 그대로 옮기면, 경제의 급격한 변화는 대개 거품과 얽혀 있다는 겁니다. 그렇다고 AI를 깎아내린 건 아닙니다. 그는 거품 반대편에 서는 회사들이 앞으로 수십 년의 승자가 된다고도 했습니다."},
                   {"say": "그가 짚은 위험은 값입니다. 보도에 따르면 그는 AI 칩을 비행기 좌석에 빗댔습니다. 한 번 띄운 비행기의 빈 좌석은 싸게라도 팔아야 하듯, 칩이 수요보다 많아지는 순간 값이 한꺼번에 무너질 수 있다는 겁니다. 2000년 무렵 광케이블을 너무 많이 깔았다가 값이 무너진 일을 예로 들었습니다."}]))
     s(dict(type="motionboard", chapter=3, label="이 영상의 설명 · 근거: 그리핀 발언 보도, SK하이닉스·마이크론 실적", title="값을 정하는 건 '얼마나 모자라냐'",
@@ -207,9 +218,13 @@ def main():
     # ── 4. 돈의 값 ──
     s(dict(type="chapter", chapter=4, num="4", title="AI 칩의 적은 금리일까", icon="landmark", look="photo", bg_src="cook",
            beats=B("세 번째 갈래, 돈의 값입니다. 금요일, 연준 이사 한 사람이 AI를 직접 이름으로 불렀습니다.")))
-    s(dict(type="quote", chapter=4, insight=True, label=COOK + " · 의견이며 사실이 아닙니다", who="리사 쿡", role="미국 연준 이사 · 칠레 중앙은행 연례 회의 연설",
-           quote="지금 금리로는 AI 건설이 줄지 않는 듯하다.", keyword="줄지",
-           orig="The current stance of policy does not appear to be curtailing the AI buildout.",
+    s(dict(type="bite", chapter=4, insight=True, label="의견이며 사실이 아닙니다", who="리사 쿡", role="미국 연준 이사 · 칠레 중앙은행 연례 회의 연설",
+           show_lower=False,   # 원본 화면에 이미 이름 띠가 있음 — 우리 이름 띠와 겹치지 않게
+           clip={"src": "cook", "lang": "en", "cuts": [
+               {"find": "The current stance of policy does not appear to be curtailing the AI buildout",
+                "ko": "지금의 통화정책은 AI 건설을 줄이고 있는 것 같지 않습니다."},
+               {"find": "waiting longer to implement rate increases risks getting behind the curve. If we fall behind, additional and larger rate increases may be required to catch up later",
+                "ko": "금리 인상을 늦출수록 뒤처질 위험이 있습니다. 뒤처지면 나중에 따라잡으려고 더 크고 잦은 인상이 필요할 수 있습니다."}]},
            beats=[{"say": "리사 쿡 이사는 연설에서, 지금의 통화정책, 곧 지금 금리로는 AI 건설이 줄지 않는 것 같다고 말했습니다."},
                   {"say": "그리고 AI 인프라 건설이 경제를 빠르게 키우는 큰 원인 가운데 하나라고 했습니다. 금리를 더 올리는 걸 늦추면 뒤처질 위험이 있다는 말도 같은 연설에 있습니다. 연준 위원 한 사람의 시각입니다."}]))
     s(dict(type="checklist", chapter=4, label=COOK, title="쿡 이사가 든 근거", x=150, text_w=920, skin=NP,
@@ -244,11 +259,11 @@ def main():
                   {"say": "대신 뉴몬트, 배릭 같은 금광 회사를 새로 샀습니다. 그런데 반도체를 다 버린 건 아닙니다. 저장장치 회사 시게이트는 세 배 가까이 늘렸습니다.", "upto": 4}]))
     s(dict(type="motionboard", chapter=5, label="이 영상의 설명 · 근거: 13F 보도 — 9월 30일 기준, 매수 포지션만", title="버린 게 아니라, 골랐다",
            els={"semi": {"kind": "card", "x": 430, "y": 520, "icon": "cpu", "label": "반도체 (TSMC·AMD …)", "value": "줄임·정리", "vsize": 40, "w": 320, "color": "red"},
-                "gold": {"kind": "card", "x": 1450, "y": 360, "icon": "gem", "label": "금광주", "value": "새로 삼", "vsize": 40, "w": 280},
-                "stx": {"kind": "card", "x": 1450, "y": 700, "icon": "hard-drive", "label": "시게이트 (저장장치)", "value": "약 3배", "vsize": 40, "w": 300},
+                "gold": {"kind": "card", "x": 1450, "y": 330, "icon": "gem", "label": "금광주", "value": "새로 삼", "vsize": 40, "w": 280},
+                "stx": {"kind": "card", "x": 1450, "y": 760, "icon": "hard-drive", "label": "시게이트 (저장장치)", "value": "약 3배", "vsize": 40, "w": 300},
                 "a1": {"kind": "arrow", "from": "semi", "to": "gold", "color": "red", "bend": -0.1},
                 "a2": {"kind": "arrow", "from": "semi", "to": "stx", "bend": 0.1},
-                "note": {"kind": "text", "x": 960, "y": 240, "text": "9월 30일 기준 — 이번 폭락 전, 매수 포지션만", "size": 40}},
+                "note": {"kind": "text", "x": 640, "y": 250, "text": "9월 30일 기준 — 이번 폭락 전, 매수 포지션만", "size": 36}},
            beats=[{"say": "돈의 이동으로 보면 이렇습니다. 반도체 쪽에서 돈을 빼서, 일부는 금으로 옮겼습니다.", "do": ["semi", "gold", "a1"], "at": {"gold": "금으로"}},
                   {"say": "그리고 같은 반도체 가운데서도 저장장치 쪽은 늘렸습니다. AI 전체를 버린 게 아니라, AI 안에서 무엇이 모자라고 무엇이 남을지를 고른 겁니다.", "do": ["stx", "a2", {"hi": "stx"}], "at": {"stx": "저장장치"}},
                   {"say": "다만 이건 9월 30일 기준이라 이번 폭락 전의 행동이고, 13F에는 공매도나 채권 같은 다른 거래는 보이지 않습니다. 한 사람의 행동을 시장 전체의 답으로 보지는 않습니다.", "do": ["note"]}]))
@@ -266,15 +281,15 @@ def main():
     # ── 6. 한국 ──
     s(dict(type="chapter", chapter=6, num="6", title="한국 메모리는 어느 편에 서 있나", icon="map-pin", look="photo", bg_src="seoul",
            beats=B("그렇다면 삼성전자와 SK하이닉스를 가진 한국 투자자는 이 세 갈래를 어떻게 읽어야 할까요?")))
-    s(dict(type="bars", chapter=6, label="한국거래소 종가(야후) · 11월 20일(금) 마감 기준 — 미국 20일 폭락 전 · 한 달은 10월 21일 대비(계산)", title="한국 메모리 두 회사 (%)", unit="", emph=0, skin=DS,
+    s(dict(type="bars", chapter=6, label="한국거래소 종가(야후) · 11월 20일(금) 마감 기준 — 미국 20일 폭락 전 · 한 달은 10월 21일 대비(계산)", title="한국 메모리 두 회사, 마이크론과 비교 (%)", unit="", emph=1, skin=DS,
            layers=[{"kind": "locator", "at": [126.92, 37.52], "label": "서울 여의도", "beat": 0, "side": "left", "top": 170, "scale": 2.2}],
-           items=[{"label": "삼성전자 한 달", "value": -18.1, "text": "-18.1", "t": "18.1%"}, {"label": "SK하이닉스 한 달", "value": -14.0, "text": "-14.0", "t": "14%"},
-                  {"label": "삼성전자 20일", "value": -7.01, "text": "-7.01", "t": "삼성전자는"}, {"label": "SK하이닉스 20일", "value": -5.92, "text": "-5.92", "t": "SK하이닉스는"}],
+           items=[{"label": "마이크론 한 달", "value": -34.9, "text": "-34.9", "t": "34.9%"}, {"label": "삼성 한 달", "value": -18.1, "text": "-18.1", "t": "18.1%"}, {"label": "하이닉스 한 달", "value": -14.0, "text": "-14.0", "t": "14%"},
+                  {"label": "삼성 20일", "value": -7.01, "text": "-7.01", "t": "삼성전자는"}, {"label": "하이닉스 20일", "value": -5.92, "text": "-5.92", "t": "SK하이닉스는"}],
            beats=[{"say": "11월 20일 한국 장 마감 기준, 삼성전자는 7.01% 내린 18만 3,100원, SK하이닉스는 5.92% 내린 111만 3천 원이었습니다. 이건 미국 금요일 폭락이 오기 전 숫자이고, 23일 월요일 장이 그걸 처음 받습니다.",
-                   "motion": [M("18만", "count", id="sec", value="183,100원", label="삼성전자 20일 종가", x=1640, y=300, w=400, h=130, fs=46),
-                              M("111만", "count", id="skh", value="1,113,000원", label="SK하이닉스 20일 종가", x=1640, y=460, w=400, h=130, fs=44)]},
+                   "motion": [M("18만", "count", id="sec", value="183,100원", label="삼성전자 20일 종가", x=270, y=600, w=380, h=120, fs=42),
+                              M("111만", "count", id="skh", value="1,113,000원", label="SK하이닉스 20일 종가", x=270, y=770, w=380, h=120, fs=40)]},
                   {"say": "한 달로 보면 삼성전자는 18.1%, SK하이닉스는 14% 내렸습니다. 마이크론의 34.9%보다는 덜 빠졌지만, 같은 방향입니다.",
-                   "motion": [M("34.9%", "count", id="mu2", value="-34.9%", label="마이크론 한 달 (비교)", x=1640, y=880, w=380, h=130, fs=50)]}]))
+                   "motion": []}]))
     s(dict(type="bignum", chapter=6, label=SKH + " (계산)", small="SK하이닉스 3분기 영업이익률 · 10월 28일 발표(잠정)", value="80%",
            compare={"label": "2분기", "value": "76%"},
            beats=[{"say": "한국 메모리가 어느 편에 서 있는지는 이 숫자가 보여 줍니다. SK하이닉스는 3분기에 매출 104조 6천억 원, 영업이익 83조 3천억 원을 냈습니다. 영업이익률 80%입니다.",
@@ -345,23 +360,45 @@ def main():
                      {"term": "13F", "plain": "큰 기관 투자자가 분기마다 미국 주식 보유를 신고하는 공시 — 분기 말 기준, 공매도는 안 보임"},
                      {"term": "PCE 물가", "plain": "연준이 가장 중요하게 보는 개인소비지출 물가 지표"}],
         "scenes": S,
-        "footage": fo,
+        "footage": {**fo, **CLIPS},
         "package": {
             "title": "반도체 동반 폭락, 수요가 꺾였나 몫이 옮겨 갔나 | 11월 21일",
             "title_options": ["반도체 동반 폭락, 수요가 꺾였나 몫이 옮겨 갔나 | 11월 21일",
                               "메모리 품절인데 마이크론 한 달 -35%, 반도체 폭락이 산 것 | 11월 21일",
                               "연준 이사 \"지금 금리로는 AI 건설이 안 줄어\" — 삼성전자·SK하이닉스는 | 11월 21일"],
             "title_why": ["핫 키워드(반도체·폭락)를 앞 20자 안에 + 질문(답 숨김) + 날짜", "숫자 대비(품절 vs -35%)", "연준 인사 따옴표 + 한국 계좌"],
-            "ticker": [{"name": "S&P 500", "chg": "-3.70%"}, {"name": "나스닥", "chg": "-5.28%"}, {"name": "반도체(SOX)", "chg": "-10.73%"}],
+            # 지수 띠는 매일 브리핑에만 (2026-11-21 사용자: "심층분석에는 굳이 주가변동폭을 안넣어도")
+            "thumb_pick": "D",
+            "tags": ["반도체 폭락", "AI 거품", "메모리 품절", "마이크론", "SK하이닉스", "삼성전자", "엔비디아", "브로드컴", "구글 TPU", "HBM", "켄 그리핀", "리사 쿡", "연준", "금리", "드러켄밀러", "AI 반도체"],
+            "hashtags": ["AI거품", "반도체폭락", "메모리"],
             "thumbnails": [
                 {"id": "A", "name": "검은 반도체 웨이퍼 + 단정 + 숫자 (photo full)", "layout": "photo", "photo_side": "full", "image": {"file": "04_assets/footage/raw/wafer.jpg", "focus": [0.5, 0.5]},
                  "top": "11월 21일 · 반도체 폭락", "lines": ["메모리는 품절", "주가는 -35%"], "hl": ["품절"], "sub": "마이크론 한 달 · 연준은 더 올려야", "size": 110, "text_y": 330, "marks": [],
                  "why": ["핫 키워드(폭락·품절) 큰 글씨 + 구체적 숫자, 단정", "manual/09 §7-1 ③ 기본 모양 — 어두운 사진"]},
-                {"id": "B", "name": "쿡 연준 이사 얼굴 + 따옴표 (person)", "layout": "person", "image": {"file": "04_assets/footage/raw/cook.jpg", "focus": [0.5, 0.35]},
-                 "person": {"name": "리사 쿡", "role": "미국 연준 이사"}, "top": "11월 21일 · 연준", "lines": ["반도체 폭락", "다음은 금리"], "hl": ["금리"],
-                 "quote": "지금 금리로는 AI 건설이 줄지 않는 듯하다", "size": 108, "text_y": 230, "photo_width": 0.5,
-                 "credit": "Public domain · Federal Reserve · 위키미디어 공용",
-                 "why": ["연준·금리 핫 키워드 + 연준 인사 얼굴 (§7-1 ①-1)", "따옴표는 영상 속 쿡 이사 인용과 같은 말"]},
+                # 2026-11-21 사용자: "심층영상 썸네일이 오늘 올린 썸네일과 거의 동일해서 바꿔야" — 브리핑(쿡 이사 얼굴)과 다른 그림·말로
+                {"id": "B", "name": "메모리 모듈 + AI 인프라 종말? / 메모리는 품절 (photo full)", "layout": "photo", "photo_side": "full", "image": {"file": "04_assets/footage/raw/memory.jpg", "focus": [0.5, 0.5]},
+                 "top": "AI 반도체 대폭락 · 한 달", "lines": ["AI 인프라 종말?", "메모리는 품절이다"], "hl": ["종말?", "품절"], "sub": "엔비디아 -43% · 마이크론 -35% (한 달)", "size": 104, "text_y": 320, "marks": [],
+                 "credit": "CC BY 4.0 · 4300streetcar · 위키미디어 공용",
+                 "why": ["시장 불안 키워드(AI 인프라 종말·대폭락) + 반전(품절) — 사용자 2026-11-21", "브리핑 썸네일(쿡 이사 얼굴)과 겹치지 않게 메모리 사진"]},
+                {"id": "D", "name": "데이터센터 + 거품인가 품절인가 (photo full)", "layout": "photo", "photo_side": "full", "image": {"file": "04_assets/footage/raw/dc.jpg", "focus": [0.5, 0.5]},
+                 "top": "AI 반도체 대폭락 · 그리핀 vs 마이크론", "lines": ["메모리는 품절인데", "AI는 거품?"], "hl": ["거품?"], "sub": "그리핀 'AI 는 거의 확실히 거품' · 마이크론 '2027년 물량 75% 약정'", "size": 112, "text_y": 300, "marks": [],
+                 "credit": "사진: Hay Kranen · CC BY 4.0",
+                 "why": ["2026-11-21 사용자: '메모리는 품절인데 AI는 거품? 이런식으로 차라리' — 역설을 한 문장으로", "엇갈린 두 시각을 큰 두 글자로 — 영상의 질문 그대로", "공포 키워드 '거품'·'대폭락'"]},
+                {"id": "D2", "name": "언 비눗방울(거품 비유, CC0) + 거품인가 품절인가 (photo full)", "layout": "photo", "photo_side": "full", "image": {"file": "04_assets/footage/raw/bubble2.jpg", "focus": [0.5, 0.5]},
+                 "top": "AI 반도체 대폭락 · 그리핀 vs 마이크론", "lines": ["거품인가", "품절인가"], "hl": ["거품인가"], "sub": "그리핀 '거의 확실히 거품' · 마이크론 '2027년 75% 약정'", "size": 120, "text_y": 300, "marks": [],
+                 "why": ["D 문구 그대로, 사진만 바꾼 후보 (사용자 2026-11-21: d 말고 다른 사진)"]},
+                {"id": "D3", "name": "비눗방울(거품 비유) + 거품인가 품절인가 (photo full)", "layout": "photo", "photo_side": "full", "image": {"file": "04_assets/footage/raw/bubble.jpg", "focus": [0.5, 0.5]},
+                 "top": "AI 반도체 대폭락 · 그리핀 vs 마이크론", "lines": ["거품인가", "품절인가"], "hl": ["거품인가"], "sub": "그리핀 '거의 확실히 거품' · 마이크론 '2027년 75% 약정'", "size": 120, "text_y": 300, "marks": [], "credit": "사진: Max Stotsky · CC BY 2.0",
+                 "why": ["D 문구 그대로, 사진만 바꾼 후보 (사용자 2026-11-21: d 말고 다른 사진)"]},
+                {"id": "D4", "name": "서버 랙 + 거품인가 품절인가 (photo full)", "layout": "photo", "photo_side": "full", "image": {"file": "04_assets/footage/raw/racks.jpg", "focus": [0.5, 0.5]},
+                 "top": "AI 반도체 대폭락 · 그리핀 vs 마이크론", "lines": ["거품인가", "품절인가"], "hl": ["거품인가"], "sub": "그리핀 '거의 확실히 거품' · 마이크론 '2027년 75% 약정'", "size": 120, "text_y": 300, "marks": [], "credit": "사진: Carl Lender · CC BY 2.0",
+                 "why": ["D 문구 그대로, 사진만 바꾼 후보 (사용자 2026-11-21: d 말고 다른 사진)"]},
+                {"id": "D5", "name": "반도체 웨이퍼 + 거품인가 품절인가 (photo full)", "layout": "photo", "photo_side": "full", "image": {"file": "04_assets/footage/raw/wafer.jpg", "focus": [0.5, 0.5]},
+                 "top": "AI 반도체 대폭락 · 그리핀 vs 마이크론", "lines": ["거품인가", "품절인가"], "hl": ["거품인가"], "sub": "그리핀 '거의 확실히 거품' · 마이크론 '2027년 75% 약정'", "size": 120, "text_y": 300, "marks": [],
+                 "why": ["D 문구 그대로, 사진만 바꾼 후보 (사용자 2026-11-21: d 말고 다른 사진)"]},
+                {"id": "D6", "name": "메모리 모듈 + 거품인가 품절인가 (photo full)", "layout": "photo", "photo_side": "full", "image": {"file": "04_assets/footage/raw/memory.jpg", "focus": [0.5, 0.5]},
+                 "top": "AI 반도체 대폭락 · 그리핀 vs 마이크론", "lines": ["거품인가", "품절인가"], "hl": ["거품인가"], "sub": "그리핀 '거의 확실히 거품' · 마이크론 '2027년 75% 약정'", "size": 120, "text_y": 300, "marks": [], "credit": "사진: 4300streetcar · CC BY 4.0",
+                 "why": ["D 문구 그대로, 사진만 바꾼 후보 (사용자 2026-11-21: d 말고 다른 사진)"]},
                 {"id": "C", "name": "숫자 대비 (dark)", "layout": "versus", "theme": "dark", "left": {"value": "75%+", "label": "마이크론 2027년 물량 약정"},
                  "right": {"value": "-34.9%", "label": "마이크론 주가 한 달"}, "headline": "품절인데, 3분의 1이 빠졌다", "hl": ["품절"], "marks": [], "why": ["숫자 둘 대비 — 역설"]}]},
     }

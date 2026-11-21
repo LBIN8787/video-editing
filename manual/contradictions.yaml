@@ -7,7 +7,7 @@
 # 낡은 쪽이 분명하면(더 새 버전·날짜의 매뉴얼 규칙이 대체) 바로 고치고 resolved 로 적습니다. 사용자 원문(feedback·reviews·인용)은 고치지 않습니다.
 # 정기 작업(예약된 작업) 지시문은 저장소 밖에 있으므로 file 에 "schedule:<작업 이름>" 으로 적습니다.
 last_sweep: '2026-11-20'
-last_commit: 30038d15234204bdc592e87badf64a5855644882
+last_commit: a822f1ebbf3ff4780ba0a3fd9b32912595c446de
 items:
 - id: c-20261120-01
   found: '2026-11-20'
@@ -319,7 +319,7 @@ items:
     text: Google Drive 기본, 공개 가능한 것만 Release
   current: unknown
   why: 모든 편에 G8 이 걸려 비공개여야 할 편도 Release 해야 통과
-  decision: "사용자 2026-11-20 '깃과 드라이브로 나눠서 해줘' — 완성본 Drive 기본(upload --to drive 기본), Release 는 공개 가능한 것만 선택 (README §3-7·11 S9·06 G8·docs/09)"
+  decision: 사용자 2026-11-20 '깃과 드라이브로 나눠서 해줘' — 완성본 Drive 기본(upload --to drive 기본), Release 는 공개 가능한 것만 선택 (README §3-7·11 S9·06 G8·docs/09)
   fix: G8 을 "보관 기록 — Drive 또는 공개 가능한 것만 Release" 로 바꾸고 upload 기본값도 정함
   status: resolved
 - id: c-20261120-25
@@ -333,8 +333,8 @@ items:
     text: 롱폼 최소 10분 (48시간 빠른 정리만 5~8분)
   current: unknown
   why: 매일 시사가 빠른 정리 예외인지 불분명. ch-issues 빠른 정리 10~12분 ↔ 08 의 5~8분도 함께
-  fix: "ch-issues-daily 제목·설명의 5분·5~8분을 지움 (48시간 빠른 정리 예외는 ch-issues 에만)"
-  decision: "사용자 2026-11-20 '10분 이상'"
+  fix: ch-issues-daily 제목·설명의 5분·5~8분을 지움 (48시간 빠른 정리 예외는 ch-issues 에만)
+  decision: 사용자 2026-11-20 '10분 이상'
   status: resolved
 - id: c-20261120-26
   found: '2026-11-20'
@@ -347,7 +347,7 @@ items:
     text: 12~20분 심층이 기본
   current: unknown
   why: 심층 한 편(18분대)이 90분 시간표에 맞는지
-  decision: "사용자 2026-11-20 '심층이 가능하면 심층으로 안되면 일반으로 … 영상길이도 결정해줘' — 아침 90분은 브리핑, 심층은 가능하면 반드시 따로 12:00·18:00, 길이는 그 판단을 따름 (09 §1·§2, README §2-4)"
+  decision: 사용자 2026-11-20 '심층이 가능하면 심층으로 안되면 일반으로 … 영상길이도 결정해줘' — 아침 90분은 브리핑, 심층은 가능하면 반드시 따로 12:00·18:00, 길이는 그 판단을 따름 (09 §1·§2, README §2-4)
   fix: 08:30 유지하고 심층 크기를 맞추거나, 심층 날은 공개를 늦춤
   status: resolved
 - id: c-20261120-27
@@ -361,8 +361,8 @@ items:
     text: 토 = 장이 열리지 않는 날 → -market-weekly
   current: unknown
   why: 토요일에 금요일 미국 장 영상과 주간 종합이 함께 걸림
-  fix: "토요일 = 금요일 장(평일과 같음), 일요일 = 한 주 종합(weekly) 하나, 매 편 인사이트 (09 §2, ch-market-daily schedule)"
-  decision: "사용자 2026-11-20 '일요일에 주간 종합 … 요일 상관없이 인사이트·분석'"
+  fix: 토요일 = 금요일 장(평일과 같음), 일요일 = 한 주 종합(weekly) 하나, 매 편 인사이트 (09 §2, ch-market-daily schedule)
+  decision: 사용자 2026-11-20 '일요일에 주간 종합 … 요일 상관없이 인사이트·분석'
   status: resolved
 - id: c-20261120-28
   found: '2026-11-20'
@@ -375,8 +375,8 @@ items:
     text: 심리·현대 일상, 이야기는 삽화·증거는 실제 사진
   current: unknown
   why: 'brand: curiosity 를 쓰면 기록 사진 표지·아카이브 연출이 자동으로 들어감 (스타일 층, v15·v16 합격분)'
-  fix: "brands.yaml curiosity chapter_looks [illust] — 그 편의 삽화가 장 표지, 기록 사진은 증거 자리만 (05 §0-7 표, identity.py·backdrop.py)"
-  decision: "사용자 2026-11-20 '표지도 삽화로'"
+  fix: brands.yaml curiosity chapter_looks [illust] — 그 편의 삽화가 장 표지, 기록 사진은 증거 자리만 (05 §0-7 표, identity.py·backdrop.py)
+  decision: 사용자 2026-11-20 '표지도 삽화로'
   status: resolved
 - id: c-20261120-29
   found: '2026-11-20'
@@ -402,8 +402,8 @@ items:
     text: 인트로 없음·10분~·모션그래픽 기본
   current: unknown
   why: make 로 만드는 대본은 아직 식스시그마·AI비즈PT 통계를 따름
-  fix: "writing.py 에서 style_profile.json 은 style_ref 가 sixsigma 일 때만"
-  decision: "v73 공통 기준 (README §2-1·§2-4, 12 §0-1)"
+  fix: writing.py 에서 style_profile.json 은 style_ref 가 sixsigma 일 때만
+  decision: v73 공통 기준 (README §2-1·§2-4, 12 §0-1)
   status: resolved
 - id: c-20261120-31
   found: '2026-11-20'
@@ -442,8 +442,8 @@ items:
     text: hook-shorts (hookshort)
   current: unknown
   why: 같은 라인에 기본이 둘
-  fix: "ch-ai-shorts 를 status paused 로 — 기본 스타일은 재개할 때 정함"
-  decision: "사용자 2026-11-20 '쇼츠채널은 일단은 보류'"
+  fix: ch-ai-shorts 를 status paused 로 — 기본 스타일은 재개할 때 정함
+  decision: 사용자 2026-11-20 '쇼츠채널은 일단은 보류'
   status: resolved
 - id: c-20261120-34
   found: '2026-11-20'
@@ -731,3 +731,16 @@ items:
   why: 사용자 2026-11-20 "이야기는 삽화로 … 마디로 해주세요" → "네, 공통으로" (docs/54 §5)
   fix: a 쪽 문장을 모두 b 로 바꾸고 04 §0-7·§0-8 을 한 절로 합침, broll-motion 은 사용자가 고를 때만
   status: resolved
+- id: c-20261121-01
+  found: '2026-11-21'
+  topic: 시장 아침 브리핑 길이
+  a:
+    file: manual/README.md §2-4 · check G6 MUST
+    text: 모든 채널의 롱폼(매일 브리핑 포함)은 10분 이상 (빠른 정리만 5분)
+  b:
+    file: manual/09-market-daily.md §2 (v76·2026-11-20 사용자 "브리핑 길이 7~10분") · §4 제목 "브리핑 (10~12분, 20~26장면)"
+    text: 아침 브리핑 7~10분
+  current: unknown
+  why: 7~10분 브리핑이 G6 MUST(10분 이상)에 걸려 통과 못 함. 09 안에서도 §2(7~10분)와 §4 제목(10~12분)이 다름
+  fix: 브리핑을 README §2-4 예외(7분 이상)로 넣고 §4 제목을 7~10분으로 — 또는 브리핑도 10분 이상으로 09 §2 를 고침
+  status: open
