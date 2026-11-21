@@ -5,6 +5,8 @@ project: 20261120-market-deep-druckenmiller
 status: pending
 ---
 
+**가장 쉬운 방법: 저장소 폴더의 `pc-clip-fetch.bat` 를 더블클릭** (받기·렌더·기록 올리기까지 한 번에).
+
 PC 에서 원본 발언 구간만 받아 주세요 (docs/50-clip-lane.md). 클라우드는 유튜브 봇 확인 때문에 받지 못합니다.
 
 ```

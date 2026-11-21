@@ -22,6 +22,7 @@ from __future__ import annotations
 import json
 import csv
 import re
+import os
 import sys
 import subprocess
 from pathlib import Path
@@ -71,8 +72,9 @@ def download(url: str, start: float, end: float, out: Path) -> bool:
            "-f", ccfg.get("format", "bv*[height<=1080]+ba/b[height<=1080]/b"),
            "--download-sections", f"*{start:.2f}-{end:.2f}", "--force-keyframes-at-cuts",
            "--merge-output-format", "mp4", "-o", str(out), url]
-    if ccfg.get("cookies_from_browser"):
-        cmd[3:3] = ["--cookies-from-browser", ccfg["cookies_from_browser"]]
+    browser = os.environ.get("YTFLOW_CLIP_COOKIES") or ccfg.get("cookies_from_browser")   # PC 실행 파일이 한 번만 바꿀 때 (pc-clip-fetch.bat)
+    if browser:   # 본인 PC 브라우저의 로그인 상태를 그대로 씀 — 봇 확인을 우회하지 않음
+        cmd[3:3] = ["--cookies-from-browser", browser]
     proc = subprocess.run(cmd, capture_output=True, text=True)
     if proc.returncode != 0 or not out.exists():
         print("    ", (proc.stderr.strip().splitlines() or ["?"])[-1][:160])
