@@ -32,3 +32,5 @@ git add projects/20261120-market-deep-druckenmiller/04_assets/clip_manifest.json
 > - 렌더: 장면 44/44, 910.6초, -14.1 LUFS, 겹침 0, sync-qa 통과(중앙값 0.05초). 목소리는 edge 초안(ElevenLabs 401 — 키 확인 필요)
 > - 완성본: Drive `ytflow/영상/20261120-market-deep-druckenmiller/druckenmiller_final_clips.mp4` (+ thumbnail_A/B/C)
 > - 처음 렌더 실패 원인: C 드라이브 여유 3.6GB → HyperFrames 임시 프레임 공간 부족. TEMP 를 E 로 돌려 해결
+> PC 2026-11-21 최종 목소리: ElevenLabs Teo(eleven_v4, 채널 설정)로 다시 렌더 — 장면 44/44, 923.3초, -14.5 LUFS, 겹침 0, sync-qa 통과(중앙값 0.05초·95% 0.19초). 79박자 모두 ElevenLabs(Drive 캐시 재사용, 이번에 쓴 글자 3,020). Drive `ytflow/영상/20261120-market-deep-druckenmiller/druckenmiller_final_elevenlabs.mp4`
+> - PC 에서 401 이 났던 이유: PC 는 환경변수 ELEVENLABS_API_KEY 만 읽음(클라우드는 네트워크 비밀값을 프록시가 끼워 줌). 목록의 ⋯ 에서 복사되는 값은 키 ID(64자)라 쓸 수 없음 → `npx @elevenlabs/cli onboard` 로 새 키(51자, sk_) 발급해 사용자 환경변수에 저장
