@@ -34,9 +34,9 @@ def bite(ch, beat, find, ko, label=TALK):
         label="iConnections 공식 채널 (YouTube) · 2026.11.17 · 인용", beats=[{"say": beat}],
         clip={"src": "druck", "lang": "en", "cuts": [{"find": find, "ko": ko}], "fit": "contain"}, show_en=False)
 
-HL = "모건스탠리 공식 'Hard Lessons' 인터뷰 (2026년 초 공개) · 인용"
+HL = "모건스탠리 공식 'Hard Lessons' 인터뷰 (2026.2.27) · 인용"
 def hbite(ch, beat, src, find, ko):
-    add(type="bite", chapter=ch, who="스탠리 드러켄밀러", role="모건스탠리 'Hard Lessons' 인터뷰 · 2026년 초",
+    add(type="bite", chapter=ch, who="스탠리 드러켄밀러", role="모건스탠리 'Hard Lessons' 인터뷰 · 2026년 2월",
         label=HL, beats=[{"say": beat}], clip={"src": src, "lang": "en", "cuts": [{"find": find, "ko": ko}], "fit": "contain"}, show_en=False)
 
 # 0 여는 장면
@@ -48,7 +48,7 @@ add(type="bignum", chapter=0, label=TALK + " · 머니와이즈(야후) 11.20",
             "motion": [{"t": "65개", "do": "stat", "id": "pos", "value": "-30개", "label": "보유 종목 · 13F", "sub": "6월 말 대비", "x": 1640, "y": 220, "fs": 92}]}])
 bite(0, "그가 지금의 자신을 설명한 한 문장입니다.", "We're trying to not lose money, as opposed to make money.",
      "우리는 지금, 돈을 벌기보다 잃지 않으려 하고 있습니다.")
-add(type="kinetic", chapter=0, beats=[{"say": "그런데 불과 9개월 전, 같은 진행자 앞에서 그는 전혀 다른 말을 했습니다. 그 사이 그의 생각은 어떻게 흘러왔을까요?", "hit": ["9개월", "흘러왔을까요"]}])
+add(type="kinetic", chapter=0, beats=[{"say": "그런데 불과 9개월 전, 그는 전혀 다른 말을 했습니다. 그 사이 그의 생각은 어떻게 흘러왔을까요?"}])
 add(type="chapter", chapter=1, num="1", title="왜 이 사람의 말을 듣나", icon="user-round", look="board",
     beats=[{"say": "먼저, 왜 이 사람의 말에 시장이 귀를 기울이는지부터 보겠습니다."}])
 add(type="checklist", chapter=1, label="모틀리풀 인물 소개 등 널리 보도된 이력 · '손실 난 해 없음'은 알려진 평가", title="스탠리 드러켄밀러",
@@ -62,13 +62,13 @@ add(type="checklist", chapter=1, label="모틀리풀 인물 소개 등 널리 �
 hbite(1, "소로스에게서 무엇을 배웠냐는 질문에, 그는 올해 초 모건스탠리 인터뷰에서 이렇게 답했습니다.", "hl_sizing",
       "What I learned from him was sizing. It's not whether you're right or wrong, it's how much you make when you're right and how much you lose when you're wrong.",
       "그에게서 배운 건 크기였습니다. 맞느냐 틀리느냐가 아니라, 맞았을 때 얼마나 벌고 틀렸을 때 얼마나 잃느냐입니다.")
-add(type="kinetic", chapter=1, beats=[{"say": "틀렸을 때 얼마나 잃느냐. 지금 그가 말하는 '안 잃기'의 뿌리가 이 문장입니다.", "hit": ["잃느냐", "안 잃기"]}])
+add(type="kinetic", chapter=1, beats=[{"say": "틀렸을 때 얼마나 잃느냐. 지금 그가 말하는 '안 잃기'의 뿌리가 이 문장입니다."}])
 add(type="quote", chapter=1, insight=True, label="널리 인용되는 그의 원칙 (구루포커스·인베스팅닷컴 등) · 정확한 문구·시점은 출처마다 조금 다름",
     who="스탠리 드러켄밀러", role="여러 강연·인터뷰에서 해 온 말로 알려짐", quote="전체 시장을 움직이는 건 실적이 아니라 연준이다",
-    keyword="연준", orig="Earnings don't move the overall market; it's the Federal Reserve Board.",
+    keyword="", orig="Earnings don't move the overall market; it's the Federal Reserve Board.",
     beats=[{"say": "그의 말을 이해하려면, 그가 시장을 어떻게 읽는지부터 알아야 합니다. 그가 오래 해 온 말로 널리 인용되는 문장이 있습니다. 전체 시장을 움직이는 건 기업 실적이 아니라 연준, 즉 미국 중앙은행이다."},
            {"say": "회사 하나의 주가는 실적이 움직이지만, 시장 전체의 물결은 돈이 얼마나 풀리고 거둬지느냐가 만든다는 뜻입니다."}])
-add(type="motionboard", chapter=1, label="이 채널의 비유 · 근거: 널리 인용되는 그의 원칙(유동성·연준)", title="그림으로 보면 — 수문과 배",
+add(type="motionboard", chapter=1, label="근거: 널리 인용되는 그의 원칙(유동성·연준)", title="그림으로 보면 — 수문과 배",
     els={"gate": {"kind": "card", "x": 330, "y": 470, "icon": "landmark", "label": "연준 (수문)", "w": 220},
          "lv": {"kind": "dashed", "pts": [[560, 640], [1780, 640]]},
          "b1": {"kind": "card", "x": 850, "y": 470, "icon": "ship", "label": "좋은 회사", "w": 190},
@@ -78,8 +78,8 @@ add(type="motionboard", chapter=1, label="이 채널의 비유 · 근거: 널리
          "shut": {"kind": "text", "x": 1180, "y": 800, "text": "수문을 닫으면 → 다 같이 내려감", "size": 52, "color": "red"}},
     beats=[{"say": "그림으로 보면 이렇습니다. 연준은 수문입니다. 시장의 배들은 각자 성능이 다르지만, 같은 물 위에 떠 있습니다.", "do": ["gate", "lv", "b1", "b2", "b3"], "at": {"b1": "배들은"}},
            {"say": "수문을 열어 돈이 풀리면 물이 차올라 좋은 배도 약한 배도 함께 뜹니다.", "do": ["open"], "at": {"open": "열어"}},
-           {"say": "수문을 닫으면 반대로 다 같이 내려갑니다. 그래서 그는 회사 하나보다, 연준과 회사들이 돈을 빌리는 금리를 먼저 봅니다.", "do": ["shut", {"hi": "gate"}], "at": {"shut": "닫으면"}}])
-add(type="kinetic", chapter=1, beats=[{"say": "그리고 그는 거래 대부분을 18개월에서 3년 앞을 보고 한다고 말합니다. 그래서 지금 그의 말은 늘 1, 2년 뒤를 향합니다.", "hit": ["18개월", "3년"]}])
+           {"say": "수문을 닫으면 반대로 다 같이 내려갑니다. 그래서 그는 회사 하나보다, 연준과 회사들이 돈을 빌리는 금리를 먼저 봅니다.", "do": ["shut"], "at": {"shut": "닫으면"}}])
+add(type="kinetic", chapter=1, beats=[{"say": "그리고 그는 거래 대부분을 18개월에서 3년 앞을 보고 한다고 말합니다. 그래서 지금 그의 말은 늘 1, 2년 뒤를 향합니다."}])
 add(type="chapter", chapter=2, num="2", title="생각의 흐름 ① 엔비디아, 2022~2024", icon="chip", look="board",
     beats=[{"say": "그의 생각이 흘러온 길, 그 출발점은 2022년의 엔비디아입니다."}])
 add(type="checklist", chapter=2, label="모건스탠리 'Hard Lessons' 인터뷰(2026년 초) 본인 회고 · 주가는 그의 말(분할 전 기준) · 매도 후회는 포춘 2024.10.18 보도와 일치", title="그가 직접 말한 엔비디아 이야기",
@@ -93,7 +93,7 @@ add(type="checklist", chapter=2, label="모건스탠리 'Hard Lessons' 인터뷰
 hbite(2, "그 순간을 그는 이렇게 기억합니다.", "hl_nvidia",
       "I violated everything I said in the interview. I couldn't stand success. It had gone from $150 to $800. I was long-term, and I couldn't deal with it, and I sold it, and then it was $1,400, like five weeks later, and I was sick.",
       "인터뷰에서 한 말을 전부 어겼습니다. 성공을 견디지 못한 거죠. 150달러에서 800달러가 됐고, 길게 보겠다던 저는 그걸 감당하지 못하고 팔았습니다. 그리고 5주 뒤 1,400달러가 됐고, 저는 속이 뒤집혔습니다.")
-add(type="kinetic", chapter=2, beats=[{"say": "맞히는 것보다 어려운 건 버티는 것. 전설의 투자자도 그걸 못 했다고 스스로 말합니다.", "hit": ["버티는", "스스로"]}])
+add(type="kinetic", chapter=2, beats=[{"say": "맞히는 것보다 어려운 건 버티는 것. 전설의 투자자도 그걸 못 했다고 스스로 말합니다."}])
 add(type="chapter", chapter=3, num="3", title="생각의 흐름 ② 2026년 초, 과열을 보다", icon="flame", look="board",
     beats=[{"say": "그리고 2026년 초. 같은 인터뷰에서 그는 AI를 보는 눈이 바뀌었다고 말합니다."}])
 hbite(3, "작년 여름부터 가을 사이, AI 쪽이 이상하게 달아올랐다는 겁니다.", "hl_heated",
@@ -116,7 +116,7 @@ hbite(3, "한국 이야기는 그의 목소리로 들어 보겠습니다.", "hl_
 hbite(3, "그리고 이렇게 덧붙였습니다. 요즘 자신이 너무 겁을 낸다며,", "hl_nerve",
       "I'm trying to regain some of my nerve just because it's more fun.",
       "배짱을 좀 되찾으려고 합니다. 그게 더 재미있으니까요.")
-add(type="kinetic", chapter=3, beats=[{"say": "올해 초의 그는, 더 크게 걸고 싶어 하는 투자자였습니다.", "hit": ["더 크게"]}])
+add(type="kinetic", chapter=3, beats=[{"say": "올해 초의 그는, 더 크게 걸고 싶어 하는 투자자였습니다."}])
 add(type="chapter", chapter=4, num="4", title="생각의 흐름 ③ 9월 말 장부", icon="file-text", look="board",
     beats=[{"say": "그 판은 실제 장부에서 어떻게 나타났을까요. 미국에서 큰 운용사는 분기마다 보유 주식을 13F라는 서류로 공개합니다."}])
 add(type="checklist", chapter=4, label=SRC13F + " · 6월 말 평가액", title="9월 말까지 다 판 것", x=150, text_w=1000, skin="newsprint",
@@ -146,7 +146,7 @@ add(type="share", chapter=4, label=SRC13F + " · 비중은 보도 계산", title
     beats=[{"say": "그림으로 보면 더 분명합니다. 장부 전체를 막대 하나로 놓겠습니다.", "show": ["total"]},
            {"say": "유전자 검사 회사 나테라 한 종목이 29.2%를 차지합니다. AI를 가장 잘 쓸 곳이 바이오라던 그 말과 이어지는 자리입니다.", "show": ["p0"]},
            {"say": "6월 말엔 16.6%였습니다. 다른 것을 줄이면서, 이 한 종목의 몫이 거의 두 배가 된 겁니다.", "show": ["mark"]}])
-add(type="motionboard", chapter=4, label="이 채널의 해석 · 근거: " + SRC13F, title="그림으로 보면 — 돈이 옮겨 간 칸 (해석)",
+add(type="motionboard", chapter=4, label="근거: " + SRC13F, title="그림으로 보면 — 돈이 옮겨 간 칸",
     els={"lt": {"kind": "text", "x": 380, "y": 220, "text": "덜어 낸 칸", "size": 52, "color": "red"},
          "rt": {"kind": "text", "x": 1430, "y": 220, "text": "채운 칸", "size": 52, "color": "green"},
          "chip": {"kind": "card", "x": 380, "y": 420, "icon": "cpu", "label": "칩·플랫폼", "w": 200, "value": "다 팔거나 줄임", "vsize": 30},
@@ -155,16 +155,16 @@ add(type="motionboard", chapter=4, label="이 채널의 해석 · 근거: " + SR
          "gold": {"kind": "card", "x": 1430, "y": 600, "icon": "gem", "label": "금광", "w": 200, "value": "3곳 새로", "vsize": 36},
          "bio": {"kind": "card", "x": 1730, "y": 600, "icon": "dna", "label": "나테라", "w": 200, "value": "29.2%", "vsize": 44},
          "m1": {"kind": "arrow", "from": "chip", "to": "hdd", "color": "navy", "bend": 0.1}},
-    beats=[{"say": "여기서부터는 해석입니다. 장부를 두 칸으로 나누면, 왼쪽은 덜어 낸 칸입니다. AI의 칩과 플랫폼, 그리고 지수 전체가 오르면 버는 콜옵션 약 3억 4,100만 달러어치.", "do": ["lt", "chip", "idx"], "at": {"idx": "지수"}},
+    beats=[{"say": "장부를 두 칸으로 나누면, 왼쪽은 덜어 낸 칸입니다. AI의 칩과 플랫폼, 그리고 지수 전체가 오르면 버는 콜옵션 약 3억 4,100만 달러어치.", "do": ["lt", "chip", "idx"], "at": {"idx": "지수"}},
            {"say": "오른쪽은 채운 칸입니다. 저장장치, 금광, 그리고 나테라.", "do": ["rt", "hdd", "gold", "bio", "m1"], "at": {"hdd": "저장장치", "gold": "금광", "bio": "나테라"}},
-           {"say": "시장 전체의 방향에 거는 돈은 빼고, 경기가 식어도 버틸 만한 곳과 자기가 확신하는 몇 곳에 모은 모양입니다.", "do": [{"hi": "gold"}, {"hi": "bio"}]}])
+           {"say": "시장 전체의 방향에 거는 돈은 빼고, 경기가 식어도 버틸 만한 곳과 자기가 확신하는 몇 곳에 모은 모양입니다.", "do": []}])
 add(type="versus", chapter=4, insight=True, label="13F 는 분기 말 하루의 사진, 45일 뒤 공개 · 공매도·통화·채권·원자재는 나오지 않음",
     left={"value": "보임", "label": "13F: 미국 주식·옵션 매수", "icon": "eye"},
     right={"value": "안 보임", "label": "구리 숏·통화·채권", "icon": "eye-off"},
     beats=[{"say": "다만 이 장부에는 한계가 있습니다. 9월 30일 하루의 사진이고, 공개는 한 달 반 뒤입니다. 그리고 공매도나 통화, 채권, 원자재는 나오지 않습니다.", "motion": [{"t": "한 달 반", "do": "stat", "id": "lag", "value": "45일", "label": "13F 기준일 → 공개", "sub": "늦게 보는 사진", "x": 960, "y": 210, "fs": 80, "static": True}]},
            {"say": "그가 말한 구리 공매도도 이 장부에는 보이지 않습니다. 그래서 장부만 보고 그의 생각을 다 안다고 할 수는 없습니다."}])
 add(type="chapter", chapter=5, num="5", title="생각의 흐름 ④ 11월 17일, 쉬다", icon="pause", look="board",
-    beats=[{"say": "그리고 11월 17일, 텍사스 오스틴. 진행자는 다시 모건스탠리의 일리아나 부잘리였습니다. 배짱을 되찾겠다던 그가 이번엔 쉬겠다고 말합니다."}])
+    beats=[{"say": "그리고 11월 17일, 텍사스 오스틴. 배짱을 되찾겠다던 그가 이번엔 쉬겠다고 말합니다."}])
 add(type="checklist", chapter=5, label=TALK + " · 구리 숏은 보도(primexbt 등)", title="11월 17일, 그가 한 말",
     x=150, text_w=1000, skin="newsprint",
     rows=[{"label": "주식은 사는 쪽도 파는 쪽도 거의 없음", "state": "warn", "t": "주식"},
@@ -176,7 +176,7 @@ add(type="checklist", chapter=5, label=TALK + " · 구리 숏은 보도(primexbt
 bite(2, "2027년 이야기는 그의 입으로 직접 들어 보겠습니다.",
      "I'm really alert to the fact that the second half of '27 could be economically disappointing",
      "2027년 하반기 경기가 실망스러울 수 있다는 점을, 저는 아주 경계하고 있습니다.")
-add(type="motionboard", chapter=5, id_=0, label="이 채널의 비유 · 근거: 본인 발언 '쉬는 중, 이틀일 수도 여섯 달일 수도'(머니와이즈)",
+add(type="motionboard", chapter=5, id_=0, label="근거: 본인 발언 '쉬는 중, 이틀일 수도 여섯 달일 수도'(머니와이즈)",
     title="그림으로 보면 — 안개 낀 길",
     els={"road": {"kind": "dashed", "pts": [[160, 740], [1760, 740]]},
          "car": {"kind": "card", "x": 380, "y": 520, "icon": "car", "label": "드러켄밀러", "w": 220},
@@ -190,12 +190,12 @@ add(type="motionboard", chapter=5, id_=0, label="이 채널의 비유 · 근거:
 bite(2, "그의 말로는 이렇습니다.", "I'm just taking a break, which could last two days or six months.",
      "저는 그냥 쉬는 중입니다. 그게 이틀일 수도, 여섯 달일 수도 있습니다.")
 add(type="quote", chapter=5, insight=True, label=TR, who="스탠리 드러켄밀러", role="TomorrowX 서밋 · 11월 17일 (번역본 요지)",
-    quote="토큰이 아니라, 일을 판다", keyword="일을", orig="Selling tasks, not tokens (번역본 기준)",
+    quote="토큰이 아니라, 일을 판다", keyword="", orig="Selling tasks, not tokens (번역본 기준)",
     beats=[{"say": "중국어로 옮겨진 대담 정리를 기준으로 하면, 그는 AI를 만드는 기반 시설보다 AI를 써서 돈을 버는 응용 쪽을 본다고 했습니다. 요지는 이렇습니다. 토큰, 즉 AI의 계산량을 파는 것이 아니라, 일을 대신 해 주고 그 값을 받는 회사."},
            {"say": "그리고 AI의 약세 시나리오는 기술이 아니라 정치와 돈을 빌리는 쪽의 위험이라며, 기술 혁신 자체에 반대로 걸지는 않겠다고 했습니다. 이 부분은 번역본 기준이라, 원문 대조가 남아 있습니다."}])
 add(type="chapter", chapter=6, num="6", title="생각은 어떻게 흘렀나", icon="git-branch", look="board",
     beats=[{"say": "이제 네 장면을 한 줄에 놓고 보겠습니다."}])
-add(type="motionboard", chapter=6, label="이 채널의 정리 · 근거: 모건스탠리 'Hard Lessons'(2026년 초)·13F(9.30)·TomorrowX 대담(11.17)·포춘 2024.10.18", title="그림으로 보면 — 그의 생각이 흐른 길",
+add(type="motionboard", chapter=6, label="근거: 모건스탠리 'Hard Lessons'(2026년 초)·13F(9.30)·TomorrowX 대담(11.17)·포춘 2024.10.18", title="그림으로 보면 — 그의 생각이 흐른 길",
     els={"line": {"kind": "dashed", "pts": [[150, 560], [1770, 560]]},
          "y1": {"kind": "text", "x": 300, "y": 470, "text": "2022", "size": 50, "color": "ink"},
          "y2": {"kind": "text", "x": 640, "y": 470, "text": "2024", "size": 50, "color": "ink"},
@@ -219,9 +219,9 @@ add(type="versus", chapter=6, label="2026년 초: 모건스탠리 'Hard Lessons'
     beats=[{"say": "가장 선명하게 뒤집힌 건 구리입니다. 올해 초 그는 구리는 다들 하는 거래라며 갖고 있었고, 연준은 금리를 올리지 않고 아마 내릴 거라며 미국 경제가 훨씬 강해질 거라고 봤습니다."},
            {"say": "11월에는 구리 값이 내리는 쪽에 걸었고, 2027년 하반기 경기를 걱정합니다. 같은 사람이 1년도 안 돼 정반대 자리에 섰습니다."}])
 hbite(2, "그 스스로도 이렇게 말합니다.", "hl_mind", "I tend to change my mind every three weeks.", "저는 3주마다 생각을 바꾸는 편입니다.")
-add(type="kinetic", chapter=6, beats=[{"say": "대가의 힘은 맞히는 데가 아니라, 틀렸다 싶으면 바로 바꾸는 데 있습니다.", "hit": ["바로", "바꾸는"]}])
-add(type="kinetic", chapter=6, beats=[{"say": "왜 바뀌었는지 그가 하나하나 설명하진 않았습니다. 다만 대담 정리를 보면, 회사들이 돈을 빌리는 금리 차이가 벌어지고 있다고 했습니다. 연준과 돈의 흐름을 먼저 보는 그의 원칙대로라면, 그 신호가 판을 바꾼 것으로 볼 수 있습니다. 이건 이 채널의 해석입니다.", "hit": ["금리 차이", "해석"]}])
-add(type="bars", chapter=6, label="월가 전망 보도(11.13~18) · 오름폭은 계산 · 전망은 의견",
+add(type="kinetic", chapter=6, beats=[{"say": "대가의 힘은 맞히는 데가 아니라, 틀렸다 싶으면 바로 바꾸는 데 있습니다."}])
+add(type="kinetic", chapter=6, beats=[{"say": "왜 바뀌었는지 그가 하나하나 설명하진 않았습니다. 다만 대담 정리를 보면, 회사들이 돈을 빌리는 금리 차이가 벌어지고 있다고 했습니다. 연준과 돈의 흐름을 먼저 보는 그의 원칙대로라면, 그 신호가 판을 바꾼 것으로 볼 수 있습니다."}])
+add(type="bars", chapter=6, label="월가 전망 보도(11.13~18) · 오름폭은 계산",
     title="같은 때, 월가의 2027년 말 S&P 500 전망", unit="", emph=4, skin="dark-doc",
     items=[{"label": "11월 16일 종가", "value": 7416.59, "text": "7,416.59", "t": "16일"},
            {"label": "웰스파고 (+10.6%)", "value": 8200, "text": "8,200", "t": "웰스파고"},
@@ -230,15 +230,15 @@ add(type="bars", chapter=6, label="월가 전망 보도(11.13~18) · 오름폭�
            {"label": "UBS (+20.0%)", "value": 8900, "text": "8,900", "t": "UBS"}],
     beats=[{"say": "그런데 같은 주, 월가의 대형 은행들은 꽤 다르게 봤습니다. 11월 16일 S&P 500 종가는 7,416.59. 웰스파고는 내년 말 8,200을 내놨습니다. 10.6% 오른다는 뜻입니다."},
            {"say": "모건스탠리와 골드만삭스는 8,700, 17.3%입니다. UBS는 8,900으로 20.0%입니다."}])
-add(type="versus", chapter=6, insight=True, label="드러켄밀러: TomorrowX 대담 11.17 · 모건스탠리 마이크 윌슨: 2027 전망(스톡트위츠 보도) · 의견이며 사실이 아닙니다",
+add(type="versus", chapter=6, insight=True, label="드러켄밀러: TomorrowX 대담 11.17 · 모건스탠리 마이크 윌슨: 2027 전망(스톡트위츠 보도)",
     left={"value": "실망 가능", "label": "드러켄밀러: 2027년 하반기 경기", "icon": "cloud-fog"},
     right={"value": "+15%", "label": "모건스탠리 윌슨: S&P 500 8,700", "icon": "trending-up"},
     beats=[{"say": "한쪽은 2027년 하반기 경기가 실망스러울 수 있다며 쉬고, 다른 쪽은 주가가 15% 넘게 오른다고 봅니다. 누가 맞을까요?"},
-           {"say": "흥미로운 건 겹치는 부분입니다. 모건스탠리의 마이크 윌슨도 2027년에는 기업 이익 증가가 크게 느려진다고 봤습니다. 다만 이미 주가가 싸졌으니 위험을 더 질 만하다는 겁니다. 둘은 같은 둔화를 보면서, 그 값이 이미 주가에 들어갔느냐를 다르게 판단한 셈입니다. 이건 이 채널의 해석입니다."}])
+           {"say": "흥미로운 건 겹치는 부분입니다. 모건스탠리의 마이크 윌슨도 2027년에는 기업 이익 증가가 크게 느려진다고 봤습니다. 다만 이미 주가가 싸졌으니 위험을 더 질 만하다는 겁니다. 둘은 같은 둔화를 보면서, 그 값이 이미 주가에 들어갔느냐를 다르게 판단한 셈입니다."}])
 add(type="chapter", chapter=7, num="7", title="내 계좌로 옮기면", icon="wallet", look="board",
     beats=[{"say": "이 이야기를 한국 계좌로 옮겨 보겠습니다. 투자 권유가 아니라, 질문을 옮기는 겁니다."}])
-add(type="kinetic", chapter=7, beats=[{"say": "한국 투자자에게 남는 질문이 하나 있습니다. 올해 초 그는 한국에 큰 포지션이 있다고 했습니다. 지금도 그런지는 알 수 없습니다. 13F에는 미국에 상장된 주식만 나오기 때문입니다.", "hit": ["한국", "알 수 없습니다"]}])
-add(type="checklist", chapter=7, label="이 채널이 고른 확인 지표 · 근거: 본인 발언(신용 스프레드·구리·2027 하반기, 번역본 포함)", title="그의 걱정이 맞는지 볼 신호",
+add(type="kinetic", chapter=7, beats=[{"say": "한국 투자자에게 남는 질문이 하나 있습니다. 올해 초 그는 한국에 큰 포지션이 있다고 했습니다. 지금도 그런지는 알 수 없습니다. 13F에는 미국에 상장된 주식만 나오기 때문입니다."}])
+add(type="checklist", chapter=7, label="근거: 본인 발언(신용 스프레드·구리·2027 하반기, 번역본 포함)", title="그의 걱정이 맞는지 볼 신호",
     x=150, text_w=1000, skin="newsprint",
     rows=[{"label": "신용 스프레드 — 회사채와 국채 금리 차가 벌어지나", "state": "warn", "t": "신용"},
           {"label": "구리 가격 — 경기 기대의 온도계", "state": "warn", "t": "구리"},
@@ -246,14 +246,14 @@ add(type="checklist", chapter=7, label="이 채널이 고른 확인 지표 · �
           {"label": "2027년 2월 중순 다음 13F — 쉼이 끝났나", "state": "warn", "t": "13F"}],
     beats=[{"say": "그의 걱정이 맞는지는 네 가지로 볼 수 있습니다. 회사들이 돈을 빌리는 금리와 국채 금리의 차이가 계속 벌어지는지, 그리고 경기 기대의 온도계인 구리 값이 어디로 가는지.", "upto": 2},
            {"say": "12월 연준 회의에서 금리를 더 올리는지, 그리고 내년 2월 중순 나올 다음 장부에서 그가 다시 주식을 늘렸는지입니다.", "upto": 4}])
-add(type="checklist", chapter=7, label="포춘 2024.10.18 · 13F 기준일 9월 30일 · 본인 발언(이틀일 수도)", title="이 해석이 틀리는 경우",
+add(type="checklist", chapter=7, label="포춘 2024.10.18 · 13F 기준일 9월 30일 · 본인 발언(이틀일 수도)", title="틀릴 수 있는 경우",
     x=150, text_w=1000, skin="newsprint",
     rows=[{"label": "쉼이 이틀로 끝나면 — 오늘의 '안 잃기'는 짧은 신호", "state": "bad", "t": "이틀"},
           {"label": "13F 는 9월 30일의 사진 — 지금은 다를 수 있음", "state": "bad", "t": "사진"},
           {"label": "대가도 틀린다 — 2024년 엔비디아를 일찍 판 것을 '큰 실수'라 함", "state": "bad", "t": "2024년"}],
     beats=[{"say": "물론 틀릴 수 있습니다. 그 스스로 쉼이 이틀일 수도 있다고 했고, 장부는 9월 30일의 사진입니다.", "upto": 2},
            {"say": "그리고 그는 2024년, 엔비디아를 일찍 판 것이 큰 실수였다고 스스로 말한 적이 있습니다. 대가의 장부도 정답지가 아니라, 생각을 읽는 단서입니다.", "upto": 3}])
-add(type="checklist", chapter=7, label="이 영상의 정리 · 근거: 대담(11.17)·13F(9.30)·월가 전망 보도", title="정리하면 세 가지", x=150, text_w=1000, skin="newsprint",
+add(type="checklist", chapter=7, label="근거: 대담(11.17)·13F(9.30)·월가 전망 보도", title="정리하면 세 가지", x=150, text_w=1000, skin="newsprint",
     rows=[{"label": "흐름: AI 확신 → 과열 경계 → 칸 옮기기 → 쉬기", "state": "ok", "t": "첫째"},
           {"label": "장부: 칩·플랫폼 ↓ · 저장장치·금광·나테라 ↑", "state": "ok", "t": "둘째"},
           {"label": "월가: 2027년 말 +10~20% — 같은 둔화, 다른 판단", "state": "ok", "t": "셋째"}],
@@ -268,7 +268,7 @@ for s in S:
 
 spec = {
  "title": "드러켄밀러의 경고 '벌기보다 안 잃기' — 그가 판 것과 산 것",
- "brand": "market", "zoom": "off",
+ "brand": "market", "zoom": "off", "opinion_tag": False,
  "core_message": "11월 17일 드러켄밀러는 '돈을 벌기보다 잃지 않으려 한다', 주식은 '거의 없다', 2027년 하반기 경기가 실망스러울 수 있다고 했다. 이는 하락 예언이 아니라 앞이 안 보여 속도를 줄인 것(쉼은 이틀일 수도 여섯 달일 수도). 9월 말 13F 에서는 알파벳·AMD·샌디스크를 다 팔고 TSMC 를 94.5% 줄이는 대신 시게이트(+180%)·금광 3곳·나테라(29.2%)로 칸을 옮겼다 — AI 를 떠난 게 아니라 AI 안에서 칸을 고르는 중.",
  "question": "전설적인 투자자가 '지금은 안 한다'고 했다. 왜, 그리고 실제로는 무엇을 했을까?",
  "logic": ["여는 장면: '거의 없다' + 95→65개 + 원본 발언(안 잃기)", "1) 왜 이 사람인가: 이력", "2) 그가 한 말 네 가지 → 원본 발언(2027) → 비유(안개 낀 길) → 원본 발언(쉼)",
@@ -286,7 +286,7 @@ spec = {
               {"term": "유동성", "plain": "시장에 풀린 돈의 양. 중앙은행이 금리와 돈 풀기로 조절"}, {"term": "신용 스프레드", "plain": "회사가 돈을 빌리는 금리와 국채 금리의 차이. 벌어지면 시장이 위험을 크게 본다는 뜻"}],
  "footage": {
    **{k: {"file": f"{k}.mp4", "url": "https://prod-mssip.morganstanley.com/insights/videos/hard-lessons/duquesne-stan-druckenmiller-iliana-bouzali",
-          "start": st, "end": en, "who": "스탠리 드러켄밀러", "credit": "Morgan Stanley 'Hard Lessons' 공식 영상 (2026년 초)", "license": "인용(20초 이내)"}
+          "start": st, "end": en, "who": "스탠리 드러켄밀러", "credit": "Morgan Stanley 'Hard Lessons' 공식 영상 (2026.2.27)", "license": "인용(20초 이내)"}
       for k, st, en in [("hl_sizing", 490.4, 497.0), ("hl_heated", 86.0, 97.9), ("hl_biotech", 310.3, 317.8), ("hl_korea", 626.4, 634.6),
                         ("hl_nerve", 1482.0, 1486.4), ("hl_nvidia", 1196.0, 1211.9), ("hl_mind", 605.6, 608.4)]},
    "druck": {"file": "druckenmiller_tomorrowx_20261117.mp4", "url": "https://www.youtube.com/watch?v=6r3D-CMJkuI",
@@ -308,7 +308,7 @@ spec = {
       "left": {"value": "-100%", "label": "알파벳 (다 팔음)"}, "right": {"value": "+180%", "label": "시게이트"},
       "headline": "드러켄밀러 '안 잃기'", "hl": ["안 잃기"], "marks": [],
       "why": ["위키미디어 공용에 쓸 수 있는 드러켄밀러 사진이 없음 → 인물 얼굴 대신 이름을 큰 글씨로 (docs/55 §3-4)"]},
-     {"id": "B", "name": "인물 — 얼굴 + 알파벳 0", "layout": "person", "image": {"file": "04_assets/footage/raw/druckenmiller.jpg"}, "person": {"name": "스탠리 드러켄밀러", "role": "듀케인 패밀리 오피스"}, "top": "같은 진행자 앞, 9개월 사이", "lines": ["배짱에서", "쉼으로"], "hl": ["쉼으로"], "credit": "화면: Morgan Stanley 'Hard Lessons' 공식 영상"}]}
+     {"id": "B", "name": "인물 — 얼굴 + 알파벳 0", "layout": "person", "image": {"file": "04_assets/footage/raw/druckenmiller.jpg"}, "person": {"name": "스탠리 드러켄밀러", "role": "듀케인 패밀리 오피스"}, "top": "2월 → 11월, 9개월 사이", "lines": ["배짱에서", "쉼으로"], "hl": ["쉼으로"], "credit": "화면: Morgan Stanley 'Hard Lessons' 공식 영상"}]}
 }
 spec["scenes"] = S
 (P/"02_script/hybrid.json").write_text(json.dumps(spec, ensure_ascii=False, indent=1), encoding="utf-8")
