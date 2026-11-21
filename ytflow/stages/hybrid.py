@@ -163,8 +163,10 @@ class HDoc(hyper.Doc):
         i = self._id()
         col = "#FFFFFF" if dark else "#5a5f6a"
         bg = "rgba(0,0,0,.45)" if dark else "rgba(251,248,241,.85)"
-        self._hud_or_items().append(f'<div id="{i}" style="position:absolute;right:56px;top:40px;padding:6px 14px;background:{bg};border-radius:6px;'
-                          f'font-family:sans;font-size:24px;color:{col};white-space:nowrap">{_e(text)}</div>')
+        # 긴 출처 줄이 왼쪽 위 장 표시를 덮지 않게 폭을 막고 두 줄까지 접음 (2026-11-21 사용자: "글씨끼리 겹치는 부분이 좀 있는데 이거 수정해주세요")
+        fs = 24 if len(text) <= 70 else 20
+        self._hud_or_items().append(f'<div id="{i}" style="position:absolute;right:56px;top:40px;max-width:1080px;padding:6px 14px;background:{bg};border-radius:6px;'
+                          f'font-family:sans;font-size:{fs}px;line-height:1.3;color:{col};text-align:right;white-space:normal;word-break:keep-all">{_e(text)}</div>')
         self.js.append(f'tl.fromTo("#{i}",{{opacity:0}},{{opacity:1,duration:0.4}},0.2);')
 
     def opinion_tag(self, dark: bool = False):

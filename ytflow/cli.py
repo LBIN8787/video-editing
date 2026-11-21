@@ -16,6 +16,7 @@
 from __future__ import annotations
 
 import argparse
+import sys
 from pathlib import Path
 import yaml
 
@@ -324,6 +325,9 @@ def main(argv: list[str] | None = None) -> None:
                     help="어느 레포의 말인가: main 메인(모든 채널 공통) · market · curiosity · issues · ai (생략하면 --project 이름으로 추정, 없으면 main)")
     mu = sub.add_parser("manual-ui", help="매뉴얼 그래프 보기·고치기 도구 (로컬 서버): 검토 기록·반영 대기·버전 올리기·md 편집")
     mu.add_argument("--port", type=int, default=8770); mu.add_argument("--host", default="127.0.0.1")
+    pf = sub.add_parser("preflight", help="업로드 전 종합 검수: 글씨·그래픽 겹침, 자막 밀림, 자막↔내레이션·화면↔소리 싱크, 대본 검사, 프레임 모음 (manual/09 §9-1)")
+    pf.add_argument("project")
+    pf.add_argument("--looked", action="store_true", help="프레임 모음(05_edit/preflight_frames.jpg)을 직접 본 뒤")
     sq = sub.add_parser("sync-qa", help="완성 영상의 자막·목소리·화면 싱크를 받아쓰기로 재기 → 05_edit/sync_qa.json")
     sq.add_argument("project")
     vi = sub.add_parser("voice-import", help="긴 내레이션 음성(ElevenLabs 웹·커넥터 mp3)을 대본 박자별로 잘라 03_voice 에 넣기")
@@ -365,6 +369,7 @@ def main(argv: list[str] | None = None) -> None:
     yu.add_argument("--dry-run", action="store_true", help="올리지 않고 무엇을 할지만 보기")
     yu.add_argument("--resume", action="store_true", help="이미 올린 영상에 빠진 단계(썸네일·자막·재생목록)만 다시")
     yu.add_argument("--update-meta", action="store_true", help="이미 올린 영상의 제목·설명란·태그를 youtube.md(제목 1번)로 다시 맞추기")
+    yu.add_argument("--skip-preflight", default="", metavar="이유", help="종합 검수 없이 올리기 (사용자가 허락한 경우만, 이유를 기록)")
     yp = sub.add_parser("yt-pack", help="유튜브 업로드 묶음: 설명란(챕터 타임코드·출처·면책)·제목 후보·태그 → 05_edit/youtube.md")
     yp.add_argument("project")
     ec = sub.add_parser("earnings-call", help="어닝콜 녹취록 정리: 준비 발언 핵심 문장·애널리스트 질문표·질문 주제 → 01_research/earnings/<TICKER>_call.md")
@@ -571,6 +576,10 @@ def main(argv: list[str] | None = None) -> None:
     elif a.cmd == "manual-ui":
         from .stages import manualgraph
         manualgraph.serve(a.port, a.host)
+    elif a.cmd == "preflight":
+        from .stages import preflight
+        r = preflight.run(Project.open(a.project), looked=a.looked)
+        sys.exit(0 if r["pass"] else 1)
     elif a.cmd == "sync-qa":
         from .stages import syncqa
         syncqa.run(Project.open(a.project))
@@ -610,6 +619,13 @@ def main(argv: list[str] | None = None) -> None:
         presenter.make(_P.open(a.project))
     elif a.cmd == "yt-publish":
         from .stages import ytpublish
+        if not (a.resume or a.update_meta or a.dry_run):   # 새로 올릴 때만: 업로드 전 종합 검수 (2026-11-21 사용자, manual/09 §9-1)
+            from .stages import preflight
+            why = preflight.gate(Project.open(a.project))
+            if why and not a.skip_preflight:
+                raise SystemExit(f"[yt-publish] 올리지 않음 — {why}")
+            if why:
+                print(f"[yt-publish] 종합 검수 건너뜀 (사유: {a.skip_preflight}) — {why}")
         if a.dry_run or a.via == "here":
             ytpublish.run(a.project, at=a.at, privacy=a.privacy, dry_run=a.dry_run, thumb=a.thumb, resume=a.resume, update_meta=a.update_meta)
         else:
