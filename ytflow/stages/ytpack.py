@@ -44,11 +44,17 @@ def run(project: str):
         tb = json.loads(tbp.read_text(encoding="utf-8"))
     as_of = (tb.get("daily") or {}).get("as_of") or ""
     brand = spec.get("brand") or tb.get("brand") or ""
-    tags = TAGS.get(brand, [])
+    # 편마다 태그 (2026-11-21 사용자: "영상노출을 높이기 위해 태그 등도 검토해주세요"): hybrid.json package.tags(그 편의 사건·인물·기업·
+    # 핫 키워드 — 사람들이 검색할 말) 먼저, 채널 공통은 뒤에. 유튜브 태그 합계 500자 안. 해시태그는 package.hashtags 또는 편 태그 앞 3개.
+    tags = []
+    for x in list(pk.get("tags") or []) + TAGS.get(brand, []):
+        if x and x not in tags and len(", ".join(tags + [x])) <= 480:
+            tags.append(x)
+    hashtags = pk.get("hashtags") or (pk.get("tags") or tags)[:3]
     desc = [spec.get("core_message", ""), ""]
     if as_of:
         desc += [f"📌 기준: {as_of}", ""]
-    desc += ["📌 챕터"] + [f"{a} {b}" for a, b in chapters] + ["", "📚 출처"] + [f"- {u}" for u in urls[:20]] + ["", DISCLAIMER, " ".join("#" + re.sub(r"\s+", "", x) for x in tags[:3])]
+    desc += ["📌 챕터"] + [f"{a} {b}" for a, b in chapters] + ["", "📚 출처"] + [f"- {u}" for u in urls[:20]] + ["", DISCLAIMER, " ".join("#" + re.sub(r"\s+", "", x).lstrip("#") for x in hashtags[:3])]
     md = [f"# 유튜브 업로드 — {project}", "", "## 제목 (기본 → 테스트 및 비교 후보)"]
     md += [f"{i}. {x}" for i, x in enumerate([pk.get("title", spec.get("title", ""))] + [x for x in pk.get("title_options", []) if x != pk.get("title")], 1)]
     md += ["", "## 설명란 (그대로 붙여 넣기)", "```", *desc, "```", "", "## 태그", ", ".join(tags), "",
