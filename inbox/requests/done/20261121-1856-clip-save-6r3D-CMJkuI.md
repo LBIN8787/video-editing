@@ -40,4 +40,4 @@ title: 드러켄밀러 TomorrowX 대담 — 네 구간 영상 파일로 받아 D
 
 ### 다음에 필요한 것
 
-사용자 PC에서 `python -m ytflow clip-fetch 20261120-market-deep-druckenmiller` 실행이 필요합니다. 같은 네 구간을 받아 `04_assets/clip_manifest.json` 을 만들고 Drive에 올리는 경로입니다. 참고로 yt-dlp 오류 메시지 자체가 `--cookies-from-browser` 사용을 안내하고 있으니, PC에서도 같은 봇 확인이 나오면 사용자 본인 브라우저 세션으로 실행하는 방법을 검토해야 합니다.
+사용자 PC에서 `python -m ytflow clip-fetch 20261120-market-deep-druckenmiller` 실행이 필요합니다. (저장소 루트의 `pc-clip-fetch.bat` 를 더블클릭하면 이 프로젝트가 기본값으로 잡혀 `git pull` → `clip-fetch` → 렌더 → 기록까지 한 번에 진행됩니다. 봇 확인에 막히면 그 화면에서 본인 브라우저(chrome/edge/firefox)를 입력해 로그인 쿠키로 다시 받도록 되어 있습니다.) 같은 네 구간을 받아 `04_assets/clip_manifest.json` 을 만들고 Drive에 올리는 경로입니다. 참고로 yt-dlp 오류 메시지 자체가 `--cookies-from-browser` 사용을 안내하고 있으니, PC에서도 같은 봇 확인이 나오면 사용자 본인 브라우저 세션으로 실행하는 방법을 검토해야 합니다.
