@@ -5,13 +5,16 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 HERE = Path(__file__).resolve().parent
 FONTS = (HERE.parents[2] / "ytflow" / "assets" / "fonts").as_uri()
-V = {
- "A": dict(img="kitchen_tl", side="left", css="background-size:1380px auto;background-position:330px 35%;background-repeat:no-repeat", lines=["참을수록", "의지가 <b>닳는다?</b>"], small="밤 11시, 냉장고 앞에서",
-           why="서윤의 장면(이 편의 첫 장면) = 내 이야기 같은 밤. 질문 제목을 감정으로 보완."),
- "B": dict(img="lab_tl", side="right", css="background-size:112%;background-position:0% 50%", lines=["쿠키 참으면", "먼저 <b>포기</b>했다"], small="1998년 실험",
-           why="원 실험의 장면·결과 한 줄. 제목(질문)과 겹치지 않고 '그런데?'를 남김."),
- "C": dict(img=None, side="left", lines=["의지력 <b>배터리</b>", "정말 있을까?"], small="23곳 · 36곳이 다시 해 보니",
-           why="종이 바탕 + 배터리 비유 = 영상의 모션그래픽과 같은 얼굴. 재검증 반전을 작은 줄로."),
+V = {   # v16 최종본에 맞춤 (2026-11-21 사용자: "썸네일 만들어주시고") — 영상의 첫 장면·결론과 같은 말
+ "A": dict(img="kitchen_tl", side="left", css="background-size:1380px auto;background-position:330px 35%;background-repeat:no-repeat",
+           lines=["밤 11시에", "<b>무너지는</b> 이유"], small="다이어트 2주째, 냉장고 앞",
+           why="영상 첫 문장('밤 11시 냉장고 앞에서 무너진 적')과 같은 장면 — 다이어트 중인 사람이 '내 얘기'로 알아봄. 제목(의지력 질문)은 원인 쪽, 썸네일은 상황 쪽으로 서로 보완."),
+ "B": dict(img="lab_tl", side="right", css="background-size:112%;background-position:0% 50%",
+           lines=["쿠키 참으면", "먼저 <b>포기</b>했다"], small="1998년 실험",
+           why="영상의 핵심 실험 한 장면·한 결과. 제목과 겹치지 않고 '정말?'을 남김."),
+ "C": dict(img="kitchen_tr", side="left", css="background-size:1400px auto;background-position:260px 55%;background-repeat:no-repeat",
+           lines=["의지력 탓은", "<b>반만</b> 맞다"], small="참을수록 닳는다는 말",
+           why="영상의 결론('반만 맞습니다')을 한 줄로 — 치킨으로 가는 손이 '그럼 나머지 반은?'을 부름."),
 }
 HTML = """<!doctype html><html><head><meta charset=utf-8><style>
 @font-face{font-family:BH;src:url(F/BlackHanSans-Regular.ttf)}@font-face{font-family:NGX;src:url(F/NanumGothic-ExtraBold.ttf)}
@@ -37,7 +40,7 @@ def main(art, out):
         for k, v in V.items():
             body = ""
             if v["img"]:
-                body += f'<div class=img style="background-image:url({(art / (v["img"] + ".jpg")).as_uri()});{v.get("css", "")}"></div><div class=panel></div><div class=tag>재현 삽화</div>'
+                body += f'<div class=img style="background-image:url({(art / (v["img"] + ".jpg")).as_uri()});{v.get("css", "")}"></div><div class=panel></div>'
             else:
                 body += '<div class=bat><i></i></div><div class=q>?</div>'
             body += f'<div class=s>{v["small"]}</div><div class=t>{"<br>".join(v["lines"])}</div>'
