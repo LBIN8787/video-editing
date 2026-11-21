@@ -3,36 +3,43 @@
 # kind: direction 방향·기준 요청 · clarify 뜻 바로잡기(모델 해석이 틀렸을 때) · tool 도구 요청 · review 영상에 대한 말
 # about: 이 말이 바로잡는 의도 ID (manual-ui '의도 정렬'의 intent:xxxx 에서 xxxx) · pending: 매뉴얼 '반영 대기'에도 넣음
 # scope: 이 말이 어느 층인가 — principle 영구 원칙 · standard 작업 기준 · style 스타일 기본값 · trial 실험 기록(금지로 만들지 않음)
+# repo: 어느 레포의 말인가 — main 메인(모든 채널 공통) · market 시장 · curiosity 호기심 · issues 시사 · ai AI (topics/<brand>). project 가 있으면 그 영상에서 한 말, 없으면 영상 밖에서 한 말
 feedback:
 - date: '2026-11-15'
   kind: clarify
+  repo: main
   quote: 나는 동영상의 이점을 살린다 즉 정적인 단순 다음 ppt 다음 ppt가 아니라 영상의 이점을 살려라 라고 했지 반드시 카메라를 움직여라 라고 하려고 했던게 아닌데
   about: 759c49eb
   note: v25 해석(README §2-5 카메라 계속 움직임·정지 비율 ≤0.3)이 뜻과 다름 — 의도 정렬에 과잉 해석으로 판정 (사용자 확인 대기)
   scope: standard
 - date: '2026-11-15'
   kind: direction
+  repo: main
   quote: '움직임 규칙: 말이 화면에 생기는 쪽으로 (카메라 고정이 기본, 정지 비율은 참고)'
   about: 759c49eb
   note: 매뉴얼 검토 질문 1 답 — README §2-5 v34
   scope: standard
 - date: '2026-11-15'
   kind: direction
+  repo: main
   quote: 스타일 MUST 들은 전부 굳이 필요하지 않다고 생각합니다. 고정규칙이 아니라 필요에 따라 유동적으로 할 수 있도록 해주세요
   note: 매뉴얼 검토 질문 2 답 — check G5 스타일 MUST 11줄·호기심 정지 비율 → SHOULD, 05·06 v34
   scope: style
 - date: '2026-11-15'
   kind: direction
+  repo: main
   quote: '영상 길이: 모든 롱폼 10분+, 시사 빠른 정리만 예외(5~8분), 많이 짧으면 쇼츠로 하세요'
   note: 매뉴얼 검토 질문 3 답 — README §2-4·08 §3·check G6 v34
   scope: standard
 - date: '2026-11-15'
   kind: direction
+  repo: curiosity
   quote: '호기심 채널 화면 뼈대: 애니메이션 무대가 기본'
   note: 매뉴얼 검토 질문 4 답 — 04 §0-4 이야기 그림판은 보조로, topics/curiosity v34
   scope: style
 - date: '2026-11-15'
   kind: direction
+  repo: main
   quote: 호기심 채널의 뼈대가 애니메이션 이라고 하기 전에 어떤 상황에서 애니메이션을 넣고 언제 그림판을 넣는지 즉 기능에 맞추어 그 기능들 연출들 편집법들은 언제 쓰이는지 먼저 정리해주세요 이는
     이 둘만이 아니라 전체 모두 해당하는 내용입니다.
   note: 'manual/10-when-to-use.md (원본 manual/usage.yaml): 기능 119개 용도 — 무대=행동, 그림판=엮어 한 장으로; 04·topics/curiosity
@@ -40,122 +47,146 @@ feedback:
   scope: standard
 - date: '2026-11-16'
   kind: direction
+  repo: main
   quote: 1.네 2.네 — 뉴스레터 화제를 시장 매일 단서로(manual/09 §3-0-1), 저장 위치 Git+Drive 역할 나누기("깃에 보관하되 깃에 보관하기 힘든 부분은 드라이브쪽을 활용하라는거야
     로컬드라이브 부담을 줄이는게 목적이고")
   scope: standard
 - date: '2026-11-16'
   kind: tool
+  repo: main
   quote: 담당 세션이 하는게 아니라 그냥 순차적으로 서로 메뉴얼 관리할때만 잠금하고 잠금도중에 누군가 사용하려하면 그냥 요청하면 되는거 아니야? / 왜냐면 바뀐 메뉴얼을 바탕으로 또 다음메뉴얼이
     작성되기도 하는데 지금은 텀이 너무 길잖아 / 내가 말한 방식으로 바꿔줘
   scope: standard
 - date: '2026-11-17'
   kind: direction
+  repo: market
   quote: 영상 자체에 추가로 내가 이전에 여러 인사이트나 매체들 언론인 언론사 들 등을 조사 활용해달라 했잖아 앞으로 영상에도 이런 매체나 언론인 언론사들의 인터뷰 내용이나 방송내용 등을 영상소스로
     첨부했으면 좋겠어
   project: 20261117-market-daily
   scope: standard
 - date: '2026-11-17'
   kind: direction
+  repo: market
   quote: 내가 이전에도 말했지만 다른 사람들이나 유명인들 매체 등등 여러 인사이트들을 그런 내용이 좀 부실한거같아 물론 사실과 인사이트는 별개로 구분해야하고
   project: 20261117-market-daily
   scope: standard
 - date: '2026-11-17'
   kind: direction
+  repo: market
   quote: 그리고 이번에 세미 아날리스의 보고서에 대한 내용이 없는거도 아쉬워요
   project: 20261117-market-daily
   scope: standard
 - date: '2026-11-17'
   kind: direction
+  repo: market
   quote: 그리고 반드시 하루1편을 올리는 것이 아니라 각 소스영상 인터뷰영상 주제 등 할 이야기가 많다면 하루에 세개까지 영상을 올려도 됩니다 즉 제한을 두지는 않는다는거에요
   scope: standard
 - date: '2026-11-17'
   kind: direction
+  repo: market
   quote: 아 그리고 각 기업의 ceo들에 대한 내용과 소식들도 소스로서 다뤄주세요 이번에도 리사수가 무엇을 햇고 젠슨에 대한 내용 등등 여러가지가 들리더라구요
   scope: standard
 - date: '2026-11-17'
   kind: direction
+  repo: market
   quote: 그리고 이 채널은 단순 시장분석만이 아니라 기술분석 기술의 미래 전망 변화 분석도 포함해 주세요.
   scope: standard
 - date: '2026-11-17'
   kind: direction
+  repo: market
   quote: 자동으로 예약 공개로 해줘
   note: '질문(11-workflow ''업로드는 사용자 승인'' vs 매일 시장 루틴 자동 예약 공개, 추가 편 포함)에 대한 답: 시장 채널은 자동 예약 공개'
   scope: standard
 - date: '2026-11-18'
   kind: direction
+  repo: main
   quote: 그리고 단순 이미지 생성에서 멈추는 것이 아니라 움직이는 애니메이션으로도 연출 할 수 있도록 하고 gpt에서만 사용하는 것이 아닌 각 에이전트들이 수행 할 수 있는 공통 메뉴얼로써 작동
     할 수 있게끔 하세요 즉 모델이 바뀌었다고 편집법 연출 등 완전 다른 결과가 나오면 안됩니다.
   note: docs/42와 S5. 원화·대사별 타임라인·렌더 입력 인계 및 검증
   scope: standard
 - date: '2026-11-18'
   kind: clarify
+  repo: main
   quote: 각 화풍별 어울리는 주제와 상황이 있는데 이를 먼저 정의하고 이를 바탕으로 실제 영상제작까지 이어가도록 하세요 기존에 올린 영상들 세편을 다시 제작하세요
   note: 대사 속 동사와 영상별 기본 화풍을 먼저 정하고 기존 세 편을 재제작
   scope: standard
 - date: '2026-11-18'
   kind: direction
+  repo: main
   quote: 그리고 아직 그림판이나 도형들로 점칠한 느낌이 강해요
   scope: style
   note: 그림판·도형 느낌은 화풍·재료의 문제 → docs/44 원화 층 애니메이션으로 대응
 - date: '2026-11-18'
   kind: direction
+  repo: main
   quote: 이런식으로 그림판 도형느낌이 나는 연출은 전부 탈락입니다. 차라리 모션그래픽을 활용하세요
   note: 라벨 상자와 선을 움직이는 컷을 교체. 실제 소품이 사건의 결과를 보여 주도록 연출.
   scope: style
 - date: '2026-11-18'
   kind: clarify
+  repo: main
   quote: 클로드가 연출하는 방식과 codex가 연출하는 방식이 너무 달라서 제가보기엔 도저히 같은 메뉴얼로 같은 영상을 만들었다는 생각이 들지 않아요
   note: 공통 문서와 개별 장면표의 실행 경로를 일치시킨다.
   scope: standard
 - date: '2026-11-18'
   kind: direction
+  repo: market
   quote: A를 기본으로 하고 큰 내용이 있다면 별도로 c영상 다뤄줘
   project: 20261118-market-daily
   note: '반영: manual/09 §3-5 ''A 기본 + 큰 내용은 C'' (v45) · §2-1 원본 발언 해설 편 · daily_brief ⑧ 소스 영상 대기 목록'
   scope: standard
 - date: '2026-11-18'
   kind: direction
+  repo: market
   quote: 그리고 내가 기술관련 테크관련이나 신 사업 등등 이런 변화에 대해서도 알려달라 했잖아 이런 주제들도 영상으로 만들어줘 기술분석 사업분석 이런거 말이야 관련한 뉴스레터도 조사하고 더 구독할게
     있다면 구독하려고
   scope: standard
 - date: '2026-11-18'
   kind: direction
+  repo: market
   quote: 산업 기술 등에서 눈에 띄는 변화나 혁명 새로운 테크기술 등등 이런게 있다면 주목하고싶거든
   scope: standard
 - date: '2026-11-18'
   kind: clarify
+  repo: market
   quote: 즉 어떻게보면 시장브리핑은 매 시장 끝나면 하고 특별한 기술 소식 사업계획 업계나 산업 자체의 혁신이나 로드맵 등이 있으면 별도로 업로드 하는거지 즉 컨텐츠를 시장브리핑이랑 이런 분석쪽으로
     두가지를 두려는거야
   note: v46 '기본 주 1편 이상'은 과잉 해석 → 분석은 특별한 소식이 있을 때만(할당량 없음), 채널 콘텐츠는 두 줄기
   scope: standard
 - date: '2026-11-18'
   kind: direction
+  repo: main
   quote: 기본적으로 codex세션의 연출은 전부 불합격이고 그냥 기본적인 화풍만 합격입니다.
   scope: trial
   note: Codex 세 편에 대한 판정 — 영상 판정(v44 기각 3건)과 화풍 승인을 나눔
 - date: '2026-11-18'
   kind: clarify
+  repo: main
   quote: 즉 영상 자체는 전부 불합격이지만 화풍만 합격이라는 의미입니다.
   scope: trial
   note: 같은 판정의 풀이 — 영상 불합격·화풍 합격
 - date: '2026-11-18'
   kind: direction
+  repo: main
   quote: 각 화풍들 합격이구요
   scope: trial
   note: 화풍 시안 합격 판정
 - date: '2026-11-18'
   kind: tool
+  repo: main
   quote: 그리고 저는 깃을 무조건 잠근다가 아니라 한번에 한명만 사용한다 입니다. 즉 깃이 비었는데도 아무도 사용 안하는데 락을 걸어서 깃을 사용하지 않는 상황이 이루어지지 않도록 해주세요
   scope: standard
   note: 매뉴얼 관리 방식(잠금은 한 번에 한 명, 비어 있으면 바로 사용) → docs/35·governance
 - date: '2026-11-18'
   kind: direction
+  repo: curiosity
   quote: 유명한 호기심 심리, 인지과학(일상생활 속 뇌과학 심리학 인지과학 등등 자연스레 엮어주세요 아니면 실험사례나요), 과거 역사기록 등등 호기심과 관련된 채널들을 20개 조사하세요 이후 그
     특징들과 영상스타일을 분석 벤치마킹하세요. 특히 심리학에서는 심리학 고양이 라는 사람의 편집스타일을 크게 참조해주세요 / 네, 반영해 주세요
   scope: standard
   note: 호기심 채널 벤치마크 요청 → docs/47, 04 반영
 - date: '2026-11-18'
   kind: clarify
+  repo: main
   quote: 추가로 각 채널별 스타일에 알맞는 사용할만한 상황별 레퍼런스들을 조사해줘 ai 호기심 시사 시장 기술 등등 이에 맞게 사용할만한 레퍼런스 스타일들을 말이야 일단 이번 스타일은 합격이고
     내가 말한건 음 이전에 말한 저 5개 레퍼런스들 화풍? 대로 추가로 스타일들 ㅅ ㅐㅇ성해달란거였어 각기 알맞은 상황에 사용할만한 레퍼런스 화풍들을 조사하고 이를 바탕으로 ai 호기심 시사 영상
     내가 제작해달란거 이를 활용해서 제작해줘
@@ -163,6 +194,7 @@ feedback:
   scope: trial
 - date: '2026-11-18'
   kind: direction
+  repo: market
   quote: 흠 이번영상도 나쁘지는 않은데 영상에 소스영상들이 없는게 아쉬워 만약 당일날 소스영상을 올리기 힘들다면 나중에 언급 할 때 소스영상을 찾아서 넣어줬으면 해
   project: 20261118-market-daily
   note: '해석: 당일 클라우드에서 원본(인터뷰·방송·어닝콜) 영상을 못 넣으면 ''소스 대기 목록''에 남기고, 같은 사건·인물이 다시 나오는 회차(이어지는 브리핑·주간·점검)에서 원본을 찾아
@@ -170,17 +202,20 @@ feedback:
   scope: standard
 - date: '2026-11-18'
   kind: direction
+  repo: market
   quote: 이런건 실제로 정리해서 말로만 하는거보다 실제 공신력 있는 사람들이 말한 내용을 첨부해야 사람들이 신뢰도가 드는거니까
   project: 20261118-market-daily
   note: '이유(신뢰도): 정리한 말보다 공신력 있는 사람의 실제 발언 영상이 근거가 된다 → 시장 채널은 원본 발언 장면(bite)을 기본으로, 인용 카드는 마지막 수단'
   scope: standard
 - date: '2026-11-18'
   kind: clarify
+  repo: main
   quote: 삽화느낌과 애니메이션 느낌 그리고 캐주얼한 느낌 모션그래픽같은느낌 2.5d같은 느낌 등 여러가지 화풍을 각 대본과 주제에 맞추어 알맞는 상황에 사용하고자 합니다.
   note: 편마다 기본 화풍 선택, 장면마다 재료를 선택할 이유 기록, 호기심 카메라 고정 원칙 적용
   scope: style
 - date: '2026-11-18'
   kind: direction
+  repo: main
   quote: 음 우선 화풍만 사용하지 말고 화풍을 적절히 알맞는 상황에 맞추어서 사용해주세요. 모션그래픽이나 다른 편집 연출 등을 언제 사용해야 하는지 분석 정리하고 상황에 맞추어서 사용해주세요 또한
     다양한 화풍의 레퍼런스들을 조사해주세요. 쿠르츠게작트 같은 화풍이나 gpt가 제작한 이런 2.5d같은 화풍 등도 말이죠. 어느 화풍이 언제 어울릴지도 분석 정의하시고 단순 삽화만이 아니라 애니메이션과
     같은 연속적인 장면도 적절하게 사용해주세요.
@@ -188,21 +223,25 @@ feedback:
   note: 화풍·연출을 상황에 맞춰 고르는 기준 → docs/45
 - date: '2026-11-18'
   kind: direction
+  repo: main
   quote: 캐주얼한 화풍을 추가하고싶거든요 / 약간 귀엽고 캐주얼한 그런 화풍이요
   scope: style
   note: 화풍 목록에 '귀엽고 캐주얼한' 화풍 추가 → docs/42·45 화풍 표
 - date: '2026-11-18'
   kind: clarify
+  repo: main
   quote: 클로드는 제가 레퍼런스화풍을 활용해달라 해서 이것으로만 제작하였고 gpt는 너무 모션그래픽의 퀄리티 자체가 낮다는게 문제점입니다.
   note: 이번 Claude판은 요청한 레퍼런스 사용의 결과다. GPT판에서는 초점, 대사와 동작 사이의 인과, 접촉과 상태 변화를 실제 재생으로 검토한다.
   scope: trial
 - date: '2026-11-18'
   kind: tool
+  repo: main
   quote: 제안3건 반영해줘 피드백들은 정리하고 내 피드백을 어떻게 수용했는지 서술해줘 과적합인지 아닌지도 체크하고 목적과 의도를 바탕으로 작성했는지 이를 어떻게 구현할건지 적혀있는지 체크해줘
   note: docs/48 수용 점검, 제안 3건(11 §2-4·05 §0-0·09 §3-5), 05 §0-8, 층 8건·과적합 16건 판정
   scope: standard
 - date: '2026-11-18'
   kind: direction
+  repo: curiosity
   quote: 그냥 호기심 이라고 아무거나 하는 것이 아니라 그 이유와 원리 과학적 내용 심리 등등 사람들이 듣자마자 궁금하거나 알고싶은 주제와 이를 과학적으로 등 분석하면서 상세히 서술해주세요. 꼭
     10분이 아니라 10분 이상의 깊이를 선호해요. 우선 c로 해주시고 바뀌는 기억 이라는 제목 자체는 별로 막 호기심이 들지는 않는 것 같아요 심리적 요인? 과학적요인 뇌과학 등을 엮어서 좀 궁금한
     제목으로 해주세요
@@ -210,24 +249,28 @@ feedback:
   scope: standard
 - date: '2026-11-18'
   kind: clarify
+  repo: curiosity
   quote: 단순 호기심이라고 호기심 채널이 아닌 과학과 논리 근거 실험 등과 엮어서 상세히 설명하는 호기심 채널입니다.
   project: 20261118-curiosity-next
   scope: standard
 - date: '2026-11-19'
   kind: direction
+  repo: curiosity
   quote: 이부분 효과음 없애줘 효과음들이 전체적으로 별로 듣기 좋은 효과음이 아니야
-  project: projects/20261118-curiosity-next
+  project: 20261118-curiosity-next
   note: 카누→보트(3:01)·질문지 낱말 바뀜(4:09) 장면을 짚음. 효과음 전체 기본값을 끔으로
   scope: style
 - date: '2026-11-19'
   kind: direction
+  repo: curiosity
   quote: 나중에 이 메뉴얼을 토대로 그림체 화풍 스타일과 그림을 누끼 딸 때 흰부분이 있는점 등만 보완하면 될 것 같습니다.
-  project: projects/20261118-curiosity-next
+  project: 20261118-curiosity-next
   note: 누끼 가장자리 흰 테두리(cutout.py) + 화풍 보완
   pending: true
   scope: standard
 - date: '2026-11-19'
   kind: direction
+  repo: market
   quote: 제가보기엔 3번째가 더 어그로가 잘끌릴 것 같아요  그리고 썸네일 스타일을 좀 더 눈에 들어오게 바꿀 필요가 있을거같기도 해요
   project: 20261119-market-daily
   note: '제목 후보 3(장면+종목: 연준이 ''순환 금융''을 적은 날 — 엔비디아·아마존·SK하이닉스)을 1번으로 올려 업로드본 제목 교체. 썸네일: thumbnail.py 에 punch 레이아웃(컬러
@@ -236,12 +279,14 @@ feedback:
   scope: style
 - date: '2026-11-19'
   kind: direction
+  repo: market
   quote: 영상 작업도 7시에 시작 8시30분 업로드로 해주세여
   note: '시장 채널 하루 시간표: 자동 제작 07:00 시작·08:30 예약 공개 (v41 08:00·10:00 대신). manual/09 §1·§2-1·§3-5·§10, channel.yaml
     publish_time·publish_slots, docs/24, yt-pack. 루틴 실행 시각은 claude.ai 루틴 설정에서 사용자가 바꿔야 함'
   scope: standard
 - date: '2026-11-19'
   kind: clarify
+  repo: market
   quote: 내가 말한 썸네일은 연준썸네일이야 유튜브 보니까 이상한 썸네일이길래 그리고 이런거 주의해줘 삐져나와
   project: 20261119-market-daily
   note: ① 앞서 '3번째가 더 어그로'는 제목 3번이 아니라 썸네일 C(연준)였음 — 모델이 제목으로 잘못 해석해 제목을 바꾸고 썸네일 A 를 올림 → 제목 되돌리고 썸네일 C 적용. 애매한 '몇
@@ -250,6 +295,7 @@ feedback:
   scope: standard
 - date: '2026-11-19'
   kind: direction
+  repo: market
   quote: 벡그라운더 렌더는 돌리고  앞으로 이런거 주의하세요 또 앞으로 썸네일 방식 커밋하세요
   project: 20261119-market-daily
   note: 09 §7-1 썸네일 방식(핫 키워드 먼저·단정+숫자·검은 톤 사진 꽉 채움 기본, punch·versus dark 변형, 제목은 사용자 요청 때만 변경) + §9 글자가 상자 밖으로 넘치는지
@@ -257,46 +303,53 @@ feedback:
   scope: standard
 - date: '2026-11-19'
   kind: direction
+  repo: market
   quote: 앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도
   project: 20261119-market-daily
   note: 09 §7-1 ① 팩트시트 '## 핫 키워드' 3~5줄을 쓰고 썸네일 큰 글씨·제목 앞 20자에
   scope: standard
 - date: '2026-11-19'
   kind: direction
+  repo: market
   quote: 조회수가 높은 썸네일들을 조사해주세요 썸네일과 그에 따른 내부 편집법 연출법에 따라 조회수가 확 달라지더라구요
   note: docs/49-thumbnail-research.md → 09 §7-1 썸네일 방식에 반영. 영상 속 편집 짝 비교는 피클 요청(thumb-hook·thumb-edit)
   scope: standard
 - date: '2026-11-19'
   kind: direction
+  repo: main
   quote: 작업에서 막히는 일은 피클에게 요청하시면 됩니다.
   note: 막히면(유튜브 재생·자막·봇 확인·로그인 필요) 우회하지 않고 inbox/requests/<KST>-<slug>.md 로 피클에게(한 파일=한 요청, main 푸시), 결과는 done/
     에서. AGENTS.md 소스 규칙에 반영
   scope: standard
 - date: '2026-11-19'
   kind: direction
+  repo: curiosity
   quote: 그리고 제 생각에는 음 원화부분에서는 codex가 사용한 〈첫 만남 뒤, 나만 대화를 망쳤다고 느낄까?〉가 더 깔끔하고 낫습니다. 전체적으로 화면이 깔끔하고 좋아요 그런데 연출 자체는
     클로드가 좀 더 좋다는 느낌이 듭니다.
-  project: projects/20261118-curiosity-next
+  project: 20261118-curiosity-next
   note: '비교: Codex 편은 장면마다 인물·배경·빛을 한 장으로 그린 완성 화면(가까운 샷·손·어깨 너머 등 구도 다양) → 깔끔, 누끼 테두리 없음. Claude 편은 넓은 배경 판 위에
     자른 인물을 세운 무대식 → 빛·테두리가 안 맞음. 앞으로: 화면 완성도는 Codex 편 수준으로 끌어올리고(화풍을 따라 하라는 뜻은 아님 — 다음 기록의 사용자 설명), 연출(박자 맞춘 등장·칸
     만화·검은 화면·되짚기)은 Claude식'
   scope: style
 - date: '2026-11-19'
   kind: clarify
+  repo: curiosity
   quote: 원화스타일 자체를 꼭 codex랑 똑같이 하라는 것은 아니구요 전체적인 화면 퀄리티 자체는 codex가 우세하지만 편집법 연출법 자체는 클로드가 좋았다 입니다. 즉 방향성과 퀄리티에서
     차이가 났어요
-  project: projects/20261118-curiosity-next
+  project: 20261118-curiosity-next
   note: '뜻한 것: 화면 완성도(마감 품질)는 Codex 편이, 편집·연출 방향은 Claude 편이 나았다 — 둘의 장점을 합칠 것. 뜻하지 않은 것: Codex 화풍을 그대로 따라 그려라. 바로잡음:
     앞 기록의 ''Codex식 완성 장면으로''는 과잉 해석 → ''화면 완성도를 Codex 편 수준으로(빛이 맞는 장면, 테두리 없는 깔끔한 합성, 구도 다양)'''
   scope: style
 - date: '2026-11-19'
   kind: direction
+  repo: curiosity
   quote: 여기 얼굴 가리는거 체크해주세요 그리고 아직도 영상 중간중간 누끼가 제대로 안따진게 많습니다. 이걸 제외한다면 커밋입니다.
-  project: projects/20261118-curiosity-next
+  project: 20261118-curiosity-next
   note: v3 엄마와 아이 장면(16:07 무렵)에서 글자 카드가 얼굴을 가림 → 글자는 얼굴을 피해서. 자른 조각 가장자리가 아직 지저분한 곳이 많음
   scope: standard
 - date: '2026-11-19'
   kind: clarify
+  repo: main
   quote: 1. 네 호기심 채널은 그렇습니다. 논리 근거 과학 실험 등을 엮어서 설명합니다. 즉 납득할만한 이유 근거가 있어야 한다 이런거죠. 2. 제가 말하려던건 일단 썸네일 자체는 눈에 띄게
     사람들이 딱 보자마자 이거다 하고 바로 인식 할 수 있도록 무엇을 말하려는지 한번에 알 수 있도록 해야한다는 의미에요 깊게 봐야지 알 수 있으면 안된다는거고 3번이라는 말은 3번의 제목이 더 제가
     보기엔 키워드가 사람들이 흥미를 가질 키워드 같았어요. 3. 네 알겠습니다. 4. 굳이 주석같은 내용은 적지 않아도 됩니다.
@@ -305,12 +358,14 @@ feedback:
   scope: standard
 - date: '2026-11-19'
   kind: clarify
+  repo: main
   quote: 3번이 좋다 이런게 핵심이 아니라 제 피드백 자체가 핵심이에요
   about: b55a4bd6
   note: '한 편의 선택이 아니라 원리로: 썸네일은 한눈에, 제목은 흥미를 끌 키워드 (prompts/thumbnail.md)'
   scope: standard
 - date: '2026-11-19'
   kind: direction
+  repo: curiosity
   quote: 대본 단계에 "호기심 대본은 설명·지식 문장 30% 이하"라는 기준 이런 기준은 또 빼주세요 너무 과적합입니다. / "설명은 이야기 속에 엮는다"는 원리 이런식으로 원리주의적으로 가지
     방법 자체를 고정하지 말아주세요
   note: 지식 문장 ≤30% 기준·●/○ 표시·검사 삭제(04·11·topics·AGENTS·checklist), 대신 방법을 고정하지 않고 D2 에서 사람이 균형을 봄, audit 이 다시 생기면
@@ -318,107 +373,127 @@ feedback:
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: curiosity
   quote: 그럼 잼 편처럼 한 인물의 행동을 따라가는 게 어울릴 때와 기억 편처럼 실험 하나에서 다음 질문으로 넘어가는 게 어울릴 때를 구분해서 공통 매뉴얼에 정리해주세요. 어느 에이전트든 대본을
     보고 왜 그 연출을 골랐는지 설명할 수 있게요.
   note: 04 §0-6 대본의 단서와 전환 이유를 기존 intent.md에 기록해 D2와 S5에서 사용
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: curiosity
   quote: 여기서 자동차만 너무 도형같아요 이질감이 심해요
   project: 20261120-chess-robot
   note: 차체와 카메라를 배경과 같은 회화 질감, 조명, 그림자로 수정한 회차 기록.
   scope: trial
 - date: '2026-11-20'
   kind: direction
+  repo: curiosity
   quote: 그리고 이런 글씨폰트나 연출이 이전 영상들이랑 너무 괴리감이 큰거같아요 갑자기 확 바뀌어서요
   project: 20261120-chess-robot
   note: 기존 두 영상의 글자 크기, 자막 상자, 기록 표시와 화면 동작을 비교해 본편에 적용한 회차 기록.
   scope: trial
 - date: '2026-11-20'
   kind: direction
+  repo: curiosity
   quote: 메모리 연출과 대조해서 비교해주세요
   project: 20261120-chess-robot
   note: 메모리 승인본 1분 22초의 분할 화면과 작은 기록 표기를 대조한 회차 기록.
   scope: trial
 - date: '2026-11-20'
   kind: direction
+  repo: curiosity
   quote: 잼도 마찬가지구요
   project: 20261120-chess-robot
   note: 잼 승인본 15초의 손과 잼병 중심 연출, 한 줄 자막 상자를 대조한 회차 기록.
   scope: trial
 - date: '2026-11-20'
   kind: direction
+  repo: issues
   quote: 폰트 전부 메모리편처럼 다뤄주세요 그리고 스페인독감편 왜이리 렉걸리는 것 같은 연출인가요
   project: 20261120-spanish-flu
   note: 두 편의 글꼴 역할과 하단 자막을 메모리 승인본과 대조. 독감의 이전 렌더에서 15fps 복제와 대사별 23단계 움직임을 확인하고 연출과 프레임 샘플링을 고침.
   scope: trial
 - date: '2026-11-20'
   kind: direction
+  repo: issues
   quote: 오히려 스페인독감은 기존 스페인독감 영상이 더 낫습니다
   project: 20261120-spanish-flu
   note: 기존 독감 편의 자료 사진, 실제 기록 영상, 읽을 시간을 주는 미색 비교 화면을 v2 재편집 기준으로 적용.
   scope: trial
 - date: '2026-11-20'
   kind: direction
+  repo: issues
   quote: 메뉴얼을 보고 영상을 만든 것이 맞나요? 상황에 맞는 연출을 한 느낌이 아닙니다
   project: 20261120-spanish-flu
   note: 대본과 컷의 목적을 대조해 신문은 지면, 수치 비교는 집계 범위, 장소와 시대는 출처 있는 사진과 영상으로 배치한 회차 기록.
   scope: trial
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 기존 호기심 채널은 심리학이나 일상생활속 현대인속 사례들을 다루기로 하겠습니다. 그리고 시사나 역사 이런쪽은 기존 스페인독감과 같은 메뉴얼을 사용하고자 합니다.
   note: 호기심 매뉴얼 04와 시사·역사 매뉴얼 08 §0-3, 채널 설정과 대기열에 반영.
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 편집스타일이 호기심채널에 올린 두 편집스타일이랑 역사 시사는 너무 편집에서 중요한 부분이 다르다고 판단되어서 입니다.
   note: 잼 편의 행동·기억 편의 실험 흐름과 스페인독감 편의 기록·비교 중심 편집을 각각 제작 기준으로 기록.
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 그리고 새 편집메뉴얼로 인포그래픽 애니메이션을 다루고자 합니다. 미주일기와 같은 인포그래픽 애니메이션을 다루거나 삽화형식을 다루거나 실제 인물사진이나 인물자료 영상 움직임을 다루거나 등
     분류하고자 합니다.
   note: 매뉴얼 12에서 장면이 하는 일에 따라 인포그래픽·삽화·실제 사진·자료 영상을 선택하도록 정리.
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 인포그래픽 애니메이션 레퍼런스 스타일도 조사해주세요
   note: 매뉴얼 12 §2에 미주일기·Kurzgesagt·3Blue1Brown·Vox Atlas·The Pudding의 적용 장면과 출처 기록.
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 주로 애니메이션 효과가 필요할때는 인포그래픽 실제 자료나 인물 소스 등이 필요하다면 실제 자료와 이를 이용한 스페인독감같은 편집 메뉴얼 이 둘다 아니라면 삽화를 사용하는 방식으로 하고자
     합니다. 가장 무난한건 실제 인물소스나 자료인 것 같습니다. 어디 사용해도 무난하니까요 유튜브 보면 왜 그 중간중간 여러 인물들의 소스영상들 별 의미럾어 보리지만 상황에 맞게 넣잖아요 그런거 말이죠
   note: 12 §1에 실제 자료·인물 소스 우선, 인포그래픽이 관계와 변화를 설명하는 경우, 삽화가 필요한 경우를 기록. 상황과 어울리는 짧은 인물·현장 보조 컷과 실제 근거 컷의 차이 포함.
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 그리고 기본적인 편집 연출은모션그래픽? 으로 합니다. 제가 알기로는 모션그래픽이 사실상 인포그래픽을 제외하면 거의 대부분의 연출에 들어가는거로 알고있어요
   note: 12 §0·05 §2·README §2-5에 모션그래픽을 기본 연출로 기록. 실사·삽화·인포그래픽에 걸쳐 쓰이며, 애니메이션 인포그래픽도 포함.
   scope: style
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 설명을 할때 단순 글과 숫자만이 아닌 이런 연출법을 사용하고싶어
   note: 설명 장면에서 시간 조건·순서·방향·수량을 의미 있는 사물·선·막대의 변화로 보여 주는 요청. 월텍남 영상의 대표 장면과 적용 예시는 docs/31-motion-grammar.md에 기록.
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: market
   quote: 나쁘지는 않은데 기존 영상연출과 대조하면 퀄리티와  화풍 자체가 좀 미흡합니다
   project: 20261120-inventory-motion
   note: 초판의 화풍과 연출 완성도에 대한 개별 시안 피드백. 같은 소재의 개정판에서 소품의 재질과 장면별 시선 유도를 비교한다.
   scope: trial
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 썸네일은 셋다 별로인거같아요 그리고 세번째 썸네일은 너무 싼티나요 저 빨간색이랑 초록색이 말이죠
   about: 20261120-market-deep
 - date: '2026-11-20'
   kind: tool
+  repo: main
   quote: 앞으로 그럼 클라우드에서 제 계정으로 로그인하던지 클라우드가 아니라 다운로드가 필요할 때만 뭐 따로 다운로드 하던지 할 수 있도록 해주세요
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 아 우선 피클에게 요청한거 좋아요
 - date: '2026-11-20'
   kind: direction
+  repo: curiosity
   quote: 기존의 젬 영상이랑 메모리 영상같은 편집스타일이 아니라 … 단순 삽화가 아니라 인물들 영상이나 모션그래픽? 등으로 설명하고 중간중간 이런 자료들을 구하기 힘들고 넣기 힘든 상황일때만 삽화를
     부분적으로 사용하는 형식으로 하고싶어 → (예시를 보고) 이 방향으로 매뉴얼에 반영해줘
   project: 20261120-curiosity-broll-sample
@@ -427,17 +502,20 @@ feedback:
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: '네 적용하고 이어서 정리해주세요 화풍목록도요 (요청: 실사 최대한 → 실사가 힘들거나 움직임이 필요하면 화풍별 모션그래픽 → 둘 다 힘들면 삽화, 모든 채널 / 쉽게 설명·상황 설명
     = 모션그래픽, 스쳐 지나가는 표시·상상 = 인물 소스영상 / 모션그래픽·삽화를 화풍별로 언제든 고를 수 있게 분류)'
   note: 'v61: manual/12 §0-1 표(작업 기준), styles/looks.yaml 화풍 목록(스타일 기본값 — 고르는 목록, MUST 아님)'
   scope: standard
 - date: '2026-11-20'
   kind: tool
+  repo: main
   quote: 일레븐랩스는 이미지 생성으로 사용하지 말아주세요
   note: 그림 생성 길에서 ElevenLabs 를 쓰지 않음 (art-gen backend·화풍 예시 포함). 목소리(TTS)는 그대로
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 그니까 영상의 구성요소를 카테고리별로 나눠서 그 카테고리 안에서 이제 화풍? 스타일? 별로 또 나눠달라는거지 그래서 그 각 카테고리에서 각 화풍? 스타일? 들을 조합하여서 영상이 나타난다
     이런 원리 느낌으로 (+ 화풍 스타일이랑 연출은 아예 다른 분야, 모션그래픽에 특정 연출을 섞을 수 있고 연출에 따라 아예 달라질 수 있다 / 클라우드에서 불가능하면 로컬 세션에서 codex에게
     요청할 수 있는 방향으로)
@@ -445,37 +523,46 @@ feedback:
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: market
   quote: 앞으로브리핑은 매번 심층으로할거고 오늘같은 일 없이 가능하도록 세팅해줘 원본영상 허가할테니까 일단 그냥 진행해줘
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 그니까 영상에 지금까지 쓰인 요소들이 더 많은거같은데 너무 적게 나온거같아서 (+ 글꼴 스타일이나 보면 중간에 편지지? 이어읽는 시장에서 나오는 칠판도 그렇고 여러 연출들 더 있지않아?)
   note: '구성요소 목록 확장: components.yaml 21 카테고리·looks_catalog 실제 렌더·presets.yaml 실제 쓰인 조합·삽화 예시 7장'
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 예시사진으로는 기존에 만든걸로 올려주면 되겟다 7장저거로 (+ 기존에 만든7장도 보여주고 / 예시 그림 준비중이라 뜬거도 마저 채워주고)
   note: '구성요소 목록 확장: components.yaml 21 카테고리·looks_catalog 실제 렌더·presets.yaml 실제 쓰인 조합·삽화 예시 7장'
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 그리고 스웨덴독감이랑 주식시장에서 쓰는 연출법 편집법 화풍 스타일 이런거도 추가해줘 / 호기심 채널도 마찬가지고
   note: '구성요소 목록 확장: components.yaml 21 카테고리·looks_catalog 실제 렌더·presets.yaml 실제 쓰인 조합·삽화 예시 7장'
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 구성 요소별로 제작 메뉴얼같은거도 따로 작성한거야? 왜냐면 그게 아니면 나중에 재구현 불가능할거아니야 또 예시사진으로는 사실 전부 보여주지 못하고 약간 괴리?가 생기니까
 - date: '2026-11-20'
   kind: tool
+  repo: main
   quote: 영상 구성요소 · 스타일 목록에 이를 올려주세요 (설명 무대)
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 보면 아직 저 배경 디테일 부터 시작해서 전체적인 디테일들이 많이 부족해보여요 / 솔직히 말해서 퀄리티가 더 낮다 이런느낌이 듭니다 (설명 무대 1차 시험작 → 2차에서 실사 구겨진 종이·굵은
     고딕·칩 그림·붓 필터·그림자)
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 쉽게 설명해야 하는 부분이다 상황설명이 필요하다 = 모션그래픽 을 주로 사용합니다. (설명 무대를 주식 채널 상황 설명 기본으로 — manual/12 §0-1, situations explain·explain-market)
 - date: '2026-11-20'
   kind: direction
+  repo: market
   quote: 일단 내가보기엔 너무 영상이 딱딱한거같아 내 소감이야 / 조회수가 낮은 이유가 이 편집스타일같아서 / 직관적으로 좀 사람들에게 풀어서 설명하지 못하는 느낌인거같아서 너무 정보만 딱딱하게
     나열하는거같아 그래서 내가 인사이트랑 설명 비유 이런걸 적극적으로 이용하려고
   project: 20261120-market-deep
@@ -484,23 +571,27 @@ feedback:
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: market
   quote: 이를 바탕으로 기존 장면과 대조하여 연출에 변화가 필요한 부분을 바꿔주세요
   project: 20261120-market-deep-remix
   note: 11/20 심층 37장면 중 13장면을 바꾼 개정판(대사 원문 유지). 렌더·업로드는 사용자 결정
   scope: trial
 - date: '2026-11-20'
   kind: direction
+  repo: market
   quote: 그리고 앞으로 어지간하면 항상 오늘과 같은 심층분석이 가능하게 해주세요 심층분석거리가 없다면 어쩔 수 없구요
   note: 'v63 manual/09 §2: 기본은 심층, 심층거리가 없을 때만 브리핑. daily_brief ④ ''오늘 형식''·''심층 중심축'' (ytflow/stages/daily.py),
     channel.yaml deep_dive'
   scope: standard
 - date: '2026-11-20'
   kind: tool
+  repo: main
   quote: 그리고 유튜브 영상 태그에도 챕터같은거 달아주세요 영상바 아래에 나타나는거 있잖아요
   note: yt-pack 이 이미 설명란에 0:00 부터 챕터를 넣음(11/12~11/20 전 편 확인). 장 표지 제목을 질문형으로 바꾸면 챕터 이름도 질문형
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: market
   quote: 한번 나열해서 설명하고 이후에 풀어서 설명 할 수 있도록 해줘
   project: 20261120-market-deep-remix
   note: 'v64 manual/09 §5-1: 항목이 여럿인 대목은 한눈에 목록(checklist glance, 한 박자) → 다음 장면에서 설명 무대로 풀이. 개정판 #7·#17·#18·#19
@@ -508,12 +599,14 @@ feedback:
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 앞으로 호기심 채널 등 이런데서 주제를 다룰 때 최신 시사나 핫한 키워드를 고려해서 채택해줘
   note: 'manual/01 §3-1 ''지금의 고리''(모든 채널): 후보 전에 이번 주 키워드 수집, 후보마다 지금의 고리(why_now: 키워드·날짜·출처), 동점이면 고리 있는 후보 먼저,
     시사는 입구·본론은 채널 기준, 억지 고리·사고 입구 금지. 04 §2 호기심 예시 표. AGENTS 표 한 줄'
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: curiosity
   quote: 주제 자체를 최근 시사나 사람들의 유행 이런걸 바탕으로 다시 선정해줘 솔직히 이번 주제 사람들이 별로 안궁금할거같아
   project: 20261120-curiosity-nextlane
   note: '옆 줄 편 D1 다시: 시사·유행 고리가 없는(why_now 약함, 지금성 1) 주제는 사용자 판단으로 보류 → v65 ''지금의 고리''로 후보 다시 찾기. 마트 줄·차선 이야기가 따로
@@ -521,12 +614,14 @@ feedback:
   scope: trial
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 왜냐하면 예시로 이런거는 저 예시사진으로는 다 안보이잖아 / 일단은 자주 쓰는 스타일과 화풍부터 해줘 / 다른 목록들도 마찬가지로 해줘
   note: '12 §0-1·05 §0-8·AGENTS 규칙: 모든 시각효과는 목록 + 움직이는 예시 + 제작 명세 — styles/hybrid/scenes(+real-examples 37), styles/looks/README,
     styles/components.md'
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: market
   quote: 사운드를 입혀주시고 엣지로 말이죠 테오말고 임시로요 모션그래픽을 다른 모션그래픽과 연출로도 다양하게 샘플을뽑아주세요 / 그리고 모든 부분에 모션 그래픽을 쓰기보다는 모션그래픽을 써야하는
     상황에서만 사용해주세요 / 쉽고 명확한 상황설명이 필요 할 때 말이죠 이해를 돕기 위해서요 / 정보전달 > 이후 상황설명이 필요하다면 상황설명이 필요한 경우 이를 사용해주세요
   project: 20261120-market-deep-remix
@@ -535,12 +630,14 @@ feedback:
   scope: standard
 - date: '2026-11-20'
   kind: clarify
+  repo: market
   quote: '챕터는 여기 이 바에 안뜬다고 말한거야 (스크린샷: 재생 바가 한 줄, 챕터 구간·이름 없음)'
   project: 20261120-market-deep
   note: 설명란에는 0:00부터 챕터 7줄이 있음(조건 충족). 실제 저장된 설명란·채널 자격은 클라우드에서 확인 불가 — 사용자 확인 대기
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: market
   quote: 자막이랑 영상 글씨가 겹치거나 전체적으로 글씨들이 겹치는 경우가 잦습니다.
   project: 20261120-market-deep-remix
   note: 'v68: 렌더된 장면을 박자 끝마다 멈춰 글자끼리·카드에 가려짐·카드 밖 넘침·자막 자리 겹침을 재는 overlapqa(렌더 끝 자동) + check G6 MUST, 설명 무대 자막 자리
@@ -548,6 +645,7 @@ feedback:
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: market
   quote: 여기는 숫자가 안보입니다. / 여기는 숫자가 안보이는게 흠입니다. 배경도 전 인과지도 배경으로 해주세요 / 어두운 무대가 제일 낫되 자꾸 숫자가 안보입니다. 하락률을 이러면 모르잖아요
     / 여기도 2~4%뭉뚱그리지 말고 제대로 각각 알려주세요
   project: 20261120-market-deep-remix
@@ -556,12 +654,14 @@ feedback:
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: market
   quote: 시간선 개념자체는 좋습니다만 연출 자체가 마음에 안듭니다. / (값이 지나간 길) 여기는 이게 제일 낫습니다.
   project: 20261120-market-deep-remix
   note: '실험 기록: 시간선은 어두운 무대 위 날짜+사건 카드+위쪽 큰 숫자로 다시 만듦, 첫날 가격은 값의 길을 정보 전달 뒤 풀이로 다시 씀'
   scope: trial
 - date: '2026-11-20'
   kind: direction
+  repo: market
   quote: '기본적으로 전부 먼저 글로 적은 다음에 상황설명해주고 어두운 배경 그게 나은거같네요 / 그냥 설명부분은 배경 공통으로 해주세요 어두운걸로요 (댓글: 여기는 이전처럼 설명하고 이후에 서술하는
     방식으로 해주세요. 즉 둘이 더하기 입니다 / 여기도 마찬가지로 정리한번 하고 이후에 상황설명 느낌으로 해주세요 / 한국 장이 닫힌 사이: 여기는 이게 더 나아요)'
   project: 20261120-market-deep-remix
@@ -570,22 +670,26 @@ feedback:
   scope: style
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 젠슨의 사적인 내용도 뭐 사적인내용은 이런거도 좀 투머치같더라구요 지침들이 너무 과적합적인 내용인것들은 지워주세요 규칙이 너무 많아지는걸 막고 정말 중요한거만 남기고자합니다
   note: 과적합 지침 197건 지우기·줄이기·합치기, 사생활 규칙 5곳 → README §3 8번 한 줄
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 1. 굳이 필수로 두지 말아주세요 2. 기본은 끄되 켤 수 있게 3. 세이브는 시장관련 소식알람이애요 4. 네 5. 모션그래픽을 최우선으로 해주세요 6. 그냥 빼주세요 7. 권장으로 하세요
   note: '범위 점검 질문 7개 답: ~였고요 SHOULD · 저음 타격음 기본 끔(YTFLOW_SFX_BASS=1) · SAVE 매일 시장 MUST/다른 시장 SHOULD · 시장 장 순서는 예시
     · 모션그래픽 최우선 · script.md 전면 금지 삭제 · 강조 SHOULD'
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 모든 공통규칙으로 트렌드 핫이슈 유행과 연관있는 주제선정 썸네일 생성으로 넣어주세요
   note: AGENTS 공통 규칙 + 01 §3-1 제목·썸네일까지 + prompts/thumbnail.md '지금의 고리'(모든 채널), 시장은 09 §7-1
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: market
   quote: 옮겨감 이런 글씨가 선에 겹쳣어요
   project: 20261120-market-deep-remix
   note: 'manual/06 G6: overlapqa 에 글자-선 겹침·화면 밖 잘림, 설명 무대 화살표 이름표 받침(pad), 숫자 카드 화면 안 고정·막대가 카드 자리 비움, 지도 지명 띠 진하게.
@@ -593,6 +697,7 @@ feedback:
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: market
   quote: 영상 내 폰트같은걸 좀 통일해야 할 것 같아요너무 음 화면 전환마다 제각각인거같아서
   project: 20261120-market-deep-remix
   note: 'manual/09 §6: 시장 글꼴 체계(제목·숫자 블랙한산스 / 나머지 나눔고딕) — typeset.py 가 장면마다 팩·설명 무대 글꼴을 덮어씀. 11/20 개정판 측정: 명조 2·고딕
@@ -600,16 +705,19 @@ feedback:
   scope: style
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 좋습니다 이야기는 삽화로 설명은 모션그래픽으로 증거는 실제 자료 인물사진 등으로 검은 화면이나 중간중간 연출은 마디로 해주세요.
   note: '앞서: ''잼 편의 삽화를 바탕으로 중간중간 메모리쪽 연출같은 효과를 주는게 좋은 것 같다''. 이어서 ''네, 공통으로''(시장처럼 이야기 박자가 적은 채널은 이야기 자리가 거의 없음)
     · v60 ''실사 B-roll 먼저''와 v61 ''떠올리게는 인물 실사''를 바꿈. 근거 docs/54 §5'
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 그리고 메뉴얼이 너무 과복잡하지 않도록 오래된 지침들이나 상반되는 지침 등은 지워주세요 즉 메뉴얼이 헷갈리면 안되니까요 명확하게 정렬해주세요 / 지금 기준으로요
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: market
   quote: 이 시장 관련해서 말이야 보면 유명인사가 썸네일에 나오거나 유명인사를 다룬 주제 내용들이 조회수가 높은 것 같은데 이 특징들을 조사하고 이를 반영해서 분석하고 썸네일이랑 썸네일 제목 생성에
     고려해줘 / 앞으로 예약작업이나 메뉴얼에 이를 반영해주세요 / 보면 그리고 유명한 투자자들이나 ceo들에 대한 주제나 썸네일 이런게 조회수가 높은거같더라구요 사람들 반응이 좋고
   note: 'docs/55(27채널 4,807편): 당사자 CEO·투자 대가는 높고(빅테크 CEO 1.54배·젠슨 황 2.26배·투자 대가 터짐 20%), 정치인을 배경으로 붙인 제목은 낮음(0.82배).
@@ -618,12 +726,14 @@ feedback:
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: market
   quote: 썸네일은 abc중에서 최대한 시장반응을 고려하여 조회수가 높게 나올 썸네일로 정해주세요 앞으로 말이죠
   note: 'manual/09 §7-1 ⑦: thumbnail 단계가 docs/49·55 근거 점수로 A/B/C 중 하나를 골라 05_edit/thumbnail_pick.json, yt-publish
     --thumb auto(기본)가 그것을 올림. 매일 예약 지시문 3-1 에도. 11/20 개정판: A 8.0점(당사자 얼굴·핫 키워드·숫자) > C 7.5 > B 2.0'
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: market
   quote: '그리고 고민인 점이 시장 브리핑에서 가볍게 보도 분석을 하고 또 그날 심층분석거리가 있다면 영상을 따로 제작할까 합니다. 물론 여기에는 인터뷰 소스영상 등 이런걸 첨부해서요 (질문 답:
     브리핑 + 따로 심층(추천) · 브리핑 길이 7~10분(추천))'
   note: 'v76 manual/09 §2: 아침 브리핑 7~10분 매일(보도 2~3개 가볍게 분석) + 심층거리와 당사자 원본 발언이 있을 때만 따로 심층 12:00·18:00(원본 없으면 보류).
@@ -632,32 +742,39 @@ feedback:
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: market
   quote: 보면 드라켄밀러 인터뷰 영상같이 여러 인사이트에 관해서 처럼 유명인사들의 인사이트나 인터뷰나 발언 인사이트 등을 다루는게 조회수가 높더라구여
   note: 'docs/55 §5(scripts/insight_research.py, 371편·223채널, 검색 선택 편향 주의): 채널 평소 중앙 2.4배, 누구나 아는 이름일수록 큼. manual/09
     §2-1 ⑤ 인물 인사이트 편, ceo_watch 4명 추가, 매일 예약 지시문 2-1'
   scope: standard
 - date: '2026-11-21'
   kind: direction
+  repo: market
   quote: 강조연출이 너무 많고 자꾸 이건 이 채널의 의견 이런거 없애주세요 그리고 실제 인터뷰 소스영상이랑 최신 인터뷰 주식을 쉰더 이런 최신 인터뷰 소스영상도 포함해주세요
   pending: true
 - date: '2026-11-21'
   kind: direction
+  repo: market
   quote: 좀 차분하고 깔끔한 스타일로 한번 해보고자 합니다.
   pending: true
 - date: '2026-11-21'
   kind: direction
+  repo: market
   quote: 그래프  스타일도 바꿔주세요  좀 깔끔하게요 브리핑이랑 분석 둘 다요
   pending: true
 - date: '2026-11-21'
   kind: clarify
+  repo: market
   quote: 제가 의도한건 이런 연출인데  전혀 연출이 다른거같아요 (누아르 사건보드 레퍼런스 noir-case-board-demo.mp4)
   pending: true
 - date: '2026-11-21'
   kind: direction
+  repo: market
   quote: 약간 호기심채널 연출처럼 좀 깔끔한 연출이 오히려 나은 것 같아서요 글씨체도 그렇구요 한번 이렇게 해주세요
   pending: true
 - date: '2026-11-21'
   kind: direction
+  repo: market
   quote: 일요일에 주간 종합을 다뤄주시고 요일 상관없이 영상에 뭐 이런저런 투자자들이나 ceo등등 투자관련 여러 인사이트나 분석 등을 다뤄주세요 그걸 위한 소스를 탐색하는거기도 하구요
   about: deep-druckenmiller
   pending: true
@@ -665,24 +782,28 @@ feedback:
   scope: standard
 - date: '2026-11-21'
   kind: direction
+  repo: main
   quote: '매일 시사: 10분 이상 / 호기심 표지: 표지도 삽화로 / 쇼츠채널은 일단은 보류입니다. 어... 훅쇼츠가 뭔지는 모르겠는데 일단은 이거 관련 영상은 아직 안만들거같아요 나중에 만들면
     다시 재개할게요'
   note: 모순 c-25·c-28·c-33 답 (선택지 답 + 원문)
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: curiosity
   quote: 제가 강조하려는건 인포그래픽을 이용한 연출과 애니메이션효과에요
   project: 20261120-chess-robot
   note: 제안함 035314 → 12 §0 머리말
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: curiosity
   quote: 배경음은 그냥 빼줘 여기는 너무 연출이 허접해 다른거로 해줘
   project: 20261120-curiosity-nextlane
   note: 제안함 083425 → 그 편의 실험 기록. 배경음 기본값은 사용자가 상황에 따라 조절(05 §0-5)
   scope: trial
 - date: '2026-11-20'
   kind: direction
+  repo: curiosity
   quote: 문제제기를 하였다면 이 문제에 대한 해결방법까지 자연스레 이어져야 한다고 생각하거든 사람들이 호기심을 느끼는 포인트는 왜 그런지 그리고 자연스럽게 어떻게 해야지 이를 극복 가능한지 점점
     스토리텔링이 되어야 하니까
   project: 20261120-curiosity-trend
@@ -690,28 +811,33 @@ feedback:
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: curiosity
   quote: 그니까 단순히 심리나 이런 주제들은 이걸 듣고 얻어가는거 아 이래야 겠구나 이런 느낌을 줄 수 있도록 대본 구성해줘
   project: 20261120-curiosity-trend
   note: 제안함 092108 → 04 §0-6 ② 5
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: curiosity
   quote: 그리고 호기심채널은 말했다싶이 유행 트렌드 이걸 기반으로 해야하니까 추가로 요즘 유행하는 AI같은 주제들로 영상을 뽑는거도 괜찮아보이고
   note: 제안함 092154·092156 → 04 범위·§2 후보 4
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: curiosity
   quote: AI로 인한 뭐 여러 사회적 문제나 사람들의 걱정거리 심리 트렌드 이런걸 세부적으로 파고 들 수도 있는거니까
   note: 제안함 092211 → 04 범위·§2 후보 4
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: curiosity
   quote: 여기서 너무 뜬금없이 바로 이야기가 넘어가요 실험에 대해서 알려주고 말해주는게 좋을거같고 영상 길이가 짧은데 일부만 잠깐 만든거죠?
   project: 20261120-curiosity-trend
   note: 제안함 101812 → 04 §0-6 ② 6
   scope: standard
 - date: '2026-11-20'
   kind: direction
+  repo: main
   quote: 깃과 드라이브로 나눠서 해줘 심층이 가능하면 심층으로 안되면 일반으로 해줘 심층이 가능한데도 일반으로 하지 말라는 의미야 이에 따라서 영상길이도 결정해줘  영상 소스 절차서의 PC쿠키
     사용해도 돼 제안함 그대로 수용해줘 배경음은 상황에 따라서 내가 조절할게
   note: 정기 검토 질문 답 → c-24 저장(README §3-7·11 S9·cli upload 기본 drive·docs/09), c-26 심층 우선·길이(09 §1·§2·README §2-4·ch-issues-daily),
@@ -719,68 +845,84 @@ feedback:
   scope: standard
 - date: '2026-11-21'
   kind: direction
+  repo: main
   quote: 유튜브에 업로드하면 유튜브 링크를 올리 드라이브에서 삭제하는게 괜찮아 보이는데 / 재료는 삭제하는걸 원하지 않아요 단지 영상을 이제 하이퍼링크처럼 대체한다 느낌인거지 어떻게 이 영상을
     만들었는지에 대한 기준 메뉴얼 재료는 그대로 냅두는거죠
 - date: '2026-11-21'
   kind: direction
+  repo: curiosity
   quote: 넘기기편 자막싱크랑 글씨가 겹치는거 수정하고 재업로드 해주세요 / 북극곰 편도 마찬가지로 체크해주세요 앞으로 매번 이런거 주의 체크해주세요
 - date: '2026-11-21'
   kind: direction
+  repo: market
   quote: 앞으로 매번 snp랑 나스닥 그리고 가장 많이 빠진 섹터지수 등을 썸네일에 넣어주세그리고 검은 금요일에서 금요일에 노란색으로 칠해주세요.
 - date: '2026-11-21'
   kind: clarify
+  repo: market
   quote: 그리고 썸네일은 사람들이 보고 클릭할만한 핫한 키워드 민감한 키워드 이런걸 적어주세요 저는 블랙 ㅁㅁㅁ 등 공포감이 있는 핫한 키워드와 금리 연준 그리고 핫한 인물이나 기업사진 등이 핫한거같아서
     썸네일을 이렇게 부탁한게 맥락이구요.
 - date: '2026-11-21'
   kind: direction
+  repo: market
   quote: '어지간해서는 매일 각각영상1개씩 올리고싶습니다. (앞 말: 오늘 이런 시장에 대한 심층분석 인터뷰영상이나 시장 분석 해설 이런영상 필요없는지 체크해주세요 즉 시장을 브리핑해주는 영상과
     그 브리핑속에서 여러 인사이트와 시장 그리고 수요 기술 등 산업 심층분석 영상을 따로 올리고자 합니다.)'
 - date: '2026-11-21'
   kind: direction
+  repo: main
   quote: 수익창출에 문제가 없다면 우리 인용규칙을 빼도 됩니다 / 네 매뉴얼 바꾸세요 경고먹거나 채널이 삭제되지 않도록 주의해주새여
 - date: '2026-11-21'
   kind: clarify
+  repo: market
   quote: '사람들이 ai인프라나 반도체 폭락 이런거에 민감하니까요 사람들이 현재 시장에 대한 불안이 극도에 달해서 이를 이용하면 좋을 것 같습니다. 이게 제가 전에 트렌드와 핫한 키워드를 적극
     활용하라 한 예시구요 (앞 말: 그리고 썸네일에도 반도체 폭락이나 ai infra종말인가 이런식으로 넣으면 좋을거같아요)'
 - date: '2026-11-21'
   kind: direction
+  repo: main
   quote: '이는 현재 영상들에 대한 분석입니다 — (붙여 넣은 진단) 이어 읽는 시장: 원본 자료로 사건을 보여주고 그래픽으로 그 의미를 해석 / 한 겹 더 보면: 반전의 일부를 초반에, 같은
     그림 반복 줄이기 / 공통: 최종 MP4·대본·사용자 승인 판본 일치, 기술·서사·연출 QA 분리'
   note: 09 §6·§2, 04 §0-2·§0-7, 06 G6·EYE 6·7, 11 §7
   scope: standard
 - date: '2026-11-21'
   kind: direction
+  repo: main
   quote: '제목·썸네일: 자동 점수로 확정하지 말고 휴대전화 크기로 축소해 확인, 첫 30초가 썸네일 약속을 이어받는지 검토 — 168픽셀 너비에서 약 6.8픽셀 글자도 ok 로 기록됨'
   note: 06 G7
   scope: standard
 - date: '2026-11-21'
   kind: direction
+  repo: market
   quote: 여러 시장 영상이 동일한 '딱 하나만 기억한다면' 결말 사용 — 영상의 성격에 따라 결말의 역할을 변화
   note: 03 §0-4 ⑪
   scope: style
 - date: '2026-11-21'
   kind: direction
+  repo: main
   quote: 우선 이는 구체 피드백입니다 — (붙여 넣은 진단) 메모리 편 재응고화 설명 수정('꺼낼 때마다 다시 쓴다' 단정 금지), 스페인 독감 편 병명 원인과 사망률 원인 분리, 잼 편 관객에게만
     바꿔치기 구조 공개, 장면 설계 규격(목적·이야기 상태·화면 소재·변화·음성·종료 조건·증거)
   note: 06 G3·G5, 04 §0-7, 08 §0-3 5~7, 11 §7
   scope: standard
 - date: '2026-11-21'
   kind: direction
+  repo: main
   quote: 구형 체크리스트의 '스타일 한 종류가 40%를 넘으면 실패' 같은 규칙은 품질의 직접적인 척도가 아닙니다. 하나의 화풍으로 일관된 이야기를 만드는 것도 충분히 타당합니다.
   note: 08 §0-3 7 — 비율 기준을 품질 척도로 쓰지 않음(check 코드의 해당 MUST 는 따로 확인 필요)
   scope: style
 - date: '2026-11-21'
   kind: review
+  repo: curiosity
   quote: 대본에 대한 의견입니다 — (의지력 편 v1 검토) 2025년 후속 연구 누락, 같은 실험을 다시 했다는 표현, 2021 확증·탐색 구분, 피로를 원인처럼, 풀 수 없는 퍼즐을 푸는 연출
   note: projects/20261121-curiosity-willpower script_review.md, 06 G3·G5
   scope: standard
+  project: 20261121-curiosity-willpower
 - date: '2026-11-21'
   kind: direction
+  repo: main
   quote: 또한 제가 이전에 영상들에 대해 피드백한 내용을 메뉴얼에 반영해주세요
   note: 이번 반영 요청 원문
   scope: standard
 - date: '2026-11-21'
   kind: review
+  repo: curiosity
   quote: 대본의 피드백입니다 — (의지력 편 v2 검토) 방향 통과, 2025 효과 배수 비교 금지·대조 조건과 주 지표 설명·생활 조언을 근거 범위 안으로·4~7장 연구 나열 대신 증거 추적·8장
     전환 문장
   project: 20261121-curiosity-willpower
@@ -788,6 +930,7 @@ feedback:
   scope: trial
 - date: '2026-11-21'
   kind: review
+  repo: curiosity
   quote: '피드백입니다 — (의지력 편 v3 검토) 대본 구조 통과·제작용 최종본 조건부 보류: 2016 버튼 과제, 2025 주 지표 외 결과, 출판편향 논쟁, 습관 연구 인과 완화, 4~6장
     기준 화면 교차, 결말 관점 변화, 8~9장 밀도, 제목'
   project: 20261121-curiosity-willpower
@@ -795,11 +938,21 @@ feedback:
   scope: trial
 - date: '2026-11-21'
   kind: direction
+  repo: main
   quote: 이는 피드백이며 제목후보는1 입니다. 이를 매뉴얼에 반영하고 앞으로는 주제선정과 대본작성 자체를 1순위로 후에 그에 맞춘 연출을 하세요. 즉 언제나 가장 우선순위는 대본이며 대본의 메뉴얼을
     구체화하세요 영상작업 들어가세요
   note: manual/13-script.md 신설(대본 1순위·쓰기 전 여섯 가지·사실과 해석 대조표·유형별 중심축·D2 반복), README 읽는 순서 0, AGENTS·11 S4 연결. 사용자
     제공 '대본 작성 매뉴얼 v1.0'의 공통 원칙·유형표를 옮김
   scope: standard
+  project: 20261121-curiosity-willpower
 - date: '2026-11-21'
   kind: direction
+  repo: main
   quote: '이건 그냥빼줘 (매뉴얼 그래프 댓글 — 03 §0-4 ''근거: docs/31… 구조와 방법만 가져오고 문구는 복제하지 않는다.'' 줄)'
+- date: '2026-11-21'
+  kind: tool
+  quote: 전체적으로 내가 어떤 주제의 영상에서 말한건지 아닌지 즉 레포별로 좀 구분해줘 보면 뒤죽박죽같아서 이를 검토해줘
+  repo: main
+  note: feedback.yaml 에 repo(main·market·curiosity·issues·ai) 필드, 그래프 '내 피드백' 레포 탭, manual/feedback-by-repo.md 자동
+    생성 (영상에서 한 말 / 영상 밖에서 한 말)
+  scope: standard
