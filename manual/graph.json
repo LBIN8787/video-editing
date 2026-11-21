@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-21T13:12:10",
- "source_hash": "85c86080fa53",
+ "generated": "2026-11-21T13:23:36",
+ "source_hash": "52457816f7f5",
  "audit": {
   "date": "2026-11-20T23:13",
   "counts": {
@@ -577,14 +577,14 @@
   "sections": 171,
   "must": 29,
   "auto": 39,
-  "intents": 192,
+  "intents": 193,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 85,
   "terms": 139,
   "bans": 153,
-  "feedback": 135,
+  "feedback": 136,
   "topics": 4,
   "episodes": 37,
   "main_situations": 17,
@@ -10920,8 +10920,8 @@
    "applied": [],
    "themes": [],
    "commit": {
-    "sha": "f0f22cfb5a26a5019f9265d3d6b3a861cb0c963f",
-    "subject": "피드백 기록: 썸네일에 시장 불안 키워드(반도체 폭락·AI 인프라 종말인가) 적극 활용",
+    "sha": "74985af7bd5c828114e6d196e361939f8a3683fb",
+    "subject": "20261121-market-daily: 썸네일 J(검은 금요일·반도체 대폭락·AI 인프라 종말인가?)로 교체 (사용자 선택)",
     "date": "2026-11-21",
     "other_files": []
    }
@@ -21551,6 +21551,34 @@
      "by": ""
     }
    ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:29aec689",
+   "kind": "intent",
+   "quote": "피드백입니다 — (의지력 편 v3 검토) 대본 구조 통과·제작용 최종본 조건부 보류: 2016 버튼 과제, 2025 주 지표 외 결과, 출판편향 논쟁, 습관 연구 인과 완화, 4~6장 기준 화면 교차, 결말 관점 변화, 8~9장 밀도, 제목",
+   "label": "피드백입니다 — (의지력 편 v3 검토) 대본 구조 통과·제작용 최종본 조건부 보류: 2016 버튼 과제, ",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:136",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:29aec689"
+   ],
+   "themes": [
+    "script"
+   ],
+   "ann_key": "intent:29aec689",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
    "status": "unreviewed",
    "annotated": false
   },
@@ -32185,6 +32213,34 @@
    "tier_key": "fb:cf66ec3e",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": false,
+   "tier": "trial",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "실험 기록"
+  },
+  {
+   "id": "fb:136",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "피드백입니다 — (의지력 편 v3 검토) 대본 구조 통과·제작용 최종본 조건부 보류: 2016 버튼 과제, 2025 주 지표 외 결과, 출판편향 논쟁, 습관 연구 인과 완화, 4~6장 기준 화면 교차, 결말 관점 변화, 8~9장 밀도, 제목",
+   "label": "피드백입니다 — (의지력 편 v3 검토) 대본 구조 통과·제작용 최종본 조건부 보류: 2016 버튼 과제, ",
+   "fb_kind": "review",
+   "fb_kind_label": "영상 검토",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "v4 반영",
+   "pending": false,
+   "themes": [
+    "script"
+   ],
+   "scope": "trial",
+   "intent": "intent:29aec689",
+   "tier_key": "fb:29aec689",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
    "overfit": false,
    "single": false,
    "tier": "trial",
@@ -58266,6 +58322,16 @@
    "kind": "about"
   },
   {
+   "s": "intent:29aec689",
+   "t": "fb:136",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:29aec689",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
    "s": "intent:e19f866e",
    "t": "fb:37",
    "kind": "quoted_in"
@@ -64228,6 +64294,16 @@
   {
    "s": "fb:135",
    "t": "intent:cf66ec3e",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:136",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "fb:136",
+   "t": "intent:29aec689",
    "kind": "quoted_as"
   }
  ]
