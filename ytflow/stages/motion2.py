@@ -168,11 +168,13 @@ class Stage:
             fs = m.get("fs", 104)
             acc = m.get("color") or self.th.get("accent", self.th["arrow"])
             muted = self.th.get("muted", "#9AA4B2")
+            if self.th.get("light_bg"):   # 밝은 바탕(종이·밝은 팩)에서는 옅은 회색이 묻힘 → 짙은 회색, 그림자 없음 (2026-11-21 대비 1.8:1)
+                muted = "#4E525C"
             sw = max(_est(lab, 30) * 1.12, _est(val, fs) * 0.92, _est(sub, 28)) + 48
             sh = 58 + fs * 1.05 + (44 if sub else 0)
             x, y = clamp_box(m.get("x", 960), m.get("y", 540), sw, sh)
             did = f"{self.p}_{m['id']}"
-            shadow = "text-shadow:0 2px 14px rgba(0,0,0,.55);"
+            shadow = "" if self.th.get("light_bg") else "text-shadow:0 2px 14px rgba(0,0,0,.55);"
             self.items.append(
                 f'<div id="{did}" style="position:absolute;left:{x - sw / 2:.0f}px;top:{y - sh / 2:.0f}px;width:{sw:.0f}px;height:{sh:.0f}px;z-index:5">'
                 f'<div id="{did}_bar" style="position:absolute;left:0;top:6px;width:5px;height:{sh - 12:.0f}px;background:{acc};transform-origin:top"></div>'
@@ -274,7 +276,8 @@ def apply(D, sc: dict, bt: list, dur: float, w: int = 1920, h: int = 1080, keep:
     acc = pal.get("accent", YEL)
     stg = Stage(f"mo{sc['id']}", w, h, theme={"icon_bg": pal.get("card2", pal.get("card", "#1C2E47")), "ring": acc, "arrow": acc,
                                              "card": pal.get("card", "#16263C"), "card_ink": pal.get("ink", "#E8EEF6"), "label": pal.get("ink", "#E8EEF6"),
-                                             "accent": acc, "muted": pal.get("muted", "#9AA4B2")})
+                                             "accent": acc, "muted": pal.get("muted", "#9AA4B2"),
+                                             "light_bg": sum(int((pal.get("base") or "#F3EFE6").lstrip("#")[i:i + 2], 16) for i in (0, 2, 4)) > 450})
     stg.no_sparkle = getattr(D, "no_zoom", False)
     stg.clean = getattr(D, "chart_clean", False)
     for k, (b, (t0, d)) in enumerate(zip(sc["beats"], bt)):

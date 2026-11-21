@@ -44,7 +44,7 @@ def hbite(ch, beat, src, find, ko):
 # 0 여는 장면
 bite(0, "11월 17일, 텍사스 오스틴의 한 투자 행사. 1981년부터 2010년까지 30년 가까이 운용하며 손실 난 해가 없었던 투자자, 스탠리 드러켄밀러에게 진행자가 물었습니다.",
      "So, how much of that portfolio do you own today? Basically, almost none.", "그 포트폴리오를 지금은 얼마나 갖고 계십니까? — 사실상 거의 없습니다.")
-S[-1]["beats"][0]["motion"] = [{"t": "1981년", "do": "stat", "id": "yrs", "value": "1981–2010", "label": "11월 17일 대담 · 운용 30년 가까이", "sub": "손실 난 해 0", "x": 1600, "y": 240, "fs": 52, "static": True}]
+S[-1]["beats"][0]["motion"] = [{"t": "1981년", "do": "stat", "id": "yrs", "value": "1981–2010", "label": "11월 17일 대담 · 운용 30년 가까이", "sub": "손실 난 해 0", "x": 1640, "y": 860, "fs": 52, "static": True}]
 bite(0, "11월 17일 대담 기준, 그는 지금의 자신을 이렇게 설명했습니다.", "We're trying to not lose money, as opposed to make money.",
      "우리는 지금, 돈을 벌기보다 잃지 않으려 하고 있습니다.")
 add(type="checklist", chapter=0, label="말: TomorrowX 대담(11.17) · 장부: 13F(9.30 기준, 11.16 공개)", title="11월 17일, 그의 말과 장부", x=150, text_w=1100,

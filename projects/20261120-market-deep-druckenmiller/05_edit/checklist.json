@@ -1,7 +1,7 @@
 {
  "project": "20261120-market-deep-druckenmiller",
  "manual_version": "83",
- "checked": "2026-11-21T09:45:16",
+ "checked": "2026-11-21T10:44:05",
  "pass": false,
  "rows": [
   {
@@ -485,7 +485,7 @@
    "level": "SHOULD",
    "item": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번 없음, 한 출처로 표지를 모두 때우지 않음",
    "ok": true,
-   "detail": "표지 ['druck_qa', 'druck_notlose', 'druck_2027', 'druck_break', 'hl_broll', 'hl_heated'] · 가장 많은 출처 ('iConnections 공식 채널 (YouTube) · 2026.11.17 TomorrowX 서밋', 4)"
+   "detail": "표지 [] · 가장 많은 출처 ('', 0)"
   },
   {
    "gate": "G5",
@@ -575,8 +575,8 @@
    "gate": "G6",
    "level": "MUST",
    "item": "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)",
-   "ok": true,
-   "detail": "{}"
+   "ok": false,
+   "detail": "{'1': ['contrast/contrast_aa_failure: Contrast is 1.83:1; WCAG AA requires 3:1.', 'contrast/contrast_aa_failure: Contrast is 1.8:1; WCAG AA requires 3:1.'], '34': ['contrast/contrast_aa_failure: Contrast is 1.19:1; WCAG AA requires 3:1.'], '35': ['contrast/contrast_aa_failure: Contrast is 1.19:1; WCAG AA requires 3:1.']}"
   },
   {
    "gate": "G6",
@@ -618,7 +618,7 @@
    "level": "참고",
    "item": "움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5)",
    "ok": false,
-   "detail": "변화 6.5/분 · 정지 0.66"
+   "detail": "변화 9.2/분 · 정지 0.63"
   },
   {
    "gate": "G6",

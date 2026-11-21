@@ -41,7 +41,7 @@ def _node_size(nd: dict) -> tuple[float, float]:
 def s_noirboard(D, sc: dict, bt: list, dur: float):
     nodes, edges = sc["nodes"], sc.get("edges", [])
     D.label(sc.get("label", ""), dark=True)
-    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""), dark=True)
     p = D._id()
     when, strings, active = {}, [], []
     for b, (t0, d) in zip(sc["beats"], bt):
@@ -177,7 +177,7 @@ def _fade(D, el, at, dur=0.6, dy=10):
 
 def s_noirtitle(D, sc, bt, dur):
     _room(D)
-    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""), dark=True)
     p = D._id()
     t0 = bt[0][0]
     title = H.escape(sc.get("title", ""))
@@ -195,7 +195,7 @@ def s_noirtitle(D, sc, bt, dur):
 def s_noircase(D, sc, bt, dur):
     _room(D)
     D.label(sc.get("label", ""), dark=True)
-    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""), dark=True)
     p = D._id()
     steps = sc.get("steps", [])
     x0, x1, ty = 640, 1720, 118
@@ -265,7 +265,7 @@ def s_noircase(D, sc, bt, dur):
 def s_noirsides(D, sc, bt, dur):
     _room(D)
     D.label(sc.get("label", ""), dark=True)
-    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""), dark=True)
     p = D._id()
     if sc.get("title"):
         D.items.append(f'<div id="{p}h" style="position:absolute;left:0;right:0;top:110px;text-align:center;font-family:sans-x,sans;font-size:44px;color:#A9A9AE;opacity:0;z-index:2">{H.escape(sc["title"])}</div>')
