@@ -3,7 +3,7 @@
  "output": null,
  "dry_run": false,
  "commands": [
-  "/usr/bin/ffmpeg -hide_banner -nostdin -i projects/20261120-market-deep-druckenmiller/05_edit/final.mp4 -vn -af loudnorm=I=-14:TP=-1:LRA=11:print_format=json -f null -"
+  "'C:\\Users\\s9907\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-8.1.1-full_build\\bin\\ffmpeg.EXE' -hide_banner -nostdin -i 'E:\\ytflow-local\\druck-render\\projects\\20261120-market-deep-druckenmiller\\05_edit\\final.mp4' -vn -af loudnorm=I=-14:TP=-1:LRA=11:print_format=json -f null -"
  ],
  "verified": false,
  "verification": [],
@@ -12,7 +12,7 @@
   {
    "check": "duration",
    "status": "PASS",
-   "value": "917.10s",
+   "value": "910.70s",
    "expected": "<= 43200s",
    "fix": "decide with the user: cut.py keeps quality but drops content; fit.py --duration speeds up (audio pitch-preserved, motion faster)",
    "reason": "",
@@ -75,7 +75,7 @@
   {
    "check": "file size",
    "status": "PASS",
-   "value": "140.7 MB",
+   "value": "147.1 MB",
    "expected": "<= 262144 MB",
    "fix": "export.py --crf 24 or lower resolution",
    "reason": "",

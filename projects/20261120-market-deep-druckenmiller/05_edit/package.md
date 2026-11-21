@@ -43,7 +43,7 @@
   "timestamp_overlap": false,
   "smallest_text_px_at_168w": 6.8,
   "ok": true,
-  "face_area": 0.105
+  "face_area": null
  },
  "C": {
   "timestamp_overlap": false,
@@ -54,7 +54,7 @@
   "timestamp_overlap": false,
   "smallest_text_px_at_168w": 6.8,
   "ok": true,
-  "face_area": 0.105
+  "face_area": null
  }
 }
 ```

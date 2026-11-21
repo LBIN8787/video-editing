@@ -226,7 +226,7 @@ add(type="noirsides", chapter=6, label="2월: 모건스탠리 'Hard Lessons'(202
            {"say": "구리는 값이 내리는 쪽에 걸었고,", "add": [{"side": 1, "tag": "11.17", "title": "구리 숏", "sub": "내리는 쪽에"}], "strike": [[0, 1]]},
            {"say": "배짱 대신 쉼을 택했습니다. 같은 사람이 1년도 안 돼 정반대 자리에 섰습니다.", "add": [{"side": 1, "tag": "11.17", "title": "쉼", "sub": "주식 거의 없음"}], "strike": [[0, 2]]}])
 hbite(2, "그 스스로도 이렇게 말합니다.", "hl_mind", "I tend to change my mind every three weeks.", "저는 3주마다 생각을 바꾸는 편입니다.")
-add(type="footage", chapter=6, label="화면: 모건스탠리 'Hard Lessons' 인터뷰(2026.2.27) · 말은 TomorrowX 대담 정리(번역본)", clip={"src": "hl_broll", "start": 14.7, "frame": "full"}, beats=[{"say": "왜 바뀌었는지 그가 하나하나 설명하진 않았습니다. 다만 대담 정리를 보면, 회사들이 돈을 빌리는 금리 차이가 벌어지고 있다고 했습니다. 연준과 돈의 흐름을 먼저 보는 그의 원칙대로라면, 그 신호가 판을 바꾼 것으로 볼 수 있습니다."}])
+add(type="footage", chapter=6, label="화면: 모건스탠리 'Hard Lessons' 인터뷰(2026.2.27) · 말은 TomorrowX 대담 정리(번역본)", clip={"src": "hl_broll", "start": 15.7, "frame": "full"}, beats=[{"say": "왜 바뀌었는지 그가 하나하나 설명하진 않았습니다. 다만 대담 정리를 보면, 회사들이 돈을 빌리는 금리 차이가 벌어지고 있다고 했습니다. 연준과 돈의 흐름을 먼저 보는 그의 원칙대로라면, 그 신호가 판을 바꾼 것으로 볼 수 있습니다."}])
 add(type="bars", chapter=6, label="월가 전망 보도(11.13~18) · 오름폭은 계산",
     title="같은 때, 월가의 2027년 말 S&P 500 전망", unit="", emph=4, skin="dark-doc",
     items=[{"label": "11월 16일 종가", "value": 7416.59, "text": "7,416.59", "t": "16일"},
