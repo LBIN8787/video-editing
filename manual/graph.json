@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-21T09:37:52",
- "source_hash": "7f5f937295ea",
+ "generated": "2026-11-21T10:12:05",
+ "source_hash": "e21c2e8a2048",
  "audit": {
   "date": "2026-11-20T23:13",
   "counts": {
@@ -577,25 +577,25 @@
   "sections": 171,
   "must": 26,
   "auto": 39,
-  "intents": 178,
+  "intents": 182,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 85,
   "terms": 139,
-  "bans": 139,
-  "feedback": 122,
+  "bans": 142,
+  "feedback": 125,
   "topics": 4,
-  "episodes": 35,
+  "episodes": 36,
   "main_situations": 17,
   "tiers": {
-   "principle": 46,
-   "standard": 117,
+   "principle": 48,
+   "standard": 118,
    "style": 16,
    "trial": 6
   },
   "overfit": 7,
-  "principle_bans": 40
+  "principle_bans": 42
  },
  "pending": [],
  "status_labels": {
@@ -1900,6 +1900,25 @@
   },
   {
    "section": "sec:09§2",
+   "text": "브리핑과 같은 장면·문장을 반복하지 않는다(§13). 브리핑은 그날 전체를 짧게, 심층은 한 줄기를 깊게.",
+   "themes": [
+    "variety"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:69a2610b",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§2",
    "text": "아침 브리핑 (매일, 7~10분, <YYYYMMDD>-market-daily): 시장 한 장 → 그날 시장을 움직인 보도 2~3개를 가볍게 분석(무엇이 나왔나·어디서·매체는 어떻게 읽었나·숫자 하나) → 한국 → 오늘 볼 것. 심층거리가 있으면 그 이야기는 한 장으로 짧게 다루고 \"이 이야기는 오늘 ○시 심층에서 자세히\"로 넘긴다(같은 장면·문장을 두 편에 반복하지 않음 — §13). 제목·썸네일은 시황 나열이 아니라 핫 키워드·사건 당사자로 시작(§7-1 — ",
    "themes": [
     "motion",
@@ -2524,6 +2543,26 @@
   },
   {
    "section": "sec:09§7-1",
+   "text": "①-1 클릭을 부르는 말 — 공포·민감 키워드, 금리·연준, 핫한 인물·기업 (작업 기준, 2026-11-21 사용자: \"썸네일은 사람들이 보고 클릭할만한 핫한 키워드 민감한 키워드 이런걸 적어주세요 저는 블랙 ㅁㅁㅁ 등 공포감이 있는 핫한 키워드와 금리 연준 그리고 핫한 인물이나 기업사진 등이 핫한거같아서\"): 큰 글씨에는 그날 실제로 쓰인 공포·민감한 말(검은 금요일·블랙 ○○·폭락·쇼크·패닉·경고·조사 같은, 국내 매체 제목에 반복된 말 — 팩트시트 ## ",
+   "themes": [
+    "variety",
+    "length"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:7e59a47f",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
+   "section": "sec:09§7-1",
    "text": "3. 기본 모양 (사용자 선택 — 11/19 '검은 바탕 연준 썸네일'): layout: photo, photo_side: full — 사건의 기관·장소·인물 사진을 꽉 채우고 어둡게(흑백·검은 톤), 위에 빨간 띠(날짜 · 출처 이름, 예 \"11월 19일 · 연준 의사록\"), 큰 두 줄(핫 키워드 한 낱말만 노랑), 아래 작은 손글씨 한 줄(다음 일정). 컬러 사진 + 노란 상자 + 숫자 칩(layout: punch)과 짙은 남색 숫자 대비(versus the",
    "themes": [
     "background",
@@ -2606,6 +2645,27 @@
    "absolute": false,
    "must": false,
    "tier_key": "ban:906de4cb",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
+   "section": "sec:09§7-1",
+   "text": "8. 지수 띠를 작게, 매번 (스타일 기본값, 2026-11-21 사용자: \"썸네일에 그리고 snp나 나스닥 soxx하락률 등을 작게 적어주세요\" · \"앞으로 매번 snp랑 나스닥 그리고 가장 많이 빠진 섹터지수 등을 썸네일에 넣어주세요\"): 모든 변형의 아래 왼쪽에 작은 띠 하나 — S&P 500 · 나스닥 · 그날 가장 많이 움직인 섹터 지수(반도체 SOX·기술 XLK 등, 팩트시트 ## 시장 한 장 ✅ 숫자 그대로, 영상과 같은 날짜 기준). hybrid.",
+   "themes": [
+    "motion",
+    "variety",
+    "depth"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:9c073a3c",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
    "overfit": false,
@@ -2702,7 +2762,7 @@
    "tier_label": "영구 원칙"
   },
   {
-   "section": "sec:09§h358",
+   "section": "sec:09§h363",
    "text": "ElevenLabs 를 쓸 수 없는 날은 edge 초안으로 만들되 올리지 않는다 (v43, §2-1 — 공개본은 Teo). 크레딧이 모자라면 그날 편을 미루거나 voice-import 로 Teo 테이크를 만든다.",
    "themes": [],
    "absolute": false,
@@ -3482,7 +3542,7 @@
    "key": "09",
    "file": "manual/09-market-daily.md",
    "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13 · v36 인사이트·영상 소스 · v42 기술 분석·CEO 소식 2026-11-17)",
-   "lines": 377,
+   "lines": 382,
    "versions": [
     19,
     24,
@@ -5255,7 +5315,7 @@
    "label": "아침은 가벼운 브리핑, 심층은 따로 — 원본 발언이 있을 때",
    "title": "2. 아침은 가벼운 브리핑, 심층은 따로 — 원본 발언이 있을 때 (v76, 2026-11-20)",
    "line": 52,
-   "end": 68,
+   "end": 71,
    "tag_version": 76,
    "versions": [
     26,
@@ -5276,8 +5336,8 @@
    "level": 3,
    "label": "하루 여러 편 — 상한 없음",
    "title": "2-1. 하루 여러 편 — 상한 없음 (v39, 2026-11-17 사용자)",
-   "line": 69,
-   "end": 85,
+   "line": 72,
+   "end": 88,
    "tag_version": 39,
    "versions": [
     39
@@ -5295,8 +5355,8 @@
    "level": 3,
    "label": "기술 분석·기술의 미래 전망",
    "title": "2-2. 기술 분석·기술의 미래 전망 (v42, 2026-11-17 사용자)",
-   "line": 86,
-   "end": 127,
+   "line": 89,
+   "end": 130,
    "tag_version": 42,
    "versions": [
     42
@@ -5311,8 +5371,8 @@
    "level": 2,
    "label": "조사 — 원인은 1차 출처로",
    "title": "3. 조사 — 원인은 1차 출처로",
-   "line": 128,
-   "end": 128,
+   "line": 131,
+   "end": 131,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5325,8 +5385,8 @@
    "level": 3,
    "label": "SAVE(오선) 소식은 기본으로 확인 (2026-11-14 사용자 요청)",
    "title": "3-0. SAVE(오선) 소식은 기본으로 확인 (2026-11-14 사용자 요청)",
-   "line": 129,
-   "end": 138,
+   "line": 132,
+   "end": 141,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5339,8 +5399,8 @@
    "level": 3,
    "label": "뉴스레터 화제도 같은 '단서' 자리 (2026-11-16 사용자 승인, docs/36)",
    "title": "3-0-1. 뉴스레터 화제도 같은 '단서' 자리 (2026-11-16 사용자 승인, docs/36)",
-   "line": 139,
-   "end": 144,
+   "line": 142,
+   "end": 147,
    "tag_version": null,
    "versions": [
     35
@@ -5355,8 +5415,8 @@
    "level": 3,
    "label": "원인 종류별 어디서 확인하나",
    "title": "3-1. 원인 종류별 어디서 확인하나",
-   "line": 145,
-   "end": 156,
+   "line": 148,
+   "end": 159,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5369,8 +5429,8 @@
    "level": 3,
    "label": "팩트시트 쓰는 법 (`01_research/factsheet.md`)",
    "title": "3-2. 팩트시트 쓰는 법 (`01_research/factsheet.md`)",
-   "line": 157,
-   "end": 162,
+   "line": 160,
+   "end": 165,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5383,8 +5443,8 @@
    "level": 3,
    "label": "데이터 함정 (실제로 겪은 것)",
    "title": "3-3. 데이터 함정 (실제로 겪은 것)",
-   "line": 163,
-   "end": 171,
+   "line": 166,
+   "end": 174,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5397,8 +5457,8 @@
    "level": 3,
    "label": "사람·매체의 인사이트 — 사실과 나눠서, 넉넉하게",
    "title": "3-4. 사람·매체의 인사이트 — 사실과 나눠서, 넉넉하게 (v36, 2026-11-17 사용자 요청)",
-   "line": 172,
-   "end": 203,
+   "line": 175,
+   "end": 206,
    "tag_version": 36,
    "versions": [
     36,
@@ -5420,8 +5480,8 @@
    "level": 3,
    "label": "매체·인물의 인터뷰·방송을 영상 소스로",
    "title": "3-5. 매체·인물의 인터뷰·방송을 영상 소스로 (v36, 2026-11-17 사용자 요청)",
-   "line": 204,
-   "end": 226,
+   "line": 207,
+   "end": 229,
    "tag_version": 36,
    "versions": [
     36
@@ -5440,8 +5500,8 @@
    "level": 2,
    "label": "대본 — 브리핑 (10~12분, 20~26장면)",
    "title": "4. 대본 — 브리핑 (10~12분, 20~26장면)",
-   "line": 227,
-   "end": 244,
+   "line": 230,
+   "end": 247,
    "tag_version": null,
    "versions": [
     34
@@ -5471,8 +5531,8 @@
    "level": 2,
    "label": "대본 — 심층 (12분~, 길이는 자료·인사이트의 양이 정함)",
    "title": "5. 대본 — 심층 (12분~, 길이는 자료·인사이트의 양이 정함)",
-   "line": 245,
-   "end": 250,
+   "line": 248,
+   "end": 253,
    "tag_version": null,
    "versions": [
     26,
@@ -5493,8 +5553,8 @@
    "level": 3,
    "label": "나열하지 말고 풀어서 — 설명은 움직이는 장면으로",
    "title": "5-1. 나열하지 말고 풀어서 — 설명은 움직이는 장면으로 (v63, 2026-11-20)",
-   "line": 251,
-   "end": 278,
+   "line": 254,
+   "end": 281,
    "tag_version": 63,
    "versions": [
     63
@@ -5524,8 +5584,8 @@
    "level": 2,
    "label": "화면 문법 (시장 카테고리 개성, `05 §0-7`)",
    "title": "6. 화면 문법 (시장 카테고리 개성, `05 §0-7`)",
-   "line": 279,
-   "end": 292,
+   "line": 282,
+   "end": 295,
    "tag_version": null,
    "versions": [
     27,
@@ -5557,8 +5617,8 @@
    "level": 2,
    "label": "제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
    "title": "7. 제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
-   "line": 293,
-   "end": 297,
+   "line": 296,
+   "end": 300,
    "tag_version": null,
    "versions": [
     27
@@ -5576,8 +5636,8 @@
    "level": 3,
    "label": "썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
    "title": "7-1. 썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
-   "line": 298,
-   "end": 311,
+   "line": 301,
+   "end": 316,
    "tag_version": null,
    "versions": [
     51
@@ -5595,8 +5655,8 @@
    "level": 2,
    "label": "렌더 전 점검",
    "title": "8. 렌더 전 점검",
-   "line": 312,
-   "end": 314,
+   "line": 317,
+   "end": 319,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5609,8 +5669,8 @@
    "level": 2,
    "label": "렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
    "title": "9. 렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
-   "line": 315,
-   "end": 322,
+   "line": 320,
+   "end": 327,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5623,8 +5683,8 @@
    "level": 2,
    "label": "업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
    "title": "10. 업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
-   "line": 323,
-   "end": 335,
+   "line": 328,
+   "end": 340,
    "tag_version": null,
    "versions": [
     34
@@ -5639,8 +5699,8 @@
    "level": 2,
    "label": "기록·되돌아보기",
    "title": "11. 기록·되돌아보기",
-   "line": 336,
-   "end": 339,
+   "line": 341,
+   "end": 344,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5653,8 +5713,8 @@
    "level": 2,
    "label": "예외 대응",
    "title": "12. 예외 대응",
-   "line": 340,
-   "end": 349,
+   "line": 345,
+   "end": 354,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5667,8 +5727,8 @@
    "level": 2,
    "label": "법·정책",
    "title": "13. 법·정책",
-   "line": 350,
-   "end": 357,
+   "line": 355,
+   "end": 362,
    "tag_version": null,
    "versions": [
     34
@@ -5676,43 +5736,43 @@
    "last_version": 34
   },
   {
-   "id": "sec:09§h358",
+   "id": "sec:09§h363",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h358",
+   "num": "h363",
    "level": 2,
    "label": "목소리 (2026-11-13 결정)",
    "title": "목소리 (2026-11-13 결정)",
-   "line": 358,
-   "end": 365,
+   "line": 363,
+   "end": 370,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h366",
+   "id": "sec:09§h371",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h366",
+   "num": "h371",
    "level": 2,
    "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
    "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
-   "line": 366,
-   "end": 371,
+   "line": 371,
+   "end": 376,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h372",
+   "id": "sec:09§h377",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h372",
+   "num": "h377",
    "level": 2,
    "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
    "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
-   "line": 372,
-   "end": 377,
+   "line": 377,
+   "end": 382,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -23125,6 +23185,48 @@
    "annotated": false
   },
   {
+   "id": "intent:01bf8baa",
+   "kind": "intent",
+   "quote": "앞으로 매번 snp랑 나스닥 그리고 가장 많이 빠진 섹터지수 등을 썸네일에 넣어주세그리고 검은 금요일에서 금요일에 노란색으로 칠해주세요.",
+   "label": "앞으로 매번 snp랑 나스닥 그리고 가장 많이 빠진 섹터지수 등을 썸네일에 넣어주세그리고 검은 금요일에서 금",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:123",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:09§7-1",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "앞으로 매번 snp랑 나스닥 그리고 가장 많이 빠진 섹터지수 등을 썸네일에 넣어주세요"
+   ],
+   "member_ids": [
+    "intent:01bf8baa",
+    "intent:87530dff"
+   ],
+   "themes": [
+    "length"
+   ],
+   "ann_key": "intent:01bf8baa",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§7-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:04276c31",
    "kind": "intent",
    "quote": "유튜브에 업로드하면 유튜브 링크를 올리 드라이브에서 삭제하는게 괜찮아 보이는데 / 재료는 삭제하는걸 원하지 않아요 단지 영상을 이제 하이퍼링크처럼 대체한다 느낌인거지 어떻게 이 영상을 만들었는지에 대한 기준 메뉴얼 재료는 그대로 냅두는거죠",
@@ -23147,6 +23249,39 @@
    "not_meant": [],
    "note": "",
    "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:115a9063",
+   "kind": "intent",
+   "quote": "썸네일에 그리고 snp나 나스닥 soxx하락률 등을 작게 적어주세요",
+   "label": "썸네일에 그리고 snp나 나스닥 soxx하락률 등을 작게 적어주세요",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "sec:09§7-1",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:115a9063"
+   ],
+   "themes": [],
+   "ann_key": "intent:115a9063",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§7-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -23179,6 +23314,88 @@
    "annotated": false
   },
   {
+   "id": "intent:a76c24e8",
+   "kind": "intent",
+   "quote": "어지간해서는 매일 각각영상1개씩 올리고싶습니다. (앞 말: 오늘 이런 시장에 대한 심층분석 인터뷰영상이나 시장 분석 해설 이런영상 필요없는지 체크해주세요 즉 시장을 브리핑해주는 영상과 그 브리핑속에서 여러 인사이트와 시장 그리고 수요 기술 등 산업 심층분석 영상을 따로 올리고자 합니다.)",
+   "label": "어지간해서는 매일 각각영상1개씩 올리고싶습니다. (앞 말: 오늘 이런 시장에 대한 심층분석 인터뷰영상이나 시",
+   "versions": [
+    76
+   ],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:125",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:09§2",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "시장을 브리핑해주는 영상과 그 브리핑속에서 여러 인사이트와 시장 그리고 수요 기술 등 산업 심층분석 영상을 따로 올리고자 합니다",
+    "어지간해서는 매일 각각영상1개씩 올리고싶습니다"
+   ],
+   "member_ids": [
+    "intent:a76c24e8",
+    "intent:01769126",
+    "intent:f2b33188"
+   ],
+   "themes": [
+    "depth"
+   ],
+   "ann_key": "intent:a76c24e8",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:76",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:03",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:06",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:374",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/daily.py:159",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/daily.py:179",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:dfa66488",
    "kind": "intent",
    "quote": "매일 시사: 10분 이상 / 호기심 표지: 표지도 삽화로 / 쇼츠채널은 일단은 보류입니다. 어... 훅쇼츠가 뭔지는 모르겠는데 일단은 이거 관련 영상은 아직 안만들거같아요 나중에 만들면 다시 재개할게요",
@@ -23204,6 +23421,46 @@
    "not_meant": [],
    "note": "",
    "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:e2cc0d3c",
+   "kind": "intent",
+   "quote": "그리고 썸네일은 사람들이 보고 클릭할만한 핫한 키워드 민감한 키워드 이런걸 적어주세요 저는 블랙 ㅁㅁㅁ 등 공포감이 있는 핫한 키워드와 금리 연준 그리고 핫한 인물이나 기업사진 등이 핫한거같아서 썸네일을 이렇게 부탁한게 맥락이구요.",
+   "label": "그리고 썸네일은 사람들이 보고 클릭할만한 핫한 키워드 민감한 키워드 이런걸 적어주세요 저는 블랙 ㅁㅁㅁ 등 ",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:124",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:09§7-1",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "썸네일은 사람들이 보고 클릭할만한 핫한 키워드 민감한 키워드 이런걸 적어주세요 저는 블랙 ㅁㅁㅁ 등 공포감이 있는 핫한 키워드와 금리 연준 그리고 핫한 인물이나 기업사진 등이 핫한거같아서"
+   ],
+   "member_ids": [
+    "intent:e2cc0d3c",
+    "intent:ab91991b"
+   ],
+   "themes": [],
+   "ann_key": "intent:e2cc0d3c",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§7-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -29427,7 +29684,7 @@
    "mentioned_in": [
     "sec:04§0-4",
     "sec:09§6",
-    "sec:09§h372",
+    "sec:09§h377",
     "sec:11§2-4",
     "sec:README§2-5",
     "sec:README§3-1",
@@ -29750,7 +30007,7 @@
     "sec:06§G6",
     "sec:08§4",
     "sec:09§6",
-    "sec:09§h372",
+    "sec:09§h377",
     "sec:10§4",
     "sec:README§0",
     "sec:README§2",
@@ -33076,6 +33333,88 @@
    "scope": "",
    "intent": "intent:90294930",
    "tier_key": "fb:90294930",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:123",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "앞으로 매번 snp랑 나스닥 그리고 가장 많이 빠진 섹터지수 등을 썸네일에 넣어주세그리고 검은 금요일에서 금요일에 노란색으로 칠해주세요.",
+   "label": "앞으로 매번 snp랑 나스닥 그리고 가장 많이 빠진 섹터지수 등을 썸네일에 넣어주세그리고 검은 금요일에서 금",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "length"
+   ],
+   "scope": "",
+   "intent": "intent:01bf8baa",
+   "tier_key": "fb:01bf8baa",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:124",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "그리고 썸네일은 사람들이 보고 클릭할만한 핫한 키워드 민감한 키워드 이런걸 적어주세요 저는 블랙 ㅁㅁㅁ 등 공포감이 있는 핫한 키워드와 금리 연준 그리고 핫한 인물이나 기업사진 등이 핫한거같아서 썸네일을 이렇게 부탁한게 맥락이구요.",
+   "label": "그리고 썸네일은 사람들이 보고 클릭할만한 핫한 키워드 민감한 키워드 이런걸 적어주세요 저는 블랙 ㅁㅁㅁ 등 ",
+   "fb_kind": "clarify",
+   "fb_kind_label": "뜻 바로잡기",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "intent": "intent:e2cc0d3c",
+   "tier_key": "fb:e2cc0d3c",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:125",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "어지간해서는 매일 각각영상1개씩 올리고싶습니다. (앞 말: 오늘 이런 시장에 대한 심층분석 인터뷰영상이나 시장 분석 해설 이런영상 필요없는지 체크해주세요 즉 시장을 브리핑해주는 영상과 그 브리핑속에서 여러 인사이트와 시장 그리고 수요 기술 등 산업 심층분석 영상을 따로 올리고자 합니다.)",
+   "label": "어지간해서는 매일 각각영상1개씩 올리고싶습니다. (앞 말: 오늘 이런 시장에 대한 심층분석 인터뷰영상이나 시",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "depth"
+   ],
+   "scope": "",
+   "intent": "intent:a76c24e8",
+   "tier_key": "fb:a76c24e8",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -46996,6 +47335,284 @@
        "say": "딱 하나만 기억한다면 이것입니다. 같은 날, 앤트로픽은 공모가보다 높게 마쳤지만 첫 거래 뒤 잠깐 오른 다음 밀렸고, 앤트로픽을 대신 사던 주식들도 내렸습니다. "
       }
      ]
+    },
+    {
+     "project": "20261121-market-daily",
+     "scenes": 24,
+     "coverage": 0.88,
+     "fit": 0.48,
+     "rows": [
+      {
+       "s": 1,
+       "type": "bignum",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "11월 20일 금요일 미국 장 마감 기준, 엔비디아는 하루에 14.01% 내린 125.53달러로 장을 마쳤습니다. 불과 사흘 전 화요일, 시장 예상을 넘는 매출 "
+      },
+      {
+       "s": 2,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "먼저 시장 한 장입니다. 나스닥은 5.28%, S&P 500은 3.70%, 다우는 1.93% 내렸습니다. 필라델피아 반도체 지수는 10.73% 빠져 나스닥의 두 "
+      },
+      {
+       "s": 3,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "업종으로 나눠 보면 기술이 7.27%로 가장 크게 빠졌고, 산업재와 금융도 내렸습니다. 열한 개 업종 가운데 오른 건 식료품·생활용품 같은 필수소비재 하나, 0."
+      },
+      {
+       "s": 4,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "먼저 엔비디아입니다. 화요일엔 숫자가 질문이었는데, 금요일엔 무엇이 질문이 됐을까요?"
+      },
+      {
+       "s": 5,
+       "type": "checklist",
+       "sit": "media",
+       "fit": false,
+       "rec": [
+        "newspapers",
+        "quote"
+       ],
+       "say": "로이터 통신은 사정을 잘 아는 두 사람을 인용해, 미국 증권거래위원회 SEC의 집행 담당 직원들이 엔비디아의 회계 문제 가능성을 살펴보고 있다고 보도했습니다. 지"
+      },
+      {
+       "s": 6,
+       "type": "motionboard",
+       "sit": "media",
+       "fit": false,
+       "rec": [
+        "newspapers",
+        "quote"
+       ],
+       "say": "상황을 그려 보면 이렇습니다. SEC가 엔비디아의 장부를 들여다보고 있다는 보도가 나왔습니다. 우리는 지금 이 단계에 있습니다."
+      },
+      {
+       "s": 7,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "그런데 이날 빠진 건 엔비디아만이 아닙니다. 마이크론이 13.89%, AMD가 13.25%, 브로드컴이 12.19%, 대만의 TSMC가 9.48% 내렸습니다. 반"
+      },
+      {
+       "s": 8,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "두 번째, 브로드컴입니다. 반도체가 다 빠진 날, 브로드컴에는 따로 붙은 이유가 하나 더 있었습니다."
+      },
+      {
+       "s": 9,
+       "type": "checklist",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "대만 TF 인터내셔널 증권의 애널리스트 궈밍치가 업계 조사를 내놨습니다. 구글이 내년, 2027년에 받을 브로드컴 설계 AI 칩, TPU 8i의 출하 계획을 약 "
+      },
+      {
+       "s": 10,
+       "type": "motionboard",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "그림으로 보면 이렇습니다. 손님은 구글 한 곳이고, 주문하는 메뉴도 같은 TPU입니다. 주방이 두 곳일 뿐입니다. 브로드컴과 미디어텍입니다."
+      },
+      {
+       "s": 11,
+       "type": "chapter",
+       "sit": "hub-event",
+       "fit": true,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "세 번째는 같은 날 칠레에서 나온 연준 이사의 말입니다."
+      },
+      {
+       "s": 12,
+       "type": "quote",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "리사 쿡 연준 이사는 칠레 중앙은행 연례 회의 연설에서, 금리 인상을 더 기다리면 뒤처질 위험이 있다고 말했습니다. 쿡 이사는 10월 회의에서 금리를 0.25%포"
+      },
+      {
+       "s": 13,
+       "type": "versus",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "그런데 같은 날 채권 시장은 반대로 움직였습니다. 연준 이사가 금리를 더 올려야 한다고 했는데, 미국 10년물 국채 금리는 5.05%에서 4.91%로 내려갔습니다"
+      },
+      {
+       "s": 14,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "이 하루를 시장의 전략가들은 어떻게 봤을까요?"
+      },
+      {
+       "s": 15,
+       "type": "versus",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "BNP 파리바의 베네딕트 로우는, 투자자들이 AI 열기가 정점을 지났는지 따지면서 공황 매도에 나섰다고 봤습니다. 사실이 아니라 한 사람의 시각입니다. 공포 지수"
+      },
+      {
+       "s": 16,
+       "type": "map_causal",
+       "sit": "hub-event",
+       "fit": true,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "여기서부터는 해석입니다. 금요일의 세 이야기는 같은 질문을 다른 자리에서 묻습니다. 엔비디아는 장부에서, 브로드컴은 주문서에서, 연준은 물가에서."
+      },
+      {
+       "s": 17,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "그렇다면 한국 시장은 이 폭락을 얼마나 받았을까요?"
+      },
+      {
+       "s": 18,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "11월 20일 한국 장 마감 기준, 코스피는 5.21% 내린 4,869.96으로 10개월 만에 가장 낮았습니다. 코스피와 코스닥 모두 프로그램 매도를 잠시 멈추는"
+      },
+      {
+       "s": 19,
+       "type": "map_causal",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "여기서부터는 해석입니다. 시간 순서를 보면, 한국의 금요일 5% 하락은 미국 목요일 장을 받은 겁니다. AMD 공매도 보고서가 나오고, S&P 500을 따라가는 "
+      },
+      {
+       "s": 20,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "이제 이 해석을 확인할 날짜들입니다."
+      },
+      {
+       "s": 21,
+       "type": "checklist",
+       "sit": "say-vs-do",
+       "fit": false,
+       "rec": [
+        "versus",
+        "bite",
+        "compare"
+       ],
+       "say": "23일 월요일 아침 9시, 한국 장이 미국 금요일을 처음 받습니다. 코스피 4,800선과 삼성전자, SK하이닉스를 봅니다. 그리고 엔비디아가 이번 보도에 공식 입"
+      },
+      {
+       "s": 22,
+       "type": "checklist",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "이 해석이 틀리는 경우도 적어 둡니다. SEC가 아무 조치 없이 끝내거나 엔비디아가 문제없음을 보인다면, 금요일의 14%는 모른다는 것에 대한 할인이었던 셈입니다"
+      },
+      {
+       "s": 23,
+       "type": "kinetic",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "시장은 숫자의 크기에서, 숫자가 적힌 자리로 눈을 옮겼습니다."
+      },
+      {
+       "s": 24,
+       "type": "outro",
+       "sit": "question",
+       "fit": false,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "딱 하나만 기억한다면 이것입니다. 금요일에 확인된 건 판정이 아니라 조사 보도 하나였고, 시장은 그 모른다는 것에 14%를 매겼습니다. 월요일 한국 장은, 그 값"
+      }
+     ]
     }
    ]
   },
@@ -47080,8 +47697,8 @@
     "일까요",
     "을까요"
    ],
-   "count": 45,
-   "fit": 32,
+   "count": 49,
+   "fit": 35,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -47299,8 +47916,8 @@
     "하락",
     "급등"
    ],
-   "count": 145,
-   "fit": 72,
+   "count": 156,
+   "fit": 77,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -47492,7 +48109,7 @@
     "헤드라인",
     "로이터"
    ],
-   "count": 3,
+   "count": 5,
    "fit": 2,
    "examples": [
     {
@@ -47837,7 +48454,7 @@
     "발행",
     "자사주"
    ],
-   "count": 15,
+   "count": 16,
    "fit": 3,
    "examples": [
     {
@@ -47892,8 +48509,8 @@
     "여파",
     "연준"
    ],
-   "count": 34,
-   "fit": 11,
+   "count": 37,
+   "fit": 13,
    "examples": [
     {
      "project": "20261112-market-daily",
@@ -53215,6 +53832,288 @@
      "say": "딱 하나만 기억한다면 이것입니다. 같은 날, 앤트로픽은 공모가보다 높게 마쳤지만 첫 거래 뒤 잠깐 오른 다음 밀렸고, 앤트로픽을 대신 사던 주식들도 내렸습니다. "
     }
    ]
+  },
+  {
+   "id": "ep:20261121-market-daily",
+   "kind": "episode",
+   "topic": "market",
+   "label": "20261121-market-daily",
+   "project": "20261121-market-daily",
+   "scenes": 24,
+   "coverage": 0.88,
+   "fit": 0.48,
+   "rows": [
+    {
+     "s": 1,
+     "type": "bignum",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "11월 20일 금요일 미국 장 마감 기준, 엔비디아는 하루에 14.01% 내린 125.53달러로 장을 마쳤습니다. 불과 사흘 전 화요일, 시장 예상을 넘는 매출 "
+    },
+    {
+     "s": 2,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "먼저 시장 한 장입니다. 나스닥은 5.28%, S&P 500은 3.70%, 다우는 1.93% 내렸습니다. 필라델피아 반도체 지수는 10.73% 빠져 나스닥의 두 "
+    },
+    {
+     "s": 3,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "업종으로 나눠 보면 기술이 7.27%로 가장 크게 빠졌고, 산업재와 금융도 내렸습니다. 열한 개 업종 가운데 오른 건 식료품·생활용품 같은 필수소비재 하나, 0."
+    },
+    {
+     "s": 4,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "먼저 엔비디아입니다. 화요일엔 숫자가 질문이었는데, 금요일엔 무엇이 질문이 됐을까요?"
+    },
+    {
+     "s": 5,
+     "type": "checklist",
+     "sit": "media",
+     "fit": false,
+     "rec": [
+      "newspapers",
+      "quote"
+     ],
+     "say": "로이터 통신은 사정을 잘 아는 두 사람을 인용해, 미국 증권거래위원회 SEC의 집행 담당 직원들이 엔비디아의 회계 문제 가능성을 살펴보고 있다고 보도했습니다. 지"
+    },
+    {
+     "s": 6,
+     "type": "motionboard",
+     "sit": "media",
+     "fit": false,
+     "rec": [
+      "newspapers",
+      "quote"
+     ],
+     "say": "상황을 그려 보면 이렇습니다. SEC가 엔비디아의 장부를 들여다보고 있다는 보도가 나왔습니다. 우리는 지금 이 단계에 있습니다."
+    },
+    {
+     "s": 7,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "그런데 이날 빠진 건 엔비디아만이 아닙니다. 마이크론이 13.89%, AMD가 13.25%, 브로드컴이 12.19%, 대만의 TSMC가 9.48% 내렸습니다. 반"
+    },
+    {
+     "s": 8,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "두 번째, 브로드컴입니다. 반도체가 다 빠진 날, 브로드컴에는 따로 붙은 이유가 하나 더 있었습니다."
+    },
+    {
+     "s": 9,
+     "type": "checklist",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "대만 TF 인터내셔널 증권의 애널리스트 궈밍치가 업계 조사를 내놨습니다. 구글이 내년, 2027년에 받을 브로드컴 설계 AI 칩, TPU 8i의 출하 계획을 약 "
+    },
+    {
+     "s": 10,
+     "type": "motionboard",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "그림으로 보면 이렇습니다. 손님은 구글 한 곳이고, 주문하는 메뉴도 같은 TPU입니다. 주방이 두 곳일 뿐입니다. 브로드컴과 미디어텍입니다."
+    },
+    {
+     "s": 11,
+     "type": "chapter",
+     "sit": "hub-event",
+     "fit": true,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "세 번째는 같은 날 칠레에서 나온 연준 이사의 말입니다."
+    },
+    {
+     "s": 12,
+     "type": "quote",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "리사 쿡 연준 이사는 칠레 중앙은행 연례 회의 연설에서, 금리 인상을 더 기다리면 뒤처질 위험이 있다고 말했습니다. 쿡 이사는 10월 회의에서 금리를 0.25%포"
+    },
+    {
+     "s": 13,
+     "type": "versus",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "그런데 같은 날 채권 시장은 반대로 움직였습니다. 연준 이사가 금리를 더 올려야 한다고 했는데, 미국 10년물 국채 금리는 5.05%에서 4.91%로 내려갔습니다"
+    },
+    {
+     "s": 14,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "이 하루를 시장의 전략가들은 어떻게 봤을까요?"
+    },
+    {
+     "s": 15,
+     "type": "versus",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "BNP 파리바의 베네딕트 로우는, 투자자들이 AI 열기가 정점을 지났는지 따지면서 공황 매도에 나섰다고 봤습니다. 사실이 아니라 한 사람의 시각입니다. 공포 지수"
+    },
+    {
+     "s": 16,
+     "type": "map_causal",
+     "sit": "hub-event",
+     "fit": true,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "여기서부터는 해석입니다. 금요일의 세 이야기는 같은 질문을 다른 자리에서 묻습니다. 엔비디아는 장부에서, 브로드컴은 주문서에서, 연준은 물가에서."
+    },
+    {
+     "s": 17,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "그렇다면 한국 시장은 이 폭락을 얼마나 받았을까요?"
+    },
+    {
+     "s": 18,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "11월 20일 한국 장 마감 기준, 코스피는 5.21% 내린 4,869.96으로 10개월 만에 가장 낮았습니다. 코스피와 코스닥 모두 프로그램 매도를 잠시 멈추는"
+    },
+    {
+     "s": 19,
+     "type": "map_causal",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "여기서부터는 해석입니다. 시간 순서를 보면, 한국의 금요일 5% 하락은 미국 목요일 장을 받은 겁니다. AMD 공매도 보고서가 나오고, S&P 500을 따라가는 "
+    },
+    {
+     "s": 20,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "이제 이 해석을 확인할 날짜들입니다."
+    },
+    {
+     "s": 21,
+     "type": "checklist",
+     "sit": "say-vs-do",
+     "fit": false,
+     "rec": [
+      "versus",
+      "bite",
+      "compare"
+     ],
+     "say": "23일 월요일 아침 9시, 한국 장이 미국 금요일을 처음 받습니다. 코스피 4,800선과 삼성전자, SK하이닉스를 봅니다. 그리고 엔비디아가 이번 보도에 공식 입"
+    },
+    {
+     "s": 22,
+     "type": "checklist",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "이 해석이 틀리는 경우도 적어 둡니다. SEC가 아무 조치 없이 끝내거나 엔비디아가 문제없음을 보인다면, 금요일의 14%는 모른다는 것에 대한 할인이었던 셈입니다"
+    },
+    {
+     "s": 23,
+     "type": "kinetic",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "시장은 숫자의 크기에서, 숫자가 적힌 자리로 눈을 옮겼습니다."
+    },
+    {
+     "s": 24,
+     "type": "outro",
+     "sit": "question",
+     "fit": false,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "딱 하나만 기억한다면 이것입니다. 금요일에 확인된 건 판정이 아니라 조사 보도 하나였고, 시장은 그 모른다는 것에 14%를 매겼습니다. 월요일 한국 장은, 그 값"
+    }
+   ]
   }
  ],
  "edges": [
@@ -53840,17 +54739,17 @@
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h358",
+   "t": "sec:09§h363",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h366",
+   "t": "sec:09§h371",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h372",
+   "t": "sec:09§h377",
    "kind": "contains"
   },
   {
@@ -58296,6 +59195,26 @@
    "kind": "about"
   },
   {
+   "s": "intent:a76c24e8",
+   "t": "ver:76",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:a76c24e8",
+   "t": "fb:125",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:a76c24e8",
+   "t": "sec:09§2",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:a76c24e8",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
    "s": "intent:c7688ffb",
    "t": "fb:16",
    "kind": "quoted_in"
@@ -58438,6 +59357,16 @@
   {
    "s": "intent:9b14a944",
    "t": "fb:6",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:e2cc0d3c",
+   "t": "fb:124",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:e2cc0d3c",
+   "t": "sec:09§7-1",
    "kind": "quoted_in"
   },
   {
@@ -59039,6 +59968,21 @@
    "s": "intent:c4c678bf",
    "t": "sec:09§3-5",
    "kind": "quoted_in"
+  },
+  {
+   "s": "intent:01bf8baa",
+   "t": "fb:123",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:01bf8baa",
+   "t": "sec:09§7-1",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:01bf8baa",
+   "t": "theme:length",
+   "kind": "about"
   },
   {
    "s": "intent:9b0c0e9e",
@@ -59754,6 +60698,11 @@
    "s": "intent:69ba832e",
    "t": "theme:background",
    "kind": "about"
+  },
+  {
+   "s": "intent:115a9063",
+   "t": "sec:09§7-1",
+   "kind": "quoted_in"
   },
   {
    "s": "intent:494092df",
@@ -61368,6 +62317,11 @@
   {
    "s": "topic:market",
    "t": "ep:20261120-market-deep-remix",
+   "kind": "episode"
+  },
+  {
+   "s": "topic:market",
+   "t": "ep:20261121-market-daily",
    "kind": "episode"
   },
   {
@@ -64438,6 +65392,31 @@
   {
    "s": "fb:122",
    "t": "intent:90294930",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:123",
+   "t": "theme:length",
+   "kind": "about"
+  },
+  {
+   "s": "fb:123",
+   "t": "intent:01bf8baa",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:124",
+   "t": "intent:e2cc0d3c",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:125",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "fb:125",
+   "t": "intent:a76c24e8",
    "kind": "quoted_as"
   }
  ]
