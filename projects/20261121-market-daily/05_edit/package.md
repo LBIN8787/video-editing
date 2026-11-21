@@ -30,30 +30,67 @@
 - 다음 일정 + 한국 계좌
 - 국내 제목 '검은 금요일' 키워드
 
-## 올릴 썸네일 (자동 선택 — docs/49·55 근거 점수, `--thumb` 로 바꿀 수 있음)
-**A**
+### D — 연준 쿡 이사 인물 + 검은 금요일 (person)
+![D](thumbnail_D.png)
 
-- A: 3.5점 — 핫 키워드 큰 글씨(SEC) +2 (manual/09 §7-1 ①) · 구체적 숫자 +1.5 (docs/49 §3)
-- B: 2.0점 — 구체적 숫자 +1.5 (docs/49 §3) · 휴대폰 목록에서도 큰 글씨 +0.5
-- C: 1.5점 — 구체적 숫자 +1.5 (docs/49 §3)
+- 영상 이야기 3의 당사자(연설 원문 ✅) + 사용자가 고른 '검은 금요일'
+- 주식이 빠진 날 연준은 인상 쪽 — 반전
+
+### E — 구글 TPU 보드 + 주문 이동 (photo full)
+![E](thumbnail_E.png)
+
+- 영상 이야기 2 — 구글·브로드컴
+- 조사일 뿐이라 아래 줄에 확인 없음을 밝힘
+
+### F — 숫자 대비: TPU 100만 개 vs 브로드컴 -12% (versus dark)
+![F](thumbnail_F.png)
+
+- 구글·브로드컴 숫자 둘 대비
+- 'AI가 끝났나'보다 '누구 몫이 줄었나'(I3)
+
+## 올릴 썸네일 (자동 선택 — docs/49·55 근거 점수, `--thumb` 로 바꿀 수 있음)
+**A** (대본에서 지정)
+
+- A: -1.5점 — 점검 실패(글자 크기·재생 시간 자리) −5 · 핫 키워드 큰 글씨(SEC) +2 (manual/09 §7-1 ①) · 구체적 숫자 +1.5 (docs/49 §3)
+- B: -3.5점 — 점검 실패(글자 크기·재생 시간 자리) −5 · 구체적 숫자 +1.5 (docs/49 §3)
+- C: -3.5점 — 점검 실패(글자 크기·재생 시간 자리) −5 · 구체적 숫자 +1.5 (docs/49 §3)
+- D: -3.0점 — 점검 실패(글자 크기·재생 시간 자리) −5 · 구체적 숫자 +1.5 (docs/49 §3) · 당사자 따옴표 발언 +0.5
+- E: -3.5점 — 점검 실패(글자 크기·재생 시간 자리) −5 · 구체적 숫자 +1.5 (docs/49 §3)
+- F: -3.5점 — 점검 실패(글자 크기·재생 시간 자리) −5 · 구체적 숫자 +1.5 (docs/49 §3)
 
 ## 점검
 ```json
 {
  "A": {
   "timestamp_overlap": false,
-  "smallest_text_px_at_168w": 7.3,
-  "ok": true
+  "smallest_text_px_at_168w": 3.9,
+  "ok": false
  },
  "B": {
   "timestamp_overlap": false,
-  "smallest_text_px_at_168w": 11.0,
-  "ok": true
+  "smallest_text_px_at_168w": 3.9,
+  "ok": false
  },
  "C": {
   "timestamp_overlap": false,
-  "smallest_text_px_at_168w": 7.3,
-  "ok": true
+  "smallest_text_px_at_168w": 3.9,
+  "ok": false
+ },
+ "D": {
+  "timestamp_overlap": false,
+  "smallest_text_px_at_168w": 3.9,
+  "ok": false,
+  "face_area": 0
+ },
+ "E": {
+  "timestamp_overlap": false,
+  "smallest_text_px_at_168w": 3.9,
+  "ok": false
+ },
+ "F": {
+  "timestamp_overlap": false,
+  "smallest_text_px_at_168w": 3.9,
+  "ok": false
  }
 }
 ```
