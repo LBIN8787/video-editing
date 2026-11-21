@@ -177,6 +177,27 @@ def parse_changelog() -> tuple[list[dict], list[str]]:
     return versions, pend
 
 
+# 레포 (메인 = 모든 채널 공통 / topics/<brand> 주제 레포) — 2026-11-21 사용자: "어떤 주제의 영상에서 말한건지 아닌지 즉 레포별로 좀 구분해줘"
+REPO = {"main": "메인(공통)", "market": "시장", "curiosity": "호기심", "issues": "시사", "ai": "AI"}
+_PROJ_REPO = {"20261120-chess-robot": "curiosity", "20261120-spanish-flu": "issues", "20261120-inventory-motion": "market",
+              "20261110-v10-after": "issues", "20261110-saudi-v10-part": "issues"}
+
+
+def repo_of_project(project: str) -> str:
+    """프로젝트 이름으로 주제 레포 추정 (없거나 스타일 시험작이면 main)."""
+    p = str(project or "").replace("projects/", "").strip()
+    if not p:
+        return "main"
+    if p in _PROJ_REPO:
+        return _PROJ_REPO[p]
+    for k in ("market", "curiosity", "issues"):
+        if f"-{k}" in p:
+            return k
+    if "-ai-" in p or p.endswith("-ai"):
+        return "ai"
+    return "main"
+
+
 def parse_reviews() -> list[dict]:
     out = []
     for l in _read(MANUAL / "reviews.md").splitlines():
@@ -184,7 +205,8 @@ def parse_reviews() -> list[dict]:
         if m:
             out.append({"id": f"rev:{len(out) + 1}", "kind": "review", "date": m.group(1), "project": m.group(2),
                         "manual_version": int(m.group(3)), "result": "pass" if m.group(4) == "통과" else "reject",
-                        "reason": m.group(5), "themes": _themes(m.group(5))})
+                        "reason": m.group(5), "themes": _themes(m.group(5)), "repo": repo_of_project(m.group(2)),
+                        "repo_label": REPO[repo_of_project(m.group(2))]})
     return out
 
 
@@ -317,17 +339,22 @@ def parse_feedback() -> list[dict]:
         out.append({"id": f"fb:{i + 1}", "kind": "feedback", "date": str(f.get("date", "")), "quote": q, "label": q[:60],
                     "fb_kind": f.get("kind", "direction"), "fb_kind_label": FB_KIND.get(f.get("kind", "direction"), f.get("kind", "")),
                     "project": f.get("project", "") or "", "about": str(f.get("about", "") or ""), "note": f.get("note", "") or "",
-                    "pending": bool(f.get("pending")), "themes": _themes(q), "scope": f.get("scope", "")})
+                    "pending": bool(f.get("pending")), "themes": _themes(q), "scope": f.get("scope", ""),
+                    "repo": (repo := f.get("repo") or repo_of_project(f.get("project", ""))), "repo_label": REPO.get(repo, repo)})
     return out
 
 
 def add_feedback(quote: str, kind: str = "direction", project: str = "", about: str = "", note: str = "",
-                 pending: bool = False, scope: str = "") -> dict:
+                 pending: bool = False, scope: str = "", repo: str = "") -> dict:
     """사용자가 한 말을 그대로 기록 → (선택) 반영 대기 → 그래프 다시 만들기."""
     import yaml
     doc = (yaml.safe_load(_read(FEEDBACK)) or {}) if FEEDBACK.exists() else {}
     doc.setdefault("feedback", [])
     item = {"date": dt.date.today().isoformat(), "kind": kind, "quote": quote.strip()}
+    repo = repo or repo_of_project(project)
+    if repo not in REPO:
+        raise ValueError("repo 는 main·market·curiosity·issues·ai 중 하나")
+    item["repo"] = repo
     if project:
         item["project"] = project
     if about:
@@ -345,7 +372,8 @@ def add_feedback(quote: str, kind: str = "direction", project: str = "", about: 
             "# python -m ytflow feedback \"원문\" [--kind direction|clarify|tool|review] [--project P] [--about 의도ID] [--pending]\n"
             "# kind: direction 방향·기준 요청 · clarify 뜻 바로잡기(모델 해석이 틀렸을 때) · tool 도구 요청 · review 영상에 대한 말\n"
             "# about: 이 말이 바로잡는 의도 ID (manual-ui '의도 정렬'의 intent:xxxx 에서 xxxx) · pending: 매뉴얼 '반영 대기'에도 넣음\n"
-            "# scope: 이 말이 어느 층인가 — principle 영구 원칙 · standard 작업 기준 · style 스타일 기본값 · trial 실험 기록(금지로 만들지 않음)\n")
+            "# scope: 이 말이 어느 층인가 — principle 영구 원칙 · standard 작업 기준 · style 스타일 기본값 · trial 실험 기록(금지로 만들지 않음)\n"
+            "# repo: 어느 레포의 말인가 — main 메인(모든 채널 공통) · market 시장 · curiosity 호기심 · issues 시사 · ai AI (topics/<brand>). project 가 있으면 그 영상에서 한 말, 없으면 영상 밖에서 한 말\n")
     FEEDBACK.write_text(head + yaml.safe_dump(doc, allow_unicode=True, sort_keys=False, width=110), encoding="utf-8")
     if pending:
         cl = MANUAL / "CHANGELOG.md"
@@ -1160,6 +1188,48 @@ def usage_md() -> str:
     return "\n".join(L) + "\n"
 
 
+def feedback_by_repo_md() -> str:
+    """내 피드백을 레포(메인·시장·호기심·시사·AI)별로, 그 안에서 '영상에서 한 말'(영상별)과 '영상 밖에서 한 말'로 나눠 적음."""
+    fbs, revs = parse_feedback(), parse_reviews()
+    L = ["# 내 피드백 — 레포별 (자동 생성: `python -m ytflow manual-graph`)", "",
+         "> 2026-11-21 사용자: \"전체적으로 내가 어떤 주제의 영상에서 말한건지 아닌지 즉 레포별로 좀 구분해줘\"",
+         "> 원본은 `manual/feedback.yaml`(repo·project) 과 `manual/reviews.md`. 고칠 때는 원본의 `repo:` 를 바꾸고 다시 만듭니다.",
+         "> **메인(공통)** = 모든 채널에 걸리는 말 · **시장·호기심·시사·AI** = 그 주제 레포(`topics/<brand>`)에만 걸리는 말.", ""]
+    L.append("| 레포 | 영상에서 한 말 | 영상 밖에서 한 말 | 영상 검토(통과·기각) |")
+    L.append("|---|---|---|---|")
+    for k, lab in REPO.items():
+        fk = [x for x in fbs if x["repo"] == k]
+        L.append(f"| {lab} | {sum(1 for x in fk if x['project'])} | {sum(1 for x in fk if not x['project'])} | {sum(1 for r in revs if r['repo'] == k)} |")
+    for k, lab in REPO.items():
+        fk = [x for x in fbs if x["repo"] == k]
+        rk = [r for r in revs if r["repo"] == k]
+        if not fk and not rk:
+            continue
+        L += ["", f"## {lab}" + (f" — `topics/{k}`" if k != "main" else " — 모든 채널 공통"), ""]
+        byp: dict[str, list] = {}
+        for x in fk:
+            if x["project"]:
+                byp.setdefault(x["project"].replace("projects/", ""), []).append(("말", x))
+        for r in rk:
+            byp.setdefault(r["project"], []).append(("검토", r))
+        if byp:
+            L += ["### 영상에서 한 말", ""]
+            for p in sorted(byp):
+                L.append(f"**{p}**")
+                for typ, x in sorted(byp[p], key=lambda y: y[1]["date"]):
+                    if typ == "검토":
+                        L.append(f"- {x['date']} · v{x['manual_version']} {'통과' if x['result'] == 'pass' else '기각'}" + (f" — “{x['reason']}”" if x["reason"] else ""))
+                    else:
+                        L.append(f"- {x['date']} · {x['fb_kind_label']} — “{x['quote']}”")
+                L.append("")
+        out = [x for x in fk if not x["project"]]
+        if out:
+            L += ["### 영상 밖에서 한 말 (방향·기준·도구)", ""]
+            for x in sorted(out, key=lambda y: y["date"]):
+                L.append(f"- {x['date']} · {x['fb_kind_label']} — “{x['quote']}”")
+    return "\n".join(L) + "\n"
+
+
 def write(html_out: str | None = None, artifact_out: str | None = None) -> Path:
     from . import governance as _gv
     own = _gv.can_write()   # 매뉴얼 파일(graph.json·10-when-to-use.md)은 잠금을 가진 쪽만 다시 씀 (docs/35)
@@ -1168,6 +1238,10 @@ def write(html_out: str | None = None, artifact_out: str | None = None) -> Path:
             (MANUAL / "10-when-to-use.md").write_text(usage_md(), encoding="utf-8")
         except Exception as e:  # noqa: BLE001
             print(f"[manual-graph] 용도표 만들기 실패: {e}")
+        try:
+            (MANUAL / "feedback-by-repo.md").write_text(feedback_by_repo_md(), encoding="utf-8")
+        except Exception as e:  # noqa: BLE001
+            print(f"[manual-graph] 레포별 피드백 만들기 실패: {e}")
     g = build()
     out = MANUAL / "graph.json"
     if not own:
@@ -1334,7 +1408,7 @@ def serve(port: int = 8770, host: str = "127.0.0.1") -> None:
                         raise ValueError("알 수 없는 종류")
                     add_feedback(q, body.get("kind", "direction"), (body.get("project") or "").strip(),
                                  (body.get("about") or "").strip(), (body.get("note") or "").strip(), bool(body.get("pending")),
-                                 (body.get("scope") or "").strip())
+                                 (body.get("scope") or "").strip(), (body.get("repo") or "").strip())
                     return self._json({"ok": True})
                 if u.path == "/api/intent-pending":
                     text = (body.get("text") or "").strip()
