@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-21T12:58:44",
- "source_hash": "3b69051e6733",
+ "generated": "2026-11-21T13:12:10",
+ "source_hash": "85c86080fa53",
  "audit": {
   "date": "2026-11-20T23:13",
   "counts": {
@@ -577,14 +577,14 @@
   "sections": 171,
   "must": 29,
   "auto": 39,
-  "intents": 191,
+  "intents": 192,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 85,
   "terms": 139,
   "bans": 153,
-  "feedback": 134,
+  "feedback": 135,
   "topics": 4,
   "episodes": 37,
   "main_situations": 17,
@@ -3609,8 +3609,10 @@
    "file": "manual/03-market.md",
    "label": "03. market — 시장의 이유 (경제·주식·산업·기술을 연결해 깊이 있게)",
    "lines": 174,
-   "versions": [],
-   "last_version": null
+   "versions": [
+    81
+   ],
+   "last_version": 81
   },
   {
    "id": "doc:04",
@@ -3642,8 +3644,10 @@
    "file": "manual/06-checklist.md",
    "label": "06. 체크리스트와 검사안 — 반드시 지킬 것",
    "lines": 114,
-   "versions": [],
-   "last_version": null
+   "versions": [
+    81
+   ],
+   "last_version": 81
   },
   {
    "id": "doc:07",
@@ -3696,8 +3700,10 @@
    "file": "manual/11-workflow.md",
    "label": "11. 제작 업무 체계 — 한 편을 처음부터 끝까지 (매뉴얼 v38, 2026-11-17 확정)",
    "lines": 177,
-   "versions": [],
-   "last_version": null
+   "versions": [
+    81
+   ],
+   "last_version": 81
   },
   {
    "id": "doc:12",
@@ -10914,8 +10920,8 @@
    "applied": [],
    "themes": [],
    "commit": {
-    "sha": "e5bc4f39a67b70aa9e00ae65c1062d91691b4f8f",
-    "subject": "youtube: 20261121-market-deep-ai-chips 올림·수정 기록",
+    "sha": "f0f22cfb5a26a5019f9265d3d6b3a861cb0c963f",
+    "subject": "피드백 기록: 썸네일에 시장 불안 키워드(반도체 폭락·AI 인프라 종말인가) 적극 활용",
     "date": "2026-11-21",
     "other_files": []
    }
@@ -10931,7 +10937,26 @@
    "themes": [
     "variety",
     "script"
-   ]
+   ],
+   "commit": {
+    "sha": "b247c1248e51d3c269e94fa666fd4558fc37267f",
+    "subject": "manual v81: 영상 진단·대본 검토 피드백 반영 + 의지력 편 대본 v1·v2",
+    "date": "2026-11-21",
+    "other_files": [
+     "AGENTS.md",
+     "channels/ch-knowledge/channel.yaml",
+     "projects/20261121-curiosity-willpower/01_research/audience.md",
+     "projects/20261121-curiosity-willpower/01_research/factsheet.md",
+     "projects/20261121-curiosity-willpower/01_research/topic_brief.json",
+     "projects/20261121-curiosity-willpower/01_research/topic_card.md",
+     "projects/20261121-curiosity-willpower/02_script/intent.md",
+     "projects/20261121-curiosity-willpower/02_script/script_review.md",
+     "projects/20261121-curiosity-willpower/02_script/script_v1.md",
+     "projects/20261121-curiosity-willpower/02_script/script_v2.md",
+     "projects/20261121-curiosity-willpower/05_edit/checklist.json",
+     "projects/20261121-curiosity-willpower/05_edit/checklist.md"
+    ]
+   }
   },
   {
    "id": "rev:1",
@@ -21838,6 +21863,35 @@
    "annotated": false
   },
   {
+   "id": "intent:cf66ec3e",
+   "kind": "intent",
+   "quote": "대본의 피드백입니다 — (의지력 편 v2 검토) 방향 통과, 2025 효과 배수 비교 금지·대조 조건과 주 지표 설명·생활 조언을 근거 범위 안으로·4~7장 연구 나열 대신 증거 추적·8장 전환 문장",
+   "label": "대본의 피드백입니다 — (의지력 편 v2 검토) 방향 통과, 2025 효과 배수 비교 금지·대조 조건과 주 ",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:135",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:cf66ec3e"
+   ],
+   "themes": [
+    "motion",
+    "script"
+   ],
+   "ann_key": "intent:cf66ec3e",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:dfa66488",
    "kind": "intent",
    "quote": "매일 시사: 10분 이상 / 호기심 표지: 표지도 삽화로 / 쇼츠채널은 일단은 보류입니다. 어... 훅쇼츠가 뭔지는 모르겠는데 일단은 이거 관련 영상은 아직 안만들거같아요 나중에 만들면 다시 재개할게요",
@@ -32109,6 +32163,35 @@
    "tier_note": "",
    "tier_fixed": true,
    "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:135",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "대본의 피드백입니다 — (의지력 편 v2 검토) 방향 통과, 2025 효과 배수 비교 금지·대조 조건과 주 지표 설명·생활 조언을 근거 범위 안으로·4~7장 연구 나열 대신 증거 추적·8장 전환 문장",
+   "label": "대본의 피드백입니다 — (의지력 편 v2 검토) 방향 통과, 2025 효과 배수 비교 금지·대조 조건과 주 ",
+   "fb_kind": "review",
+   "fb_kind_label": "영상 검토",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "v3 반영. 일반 원칙(서로 다른 과제·지표의 효과 크기를 배수로 비교하지 않음)은 06 G3 ①~⑤ 범위",
+   "pending": false,
+   "themes": [
+    "motion",
+    "script"
+   ],
+   "scope": "trial",
+   "intent": "intent:cf66ec3e",
+   "tier_key": "fb:cf66ec3e",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": false,
+   "tier": "trial",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "실험 기록"
   },
   {
    "id": "layer:main",
@@ -56109,6 +56192,30 @@
    ]
   },
   {
+   "s": "ver:81",
+   "t": "doc:03",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:81",
+   "t": "doc:06",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:81",
+   "t": "doc:11",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -58286,6 +58393,21 @@
   {
    "s": "intent:98a46673",
    "t": "theme:intent",
+   "kind": "about"
+  },
+  {
+   "s": "intent:cf66ec3e",
+   "t": "fb:135",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:cf66ec3e",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "intent:cf66ec3e",
+   "t": "theme:script",
    "kind": "about"
   },
   {
@@ -64091,6 +64213,21 @@
   {
    "s": "fb:134",
    "t": "intent:2dab8053",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:135",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "fb:135",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "fb:135",
+   "t": "intent:cf66ec3e",
    "kind": "quoted_as"
   }
  ]
