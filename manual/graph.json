@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-21T10:15:53",
- "source_hash": "0ce409f75808",
+ "generated": "2026-11-21T10:20:50",
+ "source_hash": "02369cd6713f",
  "audit": {
   "date": "2026-11-20T23:13",
   "counts": {
@@ -577,14 +577,14 @@
   "sections": 171,
   "must": 26,
   "auto": 39,
-  "intents": 183,
+  "intents": 184,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 85,
   "terms": 139,
   "bans": 146,
-  "feedback": 126,
+  "feedback": 127,
   "topics": 4,
   "episodes": 36,
   "main_situations": 17,
@@ -3640,9 +3640,10 @@
     75,
     77,
     78,
-    79
+    79,
+    80
    ],
-   "last_version": 79
+   "last_version": 80
   },
   {
    "id": "doc:10",
@@ -12008,7 +12009,22 @@
    "label": "v80",
    "summary": "원본 영상 인용을 출처별로: 공공 저작물·본인/회사 공식은 길이 제한 없음, 방송사·언론사는 한 장면 20초·한 편 60초 안팎 유지, 어느 경우든 해설 덧붙이기. 신고·경고 권리자는 config/rights_blocklist.yaml 로 막고 살아 있는 경고 동안 방송사 원본은 카드로 (2026-11-21 사용자)",
    "applied": [],
-   "themes": []
+   "themes": [],
+   "commit": {
+    "sha": "5b9eb8b459d21ac7c87aab09e5abc978eb3d9942",
+    "subject": "매뉴얼 v80: 원본 영상 인용을 권리별로 + 저작권 경고·채널 삭제 막는 안전 규칙",
+    "date": "2026-11-21",
+    "other_files": [
+     ".agents/skills/edit-style-hybrid/SKILL.md",
+     ".claude/skills/edit-style-hybrid/SKILL.md",
+     "AGENTS.md",
+     "config/rights_blocklist.yaml",
+     "docs/50-clip-lane.md",
+     "skills/edit-style-hybrid/SKILL.md",
+     "tests/test_cliplane_rights.py",
+     "ytflow/stages/cliplane.py"
+    ]
+   }
   },
   {
    "id": "rev:1",
@@ -23395,6 +23411,32 @@
    "annotated": false
   },
   {
+   "id": "intent:a02a2392",
+   "kind": "intent",
+   "quote": "사람들이 ai인프라나 반도체 폭락 이런거에 민감하니까요 사람들이 현재 시장에 대한 불안이 극도에 달해서 이를 이용하면 좋을 것 같습니다. 이게 제가 전에 트렌드와 핫한 키워드를 적극 활용하라 한 예시구요 (앞 말: 그리고 썸네일에도 반도체 폭락이나 ai infra종말인가 이런식으로 넣으면 좋을거같아요)",
+   "label": "사람들이 ai인프라나 반도체 폭락 이런거에 민감하니까요 사람들이 현재 시장에 대한 불안이 극도에 달해서 이를",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:127",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:a02a2392"
+   ],
+   "themes": [],
+   "ann_key": "intent:a02a2392",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:a76c24e8",
    "kind": "intent",
    "quote": "어지간해서는 매일 각각영상1개씩 올리고싶습니다. (앞 말: 오늘 이런 시장에 대한 심층분석 인터뷰영상이나 시장 분석 해설 이런영상 필요없는지 체크해주세요 즉 시장을 브리핑해주는 영상과 그 브리핑속에서 여러 인사이트와 시장 그리고 수요 기술 등 산업 심층분석 영상을 따로 올리고자 합니다.)",
@@ -23512,6 +23554,12 @@
    "readings": [
     {
      "ref": "ver:80",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:09",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -33573,6 +33621,32 @@
    "scope": "",
    "intent": "intent:cb8ac7fa",
    "tier_key": "fb:cb8ac7fa",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:127",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "사람들이 ai인프라나 반도체 폭락 이런거에 민감하니까요 사람들이 현재 시장에 대한 불안이 극도에 달해서 이를 이용하면 좋을 것 같습니다. 이게 제가 전에 트렌드와 핫한 키워드를 적극 활용하라 한 예시구요 (앞 말: 그리고 썸네일에도 반도체 폭락이나 ai infra종말인가 이런식으로 넣으면 좋을거같아요)",
+   "label": "사람들이 ai인프라나 반도체 폭락 이런거에 민감하니까요 사람들이 현재 시장에 대한 불안이 극도에 달해서 이를",
+   "fb_kind": "clarify",
+   "fb_kind_label": "뜻 바로잡기",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "",
+   "intent": "intent:a02a2392",
+   "tier_key": "fb:a02a2392",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -57758,6 +57832,14 @@
    ]
   },
   {
+   "s": "ver:80",
+   "t": "doc:09",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -59351,6 +59433,11 @@
    "s": "intent:267de7a0",
    "t": "theme:depth",
    "kind": "about"
+  },
+  {
+   "s": "intent:a02a2392",
+   "t": "fb:127",
+   "kind": "quoted_in"
   },
   {
    "s": "intent:a76c24e8",
@@ -65595,6 +65682,11 @@
   {
    "s": "fb:126",
    "t": "intent:cb8ac7fa",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:127",
+   "t": "intent:a02a2392",
    "kind": "quoted_as"
   }
  ]
