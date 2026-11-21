@@ -168,6 +168,9 @@ def run(path: Path, upto: str = "G8") -> Report:
             R.add("G4", "SHOULD", "목적 분간: intent.md 에 '목적:' 정보 습득형/즐길거리형 + 세 질문 (11 §2-4)",
                   bool(re.search(r"^\s*목적\s*:", _it.read_text(encoding="utf-8"), re.M)), "")
         R.add("G4", "MUST", "core_message·question·logic", all(spec.get(k) for k in ("core_message", "question", "logic")), "")
+        _rv = Path(path) / "02_script" / "script_review.md"   # 검토의 중심은 대본 (06 머리말·13 §7, 2026-11-21 사용자)
+        R.add("G4", "SHOULD", "대본 구성요소 대조표: 채널 대본 공식의 요소마다 있음/없음·어느 장 (02_script/script_review.md '구성요소', 13 §7)",
+              _rv.exists() and "구성요소" in _rv.read_text(encoding="utf-8"), "")
         cnt = {k: len(spec.get(k) or []) for k in ("compare_to", "analogies", "past_cases", "glossary")}
         if brand == "curiosity":   # v38: 호기심은 사실이 이야기 속에 (04 §0-6) — 비유와 대비 숫자만, SHOULD
             R.add("G4", "SHOULD", "curiosity: 비유와 대비가 되는 숫자 — 사실은 이야기 속에서 (04 §0-6)", cnt["analogies"] >= 1 and cnt["compare_to"] >= 1, cnt)
