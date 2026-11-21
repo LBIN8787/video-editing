@@ -586,9 +586,14 @@ def s_quote(D: HDoc, sc: dict, bt: list, dur: float):
     t0 = bt[0][0]
     kw = sc.get("keyword", "")
     nmax = 3 if sc.get("orig") else 5   # 원문 줄이 들어갈 자리 (번역은 3줄까지)
+    tl0, step = t0 + 0.3, 0.5
+    if sc.get("_read_last") and len(bt) > 1:   # 읽는 박자에 맞춰: '우리말로 옮기면 이렇습니다' 뒤부터 줄마다 읽는 속도대로
+        tb, db = bt[-1]
+        tl0 = tb + min(1.6, db * 0.18)
+        step = max(0.5, (db - (tl0 - tb)) / max(1, len(lines[:nmax])))
     for k, ln in enumerate(lines[:nmax]):
         y = 360 + k * (size + 30)
-        D.text(400, y, ln, FT("title"), size, D.ink, at=t0 + 0.3 + k * 0.5, anchor="lm")
+        D.text(400, y, ln, FT("title"), size, D.ink, at=tl0 + k * step, anchor="lm")
         if kw and kw in ln:
             f = paper.F(FT("title"), size)
             pre = f.getlength(ln[:ln.index(kw)])
@@ -1169,6 +1174,7 @@ def bite_fallback(project, spec: dict) -> None:
         sc["beats"] = list(sc.get("beats") or [{"say": f"{sc.get('who', '')}의 말입니다."}])
         if ko:   # 원본 목소리 대신 번역을 내레이터가 읽음
             sc["beats"].append({"say": f"우리말로 옮기면 이렇습니다. {ko}"})
+            sc["_read_last"] = True   # 번역 글자는 내레이터가 읽는 박자에 줄마다 나타남 (2026-11-21: 미리 다 적어 두면 정적)
         print(f"[hybrid] #{sc.get('id')} 원본 영상 없음 → 인용 카드로 그림 ({src or '소스 미지정'}) — PC 에서 footage 를 넣고 다시 렌더하면 원본으로")
 
 
