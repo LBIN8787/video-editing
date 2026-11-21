@@ -327,7 +327,7 @@ def _update_meta(pr: Project, rec: dict, rec_p: Path, dry_run: bool = False, pri
             raise SystemExit(f"[yt-publish] 영상을 찾지 못함: {vid}")
         st = cur_s["items"][0]["status"]
         st["privacyStatus"] = privacy
-        st.pop("publishAt", None), st.pop("uploadStatus", None), st.pop("failureReason", None), st.pop("rejectionReason", None)
+        st.update(publishAt=None), st.pop("uploadStatus", None), st.pop("failureReason", None), st.pop("rejectionReason", None)   # publishAt 을 빼기만 하면 예약이 남음 (2026-11-21)
         _req(tok, "PUT", f"{API}/videos?part=status", {"id": vid, "status": st})
         rec.setdefault("privacy_history", []).append(rec.get("privacy"))
         rec["privacy"] = privacy

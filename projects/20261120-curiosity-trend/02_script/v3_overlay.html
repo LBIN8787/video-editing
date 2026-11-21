@@ -9,8 +9,9 @@
 html,body{margin:0;width:1920px;height:1080px;background:transparent;overflow:hidden}
 #root{position:absolute;inset:0;font-family:G;color:#fff}
 .abs{position:absolute}
-.sub{position:absolute;left:0;right:0;bottom:64px;text-align:center;font-family:G;font-size:46px;line-height:1.35;
-  text-shadow:0 2px 6px rgba(0,0,0,.85),0 0 22px rgba(0,0,0,.55)}
+.sub{position:absolute;left:0;right:0;bottom:56px;text-align:center;font-family:G;font-size:46px;line-height:1.35;
+  text-shadow:0 2px 6px rgba(0,0,0,.85)}
+.sub span{display:inline-block;background:rgba(8,10,14,.62);padding:6px 26px 9px;border-radius:12px;max-width:1500px}
 .tag{position:absolute;left:56px;top:48px;font-family:G;font-size:24px;padding:7px 14px;border-radius:4px;
   background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.35);letter-spacing:.5px}
 .src{position:absolute;right:56px;bottom:22px;font-family:GR;font-size:22px;opacity:.75;text-shadow:0 1px 4px #000}
@@ -46,10 +47,10 @@ function elapsed(sc,t,B){
   const cnt=Math.round(12+300*p);
   const stop=t>k1-0.1;
   return `<div class="abs" style="right:80px;top:70px;text-align:right;opacity:${o};text-shadow:0 2px 14px rgba(0,0,0,.7)">
-     <div style="font-family:GX;font-size:96px;letter-spacing:2px">${hh}:${mm}<span style="font-size:36px;opacity:${p>0&&!stop?.85:0};margin-left:10px">▶▶</span></div>
+     <div style="font-family:GX;font-size:96px;letter-spacing:2px">${hh}:${mm}<span style="display:inline-block;font-size:36px;vertical-align:middle;opacity:${p>0&&!stop?.85:0};margin-left:30px">▶▶</span></div>
      <div style="font-size:30px;margin-top:6px;opacity:.9">넘긴 영상 <span style="font-family:GX;font-size:44px">${cnt}</span></div></div>`;
 }
-function kinetic(sc,t,B){return sc.words.map(([w,o],i)=>{const p=P(t,B[0].t+o,0.45);
+function kinetic(sc,t,B){return `${sc.art?`<div class="abs" style="left:0;right:0;top:330px;height:${sc.words.length*130+140}px;background:linear-gradient(180deg,rgba(6,8,12,0),rgba(6,8,12,.62) 22%,rgba(6,8,12,.62) 78%,rgba(6,8,12,0))"></div>`:""}`+sc.words.map(([w,o],i)=>{const p=P(t,B[0].t+o,0.45);
   return `<div class="abs" style="left:0;right:0;top:${380+i*130}px;text-align:center;font-family:GX;font-size:${i?100:70}px;
     color:${i?Y:'#fff'};opacity:${cl(p*3)};transform:translateY(${(1-eo(p))*28}px);text-shadow:0 6px 30px rgba(0,0,0,.75)">${w}</div>`}).join("")}
 
@@ -121,12 +122,12 @@ function checks(sc,t,B){
 const K=(B,i,n)=>{const b=B[0];return (b.kw&&b.kw[i]!==undefined)?b.kw[i]:b.t+b.d*(i+1)/((n||3)+1)};
 const AT=(B,o)=>o<0?B[0].t+B[0].d+o:B[0].t+o;
 const STAGE=`<div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 42%,#1d242d,#0b0e12)"></div>`;
-function kin2(sc,t,B){return sc.words.map(([w,o],i)=>{const p=P(t,AT(B,o),0.45);
+function kin2(sc,t,B){return `${sc.art?`<div class="abs" style="left:0;right:0;top:330px;height:${sc.words.length*130+140}px;background:linear-gradient(180deg,rgba(6,8,12,0),rgba(6,8,12,.62) 22%,rgba(6,8,12,.62) 78%,rgba(6,8,12,0))"></div>`:""}`+sc.words.map(([w,o],i)=>{const p=P(t,AT(B,o),0.45);
   return `<div class="abs" style="left:0;right:0;top:${380+i*130}px;text-align:center;font-family:GX;font-size:${i?100:70}px;
     color:${i?Y:'#fff'};opacity:${cl(p*3)};transform:translateY(${(1-eo(p))*28}px);text-shadow:0 6px 30px rgba(0,0,0,.75)">${w}</div>`}).join("")}
 function chips(sc,t,B){const n=sc.chips.length,top=sc.top||230;
   let h=sc.shade===false?"":`<div class="abs" style="left:0;top:0;bottom:0;width:1100px;background:linear-gradient(90deg,rgba(6,8,12,.75),rgba(6,8,12,0))"></div>`;
-  if(sc.head){const a=eo(P(t,B[0].t,0.5));h+=`<div class="abs" style="left:90px;top:${top-90}px;font-family:GX;font-size:56px;color:${Y};opacity:${a};text-shadow:0 2px 12px #000">${sc.head}</div>`}
+  if(sc.head){const a=eo(P(t,B[0].t,0.5));h+=`<div class="abs" style="left:90px;top:${top-90}px;font-family:GX;font-size:56px;color:${Y};opacity:${a};background:rgba(10,12,16,.62);padding:4px 20px 8px;border-radius:10px;text-shadow:0 2px 12px #000">${sc.head}</div>`}
   sc.chips.forEach((c,i)=>{const p=eb(P(t,K(B,i,n)-0.15,0.45));
     h+=`<div class="abs" style="left:90px;top:${top+i*105}px;opacity:${cl(p)};transform:translateX(${(1-cl(p))*-40}px);
       font-size:40px;background:rgba(10,12,16,.72);border-left:8px solid ${Y};padding:14px 26px 14px 22px;max-width:1300px">${c}</div>`});
@@ -189,12 +190,12 @@ function list(sc,t,B){let h=STAGE;const n=sc.items.length;
       <div style="font-size:44px;width:${act?760:1100}px">${it}</div>
       ${act?`<div style="font-size:50px;opacity:${cl(q)};margin:0 30px">→</div><div style="font-family:GX;font-size:64px;color:${Y};opacity:${cl(q)};transform:scale(${0.7+0.3*cl(q)})">${act}</div>`:""}</div>`});
   return h}
-function split(sc,t,B){const a=eo(P(t,B[0].t,0.5));let h=`<div class="abs" style="left:90px;top:120px;font-family:GX;font-size:60px;color:${Y};opacity:${a};text-shadow:0 2px 12px #000">${sc.head}</div>`;
+function split(sc,t,B){const a=eo(P(t,B[0].t,0.5));let h=`<div class="abs" style="left:90px;top:120px;font-family:GX;font-size:60px;color:${Y};opacity:${a};background:rgba(10,12,16,.62);padding:4px 20px 8px;border-radius:10px;text-shadow:0 2px 12px #000">${sc.head}</div>`;
   sc.parts.forEach(([lab,sub],i)=>{const p=eo(P(t,K(B,i,2)-0.2,0.6)),x=90+i*620;
     h+=`<div class="abs glass" style="left:${x}px;top:${720+(1-p)*20}px;width:560px;padding:26px 34px;opacity:${p};border-top:6px solid ${i?Y:'#e9edf2'}">
       <div style="font-family:GX;font-size:44px">${lab}</div><div style="font-size:32px;margin-top:8px;opacity:.85">${sub}</div></div>`});
   return h}
-function notes(sc,t,B){const a=eo(P(t,B[0].t,0.6));let h=`<div class="abs" style="left:90px;top:120px;font-family:GX;font-size:60px;color:${Y};opacity:${a};text-shadow:0 2px 12px #000">${sc.head}</div>
+function notes(sc,t,B){const a=eo(P(t,B[0].t,0.6));let h=`<div class="abs" style="left:90px;top:120px;font-family:GX;font-size:60px;color:${Y};opacity:${a};background:rgba(10,12,16,.62);padding:4px 20px 8px;border-radius:10px;text-shadow:0 2px 12px #000">${sc.head}</div>
    <div class="abs" style="left:1180px;top:${170+(1-a)*30}px;width:600px;height:640px;background:#fbf7ec;border-radius:10px;box-shadow:0 20px 50px rgba(0,0,0,.5);opacity:${a};
      background-image:repeating-linear-gradient(180deg,transparent 0 78px,#c9d6e8 78px 80px)"></div>
    <div class="abs" style="left:1240px;top:200px;font-family:GX;font-size:34px;color:#c0392b;opacity:${a}">떠올리면 즐거운 것</div>`;
@@ -214,7 +215,7 @@ function bubble(sc,t,B){const p=eb(P(t,K(B,0,2)-0.2,0.5)),q=eo(P(t,K(B,1,2)-0.2,
     <div style="background:#fff;color:#111;border-radius:60px;padding:34px 50px;font-family:GX;font-size:46px;box-shadow:0 14px 40px rgba(0,0,0,.4)">${sc.bubble}</div>
     <div style="width:34px;height:34px;border-radius:50%;background:#fff;margin:14px 0 0 90px"></div><div style="width:20px;height:20px;border-radius:50%;background:#fff;margin:8px 0 0 70px"></div></div>
    <div class="abs" style="left:110px;top:700px;opacity:${q}"><span style="font-family:GX;font-size:58px;color:${Y}">${sc.term2}</span><span style="font-size:36px;margin-left:20px">${sc.term2sub}</span></div>`}
-function ask(sc,t,B){const a=eo(P(t,B[0].t,0.5));let h=sc.head?`<div class="abs" style="left:90px;top:120px;font-family:GX;font-size:60px;color:${Y};opacity:${a};text-shadow:0 2px 12px #000">${sc.head}</div>`:"";
+function ask(sc,t,B){const a=eo(P(t,B[0].t,0.5));let h=sc.head?`<div class="abs" style="left:90px;top:120px;font-family:GX;font-size:60px;color:${Y};opacity:${a};background:rgba(10,12,16,.62);padding:4px 20px 8px;border-radius:10px;text-shadow:0 2px 12px #000">${sc.head}</div>`:"";
   sc.opts.forEach((o,i)=>{const p=eb(P(t,K(B,i,2)-0.15,0.45));
     h+=`<div class="abs" style="left:${620+i*420}px;top:${700}px;opacity:${cl(p)};transform:scale(${0.7+0.3*cl(p)});font-family:GX;font-size:52px;padding:18px 40px;border-radius:50px;
       background:${i?Y:'rgba(255,255,255,.92)'};color:#111;box-shadow:0 10px 30px rgba(0,0,0,.4)">${o}</div>`});
@@ -260,7 +261,7 @@ window.R=function(sc,t,B,D,sub){
   h+=(MG[sc.mg||"none"]||MG.none)(sc,t,B,D);
   if(sc.role==="자료 화면") h+=`<div class="tag">자료 화면 · 실험 장면 아님</div>`;
   if(sc.src) h+=`<div class="src">출처: ${sc.src}</div>`;
-  if(sub) h+=`<div class="sub">${sub}</div>`;
+  if(sub) h+=`<div class="sub"><span>${sub}</span></div>`;
   root.innerHTML=h;
 };
 </script></body></html>
