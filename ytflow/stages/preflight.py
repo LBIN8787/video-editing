@@ -94,7 +94,7 @@ def run(project: Project, looked: bool = False) -> dict:
     C["layout"] = {"pass": not lqd, "issues": len(lqd) if isinstance(lqd, (dict, list)) else 1}
 
     # 5. 대본 검사 (MUST)
-    r = subprocess.run([sys.executable, "-m", "ytflow", "check", str(project.path)], capture_output=True, text=True,
+    r = subprocess.run([sys.executable, "-m", "ytflow", "check", str(project.path)], capture_output=True, text=True, encoding="utf-8", errors="replace",
                        env={**__import__("os").environ, "PYTHONIOENCODING": "utf-8"})
     C["check_must"] = {"pass": r.returncode == 0, "tail": (r.stdout or r.stderr).strip().splitlines()[-3:]}
 

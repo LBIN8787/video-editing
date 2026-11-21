@@ -454,7 +454,7 @@ def check(work: Path) -> list[str]:
     try:
         data = json.loads(r.stdout[r.stdout.find("{"):])
     except Exception:
-        return [f"check 실행 실패: {(r.stderr or r.stdout)[-200:]}"] if r.returncode else []
+        return [f"check 실행 실패: {(r.stderr or r.stdout or '')[-200:]}"] if r.returncode else []
     out = []
     for sec in ("lint", "runtime", "layout", "contrast"):  # craft(연출 권고)는 내레이션 길이가 정하므로 제외
         for f in (data.get(sec) or {}).get("findings") or []:

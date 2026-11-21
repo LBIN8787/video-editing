@@ -160,7 +160,7 @@ def scan(project: str, only: set[int] | None = None) -> dict:
             for t in times:
                 allit = pg.evaluate(JS, t)
                 for i in allit:
-                    if i.get("boxpair"):
+                    if i.get("boxpair") and x.get("type") not in ("outro",):   # 마무리 카드는 사진 액자 위에 제목 카드를 일부러 겹쳐 놓음
                         probs.append({"t": round(t, 1), "kind": "그래픽끼리 겹침", "text": i["text"]})
                 labels = [i for i in allit if i["label"] and not i.get("boxpair") and not i.get("box")]
                 items = [i for i in allit if not i["label"] and not i.get("boxpair")]
