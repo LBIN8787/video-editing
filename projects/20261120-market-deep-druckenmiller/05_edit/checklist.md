@@ -1,10 +1,10 @@
 # 체크리스트 — 20261120-market-deep-druckenmiller
 
-매뉴얼 v77 · 2026-11-21T01:58:08 · **통과**
+매뉴얼 v77 · 2026-11-21T02:42:29 · **MUST 실패 1개**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
-| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ✅ |  |
+| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ❌ | [2026-11-21 · 사용자 피드백] 좀 차분하고 깔끔한 스타일로 한번 해보고자 합니다.; [2026-11-21 · 사용자 피드백] 강조연출 |
 | G0 | SHOULD | 매뉴얼 그래프가 최신 (python -m ytflow manual-graph) | ✅ | manual/graph.json |
 | G1 | MUST | topic_brief.json 있음 | ✅ | 01_research/topic_brief.json (schemas/topic_brief.schema.json) |
 | G1 | MUST | 브랜드(ai/market/curiosity) | ✅ | market |
