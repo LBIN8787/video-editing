@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-20T16:21:09",
- "source_hash": "974f905099d2",
+ "generated": "2026-11-21T01:58:32",
+ "source_hash": "fdd132759250",
  "audit": {
   "date": "2026-11-20T23:13",
   "counts": {
@@ -571,22 +571,22 @@
   "reviews": 37,
   "rejects": 25,
   "passes": 12,
-  "pending": 0,
+  "pending": 1,
   "rules": 46,
   "checks": 87,
   "sections": 171,
   "must": 26,
   "auto": 39,
-  "intents": 165,
+  "intents": 166,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 83,
   "terms": 139,
   "bans": 137,
-  "feedback": 110,
+  "feedback": 111,
   "topics": 4,
-  "episodes": 35,
+  "episodes": 36,
   "main_situations": 17,
   "tiers": {
    "principle": 46,
@@ -597,7 +597,9 @@
   "overfit": 6,
   "principle_bans": 40
  },
- "pending": [],
+ "pending": [
+  "[2026-11-21 · 사용자 피드백] 강조연출이 너무 많고 자꾸 이건 이 채널의 의견 이런거 없애주세요 그리고 실제 인터뷰 소스영상이랑 최신 인터뷰 주식을 쉰더 이런 최신 인터뷰 소스영상도 포함해주세요"
+ ],
  "status_labels": {
   "aligned": "정렬됨",
   "over": "과잉 해석",
@@ -12263,8 +12265,8 @@
    "versions": [
     36
    ],
-   "label": "v36: 사람·매체의 시각은 사실과 다르게 표시",
-   "src": "if sc.get(\"insight\"):   # v36: 사람·매체의 시각은 사실과 다르게 표시"
+   "label": "v36: 사람·매체의 시각은 사실과 다르게 표시 (2026-11-21 사용자가 끄라고 한 편은 opinion_tag: false — 출처 줄로만)",
+   "src": "if sc.get(\"insight\") and spec.get(\"opinion_tag\", True):   # v36: 사람·매체의 시각은 사실과 다르게 표시 (2026-11-21 사용자가 끄라고 한 편은 opinion_tag: false — 출처 줄로만)"
   },
   {
    "id": "code:ytflow/stages/hybrid.py:1218",
@@ -20627,6 +20629,34 @@
    "annotated": false
   },
   {
+   "id": "intent:9355c041",
+   "kind": "intent",
+   "quote": "강조연출이 너무 많고 자꾸 이건 이 채널의 의견 이런거 없애주세요 그리고 실제 인터뷰 소스영상이랑 최신 인터뷰 주식을 쉰더 이런 최신 인터뷰 소스영상도 포함해주세요",
+   "label": "강조연출이 너무 많고 자꾸 이건 이 채널의 의견 이런거 없애주세요 그리고 실제 인터뷰 소스영상이랑 최신 인터",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:111",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:9355c041"
+   ],
+   "themes": [
+    "emphasis"
+   ],
+   "ann_key": "intent:9355c041",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "term:bite",
    "kind": "term",
    "key": "bite",
@@ -21238,7 +21268,7 @@
    "code": [
     {
      "file": "ytflow/stages/explain.py",
-     "line": 215,
+     "line": 220,
      "src": "def s_afterline(D, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -21289,7 +21319,7 @@
    "code": [
     {
      "file": "ytflow/stages/explain.py",
-     "line": 291,
+     "line": 296,
      "src": "def s_spread(D, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -21340,7 +21370,7 @@
    "code": [
     {
      "file": "ytflow/stages/explain.py",
-     "line": 383,
+     "line": 388,
      "src": "def s_share(D, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -21392,7 +21422,7 @@
    "code": [
     {
      "file": "ytflow/stages/explain.py",
-     "line": 545,
+     "line": 550,
      "src": "def s_board(D, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -22525,7 +22555,7 @@
    "code": [
     {
      "file": "ytflow/stages/explain.py",
-     "line": 545,
+     "line": 550,
      "src": "def s_board(D, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -26813,7 +26843,7 @@
     },
     {
      "file": "ytflow/stages/motion2.py",
-     "line": 232,
+     "line": 263,
      "src": "def apply(D, sc: dict, bt: list, dur: float, w: int = 1920, h: int = 1080, keep: bool = True) -> None:"
     }
    ],
@@ -30174,6 +30204,34 @@
    "tier_note": "",
    "tier_fixed": true,
    "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:111",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "강조연출이 너무 많고 자꾸 이건 이 채널의 의견 이런거 없애주세요 그리고 실제 인터뷰 소스영상이랑 최신 인터뷰 주식을 쉰더 이런 최신 인터뷰 소스영상도 포함해주세요",
+   "label": "강조연출이 너무 많고 자꾸 이건 이 채널의 의견 이런거 없애주세요 그리고 실제 인터뷰 소스영상이랑 최신 인터",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": true,
+   "themes": [
+    "emphasis"
+   ],
+   "scope": "",
+   "intent": "intent:9355c041",
+   "tier_key": "fb:9355c041",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": false,
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
   },
   {
    "id": "layer:main",
@@ -43603,6 +43661,539 @@
      ]
     },
     {
+     "project": "20261120-market-deep-druckenmiller",
+     "scenes": 48,
+     "coverage": 0.79,
+     "fit": 0.24,
+     "rows": [
+      {
+       "s": 1,
+       "type": "bignum",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "11월 17일, 텍사스 오스틴의 한 투자 행사. 30년 넘게 운용하며 손실 난 해가 없었다고 알려진 투자자, 스탠리 드러켄밀러에게 진행자가 물었습니다. 지금 주식"
+      },
+      {
+       "s": 2,
+       "type": "bite",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "그가 지금의 자신을 설명한 한 문장입니다."
+      },
+      {
+       "s": 3,
+       "type": "kinetic",
+       "sit": "question",
+       "fit": false,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "그런데 불과 9개월 전, 그는 전혀 다른 말을 했습니다. 그 사이 그의 생각은 어떻게 흘러왔을까요?"
+      },
+      {
+       "s": 4,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "먼저, 왜 이 사람의 말에 시장이 귀를 기울이는지부터 보겠습니다."
+      },
+      {
+       "s": 5,
+       "type": "checklist",
+       "sit": "open-scene",
+       "fit": false,
+       "rec": [
+        "kb",
+        "footage",
+        "stage"
+       ],
+       "say": "1981년 자기 운용사 듀케인을 세웠고, 1988년부터 2000년까지는 조지 소로스의 퀀텀 펀드를 맡았습니다. 1992년 영국 파운드화가 떨어지는 쪽에 건 거래로"
+      },
+      {
+       "s": 6,
+       "type": "bite",
+       "sit": "call-bite",
+       "fit": true,
+       "rec": [
+        "bite",
+        "quote"
+       ],
+       "say": "소로스에게서 무엇을 배웠냐는 질문에, 그는 올해 초 모건스탠리 인터뷰에서 이렇게 답했습니다."
+      },
+      {
+       "s": 7,
+       "type": "kinetic",
+       "sit": "point",
+       "fit": false,
+       "rec": [
+        "zoomshot"
+       ],
+       "say": "틀렸을 때 얼마나 잃느냐. 지금 그가 말하는 '안 잃기'의 뿌리가 이 문장입니다."
+      },
+      {
+       "s": 8,
+       "type": "quote",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "그의 말을 이해하려면, 그가 시장을 어떻게 읽는지부터 알아야 합니다. 그가 오래 해 온 말로 널리 인용되는 문장이 있습니다. 전체 시장을 움직이는 건 기업 실적이"
+      },
+      {
+       "s": 9,
+       "type": "motionboard",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "그림으로 보면 이렇습니다. 연준은 수문입니다. 시장의 배들은 각자 성능이 다르지만, 같은 물 위에 떠 있습니다."
+      },
+      {
+       "s": 10,
+       "type": "kinetic",
+       "sit": "said",
+       "fit": false,
+       "rec": [
+        "bite",
+        "footage",
+        "quote"
+       ],
+       "say": "그리고 그는 거래 대부분을 18개월에서 3년 앞을 보고 한다고 말합니다. 그래서 지금 그의 말은 늘 1, 2년 뒤를 향합니다."
+      },
+      {
+       "s": 11,
+       "type": "chapter",
+       "sit": "open-scene",
+       "fit": true,
+       "rec": [
+        "kb",
+        "footage",
+        "stage"
+       ],
+       "say": "그의 생각이 흘러온 길, 그 출발점은 2022년의 엔비디아입니다."
+      },
+      {
+       "s": 12,
+       "type": "checklist",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "올해 초 모건스탠리 인터뷰에서 그는 이 이야기를 직접 털어놓았습니다. 2022년, 회사의 젊은 동료들이 AI 이야기를 꺼냈고, 그는 엔비디아를 처음 샀습니다. 2"
+      },
+      {
+       "s": 13,
+       "type": "bite",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "그 순간을 그는 이렇게 기억합니다."
+      },
+      {
+       "s": 14,
+       "type": "kinetic",
+       "sit": "said",
+       "fit": false,
+       "rec": [
+        "bite",
+        "footage",
+        "quote"
+       ],
+       "say": "맞히는 것보다 어려운 건 버티는 것. 전설의 투자자도 그걸 못 했다고 스스로 말합니다."
+      },
+      {
+       "s": 15,
+       "type": "chapter",
+       "sit": "open-scene",
+       "fit": true,
+       "rec": [
+        "kb",
+        "footage",
+        "stage"
+       ],
+       "say": "그리고 2026년 초. 같은 인터뷰에서 그는 AI를 보는 눈이 바뀌었다고 말합니다."
+      },
+      {
+       "s": 16,
+       "type": "bite",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "작년 여름부터 가을 사이, AI 쪽이 이상하게 달아올랐다는 겁니다."
+      },
+      {
+       "s": 17,
+       "type": "bite",
+       "sit": "cause",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "analogy"
+       ],
+       "say": "그래서 그는 다른 곳을 찾았고, 그중 하나가 바이오였습니다. 이유는 이렇습니다."
+      },
+      {
+       "s": 18,
+       "type": "checklist",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "그때 그가 그린 판은 이랬습니다. 미국 경제는 이미 강하고 더 강해질 것, 연준은 금리를 올리지 않고 아마 내릴 것. 주식은 AI 한 곳이 아니라 여러 업종에 골"
+      },
+      {
+       "s": 19,
+       "type": "bite",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "한국 이야기는 그의 목소리로 들어 보겠습니다."
+      },
+      {
+       "s": 20,
+       "type": "bite",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "그리고 이렇게 덧붙였습니다. 요즘 자신이 너무 겁을 낸다며,"
+      },
+      {
+       "s": 21,
+       "type": "kinetic",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "올해 초의 그는, 더 크게 걸고 싶어 하는 투자자였습니다."
+      },
+      {
+       "s": 22,
+       "type": "chapter",
+       "sit": "earnings",
+       "fit": true,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "그 판은 실제 장부에서 어떻게 나타났을까요. 미국에서 큰 운용사는 분기마다 보유 주식을 13F라는 서류로 공개합니다."
+      },
+      {
+       "s": 23,
+       "type": "checklist",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "9월 30일 기준 장부입니다. 먼저 판 것. 6월 말 1억 2,020만 달러어치였던 알파벳을 전부 팔았습니다. 샌디스크 7,940만 달러어치도, AMD 4,230"
+      },
+      {
+       "s": 24,
+       "type": "versus",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "이번엔 산 것. 하드디스크를 만드는 저장장치 회사 시게이트를 12만 2,000주에서 34만 1,790주로, 180% 늘렸습니다."
+      },
+      {
+       "s": 25,
+       "type": "bars",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "그리고 금광 회사 세 곳을 새로 샀습니다. 뉴몬트 4,390만, 배릭 4,290만, 애그니코 이글 4,230만 달러어치입니다."
+      },
+      {
+       "s": 26,
+       "type": "share",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "그림으로 보면 더 분명합니다. 장부 전체를 막대 하나로 놓겠습니다."
+      },
+      {
+       "s": 27,
+       "type": "motionboard",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "장부를 두 칸으로 나누면, 왼쪽은 덜어 낸 칸입니다. AI의 칩과 플랫폼, 그리고 지수 전체가 오르면 버는 콜옵션 약 3억 4,100만 달러어치."
+      },
+      {
+       "s": 28,
+       "type": "versus",
+       "sit": "explain-market",
+       "fit": false,
+       "rec": [
+        "motionboard",
+        "spread",
+        "share"
+       ],
+       "say": "다만 이 장부에는 한계가 있습니다. 9월 30일 하루의 사진이고, 공개는 한 달 반 뒤입니다. 그리고 공매도나 통화, 채권, 원자재는 나오지 않습니다."
+      },
+      {
+       "s": 29,
+       "type": "chapter",
+       "sit": "said",
+       "fit": true,
+       "rec": [
+        "bite",
+        "footage",
+        "quote"
+       ],
+       "say": "그리고 11월 17일, 텍사스 오스틴. 배짱을 되찾겠다던 그가 이번엔 쉬겠다고 말합니다."
+      },
+      {
+       "s": 30,
+       "type": "checklist",
+       "sit": "open-scene",
+       "fit": false,
+       "rec": [
+        "kb",
+        "footage",
+        "stage"
+       ],
+       "say": "네 가지입니다. 첫째, 주식은 오르는 쪽에도 내리는 쪽에도 거의 걸지 않았습니다. 둘째, 2027년 하반기 경기가 실망스러울 수 있다고 봤습니다."
+      },
+      {
+       "s": 31,
+       "type": "bite",
+       "sit": "open-scene",
+       "fit": false,
+       "rec": [
+        "kb",
+        "footage",
+        "stage"
+       ],
+       "say": "2027년 이야기는 그의 입으로 직접 들어 보겠습니다."
+      },
+      {
+       "s": 32,
+       "type": "motionboard",
+       "sit": "cause",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "analogy"
+       ],
+       "say": "그림으로 보면 이렇습니다. 안개 낀 고속도로를 달리는 운전자가 있습니다."
+      },
+      {
+       "s": 33,
+       "type": "bite",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "그의 말로는 이렇습니다."
+      },
+      {
+       "s": 34,
+       "type": "quote",
+       "sit": "route",
+       "fit": false,
+       "rec": [
+        "journey",
+        "usmap"
+       ],
+       "say": "중국어로 옮겨진 대담 정리를 기준으로 하면, 그는 AI를 만드는 기반 시설보다 AI를 써서 돈을 버는 응용 쪽을 본다고 했습니다. 요지는 이렇습니다. 토큰, 즉 "
+      },
+      {
+       "s": 35,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "이제 네 장면을 한 줄에 놓고 보겠습니다."
+      },
+      {
+       "s": 36,
+       "type": "motionboard",
+       "sit": "open-scene",
+       "fit": false,
+       "rec": [
+        "kb",
+        "footage",
+        "stage"
+       ],
+       "say": "2022년, AI와 엔비디아에 모든 걸 건 확신."
+      },
+      {
+       "s": 37,
+       "type": "versus",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "가장 선명하게 뒤집힌 건 구리입니다. 올해 초 그는 구리는 다들 하는 거래라며 갖고 있었고, 연준은 금리를 올리지 않고 아마 내릴 거라며 미국 경제가 훨씬 강해질"
+      },
+      {
+       "s": 38,
+       "type": "bite",
+       "sit": "said",
+       "fit": true,
+       "rec": [
+        "bite",
+        "footage",
+        "quote"
+       ],
+       "say": "그 스스로도 이렇게 말합니다."
+      },
+      {
+       "s": 39,
+       "type": "kinetic",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "대가의 힘은 맞히는 데가 아니라, 틀렸다 싶으면 바로 바꾸는 데 있습니다."
+      },
+      {
+       "s": 40,
+       "type": "kinetic",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "왜 바뀌었는지 그가 하나하나 설명하진 않았습니다. 다만 대담 정리를 보면, 회사들이 돈을 빌리는 금리 차이가 벌어지고 있다고 했습니다. 연준과 돈의 흐름을 먼저 "
+      },
+      {
+       "s": 41,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "그런데 같은 주, 월가의 대형 은행들은 꽤 다르게 봤습니다. 11월 16일 S&P 500 종가는 7,416.59. 웰스파고는 내년 말 8,200을 내놨습니다. 1"
+      },
+      {
+       "s": 42,
+       "type": "versus",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "한쪽은 2027년 하반기 경기가 실망스러울 수 있다며 쉬고, 다른 쪽은 주가가 15% 넘게 오른다고 봅니다. 누가 맞을까요?"
+      },
+      {
+       "s": 43,
+       "type": "chapter",
+       "sit": "route",
+       "fit": true,
+       "rec": [
+        "journey",
+        "usmap"
+       ],
+       "say": "이 이야기를 한국 계좌로 옮겨 보겠습니다. 투자 권유가 아니라, 질문을 옮기는 겁니다."
+      },
+      {
+       "s": 44,
+       "type": "kinetic",
+       "sit": "cause",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "analogy"
+       ],
+       "say": "한국 투자자에게 남는 질문이 하나 있습니다. 올해 초 그는 한국에 큰 포지션이 있다고 했습니다. 지금도 그런지는 알 수 없습니다. 13F에는 미국에 상장된 주식만"
+      },
+      {
+       "s": 45,
+       "type": "checklist",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "그의 걱정이 맞는지는 네 가지로 볼 수 있습니다. 회사들이 돈을 빌리는 금리와 국채 금리의 차이가 계속 벌어지는지, 그리고 경기 기대의 온도계인 구리 값이 어디로"
+      },
+      {
+       "s": 46,
+       "type": "checklist",
+       "sit": "open-scene",
+       "fit": false,
+       "rec": [
+        "kb",
+        "footage",
+        "stage"
+       ],
+       "say": "물론 틀릴 수 있습니다. 그 스스로 쉼이 이틀일 수도 있다고 했고, 장부는 9월 30일의 사진입니다."
+      },
+      {
+       "s": 47,
+       "type": "checklist",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "정리하면 세 가지입니다. 첫째, 그의 생각은 AI 확신에서 과열 경계로, 다시 쉼으로 흘러왔습니다. 하락 예언이 아니라 앞이 안 보여 속도를 줄인 겁니다."
+      },
+      {
+       "s": 48,
+       "type": "outro",
+       "sit": "question",
+       "fit": false,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "딱 하나만 기억한다면 이것입니다. 9개월 전 배짱을 되찾겠다던 대가가, 지금은 쉬겠다고 합니다. 그는 틀렸다 싶으면 3주 만에도 생각을 바꾸는 사람이고, 그 유연"
+      }
+     ]
+    },
+    {
      "project": "20261120-market-deep-remix",
      "scenes": 42,
      "coverage": 0.86,
@@ -44117,8 +44708,8 @@
     "새벽",
     "아침"
    ],
-   "count": 6,
-   "fit": 1,
+   "count": 13,
+   "fit": 3,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -44169,8 +44760,8 @@
     "일까요",
     "을까요"
    ],
-   "count": 45,
-   "fit": 32,
+   "count": 48,
+   "fit": 33,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -44223,8 +44814,8 @@
     "답했",
     "라고 했"
    ],
-   "count": 13,
-   "fit": 9,
+   "count": 17,
+   "fit": 11,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -44277,7 +44868,7 @@
     "파급",
     "결과"
    ],
-   "count": 6,
+   "count": 9,
    "fit": 3,
    "examples": [
     {
@@ -44330,8 +44921,8 @@
     "옮겨",
     "퍼졌"
    ],
-   "count": 7,
-   "fit": 0,
+   "count": 9,
+   "fit": 1,
    "examples": [
     {
      "project": "20261115-market-deep",
@@ -44388,8 +44979,8 @@
     "하락",
     "급등"
    ],
-   "count": 145,
-   "fit": 72,
+   "count": 154,
+   "fit": 73,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -44718,7 +45309,7 @@
     "이 대목",
     "이 문장"
    ],
-   "count": 12,
+   "count": 13,
    "fit": 0,
    "examples": [
     {
@@ -44872,7 +45463,7 @@
     "유통 물량",
     "오버행"
    ],
-   "count": 8,
+   "count": 9,
    "fit": 1,
    "examples": [
     {
@@ -44981,7 +45572,7 @@
     "여파",
     "연준"
    ],
-   "count": 34,
+   "count": 39,
    "fit": 11,
    "examples": [
     {
@@ -45035,8 +45626,8 @@
     "분기",
     "EPS"
    ],
-   "count": 59,
-   "fit": 18,
+   "count": 61,
+   "fit": 19,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -45088,8 +45679,8 @@
     "CEO",
     "CFO"
    ],
-   "count": 15,
-   "fit": 6,
+   "count": 16,
+   "fit": 7,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -49814,6 +50405,543 @@
       "chapter"
      ],
      "say": "딱 하나만 기억한다면 이것입니다. 같은 날, 앤트로픽은 공모가보다 높게 마쳤지만 첫 거래 뒤 잠깐 오른 다음 밀렸고, 앤트로픽을 대신 사던 주식들도 내렸습니다. "
+    }
+   ]
+  },
+  {
+   "id": "ep:20261120-market-deep-druckenmiller",
+   "kind": "episode",
+   "topic": "market",
+   "label": "20261120-market-deep-druckenmiller",
+   "project": "20261120-market-deep-druckenmiller",
+   "scenes": 48,
+   "coverage": 0.79,
+   "fit": 0.24,
+   "rows": [
+    {
+     "s": 1,
+     "type": "bignum",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "11월 17일, 텍사스 오스틴의 한 투자 행사. 30년 넘게 운용하며 손실 난 해가 없었다고 알려진 투자자, 스탠리 드러켄밀러에게 진행자가 물었습니다. 지금 주식"
+    },
+    {
+     "s": 2,
+     "type": "bite",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "그가 지금의 자신을 설명한 한 문장입니다."
+    },
+    {
+     "s": 3,
+     "type": "kinetic",
+     "sit": "question",
+     "fit": false,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "그런데 불과 9개월 전, 그는 전혀 다른 말을 했습니다. 그 사이 그의 생각은 어떻게 흘러왔을까요?"
+    },
+    {
+     "s": 4,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "먼저, 왜 이 사람의 말에 시장이 귀를 기울이는지부터 보겠습니다."
+    },
+    {
+     "s": 5,
+     "type": "checklist",
+     "sit": "open-scene",
+     "fit": false,
+     "rec": [
+      "kb",
+      "footage",
+      "stage"
+     ],
+     "say": "1981년 자기 운용사 듀케인을 세웠고, 1988년부터 2000년까지는 조지 소로스의 퀀텀 펀드를 맡았습니다. 1992년 영국 파운드화가 떨어지는 쪽에 건 거래로"
+    },
+    {
+     "s": 6,
+     "type": "bite",
+     "sit": "call-bite",
+     "fit": true,
+     "rec": [
+      "bite",
+      "quote"
+     ],
+     "say": "소로스에게서 무엇을 배웠냐는 질문에, 그는 올해 초 모건스탠리 인터뷰에서 이렇게 답했습니다."
+    },
+    {
+     "s": 7,
+     "type": "kinetic",
+     "sit": "point",
+     "fit": false,
+     "rec": [
+      "zoomshot"
+     ],
+     "say": "틀렸을 때 얼마나 잃느냐. 지금 그가 말하는 '안 잃기'의 뿌리가 이 문장입니다."
+    },
+    {
+     "s": 8,
+     "type": "quote",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "그의 말을 이해하려면, 그가 시장을 어떻게 읽는지부터 알아야 합니다. 그가 오래 해 온 말로 널리 인용되는 문장이 있습니다. 전체 시장을 움직이는 건 기업 실적이"
+    },
+    {
+     "s": 9,
+     "type": "motionboard",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "그림으로 보면 이렇습니다. 연준은 수문입니다. 시장의 배들은 각자 성능이 다르지만, 같은 물 위에 떠 있습니다."
+    },
+    {
+     "s": 10,
+     "type": "kinetic",
+     "sit": "said",
+     "fit": false,
+     "rec": [
+      "bite",
+      "footage",
+      "quote"
+     ],
+     "say": "그리고 그는 거래 대부분을 18개월에서 3년 앞을 보고 한다고 말합니다. 그래서 지금 그의 말은 늘 1, 2년 뒤를 향합니다."
+    },
+    {
+     "s": 11,
+     "type": "chapter",
+     "sit": "open-scene",
+     "fit": true,
+     "rec": [
+      "kb",
+      "footage",
+      "stage"
+     ],
+     "say": "그의 생각이 흘러온 길, 그 출발점은 2022년의 엔비디아입니다."
+    },
+    {
+     "s": 12,
+     "type": "checklist",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "올해 초 모건스탠리 인터뷰에서 그는 이 이야기를 직접 털어놓았습니다. 2022년, 회사의 젊은 동료들이 AI 이야기를 꺼냈고, 그는 엔비디아를 처음 샀습니다. 2"
+    },
+    {
+     "s": 13,
+     "type": "bite",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "그 순간을 그는 이렇게 기억합니다."
+    },
+    {
+     "s": 14,
+     "type": "kinetic",
+     "sit": "said",
+     "fit": false,
+     "rec": [
+      "bite",
+      "footage",
+      "quote"
+     ],
+     "say": "맞히는 것보다 어려운 건 버티는 것. 전설의 투자자도 그걸 못 했다고 스스로 말합니다."
+    },
+    {
+     "s": 15,
+     "type": "chapter",
+     "sit": "open-scene",
+     "fit": true,
+     "rec": [
+      "kb",
+      "footage",
+      "stage"
+     ],
+     "say": "그리고 2026년 초. 같은 인터뷰에서 그는 AI를 보는 눈이 바뀌었다고 말합니다."
+    },
+    {
+     "s": 16,
+     "type": "bite",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "작년 여름부터 가을 사이, AI 쪽이 이상하게 달아올랐다는 겁니다."
+    },
+    {
+     "s": 17,
+     "type": "bite",
+     "sit": "cause",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "analogy"
+     ],
+     "say": "그래서 그는 다른 곳을 찾았고, 그중 하나가 바이오였습니다. 이유는 이렇습니다."
+    },
+    {
+     "s": 18,
+     "type": "checklist",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "그때 그가 그린 판은 이랬습니다. 미국 경제는 이미 강하고 더 강해질 것, 연준은 금리를 올리지 않고 아마 내릴 것. 주식은 AI 한 곳이 아니라 여러 업종에 골"
+    },
+    {
+     "s": 19,
+     "type": "bite",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "한국 이야기는 그의 목소리로 들어 보겠습니다."
+    },
+    {
+     "s": 20,
+     "type": "bite",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "그리고 이렇게 덧붙였습니다. 요즘 자신이 너무 겁을 낸다며,"
+    },
+    {
+     "s": 21,
+     "type": "kinetic",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "올해 초의 그는, 더 크게 걸고 싶어 하는 투자자였습니다."
+    },
+    {
+     "s": 22,
+     "type": "chapter",
+     "sit": "earnings",
+     "fit": true,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "그 판은 실제 장부에서 어떻게 나타났을까요. 미국에서 큰 운용사는 분기마다 보유 주식을 13F라는 서류로 공개합니다."
+    },
+    {
+     "s": 23,
+     "type": "checklist",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "9월 30일 기준 장부입니다. 먼저 판 것. 6월 말 1억 2,020만 달러어치였던 알파벳을 전부 팔았습니다. 샌디스크 7,940만 달러어치도, AMD 4,230"
+    },
+    {
+     "s": 24,
+     "type": "versus",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "이번엔 산 것. 하드디스크를 만드는 저장장치 회사 시게이트를 12만 2,000주에서 34만 1,790주로, 180% 늘렸습니다."
+    },
+    {
+     "s": 25,
+     "type": "bars",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "그리고 금광 회사 세 곳을 새로 샀습니다. 뉴몬트 4,390만, 배릭 4,290만, 애그니코 이글 4,230만 달러어치입니다."
+    },
+    {
+     "s": 26,
+     "type": "share",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "그림으로 보면 더 분명합니다. 장부 전체를 막대 하나로 놓겠습니다."
+    },
+    {
+     "s": 27,
+     "type": "motionboard",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "장부를 두 칸으로 나누면, 왼쪽은 덜어 낸 칸입니다. AI의 칩과 플랫폼, 그리고 지수 전체가 오르면 버는 콜옵션 약 3억 4,100만 달러어치."
+    },
+    {
+     "s": 28,
+     "type": "versus",
+     "sit": "explain-market",
+     "fit": false,
+     "rec": [
+      "motionboard",
+      "spread",
+      "share"
+     ],
+     "say": "다만 이 장부에는 한계가 있습니다. 9월 30일 하루의 사진이고, 공개는 한 달 반 뒤입니다. 그리고 공매도나 통화, 채권, 원자재는 나오지 않습니다."
+    },
+    {
+     "s": 29,
+     "type": "chapter",
+     "sit": "said",
+     "fit": true,
+     "rec": [
+      "bite",
+      "footage",
+      "quote"
+     ],
+     "say": "그리고 11월 17일, 텍사스 오스틴. 배짱을 되찾겠다던 그가 이번엔 쉬겠다고 말합니다."
+    },
+    {
+     "s": 30,
+     "type": "checklist",
+     "sit": "open-scene",
+     "fit": false,
+     "rec": [
+      "kb",
+      "footage",
+      "stage"
+     ],
+     "say": "네 가지입니다. 첫째, 주식은 오르는 쪽에도 내리는 쪽에도 거의 걸지 않았습니다. 둘째, 2027년 하반기 경기가 실망스러울 수 있다고 봤습니다."
+    },
+    {
+     "s": 31,
+     "type": "bite",
+     "sit": "open-scene",
+     "fit": false,
+     "rec": [
+      "kb",
+      "footage",
+      "stage"
+     ],
+     "say": "2027년 이야기는 그의 입으로 직접 들어 보겠습니다."
+    },
+    {
+     "s": 32,
+     "type": "motionboard",
+     "sit": "cause",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "analogy"
+     ],
+     "say": "그림으로 보면 이렇습니다. 안개 낀 고속도로를 달리는 운전자가 있습니다."
+    },
+    {
+     "s": 33,
+     "type": "bite",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "그의 말로는 이렇습니다."
+    },
+    {
+     "s": 34,
+     "type": "quote",
+     "sit": "route",
+     "fit": false,
+     "rec": [
+      "journey",
+      "usmap"
+     ],
+     "say": "중국어로 옮겨진 대담 정리를 기준으로 하면, 그는 AI를 만드는 기반 시설보다 AI를 써서 돈을 버는 응용 쪽을 본다고 했습니다. 요지는 이렇습니다. 토큰, 즉 "
+    },
+    {
+     "s": 35,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "이제 네 장면을 한 줄에 놓고 보겠습니다."
+    },
+    {
+     "s": 36,
+     "type": "motionboard",
+     "sit": "open-scene",
+     "fit": false,
+     "rec": [
+      "kb",
+      "footage",
+      "stage"
+     ],
+     "say": "2022년, AI와 엔비디아에 모든 걸 건 확신."
+    },
+    {
+     "s": 37,
+     "type": "versus",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "가장 선명하게 뒤집힌 건 구리입니다. 올해 초 그는 구리는 다들 하는 거래라며 갖고 있었고, 연준은 금리를 올리지 않고 아마 내릴 거라며 미국 경제가 훨씬 강해질"
+    },
+    {
+     "s": 38,
+     "type": "bite",
+     "sit": "said",
+     "fit": true,
+     "rec": [
+      "bite",
+      "footage",
+      "quote"
+     ],
+     "say": "그 스스로도 이렇게 말합니다."
+    },
+    {
+     "s": 39,
+     "type": "kinetic",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "대가의 힘은 맞히는 데가 아니라, 틀렸다 싶으면 바로 바꾸는 데 있습니다."
+    },
+    {
+     "s": 40,
+     "type": "kinetic",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "왜 바뀌었는지 그가 하나하나 설명하진 않았습니다. 다만 대담 정리를 보면, 회사들이 돈을 빌리는 금리 차이가 벌어지고 있다고 했습니다. 연준과 돈의 흐름을 먼저 "
+    },
+    {
+     "s": 41,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "그런데 같은 주, 월가의 대형 은행들은 꽤 다르게 봤습니다. 11월 16일 S&P 500 종가는 7,416.59. 웰스파고는 내년 말 8,200을 내놨습니다. 1"
+    },
+    {
+     "s": 42,
+     "type": "versus",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "한쪽은 2027년 하반기 경기가 실망스러울 수 있다며 쉬고, 다른 쪽은 주가가 15% 넘게 오른다고 봅니다. 누가 맞을까요?"
+    },
+    {
+     "s": 43,
+     "type": "chapter",
+     "sit": "route",
+     "fit": true,
+     "rec": [
+      "journey",
+      "usmap"
+     ],
+     "say": "이 이야기를 한국 계좌로 옮겨 보겠습니다. 투자 권유가 아니라, 질문을 옮기는 겁니다."
+    },
+    {
+     "s": 44,
+     "type": "kinetic",
+     "sit": "cause",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "analogy"
+     ],
+     "say": "한국 투자자에게 남는 질문이 하나 있습니다. 올해 초 그는 한국에 큰 포지션이 있다고 했습니다. 지금도 그런지는 알 수 없습니다. 13F에는 미국에 상장된 주식만"
+    },
+    {
+     "s": 45,
+     "type": "checklist",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "그의 걱정이 맞는지는 네 가지로 볼 수 있습니다. 회사들이 돈을 빌리는 금리와 국채 금리의 차이가 계속 벌어지는지, 그리고 경기 기대의 온도계인 구리 값이 어디로"
+    },
+    {
+     "s": 46,
+     "type": "checklist",
+     "sit": "open-scene",
+     "fit": false,
+     "rec": [
+      "kb",
+      "footage",
+      "stage"
+     ],
+     "say": "물론 틀릴 수 있습니다. 그 스스로 쉼이 이틀일 수도 있다고 했고, 장부는 9월 30일의 사진입니다."
+    },
+    {
+     "s": 47,
+     "type": "checklist",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "정리하면 세 가지입니다. 첫째, 그의 생각은 AI 확신에서 과열 경계로, 다시 쉼으로 흘러왔습니다. 하락 예언이 아니라 앞이 안 보여 속도를 줄인 겁니다."
+    },
+    {
+     "s": 48,
+     "type": "outro",
+     "sit": "question",
+     "fit": false,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "딱 하나만 기억한다면 이것입니다. 9개월 전 배짱을 되찾겠다던 대가가, 지금은 쉬겠다고 합니다. 그는 틀렸다 싶으면 3주 만에도 생각을 바꾸는 사람이고, 그 유연"
     }
    ]
   },
@@ -55088,6 +56216,16 @@
    "kind": "quoted_in"
   },
   {
+   "s": "intent:9355c041",
+   "t": "fb:111",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:9355c041",
+   "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
    "s": "intent:7be96777",
    "t": "ver:24",
    "kind": "interpreted_in"
@@ -57490,6 +58628,11 @@
   {
    "s": "topic:market",
    "t": "ep:20261120-market-deep",
+   "kind": "episode"
+  },
+  {
+   "s": "topic:market",
+   "t": "ep:20261120-market-deep-druckenmiller",
    "kind": "episode"
   },
   {
@@ -60460,6 +61603,16 @@
   {
    "s": "fb:110",
    "t": "intent:aeda10c1",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:111",
+   "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "fb:111",
+   "t": "intent:9355c041",
    "kind": "quoted_as"
   }
  ]
