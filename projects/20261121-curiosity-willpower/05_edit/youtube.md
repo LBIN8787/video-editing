@@ -1,4 +1,4 @@
-# 유튜브 업로드 묶음 — 의지력 편 v14 (D4 전)
+# 유튜브 업로드 묶음 — 의지력 편 v16 최종본 (ElevenLabs)
 
 ## 제목 (1번이 올라감 — 2026-11-21 사용자 확정)
 1. 의지력은 정말 쓰면 닳을까? 과학자들의 실험이 엇갈린 이유
@@ -11,17 +11,17 @@ A/B/C — [thumbnails.md](thumbnails.md). 파일은 Drive `ytflow/영상/2026112
 
 ## 설명란
 ```
-다이어트 2주째, 밤 11시 냉장고 앞. '오늘은 의지력을 다 썼어' — 정말 그럴까요?
+다이어트 중, 밤 11시 냉장고 앞에서 무너진 적 있으신가요? '오늘은 의지력을 다 썼어' — 정말 그럴까요?
 1998년 쿠키와 무 실험부터, 직접 해 보는 2016년 단어 과제와 2025년 '반대쪽 보기' 실험, 그리고 잘 참는 사람들이 실제로 쓰는 방법까지.
 
-0:00 냉장고 앞의 당신
-0:58 쿠키와 무
-2:29 당신도 해 보세요
-3:43 30분 동안 반대쪽 보기
-4:50 같은 치킨, 다른 얼굴
-5:30 잘 참는 사람들의 비밀
-6:16 오늘 밤 써먹는 두 가지
-7:16 다시, 냉장고 앞
+0:00 냉장고 앞의 서윤
+1:04 쿠키와 무
+2:22 여러분도 해 보세요
+3:27 30분 동안 반대쪽 보기
+4:25 같은 치킨, 다른 얼굴
+5:00 잘 참는 사람들의 비밀
+5:40 오늘 밤 써먹는 두 가지
+6:31 다시, 냉장고 앞
 
 출처
 - Baumeister, R. F., Bratslavsky, E., Muraven, M., & Tice, D. M. (1998). Ego depletion: Is the active self a limited resource? Journal of Personality and Social Psychology, 74(5), 1252–1265.
@@ -37,7 +37,7 @@ A/B/C — [thumbnails.md](thumbnails.md). 파일은 Drive `ytflow/영상/2026112
 - Gollwitzer, P. M., & Sheeran, P. (2006). Implementation intentions and goal achievement: A meta-analysis of effects and processes. Advances in Experimental Social Psychology, 38.
 
 서윤은 이야기 속 인물이며, 1998년 실험실과 서윤의 장면은 연구 내용을 바탕으로 그린 재현 삽화입니다(실제 사진 아님).
-내레이션: AI 음성.
+내레이션: AI 음성(ElevenLabs).
 
 #심리학 #의지력 #자아고갈
 ```

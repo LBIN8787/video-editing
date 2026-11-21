@@ -69,7 +69,7 @@ MG.words=(d,t,K,D)=>{black();   // 심리학 고양이식: 검은 바탕 가운�
   const n=d.lines.length;d.lines.forEach(([s,k],i)=>{const a=io(t,K[k]);const last=i===n-1&&n>1;txt(s,960,500+(i-(n-1)/2)*80,50,last?GOLD:CREAM,'NGX','center',a)})};
 MG.line=(d,t,K,D)=>{black();let cur=0;d.lines.forEach((l,i)=>{if(t>=K[l[2]]-.1)cur=i});const [s,hl]=d.lines[cur];const a=io(t,K[d.lines[cur][2]]-.1,.35);
   x.save();x.font='54px NGX';const w=x.measureText(s).width;const j=hl?s.indexOf(hl):-1;const x0=960-w/2;
-  if(j<0){txt(s,960,520,54,CREAM,'NGX','center',a)}else{const pre=s.slice(0,j);const pw=x.measureText(pre).width;txt(pre,x0,520,54,CREAM,'NGX','left',a);txt(hl,x0+pw,520,54,GOLD,'NGX','left',a)}x.restore();return 'nosub'};
+  if(j<0){txt(s,960,520,54,CREAM,'NGX','center',a)}else{const pre=s.slice(0,j);const pw=x.measureText(pre).width;txt(pre,x0,520,54,CREAM,'NGX','left',a);txt(hl,x0+pw,520,54,GOLD,'NGX','left',a);txt(s.slice(j+hl.length),x0+pw+x.measureText(hl).width,520,54,CREAM,'NGX','left',a)}x.restore();return 'nosub'};
 MG.memo=(d,t,K,D)=>{memoScene(t,D,d.marks,null,0,K[0])};
 MG.etask=(d,t,K,D)=>{const p=K.filter(k=>t>=k).length;const sc=SCREEN;
   if(p>=2&&p<3||(p===3&&t<K[3]-0.2&&false)){}

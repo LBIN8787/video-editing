@@ -5,7 +5,7 @@
 | D1 주제 | 사용자 위임(에이전트 제안) — `01_research/topic_card.md` |
 | D2 대본 | v5 통과 → v1 영상 D4 기각 → v6~v10(v10 통과·렌더) → v10 피드백 → v11(흰 곰·넘기기 문법) → 심리학 고양이 분석 `01_research/psycat_compare.md` → **v12 통과** ("진행하세요") — `02_script/script_v12.md`, 이력 `02_script/script_review.md` |
 | D3 화면 | v6 샘플(실험실 장면) → v8·v9·v10 샘플(1~2장, 삽화·검은 바탕) — 사용자 피드백을 받으며 대본과 함께 다듬음 |
-| S7 전체 렌더 | **v14** — Drive `ytflow/영상/20261121-curiosity-willpower/05_edit/willpower_v14.mp4` (8분 1초, 초안 목소리 edge-tts, 배경음 없음). v13: 결론만(사족 삭제), v14: 화면 장 표지 삭제(심리학 고양이 재확인 `01_research/psycat_compare.md` §5). 이전 판 v1·v10·v12·v13 도 같은 폴더 |
+| S7 전체 렌더 | **v16 최종본** — Drive `ytflow/영상/20261121-curiosity-willpower/05_edit/willpower_v16_final.mp4` (7분 10초, ElevenLabs Nobel Butler `YBRudLRm83BV5Mazcr42` eleven_v4, 문단 35개 따로 생성 — 흐름 `aRthr57wkL8E7a6beLIZ`, 음성 원본·정렬은 Drive `voice_el_v16/`), -15.9 LUFS, 자막 싱크: 받아쓰기 122줄 중 115줄 대조, 시차 중앙값 -0.06초(0.5초 넘는 15줄은 실제 음성 시작점과 0.05초 안 — 받아쓰기 쪽 오차). 사용자: "이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요. 이제 일레븐랩스 더빙 들어가세요" → 대본 기준은 매뉴얼 v85 04 §0-8. 이전 판(v1·v10·v12~v16 초안 목소리)도 같은 폴더 |
 | S8 포장 | 제목 3(①확정) · 썸네일 A/B/C · 설명란·v10 챕터·출처 `05_edit/youtube.md` |
 | **D4 최종 승인** | **결정 기다림** — 사용자만 |
 
@@ -31,9 +31,9 @@
 
 ## 다시 만들기
 ```
-python 02_script/full_beats.py script_v14.md v14_beats.json  # 장면표 v14.json 은 make_v14 로 v13.json 에서(장 표지 제외)
-BEATS=v14_beats.json python 02_script/full_voice.py <TTS 폴더>
-SPEC=v14.json OVERLAY=v14_overlay.html TIMELINE=v14_timeline.json python 02_script/render_full.py <TTS 폴더> <원화 조각 폴더> <작업 폴더> <출력.mp4> 6
+python 02_script/full_beats.py script_v16.md v16_beats.json
+# 음성: ElevenLabs 문단별 b<번호>.mp3 → python 02_script/el_align.py <음성 폴더> v16_beats.json (단어 시각 words.json)
+SPEC=v16.json OVERLAY=v15_overlay.html TIMELINE=v16_el_timeline.json python 02_script/render_full.py <TTS 폴더> <원화 조각 폴더> <작업 폴더> <출력.mp4> 6
 ```
 원화 조각 = Drive `art/` 시트를 2×2 로 자른 것(`<시트>_tl|tr|bl|br.jpg`, 1920×1080).
 

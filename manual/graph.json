@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-21T22:05:48",
- "source_hash": "05c6d33c6873",
+ "generated": "2026-11-21T22:51:40",
+ "source_hash": "bbd3da3a28be",
  "audit": {
   "date": "2026-11-20T23:13",
   "counts": {
@@ -566,40 +566,38 @@
   "fixed": []
  },
  "stats": {
-  "manual_version": 84,
-  "versions": 84,
+  "manual_version": 85,
+  "versions": 85,
   "reviews": 40,
   "rejects": 26,
   "passes": 14,
-  "pending": 1,
+  "pending": 0,
   "rules": 54,
   "checks": 87,
-  "sections": 196,
+  "sections": 197,
   "must": 29,
   "auto": 39,
-  "intents": 233,
+  "intents": 234,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 1,
   "code": 86,
   "terms": 140,
-  "bans": 180,
-  "feedback": 172,
+  "bans": 182,
+  "feedback": 173,
   "topics": 4,
   "episodes": 39,
   "main_situations": 17,
   "tiers": {
-   "principle": 48,
+   "principle": 50,
    "standard": 154,
    "style": 25,
    "trial": 7
   },
   "overfit": 14,
-  "principle_bans": 42
+  "principle_bans": 44
  },
- "pending": [
-  "[2026-11-21 · 20261121-curiosity-willpower 기각] 기각입니다. 현재는 좋은 연구 해설을 보여주는 자료에 가깝습니다. 다음 버전의 목표는 좋은 연구 해설을 보게 되는 이야기로 만드는 것입니다. 연출 또한 마찬가지입니다. 이전보다 더 퇴화했다고 느껴지네요 그래프가 나오는거도 그렇고 이야기라기보단 연구같아요 배경도 검은색이 나은 것 같습니다"
- ],
+ "pending": [],
  "status_labels": {
   "aligned": "정렬됨",
   "over": "과잉 해석",
@@ -1312,6 +1310,42 @@
    "absolute": false,
    "must": false,
    "tier_key": "ban:4eaf359b",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
+   "section": "sec:04§0-8",
+   "text": "결론 | 장마다 결론 한 문장. 실험 조건·반론·한계를 덧붙이지 않는다(단언은 사실 범위 안에서 — 넘지 못하면 '…만이 아니다'처럼 범위를 문장 안에) | \"사족 붙이지 말고 결론만 말해주세요 빙빙 돌려말하지 말구요\", \"이랬습니다. 그런데 아니였습니다 … 억지로 길이를 늘린거같아요\" | 한계를 장마다 붙이면 말하려는 게 흐려지고 늘어진다",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:ae96aba2",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
+   "section": "sec:04§0-8",
+   "text": "화면(§0-7 보완): 화면에 장 제목·표지를 띄우지 않는다(장 이름은 설명란 챕터만). 검은 화면은 지금 읽는 핵심 문장 한 줄(작은 글씨, 핵심 낱말 하나만 강조색). 왼쪽 위 '재현·창작 인물' 꼬리표는 화면에 두지 않고 설명란에 적는다. 그래프·표 없음. (사용자: \"재현 창작인물 서윤 이런 왼쪽 위 문구 없애주고\", 심리학 고양이 장 경계 화면 확인)",
+   "themes": [
+    "emphasis"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:43ce3444",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
    "overfit": false,
@@ -3661,7 +3695,7 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "section": "sec:feedback§h274",
+   "section": "sec:feedback§h275",
    "text": "2026-11-19 · 방향·기준 요청 — “대본 단계에 \"호기심 대본은 설명·지식 문장 30% 이하\"라는 기준 이런 기준은 또 빼주세요 너무 과적합입니다. / \"설명은 이야기 속에 엮는다\"는 원리 이런식으로 원리주의적으로 가지 방법 자체를 고정하지 말아주세요”",
    "themes": [
     "script",
@@ -3681,7 +3715,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h317",
+   "section": "sec:feedback§h318",
    "text": "2026-11-09 · v3 기각 — “강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)”",
    "themes": [
     "emphasis",
@@ -4206,15 +4240,13 @@
    "key": "04",
    "file": "manual/04-curiosity.md",
    "label": "04. curiosity — 몰랐던 이유 (심리학과 현대인의 일상)",
-   "lines": 238,
+   "lines": 260,
    "versions": [
     1,
     32,
     38,
     57,
-    60,
     61,
-    73,
     79,
     83
    ],
@@ -4427,7 +4459,7 @@
    "key": "feedback",
    "file": "manual/feedback-by-repo.md",
    "label": "내 피드백 — 레포별 (자동 생성: `python -m ytflow manual-graph`)",
-   "lines": 328,
+   "lines": 329,
    "versions": [
     83,
     84
@@ -5107,6 +5139,24 @@
    ]
   },
   {
+   "id": "sec:04§0-8",
+   "kind": "section",
+   "doc": "doc:04",
+   "num": "0-8",
+   "level": 3,
+   "label": "대본은 이렇게 — 의지력 편 v16 (2026-11-21 사용자: \"이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요\")",
+   "title": "0-8. 대본은 이렇게 — 의지력 편 v16 (2026-11-21 사용자: \"이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요\")",
+   "line": 175,
+   "end": 196,
+   "tag_version": null,
+   "versions": [
+    60,
+    73,
+    85
+   ],
+   "last_version": 85
+  },
+  {
    "id": "sec:04§1",
    "kind": "section",
    "doc": "doc:04",
@@ -5114,8 +5164,8 @@
    "level": 2,
    "label": "호기심을 '만드는' 주제의 조건 (모두 충족)",
    "title": "1. 호기심을 '만드는' 주제의 조건 (모두 충족)",
-   "line": 175,
-   "end": 187,
+   "line": 197,
+   "end": 209,
    "tag_version": null,
    "versions": [
     53
@@ -5130,8 +5180,8 @@
    "level": 2,
    "label": "주제 찾기",
    "title": "2. 주제 찾기",
-   "line": 188,
-   "end": 206,
+   "line": 210,
+   "end": 228,
    "tag_version": null,
    "versions": [
     65
@@ -5146,8 +5196,8 @@
    "level": 2,
    "label": "깊은 조사 — 다섯 층 (자세히는 `prompts/script_knowledge.md` A)",
    "title": "3. 깊은 조사 — 다섯 층 (자세히는 `prompts/script_knowledge.md` A)",
-   "line": 207,
-   "end": 209,
+   "line": 229,
+   "end": 231,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5160,8 +5210,8 @@
    "level": 2,
    "label": "대본 공식",
    "title": "4. 대본 공식",
-   "line": 210,
-   "end": 223,
+   "line": 232,
+   "end": 245,
    "tag_version": null,
    "versions": [
     34
@@ -5182,8 +5232,8 @@
    "level": 2,
    "label": "소스",
    "title": "5. 소스",
-   "line": 224,
-   "end": 226,
+   "line": 246,
+   "end": 248,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5196,8 +5246,8 @@
    "level": 2,
    "label": "포장",
    "title": "6. 포장",
-   "line": 227,
-   "end": 230,
+   "line": 249,
+   "end": 252,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -5210,8 +5260,8 @@
    "level": 2,
    "label": "이 채널만의 검사",
    "title": "7. 이 채널만의 검사",
-   "line": 231,
-   "end": 238,
+   "line": 253,
+   "end": 260,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -7687,7 +7737,7 @@
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
    "line": 203,
-   "end": 273,
+   "end": 274,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7698,15 +7748,15 @@
    ]
   },
   {
-   "id": "sec:feedback§h274",
+   "id": "sec:feedback§h275",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h274",
+   "num": "h275",
    "level": 3,
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
-   "line": 274,
-   "end": 284,
+   "line": 275,
+   "end": 285,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7715,29 +7765,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h285",
+   "id": "sec:feedback§h286",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h285",
+   "num": "h286",
    "level": 2,
    "label": "시사 — `topics/issues`",
    "title": "시사 — `topics/issues`",
-   "line": 285,
-   "end": 286,
+   "line": 286,
+   "end": 287,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h287",
+   "id": "sec:feedback§h288",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h287",
+   "num": "h288",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 287,
-   "end": 314,
+   "line": 288,
+   "end": 315,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7747,29 +7797,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h315",
+   "id": "sec:feedback§h316",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h315",
+   "num": "h316",
    "level": 2,
    "label": "AI — `topics/ai`",
    "title": "AI — `topics/ai`",
-   "line": 315,
-   "end": 316,
+   "line": 316,
+   "end": 317,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h317",
+   "id": "sec:feedback§h318",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h317",
+   "num": "h318",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 317,
-   "end": 328,
+   "line": 318,
+   "end": 329,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -13413,6 +13463,26 @@
    }
   },
   {
+   "id": "ver:85",
+   "kind": "version",
+   "v": 85,
+   "date": "2026-11-21",
+   "label": "v85",
+   "summary": "호기심 대본 구성 기준 04 §0-8(의지력 편 v16): 시청자에게 먼저 묻고 인물 소개, 설정 있는 창작 인물 3인칭, 몰입 한 줄, 질문은 인물 말 뒤, 1분 안 단언, 실제 있었던 일로 들려주기, 장마다 결론만, 직접 해 보기 정답은 처음 몇 번만, 화면 장 표지·꼬리표 없음",
+   "applied": [
+    {
+     "date": "2026-11-21",
+     "project": "20261121-curiosity-willpower",
+     "reason": "기각입니다. 현재는 좋은 연구 해설을 보여주는 자료에 가깝습니다. 다음 버전의 목표는 좋은 연구 해설을 보게 되는 이야기로 만드는 것입니다. 연출 또한 마찬가지입니다. 이전보다 더 퇴화했다고 느껴지네요 그래프가 나오는거도 그렇고 이야기라기보단 연구같아요 배경도 검은색이 나은 것 같습니다"
+    }
+   ],
+   "themes": [
+    "background",
+    "script",
+    "intent"
+   ]
+  },
+  {
    "id": "rev:1",
    "kind": "review",
    "date": "2026-11-09",
@@ -14304,7 +14374,7 @@
    ],
    "repo": "curiosity",
    "repo_label": "호기심",
-   "status": "pending",
+   "status": "applied",
    "tier_key": "rev:104c731e",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -15442,7 +15512,7 @@
      "by": ""
     },
     {
-     "ref": "doc:04",
+     "ref": "sec:04§0-8",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21939,7 +22009,7 @@
      "by": ""
     },
     {
-     "ref": "doc:04",
+     "ref": "sec:04§0-8",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -22511,7 +22581,7 @@
      "by": ""
     },
     {
-     "ref": "doc:04",
+     "ref": "sec:04§0-8",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -24229,7 +24299,7 @@
      "by": ""
     },
     {
-     "ref": "doc:04",
+     "ref": "sec:04§0-8",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -24516,7 +24586,7 @@
      "by": ""
     },
     {
-     "ref": "doc:04",
+     "ref": "sec:04§0-8",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -24743,11 +24813,15 @@
   {
    "id": "intent:00574923",
    "kind": "intent",
-   "quote": "이전보다 훨씬 좋아졌습니다.",
-   "label": "이전보다 훨씬 좋아졌습니다.",
+   "quote": "이전보다 훨씬 좋아졌습니다",
+   "label": "이전보다 훨씬 좋아졌습니다",
    "versions": [],
    "date": "2026-11-21",
    "sources": [
+    {
+     "ref": "sec:04§0-8",
+     "kind": "manual"
+    },
     {
      "ref": "fb:170",
      "kind": "feedback"
@@ -24762,7 +24836,14 @@
    "meaning": "",
    "not_meant": [],
    "note": "",
-   "readings": [],
+   "readings": [
+    {
+     "ref": "sec:04§0-8",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -25087,7 +25168,9 @@
    "kind": "intent",
    "quote": "기각입니다. 현재는 좋은 연구 해설을 보여주는 자료에 가깝습니다. 다음 버전의 목표는 좋은 연구 해설을 보게 되는 이야기로 만드는 것입니다. 연출 또한 마찬가지입니다. 이전보다 더 퇴화했다고 느껴지네요 그래프가 나오는거도 그렇고 이야기라기보단 연구같아요 배경도 검은색이 나은 것 같습니다",
    "label": "기각입니다. 현재는 좋은 연구 해설을 보여주는 자료에 가깝습니다. 다음 버전의 목표는 좋은 연구 해설을 보게",
-   "versions": [],
+   "versions": [
+    85
+   ],
    "date": "2026-11-21",
    "sources": [
     {
@@ -25107,7 +25190,20 @@
    "meaning": "",
    "not_meant": [],
    "note": "",
-   "readings": [],
+   "readings": [
+    {
+     "ref": "ver:85",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0-8",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -25300,6 +25396,80 @@
    "not_meant": [],
    "note": "",
    "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:2be120db",
+   "kind": "intent",
+   "quote": "이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요. 이제 일레븐랩스 더빙 들어가세요",
+   "label": "이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요. 이제 일레븐랩스 더빙 들어가세요",
+   "versions": [
+    16
+   ],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:173",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:04§0-8",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요"
+   ],
+   "member_ids": [
+    "intent:2be120db",
+    "intent:a0d6a3ce"
+   ],
+   "themes": [
+    "script"
+   ],
+   "ann_key": "intent:2be120db",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:16",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:README§2-2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:05",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:184",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1479",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0-8",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -25800,11 +25970,18 @@
     {
      "ref": "fb:169",
      "kind": "feedback"
+    },
+    {
+     "ref": "sec:04§0-8",
+     "kind": "manual"
     }
    ],
-   "variants": [],
+   "variants": [
+    "재현 창작인물 서윤 이런 왼쪽 위 문구 없애주고"
+   ],
    "member_ids": [
-    "intent:8d30c51b"
+    "intent:8d30c51b",
+    "intent:8e293481"
    ],
    "themes": [
     "intent"
@@ -25813,7 +25990,14 @@
    "meaning": "",
    "not_meant": [],
    "note": "",
-   "readings": [],
+   "readings": [
+    {
+     "ref": "sec:04§0-8",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -30023,7 +30207,7 @@
     "sec:10§1",
     "sec:10§h9",
     "sec:10§3",
-    "sec:feedback§h274",
+    "sec:feedback§h275",
     "ver:21",
     "ver:34",
     "code:ytflow/stages/hybrid.py:1662",
@@ -32822,8 +33006,8 @@
     "sec:10§h136",
     "sec:feedback§h116",
     "sec:feedback§h203",
-    "sec:feedback§h287",
-    "sec:feedback§h317",
+    "sec:feedback§h288",
+    "sec:feedback§h318",
     "ver:10",
     "ver:30",
     "ver:31",
@@ -33248,8 +33432,8 @@
     "sec:12§0-1",
     "sec:feedback§h116",
     "sec:feedback§h203",
-    "sec:feedback§h287",
-    "sec:feedback§h317",
+    "sec:feedback§h288",
+    "sec:feedback§h318",
     "ver:10",
     "ver:12",
     "rev:11",
@@ -38453,6 +38637,36 @@
    "tier_note": "",
    "tier_fixed": false,
    "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:173",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요. 이제 일레븐랩스 더빙 들어가세요",
+   "label": "이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요. 이제 일레븐랩스 더빙 들어가세요",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "20261121-curiosity-willpower",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "script"
+   ],
+   "scope": "",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:2be120db",
+   "tier_key": "fb:2be120db",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": false,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
   },
   {
    "id": "layer:main",
@@ -61795,6 +62009,11 @@
   },
   {
    "s": "doc:04",
+   "t": "sec:04§0-8",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:04",
    "t": "sec:04§1",
    "kind": "contains"
   },
@@ -62485,27 +62704,27 @@
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h274",
+   "t": "sec:feedback§h275",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h285",
+   "t": "sec:feedback§h286",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h287",
+   "t": "sec:feedback§h288",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h315",
+   "t": "sec:feedback§h316",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h317",
+   "t": "sec:feedback§h318",
    "kind": "contains"
   },
   {
@@ -64844,11 +65063,10 @@
   },
   {
    "s": "ver:60",
-   "t": "doc:04",
+   "t": "sec:04§0-8",
    "kind": "touched",
    "via": [
-    "changelog",
-    "git"
+    "changelog"
    ]
   },
   {
@@ -65039,7 +65257,7 @@
   },
   {
    "s": "ver:73",
-   "t": "doc:04",
+   "t": "sec:04§0-8",
    "kind": "touched",
    "via": [
     "changelog"
@@ -65374,6 +65592,14 @@
    ]
   },
   {
+   "s": "ver:85",
+   "t": "sec:04§0-8",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -65592,6 +65818,12 @@
    "s": "rev:39",
    "t": "ver:81",
    "kind": "approved_in"
+  },
+  {
+   "s": "rev:40",
+   "t": "ver:85",
+   "kind": "applied_in",
+   "how": "changelog"
   },
   {
    "s": "rev:1",
@@ -66364,6 +66596,21 @@
    "kind": "about"
   },
   {
+   "s": "ver:85",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "ver:85",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "ver:85",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
    "s": "ver:8",
    "t": "code:ytflow/stages/backdrop.py:1",
    "kind": "implemented_by"
@@ -67055,6 +67302,11 @@
   },
   {
    "s": "intent:8d30c51b",
+   "t": "sec:04§0-8",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:8d30c51b",
    "t": "theme:intent",
    "kind": "about"
   },
@@ -67102,6 +67354,11 @@
    "s": "intent:a02a2392",
    "t": "fb:132",
    "kind": "quoted_in"
+  },
+  {
+   "s": "intent:104c731e",
+   "t": "ver:85",
+   "kind": "interpreted_in"
   },
   {
    "s": "intent:104c731e",
@@ -68679,6 +68936,26 @@
    "kind": "quoted_in"
   },
   {
+   "s": "intent:2be120db",
+   "t": "ver:16",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:2be120db",
+   "t": "fb:173",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:2be120db",
+   "t": "sec:04§0-8",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:2be120db",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
    "s": "intent:3ffec795",
    "t": "fb:14",
    "kind": "quoted_in"
@@ -69596,6 +69873,11 @@
   {
    "s": "intent:ca15e6d7",
    "t": "code:ytflow/stages/checklist.py:283",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:00574923",
+   "t": "sec:04§0-8",
    "kind": "quoted_in"
   },
   {
@@ -74171,6 +74453,16 @@
   {
    "s": "fb:172",
    "t": "intent:abf48aad",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:173",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "fb:173",
+   "t": "intent:2be120db",
    "kind": "quoted_as"
   }
  ]
