@@ -15,6 +15,7 @@ yt-dlp --cookies-from-browser <브라우저> --skip-download --write-auto-subs -
 ```
 | 장면 | 찾을 문장 (보도 인용 — 실제 말과 조금 다를 수 있음) |
 |---|---|
+| bite 0 (영상 첫 장면) | 진행자의 '주식에 얼마나 걸었나' 질문 + 답 "Basically, almost none." (질문부터 답까지, 2026-11-21 사용자: 시작에 이 장면을 실제로 보여 달라) |
 | bite 1 | We're trying to not lose money, as opposed to make money. |
 | bite 2 | I'm really alert to the fact that the second half of '27 could be economically disappointing |
 | bite 3 | I'm just taking a break, which could last two days or six months. |

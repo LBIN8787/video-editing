@@ -40,12 +40,16 @@ def hbite(ch, beat, src, find, ko):
         label=HL, beats=[{"say": beat}], clip={"src": src, "lang": "en", "cuts": [{"find": find, "ko": ko}], "fit": "contain"}, show_en=False)
 
 # 0 여는 장면
-add(type="footage", chapter=0, label="화면: 모건스탠리 'Hard Lessons' 인터뷰(2026.2.27) · 말은 TomorrowX 대담(11.17)·13F(9.30) 기준", clip={"src": "hl_broll", "start": 0, "frame": "full"},
-    beats=[{"say": "11월 17일, 텍사스 오스틴의 한 투자 행사. 30년 넘게 운용하며 손실 난 해가 없었다고 알려진 투자자, 스탠리 드러켄밀러에게 진행자가 물었습니다. 지금 주식에 얼마나 걸고 있습니까. 대답은 짧았습니다. 거의 없다.", "lower": {"name": "스탠리 드러켄밀러", "role": "1981~2010년 운용 · 손실 난 해 0"}, "motion": [{"t": "30년", "do": "stat", "id": "yrs", "value": "30년", "label": "11월 17일 대담 · 운용", "sub": "손실 난 해 0", "x": 1660, "y": 230, "fs": 56, "static": True}]},
-           {"say": "같은 주에 공개된 9월 30일 기준 장부, 13F에서는 6월 말 95개였던 신고 항목이 65개로 줄어 있었습니다. 구글의 모회사 알파벳은 한 주도 남기지 않았습니다.", "motion": [{"t": "65개", "do": "stat", "id": "pos", "value": "95 → 65", "label": "13F 신고 항목", "sub": "6월 말 → 9월 말", "x": 300, "y": 230, "fs": 56, "static": True}]},
-           {"say": "그런데 이상한 점이 있습니다. 많이 정리했지만, 하드디스크 회사 시게이트는 오히려 180% 늘렸습니다. 그는 시장을 피하는 걸까요, 돈이 갈 곳을 바꾸는 걸까요? 그의 말과 장부를 맞대 보겠습니다."}])
-bite(0, "그가 지금의 자신을 설명한 한 문장입니다.", "We're trying to not lose money, as opposed to make money.",
+bite(0, "11월 17일, 텍사스 오스틴의 한 투자 행사. 30년 넘게 운용하며 손실 난 해가 없었다고 알려진 투자자, 스탠리 드러켄밀러에게 진행자가 물었습니다. 지금 주식에 얼마나 걸고 있느냐고.",
+     "Basically, almost none.", "사실상 거의 없습니다.")
+bite(0, "11월 17일 대담 기준, 그는 지금의 자신을 이렇게 설명했습니다.", "We're trying to not lose money, as opposed to make money.",
      "우리는 지금, 돈을 벌기보다 잃지 않으려 하고 있습니다.")
+add(type="checklist", chapter=0, label="말: TomorrowX 대담(11.17) · 장부: 13F(9.30 기준, 11.16 공개)", title="11월 17일, 그의 말과 장부", x=150, text_w=1100,
+    rows=[{"label": "말: 주식은 '거의 없다' · 벌기보다 안 잃기", "state": "warn", "t": "거의"},
+          {"label": "장부: 13F 신고 항목 95 → 65", "state": "warn", "t": "95"},
+          {"label": "그런데: 시게이트는 +180%", "state": "ok", "t": "시게이트"}],
+    beats=[{"say": "정리하면 이렇습니다. 그는 주식에 거의 걸지 않았고, 벌기보다 잃지 않는 것이 목표라고 했습니다. 같은 주에 공개된 9월 30일 기준 장부, 13F에서는 6월 말 95개였던 신고 항목이 65개로 줄어 있었습니다. 구글의 모회사 알파벳은 한 주도 남기지 않았습니다.", "upto": 2},
+           {"say": "그런데 이상한 점이 있습니다. 많이 정리했지만, 하드디스크 회사 시게이트는 오히려 180% 늘렸습니다. 그는 시장을 피하는 걸까요, 돈이 갈 곳을 바꾸는 걸까요? 그의 말과 장부를 맞대 보겠습니다.", "upto": 3}])
 add(type="chapter", chapter=1, num="1", title="왜 이 사람의 말을 듣나", icon="user-round", look="board",
     beats=[{"say": "먼저, 왜 이 사람의 말에 시장이 귀를 기울이는지부터 보겠습니다."}])
 add(type="checklist", chapter=1, label="모틀리풀 인물 소개 등 널리 보도된 이력 · '손실 난 해 없음'은 알려진 평가", title="스탠리 드러켄밀러",
@@ -88,7 +92,7 @@ add(type="checklist", chapter=2, label="모건스탠리 'Hard Lessons' 인터뷰
 hbite(2, "그 순간을 그는 이렇게 기억합니다.", "hl_nvidia",
       "I violated everything I said in the interview. I couldn't stand success. It had gone from $150 to $800. I was long-term, and I couldn't deal with it, and I sold it, and then it was $1,400, like five weeks later, and I was sick.",
       "인터뷰에서 한 말을 전부 어겼습니다. 성공을 견디지 못한 거죠. 150달러에서 800달러가 됐고, 길게 보겠다던 저는 그걸 감당하지 못하고 팔았습니다. 그리고 5주 뒤 1,400달러가 됐고, 저는 속이 뒤집혔습니다.")
-add(type="footage", chapter=2, label="화면: 모건스탠리 'Hard Lessons' 인터뷰(2026.2.27) · 말은 TomorrowX 대담(11.17)", clip={"src": "hl_broll", "start": 32, "frame": "full"}, beats=[{"say": "너무 올랐다며 판 판단은 틀렸습니다. 그렇다면 이번에 위험을 줄이겠다는 판단도 틀릴 수 있지 않을까요? 그는 그 답을 미리 붙여 두었습니다. 이 쉼은 이틀일 수도, 여섯 달일 수도 있다고요."}])
+add(type="footage", chapter=2, label="화면: 모건스탠리 'Hard Lessons' 인터뷰(2026.2.27) · 말은 TomorrowX 대담(11.17)", clip={"src": "hl_broll", "start": 0, "frame": "full"}, beats=[{"say": "너무 올랐다며 판 판단은 틀렸습니다. 그렇다면 이번에 위험을 줄이겠다는 판단도 틀릴 수 있지 않을까요? 그는 그 답을 미리 붙여 두었습니다. 이 쉼은 이틀일 수도, 여섯 달일 수도 있다고요."}])
 add(type="chapter", chapter=3, num="3", title="생각의 흐름 ② 2026년 초, 과열을 보다", icon="flame", look="board",
     beats=[{"say": "그리고 2026년 초. 같은 인터뷰에서 그는 AI를 보는 눈이 바뀌었다고 말합니다."}])
 hbite(3, "작년 여름부터 가을 사이, AI 쪽이 이상하게 달아올랐다는 겁니다.", "hl_heated",
@@ -219,7 +223,7 @@ add(type="noirsides", chapter=6, label="2월: 모건스탠리 'Hard Lessons'(202
            {"say": "구리는 값이 내리는 쪽에 걸었고,", "add": [{"side": 1, "tag": "11.17", "title": "구리 숏", "sub": "내리는 쪽에"}], "strike": [[0, 1]]},
            {"say": "배짱 대신 쉼을 택했습니다. 같은 사람이 1년도 안 돼 정반대 자리에 섰습니다.", "add": [{"side": 1, "tag": "11.17", "title": "쉼", "sub": "주식 거의 없음"}], "strike": [[0, 2]]}])
 hbite(2, "그 스스로도 이렇게 말합니다.", "hl_mind", "I tend to change my mind every three weeks.", "저는 3주마다 생각을 바꾸는 편입니다.")
-add(type="footage", chapter=6, label="화면: 모건스탠리 'Hard Lessons' 인터뷰(2026.2.27) · 말은 TomorrowX 대담 정리(번역본)", clip={"src": "hl_broll", "start": 46, "frame": "full"}, beats=[{"say": "왜 바뀌었는지 그가 하나하나 설명하진 않았습니다. 다만 대담 정리를 보면, 회사들이 돈을 빌리는 금리 차이가 벌어지고 있다고 했습니다. 연준과 돈의 흐름을 먼저 보는 그의 원칙대로라면, 그 신호가 판을 바꾼 것으로 볼 수 있습니다."}])
+add(type="footage", chapter=6, label="화면: 모건스탠리 'Hard Lessons' 인터뷰(2026.2.27) · 말은 TomorrowX 대담 정리(번역본)", clip={"src": "hl_broll", "start": 14.7, "frame": "full"}, beats=[{"say": "왜 바뀌었는지 그가 하나하나 설명하진 않았습니다. 다만 대담 정리를 보면, 회사들이 돈을 빌리는 금리 차이가 벌어지고 있다고 했습니다. 연준과 돈의 흐름을 먼저 보는 그의 원칙대로라면, 그 신호가 판을 바꾼 것으로 볼 수 있습니다."}])
 add(type="bars", chapter=6, label="월가 전망 보도(11.13~18) · 오름폭은 계산",
     title="같은 때, 월가의 2027년 말 S&P 500 전망", unit="", emph=4, skin="dark-doc",
     items=[{"label": "11월 16일 종가", "value": 7416.59, "text": "7,416.59", "t": "16일"},
