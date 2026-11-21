@@ -2,7 +2,7 @@
 from: claude-code
 type: clip-fetch
 project: 20261120-market-deep-druckenmiller
-status: pending
+status: cancelled
 ---
 
 PC 에서 원본 발언 구간만 받아 주세요 (docs/50-clip-lane.md). 클라우드는 유튜브 봇 확인 때문에 받지 못합니다.
@@ -22,3 +22,6 @@ git add projects/20261120-market-deep-druckenmiller/04_assets/clip_manifest.json
 | druck_break | 스탠리 드러켄밀러 | https://www.youtube.com/watch?v=6r3D-CMJkuI | 555.5~562.8초 (7.3초) | 장면 [31] |
 
 끝나면 이 파일의 status 를 done 으로 바꾸고 아래에 결과(받은 파일·길이·실패 이유)를 적어 주세요.
+
+
+취소: 같은 주문을 권리 표시(official)와 함께 다시 만든 `20261121-1742-clip-fetch-20261120-market-deep-druckenmiller.md` 로 대체.

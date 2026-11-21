@@ -289,17 +289,17 @@ spec = {
               {"term": "콜옵션", "plain": "정해진 값에 살 권리 — 값이 오르면 버는 쪽에 거는 것"},
               {"term": "유동성", "plain": "시장에 풀린 돈의 양. 중앙은행이 금리와 돈 풀기로 조절"}, {"term": "신용 스프레드", "plain": "회사가 돈을 빌리는 금리와 국채 금리의 차이. 벌어지면 시장이 위험을 크게 본다는 뜻"}],
  "footage": {
-   "druck_qa": {"file": "druck_qa.mp4", "url": "https://www.youtube.com/watch?v=6r3D-CMJkuI", "start": "1:58.5", "end": "2:11.0", "who": "진행자 · 스탠리 드러켄밀러", "credit": "iConnections 공식 채널 (YouTube) · 2026.11.17 TomorrowX 서밋", "license": "인용(20초 이내)", "cover": False},
-   "druck_notlose": {"file": "druck_notlose.mp4", "url": "https://www.youtube.com/watch?v=6r3D-CMJkuI", "start": "8:10.5", "end": "8:16.8", "who": "스탠리 드러켄밀러", "credit": "iConnections 공식 채널 (YouTube) · 2026.11.17 TomorrowX 서밋", "license": "인용(20초 이내)", "cover": False},
-   "druck_2027": {"file": "druck_2027.mp4", "url": "https://www.youtube.com/watch?v=6r3D-CMJkuI", "start": "12:00.5", "end": "12:07.8", "who": "스탠리 드러켄밀러", "credit": "iConnections 공식 채널 (YouTube) · 2026.11.17 TomorrowX 서밋", "license": "인용(20초 이내)", "cover": False},
-   "druck_break": {"file": "druck_break.mp4", "url": "https://www.youtube.com/watch?v=6r3D-CMJkuI", "start": "9:15.5", "end": "9:22.8", "who": "스탠리 드러켄밀러", "credit": "iConnections 공식 채널 (YouTube) · 2026.11.17 TomorrowX 서밋", "license": "인용(20초 이내)", "cover": False},
-   "hl_broll": {"file": "hl_broll.mp4", "url": "https://prod-mssip.morganstanley.com/insights/videos/hard-lessons/duquesne-stan-druckenmiller-iliana-bouzali", "who": "스탠리 드러켄밀러", "credit": "Morgan Stanley 'Hard Lessons' 공식 영상 (2026.2.27) · 이미 인용한 구간의 화면만(소리 없음)", "license": "인용 구간 재사용", "cover": False},
+   "druck_qa": {"file": "druck_qa.mp4", "url": "https://www.youtube.com/watch?v=6r3D-CMJkuI", "start": "1:58.5", "end": "2:11.0", "who": "진행자 · 스탠리 드러켄밀러", "credit": "iConnections 공식 채널 (YouTube) · 2026.11.17 TomorrowX 서밋", "license": "인용 · 주최 측 공식 영상", "rights": "official", "channel": "iConnections", "cover": False},
+   "druck_notlose": {"file": "druck_notlose.mp4", "url": "https://www.youtube.com/watch?v=6r3D-CMJkuI", "start": "8:10.5", "end": "8:16.8", "who": "스탠리 드러켄밀러", "credit": "iConnections 공식 채널 (YouTube) · 2026.11.17 TomorrowX 서밋", "license": "인용 · 주최 측 공식 영상", "rights": "official", "channel": "iConnections", "cover": False},
+   "druck_2027": {"file": "druck_2027.mp4", "url": "https://www.youtube.com/watch?v=6r3D-CMJkuI", "start": "12:00.5", "end": "12:07.8", "who": "스탠리 드러켄밀러", "credit": "iConnections 공식 채널 (YouTube) · 2026.11.17 TomorrowX 서밋", "license": "인용 · 주최 측 공식 영상", "rights": "official", "channel": "iConnections", "cover": False},
+   "druck_break": {"file": "druck_break.mp4", "url": "https://www.youtube.com/watch?v=6r3D-CMJkuI", "start": "9:15.5", "end": "9:22.8", "who": "스탠리 드러켄밀러", "credit": "iConnections 공식 채널 (YouTube) · 2026.11.17 TomorrowX 서밋", "license": "인용 · 주최 측 공식 영상", "rights": "official", "channel": "iConnections", "cover": False},
+   "hl_broll": {"file": "hl_broll.mp4", "url": "https://prod-mssip.morganstanley.com/insights/videos/hard-lessons/duquesne-stan-druckenmiller-iliana-bouzali", "who": "스탠리 드러켄밀러", "credit": "Morgan Stanley 'Hard Lessons' 공식 영상 (2026.2.27) · 이미 인용한 구간의 화면만(소리 없음)", "license": "인용 구간 재사용", "rights": "official", "channel": "Morgan Stanley", "cover": False},
    **{k: {"file": f"{k}.mp4", "url": "https://prod-mssip.morganstanley.com/insights/videos/hard-lessons/duquesne-stan-druckenmiller-iliana-bouzali",
-          "start": st, "end": en, "who": "스탠리 드러켄밀러", "credit": "Morgan Stanley 'Hard Lessons' 공식 영상 (2026.2.27)", "license": "인용(20초 이내)"}
+          "start": st, "end": en, "who": "스탠리 드러켄밀러", "credit": "Morgan Stanley 'Hard Lessons' 공식 영상 (2026.2.27)", "license": "인용 · 회사 공식 영상", "rights": "official", "channel": "Morgan Stanley"}
       for k, st, en in [("hl_sizing", 490.4, 497.0), ("hl_heated", 86.0, 97.9), ("hl_biotech", 310.3, 317.8), ("hl_korea", 626.4, 634.6),
                         ("hl_nerve", 1482.0, 1486.4), ("hl_nvidia", 1196.0, 1211.9), ("hl_mind", 605.6, 608.4)]},
    "druck": {"file": "druckenmiller_tomorrowx_20261117.mp4", "url": "https://www.youtube.com/watch?v=6r3D-CMJkuI",
-             "who": "스탠리 드러켄밀러", "credit": "iConnections 공식 채널 (YouTube) · 2026.11.17 TomorrowX 서밋", "license": "인용(20초 이내)",
+             "who": "스탠리 드러켄밀러", "credit": "iConnections 공식 채널 (YouTube) · 2026.11.17 TomorrowX 서밋", "license": "인용 · 주최 측 공식 영상", "rights": "official", "channel": "iConnections",
              "note": "구간(start·end)은 PC 에서 자막으로 찾아 채움 — 찾을 문장은 bite 장면의 find"}},
  "package": {
    "title": "드러켄밀러가 쉰다며 오히려 늘린 것 — 그의 말과 장부",
