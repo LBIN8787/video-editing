@@ -1,21 +1,21 @@
 {
  "project": "20261120-market-deep-druckenmiller",
- "manual_version": "83",
- "checked": "2026-11-21T11:13:16",
+ "manual_version": "86",
+ "checked": "2026-11-22T01:23:07",
  "pass": false,
  "rows": [
   {
    "gate": "G0",
    "level": "MUST",
    "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
-   "ok": true,
-   "detail": ""
+   "ok": false,
+   "detail": "[2026-11-22 · 사용자 피드백 · 20261120-market-deep-druckenmiller · 층: 작업 기준] 최근 이런 인터뷰를 번역해서 올리는 채널들이 많아졌는데 이럴수록 확실한 인사이트와 이런 인터뷰 내용들을 연결지어서 이 선택이 가지는 의미와 이 인사이트의 반례 등 확장성이 주 해자가 될거라고 생각합니다."
   },
   {
    "gate": "G0",
    "level": "SHOULD",
    "item": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
-   "ok": false,
+   "ok": true,
    "detail": "manual/graph.json"
   },
   {
@@ -419,8 +419,8 @@
   },
   {
    "gate": "G6",
-   "level": "MUST",
-   "item": "길이: 롱폼 10분 이상 — 많이 짧으면 쇼츠로 (README §2-4)",
+   "level": "참고",
+   "item": "길이(측정값, 최소선 없음 — 종류·대본이 정함, README §2-4 v86) · 참고 기준 롱폼 10분",
    "ok": true,
    "detail": "15.3분"
   },
@@ -492,7 +492,7 @@
    "level": "참고",
    "item": "반복 피로: 같은 채널 직전 편과 화면 구성이 얼마나 겹치나",
    "ok": true,
-   "detail": "38%"
+   "detail": "43%"
   },
   {
    "gate": "G5",
@@ -506,28 +506,28 @@
    "level": "참고",
    "item": "자료 화면 없이 그래픽만 이어지는 가장 긴 구간",
    "ok": false,
-   "detail": "최장 451초"
+   "detail": "최장 454초"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "장 전환 없이 이어지는 가장 긴 구간",
    "ok": true,
-   "detail": "최장 184초"
+   "detail": "최장 186초"
   },
   {
    "gate": "G5",
    "level": "SHOULD",
    "item": "스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1)",
    "ok": true,
-   "detail": "8종 ['?noircase', '?noirsides', 'data-report', 'explain-stage', 'hybrid-causal', 'paper-column', 'source-cut', 'statement-brief']"
+   "detail": "6종 ['data-report', 'explain-stage', 'hybrid-causal', 'paper-column', 'source-cut', 'statement-brief']"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "스타일 조합: 가장 많이 쓴 스타일의 몫·겹친 장면·같은 스타일 연속",
    "ok": false,
-   "detail": "paper-column 0.35 · 겹침 0 · 최장 연속 3"
+   "detail": "paper-column 0.36 · 겹침 0 · 최장 연속 3"
   },
   {
    "gate": "G5",
@@ -604,7 +604,7 @@
    "level": "MUST",
    "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
    "ok": true,
-   "detail": "{'within_0_5s': 0.99, 'p95_abs_offset': 0.09, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.067}"
+   "detail": "{'within_0_5s': 0.983, 'p95_abs_offset': 0.16, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.033}"
   },
   {
    "gate": "G6",
@@ -618,7 +618,7 @@
    "level": "참고",
    "item": "움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5)",
    "ok": false,
-   "detail": "변화 9.2/분 · 정지 0.63"
+   "detail": "변화 10.1/분 · 정지 0.61"
   },
   {
    "gate": "G6",

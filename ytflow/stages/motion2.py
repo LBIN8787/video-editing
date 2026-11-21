@@ -175,8 +175,15 @@ class Stage:
             x, y = clamp_box(m.get("x", 960), m.get("y", 540), sw, sh)
             did = f"{self.p}_{m['id']}"
             shadow = "" if self.th.get("light_bg") else "text-shadow:0 2px 14px rgba(0,0,0,.55);"
+            back = ""
+            if self.th.get("on_video"):
+                muted = "#E4E7EC"
+                back = (f'<div id="{did}_bg" style="position:absolute;left:-16px;top:-14px;right:-16px;bottom:-14px;border-radius:8px;opacity:0;'
+                        f'background:linear-gradient(90deg,rgba(8,10,14,.74),rgba(8,10,14,.52))"></div>')
+                self.js.append(f'tl.fromTo("#{did}_bg",{{opacity:0}},{{opacity:1,duration:0.35}},{t:.3f});')
             self.items.append(
                 f'<div id="{did}" style="position:absolute;left:{x - sw / 2:.0f}px;top:{y - sh / 2:.0f}px;width:{sw:.0f}px;height:{sh:.0f}px;z-index:5">'
+                + back +
                 f'<div id="{did}_bar" style="position:absolute;left:0;top:6px;width:5px;height:{sh - 12:.0f}px;background:{acc};transform-origin:top"></div>'
                 f'<div id="{did}_l" style="position:absolute;left:28px;top:0;font-family:gr,sans;font-size:30px;letter-spacing:.06em;color:{muted};white-space:nowrap;opacity:0;{shadow}">{_e(lab)}</div>'
                 f'<div id="{did}_n" style="position:absolute;left:24px;top:46px;font-family:gx,sans-x;font-size:{fs}px;line-height:1.05;color:{acc};white-space:nowrap;opacity:0;{shadow}">{_e(val)}</div>'
@@ -278,6 +285,10 @@ def apply(D, sc: dict, bt: list, dur: float, w: int = 1920, h: int = 1080, keep:
                                              "card": pal.get("card", "#16263C"), "card_ink": pal.get("ink", "#E8EEF6"), "label": pal.get("ink", "#E8EEF6"),
                                              "accent": acc, "muted": pal.get("muted", "#9AA4B2"),
                                              "light_bg": sum(int((pal.get("base") or "#F3EFE6").lstrip("#")[i:i + 2], 16) for i in (0, 2, 4)) > 450})
+    # 원본 영상 위 장면은 팩 바탕색과 상관없이 화면 밝기가 제각각 → 밝은 글씨 + 반투명 어두운 바탕 (2026-11-22 드러켄밀러 편: 회색 화면 위 짙은 회색 지표 대비 1.2:1)
+    if sc.get("type") in ("bite", "footage", "source_video"):
+        stg.th["light_bg"] = False
+        stg.th["on_video"] = True
     stg.no_sparkle = getattr(D, "no_zoom", False)
     stg.clean = getattr(D, "chart_clean", False)
     for k, (b, (t0, d)) in enumerate(zip(sc["beats"], bt)):

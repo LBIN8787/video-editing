@@ -279,6 +279,9 @@ def run(project: str, at: str | None = None, privacy: str | None = None, dry_run
     plan = {"title": meta["snippet"]["title"], "privacy": meta["status"]["privacyStatus"], "publishAt": meta["status"].get("publishAt"),
             "category": meta["snippet"]["categoryId"], "tags": len(meta["snippet"]["tags"]),
             "thumbnail": f"thumbnail_{thumb}.png", "playlist": (s.get("playlists") or {}).get(kind_of(pr)), "captions": bool(s["captions"])}
+    # 일부공개·(예약 없는) 비공개는 검토용 — 공개 재생목록에 넣으면 목록을 통해 남에게 보이므로 넣지 않음 (2026-11-22)
+    if plan["privacy"] == "unlisted" or (plan["privacy"] == "private" and not plan["publishAt"]):
+        plan["playlist"] = None
     if dry_run:
         print("[yt-publish] 미리 보기 (올리지 않음):\n" + json.dumps(plan, ensure_ascii=False, indent=1))
         return plan

@@ -1,5 +1,5 @@
 import json, pathlib
-P = pathlib.Path("/home/user/video-editing/projects/20261120-market-deep-druckenmiller")
+P = pathlib.Path(__file__).resolve().parent.parent   # 클라우드·PC 어디서나 (2026-11-22)
 SRC13F = "13F(9월 30일 기준) · 보도: cryptobriefing·webull·stockhub · SEC 원문 대조 전"
 TALK = "TomorrowX 서밋 대담 (2026.11.17, 오스틴) · iConnections 공식 채널 · 모틀리풀·머니와이즈 인용"
 TR = "번역본 기준 요지 (월스트리트견문 정리, 롱브리지) · 원문 대조 전"
@@ -201,30 +201,32 @@ add(type="quote", chapter=5, insight=True, label=TR, who="스탠리 드러켄밀
     quote="토큰이 아니라, 일을 판다", keyword="", orig="Selling tasks, not tokens (번역본 기준)",
     beats=[{"say": "중국어로 옮겨진 대담 정리를 기준으로 하면, 그는 AI를 만드는 기반 시설보다 AI를 써서 돈을 버는 응용 쪽을 본다고 했습니다. 요지는 이렇습니다. 토큰, 즉 AI의 계산량을 파는 것이 아니라, 일을 대신 해 주고 그 값을 받는 회사."},
            {"say": "그리고 AI의 약세 시나리오는 기술이 아니라 정치와 돈을 빌리는 쪽의 위험이라며, 기술 혁신 자체에 반대로 걸지는 않겠다고 했습니다. 이 부분은 번역본 기준이라, 원문 대조가 남아 있습니다."}])
-add(type="chapter", chapter=6, num="6", title="생각은 어떻게 흘렀나", icon="git-branch", look="noir", kicker="2022  →  2026.11", sub="모건스탠리 인터뷰(2026.2.27) · 13F(9.30) · TomorrowX 대담(11.17)", rule=560,
+add(type="chapter", chapter=6, num="6", title="생각은 어떻게 흘렀나", icon="git-branch", look="board", kicker="2022  →  2026.11", sub="모건스탠리 인터뷰(2026.2.27) · 13F(9.30) · TomorrowX 대담(11.17)",
     beats=[{"say": "지금까지의 장면을 한자리에 모아 보겠습니다."}])
-add(type="noircase", chapter=6, label="근거: 모건스탠리 'Hard Lessons'(2026.2.27)·13F(9.30)·TomorrowX 대담(11.17)·포춘 2024.10.18",
-    title="생각이 지나온 자리", steps=["2022", "2024", "2026.2", "9.30", "11.17"],
-    center={"title": "왜 쉬나?", "sub": "드러켄밀러", "x": 960, "y": 600},
-    boxes={"n22": {"tag": "2022", "title": "엔비디아에 걸다", "sub": "챗GPT 뒤 두 배, 또 두 배", "x": 470, "y": 340, "edge": "확신"},
-           "n24": {"tag": "2024", "title": "800달러에 팔다", "sub": "5주 뒤 1,400달러", "x": 400, "y": 610, "edge": "후회"},
-           "n26": {"tag": "2026.2", "title": "AI 과열 경계", "sub": "바이오 · 일본 · 한국", "x": 500, "y": 850, "edge": "넓히기"},
-           "n930": {"tag": "9.30", "title": "장부: 칩 ↓", "sub": "나테라 29.2% · 금광 3곳", "x": 1480, "y": 380, "edge": "칸 옮기기"},
-           "n1117": {"tag": "11.17", "title": "주식 거의 없음", "sub": "2027 하반기 경계", "x": 1480, "y": 790, "edge": "쉼"}},
-    beats=[{"say": "지금까지의 장면을 한자리에 모아 보겠습니다. 2022년, AI와 엔비디아에 모든 걸 건 확신.", "step": 0, "reveal": ["n22"]},
-           {"say": "2024년, 너무 일찍 팔고 후회한 엔비디아.", "step": 1, "reveal": ["n24"]},
-           {"say": "2026년 2월, AI가 과열됐다며 바이오와 일본, 한국으로 넓히고, 배짱을 되찾겠다던 시기.", "step": 2, "reveal": ["n26"]},
-           {"say": "9월 말 장부에서는 칩과 플랫폼을 덜고 바이오와 금으로 옮겼고,", "step": 3, "reveal": ["n930"]},
-           {"say": "11월 17일, 주식을 거의 비우고 쉬겠다고 했습니다. 확신에서 경계로, 경계에서 쉼으로 흘러온 셈입니다.", "step": 4, "reveal": ["n1117"], "dim": ["n22"]}])
-add(type="noirsides", chapter=6, label="2월: 모건스탠리 'Hard Lessons'(2026.2.27) · 11월: TomorrowX 대담(11.17, 구리 숏은 보도)",
-    title="같은 사람, 9개월 사이",
-    sides=[{"head": "2월의 그", "sub": "모건스탠리 인터뷰 · 2026.2.27"}, {"head": "11월의 그", "sub": "TomorrowX 대담 · 11.17"}],
-    beats=[{"say": "가장 선명하게 뒤집힌 것들을 나란히 놓아 보겠습니다. 2월의 그는 미국 경제가 더 강해지고 연준은 아마 금리를 내릴 거라 봤고, 구리를 갖고 있었고, 배짱을 되찾고 싶다고 했습니다.",
-            "add": [{"side": 0, "tag": "2.27", "title": "경제: 더 강해질 것", "sub": "연준은 아마 인하"}, {"side": 0, "tag": "2.27", "title": "구리 보유", "sub": "다들 하는 거래"},
-                    {"side": 0, "tag": "2.27", "title": "배짱을 되찾기", "sub": "더 크게 걸고 싶다"}]},
-           {"say": "11월의 그는 2027년 하반기 경기가 실망스러울 수 있다고 했고,", "add": [{"side": 1, "tag": "11.17", "title": "2027 하반기 경계", "sub": "경기 실망 가능"}], "strike": [[0, 0]]},
-           {"say": "구리는 값이 내리는 쪽에 걸었고,", "add": [{"side": 1, "tag": "11.17", "title": "구리 숏", "sub": "내리는 쪽에"}], "strike": [[0, 1]]},
-           {"say": "배짱 대신 쉼을 택했습니다. 같은 사람이 1년도 안 돼 정반대 자리에 섰습니다.", "add": [{"side": 1, "tag": "11.17", "title": "쉼", "sub": "주식 거의 없음"}], "strike": [[0, 2]]}])
+# 2026-11-22 사용자: 이 부분 편집 스타일은 원래 처음 스타일로 (누아르 사건 보드 → 종이 위 정리판·비교), 같은 문장 두 번 말하지 않게
+add(type="motionboard", chapter=6, label="근거: 모건스탠리 'Hard Lessons'(2026.2.27)·13F(9.30)·TomorrowX 대담(11.17)·포춘 2024.10.18", title="그림으로 보면 — 그의 생각이 흐른 길",
+    els={"line": {"kind": "dashed", "pts": [[150, 560], [1770, 560]]},
+         "y1": {"kind": "text", "x": 300, "y": 470, "text": "2022", "size": 50, "color": "ink"},
+         "y2": {"kind": "text", "x": 640, "y": 470, "text": "2024", "size": 50, "color": "ink"},
+         "y3": {"kind": "text", "x": 980, "y": 470, "text": "2026.2", "size": 50, "color": "ink"},
+         "y4": {"kind": "text", "x": 1320, "y": 470, "text": "9월 말", "size": 50, "color": "ink"},
+         "y5": {"kind": "text", "x": 1660, "y": 470, "text": "11월 17일", "size": 50, "color": "red"},
+         "c1": {"kind": "card", "x": 300, "y": 740, "icon": "chip", "label": "AI 올인", "w": 210, "value": "엔비디아", "vsize": 32},
+         "c2": {"kind": "card", "x": 640, "y": 740, "icon": "log-out", "label": "너무 일찍 팖", "w": 210, "value": "800 → 1,400", "vsize": 30},
+         "c3": {"kind": "card", "x": 980, "y": 740, "icon": "flame", "label": "AI 과열", "w": 210, "value": "바이오·일본·한국", "vsize": 26},
+         "c4": {"kind": "card", "x": 1320, "y": 740, "icon": "file-text", "label": "장부", "w": 210, "value": "바이오·금", "vsize": 32},
+         "c5": {"kind": "card", "x": 1660, "y": 740, "icon": "pause", "label": "쉼", "w": 210, "value": "주식 거의 0", "vsize": 30, "color": "red"},
+         "top": {"kind": "text", "x": 960, "y": 280, "text": "AI 확신 → 과열 경계 → 칸 옮기기 → 쉬기", "size": 54, "color": "ink"}},
+    beats=[{"say": "2022년, AI와 엔비디아에 모든 걸 건 확신.", "do": ["line", "y1", "c1"]},
+           {"say": "2024년, 너무 일찍 팔고 후회한 엔비디아.", "do": ["y2", "c2"]},
+           {"say": "2026년 2월, AI가 과열됐다며 바이오와 일본, 한국으로 넓히고, 배짱을 되찾겠다던 시기.", "do": ["y3", "c3"], "at": {"c3": "과열"}},
+           {"say": "9월 말 장부에서는 칩과 플랫폼을 덜고 바이오와 금으로 옮겼고,", "do": ["y4", "c4"]},
+           {"say": "11월 17일, 주식을 거의 비우고 쉬겠다고 했습니다. 확신에서 경계로, 경계에서 쉼으로 흘러온 셈입니다.", "do": ["y5", "c5", "top"], "at": {"top": "확신에서"}}])
+add(type="versus", chapter=6, label="2월: 모건스탠리 'Hard Lessons'(2026.2.27) · 11월: TomorrowX 대담(11.17, 구리 숏은 보도)",
+    left={"value": "구리 보유", "label": "2월 · 경기 낙관 · 배짱 되찾기", "icon": "trending-up"},
+    right={"value": "구리 숏", "label": "11월 · 2027 하반기 경계 · 쉼", "icon": "trending-down"},
+    beats=[{"say": "가장 선명하게 뒤집힌 것들을 나란히 놓아 보겠습니다. 2월의 그는 미국 경제가 더 강해지고 연준은 아마 금리를 내릴 거라 봤고, 구리를 갖고 있었고, 배짱을 되찾고 싶다고 했습니다."},
+           {"say": "11월의 그는 2027년 하반기 경기가 실망스러울 수 있다고 했고, 구리는 값이 내리는 쪽에 걸었고, 배짱 대신 쉼을 택했습니다. 같은 사람이 1년도 안 돼 정반대 자리에 섰습니다."}])
 hbite(2, "그 스스로도 이렇게 말합니다.", "hl_mind", "I tend to change my mind every three weeks.", "저는 3주마다 생각을 바꾸는 편입니다.")
 add(type="footage", chapter=6, label="화면: 모건스탠리 'Hard Lessons' 인터뷰(2026.2.27) · 말은 TomorrowX 대담 정리(번역본)", clip={"src": "hl_broll", "start": 15.7, "frame": "full"}, beats=[{"say": "왜 바뀌었는지 그가 하나하나 설명하진 않았습니다. 다만 대담 정리를 보면, 회사들이 돈을 빌리는 금리 차이가 벌어지고 있다고 했습니다. 연준과 돈의 흐름을 먼저 보는 그의 원칙대로라면, 그 신호가 판을 바꾼 것으로 볼 수 있습니다."}])
 add(type="bars", chapter=6, label="월가 전망 보도(11.13~18) · 오름폭은 계산",
