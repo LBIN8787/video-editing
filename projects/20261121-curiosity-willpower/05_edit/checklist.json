@@ -1,0 +1,92 @@
+{
+ "project": "20261121-curiosity-willpower",
+ "manual_version": "81",
+ "checked": "2026-11-21T12:58:54",
+ "pass": true,
+ "rows": [
+  {
+   "gate": "G0",
+   "level": "MUST",
+   "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G0",
+   "level": "SHOULD",
+   "item": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
+   "ok": true,
+   "detail": "manual/graph.json"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "topic_brief.json 있음",
+   "ok": true,
+   "detail": "01_research/topic_brief.json (schemas/topic_brief.schema.json)"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "브랜드(ai/market/curiosity)",
+   "ok": true,
+   "detail": "curiosity"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망·시청자 질문",
+   "ok": true,
+   "detail": "야식 앞에서 무너진 것은 정말 의지가 바닥났기 때문일까?"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "트리거·왜 지금",
+   "ok": true,
+   "detail": "2026-11-21 사용자 요청: 위 피드백(반전 먼저·근거 한정·문제 제기 뒤 해법까지)을 반영해 새 주제로 대본·영상 제작. 주제는 에이전트가 제안(D1은 사용자 위임, D2에서 거부 가능)."
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망을 분명히 건드리고, 보여 줄 자료가 있다 (둘 중 하나라도 약하면 만들지 않음, 01 §3)",
+   "ok": true,
+   "detail": "강도 3 · 자료 2"
+  },
+  {
+   "gate": "G1",
+   "level": "참고",
+   "item": "욕망 점수 합계 (후보끼리 비교할 때 씀)",
+   "ok": true,
+   "detail": "합계 14 {'desire': 3, 'clarity': 3, 'timeliness': 1, 'demand': 2, 'visuals': 2, 'angle': 3}"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "수요 증거 1개 이상",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "후보 3개 비교 기록",
+   "ok": true,
+   "detail": "3"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "우리만의 답(our_angle)",
+   "ok": true,
+   "detail": "원 실험(쿠키·무) → 대규모 재검증(2016·2021)에서 효과가 일관되게 나오지 않음 → 대안 설명과 일상 자료 → 참는 힘 대신 상황을 미리 바꾸는 방법까지 이어 가기. 단정(의지력은 없다)은 피하고 '확정할 수 없다'까지만 말한다."
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "무엇이 띄우나(driver: 소재·각도·형식 + 근거)",
+   "ok": true,
+   "detail": "각도 · 같은 질문을 '실험 → 재검증 → 일상 자료'로 세 번 다른 방법으로 확"
+  }
+ ]
+}
