@@ -10,7 +10,7 @@ concept: >
 niche: "현대인의 관계·감정·선택·기억·습관. 일상 사례가 중심이며, 심리학·인지과학 원 연구와 생활 맥락을 연결한다."
 seed_keywords: ["심리학", "인지과학", "인간관계", "선택과 판단", "기억", "일상 속 습관", "디지털 생활"]
 script_guide: prompts/script_knowledge.md
-cadence: "주 1편 + 4편마다 몰아보기(통합본) 1편"
+cadence: "일 1편, 매일 18:00 공개 + 4편마다 몰아보기(통합본) 1편"   # 2026-11-22 사용자: "주1회가 아니라 일1회를 의도 … 업로드는 매일저녁6시즘"
 voice: "ElevenLabs · Nobel Butler (YBRudLRm83BV5Mazcr42) — 부드러운 중년 남성 중저음, 다큐·연구 해설용. 모델 eleven_v4 (2026-11-07 확정)"
 tts:
   backend: elevenlabs
@@ -43,7 +43,7 @@ youtube:   # 유튜브 올리기 (python -m ytflow yt-publish, docs/24) — 2026
   category_id: "27"          # 교육
   default_language: ko
   made_for_kids: false
-  publish_time: null         # 예약 없이 바로, privacy 그대로
+  publish_time: "18:00"      # 한국 시간 예약 공개 (2026-11-22 사용자: 매일 저녁 6시쯤). 이미 지났으면 바로 올리고 privacy 그대로
   privacy: unlisted          # 일부 공개 (링크가 있는 사용자만)
   captions: true
   synthetic_media: false

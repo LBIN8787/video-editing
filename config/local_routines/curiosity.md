@@ -1,10 +1,10 @@
-호기심 채널 '한겹 더 보면'(`channels/ch-knowledge`, 브랜드 curiosity, 주 1편)의 제작을 다음 사용자 결정 지점까지 진행하세요.
+호기심 채널 '한겹 더 보면'(`channels/ch-knowledge`, 브랜드 curiosity, **일 1편 · 매일 18:00 공개** — 2026-11-22 사용자: "주1회가 아니라 일1회를 의도하고 있고 … 업로드는 매일저녁6시즘")의 제작을 다음 사용자 결정 지점까지 진행하세요.
 사용자 결정(D1 주제 · D2 대본 · D3 화면 · D4 최종 승인)은 대신 내리지 않습니다 — 그 지점에서 멈추고 결정 요청 파일만 남깁니다.
 
 ## 0. 준비
 - 지금 폴더는 이 작업 전용 git worktree 이고, 최신 origin/main 에서 시작했습니다. 결과는 `git push origin HEAD:main` 으로 올립니다(거부되면 `git pull --rebase origin main` 후 다시, 최대 3번). 편이 다른 브랜치에 있으면(`REPORT.md`·pc-tasks 의 `branch:`) 그 브랜치에서 이어 갑니다.
 - 먼저 AGENTS.md, manual/README.md, **manual/04-curiosity.md**, **manual/11-workflow.md**(S0~S9·D1~D4), `channels/ch-knowledge/channel.yaml`·`episodes.md`, `inbox/pc-tasks/README.md` 를 읽습니다.
-- 사용량을 아낍니다: 하루에 한 편을 한 결정 지점만큼만 밉니다. 그림·렌더도 이 작업이 이 PC 에서 직접 합니다(PC 일꾼은 뺌 — 2026-11-21 사용자: "자동일꾼 그냥 빼 나 그냥 로컬에서 전부 영상작업 할테니까").
+- 매일 한 편이 나가려면 여러 편이 줄지어 있어야 합니다: 실행마다 **진행 중인 편을 모두** 각자 다음 결정 지점까지 한 칸씩 밉니다(한 편을 결정 지점 너머로 건너뛰지는 않음). 그림·렌더도 이 작업이 이 PC 에서 직접 합니다(PC 일꾼은 뺌 — 2026-11-21 사용자: "자동일꾼 그냥 빼 나 그냥 로컬에서 전부 영상작업 할테니까").
 
 ## 1. 진행 중인 편 찾기
 `projects/*/01_research/topic_brief.json` 의 brand 가 curiosity 이고 최근 45일 안에 시작했으며, 아직 올리지 않은 편(`05_edit/youtube_publish.json` 없음, episodes.md 에 '올림' 없음)을 찾습니다. `_sample-` 로 시작하는 폴더와 시험용(sample·broll-sample) 편은 뺍니다.
@@ -17,11 +17,11 @@
 - **D2 통과, 장면 기획 없음** → S5 장면표(`shotlist.md` + `hybrid.json`/`build.json`)·원화 주문서 → `check --upto G5` → 원화는 이 작업에서 바로 그립니다 — Codex 내장 imagegen(GPT 이미지, ChatGPT 구독, 주문서 `02_script/art_orders.md`, 화풍 참조 잼 편 `tasting.png`)으로 Drive `영상/<프로젝트>/art/` 에 저장. 이어서 `python scripts/curiosity_build.py projects/<프로젝트>` 로 완성 영상까지(설정 `02_script/build.json`, 결과 Drive `영상/<프로젝트>/05_edit/`). D3 는 사용자가 "샘플 없이"라고 하지 않았다면 대표 장면 샘플 확인을 요청합니다.
 - **빌드가 실패** → 실패 이유를 한 가지 고쳐 다시 빌드(같은 원인으로 두 번째 실패면 고치지 말고 보고). 그 편의 `inbox/pc-tasks/` 에 pending 할 일이 남아 있으면 그것도 이 작업이 처리합니다.
 - **빌드 done, D4 답 없음** → S8 포장(제목 3·썸네일 A/B/C·`yt-pack`) → `check` → **D4 요청** (`final.mp4` 은 Google Drive `영상/<프로젝트>/05_edit/`).
-- **D4 통과** (`review --pass` 기록) → S9: 승인 조건대로 목소리 확인 → `yt-publish <프로젝트>`(채널 설정: 일부 공개) → episodes.md 한 줄.
+- **D4 통과** (`review --pass` 기록) → S9: 승인 조건대로 목소리 확인 → `yt-publish <프로젝트>`(채널 설정: 매일 18:00 KST 예약). **하루에 한 편만** 공개합니다: 오늘 18:00 에 이미 예약된 편이 있으면 다음 빈 날 18:00 으로 `--at <YYYY-MM-DD>T18:00` → episodes.md 한 줄(공개 예정일 포함).
 - **D4 기각** → `review --reject` 로 원문이 기록됐는지 확인하고, 이유에 따라 S4·S5·S7 로.
 
-## 3. 진행 중인 편이 없을 때
-마지막 편 시작이 7일 이상 지났으면(주 1편) 새 편: S0 착수 메모 → S1a 신호(`inbox/newsletters/` 의 호기심 소재·`python -m ytflow demand --channel ch-knowledge`) → S1b 후보 3개 주제 카드(`topic_brief.json` candidates·`topic_card.md`) → `check --upto G1` → **D1 요청**. 7일이 안 됐으면 아무것도 만들지 않고 '대기'로 끝냅니다.
+## 3. 새 편 시작 (매일)
+오늘 시작한 호기심 편이 없고, D1 답을 기다리는 편도 없으면 새 편: S0 착수 메모 → S1a 신호(`inbox/newsletters/` 의 호기심 소재·`python -m ytflow demand --channel ch-knowledge`) → S1b 후보 3개 주제 카드(`topic_brief.json` candidates·`topic_card.md`) → `check --upto G1` → **D1 요청**. 이미 쌓인 편에서 주제가 겹치지 않게 고릅니다. D1 이 열려 있으면 새 카드를 더 쌓지 않고(사용자 결정이 밀리지 않게) 다른 편만 밉니다.
 
 ## 4. 결정 요청 파일
 `inbox/decisions/<YYYYMMDD>-<프로젝트>-D<n>.md`, 머리말 `status: open`, `project:`, `decision: D<n>`. 본문은 짧게: 무엇을 보면 되나(파일 경로·Drive 경로), 묻는 것 한 줄, 예상 소요 시간. 답이 기록되면 다음 실행에서 `status: answered` 로 바꿉니다.
