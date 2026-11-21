@@ -17,6 +17,7 @@ Claude Code, Codex 등 어떤 코딩 에이전트든 이 파일과 `skills/` 를
 ## 먼저 읽을 것
 | 하려는 일 | 읽을 파일 |
 |---|---|
+| **대본 매뉴얼 — 대본이 언제나 1순위 (v82, 2026-11-21 사용자: "앞으로는 주제선정과 대본작성 자체를 1순위로 후에 그에 맞춘 연출을 하세요. 즉 언제나 가장 우선순위는 대본이며 대본의 메뉴얼을 구체화하세요")** — 쓰기 전 여섯 가지·전진하는 대본·사실과 해석 대조표·유형별 중심축·D2 반복, D2 통과 전 그림·음성·렌더 없음 | `manual/13-script.md` (채널 문서의 대본 절보다 먼저) |
 | **제작 매뉴얼 (욕망 → 주제 → 조사 → 대본 → 연출 → 검사)** | `manual/README.md` → `manual/01~12` |
 | **편집 스타일 등록부·자동 추천** (상황에 맞는 스타일, 파일 하나로 늘림) | `styles/recipes/`, `python -m ytflow style-pick <프로젝트>`, `manual/07-extend.md` |
 | **스타일 풀 늘리기** (조사·후보·라이선스, 새 장면 chat·terminal·zoomshot·choropleth·mark, 세로 쇼츠 Claude 판) | `docs/17-style-pool.md`, `skills/edit-style-pool`, `python -m ytflow short <프로젝트>` |

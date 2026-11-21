@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-21T13:23:36",
- "source_hash": "52457816f7f5",
+ "generated": "2026-11-21T13:41:44",
+ "source_hash": "ecf3343e9e24",
  "audit": {
   "date": "2026-11-20T23:13",
   "counts": {
@@ -566,35 +566,35 @@
   "fixed": []
  },
  "stats": {
-  "manual_version": 81,
-  "versions": 81,
-  "reviews": 38,
+  "manual_version": 82,
+  "versions": 82,
+  "reviews": 39,
   "rejects": 25,
-  "passes": 13,
+  "passes": 14,
   "pending": 0,
   "rules": 54,
   "checks": 87,
-  "sections": 171,
+  "sections": 181,
   "must": 29,
   "auto": 39,
-  "intents": 193,
+  "intents": 195,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
   "code": 85,
   "terms": 139,
-  "bans": 153,
-  "feedback": 136,
+  "bans": 167,
+  "feedback": 137,
   "topics": 4,
   "episodes": 37,
   "main_situations": 17,
   "tiers": {
    "principle": 50,
-   "standard": 131,
-   "style": 20,
+   "standard": 144,
+   "style": 21,
    "trial": 6
   },
-  "overfit": 8,
+  "overfit": 9,
   "principle_bans": 44
  },
  "pending": [],
@@ -3137,6 +3137,257 @@
    "tier_label": "실험 기록"
   },
   {
+   "section": "sec:13§0",
+   "text": "2. D2(대본 검토)를 통과하기 전에는 그림 주문·음성·렌더를 하지 않는다. 호기심 채널은 원래 그랬고(04 §0-6 ③), 이제 모든 롱폼에 같다. 예외는 매일 시장 브리핑의 자동 운영(09) — 그 경우에도 에이전트가 대본 자체 검사(§7)를 먼저 통과시킨다.",
+   "themes": [
+    "script",
+    "length"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:181abee6",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:13§0",
+   "text": "4. 대본 승인과 영상 승인은 별개. D2 는 대본, D3 는 연출 샘플, D4 는 완성본. D2 통과를 영상 통과로 기록하지 않는다.",
+   "themes": [
+    "script"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:7fbf6d5c",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:13§1",
+   "text": "6. 결말 — 끝나면 무엇을 새로 이해·판단하나 | intent.md | '의지가 약해서'라고 단정하지 않게 됨",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:4415bb9f",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:13§1",
+   "text": "여섯 칸 중 하나라도 비면 대본을 쓰지 않는다. 특히 4·5가 약하면 주제를 바꾸거나 쇼츠로 보낸다(README §2-4).",
+   "themes": [
+    "script"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:ee96f6dc",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:13§2",
+   "text": "실험을 말할 때는 참가자가 무엇을 했고 · 어떤 조건을 비교했고 · 무엇을 쟀는지를 결과보다 먼저(04 §0-6 ② 6). 측정값을 바꿔 그리지 않는다(풀 수 없는 퍼즐 = '포기까지 시간').",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:4c68e195",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:13§2",
+   "text": "같은 결말 문구를 여러 편에 되풀이하지 않는다(03 ⑪).",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:c8892439",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:13§3",
+   "text": "대본 단락마다 화면의 역할만 표시하고(어떤 화풍·효과인지는 아직 정하지 않는다), 구체 연출은 D2 뒤 장면표(11 §7)에서 정한다.",
+   "themes": [
+    "script"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:515c147c",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:13§3",
+   "text": "'어떻게 실험했나'는 행동과 모션그래픽, '실제로 무엇이 나왔나'는 원문과 수치, '왜 중요한가'는 인물의 일상(의지력 편 v3 검토). 한 편의 화풍은 하나여도 되지만 모든 장면에 같은 연출을 쓰지 않고, 움직임은 정보나 상태가 변하는 순간에 쓴다.",
+   "themes": [
+    "motion"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:0a75e0d3",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": true,
+   "single": false,
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
+  },
+  {
+   "section": "sec:13§4",
+   "text": "과제·표본·측정값이 다르면 배수·순위로 비교하지 않음 | \"2021년보다 다섯 배\" → 삭제, 화면에 '다른 과제·다른 지표'",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:ba788626",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:13§4",
+   "text": "유의하지 않음 ≠ 무효과의 증명 | \"오래 했다는 것만으로는 늘지 않았다\" → \"뚜렷한 차이가 확인되지 않았다\"",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:9027eafb",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:13§4",
+   "text": "상관·탐색적 조절을 원인처럼 말하지 않음 | 피로가 클수록 효과가 컸다 → 원인처럼 쓰지 않음",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:c004e60d",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:13§4",
+   "text": "연구가 직접 검증하지 않은 생활 적용은 '원리를 생활로 옮긴 예'라고 밝힘 | \"근거가 가장 많이 쌓인 방법\" → \"도움이 될 수 있는 방법 가운데 하나\"",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:fc265cb7",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:13§5",
+   "text": "내레이션 안에 제작 설명을 넣지 않는다(\"화면의 그림은 비유입니다\" → \"의지력을 배터리처럼 생각하면 이해하기 쉬웠습니다\").",
+   "themes": [
+    "intent"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:6df46d88",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:13§5",
+   "text": "길이는 깊이의 결과(README §2-4). 장면마다 배정 시간을 미리 정하지 않는다 — 실제 낭독 뒤 잰다. 길이를 맞추려고 같은 말을 늘리지 않는다.",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:59a8a546",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
    "section": "sec:README§1-1",
    "text": "curiosity | 우연히 마주침 (원래 궁금하지 않았음) | 듣는 순간 생긴 궁금증을 풀고 싶다 | 이야기가 목적, 정보는 그 안에 | 이야기를 풀어내듯: 장면 → 인물 → 사건 → 반전 → 답 (§04 §0) | 이야기는 삽화, 설명은 그 위 모션그래픽, 증거는 실제 자료(연구자 사진·논문), 마디는 검은 화면 한 줄 (04 §0-7, v73)",
    "themes": [
@@ -3716,12 +3967,22 @@
    "last_version": null
   },
   {
+   "id": "doc:13",
+   "kind": "doc",
+   "key": "13",
+   "file": "manual/13-script.md",
+   "label": "13. 대본 매뉴얼 — 대본이 언제나 1순위 (v82, 2026-11-21)",
+   "lines": 118,
+   "versions": [],
+   "last_version": null
+  },
+  {
    "id": "doc:README",
    "kind": "doc",
    "key": "README",
    "file": "manual/README.md",
    "label": "제작 매뉴얼 — 처음 온 사람(새 세션·새 모델)이 여기서 시작합니다",
-   "lines": 156,
+   "lines": 157,
    "versions": [],
    "last_version": null
   },
@@ -6668,6 +6929,149 @@
    "last_version": null
   },
   {
+   "id": "sec:13§0",
+   "kind": "section",
+   "doc": "doc:13",
+   "num": "0",
+   "level": 2,
+   "label": "우선순위 — 대본이 화면을 정한다",
+   "title": "0. 우선순위 — 대본이 화면을 정한다",
+   "line": 11,
+   "end": 17,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:13§1",
+   "kind": "section",
+   "doc": "doc:13",
+   "num": "1",
+   "level": 2,
+   "label": "쓰기 전에 정할 여섯 가지 (`01_research/topic_brief.json` · `audience.md` · `02_script/intent.md`)",
+   "title": "1. 쓰기 전에 정할 여섯 가지 (`01_research/topic_brief.json` · `audience.md` · `02_script/intent.md`)",
+   "line": 18,
+   "end": 30,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:13§2",
+   "kind": "section",
+   "doc": "doc:13",
+   "num": "2",
+   "level": 2,
+   "label": "이야기가 전진하는 대본",
+   "title": "2. 이야기가 전진하는 대본",
+   "line": 31,
+   "end": 41,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:13§3",
+   "kind": "section",
+   "doc": "doc:13",
+   "num": "3",
+   "level": 2,
+   "label": "대본에 화면의 역할까지 적는다 (연출은 그 뒤)",
+   "title": "3. 대본에 화면의 역할까지 적는다 (연출은 그 뒤)",
+   "line": 42,
+   "end": 54,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:13§4",
+   "kind": "section",
+   "doc": "doc:13",
+   "num": "4",
+   "level": 2,
+   "label": "사실과 해석 — 대본 단계의 정확성",
+   "title": "4. 사실과 해석 — 대본 단계의 정확성",
+   "line": 55,
+   "end": 76,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:13§5",
+   "kind": "section",
+   "doc": "doc:13",
+   "num": "5",
+   "level": 2,
+   "label": "말과 분량",
+   "title": "5. 말과 분량",
+   "line": 77,
+   "end": 82,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:13§6",
+   "kind": "section",
+   "doc": "doc:13",
+   "num": "6",
+   "level": 2,
+   "label": "영상 유형별 중심축 — 고정 틀이 아니라 출발점",
+   "title": "6. 영상 유형별 중심축 — 고정 틀이 아니라 출발점",
+   "line": 83,
+   "end": 98,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null,
+   "terms": [
+    "term:tech-share"
+   ]
+  },
+  {
+   "id": "sec:13§7",
+   "kind": "section",
+   "doc": "doc:13",
+   "num": "7",
+   "level": 2,
+   "label": "대본 자체 검사 (D2 에 내기 전 에이전트가)",
+   "title": "7. 대본 자체 검사 (D2 에 내기 전 에이전트가)",
+   "line": 99,
+   "end": 108,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:13§8",
+   "kind": "section",
+   "doc": "doc:13",
+   "num": "8",
+   "level": 2,
+   "label": "대본 검토 반복 (D2)",
+   "title": "8. 대본 검토 반복 (D2)",
+   "line": 109,
+   "end": 115,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:13§9",
+   "kind": "section",
+   "doc": "doc:13",
+   "num": "9",
+   "level": 2,
+   "label": "그다음 — 연출은 대본에 맞춘다",
+   "title": "9. 그다음 — 연출은 대본에 맞춘다",
+   "line": 116,
+   "end": 118,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
    "id": "sec:README§0",
    "kind": "section",
    "doc": "doc:README",
@@ -6676,7 +7080,7 @@
    "label": "읽는 순서 (30분)",
    "title": "0. 읽는 순서 (30분)",
    "line": 5,
-   "end": 16,
+   "end": 17,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -6692,8 +7096,8 @@
    "level": 2,
    "label": "네 채널 한눈에",
    "title": "1. 네 채널 한눈에",
-   "line": 17,
-   "end": 24,
+   "line": 18,
+   "end": 25,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6706,8 +7110,8 @@
    "level": 3,
    "label": "시청 동기 → 대본·편집 해석 (사용자 정의, 2026-11-14 — 모든 채널의 최상위 기준)",
    "title": "1-1. 시청 동기 → 대본·편집 해석 (사용자 정의, 2026-11-14 — 모든 채널의 최상위 기준)",
-   "line": 25,
-   "end": 38,
+   "line": 26,
+   "end": 39,
    "tag_version": null,
    "versions": [
     21
@@ -6722,8 +7126,8 @@
    "level": 2,
    "label": "한 편을 만드는 8단계 (모든 채널 공통)",
    "title": "2. 한 편을 만드는 8단계 (모든 채널 공통)",
-   "line": 39,
-   "end": 59,
+   "line": 40,
+   "end": 60,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -6739,8 +7143,8 @@
    "level": 2,
    "label": "인트로 없음 — 모든 채널, 첫 문장부터 본론",
    "title": "2-1. 인트로 없음 — 모든 채널, 첫 문장부터 본론 (v24, 2026-11-14 사용자: \"모든 채널 그냥 인트로 일단 빼 주세요\")",
-   "line": 60,
-   "end": 66,
+   "line": 61,
+   "end": 67,
    "tag_version": 24,
    "versions": [
     23,
@@ -6759,8 +7163,8 @@
    "level": 3,
    "label": "진행 말투 — 이어 붙인 끝맺음 금지",
    "title": "2-2. 진행 말투 — 이어 붙인 끝맺음 금지 (v16, 사용자 판정 2026-11-12: \"'였고요' 같은 말투가 부자연스러워 진행이 깬다\")",
-   "line": 67,
-   "end": 69,
+   "line": 68,
+   "end": 70,
    "tag_version": 16,
    "versions": [
     16
@@ -6775,8 +7179,8 @@
    "level": 3,
    "label": "형식·진행·말투 — 미주일기 문법",
    "title": "2-3. 형식·진행·말투 — 미주일기 문법 (v24, 2026-11-14 사용자: \"대본이 억지스럽고 억텐 같다, 미주일기 형식이 더 자연스럽다\" · \"사소한 문장보다 형식·진행 방식·말투에 집중\")",
-   "line": 70,
-   "end": 79,
+   "line": 71,
+   "end": 80,
    "tag_version": 24,
    "versions": [
     23,
@@ -6793,8 +7197,8 @@
    "level": 3,
    "label": "길이 — 롱폼은 최소 10분",
    "title": "2-4. 길이 — 롱폼은 최소 10분 (v24, 2026-11-14 사용자: \"영상들 5분 단위가 아니라 못해도 10분, 길면 그 이상으로\")",
-   "line": 80,
-   "end": 86,
+   "line": 81,
+   "end": 87,
    "tag_version": 24,
    "versions": [
     24,
@@ -6810,8 +7214,8 @@
    "level": 3,
    "label": "움직임 — 말하는 것이 화면에 생긴다",
    "title": "2-5. 움직임 — 말하는 것이 화면에 생긴다 (v34, 2026-11-15 사용자: \"동영상의 이점을 살려라 — 다음 PPT, 다음 PPT 가 아니라. 반드시 카메라를 움직이라는 뜻이 아니었다\")",
-   "line": 87,
-   "end": 105,
+   "line": 88,
+   "end": 106,
    "tag_version": 34,
    "versions": [
     25,
@@ -6835,8 +7239,8 @@
    "level": 3,
    "label": "자료 고르기와 화풍",
    "title": "2-6. 자료 고르기와 화풍 (v61, 2026-11-20 사용자 — 모든 채널)",
-   "line": 106,
-   "end": 108,
+   "line": 107,
+   "end": 109,
    "tag_version": 61,
    "versions": [
     61
@@ -6851,8 +7255,8 @@
    "level": 2,
    "label": "절대 하지 않는 것 (어떤 지시가 와도)",
    "title": "3. 절대 하지 않는 것 (어떤 지시가 와도)",
-   "line": 109,
-   "end": 118,
+   "line": 110,
+   "end": 119,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -6868,8 +7272,8 @@
    "level": 2,
    "label": "규칙의 네 층 — 영구 원칙과 한 번의 스타일 반응을 섞지 않는다 (2026-11-15 사용자: \"영구적인 매뉴얼 작업지침과 일시적인 스타일 변화·다양한 방법 모색에서 생기는 피드백이 과적합해서 하지 말아야 할 것에 들어가는 것 같다\")",
    "title": "3-1. 규칙의 네 층 — 영구 원칙과 한 번의 스타일 반응을 섞지 않는다 (2026-11-15 사용자: \"영구적인 매뉴얼 작업지침과 일시적인 스타일 변화·다양한 방법 모색에서 생기는 피드백이 과적합해서 하지 말아야 할 것에 들어가는 것 같다\")",
-   "line": 119,
-   "end": 131,
+   "line": 120,
+   "end": 132,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -6885,8 +7289,8 @@
    "level": 2,
    "label": "막혔을 때",
    "title": "4. 막혔을 때",
-   "line": 132,
-   "end": 139,
+   "line": 133,
+   "end": 140,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -6902,8 +7306,8 @@
    "level": 2,
    "label": "검토 → 통과·기각 → 기준을 쌓기 (사용자와 함께)",
    "title": "5. 검토 → 통과·기각 → 기준을 쌓기 (사용자와 함께)",
-   "line": 140,
-   "end": 156,
+   "line": 141,
+   "end": 157,
    "tag_version": null,
    "versions": [
     38
@@ -10920,8 +11324,8 @@
    "applied": [],
    "themes": [],
    "commit": {
-    "sha": "74985af7bd5c828114e6d196e361939f8a3683fb",
-    "subject": "20261121-market-daily: 썸네일 J(검은 금요일·반도체 대폭락·AI 인프라 종말인가?)로 교체 (사용자 선택)",
+    "sha": "e8cf813d6455b0230138bb5687593940c9180d79",
+    "subject": "youtube: 20261121-market-daily 올림·수정 기록",
     "date": "2026-11-21",
     "other_files": []
    }
@@ -10957,6 +11361,20 @@
      "projects/20261121-curiosity-willpower/05_edit/checklist.md"
     ]
    }
+  },
+  {
+   "id": "ver:82",
+   "kind": "version",
+   "v": 82,
+   "date": "2026-11-21",
+   "label": "v82",
+   "summary": "대본 매뉴얼 13-script 신설: 대본이 언제나 1순위(D2 통과 전 그림·음성·렌더 없음, 모든 롱폼), 쓰기 전 여섯 가지, 전진하는 대본, 화면 역할 표시, 사실과 해석 대조표(의지력 편 사례), 말과 분량, 영상 유형별 중심축 7종, 대본 자체 검사, D2 반복 절차",
+   "applied": [],
+   "themes": [
+    "variety",
+    "script",
+    "length"
+   ]
   },
   {
    "id": "rev:1",
@@ -11735,6 +12153,28 @@
    "tier_note": "",
    "tier_fixed": false,
    "tier_label": "영구 원칙"
+  },
+  {
+   "id": "rev:39",
+   "kind": "review",
+   "date": "2026-11-21",
+   "project": "20261121-curiosity-willpower",
+   "manual_version": 81,
+   "result": "pass",
+   "reason": "D2 대본 통과(v5 확정본). 원문: 이는 피드백이며 제목후보는1 입니다 — 'v4는 최종 대본으로 승인할 수 있는 수준'. 영상 판정(D3·D4) 아님",
+   "themes": [
+    "script"
+   ],
+   "tier_key": "rev:08b84c2c",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
   },
   {
    "id": "theme:motion",
@@ -21496,6 +21936,34 @@
    "annotated": false
   },
   {
+   "id": "intent:08b84c2c",
+   "kind": "intent",
+   "quote": "D2 대본 통과(v5 확정본). 원문: 이는 피드백이며 제목후보는1 입니다 — 'v4는 최종 대본으로 승인할 수 있는 수준'. 영상 판정(D3·D4) 아님",
+   "label": "D2 대본 통과(v5 확정본). 원문: 이는 피드백이며 제목후보는1 입니다 — 'v4는 최종 대본으로 승인할",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "rev:39",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:08b84c2c"
+   ],
+   "themes": [
+    "script"
+   ],
+   "ann_key": "intent:08b84c2c",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:091c29d5",
    "kind": "intent",
    "quote": "여러 시장 영상이 동일한 '딱 하나만 기억한다면' 결말 사용 — 영상의 성격에 따라 결말의 역할을 변화",
@@ -21629,6 +22097,34 @@
    ],
    "themes": [],
    "ann_key": "intent:2dab8053",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:4eed63d2",
+   "kind": "intent",
+   "quote": "이는 피드백이며 제목후보는1 입니다. 이를 매뉴얼에 반영하고 앞으로는 주제선정과 대본작성 자체를 1순위로 후에 그에 맞춘 연출을 하세요. 즉 언제나 가장 우선순위는 대본이며 대본의 메뉴얼을 구체화하세요 영상작업 들어가세요",
+   "label": "이는 피드백이며 제목후보는1 입니다. 이를 매뉴얼에 반영하고 앞으로는 주제선정과 대본작성 자체를 1순위로 후",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:137",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:4eed63d2"
+   ],
+   "themes": [
+    "script"
+   ],
+   "ann_key": "intent:4eed63d2",
    "meaning": "",
    "not_meant": [],
    "note": "",
@@ -27853,6 +28349,7 @@
     "sec:10§h81",
     "sec:10§3",
     "sec:10§4",
+    "sec:13§6",
     "intent:e74799a0",
     "fb:80"
    ]
@@ -32248,6 +32745,34 @@
    "tier_note": "",
    "tier_fixed": true,
    "tier_label": "실험 기록"
+  },
+  {
+   "id": "fb:137",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "이는 피드백이며 제목후보는1 입니다. 이를 매뉴얼에 반영하고 앞으로는 주제선정과 대본작성 자체를 1순위로 후에 그에 맞춘 연출을 하세요. 즉 언제나 가장 우선순위는 대본이며 대본의 메뉴얼을 구체화하세요 영상작업 들어가세요",
+   "label": "이는 피드백이며 제목후보는1 입니다. 이를 매뉴얼에 반영하고 앞으로는 주제선정과 대본작성 자체를 1순위로 후",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "manual/13-script.md 신설(대본 1순위·쓰기 전 여섯 가지·사실과 해석 대조표·유형별 중심축·D2 반복), README 읽는 순서 0, AGENTS·11 S4 연결. 사용자 제공 '대본 작성 매뉴얼 v1.0'의 공통 원칙·유형표를 옮김",
+   "pending": false,
+   "themes": [
+    "script"
+   ],
+   "scope": "standard",
+   "intent": "intent:4eed63d2",
+   "tier_key": "fb:4eed63d2",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
   },
   {
    "id": "layer:main",
@@ -54529,6 +55054,56 @@
    "kind": "contains"
   },
   {
+   "s": "doc:13",
+   "t": "sec:13§0",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:13",
+   "t": "sec:13§1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:13",
+   "t": "sec:13§2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:13",
+   "t": "sec:13§3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:13",
+   "t": "sec:13§4",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:13",
+   "t": "sec:13§5",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:13",
+   "t": "sec:13§6",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:13",
+   "t": "sec:13§7",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:13",
+   "t": "sec:13§8",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:13",
+   "t": "sec:13§9",
+   "kind": "contains"
+  },
+  {
    "s": "doc:README",
    "t": "sec:README§0",
    "kind": "contains"
@@ -56487,6 +57062,11 @@
    "kind": "approved_in"
   },
   {
+   "s": "rev:39",
+   "t": "ver:81",
+   "kind": "approved_in"
+  },
+  {
    "s": "rev:1",
    "t": "theme:variety",
    "kind": "about"
@@ -56689,6 +57269,11 @@
   {
    "s": "rev:36",
    "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "rev:39",
+   "t": "theme:script",
    "kind": "about"
   },
   {
@@ -57219,6 +57804,21 @@
   {
    "s": "ver:81",
    "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "ver:82",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:82",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "ver:82",
+   "t": "theme:length",
    "kind": "about"
   },
   {
@@ -58122,6 +58722,16 @@
    "kind": "about"
   },
   {
+   "s": "intent:4eed63d2",
+   "t": "fb:137",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:4eed63d2",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
    "s": "intent:de453f9b",
    "t": "fb:55",
    "kind": "quoted_in"
@@ -58774,6 +59384,16 @@
   {
    "s": "intent:4f6397bd",
    "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:08b84c2c",
+   "t": "rev:39",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:08b84c2c",
+   "t": "theme:script",
    "kind": "about"
   },
   {
@@ -64304,6 +64924,16 @@
   {
    "s": "fb:136",
    "t": "intent:29aec689",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:137",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "fb:137",
+   "t": "intent:4eed63d2",
    "kind": "quoted_as"
   }
  ]
