@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-21T02:23:46",
- "source_hash": "f1e4b19dcd96",
+ "generated": "2026-11-21T02:50:55",
+ "source_hash": "4c3c1b740e05",
  "audit": {
   "date": "2026-11-20T23:13",
   "counts": {
@@ -571,20 +571,20 @@
   "reviews": 37,
   "rejects": 25,
   "passes": 12,
-  "pending": 2,
+  "pending": 4,
   "rules": 46,
   "checks": 87,
   "sections": 171,
   "must": 26,
   "auto": 39,
-  "intents": 167,
+  "intents": 169,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 0,
-  "code": 83,
+  "code": 84,
   "terms": 140,
   "bans": 137,
-  "feedback": 112,
+  "feedback": 114,
   "topics": 4,
   "episodes": 36,
   "main_situations": 17,
@@ -598,6 +598,8 @@
   "principle_bans": 40
  },
  "pending": [
+  "[2026-11-21 · 사용자 피드백] 제가 의도한건 이런 연출인데  전혀 연출이 다른거같아요 (누아르 사건보드 레퍼런스 noir-case-board-demo.mp4)",
+  "[2026-11-21 · 사용자 피드백] 그래프  스타일도 바꿔주세요  좀 깔끔하게요 브리핑이랑 분석 둘 다요",
   "[2026-11-21 · 사용자 피드백] 좀 차분하고 깔끔한 스타일로 한번 해보고자 합니다.",
   "[2026-11-21 · 사용자 피드백] 강조연출이 너무 많고 자꾸 이건 이 채널의 의견 이런거 없애주세요 그리고 실제 인터뷰 소스영상이랑 최신 인터뷰 주식을 쉰더 이런 최신 인터뷰 소스영상도 포함해주세요"
  ],
@@ -12149,10 +12151,10 @@
    "src": "\"\"\"v36 인사이트 장면 표시 (2026-11-17 사용자: \"사실과 인사이트는 별개로 구분해야\") — 왼쪽 위 장 표시 아래.\"\"\""
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:576",
+   "id": "code:ytflow/stages/hybrid.py:583",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 576,
+   "line": 583,
    "versions": [
     18
    ],
@@ -12160,10 +12162,10 @@
    "src": "if sc.get(\"orig\"):   # v18 원문(영어) 한 줄 — 번역 아래, 카드 맨 아래 (어닝콜·발언 원본: 원문·번역 2단)"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1031",
+   "id": "code:ytflow/stages/hybrid.py:1060",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1031,
+   "line": 1060,
    "versions": [
     24
    ],
@@ -12171,10 +12173,10 @@
    "src": "if spec.get(\"tts_rate\"):   # v24: 영상마다 말 빠르기 (다큐 내레이션은 차분하게, README §2-3·§2-4)"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1123",
+   "id": "code:ytflow/stages/hybrid.py:1152",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1123,
+   "line": 1152,
    "versions": [
     24
    ],
@@ -12182,10 +12184,10 @@
    "src": "gap = sc.get(\"gap\", GAP)   # v24: 장면마다 문장 사이 쉼 (다큐 내레이션은 길게)"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1143",
+   "id": "code:ytflow/stages/hybrid.py:1172",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1143,
+   "line": 1172,
    "versions": [
     15
    ],
@@ -12193,10 +12195,10 @@
    "src": "from . import identity   # v15 카테고리 개성: 장 표지 모양·증거판·칠판 (brand 가 있을 때만)"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1154",
+   "id": "code:ytflow/stages/hybrid.py:1183",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1154,
+   "line": 1183,
    "versions": [
     27
    ],
@@ -12207,10 +12209,10 @@
    ]
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1155",
+   "id": "code:ytflow/stages/hybrid.py:1184",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1155,
+   "line": 1184,
    "versions": [
     30
    ],
@@ -12221,10 +12223,10 @@
    ]
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1156",
+   "id": "code:ytflow/stages/hybrid.py:1185",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1156,
+   "line": 1185,
    "versions": [
     31
    ],
@@ -12237,10 +12239,10 @@
    ]
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1173",
+   "id": "code:ytflow/stages/hybrid.py:1202",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1173,
+   "line": 1202,
    "versions": [
     10
    ],
@@ -12248,10 +12250,10 @@
    "src": "if spec.get(\"edit_v10\", True):   # v10: 장 표지는 그 장의 자료 사진을 깐 표지가 기본"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1201",
+   "id": "code:ytflow/stages/hybrid.py:1230",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1201,
+   "line": 1230,
    "versions": [
     34
    ],
@@ -12262,10 +12264,10 @@
    ]
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1214",
+   "id": "code:ytflow/stages/hybrid.py:1245",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1214,
+   "line": 1245,
    "versions": [
     36
    ],
@@ -12273,10 +12275,10 @@
    "src": "if sc.get(\"insight\") and spec.get(\"opinion_tag\", True):   # v36: 사람·매체의 시각은 사실과 다르게 표시 (2026-11-21 사용자가 끄라고 한 편은 opinion_tag: false — 출처 줄로만)"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1222",
+   "id": "code:ytflow/stages/hybrid.py:1253",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1222,
+   "line": 1253,
    "versions": [
     10
    ],
@@ -12284,10 +12286,10 @@
    "src": "if spec.get(\"edit_v10\", True):   # 편집 기준 v10 (기본 켬): 전환·장면 안 움직임·소리 (docs/19, manual 05 §0-4)"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1415",
+   "id": "code:ytflow/stages/hybrid.py:1446",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1415,
+   "line": 1446,
    "versions": [
     16
    ],
@@ -12295,10 +12297,10 @@
    "src": "if \"brand\" not in spec:   # v16: 대본에 brand 가 없으면 프로젝트 채널(edit.yaml channel → channels/<id>/channel.yaml brand)에서"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1425",
+   "id": "code:ytflow/stages/hybrid.py:1456",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1425,
+   "line": 1456,
    "versions": [
     15
    ],
@@ -12306,10 +12308,10 @@
    "src": "if spec.get(\"brand\"):   # v15 카테고리 개성: 기본 팩을 따로 정하지 않았으면 카테고리의 기본 팩"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1441",
+   "id": "code:ytflow/stages/hybrid.py:1472",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1441,
+   "line": 1472,
    "versions": [
     36
    ],
@@ -12317,10 +12319,10 @@
    "src": "bite_fallback(project, spec)   # v36: 원본 영상이 없으면 렌더를 멈추지 않고 인용 카드로 (목소리 만들기 전에 — 번역 박자를 읽게)"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1534",
+   "id": "code:ytflow/stages/hybrid.py:1565",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1534,
+   "line": 1565,
    "versions": [
     12
    ],
@@ -12328,10 +12330,10 @@
    "src": "bgm = spec.get(\"bgm\")   # v12: 기본은 배경음 없음 — 어울리는 곡이 확실할 때만 대본에 \"bgm\": \"<등록부 id>\""
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1586",
+   "id": "code:ytflow/stages/hybrid.py:1617",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1586,
+   "line": 1617,
    "versions": [
     2
    ],
@@ -12343,10 +12345,10 @@
    ]
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1598",
+   "id": "code:ytflow/stages/hybrid.py:1629",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1598,
+   "line": 1629,
    "versions": [
     22
    ],
@@ -12391,15 +12393,26 @@
    "src": "'style=\"fill:none;stroke:#222;stroke-width:3\"/><circle cx=\"230\" cy=\"70\" r=\"18\" style=\"fill:none;stroke:#222;stroke-width:3\"/><path d=\"M230 88 v40 M210 104 h40 M230 128 l-14 24 M230 128 l14 24\" style=\"stroke:#222;stroke-w"
   },
   {
-   "id": "code:ytflow/stages/motion2.py:156",
+   "id": "code:ytflow/stages/motion2.py:159",
    "kind": "code",
    "file": "ytflow/stages/motion2.py",
-   "line": 156,
+   "line": 159,
    "versions": [
     32
    ],
    "label": "반짝이는 별 몇 개 (숫자 강조) — 시장 채널은 끔 (v32, 2026-11-15 사용자: 과하고 분위기와 안 맞음)",
    "src": "# 반짝이는 별 몇 개 (숫자 강조) — 시장 채널은 끔 (v32, 2026-11-15 사용자: 과하고 분위기와 안 맞음)"
+  },
+  {
+   "id": "code:ytflow/stages/noir.py:153",
+   "kind": "code",
+   "file": "ytflow/stages/noir.py",
+   "line": 153,
+   "versions": [
+    2
+   ],
+   "label": "================================================================ 누아르 사건 보드 v2 — 레퍼런스(2026-11-21 사용자 제공 noir-case-board-demo.mp4)",
+   "src": "# ================================================================ 누아르 사건 보드 v2 — 레퍼런스(2026-11-21 사용자 제공 noir-case-board-demo.mp4)"
   },
   {
    "id": "code:ytflow/stages/stage.py:1",
@@ -12687,7 +12700,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/motion2.py:156",
+     "ref": "code:ytflow/stages/motion2.py:159",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -13301,7 +13314,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1415",
+     "ref": "code:ytflow/stages/hybrid.py:1446",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -13405,7 +13418,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1534",
+     "ref": "code:ytflow/stages/hybrid.py:1565",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -13514,7 +13527,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1415",
+     "ref": "code:ytflow/stages/hybrid.py:1446",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -13648,7 +13661,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1415",
+     "ref": "code:ytflow/stages/hybrid.py:1446",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -13715,7 +13728,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1586",
+     "ref": "code:ytflow/stages/hybrid.py:1617",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/noir.py:153",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -13824,13 +13843,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1031",
+     "ref": "code:ytflow/stages/hybrid.py:1060",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1123",
+     "ref": "code:ytflow/stages/hybrid.py:1152",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -13887,7 +13906,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1598",
+     "ref": "code:ytflow/stages/hybrid.py:1629",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -14247,13 +14266,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1031",
+     "ref": "code:ytflow/stages/hybrid.py:1060",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1123",
+     "ref": "code:ytflow/stages/hybrid.py:1152",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -14389,13 +14408,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1031",
+     "ref": "code:ytflow/stages/hybrid.py:1060",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1123",
+     "ref": "code:ytflow/stages/hybrid.py:1152",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -14480,13 +14499,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1031",
+     "ref": "code:ytflow/stages/hybrid.py:1060",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1123",
+     "ref": "code:ytflow/stages/hybrid.py:1152",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -14578,7 +14597,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1154",
+     "ref": "code:ytflow/stages/hybrid.py:1183",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -14628,7 +14647,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1155",
+     "ref": "code:ytflow/stages/hybrid.py:1184",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -14681,7 +14700,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/motion2.py:156",
+     "ref": "code:ytflow/stages/motion2.py:159",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -14901,7 +14920,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/motion2.py:156",
+     "ref": "code:ytflow/stages/motion2.py:159",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -14957,7 +14976,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1155",
+     "ref": "code:ytflow/stages/hybrid.py:1184",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -15114,7 +15133,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1201",
+     "ref": "code:ytflow/stages/hybrid.py:1230",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -15216,13 +15235,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1031",
+     "ref": "code:ytflow/stages/hybrid.py:1060",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1123",
+     "ref": "code:ytflow/stages/hybrid.py:1152",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -15388,7 +15407,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1154",
+     "ref": "code:ytflow/stages/hybrid.py:1183",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -15486,7 +15505,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1154",
+     "ref": "code:ytflow/stages/hybrid.py:1183",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -15542,7 +15561,7 @@
      "kind": "manual"
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1156",
+     "ref": "code:ytflow/stages/hybrid.py:1185",
      "kind": "code"
     }
    ],
@@ -15584,7 +15603,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1156",
+     "ref": "code:ytflow/stages/hybrid.py:1185",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -15828,7 +15847,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1201",
+     "ref": "code:ytflow/stages/hybrid.py:1230",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -16032,7 +16051,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1201",
+     "ref": "code:ytflow/stages/hybrid.py:1230",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -16603,13 +16622,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1214",
+     "ref": "code:ytflow/stages/hybrid.py:1245",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1441",
+     "ref": "code:ytflow/stages/hybrid.py:1472",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -16724,13 +16743,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1214",
+     "ref": "code:ytflow/stages/hybrid.py:1245",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1441",
+     "ref": "code:ytflow/stages/hybrid.py:1472",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -16819,13 +16838,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1214",
+     "ref": "code:ytflow/stages/hybrid.py:1245",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1441",
+     "ref": "code:ytflow/stages/hybrid.py:1472",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -17138,13 +17157,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1214",
+     "ref": "code:ytflow/stages/hybrid.py:1245",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1441",
+     "ref": "code:ytflow/stages/hybrid.py:1472",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -17531,13 +17550,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1214",
+     "ref": "code:ytflow/stages/hybrid.py:1245",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1441",
+     "ref": "code:ytflow/stages/hybrid.py:1472",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -19912,13 +19931,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1214",
+     "ref": "code:ytflow/stages/hybrid.py:1245",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1441",
+     "ref": "code:ytflow/stages/hybrid.py:1472",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -20653,6 +20672,64 @@
     "variety"
    ],
    "ann_key": "intent:3cf5fff5",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:48be8e8d",
+   "kind": "intent",
+   "quote": "제가 의도한건 이런 연출인데  전혀 연출이 다른거같아요 (누아르 사건보드 레퍼런스 noir-case-board-demo.mp4)",
+   "label": "제가 의도한건 이런 연출인데  전혀 연출이 다른거같아요 (누아르 사건보드 레퍼런스 noir-case-boar",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:114",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:48be8e8d"
+   ],
+   "themes": [
+    "depth",
+    "intent"
+   ],
+   "ann_key": "intent:48be8e8d",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:6ac0bfe5",
+   "kind": "intent",
+   "quote": "그래프  스타일도 바꿔주세요  좀 깔끔하게요 브리핑이랑 분석 둘 다요",
+   "label": "그래프  스타일도 바꿔주세요  좀 깔끔하게요 브리핑이랑 분석 둘 다요",
+   "versions": [],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:113",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:6ac0bfe5"
+   ],
+   "themes": [
+    "variety",
+    "depth"
+   ],
+   "ann_key": "intent:6ac0bfe5",
    "meaning": "",
    "not_meant": [],
    "note": "",
@@ -21627,7 +21704,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 315,
+     "line": 322,
      "src": "def s_versus(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -21692,7 +21769,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 334,
+     "line": 341,
      "src": "def s_chapter(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -21746,7 +21823,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 457,
+     "line": 464,
      "src": "def s_map_causal(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -21815,7 +21892,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 502,
+     "line": 509,
      "src": "def s_usmap(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -21859,7 +21936,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 538,
+     "line": 545,
      "src": "def s_quote(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -21922,7 +21999,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 591,
+     "line": 598,
      "src": "def s_checklist(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -21983,7 +22060,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 627,
+     "line": 634,
      "src": "def s_analogy(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -22038,7 +22115,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 663,
+     "line": 670,
      "src": "def s_funnel(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -22078,7 +22155,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 689,
+     "line": 696,
      "src": "def s_apartments(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -22120,7 +22197,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 722,
+     "line": 729,
      "src": "def s_timeline(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -22180,7 +22257,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 759,
+     "line": 766,
      "src": "def s_bars(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -22249,7 +22326,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 825,
+     "line": 854,
      "src": "def s_bignum(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -22309,7 +22386,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 842,
+     "line": 871,
      "src": "def s_parking(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -22353,7 +22430,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 866,
+     "line": 895,
      "src": "def s_compare(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -22404,7 +22481,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 889,
+     "line": 918,
      "src": "def s_outro(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -22448,7 +22525,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 905,
+     "line": 934,
      "src": "def s_people(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -22499,7 +22576,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 935,
+     "line": 964,
      "src": "def s_newspapers(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -22545,7 +22622,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 973,
+     "line": 1002,
      "src": "def s_shape(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -22822,8 +22899,8 @@
     "sec:12§1",
     "sec:README§2-5",
     "ver:21",
-    "code:ytflow/stages/hybrid.py:1201",
-    "code:ytflow/stages/hybrid.py:1598",
+    "code:ytflow/stages/hybrid.py:1230",
+    "code:ytflow/stages/hybrid.py:1629",
     "code:ytflow/stages/stage.py:1",
     "code:ytflow/stages/thumbnail.py:161"
    ],
@@ -22928,7 +23005,7 @@
    ],
    "mentioned_in": [
     "sec:10§h50",
-    "code:ytflow/stages/hybrid.py:1586",
+    "code:ytflow/stages/hybrid.py:1617",
     "code:ytflow/stages/studio3d.py:1"
    ]
   },
@@ -23070,7 +23147,7 @@
     "ver:31",
     "code:ytflow/stages/directions.py:656",
     "code:ytflow/stages/directions.py:657",
-    "code:ytflow/stages/hybrid.py:1156"
+    "code:ytflow/stages/hybrid.py:1185"
    ]
   },
   {
@@ -23118,7 +23195,7 @@
     "ver:31",
     "code:ytflow/stages/directions.py:656",
     "code:ytflow/stages/directions.py:657",
-    "code:ytflow/stages/hybrid.py:1156"
+    "code:ytflow/stages/hybrid.py:1185"
    ]
   },
   {
@@ -23372,7 +23449,7 @@
    "related": [],
    "instead": [],
    "mentioned_in": [
-    "code:ytflow/stages/hybrid.py:1155"
+    "code:ytflow/stages/hybrid.py:1184"
    ]
   },
   {
@@ -23885,7 +23962,7 @@
     "sec:10§3",
     "ver:21",
     "ver:34",
-    "code:ytflow/stages/hybrid.py:1598",
+    "code:ytflow/stages/hybrid.py:1629",
     "code:ytflow/stages/stage.py:1",
     "intent:b0fd8bcd",
     "fb:5"
@@ -24851,7 +24928,7 @@
    "instead": [],
    "mentioned_in": [
     "sec:10§3",
-    "code:ytflow/stages/hybrid.py:1586",
+    "code:ytflow/stages/hybrid.py:1617",
     "code:ytflow/stages/studio3d.py:1"
    ]
   },
@@ -26634,7 +26711,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 1155,
+     "line": 1184,
      "src": "D.cam = spec.get(\"camera\", \"calm\") == \"beat\" and sc.get(\"type\") not in CAM_SKIP   # v30: 기본 끔 (2026-11-15 사용자: 억지 미세 움직임 필요 없음)"
     },
     {
@@ -26687,7 +26764,7 @@
     "rev:14",
     "code:ytflow/stages/edit10.py:81",
     "code:ytflow/stages/hybrid.py:147",
-    "code:ytflow/stages/hybrid.py:1154",
+    "code:ytflow/stages/hybrid.py:1183",
     "intent:ea14e9be"
    ]
   },
@@ -26711,7 +26788,7 @@
     },
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 1156,
+     "line": 1185,
      "src": "# v31 확대·축소 없음 (2026-11-15 사용자: \"자꾸 화면을 확대하고 축소하고 웅웅거리는 거 쓰지 말아 주세요\"): 시장 브랜드 기본 — 장면 안 느린 확대·tilt·dolly·차트 확대·사진 밀기 끔"
     }
    ],
@@ -26744,7 +26821,7 @@
     "code:ytflow/stages/edit10.py:95",
     "code:ytflow/stages/edit10.py:96",
     "code:ytflow/stages/edit10.py:169",
-    "code:ytflow/stages/hybrid.py:1156"
+    "code:ytflow/stages/hybrid.py:1185"
    ],
    "techniques": [
     "term:tech-zoom-into"
@@ -26900,12 +26977,12 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 1218,
+     "line": 1249,
      "src": "motion2.apply(D, sc, bt, dur)"
     },
     {
      "file": "ytflow/stages/motion2.py",
-     "line": 263,
+     "line": 266,
      "src": "def apply(D, sc: dict, bt: list, dur: float, w: int = 1920, h: int = 1080, keep: bool = True) -> None:"
     }
    ],
@@ -26970,7 +27047,7 @@
     },
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 1556,
+     "line": 1587,
      "src": "project.write_json(\"edit\", \"motion.json\", {k: m[k] for k in (\"change_events_per_min\", \"median_change_gap_s\", \"static_ratio\", \"hard_cuts_per_min\", \"audio\") if k in m})"
     }
    ],
@@ -30322,6 +30399,64 @@
    "tier_note": "",
    "tier_fixed": false,
    "tier_label": "스타일 기본값"
+  },
+  {
+   "id": "fb:113",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "그래프  스타일도 바꿔주세요  좀 깔끔하게요 브리핑이랑 분석 둘 다요",
+   "label": "그래프  스타일도 바꿔주세요  좀 깔끔하게요 브리핑이랑 분석 둘 다요",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": true,
+   "themes": [
+    "variety",
+    "depth"
+   ],
+   "scope": "",
+   "intent": "intent:6ac0bfe5",
+   "tier_key": "fb:6ac0bfe5",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": false,
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
+  },
+  {
+   "id": "fb:114",
+   "kind": "feedback",
+   "date": "2026-11-21",
+   "quote": "제가 의도한건 이런 연출인데  전혀 연출이 다른거같아요 (누아르 사건보드 레퍼런스 noir-case-board-demo.mp4)",
+   "label": "제가 의도한건 이런 연출인데  전혀 연출이 다른거같아요 (누아르 사건보드 레퍼런스 noir-case-boar",
+   "fb_kind": "clarify",
+   "fb_kind_label": "뜻 바로잡기",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": true,
+   "themes": [
+    "depth",
+    "intent"
+   ],
+   "scope": "",
+   "intent": "intent:48be8e8d",
+   "tier_key": "fb:48be8e8d",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
   },
   {
    "id": "layer:main",
@@ -44134,7 +44269,7 @@
       },
       {
        "s": 36,
-       "type": "noirboard",
+       "type": "noircase",
        "sit": "open-scene",
        "fit": false,
        "rec": [
@@ -44142,11 +44277,11 @@
         "footage",
         "stage"
        ],
-       "say": "네 장면을 한 판에 꽂아 보겠습니다. 2022년, AI와 엔비디아에 모든 걸 건 확신."
+       "say": "지금까지의 장면을 한자리에 모아 보겠습니다. 2022년, AI와 엔비디아에 모든 걸 건 확신."
       },
       {
        "s": 37,
-       "type": "versus",
+       "type": "noirsides",
        "sit": "hub-event",
        "fit": false,
        "rec": [
@@ -44154,7 +44289,7 @@
         "kb",
         "chart"
        ],
-       "say": "가장 선명하게 뒤집힌 건 구리입니다. 올해 초 그는 구리는 다들 하는 거래라며 갖고 있었고, 연준은 금리를 올리지 않고 아마 내릴 거라며 미국 경제가 훨씬 강해질"
+       "say": "가장 선명하게 뒤집힌 것들을 나란히 놓아 보겠습니다. 2월의 그는 미국 경제가 더 강해지고 연준은 아마 금리를 내릴 거라 봤고, 구리를 갖고 있었고, 배짱을 되찾"
       },
       {
        "s": 38,
@@ -50886,7 +51021,7 @@
     },
     {
      "s": 36,
-     "type": "noirboard",
+     "type": "noircase",
      "sit": "open-scene",
      "fit": false,
      "rec": [
@@ -50894,11 +51029,11 @@
       "footage",
       "stage"
      ],
-     "say": "네 장면을 한 판에 꽂아 보겠습니다. 2022년, AI와 엔비디아에 모든 걸 건 확신."
+     "say": "지금까지의 장면을 한자리에 모아 보겠습니다. 2022년, AI와 엔비디아에 모든 걸 건 확신."
     },
     {
      "s": 37,
-     "type": "versus",
+     "type": "noirsides",
      "sit": "hub-event",
      "fit": false,
      "rec": [
@@ -50906,7 +51041,7 @@
       "kb",
       "chart"
      ],
-     "say": "가장 선명하게 뒤집힌 건 구리입니다. 올해 초 그는 구리는 다들 하는 거래라며 갖고 있었고, 연준은 금리를 올리지 않고 아마 내릴 거라며 미국 경제가 훨씬 강해질"
+     "say": "가장 선명하게 뒤집힌 것들을 나란히 놓아 보겠습니다. 2월의 그는 미국 경제가 더 강해지고 연준은 아마 금리를 내릴 거라 봤고, 구리를 갖고 있었고, 배짱을 되찾"
     },
     {
      "s": 38,
@@ -55442,87 +55577,87 @@
   },
   {
    "s": "ver:18",
-   "t": "code:ytflow/stages/hybrid.py:576",
+   "t": "code:ytflow/stages/hybrid.py:583",
    "kind": "implemented_by"
   },
   {
    "s": "ver:24",
-   "t": "code:ytflow/stages/hybrid.py:1031",
+   "t": "code:ytflow/stages/hybrid.py:1060",
    "kind": "implemented_by"
   },
   {
    "s": "ver:24",
-   "t": "code:ytflow/stages/hybrid.py:1123",
+   "t": "code:ytflow/stages/hybrid.py:1152",
    "kind": "implemented_by"
   },
   {
    "s": "ver:15",
-   "t": "code:ytflow/stages/hybrid.py:1143",
+   "t": "code:ytflow/stages/hybrid.py:1172",
    "kind": "implemented_by"
   },
   {
    "s": "ver:27",
-   "t": "code:ytflow/stages/hybrid.py:1154",
+   "t": "code:ytflow/stages/hybrid.py:1183",
    "kind": "implemented_by"
   },
   {
    "s": "ver:30",
-   "t": "code:ytflow/stages/hybrid.py:1155",
+   "t": "code:ytflow/stages/hybrid.py:1184",
    "kind": "implemented_by"
   },
   {
    "s": "ver:31",
-   "t": "code:ytflow/stages/hybrid.py:1156",
+   "t": "code:ytflow/stages/hybrid.py:1185",
    "kind": "implemented_by"
   },
   {
    "s": "ver:10",
-   "t": "code:ytflow/stages/hybrid.py:1173",
+   "t": "code:ytflow/stages/hybrid.py:1202",
    "kind": "implemented_by"
   },
   {
    "s": "ver:34",
-   "t": "code:ytflow/stages/hybrid.py:1201",
+   "t": "code:ytflow/stages/hybrid.py:1230",
    "kind": "implemented_by"
   },
   {
    "s": "ver:36",
-   "t": "code:ytflow/stages/hybrid.py:1214",
+   "t": "code:ytflow/stages/hybrid.py:1245",
    "kind": "implemented_by"
   },
   {
    "s": "ver:10",
-   "t": "code:ytflow/stages/hybrid.py:1222",
+   "t": "code:ytflow/stages/hybrid.py:1253",
    "kind": "implemented_by"
   },
   {
    "s": "ver:16",
-   "t": "code:ytflow/stages/hybrid.py:1415",
+   "t": "code:ytflow/stages/hybrid.py:1446",
    "kind": "implemented_by"
   },
   {
    "s": "ver:15",
-   "t": "code:ytflow/stages/hybrid.py:1425",
+   "t": "code:ytflow/stages/hybrid.py:1456",
    "kind": "implemented_by"
   },
   {
    "s": "ver:36",
-   "t": "code:ytflow/stages/hybrid.py:1441",
+   "t": "code:ytflow/stages/hybrid.py:1472",
    "kind": "implemented_by"
   },
   {
    "s": "ver:12",
-   "t": "code:ytflow/stages/hybrid.py:1534",
+   "t": "code:ytflow/stages/hybrid.py:1565",
    "kind": "implemented_by"
   },
   {
    "s": "ver:2",
-   "t": "code:ytflow/stages/hybrid.py:1586",
+   "t": "code:ytflow/stages/hybrid.py:1617",
    "kind": "implemented_by"
   },
   {
    "s": "ver:22",
-   "t": "code:ytflow/stages/hybrid.py:1598",
+   "t": "code:ytflow/stages/hybrid.py:1629",
    "kind": "implemented_by"
   },
   {
@@ -55542,7 +55677,12 @@
   },
   {
    "s": "ver:32",
-   "t": "code:ytflow/stages/motion2.py:156",
+   "t": "code:ytflow/stages/motion2.py:159",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:2",
+   "t": "code:ytflow/stages/noir.py:153",
    "kind": "implemented_by"
   },
   {
@@ -56536,6 +56676,21 @@
    "kind": "about"
   },
   {
+   "s": "intent:48be8e8d",
+   "t": "fb:114",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:48be8e8d",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "intent:48be8e8d",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
    "s": "intent:ea14e9be",
    "t": "ver:12",
    "kind": "interpreted_in"
@@ -57246,6 +57401,21 @@
    "kind": "about"
   },
   {
+   "s": "intent:6ac0bfe5",
+   "t": "fb:113",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:6ac0bfe5",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:6ac0bfe5",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
    "s": "intent:2941d5dd",
    "t": "fb:26",
    "kind": "quoted_in"
@@ -57267,7 +57437,7 @@
   },
   {
    "s": "intent:a21b07e5",
-   "t": "code:ytflow/stages/hybrid.py:1156",
+   "t": "code:ytflow/stages/hybrid.py:1185",
    "kind": "quoted_in"
   },
   {
@@ -61723,6 +61893,36 @@
   {
    "s": "fb:112",
    "t": "intent:3cf5fff5",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:113",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "fb:113",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "fb:113",
+   "t": "intent:6ac0bfe5",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:114",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "fb:114",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
+   "s": "fb:114",
+   "t": "intent:48be8e8d",
    "kind": "quoted_as"
   }
  ]

@@ -98,6 +98,9 @@ class Stage:
 
     def add(self, m: dict, t: float, end: float):
         do = m["do"]
+        if do == "count" and getattr(self, "clean", False):   # 깔끔한 모드(시장 기본, 2026-11-21 사용자): 상자 숫자 카드 → 상자 없는 지표
+            m = dict(m, do="stat", fs=min(m.get("fs", 92), 92))
+            do = "stat"
         x, y = m.get("x", 540), m.get("y", 760)
         lab = m.get("label", "")
         lab_html = (f'<div style="position:absolute;left:-60px;right:-60px;bottom:-62px;text-align:center;white-space:nowrap;font-family:gx,sans-x;font-size:{m.get("lfs", 34)}px">'
@@ -273,6 +276,7 @@ def apply(D, sc: dict, bt: list, dur: float, w: int = 1920, h: int = 1080, keep:
                                              "card": pal.get("card", "#16263C"), "card_ink": pal.get("ink", "#E8EEF6"), "label": pal.get("ink", "#E8EEF6"),
                                              "accent": acc, "muted": pal.get("muted", "#9AA4B2")})
     stg.no_sparkle = getattr(D, "no_zoom", False)
+    stg.clean = getattr(D, "chart_clean", False)
     for k, (b, (t0, d)) in enumerate(zip(sc["beats"], bt)):
         if not b.get("motion"):
             continue
