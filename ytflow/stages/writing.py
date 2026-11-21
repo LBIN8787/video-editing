@@ -19,7 +19,7 @@ def _sixsigma() -> bool:
 
 def _style_block() -> str:
     if not _sixsigma():
-        return "(채널 공통 기준: 인트로·순서 예고 없이 첫 문장부터 본론, 롱폼 10분 이상, 설명은 모션그래픽 — manual/README §2-1·§2-4, 12 §0-1)"
+        return "(채널 공통 기준: 인트로·순서 예고 없이 첫 문장부터 본론, 길이는 종류·대본이 정함(최소선 없음), 설명은 모션그래픽 — manual/README §2-1·§2-4, 12 §0-1)"
     prof = config.style_profile()
     if not prof:
         return "(스타일 프로필 없음: `ytflow benchmark` 를 먼저 실행하면 품질이 좋아집니다)"

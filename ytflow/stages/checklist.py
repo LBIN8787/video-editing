@@ -374,7 +374,7 @@ def run(path: Path, upto: str = "G8") -> Report:
         brief_ = spec.get("format") == "brief" or path.name.endswith("-market-daily")   # 시장 아침 브리핑 7~10분 (09 §2, v76)
         min_ = 300 if quick_ else 420 if brief_ else 600
         lab_ = "빠른 정리 5분" if quick_ else "아침 브리핑 7분" if brief_ else "롱폼 10분"
-        R.add("G6", "MUST", f"길이: {lab_} 이상 — 많이 짧으면 쇼츠로 (README §2-4)", tot_ >= min_, f"{tot_ / 60:.1f}분")
+        R.add("G6", "참고", f"길이(측정값, 최소선 없음 — 종류·대본이 정함, README §2-4 v86) · 참고 기준 {lab_}", tot_ >= min_, f"{tot_ / 60:.1f}분")
     if last >= 4:  # G5 연출
         from . import backdrop
         bgs = backdrop.plan(spec)

@@ -152,7 +152,7 @@ def context_md(eff: dict, p: dict | None = None) -> str:
     L += ["## 1. 메인에서 물려받는 것 (모든 영상)",
           "- 영구 원칙 = `manual/README.md` §3 (진짜 금지) · 규칙의 네 층 = §3-1 (스타일 기본값·실험 기록은 금지 아님)",
           "- 작업 절차 8단계 + check 게이트 G0~G8 = `manual/README.md` §2, `manual/06-checklist.md`",
-          "- 인트로 없음·미주일기 문법·롱폼 10분+ = README §2-1·§2-3·§2-4 · 말하는 것이 화면에 생긴다 (작업 기준)", ""]
+          "- 인트로 없음·미주일기 문법·길이는 종류·대본이 정함 = README §2-1·§2-3·§2-4 · 말하는 것이 화면에 생긴다 (작업 기준)", ""]
     try:
         g = mg.build()
         bans = [b for b in g["bans"] if b.get("tier") == "principle"]
