@@ -1592,5 +1592,7 @@ try:  # 새 연출 문법(아카이브 다큐·지도 여정·키네틱 타이�
     _stage.register()
     from . import explain as _explain    # 설명 무대 (afterline·spread·share 장면) — 월텍남 벤치마크 docs/31·docs/51
     _explain.register()
+    from . import noir as _noir          # 누아르 사건 보드 (hubweb 관계망·ledger 두 열 장부, 날짜 눈금) — docs/57
+    _noir.register()
 except Exception as _e_dir:  # noqa: BLE001
     print(f"[hybrid] 새 연출 장면 등록 건너뜀: {_e_dir}")

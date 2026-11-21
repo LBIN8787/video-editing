@@ -72,12 +72,36 @@ DEMO = {
                           {"say": "하루 발신이 433통에서 817통으로 늘었습니다.", "spot": 1, "num": {"value": "817통", "label": "닷새 뒤 하루 발신", "sub": "첫날 433통"}},
                           {"say": "그런데 받은 쪽은 AI 인 줄 몰랐습니다.", "spot": 2}]},
 }
+DEMO.update({   # 누아르 사건 보드 (docs/57) — 가상의 예시 (실제 회사·인물 아님)
+    "hubweb": {"type": "hubweb", "skin": "noir", "title": "누가 움직였나",
+               "hub": {"label": "누가?", "sub": "이사회 뒤의 손"}, "ruler": ["월", "화", "수", "목"],
+               "nodes": [{"id": "a", "label": "대주주 펀드", "sub": "지분 12%", "date": "월", "rel": "지분 매각"},
+                         {"id": "b", "label": "사외이사 2명", "sub": "동시 사임", "date": "화"},
+                         {"id": "c", "label": "경쟁사 대표", "sub": "같은 날 매수", "from": "a", "date": "수"},
+                         {"id": "d", "label": "익명 제보", "sub": "기사 한 줄", "date": "목"}],
+               "beats": [{"say": "월요일, 대주주 펀드가 지분을 팔았습니다.", "add": ["a"]},
+                         {"say": "화요일, 사외이사 두 명이 함께 물러났습니다.", "add": ["b"]},
+                         {"say": "같은 주, 그 지분을 산 사람은 경쟁사 대표였습니다.", "add": ["c"], "hi": "a"},
+                         {"say": "그리고 목요일, 익명 제보가 나옵니다.", "add": ["d"], "cut": ["b"]}]},
+    "ledger": {"type": "ledger", "skin": "noir", "title": "엇갈린 두 편",
+               "left": {"head": "끌어내리려는 자", "sub": "해임 요구"}, "right": {"head": "다시 올리려는 자", "sub": "복귀 요구"},
+               "rows": [{"id": "l1", "side": "l", "name": "이사회", "note": "해임 의결", "date": "월"},
+                        {"id": "r1", "side": "r", "name": "직원 다수", "note": "복귀 연판장", "date": "화"},
+                        {"id": "l2", "side": "l", "name": "새 경영진", "note": "임시 대표 선임", "date": "화"},
+                        {"id": "r2", "side": "r", "name": "최대 투자사", "note": "복귀 지지", "date": "수"}],
+               "beats": [{"say": "이사회가 대표를 해임합니다.", "add": ["l1"]},
+                         {"say": "직원들은 복귀를 요구하는 연판장을 돌립니다.", "add": ["r1", "l2"]},
+                         {"say": "최대 투자사까지 복귀 편에 섭니다.", "add": ["r2"]},
+                         {"say": "결국 해임은 닷새 만에 뒤집힙니다.", "strike": ["l1"], "verdict": "닷새 만에 뒤집힘"}]},
+})
 # 같은 장면 종류의 다른 모습 (변형) — id 는 갤러리에 그대로 쓰임
 VARIANTS = {
     "chapter@two-line": {"type": "chapter", "num": "1", "look": "two-line", "kicker": "묻지도 않고", "title": "전화를 겁니다",
                          "clip": {"src": "ph", "start": 0}, "beats": [{"say": "첫 번째 문제입니다."}]},
     "footage@chips": {"type": "footage", "clip": {"src": "ph", "start": 0, "frame": "full"}, "label": "실사 자리",
                       "beats": [{"say": "출근길 사람들은 저마다 AI 에게 부탁을 겁니다.", "chips": ["프로틴 싸게 사 줘", "메일 좀 정리해 줘", "미용실 예약해 줘"]}]},
+    "chapter@noir": {"type": "chapter", "skin": "noir", "look": "noir", "kicker": "월요일 → 금요일", "title": "닷새 동안 무슨 일이 있었나", "sub": "가상의 예시",
+                     "beats": [{"say": "닷새 동안 무슨 일이 있었는지 따라가 봅니다."}]},
     "map_causal@cut": {"type": "map_causal", "title": "부탁에서 결제까지",
                        "map": {"nodes": {"ask": {"label": "사용자 부탁", "icon": "user", "x": 400, "y": 420},
                                          "bot": {"label": "AI 비서", "icon": "bot", "x": 960, "y": 420},
@@ -203,6 +227,8 @@ def main():
     work.mkdir(parents=True, exist_ok=True)
     exd = looks.examples_dir() / "scenes"
     exd.mkdir(parents=True, exist_ok=True)
+    only = {k.strip() for k in a.only.split(",") if k.strip()}
+    log: dict = {}
     jobs_ = jobs()
     items = list(jobs_.items())
     for key, (sc, common, src) in (items[::-1] if a.reverse else items):
