@@ -184,11 +184,11 @@ def s_noirtitle(D, sc, bt, dur):
     D.items.append(
         f'<div id="{p}k" style="position:absolute;left:0;right:0;top:330px;text-align:center;font-family:sans,sans;font-size:30px;letter-spacing:.12em;color:{RED2};opacity:0;z-index:2">{H.escape(sc.get("kicker", ""))}</div>'
         f'<div id="{p}t" style="position:absolute;left:0;right:0;top:390px;text-align:center;font-family:noirserif,serif;font-size:{sc.get("size", 92)}px;color:{TXT};opacity:0;z-index:2">{title}</div>'
-        f'<div id="{p}u" style="position:absolute;left:50%;top:{390 + sc.get("size", 92) * 1.35:.0f}px;width:{sc.get("rule", 520)}px;margin-left:-{sc.get("rule", 520) / 2:.0f}px;height:3px;background:{RED2};transform-origin:left;transform:scaleX(0);z-index:2"></div>'
+        f'<div id="{p}u" style="position:absolute;left:50%;top:{390 + sc.get("size", 92) * 1.35:.0f}px;width:{sc.get("rule", 520)}px;margin-left:-{sc.get("rule", 520) / 2:.0f}px;height:3px;background:{RED2};transform-origin:left;z-index:2"></div>'
         f'<div id="{p}s" style="position:absolute;left:0;right:0;top:{430 + sc.get("size", 92) * 1.45:.0f}px;text-align:center;font-family:sans,sans;font-size:28px;color:{MUT};opacity:0;z-index:2">{H.escape(sc.get("sub", ""))}</div>')
     _fade(D, f"{p}k", t0 + 0.2)
     _fade(D, f"{p}t", t0 + 0.45, 0.9, 14)
-    D.js.append(f'tl.to("#{p}u",{{scaleX:1,duration:0.9,ease:"power2.inOut"}},{t0 + 1.1:.2f});')
+    D.js.append(f'tl.fromTo("#{p}u",{{scaleX:0}},{{scaleX:1,duration:0.9,ease:"power2.inOut"}},{t0 + 1.1:.2f});')
     _fade(D, f"{p}s", t0 + 1.6)
 
 
@@ -223,7 +223,7 @@ def s_noircase(D, sc, bt, dur):
     shown, live = [], None
     for b, (t0, d) in zip(sc["beats"], bt):
         if b.get("step") is not None and steps:
-            D.js.append(f'tl.to("#{p}dot",{{opacity:1,left:{sx[b["step"]] - 11:.0f},duration:0.7,ease:"power2.inOut"}},{t0 + 0.1:.2f});')
+            D.js.append(f'tl.to("#{p}dot",{{opacity:1,x:{sx[b["step"]] - x0:.0f},duration:0.7,ease:"power2.inOut"}},{t0 + 0.1:.2f});')
         for k in b.get("reveal", []):
             bx = boxes[k]
             w, h = bx.get("w", 380), bx.get("h", 124)
@@ -270,8 +270,8 @@ def s_noirsides(D, sc, bt, dur):
     if sc.get("title"):
         D.items.append(f'<div id="{p}h" style="position:absolute;left:0;right:0;top:110px;text-align:center;font-family:sans-x,sans;font-size:44px;color:#A9A9AE;opacity:0;z-index:2">{H.escape(sc["title"])}</div>')
         _fade(D, f"{p}h", 0.2)
-    D.items.append(f'<div id="{p}v" style="position:absolute;left:959px;top:210px;width:2px;height:720px;background:#38383D;transform-origin:top;transform:scaleY(0);z-index:2"></div>')
-    D.js.append(f'tl.to("#{p}v",{{scaleY:1,duration:0.8,ease:"power2.inOut"}},0.3);')
+    D.items.append(f'<div id="{p}v" style="position:absolute;left:959px;top:210px;width:2px;height:720px;background:#38383D;transform-origin:top;z-index:2"></div>')
+    D.js.append(f'tl.fromTo("#{p}v",{{scaleY:0}},{{scaleY:1,duration:0.8,ease:"power2.inOut"}},0.3);')
     cols = sc["sides"]
     X = [122, 1020]
     for i, s in enumerate(cols):
@@ -279,9 +279,9 @@ def s_noirsides(D, sc, bt, dur):
         D.items.append(f'<div id="{p}s{i}" style="position:absolute;left:{x}px;top:200px;width:778px;opacity:0;z-index:2">'
                        f'<div style="font-family:sans-x,sans;font-size:58px;color:{TXT};white-space:nowrap">{H.escape(s.get("head", ""))}</div>'
                        f'<div style="margin-top:6px;font-family:sans,sans;font-size:26px;color:{MUT}">{H.escape(s.get("sub", ""))}</div>'
-                       f'<div id="{p}r{i}" style="margin-top:24px;height:3px;background:{RED2};transform-origin:left;transform:scaleX(0)"></div></div>')
+                       f'<div id="{p}r{i}" style="margin-top:24px;height:3px;background:{RED2};transform-origin:left"></div></div>')
         _fade(D, f"{p}s{i}", 0.5 + 0.3 * i)
-        D.js.append(f'tl.to("#{p}r{i}",{{scaleX:1,duration:0.8,ease:"power2.inOut"}},{0.9 + 0.3 * i:.2f});')
+        D.js.append(f'tl.fromTo("#{p}r{i}",{{scaleX:0}},{{scaleX:1,duration:0.8,ease:"power2.inOut"}},{0.9 + 0.3 * i:.2f});')
     n = [0, 0]
     rid = {}
     last = None
@@ -299,7 +299,7 @@ def s_noirsides(D, sc, bt, dur):
                 f'<div style="position:absolute;left:28px;top:14px;font-family:sans,sans;font-size:22px;color:{MUT}">{H.escape(it.get("tag", ""))}</div>'
                 f'<div id="{e}t" style="position:absolute;left:152px;top:2px;font-family:sans-x,sans;font-size:42px;color:{TXT};white-space:nowrap">{H.escape(it.get("title", ""))}</div>'
                 f'<div style="position:absolute;left:152px;top:58px;font-family:sans,sans;font-size:26px;color:{MUT};white-space:nowrap">{H.escape(it.get("sub", ""))}</div>'
-                f'<div id="{e}x" style="position:absolute;left:146px;top:30px;width:{min(620, 36 * len(it.get("title", "")) + 16)}px;height:3px;background:{RED2};transform-origin:left;transform:scaleX(0)"></div></div>')
+                f'<div id="{e}x" style="position:absolute;left:146px;top:30px;width:{min(620, 36 * len(it.get("title", "")) + 16)}px;height:3px;background:{RED2};transform-origin:left"></div></div>')
             at = t0 + 0.3 + 0.4 * j
             D.js.append(f'tl.fromTo("#{e}",{{opacity:0,x:-12}},{{opacity:1,x:0,duration:0.6,ease:"power2.out"}},{at:.2f});')
             if last:
@@ -308,7 +308,7 @@ def s_noirsides(D, sc, bt, dur):
         for (si, k) in b.get("strike", []):
             e = rid.get((si, k))
             if e:
-                D.js.append(f'tl.to("#{e}x",{{scaleX:1,duration:0.6,ease:"power2.inOut"}},{t0 + 0.8:.2f});'
+                D.js.append(f'tl.fromTo("#{e}x",{{scaleX:0}},{{scaleX:1,duration:0.6,ease:"power2.inOut"}},{t0 + 0.8:.2f});'
                             f'tl.to("#{e}",{{opacity:0.45,duration:0.6}},{t0 + 1.2:.2f});')
 
 

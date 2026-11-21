@@ -175,13 +175,13 @@ class Stage:
             shadow = "text-shadow:0 2px 14px rgba(0,0,0,.55);"
             self.items.append(
                 f'<div id="{did}" style="position:absolute;left:{x - sw / 2:.0f}px;top:{y - sh / 2:.0f}px;width:{sw:.0f}px;height:{sh:.0f}px;z-index:5">'
-                f'<div id="{did}_bar" style="position:absolute;left:0;top:6px;width:5px;height:{sh - 12:.0f}px;background:{acc};transform-origin:top;transform:scaleY(0)"></div>'
+                f'<div id="{did}_bar" style="position:absolute;left:0;top:6px;width:5px;height:{sh - 12:.0f}px;background:{acc};transform-origin:top"></div>'
                 f'<div id="{did}_l" style="position:absolute;left:28px;top:0;font-family:gr,sans;font-size:30px;letter-spacing:.06em;color:{muted};white-space:nowrap;opacity:0;{shadow}">{_e(lab)}</div>'
                 f'<div id="{did}_n" style="position:absolute;left:24px;top:46px;font-family:gx,sans-x;font-size:{fs}px;line-height:1.05;color:{acc};white-space:nowrap;opacity:0;{shadow}">{_e(val)}</div>'
                 + (f'<div id="{did}_s" style="position:absolute;left:28px;top:{52 + fs * 1.05:.0f}px;font-family:gr,sans;font-size:28px;color:{muted};white-space:nowrap;opacity:0;{shadow}">{_e(sub)}</div>' if sub else "")
                 + '</div>')
             self.pos[m["id"]] = (x, y, sw, sh)
-            self.js.append(f'tl.to("#{did}_bar",{{scaleY:1,duration:0.45,ease:"power3.out"}},{t:.3f});'
+            self.js.append(f'tl.fromTo("#{did}_bar",{{scaleY:0}},{{scaleY:1,duration:0.45,ease:"power3.out"}},{t:.3f});'
                            f'tl.fromTo("#{did}_l",{{opacity:0,x:-14}},{{opacity:1,x:0,duration:0.4,ease:"power2.out"}},{t + 0.12:.3f});'
                            f'tl.fromTo("#{did}_n",{{opacity:0,y:18}},{{opacity:1,y:0,duration:0.5,ease:"power3.out"}},{t + 0.2:.3f});'
                            + (f'tl.fromTo("#{did}_s",{{opacity:0}},{{opacity:1,duration:0.4}},{t + 0.55:.3f});' if sub else ""))

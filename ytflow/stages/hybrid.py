@@ -339,7 +339,7 @@ def s_versus(D: HDoc, sc: dict, bt: list, dur: float):
     t0 = bt[0][0]
     for x, it, col, at in ((W * 0.28, L, D.ink, t0 + 0.2), (W * 0.72, R, accent_text(D), t0 + 1.4)):
         D.icon(it["icon"], x, 300, 120, col, at=at)
-        D.text(x, 520, it["value"], FT("value"), 210, col, at=at + 0.2, counter=True)
+        D.text(x, 520, it["value"], FT("value"), min(210, fit(FT("value"), it["value"], 210, 620).size), col, at=at + 0.2, counter=True)   # 긴 값(12만 2,000주)이 'vs'·화면 끝에 닿지 않게
         D.text(x, 680, it["label"], FT("label"), 40, "#5a5f6a", at=at + 0.4)
     D.text(W / 2, 520, "vs", FT("note"), 90, D.muted, at=t0 + 1.2)
     if len(bt) > 1:
@@ -808,8 +808,8 @@ def s_bars(D: HDoc, sc: dict, bt: list, dur: float):
     if clean:
         _x0 = 330 + (260 if any(L.get("side") == "left" for L in sc.get("layers") or []) else 0)
         _ax = D._id()
-        D.items.append(f'<div id="{_ax}" style="position:absolute;left:{_x0}px;top:{base - 1:.0f}px;width:{1600 - _x0}px;height:2px;background:{"#6A6F78" if _dk else "#8A8F98"};transform-origin:left;transform:scaleX(0)"></div>')
-        D.js.append(f'tl.to("#{_ax}",{{scaleX:1,duration:0.6,ease:"power2.out"}},{t0 + 0.1:.2f});')
+        D.items.append(f'<div id="{_ax}" style="position:absolute;left:{_x0}px;top:{base - 1:.0f}px;width:{1600 - _x0}px;height:2px;background:{"#6A6F78" if _dk else "#8A8F98"};transform-origin:left"></div>')
+        D.js.append(f'tl.fromTo("#{_ax}",{{scaleX:0}},{{scaleX:1,duration:0.6,ease:"power2.out"}},{t0 + 0.1:.2f});')
     else:
         D.rough("line", [330 + (260 if any(L.get("side") == "left" for L in sc.get("layers") or []) else 0), base, 1600, base + 2], D.ink, 3.5, at=t0 + 0.1, dur=0.5)
     off = 260 if any(L.get("side") == "left" for L in sc.get("layers") or []) else 0   # 왼쪽에 지도·사진이 있으면 막대를 오른쪽으로 (2026-11-14 지도가 막대를 가림)
@@ -851,8 +851,8 @@ def s_bars(D: HDoc, sc: dict, bt: list, dur: float):
             top_, org = (base - h, "bottom") if v >= 0 else (base, "top")
             rad = "4px 4px 0 0" if v >= 0 else "0 0 4px 4px"
             D.items.append(f'<div id="{_b}" style="position:absolute;left:{x - bw / 2:.0f}px;top:{top_:.0f}px;width:{bw:.0f}px;height:{h:.0f}px;background:{c};border-radius:{rad};'
-                           f'transform-origin:{org};transform:scaleY(0)"></div>')
-            D.js.append(f'tl.to("#{_b}",{{scaleY:1,duration:0.7,ease:"power2.out"}},{at:.2f});')
+                           f'transform-origin:{org}"></div>')
+            D.js.append(f'tl.fromTo("#{_b}",{{scaleY:0}},{{scaleY:1,duration:0.7,ease:"power2.out"}},{at:.2f});')
         if v >= 0:
             if not clean:
                 D.rough("rectangle", [x - bw / 2, base - h, bw, h], c, 2.5, fill=c, at=at, dur=0.6)
@@ -937,14 +937,21 @@ def s_outro(D: HDoc, sc: dict, bt: list, dur: float):
         D.video(sc["_clipfile"], dur, "photo", push=0.04)
     i = D._id()
     # 사진 위 글자가 읽히도록: 뒤를 살짝 흐리게 + 가운데 종이 카드
-    D.items.append(f'<div id="{i}" style="position:absolute;inset:0;background:rgba(238,231,218,.35);backdrop-filter:blur(3px)"></div>')
+    D.items.append(f'<div id="{i}" style="position:absolute;inset:0;background:{"rgba(0,0,0,.25)" if getattr(D, "calm", False) else "rgba(238,231,218,.35)"};backdrop-filter:blur(3px)"></div>')
     D.js.append(f'tl.fromTo("#{i}",{{opacity:0}},{{opacity:1,duration:0.8}},0.6);')
     j = D._id()
-    D.items.append(f'<div id="{j}" style="position:absolute;left:{W / 2 - 600:.0f}px;top:360px;width:1200px;height:380px;background:#FBF8F1;'
-                   f'box-shadow:0 18px 40px rgba(0,0,0,.28);transform:rotate(-0.8deg)"></div>')
+    calm = getattr(D, "calm", False)   # 차분한 모드: 어두운 반투명 판·흰 글자·곧은 가는 선 (밝은 종이에 밝은 글자가 묻히던 문제, 2026-11-21)
+    card = ("background:rgba(12,14,18,.62);border:1px solid rgba(255,255,255,.14);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.45)" if calm
+            else "background:#FBF8F1;box-shadow:0 18px 40px rgba(0,0,0,.28);transform:rotate(-0.8deg)")
+    D.items.append(f'<div id="{j}" style="position:absolute;left:{W / 2 - 600:.0f}px;top:360px;width:1200px;height:380px;{card}"></div>')
     D.js.append(f'tl.fromTo("#{j}",{{opacity:0,y:30}},{{opacity:1,y:0,duration:0.6,ease:"power2.out"}},0.7);')
-    D.text(W / 2, 470, sc["title"], FT("title"), 120, D.ink, at=0.9)
-    D.rough("line", [W / 2 - 420, 560, W / 2 + 420, 566], D.red, 6, at=1.4, dur=0.5)
+    D.text(W / 2, 470, sc["title"], FT("title"), min(120, fit(FT("title"), sc["title"], 120, 1080).size), D.ink, at=0.9)
+    if calm:
+        _u = D._id()
+        D.items.append(f'<div id="{_u}" style="position:absolute;left:{W / 2 - 200:.0f}px;top:560px;width:400px;height:3px;background:{D.red};transform-origin:center"></div>')
+        D.js.append(f'tl.fromTo("#{_u}",{{scaleX:0}},{{scaleX:1,duration:0.7,ease:"power2.out"}},1.4);')
+    else:
+        D.rough("line", [W / 2 - 420, 560, W / 2 + 420, 566], D.red, 6, at=1.4, dur=0.5)
     D.text(W / 2, 640, sc.get("sub", ""), FT("note"), 56, D.red, at=1.8)
 
 
