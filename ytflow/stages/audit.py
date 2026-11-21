@@ -46,8 +46,7 @@ RETIRED = [
     (r"안녕하세요", "README §2-1 v24: 인사 없음", ["없", "하지 않", "폐지", "넣지"]),
     (r"진행 멘트를 넣", "README §2-1: 진행 멘트 대신 앞 장 결론 → 다음 질문", []),
     (r"소개\s*→\s*훅|소개에서 자연스럽게", "04 §0 v23·v24: 소개 없이 첫 문장부터 훅", ["폐지"]),
-    (r"주말 분석", "09 §2 v30: 일요일 분석글은 기본에서 뺌 — 주간 분석(토)·한 주 점검(일)", ["뺍니다", "기본에서"]),
-    (r"(?<!\d)(?:[3-9]|[1-9]~\d)~?\d?분(?![^|]{0,20}쇼츠)", None, []),   # 길이 — 아래 _length 에서 따로 판단
+    (r"주말 분석", "09 §2: 일요일 분석글은 기본에서 뺌 — 일요일은 한 주 종합(2026-11-20 사용자)", ["뺍니다", "기본에서"]),
     (r"목소리는 아직 미정|목소리 미정", "09 목소리: Teo 로 결정 (2026-11-13)", []),
     (r"\|\s*intro\b|intro \(바탕|intro 의 이어지는", "README §2-1 v24: 첫 장면은 intro 가 아니라 본론 (check G4 MUST)", ["쓰지 않", "아님", "아니라"]),
     (r"(?:지식|설명)[^|\n]{0,12}(?:≤|이하)\s*30|○ ≤30", "04 §0-6: 지식 문장 비율 기준 폐지 (2026-11-19 사용자: 너무 과적합)", ["폐지", "당시 기록"]),
@@ -99,15 +98,6 @@ def scan_retired(docs, secs) -> list[dict]:
             if _skip_section(sec):
                 continue
             for pat, why, ok in RETIRED:
-                if why is None:   # 길이: 영상 길이를 말하는 줄(롱폼·길이·분량·제목줄)에서 '…~N분' 이 10분 미만이면
-                    if not (heading or any(w in t for w in ("롱폼", "길이", "분량", "라인 고르기"))):
-                        continue
-                    for m in re.finditer(r"(\d+)~(\d+)분", t):
-                        hi = int(m.group(2))
-                        if hi < 10 and not any(w in t for w in ["쇼츠", "빠른 정리", "각 ", "장 ", "장(", "~2분", "~4분", "앞 1분"]):
-                            out.append({"kind": "retired", "level": "fix", "file": d["file"], "line": i, "text": t[:160],
-                                        "why": "README §2-4: 롱폼은 10분 이상 (시사 빠른 정리만 5~8분, 짧으면 쇼츠)"})
-                    continue
                 if heading:
                     continue
                 if re.search(pat, t) and not any(w in t for w in ok):

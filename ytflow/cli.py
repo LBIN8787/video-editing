@@ -156,7 +156,6 @@ def cmd_make(a) -> None:
         cur = _y.safe_load((p.path / "edit.yaml").read_text(encoding="utf-8")) if (p.path / "edit.yaml").exists() else {}
         cur.update({"channel": ch["id"], "format": ch.get("format", "longform"), "channel_niche": ch.get("niche", "")})
         cur.setdefault("discover", {})["seed_keywords"] = ch.get("seed_keywords") or []
-        cur.setdefault("script", {})["target_minutes"] = ch.get("target_minutes", 9)
         if ch.get("tts"):  # 채널 목소리 (확정되면 channel.yaml 의 tts: {backend: elevenlabs, elevenlabs: {voice_id: ...}})
             cur["tts"] = ch["tts"]
         (p.path / "edit.yaml").write_text(_y.safe_dump(cur, allow_unicode=True, sort_keys=False), encoding="utf-8")

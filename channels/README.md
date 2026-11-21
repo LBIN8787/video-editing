@@ -47,6 +47,6 @@ python -m ytflow make --channel <id>            # 그 채널 규칙으로 한 �
 ```
 
 ## 새 채널 추가
-1. `channels/<새 id>/channel.yaml` 을 다른 채널에서 복사해 `title·format·style_ref·niche·seed_keywords·target_minutes` 를 고칩니다.
+1. `channels/<새 id>/channel.yaml` 을 다른 채널에서 복사해 `title·format·style_ref·niche·seed_keywords` 를 고칩니다.
 2. 새 편집 스타일이 필요하면 `skills/edit-style-new` 로 `styles/<id>/` 를 먼저 만듭니다.
 3. `episodes.md` 는 빈 표로 만들어 둡니다(형식은 다른 채널과 같게).

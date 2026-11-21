@@ -1,7 +1,7 @@
 """2~4단계 + 9단계: 주제 선정 → 리서치 → 대본(씬 단위) → 업로드 패키지.
 
 data/style_profile.json(식스시그마 채널 통계)은 편집 스타일이 sixsigma 일 때만 프롬프트에 넣는다
-(모순 c-20261120-30: 그 밖의 채널은 manual/README 공통 기준 — 인트로 없음 §2-1, 10분~ §2-4, 모션그래픽 기본 12 §0).
+(모순 c-20261120-30: 그 밖의 채널은 manual/README 공통 기준 — 인트로 없음 §2-1, 길이 기준 없음 §2-4, 모션그래픽 기본 12 §0).
 """
 from __future__ import annotations
 
@@ -181,9 +181,8 @@ def article(project: Project) -> None:
     fact = (project.dir("research") / "factsheet.md").read_text(encoding="utf-8")
     imported = project.dir("source") / "input.md"
     pcfg = config.load("pipeline")
-    minutes = pcfg.get("script", {}).get("target_minutes", 9)
     user = (f"# 채널 분야\n{pcfg.get('channel_niche', '')}\n\n# 주제\n{json.dumps(topic, ensure_ascii=False)}\n\n"
-            f"# 형식 규칙\n{rules}\n\n{_inventory_block(project)}# 분량\n영상 약 {minutes}분 (원고 약 {int(minutes * 290)}자)\n\n# 팩트시트\n{fact}")
+            f"# 형식 규칙\n{rules}\n\n{_inventory_block(project)}# 분량\n정해진 길이 없음 — 이 형식·채널 대본 공식의 구성요소를 모두 채우고, 자료·인사이트의 양이 길이를 정함. 늘리려고 반복하지 않고 깊이를 줄이지 않음 (manual/README §2-4)\n\n# 팩트시트\n{fact}")
     if imported.exists():
         user += "\n\n# 가져온 조사 글 (구성 참고용, 숫자는 팩트시트 기준)\n" + imported.read_text(encoding="utf-8")
     md = llm.text(config.prompt("article"), user)
@@ -267,10 +266,6 @@ def script(project: Project) -> None:
     topic = chosen_topic(project)
     pcfg = config.load("pipeline").get("script", {})
     prof = config.style_profile() if _sixsigma() else {}
-    cpm = (prof.get("targets") or {}).get("chars_per_minute") or pcfg.get("chars_per_minute", 330)
-    minutes = (prof.get("targets") or {}).get("video_minutes") or pcfg.get("target_minutes", 9)
-    if config.load("pipeline").get("channel"):  # 채널 설정의 분량이 우선
-        minutes = pcfg.get("target_minutes", minutes)
     fact = (project.dir("research") / "factsheet.md").read_text(encoding="utf-8")
     af = project.dir("research") / "articles.json"
     arts = af.read_text(encoding="utf-8") if af.exists() else "[]"
@@ -278,7 +273,7 @@ def script(project: Project) -> None:
     art_block = (f"# 원고 (이 글을 장면 대본으로 옮깁니다: 문단 순서를 지키고, 문장은 거의 그대로 내레이션으로)\n"
                  f"{art.read_text(encoding='utf-8')}\n\n") if art.exists() else ""
     user = (f"# 스타일 프로필\n{_style_block()}\n\n# 주제\n{json.dumps(topic, ensure_ascii=False)}\n\n{art_block}{_inventory_block(project)}"
-            f"# 팩트시트\n{fact}\n\n# 인용 가능한 기사 (screenshot 장면의 source.url 로만 사용)\n{arts}\n\n# 분량\n약 {minutes}분, 분당 {cpm}자 → 내레이션 총 {int(minutes * cpm)}자 내외")
+            f"# 팩트시트\n{fact}\n\n# 인용 가능한 기사 (screenshot 장면의 source.url 로만 사용)\n{arts}\n\n# 분량\n정해진 길이 없음 — 이 형식·채널 대본 공식의 구성요소를 모두 채우고, 자료·인사이트의 양이 길이를 정함. 늘리려고 반복하지 않고 깊이를 줄이지 않음 (manual/README §2-4)")
     ref = config.load("pipeline").get("edit", {}).get("style_ref")
     addendum = config.STYLES_DIR / ref / "script.md" if ref else None
     if addendum and addendum.exists():  # 편집 스타일별 대본 규칙 (styles/<id>/script.md)

@@ -367,14 +367,10 @@ def run(path: Path, upto: str = "G8") -> Report:
         if brand == "curiosity":   # v38: 어미 비율은 이야기형(호기심)만 — 정보 채널은 어미 혼합 (11-workflow §3-2, 2026-11-17 사용자)
           R.add("G4", "참고", "말투(호기심): '~습니다/~니다' 끝맺음 몫·평균 문장 길이 (차분한 이야기 내레이터인지)",
               formal / max(len(sents), 1) >= 0.8 and avg >= 35, f"{formal / max(len(sents), 1):.0%} · {avg:.0f}자")
-    if last >= 6 and longform:  # v24 길이: 롱폼 최소 10분 (README §2-4)
+    if last >= 6 and longform:  # 길이: 측정값만 — 시간 기준 없음 (README §2-4, 2026-11-21 사용자 "타임기준은 없애주세요")
         tl_ = Path(path) / "05_edit" / "hybrid_timeline.json"
         tot_ = sum(x.get("dur", 0) for x in json.loads(tl_.read_text(encoding="utf-8"))) if tl_.exists() else 0
-        quick_ = spec.get("format") == "quick"   # 시사 48시간 안 빠른 정리 (08 §1, v34): 5~8분 예외
-        brief_ = spec.get("format") == "brief" or path.name.endswith("-market-daily")   # 시장 아침 브리핑 7~10분 (09 §2, v76)
-        min_ = 300 if quick_ else 420 if brief_ else 600
-        lab_ = "빠른 정리 5분" if quick_ else "아침 브리핑 7분" if brief_ else "롱폼 10분"
-        R.add("G6", "참고", f"길이(측정값, 최소선 없음 — 종류·대본이 정함, README §2-4 v86) · 참고 기준 {lab_}", tot_ >= min_, f"{tot_ / 60:.1f}분")
+        R.add("G6", "참고", "길이(측정값만 — 시간 기준 없음, 구성요소가 정함, README §2-4)", True, f"{tot_ / 60:.1f}분")
     if last >= 4:  # G5 연출
         from . import backdrop
         bgs = backdrop.plan(spec)
