@@ -178,6 +178,31 @@ def whisper(out, prompt=""):
     return words
 
 
+def cap_lines(s, n=26):
+    """자막 줄 나누기: 쉼표에서 먼저 끊고(말이 쉬는 곳), 그래도 길면 띄어쓰기로."""
+    out = []
+    for piece in re.split(r"(?<=,)\s+", s.strip()):
+        if out and len(out[-1]) + 1 + len(piece) <= n:
+            out[-1] = out[-1] + " " + piece
+        else:
+            out += chunks(piece, n)
+    return out
+
+
+def seg_times(out, i, s):
+    """out/seg/<i>.align.json(ElevenLabs) → 문장 s 의 글자마다 (시작, 끝). 없거나 글자가 다르면 None."""
+    a = out / "seg" / f"{i:03d}.align.json"
+    if not a.exists():
+        return None
+    d = json.loads(a.read_text(encoding="utf-8"))
+    full = "".join(d["characters"])
+    off = full.find(s)
+    if off < 0:
+        return None
+    st, en = d["character_start_times_seconds"], d["character_end_times_seconds"]
+    return [(st[off + j], en[off + j]) for j in range(len(s))]
+
+
 def write_captions(out, sents):
 
     # 자막: 문장을 줄 길이로 나누고 글자 수 비율로 시간 배분
@@ -195,13 +220,22 @@ Style: Sub,NanumGothic ExtraBold,50,&H00FFFFFF,&H00FFFFFF,&H64101012,&H64101012,
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
     ev = []
-    for s0, s1, s, _ in sents:
-        parts = chunks(s)
+    for i, (s0, s1, s, _) in enumerate(sents):
+        parts = cap_lines(s)
+        at = seg_times(out, i, s)   # ElevenLabs 문장 조각의 글자별 시각 (2026-11-21: 비례 배분은 싱크가 어긋남)
         L = sum(len(p) for p in parts)
-        x = s0
-        for p in parts:
-            y = x + (s1 - s0) * len(p) / L
-            ev.append(f"Dialogue: 0,{ass_t(x)},{ass_t(y + 0.05)},Sub,,0,0,0,,{p}")
+        x, cur = s0, 0
+        for j, p in enumerate(parts):
+            k = s.find(p, cur); k = cur if k < 0 else k; e = k + len(p) - 1; cur = e + 1
+            if at:
+                x = s0 + at[k][0] - at[0][0]
+                y = s0 + at[e][1] - at[0][0] + 0.15
+                if j + 1 < len(parts):
+                    nk = s.find(parts[j + 1], cur)
+                    y = min(y, s0 + at[nk if nk >= 0 else cur][0] - at[0][0])
+            else:
+                y = x + (s1 - s0) * len(p) / L
+            ev.append(f"Dialogue: 0,{ass_t(x)},{ass_t(y)},Sub,,0,0,0,,{p}")
             x = y
     (out / "captions.ass").write_text(head + "\n".join(ev) + "\n", encoding="utf-8-sig")
 
