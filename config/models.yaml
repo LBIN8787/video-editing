@@ -16,7 +16,7 @@ tiers:
   simple:  {label: 간단한 일, effort: high}
 providers:
   anthropic:
-    judge:   {model: claude-fable-5-2, cli: fable}
+    judge:   {model: claude-opus-5-5, cli: opus}   # 2026-11-22 사용자: "오푸스로 바꿔주세요" (Fable 소모량 감당이 어려움) — 여유가 생기면 claude-fable-5-2 / fable 로
     complex: {model: claude-opus-5-5, cli: opus}
     simple:  {model: claude-sonnet-5-5, cli: sonnet}
   openai:    # Codex — 비워 두면 Codex 기본 모델. 티어에 맞는 모델 이름을 사용자가 정해 채움
