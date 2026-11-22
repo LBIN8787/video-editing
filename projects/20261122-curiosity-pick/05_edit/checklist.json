@@ -1,8 +1,8 @@
 {
  "project": "20261122-curiosity-pick",
- "manual_version": "89",
- "checked": "2026-11-22T10:00:51",
- "pass": true,
+ "manual_version": "91",
+ "checked": "2026-11-22T10:45:35",
+ "pass": false,
  "rows": [
   {
    "gate": "G0",
@@ -37,14 +37,14 @@
    "level": "MUST",
    "item": "욕망·시청자 질문",
    "ok": true,
-   "detail": "세일하는 날 이름에 왜 '검다'는 말이 붙었을까?"
+   "detail": "몇십 년 된 주차장에도 금이 가는데, 철근도 없는 1,900년 된 돔은 어떻게 버텼을까?"
   },
   {
    "gate": "G1",
    "level": "MUST",
    "item": "트리거·왜 지금",
    "ok": true,
-   "detail": "2026-11-22 정기 작업: 호기심 채널 일 1편(매일 18:00) — 분야를 가리지 않는 이야기 채널로 바뀐 첫 주제 카드. 후보 3개는 서로 다른 분야(사회·문화 / 과학·건축 / 역사·실화)."
+   "detail": "2026-11-22 정기 작업: 호기심 채널 일 1편(매일 18:00) — 분야를 가리지 않는 이야기 채널로 바뀐 첫 주제 카드. 후보 3개는 서로 다른 분야(사회·문화 / 과학·건축 / 역사·실화). / D1 사용자 선택 B(2026-11-22)."
   },
   {
    "gate": "G1",
@@ -58,7 +58,7 @@
    "level": "참고",
    "item": "욕망 점수 합계 (후보끼리 비교할 때 씀)",
    "ok": true,
-   "detail": "합계 16 {'desire': 3, 'clarity': 3, 'timeliness': 3, 'demand': 2, 'visuals': 2, 'angle': 3}"
+   "detail": "합계 15 {'desire': 3, 'clarity': 3, 'timeliness': 1, 'demand': 3, 'visuals': 2, 'angle': 3}"
   },
   {
    "gate": "G1",
@@ -79,14 +79,189 @@
    "level": "SHOULD",
    "item": "우리만의 답(our_angle)",
    "ok": true,
-   "detail": "'장부가 흑자(black)로 돌아서는 날'이라는 흔한 설명은 1980년대에야 나타난다. 그보다 20년 앞서, 추수감사절 다음 날 쏟아진 인파와 차량에 지친 필라델피아 경찰이 그날을 부르던 말이었고, 상인들은 'Big Friday'로 바꾸려다 실패했다. 나쁜 뜻의 별명이 어떻게 좋은 뜻의 이야기로 '세탁'되었나를 따라간다."
+   "detail": "'옛날 것이 더 튼튼하다'가 아니다. 판테온 돔은 실제로 금이 가 있다. 금이 가도 무너지지 않게 무게를 덜었고(두께·가벼운 돌·빈 꼭대기), 녹슬 철이 없고, 로마 콘크리트는 틈을 스스로 메우는 재료를 품고 있었으며(MIT 2023), 사람들이 떠나지 않았다(609년 교회)."
   },
   {
    "gate": "G1",
    "level": "SHOULD",
    "item": "무엇이 띄우나(driver: 소재·각도·형식 + 근거)",
    "ok": true,
-   "detail": "각도 · 누구나 아는 설명(흑자)을 먼저 말하게 하고, 기록을 따라가며 그 설명이"
+   "detail": "각도 · 누구나 아는 '로마 콘크리트는 튼튼하다'를 '사실 금이 가 있다'로 뒤집"
+  },
+  {
+   "gate": "G2",
+   "level": "MUST",
+   "item": "자료 화면마다 credit·url",
+   "ok": false,
+   "detail": "0개, 빠짐 []"
+  },
+  {
+   "gate": "G2",
+   "level": "MUST",
+   "item": "금지 라이선스(SA·NC·ND) 없음",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G2",
+   "level": "참고",
+   "item": "자료 화면 소스 종류 (한 곳에서만 가져오면 화면이 단조로워짐)",
+   "ok": false,
+   "detail": "0종"
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "팩트시트 + 출처 링크 3개 이상",
+   "ok": true,
+   "detail": "링크 6개"
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "확인 상태 표시(✅/⚠️)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "'쓰지 않는 것' 목록",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "목적 분간: intent.md 에 '목적:' 정보 습득형/즐길거리형 + 세 질문 (11 §2-4)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "core_message·question·logic",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "대본 구성요소 대조표: 채널 대본 공식의 요소마다 있음/없음·어느 장 (02_script/script_review.md '구성요소', 13 §7)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "curiosity: 비유와 대비가 되는 숫자 — 사실은 이야기 속에서 (04 §0-6)",
+   "ok": true,
+   "detail": "{'compare_to': 3, 'analogies': 2, 'past_cases': 2, 'glossary': 1}"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "투자 권유 표현 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "레퍼런스 채널 이름 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "미완성 표시 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "과장 단어 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2, 2026-11-20 사용자: 필수 아님)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "여는 부분에 이 영상의 질문 하나 (시청자가 무엇을 따라가는지 알게)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "curiosity: 훅 먼저 정하기 (topic_brief.hook: type·line·gap)",
+   "ok": true,
+   "detail": "나와의 연결"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "curiosity: 여는 장면이 곧 훅 — 소개·순서 예고·설명보다 앞 (04 §0)",
+   "ok": true,
+   "detail": "훅 박자 0 · 순서 예고 None"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "curiosity: 훅의 질문(gap)이 나옴 (답은 숨김)",
+   "ok": true,
+   "detail": "철근도 없는 이 돔은 어떻게 1,900년을 버텼을까요?"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "curiosity: 시청자 조사 01_research/audience.md (주 시청자·유입 경로·유입 이유·끝까지 보는 이유)",
+   "ok": true,
+   "detail": "docs/29"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "curiosity: 편집 전에 대본만 사용자 검토 통과 (02_script/script_review.md '통과', 04 §0-6)",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "curiosity: 제목이 훅에서 나옴 (훅과 같은 낱말)",
+   "ok": false,
+   "detail": "0/0"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "참고",
+   "item": "말투(호기심): '~습니다/~니다' 끝맺음 몫·평균 문장 길이 (차분한 이야기 내레이터인지)",
+   "ok": true,
+   "detail": "85% · 36자"
   }
  ]
 }
