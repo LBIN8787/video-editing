@@ -8,3 +8,4 @@
 | 2026-11-20 | 20261119-curiosity-choice-blindness | 선택이 바뀐 줄도 모르고, 고른 이유를 말했다 | 12:16 · jam_v10 · 썸네일 '선택의 배신' | 통과 v7 (2026-11-20 기록) · **올림** 2026-11-21 00:20 KST 공개 https://youtu.be/WA2aWBmsOeI (기록은 2026-11-22 정기 작업이 git 에 옮김) |
 | 2026-11-21 | 20261120-curiosity-trend | 볼 게 이렇게 많은데, 왜 넘길수록 더 지루할까? | 6:35 · ElevenLabs | D4 통과 (2026-11-21 "승인합니다") · **올림** 공개 https://youtu.be/-0KlNwo5EZg |
 | 2026-11-22 | 20261121-curiosity-willpower | 의지력은 정말 쓰면 닳을까? 과학자들의 실험이 엇갈린 이유 | 7:10 · v16(서윤의 하루·다이어트·결론만·직접 해 보기, 심리학 고양이 문법) · ElevenLabs Nobel Butler | 통과 (2026-11-22, 매뉴얼 v85) · 썸네일 C2 · 2026-11-22 18:00 KST 예약 공개 · Drive `영상/20261121-curiosity-willpower/05_edit/willpower_v16_final.mp4` |
+| 2026-11-22 | 20261120-curiosity-whitebear-v2 | 생각하지 않으려 할수록 더 떠오르는 이유 | v2 · 썸네일 A | D4 통과 (2026-11-22 "흰곰편 지금 올려주세요") · **올림** 2026-11-22 10:34 KST 바로 공개 https://youtu.be/NHp9vtejP3M |
