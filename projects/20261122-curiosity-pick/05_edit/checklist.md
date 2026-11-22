@@ -1,6 +1,6 @@
 # 체크리스트 — 20261122-curiosity-pick
 
-매뉴얼 v99 · 2026-11-22T14:21:02 · **MUST 실패 2개**
+매뉴얼 v104 · 2026-11-22T16:43:59 · **MUST 실패 2개**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
@@ -65,7 +65,7 @@
 | G6 | MUST | 레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why) | ❌ | {} |
 | G6 | SHOULD | 글자 겹침 점검 기록 (05_edit/overlap_qa.json) | ⚠️ | python scripts/overlap_scan.py <프로젝트> |
 | G6 | 참고 | 무대 화면: 한꺼번에 보이는 것·글자·멈춘 박자 (한 화면 한 생각인지 눈으로, 04 §0-5) | ✅ | {} |
-| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ❌ | {'within_0_5s': 0.961, 'p95_abs_offset': 0.45, 'median_abs_offset': 0.27, 'video |
+| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ❌ | {'within_0_5s': 0.987, 'p95_abs_offset': 0.35, 'median_abs_offset': 0.26, 'video |
 | G6 | SHOULD | 납품 점검(음량 등) | ⚠️ | None |
 | G6 | SHOULD | 최종 목소리 ElevenLabs | ✅ |  |
 | G7 | MUST | 제목 후보 3개 + 이유 | ✅ |  |
