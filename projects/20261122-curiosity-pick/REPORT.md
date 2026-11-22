@@ -1,4 +1,4 @@
-# REPORT — 호기심 「철근 하나 없는 1,900년 된 돔은 왜 아직 서 있을까?」 (2026-11-22, 대본 검토 중)
+# REPORT — 호기심 「철근 하나 없는 1,900년 된 돔은 왜 아직 서 있을까?」 (2026-11-22, 최종 확인 대기)
 
 ## S0 착수 메모 (2026-11-22)
 - 채널이 '분야를 가리지 않는 호기심 이야기'로 바뀐 뒤 첫 편(channel.yaml, 2026-11-22). 직전 편: 의지력(통과·11-22 18:00 공개 예약), 흰 곰(올림·비공개).
@@ -13,4 +13,20 @@
 | S2 조사 | 완료 — `01_research/factsheet.md`(F1~F17), `audience.md`, topic_brief 를 B 로 갱신(훅: 주차장 녹물) |
 | S3·S4 의도·대본 | 완료 — `02_script/intent.md`, `script_v1.md`, 대본만 담은 `hybrid.json`(화면 미정) |
 | check --upto G4 | MUST 실패 2개는 예정된 것: G2 자료 화면(S5 전) · G4 사용자 대본 검토(D2 전) |
-| D2 대본 | **사용자 결정 기다림** — `inbox/decisions/20261122-20261122-curiosity-pick-D2.md` |
+| D2 대본 | 통과 — 사용자: "한번 영상으로 생성해주세요" (D3 샘플 없이 완성 영상까지) |
+| S5 장면표·원화 | 완료 — `02_script/shotlist.md`, 명세 `pantheon.json`(`make_spec.py`), 원화 GPT 7시트(Codex `$imagegen`, `art_orders.md`·`art_sheets.json`, Drive `영상/20261122-curiosity-pick/art/`) |
+| S7 렌더 | 완료 — Drive `영상/20261122-curiosity-pick/05_edit/pantheon_v1.mp4` (8:50, 35박자, edge-tts 초안 목소리, 배경음 없음). 렌더러는 의지력 편 것을 그대로(`render_full.py` + `pantheon_overlay.html`) |
+| S8 포장 | 제목 3·썸네일 A/B/C(`thumbnails.py`)·설명란 `05_edit/youtube.md` (yt-pack 은 hybrid 타임라인 전용이라 손으로) · 근거 검수표 `02_script/script_review.md` |
+| 자막 싱크 | sync-qa 통과 — 126/126줄, 어긋남 중앙값 0.26초·95% 0.43초, 화면−소리 -0.02초 (`05_edit/sync_qa.json`; ytflow 의 ffprobe 길이 해석 오류는 감싸서 우회 — 코드 미수정) |
+| D4 최종 | **사용자 결정 기다림** — `inbox/decisions/20261122-20261122-curiosity-pick-D4.md` |
+
+## 다시 만들기 (2026-11-22)
+```
+cd projects/20261122-curiosity-pick/02_script
+python beats.py script_v1.md beats.json && python make_spec.py
+BEATS=beats.json python full_voice.py <TTS 폴더>                       # 초안 목소리(edge-tts, 단어 시각)
+python cut_sheets.py "<YTFLOW_DRIVE>/영상/20261122-curiosity-pick/art" <조각 폴더>   # + photo_dome·photo_oculus.jpg (Commons 사진, Sonse CC BY 2.0)
+SPEC=pantheon.json OVERLAY=pantheon_overlay.html TIMELINE=pantheon_timeline.json python render_full.py <TTS 폴더> <조각 폴더> <작업 폴더> <출력.mp4> 6
+python thumbnails.py <조각 폴더> <출력 폴더>
+```
+- 막힌 것: Codex 기본 모델(gpt-6.2-sol)이 ChatGPT 계정에서 거부 → `-m gpt-6-sol` 로 그림. Codex 쪽 저장 명령이 막혀 그림은 `~/.codex/generated_images` 에서 옮김. Wikimedia 이미지 서버가 한동안 요청 제한(429) — 잠시 뒤 받음. `curiosity_build.py` 는 main 에 없음(흰 곰 작업 브랜치에만) → 의지력 편 렌더러를 씀.
