@@ -1,0 +1,232 @@
+{
+ "project": "20261123-curiosity-fashion20",
+ "manual_version": "115",
+ "checked": "2026-11-23T01:16:19",
+ "pass": false,
+ "rows": [
+  {
+   "gate": "G0",
+   "level": "MUST",
+   "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G0",
+   "level": "SHOULD",
+   "item": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
+   "ok": true,
+   "detail": "manual/graph.json"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "topic_brief.json 있음",
+   "ok": true,
+   "detail": "01_research/topic_brief.json (schemas/topic_brief.schema.json)"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "브랜드(ai/market/curiosity)",
+   "ok": true,
+   "detail": "curiosity"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망·시청자 질문",
+   "ok": true,
+   "detail": "촌스럽던 게 왜 몇십 년 뒤엔 다시 예뻐 보일까?"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "트리거·왜 지금",
+   "ok": true,
+   "detail": "이번 주 '다시 유행' 기사 — 할머니 레이스가 집 안으로(레이디경향 11-18), 70년대 페더드 헤어의 귀환(하퍼스 바자 코리아 11-19), 카프리·로우라이즈·젤리슈즈(헤럴드경제 11-20). D1 카드에 적었던 '광택 가구'·'20년 전 신발' 기사는 S2 에서 찾지 못해 뺌."
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망을 분명히 건드리고, 보여 줄 자료가 있다 (둘 중 하나라도 약하면 만들지 않음, 01 §3)",
+   "ok": true,
+   "detail": "강도 2 · 자료 3"
+  },
+  {
+   "gate": "G1",
+   "level": "참고",
+   "item": "욕망 점수 합계 (후보끼리 비교할 때 씀)",
+   "ok": true,
+   "detail": "합계 15 {'desire': 2, 'clarity': 3, 'timeliness': 2, 'demand': 2, 'visuals': 3, 'angle': 3}"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "수요 증거 1개 이상",
+   "ok": true,
+   "detail": "2"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "후보 3개 비교 기록",
+   "ok": false,
+   "detail": "0"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "우리만의 답(our_angle)",
+   "ok": true,
+   "detail": "엄마 옷장의 점퍼 한 벌을 끝까지 들고, '옷은 그대로였다'에서 출발해 숫자(20년·100년)를 차례로 의심한다. 다음 유행을 예측하지 않는다."
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "무엇이 띄우나(driver: 소재·각도·형식 + 근거)",
+   "ok": true,
+   "detail": "각도 · 누구나 아는 말(20년 주기)을 87년 전 표와 100년 물결로 뒤집고,"
+  },
+  {
+   "gate": "G2",
+   "level": "MUST",
+   "item": "자료 화면마다 credit·url",
+   "ok": false,
+   "detail": "0개, 빠짐 []"
+  },
+  {
+   "gate": "G2",
+   "level": "MUST",
+   "item": "금지 라이선스(SA·NC·ND) 없음",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G2",
+   "level": "참고",
+   "item": "자료 화면 소스 종류 (한 곳에서만 가져오면 화면이 단조로워짐)",
+   "ok": false,
+   "detail": "0종"
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "팩트시트 + 출처 링크 3개 이상",
+   "ok": true,
+   "detail": "링크 37개"
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "확인 상태 표시(✅/⚠️)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "'쓰지 않는 것' 목록",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "목적 분간: intent.md 에 '목적:' 정보 습득형/즐길거리형 + 세 질문 (11 §2-4)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "core_message·question·logic",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "근거 검수표: 모든 주장에 근거·비약·괴리·착각 확인 (02_script/script_review.md '근거 검수', 13 §4-1, 2026-11-22 사용자)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "대본 구성요소 대조표: 채널 대본 공식의 요소마다 있음/없음·어느 장 (02_script/script_review.md '구성요소', 13 §7)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "curiosity: 비유와 대비가 되는 숫자 — 사실은 이야기 속에서 (04 §0-6)",
+   "ok": false,
+   "detail": "{'compare_to': 0, 'analogies': 0, 'past_cases': 0, 'glossary': 0}"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "투자 권유 표현 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "레퍼런스 채널 이름 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "미완성 표시 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "과장 단어 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2, 2026-11-20 사용자: 필수 아님)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "여는 부분에 이 영상의 질문 하나 (시청자가 무엇을 따라가는지 알게)",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "참고",
+   "item": "말투(호기심): '~습니다/~니다' 끝맺음 몫·평균 문장 길이 (차분한 이야기 내레이터인지)",
+   "ok": false,
+   "detail": "0% · 0자"
+  }
+ ]
+}

@@ -1,8 +1,8 @@
 {
  "project": "20261122-curiosity-pick2",
- "manual_version": "113",
- "checked": "2026-11-22T23:04:12",
- "pass": true,
+ "manual_version": "115",
+ "checked": "2026-11-23T01:16:12",
+ "pass": false,
  "rows": [
   {
    "gate": "G0",
@@ -37,14 +37,14 @@
    "level": "MUST",
    "item": "욕망·시청자 질문",
    "ok": true,
-   "detail": "올림픽 마라톤에서 어떻게 차를 타고 온 선수가 1등으로 들어오고, 진짜 우승자는 쥐약 성분을 먹고 달렸을까?"
+   "detail": "감시는 매번 강해지는데 왜 커닝은 계속 이길까?"
   },
   {
    "gate": "G1",
    "level": "MUST",
    "item": "트리거·왜 지금",
    "ok": true,
-   "detail": "2026-11-22 정기 작업: 호기심 채널 일 1편. 판테온 편이 비공개로 끝남(사용자: \"주제가 애매하고 솔직히 사람들이 좋아할까? 하면 잘 모르겠네요 이야기를 풀어나가는게 재밌냐 하면 그거도 잘 모르겠구요\") → 후보 5개를 ① 제목만으로 끌리는가 ② 사람이 겪은 이야기인가 ③ 지우의 일상과 이어지나 로 먼저 따짐."
+   "detail": "세무사 시험 수석 합격자의 AI 기기 부정행위(11-12 의혹, 11-15 공단 고소) → 11-17 수능 비상 점검회의 → 11-19 수능(AI 스마트안경 금지)"
   },
   {
    "gate": "G1",
@@ -79,14 +79,154 @@
    "level": "SHOULD",
    "item": "우리만의 답(our_angle)",
    "ok": true,
-   "detail": "기묘한 일화 모음으로 끝내지 않고, '왜 물을 주지 않았나'라는 한 질문으로 묶어 오늘의 급수대·규정으로 돌아온다. (D1 뒤 S2 에서 확정)"
+   "detail": "수법 일화 모음이 아니라, 1705년 땅속 대나무 통·2004년 휴대전화·2026년을 '먼저 뚫리고 그다음에 막는다'는 한 순서로 묶고, 세 사건이 모두 시험 밖에서 드러났다는 두 번째 공통점으로 닫는다."
   },
   {
    "gate": "G1",
    "level": "SHOULD",
    "item": "무엇이 띄우나(driver: 소재·각도·형식 + 근거)",
    "ok": true,
-   "detail": "소재 · 제목 한 줄('1등이 차를 타고 왔다')로 끌리고, 사람들의 사연과 반전"
+   "detail": "각도 · 이번 주 화제(AI 커닝)를 사건 해설이 아니라 320년 전 실록의 장면"
+  },
+  {
+   "gate": "G2",
+   "level": "MUST",
+   "item": "자료 화면마다 credit·url",
+   "ok": false,
+   "detail": "0개, 빠짐 []"
+  },
+  {
+   "gate": "G2",
+   "level": "MUST",
+   "item": "금지 라이선스(SA·NC·ND) 없음",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G2",
+   "level": "참고",
+   "item": "자료 화면 소스 종류 (한 곳에서만 가져오면 화면이 단조로워짐)",
+   "ok": false,
+   "detail": "0종"
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "팩트시트 + 출처 링크 3개 이상",
+   "ok": true,
+   "detail": "링크 10개"
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "확인 상태 표시(✅/⚠️)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "'쓰지 않는 것' 목록",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "목적 분간: intent.md 에 '목적:' 정보 습득형/즐길거리형 + 세 질문 (11 §2-4)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "core_message·question·logic",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "근거 검수표: 모든 주장에 근거·비약·괴리·착각 확인 (02_script/script_review.md '근거 검수', 13 §4-1, 2026-11-22 사용자)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "대본 구성요소 대조표: 채널 대본 공식의 요소마다 있음/없음·어느 장 (02_script/script_review.md '구성요소', 13 §7)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "curiosity: 비유와 대비가 되는 숫자 — 사실은 이야기 속에서 (04 §0-6)",
+   "ok": false,
+   "detail": "{'compare_to': 0, 'analogies': 0, 'past_cases': 0, 'glossary': 0}"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "투자 권유 표현 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "레퍼런스 채널 이름 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "미완성 표시 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "과장 단어 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2, 2026-11-20 사용자: 필수 아님)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "여는 부분에 이 영상의 질문 하나 (시청자가 무엇을 따라가는지 알게)",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "참고",
+   "item": "말투(호기심): '~습니다/~니다' 끝맺음 몫·평균 문장 길이 (차분한 이야기 내레이터인지)",
+   "ok": false,
+   "detail": "0% · 0자"
   }
  ]
 }
