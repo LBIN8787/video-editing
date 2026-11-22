@@ -26,6 +26,8 @@ def run(cmd, cwd=None):
 
 
 def install(t: dict, force: bool) -> None:
+    if t["kind"] == "skill":  # 본체 없이 skill 폴더만 (저장소가 크고 skill 이 곧 도구일 때)
+        return install_skill_only(t, force)
     dst = TOOLS / t["name"]
     if dst.exists() and not force:
         print(f"= {t['name']} (설치돼 있음)")
@@ -61,6 +63,58 @@ def install(t: dict, force: bool) -> None:
                 shutil.copytree(src, out, ignore=shutil.ignore_patterns(".git", "tests", "evals", "node_modules"))
         print(f"  skill → {Path(rel).name if rel != '.' else t['name']}")
     if tmp:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
+def set_description(skill_md: Path, desc: str) -> None:
+    """SKILL.md 머리(frontmatter)의 description 만 바꿈 (여러 줄 description 도 통째로)."""
+    import re
+    text = skill_md.read_text(encoding="utf-8")
+    head, sep, body = text[4:].partition("\n---")
+    lines, out, skip = head.split("\n"), [], False
+    for ln in lines:
+        if skip and (ln.startswith((" ", "\t")) or not ln.strip()):
+            continue
+        skip = False
+        if re.match(r"^description\s*:", ln):
+            out.append("description: " + json.dumps(desc, ensure_ascii=False))
+            skip = True
+            continue
+        out.append(ln)
+    skill_md.write_text("---\n" + "\n".join(out) + sep + body, encoding="utf-8")
+
+
+def install_skill_only(t: dict, force: bool) -> None:
+    """고정 태그를 임시로 얕게 받아 skill 폴더의 include 만 복사 (tools/ 에 본체를 두지 않음)."""
+    outs = [sd / Path(rel).name for rel in t["skills"] for sd in SKILL_DIRS]
+    if all(o.exists() for o in outs) and not force:
+        print(f"= {t['name']} (설치돼 있음)")
+        return
+    print(f"+ {t['name']} ({t.get('ref') or t['commit']})")
+    tmp = Path(tempfile.mkdtemp())
+    try:
+        if t.get("ref"):  # 태그
+            run(["git", "clone", "-q", "--depth", "1", "--branch", t["ref"], t["repo"], str(tmp / "r")])
+        else:  # 태그 없는 저장소는 커밋으로
+            run(["git", "clone", "-q", "--filter=blob:none", "--no-checkout", t["repo"], str(tmp / "r")])
+            run(["git", "checkout", "-q", t["commit"]], cwd=tmp / "r")
+        got = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=tmp / "r", capture_output=True, text=True).stdout.strip()
+        if t.get("commit") and not t["commit"].startswith(got) and not got.startswith(t["commit"]):
+            raise SystemExit(f"  ! {t['name']}: 태그 {t['ref']} 가 {got} 를 가리킴 (고정값 {t['commit']}) — 다시 검토하세요")
+        for rel in t["skills"]:
+            src = tmp / "r" / rel
+            for sd in SKILL_DIRS:
+                out = sd / Path(rel).name
+                if out.exists():
+                    shutil.rmtree(out)
+                out.mkdir(parents=True)
+                for name in t.get("include") or [p.name for p in src.iterdir()]:
+                    (shutil.copytree if (src / name).is_dir() else shutil.copy)(src / name, out / name)
+                desc = (t.get("description_override") or {}).get(Path(rel).name)
+                if desc:  # 호출 조건이 너무 넓은 skill 은 설명을 좁혀 우리 skill 과 겹치지 않게
+                    set_description(out / "SKILL.md", desc)
+            print(f"  skill → {Path(rel).name}")
+    finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
 
