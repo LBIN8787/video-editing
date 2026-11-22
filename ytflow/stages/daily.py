@@ -145,6 +145,8 @@ def market(day: str, cache: Path) -> dict:
     for q in w.get("tech") or []:
         for n in _news(q["q"], q.get("lang", "en"))[:4]:
             out["tech_news"].append({"q": q["q"], "title": n["title"], "source": n["source"], "url": n["url"], "published": n["published"]})
+    # 영상 신호 점검 (2026-11-22 사용자: "각 영상들의 주목해야 할 체크리스트들 이걸 실제로 주시해주세요") — config/signal_watch.yaml
+    out["signals"] = _signals(day, cache)
     # 시장 전체 뉴스에서 되풀이되는 고유 낱말 = 그날의 주제 (예: 코어위브 실적, 엔비디아 CEO) — 관심 종목 밖의 이야기도 잡기
     stop = {"뉴욕증시", "증시", "마감", "상승", "하락", "코스피", "코스닥", "나스닥", "다우", "일제히", "속보", "오늘", "종합", "리포트",
             "브리핑", "목표가", "투자증권", "증권", "글로벌마켓", "Stock", "Market", "Today", "News", "and", "the", "for", "stock", "market",
@@ -180,6 +182,38 @@ def market(day: str, cache: Path) -> dict:
     out["format"] = ("브리핑 + 따로 심층 후보: " + cand[0]["name"] + " (당사자 원본 발언 — 인터뷰·기자회견·어닝콜 — 을 구할 수 있을 때만, 브리핑 올린 뒤 12:00·18:00)") if cand \
         else "브리핑만 (심층 신호 없음 — ⑤⑥·SAVE·뉴스레터에서 한 번 더 보고, 없으면 브리핑만)"
     return out
+
+
+
+def _signals(day: str, cache: Path) -> list[dict]:
+    """영상이 말한 '볼 것'마다 지금 값·새 소식·날짜를 모은다 (config/signal_watch.yaml). 소식은 단서 — 1차 출처로 확인."""
+    try:
+        import yaml as _yaml
+        w = _yaml.safe_load((config.ROOT / "config" / "signal_watch.yaml").read_text(encoding="utf-8")) or {}
+    except Exception:  # noqa: BLE001
+        return []
+    from .marketdata import fetch
+    vids = w.get("videos") or {}
+    rows = []
+    for s in w.get("signals") or []:
+        if s.get("status") == "done":
+            continue
+        r = {"id": s["id"], "what": s["what"], "baseline": s.get("baseline", ""), "means": s.get("means", ""),
+             "from": [vids.get(v, {}).get("title", v) for v in s.get("from") or []], "due": s.get("due", ""), "news": [], "px": None}
+        if s.get("ticker"):
+            try:
+                r["px"] = _pct(fetch(s["ticker"], "1mo", cache), day, s["ticker"])
+            except Exception:  # noqa: BLE001
+                pass
+        if s.get("q"):
+            for n in _news(s["q"], s.get("lang", "en"), hours=72)[:3]:
+                r["news"].append({"title": n["title"], "source": n["source"], "url": n["url"]})
+        d = str(s.get("due", ""))[:10]
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}", d):
+            gap = (datetime.strptime(d, "%Y-%m-%d") - datetime.strptime(day, "%Y-%m-%d")).days
+            r["due_flag"] = "지남 — 결과를 적고 done" if gap < 0 else ("오늘·내일" if gap <= 1 else (f"{gap}일 남음" if gap <= 7 else ""))
+        rows.append(r)
+    return rows
 
 
 def issues(day: str) -> dict:
@@ -265,6 +299,13 @@ def to_md(b: dict) -> str:
     if b.get("tech_news"):   # manual/09 §2-2 기술 분석·미래 전망
         L += ["", "## ⑥-2 기술 소식 (기술 분석·미래 전망 후보, manual/09 §2-2)"]
         L += [f"- [{n['q']}] {n['title']} — {n['source']}" for n in b["tech_news"][:16]]
+    if b.get("signals"):   # 2026-11-22 사용자: 영상의 '볼 것'을 실제로 주시
+        L += ["", "## ⑥-3 영상 신호 점검 (config/signal_watch.yaml) — 움직였으면 1차 출처로 확인 → inbox/signals/log.md 에 한 줄 → 소재·후속·정정 후보"]
+        for s in b["signals"]:
+            flag = f" · ⏰ {s['due']} ({s['due_flag']})" if s.get("due_flag") else ""
+            px = f" · {s['px']['pct']:+.2f}% ({s['px']['date']})" if s.get("px") else ""
+            L += [f"- **{s['what']}**{px}{flag}", f"  - 지금: {s['baseline']}", f"  - 움직이면: {s['means']}"]
+            L += [f"  - 소식: {n['title']} — {n['source']}" for n in s["news"]] or ["  - 소식: (새 소식 없음)"]
     return "\n".join(L) + "\n"
 
 
