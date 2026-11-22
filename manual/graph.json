@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-22T16:26:12",
- "source_hash": "ed14a58fb0e2",
+ "generated": "2026-11-22T18:10:36",
+ "source_hash": "82fe9e681bc0",
  "audit": {
   "date": "2026-11-21T13:56",
   "counts": {
@@ -1007,10 +1007,10 @@
   ]
  },
  "stats": {
-  "manual_version": 105,
-  "versions": 105,
-  "reviews": 47,
-  "rejects": 28,
+  "manual_version": 106,
+  "versions": 106,
+  "reviews": 48,
+  "rejects": 29,
   "passes": 19,
   "pending": 0,
   "rules": 57,
@@ -1018,21 +1018,21 @@
   "sections": 203,
   "must": 30,
   "auto": 41,
-  "intents": 287,
+  "intents": 289,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 3,
   "code": 83,
   "terms": 140,
-  "bans": 201,
-  "feedback": 211,
+  "bans": 203,
+  "feedback": 212,
   "topics": 4,
   "episodes": 43,
   "main_situations": 17,
   "tiers": {
    "principle": 52,
-   "standard": 172,
-   "style": 27,
+   "standard": 173,
+   "style": 28,
    "trial": 7
   },
   "overfit": 14,
@@ -1157,13 +1157,13 @@
      "text": "- 2026-11-11 · v11 기각 — “화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌”"
     },
     {
-     "section": "sec:feedback§h343",
+     "section": "sec:feedback§h345",
      "theme": "sound",
      "pol": "-",
      "text": "- 2026-11-11 · v11 기각 — “화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌”"
     },
     {
-     "section": "sec:feedback§h373",
+     "section": "sec:feedback§h375",
      "theme": "sound",
      "pol": "-",
      "text": "- 2026-11-11 · v11 기각 — “화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌”"
@@ -1830,6 +1830,27 @@
   },
   {
    "section": "sec:04§0-7",
+   "text": "설명 — 숫자·비교·순서·원리·관계 | 이야기 장면 안에서 — 그 삽화 위에 얹은 움직임(사물·선·인물의 변화)으로 보여 화면이 이야기에서 벗어나지 않게. 실험은 순서대로 한 칸씩(칸 만화). 그래프·표처럼 연구 보고서 느낌의 화면은 기본이 아님 (2026-11-21 사용자: 이야기에 몰입되는 연출 위주). 원리·구조 설명도 같은 화풍의 삽화로 — 인물이 그린 설계 스케치·단면 그림·직접 해 보는 장면에 화살표·짧은 이름표를 얹어 '어떤 느낌으로 설계했는지'만 ",
+   "themes": [
+    "motion",
+    "background",
+    "depth"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:ede61393",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": true,
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
+  },
+  {
+   "section": "sec:04§0-7",
    "text": "모션그래픽이 넘치면 — 글자가 아래 자막과 같은 문장을 반복하거나(unslop 기각), 글씨·도형만 이어져 지루해진다(사우디 v8 기각). 말이 설명하는 관계를 움직임으로 보여 줄 때만 쓰고, 글자를 띄우는 용도로 쓰지 않는다.",
    "themes": [
     "motion",
@@ -1860,6 +1881,23 @@
    "why": "제작 방법·품질 기준",
    "overfit": false,
    "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:04§0-7",
+   "text": "기준 화풍은 채널의 이전 영상 화풍(잼 편 tasting.png 의 부드러운 셀 애니메이션)이고, 실사·반실사 쪽으로 옮겨 가지 않는다 (판테온 v3 D4 기각, 2026-11-22 사용자: \"지우 얼굴이 점점 실사풍으로 되어가는데 저는 이걸 고쳐달란거였어요 분명 처음엔 이런 화풍이었잖아요\"). 왜: '그림체 통일'은 처음 화풍으로 맞추라는 뜻이었는데, v3 은 애니 톤을 원인으로 보고 화풍 참조를 빼서 얼굴이 점점 실사풍이 됐다. 어떻게: 원화 생성마다 화풍 ",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:c6cc20e0",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
    "tier": "standard",
    "tier_by": "자동 추정",
    "tier_note": "",
@@ -4592,7 +4630,7 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "section": "sec:feedback§h326",
+   "section": "sec:feedback§h327",
    "text": "2026-11-19 · 방향·기준 요청 — “대본 단계에 \"호기심 대본은 설명·지식 문장 30% 이하\"라는 기준 이런 기준은 또 빼주세요 너무 과적합입니다. / \"설명은 이야기 속에 엮는다\"는 원리 이런식으로 원리주의적으로 가지 방법 자체를 고정하지 말아주세요”",
    "themes": [
     "script",
@@ -4612,7 +4650,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h373",
+   "section": "sec:feedback§h375",
    "text": "2026-11-09 · v3 기각 — “강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)”",
    "themes": [
     "emphasis",
@@ -5160,7 +5198,7 @@
    "key": "04",
    "file": "manual/04-curiosity.md",
    "label": "04. curiosity — 몰랐던 이유 (심리학과 현대인의 일상)",
-   "lines": 262,
+   "lines": 263,
    "versions": [
     1,
     32,
@@ -5196,9 +5234,10 @@
     61,
     73,
     78,
-    79
+    79,
+    105
    ],
-   "last_version": 79
+   "last_version": 105
   },
   {
    "id": "doc:06",
@@ -5316,9 +5355,10 @@
     98,
     101,
     102,
-    103
+    103,
+    105
    ],
-   "last_version": 103
+   "last_version": 105
   },
   {
    "id": "doc:10",
@@ -5403,7 +5443,7 @@
    "key": "feedback",
    "file": "manual/feedback-by-repo.md",
    "label": "내 피드백 — 레포별 (자동 생성: `python -m ytflow manual-graph`)",
-   "lines": 384,
+   "lines": 386,
    "versions": [
     83,
     84,
@@ -5426,9 +5466,10 @@
     101,
     102,
     103,
-    104
+    104,
+    105
    ],
-   "last_version": 104
+   "last_version": 105
   },
   {
    "id": "doc:README",
@@ -6092,7 +6133,7 @@
    "label": "화면의 네 자리 — 이야기는 삽화, 설명은 모션그래픽, 증거는 실제 자료, 마디는 검은 화면",
    "title": "0-7. 화면의 네 자리 — 이야기는 삽화, 설명은 모션그래픽, 증거는 실제 자료, 마디는 검은 화면 (v73, 2026-11-20 사용자 결정 · 모든 채널 공통 규칙은 [12 §0-1](12-visual-storytelling.md))",
    "line": 147,
-   "end": 175,
+   "end": 176,
    "tag_version": 73,
    "versions": [
     73
@@ -6111,8 +6152,8 @@
    "level": 3,
    "label": "대본은 이렇게 — 의지력 편 v16 (2026-11-21 사용자: \"이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요\")",
    "title": "0-8. 대본은 이렇게 — 의지력 편 v16 (2026-11-21 사용자: \"이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요\")",
-   "line": 176,
-   "end": 198,
+   "line": 177,
+   "end": 199,
    "tag_version": null,
    "versions": [
     60,
@@ -6129,8 +6170,8 @@
    "level": 2,
    "label": "호기심을 '만드는' 주제의 조건 (모두 충족)",
    "title": "1. 호기심을 '만드는' 주제의 조건 (모두 충족)",
-   "line": 199,
-   "end": 211,
+   "line": 200,
+   "end": 212,
    "tag_version": null,
    "versions": [
     53
@@ -6145,8 +6186,8 @@
    "level": 2,
    "label": "주제 찾기",
    "title": "2. 주제 찾기",
-   "line": 212,
-   "end": 230,
+   "line": 213,
+   "end": 231,
    "tag_version": null,
    "versions": [
     65
@@ -6161,8 +6202,8 @@
    "level": 2,
    "label": "깊은 조사 — 다섯 층 (자세히는 `prompts/script_knowledge.md` A)",
    "title": "3. 깊은 조사 — 다섯 층 (자세히는 `prompts/script_knowledge.md` A)",
-   "line": 231,
-   "end": 233,
+   "line": 232,
+   "end": 234,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6175,8 +6216,8 @@
    "level": 2,
    "label": "대본 공식",
    "title": "4. 대본 공식",
-   "line": 234,
-   "end": 247,
+   "line": 235,
+   "end": 248,
    "tag_version": null,
    "versions": [
     34
@@ -6197,8 +6238,8 @@
    "level": 2,
    "label": "소스",
    "title": "5. 소스",
-   "line": 248,
-   "end": 250,
+   "line": 249,
+   "end": 251,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6211,8 +6252,8 @@
    "level": 2,
    "label": "포장",
    "title": "6. 포장",
-   "line": 251,
-   "end": 254,
+   "line": 252,
+   "end": 255,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6225,8 +6266,8 @@
    "level": 2,
    "label": "이 채널만의 검사",
    "title": "7. 이 채널만의 검사",
-   "line": 255,
-   "end": 262,
+   "line": 256,
+   "end": 263,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8803,7 +8844,7 @@
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
    "line": 241,
-   "end": 325,
+   "end": 326,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -8814,15 +8855,15 @@
    ]
   },
   {
-   "id": "sec:feedback§h326",
+   "id": "sec:feedback§h327",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h326",
+   "num": "h327",
    "level": 3,
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
-   "line": 326,
-   "end": 340,
+   "line": 327,
+   "end": 342,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -8831,29 +8872,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h341",
+   "id": "sec:feedback§h343",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h341",
+   "num": "h343",
    "level": 2,
    "label": "시사 — `topics/issues`",
    "title": "시사 — `topics/issues`",
-   "line": 341,
-   "end": 342,
+   "line": 343,
+   "end": 344,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h343",
+   "id": "sec:feedback§h345",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h343",
+   "num": "h345",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 343,
-   "end": 370,
+   "line": 345,
+   "end": 372,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -8863,29 +8904,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h371",
+   "id": "sec:feedback§h373",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h371",
+   "num": "h373",
    "level": 2,
    "label": "AI — `topics/ai`",
    "title": "AI — `topics/ai`",
-   "line": 371,
-   "end": 372,
+   "line": 373,
+   "end": 374,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h373",
+   "id": "sec:feedback§h375",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h373",
+   "num": "h375",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 373,
-   "end": 384,
+   "line": 375,
+   "end": 386,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -15093,6 +15134,69 @@
    "label": "v105",
    "summary": "썸네일 §7-1 9 젊은 층 트렌디 변형(layout: trend) · 오른쪽 위 출처 상자 기본 끔(설명란으로)",
    "applied": [],
+   "themes": [],
+   "commit": {
+    "sha": "494efbf303eae78d9239337995658b2769b751bc",
+    "subject": "매뉴얼 v105: 오른쪽 위 출처 상자 기본 끔(설명란으로) · 젊은 층 트렌디 썸네일(layout: trend) · 메모리 후속·엔비디아 순환금융 검토 통과 기록",
+    "date": "2026-11-22",
+    "other_files": [
+     "projects/20261122-market-deep-memory-chicken/01_research/audience.md",
+     "projects/20261122-market-deep-memory-chicken/01_research/daily_brief.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/daily_brief.md",
+     "projects/20261122-market-deep-memory-chicken/01_research/factsheet.md",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/000660.KS_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/000660.KS_1mo.meta.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/005380.KS_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/005380.KS_1mo.meta.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/005930.KS_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/005930.KS_1mo.meta.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/012450.KS_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/012450.KS_1mo.meta.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/035420.KS_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/035420.KS_1mo.meta.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/035720.KS_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/035720.KS_1mo.meta.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/068270.KS_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/068270.KS_1mo.meta.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/105560.KS_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/105560.KS_1mo.meta.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/207940.KS_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/207940.KS_1mo.meta.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/373220.KS_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/373220.KS_1mo.meta.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/AAPL_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/AAPL_1mo.meta.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/AMD_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/AMD_1mo.meta.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/AMZN_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/AMZN_1mo.meta.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/AVGO_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/AVGO_1mo.meta.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/BTC-USD_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/BTC-USD_1mo.meta.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/CL=F_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/CL=F_1mo.meta.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/GC=F_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/GC=F_1mo.meta.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/GOOGL_1mo.json",
+     "projects/20261122-market-deep-memory-chicken/01_research/prices/GOOGL_1mo.meta.json"
+    ]
+   }
+  },
+  {
+   "id": "ver:106",
+   "kind": "version",
+   "v": 106,
+   "date": "2026-11-22",
+   "label": "v106",
+   "summary": "호기심: 설명도 같은 화풍 삽화로 + 기준 화풍은 이전 영상(잼 편) 셀 애니, 실사풍으로 번지지 않게 (판테온 v3 D4 기각)",
+   "applied": [
+    {
+     "date": "2026-11-22",
+     "project": "20261122-curiosity-pick",
+     "reason": "지우 얼굴이 너무 매번 달라져요 화풍 자체를 이전영상들 화풍처럼 해주세요 지우 얼굴이 점점 실사풍으로 되어가는데 저는 이걸 고쳐달란거였어요 분명 처음엔 이런 화풍이었잖아요"
+    }
+   ],
    "themes": []
   },
   {
@@ -16149,6 +16253,29 @@
    "why": "제작 방법·품질 기준",
    "overfit": false,
    "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "rev:48",
+   "kind": "review",
+   "date": "2026-11-22",
+   "project": "20261122-curiosity-pick",
+   "manual_version": 105,
+   "result": "reject",
+   "reason": "지우 얼굴이 너무 매번 달라져요 화풍 자체를 이전영상들 화풍처럼 해주세요 지우 얼굴이 점점 실사풍으로 되어가는데 저는 이걸 고쳐달란거였어요 분명 처음엔 이런 화풍이었잖아요",
+   "themes": [],
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "status": "applied",
+   "tier_key": "rev:d7874fac",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
    "tier": "standard",
    "tier_by": "자동 추정",
    "tier_note": "",
@@ -28104,6 +28231,104 @@
    "annotated": false
   },
   {
+   "id": "intent:b696a409",
+   "kind": "intent",
+   "quote": "중간중간 인포그래픽 설명도 삽화로 가능할까요? / 기본적으로 어떤 느낌으로 설계했는지 보여주는 식으로 해주세요 이해만 되면 됩니다.",
+   "label": "중간중간 인포그래픽 설명도 삽화로 가능할까요? / 기본적으로 어떤 느낌으로 설계했는지 보여주는 식으로 해주세",
+   "versions": [
+    73
+   ],
+   "date": "2026-11-21",
+   "sources": [
+    {
+     "ref": "fb:212",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:04§0-7",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "기본적으로 어떤 느낌으로 설계했는지 보여주는 식으로 해주세요 이해만 되면 됩니다.",
+    "중간중간 인포그래픽 설명도 삽화로 가능할까요?"
+   ],
+   "member_ids": [
+    "intent:b696a409",
+    "intent:1c3bc660",
+    "intent:4deebaed"
+   ],
+   "themes": [],
+   "ann_key": "intent:b696a409",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:73",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0-7",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0-8",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:12§0-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:05",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:10",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:11",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:README",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/backdrop.py:139",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/identity.py:74",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:bc28e516",
    "kind": "intent",
    "quote": "전체적으로 내가 어떤 주제의 영상에서 말한건지 아닌지 즉 레포별로 좀 구분해줘 보면 뒤죽박죽같아서 이를 검토해줘",
@@ -30223,6 +30448,73 @@
    "readings": [
     {
      "ref": "sec:09§3-6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:d7874fac",
+   "kind": "intent",
+   "quote": "지우 얼굴이 너무 매번 달라져요 화풍 자체를 이전영상들 화풍처럼 해주세요 지우 얼굴이 점점 실사풍으로 되어가는데 저는 이걸 고쳐달란거였어요 분명 처음엔 이런 화풍이었잖아요",
+   "label": "지우 얼굴이 너무 매번 달라져요 화풍 자체를 이전영상들 화풍처럼 해주세요 지우 얼굴이 점점 실사풍으로 되어가",
+   "versions": [
+    3,
+    106
+   ],
+   "date": "2026-11-22",
+   "sources": [
+    {
+     "ref": "rev:48",
+     "kind": "review"
+    },
+    {
+     "ref": "sec:04§0-7",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "지우 얼굴이 점점 실사풍으로 되어가는데 저는 이걸 고쳐달란거였어요 분명 처음엔 이런 화풍이었잖아요"
+   ],
+   "member_ids": [
+    "intent:d7874fac",
+    "intent:2c4aa2fe"
+   ],
+   "themes": [],
+   "ann_key": "intent:d7874fac",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:3",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/ytpublish.py:1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "ver:106",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0-7",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -33819,7 +34111,7 @@
     "sec:10§1",
     "sec:10§h9",
     "sec:10§3",
-    "sec:feedback§h326",
+    "sec:feedback§h327",
     "ver:21",
     "ver:34",
     "code:ytflow/stages/hybrid.py:1671",
@@ -36627,8 +36919,8 @@
     "sec:10§h136",
     "sec:feedback§h136",
     "sec:feedback§h241",
-    "sec:feedback§h343",
-    "sec:feedback§h373",
+    "sec:feedback§h345",
+    "sec:feedback§h375",
     "ver:10",
     "ver:30",
     "ver:31",
@@ -37053,8 +37345,8 @@
     "sec:12§0-1",
     "sec:feedback§h136",
     "sec:feedback§h241",
-    "sec:feedback§h343",
-    "sec:feedback§h373",
+    "sec:feedback§h345",
+    "sec:feedback§h375",
     "ver:10",
     "ver:12",
     "rev:11",
@@ -43405,6 +43697,34 @@
    "tier_note": "",
    "tier_fixed": true,
    "tier_label": "스타일 기본값"
+  },
+  {
+   "id": "fb:212",
+   "kind": "feedback",
+   "date": "2026-11-22",
+   "quote": "중간중간 인포그래픽 설명도 삽화로 가능할까요? / 기본적으로 어떤 느낌으로 설계했는지 보여주는 식으로 해주세요 이해만 되면 됩니다.",
+   "label": "중간중간 인포그래픽 설명도 삽화로 가능할까요? / 기본적으로 어떤 느낌으로 설계했는지 보여주는 식으로 해주세",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "manual/04 §0-7 설명 행 (제안함 20261122-162427 반영)",
+   "pending": false,
+   "themes": [],
+   "scope": "standard",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:b696a409",
+   "tier_key": "fb:b696a409",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
   },
   {
    "id": "layer:main",
@@ -69520,12 +69840,7 @@
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h326",
-   "kind": "contains"
-  },
-  {
-   "s": "doc:feedback",
-   "t": "sec:feedback§h341",
+   "t": "sec:feedback§h327",
    "kind": "contains"
   },
   {
@@ -69535,12 +69850,17 @@
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h371",
+   "t": "sec:feedback§h345",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
    "t": "sec:feedback§h373",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:feedback",
+   "t": "sec:feedback§h375",
    "kind": "contains"
   },
   {
@@ -72841,6 +73161,30 @@
    ]
   },
   {
+   "s": "ver:105",
+   "t": "doc:05",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:105",
+   "t": "doc:09",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:105",
+   "t": "doc:feedback",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -73102,6 +73446,12 @@
    "s": "rev:47",
    "t": "ver:104",
    "kind": "approved_in"
+  },
+  {
+   "s": "rev:48",
+   "t": "ver:106",
+   "kind": "applied_in",
+   "how": "changelog"
   },
   {
    "s": "rev:1",
@@ -75549,6 +75899,26 @@
    "kind": "about"
   },
   {
+   "s": "intent:d7874fac",
+   "t": "ver:3",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:d7874fac",
+   "t": "ver:106",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:d7874fac",
+   "t": "rev:48",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:d7874fac",
+   "t": "sec:04§0-7",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:cf66ec3e",
    "t": "fb:140",
    "kind": "quoted_in"
@@ -76027,6 +76397,21 @@
    "s": "intent:e931cbe6",
    "t": "theme:variety",
    "kind": "about"
+  },
+  {
+   "s": "intent:b696a409",
+   "t": "ver:73",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:b696a409",
+   "t": "fb:212",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:b696a409",
+   "t": "sec:04§0-7",
+   "kind": "quoted_in"
   },
   {
    "s": "intent:48be8e8d",
@@ -82726,6 +83111,11 @@
   {
    "s": "fb:211",
    "t": "intent:e3d67d27",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:212",
+   "t": "intent:b696a409",
    "kind": "quoted_as"
   }
  ]
