@@ -38,7 +38,7 @@
 표시: `marks: [{type: circle|arrow|x|stamp, ...}]`. 변형마다 `why` 2~3줄.
 
 ### 시장 채널 (2026-11-19)
-`manual/09-market-daily.md` §7-1 — **핫 키워드 먼저**(팩트시트 `## 핫 키워드`), 단정 한 마디 + 숫자, 기본은 검은 톤 사진 꽉 채움(`photo` `full`), `punch`·`versus theme: dark` 는 변형. 근거 `docs/49-thumbnail-research.md`.
+`manual/09-market-daily.md` §7-1 — **핫 키워드 먼저**(팩트시트 `## 핫 키워드`), 단정 한 마디 + 숫자, 기본은 검은 톤 사진 꽉 채움(`photo` `full`), `punch`·`chart`·`person`·`trend`(시네마틱 실사풍) 는 변형, `versus theme: dark` 는 쓰지 않음. **통합 기준: `manual/14-packaging.md`.** 근거 `docs/49-thumbnail-research.md`.
 **클릭을 부르는 말 (2026-11-21, manual/09 §7-1 ①-1):** 큰 글씨는 그날 실제로 쓰인 공포·민감 키워드(검은 금요일·블랙 ○○·폭락·쇼크·경고)와 금리·연준, 사진은 그날 이야기의 핫한 인물·기업. 팩트시트·매체 제목에 없는 말은 쓰지 않음.
 **지수 띠 (2026-11-21, manual/09 §7-1 ⑧):** 시장 채널은 매번 `package.ticker` 에 S&P 500·나스닥·그날 가장 많이 움직인 섹터 지수(팩트시트 ✅ 숫자) — 아래 왼쪽 작은 띠로 모든 변형에 들어감.
 **유명 인물 (2026-11-20, docs/55):** 사건의 당사자(CEO·창업자·투자 대가·중앙은행 수장)가 있으면 A 는 `layout: person` —

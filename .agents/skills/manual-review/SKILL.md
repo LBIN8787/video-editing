@@ -32,7 +32,7 @@ description: 매뉴얼 정기 검토(매일 밤 자동 실행·사람이 "매뉴
    | 모순 점검 차례 (sweep) | 위 2-1 |
    고친 것마다 한 줄 요약을 모아 둔다.
 3-1. **제안함** (`proposal` 항목, `proposals/manual/`): 다른 에이전트가 남긴 것. 영상 검토(review)·사용자 원문 피드백(feedback)은 그 명령으로 그대로 옮기고(원문 유지), 규칙을 바꾸자는 제안은 ask 로 사용자에게 묻는다. 반영한 제안 파일은 `status: done` 으로.
-3-1. **모델 역할 점검** (2026-11-22 사용자: "모델이 새로 나오면 이도 재 설정하고"): 이 세션의 환경 정보(시스템 프롬프트의 최신 모델 목록)에 `config/models.yaml` 보다 새 모델(같은 계열의 더 높은 버전)이 보이면 ask 로 남긴다 — 바꿀지는 사용자. 사용자가 바꾸라고 하면 `models.yaml` 의 model·cli·checked 와 `.claude/agents/*.md` 의 model 을 함께 고친다 (manual/11 §1-1).
+3-1. **모델 티어 점검** (2026-11-22 사용자: "모델이 새로 나오면 이도 재 설정하고"): 이 세션의 환경 정보(시스템 프롬프트의 최신 모델 목록)에 `config/models.yaml` 보다 새 모델(같은 계열의 더 높은 버전)이 보이면 ask 로 남긴다 — 바꿀지는 사용자. 사용자가 바꾸라고 하면 `models.yaml` 의 `providers`(티어별 model·cli)·`checked` 와 `.claude/agents/*.md` 의 model 을 함께 고친다 — 티어(judge·complex·simple)와 tasks 는 그대로 (manual/11 §1-1).
 4. **ask 항목은 고치지 않는다** (모순 open·충돌·과적합·반영 대기·층 미정·어긋난 해석). 규칙의 뜻·층·MUST 여부는 사용자가 정한다 (manual/README §3-1). 같은 질문이 이미 며칠째 남아 있으면 알림에 '며칠째'만 적고 새로 길게 쓰지 않는다.
 5. 마무리:
    - `python -m ytflow manual-audit --note "정기 검토" --fixed "고친 것 한 줄" --fixed "…"` — 다시 재서 해결 여부를 기록하고, 고친 것을 보고서·그래프('지난 검토에서 고친 것')에 남긴다.

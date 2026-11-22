@@ -6,6 +6,7 @@
 | 순서 | 파일 | 얻는 것 |
 |---|---|---|
 | 0 | [`13-script.md`](13-script.md) | **대본이 언제나 1순위** (v82, 2026-11-21 사용자) — 쓰기 전 여섯 가지, 전진하는 대본, 사실과 해석 대조표, 유형별 중심축, D2 반복. 연출은 대본이 확정된 뒤 |
+| S9 | [`14-packaging.md`](14-packaging.md) | **제목·썸네일·태그 통합 기준 (시장)** (2026-11-22 사용자) — 무엇을 약속하느냐, 브리핑·심층·주간별 구성, 태그는 실제 검색어, 테스트 및 비교, 구독으로 잇기 |
 | 1 | [`01-desire-map.md`](01-desire-map.md) | **왜 이 영상을 보는가** — 네 채널의 근본 욕망, 주제를 고르는 상위 기준 |
 | 2 | 맡은 채널 하나: [`02-ai.md`](02-ai.md) · [`03-market.md`](03-market.md)(+ 매일 운영 [`09-market-daily.md`](09-market-daily.md)) · [`04-curiosity.md`](04-curiosity.md) · [`08-issues.md`](08-issues.md) | 그 채널의 주제 찾기 → 조사 → 대본 → 편집을 단계별로 |
 | 3 | [`12-visual-storytelling.md`](12-visual-storytelling.md) · [`05-style-matching.md`](05-style-matching.md) | 인포그래픽·삽화·인물 사진·자료 영상을 언제 쓰나, 편집 스타일과 그래픽 팩 |

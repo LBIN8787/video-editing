@@ -14,7 +14,8 @@
 - punch : (시장, 2026-11-19 사용자 "썸네일 스타일을 좀 더 눈에 들어오게") 컬러 사진 꽉 채움 + 아주 큰 두 줄 글씨 +
           강조 단어는 노란 상자 위 검은 글씨 + 큰 숫자 칩(▲초록·▼빨강). 작은 손글씨 줄 대신 칩. "theme": "dark" 인 versus 도 같은 결.
           chips: [{"text": "엔비디아 ▼2.89%", "color": "down"|"up"|"yellow"}]
-- trend : (2026-11-22 사용자: 40·50대 위주 → 젊은 유입층, "좀 트렌디하게") 3D 일러스트(GPT 이미지) 꽉 채움 + 알약 태그 +
+- trend : (2026-11-22 사용자: 40·50대 위주 → 젊은 유입층, "좀 트렌디하게"; 같은 날 "유아틱 아니야?" → 귀여운 3D 캐릭터 금지)
+          시네마틱 실사풍 그림(GPT 이미지, 금융 다큐·경제지 표지 같은 조명) 꽉 채움 + 알약 태그 +
           블랙한산스 두 줄(딱딱한 그림자, 강조 한 단어만 네온) + 스티커. 말투는 구어체 질문.
 - person: (시장, 2026-11-20 사용자: "유명인사가 썸네일에 나오거나 유명인사를 다룬 주제 내용들이 조회수가 높은 것 같은데")
           사건의 당사자 얼굴을 오른쪽에 크게(얼굴을 찾아 화면 높이의 40~50% 로 자름, 컬러) + 이름표(이름 · 직함) + 왼쪽 큰 두 줄.
@@ -26,6 +27,7 @@ from __future__ import annotations
 import json
 import math
 import random
+import re
 import subprocess
 from pathlib import Path
 
@@ -467,7 +469,7 @@ NEON = {"lime": (190, 255, 60), "pink": (255, 70, 160), "cyan": (60, 230, 255), 
 
 def _trend(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
     """젊은 층용 (2026-11-22 사용자: "내 채널이 대부분 40대50대 이상이거든? 젊은 유입층을 늘리고싶은데 좀 트렌디하게").
-    3D 일러스트(GPT 이미지) 꽉 채움 + 왼쪽 어둡게 + 알약 태그 + 블랙한산스 두 줄(검은 테두리·딱딱한 그림자, 강조 한 단어만 네온) + 작은 스티커 칩.
+    시네마틱 실사풍 그림(GPT 이미지) 꽉 채움 + 왼쪽 어둡게 + 알약 태그 + 블랙한산스 두 줄(검은 테두리·딱딱한 그림자, 강조 한 단어만 네온) + 작은 스티커 칩.
     v: image.file, top, lines, hl, accent(lime|pink|cyan|yellow), sticker(선택, 오른쪽 위 비스듬한 스티커), chips"""
     boxes = []
     acc = NEON.get(v.get("accent", "lime"), NEON["lime"])
@@ -695,7 +697,7 @@ def score(v: dict, qa: dict, hot: list[str], title: str = "") -> tuple[float, li
         sc += 1.5; why.append("구체적 숫자 +1.5 (docs/49 §3)")
     if v.get("quote"):
         sc += 0.5; why.append("당사자 따옴표 발언 +0.5")
-    if "?" in text or "？" in text:
+    if re.search(r"(가능성|할까|일까|될까|인가요|살릴까|오를까|내릴까)\s*[?？]", text):   # 추측형만 깎음 — 논쟁형·역설 질문은 후보 (manual/09 §7-1 2, 2026-11-21 사용자)
         sc -= 1.5; why.append("물음표 추측 −1.5 (docs/49)")
     if any(n in text for n in POLITICIANS) and not per:
         sc -= 1.5; why.append("정치인 이름만 −1.5 (docs/55: 0.82배)")

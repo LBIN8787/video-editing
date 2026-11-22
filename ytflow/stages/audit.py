@@ -183,9 +183,10 @@ def scan_models() -> list[dict]:
         old = 999
     if old < 30:
         return []
-    roles = ", ".join(f"{k}={v.get('model')}" for k, v in (m.get("roles") or {}).items())
+    tiers = ((m.get("providers") or {}).get("anthropic") or {}) or (m.get("roles") or {})   # models.yaml: 티어(judge·complex·simple) → 제공사별 모델
+    roles = ", ".join(f"{k}={(v or {}).get('model')}" for k, v in tiers.items())
     return [{"kind": "proposal", "level": "ask", "file": "config/models.yaml", "line": 0,
-             "text": f"모델 역할 다시 점검 ({old}일 지남): {roles}",
+             "text": f"모델 티어 다시 점검 ({old}일 지남): {roles}",
              "why": "새 모델이 나왔으면 models.yaml·.claude/agents 를 바꾸고 checked 를 고침 — 바꿀지는 사용자 (manual/11 §1-1)"}]
 
 

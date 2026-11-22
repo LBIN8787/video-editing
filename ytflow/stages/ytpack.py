@@ -8,6 +8,7 @@ from __future__ import annotations
 import json
 import os
 import re
+from pathlib import Path
 
 from ..project import Project
 
@@ -19,6 +20,23 @@ def _ts(sec: float) -> str:
     sec = int(round(sec))
     return f"{sec // 60}:{sec % 60:02d}" if sec < 3600 else f"{sec // 3600}:{sec % 3600 // 60:02d}:{sec % 60:02d}"
 
+
+
+def tag_scores(tags: list[str], extra: list[str] | None = None, root: Path | None = None) -> tuple[list[dict], list[dict]]:
+    """data/tag_stats.json (scripts/tag_research.py — 비교 채널에서 태그별 '채널 중앙값 대비 조회수 배수') 로
+    ① 지금 단 태그의 성적 ② 같은 낱말을 품은 잘 나온 태그 후보를 돌려준다 (2026-11-22 사용자: "어떤 태그가 조회수가 잘나오는지 분석하세요
+    이후 이를 참조하여 태그를 달고 수정 할 수 있도록"). 인과가 아니라 같은 주제 안에서 어떤 말을 고를지의 참고."""
+    f = (root or Path(__file__).resolve().parents[2]) / "data" / "tag_stats.json"
+    if not f.exists():
+        return [], []
+    st = json.loads(f.read_text(encoding="utf-8"))
+    idx = {s["key"]: s for s in st.get("tags", [])}
+    norm = lambda s: re.sub(r"\s+", "", s).lower()
+    mine = [dict(idx[norm(t)], mine=t) for t in tags if norm(t) in idx]
+    words = {w for t in list(tags) + list(extra or []) for w in re.findall(r"[가-힣A-Za-z0-9]{2,}", t.lower())}
+    have = {norm(t) for t in tags}
+    cand = [s for s in st.get("tags", []) if s["key"] not in have and s["x_geo"] >= 1.2 and any(w in s["key"] for w in words)]
+    return mine, sorted(cand, key=lambda s: -s["x_geo"])[:20]
 
 
 def yt_suggest(seeds: list[str], per: int = 8) -> dict:
@@ -88,7 +106,13 @@ def run(project: str):
     seeds = pk.get("tag_seeds") or [x for x in (pk.get("tags") or [])][:8]
     sug = yt_suggest(seeds) if seeds and os.environ.get("YTFLOW_OFFLINE") != "1" else {}
     sug_md = ["## 검색 자동완성 (태그 후보 — 영상과 맞는 것만 package.tags 앞쪽으로, manual/09 §7-1 10)"] + [f"- {q} → {', '.join(v) or '(없음)'}" for q, v in sug.items()] + [""] if sug else []
-    md += ["", "## 설명란 (그대로 붙여 넣기)", "```", *desc, "```", "", "## 태그", ", ".join(tags), "", *sug_md,
+    mine, cand = tag_scores(tags, [v for vs in sug.values() for v in vs])
+    perf_md = []
+    if mine or cand:
+        perf_md = ["## 태그 성적 (비교 채널, data/tag_stats.json — 1.0 = 그 채널 평소, 높을수록 잘 나온 영상에 많이 쓰임)"]
+        perf_md += ["- 지금 단 태그: " + (", ".join(f"{m['mine']} ×{m['x_geo']}({m['videos']}편)" for m in sorted(mine, key=lambda m: -m['x_geo'])) or "(자료 없음)")]
+        perf_md += ["- 같은 낱말의 잘 나온 태그 후보(영상과 맞는 것만): " + (", ".join(f"{c['tag']} ×{c['x_geo']}" for c in cand) or "(없음)"), ""]
+    md += ["", "## 설명란 (그대로 붙여 넣기)", "```", *desc, "```", "", "## 태그", ", ".join(tags), "", *perf_md, *sug_md,
            "## 썸네일", "05_edit/thumbnail_A.png · B · C → 유튜브 '테스트 및 비교'에 세 장 모두",
            "", "## 체크", "- 공개 예약: 한국 시간 08:30 (평일, 채널 publish_time)  - 재생목록: 아침 브리핑 / 심층 / 주간",
            f"- 챕터 {len(chapters)}개 (유튜브는 3개 이상·각 10초 이상이어야 표시)",
