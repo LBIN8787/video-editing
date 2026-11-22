@@ -7,6 +7,7 @@
 #   judge   판단: 무엇을 만들지·어느 쪽이 맞는지·통과인지 정하는 일, 일 나누기(지휘), 사용자에게 올리는 결정 정리, **원고·대본 쓰기**(대본이 1순위)
 #   complex 복잡한 일: 길고 여러 조건을 함께 지켜야 하는 제작 — 대본 근거 검수표·구성요소 대조표(쓴 모델과 다른 눈으로), 레퍼런스 분석, 장면표·연출 설계, 영상 검수 대조
 #   simple  간단한 일: 범위가 분명한 실무 — 자료 수집·요약·목록 뽑기·옮겨 적기·렌더·캡처·자막
+# 2026-11-22 사용자: "그냥 opus로 세션진행하고 fable은 중요할때만 호출하게 해보세요" → judge 도 Opus. Fable 은 .claude/agents/fable.md 로 중요한 판단에만.
 # 쓰는 곳: ytflow/llm.py (claude-cli·api → anthropic, codex-cli → openai) · .claude/agents/{senior,worker}.md
 # 새 모델이 나오면: providers 의 이름만 바꾸고 checked 날짜를 고친다 (정기 검토가 30일마다 묻는다).
 checked: '2026-11-22'

@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-22T19:21:25",
- "source_hash": "c57da664dacb",
+ "generated": "2026-11-22T11:35:57",
+ "source_hash": "1be4d7eefe62",
  "audit": {
   "date": "2026-11-21T13:56",
   "counts": {
@@ -1007,8 +1007,8 @@
   ]
  },
  "stats": {
-  "manual_version": 111,
-  "versions": 111,
+  "manual_version": 112,
+  "versions": 112,
   "reviews": 49,
   "rejects": 30,
   "passes": 19,
@@ -1018,14 +1018,14 @@
   "sections": 214,
   "must": 30,
   "auto": 41,
-  "intents": 310,
+  "intents": 311,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 3,
   "code": 83,
   "terms": 140,
   "bans": 214,
-  "feedback": 230,
+  "feedback": 231,
   "topics": 4,
   "episodes": 43,
   "main_situations": 17,
@@ -1145,25 +1145,25 @@
      "text": "- 배경음 기본 없음. **카메라는 억지로 흔들지 않는다 (v30, 2026-11-15 사용자: \"정적이라고 했다고 정지 화면에서 굳이 억지로 화면을 웅웅거리며 미세하게 움직이지 않아도 됩니다\")** — v27 박자 카메라는 기본 끔(`\"camera\": \"beat\"` 로만 켬). '정적'의 뜻은 화면이 흔들리지 않는다는 것이 아니라 **말하는 내용이 화면에"
     },
     {
-     "section": "sec:feedback§h141",
+     "section": "sec:feedback§h142",
      "theme": "sound",
      "pol": "-",
      "text": "- 2026-11-11 · v11 기각 — “화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌”"
     },
     {
-     "section": "sec:feedback§h258",
+     "section": "sec:feedback§h259",
      "theme": "sound",
      "pol": "-",
      "text": "- 2026-11-11 · v11 기각 — “화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌”"
     },
     {
-     "section": "sec:feedback§h364",
+     "section": "sec:feedback§h365",
      "theme": "sound",
      "pol": "-",
      "text": "- 2026-11-11 · v11 기각 — “화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌”"
     },
     {
-     "section": "sec:feedback§h394",
+     "section": "sec:feedback§h395",
      "theme": "sound",
      "pol": "-",
      "text": "- 2026-11-11 · v11 기각 — “화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌”"
@@ -3990,14 +3990,13 @@
   },
   {
    "section": "sec:11§1-1",
-   "text": "Claude Code 세션: 세션 모델을 판단 티어(Fable 5.2)로 열고, 복잡한 일은 senior(Opus — 대본은 쓰지 않고 검수표·대조표·분석), 간단한 일은 worker(Sonnet) 에이전트에게 맡깁니다(.claude/agents/). 맡긴 결과도 판단 티어가 확인하고 보고합니다. 예약 작업도 판단 티어로 돌립니다(2026-11-22 사용자: \"예약 작업들도 Fable로 돌려주세요\").",
+   "text": "중요한 판단만 | Claude Fable 5.2 (fable 에이전트 — 비쌈) | ① 대본을 D2 에 내기 직전 최종 판단 한 번 ② 근거가 엇갈려 어느 쪽이 맞는지 정할 때 ③ 사용자가 \"Fable 로\"라고 할 때. 필요한 파일만 넘겨 짧게 묻고, 일상 작업에는 쓰지 않음",
    "themes": [
-    "script",
-    "depth"
+    "script"
    ],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:b97671a7",
+   "tier_key": "ban:5cd22051",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -4669,200 +4668,6 @@
    "tier_label": "영구 원칙"
   },
   {
-   "section": "sec:feedback§h17",
-   "text": "2026-11-09 · v2 통과 — “스타일 단독 품질 합격 (단독 영상 금지 규칙은 archive 기각 사유로 반영)”",
-   "themes": [
-    "variety"
-   ],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:474d72bf",
-   "tier_auto": "style",
-   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
-   "overfit": true,
-   "single": false,
-   "tier": "style",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "스타일 기본값"
-  },
-  {
-   "section": "sec:feedback§h41",
-   "text": "2026-11-15 · 방향·기준 요청 — “스타일 MUST 들은 전부 굳이 필요하지 않다고 생각합니다. 고정규칙이 아니라 필요에 따라 유동적으로 할 수 있도록 해주세요”",
-   "themes": [
-    "motion",
-    "variety"
-   ],
-   "absolute": false,
-   "must": true,
-   "tier_key": "ban:6bd5316b",
-   "tier_auto": "style",
-   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
-   "overfit": true,
-   "single": false,
-   "tier": "style",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "스타일 기본값"
-  },
-  {
-   "section": "sec:feedback§h41",
-   "text": "2026-11-18 · 도구 요청 — “그리고 저는 깃을 무조건 잠근다가 아니라 한번에 한명만 사용한다 입니다. 즉 깃이 비었는데도 아무도 사용 안하는데 락을 걸어서 깃을 사용하지 않는 상황이 이루어지지 않도록 해주세요”",
-   "themes": [],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:80d19e7a",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "section": "sec:feedback§h41",
-   "text": "2026-11-18 · 방향·기준 요청 — “음 우선 화풍만 사용하지 말고 화풍을 적절히 알맞는 상황에 맞추어서 사용해주세요. 모션그래픽이나 다른 편집 연출 등을 언제 사용해야 하는지 분석 정리하고 상황에 맞추어서 사용해주세요 또한 다양한 화풍의 레퍼런스들을 조사해주세요. 쿠르츠게작트 같은 화풍이나 gpt가 제작한 이런 2.5d같은 화풍 등도 말이죠. 어느 화풍이 언제 어울릴지도 분석 정의하시고 단순 삽화만이 아니라 애니메이션과 같은 연속적인 장면도 적절하게 사",
-   "themes": [
-    "variety",
-    "depth"
-   ],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:c0a44b9a",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "section": "sec:feedback§h141",
-   "text": "2026-11-11 · v11 기각 — “화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌”",
-   "themes": [
-    "motion",
-    "sound"
-   ],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:63c0f244",
-   "tier_auto": "trial",
-   "why": "스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨",
-   "overfit": true,
-   "single": true,
-   "tier": "trial",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "실험 기록"
-  },
-  {
-   "section": "sec:feedback§h211",
-   "text": "2026-11-17 · 방향·기준 요청 — “그리고 반드시 하루1편을 올리는 것이 아니라 각 소스영상 인터뷰영상 주제 등 할 이야기가 많다면 하루에 세개까지 영상을 올려도 됩니다 즉 제한을 두지는 않는다는거에요”",
-   "themes": [],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:e9da4fa9",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "section": "sec:feedback§h258",
-   "text": "2026-11-14 · v20 기각 — “중간중간 너무 난잡함. 목표·시청자 욕망을 먼저 정의하지 않고 만듦. 대본을 소제목처럼 글로 쓰거나 사진·그림을 붙여 넣기만 함 — 대본에 따른 애니메이션이 아님. 각 연출의 의도가 불분명”",
-   "themes": [
-    "variety",
-    "script",
-    "intent"
-   ],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:e4101e1f",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "section": "sec:feedback§h258",
-   "text": "2026-11-21 · 영상 검토 — “대본의 피드백입니다 — (의지력 편 v2 검토) 방향 통과, 2025 효과 배수 비교 금지·대조 조건과 주 지표 설명·생활 조언을 근거 범위 안으로·4~7장 연구 나열 대신 증거 추적·8장 전환 문장”",
-   "themes": [
-    "motion",
-    "script"
-   ],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:0feeaa75",
-   "tier_auto": "style",
-   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
-   "overfit": true,
-   "single": false,
-   "tier": "style",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "스타일 기본값"
-  },
-  {
-   "section": "sec:feedback§h345",
-   "text": "2026-11-19 · 방향·기준 요청 — “대본 단계에 \"호기심 대본은 설명·지식 문장 30% 이하\"라는 기준 이런 기준은 또 빼주세요 너무 과적합입니다. / \"설명은 이야기 속에 엮는다\"는 원리 이런식으로 원리주의적으로 가지 방법 자체를 고정하지 말아주세요”",
-   "themes": [
-    "script",
-    "depth"
-   ],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:30101c38",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "section": "sec:feedback§h394",
-   "text": "2026-11-09 · v3 기각 — “강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)”",
-   "themes": [
-    "emphasis",
-    "variety"
-   ],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:440ec262",
-   "tier_auto": "style",
-   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
-   "overfit": true,
-   "single": false,
-   "tier": "style",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "스타일 기본값"
-  },
-  {
    "section": "sec:README§1-1",
    "text": "curiosity | 우연히 마주침 (원래 궁금하지 않았음) | 듣는 순간 생긴 궁금증을 풀고 싶다 | 이야기가 목적, 정보는 그 안에 | 이야기를 풀어내듯: 장면 → 인물 → 사건 → 반전 → 답 (§04 §0) | 이야기는 삽화, 설명은 그 위 모션그래픽, 증거는 실제 자료(연구자 사진·논문), 마디는 검은 화면 한 줄 (04 §0-7, v73)",
    "themes": [
@@ -5154,6 +4959,200 @@
    "tier_note": "",
    "tier_fixed": false,
    "tier_label": "영구 원칙"
+  },
+  {
+   "section": "sec:feedback§h17",
+   "text": "2026-11-09 · v2 통과 — “스타일 단독 품질 합격 (단독 영상 금지 규칙은 archive 기각 사유로 반영)”",
+   "themes": [
+    "variety"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:474d72bf",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": true,
+   "single": false,
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
+  },
+  {
+   "section": "sec:feedback§h41",
+   "text": "2026-11-15 · 방향·기준 요청 — “스타일 MUST 들은 전부 굳이 필요하지 않다고 생각합니다. 고정규칙이 아니라 필요에 따라 유동적으로 할 수 있도록 해주세요”",
+   "themes": [
+    "motion",
+    "variety"
+   ],
+   "absolute": false,
+   "must": true,
+   "tier_key": "ban:6bd5316b",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": true,
+   "single": false,
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
+  },
+  {
+   "section": "sec:feedback§h41",
+   "text": "2026-11-18 · 도구 요청 — “그리고 저는 깃을 무조건 잠근다가 아니라 한번에 한명만 사용한다 입니다. 즉 깃이 비었는데도 아무도 사용 안하는데 락을 걸어서 깃을 사용하지 않는 상황이 이루어지지 않도록 해주세요”",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:80d19e7a",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:feedback§h41",
+   "text": "2026-11-18 · 방향·기준 요청 — “음 우선 화풍만 사용하지 말고 화풍을 적절히 알맞는 상황에 맞추어서 사용해주세요. 모션그래픽이나 다른 편집 연출 등을 언제 사용해야 하는지 분석 정리하고 상황에 맞추어서 사용해주세요 또한 다양한 화풍의 레퍼런스들을 조사해주세요. 쿠르츠게작트 같은 화풍이나 gpt가 제작한 이런 2.5d같은 화풍 등도 말이죠. 어느 화풍이 언제 어울릴지도 분석 정의하시고 단순 삽화만이 아니라 애니메이션과 같은 연속적인 장면도 적절하게 사",
+   "themes": [
+    "variety",
+    "depth"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:c0a44b9a",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:feedback§h142",
+   "text": "2026-11-11 · v11 기각 — “화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌”",
+   "themes": [
+    "motion",
+    "sound"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:63c0f244",
+   "tier_auto": "trial",
+   "why": "스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨",
+   "overfit": true,
+   "single": true,
+   "tier": "trial",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "실험 기록"
+  },
+  {
+   "section": "sec:feedback§h212",
+   "text": "2026-11-17 · 방향·기준 요청 — “그리고 반드시 하루1편을 올리는 것이 아니라 각 소스영상 인터뷰영상 주제 등 할 이야기가 많다면 하루에 세개까지 영상을 올려도 됩니다 즉 제한을 두지는 않는다는거에요”",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:e9da4fa9",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:feedback§h259",
+   "text": "2026-11-14 · v20 기각 — “중간중간 너무 난잡함. 목표·시청자 욕망을 먼저 정의하지 않고 만듦. 대본을 소제목처럼 글로 쓰거나 사진·그림을 붙여 넣기만 함 — 대본에 따른 애니메이션이 아님. 각 연출의 의도가 불분명”",
+   "themes": [
+    "variety",
+    "script",
+    "intent"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:e4101e1f",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:feedback§h259",
+   "text": "2026-11-21 · 영상 검토 — “대본의 피드백입니다 — (의지력 편 v2 검토) 방향 통과, 2025 효과 배수 비교 금지·대조 조건과 주 지표 설명·생활 조언을 근거 범위 안으로·4~7장 연구 나열 대신 증거 추적·8장 전환 문장”",
+   "themes": [
+    "motion",
+    "script"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:0feeaa75",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": true,
+   "single": false,
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
+  },
+  {
+   "section": "sec:feedback§h346",
+   "text": "2026-11-19 · 방향·기준 요청 — “대본 단계에 \"호기심 대본은 설명·지식 문장 30% 이하\"라는 기준 이런 기준은 또 빼주세요 너무 과적합입니다. / \"설명은 이야기 속에 엮는다\"는 원리 이런식으로 원리주의적으로 가지 방법 자체를 고정하지 말아주세요”",
+   "themes": [
+    "script",
+    "depth"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:30101c38",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:feedback§h395",
+   "text": "2026-11-09 · v3 기각 — “강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)”",
+   "themes": [
+    "emphasis",
+    "variety"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:440ec262",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": true,
+   "single": false,
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
   }
  ],
  "tier_labels": {
@@ -5337,10 +5336,6 @@
    "label": "01. 욕망 지도 — 주제보다 먼저 '왜 보는가'를 정한다",
    "lines": 102,
    "versions": [
-    1,
-    5,
-    6,
-    7,
     32,
     38,
     57
@@ -5355,7 +5350,6 @@
    "label": "02. ai — AI 더 잘 쓰기 (AI 트렌드와 활용법)",
    "lines": 70,
    "versions": [
-    1,
     23,
     32,
     38
@@ -5370,7 +5364,6 @@
    "label": "03. market — 시장의 이유 (경제·주식·산업·기술을 연결해 깊이 있게)",
    "lines": 174,
    "versions": [
-    1,
     23,
     24,
     32,
@@ -5393,7 +5386,6 @@
    "label": "04. curiosity — 몰랐던 이유 (심리학과 현대인의 일상)",
    "lines": 264,
    "versions": [
-    1,
     32,
     38,
     57,
@@ -5402,9 +5394,10 @@
     83,
     99,
     106,
-    110
+    110,
+    111
    ],
-   "last_version": 110
+   "last_version": 111
   },
   {
    "id": "doc:05",
@@ -5414,13 +5407,6 @@
    "label": "05. 편집 스타일 고르기 — 영상마다, 장면마다",
    "lines": 243,
    "versions": [
-    1,
-    2,
-    4,
-    10,
-    11,
-    13,
-    16,
     32,
     57,
     58,
@@ -5442,18 +5428,6 @@
    "label": "06. 체크리스트와 검사안 — 반드시 지킬 것",
    "lines": 125,
    "versions": [
-    1,
-    2,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    12,
-    13,
-    15,
     23,
     32,
     34,
@@ -5489,10 +5463,6 @@
    "label": "08. issues — 이슈의 구조 (시사·사회 이슈·역사 해설)",
    "lines": 156,
    "versions": [
-    5,
-    6,
-    8,
-    18,
     23,
     32,
     34,
@@ -5511,7 +5481,6 @@
    "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13 · v36 인사이트·영상 소스 · v42 기술 분석·CEO 소식 2026-11-17)",
    "lines": 480,
    "versions": [
-    19,
     24,
     29,
     30,
@@ -5578,7 +5547,7 @@
    "key": "11",
    "file": "manual/11-workflow.md",
    "label": "11. 제작 업무 체계 — 한 편을 처음부터 끝까지 (매뉴얼 v38, 2026-11-17 확정)",
-   "lines": 206,
+   "lines": 193,
    "versions": [
     43,
     44,
@@ -5650,12 +5619,32 @@
    "last_version": 109
   },
   {
+   "id": "doc:README",
+   "kind": "doc",
+   "key": "README",
+   "file": "manual/README.md",
+   "label": "제작 매뉴얼 — 처음 온 사람(새 세션·새 모델)이 여기서 시작합니다",
+   "lines": 160,
+   "versions": [
+    32,
+    55,
+    57,
+    59,
+    73,
+    79,
+    82,
+    87,
+    109
+   ],
+   "last_version": 109
+  },
+  {
    "id": "doc:feedback",
    "kind": "doc",
    "key": "feedback",
    "file": "manual/feedback-by-repo.md",
    "label": "내 피드백 — 레포별 (자동 생성: `python -m ytflow manual-graph`)",
-   "lines": 405,
+   "lines": 406,
    "versions": [
     83,
     84,
@@ -5683,35 +5672,10 @@
     106,
     107,
     108,
-    109
+    109,
+    111
    ],
-   "last_version": 109
-  },
-  {
-   "id": "doc:README",
-   "kind": "doc",
-   "key": "README",
-   "file": "manual/README.md",
-   "label": "제작 매뉴얼 — 처음 온 사람(새 세션·새 모델)이 여기서 시작합니다",
-   "lines": 160,
-   "versions": [
-    1,
-    2,
-    5,
-    8,
-    17,
-    19,
-    32,
-    55,
-    57,
-    59,
-    73,
-    79,
-    82,
-    87,
-    109
-   ],
-   "last_version": 109
+   "last_version": 111
   },
   {
    "id": "sec:01§1",
@@ -8512,10 +8476,10 @@
    "doc": "doc:11",
    "num": "1-1",
    "level": 3,
-   "label": "모델 티어 — 판단(Fable 5.2) · 복잡한 일(Opus 5.5) · 간단한 일(Sonnet 5.5)",
-   "title": "1-1. 모델 티어 — 판단(Fable 5.2) · 복잡한 일(Opus 5.5) · 간단한 일(Sonnet 5.5)",
+   "label": "모델 티어 — 메인은 Opus, Fable 은 중요할 때만 (2026-11-22 사용자: \"그냥 opus로 세션진행하고 fable은 중요할때만 호출하게 해보세요 fable을 메인으로 하라고 해서 메인으로 햇더니 토큰이 녹았거든요\")",
+   "title": "1-1. 모델 티어 — 메인은 Opus, Fable 은 중요할 때만 (2026-11-22 사용자: \"그냥 opus로 세션진행하고 fable은 중요할때만 호출하게 해보세요 fable을 메인으로 하라고 해서 메인으로 햇더니 토큰이 녹았거든요\")",
    "line": 31,
-   "end": 59,
+   "end": 46,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8528,8 +8492,8 @@
    "level": 2,
    "label": "단계표",
    "title": "2. 단계표",
-   "line": 60,
-   "end": 83,
+   "line": 47,
+   "end": 70,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8542,8 +8506,8 @@
    "level": 3,
    "label": "한 편씩 따로 진행",
    "title": "2-1. 한 편씩 따로 진행 (v2)",
-   "line": 84,
-   "end": 93,
+   "line": 71,
+   "end": 80,
    "tag_version": 2,
    "versions": [
     2
@@ -8558,8 +8522,8 @@
    "level": 3,
    "label": "결정 지점 — 보여 주는 것 · 묻는 것 · 기각되면 돌아갈 곳",
    "title": "2-2. 결정 지점 — 보여 주는 것 · 묻는 것 · 기각되면 돌아갈 곳",
-   "line": 94,
-   "end": 105,
+   "line": 81,
+   "end": 92,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8572,8 +8536,8 @@
    "level": 3,
    "label": "작업 기록 — 수정하면서 작업하기",
    "title": "2-3. 작업 기록 — 수정하면서 작업하기",
-   "line": 106,
-   "end": 114,
+   "line": 93,
+   "end": 101,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8586,8 +8550,8 @@
    "level": 3,
    "label": "S3 첫 칸 — 목적 분간과 매체 질문 (2026-11-18 사용자, 근거 `docs/37`)",
    "title": "2-4. S3 첫 칸 — 목적 분간과 매체 질문 (2026-11-18 사용자, 근거 `docs/37`)",
-   "line": 115,
-   "end": 134,
+   "line": 102,
+   "end": 121,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -8603,8 +8567,8 @@
    "level": 2,
    "label": "채널별 차이 (같은 단계표, 다른 내용)",
    "title": "3. 채널별 차이 (같은 단계표, 다른 내용)",
-   "line": 135,
-   "end": 149,
+   "line": 122,
+   "end": 136,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8617,8 +8581,8 @@
    "level": 3,
    "label": "AI 롱폼 — 형식을 주제가 고른다 (2026-11-17 사용자)",
    "title": "3-1. AI 롱폼 — 형식을 주제가 고른다 (2026-11-17 사용자)",
-   "line": 150,
-   "end": 162,
+   "line": 137,
+   "end": 149,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -8634,8 +8598,8 @@
    "level": 3,
    "label": "이슈·경제·주식 내레이션 (2026-11-17 사용자)",
    "title": "3-2. 이슈·경제·주식 내레이션 (2026-11-17 사용자)",
-   "line": 163,
-   "end": 172,
+   "line": 150,
+   "end": 159,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8648,8 +8612,8 @@
    "level": 2,
    "label": "개정 기록 (작업하면서 채움)",
    "title": "5. 개정 기록 (작업하면서 채움)",
-   "line": 173,
-   "end": 179,
+   "line": 160,
+   "end": 166,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8662,8 +8626,8 @@
    "level": 2,
    "label": "시작 전에 확인할 것",
    "title": "6. 시작 전에 확인할 것",
-   "line": 180,
-   "end": 185,
+   "line": 167,
+   "end": 172,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8676,8 +8640,8 @@
    "level": 2,
    "label": "연출 인계와 화면 검토",
    "title": "7. 연출 인계와 화면 검토",
-   "line": 186,
-   "end": 206,
+   "line": 173,
+   "end": 193,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -9109,212 +9073,6 @@
    "last_version": null
   },
   {
-   "id": "sec:feedback§h15",
-   "kind": "section",
-   "doc": "doc:feedback",
-   "num": "h15",
-   "level": 2,
-   "label": "메인(공통) — 모든 채널 공통",
-   "title": "메인(공통) — 모든 채널 공통",
-   "line": 15,
-   "end": 16,
-   "tag_version": null,
-   "versions": [],
-   "last_version": null
-  },
-  {
-   "id": "sec:feedback§h17",
-   "kind": "section",
-   "doc": "doc:feedback",
-   "num": "h17",
-   "level": 3,
-   "label": "영상에서 한 말",
-   "title": "영상에서 한 말",
-   "line": 17,
-   "end": 40,
-   "tag_version": null,
-   "versions": [],
-   "last_version": null
-  },
-  {
-   "id": "sec:feedback§h41",
-   "kind": "section",
-   "doc": "doc:feedback",
-   "num": "h41",
-   "level": 3,
-   "label": "영상 밖에서 한 말 (방향·기준·도구)",
-   "title": "영상 밖에서 한 말 (방향·기준·도구)",
-   "line": 41,
-   "end": 138,
-   "tag_version": null,
-   "versions": [],
-   "last_version": null,
-   "terms": [
-    "term:static-ratio"
-   ]
-  },
-  {
-   "id": "sec:feedback§h139",
-   "kind": "section",
-   "doc": "doc:feedback",
-   "num": "h139",
-   "level": 2,
-   "label": "시장 — `topics/market`",
-   "title": "시장 — `topics/market`",
-   "line": 139,
-   "end": 140,
-   "tag_version": null,
-   "versions": [],
-   "last_version": null
-  },
-  {
-   "id": "sec:feedback§h141",
-   "kind": "section",
-   "doc": "doc:feedback",
-   "num": "h141",
-   "level": 3,
-   "label": "영상에서 한 말",
-   "title": "영상에서 한 말",
-   "line": 141,
-   "end": 210,
-   "tag_version": null,
-   "versions": [],
-   "last_version": null,
-   "terms": [
-    "term:beat-camera",
-    "term:transition",
-    "term:graphic-pack"
-   ]
-  },
-  {
-   "id": "sec:feedback§h211",
-   "kind": "section",
-   "doc": "doc:feedback",
-   "num": "h211",
-   "level": 3,
-   "label": "영상 밖에서 한 말 (방향·기준·도구)",
-   "title": "영상 밖에서 한 말 (방향·기준·도구)",
-   "line": 211,
-   "end": 255,
-   "tag_version": null,
-   "versions": [],
-   "last_version": null
-  },
-  {
-   "id": "sec:feedback§h256",
-   "kind": "section",
-   "doc": "doc:feedback",
-   "num": "h256",
-   "level": 2,
-   "label": "호기심 — `topics/curiosity`",
-   "title": "호기심 — `topics/curiosity`",
-   "line": 256,
-   "end": 257,
-   "tag_version": null,
-   "versions": [],
-   "last_version": null
-  },
-  {
-   "id": "sec:feedback§h258",
-   "kind": "section",
-   "doc": "doc:feedback",
-   "num": "h258",
-   "level": 3,
-   "label": "영상에서 한 말",
-   "title": "영상에서 한 말",
-   "line": 258,
-   "end": 344,
-   "tag_version": null,
-   "versions": [],
-   "last_version": null,
-   "terms": [
-    "term:tech-spread",
-    "term:beat-camera",
-    "term:transition"
-   ]
-  },
-  {
-   "id": "sec:feedback§h345",
-   "kind": "section",
-   "doc": "doc:feedback",
-   "num": "h345",
-   "level": 3,
-   "label": "영상 밖에서 한 말 (방향·기준·도구)",
-   "title": "영상 밖에서 한 말 (방향·기준·도구)",
-   "line": 345,
-   "end": 361,
-   "tag_version": null,
-   "versions": [],
-   "last_version": null,
-   "terms": [
-    "term:style-anim-stage"
-   ]
-  },
-  {
-   "id": "sec:feedback§h362",
-   "kind": "section",
-   "doc": "doc:feedback",
-   "num": "h362",
-   "level": 2,
-   "label": "시사 — `topics/issues`",
-   "title": "시사 — `topics/issues`",
-   "line": 362,
-   "end": 363,
-   "tag_version": null,
-   "versions": [],
-   "last_version": null
-  },
-  {
-   "id": "sec:feedback§h364",
-   "kind": "section",
-   "doc": "doc:feedback",
-   "num": "h364",
-   "level": 3,
-   "label": "영상에서 한 말",
-   "title": "영상에서 한 말",
-   "line": 364,
-   "end": 391,
-   "tag_version": null,
-   "versions": [],
-   "last_version": null,
-   "terms": [
-    "term:beat-camera",
-    "term:transition"
-   ]
-  },
-  {
-   "id": "sec:feedback§h392",
-   "kind": "section",
-   "doc": "doc:feedback",
-   "num": "h392",
-   "level": 2,
-   "label": "AI — `topics/ai`",
-   "title": "AI — `topics/ai`",
-   "line": 392,
-   "end": 393,
-   "tag_version": null,
-   "versions": [],
-   "last_version": null
-  },
-  {
-   "id": "sec:feedback§h394",
-   "kind": "section",
-   "doc": "doc:feedback",
-   "num": "h394",
-   "level": 3,
-   "label": "영상에서 한 말",
-   "title": "영상에서 한 말",
-   "line": 394,
-   "end": 405,
-   "tag_version": null,
-   "versions": [],
-   "last_version": null,
-   "terms": [
-    "term:beat-camera",
-    "term:transition"
-   ]
-  },
-  {
    "id": "sec:README§0",
    "kind": "section",
    "doc": "doc:README",
@@ -9557,6 +9315,212 @@
     38
    ],
    "last_version": 38
+  },
+  {
+   "id": "sec:feedback§h15",
+   "kind": "section",
+   "doc": "doc:feedback",
+   "num": "h15",
+   "level": 2,
+   "label": "메인(공통) — 모든 채널 공통",
+   "title": "메인(공통) — 모든 채널 공통",
+   "line": 15,
+   "end": 16,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:feedback§h17",
+   "kind": "section",
+   "doc": "doc:feedback",
+   "num": "h17",
+   "level": 3,
+   "label": "영상에서 한 말",
+   "title": "영상에서 한 말",
+   "line": 17,
+   "end": 40,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:feedback§h41",
+   "kind": "section",
+   "doc": "doc:feedback",
+   "num": "h41",
+   "level": 3,
+   "label": "영상 밖에서 한 말 (방향·기준·도구)",
+   "title": "영상 밖에서 한 말 (방향·기준·도구)",
+   "line": 41,
+   "end": 139,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null,
+   "terms": [
+    "term:static-ratio"
+   ]
+  },
+  {
+   "id": "sec:feedback§h140",
+   "kind": "section",
+   "doc": "doc:feedback",
+   "num": "h140",
+   "level": 2,
+   "label": "시장 — `topics/market`",
+   "title": "시장 — `topics/market`",
+   "line": 140,
+   "end": 141,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:feedback§h142",
+   "kind": "section",
+   "doc": "doc:feedback",
+   "num": "h142",
+   "level": 3,
+   "label": "영상에서 한 말",
+   "title": "영상에서 한 말",
+   "line": 142,
+   "end": 211,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null,
+   "terms": [
+    "term:beat-camera",
+    "term:transition",
+    "term:graphic-pack"
+   ]
+  },
+  {
+   "id": "sec:feedback§h212",
+   "kind": "section",
+   "doc": "doc:feedback",
+   "num": "h212",
+   "level": 3,
+   "label": "영상 밖에서 한 말 (방향·기준·도구)",
+   "title": "영상 밖에서 한 말 (방향·기준·도구)",
+   "line": 212,
+   "end": 256,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:feedback§h257",
+   "kind": "section",
+   "doc": "doc:feedback",
+   "num": "h257",
+   "level": 2,
+   "label": "호기심 — `topics/curiosity`",
+   "title": "호기심 — `topics/curiosity`",
+   "line": 257,
+   "end": 258,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:feedback§h259",
+   "kind": "section",
+   "doc": "doc:feedback",
+   "num": "h259",
+   "level": 3,
+   "label": "영상에서 한 말",
+   "title": "영상에서 한 말",
+   "line": 259,
+   "end": 345,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null,
+   "terms": [
+    "term:tech-spread",
+    "term:beat-camera",
+    "term:transition"
+   ]
+  },
+  {
+   "id": "sec:feedback§h346",
+   "kind": "section",
+   "doc": "doc:feedback",
+   "num": "h346",
+   "level": 3,
+   "label": "영상 밖에서 한 말 (방향·기준·도구)",
+   "title": "영상 밖에서 한 말 (방향·기준·도구)",
+   "line": 346,
+   "end": 362,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null,
+   "terms": [
+    "term:style-anim-stage"
+   ]
+  },
+  {
+   "id": "sec:feedback§h363",
+   "kind": "section",
+   "doc": "doc:feedback",
+   "num": "h363",
+   "level": 2,
+   "label": "시사 — `topics/issues`",
+   "title": "시사 — `topics/issues`",
+   "line": 363,
+   "end": 364,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:feedback§h365",
+   "kind": "section",
+   "doc": "doc:feedback",
+   "num": "h365",
+   "level": 3,
+   "label": "영상에서 한 말",
+   "title": "영상에서 한 말",
+   "line": 365,
+   "end": 392,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null,
+   "terms": [
+    "term:beat-camera",
+    "term:transition"
+   ]
+  },
+  {
+   "id": "sec:feedback§h393",
+   "kind": "section",
+   "doc": "doc:feedback",
+   "num": "h393",
+   "level": 2,
+   "label": "AI — `topics/ai`",
+   "title": "AI — `topics/ai`",
+   "line": 393,
+   "end": 394,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:feedback§h395",
+   "kind": "section",
+   "doc": "doc:feedback",
+   "num": "h395",
+   "level": 3,
+   "label": "영상에서 한 말",
+   "title": "영상에서 한 말",
+   "line": 395,
+   "end": 406,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null,
+   "terms": [
+    "term:beat-camera",
+    "term:transition"
+   ]
   },
   {
    "id": "rule:G1:1",
@@ -12495,38 +12459,7 @@
     "emphasis",
     "variety",
     "intent"
-   ],
-   "commit": {
-    "sha": "2629ed4e567faeac89a38c8fa8f5a1af44156e5a",
-    "subject": "제작 매뉴얼 v1: 세 채널을 욕망으로 정의, 채널별 절차, 스타일 고르기, 체크리스트 G0~G8 자동 검사, 검토(통과/기각) 기록과 매뉴얼 버전",
-    "date": "2026-11-08",
-    "other_files": [
-     ".agents/skills/channel-run/SKILL.md",
-     ".claude/skills/channel-run/SKILL.md",
-     "AGENTS.md",
-     "channels/README.md",
-     "channels/brands.yaml",
-     "channels/ch-ai-guide/README.md",
-     "channels/ch-ai-guide/channel.yaml",
-     "channels/ch-ai-guide/episodes.md",
-     "channels/ch-ai-shorts/channel.yaml",
-     "channels/ch-data-motion/channel.yaml",
-     "channels/ch-knowledge/channel.yaml",
-     "channels/ch-money-shorts/channel.yaml",
-     "channels/ch-paper-column/channel.yaml",
-     "channels/ch-source-brief/channel.yaml",
-     "\"projects/20261106-hybrid-\\353\\215\\260\\354\\235\\264\\355\\204\\260\\354\\204\\274\\355\\204\\260/05_edit/checklist.json\"",
-     "\"projects/20261106-hybrid-\\353\\215\\260\\354\\235\\264\\355\\204\\260\\354\\204\\274\\355\\204\\260/05_edit/checklist.md\"",
-     "\"projects/20261107-knowledge-\\354\\212\\244\\355\\216\\230\\354\\235\\270\\353\\217\\205\\352\\260\\220/01_research/topic_brief.json\"",
-     "\"projects/20261107-knowledge-\\354\\212\\244\\355\\216\\230\\354\\235\\270\\353\\217\\205\\352\\260\\220/05_edit/checklist.json\"",
-     "\"projects/20261107-knowledge-\\354\\212\\244\\355\\216\\230\\354\\235\\270\\353\\217\\205\\352\\260\\220/05_edit/checklist.md\"",
-     "prompts/topic_desire.md",
-     "schemas/topic_brief.schema.json",
-     "skills/channel-run/SKILL.md",
-     "ytflow/cli.py",
-     "ytflow/stages/checklist.py"
-    ]
-   }
+   ]
   },
   {
    "id": "ver:2",
@@ -12540,46 +12473,7 @@
     "sound",
     "emphasis",
     "variety"
-   ],
-   "commit": {
-    "sha": "dbcf4299dda51c830563ab90b0ddb824d031340c",
-    "subject": "편집 스타일 등록부와 상황별 자동 추천(style-pick), 새 스타일 스킬 3종, 늘리는 법(manual/07) — 매뉴얼 v2",
-    "date": "2026-11-08",
-    "other_files": [
-     ".agents/skills/edit-style-archive/SKILL.md",
-     ".agents/skills/edit-style-journey/SKILL.md",
-     ".agents/skills/edit-style-kinetic/SKILL.md",
-     ".claude/skills/edit-style-archive/SKILL.md",
-     ".claude/skills/edit-style-journey/SKILL.md",
-     ".claude/skills/edit-style-kinetic/SKILL.md",
-     "AGENTS.md",
-     "\"projects/20261107-knowledge-\\354\\212\\244\\355\\216\\230\\354\\235\\270\\353\\217\\205\\352\\260\\220/01_research/style_pick.json\"",
-     "\"projects/20261107-knowledge-\\354\\212\\244\\355\\216\\230\\354\\235\\270\\353\\217\\205\\352\\260\\220/01_research/style_pick.md\"",
-     "\"projects/20261107-knowledge-\\354\\212\\244\\355\\216\\230\\354\\235\\270\\353\\217\\205\\352\\260\\220/01_research/topic_brief.json\"",
-     "\"projects/20261107-knowledge-\\354\\212\\244\\355\\216\\230\\354\\235\\270\\353\\217\\205\\352\\260\\220/05_edit/checklist.json\"",
-     "\"projects/20261107-knowledge-\\354\\212\\244\\355\\216\\230\\354\\235\\270\\353\\217\\205\\352\\260\\220/05_edit/checklist.md\"",
-     "schemas/topic_brief.schema.json",
-     "skills/edit-style-archive/SKILL.md",
-     "skills/edit-style-journey/SKILL.md",
-     "skills/edit-style-kinetic/SKILL.md",
-     "styles/recipes/_template.yaml",
-     "styles/recipes/archive-doc.yaml",
-     "styles/recipes/blueprint-explainer.yaml",
-     "styles/recipes/data-report.yaml",
-     "styles/recipes/hybrid-causal.yaml",
-     "styles/recipes/kinetic-type.yaml",
-     "styles/recipes/map-journey.yaml",
-     "styles/recipes/paper-column.yaml",
-     "styles/recipes/screen-demo.yaml",
-     "styles/recipes/shorts-card.yaml",
-     "styles/recipes/statement-brief.yaml",
-     "ytflow/cli.py",
-     "ytflow/stages/checklist.py",
-     "ytflow/stages/hybrid.py",
-     "ytflow/stages/stylepick.py",
-     "ytflow/stages/syncqa.py"
-    ]
-   }
+   ]
   },
   {
    "id": "ver:3",
@@ -12603,47 +12497,6 @@
    "themes": [
     "variety"
    ],
-   "commit": {
-    "sha": "793211d714d8edd1369dfdf78bcd887064254c8b",
-    "subject": "매뉴얼 v3(스타일 조합 규칙·지도 재디자인 반영), 조합 견본 다시 렌더, AI 채널 첫 영상(unslop) 기획·조사·대본·시연 자료",
-    "date": "2026-11-09",
-    "other_files": [
-     ".gitignore",
-     "channels/ch-ai-guide/channel.yaml",
-     "projects/20261109-ai-unslop/01_research/factsheet.md",
-     "projects/20261109-ai-unslop/01_research/style_pick.json",
-     "projects/20261109-ai-unslop/01_research/style_pick.md",
-     "projects/20261109-ai-unslop/01_research/topic_brief.json",
-     "projects/20261109-ai-unslop/02_script/hybrid.json",
-     "projects/20261109-ai-unslop/04_assets/demo/README.md",
-     "projects/20261109-ai-unslop/04_assets/demo/after.html",
-     "projects/20261109-ai-unslop/04_assets/demo/before_rebuilt.html",
-     "projects/20261109-ai-unslop/04_assets/demo/build_story.py",
-     "projects/20261109-ai-unslop/04_assets/demo/cap_web.js",
-     "projects/20261109-ai-unslop/04_assets/demo/record_morph.js",
-     "projects/20261109-ai-unslop/04_assets/demo/record_term.js",
-     "projects/20261109-ai-unslop/04_assets/demo/shot.js",
-     "projects/20261109-ai-unslop/04_assets/demo/shot169.js",
-     "projects/20261109-ai-unslop/04_assets/demo/story.html",
-     "projects/20261109-ai-unslop/04_assets/demo/term_log.txt",
-     "projects/20261109-ai-unslop/05_edit/checklist.json",
-     "projects/20261109-ai-unslop/05_edit/checklist.md",
-     "projects/20261109-ai-unslop/edit.yaml",
-     "projects/20261109-ai-unslop/state.json",
-     "projects/20261109-style-combo/02_script/hybrid.json",
-     "projects/20261109-style-combo/04_assets/layout_qa.json",
-     "projects/20261109-style-combo/05_edit/delivery_check.json",
-     "projects/20261109-style-combo/05_edit/hybrid_timeline.json",
-     "projects/20261109-style-combo/05_edit/subs.ass",
-     "projects/20261109-style-combo/05_edit/sync_qa.json",
-     "projects/20261109-style-combo/state.json",
-     "scripts/style_demo.py",
-     "styles/demos/combo.json",
-     "ytflow/stages/directions.py",
-     "ytflow/stages/hybrid.py",
-     "ytflow/stages/stylepick.py"
-    ]
-   },
    "terms": [
     "term:layers",
     "term:graphic-pack"
@@ -12672,24 +12525,6 @@
     "emphasis",
     "variety"
    ],
-   "commit": {
-    "sha": "75c7aa3a8b91ecf9dd3cd32e42962c8055252822",
-    "subject": "매뉴얼 v4: 강조 아껴 쓰기 (사용자 판정: 남용은 안 쓰는 것만 못하다)",
-    "date": "2026-11-09",
-    "other_files": [
-     ".agents/skills/edit-style-kinetic/SKILL.md",
-     ".claude/skills/edit-style-kinetic/SKILL.md",
-     "projects/20261109-ai-unslop/02_script/hybrid.json",
-     "projects/20261109-style-combo/02_script/demo_spec.json",
-     "projects/20261109-style-combo/02_script/hybrid.json",
-     "projects/20261109-style-combo/state.json",
-     "skills/edit-style-kinetic/SKILL.md",
-     "styles/demos/combo.json",
-     "ytflow/stages/checklist.py",
-     "ytflow/stages/directions.py",
-     "ytflow/stages/stylepick.py"
-    ]
-   },
    "terms": [
     "term:layers"
    ]
@@ -12705,35 +12540,7 @@
    "themes": [
     "variety",
     "depth"
-   ],
-   "commit": {
-    "sha": "402c33c672fc040d28fb8b20fe47e3ee24d2757d",
-    "subject": "시사·사회 이슈 채널(issues) 추가 — 매뉴얼 v5",
-    "date": "2026-11-09",
-    "other_files": [
-     "AGENTS.md",
-     "channels/README.md",
-     "channels/brands.yaml",
-     "channels/ch-issues/README.md",
-     "channels/ch-issues/channel.yaml",
-     "channels/ch-issues/episodes.md",
-     "docs/18-issues-research.md",
-     "schemas/topic_brief.schema.json",
-     "scripts/issues_research.py",
-     "styles/recipes/archive-doc.yaml",
-     "styles/recipes/data-choropleth.yaml",
-     "styles/recipes/data-report.yaml",
-     "styles/recipes/hybrid-causal.yaml",
-     "styles/recipes/issue-dark-montage.yaml",
-     "styles/recipes/issue-quick-brief.yaml",
-     "styles/recipes/kinetic-type.yaml",
-     "styles/recipes/map-journey.yaml",
-     "styles/recipes/paper-column.yaml",
-     "styles/recipes/statement-brief.yaml",
-     "ytflow/stages/checklist.py",
-     "ytflow/stages/stylepick.py"
-    ]
-   }
+   ]
   },
   {
    "id": "ver:6",
@@ -12747,20 +12554,7 @@
     "sound",
     "script",
     "depth"
-   ],
-   "commit": {
-    "sha": "7af5a8589a6417a012d15dab962090841b13c1a8",
-    "subject": "성공 원인 나누기(소재·각도·형식·구독자) 분석과 매뉴얼 반영 — 매뉴얼 v6",
-    "date": "2026-11-09",
-    "other_files": [
-     "docs/18-issues-research.md",
-     "\"projects/20261107-knowledge-\\354\\212\\244\\355\\216\\230\\354\\235\\270\\353\\217\\205\\352\\260\\220/01_research/topic_brief.json\"",
-     "projects/20261109-ai-unslop/01_research/topic_brief.json",
-     "schemas/topic_brief.schema.json",
-     "scripts/issues_attribution.py",
-     "ytflow/stages/checklist.py"
-    ]
-   }
+   ]
   },
   {
    "id": "ver:7",
@@ -12770,23 +12564,7 @@
    "label": "v7",
    "summary": "시사 = 재미있게 보는 뉴스: 수수께끼 훅·말하듯 쓰기·장마다 작은 답·숫자는 적게 (사용자 판단, docs/18 근거)",
    "applied": [],
-   "themes": [],
-   "commit": {
-    "sha": "b01f88a6a2e274706cafe3ef1fc5f4b669f855c2",
-    "subject": "manual v7: 시사 = 재미있게 보는 뉴스 + 사우디 이슈 영상 대본",
-    "date": "2026-11-09",
-    "other_files": [
-     "projects/20261109-issues-saudi/01_research/factsheet.md",
-     "projects/20261109-issues-saudi/01_research/nasa_items.json",
-     "projects/20261109-issues-saudi/01_research/style_pick.json",
-     "projects/20261109-issues-saudi/01_research/style_pick.md",
-     "projects/20261109-issues-saudi/01_research/topic_brief.json",
-     "projects/20261109-issues-saudi/02_script/hybrid.json",
-     "projects/20261109-issues-saudi/edit.yaml",
-     "projects/20261109-issues-saudi/state.json",
-     "ytflow/stages/checklist.py"
-    ]
-   }
+   "themes": []
   },
   {
    "id": "ver:8",
@@ -12806,21 +12584,7 @@
     "background",
     "variety",
     "script"
-   ],
-   "commit": {
-    "sha": "23daedcef346844f8f2ab9f69dae0cc83d4e20d0",
-    "subject": "manual v8: MC 오프닝 필수 + 장면 목적별 배경 (사우디 영상 반 통과 기각 반영)",
-    "date": "2026-11-09",
-    "other_files": [
-     "projects/20261109-issues-saudi/02_script/hybrid.json",
-     "prompts/script_hybrid.md",
-     "ytflow/stages/backdrop.py",
-     "ytflow/stages/checklist.py",
-     "ytflow/stages/directions.py",
-     "ytflow/stages/hybrid.py",
-     "ytflow/stages/stylepick.py"
-    ]
-   }
+   ]
   },
   {
    "id": "ver:9",
@@ -12840,19 +12604,6 @@
     "motion",
     "variety"
    ],
-   "commit": {
-    "sha": "ad23de8f62aa92ee1944a6ef1d4556336c45f05f",
-    "subject": "manual v9: 반복 피로 막기 — 시각 효과 fx 6종 + 눈요기 검사",
-    "date": "2026-11-09",
-    "other_files": [
-     "projects/20261109-issues-saudi/02_script/hybrid.json",
-     "prompts/script_hybrid.md",
-     "ytflow/stages/checklist.py",
-     "ytflow/stages/directions.py",
-     "ytflow/stages/hybrid.py",
-     "ytflow/stages/stylepick.py"
-    ]
-   },
    "terms": [
     "term:fx-tilt",
     "term:fx-dolly",
@@ -12874,19 +12625,6 @@
     "motion",
     "sound"
    ],
-   "commit": {
-    "sha": "e2b6ff61b5cb32a3fa60f04052e803d7fee239a7",
-    "subject": "manual v10: 편집 기준 v10 채택 (전후 비교에서 '후' 판 합격)",
-    "date": "2026-11-10",
-    "other_files": [
-     "AGENTS.md",
-     "projects/20261110-v10-before/02_script/hybrid.json",
-     "prompts/script_hybrid.md",
-     "ytflow/stages/checklist.py",
-     "ytflow/stages/edit10.py",
-     "ytflow/stages/hybrid.py"
-    ]
-   },
    "terms": [
     "term:recap",
     "term:isotype",
@@ -12911,20 +12649,7 @@
    "themes": [
     "sound",
     "variety"
-   ],
-   "commit": {
-    "sha": "2e62561f2b0a0cbe8dc3502d5144c4276a933429",
-    "subject": "manual v11: 소리 기준 — 저음 타격음 금지, 배경음 음질·부드러운 누르기·겹쳐 반복",
-    "date": "2026-11-10",
-    "other_files": [
-     "assets/bgm/bgm.yaml",
-     "projects/20261110-saudi-v10-part/02_script/hybrid.json",
-     "projects/20261110-saudi-v10-part/05_edit/delivery_check.json",
-     "projects/20261110-saudi-v10-part/05_edit/motion.json",
-     "ytflow/stages/edit10.py",
-     "ytflow/stages/hybrid.py"
-    ]
-   }
+   ]
   },
   {
    "id": "ver:12",
@@ -12959,26 +12684,6 @@
     "motion",
     "sound"
    ],
-   "commit": {
-    "sha": "2ad3856069a5aadcae67b1662b26e1055f2f866d",
-    "subject": "manual v12: 차분하게 — 움직임·배경음 줄이기 (네 편 기각 반영)",
-    "date": "2026-11-11",
-    "other_files": [
-     "channels/ch-issues/channel.yaml",
-     "projects/20261111-ai-industry-week/02_script/hybrid.json",
-     "projects/20261111-curiosity-hallucination/02_script/hybrid.json",
-     "projects/20261111-issues-aiglasses/02_script/hybrid.json",
-     "projects/20261111-market-nvidia/02_script/hybrid.json",
-     "scripts/episodes_20261111/ai.py",
-     "scripts/episodes_20261111/curiosity.py",
-     "scripts/episodes_20261111/issues.py",
-     "scripts/episodes_20261111/market.py",
-     "ytflow/stages/checklist.py",
-     "ytflow/stages/directions.py",
-     "ytflow/stages/edit10.py",
-     "ytflow/stages/hybrid.py"
-    ]
-   },
    "terms": [
     "term:slow-push",
     "term:transition"
@@ -13001,23 +12706,6 @@
    "themes": [
     "background"
    ],
-   "commit": {
-    "sha": "f8ea8721b7da305f98372ef7562852a35b76d3b8",
-    "subject": "manual v13: 바탕색 돌려 쓰기 — 흰색·회청·남색·초록 그래픽 팩 추가",
-    "date": "2026-11-11",
-    "other_files": [
-     "projects/20261111-ai-industry-week/edit.yaml",
-     "projects/20261111-curiosity-hallucination/edit.yaml",
-     "projects/20261111-market-nvidia/05_edit/checklist.json",
-     "projects/20261111-market-nvidia/05_edit/checklist.md",
-     "projects/20261111-market-nvidia/edit.yaml",
-     "skins/clean-white/skin.yaml",
-     "skins/forest/skin.yaml",
-     "skins/midnight/skin.yaml",
-     "skins/slate/skin.yaml",
-     "ytflow/stages/checklist.py"
-    ]
-   },
    "terms": [
     "term:graphic-pack"
    ]
@@ -13039,16 +12727,7 @@
    "themes": [
     "background",
     "variety"
-   ],
-   "commit": {
-    "sha": "1f073fd57537e6b711b68d04ceaf52273bf33676",
-    "subject": "manual v14: 바탕은 상황이 고른다 (장면이 하는 일에 맞는 그래픽 팩, 스타일 조합의 일부)",
-    "date": "2026-11-11",
-    "other_files": [
-     "ytflow/stages/edit10.py",
-     "ytflow/stages/hybrid.py"
-    ]
-   }
+   ]
   },
   {
    "id": "ver:15",
@@ -13060,43 +12739,7 @@
    "applied": [],
    "themes": [
     "variety"
-   ],
-   "commit": {
-    "sha": "8b168080ed76df664f9ef21ac68b16e80cd062c2",
-    "subject": "v15 카테고리 개성: 시사 증거판·시장 대시보드·호기심 칠판·AI 앱 창 + 듀오톤 사진 표지, 위키미디어 공용 사진 찾기, 시험판",
-    "date": "2026-11-11",
-    "other_files": [
-     "AGENTS.md",
-     "channels/brands.yaml",
-     "docs/21-background-styles.md",
-     "projects/20261111-ai-industry-week/state.json",
-     "projects/20261111-curiosity-hallucination/state.json",
-     "projects/20261111-issues-aiglasses/05_edit/checklist.json",
-     "projects/20261111-issues-aiglasses/05_edit/checklist.md",
-     "projects/20261111-issues-aiglasses/state.json",
-     "projects/20261111-market-nvidia/state.json",
-     "projects/20261112-bg-trials/01_research/factsheet.md",
-     "projects/20261112-bg-trials/02_script/hybrid.json",
-     "projects/20261112-bg-trials/04_assets/footage/raw/dc.json",
-     "projects/20261112-bg-trials/04_assets/footage/raw/exam.json",
-     "projects/20261112-bg-trials/04_assets/footage/raw/nyse.json",
-     "projects/20261112-bg-trials/04_assets/layout_qa.json",
-     "projects/20261112-bg-trials/05_edit/delivery_check.json",
-     "projects/20261112-bg-trials/05_edit/hybrid_timeline.json",
-     "projects/20261112-bg-trials/05_edit/motion.json",
-     "projects/20261112-bg-trials/05_edit/subs.ass",
-     "projects/20261112-bg-trials/05_edit/sync_qa.json",
-     "projects/20261112-bg-trials/edit.yaml",
-     "scripts/trials_20261112/make.py",
-     "skins/chalkboard/skin.yaml",
-     "skins/corkboard/skin.yaml",
-     "ytflow/stages/archive.py",
-     "ytflow/stages/backdrop.py",
-     "ytflow/stages/checklist.py",
-     "ytflow/stages/hybrid.py",
-     "ytflow/stages/identity.py"
-    ]
-   }
+   ]
   },
   {
    "id": "ver:16",
@@ -13115,25 +12758,7 @@
    "themes": [
     "variety",
     "script"
-   ],
-   "commit": {
-    "sha": "bbbcecae588c9f983470be23bffa71d3de8e28d7",
-    "subject": "v16: 진행 말투 기준(연결어미 끝맺음 금지, check MUST) + 새 스타일 5종 승인·상황별 look",
-    "date": "2026-11-11",
-    "other_files": [
-     "projects/20261112-bg-trials/05_edit/checklist.json",
-     "projects/20261112-bg-trials/05_edit/checklist.md",
-     "prompts/script_hybrid.md",
-     "styles/recipes/app-window-cover.yaml",
-     "styles/recipes/chalk-lesson.yaml",
-     "styles/recipes/dash-cover.yaml",
-     "styles/recipes/duotone-cover.yaml",
-     "styles/recipes/evidence-board.yaml",
-     "ytflow/stages/checklist.py",
-     "ytflow/stages/hybrid.py",
-     "ytflow/stages/identity.py"
-    ]
-   }
+   ]
   },
   {
    "id": "ver:17",
@@ -13146,54 +12771,7 @@
    "themes": [
     "motion",
     "depth"
-   ],
-   "commit": {
-    "sha": "5047d63231e64a90ed2f20a404dbe1384b843990",
-    "subject": "v17: 매일 시장·시사 브리핑(daily) + 호기심 채널 훅 먼저",
-    "date": "2026-11-12",
-    "other_files": [
-     "AGENTS.md",
-     "channels/brands.yaml",
-     "channels/ch-issues-daily/channel.yaml",
-     "channels/ch-market-daily/channel.yaml",
-     "projects/20261112-bg-trials/state.json",
-     "projects/20261112-market-daily/01_research/daily_brief.json",
-     "projects/20261112-market-daily/01_research/daily_brief.md",
-     "projects/20261112-market-daily/01_research/prices/000660.KS_1mo.json",
-     "projects/20261112-market-daily/01_research/prices/000660.KS_1mo.meta.json",
-     "projects/20261112-market-daily/01_research/prices/005380.KS_1mo.json",
-     "projects/20261112-market-daily/01_research/prices/005380.KS_1mo.meta.json",
-     "projects/20261112-market-daily/01_research/prices/005930.KS_1mo.json",
-     "projects/20261112-market-daily/01_research/prices/005930.KS_1mo.meta.json",
-     "projects/20261112-market-daily/01_research/prices/012450.KS_1mo.json",
-     "projects/20261112-market-daily/01_research/prices/012450.KS_1mo.meta.json",
-     "projects/20261112-market-daily/01_research/prices/035420.KS_1mo.json",
-     "projects/20261112-market-daily/01_research/prices/035420.KS_1mo.meta.json",
-     "projects/20261112-market-daily/01_research/prices/035720.KS_1mo.json",
-     "projects/20261112-market-daily/01_research/prices/035720.KS_1mo.meta.json",
-     "projects/20261112-market-daily/01_research/prices/068270.KS_1mo.json",
-     "projects/20261112-market-daily/01_research/prices/068270.KS_1mo.meta.json",
-     "projects/20261112-market-daily/01_research/prices/105560.KS_1mo.json",
-     "projects/20261112-market-daily/01_research/prices/105560.KS_1mo.meta.json",
-     "projects/20261112-market-daily/01_research/prices/207940.KS_1mo.json",
-     "projects/20261112-market-daily/01_research/prices/207940.KS_1mo.meta.json",
-     "projects/20261112-market-daily/01_research/prices/373220.KS_1mo.json",
-     "projects/20261112-market-daily/01_research/prices/373220.KS_1mo.meta.json",
-     "projects/20261112-market-daily/01_research/prices/AAPL_1mo.json",
-     "projects/20261112-market-daily/01_research/prices/AAPL_1mo.meta.json",
-     "projects/20261112-market-daily/01_research/prices/AMD_1mo.json",
-     "projects/20261112-market-daily/01_research/prices/AMD_1mo.meta.json",
-     "projects/20261112-market-daily/01_research/prices/AMZN_1mo.json",
-     "projects/20261112-market-daily/01_research/prices/AMZN_1mo.meta.json",
-     "projects/20261112-market-daily/01_research/prices/AVGO_1mo.json",
-     "projects/20261112-market-daily/01_research/prices/AVGO_1mo.meta.json",
-     "projects/20261112-market-daily/01_research/prices/BTC-USD_1mo.json",
-     "projects/20261112-market-daily/01_research/prices/BTC-USD_1mo.meta.json",
-     "projects/20261112-market-daily/01_research/prices/CL=F_1mo.json",
-     "projects/20261112-market-daily/01_research/prices/CL=F_1mo.meta.json",
-     "projects/20261112-market-daily/01_research/prices/GC=F_1mo.json"
-    ]
-   }
+   ]
   },
   {
    "id": "ver:18",
@@ -13205,37 +12783,7 @@
    "applied": [],
    "themes": [
     "script"
-   ],
-   "commit": {
-    "sha": "19df4ce637df74e9e98c2dab2ae55bfccab8fd7c",
-    "subject": "v18: 어닝콜 해부(earnings-call) + 연결·의미 기준 + 코어위브 3분기 어닝콜 대본",
-    "date": "2026-11-12",
-    "other_files": [
-     "AGENTS.md",
-     "projects/20261112-market-call/01_research/daily_brief.json",
-     "projects/20261112-market-call/01_research/daily_brief.md",
-     "projects/20261112-market-call/01_research/earnings/CRWV_3Q26.txt",
-     "projects/20261112-market-call/01_research/earnings/CRWV_call.md",
-     "projects/20261112-market-call/01_research/factsheet.md",
-     "projects/20261112-market-call/01_research/style_pick.json",
-     "projects/20261112-market-call/01_research/style_pick.md",
-     "projects/20261112-market-call/01_research/topic_brief.json",
-     "projects/20261112-market-call/02_script/hybrid.json",
-     "projects/20261112-market-call/04_assets/footage/raw/dc.json",
-     "projects/20261112-market-call/04_assets/footage/raw/nvidia.json",
-     "projects/20261112-market-call/edit.yaml",
-     "projects/20261112-market-call/state.json",
-     "projects/20261112-market-daily/01_research/earnings/CRWV_call.md",
-     "projects/20261112-market-daily/05_edit/checklist.json",
-     "projects/20261112-market-daily/05_edit/checklist.md",
-     "projects/20261112-market-daily/state.json",
-     "scripts/call_20261112/make.py",
-     "ytflow/cli.py",
-     "ytflow/stages/checklist.py",
-     "ytflow/stages/earnings.py",
-     "ytflow/stages/hybrid.py"
-    ]
-   }
+   ]
   },
   {
    "id": "ver:19",
@@ -13248,54 +12796,7 @@
    "themes": [
     "script",
     "length"
-   ],
-   "commit": {
-    "sha": "7a861114048d3af9c1a5ef5529a69496e7aba05f",
-    "subject": "manual v19: 이어 읽는 시장 매일 운영 매뉴얼 + yt-pack(설명란·챕터·출처) + daily 지수 갱신 늦음 처리 + 11/13 브리핑 대본",
-    "date": "2026-11-12",
-    "other_files": [
-     "AGENTS.md",
-     "projects/20261112-market-call/05_edit/youtube.md",
-     "projects/20261113-market-daily/01_research/daily_brief.json",
-     "projects/20261113-market-daily/01_research/daily_brief.md",
-     "projects/20261113-market-daily/01_research/factsheet.md",
-     "projects/20261113-market-daily/01_research/prices/000660.KS_1mo.json",
-     "projects/20261113-market-daily/01_research/prices/000660.KS_1mo.meta.json",
-     "projects/20261113-market-daily/01_research/prices/005380.KS_1mo.json",
-     "projects/20261113-market-daily/01_research/prices/005380.KS_1mo.meta.json",
-     "projects/20261113-market-daily/01_research/prices/005930.KS_1mo.json",
-     "projects/20261113-market-daily/01_research/prices/005930.KS_1mo.meta.json",
-     "projects/20261113-market-daily/01_research/prices/012450.KS_1mo.json",
-     "projects/20261113-market-daily/01_research/prices/012450.KS_1mo.meta.json",
-     "projects/20261113-market-daily/01_research/prices/035420.KS_1mo.json",
-     "projects/20261113-market-daily/01_research/prices/035420.KS_1mo.meta.json",
-     "projects/20261113-market-daily/01_research/prices/035720.KS_1mo.json",
-     "projects/20261113-market-daily/01_research/prices/035720.KS_1mo.meta.json",
-     "projects/20261113-market-daily/01_research/prices/068270.KS_1mo.json",
-     "projects/20261113-market-daily/01_research/prices/068270.KS_1mo.meta.json",
-     "projects/20261113-market-daily/01_research/prices/105560.KS_1mo.json",
-     "projects/20261113-market-daily/01_research/prices/105560.KS_1mo.meta.json",
-     "projects/20261113-market-daily/01_research/prices/207940.KS_1mo.json",
-     "projects/20261113-market-daily/01_research/prices/207940.KS_1mo.meta.json",
-     "projects/20261113-market-daily/01_research/prices/373220.KS_1mo.json",
-     "projects/20261113-market-daily/01_research/prices/373220.KS_1mo.meta.json",
-     "projects/20261113-market-daily/01_research/prices/AAPL_1mo.json",
-     "projects/20261113-market-daily/01_research/prices/AAPL_1mo.meta.json",
-     "projects/20261113-market-daily/01_research/prices/AMD_1mo.json",
-     "projects/20261113-market-daily/01_research/prices/AMD_1mo.meta.json",
-     "projects/20261113-market-daily/01_research/prices/AMZN_1mo.json",
-     "projects/20261113-market-daily/01_research/prices/AMZN_1mo.meta.json",
-     "projects/20261113-market-daily/01_research/prices/AVGO_1mo.json",
-     "projects/20261113-market-daily/01_research/prices/AVGO_1mo.meta.json",
-     "projects/20261113-market-daily/01_research/prices/BTC-USD_1mo.json",
-     "projects/20261113-market-daily/01_research/prices/BTC-USD_1mo.meta.json",
-     "projects/20261113-market-daily/01_research/prices/CL=F_1mo.json",
-     "projects/20261113-market-daily/01_research/prices/CL=F_1mo.meta.json",
-     "projects/20261113-market-daily/01_research/prices/GC=F_1mo.json",
-     "projects/20261113-market-daily/01_research/prices/GC=F_1mo.meta.json",
-     "projects/20261113-market-daily/01_research/prices/GOOGL_1mo.json"
-    ]
-   }
+   ]
   },
   {
    "id": "ver:20",
@@ -13313,42 +12814,10 @@
     "length"
    ],
    "commit": {
-    "sha": "c4a18a5359b684bf7103285513ba8eac88a1d97c",
-    "subject": "v20: 원본 발언 컷편집(bite)·손그림 삽화(illust) 스타일 + 시험작, cut·art-brief 명령",
-    "date": "2026-11-12",
-    "other_files": [
-     ".agents/skills/edit-style-illustrated/SKILL.md",
-     ".agents/skills/edit-style-source-cut/SKILL.md",
-     ".claude/skills/edit-style-illustrated/SKILL.md",
-     ".claude/skills/edit-style-source-cut/SKILL.md",
-     ".gitignore",
-     "AGENTS.md",
-     "projects/20261113-style-cut/01_research/factsheet.md",
-     "projects/20261113-style-cut/02_script/art_brief.md",
-     "projects/20261113-style-cut/02_script/cuts.json",
-     "projects/20261113-style-cut/02_script/hybrid.json",
-     "projects/20261113-style-cut/04_assets/layout_qa.json",
-     "projects/20261113-style-cut/05_edit/delivery_check.json",
-     "projects/20261113-style-cut/05_edit/hybrid_timeline.json",
-     "projects/20261113-style-cut/05_edit/motion.json",
-     "projects/20261113-style-cut/05_edit/release.json",
-     "projects/20261113-style-cut/05_edit/subs.ass",
-     "projects/20261113-style-cut/05_edit/sync_qa.json",
-     "projects/20261113-style-cut/edit.yaml",
-     "projects/20261113-style-cut/state.json",
-     "scripts/style_cut/make.py",
-     "skills/edit-style-illustrated/SKILL.md",
-     "skills/edit-style-source-cut/SKILL.md",
-     "styles/illustrated/STYLE.md",
-     "styles/recipes/illustrated.yaml",
-     "styles/recipes/source-cut.yaml",
-     "styles/source-cut/STYLE.md",
-     "ytflow/cli.py",
-     "ytflow/stages/cutedit.py",
-     "ytflow/stages/hybrid.py",
-     "ytflow/stages/illust.py",
-     "ytflow/stages/syncqa.py"
-    ]
+    "sha": "d5160646c22d0a5b4e045885c93280af78d767e6",
+    "subject": "anim-stage 스타일 문서·썸네일 그림 조각(cutouts)·AGENTS 안내",
+    "date": "2026-11-14",
+    "other_files": []
    },
    "terms": [
     "term:bite",
@@ -15699,6 +15168,25 @@
    "date": "2026-11-22",
    "label": "v111",
    "summary": "호기심: 채널 주요 등장인물·화풍 기준 = 지우 (channel.yaml character)",
+   "applied": [],
+   "themes": [],
+   "commit": {
+    "sha": "ed400cba4ad585f4e4d96ad84492352ce7be525a",
+    "subject": "호기심 채널: 주요 등장인물·화풍 기준을 지우로 (사용자 결정)",
+    "date": "2026-11-22",
+    "other_files": [
+     "channels/ch-knowledge/channel.yaml",
+     "config/local_routines/curiosity.md"
+    ]
+   }
+  },
+  {
+   "id": "ver:112",
+   "kind": "version",
+   "v": 112,
+   "date": "2026-11-22",
+   "label": "v112",
+   "summary": "모델: 메인은 Opus, Fable 은 중요할 때만(fable 에이전트), 정기 검토는 새 세션 (사용자 11/22)",
    "applied": [],
    "themes": []
   },
@@ -18334,12 +17822,6 @@
      "by": ""
     },
     {
-     "ref": "doc:06",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
      "ref": "code:ytflow/stages/directions.py:633",
      "status": "unreviewed",
      "note": "",
@@ -18391,24 +17873,6 @@
     },
     {
      "ref": "sec:05§0-2",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:06",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:08",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:README",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -18493,18 +17957,6 @@
     },
     {
      "ref": "gate:G5",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:05",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:06",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -18604,24 +18056,6 @@
      "by": ""
     },
     {
-     "ref": "doc:06",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:08",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:README",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
      "ref": "code:ytflow/stages/backdrop.py:1",
      "status": "unreviewed",
      "note": "",
@@ -18676,18 +18110,6 @@
      "status": "unreviewed",
      "note": "",
      "by": ""
-    },
-    {
-     "ref": "doc:05",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:06",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
     }
    ],
    "status": "unreviewed",
@@ -18725,12 +18147,6 @@
      "status": "unreviewed",
      "note": "",
      "by": ""
-    },
-    {
-     "ref": "doc:05",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
     }
    ],
    "status": "unreviewed",
@@ -18765,18 +18181,6 @@
    "readings": [
     {
      "ref": "ver:13",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:05",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:06",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -18830,12 +18234,6 @@
     },
     {
      "ref": "sec:README§2-2",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:05",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -18904,12 +18302,6 @@
     },
     {
      "ref": "sec:05§0-5",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:06",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -19060,12 +18452,6 @@
      "by": ""
     },
     {
-     "ref": "doc:05",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
      "ref": "code:ytflow/stages/checklist.py:189",
      "status": "unreviewed",
      "note": "",
@@ -19133,12 +18519,6 @@
      "by": ""
     },
     {
-     "ref": "doc:README",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
      "ref": "code:ytflow/stages/checklist.py:195",
      "status": "unreviewed",
      "note": "",
@@ -19201,12 +18581,6 @@
     },
     {
      "ref": "sec:README§2-2",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:05",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -19280,24 +18654,6 @@
     },
     {
      "ref": "sec:11§2-1",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:05",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:06",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:README",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -25530,12 +24886,6 @@
      "by": ""
     },
     {
-     "ref": "doc:06",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
      "ref": "code:ytflow/stages/backdrop.py:64",
      "status": "unreviewed",
      "note": "",
@@ -26018,7 +25368,7 @@
      "kind": "review"
     },
     {
-     "ref": "sec:feedback§h258",
+     "ref": "sec:feedback§h259",
      "kind": "manual"
     }
    ],
@@ -26054,7 +25404,7 @@
      "by": ""
     },
     {
-     "ref": "sec:feedback§h258",
+     "ref": "sec:feedback§h259",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -27801,12 +27151,6 @@
     },
     {
      "ref": "sec:README§2-2",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:05",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -29755,24 +29099,6 @@
      "by": ""
     },
     {
-     "ref": "doc:05",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:06",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:README",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
      "ref": "code:ytflow/stages/hybrid.py:1659",
      "status": "unreviewed",
      "note": "",
@@ -30059,18 +29385,11 @@
     {
      "ref": "fb:218",
      "kind": "feedback"
-    },
-    {
-     "ref": "sec:11§1-1",
-     "kind": "manual"
     }
    ],
-   "variants": [
-    "즉 판단 가장 중요한 판단이 들어가는 부분 판단부붐은 fable이 복잡한 일은 opus 간단한 일은 sonnet입니다. 다른 프론티어 모델들도 이런식으로 티어가 나뉘는데 모델 이름과 버전만 다르다는 느낌으로 하려구요"
-   ],
+   "variants": [],
    "member_ids": [
-    "intent:14eeb694",
-    "intent:88aaafac"
+    "intent:14eeb694"
    ],
    "themes": [
     "variety"
@@ -30079,14 +29398,7 @@
    "meaning": "",
    "not_meant": [],
    "note": "",
-   "readings": [
-    {
-     "ref": "sec:11§1-1",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    }
-   ],
+   "readings": [],
    "status": "unreviewed",
    "annotated": false
   },
@@ -30847,12 +30159,6 @@
      "by": ""
     },
     {
-     "ref": "doc:08",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
      "ref": "code:ytflow/stages/checklist.py:222",
      "status": "unreviewed",
      "note": "",
@@ -30940,12 +30246,6 @@
     },
     {
      "ref": "sec:03§0-1",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:08",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -31126,10 +30426,6 @@
    "date": "2026-11-22",
    "sources": [
     {
-     "ref": "sec:11§1-1",
-     "kind": "manual"
-    },
-    {
      "ref": "fb:219",
      "kind": "feedback"
     }
@@ -31145,14 +30441,7 @@
    "meaning": "",
    "not_meant": [],
    "note": "",
-   "readings": [
-    {
-     "ref": "sec:11§1-1",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    }
-   ],
+   "readings": [],
    "status": "unreviewed",
    "annotated": false
   },
@@ -31797,10 +31086,6 @@
    "date": "2026-11-22",
    "sources": [
     {
-     "ref": "sec:11§1-1",
-     "kind": "manual"
-    },
-    {
      "ref": "fb:221",
      "kind": "feedback"
     }
@@ -31814,14 +31099,7 @@
    "meaning": "",
    "not_meant": [],
    "note": "",
-   "readings": [
-    {
-     "ref": "sec:11§1-1",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    }
-   ],
+   "readings": [],
    "status": "unreviewed",
    "annotated": false
   },
@@ -31906,6 +31184,48 @@
    "readings": [
     {
      "ref": "sec:09§7",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:e0fcb197",
+   "kind": "intent",
+   "quote": "새 세션에서 돌게하시고 저 지금 혼란스러워요 그냥 opus로 세션진행하고 fable은 중요할때만 호출하게 해보세요 fable을 메인으로 하라고 해서 메인으로 햇더니 토큰이 녹았거든요",
+   "label": "새 세션에서 돌게하시고 저 지금 혼란스러워요 그냥 opus로 세션진행하고 fable은 중요할때만 호출하게 해",
+   "versions": [],
+   "date": "2026-11-22",
+   "sources": [
+    {
+     "ref": "fb:231",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:11§1-1",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "그냥 opus로 세션진행하고 fable은 중요할때만 호출하게 해보세요 fable을 메인으로 하라고 해서 메인으로 햇더니 토큰이 녹았거든요"
+   ],
+   "member_ids": [
+    "intent:e0fcb197",
+    "intent:70d2da76"
+   ],
+   "themes": [
+    "script"
+   ],
+   "ann_key": "intent:e0fcb197",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:11§1-1",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -32117,32 +31437,18 @@
     {
      "ref": "fb:216",
      "kind": "feedback"
-    },
-    {
-     "ref": "sec:11§1-1",
-     "kind": "manual"
     }
    ],
-   "variants": [
-    "fable5.2가 sonnet5.5랑 opus5.5를 오케스트레이션 했으면 해 물론 모델이 새로 나오면 이도 재 설정하고"
-   ],
+   "variants": [],
    "member_ids": [
-    "intent:ec72a994",
-    "intent:2f754f11"
+    "intent:ec72a994"
    ],
    "themes": [],
    "ann_key": "intent:ec72a994",
    "meaning": "",
    "not_meant": [],
    "note": "",
-   "readings": [
-    {
-     "ref": "sec:11§1-1",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    }
-   ],
+   "readings": [],
    "status": "unreviewed",
    "annotated": false
   },
@@ -32269,12 +31575,6 @@
     },
     {
      "ref": "sec:03§0-1",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:08",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -35512,7 +34812,7 @@
     "sec:10§1",
     "sec:10§h9",
     "sec:10§3",
-    "sec:feedback§h345",
+    "sec:feedback§h346",
     "ver:21",
     "ver:34",
     "code:ytflow/stages/hybrid.py:1671",
@@ -38173,7 +37473,7 @@
     "sec:12§0-1",
     "sec:13§4-1",
     "sec:13§7",
-    "sec:feedback§h258",
+    "sec:feedback§h259",
     "ver:92",
     "rule:G4:1",
     "check:172",
@@ -38320,10 +37620,10 @@
     "sec:05§0-5",
     "sec:09§6",
     "sec:10§h136",
-    "sec:feedback§h141",
-    "sec:feedback§h258",
-    "sec:feedback§h364",
-    "sec:feedback§h394",
+    "sec:feedback§h142",
+    "sec:feedback§h259",
+    "sec:feedback§h365",
+    "sec:feedback§h395",
     "ver:10",
     "ver:30",
     "ver:31",
@@ -38646,8 +37946,8 @@
    "mentioned_in": [
     "sec:09§6",
     "sec:10§h136",
-    "sec:feedback§h41",
     "sec:README§2-5",
+    "sec:feedback§h41",
     "ver:25",
     "ver:27",
     "ver:30",
@@ -38746,10 +38046,10 @@
     "sec:10§h136",
     "sec:10§4",
     "sec:12§0-1",
-    "sec:feedback§h141",
-    "sec:feedback§h258",
-    "sec:feedback§h364",
-    "sec:feedback§h394",
+    "sec:feedback§h142",
+    "sec:feedback§h259",
+    "sec:feedback§h365",
+    "sec:feedback§h395",
     "ver:10",
     "ver:12",
     "rev:11",
@@ -38912,9 +38212,9 @@
     "sec:09§6",
     "sec:09§h475",
     "sec:10§4",
-    "sec:feedback§h141",
     "sec:README§0",
     "sec:README§2",
+    "sec:feedback§h142",
     "ver:3",
     "ver:13",
     "ver:50",
@@ -45634,6 +44934,36 @@
    "repo_label": "호기심",
    "intent": "intent:0818276a",
    "tier_key": "fb:0818276a",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:231",
+   "kind": "feedback",
+   "date": "2026-11-22",
+   "quote": "새 세션에서 돌게하시고 저 지금 혼란스러워요 그냥 opus로 세션진행하고 fable은 중요할때만 호출하게 해보세요 fable을 메인으로 하라고 해서 메인으로 햇더니 토큰이 녹았거든요",
+   "label": "새 세션에서 돌게하시고 저 지금 혼란스러워요 그냥 opus로 세션진행하고 fable은 중요할때만 호출하게 해",
+   "fb_kind": "clarify",
+   "fb_kind_label": "뜻 바로잡기",
+   "project": "",
+   "about": "",
+   "note": "판단 티어 모델 Opus, Fable 은 fable 에이전트로 중요한 판단에만(대본 D2 직전 최종 판단·엇갈린 근거·사용자 요청), 정기 검토는 매번 새 세션(trig_01MBqsambG48MuurbLaSrU1S, 옛 예약 끔), 11 §1-1·AGENTS",
+   "pending": false,
+   "themes": [
+    "script"
+   ],
+   "scope": "standard",
+   "repo": "main",
+   "repo_label": "메인(공통)",
+   "intent": "intent:e0fcb197",
+   "tier_key": "fb:e0fcb197",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -71772,71 +71102,6 @@
    "kind": "contains"
   },
   {
-   "s": "doc:feedback",
-   "t": "sec:feedback§h15",
-   "kind": "contains"
-  },
-  {
-   "s": "doc:feedback",
-   "t": "sec:feedback§h17",
-   "kind": "contains"
-  },
-  {
-   "s": "doc:feedback",
-   "t": "sec:feedback§h41",
-   "kind": "contains"
-  },
-  {
-   "s": "doc:feedback",
-   "t": "sec:feedback§h139",
-   "kind": "contains"
-  },
-  {
-   "s": "doc:feedback",
-   "t": "sec:feedback§h141",
-   "kind": "contains"
-  },
-  {
-   "s": "doc:feedback",
-   "t": "sec:feedback§h211",
-   "kind": "contains"
-  },
-  {
-   "s": "doc:feedback",
-   "t": "sec:feedback§h256",
-   "kind": "contains"
-  },
-  {
-   "s": "doc:feedback",
-   "t": "sec:feedback§h258",
-   "kind": "contains"
-  },
-  {
-   "s": "doc:feedback",
-   "t": "sec:feedback§h345",
-   "kind": "contains"
-  },
-  {
-   "s": "doc:feedback",
-   "t": "sec:feedback§h362",
-   "kind": "contains"
-  },
-  {
-   "s": "doc:feedback",
-   "t": "sec:feedback§h364",
-   "kind": "contains"
-  },
-  {
-   "s": "doc:feedback",
-   "t": "sec:feedback§h392",
-   "kind": "contains"
-  },
-  {
-   "s": "doc:feedback",
-   "t": "sec:feedback§h394",
-   "kind": "contains"
-  },
-  {
    "s": "doc:README",
    "t": "sec:README§0",
    "kind": "contains"
@@ -71904,6 +71169,71 @@
   {
    "s": "doc:README",
    "t": "sec:README§5",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:feedback",
+   "t": "sec:feedback§h15",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:feedback",
+   "t": "sec:feedback§h17",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:feedback",
+   "t": "sec:feedback§h41",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:feedback",
+   "t": "sec:feedback§h140",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:feedback",
+   "t": "sec:feedback§h142",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:feedback",
+   "t": "sec:feedback§h212",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:feedback",
+   "t": "sec:feedback§h257",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:feedback",
+   "t": "sec:feedback§h259",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:feedback",
+   "t": "sec:feedback§h346",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:feedback",
+   "t": "sec:feedback§h363",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:feedback",
+   "t": "sec:feedback§h365",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:feedback",
+   "t": "sec:feedback§h393",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:feedback",
+   "t": "sec:feedback§h395",
    "kind": "contains"
   },
   {
@@ -72718,62 +72048,6 @@
    ]
   },
   {
-   "s": "ver:1",
-   "t": "doc:01",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:1",
-   "t": "doc:02",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:1",
-   "t": "doc:03",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:1",
-   "t": "doc:04",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:1",
-   "t": "doc:05",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:1",
-   "t": "doc:06",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:1",
-   "t": "doc:README",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
    "s": "ver:2",
    "t": "sec:01§2",
    "kind": "touched",
@@ -72786,8 +72060,7 @@
    "t": "doc:07",
    "kind": "touched",
    "via": [
-    "changelog",
-    "git"
+    "changelog"
    ]
   },
   {
@@ -72796,30 +72069,6 @@
    "kind": "touched",
    "via": [
     "tag"
-   ]
-  },
-  {
-   "s": "ver:2",
-   "t": "doc:05",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:2",
-   "t": "doc:06",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:2",
-   "t": "doc:README",
-   "kind": "touched",
-   "via": [
-    "git"
    ]
   },
   {
@@ -72839,99 +72088,11 @@
    ]
   },
   {
-   "s": "ver:4",
-   "t": "doc:05",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:4",
-   "t": "doc:06",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:5",
-   "t": "doc:01",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:5",
-   "t": "doc:06",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:5",
-   "t": "doc:08",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:5",
-   "t": "doc:README",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:6",
-   "t": "doc:01",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:6",
-   "t": "doc:06",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:6",
-   "t": "doc:08",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
    "s": "ver:7",
    "t": "sec:08§0-1",
    "kind": "touched",
    "via": [
     "tag"
-   ]
-  },
-  {
-   "s": "ver:7",
-   "t": "doc:01",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:7",
-   "t": "doc:06",
-   "kind": "touched",
-   "via": [
-    "git"
    ]
   },
   {
@@ -72943,30 +72104,6 @@
    ]
   },
   {
-   "s": "ver:8",
-   "t": "doc:06",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:8",
-   "t": "doc:08",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:8",
-   "t": "doc:README",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
    "s": "ver:9",
    "t": "sec:05§0-3",
    "kind": "touched",
@@ -72975,67 +72112,11 @@
    ]
   },
   {
-   "s": "ver:9",
-   "t": "doc:06",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:10",
-   "t": "doc:05",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:10",
-   "t": "doc:06",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:11",
-   "t": "doc:05",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
    "s": "ver:12",
    "t": "sec:05§0-5",
    "kind": "touched",
    "via": [
     "tag"
-   ]
-  },
-  {
-   "s": "ver:12",
-   "t": "doc:06",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:13",
-   "t": "doc:05",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:13",
-   "t": "doc:06",
-   "kind": "touched",
-   "via": [
-    "git"
    ]
   },
   {
@@ -73055,27 +72136,11 @@
    ]
   },
   {
-   "s": "ver:15",
-   "t": "doc:06",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
    "s": "ver:16",
    "t": "sec:README§2-2",
    "kind": "touched",
    "via": [
     "tag"
-   ]
-  },
-  {
-   "s": "ver:16",
-   "t": "doc:05",
-   "kind": "touched",
-   "via": [
-    "git"
    ]
   },
   {
@@ -73103,43 +72168,11 @@
    ]
   },
   {
-   "s": "ver:17",
-   "t": "doc:README",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
    "s": "ver:18",
    "t": "sec:03§0-1",
    "kind": "touched",
    "via": [
     "tag"
-   ]
-  },
-  {
-   "s": "ver:18",
-   "t": "doc:08",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:19",
-   "t": "doc:09",
-   "kind": "touched",
-   "via": [
-    "git"
-   ]
-  },
-  {
-   "s": "ver:19",
-   "t": "doc:README",
-   "kind": "touched",
-   "via": [
-    "git"
    ]
   },
   {
@@ -75256,6 +74289,22 @@
   {
    "s": "ver:110",
    "t": "doc:04",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:111",
+   "t": "doc:04",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:111",
+   "t": "doc:feedback",
    "kind": "touched",
    "via": [
     "git"
@@ -77398,22 +76447,12 @@
   },
   {
    "s": "intent:14eeb694",
-   "t": "sec:11§1-1",
-   "kind": "quoted_in"
-  },
-  {
-   "s": "intent:14eeb694",
    "t": "theme:variety",
    "kind": "about"
   },
   {
    "s": "intent:ec72a994",
    "t": "fb:216",
-   "kind": "quoted_in"
-  },
-  {
-   "s": "intent:ec72a994",
-   "t": "sec:11§1-1",
    "kind": "quoted_in"
   },
   {
@@ -77879,6 +76918,21 @@
   {
    "s": "intent:c6ae953f",
    "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "intent:e0fcb197",
+   "t": "fb:231",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:e0fcb197",
+   "t": "sec:11§1-1",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:e0fcb197",
+   "t": "theme:script",
    "kind": "about"
   },
   {
@@ -78523,7 +77577,7 @@
   },
   {
    "s": "intent:b3682647",
-   "t": "sec:feedback§h258",
+   "t": "sec:feedback§h259",
    "kind": "quoted_in"
   },
   {
@@ -80157,21 +79211,6 @@
    "kind": "about"
   },
   {
-   "s": "intent:96129212",
-   "t": "sec:11§1-1",
-   "kind": "quoted_in"
-  },
-  {
-   "s": "intent:96129212",
-   "t": "fb:219",
-   "kind": "quoted_in"
-  },
-  {
-   "s": "intent:96129212",
-   "t": "theme:script",
-   "kind": "about"
-  },
-  {
    "s": "intent:81815dc7",
    "t": "sec:14§6",
    "kind": "quoted_in"
@@ -80199,6 +79238,16 @@
   {
    "s": "intent:99b74c20",
    "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "intent:96129212",
+   "t": "fb:219",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:96129212",
+   "t": "theme:script",
    "kind": "about"
   },
   {
@@ -80307,18 +79356,13 @@
    "kind": "quoted_in"
   },
   {
-   "s": "intent:d9913859",
-   "t": "sec:11§1-1",
+   "s": "intent:d8042c5d",
+   "t": "fb:157",
    "kind": "quoted_in"
   },
   {
    "s": "intent:d9913859",
    "t": "fb:221",
-   "kind": "quoted_in"
-  },
-  {
-   "s": "intent:d8042c5d",
-   "t": "fb:157",
    "kind": "quoted_in"
   },
   {
@@ -85529,6 +84573,16 @@
   {
    "s": "fb:230",
    "t": "intent:0818276a",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:231",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "fb:231",
+   "t": "intent:e0fcb197",
    "kind": "quoted_as"
   }
  ]
