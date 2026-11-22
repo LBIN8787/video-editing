@@ -385,16 +385,6 @@ def _week_badge(im: Image.Image, wk: dict, boxes: list) -> Image.Image:
     im = im.convert("RGBA")
     ov = Image.new("RGBA", im.size, (0, 0, 0, 0))
     d = ImageDraw.Draw(ov)
-<<<<<<< ours
-    f1, f2 = _font(GOTHIC_X, 58), _font(GOTHIC_X, 30)
-    w = max(f1.getlength(wk["label"]), f2.getlength(wk["range"])) + 48
-    x1, y0 = W - 28, 26
-    x0 = x1 - w
-    d.rounded_rectangle([x0, y0, x1, y0 + 128], 14, fill=YELLOW + (255,), outline=(0, 0, 0, 255), width=5)
-    d.text(((x0 + x1) / 2, y0 + 12), wk["label"], font=f1, fill=(10, 10, 10), anchor="mt")
-    d.text(((x0 + x1) / 2, y0 + 82), wk["range"], font=f2, fill=(40, 40, 40), anchor="mt")
-    boxes.append((x0, y0, x1, y0 + 128))
-=======
     # 2026-11-22 사용자: "오른쪽 위의 노란색 너무 싼티나요" → 반투명 검정 판 + 흰 글씨 + 왼쪽 가는 빨간 선 (차분하게)
     f1, f2 = _font(GOTHIC_X, 44), _font(GOTHIC_X, 26)
     w = max(f1.getlength(wk["label"]), f2.getlength(wk["range"])) + 52
@@ -405,7 +395,6 @@ def _week_badge(im: Image.Image, wk: dict, boxes: list) -> Image.Image:
     d.text((x0 + 26, y0 + 12), wk["label"], font=f1, fill=(255, 255, 255))
     d.text((x0 + 26, y0 + 64), wk["range"], font=f2, fill=(190, 196, 206))
     boxes.append((x0, y0, x1, y0 + h))
->>>>>>> theirs
     return Image.alpha_composite(im, ov).convert("RGB")
 
 
@@ -414,11 +403,7 @@ def render(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
     im, boxes = _render_layout(project, spec, dict(v, _week=wk) if wk else v)
     if wk:
         im = _week_badge(im, wk, boxes)
-<<<<<<< ours
-    tk = v.get("ticker") or (spec.get("package") or {}).get("ticker")
-=======
     tk = None if v.get("no_ticker") else (v.get("ticker") or (spec.get("package") or {}).get("ticker"))   # 차트·칩이 있는 판은 지수 띠를 끔
->>>>>>> theirs
     if tk:   # 아래 왼쪽 작은 지수 띠 [{"name": "S&P 500", "chg": "-3.70%"}] — 재생 시간 자리(TIMESTAMP_BOX)는 피함.
         # 일부러 작은 글씨라 휴대폰 글씨 점검(boxes)에는 넣지 않음 (manual/09 §7-1 ⑧, 2026-11-21 사용자)
         im = im.convert("RGBA")
