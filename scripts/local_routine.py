@@ -223,7 +223,9 @@ def main() -> None:
         shutil.rmtree(tmp, ignore_errors=True)
         tmp.mkdir(parents=True, exist_ok=True)
         env = dict(os.environ, TEMP=str(tmp), TMP=str(tmp), PYTHONUTF8="1", PYTHONIOENCODING="utf-8",
-                   YTFLOW_LOCAL_ROUTINE=a.job)
+                   YTFLOW_LOCAL_ROUTINE=a.job,
+                   # 하위 에이전트를 백그라운드로 돌려도 claude -p 가 10분 뒤 끊지 않게 (11-23 AI 커닝 편 조사 중단)
+                   CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS="0")
         prompt = COMMON.format(title=job.get("title", a.job), wt=wt, branch=branch, root=ROOT, drive=run.drive,
                                today=f"{dt.date.today():%Y-%m-%d (%a)}", prompt=job["prompt"]) + \
             (wt / job["prompt"]).read_text(encoding="utf-8")
