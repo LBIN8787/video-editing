@@ -1283,7 +1283,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
             # 설명 무대 바탕 기본값: 시장은 어두운 무대 (2026-11-20 사용자: "설명부분은 배경 공통으로 해주세요 어두운걸로요")
             sc["theme"] = spec.get("explain_theme") or {"market": "dark"}.get(spec.get("brand", ""), "paper")
         RENDER[sc["type"]](D, sc, bt, dur)
-        if sc.get("insight") and spec.get("opinion_tag", True):   # v36: 사람·매체의 시각은 사실과 다르게 표시 (2026-11-21 사용자가 끄라고 한 편은 opinion_tag: false — 출처 줄로만)
+        if sc.get("insight") and spec.get("opinion_tag", False):   # v36: 사람·매체의 시각은 사실과 다르게 표시 (2026-11-21 사용자가 끄라고 한 편은 opinion_tag: false — 출처 줄로만)
             D.opinion_tag(dark=sc["type"] in ("bite", "versus") or D.skin.get("dark", False))
     if sc["type"] != "newsdesk":   # 요약 장면 위에 '말에 맞춰 생기는 사물' (박자 motion, docs/25 §8)
         from . import motion2

@@ -496,17 +496,21 @@ def _el_html(D, sc, key: str, el: dict) -> tuple[str, float, float]:
         return inner, w, h
     if k == "card":
         w = el.get("w", 180)
-        h = el.get("h", w * (1.2 if el.get("label") else 1.0))
-        if el.get("img"):
-            ph = _asset(D, sc, el["img"])
-            mk = f'<img src="{ph}" style="width:{w * 0.78:.0f}px;height:{w * 0.78:.0f}px;object-fit:contain">' if ph else ""
-        elif el.get("icon") == "chip":
-            mk = _chip(int(w * 0.66), uid)
-        else:
-            from .icons import svg_markup
-            mk = svg_markup(el.get("icon", "package"), int(w * 0.58), CARD_INK) or ""
         lab = el.get("label", "")
         lsz = fit(HEAVY, lab, el.get("size", 46), w - 20).size if lab else 0
+        # 아이콘은 카드 폭에 비례하지 않고 상한을 둠 — 넓은 카드가 덩달아 커지지 않게 (2026-11-23 사용자: "살짝 커요")
+        ic = min(w * 0.58, el.get("icon_px", 112))
+        h = el.get("h", ic + (lsz * 1.1 + 52 if lab else 44))
+        if el.get("img"):
+            ph = _asset(D, sc, el["img"])
+            mk = f'<img src="{ph}" style="width:{ic * 1.3:.0f}px;height:{ic * 1.3:.0f}px;object-fit:contain">' if ph else ""
+            h += ic * 0.3
+        elif el.get("icon") == "chip":
+            mk = _chip(int(ic * 1.1), uid)
+            h += ic * 0.1
+        else:
+            from .icons import svg_markup
+            mk = svg_markup(el.get("icon", "package"), int(ic), CARD_INK) or ""
         col = {"red": "#B5302A", "navy": NAVY}.get(el.get("color", "navy"), el.get("color", NAVY))   # 카드 안 빨강은 밝은 카드 위 — 어두운 테마 변환(#B5302B→밝은 빨강)에서 빼려고 한 자리 다른 값 (대비 2.9:1, 2026-11-21)
         # 카드 아래 큰 숫자 (2026-11-20 사용자: "숫자가 안보입니다" · "2~4% 뭉뚱그리지 말고 제대로 각각") — 음수 빨강·양수 초록
         val = str(el.get("value", ""))
@@ -557,7 +561,16 @@ def s_board(D, sc: dict, bt: list, dur: float):
     """
     from . import motion2
     _head(D, sc)
-    els = sc.get("els", {})
+    els = {k: dict(v) for k, v in sc.get("els", {}).items()}
+    # 같은 줄(같은 y)의 카드는 같은 크기로 (2026-11-23 사용자: "네모가 크기가 제각각이기도 하고 살짝 커요")
+    rows = {}
+    for el in els.values():
+        if el.get("kind") == "card" and "h" not in el:
+            rows.setdefault(round(el.get("y", 0) / 40), []).append(el)
+    for row in rows.values():
+        rw = max(el.get("w", 180) for el in row)
+        for el in row:
+            el["w"] = rw
     box = {}
     first = bt[0][0]
     # 1) 위치를 가진 요소는 미리 만들어 두고(숨김), 등장 시각에 나타낸다
