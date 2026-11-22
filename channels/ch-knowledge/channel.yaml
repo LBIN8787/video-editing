@@ -17,6 +17,15 @@ tts:
   backend: elevenlabs
   elevenlabs: {voice_id: YBRudLRm83BV5Mazcr42, model_id: eleven_v4, language_code: ko}
   # API 키 없이: ElevenLabs 커넥터(또는 웹)로 장 단위 긴 음성 생성 → python -m ytflow voice-import <프로젝트> part1.mp3 part2.mp3
+character:   # 2026-11-22 사용자: "앞으로 이 채널의 화풍기준과 주요 등장인물을 지우로 설정할게"
+  name: 지우
+  role: "채널의 주요 등장인물(창작 인물). 편마다 지우가 겪고·해 보고·구경하는 이야기로 풀어 감. 다른 인물은 그 편에 필요할 때만 곁들임."
+  look: "둥근 얼굴, 크고 둥근 눈, 짧은 검은 단발, 굵고 단순한 윤곽선, 평면 셀 채색. 옷은 장면에 맞게 바뀌어도 얼굴·머리·그림체는 같게."
+  style: "부드러운 셀 애니메이션(잼 편·흰곰 편). 배경도 같은 정도로 단순하게. 실사·반실사·세밀한 질감·작은 눈 쪽으로 가지 않음."
+  refs:      # Google Drive ytflow/ 아래. 모든 원화 생성에 이 두 장을 참조로 넣음 (새 편에서 그린 그림은 기준이 아님)
+    - "영상/20261120-curiosity-whitebear-v2/art/night.png"          # 지우 얼굴·그림체
+    - "영상/20261119-curiosity-choice-blindness/art/tasting.png"    # 채널 화풍
+  check: "새 편 원화는 샘플 시트 한 장(지우가 나오는 대표 4칸)을 refs 와 나란히 사용자에게 먼저 보이고, 통과한 뒤 나머지를 그림 (manual/04 §0-7)."
 tone: "차분한 이야기. 익숙한 장면·궁금증 → 질문 → 실제로 있었던 일·사람·실험을 따라감 → 처음 장면을 새롭게 이해."
 needs_pc_rebuild: false                  # 무료 스톡 실사·모션그래픽·연구 자료 중심 (방송 원본 구간이 필요하면 clip-order, docs/50)
 
