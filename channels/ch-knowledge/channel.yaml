@@ -43,8 +43,8 @@ youtube:   # 유튜브 올리기 (python -m ytflow yt-publish, docs/24) — 2026
   category_id: "27"          # 교육
   default_language: ko
   made_for_kids: false
-  publish_time: "18:00"      # 한국 시간 예약 공개 (2026-11-22 사용자: 매일 저녁 6시쯤). 이미 지났으면 바로 올리고 privacy 그대로
-  privacy: unlisted          # 일부 공개 (링크가 있는 사용자만)
+  publish_time: "18:00"      # 한국 시간 예약 공개 (2026-11-22 사용자: 매일 저녁 6시쯤, "예약공개로 해주시고"). 예약 전까지 비공개 → 18:00 공개. 18:00 이 지났으면 바로 올리지 말고 다음 날 18:00 으로 --at
+  privacy: public            # 예약 시각이 지난 채 --at 없이 올리면 바로 공개됨 — 실행기는 늘 예약으로 올림 (11-20 의 일부 공개를 대신함)
   captions: true
   synthetic_media: false
   playlists: {}
