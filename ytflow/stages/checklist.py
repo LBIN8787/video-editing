@@ -169,6 +169,8 @@ def run(path: Path, upto: str = "G8") -> Report:
                   bool(re.search(r"^\s*목적\s*:", _it.read_text(encoding="utf-8"), re.M)), "")
         R.add("G4", "MUST", "core_message·question·logic", all(spec.get(k) for k in ("core_message", "question", "logic")), "")
         _rv = Path(path) / "02_script" / "script_review.md"   # 검토의 중심은 대본 (06 머리말·13 §7, 2026-11-21 사용자)
+        R.add("G4", "MUST", "근거 검수표: 모든 주장에 근거·비약·괴리·착각 확인 (02_script/script_review.md '근거 검수', 13 §4-1, 2026-11-22 사용자)",
+              _rv.exists() and "근거 검수" in _rv.read_text(encoding="utf-8"), "")
         R.add("G4", "SHOULD", "대본 구성요소 대조표: 채널 대본 공식의 요소마다 있음/없음·어느 장 (02_script/script_review.md '구성요소', 13 §7)",
               _rv.exists() and "구성요소" in _rv.read_text(encoding="utf-8"), "")
         cnt = {k: len(spec.get(k) or []) for k in ("compare_to", "analogies", "past_cases", "glossary")}

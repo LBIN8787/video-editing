@@ -52,7 +52,8 @@ description: 팩트시트와 편집 스타일 규칙으로 장면(scene) 단위 
 4. 사람이 읽는 `02_script/script.md` 는 `python -c "from ytflow.project import Project; from ytflow.stages.writing import write_script_md as w; p=Project.open('<프로젝트>'); w(p, p.read_json('script','scenes.json'))"` 로 만듭니다.
 
 ## 규칙
-- **분량:** 분당 글자 수(style_profile targets) × 목표 분량을 지킵니다.
+- **분량:** 시간·글자 수 목표는 없습니다. 채널 대본 공식의 구성요소를 모두 채우고, 자료·인사이트의 양이 길이를 정합니다 (manual/README §2-4, 13 §7).
+- **근거 검수 (2026-11-22 사용자):** 모든 주장에 근거·비약·괴리·착각 네 질문을 거쳐 `02_script/script_review.md` 에 '근거 검수' 표를 남깁니다 (manual/13-script.md §4-1, check G4 MUST).
 - **원본 발언:** quote 는 팩트시트 '인물 발언'에서 원문이 확인된 것만 씁니다.
 - **단정 금지:** '재확인 필요' 팩트는 단정하지 않습니다. 투자 권유 표현은 금지합니다.
 - **카드 강조:** 카드의 highlight 는 한 카드에 하나만 둡니다.
