@@ -34,6 +34,22 @@ def _cfg() -> dict:
     return config.load("pipeline").get("llm", {})
 
 
+# 모델 역할 (config/models.yaml — 지휘 Fable · 실무 Sonnet · 중요한 일 Opus, 2026-11-22 사용자)
+import contextvars as _cv
+_TASK: _cv.ContextVar[str] = _cv.ContextVar("ytflow_llm_task", default="")
+
+
+def _role() -> dict:
+    """지금 단계(task)의 역할 설정 {model, cli, effort}. models.yaml 이 없으면 빈 dict (pipeline.yaml 값을 씀)."""
+    f = config.CONFIG_DIR / "models.yaml"
+    if not f.exists():
+        return {}
+    import yaml
+    m = yaml.safe_load(f.read_text(encoding="utf-8")) or {}
+    tasks, roles = m.get("tasks") or {}, m.get("roles") or {}
+    return roles.get(tasks.get(_TASK.get()) or tasks.get("default") or "", {}) or {}
+
+
 def client() -> anthropic.Anthropic:
     global _client
     if _client is None:
@@ -43,10 +59,11 @@ def client() -> anthropic.Anthropic:
 
 def _common() -> dict:
     cfg = _cfg()
+    r = _role()
     kw: dict = {
-        "model": cfg.get("model", "claude-opus-5-5"),
+        "model": r.get("model") or cfg.get("model", "claude-opus-5-5"),
         "thinking": {"type": "adaptive"},
-        "output_config": {"effort": cfg.get("effort", "high")},
+        "output_config": {"effort": r.get("effort") or cfg.get("effort", "high")},
     }
     if cfg.get("fallbacks", True):
         # 안전 분류기가 거절하면 서버가 카테고리에 맞는 대체 모델로 재실행
@@ -70,7 +87,7 @@ def _cli(system: str, user: str, schema: dict | None = None, tools: list[str] | 
         raise SystemExit("claude CLI 가 없습니다. `npm install -g @anthropic-ai/claude-code` 후 `claude` 로 로그인하세요.")
     cfg = _cfg()
     cmd = [exe, "-p", "--output-format", "json", "--system-prompt", system,
-           "--tools", ",".join(tools or []), "--no-session-persistence", "--model", cfg.get("cli_model", "opus")]
+           "--tools", ",".join(tools or []), "--no-session-persistence", "--model", _role().get("cli") or cfg.get("cli_model", "opus")]
     if tools:  # 비대화 실행이므로 지정한 도구(웹 검색 등)만 미리 허용
         cmd += ["--allowedTools", ",".join(tools)]
     if schema is not None:
@@ -173,9 +190,15 @@ def _manual(kind: str, system: str, user: str, schema: dict | None = None, web: 
 
 
 # ---------------------------------------------------------------- 공용 진입점
-def text(system: str, user: str, max_tokens: int = 64000, web: bool = False) -> str:
+def text(system: str, user: str, max_tokens: int = 64000, web: bool = False, task: str = "") -> str:
     """긴 마크다운 출력(대본·리서치). web=True 면 웹 검색·페이지 읽기를 허용한다.
-    API 는 스트리밍으로 받아 타임아웃을 피한다."""
+    API 는 스트리밍으로 받아 타임아웃을 피한다. task = config/models.yaml 의 단계 이름(모델 역할)."""
+    if task:
+        tok = _TASK.set(task)
+        try:
+            return text(system, user, max_tokens, web)
+        finally:
+            _TASK.reset(tok)
     b = _backend()
     if b == "manual":
         return _manual("text", system, user, web=web)
@@ -213,9 +236,16 @@ def _api_web(system: str, user: str, max_tokens: int) -> str:
 
 
 def structured(system: str, user: str, schema: Type[T], max_tokens: int = 16000,
-               images: list | None = None, web: bool = False) -> T:
+               images: list | None = None, web: bool = False, task: str = "") -> T:
     """스키마로 검증된 JSON 출력. images 를 주면 그림(장면 미리보기 등)을 함께 보고 답한다.
-    web=True 면 먼저 웹 검색으로 조사한 글을 받고, 그 글을 스키마로 옮긴다 (모든 백엔드 공통)."""
+    web=True 면 먼저 웹 검색으로 조사한 글을 받고, 그 글을 스키마로 옮긴다 (모든 백엔드 공통).
+    task = config/models.yaml 의 단계 이름(모델 역할)."""
+    if task:
+        tok = _TASK.set(task)
+        try:
+            return structured(system, user, schema, max_tokens, images, web)
+        finally:
+            _TASK.reset(tok)
     if web:
         notes = text(system + "\n\n조사 결과를 빠짐없이 마크다운으로 적으세요 (URL·날짜 포함). 다음 단계에서 JSON 으로 옮깁니다.",
                      user, max_tokens=max_tokens, web=True)

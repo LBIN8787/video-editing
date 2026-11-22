@@ -143,7 +143,7 @@ def run(project: Project) -> None:
             f"# 최근 헤드라인\n{json.dumps(heads, ensure_ascii=False)[:30000]}\n\n"
             f"# 최근 원본 영상 목록 (공식·방송 채널)\n{json.dumps(found['videos'], ensure_ascii=False)[:20000]}")
     print("[scout] 화제별 소스 찾는 중 (웹 검색)")
-    res = llm.structured(config.prompt("scout"), user, ScoutResult, web=True, max_tokens=16000)
+    res = llm.structured(config.prompt("scout"), user, ScoutResult, web=True, max_tokens=16000, task="scout")
     found["topics"] = [t.model_dump() for t in res.topics]
     project.write_json("source", "scout.json", found)
     for t in found["topics"]:

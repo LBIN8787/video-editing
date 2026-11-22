@@ -100,7 +100,7 @@ def build(project: Project, repo: str | None, topic: str | None) -> None:
         print("[shorts] 소재 수집 (GitHub·HN·뉴스)")
         tr = ai_trends()
         project.write_json("source", "ai_trends.json", tr)
-        pk = llm.structured(config.prompt("shorts_pick"), json.dumps(tr, ensure_ascii=False)[:60000], ShortPick)
+        pk = llm.structured(config.prompt("shorts_pick"), json.dumps(tr, ensure_ascii=False)[:60000], ShortPick, task="shorts_pick")
         repo, topic = pk.repo, pk.topic
         project.write_json("source", "pick.json", pk.model_dump())
         print(f"[shorts] 선택: {topic} ({repo})")
@@ -108,7 +108,7 @@ def build(project: Project, repo: str | None, topic: str | None) -> None:
     if topic and not repo and config.load("pipeline").get("shorts_mode") == "info":
         # 정보형 쇼츠(경제·기업 상식): 저장소 화면 대신 웹으로 사실을 확인하고 카드·큰 글씨로 보여 준다
         print("[shorts] 정보형: 사실 확인 (웹 검색)")
-        facts = llm.text(config.prompt("shorts_facts"), f"# 주제\n{topic}\n\n# 오늘\n{__import__('datetime').date.today()}", web=True)
+        facts = llm.text(config.prompt("shorts_facts"), f"# 주제\n{topic}\n\n# 오늘\n{__import__('datetime').date.today()}", web=True, task="shorts_facts")
         (res / "factsheet.md").write_text(facts, encoding="utf-8")
         info = {"mode": "info", "facts": facts[:15000],
                 "rule": "저장소가 없으므로 page_* 화면은 쓰지 않습니다. card(숫자, number_compare·bars 위주, 항목 2~3개) · big_text · "
@@ -134,7 +134,7 @@ def build(project: Project, repo: str | None, topic: str | None) -> None:
     user = (f"# 소재\n{json.dumps(pick, ensure_ascii=False)}\n\n# 저장소 정보·README\n{json.dumps(info, ensure_ascii=False)[:20000]}\n\n"
             f"# 스타일 규칙\n{(config.STYLES_DIR / 'shorts-aitips' / 'script.md').read_text(encoding='utf-8')}")
     print("[shorts] 대본 작성")
-    sc = llm.structured(config.prompt("shorts_script"), user, ShortScript)
+    sc = llm.structured(config.prompt("shorts_script"), user, ShortScript, task="shorts_script")
     data = sc.model_dump()
     project.write_json("script", "shorts.json", data)
     # scenes.json 형식으로 변환 → voice / subtitles / assemble / package 그대로 사용

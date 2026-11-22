@@ -128,7 +128,7 @@ class StyleProfile(BaseModel):
 def build_profile(all_metrics: dict) -> dict:
     sys_prompt = config.prompt("style_extract")
     user = json.dumps(all_metrics, ensure_ascii=False, indent=1)
-    profile = llm.structured(sys_prompt, user, StyleProfile).model_dump()
+    profile = llm.structured(sys_prompt, user, StyleProfile, task="benchmark").model_dump()
     # 수치 목표는 LLM 이 아니라 측정값으로 고정
     primary = [m for m in all_metrics.values() if m.get("role") == "primary"] or list(all_metrics.values())
     nums = [m.get("transcript_avg", {}).get("chars_per_minute") for m in primary]

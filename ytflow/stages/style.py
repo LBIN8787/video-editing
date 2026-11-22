@@ -189,7 +189,7 @@ def run(name: str, videos: list[str], title: str | None = None) -> Path:
         "당신은 유튜브 편집 감독입니다. 레퍼런스 채널의 장면 미리보기 시트(10초 간격)와 움직임 띠(0.2초 간격), "
         "측정값을 보고 '다른 영상에도 재현 가능한 편집 규칙'을 한국어로 정리하세요. 관찰한 것만 쓰고, 추정은 '추정'이라고 표시하세요. "
         "대사·고유 캐릭터·로고를 베끼는 규칙은 쓰지 말고 구조와 기법만 적으세요.",
-        json.dumps({"channel": title or name, "metrics": metrics}, ensure_ascii=False), StyleRules, images=imgs)
+        json.dumps({"channel": title or name, "metrics": metrics}, ensure_ascii=False), StyleRules, images=imgs, task="style_rules")
     (base / "rules.json").write_text(json.dumps(rules.model_dump(), ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[style] 규칙 → {base}/rules.json")
     draft_docs(base, title or name, metrics, rules.model_dump(), edit)

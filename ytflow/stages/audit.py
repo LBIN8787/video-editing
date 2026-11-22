@@ -170,6 +170,25 @@ def changed_instr(since: str) -> list[str]:
             and n not in ("manual/CHANGELOG.md", "manual/reviews.md", "manual/audit.md"))]
 
 
+def scan_models() -> list[dict]:
+    """모델 역할(config/models.yaml)을 30일마다 다시 보게 — 새 모델이 나오면 재설정 (2026-11-22 사용자)."""
+    f = config.ROOT / "config" / "models.yaml"
+    if not f.exists():
+        return []
+    import yaml
+    m = yaml.safe_load(f.read_text(encoding="utf-8")) or {}
+    try:
+        old = (dt.date.today() - dt.date.fromisoformat(str(m.get("checked")))).days
+    except ValueError:
+        old = 999
+    if old < 30:
+        return []
+    roles = ", ".join(f"{k}={v.get('model')}" for k, v in (m.get("roles") or {}).items())
+    return [{"kind": "proposal", "level": "ask", "file": "config/models.yaml", "line": 0,
+             "text": f"모델 역할 다시 점검 ({old}일 지남): {roles}",
+             "why": "새 모델이 나왔으면 models.yaml·.claude/agents 를 바꾸고 checked 를 고침 — 바꿀지는 사용자 (manual/11 §1-1)"}]
+
+
 def scan_contra() -> list[dict]:
     d = load_contra()
     out = []
@@ -288,6 +307,7 @@ def build() -> dict:
     items += [dict(x, kind="retired") for x in scan_retired(instr, secs)]
     items += scan_refs(instr, secs)
     items += scan_contra()
+    items += scan_models()
     if mg.is_stale():
         items.append({"kind": "stale", "level": "fix", "file": "manual/graph.json", "line": 0, "text": "매뉴얼 그래프가 옛것",
                       "why": "python -m ytflow manual-graph"})

@@ -28,6 +28,17 @@
 
 > 사용자가 가리키는 대상(제목·썸네일·장면)이 애매하면 바꾸기 전에 확인합니다.
 
+### 1-1. 모델 역할 — 지휘 Fable · 실무 Sonnet · 중요한 일 Opus (2026-11-22 사용자: "자료조사나 이런 지시 오케스트레이션은 fable이 일을 하는건 sonnet이 좀 더 중요한 일은 opus가 이처럼 fable5.2가 sonnet5.5랑 opus5.5를 오케스트레이션 했으면 해 물론 모델이 새로 나오면 이도 재 설정하고")
+| 역할 | 모델 (지금) | 맡는 일 |
+|---|---|---|
+| **지휘** (orchestrator) | Claude Fable 5.2 | 주제 고르기·조사 지시·단계 판단·누구에게 맡길지·결정 지점(D1~D4) 정리·사용자 보고 |
+| **실무** (worker) | Claude Sonnet 5.5 | 자료 수집·요약·목록 뽑기·팩트시트 초안·장면표 채우기·렌더·캡처·자막 |
+| **중요한 일** (senior) | Claude Opus 5.5 | 원고·대본 쓰기(대본이 1순위, 13), 근거 검수(근거·비약·괴리·착각), 제목·썸네일, 영상 최종 검수 |
+
+- **한 곳에서 정함:** [`config/models.yaml`](../config/models.yaml) — 역할마다 모델, 파이프라인 단계마다 역할. `ytflow` 의 자동 단계(`make`·`daily`·`shorts` 등)는 이 표대로 모델을 고릅니다(`ytflow/llm.py`).
+- **Claude Code 세션:** 세션 모델을 Fable 5.2 로 열고(지휘), 실무는 `worker` 에이전트(Sonnet), 중요한 일은 `senior` 에이전트(Opus)에게 맡깁니다(`.claude/agents/`). 맡긴 결과도 지휘가 확인하고 사용자에게 보고합니다. Codex 세션에는 해당 없음.
+- **새 모델이 나오면 다시 설정:** `models.yaml` 의 model·cli 와 `checked` 날짜, `.claude/agents/*.md` 의 model 을 바꿉니다. 정기 검토가 `checked` 가 30일 지났거나 세션 환경에 더 새 모델이 보이면 물어봅니다(skills/manual-review).
+
 ---
 
 ## 2. 단계표

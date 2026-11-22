@@ -60,7 +60,7 @@ def select(project: Project) -> None:
             f"# 트렌드 레이더 (최근 {trends.get('window_hours', '?')}시간, 여러 매체)\n{json.dumps(trends, ensure_ascii=False)[:40000]}\n\n"
             f"# 화제별로 찾아 둔 소스 (scout: 소스가 강한 화제를 우선)\n{json.dumps(scout.get('topics', []), ensure_ascii=False)[:40000]}\n\n"
             f"# 이 채널의 형식\n{fmt} — 이 형식에 맞는 주제를 1순위로. 형식이 다른 좋은 주제도 format 을 바꿔 함께 적으면 다른 채널 대기열로 보냅니다.")
-    res = llm.structured(config.prompt("topic_select"), user, TopicShortlist)
+    res = llm.structured(config.prompt("topic_select"), user, TopicShortlist, task="topic_select")
     picks = sorted(res.picks, key=lambda p: (p.format == fmt, p.score), reverse=True)  # 채널 형식에 맞는 주제가 먼저
     _queue_other_formats(project, [p for p in picks if p.format != fmt])
     project.write_json("source", "shortlist.json", [p.model_dump() for p in picks])
@@ -162,10 +162,10 @@ def research(project: Project) -> None:
     user = (f"# 오늘 날짜\n{date.today().isoformat()}\n\n# 주제\n{json.dumps(topic, ensure_ascii=False)}\n\n"
             f"# 소스 영상 자막 (있으면)\n{json.dumps(transcripts, ensure_ascii=False)}\n\n# 제작자 메모/추가 자료\n{extra}")
     print("[research] 웹 리서치 중 (수 분 걸릴 수 있음)")
-    md = llm.text(config.prompt("research"), user, web=True)
+    md = llm.text(config.prompt("research"), user, web=True, task="research")
     (project.dir("research") / "factsheet.md").write_text(md, encoding="utf-8")
     arts = llm.structured("팩트시트에 인용된 기사·공시·보도자료를 목록으로 뽑으세요. URL 이 적힌 것만, 팩트시트에 있는 그대로.",
-                          md, ArticleList)
+                          md, ArticleList, task="articles")
     project.write_json("research", "articles.json", [x.model_dump() for x in arts.articles])
     print(f"[research] {project.dir('research')}/factsheet.md · 기사 {len(arts.articles)}건")
     project.mark_done("research")
@@ -185,7 +185,7 @@ def article(project: Project) -> None:
             f"# 형식 규칙\n{rules}\n\n{_inventory_block(project)}# 분량\n정해진 길이 없음 — 이 형식·채널 대본 공식의 구성요소를 모두 채우고, 자료·인사이트의 양이 길이를 정함. 늘리려고 반복하지 않고 깊이를 줄이지 않음 (manual/README §2-4)\n\n# 팩트시트\n{fact}")
     if imported.exists():
         user += "\n\n# 가져온 조사 글 (구성 참고용, 숫자는 팩트시트 기준)\n" + imported.read_text(encoding="utf-8")
-    md = llm.text(config.prompt("article"), user)
+    md = llm.text(config.prompt("article"), user, task="article")
     import re as _re
     parts = _re.split(r"\n#+\s*제작 메모\s*\n", md, maxsplit=1)  # 제작자용 메모는 대본에 넣지 않는다
     md = parts[0].rstrip() + "\n"
@@ -293,7 +293,7 @@ def script(project: Project) -> None:
                  f"바탕 theme: {em.get('theme', 'paper')}\n" + (sty.read_text(encoding="utf-8") if sty.is_file() else ""))
     family = config.style_family()
     system = config.prompt("script") + "\n\n" + config.prompt(f"script_{family}") if family != "shorts" else config.prompt("script")
-    res = llm.structured(system, user, Script, max_tokens=32000)
+    res = llm.structured(system, user, Script, max_tokens=32000, task="script")
     data = res.model_dump()
     from ..scriptcheck import check
     errs, warns = check(data, family)
@@ -301,7 +301,7 @@ def script(project: Project) -> None:
         print(f"[script] 점검 {len(errs)}건 → 고쳐 쓰기: " + " / ".join(errs[:5]))
         fix = (user + "\n\n# 첫 원고\n" + json.dumps(data, ensure_ascii=False) +
                "\n\n# 점검에서 걸린 것 (모두 고친 전체 원고를 다시 쓰세요)\n" + "\n".join(f"- {x}" for x in errs + warns))
-        data = llm.structured(system, fix, Script, max_tokens=32000).model_dump()
+        data = llm.structured(system, fix, Script, max_tokens=32000, task="script_fix").model_dump()
     project.write_json("script", "scenes.json", data)
     write_script_md(project, data)
     total = sum(len(s["narration"].replace(" ", "")) for s in data["scenes"])
@@ -346,7 +346,7 @@ def package(project: Project) -> None:
     chapters = project.read_json("edit", "chapters.json") if (project.dir("edit") / "chapters.json").exists() else []
     user = (f"# 스타일 프로필\n{_style_block()}\n\n# 대본\n{json.dumps(scenes, ensure_ascii=False)}\n\n"
             f"# 챕터(초)\n{json.dumps(chapters, ensure_ascii=False)}")
-    res = llm.structured(config.prompt("package"), user, Package).model_dump()
+    res = llm.structured(config.prompt("package"), user, Package, task="package").model_dump()
     refs = ("미주일기", "식스시그마", "머니크루", "AI비즈PT", "AIBizPT", "로제타")  # 벤치마킹 채널 이름은 태그·제목에서 뺀다
     res["tags"] = [t for t in res["tags"] if not any(r in t for r in refs)]
     res["titles"] = [t for t in res["titles"] if not any(r in t for r in refs)] or res["titles"]

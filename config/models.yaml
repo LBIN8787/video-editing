@@ -1,0 +1,35 @@
+# 모델 역할 — 지휘는 Fable, 실무는 Sonnet, 중요한 일은 Opus
+# 2026-11-22 사용자: "자료조사나 이런 지시 오케스트레이션은 fable이 일을 하는건 sonnet이 좀 더 중요한 일은 opus가
+#   이처럼 fable5.2가 sonnet5.5랑 opus5.5를 오케스트레이션 했으면 해 물론 모델이 새로 나오면 이도 재 설정하고"
+# 쓰는 곳: ytflow/llm.py (claude-cli 는 cli 별칭, api 는 model ID) · .claude/agents/{worker,senior}.md (Claude Code 세션)
+# 새 모델이 나오면: 아래 roles 의 model·cli 를 바꾸고 checked 날짜를 고친다 (정기 검토가 30일마다 묻는다, skills/manual-review).
+checked: '2026-11-22'
+roles:
+  orchestrator:   # 지휘: 주제 고르기·조사 지시·단계 판단·누구에게 맡길지·사용자 보고
+    model: claude-fable-5-2
+    cli: fable
+    effort: high
+  worker:         # 실무: 자료 수집·요약·목록 뽑기·장면표 채우기·렌더·캡처·자막
+    model: claude-sonnet-5-5
+    cli: sonnet
+    effort: high
+  senior:         # 중요한 일: 원고·대본 쓰기, 근거 검수(근거·비약·괴리·착각), 제목·썸네일, 최종 검수
+    model: claude-opus-5-5
+    cli: opus
+    effort: high
+# ytflow 파이프라인 단계 → 역할 (없는 단계는 default)
+tasks:
+  default: senior
+  topic_select: orchestrator
+  scout: orchestrator
+  shorts_pick: orchestrator
+  research: worker
+  articles: worker
+  shorts_facts: worker
+  benchmark: worker
+  style_rules: worker
+  article: senior
+  script: senior
+  script_fix: senior
+  package: senior
+  shorts_script: senior
