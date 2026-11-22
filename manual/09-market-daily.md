@@ -454,6 +454,7 @@
 
 ## 목소리 (2026-11-13 결정)
 - **Teo** (`0mlAtfsvMzFpppUuNWkV`, ElevenLabs eleven_v4) — 오래 들어도 편한 차분한 중저음 (2026-11-13 사용자 선택, 8명 비교). 예비 Sung-ho. 근거·시험 결과는 `docs/08-voice.md` §이어 읽는 시장.
+- **ElevenLabs 는 직접 API 로만 (MCP 생성 금지, 2026-11-22 사용자):** 같은 문장(33자, Teo·eleven_v4)을 실측: **직접 API 15 크레딧**(응답 헤더 `Character-Cost`) vs **MCP `creative_generate_speech` 1테이크 33 크레딧·기본 2테이크 66 크레딧**(estimate_only) — MCP 가 1테이크도 2.2배, 기본값이면 4.4배 (AGENTS 목소리 규칙, docs/08-voice.md).
 - 숫자는 대본에 숫자 그대로 쓴다. 같은 말이 반복되는 구절은 테이크마다 빠졌는지 `voice-import` 일치율로 확인.
 - 순서: 화면 확정 → 장별 2~3덩어리 생성 → `python -m ytflow voice-import <프로젝트> part1.mp3 …` → `hybrid` 다시 렌더.
 - ElevenLabs 를 쓸 수 없는 날은 edge 초안으로 만들되 올리지 않는다 (v43, §2-1 — 공개본은 Teo). 크레딧이 모자라면 그날 편을 미루거나 voice-import 로 Teo 테이크를 만든다.

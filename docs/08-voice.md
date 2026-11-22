@@ -32,6 +32,15 @@
 | `language_code` | `ko` | |
 | `stability` / `similarity_boost` / `style` / `speed` | 0.5 / 0.75 / 0.0 / 1.0 | 해설 채널은 안정성 0.5 안팎, 속도 1.0~1.1 |
 
+## API 로만 — MCP 로 만들지 않음 (2026-11-22 사용자: "일레븐랩스 사용시 반드시 api로 mcp로 사용하지 마세요 보니까 크레딧소모가 더 큰 것 같더라구요 진위 확인하고 맞다면 이렇게 해주세요.")
+| 같은 문장 (33자, Teo `0mlAtfsvMzFpppUuNWkV`, eleven_v4, 2026-11-22 실측) | 크레딧 |
+|---|---|
+| 직접 API (`/v1/text-to-speech`, 응답 헤더 `Character-Cost`) | **15** |
+| ElevenLabs MCP `creative_generate_speech` 1테이크 (estimate_only) | 33 |
+| ElevenLabs MCP 기본값 2테이크 (estimate_only) | 66 |
+
+MCP(Creative 흐름)는 글자당 약 1크레딧으로 계산되고 기본으로 두 테이크를 만들어, 같은 목소리를 직접 API 보다 2.2~4.4배 비싸게 씁니다. 그래서 목소리는 `ytflow` 의 직접 API(`_elevenlabs`·`voice-sample`·`hybrid`)로만 만들고, MCP 의 생성 도구는 쓰지 않습니다. 계정 사용량 조회처럼 크레딧을 쓰지 않는 것만 예외.
+
 ## 동작 (`ytflow/stages/media.py` 의 `_elevenlabs`)
 - `with-timestamps` 엔드포인트로 받아 **글자별 시작·끝 시각**을 `03_voice/scene_XXX.align.json` 에 저장합니다(단어 단위 자막·쇼츠 단어 팝 자막에 쓸 수 있음).
 - 같은 문장·목소리·설정이면 `.cache/elevenlabs/` 캐시를 씁니다 → 다시 돌려도 크레딧을 또 쓰지 않습니다.
