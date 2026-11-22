@@ -1,0 +1,92 @@
+{
+ "project": "20261122-curiosity-pick2",
+ "manual_version": "113",
+ "checked": "2026-11-22T23:04:12",
+ "pass": true,
+ "rows": [
+  {
+   "gate": "G0",
+   "level": "MUST",
+   "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G0",
+   "level": "SHOULD",
+   "item": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
+   "ok": true,
+   "detail": "manual/graph.json"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "topic_brief.json 있음",
+   "ok": true,
+   "detail": "01_research/topic_brief.json (schemas/topic_brief.schema.json)"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "브랜드(ai/market/curiosity)",
+   "ok": true,
+   "detail": "curiosity"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망·시청자 질문",
+   "ok": true,
+   "detail": "올림픽 마라톤에서 어떻게 차를 타고 온 선수가 1등으로 들어오고, 진짜 우승자는 쥐약 성분을 먹고 달렸을까?"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "트리거·왜 지금",
+   "ok": true,
+   "detail": "2026-11-22 정기 작업: 호기심 채널 일 1편. 판테온 편이 비공개로 끝남(사용자: \"주제가 애매하고 솔직히 사람들이 좋아할까? 하면 잘 모르겠네요 이야기를 풀어나가는게 재밌냐 하면 그거도 잘 모르겠구요\") → 후보 5개를 ① 제목만으로 끌리는가 ② 사람이 겪은 이야기인가 ③ 지우의 일상과 이어지나 로 먼저 따짐."
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망을 분명히 건드리고, 보여 줄 자료가 있다 (둘 중 하나라도 약하면 만들지 않음, 01 §3)",
+   "ok": true,
+   "detail": "강도 3 · 자료 2"
+  },
+  {
+   "gate": "G1",
+   "level": "참고",
+   "item": "욕망 점수 합계 (후보끼리 비교할 때 씀)",
+   "ok": true,
+   "detail": "합계 16 {'desire': 3, 'clarity': 3, 'timeliness': 2, 'demand': 3, 'visuals': 2, 'angle': 3}"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "수요 증거 1개 이상",
+   "ok": true,
+   "detail": "2"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "후보 3개 비교 기록",
+   "ok": true,
+   "detail": "5"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "우리만의 답(our_angle)",
+   "ok": true,
+   "detail": "기묘한 일화 모음으로 끝내지 않고, '왜 물을 주지 않았나'라는 한 질문으로 묶어 오늘의 급수대·규정으로 돌아온다. (D1 뒤 S2 에서 확정)"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "무엇이 띄우나(driver: 소재·각도·형식 + 근거)",
+   "ok": true,
+   "detail": "소재 · 제목 한 줄('1등이 차를 타고 왔다')로 끌리고, 사람들의 사연과 반전"
+  }
+ ]
+}
