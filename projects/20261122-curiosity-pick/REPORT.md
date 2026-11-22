@@ -67,9 +67,9 @@ python thumbnails.py <조각 폴더> <출력 폴더>
 |---|---|
 | 지우 화풍 | 지우 기준 그림 `art/jiwoo_ref.png`(v1 지우 네 칸) + v1 `dome.png` 만 참조로 build1·build2·build3·lime 다시 그림(`art/<시트>_v3.png`, 흰 곰 편 night.png 뺌). 지우 칸 모아 보기 `art/jiwoo_lineup_v3.jpg` 확인 |
 | 설명 삽화 | 돔 단면 도식(MG.dome·블록 탑) 14박자 → 새 GPT 시트 plan1~4(지우가 그린 설계 스케치, `art_sheets_v3.json`·`art_orders.md` v3 절). 명세 `make_spec_v3.py` → `pantheon_v3.json`(대본·박자 = v2 그대로, 도식 박자 0) |
-| S7 렌더 | Drive `영상/20261122-curiosity-pick/05_edit/pantheon_v3.mp4` (11:03, edge-tts 초안, 배경음 없음). 설명 박자 프레임 확인 `pantheon_v3_sketch_frames.jpg` — 이름표·자막 겹침 없음 |
+| S7 렌더 | Drive `영상/20261122-curiosity-pick/05_edit/pantheon_v3.mp4` (11:03, edge-tts 초안, 배경음 없음). 매뉴얼 v105 따라 오른쪽 위 사진 출처 상자 끔(`pantheon_v3_overlay.html`, 출처는 설명란). 설명 박자 프레임 확인 `pantheon_v3_sketch_frames.jpg` — 이름표·자막 겹침 없음 |
 | 자막 싱크 | sync-qa 통과 — 155/155줄, 중앙값 0.26초·95% 0.35초, 화면−소리 -0.09초 (`subs.ass` 는 v3 타임라인에서; ffprobe 길이 해석 오류는 감싸서 우회, 코드 미수정) |
 | S8 포장 | 썸네일 v3 A/B/C(`thumbnail_v3_*.png`), 제목·설명란은 v2 `youtube.md` 그대로 |
 | D4 | **사용자 결정 기다림** — `inbox/decisions/20261122-20261122-curiosity-pick-D4v3.md` |
 
-다시 만들기: v2 와 같고 `python make_spec_v3.py` → `SPEC=pantheon_v3.json OVERLAY=pantheon_v2_overlay.html TIMELINE=pantheon_v3_timeline.json python render_full.py …` (조각 폴더에는 build1·build2·build3·lime 을 `_v3` 시트에서, plan1~4 를 `plan<n>_v3.png` 에서 자름).
+다시 만들기: v2 와 같고 `python make_spec_v3.py` → `SPEC=pantheon_v3.json OVERLAY=pantheon_v3_overlay.html TIMELINE=pantheon_v3_timeline.json python render_full.py …` (조각 폴더에는 build1·build2·build3·lime 을 `_v3` 시트에서, plan1~4 를 `plan<n>_v3.png` 에서 자름).
