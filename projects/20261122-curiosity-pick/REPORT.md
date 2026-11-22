@@ -106,3 +106,15 @@ SPEC=pantheon_v3.json OVERLAY=pantheon_v3_overlay.html TIMELINE=pantheon_v4_time
 | D3 | **사용자 결정 기다림** — `inbox/decisions/20261122-20261122-curiosity-pick-D3v5.md` |
 
 통과하면: 지우가 나오는 모든 시트 + 사람·배경 시트 전부를 같은 참조 두 장 + 이 샘플 프롬프트의 화풍 문단으로 다시 그려 v5 렌더(대본 v2·박자·자막·설명 삽화 방향·실제 사진 그대로).
+
+## v6 화풍 샘플 (2026-11-22 정기 작업) — v5 샘플 답("흰곰편이 더 고퀄리티같은데 … 묘하게 조금 달라서요" → "업로드한 영상들의 지우와 비교하여 최대한 유사하게 뽑아주세요") → 샘플 다시, D3 대기
+| 단계 | 상태 |
+|---|---|
+| 참조 | 올라간 흰곰 편의 지우 시트 `night.png`·`mind.png` + 잼 편 `tasting.png`. v5 샘플·판테온 기존 그림은 넣지 않음. (trend 편 인물은 갈색 곱슬머리의 다른 인물이라 뺌) |
+| 프롬프트 | "cute·storybook·simplified backgrounds·one shadow tone" 을 빼고 "참조와 같은 사람·같은 그리기 방식"으로만 — `art/style_sample_v6.txt` (Codex `$imagegen`, `-m gpt-6-sol`) |
+| 회차 | 1회차(`style_sample_v6_r1.png`): 올려다보는 칸의 눈이 가늘고 콘크리트·대리석이 사진 쪽 → 2회차(`style_sample_v6.png`, 채택): 눈·배경 칠 두 줄만 더함, sleep.png 참조 뺌 |
+| 나란히 보기 | `art/style_sample_v6_compare.jpg` — 얼굴 비율·나이대·눈·선·그림자가 흰곰 편과 같음. 남은 차이: 햇빛 칸의 머리 갈색 윤기, 주차장 배경 묘사, 로마 칸의 배낭 |
+| 렌더 | 하지 않음 (샘플 통과 뒤) |
+| D3 | **사용자 결정 기다림** — `inbox/decisions/20261122-20261122-curiosity-pick-D3v5.md` (결과 절) |
+
+혼자 판단한 것: 지우 참조 시트로 night 와 함께 `mind.png`(서서 웃는 반측면·전신이 있음)를 고름. `channel.yaml` 의 `character.refs` 는 night·tasting 두 장이라, 샘플이 통과하면 mind.png 를 refs 에 더할지 함께 여쭘.
