@@ -15,6 +15,7 @@
 | 댓글 | commentThreads (force-ssl) | 없었음 | 새 댓글 수집(작성자 이름 저장 안 함), 질문 표시, 답글은 초안만 |
 | 썸네일 A/B '테스트 및 비교' | Studio 에만 있음(API 없음) | 수동 | 그대로 수동(Chrome) — 대신 48시간 뒤 처진 편은 `ops-act rethumb` 로 B·C 교체 실험 |
 | 고정 댓글 | API 가 '고정'을 지원하지 않음(올리기만) | — | 보고서 제안으로만 |
+| 진행 바 챕터 (2026-11-23 사용자: "영상바에 타임라인이 안나타나더라고") | 설명란 타임코드(00:00 시작·3개 이상·오름차순·각 10초 이상) + 채널 '고급 기능' | 두 채널 공개 영상 모두 챕터 없음(시청 페이지에 chapterRenderer 없음) — 설명란은 대부분 맞음 → 고급 기능이 꺼진 것으로 보임 | `ops` 가 영상마다 설명란 조건·실제 표시를 점검(보고서 §4-1), `yt-publish` 가 올리기 전 경고, `ops-act <채널> resave` 로 고급 기능을 켠 뒤 설명란 다시 저장. 흰곰 편의 4초 챕터를 고침 |
 | 매일 돌리기 | 이 PC 정기 작업(docs/56) | 시장·호기심 제작만 | `channel-ops` 22:10 추가 |
 | 분석 → 다음 편 | — | 없었음 | `channels/<폴더>/ops/next.md` 를 제작 작업이 S0 에서 읽음, 실험 장부 `data/analytics/experiments.md` |
 | 비교 채널 | `last30days`·`claude-youtube` competitor (docs/62), vidIQ(크레딧 없음) | — | 매주 일요일 주간 요약에서 |
@@ -52,6 +53,8 @@ python -m ytflow ops-act market revert --video <id>            # 마지막 교�
 모든 행동은 `data/analytics/actions.jsonl` 에 전·후와 함께 기록.
 
 ## 5. 사용자가 할 일 (한 번)
+**진행 바 챕터:** YouTube Studio → 설정 → 채널 → 기능 사용 자격 → **고급 기능** 사용(두 채널 각각, 전화 인증 등). 켜지면 `python -m ytflow ops-act market resave`·`ops-act curiosity resave` 로 기존 영상의 설명란을 다시 저장(내용 그대로).
+
 분석 권한 추가 — 이 PC 에서 채널마다(브라우저가 열리면 해당 채널의 브랜드 계정을 고르고 허용):
 ```powershell
 python scripts\youtube_auth.py E:\ytflow-local\.secrets\client_secret.json --to-github
