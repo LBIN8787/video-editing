@@ -4,8 +4,8 @@
 # (앞 말: "fable5.2가 sonnet5.5랑 opus5.5를 오케스트레이션 했으면 해 물론 모델이 새로 나오면 이도 재 설정하고")
 #
 # 티어는 제공사와 상관없이 셋 — 일은 티어에 맡기고(tasks), 티어마다 어느 모델인지는 제공사별 표(providers)에서 바꿉니다.
-#   judge   판단: 무엇을 만들지·어느 쪽이 맞는지·통과인지 정하는 일, 일 나누기(지휘), 사용자에게 올리는 결정 정리
-#   complex 복잡한 일: 길고 여러 조건을 함께 지켜야 하는 제작 — 원고·대본 쓰기·고치기, 레퍼런스 분석, 검수표 작성
+#   judge   판단: 무엇을 만들지·어느 쪽이 맞는지·통과인지 정하는 일, 일 나누기(지휘), 사용자에게 올리는 결정 정리, **원고·대본 쓰기**(대본이 1순위)
+#   complex 복잡한 일: 길고 여러 조건을 함께 지켜야 하는 제작 — 대본 근거 검수표·구성요소 대조표(쓴 모델과 다른 눈으로), 레퍼런스 분석, 장면표·연출 설계, 영상 검수 대조
 #   simple  간단한 일: 범위가 분명한 실무 — 자료 수집·요약·목록 뽑기·옮겨 적기·렌더·캡처·자막
 # 쓰는 곳: ytflow/llm.py (claude-cli·api → anthropic, codex-cli → openai) · .claude/agents/{senior,worker}.md
 # 새 모델이 나오면: providers 의 이름만 바꾸고 checked 날짜를 고친다 (정기 검토가 30일마다 묻는다).
@@ -30,10 +30,10 @@ tasks:
   scout: judge             # 소스가 강한 주제·형식 판단
   shorts_pick: judge       # 쇼츠 소재 고름
   package: judge           # 제목·썸네일 문구 고름 (무엇이 눌릴지 판단)
-  article: complex         # 원고
-  script: complex          # 대본
-  script_fix: complex      # 대본 고치기
-  shorts_script: complex
+  article: judge           # 원고 — 대본이 1순위 (2026-11-22 사용자: "대본쓰기의 경우 매우 중요한데")
+  script: judge            # 대본 — 가장 중요한 일이라 판단 티어가 직접 씀. 근거 검수표는 complex 가 따로(쓴 쪽과 검수하는 쪽을 나눔)
+  script_fix: judge        # 대본 고치기
+  shorts_script: judge
   benchmark: complex       # 레퍼런스 대본 규칙 분석
   style_rules: complex     # 레퍼런스 장면 시트 분석
   research: simple         # 자료 수집 (근거 검수는 따로 — 13 §4-1)
