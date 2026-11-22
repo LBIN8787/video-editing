@@ -30,3 +30,9 @@ SPEC=pantheon.json OVERLAY=pantheon_overlay.html TIMELINE=pantheon_timeline.json
 python thumbnails.py <조각 폴더> <출력 폴더>
 ```
 - 막힌 것: Codex 기본 모델(gpt-6.2-sol)이 ChatGPT 계정에서 거부 → `-m gpt-6-sol` 로 그림. Codex 쪽 저장 명령이 막혀 그림은 `~/.codex/generated_images` 에서 옮김. Wikimedia 이미지 서버가 한동안 요청 제한(429) — 잠시 뒤 받음. `curiosity_build.py` 는 main 에 없음(흰 곰 작업 브랜치에만) → 의지력 편 렌더러를 씀.
+
+## v2 대본 (2026-11-22 정기 작업) — D4 기각 반영
+- 기각 원문: "지식나열같아요 체감이 안된다 … 쇼츠로 건물짓는 영상 … 같이 이야기를 구경하고 공감 참여 이해를 유도"
+- `02_script/script_v2.md`: 지우가 철근 없이 돔을 직접 지어 보는 과정(고르게 붓기 실패 → 아래 두껍게·고리 → 가벼운 돌·홈 → 꼭대기 비우기 → 금이 가도 섬 → 철근의 녹과 비교 → 하얀 덩어리 실험). 팩트시트 F18(돔의 힘·계단 고리·균열 위치 ⚠️)·F19(크기 비교 계산) 추가, `intent.md`·`script_review.md` v2 절.
+- `check --upto G4` MUST 통과(장면 파일 hybrid.json 은 아직 v1 — D2 통과 뒤 S5 에서 v2 로 새로).
+- **D2 대기:** `inbox/decisions/20261122-20261122-curiosity-pick-D2v2.md`

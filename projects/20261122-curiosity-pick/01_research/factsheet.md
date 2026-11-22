@@ -24,6 +24,9 @@
 | F16 | 철근 콘크리트: 콘크리트는 압축에 강하고 인장에 약해 철근이 인장을 맡음. 물·염분·이산화탄소(탄산화)가 철근에 닿으면 녹이 슬고 부피가 커져 콘크리트를 갈라지고 떨어지게 함 — 콘크리트 열화의 가장 흔한 형태 | ✅(공학 해설 다수 일치) | [ASCE Civil Engineering 2023](https://asce.org/publications-and-news/civil-engineering-source/civil-engineering-magazine/article/2023/03/roman-concrete-offers-lessons-in-longevity) · Practical Engineering |
 | F17 | 한계: 로마 콘크리트가 요즘 콘크리트보다 강한 것은 아님(요즘 고강도 콘크리트의 압축 강도가 훨씬 높고 예측 가능). 남은 로마 건물만 보이는 생존 편향. 철근 없이 지으려면 더 많은 재료가 듦 | ✅(해설) | Practical Engineering |
 
+| F18 | 돔의 힘: 자오선(위아래) 방향은 누르는 힘만 받고, 둘레(고리) 방향 힘은 꼭대기 쪽은 누름·아래쪽은 잡아당김(벌어짐). 바깥 아래쪽의 계단식 고리(step rings)가 벌어지는 밑단을 눌러 줌. 균열 14줄 남짓은 아래 가장자리에서 세로로 올라가 위도 약 57° 근처(고리 힘이 당김→누름으로 바뀌는 자리)까지 | ⚠️(해설·강의 자료, Masi 2018 은 ✅ 초록 — 위도는 해설 요약) | [Masi 외 2018 (HAL v2)](https://hal.archives-ouvertes.fr/hal-01719997v2) · [Engineering Rome: Studying Domes](https://engineeringrome.org/?p=6541) · [Univ. Trieste 강의 자료](https://moodle2.units.it/pluginfile.php/239165/mod_resource/content/1/Materials%20and%20construction%20of%20the%20Pantheon.pdf) |
+| F19 | 크기 비교(이 편의 계산, v2): 43m ≈ 시내버스(약 11m) 4대 · 아파트 한 층 약 2.9m → 15층쯤 · 6.4m > 어른 셋(약 1.7m×3=5.1m) · 1.2/6.4 ≈ 5분의 1 | 계산 | 버스·층고는 일반 치수(대략) |
+
 ## 대본에 쓰는 숫자와 비교 기준
 - 43m(지름) ↔ 높이도 같은 43m (공 하나가 꼭 들어가는 크기 — 위키의 설명, ⚠️)
 - 6.4m(아래 두께) ↔ 1.2m(구멍 둘레)
