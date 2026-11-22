@@ -73,3 +73,25 @@ python thumbnails.py <조각 폴더> <출력 폴더>
 | D4 | **사용자 결정 기다림** — `inbox/decisions/20261122-20261122-curiosity-pick-D4v3.md` |
 
 다시 만들기: v2 와 같고 `python make_spec_v3.py` → `SPEC=pantheon_v3.json OVERLAY=pantheon_v3_overlay.html TIMELINE=pantheon_v3_timeline.json python render_full.py …` (조각 폴더에는 build1·build2·build3·lime 을 `_v3` 시트에서, plan1~4 를 `plan<n>_v3.png` 에서 자름).
+
+## v4 영상 (2026-11-22 정기 작업) — v3 D4 기각 + 바로잡음("되살리고 튀는 지우칸만 고쳐쥬세요") → D4 요청
+| 단계 | 상태 |
+|---|---|
+| 되살림 | build1·build2·build3·lime 은 v2 시트(`art/<시트>.png`)로 되돌림, v1 시트 그대로. `jiwoo_ref.png`·`*_v3` 짓는 시트는 쓰지 않음 |
+| 나란히 보기 | 지우 칸 전부를 `garage_tr`(주차장 지우)와 한 장에 → `art/jiwoo_lineup_v4.jpg` |
+| 튀는 칸만 다시 | `dome_bl`(반실사 클로즈업)·`build2_bl`(만화풍 얼굴) 한 칸씩 새로(`art/dome_bl_v4.png`·`build2_bl_v4.png`), 설계 스케치 plan1~4 는 v3 시트를 고치기(구성 그대로, 지우만) → `art/plan<n>_v4.png`. 참조는 garage.png + 잼 편 tasting.png 만(Codex `$imagegen`, `-m gpt-6-sol`, 프롬프트 `art/*_v4.txt`) |
+| 그대로 둔 칸 | build1_tr·build3_tl 은 고칠 후보였지만 나란히 보기에서 같은 화풍이라 v2 그대로 |
+| S7 렌더 | Drive `영상/20261122-curiosity-pick/05_edit/pantheon_v4.mp4` (11:03, = final.mp4) — 타임라인이 v3 과 같아 자막 싱크(v3 sync-qa 통과)·subs.ass 그대로 유효. 명세·오버레이는 v3 그대로(`pantheon_v3.json`·`pantheon_v3_overlay.html`), 타임라인 `05_edit/pantheon_v4_timeline.json` |
+| 바뀐 것 | `05_edit/pantheon_v4_changes.jpg`(전·후), 표는 `inbox/decisions/20261122-20261122-curiosity-pick-D4v4.md` |
+| S8 포장 | 썸네일 v4 A/B/C(C 는 v2 build1_br 로 돌아감), 제목·설명란 그대로 |
+| D4 | **사용자 결정 기다림** — `inbox/decisions/20261122-20261122-curiosity-pick-D4v4.md` |
+
+다시 만들기 (조각 폴더):
+```
+# 시트 폴더에 garage dome end history lab rust struct build1 build2 build3 lime .png 와 plan<n>_v4.png → plan<n>.png
+python cut_sheets.py <시트 폴더> <조각 폴더>
+# dome_bl_v4.png·build2_bl_v4.png 는 16:9 가운데 자르기 → 1920×1080 으로 <조각 폴더>/dome_bl.jpg·build2_bl.jpg 덮어쓰기
+# photo_dome·photo_oculus: Commons "Oculus, Dome, Pantheon (31565206097).jpg" ?width=1920 (1920×2560) 에서 오쿨루스 중심(985,1184) 기준 1920×1080 / 960×540→확대
+BEATS=beats_v2.json python full_voice.py <TTS 폴더>
+SPEC=pantheon_v3.json OVERLAY=pantheon_v3_overlay.html TIMELINE=pantheon_v4_timeline.json python render_full.py <TTS 폴더> <조각 폴더> <작업 폴더> <출력.mp4> 6
+```
