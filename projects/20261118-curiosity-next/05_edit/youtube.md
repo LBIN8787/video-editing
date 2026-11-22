@@ -1,4 +1,50 @@
-# 업로드 묶음 (초안 — D4 최종 승인은 사용자만)
+# 유튜브 업로드 — 20261118-curiosity-next
+
+(2026-11-22 올라가 있는 제목·설명란을 그대로 옮기고 태그·해시태그만 더함 — yt-publish --update-meta 용. 이전 초안은 아래에 그대로)
+
+## 제목 (기본 → 테스트 및 비교 후보)
+1. 친구와 내 기억이 다를 때, 더 또렷이 기억하는 쪽이 맞을까?
+
+## 설명란 (그대로 붙여 넣기)
+```
+1986년 챌린저호 폭발 다음 날, 한 심리학자가 학생들에게 종이 한 장씩을 나눠 주었습니다. 2년 반 뒤, 그 종이와 학생들의 기억은 달라져 있었습니다.
+기억은 왜 바뀌고, 우리는 왜 바뀐 줄을 모를까요. 바틀렛의 '유령들의 전쟁', 로프터스·파머의 교통사고 실험, '쇼핑몰 미아' 연구와 그 재분석, 나더·르두의 재응고화 실험, 섀크터의 가설, 9·11 기억 연구, 그리고 DNA로 뒤집힌 목격자 증언까지 실험과 기록으로 따라갑니다.
+
+챕터
+00:00 종이 한 장
+01:23 녹화가 아니다
+02:26 단어 하나
+04:04 없던 사건까지
+05:26 뇌 안에서 일어나는 일
+07:38 왜 이렇게 만들어졌을까
+08:46 확신이라는 착각
+09:55 확신이 치른 대가
+11:07 우리가 할 수 있는 것
+12:20 다시, 그 종이
+
+출처
+- Neisser, U. & Harsch, N. (1992). Phantom flashbulbs. / 리뷰: https://pmc.ncbi.nlm.nih.gov/articles/PMC2925254/
+- Bartlett, F. C. (1932). Remembering. Cambridge University Press.
+- Loftus, E. F. & Palmer, J. C. (1974). Journal of Verbal Learning and Verbal Behavior, 13, 585–589.
+- Loftus, E. F. & Pickrell, J. E. (1995). The formation of false memories. / 재분석 보도: https://scientificamerican.com/article/people-likely-arent-as-susceptible-to-false-memories-as-researchers-thought
+- Nader, K., Schafe, G. E. & LeDoux, J. E. (2000). Nature, 406, 722–726. https://pubmed.ncbi.nlm.nih.gov/10963596/
+- Schacter, D. L. & Addis, D. R. (2007). Phil. Trans. R. Soc. B, 362, 773–786.
+- Talarico, J. M. & Rubin, D. C. (2003). Psychological Science, 14(5), 455–461.
+- Innocence Project — Ronald Cotton: https://innocenceproject.org/cases/ronald-cotton
+
+사진
+- 챌린저호 (1986.1.28): NASA / Kennedy Space Center, 퍼블릭 도메인 (Wikimedia Commons)
+- 프레더릭 바틀렛 (1948): 퍼블릭 도메인 (Wikimedia Commons)
+
+#심리학 #기억 #뇌과학
+```
+
+## 태그
+기억, 기억 왜곡, 거짓기억, 거짓 기억, 뇌과학, 심리학, 심리학 실험, 심리 실험, 오정보 효과, 재응고화, 로프터스, 목격자 증언, 섬광 기억, 챌린저호, 인지심리학, 호기심, 한 겹 더 보면
+
+---
+
+# (이전 초안) 업로드 묶음 (초안 — D4 최종 승인은 사용자만)
 
 ## 제목 후보 (호기심 채널: ① 질문형 ② 장면·숫자형 ③ 상식 깨기형)
 1. 떠올리는 순간 기억은 다시 열린다 — 생생한 기억을 믿을 수 없는 과학적 이유
