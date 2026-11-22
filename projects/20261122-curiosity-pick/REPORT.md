@@ -1,4 +1,4 @@
-# REPORT — 호기심 「철근 하나 없는 1,900년 된 돔은 왜 아직 서 있을까?」 (2026-11-22, 최종 확인 대기)
+# REPORT — 호기심 「철근 하나 없는 1,900년 된 돔은 왜 아직 서 있을까?」 (2026-11-22, v2 최종 확인 대기)
 
 ## S0 착수 메모 (2026-11-22)
 - 채널이 '분야를 가리지 않는 호기심 이야기'로 바뀐 뒤 첫 편(channel.yaml, 2026-11-22). 직전 편: 의지력(통과·11-22 18:00 공개 예약), 흰 곰(올림·비공개).
@@ -36,3 +36,28 @@ python thumbnails.py <조각 폴더> <출력 폴더>
 - `02_script/script_v2.md`: 지우가 철근 없이 돔을 직접 지어 보는 과정(고르게 붓기 실패 → 아래 두껍게·고리 → 가벼운 돌·홈 → 꼭대기 비우기 → 금이 가도 섬 → 철근의 녹과 비교 → 하얀 덩어리 실험). 팩트시트 F18(돔의 힘·계단 고리·균열 위치 ⚠️)·F19(크기 비교 계산) 추가, `intent.md`·`script_review.md` v2 절.
 - `check --upto G4` MUST 통과(장면 파일 hybrid.json 은 아직 v1 — D2 통과 뒤 S5 에서 v2 로 새로).
 - **D2 대기:** `inbox/decisions/20261122-20261122-curiosity-pick-D2v2.md`
+
+## v2 영상 (2026-11-22 정기 작업) — D2 v2 통과("영상 한번 생성해주세요", 샘플 없이) → D4 요청
+| 단계 | 상태 |
+|---|---|
+| S5 장면표 | `02_script/shotlist_v2.md`, 명세 `pantheon_v2.json` ← `make_spec_v2.py` ← `beats_v2.json`(41박자, `beats.py` 에 🎮 시청자 참여 박자 추가) |
+| 원화 | 새 GPT 시트 4장(build1·build2·build3·lime — 지우가 짓는 과정, `art_sheets_v2.json`·`art_orders.md` v2 절) + v1 7장 재사용 → Drive `영상/20261122-curiosity-pick/art/` |
+| 모션그래픽 | **돔 단면 도식 `MG.dome`**(실제 비율 1m=14px, `pantheon_v2_overlay.html`) — 같은 단면이 박자마다 고쳐 지어짐(크기 비교·누름/벌어짐·금·밑단 두께·어른 셋·계단 고리·돌 세 층·블록 탑·천장 홈·'전부 무거웠다면'·꼭대기 열림·비·배수구) |
+| S7 렌더 | Drive `영상/20261122-curiosity-pick/05_edit/pantheon_v2.mp4` (11:04, edge-tts 초안, 배경음 없음). 프레임 확인 후 도식 글 2곳(버스·배수구)이 자막과 겹쳐 위로 옮겨 다시 렌더 |
+| 자막 싱크 | sync-qa 통과 — 154/155줄, 0.3초 안 95.5%, 95% 0.30초, 화면−소리 -0.09초 (`05_edit/sync_qa.json`, `subs.ass` 는 v2 타임라인에서). 렌더러 `word_times` 를 difflib 글자 맞춤으로 바꿈(edge-tts 경계가 글자를 빠뜨리거나 겹쳐 박자 7·24 자막이 최대 2초 일렀음) |
+| S8 포장 | 썸네일 v2 A/B/C(C 를 '철근 없이 / 지어 봤더니 쩍'으로), `05_edit/youtube.md` v2(챕터·제목 3번 교체) |
+| D4 | **사용자 결정 기다림** — `inbox/decisions/20261122-20261122-curiosity-pick-D4v2.md` |
+
+다시 만들기:
+```
+cd projects/20261122-curiosity-pick/02_script
+python beats.py script_v2.md beats_v2.json && python make_spec_v2.py
+BEATS=beats_v2.json python full_voice.py <TTS 폴더>
+python cut_sheets.py "<YTFLOW_DRIVE>/영상/20261122-curiosity-pick/art" <조각 폴더>   # + photo_dome·photo_oculus.jpg (Commons Special:FilePath?width=1920 에서 잘라 냄)
+SPEC=pantheon_v2.json OVERLAY=pantheon_v2_overlay.html TIMELINE=pantheon_v2_timeline.json python render_full.py <TTS 폴더> <조각 폴더> <작업 폴더> <출력.mp4> 6
+python thumbnails.py <조각 폴더> <출력 폴더>
+```
+- 알아 둘 것: GPT 시트 두 칸(build1 왼쪽 위·build2 오른쪽 위)에 완성된 판테온 현관이 배경에 함께 그려짐(짓는 중인데 완성 건물이 보임) — 짧게 지나가는 칸이라 그대로 둠, 거슬리면 그 칸만 다시 그림.
+- `check`: MUST 미통과 2개는 v1 과 같은 성격 — G6 레이아웃 QA 는 hybrid 렌더러 전용 기록(이 렌더러는 프레임을 눈으로 확인), G6 싱크 중앙값 0.26초(기준 0.2) — 측정 쉼 보정 차이로 v1(0.26)과 같음.
+- 길이 11:04 로 v1(8:50)보다 김 — 짓는 과정 장(2~6장)이 늘어난 몫.
+- 막힌 것: Wikimedia upload 서버 429 → Commons `Special:FilePath` 로 받음. `codex exec -i` 가 뒤 인자를 그림 경로로 먹어 프롬프트는 stdin 으로.

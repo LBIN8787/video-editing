@@ -5,16 +5,16 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 HERE = Path(__file__).resolve().parent
 FONTS = (HERE.parents[2] / "ytflow" / "assets" / "fonts").as_uri()
-V = {   # 판테온 편 (2026-11-22) — 영상 첫 장면·핵심 반전·결론과 같은 말. '1,900년'(지금의 고리)을 큰 글씨에
+V = {   # 판테온 편 (2026-11-22, v2 에서 C 를 '직접 지어 보기'로) — 영상 첫 장면·핵심 반전·결론과 같은 말. '1,900년'(지금의 고리)을 큰 글씨에
  "A": dict(img="dome_tl", side="left", css="background-size:1500px auto;background-position:180px 30%;background-repeat:no-repeat",
            lines=["철근 0개로", "<b>1,900년</b>"], small="비가 그대로 들어오는 돔",
            why="영상 3~4박자(구멍으로 쏟아지는 비 · 철근 0가닥 · 약 1,900년). 제목의 질문을 숫자 두 개로."),
  "B": dict(img="garage_tl", side="right", css="background-size:1400px auto;background-position:-260px -40px;background-repeat:no-repeat",
            lines=["주차장은 금 가는데", "이 돔은 <b>왜?</b>"], small="몇십 년 vs 1,900년",
            why="첫 문장(지하주차장 녹물)과 같은 장면 — 시청자가 '내가 본 그 자국'으로 알아봄."),
- "C": dict(img="lab_tl", side="left", css="background-size:1500px auto;background-position:200px 50%;background-repeat:no-repeat",
-           lines=["금을 스스로", "<b>메우는</b> 돌"], small="로마 콘크리트의 하얀 점",
-           why="4장의 반전(실수로 알던 하얀 점이 2주 만에 틈을 메움)을 한 줄로."),
+ "C": dict(img="build1_br", side="left", css="background-size:1400px auto;background-position:60px 20%;background-repeat:no-repeat",
+           lines=["철근 없이", "지어 봤더니 <b>쩍</b>"], small="1,900년 된 돔, 직접 지어 보기",
+           why="v2 의 뼈대(지우가 직접 지어 보는 과정) — 첫 시도에서 아래가 벌어져 금이 가는 장면(3장). 실패에서 시작하는 구경거리."),
 }
 HTML = """<!doctype html><html><head><meta charset=utf-8><style>
 @font-face{font-family:BH;src:url(F/BlackHanSans-Regular.ttf)}@font-face{font-family:NGX;src:url(F/NanumGothic-ExtraBold.ttf)}

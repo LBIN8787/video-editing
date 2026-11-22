@@ -22,23 +22,36 @@ def dur(p):
 
 
 def word_times(text, toks):
-    """원문 낱말마다 (시작, 끝). 읽기 바꿈을 적용한 낱말의 글자를 TTS 단어 경계 글자열에 차례로 맞춘다."""
-    stream = []   # 글자마다 (시작, 끝)
+    """원문 낱말마다 (시작, 끝). TTS 단어 경계 글자열과 원문 글자열을 difflib 로 맞춘다
+    (edge-tts 경계가 글자를 빠뜨리거나 겹쳐 내는 일이 있어 — 판테온 v2 '하나. 철'·'균열. 연 | 열. 연' — 차례 맞춤은 뒤가 밀림)."""
+    import difflib
+    sc, st = "", []   # TTS 글자·글자마다 (시작, 끝)
     for a, b, w in toks:
-        stream += [(a, b)] * len(norm(w))
+        t = norm(w); sc += t; L = max(len(t), 1)
+        st += [(a + (b - a) * j / L, a + (b - a) * (j + 1) / L) for j in range(len(t))]   # 한 경계 안에서만 글자로 나눔(문장 전체 비례 배분 아님)
     words = text.split()
-    out, p = [], 0
-    for w in words:
+    oc, own = "", []
+    for i, w in enumerate(words):
         sw = w
         for k, v in SAY.items():
             sw = sw.replace(k, v)
-        n = len(norm(sw))
-        if n == 0:
-            out.append(out[-1] if out else (0, 0)); continue
-        seg = stream[p:p + n] or stream[-1:]
-        out.append((seg[0][0], seg[-1][1])); p += n
-    if p != len(stream):
-        print("  ! 글자 맞춤 어긋남", len(stream) - p, text[:30])
+        t = norm(sw); oc += t; own += [i] * len(t)
+    m = {}
+    for blk in difflib.SequenceMatcher(None, oc, sc, autojunk=False).get_matching_blocks():
+        for k in range(blk.size):
+            m[blk.a + k] = blk.b + k
+    out = [None] * len(words)
+    for i in range(len(words)):
+        idx = [m[c] for c, o in enumerate(own) if o == i and c in m]
+        if idx:
+            out[i] = (st[min(idx)][0], st[max(idx)][1])
+    if len(m) < len(oc):
+        print("  ! 글자 맞춤", len(oc) - len(m), "자 못 맞춤", text[:30])
+    last = (0, 0)
+    for i in range(len(out)):   # 못 맞춘 낱말(문장부호만 등)은 앞 낱말 끝에 붙임
+        if out[i] is None:
+            out[i] = (last[1], last[1])
+        last = out[i]
     return words, out
 
 
