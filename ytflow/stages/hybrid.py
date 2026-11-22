@@ -343,7 +343,12 @@ def s_versus(D: HDoc, sc: dict, bt: list, dur: float):
         D.icon(it["icon"], x, 300, 120, col, at=at)
         D.text(x, 520, it["value"], FT("value"), min(150 if getattr(D, "calm", False) else 210, fit(FT("value"), it["value"], 210, 620).size), col, at=at + 0.2, counter=True)   # 긴 값(12만 2,000주)이 'vs'·화면 끝에 닿지 않게
         D.text(x, 680, it["label"], FT("label"), 40, "#5a5f6a", at=at + 0.4)
-    D.text(W / 2, 520, "vs", FT("note"), 90, D.muted, at=t0 + 1.2)
+    # 가운데 말: 같은 종류끼리 맞붙일 때만 'vs'. 말과 시장(발언 ↔ 가격)처럼 종류가 다르면 '그런데',
+    # 같은 사건을 두 사람이 다르게 읽은 것이면 비움 (2026-11-22 사용자: "vs가 들어갈 자리가 아니지 않나요?")
+    mid = sc.get("mid", "vs")
+    if mid:
+        # 'vs' 는 두 값 사이, 긴 말('그런데')은 값에 닿지 않게 아이콘 줄(위쪽 빈자리)에
+        D.text(W / 2, 520 if mid == "vs" else 300, mid, FT("note"), 90 if mid == "vs" else 60, D.muted, at=t0 + 1.2)
     if len(bt) > 1:
         t1 = bt[1][0]
         D.circle(W * 0.72, 520, 210, 130, at=t1 + 0.3)
