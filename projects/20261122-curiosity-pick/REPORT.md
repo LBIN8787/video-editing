@@ -95,3 +95,14 @@ python cut_sheets.py <시트 폴더> <조각 폴더>
 BEATS=beats_v2.json python full_voice.py <TTS 폴더>
 SPEC=pantheon_v3.json OVERLAY=pantheon_v3_overlay.html TIMELINE=pantheon_v4_timeline.json python render_full.py <TTS 폴더> <조각 폴더> <작업 폴더> <출력.mp4> 6
 ```
+
+## v5 화풍 샘플 (2026-11-22 정기 작업) — v4 D4 기각("거의 전구간이 전부 이전 영상들 화풍이랑 달라 실사풍에 눈은 작고 완전 다른 화풍과 캐릭터가됐어") → 샘플만, D3 요청
+| 단계 | 상태 |
+|---|---|
+| 진단 | 기준으로 삼던 `garage.png`(v1 주차장 지우)부터 이전 영상 화풍이 아님 → 판테온 편 기존 그림은 어떤 것도 참조로 쓰지 않음 |
+| 샘플 | 참조 = 흰 곰 편 `night.png` + 잼 편 `tasting.png` 두 장만. 4칸 시트 1장(주차장 녹물·판테온 올려다봄·공사장 돔 가리킴·설계 스케치 설명) → Drive `art/style_sample_v5.png`, 프롬프트 `art/style_sample_v5.txt` (Codex `$imagegen`, `-m gpt-6-sol`, 한 번에 그림) |
+| 나란히 보기 | `art/style_sample_v5_compare.jpg` — 둥근 얼굴·큰 눈·단발·굵은 선·평면 채색이 이전 영상과 같은 계열. 다른 점: 조금 더 어려 보임, 머리색이 짙은 갈색 |
+| 렌더 | 하지 않음 (샘플 통과 뒤) |
+| D3 | **사용자 결정 기다림** — `inbox/decisions/20261122-20261122-curiosity-pick-D3v5.md` |
+
+통과하면: 지우가 나오는 모든 시트 + 사람·배경 시트 전부를 같은 참조 두 장 + 이 샘플 프롬프트의 화풍 문단으로 다시 그려 v5 렌더(대본 v2·박자·자막·설명 삽화 방향·실제 사진 그대로).
