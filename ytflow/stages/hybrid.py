@@ -152,9 +152,12 @@ class HDoc(hyper.Doc):
         return self.items
 
     def label(self, text: str, dark: bool = False):
-        if not text:
+        # 2026-11-22 사용자: "오른쪽 위에 설명? 흰색? 저게 너무 길고 가끔 화면을 가려" — 기본은 화면에 안 씀(출처는 설명란 📚 출처).
+        #   spec "source_label": "off"(상자 모드 기본) | "small"(작은 글씨, 차분한 모드 기본) | "box"(예전 흰 상자)
+        mode = getattr(self, "src_label", "small" if getattr(self, "calm", False) else "off")
+        if not text or mode == "off":
             return
-        if getattr(self, "calm", False):   # 호기심 채널처럼: 상자 없는 작은 출처 글씨
+        if mode == "small":   # 호기심 채널처럼: 상자 없는 작은 출처 글씨
             i = self._id()
             self._hud_or_items().append(f'<div id="{i}" style="position:absolute;right:56px;top:46px;font-family:gr,sans;font-size:22px;color:rgba(255,255,255,.72);'
                                         f'white-space:nowrap;text-shadow:0 1px 4px #000">{_e(text)}</div>')
@@ -1271,6 +1274,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     D.bg_name = bg_name
     D._work = work
     D.calm = bool(spec.get("calm"))
+    D.src_label = spec.get("source_label") or ("small" if D.calm else "off")   # 2026-11-22 사용자: 오른쪽 위 출처 상자가 길고 화면을 가림
     # 깔끔한 그래프 (2026-11-21 사용자: "그래프 스타일도 바꿔주세요 좀 깔끔하게요 브리핑이랑 분석 둘 다요") — 시장 기본: 빗금 없는 면 막대·가는 축·점선 없는 눈금
     D.chart_clean = spec.get("chart_style", "clean" if spec.get("brand") == "market" else "rough") == "clean"   # 차분하고 깔끔한 모드 (2026-11-21 사용자) — 손그림 강조 없음, 아래 calm_pass 로 움직임·효과음 정리
     from . import graphics

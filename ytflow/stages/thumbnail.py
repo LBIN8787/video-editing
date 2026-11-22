@@ -14,6 +14,8 @@
 - punch : (시장, 2026-11-19 사용자 "썸네일 스타일을 좀 더 눈에 들어오게") 컬러 사진 꽉 채움 + 아주 큰 두 줄 글씨 +
           강조 단어는 노란 상자 위 검은 글씨 + 큰 숫자 칩(▲초록·▼빨강). 작은 손글씨 줄 대신 칩. "theme": "dark" 인 versus 도 같은 결.
           chips: [{"text": "엔비디아 ▼2.89%", "color": "down"|"up"|"yellow"}]
+- trend : (2026-11-22 사용자: 40·50대 위주 → 젊은 유입층, "좀 트렌디하게") 3D 일러스트(GPT 이미지) 꽉 채움 + 알약 태그 +
+          블랙한산스 두 줄(딱딱한 그림자, 강조 한 단어만 네온) + 스티커. 말투는 구어체 질문.
 - person: (시장, 2026-11-20 사용자: "유명인사가 썸네일에 나오거나 유명인사를 다룬 주제 내용들이 조회수가 높은 것 같은데")
           사건의 당사자 얼굴을 오른쪽에 크게(얼굴을 찾아 화면 높이의 40~50% 로 자름, 컬러) + 이름표(이름 · 직함) + 왼쪽 큰 두 줄.
           "person": {"name": "젠슨 황", "role": "엔비디아 CEO"}, "quote": "따옴표 한 마디"(선택). 근거 docs/55-celebrity-effect.md
@@ -459,7 +461,82 @@ def _chart(v: dict) -> tuple[Image.Image, list]:
     return base, boxes
 
 
+BHS = FONTS / "BlackHanSans-Regular.ttf"
+NEON = {"lime": (190, 255, 60), "pink": (255, 70, 160), "cyan": (60, 230, 255), "yellow": (255, 222, 40)}
+
+
+def _trend(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
+    """젊은 층용 (2026-11-22 사용자: "내 채널이 대부분 40대50대 이상이거든? 젊은 유입층을 늘리고싶은데 좀 트렌디하게").
+    3D 일러스트(GPT 이미지) 꽉 채움 + 왼쪽 어둡게 + 알약 태그 + 블랙한산스 두 줄(검은 테두리·딱딱한 그림자, 강조 한 단어만 네온) + 작은 스티커 칩.
+    v: image.file, top, lines, hl, accent(lime|pink|cyan|yellow), sticker(선택, 오른쪽 위 비스듬한 스티커), chips"""
+    boxes = []
+    acc = NEON.get(v.get("accent", "lime"), NEON["lime"])
+    im = _cover(_image(project, spec, v["image"]), W, H, *v["image"].get("focus", [0.5, 0.5]))
+    im = ImageEnhance.Color(im).enhance(v.get("saturate", 1.15))
+    base = im.convert("RGBA")
+    sh = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    sd = ImageDraw.Draw(sh)
+    for x in range(W):
+        a = int(205 * max(0.0, 1 - x / (W * 0.7)) ** 1.1)
+        sd.line([(x, 0), (x, H)], fill=(6, 6, 14, a))
+    base.alpha_composite(sh)
+    d = ImageDraw.Draw(base)
+    tx, y = 58, v.get("text_y", 200)
+    if v.get("top"):
+        ft = _font(BHS, 40)
+        tw = ft.getlength(v["top"])
+        d.rounded_rectangle([tx, y - 78, tx + tw + 44, y - 18], 30, fill=acc)
+        d.text((tx + 22, y - 74), v["top"], font=ft, fill=(8, 8, 12))
+        boxes.append((tx, y - 78, tx + tw + 44, y - 18))
+    maxw = v.get("text_w", 760)
+    for ln in v["lines"]:
+        s = v.get("size", 132)
+        while _font(BHS, s).getlength(ln) > maxw and s > 60:
+            s -= 4
+        f = _font(BHS, s)
+        cx = tx
+        toks = ln.split(" ")
+        for i, tok in enumerate(toks):
+            word = tok + (" " if i < len(toks) - 1 else "")
+            col = acc if any(h in tok for h in v.get("hl", [])) else (255, 255, 255)
+            off = max(6, s // 16)
+            d.text((cx + off, y + off), tok, font=f, fill=(0, 0, 0), stroke_width=max(8, s // 12), stroke_fill=(0, 0, 0))   # 딱딱한 그림자
+            d.text((cx, y), tok, font=f, fill=col, stroke_width=max(8, s // 12), stroke_fill=(0, 0, 0))
+            cx += f.getlength(word)
+        boxes.append((tx, y, cx, y + s))
+        y += int(s * 1.1)
+    chips = v.get("chips", [])
+    if chips:
+        y += 22
+        cx = tx
+        for c in chips:
+            fs = c.get("size", 44)
+            f = _font(BHS, fs)
+            w = f.getlength(c["text"]) + fs * 0.9
+            col = {"up": UP, "down": DOWN}.get(c.get("color"), (255, 255, 255))
+            fg = (255, 255, 255) if c.get("color") in ("up", "down") else (10, 10, 10)
+            d.rounded_rectangle([cx, y, cx + w, y + fs * 1.5], int(fs * 0.75), fill=col, outline=(0, 0, 0), width=4)
+            d.text((cx + fs * 0.45, y + fs * 0.22), c["text"], font=f, fill=fg)
+            boxes.append((cx, y, cx + w, y + fs * 1.5))
+            cx += w + 18
+    if v.get("sticker"):   # 비스듬한 스티커 한 장 (오른쪽 위)
+        fs = 46
+        f = _font(BHS, fs)
+        tw = f.getlength(v["sticker"])
+        lay = Image.new("RGBA", (int(tw + 70), int(fs * 1.9)), (0, 0, 0, 0))
+        ld = ImageDraw.Draw(lay)
+        ld.rounded_rectangle([4, 4, lay.width - 4, lay.height - 4], 18, fill=(255, 255, 255), outline=(0, 0, 0), width=5)
+        ld.text((lay.width / 2, lay.height / 2), v["sticker"], font=f, fill=(10, 10, 10), anchor="mm")
+        lay = lay.rotate(v.get("sticker_rot", 8), expand=True, resample=Image.BICUBIC)
+        sx, sy = v.get("sticker_xy", [W - lay.width - 40, 40])
+        base.alpha_composite(lay, (int(sx), int(sy)))
+        boxes.append((sx, sy, sx + lay.width, sy + lay.height))
+    return base.convert("RGB"), boxes
+
+
 def _render_layout(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
+    if v.get("layout") == "trend":
+        return _trend(project, spec, v)
     if v.get("layout") == "person":
         return _person(project, spec, v)
     if v.get("layout") == "punch":
