@@ -270,7 +270,7 @@ def lower_bar(D, name: str, role: str, at: float):
     i = D._id()
     f = fit(FT("title"), name, 50, 900)
     D.items.append(
-        f'<div id="{i}" style="position:absolute;left:96px;top:770px">'
+        f'<div id="{i}" style="position:absolute;left:96px;top:{getattr(D, "lower_top", None) or 770}px">'
         f'<div style="width:90px;height:6px;background:{D.red};margin-bottom:12px"></div>'
         f'<div style="font-family:sans-x;font-size:{f.size}px;color:#FFFFFF;text-shadow:0 2px 10px rgba(0,0,0,.8);white-space:nowrap">{_e(name)}</div>'
         f'<div style="font-family:sans;font-size:26px;color:#EEEEEE;text-shadow:0 2px 8px rgba(0,0,0,.8);white-space:nowrap;margin-top:4px">{_e(role)}</div></div>')

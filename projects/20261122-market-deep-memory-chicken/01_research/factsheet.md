@@ -289,3 +289,9 @@ https://www.federalreserve.gov/newsevents/speech/cook20261120a.htm "The U.S. Eco
 - ✅ 키몬다 2009년 1월 23일 파산 신청 · 엘피다 2012년 2월 파산 신청(일본 제조업 최대) — https://www.theregister.co.uk/2009/01/23/qimonda_files_insolvency/ · https://www.computerworld.com/article/1549504/dram-maker-elpida-files-for-bankruptcy.html
 - 💬 해석(이 채널): 업계 전체로는 덜 만드는 게 이익이지만, 내가 더 판 매출은 나 혼자, 값 하락은 모두가 나눠 짐 → 각자 '그래도 판다'(죄수의 딜레마). 함께 줄이자는 약속은 담합. 그래서 감산은 원가 아래로 떨어진 뒤에야 옴.
 - 💬 계산(이 채널): 과거 하강기 민감도(값 10% 내릴 때 0.5~0.6% 더 삼)로 10% 과잉이면 값 약 -80~-85% → SK하이닉스 3분기 구조(100원에 비용 20원)로 -80% 면 영업이익 0 → 그 아래는 적자·감산
+
+## 11월 22일 검수 반영 (감산 순서·KB 전망 바로잡음)
+- ✅ 2022.9.29 마이크론 회계 2023년 투자 30%+ 축소 · 2022.9.30 키옥시아 웨이퍼 투입 30% 감축(10월부터) — https://www.theregister.com/2022/09/30/chipmakers_cut_output/
+- ⚠️ 2022.10 SK하이닉스 3분기 실적 발표: 2023년 투자 절반 넘게 축소·수익성 낮은 제품 감산 (당시 발표, 이번에 원문 재확인 못 함)
+- ✅ 2022.11.16 마이크론 웨이퍼 투입 약 20% 감산 — https://www.fool.com/investing/2022/11/16/micron-slashes-production-as-demand-tumbles
+- ⚠️ KB증권(2026.11.20): 내년 D램 평균 판매가 전년 대비 +40%(계약가 기준), 수요 +25% > 공급 +18% — '지금 값에서 40% 더'가 아님

@@ -199,7 +199,9 @@ def s_bite(D, sc: dict, bt: list, dur: float):
     D.label(" · ".join(x for x in (sc.get("label", ""), b.get("credit", "")) if x), dark=True)
     D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""), dark=True)
     if sc.get("show_lower", True):
+        D.lower_top = sc.get("lower_top")   # 원본 방송 자막 띠와 겹칠 때 위로 (예: 560)
         D.lower(sc.get("who", ""), sc.get("role", ""), tb + 0.4, dark=True)
+        D.lower_top = None
     if sc.get("show_en", True):   # 원문 한 줄 (번역 자막 위, 작게): 원문·번역 2단
         for s in b["segs"]:
             parts = _en_chunks(s.get("en", ""))

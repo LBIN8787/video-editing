@@ -96,7 +96,7 @@ class HDoc(hyper.Doc):
         f = fit(FT("title"), name, 46, 900)
         w = max(f.getlength(name), fit(FT("label"), role, 26, 900).getlength(role)) + 80
         self.items.append(
-            f'<div id="{i}" style="position:absolute;left:96px;top:760px;width:{w:.0f}px;height:118px;background:#FBF8F1;'
+            f'<div id="{i}" style="position:absolute;left:96px;top:{getattr(self, "lower_top", None) or 760}px;width:{w:.0f}px;height:118px;background:#FBF8F1;'
             f'box-shadow:0 8px 22px rgba(0,0,0,.25);transform-origin:left center">'
             f'<div style="position:absolute;left:0;top:0;width:10px;height:100%;background:{self.red}"></div>'
             f'<div style="position:absolute;left:34px;top:16px;font-family:serif-x;font-size:{f.size}px;color:{self.ink};white-space:nowrap">{_e(name)}</div>'
