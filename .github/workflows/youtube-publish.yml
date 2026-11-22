@@ -37,6 +37,8 @@ jobs:
           D="projects/${{ steps.req.outputs.name }}/05_edit"
           mkdir -p "$D"
           if grep -q '"resume": true' /tmp/req.json; then P="-p thumbnail_*.png -p subs.ass"; else P="-p final.mp4 -p thumbnail_*.png -p subs.ass"; fi
+          # 제목·설명란·태그만 바꾸는 요청(update_meta)은 파일이 필요 없다 — Release 가 없는 영상(PC 에서 올린 것)도 고칠 수 있게 (2026-11-22)
+          if grep -q '"update_meta": true' /tmp/req.json; then echo "update_meta: 파일 받지 않음"; exit 0; fi
           gh release download "video-${{ steps.req.outputs.name }}" -D "$D" --clobber $P
           ls -la "$D"
       - name: Publish to YouTube
