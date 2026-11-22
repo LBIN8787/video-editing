@@ -1,0 +1,92 @@
+{
+ "project": "20261122-curiosity-pick",
+ "manual_version": "89",
+ "checked": "2026-11-22T10:00:51",
+ "pass": true,
+ "rows": [
+  {
+   "gate": "G0",
+   "level": "MUST",
+   "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G0",
+   "level": "SHOULD",
+   "item": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
+   "ok": true,
+   "detail": "manual/graph.json"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "topic_brief.json 있음",
+   "ok": true,
+   "detail": "01_research/topic_brief.json (schemas/topic_brief.schema.json)"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "브랜드(ai/market/curiosity)",
+   "ok": true,
+   "detail": "curiosity"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망·시청자 질문",
+   "ok": true,
+   "detail": "세일하는 날 이름에 왜 '검다'는 말이 붙었을까?"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "트리거·왜 지금",
+   "ok": true,
+   "detail": "2026-11-22 정기 작업: 호기심 채널 일 1편(매일 18:00) — 분야를 가리지 않는 이야기 채널로 바뀐 첫 주제 카드. 후보 3개는 서로 다른 분야(사회·문화 / 과학·건축 / 역사·실화)."
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망을 분명히 건드리고, 보여 줄 자료가 있다 (둘 중 하나라도 약하면 만들지 않음, 01 §3)",
+   "ok": true,
+   "detail": "강도 3 · 자료 2"
+  },
+  {
+   "gate": "G1",
+   "level": "참고",
+   "item": "욕망 점수 합계 (후보끼리 비교할 때 씀)",
+   "ok": true,
+   "detail": "합계 16 {'desire': 3, 'clarity': 3, 'timeliness': 3, 'demand': 2, 'visuals': 2, 'angle': 3}"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "수요 증거 1개 이상",
+   "ok": true,
+   "detail": "2"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "후보 3개 비교 기록",
+   "ok": true,
+   "detail": "3"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "우리만의 답(our_angle)",
+   "ok": true,
+   "detail": "'장부가 흑자(black)로 돌아서는 날'이라는 흔한 설명은 1980년대에야 나타난다. 그보다 20년 앞서, 추수감사절 다음 날 쏟아진 인파와 차량에 지친 필라델피아 경찰이 그날을 부르던 말이었고, 상인들은 'Big Friday'로 바꾸려다 실패했다. 나쁜 뜻의 별명이 어떻게 좋은 뜻의 이야기로 '세탁'되었나를 따라간다."
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "무엇이 띄우나(driver: 소재·각도·형식 + 근거)",
+   "ok": true,
+   "detail": "각도 · 누구나 아는 설명(흑자)을 먼저 말하게 하고, 기록을 따라가며 그 설명이"
+  }
+ ]
+}
