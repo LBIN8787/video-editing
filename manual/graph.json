@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-22T19:14:50",
- "source_hash": "5fef67674c00",
+ "generated": "2026-11-22T19:15:53",
+ "source_hash": "6f3bd38e1382",
  "audit": {
   "date": "2026-11-21T13:56",
   "counts": {
@@ -1007,12 +1007,12 @@
   ]
  },
  "stats": {
-  "manual_version": 109,
-  "versions": 109,
+  "manual_version": 110,
+  "versions": 110,
   "reviews": 49,
   "rejects": 30,
   "passes": 19,
-  "pending": 1,
+  "pending": 0,
   "rules": 57,
   "checks": 89,
   "sections": 214,
@@ -1038,9 +1038,7 @@
   "overfit": 15,
   "principle_bans": 48
  },
- "pending": [
-  "[2026-11-22 · 20261122-curiosity-pick 기각] 거의 전구간이 전부 이전 영상들 화풍이랑 달라 실사풍에 눈은 작고 완전 다른 화풍과 캐릭터가됐어"
- ],
+ "pending": [],
  "status_labels": {
   "aligned": "정렬됨",
   "over": "과잉 해석",
@@ -15655,6 +15653,22 @@
    }
   },
   {
+   "id": "ver:110",
+   "kind": "version",
+   "v": 110,
+   "date": "2026-11-22",
+   "label": "v110",
+   "summary": "호기심: 인물 기준은 이전에 통과한 영상의 그림(지우=흰곰 편), 원화는 샘플 시트 먼저 확인 (판테온 v4 D4 기각)",
+   "applied": [
+    {
+     "date": "2026-11-22",
+     "project": "20261122-curiosity-pick",
+     "reason": "거의 전구간이 전부 이전 영상들 화풍이랑 달라 실사풍에 눈은 작고 완전 다른 화풍과 캐릭터가됐어"
+    }
+   ],
+   "themes": []
+  },
+  {
    "id": "rev:1",
    "kind": "review",
    "date": "2026-11-09",
@@ -16748,7 +16762,7 @@
    "themes": [],
    "repo": "curiosity",
    "repo_label": "호기심",
-   "status": "pending",
+   "status": "applied",
    "tier_key": "rev:e1311d78",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -31778,9 +31792,16 @@
    "kind": "intent",
    "quote": "거의 전구간이 전부 이전 영상들 화풍이랑 달라 실사풍에 눈은 작고 완전 다른 화풍과 캐릭터가됐어",
    "label": "거의 전구간이 전부 이전 영상들 화풍이랑 달라 실사풍에 눈은 작고 완전 다른 화풍과 캐릭터가됐어",
-   "versions": [],
+   "versions": [
+    3,
+    110
+   ],
    "date": "2026-11-22",
    "sources": [
+    {
+     "ref": "sec:04§0-7",
+     "kind": "manual"
+    },
     {
      "ref": "rev:49",
      "kind": "review"
@@ -31795,7 +31816,38 @@
    "meaning": "",
    "not_meant": [],
    "note": "",
-   "readings": [],
+   "readings": [
+    {
+     "ref": "ver:3",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "gate:G5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/ytpublish.py:1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "ver:110",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0-7",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -75310,6 +75362,12 @@
    "how": "changelog"
   },
   {
+   "s": "rev:49",
+   "t": "ver:110",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
    "s": "rev:1",
    "t": "theme:variety",
    "kind": "about"
@@ -78975,6 +79033,26 @@
    "kind": "about"
   },
   {
+   "s": "intent:e1311d78",
+   "t": "ver:3",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:e1311d78",
+   "t": "ver:110",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:e1311d78",
+   "t": "sec:04§0-7",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:e1311d78",
+   "t": "rev:49",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:e51c20e6",
    "t": "sec:06§h3",
    "kind": "quoted_in"
@@ -78993,11 +79071,6 @@
    "s": "intent:e51c20e6",
    "t": "theme:script",
    "kind": "about"
-  },
-  {
-   "s": "intent:e1311d78",
-   "t": "rev:49",
-   "kind": "quoted_in"
   },
   {
    "s": "intent:3ffec795",
