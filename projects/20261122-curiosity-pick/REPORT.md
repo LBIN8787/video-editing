@@ -118,3 +118,18 @@ SPEC=pantheon_v3.json OVERLAY=pantheon_v3_overlay.html TIMELINE=pantheon_v4_time
 | D3 | **사용자 결정 기다림** — `inbox/decisions/20261122-20261122-curiosity-pick-D3v5.md` (결과 절) |
 
 혼자 판단한 것: 지우 참조 시트로 night 와 함께 `mind.png`(서서 웃는 반측면·전신이 있음)를 고름. `channel.yaml` 의 `character.refs` 는 night·tasting 두 장이라, 샘플이 통과하면 mind.png 를 refs 에 더할지 함께 여쭘.
+
+## v5 영상 (2026-11-22 정기 작업) — D3 답("그냥 이전 그대로 영상 제작해주세요" · 지우 기준판 확정 "제가 중요시하는건 화풍의 일관성이에요") → D4 요청
+| 단계 | 상태 |
+|---|---|
+| 참조 | `channel.yaml` `character.refs` 두 장만 — 지우 기준판 `refs/ch-knowledge/jiwoo_board.png` + 잼 편 `tasting.png`. 판테온 v1~v4 그림·샘플 v5·v6·흰곰 편 시트는 참조로도 화면으로도 쓰지 않음 |
+| 원화 | 15시트 전부 다시 그림(`art_sheets_v5.json`, Codex `$imagegen` `-m gpt-6-sol`) → Drive `art/<시트>_v5.png`. end·lime 은 한 번씩 다시 그려 칸별로 섞음(`art_orders.md` v5 절) |
+| 모아 보기 | 지우 칸 36개 + 기준판 → `art/jiwoo_lineup_v5.jpg` — 얼굴·눈·물결 단발·머리핀·선·채색이 기준판과 같음. 튀는 칸 없음(끝 장면 머리 길이만 다시 그려 맞춤) |
+| S7 렌더 | Drive `05_edit/pantheon_v5.mp4` (11:03, = `final.mp4`). 명세·오버레이는 v3 그대로(`pantheon_v3.json`·`pantheon_v3_overlay.html`), 타임라인 `05_edit/pantheon_v5_timeline.json` 은 v4 와 완전히 같음 → 자막 싱크(v3 sync-qa 통과)·`subs.ass` 그대로 유효. 프레임 21장 확인(`05_edit/pantheon_v5_frames_1·2.jpg`) — 이름표·자막 겹침 없음 |
+| 바뀐 것 | `05_edit/pantheon_v5_changes.jpg`(전·후 12칸), 표는 `inbox/decisions/20261122-20261122-curiosity-pick-D4v5.md` |
+| S8 포장 | 썸네일 v5 A/B/C(`thumbnail_v5_*.png` — 새 그림, C 는 지우가 보이게 글을 오른쪽으로), 제목·설명란 그대로 |
+| check | MUST 미통과 2개는 앞 판과 같은 성격(G6 레이아웃 QA 는 hybrid 렌더러 전용 기록, 싱크 중앙값 0.26초) |
+| D4 | **사용자 결정 기다림** — `inbox/decisions/20261122-20261122-curiosity-pick-D4v5.md` |
+
+다시 만들기: `python cut_sheets.py <art/*_v5.png 를 <시트>.png 로 둔 폴더> <조각 폴더>` + photo_dome·photo_oculus(v4 절과 같음) → `BEATS=beats_v2.json python full_voice.py <TTS>` → `SPEC=pantheon_v3.json OVERLAY=pantheon_v3_overlay.html TIMELINE=pantheon_v5_timeline.json python render_full.py <TTS> <조각> <작업> <출력.mp4> 6`.
+- 알아 둘 것: ① 원화 시트는 1672×941(칸 836×470)을 1920×1080 으로 키움 — 앞 판들과 같음. ② 짓는 장면 몇 칸(build1 세 칸·plan 배경)에 완성된 현관이 함께 그려짐(v2 때와 같은 버릇). ③ plan3 오른쪽 아래(시도 1 과 완성 단면 비교)의 완성 단면은 금이 돔 아랫부분이 아니라 바닥 쪽에 그려짐 — 3초쯤 지나가는 칸. ④ 오쿨루스 실제 사진 확대 칸은 하늘이 하얗게 날아감(v4 와 같은 사진·같은 자르기).

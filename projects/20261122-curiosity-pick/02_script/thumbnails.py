@@ -12,7 +12,7 @@ V = {   # 판테온 편 (2026-11-22, v2 에서 C 를 '직접 지어 보기'로) 
  "B": dict(img="garage_tl", side="right", css="background-size:1400px auto;background-position:-260px -40px;background-repeat:no-repeat",
            lines=["주차장은 금 가는데", "이 돔은 <b>왜?</b>"], small="몇십 년 vs 1,900년",
            why="첫 문장(지하주차장 녹물)과 같은 장면 — 시청자가 '내가 본 그 자국'으로 알아봄."),
- "C": dict(img="build1_br", side="left", css="background-size:1400px auto;background-position:60px 20%;background-repeat:no-repeat",
+ "C": dict(img="build1_br", side="right", css="background-size:1400px auto;background-position:-40px 60%;background-repeat:no-repeat",   # v5: 새 칸은 지우가 왼쪽 아래 — 글을 오른쪽으로
            lines=["철근 없이", "지어 봤더니 <b>쩍</b>"], small="1,900년 된 돔, 직접 지어 보기",
            why="v2 의 뼈대(지우가 직접 지어 보는 과정) — 첫 시도에서 아래가 벌어져 금이 가는 장면(3장). 실패에서 시작하는 구경거리."),
 }
