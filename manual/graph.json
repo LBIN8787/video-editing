@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-23T00:41:41",
- "source_hash": "2d6a771fe9b8",
+ "generated": "2026-11-23T01:05:39",
+ "source_hash": "cb9316291df3",
  "audit": {
   "date": "2026-11-21T13:56",
   "counts": {
@@ -1007,31 +1007,31 @@
   ]
  },
  "stats": {
-  "manual_version": 115,
-  "versions": 115,
+  "manual_version": 116,
+  "versions": 116,
   "reviews": 49,
   "rejects": 30,
   "passes": 19,
   "pending": 0,
   "rules": 57,
   "checks": 89,
-  "sections": 215,
+  "sections": 216,
   "must": 30,
   "auto": 41,
-  "intents": 318,
+  "intents": 319,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 3,
   "code": 83,
   "terms": 140,
-  "bans": 215,
+  "bans": 217,
   "feedback": 238,
   "topics": 4,
   "episodes": 43,
   "main_situations": 17,
   "tiers": {
    "principle": 54,
-   "standard": 182,
+   "standard": 184,
    "style": 27,
    "trial": 9
   },
@@ -4065,6 +4065,44 @@
    "tier_label": "작업 기준"
   },
   {
+   "section": "sec:11§2-5",
+   "text": "S4 → D2 | fact-check-workflow | 대본의 사실 주장을 factsheet ✅/⚠️ 와 맞대기 → 02_script/factcheck.md. 판정 못 한 것은 대본에서 단정하지 않음",
+   "themes": [
+    "script"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:69c03de4",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:11§2-5",
+   "text": "올린 뒤 | claude-youtube (analyze) | 24·48시간에 본 비율·시청 지속·노출 클릭률 → 원인을 주제·훅·결말·화면 중 하나로 → episodes.md. 이 스킬의 대본·훅·썸네일 조언은 쓰지 않음",
+   "themes": [
+    "script"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:c8ac8f6a",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
    "section": "sec:11§3-1",
    "text": "형식을 하나로 고정하지 않습니다. S1b 에서 주제마다 아래 넷 중 시청자가 얻을 가치가 가장 큰 형식을 제안하고 D1 에서 함께 결정합니다.",
    "themes": [
@@ -5423,9 +5461,10 @@
     106,
     110,
     111,
-    113
+    113,
+    115
    ],
-   "last_version": 113
+   "last_version": 115
   },
   {
    "id": "doc:05",
@@ -5599,7 +5638,7 @@
    "key": "11",
    "file": "manual/11-workflow.md",
    "label": "11. 제작 업무 체계 — 한 편을 처음부터 끝까지 (매뉴얼 v38, 2026-11-17 확정)",
-   "lines": 193,
+   "lines": 212,
    "versions": [
     43,
     44,
@@ -5710,9 +5749,10 @@
     111,
     112,
     113,
-    114
+    114,
+    115
    ],
-   "last_version": 114
+   "last_version": 115
   },
   {
    "id": "doc:README",
@@ -8630,12 +8670,30 @@
    "label": "S3 첫 칸 — 목적 분간과 매체 질문 (2026-11-18 사용자, 근거 `docs/37`)",
    "title": "2-4. S3 첫 칸 — 목적 분간과 매체 질문 (2026-11-18 사용자, 근거 `docs/37`)",
    "line": 102,
-   "end": 121,
+   "end": 119,
    "tag_version": null,
    "versions": [],
    "last_version": null,
    "terms": [
     "term:beat-motion"
+   ]
+  },
+  {
+   "id": "sec:11§2-5",
+   "kind": "section",
+   "doc": "doc:11",
+   "num": "2-5",
+   "level": 3,
+   "label": "단계마다 꺼내 쓰는 외부 스킬 (작업 기준, 2026-11-23 사용자: \"언제 사용할지 언제 쓸지 정리해서 반영해줘\")",
+   "title": "2-5. 단계마다 꺼내 쓰는 외부 스킬 (작업 기준, 2026-11-23 사용자: \"언제 사용할지 언제 쓸지 정리해서 반영해줘\")",
+   "line": 120,
+   "end": 140,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null,
+   "terms": [
+    "term:bite",
+    "term:tech-split-screen"
    ]
   },
   {
@@ -8646,8 +8704,8 @@
    "level": 2,
    "label": "채널별 차이 (같은 단계표, 다른 내용)",
    "title": "3. 채널별 차이 (같은 단계표, 다른 내용)",
-   "line": 122,
-   "end": 136,
+   "line": 141,
+   "end": 155,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8660,8 +8718,8 @@
    "level": 3,
    "label": "AI 롱폼 — 형식을 주제가 고른다 (2026-11-17 사용자)",
    "title": "3-1. AI 롱폼 — 형식을 주제가 고른다 (2026-11-17 사용자)",
-   "line": 137,
-   "end": 149,
+   "line": 156,
+   "end": 168,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -8677,8 +8735,8 @@
    "level": 3,
    "label": "이슈·경제·주식 내레이션 (2026-11-17 사용자)",
    "title": "3-2. 이슈·경제·주식 내레이션 (2026-11-17 사용자)",
-   "line": 150,
-   "end": 159,
+   "line": 169,
+   "end": 178,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8691,8 +8749,8 @@
    "level": 2,
    "label": "개정 기록 (작업하면서 채움)",
    "title": "5. 개정 기록 (작업하면서 채움)",
-   "line": 160,
-   "end": 166,
+   "line": 179,
+   "end": 185,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8705,8 +8763,8 @@
    "level": 2,
    "label": "시작 전에 확인할 것",
    "title": "6. 시작 전에 확인할 것",
-   "line": 167,
-   "end": 172,
+   "line": 186,
+   "end": 191,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8719,8 +8777,8 @@
    "level": 2,
    "label": "연출 인계와 화면 검토",
    "title": "7. 연출 인계와 화면 검토",
-   "line": 173,
-   "end": 193,
+   "line": 192,
+   "end": 212,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -15819,7 +15877,27 @@
    "label": "v115",
    "summary": "호기심: 주제 카드 후보 10개, 여러 편 함께 고르기 (사용자 11-23)",
    "applied": [],
-   "themes": []
+   "themes": [],
+   "commit": {
+    "sha": "1a06511fd50d663e2fd4f17fe0863b505de44af2",
+    "subject": "매뉴얼 v115: 호기심 주제 카드 후보 10개·여러 편 함께 고르기 — 사용자 11-23",
+    "date": "2026-11-23",
+    "other_files": [
+     "config/local_routines/curiosity.md"
+    ]
+   }
+  },
+  {
+   "id": "ver:116",
+   "kind": "version",
+   "v": 116,
+   "date": "2026-11-23",
+   "label": "v116",
+   "summary": "단계마다 꺼내 쓰는 외부 스킬(11 §2-5): last30days·사실 확인 4종·ElevenLabs 5종·올린 뒤 성과 분석 — 매뉴얼 > 우리 스킬 > 외부 스킬 (사용자 11-23)",
+   "applied": [],
+   "themes": [
+    "depth"
+   ]
   },
   {
    "id": "rev:1",
@@ -32684,6 +32762,39 @@
    "annotated": false
   },
   {
+   "id": "intent:65baf241",
+   "kind": "intent",
+   "quote": "언제 사용할지 언제 쓸지 정리해서 반영해줘",
+   "label": "언제 사용할지 언제 쓸지 정리해서 반영해줘",
+   "versions": [],
+   "date": "2026-11-23",
+   "sources": [
+    {
+     "ref": "sec:11§2-5",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:65baf241"
+   ],
+   "themes": [],
+   "ann_key": "intent:65baf241",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:11§2-5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:e1ebf689",
    "kind": "intent",
    "quote": "앞으로 주제선정할때 리스트10개는 뽑고 후보군 고를 수 있도록 해줘",
@@ -32769,6 +32880,7 @@
     "sec:10§h37",
     "sec:10§4",
     "sec:10§5",
+    "sec:11§2-5",
     "sec:12§0-1",
     "sec:12§1",
     "ver:20",
@@ -38301,6 +38413,7 @@
     "sec:09§5",
     "sec:10§h81",
     "sec:10§4",
+    "sec:11§2-5",
     "sec:14§2",
     "sec:14§4",
     "ver:26",
@@ -72264,6 +72377,11 @@
   },
   {
    "s": "doc:11",
+   "t": "sec:11§2-5",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:11",
    "t": "sec:11§3",
    "kind": "contains"
   },
@@ -75990,6 +76108,22 @@
    ]
   },
   {
+   "s": "ver:115",
+   "t": "doc:04",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:115",
+   "t": "doc:feedback",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -77172,6 +77306,11 @@
   {
    "s": "ver:114",
    "t": "theme:emphasis",
+   "kind": "about"
+  },
+  {
+   "s": "ver:116",
+   "t": "theme:depth",
    "kind": "about"
   },
   {
@@ -81067,6 +81206,11 @@
   {
    "s": "intent:6d845c2a",
    "t": "sec:05§0-8",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:65baf241",
+   "t": "sec:11§2-5",
    "kind": "quoted_in"
   },
   {

@@ -98,3 +98,19 @@
 - **읽은 것:** README, `skills/ego-browser/SKILL.md`, `references/install*.md`, `scripts/install.sh`(macOS 전용, cdn.ego.app 에서 dmg 를 받음). 실제 사용법은 설치된 앱의 `ego-browser skill` 출력이 기준.
 - **쓰는 곳:** `skills/ref-watch-ego` — 레퍼런스 영상을 내려받지 않고 사용자 브라우저에서 '정지 → 이동 → 찍기'로 캡처해 분석. youtube.com 영상 페이지만 열고, 쿠키를 다른 도구에 넘기지 않음.
 - **주의:** 로그인된 브라우저라 계정 행동(구독·댓글·좋아요)을 하지 않도록 스킬에 명시. 첫 실행 때 크롬 데이터 가져오기는 사용자가 결정.
+
+## 2026-11-23 last30days (최근 30일 커뮤니티·영상 반응 조사)
+- **무엇:** `mvanhorn/last30days-skill` (MIT). v3.33.0(2026-11-09, 커밋 `7869eb1`)에 고정 — 최신 v4.6.0 은 이틀 된 판이라 2주 규칙으로 보류. 주제 하나를 최근 30일 Reddit·HN·YouTube(자막)·GitHub·dev.to·Polymarket 등에서 찾아 반응(추천·댓글·조회)으로 순위를 매김. 엔진은 Python 3.12+ 표준 라이브러리만(의존성 없음).
+- **읽은 것:** SKILL.md, references/runtime.md·research-runbook.md, scripts 의 subprocess·네트워크 호스트 전부. `eval/exec` 없음.
+- **설치:** `kind: "skill"` — 태그를 임시로 얕게 받아 `skills/last30days` 의 SKILL.md·agents·references·scripts 만 `.claude/skills`·`.agents/skills` 에 복사(데모 그림·음악 14MB 인 assets 는 뺌, `tools/` 에 본체 없음, .gitignore). `python scripts/install_tools.py`.
+- **주의 1 — 설정 마법사를 돌리지 않음:** 첫 실행 마법사(`setup_wizard.py`)가 `npx -y` 로 전역 CLI(digg·printing-press 소스)를 **자동 설치**함. 대신 `~/.config/last30days/.env` 를 직접 씀: `SETUP_COMPLETE=true`, `FROM_BROWSER=off`, `REDDIT_SESSION_OFFERED=true`, `REDDIT_BROWSER_CONSENT=false`, `LAST30DAYS_MEMORY_DIR=`(빈 값 = 결과 파일 저장 끔, C 드라이브에 쌓이지 않게).
+- **주의 2 — 쿠키·키 없이:** 브라우저 쿠키(X·Reddit 로그인) 읽기는 동의할 때만 동작하고 우리는 끔. ScrapeCreators·X·xAI 등 키는 넣지 않음 → 키 없는 소스만: Reddit 공개 JSON·HN·GitHub·dev.to·YouTube(yt-dlp)·Stocktwits·Polymarket.
+- **주의 3 — 이 PC:** `yt-dlp.exe` 가 PATH 에 없어 YouTube 가 빠짐 → 실행할 때 `...\LocalCache\local-packages\Python313\Scripts` 를 PATH 에 더함. Polymarket 은 연결이 끊김(국내 접속 차단으로 보임).
+- **쓰는 곳:** 주제 단서·반응 수집 (docs/61). 결과는 커뮤니티 글이라 **사실 출처가 아님** — 숫자·발언은 1차 출처로 다시 확인.
+
+## 2026-11-23 영상 제작용 외부 스킬 묶음 (ElevenLabs·YouTube 분석·저널리즘 확인)
+조사·선정 이유와 '언제 쓰나'는 `docs/62-external-skills-map.md`. 모두 `kind: "skill"` 로 커밋 고정(2주 이상 지난 판), 스킬 폴더만 복사.
+- **elevenlabs/skills** (MIT, `9763c39` 2026-11-04): text-to-speech·speech-to-text·voice-isolator·music·sound-effects 만. SKILL.md 와 references 만 있고 스크립트 없음. 호출은 api.elevenlabs.io, `ELEVENLABS_API_KEY`. 키가 없을 때 안내하는 `npx -y @elevenlabs/cli@latest onboard init` 은 쓰지 않음.
+- **AgriciDaniel/claude-youtube** (MIT, `84c3fa6` 2026-04-10): execution/*.py 를 읽음 — googleapis 만, scope `youtube.readonly`·`yt-analytics.readonly`(읽기 전용), 토큰은 스킬 폴더 tmp/. 설치 스크립트(install.ps1)는 git clone·복사뿐이지만 쓰지 않음. 설명(description)이 'video·script·hook' 에도 걸려 우리 스킬을 가로챌 수 있어, 설치 때 **분석·점검·경쟁·재활용 전용으로 좁힘**(`description_override`).
+- **jamditis/claude-skills-journalism** (MIT, `e1f38cb` 2026-11-04): fact-check-workflow·source-verification·social-media-intelligence·data-journalism 만. 지침 문서뿐(스크립트 없음), 외부 자료를 '믿지 않는 데이터'로 다루는 규칙이 들어 있음.
+- **보류:** Remotion 공식 스킬, Manim 스킬, YouTube Clipper, Anthropic 디자인 스킬 (이유는 docs/62 §4).
