@@ -12,7 +12,7 @@ V = {   # 커닝 편 (2026-11-23) — 지금의 고리: 'AI 커닝'(세무사 �
  "B": dict(img="joseon2_tl", side="right", css="background-size:1500px auto;background-position:-300px 40%;background-repeat:no-repeat",
            lines=["320년 전에도", "<b>땅속</b> 커닝"], small="성균관 마당에서 나온 대나무 통",
            why="3장(1705 반수당 대나무 통) — 영상의 '기억할 한 장면'. 'AI 라서 처음 생긴 문제'라는 기존 인식을 깸."),
- "C": dict(img="gate_bl", side="right", css="background-size:1500px auto;background-position:-40px 30%;background-repeat:no-repeat",
+ "C": dict(img="gate_bl", side="left", css="background-size:1300px auto;background-position:470px 30%;background-repeat:no-repeat",
            lines=["수능 금지 목록", "<b>AI 안경</b>까지"], small="커닝은 왜 늘 한 발 앞설까",
            why="처음·끝의 같은 물건(교문 옆 안내문)과 지우. 수능 키워드 — 올해 수능은 AI 스마트안경을 이름으로 금지(F36)."),
 }

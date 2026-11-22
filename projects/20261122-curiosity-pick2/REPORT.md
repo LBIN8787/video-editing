@@ -23,3 +23,22 @@
 - 한 일: 사라진 출처 목록을 다시 만들고 여섯 줄을 본문 대조, 대본 v1, 근거 검수 반영, D2 요청. `topic_brief.json` 맨 위 칸(known·new_angle·hook 등)을 이 주제로 다시 씀.
 - 혼자 판단한 것: 지우를 사건을 겪는 사람이 아니라 수능 날 교문 앞에서 떠올리는 사람으로 둠. 청나라 커닝 조끼·기묘과옥·'11만 원'·굿하트 문구는 쓰지 않음. 본인이 밝힌 도구는 후속 보도가 있어 "안경이 아니었다"까지만.
 - 막힌 것: 출처 34개 가운데 10개는 주소를 다시 찾지 못함(`sources.md`). 실록 날짜의 양력 환산·국역 세 구절은 미검수 — 장면표 전에 다시 엶.
+
+## 2026-11-23 정기 작업 (S5 마무리 → S7 렌더 → S8 포장 → D4 요청)
+| 단계 | 상태 |
+|---|---|
+| S5 원화 | 완료 — GPT 12시트(class·y2004a·y2004b 는 `_r2`), Drive `영상/20261122-curiosity-pick2/art/` |
+| S7 렌더 | 완료 — Drive `영상/20261122-curiosity-pick2/05_edit/cunning_v1.mp4` (11:33, = final), edge-tts 초안 목소리, 배경음 없음. 프레임 50장 눈으로 확인(`cunning_v1_frames_1·2.jpg`) |
+| 자막 싱크 | sync-qa — 0.5초 안 98.2%·중앙값 0.26초·화면−소리 0.01초 (통과) (`05_edit/sync_qa.json`, `subs.ass` 는 v1 타임라인에서; ffprobe 길이 해석 오류는 감싸서 우회, 코드 미수정) |
+| S8 포장 | 제목 3·설명란·태그 `05_edit/youtube.md`, 썸네일 A/B/C(Drive 같은 폴더, `thumbnail_qa.json`), 요약 `02_script/hybrid.json`, 보관 기록 `drive_archive.json` |
+| D4 | **사용자 결정 기다림** — `inbox/decisions/20261123-20261122-curiosity-pick2-D4.md` |
+
+다시 만들기 (02_script 에서):
+```
+python beats.py script_v2.md beats.json && python make_spec.py
+BEATS=beats.json python full_voice.py <TTS 폴더>
+python cut_sheets.py <시트 폴더(_r2 가 있으면 그 판을 <시트>.png 로)> <조각 폴더>
+
+SPEC=cunning.json OVERLAY=cunning_overlay.html TIMELINE=cunning_timeline.json python render_full.py <TTS 폴더> <조각 폴더> <작업 폴더> <출력.mp4> 6
+python thumbnails.py <조각 폴더> <출력 폴더>
+```

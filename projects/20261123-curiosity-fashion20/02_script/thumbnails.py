@@ -1,20 +1,20 @@
-"""판테온 편 썸네일 (의지력 편 thumbnails.py 를 그대로 가져옴) A/B/C (1280×720) + 휴대폰 크기 미리보기. prompts/thumbnail.md: 큰 두 줄·강조 한 낱말·오른쪽 아래 재생 시간 자리 비움.
+"""유행 20년 편 썸네일 (판테온 편 thumbnails.py 를 가져와 V 만 바꿈) A/B/C (1280×720) + 휴대폰 크기 미리보기. prompts/thumbnail.md: 큰 두 줄·강조 한 낱말·오른쪽 아래 재생 시간 자리 비움.
 python thumbnails.py <원화 조각 폴더> <출력 폴더>"""
 import sys
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 HERE = Path(__file__).resolve().parent
 FONTS = (HERE.parents[2] / "ytflow" / "assets" / "fonts").as_uri()
-V = {   # 판테온 편 (2026-11-22, v2 에서 C 를 '직접 지어 보기'로) — 영상 첫 장면·핵심 반전·결론과 같은 말. '1,900년'(지금의 고리)을 큰 글씨에
- "A": dict(img="dome_tl", side="left", css="background-size:1500px auto;background-position:180px 30%;background-repeat:no-repeat",
-           lines=["철근 0개로", "<b>1,900년</b>"], small="비가 그대로 들어오는 돔",
-           why="영상 3~4박자(구멍으로 쏟아지는 비 · 철근 0가닥 · 약 1,900년). 제목의 질문을 숫자 두 개로."),
- "B": dict(img="garage_tl", side="right", css="background-size:1400px auto;background-position:-260px -40px;background-repeat:no-repeat",
-           lines=["주차장은 금 가는데", "이 돔은 <b>왜?</b>"], small="몇십 년 vs 1,900년",
-           why="첫 문장(지하주차장 녹물)과 같은 장면 — 시청자가 '내가 본 그 자국'으로 알아봄."),
- "C": dict(img="build1_br", side="right", css="background-size:1400px auto;background-position:-40px 60%;background-repeat:no-repeat",   # v5: 새 칸은 지우가 왼쪽 아래 — 글을 오른쪽으로
-           lines=["철근 없이", "지어 봤더니 <b>쩍</b>"], small="1,900년 된 돔, 직접 지어 보기",
-           why="v2 의 뼈대(지우가 직접 지어 보는 과정) — 첫 시도에서 아래가 벌어져 금이 가는 장면(3장). 실패에서 시작하는 구경거리."),
+V = {   # 유행 20년 편 (2026-11-23) — 지금의 고리 '복고 유행·20년 전 옷'을 큰 글씨에. 영상 첫 장면·핵심 질문·결론과 같은 말
+ "A": dict(img="wardrobe_br", side="left", css="background-size:1300px auto;background-position:400px 40%;background-repeat:no-repeat",
+           lines=["20년 전 엄마 점퍼", "왜 다시 <b>유행?</b>"], small="엄마 옷장 맨 안쪽",
+           why="첫 장면(지우가 엄마 옷장에서 스무 해 넘은 점퍼를 꺼냄) + 제목의 질문. 지금의 고리(복고 유행)를 앞에."),
+ "B": dict(img="kroeber_tr", side="right", css="background-size:1500px auto;background-position:-420px 40%;background-repeat:no-repeat",
+           lines=["유행은 정말", "<b>20년</b>마다 돌까?"], small="75년 치 패션 그림을 자로 잰 사람",
+           why="3장(크로버가 1844~1919 패션 그림의 치마를 자로 잼) — '스무 해'가 법칙인지 묻는 영상의 반전과 같은 말."),
+ "C": dict(img="wardrobe_tr", side="left", css="background-size:1400px auto;background-position:250px 40%;background-repeat:no-repeat",
+           lines=["그땐 우스웠는데", "지금은 <b>예쁜</b> 이유"], small="돌아온 건 옷이 아니라 눈",
+           why="결론(돌아온 건 옷이 아니라 보는 눈) — 점퍼는 그대로, 보는 눈이 바뀜."),
 }
 HTML = """<!doctype html><html><head><meta charset=utf-8><style>
 @font-face{font-family:BH;src:url(F/BlackHanSans-Regular.ttf)}@font-face{font-family:NGX;src:url(F/NanumGothic-ExtraBold.ttf)}
