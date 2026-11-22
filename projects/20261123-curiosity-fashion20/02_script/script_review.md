@@ -1,3 +1,9 @@
+## D2 통과 (2026-11-23, 사용자 위임 — Fable 5.2 검수)
+사용자: "대본검수 fable5.2에게 검수한 다음 수정할 점 있으면 수정하고 통과하면 영상 만들어주세여"
+- 판정: PASS (`fable_review.md`), **기준본 `script_v2.md`** (v1 → v2 바뀐 것 표는 fable_review.md)
+- D3: 사용자 "통과하면 영상 만들어주세요" → 샘플 시트 확인 없이 진행. 대신 원화는 `channel.yaml` character(지우 기준판 jiwoo_board.png + tasting.png)를 매 장 참조로 넣고, 기준판과 다르게 나온 칸은 다시 그림.
+- fable_review.md 의 '영상으로 만들 때 넘길 것'·'⚠️ 미검수'를 장면표 전에 처리.
+
 # D2 대본 검토 — 유행은 왜 20년쯤 지나면 돌아올까
 
 기준본: `script_v1.md` (2026-11-23) · 근거: `01_research/factsheet.md`(F번호)·`sources.md` · 의도: `intent.md` · 시청자: `01_research/audience.md`
