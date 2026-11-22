@@ -4,6 +4,7 @@
 - 지금 폴더는 이 작업 전용 git worktree 이고, 최신 origin/main 에서 시작했습니다. 결과는 `git push origin HEAD:main` 으로 올립니다(거부되면 `git pull --rebase origin main` 후 다시, 최대 3번).
 - 환경 준비가 안 됐을 때만 `pip install -q -r requirements.txt` · `python scripts/install_tools.py` 를 실행합니다(이미 있으면 건너뜀).
 - 먼저 AGENTS.md, manual/README.md, **manual/09-market-daily.md**(매일 운영 매뉴얼), **docs/24-youtube-publish.md** 를 읽고 그 절차를 따릅니다.
+- **운영 분석에서 넘어온 것을 먼저 읽습니다:** `channels/ch-market-daily/ops/next.md`(있으면) — '이번에 바꿔 볼 것' 하나를 이번 편에 반영하고, 반영했으면 보고에 실험 번호를 적습니다. 매뉴얼과 부딪히면 매뉴얼이 우선(2026-11-23 사용자: 채널 운영·분석을 에이전트에게 맡김, docs/63).
 - 사용량을 아낍니다: 같은 렌더를 여러 번 돌리지 않고, 실패하면 원인 한 가지를 고친 뒤 한 번만 다시 합니다.
 - 오늘 브리핑 프로젝트가 이미 main 에 있고 `05_edit/youtube_publish.json` 이 있으면(이미 올림) 브리핑은 건너뛰고, 오늘 심층(`<YYYYMMDD>-market-deep-*`)이 아직 안 올라갔으면 §1 의 3번(심층)부터 합니다. 둘 다 올렸으면 '이미 올림'으로 끝냅니다. 같은 프로젝트를 두 번 올리지 않습니다.
 

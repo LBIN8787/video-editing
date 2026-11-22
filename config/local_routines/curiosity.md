@@ -5,6 +5,7 @@
 ## 0. 준비
 - 지금 폴더는 이 작업 전용 git worktree 이고, 최신 origin/main 에서 시작했습니다. 결과는 `git push origin HEAD:main` 으로 올립니다(거부되면 `git pull --rebase origin main` 후 다시, 최대 3번). 편이 다른 브랜치에 있으면(`REPORT.md`·pc-tasks 의 `branch:`) 그 브랜치에서 이어 갑니다.
 - 먼저 AGENTS.md, manual/README.md, **manual/04-curiosity.md**, **manual/11-workflow.md**(S0~S9·D1~D4), `channels/ch-knowledge/channel.yaml`·`episodes.md`, `inbox/pc-tasks/README.md` 를 읽습니다.
+- **운영 분석에서 넘어온 것을 먼저 읽습니다:** `channels/ch-knowledge/ops/next.md`(있으면) — '이번에 바꿔 볼 것' 하나를 이번 편에 반영하고, 반영했으면 보고에 실험 번호를 적습니다. 매뉴얼과 부딪히면 매뉴얼이 우선(2026-11-23 사용자: 채널 운영·분석을 에이전트에게 맡김, docs/63).
 - 매일 한 편이 나가려면 여러 편이 줄지어 있어야 합니다: 실행마다 **진행 중인 편을 모두** 각자 다음 결정 지점까지 한 칸씩 밉니다(한 편을 결정 지점 너머로 건너뛰지는 않음). 그림·렌더도 이 작업이 이 PC 에서 직접 합니다(PC 일꾼은 뺌 — 2026-11-21 사용자: "자동일꾼 그냥 빼 나 그냥 로컬에서 전부 영상작업 할테니까").
 
 ## 1. 진행 중인 편 찾기
