@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-23T06:26:32",
- "source_hash": "12fbabf0ba96",
+ "generated": "2026-11-23T07:08:47",
+ "source_hash": "edd3f1b89c6e",
  "audit": {
   "date": "2026-11-21T13:56",
   "counts": {
@@ -1018,14 +1018,14 @@
   "sections": 217,
   "must": 30,
   "auto": 41,
-  "intents": 325,
+  "intents": 326,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 3,
   "code": 83,
   "terms": 140,
   "bans": 225,
-  "feedback": 243,
+  "feedback": 244,
   "topics": 4,
   "episodes": 46,
   "main_situations": 17,
@@ -5047,7 +5047,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h418",
+   "section": "sec:feedback§h419",
    "text": "2026-11-09 · v3 기각 — “강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)”",
    "themes": [
     "emphasis",
@@ -5761,9 +5761,10 @@
     103,
     105,
     107,
-    109
+    109,
+    119
    ],
-   "last_version": 109
+   "last_version": 119
   },
   {
    "id": "doc:10",
@@ -5857,9 +5858,10 @@
    "lines": 87,
    "versions": [
     109,
-    114
+    114,
+    119
    ],
-   "last_version": 114
+   "last_version": 119
   },
   {
    "id": "doc:feedback",
@@ -5867,7 +5869,7 @@
    "key": "feedback",
    "file": "manual/feedback-by-repo.md",
    "label": "내 피드백 — 레포별 (자동 생성: `python -m ytflow manual-graph`)",
-   "lines": 429,
+   "lines": 430,
    "versions": [
     83,
     84,
@@ -5902,9 +5904,10 @@
     114,
     115,
     117,
-    118
+    118,
+    119
    ],
-   "last_version": 118
+   "last_version": 119
   },
   {
    "id": "doc:README",
@@ -9510,7 +9513,7 @@
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
    "line": 366,
-   "end": 385,
+   "end": 386,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9519,29 +9522,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h386",
+   "id": "sec:feedback§h387",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h386",
+   "num": "h387",
    "level": 2,
    "label": "시사 — `topics/issues`",
    "title": "시사 — `topics/issues`",
-   "line": 386,
-   "end": 387,
+   "line": 387,
+   "end": 388,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h388",
+   "id": "sec:feedback§h389",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h388",
+   "num": "h389",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 388,
-   "end": 415,
+   "line": 389,
+   "end": 416,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9551,29 +9554,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h416",
+   "id": "sec:feedback§h417",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h416",
+   "num": "h417",
    "level": 2,
    "label": "AI — `topics/ai`",
    "title": "AI — `topics/ai`",
-   "line": 416,
-   "end": 417,
+   "line": 417,
+   "end": 418,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h418",
+   "id": "sec:feedback§h419",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h418",
+   "num": "h419",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 418,
-   "end": 429,
+   "line": 419,
+   "end": 430,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -16155,7 +16158,17 @@
    "label": "v119",
    "summary": "여는 장면은 원본 발언·갈등부터(웹소설 첫 줄), 지금의 의심으로 틀 잡기, 반대편은 무엇을 문제 삼나까지, 의견 배지 기본 끔",
    "applied": [],
-   "themes": []
+   "themes": [],
+   "commit": {
+    "sha": "8d746ebc95aecbfa0e1ba5f0351970d8e7af7a9b",
+    "subject": "매뉴얼 v119: 여는 장면은 원본 발언·갈등부터(웹소설 첫 줄), 지금의 의심으로 틀 잡기, 반대편은 무엇을 문제 삼나까지, 의견 배지 기본 끔 · 카드 같은 줄 같은 크기",
+    "date": "2026-11-23",
+    "other_files": [
+     "proposals/manual/20261123-003617-tags-feedback.md",
+     "ytflow/stages/explain.py",
+     "ytflow/stages/hybrid.py"
+    ]
+   }
   },
   {
    "id": "rev:1",
@@ -33539,6 +33552,32 @@
    "annotated": false
   },
   {
+   "id": "intent:dfaedd24",
+   "kind": "intent",
+   "quote": "일관성이 중요한데 이게 너무 떨어지네요",
+   "label": "일관성이 중요한데 이게 너무 떨어지네요",
+   "versions": [],
+   "date": "2026-11-23",
+   "sources": [
+    {
+     "ref": "fb:244",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:dfaedd24"
+   ],
+   "themes": [],
+   "ann_key": "intent:dfaedd24",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:e1ebf689",
    "kind": "intent",
    "quote": "앞으로 주제선정할때 리스트10개는 뽑고 후보군 고를 수 있도록 해줘",
@@ -39599,8 +39638,8 @@
     "sec:10§h136",
     "sec:feedback§h146",
     "sec:feedback§h273",
-    "sec:feedback§h388",
-    "sec:feedback§h418",
+    "sec:feedback§h389",
+    "sec:feedback§h419",
     "ver:10",
     "ver:30",
     "ver:31",
@@ -40025,8 +40064,8 @@
     "sec:12§0-1",
     "sec:feedback§h146",
     "sec:feedback§h273",
-    "sec:feedback§h388",
-    "sec:feedback§h418",
+    "sec:feedback§h389",
+    "sec:feedback§h419",
     "ver:10",
     "ver:12",
     "rev:11",
@@ -47290,6 +47329,34 @@
    "repo_label": "시장",
    "intent": "intent:90179785",
    "tier_key": "fb:90179785",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:244",
+   "kind": "feedback",
+   "date": "2026-11-23",
+   "quote": "일관성이 중요한데 이게 너무 떨어지네요",
+   "label": "일관성이 중요한데 이게 너무 떨어지네요",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "standard",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": "intent:dfaedd24",
+   "tier_key": "fb:dfaedd24",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -73587,22 +73654,22 @@
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h386",
+   "t": "sec:feedback§h387",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h388",
+   "t": "sec:feedback§h389",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h416",
+   "t": "sec:feedback§h417",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h418",
+   "t": "sec:feedback§h419",
    "kind": "contains"
   },
   {
@@ -77152,6 +77219,30 @@
   },
   {
    "s": "ver:118",
+   "t": "doc:feedback",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:119",
+   "t": "doc:09",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:119",
+   "t": "doc:14",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:119",
    "t": "doc:feedback",
    "kind": "touched",
    "via": [
@@ -82432,6 +82523,11 @@
   {
    "s": "intent:515af871",
    "t": "fb:228",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:dfaedd24",
+   "t": "fb:244",
    "kind": "quoted_in"
   },
   {
@@ -87757,6 +87853,11 @@
   {
    "s": "fb:243",
    "t": "intent:90179785",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:244",
+   "t": "intent:dfaedd24",
    "kind": "quoted_as"
   }
  ]
