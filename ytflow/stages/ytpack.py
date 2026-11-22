@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 
 from ..project import Project
@@ -18,6 +19,22 @@ def _ts(sec: float) -> str:
     sec = int(round(sec))
     return f"{sec // 60}:{sec % 60:02d}" if sec < 3600 else f"{sec // 3600}:{sec % 3600 // 60:02d}:{sec % 60:02d}"
 
+
+
+def yt_suggest(seeds: list[str], per: int = 8) -> dict:
+    """유튜브 검색 자동완성 (공개 주소, 키 없음) — 사람들이 실제로 치는 검색어 (2026-11-22 사용자: "태그에 따라 조회수가 좀 차이나는거같습니다").
+    태그 '후보'만 돌려준다. 영상과 맞는 것만 사람이 고른다(manual/09 §7-1 10)."""
+    import urllib.parse
+    import urllib.request
+    out = {}
+    for q in seeds:
+        try:
+            u = "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&hl=ko&q=" + urllib.parse.quote(q)
+            r = urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0"}), timeout=10)
+            out[q] = [x for x in json.loads(r.read().decode("utf-8", "ignore"))[1] if x != q][:per]
+        except Exception:  # noqa: BLE001
+            out[q] = []
+    return out
 
 def run(project: str):
     pr = Project.open(project)
@@ -68,7 +85,10 @@ def run(project: str):
     desc += ["📌 챕터"] + [f"{a} {b}" for a, b in chapters] + ["", "📚 출처"] + [f"- {u}" for u in urls[:20]] + extra + ["", DISCLAIMER, " ".join("#" + re.sub(r"\s+", "", x).lstrip("#") for x in hashtags[:3])]
     md = [f"# 유튜브 업로드 — {project}", "", "## 제목 (기본 → 테스트 및 비교 후보)"]
     md += [f"{i}. {x}" for i, x in enumerate([pk.get("title", spec.get("title", ""))] + [x for x in pk.get("title_options", []) if x != pk.get("title")], 1)]
-    md += ["", "## 설명란 (그대로 붙여 넣기)", "```", *desc, "```", "", "## 태그", ", ".join(tags), "",
+    seeds = pk.get("tag_seeds") or [x for x in (pk.get("tags") or [])][:8]
+    sug = yt_suggest(seeds) if seeds and os.environ.get("YTFLOW_OFFLINE") != "1" else {}
+    sug_md = ["## 검색 자동완성 (태그 후보 — 영상과 맞는 것만 package.tags 앞쪽으로, manual/09 §7-1 10)"] + [f"- {q} → {', '.join(v) or '(없음)'}" for q, v in sug.items()] + [""] if sug else []
+    md += ["", "## 설명란 (그대로 붙여 넣기)", "```", *desc, "```", "", "## 태그", ", ".join(tags), "", *sug_md,
            "## 썸네일", "05_edit/thumbnail_A.png · B · C → 유튜브 '테스트 및 비교'에 세 장 모두",
            "", "## 체크", "- 공개 예약: 한국 시간 08:30 (평일, 채널 publish_time)  - 재생목록: 아침 브리핑 / 심층 / 주간",
            f"- 챕터 {len(chapters)}개 (유튜브는 3개 이상·각 10초 이상이어야 표시)",
