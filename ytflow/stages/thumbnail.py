@@ -266,7 +266,10 @@ def _versus_dark(v: dict) -> tuple[Image.Image, list]:
     d = ImageDraw.Draw(base)
     boxes = []
     if v.get("headline"):
-        boxes += _text_block(d, [v["headline"]], v.get("hl", []), 640, 46, 1180, 104, align="center")
+        if v.get("_week"):   # 오른쪽 위 주간 딱지 자리를 비움
+            boxes += _text_block(d, [v["headline"]], v.get("hl", []), (W - 330) // 2, 46, W - 400, 96, align="center")
+        else:
+            boxes += _text_block(d, [v["headline"]], v.get("hl", []), 640, 46, 1180, 104, align="center")
     L, R = v["left"], v["right"]
     for (it, cx, col) in ((L, 330, YELLOW), (R, 950, DOWN)):
         sz = it.get("size", 230)
@@ -364,8 +367,40 @@ def _person(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
     return base.convert("RGB"), boxes
 
 
+def week_of(project: Project) -> dict | None:
+    """주간 영상의 기간 표시 (2026-11-22 사용자: "주간영상 기간을 명시하고 뭐 11월 3주차 이런식으로 썸네일에 알리는게 어떤가요? 앞으로의 주간영상들도 같은 템플릿으로").
+    프로젝트 날짜(YYYYMMDD) 이전의 가장 가까운 금요일까지 월~금 한 주. 'n월 n주차'는 그 주의 목요일이 속한 달·날짜로(목요일 기준 주차)."""
+    import datetime as _dt
+    name = project.path.name
+    if "weekly" not in name or not name[:8].isdigit():
+        return None
+    d = _dt.date(int(name[:4]), int(name[4:6]), int(name[6:8]))
+    fri = d - _dt.timedelta(days=(d.weekday() - 4) % 7)
+    mon, thu = fri - _dt.timedelta(days=4), fri - _dt.timedelta(days=1)
+    return {"label": f"{thu.month}월 {math.ceil(thu.day / 7)}주차", "range": f"{mon.month}.{mon.day} ~ {fri.month}.{fri.day}"}
+
+
+def _week_badge(im: Image.Image, wk: dict, boxes: list) -> Image.Image:
+    """오른쪽 위 기간 딱지 — 모든 주간 썸네일에 같은 자리·같은 모양 (시리즈 표시)."""
+    im = im.convert("RGBA")
+    ov = Image.new("RGBA", im.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(ov)
+    f1, f2 = _font(GOTHIC_X, 58), _font(GOTHIC_X, 30)
+    w = max(f1.getlength(wk["label"]), f2.getlength(wk["range"])) + 48
+    x1, y0 = W - 28, 26
+    x0 = x1 - w
+    d.rounded_rectangle([x0, y0, x1, y0 + 128], 14, fill=YELLOW + (255,), outline=(0, 0, 0, 255), width=5)
+    d.text(((x0 + x1) / 2, y0 + 12), wk["label"], font=f1, fill=(10, 10, 10), anchor="mt")
+    d.text(((x0 + x1) / 2, y0 + 82), wk["range"], font=f2, fill=(40, 40, 40), anchor="mt")
+    boxes.append((x0, y0, x1, y0 + 128))
+    return Image.alpha_composite(im, ov).convert("RGB")
+
+
 def render(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
-    im, boxes = _render_layout(project, spec, v)
+    wk = v.get("week") or (spec.get("package") or {}).get("week") or week_of(project)
+    im, boxes = _render_layout(project, spec, dict(v, _week=wk) if wk else v)
+    if wk:
+        im = _week_badge(im, wk, boxes)
     tk = v.get("ticker") or (spec.get("package") or {}).get("ticker")
     if tk:   # 아래 왼쪽 작은 지수 띠 [{"name": "S&P 500", "chg": "-3.70%"}] — 재생 시간 자리(TIMESTAMP_BOX)는 피함.
         # 일부러 작은 글씨라 휴대폰 글씨 점검(boxes)에는 넣지 않음 (manual/09 §7-1 ⑧, 2026-11-21 사용자)
