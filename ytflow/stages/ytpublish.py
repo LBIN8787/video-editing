@@ -242,6 +242,10 @@ def build_meta(pr: Project, at: str | None = None, privacy: str | None = None) -
         status["containsSyntheticMedia"] = True
     if when:
         status["publishAt"] = when
+    from .channelops import chapter_problems   # 진행 바 챕터 조건 (2026-11-23 사용자: "영상바에 타임라인이 안나타나더라고")
+    probs = chapter_problems(p["description"], 0)
+    if probs:
+        print(f"[yt-publish] ⚠ 진행 바 챕터가 안 붙을 설명란: {'; '.join(probs)} — youtube.md 의 📌 챕터를 고치세요 (00:00 시작·3개 이상·각 10초 이상)")
     meta = {"snippet": {"title": p["title"], "description": p["description"], "tags": p["tags"], "categoryId": str(s["category_id"]),
                         "defaultLanguage": s["default_language"], "defaultAudioLanguage": s["default_language"]},
             "status": status}

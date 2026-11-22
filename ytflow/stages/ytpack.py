@@ -59,7 +59,7 @@ def run(project: str):
     spec = json.loads((pr.dir("script") / "hybrid.json").read_text(encoding="utf-8"))
     tl = json.loads((pr.dir("edit") / "hybrid_timeline.json").read_text(encoding="utf-8"))
     pk = spec.get("package") or {}
-    t, chapters = 0.0, [("0:00", "오프닝")]
+    t, chapters = 0.0, [("00:00", "오프닝")]   # 공식 도움말 표기 00:00 (support.google.com/youtube/answer/9884579)
     by_id = {s["id"]: s for s in spec["scenes"]}
     for x in tl:
         sc = by_id.get(x["scene"], {})

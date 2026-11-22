@@ -131,6 +131,11 @@ def fetch(name: str, ch: dict) -> dict:
                          "duration": _secs(x["contentDetails"]["duration"]),
                          "views": int(s.get("viewCount", 0)), "likes": int(s.get("likeCount", 0)),
                          "comments": int(s.get("commentCount", 0)), "project": pm.get(x["id"])})
+            dur = vids[-1]["duration"]
+            vids[-1]["chapters"] = len(parse_chapters(x["snippet"].get("description", "")))
+            vids[-1]["chapter_problems"] = chapter_problems(x["snippet"].get("description", ""), dur)
+            if st["privacyStatus"] == "public":
+                vids[-1]["chapters_shown"] = chapters_shown(x["id"])
     t = now().isoformat(timespec="minutes")
     chan = {"id": me["id"], "title": me["snippet"]["title"], "handle": me["snippet"].get("customUrl"),
             "subscribers": int(me["statistics"].get("subscriberCount", 0)),
@@ -160,6 +165,60 @@ def fetch(name: str, ch: dict) -> dict:
     except RuntimeError as e:
         out["reach"] = {"ok": False, "why": str(e)[:200]}
     return out
+
+
+# ---------------------------------------------------------------- 진행 바 챕터 (2026-11-23 사용자: "영상바에 타임라인이 안나타나더라고")
+# 유튜브 공식 조건(support.google.com/youtube/answer/9884579): 설명란 첫 타임코드 00:00 · 3개 이상 · 오름차순 · 각 10초 이상,
+# 그리고 채널이 '고급 기능'을 쓸 수 있어야 함(Studio 설정 → 채널 → 기능 사용 자격). 설명란이 맞는데도 안 보이면 거의 이것.
+TS_LINE = re.compile(r"^\s*\(?((?:\d{1,2}:)?\d{1,2}:\d{2})\)?\s*[-–—:]?\s+(\S.*)$")
+
+
+def _sec(ts: str) -> int:
+    p = [int(x) for x in ts.split(":")]
+    return p[0] * 3600 + p[1] * 60 + p[2] if len(p) == 3 else p[0] * 60 + p[1]
+
+
+def parse_chapters(desc: str) -> list:
+    """설명란에서 첫 00:00 줄부터 이어지는 타임코드 줄들 → [(초, 제목)]."""
+    out, started = [], False
+    for ln in (desc or "").splitlines():
+        m = TS_LINE.match(ln)
+        if m and (started or _sec(m.group(1)) == 0):
+            started = True
+            out.append((_sec(m.group(1)), m.group(2).strip()))
+        elif started and ln.strip():
+            break   # 챕터 목록이 끝남
+    return out
+
+
+def chapter_problems(desc: str, duration: int) -> list:
+    ch = parse_chapters(desc)
+    if not ch:
+        any_ts = any(TS_LINE.match(ln) for ln in (desc or "").splitlines())
+        return ["첫 타임코드가 00:00 이 아님" if any_ts else "설명란에 타임코드 없음"]
+    p = []
+    if len(ch) < 3:
+        p.append(f"타임코드 {len(ch)}개 (3개 이상이어야 함)")
+    for (a, ta), (b, tb) in zip(ch, ch[1:]):
+        if b <= a:
+            p.append(f"순서가 거꾸로: {ta} → {tb}")
+        elif b - a < 10:
+            p.append(f"10초보다 짧은 챕터: '{ta}' ({b - a}초)")
+    if duration and duration - ch[-1][0] < 10:
+        p.append(f"마지막 챕터 '{ch[-1][1]}' 이 10초보다 짧거나 영상 밖")
+    return p
+
+
+def chapters_shown(video_id: str):
+    """공개 시청 페이지에 챕터가 실제로 붙었나 (True/False, 확인 못 하면 None). 봇 확인이 뜨면 우회하지 않고 None."""
+    try:
+        req = urllib.request.Request(f"https://www.youtube.com/watch?v={video_id}", headers={"User-Agent": "Mozilla/5.0"})
+        h = urllib.request.urlopen(req, timeout=30).read().decode("utf-8", "replace")
+    except Exception:
+        return None
+    if '"videoDetails"' not in h:
+        return None
+    return '"chapterRenderer"' in h
 
 
 def fetch_comments(tok: str, d: Path, channel_id: str) -> dict:
@@ -402,6 +461,22 @@ def report(name: str, ch: dict, got: dict | None = None) -> Path:
                          f"{rp['drop']*100:.0f}%p 빠짐, 끝까지 {rp['end']*100:.0f}%{rel}" + (f" — 그때 말: “{said[:60]}”" if said else ""))
     lines += ["", "## 4. 노출·클릭"]
     lines.append(f"- {reach.get('note') or reach.get('why') or ('영상별 노출 클릭률은 표에' if reach.get('ok') else '없음')}")
+    lines += ["", "## 4-1. 진행 바 챕터"]
+    bad = [v for v in pub if v.get("chapter_problems")]
+    hidden = [v for v in pub if not v.get("chapter_problems") and v.get("chapters_shown") is False]
+    shown = [v for v in pub if v.get("chapters_shown")]
+    for v in bad:
+        lines.append(f"- 설명란 타임코드 문제: [{v['title'][:40]}](https://studio.youtube.com/video/{v['id']}/edit) — {'; '.join(v['chapter_problems'])}")
+    if hidden and not shown:
+        lines.append(f"- 설명란은 맞는데 공개 영상 {len(hidden)}편 모두 진행 바에 챕터가 안 붙음 → **채널 '고급 기능'이 꺼져 있을 가능성이 큼.** "
+                     "사용자: YouTube Studio → 설정 → 채널 → 기능 사용 자격 → 고급 기능(전화 인증 등). 켜진 뒤 "
+                     f"`python -m ytflow ops-act {name} resave` 로 설명란을 다시 저장해 반영을 재촉.")
+    elif hidden:
+        for v in hidden:
+            lines.append(f"- 설명란은 맞는데 챕터가 아직 안 붙음 (반영 지연일 수 있음, 24~72시간): [{v['title'][:40]}](https://youtu.be/{v['id']})")
+    if not bad and not hidden:
+        known = [v for v in pub if v.get("chapters_shown") is not None]
+        lines.append(f"- 이상 없음 (확인 {len(known)}편)" if known else "- 확인 못 함 (시청 페이지를 못 읽음)")
     new = ((got or {}).get("comments") or {}).get("new") or []
     lines += ["", f"## 5. 새 댓글 {len(new)}개"]
     titles = {v["id"]: v["title"] for v in vids}
@@ -554,6 +629,19 @@ def act(name: str, what: str, video=None, to=None, dry_run: bool = False, force:
         return _act_tidy(name, vids, tok, dry_run)
     if what == "playlists":
         return _act_playlists(name, ch, vids, tok, dry_run)
+    if what == "resave":   # 설명란을 그대로 다시 저장 → 챕터 재처리 재촉 (내용은 바꾸지 않음)
+        targets = [x for x in vids if x["privacy"] == "public" and (not video or x["id"] == video)
+                   and not x.get("chapter_problems") and x.get("chapters_shown") is not True]
+        for x in targets:
+            print(f"[ops-act] {'(시험) ' if dry_run else ''}설명란 다시 저장: {x['title'][:40]}")
+            if not dry_run:
+                sn = _call(tok, YT + "videos", {"part": "snippet", "id": x["id"]})["items"][0]["snippet"]
+                body = {"id": x["id"], "snippet": {k: sn[k] for k in ("title", "categoryId", "description", "tags", "defaultLanguage") if k in sn}}
+                _call(tok, YT + "videos?part=snippet", method="PUT", body=body)
+                _log({"action": "resave_description", "channel": name, "video": x["id"]})
+        if not targets:
+            print("[ops-act] 다시 저장할 영상 없음")
+        return
     v = byid.get(video or "")
     if not v:
         raise SystemExit(f"[ops-act] {name} 에 영상 {video} 이 없음 (먼저 python -m ytflow ops {name})")
