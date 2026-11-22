@@ -385,6 +385,7 @@ def _week_badge(im: Image.Image, wk: dict, boxes: list) -> Image.Image:
     im = im.convert("RGBA")
     ov = Image.new("RGBA", im.size, (0, 0, 0, 0))
     d = ImageDraw.Draw(ov)
+<<<<<<< ours
     f1, f2 = _font(GOTHIC_X, 58), _font(GOTHIC_X, 30)
     w = max(f1.getlength(wk["label"]), f2.getlength(wk["range"])) + 48
     x1, y0 = W - 28, 26
@@ -393,6 +394,18 @@ def _week_badge(im: Image.Image, wk: dict, boxes: list) -> Image.Image:
     d.text(((x0 + x1) / 2, y0 + 12), wk["label"], font=f1, fill=(10, 10, 10), anchor="mt")
     d.text(((x0 + x1) / 2, y0 + 82), wk["range"], font=f2, fill=(40, 40, 40), anchor="mt")
     boxes.append((x0, y0, x1, y0 + 128))
+=======
+    # 2026-11-22 사용자: "오른쪽 위의 노란색 너무 싼티나요" → 반투명 검정 판 + 흰 글씨 + 왼쪽 가는 빨간 선 (차분하게)
+    f1, f2 = _font(GOTHIC_X, 44), _font(GOTHIC_X, 26)
+    w = max(f1.getlength(wk["label"]), f2.getlength(wk["range"])) + 52
+    x1, y0, h = W - 30, 30, 100
+    x0 = x1 - w
+    d.rounded_rectangle([x0, y0, x1, y0 + h], 8, fill=(8, 10, 16, 190))
+    d.rectangle([x0, y0, x0 + 6, y0 + h], fill=RED + (255,))
+    d.text((x0 + 26, y0 + 12), wk["label"], font=f1, fill=(255, 255, 255))
+    d.text((x0 + 26, y0 + 64), wk["range"], font=f2, fill=(190, 196, 206))
+    boxes.append((x0, y0, x1, y0 + h))
+>>>>>>> theirs
     return Image.alpha_composite(im, ov).convert("RGB")
 
 
@@ -401,7 +414,11 @@ def render(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
     im, boxes = _render_layout(project, spec, dict(v, _week=wk) if wk else v)
     if wk:
         im = _week_badge(im, wk, boxes)
+<<<<<<< ours
     tk = v.get("ticker") or (spec.get("package") or {}).get("ticker")
+=======
+    tk = None if v.get("no_ticker") else (v.get("ticker") or (spec.get("package") or {}).get("ticker"))   # 차트·칩이 있는 판은 지수 띠를 끔
+>>>>>>> theirs
     if tk:   # 아래 왼쪽 작은 지수 띠 [{"name": "S&P 500", "chg": "-3.70%"}] — 재생 시간 자리(TIMESTAMP_BOX)는 피함.
         # 일부러 작은 글씨라 휴대폰 글씨 점검(boxes)에는 넣지 않음 (manual/09 §7-1 ⑧, 2026-11-21 사용자)
         im = im.convert("RGBA")
@@ -424,11 +441,46 @@ def render(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
     return im, boxes
 
 
+def _chart(v: dict) -> tuple[Image.Image, list]:
+    """차트 썸네일 (2026-11-22 사용자: "썸네일도 여러 각기다른 스타일을 제시하세요"): 짙은 바탕 + 실제 종가 선(하락은 빨강) +
+    끝점의 큰 숫자 + 왼쪽 위 큰 두 줄. series: [값…], days: ["월", …], value: "-23%", value_label: "엔비디아 한 주"."""
+    base = Image.new("RGB", (W, H), (10, 13, 22))
+    d = ImageDraw.Draw(base, "RGBA")
+    for i in range(H):   # 아래쪽을 살짝 밝게
+        a = int(40 * (i / H) ** 2)
+        d.line([(0, i), (W, i)], fill=(40, 20, 28, a))
+    ys = v["series"]
+    lo, hi = min(ys), max(ys)
+    x0, x1, y0, y1 = 120, W - 330, 330, 590
+    pts = [(x0 + (x1 - x0) * i / (len(ys) - 1), y0 + (y1 - y0) * (hi - y) / (hi - lo or 1)) for i, y in enumerate(ys)]
+    for gy in (y0, (y0 + y1) / 2, y1):
+        d.line([(x0, gy), (x1, gy)], fill=(255, 255, 255, 28), width=2)
+    down = ys[-1] < ys[0]
+    col = DOWN if down else UP
+    d.polygon(pts + [(x1, y1 + 40), (x0, y1 + 40)], fill=col + (38,))
+    d.line(pts, fill=col, width=10, joint="curve")
+    for (x, y) in pts:
+        d.ellipse([x - 9, y - 9, x + 9, y + 9], fill=(255, 255, 255))
+    fd = _font(GOTHIC_X, 30)
+    for (x, _), lab in zip(pts, v.get("days", [])):
+        d.text((x, y1 + 50), lab, font=fd, fill=(170, 176, 190), anchor="mt")
+    ex, ey = pts[-1]
+    fv = _font(GOTHIC_X, 150)
+    d.text((W - 40, min(ey, H - 260)), v["value"], font=fv, fill=col, anchor="rm", stroke_width=8, stroke_fill=(0, 0, 0))
+    fl = _font(GOTHIC_X, 40)
+    d.text((W - 44, min(ey, H - 260) + 96), v.get("value_label", ""), font=fl, fill=(235, 235, 235), anchor="rm")
+    boxes = _text_block(d, v["lines"], v.get("hl", []), 60, v.get("text_y", 70), v.get("text_w", 900), v.get("size", 104))
+    boxes.append((W - 40 - fv.getlength(v["value"]), min(ey, H - 260) - 80, W - 40, min(ey, H - 260) + 140))
+    return base, boxes
+
+
 def _render_layout(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
     if v.get("layout") == "person":
         return _person(project, spec, v)
     if v.get("layout") == "punch":
         return _punch(project, spec, v)
+    if v.get("layout") == "chart":
+        return _chart(v)
     if v.get("layout") == "versus" and v.get("theme") == "dark":
         return _versus_dark(v)
     base = Image.new("RGBA", (W, H), PAPER + (255,))
