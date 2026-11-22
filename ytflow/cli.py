@@ -369,6 +369,17 @@ def main(argv: list[str] | None = None) -> None:
     yu.add_argument("--resume", action="store_true", help="이미 올린 영상에 빠진 단계(썸네일·자막·재생목록)만 다시")
     yu.add_argument("--update-meta", action="store_true", help="이미 올린 영상의 제목·설명란·태그를 youtube.md(제목 1번)로 다시 맞추기")
     yu.add_argument("--skip-preflight", default="", metavar="이유", help="종합 검수 없이 올리기 (사용자가 허락한 경우만, 이유를 기록)")
+    op = sub.add_parser("ops", help="채널 운영·분석: 올린 영상 수치·시청 지속·노출·댓글 수집 → channels/<채널>/ops/<날짜>.md (docs/63)")
+    op.add_argument("channels", nargs="*", help="config/channel_ops.yaml 의 이름 (없으면 전부: market curiosity)")
+    op.add_argument("--no-report", action="store_true", help="수집만")
+    op.add_argument("--report-only", action="store_true", help="수집 없이 지난 수치로 보고서만")
+    oa = sub.add_parser("ops-act", help="채널 운영 행동 (허용된 것만, manual/11 §8): tidy 사본 정리 · playlists · retitle · rethumb · revert")
+    oa.add_argument("channel", help="config/channel_ops.yaml 의 이름 (market | curiosity)")
+    oa.add_argument("what", choices=["tidy", "playlists", "retitle", "rethumb", "revert"])
+    oa.add_argument("--video", default=None)
+    oa.add_argument("--to", default=None, help="retitle: youtube.md 제목 후보 번호(2·3) 또는 새 제목 / rethumb: B·C")
+    oa.add_argument("--dry-run", action="store_true")
+    oa.add_argument("--force", action="store_true")
     yp = sub.add_parser("yt-pack", help="유튜브 업로드 묶음: 설명란(챕터 타임코드·출처·면책)·제목 후보·태그 → 05_edit/youtube.md")
     yp.add_argument("project")
     ec = sub.add_parser("earnings-call", help="어닝콜 녹취록 정리: 준비 발언 핵심 문장·애널리스트 질문표·질문 주제 → 01_research/earnings/<TICKER>_call.md")
@@ -629,6 +640,12 @@ def main(argv: list[str] | None = None) -> None:
             ytpublish.run(a.project, at=a.at, privacy=a.privacy, dry_run=a.dry_run, thumb=a.thumb, resume=a.resume, update_meta=a.update_meta)
         else:
             ytpublish.request_github(a.project, at=a.at, privacy=a.privacy, thumb=a.thumb, resume=a.resume, update_meta=a.update_meta)
+    elif a.cmd == "ops":
+        from .stages import channelops
+        channelops.run(a.channels or None, do_fetch=not a.report_only, do_report=not a.no_report)
+    elif a.cmd == "ops-act":
+        from .stages import channelops
+        channelops.act(a.channel, a.what, a.video, a.to, a.dry_run, a.force)
     elif a.cmd == "yt-pack":
         from .stages import ytpack
         ytpack.run(a.project)

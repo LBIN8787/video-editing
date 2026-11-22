@@ -2,6 +2,7 @@
 
     python scripts/youtube_auth.py client_secret.json --to-github
     python scripts/youtube_auth.py client_secret.json --name knowledge --to-github   # 채널별 (호기심 '한겹 더 보면')
+    (2026-11-23 부터 분석 읽기 권한 yt-analytics.readonly 도 함께 받음 — 예전 토큰이면 한 번 다시 실행, docs/63)
 
 1) 브라우저가 열리면 이미 로그인된 구글 계정으로 → **채널 '이어읽는시장'(브랜드 계정)을 고르고** → 허용.
 2) 받은 '갱신 토큰'을 GitHub 저장소 비밀값(YT_CLIENT_ID · YT_CLIENT_SECRET · YT_REFRESH_TOKEN)에 바로 넣는다
@@ -20,7 +21,9 @@ import urllib.request
 import webbrowser
 from pathlib import Path
 
-SCOPES = "https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube.force-ssl"
+# 올리기·관리 + 읽기 전용 분석 (2026-11-23: 채널 운영·분석을 에이전트에게 맡김 — 시청 지속·유입 경로·노출 클릭률, docs/63)
+SCOPES = ("https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube.force-ssl"
+          " https://www.googleapis.com/auth/yt-analytics.readonly")
 
 
 def main():
