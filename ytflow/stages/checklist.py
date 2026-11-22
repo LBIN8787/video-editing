@@ -234,6 +234,8 @@ def run(path: Path, upto: str = "G8") -> Report:
             if ch == "ch-market-daily":
                 fs = (res / "factsheet.md").read_text(encoding="utf-8") if (res / "factsheet.md").exists() else ""
                 kinds = [k for k in ("이슈", "보고서", "전망", "실적") if k in fs]
+                R.add("G3", "MUST", "시간대: 팩트시트에 현지(ET)·한국(KST) 시각을 함께 적음 — 날짜·장 구분 착각 방지 (09 §3-6, 2026-11-22 사용자)",
+                      "ET" in fs and ("KST" in fs or "한국 시각" in fs or "한국 시간" in fs), "")
                 R.add("G3", "MUST", "매일 시장: 이야기마다 원인 종류(이슈·보고서·전망·실적)와 1차 출처를 팩트시트에", bool(kinds) and "http" in fs, kinds)
                 # v26 (03 §0-2, 2026-11-15 사용자): 뻔한 사실 말고 자료를 엮어야 보이는 것 — 자료 지도·말과 행동·매체 프레임
                 deep = path.name.endswith(("-analysis", "-weekly", "-review")) or str(tb.get("depth", "")).startswith("심층")
