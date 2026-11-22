@@ -39,15 +39,17 @@ import contextvars as _cv
 _TASK: _cv.ContextVar[str] = _cv.ContextVar("ytflow_llm_task", default="")
 
 
-def _role() -> dict:
-    """지금 단계(task)의 역할 설정 {model, cli, effort}. models.yaml 이 없으면 빈 dict (pipeline.yaml 값을 씀)."""
+def _role(provider: str = "anthropic") -> dict:
+    """지금 단계(task)의 티어 설정 {model, cli, effort}. 티어(judge·complex·simple)는 제공사 공통, 모델 이름만 제공사별.
+    models.yaml 이 없으면 빈 dict (pipeline.yaml 값을 씀)."""
     f = config.CONFIG_DIR / "models.yaml"
     if not f.exists():
         return {}
     import yaml
     m = yaml.safe_load(f.read_text(encoding="utf-8")) or {}
-    tasks, roles = m.get("tasks") or {}, m.get("roles") or {}
-    return roles.get(tasks.get(_TASK.get()) or tasks.get("default") or "", {}) or {}
+    tasks = m.get("tasks") or {}
+    tier = tasks.get(_TASK.get()) or tasks.get("default") or ""
+    return {**((m.get("tiers") or {}).get(tier) or {}), **(((m.get("providers") or {}).get(provider) or {}).get(tier) or {})}
 
 
 def client() -> anthropic.Anthropic:
@@ -141,8 +143,9 @@ def _codex(system: str, user: str, schema: dict | None = None, web: bool = False
         out = Path(td) / "out.txt"
         cmd = [exe] + (["--search"] if web else []) + ["exec", "--skip-git-repo-check", "--ephemeral",
                                                        "-s", "read-only", "-o", str(out)]
-        if cfg.get("codex_model"):
-            cmd += ["-m", cfg["codex_model"]]
+        cm = _role("openai").get("model") or cfg.get("codex_model")   # 티어별 Codex 모델 (models.yaml), 비면 기본
+        if cm:
+            cmd += ["-m", cm]
         if schema is not None:
             sf = Path(td) / "schema.json"
             sf.write_text(json.dumps(strict_schema(schema), ensure_ascii=False), encoding="utf-8")

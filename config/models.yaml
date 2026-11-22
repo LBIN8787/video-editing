@@ -1,35 +1,41 @@
-# 모델 역할 — 지휘는 Fable, 실무는 Sonnet, 중요한 일은 Opus
-# 2026-11-22 사용자: "자료조사나 이런 지시 오케스트레이션은 fable이 일을 하는건 sonnet이 좀 더 중요한 일은 opus가
-#   이처럼 fable5.2가 sonnet5.5랑 opus5.5를 오케스트레이션 했으면 해 물론 모델이 새로 나오면 이도 재 설정하고"
-# 쓰는 곳: ytflow/llm.py (claude-cli 는 cli 별칭, api 는 model ID) · .claude/agents/{worker,senior}.md (Claude Code 세션)
-# 새 모델이 나오면: 아래 roles 의 model·cli 를 바꾸고 checked 날짜를 고친다 (정기 검토가 30일마다 묻는다, skills/manual-review).
+# 모델 티어 — 판단은 최상위, 복잡한 일은 중간, 간단한 일은 가벼운 모델
+# 2026-11-22 사용자: "판단 가장 중요한 판단이 들어가는 부분 판단부분은 fable이 복잡한 일은 opus 간단한 일은 sonnet입니다.
+#   다른 프론티어 모델들도 이런식으로 티어가 나뉘는데 모델 이름과 버전만 다르다는 느낌으로 하려구요"
+# (앞 말: "fable5.2가 sonnet5.5랑 opus5.5를 오케스트레이션 했으면 해 물론 모델이 새로 나오면 이도 재 설정하고")
+#
+# 티어는 제공사와 상관없이 셋 — 일은 티어에 맡기고(tasks), 티어마다 어느 모델인지는 제공사별 표(providers)에서 바꿉니다.
+#   judge   판단: 무엇을 만들지·어느 쪽이 맞는지·통과인지 정하는 일, 일 나누기(지휘), 사용자에게 올리는 결정 정리
+#   complex 복잡한 일: 길고 여러 조건을 함께 지켜야 하는 제작 — 원고·대본 쓰기·고치기, 레퍼런스 분석, 검수표 작성
+#   simple  간단한 일: 범위가 분명한 실무 — 자료 수집·요약·목록 뽑기·옮겨 적기·렌더·캡처·자막
+# 쓰는 곳: ytflow/llm.py (claude-cli·api → anthropic, codex-cli → openai) · .claude/agents/{senior,worker}.md
+# 새 모델이 나오면: providers 의 이름만 바꾸고 checked 날짜를 고친다 (정기 검토가 30일마다 묻는다).
 checked: '2026-11-22'
-roles:
-  orchestrator:   # 지휘: 주제 고르기·조사 지시·단계 판단·누구에게 맡길지·사용자 보고
-    model: claude-fable-5-2
-    cli: fable
-    effort: high
-  worker:         # 실무: 자료 수집·요약·목록 뽑기·장면표 채우기·렌더·캡처·자막
-    model: claude-sonnet-5-5
-    cli: sonnet
-    effort: high
-  senior:         # 중요한 일: 원고·대본 쓰기, 근거 검수(근거·비약·괴리·착각), 제목·썸네일, 최종 검수
-    model: claude-opus-5-5
-    cli: opus
-    effort: high
-# ytflow 파이프라인 단계 → 역할 (없는 단계는 default)
+tiers:
+  judge:   {label: 판단, effort: high}
+  complex: {label: 복잡한 일, effort: high}
+  simple:  {label: 간단한 일, effort: high}
+providers:
+  anthropic:
+    judge:   {model: claude-fable-5-2, cli: fable}
+    complex: {model: claude-opus-5-5, cli: opus}
+    simple:  {model: claude-sonnet-5-5, cli: sonnet}
+  openai:    # Codex — 비워 두면 Codex 기본 모델. 티어에 맞는 모델 이름을 사용자가 정해 채움
+    judge:   {model: ""}
+    complex: {model: ""}
+    simple:  {model: ""}
+# ytflow 파이프라인 단계 → 티어 (없는 단계는 default)
 tasks:
-  default: senior
-  topic_select: orchestrator
-  scout: orchestrator
-  shorts_pick: orchestrator
-  research: worker
-  articles: worker
-  shorts_facts: worker
-  benchmark: worker
-  style_rules: worker
-  article: senior
-  script: senior
-  script_fix: senior
-  package: senior
-  shorts_script: senior
+  default: complex
+  topic_select: judge      # 어느 주제로 갈지 고름
+  scout: judge             # 소스가 강한 주제·형식 판단
+  shorts_pick: judge       # 쇼츠 소재 고름
+  package: judge           # 제목·썸네일 문구 고름 (무엇이 눌릴지 판단)
+  article: complex         # 원고
+  script: complex          # 대본
+  script_fix: complex      # 대본 고치기
+  shorts_script: complex
+  benchmark: complex       # 레퍼런스 대본 규칙 분석
+  style_rules: complex     # 레퍼런스 장면 시트 분석
+  research: simple         # 자료 수집 (근거 검수는 따로 — 13 §4-1)
+  articles: simple         # 기사 목록 옮겨 적기
+  shorts_facts: simple
