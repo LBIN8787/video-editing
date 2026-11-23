@@ -45,8 +45,27 @@ def _cache() -> Path:
         return ROOT / ".git" / "manual-lock.json"
 
 
+def _env_for(cwd) -> dict:
+    """다른 폴더(잠금용 임시 worktree)에서 git 을 돌릴 때는 GIT_DIR·GIT_INDEX_FILE·GIT_WORK_TREE 를 뺀다.
+    pre-commit 훅 안에서는 git 이 이 변수들을 사용자 저장소로 정해 두므로, 그대로 두면 '임시 폴더에서' 한 줄 알았던
+    orphan checkout·rm·commit 이 사용자 저장소에서 일어나 잠금 파일만 남은 커밋이 main 에 올라간다 (2026-11-23 실제 사고)."""
+    env = dict(os.environ)
+    if cwd is not None:
+        for k in ("GIT_DIR", "GIT_INDEX_FILE", "GIT_WORK_TREE", "GIT_PREFIX", "GIT_OBJECT_DIRECTORY"):
+            env.pop(k, None)
+    return env
+
+
+def _guard_wt(wt: Path) -> None:
+    """잠금용 임시 worktree 가 정말 그 폴더인지 — 아니면 아무것도 지우거나 커밋하지 않고 멈춤."""
+    top = subprocess.run(["git", "rev-parse", "--show-toplevel"], cwd=wt, env=_env_for(wt), capture_output=True, text=True,
+                         encoding="utf-8", errors="replace", timeout=30).stdout.strip()
+    if not top or Path(top).resolve() != Path(wt).resolve():
+        raise RuntimeError(f"잠금용 임시 폴더를 만들지 못함 ({wt} → git 은 {top or '없음'} 을 가리킴) — 사용자 저장소를 건드리지 않고 멈춤")
+
+
 def _git(*a, check=True, cwd=None) -> str:
-    r = subprocess.run(["git", *a], cwd=cwd or ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60)
+    r = subprocess.run(["git", *a], cwd=cwd or ROOT, env=_env_for(cwd), capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60)
     if check and r.returncode != 0:
         raise RuntimeError((r.stderr or r.stdout).strip()[:300])
     return r.stdout
@@ -128,8 +147,21 @@ def holder_ok(lock: dict | None = None, me: str | None = None) -> tuple[bool, st
                    f"python -m ytflow manual-lock request \"…\" 로 요청을 남기고, 풀리면 잡으세요 (docs/35)")
 
 
+_HOOK_VARS = ("GIT_DIR", "GIT_INDEX_FILE", "GIT_WORK_TREE", "GIT_PREFIX", "GIT_OBJECT_DIRECTORY")
+
+
 def _write_lock(new: dict | None, msg: str, force: bool = False) -> None:
-    """locks 브랜치의 잠금 파일만 바꾼 커밋을 push — 동시에 잡으면 늦은 쪽 push 가 거절됨."""
+    """locks 브랜치의 잠금 파일만 바꾼 커밋을 push — 동시에 잡으면 늦은 쪽 push 가 거절됨.
+    pre-commit 훅에서 불리면 git 이 GIT_DIR·GIT_INDEX_FILE 을 사용자 저장소로 정해 둠 → 이 함수 동안만 빼고 끝나면 되돌림
+    (그대로 두면 worktree add·commit 이 사용자 저장소의 색인을 잠금 브랜치로 바꿔 main 이 잠금 파일만 남음 — 2026-11-23 사고)."""
+    saved = {k: os.environ.pop(k) for k in _HOOK_VARS if k in os.environ}
+    try:
+        _write_lock_inner(new, msg, force)
+    finally:
+        os.environ.update(saved)
+
+
+def _write_lock_inner(new: dict | None, msg: str, force: bool = False) -> None:
     o = owners().get("lock") or {}
     br, fn = o.get("branch", "locks"), o.get("file", "manual-lock.json")
     with tempfile.TemporaryDirectory() as td:
@@ -139,8 +171,10 @@ def _write_lock(new: dict | None, msg: str, force: bool = False) -> None:
         if exists:
             _git("fetch", "-q", "origin", br)
             _git("worktree", "add", "-q", "--detach", str(wt), "FETCH_HEAD")
+            _guard_wt(wt)
         else:
             _git("worktree", "add", "-q", "--detach", str(wt), "HEAD")
+            _guard_wt(wt)
             _git("checkout", "-q", "--orphan", f"tmp-{br}", cwd=wt)
             _git("rm", "-rq", "--cached", ".", cwd=wt, check=False)
             for p in wt.iterdir():
@@ -164,7 +198,7 @@ def _write_lock(new: dict | None, msg: str, force: bool = False) -> None:
             _git("add", fn, cwd=wt)
             _git("-c", "user.name=ytflow-lock", "-c", "user.email=ytflow-lock@users.noreply.github.com",
                  "commit", "-q", "-m", msg, cwd=wt)
-            r = subprocess.run(["git", "push", "origin", f"HEAD:refs/heads/{br}"], cwd=wt, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120)
+            r = subprocess.run(["git", "push", "origin", f"HEAD:refs/heads/{br}"], cwd=wt, env=_env_for(wt), capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120)
             if r.returncode != 0:
                 raise RuntimeError("다른 세션이 먼저 잠금을 바꿈 — status 로 다시 확인하세요\n" + r.stderr[-300:])
         finally:
