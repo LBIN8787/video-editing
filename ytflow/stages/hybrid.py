@@ -1320,9 +1320,9 @@ def us_states() -> dict:
 
 def render_scene(work: Path, out: Path) -> str:
     r = subprocess.run([str(hyper.BIN), "render", "--quality", "looks", "-o", str(out.resolve())], cwd=work, env=hyper._env(),
-                       capture_output=True, text=True, timeout=1800)
+                       capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=1800)   # Windows 기본(cp949)으로 읽으면 렌더 로그의 특수문자에서 깨져 오류 문구가 사라짐
     if r.returncode or not out.exists():
-        return (r.stderr or r.stdout)[-300:]
+        return (r.stderr or r.stdout or f"렌더 실패 (코드 {r.returncode})")[-300:]
     return ""
 
 

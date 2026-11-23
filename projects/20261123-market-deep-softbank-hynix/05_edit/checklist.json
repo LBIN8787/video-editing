@@ -1,7 +1,7 @@
 {
  "project": "20261123-market-deep-softbank-hynix",
  "manual_version": "120",
- "checked": "2026-11-23T14:21:48",
+ "checked": "2026-11-23T18:26:07",
  "pass": true,
  "rows": [
   {
@@ -15,7 +15,7 @@
    "gate": "G0",
    "level": "SHOULD",
    "item": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
-   "ok": true,
+   "ok": false,
    "detail": "manual/graph.json"
   },
   {
@@ -411,6 +411,13 @@
    "detail": "[]"
   },
   {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "심층·분석 제목·썸네일에 날짜·'심층' 없음 — 브리핑에만 (manual/09 §7)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
    "gate": "G4",
    "level": "SHOULD",
    "item": "market: 끝에 확인할 신호(checklist)",
@@ -430,13 +437,6 @@
    "item": "말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용)",
    "ok": true,
    "detail": "[]"
-  },
-  {
-   "gate": "G6",
-   "level": "참고",
-   "item": "길이(측정값만 — 시간 기준 없음, 구성요소가 정함, README §2-4)",
-   "ok": true,
-   "detail": "10.7분"
   },
   {
    "gate": "G5",
@@ -485,7 +485,7 @@
    "level": "참고",
    "item": "바탕 계열: 같은 채널 직전 두 편과 같은 바탕 계열인지 (바꿔도 되고 이어 써도 됨 — 카테고리 얼굴 05 §0-7 이 먼저)",
    "ok": true,
-   "detail": "이번 cream · 직전 []"
+   "detail": "이번 cream · 직전 ['cream']"
   },
   {
    "gate": "G5",
@@ -640,41 +640,6 @@
    "item": "최종 목소리 ElevenLabs",
    "ok": true,
    "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "MUST",
-   "item": "제목 후보 3개 + 이유",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "MUST",
-   "item": "썸네일 A/B/C + 점검 ok",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G7",
-   "level": "참고",
-   "item": "제목 앞부분에 질문·핵심 (목록에서 잘려도 무슨 영상인지 보이게)",
-   "ok": true,
-   "detail": "손정의는 왜 62% 빠진 SK하이닉스에 "
-  },
-  {
-   "gate": "G8",
-   "level": "MUST",
-   "item": "완성본 보관 기록 — Drive(drive.json·drive_archive.json) 또는 공개 가능한 것만 GitHub Release(release.json)",
-   "ok": true,
-   "detail": ""
-  },
-  {
-   "gate": "G8",
-   "level": "MUST",
-   "item": "episodes.md 기록",
-   "ok": true,
-   "detail": "ch-market-daily"
   }
  ]
 }

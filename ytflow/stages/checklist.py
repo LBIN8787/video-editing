@@ -327,6 +327,9 @@ def run(path: Path, upto: str = "G8") -> Report:
             txts_ = [pk_.get("title", "")] + list(pk_.get("title_options") or []) + [" ".join([th.get("top", ""), *th.get("lines", []), th.get("sub", ""), th.get("headline", "")]) for th in pk_.get("thumbnails") or []]
             named_ = [x[:30] for x in txts_ if "이어 읽는 시장" in x or "이어읽는시장" in x]
             R.add("G6", "MUST", "제목·썸네일에 채널 이름(이어 읽는 시장) 없음 — 날짜만 (manual/09 §7)", not named_, named_[:2])
+            if "-market-daily" not in path.name and "-weekly" not in path.name:   # 2026-11-23 사용자: 날짜는 브리핑에만, '심층' 딱지도 빼기
+                dated_ = [x[:40] for x in txts_ if re.search(r"\d{1,2}\s?월\s?\d{1,2}\s?일|심층", x)]
+                R.add("G6", "SHOULD", "심층·분석 제목·썸네일에 날짜·'심층' 없음 — 브리핑에만 (manual/09 §7)", not dated_, dated_[:3])
         if brand == "market":
             tail = [s.get("type") for s in spec.get("scenes", [])[-3:]]
             R.add("G4", "SHOULD", "market: 끝에 확인할 신호(checklist)", "checklist" in tail, tail)
