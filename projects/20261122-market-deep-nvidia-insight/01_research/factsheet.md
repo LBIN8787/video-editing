@@ -120,3 +120,7 @@
 - ✅ 10월 의사록(11/18): "off-balance-sheet leasing commitments and circular financing arrangements among AI-related firms could amplify losses if returns on AI investment were to disappoint." · "almost all participants judged that … further action to raise the target range … would likely be appropriate"
 - ✅ 쿡 이사(11/20): "The current stance of policy does not appear to be curtailing the AI buildout" https://www.federalreserve.gov/newsevents/speech/cook20261120a.htm · 10년물 5.05%(19일) → 4.91%(20일)
 - 🧮 금리 계산(이 채널, 예시): 100억 달러 빚 × 1%p = 해마다 1억 달러 → 8년 셈 흑자 17.5억 → 16.5억, 3년 셈 적자 3.3억 → 4.3억
+
+## 11월 23일 보강 — 젠슨 황 복귀
+- ✅ 11월 22일(미국 시간) 이사회 만장일치로 젠슨 황 사장·CEO·이사 복귀, 크레스는 부사장 겸 CFO 로 계속 — 8-K https://www.sec.gov/Archives/edgar/data/1045810/000104581026000090/nvda-20261122.htm
+- ✅ 보도자료(11월 23일): 정부 고위층 의견으로 국가안보 위험 없음, 독립위원회 조사는 결론까지, 수출통제 위원회·최고준법책임자 신설 https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000090/nov23pressrelease.htm

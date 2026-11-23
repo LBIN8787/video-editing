@@ -35,6 +35,8 @@
 - https://techcrunch.com/2025/11/27/this-thanksgivings-real-drama-may-be-michael-burry-versus-nvidia
 - https://news.nate.com/view/20261122n03345
 - https://view.asiae.co.kr/article/2026090221450250672
+- https://www.sec.gov/Archives/edgar/data/1045810/000104581026000090/nvda-20261122.htm
+- https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000090/nov23pressrelease.htm
 
 🎬 원본 영상 (짧은 인용)
 - 콜레트 크레스 — CNBC Television 공식 채널 (YouTube) · 2026.11.18 https://www.youtube.com/watch?v=Uu-v3YJSgNY
