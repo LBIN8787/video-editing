@@ -21,6 +21,7 @@ RSS 는 직접:   python -m ytflow newsletters rss
 """
 from __future__ import annotations
 
+import base64
 import json
 import re
 from hashlib import sha256
@@ -43,6 +44,9 @@ NOISE_SUBJ = re.compile(r"(?i)confirm|welcome|verify|subscription|preferences|up
 EMAIL_ADDRESS = re.compile(r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}")
 GENERIC = re.compile(r"(?i)^(read more|more|here|click here|link|learn more|full story|continue reading|read|sign up|subscribe|"
                      r"view online|this|website|자세히|더 보기|원문|바로가기|기사 보기)\W*$")
+# 짧은 라벨은 대개 'Read more' 같은 잡음이라 거부하지만, 한국어 낱말 둘 이상은 소재 이름이다
+# (예: '사이드카'·'공매도' — 어피티 머니레터, 2026-11-23).
+SHORT_OK = re.compile(r"[가-힣]{2}")
 UA = {"User-Agent": "ytflow-newsletters (research)"}
 
 
@@ -78,10 +82,42 @@ def which(msg: dict, c: dict) -> dict | None:
 
 
 # ── 링크 ──
+# Stibee(스티비: 어피티 머니레터·미라클레터 등)의 클릭 추적 주소.
+#   https://event.stibee.com/v2/click/<수신자 묶음 base64>/<목적지 base64url>
+# 목적지가 주소 안에 그대로 들어 있어 네트워크 요청 없이 해독된다 (2026-11-23 확인).
+# 앞 묶음은 구독자·캠페인 번호라 해독해도 쓸 데가 없고, 그대로 두면 공개 목록에 수신자 식별자가 실린다.
+STIBEE_CLICK = re.compile(r"https?://event\.stibee\.com/v2/click/[^/\s?#]+/([A-Za-z0-9_\-=]+)")
+
+
+def b64url_text(s: str) -> str:
+    """base64url 글자 → utf-8 글자. 패딩은 있어도 없어도 되고, 아니면 빈 글자."""
+    t = s.replace("-", "+").replace("_", "/").rstrip("=")
+    try:
+        return base64.b64decode(t + "=" * (-len(t) % 4), validate=True).decode("utf-8")
+    except (ValueError, UnicodeDecodeError):
+        return ""
+
+
+def stibee_dest(url: str) -> str:
+    """Stibee 클릭 추적 주소 → 실제 목적지. 형식이 다르거나 해독이 안 되면 빈 글자(주소를 손대지 않음)."""
+    m = STIBEE_CLICK.match(url)
+    if not m or url[m.end():].strip("/"):   # 뒤에 다른 경로가 붙은 형식은 건드리지 않는다
+        return ""
+    dest = b64url_text(m.group(1))
+    return dest if dest.startswith(("http://", "https://")) else ""
+
+
 def unwrap(url: str) -> str:
-    """추적 주소 안에 든 진짜 주소 꺼내기 (TLDR 의 /CL0/<인코딩된 주소>/… 등). 못 꺼내면 그대로."""
+    """추적 주소 안에 든 진짜 주소 꺼내기 — 주소 안에서만 푼다(네트워크 요청 없음).
+
+    Stibee `/v2/click/<묶음>/<base64url 목적지>`, TLDR `/CL0/<인코딩된 주소>/…`,
+    흔한 리디렉트 파라미터(`?url=`·`?u=`·`?redirect=`) 순서로 보고, 못 꺼내면 그대로.
+    """
+    stibee = stibee_dest(url)
     m = re.search(r"/CL0/(https?(?::|%3A)[^/]*(?:/|%2F).+?)/\d+/[0-9a-f-]{20,}", url)
-    if m:
+    if stibee:
+        url = stibee
+    elif m:
         url = urllib.parse.unquote(m.group(1))
     else:
         q = urllib.parse.parse_qs(urllib.parse.urlsplit(url).query)
@@ -101,7 +137,8 @@ MANAGEMENT = re.compile(
     r"unsubscribe|subscription|preferences|opt[-_ ]?out|manage[-_ /]?profile|"
     r"confirm|verification|verify|sign[-_ ]?in|log[-_ ]?in|password|"
     r"change[-_ /]?email|update[-_ /]?email|email[-_ /]?change|account[-_ /]?settings|"
-    r"구독.?해지|수신.?거부|환경.?설정|본인.?인증", re.I)
+    r"subscribers/auth|"
+    r"구독.?해지|수신.?거부|이메일.?변경|환경.?설정|본인.?인증", re.I)
 PUBLIC_QUERY = {"id", "v", "q", "s", "page", "lang", "language", "year", "month"}
 SENSITIVE_QUERY = re.compile(
     r"token|secret|email|recipient|subscriber|signature|auth|session|hash|"
@@ -190,20 +227,32 @@ def _clean(t: str) -> str:
 
 
 def extract(body: str) -> list[tuple[str, str]]:
-    """[(제목, 주소)] — 마크다운 링크 → '글 <주소>' → 맨 주소(앞줄을 제목으로) 순서로."""
-    out, seen_spans = [], []
+    """[(제목, 주소)] — 마크다운 링크 → '글 <주소>' → 맨 주소(앞줄을 제목으로) 순서로.
+
+    같은 주소를 두 번 줍지 않는다: 마크다운 링크 안의 주소는 각도괄호·맨주소 규칙에서 빼서,
+    '앞 글자가 라벨로 붙는' 중복(2026-11-23 확인)을 만들지 않는다.
+    """
+    out, md_url_spans, seen_spans = [], [], []
     lines = body.splitlines()
     for rx in (LINK_MD, LINK_ANGLE):
         for m in rx.finditer(body):
+            ua, ub = m.span(2)
+            if any(a <= ua and ub <= b for a, b in md_url_spans):
+                continue
             if any(a <= m.start() < b for a, b in seen_spans):
                 continue
             seen_spans.append(m.span())
+            if rx is LINK_MD:
+                md_url_spans.append((ua, ub))
             title, url = _clean(m.group(1)), m.group(2)
             if not title or GENERIC.match(title):   # 'Read more' → 앞 줄을 제목으로
                 before = body[: m.start()].rstrip().splitlines()
                 title = _clean(before[-1]) if before else ""
             out.append((m.start(), title, url))
     for m in LINK_BARE.finditer(body):
+        ua, ub = m.span()
+        if any(a <= ua and ub <= b for a, b in md_url_spans):
+            continue
         if any(a <= m.start() < b for a, b in seen_spans):
             continue
         ln = body.count("\n", 0, m.start())
@@ -278,13 +327,17 @@ def items_from(msg: dict, c: dict, do_resolve: bool = True) -> list[dict]:
     for title, url in extract(msg.get("body", "")):
         # Filter raw link/label BEFORE unwrapping. No email-link HTTP requests,
         # including when do_resolve=True (legacy API compatibility).
-        if len(title) < 8 or EMAIL_ADDRESS.search(title) or MANAGEMENT.search(urllib.parse.unquote(url) + " " + title):
+        if ((len(title) < 8 and not SHORT_OK.search(title)) or EMAIL_ADDRESS.search(title)
+                or MANAGEMENT.search(urllib.parse.unquote(url) + " " + title)):
             continue
         try:
             if skip(url, title, c, own):
                 continue
             url = unwrap(url)
         except ValueError:
+            continue
+        # 해독된 목적지가 탈퇴·설정 주소일 수 있다 — 감싼 주소만 보고 지나치지 않는다
+        if MANAGEMENT.search(urllib.parse.unquote(url)):
             continue
         if not public_link(url) or skip(url, title, c, own) or url in urls:
             continue
