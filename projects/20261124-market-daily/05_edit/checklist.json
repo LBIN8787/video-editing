@@ -1,0 +1,680 @@
+{
+ "project": "20261124-market-daily",
+ "manual_version": "124",
+ "checked": "2026-11-24T08:50:48",
+ "pass": true,
+ "rows": [
+  {
+   "gate": "G0",
+   "level": "MUST",
+   "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G0",
+   "level": "SHOULD",
+   "item": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
+   "ok": true,
+   "detail": "manual/graph.json"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "topic_brief.json 있음",
+   "ok": true,
+   "detail": "01_research/topic_brief.json (schemas/topic_brief.schema.json)"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "브랜드(ai/market/curiosity)",
+   "ok": true,
+   "detail": "market"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망·시청자 질문",
+   "ok": true,
+   "detail": "한 사람이 돌아왔을 뿐인데, 왜 마이크론과 코어위브까지 20% 가까이 올랐을까?"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "트리거·왜 지금",
+   "ok": true,
+   "detail": "젠슨 황 복귀 8-K·보도자료 · 엔비디아 +31.48% · 마이크론 +19% · 코스피 검은 월요일 -3.31%"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망을 분명히 건드리고, 보여 줄 자료가 있다 (둘 중 하나라도 약하면 만들지 않음, 01 §3)",
+   "ok": true,
+   "detail": "강도 3 · 자료 2"
+  },
+  {
+   "gate": "G1",
+   "level": "참고",
+   "item": "욕망 점수 합계 (후보끼리 비교할 때 씀)",
+   "ok": true,
+   "detail": "합계 17 {'desire': 3, 'clarity': 3, 'timeliness': 3, 'demand': 3, 'visuals': 2, 'angle': 3}"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "수요 증거 1개 이상",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "후보 3개 비교 기록",
+   "ok": false,
+   "detail": "2"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "우리만의 답(our_angle)",
+   "ok": true,
+   "detail": "정규장 종가로 1조 달러 가까운 '한 사람의 값'을 직접 계산, 한국 장의 시간 순서(소식 전 -3.31% → 오늘 첫 반영)를 바로잡기, 경위·주장 해부는 심층으로"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "무엇이 띄우나(driver: 소재·각도·형식 + 근거)",
+   "ok": false,
+   "detail": "이슈 · 엔비디아 이사회의 CEO 복귀 결정(8-K)"
+  },
+  {
+   "gate": "G2",
+   "level": "MUST",
+   "item": "시장: SAVE(오선) 시장 소식 알림 확인 기록 — 상태 '확인함' 또는 '확인 못 함: 이유' (01_research/save_check.md)",
+   "ok": true,
+   "detail": "확인 못 함: 08:00 자동 실행, 알림 없음 (inbox/save/20261124.md 없음 — 뉴스레터 수집분의 SAVE 알림 7건(11-23 16:39~17:37)은 단서로 봄)"
+  },
+  {
+   "gate": "G2",
+   "level": "SHOULD",
+   "item": "시장: SAVE 실제로 확인함 (항목 1개 이상)",
+   "ok": false,
+   "detail": "확인 못 함: 08:00 자동 실행, 알림 없음 (inbox/save/20261124.md 없음 — 뉴스레터 수집분의 SAVE 알림 7건(11-23 16:39~17:37)은 단서로 봄) · 항목 2"
+  },
+  {
+   "gate": "G2",
+   "level": "MUST",
+   "item": "자료 화면마다 credit·url",
+   "ok": true,
+   "detail": "3개, 빠짐 []"
+  },
+  {
+   "gate": "G2",
+   "level": "MUST",
+   "item": "금지 라이선스(SA·NC·ND) 없음",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G2",
+   "level": "참고",
+   "item": "자료 화면 소스 종류 (한 곳에서만 가져오면 화면이 단조로워짐)",
+   "ok": true,
+   "detail": "3종"
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "팩트시트 + 출처 링크 3개 이상",
+   "ok": true,
+   "detail": "링크 21개"
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "확인 상태 표시(✅/⚠️)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "'쓰지 않는 것' 목록",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "core_message·question·logic",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "근거 검수표: 모든 주장에 근거·비약·괴리·착각 확인 (02_script/script_review.md '근거 검수', 13 §4-1, 2026-11-22 사용자)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "대본 구성요소 대조표: 채널 대본 공식의 요소마다 있음/없음·어느 장 (02_script/script_review.md '구성요소', 13 §7)",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "쉬운 대본: 숫자엔 비교 기준, 낯선 개념엔 비유, 과거 사례, 어려운 말 풀이가 있다",
+   "ok": true,
+   "detail": "{'compare_to': 5, 'analogies': 2, 'past_cases': 1, 'glossary': 5}"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "투자 권유 표현 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "레퍼런스 채널 이름 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "미완성 표시 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "과장 단어 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2, 2026-11-20 사용자: 필수 아님)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "여는 부분에 이 영상의 질문 하나 (시청자가 무엇을 따라가는지 알게)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "연결·의미: 팩트시트에 '## 해석'(근거 번호와 함께) — 사실만 옮기지 않기 (03 §0-1)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "연결·의미: 대본에서 해석을 해석이라고 밝힘 ('해석'·'의미'·'로 볼 수 있')",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "매일 브리핑: daily_brief.json 있음 (python -m ytflow daily)",
+   "ok": true,
+   "detail": "01_research/daily_brief.json"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "매일 브리핑: 첫 두 장면 안에 기준 시각('○일 마감 기준' / '○시 기준') — 인트로 없이 (README §2-1)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "시간대: 팩트시트에 현지(ET)·한국(KST) 시각을 함께 적음 — 날짜·장 구분 착각 방지 (09 §3-6, 2026-11-22 사용자)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "매일 시장: 이야기마다 원인 종류(이슈·보고서·전망·실적)와 1차 출처를 팩트시트에",
+   "ok": true,
+   "detail": "['이슈', '전망', '실적']"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "v26: topic_brief 에 known(이미 알려진 것)·new_angle(자료를 엮어야 보이는 것) — 제목·훅은 new_angle 에서 (03 §0-2)",
+   "ok": true,
+   "detail": "시장이 산 것은 'AI 반도체 전체'가 아니라 '엔비디아를 중심으로 도는"
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "v26: 팩트시트 '## 자료 지도' — 서로 다른 종류(보고서·발언·행동)를 맞대고, 자료마다 의미 칸 (03 §0-2)",
+   "ok": false,
+   "detail": "6줄 {'보고서': 0, '발언': 0, '행동': 4} 의미✓"
+  },
+  {
+   "gate": "G3",
+   "level": "참고",
+   "item": "v26: 자료 지도 분량 (종류별 줄 수)",
+   "ok": false,
+   "detail": "6줄 {'보고서': 0, '발언': 0, '행동': 4}"
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "v33: 팩트시트 '## 직접 계산' 1개+ (식·출처 숫자) — 연결 비율·민감도 (03 §0-4)",
+   "ok": false,
+   "detail": "0개"
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "v33: 팩트시트 '## 틀리는 경우' — 이 판단이 틀리는 조건 (03 §0-4)",
+   "ok": true,
+   "detail": "3개"
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "v33: 팩트시트 '## 신호' — 숫자 기준선·날짜가 있는 확인 신호 (03 §0-4)",
+   "ok": false,
+   "detail": "0개"
+  },
+  {
+   "gate": "G3",
+   "level": "참고",
+   "item": "v33: 틀리는 경우·신호 개수",
+   "ok": false,
+   "detail": "틀림 3 · 신호 0"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "v28: topic_brief hub_event — 시장을 흔든 사건이 있으면 중심축, 없으면 '없음: 이유' (03 §0-3)",
+   "ok": true,
+   "detail": "엔비디아 이사회, 젠슨 황 CEO 복귀(사임 12일 만) — 엔비디아 +"
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "v28: 팩트시트 '## 파급 경로'·'## 주의할 점' (03 §0-3)",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "v28: 여는 부분에 중심 사건 (03 §0-3)",
+   "ok": false,
+   "detail": "젠슨 황 복귀"
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "v26: 팩트시트 '## 매체 프레임' — 매체끼리 어떻게 다르게 읽었나 (제목·강조점·빠진 것, 03 §0-2)",
+   "ok": true,
+   "detail": "4곳"
+  },
+  {
+   "gate": "G3",
+   "level": "참고",
+   "item": "v26: 매체 프레임 범위 (국내·해외를 함께 보면 프레임 차이가 더 잘 보임)",
+   "ok": true,
+   "detail": "4곳"
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "v28: 매체 프레임에 '입장' 칸 (낙관·우려·중립, 03 §0-3)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "v26: 대본에 매체가 어떻게 다뤘나 + 말과 행동 맞대기 (03 §0-2)",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "v36: 팩트시트 '## 인사이트' — 이름·직함 있는 사람·매체의 엇갈리는 해석(입장이 갈림), 원문·근거·출처 (09 §3-4)",
+   "ok": true,
+   "detail": "4줄 · 입장 ['낙관', '우려', '중립'] · 국내 ✓ 해외 ✓"
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "v36: 팩트시트 '## 영상 소스' — 인터뷰·방송 원본 후보 1줄+ (못 찾으면 '없음: 이유') (09 §3-5)",
+   "ok": true,
+   "detail": "1줄"
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "v42: 팩트시트 '## CEO 소식' — 오늘 이야기와 이어지는 경영진의 말·행동 1줄+, 원문·공시 출처 (09 §3-4-2)",
+   "ok": true,
+   "detail": "2줄"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "v36: 대본에 인사이트 장면 (\"insight\": true — 화면에 '의견' 표시, 사실과 구분) (09 §3-4)",
+   "ok": true,
+   "detail": "1개"
+  },
+  {
+   "gate": "G4",
+   "level": "참고",
+   "item": "v36·v52: 인사이트 분량 — 유명인(이름난 투자자·경영자·당국자·석학)의 분석을 넉넉히 다뤘나 (국내 증권사는 필수 아님)",
+   "ok": false,
+   "detail": "장면 1 · 팩트시트 4줄 · 국내 ✓ 해외 ✓"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "v36: 매체·인물의 원본 발언 장면(bite) 1개+ — 원본이 없으면 인용 카드로 그려짐 (09 §3-5)",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "v27: 말로 숫자를 늘어놓는 순간 화면이 따라 바뀜 — 말은 많은데 화면이 멈춘 박자 없음 (manual/09 §6)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "제목·썸네일에 채널 이름(이어 읽는 시장) 없음 — 날짜만 (manual/09 §7)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "market: 끝에 확인할 신호(checklist)",
+   "ok": true,
+   "detail": "['checklist', 'kinetic', 'outro']"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G6",
+   "level": "참고",
+   "item": "길이(측정값만 — 시간 기준 없음, 구성요소가 정함, README §2-4)",
+   "ok": true,
+   "detail": "8.0분"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "배경: 한 가지 바탕으로 고정하지 않음 — 장면이 하는 일이 바뀌면 바탕도 바뀜 (05 §0-2)",
+   "ok": true,
+   "detail": "['film', 'grid', 'photo', 'spot', 'tint']"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "배경: 같은 바탕이 이어지는 구간",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "반복 피로: 글씨·도형뿐인 장면이 이어지는 구간 — 자료·지도·그림으로 보여 줄 수 있는지 다시 볼 곳 (05 §0-3)",
+   "ok": false,
+   "detail": "최장 3연속 (장면 10)"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "장식 효과(dust·leak)를 쓴 장면 — 내용이 담긴 볼거리 대신 쓰지 않았는지 (05 §0-4)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "반복 피로: 볼거리(자료·지도·그림)가 있는 장면의 몫",
+   "ok": false,
+   "detail": "5/13"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "반복 피로: 같은 시각 효과가 이어지는 구간 (효과 종류 수는 채우지 않음 — 05 §0-5)",
+   "ok": true,
+   "detail": "[] 연속 []"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "바탕 계열: 같은 채널 직전 두 편과 같은 바탕 계열인지 (바꿔도 되고 이어 써도 됨 — 카테고리 얼굴 05 §0-7 이 먼저)",
+   "ok": false,
+   "detail": "이번 cream · 직전 ['cream', 'cream']"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게)",
+   "ok": true,
+   "detail": "market"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번 없음, 한 출처로 표지를 모두 때우지 않음",
+   "ok": true,
+   "detail": "표지 ['jensen_huang_face', 'nyse', 'seoul'] · 가장 많은 출처 ('CC BY 4.0 · Anders Eidesvik · 위키미디어 공용 · Jensen huang stanford 2026-04-30 005', 1)"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "반복 피로: 같은 채널 직전 편과 화면 구성이 얼마나 겹치나",
+   "ok": false,
+   "detail": "89%"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "같은 장면 type 이 이어지는 구간 — 하는 일이 바뀌었는데 화면이 같지 않나",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "자료 화면 없이 그래픽만 이어지는 가장 긴 구간",
+   "ok": false,
+   "detail": "최장 472초"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "장 전환 없이 이어지는 가장 긴 구간",
+   "ok": true,
+   "detail": "최장 106초"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1)",
+   "ok": true,
+   "detail": "5종 ['data-report', 'explain-stage', 'hybrid-causal', 'kinetic-type', 'paper-column']"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "스타일 조합: 가장 많이 쓴 스타일의 몫·겹친 장면·같은 스타일 연속",
+   "ok": false,
+   "detail": "data-report 0.35 · 겹침 0 · 최장 연속 2"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "강조 횟수·강조가 겹친 장면 — 기억할 숫자·반전·결론에만 썼는지 (05 §0-1)",
+   "ok": true,
+   "detail": "1번 [(18, 'kinetic')] · 겹친 장면 []"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "핵심 단어 띄우기에 문장을 쓰지 않음 — 자막과 같은 내용을 위에 반복하지 않음 (v3)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
+   "ok": true,
+   "detail": "paper-sketch / 등록부 ['blueprint', 'clean-flat', 'clean-white', 'corkboard', 'crumpled-paper', 'dark-doc', 'kinetic-poster', 'midnight', 'newsprint', 'none', 'paper-sketch']"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
+   "ok": true,
+   "detail": "python -m ytflow style-pick <프로젝트>"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움)",
+   "ok": true,
+   "detail": "python -m ytflow edit-plan <프로젝트> → 02_script/EDIT_CONTEXT.md"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "final.mp4",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "화면 글자 겹침 없음 — 글자끼리·카드에 가려짐·카드 밖 넘침·자막 자리 (overlap_qa)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "글자가 카드·강조 상자 가장자리에 걸치지 않음 (overlap_qa)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G6",
+   "level": "참고",
+   "item": "무대 화면: 한꺼번에 보이는 것·글자·멈춘 박자 (한 화면 한 생각인지 눈으로, 04 §0-5)",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
+   "ok": true,
+   "detail": "{'within_0_5s': 1.0, 'p95_abs_offset': 0.09, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.033}"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "납품 점검(음량 등)",
+   "ok": true,
+   "detail": "completed"
+  },
+  {
+   "gate": "G6",
+   "level": "참고",
+   "item": "움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5)",
+   "ok": false,
+   "detail": "변화 5.5/분 · 정지 0.72"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "최종 목소리 ElevenLabs",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "제목 후보 3개 + 이유",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "썸네일 A/B/C + 점검 ok",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "참고",
+   "item": "제목 앞부분에 질문·핵심 (목록에서 잘려도 무슨 영상인지 보이게)",
+   "ok": true,
+   "detail": "젠슨 황 한 명이 돌아왔는데 왜 마이크론"
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "완성본 보관 기록 — Drive(drive.json·drive_archive.json) 또는 공개 가능한 것만 GitHub Release(release.json)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "episodes.md 기록",
+   "ok": true,
+   "detail": "ch-market-daily"
+  }
+ ]
+}
