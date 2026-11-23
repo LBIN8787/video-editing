@@ -397,6 +397,74 @@ def _tank(D, sc, bt, dur, m):
         _arc_label(D, (X0 + X1) / 2, TOP - 60 + 0, m.get("verdict_text", ""), RED, T["verdict"], 36)
 
 
+def gapline(D, sc: dict, bt: list):
+    """기존 설명 무대 아래 빈자리에 '시간 줄' 하나만 더한다 (2026-11-24 사용자: "이전에 만든거에 살짝만 추가하는게 더 … 깔끔할거같아요").
+    나가는 돈(빨강, 축 아래)은 크게 먼저, 들어오는 돈(초록, 축 위)은 작게 매달. 틈은 괄호 하나로, 글은 괄호에 붙는다.
+      "gapline": {"cues": {"out1": "먼저", "in": "매출은", "gap": "틈이", "out2": "다음 모델이", "regap": "다시 벌립니다"},
+                  "labels": {"out": "나가는 돈", "in": "들어오는 돈", "gap": "틈 = 밖에서 구할 돈", "regap": "더 큰 약속 → 틈이 다시 벌어진다"}}"""
+    g = sc.get("gapline") or {}
+    T = _cue_times(dict(sc, mechanism={"cues": g.get("cues") or {}}), bt)
+    L = {"out": "나가는 돈", "in": "들어오는 돈", "gap": "틈 = 밖에서 구할 돈", "regap": "더 큰 약속 → 틈이 다시 벌어진다", **(g.get("labels") or {})}
+    AX, XA, XB = 700, 220, 1700
+    t0 = min([v for v in T.values()] or [bt[0][0] + 0.5])
+    ax = D._id()
+    D.items.append(f'<div id="{ax}" style="position:absolute;left:{XA}px;top:{AX - 2}px;width:{XB - XA}px;height:4px;background:#C9CED6;transform-origin:left;transform:scaleX(0);z-index:4"></div>')
+    D.js.append(f'tl.to("#{ax}",{{scaleX:1,duration:0.6,ease:"power2.out"}},{t0:.2f});')
+    _arc_label(D, XB + 70, AX, "시간 →", MUTED, t0 + 0.3, 28)
+
+    def bar(x, h, up, color, at, w=46):
+        i = D._id()
+        top = AX - h if up else AX + 2
+        D.items.append(f'<div id="{i}" style="position:absolute;left:{x - w / 2:.0f}px;top:{top:.0f}px;width:{w}px;height:{h:.0f}px;background:{color};'
+                       f'border-radius:{"6px 6px 0 0" if up else "0 0 6px 6px"};transform-origin:{"bottom" if up else "top"};transform:scaleY(0);z-index:5"></div>')
+        D.js.append(f'tl.to("#{i}",{{scaleY:1,duration:0.45,ease:"power3.out"}},{at:.2f});')
+        return i
+
+    def bracket(xa, xb, y, color, at, label, open_end=False):
+        i = D._id()
+        style = "dashed" if open_end else "solid"
+        D.items.append(f'<div id="{i}" style="position:absolute;left:{xa:.0f}px;top:{y:.0f}px;width:{xb - xa:.0f}px;height:22px;border:5px {style} {color};border-bottom:none;'
+                       f'border-radius:8px 8px 0 0;{"border-right:none;" if open_end else ""}transform-origin:left;transform:scaleX(0);z-index:6"></div>')
+        D.js.append(f'tl.to("#{i}",{{scaleX:1,duration:0.6,ease:"power2.inOut"}},{at:.2f});')
+        _arc_label(D, (xa + xb) / 2, y - 34, label, color, at + 0.4, 36)
+
+    x_out1, h_out1 = 300, 120
+    if "out1" in T:
+        bar(x_out1, h_out1, False, RED, T["out1"], 90)
+        _arc_label(D, x_out1, AX + h_out1 + 34, L["out"], RED, T["out1"] + 0.3, 30)
+    # 들어오는 돈: 작게, 매달 하나씩 (점점 조금 커짐). 처음 약속을 따라잡는 곳에서 다음 약속.
+    xs, catch = [], None
+    if "in" in T:
+        t_end_in = T.get("out2", bt[-1][0] + bt[-1][1]) - 0.3
+        x, h, acc, k = x_out1 + 110, 16.0, 0.0, 0
+        t = T["in"] + 0.3
+        step = max(0.35, (t_end_in - t) / 8)
+        while x < 1040 and t < t_end_in:
+            bar(x, h, True, GREEN, t)
+            acc += h
+            if catch is None and acc >= h_out1:
+                catch = x
+            xs.append(x)
+            x += 64
+            h += 4
+            t += step
+        _arc_label(D, x_out1 + 200, AX + 36, L["in"], GREEN, T["in"] + 0.4, 28)
+    if "gap" in T:
+        bracket(x_out1 - 45, (catch or 1000) + 24, 560, RED, T["gap"], L["gap"])
+    if "out2" in T:
+        x2 = (xs[-1] + 100) if xs else (catch or 1000) + 90
+        bar(x2, 190, False, RED, T["out2"], 120)
+        tr = T.get("regap", T["out2"] + 1.5)
+        x, h = x2 + 110, 40.0
+        k = 0
+        while x < XB - 30:
+            bar(x, h, True, GREEN, tr + 0.4 + k * 0.25)
+            x += 64
+            h += 5
+            k += 1
+        bracket(x2 - 60, XB, 560, RED, tr, L["regap"], open_end=True)
+
+
 def register():
     from . import hybrid
     from .explain import _themed

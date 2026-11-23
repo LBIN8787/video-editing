@@ -683,6 +683,9 @@ def s_board(D, sc: dict, bt: list, dur: float):
                             f'tl.call(()=>{{document.querySelector("#{bx["id"]} div").textContent={json_str(act["text"])}}},null,{t + 0.15:.2f});'
                             f'tl.to("#{bx["id"]} div",{{opacity:1,duration:.2}},{t + 0.16:.2f});')
             t += act.get("gap", 0.45) if isinstance(act, dict) else 0.45
+    if sc.get("gapline"):   # 기존 장면 아래 빈자리에 시간 줄 하나 (설명 애니메이션 '살짝 더하기', 2026-11-24)
+        from .mechanism import gapline
+        gapline(D, sc, bt)
 
 
 def json_str(x: str) -> str:
