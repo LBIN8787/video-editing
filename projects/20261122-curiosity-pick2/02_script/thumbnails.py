@@ -7,7 +7,7 @@ HERE = Path(__file__).resolve().parent
 FONTS = (HERE.parents[2] / "ytflow" / "assets" / "fonts").as_uri()
 V = {   # 커닝 편 (2026-11-23) — 지금의 고리: 'AI 커닝'(세무사 수석 합격자 사건)·'수능' AI 안경 금지 를 큰 글씨에. 영상 장면과 같은 그림
  "A": dict(img="hall_bl", side="left", css="background-size:1420px auto;background-position:260px 45%;background-repeat:no-repeat",
-           lines=["감독관 바로 앞", "<b>AI 커닝</b>"], small="세무사 시험 수석 합격자가 밝힌 일",
+           lines=["감독관 바로 앞", "<b>AI 커닝</b>"], small="올해 시험장 AI 기기 부정행위 보도",
            why="1장 4박자(맨 앞줄 한가운데, 감독관 바로 앞)와 같은 장면 — 이번 주 뉴스 키워드 'AI 커닝'을 큰 글씨에. 당사자는 뒷모습뿐."),
  "B": dict(img="joseon2_tl", side="right", css="background-size:1500px auto;background-position:-300px 40%;background-repeat:no-repeat",
            lines=["320년 전에도", "<b>땅속</b> 커닝"], small="성균관 마당에서 나온 대나무 통",

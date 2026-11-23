@@ -6,13 +6,13 @@ from playwright.sync_api import sync_playwright
 HERE = Path(__file__).resolve().parent
 FONTS = (HERE.parents[2] / "ytflow" / "assets" / "fonts").as_uri()
 V = {   # 유행 20년 편 (2026-11-23) — 지금의 고리 '복고 유행·20년 전 옷'을 큰 글씨에. 영상 첫 장면·핵심 질문·결론과 같은 말
- "A": dict(img="wardrobe_br", side="left", css="background-size:1300px auto;background-position:400px 40%;background-repeat:no-repeat",
+ "A": dict(img="wardrobe_br", side="left", css="background-size:1100px auto;background-position:430px 40%;background-repeat:no-repeat",
            lines=["20년 전 엄마 점퍼", "왜 다시 <b>유행?</b>"], small="엄마 옷장 맨 안쪽",
            why="첫 장면(지우가 엄마 옷장에서 스무 해 넘은 점퍼를 꺼냄) + 제목의 질문. 지금의 고리(복고 유행)를 앞에."),
  "B": dict(img="kroeber_tr", side="right", css="background-size:1500px auto;background-position:-420px 40%;background-repeat:no-repeat",
            lines=["유행은 정말", "<b>20년</b>마다 돌까?"], small="75년 치 패션 그림을 자로 잰 사람",
            why="3장(크로버가 1844~1919 패션 그림의 치마를 자로 잼) — '스무 해'가 법칙인지 묻는 영상의 반전과 같은 말."),
- "C": dict(img="wardrobe_tr", side="left", css="background-size:1400px auto;background-position:250px 40%;background-repeat:no-repeat",
+ "C": dict(img="wardrobe_tr", side="left", css="background-size:1000px auto;background-position:420px 40%;background-repeat:no-repeat",
            lines=["그땐 우스웠는데", "지금은 <b>예쁜</b> 이유"], small="돌아온 건 옷이 아니라 눈",
            why="결론(돌아온 건 옷이 아니라 보는 눈) — 점퍼는 그대로, 보는 눈이 바뀜."),
 }
