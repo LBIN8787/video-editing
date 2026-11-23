@@ -57,7 +57,7 @@ s(dict(type="checklist", label="1부(엔비디아 순환금융)에서 본 개념
 
 # ── 1. 젠슨 황 ──
 s(dict(type="chapter", num="1", title="젠슨 황 — 'GPU 는 8년을 번다, 그래서 담보가 된다'", icon="cpu", look="board",
-       beats=[{"say": "먼저 가장 강한 방어, 지난달 젠슨 황의 말입니다. 그는 이 인터뷰 몇 주 뒤 CEO에서 물러났습니다. 말한 사람은 떠났지만 이 논리는 지금도 엔비디아 방어의 중심이고, 새 경영진이 이 약속들을 그대로 이어 갈지가 질문으로 남았습니다."}]))
+       beats=[{"say": "먼저 가장 강한 방어, 10월 21일 젠슨 황의 말입니다. 그는 이 인터뷰 몇 주 뒤 CEO에서 물러났습니다. 말한 사람은 떠났지만 이 논리는 지금도 엔비디아 방어의 중심이고, 새 경영진이 이 약속들을 그대로 이어 갈지가 질문으로 남았습니다."}]))
 s(dict(type="bite", insight=True, label=OP + " · 같은 인터뷰", who="젠슨 황", role="엔비디아 CEO · 야후 파이낸스 (10월)", show_lower=False,
        clip={"src": "huang_collateral", "lang": "en", "cuts": [
            {"find": "Now when that happens, you might be able to underwrite a loan against the asset itself. Today, most computers don't have value, don't have very little residual value, but people are now recognizing NVIDIA's compute has a great deal of residual value.",
@@ -83,7 +83,7 @@ s(dict(type="bite", lower_top=600, insight=True, label=OP + " · 엔비디아 �
        clip={"src": "kress", "lang": "en", "cuts": [
            {"find": "Interesting statement, but no, it is not true. If we want to think about where we are with our hyperscalers, they are the ones that are right now feverishly looking for more focus in terms of the compute that we have available.",
             "ko": "흥미로운 말이지만, 아닙니다. 사실이 아닙니다. 지금 우리가 가진 연산 능력을 가장 애타게 찾는 건 바로 대형 클라우드 회사들입니다."}]},
-       beats=[{"say": "실적 다음 날인 지난 18일, CNBC가 물었습니다. 엔비디아가 대형 클라우드 고객을 잃어 가니, 신용도가 낮은 네오클라우드를 떠받치는 것 아니냐고요. 그녀의 답입니다."}]))
+       beats=[{"say": "실적 다음 날인 11월 18일, CNBC가 물었습니다. 엔비디아가 대형 클라우드 고객을 잃어 가니, 신용도가 낮은 네오클라우드를 떠받치는 것 아니냐고요. 그녀의 답입니다."}]))
 s(dict(type="checklist", insight=True, label="받침: 1부(매출 절반 빅테크 · 3분기 매출 1,158억) / 어긋남: CFO 코멘터리(매출채권 810억·회수 64일, 지분 손상 18억) · 국내 보도(보증 조건 명확화 뒤 네오클라우드 20%+ 하락) · " + OP,
        title="크레스의 말 — 받치는 근거와 어긋나는 근거", x=120, text_w=1080, skin=NP,
        rows=[{"label": "받침: 매출의 절반은 여전히 빅테크, 3분기 매출 1,158억 달러", "state": "ok", "t": "받치는"},
@@ -147,7 +147,7 @@ s(dict(type="quote", insight=True, label="KB증권 (2026.9, 아시아경제 보�
        who="KB증권", role="국내 증권사 · 9월 리포트 (보도)",
        quote="매출채권이 는 건 돈 받는 시점이 늦어진 것일 뿐이다.", keyword="시점",
        orig="(요약) 2026~28 누적 잉여현금 약 9,600억 달러, 약정 4,220억 달러보다 큼",
-       beats=[{"say": "국내 증권가의 시각도 있습니다. KB증권은 지난 9월, 매출채권이 는 건 돈을 받는 시점이 늦어진 것일 뿐이고, 엔비디아가 2026년부터 28년까지 벌 잉여현금이 약 9,600억 달러로, 약정 4,220억 달러보다 크다고 봤습니다. 엔비디아의 위험보다, 그 고리에 걸린 고객들의 위험이 더 크다는 시각과도 이어집니다.",
+       beats=[{"say": "국내 증권가의 시각도 있습니다. KB증권은 올해 9월, 매출채권이 는 건 돈을 받는 시점이 늦어진 것일 뿐이고, 엔비디아가 2026년부터 28년까지 벌 잉여현금이 약 9,600억 달러로, 약정 4,220억 달러보다 크다고 봤습니다. 엔비디아의 위험보다, 그 고리에 걸린 고객들의 위험이 더 크다는 시각과도 이어집니다.",
                "motion": [M("9,600억", "kb", "잉여현금 9,600억 · 약정 4,220억보다 큼", "KB증권 (2026~28, 달러)", 1560, 880, 520, 110, 28)]}]))
 
 # ── 6. 어디서 갈리나 ──
@@ -269,7 +269,7 @@ spec = {
                           "젠슨 황 vs 짐 채노스 — 엔비디아 1,180억 달러 보증, 근거만 따져 보면",
                           "엔비디아 순환금융의 진짜 쟁점은 'GPU 수명'이다"],
         "title_why": ["숫자 대결", "인물 대결 + 숫자", "단정 한 마디"],
-        "thumb_pick": "A", "thumb_test": ["A", "B", "D"],
+        "thumb_test": ["A", "B", "D"],
         "tags": ["엔비디아 순환금융", "엔비디아 순환거래", "엔비디아 거품론", "ai 거품", "젠슨황", "콜레트 크레스", "짐 채노스", "마이클 버리", "GPU 감가상각",
                  "코어위브", "코어위브 사태", "엔비디아 주가 하락 이유", "엔비디아 주가 전망", "네오클라우드", "SK하이닉스", "삼성전자"],
         "hashtags": ["엔비디아", "AI거품", "순환금융"],
