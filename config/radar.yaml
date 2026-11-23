@@ -1,0 +1,99 @@
+# 원본 레이더 — 사람의 말(원본 영상)·큰 날(사건)을 매일 추적 (2026-11-23 사용자: "우리도 사람의 말이나 사건형 원본형처럼 이를 추적할 수 있었으면")
+# 쓰는 곳: ytflow/stages/radar.py → inbox/radar/<날짜>.md · tracker.json. 설명: docs/63-source-radar.md
+# 사람 목록은 config/ceo_watch.yaml 의 ceos 를 그대로 씀 (여기서는 무게·별칭만 더함).
+# 레이더가 찾는 것은 '단서'. 영상에 쓰는 발언은 원본 영상·공식 기록에서 직접 확인 (manual/09 §3-4·§3-5).
+
+window_days: 9            # 원본형: 공개 뒤 2~9일 안에 해설이 가장 많이 붙음 (식스시그마·월가인사이드 관찰, PLAN §6)
+event_move_pct: 3.0       # 사건형: 지수가 이만큼 넘게 움직인 날 = '큰 날'
+event_indices: ["^SOX", "^IXIC", "^GSPC", "^KS11", "^KQ11"]
+
+# 사람의 무게 (조회 잠재력). 없으면 2. 근거: docs/55 인물 해설 영상 배수, 이번 주 벤치마크(드러켄밀러 28만·손정의 22만)
+weight:
+  젠슨 황: 3
+  일론 머스크: 3
+  워런 버핏: 3
+  스탠리 드러켄밀러: 3
+  샘 올트먼: 3
+  빌 게이츠: 3
+  마이클 버리: 3
+  케빈 워시: 3
+  레이 달리오: 2.5
+  하워드 막스: 2.5
+  리사 수: 2.5
+  제이미 다이먼: 2.5
+  캐시 우드: 2.5
+  마크 저커버그: 2.5
+  사티아 나델라: 2.5
+
+# 레이더에만 더할 사람 (ceo_watch 에 없는 이름) — 공식 발언·인터뷰가 시장을 움직이는 사람
+extra:
+  - {name: 손정의, en: "Masayoshi Son", company: 소프트뱅크, q: "\"Masayoshi Son\""}
+  - {name: 제롬 파월, en: "Jerome Powell", company: 전 연준 의장, q: "\"Jerome Powell\""}
+  - {name: 스콧 베센트, en: "Scott Bessent", company: 미 재무장관, q: "\"Scott Bessent\""}
+  - {name: 데이비드 테퍼, en: "David Tepper", company: 아팔루사, q: "\"David Tepper\""}
+  - {name: 폴 튜더 존스, en: "Paul Tudor Jones", company: 튜더 인베스트먼트, q: "\"Paul Tudor Jones\""}
+  - {name: 마이클 세일러, en: "Michael Saylor", company: 스트래티지, q: "\"Michael Saylor\""}
+
+# 원본을 올리는 곳 (방송·행사·팟캐스트·회사 공식). 제목에 사람 이름 + 이 채널이면 '원본'으로 봄.
+originals:
+  - CNBC
+  - CNBC Television
+  - CNBC International
+  - Bloomberg Television
+  - Bloomberg Podcasts
+  - Bloomberg Originals
+  - Fox Business
+  - Yahoo Finance
+  - Reuters
+  - Financial Times
+  - The Wall Street Journal
+  - WSJ News
+  - iConnections
+  - Goldman Sachs
+  - Morgan Stanley
+  - Norges Bank Investment Management
+  - Stripe
+  - Y Combinator
+  - Stanford Graduate School of Business
+  - Lex Fridman
+  - Dwarkesh Patel
+  - All-In Podcast
+  - BG2Pod
+  - Invest Like the Best
+  - Acquired
+  - No Priors
+  - 20VC with Harry Stebbings
+  - The Diary Of A CEO
+  - Bloomberg Live
+  - World Economic Forum
+  - Economic Club of New York
+  - The Economic Club of Washington, D.C.
+  - Federal Reserve
+  - NVIDIA
+  - OpenAI
+  - Anthropic
+  - Microsoft
+  - Google
+  - Tesla
+  - Berkshire Hathaway
+  - Bridgewater Associates
+  - Oaktree Capital
+  - SoftBank Group
+  - CNBC-TV18
+
+# 같은 원본을 해설하는 국내 채널 — 이미 다뤘는지(경쟁·수요)를 보는 기준 (PLAN §6 분석 대상)
+competitors:
+  - 식스시그마
+  - 월가인사이드
+  - 월터의 월가노트
+  - MTN 월가워즈
+  - 오신트
+  - 센서스튜디오
+  - 세계 풍향계
+  - 머니네버슬립
+
+# 해설(남의 해석) 영상 제목에 흔한 말 — 원본이 아니라고 봄
+commentary_words: ["just sold", "just bought", "here's what", "is buying", "is selling", "warning", "reveals", "predicts", "secret",
+                   "knows something", "stock picks", "portfolio", "13f", "explained", "reaction", "breakdown"]
+original_words: ["interview", "podcast", "fireside", "keynote", "summit", "conference", "conversation", "town hall", "speech",
+                 "remarks", "testimony", "press conference", "earnings call", "full", "live", "talks", "joins", "sits down"]

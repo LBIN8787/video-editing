@@ -636,12 +636,15 @@ def s_checklist(D: HDoc, sc: dict, bt: list, dur: float):
     xl = sc.get("x", 380)                     # 오른쪽에 움직이는 그림을 둘 때: "x": 160, "text_w": 900 (요약 + 애니메이션 혼용)
     tw = sc.get("text_w", 1000)
     shown = 0
+    rows_at = []
     from . import motion2
+    n0 = len(D.items)
     for k_b, (b, (t0, d)) in enumerate(zip(sc["beats"], bt)):
         upto = b.get("upto", len(rows))
         for r_i in range(shown, upto):
             r = rows[r_i]
             y = y0 + r_i * rh
+            i_row = len(D.items)
             at = t0 + 0.3 + (r_i - shown) * 0.9
             if r.get("t"):   # 그 줄의 핵심 낱말을 말하는 순간 줄이 나타남
                 at = max(t0, (motion2.row_time(sc, k_b, b, t0, d, r["t"]) or at) - 0.15)
@@ -658,9 +661,63 @@ def s_checklist(D: HDoc, sc: dict, bt: list, dur: float):
             elif st == "warn":
                 D.icon("triangle-alert", xl + 30, y, 44, "#C77B12", at=at + 0.4)
             D.sfx.append(("pencil", at))
+            if sc.get("focus"):   # 지금 말하는 줄만 또렷하게: 앞줄은 흐려짐 (정적 줄이기 시안)
+                rows_at.append((at, [re.search(r'id="([^"]+)"', it_).group(1) for it_ in D.items[i_row:] if 'id="' in it_]))
         shown = upto
         if b.get("stamp"):
             D.stamp(b["stamp"], 1450, 720, t0 + d - 1.2)
+    if sc.get("focus") and len(rows_at) > 1:
+        _checklist_focus(D, sc, rows_at, xl, y0, rh, tw)
+    if sc.get("panel"):
+        _checklist_panel(D, sc, bt)
+
+
+def _checklist_focus(D: HDoc, sc: dict, rows_at: list, xl: float, y0: float, rh: float, tw: float):
+    """줄이 하나 더 나오면 앞줄 글자는 흐리게, 새 줄 왼쪽에 강조색 띠 — 화면이 '지금 이 줄'을 가리킨다."""
+    for k, (at, ids) in enumerate(rows_at):
+        j = D._id()
+        y = y0 + k * rh
+        D.items.append(f'<div id="{j}" style="position:absolute;left:{xl - 34:.0f}px;top:{y - 34:.0f}px;width:10px;height:68px;background:{D.red};border-radius:4px;opacity:0;transform-origin:center"></div>')
+        D.js.append(f'tl.fromTo("#{j}",{{opacity:0,scaleY:0}},{{opacity:1,scaleY:1,duration:0.3,ease:"power2.out"}},{at:.2f});')
+        if k + 1 < len(rows_at):
+            nxt = rows_at[k + 1][0]
+            D.js.append(f'tl.to("#{j}",{{opacity:0,duration:0.3}},{nxt:.2f});')
+            if ids:
+                D.js.append(f'tl.to("{",".join("#" + x for x in ids)}",{{opacity:0.38,duration:0.4}},{nxt:.2f});')
+
+
+def _checklist_panel(D: HDoc, sc: dict, bt: list):
+    """체크리스트 오른쪽 빈자리: 지금 말하는 항목의 핵심 하나를 크게 (아이콘 + 짧은 말 + 한 줄). 다음 항목이 오면 바뀐다."""
+    from . import motion2
+    ents = []
+    for e in sc["panel"]:
+        kb = e.get("beat", 0)
+        b, (t0, d) = sc["beats"][kb], bt[kb]
+        at = t0 + 0.3
+        if e.get("t") and sc.get("_project_dir"):
+            at = max(t0, (motion2.row_time(sc, kb, b, t0, d, e["t"]) or at) - 0.1)
+        ents.append((at, e))
+    ents.sort(key=lambda x: x[0])
+    cx, cy = sc.get("panel_x", 1500), sc.get("panel_y", 560)
+    dark = D.skin.get("dark", False)
+    sub_col = "#C9CDD4" if dark else "#4A4F58"
+    for k, (at, e) in enumerate(ents):
+        j = D._id()
+        icon = ""
+        val, lab, sub = e.get("value", ""), e.get("label", ""), e.get("sub", "")
+        vf = fit(FT("value"), val, 96, 640)
+        from . import typeset as _ts
+        fv = {paper.SERIF: "serif-x", paper.SERIF_B: "serif-b", paper.SANS: "sans", paper.SANS_X: "sans-x"}.get(Path(FT("value"))) or _ts.family(FT("value")) or "sans-x"
+        D.items.append(
+            f'<div id="{j}" style="position:absolute;left:{cx - 340:.0f}px;top:{cy - 190:.0f}px;width:680px;height:380px;opacity:0;text-align:center">'
+            f'<div style="width:90px;height:8px;background:{D.red};margin:0 auto 26px auto;border-radius:4px"></div>'
+            f'<div style="font-family:sans-x,sans;font-size:36px;color:{sub_col};white-space:nowrap">{_e(lab)}</div>'
+            f'<div style="font-family:{fv};font-size:{vf.size}px;line-height:1.25;color:{D.ink};white-space:nowrap;margin-top:10px">{_e(val)}</div>'
+            f'<div style="font-family:sans,sans-x;font-size:34px;color:{sub_col};white-space:nowrap;margin-top:14px">{_e(sub)}</div></div>')
+        D.js.append(f'tl.fromTo("#{j}",{{opacity:0,y:26}},{{opacity:1,y:0,duration:0.4,ease:"power2.out"}},{at:.2f});')
+        if k + 1 < len(ents):
+            D.js.append(f'tl.to("#{j}",{{opacity:0,y:-20,duration:0.25}},{ents[k + 1][0] - 0.25:.2f});')
+        D.sfx.append(("click-soft", at))
 
 
 def s_analogy(D: HDoc, sc: dict, bt: list, dur: float):
@@ -776,6 +833,10 @@ def s_timeline(D: HDoc, sc: dict, bt: list, dur: float):
         for k in range(shown, upto):
             it = items[k]
             at = t0 + 0.3 + (k - shown) * 1.0
+            if it.get("t") and sc.get("_project_dir"):   # 그 일을 말하는 순간 (정적 줄이기 시안)
+                from . import motion2
+                k_b = sc["beats"].index(b)
+                at = max(t0, (motion2.row_time(sc, k_b, b, t0, d, it["t"]) or at) - 0.15)
             if "from" in it:
                 xa, xb = X[it["from"]] - 70, X[it["to"]] + 70
                 col = D.red if it.get("tone") == "risk" else "#2E7D4F"

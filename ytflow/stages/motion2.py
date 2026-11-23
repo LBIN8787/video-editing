@@ -103,6 +103,13 @@ class Stage:
             do = "stat"
         x, y = m.get("x", 540), m.get("y", 760)
         lab = m.get("label", "")
+        from . import mograph   # 모션그래픽 사물 (2026-11-23 사용자: "모션그래픽을 적극적으로")
+        if do in mograph.KINDS:
+            mograph.add(self, m, do, x, y, t, lab)
+            return
+        if do == "move":
+            mograph.move(self, m, t)
+            return
         lab_html = (f'<div style="position:absolute;left:-60px;right:-60px;bottom:-62px;text-align:center;white-space:nowrap;font-family:gx,sans-x;font-size:{m.get("lfs", 34)}px">'
                     f'<span style="display:inline-block;padding:2px 12px;border-radius:8px;background:rgba(10,12,16,.62);color:#F4F6FA">{_e(lab)}</span></div>') if lab else ""   # 바탕을 깔아 어떤 배경에서도 대비 확보 (2026-11-15 layout_qa 대비 2.19:1)
         if do == "folder":
@@ -250,7 +257,7 @@ class Stage:
         if do == "pulse" and m.get("on") in self.pos:
             self.js.append(f'tl.fromTo("#{self.p}_{m["on"]}",{{scale:1}},{{scale:1.18,duration:0.16,yoyo:true,repeat:1,ease:"power1.inOut"}},{t:.3f});')
         elif do == "out" and m.get("on") in self.pos:
-            self.js.append(f'tl.to("#{self.p}_{m["on"]}",{{opacity:0,scale:0.6,duration:0.25}},{t:.3f});')
+            self.js.append(f'tl.to("#{self.p}_{m["on"]},#{self.p}_{m["on"]}_lb",{{opacity:0,scale:0.6,duration:0.25}},{t:.3f});')
 
     def finish(self, end: float, keep: bool = False) -> tuple[str, str]:
         """(HTML, JS) — 장면 끝에 모두 사라짐 (keep=True 면 남김)."""

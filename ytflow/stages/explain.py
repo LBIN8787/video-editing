@@ -603,6 +603,8 @@ def s_board(D, sc: dict, bt: list, dur: float):
             name = act if isinstance(act, str) else next((act[x] for x in ("move", "hi", "dim", "hide", "swap") if x in act), None)
             if name in words and sc.get("_project_dir"):
                 t = max(t0, motion2.row_time(sc, k, b, t0, d, words[name]) - 0.1)
+            if isinstance(act, dict) and act.get("t") and sc.get("_project_dir"):   # 동작마다 자기 낱말 (같은 요소를 두 번 강조할 때)
+                t = max(t0, motion2.row_time(sc, k, b, t0, d, act["t"]) - 0.1)
             el = els.get(name, {})
             bx = box.get(name)
             if isinstance(act, str):

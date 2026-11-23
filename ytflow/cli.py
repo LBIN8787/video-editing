@@ -339,6 +339,11 @@ def main(argv: list[str] | None = None) -> None:
     dl.add_argument("--brand", default="market", choices=["market", "issues"])
     dl.add_argument("--date", default="", help="기준 거래일 YYYY-MM-DD (기본: 한국 아침 기준 가장 최근 거래일)")
     dl.add_argument("--project", default="", help="결과를 넣을 프로젝트 (없으면 새로 만듦)")
+    rd = sub.add_parser("radar", help="원본 레이더: 이름 있는 사람의 원본 영상(원본형 2~9일)·큰 날(사건형 ±3%) 추적 → inbox/radar/<날짜>.md (docs/63)")
+    rd.add_argument("--date", default="")
+    rd.add_argument("--people", default="", help="쉼표로 몇 사람만 (예: 드러켄밀러,젠슨 황)")
+    rd.add_argument("--no-kr", action="store_true", help="국내 해설(경쟁) 확인 생략")
+    rd.add_argument("--mark", nargs=2, metavar=("VIDEO_ID", "STATUS"), help="추적표 상태: made|skip|watch")
     cu = sub.add_parser("cut", help="원본 발언 컷편집: bite 장면의 문장을 긴 원본(어닝콜·기자회견)에서 찾아 구간 목록 → 02_script/cuts.json")
     cu.add_argument("project")
     cu.add_argument("--force", action="store_true", help="이미 찾은(사람이 고친) 구간도 다시 찾기")
@@ -655,6 +660,12 @@ def main(argv: list[str] | None = None) -> None:
     elif a.cmd == "daily":
         from .stages import daily
         daily.run(a.brand, a.date, a.project)
+    elif a.cmd == "radar":
+        from .stages import radar
+        if a.mark:
+            radar.mark(*a.mark)
+        else:
+            radar.run(a.date, [x.strip() for x in a.people.split(",") if x.strip()] or None, not a.no_kr)
     elif a.cmd == "newsletters":
         from .stages import newsletters
         newsletters.main(a.args)

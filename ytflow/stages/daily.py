@@ -350,6 +350,14 @@ def run(brand: str = "market", day: str = "", project: str = "") -> Path:
     except Exception as e:  # noqa: BLE001 — 뉴스레터가 없어도 브리핑은 나와야 함
         md += f"\n## ⑦ 뉴스레터 화제\n(읽기 실패: {e})\n"
     md += _source_backlog()
+    if brand == "market":   # 원본 레이더 (2026-11-23, docs/63): 오늘 결과가 있으면 판단 줄만 붙임 — 없으면 명령 안내
+        rp = config.ROOT / "inbox" / "radar" / f"{datetime.now(KST).date().isoformat()}.md"
+        if rp.exists():
+            t = rp.read_text(encoding="utf-8")
+            judge = t.split("## ⓐ 오늘의 판단", 1)[-1].split("\n## ", 1)[0].strip()
+            md += f"\n## ⓪ 원본 레이더 (사람의 말·큰 날, inbox/radar/{rp.name})\n{judge}\n"
+        else:
+            md += "\n## ⓪ 원본 레이더\n(오늘 결과 없음 — `python -m ytflow radar` 로 원본형·사건형 후보를 먼저 보세요, docs/63)\n"
     (rdir / "daily_brief.md").write_text(md, encoding="utf-8")
     print(f"[daily] → {rdir / 'daily_brief.md'}")
     if brand == "market":   # SAVE(오선) 소식은 기본 확인 (2026-11-14 사용자) — 사람이 앱/웹에서 보고 표를 채움 (savecheck.py)

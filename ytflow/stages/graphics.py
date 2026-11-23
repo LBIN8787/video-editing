@@ -48,8 +48,9 @@ def compare_data(sc: dict) -> dict | None:
         if a is None or b is None:
             return None
         q = sc["beats"][1].get("question", "") if len(sc["beats"]) > 1 else ""
-        return {"items": [{"label": L["label"], "value": abs(a), "text": L["value"], "icon": L.get("icon")},
-                          {"label": R["label"], "value": abs(b), "text": R["value"], "icon": R.get("icon")}],
+        sgn = (a < 0) != (b < 0)   # 부호가 다르면(하락 vs 상승) 기준선 위아래로 — 음수를 위로 그리지 않게
+        return {"items": [{"label": L["label"], "value": a if sgn else abs(a), "text": L["value"], "icon": L.get("icon"), "t": L.get("t")},
+                          {"label": R["label"], "value": b if sgn else abs(b), "text": R["value"], "icon": R.get("icon"), "t": R.get("t")}],
                 "unit": "", "title": sc.get("title", ""), "question": q, "emph": 1}
     return None
 
@@ -114,7 +115,7 @@ def _question(D, data, bt):
 
 
 def _bars(D, sc, bt, data, render):
-    fake = dict(sc, items=[{"label": i["label"], "value": i["value"], "text": i["text"]} for i in data["items"]], unit=data["unit"],
+    fake = dict(sc, items=[{"label": i["label"], "value": i["value"], "text": i["text"], **({"t": i["t"]} if i.get("t") else {})} for i in data["items"]], unit=data["unit"],
                 title=data["title"] or data.get("question", ""), emph=data["emph"])
     render["bars"](D, fake, bt, 0)   # 질문은 제목 자리에 (아래 라벨과 겹치지 않게)
 
