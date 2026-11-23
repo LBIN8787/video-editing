@@ -67,6 +67,8 @@ def frames_sheet(project: Project) -> Path:
 import re as _re
 
 # 만든 날을 기준으로만 맞는 말 — 올리는 날·보는 날이 달라지면 틀린다. '올해·내년·지난 3월'처럼 해·달 단위는 그해 안에선 맞으므로 뺌.
+#   달 없이 날짜만 쓴 말('22일까지의 자료')도 다음 달에 보면 헷갈림 → '11월 22일'처럼 (2026-11-23 끝 화면)
+_BARE_DAY = _re.compile(r"(?<![\d.])(\d{1,2})일(?!\s?(간|동안|뒤|안|만|째|치|전|후|분|씩|마다|\s?이내))")
 _REL = _re.compile(r"(어제|그제|그저께|내일|모레|이번\s?주|지난\s?주(?!년)|다음\s?주|이번\s?달|지난\s?달|다음\s?달|금주|지난\s?주말|이번\s?주말|"
                    r"며칠\s?전|\d+\s?일\s?전|지난\s?\d{1,2}\s?일|오는\s?\d{1,2}\s?일|방금)")
 
@@ -87,6 +89,8 @@ def relative_dates(project: Project) -> list[str]:
                 walk(v, key)
         elif isinstance(o, str) and key not in ("id", "icon", "kind", "type", "src", "url", "file", "photo"):
             m = _REL.search(o)
+            if not m and "월" not in o:   # 달이 하나도 없는 글에 날짜만 — '22일까지의 자료'
+                m = next((b for b in _BARE_DAY.finditer(o) if 1 <= int(b.group(1)) <= 31), None)
             if m and o not in out:
                 out.append(o if len(o) < 160 else o[max(0, m.start() - 60):m.end() + 60])
 
