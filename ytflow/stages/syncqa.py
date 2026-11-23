@@ -55,10 +55,11 @@ def _words_windowed(wav, win: float = 25.0) -> list[dict]:
 def run(project: Project) -> dict:
     edir = project.dir("edit")
     final = edir / "final.mp4"
-    lines = []
+    lines, spans = [], []
     for ln in (edir / "subs.ass").read_text(encoding="utf-8").splitlines():
         if ln.startswith("Dialogue:"):
             f = ln.split(",", 9)
+            spans.append((_t(f[1]), _t(f[2])))   # 모든 자막(원본 발언 포함)의 시각 — '앞 줄이 아직 떠 있는 시각' 판단용
             if f[4].strip() == "bite":   # 원본 발언 번역 자막: 내레이션이 아니므로 싱크 점검에서 뺀다
                 continue
             lines.append((_t(f[1]), _t(f[2]), f[9]))
@@ -113,6 +114,7 @@ def run(project: Project) -> dict:
 
     rows = []
     for (a, b, text), p in zip(lines, starts):
+        pb = max((b0 for a0, b0 in spans if a0 < a - 0.05), default=None)
         n = len(norm(text))
         q_hit = next((q for q in range(p, p + min(n, 4)) if q in m), None)  # 줄 앞 4글자 안에서 맞는 글자
         if q_hit is None:
@@ -128,6 +130,10 @@ def run(project: Project) -> dict:
         # 받아쓰기가 앞 줄 말끝에 시각을 붙여 1초 밀렸다고 재던 것 (2026-11-23 심층: 소리로 재 보니 정확히 맞았음)
         e_near = next((e0 for _s0, e0 in sil if abs(a - e0) <= 0.15), None)
         if e_near is not None and abs(a - spoken) > 0.3 and abs(e_near - spoken) <= 1.5:
+            spoken = e_near
+        # 줄 첫 낱말이 앞 줄에도 있으면('오픈AI'·'이') 받아쓰기가 앞 줄의 같은 말에 맞춰, 아직 앞 줄 자막이 떠 있는 시각을 시작으로 잰다.
+        # 자막이 '쉼 끝 = 말 다시 시작'에 정확히 뜬 줄이면 그 쉼 끝이 실제 시작 (2026-11-24 오픈AI 4.19초·엔비디아 2부 1.79초 — 소리로 재 보니 0초)
+        elif e_near is not None and pb is not None and spoken < pb - 0.1 and abs(a - spoken) > 0.3:
             spoken = e_near
         rows.append({"sub": round(a, 2), "spoken": round(spoken, 2), "off": round(a - spoken, 2), "text": text[:30]})
     offs = sorted(abs(r["off"]) for r in rows)

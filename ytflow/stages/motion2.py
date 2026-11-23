@@ -182,8 +182,12 @@ class Stage:
             x, y = clamp_box(m.get("x", 960), m.get("y", 540), sw, sh)
             did = f"{self.p}_{m['id']}"
             shadow = "" if self.th.get("light_bg") else "text-shadow:0 2px 14px rgba(0,0,0,.55);"
+            # 원본 영상 위(bite·clip)에서는 바탕 없는 글자가 화면 글자·밝은 배경에 묻힘 → 어두운 판을 깔고 밝은 회색 (2026-11-24 메모리 2부 대비 2:1)
+            plate = "background:rgba(10,12,16,.78);border-radius:10px;padding:8px 16px 8px 0;box-sizing:content-box;" if self.th.get("on_video") else ""
+            if self.th.get("on_video"):
+                muted = "#C9CED6"
             self.items.append(
-                f'<div id="{did}" style="position:absolute;left:{x - sw / 2:.0f}px;top:{y - sh / 2:.0f}px;width:{sw:.0f}px;height:{sh:.0f}px;z-index:5">'
+                f'<div id="{did}" style="position:absolute;left:{x - sw / 2:.0f}px;top:{y - sh / 2:.0f}px;width:{sw:.0f}px;height:{sh:.0f}px;z-index:5;{plate}">'
                 f'<div id="{did}_bar" style="position:absolute;left:0;top:6px;width:5px;height:{sh - 12:.0f}px;background:{acc};transform-origin:top"></div>'
                 f'<div id="{did}_l" style="position:absolute;left:28px;top:0;font-family:gr,sans;font-size:30px;letter-spacing:.06em;color:{muted};white-space:nowrap;opacity:0;{shadow}">{_e(lab)}</div>'
                 f'<div id="{did}_n" style="position:absolute;left:24px;top:46px;font-family:gx,sans-x;font-size:{fs}px;line-height:1.05;color:{acc};white-space:nowrap;opacity:0;{shadow}">{_e(val)}</div>'
@@ -287,6 +291,7 @@ def apply(D, sc: dict, bt: list, dur: float, w: int = 1920, h: int = 1080, keep:
     stg = Stage(f"mo{sc['id']}", w, h, theme={"icon_bg": pal.get("card2", pal.get("card", "#1C2E47")), "ring": acc, "arrow": acc,
                                              "card": pal.get("card", "#16263C"), "card_ink": pal.get("ink", "#E8EEF6"), "label": pal.get("ink", "#E8EEF6"),
                                              "accent": acc, "muted": pal.get("muted", "#9AA4B2"),
+                                             "on_video": sc.get("type") == "bite" or isinstance(sc.get("clip"), dict),
                                              "light_bg": sc.get("theme") != "dark" and sum(int((pal.get("base") or "#F3EFE6").lstrip("#")[i:i + 2], 16) for i in (0, 2, 4)) > 450})
     # 설명 무대가 어두운 바탕(theme dark)이면 팩의 밝은 base 와 상관없이 어두운 바탕용 색 — 짙은 회색 이름이 묻혀 대비 1.8:1 (2026-11-23 오픈AI 심층)
     stg.no_sparkle = getattr(D, "no_zoom", False)

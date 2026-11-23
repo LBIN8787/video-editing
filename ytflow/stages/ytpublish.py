@@ -390,10 +390,15 @@ def request_github(project: str, at: str | None = None, privacy: str | None = No
     (work / "req.json").write_text(req, encoding="utf-8")
     env = dict(os.environ, GIT_INDEX_FILE=str(work / "index"))
     g = lambda *a: subprocess.run(["git", *a], cwd=root, env=env, capture_output=True, text=True, check=True).stdout.strip()
-    g("read-tree", "HEAD")
-    g("update-index", "--add", "--cacheinfo", f"100644,{g('hash-object', '-w', str(work / 'req.json'))},_publish/{name}.json")
-    commit = g("commit-tree", g("write-tree"), "-p", "HEAD", "-m", f"publish: {name} (Actions 가 유튜브에 올리고 이 브랜치를 지움)")
-    r = subprocess.run(["git", "push", "-f", "origin", f"{commit}:refs/heads/publish/{name}"], cwd=root, capture_output=True, text=True)
+    # 임시 index 는 저장소 크기만큼 커서(수백 MB~1GB) 남기면 C 드라이브가 참 → 끝나면 반드시 지움 (2026-11-24 임시 폴더 9개·약 8GB 로 C 0MB)
+    try:
+        g("read-tree", "HEAD")
+        g("update-index", "--add", "--cacheinfo", f"100644,{g('hash-object', '-w', str(work / 'req.json'))},_publish/{name}.json")
+        commit = g("commit-tree", g("write-tree"), "-p", "HEAD", "-m", f"publish: {name} (Actions 가 유튜브에 올리고 이 브랜치를 지움)")
+        r = subprocess.run(["git", "push", "-f", "origin", f"{commit}:refs/heads/publish/{name}"], cwd=root, capture_output=True, text=True)
+    finally:
+        import shutil
+        shutil.rmtree(work, ignore_errors=True)
     if r.returncode:
         raise SystemExit(r.stderr[-600:])
     print(f"[yt-publish] GitHub Actions 에 요청함 → 몇 분 뒤 05_edit/youtube_publish.json 이 main 에 기록됩니다 (Actions 탭 'youtube-publish')")
