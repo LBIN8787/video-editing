@@ -498,7 +498,7 @@ def polarity_lines(secs: list[dict]) -> list[dict]:
     out = []
     for s in secs:
         body = s.get("body", "")
-        if "규칙의 네 층" in s.get("title", "") or "기록용 — 지금 기본값이 아닙니다" in body or s["doc"] == "doc:10":   # 설명·기록용·용도표는 규칙 줄이 아님
+        if "규칙의 네 층" in s.get("title", "") or "기록용 — 지금 기본값이 아닙니다" in body or s["doc"] in ("doc:10", "doc:feedback"):   # 설명·기록용·용도표·피드백 기록(사용자 원문 모음)은 규칙 줄이 아님
             continue
         for ln in body.splitlines():
             if ln.lstrip().startswith(">"):   # 인용(사용자 원문·옛 기준)은 규칙 줄이 아님
