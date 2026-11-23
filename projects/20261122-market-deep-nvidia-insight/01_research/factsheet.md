@@ -2,6 +2,10 @@
 
 시각: 엔비디아 3분기 실적은 11월 17일(화) 미국 장 마감 뒤(16:20 ET 무렵) = 한국 시간 18일(수) 06:20 KST 무렵 발표. 보증·약정·매출채권 숫자는 10월 25일(회계 3분기 말) 기준. CEO 교체 8-K 는 11월 11일(ET) 사건, 보도자료 11월 12일.
 
+## 11월 23일 보강 — 젠슨 황 복귀
+- ✅ 11월 22일(미국 시간) 이사회 만장일치로 젠슨 황 사장·CEO·이사 복귀, 크레스는 부사장 겸 CFO 로 계속 — 8-K https://www.sec.gov/Archives/edgar/data/1045810/000104581026000090/nvda-20261122.htm
+- ✅ 보도자료(11월 23일): 정부 고위층 의견으로 국가안보 위험 없음, 독립위원회 조사는 결론까지, 수출통제 위원회·최고준법책임자 신설 https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000090/nov23pressrelease.htm
+
 ## 이야기 1 — 실적(보고서): 엔비디아가 고객 쪽에 걸어 둔 것 (원인 종류: 실적)
 - ✅ 3분기(회계 2027) 매출 1,158억 달러(+103% 전년 대비), 데이터센터 1,076억 달러(하이퍼스케일 601억 · AI 클라우드·산업·기업 475억), 4분기 전망 1,300억 ±3% — CFO 코멘터리 https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000088/q3fy27cfocommentary.htm
 - ✅ 보증 최대 노출 합계 1,180억 달러(10월 25일): SB에너지(오픈AI 계열 임차) 신용 지원 1,050억 · 전력·시스템 신용 지원 95억 · 네오클라우드 토지·전력·건물 보증 35억. "To date, we have not made any payments related to our guarantees." — 같은 문서
@@ -120,7 +124,3 @@
 - ✅ 10월 의사록(11/18): "off-balance-sheet leasing commitments and circular financing arrangements among AI-related firms could amplify losses if returns on AI investment were to disappoint." · "almost all participants judged that … further action to raise the target range … would likely be appropriate"
 - ✅ 쿡 이사(11/20): "The current stance of policy does not appear to be curtailing the AI buildout" https://www.federalreserve.gov/newsevents/speech/cook20261120a.htm · 10년물 5.05%(19일) → 4.91%(20일)
 - 🧮 금리 계산(이 채널, 예시): 100억 달러 빚 × 1%p = 해마다 1억 달러 → 8년 셈 흑자 17.5억 → 16.5억, 3년 셈 적자 3.3억 → 4.3억
-
-## 11월 23일 보강 — 젠슨 황 복귀
-- ✅ 11월 22일(미국 시간) 이사회 만장일치로 젠슨 황 사장·CEO·이사 복귀, 크레스는 부사장 겸 CFO 로 계속 — 8-K https://www.sec.gov/Archives/edgar/data/1045810/000104581026000090/nvda-20261122.htm
-- ✅ 보도자료(11월 23일): 정부 고위층 의견으로 국가안보 위험 없음, 독립위원회 조사는 결론까지, 수출통제 위원회·최고준법책임자 신설 https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000090/nov23pressrelease.htm

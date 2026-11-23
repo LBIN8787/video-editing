@@ -20,6 +20,8 @@
 
 📚 출처
 📅 자료 기준: 2026년 11월 23일
+- https://www.sec.gov/Archives/edgar/data/1045810/000104581026000090/nvda-20261122.htm
+- https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000090/nov23pressrelease.htm
 - https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000088/q3fy27cfocommentary.htm
 - https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000075/nvda-20260726.htm
 - https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition
@@ -38,8 +40,6 @@
 - https://view.asiae.co.kr/article/2026090221450250672
 - https://www.youtube.com/watch?v=sH5qyeHSdVs
 - https://www.youtube.com/watch?v=Uu-v3YJSgNY
-- https://www.youtube.com/watch?v=VVvbvEr4HR0
-- https://www.fool.com/investing/2025/08/19/famous-short-seller-jim-chanos-just-laid-out-his-b
 
 🎬 원본 영상 (짧은 인용)
 - 콜레트 크레스 — CNBC Television 공식 채널 (YouTube) · 2026.11.18 https://www.youtube.com/watch?v=Uu-v3YJSgNY
