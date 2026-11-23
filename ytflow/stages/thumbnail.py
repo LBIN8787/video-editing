@@ -657,14 +657,25 @@ def _hot_words(project: Project) -> list[str]:
     m = re.search(r"## 핫 키워드[^\n]*\n(.*?)(?:\n## |\Z)", fs.read_text(encoding="utf-8"), re.S)
     if not m:
         return []
-    out = []
+    # 줄 모양: "- 국내 제목 반복: '오픈AI 자금난'·'AI 거품'" / "- daily_brief ⑤ 주제어: 급락(9) · 전망(5)"
+    # 콜론 앞은 이름표(국내·해외·제목·daily_brief…)라 키워드가 아님 — 예전엔 이름표 낱말이 키워드로 섞였음 (2026-11-23)
+    # "→ 썸네일 큰 글씨…" 줄은 썸네일에 넣을 말이라 썸네일 글자와 맞대면 늘 맞으므로 뺌
+    out: list[str] = []
     for ln in m.group(1).splitlines():
-        ln = ln.strip("- ").strip()
-        if not ln or ln.startswith("썸네일"):
+        ln = ln.strip().lstrip("-").strip()
+        if not ln or ln.startswith(("썸네일", "→")):
             continue
-        head = re.split(r"\s[—\-–(]|\(", ln)[0].strip()
-        out += [w for w in re.split(r"[·,/ ]+", head) if len(w) >= 2]
-    return out
+        if re.search(r"[:：]", ln):
+            ln = re.split(r"[:：]", ln, maxsplit=1)[1]
+        ln = re.split(r"\s[—–]\s|\s\(", ln)[0]          # 뒤의 풀이·괄호 설명 버림
+        quoted = re.findall(r"[‘'\"“]([^’'\"”]+)[’'\"”]", ln)
+        items = quoted or re.split(r"[·,/]+", ln)
+        for it in items:
+            it = re.sub(r"\(\d+\)", "", it).strip(" *")
+            if len(it) >= 2:   # 따옴표 구절은 통째로만 ('투자 우려'를 '투자'·'우려'로 쪼개면 흔한 낱말까지 점수)
+                out.append(it)
+    seen: set[str] = set()
+    return [w for w in out if not (w in seen or seen.add(w))]
 
 
 _src_text = ""
