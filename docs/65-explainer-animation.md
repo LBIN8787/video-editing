@@ -1,0 +1,93 @@
+# 65. 설명 애니메이션 — 원리를 움직임으로 보여 주는 연출법·편집법 (2026-11-24)
+
+> 사용자: "트랜스포머 등을 서술 할 때 글로만 하면 이해하기 힘들고 지루하지만 모션그래픽을 잘 사용하면 한눈에 들어오듯이요 … 3b1b 등" ·
+> "설명을 할 때 모션그래픽으로 시각화로 잘 설명하거나 지루하지 않도록 잘 보여주고싶은거에요" ·
+> (시안 1) "애니메이션 자체는 좋은데 그 퀄리티나 직관성이 기존보다 많이 떨어져요" ·
+> (시안 2) "훨씬 좋아요 … 기존 카드처럼 통일해주시고 … 연출법이나 편집법을 더 분석하고 제시해주세요 방향성 마음에 듭니다"
+
+이미 본 것은 반복하지 않음: 장면 사례(월텍남 [31](31-motion-grammar.md), 식스시그마·Kurzgesagt·3b1b·Vox [50](50-motion-graphics-editing-references.md), 고퀄리티 디테일 [52](52-motion-quality-references.md)), 기법 카탈로그 [32](32-technique-research.md), 대본→화풍 [42](42-script-to-motion.md).
+이 문서는 **'원리를 설명하는 움직임'을 어떻게 설계하나**를 연구·제작 자료로 정리하고, 업로드 대기 다섯 편에 적용할 계획을 낸다.
+
+## 1. 연구가 말하는 것 — 언제 움직임이 이해를 돕나
+
+| 근거 | 핵심 | 우리 편집에서 |
+|---|---|---|
+| Tversky·Morrison·Bétrancourt, 〈Animation: Can It Facilitate?〉(2002) | **일치(congruence)**: 그림의 구조가 개념의 구조와 같아야 한다. **파악(apprehension)**: 너무 빠르거나 복잡하면 움직임이 오히려 방해한다. | 고리 개념이면 화면도 고리, 시간 순서면 화면도 왼→오. 한 번에 하나만 변하고, 변한 뒤 머무는 시간을 준다. |
+| Heer·Robertson, 〈Animated Transitions in Statistical Data Graphics〉(2007) | 전환 애니메이션은 대상 추적·값 추정을 유의하게 돕는다. 같은 자료는 같은 표시로 이어 가고, 복잡한 전환은 **단계로 나눈다(staging)**, 단순하고 예측 가능하게. | 막대가 카드로, 카드가 고리의 마디로 '변한다' — 지우고 새로 그리지 않는다. 바뀌는 게 여럿이면 순서대로. |
+| Bostock, 〈Object Constancy〉 | 같은 대상을 전환 내내 같은 그림 요소로 추적하게 하면 따라가는 수고가 준다. 관계없는 자료 사이에는 디졸브·컷. | 엔비디아 카드는 장면 안에서 끝까지 같은 카드. 다른 이야기로 넘어갈 때만 장면 전환. |
+| Mayer 멀티미디어 학습 원리 | **신호(signaling)**: 핵심을 짚어 주면 배움이 는다. **시간 근접**: 말과 그림을 동시에. **공간 근접**: 글자는 가리키는 그림 옆에. **분절**: 한 덩어리씩. **일관성**: 군더더기를 뺀다. | 말하는 순간 움직임(`cue`), 숫자는 사물에 붙이기, 위쪽 '단계 한 줄'(분절·신호), 장식 효과 없음. |
+| Bret Victor, 〈Up and Down the Ladder of Abstraction〉 | 이해는 구체 ↔ 추상 사이를 오르내릴 때 생긴다. 추상만 보면 아래의 구체가 안 보인다. | 실제 이름(엔비디아·오픈AI) → 원리(파는 쪽·사는 쪽) → 다시 구체(한국 계좌·메모리 주문). |
+| 3Blue1Brown (manim, 그랜트 샌더슨) | 그림이 먼저, 기호는 나중. 직관을 쌓는 보조 자료. 등장인물·궁금증·해결의 이야기 구조. | 숫자보다 사물의 움직임이 먼저, 숫자는 움직임이 끝난 자리에 붙는다. 장면마다 질문 → 움직임 → 답. |
+| Kurzgesagt 제작 과정 | 깊은 조사 → 대본(수 주) → 그림·스토리보드 → **내레이션이 박자를 정하고** 애니메이션이 맞춘다. | 우리도 목소리 박자(받아쓰기 단어 시각)에 움직임을 맞춘다 — 이미 갖춘 구조. |
+| Vox(제작자 인터뷰·분석 글) | 작은 움직임 요소가 리듬을 만든다, 대본 단계에서 이야기에 깊이 들어감, 종이 시계 → 원그래프처럼 **사물이 그래프로 변함**. | 사물 → 그래프 변환(동전 더미 → 막대, 시계 → 몫). |
+| UX in Motion 12 원칙 (Willenskomer) | 가속·감속(easing), 시차(offset & delay), 부모-자식 관계(parenting), 형태 변환(transformation), 값 변화(value change) 등. | 묶인 사물은 함께 움직임(보증 방패는 고객 카드를 따라감), 값 바뀜은 숫자·막대가 같이. |
+
+## 2. 우리 채널의 설명 애니메이션 원칙 (시안 1·2 피드백 반영)
+
+1. **한 장면 = 한 장치.** 한 원리를 보여 주는 장치 하나를 두고, 장면 끝까지 같은 사물이 남아 **변한다**(채워지고·흐르고·끊기고·식는다). [일치·대상 유지]
+2. **그림은 우리 카드로.** 등장 사물은 설명 무대의 흰 카드(굵은 선 아이콘 + 굵은 이름)와 같은 모양. 새 그림체를 만들지 않는다. ← 시안 1 "퀄리티·직관성이 떨어진다", 시안 2 "기존 카드처럼 통일"
+3. **움직이는 것에는 뜻이 보인다.** 돈은 '$' 동전, 칩은 칩 카드, 빚은 빗금. 정체를 알 수 없는 점·네모는 쓰지 않는다. [파악]
+4. **위쪽 '단계 한 줄'.** "③ 엔비디아가 돈을 대면"처럼 지금 단계를 한 줄로, 단계가 바뀌면 그 줄만 바뀐다. 설명 글을 화면 곳곳에 쌓지 않는다. [신호·분절·일관성]
+5. **말하는 순간 움직인다.** 대본 낱말(`cue`)에 맞춰 시작, 한 번에 한 변화, 변한 뒤 머문다. [시간 근접·파악]
+6. **색은 뜻이 하나.** 돈·현금 초록, 주문·매출 주황, 위험·손실 빨강, 꺼진 것 회색 — 한 편 안에서 바꾸지 않는다.
+7. **숫자는 사물에 붙는다.** "보증 1,050억 달러"는 방패 옆·단계 줄에, 막대의 값은 막대 끝에. [공간 근접]
+8. **구체 → 원리 → 구체.** 실제 회사 이름으로 시작해 원리를 돌리고, 끝은 한국 계좌·종목으로 내려온다. [사다리]
+9. **카메라 고정, 장식 없음.** 확대·축소(v31)·스캔·반짝이(v32) 없음 — 움직이는 것은 사물뿐.
+10. **'넘어감'도 장치로.** 다음 장면이 같은 사물을 쓰면 그 사물을 들고 넘어간다(체크리스트의 한 줄이 카드가 되어 장치로 들어감).
+
+## 3. 연출법 — 장치(device) 목록
+
+시장 채널 설명에 되풀이되는 원리를 장치 하나씩으로. `ytflow/stages/mechanism.py` 의 `kind` 로 만든다 (지금 `loop` 하나 완성).
+
+| 장치 | 보여 주는 원리 | 움직임 (cue 예) | 쓰일 장면 (업로드 대기 다섯 편) |
+|---|---|---|---|
+| **고리 `loop`** ✅ | 파는 쪽이 돈을 대고 그 돈이 주문으로 돌아온다 | 동전이 돌고(fund) 칩이 돌아오고(order) 매출 막대가 오름, 보증 방패, 경쟁사 길 ✕, 무너지면 고리가 끊기고 두 번 잃음 | 엔비디아 1부 #6·#7 |
+| **물통 `tank`** | 들어오는 돈 < 나가는 돈, 버티는 기간 = 물 높이 ÷ 새는 속도 | 위 수도꼭지(매출·투자 유치)와 아래 구멍(연산 약정) 두 흐름, 물 높이와 '남은 개월' 눈금, 상장·대출 = 새 물줄기 | 오픈AI #6·#8·#19·#35 |
+| **수요·공급 `market`** | 공급이 늦게 따라오고 수요가 한꺼번에 오면 값이 뛴다 | 두 곡선이 움직이고 만나는 점(값)이 위로, 4배 눈금. 공장 짓는 시간만큼 공급 곡선은 늦게 이동 | 메모리 1부 #4·#5·#26·#27 |
+| **시간 지연 `pipeline`** | 지금 결정이 몇 년 뒤에 나온다 | 컨베이어 위 상자가 '착공 → 껍데기 → 장비 → 양산' 칸을 지나감, 달력이 넘어감 | 메모리 1부 #4, 2부 #11 |
+| **버티기 게임 `chicken`** | 먼저 줄이면 손해, 다 같이 버티면 다 같이 손해 | 플레이어 카드 셋이 생산 레버를 쥐고, 값 막대가 내려가며, 먼저 놓은 쪽이 점유율을 잃음 | 메모리 1부 #17·#19, 2부 #20 |
+| **연쇄 `domino`** | 한 회사의 약속에 여러 회사가 걸려 있다 | 카드가 줄지어 서고, 첫 카드가 기울면 화살표를 따라 차례로 기움(가설이면 점선) | 오픈AI #22, 엔비디아 1부 #18 |
+| **수명 곡선 `lifetime`** | 칩이 몇 년 돈을 버나 = 담보 가치·빚의 안전 | 연차 눈금 위 '번 돈' 막대가 쌓이고, 4년·8년 두 갈래 곡선, 담보 가치 선이 빚 선 아래로 내려가는 순간 | 엔비디아 2부 #8·#15·#27 |
+| **저울 `scale`** | 같은 사실, 다른 해석 — 근거끼리 맞대기 | 양쪽 접시에 근거 카드가 하나씩 올라가며 기울고, 마지막에 '갈리는 숫자 하나'가 가운데 | 엔비디아 2부 #27, 메모리 2부 #24·#25, 오픈AI #32 |
+| **갈림길 `branch`** | 앞으로 몇 갈래, 각각의 신호 | 한 줄기가 갈라지며 갈래마다 신호 카드, 지금 위치 점 | 메모리 1부 #34, 오픈AI #35 |
+| **몫 `share`** (기존 설명 무대에 있음) | 전체 중 얼마 | 동전 더미 → 막대 → 몫으로 변환 | 엔비디아 1부 #7, 메모리 2부 #18 |
+
+## 4. 편집법 — 대본에서 화면까지
+
+1. **어디를 장치로 할까 (대본 단계).** 정보 전달 장면(글·숫자)이 먼저 사실을 말한 뒤, "이 목록을 듣고 시청자가 상황을 머릿속에 그릴 수 있나?"에 '아니오'인 대목만 장치로 (09 §5-1 그대로). 한 편에 3~6개면 충분 — 숫자로 정하지 않고, 원리가 나오는 대목마다 하나.
+2. **장치 고르기.** 위 표에서 원리에 맞는 장치(일치 원칙). 맞는 게 없으면 새 장치를 만들되 카드·색·단계 줄 규칙은 같게.
+3. **cue 적기.** 박자 대사에서 단계마다 '움직임이 시작될 낱말'을 고른다. 동사(대 줍니다·돌아옵니다·무너지면)가 가장 좋다. 단계 줄 문구는 10~20자, 번호를 붙인다.
+4. **박자 길이.** 장치 장면은 사물이 계속 변하므로 40~90초도 지루하지 않다. 반대로 한 변화가 끝난 뒤 2~3초는 머물러 눈이 따라오게 한다(파악).
+5. **앞뒤 연결.** 들어갈 때: 앞 장면의 대상(체크리스트 줄·큰 숫자)이 장치의 카드가 되어 들어온다. 나올 때: 장치의 결론(예: '두 번 잃는다')이 다음 장면의 제목이 된다.
+6. **소리.** 동전·칩이 도착할 때 아주 작은 딸깍, 끊길 때 한 번의 '훅'. 배경음은 기본 없음(기존 규칙).
+7. **검수 (렌더 뒤).** 단계마다 한 장씩 프레임을 뽑아 본다:
+   - 이 한 장만 보고 지금 무슨 단계인지 알 수 있나 (단계 줄 + 사물)
+   - 움직이는 것이 무엇인지 알 수 있나 (동전·칩·빗금)
+   - 글자끼리·자막과 겹치지 않나 (`overlap_qa`, 일부러 선 위를 지나는 동전은 예외)
+   - 처음 본 카드가 끝까지 같은 카드인가
+   - 숫자가 대본·팩트시트와 같은가
+
+## 5. 업로드 대기 다섯 편에 적용 계획 (제안)
+
+| 순서 | 할 일 | 대상 장면 | 비고 |
+|---|---|---|---|
+| 1 | `loop` 다듬기(완료) → 엔비디아 1부 #6·#7 을 장치로 바꿔 다시 렌더 | 엔비디아 1부 | 시안 2 그대로 + 엔비디아 카드 선 아이콘 |
+| 2 | `tank` 만들기 | 오픈AI #6·#8·#19·#35 | 오픈AI 편의 중심 원리 '돈이 먼저 나가고 나중에 들어온다' |
+| 3 | `market`·`pipeline`·`chicken` 만들기 | 메모리 1부 #4·#5·#17·#19·#26·#27 | 메모리 1부가 장면이 가장 많음 |
+| 4 | `scale`·`lifetime`·`domino` 만들기 | 엔비디아 2부·메모리 2부·오픈AI 맞대기 장면 | 2부는 '근거끼리 맞대기'가 중심 |
+| 5 | 편마다 다시 렌더 → 단계별 프레임 검수(§4-7) → 사용자 확인 → 업로드 | 다섯 편 | 목소리는 지금 녹음 그대로 |
+
+장치 하나를 만드는 데 2~4시간(설계·렌더·검수), 한 번 만들면 다음 영상부터는 대본에 `cue` 만 적으면 된다.
+
+## 출처
+- Tversky, Morrison, Bétrancourt (2002), Animation: Can It Facilitate? — [Stanford PDF](https://hci.stanford.edu/courses/cs448b/papers/Tversky_AnimationFacilitate_IJHCS02.pdf)
+- Heer, Robertson (2007), Animated Transitions in Statistical Data Graphics — [UW IDL](https://idl.uw.edu/papers/animated-transitions), [PDF](https://homes.cs.washington.edu/~jheer/files/2007-AnimatedTrans-InfoVis.pdf)
+- Mike Bostock, Object Constancy — [bost.ocks.org/mike/constancy](https://bost.ocks.org/mike/constancy)
+- Richard E. Mayer, Research-based principles for designing multimedia instruction — [UNH PDF](https://www.unh.edu/teaching-learning-resource-hub/sites/default/files/media/2023-06/itow-research-based-principles-for-designing-multimedia-instruction-mayer.pdf), [Cambridge Handbook 장](https://cambridge.org/core/books/cambridge-handbook-of-multimedia-learning/principles-for-reducing-extraneous-processing-in-multimedia-learning/F29A19FCD34C542806F736E0661C05F5)
+- Bret Victor, Up and Down the Ladder of Abstraction — [worrydream.com](https://worrydream.com/LadderOfAbstraction/)
+- 3Blue1Brown — [How I animate 3Blue1Brown (Manim 데모)](https://www.3blue1brown.com/lessons/manim-demo/), [Attention in transformers](https://www.3blue1brown.com/lessons/attention), [About](https://www.3blue1brown.com/about), [Stanford Daily 강연 기사](https://www.stanforddaily.com/2020/01/24/3blue1brown-creator-grant-sanderson-15-talks-engaging-with-math-using-stories-and-visuals)
+- Kurzgesagt — [Our video process](https://kurzgesagt.org/youtube/), [CERN 발표 자료](https://indico.cern.ch/event/914586/sessions/348932/attachments/2160174/3644471/Kurzgesagt.pdf)
+- Vox — [PremiumBeat 분석](https://www.premiumbeat.com/blog/replicating-vox-motion-graphic/), [Storybench 인터뷰](https://www.storybench.org/?p=21229)
+- Issara Willenskomer, UX in Motion Manifesto — [uxmag.com](https://uxmag.com/articles/creating-usability-with-motion-the-ux-in-motion-manifesto)
+
+한계: 3b1b 의 색·배치 결정에 대한 제작자 본인의 글은 찾지 못했다(위 원칙은 공개 강연·영상 관찰·연구에서 옮긴 것). Vox 는 공식 제작기가 없어 분석 글·인터뷰로 보았다.

@@ -1342,7 +1342,7 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     D.chart_clean = spec.get("chart_style", "clean" if spec.get("brand") == "market" else "rough") == "clean"   # 차분하고 깔끔한 모드 (2026-11-21 사용자) — 손그림 강조 없음, 아래 calm_pass 로 움직임·효과음 정리
     from . import graphics
     if not graphics.dispatch(D, sc, bt, dur, RENDER):   # 그래픽 팩이 다른 컴포넌트(그림)를 고르면 그걸로
-        if sc["type"] in ("afterline", "spread", "share", "motionboard") and not sc.get("theme"):
+        if sc["type"] in ("afterline", "spread", "share", "motionboard", "mechanism") and not sc.get("theme"):
             # 설명 무대 바탕 기본값: 시장은 어두운 무대 (2026-11-20 사용자: "설명부분은 배경 공통으로 해주세요 어두운걸로요")
             sc["theme"] = spec.get("explain_theme") or {"market": "dark"}.get(spec.get("brand", ""), "paper")
         RENDER[sc["type"]](D, sc, bt, dur)
@@ -1738,6 +1738,8 @@ try:  # 새 연출 문법(아카이브 다큐·지도 여정·키네틱 타이�
     _stage.register()
     from . import explain as _explain    # 설명 무대 (afterline·spread·share 장면) — 월텍남 벤치마크 docs/31·docs/51
     _explain.register()
+    from . import mechanism as _mechanism   # 설명 애니메이션 (원리를 움직임으로, 3b1b 식 — 2026-11-24)
+    _mechanism.register()
     from . import noir as _noir          # 누아르 사건 보드 (hubweb 관계망·ledger 두 열 장부, 날짜 눈금) — docs/57
     _noir.register()
     from . import noircase as _noircase  # 누아르 변형 (noirtitle·noircase·noirsides, 2026-11-21 드러켄밀러 편)
