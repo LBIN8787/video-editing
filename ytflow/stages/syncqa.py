@@ -105,9 +105,13 @@ def run(project: Project) -> dict:
             merged.append((s0, e0))
     sil = merged
 
-    def onset(t):
+    def onset(t, end=None):
         for s0, e0 in sil:
             if s0 - 0.3 <= t < e0 - 0.05 and e0 - t <= 2.5:   # 무음 속에서는 말이 시작될 수 없음 → 무음 끝이 실제 말 시작
+                # 단, 쉼 바로 앞에서 시작해 쉼이 오기 전에 끝난 짧은 낱말('다섯째,' 뒤 쉼)은 진짜 말소리 — 옮기지 않음.
+                # 옮기면 맞게 뜬 자막을 0.5~1초 밀렸다고 잼 (2026-11-23 심층 '다섯째,·넷째,' 줄)
+                if t < s0 and end is not None and end <= s0 + 0.15:
+                    return t
                 return e0
         return t
 
@@ -121,7 +125,7 @@ def run(project: Project) -> dict:
             continue                                   # 뒤 글자에 맞춰 늦게 잼 → 잴 수 없는 줄로 뺌 (2026-11-23 심층)
         hit = m[q_hit]
         spoken = float(words[owner[hit]]["start"])
-        spoken = onset(spoken)
+        spoken = onset(spoken, words[owner[hit]].get("end"))
         rows.append({"sub": round(a, 2), "spoken": round(spoken, 2), "off": round(a - spoken, 2), "text": text[:30]})
     offs = sorted(abs(r["off"]) for r in rows)
     res = {
