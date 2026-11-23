@@ -450,7 +450,7 @@ def build(card: dict, work: Path, duration: float, seed: int = 1) -> Path:
 
 def check(work: Path) -> list[str]:
     """hyperframes check: 레이아웃(겹침·잘림)·대비 점검. 문제 문장 목록."""
-    r = subprocess.run([str(BIN), "check", "--json"], cwd=work, env=_env(), capture_output=True, text=True, timeout=300)
+    r = subprocess.run([str(BIN), "check", "--json"], cwd=work, env=_env(), capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=300)
     try:
         data = json.loads(r.stdout[r.stdout.find("{"):])
     except Exception:

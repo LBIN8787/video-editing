@@ -274,10 +274,14 @@ def apply(D, sc: dict, bt: list, dur: float, w: int = 1920, h: int = 1080, keep:
     from . import align
     pal = D.skin.get("palette", {})
     acc = pal.get("accent", YEL)
+    if sc.get("theme") == "dark" and isinstance(acc, str) and acc.startswith("#") and len(acc) == 7:
+        # 밝은 종이용 진한 강조색(예: #C2410C)은 어두운 무대에서 2.7:1 → 흰색을 35% 섞어 3:1 넘게 (2026-11-23)
+        acc = "#" + "".join(f"{int(int(acc[i:i + 2], 16) * 0.65 + 255 * 0.35):02X}" for i in (1, 3, 5))
     stg = Stage(f"mo{sc['id']}", w, h, theme={"icon_bg": pal.get("card2", pal.get("card", "#1C2E47")), "ring": acc, "arrow": acc,
                                              "card": pal.get("card", "#16263C"), "card_ink": pal.get("ink", "#E8EEF6"), "label": pal.get("ink", "#E8EEF6"),
                                              "accent": acc, "muted": pal.get("muted", "#9AA4B2"),
-                                             "light_bg": sum(int((pal.get("base") or "#F3EFE6").lstrip("#")[i:i + 2], 16) for i in (0, 2, 4)) > 450})
+                                             "light_bg": sc.get("theme") != "dark" and sum(int((pal.get("base") or "#F3EFE6").lstrip("#")[i:i + 2], 16) for i in (0, 2, 4)) > 450})
+    # 설명 무대가 어두운 바탕(theme dark)이면 팩의 밝은 base 와 상관없이 어두운 바탕용 색 — 짙은 회색 이름이 묻혀 대비 1.8:1 (2026-11-23 오픈AI 심층)
     stg.no_sparkle = getattr(D, "no_zoom", False)
     stg.clean = getattr(D, "chart_clean", False)
     for k, (b, (t0, d)) in enumerate(zip(sc["beats"], bt)):

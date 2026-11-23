@@ -230,7 +230,10 @@ def run(path: Path, upto: str = "G8") -> Report:
             db = _load(res / "daily_brief.json")
             R.add("G1", "MUST", "매일 브리핑: daily_brief.json 있음 (python -m ytflow daily)", db is not None, "01_research/daily_brief.json")
             intro_txt = " ".join(b.get("say", "") for s in spec.get("scenes", [])[:2] for b in s.get("beats", []))
-            R.add("G4", "MUST", "매일 브리핑: 첫 두 장면 안에 기준 시각('○일 마감 기준' / '○시 기준') — 인트로 없이 (README §2-1)", "기준" in intro_txt, "")
+            # 아침 브리핑(…-daily)만: 심층·분석은 늦게 올려도 맞도록 날짜를 여는 말에 넣지 않고 설명란 '자료 기준'에 (2026-11-23 사용자:
+            # "브리핑에만 날자를 적는게 좋아보여" · "마지막에 ~~일까지의 자료 이런거 꼭 필요할꺼요?", preflight timing 과 같은 기준)
+            if path.name.endswith("-daily"):
+                R.add("G4", "MUST", "매일 브리핑: 첫 두 장면 안에 기준 시각('○일 마감 기준' / '○시 기준') — 인트로 없이 (README §2-1)", "기준" in intro_txt, "")
             if ch == "ch-market-daily":
                 fs = (res / "factsheet.md").read_text(encoding="utf-8") if (res / "factsheet.md").exists() else ""
                 kinds = [k for k in ("이슈", "보고서", "전망", "실적") if k in fs]
