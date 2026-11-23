@@ -53,3 +53,8 @@
 | 2026-11-22 | 20261122-curiosity-pick | v109 | 기각 | 거의 전구간이 전부 이전 영상들 화풍이랑 달라 실사풍에 눈은 작고 완전 다른 화풍과 캐릭터가됐어 |
 | 2026-11-23 | 20261123-curiosity-soldout | v116 | 기각 | 우선 품절임박부터 입니다. 여기 화풍 작화가 갑자기 달라집니다. 그리고 마지막에 맛을 물어보세요 라는게 뭔가 말이 어색해요 |
 | 2026-11-23 | 20261123-curiosity-soldout | v120 | 통과 |  |
+| 2026-11-23 | 20261122-market-deep-openai | v120 | 통과 |  |
+| 2026-11-23 | 20261122-market-deep-nvidia-circular | v120 | 통과 |  |
+| 2026-11-23 | 20261122-market-deep-nvidia-insight | v120 | 통과 |  |
+| 2026-11-23 | 20261122-market-deep-memory-chicken | v120 | 통과 |  |
+| 2026-11-23 | 20261122-market-deep-memory-insight | v120 | 통과 |  |
