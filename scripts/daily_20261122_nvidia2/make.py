@@ -26,25 +26,25 @@ OP = "의견이며 사실이 아닙니다"
 
 # ── 0. 여는 장면 ──
 # 여는 장면: 원본 발언 (2026-11-23 사용자)
-s(dict(type="bite", insight=True, label=OP + " · 엔비디아 CEO (당시, 파는 쪽)", who="젠슨 황", role="엔비디아 CEO · 야후 파이낸스 (10월)",
+s(dict(type="bite", insight=True, label=OP + " · 엔비디아 CEO (파는 쪽)", who="젠슨 황", role="엔비디아 CEO · 야후 파이낸스 (10월)",
        clip={"src": "huang_life", "lang": "en", "cuts": [
            {"find": "And so people are discovering that what people thought used to be a four -year lifecycle really is probably eight to maybe more.",
             "ko": "그래서 사람들은 4년이라고 생각했던 수명이, 실제로는 8년이거나 그 이상이라는 걸 알아 가고 있습니다."}]},
        beats=[{"say": "지난 10월, AI 빚을 둘러싼 걱정에 엔비디아의 젠슨 황은 이렇게 답했습니다."}]))
 s(dict(type="bignum", insight=True, label=OP + " · 젠슨 황(야후 파이낸스 10월) vs 짐 채노스(공매도 투자자)",
        small="GPU 가 돈을 버는 기간 — 젠슨 황 vs 짐 채노스", value="8년 vs 3년",
-       beats=[{"say": "이 말을 한 젠슨 황은 이제 엔비디아에 없습니다. 11월 11일 CEO에서 물러났습니다. 그런데 그가 남긴 이 8년이라는 숫자가, 지금 엔비디아를 둘러싼 의심의 한가운데 있습니다. 공매도 투자자 짐 채노스는 3년이라고 봅니다."}]))
+       beats=[{"say": "이 말을 한 젠슨 황은 11월 11일 CEO에서 물러났다가, 22일 이사회 결정으로 다시 돌아왔습니다. 그가 말한 이 8년이라는 숫자가 지금 엔비디아를 둘러싼 의심의 한가운데 있고, 이제는 그가 직접 지켜야 할 숫자입니다. 공매도 투자자 짐 채노스는 3년이라고 봅니다."}]))
 s(dict(type="bignum", label="엔비디아 3분기(회계 2027) CFO 코멘터리 — 보증 최대 노출 1,180억 달러, 지금까지 실제로 낸 돈 없음 (10월 25일 기준)",
        small="엔비디아가 고객 대신 내겠다고 약속한 돈 (최대) · 지금까지 실제로 낸 돈", value="1,180억 vs 0",
        beats=[{"say": "엔비디아가 고객이 못 내면 대신 내겠다고 약속한 돈은 최대 1,180억 달러이고, 지금까지 실제로 낸 돈은 없습니다. 이 약속이 안전한지가 GPU가 몇 년을 버느냐에 달려 있습니다.",
                "motion": [M("1,180억", "g", "보증 최대 1,180억 달러 · 실제 지급 0", "CFO 코멘터리 (10.25 기준)", 1560, 880, 520, 110, 30)]}]))
-s(dict(type="checklist", label="엔비디아 8-K(11.11) 젠슨 황 사임 · WSJ(11.17) SEC 민사 조사 보도 · 로이터(11.20, 익명 소식통 2명) 회계 문제 가능성 검토 보도 — SEC 논평 거부, 엔비디아 즉답 없음 · 연준 금융안정보고서(11.13)·10월 의사록(11.18) · 엔비디아 11.20 -14.01%, 7주 연속 하락 2008년 이후 최장(CNBC)",
+s(dict(type="checklist", label="엔비디아 8-K(11.11) 젠슨 황 사임 · 8-K(11.22) 복귀, 이사회 독립위 조사 계속 · WSJ(11.17) SEC 민사 조사 보도 · 로이터(11.20, 익명 소식통 2명) 회계 문제 가능성 검토 보도 — SEC 논평 거부, 엔비디아 즉답 없음 · 연준 금융안정보고서(11.13)·10월 의사록(11.18) · 엔비디아 11.20 -14.01%, 7주 연속 하락 2008년 이후 최장(CNBC)",
        title="지금 엔비디아를 둘러싼 의심 네 가지", x=120, text_w=1080, skin=NP,
-       rows=[{"label": "① 고리를 이끌던 젠슨 황이 떠났다 (11월 11일)", "state": "warn", "t": "첫째"},
+       rows=[{"label": "① 젠슨 황 사임(11월 11일) → 복귀(22일), 조사는 계속", "state": "warn", "t": "첫째"},
              {"label": "② SEC 가 장부를 본다는 보도 (익명 소식통, 확인 안 됨)", "state": "warn", "t": "둘째"},
              {"label": "③ 연준이 '순환 금융'을 위험으로 적었다", "state": "warn", "t": "셋째"},
              {"label": "④ 금리 — 연준은 더 올릴 수 있다고 말한다", "state": "warn", "t": "넷째"}],
-       beats=[{"say": "지금 시장의 의심은 넷입니다. 첫째, 이 고리를 이끌던 젠슨 황이 떠났습니다. 사임 이유는 공시에 없습니다. 둘째, SEC가 엔비디아의 장부를 들여다본다는 보도가 나왔습니다. 셋째, 연준이 AI 회사들 사이의 순환 금융을 위험으로 적었습니다. 넷째, 연준은 금리를 더 올릴 수 있다고 말합니다.", "upto": 4},
+       beats=[{"say": "지금 시장의 의심은 넷입니다. 첫째, 이 고리를 이끌던 젠슨 황이 11월 11일 물러났다가 22일 돌아왔지만, 이사회 독립위원회의 조사는 결론까지 계속됩니다. 둘째, SEC가 엔비디아의 장부를 들여다본다는 보도가 나왔습니다. 셋째, 연준이 AI 회사들 사이의 순환 금융을 위험으로 적었습니다. 넷째, 연준은 금리를 더 올릴 수 있다고 말합니다.", "upto": 4},
               {"say": "시장은 이 넷을 한꺼번에 샀습니다. 11월 20일 엔비디아는 하루에 14% 빠졌고, 7주 연속 하락은 2008년 금융위기 이후 가장 깁니다. 그래서 오늘 질문은 둘입니다. 이 의심들이 근거가 있나, 그리고 고리가 끊기면 시장 전체로 번지나.",
                "motion": [M("-14%", "nv", "엔비디아 11월 20일 하루 -14.01%", "7주 연속 하락, 2008년 이후 최장 (CNBC)", 1500, 880, 560, 110, 28)]}]))
 s(dict(type="checklist", label="1부(엔비디아 순환금융)에서 본 개념",
@@ -57,7 +57,7 @@ s(dict(type="checklist", label="1부(엔비디아 순환금융)에서 본 개념
 
 # ── 1. 젠슨 황 ──
 s(dict(type="chapter", num="1", title="젠슨 황 — 'GPU 는 8년을 번다, 그래서 담보가 된다'", icon="cpu", look="board",
-       beats=[{"say": "먼저 가장 강한 방어, 10월 21일 젠슨 황의 말입니다. 그는 이 인터뷰 몇 주 뒤 CEO에서 물러났습니다. 말한 사람은 떠났지만 이 논리는 지금도 엔비디아 방어의 중심이고, 새 경영진이 이 약속들을 그대로 이어 갈지가 질문으로 남았습니다."}]))
+       beats=[{"say": "먼저 가장 강한 방어, 10월 21일 젠슨 황의 말입니다. 그는 이 인터뷰 몇 주 뒤 CEO에서 물러났다가, 11월 22일 이사회 결정으로 돌아왔습니다. 이 논리는 지금도 엔비디아 방어의 중심이고, 돌아온 그가 이 약속들을 어떻게 지킬지가 질문으로 남았습니다."}]))
 s(dict(type="bite", insight=True, label=OP + " · 같은 인터뷰", who="젠슨 황", role="엔비디아 CEO · 야후 파이낸스 (10월)", show_lower=False,
        clip={"src": "huang_collateral", "lang": "en", "cuts": [
            {"find": "Now when that happens, you might be able to underwrite a loan against the asset itself. Today, most computers don't have value, don't have very little residual value, but people are now recognizing NVIDIA's compute has a great deal of residual value.",
@@ -78,8 +78,8 @@ s(dict(type="motionboard", label="젠슨 황 야후 파이낸스(2026.10.21) 논
 
 # ── 2. 크레스 ──
 s(dict(type="chapter", num="2", title="콜레트 크레스 — '네오클라우드를 떠받치는 게 아니다'", icon="users", look="board",
-       beats=[{"say": "두 번째, 젠슨 황의 자리를 이어받은 콜레트 크레스 임시 CEO입니다."}]))
-s(dict(type="bite", lower_top=600, insight=True, label=OP + " · 엔비디아 임시 CEO (전 CFO)", who="콜레트 크레스", role="엔비디아 임시 CEO · CNBC (11월 18일)",
+       beats=[{"say": "두 번째, 젠슨 황이 물러나 있던 동안 임시 CEO를 맡은 재무 책임자 콜레트 크레스입니다."}]))
+s(dict(type="bite", lower_top=600, insight=True, label=OP + " · 엔비디아 CFO (당시 임시 CEO)", who="콜레트 크레스", role="엔비디아 CFO · 당시 임시 CEO · CNBC (11월 18일)",
        clip={"src": "kress", "lang": "en", "cuts": [
            {"find": "Interesting statement, but no, it is not true. If we want to think about where we are with our hyperscalers, they are the ones that are right now feverishly looking for more focus in terms of the compute that we have available.",
             "ko": "흥미로운 말이지만, 아닙니다. 사실이 아닙니다. 지금 우리가 가진 연산 능력을 가장 애타게 찾는 건 바로 대형 클라우드 회사들입니다."}]},
@@ -218,7 +218,7 @@ s(dict(type="checklist", label="가설 · 시장 전체 쪽 신호 — 엔비디
        beats=[{"say": "시장 전체 쪽 신호도 둘입니다. 엔비디아가 공시에서 SEC 조사를 직접 밝히는지, 그리고 12월 연준 회의에서 금리를 더 올리는지입니다. 둘 다 GPU 수명의 숫자를 바꾸지는 않지만, 그 숫자가 틀렸을 때의 손실을 키웁니다.", "upto": 2}]))
 s(dict(type="kinetic", beats=[{"say": "순환금융이 안전한지는 엔비디아의 말이 아니라, GPU가 실제로 몇 년을 버느냐가 정합니다.", "hit": ["몇 년"]}]))
 s(dict(type="outro", title="출처는 설명란에", sub="", clip={"src": "dc", "start": 0},
-       beats=[{"say": "딱 하나만 기억한다면 이것입니다. 젠슨 황은 떠났지만 그가 남긴 질문은 그대로입니다. 방어하는 쪽은 GPU가 8년을 번다고 하고, 비판하는 쪽은 3년이라고 합니다. 연준의 경고도 금리도, 이 숫자가 틀렸을 때의 손실을 키우는 이야기입니다. 그 차이가 담보와 빚과 보증의 위험을 모두 정합니다. 임대료와 보증 지급, 칩값을 받는 속도를 보면, 어느 쪽이 맞아 가는지 스스로 읽을 수 있습니다."}]))
+       beats=[{"say": "딱 하나만 기억한다면 이것입니다. 젠슨 황은 돌아왔고, 질문도 그대로입니다. 방어하는 쪽은 GPU가 8년을 번다고 하고, 비판하는 쪽은 3년이라고 합니다. 연준의 경고도 금리도, 이 숫자가 틀렸을 때의 손실을 키우는 이야기입니다. 그 차이가 담보와 빚과 보증의 위험을 모두 정합니다. 임대료와 보증 지급, 칩값을 받는 속도를 보면, 어느 쪽이 맞아 가는지 스스로 읽을 수 있습니다."}]))
 
 _ch = 0
 for _sc in S:
@@ -246,7 +246,7 @@ footage.update({
 })
 raw = "04_assets/footage/raw/"
 ART = "04_assets/thumb_art/"
-spec = {"asof": "2026년 11월 22일",
+spec = {"asof": "2026년 11월 23일",
     "opinion_tag": False,   # 2026-11-23 사용자: "이런 왼쪽 위의 사족 빼주세요" (11-21 에도 끄라고 함)
     "title": "엔비디아 순환금융, 누가 맞나 — 방어와 비판, 근거끼리 맞대기 (2부)",
     "brand": "market", "zoom": "off",
@@ -274,7 +274,7 @@ spec = {"asof": "2026년 11월 22일",
     "package": {
         "title": "\"GPU 는 8년 번다\" vs \"3년이면 끝\" — 엔비디아 순환금융, 누가 맞나 (2부)",
         "title_options": ["\"GPU 는 8년 번다\" vs \"3년이면 끝\" — 엔비디아 순환금융, 누가 맞나 (2부)",
-                          "젠슨 황 vs 짐 채노스 — 엔비디아 1,180억 달러 보증, 근거만 따져 보면",
+                          "돌아온 젠슨 황 vs 짐 채노스 — 엔비디아 1,180억 달러 보증, 근거만 따져 보면",
                           "엔비디아 순환금융의 진짜 쟁점은 'GPU 수명'이다"],
         "title_why": ["숫자 대결", "인물 대결 + 숫자", "단정 한 마디"],
         "thumb_test": ["A", "B", "D"],
