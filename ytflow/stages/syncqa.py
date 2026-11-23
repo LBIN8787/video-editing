@@ -114,9 +114,12 @@ def run(project: Project) -> dict:
     rows = []
     for (a, b, text), p in zip(lines, starts):
         n = len(norm(text))
-        hit = next((m[q] for q in range(p, p + min(n, 4)) if q in m), None)  # 줄 앞 4글자 안에서 맞는 글자
-        if hit is None:
+        q_hit = next((q for q in range(p, p + min(n, 4)) if q in m), None)  # 줄 앞 4글자 안에서 맞는 글자
+        if q_hit is None:
             continue
+        if any(ch.isdigit() for ch in S[p:q_hit]):   # 줄 첫머리 숫자('78%')를 받아쓰기가 '칠십팔'로 적으면 글자가 안 맞아
+            continue                                   # 뒤 글자에 맞춰 늦게 잼 → 잴 수 없는 줄로 뺌 (2026-11-23 심층)
+        hit = m[q_hit]
         spoken = float(words[owner[hit]]["start"])
         spoken = onset(spoken)
         rows.append({"sub": round(a, 2), "spoken": round(spoken, 2), "off": round(a - spoken, 2), "text": text[:30]})
