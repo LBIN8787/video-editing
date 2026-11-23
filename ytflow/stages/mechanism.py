@@ -111,11 +111,14 @@ def _arc_svg(D, pts, color, width, at, dashed=False):
 
 
 def s_mechanism(D, sc: dict, bt: list, dur: float):
-    from .explain import _head
-    _head(D, sc)
+    from .explain import _setup
+    _setup(D, sc, title=False)
     m = sc.get("mechanism") or {}
-    if m.get("kind", "loop") == "loop":
+    kind = m.get("kind", "loop")
+    if kind == "loop":
         _loop(D, sc, bt, dur, m)
+    elif kind == "tank":
+        _tank(D, sc, bt, dur, m)
 
 
 def _card(D, sc, key, x, y, el, at):
@@ -286,6 +289,112 @@ def _loop(D, sc, bt, dur, m):
                 D.js.append(f'tl.to("#{c}",{{opacity:0,y:30,duration:0.3}},{t_loss + k * 0.7 + 0.2:.2f});')
         if "orders_gone" in T and rev_f:
             D.js.append(f'tl.to("#{rev_f}",{{scaleY:0.1,background:"{GREY}",duration:0.8}},{T["orders_gone"]:.2f});')
+
+
+def _tank(D, sc, bt, dur, m):
+    """통장(물통): 돈은 크게 먼저 퍼 가고(약속), 매출은 위에서 조금씩·점점 굵게 들어온다. 모자라면 밖에서 구한 돈이 채운다.
+    아하: 매출 물줄기는 굵어지는데 다음 약속이 더 크게 퍼 가서 통장이 다시 바닥난다 (오픈AI '매출이 느는데 왜 모자라나')."""
+    T = _cue_times(sc, bt)
+    first = bt[0][0] + 0.2
+    end = bt[-1][0] + bt[-1][1]
+    steps = sorted((T[k], v) for k, v in (m.get("steps") or {}).items() if k in T)
+    if steps:
+        _caption(D, steps)
+    X0, X1, TOP, BOT = 760, 1160, 260, 820      # 통장 안쪽
+    ZERO = 740                                   # 이 아래는 '모자람'
+    # 통장 그릇 · 바닥 아래 빨간 구역 · '0' 선
+    tank, water, red = D._id(), D._id(), D._id()
+    D.items.append(
+        f'<div id="{tank}" style="position:absolute;left:{X0 - 10}px;top:{TOP}px;width:{X1 - X0 + 20}px;height:{BOT - TOP + 10}px;border:8px solid #E8EEF6;'
+        f'border-top:none;border-radius:0 0 26px 26px;opacity:0;z-index:5"></div>'
+        f'<div id="{red}" style="position:absolute;left:{X0 - 2}px;top:{ZERO}px;width:{X1 - X0 + 4}px;height:{BOT - ZERO + 2}px;'
+        f'background:repeating-linear-gradient(45deg,{RED}55,{RED}55 12px,transparent 12px,transparent 24px);border-radius:0 0 20px 20px;opacity:0;z-index:3"></div>'
+        f'<div id="{water}" style="position:absolute;left:{X0 - 2}px;top:{TOP}px;width:{X1 - X0 + 4}px;height:{BOT - TOP + 2}px;background:linear-gradient(180deg,#5FE3A8,#2BAF78);'
+        f'border-radius:0 0 20px 20px;transform-origin:bottom;transform:scaleY(0);opacity:.92;z-index:4"></div>')
+    lvl = lambda y: (BOT - y) / (BOT - TOP)     # 화면 높이 → 물 비율
+    D.js.append(f'tl.to("#{tank}",{{opacity:1,duration:0.4}},{first:.2f});'
+                f'tl.to("#{water}",{{scaleY:{lvl(520):.3f},duration:0.8,ease:"power2.out"}},{first + 0.2:.2f});')
+    _arc_label(D, (X0 + X1) / 2, BOT + 40, m.get("tank_label", "통장 (현금)"), INK, first + 0.3, 34)
+    zl = D._id()
+    D.items.append(f'<div id="{zl}" style="position:absolute;left:{X0 - 70}px;top:{ZERO - 2}px;width:{X1 - X0 + 140}px;height:0;border-top:4px dashed {RED};opacity:0;z-index:6"></div>')
+    D.js.append(f'tl.to("#{zl}",{{opacity:1,duration:0.3}},{first + 0.4:.2f});')
+    _arc_label(D, X0 - 130, ZERO + 30, m.get("zero_label", "바닥"), RED, first + 0.5, 30)
+    level = [520.0]
+
+    def set_level(y, at, d=0.7):
+        level[0] = y
+        D.js.append(f'tl.to("#{water}",{{scaleY:{max(0.0, lvl(y)):.3f},duration:{d},ease:"power2.inOut"}},{at:.2f});')
+        if y >= ZERO - 4:
+            D.js.append(f'tl.to("#{red}",{{opacity:1,duration:0.3}},{at + d * 0.6:.2f});'
+                        f'tl.set("#{water}",{{background:"linear-gradient(180deg,#FF8A7E,#C9463B)"}},{at + d * 0.6:.2f});')
+        else:
+            D.js.append(f'tl.to("#{red}",{{opacity:0,duration:0.3}},{at:.2f});'
+                        f'tl.set("#{water}",{{background:"linear-gradient(180deg,#5FE3A8,#2BAF78)"}},{at:.2f});')
+
+    # 위: 매출 수도꼭지 (구독료·사용료) — 물줄기가 시간이 갈수록 굵어짐
+    t_in = T.get("in")
+    stream = None
+    if t_in:
+        _card(D, sc, "faucet", 450, 330, {"icon": m.get("in_icon", "credit-card"), "label": m.get("in_label", "매출"), "w": 300, "size": 34}, t_in)
+        stream = D._id()
+        D.svg.append(f'<path id="{stream}" d="M600 330 Q 900 300 900 {TOP + 150}" fill="none" stroke="#5FE3A8" stroke-width="6" '
+                     f'stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>')
+        D.js.append(f'tl.to("#{stream}",{{strokeDashoffset:0,duration:0.6,ease:"power2.out"}},{t_in + 0.2:.2f});')
+        _arc_label(D, 450, 450, m.get("in_note", "매달 조금씩"), GREEN, t_in + 0.4, 30)
+
+    # 오른쪽: 퍼 가는 약속 — 카드 크기가 1배·2배·4배, 통장 바닥에서 화살표로 빠져나감
+    outs = m.get("outs") or []
+    ev = []
+    for k, o in enumerate(outs):
+        t = T.get(o.get("cue", ""))
+        if t is None:
+            continue
+        y = 330 + k * 190
+        w = 250 + k * 50
+        cid, cw, ch = _card(D, sc, f"out{k}", 1560, y, {"icon": o.get("icon", "server"), "label": o["label"], "w": w, "size": 30 + k * 4}, t)
+        _arc_svg(D, _qbez((X1 + 12, BOT - 60), (1300, y + 60), (1560 - cw / 2 - 12, y), 10), RED, 8 + k * 4, t + 0.2)
+        ev.append((t + 0.5, "set", o["to"]) if o.get("to") else (t + 0.5, "drop", o.get("drop", 120)))
+        D.sfx.append(("whoosh-short", t + 0.5))
+        if stream and o.get("thicker"):
+            D.js.append(f'tl.to("#{stream}",{{attr:{{"stroke-width":{6 + 7 * k}}},duration:0.6}},{t + 1.2:.2f});')
+
+    # 매출이 들어오며 조금씩 차오름 (in 뒤로, 약속이 퍼 가는 순간은 건너뜀) — 약속이 하나 지날 때마다 물줄기가 굵어짐
+    if t_in:
+        cues_out = sorted(T[o["cue"]] for o in outs if o.get("cue") in T)
+        t, k_out = t_in + 1.0, 0
+        while t < end - 1.0:
+            busy = [c for c in cues_out if c - 0.4 < t < c + 1.6]
+            if busy:
+                t = busy[0] + 1.6
+                continue
+            k_out = sum(1 for c in cues_out if c < t)
+            ev.append((t, "rise_last" if cues_out and k_out == len(cues_out) else "rise", m.get("in_rate", 10) + m.get("in_growth", 8) * k_out))
+            t += 1.2
+
+    # 아래 왼쪽: 밖에서 구한 돈 — 동전이 쏟아져 통장을 채움
+    t_ext = T.get("ext")
+    if t_ext:
+        _card(D, sc, "ext", 450, 640, {"icon": m.get("ext_icon", "landmark"), "label": m.get("ext_label", "밖에서 구한 돈"), "w": 300, "size": 32}, t_ext)
+        for k in range(8):
+            c = _coin(D, 640, 610, 50)
+            D.js.append(f'tl.set("#{c}",{{opacity:1}},{t_ext + 0.4 + k * 0.12:.2f});'
+                        f'tl.fromTo("#{c}",{{x:0,y:0}},{{keyframes:[{{x:{(X0 + X1) / 2 - 640 - 40 + k * 10:.0f},y:{-260 - (k % 3) * 20},duration:0.35,ease:"power1.out"}},'
+                        f'{{y:{TOP + 60 - 610:.0f},duration:0.3,ease:"power2.in"}}],immediateRender:false}},{t_ext + 0.4 + k * 0.12:.2f});'
+                        f'tl.to("#{c}",{{opacity:0,duration:0.15}},{t_ext + 1.1 + k * 0.12:.2f});')
+        ev.append((t_ext + 1.2, "set", m.get("ext_level", 470)))
+    for t, kind, v in sorted(ev):   # 시간 순서로 물 높이를 따라감
+        if kind == "drop":
+            set_level(min(BOT - 6, level[0] + v), t, 0.8)
+        elif kind == "rise":
+            set_level(max(TOP + 40, level[0] - v), t, 1.0)
+        elif kind == "rise_last":   # 마지막 약속 뒤: 매출이 들어와도 바닥 위로는 못 올라옴 (결론: 그래도 모자라다)
+            set_level(max(ZERO + 14, level[0] - v), t, 1.0)
+        else:
+            set_level(v, t, 0.9)
+
+    # 끝: 한 줄 결론
+    if "verdict" in T and m.get("verdict_text"):
+        _arc_label(D, (X0 + X1) / 2, TOP - 60 + 0, m.get("verdict_text", ""), RED, T["verdict"], 36)
 
 
 def register():
