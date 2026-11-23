@@ -69,6 +69,9 @@ def add(st, m: dict, do: str, x: float, y: float, t: float, lab: str) -> None:
     acc = m.get("color") or st.th.get("accent", st.th["arrow"])
     ink = "#20242C" if light else "#E8EEF6"
     did = f"{st.p}_{m['id']}"
+    if do == "scan" and getattr(st, "no_sparkle", False):   # 시장: 훑는 움직임은 끔 (v32 "스캔하는 듯한 모션그래픽 빼 주세요") → 돋보기 두근
+        m = dict(m, icon="search", anim="beat", size=m.get("size", 110))
+        do = "glyph"
     if do == "glyph":
         sz = m.get("size", 150)
         col = acc if m.get("accent", True) else ink

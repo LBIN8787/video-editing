@@ -1330,6 +1330,8 @@ def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, wo
     sc["_project_dir"] = str(project.path)   # 새 연출(directions.py)이 박자 음성·단어 시각을 찾을 때
     sc.setdefault("_spec_stage", {k: spec[k] for k in ("camera", "perspective", "idle") if k in spec})   # 무대(stage) 움직임 기본값 (v34)
     sc["_prices"] = project.dir("research") / "prices"
+    if spec.get("brand") == "market" and sc.get("type") == "checklist":   # G 방식 (manual/09 §6, 2026-11-24): 지금 말하는 줄만 또렷하게
+        sc.setdefault("focus", True)
     if sc["type"] == "usmap":
         sc["_states"] = us_states()
     D.bg_name = bg_name

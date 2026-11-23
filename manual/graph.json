@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-23T21:14:55",
- "source_hash": "71615dfe41be",
+ "generated": "2026-11-24T01:53:15",
+ "source_hash": "4d1958af4958",
  "audit": {
   "date": "2026-11-21T13:56",
   "counts": {
@@ -1007,36 +1007,36 @@
   ]
  },
  "stats": {
-  "manual_version": 121,
-  "versions": 121,
+  "manual_version": 122,
+  "versions": 122,
   "reviews": 58,
   "rejects": 31,
   "passes": 27,
   "pending": 0,
   "rules": 57,
   "checks": 90,
-  "sections": 217,
+  "sections": 218,
   "must": 30,
   "auto": 41,
-  "intents": 335,
+  "intents": 337,
   "misaligned": 0,
   "intents_reviewed": 4,
   "conflicts": 4,
-  "code": 84,
+  "code": 85,
   "terms": 140,
-  "bans": 225,
-  "feedback": 252,
+  "bans": 226,
+  "feedback": 253,
   "topics": 4,
-  "episodes": 51,
+  "episodes": 53,
   "main_situations": 17,
   "tiers": {
-   "principle": 56,
+   "principle": 57,
    "standard": 188,
    "style": 28,
    "trial": 10
   },
   "overfit": 17,
-  "principle_bans": 50
+  "principle_bans": 51
  },
  "pending": [],
  "status_labels": {
@@ -1163,7 +1163,7 @@
      "text": "- 2026-11-11 · v11 기각 — “화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌”"
     },
     {
-     "section": "sec:feedback§h285",
+     "section": "sec:feedback§h286",
      "theme": "sound",
      "pol": "-",
      "text": "- 2026-11-11 · v11 기각 — “화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌”"
@@ -3099,6 +3099,23 @@
    "tier_label": "작업 기준"
   },
   {
+   "section": "sec:09§3-0-2",
+   "text": "레이더는 목록·정보만 읽고 영상을 받지 않으며, 봇 확인이 뜨면 우회하지 않고 건너뛴다.",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:c31c2af2",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
    "section": "sec:09§3-1",
    "text": "막힌 곳(403·봇 확인)은 우회하지 않음 — 다른 1차 출처나 보도 2곳 일치로.",
    "themes": [],
@@ -4103,7 +4120,7 @@
    "tier_label": "영구 원칙"
   },
   {
-   "section": "sec:09§h485",
+   "section": "sec:09§h502",
    "text": "ElevenLabs 는 직접 API 로만 (MCP 생성 금지, 2026-11-22 사용자): 같은 문장(33자, Teo·eleven_v4)을 실측: 직접 API 15 크레딧(응답 헤더 Character-Cost) vs MCP creative_generate_speech 1테이크 33 크레딧·기본 2테이크 66 크레딧(estimate_only) — MCP 가 1테이크도 2.2배, 기본값이면 4.4배 (AGENTS 목소리 규칙, docs/08-voice.md).",
    "themes": [
     "sound"
@@ -4122,7 +4139,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:09§h485",
+   "section": "sec:09§h502",
    "text": "ElevenLabs 를 쓸 수 없는 날은 edge 초안으로 만들되 올리지 않는다 (v43, §2-1 — 공개본은 Teo). 크레딧이 모자라면 그날 편을 미루거나 voice-import 로 Teo 테이크를 만든다.",
    "themes": [],
    "absolute": false,
@@ -5037,7 +5054,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h285",
+   "section": "sec:feedback§h286",
    "text": "2026-11-14 · v20 기각 — “중간중간 너무 난잡함. 목표·시청자 욕망을 먼저 정의하지 않고 만듦. 대본을 소제목처럼 글로 쓰거나 사진·그림을 붙여 넣기만 함 — 대본에 따른 애니메이션이 아님. 각 연출의 의도가 불분명”",
    "themes": [
     "variety",
@@ -5058,7 +5075,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h285",
+   "section": "sec:feedback§h286",
    "text": "2026-11-21 · 영상 검토 — “대본의 피드백입니다 — (의지력 편 v2 검토) 방향 통과, 2025 효과 배수 비교 금지·대조 조건과 주 지표 설명·생활 조언을 근거 범위 안으로·4~7장 연구 나열 대신 증거 추적·8장 전환 문장”",
    "themes": [
     "motion",
@@ -5078,7 +5095,7 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "section": "sec:feedback§h384",
+   "section": "sec:feedback§h385",
    "text": "2026-11-19 · 방향·기준 요청 — “대본 단계에 \"호기심 대본은 설명·지식 문장 30% 이하\"라는 기준 이런 기준은 또 빼주세요 너무 과적합입니다. / \"설명은 이야기 속에 엮는다\"는 원리 이런식으로 원리주의적으로 가지 방법 자체를 고정하지 말아주세요”",
    "themes": [
     "script",
@@ -5098,7 +5115,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h439",
+   "section": "sec:feedback§h440",
    "text": "2026-11-09 · v3 기각 — “강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)”",
    "themes": [
     "emphasis",
@@ -5777,7 +5794,7 @@
    "key": "09",
    "file": "manual/09-market-daily.md",
    "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13 · v36 인사이트·영상 소스 · v42 기술 분석·CEO 소식 2026-11-17)",
-   "lines": 505,
+   "lines": 522,
    "versions": [
     19,
     24,
@@ -5934,7 +5951,7 @@
    "key": "feedback",
    "file": "manual/feedback-by-repo.md",
    "label": "내 피드백 — 레포별 (자동 생성: `python -m ytflow manual-graph`)",
-   "lines": 450,
+   "lines": 451,
    "versions": [
     83,
     84,
@@ -7690,7 +7707,7 @@
    "label": "하루 시간표 (평일, 한국 시간)",
    "title": "1. 하루 시간표 (평일, 한국 시간)",
    "line": 31,
-   "end": 51,
+   "end": 52,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -7703,8 +7720,8 @@
    "level": 2,
    "label": "아침은 가벼운 브리핑, 심층은 따로 — 원본 발언이 있을 때",
    "title": "2. 아침은 가벼운 브리핑, 심층은 따로 — 원본 발언이 있을 때 (v76, 2026-11-20)",
-   "line": 52,
-   "end": 65,
+   "line": 53,
+   "end": 66,
    "tag_version": 76,
    "versions": [
     26,
@@ -7722,8 +7739,8 @@
    "level": 3,
    "label": "브리핑과 심층은 다른 영상이다 (작업 기준, 2026-11-21 사용자: \"인사이트에 대해서 여러가지를 인사이트와 함께 근거를 뜯어보고 해석해야하는데 지금 영상은 브리핑과 크게 다를바 없어보여요 심층분석이라기엔 브리핑과 별 차이점이없다\")",
    "title": "2-0. 브리핑과 심층은 다른 영상이다 (작업 기준, 2026-11-21 사용자: \"인사이트에 대해서 여러가지를 인사이트와 함께 근거를 뜯어보고 해석해야하는데 지금 영상은 브리핑과 크게 다를바 없어보여요 심층분석이라기엔 브리핑과 별 차이점이없다\")",
-   "line": 66,
-   "end": 101,
+   "line": 67,
+   "end": 102,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7741,8 +7758,8 @@
    "level": 3,
    "label": "하루 여러 편 — 상한 없음",
    "title": "2-1. 하루 여러 편 — 상한 없음 (v39, 2026-11-17 사용자)",
-   "line": 102,
-   "end": 118,
+   "line": 103,
+   "end": 119,
    "tag_version": 39,
    "versions": [
     39
@@ -7760,8 +7777,8 @@
    "level": 3,
    "label": "기술 분석·기술의 미래 전망",
    "title": "2-2. 기술 분석·기술의 미래 전망 (v42, 2026-11-17 사용자)",
-   "line": 119,
-   "end": 160,
+   "line": 120,
+   "end": 161,
    "tag_version": 42,
    "versions": [
     42
@@ -7776,8 +7793,8 @@
    "level": 2,
    "label": "조사 — 원인은 1차 출처로",
    "title": "3. 조사 — 원인은 1차 출처로",
-   "line": 161,
-   "end": 161,
+   "line": 162,
+   "end": 162,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -7790,8 +7807,8 @@
    "level": 3,
    "label": "SAVE(오선) 소식은 기본으로 확인 (2026-11-14 사용자 요청)",
    "title": "3-0. SAVE(오선) 소식은 기본으로 확인 (2026-11-14 사용자 요청)",
-   "line": 162,
-   "end": 171,
+   "line": 163,
+   "end": 172,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -7804,13 +7821,27 @@
    "level": 3,
    "label": "뉴스레터 화제도 같은 '단서' 자리 (2026-11-16 사용자 승인, docs/36)",
    "title": "3-0-1. 뉴스레터 화제도 같은 '단서' 자리 (2026-11-16 사용자 승인, docs/36)",
-   "line": 172,
-   "end": 177,
+   "line": 173,
+   "end": 178,
    "tag_version": null,
    "versions": [
     35
    ],
    "last_version": 35
+  },
+  {
+   "id": "sec:09§3-0-2",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "3-0-2",
+   "level": 3,
+   "label": "원본 레이더 — 사람의 말·큰 날을 매일 추적 (작업 기준, 2026-11-23 사용자: \"우리도 사람의 말이나 사건형 원본형처럼 이를 추적할 수 있었으면 해요\", docs/63)",
+   "title": "3-0-2. 원본 레이더 — 사람의 말·큰 날을 매일 추적 (작업 기준, 2026-11-23 사용자: \"우리도 사람의 말이나 사건형 원본형처럼 이를 추적할 수 있었으면 해요\", docs/63)",
+   "line": 179,
+   "end": 186,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
   },
   {
    "id": "sec:09§3-1",
@@ -7820,8 +7851,8 @@
    "level": 3,
    "label": "원인 종류별 어디서 확인하나",
    "title": "3-1. 원인 종류별 어디서 확인하나",
-   "line": 178,
-   "end": 189,
+   "line": 187,
+   "end": 198,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -7834,8 +7865,8 @@
    "level": 3,
    "label": "팩트시트 쓰는 법 (`01_research/factsheet.md`)",
    "title": "3-2. 팩트시트 쓰는 법 (`01_research/factsheet.md`)",
-   "line": 190,
-   "end": 195,
+   "line": 199,
+   "end": 204,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -7848,8 +7879,8 @@
    "level": 3,
    "label": "데이터 함정 (실제로 겪은 것)",
    "title": "3-3. 데이터 함정 (실제로 겪은 것)",
-   "line": 196,
-   "end": 204,
+   "line": 205,
+   "end": 213,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -7862,8 +7893,8 @@
    "level": 3,
    "label": "사람·매체의 인사이트 — 사실과 나눠서, 넉넉하게",
    "title": "3-4. 사람·매체의 인사이트 — 사실과 나눠서, 넉넉하게 (v36, 2026-11-17 사용자 요청)",
-   "line": 205,
-   "end": 242,
+   "line": 214,
+   "end": 251,
    "tag_version": 36,
    "versions": [
     36,
@@ -7887,8 +7918,8 @@
    "level": 3,
    "label": "매체·인물의 인터뷰·방송을 영상 소스로",
    "title": "3-5. 매체·인물의 인터뷰·방송을 영상 소스로 (v36, 2026-11-17 사용자 요청)",
-   "line": 243,
-   "end": 279,
+   "line": 252,
+   "end": 288,
    "tag_version": 36,
    "versions": [
     36
@@ -7908,8 +7939,8 @@
    "level": 3,
    "label": "시간대 착각 방지 (영구 원칙, 2026-11-22 사용자: \"특히나 시장같은 경우는 시간대를 착각 할 수도 있는데 이런 경우가 없도록 하세요\")",
    "title": "3-6. 시간대 착각 방지 (영구 원칙, 2026-11-22 사용자: \"특히나 시장같은 경우는 시간대를 착각 할 수도 있는데 이런 경우가 없도록 하세요\")",
-   "line": 280,
-   "end": 289,
+   "line": 289,
+   "end": 298,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -7922,8 +7953,8 @@
    "level": 2,
    "label": "대본 — 브리핑 (시간 기준 없음 — 아래 구성요소를 모두 채움, README §2-4)",
    "title": "4. 대본 — 브리핑 (시간 기준 없음 — 아래 구성요소를 모두 채움, README §2-4)",
-   "line": 290,
-   "end": 307,
+   "line": 299,
+   "end": 316,
    "tag_version": null,
    "versions": [
     34
@@ -7953,8 +7984,8 @@
    "level": 2,
    "label": "대본 — 심층 (시간 기준 없음 — 구성요소를 모두 채우고 길이는 자료·인사이트의 양이 정함)",
    "title": "5. 대본 — 심층 (시간 기준 없음 — 구성요소를 모두 채우고 길이는 자료·인사이트의 양이 정함)",
-   "line": 308,
-   "end": 323,
+   "line": 317,
+   "end": 332,
    "tag_version": null,
    "versions": [
     26,
@@ -7976,8 +8007,8 @@
    "level": 3,
    "label": "원리에서 결론이 따라 나오게 — 외우게 하지 않는다 (작업 기준, 2026-11-22 사용자)",
    "title": "5-0. 원리에서 결론이 따라 나오게 — 외우게 하지 않는다 (작업 기준, 2026-11-22 사용자)",
-   "line": 324,
-   "end": 332,
+   "line": 333,
+   "end": 341,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7993,8 +8024,8 @@
    "level": 3,
    "label": "만약에 검수 — 빠진 변수·다른 경우·숨은 가정 (작업 기준, 2026-11-22 사용자: \"제가 매번 만략에 만약에 등 경우의수나 다른 변수요인 등을 찾듯이 시장 대본을 구성 할 때는 이점을 항상 고려하고 검수해주세요. 특히나 심층분석은 이게 중요합니다. 사소한 디테일이나 빼먹은 요인 if가정 말이죠\")",
    "title": "5-0-1. 만약에 검수 — 빠진 변수·다른 경우·숨은 가정 (작업 기준, 2026-11-22 사용자: \"제가 매번 만략에 만약에 등 경우의수나 다른 변수요인 등을 찾듯이 시장 대본을 구성 할 때는 이점을 항상 고려하고 검수해주세요. 특히나 심층분석은 이게 중요합니다. 사소한 디테일이나 빼먹은 요인 if가정 말이죠\")",
-   "line": 333,
-   "end": 348,
+   "line": 342,
+   "end": 357,
    "tag_version": null,
    "versions": [
     96
@@ -8009,8 +8040,8 @@
    "level": 3,
    "label": "큰 주제는 1부(개념)·2부(인사이트)로 (작업 기준, 2026-11-22 사용자: \"2부로 만들어도 되니까 이 메모리호황을 보는 인사이트와 그 인터뷰내용과 명확한 논리근거 그 반대근거 등등 여러 인사이트로 확장해주세요\" · \"즉 지금은 약간 개념설명이고 이 개념을 바탕으로 진짜 인사이트와 각각의 근거까지 이어가자 입니다\" · \"이런 심층분석은 이 주제에 대한 다른 사람들의 인사이트 여러 인사이트로 볼 수 있어야 합니다. 그리고 가능한 이 발언이 담긴 영상소스를 넣어달라 했구요\")",
    "title": "5-0-2. 큰 주제는 1부(개념)·2부(인사이트)로 (작업 기준, 2026-11-22 사용자: \"2부로 만들어도 되니까 이 메모리호황을 보는 인사이트와 그 인터뷰내용과 명확한 논리근거 그 반대근거 등등 여러 인사이트로 확장해주세요\" · \"즉 지금은 약간 개념설명이고 이 개념을 바탕으로 진짜 인사이트와 각각의 근거까지 이어가자 입니다\" · \"이런 심층분석은 이 주제에 대한 다른 사람들의 인사이트 여러 인사이트로 볼 수 있어야 합니다. 그리고 가능한 이 발언이 담긴 영상소스를 넣어달라 했구요\")",
-   "line": 349,
-   "end": 357,
+   "line": 358,
+   "end": 366,
    "tag_version": null,
    "versions": [
     114
@@ -8025,8 +8056,8 @@
    "level": 3,
    "label": "나열하지 말고 풀어서 — 설명은 움직이는 장면으로",
    "title": "5-1. 나열하지 말고 풀어서 — 설명은 움직이는 장면으로 (v63, 2026-11-20)",
-   "line": 358,
-   "end": 385,
+   "line": 367,
+   "end": 395,
    "tag_version": 63,
    "versions": [
     63
@@ -8045,7 +8076,8 @@
     "term:bignum",
     "term:style-explain-stage",
     "term:tech-spread",
-    "term:tech-share"
+    "term:tech-share",
+    "term:beat-motion"
    ]
   },
   {
@@ -8056,8 +8088,8 @@
    "level": 2,
    "label": "화면 문법 (시장 카테고리 개성, `05 §0-7`)",
    "title": "6. 화면 문법 (시장 카테고리 개성, `05 §0-7`)",
-   "line": 386,
-   "end": 401,
+   "line": 396,
+   "end": 418,
    "tag_version": null,
    "versions": [
     27,
@@ -8066,6 +8098,8 @@
    ],
    "last_version": 81,
    "terms": [
+    "term:versus",
+    "term:timeline",
     "term:board",
     "term:fx-tilt",
     "term:fx-dolly",
@@ -8090,8 +8124,8 @@
    "level": 2,
    "label": "제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
    "title": "7. 제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
-   "line": 402,
-   "end": 411,
+   "line": 419,
+   "end": 428,
    "tag_version": null,
    "versions": [
     27
@@ -8111,8 +8145,8 @@
    "level": 3,
    "label": "썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
    "title": "7-1. 썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
-   "line": 412,
-   "end": 430,
+   "line": 429,
+   "end": 447,
    "tag_version": null,
    "versions": [
     51
@@ -8130,8 +8164,8 @@
    "level": 2,
    "label": "렌더 전 점검",
    "title": "8. 렌더 전 점검",
-   "line": 431,
-   "end": 433,
+   "line": 448,
+   "end": 450,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8144,8 +8178,8 @@
    "level": 2,
    "label": "렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
    "title": "9. 렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
-   "line": 434,
-   "end": 441,
+   "line": 451,
+   "end": 458,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8158,8 +8192,8 @@
    "level": 3,
    "label": "업로드 전 종합 검수 — 통과해야 올린다 (작업 기준, 2026-11-21 사용자: \"업로드 하기 전 항상 글씨겹침 그래픽끼리 겹침 자막밀림 자막과 나레이션 싱크 화면과 자막이 일치하는지 등 종합적으로 검수하세요 이는 메뉴얼에 반영하세요\")",
    "title": "9-1. 업로드 전 종합 검수 — 통과해야 올린다 (작업 기준, 2026-11-21 사용자: \"업로드 하기 전 항상 글씨겹침 그래픽끼리 겹침 자막밀림 자막과 나레이션 싱크 화면과 자막이 일치하는지 등 종합적으로 검수하세요 이는 메뉴얼에 반영하세요\")",
-   "line": 442,
-   "end": 449,
+   "line": 459,
+   "end": 466,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8172,8 +8206,8 @@
    "level": 2,
    "label": "업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
    "title": "10. 업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
-   "line": 450,
-   "end": 462,
+   "line": 467,
+   "end": 479,
    "tag_version": null,
    "versions": [
     34
@@ -8188,8 +8222,8 @@
    "level": 2,
    "label": "기록·되돌아보기",
    "title": "11. 기록·되돌아보기",
-   "line": 463,
-   "end": 466,
+   "line": 480,
+   "end": 483,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8202,8 +8236,8 @@
    "level": 2,
    "label": "예외 대응",
    "title": "12. 예외 대응",
-   "line": 467,
-   "end": 476,
+   "line": 484,
+   "end": 493,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8216,8 +8250,8 @@
    "level": 2,
    "label": "법·정책",
    "title": "13. 법·정책",
-   "line": 477,
-   "end": 484,
+   "line": 494,
+   "end": 501,
    "tag_version": null,
    "versions": [
     34
@@ -8225,43 +8259,43 @@
    "last_version": 34
   },
   {
-   "id": "sec:09§h485",
+   "id": "sec:09§h502",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h485",
+   "num": "h502",
    "level": 2,
    "label": "목소리 (2026-11-13 결정)",
    "title": "목소리 (2026-11-13 결정)",
-   "line": 485,
-   "end": 493,
+   "line": 502,
+   "end": 510,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h494",
+   "id": "sec:09§h511",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h494",
+   "num": "h511",
    "level": 2,
    "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
    "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
-   "line": 494,
-   "end": 499,
+   "line": 511,
+   "end": 516,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h500",
+   "id": "sec:09§h517",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h500",
+   "num": "h517",
    "level": 2,
    "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
    "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
-   "line": 500,
-   "end": 505,
+   "line": 517,
+   "end": 522,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9535,35 +9569,35 @@
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
    "line": 230,
-   "end": 282,
+   "end": 283,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h283",
+   "id": "sec:feedback§h284",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h283",
+   "num": "h284",
    "level": 2,
    "label": "호기심 — `topics/curiosity`",
    "title": "호기심 — `topics/curiosity`",
-   "line": 283,
-   "end": 284,
+   "line": 284,
+   "end": 285,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h285",
+   "id": "sec:feedback§h286",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h285",
+   "num": "h286",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 285,
-   "end": 383,
+   "line": 286,
+   "end": 384,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9574,15 +9608,15 @@
    ]
   },
   {
-   "id": "sec:feedback§h384",
+   "id": "sec:feedback§h385",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h384",
+   "num": "h385",
    "level": 3,
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
-   "line": 384,
-   "end": 406,
+   "line": 385,
+   "end": 407,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9591,29 +9625,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h407",
+   "id": "sec:feedback§h408",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h407",
+   "num": "h408",
    "level": 2,
    "label": "시사 — `topics/issues`",
    "title": "시사 — `topics/issues`",
-   "line": 407,
-   "end": 408,
+   "line": 408,
+   "end": 409,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h409",
+   "id": "sec:feedback§h410",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h409",
+   "num": "h410",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 409,
-   "end": 436,
+   "line": 410,
+   "end": 437,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9623,29 +9657,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h437",
+   "id": "sec:feedback§h438",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h437",
+   "num": "h438",
    "level": 2,
    "label": "AI — `topics/ai`",
    "title": "AI — `topics/ai`",
-   "line": 437,
-   "end": 438,
+   "line": 438,
+   "end": 439,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h439",
+   "id": "sec:feedback§h440",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h439",
+   "num": "h440",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 439,
-   "end": 450,
+   "line": 440,
+   "end": 451,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -11798,13 +11832,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:233",
+   "id": "check:236",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "매일 브리핑: 첫 두 장면 안에 기준 시각('○일 마감 기준' / '○시 기준') — 인트로 없이 (README §2-1)",
    "file": "ytflow/stages/checklist.py",
-   "line": 233,
+   "line": 236,
    "tier_key": "check:8ee160bd",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -11817,13 +11851,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:237",
+   "id": "check:240",
    "kind": "check",
    "gate": "gate:G3",
    "level": "MUST",
    "label": "시간대: 팩트시트에 현지(ET)·한국(KST) 시각을 함께 적음 — 날짜·장 구분 착각 방지 (09 §3-6, 2026-11-22 사용자)",
    "file": "ytflow/stages/checklist.py",
-   "line": 237,
+   "line": 240,
    "tier_key": "check:f6e35c00",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -11836,13 +11870,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:239",
+   "id": "check:242",
    "kind": "check",
    "gate": "gate:G3",
    "level": "MUST",
    "label": "매일 시장: 이야기마다 원인 종류(이슈·보고서·전망·실적)와 1차 출처를 팩트시트에",
    "file": "ytflow/stages/checklist.py",
-   "line": 239,
+   "line": 242,
    "tier_key": "check:406a96cc",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -11855,13 +11889,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:248",
+   "id": "check:251",
    "kind": "check",
    "gate": "gate:G1",
    "level": "MUST/SHOULD",
    "label": "v26: topic_brief 에 known(이미 알려진 것)·new_angle(자료를 엮어야 보이는 것) — 제목·훅은 new_angle 에서 (03 §0-2)",
    "file": "ytflow/stages/checklist.py",
-   "line": 248,
+   "line": 251,
    "tier_key": "check:5e0e8fc3",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -11874,13 +11908,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:254",
+   "id": "check:257",
    "kind": "check",
    "gate": "gate:G3",
    "level": "MUST/SHOULD",
    "label": "v26: 팩트시트 '## 자료 지도' — 서로 다른 종류(보고서·발언·행동)를 맞대고, 자료마다 의미 칸 (03 §0-2)",
    "file": "ytflow/stages/checklist.py",
-   "line": 254,
+   "line": 257,
    "tier_key": "check:504b7c0f",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -11893,52 +11927,14 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:260",
+   "id": "check:263",
    "kind": "check",
    "gate": "gate:G3",
    "level": "MUST",
    "label": "주간: 팩트시트 '## 다음 주 일정' — 한국 시간·볼 것·출처가 있는 지표·실적 일정 (manual/09 §2)",
    "file": "ytflow/stages/checklist.py",
-   "line": 260,
+   "line": 263,
    "tier_key": "check:606b5c7a",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "id": "check:268",
-   "kind": "check",
-   "gate": "gate:G3",
-   "level": "MUST/SHOULD",
-   "label": "v33: 팩트시트 '## 직접 계산' 1개+ (식·출처 숫자) — 연결 비율·민감도 (03 §0-4)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 268,
-   "tier_key": "check:dc4cff22",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "id": "check:270",
-   "kind": "check",
-   "gate": "gate:G3",
-   "level": "MUST/SHOULD",
-   "label": "v33: 팩트시트 '## 틀리는 경우' — 이 판단이 틀리는 조건 (03 §0-4)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 270,
-   "tier_key": "check:c1b69389",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -11954,9 +11950,47 @@
    "kind": "check",
    "gate": "gate:G3",
    "level": "MUST/SHOULD",
-   "label": "v33: 팩트시트 '## 신호' — 숫자 기준선·날짜가 있는 확인 신호 (03 §0-4)",
+   "label": "v33: 팩트시트 '## 직접 계산' 1개+ (식·출처 숫자) — 연결 비율·민감도 (03 §0-4)",
    "file": "ytflow/stages/checklist.py",
    "line": 271,
+   "tier_key": "check:dc4cff22",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "check:273",
+   "kind": "check",
+   "gate": "gate:G3",
+   "level": "MUST/SHOULD",
+   "label": "v33: 팩트시트 '## 틀리는 경우' — 이 판단이 틀리는 조건 (03 §0-4)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 273,
+   "tier_key": "check:c1b69389",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "check:274",
+   "kind": "check",
+   "gate": "gate:G3",
+   "level": "MUST/SHOULD",
+   "label": "v33: 팩트시트 '## 신호' — 숫자 기준선·날짜가 있는 확인 신호 (03 §0-4)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 274,
    "tier_key": "check:11d8ec6d",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -11969,33 +12003,14 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:275",
+   "id": "check:278",
    "kind": "check",
    "gate": "gate:G1",
    "level": "MUST/SHOULD",
    "label": "v28: topic_brief hub_event — 시장을 흔든 사건이 있으면 중심축, 없으면 '없음: 이유' (03 §0-3)",
    "file": "ytflow/stages/checklist.py",
-   "line": 275,
+   "line": 278,
    "tier_key": "check:0ca5e79a",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": true,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "id": "check:277",
-   "kind": "check",
-   "gate": "gate:G3",
-   "level": "MUST/SHOULD",
-   "label": "v28: 팩트시트 '## 파급 경로'·'## 주의할 점' (03 §0-3)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 277,
-   "tier_key": "check:aa2e8f11",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -12009,11 +12024,30 @@
   {
    "id": "check:280",
    "kind": "check",
+   "gate": "gate:G3",
+   "level": "MUST/SHOULD",
+   "label": "v28: 팩트시트 '## 파급 경로'·'## 주의할 점' (03 §0-3)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 280,
+   "tier_key": "check:aa2e8f11",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "check:283",
+   "kind": "check",
    "gate": "gate:G4",
    "level": "MUST/SHOULD",
    "label": "v28: 여는 부분에 중심 사건 (03 §0-3)",
    "file": "ytflow/stages/checklist.py",
-   "line": 280,
+   "line": 283,
    "tier_key": "check:a868bf0d",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12026,13 +12060,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:282",
+   "id": "check:285",
    "kind": "check",
    "gate": "gate:G3",
    "level": "MUST/SHOULD",
    "label": "v26: 팩트시트 '## 매체 프레임' — 매체끼리 어떻게 다르게 읽었나 (제목·강조점·빠진 것, 03 §0-2)",
    "file": "ytflow/stages/checklist.py",
-   "line": 282,
+   "line": 285,
    "tier_key": "check:c65f0f64",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -12045,13 +12079,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:285",
+   "id": "check:288",
    "kind": "check",
    "gate": "gate:G3",
    "level": "MUST/SHOULD",
    "label": "v28: 매체 프레임에 '입장' 칸 (낙관·우려·중립, 03 §0-3)",
    "file": "ytflow/stages/checklist.py",
-   "line": 285,
+   "line": 288,
    "tier_key": "check:08b63a1a",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12064,13 +12098,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:288",
+   "id": "check:291",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST/SHOULD",
    "label": "v26: 대본에 매체가 어떻게 다뤘나 + 말과 행동 맞대기 (03 §0-2)",
    "file": "ytflow/stages/checklist.py",
-   "line": 288,
+   "line": 291,
    "terms": [
     "term:tech-split-screen"
    ],
@@ -12086,33 +12120,14 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:296",
+   "id": "check:299",
    "kind": "check",
    "gate": "gate:G3",
    "level": "MUST",
    "label": "v36: 팩트시트 '## 인사이트' — 이름·직함 있는 사람·매체의 엇갈리는 해석(입장이 갈림), 원문·근거·출처 (09 §3-4)",
    "file": "ytflow/stages/checklist.py",
-   "line": 296,
+   "line": 299,
    "tier_key": "check:67f13bb9",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "id": "check:300",
-   "kind": "check",
-   "gate": "gate:G3",
-   "level": "MUST",
-   "label": "v36: 팩트시트 '## 영상 소스' — 인터뷰·방송 원본 후보 1줄+ (못 찾으면 '없음: 이유') (09 §3-5)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 300,
-   "tier_key": "check:29010d7c",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -12127,11 +12142,11 @@
    "id": "check:303",
    "kind": "check",
    "gate": "gate:G3",
-   "level": "SHOULD",
-   "label": "v42: 팩트시트 '## CEO 소식' — 오늘 이야기와 이어지는 경영진의 말·행동 1줄+, 원문·공시 출처 (09 §3-4-2)",
+   "level": "MUST",
+   "label": "v36: 팩트시트 '## 영상 소스' — 인터뷰·방송 원본 후보 1줄+ (못 찾으면 '없음: 이유') (09 §3-5)",
    "file": "ytflow/stages/checklist.py",
    "line": 303,
-   "tier_key": "check:05a3cad1",
+   "tier_key": "check:29010d7c",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -12145,11 +12160,30 @@
   {
    "id": "check:306",
    "kind": "check",
+   "gate": "gate:G3",
+   "level": "SHOULD",
+   "label": "v42: 팩트시트 '## CEO 소식' — 오늘 이야기와 이어지는 경영진의 말·행동 1줄+, 원문·공시 출처 (09 §3-4-2)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 306,
+   "tier_key": "check:05a3cad1",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "check:309",
+   "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "v36: 대본에 인사이트 장면 (\\",
    "file": "ytflow/stages/checklist.py",
-   "line": 306,
+   "line": 309,
    "tier_key": "check:175b5b50",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12162,13 +12196,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:308",
+   "id": "check:311",
    "kind": "check",
    "gate": "gate:G4",
    "level": "SHOULD",
    "label": "v36: 매체·인물의 원본 발언 장면(bite) 1개+ — 원본이 없으면 인용 카드로 그려짐 (09 §3-5)",
    "file": "ytflow/stages/checklist.py",
-   "line": 308,
+   "line": 311,
    "terms": [
     "term:bite"
    ],
@@ -12184,13 +12218,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:324",
+   "id": "check:327",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "v27: 말로 숫자를 늘어놓는 순간 화면이 따라 바뀜 — 말은 많은데 화면이 멈춘 박자 없음 (manual/09 §6)",
    "file": "ytflow/stages/checklist.py",
-   "line": 324,
+   "line": 327,
    "tier_key": "check:d0100351",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12203,33 +12237,14 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:329",
+   "id": "check:332",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "제목·썸네일에 채널 이름(이어 읽는 시장) 없음 — 날짜만 (manual/09 §7)",
    "file": "ytflow/stages/checklist.py",
-   "line": 329,
-   "tier_key": "check:1a6212d9",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "id": "check:332",
-   "kind": "check",
-   "gate": "gate:G6",
-   "level": "SHOULD",
-   "label": "심층·분석 제목·썸네일에 날짜·'심층' 없음 — 브리핑에만 (manual/09 §7)",
-   "file": "ytflow/stages/checklist.py",
    "line": 332,
-   "tier_key": "check:566e65de",
+   "tier_key": "check:1a6212d9",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -12243,11 +12258,30 @@
   {
    "id": "check:335",
    "kind": "check",
+   "gate": "gate:G6",
+   "level": "SHOULD",
+   "label": "심층·분석 제목·썸네일에 날짜·'심층' 없음 — 브리핑에만 (manual/09 §7)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 335,
+   "tier_key": "check:566e65de",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "check:338",
+   "kind": "check",
    "gate": "gate:G4",
    "level": "SHOULD",
    "label": "market: 끝에 확인할 신호(checklist)",
    "file": "ytflow/stages/checklist.py",
-   "line": 335,
+   "line": 338,
    "terms": [
     "term:checklist"
    ],
@@ -12263,13 +12297,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:341",
+   "id": "check:344",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "issues: 사실 기준 시각(as_of)",
    "file": "ytflow/stages/checklist.py",
-   "line": 341,
+   "line": 344,
    "tier_key": "check:8745b5ff",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12282,13 +12316,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:343",
+   "id": "check:346",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "issues: 서로 다른 입장 2개 이상(각 출처)",
    "file": "ytflow/stages/checklist.py",
-   "line": 343,
+   "line": 346,
    "tier_key": "check:54636780",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12301,13 +12335,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:344",
+   "id": "check:347",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "issues: 대본에 '기준' 시점 언급",
    "file": "ytflow/stages/checklist.py",
-   "line": 344,
+   "line": 347,
    "tier_key": "check:b2bb6398",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12320,13 +12354,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:348",
+   "id": "check:351",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "issues: 단정·비하 금지어 없음",
    "file": "ytflow/stages/checklist.py",
-   "line": 348,
+   "line": 351,
    "tier_key": "check:e655dacb",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
@@ -12339,13 +12373,13 @@
    "tier_label": "영구 원칙"
   },
   {
-   "id": "check:353",
+   "id": "check:356",
    "kind": "check",
    "gate": "gate:G3",
    "level": "MUST",
    "label": "issues: 교차 확인 — {sources} (08 §2)",
    "file": "ytflow/stages/checklist.py",
-   "line": 353,
+   "line": 356,
    "tier_key": "check:3c4c63ff",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12358,13 +12392,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:354",
+   "id": "check:357",
    "kind": "check",
    "gate": "gate:G4",
    "level": "SHOULD",
    "label": "issues: 모르는 것(unknowns) 말하기",
    "file": "ytflow/stages/checklist.py",
-   "line": 354,
+   "line": 357,
    "tier_key": "check:43d9ec14",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12377,13 +12411,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:356",
+   "id": "check:359",
    "kind": "check",
    "gate": "gate:G4",
    "level": "SHOULD",
    "label": "issues: 사람의 목소리 장면 1개 이상 (quote·이름 자막)",
    "file": "ytflow/stages/checklist.py",
-   "line": 356,
+   "line": 359,
    "terms": [
     "term:quote"
    ],
@@ -12399,13 +12433,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:362",
+   "id": "check:365",
    "kind": "check",
    "gate": "gate:G1",
    "level": "SHOULD",
    "label": "issues: 이름 붙은 시리즈(series)",
    "file": "ytflow/stages/checklist.py",
-   "line": 362,
+   "line": 365,
    "tier_key": "check:37b2f474",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12418,13 +12452,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:370",
+   "id": "check:373",
    "kind": "check",
    "gate": "gate:G4",
    "level": "MUST",
    "label": "인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1)",
    "file": "ytflow/stages/checklist.py",
-   "line": 370,
+   "line": 373,
    "terms": [
     "term:intro"
    ],
@@ -12440,13 +12474,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:373",
+   "id": "check:376",
    "kind": "check",
    "gate": "gate:G4",
    "level": "SHOULD",
    "label": "말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용)",
    "file": "ytflow/stages/checklist.py",
-   "line": 373,
+   "line": 376,
    "tier_key": "check:9f786482",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12459,13 +12493,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:388",
+   "id": "check:391",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "배경: 한 가지 바탕으로 고정하지 않음 — 장면이 하는 일이 바뀌면 바탕도 바뀜 (05 §0-2)",
    "file": "ytflow/stages/checklist.py",
-   "line": 388,
+   "line": 391,
    "tier_key": "check:2c299e6d",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -12478,13 +12512,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:424",
+   "id": "check:427",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게)",
    "file": "ytflow/stages/checklist.py",
-   "line": 424,
+   "line": 427,
    "tier_key": "check:aab08acb",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -12497,13 +12531,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:435",
+   "id": "check:438",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번 없음, 한 출처로 표지를 모두 때우지 않음",
    "file": "ytflow/stages/checklist.py",
-   "line": 435,
+   "line": 438,
    "tier_key": "check:02c1078e",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -12516,13 +12550,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:464",
+   "id": "check:467",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1)",
    "file": "ytflow/stages/checklist.py",
-   "line": 464,
+   "line": 467,
    "tier_key": "check:99b8b152",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -12535,13 +12569,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:474",
+   "id": "check:477",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "핵심 단어 띄우기에 문장을 쓰지 않음 — 자막과 같은 내용을 위에 반복하지 않음 (v3)",
    "file": "ytflow/stages/checklist.py",
-   "line": 474,
+   "line": 477,
    "tier_key": "check:1aff01bf",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12554,13 +12588,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:476",
+   "id": "check:479",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
    "file": "ytflow/stages/checklist.py",
-   "line": 476,
+   "line": 479,
    "terms": [
     "term:graphic-pack"
    ],
@@ -12576,13 +12610,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:478",
+   "id": "check:481",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "style-pick 기록 (상황에 맞춘 스타일 선택)",
    "file": "ytflow/stages/checklist.py",
-   "line": 478,
+   "line": 481,
    "tier_key": "check:9bfba96b",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -12595,13 +12629,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:480",
+   "id": "check:483",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움)",
    "file": "ytflow/stages/checklist.py",
-   "line": 480,
+   "line": 483,
    "tier_key": "check:949b9462",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12614,13 +12648,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:484",
+   "id": "check:487",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "final.mp4",
    "file": "ytflow/stages/checklist.py",
-   "line": 484,
+   "line": 487,
    "tier_key": "check:502a31b3",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12633,13 +12667,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:500",
+   "id": "check:503",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)",
    "file": "ytflow/stages/checklist.py",
-   "line": 500,
+   "line": 503,
    "tier_key": "check:4f448879",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12652,13 +12686,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:505",
+   "id": "check:508",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "글자 겹침 점검 기록 (05_edit/overlap_qa.json)",
    "file": "ytflow/stages/checklist.py",
-   "line": 505,
+   "line": 508,
    "tier_key": "check:6265c603",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12671,13 +12705,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:510",
+   "id": "check:513",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "화면 글자 겹침 없음 — 글자끼리·카드에 가려짐·카드 밖 넘침·자막 자리 (overlap_qa)",
    "file": "ytflow/stages/checklist.py",
-   "line": 510,
+   "line": 513,
    "tier_key": "check:287f0a57",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12690,13 +12724,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:511",
+   "id": "check:514",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "글자가 카드·강조 상자 가장자리에 걸치지 않음 (overlap_qa)",
    "file": "ytflow/stages/checklist.py",
-   "line": 511,
+   "line": 514,
    "tier_key": "check:65538b9a",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -12709,13 +12743,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:517",
+   "id": "check:520",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
    "file": "ytflow/stages/checklist.py",
-   "line": 517,
+   "line": 520,
    "tier_key": "check:79a7c86e",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12728,13 +12762,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:520",
+   "id": "check:523",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "납품 점검(음량 등)",
    "file": "ytflow/stages/checklist.py",
-   "line": 520,
+   "line": 523,
    "tier_key": "check:5e0947d1",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12747,13 +12781,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:533",
+   "id": "check:536",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "최종 목소리 ElevenLabs",
    "file": "ytflow/stages/checklist.py",
-   "line": 533,
+   "line": 536,
    "tier_key": "check:91c4c655",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12766,13 +12800,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:537",
+   "id": "check:540",
    "kind": "check",
    "gate": "gate:G7",
    "level": "MUST",
    "label": "제목 후보 3개 + 이유",
    "file": "ytflow/stages/checklist.py",
-   "line": 537,
+   "line": 540,
    "tier_key": "check:533d8276",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12785,33 +12819,14 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:539",
+   "id": "check:542",
    "kind": "check",
    "gate": "gate:G7",
    "level": "MUST",
    "label": "썸네일 A/B/C + 점검 ok",
    "file": "ytflow/stages/checklist.py",
-   "line": 539,
+   "line": 542,
    "tier_key": "check:a992f8cd",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "id": "check:545",
-   "kind": "check",
-   "gate": "gate:G8",
-   "level": "MUST",
-   "label": "완성본 보관 기록 — Drive(drive.json·drive_archive.json) 또는 공개 가능한 것만 GitHub Release(release.json)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 545,
-   "tier_key": "check:3d8271a6",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -12827,9 +12842,28 @@
    "kind": "check",
    "gate": "gate:G8",
    "level": "MUST",
-   "label": "episodes.md 기록",
+   "label": "완성본 보관 기록 — Drive(drive.json·drive_archive.json) 또는 공개 가능한 것만 GitHub Release(release.json)",
    "file": "ytflow/stages/checklist.py",
    "line": 548,
+   "tier_key": "check:3d8271a6",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "check:551",
+   "kind": "check",
+   "gate": "gate:G8",
+   "level": "MUST",
+   "label": "episodes.md 기록",
+   "file": "ytflow/stages/checklist.py",
+   "line": 551,
    "tier_key": "check:45482bc9",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -16334,6 +16368,18 @@
    }
   },
   {
+   "id": "ver:122",
+   "kind": "version",
+   "v": 122,
+   "date": "2026-11-24",
+   "label": "v122",
+   "summary": "시장: G 방식(현재 화면 유지·말할 때 바뀜·동사를 연기하는 모션그래픽 사물) 기본, 원본 레이더(사건형·원본형) 아침 순서",
+   "applied": [],
+   "themes": [
+    "depth"
+   ]
+  },
+  {
    "id": "rev:1",
    "kind": "review",
    "date": "2026-11-09",
@@ -17738,10 +17784,10 @@
    "src": "if ch in (\"ch-market-daily\", \"ch-issues-daily\"):   # v17 매일 브리핑 (03 §0, 08 §0-2)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:240",
+   "id": "code:ytflow/stages/checklist.py:243",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 240,
+   "line": 243,
    "versions": [
     26
    ],
@@ -17749,10 +17795,10 @@
    "src": "# v26 (03 §0-2, 2026-11-15 사용자): 뻔한 사실 말고 자료를 엮어야 보이는 것 — 자료 지도·말과 행동·매체 프레임"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:253",
+   "id": "code:ytflow/stages/checklist.py:256",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 253,
+   "line": 256,
    "versions": [
     38
    ],
@@ -17760,10 +17806,10 @@
    "src": "# v38: 원리(서로 다른 종류의 자료를 맞대 의미를 찾음)는 lvl, 분량은 참고 — 보고서가 없는 주제에 칸 채우기를 막음"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:261",
+   "id": "code:ytflow/stages/checklist.py:264",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 261,
+   "line": 264,
    "versions": [
     33
    ],
@@ -17771,10 +17817,10 @@
    "src": "# v33 머니크루 수준의 깊이 (03 §0-4, docs/31)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:269",
+   "id": "code:ytflow/stages/checklist.py:272",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 269,
+   "line": 272,
    "versions": [
     38
    ],
@@ -17782,10 +17828,10 @@
    "src": "# v38: 있어야 하는 것은 lvl, 셋을 채우는 것은 참고 — 약한 것을 채워 넣지 않게"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:274",
+   "id": "code:ytflow/stages/checklist.py:277",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 274,
+   "line": 277,
    "versions": [
     38
    ],
@@ -17793,10 +17839,10 @@
    "src": "no_hub = isinstance(hub, str) and hub.strip().startswith(\"없음\") and len(hub.strip()) > 4   # v38: 흔든 사건이 없는 기간은 \"없음: 이유\" — 지어내지 않음"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:290",
+   "id": "code:ytflow/stages/checklist.py:293",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 290,
+   "line": 293,
    "versions": [
     36
    ],
@@ -17804,10 +17850,10 @@
    "src": "# v36 (manual/09 §3-4·§3-5, 2026-11-17 사용자: \"여러 인사이트들 … 부실\" · \"인터뷰·방송 내용을 영상소스로\") — 11/18 회차부터"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:310",
+   "id": "code:ytflow/stages/checklist.py:313",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 310,
+   "line": 313,
    "versions": [
     27
    ],
@@ -17815,10 +17861,10 @@
    "src": "if ch == \"ch-market-daily\" and spec.get(\"scenes\"):   # v27 (manual/09 §6, 2026-11-15 사용자: \"말은 많은데 45일·60일만 강조된 채 멈춰 있다\")"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:366",
+   "id": "code:ytflow/stages/checklist.py:369",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 366,
+   "line": 369,
    "versions": [
     24
    ],
@@ -17826,10 +17872,10 @@
    "src": "if last >= 3:  # v24 인트로 없음 (README §2-1) · 말투 (README §2-3, 미주일기식)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:377",
+   "id": "code:ytflow/stages/checklist.py:380",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 377,
+   "line": 380,
    "versions": [
     38
    ],
@@ -17837,10 +17883,10 @@
    "src": "if brand == \"curiosity\":   # v38: 어미 비율은 이야기형(호기심)만 — 정보 채널은 어미 혼합 (11-workflow §3-2, 2026-11-17 사용자)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:401",
+   "id": "code:ytflow/stages/checklist.py:404",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 401,
+   "line": 404,
    "versions": [
     13
    ],
@@ -17848,10 +17894,10 @@
    "src": "# 바탕 계열 (v13, 2026-11-11 한 편 판정 \"돌려 써도 됨\" — 허락이지 명령이 아님): 같은 채널 직전 두 편과 같은 바탕 계열이면 참고로 표시"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:423",
+   "id": "code:ytflow/stages/checklist.py:426",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 423,
+   "line": 426,
    "versions": [
     15
    ],
@@ -17859,10 +17905,10 @@
    "src": "if spec.get(\"scenes\"):   # v15 카테고리 개성 (05 §0-7)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:486",
+   "id": "code:ytflow/stages/checklist.py:489",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 486,
+   "line": 489,
    "versions": [
     38
    ],
@@ -17870,10 +17916,10 @@
    "src": "_soft = (\"stage/crowded\", \"stage/text\", \"stage/static\")   # v38: 숫자로 감지하는 '붐빔·글자 수·정지'는 참고 — 판단은 D3 화면 확인"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:526",
+   "id": "code:ytflow/stages/checklist.py:529",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 526,
+   "line": 529,
    "versions": [
     25
    ],
@@ -18175,10 +18221,10 @@
    "src": "if sc.get(\"orig\"):   # v18 원문(영어) 한 줄 — 번역 아래, 카드 맨 아래 (어닝콜·발언 원본: 원문·번역 2단)"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1099",
+   "id": "code:ytflow/stages/hybrid.py:1160",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1099,
+   "line": 1160,
    "versions": [
     24
    ],
@@ -18186,10 +18232,10 @@
    "src": "if spec.get(\"tts_rate\"):   # v24: 영상마다 말 빠르기 (다큐 내레이션은 차분하게, README §2-3·§2-4)"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1192",
+   "id": "code:ytflow/stages/hybrid.py:1253",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1192,
+   "line": 1253,
    "versions": [
     24
    ],
@@ -18197,10 +18243,10 @@
    "src": "gap = sc.get(\"gap\", GAP)   # v24: 장면마다 문장 사이 쉼 (다큐 내레이션은 길게)"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1212",
+   "id": "code:ytflow/stages/hybrid.py:1273",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1212,
+   "line": 1273,
    "versions": [
     15
    ],
@@ -18208,10 +18254,10 @@
    "src": "from . import identity   # v15 카테고리 개성: 장 표지 모양·증거판·칠판 (brand 가 있을 때만)"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1223",
+   "id": "code:ytflow/stages/hybrid.py:1284",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1223,
+   "line": 1284,
    "versions": [
     27
    ],
@@ -18222,10 +18268,10 @@
    ]
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1224",
+   "id": "code:ytflow/stages/hybrid.py:1285",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1224,
+   "line": 1285,
    "versions": [
     30
    ],
@@ -18236,10 +18282,10 @@
    ]
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1225",
+   "id": "code:ytflow/stages/hybrid.py:1286",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1225,
+   "line": 1286,
    "versions": [
     31
    ],
@@ -18252,10 +18298,10 @@
    ]
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1242",
+   "id": "code:ytflow/stages/hybrid.py:1303",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1242,
+   "line": 1303,
    "versions": [
     10
    ],
@@ -18263,10 +18309,10 @@
    "src": "if spec.get(\"edit_v10\", True):   # v10: 장 표지는 그 장의 자료 사진을 깐 표지가 기본"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1270",
+   "id": "code:ytflow/stages/hybrid.py:1331",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1270,
+   "line": 1331,
    "versions": [
     34
    ],
@@ -18277,10 +18323,10 @@
    ]
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1286",
+   "id": "code:ytflow/stages/hybrid.py:1349",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1286,
+   "line": 1349,
    "versions": [
     36
    ],
@@ -18288,10 +18334,10 @@
    "src": "if sc.get(\"insight\") and spec.get(\"opinion_tag\", False):   # v36: 사람·매체의 시각은 사실과 다르게 표시 (2026-11-21 사용자가 끄라고 한 편은 opinion_tag: false — 출처 줄로만)"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1294",
+   "id": "code:ytflow/stages/hybrid.py:1357",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1294,
+   "line": 1357,
    "versions": [
     10
    ],
@@ -18299,10 +18345,10 @@
    "src": "if spec.get(\"edit_v10\", True):   # 편집 기준 v10 (기본 켬): 전환·장면 안 움직임·소리 (docs/19, manual 05 §0-4)"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1488",
+   "id": "code:ytflow/stages/hybrid.py:1551",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1488,
+   "line": 1551,
    "versions": [
     16
    ],
@@ -18310,10 +18356,10 @@
    "src": "if \"brand\" not in spec:   # v16: 대본에 brand 가 없으면 프로젝트 채널(edit.yaml channel → channels/<id>/channel.yaml brand)에서"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1498",
+   "id": "code:ytflow/stages/hybrid.py:1561",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1498,
+   "line": 1561,
    "versions": [
     15
    ],
@@ -18321,10 +18367,10 @@
    "src": "if spec.get(\"brand\"):   # v15 카테고리 개성: 기본 팩을 따로 정하지 않았으면 카테고리의 기본 팩"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1514",
+   "id": "code:ytflow/stages/hybrid.py:1577",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1514,
+   "line": 1577,
    "versions": [
     36
    ],
@@ -18332,10 +18378,10 @@
    "src": "bite_fallback(project, spec)   # v36: 원본 영상이 없으면 렌더를 멈추지 않고 인용 카드로 (목소리 만들기 전에 — 번역 박자를 읽게)"
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1607",
+   "id": "code:ytflow/stages/hybrid.py:1670",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1607,
+   "line": 1670,
    "versions": [
     12
    ],
@@ -18343,10 +18389,10 @@
    "src": "bgm = spec.get(\"bgm\")   # v12: 기본은 배경음 없음 — 어울리는 곡이 확실할 때만 대본에 \"bgm\": \"<등록부 id>\""
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1659",
+   "id": "code:ytflow/stages/hybrid.py:1722",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1659,
+   "line": 1722,
    "versions": [
     2
    ],
@@ -18358,10 +18404,10 @@
    ]
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1671",
+   "id": "code:ytflow/stages/hybrid.py:1734",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1671,
+   "line": 1734,
    "versions": [
     22
    ],
@@ -18421,10 +18467,24 @@
    "src": "'style=\"fill:none;stroke:#222;stroke-width:3\"/><circle cx=\"230\" cy=\"70\" r=\"18\" style=\"fill:none;stroke:#222;stroke-width:3\"/><path d=\"M230 88 v40 M210 104 h40 M230 128 l-14 24 M230 128 l14 24\" style=\"stroke:#222;stroke-w"
   },
   {
-   "id": "code:ytflow/stages/motion2.py:159",
+   "id": "code:ytflow/stages/mograph.py:72",
+   "kind": "code",
+   "file": "ytflow/stages/mograph.py",
+   "line": 72,
+   "versions": [
+    32
+   ],
+   "label": "시장: 훑는 움직임은 끔 (v32 \"스캔하는 듯한 모션그래픽 빼 주세요\") → 돋보기 두근",
+   "src": "if do == \"scan\" and getattr(st, \"no_sparkle\", False):   # 시장: 훑는 움직임은 끔 (v32 \"스캔하는 듯한 모션그래픽 빼 주세요\") → 돋보기 두근",
+   "terms": [
+    "term:fx-scan"
+   ]
+  },
+  {
+   "id": "code:ytflow/stages/motion2.py:166",
    "kind": "code",
    "file": "ytflow/stages/motion2.py",
-   "line": 159,
+   "line": 166,
    "versions": [
     32
    ],
@@ -18805,7 +18865,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/motion2.py:159",
+     "ref": "code:ytflow/stages/mograph.py:72",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/motion2.py:166",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -19543,7 +19609,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:401",
+     "ref": "code:ytflow/stages/checklist.py:404",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -19608,7 +19674,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1488",
+     "ref": "code:ytflow/stages/hybrid.py:1551",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -19718,7 +19784,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1607",
+     "ref": "code:ytflow/stages/hybrid.py:1670",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -19833,7 +19899,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1488",
+     "ref": "code:ytflow/stages/hybrid.py:1551",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -19979,7 +20045,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1488",
+     "ref": "code:ytflow/stages/hybrid.py:1551",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -20064,7 +20130,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1659",
+     "ref": "code:ytflow/stages/hybrid.py:1722",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -20185,19 +20251,19 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:366",
+     "ref": "code:ytflow/stages/checklist.py:369",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1099",
+     "ref": "code:ytflow/stages/hybrid.py:1160",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1192",
+     "ref": "code:ytflow/stages/hybrid.py:1253",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -20254,7 +20320,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1671",
+     "ref": "code:ytflow/stages/hybrid.py:1734",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -20345,31 +20411,31 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:240",
+     "ref": "code:ytflow/stages/checklist.py:243",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:248",
+     "ref": "check:251",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:254",
+     "ref": "check:257",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:282",
+     "ref": "check:285",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:288",
+     "ref": "check:291",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -20443,7 +20509,7 @@
      "by": "사용자 결정 2026-11-15 (매뉴얼 v34 — '말이 화면에 생기는 쪽', 스타일 규칙 유동)"
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:526",
+     "ref": "code:ytflow/stages/checklist.py:529",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -20485,7 +20551,7 @@
      "kind": "code"
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:526",
+     "ref": "code:ytflow/stages/checklist.py:529",
      "kind": "code"
     }
    ],
@@ -20517,7 +20583,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:526",
+     "ref": "code:ytflow/stages/checklist.py:529",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -20665,19 +20731,19 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:366",
+     "ref": "code:ytflow/stages/checklist.py:369",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1099",
+     "ref": "code:ytflow/stages/hybrid.py:1160",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1192",
+     "ref": "code:ytflow/stages/hybrid.py:1253",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -20762,19 +20828,19 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:366",
+     "ref": "code:ytflow/stages/checklist.py:369",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1099",
+     "ref": "code:ytflow/stages/hybrid.py:1160",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1192",
+     "ref": "code:ytflow/stages/hybrid.py:1253",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -20842,7 +20908,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:310",
+     "ref": "code:ytflow/stages/checklist.py:313",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -20866,13 +20932,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1223",
+     "ref": "code:ytflow/stages/hybrid.py:1284",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:324",
+     "ref": "check:327",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -20922,7 +20988,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1224",
+     "ref": "code:ytflow/stages/hybrid.py:1285",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21029,7 +21095,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/motion2.py:159",
+     "ref": "code:ytflow/stages/mograph.py:72",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/motion2.py:166",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21114,13 +21186,7 @@
      "by": ""
     },
     {
-     "ref": "check:275",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "check:277",
+     "ref": "check:278",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21132,7 +21198,13 @@
      "by": ""
     },
     {
-     "ref": "check:285",
+     "ref": "check:283",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:288",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21303,7 +21375,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/motion2.py:159",
+     "ref": "code:ytflow/stages/mograph.py:72",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/motion2.py:166",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21365,7 +21443,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1224",
+     "ref": "code:ytflow/stages/hybrid.py:1285",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21534,7 +21612,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1270",
+     "ref": "code:ytflow/stages/hybrid.py:1331",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21598,25 +21676,25 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:261",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "check:268",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "check:270",
+     "ref": "code:ytflow/stages/checklist.py:264",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
      "ref": "check:271",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:273",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:274",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21691,7 +21769,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:310",
+     "ref": "code:ytflow/stages/checklist.py:313",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21715,13 +21793,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1223",
+     "ref": "code:ytflow/stages/hybrid.py:1284",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:324",
+     "ref": "check:327",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21741,7 +21819,7 @@
    "date": "2026-11-15",
    "sources": [
     {
-     "ref": "code:ytflow/stages/checklist.py:310",
+     "ref": "code:ytflow/stages/checklist.py:313",
      "kind": "code"
     }
    ],
@@ -21789,7 +21867,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:310",
+     "ref": "code:ytflow/stages/checklist.py:313",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21813,13 +21891,13 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1223",
+     "ref": "code:ytflow/stages/hybrid.py:1284",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:324",
+     "ref": "check:327",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21869,7 +21947,7 @@
      "kind": "manual"
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1225",
+     "ref": "code:ytflow/stages/hybrid.py:1286",
      "kind": "code"
     }
    ],
@@ -21917,7 +21995,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1225",
+     "ref": "code:ytflow/stages/hybrid.py:1286",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21973,7 +22051,7 @@
      "by": ""
     },
     {
-     "ref": "check:303",
+     "ref": "check:306",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -22173,7 +22251,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1270",
+     "ref": "code:ytflow/stages/hybrid.py:1331",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -22451,7 +22529,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1270",
+     "ref": "code:ytflow/stages/hybrid.py:1331",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -22704,31 +22782,31 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:253",
+     "ref": "code:ytflow/stages/checklist.py:256",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:269",
+     "ref": "code:ytflow/stages/checklist.py:272",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:274",
+     "ref": "code:ytflow/stages/checklist.py:277",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:377",
+     "ref": "code:ytflow/stages/checklist.py:380",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:486",
+     "ref": "code:ytflow/stages/checklist.py:489",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -22911,31 +22989,31 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:253",
+     "ref": "code:ytflow/stages/checklist.py:256",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:269",
+     "ref": "code:ytflow/stages/checklist.py:272",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:274",
+     "ref": "code:ytflow/stages/checklist.py:277",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:377",
+     "ref": "code:ytflow/stages/checklist.py:380",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:486",
+     "ref": "code:ytflow/stages/checklist.py:489",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -23112,7 +23190,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:290",
+     "ref": "code:ytflow/stages/checklist.py:293",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -23124,37 +23202,37 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1286",
+     "ref": "code:ytflow/stages/hybrid.py:1349",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1514",
+     "ref": "code:ytflow/stages/hybrid.py:1577",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:296",
+     "ref": "check:299",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:300",
+     "ref": "check:303",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:306",
+     "ref": "check:309",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:308",
+     "ref": "check:311",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -23200,7 +23278,7 @@
    "date": "2026-11-17",
    "sources": [
     {
-     "ref": "code:ytflow/stages/checklist.py:290",
+     "ref": "code:ytflow/stages/checklist.py:293",
      "kind": "code"
     }
    ],
@@ -23239,7 +23317,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:290",
+     "ref": "code:ytflow/stages/checklist.py:293",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -23251,37 +23329,37 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1286",
+     "ref": "code:ytflow/stages/hybrid.py:1349",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1514",
+     "ref": "code:ytflow/stages/hybrid.py:1577",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:296",
+     "ref": "check:299",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:300",
+     "ref": "check:303",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:306",
+     "ref": "check:309",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:308",
+     "ref": "check:311",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -23301,7 +23379,7 @@
    "date": "2026-11-17",
    "sources": [
     {
-     "ref": "code:ytflow/stages/checklist.py:290",
+     "ref": "code:ytflow/stages/checklist.py:293",
      "kind": "code"
     }
    ],
@@ -23340,7 +23418,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:290",
+     "ref": "code:ytflow/stages/checklist.py:293",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -23352,37 +23430,37 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1286",
+     "ref": "code:ytflow/stages/hybrid.py:1349",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1514",
+     "ref": "code:ytflow/stages/hybrid.py:1577",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:296",
+     "ref": "check:299",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:300",
+     "ref": "check:303",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:306",
+     "ref": "check:309",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:308",
+     "ref": "check:311",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -23665,7 +23743,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:290",
+     "ref": "code:ytflow/stages/checklist.py:293",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -23677,37 +23755,37 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1286",
+     "ref": "code:ytflow/stages/hybrid.py:1349",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1514",
+     "ref": "code:ytflow/stages/hybrid.py:1577",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:296",
+     "ref": "check:299",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:300",
+     "ref": "check:303",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:306",
+     "ref": "check:309",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:308",
+     "ref": "check:311",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -24076,7 +24154,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:290",
+     "ref": "code:ytflow/stages/checklist.py:293",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -24088,37 +24166,37 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1286",
+     "ref": "code:ytflow/stages/hybrid.py:1349",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1514",
+     "ref": "code:ytflow/stages/hybrid.py:1577",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:296",
+     "ref": "check:299",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:300",
+     "ref": "check:303",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:306",
+     "ref": "check:309",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:308",
+     "ref": "check:311",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -26345,7 +26423,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1607",
+     "ref": "code:ytflow/stages/hybrid.py:1670",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -26785,7 +26863,7 @@
      "kind": "review"
     },
     {
-     "ref": "sec:feedback§h285",
+     "ref": "sec:feedback§h286",
      "kind": "manual"
     }
    ],
@@ -26821,7 +26899,7 @@
      "by": ""
     },
     {
-     "ref": "sec:feedback§h285",
+     "ref": "sec:feedback§h286",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -27856,7 +27934,7 @@
      "by": ""
     },
     {
-     "ref": "check:303",
+     "ref": "check:306",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -28179,7 +28257,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:290",
+     "ref": "code:ytflow/stages/checklist.py:293",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -28191,37 +28269,37 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1286",
+     "ref": "code:ytflow/stages/hybrid.py:1349",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1514",
+     "ref": "code:ytflow/stages/hybrid.py:1577",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:296",
+     "ref": "check:299",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:300",
+     "ref": "check:303",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:306",
+     "ref": "check:309",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:308",
+     "ref": "check:311",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -28585,7 +28663,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1488",
+     "ref": "code:ytflow/stages/hybrid.py:1551",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -28869,7 +28947,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:290",
+     "ref": "code:ytflow/stages/checklist.py:293",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -28881,37 +28959,37 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1286",
+     "ref": "code:ytflow/stages/hybrid.py:1349",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1514",
+     "ref": "code:ytflow/stages/hybrid.py:1577",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:296",
+     "ref": "check:299",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:300",
+     "ref": "check:303",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:306",
+     "ref": "check:309",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:308",
+     "ref": "check:311",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -29610,7 +29688,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:290",
+     "ref": "code:ytflow/stages/checklist.py:293",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -29622,37 +29700,37 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1286",
+     "ref": "code:ytflow/stages/hybrid.py:1349",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1514",
+     "ref": "code:ytflow/stages/hybrid.py:1577",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:296",
+     "ref": "check:299",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:300",
+     "ref": "check:303",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:306",
+     "ref": "check:309",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:308",
+     "ref": "check:311",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -29711,7 +29789,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:290",
+     "ref": "code:ytflow/stages/checklist.py:293",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -29723,37 +29801,37 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1286",
+     "ref": "code:ytflow/stages/hybrid.py:1349",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1514",
+     "ref": "code:ytflow/stages/hybrid.py:1577",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:296",
+     "ref": "check:299",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:300",
+     "ref": "check:303",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:306",
+     "ref": "check:309",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:308",
+     "ref": "check:311",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -30325,7 +30403,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:290",
+     "ref": "code:ytflow/stages/checklist.py:293",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -30337,37 +30415,37 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1286",
+     "ref": "code:ytflow/stages/hybrid.py:1349",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1514",
+     "ref": "code:ytflow/stages/hybrid.py:1577",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:296",
+     "ref": "check:299",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:300",
+     "ref": "check:303",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:306",
+     "ref": "check:309",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:308",
+     "ref": "check:311",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -30648,7 +30726,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1659",
+     "ref": "code:ytflow/stages/hybrid.py:1722",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -31585,7 +31663,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:290",
+     "ref": "code:ytflow/stages/checklist.py:293",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -31597,37 +31675,37 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1286",
+     "ref": "code:ytflow/stages/hybrid.py:1349",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1514",
+     "ref": "code:ytflow/stages/hybrid.py:1577",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:296",
+     "ref": "check:299",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:300",
+     "ref": "check:303",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:306",
+     "ref": "check:309",
      "status": "unreviewed",
      "note": "",
      "by": ""
     },
     {
-     "ref": "check:308",
+     "ref": "check:311",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -32726,7 +32804,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1659",
+     "ref": "code:ytflow/stages/hybrid.py:1722",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -33591,6 +33669,63 @@
    "annotated": false
   },
   {
+   "id": "intent:04c3bdda",
+   "kind": "intent",
+   "quote": "현재형에 차라리 정적인 부분을 좀 줄이는 방식이 나아보여요 / 그리고 우리도 사람의 말이나 사건형 원본형처럼 이를 추적할 수 있었으면 해요 그리고 좀 편집방식을 모션그래픽을 좀 잘쓰고싶습니다 적극적으로 맣이죠 / G f 모션그래픽으로 해주세요",
+   "label": "현재형에 차라리 정적인 부분을 좀 줄이는 방식이 나아보여요 / 그리고 우리도 사람의 말이나 사건형 원본형처럼",
+   "versions": [],
+   "date": "2026-11-23",
+   "sources": [
+    {
+     "ref": "fb:253",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:09§3-0-2",
+     "kind": "manual"
+    },
+    {
+     "ref": "sec:09§6",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "우리도 사람의 말이나 사건형 원본형처럼 이를 추적할 수 있었으면 해요",
+    "현재형에 차라리 정적인 부분을 좀 줄이는 방식이 나아보여요",
+    "G f 모션그래픽으로 해주세요"
+   ],
+   "member_ids": [
+    "intent:04c3bdda",
+    "intent:01045c8d",
+    "intent:7cb1896c",
+    "intent:ecdc0eed"
+   ],
+   "themes": [
+    "motion",
+    "depth"
+   ],
+   "ann_key": "intent:04c3bdda",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§3-0-2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:0bd56be1",
    "kind": "intent",
    "quote": "니중에 클릭률 노출률 제목 이런 지표들을 보고 기준을 차근차근 조정해나가",
@@ -34270,6 +34405,39 @@
    "annotated": false
   },
   {
+   "id": "intent:7b88afbf",
+   "kind": "intent",
+   "quote": "편집방식을 모션그래픽을 좀 잘쓰고싶습니다 적극적으로 많이요",
+   "label": "편집방식을 모션그래픽을 좀 잘쓰고싶습니다 적극적으로 많이요",
+   "versions": [],
+   "date": "2026-11-24",
+   "sources": [
+    {
+     "ref": "sec:09§6",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:7b88afbf"
+   ],
+   "themes": [],
+   "ann_key": "intent:7b88afbf",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "term:bite",
    "kind": "term",
    "key": "bite",
@@ -34323,7 +34491,7 @@
     "sec:12§0-1",
     "sec:12§1",
     "ver:20",
-    "check:308"
+    "check:311"
    ],
    "techniques": [
     "term:tech-j-l-cut",
@@ -34777,7 +34945,7 @@
     "sec:10§h107",
     "sec:README§2-1",
     "rule:G4:1",
-    "check:370"
+    "check:373"
    ]
   },
   {
@@ -35261,6 +35429,7 @@
     "sec:09§3-4",
     "sec:09§4",
     "sec:09§5-1",
+    "sec:09§6",
     "sec:09§7",
     "sec:09§7-1",
     "sec:10§h37",
@@ -35502,7 +35671,7 @@
     "sec:10§h37",
     "sec:10§5",
     "sec:12§1",
-    "check:356"
+    "check:359"
    ]
   },
   {
@@ -35563,7 +35732,7 @@
     "sec:10§h107",
     "sec:10§5",
     "rule:G4:1",
-    "check:335"
+    "check:338"
    ]
   },
   {
@@ -35576,7 +35745,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 666,
+     "line": 723,
      "src": "def s_analogy(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -35631,7 +35800,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 702,
+     "line": 759,
      "src": "def s_funnel(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -35671,7 +35840,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 728,
+     "line": 785,
      "src": "def s_apartments(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -35713,7 +35882,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 761,
+     "line": 818,
      "src": "def s_timeline(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -35753,6 +35922,7 @@
     "sec:05§2",
     "sec:08§h112",
     "sec:09§5-1",
+    "sec:09§6",
     "sec:10§h99",
     "sec:10§h107",
     "sec:10§5",
@@ -35773,7 +35943,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 798,
+     "line": 859,
      "src": "def s_bars(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -35841,7 +36011,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 886,
+     "line": 947,
      "src": "def s_bignum(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -35901,7 +36071,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 903,
+     "line": 964,
      "src": "def s_parking(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -35945,7 +36115,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 927,
+     "line": 988,
      "src": "def s_compare(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -35996,7 +36166,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 950,
+     "line": 1011,
      "src": "def s_outro(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -36040,7 +36210,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 973,
+     "line": 1034,
      "src": "def s_people(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -36091,7 +36261,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 1003,
+     "line": 1064,
      "src": "def s_newspapers(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -36137,7 +36307,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 1041,
+     "line": 1102,
      "src": "def s_shape(D: HDoc, sc: dict, bt: list, dur: float):"
     }
    ],
@@ -36420,8 +36590,8 @@
     "sec:12§1",
     "sec:README§2-5",
     "ver:21",
-    "code:ytflow/stages/hybrid.py:1270",
-    "code:ytflow/stages/hybrid.py:1671",
+    "code:ytflow/stages/hybrid.py:1331",
+    "code:ytflow/stages/hybrid.py:1734",
     "code:ytflow/stages/stage.py:1",
     "code:ytflow/stages/thumbnail.py:165"
    ],
@@ -36526,7 +36696,7 @@
    ],
    "mentioned_in": [
     "sec:10§h50",
-    "code:ytflow/stages/hybrid.py:1659",
+    "code:ytflow/stages/hybrid.py:1722",
     "code:ytflow/stages/studio3d.py:1"
    ]
   },
@@ -36668,7 +36838,7 @@
     "ver:31",
     "code:ytflow/stages/directions.py:656",
     "code:ytflow/stages/directions.py:657",
-    "code:ytflow/stages/hybrid.py:1225"
+    "code:ytflow/stages/hybrid.py:1286"
    ]
   },
   {
@@ -36716,7 +36886,7 @@
     "ver:31",
     "code:ytflow/stages/directions.py:656",
     "code:ytflow/stages/directions.py:657",
-    "code:ytflow/stages/hybrid.py:1225"
+    "code:ytflow/stages/hybrid.py:1286"
    ]
   },
   {
@@ -36902,7 +37072,8 @@
     "sec:10§h136",
     "ver:9",
     "code:ytflow/stages/directions.py:656",
-    "code:ytflow/stages/directions.py:657"
+    "code:ytflow/stages/directions.py:657",
+    "code:ytflow/stages/mograph.py:72"
    ]
   },
   {
@@ -36970,7 +37141,7 @@
    "related": [],
    "instead": [],
    "mentioned_in": [
-    "code:ytflow/stages/hybrid.py:1224"
+    "code:ytflow/stages/hybrid.py:1285"
    ]
   },
   {
@@ -37482,10 +37653,10 @@
     "sec:10§1",
     "sec:10§h9",
     "sec:10§3",
-    "sec:feedback§h384",
+    "sec:feedback§h385",
     "ver:21",
     "ver:34",
-    "code:ytflow/stages/hybrid.py:1671",
+    "code:ytflow/stages/hybrid.py:1734",
     "code:ytflow/stages/stage.py:1",
     "intent:b0fd8bcd",
     "fb:5"
@@ -38451,7 +38622,7 @@
    "instead": [],
    "mentioned_in": [
     "sec:10§3",
-    "code:ytflow/stages/hybrid.py:1659",
+    "code:ytflow/stages/hybrid.py:1722",
     "code:ytflow/stages/studio3d.py:1"
    ]
   },
@@ -39857,7 +40028,7 @@
     "sec:14§4",
     "ver:26",
     "ver:37",
-    "check:288"
+    "check:291"
    ]
   },
   {
@@ -40144,7 +40315,7 @@
     "sec:12§0-1",
     "sec:13§4-1",
     "sec:13§7",
-    "sec:feedback§h285",
+    "sec:feedback§h286",
     "ver:92",
     "rule:G4:1",
     "check:172",
@@ -40248,7 +40419,7 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 1224,
+     "line": 1285,
      "src": "D.cam = spec.get(\"camera\", \"calm\") == \"beat\" and sc.get(\"type\") not in CAM_SKIP   # v30: 기본 끔 (2026-11-15 사용자: 억지 미세 움직임 필요 없음)"
     },
     {
@@ -40293,9 +40464,9 @@
     "sec:09§6",
     "sec:10§h136",
     "sec:feedback§h147",
-    "sec:feedback§h285",
-    "sec:feedback§h409",
-    "sec:feedback§h439",
+    "sec:feedback§h286",
+    "sec:feedback§h410",
+    "sec:feedback§h440",
     "ver:10",
     "ver:30",
     "ver:31",
@@ -40305,7 +40476,7 @@
     "rev:14",
     "code:ytflow/stages/edit10.py:81",
     "code:ytflow/stages/hybrid.py:147",
-    "code:ytflow/stages/hybrid.py:1223",
+    "code:ytflow/stages/hybrid.py:1284",
     "intent:ea14e9be"
    ]
   },
@@ -40329,7 +40500,7 @@
     },
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 1225,
+     "line": 1286,
      "src": "# v31 확대·축소 없음 (2026-11-15 사용자: \"자꾸 화면을 확대하고 축소하고 웅웅거리는 거 쓰지 말아 주세요\"): 시장 브랜드 기본 — 장면 안 느린 확대·tilt·dolly·차트 확대·사진 밀기 끔"
     }
    ],
@@ -40362,7 +40533,7 @@
     "code:ytflow/stages/edit10.py:95",
     "code:ytflow/stages/edit10.py:96",
     "code:ytflow/stages/edit10.py:169",
-    "code:ytflow/stages/hybrid.py:1225"
+    "code:ytflow/stages/hybrid.py:1286"
    ],
    "techniques": [
     "term:tech-zoom-into"
@@ -40518,12 +40689,12 @@
    "code": [
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 1290,
+     "line": 1353,
      "src": "motion2.apply(D, sc, bt, dur)"
     },
     {
      "file": "ytflow/stages/motion2.py",
-     "line": 268,
+     "line": 275,
      "src": "def apply(D, sc: dict, bt: list, dur: float, w: int = 1920, h: int = 1080, keep: bool = True) -> None:"
     }
    ],
@@ -40553,8 +40724,9 @@
    "instead": [],
    "mentioned_in": [
     "sec:04§0-4",
+    "sec:09§5-1",
     "sec:09§6",
-    "sec:09§h500",
+    "sec:09§h517",
     "sec:11§2-4",
     "sec:README§2-5",
     "sec:README§3-1",
@@ -40588,7 +40760,7 @@
     },
     {
      "file": "ytflow/stages/hybrid.py",
-     "line": 1629,
+     "line": 1692,
      "src": "project.write_json(\"edit\", \"motion.json\", {k: m[k] for k in (\"change_events_per_min\", \"median_change_gap_s\", \"static_ratio\", \"hard_cuts_per_min\", \"audio\") if k in m})"
     }
    ],
@@ -40719,9 +40891,9 @@
     "sec:10§4",
     "sec:12§0-1",
     "sec:feedback§h147",
-    "sec:feedback§h285",
-    "sec:feedback§h409",
-    "sec:feedback§h439",
+    "sec:feedback§h286",
+    "sec:feedback§h410",
+    "sec:feedback§h440",
     "ver:10",
     "ver:12",
     "rev:11",
@@ -40882,7 +41054,7 @@
     "sec:06§G6",
     "sec:08§4",
     "sec:09§6",
-    "sec:09§h500",
+    "sec:09§h517",
     "sec:10§4",
     "sec:feedback§h147",
     "sec:README§0",
@@ -40892,7 +41064,7 @@
     "ver:50",
     "rev:15",
     "rule:G6:1",
-    "check:476",
+    "check:479",
     "intent:00ba80c7",
     "step:5"
    ]
@@ -48252,6 +48424,37 @@
    "tier_note": "",
    "tier_fixed": true,
    "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:253",
+   "kind": "feedback",
+   "date": "2026-11-24",
+   "quote": "현재형에 차라리 정적인 부분을 좀 줄이는 방식이 나아보여요 / 그리고 우리도 사람의 말이나 사건형 원본형처럼 이를 추적할 수 있었으면 해요 그리고 좀 편집방식을 모션그래픽을 좀 잘쓰고싶습니다 적극적으로 맣이죠 / G f 모션그래픽으로 해주세요",
+   "label": "현재형에 차라리 정적인 부분을 좀 줄이는 방식이 나아보여요 / 그리고 우리도 사람의 말이나 사건형 원본형처럼",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "manual/09 §6 G 방식, §3-0-2 원본 레이더, §1 시간표; docs/63·64",
+   "pending": false,
+   "themes": [
+    "motion",
+    "depth"
+   ],
+   "scope": "style",
+   "repo": "market",
+   "repo_label": "시장",
+   "intent": "intent:04c3bdda",
+   "tier_key": "fb:04c3bdda",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "style",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "스타일 기본값"
   },
   {
    "id": "layer:main",
@@ -66170,6 +66373,164 @@
      ]
     },
     {
+     "project": "20261123-market-daily-F",
+     "scenes": 6,
+     "coverage": 1.0,
+     "fit": 0.33,
+     "rows": [
+      {
+       "s": 1,
+       "type": "versus",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "금요일 밤, 한국의 코스피200 야간선물은 6.99% 빠졌습니다. 그런데 일요일 밤 미국의 나스닥100 선물은 1.19% 올랐습니다. 같은 주말, 정반대의 두 숫"
+      },
+      {
+       "s": 2,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "출발점부터 짚겠습니다. 11월 20일 금요일 미국 장 마감 기준, 나스닥은 5.28%, S&P 500은 3.70%, 반도체 지수는 10.73% 내렸습니다. 이 하"
+      },
+      {
+       "s": 3,
+       "type": "timeline",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "중요한 건 순서입니다. 같은 금요일 코스피는 5.21% 내린 4,869.96으로 닫혔는데, 이건 미국 금요일 폭락보다 먼저 닫힌 숫자입니다. 금요일 밤의 충격은 "
+      },
+      {
+       "s": 4,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "먼저 일요일 오후 정부서울청사에서 열린 회의입니다. 정부는 무엇을 꺼냈을까요?"
+      },
+      {
+       "s": 5,
+       "type": "checklist",
+       "sit": "explain-market",
+       "fit": false,
+       "rec": [
+        "motionboard",
+        "spread",
+        "share"
+       ],
+       "say": "이형일 부총리가 주재한 회의는 2시간 20분쯤 이어졌습니다. 첫째, 증권시장안정펀드, 이른바 증안펀드를 시장 상황에 따라 바로 가동할 수 있도록 준비에 들어갔습니"
+      },
+      {
+       "s": 6,
+       "type": "motionboard",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "그림으로 정리해 보겠습니다. 금요일 한국 장을 끌어내린 이유는 미국의 AI와 반도체였습니다. 정부도 회의에서 AI 투자 우려와 수익성 걱정을 원인으로 꼽았습니다."
+      }
+     ]
+    },
+    {
+     "project": "20261123-market-daily-G",
+     "scenes": 6,
+     "coverage": 1.0,
+     "fit": 0.33,
+     "rows": [
+      {
+       "s": 1,
+       "type": "versus",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "금요일 밤, 한국의 코스피200 야간선물은 6.99% 빠졌습니다. 그런데 일요일 밤 미국의 나스닥100 선물은 1.19% 올랐습니다. 같은 주말, 정반대의 두 숫"
+      },
+      {
+       "s": 2,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "출발점부터 짚겠습니다. 11월 20일 금요일 미국 장 마감 기준, 나스닥은 5.28%, S&P 500은 3.70%, 반도체 지수는 10.73% 내렸습니다. 이 하"
+      },
+      {
+       "s": 3,
+       "type": "timeline",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "중요한 건 순서입니다. 같은 금요일 코스피는 5.21% 내린 4,869.96으로 닫혔는데, 이건 미국 금요일 폭락보다 먼저 닫힌 숫자입니다. 금요일 밤의 충격은 "
+      },
+      {
+       "s": 4,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "먼저 일요일 오후 정부서울청사에서 열린 회의입니다. 정부는 무엇을 꺼냈을까요?"
+      },
+      {
+       "s": 5,
+       "type": "checklist",
+       "sit": "explain-market",
+       "fit": false,
+       "rec": [
+        "motionboard",
+        "spread",
+        "share"
+       ],
+       "say": "이형일 부총리가 주재한 회의는 2시간 20분쯤 이어졌습니다. 첫째, 증권시장안정펀드, 이른바 증안펀드를 시장 상황에 따라 바로 가동할 수 있도록 준비에 들어갔습니"
+      },
+      {
+       "s": 6,
+       "type": "motionboard",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "그림으로 정리해 보겠습니다. 금요일 한국 장을 끌어내린 이유는 미국의 AI와 반도체였습니다. 정부도 회의에서 AI 투자 우려와 수익성 걱정을 원인으로 꼽았습니다."
+      }
+     ]
+    },
+    {
      "project": "20261123-market-deep-softbank-hynix",
      "scenes": 22,
      "coverage": 0.95,
@@ -66513,8 +66874,8 @@
     "일까요",
     "을까요"
    ],
-   "count": 93,
-   "fit": 67,
+   "count": 95,
+   "fit": 69,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -66732,8 +67093,8 @@
     "하락",
     "급등"
    ],
-   "count": 242,
-   "fit": 111,
+   "count": 250,
+   "fit": 113,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -67238,7 +67599,7 @@
     "유통 물량",
     "오버행"
    ],
-   "count": 12,
+   "count": 14,
    "fit": 1,
    "examples": [
     {
@@ -76513,6 +76874,172 @@
    ]
   },
   {
+   "id": "ep:20261123-market-daily-F",
+   "kind": "episode",
+   "topic": "market",
+   "label": "20261123-market-daily-F",
+   "project": "20261123-market-daily-F",
+   "scenes": 6,
+   "coverage": 1.0,
+   "fit": 0.33,
+   "rows": [
+    {
+     "s": 1,
+     "type": "versus",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "금요일 밤, 한국의 코스피200 야간선물은 6.99% 빠졌습니다. 그런데 일요일 밤 미국의 나스닥100 선물은 1.19% 올랐습니다. 같은 주말, 정반대의 두 숫"
+    },
+    {
+     "s": 2,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "출발점부터 짚겠습니다. 11월 20일 금요일 미국 장 마감 기준, 나스닥은 5.28%, S&P 500은 3.70%, 반도체 지수는 10.73% 내렸습니다. 이 하"
+    },
+    {
+     "s": 3,
+     "type": "timeline",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "중요한 건 순서입니다. 같은 금요일 코스피는 5.21% 내린 4,869.96으로 닫혔는데, 이건 미국 금요일 폭락보다 먼저 닫힌 숫자입니다. 금요일 밤의 충격은 "
+    },
+    {
+     "s": 4,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "먼저 일요일 오후 정부서울청사에서 열린 회의입니다. 정부는 무엇을 꺼냈을까요?"
+    },
+    {
+     "s": 5,
+     "type": "checklist",
+     "sit": "explain-market",
+     "fit": false,
+     "rec": [
+      "motionboard",
+      "spread",
+      "share"
+     ],
+     "say": "이형일 부총리가 주재한 회의는 2시간 20분쯤 이어졌습니다. 첫째, 증권시장안정펀드, 이른바 증안펀드를 시장 상황에 따라 바로 가동할 수 있도록 준비에 들어갔습니"
+    },
+    {
+     "s": 6,
+     "type": "motionboard",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "그림으로 정리해 보겠습니다. 금요일 한국 장을 끌어내린 이유는 미국의 AI와 반도체였습니다. 정부도 회의에서 AI 투자 우려와 수익성 걱정을 원인으로 꼽았습니다."
+    }
+   ]
+  },
+  {
+   "id": "ep:20261123-market-daily-G",
+   "kind": "episode",
+   "topic": "market",
+   "label": "20261123-market-daily-G",
+   "project": "20261123-market-daily-G",
+   "scenes": 6,
+   "coverage": 1.0,
+   "fit": 0.33,
+   "rows": [
+    {
+     "s": 1,
+     "type": "versus",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "금요일 밤, 한국의 코스피200 야간선물은 6.99% 빠졌습니다. 그런데 일요일 밤 미국의 나스닥100 선물은 1.19% 올랐습니다. 같은 주말, 정반대의 두 숫"
+    },
+    {
+     "s": 2,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "출발점부터 짚겠습니다. 11월 20일 금요일 미국 장 마감 기준, 나스닥은 5.28%, S&P 500은 3.70%, 반도체 지수는 10.73% 내렸습니다. 이 하"
+    },
+    {
+     "s": 3,
+     "type": "timeline",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "중요한 건 순서입니다. 같은 금요일 코스피는 5.21% 내린 4,869.96으로 닫혔는데, 이건 미국 금요일 폭락보다 먼저 닫힌 숫자입니다. 금요일 밤의 충격은 "
+    },
+    {
+     "s": 4,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "먼저 일요일 오후 정부서울청사에서 열린 회의입니다. 정부는 무엇을 꺼냈을까요?"
+    },
+    {
+     "s": 5,
+     "type": "checklist",
+     "sit": "explain-market",
+     "fit": false,
+     "rec": [
+      "motionboard",
+      "spread",
+      "share"
+     ],
+     "say": "이형일 부총리가 주재한 회의는 2시간 20분쯤 이어졌습니다. 첫째, 증권시장안정펀드, 이른바 증안펀드를 시장 상황에 따라 바로 가동할 수 있도록 준비에 들어갔습니"
+    },
+    {
+     "s": 6,
+     "type": "motionboard",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "그림으로 정리해 보겠습니다. 금요일 한국 장을 끌어내린 이유는 미국의 AI와 반도체였습니다. 정부도 회의에서 AI 투자 우려와 수익성 걱정을 원인으로 꼽았습니다."
+    }
+   ]
+  },
+  {
    "id": "ep:20261123-market-deep-softbank-hynix",
    "kind": "episode",
    "topic": "market",
@@ -77331,6 +77858,11 @@
   },
   {
    "s": "doc:09",
+   "t": "sec:09§3-0-2",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
    "t": "sec:09§3-1",
    "kind": "contains"
   },
@@ -77441,17 +77973,17 @@
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h485",
+   "t": "sec:09§h502",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h494",
+   "t": "sec:09§h511",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h500",
+   "t": "sec:09§h517",
    "kind": "contains"
   },
   {
@@ -77801,37 +78333,37 @@
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h283",
+   "t": "sec:feedback§h284",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h285",
+   "t": "sec:feedback§h286",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h384",
+   "t": "sec:feedback§h385",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h407",
+   "t": "sec:feedback§h408",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h409",
+   "t": "sec:feedback§h410",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h437",
+   "t": "sec:feedback§h438",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h439",
+   "t": "sec:feedback§h440",
    "kind": "contains"
   },
   {
@@ -78410,42 +78942,32 @@
    "kind": "enforces"
   },
   {
-   "s": "check:233",
+   "s": "check:236",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:237",
+   "s": "check:240",
    "t": "gate:G3",
    "kind": "enforces"
   },
   {
-   "s": "check:239",
+   "s": "check:242",
    "t": "gate:G3",
    "kind": "enforces"
   },
   {
-   "s": "check:248",
+   "s": "check:251",
    "t": "gate:G1",
    "kind": "enforces"
   },
   {
-   "s": "check:254",
+   "s": "check:257",
    "t": "gate:G3",
    "kind": "enforces"
   },
   {
-   "s": "check:260",
-   "t": "gate:G3",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:268",
-   "t": "gate:G3",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:270",
+   "s": "check:263",
    "t": "gate:G3",
    "kind": "enforces"
   },
@@ -78455,23 +78977,28 @@
    "kind": "enforces"
   },
   {
-   "s": "check:275",
+   "s": "check:273",
+   "t": "gate:G3",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:274",
+   "t": "gate:G3",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:278",
    "t": "gate:G1",
    "kind": "enforces"
   },
   {
-   "s": "check:277",
-   "t": "gate:G3",
-   "kind": "enforces"
-  },
-  {
    "s": "check:280",
-   "t": "gate:G4",
+   "t": "gate:G3",
    "kind": "enforces"
   },
   {
-   "s": "check:282",
-   "t": "gate:G3",
+   "s": "check:283",
+   "t": "gate:G4",
    "kind": "enforces"
   },
   {
@@ -78481,16 +79008,16 @@
   },
   {
    "s": "check:288",
-   "t": "gate:G4",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:296",
    "t": "gate:G3",
    "kind": "enforces"
   },
   {
-   "s": "check:300",
+   "s": "check:291",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:299",
    "t": "gate:G3",
    "kind": "enforces"
   },
@@ -78501,22 +79028,22 @@
   },
   {
    "s": "check:306",
+   "t": "gate:G3",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:309",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:308",
+   "s": "check:311",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:324",
+   "s": "check:327",
    "t": "gate:G4",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:329",
-   "t": "gate:G6",
    "kind": "enforces"
   },
   {
@@ -78526,16 +79053,11 @@
   },
   {
    "s": "check:335",
-   "t": "gate:G4",
+   "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:341",
-   "t": "gate:G4",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:343",
+   "s": "check:338",
    "t": "gate:G4",
    "kind": "enforces"
   },
@@ -78545,33 +79067,38 @@
    "kind": "enforces"
   },
   {
-   "s": "check:348",
+   "s": "check:346",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:353",
-   "t": "gate:G3",
+   "s": "check:347",
+   "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:354",
+   "s": "check:351",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
    "s": "check:356",
+   "t": "gate:G3",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:357",
    "t": "gate:G4",
    "kind": "enforces"
   },
   {
-   "s": "check:362",
+   "s": "check:359",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:365",
    "t": "gate:G1",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:370",
-   "t": "gate:G4",
    "kind": "enforces"
   },
   {
@@ -78580,72 +79107,72 @@
    "kind": "enforces"
   },
   {
-   "s": "check:388",
+   "s": "check:376",
+   "t": "gate:G4",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:391",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:424",
+   "s": "check:427",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:435",
+   "s": "check:438",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:464",
+   "s": "check:467",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:474",
+   "s": "check:477",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:476",
+   "s": "check:479",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:478",
+   "s": "check:481",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:480",
+   "s": "check:483",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:484",
+   "s": "check:487",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:500",
+   "s": "check:503",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:505",
+   "s": "check:508",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:510",
+   "s": "check:513",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:511",
-   "t": "gate:G6",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:517",
+   "s": "check:514",
    "t": "gate:G6",
    "kind": "enforces"
   },
@@ -78655,27 +79182,32 @@
    "kind": "enforces"
   },
   {
-   "s": "check:533",
+   "s": "check:523",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:537",
+   "s": "check:536",
+   "t": "gate:G6",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:540",
    "t": "gate:G7",
    "kind": "enforces"
   },
   {
-   "s": "check:539",
+   "s": "check:542",
    "t": "gate:G7",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:545",
-   "t": "gate:G8",
    "kind": "enforces"
   },
   {
    "s": "check:548",
+   "t": "gate:G8",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:551",
    "t": "gate:G8",
    "kind": "enforces"
   },
@@ -82804,6 +83336,11 @@
    "kind": "about"
   },
   {
+   "s": "ver:122",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
    "s": "ver:8",
    "t": "code:ytflow/stages/backdrop.py:1",
    "kind": "implemented_by"
@@ -82865,67 +83402,67 @@
   },
   {
    "s": "ver:26",
-   "t": "code:ytflow/stages/checklist.py:240",
+   "t": "code:ytflow/stages/checklist.py:243",
    "kind": "implemented_by"
   },
   {
    "s": "ver:38",
-   "t": "code:ytflow/stages/checklist.py:253",
+   "t": "code:ytflow/stages/checklist.py:256",
    "kind": "implemented_by"
   },
   {
    "s": "ver:33",
-   "t": "code:ytflow/stages/checklist.py:261",
+   "t": "code:ytflow/stages/checklist.py:264",
    "kind": "implemented_by"
   },
   {
    "s": "ver:38",
-   "t": "code:ytflow/stages/checklist.py:269",
+   "t": "code:ytflow/stages/checklist.py:272",
    "kind": "implemented_by"
   },
   {
    "s": "ver:38",
-   "t": "code:ytflow/stages/checklist.py:274",
+   "t": "code:ytflow/stages/checklist.py:277",
    "kind": "implemented_by"
   },
   {
    "s": "ver:36",
-   "t": "code:ytflow/stages/checklist.py:290",
+   "t": "code:ytflow/stages/checklist.py:293",
    "kind": "implemented_by"
   },
   {
    "s": "ver:27",
-   "t": "code:ytflow/stages/checklist.py:310",
+   "t": "code:ytflow/stages/checklist.py:313",
    "kind": "implemented_by"
   },
   {
    "s": "ver:24",
-   "t": "code:ytflow/stages/checklist.py:366",
+   "t": "code:ytflow/stages/checklist.py:369",
    "kind": "implemented_by"
   },
   {
    "s": "ver:38",
-   "t": "code:ytflow/stages/checklist.py:377",
+   "t": "code:ytflow/stages/checklist.py:380",
    "kind": "implemented_by"
   },
   {
    "s": "ver:13",
-   "t": "code:ytflow/stages/checklist.py:401",
+   "t": "code:ytflow/stages/checklist.py:404",
    "kind": "implemented_by"
   },
   {
    "s": "ver:15",
-   "t": "code:ytflow/stages/checklist.py:423",
+   "t": "code:ytflow/stages/checklist.py:426",
    "kind": "implemented_by"
   },
   {
    "s": "ver:38",
-   "t": "code:ytflow/stages/checklist.py:486",
+   "t": "code:ytflow/stages/checklist.py:489",
    "kind": "implemented_by"
   },
   {
    "s": "ver:25",
-   "t": "code:ytflow/stages/checklist.py:526",
+   "t": "code:ytflow/stages/checklist.py:529",
    "kind": "implemented_by"
   },
   {
@@ -83055,82 +83592,82 @@
   },
   {
    "s": "ver:24",
-   "t": "code:ytflow/stages/hybrid.py:1099",
+   "t": "code:ytflow/stages/hybrid.py:1160",
    "kind": "implemented_by"
   },
   {
    "s": "ver:24",
-   "t": "code:ytflow/stages/hybrid.py:1192",
+   "t": "code:ytflow/stages/hybrid.py:1253",
    "kind": "implemented_by"
   },
   {
    "s": "ver:15",
-   "t": "code:ytflow/stages/hybrid.py:1212",
+   "t": "code:ytflow/stages/hybrid.py:1273",
    "kind": "implemented_by"
   },
   {
    "s": "ver:27",
-   "t": "code:ytflow/stages/hybrid.py:1223",
+   "t": "code:ytflow/stages/hybrid.py:1284",
    "kind": "implemented_by"
   },
   {
    "s": "ver:30",
-   "t": "code:ytflow/stages/hybrid.py:1224",
+   "t": "code:ytflow/stages/hybrid.py:1285",
    "kind": "implemented_by"
   },
   {
    "s": "ver:31",
-   "t": "code:ytflow/stages/hybrid.py:1225",
-   "kind": "implemented_by"
-  },
-  {
-   "s": "ver:10",
-   "t": "code:ytflow/stages/hybrid.py:1242",
-   "kind": "implemented_by"
-  },
-  {
-   "s": "ver:34",
-   "t": "code:ytflow/stages/hybrid.py:1270",
-   "kind": "implemented_by"
-  },
-  {
-   "s": "ver:36",
    "t": "code:ytflow/stages/hybrid.py:1286",
    "kind": "implemented_by"
   },
   {
    "s": "ver:10",
-   "t": "code:ytflow/stages/hybrid.py:1294",
+   "t": "code:ytflow/stages/hybrid.py:1303",
    "kind": "implemented_by"
   },
   {
-   "s": "ver:16",
-   "t": "code:ytflow/stages/hybrid.py:1488",
-   "kind": "implemented_by"
-  },
-  {
-   "s": "ver:15",
-   "t": "code:ytflow/stages/hybrid.py:1498",
+   "s": "ver:34",
+   "t": "code:ytflow/stages/hybrid.py:1331",
    "kind": "implemented_by"
   },
   {
    "s": "ver:36",
-   "t": "code:ytflow/stages/hybrid.py:1514",
+   "t": "code:ytflow/stages/hybrid.py:1349",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:10",
+   "t": "code:ytflow/stages/hybrid.py:1357",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:16",
+   "t": "code:ytflow/stages/hybrid.py:1551",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:15",
+   "t": "code:ytflow/stages/hybrid.py:1561",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:36",
+   "t": "code:ytflow/stages/hybrid.py:1577",
    "kind": "implemented_by"
   },
   {
    "s": "ver:12",
-   "t": "code:ytflow/stages/hybrid.py:1607",
+   "t": "code:ytflow/stages/hybrid.py:1670",
    "kind": "implemented_by"
   },
   {
    "s": "ver:2",
-   "t": "code:ytflow/stages/hybrid.py:1659",
+   "t": "code:ytflow/stages/hybrid.py:1722",
    "kind": "implemented_by"
   },
   {
    "s": "ver:22",
-   "t": "code:ytflow/stages/hybrid.py:1671",
+   "t": "code:ytflow/stages/hybrid.py:1734",
    "kind": "implemented_by"
   },
   {
@@ -83155,7 +83692,12 @@
   },
   {
    "s": "ver:32",
-   "t": "code:ytflow/stages/motion2.py:159",
+   "t": "code:ytflow/stages/mograph.py:72",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:32",
+   "t": "code:ytflow/stages/motion2.py:166",
    "kind": "implemented_by"
   },
   {
@@ -83235,22 +83777,12 @@
   },
   {
    "s": "ver:26",
-   "t": "check:248",
+   "t": "check:251",
    "kind": "implemented_by"
   },
   {
    "s": "ver:26",
-   "t": "check:254",
-   "kind": "implemented_by"
-  },
-  {
-   "s": "ver:33",
-   "t": "check:268",
-   "kind": "implemented_by"
-  },
-  {
-   "s": "ver:33",
-   "t": "check:270",
+   "t": "check:257",
    "kind": "implemented_by"
   },
   {
@@ -83259,13 +83791,18 @@
    "kind": "implemented_by"
   },
   {
-   "s": "ver:28",
-   "t": "check:275",
+   "s": "ver:33",
+   "t": "check:273",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:33",
+   "t": "check:274",
    "kind": "implemented_by"
   },
   {
    "s": "ver:28",
-   "t": "check:277",
+   "t": "check:278",
    "kind": "implemented_by"
   },
   {
@@ -83274,58 +83811,63 @@
    "kind": "implemented_by"
   },
   {
-   "s": "ver:26",
-   "t": "check:282",
+   "s": "ver:28",
+   "t": "check:283",
    "kind": "implemented_by"
   },
   {
-   "s": "ver:28",
+   "s": "ver:26",
    "t": "check:285",
    "kind": "implemented_by"
   },
   {
-   "s": "ver:26",
+   "s": "ver:28",
    "t": "check:288",
    "kind": "implemented_by"
   },
   {
-   "s": "ver:36",
-   "t": "check:296",
+   "s": "ver:26",
+   "t": "check:291",
    "kind": "implemented_by"
   },
   {
    "s": "ver:36",
-   "t": "check:300",
+   "t": "check:299",
    "kind": "implemented_by"
   },
   {
-   "s": "ver:42",
+   "s": "ver:36",
    "t": "check:303",
    "kind": "implemented_by"
   },
   {
-   "s": "ver:36",
+   "s": "ver:42",
    "t": "check:306",
    "kind": "implemented_by"
   },
   {
    "s": "ver:36",
-   "t": "check:308",
+   "t": "check:309",
+   "kind": "implemented_by"
+  },
+  {
+   "s": "ver:36",
+   "t": "check:311",
    "kind": "implemented_by"
   },
   {
    "s": "ver:27",
-   "t": "check:324",
+   "t": "check:327",
    "kind": "implemented_by"
   },
   {
    "s": "ver:15",
-   "t": "check:424",
+   "t": "check:427",
    "kind": "implemented_by"
   },
   {
    "s": "ver:15",
-   "t": "check:435",
+   "t": "check:438",
    "kind": "implemented_by"
   },
   {
@@ -83870,6 +84412,31 @@
   },
   {
    "s": "intent:01b1e11e",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "intent:04c3bdda",
+   "t": "fb:253",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:04c3bdda",
+   "t": "sec:09§3-0-2",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:04c3bdda",
+   "t": "sec:09§6",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:04c3bdda",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "intent:04c3bdda",
    "t": "theme:depth",
    "kind": "about"
   },
@@ -84970,7 +85537,7 @@
   },
   {
    "s": "intent:b3682647",
-   "t": "sec:feedback§h285",
+   "t": "sec:feedback§h286",
    "kind": "quoted_in"
   },
   {
@@ -86245,7 +86812,7 @@
   },
   {
    "s": "intent:8ecb5021",
-   "t": "code:ytflow/stages/checklist.py:526",
+   "t": "code:ytflow/stages/checklist.py:529",
    "kind": "quoted_in"
   },
   {
@@ -86419,6 +86986,11 @@
    "kind": "about"
   },
   {
+   "s": "intent:7b88afbf",
+   "t": "sec:09§6",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:2941d5dd",
    "t": "fb:26",
    "kind": "quoted_in"
@@ -86455,7 +87027,7 @@
   },
   {
    "s": "intent:a21b07e5",
-   "t": "code:ytflow/stages/hybrid.py:1225",
+   "t": "code:ytflow/stages/hybrid.py:1286",
    "kind": "quoted_in"
   },
   {
@@ -86790,7 +87362,7 @@
   },
   {
    "s": "intent:99b74c20",
-   "t": "code:ytflow/stages/checklist.py:310",
+   "t": "code:ytflow/stages/checklist.py:313",
    "kind": "quoted_in"
   },
   {
@@ -87055,7 +87627,7 @@
   },
   {
    "s": "intent:ca15e6d7",
-   "t": "code:ytflow/stages/checklist.py:290",
+   "t": "code:ytflow/stages/checklist.py:293",
    "kind": "quoted_in"
   },
   {
@@ -87165,7 +87737,7 @@
   },
   {
    "s": "intent:c9e1567a",
-   "t": "code:ytflow/stages/checklist.py:290",
+   "t": "code:ytflow/stages/checklist.py:293",
    "kind": "quoted_in"
   },
   {
@@ -88241,6 +88813,16 @@
   {
    "s": "topic:market",
    "t": "ep:20261123-market-daily",
+   "kind": "episode"
+  },
+  {
+   "s": "topic:market",
+   "t": "ep:20261123-market-daily-F",
+   "kind": "episode"
+  },
+  {
+   "s": "topic:market",
+   "t": "ep:20261123-market-daily-G",
    "kind": "episode"
   },
   {
@@ -92351,6 +92933,21 @@
   {
    "s": "fb:252",
    "t": "intent:d6c12d25",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:253",
+   "t": "theme:motion",
+   "kind": "about"
+  },
+  {
+   "s": "fb:253",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "fb:253",
+   "t": "intent:04c3bdda",
    "kind": "quoted_as"
   }
  ]
