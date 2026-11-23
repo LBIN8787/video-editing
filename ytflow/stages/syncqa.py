@@ -105,14 +105,9 @@ def run(project: Project) -> dict:
             merged.append((s0, e0))
     sil = merged
 
-    def onset(t, end=None):
+    def onset(t):
         for s0, e0 in sil:
             if s0 - 0.3 <= t < e0 - 0.05 and e0 - t <= 2.5:   # 무음 속에서는 말이 시작될 수 없음 → 무음 끝이 실제 말 시작
-                # 단, 쉼 바로 앞에서 시작해 쉼이 오기 전에 끝난 짧은 낱말('다섯째,' 뒤 쉼)은 진짜 말소리 — 옮기지 않음.
-                # 옮기면 맞게 뜬 자막을 0.5~1초 밀렸다고 잼 (2026-11-23 심층 '다섯째,·넷째,' 줄)
-                # (받아쓰기는 짧은 낱말의 끝을 뒤 쉼까지 늘려 적으므로 끝 시각으로는 못 가림 — 쉼보다 분명히 앞에서 시작했으면 진짜 말)
-                if t < s0 - 0.05:
-                    return t
                 return e0
         return t
 
@@ -124,9 +119,16 @@ def run(project: Project) -> dict:
             continue
         if any(ch.isdigit() for ch in S[p:q_hit]):   # 줄 첫머리 숫자('78%')를 받아쓰기가 '칠십팔'로 적으면 글자가 안 맞아
             continue                                   # 뒤 글자에 맞춰 늦게 잼 → 잴 수 없는 줄로 뺌 (2026-11-23 심층)
+        if q_hit - p >= 2:   # 줄 첫 낱말('다섯째,'·'넷째,')을 받아쓰기가 통째로 놓치면 쉼 뒤 낱말에 맞춰 1초 가까이 늦게 잼
+            continue          # → 첫머리를 못 들은 줄은 잴 수 없는 줄로 뺌 (2026-11-23 심층: 손으로 재 보니 자막은 0.1초 안에 맞았음)
         hit = m[q_hit]
         spoken = float(words[owner[hit]]["start"])
-        spoken = onset(spoken, words[owner[hit]].get("end"))
+        spoken = onset(spoken)
+        # 자막이 '쉼이 끝나 말이 다시 시작되는 순간'(내레이션 무음 끝) ±0.15초에 뜨면 그게 그 줄의 실제 시작 —
+        # 받아쓰기가 앞 줄 말끝에 시각을 붙여 1초 밀렸다고 재던 것 (2026-11-23 심층: 소리로 재 보니 정확히 맞았음)
+        e_near = next((e0 for _s0, e0 in sil if abs(a - e0) <= 0.15), None)
+        if e_near is not None and abs(a - spoken) > 0.3 and abs(e_near - spoken) <= 1.5:
+            spoken = e_near
         rows.append({"sub": round(a, 2), "spoken": round(spoken, 2), "off": round(a - spoken, 2), "text": text[:30]})
     offs = sorted(abs(r["off"]) for r in rows)
     res = {
