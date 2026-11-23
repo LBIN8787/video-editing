@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright
 HERE = Path(__file__).resolve().parent
 FONTS = (HERE.parents[2] / "ytflow" / "assets" / "fonts").as_uri()
 V = {   # 품절 임박 편 (2026-11-23) — 지금의 고리 '블랙프라이데이·품절 임박'을 큰 글씨에. 영상 첫 장면·핵심 반전·4장 질문과 같은 말
- "A": dict(img="room2_tr", side="left", css="background-size:1300px auto;background-position:110px 50%;background-repeat:no-repeat",
+ "A": dict(img="room2_tr", side="left", css="background-size:1300px auto;background-position:330px 50%;background-repeat:no-repeat",
            lines=["블프 '품절 임박'", "왜 손이 <b>먼저?</b>"], small="블랙프라이데이 밤 11시 50분",
            why="첫 장면(지우가 '3개 남음' 앞에서 몸을 일으킴) + 제목의 질문. 지금의 고리(블프·품절 임박)를 앞에."),
  "B": dict(img="cookie1_tr", side="right", css="background-size:1500px auto;background-position:-640px 40%;background-repeat:no-repeat",
