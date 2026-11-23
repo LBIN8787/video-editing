@@ -169,8 +169,10 @@ def public_link(url: str, strict: bool = True) -> bool:
         # Unknown query keys can be per-recipient identifiers: retain privately
         # for manual canonical-source lookup, never publish or request them.
         pairs = urllib.parse.parse_qsl(p.query, keep_blank_values=True)
-        if any(SENSITIVE_QUERY.search(k) or k.lower() not in PUBLIC_QUERY or
-               len(v) > 80 or "@" in v for k, v in pairs):
+        # KDI 경제정보센터 자료 주소의 `?num=` 은 자료 번호(공개) — 그 호스트에서만 예외 (2026-11-23)
+        kdi_num = host == "eiec.kdi.re.kr"
+        if any(SENSITIVE_QUERY.search(k) or len(v) > 80 or "@" in v or
+               (k.lower() not in PUBLIC_QUERY and not (kdi_num and k.lower() == "num")) for k, v in pairs):
             return False
         if strict and re.search(r"(?:^|/)[A-Za-z0-9_=-]{48,}(?:/|$)", urllib.parse.unquote(p.path)):
             return False
