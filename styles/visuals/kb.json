@@ -1,0 +1,139 @@
+{
+ "id": "kb",
+ "type": "kb",
+ "example_source": "projects\\20261107-style-archive\\02_script\\hybrid.json",
+ "renderer": "ytflow/stages/directions.py:57",
+ "function": "s_kb",
+ "scene_fields": [
+  "label",
+  "move",
+  "stamp"
+ ],
+ "beat_fields": [
+  "lower"
+ ],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only kb --force",
+ "spec_common": {
+  "edit_v10": true,
+  "map": {
+   "nodes": {
+    "war": {
+     "label": "1차 세계대전",
+     "icon": "shield-alert",
+     "x": 250,
+     "y": 400
+    },
+    "troops": {
+     "label": "군대 이동·밀집 막사",
+     "icon": "ship",
+     "x": 710,
+     "y": 400
+    },
+    "spread": {
+     "label": "독감이 세계로",
+     "icon": "globe",
+     "x": 1170,
+     "y": 400
+    },
+    "deaths": {
+     "label": "최소 5천만 명 사망",
+     "icon": "heart-pulse",
+     "x": 1630,
+     "y": 400
+    },
+    "censor": {
+     "label": "전쟁국: 나쁜 소식 검열",
+     "icon": "lock",
+     "x": 250,
+     "y": 720
+    },
+    "late": {
+     "label": "숨긴 곳은 대비가 늦음",
+     "icon": "hourglass",
+     "x": 710,
+     "y": 720
+    },
+    "spain": {
+     "label": "중립국 스페인: 보도",
+     "icon": "newspaper",
+     "x": 1170,
+     "y": 720
+    },
+    "name": {
+     "label": "'스페인 독감'이란 이름",
+     "icon": "tag",
+     "x": 1630,
+     "y": 720
+    }
+   },
+   "edges": [
+    [
+     "war",
+     "troops"
+    ],
+    [
+     "troops",
+     "spread"
+    ],
+    [
+     "spread",
+     "deaths"
+    ],
+    [
+     "war",
+     "censor"
+    ],
+    [
+     "censor",
+     "late"
+    ],
+    [
+     "late",
+     "spread"
+    ],
+    [
+     "spread",
+     "spain"
+    ],
+    [
+     "spain",
+     "name"
+    ]
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "type": "kb",
+   "clip": {
+    "src": "march",
+    "start": 0
+   },
+   "move": "in",
+   "stamp": "1918 · 프랑스 서부전선",
+   "label": "자료 화면 · 미국 의회도서관",
+   "beats": [
+    {
+     "say": "1918년, 전 세계 사람 세 명 중 한 명이 같은 병에 걸렸습니다."
+    },
+    {
+     "say": "우리는 이 병을 '스페인 독감'이라고 부르죠. 그런데 이상한 점이 하나 있습니다."
+    }
+   ],
+   "id": 1,
+   "chapter": 0
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "kb",
+   "events": [
+    " 0.00s 영상 움직임",
+    " 0.20s 「자료 화면 · 미국 의회도서관」 아래에서 떠오름",
+    " 0.30s 요소 아래에서 떠오름",
+    " 0.50s 요소 나타남"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+# v15 · 2026-11-12 사용자 통과 (시험판 20261112-bg-trials)
+id: evidence-board
+name: "증거판 (코르크 판 + 핀 꽂은 카드 + 붉은 실)"
+status: approved
+renderer: hybrid
+skin: corkboard
+format: [longform]
+owns: []                     # 인과 지도(map_causal)의 '모양' — 장면 수는 hybrid-causal 이 셈
+scene_types: [map_causal]    # 대본: map_causal 에 "look": "board" (issues 는 자동)
+fits:
+  brands: [issues, market]
+  questions: [연결, 원인, 숨은 장면, 소문 확인]
+  moods: [긴장, 위기]
+  needs: []
+roles: [body]
+avoid: "사람·기관·회사가 아니라 원리·과정을 잇는 지도(→ 칠판) / 한 영상에 2번 넘게"
+when: "누가 누구와 엮였나 — 인물·기관·회사·사건이 서로 이어지는 관계도. 시사는 기본, 시장은 소송·조사·거래처럼 '주체' 관계일 때"
+demo: "20261112-bg-trials"

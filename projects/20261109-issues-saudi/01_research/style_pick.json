@@ -1,0 +1,117 @@
+{
+ "base": {
+  "id": "data-report",
+  "name": "데이터 리포트 (실제 시세·막대·비교표)",
+  "score": 8.0,
+  "why": [
+   "질문 유형 원인",
+   "분위기 긴장",
+   "소스 있음(price)"
+  ],
+  "skin": "clean-flat",
+  "scene_types": [
+   "chart",
+   "bars",
+   "compare",
+   "bignum"
+  ],
+  "status": "approved",
+  "skill": "edit-style-moneycrew",
+  "demo": "20261106-머니크루-dram"
+ },
+ "hook": {
+  "id": "archive-doc",
+  "name": "아카이브 다큐 (자료 화면 켄 번스 + 타자기 문장)",
+  "score": 5.5,
+  "why": [
+   "분위기 위기·긴장",
+   "소스 있음(archive)"
+  ],
+  "skin": "dark-doc",
+  "scene_types": [
+   "kb",
+   "card_type",
+   "footage",
+   "quote"
+  ],
+  "status": "demo",
+  "skill": "edit-style-archive",
+  "demo": "20261107-style-archive"
+ },
+ "ending": {
+  "id": "kinetic-type",
+  "name": "키네틱 타이포 (말하는 순간 단어가 튀어나옴)",
+  "score": 2.5,
+  "why": [],
+  "skin": "kinetic-poster",
+  "scene_types": [
+   "kinetic",
+   "card_type"
+  ],
+  "status": "demo",
+  "skill": "edit-style-kinetic",
+  "demo": "20261107-style-kinetic"
+ },
+ "mix": [
+  {
+   "id": "data-report",
+   "score": 8.0,
+   "why": [
+    "질문 유형 원인",
+    "분위기 긴장",
+    "소스 있음(price)"
+   ],
+   "roles": [
+    "whole",
+    "body"
+   ]
+  },
+  {
+   "id": "issue-dark-montage",
+   "score": 8.0,
+   "why": [
+    "질문 유형 원인",
+    "분위기 긴장·위기",
+    "소스 있음(archive)",
+    "소스 있음(map)"
+   ],
+   "roles": [
+    "whole"
+   ]
+  },
+  {
+   "id": "map-journey",
+   "score": 6.5,
+   "why": [
+    "질문 유형 원인",
+    "소스 있음(map)"
+   ],
+   "roles": [
+    "body"
+   ]
+  },
+  {
+   "id": "paper-column",
+   "score": 6.0,
+   "why": [
+    "질문 유형 원인"
+   ],
+   "roles": [
+    "whole"
+   ]
+  },
+  {
+   "id": "archive-doc",
+   "score": 5.5,
+   "why": [
+    "분위기 위기·긴장",
+    "소스 있음(archive)"
+   ],
+   "roles": [
+    "hook",
+    "body",
+    "whole"
+   ]
+  }
+ ]
+}

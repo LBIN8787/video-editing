@@ -1,0 +1,36 @@
+id: ch-source-brief
+brand: market                               # channels/brands.yaml (욕망 = 채널)
+title: "(가칭) 원본으로 보는 기업"
+format: longform
+style_ref: sixsigma                      # 원본 소스형: CEO·CFO 인터뷰·실적발표 원본 + 자막 + 핵심요약 애니메이션
+family: source
+concept: >
+  실적발표·인터뷰·청문회에서 경영진이 '직접 한 말'을 원본 영상으로 보여 주고,
+  사이사이 핵심 요약 카드로 숫자를 정리하는 보고서형 채널.
+niche: "미국·한국 대형 기술주의 실적발표·경영진 발언 해설. 발언 원문과 공시 숫자로 확인한다. 투자 권유는 하지 않는다."
+seed_keywords: ["실적발표", "earnings call", "CEO 인터뷰", "엔비디아", "빅테크 실적", "가이던스", "자사주", "인수합병"]
+cadence: "주 1~2편 (실적 시즌에 몰아서)"
+voice: "ElevenLabs · Hyun Bin (s07IwTCOrCDCaETjUVjx) — 차분하고 절제된 남성, 기업 PR·보고서 해설용. 모델 eleven_v4 (2026-11-07, 하이브리드 경제 영상)"
+tone: "사실 전달 위주. 발언 → 정리하면 → 숫자 리듬."
+needs_pc_rebuild: true                   # YouTube 원본 클립은 사용자 PC 에서 rebuild 로 받음
+
+# 소스 찾기 (벤치마킹: docs/07-sourcing.md — 식스시그마식 '발언 원본에서 출발')
+sourcing:
+  start_from: statement           # 인물이 직접 말한 원본 영상 → 발언 → 공시·데이터로 교차 확인
+  max_age_days: 10                # 최근 10일 안의 원본
+  min_seconds: 240                # 4분 이상 (인터뷰·대담·실적 콜)
+  video_channels:                 # 원본 영상을 훑는 공식·방송 채널 (목록 조회만, 다운로드는 PC rebuild)
+    - "@CNBCtelevision"
+    - "@BloombergTelevision"
+    - "@YahooFinance"
+    - "@FoxBusiness"
+    - "@markets"                  # Bloomberg Markets & Finance
+  also_search: ["{회사} earnings call", "{회사} investor day", "{인물} interview", "{인물} podcast"]
+  verify_with: ["SEC/DART 공시(10-Q·10-K·8-K·13F)", "주주서한·실적 보도자료·실적 콜 녹취", "시세(야후 파이낸스)·지수·FRED", "로이터·블룸버그·CNBC 보도"]
+  correct_speaker: true           # 발언 속 숫자가 공시와 다르면 공시 숫자로 바로잡아 보여 준다
+  falsifiable_end: true           # "이 판단이 틀렸다면 무엇이 먼저 꺾이나"로 끝낸다
+
+# 목소리 확정 후 (docs/08-voice.md):
+# tts:
+#   backend: elevenlabs
+#   elevenlabs: {voice_id: "<ElevenLabs 목소리 ID>", model_id: eleven_multilingual_v2, language_code: ko, stability: 0.5, similarity_boost: 0.75, speed: 1.0}

@@ -1,0 +1,56 @@
+{
+  "$defs": {
+    "Article": {
+      "properties": {
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "publisher": {
+          "title": "Publisher",
+          "type": "string"
+        },
+        "date": {
+          "description": "YYYY-MM-DD (모르면 빈 문자열)",
+          "title": "Date",
+          "type": "string"
+        },
+        "facts": {
+          "description": "이 기사가 뒷받침하는 팩트 번호 (예: F1)",
+          "items": {
+            "type": "string"
+          },
+          "title": "Facts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "url",
+        "title",
+        "publisher",
+        "date",
+        "facts"
+      ],
+      "title": "Article",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "articles": {
+      "items": {
+        "$ref": "#/$defs/Article"
+      },
+      "title": "Articles",
+      "type": "array"
+    }
+  },
+  "required": [
+    "articles"
+  ],
+  "title": "ArticleList",
+  "type": "object"
+}

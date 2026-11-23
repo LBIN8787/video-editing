@@ -1,0 +1,117 @@
+{
+ "base": {
+  "id": "paper-column",
+  "name": "종이 칼럼 (구겨진 종이 + 손그림 + 콜라주)",
+  "score": 7.0,
+  "why": [
+   "질문 유형 행동의 이유",
+   "분위기 차분"
+  ],
+  "skin": "paper-sketch",
+  "scene_types": [
+   "analogy",
+   "map_causal",
+   "bignum",
+   "timeline"
+  ],
+  "status": "approved",
+  "skill": "edit-style-mijudiary",
+  "demo": "20261106-미주일기-현금흐름"
+ },
+ "hook": {
+  "id": "story-board",
+  "name": "이야기 그림판 (말하는 순간 종이 위에 사람·사물이 그려지고 카메라가 따라감)",
+  "score": 8.5,
+  "why": [
+   "질문 유형 행동의 이유",
+   "분위기 차분·과거·미래"
+  ],
+  "skin": "paper-sketch",
+  "scene_types": [
+   "story"
+  ],
+  "status": "demo",
+  "skill": "edit-style-story-board",
+  "demo": "20261113-curiosity-moravec"
+ },
+ "ending": {
+  "id": "story-board",
+  "name": "이야기 그림판 (말하는 순간 종이 위에 사람·사물이 그려지고 카메라가 따라감)",
+  "score": 8.5,
+  "why": [
+   "질문 유형 행동의 이유",
+   "분위기 차분·과거·미래"
+  ],
+  "skin": "paper-sketch",
+  "scene_types": [
+   "story"
+  ],
+  "status": "demo",
+  "skill": "edit-style-story-board",
+  "demo": "20261113-curiosity-moravec"
+ },
+ "mix": [
+  {
+   "id": "story-board",
+   "score": 8.5,
+   "why": [
+    "질문 유형 행동의 이유",
+    "분위기 차분·과거·미래"
+   ],
+   "roles": [
+    "hook",
+    "body",
+    "ending"
+   ]
+  },
+  {
+   "id": "chalk-lesson",
+   "score": 8.0,
+   "why": [
+    "질문 유형 행동의 이유",
+    "분위기 차분·과거"
+   ],
+   "roles": [
+    "body"
+   ]
+  },
+  {
+   "id": "paper-column",
+   "score": 7.0,
+   "why": [
+    "질문 유형 행동의 이유",
+    "분위기 차분"
+   ],
+   "roles": [
+    "whole"
+   ]
+  },
+  {
+   "id": "illustrated",
+   "score": 6.5,
+   "why": [
+    "질문 유형 행동의 이유",
+    "분위기 차분·과거·미래",
+    "소스 확인 필요(art)"
+   ],
+   "roles": [
+    "hook",
+    "body",
+    "ending"
+   ]
+  },
+  {
+   "id": "hybrid-causal",
+   "score": 5.0,
+   "why": [
+    "질문 유형 행동의 이유",
+    "분위기 차분",
+    "소스 확인 필요(footage)"
+   ],
+   "roles": [
+    "whole",
+    "body"
+   ]
+  }
+ ]
+}

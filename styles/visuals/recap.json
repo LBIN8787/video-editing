@@ -1,0 +1,145 @@
+{
+ "id": "recap",
+ "type": "recap",
+ "example_source": "projects\\20261110-v10-after\\02_script\\hybrid.json",
+ "renderer": "ytflow/stages/edit10.py:101",
+ "function": "s_recap",
+ "scene_fields": [
+  "items",
+  "label",
+  "new_from",
+  "title"
+ ],
+ "beat_fields": [],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only recap --force",
+ "spec_common": {
+  "edit_v10": true,
+  "map": {
+   "nodes": {
+    "war": {
+     "label": "이란 전쟁 (2.28)",
+     "icon": "siren",
+     "x": 250,
+     "y": 400
+    },
+    "hormuz": {
+     "label": "호르무즈 봉쇄",
+     "icon": "ban",
+     "x": 710,
+     "y": 400
+    },
+    "volume": {
+     "label": "팔 수 있는 양 ↓",
+     "icon": "trending-down",
+     "x": 1170,
+     "y": 400
+    },
+    "gdp": {
+     "label": "실질 GDP -3.8%",
+     "icon": "chart-line",
+     "x": 1630,
+     "y": 400
+    },
+    "price": {
+     "label": "유가 117달러까지",
+     "icon": "fuel",
+     "x": 250,
+     "y": 720
+    },
+    "profit": {
+     "label": "아람코 이익 +34.5%",
+     "icon": "coins",
+     "x": 710,
+     "y": 720
+    },
+    "houthi": {
+     "label": "후티의 홍해 공격",
+     "icon": "alert-triangle",
+     "x": 1170,
+     "y": 720
+    },
+    "budget": {
+     "label": "재정적자 2배+",
+     "icon": "landmark",
+     "x": 1630,
+     "y": 720
+    }
+   },
+   "edges": [
+    [
+     "war",
+     "hormuz"
+    ],
+    [
+     "hormuz",
+     "volume"
+    ],
+    [
+     "volume",
+     "gdp"
+    ],
+    [
+     "war",
+     "price"
+    ],
+    [
+     "price",
+     "profit"
+    ],
+    [
+     "houthi",
+     "volume"
+    ],
+    [
+     "volume",
+     "budget"
+    ]
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "type": "recap",
+   "chapter": 1,
+   "title": "여기까지 정리",
+   "items": [
+    "길이 막혀, 팔 수 있는 양이 30% 가까이 줄었다"
+   ],
+   "new_from": 0,
+   "beats": [
+    {
+     "say": "정리하면, 길이 막혀 팔 수 있는 양이 30% 가까이 줄었습니다."
+    }
+   ],
+   "id": 1,
+   "layers": [
+    {
+     "kind": "locator",
+     "at": [
+      56.4,
+      26.5
+     ],
+     "label": "막힌 길목 · 호르무즈",
+     "beat": 0,
+     "side": "right",
+     "top": 600,
+     "scale": 2.2
+    }
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "recap",
+   "events": [
+    " 0.00s 화면 전체(카메라) 확대·이동",
+    " 0.20s 「정리」 아래에서 떠오름",
+    " 0.20s 「여기까지 정리」 아래에서 떠오름",
+    " 0.50s 손그림 선 그려짐",
+    " 0.65s 「1」 옆에서 밀려 들어옴",
+    " 0.65s 「<path d=\"M145.541,247.603L14…」 튀어나옴"
+   ]
+  }
+ ]
+}

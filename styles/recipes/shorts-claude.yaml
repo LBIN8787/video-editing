@@ -1,0 +1,18 @@
+id: shorts-claude
+name: "쇼츠 Claude 판 (실제 녹화 화면 중심, 고정 배치)"
+status: demo
+renderer: shorts_hf
+skin: clean-flat
+format: [shorts]
+owns: []
+scene_types: []
+fits:
+  brands: [ai, market, curiosity]
+  questions: [정체, 방법, 개념]
+  moods: [실용, 빠름]
+  needs: [screen]
+roles: [whole]
+avoid: "실제 화면이 없을 때 (그때는 shorts-guide-codex 처럼 설명 카드형이 낫다)"
+demo: "20261109-short-unslop"
+skill: edit-style-pool
+notes: "python -m ytflow short <프로젝트> (02_script/short.json). Codex 'AI 실전노트'와 같은 고정 배치·-16 LUFS·효과음 없음, 다른 점은 가운데가 실제 화면"

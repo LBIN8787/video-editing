@@ -1,0 +1,20 @@
+# 2026-11-13 사용자 요청: "대본과 함께 대본에 어울리는 영상소스를 컷편집 — 어닝이나 누가 발언했다 그러면 대본과 어울리는 부분만 컷편집하여 올린다"
+# 기법: 긴 원본(어닝콜·기자회견·청문회·인터뷰)을 받아쓰기 → 대본이 고른 문장만 단어 단위로 잘라 → 그 사람의 목소리 그대로 + 원문·번역 2단 자막.
+id: source-cut
+name: "원본 발언 컷편집 (그 사람이 직접 말하는 부분만 잘라 넣기)"
+status: demo
+renderer: hybrid
+skin: clean-flat
+format: [longform, shorts]
+owns: [bite]
+scene_types: [bite]          # ytflow/stages/cutedit.py · python -m ytflow cut <프로젝트>
+fits:
+  brands: [market, issues, ai]
+  questions: [약속, 원인, 전망, 발언 확인, 누가 무엇을 말했나]
+  moods: [긴장, 차분, 실용]
+  needs: [footage, statement]
+roles: [hook, body, ending]
+avoid: "라이선스가 확인 안 된 원본(뉴스 채널 화면 등) / 한 번에 25초 넘게 (요점만) / 발언 앞뒤를 잘라 뜻을 바꾸는 편집 / 사인(私人)의 발언"
+when: "어닝콜 경영진의 약속·답변, 연준·정부 기자회견, 청문회, CEO 인터뷰 — 내레이션이 '이렇게 말했다'고 전하는 대신 그 사람의 목소리로 3~20초"
+demo: "20261113-style-cut"
+skill: "edit-style-source-cut"

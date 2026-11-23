@@ -1,0 +1,1680 @@
+"""하이브리드 스타일 렌더러: 식스시그마의 '원본 영상' + 머니크루의 '논리·인과' + 미주일기의 '종이·손그림'.
+
+한 영상은 hybrid.json(장면 → 박자 beats)으로 씁니다. 박자마다 내레이션 한두 문장이 있고, 화면은 그 박자에 맞춰 움직입니다.
+장면 종류(type)마다 화면이 다르고, 같은 종류가 연달아 나오지 않게 대본을 짭니다(prompts/script_hybrid.md).
+
+  footage     원본 영상(전체 화면 또는 종이 위 사진처럼) + 이름 자막(lower third) + 복스식 주석(vox)
+  chart       실제 시세 선 그래프 + 마지막 구간으로 카메라 확대 + 도장
+  map_causal  영상 내내 자라는 '인과 지도'(노드·손그림 화살표). 지금 이야기하는 칸이 빨갛게
+  usmap       손으로 그린 미국 지도 + 주 강조 + 숫자 카운터
+  versus · bignum · funnel · apartments · parking · bars · timeline · checklist · compare · quote · analogy · chapter · outro
+
+렌더: 장면마다 HyperFrames 프로젝트를 만들어 MP4 로 → 이어 붙이고 → 자막(아래)·효과음·마스터링(finish.py).
+"""
+from __future__ import annotations
+
+import html as H
+import json
+import math
+import os
+import re
+import shutil
+import subprocess
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+
+from .. import config
+from ..project import Project
+from . import hyper, paper
+from .paper import FT, fit
+import numpy as np
+
+W, HH = 1920, 1080
+GAP = 0.28          # 박자 사이 쉼
+LEAD = 0.35         # 장면 시작 후 첫 내레이션까지
+TAIL = 0.55         # 마지막 박자 뒤 여유
+FPS = 30
+
+
+def _e(s) -> str:
+    return H.escape(str(s))
+
+
+# ---------------------------------------------------------------- 문서 (hyper.Doc 확장)
+CAM_SKIP = {"footage", "outro", "intro", "bite", "stage", "story", "kb", "journey", "zoomshot", "newsdesk"}   # 영상·자체 카메라가 있는 장면은 박자 카메라 없음
+
+
+class HDoc(hyper.Doc):
+    def __init__(self, seed: int):
+        from . import skin as _skin
+        self.skin = _skin.load()
+        _skin.apply_fonts(self.skin)
+        paper.OVERRIDE.clear()
+        paper.OVERRIDE.update(_skin.paper_override(self.skin))
+        super().__init__(seed)
+        self.rough_hook = lambda o: _skin.rough_opts(self.skin, o)
+        self.media, self.under = [], []   # 영상·사진 (svg 아래), 종이 카드 등 바닥 요소
+        self.css = []
+        self.sfx = []                     # (효과음 이름, 장면 안 시각)
+        self.qa = []                      # 렌더 전 자체 점검 (선이 칸을 지남 등) → layout_qa.json
+        self.blue = "#2F5D8C"
+        self.yellow = "#F3D36B"
+
+    # 영상 ------------------------------------------------------
+    def video(self, src: str, dur: float, frame: str = "full", push: float = 0.06, at: float = 0.0):
+        """frame=full: 화면 가득, 아래쪽 어둡게 / photo: 종이 위 흰 테두리 사진 + 테이프 + 살짝 기울임."""
+        i = self._id()
+        if frame == "photo":
+            x, y, w, h, rot = 300, 120, 1320, 742, -1.6
+            self.media.append(
+                f'<div id="{i}f" style="position:absolute;left:{x - 18}px;top:{y - 18}px;width:{w + 36}px;height:{h + 36}px;'
+                f'background:#FBF8F1;box-shadow:0 18px 40px rgba(0,0,0,.28);transform:rotate({rot}deg)"></div>'
+                f'<div id="{i}w" style="position:absolute;left:{x}px;top:{y}px;width:{w}px;height:{h}px;overflow:hidden;transform:rotate({rot}deg)">'
+                f'<video id="{i}" class="clip" src="assets/{src}" muted playsinline data-start="0" data-duration="{dur:.2f}" data-track-index="2" '
+                f'style="width:100%;height:100%;object-fit:cover"></video></div>'
+                f'<div style="position:absolute;left:{x + w / 2 - 90}px;top:{y - 40}px;width:180px;height:46px;background:rgba(236,220,170,.85);transform:rotate(3deg)"></div>')
+            self.js.append(f'tl.fromTo("#{i}f,#{i}w",{{opacity:0,y:40}},{{opacity:1,y:0,duration:0.5,ease:"power2.out"}},{at:.2f});')
+            if not getattr(self, "no_zoom", False):
+                self.js.append(f'tl.fromTo("#{i}",{{scale:1.0}},{{scale:{1 + push:.3f},duration:{dur:.2f},ease:"none"}},0);')
+        else:
+            self.media.append(
+                f'<div id="{i}w" style="position:absolute;inset:0;overflow:hidden">'
+                f'<video id="{i}" class="clip" src="assets/{src}" muted playsinline data-start="0" data-duration="{dur:.2f}" data-track-index="2" '
+                f'style="width:100%;height:100%;object-fit:cover"></video></div>'
+                f'<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 62%,rgba(0,0,0,.55) 100%)"></div>'
+                f'<div style="position:absolute;inset:0;box-shadow:inset 0 0 0 14px #EEE7DA, inset 0 0 0 16px rgba(0,0,0,.15)"></div>')
+            if not getattr(self, "no_zoom", False):
+                self.js.append(f'tl.fromTo("#{i}",{{scale:1.0}},{{scale:{1 + push:.3f},duration:{dur:.2f},ease:"none"}},0);')
+        return i
+
+    # 이름 자막 (lower third) ------------------------------------
+    def lower(self, name: str, role: str, at: float, dark: bool = False):
+        from . import graphics
+        if graphics.component(self, "lower") == "bar" and (dark or getattr(self, "calm", False)):   # 영상 위에서만 얇은 선 스타일 (종이 위는 띠 유지) · 차분한 모드는 늘 얇은 선
+            return graphics.lower_bar(self, name, role, at)
+        i = self._id()
+        f = fit(FT("title"), name, 46, 900)
+        w = max(f.getlength(name), fit(FT("label"), role, 26, 900).getlength(role)) + 80
+        self.items.append(
+            f'<div id="{i}" style="position:absolute;left:96px;top:{getattr(self, "lower_top", None) or 760}px;width:{w:.0f}px;height:118px;background:#FBF8F1;'
+            f'box-shadow:0 8px 22px rgba(0,0,0,.25);transform-origin:left center">'
+            f'<div style="position:absolute;left:0;top:0;width:10px;height:100%;background:{self.red}"></div>'
+            f'<div style="position:absolute;left:34px;top:16px;font-family:serif-x;font-size:{f.size}px;color:{self.ink};white-space:nowrap">{_e(name)}</div>'
+            f'<div style="position:absolute;left:36px;top:74px;font-family:sans;font-size:26px;color:#5a5f6a;white-space:nowrap">{_e(role)}</div></div>')
+        self.js.append(f'tl.fromTo("#{i}",{{scaleX:0,opacity:0}},{{scaleX:1,opacity:1,duration:0.45,ease:"power3.out"}},{at:.2f});')
+        self.sfx.append(("click-soft", at))
+
+    # 복스식 주석: 종이 쪽지 + 형광펜 + 연결선 + 펜 메모 -------------
+    def vox(self, text: str, note: str, at: float, x: float = 1060, y: float = 150, on_paper: bool = False):
+        i = self._id()
+        f = fit(FT("title"), text, 56, 700)
+        w = f.getlength(text) + 70
+        x = min(x, 1860 - w)  # 화면 오른쪽 밖으로 나가지 않게
+        self.items.append(
+            f'<div id="{i}" style="position:absolute;left:{x:.0f}px;top:{y:.0f}px;width:{w:.0f}px;height:110px;background:#FBF8F1;'
+            f'box-shadow:0 10px 26px rgba(0,0,0,.3);transform:rotate(-1.2deg)">'
+            f'<div id="{i}m" style="position:absolute;left:28px;top:58px;width:{w - 56:.0f}px;height:30px;background:{self.yellow};opacity:.8;transform-origin:left center"></div>'
+            f'<div style="position:absolute;left:35px;top:18px;font-family:serif-x;font-size:{f.size}px;color:{self.ink};white-space:nowrap">{_e(text)}</div></div>')
+        self.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:-24,rotation:-5}},{{opacity:1,y:0,rotation:-1.2,duration:0.5,ease:"back.out(1.6)"}},{at:.2f});')
+        self.js.append(f'tl.fromTo("#{i}m",{{scaleX:0}},{{scaleX:1,duration:0.5,ease:"power1.inOut"}},{at + 0.45:.2f});')
+        if note:
+            nx, ny = x + w - 40, y + 150
+            self.rough("line", [nx - 20, y + 108, nx + 10, ny - 10], self.yellow, 3.5, at=at + 0.8, dur=0.25, roughness=0.8)
+            nf = fit(FT("note"), note, 40, 760)
+            nleft = min(nx - 40, 1870 - nf.getlength(note))  # 메모도 화면 안에
+            # 영상 위면 밝은 글씨+그림자, 종이 위(사진 틀 밖)면 잉크색 (대비 3:1 이상)
+            ncol, nsh = (self.red, "background:rgba(251,248,241,.92);padding:2px 12px;border-radius:6px;") if on_paper \
+                else ("#FFF3C4", "background:rgba(20,20,20,.55);padding:2px 12px;border-radius:6px;text-shadow:0 2px 6px rgba(0,0,0,.8);")
+            j = self._id()
+            self.items.append(f'<div id="{j}" style="position:absolute;left:{nleft:.0f}px;top:{ny:.0f}px;font-family:pen;font-size:{nf.size}px;'
+                              f'color:{ncol};{nsh}white-space:nowrap">{_e(note)}</div>')
+            self.js.append(f'tl.fromTo("#{j}",{{opacity:0,y:8}},{{opacity:1,y:0,duration:0.35}},{at + 1.0:.2f});')
+        self.sfx.append(("pencil", at + 0.45))
+
+    # 도장 ------------------------------------------------------
+    def stamp(self, text: str, x: float, y: float, at: float, rot: float = -8):
+        i = self._id()
+        f = fit(FT("title"), text, 64, 640)
+        w, h = f.getlength(text) + 80, 120
+        self.items.append(
+            f'<div id="{i}" style="position:absolute;left:{x - w / 2:.0f}px;top:{y - h / 2:.0f}px;width:{w:.0f}px;height:{h}px;'
+            f'border:7px double {self.red};border-radius:10px;color:{self.red};font-family:serif-x;font-size:{f.size}px;'
+            f'display:flex;align-items:center;justify-content:center;transform:rotate({rot}deg);background:rgba(251,248,241,.72)">{_e(text)}</div>')
+        self.js.append(f'tl.fromTo("#{i}",{{opacity:0,scale:1.8}},{{opacity:1,scale:1,duration:0.28,ease:"power4.in"}},{at:.2f});')
+        self.sfx.append(("impact-bass-1", at + 0.25))
+
+    def _hud_or_items(self) -> list:
+        """출처 줄·장 꼬리표는 박자 카메라(#cam) 밖에 둔다 — 카메라가 다가가도 잘리지 않게 (v27)."""
+        if getattr(self, "cam", False):
+            if not hasattr(self, "hud"):
+                self.hud = []
+            return self.hud
+        return self.items
+
+    def label(self, text: str, dark: bool = False):
+        # 2026-11-22 사용자: "오른쪽 위에 설명? 흰색? 저게 너무 길고 가끔 화면을 가려" — 기본은 화면에 안 씀(출처는 설명란 📚 출처).
+        #   spec "source_label": "off"(상자 모드 기본) | "small"(작은 글씨, 차분한 모드 기본) | "box"(예전 흰 상자)
+        mode = getattr(self, "src_label", "small" if getattr(self, "calm", False) else "off")
+        if not text or mode == "off":
+            return
+        if mode == "small":   # 호기심 채널처럼: 상자 없는 작은 출처 글씨
+            i = self._id()
+            self._hud_or_items().append(f'<div id="{i}" style="position:absolute;right:56px;top:46px;font-family:gr,sans;font-size:22px;color:rgba(255,255,255,.72);'
+                                        f'white-space:nowrap;text-shadow:0 1px 4px #000">{_e(text)}</div>')
+            self.js.append(f'tl.fromTo("#{i}",{{opacity:0}},{{opacity:1,duration:0.5}},0.2);')
+            return
+        i = self._id()
+        col = "#FFFFFF" if dark else "#5a5f6a"
+        bg = "rgba(0,0,0,.45)" if dark else "rgba(251,248,241,.85)"
+        # 긴 출처 줄이 왼쪽 위 장 표시를 덮지 않게 폭을 막고 두 줄까지 접음 (2026-11-21 사용자: "글씨끼리 겹치는 부분이 좀 있는데 이거 수정해주세요")
+        fs = 24 if len(text) <= 70 else 20
+        self._hud_or_items().append(f'<div id="{i}" style="position:absolute;right:56px;top:40px;max-width:1080px;padding:6px 14px;background:{bg};border-radius:6px;'
+                          f'font-family:sans;font-size:{fs}px;line-height:1.3;color:{col};text-align:right;white-space:normal;word-break:keep-all">{_e(text)}</div>')
+        self.js.append(f'tl.fromTo("#{i}",{{opacity:0}},{{opacity:1,duration:0.4}},0.2);')
+
+    def opinion_tag(self, dark: bool = False):
+        """v36 인사이트 장면 표시 (2026-11-17 사용자: "사실과 인사이트는 별개로 구분해야") — 왼쪽 위 장 표시 아래."""
+        i = self._id()
+        col = "#FFFFFF" if dark else self.ink
+        bg = "rgba(12,12,14,.55)" if dark else "rgba(251,248,241,.9)"
+        self._hud_or_items().append(f'<div id="{i}" style="position:absolute;left:56px;top:84px;padding:4px 14px;background:{bg};border:2px solid {self.red};'
+                          f'border-radius:6px;font-family:sans-x;font-size:24px;color:{col};white-space:nowrap">💭 의견 · 사실이 아닌 한 사람의 시각</div>')
+        self.js.append(f'tl.fromTo("#{i}",{{opacity:0}},{{opacity:1,duration:0.4}},0.3);')
+
+    def chapter_tag(self, num: str, title: str, dark: bool = False):
+        if not num:
+            return
+        if getattr(self, "calm", False):   # 호기심 채널처럼: 얇은 테두리 알약 + 흰 글자 (2026-11-21)
+            i = self._id()
+            self._hud_or_items().append(f'<div id="{i}" style="position:absolute;left:56px;top:44px;font-family:sans;font-size:24px;color:#FFFFFF;white-space:nowrap;'
+                                        f'padding:7px 14px;border-radius:4px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.35);letter-spacing:.5px">'
+                                        f'{_e(num)} · {_e(title)}</div>')
+            self.js.append(f'tl.fromTo("#{i}",{{opacity:0}},{{opacity:1,duration:0.5}},0.15);')
+            return
+        i = self._id()
+        col = "#FFFFFF" if dark else self.ink
+        acc = (self.skin.get("palette") or {}).get("accent", "#C4452F").lstrip("#")
+        lum = sum(int(acc[k:k + 2], 16) * w for k, w in ((0, .299), (2, .587), (4, .114)))
+        on_acc = "#111111" if lum > 150 else "#fff"   # 밝은 강조색(청사진의 노랑) 위에는 검은 글자
+        back = "background:rgba(12,12,14,.55);padding:4px 14px 4px 4px;border-radius:6px;" if dark else ""   # 밝은 영상 위에서도 읽히게
+        self._hud_or_items().append(f'<div id="{i}" style="position:absolute;left:56px;top:38px;font-family:sans-x;font-size:26px;color:{col};white-space:nowrap;{back}">'
+                          f'<span style="background:{self.red};color:{on_acc};padding:2px 12px;border-radius:4px;margin-right:12px">{_e(num)}</span>{_e(title)}</div>')
+        self.js.append(f'tl.fromTo("#{i}",{{opacity:0,x:-20}},{{opacity:1,x:0,duration:0.4}},0.15);')
+
+    def h1(self, title: str, at: float = 0.2, y: float = 150, size: int = 62):
+        if not title:
+            return
+        f = fit(FT("title"), title, size, W - 360)
+        self.text(W / 2, y, title, FT("title"), f.size, self.ink, at=at)
+        w = f.getlength(title)
+        self.rough("line", [W / 2 - w / 2, y + size * 0.72, W / 2 + w / 2, y + size * 0.72 + 3], self.red, 3.5, at=at + 0.3, dur=0.35, roughness=1.0)
+
+    def html(self, duration: float, bg_name: str) -> str:
+        cam = getattr(self, "cam", False)
+        keep = self.items
+        if cam:
+            self.items = keep + ["<!--CAMEND-->"] + list(getattr(self, "hud", []))
+        try:
+            base = super().html(duration, bg_name)
+        finally:
+            self.items = keep
+        if cam:   # 박자 카메라: 그림(잉크 SVG + 요소)만 #cam 안에, 출처 줄·꼬리표는 밖에
+            base = base.replace('<svg id="ink"', f'<div id="cam" style="position:absolute;left:0;top:0;width:{W}px;height:{HH}px;transform-origin:50% 50%">'
+                                + '<svg id="ink"', 1).replace("<!--CAMEND-->", "</div>", 1)
+        media = "".join(self.media)
+        base = base.replace('<div id="layer"', media + '<div id="layer"', 1)
+        if getattr(self, "top", None):   # 겹치기(layers)의 영상 액자: 렌더러가 찾도록 #layer 밖, 그 위에
+            base = base.replace("\n</div></div>\n<script>", "\n</div>" + "".join(self.top) + "</div>\n<script>", 1)
+        base = base.replace("</style>", "".join(self.css) + f"video{{filter:{_skin_mod().video_filter(self.skin) or 'none'}}}</style>", 1)
+        if getattr(self, "head_extra", None):   # 3D 장면 등: importmap·모듈 스크립트는 head 에
+            base = base.replace("</head>", self.head_extra + "</head>", 1)
+        return _skin_mod().remap_html(base, self.skin)   # 기본 토큰 색 → 고른 스킨의 색
+
+
+def _skin_mod():
+    from . import skin
+    return skin
+
+
+# ---------------------------------------------------------------- 장면별 화면
+def s_footage(D: HDoc, sc: dict, bt: list, dur: float):
+    clip = sc["clip"]
+    full = clip.get("frame", "full") == "full"
+    D.video(sc["_clipfile"], dur, clip.get("frame", "full"))
+    D.label(sc.get("label", ""), dark=full)
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""), dark=full)
+    for b, (t0, d) in zip(sc["beats"], bt):
+        if b.get("lower"):
+            D.lower(b["lower"]["name"], b["lower"]["role"], t0 + 0.2, dark=full)
+        if b.get("vox"):
+            D.vox(b["vox"]["text"], b["vox"].get("note", ""), t0 + 0.4, x=1000 if full else 1120, y=140 if full else 110, on_paper=not full)
+        if b.get("chips"):   # 실사 위 말 칩 (docs/43 §4-3, uiflow.chips)
+            from . import uiflow
+            uiflow.chips(D, b["chips"], t0 + 0.3, b.get("chip_gap", 0.6))
+
+
+def _free_spot(pts: list, used: list, ax: float, ay: float, w: float, h: float, top: float, bottom: float) -> tuple[float, float]:
+    """기준점(ax, ay) 근처에서 선(pts)과 이미 놓은 글자(used)에 겹치지 않는 자리 → (오른쪽 끝 x, 가운데 y). 글자는 anchor='rm'."""
+    import math
+    dense = []
+    for (x1_, y1_), (x2_, y2_) in zip(pts, pts[1:]):   # 선을 촘촘한 점으로
+        n = max(1, int(math.hypot(x2_ - x1_, y2_ - y1_) / 8))
+        dense += [(x1_ + (x2_ - x1_) * k / n, y1_ + (y2_ - y1_) * k / n) for k in range(n + 1)]
+    pad = 30   # 선 굵기(강조 8px)·글자 여백까지
+    for dy in (100, -100, 150, -150, 210, -210, 270, -270, 340, -340, 420, -420):   # 2026-11-14: 후보가 모자라 검사 없는 대체 위치로 떨어져 글자가 선에 걸림
+        for dx in (-30, -140, 60, -260, -400, -560):
+            rx, cy = ax + dx, ay + dy
+            L, R, T, B = rx - w - pad, rx + pad, cy - h / 2 - pad, cy + h / 2 + pad
+            if T < top or B > bottom:
+                continue
+            if any(L <= x <= R and T <= y <= B for x, y in dense):
+                continue
+            if any(not (R < a or L > b or B < c or T > d) for a, b, c, d in used):
+                continue
+            used.append((L, R, T, B))
+            return rx, cy
+    return ax - 20, ay + 70
+
+
+def s_chart(D: HDoc, sc: dict, bt: list, dur: float):
+    from . import marketdata
+    rows = marketdata.fetch(sc["ticker"], sc.get("period", "3mo"), sc["_prices"])
+    last = rows[-1]["date"] if rows else ""
+    rows = rows + [r for r in sc.get("append", []) if r["date"] > last]  # 시세 원본에 아직 없는 확정 종가(출처는 label 에)
+    rows = rows[-60:]
+    D.label(sc.get("label", ""))
+    D.h1(sc.get("title", ""), y=130)
+    x0, x1, y0, y1 = 200, 1560, 250, 760
+    lo, hi = min(r["close"] for r in rows), max(r["close"] for r in rows)
+    pad = (hi - lo) * 0.12
+    lo, hi = lo - pad, hi + pad
+    X = lambda i: x0 + (x1 - x0) * i / (len(rows) - 1)
+    Y = lambda v: y1 - (y1 - y0) * (v - lo) / (hi - lo)
+    _pal = D.skin.get("palette", {})
+    _b = (_pal.get("base") or "#F3EFE6").lstrip("#")
+    _dark = sum(int(_b[i:i + 2], 16) for i in (0, 2, 4)) < 300
+    axis = (_pal.get("muted_text") or "#B8C2D0") if _dark else "#4E525C"   # 어두운 팩에서도 눈금 글자 대비 4.5:1
+    grid = (_pal.get("line") or "#3B4D66") if _dark else "#c9c0ae"
+    for k in range(5):  # 가격 눈금
+        v = lo + (hi - lo) * k / 4
+        yy = Y(v)
+        D.svg.append(f'<line x1="{x0}" y1="{yy:.0f}" x2="{x1}" y2="{yy:.0f}" stroke="{grid}" stroke-width="1" opacity=".55"/>' if getattr(D, "chart_clean", False) else
+                     f'<line x1="{x0}" y1="{yy:.0f}" x2="{x1}" y2="{yy:.0f}" stroke="{grid}" stroke-width="1.5" stroke-dasharray="6 8"/>')
+        D.items.append(f'<div style="position:absolute;left:{x1 + 20}px;top:{yy - 16:.0f}px;font-family:sans;font-size:24px;color:{axis}">{v:,.0f}</div>')
+    pts = [(X(i), Y(r["close"])) for i, r in enumerate(rows)]
+    D.stroke(pts, D.ink, 4, at=0.3, dur=1.4)
+    for lab, idx in ((rows[0]["date"][2:].replace("-", "."), 0), (rows[-1]["date"][2:].replace("-", "."), len(rows) - 1)):
+        D.items.append(f'<div style="position:absolute;left:{X(idx) - 60:.0f}px;top:{y1 + 18}px;font-family:sans;font-size:24px;color:{axis}">{lab}</div>')
+    # 마지막 이틀 강조 + 카메라 확대
+    b0 = sc["beats"][0]
+    n = b0.get("focus_last", 3)
+    seg = pts[-n:]
+    t0 = bt[0][0]
+    if getattr(D, "chart_clean", False):   # 깔끔한 그래프: 마지막 구간만 강조색으로 조금 굵게 + 끝점은 작은 점 (손그림 동그라미 없음)
+        D.stroke(seg, D.red, 5, at=t0 + 1.2, dur=0.6)
+        _d = D._id()
+        D.items.append(f'<div id="{_d}" style="position:absolute;left:{seg[-1][0] - 9:.0f}px;top:{seg[-1][1] - 9:.0f}px;width:18px;height:18px;border-radius:50%;background:{D.red};opacity:0"></div>')
+        D.js.append(f'tl.to("#{_d}",{{opacity:1,duration:0.4}},{t0 + 1.7:.2f});')
+    else:
+        D.stroke(seg, D.red, 8, at=t0 + 1.2, dur=0.6)
+        D.circle(seg[-1][0], seg[-1][1], 26, 26, at=t0 + 1.7)
+    _fmt = ",.2f" if str(sc.get("ticker", "")).startswith("^") or rows[-1]["close"] < 1000 else ",.0f"   # 지수·1,000 미만 가격은 소수 둘째 자리까지 (반올림으로 숫자가 대사와 달라지지 않게, 2026-11-14 '163' vs 162.85)
+    val_txt = format(rows[-1]['close'], _fmt)
+    # 오른쪽 가격 눈금 글자 자리는 비워 둠 (2026-11-14 사용자: 글자 삐져나옴·겹침 주의 — '10,146.32'가 눈금 '9,519'에 겹침)
+    used = [(x1 + 5, x1 + 150, Y(lo + (hi - lo) * k / 4) - 22, Y(lo + (hi - lo) * k / 4) + 22) for k in range(5)]
+    # 숫자 글자는 선과 겹치지 않는 빈 곳에 (2026-11-13 사용자: '166'·'-4.34%'가 그래프 선 위에 겹침)
+    vx, vy = _free_spot(pts, used, seg[-1][0], seg[-1][1], len(val_txt) * 32, 60, y0, y1 + 10)
+    D.text(vx, vy, val_txt, FT("value"), 54, accent_text(D), at=t0 + 1.9, anchor="rm")
+    if b0.get("mark"):
+        mx, my = _free_spot(pts, used, (seg[0][0] + seg[-1][0]) / 2, min(p[1] for p in seg), len(b0["mark"]) * 40, 60, y0, y1 + 10)
+        D.text(mx, my, b0["mark"], FT("note"), 50, accent_text(D), at=t0 + 2.2, anchor="rm")
+    if not getattr(D, "no_zoom", False):
+        D.js.append(f'tl.to("#layer",{{scale:1.18,x:-230,y:40,duration:1.6,ease:"power2.inOut"}},{t0 + 1.0:.2f});')
+    D.sfx.append(("pencil", t0 + 1.2))
+    if len(sc["beats"]) > 1 and sc["beats"][1].get("stamp"):
+        if not getattr(D, "no_zoom", False):
+            D.js.append(f'tl.to("#layer",{{scale:1,x:0,y:0,duration:0.8,ease:"power2.inOut"}},{bt[1][0] - 0.2:.2f});')
+        D.stamp(sc["beats"][1]["stamp"], 820, 520, bt[1][0] + 0.7)
+
+
+def s_versus(D: HDoc, sc: dict, bt: list, dur: float):
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    L, R = sc["left"], sc["right"]
+    t0 = bt[0][0]
+    for x, it, col, at in ((W * 0.28, L, D.ink, t0 + 0.2), (W * 0.72, R, accent_text(D), t0 + 1.4)):
+        D.icon(it["icon"], x, 300, 120, col, at=at)
+        D.text(x, 520, it["value"], FT("value"), min(150 if getattr(D, "calm", False) else 210, fit(FT("value"), it["value"], 210, 620).size), col, at=at + 0.2, counter=True)   # 긴 값(12만 2,000주)이 'vs'·화면 끝에 닿지 않게
+        D.text(x, 680, it["label"], FT("label"), 40, "#5a5f6a", at=at + 0.4)
+    # 가운데 말: 같은 종류끼리 맞붙일 때만 'vs'. 말과 시장(발언 ↔ 가격)처럼 종류가 다르면 '그런데',
+    # 같은 사건을 두 사람이 다르게 읽은 것이면 비움 (2026-11-22 사용자: "vs가 들어갈 자리가 아니지 않나요?")
+    mid = sc.get("mid", "vs")
+    if mid:
+        # 'vs' 는 두 값 사이, 긴 말('그런데')은 값에 닿지 않게 아이콘 줄(위쪽 빈자리)에
+        D.text(W / 2, 520 if mid == "vs" else 300, mid, FT("note"), 90 if mid == "vs" else 60, D.muted, at=t0 + 1.2)
+    if len(bt) > 1:
+        t1 = bt[1][0]
+        D.circle(W * 0.72, 520, 210, 130, at=t1 + 0.3)
+        q = sc["beats"][1].get("question", "")
+        if q:
+            D.text(W / 2, 830, q, FT("title"), 64, D.ink, at=t1 + 1.0)
+            D.sfx.append(("pop", t1 + 1.0))
+
+
+def s_chapter(D: HDoc, sc: dict, bt: list, dur: float):
+    # 종이 한 장이 오른쪽에서 밀려 들어오며 장 제목 (그래픽 팩 chapter: paper). 'type' 이면 큰 글씨 판.
+    from . import graphics
+    if graphics.component(D, "chapter", sc) == "quiet":
+        return graphics.chapter_quiet(D, sc)
+    if graphics.component(D, "chapter", sc) == "type":
+        return graphics.chapter_type(D, sc)
+    i = D._id()
+    D.media.append(f'<div id="{i}" style="position:absolute;inset:0;background:#2b2f3a"></div>')
+    j = D._id()
+    D.media.append(f'<img id="{j}" src="assets/{getattr(D, 'bg_name', 'paper.jpg')}" style="position:absolute;left:0;top:0;width:{W}px;height:{HH}px;box-shadow:-30px 0 60px rgba(0,0,0,.45)">')
+    D.js.append(f'tl.fromTo("#{j}",{{x:{W},rotation:4}},{{x:0,rotation:0,duration:0.7,ease:"power3.out"}},0);')
+    D.sfx.append(("whoosh", 0.0))
+    D.icon(sc.get("icon", ""), W / 2, 330, 110, D.red, at=0.6)
+    D.text(W / 2, 470, f"{sc.get('num', '')}", FT("value"), 120, D.red, at=0.7)
+    f = fit(FT("title"), sc["title"], 92, W - 300)
+    D.text(W / 2, 640, sc["title"], FT("title"), f.size, D.ink, at=0.9)
+    w = f.getlength(sc["title"])
+    D.rough("line", [W / 2 - w / 2, 710, W / 2 + w / 2, 714], D.red, 4.5, at=1.3, dur=0.45)
+
+
+def accent_text(D, tint: float = 0.0) -> str:
+    """강조색을 '글자'로 쓸 때: 밝은 팩이면 바탕과 대비 4.5:1 이 될 때까지 어둡게 (어두운 팩은 그대로).
+    tint: 글자 뒤 칸을 강조색으로 옅게 칠했을 때 그 비율(예: 활성 칸 0.22) — 칠한 바탕 기준으로 잰다."""
+    def rgb(c):
+        c = c.lstrip("#"); return [int(c[i:i + 2], 16) for i in (0, 2, 4)]
+    def lum(c):
+        v = [x / 255 for x in c]; v = [x / 12.92 if x <= 0.03928 else ((x + 0.055) / 1.055) ** 2.4 for x in v]
+        return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]
+    base = rgb(D.skin.get("palette", {}).get("base", "#F3EFE6")); acc = rgb(D.red)
+    if tint:
+        base = [round(b * (1 - tint) + a * tint) for b, a in zip(base, acc)]
+    lb = lum(base)
+    if lb < 0.4:
+        return D.red
+    for _ in range(20):
+        if (lb + 0.05) / (lum(acc) + 0.05) >= 4.5:
+            break
+        acc = [int(x * 0.88) for x in acc]
+    return "#" + "".join(f"{x:02X}" for x in acc)
+
+
+def _node_box(D: HDoc, key: str, nd: dict, state: str, at: float, instant: bool):
+    """인과 지도 칸: state = dim | on | active"""
+    x, y = nd["x"], nd["y"]
+    bw, bh = BW, BH
+    col = accent_text(D, 0.22) if state == "active" else (D.ink if state == "on" else "#a8a29a")
+    fill = "rgba(196,69,47,0.22)" if state == "active" else None
+    d = 0.01 if instant else 0.45
+    from . import graphics
+    graphics.node(D, x, y, bw, bh, col, state, at, d)   # 칸 모양은 그래픽 팩(flow: box·pill·sticky·circle)
+    D.icon(nd.get("icon", ""), x, y - 30, 48, col, at=at if instant else at + 0.15, gap=0.0)
+    D.text(x, y + 34, nd["label"], FT("box"), fit(FT("box"), nd["label"], 34, bw - 30).size, col,
+           at=at if instant else at + 0.2, gap=0.0, dur=0.01 if instant else 0.4)
+
+
+BW, BH = 330, 150   # 인과 지도 칸 크기
+
+
+def _hits(seg, rect) -> bool:
+    """수평·수직·사선 선분이 사각형(여유 포함)을 지나가나."""
+    (x0, y0), (x1, y1) = seg
+    l, t, r, b = rect
+    for k in range(0, 41):
+        x, y = x0 + (x1 - x0) * k / 40, y0 + (y1 - y0) * k / 40
+        if l < x < r and t < y < b:
+            return True
+    return False
+
+
+def _route(a: dict, b: dict, others: list) -> tuple[list, bool]:
+    """a 칸 → b 칸 화살표 경로. 다른 칸을 지나지 않는 첫 후보를 고른다 (직선 → ㄱ자 → 줄 사이 빈 띠로 돌아가기)."""
+    ax, ay, bx, by = a["x"], a["y"], b["x"], b["y"]
+    hw, hh, m = BW / 2, BH / 2, 12
+    rects = [(o["x"] - hw - m, o["y"] - hh - m, o["x"] + hw + m, o["y"] + hh + m) for o in others]
+    sx = 1 if bx > ax else -1
+    sy = 1 if by > ay else -1
+    cands = []
+    if ay == by:
+        cands.append([(ax + sx * hw, ay), (bx - sx * hw, by)])
+    if ax == bx:
+        cands.append([(ax, ay + sy * hh), (bx, by - sy * hh)])
+    if ax != bx and ay != by:
+        cands.append([(ax + sx * hw, ay), (bx, ay), (bx, by - sy * hh)])          # 옆으로 나가 꺾어 내려가기
+        cands.append([(ax, ay + sy * hh), (ax, by), (bx - sx * hw, by)])          # 아래로 나가 꺾어 옆으로
+        cands.append([(ax + sx * hw, ay), (bx - sx * hw, by)])                    # 사선
+    # 줄 사이 빈 띠(두 줄 칸 사이)로 돌아가기
+    lanes = sorted({(ay + by) / 2, ay + sy * (hh + 70), ay - sy * (hh + 70), by + (hh + 70), by - (hh + 70)},
+                   key=lambda v: abs(v - (ay + by) / 2))
+    for ly in lanes:
+        pa = (ax, ay + (hh if ly > ay else -hh))
+        pb = (bx, by + (hh if ly > by else -hh))
+        cands.append([pa, (ax, ly), (bx, ly), pb])
+    for c in cands:
+        segs = list(zip(c[:-1], c[1:]))
+        if not any(_hits(sg, r) for sg in segs for r in rects):
+            return c, True
+    return cands[0], False
+
+
+def _edge(D: HDoc, a: dict, b: dict, at: float, instant: bool, col: str, others: list | None = None):
+    """화살표 하나 → (감싼 <g> id, 경로 점들). 나중에 '막힘'(uiflow.cut_link)으로 바꿀 수 있게 묶어 둠."""
+    gid = D._id()
+    D.svg.append(f'<g id="{gid}">')
+    pts = _edge_draw(D, a, b, at, instant, col, others)
+    D.svg.append("</g>")
+    return gid, pts
+
+
+def _edge_draw(D: HDoc, a: dict, b: dict, at: float, instant: bool, col: str, others: list | None = None):
+    pts, ok = _route(a, b, others or [])
+    if not ok:
+        D.qa.append(f"인과 지도: '{a['label']}' → '{b['label']}' 화살표가 다른 칸을 지납니다 (칸 위치를 옮기세요)")
+    d_body, d_head = (0.01, 0.01) if instant else (0.35 + 0.1 * (len(pts) - 2), 0.15)
+    D.rough("linearPath", [[list(p) for p in pts]], col, 3.5, at=at, dur=d_body, roughness=0.9)
+    (x0, y0), (x1, y1) = pts[-2], pts[-1]
+    ang = math.atan2(y1 - y0, x1 - x0)
+    head = [[x1 - 22 * math.cos(ang - 0.45), y1 - 22 * math.sin(ang - 0.45)], [x1, y1],
+            [x1 - 22 * math.cos(ang + 0.45), y1 - 22 * math.sin(ang + 0.45)]]
+    D.rough("linearPath", [head], col, 3.5, at=at + d_body, dur=d_head, roughness=0.5)
+    return pts
+
+
+def s_map_causal(D: HDoc, sc: dict, bt: list, dur: float):
+    mp = sc["_map"]
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.h1(sc.get("title", ""), y=150, size=58)
+    shown, drawn = [], {}
+    # 장면 시작 때 이미 있던 것: 첫 박자의 instant
+    first = sc["beats"][0]
+    for k in first.get("reveal", []) if first.get("instant") else []:
+        pass
+    active = None
+    for bi, (b, (t0, d)) in enumerate(zip(sc["beats"], bt)):
+        newly = [k for k in b.get("reveal", []) if k not in shown]
+        inst = set(n for e in b.get("instant", []) for n in e)
+        for k_i, k in enumerate(newly):
+            instant = k in inst
+            _node_box(D, k, mp["nodes"][k], "on", 0.3 if instant else t0 + 0.25 * k_i, instant)
+            shown.append(k)
+        for e in b.get("instant", []):
+            if tuple(e) not in drawn:
+                drawn[tuple(e)] = _edge(D, mp["nodes"][e[0]], mp["nodes"][e[1]], 0.35, True, D.ink, [v for k2, v in mp["nodes"].items() if k2 not in e])
+        for e_i, e in enumerate(b.get("draw", [])):
+            if tuple(e) not in drawn:
+                drawn[tuple(e)] = _edge(D, mp["nodes"][e[0]], mp["nodes"][e[1]], t0 + 0.6 + 0.55 * e_i, False, D.red if b.get("active") == e[1] else D.ink,
+                                        [v for k2, v in mp["nodes"].items() if k2 not in e])
+                D.sfx.append(("pencil", t0 + 0.6 + 0.55 * e_i))
+        if b.get("active") and b["active"] != active:
+            k = b["active"]
+            nd = mp["nodes"][k]
+            _node_box(D, k, nd, "active", t0 + 0.9, False)
+            active = k
+        for c_i, e in enumerate(b.get("cut", [])):   # 선 상태 바꾸기: 지우지 않고 빨간 점선 + X (docs/43 §4-2)
+            if tuple(e) in drawn:
+                from . import uiflow
+                gid, pts = drawn[tuple(e)]
+                uiflow.cut_link(D, gid, pts, t0 + 0.5 + 0.4 * c_i)
+            else:
+                D.qa.append(f"인과 지도: cut {e} — 아직 그리지 않은 화살표입니다")
+        if b.get("tag"):
+            nd = mp["nodes"][b["tag"]["node"]]
+            ty = nd["y"] + 120 if nd["y"] < 600 else nd["y"] - 125
+            D.marker(nd["x"] - 170, ty, 340, 46, at=t0 + 1.0)
+            D.text(nd["x"], ty, b["tag"]["text"], FT("note"), fit(FT("note"), b["tag"]["text"], 40, 360).size, D.red, at=t0 + 1.1)
+
+
+def s_usmap(D: HDoc, sc: dict, bt: list, dur: float):
+    states = sc["_states"]
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.h1(sc.get("title", ""), y=120, size=56)
+    ox, oy, s = 210, 210, 0.82
+    g = D._id()
+    paths = "".join(f'<path class="{g}" d="{v["d"]}" fill="none" stroke="#7d7568" stroke-width="2.2" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>'
+                    for k, v in states.items())
+    D.svg.append(f'<g transform="translate({ox},{oy}) scale({s})">{paths}</g>')
+    D.js.append(f'tl.to(".{g}",{{strokeDashoffset:0,duration:0.9,ease:"power1.inOut",stagger:0.012}},0.2);')
+    D.sfx.append(("pencil", 0.3))
+    for b, (t0, d) in zip(sc["beats"], bt):
+        for st in b.get("highlight", []):
+            v = states[st]
+            h = D._id()
+            D.svg.append(f'<g transform="translate({ox},{oy}) scale({s})"><path id="{h}" d="{v["d"]}" fill="{D.red}" fill-opacity="0.55" stroke="{D.red}" stroke-width="4"/></g>')
+            D.js.append(f'tl.fromTo("#{h}",{{opacity:0}},{{opacity:1,duration:0.5}},{t0 + 0.4:.2f});')
+        if b.get("note"):
+            v = states[b["note"]["state"]]
+            cx, cy = ox + v["c"][0] * s, oy + v["c"][1] * s
+            tx, ty = cx - 60, cy + 190  # 주 아래쪽 (오른쪽 숫자와 겹치지 않게)
+            D.rough("line", [tx + 20, ty - 40, cx, cy + 14], D.red, 3.5, at=t0 + 0.7, dur=0.35)
+            D.text(tx, ty, b["note"]["text"], FT("note"), 50, D.red, at=t0 + 0.9)
+        if b.get("counter"):
+            c = b["counter"]
+            D.text(1640, 330, f'{c["value"]}{c.get("suffix", "")}', FT("value"), 150, D.ink, at=t0 + 0.3, counter=True)
+            D.text(1640, 450, c.get("label", ""), FT("label"), 38, "#5a5f6a", at=t0 + 0.5)
+        if b.get("counter2"):
+            c = b["counter2"]
+            D.marker(1460, 590, 360, 70, at=t0 + 0.3)
+            D.text(1640, 590, f'{c["value"]} / {c["of"]}', FT("value"), 88, D.red, at=t0 + 0.4, counter=True)
+            D.text(1640, 680, c.get("label", ""), FT("label"), 38, D.red, at=t0 + 0.6)
+            D.sfx.append(("pop", t0 + 0.5))
+
+
+def s_quote(D: HDoc, sc: dict, bt: list, dur: float):
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    i = D._id()
+    D.under.append(i)
+    if getattr(D, "calm", False):   # 호기심 채널처럼: 어두운 반투명 판(글자는 밝게) — 밝은 종이 카드에 밝은 글자가 묻혀 보이지 않던 문제 (2026-11-21)
+        D.items.append(f'<div id="{i}" style="position:absolute;left:250px;top:200px;width:1420px;height:540px;background:rgba(12,14,18,.62);'
+                       f'border:1px solid rgba(255,255,255,.14);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.45)"></div>')
+    else:
+        D.items.append(f'<div id="{i}" style="position:absolute;left:250px;top:200px;width:1420px;height:540px;background:#FBF8F1;'
+                       f'box-shadow:0 14px 34px rgba(0,0,0,.2);transform:rotate(-0.8deg)"></div>')
+    D.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:30}},{{opacity:1,y:0,duration:0.5}},0.15);')
+    if getattr(D, "typeset", None):   # 글꼴 체계(블랙한산스)의 따옴표는 크고 낮게 그려져 첫 줄에 닿음 → 왼쪽 위 여백으로 (2026-11-20 겹침 점검)
+        D.text(300, 250, "“", FT("value"), 110, D.red, at=0.4, anchor="lm")
+    else:
+        D.text(330, 290, "“", FT("value"), 160, D.red, at=0.4, anchor="lm")
+    q = sc["quote"]
+    lines, cur = [], ""
+    for wd in q.split(" "):
+        if len((cur + " " + wd).strip()) > 22:
+            lines.append(cur.strip())
+            cur = wd
+        else:
+            cur += " " + wd
+    lines.append(cur.strip())
+    size = 58 if len(lines) <= 3 else 50
+    t0 = bt[0][0]
+    kw = sc.get("keyword", "")
+    nmax = 3 if sc.get("orig") else 5   # 원문 줄이 들어갈 자리 (번역은 3줄까지)
+    tl0, step = t0 + 0.3, 0.5
+    if sc.get("_read_last") and len(bt) > 1:   # 읽는 박자에 맞춰: '우리말로 옮기면 이렇습니다' 뒤부터 줄마다 읽는 속도대로
+        tb, db = bt[-1]
+        tl0 = tb + min(1.6, db * 0.18)
+        step = max(0.5, (db - (tl0 - tb)) / max(1, len(lines[:nmax])))
+    for k, ln in enumerate(lines[:nmax]):
+        y = 360 + k * (size + 30)
+        D.text(400, y, ln, FT("title"), size, D.ink, at=tl0 + k * step, anchor="lm")
+        if kw and kw in ln:
+            f = paper.F(FT("title"), size)
+            pre = f.getlength(ln[:ln.index(kw)])
+            mk_at = bt[-1][0] + 0.3 if any(b.get("mark") for b in sc["beats"]) else t0 + 1.6
+            card_ix = next(n for n, it in enumerate(D.items) if f'id="{i}"' in it)  # 카드 바로 위, 글자 아래
+            D.marker(400 + pre - 6, y + size * 0.18, f.getlength(kw) + 12, size * 0.55, at=mk_at, index=card_ix + 1)
+            if sc.get("note"):
+                ny = 360 + min(len(lines), nmax) * (size + 30) + 6  # 인용문 마지막 줄 아래 (다음 줄과 겹치지 않게)
+                D.text(min(400 + pre, 1500 - paper.F(FT("note"), 42).getlength(sc["note"])), ny, "↳ " + sc["note"], FT("note"), 42, D.red, at=mk_at + 0.4, anchor="lm")
+            D.sfx.append(("pencil", mk_at))
+    if sc.get("orig"):   # v18 원문(영어) 한 줄 — 번역 아래, 카드 맨 아래 (어닝콜·발언 원본: 원문·번역 2단)
+        o = sc["orig"].strip()
+        o_lines, cur = [], ""
+        for wd in o.split(" "):
+            if len((cur + " " + wd).strip()) > 92:
+                o_lines.append(cur.strip()); cur = wd
+            else:
+                cur += " " + wd
+        o_lines.append(cur.strip())
+        for k, ln in enumerate(o_lines[:2]):
+            D.text(400, 676 + k * 36, ("“" if k == 0 else "") + ln + ("”" if k == len(o_lines[:2]) - 1 else ""),
+                   paper.SANS, 26, "#5a5f6a", at=t0 + 0.9, anchor="lm")
+    D.lower(sc.get("who", ""), sc.get("role", ""), t0 + 0.6)
+
+
+def s_checklist(D: HDoc, sc: dict, bt: list, dur: float):
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.h1(sc.get("title", ""), y=150)
+    rows = sc["rows"]
+    y0, rh = 310, 125
+    xl = sc.get("x", 380)                     # 오른쪽에 움직이는 그림을 둘 때: "x": 160, "text_w": 900 (요약 + 애니메이션 혼용)
+    tw = sc.get("text_w", 1000)
+    shown = 0
+    from . import motion2
+    for k_b, (b, (t0, d)) in enumerate(zip(sc["beats"], bt)):
+        upto = b.get("upto", len(rows))
+        for r_i in range(shown, upto):
+            r = rows[r_i]
+            y = y0 + r_i * rh
+            at = t0 + 0.3 + (r_i - shown) * 0.9
+            if r.get("t"):   # 그 줄의 핵심 낱말을 말하는 순간 줄이 나타남
+                at = max(t0, (motion2.row_time(sc, k_b, b, t0, d, r["t"]) or at) - 0.15)
+            D.rough("rectangle", [xl, y - 30, 60, 60], D.ink, 3, at=at, dur=0.3)
+            D.text(xl + 100, y, r["label"], FT("box"), fit(FT("box"), r["label"], 46, tw).size, D.ink, at=at + 0.1, anchor="lm")
+            st = r.get("state")
+            if st in ("yes", "ok"):   # 확인된 줄은 체크 (2026-11-13: 'ok' 가 빈 칸으로 남아 무엇이 확인인지 안 보임)
+                D.rough("linearPath", [[[xl + 10, y], [xl + 25, y + 20], [xl + 56, y - 26]]], "#2E7D4F", 6, at=at + 0.45, dur=0.3)
+            elif st == "no":
+                D.rough("line", [xl + 8, y - 22, xl + 52, y + 22], D.red, 6, at=at + 0.45, dur=0.15)
+                D.rough("line", [xl + 52, y - 22, xl + 8, y + 22], D.red, 6, at=at + 0.6, dur=0.15)
+            elif st == "date":
+                D.text(1500, y, r.get("value", ""), FT("value"), 52, D.red, at=at + 0.45, anchor="lm")
+            elif st == "warn":
+                D.icon("triangle-alert", xl + 30, y, 44, "#C77B12", at=at + 0.4)
+            D.sfx.append(("pencil", at))
+        shown = upto
+        if b.get("stamp"):
+            D.stamp(b["stamp"], 1450, 720, t0 + d - 1.2)
+
+
+def s_analogy(D: HDoc, sc: dict, bt: list, dur: float):
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.h1(sc.get("title", ""), y=140)
+    L, R = sc["left"], sc["right"]
+    t0 = bt[0][0]
+    for x, it, col, at in ((W * 0.3, L, D.ink, t0 + 0.2), (W * 0.7, R, D.red, t0 + 1.4)):
+        D.rough("rectangle", [x - 230, 260, 460, 340], col, 3, at=at, dur=0.4)
+        D.icon(it["icon"], x, 370, 130, col, at=at + 0.2)
+        # 글자가 상자(460) 밖으로 삐져나오지 않게 (2026-11-19 사용자: "이런거 주의해줘 삐져나와")
+        # 한 줄로 42 이상이면 한 줄, 아니면 ':'·가운데 띄어쓰기에서 두 줄로 나눠 각 줄을 상자 안(420)에 맞춘다.
+        lab = it["label"]
+        if fit(FT("title"), lab, 58, 420).size >= 42:
+            D.text(x, 500, lab, FT("title"), fit(FT("title"), lab, 58, 420).size, col, at=at + 0.3)
+            sub_y = 560
+        else:
+            if ": " in lab:
+                a, b = lab.split(": ", 1)
+                a += ":"
+            else:
+                ws = lab.split(" ")
+                k = max(1, len(ws) // 2)
+                a, b = " ".join(ws[:k]), " ".join(ws[k:])
+            sz = min(fit(FT("title"), a, 50, 420).size, fit(FT("title"), b, 50, 420).size)
+            D.text(x, 472, a, FT("title"), sz, col, at=at + 0.3)
+            D.text(x, 528, b, FT("title"), sz, col, at=at + 0.35)
+            sub_y = 576
+        D.text(x, sub_y, it["sub"], FT("note"), fit(FT("note"), it["sub"], 40, 420).size, "#5a5f6a", at=at + 0.4)   # 상자(460) 안에 맞춤
+    D.text(W / 2, 430, "≈", FT("value"), 120, D.red, at=t0 + 1.2)
+    if len(bt) > 1 and sc.get("result"):
+        t1 = bt[1][0]
+        D.arrow(W * 0.5, 620, W * 0.5, 740, D.ink, at=t1 - 1.0)
+        D.icon(sc["result"]["icon"], W / 2 - 260, 800, 64, D.red, at=t1 - 0.6)
+        D.text(W / 2 - 200, 800, sc["result"]["label"], FT("box"), 46, D.red, at=t1 - 0.5, anchor="lm")
+
+
+def s_funnel(D: HDoc, sc: dict, bt: list, dur: float):
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.h1(sc.get("title", ""), y=140)
+    bars = sc["bars"]
+    top = max(b["value"] for b in bars)
+    x0, wmax = 560, 860
+    shown = 0
+    for b, (t0, d) in zip(sc["beats"], bt):
+        upto = b.get("upto", len(bars))
+        for k in range(shown, upto):
+            it = bars[k]
+            y = 300 + k * 190
+            w = wmax * it["value"] / top
+            col = D.red if it.get("highlight") else D.ink
+            at = t0 + 0.3
+            D.text(x0 - 30, y, it["label"], FT("box"), 40, D.ink, at=at, anchor="rm")
+            D.rough("rectangle", [x0, y - 50, max(w, 20), 100], col, 2.5, fill=col, at=at + 0.2, dur=0.9)
+            D.text(x0 + max(w, 20) + 26, y - 12, f'{it["value"]}{sc.get("unit", "")}', FT("value"), 64, col, at=at + 0.8, anchor="lm", counter=True)
+            D.text(x0 + max(w, 20) + 28, y + 42, it.get("sub", ""), FT("note"), 38, "#5a5f6a", at=at + 1.0, anchor="lm")
+            D.sfx.append(("pencil", at + 0.2))
+            if it.get("highlight"):
+                D.circle(x0 + max(w, 20) + 120, y - 10, 140, 70, at=at + 1.5)
+        shown = upto
+
+
+def s_apartments(D: HDoc, sc: dict, bt: list, dur: float):
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.h1(sc.get("title", ""), y=140)
+    total, waiting, cancel = sc["total"], sc["waiting"], sc["cancel"]
+    cols = 20
+    cw, ch, gx, gy = 50, 54, 14, 12
+    x0 = (W - cols * (cw + gx)) / 2
+    y0 = 250
+    g = D._id()
+    rects = []
+    for k in range(total):
+        r_, c_ = divmod(k, cols)
+        x, y = x0 + c_ * (cw + gx), y0 + r_ * (ch + gy)
+        cls = "w" if k >= total - waiting else "n"
+        cls2 = " x" if k >= total - cancel else ""
+        rects.append(f'<rect class="{g} {g}{cls}{" " + g + "x" if cls2 else ""}" x="{x:.0f}" y="{y:.0f}" width="{cw}" height="{ch}" rx="3" '
+                     f'fill="#FBF8F1" stroke="{D.ink}" stroke-width="2.5"/>'
+                     f'<rect class="{g}win" x="{x + 14:.0f}" y="{y + 14:.0f}" width="{cw - 28}" height="{ch - 30}" fill="none" stroke="#9a9488" stroke-width="1.5"/>')
+    D.svg.append("".join(rects))
+    t0 = bt[0][0]
+    D.js.append(f'tl.fromTo(".{g},.{g}win",{{opacity:0,y:12}},{{opacity:1,y:0,duration:0.25,stagger:0.006}},{t0 + 0.2:.2f});')
+    D.text(W / 2, 830, f"{total}개 동 = 계획 전체 148GW", FT("note"), 44, D.ink, at=t0 + 1.0)
+    if len(bt) > 1:
+        t1 = bt[1][0]
+        D.js.append(f'tl.to(".{g}w",{{fill:"{D.yellow}",duration:0.25,stagger:0.01}},{t1 + 0.2:.2f});')
+        D.js.append(f'tl.to(".{g}x",{{fill:"{D.red}",stroke:"{D.red}",duration:0.25,stagger:0.05}},{t1 + 2.2:.2f});')
+        D.marker(500, 890, 340, 46, at=t1 + 0.6)
+        D.text(670, 890, "허가 대기 60개 동", FT("note"), 42, D.ink, at=t1 + 0.7)
+        D.text(1250, 890, "최악이면 취소 12개 동", FT("note"), 42, D.red, at=t1 + 2.4)
+        D.sfx.append(("pop", t1 + 2.3))
+
+
+def s_timeline(D: HDoc, sc: dict, bt: list, dur: float):
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.h1(sc.get("title", ""), y=140)
+    ys = sc["years"]
+    x0, x1, y = 230, 1690, 560
+    X = {v: x0 + (x1 - x0) * k / (len(ys) - 1) for k, v in enumerate(ys)}
+    D.rough("line", [x0 - 40, y, x1 + 60, y], D.ink, 4, at=0.3, dur=0.6)
+    for v, x in X.items():
+        D.rough("line", [x, y - 18, x, y + 18], D.ink, 3, at=0.5, dur=0.1, gap=0.0)
+        D.text(x, y + 60, v, FT("value"), 46, D.ink, at=0.55, gap=0.0)
+    shown = 0
+    items = sc.get("spans") or sc.get("events") or []
+    for b, (t0, d) in zip(sc["beats"], bt):
+        upto = b.get("upto", len(items))
+        for k in range(shown, upto):
+            it = items[k]
+            at = t0 + 0.3 + (k - shown) * 1.0
+            if "from" in it:
+                xa, xb = X[it["from"]] - 70, X[it["to"]] + 70
+                col = D.red if it.get("tone") == "risk" else "#2E7D4F"
+                D.rough("rectangle", [xa, y - 150, xb - xa, 110], col, 3, fill=col, at=at, dur=0.8)
+                D.text((xa + xb) / 2, y - 200, it["label"], FT("box"), fit(FT("box"), it["label"], 42, max(xb - xa, 300)).size, col, at=at + 0.5)
+            else:
+                x = X[it["at"]]
+                yy = y - 140 - (k % 2) * 140
+                D.icon("calendar", x, yy - 70, 52, D.red, at=at)
+                fl = fit(FT("box"), it["label"], 38, 520)
+                half = max(fl.getlength(it["label"]), paper.F(FT("note"), 34).getlength(it.get("sub", ""))) / 2 + 40
+                tx = min(max(x, half), W - half)   # 글자는 화면 안으로 (점·선은 제자리)
+                D.text(tx, yy, it["label"], FT("box"), fl.size, D.ink, at=at + 0.15)
+                D.text(tx, yy + 48, it.get("sub", ""), FT("note"), 34, "#5a5f6a", at=at + 0.3)
+                D.rough("line", [x, yy + 75, x, y - 22], D.red, 2.5, at=at + 0.2, dur=0.25)
+            D.sfx.append(("pencil", at))
+        shown = upto
+
+
+def s_bars(D: HDoc, sc: dict, bt: list, dur: float):
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.h1(sc.get("title", ""), y=140)
+    items = sc["items"]
+    # 2026-11-14 사용자: "그래프를 보여주는 게 너무 늦다 — 대사와 함께" · "-인데 +처럼 나오는 것이 직관적이지 않다"
+    # → 첫 박자부터 차례로 서고(항목 t 가 있으면 그 말을 하는 순간), 음수는 기준선 아래로 내려 그린다.
+    pos = max([i["value"] for i in items if i["value"] > 0] or [0])
+    neg = max([-i["value"] for i in items if i["value"] < 0] or [0])
+    span = (pos + neg) or 1
+    area_top, area_bot = 340, 800 if neg else 820       # 막대가 차지하는 세로 범위 (값 글자가 제목 밑줄에 닿지 않게)
+    base = area_top + (area_bot - area_top) * pos / span if neg else area_bot
+    scale = (area_bot - area_top) / span
+    t0 = bt[0][0]
+    em = sc.get("emph", 0)   # 강조(강조색) 항목 번호 — 순서는 대본 그대로
+    n = len(items)
+    step = 440 if n <= 3 else 1180 / (n - 1)       # 4개 이상이면 화면 안에 고르게 (예전 2~3개 배치는 그대로)
+    bw = 220 if n <= 3 else min(220, step * 0.55)
+    stagger = 0.9 if n <= 3 else 0.6
+    vsize = 72 if n <= 3 else 60
+    clean = getattr(D, "chart_clean", False)
+    _pal = D.skin.get("palette", {})
+    _bb = (_pal.get("base") or "#F3EFE6").lstrip("#")
+    _dk = sum(int(_bb[i:i + 2], 16) for i in (0, 2, 4)) < 300
+    mute_bar = "#5C616B" if _dk else "#B9BEC6"            # 깔끔한 그래프: 강조 아닌 막대는 차분한 회색, 강조 하나만 강조색
+    if clean:
+        _x0 = 330 + (260 if any(L.get("side") == "left" for L in sc.get("layers") or []) else 0)
+        _ax = D._id()
+        D.items.append(f'<div id="{_ax}" style="position:absolute;left:{_x0}px;top:{base - 1:.0f}px;width:{1600 - _x0}px;height:2px;background:{"#6A6F78" if _dk else "#8A8F98"};transform-origin:left"></div>')
+        D.js.append(f'tl.fromTo("#{_ax}",{{scaleX:0}},{{scaleX:1,duration:0.6,ease:"power2.out"}},{t0 + 0.1:.2f});')
+    else:
+        D.rough("line", [330 + (260 if any(L.get("side") == "left" for L in sc.get("layers") or []) else 0), base, 1600, base + 2], D.ink, 3.5, at=t0 + 0.1, dur=0.5)
+    off = 260 if any(L.get("side") == "left" for L in sc.get("layers") or []) else 0   # 왼쪽에 지도·사진이 있으면 막대를 오른쪽으로 (2026-11-14 지도가 막대를 가림)
+    if n > 3 and off:
+        step = (1550 - (370 + off)) / (n - 1)
+        bw = min(220, step * 0.55)
+    # 말에 맞춰 생기는 숫자 카드(motion count)가 놓일 자리는 비워 둠 (2026-11-20 겹침 점검: 카드가 '브로드컴'·'셀트리온' 이름을 가림)
+    from . import motion2 as _m2
+    _cards = [_m2.count_rect(m_) for b_ in sc.get("beats", []) for m_ in (b_.get("motion") or []) if m_.get("do") == "count"]
+    _lo, _hi = (520 if n <= 3 else 370) + off, (1400 if n <= 3 else 1550)
+    for cx_, cy_, cw_, ch_ in _cards:
+        if cy_ - ch_ / 2 < base + 120 and cy_ + ch_ / 2 > base - 520:   # 막대 높이대에 걸치는 카드만
+            if cx_ >= 960:
+                _hi = min(_hi, cx_ - cw_ / 2 - bw / 2 - 40)
+            else:
+                _lo = max(_lo, cx_ + cw_ / 2 + bw / 2 + 40)
+    _reserve = _cards and (_hi < (1400 if n <= 3 else 1550) or _lo > (520 if n <= 3 else 370) + off)
+    if _reserve and n > 1:
+        step = (_hi - _lo) / (n - 1)
+        bw = min(bw, step * 0.55)
+    for k, it in enumerate(items):
+        x = (_lo + k * step if n > 1 else (_lo + _hi) / 2) if _reserve else \
+            520 + off + k * (440 - off / 2) if n <= 3 else 370 + off + k * step if off else 960 + (k - (n - 1) / 2) * step
+        v = it["value"]
+        h = max(abs(v) * scale, 6)
+        at = t0 + 0.4 + k * stagger
+        if it.get("t"):   # 그 항목 이름을 말하는 순간 막대가 섬 (2026-11-13: 막대가 늦게 나와 화살표가 빈 곳을 가리킴)
+            from . import motion2
+            for k_b, (b_, (tb, db)) in enumerate(zip(sc["beats"], bt)):
+                if it["t"] in b_["say"]:
+                    at = max(tb, motion2.row_time(sc, k_b, b_, tb, db, it["t"]) - 0.1)
+                    break
+        c = D.red if k == em else (mute_bar if clean else D.ink)
+        txt = f'{it.get("text", v)}'
+        lsize = fit(FT("box"), it["label"], 44, step - 20 if n > 3 else 400).size
+        vcol = (D.red if k == em else D.ink) if clean else c
+        if clean:   # 빗금 없는 면 막대가 기준선에서 자라 오름 (위쪽 모서리만 살짝 둥글게)
+            _b = D._id()
+            top_, org = (base - h, "bottom") if v >= 0 else (base, "top")
+            rad = "4px 4px 0 0" if v >= 0 else "0 0 4px 4px"
+            D.items.append(f'<div id="{_b}" style="position:absolute;left:{x - bw / 2:.0f}px;top:{top_:.0f}px;width:{bw:.0f}px;height:{h:.0f}px;background:{c};border-radius:{rad};'
+                           f'transform-origin:{org}"></div>')
+            D.js.append(f'tl.fromTo("#{_b}",{{scaleY:0}},{{scaleY:1,duration:0.7,ease:"power2.out"}},{at:.2f});')
+        if v >= 0:
+            if not clean:
+                D.rough("rectangle", [x - bw / 2, base - h, bw, h], c, 2.5, fill=c, at=at, dur=0.6)
+            D.text(x, base - h - 50, txt, FT("value"), vsize, vcol, at=at + 0.4, counter=True)
+            D.text(x, base + 48, it["label"], FT("box"), lsize, D.ink, at=at)
+        else:   # 아래로: 값은 막대 끝 아래, 이름은 기준선 위
+            if not clean:
+                D.rough("rectangle", [x - bw / 2, base, bw, h], c, 2.5, fill=c, at=at, dur=0.6)
+            D.text(x, base + h + 50, txt, FT("value"), vsize, vcol, at=at + 0.4, counter=True)
+            D.text(x, base - 40, it["label"], FT("box"), lsize, D.ink, at=at)
+        if not clean:
+            D.sfx.append(("pencil", at))
+    D.text(1640, 270, sc.get("unit", ""), FT("note"), 40, "#5a5f6a", at=t0)
+
+
+def s_bignum(D: HDoc, sc: dict, bt: list, dur: float):
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    t0 = bt[0][0]
+    D.text(W / 2, 300, sc.get("small", ""), FT("label"), 44, "#5a5f6a", at=t0 + 0.2)
+    D.text(W / 2, 480, sc["value"], FT("value"), 230, D.red, at=t0 + 0.5, counter=True)
+    f = paper.F(FT("value"), 230)
+    w = f.getlength(sc["value"])
+    D.rough("line", [W / 2 - w / 2, 610, W / 2 + w / 2, 616], D.red, 6, at=t0 + 1.6, dur=0.4)
+    if len(bt) > 1 and sc.get("compare"):
+        t1 = bt[1][0]
+        D.text(W / 2 - 40, 760, sc["compare"]["label"], FT("box"), 52, D.ink, at=t1 + 0.1, anchor="rm")
+        D.marker(W / 2 - 10, 760, 300, 64, at=t1 + 0.4)
+        D.text(W / 2 + 10, 760, sc["compare"]["value"], FT("value"), 80, D.ink, at=t1 + 0.3, anchor="lm")
+        D.sfx.append(("pop", t1 + 0.3))
+
+
+def s_parking(D: HDoc, sc: dict, bt: list, dur: float):
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.h1(sc.get("title", ""), y=140)
+    g = D._id()
+    out = []
+    x0, y0 = 560, 250
+    for k in range(100):
+        r_, c_ = divmod(k, 10)
+        x, y = x0 + c_ * 82, y0 + r_ * 56
+        out.append(f'<rect x="{x}" y="{y}" width="72" height="46" fill="none" stroke="#9a9488" stroke-width="2"/>')
+        if k != 57:
+            out.append(f'<rect class="{g}" x="{x + 10}" y="{y + 8}" width="52" height="30" rx="8" fill="{D.ink}"/>')
+        else:
+            out.append(f'<rect class="{g}h" x="{x + 10}" y="{y + 8}" width="5" height="30" rx="2" fill="{D.red}"/>')
+    D.svg.append("".join(out))
+    t0 = bt[0][0]
+    D.js.append(f'tl.fromTo(".{g}",{{opacity:0,scale:0.4,transformOrigin:"center"}},{{opacity:1,scale:1,duration:0.2,stagger:0.018}},{t0 + 0.3:.2f});')
+    D.js.append(f'tl.fromTo(".{g}h",{{opacity:0}},{{opacity:1,duration:0.3}},{t0 + 2.3:.2f});')
+    D.circle(x0 + 7 * 82 + 36, y0 + 5 * 56 + 23, 60, 40, at=t0 + 2.6)
+    D.text(1500, 520, "0.94%", FT("value"), 110, D.red, at=t0 + 2.4, anchor="lm")
+    D.text(1500, 620, "빈자리 비율", FT("note"), 46, D.ink, at=t0 + 2.6, anchor="lm")
+
+
+def s_compare(D: HDoc, sc: dict, bt: list, dur: float):
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.h1(sc.get("title", ""), y=140)
+    cx = [560, 1020, 1480]
+    D.text(cx[1], 290, sc["cols"][0], FT("box"), 46, D.muted, at=0.4)
+    D.text(cx[2], 290, sc["cols"][1], FT("box"), 46, D.red, at=0.5)
+    D.rough("line", [300, 340, 1720, 342], D.ink, 3, at=0.6, dur=0.5)
+    shown = 0
+    for b, (t0, d) in zip(sc["beats"], bt):
+        upto = b.get("upto", len(sc["rows"]))
+        for k in range(shown, upto):
+            r = sc["rows"][k]
+            y = 440 + k * 170
+            at = t0 + 0.3
+            D.text(cx[0], y, r["label"], FT("label"), 42, "#5a5f6a", at=at)
+            D.text(cx[1], y, r["a"], FT("title"), 56, D.ink, at=at + 0.3)
+            D.text(cx[2], y, r["b"], FT("title"), 56, D.red, at=at + 0.8)
+            D.marker(cx[2] - 200, y + 10, 400, 40, at=at + 1.0)
+            D.sfx.append(("pencil", at + 1.0))
+        shown = upto
+
+
+def s_outro(D: HDoc, sc: dict, bt: list, dur: float):
+    if sc.get("_clipfile"):   # 자료 영상이 없으면(클라우드에 파일 없음) 팩 바탕 위에 카드만 (2026-11-20 개정판 렌더)
+        D.video(sc["_clipfile"], dur, "photo", push=0.04)
+    i = D._id()
+    # 사진 위 글자가 읽히도록: 뒤를 살짝 흐리게 + 가운데 종이 카드
+    D.items.append(f'<div id="{i}" style="position:absolute;inset:0;background:{"rgba(0,0,0,.25)" if getattr(D, "calm", False) else "rgba(238,231,218,.35)"};backdrop-filter:blur(3px)"></div>')
+    D.js.append(f'tl.fromTo("#{i}",{{opacity:0}},{{opacity:1,duration:0.8}},0.6);')
+    j = D._id()
+    calm = getattr(D, "calm", False)   # 차분한 모드: 어두운 반투명 판·흰 글자·곧은 가는 선 (밝은 종이에 밝은 글자가 묻히던 문제, 2026-11-21)
+    card = ("background:rgba(12,14,18,.62);border:1px solid rgba(255,255,255,.14);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.45)" if calm
+            else "background:#FBF8F1;box-shadow:0 18px 40px rgba(0,0,0,.28);transform:rotate(-0.8deg)")
+    D.items.append(f'<div id="{j}" style="position:absolute;left:{W / 2 - 600:.0f}px;top:360px;width:1200px;height:380px;{card}"></div>')
+    D.js.append(f'tl.fromTo("#{j}",{{opacity:0,y:30}},{{opacity:1,y:0,duration:0.6,ease:"power2.out"}},0.7);')
+    D.text(W / 2, 470, sc["title"], FT("title"), min(120, fit(FT("title"), sc["title"], 120, 1080).size), D.ink, at=0.9)
+    if calm:
+        _u = D._id()
+        D.items.append(f'<div id="{_u}" style="position:absolute;left:{W / 2 - 200:.0f}px;top:560px;width:400px;height:3px;background:{D.red};transform-origin:center"></div>')
+        D.js.append(f'tl.fromTo("#{_u}",{{scaleX:0}},{{scaleX:1,duration:0.7,ease:"power2.out"}},1.4);')
+    else:
+        D.rough("line", [W / 2 - 420, 560, W / 2 + 420, 566], D.red, 6, at=1.4, dur=0.5)
+    D.text(W / 2, 640, sc.get("sub", ""), FT("note"), 56, D.red, at=1.8)
+
+
+def s_people(D: HDoc, sc: dict, bt: list, dur: float):
+    """100명 그림: 그중 count 명이 빨갛게. 비율을 '사람'으로 느끼게 (3명 중 1명, 10명 중 4명)."""
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.h1(sc.get("title", ""), y=140)
+    n = int(sc["count"])
+    g = D._id()
+    rng = np.random.default_rng(sc["id"])
+    hit = set(rng.choice(100, n, replace=False).tolist()) if sc.get("scatter", True) else set(range(n))
+    out, x0, y0 = [], 260, 250
+    for k in range(100):
+        r_, c_ = divmod(k, 10)
+        cx, cy = x0 + c_ * 70, y0 + r_ * 64
+        cls = f"{g}h" if k in hit else f"{g}n"
+        out.append(f'<g class="{g}"><circle cx="{cx}" cy="{cy}" r="9" fill="{D.muted}"/>'
+                   f'<path d="M{cx - 15},{cy + 36} v-8 a15,13 0 0 1 30,0 v8 z" fill="{D.muted}"/></g>'
+                   f'<g class="{cls}" style="opacity:0"><circle cx="{cx}" cy="{cy}" r="9" fill="{D.red}"/>'
+                   f'<path d="M{cx - 15},{cy + 36} v-8 a15,13 0 0 1 30,0 v8 z" fill="{D.red}"/></g>')
+    D.svg.append("".join(out))
+    t0 = bt[0][0]
+    D.js.append(f'tl.fromTo(".{g}",{{opacity:0,y:10}},{{opacity:1,y:0,duration:0.25,stagger:0.012}},{t0 + 0.3:.2f});')
+    tf = next((t for b, (t, _) in zip(sc["beats"], bt) if b.get("fill")), bt[-1][0])
+    D.js.append(f'tl.to(".{g}h",{{opacity:1,duration:0.2,stagger:0.02}},{tf + 0.3:.2f});')
+    D.sfx.append(("pop", tf + 0.3))
+    D.text(1080, 470, sc["value"], FT("value"), 150, D.red, at=tf + 0.6, anchor="lm", counter=True)
+    D.text(1080, 600, sc.get("caption", ""), FT("note"), fit(FT("note"), sc.get("caption", ""), 50, 760).size, D.ink, at=tf + 0.9, anchor="lm")
+    if sc.get("sub"):
+        D.text(1080, 690, sc["sub"], FT("label"), fit(FT("label"), sc["sub"], 34, 760).size, "#5a5f6a", at=tf + 1.1, anchor="lm")
+
+
+def s_newspapers(D: HDoc, sc: dict, bt: list, dur: float):
+    """두 나라 신문 비교: 왼쪽은 검은 줄로 지워진(검열) 지면, 오른쪽은 큰 제목으로 보도한 지면. 재구성 그림."""
+    D.label(sc.get("label", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    L, R = sc["left"], sc["right"]
+    tl_ = {b.get("show"): t for b, (t, _) in zip(sc["beats"], bt)}
+    for k, (it, x) in enumerate(((L, 250), (R, 1010))):
+        at = tl_.get("left" if k == 0 else "right", bt[0][0]) + 0.2
+        i = D._id()
+        D.items.append(f'<div id="{i}" style="position:absolute;left:{x}px;top:200px;width:660px;height:690px;background:#F7F2E6;'
+                       f'box-shadow:0 14px 34px rgba(0,0,0,.22);transform:rotate({-1.2 if k == 0 else 1.0}deg)"></div>')
+        D.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:40}},{{opacity:1,y:0,duration:0.5,ease:"power2.out"}},{at:.2f});')
+        D.text(x + 330, 260, it["name"], FT("title"), 46, D.ink, at=at + 0.2)
+        D.rough("line", [x + 40, 300, x + 620, 300], D.ink, 3, at=at + 0.3, dur=0.3, roughness=0.6)
+        D.text(x + 330, 330, it.get("sub", ""), FT("label"), 26, "#5a5f6a", at=at + 0.3)
+        if k == 0:  # 검열: 글줄 위에 검은 띠
+            for r_ in range(9):
+                y = 400 + r_ * 50
+                w = 560 if r_ % 3 != 2 else 380
+                D.items.append(f'<div class="{i}l" style="position:absolute;left:{x + 50}px;top:{y - 4}px;width:{w}px;height:8px;background:#B9B09E;border-radius:4px"></div>')
+                j = D._id()
+                D.items.append(f'<div id="{j}" style="position:absolute;left:{x + 44}px;top:{y - 16}px;width:{w + 12}px;height:30px;'
+                               f'background:#1d1d1d;transform-origin:left center"></div>')
+                D.js.append(f'tl.fromTo("#{j}",{{scaleX:0}},{{scaleX:1,duration:0.18,ease:"power1.in"}},{at + 0.9 + r_ * 0.12:.2f});')
+            D.stamp(L.get("stamp", "검열"), x + 400, 790, at + 2.2, rot=-10)
+        else:
+            f = fit(FT("title"), it["headline"], 64, 580)
+            D.text(x + 330, 430, it["headline"], FT("title"), f.size, D.red, at=at + 0.5)
+            D.marker(x + 330 - f.getlength(it["headline"]) / 2 - 10, 440, f.getlength(it["headline"]) + 20, 30, at=at + 1.0, index=len(D.items))
+            for r_ in range(7):
+                y = 520 + r_ * 46
+                D.items.append(f'<div class="{i}l" style="position:absolute;left:{x + 50}px;top:{y - 4}px;width:{560 if r_ % 3 != 2 else 380}px;height:8px;background:#B9B09E;border-radius:4px"></div>')
+            if it.get("note"):
+                D.text(x + 330, 850, it["note"], FT("note"), 40, D.ink, at=at + 1.4)
+        D.js.append(f'tl.fromTo(".{i}l",{{opacity:0,scaleX:0,transformOrigin:"left center"}},{{opacity:1,scaleX:1,duration:0.25,stagger:0.05}},{at + 0.4:.2f});')
+        D.sfx.append(("click-soft", at))
+
+
+def s_shape(D: HDoc, sc: dict, bt: list, dur: float):
+    """모양 비교 개념도 (숫자 축 없음): 보통은 U자, 그때는 W자. 박자마다 곡선 하나씩."""
+    D.label(sc.get("label", "개념도 · 모양만 나타냄"))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.h1(sc.get("title", ""), y=140)
+    x0, x1, y0, y1 = 380, 1560, 280, 800
+    t0 = bt[0][0]
+    D.rough("line", [x0, y1, x1 + 40, y1], D.ink, 3.5, at=t0 + 0.2, dur=0.5, roughness=0.7)
+    D.rough("line", [x0, y1, x0, y0 - 30], D.ink, 3.5, at=t0 + 0.3, dur=0.5, roughness=0.7)
+    D.text(x1 + 40, y1 + 50, sc.get("xlabel", "나이 →"), FT("note"), 40, D.ink, at=t0 + 0.4, anchor="rm")
+    D.text(x0 - 30, y0 - 60, sc.get("ylabel", "사망 위험 ↑"), FT("note"), 40, D.ink, at=t0 + 0.4, anchor="lm")
+    for k, tick in enumerate(sc.get("ticks", [])):
+        D.text(x0 + (x1 - x0) * tick["at"], y1 + 50, tick["label"], FT("label"), 30, "#5a5f6a", at=t0 + 0.5)
+    X = lambda u: x0 + (x1 - x0) * u
+    Y = lambda v: y1 - (y1 - y0) * v
+    for k, (b, (t, _)) in enumerate(zip(sc["beats"], bt)):
+        cv = b.get("curve")
+        if not cv:
+            continue
+        col = D.red if cv.get("tone") == "red" else D.muted
+        pts = [[X(u), Y(v)] for u, v in cv["points"]]
+        D.rough("curve", [pts], col, 6 if col == D.red else 5, at=t + 0.3, dur=1.4, roughness=0.8)
+        lx, ly = cv.get("label_at", [0.8, 0.5])
+        D.text(X(lx), Y(ly), cv["label"], FT("box"), 44, col, at=t + 1.2)
+        if cv.get("circle"):
+            cu, cvv = cv["circle"]
+            D.circle(X(cu), Y(cvv), 120, 90, at=t + 1.8)
+            if cv.get("note"):
+                D.text(X(cu), Y(cvv) - 130, cv["note"], FT("note"), 42, D.red, at=t + 2.1)
+        D.sfx.append(("pencil", t + 0.4))
+
+
+RENDER = {"footage": s_footage, "chart": s_chart, "versus": s_versus, "chapter": s_chapter, "map_causal": s_map_causal,
+          "usmap": s_usmap, "quote": s_quote, "checklist": s_checklist, "analogy": s_analogy, "funnel": s_funnel,
+          "apartments": s_apartments, "timeline": s_timeline, "bars": s_bars, "bignum": s_bignum, "parking": s_parking,
+          "compare": s_compare, "outro": s_outro,
+          "people": s_people, "newspapers": s_newspapers, "shape": s_shape}
+
+
+# ---------------------------------------------------------------- 음성·시간
+def _channel_tts(project: Project) -> dict:
+    try:
+        import yaml as _y
+        ed = _y.safe_load((project.path / "edit.yaml").read_text(encoding="utf-8")) or {}
+        cy = config.ROOT / "channels" / str(ed.get("channel")) / "channel.yaml"
+        return ((_y.safe_load(cy.read_text(encoding="utf-8")) or {}).get("tts") or {}) if cy.exists() else {}
+    except Exception:  # noqa: BLE001
+        return {}
+
+
+def voice(project: Project, spec: dict) -> dict:
+    """박자마다 TTS → 03_voice/hb_<장면>_<박자>.wav, 길이 표."""
+    vdir = project.dir("voice")
+    vdir.mkdir(parents=True, exist_ok=True)  # 새 프로젝트는 폴더가 없을 수 있음
+    cfg = dict(config.load("pipeline").get("tts", {}))
+    ch_tts = _channel_tts(project)   # 채널마다 정한 목소리 (channels/<id>/channel.yaml 의 tts) — 예: 이어 읽는 시장 = Teo
+    if ch_tts and os.environ.get("YTFLOW_TTS", "") != "edge":   # YTFLOW_TTS=edge 면 초안 목소리로 강제
+        cfg = {**cfg, **ch_tts, "elevenlabs": {**(cfg.get("elevenlabs") or {}), **(ch_tts.get("elevenlabs") or {})}}
+    if spec.get("tts_rate"):   # v24: 영상마다 말 빠르기 (다큐 내레이션은 차분하게, README §2-3·§2-4)
+        cfg["rate"] = spec["tts_rate"]
+    el = cfg.get("backend") == "elevenlabs"
+    tag = f"\n#voice={(cfg.get('elevenlabs') or {}).get('voice_id', '')}" if el else (f"\n#rate={cfg['rate']}" if spec.get("tts_rate") else "")   # 목소리·빠르기를 바꾸면 박자 음성을 다시 만듦
+    durs = {}
+    # 2026-11-20: 장면이 끼어들어 번호가 밀려도 같은 대사(+같은 목소리)는 다시 녹음하지 않고 옮겨 씀 (ElevenLabs 크레딧 절약)
+    import tempfile as _tf
+    pool = _tf.mkdtemp(prefix="hbvoice-", dir=vdir)
+    have = {}
+    for t in vdir.glob("hb_*.txt"):
+        w = t.with_suffix(".wav")
+        if w.exists():
+            txt = t.read_text(encoding="utf-8")
+            for ext in (".wav", ".mp3", ".words.json", ".align.json"):
+                f = t.with_suffix(ext)
+                if f.exists():
+                    shutil.copy2(f, Path(pool) / f.name)
+            have.setdefault(txt, t.stem)
+    for sc in spec["scenes"]:
+        for k, b in enumerate(sc["beats"]):
+            key = f"{sc['id']:03d}_{k}"
+            wav = vdir / f"hb_{key}.wav"
+            side = vdir / f"hb_{key}.txt"   # 대사가 바뀌면(장면 번호가 밀려도) 다시 만든다
+            if wav.exists() and (not side.exists() or side.read_text(encoding="utf-8") != b["say"] + tag):
+                for ext in (".wav", ".mp3", ".words.json", ".align.json"):
+                    (vdir / f"hb_{key}{ext}").unlink(missing_ok=True)
+            if not wav.exists() and (b["say"] + tag) in have:   # 같은 대사의 녹음이 다른 번호로 있으면 옮겨 씀
+                old = have[b["say"] + tag]
+                for ext in (".wav", ".mp3", ".words.json", ".align.json"):
+                    f = Path(pool) / f"{old}{ext}"
+                    if f.exists():
+                        shutil.copy2(f, vdir / f"hb_{key}{ext}")
+            if not wav.exists():
+                mp3 = vdir / f"hb_{key}.mp3"
+                # mp3 와 대사 기록이 맞으면 녹음은 있음 → wav 만 다시 만듦 (PC 로 mp3 만 보낼 때, docs/50)
+                done = mp3.exists() and mp3.stat().st_size > 1000 and side.exists() and side.read_text(encoding="utf-8") == b["say"] + tag
+                if el and not done:
+                    from .media import _elevenlabs
+                    try:
+                        _elevenlabs(b["say"], mp3, cfg.get("elevenlabs") or {})
+                        done = True
+                    except Exception as e:  # noqa: BLE001  키 없음·크레딧 부족 → 초안 목소리로 (영상은 멈추지 않음, 기록만)
+                        print(f"[hybrid] ElevenLabs 실패 → edge 초안 목소리로: {str(e)[:160]}")
+                        el, tag = False, ""
+                if not done:
+                    cmd = [shutil.which("edge-tts") or "edge-tts", "--voice", cfg.get("voice", "ko-KR-InJoonNeural"),
+                           f"--rate={cfg.get('rate', '+0%')}", "--text", b["say"], "--write-media", str(mp3)]
+                    px = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
+                    if px:
+                        cmd[1:1] = ["--proxy", px]
+                    for _ in range(3):
+                        if subprocess.run(cmd, capture_output=True).returncode == 0 and mp3.exists() and mp3.stat().st_size > 1000:
+                            break
+                subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(mp3), "-af",
+                                "silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse",
+                                "-ar", "48000", "-ac", "2", str(wav)], check=True)
+            side.write_text(b["say"] + tag, encoding="utf-8")
+            durs[key] = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(wav)],
+                                             capture_output=True, text=True).stdout)
+    shutil.rmtree(pool, ignore_errors=True)
+    return durs
+
+
+def bite_fallback(project, spec: dict) -> None:
+    """bite 장면의 원본 영상이 아직 없으면(클라우드는 YouTube 봇 확인으로 못 받음) 인용 카드(quote)로 바꿔 그린다.
+    PC 에서 원본을 04_assets/footage/ 에 넣고 다시 렌더하면 원래 bite 로 돌아간다 (manual/09 §3-5, v36)."""
+    fdir = project.dir("assets") / "footage"
+    for sc in spec["scenes"]:
+        if sc.get("type") != "bite":
+            continue
+        src = (sc.get("clip") or {}).get("src", "")
+        meta = (spec.get("footage") or {}).get(src) or {}
+        if meta.get("file") and (fdir / meta["file"]).exists():
+            continue
+        cuts = (sc.get("clip") or {}).get("cuts", [])
+        ko = " ".join(c.get("ko", "") for c in cuts).strip()
+        en = " ".join(c.get("find") or f"{c.get('from', '')} … {c.get('to', '')}" for c in cuts).strip()
+        where = meta.get("credit") or meta.get("url") or ""
+        sc["type"] = "quote"
+        sc["quote"] = ko or sc.get("quote", "")
+        sc["orig"] = en
+        sc.setdefault("keyword", "")
+        sc["label"] = " · ".join(x for x in (sc.get("label", ""), where, "원본 영상: PC 에서 채움") if x)
+        sc["beats"] = list(sc.get("beats") or [{"say": f"{sc.get('who', '')}의 말입니다."}])
+        if ko:   # 원본 목소리 대신 번역을 내레이터가 읽음
+            sc["beats"].append({"say": f"우리말로 옮기면 이렇습니다. {ko}"})
+            sc["_read_last"] = True   # 번역 글자는 내레이터가 읽는 박자에 줄마다 나타남 (2026-11-21: 미리 다 적어 두면 정적)
+        print(f"[hybrid] #{sc.get('id')} 원본 영상 없음 → 인용 카드로 그림 ({src or '소스 미지정'}) — PC 에서 footage 를 넣고 다시 렌더하면 원본으로")
+
+
+def timing(sc: dict, durs: dict) -> tuple[list, float]:
+    t = LEAD + (0.9 if sc["type"] == "chapter" else 0.0)
+    bt = []
+    gap = sc.get("gap", GAP)   # v24: 장면마다 문장 사이 쉼 (다큐 내레이션은 길게)
+    for k, _ in enumerate(sc["beats"]):
+        d = durs[f"{sc['id']:03d}_{k}"]
+        bt.append((round(t, 2), d))
+        t += d + gap
+    if sc.get("_bite"):   # 원본 발언 컷 (cutedit): 앞 내레이션 뒤에 그 사람의 말이 이어진다
+        tb = (t - gap + 0.35) if bt else 0.0
+        sc["_bite_at"] = round(tb, 2)
+        return bt, math.ceil((tb + sc["_bite"]["dur"] + 0.45) * FPS - 1e-6) / FPS
+    # 30fps 프레임 격자에 맞춤: 장면 영상 길이 = 음성 길이 (안 맞추면 장면마다 0.01~0.03초씩 밀려 끝에서 0.6초 어긋남)
+    return bt, math.ceil((t - gap + TAIL) * FPS - 1e-6) / FPS
+
+
+# ---------------------------------------------------------------- 장면 렌더
+def build_scene(project: Project, spec: dict, sc: dict, bt: list, dur: float, work: Path) -> HDoc:
+    work.mkdir(parents=True, exist_ok=True)
+    a = work / "assets"
+    (a / "fonts").mkdir(parents=True, exist_ok=True)
+    shutil.copy(hyper.GSAP, a / "gsap.min.js")
+    _env_skin = os.environ.get("YTFLOW_SKIN")
+    from . import identity   # v15 카테고리 개성: 장 표지 모양·증거판·칠판 (brand 가 있을 때만)
+    if not spec.get("calm"):   # 차분한 모드는 카테고리 모양(대시보드 격자·장 표지 사진·쪽지)을 쓰지 않음
+        identity.prepare(spec, sc)
+    scene_skin = sc.get("skin") or ("calm" if spec.get("calm") else None)   # 차분한 모드: 모든 장면 한 바탕 (2026-11-21 사용자)
+    if not scene_skin and spec.get("bg_mode", "situation") == "situation" and spec.get("edit_v10", True):
+        from . import edit10, skin as _skin_m   # 상황별 바탕 (manual 05 §0-6): 장면이 하는 일에 맞는 팩
+        scene_skin = identity.situation_skin(spec, sc, _skin_m.current()) or edit10.situation_skin(sc, _skin_m.current())
+    if scene_skin:   # 장면별 그래픽 팩 (스타일 조합: 한 영상 안에서 구간마다 다른 팩)
+        os.environ["YTFLOW_SKIN"] = scene_skin
+    try:
+        D = HDoc(sc["id"] * 7 + 3)
+        # v27 박자 카메라 (manual/09 §6): spec camera: "beat" 일 때만
+        D.cam = spec.get("camera", "calm") == "beat" and sc.get("type") not in CAM_SKIP   # v30: 기본 끔 (2026-11-15 사용자: 억지 미세 움직임 필요 없음)
+        # v31 확대·축소 없음 (2026-11-15 사용자: "자꾸 화면을 확대하고 축소하고 웅웅거리는 거 쓰지 말아 주세요"): 시장 브랜드 기본 — 장면 안 느린 확대·tilt·dolly·차트 확대·사진 밀기 끔
+        D.no_zoom = spec.get("zoom", "off" if spec.get("brand") == "market" else "on") == "off"
+    finally:
+        if _env_skin is None:
+            os.environ.pop("YTFLOW_SKIN", None)
+        else:
+            os.environ["YTFLOW_SKIN"] = _env_skin
+    from . import typeset   # 한 편 안의 글꼴 통일 (2026-11-20 사용자: "화면 전환마다 제각각") — 시장 기본, "type": "pack" 이면 팩 글꼴
+    _ts = typeset.for_spec(spec)
+    if _ts:
+        typeset.apply(D, a, _ts)
+    for p in (paper.SERIF, paper.SERIF_B, paper.PEN, paper.SANS, paper.SANS_X, paper.FONT_DIR / "NanumGothic-Regular.ttf"):
+        if not (a / "fonts" / p.name).exists():   # 글꼴은 그래픽 팩(장면별일 수 있음)이 정한 뒤에 연결
+            try:
+                os.link(p, a / "fonts" / p.name)
+            except OSError:
+                shutil.copy(p, a / "fonts" / p.name)
+    if spec.get("edit_v10", True):   # v10: 장 표지는 그 장의 자료 사진을 깐 표지가 기본
+        from . import edit10
+        edit10.prepare(spec, sc)
+    from . import backdrop   # 장면 목적에 맞는 바탕 (film·grid·spot·tint·photo, manual 05 §0-2)
+    kind = "film" if spec.get("calm") else backdrop.auto(sc, bool(spec.get("footage")))   # 차분한 모드: 장면마다 바탕을 바꾸지 않음 (팩의 무늬 없는 바탕 하나)
+    chap = int(sc.get("chapter", 0) or 0)
+    tag = {"tint": f"_c{chap}", "photo": f"_{sc.get('bg_src', '')}", "illust": f"_a{sc.get('bg_src', '')}",
+           "duotone": f"_{sc.get('bg_src', '')}_{''.join(c.strip('#') for c in (sc.get('_duo') or []))}",
+           "glow": f"_{''.join(c.strip('#') for c in (sc.get('_duo') or []))}", "cork": f"_c{chap}", "chalk": f"_c{chap}", "dash": f"_c{chap}"}.get(kind, "")
+    still = backdrop.photo_still(project, spec, sc.get("bg_src")) if kind in ("photo", "duotone", "illust") else None
+    if still is not None and still.exists():   # 같은 키라도 사진을 바꾸면 바탕도 새로 (파일 크기로 구분)
+        tag += f"_{still.stat().st_size % 100000}"
+    bg_name = f"bg_{D.skin['id']}_{kind}{tag}_b3.jpg"   # _b3: 바탕 밝기 규칙 판 (바꾸면 올림) — b3: 밝은 팩 사진 바탕을 옅게
+    bg = a / bg_name
+    if not bg.exists():
+        backdrop.make(D.skin, kind, W, HH, chap, still, sc.get("_duo")).save(bg, quality=92)
+    _clip_src = (project.dir("assets") / "footage" / spec["footage"][sc["clip"]["src"]]["file"]) if sc.get("clip") and sc["clip"].get("src") in (spec.get("footage") or {}) else None
+    # bite 가 원본 없이 인용 카드로 바뀌면 clip 에 start 가 없다 (2026-11-20 개정판 렌더에서 KeyError) — 구간·파일이 있을 때만 자름
+    if sc.get("clip") and sc["type"] != "bite" and "start" in sc["clip"] and _clip_src is not None and _clip_src.exists():
+        src = _clip_src
+        out = a / f"clip_{sc['id']:03d}.mp4"
+        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-ss", str(sc["clip"]["start"]), "-i", str(src),
+                        "-t", f"{dur + 0.5:.2f}", "-an", "-vf", "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=30",
+                        "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p", str(out)], check=True)
+        sc["_clipfile"] = out.name
+    sc["_map"] = sc.get("map") or spec.get("map")   # 장면마다 다른 지도도 가능
+    sc["_chapters"] = [x.get("title", "") for x in spec["scenes"] if x.get("type") == "chapter"]
+    sc["_project_dir"] = str(project.path)   # 새 연출(directions.py)이 박자 음성·단어 시각을 찾을 때
+    sc.setdefault("_spec_stage", {k: spec[k] for k in ("camera", "perspective", "idle") if k in spec})   # 무대(stage) 움직임 기본값 (v34)
+    sc["_prices"] = project.dir("research") / "prices"
+    if sc["type"] == "usmap":
+        sc["_states"] = us_states()
+    D.bg_name = bg_name
+    D._work = work
+    D.calm = bool(spec.get("calm"))
+    D.src_label = spec.get("source_label") or ("small" if D.calm else "off")   # 2026-11-22 사용자: 오른쪽 위 출처 상자가 길고 화면을 가림
+    # 깔끔한 그래프 (2026-11-21 사용자: "그래프 스타일도 바꿔주세요 좀 깔끔하게요 브리핑이랑 분석 둘 다요") — 시장 기본: 빗금 없는 면 막대·가는 축·점선 없는 눈금
+    D.chart_clean = spec.get("chart_style", "clean" if spec.get("brand") == "market" else "rough") == "clean"   # 차분하고 깔끔한 모드 (2026-11-21 사용자) — 손그림 강조 없음, 아래 calm_pass 로 움직임·효과음 정리
+    from . import graphics
+    if not graphics.dispatch(D, sc, bt, dur, RENDER):   # 그래픽 팩이 다른 컴포넌트(그림)를 고르면 그걸로
+        if sc["type"] in ("afterline", "spread", "share", "motionboard") and not sc.get("theme"):
+            # 설명 무대 바탕 기본값: 시장은 어두운 무대 (2026-11-20 사용자: "설명부분은 배경 공통으로 해주세요 어두운걸로요")
+            sc["theme"] = spec.get("explain_theme") or {"market": "dark"}.get(spec.get("brand", ""), "paper")
+        RENDER[sc["type"]](D, sc, bt, dur)
+        if sc.get("insight") and spec.get("opinion_tag", False):   # v36: 사람·매체의 시각은 사실과 다르게 표시 (2026-11-21 사용자가 끄라고 한 편은 opinion_tag: false — 출처 줄로만)
+            D.opinion_tag(dark=sc["type"] in ("bite", "versus") or D.skin.get("dark", False))
+    if sc["type"] != "newsdesk":   # 요약 장면 위에 '말에 맞춰 생기는 사물' (박자 motion, docs/25 §8)
+        from . import motion2
+        motion2.apply(D, sc, bt, dur)
+    if sc.get("layers"):   # 한 장면 안에서 스타일 겹치기 (directions.apply_layers)
+        from . import directions
+        directions.apply_layers(D, project, spec, sc, bt, dur, a)
+    if spec.get("edit_v10", True):   # 편집 기준 v10 (기본 켬): 전환·장면 안 움직임·소리 (docs/19, manual 05 §0-4)
+        from . import edit10
+        edit10.apply(D, spec, sc, bt, dur)
+    if sc.get("fx"):   # 시각 효과 (반복 피로 막기, manual 05 §0-3)
+        from . import directions as _dir
+        _dir.apply_fx(D, project, spec, sc, bt, dur, a)
+    idx, html = work / "index.html", D.html(dur, bg_name)
+    if not idx.exists() or idx.read_text(encoding="utf-8") != html:  # 바뀐 장면만 다시 렌더
+        idx.write_text(html, encoding="utf-8")
+    (work / "hyperframes.json").write_text(json.dumps({"name": work.name}), encoding="utf-8")
+    if D.calm:   # 튀는 등장(back·elastic) → 부드러운 감속, 0에서 커지는 등장 → 거의 제자리에서, 효과음 없음
+        D.js[:] = [re.sub(r'scale:0(\.\d+)?(?=[,}])', 'scale:0.97', re.sub(r'(back|elastic)\.(in)?out\([^)]*\)|(back|elastic)\.(in)?out', 'power2.out', x)) for x in D.js]
+        D.sfx[:] = []
+        D.items[:] = [x.replace("#5a5f6a", "#A3A7AE") for x in D.items]   # 밝은 종이용 회색 글자 → 어두운 바탕에서 읽히는 옅은 회색
+    return D
+
+
+def us_states() -> dict:
+    cache = config.CACHE_DIR / "us_states_1500x860.json"
+    if not cache.exists():
+        cache.parent.mkdir(parents=True, exist_ok=True)
+        r = subprocess.run(["node", str(config.ROOT / "ytflow" / "assets" / "us_states.mjs"), str(hyper.TOOLS / "node_modules"), "1500", "860"],
+                           capture_output=True, text=True, check=True)
+        cache.write_text(r.stdout, encoding="utf-8")
+    return json.loads(cache.read_text(encoding="utf-8"))
+
+
+def render_scene(work: Path, out: Path) -> str:
+    r = subprocess.run([str(hyper.BIN), "render", "--quality", "looks", "-o", str(out.resolve())], cwd=work, env=hyper._env(),
+                       capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=1800)   # Windows 기본(cp949)으로 읽으면 렌더 로그의 특수문자에서 깨져 오류 문구가 사라짐
+    if r.returncode or not out.exists():
+        return (r.stderr or r.stdout or f"렌더 실패 (코드 {r.returncode})")[-300:]
+    return ""
+
+
+# ---------------------------------------------------------------- 자막·효과음·조립
+def _ass_time(t: float) -> str:
+    h, r = divmod(t, 3600)
+    m, s = divmod(r, 60)
+    return f"{int(h)}:{int(m):02d}:{s:05.2f}"
+
+
+def _chunks(text: str, n: int = 24) -> list[str]:
+    """자막 한 줄 단위: 문장 끝(. ? !) → 쉼표 → 띄어쓰기 순으로 자연스럽게 끊는다 (한 줄 최대 n자 안팎)."""
+    sents = [x.strip() for x in re.split(r"(?<=[.?!])\s+", text) if x.strip()]
+    if len(sents) > 1:
+        return [c for x in sents for c in _chunks(x, n)]
+    if len(text) > n and "," in text:
+        parts = [x.strip() for x in re.split(r"(?<=,)\s+", text) if x.strip()]
+        if len(parts) > 1 and all(len(x) >= 6 for x in parts):
+            return [c for x in parts for c in _chunks(x, n)]
+    # 숫자와 단위는 한 줄에 (예: '200만 명을' 이 '200만 / 명을' 로 갈라지지 않게)
+    glued = re.sub(r"(\d[\d,.]*[만억천조]?)\s+(명|개|년|원|달러|배|곳|척|대|건|번|살|채|퍼센트|%)", "\\1\u00a0\\2", text)
+    words, out, cur = glued.split(" "), [], ""
+    for w in words:
+        if len((cur + " " + w).strip()) > n and cur:
+            out.append(cur.strip())
+            cur = w
+        else:
+            cur += " " + w
+    if cur.strip():
+        out.append(cur.strip())
+    if len(out) > 1 and len(out[-1]) < 7 and len(out[-2]) + len(out[-1]) <= n + 8:  # 짧은 꼬리 줄은 앞 줄에 붙임
+        out[-2:] = [out[-2] + " " + out[-1]]
+    return [o.replace("\u00a0", " ") for o in out]
+
+
+def _word_starts(wav: Path, parts: list[str], dur: float) -> list[float] | None:
+    """자막 줄마다 '그 줄의 첫 글자를 말하기 시작하는 시각'(박자 음성 기준 초).
+    받아쓴 단어의 글자 누적 위치와 대본 글자 누적 위치를 비율로 맞춘다 (받아쓰기가 조금 틀려도 위치는 맞음)."""
+    from . import align
+    if not align.available():
+        return None
+    try:
+        words = align.transcribe(Path(wav), "ko")
+    except Exception:  # noqa: BLE001
+        return None
+    import difflib
+    norm = align._norm
+    R, owner = "", []
+    for wi, w in enumerate(words):
+        t = norm(w["word"])
+        R += t
+        owner += [wi] * len(t)
+    if not R:
+        return None
+    S, pos = "", []
+    for p in parts:
+        pos.append(len(S))
+        S += norm(p)
+    blocks = [b for b in difflib.SequenceMatcher(None, S, R, autojunk=False).get_matching_blocks() if b.size]
+
+    def s2r(p: int) -> int:  # 대본 글자 위치 → 받아쓰기 글자 위치 (글자 단위 맞추기, 숫자·띄어쓰기 차이에 강함)
+        prev = (0, 0)
+        for b in blocks:
+            if b.a <= p < b.a + b.size:
+                return b.b + (p - b.a)
+            if b.a > p:
+                a0, r0 = prev
+                return r0 + int((p - a0) * max(b.b - r0, 0) / max(b.a - a0, 1))
+            prev = (b.a + b.size, b.b + b.size)
+        return len(R) - 1
+
+    # 받아쓰기는 단어 시작을 앞의 쉼(무음) 속으로 당겨 잡기도 한다 → 실제 말소리 시작(무음 끝)으로 보정
+    sil, st = [], None
+    pr = subprocess.run(["ffmpeg", "-hide_banner", "-nostdin", "-i", str(wav), "-af", "silencedetect=n=-40dB:d=0.15", "-f", "null", "-"],
+                        capture_output=True, text=True)
+    for ln in pr.stderr.splitlines():
+        if "silence_start:" in ln:
+            st = float(ln.split("silence_start:")[1].split()[0])
+        elif "silence_end:" in ln and st is not None:
+            sil.append((st, float(ln.split("silence_end:")[1].split()[0])))
+            st = None
+
+    def onset(t: float) -> float:
+        for s0, e0 in sil:
+            if s0 - 0.3 <= t < e0 - 0.05 and e0 - t <= 1.5:
+                return e0
+        return t
+
+    out = []
+    for p in pos:
+        wi = owner[min(max(s2r(p), 0), len(owner) - 1)]
+        out.append(min(max(onset(float(words[wi]["start"])) - 0.05, 0.0), dur))
+    out[0] = 0.0
+    return out
+
+
+def subtitles(events: list, path: Path) -> None:
+    """events: (시작, 끝, 문장). 아래 가운데 상자형 자막."""
+    head = """[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sub,{font},{size},{text},{text},{outline},{box},1,0,0,0,100,100,0,0,{border_style},{outline_w},0,2,80,80,{margin_v},1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+"""
+    lines = []
+    for ev in events:
+        t0, t1, text = ev[:3]
+        wav = ev[3] if len(ev) > 3 else None
+        nm = ev[4] if len(ev) > 4 else ""
+        parts = _chunks(text)
+        starts = _word_starts(wav, parts, t1 - t0) if wav else None
+        if starts:  # 실제로 그 말을 하는 순간에 자막이 바뀐다 (faster-whisper 단어 시각)
+            for k, p in enumerate(parts):
+                a = t0 + starts[k]
+                b = t0 + starts[k + 1] - 0.02 if k + 1 < len(parts) else t1 + 0.15
+                lines.append(f"Dialogue: 0,{_ass_time(a)},{_ass_time(max(b, a + 0.3))},Sub,,0,0,0,,{p}")
+            continue
+        tot = sum(len(p) for p in parts) or 1
+        t = t0
+        for p in parts:
+            d = (t1 - t0) * len(p) / tot
+            lines.append(f"Dialogue: 0,{_ass_time(t)},{_ass_time(t + d - 0.02)},Sub,{nm},0,0,0,,{p}")
+            t += d
+    sk = _skin_mod()
+    head = head.format(**sk.subtitle_style(sk.load()))   # 자막 상자도 그래픽 스킨이 정함
+    path.write_text(head + "\n".join(lines) + "\n", encoding="utf-8")
+
+
+def sfx_files() -> dict:
+    base = config.ROOT / ".claude" / "skills" / "media-use" / "audio" / "assets" / "sfx"
+    if not base.exists():
+        base = config.ROOT / ".agents" / "skills" / "media-use" / "audio" / "assets" / "sfx"
+    # impact-bass(저음 '두웅')는 기본 끔 — 켜려면 YTFLOW_SFX_BASS=1 (2026-11-20 사용자: "기본은 끄되 켤 수 있게")
+    names = ["whoosh", "pop", "click-soft", "whoosh-short", "riser", "chime"]
+    if os.environ.get("YTFLOW_SFX_BASS") == "1":
+        names.append("impact-bass-1")
+    files = {k: base / f"{k}.mp3" for k in names}
+    pen = config.CACHE_DIR / "sfx" / "pencil.wav"
+    if not pen.exists() or pen.stat().st_size < 1000:
+        # 연필 긁는 소리: 내려받지 않고 직접 만듦 (분홍 잡음 → 대역 통과 → 빠른 떨림 → 페이드)
+        pen.parent.mkdir(parents=True, exist_ok=True)
+        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i",
+                        "anoisesrc=color=pink:duration=0.9:amplitude=0.6:seed=7",
+                        "-af", "highpass=f=1800,lowpass=f=6500,tremolo=f=11:d=0.7,afade=t=in:d=0.05,afade=t=out:st=0.6:d=0.3",
+                        "-ar", "48000", "-ac", "2", str(pen)], check=False)
+    if pen.exists() and pen.stat().st_size > 1000:
+        files["pencil"] = pen
+    return {k: v for k, v in files.items() if v.exists()}
+
+
+def make(project: Project, workers: int = 3) -> Path:
+    from . import pinned_motion
+    replay = pinned_motion.render(project)
+    if replay is not None:
+        return replay
+    spec = json.loads((project.dir("script") / "hybrid.json").read_text(encoding="utf-8"))
+    if "brand" not in spec:   # v16: 대본에 brand 가 없으면 프로젝트 채널(edit.yaml channel → channels/<id>/channel.yaml brand)에서
+        try:
+            import yaml as _y
+            ed = _y.safe_load((project.path / "edit.yaml").read_text(encoding="utf-8")) or {}
+            ch = ed.get("channel")
+            cy = config.ROOT / "channels" / str(ch) / "channel.yaml"
+            if ch and cy.exists():
+                spec["brand"] = (_y.safe_load(cy.read_text(encoding="utf-8")) or {}).get("brand")
+        except Exception:  # noqa: BLE001
+            pass
+    if spec.get("brand"):   # v15 카테고리 개성: 기본 팩을 따로 정하지 않았으면 카테고리의 기본 팩
+        from . import identity
+        idn = identity.get(spec)
+        e = config.load("pipeline").get("edit", {}) or {}
+        if idn and idn.get("base_skin") and not os.environ.get("YTFLOW_SKIN") and not e.get("skin"):
+            os.environ["YTFLOW_SKIN"] = idn["base_skin"]
+    chapters = {sc["chapter"]: sc for sc in spec["scenes"] if sc["type"] == "chapter"}
+    for sc in spec["scenes"]:  # 장 표시(왼쪽 위)
+        ch = chapters.get(sc.get("chapter"))
+        if ch and sc["type"] != "chapter":
+            sc["_chnum"], sc["_chtitle"] = ch["num"], ch["title"]
+    try:   # docs/50: PC 에서 받은 원본 구간이 Drive 에 있으면 먼저 가져옴 (없으면 조용히 넘어가고 인용 카드)
+        from . import cliplane
+        cliplane.pull(project)
+    except Exception as e:  # noqa: BLE001
+        print(f"[hybrid] clip-pull 건너뜀: {e}")
+    bite_fallback(project, spec)   # v36: 원본 영상이 없으면 렌더를 멈추지 않고 인용 카드로 (목소리 만들기 전에 — 번역 박자를 읽게)
+    print("[hybrid] 음성")
+    durs = voice(project, spec)
+    if any(sc.get("type") == "bite" for sc in spec["scenes"]):   # 원본 발언 컷편집: 대본과 맞는 구간만 잘라 이어 붙임
+        from . import cutedit
+        cutedit.prepare(project, spec)
+    adir = project.dir("assets")
+    plan = []
+    for sc in spec["scenes"]:
+        bt, dur = timing(sc, durs)
+        plan.append((sc, bt, dur))
+    print(f"[hybrid] 장면 {len(plan)}개, 총 {sum(p[2] for p in plan):.1f}초 → 렌더 (병렬 {workers})")
+    sfx_events = []
+    t_acc = 0.0
+
+    import threading
+    build_lock = threading.Lock()   # 장면 HTML 만들기는 한 번에 하나씩: 그래픽 팩(YTFLOW_SKIN)·글꼴·색이 전역 설정이라 동시에 만들면 다른 장면의 팩이 섞임 (2026-11-12 발견)
+
+    def job(item):
+        sc, bt, dur = item
+        work = adir / "hb" / f"scene_{sc['id']:03d}"
+        out = adir / f"hb_{sc['id']:03d}.mp4"
+        with build_lock:
+            D = build_scene(project, spec, sc, bt, dur, work)
+        issues = D.qa + hyper.check(work)
+        err = "" if out.exists() and out.stat().st_mtime > (work / "index.html").stat().st_mtime else render_scene(work, out)
+        return sc["id"], D.sfx, issues, err
+
+    results = {}
+    with ThreadPoolExecutor(workers) as ex:
+        for sid, sfx, issues, err in ex.map(job, plan):
+            results[sid] = (sfx, issues, err)
+            print(f"[hybrid] #{sid} {'✗ ' + err if err else 'ok'}{' · 점검 ' + str(len(issues)) if issues else ''}")
+    # 이어 붙이기 + 음성 + 자막 + 효과음
+    edir = project.dir("edit")
+    edir.mkdir(parents=True, exist_ok=True)
+    work = edir / "hb_work"
+    work.mkdir(parents=True, exist_ok=True)
+    vlist, alist, subs = [], [], []
+    for sc, bt, dur in plan:
+        vfile = adir / f"hb_{sc['id']:03d}.mp4"
+        vlist.append(f"file '{vfile.resolve()}'")
+        # 렌더러가 장면 길이를 0.1초 단위로 올려 잡는다 → 실제 영상 길이를 재서 음성·자막·효과음을 거기에 맞춘다
+        # (안 그러면 장면마다 0.01~0.03초씩 화면이 소리보다 늦어져 6분이면 0.5초 어긋남)
+        dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(vfile)],
+                                   capture_output=True, text=True).stdout or dur)
+        # 장면 음성: 박자 사이 쉼을 넣어 한 파일로
+        parts, t = [], 0.0
+        for k, (t0, d) in enumerate(bt):
+            parts.append((t0, project.dir("voice") / f"hb_{sc['id']:03d}_{k}.wav"))
+            if sc["type"] != "kinetic" and sc.get("subs", True):   # 키네틱 장면은 화면 글자가 자막
+                subs.append((t_acc + t0, t_acc + t0 + d, sc["beats"][k]["say"], project.dir("voice") / f"hb_{sc['id']:03d}_{k}.wav"))
+        if sc.get("_bite"):   # 원본 발언 소리 + 번역 자막 (자막 이름 'bite': 싱크 점검에서 제외)
+            parts.append((sc["_bite_at"], Path(sc["_bite"]["wav"])))
+            for s_ in sc["_bite"]["segs"]:
+                if s_.get("ko"):
+                    subs.append((t_acc + sc["_bite_at"] + s_["t0"], t_acc + sc["_bite_at"] + s_["t1"] - 0.05, s_["ko"], None, "bite"))
+        for name, at in results[sc["id"]][0]:
+            sfx_events.append((name, t_acc + at))
+        sa = work / f"a_{sc['id']:03d}.wav"
+        inputs, filt = [], []
+        for k, (t0, wav) in enumerate(parts):
+            inputs += ["-i", str(wav)]
+            filt.append(f"[{k + 1}:a]adelay={int(t0 * 1000)}|{int(t0 * 1000)}[d{k}]")  # 0번 입력은 무음 바탕(anullsrc) → 박자 음성은 k+1번
+        mix = "".join(f"[d{k}]" for k in range(len(parts)))
+        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-t", f"{dur:.3f}", "-i", "anullsrc=r=48000:cl=stereo",
+                        *inputs, "-filter_complex", ";".join(filt) + f";[0:a]{mix}amix=inputs={len(parts) + 1}:normalize=0:duration=first[a]",
+                        "-map", "[a]", "-t", f"{dur:.3f}", str(sa)], check=True)
+        alist.append(f"file '{sa.resolve()}'")
+        t_acc += dur
+    (work / "v.txt").write_text("\n".join(vlist), encoding="utf-8")
+    (work / "a.txt").write_text("\n".join(alist), encoding="utf-8")
+    ff = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y"]
+    subprocess.run(ff + ["-f", "concat", "-safe", "0", "-i", str(work / "v.txt"), "-c", "copy", str(work / "video.mp4")], check=True)
+    subprocess.run(ff + ["-f", "concat", "-safe", "0", "-i", str(work / "a.txt"), "-c", "copy", str(work / "voice.wav")], check=True)
+    subtitles(subs, edir / "subs.ass")
+    # 효과음 섞기 (작게)
+    files = sfx_files()
+    ev = [(n, t) for n, t in sfx_events if n in files]
+    sfx_wav = work / "sfx.wav"
+    if ev:
+        inputs, filt = [], []
+        vol = {"pencil": 0.12, "whoosh": 0.35, "pop": 0.3, "click-soft": 0.25, "impact-bass-1": 0.3, "whoosh-short": 0.3, "riser": 0.18, "chime": 0.22}
+        for k, (n, t) in enumerate(ev[:180]):
+            inputs += (["-ss", "7.0"] if n == "riser" else []) + ["-i", str(files[n])]
+            filt.append(f"[{k}:a]atrim=0:{1.4 if n == 'pencil' else (3.0 if n == 'riser' else 2.5)},volume={vol.get(n, 0.3)},adelay={int(t * 1000)}|{int(t * 1000)}[s{k}]")
+        mix = "".join(f"[s{k}]" for k in range(len(filt)))
+        subprocess.run(ff + inputs + ["-filter_complex", ";".join(filt) + f";{mix}amix=inputs={len(filt)}:normalize=0[o]",
+                                      "-map", "[o]", "-ar", "48000", "-ac", "2", "-t", f"{t_acc:.2f}", str(sfx_wav)], check=True)
+    ass = (edir / "subs.ass").resolve().as_posix().replace(":", "\\:")   # 윈도 경로의 역슬래시는 필터에서 지워짐 → / 로
+    fdir = Path(paper.FONT_DIR).as_posix().replace(":", "\\:")
+    a_in = ["-i", str(work / "voice.wav")] + (["-i", str(sfx_wav)] if ev else [])
+    amix = "[1:a][2:a]amix=inputs=2:normalize=0:duration=first[a]" if ev else "[1:a]anull[a]"
+    bgm = spec.get("bgm")   # v12: 기본은 배경음 없음 — 어울리는 곡이 확실할 때만 대본에 "bgm": "<등록부 id>"
+    pw = None
+    if bgm:   # 배경음: 등록부 곡(assets/bgm/bgm.yaml) 또는 직접 합성 패드, 목소리가 나오면 자동으로 낮춤 (docs/19 A1)
+        from . import edit10
+        pw = edit10.pad(work / "pad.wav", t_acc, spec.get("bgm_mood", "calm")) if bgm == "pad" else edit10.music(work / "bgm.wav", t_acc, bgm)
+    if pw:
+        a_in += ["-i", str(pw)]
+        n = 3 if ev else 2
+        pre = "[1:a]asplit=2[v1][vk];" + f"[{n}:a][vk]sidechaincompress=threshold=0.03:ratio=3:attack=120:release=1500,volume={0.22 if bgm == 'pad' else 1.0}[pd];"   # 부드럽게 (단어 사이마다 들썩이지 않게)
+        amix = pre + (f"[v1][2:a][pd]amix=inputs=3:normalize=0:duration=first[a]" if ev else "[v1][pd]amix=inputs=2:normalize=0:duration=first[a]")
+    subprocess.run(ff + ["-i", str(work / "video.mp4"), *a_in, "-filter_complex", f"[0:v]ass='{ass}':fontsdir='{fdir}'[v];{amix}",
+                         "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "medium", "-crf", "19", "-c:a", "aac", "-b:a", "192k",
+                         str(edir / "draft.mp4")], check=True)
+    project.write_json("edit", "hybrid_timeline.json", [{"scene": sc["id"], "type": sc["type"], "dur": dur, "beats": bt} for sc, bt, dur in plan])
+    issues = {sid: r[1] for sid, r in results.items() if r[1]}
+    project.write_json("assets", "layout_qa.json", {str(k): v for k, v in issues.items()})
+    from .finish import master
+    master(project)
+    print(f"[hybrid] {edir}/final.mp4 ({t_acc:.1f}초)")
+    try:  # 완성본 움직임 측정 (화면 변화/분·정지 비율·배경음) → 05_edit/motion.json (check G6, docs/19 A4)
+        from . import style as _style
+        m = _style.measure(edir / "final.mp4", work, "motion")["metrics"]
+        project.write_json("edit", "motion.json", {k: m[k] for k in ("change_events_per_min", "median_change_gap_s", "static_ratio", "hard_cuts_per_min", "audio") if k in m})
+        print(f"[hybrid] 움직임: 화면 변화 {m.get('change_events_per_min')}/분 · 정지 비율 {m.get('static_ratio')}")
+    except Exception as e:  # noqa: BLE001
+        print(f"[hybrid] 움직임 측정 건너뜀: {e}")
+    try:  # 글자 겹침 점검: 장면 HTML 을 박자 끝마다 멈춰 글자끼리·카드·자막 자리 겹침을 잼 → 05_edit/overlap_qa.json
+        from . import overlapqa   # (2026-11-20 사용자: "자막이랑 영상 글씨가 겹치거나 전체적으로 글씨들이 겹치는 경우가 잦습니다")
+        overlapqa.run(project.path.name)
+    except Exception as e:  # noqa: BLE001
+        print(f"[hybrid] 겹침 점검 건너뜀: {e}")
+    if spec.get("package"):  # 제목·썸네일 (영상과 함께 만든다 — prompts/thumbnail.md)
+        try:
+            from . import thumbnail
+            thumbnail.run(project)
+        except Exception as e:  # noqa: BLE001 — 사진 파일이 없어도 싱크 점검까지는 간다
+            print(f"[hybrid] 썸네일 건너뜀: {e}")
+    try:  # 완성본 싱크를 받아쓰기로 재서 05_edit/sync_qa.json 에 (자막·목소리 0.3초 이내 95% 이상이면 통과)
+        from . import syncqa
+        syncqa.run(project)
+    except Exception as e:  # noqa: BLE001
+        print(f"[hybrid] 싱크 점검 건너뜀: {e}")
+    return edir / "final.mp4"
+
+
+try:  # 새 연출 문법(아카이브 다큐·지도 여정·키네틱 타이포)의 장면 type 을 추가 등록 — 기존 장면은 그대로
+    from . import directions as _directions
+    _directions.register()
+    from . import edit10 as _edit10
+    _edit10.register()
+    from . import motion as _motion   # 움직이는 비유 애니메이션 (metaphor 장면, styles/recipes/motion-metaphor.yaml)
+    _motion.register()
+    from . import studio3d as _studio3d   # 어두운 스튜디오 3D 물체 (studio3d 장면, motion-metaphor v2 · docs/22)
+    _studio3d.register()
+    from . import cutedit as _cutedit   # 원본 발언 컷편집 (bite 장면, styles/source-cut)
+    _cutedit.register()
+    from . import illust as _illust     # 손그림 삽화 (illust 장면, styles/illustrated)
+    _illust.register()
+    from . import newsdesk as _newsdesk  # 뉴스 데스크 카드 (newsdesk 장면, styles/news-desk)
+    _newsdesk.register()
+    from . import uiflow as _uiflow      # UI 재연·증거 (statecard·docspot 장면, 두 줄 장 표지, 칩, 선 끊김, 모양 매치 아이리스 — docs/43)
+    _uiflow.register()
+    from . import story as _story        # 이야기 그림판 (story 장면, styles/story-board) — 호기심 채널
+    _story.register()
+    from . import stage as _stage        # 애니메이션 무대 (stage 장면, styles/anim-stage) — 호기심 채널 v22, manual/04 §0-5
+    _stage.register()
+    from . import explain as _explain    # 설명 무대 (afterline·spread·share 장면) — 월텍남 벤치마크 docs/31·docs/51
+    _explain.register()
+    from . import noir as _noir          # 누아르 사건 보드 (hubweb 관계망·ledger 두 열 장부, 날짜 눈금) — docs/57
+    _noir.register()
+    from . import noircase as _noircase  # 누아르 변형 (noirtitle·noircase·noirsides, 2026-11-21 드러켄밀러 편)
+    _noircase.register()
+except Exception as _e_dir:  # noqa: BLE001
+    print(f"[hybrid] 새 연출 장면 등록 건너뜀: {_e_dir}")

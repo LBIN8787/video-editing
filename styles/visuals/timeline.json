@@ -1,0 +1,166 @@
+{
+ "id": "timeline",
+ "type": "timeline",
+ "example_source": "projects\\20261106-hybrid-데이터센터\\02_script\\hybrid.json",
+ "renderer": "ytflow/stages/hybrid.py:717",
+ "function": "s_timeline",
+ "scene_fields": [
+  "events",
+  "label",
+  "spans",
+  "title",
+  "years"
+ ],
+ "beat_fields": [
+  "upto"
+ ],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only timeline --force",
+ "spec_common": {
+  "edit_v10": true,
+  "map": {
+   "nodes": {
+    "vote": {
+     "label": "미국 선거·주민투표",
+     "icon": "flag",
+     "x": 250,
+     "y": 400
+    },
+    "permit": {
+     "label": "AI 공장 허가 막힘",
+     "icon": "ban",
+     "x": 710,
+     "y": 400
+    },
+    "build": {
+     "label": "새 공장 덜 짓기",
+     "icon": "construction",
+     "x": 1170,
+     "y": 400
+    },
+    "chips": {
+     "label": "칩·메모리 주문 ↓?",
+     "icon": "memory-stick",
+     "x": 1630,
+     "y": 400
+    },
+    "kospi": {
+     "label": "한국 반도체 주가 ↓",
+     "icon": "trending-down",
+     "x": 1630,
+     "y": 720
+    },
+    "money": {
+     "label": "빅테크 돈은 그대로",
+     "icon": "dollar-sign",
+     "x": 1170,
+     "y": 720
+    },
+    "old": {
+     "label": "기존 공장 몸값 ↑",
+     "icon": "building-2",
+     "x": 710,
+     "y": 720
+    },
+    "fx": {
+     "label": "환율·미국 반도체",
+     "icon": "globe",
+     "x": 250,
+     "y": 720
+    }
+   },
+   "edges": [
+    [
+     "vote",
+     "permit"
+    ],
+    [
+     "permit",
+     "build"
+    ],
+    [
+     "build",
+     "chips"
+    ],
+    [
+     "chips",
+     "kospi"
+    ],
+    [
+     "money",
+     "build"
+    ],
+    [
+     "permit",
+     "old"
+    ],
+    [
+     "fx",
+     "kospi"
+    ]
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": 1,
+   "type": "timeline",
+   "chapter": 3,
+   "label": "2026.11.06 · 서스케하나 보고서 보도",
+   "title": "위험은 언제 몰려 있나",
+   "years": [
+    "2026",
+    "2027",
+    "2028",
+    "2029",
+    "2030"
+   ],
+   "spans": [
+    {
+     "from": "2027",
+     "to": "2027",
+     "label": "대부분 허가 완료",
+     "tone": "ok"
+    },
+    {
+     "from": "2028",
+     "to": "2030",
+     "label": "취소·지연 위험이 몰린 구간",
+     "tone": "risk"
+    }
+   ],
+   "beats": [
+    {
+     "say": "그리고 '언제'가 중요합니다. 2027년에 들어설 물량은 대부분 이미 허가를 받았습니다.",
+     "upto": 1
+    },
+    {
+     "say": "위험은 2028년부터 2030년 사이에 몰려 있습니다. 그래서 서스케하나는 2027년이 가장 많이 짓는 해라는 전망을 바꾸지 않았습니다.",
+     "upto": 2
+    }
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "scene": 1,
+   "type": "timeline",
+   "events": [
+    " 0.00s 화면 전체(카메라) 확대·이동",
+    " 0.20s 「2026.11.06 · 서스케하나 보고서 보도」 아래에서 떠오름",
+    " 0.20s 「위험은 언제 몰려 있나」 아래에서 떠오름",
+    " 0.30s 손그림 선 그려짐",
+    " 0.55s 「2026」 아래에서 떠오름",
+    " 0.55s 「2027」 아래에서 떠오름",
+    " 0.55s 「2028」 아래에서 떠오름",
+    " 0.55s 「2029」 아래에서 떠오름",
+    " 0.55s 「2030」 아래에서 떠오름",
+    " 0.65s 손그림 선 그려짐",
+    " 0.65s 손그림 선 나타남",
+    " 1.15s 「대부분 허가 완료」 아래에서 떠오름",
+    " 7.52s 손그림 선 그려짐",
+    " 7.52s 손그림 선 나타남",
+    " 8.02s 「취소·지연 위험이 몰린 구간」 아래에서 떠오름"
+   ]
+  }
+ ]
+}

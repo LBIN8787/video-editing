@@ -1,0 +1,20 @@
+# 2026-11-13 사용자 요청: "손그림 애니메이션 삽화 (이 그림체만이 아니라 포괄적으로) 스타일도 추가" — 그림은 사용자가 준비 (사용자 선택)
+# 기법: 한 장의 삽화 위를 카메라가 박자마다 '지금 말하는 곳'으로 옮겨 감 + 붓 쓸기 등장 + 선이 살아 있는 boil + 손그림 표시(동그라미·화살표·말풍선·메모).
+id: illustrated
+name: "손그림 삽화 (삽화 한 장 위를 카메라가 옮겨 가며 설명)"
+status: demo
+renderer: hybrid
+skin: clean-flat
+format: [longform, shorts]
+owns: [illust]
+scene_types: [illust]        # ytflow/stages/illust.py · python -m ytflow art-brief <프로젝트>
+fits:
+  brands: [curiosity, market, ai, issues]
+  questions: [개념, 행동의 이유, 비유, 상황 그려 보기, 오늘과 연결]
+  moods: [차분, 과거, 미래, 실용]
+  needs: [art]
+roles: [hook, body, ending]
+avoid: "숫자가 주인공(→ 차트) / 실제 사건 현장(→ 사진·원본 영상: 그림은 사실처럼 보이면 안 됨) / 실존 인물을 닮게 그리기 / 시사의 피해 장면"
+when: "사람들의 생각·행동·상황을 '그려서' 보여 줄 때 — 소비자가 망설임, 회의실의 고민, 두 갈래 선택, 옛날 사례 재현, 비유 장면"
+demo: "20261113-style-cut"
+skill: "edit-style-illustrated"

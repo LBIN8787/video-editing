@@ -1,0 +1,113 @@
+{
+ "project": "20261113-market-daily",
+ "manual_version": "20",
+ "checked": "2026-11-14T00:28:15",
+ "pass": true,
+ "rows": [
+  {
+   "gate": "G0",
+   "level": "MUST",
+   "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "topic_brief.json 있음",
+   "ok": true,
+   "detail": "01_research/topic_brief.json (schemas/topic_brief.schema.json)"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "브랜드(ai/market/curiosity)",
+   "ok": true,
+   "detail": "market"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망·시청자 질문",
+   "ok": true,
+   "detail": "창업자가 떠난 날, 시장은 이 소식을 어떻게 읽었을까?"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "트리거·왜 지금",
+   "ok": true,
+   "detail": "11/12 젠슨 황 엔비디아 CEO 즉시 사임(8-K) → 엔비디아 -4.34%, AMD +5.86%, 브로드컴 +5.54%, 네이버 -6.43%"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망 점수 ≥12, 욕망 강도·보여 줄 자료 ≥2",
+   "ok": true,
+   "detail": "합계 16 {'desire': 3, 'clarity': 3, 'timeliness': 3, 'demand': 3, 'visuals': 2, 'angle': 2}"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "수요 증거 1개 이상",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "후보 3개 비교 기록",
+   "ok": true,
+   "detail": "3"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "우리만의 답(our_angle)",
+   "ok": true,
+   "detail": "공시로 확인된 것과 보도·해석을 나누고, '하루 주가 ≠ 주문 이동'을 짚는다"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "무엇이 띄우나(driver: 소재·각도·형식 + 근거)",
+   "ok": true,
+   "detail": "소재 · 세계 시가총액 상위 기업 창업자 사임"
+  },
+  {
+   "gate": "G2",
+   "level": "MUST",
+   "item": "시장: SAVE(오선) 소식 확인 기록 — 상태 '확인함' 또는 '확인 못 함: 이유' (01_research/save_check.md)",
+   "ok": true,
+   "detail": "확인 못 함: 이 회차는 SAVE 확인 규칙(2026-11-14) 전에 만들어짐"
+  },
+  {
+   "gate": "G2",
+   "level": "SHOULD",
+   "item": "시장: SAVE 실제로 확인함 (항목 1개 이상)",
+   "ok": false,
+   "detail": "확인 못 함: 이 회차는 SAVE 확인 규칙(2026-11-14) 전에 만들어짐 · 항목 0"
+  },
+  {
+   "gate": "G2",
+   "level": "MUST",
+   "item": "자료 화면마다 credit·url",
+   "ok": true,
+   "detail": "2개, 빠짐 []"
+  },
+  {
+   "gate": "G2",
+   "level": "MUST",
+   "item": "금지 라이선스(SA·NC·ND) 없음",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G2",
+   "level": "SHOULD",
+   "item": "자료 화면 소스 3종 이상 (롱폼)",
+   "ok": false,
+   "detail": "2종"
+  }
+ ]
+}

@@ -1,0 +1,1429 @@
+{
+ "project": "20261114-market-weekly",
+ "topic": "market",
+ "topic_name": "주식 · 시장",
+ "scenes": [
+  {
+   "scene": 1,
+   "type": "intro",
+   "chapter": 0,
+   "situation": "question",
+   "situation_name": "질문·명제 한 줄을 던진다",
+   "origin": "main",
+   "also": [
+    "next-week",
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "안녕하세요. 어제의 시장을 이어 읽는, 이어 읽는 시장입니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "토요일은 한 주를 정리하는 주간 분석입니다. 11월 9일부터 13일까지, 13일 미국과 한국 장 마감 기준으로 정리합니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "지난주 목요일, 반도체 지수는 하루에 12% 넘게 빠졌습니다. 이번 주에는 그중 상당 부분을 되찾았죠. 그런데 그 한가운데 있던 엔비디아만, 한 주 동안 13% 가까이 내렸습니다. 반등하는 시장에서, 왜 주인공만 빠졌을까요?",
+     "situations": [
+      "question",
+      "metric"
+     ],
+     "hits": [
+      "?",
+      "왜 ",
+      "을까요"
+     ]
+    },
+    {
+     "say": "급락 뒤의 되돌림, 엔비디아의 빈자리, 다시 오르는 금리를 보고, 연준이 13일 낸 보고서를 깊이 읽은 뒤, 한국 시장과 다음 주 일정으로 마무리합니다.",
+     "situations": [
+      "next-week",
+      "hub-event"
+     ],
+     "hits": [
+      "다음 주",
+      "일정"
+     ]
+    },
+    {
+     "say": "시작하겠습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ],
+   "recommended_scenes": [
+    "card_type",
+    "chapter"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "그림을 억지로 넣기",
+   "why": "질문은 글자 하나로 — 강조 예산 안에서 (05 §0-1)"
+  },
+  {
+   "scene": 2,
+   "type": "bars",
+   "chapter": 0,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "compare"
+   ],
+   "beats": [
+    {
+     "say": "먼저 한 주 숫자입니다. 지난주 금요일 종가와 비교하면, S&P 500은 2.51%, 나스닥은 2.27% 올랐습니다.",
+     "situations": [
+      "metric",
+      "compare"
+     ],
+     "hits": [
+      "2.51%",
+      "올랐"
+     ]
+    },
+    {
+     "say": "반도체 지수는 8.05%, 코스피는 4.56% 올랐습니다. 지난주에 가장 크게 빠졌던 곳이, 이번 주에 가장 크게 되돌린 한 주였습니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "8.05%",
+      "올랐",
+      "지수"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 3,
+   "type": "chapter",
+   "chapter": 1,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [],
+   "beats": [
+    {
+     "say": "첫 번째 흐름, 급락 뒤의 되돌림입니다. 이번 주를 이해하려면, 지난주 목요일부터 봐야 합니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "급락"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 4,
+   "type": "chart",
+   "chapter": 1,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [],
+   "beats": [
+    {
+     "say": "반도체 지수의 한 달 흐름입니다. 11월 5일 목요일, 이 지수는 하루에 12.25% 떨어졌습니다. 같은 날 S&P 500은 4.4%, 코스피는 5.3% 빠졌습니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "12.25%",
+      "떨어졌",
+      "지수"
+     ]
+    },
+    {
+     "say": "이번 주에는 월요일 하루에만 6.85% 오르는 등, 한 주 동안 8.05%를 되찾았습니다. 다만 13일 종가 10,146.32는, 급락 직전인 4일의 10,268.65에는 아직 못 미칩니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "6.85%",
+      "급락"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 5,
+   "type": "checklist",
+   "chapter": 1,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "cause",
+    "media"
+   ],
+   "beats": [
+    {
+     "say": "보도들은 지난주 급락의 배경으로 세 가지를 꼽았습니다. 대출이 비싸지면서 AI 데이터센터 건설이 느려질 수 있다는 걱정, 중간선거 결과로 데이터센터 건설이 제한될 수 있다는 우려, 그리고 AI 주가가 너무 올랐다는 거품 논쟁입니다.",
+     "situations": [
+      "metric",
+      "cause"
+     ],
+     "hits": [
+      "올랐",
+      "급락",
+      "주가"
+     ]
+    },
+    {
+     "say": "그리고 이번 주 월요일 반등은, 많이 빠진 반도체에 저가 매수가 들어온 결과로 보도됐습니다. 세 가지 걱정 가운데 풀렸다고 확인된 것은 아직 없습니다. 걱정이 풀렸다기보다, 너무 빠진 가격이 되돌아온 쪽에 가깝다는 뜻이죠.",
+     "situations": [
+      "cause",
+      "media"
+     ],
+     "hits": [
+      "결과"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 6,
+   "type": "chapter",
+   "chapter": 2,
+   "situation": "question",
+   "situation_name": "질문·명제 한 줄을 던진다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "두 번째 흐름입니다. 반도체가 되살아난 한 주, 엔비디아는 왜 반대로 갔을까요?",
+     "situations": [
+      "question"
+     ],
+     "hits": [
+      "?",
+      "왜 ",
+      "을까요"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "card_type",
+    "chapter"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "그림을 억지로 넣기",
+   "why": "질문은 글자 하나로 — 강조 예산 안에서 (05 §0-1)"
+  },
+  {
+   "scene": 7,
+   "type": "bars",
+   "chapter": 2,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "route"
+   ],
+   "beats": [
+    {
+     "say": "한 주 성적표입니다. AMD는 18.93%, 브로드컴은 18.16% 올랐습니다. 반도체 지수는 8.05% 올랐죠.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "18.93%",
+      "올랐",
+      "지수"
+     ]
+    },
+    {
+     "say": "반면 엔비디아는 186.64달러에서 162.85달러로, 12.75% 내렸습니다. 같은 업종 안에서 혼자 반대로 간 겁니다. 업종이 아니라, 엔비디아 한 회사의 이야기였다는 뜻이죠.",
+     "situations": [
+      "metric",
+      "route"
+     ],
+     "hits": [
+      "12.75%"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 8,
+   "type": "quote",
+   "chapter": 2,
+   "situation": "say-vs-do",
+   "situation_name": "말과 행동을 맞댄다",
+   "origin": "add",
+   "also": [
+    "hub-event",
+    "call-bite"
+   ],
+   "beats": [
+    {
+     "say": "이유는 공시에 있습니다. 11일 장 마감 뒤, 이사회는 젠슨 황의 사장, CEO, 이사직 사임을 받아들였고, 즉시 효력이 생겼습니다.",
+     "situations": [
+      "say-vs-do",
+      "hub-event"
+     ],
+     "hits": [
+      "공시"
+     ]
+    },
+    {
+     "say": "콜레트 크레스 최고재무책임자가 임시 CEO를 맡았고, 정식 CEO는 내부와 외부 후보를 모두 놓고 찾고 있습니다.",
+     "situations": [
+      "call-bite"
+     ],
+     "hits": [
+      "CEO"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "versus",
+    "bite",
+    "compare"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-screen",
+     "status": "partial"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "한쪽만 크게",
+   "why": "v26 자료를 엮어 — 말(발언)과 행동(공시·거래)을 나란히"
+  },
+  {
+   "scene": 9,
+   "type": "chart",
+   "chapter": 2,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "say-vs-do"
+   ],
+   "beats": [
+    {
+     "say": "주가는 공시 전부터 빠지고 있었습니다. 월요일에는 이사회가 최고경영자 관련 보도를 조사한다는 소식에 4.27%, 화요일에 5.47% 내렸습니다.",
+     "situations": [
+      "metric",
+      "say-vs-do"
+     ],
+     "hits": [
+      "4.27%",
+      "주가"
+     ]
+    },
+    {
+     "say": "공시가 나온 뒤에도 12일 4.34%, 13일 2.01% 더 내렸습니다.",
+     "situations": [
+      "say-vs-do",
+      "metric"
+     ],
+     "hits": [
+      "공시"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 10,
+   "type": "bars",
+   "chapter": 2,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "compare",
+    "media"
+   ],
+   "beats": [
+    {
+     "say": "그런데 13일 금요일에는 시장 전체가 약했습니다. S&P 500은 0.40%, 나스닥은 0.91% 내렸고, 반도체 지수는 3.43% 빠졌습니다. 특히 AMD가 8.75%, 브로드컴이 4.76% 내리면서, 엔비디아의 2.01%보다 더 크게 빠졌습니다.",
+     "situations": [
+      "metric",
+      "compare"
+     ],
+     "hits": [
+      "0.40%",
+      "지수"
+     ]
+    },
+    {
+     "say": "보도들은 전날 급등한 만큼 차익을 실현한 매물, 그리고 엔비디아 쪽으로 다시 돌아오는 매수를 이유로 들었습니다. 브로드컴은 한 증권사가 고객 쏠림을 이유로 투자의견을 중립으로 낮췄다는 소식도 겹쳤습니다.",
+     "situations": [
+      "metric",
+      "media"
+     ],
+     "hits": [
+      "급등"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 11,
+   "type": "map_causal",
+   "chapter": 2,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "next-week",
+    "cause"
+   ],
+   "beats": [
+    {
+     "say": "여기서부터는 해석입니다. 한 장으로 이어 보면, 창업자가 떠나면서 리더십에 빈자리가 생겼고, 돈은 하루 이틀 대안으로 쏠렸다가, 금요일에 일부 되돌아왔습니다.",
+     "situations": [
+      "cause",
+      "point"
+     ],
+     "hits": [
+      "로 이어"
+     ]
+    },
+    {
+     "say": "주가는 기대를 먼저 움직이지만, 실제 칩 주문은 몇 달, 몇 년 단위로 움직입니다. 그래서 이 쏠림이 진짜 주문의 이동인지는, 다음 주 실적 발표가 처음으로 보여 줄 겁니다.",
+     "situations": [
+      "earnings",
+      "next-week"
+     ],
+     "hits": [
+      "실적"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 12,
+   "type": "chapter",
+   "chapter": 3,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "세 번째 흐름은 금리입니다. 주식이 오른 한 주, 채권 시장에서는 다른 신호가 나왔습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 13,
+   "type": "versus",
+   "chapter": 3,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "route"
+   ],
+   "beats": [
+    {
+     "say": "미국 10년물 국채 금리는 한 주 동안 4.86%에서 5.15%로 올랐습니다. 지난주 급락 때 잠깐 내려갔던 금리가, 다시 5%대로 올라선 거죠.",
+     "situations": [
+      "metric",
+      "route"
+     ],
+     "hits": [
+      "4.86%",
+      "올랐",
+      "급락"
+     ]
+    },
+    {
+     "say": "같은 한 주, 금값은 4.74%, 비트코인은 9.40% 내렸습니다. 이자가 붙지 않는 자산들이 함께 약했던 한 주였습니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "4.74%"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 14,
+   "type": "checklist",
+   "chapter": 3,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "hub-event",
+    "open-scene"
+   ],
+   "beats": [
+    {
+     "say": "금요일 아침에 나온 10월 생산자물가는, 한 달 동안 0.3% 올랐습니다. 1년 전과 비교하면 6.5%나 높고, 그중 에너지 가격은 1년 새 37% 올랐습니다.",
+     "situations": [
+      "metric",
+      "open-scene"
+     ],
+     "hits": [
+      "0.3%",
+      "올랐"
+     ]
+    },
+    {
+     "say": "연준은 9월에 금리를 0.25%포인트 올린 뒤, 10월에는 3.75에서 4% 사이로 동결했습니다. 성명은 물가가 여전히 높다고 적었고, 12명 가운데 2명은 한 번 더 올리자고 했습니다.",
+     "situations": [
+      "hub-event",
+      "metric"
+     ],
+     "hits": [
+      "연준"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 15,
+   "type": "chapter",
+   "chapter": 4,
+   "situation": "hub-event",
+   "situation_name": "시장을 흔든 사건과 파급",
+   "origin": "add",
+   "also": [
+    "cause"
+   ],
+   "beats": [
+    {
+     "say": "네 번째는 13일 연준이 낸 금융안정보고서입니다. 요약에서 멈추지 않고, 어디로 번지는지까지 따라가 보겠습니다.",
+     "situations": [
+      "hub-event",
+      "cause"
+     ],
+     "hits": [
+      "연준"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "map_causal",
+    "kb",
+    "chart"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "사건을 따로 떼어 나열",
+   "why": "v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로"
+  },
+  {
+   "scene": 16,
+   "type": "quote",
+   "chapter": 4,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "earnings",
+    "cause"
+   ],
+   "beats": [
+    {
+     "say": "보고서의 첫 요약은 이렇습니다. 주가 수준은 여전히 높고, 그 일부는 초지능, 그러니까 사람을 뛰어넘는 AI에 대한 시장의 열광 때문이다.",
+     "situations": [
+      "metric",
+      "cause"
+     ],
+     "hits": [
+      "주가"
+     ]
+    },
+    {
+     "say": "중앙은행이 지금의 주가에 AI 기대가 얹혀 있다고 공식 문서에 적은 겁니다. 보고서는 실적이 기대보다 낮으면 주가가 그만큼 내려갈 수 있다는 걱정도 함께 실었습니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "실적"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 17,
+   "type": "checklist",
+   "chapter": 4,
+   "situation": "hub-event",
+   "situation_name": "시장을 흔든 사건과 파급",
+   "origin": "add",
+   "also": [
+    "compare",
+    "point"
+   ],
+   "beats": [
+    {
+     "say": "보고서에 실린 설문에서, 뉴욕 연은이 만난 시장 참가자 23곳이 가장 많이 꼽은 위험이 AI였습니다. 걱정은 세 갈래입니다. 큰 투자에 비해 수익이 불확실해 AI 주식이 급하게 떨어질 수 있다는 것, 그리고 AI를 이용한 사이버 공격입니다.",
+     "situations": [
+      "compare"
+     ],
+     "hits": [
+      "에 비해"
+     ]
+    },
+    {
+     "say": "세 번째가 복잡한 AI 관련 자금 조달인데, 이게 이 보고서의 핵심입니다. 설문은 연준의 공식 견해는 아니지만, 보고서는 이 부분을 따로 한 장을 들여 숫자로 분석했습니다.",
+     "situations": [
+      "hub-event",
+      "point"
+     ],
+     "hits": [
+      "연준"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "map_causal",
+    "kb",
+    "chart"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "사건을 따로 떼어 나열",
+   "why": "v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로"
+  },
+  {
+   "scene": 18,
+   "type": "bars",
+   "chapter": 4,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "say-vs-do",
+    "open-scene"
+   ],
+   "beats": [
+    {
+     "say": "데이터센터 같은 AI 컴퓨팅 인프라를 짓느라 발행한 채권은, 2023년 한 해 1,300억 달러였습니다. 올해는 10월까지만 6,800억 달러를 넘었습니다. 약 다섯 배죠.",
+     "situations": [
+      "say-vs-do",
+      "metric"
+     ],
+     "hits": [
+      "발행"
+     ]
+    },
+    {
+     "say": "신용이 좋은 기업들이 낸 투자등급 회사채 가운데 이 분야 비중도, 2023년 6%가 안 됐는데 올해는 약 31%입니다. 우량 회사채 세 장 중 한 장 가까이가 AI 인프라용인 셈입니다.",
+     "situations": [
+      "metric",
+      "open-scene"
+     ],
+     "hits": [
+      "6%"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 19,
+   "type": "analogy",
+   "chapter": 4,
+   "situation": "open-scene",
+   "situation_name": "장면을 연다 (사람·장소·날짜)",
+   "origin": "main",
+   "also": [
+    "point"
+   ],
+   "beats": [
+    {
+     "say": "보고서는 지금을 1990년대 후반 통신 투자 붐과 나란히 놓았습니다. 경제 규모에 견준 투자 속도는 두 시기가 비슷하게 움직여 왔는데, 최근 AI 투자가 빨라져 곧 통신 시절을 넘어설 수 있다고 적었습니다. 그 통신 붐은, 2000년대 초 거품이 꺼지며 끝났죠.",
+     "situations": [
+      "open-scene"
+     ],
+     "hits": [
+      "1990년"
+     ]
+    },
+    {
+     "say": "차이도 있습니다. 지금 빅테크는 버는 현금이 많아 빚을 덜 써 왔다는 점입니다. 그런데 보고서는 여기에 '적어도 올해까지는'이라는 단서를 달았습니다. 현금으로 하던 투자가, 빚으로 넘어가기 시작했다는 뜻입니다.",
+     "situations": [
+      "point"
+     ],
+     "hits": [
+      "여기"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "kb",
+    "footage",
+    "stage"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    }
+   ],
+   "blocked": [
+    "parallax-photo"
+   ],
+   "avoid": "글자 카드로 열기",
+   "why": "인트로 없이 첫 문장부터 장면 (README §2-1·§2-3)"
+  },
+  {
+   "scene": 20,
+   "type": "checklist",
+   "chapter": 4,
+   "situation": "compare",
+   "situation_name": "둘을 비교한다",
+   "origin": "main",
+   "also": [
+    "hub-event",
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "빚보다 더 빨리 늘어난 게 있습니다. 대차대조표 밖의 약속입니다. 아직 시작하지 않은 임대 계약이 1조 달러, 보증과 장기 계약 약속이 2조 달러를 넘습니다. 할인하지 않은 금액이라 빚과 바로 비교할 수는 없다고 보고서는 덧붙였습니다.",
+     "situations": [
+      "compare",
+      "metric"
+     ],
+     "hits": [
+      "보다 ",
+      "비교"
+     ]
+    },
+    {
+     "say": "방식은 이렇습니다. 빅테크가 데이터센터를 오래 빌리겠다고 계약하면, 신용이 약한 개발사가 그 계약을 담보로 돈을 빌립니다. GPU 회사는 칩의 가치를 보증해 주고, 지분까지 투자하기도 하죠. 보고서는 이 고리를 순환 금융이라고 불렀습니다.",
+     "situations": [
+      "hub-event"
+     ],
+     "hits": [
+      "순환"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "versus",
+    "bars",
+    "compare"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-screen",
+     "status": "partial"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 나열",
+   "why": "같은 틀에 나란히"
+  },
+  {
+   "scene": 21,
+   "type": "map_causal",
+   "chapter": 4,
+   "situation": "question",
+   "situation_name": "질문·명제 한 줄을 던진다",
+   "origin": "main",
+   "also": [
+    "hub-event",
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "그럼 이 돈은 누가 들고 있을까요? 빅테크와 GPU 회사의 채권은 주로 펀드와 연기금, 보험사가 들고 있습니다. 더 위험한 후순위 채권과 지분은 하이일드 펀드, 생명보험사, 사모 대출 같은 곳이 들고 있습니다.",
+     "situations": [
+      "question",
+      "rank"
+     ],
+     "hits": [
+      "?",
+      "을까요"
+     ]
+    },
+    {
+     "say": "미국 대형 은행들이 빅테크와 데이터센터 개발사, 관련 회사와 전력 회사에 걸쳐 진 노출은 1조 달러 가까이 됩니다. 연준은 이 노출을 매년 스트레스 테스트에서 점검한다고 적었습니다.",
+     "situations": [
+      "hub-event",
+      "metric"
+     ],
+     "hits": [
+      "연준"
+     ]
+    },
+    {
+     "say": "보고서는 양쪽을 함께 적었습니다. 빅테크가 손실을 먼저 떠안아 금융 시스템의 충격을 줄일 수도 있지만, 그만큼 빅테크가 진 위험은 장부에 보이는 것보다 클 수 있다는 겁니다.",
+     "situations": [
+      "compare"
+     ],
+     "hits": [
+      "보다 "
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "card_type",
+    "chapter"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "그림을 억지로 넣기",
+   "why": "질문은 글자 하나로 — 강조 예산 안에서 (05 §0-1)"
+  },
+  {
+   "scene": 22,
+   "type": "map_causal",
+   "chapter": 4,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "question",
+    "route"
+   ],
+   "beats": [
+    {
+     "say": "그럼 어디로 번질 수 있을까요? 보고서가 직접 그린 시나리오는 이렇습니다. AI 투자의 수익이 기대에 못 미치면 주가가 내려가고, 돈 빌리기가 어려워지고, 기업이 투자를 줄이고, 경기가 식어 대출 손실이 늘 수 있다. 빚을 많이 쓴 투자자들의 매도가 하락을 키울 수 있다고도 적었습니다.",
+     "situations": [
+      "metric",
+      "question"
+     ],
+     "hits": [
+      "하락",
+      "주가"
+     ]
+    },
+    {
+     "say": "여기서부터는 해석입니다. 이번 주 장기 금리가 5%를 넘은 건, 빚으로 짓는 데이터센터의 비용이 오른다는 뜻입니다. 투자가 현금에서 빚으로 넘어가는 시점이라, 금리에 더 민감해진 셈이죠.",
+     "situations": [
+      "metric",
+      "route"
+     ],
+     "hits": [
+      "5%"
+     ]
+    },
+    {
+     "say": "그리고 이 사슬 끝에는 한국이 있습니다. SK하이닉스와 삼성전자가 파는 AI용 메모리의 주문은, 결국 이 데이터센터 투자에서 나옵니다. 투자 속도가 바뀌면, 한국 반도체의 숫자도 같이 바뀔 수 있습니다.",
+     "situations": [
+      "change",
+      "conclusion"
+     ],
+     "hits": [
+      "바뀌"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 23,
+   "type": "analogy",
+   "chapter": 4,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "hub-event",
+    "earnings"
+   ],
+   "beats": [
+    {
+     "say": "정리하겠습니다. 이 보고서가 금요일 주가를 움직였다는 근거는 없습니다. 다만 지난주 급락 때 시장이 걱정한 것과, 연준이 위험 목록 맨 위에 올린 것이 같습니다.",
+     "situations": [
+      "metric",
+      "hub-event"
+     ],
+     "hits": [
+      "급락",
+      "주가"
+     ]
+    },
+    {
+     "say": "그래서 이번 주 반등이 걱정을 풀어서가 아니라는 점이 더 분명해집니다. 걱정을 푸는 열쇠는 하나, AI 투자가 실제로 돈을 벌어 주느냐입니다. 그 첫 답이 다음 주 엔비디아 실적에서 나옵니다.",
+     "situations": [
+      "earnings",
+      "next-week"
+     ],
+     "hits": [
+      "실적"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 24,
+   "type": "chapter",
+   "chapter": 5,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "이제 한국 시장입니다. 한국은 지난주에 더 크게 빠졌고, 이번 주에 더 크게 되돌렸습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 25,
+   "type": "bars",
+   "chapter": 5,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "media"
+   ],
+   "beats": [
+    {
+     "say": "코스피는 한 주 동안 4.56% 올라 5,290.53에 마감했습니다. 삼성전자는 9.17%, SK하이닉스는 7.42% 올랐습니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "4.56%",
+      "올랐"
+     ]
+    },
+    {
+     "say": "반대로 네이버는 9.31% 내렸습니다. 엔비디아와 AI 협력을 키워 온 회사라, 엔비디아 소식에 함께 흔들린 것으로 보도됐습니다.",
+     "situations": [
+      "metric",
+      "media"
+     ],
+     "hits": [
+      "9.31%"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 26,
+   "type": "bars",
+   "chapter": 5,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "hub-event",
+    "timeline"
+   ],
+   "beats": [
+    {
+     "say": "날짜별로 보면, 지난주 금요일 코스피는 하루에 6.02% 빠졌고, 이번 주 월요일에도 0.81% 더 내렸습니다. 그 뒤 화요일 4.39%, 수요일 2.60% 오르며 미국의 반등을 따라갔죠.",
+     "situations": [
+      "metric",
+      "timeline"
+     ],
+     "hits": [
+      "6.02%"
+     ]
+    },
+    {
+     "say": "하지만 엔비디아 사임 소식 뒤 이틀은 연속으로 내렸습니다. 13일에는 장중 5,500을 넘었다가, 외국인이 5천억 원 넘게 팔면서 0.98% 내린 채 마감했습니다.",
+     "situations": [
+      "metric",
+      "hub-event"
+     ],
+     "hits": [
+      "0.98%",
+      "억 원"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 27,
+   "type": "kinetic",
+   "chapter": 5,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "되돌림은 빨랐고, 이제 숫자가 답할 차례입니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 28,
+   "type": "checklist",
+   "chapter": 5,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "next-week",
+    "hub-event"
+   ],
+   "beats": [
+    {
+     "say": "다음 주 볼 것은 세 가지입니다. 먼저 한국 시간 18일 수요일 새벽 6시 20분, 엔비디아 3분기 실적입니다. 임시 CEO 체제의 첫 실적이고, 연준 보고서가 던진 질문, 그러니까 AI 투자가 돈을 버느냐에 대한 첫 숫자이기도 합니다. 데이터센터 매출과 다음 분기 전망을 보면 됩니다.",
+     "situations": [
+      "earnings",
+      "next-week"
+     ],
+     "hits": [
+      "매출",
+      "실적",
+      "분기"
+     ]
+    },
+    {
+     "say": "다음 날인 19일 새벽 4시에는 연준 10월 회의 의사록이 나올 예정입니다. 그리고 그 뒤에는 12월 8일과 9일 연준 회의가 기다리고 있습니다.",
+     "situations": [
+      "hub-event",
+      "open-scene"
+     ],
+     "hits": [
+      "연준"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 29,
+   "type": "outro",
+   "chapter": 5,
+   "situation": "point",
+   "situation_name": "화면의 한 곳을 가리킨다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "오늘 이어 읽는 시장은 여기까지입니다. 출처는 모두 설명란에 남겨 두겠습니다.",
+     "situations": [
+      "point"
+     ],
+     "hits": [
+      "여기"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "zoomshot"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    }
+   ],
+   "blocked": [],
+   "avoid": "줌 3번 이상",
+   "why": "가리키는 곳만 표시"
+  }
+ ],
+ "coverage": 0.9,
+ "fit": 0.42,
+ "counts": {
+  "metric": 15,
+  "question": 3,
+  "earnings": 2,
+  "hub-event": 2,
+  "say-vs-do": 1,
+  "open-scene": 1,
+  "compare": 1,
+  "point": 1
+ },
+ "defaults": {
+  "zoom": "off",
+  "camera": "calm",
+  "bgm": "none",
+  "motion_beats": true
+ }
+}

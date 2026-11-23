@@ -1,0 +1,146 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- 의지력 편 v6 화면 (D4 기각 반영 2026-11-21): 이야기가 앞, 연구는 실험실 장면 안에서. 검은 바탕, 그래프·설명 카드 없음.
+     원화 위에는 그 순간의 낱말·숫자만(흰 글씨 + 어두운 띠). 기준 화면 = 서윤의 냉장고 메모. INIT/R 계약은 full_overlay.html 과 같음. -->
+<style>
+@font-face{font-family:NG;src:url(../../../ytflow/assets/fonts/NanumGothic-Bold.ttf)}
+@font-face{font-family:NGX;src:url(../../../ytflow/assets/fonts/NanumGothic-ExtraBold.ttf)}
+@font-face{font-family:BH;src:url(../../../ytflow/assets/fonts/BlackHanSans-Regular.ttf)}
+@font-face{font-family:PEN;src:url(../../../ytflow/assets/fonts/NanumPenScript-Regular.ttf)}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#0d0c0b}
+canvas{display:block}
+</style></head><body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+const BG='#0d0c0b',CREAM='#efe7da',DIM='#9a8f80',RED='#d9574a',GOLD='#e0ad4c',GRN='#4f9f78',INK='#2b2622';
+// 원화 좌표 (lab16 조각 기준 1920×1080): 모니터 화면, 메모
+const SCREEN={x:620,y:122,w:1030,h:686}, MEMO={x:672,y:250,w:292,h:436};
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)), ease=v=>{v=cl(v);return v<.5?2*v*v:1-Math.pow(-2*v+2,2)/2};
+const io=(t,a,d=.5)=>ease((t-a)/d);
+const pop=(t,a)=>{const v=cl((t-a)/.35);return v<=0?0:1+0.2*Math.sin(v*Math.PI)*(1-v)};
+let S=[],IM={};
+function txt(s,X,Y,size,col,font='NG',align='center',alpha=1){if(alpha<=0)return;x.save();x.globalAlpha=alpha;x.fillStyle=col;x.font=`${size}px ${font}`;x.textAlign=align;x.textBaseline='middle';x.fillText(s,X,Y);x.restore()}
+function wrap(s,maxW,size,font){x.save();x.font=`${size}px ${font}`;const out=[];let cur='';for(const w of s.split(' ')){const t=cur?cur+' '+w:w;if(x.measureText(t).width>maxW&&cur){out.push(cur);cur=w}else cur=t}if(cur)out.push(cur);x.restore();return out}
+function para(s,X,Y,maxW,size,col,font='NG',align='center',alpha=1,lh=1.4){const L=wrap(s,maxW,size,font);L.forEach((l,i)=>txt(l,X,Y+(i-(L.length-1)/2)*size*lh,size,col,font,align,alpha));}
+function rr(X,Y,w,h,r,fill,stroke,lw=3,alpha=1){if(alpha<=0)return;x.save();x.globalAlpha=alpha;x.beginPath();x.roundRect(X,Y,w,h,r);if(fill){x.fillStyle=fill;x.fill()}if(stroke){x.strokeStyle=stroke;x.lineWidth=lw;x.stroke()}x.restore()}
+function dot(X,Y,r,col,alpha=1){if(alpha<=0)return;x.save();x.globalAlpha=alpha;x.fillStyle=col;x.beginPath();x.arc(X,Y,r,0,Math.PI*2);x.fill();x.restore()}
+function black(){x.fillStyle=BG;x.fillRect(0,0,1920,1080)}
+function art(name,lt,D,mv='in',alpha=1){if(name==='black'){x.save();x.globalAlpha=alpha;black();x.restore();return}const im=IM[name];if(!im||alpha<=0)return;const p=cl(lt/Math.max(D,1));let s=1.04,dx=0,dy=0;
+  if(mv==='still'){s=1}else if(mv==='in'){s=1.0+0.07*p}else if(mv==='out'){s=1.07-0.07*p}else if(mv==='left'){s=1.07;dx=40-80*p}else if(mv==='right'){s=1.07;dx=-40+80*p}
+  const w=1920*s,h=1080*s;x.save();x.globalAlpha=alpha;x.drawImage(im,960-w/2+dx,540-h/2+dy,w,h);x.restore()}
+function vign(){const g=x.createRadialGradient(960,540,500,960,540,1150);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,.55)');x.fillStyle=g;x.fillRect(0,0,1920,1080);
+  const b=x.createLinearGradient(0,820,0,1080);b.addColorStop(0,'rgba(0,0,0,0)');b.addColorStop(1,'rgba(0,0,0,.55)');x.fillStyle=b;x.fillRect(0,820,1920,260)}
+function tag(s){x.save();x.font='24px NGX';const w=x.measureText(s).width;rr(36,30,w+36,46,23,'rgba(0,0,0,.5)');x.restore();txt(s,54,53,24,'#d9d0c2','NGX','left')}
+// 장면 위 한 줄(흰 글씨 + 어두운 띠): 그 순간의 낱말
+function label(s,lt,Y=110,size=48){const a=io(lt,.15,.4);if(a<=0)return;x.save();x.font=`${size}px BH`;const w=x.measureText(s).width;x.restore();
+  x.save();x.globalAlpha=a*.72;x.fillStyle='#000';x.fillRect(960-w/2-40,Y-size*0.85,w+80,size*1.7);x.restore();txt(s,960,Y,size,CREAM,'BH','center',a)}
+function stampT(s,lt,Y=140,col=CREAM){const n=Math.floor(cl((lt-.3)/1.2)*s.length);x.save();x.font='54px BH';const w=x.measureText(s).width;x.restore();rr(36,Y-44,w+60,84,10,'rgba(0,0,0,.55)',null,0,n>0?1:0);txt(s.slice(0,n),66,Y,54,col,'BH','left')}
+function SUB(s){if(!s)return;x.save();x.font='42px NGX';const w=x.measureText(s).width;x.fillStyle='rgba(10,9,8,.86)';x.beginPath();x.roundRect(960-w/2-30,966,w+60,74,10);x.fill();x.fillStyle='#fff';x.textAlign='center';x.textBaseline='middle';x.fillText(s,960,1004);x.restore()}
+function mark(kind,X,Y,s,a=1){if(a<=0)return;x.save();x.globalAlpha=a;x.lineWidth=s*.16;x.lineCap='round';x.strokeStyle=kind==='q'?GOLD:GRN;x.fillStyle=kind==='q'?GOLD:GRN;
+  if(kind==='q'){x.font=`${s*2}px PEN`;x.textAlign='center';x.textBaseline='middle';x.fillText('?',X,Y)}else{x.beginPath();x.moveTo(X-s*.5,Y);x.lineTo(X-s*.1,Y+s*.4);x.lineTo(X+s*.55,Y-s*.45);x.stroke()}x.restore()}
+// 냉장고 메모: 손글씨 + 표시들
+function memoScene(t,D,marks,add,tAdd,writeAt){art('lab16_br',t,D,'still');vign();tag('재현 · 창작 인물 서윤');
+  const m=MEMO,s='자제력은 쓰면 줄어든다',n=Math.floor(cl((t-writeAt)/1.6)*s.length);
+  x.save();x.translate(m.x+m.w/2,m.y+m.h/2);x.rotate(-0.04);x.font='66px PEN';x.fillStyle='#2b2622';x.textAlign='center';x.textBaseline='middle';
+  const L=['자제력은','쓰면 줄어든다'];let k=0;L.forEach((l,i)=>{const take=Math.max(0,Math.min(l.length,n-k));x.fillText(l.slice(0,take),0,(i-.5)*80-20);k+=l.length});x.restore();
+  const all=add?marks.concat([add]):marks;all.forEach((mk,i)=>{const nw=add&&i===all.length-1;mark(mk,m.x+m.w+150+i*190,m.y+m.h/2-20,nw?130*pop(t,tAdd):130,nw?cl((t-tAdd)/.3):1)})}
+
+const MG={};
+MG.madi=(d,t)=>{black();para(d.text,960,530,1500,d.text.length>60?54:66,CREAM,'BH','center',io(t,.35,.9),1.45);return 'nosub'};
+MG.art=(d,t,K,D)=>{const sh=d.shots;let cur=-1;sh.forEach((s,k)=>{if(s[1]<0||t>=K[s[1]]-0.15)cur=k});
+  const st=k=>sh[k][1]<0?0:K[sh[k][1]]-0.15;
+  // 같은 그림이 이어지는 구간은 하나의 카메라 움직임으로(글만 바뀜)
+  const runStart=k=>{while(k>0&&sh[k-1][0]===sh[k][0])k--;return k}, runEnd=k=>{while(k+1<sh.length&&sh[k+1][0]===sh[k][0])k++;return k+1<sh.length?st(k+1):D};
+  if(cur<0){art(d.first[0],t,K[0],d.first[1]);vign();tag('재현 · 창작 인물 서윤');return}
+  const b=runStart(cur), mv=sh[b][2]||'in';
+  if(b>0){const pb=runStart(b-1);art(sh[pb][0],t-st(pb),runEnd(pb)-st(pb)+.6,sh[pb][2]||'in')}else if(d.first)art(d.first[0],t,K[0]+.6,d.first[1]);
+  const fade=(b>0||d.first)?io(t,st(b),.45):1;art(sh[b][0],t-st(b),runEnd(b)-st(b),mv,fade);vign();
+  const n=sh[cur][0];if(n!=='black')tag(n.startsWith('kitchen')||n.startsWith('day')?'재현 · 창작 인물 서윤':'재현 · 실제 사진 아님');
+  if(sh[cur][3]){if(n==='black')txt(sh[cur][3],960,520,150,CREAM,'BH','center',io(t,st(cur)+.2,.5));else label(sh[cur][3],t-st(cur),110,sh[cur][3].length>30?40:48)}
+  if(d.stamp&&b===0&&n!=='black')stampT(d.stamp,t);
+  if(d.diet&&cur===0&&t>=K[0]-.3)stampT(d.diet,t-K[0]+.3,236,GOLD);
+  if(d.think&&t>=K[d.thinkk||0]-.2)bubble(d.think,t-K[d.thinkk||0]+.2);
+  if(d.say&&t>=K[d.sayk]-.2)bubble(d.say,t-K[d.sayk]+.2);
+  if(d.battery){const b=d.battery,a=io(t,b.at!=null?K[b.at]:0);const lv=b.from+(b.to-b.from)*io(t,(b.at!=null?K[b.at]:0)+.3,b.dur||3);x.save();x.globalAlpha=a*.55;x.fillStyle='#000';x.fillRect(1500,70,330,170);x.restore();batteryLine(1560,110,200,90,lv,a)}
+};
+MG.words=(d,t,K,D)=>{black();txt(d.head,960,170,64,DIM,'BH','center',io(t,0));
+  d.lines.forEach(([s,k],i)=>{const a=io(t,K[k]);const last=i===d.lines.length-1;txt(s,960,320+i*155,last?56:86,last?GOLD:CREAM,last?'BH':'PEN','center',a)})};
+MG.memo=(d,t,K,D)=>{memoScene(t,D,d.marks,null,0,K[0])};
+MG.etask=(d,t,K,D)=>{const p=K.filter(k=>t>=k).length;const sc=SCREEN;
+  if(p>=2&&p<3||(p===3&&t<K[3]-0.2&&false)){}
+  const hard=p>=2, digits=p>=4;
+  // 손가락이 멈추는 순간(어려운 집단, e가 모음 옆)에는 손 클로즈업으로 자름
+  const W=['table','read','pencil','beach','letter','ocean','queen','planet'],per=1.45,k=Math.floor(t/per),f=(t%per)/per,w=W[k%W.length];
+  const near=/[aiou]e|e[aiou]/.test(w),hasE=w.includes('e');
+  const handShot=p===3&&near&&hasE&&f>.3&&f<.9;
+  if(handShot){art('lab16_tr',f,1,'in');vign();tag('재현 · 실제 사진 아님');label('멈춤 — e가 모음 옆',1,110,52);return}
+  art('lab16_bl',t,D,'still');vign();tag('재현 · 실제 사진 아님');
+  x.save();x.beginPath();x.rect(sc.x,sc.y,sc.w,sc.h);x.clip();
+  if(!digits){txt(w,sc.x+sc.w/2,sc.y+sc.h/2,150,'#f3eee6','NGX','center',f<.88?1:0);
+    if(p>=1&&hasE&&f>.2&&f<.88){x.font='150px NGX';const pre=x.measureText(w.slice(0,w.indexOf('e'))).width,full=x.measureText(w).width,ew=x.measureText('e').width;
+      const stop=hard&&near;x.strokeStyle=stop?RED:GRN;x.lineWidth=10;const ex=sc.x+sc.w/2-full/2+pre;x.beginPath();x.moveTo(ex,sc.y+sc.h/2+85);x.lineTo(ex+ew,sc.y+sc.h/2+85);x.stroke()}}
+  else{const lt=t-K[3];const sets=[['1','3','1',1,[110,190,110]],['2','2','1',2,[190,110,110]],['3','2','2',0,[110,110,190]]];const s=sets[Math.floor(lt/2.4)%3],ff=(lt%2.4)/2.4;
+    s.slice(0,3).forEach((n,j)=>txt(n,sc.x+sc.w/2+(j-1)*260,sc.y+sc.h/2,s[4][j],'#f3eee6','BH'));if(ff>.45){x.strokeStyle=GOLD;x.lineWidth=8;x.strokeRect(sc.x+sc.w/2+(s[3]-1)*260-95,sc.y+sc.h/2-120,190,240)}}
+  x.restore();
+  if(digits)label('숫자 셋 중 다른 하나',t-K[3]);
+  else if(p>=2)label('어려운 집단 · e가 모음 옆이면 멈춤',t-K[1]);
+  else if(p>=1){label('쉬운 집단 · e가 보이면 누름',t-K[0]);}
+  if(!digits&&p>=1&&hasE&&f>.2&&f<.88){const stop=hard&&near;rr(1560,190,240,90,45,stop?RED:GRN,null,0,1);txt(stop?'멈춤':'누름',1680,235,46,'#fff','BH')}
+};
+MG.result=(d,t,K,D)=>{const tAdd=K[3]-.1;if(t>=tAdd-.4){memoScene(t,D,d.marks,d.mark,tAdd,-10);return}
+  art(d.img,t,D,'out');x.fillStyle='rgba(0,0,0,.62)';x.fillRect(0,0,1920,1080);tag('재현 · 실제 사진 아님');
+  const [l0,l1,l2,l3]=d.lines;txt(l0[0],960,250,40,DIM,'NGX','center',io(t,K[l0[1]]));
+  txt(l1[0],960,430,150*pop(t,K[l1[1]])||1,CREAM,'BH','center',io(t,K[l1[1]]));txt('참가자',960,540,40,DIM,'NGX','center',io(t,K[l1[1]]+.3));
+  txt(l2[0],960,690,64,CREAM,'BH','center',io(t,K[2]));txt(l3[0],960,790,48,GOLD,'BH','center',io(t,K[2]+2.4))};
+
+
+// v8: 서윤의 말(말풍선), 질문이 서윤의 말에서 바로 떠오름, 하루 되감기, 그날의 기록(숫자 몇 줄)
+function bubble(s,lt,X=1440,Y=230){const a=io(lt,0,.35);if(a<=0)return;x.save();x.font='68px PEN';const w=Math.min(900,x.measureText(s).width+100);x.restore();
+  rr(X-w/2,Y-70,w,140,70,'rgba(250,246,238,.96)',null,0,a);x.save();x.globalAlpha=a;x.fillStyle='rgba(250,246,238,.96)';x.beginPath();x.moveTo(X-w/2+90,Y+55);x.lineTo(X-w/2+40,Y+120);x.lineTo(X-w/2+150,Y+62);x.fill();x.restore();
+  txt(s,X,Y,68,INK,'PEN','center',a)}
+MG.speak=(d,t,K,D)=>{art(d.img,t,D,'in');vign();tag('재현 · 창작 인물 서윤');bubble(d.say,t-.2)};
+MG.ask=(d,t,K,D)=>{art(d.img,t,D,'in');x.fillStyle=`rgba(0,0,0,${.55*io(t,K[0],.8)})`;x.fillRect(0,0,1920,1080);vign();tag('재현 · 창작 인물 서윤');
+  const a=io(t,K[0],.6);txt(d.q,960,d.qy||470,(d.qs||92)*(pop(t,K[0])||1),CREAM,'BH','center',a)};
+MG.rewind=(d,t,K,D)=>{const seq=d.seq,k0=K[0];if(t<k0){art(d.from,t,k0,'out');vign();tag('재현 · 창작 인물 서윤');return}
+  const per=.42,i=Math.min(seq.length-1,Math.floor((t-k0)/per));art(seq[i],i===seq.length-1?t-k0-i*per:0,4,i===seq.length-1?'in':'still');
+  if(i<seq.length-1){x.fillStyle='rgba(255,255,255,.08)';x.fillRect(0,0,1920,1080);txt('◀◀',1780,90,48,CREAM,'NGX','center',.85)}vign();tag('재현 · 창작 인물 서윤');if(i===seq.length-1&&d.stamp)stampT(d.stamp,t-k0-i*per)};
+MG.times=(d,t,K,D)=>{art(d.img,t,D,'out');x.fillStyle='rgba(0,0,0,.6)';x.fillRect(0,0,1920,1080);tag('재현 · 실제 사진 아님');
+  label(d.head,t,150,44);d.rows.forEach((r,i)=>{const a=io(t,K[i]);const big=i===d.rows.length-1;
+    txt(r[0],760,360+i*170,big?48:42,big?CREAM:DIM,'BH','right',a);txt(r[1],820,360+i*170,big?120*(pop(t,K[i])||1):86,big?RED:CREAM,'BH','left',a)});
+  if(d.foot)txt(d.foot,960,880,48,GOLD,'BH','center',io(t,K[K.length-1]))};
+
+
+
+function line(a,b,c2,d,col=CREAM,lw=4,alpha=1,dash){if(alpha<=0)return;x.save();x.globalAlpha=alpha;x.strokeStyle=col;x.lineWidth=lw;if(dash)x.setLineDash(dash);x.beginPath();x.moveTo(a,b);x.lineTo(c2,d);x.stroke();x.restore()}
+function arrow(a,b,c2,d,col=CREAM,lw=5,alpha=1,prog=1){if(alpha<=0||prog<=0)return;const ex=a+(c2-a)*prog,ey=b+(d-b)*prog;line(a,b,ex,ey,col,lw,alpha);const an=Math.atan2(d-b,c2-a);x.save();x.globalAlpha=alpha;x.fillStyle=col;x.beginPath();x.moveTo(ex,ey);x.lineTo(ex-26*Math.cos(an-0.45),ey-26*Math.sin(an-0.45));x.lineTo(ex-26*Math.cos(an+0.45),ey-26*Math.sin(an+0.45));x.closePath();x.fill();x.restore()}
+function chip(s,X,Y,size,fill,col,alpha=1){if(alpha<=0)return;x.save();x.font=`${size}px NGX`;const w=x.measureText(s).width;x.restore();rr(X-w/2-26,Y-size*0.9,w+52,size*1.8,size*0.9,fill,null,0,alpha);txt(s,X,Y,size,col,'NGX','center',alpha)}
+// ---------- v12 (심리학 고양이 문법): 장 표지 · 시청자 참여 과제 · 흰 선 그림 ----------
+MG.card=(d,t,K,D)=>{black();const a=io(t,.15,.5)*(1-io(t,D-.45,.4));const big=d.text.length<12;
+  txt(d.text,960,530,big?78:64,CREAM,'BH','center',a);if(big){x.save();x.globalAlpha=a*.6;x.strokeStyle=CREAM;x.lineWidth=2;x.beginPath();x.moveTo(860,600);x.lineTo(1060,600);x.stroke();x.restore()}return 'nosub'};
+// 흰 선 배터리(남은 양 lv 0~1)
+function batteryLine(X,Y,w,h,lv,a=1){if(a<=0)return;x.save();x.globalAlpha=a;x.strokeStyle=CREAM;x.lineWidth=6;x.beginPath();x.roundRect(X,Y,w,h,12);x.stroke();
+  x.fillStyle=CREAM;x.fillRect(X+w,Y+h*.3,14,h*.4);const l=cl(lv);x.fillStyle=l<.3?RED:CREAM;x.fillRect(X+12,Y+12,(w-24)*l,h-24);x.restore()}
+// 참여 과제 ① 단어 속 e — phase 'press'(e가 보이면 탁) / 'stop'(e 옆 모음이면 멈춤)
+MG.play_e=(d,t,K,D)=>{black();const W=d.words, per=1.7, k=Math.floor(t/per), f=(t%per)/per, w=W[k%W.length];
+  const hasE=w.includes('e'), near=/[aiou]e|e[aiou]|ee/.test(w), stop=d.phase==='stop'&&near;
+  txt(d.phase==='stop'?'e가 보이면 탁 — 단, e 옆에 모음이 있으면 멈추기':'e가 보이면 속으로 탁!',960,170,44,DIM,'BH','center',io(t,0));
+  txt(w,960,520,150,CREAM,'NGX','center',f<.9?1:0);
+  if(hasE&&f>.45&&f<.9){x.save();x.font='150px NGX';const pre=x.measureText(w.slice(0,w.indexOf('e'))).width,full=x.measureText(w).width,ew=x.measureText('e').width;x.restore();
+    const ex=960-full/2+pre;line(ex,610,ex+ew,610,stop?RED:GRN,9);chip(stop?'멈춤':'탁',960,760,52,stop?RED:GRN,'#fff',1)}
+  tag('직접 해 보세요')};
+// 참여 과제 ② 점의 반대쪽 보기
+MG.play_dot=(d,t,K,D)=>{black();const per=2.2,k=Math.floor(t/per),f=(t%per)/per,side=[1,-1,-1,1,-1,1,1,-1][k%8];
+  txt('점이 뜨면 — 반대쪽을 보세요',960,170,48,DIM,'BH','center',io(t,0));txt('+',960,540,80,CREAM,'NG','center',1);
+  if(f>.15&&f<.85)dot(960+side*560,540,34,RED,1);
+  if(f>.5&&f<.85){arrow(960-side*120,540,960-side*480,540,GRN,8,1,io(f,.5,.15));txt('여기!',960-side*560,540,46,GRN,'BH','center',1)}
+  tag('직접 해 보세요')};
+
+function R(si,t,sub){const s=S[si];x.globalAlpha=1;const r=MG[s.data.mg](Object.assign({id:s.data.id},s.data),t,s.K,s.D);
+  if(si>0&&S[si-1].data.ch!==s.data.ch&&t<.35){x.fillStyle=`rgba(13,12,11,${1-t/.35})`;x.fillRect(0,0,1920,1080)}
+  if(r!=='nosub')SUB(sub)}
+function INIT(scenes,artURI){S=scenes;const names=new Set(['lab16_br']);scenes.forEach(s=>{const d=s.data;(d.shots||[]).forEach(z=>z[0]!=='black'&&names.add(z[0]));if(d.first)names.add(d.first[0]);if(d.img)names.add(d.img);if(d.mg==='etask')['lab16_bl','lab16_tr'].forEach(n=>names.add(n));(d.seq||[]).forEach(n=>names.add(n));if(d.from)names.add(d.from)});
+  let left=names.size+1;window.READY=false;const done=()=>{if(--left<=0)window.READY=true};Promise.all(['40px NG','40px NGX','40px BH','40px PEN'].map(f=>document.fonts.load(f,'가나다 abc 123'))).then(done,done);
+  names.forEach(n=>{const im=new Image();im.onload=done;im.onerror=done;im.src=artURI+'/'+n+'.jpg';IM[n]=im})}
+window.R=R;window.INIT=INIT;
+</script></body></html>

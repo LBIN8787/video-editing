@@ -1,0 +1,480 @@
+{
+  "recipe": {
+    "start_from": "document",
+    "documents": [
+      "기업 공식 블로그·연구 페이지(anthropic.com/research, deepmind, openai)",
+      "논문(arXiv·NBER·학술지)",
+      "IR 보도자료·SEC 공시",
+      "정부·국제기구·연구소(IMF·Fed·Stanford HAI·METR)",
+      "인물의 X 게시물(공식 계정)"
+    ],
+    "photos": "wikimedia_commons",
+    "min_documents": 3,
+    "chapters": true
+  },
+  "videos": [],
+  "topics": [
+    {
+      "topic": "미 중간선거 뒤 AI·반도체 폭락, 코스피 이틀 11% 하락 (한국 서킷브레이커·대만 공매도 제한)",
+      "sources": [
+        {
+          "kind": "news",
+          "title": "AI data center midterms selloff",
+          "publisher": "CNBC",
+          "date": "2026-11-06",
+          "url": "https://www.cnbc.com/2026/11/06/ai-data-center-midterms-selloff.html",
+          "speaker": "",
+          "claim": "선거 충격으로 AI주 급락, 데이터센터 건설이 '소모전'이 됐다는 분석 (본문 403, 제목만 확인)",
+          "use_as": "screenshot"
+        },
+        {
+          "kind": "news",
+          "title": "Chips Selloff Worsens as Fears About AI Trade Grip Stock Market",
+          "publisher": "Bloomberg",
+          "date": "2026-11-05",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-05/chips-selloff-worsens-as-fears-about-ai-trade-grip-stock-market",
+          "speaker": "",
+          "claim": "필라델피아 반도체지수 -9.2%(장중 기준), 6월 이후 최악의 하루",
+          "use_as": "card_data"
+        },
+        {
+          "kind": "news",
+          "title": "Chipmaker Selloff Deepens Amid Post-Election Concerns For Future Of Data Centers",
+          "publisher": "Forbes",
+          "date": "2026-11-05",
+          "url": "https://www.forbes.com/sites/fionariley/2026/11/05/chipmaker-selloff-deepens-amid-post-election-concerns-for-future-of-data-centers/",
+          "speaker": "",
+          "claim": "선거 뒤 데이터센터 전망 우려로 반도체 매도 확대",
+          "use_as": "screenshot"
+        },
+        {
+          "kind": "news",
+          "title": "Stocks Nov 5, 2026",
+          "publisher": "Fox Business",
+          "date": "2026-11-05",
+          "url": "https://www.foxbusiness.com/markets/stocks-nov-5-2026",
+          "speaker": "",
+          "claim": "나스닥 -5%, 다우 -1,800포인트 이상",
+          "use_as": "card_data"
+        },
+        {
+          "kind": "news",
+          "title": "Trump blames Democrats for stock market plunge after sweeping midterm victories",
+          "publisher": "Fox Business",
+          "date": "2026-11-05",
+          "url": "https://www.foxbusiness.com/politics/trump-blames-democrats-stock-market-plunge-after-sweeping-midterm-victories",
+          "speaker": "도널드 트럼프 (기사 속 발언)",
+          "claim": "트럼프가 폭락 책임을 민주당 승리로 돌림 (날짜 11/5~6)",
+          "use_as": "quote"
+        },
+        {
+          "kind": "news",
+          "title": "Stocks plunge after Dem midterm sweep",
+          "publisher": "Yahoo Finance",
+          "date": "2026-11-05",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/stocks-plunge-dem-midterm-sweep-205246551.html",
+          "speaker": "",
+          "claim": "민주당 압승으로 AI 규제 우려가 커져 증시 급락 (날짜 11/5~6)",
+          "use_as": "screenshot"
+        },
+        {
+          "kind": "news",
+          "title": "코스피 이틀간 11% 폭락",
+          "publisher": "파이낸셜뉴스",
+          "date": "2026-11-06",
+          "url": "https://www.fnnews.com/news/202611061652460795",
+          "speaker": "",
+          "claim": "코스피 이틀간 11% 폭락, 66개 종목 연중 최저가",
+          "use_as": "card_data"
+        },
+        {
+          "kind": "news",
+          "title": "코스피·코스닥 5%대 급락",
+          "publisher": "MBC",
+          "date": "2026-11-06",
+          "url": "https://imnews.imbc.com/news/2026/econo/article/6863441_36932.html",
+          "speaker": "",
+          "claim": "코스피·코스닥 5%대 급락, 삼성전자 -7%, SK하이닉스 -9% (장중 시세라 종가와 다를 수 있음)",
+          "use_as": "card_data"
+        },
+        {
+          "kind": "news",
+          "title": "삼성전자·SK하이닉스 이틀간 급락 (연합 인용)",
+          "publisher": "스페셜타임스(연합뉴스 인용)",
+          "date": "2026-11-06",
+          "url": "https://www.specialtimes.co.kr/news/articleView.html?idxno=482631",
+          "speaker": "",
+          "claim": "이틀간 삼성전자 -13.44%, SK하이닉스 -18.91%; 두 종목 합산 시총 약 1,930조 원(6월 고점 대비 -53.77%); 6일 코스피 종가 5059.69(-6.02%); 외국인 약 2.77조 원 순매도; 오전 9시 3분 서킷브레이커 발동",
+          "use_as": "card_data"
+        },
+        {
+          "kind": "news",
+          "title": "Taiwan FSC restricts short selling",
+          "publisher": "Securities Finance Times",
+          "date": "",
+          "url": "https://www.securitiesfinancetimes.com/securitieslendingnews/regulationarticle.php?article_id=225870",
+          "speaker": "",
+          "claim": "대만 FSC가 11/9부터 공매도 제한, 하루 대차 매도를 최근 30일 평균 거래량의 3%로 제한 (기사 날짜 2026-11, 정확한 날짜 재확인 필요)",
+          "use_as": "screenshot"
+        },
+        {
+          "kind": "news",
+          "title": "Taiwan authorizes its NT$500 billion stabilization fund to buy stocks after TAIEX's 12% weekly slide",
+          "publisher": "mlq.ai",
+          "date": "",
+          "url": "https://mlq.ai/news/taiwan-authorizes-its-nt500-billion-stabilization-fund-to-buy-stocks-after-taiexs-12-weekly-slide/",
+          "speaker": "",
+          "claim": "대만 증시안정기금 NT$5,000억(약 150억 달러) 투입 승인, 가권지수 주간 -12% (2026-11, 2차 출처)",
+          "use_as": "card_data"
+        },
+        {
+          "kind": "document",
+          "title": "Hinojosa calls for data center moratorium until Abbott convenes legislature",
+          "publisher": "Hinojosa 선거캠프 (ginafortexas.com)",
+          "date": "",
+          "url": "https://ginafortexas.com/2026/07/in-the-news-hinojosa-calls-for-data-center-moratorium-until-abbott-convenes-legislature/",
+          "speaker": "",
+          "claim": "텍사스 민주당 후보가 데이터센터 모라토리엄 공약 (2026-07; 주지사 당선 여부는 미확인, 단정 금지)",
+          "use_as": "screenshot"
+        },
+        {
+          "kind": "news",
+          "title": "Texas governor's data center moratorium prompts calls for special legislative session",
+          "publisher": "HPPR(공영방송)",
+          "date": "2026-08-07",
+          "url": "https://www.hppr.org/hppr-news/2026-08-07/texas-governors-data-center-moratorium-prompts-calls-for-special-legislative-session",
+          "speaker": "",
+          "claim": "애벗 주지사의 데이터센터 일시중단 선언 (배경)",
+          "use_as": "screenshot"
+        },
+        {
+          "kind": "document",
+          "title": "SK하이닉스 2026년 3분기 경영실적",
+          "publisher": "SK하이닉스 뉴스룸",
+          "date": "2026-10-28",
+          "url": "https://news.skhynix.co.kr/q3-2026-business-results/",
+          "speaker": "",
+          "claim": "반론용: 실적은 사상 최대",
+          "use_as": "card_data"
+        }
+      ],
+      "depth": "분석",
+      "depth_reason": "민주당 압승→데이터센터 모라토리엄·규제 우려→서킷브레이커·대만 공매도 제한으로 이어지는 3단 논리, 지수·시총·외국인 순매도 숫자 다수, 반론(SK하이닉스 사상 최대 실적)과 과거 사례(대만 2022년 공매도 제한)가 있음. 단 Hinojosa 당선 여부, TSMC 등락은 재확인 필요"
+    },
+    {
+      "topic": "AI 데이터센터 '빚'의 균열: ING 대출 매각, 오라클 스타게이트 불가항력 통지, 브룩필드 발언",
+      "sources": [
+        {
+          "kind": "news",
+          "title": "ING AI data center loans debt",
+          "publisher": "CNBC",
+          "date": "2026-11-06",
+          "url": "https://www.cnbc.com/2026/11/06/ing-ai-data-center-loans-debt.html",
+          "speaker": "",
+          "claim": "ING가 약 5억 달러어치 데이터센터 대출의 매수자를 찾는다는 보도",
+          "use_as": "screenshot"
+        },
+        {
+          "kind": "news",
+          "title": "ING puts $500 million data center loans up for sale - Bloomberg",
+          "publisher": "Global Banking & Finance(블룸버그 인용)",
+          "date": "2026-11-06",
+          "url": "https://www.globalbankingandfinance.com/ing-puts-500-million-data-center-loans-up-sale-bloomberg/",
+          "speaker": "",
+          "claim": "대출 약 12건, 입찰 마감 11/19, 최소 1,000만 달러 단위, 스타게이트 뉴멕시코분 약 2,500만 달러 포함 (2차 출처)",
+          "use_as": "card_data"
+        },
+        {
+          "kind": "news",
+          "title": "Oracle sends force majeure notice on its New Mexico Stargate data center",
+          "publisher": "TechCrunch",
+          "date": "2026-09-24",
+          "url": "https://techcrunch.com/2026/09/24/oracle-sends-force-majeure-notice-on-its-new-mexico-stargate-data-center/",
+          "speaker": "",
+          "claim": "오라클이 프로젝트 주피터(2.45GW, 1,400에이커)에 불가항력 통지, 은행 약 20곳이 180억 달러 대출 (10일 밖, 배경)",
+          "use_as": "screenshot"
+        },
+        {
+          "kind": "news",
+          "title": "Brookfield CEO on AI infrastructure gaps",
+          "publisher": "Crypto Briefing",
+          "date": "",
+          "url": "https://cryptobriefing.com/brookfield-ceo-ai-infrastructure-gaps/",
+          "speaker": "브루스 플랫, 브룩필드 CEO (간접 인용)",
+          "claim": "\"We as an industry can't build enough\" (날짜 재확인 필요)",
+          "use_as": "quote"
+        },
+        {
+          "kind": "news",
+          "title": "Brookfield says it's not becoming the WeWork of AI despite data centre slowdown",
+          "publisher": "The Logic",
+          "date": "",
+          "url": "https://thelogic.co/briefing/brookfield-says-its-not-becoming-the-wework-of-ai-despite-data-centre-slowdown/",
+          "speaker": "브룩필드 (간접 인용)",
+          "claim": "업계가 원래 예상한 데이터센터의 \"a fraction\"만 지을 수 있고 투자는 \"really, really choosy\"하게 (날짜 재확인 필요; 'not physically possible' 표현은 미확인)",
+          "use_as": "quote"
+        },
+        {
+          "kind": "data",
+          "title": "Banks meeting data center demand with billions in credit facilities, bonds",
+          "publisher": "S&P Global Market Intelligence",
+          "date": "",
+          "url": "https://www.spglobal.com/market-intelligence/en/news-insights/research/2026/02/banks-meeting-data-center-demand-with-billions-in-credit-facilities-bonds",
+          "speaker": "",
+          "claim": "은행들의 데이터센터 대출·채권 규모 (2026-02, 배경)",
+          "use_as": "card_data"
+        }
+      ],
+      "depth": "분석",
+      "depth_reason": "은행 대출 매각→스타게이트 전력 문제·AI 부채 증가→연기금·대출기관 위험 재계산의 3단 논리와 반론(부실 증거 없음, 일상적 대출 매각 가능성)이 있으나 공시·IR 같은 1차 문서가 없어 보도 위주 롱폼"
+    },
+    {
+      "topic": "AMD 데이터센터 매출 +97% 사상 최대, 그런데 빅테크는 설비투자 속도 조절",
+      "sources": [
+        {
+          "kind": "document",
+          "title": "AMD Reports Third Quarter 2026 Financial Results",
+          "publisher": "AMD IR",
+          "date": "2026-11-03",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1303/amd-reports-third-quarter-2026-financial-results",
+          "speaker": "리사 수, AMD CEO",
+          "claim": "매출 133.77억 달러(+45%), 데이터센터 85.46억 달러(+97%), GAAP 매출총이익률 54%, Non-GAAP EPS 2.09달러, 4분기 전망 약 170억 달러±3%(+66%). \"We delivered a record quarter with revenue exceeding the high end of our guidance\"",
+          "use_as": "card_data"
+        },
+        {
+          "kind": "document",
+          "title": "AMD Form 8-K Exhibit 99.1 (Q3 2026)",
+          "publisher": "SEC",
+          "date": "2026-11-03",
+          "url": "https://www.sec.gov/Archives/edgar/data/0000002488/000000248826000188/q32026991.htm",
+          "speaker": "",
+          "claim": "3분기 실적 공시 원문 화면",
+          "use_as": "screenshot"
+        },
+        {
+          "kind": "video",
+          "title": "Watch CNBC's full interview with AMD CEO Lisa Su",
+          "publisher": "CNBC",
+          "date": "2026-11-04",
+          "url": "https://www.cnbc.com/video/2026/11/04/watch-cnbcs-full-interview-with-amd-ceo-lisa-su.html",
+          "speaker": "리사 수, AMD CEO",
+          "claim": "Squawk on the Street 출연: 3분기 실적, AI 칩 수요, 중간선거가 데이터센터 건설에 미칠 영향 (유튜브 주소 미확인)",
+          "use_as": "quote"
+        },
+        {
+          "kind": "news",
+          "title": "Alphabet Q3 2026 earnings",
+          "publisher": "CNBC",
+          "date": "2026-10-28",
+          "url": "https://www.cnbc.com/2026/10/28/alphabet-googl-earnings-q3-2026.html",
+          "speaker": "",
+          "claim": "알파벳 3분기 실적",
+          "use_as": "screenshot"
+        },
+        {
+          "kind": "news",
+          "title": "Microsoft, Google AI capex estimates",
+          "publisher": "CNBC",
+          "date": "2026-10-29",
+          "url": "https://www.cnbc.com/2026/10/29/microsoft-google-ai-capex-estimates.html",
+          "speaker": "",
+          "claim": "구글·MS가 설비투자 전망 상향을 미룸, 2027년 하이퍼스케일러 설비투자 1조 달러 돌파 전망 (MS 연간 capex는 1,700억/1,750억 달러로 엇갈려 재확인 필요)",
+          "use_as": "card_data"
+        },
+        {
+          "kind": "data",
+          "title": "Alphabet (GOOG) Q3 2026 earnings summary",
+          "publisher": "Quartr",
+          "date": "2026-10-28",
+          "url": "https://quartr.com/events/alphabet-goog-q3-2026_3ebmqmdr",
+          "speaker": "",
+          "claim": "3분기 설비투자 513.55억 달러, 영업현금흐름 422.9억 달러, 잉여현금흐름 -90.65억 달러, 2026년 capex 1,950~2,050억 달러 유지, 클라우드 307억 달러(+103%)",
+          "use_as": "card_data"
+        },
+        {
+          "kind": "news",
+          "title": "Amazon slides 3%, Alphabet 12%",
+          "publisher": "Yahoo Finance",
+          "date": "",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/amazon-slides-3-alphabet-12-162243527.html",
+          "speaker": "",
+          "claim": "알파벳 주가 -12%, 아마존 -3% (2026-10)",
+          "use_as": "card_data"
+        },
+        {
+          "kind": "news",
+          "title": "Big Tech's AI spending plans reach $725 billion",
+          "publisher": "Tom's Hardware",
+          "date": "",
+          "url": "https://tomshardware.com/tech-industry/big-tech/big-techs-ai-spending-plans-reach-725-billion",
+          "speaker": "",
+          "claim": "빅테크 2026년 AI 설비투자 약 7,250억 달러 (2026-10)",
+          "use_as": "card_data"
+        }
+      ],
+      "depth": "분석",
+      "depth_reason": "AMD 사상 최대 실적→빅테크 연 7천억 달러대 capex→알파벳 FCF 마이너스·capex 상향 보류·주가 하락의 3단 논리, 회사 IR·SEC 8-K로 숫자가 탄탄하고 CEO 인터뷰 영상(CNBC 사이트)도 있음"
+    },
+    {
+      "topic": "다시 금리를 올리는 중앙은행들: 연준 9월 인상·10월 동결(인상 소수의견 2명), 영란은행 3년 만에 인상",
+      "sources": [
+        {
+          "kind": "document",
+          "title": "Monetary Policy Summary and minutes - November 2026",
+          "publisher": "Bank of England",
+          "date": "2026-11-05",
+          "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026",
+          "speaker": "테일러 위원 (회의록)",
+          "claim": "기준금리 3.75%→4%, 8대1(맨 위원 4.25% 주장), 9월 CPI 3.5%(에너지 영향 약 1%p), 2027년 1분기 약 4½%·2분기 약 5% 전망, 테일러: 인상 사이클의 시작은 아님, 다음 결정 12/17",
+          "use_as": "card_data"
+        },
+        {
+          "kind": "document",
+          "title": "Monetary Policy Summary and minutes November 2026 (PDF)",
+          "publisher": "Bank of England",
+          "date": "2026-11-05",
+          "url": "https://www.bankofengland.co.uk/-/media/boe/files/monetary-policy-summary-and-minutes/2026/monetary-policy-summary-and-minutes-november-2026.pdf",
+          "speaker": "",
+          "claim": "회의록 원문",
+          "use_as": "screenshot"
+        },
+        {
+          "kind": "document",
+          "title": "FOMC statement October 28, 2026",
+          "publisher": "Federal Reserve",
+          "date": "2026-10-28",
+          "url": "https://federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
+          "speaker": "",
+          "claim": "3.75~4.00% 동결, 10대2(쿡·해맥 0.25%p 인상 주장), \"Inflation remains elevated\". 9/16 12대0 0.25%p 인상은 2차 출처로만 확인",
+          "use_as": "card_data"
+        },
+        {
+          "kind": "document",
+          "title": "Transcript of Chair Warsh's Press Conference, October 28, 2026 (preliminary)",
+          "publisher": "Federal Reserve",
+          "date": "2026-10-28",
+          "url": "https://www.federalreserve.gov/mediacenter/files/FOMCpresconf20261028.pdf",
+          "speaker": "케빈 워시, 연준 의장",
+          "claim": "워시 의장 기자회견 예비 녹취록",
+          "use_as": "quote"
+        },
+        {
+          "kind": "x_post",
+          "title": "Fed Chair Warsh press conference livestream",
+          "publisher": "Federal Reserve (X)",
+          "date": "2026-10-28",
+          "url": "https://x.com/federalreserve/status/2115449354433810702",
+          "speaker": "연준 공식 계정",
+          "claim": "워시 의장 기자회견 생중계 공지",
+          "use_as": "screenshot"
+        },
+        {
+          "kind": "video",
+          "title": "Watch live: Fed Chair Warsh holds press conference on interest rate decision",
+          "publisher": "NBC News",
+          "date": "2026-10-28",
+          "url": "https://www.nbcnews.com/video/watch-live-fed-chair-warsh-holds-press-conference-on-interest-rate-decision-272396357550",
+          "speaker": "케빈 워시, 연준 의장",
+          "claim": "워시 기자회견 생중계 영상 (연준 공식 유튜브 watch?v= 주소는 미확인)",
+          "use_as": "quote"
+        },
+        {
+          "kind": "news",
+          "title": "Fed meeting live updates: October meeting, Kevin Warsh",
+          "publisher": "Yahoo Finance",
+          "date": "2026-10-28",
+          "url": "https://finance.yahoo.com/economy/policy/live/fed-meeting-live-updates-federal-reserve-october-meeting-kevin-warsh-161129201.html",
+          "speaker": "케빈 워시, 연준 의장",
+          "claim": "워시: 정치는 결정에 \"no role\"",
+          "use_as": "screenshot"
+        },
+        {
+          "kind": "news",
+          "title": "Fed chair Kevin Warsh, Treasury bond yield curve control, debt costs",
+          "publisher": "Fortune",
+          "date": "2026-11-01",
+          "url": "https://fortune.com/2026/11/01/fed-chair-kevin-warsh-treasury-bond-yield-curve-control-debt-costs-inflation-interest-rates-gdp-growth",
+          "speaker": "",
+          "claim": "반론: 워시가 실제로는 물가가 아니라 국채 이자 부담을 관리하고 있다는 해석",
+          "use_as": "screenshot"
+        },
+        {
+          "kind": "document",
+          "title": "Kevin Warsh",
+          "publisher": "Wikipedia",
+          "date": "",
+          "url": "https://en.wikipedia.org/wiki/Kevin_Warsh",
+          "speaker": "",
+          "claim": "인물 사진 출처 후보 (Commons 원본 재확인 필요)",
+          "use_as": "photo"
+        }
+      ],
+      "depth": "분석",
+      "depth_reason": "영란은행 2023년 8월 이후 첫 인상→중동 분쟁 에너지값·영국 인플레 전망 5%→연준 12월 인상 가능성과 AI 부채 부담의 3단 논리, 중앙은행 원문 문서 3건 이상, 과거 사례(2023년 인상, 2024~25년 인하)와 반론(Fortune 해석)이 있음"
+    },
+    {
+      "topic": "SK하이닉스 3분기 영업이익률 80%, 분기 매출 첫 100조 원",
+      "sources": [
+        {
+          "kind": "document",
+          "title": "SK하이닉스 2026년 3분기 경영실적",
+          "publisher": "SK하이닉스 뉴스룸",
+          "date": "2026-10-28",
+          "url": "https://news.skhynix.co.kr/q3-2026-business-results/",
+          "speaker": "",
+          "claim": "매출 104.6조 원(전분기 대비 +32%), 영업이익 83.3조 원, 영업이익률 80%, 순현금 98.7조 원, 고객 14곳과 2027~28년 생산능력 50% 넘게 장기계약, 주당 배당 2만 원(특별배당 1만 원 포함)",
+          "use_as": "card_data"
+        },
+        {
+          "kind": "news",
+          "title": "SK hynix Q3 2026 record profit",
+          "publisher": "Counterpoint Research",
+          "date": "2026-10-28",
+          "url": "https://counterpointresearch.com/cn/insights/sk-hynix-q3-2026-record-profit",
+          "speaker": "",
+          "claim": "영업이익 전년 대비 +632%",
+          "use_as": "card_data"
+        },
+        {
+          "kind": "news",
+          "title": "SK하이닉스 3분기 실적",
+          "publisher": "CEO스코어데일리",
+          "date": "2026-10-28",
+          "url": "https://ceoscoredaily.com/page/view/2026102815194560913",
+          "speaker": "",
+          "claim": "매출 전년 대비 +327.9%",
+          "use_as": "card_data"
+        }
+      ],
+      "depth": "안내",
+      "depth_reason": "실적 한 가지 사실로 5문장 안에 핵심이 끝남 → 쇼츠. ①의 반론 근거로도 사용, 증가율은 기준(전분기/전년)을 함께 표기"
+    },
+    {
+      "topic": "한국 정부 \"AI 데이터센터 투자 계속\": 배경훈 부총리 (보류 권고)",
+      "sources": [
+        {
+          "kind": "news",
+          "title": "AI 데이터센터 2035년까지 1,000조 원 투자",
+          "publisher": "헤럴드경제",
+          "date": "2026-06-28",
+          "url": "https://www.heraldk.com/article/2026062822130781636",
+          "speaker": "",
+          "claim": "2035년까지 AI 데이터센터에 1,000조 원 이상, 총 18.4GW (6/28~29)",
+          "use_as": "card_data"
+        },
+        {
+          "kind": "news",
+          "title": "2029년까지 AI 데이터센터 8.4GW",
+          "publisher": "아시아경제",
+          "date": "2026-06-29",
+          "url": "https://view.asiae.co.kr/article/2026062915485604284",
+          "speaker": "",
+          "claim": "2029년까지 8.4GW, 550조 원",
+          "use_as": "card_data"
+        }
+      ],
+      "depth": "안내",
+      "depth_reason": "정부 계획 한 가지 사실이며, 11/6 \"늦춰선 안 돼\" 발언 원문(과기정통부 보도자료)을 확인하지 못해 소스 2개뿐 → 보류 권고"
+    }
+  ]
+}

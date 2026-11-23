@@ -1,0 +1,275 @@
+"""이어 읽는 시장 — 11월 15일(일) 분석글: AI 공장 산업의 돈 흐름 (엔비디아 약속·보증, 18일 실적에서 볼 것).
+    python -m ytflow daily --project 20261115-market-analysis
+    python scripts/daily_20261115/make.py && python -m ytflow hybrid 20261115-market-analysis
+"""
+import json
+import subprocess
+import time
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+from ytflow.stages import archive  # noqa: E402
+
+P = ROOT / "projects" / "20261115-market-analysis"
+AS_OF = "11월 13일 미국·한국 마감 기준 · 일요일 분석"
+YH = "야후 파이낸스 종가 · 2026.11.6 → 11.13"
+Q2 = "엔비디아 2분기(FY2027) 실적 보도자료·CFO 코멘터리 (2026.8.26, SEC 8-K)"
+FSR = "연준 금융안정보고서 (2026.11.13) · Box 2.2"
+
+PHOTOS = {  # 키: 위키미디어 공용 파일 이름 (CC BY·PD)
+    "nvidia": "Nvidia sign.jpg",
+    "nyse": "New York Stock Exchange Facade 2015.jpg",
+    "fed": "Eccles Building (26088200676).jpg",
+    "seoul": "Skyline of Yeouido, a prominent finance district in Seoul.jpg",
+    "dc": "Microsoft Data Center Middenmeer, the Netherlands - 1.jpg",
+}
+KNOWN = {   # 위키미디어 조회가 막힐 때 (2026-11-14 검색 결과)
+    "nvidia": {"license": "CC BY 2.0", "artist": "Will Buckner"},
+    "nyse": {"license": "CC BY 2.0", "artist": "작자 미상"},
+    "fed": {"license": "Public domain", "artist": "Federal Reserve"},
+    "seoul": {"license": "CC BY 4.0", "artist": "작자 미상"},
+    "dc": {"license": "CC BY 4.0", "artist": "Hay Kranen"},
+}
+
+
+def photos() -> dict:
+    fdir = P / "04_assets" / "footage"
+    (fdir / "raw").mkdir(parents=True, exist_ok=True)
+    out = {}
+    for key, title in PHOTOS.items():
+        meta = fdir / "raw" / f"{key}.json"
+        if meta.exists():
+            r = json.loads(meta.read_text(encoding="utf-8"))
+        else:
+            try:
+                r = archive.commons_file(title)
+            except Exception:  # noqa: BLE001
+                r = None
+            if not r:
+                k = KNOWN[key]
+                r = {"title": title, "license": k["license"], "artist": k["artist"], "page": "https://commons.wikimedia.org/wiki/File:" + title.replace(" ", "_"),
+                     "url": "", "credit": f"{k['license']} · {k['artist']} · 위키미디어 공용 · {title.rsplit('.', 1)[0][:50]}"}
+            meta.write_text(json.dumps(r, ensure_ascii=False, indent=1), encoding="utf-8")
+        jpg = fdir / "raw" / f"{key}.jpg"
+        if not jpg.exists():
+            url = "https://commons.wikimedia.org/wiki/Special:FilePath/" + title.replace(" ", "_") + "?width=1920"   # 썸네일 서버는 429 가 잦음
+            for _ in range(3):
+                subprocess.run(["curl", "-sSL", "-A", "ytflow/1.0 (video research tool)", "-o", str(jpg), url], check=True)
+                if jpg.read_bytes()[:2] == b"\xff\xd8":
+                    break
+                time.sleep(8)
+            else:
+                jpg.unlink()
+                raise SystemExit(f"사진 받기 실패: {title}")
+        mp4 = fdir / f"{key}.mp4"
+        if not mp4.exists():
+            archive.still_to_clip(jpg, mp4, dur=12)
+        out[key] = {"file": mp4.name, "credit": r["credit"], "url": r["page"], "license": r["license"]}
+    return out
+
+
+def B(*s):
+    return [{"say": x} for x in s]
+
+
+def main():
+    for d in ("01_research", "02_script", "05_edit"):
+        (P / d).mkdir(parents=True, exist_ok=True)
+    fo = photos()
+    cr = {k: v["credit"].split(" · 위키미디어")[0] for k, v in fo.items()}
+    S = []
+    s = S.append
+    # 여는 장면 → 크기 → 질문 (v24: 인트로·인사 없음)
+    s(dict(type="bignum", chapter=0, label=Q2, small="엔비디아 CFO 코멘터리 · '보증' 항목 · 2026년 7월 말 기준", value="1,085억 달러",
+           compare={"label": "같은 분기 매출", "value": "962억 달러"}, fx=["dolly"],
+           beats=B("지난 8월 26일, 엔비디아는 분기 실적과 함께 최고재무책임자의 설명 자료를 냈습니다. 그 문서 뒤쪽, 보증이라는 항목에는 최대 1,085억 달러라는 숫자가 적혀 있었습니다.",
+                   "같은 분기 엔비디아가 판 전체 매출은 962억 달러였습니다. 한 분기 매출보다 큰 금액을, 고객이 빌린 데이터센터의 임대료를 못 낼 때 대신 책임지겠다고 약속한 겁니다.")))
+    s(dict(type="bars", chapter=0, label=Q2 + " · 주가는 " + YH, title="엔비디아 분기 매출 (억 달러)", unit="", emph=2,
+           layers=[{"kind": "locator", "at": [-121.96, 37.37], "label": "미국 캘리포니아 산타클라라 · 엔비디아 본사", "beat": 0, "side": "left", "top": 170, "scale": 2.2}],
+           items=[{"label": "1년 전 2분기", "value": 467, "text": "467", "t": "1년 전"}, {"label": "올해 2분기", "value": 962, "text": "962", "t": "올해 2분기"},
+                  {"label": "3분기 회사 전망", "value": 1080, "text": "1,080", "t": "3분기"}],
+           beats=B("엔비디아의 매출은 1년 전 같은 분기 467억 달러에서, 올해 2분기 962억 달러로 두 배 넘게 늘었습니다. 회사는 3분기 매출을 1,080억 달러 안팎으로 내다봤습니다.",
+                   "11월 13일 마감 기준 엔비디아 주가는 162.85달러로, 한 주 동안 12.75% 내렸습니다. 창업자가 물러난 뒤 처음 나오는 실적이, 한국 시간 18일 새벽에 발표됩니다. 세계에서 가장 돈을 잘 버는 칩 회사가, 왜 고객의 빚까지 보증하게 됐을까요?")))
+    # 1. 칩 회사의 성적표
+    s(dict(type="chapter", chapter=1, num="1", title="칩 회사의 성적표", icon="server", look="dash",
+           beats=B("답을 찾으려면 먼저, 이 회사가 누구에게서 돈을 버는지부터 봐야 합니다.")))
+    s(dict(type="checklist", chapter=1, label=Q2, title="2분기 데이터센터 매출 890억 달러, 누가 샀나", fx=["tilt"], x=150, text_w=860,
+           layers=[{"kind": "photo", "src": "dc", "beat": 0, "side": "right", "w": 440, "top": 620, "caption": f"데이터센터 · {cr['dc']}"}],
+           rows=[{"label": "전체 매출 962억 중 데이터센터 890억 (1년 새 +117%)", "state": "ok", "t": "890억"},
+                 {"label": "대형 클라우드(하이퍼스케일) 487억 (+102%)", "state": "ok", "t": "487억"},
+                 {"label": "AI 클라우드·기업·국가 403억 (+138%)", "state": "warn", "t": "403억"},
+                 {"label": "중국 출하: 데이터센터 매출의 1% 미만", "state": "warn", "t": "1%"}],
+           beats=[{"say": "2분기 매출 962억 달러 가운데 890억 달러가 데이터센터에서 나왔습니다. 1년 전보다 117% 늘어난 숫자입니다. 그중 487억 달러는 아마존이나 마이크로소프트 같은 대형 클라우드 회사가 샀습니다.", "upto": 2},
+                  {"say": "더 빨리 늘어난 쪽은 나머지 403억 달러입니다. AI 전문 클라우드와 일반 기업, 국가 단위 고객으로, 1년 새 138% 늘었습니다. 중국으로 간 물량은 데이터센터 매출의 1%도 되지 않았습니다.", "upto": 4}]))
+    s(dict(type="quote", chapter=1, label=Q2, fx=["scan"], who="젠슨 황 (당시 CEO)", role="2분기 실적 보도자료 · 8월 26일",
+           quote="이제 컴퓨팅이 곧 매출이다.", keyword="매출",
+           orig="Now, compute is revenue.",
+           beats=B("당시 최고경영자였던 젠슨 황은 실적 보도자료에서, 이제 컴퓨팅이 곧 매출이라고 말했습니다. AI가 쓸모 있는 일을 하고, 그 결과물이 돈이 된다는 뜻입니다.",
+                   "이 말이 맞다면, 칩을 사는 고객들은 그 칩으로 돈을 벌어 다시 칩을 삽니다. 문제는 고객들이 버는 속도보다, 짓는 속도가 더 빠를 때 생깁니다.")))
+    # 2. 두 배로 늘어난 약속
+    s(dict(type="chapter", chapter=2, num="2", title="두 배로 늘어난 약속", icon="calendar", look="photo", bg_src="dc",
+           beats=B("그 속도의 흔적은, 실적표가 아니라 약속을 적은 표에 먼저 나타났습니다.")))
+    s(dict(type="bars", chapter=2, label=Q2 + " · 공급·생산능력 등 미래 약속 합계", title="엔비디아가 미리 약속한 돈 (억 달러)", unit="", emph=1, fx=["dolly"],
+           items=[{"label": "1분기 말", "value": 1190, "text": "1,190", "t": "1,190억"}, {"label": "2분기 말", "value": 2790, "text": "2,790", "t": "2,790억"}],
+           beats=B("엔비디아가 부품 회사들에 앞으로 사겠다고 약속한 돈은, 한 분기 만에 1,190억 달러에서 2,790억 달러로 늘었습니다. 회사는 늘어난 약속의 대부분이 메모리 구매라고 적었습니다.",
+                   "클라우드 계약과 데이터센터 임대, 지분 투자까지 더하면 7월 말 기준 약속 합계는 3,660억 달러입니다. 앞으로 몇 년 동안 팔릴 칩의 재료를, 지금 미리 잡아 둔 셈입니다.")))
+    s(dict(type="analogy", chapter=2, label="비유 · 근거: " + Q2, title="줄 서는 식당의 재료 계약",
+           left={"icon": "store", "label": "줄 서는 식당", "sub": "몇 년 치 재료를 미리 계약"}, right={"icon": "microchip", "label": "엔비디아", "sub": "몇 년 치 메모리를 미리 계약"},
+           result={"icon": "circle-alert", "label": "손님이 계속 온다는 데 건 약속"},
+           beats=[{"say": "줄이 끝없이 늘어선 식당을 떠올리면 쉽습니다. 주인은 재료가 떨어질까 봐 몇 년 치 재료를 미리 계약합니다. 손님이 계속 온다면, 이것은 가장 현명한 준비입니다."},
+                  {"say": "하지만 계약은 손님 수와 상관없이 남습니다. 엔비디아의 2,790억 달러도 같습니다. AI 데이터센터를 짓는 손님이 계속 온다는 데 건 약속입니다.", "show_result": True}]))
+    s(dict(type="map_causal", chapter=2, look="board", label="공시(사실) + 자체 해석 · 근거: " + Q2 + ", 야후 시세",
+           map={"nodes": {"nv": {"label": "엔비디아 약속 2,790억 달러", "icon": "building-2", "x": 300, "y": 360},
+                          "mem": {"label": "늘어난 몫의 대부분: 메모리", "icon": "microchip", "x": 960, "y": 360},
+                          "hx": {"label": "공시: SK하이닉스와 메모리 다년 협력", "icon": "handshake", "x": 1600, "y": 360},
+                          "kr": {"label": "해석: 한국 메모리 주문과 연결", "icon": "trending-up", "x": 960, "y": 780}},
+                "edges": [["nv", "mem"], ["mem", "hx"], ["mem", "kr"]]},
+           beats=[{"say": "이 약속의 줄을 따라가면 한국이 나옵니다. 엔비디아는 같은 보도자료에서 SK하이닉스와 차세대 메모리를 함께 개발하는 다년 협력을 발표했습니다.",
+                   "reveal": ["nv", "mem", "hx"], "draw": [["nv", "mem"], ["mem", "hx"]], "active": "hx"},
+                  {"say": "여기서부터는 해석입니다. 어느 회사가 얼마를 받는지는 공시에 없습니다. 다만 AI용 메모리를 대량으로 만들 수 있는 회사가 손에 꼽히는 만큼, 이 약속이 지켜지느냐는 한국 메모리 회사들의 주문과 이어져 있다고 볼 수 있습니다.",
+                   "reveal": ["kr"], "draw": [["mem", "kr"]], "active": "kr"}]))
+    # 3. 고객의 빚을 보증하는 칩 회사
+    s(dict(type="chapter", chapter=3, num="3", title="고객의 빚을 보증하다", icon="landmark", look="photo", bg_src="nvidia",
+           beats=B("그렇다면 처음에 본 1,085억 달러 보증은 어디서 나왔을까요?")))
+    s(dict(type="quote", chapter=3, label=Q2 + " · 추가 약속(Additional Commitments)", fx=["dolly"], who="엔비디아", role="CFO 코멘터리 · 8월 26일",
+           quote="많은 고객이 자기 재무 상태와 신용이 감당할 수 있는 것보다 빠르게 크고 있다.", keyword="빠르게",
+           orig="many are growing faster than their balance sheets and long-term credit profiles can support.",
+           beats=B("엔비디아는 설명 자료에 이렇게 적었습니다. AI 클라우드와 모델 회사들의 수요는 엄청나지만, 많은 고객이 자기 재무 상태와 신용이 감당할 수 있는 것보다 빠르게 크고 있다.",
+                   "그래서 일부 고객이 땅과 전력, 데이터센터 공간을 확보하도록 돕는 계약을 맺었다고 밝혔습니다. 칩을 파는 회사가, 칩을 놓을 건물과 그 건물의 빚까지 챙기기 시작한 겁니다.")))
+    s(dict(type="checklist", chapter=3, label=Q2 + " · 보증은 최대 노출액, 단계적으로 효력", title="칩 말고 엔비디아가 대는 것", fx=["scan"], x=150, text_w=860,
+           layers=[{"kind": "photo", "src": "dc", "beat": 1, "side": "right", "w": 440, "top": 620, "caption": f"데이터센터 · {cr['dc']}"}],
+           rows=[{"label": "AI 클라우드 계약 360억 달러", "state": "warn", "t": "360억"},
+                 {"label": "남에게 넘길 데이터센터 임대 200억 달러", "state": "warn", "t": "200억"},
+                 {"label": "AI 클라우드 임대 보증 최대 35억 달러", "state": "warn", "t": "35억"},
+                 {"label": "오하이오 4.25GW 부지 보증 최대 1,050억 달러", "state": "warn", "t": "1,050억"}],
+           beats=[{"say": "목록은 이렇습니다. AI 클라우드 회사들과 맺은 계약이 360억 달러, 나중에 다른 회사에 넘길 데이터센터 임대가 200억 달러입니다.", "upto": 2},
+                  {"say": "보증은 두 가지입니다. AI 클라우드 파트너들의 임대 보증이 최대 35억 달러, 그리고 오하이오의 한 부지에 대한 보증이 최대 1,050억 달러입니다. 오픈AI가 20년 동안 빌려 쓸 4.25기가와트 규모의 데이터센터로, 엔비디아 장비만 들어갑니다.", "upto": 4},
+                  {"say": "고객이 쓸 땅과 전력을 구하고, 임대 계약을 대신 맺었다가 넘기고, 임대료를 못 낼 때를 대비해 보증까지 서는 구조입니다. 칩 한 상자를 파는 일이, 20년짜리 부동산 계약과 한 묶음이 된 셈입니다."}]))
+    s(dict(type="bignum", chapter=3, label=Q2 + " · 회사 추정", small="오하이오 부지, 칩 한 세대 = 엔비디아 매출 1,500억 ~", value="2,000억 달러",
+           compare={"label": "보증 상한", "value": "1,050억 달러"}, fx=["tilt"],
+           beats=B("엔비디아가 이 보증을 서는 이유도 같은 문서에 있습니다. 이 부지에 칩 한 세대를 채우면 GPU 약 150만 개, 엔비디아 매출로는 1,500억에서 2,000억 달러가 될 수 있다고 회사는 적었습니다.",
+                   "보증은 데이터센터가 실제로 문을 열 때부터 단계적으로 효력이 생기고, 오픈AI가 임대료를 낼수록 줄어듭니다. 첫 효력은 2028년 무렵으로 예상됩니다. 큰 주문을 붙잡기 위해, 그 주문을 낼 고객의 뒤를 받쳐 준 셈입니다.")))
+    s(dict(type="versus", chapter=3, label=Q2 + " · 매출채권 회수 기간(DSO)", fx=["tilt"],
+           left={"value": "45일", "label": "1분기 말", "icon": "calendar"}, right={"value": "60일", "label": "2분기 말", "icon": "hourglass"},
+           beats=B("또 하나 달라진 숫자가 있습니다. 물건을 팔고 돈을 받기까지 걸리는 기간이, 한 분기 만에 45일에서 60일로 늘었습니다. 받을 돈은 631억 달러로, 한 분기 매출의 3분의 2에 가깝습니다.",
+                   "회사는 신용이 좋은 일부 대형 고객에게, 여러 분기에 걸친 큰 계약의 대금 기한을 늘려 줬기 때문이라고 설명했습니다. 같은 분기 엔비디아는 250억 달러어치 회사채도 발행했습니다.",
+                   "대금 기한을 늘려 준다는 것은, 고객이 칩값을 치르기 전까지 그 돈을 엔비디아가 대신 빌려주고 있는 것과 비슷합니다. 칩 회사의 장부에, 조금씩 은행의 모습이 겹쳐지기 시작한 겁니다.")))
+    # 4. 연준이 본 같은 고리
+    s(dict(type="chapter", chapter=4, num="4", title="연준이 본 같은 고리", icon="git-branch", look="board",
+           beats=B("이 모양을, 미국 중앙은행도 같은 주에 짚었습니다.")))
+    s(dict(type="map_causal", chapter=4, look="board", label=FSR + " (사실) · 엔비디아 공시와 겹쳐 본 것은 자체 해석",
+           map={"nodes": {"gpu": {"label": "GPU 회사: 칩 가치 보증·지분 투자", "icon": "microchip", "x": 330, "y": 340},
+                          "dev": {"label": "데이터센터 개발사·AI 클라우드", "icon": "server", "x": 1000, "y": 340},
+                          "big": {"label": "빅테크: 장기 임차 계약", "icon": "building-2", "x": 1600, "y": 560},
+                          "loan": {"label": "그 계약을 담보로 대출", "icon": "landmark", "x": 1000, "y": 790},
+                          "buy": {"label": "칩 구매 → 다시 GPU 회사 매출", "icon": "trending-up", "x": 330, "y": 790}},
+                "edges": [["gpu", "dev"], ["big", "dev"], ["dev", "loan"], ["loan", "buy"], ["buy", "gpu"]]},
+           beats=[{"say": "11월 13일 연준이 낸 금융안정보고서는 AI 인프라의 돈 흐름을 이렇게 그렸습니다. 빅테크가 데이터센터를 오래 빌리겠다고 계약하면, 신용이 약한 개발사가 그 계약을 담보로 돈을 빌립니다.",
+                   "reveal": ["big", "dev", "loan"], "draw": [["big", "dev"], ["dev", "loan"]], "active": "loan"},
+                  {"say": "GPU 회사는 칩의 가치를 보증해 주고 지분도 투자합니다. 빌린 돈은 다시 칩을 사는 데 쓰입니다. 보고서는 이 고리를 순환 금융이라고 불렀습니다.",
+                   "reveal": ["gpu", "buy"], "draw": [["gpu", "dev"], ["loan", "buy"], ["buy", "gpu"]], "active": "buy"},
+                  {"say": "여기서부터는 해석입니다. 보고서는 회사 이름을 적지 않았지만, 엔비디아 공시에 적힌 보증과 임대, 지분 투자는 이 그림의 왼쪽 위 칸과 같은 모양입니다.", "active": "gpu"}]))
+    s(dict(type="bars", chapter=4, label=FSR, title="우량 회사채 중 AI 컴퓨팅 인프라용 비중 (%)", unit="", emph=1, fx=["dolly"],
+           layers=[{"kind": "photo", "src": "fed", "beat": 0, "side": "left", "w": 420, "top": 300, "caption": f"연준 에클스 빌딩 · {cr['fed']}"}],
+           items=[{"label": "2023년", "value": 6, "text": "6 미만", "t": "2023년"}, {"label": "2026년", "value": 31, "text": "약 31", "t": "올해는"}],
+           beats=B("이 고리를 도는 돈의 크기도 보고서에 있습니다. 신용이 좋은 기업들이 낸 회사채 가운데, AI 컴퓨팅 인프라용 비중은 2023년 6%가 안 됐습니다.",
+                   "올해는 약 31%입니다. 우량 회사채 세 장 가운데 한 장 가까이가 AI 인프라를 짓는 데 쓰인 셈입니다. 같은 기간 발행액은 1,300억 달러에서 6,800억 달러 넘게, 약 다섯 배로 늘었습니다.")))
+    s(dict(type="checklist", chapter=4, label=Q2 + " · 확정 계약 전제(subject to definitive agreements)", title="빈자리를 채울 바깥 돈", fx=["scan"], x=150, text_w=860,
+           layers=[{"kind": "photo", "src": "nyse", "beat": 0, "side": "right", "w": 440, "top": 620, "caption": f"뉴욕증권거래소 · {cr['nyse']}"}],
+           rows=[{"label": "아폴로·블랙록·블랙스톤·브룩필드·골드만삭스·KKR", "state": "ok", "t": "아폴로"},
+                 {"label": "독립된 컴퓨팅 금융 플랫폼", "state": "ok", "t": "플랫폼"},
+                 {"label": "제3자 자본 5,000억 달러 이상 (확정 계약 전)", "state": "warn", "t": "5,000억"}],
+           beats=[{"say": "엔비디아도 이 돈의 빈자리를 알고 있었습니다. 같은 8월, 아폴로와 블랙록, 블랙스톤, 브룩필드, 골드만삭스, KKR과 함께 독립된 컴퓨팅 금융 플랫폼을 만들겠다고 발표했습니다.", "upto": 2},
+                  {"say": "목표는 바깥 투자자의 돈 5,000억 달러 이상을 AI 인프라로 끌어오는 것입니다. 다만 아직 확정 계약 전이라는 단서가 붙어 있습니다.", "upto": 3}]))
+    # 5. 1990년대 통신 장비 회사
+    s(dict(type="chapter", chapter=5, num="5", title="닮은 꼴, 그리고 한국", icon="cable", look="photo", bg_src="nyse",
+           beats=B("고객에게 돈을 대 주며 장비를 판 회사들은, 예전에도 있었습니다.")))
+    s(dict(type="analogy", chapter=5, label="과거 사례: eWeek·Motley Fool(2001) · 연준 보고서 그림 B · 엔비디아 2분기 공시",
+           title="닮은 점과 다른 점",
+           left={"icon": "cable", "label": "90년대 통신 장비", "sub": "통신사에 돈 빌려주고 장비 판매"}, right={"icon": "microchip", "label": "지금 엔비디아", "sub": "임대 보증·지분 투자·대금 기한 연장"},
+           result={"icon": "circle-alert", "label": "같은 모양, 다른 체력 — 시험은 고객이 버는 돈"},
+           beats=[{"say": "1990년대 말, 루슨트 같은 통신 장비 회사들은 신생 통신사에 돈을 빌려주고 장비를 팔았습니다. 2001년 통신 거품이 꺼지고 고객사들이 줄줄이 파산하자, 그 대출은 손실로 돌아왔습니다. 연준 보고서도 지금의 AI 투자 속도를 그 통신 투자 붐과 나란히 놓았습니다."},
+                  {"say": "다른 점도 분명합니다. 엔비디아는 현금과 유가증권을 566억 달러 들고 있고, 대금 기한을 늘려 준 고객도 신용이 좋은 회사들이라고 밝혔습니다. 그래서 모양은 닮았지만 체력은 다르고, 결국 시험대는 고객이 AI로 실제로 돈을 버느냐입니다.", "show_result": True}]))
+    s(dict(type="map_causal", chapter=5, look="board", label="자체 해석 · 근거: 엔비디아 2분기 공시, 연준 금융안정보고서 5장 시나리오",
+           map={"nodes": {"earn": {"label": "고객의 AI 수익이 기대보다 낮음", "icon": "trending-down", "x": 300, "y": 340},
+                          "rent": {"label": "임대료·대금 지급 부담", "icon": "landmark", "x": 960, "y": 340},
+                          "guar": {"label": "보증·받을 돈이 엔비디아로", "icon": "circle-alert", "x": 1600, "y": 340},
+                          "order": {"label": "새 칩 주문 감소", "icon": "server", "x": 1600, "y": 790},
+                          "mem": {"label": "메모리 약속 → 한국 주문", "icon": "microchip", "x": 960, "y": 790},
+                          "good": {"label": "수익이 나면: 고리가 수요를 키움", "icon": "trending-up", "x": 300, "y": 790}},
+                "edges": [["earn", "rent"], ["rent", "guar"], ["guar", "order"], ["order", "mem"], ["good", "mem"]]},
+           beats=[{"say": "여기서부터는 해석입니다. 이 고리가 거꾸로 돌면 이렇게 됩니다. 고객의 AI 수익이 기대보다 낮으면 임대료와 칩 대금이 부담이 되고, 보증과 받을 돈의 위험이 엔비디아로 돌아오며, 새 칩 주문이 줄 수 있습니다.",
+                   "reveal": ["earn", "rent", "guar", "order"], "draw": [["earn", "rent"], ["rent", "guar"], ["guar", "order"]], "active": "order"},
+                  {"say": "그 끝에는 메모리 약속, 그러니까 한국 회사들의 주문이 있습니다. 반대로 고객이 돈을 벌면, 같은 고리가 수요를 더 키웁니다. 고리는 어느 방향으로도 소리를 키우는 확성기와 같습니다.",
+                   "reveal": ["mem", "good"], "draw": [["order", "mem"], ["good", "mem"]], "active": "mem"}]))
+    # 6. 한국
+    s(dict(type="bars", chapter=5, label=YH + " · 엔비디아 2분기 보도자료(한국 협력)", title="한국 AI 관련주, 이번 주 등락 (%)", unit="", emph=3,
+           layers=[{"kind": "locator", "at": [126.98, 37.57], "label": "서울 · 11월 13일 마감", "beat": 0, "side": "left", "top": 170, "scale": 2.2}],
+           items=[{"label": "코스피", "value": 4.56, "text": "+4.56", "t": "코스피는"}, {"label": "삼성전자", "value": 9.17, "text": "+9.17", "t": "삼성전자는"},
+                  {"label": "SK하이닉스", "value": 7.42, "text": "+7.42", "t": "SK하이닉스는"}, {"label": "네이버", "value": -9.31, "text": "-9.31", "t": "네이버는"}],
+           beats=B("한국 시장은 이 고리에 이미 들어와 있습니다. 11월 13일 마감 기준 한 주 동안 코스피는 4.56%, 삼성전자는 9.17%, SK하이닉스는 7.42% 올랐습니다.",
+                   "네이버는 9.31% 내렸습니다. 엔비디아는 8월에 SK텔레콤, 네이버, 브룩필드와 한국에 기가와트 규모 AI 공장을 짓는 협력도 발표했습니다. 메모리는 약속의 줄로, AI 공장은 협력의 줄로 같은 고리에 묶여 있는 셈입니다.")))
+    s(dict(type="kinetic", chapter=5, beats=[{"say": "칩을 파는 회사가, 이제 칩을 살 돈의 뒤까지 받치고 있습니다.", "hit": ["칩을", "뒤까지"]}]))
+    s(dict(type="checklist", chapter=5, label="11월 15일 기준 일정 (한국 시간) · 투자 권유가 아닙니다", title="18일 실적에서 볼 것", fx=["dolly"],
+           rows=[{"label": "18일(수) 06:20 — 매출이 1,058억~1,102억 달러 범위 안인가", "state": "warn"},
+                 {"label": "약속 2,790억 · 보증 1,085억 달러가 더 늘었나", "state": "warn"},
+                 {"label": "대금 회수 60일 · 다음 분기 전망", "state": "warn"},
+                 {"label": "임시 CEO 체제의 첫 설명 (07:00 콜)", "state": "warn"}],
+           beats=[{"say": "한국 시간 18일 수요일 새벽 6시 20분, 엔비디아 3분기 실적이 나옵니다. 먼저 매출이 회사가 제시한 1,058억에서 1,102억 달러 범위 안에 드는지 봅니다. 그리고 숫자표 뒤쪽, 약속과 보증의 금액이 또 늘었는지 봅니다.", "upto": 2},
+                  {"say": "돈을 받기까지 걸리는 60일이 더 길어졌는지, 다음 분기 전망은 어떤지도 함께 봅니다. 7시 콜에서는 임시 최고경영자를 맡은 콜레트 크레스가, 이 고리를 어떻게 설명하는지가 처음 드러납니다.", "upto": 4}]))
+    s(dict(type="outro", chapter=5, title="이어 읽는 시장", sub="11월 13일 마감 기준 · 출처는 설명란에", clip={"src": "nvidia", "start": 0},
+           beats=B("8월의 그 설명 자료에서 엔비디아는 컴퓨팅이 곧 매출이라고 했고, 같은 문서 뒤쪽에는 그 매출을 지키기 위한 1,085억 달러의 약속을 적었습니다. AI 붐의 크기를 재는 숫자는 매출이지만, 그 단단함을 재는 숫자는 고객이 버는 돈입니다. 18일에는 어느 숫자를 먼저 보게 될까요? 출처는 모두 설명란에 남겨 두겠습니다.")))
+    for i, x in enumerate(S, 1):
+        x["id"] = i
+    spec = {
+        "title": "엔비디아는 왜 고객의 빚까지 보증하나 — AI 공장 산업의 돈 흐름",
+        "brand": "market",
+        "core_message": "엔비디아는 칩을 파는 데서 그치지 않고 2,790억 달러의 부품 약속, 최대 1,085억 달러의 고객 임대 보증, 늘어난 대금 기한으로 고객이 칩을 살 수 있게 받치고 있다. 연준이 '순환 금융'이라 부른 AI 인프라의 돈 고리와 같은 모양이며, 이 고리를 단단하게 하는 것은 고객이 AI로 버는 돈이다 — 첫 확인은 18일 실적의 약속·보증·대금 회수 줄이다.",
+        "question": "세계에서 가장 돈을 잘 버는 칩 회사가, 왜 고객의 빚까지 보증하게 됐을까?",
+        "logic": ["여는 장면: 8/26 CFO 코멘터리 '보증' 최대 1,085억 달러 > 같은 분기 매출 962억",
+                  "1) 매출 467억(1년 전)→962억→전망 1,080억 · 데이터센터 890억(+117%), 하이퍼스케일 487억·ACIE 403억(+138%)",
+                  "2) 약속 1,190억→2,790억 달러(대부분 메모리), 합계 3,660억 → SK하이닉스 협력 → 해석: 한국 메모리 주문",
+                  "3) 고객이 신용보다 빨리 큼 → 클라우드 계약 360억·임대 200억·보증 35억+1,050억(오하이오 4.25GW, 오픈AI 20년) · 한 세대 매출 1,500~2,000억 · 대금 회수 45→60일, 회사채 250억",
+                  "4) 연준 금융안정보고서: 장기 임차 → 담보 대출 → 칩 보증·지분 → '순환 금융' · AI 인프라 비중 6%→31% · 해석: 엔비디아 공시와 같은 모양 · 외부 자본 5,000억 플랫폼(확정 전)",
+                  "5) 1990년대 말 통신 장비 회사의 고객 대출 → 2001 손실 vs 지금(현금 566억, 우량 고객) → 해석: 고리가 거꾸로 돌면 / 수요를 키우면",
+                  "한국: 삼성전자 +9.17%, SK하이닉스 +7.42%, 네이버 -9.31% · 18일 06:20 실적에서 볼 것"],
+        "compare_to": [{"value": "보증 최대 1,085억 달러", "to": "같은 분기 매출 962억 달러"},
+                       {"value": "약속 2,790억 달러", "to": "직전 분기 1,190억 달러"},
+                       {"value": "대금 회수 60일", "to": "직전 분기 45일"},
+                       {"value": "AI 인프라 회사채 비중 약 31%", "to": "2023년 6% 미만"}],
+        "analogies": [{"a": "줄 서는 식당의 몇 년 치 재료 계약", "b": "손님(AI 데이터센터 수요)이 계속 온다는 데 건 메모리 선구매"},
+                      {"a": "확성기", "b": "보증·대출 고리는 수요가 좋을 때도 나쁠 때도 소리를 키운다"}],
+        "past_cases": [{"case": "1990년대 말~2001년 통신 장비 회사(루슨트 등)의 고객 대출과 통신 거품 붕괴", "lesson": "고객에게 돈을 대 주며 판 매출은 고객이 무너지면 손실로 돌아온다 — 다만 지금은 현금·고객 신용이 다르다"}],
+        "glossary": [{"term": "CFO 코멘터리", "plain": "실적 발표 때 최고재무책임자가 숫자의 이유를 글로 설명한 자료"},
+                     {"term": "약속(commitments)", "plain": "앞으로 사거나 빌리기로 이미 계약해 둔 돈"},
+                     {"term": "보증", "plain": "고객이 돈을 못 내면 대신 책임지겠다는 약속"},
+                     {"term": "매출채권 회수 기간(DSO)", "plain": "물건을 팔고 실제로 돈을 받기까지 걸리는 평균 날수"},
+                     {"term": "하이퍼스케일러", "plain": "아마존·마이크로소프트·구글처럼 거대한 데이터센터를 운영하는 클라우드 회사"},
+                     {"term": "순환 금융", "plain": "큰 회사가 작은 회사에 돈을 대거나 보증하고, 그 작은 회사가 다시 큰 회사의 제품을 사는 고리"},
+                     {"term": "기가와트(GW)", "plain": "전력 규모 단위. 1GW는 대형 원전 한 기 정도"}],
+        "scenes": S,
+        "footage": fo,
+        "package": {
+            "title": "AI 공장의 돈 고리: 약속 2,790억·연준의 '순환 금융'·18일 실적에서 볼 것 | 11월 15일",   # 2026-11-15 사용자: 제목은 C + 날짜만, 채널 이름 없음 (업로드 뒤 --update-meta 로 바꿈)
+            "title_options": ["AI 공장의 돈 고리: 약속 2,790억·연준의 '순환 금융'·18일 실적에서 볼 것 | 11월 15일",
+                              "엔비디아는 왜 고객의 빚까지 보증하나 | 11월 15일",
+                              "매출 962억, 보증 1,085억 달러 — 엔비디아 공시 뒤쪽에 적힌 숫자"],
+            "title_why": ["사용자 선택(C): 다룬 흐름 + 일정", "훅(칩 회사가 왜 빚을 보증하나)에서 — 답은 숨김", "숫자 대비(매출보다 큰 보증)"],
+            "thumbnails": [
+                {"id": "A", "name": "엔비디아 간판 + 질문", "layout": "photo", "photo_side": "full", "image": {"file": "04_assets/footage/raw/nvidia.jpg", "focus": [0.5, 0.5]},
+                 "top": "11월 15일 · 일요일 분석", "lines": ["칩 회사가 왜", "고객의 빚까지?"], "hl": ["빚까지"], "sub": "엔비디아 · AI 공장의 돈 흐름", "size": 116, "text_y": 330, "marks": [],
+                 "why": ["장면 + 질문"]},
+                {"id": "B", "name": "숫자 대비", "layout": "versus", "left": {"value": "962억", "label": "분기 매출 (달러)"},
+                 "right": {"value": "1,085억", "label": "고객 보증 최대 (달러)"}, "headline": "매출보다 큰 보증", "hl": [], "marks": [], "why": ["숫자 둘이 질문"]},
+                {"id": "C", "name": "다음 일정", "layout": "photo", "photo_side": "full", "image": {"file": "04_assets/footage/raw/dc.jpg", "focus": [0.5, 0.5]},
+                 "top": "18일(수) 06:20 엔비디아 실적", "lines": ["숫자표 뒤쪽,", "약속과 보증을 보라"], "hl": ["약속과 보증"], "sub": "AI 공장의 돈 고리", "size": 110, "text_y": 330, "marks": [],
+                 "why": ["공시 + 다음 일정"]}]},
+    }
+    (P / "02_script" / "hybrid.json").write_text(json.dumps(spec, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(P, len(S))
+
+
+if __name__ == "__main__":
+    main()

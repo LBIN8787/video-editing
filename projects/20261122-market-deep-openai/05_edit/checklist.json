@@ -1,0 +1,253 @@
+{
+ "project": "20261122-market-deep-openai",
+ "manual_version": "119",
+ "checked": "2026-11-23T10:32:51",
+ "pass": true,
+ "rows": [
+  {
+   "gate": "G0",
+   "level": "MUST",
+   "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G0",
+   "level": "SHOULD",
+   "item": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
+   "ok": true,
+   "detail": "manual/graph.json"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "topic_brief.json 있음",
+   "ok": true,
+   "detail": "01_research/topic_brief.json (schemas/topic_brief.schema.json)"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "브랜드(ai/market/curiosity)",
+   "ok": true,
+   "detail": "market"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망·시청자 질문",
+   "ok": true,
+   "detail": "앤트로픽은 상장해 돈을 모았는데, 오픈AI 는 모으려던 돈의 절반만 모았다. 오픈AI 는 얼마나 버틸 수 있을까?"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "트리거·왜 지금",
+   "ok": true,
+   "detail": "CNBC 페이버: 오픈AI 모집이 목표 300억 달러의 절반 · 손정의 '앤트로픽 대신 오픈AI 를 고른 게 실수' · 앤트로픽 3분기 매출 170억 달러 vs 오픈AI 약 100억 달러(보도)"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망을 분명히 건드리고, 보여 줄 자료가 있다 (둘 중 하나라도 약하면 만들지 않음, 01 §3)",
+   "ok": true,
+   "detail": "강도 3 · 자료 2"
+  },
+  {
+   "gate": "G1",
+   "level": "참고",
+   "item": "욕망 점수 합계 (후보끼리 비교할 때 씀)",
+   "ok": true,
+   "detail": "합계 16 {'desire': 3, 'clarity': 2, 'timeliness': 3, 'demand': 3, 'visuals': 2, 'angle': 3}"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "수요 증거 1개 이상",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "후보 3개 비교 기록",
+   "ok": false,
+   "detail": "1"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "우리만의 답(our_angle)",
+   "ok": true,
+   "detail": "공시(앤트로픽 S-1·오라클 10-Q·코어위브)와 보도(로이터·CNBC·FT·WSJ)를 나누고, 이름 있는 사람들의 주장을 같은 무게로 놓고 근거만 따진다"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "무엇이 띄우나(driver: 소재·각도·형식 + 근거)",
+   "ok": false,
+   "detail": "이슈 · 자금 모집 부족 보도 + 앤트로픽 상장 + 소프트뱅크 급락"
+  },
+  {
+   "gate": "G2",
+   "level": "SHOULD",
+   "item": "시장: SAVE(오선) 시장 소식 알림 확인 기록 — 상태 '확인함' 또는 '확인 못 함: 이유' (01_research/save_check.md)",
+   "ok": true,
+   "detail": "확인함 (사용자 메모: 20261121.md)"
+  },
+  {
+   "gate": "G2",
+   "level": "SHOULD",
+   "item": "시장: SAVE 실제로 확인함 (항목 1개 이상)",
+   "ok": true,
+   "detail": "확인함 (사용자 메모: 20261121.md) · 항목 10"
+  },
+  {
+   "gate": "G2",
+   "level": "MUST",
+   "item": "자료 화면마다 credit·url",
+   "ok": true,
+   "detail": "10개, 빠짐 []"
+  },
+  {
+   "gate": "G2",
+   "level": "MUST",
+   "item": "금지 라이선스(SA·NC·ND) 없음",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G2",
+   "level": "참고",
+   "item": "자료 화면 소스 종류 (한 곳에서만 가져오면 화면이 단조로워짐)",
+   "ok": true,
+   "detail": "9종"
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "팩트시트 + 출처 링크 3개 이상",
+   "ok": true,
+   "detail": "링크 35개"
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "확인 상태 표시(✅/⚠️)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "'쓰지 않는 것' 목록",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "core_message·question·logic",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "근거 검수표: 모든 주장에 근거·비약·괴리·착각 확인 (02_script/script_review.md '근거 검수', 13 §4-1, 2026-11-22 사용자)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "대본 구성요소 대조표: 채널 대본 공식의 요소마다 있음/없음·어느 장 (02_script/script_review.md '구성요소', 13 §7)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "쉬운 대본: 숫자엔 비교 기준, 낯선 개념엔 비유, 과거 사례, 어려운 말 풀이가 있다",
+   "ok": true,
+   "detail": "{'compare_to': 4, 'analogies': 2, 'past_cases': 1, 'glossary': 5}"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "투자 권유 표현 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "레퍼런스 채널 이름 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "미완성 표시 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "과장 단어 0개",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "진행 말투: '~였고요.' 같은 이어 붙인 끝맺음 없음 (README §2-2, 2026-11-20 사용자: 필수 아님)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "여는 부분에 이 영상의 질문 하나 (시청자가 무엇을 따라가는지 알게)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "연결·의미: 팩트시트에 '## 해석'(근거 번호와 함께) — 사실만 옮기지 않기 (03 §0-1)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "연결·의미: 대본에서 해석을 해석이라고 밝힘 ('해석'·'의미'·'로 볼 수 있')",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "market: 끝에 확인할 신호(checklist)",
+   "ok": true,
+   "detail": "['checklist', 'kinetic', 'outro']"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "인트로 없음: 첫 장면이 intro 가 아니고 인사·채널 소개·순서 예고·구독 부탁 없음 (README §2-1)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용)",
+   "ok": true,
+   "detail": "[]"
+  }
+ ]
+}

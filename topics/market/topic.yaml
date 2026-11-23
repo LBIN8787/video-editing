@@ -1,0 +1,63 @@
+# 주제 레포: 주식 (market) — "돈의 흐름을 알아 이기고 싶다". 메인을 물려받고 여기서 다른 것만.
+id: market
+name: 주식 · 시장
+inherits: main
+channels: [ch-market-daily, ch-paper-column, ch-money-shorts, ch-source-brief, ch-data-motion]
+manual: [manual/03-market.md, manual/09-market-daily.md]
+look: 시장 대시보드 (05 §0-7)
+defaults:            # 스타일 기본값 덮어쓰기 — 금지 아님, 장면에서 바꿀 수 있음 (README §3-1)
+  zoom: "off"        # v31 사용자: 확대·축소·웅웅거림 쓰지 말아 주세요 → 시장 기본 끔
+  camera: calm       # v30: 억지 미세 움직임 없음 (박자 카메라 기본 끔)
+  bgm: none          # 05 §0-5
+  motion_beats: true # v27·v30: 말하는 숫자가 그 순간 화면에 (작업 기준)
+situations:
+  override:
+    metric:
+      scenes: [bignum, chart, bars]
+      techniques: [count-up, scramble]
+      why: 말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)
+  add:
+    explain-market:
+      name: 시장 구조를 쉽게 풀어 준다
+      signals: ['보호예수', '공매도', '정제마진', '크랙', '유통 물량', '오버행', '차익', '블록딜', '자사주', '공급망', '제재', '매출 비중']
+      scenes: [motionboard, spread, share, afterline]
+      techniques: [motionboard, spread, share, afterline]
+      avoid: 용어 풀이를 글 카드로만
+      why: 2026-11-20 사용자 — 주식 채널도 상황 설명이 필요하면 모션그래픽(설명 무대). 흐름은 자료로 질문 → 설명 무대로 원리 → 자료로 확인 (docs/31)
+    say-vs-do:
+      name: 말과 행동을 맞댄다
+      signals: ['공시', '실제로는', '매각', '매수했', '발행', '자사주', '했지만', '말과 달리']
+      scenes: [versus, bite, compare]
+      techniques: [split-screen, rough-highlight]
+      avoid: 한쪽만 크게
+      why: v26 자료를 엮어 — 말(발언)과 행동(공시·거래)을 나란히
+    hub-event:
+      name: 시장을 흔든 사건과 파급
+      signals: ['사임', '발표 직후', '쇼크', '파급', '여파', '연준', '순환']
+      scenes: [map_causal, kb, chart]
+      techniques: [draw-on, spotlight, match-move]
+      avoid: 사건을 따로 떼어 나열
+      why: v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로
+    earnings:
+      name: 실적·가이던스
+      signals: ['매출', '영업이익', '가이던스', '실적', '분기', 'EPS', '컨센서스']
+      scenes: [bars, versus, bignum]
+      techniques: [count-up, chart-morph]
+      avoid: 숫자 표를 통째로
+      why: "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+    call-bite:
+      name: 어닝콜·기자회견 발언
+      signals: ['어닝콜', '콘퍼런스콜', '질문에', '애널리스트', 'CEO', 'CFO']
+      scenes: [bite, quote]
+      techniques: [j-l-cut, rough-highlight]
+      avoid: 번역만 읽기
+      why: 원문+번역 2단, 그 사람의 목소리 (03 §0-1, source-cut)
+    next-week:
+      name: 다음 주 볼 일정
+      signals: ['다음 주', '발표 예정', '일정', '한국 시간']
+      scenes: [timeline, checklist]
+      techniques: [stagger]
+      avoid: 일정 나열만
+      why: v29 일정마다 왜 중요·볼 숫자·결과별 해석
+  drop: [ai-ask, command]
+avoid_techniques: [zoom-into, pull-back, parallax-photo, whip-pan]   # v31·v12 — 시장 채널에선 기본으로 쓰지 않음

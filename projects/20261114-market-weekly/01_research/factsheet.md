@@ -1,0 +1,64 @@
+# 팩트시트 — 이어 읽는 시장 11월 14일(토) 주간 분석 (11월 9~13일, 13일 미국·한국 마감 기준)
+
+자동 훑기: `daily_brief.md` (06:05 실행 때 야후 11/13 봉이 빠져 있어, 주간 숫자는 아래처럼 다시 조회). ✅ 1차 출처·시세로 확인 · ⚠️ 보도(1곳 또는 회사 확인 없음) · 💬 해석(영상에서 밝힘)
+
+## 한 주 숫자 (야후 파이낸스 일별 종가, 11/6 금 → 11/13 금, 2026-11-13 21:30 UTC 조회 · 01_research/prices)
+- W1 ✅ S&P 500 7,376.86 → 7,561.67 (+2.51%) · 나스닥 24,579.43 → 25,136.27 (+2.27%) · 다우 51,285.73 → 52,347.55 (+2.07%) — https://finance.yahoo.com/quote/%5EGSPC/history
+- W2 ✅ 필라델피아 반도체 지수 9,390.25 → 10,146.32 (+8.05%). 11/9(월) 하루 +6.85%. 11/4 종가 10,268.65 (11/5 급락 직전) — https://finance.yahoo.com/quote/%5ESOX/history
+- W3 ✅ 엔비디아 186.64 → 162.85달러 (-12.75%) · AMD 449.04 → 534.06 (+18.93%) · 브로드컴 293.69 → 347.01 (+18.16%)
+- W4 ✅ 13일(금) 하루: AMD 585.30 → 534.06 (-8.75%) · 브로드컴 364.36 → 347.01 (-4.76%) · 엔비디아 166.19 → 162.85 (-2.01%) · 반도체 지수 -3.43% · S&P -0.40% · 나스닥 -0.91%
+- W5 ✅ 미 10년물 국채 금리(^TNX) 4.86% → 5.15% · 금 4,074.9 → 3,881.8달러 (-4.74%) · 비트코인 75,746.93 → 68,626.21달러 (-9.40%, 24시간 거래라 UTC 날짜 기준)
+- W6 ✅ 코스피 5,059.69 → 5,290.53 (+4.56%) · 코스닥 644.27 → 699.66 (+8.60%) · 삼성전자 188,700 → 206,000원 (+9.17%) · SK하이닉스 1,132,000 → 1,216,000원 (+7.42%) · NAVER 190,200 → 172,500원 (-9.31%)
+  - ⚠️ 야후 ^KS11 일별 표에 11/13 봉이 비어 있음 → 11/13 종가 5,290.53 은 야후 실시간 값 + 아주경제·MTN 마감 기사로 확인
+- W7 ✅ 코스피 날짜별: 11/6 -6.02% (5,383.80 → 5,059.69), 11/9 -0.81%, 11/10 +4.39%, 11/11 +2.60%, 11/12 -0.61%, 11/13 -0.98%
+
+## 흐름 1 — 급락 뒤 되돌림 · 원인 종류: **이슈**(선거·규제 걱정) + **전망**(금리·데이터센터 투자)
+- R1 ✅ 11/5(목) S&P 500 -4.4% (7,353.73), 나스닥 -5.5%, 다우 -1,833포인트, 반도체 지수 -12.25%(30종목 모두 하락), 코스피 -5.3% — AP 보도(Spectrum News) https://spectrumlocalnews.com/us/snplus/business/2026/11/05/stock-market-ai-chip-selloff , Tradingkey https://www.tradingkey.com/analysis/stocks/us-stocks/262284414-us-stocks-close-nasdaq-sp500-dow-enters-correction-ai-selloff-tradingkey
+- R2 ⚠️ 급락 배경(보도): ① 비싸진 대출로 AI 데이터센터 건설이 느려질 수 있다는 걱정 ② 중간선거 민주당 승리로 데이터센터 건설 제한 가능성 ③ AI 주가 거품 논쟁 — AP(Spectrum News) 위 주소
+- R3 ⚠️ 11/9(월) 반등: 지난주 급락한 반도체에 저가 매수, S&P +2.35%, 나스닥 +2.74%, VIX 19.92(-22.3%) — 파이낸셜뉴스 https://www.fnnews.com/news/202611100624351093 (숫자는 야후로 ✅)
+- R4 ⚠️ AP: 이번 주 상승은 S&P 500의 10월 초 이후 첫 주간 상승 — https://www.adn.com/business-economy/2026/11/13/stocks-sway-as-wall-street-heads-for-winning-week-after-several-turbulent-days/ (장중 기사라 영상에서는 쓰지 않음)
+
+## 흐름 2 — 엔비디아 리더십 공백과 돈의 이동 · 원인 종류: **이슈** + **보고서**
+- N1 ✅ 8-K (11/11 자): 젠슨 황 사장·CEO·이사직 즉시 사임, 콜레트 크레스 임시 CEO(CFO 겸임) — https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm
+- N2 ✅ 보도자료: 3분기(FY2027) 실적 11월 17일(화) 오후 1:20 PT 발표, 2시 PT 콜 (= 한국 18일 06:20 / 07:00) — https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvidiaannouncesceotransiti.htm
+- N3 ✅ 엔비디아 날짜별: 11/9 -4.27%, 11/10 -5.47%, 11/12 -4.34%, 11/13 -2.01% (야후)
+- N4 ⚠️ 11/9 하락: 이사회가 CEO 관련 보도를 조사한다는 소식 (파이낸셜뉴스) — 사적 인물·사생활 내용은 쓰지 않음
+- N5 ⚠️ 11/12 AMD·브로드컴 상승 = 엔비디아 대안을 찾는 움직임으로 보도 (20261113 팩트시트 A1)
+- N6 ⚠️ 11/13 되돌림: 전날 급등분 차익 실현 + 엔비디아 쪽으로 다시 돌아오는 매수로 보도 (Invezz https://invezz.com/news/2026/11/13/amd-broadcom-stocks-fall-2-as-nvidia-rebounds-is-wall-street-switching-sides/ , 24/7 Wall St. https://247wallst.com/investing/2026/11/13/amd-tumbles-11-broadcom-and-intel-slide-6-as-chip-rally-reverses/)
+- N7 ⚠️ **보고서**: 로스차일드 앤 코 레드번이 브로드컴 투자의견을 '중립'으로 낮춤 — 고객 쏠림(오픈AI·앤트로픽 의존) 지적 (Investing.com https://www.investing.com/news/stock-market-news/why-is-broadcom-stock-sliding-today-93CH-5026023 , 같은 내용 2곳). 목표가는 쓰지 않음
+
+## 흐름 3 — 다시 오르는 금리 · 원인 종류: **전망**(물가·연준)
+- F1 ✅ BLS 10월 생산자물가(PPI, 11/13 08:30 ET): 최종수요 전월 +0.3%, 12개월 +6.5% · 상품 12개월 +10.2% · 에너지 12개월 +37.0% · 식품·에너지·유통 뺀 근원 전월 +0.5%, 12개월 +4.9% — https://www.bls.gov/news.release/archives/ppi_11132026.htm
+- F2 ✅ 연준 10/28 성명: 기준금리 3.75~4% 동결, 10대 2 — 쿡·해맥 위원은 0.25%p 인상 주장. "Inflation remains elevated." — https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm
+- F3 ✅ 연준 9/16: 0.25%p 인상(3.75~4%), 12대 0 — https://www.federalreserve.gov/monetarypolicy/files/monetary20260916a1.pdf
+- F4 ✅ 다음 FOMC 12월 8~9일 (경제전망 포함) · 의사록은 결정 3주 뒤 공개 — https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm → 10월 의사록 11월 18일(수) 오후 2시 ET 예정(= 한국 19일 04:00, FXStreet·CMC 일정표 일치)
+- F5 ⚠️ AP: 경제학자 다수는 12월 인상을 예상 (보도) — 영상에서는 '시장은 12월 회의를 주목'까지만
+- F6 ⚠️ 이란 전쟁 이후 유가 높음 (AP: 브렌트 95.81달러, 2월 말 72달러) — 에너지 물가 배경 설명에만
+
+- F7 ✅ **연준 금융안정보고서 (11/13, 1년 2회)** 요약 1번: "Measures of equity valuations have remained high, partly driven by market enthusiasm for super intelligence (SI)." — https://www.federalreserve.gov/publications/files/financial-stability-report-20261113.pdf (목록 https://www.federalreserve.gov/publications/financial-stability-report.htm)
+- F8 ✅ 같은 보고서 Box 5.1 (뉴욕 연은, 9~10월 시장 참가자 23곳 설문, "should not be interpreted as representing the views of the Federal Reserve"): "AI was the top-cited risk" — 걱정 ① 높은 주가와 실적 미달 시 조정 ② AI 사이버 공격 ③ 복잡한 AI 관련 자금 조달. "a sharp correction in AI-related equities, driven by uncertain returns on large capital expenditures". 장기 국채 금리 추가 상승도 주요 위험
+- F9 ✅ 같은 보고서: "Advanced computing–related debt issuance rose to more than $680 billion by October 2026, about a fivefold increase from $130 billion in all of 2023"
+- F11 ✅ 같은 보고서 Box 2.2: "advanced computing–related borrowing as a share of nonfinancial investment-grade corporate debt issuance increased from less than 6 percent in 2023 to about 31 percent in 2026" · 공개 부채 잔액 1.1조 달러+ (2026.10)
+- F12 ✅ Box 2.2: 장부 밖 약속 — "not-yet-commenced leases (whose undiscounted values exceed $1 trillion) and other obligations such as take-or-pay contracts and residual value guarantees (whose undiscounted values exceed $2 trillion)" · 할인 안 한 값이라 빚과 직접 비교 불가(각주 5)
+- F13 ✅ Box 2.2: 하이퍼스케일러 장기 임차 → 개발사가 그 계약으로 자금 조달, GPU 회사의 잔존가치 보증 + 지분 투자 → "circular financing" dynamic
+- F14 ✅ Box 2.2: 채권은 주로 뮤추얼펀드·연기금·보험사, 후순위·지분은 하이일드 펀드·생명보험·BDC·사모 대출 · "the largest U.S. bank holding companies have close to $1 trillion of exposure to large technology firms, data center developers, advanced computing–related SPEs and private credit vehicles, and utility companies" (스트레스 테스트에서 점검) · 빅테크가 손실을 흡수해 충격을 줄일 수도 있지만 장부보다 노출이 클 수 있다
+- F15 ✅ Box 2.2 그림 B: 1995년부터의 통신 투자 주기와 비교 — "the pace of the current cycle's investment may surpass that of the 1990s telecom cycle relatively soon" · 하이퍼스케일러는 현금흐름이 강해 빚을 덜 냈다 "at least until this year" (하이퍼스케일러 = 아마존·알파벳·메타·MS·오라클)
+- F16 ✅ 5장 시나리오: "An unexpected downturn in corporate earnings could prompt declines in corporate asset valuations, a tightening of credit conditions, and a pullback from capital expenditures, reducing aggregate demand" · 레버리지 투자자의 매도가 하락을 키울 수 있음
+- F10 ⚠️ 응답 비율 87%(봄 50%)는 보도(CNBC·Bloomberg 등) 숫자 — 보고서 그림에서 숫자를 직접 확인하지 못해 영상에서 쓰지 않음. '3조 달러 넘는 보증·리스'도 원문에서 확인 못 해 뺌
+
+## 한국 · 원인 종류: **이슈**
+- K1 ✅ 11/13 코스피 5,290.53 (-0.98%), 장중 5,500선 넘었다가 하락 전환, 외국인 순매도(아주경제 5,475억 원, 매체마다 집계 다름 → 영상은 '5천억 원 넘게'), 삼성전자 -0.96%, SK하이닉스 -3.03% — 아주경제 https://www.ajunews.com/view/20261113152425151 , MTN https://news.mtn.co.kr/article/2026111315370634191
+- K2 ⚠️ 정부 자본시장 간담회에서 구체적 실행 계획은 나오지 않았다는 평가 (아주경제 1곳) — 영상에서 쓰지 않음
+
+## 해석 (💬 영상에서 밝힘)
+- I1 💬 이번 주 반등은 걱정이 풀렸다기보다 너무 빠진 가격이 되돌아온 성격이 크다 — 근거 W2, R1, R2, R3 (반도체 지수는 아직 11/4 수준 아래)
+- I2 💬 엔비디아 공백 → 대안(AMD·브로드컴)으로 쏠렸다가 금요일 되돌림 — 하루 이틀의 쏠림은 쉽게 되돌아간다, 확인은 실적 — 근거 W3, W4, N5, N6, N7
+- I3 💬 금리가 오르는 한 주에 이자 없는 자산(금·비트코인)이 약했다 — 관찰, 인과 단정 안 함 — 근거 W5, F1
+- I5 💬 금융안정보고서가 13일 주가를 움직였다는 근거는 없음(말함). 다만 지난주 급락의 걱정(AI 투자 수익·빚)과 연준 보고서의 위험 1순위가 같다 — 근거 R2, F7, F8, F9
+- I6 💬 AI 투자가 현금에서 빚으로 넘어가는 시점이라 금리에 더 민감 → 10년물 5.15%는 데이터센터 자금 비용 상승 — 근거 W5, F9, F15
+- I7 💬 한국 AI 메모리(SK하이닉스·삼성전자) 주문은 데이터센터 투자에서 나옴 → 투자 속도 변화가 한국 반도체 숫자로 이어질 수 있음 — 근거 F16, W6
+- I8 💬 걱정을 푸는 열쇠 = AI 투자 수익 → 첫 숫자는 엔비디아 실적(데이터센터 매출·전망) — 근거 F8, N2
+- I4 💬 다음 주 엔비디아 실적과 연준 의사록이 세 흐름(AI 투자·리더십·금리)을 한꺼번에 시험 — 근거 N2, F4
+
+## 쓰지 않는 것
+- 데일리·콜린스 연은 총재 발언(보도 1곳, 원문 미확인) · 사적 인물 이름·사생활 내용 · 증권사 목표가 · 외국인 순매도 정확한 금액(매체마다 다름) · AP의 '첫 주간 상승' 표현(장중 기사) · 엔비디아 칩 중국 공급 의혹(보도 1곳, 확인 안 됨) · 월마트 등 다른 실적 일정(1곳)

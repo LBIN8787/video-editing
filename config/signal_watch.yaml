@@ -1,0 +1,159 @@
+# 영상이 말한 '볼 것'을 실제로 지켜보는 목록 (2026-11-22 사용자: "각 영상들의 주목해야 할 체크리스트들 이걸 실제로 주시해주세요")
+# 쓰는 곳: ytflow/stages/daily.py → daily_brief.md '⑥-3 영상 신호 점검' (매일 아침), config/local_routines/market-daily.md 의 점검 단계.
+# 규칙:
+#  - 신호마다 지금 값(baseline)과, 움직이면 어느 쪽을 가리키는지(means)를 적어 둔다. 영상에서 말한 그대로.
+#  - 뉴스 검색은 '단서'. 값이 바뀌었다고 쓰려면 1차 출처(공시·실적 자료·회사 발표·TrendForce 원문)로 확인한다.
+#  - 움직임을 확인하면 inbox/signals/log.md 에 한 줄(날짜·신호·새 값·출처·어느 쪽을 가리키나)을 남기고,
+#    그날 브리핑 소재·후속편·고정 댓글 정정 후보로 올린다. 아무 일 없으면 적지 않는다.
+#  - 날짜가 있는 신호(due)는 그날이 지나면 결과를 적고 status: done 으로 바꾼다.
+#  - 새 시장 영상을 올리면 그 영상의 '다음 소식을 읽는 …'·'이 해석이 틀리는 경우'를 여기에 더한다.
+
+videos:
+  ai-chips:     {title: "AI 칩·메모리 하강 원리 (심층)", youtube: 1_AcJrrHOc0, project: 20261121-market-deep-ai-chips}
+  memory:       {title: "메모리 값 4배, 그런데 주가는 폭락? (후속, 미공개)", youtube: "", project: 20261122-market-deep-memory-chicken}
+  nvidia:       {title: "엔비디아 순환금융 (심층, 미공개)", youtube: "", project: 20261122-market-deep-nvidia-circular}
+  weekly-1123:  {title: "11월 3주차 주간 종합", youtube: iOKBizNcBb8, project: 20261122-market-weekly}
+
+signals:
+  # ── 메모리 사이클 (ai-chips · memory) ──
+  - id: nand-contract
+    from: [ai-chips, memory]
+    what: 낸드 계약가 방향 (TrendForce 분기 전망)
+    baseline: "2026.11.19 TrendForce — 낸드 계약가 내년 1분기부터 하락 전망"
+    means: "하락 폭이 커지면 '흔한/깊은 하강' 쪽, 전망이 상향되면 '얕은 하강' 쪽"
+    q: "TrendForce NAND contract prices"
+  - id: dram-contract-spot
+    from: [memory]
+    what: D램 계약가·현물가 (계약은 오르는데 현물이 먼저 빠지나)
+    baseline: "최근 한 달 현물 D램 -5%, 낸드 -20% (KB증권, 2026.11.20 보도) · KB 내년 D램 계약가 +40% 전망"
+    means: "현물 하락이 이어지고 계약가 전망이 꺾이면 '갈라진 시장'의 범용 쪽이 먼저 꺾이는 그림"
+    q: "DRAM spot price TrendForce"
+  - id: ltA-renegotiation
+    from: [ai-chips, memory]
+    what: 장기 계약 재협상·취소 소식 (메모리 고객 쪽)
+    baseline: "마이크론 2027 물량 75%+ · SK하이닉스 2027~28 생산능력 절반+ 장기 계약 (회사 발표)"
+    means: "재협상·물량 조정 보도가 나오면 공급 과잉이 고객 창고에 나타나기 시작한 첫 신호"
+    q: "memory long-term agreement renegotiate DRAM customers"
+  - id: micron-gm
+    from: [ai-chips]
+    what: 마이크론 분기 총이익률 (지금 87%)
+    baseline: "87% (직전 분기, 2018년 분기 꼭대기 61%)"
+    means: "조금 내려오면 '얕은 하강', 크게 내려오면 '흔한/깊은 하강'"
+    due: "2026-12-18"   # 미국 12.17(목) 14:30 MT = 한국 18일 아침 (회사 발표 2026.11.19)
+    q: "Micron earnings date gross margin"
+    ticker: MU
+  - id: cut-utilization
+    from: [memory]
+    what: 메모리 회사가 감산·가동률을 말하나
+    baseline: "지금은 증설 쪽 (SK하이닉스 웨이퍼 5년 2배 — 최태원), 감산 언급 없음"
+    means: "감산·가동률 조정 언급 = 하강 인정. 늦을수록 하강이 깊었던 게 과거 패턴"
+    q: "삼성전자 SK하이닉스 감산 가동률"
+    lang: ko
+  - id: china-capex
+    from: [memory]
+    what: 중국 메모리 업체 증설 (CXMT·YMTC)
+    baseline: "보도 기준 증설 진행 중 (수치는 1차 출처 확인 필요)"
+    means: "값이 내려도 증설을 이어 가면 '정부가 받치는 공급' → 하강이 길어짐"
+    q: "CXMT YMTC capacity expansion"
+  - id: share-vs-margin
+    from: [memory]
+    what: 실적 발표에서 '점유율'을 말하나 '수익성'을 말하나
+    baseline: "지금은 수익성·장기 계약 중심 표현"
+    means: "점유율을 강조하기 시작하면 치킨 게임 재개 신호"
+    q: "memory maker market share strategy Samsung SK hynix Micron"
+  - id: dram-lawsuit
+    from: [memory]
+    what: 미국 D램 담합 집단소송 (삼성·SK하이닉스·마이크론이 2022년 말부터 범용 D램 생산을 함께 조였다는 주장)
+    baseline: "2026.11.14 캘리포니아 북부 연방법원(노엘 와이즈 판사) 기각 신청 거부 → 소송 진행. 위법이라는 판단은 아님"
+    means: "증거 공개 단계로 가면 '감산은 각자 판단'이라는 영상 설명(2023 감산)에 반론 자료가 나올 수 있음 — 판결 전까지 단정 금지"
+    q: "DRAM antitrust class action Samsung SK hynix Micron"
+  - id: gpu-rent
+    from: [ai-chips]
+    what: GPU 임대료 (H100·B200 시간당)
+    baseline: "오르는 중 — Silicon Data H100 지수 시간당 2.88달러(2026.10.24, 2025.12 2.00달러) · 코어위브 3분기 콜: 호퍼·암페어 가격 전 분기보다 30~50% 상승(2026.11.10)"
+    means: "임대료가 빠지면 칩이 남기 시작한 것 → AI 쪽 수요 꺾임의 선행 신호"
+    q: "GPU rental price H100 per hour index"
+
+  # ── 엔비디아 순환금융 (nvidia) ──
+  - id: nvda-dso
+    from: [nvidia]
+    what: 엔비디아 매출채권 회수 기간 (DSO)
+    baseline: "64일 · 매출채권 810억 달러 (3분기 CFO 코멘터리)"
+    means: "길어지면 고객이 칩값을 늦게 낸다 → 고리 약화"
+    due: "다음 분기 실적 (2027년 2월 예정, 날짜 확인 필요)"
+    q: "Nvidia accounts receivable days sales outstanding"
+    ticker: NVDA
+  - id: nvda-impairment
+    from: [nvidia]
+    what: 엔비디아 비상장 지분 투자 손상
+    baseline: "3분기 18억 달러 (2분기까지 누적 2.5억)"
+    means: "손상이 이어지면 투자한 고객사의 값이 깎이는 중"
+    q: "Nvidia impairment equity investments"
+  - id: wallst-chip-financing
+    from: [nvidia]
+    what: 월가 5,000억 달러 칩 금융 실제 집행
+    baseline: "집행 0 (WSJ 보도) · 은행은 엔비디아 보증 25% 초과 요구"
+    means: "집행되면 고리가 다시 돌고, 계속 0이면 담보·보증 부담이 엔비디아로"
+    q: "Nvidia chip financing banks $500 billion"
+  - id: nvda-supply-commit
+    from: [nvidia]
+    what: 엔비디아 공급 약정 (대부분 메모리)
+    baseline: "3,900억 달러 (석 달 전 2,790억) — 일부 취소·조정 가능하다고 명시"
+    means: "줄어들면 한국 메모리 장기 계약에 바로 닿는 신호 (한국 계좌에 가장 가까움)"
+    q: "Nvidia supply commitments memory"
+  - id: nvda-guarantee
+    from: [nvidia]
+    what: 오픈AI 계열 단지 1,050억 달러 보증 — 오픈AI 신용등급
+    baseline: "보증 총 1,180억 달러 · 오픈AI 가 만족할 신용등급을 받으면 1,050억 보증 종료 조건"
+    means: "등급을 받으면 보증 부담이 끝남(틀리는 경우 ①), 등급이 늦으면 부담 지속"
+    q: "OpenAI credit rating"
+  - id: sec-probe
+    from: [nvidia, weekly-1123]
+    what: SEC 의 엔비디아 회계 조사 보도 후속
+    baseline: "2026.11.20 로이터 — 소식통 2명, 쟁점 미상. 그날 엔비디아 -14%"
+    means: "조치 없이 끝나면 하락은 '모른다는 것'의 할인(주간 영상 '틀리는 경우')"
+    q: "Nvidia SEC accounting probe"
+    ticker: NVDA
+  - id: nvda-ceo
+    from: [nvidia]
+    what: CEO 교체·이사회 독립위원회 조사 결과
+    baseline: "11.11 젠슨 황 사임, 콜레트 크레스 임시 CEO, 독립위원회 조사 중"
+    means: "조사 결과·정식 CEO 선임이 불확실성을 줄이는지"
+    q: "Nvidia board independent committee investigation Kress"
+  - id: neocloud
+    from: [nvidia]
+    what: 네오클라우드(코어위브 등) 주가
+    baseline: "보증 조건 명확화 뒤 20%+ 하락 (보도)"
+    means: "더 빠지면 엔비디아 고객 쪽 자금 조달이 막히는 중"
+    q: "CoreWeave stock"
+    ticker: CRWV
+  - id: amd-openai
+    from: [nvidia]
+    what: 경쟁사도 같은 방식인가 (AMD–오픈AI 워런트 등)
+    baseline: "AMD 2025.10 오픈AI 에 최대 1억 6천만 주 워런트 + 6GW"
+    means: "칩 회사들의 고객 자금 지원 경쟁이 넓어지면 엔비디아만의 문제가 아님"
+    q: "AMD OpenAI warrant"
+
+  # ── 주간 (weekly-1123) — 날짜가 있는 확인 ──
+  - id: kospi-1123
+    from: [weekly-1123]
+    what: 23일(월) 한국 장이 미국 금요일 폭락을 어떻게 받나
+    baseline: "코스피 4,869.96 (11.20 종가) · 삼성 주간 -11.12% · 하이닉스 -8.47%"
+    means: "미국만큼 안 빠지면 금요일 -5.21% 가 이미 앞서 반영한 것 (틀리는 경우 ③)"
+    due: "2026-11-23"
+    ticker: ^KS11
+  - id: fed-1210
+    from: [weekly-1123, ai-chips]
+    what: 12월 연준 금리 결정 (인상이냐 동결이냐)
+    baseline: "쿡 이사 인상 시사 · 결정 12월 10일 새벽(한국)"
+    means: "인상하면 이익보다 P/E 가 먼저 움직임 / 동결이면 쿡 이사 시각이 소수 (틀리는 경우 ②)"
+    due: "2026-12-10"
+    q: "Fed December rate decision"
+  - id: avgo-1209
+    from: [weekly-1123]
+    what: 브로드컴 실적 (보도 기준 12월 9일)
+    baseline: "회사 발표 2026.11.9 — 미국 12.9(수) 17:00 ET = 한국 10일 아침 7시 · 직전 가이던스 4분기 매출 약 348억 달러"
+    means: "2027 주문이 크면 AI 수요 지속 쪽, 줄면 고리 약화 쪽"
+    due: "2026-12-10"
+    q: "Broadcom earnings date December"
+    ticker: AVGO

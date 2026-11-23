@@ -1,0 +1,20 @@
+id: ch-issues-daily
+brand: issues                               # channels/brands.yaml (욕망 = 채널)
+title: "(가칭) 어제 세상 정리"
+format: longform
+style_ref: hybrid
+family: source
+concept: >
+  매일, 전날 가장 크게 다뤄진 구조적 이슈(정책·제도·국제·기업) 하나를 골라 '무슨 일 → 왜 → 양쪽 입장 → 앞으로'로 정리한다 (2026-11-20 사용자: 10분 이상).
+niche: "전날 주요 뉴스 중 구조가 있는 이슈. 개인 사건·사고는 제도·구조 문제로 이어질 때만. 기준 시각과 양쪽 입장을 늘 밝힌다."
+seed_keywords: ["정부 발표", "국회", "국제", "제재", "선거", "제도 변화"]
+cadence: "평일 매일"
+tone: "실제 자료로 전날 이슈를 설명하는 정리 (manual/08 §0-2·§0-3)."
+script_guide: manual/08-issues.md
+sourcing:
+  start_from: document
+  verify_with: ["기관 공식 발표·발언 영상", "당사자 입장", "별개 언론의 확인 보도"]
+daily:
+  scan: "python -m ytflow daily --brand issues --project <YYYYMMDD>-issues-daily"
+  stories: [1, 1]
+  skip: "개인 피해 사건·사고(구조 이슈가 아니면), 사적 인물 실명, 확인 안 된 의혹"

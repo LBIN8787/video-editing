@@ -1,0 +1,18 @@
+# v15 · 2026-11-12 사용자 통과 (시험판 20261112-bg-trials)
+id: dash-cover
+name: "대시보드 장 표지 (짙은 남색 모눈 + CHAPTER 번호 + 강조선)"
+status: approved
+renderer: hybrid
+skin: midnight
+format: [longform]
+owns: []
+scene_types: [chapter]       # chapter 에 "look": "dash" (market 은 자동)
+fits:
+  brands: [market, ai]
+  questions: [비교, 원인, 과거 사례]
+  moods: [긴장, 빠름]
+  needs: []
+roles: [body]
+avoid: "숫자가 나오지 않는 장(사람 이야기·역사) / 가짜 수치·그래프 장식"
+when: "다음 장이 숫자로 시작할 때 — 시세·실적·규모. AI 채널은 돈 이야기(상장·투자) 장에서"
+demo: "20261112-bg-trials"

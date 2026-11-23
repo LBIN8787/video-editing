@@ -1,0 +1,114 @@
+# 네 채널(브랜드) — 사람의 욕망 하나 = 채널 하나 (manual/01-desire-map.md)
+# 기존 channels/<id>/ 폴더는 이 브랜드 아래의 '제작 라인'(형식·편집 스타일 묶음)입니다.
+# 채널을 고를 때: 1) 이 파일에서 브랜드(욕망) → 2) 소재 성격으로 라인 → 3) manual/05-style-matching.md 로 장면별 연출·그래픽.
+
+brands:
+  ai:
+    title: "(가칭) AI 더 잘 쓰기"
+    desire: "AI 를 더 잘 알고, 더 잘 다루고 싶다 (뒤처지기 싫다 · 일을 덜고 싶다 · 남보다 먼저 쓰고 싶다)"
+    viewer_questions:
+      - "이거 뭔데 다들 난리야? (새 모델·도구·발표)"
+      - "나는 어떻게 쓰면 되지? (따라 하면 되는 방법)"
+      - "그래서 내 일·내 돈에 무슨 변화가 생겨? (영향)"
+      - "무료로/더 싸게/더 빨리 하는 법은?"
+    triggers: ["새 모델·기능 발표 (공식 블로그·릴리스 노트)", "GitHub 14일 별 급증 저장소", "X·Hacker News 화제 글", "AI 관련 사건(가격 인하·규제·사고)"]
+    lines:
+      shorts: ch-ai-shorts        # 30~45초, 도구 하나 '무엇·어떻게'
+      longform: ch-ai-guide       # 트렌드 해설 또는 따라 하기 실습
+    manual: manual/02-ai.md
+
+  market:
+    title: "(가칭) 시장의 이유"
+    desire: "돈의 흐름을 더 잘 알아서 투자에서 이기고(잃지 않고) 싶다 — '왜 움직였나'를 남보다 먼저, 정확히"
+    viewer_questions:
+      - "왜 갑자기 올랐/떨어졌지? (원인)"
+      - "그게 다른 데엔 어떻게 번지지? (인과·연결: 산업·공급망·금리·환율)"
+      - "누가 뭐라고 했어? (CEO·연준·유명 투자자 발언)"
+      - "과거에도 이런 적 있었나? 그때는 어떻게 됐지?"
+      - "뭘 보면 다음을 알 수 있지? (확인할 신호)"
+    triggers: ["하루 ±5% 이상 움직인 대형주·업종", "실적발표·가이던스", "CEO·연준 발언", "공시(지분·M&A·자사주)", "시장에 도는 소문(찌라시) — 사실 확인 대상으로만"]
+    lines:
+      longform_statement: ch-source-brief   # 발언 원본 중심 (PC rebuild)
+      longform_concept: ch-paper-column     # 개념·구조 칼럼
+      longform_data: ch-data-motion         # 숫자·비교 리포트
+      daily: ch-market-daily                # v17 매일 아침: 전날 시장을 움직인 이슈·보고서·전망 (python -m ytflow daily)
+      shorts: ch-money-shorts               # 하나만 알려 주는 안내
+    manual: manual/03-market.md
+
+  curiosity:
+    title: "(가칭) 몰랐던 이유"
+    desire: "궁금증을 풀고 싶다 — 평소엔 몰랐지만, 듣는 순간 '어? 왜지?' 하고 끝까지 알고 싶어지는 것"
+    viewer_questions:
+      - "왜 처음 본 사람과 헤어진 뒤 내 말실수만 떠오르지?"
+      - "같은 일을 겪고도 왜 서로 다르게 기억하지?"
+      - "이런 습관이나 판단은 왜 반복될까?"
+    triggers: ["수요 분석 아웃라이어 (python -m ytflow demand)", "직장·학교·가정·온라인에서 만나는 행동", "익숙한 것의 숨은 기원·이유 (역사·과학·사회·문화·물건)", "기묘한 실화·사건의 뒷이야기", "익숙한 행동을 다르게 설명하는 심리 연구"]   # 2026-11-22 사용자: 다양한 소재를 이야기로
+    lines:
+      longform: ch-knowledge
+    manual: manual/04-curiosity.md
+
+  issues:
+    title: "(가칭) 이슈의 구조"
+    desire: "세상이 어떻게 돌아가는지 알고 싶다 — 뉴스 속 큰 사건을 '왜·어디로'까지 이해해서 불안을 줄이고, 대화에서 뒤처지지 않고, 내 삶에 올 영향을 미리 알고 싶다"
+    viewer_questions:
+      - "저 나라(사람·회사)는 왜 지금 저랬지? (원인·속내)"
+      - "그래서 앞으로 어떻게 돼? (전망·운명)"
+      - "강해 보이던 게 왜 무너지지? (몰락의 구조)"
+      - "그때 무슨 일이 있었고, 어떤 조건이 결과를 갈랐지? (역사)"
+      - "그게 우리(한국·내 지갑)에 무슨 상관이야?"
+      - "요즘 다들 말하는 그거, 5분 만에 정리해 줘"
+    triggers: ["국제 뉴스 상위(전쟁·제재·선거·정권 교체)", "국내 사회 이슈(제도 변화·사건·논쟁)", "기업·도시·나라의 급격한 몰락·부상", "당대 기록이 풍부한 역사 사건", "비교 채널 아웃라이어 (scripts/issues_research.py)"]
+    lines:
+      longform_deep: ch-issues          # 시사·역사 심층 (기존 스페인독감 편의 자료 중심 편집)
+      longform_quick: ch-issues         # 빠른 정리 (크랩식 구조) — 같은 라인, 구성만 다르게
+      daily: ch-issues-daily            # v17 매일: 전날 가장 크게 다뤄진 구조적 이슈 하나 (python -m ytflow daily --brand issues)
+    manual: manual/08-issues.md
+
+# ---------------------------------------------------------------- v15 카테고리 개성 (identity)
+# 채널을 몇 개로 묶어 운영해도(예: 세 채널) 카테고리마다 '보는 순간 알 수 있는' 편집이 남도록.
+# 한 편의 hybrid.json 에 "brand": "<id>" 를 쓰면 ytflow/stages/identity.py 가 적용 (장면에 "brand" 를 쓰면 그 장면만).
+#   concept        한 줄 컨셉 (세계관)
+#   base_skin      기본 그래픽 팩
+#   chapter_looks  장 표지 모양을 장 번호 순서로 돌려 씀: photo(듀오톤 자료 사진)·board(증거판 카드)·chalk(칠판)·dash(대시보드)·window(앱 창)
+#   duotone        자료 사진을 물들일 두 색 [어두운 색, 밝은 색]
+#   structure      인과 지도(map_causal)를 그릴 판: board(증거판) · chalk(칠판) · 없음(상황별 팩 그대로)
+#   situation      상황별 팩 덮어쓰기 (manual 05 §0-6 표의 카테고리판)
+#   signature      이 카테고리를 대표하는 연출 레시피 (styles/recipes) — 한 편에 2개 이상
+#   photo_hint     장 표지 사진 고르는 법 (NASA 위성 사진에 고정하지 않음)
+identity:
+  issues:
+    concept: "사건 파일 — 코르크 증거판·붉은 실·타자기 도장, 어두운 다큐 톤"
+    base_skin: dark-doc
+    chapter_looks: [board, photo, board, photo]
+    duotone: ["#14161C", "#C9473A"]
+    structure: board
+    situation: {data: [slate, midnight], voice: [dark-doc, forest], structure: [corkboard]}
+    signature: [issue-dark-montage, statement-brief, map-journey, data-choropleth]
+    photo_hint: "사건 현장·기관 건물·관련 장소 (위키미디어 공용 PD·CC BY, 정부 공개 사진)"
+  market:
+    concept: "트레이딩 데스크 — 대시보드 바탕·시세 차트·공시 형광펜, 차가운 남색"
+    base_skin: slate
+    chapter_looks: [dash, photo, dash, photo]
+    duotone: ["#0B1626", "#4C8DE6"]
+    structure: null
+    situation: {data: [slate, midnight], voice: [clean-white, slate], structure: [blueprint, slate]}
+    signature: [data-report, hybrid-causal, statement-brief, blueprint-explainer]
+    photo_hint: "거래소·회사 건물·공장·항만 (CC BY·PD, 회사 공식 보도 사진)"
+  curiosity:
+    concept: "그림 이야기와 실험 노트 — 이야기는 그 편의 삽화, 설명은 삽화 위 모션그래픽, 연구자 사진은 증거로, 장 사이는 검은 화면 (v73, manual/04 §0-7)"
+    base_skin: clean-white
+    chapter_looks: [illust]     # v73 (2026-11-20 사용자: "표지도 삽화로") — footage 의 "art": true 삽화를 장 표지로, 없으면 plain
+    duotone: ["#2A2118", "#D9B98A"]
+    structure: chalk
+    situation: {data: [clean-white, slate], voice: [clean-white, paper-sketch], structure: [chalkboard]}
+    signature: [anim-stage, story-board, kinetic-type]
+    photo_hint: "증거 자리만 — 연구자·실험의 실제 사진 (위키미디어 공용 PD·CC, 이름·연도와 함께)"
+  ai:
+    concept: "제품 발표 무대 — 앱 창·은은한 빛·코드와 대화 화면, 짙은 남색과 청록"
+    base_skin: midnight
+    chapter_looks: [window, photo, window, photo]
+    duotone: ["#08121C", "#2DD4BF"]
+    structure: null
+    situation: {data: [midnight, blueprint], voice: [midnight, dark-doc], structure: [blueprint, midnight]}
+    signature: [ai-chat, terminal-typing, screen-zoom, blueprint-explainer]
+    photo_hint: "데이터센터·연구소·제품 화면 (PD·CC0·CC BY, 회사 공식 이미지)"

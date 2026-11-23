@@ -1,0 +1,61 @@
+id: ch-market-daily
+brand: market                               # channels/brands.yaml (욕망 = 채널)
+title: "이어 읽는 시장"            # 2026-11-12 사용자 확정 (docs/23)
+handle: "@이어읽는시장"
+brand_kit: channels/ch-market-daily/brand/   # 소개 문구 about.md · 배너·프로필 (render.js)
+format: longform
+style_ref: hybrid
+family: source
+concept: >
+  매일 아침, 전날 시장을 크게 움직인 것(이슈·증권사/기관 보고서·전망·실적)을 골라 '왜 움직였나'를 설명한다.
+  여기에 그 시장을 움직이는 기술이 어디로 가는지(기술 분석·미래 전망)와 CEO 들의 말과 행동도 소스로 다룬다 (2026-11-17 사용자, manual/09 §2-2·§3-4-2).
+  지수·업종 마감 → 가장 크게 움직인 이야기 2~3개 → 원인(1차 출처) → 시장 전체와 따로/같이 움직였나 → 오늘 확인할 것.
+niche: "미국·한국 시장 전날 마감 해설. 실제 시세와 1차 출처(회사 발표·공시·보고서 원문·연준·통계)만. 투자 권유는 하지 않는다."
+seed_keywords: ["AI 반도체 기술 전망", "HBM", "CEO 발언", "뉴욕증시 마감", "코스피 마감", "특징주", "증권사 리포트", "목표가", "가이던스", "연준", "실적 발표"]
+cadence: "하루 1편 이상 (상한 없음, 2026-11-17 사용자: 소스·인터뷰·주제가 많으면 하루 세 편까지도 — manual/09 §2-1) — 장이 열린 다음 날: 아침 브리핑 + 그날 가장 큰 줄기를 따로 심층(매일 두 편, 2026-11-21 사용자 — manual/09 §2) (화~토 아침 = 전날 장, 토요일은 금요일 미국 장) / 일요일: 한 주 종합(weekly — 이슈 종합 + 인사이트 점검 + 다음 주 일정·실적). 요일과 상관없이 매 편 투자자·CEO 등의 인사이트·분석을 다룸 (2026-11-20 사용자, manual/09 §2)"
+schedule:
+  weekday: {kind: briefing, minutes: [7, 10], upload: "아침 (예약 작업 시각)"}   # v76 (2026-11-20 사용자): 아침은 가벼운 보도 분석 브리핑
+  deep_dive: {kind: deep_dive, minutes: [12, 20], when: "v76 — 심층거리가 있고 당사자 원본 발언(인터뷰·기자회견·어닝콜)을 붙일 수 있는 날만 따로, 브리핑을 올린 뒤 만들어 12:00·18:00 공개 (manual/09 §2)"}
+  saturday: {kind: briefing, minutes: [7, 10], note: "금요일 미국 장 — 평일과 같음 (2026-11-20 사용자)"}
+  sunday: {kind: weekly_review, minutes: [12, 20]}   # 한 주 종합 -market-weekly (이슈 종합 + 인사이트 점검 + 다음 주 볼 것, 2026-11-20 사용자: "일요일에 주간 종합")
+  holidays: "미국·한국 휴장일은 쉬거나 주간 분석으로"
+explain_motion:   # 2026-11-20 사용자: "쉽게 설명해야 하는 부분이다, 상황 설명이 필요하다 = 모션그래픽을 주로 사용합니다"
+  style: explain-stage            # styles/explain-stage/STYLE.md — afterline·spread·share·motionboard 장면
+  use_when: "상황 설명·원리·구조를 쉽게 풀어야 하는 박자 (보호예수·공매도·정제마진·매출 비중·공급망·제재 이후 등)"
+  flow: "자료(차트·기사·발언)로 질문 → 설명 무대로 원리 → 다시 자료로 확인"
+  theme: paper                    # paper | dark | light
+tone: "아침 시황 진행자. 숫자에는 비교 기준, 원인에는 출처, 끝에는 '오늘 볼 것'."
+daily:
+  scan: "python -m ytflow daily --project <YYYYMMDD>-market-daily"   # 전날 시장 → 01_research/daily_brief.md
+  stories: [2, 3]                  # 한 편에 다룰 이야기 수
+  window: "한국 아침 6~9시 제작 → 오전 업로드 (미국 장 마감 16:00 ET = 06:00 KST, 서머타임 05:00)"
+  as_of: "○월 ○일 마감 기준 (미국·한국 날짜를 따로)"
+sourcing:
+  start_from: data
+  datasets: ["시세: 야후 파이낸스 (marketdata.py, 날짜 확인)", "회사 발표·IR·SEC 8-K / DART 공시", "증권사·기관 보고서 원문(공개분) 또는 보도에 인용된 문장", "연준·통계청·BLS 발표"]
+  end_with: ["오늘 확인할 것 (일정·지표·발표 시각)"]
+  must_check:   # 매 회 기본으로 확인하는 소식 모음 (2026-11-14 사용자) — 단서로만, 영상에 넣을 것은 1차 출처로 재확인
+    - {name: "SAVE (오선)", web: "https://www.saveticker.com", app: "https://apps.apple.com/kr/app/id6751139540",
+       how: "사람이 앱/웹에서 확인 → 01_research/save_check.md (또는 inbox/save/<YYYYMMDD>.md 메모). 자동 수집·우회 안 함 (봇 확인·AI 수집 거부)",
+       covers: ["글로벌 속보", "기업 리포트", "경제 지표", "투자 일정(연준 등)"]}
+tts:   # 2026-11-13 사용자 선택 (docs/08-voice.md §2차 후보 8명): Teo — 오래 듣기 편한 차분한 중저음. 예비 Sung-ho (AgA5UKT9OrVg7jxVBZd4)
+  backend: elevenlabs
+  elevenlabs: {voice_id: 0mlAtfsvMzFpppUuNWkV, model_id: eleven_v4, language_code: ko, stability: 0.55, speed: 1.0}
+  # 키 없이: ElevenLabs 커넥터로 장(章)별 2~3덩어리 생성 → python -m ytflow voice-import <프로젝트> part1.mp3 part2.mp3 (테이크 중 대본과 다 맞는 것)
+  # 크레딧: 원고 1자 ≈ 0.85 크레딧/테이크 (2,500~3,300자에서 2,100~2,800 측정). 롱폼을 매일 만들면 월 1만 무료 한도로는 부족
+youtube:   # 유튜브 올리기·관리 (python -m ytflow yt-publish, docs/24-youtube-publish.md)
+  category_id: "25"          # 뉴스/정치 (시장 브리핑)
+  default_language: ko
+  made_for_kids: false
+  publish_time: "08:30"      # 한국 시간 예약 공개 (지났으면 바로 공개) — 2026-11-19 사용자: 07:00 제작 시작·08:30 공개 (11-17 의 08:00·10:00 을 대신함)
+  publish_slots: ["08:30", "12:00", "18:00"]   # 같은 날 2·3번째 영상 (2026-11-17 사용자: 하루 여러 편 가능, 상한 없음 — 넘으면 2시간씩 뒤로)
+  privacy: public
+  captions: true             # subs.ass → 한국어 자막 트랙
+  synthetic_media: false     # 실제 인물·사건처럼 보이는 합성 없음 (AI 목소리 내레이션은 채널 정보에 밝힘)
+  playlists:                 # 영상 종류 → 재생목록 (없으면 만듦)
+    briefing: "아침 시장 브리핑"
+    deep: "심층 분석"
+    weekly: "주간 시장 정리"
+    analysis: "주말 분석"          # 옛 일요일 분석글(-analysis, 20261115 편) 재생목록 — 기본에서 뺌, 일요일은 -weekly
+    tech: "기술과 미래"           # <날짜>-market-tech-<주제> (manual/09 §2-2)
+    biz: "사업 분석"              # <날짜>-market-biz-<주제> (manual/09 §2-2-1, v46)

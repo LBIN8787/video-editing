@@ -1,0 +1,55 @@
+{
+ "id": "bite",
+ "type": "bite",
+ "example_source": "projects\\20261113-style-cut\\02_script\\hybrid.json",
+ "renderer": "ytflow/stages/cutedit.py:154",
+ "function": "s_bite",
+ "scene_fields": [
+  "label",
+  "role",
+  "show_en",
+  "who"
+ ],
+ "beat_fields": [
+  "credit",
+  "dur",
+  "segs",
+  "video"
+ ],
+ "rebuild": "python scripts/visual_catalog.py <작업 폴더> --only bite --force",
+ "spec_common": {
+  "edit_v10": true
+ },
+ "scenes": [
+  {
+   "type": "bite",
+   "chapter": 0,
+   "who": "제롬 파월",
+   "role": "연준 의장 · 2023년 6월 14일 FOMC 기자회견",
+   "label": "FOMC 기자회견 2023.6.14",
+   "beats": [
+    {
+     "say": "파월 의장의 설명을 직접 들어 보겠습니다."
+    }
+   ],
+   "clip": {
+    "src": "fomc",
+    "lang": "en",
+    "cuts": [
+     {
+      "from": "We've covered a lot of ground",
+      "to": "have yet to be felt",
+      "ko": "우리는 많이 왔고, 긴축의 효과는 아직 다 나타나지 않았습니다."
+     },
+     {
+      "from": "today we decided to leave",
+      "to": "policy interest rate unchanged",
+      "ko": "그래서 오늘, 정책금리를 그대로 두기로 했습니다."
+     }
+    ]
+   },
+   "id": 1
+  }
+ ],
+ "timeline": []
+}

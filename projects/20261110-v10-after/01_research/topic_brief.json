@@ -1,0 +1,34 @@
+{
+ "brand": "issues",
+ "line": "ch-issues",
+ "format_length": "quick",
+ "series": "이슈의 구조",
+ "desire": "중동 전쟁 뉴스가 내 기름값·물가로 이어지는데, 왜 이런 일이 생기는지 구조를 알고 싶다",
+ "trigger": "2026-11-01 사우디 통계청 속보: 3분기 GDP -3.8% (유가는 10월 말 배럴당 117달러까지 올랐는데)",
+ "why_now": "11월 8일 트럼프 '추가 공격 가능성 매우 낮다' 발언 뒤 유가가 94달러대로 내려옴 — 전쟁·유가·산유국 경제를 한 번에 정리할 시점",
+ "viewer_question": "유가가 올랐는데 왜 사우디는 마이너스 성장?",
+ "question_type": "원인",
+ "mood": ["긴장", "위기"],
+ "topic": "이란 전쟁으로 유가는 117달러까지 → 그런데 산유국 사우디 GDP는 -3.8% → 비싸게 팔아도 '팔 수 있는 양'이 줄었기 때문 (호르무즈 봉쇄·홍해 우회로 공격)",
+ "our_angle": "유가 상승 = 산유국 호황이라는 통념의 반대 결과를, 사우디 수출 지도 하나(호르무즈 → 동서 송유관 → 얀부 → 홍해)로 설명",
+ "driver": {"type": "소재", "why": "docs/18 §6: 사우디·중동 1.78 · 경제 위기·몰락 2.06 · 이란 1.58 — 세 소재가 겹침", "angle": "반대 결과 (유가는 오르는데 산유국 경제는 줄었다)"},
+ "as_of": "2026-11-09 18:00 KST",
+ "sides": [
+  {"who": "회복론 — 팀 캘런 (아랍걸프국가연구소 방문연구원, 전 IMF 사우디 담당 국장)", "claim": "유가가 오르면 4분기 석유 수입이 다시 늘어날 것", "source": "https://bcm.nacm.org/saudi-arabias-economy-responds-to-wartime-stress/"},
+  {"who": "우려론 — 재정 숫자", "claim": "3분기 재정적자 840억 리얄, 전 분기보다 145% 늘어 두 배 넘게 — 아람코가 정부에 내는 돈이 줄었기 때문 (블룸버그 보도)", "source": "https://sg.finance.yahoo.com/news/saudi-budget-deficit-more-doubles-231331566.html"}
+ ],
+ "unknowns": ["전쟁이 언제 끝날지 (카타르 중재, 합의 임박 신호 없음)", "3분기 GDP 는 속보치라 고쳐질 수 있음", "4분기 석유 수입이 실제로 회복될지"],
+ "score": {"desire": 3, "clarity": 3, "timeliness": 3, "demand": 3, "visuals": 2, "angle": 2},
+ "demand_evidence": [
+  {"kind": "outlier", "detail": "docs/18 640편: 사우디·중동 소재 1.78배 (비디오머그 '후티 반군' ×5.9, 크랩 '네옴시티' ×4.0, 김지윤 '미국과 사우디' ×3.7)", "url": ""},
+  {"kind": "outlier", "detail": "김지윤의 지식Play '미국은 왜 지금 이란을 쳤을까' ×8.4 (320만 회)", "url": ""}
+ ],
+ "visual_sources": ["NASA 우주 사진(퍼블릭 도메인): 호르무즈 해협·리야드 야경·얀부항 야경·케슘섬", "브렌트유 주간 시세 (야후 파이낸스 BZ=F)", "직접 그린 지도·인과 지도"],
+ "rumor": false,
+ "style": {"skin": "dark-doc", "hook": "kb(호르무즈 해협 우주 사진) → card_type 질문", "why": "issue-dark-montage: 전쟁·위기 주제 → 어두운 다큐 팩 + 지도·인과 결론 그림 (docs/18)"},
+ "candidates": [
+  {"topic": "유가는 올랐는데 왜 사우디는 마이너스 성장?", "total": 16, "why_not": "선택"},
+  {"topic": "미국 중간선거 민주당 양원 장악", "total": 12, "why_not": "국내 정치·선거는 소재 약함(0.90)·편향 위험"},
+  {"topic": "파라과이 은행 영업정지·대통령 위기", "total": 10, "why_not": "출처마다 사실관계가 달라 확인 부족 (사임 vs 탄핵·가택연금)"}
+ ]
+}

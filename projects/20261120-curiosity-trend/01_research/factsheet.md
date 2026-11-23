@@ -1,0 +1,31 @@
+# 팩트시트 · 2026-11-20 확인
+
+## 자료 지도
+| 번호 | 확인된 내용 | 확인 | 출처 |
+|---|---|---|---|
+| F1 | 『트렌드 코리아 2027』(김난도 외, 2026-09-30 발표) 10대 키워드 중 가장 강조된 것이 **권태사회** — "즐길 거리가 넘칠수록 오히려 더 자주 권태를 느낀다." 2027 슬로건 '알파쉽'. | ✅ 기사·칼럼 | [서울신문](https://www.seoul.co.kr/news/newsView.php?id=20260930500263) · [헤이팝](https://heypop.kr/?p=144345) |
+| F2 | Wilson 외, "Just think: The challenges of the disengaged mind", *Science* 345(6192):75–77, 2014. 11개 연구, 참가자는 아무것도 없이 **6~15분** 혼자 생각만 하는 것을 대체로 즐기지 못함. 집에서 한 연구에서는 32%가 몰래 다른 일을 하거나 일어남. 18~77세 지역 주민 표본도 대학생과 비슷한 결과. | ✅ 저자 원고(PMC) | [PMC4330241](https://pmc.ncbi.nlm.nih.gov/articles/PMC4330241/) |
+| F3 | 같은 논문 연구 10: 미리 전기 충격을 체험하고 "돈을 내서라도 다시 받지 않겠다"고 답한 사람들만 분석. 15분 동안 혼자 생각하는 중에 버튼으로 스스로 충격을 줄 수 있었음 → **남성 18명 중 12명(67%), 여성 24명 중 6명(25%)**이 한 번 이상 누름. 한 남성은 **190번** (평균 계산에서 제외된 극단값). | ✅ 저자 원고(PMC) | 위와 같음 |
+| F11 | 반론(Fox 외, *Frontiers in Psychology* 2014 의견 논문): 충격 실험 참가자 거의 모두가 15분의 대부분을 '그냥 생각하기'로 보냈고, 생각하기를 평균적으로 '어느 정도 즐길 만하다'고 평가 — 결과가 과장되었다는 지적. 충격은 발목에 연결. | ✅ 의견 논문·BPS | [Frontiers](https://www.frontiersin.org/articles/10.3389/fpsyg.2014.01427) · [BPS](https://www.bps.org.uk/research-digest/it-darkness-within-some-people-would-rather-shock-themselves-electricity-spend-time) |
+| F4 | Tam & Inzlicht, "Fast-Forward to Boredom: How Switching Behavior on Digital Media Makes People More Bored", *J. Exp. Psychol.: General* 153(10):2409–2426, 2024. 토론토대 스카버러 심리학과. **7개 실험, 총 1,223명(6개 사전 등록)**. 영상 사이를 넘기거나 영상 안에서 앞뒤로 건너뛰는 것을 '디지털 스위칭'이라 부름. | ✅ 원문 | [논문 PDF](https://static1.squarespace.com/static/550b09eae4b0147d03eda40d/t/67815f657379b710c3caf7d8/1736531823011/Fast-forward-to-boredom.pdf) · DOI 10.1037/xge0001639 |
+| F5 | 연구 1 (미국 성인 140명, Prolific, 18~78세): 지루한 영상 묶음을 받았을 때 다음 영상으로 넘긴 횟수 중앙값 **8번**, 재미있는 묶음은 **4번**. 지루하면 넘긴다. | ✅ 원문 | 위와 같음 |
+| F6 | 연구 2 (대학생 231명): 사람들은 넘길 수 있으면 덜 지루할 거라고 예측했고, **81%**가 넘길 수 있는 쪽을 골랐음(19%는 한 편 끝까지). | ✅ 원문 | 위와 같음 |
+| F7 | 연구 3 (대학생 159명, 한 사람이 두 조건 모두): 10분 동안 ① 10분짜리 영상 한 편(넘기기 불가) ② 5분짜리 영상 일곱 편(마음대로 넘김). 넘긴 횟수 1~35번(중앙값 5). **넘긴 쪽이 더 지루**(7점 척도 평균 3.72 vs 3.26, 효과 크기 d=0.25 — 작지만 분명), 만족·몰입·의미도 낮음. | ✅ 원문 | 위와 같음 |
+| F8 | 연구 4 (대학생 166명): 한 영상 안에서 앞뒤로 건너뛸 수 있게 해도 같은 결과(더 지루). 연구 5 (174명): 유튜브에서 **자기가 고른 9분 이상 영상**을 볼 때도 넘긴 쪽이 더 지루. 넘긴 이유를 적은 사람의 절반 넘게가 "지루해서". | ✅ 원문 · BPS 요약 | 위와 같음 · [BPS](https://bps.org.uk/research-digest/scrolling-through-online-videos-increases-boredom) |
+| F9 | 한계: 연구 3~5 는 대학생 표본. **연구 6(대학생 아닌 다양한 연령, 온라인 기사)은 결과가 엇갈림** — 넘기는 조건을 먼저 겪으면 그 뒤의 한 편 보기도 더 지루. 연구 7: '지금 다른 걸 볼 수도 있었는데'라는 기회비용이 이유일 수 있음. | ✅ 원문 | 위와 같음 |
+| F10 | 저자들의 설명: 지루함은 **주의**가 붙지 않거나 **의미**를 못 느낄 때 생긴다(Eastwood 외 2012, Westgate & Wilson 2018 '의미와 주의 모형'). 넘기면 몰입·만족·의미가 낮아짐. "영상의 즐거움은 넘기는 데서가 아니라 빠져드는 데서 온다." | ✅ 원문(초록·토론) | 위와 같음 |
+| F12 | Tam & Inzlicht 토론·한계: 넘기지 않는 시청을 **영화관·극장**에 비유("사람들이 돈을 내고 몰입하는 경험"). "지루함을 피하는 모든 행동이 지루함을 키운다는 뜻은 아니다 — 게임·운동 같은 다른 활동은 지루함을 덜어 줄 가능성이 크다." 최적의 넘기기 수준은 **후속 연구 과제**. | ✅ 원문 | [논문 PDF](https://static1.squarespace.com/static/550b09eae4b0147d03eda40d/t/67815f657379b710c3caf7d8/1736531823011/Fast-forward-to-boredom.pdf) |
+| F13 | Westgate, Wilson & Gilbert, "With a Little Help for Our Thoughts: Making It Easier to Think for Pleasure", *Emotion* 17:828–839, 2017: 참가자가 즐거운 생각 주제를 미리 적고, 생각할 때 간단한 도움(주제 상기)을 받으면 생각하는 시간이 **더 쉽고 더 즐거웠다**. 생각으로 즐거움을 얻는 일은 생각보다 머리를 많이 쓰는 일. 후속(Westgate 외 2021, *Emotion*)도 미리 정한 주제·상기의 효과를 이어 다룸. | ✅ 초록·보도 (원문 방법 미확인) | [Springer/Emotion 서지](https://zendy.io/pdf-viewer/10.1037/emo0000278) · [UF 보도 2021](https://news.ufl.edu/2021/03/daydreaming/) |
+| F14 | 버트런드 러셀, 『행복의 정복』(The Conquest of Happiness, 1930) 4장 '지루함과 흥분': "We are less bored than our ancestors were, but we are more afraid of boredom." (우리는 조상들보다 덜 지루하지만, 지루함을 더 두려워한다.) Tam & Inzlicht 2024 서문도 같은 장을 인용. 사진: Wikimedia Commons 퍼블릭 도메인 'Bertrand Russell, 1894.jpg' 등. | ✅ 원문(구텐베르크)·인용 사이트 | [Project Gutenberg #77894](https://gutenberg.org/ebooks/77894) · [The Marginalian](https://www.themarginalian.org/2015/01/21/bertrand-russell-boredom-conquest-of-happiness/) |
+| F15 | 대니얼 길버트(하버드대)는 Wilson 외 2014 Science 논문과 Westgate 외 2017 의 공저자. 사진: Wikimedia Commons 'Daniel Gilbert.jpg' (퍼블릭 도메인 표기 — 사용 전 파일 페이지 재확인). 티모시 윌슨·케이티 탐·마이클 인즐리히트는 자유 라이선스 사진을 찾지 못함 → 이름·소속 카드로. | 🟡 라이선스 재확인 필요 | [Commons](https://commons.wikimedia.org/wiki/File:Daniel_Gilbert.jpg) |
+
+## 해석의 지도
+- Wilson 2014 는 "사람은 할 일 없는 상태를 얼마나 싫어하나"(아픔을 택할 만큼), Tam & Inzlicht 2024 는 "그 지루함을 피하는 요즘 방법(넘기기)이 오히려 지루함을 키운다"를 보여 준다 — 두 연구는 '피하려는 마음'과 '피하는 방법의 역효과'로 이어진다.
+- 효과는 **작다**(d=0.25). "넘기면 훨씬 지루해진다"가 아니라 "덜 지루해지지 않고 오히려 조금 더"로 말한다. 대학생 아닌 사람·글에서는 엇갈렸다(F9).
+
+## 쓰지 않는 것
+- '몇 분 버티면 덜 지루하다' 같은 구체적 시간 처방(연구에 없음 — F12). '여행 떠올리기' 예시는 연구가 쓴 '즐거운 주제'의 예로만, 효과 크기 없이.
+- "요즘 사람들 집중력이 8초" 같은 금붕어 통계(출처 불분명).
+- 쇼츠가 뇌를 망가뜨린다·도파민 중독 같은 단정(이 연구들이 보인 것이 아님).
+- 『트렌드 코리아 2027』 다른 키워드의 뜻(원문 미확인).
+- 화면의 인물은 무료 스톡 실사이며 실험 참가자가 아님 → '자료 화면' 표시. 지루해하는 얼굴을 '중독된 사람'처럼 쓰지 않음.

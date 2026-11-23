@@ -1,0 +1,211 @@
+# 화풍 목록 — 영상마다 언제든 고를 수 있는 '보이는 모습'의 목록 (2026-11-20 사용자: "각 모션그래픽이나 삽화 등은 스타일 즉 언제든지 내가 화풍 등을 고를 수 있도록 분류해주세요")
+#
+# 규칙(MUST)이 아니라 고르는 목록입니다. 무엇으로 보여 줄지(실사·모션그래픽·삽화)는 박자가 하는 일이 정하고(manual/12 §0-1),
+# 그 모션그래픽·삽화가 '어떻게 보일지'를 여기서 고릅니다.
+#
+# 보기:    python -m ytflow looks [--kind motion|illust|footage]
+# 고르기:  python -m ytflow look <프로젝트> --motion clean-flat --illust cute-casual --footage warm-doc
+#          → 프로젝트 edit.yaml 의 look: {motion, illust, footage} 에 적힘
+# 적용:    motion → 그래픽 스킨(skins/<skin>)으로 렌더 (edit.yaml 에 skin 을 따로 적으면 그것이 우선)
+#          illust → 그림 주문서(art-gen)의 화풍 문장 (art_plan.json 에 style 을 적으면 그것이 우선)
+#          footage → 실사 클립 색보정 (실제 자료 영상 렌더러가 읽음)
+# 새 화풍 더하기: 아래 형식으로 한 항목 추가 (motion 은 skins/<id>/skin.yaml 도 함께).
+#
+# status: approved = 사용자 합격 · trial = 시안 있음(판정 전) · available = 바로 렌더 가능(따로 판정 기록 없음)
+
+motion:   # 모션그래픽 화풍 — 도형·글자·막대·지도가 천천히 나타나고 움직이는 화면의 모습
+  clean-flat:
+    name: 평면 인포그래픽
+    skin: clean-flat
+    look: 무늬 없는 미색 바탕, 곧은 선, 꽉 찬 면, 굵은 고딕
+    fits: 숫자·비교·과정 설명, 경제·산업 (시장 채널 기본)
+    avoid: 감정·회상 장면
+    status: approved
+  clean-white:
+    name: 하얀 평면
+    skin: clean-white
+    look: 깨끗한 흰 바탕, 진한 남색 글씨, 파란 강조
+    fits: 기술·도구 설명, 앱·서비스 흐름 (AI 채널)
+    avoid: 역사·이야기
+    status: available
+  slate:
+    name: 슬레이트
+    skin: slate
+    look: 차가운 회청색 바탕, 먹색 글씨, 주홍 강조
+    fits: 경제·데이터, 차분한 분석
+    avoid: 따뜻한 생활 이야기
+    status: available
+  midnight:
+    name: 미드나이트
+    skin: midnight
+    look: 짙은 남색 바탕, 밝은 글씨, 청록 강조
+    fits: AI·기술 최전선, 우주·규모 (플랫 벡터 삽화와 잘 이어짐)
+    avoid: 옛 사건·자료 화면이 많은 편
+    status: available
+  blueprint:
+    name: 청사진
+    skin: blueprint
+    look: 짙은 남색 모눈, 흰 선, 노란 강조 — 설계도 느낌
+    fits: 구조·원리·작동 방식
+    avoid: 역사·감성
+    status: available
+  chalkboard:
+    name: 칠판
+    skin: chalkboard
+    look: 녹회색 칠판, 분필 손글씨, 노란 분필 강조
+    fits: 원리를 배운다 — 과정·구조 설명 (호기심)
+    avoid: 사람·기관 관계도, 숫자 비교, 한 편에 너무 자주
+    status: approved
+  paper-sketch:
+    name: 종이 위 손그림
+    skin: paper-sketch
+    look: 크림색 종이, 남색 잉크, 빨간 펜, 손그림 선 (미주일기풍 질감)
+    fits: 개념·역사 해설, 원본 자료가 적은 주제
+    avoid: 코드가 즉석에서 그린 도형만으로 장면을 채우기 (05 §0-8 'PPT 도형' 기각)
+    status: available
+  corkboard:
+    name: 증거판
+    skin: corkboard
+    look: 코르크판, 핀으로 꽂은 종이 카드, 붉은 실
+    fits: 누가 누구와 연결돼 있나 (시사)
+    avoid: 숫자 비교
+    status: approved
+  dark-doc:
+    name: 어두운 다큐
+    skin: dark-doc
+    look: 먹색 필름 바탕(입자·비네트), 밝은 글씨, 호박색 강조, 흑백 자료 화면
+    fits: 원본 영상·발언 중심, 실사 사이의 정리 화면, 역사·위기
+    avoid: 밝고 가벼운 생활 정보
+    status: approved
+  noir:
+    name: 누아르 사건 보드
+    skin: noir
+    look: 거의 검은 바탕(입자·강한 비네트), 회백색 글씨, 강조는 빨강 하나뿐(지금 말하는 것만), 강한 흑백 자료 화면, 작은 자막
+    fits: 흩어진 사건을 한 질문으로 잇는 시사 큰 사건·시장 심층 주간 (hubweb·ledger 장면, docs/57)
+    avoid: 밝고 가벼운 생활 정보, 숫자 많은 실적 해설, 한 편 내내 (긴장이 무뎌짐)
+    status: available
+  newsprint:
+    name: 신문지
+    skin: newsprint
+    look: 누런 신문 종이, 먹색 활자, 진한 빨강, 흑백 사진
+    fits: 옛 사건·옛 신문·지도
+    avoid: 최신 기술
+    status: available
+  forest:
+    name: 포레스트
+    skin: forest
+    look: 짙은 초록 바탕, 상아색 글씨, 금빛 강조
+    fits: 역사·이야기, 자연
+    avoid: 데이터 대시보드
+    status: available
+  kinetic-poster:
+    name: 키네틱 포스터
+    skin: kinetic-poster
+    look: 크림 바탕, 검정 굵은 글자, 빨강 강조 — 화면 글자가 곧 자막
+    fits: 훅·장 전환·결론 한 문장, 쇼츠
+    avoid: 롱폼 전체
+    status: available
+  footage-overlay:
+    name: 실사 위 그래픽
+    skin: ""
+    look: 실사 위에 흰 굵은 글자 + 노란 강조, 모서리 괄호·라벨·반투명 패널 (바탕은 실사)
+    fits: 실사 B-roll 위의 콜아웃·막대·핵심어 — 설명이 실사의 상황에 붙어 있을 때
+    avoid: 그래픽이 실사를 덮어 사람이 안 보이게 (패널은 화면 절반 이하)
+    status: approved
+    demo: 20261120-curiosity-broll-sample
+
+  crumpled-paper:
+    name: 구겨진 종이 (설명 무대)
+    skin: crumpled-paper
+    look: 실사 구겨진 종이 바탕, 굵은 고딕(Black Han Sans), 흰 카드에 3겹 그림자, 붓으로 칠한 붉은 금지 표시·구간
+    fits: 상황 설명·원리 — 보호예수·공매도·제재 이후·마진·비중 (시장 채널 상황 설명 기본, styles/explain-stage)
+    avoid: 차가운 기술·앱 화면 이야기
+    status: approved   # 2026-11-20 사용자: "이 모션그래픽 스타일 커밋하겠습니다 … 주식채널에도 사용"
+    media: scenes/explain-look-crumpled-paper.mp4   # 실제 렌더 (styles/explain-stage/demo/render.py --gallery)
+  dark-stage:
+    name: 어두운 무대 (설명 무대)
+    skin: dark-stage
+    look: 숯색 무대에 가운데만 조금 밝게, 밝은 글씨·밝은 붉은 붓, 카드는 밝게 떠 있음
+    fits: 같은 설명 무대를 무겁고 긴장된 대목에 — 제재·위기·급락
+    avoid: 밝고 가벼운 생활 이야기
+    status: available
+    media: scenes/explain-look-dark-stage.mp4
+
+illust:   # 삽화 화풍 — 실사도 모션그래픽도 어려운 박자에만 (그림은 원화, 코드는 움직임 — 05 §0-8)
+  casual-cel:
+    name: 캐주얼 셀 애니메이션
+    look: 손으로 칠한 배경, 가는 선의 인물, 따뜻한 빛
+    fits: 일상·기억·회상, 인물의 감정
+    avoid: 정밀한 수치·기계 구조
+    status: approved
+    prompt: "Casual cel-animation style: hand-painted soft backgrounds, thin clean line art for characters, warm natural light, gentle muted palette, expressive but simple faces, cozy everyday atmosphere. Original design, no existing characters or logos, no text."
+  cute-casual:
+    name: 귀엽고 캐주얼한 그림
+    look: 3등신, 점 눈·볼터치, 굵고 부드러운 선, 파스텔
+    fits: 가벼운 호기심·생활 정보·쇼츠, 실수·코미디, 어려운 말을 부드럽게
+    avoid: 무거운 사건·피해자가 있는 시사
+    status: trial
+    prompt: "Cute casual cartoon style: chunky rounded characters with big heads and small bodies (about 3 heads tall), simple dot eyes with a shine, rosy cheeks, thick soft dark-brown outlines with slight line weight variation, flat pastel colors with one soft cel shadow, gentle paper grain, cozy and playful, like a modern picture-book webtoon. No text."
+  flat-vector:
+    name: 플랫 벡터 과학 설명
+    look: 원·둥근 사각형, 외곽선 없음, 짙은 남색 바탕 + 빛나는 채도
+    fits: 원리·우주·몸속·규모 비교, 추상 개념을 물건처럼
+    avoid: 실제 인물·사건의 사실감이 필요할 때
+    status: trial
+    prompt: "Modern science-explainer flat vector style: clean geometric shapes built from circles and rounded rectangles, no outlines, bold saturated palette on a deep navy background with glowing accents, soft gradients and subtle long shadows, simple characters with round heads and minimal faces, crisp and readable at a glance. Original design, no existing characters or logos, no text."
+  clay-miniature:
+    name: 2.5D 점토·펠트 미니어처
+    look: 손자국·실밥 질감, 과장된 얼굴, 얕은 심도, 실제 재료 소품
+    fits: 옛 인물 재현, 옛날이야기, 한 사람의 하루를 작은 무대로
+    avoid: 빠른 정보 나열, 데이터
+    status: trial
+    prompt: "2.5D handmade stop-motion miniature look: clay and felt characters with visible fabric fibers, fingerprints and stitching, caricatured expressive faces, warm golden-hour practical lighting, shallow depth of field, handmade miniature set with real-material props, cinematic composition. No text."
+  editorial-ink:
+    name: 시사 지면 삽화
+    look: 잉크선 + 평면 채색, 실제 장소의 무게
+    fits: 기관·도시·산업, 실제 장소 (시사)
+    avoid: 감정 코미디
+    status: approved
+    prompt: "Editorial newspaper illustration style: confident ink line work with flat muted color fills, restrained palette, realistic proportions and places, serious magazine tone. Original design, no logos, no text."
+  mint-flat:
+    name: 민트 플랫 제품 일러스트
+    look: 둥근 덩어리, 손·물건 중심, 민트 계열
+    fits: 앱·결제·권한 같은 제품 설명 (AI)
+    avoid: 역사·감정
+    status: approved
+    prompt: "Friendly flat product illustration: soft rounded blob shapes, hands and devices in focus, mint and soft teal palette with one warm accent, no outlines, clean white space. Original design, no logos, no text."
+  editorial-flat:
+    name: 평면 편집 삽화 (그림 생성 기본값)
+    look: 크림·남색·벽돌색, 남색 외곽선, 옅은 종이 결
+    fits: 화풍을 따로 고르지 않았을 때의 기본
+    avoid: ""
+    status: available
+    prompt: "Flat editorial vector illustration, warm cream, navy blue and muted brick-red palette, confident navy outlines, soft flat shading, subtle paper grain, charming and gentle. Plain pure white background, no ground shadows, no text, no labels."
+  doc-collage:
+    name: 실제 자료 콜라주
+    look: 원문·사진 위 형광펜·표시
+    fits: 증거·인용·날짜를 짚을 때
+    avoid: 이야기 몰입 구간
+    status: approved
+    prompt: ""   # 그림 생성이 아니라 실제 자료를 오려 붙임
+
+footage:  # 실사 클립 색보정 — 한 편의 클립을 같은 값으로 묶음
+  warm-doc:
+    name: 따뜻한 다큐
+    look: 채도 조금 낮춤, 따뜻한 중간톤, 비네트, 옅은 필름 입자
+    fits: 생활·심리·호기심 (기본)
+    status: approved
+    demo: 20261120-curiosity-broll-sample
+    vf: "eq=contrast=1.06:saturation=0.82:gamma=0.97,colorbalance=rs=0.03:bs=-0.03:rh=0.02:bh=-0.03,vignette=PI/4.5,noise=alls=5:allf=t"
+  cool-news:
+    name: 차가운 보도
+    look: 채도 그대로, 약간 차가운 톤, 비네트 없음
+    fits: 시장·AI 실사 (회사·도시·화면 녹화)
+    status: available
+    vf: "eq=contrast=1.04:saturation=0.95,colorbalance=rs=-0.02:bs=0.03"
+  mono-archive:
+    name: 흑백 기록
+    look: 흑백, 대비 높임, 입자
+    fits: 옛 사건·회상 (실제 기록 사진·영상과 섞일 때)
+    status: available
+    vf: "hue=s=0,eq=contrast=1.12,noise=alls=8:allf=t,vignette=PI/4"

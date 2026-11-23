@@ -1,0 +1,102 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- 의지력 편 6장 '더 오래, 더 강하게' D3 샘플 — 모션그래픽. R(t, P) 가 그 시각의 한 장면을 그린다(결정적).
+     P = [{t0,t1}] 문단(박자)별 시작·끝 초. 화면 역할: 설명(실험 동작) → 증거(수치) → 마디. 13-script §3 -->
+<style>
+@font-face{font-family:NG;src:url(../../../ytflow/assets/fonts/NanumGothic-Bold.ttf)}
+@font-face{font-family:NGX;src:url(../../../ytflow/assets/fonts/NanumGothic-ExtraBold.ttf)}
+@font-face{font-family:BH;src:url(../../../ytflow/assets/fonts/BlackHanSans-Regular.ttf)}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#1d1b19}
+canvas{display:block}
+</style></head><body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+const PAPER='#efe7da',INK='#2b2622',DIM='#8d8274',RED='#c8473a',GRN='#3f8f6b',BLUE='#3d6fa8',GOLD='#d9a441';
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)), ease=v=>{v=cl(v);return v<.5?2*v*v:1-Math.pow(-2*v+2,2)/2};
+const io=(t,a,d=.5)=>ease((t-a)/d);
+function txt(s,X,Y,size,col,font='NG',align='center',alpha=1){x.save();x.globalAlpha=alpha;x.fillStyle=col;x.font=`${size}px ${font}`;x.textAlign=align;x.textBaseline='middle';x.fillText(s,X,Y);x.restore()}
+function bg(){x.fillStyle=PAPER;x.fillRect(0,0,1920,1080);
+  // 종이 결: 고정 난수 점
+  x.save();x.globalAlpha=.05;let s=7;for(let i=0;i<900;i++){s=(s*9301+49297)%233280;const a=s/233280;s=(s*9301+49297)%233280;const b=s/233280;x.fillStyle=INK;x.fillRect(a*1920,b*1080,2,2)}x.restore()}
+function src(s){txt(s,1880,60,22,DIM,'NG','right')}
+function eye(cx,cy,r,look,alpha=1){ // look: -1(왼쪽)~1(오른쪽)
+  x.save();x.globalAlpha=alpha;x.fillStyle='#fff';x.strokeStyle=INK;x.lineWidth=4;
+  x.beginPath();x.ellipse(cx,cy,r*1.5,r,0,0,Math.PI*2);x.fill();x.stroke();
+  x.fillStyle=INK;x.beginPath();x.arc(cx+look*r*0.85,cy,r*0.45,0,Math.PI*2);x.fill();x.restore()}
+function dot(X,Y,r,col,alpha=1){x.save();x.globalAlpha=alpha;x.fillStyle=col;x.beginPath();x.arc(X,Y,r,0,Math.PI*2);x.fill();x.restore()}
+function clock(cx,cy,r,frac,label){x.save();x.strokeStyle='#d8cdbd';x.lineWidth=14;x.beginPath();x.arc(cx,cy,r,0,Math.PI*2);x.stroke();
+  x.strokeStyle=INK;x.beginPath();x.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+Math.PI*2*frac);x.stroke();x.restore();txt(label,cx,cy,40,INK,'BH')}
+// 안티사카드 한 번(주기 per 초): 점이 나타나면 눈이 끌렸다가 반대로
+function antisaccade(cx,cy,r,t,per,anti=true,a=1){const k=Math.floor(t/per),f=(t%per)/per,side=(k%2?1:-1);
+  dot(cx+side*r*4,cy,r*0.35,RED,a*(f>.15&&f<.85?1:0));
+  let look=0; if(f>.2&&f<.35) look=side*0.5*((f-.2)/.15); else if(f>=.35&&f<.85) look=anti?-side:side;
+  if(anti&&f>=.35&&f<.45) look=side*0.5+(-side-side*0.5)*((f-.35)/.1);
+  eye(cx,cy,r,look,a); txt('+',cx,cy+r*1.9,30,DIM,'NG','center',a)}
+// Go/NoGo 줄
+function gonogo(cx,cy,t,a=1,err=false){const items=['go','go','nogo','go','go','go','nogo','go'];const sp=1.1;const n=Math.floor(t/sp),f=(t%sp)/sp;const it=items[n%items.length];
+  x.save();x.globalAlpha=a;
+  const sy=cy-60;if(it==='go'){dot(cx,sy,60,GRN)}else{x.strokeStyle=RED;x.lineWidth=18;x.beginPath();x.moveTo(cx-50,sy-50);x.lineTo(cx+50,sy+50);x.moveTo(cx+50,sy-50);x.lineTo(cx-50,sy+50);x.stroke()}
+  // 버튼과 손가락
+  const by=cy+330;x.fillStyle='#d8cdbd';x.beginPath();x.ellipse(cx,by,110,34,0,0,Math.PI*2);x.fill();
+  const press=(it==='go'||(err&&it==='nogo'))&&f>.25&&f<.55;x.fillStyle=press?(it==='nogo'?RED:INK):'#6b6157';
+  x.beginPath();x.ellipse(cx,by-(press?4:14),80,24,0,0,Math.PI*2);x.fill();
+  x.fillStyle='#e9c8a8';x.strokeStyle=INK;x.lineWidth=3;x.beginPath();x.roundRect(cx-26,by-(press?150:190),52,120,24);x.fill();x.stroke();
+  x.restore();
+  if(it==='nogo') txt(err&&f>.25?'잘못 누름':'멈춤',cx+170,cy-60,40,RED,'NGX','center',a*(f>.1?1:0));
+}
+function bar(X,Y,w,val,max,col,label,vtxt,grow){const h=560*val/max*grow;x.fillStyle=col;x.fillRect(X,Y-h,w,h);txt(label,X+w/2,Y+40,30,INK);txt(vtxt,X+w/2,Y-h-34,36,INK,'BH','center',grow>0.95?1:0)}
+function SUB(s){if(!s)return;x.save();x.font='42px NGX';const w=x.measureText(s).width;x.fillStyle='rgba(20,18,16,.82)';x.fillRect(960-w/2-28,968,w+56,70);x.fillStyle='#fff';x.textAlign='center';x.textBaseline='middle';x.fillText(s,960,1004);x.restore()}
+function R(t,P,sub){
+  bg();
+  const pi=P.findIndex(p=>t<p.t1), i=pi<0?P.length-1:pi, p=P[i], lt=t-p.t0, dur=p.t1-p.t0;
+  if(i===0){ // 연구진 · 더 길고 힘들게
+    txt('2025년',960,300,40,DIM,'NG','center',io(lt,0));
+    txt('첫 과제를 더 오래, 더 힘들게',960,420,92,INK,'BH','center',io(lt,.3,.6));
+    clock(960,700,120,cl((lt-1.5)/(dur-1.5))*0.75,'30~40분');
+    src('Dang 외 (2025), Journal of Pacific Rim Psychology 19');
+  } else if(i===1){ // 안티사카드 동작
+    txt('점의 반대쪽을 보세요',960,170,60,INK,'BH','center',io(lt,0));
+    antisaccade(960,560,90,lt,1.6,true,1);
+    txt('끌려가는 눈을 매번 붙잡아 반대로',960,860,40,DIM,'NG','center',io(lt,3));
+    const m=Math.min(40,Math.floor(cl(lt/dur)*40));clock(1660,240,70,m/40,m+'분');
+    src('재현 도식');
+  } else if(i===2){ // 세 집단
+    const q=io(lt,0);txt('오래 하면 누구나 지치는 걸까?',960,140,58,INK,'BH','center',q*(lt<dur*0.35?1:0.35));
+    const cols=[[420,'오래 참기','반대쪽 보기 · 30~40분',true,1],[960,'길게 쉬운 과제','점 쪽 보기 · 같은 시간',false,1],[1500,'짧게 쉬운 과제','점 쪽 보기 · 짧게',false,0.35]];
+    cols.forEach(([cx,h,s,anti,len],k)=>{const a=io(lt,dur*(0.25+k*0.2));antisaccade(cx,470,55,lt,1.6,anti,a);txt(h,cx,660,46,anti?RED:INK,'BH','center',a);txt(s,cx,720,30,DIM,'NG','center',a);
+      x.save();x.globalAlpha=a;x.fillStyle='#d8cdbd';x.fillRect(cx-170,780,340,22);x.fillStyle=anti?RED:INK;x.fillRect(cx-170,780,340*len*cl((lt-dur*(0.25+k*0.2))/2),22);x.restore()});
+    src('Dang 외 (2025) 설계 · 재현 도식');
+  } else if(i===3){ // Go/NoGo
+    txt('세 집단 모두 같은 두 번째 과제',960,140,52,INK,'BH','center',io(lt,0));
+    gonogo(960,400,lt,io(lt,.4),false);
+    const a=io(lt,dur*0.6);x.save();x.globalAlpha=a;x.strokeStyle=RED;x.lineWidth=4;x.strokeRect(560,800,800,90);x.restore();
+    txt('주 지표 · 누르지 말아야 할 때 잘못 누른 실수',960,845,38,RED,'NGX','center',a);
+  } else if(i===4){ // 결과: 효과 크기
+    txt('누르지 말아야 할 때 잘못 누른 실수',960,110,46,INK,'BH','center',io(lt,0));
+    txt('14개 표본 · 2,078명 · 실험실과 온라인',960,175,32,DIM,'NG','center',io(lt,.4));
+    const g1=io(lt,dur*0.3,1.2),g2=io(lt,dur*0.42,1.2);
+    x.strokeStyle=INK;x.lineWidth=3;x.beginPath();x.moveTo(470,880);x.lineTo(1450,880);x.stroke();
+    bar(560,880,300,0.35,0.4,RED,'오래 참기 vs 길게 쉬운 과제','d = 0.35',g1);
+    bar(1060,880,300,0.31,0.4,RED,'오래 참기 vs 짧게 쉬운 과제','d = 0.31',g2);
+    txt('효과 크기(d) · 다른 연구와 과제·지표가 달라 직접 비교하지 않음',960,935,26,DIM,'NG','center',io(lt,dur*0.6));
+  } else if(i===5){ // 대조끼리
+    txt('쉬운 과제: 오래 vs 짧게',960,140,52,INK,'BH','center',io(lt,0));
+    x.strokeStyle=INK;x.lineWidth=3;x.beginPath();x.moveTo(470,820);x.lineTo(1450,820);x.stroke();
+    const g=io(lt,.6,1);bar(600,820,260,0.35,0.4,'#c9bfb0','오래 참기 vs 길게 쉬운 과제','d = 0.35',g*0.999);bar(1060,820,260,0.01,0.4,INK,'길게 vs 짧게','d = 0.01',g);
+    txt('뚜렷한 차이가 확인되지 않음 — 차이가 없다는 증명은 아님',960,900,34,INK,'NGX','center',io(lt,dur*0.45));
+  } else if(i===6){ // 지표별
+    txt('모든 능력이 똑같이 떨어진 것은 아니다',960,160,56,INK,'BH','center',io(lt,0));
+    const rows=[['누르지 말아야 할 때 잘못 누름','차이 나타남',RED],['다른 종류의 실수','뚜렷한 차이 확인 안 됨',DIM],['반응 시간','뚜렷한 차이 확인 안 됨',DIM]];
+    rows.forEach(([a,b,col],k)=>{const al=io(lt,dur*(0.12+k*0.14));x.save();x.globalAlpha=al;x.fillStyle=k===0?'#f6d9d3':'#e6ddcf';x.fillRect(420,330+k*150,1080,110);x.restore();
+      txt(a,470,385+k*150,42,INK,'NGX','left',al);txt(b,1450,385+k*150,38,col,'NGX','right',al)});
+    txt('같은 결과가 다른 연구진에서도 나올지는 아직',960,840,34,DIM,'NG','center',io(lt,dur*0.7));
+  } else { // 마디
+    x.fillStyle='#0d0c0b';x.fillRect(0,0,1920,1080);
+    txt('그렇다면 의지력은 결국 배터리가 맞았던 걸까요?',960,540,62,'#efe7da','BH','center',io(lt,.2,.8));
+    return;
+  }
+  SUB(sub);
+}
+window.R=R;
+</script></body></html>

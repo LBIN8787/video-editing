@@ -1,0 +1,76 @@
+{
+  "properties": {
+    "summary": {
+      "title": "Summary",
+      "type": "string"
+    },
+    "backgrounds": {
+      "description": "배경 종류와 언제 쓰는지",
+      "items": {
+        "type": "string"
+      },
+      "title": "Backgrounds",
+      "type": "array"
+    },
+    "layout": {
+      "description": "화면 배치 규칙",
+      "items": {
+        "type": "string"
+      },
+      "title": "Layout",
+      "type": "array"
+    },
+    "motion": {
+      "description": "움직임·전환 규칙 (무엇이 어떻게 나타나고 카메라가 어떻게 움직이는지)",
+      "items": {
+        "type": "string"
+      },
+      "title": "Motion",
+      "type": "array"
+    },
+    "recurring_elements": {
+      "description": "반복해서 나오는 요소 (종이 칩, 사진, 캐릭터, 형광펜 등)",
+      "items": {
+        "type": "string"
+      },
+      "title": "Recurring Elements",
+      "type": "array"
+    },
+    "typography": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Typography",
+      "type": "array"
+    },
+    "subtitles": {
+      "title": "Subtitles",
+      "type": "string"
+    },
+    "sound": {
+      "title": "Sound",
+      "type": "string"
+    },
+    "renderer_gaps": {
+      "description": "현재 ytflow 렌더러(검은 카드 sixsigma / 종이 손그림 paper)가 아직 못 하는 것",
+      "items": {
+        "type": "string"
+      },
+      "title": "Renderer Gaps",
+      "type": "array"
+    }
+  },
+  "required": [
+    "summary",
+    "backgrounds",
+    "layout",
+    "motion",
+    "recurring_elements",
+    "typography",
+    "subtitles",
+    "sound",
+    "renderer_gaps"
+  ],
+  "title": "StyleRules",
+  "type": "object"
+}

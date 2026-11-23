@@ -1,0 +1,113 @@
+{
+ "base": {
+  "id": "issue-dark-montage",
+  "name": "시사 심층 (어두운 영화 톤 + 실사 사진 몽타주 + 지도·인과 결론)",
+  "score": 8.0,
+  "why": [
+   "질문 유형 원인",
+   "소스 있음(archive)",
+   "소스 있음(map)"
+  ],
+  "skin": "dark-doc",
+  "scene_types": [
+   "kb",
+   "journey",
+   "choropleth",
+   "map_causal",
+   "card_type",
+   "quote"
+  ],
+  "status": "approved",
+  "skill": "edit-style-pool",
+  "demo": ""
+ },
+ "hook": {
+  "id": "source-cut",
+  "name": "원본 발언 컷편집 (그 사람이 직접 말하는 부분만 잘라 넣기)",
+  "score": 4.5,
+  "why": [
+   "질문 유형 원인",
+   "소스 확인 필요(footage)",
+   "소스 있음(statement)"
+  ],
+  "skin": "clean-flat",
+  "scene_types": [
+   "bite"
+  ],
+  "status": "demo",
+  "skill": "edit-style-source-cut",
+  "demo": "20261113-style-cut"
+ },
+ "ending": {
+  "id": "source-cut",
+  "name": "원본 발언 컷편집 (그 사람이 직접 말하는 부분만 잘라 넣기)",
+  "score": 4.5,
+  "why": [
+   "질문 유형 원인",
+   "소스 확인 필요(footage)",
+   "소스 있음(statement)"
+  ],
+  "skin": "clean-flat",
+  "scene_types": [
+   "bite"
+  ],
+  "status": "demo",
+  "skill": "edit-style-source-cut",
+  "demo": "20261113-style-cut"
+ },
+ "mix": [
+  {
+   "id": "issue-dark-montage",
+   "score": 8.0,
+   "why": [
+    "질문 유형 원인",
+    "소스 있음(archive)",
+    "소스 있음(map)"
+   ],
+   "roles": [
+    "whole"
+   ]
+  },
+  {
+   "id": "map-journey",
+   "score": 6.5,
+   "why": [
+    "질문 유형 원인",
+    "소스 있음(map)"
+   ],
+   "roles": [
+    "body"
+   ]
+  },
+  {
+   "id": "dash-cover",
+   "score": 6.0,
+   "why": [
+    "질문 유형 원인"
+   ],
+   "roles": [
+    "body"
+   ]
+  },
+  {
+   "id": "evidence-board",
+   "score": 6.0,
+   "why": [
+    "질문 유형 원인"
+   ],
+   "roles": [
+    "body"
+   ]
+  },
+  {
+   "id": "paper-column",
+   "score": 6.0,
+   "why": [
+    "질문 유형 원인"
+   ],
+   "roles": [
+    "whole"
+   ]
+  }
+ ]
+}

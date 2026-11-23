@@ -1,0 +1,34 @@
+# 누아르 사건 보드 — 거의 검은 바탕, 회백색 글씨, 강조는 빨강 하나뿐, 자료 화면은 강한 흑백 (docs/57 §2-1, 오신트형 구조만)
+# 쓰는 곳: 시사(issues) 큰 사건 · 시장 심층의 '누가 누구와 엮였나' 주간. 밝고 가벼운 생활 정보에는 맞지 않음.
+# 원칙: 빨강은 '지금 말하는 것' 한 곳에만 — 앞 박자의 빨강은 회색으로 물러남 (hubweb·ledger 장면이 그렇게 움직임)
+id: noir
+title: 누아르 사건 보드
+palette:
+  base: "#0E0E10"
+  ink: "#E9E5DC"
+  accent: "#D6262E"
+  card: "#18181B"
+  card2: "#202024"
+  muted_text: "#9C9A96"
+  muted2: "#85837F"
+  line: "#55534F"
+  line2: "#3D3C39"
+  line3: "#2A2A2C"
+  dim: "#4A4946"
+  map_stroke: "#6B6965"
+  ok: "#C9C5BC"          # 흑백 원칙: '좋음'도 색 없이 밝은 회색
+  warn: "#D6262E"
+  blue: "#A9A6A0"
+  marker: "#7E1A1F"      # 형광펜 = 짙은 핏빛 (글씨는 회백색 그대로 보임)
+  note_on_video: "#F2EEE6"
+  redact: "#000000"
+  deep: "#08080A"
+  tape: "#2E2D2B"
+background: {type: dark, grain: 9, vignette: 0.65}
+strokes: {roughness_scale: 0.35, bowing: 0.4}
+photo: {tone: "grayscale(1) contrast(1.3) brightness(.82)"}
+fonts: {title: NanumGothic-ExtraBold.ttf, value: NanumMyeongjo-ExtraBold.ttf, box: NanumGothic-Bold.ttf, note: NanumGothic-Bold.ttf, label: NanumGothic-Regular.ttf}
+subtitle: {font: NanumGothic, size: 44, text: "&H00E6EEF2", box: "&H50000000"}
+# 그림(컴포넌트): 비교 = 막대, 비율 = 도넛, 인과 = 알약, 장 표지 = 큰 글씨, 이름 자막 = 얇은 선
+components: {compare: bars, proportion: donut, flow: pill, chapter: type, lower: bar}
+dark: true

@@ -1,0 +1,29 @@
+# 채널 1편을 만들 때 쓰는 설정. python -m ytflow make --channel ch-paper-column
+brand: market                               # channels/brands.yaml (욕망 = 채널)
+id: ch-paper-column
+title: "(가칭) 종이 위의 경제"            # 채널 이름은 정해지면 바꾸세요
+format: longform                         # longform(장편 칼럼·보고서 분석) | shorts(짧은 주제 안내)
+style_ref: mijudiary                     # 편집 스타일 (styles/mijudiary) — 자체 제작 기본
+family: infographic
+concept: >
+  한 주의 경제·기업 뉴스 하나를 골라, 칼럼처럼 '왜 그런가'를 끝까지 풀어 주는 채널.
+  종이 위에 손으로 그려 가며 설명하는 화면(미주일기 스타일)으로, 일반인도 숫자와 비유로 이해하게 한다.
+niche: "주식시장 중심의 투자·기술·기업 해설. 돈의 흐름·실적·구조를 숫자·비유·과거 사례로 풀어 준다. 종목 추천·매수 권유는 하지 않는다."
+seed_keywords: ["빅테크 실적", "현금흐름", "AI 투자", "반도체 주가", "금리", "삼성전자 SK하이닉스", "데이터센터 투자", "기업 부채"]
+cadence: "주 1편 (예: 목요일 업로드)"
+voice: "미정 — ElevenLabs 로 정함 (영상이 확정된 뒤 목소리를 고르고 아래 tts 의 주석을 풉니다)"
+tone: "차분한 해설. 질문으로 장을 열고, 결론은 한 문장으로."
+
+# 소스 찾기 (벤치마킹: docs/07-sourcing.md — 미주일기식 '1차 문서에서 출발')
+sourcing:
+  start_from: document            # 기업 연구 블로그·논문·IR 보도자료·SEC 공시·정부·연구소 → 개념을 칼럼으로
+  documents: ["기업 공식 블로그·연구 페이지(anthropic.com/research, deepmind, openai)", "논문(arXiv·NBER·학술지)",
+              "IR 보도자료·SEC 공시", "정부·국제기구·연구소(IMF·Fed·Stanford HAI·METR)", "인물의 X 게시물(공식 계정)"]
+  photos: wikimedia_commons       # 인물·장소 사진은 위키미디어 공용 CC 사진만 (저작자·라이선스를 설명란에 표기)
+  min_documents: 3
+  chapters: true                  # 장 제목을 질문형으로 → 설명란 챕터
+
+# 목소리 확정 후 (docs/08-voice.md):
+# tts:
+#   backend: elevenlabs
+#   elevenlabs: {voice_id: "<ElevenLabs 목소리 ID>", model_id: eleven_multilingual_v2, language_code: ko, stability: 0.5, similarity_boost: 0.75, speed: 1.0}

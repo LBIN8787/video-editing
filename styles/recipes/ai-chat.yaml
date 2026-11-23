@@ -1,0 +1,18 @@
+id: ai-chat
+name: "AI 대화 화면 (질문 타자 + 답이 흘러나옴)"
+status: demo
+renderer: hybrid
+skin: clean-flat
+format: [longform]
+owns: [chat]                # 이 스타일로 '세는' 장면 type (조합 규칙 검사용)
+scene_types: [chat]
+fits:
+  brands: [ai]
+  questions: [방법, 정체, 비교]
+  moods: [실용]
+  needs: []
+roles: [body]
+avoid: "실제 서비스 화면처럼 보이게 하기 (상표·로고 금지, label 에 '재구성 예시') / 대화를 지어내기 — 실제 쓴 프롬프트·답 또는 공식 문서의 절차만"
+demo: "20261109-pool-ai (장면 1)"
+skill: edit-style-pool
+notes: "HyperFrames 레지스트리 chat-thread·claude-exchange 블록에서 아이디어 (Apache-2.0), 구현은 directions.s_chat"

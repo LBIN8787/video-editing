@@ -1,0 +1,147 @@
+# 메인 레포의 공통 '상황' — 대본의 한 박자(문장)가 하는 일 → 화면을 무엇으로 채우나 (manual/05 §2 표를 기계가 읽게)
+# 주제 레포(topics/<brand>/topic.yaml)가 이것을 물려받아 더하거나(add) 바꾸거나(override) 뺍니다(drop).
+# 영상 한 편은 python -m ytflow edit-plan <프로젝트> 로 박자마다 상황을 찾아 편집 계획을 채웁니다 (docs/33).
+#
+#   signals  : 이 상황을 알아보는 말 (정규식, 대본 say 에서 찾음) — 여러 상황이 겹치면 점수 높은 순
+#   scenes   : 1순위 → 2순위 장면 종류 (hybrid.json type, 용어 사전 '장면 종류')
+#   techniques: 함께 쓸 연출 기법 (styles/techniques.yaml id) — 상태가 후보·보류면 계획에 그렇게 표시
+#   avoid    : 이 상황에서 피할 것
+#   why      : 왜 이 화면인가 (사용자 뜻·매뉴얼 근거)
+
+situations:
+  open-scene:
+    name: 장면을 연다 (사람·장소·날짜)
+    signals: ['\d{4}년', '그날', '어느 날', '그해', '새벽', '아침', '밤 \d', '에서 열린', '회의실', '현장']
+    scenes: [kb, footage, stage]
+    techniques: [parallax-photo, draw-on]
+    avoid: 글자 카드로 열기
+    why: 인트로 없이 첫 문장부터 장면 (README §2-1·§2-3)
+
+  question:
+    name: 질문·명제 한 줄을 던진다
+    signals: ['\?', '왜 ', '무엇일까', '어떻게 될까', '일까요', '을까요']
+    scenes: [card_type, chapter]
+    techniques: [split-reveal]
+    avoid: 그림을 억지로 넣기
+    why: 질문은 글자 하나로 — 강조 예산 안에서 (05 §0-1)
+
+  said:
+    name: 누가 말했다
+    signals: ['말했', '밝혔', '발언', '강조했', '답했', '라고 했', '말합니다', '설명했', '언급']
+    scenes: [bite, footage, quote]
+    techniques: [j-l-cut, rough-highlight]
+    avoid: 내레이션으로만 전하기
+    why: 그 사람의 목소리·원문이 증거 (source-cut, 03 §0-1)
+
+  cause:
+    name: 원인 → 결과를 잇는다
+    signals: ['때문', '그래서', '이어지', '번지', '파급', '결과', '탓에', '로 이어', '연쇄']
+    scenes: [map_causal, analogy]
+    techniques: [draw-on, spotlight, match-move]
+    avoid: 장면마다 새 도식 (같은 칸 위치 유지)
+    why: 화살표가 말과 함께 그어져야 '이어진다'가 보임
+
+  route:
+    name: 어디서 어디로 움직였다
+    signals: ['에서 .{1,12}(으)?로 ', '수출', '수입', '공급망', '옮겨', '퍼졌', '건너']
+    scenes: [journey, usmap]
+    techniques: [motion-path, draw-on]
+    avoid: 표로 보여 주기
+    why: 이동은 지도 위 경로로
+
+  metric:
+    name: 숫자·지표가 움직였다
+    signals: ['\d+(\.\d+)?%', '올랐', '떨어졌', '상승', '하락', '급등', '급락', '주가', '지수', '억 ?(원|달러)', '조 ?(원|달러)']
+    scenes: [chart, bignum, bars]
+    techniques: [count-up, scramble]
+    avoid: 손그림 가짜 그래프, 말한 숫자가 화면에 없는 것
+    why: '말하는 숫자가 그 순간 화면에 생긴다 (작업 기준, 09 §6 v27·v30)'
+
+  compare:
+    name: 둘을 비교한다
+    signals: ['보다 ', '비교', '반면', '대비', '와 달리', '에 비해']
+    scenes: [versus, bars, compare]
+    techniques: [split-screen, chart-morph]
+    avoid: 숫자 나열
+    why: 같은 틀에 나란히
+
+  ratio:
+    name: 비율·규모를 느끼게 한다
+    signals: ['명 중', '\d+명 가운데', '비율', '절반', '비중', '중 \d+']
+    scenes: [people, isotype, parking]
+    techniques: [stagger, chart-morph]
+    avoid: 퍼센트 글자만
+    why: 비율을 사람·물건 수로
+
+  timeline:
+    name: 시간 순서
+    signals: ['\d{4}년.{0,40}\d{4}년', '그 뒤', '이후', '그로부터', '처음', '마침내']
+    scenes: [timeline, checklist]
+    techniques: [stagger, motion-path]
+    avoid: 연도만 나열
+    why: 한 줄기 이야기를 시간 순서로 (README §2-3)
+
+  media:
+    name: 보도·매체가 어떻게 다뤘나
+    signals: ['보도', '매체', '신문', '기사', '헤드라인', '로이터', '블룸버그']
+    scenes: [newspapers, quote]
+    techniques: [split-screen, rough-highlight]
+    avoid: 매체 판단을 단정
+    why: 매체 프레임의 차이 자체가 이야기 (03 §0-2)
+
+  rank:
+    name: 순위가 바뀌었다
+    signals: ['\d+위', '순위', '1위', '올라섰', '밀려났', '추월']
+    scenes: [bars, chart]
+    techniques: [bar-race, count-up]
+    avoid: 순위표를 글로
+    why: 자리바꿈은 움직이는 막대로
+
+  change:
+    name: 바뀌었다·변했다 (동사)
+    signals: ['바뀌', '변했', '변하', '뒤집', '달라졌', '탈바꿈', '돌아섰']
+    scenes: [stage, analogy, shape]
+    techniques: [morph, match-move]
+    avoid: 바뀐 전후를 글자로만
+    why: 대본의 동사를 그림이 연기 (04 §0-5)
+
+  point:
+    name: 화면의 한 곳을 가리킨다
+    signals: ['여기', '이 부분', '이 줄', '이 숫자', '이 대목', '이 문장']
+    scenes: [zoomshot]
+    techniques: [rough-highlight, spotlight]
+    avoid: 줌 3번 이상
+    why: 가리키는 곳만 표시
+
+  conclusion:
+    name: 꼭 기억할 한 문장 (결론·훅)
+    signals: ['결국', '정리하면', '핵심은', '한마디로', '그래서 지금', '남은 질문']
+    scenes: [kinetic, card_type, recap]
+    techniques: [split-reveal, match-move]
+    avoid: 영상 내내 키네틱, 자막과 같은 문장 다시 쓰기
+    why: 강조는 아껴서 — 결론 한 번 (05 §0-1)
+
+
+  explain:
+    name: 상황을 쉽게 풀어 준다 (원리·구조·누가 무엇을 누구에게)
+    signals: ['원리', '구조', '쉽게 말해', '즉,', '이라는 뜻', '작동', '풀리면', '묶여', '넘기', '팔 수 있', '차이', '마진', '스프레드', '비중', '차지', '뒤에도', '이후에도']
+    scenes: [motionboard, spread, share, afterline]
+    techniques: [motionboard, spread, share, afterline]
+    avoid: 글·숫자 카드만으로 설명, 'PPT 도형' 같은 평면 도식
+    why: '2026-11-20 사용자: "쉽게 설명해야 하는 부분이다 상황설명이 필요하다 = 모션그래픽 을 주로 사용" — 설명 무대(styles/explain-stage), 12 §0-1'
+
+  ai-ask:
+    name: AI 에게 어떻게 시키는지
+    signals: ['프롬프트', '물어보', '시키', '대화창', '답을 받']
+    scenes: [chat, footage]
+    techniques: [split-reveal]
+    avoid: 지어낸 대화를 실제처럼
+    why: 재구성 예시는 표시
+
+  command:
+    name: 설치·실행 명령
+    signals: ['명령', '설치', '실행', '터미널', 'npm ', 'pip ', 'npx ']
+    scenes: [terminal, footage]
+    techniques: [scramble]
+    avoid: 실행하지 않은 결과
+    why: 실제 실행 기록만

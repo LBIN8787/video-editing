@@ -1,0 +1,315 @@
+"""이어 읽는 시장 — 11월 19일(목) 아침 브리핑: 엔비디아 실적 다음 날 하락 + 연준 의사록(AI 순환 금융) + 앤트로픽 공모(공급자 7곳 사모) + 한국.
+    python scripts/daily_20261119/make.py && python -m ytflow hybrid 20261119-market-daily
+"""
+import json
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+from ytflow.stages import archive  # noqa: E402
+
+P = ROOT / "projects" / "20261119-market-daily"
+DS, NP = "dark-doc", "newsprint"
+YH = "야후 파이낸스 종가 · 11월 18일(수) 마감 기준 · 17일 대비"
+FOMC = "연준 10월 27~28일 회의 의사록 (2026.11.18 공개) · federalreserve.gov"
+S1 = "앤트로픽 S-1/A (2026.11) · SEC"
+IPO = "공모가는 CNBC·AP 보도(소식통) — 회사 공식 발표 아님"
+ETD = "이투데이 (2026.11.18) 증권사 코멘트 인용"
+
+PHOTOS = {
+    "nyse": "New York Stock Exchange Facade 2015.jpg",
+    "seoul": "Skyline of Yeouido, a prominent finance district in Seoul.jpg",
+    "dc": "Microsoft Data Center Middenmeer, the Netherlands - 1.jpg",
+    "mem": "SK Hynix DDR5 form factors.jpg",
+    "fed": "Eccles Building (26088200676).jpg",
+    "racks": "Datacenter Server Racks (22370909788).jpg",
+}
+KNOWN = {
+    "nyse": {"license": "CC BY 2.0", "artist": "작자 미상"},
+    "seoul": {"license": "CC BY 4.0", "artist": "작자 미상"},
+    "dc": {"license": "CC BY 4.0", "artist": "Hay Kranen"},
+    "mem": {"license": "CC BY 4.0", "artist": "작자 미상"},
+    "fed": {"license": "Public domain", "artist": "작자 미상"},
+    "racks": {"license": "CC BY 2.0", "artist": "작자 미상"},
+}
+
+
+def photos() -> dict:
+    fdir = P / "04_assets" / "footage"
+    (fdir / "raw").mkdir(parents=True, exist_ok=True)
+    out = {}
+    for key, title in PHOTOS.items():
+        meta = fdir / "raw" / f"{key}.json"
+        if meta.exists():
+            r = json.loads(meta.read_text(encoding="utf-8"))
+        else:
+            try:
+                r = archive.commons_file(title)
+            except Exception:  # noqa: BLE001
+                r = None
+            if not r:
+                k = KNOWN[key]
+                r = {"title": title, "license": k["license"], "artist": k["artist"], "page": "https://commons.wikimedia.org/wiki/File:" + title.replace(" ", "_"),
+                     "url": "", "credit": f"{k['license']} · {k['artist']} · 위키미디어 공용 · {title.rsplit('.', 1)[0][:50]}"}
+            meta.write_text(json.dumps(r, ensure_ascii=False, indent=1), encoding="utf-8")
+        jpg = fdir / "raw" / f"{key}.jpg"
+        if not jpg.exists():
+            url = "https://commons.wikimedia.org/wiki/Special:FilePath/" + title.replace(" ", "_") + "?width=1920"
+            for _ in range(3):
+                subprocess.run(["curl", "-sSL", "-A", "ytflow/1.0 (video research tool)", "-o", str(jpg), url], check=True)
+                if jpg.read_bytes()[:2] == b"\xff\xd8":
+                    break
+                time.sleep(8)
+            else:
+                jpg.unlink()
+                raise SystemExit(f"사진 받기 실패: {title}")
+        mp4 = fdir / f"{key}.mp4"
+        if not mp4.exists():
+            archive.still_to_clip(jpg, mp4, dur=12)
+        out[key] = {"file": mp4.name, "credit": r["credit"], "url": r["page"], "license": r["license"]}
+    return out
+
+
+def B(*s):
+    return [{"say": x} for x in s]
+
+
+
+
+def M(t, do, **kw):
+    return dict(t=t, do=do, **kw)
+
+
+def main():
+    for d in ("01_research", "02_script", "05_edit"):
+        (P / d).mkdir(parents=True, exist_ok=True)
+    fo = photos()
+    cr = {k: v["credit"].split(" · 위키미디어")[0] for k, v in fo.items()}
+    S = []
+    s = S.append
+
+    # ── 여는 장면 ──
+    s(dict(type="bignum", chapter=0, label=YH + " · 실적 수치는 엔비디아 8-K 보도자료(11.17)", small="엔비디아 종가 · 11월 18일 미국 장 마감 기준", value="150.96달러",
+           compare={"label": "닷새 전 (11일 종가)", "value": "173.73달러"},
+           beats=[{"say": "11월 18일 수요일 미국 장 마감 기준, 엔비디아는 2.89% 내린 150.96달러에 장을 마쳤습니다. 하루 전 매출 1,158억 달러로 시장 예상을 넘는 성적표를 냈는데도, 닷새 연속 하락입니다. 닷새 사이 13% 넘게 빠졌습니다.",
+                   "motion": [M("13%", "count", id="d5", value="-13.1%", label="11일 → 18일", x=1660, y=690, w=400, h=140, fs=52)]},
+                  {"say": "그런데 같은 날, 같은 AI 쪽에서 반대로 움직인 회사들이 있습니다. 아마존은 3.82%, 브로드컴은 3.64% 올랐습니다.",
+                   "motion": [M("아마존", "count", id="amz", value="+3.82%", label="아마존 18일", x=1660, y=860, w=400, h=140, fs=52)]}]))
+    s(dict(type="quote", chapter=0, label=FOMC, who="미국 연준 직원 평가", role="10월 회의 의사록 · 금융 안정 부분",
+           quote="AI 관련 회사들 사이의 순환 금융은, AI 투자 수익이 실망스러우면 손실을 키울 수 있다.", keyword="순환 금융",
+           orig="circular financing arrangements among AI-related firms could amplify losses if returns on AI investment were to disappoint",
+           beats=B("같은 날 오후, 미국 중앙은행인 연준이 지난달 회의의 의사록을 공개했습니다. 금융 안정을 다룬 부분에 이런 문장이 있습니다. AI 관련 회사들 사이의 순환 금융은, AI 투자 수익이 실망스러우면 손실을 키울 수 있다.",
+                   "그리고 그날 밤, AI 회사 앤트로픽의 공모가가 83달러로 정해졌다는 보도가 나왔습니다. 엔비디아는 빠지고, 아마존은 올랐습니다. 돈은 AI를 떠난 걸까요, 아니면 자리를 옮긴 걸까요?")))
+
+    # ── 시장 한 장 ──
+    s(dict(type="bars", chapter=0, label=YH + " · 보험주·유가 원인은 스톡타이탄(CNBC 인용) 보도", title="18일(수) 미국 장 (%)", unit="", emph=0, skin=DS,
+           items=[{"label": "다우", "value": -1.11, "text": "-1.11", "t": "다우는"}, {"label": "S&P 500", "value": -0.23, "text": "-0.23", "t": "S&P 500"},
+                  {"label": "반도체 지수", "value": 0.10, "text": "+0.10", "t": "반도체"}, {"label": "나스닥", "value": 0.42, "text": "+0.42", "t": "나스닥은"}],
+           beats=[{"say": "먼저 시장 한 장입니다. 다우는 1.11% 내렸고, S&P 500은 0.23% 내려 닷새 연속 하락했습니다. 반면 나스닥은 0.42% 올랐습니다. 세 지수가 서로 다른 방향을 가리킨 하루입니다."},
+                  {"say": "다우를 끌어내린 건 AI가 아니었습니다. 보도에 따르면 미국 정부가 노인 의료보험 지급을 더 깐깐하게 환수하겠다는 규칙안을 내면서, 유나이티드헬스가 10% 넘게 빠졌습니다. 에너지 업종도 원유 재고가 늘었다는 소식에 3.27% 내렸습니다.",
+                   "motion": [M("유나이티드헬스", "count", id="unh", value="-10.21%", label="유나이티드헬스 (보도)", x=1480, y=760, w=400, h=160, fs=60),
+                              M("에너지", "count", id="xle", value="-3.27%", label="에너지 업종(XLE)", x=1480, y=940, w=400, h=160, fs=60)]}]))
+
+    # ── 1. 엔비디아 ──
+    s(dict(type="chapter", chapter=1, num="1", title="숫자는 넘었는데, 닷새째", icon="trending-down", look="photo", bg_src="nyse",
+           beats=B("먼저 엔비디아입니다. 성적표는 좋았는데, 왜 주가는 계속 빠질까요?")))
+    s(dict(type="bars", chapter=1, label=YH, title="같은 날, AI 회사들 (%)", unit="", emph=0, skin=DS,
+           items=[{"label": "아마존", "value": 3.82, "text": "+3.82", "t": "아마존"}, {"label": "브로드컴", "value": 3.64, "text": "+3.64", "t": "브로드컴"},
+                  {"label": "알파벳", "value": 0.80, "text": "+0.80", "t": "알파벳"}, {"label": "AMD", "value": 0.70, "text": "+0.70", "t": "AMD"},
+                  {"label": "엔비디아", "value": -2.89, "text": "-2.89", "t": "엔비디아는"}],
+           beats=[{"say": "같은 날 AI 회사들의 성적을 나란히 놓아 보겠습니다. 아마존과 브로드컴은 3% 넘게 올랐고, 알파벳과 AMD도 조금 올랐습니다. 엔비디아만 2.89% 내렸습니다."},
+                  {"say": "보도에 따르면 엔비디아는 장이 열리기 전 4% 가까이 오르다가, 개장 20분 만에 하락으로 돌아섰습니다. 엔비디아 칩을 빌려주는 신생 클라우드 회사 코어위브도 4.13% 내렸습니다.",
+                   "motion": [M("코어위브", "count", id="crwv", value="-4.13%", label="코어위브 (CNBC 보도)", x=1480, y=860, w=400, h=150, fs=56)]}]))
+    s(dict(type="quote", chapter=1, insight=True, label="CNBC 매드 머니 (2026.11.18) · CNBC 기사 인용 · 원본 영상은 PC 단계 · 의견이며 사실이 아닙니다", who="콜레트 크레스", role="엔비디아 임시 CEO · CNBC 인터뷰",
+           quote="고객이 바뀌고 있다는 생각, 그건 사실이 아닙니다.", keyword="사실이 아닙니다",
+           orig="This concept that anything is changing in terms of any of our types of customers — that is just not true.",
+           beats=[{"say": "임시 대표 콜레트 크레스는 이날 미국 방송 인터뷰에서 이렇게 말했습니다. 어떤 고객이든 무언가 바뀌고 있다는 생각, 그건 사실이 아니라는 겁니다."},
+                   {"say": "회사 대표의 시각입니다. 이 말을 받치는 숫자는, 시장 예상 1,091억을 넘은 매출 1,158억 달러입니다. 그런데 오늘 공개된 앤트로픽의 신고서를 보면, 큰 고객 한 곳은 엔비디아를 포함해 네 가지 칩을 섞어 쓴다고 적었습니다.",
+                    "motion": [M("1,158억", "count", id="rev", value="1,158억 달러", label="3분기 매출 (예상 1,091억)", x=900, y=860, w=460, h=140, fs=52)]}]))
+    s(dict(type="versus", chapter=1, insight=True, label="야후 파이낸스 (2026.11.18) 애널리스트 인용 · 의견이며 사실이 아닙니다",
+           left={"value": "숫자", "label": "매출 1,158억 · 예상 1,091억 상회", "icon": "file-text"},
+           right={"value": "공백", "label": "셰이퍼(오펜하이머): 리더십 공백", "icon": "circle-alert"},
+           beats=[{"say": "시장이 지금 묻는 건 숫자가 아닌 것 같습니다. 오펜하이머의 애널리스트 리치 셰이퍼는, 황의 사임이 리더십 공백을 만들었고 자연도 투자자도 공백을 싫어한다고 적었습니다. 사실이 아니라 한 사람의 시각입니다."},
+                  {"say": "시포트 리서치의 제이 골드버그도, 젠슨 황은 회사 구조를 자기 중심으로 짜 왔다고 말했습니다. 매체의 제목도 같은 쪽을 봤습니다. 국내에서는 엔비디아 실적도 시장을 못 살렸다는 제목이, 해외에서는 황 없는 삶을 마주한 투자자라는 제목이 나왔습니다. 숫자에 대한 질문은 답을 받았고, 시장의 질문은 누가 이끄느냐로 옮겨 간 셈입니다."}]))
+
+    # ── 2. 연준 ──
+    s(dict(type="chapter", chapter=2, num="2", title="연준이 이름 붙인 고리", icon="landmark", look="photo", bg_src="fed",
+           beats=B("이제 같은 날 나온 연준의 문서를 열어 보겠습니다.")))
+    s(dict(type="checklist", chapter=2, label=FOMC + " · 원문 문장 요약", title="의사록에 적힌 네 가지", x=150, text_w=880, skin=NP,
+           rows=[{"label": "금리 3.75~4.00% 동결 — 10 대 2, 두 명은 인상 주장", "state": "ok", "t": "동결"},
+                 {"label": "거의 모든 위원: 추가 인상이 적절할 것", "state": "warn", "t": "거의 모든"},
+                 {"label": "많은 위원: AI 건설 붐은 물가의 큰 위험 요인", "state": "warn", "t": "물가"},
+                 {"label": "대부분 위원: AI 관련 부채가 빠르게, 불투명하게 늘었다", "state": "warn", "t": "부채"}],
+           beats=[{"say": "10월 회의에서 연준은 기준금리를 3.75에서 4% 사이로 묶었습니다. 하지만 위원 두 명은 0.25%포인트 올리자며 반대했습니다. 그리고 거의 모든 위원이, 앞으로 금리를 더 올리는 것이 적절할 것이라고 봤습니다.", "upto": 2},
+                  {"say": "물가의 위험 요인으로 꼽힌 것 가운데 하나가 AI입니다. 많은 위원이 데이터센터를 짓는 AI 건설 붐을 물가의 큰 위험 요인으로 봤습니다. 칩과 전력, 부품 수요가 공급을 앞지르고 있다는 겁니다.", "upto": 3},
+                  {"say": "그리고 대부분의 위원이, AI 관련 부채가 빠르게 늘었고 그 상당 부분이 복잡하고 불투명한 구조로 늘었다고 지적했습니다. 다만 같은 문서는, 은행들은 자본이 넉넉해 큰 손실도 견딜 수 있다는 평가도 함께 적었습니다.", "upto": 4,
+                   "motion": [M("10 대 2", "count", id="vote", value="10 대 2", label="동결 표결 (2명 인상 주장)", x=1440, y=820, w=480, h=170, fs=60)]}]))
+    s(dict(type="quote", chapter=2, label=FOMC + " · 시세는 야후 파이낸스", who="미국 연준 위원들", role="10월 회의 의사록 · 금융 안정 논의",
+           quote="AI 관련 노출이 소수의 회사에 점점 더 몰리고 있다.", keyword="소수의 회사",
+           orig="AI-related exposures were becoming increasingly concentrated among a small number of firms.",
+           beats=[{"say": "몇몇 위원은 한 걸음 더 나갔습니다. AI 관련 위험이 소수의 회사에 점점 더 몰리고 있다는 겁니다."},
+                  {"say": "의사록이 다우 하락의 유일한 이유라고 볼 수는 없습니다. 보험주와 에너지에는 따로 이유가 있었습니다. 다만 금리는 더 오를 수 있고, AI의 돈은 몇몇 회사 사이를 돌고 있다는 것. 이 두 가지가 한 문서에 함께 적혔습니다. 미국 10년물 국채 금리는 5.07%였습니다.",
+                   "motion": [M("5.07%", "count", id="tnx", value="5.07%", label="미 10년물 금리 (17일 5.10%)", x=900, y=860, w=460, h=140, fs=52)]}]))
+
+    # ── 3. 앤트로픽 ──
+    s(dict(type="chapter", chapter=3, num="3", title="공모가 83달러, 그리고 일곱 곳", icon="building", look="photo", bg_src="racks",
+           beats=B("그럼 그 '몇몇 회사'의 모습을, 오늘 상장하는 회사의 서류로 보겠습니다.")))
+    s(dict(type="bignum", chapter=3, label=IPO + " · 범위·주식 수는 " + S1 + " · 공모 규모는 이 영상의 계산", small="앤트로픽 공모가 (보도) · 나스닥 'ANT'", value="83달러",
+           compare={"label": "회사가 낸 희망 범위", "value": "70~78달러"},
+           beats=[{"say": "클로드를 만드는 AI 회사 앤트로픽의 공모가는, 보도에 따르면 주당 83달러입니다. 회사가 내놓은 희망 범위 70~78달러의 가장 높은 값보다도 5달러 높습니다. 회사의 공식 발표는 아직 아니고, 소식통을 인용한 보도입니다."},
+                  {"say": "공모 주식 8억 2,500만 주에 83달러를 곱하면 약 685억 달러입니다. 보도된 기업가치는 약 1조 5천억 달러. 한국 시간으로 오늘 밤, 나스닥에서 첫 거래가 시작될 예정입니다.",
+                   "motion": [M("685억", "count", id="raise", value="약 685억 달러", label="공모 규모 (계산)", x=1660, y=860, w=440, h=140, fs=50)]}]))
+    s(dict(type="bars", chapter=3, label=S1 + " · 회사별 금액은 희망 범위 중간값 74달러 가정 시 신고서 숫자", title="공모 직후 주식을 사기로 한 일곱 곳 (억 달러)", unit="", emph=1, skin=DS,
+           items=[{"label": "구글", "value": 100, "text": "100", "t": "구글"}, {"label": "엔비디아", "value": 100, "text": "100", "t": "엔비디아가"},
+                  {"label": "AMD", "value": 25, "text": "25", "t": "AMD"}, {"label": "브로드컴", "value": 10, "text": "10", "t": "브로드컴"},
+                  {"label": "마이크론", "value": 10, "text": "10", "t": "마이크론"}, {"label": "마이크로소프트", "value": 10, "text": "10", "t": "마이크로소프트"},
+                  {"label": "TSMC", "value": 5, "text": "5", "t": "TSMC"}],
+           beats=[{"say": "그런데 신고서에는 공모와 별도로 눈에 띄는 표가 있습니다. 상장 직후, 일곱 회사가 같은 값에 모두 260억 달러어치 주식을 사기로 했습니다. 구글과 엔비디아가 각각 약 100억 달러, AMD가 25억 달러입니다.",
+                   "motion": [M("260억", "count", id="pp", value="260억 달러", label="동시 사모 합계 (S-1/A)", x=1600, y=300, w=440, h=130, fs=50)]},
+                  {"say": "브로드컴, 마이크론, 마이크로소프트가 각각 약 10억, 대만의 TSMC가 약 5억 달러입니다. 이 이름들을 잘 기억해 두세요. 신고서의 다른 쪽에 이 회사들이 또 나옵니다."}]))
+    s(dict(type="checklist", chapter=3, label=S1 + " · 배수는 이 영상의 계산", title="앤트로픽 장부 — 무엇을 사기로 했나", x=150, text_w=880, skin=NP,
+           rows=[{"label": "칩: 아마존 트레이니엄 · 구글 TPU · 엔비디아 · AMD", "state": "ok", "t": "네 가지"},
+                 {"label": "클라우드: 아마존 · 구글 · 마이크로소프트 / 부품: 브로드컴", "state": "ok", "t": "클라우드"},
+                 {"label": "1~9월 매출 332억 달러 (1년 전 25억)", "state": "ok", "t": "332억"},
+                 {"label": "사기로 한 약속 9,009억 달러 — 12개월 안 707억", "state": "warn", "t": "9,009억"}],
+           beats=[{"say": "앤트로픽은 네 가지 칩을 섞어 씁니다. 아마존의 트레이니엄, 구글의 TPU, 엔비디아와 AMD의 GPU입니다. 클라우드는 아마존·구글·마이크로소프트에 기대고, 부품은 브로드컴 같은 회사에서 받는다고 적었습니다. 주식을 사겠다는 일곱 곳이, 거의 그대로 앤트로픽의 공급자 명단입니다.", "upto": 2},
+                  {"say": "올해 1월부터 9월까지 매출은 332억 달러, 1년 전 25억에서 열세 배가 됐습니다. 그런데 앞으로 컴퓨트와 인프라를 사기로 약속한 돈은 약 9,009억 달러입니다. 연 매출로 환산한 숫자의 약 20배입니다.", "upto": 4,
+                   "motion": [M("20배", "count", id="x20", value="약 20배", label="약속 ÷ 연 환산 매출 (계산)", x=1440, y=820, w=480, h=170, fs=60)]},
+                  {"say": "대부분은 2031년 이후의 먼 약속이지만, 앞으로 12개월 안에 낼 몫만 707억 달러입니다. 올해 9개월 매출의 두 배가 넘습니다. 순손실은 1,040억 달러였는데, 대부분은 전환사채 같은 장부상 평가 손실이라 현금이 나간 것과는 다릅니다.",
+                   "motion": [M("707억", "count", id="y1", value="707억 달러", label="12개월 안 약속", x=1440, y=600, w=480, h=170, fs=60)]}]))
+    s(dict(type="quote", chapter=3, label=S1 + " · 위험 요인", who="앤트로픽 신고서", role="위험 요인 · 컴퓨트 약속",
+           quote="실현되지 않을 수도 있는 매출 기대를 바탕으로, 이런 의무를 질 수 있다.", keyword="실현되지",
+           orig="we may enter into these obligations based on revenue expectations that may not be realized.",
+           beats=B("회사 스스로도 위험 요인에 이렇게 적었습니다. 실현되지 않을 수도 있는 매출 기대를 바탕으로, 이런 의무를 질 수 있다.",
+                   "매출은 대부분 쓴 만큼 받는 방식이라 길게 묶여 있지 않은데, 컴퓨트 약속은 여러 해에 걸쳐 있다는 겁니다. 들어올 돈은 짧고, 나갈 돈은 깁니다.")))
+    s(dict(type="analogy", chapter=3, label="비유 · 이 영상의 설명", title="빵집과 밀가루 가게",
+           left={"icon": "store", "label": "빵집: 밀가루 10년 치 주문", "sub": "앤트로픽 · 약속 9,009억"}, right={"icon": "wheat", "label": "밀가루 가게: 빵집 지분을 산다", "sub": "공급자 7곳 · 260억"},
+           result={"icon": "link", "label": "빵이 잘 팔리면 둘 다 웃고, 안 팔리면 함께 흔들린다"},
+           beats=[{"say": "동네 가게로 비유해 보겠습니다. 빵집이 밀가루 가게와 10년 치 밀가루를 사기로 약속합니다. 그리고 밀가루 가게는 그 빵집의 지분을 삽니다. 빵집이 낸 주문서가, 밀가루 가게의 매출이 되고, 그 매출의 일부가 다시 빵집의 투자금으로 돌아옵니다."},
+                  {"say": "빵이 잘 팔리면 둘 다 웃습니다. 하지만 빵이 생각만큼 팔리지 않으면, 주문서와 지분이 함께 흔들립니다. 연준이 순환 금융이라고 부른 것이 바로 이런 모양입니다.", "show_result": True}]))
+    s(dict(type="map_causal", chapter=3, look="board", label="자체 해석 · 근거: 앤트로픽 S-1/A(사모 7곳·칩·클라우드·약속), 연준 의사록(순환 금융), 야후 파이낸스 종가",
+           map={"nodes": {"ant": {"label": "앤트로픽: 약속 9,009억", "icon": "cpu", "x": 960, "y": 260},
+                          "sup": {"label": "공급자: 칩·클라우드·부품", "icon": "server", "x": 400, "y": 600},
+                          "eq": {"label": "같은 회사들: 사모 260억", "icon": "banknote", "x": 1520, "y": 600},
+                          "fed": {"label": "연준: '순환 금융' 경고", "icon": "landmark", "x": 960, "y": 880}},
+                "edges": [["ant", "sup"], ["sup", "eq"], ["eq", "ant"], ["eq", "fed"]]},
+           beats=[{"say": "여기서부터는 해석입니다. 앤트로픽은 공급자들에게 9,009억 달러어치를 사기로 약속했고, 그 공급자들은 앤트로픽의 주식을 260억 달러어치 삽니다. 파는 쪽과 사는 쪽이 같은 회사들인 고리입니다.",
+                   "reveal": ["ant", "sup", "eq"], "draw": [["ant", "sup"], ["sup", "eq"], ["eq", "ant"]], "active": "ant"},
+                  {"say": "그래서 18일의 시세가 다르게 읽힙니다. 칩을 파는 엔비디아는 내렸고, 앤트로픽의 지분을 크게 가진 아마존은 올랐습니다. 돈은 AI를 떠났다기보다, 고리 안에서 자리를 옮긴 것으로 보입니다. 다만 하루 시세로 이유를 단정할 수는 없습니다. 그리고 같은 날, 연준은 바로 이런 고리를 위험으로 적었습니다.",
+                   "reveal": ["fed"], "draw": [["eq", "fed"]], "active": "fed"}]))
+
+    # ── 4. 엇갈린 시각 ──
+    s(dict(type="chapter", chapter=4, num="4", title="공모를 보는 엇갈린 시각", icon="message-circle", look="board",
+           beats=B("이 공모를 국내 증권가는 어떻게 봤을까요?")))
+    s(dict(type="versus", chapter=4, insight=True, label=ETD + " · 의견이며 사실이 아닙니다",
+           left={"value": "변수", "label": "임정은(KB증권): 공모가가 상단을 넘을지", "icon": "circle-help"},
+           right={"value": "6/8", "label": "하장권(한화투자증권): 상장 뒤 오른 경우", "icon": "trending-up"},
+           beats=[{"say": "KB증권 임정은 연구원은 공모가가 희망 범위 상단을 넘는지가 AI 투자 심리 회복의 주요 변수라고 봤습니다. 사실이 아니라 한 사람의 시각입니다. 보도대로라면 공모가는 상단을 넘었습니다. 다만 18일 한국 장은 그 소식 전에 닫혔습니다."},
+                  {"say": "한화투자증권 하장권 연구원은 과거 해외 대형 공모 8건을 살폈습니다. 상장 전 열흘 동안 코스피는 평균 3% 내렸고, 상장 뒤 20거래일 동안은 8건 가운데 6건에서 올랐다는 겁니다. 공모로 쏠린 돈이 상장 뒤 풀린다는 해석입니다. 다만 이번 공모는 사모까지 합치면 900억 달러가 넘어, 과거와 크기가 다릅니다.",
+                   "motion": [M("8건", "count", id="ipo8", value="6 / 8", label="상장 뒤 코스피 상승", x=960, y=880, w=460, h=140, fs=52)]}]))
+    s(dict(type="quote", chapter=4, insight=True, label=ETD + " · 앤트로픽 S-1/A 위험 요인 · 의견이며 사실이 아닙니다", who="김동원 외", role="KB증권 리서치본부장",
+           quote="2028년까지 구조적인 메모리 수급 불균형이 한층 심화될 전망.", keyword="2028년",
+           layers=[{"kind": "photo", "src": "mem", "beat": 1, "side": "right", "w": 420, "top": 640, "caption": f"메모리 모듈 (예시 사진) · {cr['mem']}"}],
+           beats=B("KB증권 김동원 리서치본부장 등은, 고대역폭 메모리 생산이 늘면서 일반 메모리 공급이 막히고, AI 데이터센터에 들어가는 메모리도 늘어 2028년까지 메모리 부족이 더 심해질 것으로 봤습니다.",
+                   "이 시각을 받치는 문서가 있습니다. 앤트로픽 신고서도 고대역폭 메모리를 주로 SK하이닉스, 삼성전자, 마이크론이 만든다고 적고, 공급이 수요를 못 따라갈 수 있다는 점을 위험으로 꼽았습니다. 다만 같은 날 마이크론 주가는 1.01% 내렸습니다.")))
+
+    # ── 5. 한국 ──
+    s(dict(type="chapter", chapter=5, num="5", title="한국은 공급으로 이 고리에", icon="map-pin", look="photo", bg_src="seoul",
+           beats=B("그렇다면 한국 시장은 이 고리의 어디에 있을까요?")))
+    s(dict(type="bars", chapter=5, label="코스피 마감 보도(KBS·MBC) · 종목 한국거래소 종가(야후) · 수급 이투데이 · 18일 마감 기준", title="18일 한국 시장 (%)", unit="", emph=0, skin=DS,
+           layers=[{"kind": "locator", "at": [126.92, 37.52], "label": "서울 여의도", "beat": 0, "side": "left", "top": 170, "scale": 2.2}],
+           items=[{"label": "SK하이닉스", "value": 4.19, "text": "+4.19", "t": "SK하이닉스는"}, {"label": "삼성전자", "value": 2.31, "text": "+2.31", "t": "삼성전자는"},
+                  {"label": "코스피", "value": 1.99, "text": "+1.99", "t": "코스피는"}, {"label": "삼성바이오로직스", "value": -3.39, "text": "-3.39", "t": "삼성바이오로직스는"}],
+           beats=[{"say": "11월 18일 한국 장 마감 기준, 코스피는 1.99% 오른 5,067.44로 하루 만에 5천 선을 되찾았습니다. 나흘 연속 하락을 끊었습니다. 엔비디아 실적이 나온 뒤 처음 열린 장이었습니다.",
+                   "motion": [M("5,067.44", "count", id="ks", value="5,067.44", label="코스피 18일 종가", x=1700, y=250, w=400, h=130, fs=52)]},
+                  {"say": "SK하이닉스는 4.19% 오른 114만 4천 원, 삼성전자는 2.31% 오른 19만 4,700원이었습니다. 반면 삼성바이오로직스는 3.39% 내렸습니다. 기관이 5천억 원대를 사들였고, 외국인은 3천억 원대를 팔아 매도가 나흘째 이어졌습니다.",
+                   "motion": [M("외국인", "count", id="fx", value="3천억 원대", label="외국인 순매도 (보도)", x=1700, y=400, w=400, h=130, fs=48)]}]))
+    s(dict(type="map_causal", chapter=5, look="board", label="자체 해석 · 근거: 앤트로픽 S-1/A(HBM 제조사·사모 7곳), 한국거래소 종가, 연준 의사록",
+           map={"nodes": {"kr": {"label": "18일 한국: 실적만 반영 (5,067.44)", "icon": "map-pin", "x": 960, "y": 260},
+                          "us": {"label": "18일 밤: 엔비디아·의사록·공모가", "icon": "clock", "x": 400, "y": 600},
+                          "mem": {"label": "한국 메모리: 지분 아닌 공급으로", "icon": "hard-drive", "x": 1520, "y": 600},
+                          "today": {"label": "19일 한국 장이 처음 반영", "icon": "calendar", "x": 960, "y": 880}},
+                "edges": [["kr", "today"], ["us", "today"], ["mem", "today"]]},
+           beats=[{"say": "여기서부터는 해석입니다. 한국 장은 엔비디아 실적은 반영했지만, 그 뒤 미국에서 일어난 엔비디아의 하락과 연준 의사록, 앤트로픽 공모가는 반영하지 못했습니다. 오늘 19일 장이 이것들을 처음 받습니다.",
+                   "reveal": ["kr", "us", "today"], "draw": [["kr", "today"], ["us", "today"]], "active": "today"},
+                  {"say": "그리고 한국의 자리입니다. 앤트로픽 신고서는 SK하이닉스와 삼성전자를 메모리 제조사로 이름까지 적었지만, 주식을 사는 일곱 곳에 한국 회사는 없습니다. 마이크론은 있습니다. 한국 메모리는 이 고리에 지분이 아니라 공급으로 걸려 있습니다. 고리가 잘 돌면 주문이 늘고, 흔들리면 주문서가 먼저 흔들리는 자리입니다.",
+                   "reveal": ["mem"], "draw": [["mem", "today"]], "active": "mem"}]))
+
+    # ── 6. 볼 것 ──
+    s(dict(type="chapter", chapter=6, num="6", title="오늘과 다음 볼 것", icon="calendar", look="board",
+           beats=B("이제 이 해석을 확인할 날짜들입니다.")))
+    s(dict(type="checklist", chapter=6, label="한국거래소 · 앤트로픽 S-1/A(첫 거래는 보도) · 연준 일정(보도) · 투자 권유가 아닙니다", title="일정 (한국 시간)", x=150, text_w=900, skin=NP,
+           rows=[{"label": "19일(목) 09:00 · 한국 장 — 5천 선 · 외국인", "state": "warn", "t": "9시"},
+                 {"label": "19일(목) 밤~20일 새벽 · 앤트로픽 첫 거래 — 83달러 대비", "state": "warn", "t": "첫 거래"},
+                 {"label": "수 주 안 · 엔비디아 새 대표 · 분기 보고서", "state": "warn", "t": "새 대표"},
+                 {"label": "12월 10일(목) 새벽 · 연준 금리 결정", "state": "warn", "t": "12월"}],
+           beats=[{"say": "오늘 아침 9시 한국 장에서는 코스피가 5천 선을 지키는지, 외국인 매도가 줄어드는지를 봅니다. 한국 시간 오늘 밤부터 내일 새벽 사이에는 앤트로픽의 첫 거래 가격이 공모가 83달러와 얼마나 다른지 나옵니다.", "upto": 2},
+                  {"say": "엔비디아가 새 대표를 언제 정하는지, 그리고 12월 10일 새벽 연준이 금리를 얼마나 올리는지가 그다음입니다.", "upto": 4}]))
+    s(dict(type="checklist", chapter=6, label="팩트시트 '틀리는 경우' · 투자 권유가 아닙니다", title="이 해석이 틀리는 경우", x=150, text_w=920, skin=NP,
+           rows=[{"label": "앤트로픽 매출이 12개월 약속 707억을 넉넉히 덮으면", "state": "warn", "t": "707억"},
+                 {"label": "엔비디아가 새 대표를 정하고 주가가 반등하면", "state": "warn", "t": "새 대표"},
+                 {"label": "12월에 연준이 금리를 묶으면", "state": "warn", "t": "묶으면"}],
+           beats=[{"say": "이 해석이 틀리는 경우도 적어 둡니다. 앤트로픽이 상장 뒤 분기마다 매출을 크게 늘려, 12개월 약속 707억 달러를 넉넉히 덮는다면, 순환이라는 걱정은 성장 초기의 모양이었던 셈입니다.", "upto": 1},
+                  {"say": "엔비디아가 새 대표를 정하고 주가가 반등한다면, 이번 하락은 리더십 공백의 할인이었던 것입니다. 그리고 12월에 연준이 금리를 묶는다면, 의사록의 추가 인상은 10월 기준의 전망에 그쳤던 겁니다.", "upto": 3}]))
+    s(dict(type="kinetic", chapter=6, beats=[{"say": "돈은 떠나지 않았고, 고리 안에서 자리를 옮겼습니다.", "hit": ["떠나지", "자리를"]}]))
+    s(dict(type="outro", chapter=6, title="19일 아침까지의 소식", sub="출처는 설명란에", clip={"src": "racks", "start": 0},
+           beats=B("딱 하나만 기억한다면 이것입니다. 같은 날 연준은 AI의 순환 금융을 위험으로 적었고, 시장은 그 고리의 한가운데 있는 회사에 1조 5천억 달러를 매겼습니다. 이 고리를 계속 돌게 하는 것은, 결국 누가 내는 돈일까요?")))
+    for i, x in enumerate(S, 1):
+        x["id"] = i
+    spec = {
+        "title": "연준이 '순환 금융'을 적은 날 — 엔비디아는 빠지고 앤트로픽은 1.5조",
+        "brand": "market",
+        "zoom": "off",
+        "core_message": "11월 18일 엔비디아는 예상을 넘은 실적 다음 날 -2.89%(5거래일 -13.1%)였지만 아마존(+3.82%)·브로드컴(+3.64%)은 올랐다. 같은 날 공개된 연준 의사록은 거의 모든 위원이 추가 인상을 적절하다고 봤고, 직원 평가는 'AI 관련 회사들 사이의 순환 금융'이 손실을 키울 수 있다고 적었다. 그날 밤 공모가 83달러(보도)가 정해진 앤트로픽의 신고서에는 공모 직후 260억 달러어치 주식을 살 7곳(구글·엔비디아·AMD·브로드컴·마이크론·MS·TSMC)이 모두 칩·클라우드·부품 공급자로 나오고, 앤트로픽은 9,009억 달러(12개월 안 707억)를 사기로 약속했다 — 돈은 AI를 떠난 것이 아니라 고리 안에서 자리를 옮겼다. 한국은 18일 5천 선을 되찾았고(5,067.44), 한국 메모리는 지분이 아니라 공급으로 이 고리에 걸려 있다.",
+        "question": "엔비디아는 숫자를 넘고도 닷새째 빠졌고, 같은 날 아마존은 4% 가까이 올랐다. 돈은 AI를 떠난 걸까, 자리를 옮긴 걸까?",
+        "logic": ["여는 장면: 엔비디아 150.96(-2.89%, 5일 -13.1%) vs 아마존·브로드컴 상승 → 의사록 '순환 금융' 문장 → 공모가 83달러(보도) → 질문",
+                  "시장 한 장: 다우 -1.11·S&P -0.23(5일째)·나스닥 +0.42 — 다우는 보험(유나이티드헬스 -10.21%)·에너지 -3.27%",
+                  "1) 엔비디아: AI 회사들 막대(아마존 +3.82 … 엔비디아 -2.89) · 장 전 상승 → 하락 전환, 코어위브 -4.13 · 크레스 '사실이 아니다' + 맞대기(앤트로픽은 네 가지 칩) · 셰이퍼·골드버그: 리더십 공백",
+                  "2) 연준 의사록: 동결 10대2 · 거의 모두 추가 인상 · AI 건설 붐 물가 위험 · AI 부채 불투명 · 소수 회사 집중 · 은행은 견딜 수 있음 · 10년물 5.07%",
+                  "3) 앤트로픽: 83달러(보도) vs 70~78 · 약 685억 · 사모 260억 7곳 · 칩·클라우드 공급자 명단과 겹침 · 매출 332억 vs 약속 9,009억(약 20배)·12개월 707억 · 위험 요인 문장 · 비유(빵집·밀가루 가게) · 해석: 파는 쪽=사는 쪽 고리, 엔비디아↓ 아마존↑",
+                  "4) 엇갈린 시각: 임정은(공모가 변수) vs 하장권(상장 뒤 6/8 상승) · 김동원(메모리 불균형) ↔ 신고서 HBM 제조사 · 마이크론 -1.01",
+                  "5) 한국: 5,067.44(+1.99)·하이닉스 +4.19·삼성전자 +2.31·외국인 3천억 원대 매도 → 해석: 19일이 첫 반영, 한국 메모리는 공급으로 고리에(사모 7곳엔 없음)",
+                  "6) 볼 것: 19일 한국 장·앤트로픽 첫 거래·엔비디아 새 대표·12월 10일 연준 · 틀리는 경우 3",
+                  "마무리: 돈은 떠나지 않았고 고리 안에서 자리를 옮겼다 — 고리를 돌게 하는 돈은 누가 내나"],
+        "compare_to": [{"value": "엔비디아 150.96달러", "to": "11일 173.73달러 (-13.1%)"},
+                       {"value": "공모가 83달러", "to": "희망 범위 70~78달러"},
+                       {"value": "약속 9,009억 달러", "to": "연 환산 매출 약 443억 (약 20배)"},
+                       {"value": "12개월 안 707억", "to": "1~9월 매출 332억 (약 2.1배)"},
+                       {"value": "코스피 5,067.44", "to": "17일 4,968.48 (+1.99%)"}],
+        "analogies": [{"a": "빵집과 밀가루 가게", "b": "빵집(앤트로픽)이 밀가루 10년 치를 주문하고, 밀가루 가게(공급자)가 빵집 지분을 산다 — 잘 팔리면 둘 다 웃고 안 팔리면 함께 흔들림"},
+                      {"a": "들어올 돈은 짧고 나갈 돈은 길다", "b": "쓴 만큼 받는 매출 vs 여러 해 묶인 컴퓨트 약속"}],
+        "past_cases": [{"case": "1990년대 말~2000년 통신 장비 회사들의 '벤더 파이낸싱' — 장비 회사가 고객에게 돈을 빌려줘 자기 장비를 사게 함 (11/15 회차에서 비교)", "lesson": "같은 모양이라도 결론은 고객의 매출이 약속을 덮느냐에 달림 — 단정하지 않고 신호로 확인"},
+                       {"case": "지난 회차(11/18): 엔비디아 공급 약속 3,900억·보증 최대 1,180억 — 파는 쪽 장부", "lesson": "오늘은 사는 쪽(앤트로픽) 장부에서 같은 고리를 봄"}],
+        "glossary": [{"term": "의사록", "plain": "연준 회의에서 오간 이야기를 3주 뒤 공개하는 기록"},
+                     {"term": "순환 금융", "plain": "물건을 파는 회사가 사는 회사에 돈을 대고, 그 돈이 다시 물건값으로 돌아오는 구조"},
+                     {"term": "공모가", "plain": "상장할 때 새 주주에게 파는 주식 한 주의 값"},
+                     {"term": "동시 사모", "plain": "공모와 같은 때, 정해진 몇몇 회사에게만 따로 파는 주식"},
+                     {"term": "고대역폭 메모리(HBM)", "plain": "AI 칩 옆에 붙어 데이터를 아주 빨리 주고받는 메모리"}],
+        "scenes": S,
+        "footage": fo,
+        "package": {
+            "title": "엔비디아는 빠지고 아마존은 올랐다, 돈은 어디로 옮겼나 | 11월 19일",
+            "title_options": ["엔비디아는 빠지고 아마존은 올랐다, 돈은 어디로 옮겼나 | 11월 19일",
+                              "연준이 '순환 금융'을 적은 날 — 엔비디아·아마존·SK하이닉스 | 11월 19일",
+                              "공급자 7곳이 260억 — 앤트로픽 공모가 83달러 뒤의 다른 숫자 | 11월 19일"],
+            "title_why": ["훅(질문, 답 숨김) + 날짜 — 썸네일 C(연준 경고)와 겹치지 않게", "장면 + 다룬 종목 (2026-11-19 한때 1번으로 올렸다가 되돌림: 사용자가 말한 '3번째'는 제목이 아니라 썸네일 C)", "숫자 대비"],
+            "thumbnails": [
+                {"id": "A", "name": "서버 + 질문 + 숫자 칩 (punch)", "layout": "punch", "image": {"file": "04_assets/footage/raw/racks.jpg", "focus": [0.5, 0.5]},
+                 "top": "11월 19일 · 아침 브리핑", "lines": ["돈은 AI를 떠났나,", "자리를 옮겼나?"], "hl": ["옮겼나?"], "size": 150, "text_y": 140,
+                 "chips": [{"text": "엔비디아 ▼2.89%", "color": "down"}, {"text": "아마존 ▲3.82%", "color": "up"}],
+                 "why": ["질문 + 숫자 대비 — 제목(연준·순환 금융)과 겹치지 않게 '돈의 자리'를 물음", "사용자 2026-11-19: 더 눈에 들어오게 → 컬러 사진·큰 글씨·노란 상자·숫자 칩"]},
+                {"id": "B", "name": "숫자 대비 (dark)", "layout": "versus", "theme": "dark", "left": {"value": "260억", "label": "공급자 7곳이 살 주식"},
+                 "right": {"value": "9,009억", "label": "앤트로픽이 살 컴퓨트"}, "headline": "파는 쪽이 사는 쪽이 될 때", "hl": ["사는"], "marks": [], "why": ["숫자 둘 대비"]},
+                {"id": "C", "name": "연준 문서 (검은 바탕)", "layout": "photo", "photo_side": "full", "image": {"file": "04_assets/footage/raw/fed.jpg", "focus": [0.5, 0.5]},
+                 "top": "11월 19일 · 연준 의사록", "lines": ["'순환 금융'", "같은 날 1.5조"], "hl": ["순환"], "sub": "오늘 밤 앤트로픽 첫 거래", "size": 104, "text_y": 330, "marks": [],
+                 "why": ["공시·다음 일정", "2026-11-19 사용자: 검은 바탕 연준 썸네일로 (유튜브 적용)"]}]},
+    }
+    (P / "02_script" / "hybrid.json").write_text(json.dumps(spec, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(P, len(S))
+
+
+if __name__ == "__main__":
+    main()

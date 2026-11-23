@@ -1,0 +1,19 @@
+# 2026-11-13 레퍼런스 분석 (docs/25 §1): 1분코딩 'AI 뉴스 위클리' — 구조·기법만 (대사·로고·썸네일 그림 복제 금지)
+id: news-desk
+name: "뉴스 데스크 카드 (한 소식 = 한 장: 순번·꼬리표·강조 제목·숫자 3칸·증거 패널)"
+status: demo
+renderer: hybrid
+skin: midnight
+format: [longform]
+owns: [newsdesk]
+scene_types: [newsdesk]
+fits:
+  brands: [market, ai, issues]
+  questions: [무슨 일, 요약, 지금 할 일, 여러 소식]
+  moods: [빠름, 실용, 차분]
+  needs: [statement, price]
+roles: [body]
+avoid: "인과·연결이 주인공인 장면(→ 인과 지도) / 한 영상 전체를 이 틀만으로 (화면 변화 4.6회/분 — 지루함) / 소식 하나뿐인 영상"
+when: "여러 소식을 차례로 — 주간 정리, 매일 브리핑의 소식 2~3개, AI 업계 위클리. 소식마다 '그래서 무엇(꼬리표)'·숫자·증거 하나"
+demo: "20261113-style-ref2"
+skill: "edit-style-news-desk"

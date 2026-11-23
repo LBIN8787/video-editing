@@ -1,0 +1,3942 @@
+{
+ "title_working": "데이터센터 규제가 반도체를 끝낸다? '8%'라는 숫자부터 보세요 | 미국 중간선거 이후",
+ "core_message": "AI 데이터센터 취소 위험은 계획의 8%, 그마저 2028년 이후 물량이다",
+ "logic": [
+  "무슨 일: 중간선거 뒤 이틀 동안 코스피 -10.98%, 외국인 6조 원 넘게 매도. 그런데 서스케하나가 본 취소 위험은 계획 용량의 8%(12GW)",
+  "왜: 주민투표 41건 중 40건에서 제한 쪽 승리, 텍사스 당선인의 모라토리엄 발언. 하지만 아직 법은 없고, 감사는 공화당 애벗이 먼저 시작",
+  "그래서: 8%는 최악의 취소이고 2028~2030년에 몰려 있음. 빅테크는 설비투자 계획을 줄이지 않았고, 걸림돌은 돈보다 짓는 속도",
+  "전에도?: 2022년 북버지니아 전력 부족 때 신규 건설이 막히자 기존 센터 공실률 0.94%. 다만 그때는 전력망 한계였고 지역도 한 곳",
+  "반론: 8%는 취소만 센 숫자이고 60GW 지연은 따로 봐야 함. 최악이면 반도체 매출 -10%. 보고서 원문 비공개, 환율·미국 반도체주 급락도 겹침",
+  "의미: 남은 질문은 '얼마나 줄어드나'보다 '언제, 어디로 옮겨 가나'. 텍사스 감사 결과, 1월 취임·회기, 빅테크 4분기 실적을 확인"
+ ],
+ "glossary": [
+  {
+   "term": "데이터센터",
+   "plain": "AI 계산을 하는 컴퓨터를 잔뜩 모아 둔 큰 건물",
+   "scene_id": 5
+  },
+  {
+   "term": "모라토리엄",
+   "plain": "새 허가나 건설을 한동안 한꺼번에 멈추는 조치",
+   "scene_id": 22
+  },
+  {
+   "term": "NDA(비밀유지계약)",
+   "plain": "협상 내용을 밖에 말하지 않기로 하는 계약",
+   "scene_id": 26
+  },
+  {
+   "term": "학습용·추론용",
+   "plain": "AI를 가르치는 데 드는 계산과 AI를 실제로 쓰는 데 드는 계산",
+   "scene_id": 32
+  },
+  {
+   "term": "GW(기가와트)",
+   "plain": "데이터센터 크기를 재는 전력 단위로, 1GW는 원전 약 1기 규모",
+   "scene_id": 35
+  },
+  {
+   "term": "인허가",
+   "plain": "건물을 짓기 전에 정부에서 받아야 하는 허락",
+   "scene_id": 37
+  },
+  {
+   "term": "설비투자",
+   "plain": "서버나 건물처럼 오래 쓰는 자산을 사는 데 쓰는 돈",
+   "scene_id": 51
+  },
+  {
+   "term": "AI 가속기",
+   "plain": "AI 계산을 빠르게 해 주는 전용 칩",
+   "scene_id": 58
+  },
+  {
+   "term": "GPU",
+   "plain": "AI 계산을 한꺼번에 많이 처리하는 칩",
+   "scene_id": 65
+  },
+  {
+   "term": "HBM",
+   "plain": "AI 칩 바로 옆에 붙어 데이터를 아주 빨리 주고받는 메모리",
+   "scene_id": 65
+  },
+  {
+   "term": "공실률",
+   "plain": "전체 자리 중에서 비어 있는 자리의 비율",
+   "scene_id": 74
+  },
+  {
+   "term": "환율",
+   "plain": "1달러를 사는 데 원화가 얼마 드는지 나타낸 값",
+   "scene_id": 86
+  },
+  {
+   "term": "관세",
+   "plain": "다른 나라에서 들어오는 물건에 매기는 세금",
+   "scene_id": 100
+  }
+ ],
+ "scenes": [
+  {
+   "id": 1,
+   "section": "hook",
+   "kind": "narration",
+   "narration": "미국 중간선거가 끝나고 이틀 동안 코스피는 약 11% 떨어졌습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 산경투데이",
+   "source": null,
+   "card": {
+    "type": "chart",
+    "title": "코스피, 선거 뒤 이틀",
+    "items": [
+     {
+      "label": "2026-11-05",
+      "value": "-5.28%",
+      "sub": "첫째 날 급락",
+      "highlight": false,
+      "icon": ""
+     },
+     {
+      "label": "2026-11-06",
+      "value": "-6.02%",
+      "sub": "둘째 날 급락",
+      "highlight": true,
+      "icon": ""
+     }
+    ],
+    "note": "11/4→11/6 이틀 누적 -10.98%",
+    "ticker": "^KS11",
+    "period": "1mo",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "11%"
+   ],
+   "visual_type": "card",
+   "beat": "number",
+   "compare_to": "선거 다음 날 11/4 종가 5,683.80 대비",
+   "visual_brief": "코스피 1개월 실제 시세 차트. 11/5, 11/6 점 표시, 11/6 빨간 강조.",
+   "image_prompt": ""
+  },
+  {
+   "id": 2,
+   "section": "hook",
+   "kind": "narration",
+   "narration": "선거 다음 날 5,683이던 코스피는 이틀 뒤 5,059까지 내려갔습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 톱스타뉴스",
+   "source": null,
+   "card": {
+    "type": "number_compare",
+    "title": "코스피 종가",
+    "items": [
+     {
+      "label": "11월 4일",
+      "value": "5,683.80",
+      "sub": "선거 다음 날",
+      "highlight": false,
+      "icon": ""
+     },
+     {
+      "label": "11월 6일",
+      "value": "5,059.69",
+      "sub": "이틀 뒤",
+      "highlight": true,
+      "icon": "trending-down"
+     }
+    ],
+    "note": "중간 11/5 종가 5,383.80",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "5,059"
+   ],
+   "visual_type": "card",
+   "beat": "number",
+   "compare_to": "11/4 종가 5,683.80",
+   "visual_brief": "큰 숫자 두 개가 차례로 등장. 오른쪽 빨간색.",
+   "image_prompt": ""
+  },
+  {
+   "id": 3,
+   "section": "hook",
+   "kind": "narration",
+   "narration": "600포인트 넘게 빠진 겁니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 톱스타뉴스",
+   "source": null,
+   "card": {
+    "type": "number_compare",
+    "title": "코스피 이틀 낙폭",
+    "items": [
+     {
+      "label": "11월 5일",
+      "value": "-300.00p",
+      "sub": "-5.28%",
+      "highlight": false,
+      "icon": "trending-down"
+     },
+     {
+      "label": "11월 6일",
+      "value": "-324.11p",
+      "sub": "-6.02%",
+      "highlight": false,
+      "icon": "trending-down"
+     },
+     {
+      "label": "이틀 합계",
+      "value": "-624.11p",
+      "sub": "-10.98%",
+      "highlight": true,
+      "icon": ""
+     }
+    ],
+    "note": "11/4 종가 5,683.80 기준",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "600포인트"
+   ],
+   "visual_type": "card",
+   "beat": "number",
+   "compare_to": "11/4 종가 대비 -624.11포인트",
+   "visual_brief": "하루 낙폭 두 개 → 합계가 마지막에 빨간색으로.",
+   "image_prompt": ""
+  },
+  {
+   "id": 4,
+   "section": "hook",
+   "kind": "narration",
+   "narration": "그 이틀 동안 외국인은 6조 원 넘게 팔았습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 네이트",
+   "source": {
+    "url": "https://m.news.nate.com/view/20261106n23018",
+    "start": "",
+    "end": "",
+    "find": "11%",
+    "length": 4.0,
+    "query": ""
+   },
+   "card": null,
+   "emphasis": [
+    "6조 원"
+   ],
+   "visual_type": "screenshot",
+   "beat": "number",
+   "compare_to": "11/5 3.4조 + 11/6 2.77조",
+   "visual_brief": "'이틀 새 11%' 기사 헤드라인 캡처, 외국인 순매도 문장 형광펜.",
+   "image_prompt": ""
+  },
+  {
+   "id": 5,
+   "section": "hook",
+   "kind": "narration",
+   "narration": "그런데 미국 증권사 서스케하나가 AI 데이터센터의 위험을 따져 봤습니다. 데이터센터는 컴퓨터를 모아 둔 큰 건물입니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "데이터센터 = 컴퓨터를 모은 건물",
+    "items": [],
+    "note": "AI 계산은 대부분 이 건물 안에서 이뤄짐",
+    "ticker": "",
+    "period": "",
+    "icon": "server",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "컴퓨터를 모아 둔"
+   ],
+   "visual_type": "card",
+   "beat": "jargon",
+   "compare_to": "",
+   "visual_brief": "용어 풀이 카드. 서버 아이콘 한 개.",
+   "image_prompt": ""
+  },
+  {
+   "id": 6,
+   "section": "hook",
+   "kind": "narration",
+   "narration": "최악의 경우 취소될 수 있다고 본 물량은 계획의 8%입니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": {
+    "url": "https://za.investing.com/news/stock-market-news/susquehanna-sees-8-of-ai-data-center-projects-at-risk-93CH-4557351",
+    "start": "",
+    "end": "",
+    "find": "8%",
+    "length": 4.0,
+    "query": ""
+   },
+   "card": null,
+   "emphasis": [
+    "8%"
+   ],
+   "visual_type": "screenshot",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "Investing.com 'Susquehanna sees 8% of AI data center projects at risk' 헤드라인 캡처, 8% 형광펜.",
+   "image_prompt": ""
+  },
+  {
+   "id": 7,
+   "section": "hook",
+   "kind": "narration",
+   "narration": "위험은 8%인데 낙폭은 11%입니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com·산경투데이",
+   "source": null,
+   "card": {
+    "type": "number_compare",
+    "title": "위험 8% vs 낙폭 11%",
+    "items": [
+     {
+      "label": "취소 위험",
+      "value": "8%",
+      "sub": "AI DC 계획 용량 대비",
+      "highlight": false,
+      "icon": "server"
+     },
+     {
+      "label": "코스피 낙폭",
+      "value": "-11%",
+      "sub": "11/4 → 11/6 이틀",
+      "highlight": true,
+      "icon": "trending-down"
+     }
+    ],
+    "note": "정확히는 -10.98%",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "11%"
+   ],
+   "visual_type": "card",
+   "beat": "number",
+   "compare_to": "취소 위험 8%(계획 용량 대비) vs 코스피 이틀 -10.98%",
+   "visual_brief": "두 큰 숫자를 좌우로 나란히. 오른쪽 -11% 빨간색.",
+   "image_prompt": ""
+  },
+  {
+   "id": 8,
+   "section": "hook",
+   "kind": "narration",
+   "narration": "오늘 따라갈 질문은 하나입니다. 이 차이는 어디서 왔을까요?",
+   "quote_en": "",
+   "label": "2026.11.06 · 자체 정리",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "이 차이는 어디서 왔을까?",
+    "items": [],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "search",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "차이"
+   ],
+   "visual_type": "card",
+   "beat": "question",
+   "compare_to": "",
+   "visual_brief": "검은 배경 질문 한 문장.",
+   "image_prompt": ""
+  },
+  {
+   "id": 9,
+   "section": "hook",
+   "kind": "narration",
+   "narration": "선거, 8%의 크기, 빅테크의 돈, 과거 사례 순서로 따라가 보겠습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 자체 정리",
+   "source": null,
+   "card": {
+    "type": "flow",
+    "title": "오늘 따라갈 길",
+    "items": [
+     {
+      "label": "선거",
+      "value": "1",
+      "sub": "무슨 일이 있었나",
+      "highlight": false,
+      "icon": "landmark"
+     },
+     {
+      "label": "8%의 크기",
+      "value": "2",
+      "sub": "얼마나 큰가",
+      "highlight": false,
+      "icon": "percent"
+     },
+     {
+      "label": "빅테크의 돈",
+      "value": "3",
+      "sub": "멈췄나",
+      "highlight": false,
+      "icon": "dollar-sign"
+     },
+     {
+      "label": "과거 사례",
+      "value": "4",
+      "sub": "전에도 있었나",
+      "highlight": false,
+      "icon": "clock"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "과거 사례"
+   ],
+   "visual_type": "card",
+   "beat": "summary",
+   "compare_to": "",
+   "visual_brief": "네 단계 흐름도.",
+   "image_prompt": ""
+  },
+  {
+   "id": 10,
+   "section": "intro",
+   "kind": "narration",
+   "narration": "영상이 도움이 되셨다면 구독과 좋아요 부탁드립니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 자체 정리",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "구독과 좋아요",
+    "items": [],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "users",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "구독"
+   ],
+   "visual_type": "card",
+   "beat": "",
+   "compare_to": "",
+   "visual_brief": "고정 장면: 구독과 좋아요 text 카드(약 1분 15~20초 위치).",
+   "image_prompt": ""
+  },
+  {
+   "id": 11,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "먼저, 선거에서 무슨 일이 있었을까요?",
+   "quote_en": "",
+   "label": "2026.11.05 · The Next Web",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "선거에서 무슨 일이 있었나?",
+    "items": [],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "landmark",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "선거"
+   ],
+   "visual_type": "card",
+   "beat": "question",
+   "compare_to": "",
+   "visual_brief": "장 전환 질문 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 12,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "11월 3일은 미국 중간선거 날이었습니다.",
+   "quote_en": "",
+   "label": "2026.11.03 · Reuters",
+   "source": {
+    "url": "https://www.youtube.com/watch?v=LRC3L_iVICY",
+    "start": "0:11.8",
+    "end": "0:14.8",
+    "find": "",
+    "length": 3.0,
+    "query": "US midterm election 2026 polling place voters Reuters"
+   },
+   "card": null,
+   "emphasis": [
+    "중간선거"
+   ],
+   "visual_type": "source_video",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "미국 투표소 B-roll. 패널·타 채널 화면 금지.",
+   "image_prompt": ""
+  },
+  {
+   "id": 13,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "이날 데이터센터를 두고 지역 주민투표 41건이 열렸습니다.",
+   "quote_en": "",
+   "label": "2026.11.05 · The Next Web",
+   "source": null,
+   "card": {
+    "type": "number_compare",
+    "title": "데이터센터 주민투표",
+    "items": [
+     {
+      "label": "전체 투표",
+      "value": "41건",
+      "sub": "10개 주",
+      "highlight": true,
+      "icon": "users"
+     }
+    ],
+    "note": "2026.11.03 투표 기준",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "41건"
+   ],
+   "visual_type": "card",
+   "beat": "number",
+   "compare_to": "10개 주에서 열린 전체 건수",
+   "visual_brief": "숫자 41이 올라가며 등장.",
+   "image_prompt": ""
+  },
+  {
+   "id": 14,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "그중 40건에서 개발을 제한하는 쪽이 이겼습니다.",
+   "quote_en": "",
+   "label": "2026.11.05 · The Next Web",
+   "source": null,
+   "card": {
+    "type": "number_compare",
+    "title": "데이터센터 주민투표",
+    "items": [
+     {
+      "label": "전체 투표",
+      "value": "41건",
+      "sub": "10개 주",
+      "highlight": false,
+      "icon": "users"
+     },
+     {
+      "label": "제한 쪽 승리",
+      "value": "40건",
+      "sub": "오하이오 21건 최다",
+      "highlight": true,
+      "icon": "ban"
+     },
+     {
+      "label": "예외",
+      "value": "1건",
+      "sub": "노스다코타 Harwood",
+      "highlight": false,
+      "icon": "map-pin"
+     }
+    ],
+    "note": "2026.11.03 투표 기준",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "40건"
+   ],
+   "visual_type": "card",
+   "beat": "number",
+   "compare_to": "전체 41건 중 40건",
+   "visual_brief": "같은 카드에 두 칸 추가, 40건 강조.",
+   "image_prompt": ""
+  },
+  {
+   "id": 15,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "집계한 곳에 따라 37건으로 세기도 하지만, 큰 흐름은 같습니다.",
+   "quote_en": "",
+   "label": "2026.11 · GovTech",
+   "source": {
+    "url": "https://www.govtech.com/question-of-the-day/how-many-anti-data-center-measures-did-voters-approve-in-the-midterms",
+    "start": "",
+    "end": "",
+    "find": "37",
+    "length": 4.0,
+    "query": ""
+   },
+   "card": null,
+   "emphasis": [
+    "37건"
+   ],
+   "visual_type": "screenshot",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "GovTech 기사 헤드라인 캡처, 37 형광펜.",
+   "image_prompt": ""
+  },
+  {
+   "id": 16,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "텍사스에서는 지나 이노호사 후보가 주지사에 당선됐습니다.",
+   "quote_en": "",
+   "label": "2026.11.05 · Reuters",
+   "source": {
+    "url": "https://www.youtube.com/watch?v=eYjKpJ25QM0",
+    "start": "1:00.0",
+    "end": "1:04.0",
+    "find": "",
+    "length": 4.0,
+    "query": "Gina Hinojosa Texas governor elect November 2026 Reuters"
+   },
+   "card": null,
+   "emphasis": [
+    "이노호사"
+   ],
+   "visual_type": "source_video",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "이노호사 당선 관련 통신사·주요 언론 B-roll. 원래 목소리는 쓰지 않음.",
+   "image_prompt": ""
+  },
+  {
+   "id": 17,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "이노호사는 \"주민을 보호할 규칙과 법이 없다\"고 말했습니다.",
+   "quote_en": "",
+   "label": "2026.11.05 · Reuters(CNN 인터뷰)",
+   "source": null,
+   "card": {
+    "type": "headline",
+    "title": "\"주민을 보호할 규칙과 법이 없다\"",
+    "items": [
+     {
+      "label": "이노호사",
+      "value": "당선인",
+      "sub": "11/5 CNN 인터뷰",
+      "highlight": true,
+      "icon": "megaphone"
+     }
+    ],
+    "note": "no rules and laws to protect Texans",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "규칙과 법"
+   ],
+   "visual_type": "card",
+   "beat": "quote",
+   "compare_to": "",
+   "visual_brief": "발언 문장 카드, '규칙과 법' 형광펜. 영어 원문은 note 작은 글씨.",
+   "image_prompt": ""
+  },
+  {
+   "id": 18,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "그리고 보호 장치가 생길 때까지 데이터센터 일을 멈춰야 한다고 했습니다.",
+   "quote_en": "",
+   "label": "2026.11.05 · US News/Reuters",
+   "source": {
+    "url": "https://www.usnews.com/news/us/articles/2026-11-05/texas-governor-elect-says-state-will-have-laws-to-shield-citizens-from-data-centers",
+    "start": "",
+    "end": "",
+    "find": "laws to shield",
+    "length": 4.0,
+    "query": ""
+   },
+   "card": null,
+   "emphasis": [
+    "멈춰야"
+   ],
+   "visual_type": "screenshot",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "US News(Reuters) 헤드라인 캡처, 'laws to shield citizens' 형광펜.",
+   "image_prompt": ""
+  },
+  {
+   "id": 19,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "다만 이 발언과 실제 법은 따로 봐야 합니다.",
+   "quote_en": "",
+   "label": "2026.11.04 · KSAT",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "텍사스, 지금 있는 것",
+    "items": [
+     {
+      "label": "공약·발언",
+      "value": "있음",
+      "sub": "7/23 공약, 11/5 발언",
+      "highlight": true,
+      "icon": "megaphone"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "실제 법"
+   ],
+   "visual_type": "card",
+   "beat": "counter",
+   "compare_to": "",
+   "visual_brief": "표가 한 줄씩 늘어나는 첫 장면.",
+   "image_prompt": ""
+  },
+  {
+   "id": 20,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "지금 있는 것은 공약과 발언뿐이고, 시행 중인 법안은 없습니다.",
+   "quote_en": "",
+   "label": "2026.11.04 · KSAT",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "텍사스, 지금 있는 것",
+    "items": [
+     {
+      "label": "공약·발언",
+      "value": "있음",
+      "sub": "7/23 공약, 11/5 발언",
+      "highlight": false,
+      "icon": "megaphone"
+     },
+     {
+      "label": "시행 법안",
+      "value": "없음",
+      "sub": "11/6 기준",
+      "highlight": true,
+      "icon": "gavel"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "법안"
+   ],
+   "visual_type": "card",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "같은 표에 두 번째 줄 추가, 강조.",
+   "image_prompt": ""
+  },
+  {
+   "id": 21,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "새 주지사 취임은 내년 1월 19일입니다.",
+   "quote_en": "",
+   "label": "2026.11.04 · KSAT",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "텍사스, 지금 있는 것",
+    "items": [
+     {
+      "label": "공약·발언",
+      "value": "있음",
+      "sub": "7/23 공약, 11/5 발언",
+      "highlight": false,
+      "icon": "megaphone"
+     },
+     {
+      "label": "시행 법안",
+      "value": "없음",
+      "sub": "11/6 기준",
+      "highlight": false,
+      "icon": "gavel"
+     },
+     {
+      "label": "취임",
+      "value": "2027.01.19",
+      "sub": "주지사 당선인",
+      "highlight": true,
+      "icon": "calendar"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "1월 19일"
+   ],
+   "visual_type": "card",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "세 번째 줄 추가.",
+   "image_prompt": ""
+  },
+  {
+   "id": 22,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "이노호사가 말한 모라토리엄은 신규 허가를 한동안 일괄 멈추는 조치입니다.",
+   "quote_en": "",
+   "label": "2026.07.23 · Gina for Texas",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "모라토리엄 = 신규 허가 일괄 정지",
+    "items": [],
+    "note": "일정 기간 동안만 멈추는 조치",
+    "ticker": "",
+    "period": "",
+    "icon": "ban",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "모라토리엄"
+   ],
+   "visual_type": "card",
+   "beat": "jargon",
+   "compare_to": "",
+   "visual_brief": "용어 풀이 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 23,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "그런데 모라토리엄을 어디까지 적용할지는 아직 정하지 않았습니다.",
+   "quote_en": "",
+   "label": "2026.07.23 · Gina for Texas",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "텍사스, 지금 있는 것",
+    "items": [
+     {
+      "label": "공약·발언",
+      "value": "있음",
+      "sub": "7/23 공약, 11/5 발언",
+      "highlight": false,
+      "icon": "megaphone"
+     },
+     {
+      "label": "시행 법안",
+      "value": "없음",
+      "sub": "11/6 기준",
+      "highlight": false,
+      "icon": "gavel"
+     },
+     {
+      "label": "취임",
+      "value": "2027.01.19",
+      "sub": "주지사 당선인",
+      "highlight": false,
+      "icon": "calendar"
+     },
+     {
+      "label": "모라토리엄 범위",
+      "value": "미정",
+      "sub": "지역·규모 정의 없음",
+      "highlight": true,
+      "icon": "triangle-alert"
+     }
+    ],
+    "note": "출처: 캠프 보도자료, KSAT",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "어디까지"
+   ],
+   "visual_type": "card",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "표 완성. 네 번째 줄 강조.",
+   "image_prompt": ""
+  },
+  {
+   "id": 24,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "게다가 텍사스의 브레이크는 선거 전에 공화당 애벗 현 주지사가 먼저 밟았습니다.",
+   "quote_en": "",
+   "label": "2026.08.11 · Holland & Knight",
+   "source": {
+    "url": "https://www.hklaw.com/en/insights/publications/2026/08/texas-gov-abbott-directs-data-center-audit",
+    "start": "",
+    "end": "",
+    "find": "audit",
+    "length": 5.0,
+    "query": ""
+   },
+   "card": null,
+   "emphasis": [
+    "먼저"
+   ],
+   "visual_type": "screenshot",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "Holland & Knight 'Abbott directs data center audit' 제목 캡처, audit 형광펜.",
+   "image_prompt": ""
+  },
+  {
+   "id": 25,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "지난 8월 초, 전력망 연결을 기다리는 데이터센터를 모두 감사하라고 지시한 겁니다.",
+   "quote_en": "",
+   "label": "2026.08.11 · DLA Piper",
+   "source": null,
+   "card": {
+    "type": "flow",
+    "title": "텍사스 규제 연표",
+    "items": [
+     {
+      "label": "7월 23일",
+      "value": "공약",
+      "sub": "이노호사 캠프",
+      "highlight": false,
+      "icon": "megaphone"
+     },
+     {
+      "label": "8월 초",
+      "value": "감사 지시",
+      "sub": "애벗, 연결 대기 전체",
+      "highlight": true,
+      "icon": "search"
+     },
+     {
+      "label": "11월 3일",
+      "value": "선거",
+      "sub": "이노호사 당선",
+      "highlight": false,
+      "icon": "landmark"
+     },
+     {
+      "label": "2027.01.19",
+      "value": "취임",
+      "sub": "새 주지사",
+      "highlight": false,
+      "icon": "calendar"
+     }
+    ],
+    "note": "서한 날짜(8/3 또는 8/6)는 재확인 필요",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "감사"
+   ],
+   "visual_type": "card",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "연표 흐름도, 8월 초 칸 강조.",
+   "image_prompt": ""
+  },
+  {
+   "id": 26,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "업계도 움직였습니다. 열쇠말은 NDA, 협상 내용을 밖에 말하지 않기로 하는 계약입니다.",
+   "quote_en": "",
+   "label": "2026.11.05 · Gizmodo",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "NDA = 비밀유지계약",
+    "items": [],
+    "note": "여기서는 기업과 지역 공무원 사이의 계약",
+    "ticker": "",
+    "period": "",
+    "icon": "file-text",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "NDA"
+   ],
+   "visual_type": "card",
+   "beat": "jargon",
+   "compare_to": "",
+   "visual_brief": "용어 풀이 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 27,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "OpenAI는 11월 5일, 공직자와는 이런 계약을 쓰지 않겠다고 발표했습니다.",
+   "quote_en": "",
+   "label": "2026.11.05 · Gizmodo",
+   "source": {
+    "url": "https://gizmodo.com/openai-is-changing-its-tune-on-data-centers-following-electoral-wipeout-2000835718",
+    "start": "",
+    "end": "",
+    "find": "NDA",
+    "length": 5.0,
+    "query": ""
+   },
+   "card": null,
+   "emphasis": [
+    "공직자"
+   ],
+   "visual_type": "screenshot",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "Gizmodo 기사 헤드라인 캡처, NDA 문장 형광펜.",
+   "image_prompt": ""
+  },
+  {
+   "id": 28,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "하지만 이 약속은 OpenAI가 직접 소유하고 운영할 사이트에만 해당합니다.",
+   "quote_en": "",
+   "label": "2026.11 · tech-insider",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "OpenAI 약속의 범위",
+    "items": [
+     {
+      "label": "자사 소유·운영",
+      "value": "적용",
+      "sub": "앞으로 지을 곳",
+      "highlight": true,
+      "icon": "building"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "소유하고 운영할"
+   ],
+   "visual_type": "card",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "표 첫 줄.",
+   "image_prompt": ""
+  },
+  {
+   "id": 29,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "파트너 사이트는 명시하지 않았고, 지켜야 할 의무도 없습니다.",
+   "quote_en": "",
+   "label": "2026.11 · The Neuron",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "OpenAI 약속의 범위",
+    "items": [
+     {
+      "label": "자사 소유·운영",
+      "value": "적용",
+      "sub": "앞으로 지을 곳",
+      "highlight": false,
+      "icon": "building"
+     },
+     {
+      "label": "파트너 사이트",
+      "value": "명시 없음",
+      "sub": "예: Stargate 협력사",
+      "highlight": true,
+      "icon": "handshake"
+     },
+     {
+      "label": "구속력",
+      "value": "없음",
+      "sub": "입법 요청 문서",
+      "highlight": true,
+      "icon": "scale"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "의무"
+   ],
+   "visual_type": "card",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "같은 표에 두 줄 추가.",
+   "image_prompt": ""
+  },
+  {
+   "id": 30,
+   "section": "body-1",
+   "kind": "narration",
+   "narration": "정리하면, 브레이크는 밟혔지만 아직 법이 아니라 말과 약속입니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 자체 정리",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "정리: 아직은 말과 약속",
+    "items": [],
+    "note": "시행 법안 없음 · 감사는 8월부터 진행 중",
+    "ticker": "",
+    "period": "",
+    "icon": "scale",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "말과 약속"
+   ],
+   "visual_type": "card",
+   "beat": "summary",
+   "compare_to": "",
+   "visual_brief": "요약 한 문장 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 31,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "그렇다면 8%는 실제로 얼마나 클까요?",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "8%는 실제로 얼마나 큰가?",
+    "items": [],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "percent",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "8%"
+   ],
+   "visual_type": "card",
+   "beat": "question",
+   "compare_to": "",
+   "visual_brief": "장 전환 질문 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 32,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "먼저 말 두 개를 알아 두겠습니다. 학습용은 AI를 가르치는 계산, 추론용은 AI를 쓰는 계산입니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "학습용 vs 추론용",
+    "items": [
+     {
+      "label": "학습용",
+      "value": "가르치기",
+      "sub": "이번 숫자에 포함",
+      "highlight": true,
+      "icon": "brain"
+     },
+     {
+      "label": "추론용",
+      "value": "쓰기",
+      "sub": "이번 숫자에서 빠짐",
+      "highlight": false,
+      "icon": "bot"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "학습용"
+   ],
+   "visual_type": "card",
+   "beat": "jargon",
+   "compare_to": "",
+   "visual_brief": "두 줄 표.",
+   "image_prompt": ""
+  },
+  {
+   "id": 33,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "서스케하나의 숫자는 깔때기처럼 좁아집니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "flow",
+    "title": "서스케하나의 깔때기",
+    "items": [],
+    "note": "2025~2030년 학습용 AI 데이터센터",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "깔때기"
+   ],
+   "visual_type": "card",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "빈 깔때기 도식 틀만 먼저 등장.",
+   "image_prompt": ""
+  },
+  {
+   "id": 34,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "2025년부터 2030년까지 계획된 학습용 AI 데이터센터를 셌습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "서스케하나가 센 것",
+    "items": [
+     {
+      "label": "기간",
+      "value": "2025~2030",
+      "sub": "계획된 물량",
+      "highlight": false,
+      "icon": "calendar"
+     },
+     {
+      "label": "종류",
+      "value": "학습용 AI",
+      "sub": "추론용은 빠짐",
+      "highlight": true,
+      "icon": "brain"
+     },
+     {
+      "label": "기준",
+      "value": "전력 용량",
+      "sub": "건수가 아니라 크기",
+      "highlight": false,
+      "icon": "zap"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "학습용"
+   ],
+   "visual_type": "card",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "세 줄 표, 종류 줄 강조.",
+   "image_prompt": ""
+  },
+  {
+   "id": 35,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "크기는 전력 단위인 GW로 잽니다. 1GW는 원전 약 1기 규모입니다.",
+   "quote_en": "",
+   "label": "2024.09.23 · Redmond Mag",
+   "source": null,
+   "card": {
+    "type": "analogy",
+    "title": "1GW는 얼마나 클까",
+    "items": [
+     {
+      "label": "1GW",
+      "value": "1,000MW",
+      "sub": "데이터센터 전력 단위",
+      "highlight": false,
+      "icon": "zap"
+     },
+     {
+      "label": "원전 1기",
+      "value": "약 1GW",
+      "sub": "TMI 1호기 약 835MW",
+      "highlight": true,
+      "icon": "atom"
+     }
+    ],
+    "note": "원전 1기 출력은 기종마다 조금씩 다름",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "원전"
+   ],
+   "visual_type": "card",
+   "beat": "jargon",
+   "compare_to": "",
+   "visual_brief": "GW와 원전 1기를 비유 카드로.",
+   "image_prompt": ""
+  },
+  {
+   "id": 36,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "계획 전체는 148GW, 원전 약 148기 규모입니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "flow",
+    "title": "서스케하나의 깔때기",
+    "items": [
+     {
+      "label": "계획 전체",
+      "value": "148GW",
+      "sub": "원전 약 148기 규모",
+      "highlight": true,
+      "icon": "server"
+     }
+    ],
+    "note": "2025~2030년 학습용 AI 데이터센터",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "148GW"
+   ],
+   "visual_type": "card",
+   "beat": "number",
+   "compare_to": "원전 약 148기 규모",
+   "visual_brief": "깔때기 첫 칸 148GW.",
+   "image_prompt": ""
+  },
+  {
+   "id": 37,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "이 중 40%인 60GW가 인허가, 그러니까 정부 허락을 기다리고 있습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "flow",
+    "title": "서스케하나의 깔때기",
+    "items": [
+     {
+      "label": "계획 전체",
+      "value": "148GW",
+      "sub": "원전 약 148기 규모",
+      "highlight": false,
+      "icon": "server"
+     },
+     {
+      "label": "인허가 대기",
+      "value": "60GW",
+      "sub": "전체의 40%",
+      "highlight": true,
+      "icon": "hourglass"
+     }
+    ],
+    "note": "인허가 = 짓기 전에 받는 정부 허락",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "60GW"
+   ],
+   "visual_type": "card",
+   "beat": "number",
+   "compare_to": "계획 148GW의 40%",
+   "visual_brief": "깔때기 두 번째 칸 추가.",
+   "image_prompt": ""
+  },
+  {
+   "id": 38,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "최악의 경우 이 가운데 12GW가 취소될 수 있습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "flow",
+    "title": "서스케하나의 깔때기",
+    "items": [
+     {
+      "label": "계획 전체",
+      "value": "148GW",
+      "sub": "원전 약 148기 규모",
+      "highlight": false,
+      "icon": "server"
+     },
+     {
+      "label": "인허가 대기",
+      "value": "60GW",
+      "sub": "전체의 40%",
+      "highlight": false,
+      "icon": "hourglass"
+     },
+     {
+      "label": "최악 취소",
+      "value": "12GW",
+      "sub": "2028~2030년분",
+      "highlight": true,
+      "icon": "ban"
+     }
+    ],
+    "note": "2025~2030년 학습용 AI 데이터센터",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "12GW"
+   ],
+   "visual_type": "card",
+   "beat": "number",
+   "compare_to": "대기 60GW의 20%",
+   "visual_brief": "깔때기 완성, 마지막 칸 빨간색.",
+   "image_prompt": ""
+  },
+  {
+   "id": 39,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "전체의 8%, 대기 물량의 20%입니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "bars",
+    "title": "12GW는 어느 정도인가 (%)",
+    "items": [
+     {
+      "label": "전체 148GW 대비",
+      "value": "8",
+      "sub": "12÷148=8.1%",
+      "highlight": true,
+      "icon": ""
+     },
+     {
+      "label": "대기 60GW 대비",
+      "value": "20",
+      "sub": "12÷60=20%",
+      "highlight": false,
+      "icon": ""
+     }
+    ],
+    "note": "보도 숫자와 직접 계산이 일치",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "8%"
+   ],
+   "visual_type": "card",
+   "beat": "number",
+   "compare_to": "전체 148GW 대비 8%, 대기 60GW 대비 20%",
+   "visual_brief": "가로 막대 두 개가 자라며 등장.",
+   "image_prompt": ""
+  },
+  {
+   "id": 40,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "아파트 분양에 비유해 보겠습니다. 148개 동을 짓기로 했습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "analogy",
+    "title": "아파트 분양으로 보면",
+    "items": [
+     {
+      "label": "AI DC 계획",
+      "value": "148GW",
+      "sub": "2025~2030 학습용",
+      "highlight": false,
+      "icon": "server"
+     },
+     {
+      "label": "아파트 분양",
+      "value": "148개 동",
+      "sub": "짓기로 한 전체",
+      "highlight": true,
+      "icon": "building"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "148개 동"
+   ],
+   "visual_type": "card",
+   "beat": "analogy",
+   "compare_to": "",
+   "visual_brief": "실제 ≈ 비유 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 41,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "60개 동은 아직 구청 허가를 기다립니다. 최악의 경우 그중 12개 동이 취소됩니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "analogy",
+    "title": "아파트 분양으로 보면",
+    "items": [
+     {
+      "label": "최악 취소",
+      "value": "12GW",
+      "sub": "대기 60GW 중",
+      "highlight": false,
+      "icon": "ban"
+     },
+     {
+      "label": "취소되는 동",
+      "value": "12개 동",
+      "sub": "허가 대기 60개 동 중",
+      "highlight": true,
+      "icon": "building-2"
+     }
+    ],
+    "note": "비율은 실제와 같음(8.1%). 지연은 반영 안 됨",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "12개 동"
+   ],
+   "visual_type": "card",
+   "beat": "analogy",
+   "compare_to": "",
+   "visual_brief": "같은 비유 카드 이어서. note에 비유의 한계.",
+   "image_prompt": ""
+  },
+  {
+   "id": 42,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "중요한 건 '언제' 짓느냐입니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Finance for everyone",
+   "source": {
+    "url": "https://www.youtube.com/watch?v=OQQOKWVQIPM",
+    "start": "1:00.0",
+    "end": "1:03.0",
+    "find": "",
+    "length": 3.0,
+    "query": "AI data center construction site aerial footage 2026 Stargate Abilene"
+   },
+   "card": null,
+   "emphasis": [
+    "언제"
+   ],
+   "visual_type": "source_video",
+   "beat": "so_what",
+   "compare_to": "",
+   "visual_brief": "데이터센터 건설 현장 항공 B-roll.",
+   "image_prompt": ""
+  },
+  {
+   "id": 43,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "2027년 입주분은 대부분 허가를 받았습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "위험은 언제 몰려 있나",
+    "items": [
+     {
+      "label": "2027년 물량",
+      "value": "대부분 허가",
+      "sub": "가까운 충격 제한적",
+      "highlight": true,
+      "icon": "circle-check"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "대부분 허가"
+   ],
+   "visual_type": "card",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "표 첫 줄.",
+   "image_prompt": ""
+  },
+  {
+   "id": 44,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "위험은 2028년부터 2030년 사이 물량에 몰려 있습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "위험은 언제 몰려 있나",
+    "items": [
+     {
+      "label": "2027년 물량",
+      "value": "대부분 허가",
+      "sub": "가까운 충격 제한적",
+      "highlight": false,
+      "icon": "circle-check"
+     },
+     {
+      "label": "2028~2030년",
+      "value": "위험 집중",
+      "sub": "12GW 취소 가능",
+      "highlight": true,
+      "icon": "triangle-alert"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "2028년"
+   ],
+   "visual_type": "card",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "같은 표 두 번째 줄 추가, 강조.",
+   "image_prompt": ""
+  },
+  {
+   "id": 45,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "그래서 서스케하나는 2027년이 신규 설치가 가장 많은 해라는 전망을 바꾸지 않았습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": {
+    "url": "https://ng.investing.com/news/stock-market-news/susquehanna-sees-8-of-ai-data-center-projects-at-risk-93CH-2789437",
+    "start": "",
+    "end": "",
+    "find": "2027",
+    "length": 5.0,
+    "query": ""
+   },
+   "card": null,
+   "emphasis": [
+    "2027년"
+   ],
+   "visual_type": "screenshot",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "Investing.com 기사 본문 중 2027 정점 문장 형광펜.",
+   "image_prompt": ""
+  },
+  {
+   "id": 46,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "148GW에는 AI를 실제로 '쓰는' 추론용 수요도 빠져 있습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "flow",
+    "title": "서스케하나의 깔때기",
+    "items": [
+     {
+      "label": "계획 전체",
+      "value": "148GW",
+      "sub": "학습용만 셈",
+      "highlight": true,
+      "icon": "server"
+     },
+     {
+      "label": "추론용 수요",
+      "value": "빠짐",
+      "sub": "2027년부터 증가",
+      "highlight": true,
+      "icon": "bot"
+     }
+    ],
+    "note": "추론·비AI 수요가 부족분을 일부 메울 수 있음",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "추론용"
+   ],
+   "visual_type": "card",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "깔때기 옆에 '빠진 수요' 칸 추가.",
+   "image_prompt": ""
+  },
+  {
+   "id": 47,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "그래서 보고서의 결론은 \"시장이 이미 더 많이 반영했을 수 있다\"였습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com(중문판)",
+   "source": {
+    "url": "https://cn.investing.com/news/stock-market-news/article-93CH-3654140",
+    "start": "",
+    "end": "",
+    "find": "",
+    "length": 5.0,
+    "query": ""
+   },
+   "card": null,
+   "emphasis": [
+    "반영"
+   ],
+   "visual_type": "screenshot",
+   "beat": "quote",
+   "compare_to": "",
+   "visual_brief": "Investing.com 중문판 기사 결론 문장 형광펜, 한국어 번역 자막.",
+   "image_prompt": ""
+  },
+  {
+   "id": 48,
+   "section": "body-2",
+   "kind": "narration",
+   "narration": "정리하면, 취소 위험은 8%이고 그마저 2028년 이후에 몰려 있습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "number_compare",
+    "title": "정리: 8%의 크기",
+    "items": [
+     {
+      "label": "최악 취소",
+      "value": "8%",
+      "sub": "계획 148GW 대비",
+      "highlight": true,
+      "icon": "percent"
+     },
+     {
+      "label": "몰린 시기",
+      "value": "2028년~",
+      "sub": "2027년은 대부분 허가",
+      "highlight": false,
+      "icon": "calendar"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "2028년"
+   ],
+   "visual_type": "card",
+   "beat": "summary",
+   "compare_to": "",
+   "visual_brief": "요약 숫자 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 49,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "그럼 돈을 쓰는 쪽은 멈췄을까요?",
+   "quote_en": "",
+   "label": "2026.10.29 · 빅테크 실적",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "돈을 쓰는 쪽은 멈췄나?",
+    "items": [],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "dollar-sign",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "멈췄을까요"
+   ],
+   "visual_type": "card",
+   "beat": "question",
+   "compare_to": "",
+   "visual_brief": "장 전환 질문 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 50,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "선거 직전 빅테크가 내놓은 실적을 보면, 아직은 멈추지 않았습니다.",
+   "quote_en": "",
+   "label": "2026.10.29 · Amazon Web Services",
+   "source": {
+    "url": "https://www.youtube.com/watch?v=bFYDrHYDns4",
+    "start": "0:19.5",
+    "end": "0:23.5",
+    "find": "",
+    "length": 4.0,
+    "query": "AWS data center servers b-roll Amazon official"
+   },
+   "card": null,
+   "emphasis": [
+    "멈추지 않았습니다"
+   ],
+   "visual_type": "source_video",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "데이터센터 서버실 B-roll(회사 공식 채널).",
+   "image_prompt": ""
+  },
+  {
+   "id": 51,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "설비투자는 서버나 건물처럼 오래 쓰는 자산을 사는 돈입니다.",
+   "quote_en": "",
+   "label": "2026.10.28 · Alphabet SEC 8-K",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "설비투자 = 오래 쓰는 자산 사기",
+    "items": [],
+    "note": "서버, 건물, 전력 설비 등",
+    "ticker": "",
+    "period": "",
+    "icon": "factory",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "설비투자"
+   ],
+   "visual_type": "card",
+   "beat": "jargon",
+   "compare_to": "",
+   "visual_brief": "용어 풀이 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 52,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "3분기 한 분기에만 아마존이 759억 달러를 설비투자에 썼습니다.",
+   "quote_en": "",
+   "label": "2026.10.29 · Amazon 실적",
+   "source": null,
+   "card": {
+    "type": "bars",
+    "title": "3분기 설비투자 (억 달러)",
+    "items": [
+     {
+      "label": "아마존",
+      "value": "759",
+      "sub": "현금 기준",
+      "highlight": true,
+      "icon": ""
+     }
+    ],
+    "note": "CNBC는 773억 달러로 보도(집계 기준 차이)",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "759억 달러"
+   ],
+   "visual_type": "card",
+   "beat": "number",
+   "compare_to": "같은 분기 알파벳 514억·MS 452억 달러",
+   "visual_brief": "막대 하나가 자라며 등장.",
+   "image_prompt": ""
+  },
+  {
+   "id": 53,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "알파벳은 514억, 마이크로소프트는 452억 달러입니다.",
+   "quote_en": "",
+   "label": "2026.10.28 · Alphabet·Microsoft",
+   "source": null,
+   "card": {
+    "type": "bars",
+    "title": "3분기 설비투자 (억 달러)",
+    "items": [
+     {
+      "label": "아마존",
+      "value": "759",
+      "sub": "현금 기준",
+      "highlight": false,
+      "icon": ""
+     },
+     {
+      "label": "알파벳",
+      "value": "514",
+      "sub": "513.55억",
+      "highlight": true,
+      "icon": ""
+     },
+     {
+      "label": "마이크로소프트",
+      "value": "452",
+      "sub": "전년보다 약 30%↑",
+      "highlight": true,
+      "icon": ""
+     }
+    ],
+    "note": "MS는 회계연도 기준 1분기(7~9월)",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "514억"
+   ],
+   "visual_type": "card",
+   "beat": "number",
+   "compare_to": "MS는 1년 전보다 약 30% 증가",
+   "visual_brief": "같은 막대 차트에 두 막대 추가.",
+   "image_prompt": ""
+  },
+  {
+   "id": 54,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "아마존은 올해 약 2,200억 달러를 쓰겠다는 계획을 그대로 뒀습니다.",
+   "quote_en": "",
+   "label": "2026.10.29 · Seeking Alpha",
+   "source": {
+    "url": "https://seekingalpha.com/news/4622393-amazon-outlines-q3-net-sales-of-197b-202b-while-lifting-2026-cash-capex-to-about-220b",
+    "start": "",
+    "end": "",
+    "find": "$220B",
+    "length": 4.0,
+    "query": ""
+   },
+   "card": null,
+   "emphasis": [
+    "2,200억 달러"
+   ],
+   "visual_type": "screenshot",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "Seeking Alpha 헤드라인 캡처, 'about $220B' 형광펜.",
+   "image_prompt": ""
+  },
+  {
+   "id": 55,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "원화로 약 298조 5천억 원입니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 뉴스1(환산)",
+   "source": null,
+   "card": {
+    "type": "number_compare",
+    "title": "아마존 올해 설비투자",
+    "items": [
+     {
+      "label": "달러",
+      "value": "2,200억",
+      "sub": "2026년 계획",
+      "highlight": false,
+      "icon": "dollar-sign"
+     },
+     {
+      "label": "원화 환산",
+      "value": "298.5조",
+      "sub": "약 298조 5천억 원",
+      "highlight": true,
+      "icon": "banknote"
+     }
+    ],
+    "note": "원/달러 1,356.6원(11/6 종가) 기준 환산",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "298조"
+   ],
+   "visual_type": "card",
+   "beat": "number",
+   "compare_to": "2,200억 달러 × 1,356.6원(11/6 종가)",
+   "visual_brief": "달러 → 원화 두 숫자, 원화 쪽 강조.",
+   "image_prompt": ""
+  },
+  {
+   "id": 56,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "한국 정부 1년 예산의 약 41%입니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 시사뉴스(환산)",
+   "source": null,
+   "card": {
+    "type": "number_compare",
+    "title": "아마존 vs 한국 예산",
+    "items": [
+     {
+      "label": "아마존 2026",
+      "value": "298.5조",
+      "sub": "설비투자 계획",
+      "highlight": true,
+      "icon": "server"
+     },
+     {
+      "label": "한국 정부 예산",
+      "value": "727.9조",
+      "sub": "2026년",
+      "highlight": false,
+      "icon": "landmark"
+     }
+    ],
+    "note": "298.5 ÷ 727.9 ≈ 41%",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "41%"
+   ],
+   "visual_type": "card",
+   "beat": "number",
+   "compare_to": "2026년 한국 정부 예산 727.9조 원의 약 41%",
+   "visual_brief": "두 큰 숫자 비교, 아마존 쪽 강조.",
+   "image_prompt": ""
+  },
+  {
+   "id": 57,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "알파벳과 아마존은 둘 다 2027년에 더 늘리겠다고 했습니다.",
+   "quote_en": "",
+   "label": "2026.10.29 · Alphabet SEC 8-K·Amazon",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "2027년 설비투자 계획",
+    "items": [
+     {
+      "label": "알파벳",
+      "value": "증가",
+      "sub": "\"크게 늘어난다\"",
+      "highlight": true,
+      "icon": "trending-up"
+     },
+     {
+      "label": "아마존",
+      "value": "증가",
+      "sub": "\"의미 있게 늘린다\"",
+      "highlight": true,
+      "icon": "trending-up"
+     }
+    ],
+    "note": "구체 숫자는 4분기 실적에서 공개 예정",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "2027년"
+   ],
+   "visual_type": "card",
+   "beat": "fact",
+   "compare_to": "",
+   "visual_brief": "두 줄 표.",
+   "image_prompt": ""
+  },
+  {
+   "id": 58,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "재시 CEO는 AI 계산용 칩인 가속기를 \"약 14초마다 하나씩 설치한다\"고 했습니다.",
+   "quote_en": "",
+   "label": "2026.10.29 · Amazon 3분기 실적 콜",
+   "source": null,
+   "card": {
+    "type": "headline",
+    "title": "\"14초마다 AI 가속기 하나\"",
+    "items": [
+     {
+      "label": "앤디 재시",
+      "value": "아마존 CEO",
+      "sub": "3분기 실적 콜",
+      "highlight": true,
+      "icon": "microchip"
+     }
+    ],
+    "note": "가속기 = AI 계산을 빠르게 하는 칩",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "14초"
+   ],
+   "visual_type": "card",
+   "beat": "quote",
+   "compare_to": "",
+   "visual_brief": "발언 문장 카드, '14초' 형광펜. 원문 'about every 14 seconds'는 작은 글씨.",
+   "image_prompt": ""
+  },
+  {
+   "id": 59,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "그리고 \"깔자마자 고객이 다 써 버린다\"고 덧붙였습니다.",
+   "quote_en": "",
+   "label": "2026.10.30 · Motley Fool 콜 원문",
+   "source": {
+    "url": "https://www.fool.com/earnings/call-transcripts/2026/10/30/amazon-amzn-q3-2026-earnings-call-transcript/",
+    "start": "",
+    "end": "",
+    "find": "gobbling it up",
+    "length": 4.0,
+    "query": ""
+   },
+   "card": null,
+   "emphasis": [
+    "다 써 버린다"
+   ],
+   "visual_type": "screenshot",
+   "beat": "quote",
+   "compare_to": "",
+   "visual_brief": "콜 원문 페이지 캡처, 'customers are gobbling it up' 형광펜.",
+   "image_prompt": ""
+  },
+  {
+   "id": 60,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "오히려 걸림돌은 '돈'보다 '짓는 속도'에 있습니다.",
+   "quote_en": "",
+   "label": "2026.10.28 · WBNS 10TV",
+   "source": {
+    "url": "https://www.youtube.com/watch?v=VK48SgN4THM",
+    "start": "0:12.6",
+    "end": "0:15.6",
+    "find": "",
+    "length": 3.0,
+    "query": "data center construction crane b-roll Microsoft official"
+   },
+   "card": null,
+   "emphasis": [
+    "짓는 속도"
+   ],
+   "visual_type": "source_video",
+   "beat": "why",
+   "compare_to": "",
+   "visual_brief": "데이터센터 건설 크레인 B-roll.",
+   "image_prompt": ""
+  },
+  {
+   "id": 61,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "마이크로소프트는 외부 업체의 용량 공급이 늦어져, 설비투자가 예상보다 적었다고 설명했습니다.",
+   "quote_en": "",
+   "label": "2026.10.28 · Microsoft 실적 콜(Data Studios)",
+   "source": null,
+   "card": {
+    "type": "headline",
+    "title": "외부 업체 용량 공급 지연",
+    "items": [
+     {
+      "label": "MS CFO",
+      "value": "에이미 후드",
+      "sub": "FY27 1분기 콜",
+      "highlight": true,
+      "icon": "hourglass"
+     }
+    ],
+    "note": "capacity deliveries were delayed",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "늦어져"
+   ],
+   "visual_type": "card",
+   "beat": "why",
+   "compare_to": "",
+   "visual_brief": "발언 카드, '지연' 형광펜.",
+   "image_prompt": ""
+  },
+  {
+   "id": 62,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "새 카페 허가가 막히면, 이미 영업 중인 카페의 임대료가 오르는 것과 비슷합니다.",
+   "quote_en": "",
+   "label": "2023 · InsideNoVa/CBRE",
+   "source": null,
+   "card": {
+    "type": "analogy",
+    "title": "새 매장이 막히면",
+    "items": [
+     {
+      "label": "신규 센터",
+      "value": "허가 지연",
+      "sub": "기존 센터 수요↑",
+      "highlight": false,
+      "icon": "server"
+     },
+     {
+      "label": "새 카페",
+      "value": "허가 막힘",
+      "sub": "기존 카페 임대료↑",
+      "highlight": true,
+      "icon": "store"
+     }
+    ],
+    "note": "한계: 반도체 주문까지 같은 결과라는 뜻은 아님",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "임대료"
+   ],
+   "visual_type": "card",
+   "beat": "analogy",
+   "compare_to": "",
+   "visual_brief": "실제 ≈ 비유 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 63,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "그런데 원두를 대는 업체, 반도체 회사에게는 결과가 두 갈래입니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 자체 정리",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "원두 업체(반도체)의 두 갈래",
+    "items": [
+     {
+      "label": "새 매장 감소",
+      "value": "주문↓ 가능",
+      "sub": "신규 건설 지연",
+      "highlight": false,
+      "icon": "trending-down"
+     },
+     {
+      "label": "기존 매장 바쁨",
+      "value": "주문↑ 가능",
+      "sub": "가동률 상승",
+      "highlight": false,
+      "icon": "trending-up"
+     }
+    ],
+    "note": "어느 쪽인지 아직 정해지지 않음",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "두 갈래"
+   ],
+   "visual_type": "card",
+   "beat": "so_what",
+   "compare_to": "",
+   "visual_brief": "두 갈래 표, 강조 없음.",
+   "image_prompt": ""
+  },
+  {
+   "id": 64,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "새 매장이 줄면 주문도 줄 수 있습니다. 기존 매장이 바빠지면 오히려 늘 수도 있습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 자체 정리",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "원두 업체(반도체)의 두 갈래",
+    "items": [
+     {
+      "label": "새 매장 감소",
+      "value": "주문↓ 가능",
+      "sub": "신규 건설 지연",
+      "highlight": true,
+      "icon": "trending-down"
+     },
+     {
+      "label": "기존 매장 바쁨",
+      "value": "주문↑ 가능",
+      "sub": "가동률 상승",
+      "highlight": true,
+      "icon": "trending-up"
+     }
+    ],
+    "note": "어느 쪽인지 아직 정해지지 않음",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "오히려"
+   ],
+   "visual_type": "card",
+   "beat": "so_what",
+   "compare_to": "",
+   "visual_brief": "같은 표, 문장 순서대로 한 줄씩 강조.",
+   "image_prompt": ""
+  },
+  {
+   "id": 65,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "GPU는 AI 계산을 하는 칩이고, HBM은 그 옆에 붙는 고속 메모리입니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 자체 정리",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "GPU와 HBM",
+    "items": [
+     {
+      "label": "GPU",
+      "value": "AI 계산 칩",
+      "sub": "한꺼번에 많이 계산",
+      "highlight": true,
+      "icon": "cpu"
+     },
+     {
+      "label": "HBM",
+      "value": "고속 메모리",
+      "sub": "GPU 옆에 붙음",
+      "highlight": true,
+      "icon": "memory-stick"
+     }
+    ],
+    "note": "HBM은 한국 메모리 회사의 주력 제품",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "HBM"
+   ],
+   "visual_type": "card",
+   "beat": "jargon",
+   "compare_to": "",
+   "visual_brief": "두 줄 용어 표.",
+   "image_prompt": ""
+  },
+  {
+   "id": 66,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "이 흐름이 HBM 주문까지 어떻게 이어질지는 아직 확인된 데이터가 없습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 자체 정리",
+   "source": null,
+   "card": {
+    "type": "flow",
+    "title": "새로 짓기 어려우면 돈은?",
+    "items": [
+     {
+      "label": "신규 건설",
+      "value": "지연",
+      "sub": "인허가·연결 대기",
+      "highlight": false,
+      "icon": "construction"
+     },
+     {
+      "label": "기존 센터",
+      "value": "수요 집중?",
+      "sub": "임대료 상승 가능",
+      "highlight": false,
+      "icon": "server"
+     },
+     {
+      "label": "GPU·HBM 주문",
+      "value": "미확인",
+      "sub": "확인된 데이터 없음",
+      "highlight": true,
+      "icon": "microchip"
+     },
+     {
+      "label": "삼성·하이닉스",
+      "value": "미확인",
+      "sub": "확인할 지표로",
+      "highlight": false,
+      "icon": "factory"
+     }
+    ],
+    "note": "뒤로 갈수록 확인된 데이터가 없음",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "확인된 데이터"
+   ],
+   "visual_type": "card",
+   "beat": "so_what",
+   "compare_to": "",
+   "visual_brief": "돈의 흐름 도식. HBM 칸 강조, 물음표 칸은 점선.",
+   "image_prompt": ""
+  },
+  {
+   "id": 67,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "메리츠증권 김선우 연구원은 \"당장 수요 변화의 이상징후는 감지되지 않는다\"고 봤습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 파이낸셜뉴스",
+   "source": {
+    "url": "https://fnnews.com/news/202611061630147133",
+    "start": "",
+    "end": "",
+    "find": "이상징후",
+    "length": 5.0,
+    "query": ""
+   },
+   "card": null,
+   "emphasis": [
+    "이상징후"
+   ],
+   "visual_type": "screenshot",
+   "beat": "quote",
+   "compare_to": "",
+   "visual_brief": "파이낸셜뉴스 기사 캡처, '이상징후는 감지되지 않는' 문장 형광펜.",
+   "image_prompt": ""
+  },
+  {
+   "id": 68,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "다만 이것은 한 증권사의 의견입니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 파이낸셜뉴스",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "한 증권사의 의견",
+    "items": [],
+    "note": "확인된 주문 데이터는 아직 없음",
+    "ticker": "",
+    "period": "",
+    "icon": "user",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "의견"
+   ],
+   "visual_type": "card",
+   "beat": "counter",
+   "compare_to": "",
+   "visual_brief": "짧은 한 문장 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 69,
+   "section": "body-3",
+   "kind": "narration",
+   "narration": "정리하면, 돈은 아직 줄지 않았고 막힌 건 짓는 속도입니다.",
+   "quote_en": "",
+   "label": "2026.10.29 · 빅테크 실적",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "정리: 돈과 속도",
+    "items": [
+     {
+      "label": "설비투자 계획",
+      "value": "유지·증가",
+      "sub": "아마존·알파벳",
+      "highlight": false,
+      "icon": "dollar-sign"
+     },
+     {
+      "label": "짓는 속도",
+      "value": "지연",
+      "sub": "MS 외부 용량 공급",
+      "highlight": true,
+      "icon": "hourglass"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "짓는 속도"
+   ],
+   "visual_type": "card",
+   "beat": "summary",
+   "compare_to": "",
+   "visual_brief": "요약 표.",
+   "image_prompt": ""
+  },
+  {
+   "id": 70,
+   "section": "body-4",
+   "kind": "narration",
+   "narration": "전에도 이런 일이 있었을까요?",
+   "quote_en": "",
+   "label": "2022.11 · Route Fifty",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "전에도 이런 일이 있었나?",
+    "items": [],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "clock",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "전에도"
+   ],
+   "visual_type": "card",
+   "beat": "question",
+   "compare_to": "",
+   "visual_brief": "장 전환 질문 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 71,
+   "section": "body-4",
+   "kind": "narration",
+   "narration": "2022년 미국 북버지니아에서 비슷한 일이 있었습니다.",
+   "quote_en": "",
+   "label": "2022.11 · Greater Reston Living",
+   "source": {
+    "url": "https://www.youtube.com/watch?v=VVY12yzirKY",
+    "start": "0:13.5",
+    "end": "0:16.5",
+    "find": "",
+    "length": 3.0,
+    "query": "Ashburn Loudoun County data center alley aerial footage"
+   },
+   "card": null,
+   "emphasis": [
+    "북버지니아"
+   ],
+   "visual_type": "source_video",
+   "beat": "precedent",
+   "compare_to": "",
+   "visual_brief": "애시번 데이터센터 밀집 지역 항공 B-roll.",
+   "image_prompt": ""
+  },
+  {
+   "id": 72,
+   "section": "body-4",
+   "kind": "narration",
+   "narration": "그해 7월, 전력회사가 이 지역 신규 데이터센터에는 몇 년 동안 전기를 대기 어렵다고 알렸습니다.",
+   "quote_en": "",
+   "label": "2022.11 · Route Fifty",
+   "source": {
+    "url": "https://route-fifty.com/infrastructure/2022/11/county-puts-band-aids-power-shortage-pain/379369",
+    "start": "",
+    "end": "",
+    "find": "power",
+    "length": 5.0,
+    "query": ""
+   },
+   "card": null,
+   "emphasis": [
+    "전기"
+   ],
+   "visual_type": "screenshot",
+   "beat": "precedent",
+   "compare_to": "",
+   "visual_brief": "Route Fifty 기사 헤드라인 캡처, power shortage 형광펜.",
+   "image_prompt": ""
+  },
+  {
+   "id": 73,
+   "section": "body-4",
+   "kind": "narration",
+   "narration": "새로 짓는 길이 막히자, 기존 센터에 수요가 몰렸습니다.",
+   "quote_en": "",
+   "label": "2023 · InsideNoVa/CBRE",
+   "source": null,
+   "card": {
+    "type": "flow",
+    "title": "북버지니아 2022~2023",
+    "items": [
+     {
+      "label": "2022년 7월",
+      "value": "전력 경고",
+      "sub": "전력회사 Dominion",
+      "highlight": false,
+      "icon": "zap"
+     },
+     {
+      "label": "신규 건설",
+      "value": "지연",
+      "sub": "수년간 전력 부족",
+      "highlight": false,
+      "icon": "construction"
+     },
+     {
+      "label": "기존 센터",
+      "value": "수요 집중",
+      "sub": "임대료 상승",
+      "highlight": true,
+      "icon": "server"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "기존 센터"
+   ],
+   "visual_type": "card",
+   "beat": "precedent",
+   "compare_to": "",
+   "visual_brief": "흐름도 세 칸.",
+   "image_prompt": ""
+  },
+  {
+   "id": 74,
+   "section": "body-4",
+   "kind": "narration",
+   "narration": "공실률, 즉 빈 자리 비율은 2023년 상반기 0.94%였습니다.",
+   "quote_en": "",
+   "label": "2023 · InsideNoVa/CBRE",
+   "source": null,
+   "card": {
+    "type": "number_compare",
+    "title": "북버지니아 공실률",
+    "items": [
+     {
+      "label": "2022년 말",
+      "value": "1% 미만",
+      "sub": "당시 사상 최저",
+      "highlight": false,
+      "icon": "percent"
+     },
+     {
+      "label": "2023 상반기",
+      "value": "0.94%",
+      "sub": "더 낮아짐",
+      "highlight": true,
+      "icon": "warehouse"
+     }
+    ],
+    "note": "공실률 = 전체 중 빈 자리 비율",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "0.94%"
+   ],
+   "visual_type": "card",
+   "beat": "number",
+   "compare_to": "2022년 말 1% 미만보다 더 낮음",
+   "visual_brief": "큰 숫자 카드, 0.94% 강조.",
+   "image_prompt": ""
+  },
+  {
+   "id": 75,
+   "section": "body-4",
+   "kind": "narration",
+   "narration": "100칸 주차장에 빈칸이 1칸도 안 남을 만큼 꽉 찼다는 뜻입니다.",
+   "quote_en": "",
+   "label": "2023 · InsideNoVa/CBRE",
+   "source": null,
+   "card": {
+    "type": "analogy",
+    "title": "공실률 0.94%를 주차장으로",
+    "items": [
+     {
+      "label": "북버지니아",
+      "value": "0.94%",
+      "sub": "2023 상반기 공실률",
+      "highlight": false,
+      "icon": "server"
+     },
+     {
+      "label": "주차장 100칸",
+      "value": "빈칸 1칸↓",
+      "sub": "거의 꽉 찬 상태",
+      "highlight": true,
+      "icon": "car"
+     }
+    ],
+    "note": "한계: 지역 전체 평균이라 센터마다 다름",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "꽉 찼다"
+   ],
+   "visual_type": "card",
+   "beat": "analogy",
+   "compare_to": "",
+   "visual_brief": "실제 ≈ 비유 카드. 비율 0.94 : 100 유지.",
+   "image_prompt": ""
+  },
+  {
+   "id": 76,
+   "section": "body-4",
+   "kind": "narration",
+   "narration": "다만 그때와 지금은 다릅니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 자체 정리",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "그때와 지금은 다르다",
+    "items": [],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "scale",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "다릅니다"
+   ],
+   "visual_type": "card",
+   "beat": "counter",
+   "compare_to": "",
+   "visual_brief": "짧은 한 문장 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 77,
+   "section": "body-4",
+   "kind": "narration",
+   "narration": "그때 원인은 전력망이라는 물리적 한계였고, 지역도 한 곳이었습니다.",
+   "quote_en": "",
+   "label": "2022.11 · Route Fifty",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "그때 vs 지금",
+    "items": [
+     {
+      "label": "2022 원인",
+      "value": "전력망",
+      "sub": "물리적 한계",
+      "highlight": true,
+      "icon": "zap"
+     },
+     {
+      "label": "2022 지역",
+      "value": "한 곳",
+      "sub": "북버지니아",
+      "highlight": true,
+      "icon": "map-pin"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "물리적 한계"
+   ],
+   "visual_type": "card",
+   "beat": "precedent",
+   "compare_to": "",
+   "visual_brief": "표 위 두 줄.",
+   "image_prompt": ""
+  },
+  {
+   "id": 78,
+   "section": "body-4",
+   "kind": "narration",
+   "narration": "지금은 정치와 인허가 문제이고, 여러 주에 걸쳐 있습니다.",
+   "quote_en": "",
+   "label": "2026.11.05 · The Next Web",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "그때 vs 지금",
+    "items": [
+     {
+      "label": "2022 원인",
+      "value": "전력망",
+      "sub": "물리적 한계",
+      "highlight": false,
+      "icon": "zap"
+     },
+     {
+      "label": "2022 지역",
+      "value": "한 곳",
+      "sub": "북버지니아",
+      "highlight": false,
+      "icon": "map-pin"
+     },
+     {
+      "label": "지금 원인",
+      "value": "정치·인허가",
+      "sub": "선거·주민투표",
+      "highlight": true,
+      "icon": "landmark"
+     },
+     {
+      "label": "지금 지역",
+      "value": "여러 주",
+      "sub": "주민투표 10개 주",
+      "highlight": true,
+      "icon": "globe"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "여러 주"
+   ],
+   "visual_type": "card",
+   "beat": "precedent",
+   "compare_to": "",
+   "visual_brief": "같은 표에 지금 두 줄 추가.",
+   "image_prompt": ""
+  },
+  {
+   "id": 79,
+   "section": "body-4",
+   "kind": "narration",
+   "narration": "그래서 북버지니아의 결과가 이번에도 그대로 되풀이된다고 볼 수는 없습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 자체 정리",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "같은 결과라고 단정할 수 없다",
+    "items": [],
+    "note": "참고할 사례일 뿐",
+    "ticker": "",
+    "period": "",
+    "icon": "triangle-alert",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "그대로"
+   ],
+   "visual_type": "card",
+   "beat": "so_what",
+   "compare_to": "",
+   "visual_brief": "한 문장 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 80,
+   "section": "body-5",
+   "kind": "narration",
+   "narration": "반대로 생각해 보겠습니다. 8%가 전부일까요?",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "반론: 8%가 전부일까?",
+    "items": [],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "scale",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "전부"
+   ],
+   "visual_type": "card",
+   "beat": "question",
+   "compare_to": "",
+   "visual_brief": "장 전환 질문 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 81,
+   "section": "body-5",
+   "kind": "narration",
+   "narration": "8%는 '취소'만 센 숫자입니다. 대기 중인 60GW가 오래 묶이면 매출 시점이 줄줄이 밀립니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "flow",
+    "title": "서스케하나의 깔때기",
+    "items": [
+     {
+      "label": "계획 전체",
+      "value": "148GW",
+      "sub": "2025~2030 학습용",
+      "highlight": false,
+      "icon": "server"
+     },
+     {
+      "label": "인허가 대기",
+      "value": "60GW",
+      "sub": "지연 위험",
+      "highlight": true,
+      "icon": "hourglass"
+     },
+     {
+      "label": "최악 취소",
+      "value": "12GW",
+      "sub": "8%는 이것만 셈",
+      "highlight": false,
+      "icon": "ban"
+     }
+    ],
+    "note": "지연 효과는 8%보다 클 수 있음",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "60GW"
+   ],
+   "visual_type": "card",
+   "beat": "counter",
+   "compare_to": "",
+   "visual_brief": "앞의 깔때기 다시 띄우고 60GW 칸 강조.",
+   "image_prompt": ""
+  },
+  {
+   "id": 82,
+   "section": "body-5",
+   "kind": "narration",
+   "narration": "서스케하나도 최악의 경우 반도체 산업 매출이 1년 전보다 10% 줄 수 있다고 했습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "number_compare",
+    "title": "최악의 경우 두 숫자",
+    "items": [
+     {
+      "label": "취소 위험",
+      "value": "8%",
+      "sub": "계획 용량 대비",
+      "highlight": false,
+      "icon": "server"
+     },
+     {
+      "label": "반도체 매출",
+      "value": "-10%",
+      "sub": "전년 대비, 최악",
+      "highlight": true,
+      "icon": "trending-down"
+     }
+    ],
+    "note": "서스케하나 최악 시나리오",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "10%"
+   ],
+   "visual_type": "card",
+   "beat": "counter",
+   "compare_to": "전년 대비",
+   "visual_brief": "두 숫자 비교, -10% 강조.",
+   "image_prompt": ""
+  },
+  {
+   "id": 83,
+   "section": "body-5",
+   "kind": "narration",
+   "narration": "보고서 원문은 공개되지 않았고, 148GW를 어떻게 셌는지도 알 수 없습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "보고서 원문은 비공개",
+    "items": [],
+    "note": "148GW 산정 방법 미공개",
+    "ticker": "",
+    "period": "",
+    "icon": "triangle-alert",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "원문"
+   ],
+   "visual_type": "card",
+   "beat": "counter",
+   "compare_to": "",
+   "visual_brief": "경고 아이콘 한 문장 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 84,
+   "section": "body-5",
+   "kind": "narration",
+   "narration": "제한 가능성이 큰 주들이 미국 계획 용량의 45%라는 분석도 있지만, 아직 확인되지 않았습니다.",
+   "quote_en": "",
+   "label": "2026.11.05 · The Next Web",
+   "source": {
+    "url": "https://thenextweb.com/news/data-centres-us-midterms-ballot-measures",
+    "start": "",
+    "end": "",
+    "find": "45%",
+    "length": 5.0,
+    "query": ""
+   },
+   "card": null,
+   "emphasis": [
+    "확인되지 않았습니다"
+   ],
+   "visual_type": "screenshot",
+   "beat": "counter",
+   "compare_to": "",
+   "visual_brief": "TNW 기사 캡처, 45% 문장 형광펜 + '미확인' 표시.",
+   "image_prompt": ""
+  },
+  {
+   "id": 85,
+   "section": "body-5",
+   "kind": "narration",
+   "narration": "코스피가 빠진 것도 규제 하나 때문만은 아닙니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 알고보니 Algoboni",
+   "source": {
+    "url": "https://www.youtube.com/watch?v=Qghec36EHmM",
+    "start": "0:43.6",
+    "end": "0:46.6",
+    "find": "",
+    "length": 3.0,
+    "query": "코스피 급락 서킷브레이커 2026년 11월 6일 연합뉴스"
+   },
+   "card": null,
+   "emphasis": [
+    "하나"
+   ],
+   "visual_type": "source_video",
+   "beat": "counter",
+   "compare_to": "",
+   "visual_brief": "한국거래소·시세판 B-roll(주요 언론).",
+   "image_prompt": ""
+  },
+  {
+   "id": 86,
+   "section": "body-5",
+   "kind": "narration",
+   "narration": "환율은 1달러를 사는 데 원화가 얼마 드는지를 뜻합니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 뉴스1",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "환율 = 1달러의 원화 값",
+    "items": [],
+    "note": "환율이 오르면 원화 값은 떨어진 것",
+    "ticker": "",
+    "period": "",
+    "icon": "banknote",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "환율"
+   ],
+   "visual_type": "card",
+   "beat": "jargon",
+   "compare_to": "",
+   "visual_brief": "용어 풀이 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 87,
+   "section": "body-5",
+   "kind": "narration",
+   "narration": "같은 날 원/달러 환율은 14.5원 올라 1,356.6원이 됐습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 뉴스1",
+   "source": null,
+   "card": {
+    "type": "number_compare",
+    "title": "11/6 원/달러 환율",
+    "items": [
+     {
+      "label": "11월 5일",
+      "value": "1,342.1원",
+      "sub": "전날 종가(계산)",
+      "highlight": false,
+      "icon": "banknote"
+     },
+     {
+      "label": "11월 6일",
+      "value": "1,356.6원",
+      "sub": "+14.5원",
+      "highlight": true,
+      "icon": "trending-up"
+     }
+    ],
+    "note": "15:30 기준, 장중 고점 1,362.2원",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "14.5원"
+   ],
+   "visual_type": "card",
+   "beat": "number",
+   "compare_to": "전날보다 14.5원 상승",
+   "visual_brief": "두 숫자 비교.",
+   "image_prompt": ""
+  },
+  {
+   "id": 88,
+   "section": "body-5",
+   "kind": "narration",
+   "narration": "미국 반도체주 급락도 함께 겹쳤습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 톱스타뉴스",
+   "source": {
+    "url": "https://www.topstarnews.net/news/articleView.html?idxno=16270053",
+    "start": "",
+    "end": "",
+    "find": "반도체",
+    "length": 3.0,
+    "query": ""
+   },
+   "card": null,
+   "emphasis": [
+    "반도체주"
+   ],
+   "visual_type": "screenshot",
+   "beat": "counter",
+   "compare_to": "",
+   "visual_brief": "11/6 증시 기사 캡처, 미국 반도체주 급락 문장 형광펜.",
+   "image_prompt": ""
+  },
+  {
+   "id": 89,
+   "section": "body-5",
+   "kind": "narration",
+   "narration": "정리하면, 8%는 최악의 취소만 센 숫자이고, 코스피 낙폭엔 다른 이유도 섞여 있습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 자체 정리",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "정리: 반론",
+    "items": [
+     {
+      "label": "8%",
+      "value": "취소만 셈",
+      "sub": "지연은 따로",
+      "highlight": true,
+      "icon": "percent"
+     },
+     {
+      "label": "근거",
+      "value": "원문 비공개",
+      "sub": "기사 1곳 기준",
+      "highlight": false,
+      "icon": "file-text"
+     },
+     {
+      "label": "코스피 낙폭",
+      "value": "여러 원인",
+      "sub": "환율·미국 반도체",
+      "highlight": false,
+      "icon": "layers"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "다른 이유"
+   ],
+   "visual_type": "card",
+   "beat": "summary",
+   "compare_to": "",
+   "visual_brief": "요약 표.",
+   "image_prompt": ""
+  },
+  {
+   "id": 90,
+   "section": "takeaway",
+   "kind": "narration",
+   "narration": "그래서 무엇이 달라질까요?",
+   "quote_en": "",
+   "label": "2026.11.06 · 자체 정리",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "그래서 무엇이 달라지나?",
+    "items": [],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "target",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "달라질까요"
+   ],
+   "visual_type": "card",
+   "beat": "question",
+   "compare_to": "",
+   "visual_brief": "장 전환 질문 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 91,
+   "section": "takeaway",
+   "kind": "narration",
+   "narration": "취소 위험은 계획의 8%이고, 그마저 2028년 이후 물량에 몰려 있습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · Investing.com",
+   "source": null,
+   "card": {
+    "type": "number_compare",
+    "title": "핵심 한 문장",
+    "items": [
+     {
+      "label": "취소 위험",
+      "value": "8%",
+      "sub": "계획 용량 대비",
+      "highlight": true,
+      "icon": "percent"
+     },
+     {
+      "label": "몰린 시기",
+      "value": "2028년~",
+      "sub": "2027년은 대부분 허가",
+      "highlight": false,
+      "icon": "calendar"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "8%"
+   ],
+   "visual_type": "card",
+   "beat": "takeaway",
+   "compare_to": "계획 148GW 대비",
+   "visual_brief": "핵심 숫자 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 92,
+   "section": "takeaway",
+   "kind": "narration",
+   "narration": "돈을 쓰는 빅테크는 아직 계획을 줄이지 않았습니다.",
+   "quote_en": "",
+   "label": "2026.10.29 · AI Unfiltered with Thorsten Meyer",
+   "source": {
+    "url": "https://www.youtube.com/watch?v=ivIwD6iqaIc",
+    "start": "0:42.6",
+    "end": "0:45.6",
+    "find": "",
+    "length": 3.0,
+    "query": "Google data center servers b-roll official"
+   },
+   "card": null,
+   "emphasis": [
+    "줄이지 않았습니다"
+   ],
+   "visual_type": "source_video",
+   "beat": "takeaway",
+   "compare_to": "",
+   "visual_brief": "데이터센터 서버 랙 B-roll(회사 공식).",
+   "image_prompt": ""
+  },
+  {
+   "id": 93,
+   "section": "takeaway",
+   "kind": "narration",
+   "narration": "그렇다면 남은 질문은 '얼마나 줄어드나'보다 '언제, 어디로 옮겨 가나'입니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 자체 정리",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "언제, 어디로 옮겨 가나",
+    "items": [],
+    "note": "'얼마나 줄어드나'보다 먼저 볼 질문",
+    "ticker": "",
+    "period": "",
+    "icon": "map-pin",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "언제, 어디로"
+   ],
+   "visual_type": "card",
+   "beat": "takeaway",
+   "compare_to": "",
+   "visual_brief": "한 문장 카드.",
+   "image_prompt": ""
+  },
+  {
+   "id": 94,
+   "section": "outro",
+   "kind": "narration",
+   "narration": "다음에 볼 일정을 차례로 짚어 보겠습니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 자체 정리",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "다음에 볼 것",
+    "items": [],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "일정"
+   ],
+   "visual_type": "card",
+   "beat": "next",
+   "compare_to": "",
+   "visual_brief": "빈 표 틀.",
+   "image_prompt": ""
+  },
+  {
+   "id": 95,
+   "section": "outro",
+   "kind": "narration",
+   "narration": "먼저 12월로 예상되는 텍사스 전력망 감사 결과입니다. 승인되는 물량이 몇 GW인지 봅니다.",
+   "quote_en": "",
+   "label": "2026.11.04 · KSAT",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "다음에 볼 것",
+    "items": [
+     {
+      "label": "2026년 12월",
+      "value": "감사 결과",
+      "sub": "승인 GW (예상 일정)",
+      "highlight": true,
+      "icon": "search"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "12월"
+   ],
+   "visual_type": "card",
+   "beat": "next",
+   "compare_to": "",
+   "visual_brief": "표 첫 줄.",
+   "image_prompt": ""
+  },
+  {
+   "id": 96,
+   "section": "outro",
+   "kind": "narration",
+   "narration": "내년 1월 19일에는 이노호사가 취임합니다.",
+   "quote_en": "",
+   "label": "2026.11.04 · KSAT",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "다음에 볼 것",
+    "items": [
+     {
+      "label": "2026년 12월",
+      "value": "감사 결과",
+      "sub": "승인 GW (예상 일정)",
+      "highlight": false,
+      "icon": "search"
+     },
+     {
+      "label": "2027.01.19",
+      "value": "취임",
+      "sub": "이노호사 주지사",
+      "highlight": true,
+      "icon": "calendar"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "1월 19일"
+   ],
+   "visual_type": "card",
+   "beat": "next",
+   "compare_to": "",
+   "visual_brief": "두 번째 줄 추가.",
+   "image_prompt": ""
+  },
+  {
+   "id": 97,
+   "section": "outro",
+   "kind": "narration",
+   "narration": "같은 1월에는 주의회 회기도 열립니다. 법안에 모라토리엄이 어디까지 담기는지 봅니다.",
+   "quote_en": "",
+   "label": "2026.11.04 · KSAT",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "다음에 볼 것",
+    "items": [
+     {
+      "label": "2026년 12월",
+      "value": "감사 결과",
+      "sub": "승인 GW (예상 일정)",
+      "highlight": false,
+      "icon": "search"
+     },
+     {
+      "label": "2027.01.19",
+      "value": "취임",
+      "sub": "이노호사 주지사",
+      "highlight": false,
+      "icon": "calendar"
+     },
+     {
+      "label": "2027년 1월",
+      "value": "주의회 회기",
+      "sub": "개회일은 재확인 필요",
+      "highlight": true,
+      "icon": "gavel"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "모라토리엄"
+   ],
+   "visual_type": "card",
+   "beat": "next",
+   "compare_to": "",
+   "visual_brief": "세 번째 줄 추가.",
+   "image_prompt": ""
+  },
+  {
+   "id": 98,
+   "section": "outro",
+   "kind": "narration",
+   "narration": "다음은 1월 말에서 2월 초에 나올 빅테크 실적입니다.",
+   "quote_en": "",
+   "label": "2026.10.28 · Alphabet SEC 8-K",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "다음에 볼 것",
+    "items": [
+     {
+      "label": "2026년 12월",
+      "value": "감사 결과",
+      "sub": "승인 GW (예상 일정)",
+      "highlight": false,
+      "icon": "search"
+     },
+     {
+      "label": "2027.01.19",
+      "value": "취임",
+      "sub": "이노호사 주지사",
+      "highlight": false,
+      "icon": "calendar"
+     },
+     {
+      "label": "2027년 1월",
+      "value": "주의회 회기",
+      "sub": "개회일은 재확인 필요",
+      "highlight": false,
+      "icon": "gavel"
+     },
+     {
+      "label": "1월 말~2월 초",
+      "value": "4분기 실적",
+      "sub": "빅테크 설비투자",
+      "highlight": true,
+      "icon": "chart-column"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "빅테크 실적"
+   ],
+   "visual_type": "card",
+   "beat": "next",
+   "compare_to": "",
+   "visual_brief": "네 번째 줄 추가.",
+   "image_prompt": ""
+  },
+  {
+   "id": 99,
+   "section": "outro",
+   "kind": "narration",
+   "narration": "알파벳은 이때 2027년 설비투자 숫자를 밝힐 예정입니다.",
+   "quote_en": "",
+   "label": "2026.10.28 · Alphabet SEC 8-K",
+   "source": {
+    "url": "https://www.sec.gov/Archives/edgar/data/0001652044/000165204426000080/googexhibit991q32026.htm",
+    "start": "",
+    "end": "",
+    "find": "2027",
+    "length": 4.0,
+    "query": ""
+   },
+   "card": null,
+   "emphasis": [
+    "2027년"
+   ],
+   "visual_type": "screenshot",
+   "beat": "next",
+   "compare_to": "",
+   "visual_brief": "알파벳 8-K 실적 자료 캡처, 2027 설비투자 언급 문장 형광펜.",
+   "image_prompt": ""
+  },
+  {
+   "id": 100,
+   "section": "outro",
+   "kind": "narration",
+   "narration": "이달 중순에는 이달 1일부터 10일까지의 반도체 수출이 나옵니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 관세청 일정",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "다음에 볼 것",
+    "items": [
+     {
+      "label": "2026년 12월",
+      "value": "감사 결과",
+      "sub": "승인 GW (예상 일정)",
+      "highlight": false,
+      "icon": "search"
+     },
+     {
+      "label": "2027.01.19",
+      "value": "취임",
+      "sub": "이노호사 주지사",
+      "highlight": false,
+      "icon": "calendar"
+     },
+     {
+      "label": "2027년 1월",
+      "value": "주의회 회기",
+      "sub": "개회일은 재확인 필요",
+      "highlight": false,
+      "icon": "gavel"
+     },
+     {
+      "label": "1월 말~2월 초",
+      "value": "4분기 실적",
+      "sub": "빅테크 설비투자",
+      "highlight": false,
+      "icon": "chart-column"
+     },
+     {
+      "label": "11월 중순",
+      "value": "반도체 수출",
+      "sub": "관세청 1~10일 집계",
+      "highlight": true,
+      "icon": "ship"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "반도체 수출"
+   ],
+   "visual_type": "card",
+   "beat": "next",
+   "compare_to": "",
+   "visual_brief": "다섯 번째 줄 추가.",
+   "image_prompt": ""
+  },
+  {
+   "id": 101,
+   "section": "outro",
+   "kind": "narration",
+   "narration": "외국인이 다시 사는 쪽으로 돌아서는지도 함께 봅니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 자체 정리",
+   "source": null,
+   "card": {
+    "type": "table",
+    "title": "다음에 볼 것",
+    "items": [
+     {
+      "label": "2026년 12월",
+      "value": "감사 결과",
+      "sub": "승인 GW (예상 일정)",
+      "highlight": false,
+      "icon": "search"
+     },
+     {
+      "label": "2027.01.19",
+      "value": "취임",
+      "sub": "이노호사 주지사",
+      "highlight": false,
+      "icon": "calendar"
+     },
+     {
+      "label": "2027년 1월",
+      "value": "주의회 회기",
+      "sub": "개회일은 재확인 필요",
+      "highlight": false,
+      "icon": "gavel"
+     },
+     {
+      "label": "1월 말~2월 초",
+      "value": "4분기 실적",
+      "sub": "빅테크 설비투자",
+      "highlight": false,
+      "icon": "chart-column"
+     },
+     {
+      "label": "11월 중순",
+      "value": "반도체 수출",
+      "sub": "관세청 1~10일 집계",
+      "highlight": false,
+      "icon": "ship"
+     },
+     {
+      "label": "매일",
+      "value": "외국인 수급",
+      "sub": "순매수 전환 여부",
+      "highlight": true,
+      "icon": "users"
+     }
+    ],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "외국인"
+   ],
+   "visual_type": "card",
+   "beat": "next",
+   "compare_to": "",
+   "visual_brief": "표 완성, 마지막 줄 강조.",
+   "image_prompt": ""
+  },
+  {
+   "id": 102,
+   "section": "outro",
+   "kind": "narration",
+   "narration": "8% 위험에 코스피는 왜 11% 빠졌을까요. 오늘은 여기까지입니다.",
+   "quote_en": "",
+   "label": "2026.11.06 · 자체 정리",
+   "source": null,
+   "card": {
+    "type": "text",
+    "title": "8% 위험에 코스피는 왜 11% 빠졌나",
+    "items": [],
+    "note": "",
+    "ticker": "",
+    "period": "",
+    "icon": "",
+    "unit": "",
+    "start": "",
+    "end": ""
+   },
+   "emphasis": [
+    "8%"
+   ],
+   "visual_type": "card",
+   "beat": "",
+   "compare_to": "",
+   "visual_brief": "고정 장면: 영상 제목 text 카드.",
+   "image_prompt": ""
+  }
+ ]
+}

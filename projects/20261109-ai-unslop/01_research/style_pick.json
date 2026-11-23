@@ -1,0 +1,115 @@
+{
+ "base": {
+  "id": "blueprint-explainer",
+  "name": "청사진 설명 (남색 모눈 + 흰 선 구조도)",
+  "score": 6.5,
+  "why": [
+   "질문 유형 방법",
+   "분위기 미래"
+  ],
+  "skin": "blueprint",
+  "scene_types": [
+   "map_causal",
+   "analogy",
+   "bars",
+   "checklist"
+  ],
+  "status": "demo",
+  "skill": "edit-style-hybrid",
+  "demo": "20261106-hybrid-데이터센터 (skin-preview)"
+ },
+ "hook": {
+  "id": "kinetic-type",
+  "name": "키네틱 타이포 (말하는 순간 단어가 튀어나옴)",
+  "score": 6.5,
+  "why": [
+   "질문 유형 방법",
+   "분위기 실용"
+  ],
+  "skin": "kinetic-poster",
+  "scene_types": [
+   "kinetic",
+   "card_type"
+  ],
+  "status": "demo",
+  "skill": "edit-style-kinetic",
+  "demo": "20261107-style-kinetic"
+ },
+ "ending": {
+  "id": "kinetic-type",
+  "name": "키네틱 타이포 (말하는 순간 단어가 튀어나옴)",
+  "score": 6.5,
+  "why": [
+   "질문 유형 방법",
+   "분위기 실용"
+  ],
+  "skin": "kinetic-poster",
+  "scene_types": [
+   "kinetic",
+   "card_type"
+  ],
+  "status": "demo",
+  "skill": "edit-style-kinetic",
+  "demo": "20261107-style-kinetic"
+ },
+ "mix": [
+  {
+   "id": "blueprint-explainer",
+   "score": 6.5,
+   "why": [
+    "질문 유형 방법",
+    "분위기 미래"
+   ],
+   "roles": [
+    "body",
+    "whole"
+   ]
+  },
+  {
+   "id": "kinetic-type",
+   "score": 6.5,
+   "why": [
+    "질문 유형 방법",
+    "분위기 실용"
+   ],
+   "roles": [
+    "hook",
+    "ending"
+   ]
+  },
+  {
+   "id": "screen-demo",
+   "score": 6.0,
+   "why": [
+    "질문 유형 방법",
+    "분위기 실용",
+    "소스 있음(screen)"
+   ],
+   "roles": [
+    "body"
+   ]
+  },
+  {
+   "id": "hybrid-causal",
+   "score": 4.0,
+   "why": [
+    "소스 있음(footage)"
+   ],
+   "roles": [
+    "whole",
+    "body"
+   ]
+  },
+  {
+   "id": "data-report",
+   "score": 1.0,
+   "why": [
+    "소스 확인 필요(price)"
+   ],
+   "roles": [
+    "whole",
+    "body"
+   ]
+  }
+ ]
+}
