@@ -311,6 +311,7 @@ old = json.loads((OLD / "02_script" / "hybrid.json").read_text(encoding="utf-8")
 raw = "04_assets/footage/raw/"
 ART = "04_assets/thumb_art/"
 spec = {
+    "opinion_tag": False,   # 2026-11-23 사용자: "이런 왼쪽 위의 사족 빼주세요" (11-21 에도 끄라고 함)
     "title": "오픈AI 는 얼마나 버틸 수 있나 — 돈을 벌면서도 돈이 모자란 회사의 원리",
     "brand": "market", "zoom": "off",
     "core_message": "AI 모델 회사는 연산을 몇 년 치 먼저 약속하고 매출은 나중에 들어와, 매출이 늘어도 돈이 모자란다. 오픈AI 의 약정은 약 6,650억 달러(보도)로 연 매출의 약 13년 치이고, 11월 모집은 목표의 절반이었다. 누구도 도산을 단정하지 않았고, 갈리는 것은 새 돈을 언제·어떤 값에 구하느냐다. 그 약속의 반대편(오라클·코어위브·소프트뱅크·엔비디아)을 거쳐 칩과 한국 메모리 주문으로 이어진다.",

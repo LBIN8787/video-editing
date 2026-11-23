@@ -111,3 +111,12 @@
 - 받침 숫자: Silicon Data H100 지수 2.88달러(2026.10.24, 2025.12.9 2.00달러, +44%) https://www.silicondata.com/products/silicon-index?gpu=h100 · 코어위브 3분기 콜(2026.11.10) 구세대(호퍼·암페어) 가격 전 분기 대비 +30~50% (보도)
 - 어긋남 숫자: 1부 팩트시트 (매출채권 810억·DSO 64일, 지분 손상 18억, 네오클라우드 20%+ 하락 보도, 월가 5,000억 집행 0·보증 25%+ 요구 WSJ 보도)
 - 계산 (🧮 예시): GPU 100억 달러어치, 해마다 임대 매출 30억 가정 — 3년 상각 33.3억(적자 3.3억) · 6년 16.7억(흑자 13.3억) · 8년 12.5억(흑자 17.5억)
+
+## 11월 23일 보강 — 지금 쏟아지는 의심 네 가지 (사용자: "순환 금융이나 시장 자체가 무너지는건가 금리는? 조사는? … 젠슨마저 이제 떠났는걸요?")
+- ✅ 8-K(11/11): 젠슨 황 사장·CEO·이사 사임 즉시 효력, 크레스 임시 CEO(CFO 겸), 하비 존스 의장 — 사임 이유는 공시에 없음(사생활 보도는 쓰지 않음) https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/
+- ⚠️ WSJ(11/17) SEC 민사 조사 — 공시가 투자자를 오도했는지 포함, 초점 밝히지 않음 (pymnts 인용) · ⚠️ 로이터(11/20, 익명 2명) "potential accounting issues" · "The SEC declined to comment, and Nvidia didn't immediately respond." · "An SEC inquiry isn't a finding of wrongdoing…" (24/7 월스트리트) — 조사 대상 짐작하지 않음
+- ✅ 엔비디아 11/20 -14.01%, 7주 연속 하락 2008년 이후 최장 (CNBC 제목) · 반도체 지수 -10.73%
+- ✅ 연준 금융안정보고서(11/13) Box 2.2: AI 컴퓨팅 관련 차입 몫 우량 회사채 발행의 6% 미만(2023) → 약 31%(2026) · 발행 1,300억 → 6,800억 달러+ · 최대 은행 지주사 노출 1조 달러 가까이 https://www.federalreserve.gov/publications/files/financial-stability-report-20261113.pdf
+- ✅ 10월 의사록(11/18): "off-balance-sheet leasing commitments and circular financing arrangements among AI-related firms could amplify losses if returns on AI investment were to disappoint." · "almost all participants judged that … further action to raise the target range … would likely be appropriate"
+- ✅ 쿡 이사(11/20): "The current stance of policy does not appear to be curtailing the AI buildout" https://www.federalreserve.gov/newsevents/speech/cook20261120a.htm · 10년물 5.05%(19일) → 4.91%(20일)
+- 🧮 금리 계산(이 채널, 예시): 100억 달러 빚 × 1%p = 해마다 1억 달러 → 8년 셈 흑자 17.5억 → 16.5억, 3년 셈 적자 3.3억 → 4.3억
