@@ -58,3 +58,5 @@
 | 2026-11-23 | 20261122-market-deep-nvidia-insight | v120 | 통과 |  |
 | 2026-11-23 | 20261122-market-deep-memory-chicken | v120 | 통과 |  |
 | 2026-11-23 | 20261122-market-deep-memory-insight | v120 | 통과 |  |
+| 2026-11-23 | 20261122-curiosity-pick2 | v121 | 통과 |  |
+| 2026-11-23 | 20261123-curiosity-fashion20 | v121 | 통과 |  |
