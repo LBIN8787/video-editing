@@ -100,7 +100,8 @@ def worktree(job: str) -> tuple[Path, str]:
     git(wt, "checkout", "-f", "-B", branch, "origin/main")   # 늘 원격 main 그대로에서 시작 (지난 실행의 미푸시 커밋은 버림)
     git(wt, "clean", "-fd", "-e", "projects/*/0[0-9]_*", check=False)   # 추적 안 되는 기획 찌꺼기만, 미디어(무시 파일)는 남김
     (wt / "LOCAL_RESULT.md").unlink(missing_ok=True)
-    (wt / "ROUTINE_STOP").unlink(missing_ok=True)
+    for f in ("ROUTINE_STOP", "DEEP_SCAN.md", "DEEP_WATCH.json"):   # 지난 차례의 단계 사이 쪽지
+        (wt / f).unlink(missing_ok=True)
     return wt, branch
 
 
@@ -271,8 +272,10 @@ def main() -> None:
         mins = (time.time() - t0) / 60
         res = "\n\n".join(results) or f"{a.job}: 보고 없음 (종료 코드 {rc}) — 로그 확인"
         first = res.strip().splitlines()[0] if res.strip() else a.job
-        if stopped_at == 0 and not rc and job.get("quiet_skip"):
-            # 첫 단계(판단)에서 '안 만듦' — 2시간마다 알림·보고 파일을 쌓지 않고 로그 한 줄만
+        qs = job.get("quiet_skip")
+        quiet = [steps[0].get("name")] if qs is True else (qs or [])
+        if stopped_at is not None and not rc and steps[stopped_at].get("name") in quiet:
+            # 훑기·판단 단계에서 멈춤(새 소재 없음·안 만듦) — 2시간마다 알림·보고 파일을 쌓지 않고 로그 한 줄만
             run.log(f"끝: {first} ({mins:.0f}분)")
             (run.home / "logs" / f"{a.job}.last.txt").write_text("\n\n".join(outs), encoding="utf-8")
             return

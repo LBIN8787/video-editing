@@ -27,8 +27,10 @@ jobs:
     time: "00:40"               # 첫 차례. repeat_hours 마다 다시 (앱 예약 cron '40 */2 * * *')
     repeat_hours: 2
     wait_for: [market-daily]    # 아침 브리핑이 도는 동안은 건너뜀 (PC·목소리 크레딧을 나눠 쓰지 않음)
-    quiet_skip: true            # 판단이 '안 만듦'이면 알림·보고 파일 없이 로그 한 줄만
+    quiet_skip: [scan, judge]   # 이 단계에서 멈추면(새 소재 없음·안 만듦) 알림·보고 파일 없이 로그 한 줄만
+    # 2026-11-24 사용자: "소재 감시는 당연히 sonnet이 하시구요" — 2시간마다 훑기는 Sonnet, 만들지 판단·검수는 Fable (후보가 있을 때만)
     steps:
+      - {name: scan,   prompt: config/local_routines/deep-watch-scan.md,   model: claude-sonnet-5-5, timeout_min: 30}
       - {name: judge,  prompt: config/local_routines/deep-watch-judge.md,  model: claude-fable-5-2, timeout_min: 40}
       - {name: make,   prompt: config/local_routines/deep-watch-make.md,   timeout_min: 200}
       - {name: review, prompt: config/local_routines/deep-watch-review.md, model: claude-fable-5-2, timeout_min: 90}

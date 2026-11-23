@@ -1,7 +1,8 @@
 '이어 읽는 시장' 심층(분석) 영상의 **소재 감시 — 2단계: 제작**입니다. 1단계(판단, Fable)가 "만든다"고 정한 소재로 한 편을 만듭니다. **유튜브에는 올리지 않습니다** — 3단계(검수, Fable)가 확인하고 올립니다.
 
 ## 0. 준비
-- 작업 폴더 맨 위 `DEEP_WATCH.json` 을 먼저 읽습니다: project·question·new_angle·person·sources·insights_to_find. 이 질문과 각도를 지킵니다(바꿔야 하면 이유를 보고에).
+- 작업 폴더 맨 위 `DEEP_WATCH.json` 을 먼저 읽습니다: project·kind·person·quote·question·new_angle·korea_tie·sources·insights_to_find·deadline. 이 질문과 각도를 지키고, **deadline 전에 공개될 수 있게** 범위를 정합니다(바꿔야 하면 이유를 보고에).
+- **이 편의 모양 (docs/63, 2026-11-24 사용자):** 출발점은 그 사람의 말 — 여는 장면은 원본 발언, 제목 후보 1번은 **이름 + 따옴표 발언**(원본에서 확인한 말 그대로). 사건형이면 '큰 날 + 이름 있는 n명은 뭐라 했나'(사람마다 원본 발언 → 근거 → 판정). 원본형이면 그 한 편을 깊게(원문 해부·말과 장부 맞대기). **끝은 한국 투자자의 종목으로 묶습니다**(`korea_tie` — "하이닉스·삼성 어쩌나", "내 엔비디아는?"처럼, 투자 권유 없이 무엇을 보면 되는지).
 - AGENTS.md, manual/README.md, **manual/09-market-daily.md**(특히 §2·§2-0·§3·§5·§6·§7·§9-1), manual/03-market.md §0-2·§0-4, docs/24-youtube-publish.md 를 읽고 그 절차를 따릅니다. 어닝콜이면 03 §0-1 어닝콜 해부.
 - 운영 분석에서 넘어온 `channels/ch-market-daily/ops/next.md`(있으면)의 '이번에 바꿔 볼 것'이 심층에 맞으면 반영합니다.
 - 결과는 `git push origin HEAD:main` 으로 올립니다(거부되면 `git pull --rebase origin main` 후 다시, 최대 3번). 같은 이름의 프로젝트가 이미 main 에 있으면 만들지 않고 보고합니다.
@@ -27,7 +28,7 @@
 4. **검사·렌더**: `python -m ytflow check <프로젝트> --upto G5` (MUST 실패 0) → `python -m ytflow hybrid <프로젝트>`. ElevenLabs 실패 → edge 면 초안 목소리 — 3단계에서 올리지 않도록 보고에 적음.
 5. **제목·썸네일**: manual/09 §7·§7-1 (심층은 날짜·'심층' 딱지·지수 띠 없음, 인물이면 `layout: person`), `thumbnail` 단계 → `05_edit/thumbnail_pick.json`. 태그 15~20개.
 6. **종합 검수 준비**: `python -m ytflow preflight <프로젝트>` 까지 돌려 둡니다(`--looked` 는 3단계가 직접 보고 붙임).
-7. **묶음**: `yt-pack <프로젝트>` → `upload <프로젝트>` → 기획 문서만 커밋해 main 에 push.
+7. **묶음**: `yt-pack <프로젝트>` → `05_edit/youtube.md` 설명란에 **원본 번호 목록과 날짜**가 있는지 확인(①②③… 사람·매체·원본 제목·공개 날짜·주소 — 없으면 hybrid.json 소스 정보를 고쳐 다시 `yt-pack`) → `upload <프로젝트>` → 기획 문서만 커밋해 main 에 push.
 
 ## 보고 (LOCAL_RESULT.md)
 첫 줄: `심층 제작 <프로젝트>: 렌더 끝 — <제목 후보 1>` (못 끝냈으면 `심층 제작 <프로젝트>: 못 끝냄 — <이유>` 로 쓰고 작업 폴더 맨 위에 `ROUTINE_STOP` 을 만듦 → 검수·공개로 넘어가지 않음).
