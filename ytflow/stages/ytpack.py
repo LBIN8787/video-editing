@@ -100,7 +100,9 @@ def run(project: str):
         elif f.get("credit") and "CC BY" in f.get("license", f.get("credit", "")):
             photos_.append(f"- {f['credit']}" + (f" {f['url']}" if f.get("url") else ""))
     extra = (["", "🎬 원본 영상 (짧은 인용)"] + clips_ if clips_ else []) + (["", "📷 사진"] + photos_ if photos_ else [])
-    desc += ["📌 챕터"] + [f"{a} {b}" for a, b in chapters] + ["", "📚 출처"] + [f"- {u}" for u in urls[:20]] + extra + ["", DISCLAIMER, " ".join("#" + re.sub(r"\s+", "", x).lstrip("#") for x in hashtags[:3])]
+    # 자료 기준일은 영상 끝 화면이 아니라 설명란에 (2026-11-23 사용자: "마지막에 ~~일까지의 자료 이런거 꼭 필요할꺼요?")
+    asof = [f"📅 자료 기준: {spec['asof']}"] if spec.get("asof") else []
+    desc += ["📌 챕터"] + [f"{a} {b}" for a, b in chapters] + ["", "📚 출처"] + asof + [f"- {u}" for u in urls[:20]] + extra + ["", DISCLAIMER, " ".join("#" + re.sub(r"\s+", "", x).lstrip("#") for x in hashtags[:3])]
     md = [f"# 유튜브 업로드 — {project}", "", "## 제목 (기본 → 테스트 및 비교 후보)"]
     md += [f"{i}. {x}" for i, x in enumerate([pk.get("title", spec.get("title", ""))] + [x for x in pk.get("title_options", []) if x != pk.get("title")], 1)]
     seeds = pk.get("tag_seeds") or [x for x in (pk.get("tags") or [])][:8]

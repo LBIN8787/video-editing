@@ -173,7 +173,7 @@ s(dict(type="checklist", chapter=5, insight=True, label="가설 · 투자 권유
              {"label": "엔비디아 메모리 약정이 줄어드나 (지금 3,900억)", "state": "warn", "t": "메모리 약정"}],
        beats=[{"say": "여기서부터는 가설입니다. 원리로 보면 볼 것은 네 가지입니다. 칩값을 받는 데 걸리는 날이 더 길어지는지, 투자한 회사의 손상이 이어지는지, 월가의 칩 금융이 실제로 집행되는지, 그리고 엔비디아의 메모리 약정이 줄어드는지입니다. 마지막 것이 한국 계좌에 가장 가까운 신호입니다.", "upto": 4}]))
 s(dict(type="kinetic", chapter=5, beats=[{"say": "순환금융은 가짜 매출이 아니라, 오늘의 주문을 몇 년 뒤의 약속으로 당겨 온 것입니다.", "hit": ["약속"]}]))
-s(dict(type="outro", chapter=5, title="11월 22일까지의 자료", sub="출처는 설명란에", clip={"src": "dc", "start": 0},
+s(dict(type="outro", chapter=5, title="출처는 설명란에", sub="", clip={"src": "dc", "start": 0},
        beats=[{"say": "딱 하나만 기억한다면 이것입니다. 칩을 파는 쪽이 사는 쪽에 돈을 대면, 오늘의 매출은 진짜여도 위험은 몇 년 뒤로 쌓입니다. 그 위험이 커지는지는 칩값을 받는 속도와, 투자한 회사의 값, 그리고 메모리 약정에서 먼저 보입니다."}]))
 
 # ── 화면 오른쪽 위 출처 줄은 출처 이름만 (2026-11-22 사용자: "오른쪽 위의 뭐 흰색바 주저리주저리 써놓은거 그냥 출처만 적던지 아예 빼던지") ──
@@ -214,7 +214,7 @@ footage = {k: v for k, v in src["footage"].items() if k in ("dc", "chips", "wafe
 footage["kress"] = {"file": "kress_cnbc_20261118.mp4", "url": "https://www.youtube.com/watch?v=Uu-v3YJSgNY", "start": "0:35.2", "end": "0:50.0",
                     "who": "콜레트 크레스", "rights": "broadcast", "credit": "CNBC Television 공식 채널 (YouTube) · 2026.11.18"}
 raw = "04_assets/footage/raw/"
-spec = {
+spec = {"asof": "2026년 11월 22일",
     "opinion_tag": False,   # 2026-11-23 사용자: "이런 왼쪽 위의 사족 빼주세요" (11-21 에도 끄라고 함)
     "title": "엔비디아 순환금융 — 칩을 파는 회사가 사는 회사에 돈을 댈 때",
     "brand": "market", "zoom": "off",

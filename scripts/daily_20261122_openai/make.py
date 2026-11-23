@@ -294,7 +294,7 @@ s(dict(type="checklist", label="가설 · 볼 것 — 오픈AI 공개 S-1, 오�
        beats=[{"say": "원리로 보면 볼 것은 네 가지입니다. 첫째, 오픈AI의 공개 상장 서류에 적힐 현금과 약정의 실제 숫자. 둘째, 오라클과 코어위브 실적에서 남은 계약이 늘어나는지, 뒤로 밀리는지.", "upto": 2},
               {"say": "셋째, 오픈AI가 신용등급을 받는지. 받으면 엔비디아의 보증이 끝나고, 스스로 빚을 낼 길이 열립니다. 넷째, 다음 모집에서 회사의 값이 유지되는지입니다. 한국 계좌에 가장 가까운 신호는 둘째입니다.", "upto": 4}]))
 s(dict(type="kinetic", beats=[{"say": "오픈AI의 문제는 돈을 못 버는 것이 아니라, 버는 속도보다 약속이 먼저 커졌다는 것입니다.", "hit": ["약속"]}]))
-s(dict(type="outro", title="11월 22일까지의 자료", sub="출처는 설명란에", clip={"src": "dc", "start": 0},
+s(dict(type="outro", title="출처는 설명란에", sub="", clip={"src": "dc", "start": 0},
        beats=[{"say": "딱 하나만 기억한다면 이것입니다. AI 회사의 돈은 먼저 나가고 나중에 들어옵니다. 그 틈을 누가, 어떤 값에 메워 주느냐에 따라 오픈AI와 그 약속의 반대편에 선 회사들의 길이 갈립니다. 이 구조를 알면, 다음 모집과 상장 소식이 어느 길을 가리키는지 스스로 읽을 수 있습니다."}]))
 
 _ch = 0
@@ -310,7 +310,7 @@ for sub in ("04_assets/footage", "01_research"):
 old = json.loads((OLD / "02_script" / "hybrid.json").read_text(encoding="utf-8"))
 raw = "04_assets/footage/raw/"
 ART = "04_assets/thumb_art/"
-spec = {
+spec = {"asof": "2026년 11월 22일",
     "opinion_tag": False,   # 2026-11-23 사용자: "이런 왼쪽 위의 사족 빼주세요" (11-21 에도 끄라고 함)
     "title": "오픈AI 는 얼마나 버틸 수 있나 — 돈을 벌면서도 돈이 모자란 회사의 원리",
     "brand": "market", "zoom": "off",
