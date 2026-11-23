@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-23T07:08:47",
- "source_hash": "edd3f1b89c6e",
+ "generated": "2026-11-23T13:33:06",
+ "source_hash": "a16ab58e088b",
  "audit": {
   "date": "2026-11-21T13:56",
   "counts": {
@@ -1007,8 +1007,8 @@
   ]
  },
  "stats": {
-  "manual_version": 119,
-  "versions": 119,
+  "manual_version": 120,
+  "versions": 120,
   "reviews": 50,
   "rejects": 31,
   "passes": 19,
@@ -1018,20 +1018,20 @@
   "sections": 217,
   "must": 30,
   "auto": 41,
-  "intents": 326,
+  "intents": 327,
   "misaligned": 0,
   "intents_reviewed": 4,
-  "conflicts": 3,
+  "conflicts": 4,
   "code": 83,
   "terms": 140,
-  "bans": 225,
-  "feedback": 244,
+  "bans": 224,
+  "feedback": 245,
   "topics": 4,
-  "episodes": 46,
+  "episodes": 48,
   "main_situations": 17,
   "tiers": {
    "principle": 55,
-   "standard": 189,
+   "standard": 188,
    "style": 28,
    "trial": 10
   },
@@ -1167,6 +1167,49 @@
      "theme": "sound",
      "pol": "-",
      "text": "- 2026-11-11 · v11 기각 — “화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌”"
+    }
+   ]
+  },
+  {
+   "theme": "background",
+   "plus": [
+    {
+     "section": "sec:04§0-7",
+     "theme": "background",
+     "pol": "+",
+     "text": "- **인물은 새로 그리지 않고 승인된 그림에서 고쳐 그린다 (2026-11-23, 세 편 D4 기각 뒤 사용자: \"일관성이 중요한데 이게 너무 떨어지네요\" → \"고쳐그리고 그냥 내 codex 즉 내 gpt구독을 이용해달란거였어\" → 칸 모음 \"통과입니다.\").** 왜: 장면마다 인물을 처음부터 그리면 기준판을 참조로 붙여도 그림 모델이 얼굴을 매번 새로 "
+    }
+   ],
+   "minus": [
+    {
+     "section": "sec:08§0-3",
+     "theme": "background",
+     "pol": "-",
+     "text": "7. **같은 화풍, 다른 연출.** 종이 배경의 인용문·지도·통계·챕터가 같은 모양으로 되풀이되지 않게, 자료의 역할에 따라 연출을 고릅니다(신문 원문은 해당 부분을 따라 읽기, 확산은 이동 경로가 변하는 지도, 두 도시 비교는 조치 날짜와 사망률을 같은 시간축에). 한 화풍을 편 전체에 쓰는 것은 괜찮습니다 — '한 스타일 40% 초과 실패' 같은 비율"
+    },
+    {
+     "section": "sec:09§7",
+     "theme": "background",
+     "pol": "-",
+     "text": "- **썸네일 후보는 서로 다른 스타일로 (작업 기준, 2026-11-22 사용자: \"저 b썸네일 스타일은 더 사용하지 마시고 썸네일도 여러 각기다른 스타일을 제시하세요\")** — 왜: 같은 배치에 사진만 바꾼 후보는 '테스트 및 비교'에서 배울 것이 없고, 고르는 사람에게도 차이가 안 보인다. 후보 3~4장은 배치부터 다르게: 사진형(`photo`, 어두"
+    },
+    {
+     "section": "sec:09§7-1",
+     "theme": "background",
+     "pol": "-",
+     "text": "3. **기본 모양 (사용자 선택 — 11/19 '검은 바탕 연준 썸네일'):** `layout: photo`, `photo_side: full` — 사건의 기관·장소·인물 사진을 꽉 채우고 **어둡게(흑백·검은 톤)**, 위에 빨간 띠(날짜 · 출처 이름, 예 \"11월 19일 · 연준 의사록\"), 큰 두 줄(핫 키워드 한 낱말만 노랑), 아래 작은 손글씨"
+    },
+    {
+     "section": "sec:12§0-1",
+     "theme": "background",
+     "pol": "-",
+     "text": "- 기록을 바탕으로 다시 그린 장면은 '재구성'이라고 화면에 표시합니다(§1). 실제 사건 당사자의 얼굴은 그리지 않고, 얼굴을 알아볼 수 있는 실제 인물 사진·영상을 질환·중독·범죄·우울 같은 부정적 맥락의 당사자처럼 쓰지 않으며, AI 로 만든 인물을 실제 기록처럼 쓰지 않습니다(영구 원칙)."
+    },
+    {
+     "section": "sec:14§2",
+     "theme": "background",
+     "pol": "-",
+     "text": "**쓰지 않는 모양:** 남색 바탕 숫자 대비(`versus` + `theme: dark`) · 노란 딱지 · 귀여운 3D 점토 캐릭터(유아틱) — 모두 2026-11-22 사용자 기각."
     }
    ]
   },
@@ -1908,32 +1951,18 @@
   },
   {
    "section": "sec:04§0-7",
-   "text": "채널의 주요 등장인물은 지우이고, 화풍 기준도 지우다 (2026-11-22 사용자: \"앞으로 이 채널의 화풍기준과 주요 등장인물을 지우로 설정할게\"). 편마다 지우가 겪고·해 보고·구경하는 이야기로 풀고, 생김새·화풍·참조 그림은 channels/ch-knowledge/channel.yaml 의 character 에 한 곳으로 둔다(둥근 얼굴·큰 눈·짧은 단발·평면 셀 채색, 참조 = 지우 기준판 refs/ch-knowledge/jiwoo_board.png + ",
-   "themes": [],
+   "text": "인물은 새로 그리지 않고 승인된 그림에서 고쳐 그린다 (2026-11-23, 세 편 D4 기각 뒤 사용자: \"일관성이 중요한데 이게 너무 떨어지네요\" → \"고쳐그리고 그냥 내 codex 즉 내 gpt구독을 이용해달란거였어\" → 칸 모음 \"통과입니다.\"). 왜: 장면마다 인물을 처음부터 그리면 기준판을 참조로 붙여도 그림 모델이 얼굴을 매번 새로 해석해, 한 편 20~40칸 가운데 몇 칸은 반드시 튄다. 주문문을 고치면 튀는 방향만 바뀐다(날카롭게 → 귀엽게 → ",
+   "themes": [
+    "background",
+    "script"
+   ],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:d87de465",
+   "tier_key": "ban:6583afc6",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
    "single": true,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "section": "sec:04§0-7",
-   "text": "기준 화풍은 채널의 이전 영상 화풍(잼 편 tasting.png 의 부드러운 셀 애니메이션)이고, 실사·반실사 쪽으로 옮겨 가지 않는다 (판테온 v3 D4 기각, 2026-11-22 사용자: \"지우 얼굴이 점점 실사풍으로 되어가는데 저는 이걸 고쳐달란거였어요 분명 처음엔 이런 화풍이었잖아요\"). 왜: '그림체 통일'은 처음 화풍으로 맞추라는 뜻이었는데, v3 은 애니 톤을 원인으로 보고 화풍 참조를 빼서 얼굴이 점점 실사풍이 됐다. 어떻게: 원화 생성마다 화풍 ",
-   "themes": [],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:c6cc20e0",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
    "tier": "standard",
    "tier_by": "자동 추정",
    "tier_note": "",
@@ -5027,7 +5056,7 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "section": "sec:feedback§h366",
+   "section": "sec:feedback§h367",
    "text": "2026-11-19 · 방향·기준 요청 — “대본 단계에 \"호기심 대본은 설명·지식 문장 30% 이하\"라는 기준 이런 기준은 또 빼주세요 너무 과적합입니다. / \"설명은 이야기 속에 엮는다\"는 원리 이런식으로 원리주의적으로 가지 방법 자체를 고정하지 말아주세요”",
    "themes": [
     "script",
@@ -5047,7 +5076,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h419",
+   "section": "sec:feedback§h420",
    "text": "2026-11-09 · v3 기각 — “강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)”",
    "themes": [
     "emphasis",
@@ -5595,7 +5624,7 @@
    "key": "04",
    "file": "manual/04-curiosity.md",
    "label": "04. curiosity — 몰랐던 이유 (심리학과 현대인의 일상)",
-   "lines": 266,
+   "lines": 267,
    "versions": [
     1,
     32,
@@ -5869,7 +5898,7 @@
    "key": "feedback",
    "file": "manual/feedback-by-repo.md",
    "label": "내 피드백 — 레포별 (자동 생성: `python -m ytflow manual-graph`)",
-   "lines": 430,
+   "lines": 431,
    "versions": [
     83,
     84,
@@ -6572,7 +6601,7 @@
    "label": "화면의 네 자리 — 이야기는 삽화, 설명은 모션그래픽, 증거는 실제 자료, 마디는 검은 화면",
    "title": "0-7. 화면의 네 자리 — 이야기는 삽화, 설명은 모션그래픽, 증거는 실제 자료, 마디는 검은 화면 (v73, 2026-11-20 사용자 결정 · 모든 채널 공통 규칙은 [12 §0-1](12-visual-storytelling.md))",
    "line": 148,
-   "end": 178,
+   "end": 179,
    "tag_version": 73,
    "versions": [
     73
@@ -6591,8 +6620,8 @@
    "level": 3,
    "label": "대본은 이렇게 — 의지력 편 v16 (2026-11-21 사용자: \"이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요\")",
    "title": "0-8. 대본은 이렇게 — 의지력 편 v16 (2026-11-21 사용자: \"이대로 커밋해주세요 대본도 이런 느낌으로 앞으로 구성해주세요\")",
-   "line": 179,
-   "end": 201,
+   "line": 180,
+   "end": 202,
    "tag_version": null,
    "versions": [
     60,
@@ -6609,8 +6638,8 @@
    "level": 2,
    "label": "호기심을 '만드는' 주제의 조건 (모두 충족)",
    "title": "1. 호기심을 '만드는' 주제의 조건 (모두 충족)",
-   "line": 202,
-   "end": 214,
+   "line": 203,
+   "end": 215,
    "tag_version": null,
    "versions": [
     53
@@ -6625,8 +6654,8 @@
    "level": 2,
    "label": "주제 찾기",
    "title": "2. 주제 찾기",
-   "line": 215,
-   "end": 234,
+   "line": 216,
+   "end": 235,
    "tag_version": null,
    "versions": [
     65
@@ -6641,8 +6670,8 @@
    "level": 2,
    "label": "깊은 조사 — 다섯 층 (자세히는 `prompts/script_knowledge.md` A)",
    "title": "3. 깊은 조사 — 다섯 층 (자세히는 `prompts/script_knowledge.md` A)",
-   "line": 235,
-   "end": 237,
+   "line": 236,
+   "end": 238,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6655,8 +6684,8 @@
    "level": 2,
    "label": "대본 공식",
    "title": "4. 대본 공식",
-   "line": 238,
-   "end": 251,
+   "line": 239,
+   "end": 252,
    "tag_version": null,
    "versions": [
     34
@@ -6677,8 +6706,8 @@
    "level": 2,
    "label": "소스",
    "title": "5. 소스",
-   "line": 252,
-   "end": 254,
+   "line": 253,
+   "end": 255,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6691,8 +6720,8 @@
    "level": 2,
    "label": "포장",
    "title": "6. 포장",
-   "line": 255,
-   "end": 258,
+   "line": 256,
+   "end": 259,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -6705,8 +6734,8 @@
    "level": 2,
    "label": "이 채널만의 검사",
    "title": "7. 이 채널만의 검사",
-   "line": 259,
-   "end": 266,
+   "line": 260,
+   "end": 267,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -9494,7 +9523,7 @@
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
    "line": 273,
-   "end": 365,
+   "end": 366,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9505,15 +9534,15 @@
    ]
   },
   {
-   "id": "sec:feedback§h366",
+   "id": "sec:feedback§h367",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h366",
+   "num": "h367",
    "level": 3,
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
-   "line": 366,
-   "end": 386,
+   "line": 367,
+   "end": 387,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9522,29 +9551,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h387",
+   "id": "sec:feedback§h388",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h387",
+   "num": "h388",
    "level": 2,
    "label": "시사 — `topics/issues`",
    "title": "시사 — `topics/issues`",
-   "line": 387,
-   "end": 388,
+   "line": 388,
+   "end": 389,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h389",
+   "id": "sec:feedback§h390",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h389",
+   "num": "h390",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 389,
-   "end": 416,
+   "line": 390,
+   "end": 417,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9554,29 +9583,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h417",
+   "id": "sec:feedback§h418",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h417",
+   "num": "h418",
    "level": 2,
    "label": "AI — `topics/ai`",
    "title": "AI — `topics/ai`",
-   "line": 417,
-   "end": 418,
+   "line": 418,
+   "end": 419,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h419",
+   "id": "sec:feedback§h420",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h419",
+   "num": "h420",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 419,
-   "end": 430,
+   "line": 420,
+   "end": 431,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -16169,6 +16198,16 @@
      "ytflow/stages/hybrid.py"
     ]
    }
+  },
+  {
+   "id": "ver:120",
+   "kind": "version",
+   "v": 120,
+   "date": "2026-11-23",
+   "label": "v120",
+   "summary": "호기심: 인물은 승인 그림에서 고쳐 그리기, 인물 칸 모음은 렌더 전 사용자 통과(위임 때도)",
+   "applied": [],
+   "themes": []
   },
   {
    "id": "rev:1",
@@ -32692,7 +32731,6 @@
    "quote": "지우 얼굴이 너무 매번 달라져요 화풍 자체를 이전영상들 화풍처럼 해주세요 지우 얼굴이 점점 실사풍으로 되어가는데 저는 이걸 고쳐달란거였어요 분명 처음엔 이런 화풍이었잖아요",
    "label": "지우 얼굴이 너무 매번 달라져요 화풍 자체를 이전영상들 화풍처럼 해주세요 지우 얼굴이 점점 실사풍으로 되어가",
    "versions": [
-    3,
     106
    ],
    "date": "2026-11-22",
@@ -32700,18 +32738,11 @@
     {
      "ref": "rev:48",
      "kind": "review"
-    },
-    {
-     "ref": "sec:04§0-7",
-     "kind": "manual"
     }
    ],
-   "variants": [
-    "지우 얼굴이 점점 실사풍으로 되어가는데 저는 이걸 고쳐달란거였어요 분명 처음엔 이런 화풍이었잖아요"
-   ],
+   "variants": [],
    "member_ids": [
-    "intent:d7874fac",
-    "intent:2c4aa2fe"
+    "intent:d7874fac"
    ],
    "themes": [],
    "ann_key": "intent:d7874fac",
@@ -32719,24 +32750,6 @@
    "not_meant": [],
    "note": "",
    "readings": [
-    {
-     "ref": "ver:3",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "gate:G5",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/ytpublish.py:1",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
     {
      "ref": "ver:106",
      "status": "unreviewed",
@@ -32751,12 +32764,6 @@
     },
     {
      "ref": "doc:feedback",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "sec:04§0-7",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -32956,15 +32963,10 @@
    "quote": "거의 전구간이 전부 이전 영상들 화풍이랑 달라 실사풍에 눈은 작고 완전 다른 화풍과 캐릭터가됐어",
    "label": "거의 전구간이 전부 이전 영상들 화풍이랑 달라 실사풍에 눈은 작고 완전 다른 화풍과 캐릭터가됐어",
    "versions": [
-    3,
     110
    ],
    "date": "2026-11-22",
    "sources": [
-    {
-     "ref": "sec:04§0-7",
-     "kind": "manual"
-    },
     {
      "ref": "rev:49",
      "kind": "review"
@@ -32981,24 +32983,6 @@
    "note": "",
    "readings": [
     {
-     "ref": "ver:3",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "gate:G5",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "code:ytflow/stages/ytpublish.py:1",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
      "ref": "ver:110",
      "status": "unreviewed",
      "note": "",
@@ -33006,12 +32990,6 @@
     },
     {
      "ref": "doc:04",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "sec:04§0-7",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -33437,6 +33415,95 @@
    "annotated": false
   },
   {
+   "id": "intent:629a91d2",
+   "kind": "intent",
+   "quote": "고쳐그리고 그냥 내 codex 즉 내 gpt구독을 이용해달란거였어",
+   "label": "고쳐그리고 그냥 내 codex 즉 내 gpt구독을 이용해달란거였어",
+   "versions": [
+    73
+   ],
+   "date": "2026-11-23",
+   "sources": [
+    {
+     "ref": "sec:04§0-7",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:629a91d2"
+   ],
+   "themes": [],
+   "ann_key": "intent:629a91d2",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:73",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0-7",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0-8",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:12§0-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:05",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:10",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:11",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:README",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/backdrop.py:139",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/identity.py:74",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:65baf241",
    "kind": "intent",
    "quote": "언제 사용할지 언제 쓸지 정리해서 반영해줘",
@@ -33556,9 +33623,15 @@
    "kind": "intent",
    "quote": "일관성이 중요한데 이게 너무 떨어지네요",
    "label": "일관성이 중요한데 이게 너무 떨어지네요",
-   "versions": [],
+   "versions": [
+    73
+   ],
    "date": "2026-11-23",
    "sources": [
+    {
+     "ref": "sec:04§0-7",
+     "kind": "manual"
+    },
     {
      "ref": "fb:244",
      "kind": "feedback"
@@ -33573,7 +33646,68 @@
    "meaning": "",
    "not_meant": [],
    "note": "",
-   "readings": [],
+   "readings": [
+    {
+     "ref": "ver:73",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0-7",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:04§0-8",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:12§0-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:05",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:10",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:11",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:README",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/backdrop.py:139",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/identity.py:74",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -36827,7 +36961,7 @@
     "sec:10§1",
     "sec:10§h9",
     "sec:10§3",
-    "sec:feedback§h366",
+    "sec:feedback§h367",
     "ver:21",
     "ver:34",
     "code:ytflow/stages/hybrid.py:1671",
@@ -39638,8 +39772,8 @@
     "sec:10§h136",
     "sec:feedback§h146",
     "sec:feedback§h273",
-    "sec:feedback§h389",
-    "sec:feedback§h419",
+    "sec:feedback§h390",
+    "sec:feedback§h420",
     "ver:10",
     "ver:30",
     "ver:31",
@@ -40064,8 +40198,8 @@
     "sec:12§0-1",
     "sec:feedback§h146",
     "sec:feedback§h273",
-    "sec:feedback§h389",
-    "sec:feedback§h419",
+    "sec:feedback§h390",
+    "sec:feedback§h420",
     "ver:10",
     "ver:12",
     "rev:11",
@@ -47357,6 +47491,34 @@
    "repo_label": "호기심",
    "intent": "intent:dfaedd24",
    "tier_key": "fb:dfaedd24",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:245",
+   "kind": "feedback",
+   "date": "2026-11-23",
+   "quote": "통과입니다.",
+   "label": "통과입니다.",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "projects/20261123-curiosity-soldout",
+   "about": "",
+   "note": "D3: 세 편 지우 칸 모음(승인 그림에서 고쳐 그린 35칸) 통과",
+   "pending": false,
+   "themes": [],
+   "scope": "standard",
+   "repo": "curiosity",
+   "repo_label": "호기심",
+   "intent": null,
+   "tier_key": "fb:540faf38",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -63438,9 +63600,9 @@
     },
     {
      "project": "20261122-market-deep-nvidia-circular",
-     "scenes": 21,
+     "scenes": 22,
      "coverage": 1.0,
-     "fit": 0.43,
+     "fit": 0.41,
      "rows": [
       {
        "s": 1,
@@ -63451,7 +63613,7 @@
         "bite",
         "quote"
        ],
-       "say": "엔비디아가 돈이 모자란 고객에게 돈을 대 주며 칩을 판다는 의심, 엔비디아의 새 CEO는 지난 18일 이렇게 답했습니다."
+       "say": "엔비디아가 돈이 모자란 고객에게 돈을 대 주며 칩을 판다는 의심, 젠슨 황이 물러난 뒤 임시 CEO가 된 콜레트 크레스는 지난 18일 이렇게 답했습니다."
       },
       {
        "s": 2,
@@ -63474,10 +63636,22 @@
         "kb",
         "chart"
        ],
-       "say": "먼저 흔한 생각 세 가지를 짚고 가겠습니다. 순환금융은 가짜 매출이다. 엔비디아 매출 대부분이 자기 돈이다. 엔비디아는 현금이 많으니 위험은 없다. 셋 다 그대로"
+       "say": "그리고 이 고리는 지금 의심의 한가운데 있습니다. 11월 11일 젠슨 황이 물러났고, SEC가 엔비디아의 장부를 들여다본다는 보도가 나왔고, 연준은 의사록에 AI"
       },
       {
        "s": 4,
+       "type": "checklist",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "먼저 흔한 생각 세 가지를 짚고 가겠습니다. 순환금융은 가짜 매출이다. 엔비디아 매출 대부분이 자기 돈이다. 엔비디아는 현금이 많으니 위험은 없다. 셋 다 그대로"
+      },
+      {
+       "s": 5,
        "type": "chapter",
        "sit": "question",
        "fit": true,
@@ -63488,7 +63662,7 @@
        "say": "먼저 원리입니다. 왜 칩을 파는 회사가 칩을 사는 회사에 돈을 댈까요?"
       },
       {
-       "s": 5,
+       "s": 6,
        "type": "motionboard",
        "sit": "compare",
        "fit": false,
@@ -63500,7 +63674,7 @@
        "say": "원리는 단순합니다. 사는 쪽이 돈은 없는데 더 크고 싶을 때, 돈이 많은 파는 쪽이 대신 대 줍니다. AI 모델 회사들은 아직 버는 돈보다 쓰는 돈이 많고, 네오"
       },
       {
-       "s": 6,
+       "s": 7,
        "type": "motionboard",
        "sit": "question",
        "fit": false,
@@ -63511,7 +63685,7 @@
        "say": "그럼 가짜 매출일까요? 그렇진 않습니다. 고객이 칩값을 갚으면 매출은 진짜입니다. 엔비디아 고객의 큰 몫은 현금이 많은 빅테크이기도 합니다."
       },
       {
-       "s": 7,
+       "s": 8,
        "type": "chapter",
        "sit": "question",
        "fit": true,
@@ -63522,7 +63696,7 @@
        "say": "두 번째 생각, 엔비디아 매출 대부분이 자기 돈일까요? 크기를 숫자로 보겠습니다."
       },
       {
-       "s": 8,
+       "s": 9,
        "type": "bars",
        "sit": "metric",
        "fit": true,
@@ -63534,7 +63708,7 @@
        "say": "비상장 회사 지분은 올해 1월 223억 달러에서 10월 655억 달러로 세 배가 됐습니다. 보증은 최대 1,180억 달러, 남는 클라우드를 빌려 쓰거나 데이터센터"
       },
       {
-       "s": 9,
+       "s": 10,
        "type": "checklist",
        "sit": "earnings",
        "fit": false,
@@ -63546,7 +63720,7 @@
        "say": "그렇다고 오늘 매출 대부분이 자기 돈인 건 아닙니다. 가장 큰 보증 1,050억 달러는 데이터센터 임대가 시작돼야 효력이 생기고, 첫 단계는 2028년에서 29년"
       },
       {
-       "s": 10,
+       "s": 11,
        "type": "chapter",
        "sit": "timeline",
        "fit": true,
@@ -63557,7 +63731,7 @@
        "say": "이 구조는 처음이 아닙니다."
       },
       {
-       "s": 11,
+       "s": 12,
        "type": "bignum",
        "sit": "metric",
        "fit": true,
@@ -63569,7 +63743,7 @@
        "say": "2000년 무렵 통신 장비 회사 루슨트는 장비를 사는 신생 통신사에 돈을 빌려줬습니다. 고객 대출 약정은 1998년 23억 달러에서 2000년 2월 84억 달러까"
       },
       {
-       "s": 12,
+       "s": 13,
        "type": "checklist",
        "sit": "compare",
        "fit": false,
@@ -63581,7 +63755,7 @@
        "say": "같은 점은 두 가지입니다. 파는 쪽이 사는 쪽에 돈을 대고, 위험이 몇 곳에 몰립니다. 7월 말 엔비디아의 직접 고객 다섯 곳이 받을 돈의 70%를 차지했습니다."
       },
       {
-       "s": 13,
+       "s": 14,
        "type": "chapter",
        "sit": "question",
        "fit": true,
@@ -63592,7 +63766,7 @@
        "say": "세 번째 생각, 엔비디아는 현금이 많으니 위험이 없을까요? 고리가 약해지는 곳은 엔비디아의 현금이 아니라, 고객의 돈 사정에서 먼저 보입니다."
       },
       {
-       "s": 14,
+       "s": 15,
        "type": "bars",
        "sit": "metric",
        "fit": true,
@@ -63604,7 +63778,7 @@
        "say": "첫째, 칩값을 받는 데 시간이 더 걸립니다. 아직 받지 못한 칩값은 1월 385억 달러에서 10월 810억 달러로 늘었고, 받기까지 걸리는 날은 석 달 새 60일"
       },
       {
-       "s": 15,
+       "s": 16,
        "type": "checklist",
        "sit": "metric",
        "fit": false,
@@ -63616,7 +63790,7 @@
        "say": "둘째, 투자한 회사의 값이 깎이기 시작했습니다. 엔비디아는 3분기에 비상장 지분에서 18억 달러의 손상을 잡았습니다. 2분기까지 쌓인 손상이 2억 5,000만 달"
       },
       {
-       "s": 16,
+       "s": 17,
        "type": "chapter",
        "sit": "question",
        "fit": true,
@@ -63627,7 +63801,7 @@
        "say": "그럼 이 고리가 한국 계좌와는 어떻게 이어질까요?"
       },
       {
-       "s": 17,
+       "s": 18,
        "type": "motionboard",
        "sit": "point",
        "fit": false,
@@ -63637,7 +63811,7 @@
        "say": "엔비디아가 공급사와 맺은 구매 약정은 석 달 새 2,790억 달러에서 3,900억 달러로 늘었고, 회사는 그 대부분이 여러 해에 걸친 메모리 구매라고 밝혔습니다."
       },
       {
-       "s": 18,
+       "s": 19,
        "type": "checklist",
        "sit": "earnings",
        "fit": false,
@@ -63649,7 +63823,7 @@
        "say": "이 설명이 틀리는 경우도 짚어 두겠습니다. 첫째, 오픈AI가 만족할 만한 신용등급을 받으면 1,050억 달러 보증은 끝나도록 돼 있습니다. 둘째, AI 수요가 계"
       },
       {
-       "s": 19,
+       "s": 20,
        "type": "checklist",
        "sit": "point",
        "fit": false,
@@ -63659,7 +63833,7 @@
        "say": "여기서부터는 가설입니다. 원리로 보면 볼 것은 네 가지입니다. 칩값을 받는 데 걸리는 날이 더 길어지는지, 투자한 회사의 손상이 이어지는지, 월가의 칩 금융이 실"
       },
       {
-       "s": 20,
+       "s": 21,
        "type": "kinetic",
        "sit": "hub-event",
        "fit": false,
@@ -63671,7 +63845,7 @@
        "say": "순환금융은 가짜 매출이 아니라, 오늘의 주문을 몇 년 뒤의 약속으로 당겨 온 것입니다."
       },
       {
-       "s": 21,
+       "s": 22,
        "type": "outro",
        "sit": "earnings",
        "fit": false,
@@ -63919,6 +64093,468 @@
        "say": "딱 하나만 기억한다면 이것입니다. 이번 주 시장은 숫자가 얼마냐보다, 그 숫자가 어디에 어떻게 적혔느냐를 묻기 시작했습니다. 그 답의 첫 장면은 월요일 아침 한국"
       }
      ]
+    },
+    {
+     "project": "20261123-market-daily",
+     "scenes": 17,
+     "coverage": 0.88,
+     "fit": 0.4,
+     "rows": [
+      {
+       "s": 1,
+       "type": "versus",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "금요일 밤, 한국의 코스피200 야간선물은 6.99% 빠졌습니다. 그런데 일요일 밤 미국의 나스닥100 선물은 1.19% 올랐습니다. 같은 주말, 정반대의 두 숫"
+      },
+      {
+       "s": 2,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "출발점부터 짚겠습니다. 11월 20일 금요일 미국 장 마감 기준, 나스닥은 5.28%, S&P 500은 3.70%, 반도체 지수는 10.73% 내렸습니다. 이 하"
+      },
+      {
+       "s": 3,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "먼저 일요일 오후 정부서울청사에서 열린 회의입니다. 정부는 무엇을 꺼냈을까요?"
+      },
+      {
+       "s": 4,
+       "type": "checklist",
+       "sit": "explain-market",
+       "fit": false,
+       "rec": [
+        "motionboard",
+        "spread",
+        "share"
+       ],
+       "say": "이형일 부총리가 주재한 회의는 2시간 20분쯤 이어졌습니다. 첫째, 증권시장안정펀드, 이른바 증안펀드를 시장 상황에 따라 바로 가동할 수 있도록 준비에 들어갔습니"
+      },
+      {
+       "s": 5,
+       "type": "motionboard",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "그림으로 정리해 보겠습니다. 금요일 한국 장을 끌어내린 이유는 미국의 AI와 반도체였습니다. 정부도 회의에서 AI 투자 우려와 수익성 걱정을 원인으로 꼽았습니다."
+      },
+      {
+       "s": 6,
+       "type": "chapter",
+       "sit": "media",
+       "fit": true,
+       "rec": [
+        "newspapers",
+        "quote"
+       ],
+       "say": "두 번째, 폭락 한가운데서 나온 뜻밖의 보도입니다. 누군가는 SK하이닉스를 통째로 사려 했다는 겁니다."
+      },
+      {
+       "s": 7,
+       "type": "checklist",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "외신 보도를 인용한 서울경제와 재경일보에 따르면, 소프트뱅크의 손정의 회장이 SK하이닉스를 약 1조 달러에 사는 방안을 검토했고, 월가 금융회사들과 자금 조달까지"
+      },
+      {
+       "s": 8,
+       "type": "bignum",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "계산해 보겠습니다. 1조 달러는 약 1,347조 원입니다. 금요일 종가 기준 SK하이닉스의 시가총액은 777조 5천억 원. 지금 값보다 약 73% 비싼, 1.73"
+      },
+      {
+       "s": 9,
+       "type": "chapter",
+       "sit": "hub-event",
+       "fit": true,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "세 번째는 미국 일요일 아침 방송입니다. 스콧 베선트 미국 재무장관이 엔비디아와 연준에 대해 말했습니다."
+      },
+      {
+       "s": 10,
+       "type": "quote",
+       "sit": "route",
+       "fit": false,
+       "rec": [
+        "journey",
+        "usmap"
+       ],
+       "say": "진행자가 물었습니다. 열흘 안에 엔비디아의 답이 필요하다고 한 지 일주일인데, 답을 받았느냐. 베선트 장관의 대답은 짧았습니다. 아직 받지 못했다는 겁니다."
+      },
+      {
+       "s": 11,
+       "type": "versus",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "베선트 장관은 시장 하락의 이유로 여러 가지가 겹쳤다고 하면서, 연준에서 매우 매파적인 발언이 나왔고, 연준이 지나치게 조이면 정책 실수가 될 수 있다고 믿는 사"
+      },
+      {
+       "s": 12,
+       "type": "map_causal",
+       "sit": "hub-event",
+       "fit": true,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "여기서부터는 해석입니다. 주말 동안 새로 정해진 것을 모아 보면, 정부는 떨어지는 속도를, 베선트 장관은 엔비디아에서 누가 책임자였는지를 다뤘습니다. 손정의 보도"
+      },
+      {
+       "s": 13,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "이제 오늘부터 이번 주, 이 해석을 확인할 날짜들입니다."
+      },
+      {
+       "s": 14,
+       "type": "checklist",
+       "sit": "say-vs-do",
+       "fit": false,
+       "rec": [
+        "versus",
+        "bite",
+        "compare"
+       ],
+       "say": "오늘 아침 9시, 한국 정규장이 미국 금요일을 처음 받습니다. 야간선물의 마이너스 7%와 미국 선물의 반등 사이 어디에서 열리는지, 그리고 삼성전자와 SK하이닉스"
+      },
+      {
+       "s": 15,
+       "type": "checklist",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "틀리는 경우도 적어 둡니다. 오늘 한국 장이 야간선물만큼 빠지지 않는다면, 미국 선물 반등과 정부 조치가 일부를 받친 것입니다. 증안펀드가 실제로 가동된다면, 준"
+      },
+      {
+       "s": 16,
+       "type": "kinetic",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "주말에 정해진 건 값이 아니라, 책임과 속도였습니다."
+      },
+      {
+       "s": 17,
+       "type": "outro",
+       "sit": "open-scene",
+       "fit": false,
+       "rec": [
+        "kb",
+        "footage",
+        "stage"
+       ],
+       "say": "정부는 미끄러지는 속도를 줄이겠다고 했고, 미국에서는 책임자를 찾기 시작했습니다. 그렇다면 오늘 아침, 시장은 이유와 속도 가운데 어느 쪽을 더 크게 볼까요?"
+      }
+     ]
+    },
+    {
+     "project": "20261123-market-deep-softbank-hynix",
+     "scenes": 22,
+     "coverage": 0.95,
+     "fit": 0.38,
+     "rows": [
+      {
+       "s": 1,
+       "type": "versus",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "SK하이닉스 주가는 6월 최고가 291만 9천 원에서, 11월 20일 한국 장 마감 기준 111만 3천 원까지 내려왔습니다. 다섯 달 만에 61.9%가 빠졌습니다"
+      },
+      {
+       "s": 2,
+       "type": "checklist",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "먼저 지금 쏟아지는 의심부터 짚겠습니다. 반도체가 폭락했으니 AI가 끝났느냐. 주가가 빠졌다는 건 사실이지만, 이익이 줄었다는 숫자는 아직 없습니다. SK하이닉스"
+      },
+      {
+       "s": 3,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "첫 번째 시각은 사려 한 사람, 손정의입니다. 그는 무엇을 보고 이 값을 생각했을까요?"
+      },
+      {
+       "s": 4,
+       "type": "quote",
+       "sit": "rank",
+       "fit": false,
+       "rec": [
+        "bars",
+        "chart"
+       ],
+       "say": "손정의는 올해 연차보고서에서 이렇게 썼습니다. 사람을 넘어서는 인공지능, ASI의 시대에 1위 플랫폼 제공자가 되겠다. 그리고 그 시대에는 거대한 계산을 감당할 "
+      },
+      {
+       "s": 5,
+       "type": "motionboard",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "그의 말과 행동을 이어 붙이면 이런 사슬이 됩니다. 먼저 밝혀 둘 점은, 이건 이 채널이 세운 논리이고 손정의가 이 순서로 말한 기록은 없다는 겁니다. ASI가 "
+      },
+      {
+       "s": 6,
+       "type": "versus",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "손정의가 웃돈을 얹어 산 건 처음이 아닙니다. 2016년 영국 반도체 설계 회사 Arm을 살 때, 직전 종가보다 43% 비싼 값을 냈습니다. 그때도 1조 엔짜리 "
+      },
+      {
+       "s": 7,
+       "type": "chapter",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "두 번째 시각은, 이 회사의 주가가 원래부터 싸게 매겨져 있었다는 쪽입니다."
+      },
+      {
+       "s": 8,
+       "type": "quote",
+       "sit": "media",
+       "fit": true,
+       "rec": [
+        "newspapers",
+        "quote"
+       ],
+       "say": "한화투자증권의 박준영 연구원은 6월 보고서에서, SK하이닉스가 앞으로 1년 이익 기준으로 주가수익비율, PER 약 6.6배에 거래된다고 봤습니다. 미국 경쟁사 마"
+      },
+      {
+       "s": 9,
+       "type": "checklist",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "이 시각을 받치는 행동이 둘 있습니다. SK하이닉스는 7월 미국 나스닥에 상장해 약 265억 달러를 모았고, 8월에는 40조 원어치 자기 주식을 사서 없애겠다고 "
+      },
+      {
+       "s": 10,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "세 번째 시각은 값이 아니라, 애초에 살 수가 없다는 쪽입니다."
+      },
+      {
+       "s": 11,
+       "type": "quote",
+       "sit": "media",
+       "fit": true,
+       "rec": [
+        "newspapers",
+        "quote"
+       ],
+       "say": "미국 투자 매체 머니모닝의 코디 알렉산더는 이번 보도를 두고, 원하는 것과 실제로 집행할 수 있는 자본은 다르다고 썼습니다. 한국 아주경제도 규모와 흩어진 주주,"
+      },
+      {
+       "s": 12,
+       "type": "motionboard",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "첫째, 돈입니다. 소프트뱅크의 현금은 약 343억 달러, 1조 달러의 3.4%입니다. 1조 달러는 소프트뱅크 자신의 시가총액보다 9.2배 큽니다. 게다가 이미 오"
+      },
+      {
+       "s": 13,
+       "type": "checklist",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "나라가 반도체 인수를 막은 일은 처음이 아닙니다. 2018년 브로드컴이 1,170억 달러에 퀄컴을 사려 하자, 미국 대통령이 국가 안보를 이유로 금지했습니다."
+      },
+      {
+       "s": 14,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "이제 이 채널이 직접 계산해 보겠습니다. 1조 달러와 지금 시장 값은, 각각 앞으로의 이익을 얼마로 보고 있을까요?"
+      },
+      {
+       "s": 15,
+       "type": "bignum",
+       "sit": "earnings",
+       "fit": true,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "SK하이닉스는 올해 1분기부터 3분기까지 순이익 174조 원을 냈습니다. 1년으로 늘리면 232조 원. 지금 시가총액은 이 이익의 3.4배, 1조 달러를 내도 5"
+      },
+      {
+       "s": 16,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "그런데 이렇게 싸 보이는 데는 이유가 있습니다. 메모리 이익은 꼭대기 뒤에 크게 줄어 왔습니다. 그래서 하나만 가정해 봅니다. 이익이 꺾인 뒤 보통의 값을 PER"
+      },
+      {
+       "s": 17,
+       "type": "map_causal",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "여기서부터는 해석입니다. 세 시각을 겹쳐 보면, 싸다는 쪽은 이익 대비 값을, 못 산다는 쪽은 돈과 법과 주인을 봅니다. 서로 다른 질문에 답하고 있어서 둘 다 "
+      },
+      {
+       "s": 18,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "그렇다면 42%와 67%, 어느 쪽에 가까운지는 언제 알 수 있을까요?"
+      },
+      {
+       "s": 19,
+       "type": "checklist",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "첫 숫자는 12월 18일 무렵 나올 미국 마이크론의 실적입니다. 같은 메모리 회사의 이익률이 어느 쪽으로 움직이는지가 먼저 보입니다. 그리고 내년 1월 하순, S"
+      },
+      {
+       "s": 20,
+       "type": "checklist",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "틀리는 경우도 적어 둡니다. SK하이닉스의 이익이 42% 넘게 줄어든다면, 1조 달러는 비싼 값이었던 겁니다. 반대로 67%보다 덜 줄어든다면, 지금 시장 값이 "
+      },
+      {
+       "s": 21,
+       "type": "kinetic",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "1조 달러는 값이 아니라, 이익이 얼마나 줄어들지에 건 내기였습니다."
+      },
+      {
+       "s": 22,
+       "type": "outro",
+       "sit": "question",
+       "fit": false,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "시장은 이익이 3분의 2쯤 줄어든다고 값을 매겼고, 한 사람은 그 절반도 안 줄어든다고 봤습니다. 내년 1월의 숫자는, 어느 쪽에 더 가까울까요?"
+      }
+     ]
     }
    ]
   },
@@ -63951,7 +64587,7 @@
     "새벽",
     "아침"
    ],
-   "count": 22,
+   "count": 23,
    "fit": 5,
    "examples": [
     {
@@ -64003,8 +64639,8 @@
     "일까요",
     "을까요"
    ],
-   "count": 81,
-   "fit": 57,
+   "count": 86,
+   "fit": 61,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -64164,7 +64800,7 @@
     "옮겨",
     "퍼졌"
    ],
-   "count": 9,
+   "count": 10,
    "fit": 1,
    "examples": [
     {
@@ -64222,8 +64858,8 @@
     "하락",
     "급등"
    ],
-   "count": 204,
-   "fit": 98,
+   "count": 219,
+   "fit": 102,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -64388,7 +65024,7 @@
     },
     {
      "project": "20261122-market-deep-nvidia-circular",
-     "scene": 10,
+     "scene": 11,
      "type": "chapter",
      "say": "이 구조는 처음이 아닙니다.",
      "fit": true
@@ -64422,8 +65058,8 @@
     "헤드라인",
     "로이터"
    ],
-   "count": 9,
-   "fit": 2,
+   "count": 12,
+   "fit": 5,
    "examples": [
     {
      "project": "20261112-market-daily",
@@ -64475,9 +65111,17 @@
     "밀려났",
     "추월"
    ],
-   "count": 0,
+   "count": 1,
    "fit": 0,
-   "examples": []
+   "examples": [
+    {
+     "project": "20261123-market-deep-softbank-hynix",
+     "scene": 4,
+     "type": "quote",
+     "say": "손정의는 올해 연차보고서에서 이렇게 썼습니다. 사람을 넘어서는 인공지능, ASI의 시대에 1위 플랫폼 제공자가 되겠다. 그리고 그 시대에는 거대한 계산을 감당할 반도체가 필요하다고 했습니다.",
+     "fit": false
+    }
+   ]
   },
   {
    "id": "sit:market:change",
@@ -64720,7 +65364,7 @@
     "유통 물량",
     "오버행"
    ],
-   "count": 9,
+   "count": 10,
    "fit": 1,
    "examples": [
     {
@@ -64774,7 +65418,7 @@
     "발행",
     "자사주"
    ],
-   "count": 18,
+   "count": 19,
    "fit": 4,
    "examples": [
     {
@@ -64829,8 +65473,8 @@
     "여파",
     "연준"
    ],
-   "count": 49,
-   "fit": 14,
+   "count": 54,
+   "fit": 16,
    "examples": [
     {
      "project": "20261112-market-daily",
@@ -64883,8 +65527,8 @@
     "분기",
     "EPS"
    ],
-   "count": 82,
-   "fit": 28,
+   "count": 86,
+   "fit": 29,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -72129,9 +72773,9 @@
    "topic": "market",
    "label": "20261122-market-deep-nvidia-circular",
    "project": "20261122-market-deep-nvidia-circular",
-   "scenes": 21,
+   "scenes": 22,
    "coverage": 1.0,
-   "fit": 0.43,
+   "fit": 0.41,
    "rows": [
     {
      "s": 1,
@@ -72142,7 +72786,7 @@
       "bite",
       "quote"
      ],
-     "say": "엔비디아가 돈이 모자란 고객에게 돈을 대 주며 칩을 판다는 의심, 엔비디아의 새 CEO는 지난 18일 이렇게 답했습니다."
+     "say": "엔비디아가 돈이 모자란 고객에게 돈을 대 주며 칩을 판다는 의심, 젠슨 황이 물러난 뒤 임시 CEO가 된 콜레트 크레스는 지난 18일 이렇게 답했습니다."
     },
     {
      "s": 2,
@@ -72165,10 +72809,22 @@
       "kb",
       "chart"
      ],
-     "say": "먼저 흔한 생각 세 가지를 짚고 가겠습니다. 순환금융은 가짜 매출이다. 엔비디아 매출 대부분이 자기 돈이다. 엔비디아는 현금이 많으니 위험은 없다. 셋 다 그대로"
+     "say": "그리고 이 고리는 지금 의심의 한가운데 있습니다. 11월 11일 젠슨 황이 물러났고, SEC가 엔비디아의 장부를 들여다본다는 보도가 나왔고, 연준은 의사록에 AI"
     },
     {
      "s": 4,
+     "type": "checklist",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "먼저 흔한 생각 세 가지를 짚고 가겠습니다. 순환금융은 가짜 매출이다. 엔비디아 매출 대부분이 자기 돈이다. 엔비디아는 현금이 많으니 위험은 없다. 셋 다 그대로"
+    },
+    {
+     "s": 5,
      "type": "chapter",
      "sit": "question",
      "fit": true,
@@ -72179,7 +72835,7 @@
      "say": "먼저 원리입니다. 왜 칩을 파는 회사가 칩을 사는 회사에 돈을 댈까요?"
     },
     {
-     "s": 5,
+     "s": 6,
      "type": "motionboard",
      "sit": "compare",
      "fit": false,
@@ -72191,7 +72847,7 @@
      "say": "원리는 단순합니다. 사는 쪽이 돈은 없는데 더 크고 싶을 때, 돈이 많은 파는 쪽이 대신 대 줍니다. AI 모델 회사들은 아직 버는 돈보다 쓰는 돈이 많고, 네오"
     },
     {
-     "s": 6,
+     "s": 7,
      "type": "motionboard",
      "sit": "question",
      "fit": false,
@@ -72202,7 +72858,7 @@
      "say": "그럼 가짜 매출일까요? 그렇진 않습니다. 고객이 칩값을 갚으면 매출은 진짜입니다. 엔비디아 고객의 큰 몫은 현금이 많은 빅테크이기도 합니다."
     },
     {
-     "s": 7,
+     "s": 8,
      "type": "chapter",
      "sit": "question",
      "fit": true,
@@ -72213,7 +72869,7 @@
      "say": "두 번째 생각, 엔비디아 매출 대부분이 자기 돈일까요? 크기를 숫자로 보겠습니다."
     },
     {
-     "s": 8,
+     "s": 9,
      "type": "bars",
      "sit": "metric",
      "fit": true,
@@ -72225,7 +72881,7 @@
      "say": "비상장 회사 지분은 올해 1월 223억 달러에서 10월 655억 달러로 세 배가 됐습니다. 보증은 최대 1,180억 달러, 남는 클라우드를 빌려 쓰거나 데이터센터"
     },
     {
-     "s": 9,
+     "s": 10,
      "type": "checklist",
      "sit": "earnings",
      "fit": false,
@@ -72237,7 +72893,7 @@
      "say": "그렇다고 오늘 매출 대부분이 자기 돈인 건 아닙니다. 가장 큰 보증 1,050억 달러는 데이터센터 임대가 시작돼야 효력이 생기고, 첫 단계는 2028년에서 29년"
     },
     {
-     "s": 10,
+     "s": 11,
      "type": "chapter",
      "sit": "timeline",
      "fit": true,
@@ -72248,7 +72904,7 @@
      "say": "이 구조는 처음이 아닙니다."
     },
     {
-     "s": 11,
+     "s": 12,
      "type": "bignum",
      "sit": "metric",
      "fit": true,
@@ -72260,7 +72916,7 @@
      "say": "2000년 무렵 통신 장비 회사 루슨트는 장비를 사는 신생 통신사에 돈을 빌려줬습니다. 고객 대출 약정은 1998년 23억 달러에서 2000년 2월 84억 달러까"
     },
     {
-     "s": 12,
+     "s": 13,
      "type": "checklist",
      "sit": "compare",
      "fit": false,
@@ -72272,7 +72928,7 @@
      "say": "같은 점은 두 가지입니다. 파는 쪽이 사는 쪽에 돈을 대고, 위험이 몇 곳에 몰립니다. 7월 말 엔비디아의 직접 고객 다섯 곳이 받을 돈의 70%를 차지했습니다."
     },
     {
-     "s": 13,
+     "s": 14,
      "type": "chapter",
      "sit": "question",
      "fit": true,
@@ -72283,7 +72939,7 @@
      "say": "세 번째 생각, 엔비디아는 현금이 많으니 위험이 없을까요? 고리가 약해지는 곳은 엔비디아의 현금이 아니라, 고객의 돈 사정에서 먼저 보입니다."
     },
     {
-     "s": 14,
+     "s": 15,
      "type": "bars",
      "sit": "metric",
      "fit": true,
@@ -72295,7 +72951,7 @@
      "say": "첫째, 칩값을 받는 데 시간이 더 걸립니다. 아직 받지 못한 칩값은 1월 385억 달러에서 10월 810억 달러로 늘었고, 받기까지 걸리는 날은 석 달 새 60일"
     },
     {
-     "s": 15,
+     "s": 16,
      "type": "checklist",
      "sit": "metric",
      "fit": false,
@@ -72307,7 +72963,7 @@
      "say": "둘째, 투자한 회사의 값이 깎이기 시작했습니다. 엔비디아는 3분기에 비상장 지분에서 18억 달러의 손상을 잡았습니다. 2분기까지 쌓인 손상이 2억 5,000만 달"
     },
     {
-     "s": 16,
+     "s": 17,
      "type": "chapter",
      "sit": "question",
      "fit": true,
@@ -72318,7 +72974,7 @@
      "say": "그럼 이 고리가 한국 계좌와는 어떻게 이어질까요?"
     },
     {
-     "s": 17,
+     "s": 18,
      "type": "motionboard",
      "sit": "point",
      "fit": false,
@@ -72328,7 +72984,7 @@
      "say": "엔비디아가 공급사와 맺은 구매 약정은 석 달 새 2,790억 달러에서 3,900억 달러로 늘었고, 회사는 그 대부분이 여러 해에 걸친 메모리 구매라고 밝혔습니다."
     },
     {
-     "s": 18,
+     "s": 19,
      "type": "checklist",
      "sit": "earnings",
      "fit": false,
@@ -72340,7 +72996,7 @@
      "say": "이 설명이 틀리는 경우도 짚어 두겠습니다. 첫째, 오픈AI가 만족할 만한 신용등급을 받으면 1,050억 달러 보증은 끝나도록 돼 있습니다. 둘째, AI 수요가 계"
     },
     {
-     "s": 19,
+     "s": 20,
      "type": "checklist",
      "sit": "point",
      "fit": false,
@@ -72350,7 +73006,7 @@
      "say": "여기서부터는 가설입니다. 원리로 보면 볼 것은 네 가지입니다. 칩값을 받는 데 걸리는 날이 더 길어지는지, 투자한 회사의 손상이 이어지는지, 월가의 칩 금융이 실"
     },
     {
-     "s": 20,
+     "s": 21,
      "type": "kinetic",
      "sit": "hub-event",
      "fit": false,
@@ -72362,7 +73018,7 @@
      "say": "순환금융은 가짜 매출이 아니라, 오늘의 주문을 몇 년 뒤의 약속으로 당겨 온 것입니다."
     },
     {
-     "s": 21,
+     "s": 22,
      "type": "outro",
      "sit": "earnings",
      "fit": false,
@@ -72612,6 +73268,476 @@
       "stage"
      ],
      "say": "딱 하나만 기억한다면 이것입니다. 이번 주 시장은 숫자가 얼마냐보다, 그 숫자가 어디에 어떻게 적혔느냐를 묻기 시작했습니다. 그 답의 첫 장면은 월요일 아침 한국"
+    }
+   ]
+  },
+  {
+   "id": "ep:20261123-market-daily",
+   "kind": "episode",
+   "topic": "market",
+   "label": "20261123-market-daily",
+   "project": "20261123-market-daily",
+   "scenes": 17,
+   "coverage": 0.88,
+   "fit": 0.4,
+   "rows": [
+    {
+     "s": 1,
+     "type": "versus",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "금요일 밤, 한국의 코스피200 야간선물은 6.99% 빠졌습니다. 그런데 일요일 밤 미국의 나스닥100 선물은 1.19% 올랐습니다. 같은 주말, 정반대의 두 숫"
+    },
+    {
+     "s": 2,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "출발점부터 짚겠습니다. 11월 20일 금요일 미국 장 마감 기준, 나스닥은 5.28%, S&P 500은 3.70%, 반도체 지수는 10.73% 내렸습니다. 이 하"
+    },
+    {
+     "s": 3,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "먼저 일요일 오후 정부서울청사에서 열린 회의입니다. 정부는 무엇을 꺼냈을까요?"
+    },
+    {
+     "s": 4,
+     "type": "checklist",
+     "sit": "explain-market",
+     "fit": false,
+     "rec": [
+      "motionboard",
+      "spread",
+      "share"
+     ],
+     "say": "이형일 부총리가 주재한 회의는 2시간 20분쯤 이어졌습니다. 첫째, 증권시장안정펀드, 이른바 증안펀드를 시장 상황에 따라 바로 가동할 수 있도록 준비에 들어갔습니"
+    },
+    {
+     "s": 5,
+     "type": "motionboard",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "그림으로 정리해 보겠습니다. 금요일 한국 장을 끌어내린 이유는 미국의 AI와 반도체였습니다. 정부도 회의에서 AI 투자 우려와 수익성 걱정을 원인으로 꼽았습니다."
+    },
+    {
+     "s": 6,
+     "type": "chapter",
+     "sit": "media",
+     "fit": true,
+     "rec": [
+      "newspapers",
+      "quote"
+     ],
+     "say": "두 번째, 폭락 한가운데서 나온 뜻밖의 보도입니다. 누군가는 SK하이닉스를 통째로 사려 했다는 겁니다."
+    },
+    {
+     "s": 7,
+     "type": "checklist",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "외신 보도를 인용한 서울경제와 재경일보에 따르면, 소프트뱅크의 손정의 회장이 SK하이닉스를 약 1조 달러에 사는 방안을 검토했고, 월가 금융회사들과 자금 조달까지"
+    },
+    {
+     "s": 8,
+     "type": "bignum",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "계산해 보겠습니다. 1조 달러는 약 1,347조 원입니다. 금요일 종가 기준 SK하이닉스의 시가총액은 777조 5천억 원. 지금 값보다 약 73% 비싼, 1.73"
+    },
+    {
+     "s": 9,
+     "type": "chapter",
+     "sit": "hub-event",
+     "fit": true,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "세 번째는 미국 일요일 아침 방송입니다. 스콧 베선트 미국 재무장관이 엔비디아와 연준에 대해 말했습니다."
+    },
+    {
+     "s": 10,
+     "type": "quote",
+     "sit": "route",
+     "fit": false,
+     "rec": [
+      "journey",
+      "usmap"
+     ],
+     "say": "진행자가 물었습니다. 열흘 안에 엔비디아의 답이 필요하다고 한 지 일주일인데, 답을 받았느냐. 베선트 장관의 대답은 짧았습니다. 아직 받지 못했다는 겁니다."
+    },
+    {
+     "s": 11,
+     "type": "versus",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "베선트 장관은 시장 하락의 이유로 여러 가지가 겹쳤다고 하면서, 연준에서 매우 매파적인 발언이 나왔고, 연준이 지나치게 조이면 정책 실수가 될 수 있다고 믿는 사"
+    },
+    {
+     "s": 12,
+     "type": "map_causal",
+     "sit": "hub-event",
+     "fit": true,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "여기서부터는 해석입니다. 주말 동안 새로 정해진 것을 모아 보면, 정부는 떨어지는 속도를, 베선트 장관은 엔비디아에서 누가 책임자였는지를 다뤘습니다. 손정의 보도"
+    },
+    {
+     "s": 13,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "이제 오늘부터 이번 주, 이 해석을 확인할 날짜들입니다."
+    },
+    {
+     "s": 14,
+     "type": "checklist",
+     "sit": "say-vs-do",
+     "fit": false,
+     "rec": [
+      "versus",
+      "bite",
+      "compare"
+     ],
+     "say": "오늘 아침 9시, 한국 정규장이 미국 금요일을 처음 받습니다. 야간선물의 마이너스 7%와 미국 선물의 반등 사이 어디에서 열리는지, 그리고 삼성전자와 SK하이닉스"
+    },
+    {
+     "s": 15,
+     "type": "checklist",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "틀리는 경우도 적어 둡니다. 오늘 한국 장이 야간선물만큼 빠지지 않는다면, 미국 선물 반등과 정부 조치가 일부를 받친 것입니다. 증안펀드가 실제로 가동된다면, 준"
+    },
+    {
+     "s": 16,
+     "type": "kinetic",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "주말에 정해진 건 값이 아니라, 책임과 속도였습니다."
+    },
+    {
+     "s": 17,
+     "type": "outro",
+     "sit": "open-scene",
+     "fit": false,
+     "rec": [
+      "kb",
+      "footage",
+      "stage"
+     ],
+     "say": "정부는 미끄러지는 속도를 줄이겠다고 했고, 미국에서는 책임자를 찾기 시작했습니다. 그렇다면 오늘 아침, 시장은 이유와 속도 가운데 어느 쪽을 더 크게 볼까요?"
+    }
+   ]
+  },
+  {
+   "id": "ep:20261123-market-deep-softbank-hynix",
+   "kind": "episode",
+   "topic": "market",
+   "label": "20261123-market-deep-softbank-hynix",
+   "project": "20261123-market-deep-softbank-hynix",
+   "scenes": 22,
+   "coverage": 0.95,
+   "fit": 0.38,
+   "rows": [
+    {
+     "s": 1,
+     "type": "versus",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "SK하이닉스 주가는 6월 최고가 291만 9천 원에서, 11월 20일 한국 장 마감 기준 111만 3천 원까지 내려왔습니다. 다섯 달 만에 61.9%가 빠졌습니다"
+    },
+    {
+     "s": 2,
+     "type": "checklist",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "먼저 지금 쏟아지는 의심부터 짚겠습니다. 반도체가 폭락했으니 AI가 끝났느냐. 주가가 빠졌다는 건 사실이지만, 이익이 줄었다는 숫자는 아직 없습니다. SK하이닉스"
+    },
+    {
+     "s": 3,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "첫 번째 시각은 사려 한 사람, 손정의입니다. 그는 무엇을 보고 이 값을 생각했을까요?"
+    },
+    {
+     "s": 4,
+     "type": "quote",
+     "sit": "rank",
+     "fit": false,
+     "rec": [
+      "bars",
+      "chart"
+     ],
+     "say": "손정의는 올해 연차보고서에서 이렇게 썼습니다. 사람을 넘어서는 인공지능, ASI의 시대에 1위 플랫폼 제공자가 되겠다. 그리고 그 시대에는 거대한 계산을 감당할 "
+    },
+    {
+     "s": 5,
+     "type": "motionboard",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "그의 말과 행동을 이어 붙이면 이런 사슬이 됩니다. 먼저 밝혀 둘 점은, 이건 이 채널이 세운 논리이고 손정의가 이 순서로 말한 기록은 없다는 겁니다. ASI가 "
+    },
+    {
+     "s": 6,
+     "type": "versus",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "손정의가 웃돈을 얹어 산 건 처음이 아닙니다. 2016년 영국 반도체 설계 회사 Arm을 살 때, 직전 종가보다 43% 비싼 값을 냈습니다. 그때도 1조 엔짜리 "
+    },
+    {
+     "s": 7,
+     "type": "chapter",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "두 번째 시각은, 이 회사의 주가가 원래부터 싸게 매겨져 있었다는 쪽입니다."
+    },
+    {
+     "s": 8,
+     "type": "quote",
+     "sit": "media",
+     "fit": true,
+     "rec": [
+      "newspapers",
+      "quote"
+     ],
+     "say": "한화투자증권의 박준영 연구원은 6월 보고서에서, SK하이닉스가 앞으로 1년 이익 기준으로 주가수익비율, PER 약 6.6배에 거래된다고 봤습니다. 미국 경쟁사 마"
+    },
+    {
+     "s": 9,
+     "type": "checklist",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "이 시각을 받치는 행동이 둘 있습니다. SK하이닉스는 7월 미국 나스닥에 상장해 약 265억 달러를 모았고, 8월에는 40조 원어치 자기 주식을 사서 없애겠다고 "
+    },
+    {
+     "s": 10,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "세 번째 시각은 값이 아니라, 애초에 살 수가 없다는 쪽입니다."
+    },
+    {
+     "s": 11,
+     "type": "quote",
+     "sit": "media",
+     "fit": true,
+     "rec": [
+      "newspapers",
+      "quote"
+     ],
+     "say": "미국 투자 매체 머니모닝의 코디 알렉산더는 이번 보도를 두고, 원하는 것과 실제로 집행할 수 있는 자본은 다르다고 썼습니다. 한국 아주경제도 규모와 흩어진 주주,"
+    },
+    {
+     "s": 12,
+     "type": "motionboard",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "첫째, 돈입니다. 소프트뱅크의 현금은 약 343억 달러, 1조 달러의 3.4%입니다. 1조 달러는 소프트뱅크 자신의 시가총액보다 9.2배 큽니다. 게다가 이미 오"
+    },
+    {
+     "s": 13,
+     "type": "checklist",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "나라가 반도체 인수를 막은 일은 처음이 아닙니다. 2018년 브로드컴이 1,170억 달러에 퀄컴을 사려 하자, 미국 대통령이 국가 안보를 이유로 금지했습니다."
+    },
+    {
+     "s": 14,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "이제 이 채널이 직접 계산해 보겠습니다. 1조 달러와 지금 시장 값은, 각각 앞으로의 이익을 얼마로 보고 있을까요?"
+    },
+    {
+     "s": 15,
+     "type": "bignum",
+     "sit": "earnings",
+     "fit": true,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "SK하이닉스는 올해 1분기부터 3분기까지 순이익 174조 원을 냈습니다. 1년으로 늘리면 232조 원. 지금 시가총액은 이 이익의 3.4배, 1조 달러를 내도 5"
+    },
+    {
+     "s": 16,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "그런데 이렇게 싸 보이는 데는 이유가 있습니다. 메모리 이익은 꼭대기 뒤에 크게 줄어 왔습니다. 그래서 하나만 가정해 봅니다. 이익이 꺾인 뒤 보통의 값을 PER"
+    },
+    {
+     "s": 17,
+     "type": "map_causal",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "여기서부터는 해석입니다. 세 시각을 겹쳐 보면, 싸다는 쪽은 이익 대비 값을, 못 산다는 쪽은 돈과 법과 주인을 봅니다. 서로 다른 질문에 답하고 있어서 둘 다 "
+    },
+    {
+     "s": 18,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "그렇다면 42%와 67%, 어느 쪽에 가까운지는 언제 알 수 있을까요?"
+    },
+    {
+     "s": 19,
+     "type": "checklist",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "첫 숫자는 12월 18일 무렵 나올 미국 마이크론의 실적입니다. 같은 메모리 회사의 이익률이 어느 쪽으로 움직이는지가 먼저 보입니다. 그리고 내년 1월 하순, S"
+    },
+    {
+     "s": 20,
+     "type": "checklist",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "틀리는 경우도 적어 둡니다. SK하이닉스의 이익이 42% 넘게 줄어든다면, 1조 달러는 비싼 값이었던 겁니다. 반대로 67%보다 덜 줄어든다면, 지금 시장 값이 "
+    },
+    {
+     "s": 21,
+     "type": "kinetic",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "1조 달러는 값이 아니라, 이익이 얼마나 줄어들지에 건 내기였습니다."
+    },
+    {
+     "s": 22,
+     "type": "outro",
+     "sit": "question",
+     "fit": false,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "시장은 이익이 3분의 2쯤 줄어든다고 값을 매겼고, 한 사람은 그 절반도 안 줄어든다고 봤습니다. 내년 1월의 숫자는, 어느 쪽에 더 가까울까요?"
     }
    ]
   }
@@ -73649,27 +74775,27 @@
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h366",
+   "t": "sec:feedback§h367",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h387",
+   "t": "sec:feedback§h388",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h389",
+   "t": "sec:feedback§h390",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h417",
+   "t": "sec:feedback§h418",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h419",
+   "t": "sec:feedback§h420",
    "kind": "contains"
   },
   {
@@ -80092,22 +81218,12 @@
   },
   {
    "s": "intent:d7874fac",
-   "t": "ver:3",
-   "kind": "interpreted_in"
-  },
-  {
-   "s": "intent:d7874fac",
    "t": "ver:106",
    "kind": "interpreted_in"
   },
   {
    "s": "intent:d7874fac",
    "t": "rev:48",
-   "kind": "quoted_in"
-  },
-  {
-   "s": "intent:d7874fac",
-   "t": "sec:04§0-7",
    "kind": "quoted_in"
   },
   {
@@ -81356,26 +82472,6 @@
    "kind": "about"
   },
   {
-   "s": "intent:e1311d78",
-   "t": "ver:3",
-   "kind": "interpreted_in"
-  },
-  {
-   "s": "intent:e1311d78",
-   "t": "ver:110",
-   "kind": "interpreted_in"
-  },
-  {
-   "s": "intent:e1311d78",
-   "t": "sec:04§0-7",
-   "kind": "quoted_in"
-  },
-  {
-   "s": "intent:e1311d78",
-   "t": "rev:49",
-   "kind": "quoted_in"
-  },
-  {
    "s": "intent:e51c20e6",
    "t": "sec:06§h3",
    "kind": "quoted_in"
@@ -81394,6 +82490,16 @@
    "s": "intent:e51c20e6",
    "t": "theme:script",
    "kind": "about"
+  },
+  {
+   "s": "intent:e1311d78",
+   "t": "ver:110",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:e1311d78",
+   "t": "rev:49",
+   "kind": "quoted_in"
   },
   {
    "s": "intent:3ffec795",
@@ -81888,6 +82994,16 @@
   {
    "s": "intent:abf48aad",
    "t": "fb:172",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:629a91d2",
+   "t": "ver:73",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:629a91d2",
+   "t": "sec:04§0-7",
    "kind": "quoted_in"
   },
   {
@@ -82486,6 +83602,21 @@
    "kind": "about"
   },
   {
+   "s": "intent:dfaedd24",
+   "t": "ver:73",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:dfaedd24",
+   "t": "sec:04§0-7",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:dfaedd24",
+   "t": "fb:244",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:ac4a4963",
    "t": "ver:16",
    "kind": "interpreted_in"
@@ -82523,11 +83654,6 @@
   {
    "s": "intent:515af871",
    "t": "fb:228",
-   "kind": "quoted_in"
-  },
-  {
-   "s": "intent:dfaedd24",
-   "t": "fb:244",
    "kind": "quoted_in"
   },
   {
@@ -83798,6 +84924,16 @@
   {
    "s": "topic:market",
    "t": "ep:20261122-market-weekly",
+   "kind": "episode"
+  },
+  {
+   "s": "topic:market",
+   "t": "ep:20261123-market-daily",
+   "kind": "episode"
+  },
+  {
+   "s": "topic:market",
+   "t": "ep:20261123-market-deep-softbank-hynix",
    "kind": "episode"
   },
   {
