@@ -34,17 +34,20 @@ git -C $runner checkout -q -f -B local/runner origin/main
 
 $jobs = & $py "$runner\scripts\local_routine.py" --list
 foreach ($line in $(if ($Windows) { $jobs } else { @() })) {
-  $name, $time = $line -split "\|", 2
+  $name, $time, $rep = $line -split "\|", 3
   # 실행 직전에 실행기 폴더를 최신 main 으로 맞춘 뒤 실행
   $cmd = "git -C '$runner' fetch -q origin main; git -C '$runner' checkout -q -f -B local/runner origin/main; & '$py' '$runner\scripts\local_routine.py' $name"
   $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -Command `"$cmd`"" -WorkingDirectory $runner
   $trigger = New-ScheduledTaskTrigger -Daily -At $time
+  if ($rep) {   # repeat_hours: 하루 동안 그 간격으로 반복 (심층 감시, 2026-11-24)
+    $trigger.Repetition = (New-ScheduledTaskTrigger -Once -At $time -RepetitionInterval (New-TimeSpan -Hours ([int]$rep)) -RepetitionDuration (New-TimeSpan -Days 1)).Repetition
+  }
   # 꺼져 있다가 켜지면 놓친 차례를 바로 실행, 절전이면 깨워서 실행, 겹치면 새 것은 건너뜀
   $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -WakeToRun -DontStopIfGoingOnBatteries -AllowStartIfOnBatteries `
     -MultipleInstances IgnoreNew -ExecutionTimeLimit (New-TimeSpan -Hours 6)
   Register-ScheduledTask -TaskName "ytflow-$name" -Action $action -Trigger $trigger -Settings $settings `
     -Description "ytflow local routine $name (scripts/local_routine.py, docs/56)" -Force | Out-Null
-  Write-Host "등록됨: ytflow-$name — 매일 $time"
+  Write-Host ("등록됨: ytflow-$name — 매일 $time" + $(if ($rep) { " 부터 ${rep}시간마다" } else { "" }))
 }
 
 # PC 일꾼은 뺌 (2026-11-21 사용자: "자동일꾼 그냥 빼 나 그냥 로컬에서 전부 영상작업 할테니까") — 예전에 등록됐으면 지움

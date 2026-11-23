@@ -20,3 +20,17 @@ jobs:
     time: "22:10"               # 시장 08:30·호기심 18:00 공개 뒤 수치가 쌓인 시각. 2026-11-23 사용자: "앞으로 내 채널은 네가 운영하고 네가 분석하길 바래"
     prompt: config/local_routines/channel-ops.md
     timeout_min: 90
+  market-deep-watch:
+    # 2026-11-24 사용자: "분석영상을 꼭 특정시간마다 업로드보다는 소재가 생기면 업로드 할 수 있도록" →
+    #   선택: 2시간마다 감시 · 소재 생길 때만(매일 고정 심층 없음) · "완성 즉시 공개하고 검수와 분석영상을 제작할지 제작할만한 내용인지의 판단은 fable이 해주세요"
+    title: "이어 읽는 시장 — 심층 소재 감시 (2시간마다)"
+    time: "00:40"               # 첫 차례. repeat_hours 마다 다시 (앱 예약 cron '40 */2 * * *')
+    repeat_hours: 2
+    wait_for: [market-daily]    # 아침 브리핑이 도는 동안은 건너뜀 (PC·목소리 크레딧을 나눠 쓰지 않음)
+    quiet_skip: [scan, judge]   # 이 단계에서 멈추면(새 소재 없음·안 만듦) 알림·보고 파일 없이 로그 한 줄만
+    # 2026-11-24 사용자: "소재 감시는 당연히 sonnet이 하시구요" — 2시간마다 훑기는 Sonnet, 만들지 판단·검수는 Fable (후보가 있을 때만)
+    steps:
+      - {name: scan,   prompt: config/local_routines/deep-watch-scan.md,   model: claude-sonnet-5-5, timeout_min: 30}
+      - {name: judge,  prompt: config/local_routines/deep-watch-judge.md,  model: claude-fable-5-2, timeout_min: 40}
+      - {name: make,   prompt: config/local_routines/deep-watch-make.md,   timeout_min: 200}
+      - {name: review, prompt: config/local_routines/deep-watch-review.md, model: claude-fable-5-2, timeout_min: 90}
