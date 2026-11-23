@@ -64,6 +64,36 @@ def frames_sheet(project: Project) -> Path:
     return out
 
 
+import re as _re
+
+# 만든 날을 기준으로만 맞는 말 — 올리는 날·보는 날이 달라지면 틀린다. '올해·내년·지난 3월'처럼 해·달 단위는 그해 안에선 맞으므로 뺌.
+_REL = _re.compile(r"(어제|그제|그저께|내일|모레|이번\s?주|지난\s?주(?!년)|다음\s?주|이번\s?달|지난\s?달|다음\s?달|금주|지난\s?주말|이번\s?주말|"
+                   r"며칠\s?전|\d+\s?일\s?전|지난\s?\d{1,2}\s?일|오는\s?\d{1,2}\s?일|방금)")
+
+
+def relative_dates(project: Project) -> list[str]:
+    """대본(내레이션·원문 번역·화면 글자)에서 만든 날 기준 상대 날짜가 든 문장."""
+    f = project.dir("script") / "hybrid.json"
+    if not f.exists():
+        return []
+    out: list[str] = []
+
+    def walk(o, key=""):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                walk(v, k)
+        elif isinstance(o, list):
+            for v in o:
+                walk(v, key)
+        elif isinstance(o, str) and key not in ("id", "icon", "kind", "type", "src", "url", "file", "photo"):
+            m = _REL.search(o)
+            if m and o not in out:
+                out.append(o if len(o) < 160 else o[max(0, m.start() - 60):m.end() + 60])
+
+    walk(json.loads(f.read_text(encoding="utf-8")).get("scenes", []))
+    return out
+
+
 def run(project: Project, looked: bool = False) -> dict:
     edir = project.dir("edit")
     final = edir / "final.mp4"
@@ -97,6 +127,13 @@ def run(project: Project, looked: bool = False) -> dict:
     r = subprocess.run([sys.executable, "-m", "ytflow", "check", str(project.path)], capture_output=True, text=True, encoding="utf-8", errors="replace",
                        env={**__import__("os").environ, "PYTHONIOENCODING": "utf-8"})
     C["check_must"] = {"pass": r.returncode == 0, "tail": (r.stdout or r.stderr).strip().splitlines()[-3:]}
+
+    # 7. 나중에 올려도 맞나 — 만든 날 기준 상대 날짜 (2026-11-23 사용자: "나중에 올려도 영상 내용에 문제를 끼치지 않는지도
+    #    검수하세요 예시로 날짜나 발언 등등") — '이번 주 인터뷰'는 다음 주에 올리면 틀린 말이 됨 → '11월 18일 인터뷰'로
+    # 매일 브리핑(…-daily)은 만든 날 아침에 올리는 영상이라 '오늘·이번 주'가 맞는 말 — 빼고, 나머지는 모두 봄
+    stale = [] if project.path.name.endswith("-daily") else relative_dates(project)
+    C["timing"] = {"pass": not stale, "lines": stale[:8],
+                   "note": "만든 날 기준 상대 날짜(이번 주·지난주·어제·지난 N일…)를 실제 날짜로 바꾸고 다시 렌더 — 올리는 날과 보는 날이 달라도 맞게"}
 
     # 6. 사람 눈
     sheet = frames_sheet(project)
