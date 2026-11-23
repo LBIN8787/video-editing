@@ -518,6 +518,7 @@ def _el_html(D, sc, key: str, el: dict) -> tuple[str, float, float]:
         vsz = fit(HEAVY, val, el.get("vsize", 50), w - 16).size if val else 0
         if val:
             h += vsz * 1.1 + 6
+        h = max(h, el.get("_minh", 0))
         inner = (f'<div style="width:{w:.0f}px;height:{h:.0f}px;background:linear-gradient(180deg,#FFFEFB,#F1EEE6);border-radius:8px;'
                  f'box-shadow:{SHADOW};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;'
                  f'transform:rotate({rot}deg)">{mk}'
@@ -569,8 +570,16 @@ def s_board(D, sc: dict, bt: list, dur: float):
             rows.setdefault(round(el.get("y", 0) / 40), []).append(el)
     for row in rows.values():
         rw = max(el.get("w", 180) for el in row)
+        # 폭을 맞추다 이웃 카드와 겹치면 안 됨 (2026-11-23 사용자: "서로 겹치고 크기도 제각각") — 가장 좁은 간격에 맞춰 줄임
+        xs = sorted(el.get("x", 0) for el in row)
+        if len(xs) > 1:
+            rw = min(rw, min(b - a for a, b in zip(xs, xs[1:])) - 28)
         for el in row:
             el["w"] = rw
+        # 높이도 줄에서 가장 큰 카드에 맞춤 — 숫자(value) 있는 카드만 키가 커서 들쭉날쭉해 보이던 것
+        rh = max(_el_html(D, sc, "_", el)[2] for el in row)
+        for el in row:
+            el["_minh"] = rh
     box = {}
     first = bt[0][0]
     # 1) 위치를 가진 요소는 미리 만들어 두고(숨김), 등장 시각에 나타낸다
