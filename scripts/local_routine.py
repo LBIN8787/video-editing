@@ -100,6 +100,7 @@ def worktree(job: str) -> tuple[Path, str]:
     git(wt, "checkout", "-f", "-B", branch, "origin/main")   # 늘 원격 main 그대로에서 시작 (지난 실행의 미푸시 커밋은 버림)
     git(wt, "clean", "-fd", "-e", "projects/*/0[0-9]_*", check=False)   # 추적 안 되는 기획 찌꺼기만, 미디어(무시 파일)는 남김
     (wt / "LOCAL_RESULT.md").unlink(missing_ok=True)
+    (wt / "ROUTINE_STOP").unlink(missing_ok=True)
     return wt, branch
 
 
@@ -123,10 +124,12 @@ def claude_ready(exe: str, env: dict) -> bool:
     return r.returncode == 0 and "Not logged in" not in (r.stdout + r.stderr)
 
 
-def agent_cmd(wt: Path, env: dict, run: Run) -> tuple[list[str], str]:
+def agent_cmd(wt: Path, env: dict, run: Run, model: str | None = None) -> tuple[list[str], str]:
     exe = find_claude()
     if exe and claude_ready(exe, env):
-        return [exe, "-p", "--permission-mode", "bypassPermissions"], "claude"
+        # model: 단계마다 모델을 고름 (예: 심층 감시의 판단·검수 = claude-fable-5-2, 2026-11-24 사용자 "판단은 fable이 해주세요")
+        return [exe, "-p", "--permission-mode", "bypassPermissions"] + (["--model", model] if model else []), \
+            f"claude({model})" if model else "claude"
     if exe:
         run.log(f"Claude Code 로그인 안 됨 ({exe}) — Codex 로 대신 (docs/56 §1 한 번 로그인)")
     codex = shutil.which("codex")
@@ -199,7 +202,7 @@ def main() -> None:
     a = ap.parse_args()
     if a.list:   # 설치 스크립트가 읽음 — 영문만 (콘솔 인코딩과 무관하게)
         for k, v in load_jobs(ROOT).items():
-            print(f"{k}|{v['time']}")
+            print(f"{k}|{v['time']}|{v.get('repeat_hours', '')}")   # 반복 작업(심층 감시)은 시간 간격
         return
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     if not a.job:
@@ -211,6 +214,12 @@ def main() -> None:
     if lock.exists() and time.time() - lock.stat().st_mtime < 6 * 3600:
         run.log("이미 도는 중 — 이번 차례는 건너뜀")
         return
+    # wait_for: 이 작업들이 도는 중이면 이번 차례는 건너뜀 (예: 심층 감시는 아침 브리핑이 렌더하는 동안 PC·목소리 크레딧을 나눠 쓰지 않음)
+    for other in (load_jobs(ROOT).get(a.job) or {}).get("wait_for") or []:
+        ol = run.home / "locks" / f"{other}.lock"
+        if ol.exists() and time.time() - ol.stat().st_mtime < 6 * 3600:
+            run.log(f"{other} 가 도는 중 — 이번 차례는 건너뜀")
+            return
     lock.write_text(f"{os.getpid()} {dt.datetime.now():%Y-%m-%d %H:%M}", encoding="utf-8")
     stamp = f"{dt.datetime.now():%Y%m%d-%H%M}"
     try:
@@ -226,34 +235,54 @@ def main() -> None:
                    YTFLOW_LOCAL_ROUTINE=a.job,
                    # 하위 에이전트를 백그라운드로 돌려도 claude -p 가 10분 뒤 끊지 않게 (11-23 AI 커닝 편 조사 중단)
                    CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS="0")
-        prompt = COMMON.format(title=job.get("title", a.job), wt=wt, branch=branch, root=ROOT, drive=run.drive,
-                               today=f"{dt.date.today():%Y-%m-%d (%a)}", prompt=job["prompt"]) + \
-            (wt / job["prompt"]).read_text(encoding="utf-8")
-        cmd, who = agent_cmd(wt, env, run)
-        if not cmd:
-            raise SystemExit("claude·codex 둘 다 실행할 수 없음 — docs/56 §1")
-        run.log(f"시작: {a.job} ({who}) · 작업 폴더 {wt}")
+        # 단계: steps 가 있으면 차례로 (단계마다 지시문·모델·시간), 없으면 prompt 하나.
+        # 어느 단계든 작업 폴더에 ROUTINE_STOP 을 만들면 거기서 끝 (예: 판단 단계가 '안 만듦').
+        steps = job.get("steps") or [{"name": a.job, "prompt": job["prompt"], "timeout_min": job.get("timeout_min", 180)}]
+        stop_f = wt / "ROUTINE_STOP"
+        stop_f.unlink(missing_ok=True)
+        results, outs, who, rc, t0, stopped_at = [], [], "", 0, time.time(), None
+        for i, st in enumerate(steps):
+            prompt = COMMON.format(title=job.get("title", a.job), wt=wt, branch=branch, root=ROOT, drive=run.drive,
+                                   today=f"{dt.datetime.now():%Y-%m-%d (%a) %H:%M}", prompt=st["prompt"]) + \
+                (wt / st["prompt"]).read_text(encoding="utf-8")
+            cmd, who = agent_cmd(wt, env, run, st.get("model") or job.get("model"))
+            if not cmd:
+                raise SystemExit("claude·codex 둘 다 실행할 수 없음 — docs/56 §1")
+            run.log(f"시작: {a.job}/{st.get('name', i)} ({who}) · 작업 폴더 {wt}")
+            if a.dry_run:
+                continue
+            try:
+                r = subprocess.run(cmd, cwd=wt, input=prompt, text=True, encoding="utf-8", errors="replace",
+                                   capture_output=True, timeout=int(st.get("timeout_min", 180)) * 60, env=env)
+                rc, out = r.returncode, (r.stdout or "") + "\n--- stderr ---\n" + (r.stderr or "")
+            except subprocess.TimeoutExpired as e:
+                rc, out = 124, f"시간 초과 ({st.get('timeout_min')}분)\n{e.stdout or ''}"
+            outs.append(f"===== {st.get('name', i)} ({who}) 종료 코드 {rc} =====\n{out}")
+            res_f = wt / "LOCAL_RESULT.md"
+            if res_f.exists():
+                results.append(res_f.read_text(encoding="utf-8").rstrip())
+                res_f.unlink()
+            if stop_f.exists() or rc:
+                stopped_at = i
+                break
         if a.dry_run:
             run.log("dry-run: 여기까지 (에이전트 실행 안 함)")
             return
-        t0 = time.time()
-        try:
-            r = subprocess.run(cmd, cwd=wt, input=prompt, text=True, encoding="utf-8", errors="replace",
-                               capture_output=True, timeout=int(job.get("timeout_min", 180)) * 60, env=env)
-            rc, out = r.returncode, (r.stdout or "") + "\n--- stderr ---\n" + (r.stderr or "")
-        except subprocess.TimeoutExpired as e:
-            rc, out = 124, f"시간 초과 ({job.get('timeout_min')}분)\n{e.stdout or ''}"
         mins = (time.time() - t0) / 60
-        res_f = wt / "LOCAL_RESULT.md"
-        res = res_f.read_text(encoding="utf-8") if res_f.exists() else f"{a.job}: 보고 없음 (종료 코드 {rc}) — 로그 확인"
+        res = "\n\n".join(results) or f"{a.job}: 보고 없음 (종료 코드 {rc}) — 로그 확인"
+        first = res.strip().splitlines()[0] if res.strip() else a.job
+        if stopped_at == 0 and not rc and job.get("quiet_skip"):
+            # 첫 단계(판단)에서 '안 만듦' — 2시간마다 알림·보고 파일을 쌓지 않고 로그 한 줄만
+            run.log(f"끝: {first} ({mins:.0f}분)")
+            (run.home / "logs" / f"{a.job}.last.txt").write_text("\n\n".join(outs), encoding="utf-8")
+            return
         moved = mirror_media(wt, run)
         prune_media(wt, run)
         rep = run.home / "reports" / f"{stamp}-{a.job}.md"
         rep.parent.mkdir(parents=True, exist_ok=True)
         rep.write_text(res.rstrip() + f"\n\n---\n에이전트 {who} · 종료 코드 {rc} · {mins:.0f}분\n"
                        + ("\n".join(f"- {m}" for m in moved) or "- Drive 로 옮길 새 큰 파일 없음") + "\n", encoding="utf-8")
-        (run.home / "logs" / f"{stamp}-{a.job}.agent.txt").write_text(out, encoding="utf-8")
-        first = res.strip().splitlines()[0] if res.strip() else a.job
+        (run.home / "logs" / f"{stamp}-{a.job}.agent.txt").write_text("\n\n".join(outs), encoding="utf-8")
         run.log(f"끝: {first} (종료 코드 {rc}, {mins:.0f}분) · 보고 {rep}")
         notify(job.get("title", a.job), first)
     except Exception as e:  # noqa: BLE001
