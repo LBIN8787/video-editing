@@ -9,3 +9,5 @@
 - 2026-11-22 · dram-lawsuit(새로 추가) · 미국 D램 담합 집단소송 기각 신청 거부(2026.11.14, 노엘 와이즈 판사) · PYMNTS·HotHardware 등 보도, 판결문 원문 확인 필요 · 위법 판단 아님. 후속편의 '2023 감산은 각자' 설명에 반론이 될 수 있는 쟁점이라 지켜봄
 - 2026-11-22 · wallst-chip-financing · 5,000억 달러는 '비구속 MOU, 조달 목표'였음(2026.8.10 발표, 회사별 약정·일정 비공개) · 엔비디아 발표·Fortune(2026.8.11) · 영상의 "아직 집행 0(WSJ 보도)"과 어긋나지 않음. 'Scotch mist' 보도는 원문 미확인
 - 2026-11-22 · nand-contract · TrendForce 2027 낸드 하락 전망 원문 재확인 대상(제목: 중국 클라우드 업체 주문 감소가 북미 수요 증가를 넘어선다) · 영상 baseline 과 같은 방향
+- 2026-11-23 · ceo-board-probe · 베선트 재무장관(CBS Face the Nation, 현지 11.22): 엔비디아 준법 답 "We don't" — 아직 못 받음, "who was in charge of compliance" · 이사회가 빠르게 확인 중 · CBS 녹취 https://www.cbsnews.com/news/transcript-treasury-secretary-scott-bessent-face-the-nation-with-margaret-brennan-nov-22-2026/ · 조사 결과·정식 CEO 선임은 아직 — 변화 없음(불확실성 그대로). 황 전 CEO 상원 증언 동의·12월 초 하원 면담(CBS 기사)
+- 2026-11-23 · (새 단서) 손정의 SK하이닉스 약 1조 달러 인수 검토 → 중단 보도(외신 인용, 재경일보 11.21·서울경제 11.22) · 소프트뱅크 "no longer under active evaluation" · 메모리 쪽 신호 아님(가격 아닌 지배권 이야기) — 11/23 브리핑·심층 소재

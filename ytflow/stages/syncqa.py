@@ -95,9 +95,19 @@ def run(project: Project) -> dict:
             sil.append((st, float(ln.split("silence_end:")[1].split()[0])))
             st = None
 
+    # 장 표지 효과음처럼 짧은 소리(0.3초 이하)로 끊긴 무음은 하나로 본다 — 끊긴 채면 받아쓰기가 앞당겨 잡은
+    # 첫 단어(앞 장면 말끝 근처)를 보정하지 못해, 실제로는 맞는 자막을 2초 가까이 밀렸다고 잰다 (2026-11-23 브리핑 장 2 표지)
+    merged = []
+    for s0, e0 in sil:
+        if merged and s0 - merged[-1][1] <= 0.3:
+            merged[-1] = (merged[-1][0], e0)
+        else:
+            merged.append((s0, e0))
+    sil = merged
+
     def onset(t):
         for s0, e0 in sil:
-            if s0 - 0.3 <= t < e0 - 0.05 and e0 - t <= 1.5:
+            if s0 - 0.3 <= t < e0 - 0.05 and e0 - t <= 2.5:   # 무음 속에서는 말이 시작될 수 없음 → 무음 끝이 실제 말 시작
                 return e0
         return t
 
