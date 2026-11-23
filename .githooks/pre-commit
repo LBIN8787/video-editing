@@ -1,3 +1,0 @@
-#!/bin/sh
-# 매뉴얼·규칙 파일은 한 번에 한 명만 (docs/35, manual/OWNERS.yaml). 켜기: git config core.hooksPath .githooks
-python3 "$(git rev-parse --show-toplevel)/scripts/manual_guard.py" pre-commit
