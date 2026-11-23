@@ -1564,6 +1564,9 @@ def make(project: Project, workers: int = 3) -> Path:
         e = config.load("pipeline").get("edit", {}) or {}
         if idn and idn.get("base_skin") and not os.environ.get("YTFLOW_SKIN") and not e.get("skin"):
             os.environ["YTFLOW_SKIN"] = idn["base_skin"]
+    if spec.get("brand") == "market" and spec.get("g_pass", True):   # G 보완 (manual/09 §6, 2026-11-24): 말할 때 바뀜 + 동사를 연기하는 사물
+        from . import gpass
+        print(f"[hybrid] G 보완: {gpass.apply(spec)}")
     chapters = {sc["chapter"]: sc for sc in spec["scenes"] if sc["type"] == "chapter"}
     for sc in spec["scenes"]:  # 장 표시(왼쪽 위)
         ch = chapters.get(sc.get("chapter"))
