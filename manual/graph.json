@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-25T01:01:54",
- "source_hash": "75dd8fb895a8",
+ "generated": "2026-11-25T08:49:42",
+ "source_hash": "0996b361df1c",
  "audit": {
   "date": "2026-11-24T03:00",
   "counts": {
@@ -789,40 +789,38 @@
   "fixed": []
  },
  "stats": {
-  "manual_version": 126,
-  "versions": 126,
+  "manual_version": 127,
+  "versions": 127,
   "reviews": 58,
   "rejects": 31,
   "passes": 27,
-  "pending": 1,
+  "pending": 0,
   "rules": 57,
   "checks": 90,
   "sections": 221,
   "must": 30,
   "auto": 41,
-  "intents": 348,
+  "intents": 349,
   "misaligned": 1,
   "intents_reviewed": 7,
   "conflicts": 3,
   "code": 85,
   "terms": 140,
-  "bans": 233,
+  "bans": 235,
   "feedback": 264,
   "topics": 4,
-  "episodes": 52,
+  "episodes": 53,
   "main_situations": 17,
   "tiers": {
    "principle": 57,
-   "standard": 194,
+   "standard": 196,
    "style": 29,
    "trial": 10
   },
   "overfit": 17,
   "principle_bans": 51
  },
- "pending": [
-  "[2026-11-24 · 사용자 피드백 · 층: 작업 기준] 우선 005 영상은 좀 둘다 별로에요 우선 005 오른쪽 개선안이 뭘 나타내고싶은건지 모르겠고 저 칩 이미지가 필요해? 저게 왜 필요하지? 엔비디아인데? 직관성도 떨어지고 별로 설명에도 안적합한데 라는 생각입니다 019영상도 좀 정지화면이 긴거같아요 보통 다큐멘터리나 공중파 등 대형 인력 편집스타일에서 저런 정지화면이나 연출을 자주 사용하나여? 그리고 상황설명에 있어서 도움이되냐 대본이 말하는 것을 이해하기 쉽게 표현했냐 직관성이 좋냐? 하면 별로 왼쪽보다 앞서지도 않습니다. 차라리 이전에 제가 호평한 008은 대본이 말하는 것데 대해서 설명과 직관성이 괜찮았는데 이번에는 전혀 그에 부합하지 않는 것 같아요"
- ],
+ "pending": [],
  "status_labels": {
   "aligned": "정렬됨",
   "over": "과잉 해석",
@@ -2148,6 +2146,42 @@
    "absolute": false,
    "must": true,
    "tier_key": "ban:de95751d",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:05§0-9",
+   "text": "어떻게: 그림은 대사의 내용(실제 회사·관계·값)을 연기한다. decide.why 에 '기존 장면보다 무엇이 더 잘 이해되나'를 한 문장으로 쓸 수 없으면 새 문법을 고르지 않는다. 고정 틀(fixedframe)·하나 → 여럿(replicate)은 기본값·추천에 넣지 않는다(실험 기록으로만).",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:260d86a6",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:05§0-9",
+   "text": "넘치면: 새 문법을 아예 시도하지 않음 → 내용을 연기하는 문법(008 관계도)은 계속 쓴다. 모자라면: 멋있는 레퍼런스 형식을 그대로 옮김 → 위 한 문장 검사.",
+   "themes": [
+    "script"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:2d4f5775",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -5534,7 +5568,7 @@
    "key": "05",
    "file": "manual/05-style-matching.md",
    "label": "05. 편집 스타일 고르기 — 영상마다, 장면마다",
-   "lines": 257,
+   "lines": 262,
    "versions": [
     1,
     2,
@@ -5836,9 +5870,10 @@
     122,
     123,
     124,
-    125
+    125,
+    126
    ],
-   "last_version": 125
+   "last_version": 126
   },
   {
    "id": "doc:README",
@@ -6953,12 +6988,13 @@
    "label": "연출 결정 기록 — 여러 연출 가운데 '이것'을 고른 근거와 의도 (작업 기준, 2026-11-24 사용자)",
    "title": "0-9. 연출 결정 기록 — 여러 연출 가운데 '이것'을 고른 근거와 의도 (작업 기준, 2026-11-24 사용자)",
    "line": 167,
-   "end": 180,
+   "end": 185,
    "tag_version": null,
    "versions": [
-    125
+    125,
+    127
    ],
-   "last_version": 125
+   "last_version": 127
   },
   {
    "id": "sec:05§0-8",
@@ -6968,8 +7004,8 @@
    "level": 2,
    "label": "화풍과 연출은 상황이 고른다 — 그림은 원화, 코드는 움직임 (2026-11-18 사용자)",
    "title": "0-8. 화풍과 연출은 상황이 고른다 — 그림은 원화, 코드는 움직임 (2026-11-18 사용자)",
-   "line": 181,
-   "end": 192,
+   "line": 186,
+   "end": 197,
    "tag_version": null,
    "versions": [
     48,
@@ -6985,8 +7021,8 @@
    "level": 2,
    "label": "영상 단위: 그래픽 팩 고르기",
    "title": "1. 영상 단위: 그래픽 팩 고르기",
-   "line": 193,
-   "end": 205,
+   "line": 198,
+   "end": 210,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7012,8 +7048,8 @@
    "level": 2,
    "label": "장면 단위: 연출 type 고르기 (말하는 내용 → 화면)",
    "title": "2. 장면 단위: 연출 type 고르기 (말하는 내용 → 화면)",
-   "line": 206,
-   "end": 232,
+   "line": 211,
+   "end": 237,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7061,8 +7097,8 @@
    "level": 2,
    "label": "리듬 규칙 (docs/15 근거, `check` 가 일부 자동 검사)",
    "title": "3. 리듬 규칙 (docs/15 근거, `check` 가 일부 자동 검사)",
-   "line": 233,
-   "end": 237,
+   "line": 238,
+   "end": 242,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -7075,8 +7111,8 @@
    "level": 2,
    "label": "주제별 조합 (출발점) — 주제 레포로 옮김",
    "title": "4. 주제별 조합 (출발점) — 주제 레포로 옮김 (v34)",
-   "line": 238,
-   "end": 240,
+   "line": 243,
+   "end": 245,
    "tag_version": 34,
    "versions": [
     34
@@ -7091,8 +7127,8 @@
    "level": 2,
    "label": "시험작 (같은 이야기를 다른 연출로)",
    "title": "5. 시험작 (같은 이야기를 다른 연출로)",
-   "line": 241,
-   "end": 244,
+   "line": 246,
+   "end": 249,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7113,8 +7149,8 @@
    "level": 2,
    "label": "UI 재연·문서 강조 도구",
    "title": "6. UI 재연·문서 강조 도구 (v50, 2026-11-19)",
-   "line": 245,
-   "end": 257,
+   "line": 250,
+   "end": 262,
    "tag_version": 50,
    "versions": [
     50
@@ -16377,7 +16413,23 @@
    "applied": [],
    "themes": [
     "length"
-   ]
+   ],
+   "commit": {
+    "sha": "9d6c5945ec4d48d280cd37946be30a183fe4f2db",
+    "subject": "매뉴얼 v126: 심층 편은 올리는 요일·날짜에 묶이지 않게 (03 §0-5)",
+    "date": "2026-11-25",
+    "other_files": []
+   }
+  },
+  {
+   "id": "ver:127",
+   "kind": "version",
+   "v": 127,
+   "date": "2026-11-25",
+   "label": "v127",
+   "summary": "새 연출 문법은 대사의 내용(실제 회사·관계·값)을 연기할 때만 — docu 시범 005·019 기각, fixedframe·replicate 기본값 제외 (05 §0-9, docs/67 §9)",
+   "applied": [],
+   "themes": []
   },
   {
    "id": "rev:1",
@@ -18404,10 +18456,10 @@
    ]
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1738",
+   "id": "code:ytflow/stages/hybrid.py:1740",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1738,
+   "line": 1740,
    "versions": [
     22
    ],
@@ -20360,7 +20412,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1738",
+     "ref": "code:ytflow/stages/hybrid.py:1740",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -33688,7 +33740,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1738",
+     "ref": "code:ytflow/stages/hybrid.py:1740",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -34691,6 +34743,41 @@
    "annotated": false
   },
   {
+   "id": "intent:510cbf66",
+   "kind": "intent",
+   "quote": "005 오른쪽 개선안이 뭘 나타내고싶은건지 모르겠고 저 칩 이미지가 필요해? … 019영상도 좀 정지화면이 긴거같아요 … 차라리 이전에 제가 호평한 008은 대본이 말하는 것데 대해서 설명과 직관성이 괜찮았는데",
+   "label": "005 오른쪽 개선안이 뭘 나타내고싶은건지 모르겠고 저 칩 이미지가 필요해? … 019영상도 좀 정지화면이 ",
+   "versions": [],
+   "date": "2026-11-24",
+   "sources": [
+    {
+     "ref": "sec:05§0-9",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:510cbf66"
+   ],
+   "themes": [
+    "script"
+   ],
+   "ann_key": "intent:510cbf66",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:05§0-9",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:6ca3c450",
    "kind": "intent",
    "quote": "더 이런 편집사례들을 조사하세요 제가 원하는건 방송국이나 대형 인력들이 만드는 편집연출정도의 레벨입니다. 또한 단순 다큐를 사용할때만 이를 작설하는 것이 아니라 선택과 방향성 설정에 있어서 이를 기록하라는 것 입니다. 다양한 연출법 편집법 스타일들이 존재하는데 그 다양항것들중 이것을 선택한 근거와 의도가 명확해야합니다. 제가 주의하는건 추적 불가능하고 일관성이 없는 단순 슬롭입니다.",
@@ -34973,6 +35060,12 @@
     },
     {
      "ref": "sec:03§0-5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:feedback",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -37163,7 +37256,7 @@
     "sec:README§2-5",
     "ver:21",
     "code:ytflow/stages/hybrid.py:1331",
-    "code:ytflow/stages/hybrid.py:1738",
+    "code:ytflow/stages/hybrid.py:1740",
     "code:ytflow/stages/stage.py:1",
     "code:ytflow/stages/thumbnail.py:165"
    ],
@@ -38229,7 +38322,7 @@
     "sec:feedback§h396",
     "ver:21",
     "ver:34",
-    "code:ytflow/stages/hybrid.py:1738",
+    "code:ytflow/stages/hybrid.py:1740",
     "code:ytflow/stages/stage.py:1",
     "intent:b0fd8bcd",
     "fb:5"
@@ -67771,6 +67864,211 @@
        "say": "미국은 사슬의 가운데가 돌아온 것을 하루 만에 값으로 매겼습니다. 그렇다면 오늘 아침, 그 사슬의 끝에 있는 한국 메모리는 얼마나 따라갈까요?"
       }
      ]
+    },
+    {
+     "project": "20261125-market-daily",
+     "scenes": 18,
+     "coverage": 0.78,
+     "fit": 0.43,
+     "rows": [
+      {
+       "s": 1,
+       "type": "versus",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "어제 화요일, 코스피는 젠슨 황의 복귀 소식을 받고 6.32% 올라 5,000선을 되찾았습니다. 그런데 몇 시간 뒤 같은 화요일 미국의 반도체 지수는 7.88% "
+      },
+      {
+       "s": 2,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "숫자부터 보겠습니다. 11월 24일 화요일 미국 장 마감 기준, 다우는 0.85% 올라 50,018로 5만 선을 다시 넘었습니다. S&P 500은 0.50%, 나"
+      },
+      {
+       "s": 3,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "첫 번째, 무엇이 얼마나 빠졌는지입니다. 같은 반도체 사슬이라도 빠진 폭이 크게 갈렸습니다."
+      },
+      {
+       "s": 4,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "엔비디아 칩을 빌려주는 코어위브는 11.86%, 서버를 만드는 델은 11.83%, 메모리를 대는 마이크론은 11.01% 내렸습니다. 경쟁사 AMD도 8.86% 빠"
+      },
+      {
+       "s": 5,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "그래서 직접 계산해 봤습니다. 월요일에 오른 만큼 가운데, 화요일에 얼마를 돌려줬는지입니다. 엔비디아는 24%만 돌려줬습니다. 오른 몫의 4분의 3을 지킨 겁니다"
+      },
+      {
+       "s": 6,
+       "type": "motionboard",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "그림으로 보면 이렇습니다. 시장은 황의 복귀라는 소식 자체는 대부분 남겨 뒀습니다. 엔비디아가 오른 몫의 76%를 지켰으니까요."
+      },
+      {
+       "s": 7,
+       "type": "chapter",
+       "sit": "said",
+       "fit": true,
+       "rec": [
+        "bite",
+        "footage",
+        "quote"
+       ],
+       "say": "두 번째, 반도체에서 빠진 돈이 시장을 떠났는지입니다. 숫자는 아니라고 말합니다."
+      },
+      {
+       "s": 8,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "업종별로 보면 기술 업종만 3.26% 빠졌고, 나머지는 대부분 올랐습니다. 가장 많이 오른 건 헬스케어로 2.95%, 생활필수품을 파는 회사들도 1.66% 올랐습"
+      },
+      {
+       "s": 9,
+       "type": "checklist",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "헬스케어에는 이유가 하나 더 있었습니다. 프랑스 제약사 사노피가 미국 인스메드를 주당 175달러, 모두 약 410억 달러에 사기로 했습니다. 회사 공시에 따르면 "
+      },
+      {
+       "s": 10,
+       "type": "versus",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "사람들의 시각은 갈립니다. UBS 글로벌 웰스 매니지먼트의 마크 헤펠레 최고투자책임자는, CNBC가 인용한 고객 메모에서 이번 출렁임을 AI 투자 이야기가 깨졌다"
+      },
+      {
+       "s": 11,
+       "type": "map_causal",
+       "sit": "point",
+       "fit": false,
+       "rec": [
+        "zoomshot"
+       ],
+       "say": "여기서부터는 해석입니다. 화요일 미국 시장은 황의 복귀를 되돌리지 않았습니다. 엔비디아 자체는 오른 몫 대부분을 지켰습니다."
+      },
+      {
+       "s": 12,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "이제 한국입니다. 이번에도 시간 순서가 중요합니다."
+      },
+      {
+       "s": 13,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "어제 한국 장은 미국 월요일의 급등을 받아, 코스피가 6.32% 오른 5,006.03으로 닫혔습니다. SK하이닉스는 6.73%, 삼성전자는 6.70% 올랐고, 국"
+      },
+      {
+       "s": 14,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "이 해석을 확인할 날짜들입니다."
+      },
+      {
+       "s": 15,
+       "type": "checklist",
+       "sit": "open-scene",
+       "fit": false,
+       "rec": [
+        "kb",
+        "footage",
+        "stage"
+       ],
+       "say": "오늘 아침 9시, 코스피가 5,000선을 지키는지, 한국 메모리가 마이크론처럼 크게 되돌리는지 봅니다. 오늘은 보도된 재무부의 엔비디아 답변 기한이고, 밤 10시"
+      },
+      {
+       "s": 16,
+       "type": "checklist",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "틀리는 경우도 적어 둡니다. 엔비디아마저 남은 몫을 며칠 안에 돌려준다면, 화요일은 사슬만의 되돌림이 아니라 복귀 효과 전체가 빠지는 첫날이었다는 뜻입니다."
+      },
+      {
+       "s": 17,
+       "type": "kinetic",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "시장은 소식은 남기고, 덤은 돌려줬습니다."
+      },
+      {
+       "s": 18,
+       "type": "outro",
+       "sit": "question",
+       "fit": false,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "미국은 하루 만에 덤을 내려놨습니다. 그렇다면 어제 덤까지 받은 한국은, 오늘 얼마를 내려놓게 될까요?"
+      }
+     ]
     }
    ]
   },
@@ -67803,7 +68101,7 @@
     "새벽",
     "아침"
    ],
-   "count": 28,
+   "count": 29,
    "fit": 5,
    "examples": [
     {
@@ -67855,7 +68153,7 @@
     "일까요",
     "을까요"
    ],
-   "count": 94,
+   "count": 95,
    "fit": 67,
    "examples": [
     {
@@ -67909,8 +68207,8 @@
     "답했",
     "라고 했"
    ],
-   "count": 31,
-   "fit": 24,
+   "count": 32,
+   "fit": 25,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -68074,8 +68372,8 @@
     "하락",
     "급등"
    ],
-   "count": 252,
-   "fit": 116,
+   "count": 262,
+   "fit": 121,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -68419,7 +68717,7 @@
     "이 대목",
     "이 문장"
    ],
-   "count": 17,
+   "count": 18,
    "fit": 0,
    "examples": [
     {
@@ -78363,6 +78661,215 @@
      "say": "미국은 사슬의 가운데가 돌아온 것을 하루 만에 값으로 매겼습니다. 그렇다면 오늘 아침, 그 사슬의 끝에 있는 한국 메모리는 얼마나 따라갈까요?"
     }
    ]
+  },
+  {
+   "id": "ep:20261125-market-daily",
+   "kind": "episode",
+   "topic": "market",
+   "label": "20261125-market-daily",
+   "project": "20261125-market-daily",
+   "scenes": 18,
+   "coverage": 0.78,
+   "fit": 0.43,
+   "rows": [
+    {
+     "s": 1,
+     "type": "versus",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "어제 화요일, 코스피는 젠슨 황의 복귀 소식을 받고 6.32% 올라 5,000선을 되찾았습니다. 그런데 몇 시간 뒤 같은 화요일 미국의 반도체 지수는 7.88% "
+    },
+    {
+     "s": 2,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "숫자부터 보겠습니다. 11월 24일 화요일 미국 장 마감 기준, 다우는 0.85% 올라 50,018로 5만 선을 다시 넘었습니다. S&P 500은 0.50%, 나"
+    },
+    {
+     "s": 3,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "첫 번째, 무엇이 얼마나 빠졌는지입니다. 같은 반도체 사슬이라도 빠진 폭이 크게 갈렸습니다."
+    },
+    {
+     "s": 4,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "엔비디아 칩을 빌려주는 코어위브는 11.86%, 서버를 만드는 델은 11.83%, 메모리를 대는 마이크론은 11.01% 내렸습니다. 경쟁사 AMD도 8.86% 빠"
+    },
+    {
+     "s": 5,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "그래서 직접 계산해 봤습니다. 월요일에 오른 만큼 가운데, 화요일에 얼마를 돌려줬는지입니다. 엔비디아는 24%만 돌려줬습니다. 오른 몫의 4분의 3을 지킨 겁니다"
+    },
+    {
+     "s": 6,
+     "type": "motionboard",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "그림으로 보면 이렇습니다. 시장은 황의 복귀라는 소식 자체는 대부분 남겨 뒀습니다. 엔비디아가 오른 몫의 76%를 지켰으니까요."
+    },
+    {
+     "s": 7,
+     "type": "chapter",
+     "sit": "said",
+     "fit": true,
+     "rec": [
+      "bite",
+      "footage",
+      "quote"
+     ],
+     "say": "두 번째, 반도체에서 빠진 돈이 시장을 떠났는지입니다. 숫자는 아니라고 말합니다."
+    },
+    {
+     "s": 8,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "업종별로 보면 기술 업종만 3.26% 빠졌고, 나머지는 대부분 올랐습니다. 가장 많이 오른 건 헬스케어로 2.95%, 생활필수품을 파는 회사들도 1.66% 올랐습"
+    },
+    {
+     "s": 9,
+     "type": "checklist",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "헬스케어에는 이유가 하나 더 있었습니다. 프랑스 제약사 사노피가 미국 인스메드를 주당 175달러, 모두 약 410억 달러에 사기로 했습니다. 회사 공시에 따르면 "
+    },
+    {
+     "s": 10,
+     "type": "versus",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "사람들의 시각은 갈립니다. UBS 글로벌 웰스 매니지먼트의 마크 헤펠레 최고투자책임자는, CNBC가 인용한 고객 메모에서 이번 출렁임을 AI 투자 이야기가 깨졌다"
+    },
+    {
+     "s": 11,
+     "type": "map_causal",
+     "sit": "point",
+     "fit": false,
+     "rec": [
+      "zoomshot"
+     ],
+     "say": "여기서부터는 해석입니다. 화요일 미국 시장은 황의 복귀를 되돌리지 않았습니다. 엔비디아 자체는 오른 몫 대부분을 지켰습니다."
+    },
+    {
+     "s": 12,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "이제 한국입니다. 이번에도 시간 순서가 중요합니다."
+    },
+    {
+     "s": 13,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "어제 한국 장은 미국 월요일의 급등을 받아, 코스피가 6.32% 오른 5,006.03으로 닫혔습니다. SK하이닉스는 6.73%, 삼성전자는 6.70% 올랐고, 국"
+    },
+    {
+     "s": 14,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "이 해석을 확인할 날짜들입니다."
+    },
+    {
+     "s": 15,
+     "type": "checklist",
+     "sit": "open-scene",
+     "fit": false,
+     "rec": [
+      "kb",
+      "footage",
+      "stage"
+     ],
+     "say": "오늘 아침 9시, 코스피가 5,000선을 지키는지, 한국 메모리가 마이크론처럼 크게 되돌리는지 봅니다. 오늘은 보도된 재무부의 엔비디아 답변 기한이고, 밤 10시"
+    },
+    {
+     "s": 16,
+     "type": "checklist",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "틀리는 경우도 적어 둡니다. 엔비디아마저 남은 몫을 며칠 안에 돌려준다면, 화요일은 사슬만의 되돌림이 아니라 복귀 효과 전체가 빠지는 첫날이었다는 뜻입니다."
+    },
+    {
+     "s": 17,
+     "type": "kinetic",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "시장은 소식은 남기고, 덤은 돌려줬습니다."
+    },
+    {
+     "s": 18,
+     "type": "outro",
+     "sit": "question",
+     "fit": false,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "미국은 하루 만에 덤을 내려놨습니다. 그렇다면 어제 덤까지 받은 한국은, 오늘 얼마를 내려놓게 될까요?"
+    }
+   ]
   }
  ],
  "edges": [
@@ -83281,6 +83788,22 @@
    ]
   },
   {
+   "s": "ver:126",
+   "t": "doc:feedback",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:127",
+   "t": "sec:05§0-9",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -84888,7 +85411,7 @@
   },
   {
    "s": "ver:22",
-   "t": "code:ytflow/stages/hybrid.py:1738",
+   "t": "code:ytflow/stages/hybrid.py:1740",
    "kind": "implemented_by"
   },
   {
@@ -85965,6 +86488,16 @@
    "s": "intent:a7e032cd",
    "t": "fb:187",
    "kind": "quoted_in"
+  },
+  {
+   "s": "intent:510cbf66",
+   "t": "sec:05§0-9",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:510cbf66",
+   "t": "theme:script",
+   "kind": "about"
   },
   {
    "s": "intent:2548325d",
@@ -90199,6 +90732,11 @@
   {
    "s": "topic:market",
    "t": "ep:20261124-market-daily",
+   "kind": "episode"
+  },
+  {
+   "s": "topic:market",
+   "t": "ep:20261125-market-daily",
    "kind": "episode"
   },
   {
