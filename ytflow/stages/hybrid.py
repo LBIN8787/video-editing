@@ -632,7 +632,7 @@ def s_checklist(D: HDoc, sc: dict, bt: list, dur: float):
     D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
     D.h1(sc.get("title", ""), y=150)
     rows = sc["rows"]
-    y0, rh = 310, 125
+    y0, rh = 310, sc.get("row_h") or (125 if len(rows) <= 5 else 112)   # 줄이 여섯 개 이상이면 줄 간격을 좁혀 자막 자리를 비움 (2026-11-24)
     xl = sc.get("x", 380)                     # 오른쪽에 움직이는 그림을 둘 때: "x": 160, "text_w": 900 (요약 + 애니메이션 혼용)
     tw = sc.get("text_w", 1000)
     shown = 0

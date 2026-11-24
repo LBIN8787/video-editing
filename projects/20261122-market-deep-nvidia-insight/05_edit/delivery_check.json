@@ -3,7 +3,7 @@
  "output": null,
  "dry_run": false,
  "commands": [
-  "'C:\\Users\\s9907\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-8.1.1-full_build\\bin\\ffmpeg.EXE' -hide_banner -nostdin -i 'projects\\20261122-market-deep-nvidia-insight\\05_edit\\final.mp4' -vn -af loudnorm=I=-14:TP=-1:LRA=11:print_format=json -f null -"
+  "'C:\\Users\\s9907\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-8.1.1-full_build\\bin\\ffmpeg.EXE' -hide_banner -nostdin -i 'E:\\ytflow-local\\wt-main\\projects\\20261122-market-deep-nvidia-insight\\05_edit\\final.mp4' -vn -af loudnorm=I=-14:TP=-1:LRA=11:print_format=json -f null -"
  ],
  "verified": false,
  "verification": [],
@@ -75,7 +75,7 @@
   {
    "check": "file size",
    "status": "PASS",
-   "value": "113.5 MB",
+   "value": "114.8 MB",
    "expected": "<= 262144 MB",
    "fix": "export.py --crf 24 or lower resolution",
    "reason": "",
@@ -103,7 +103,7 @@
    "check": "loudness",
    "status": "PASS",
    "value": "-14.0 LUFS",
-   "expected": "-14 ± 2 LUFS",
+   "expected": "-14 짹 2 LUFS",
    "fix": "loudness.py -I -14 for speech or music; leave ambience/near-silence (<= -40 LUFS) alone and say so",
    "reason": "",
    "kind": "judgement"

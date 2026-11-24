@@ -602,8 +602,10 @@ def checklist_pics(D, sc: dict, bt: list):
                     start + k * gap, "opacity:0,x:0,y:0", f"opacity:0,x:{x2 - x1:.0f},y:{y2 - y1:.0f}", dur, "power1.inOut")
             D.js.append(f'tl.set("#{r}",{{opacity:1}},{start + k * gap + 0.01:.2f});tl.to("#{r}",{{opacity:0,duration:0.15}},{start + k * gap + dur - 0.1:.2f});')
 
-    def num(x, y, pre, v, post, color, size, at, start=0.0, dur=0.9, fam="heavy"):
+    def num(x, y, pre, v, post, color, size, at, start=0, dur=0.9, fam="heavy"):
         """숫자가 start 에서 v 까지 올라가는 글자."""
+        v = int(v) if isinstance(v, float) and v.is_integer() else v
+        start = int(start) if isinstance(start, float) and start.is_integer() else start
         i = D._id()
         dec = max(len(str(v).split(".")[1]) if "." in str(v) else 0, len(str(start).split(".")[1]) if "." in str(start) else 0)
         D.items.append(f'<div id="{i}" style="position:absolute;left:{x:.0f}px;top:{y:.0f}px;opacity:0;z-index:7"><div style="transform:translate(-50%,-50%);'
@@ -620,10 +622,10 @@ def checklist_pics(D, sc: dict, bt: list):
                    f'box-shadow:{SH}">{_e(text)}</div></div>', at, frm, "opacity:1,y:0", 0.45, ease)
 
     def wcard(x, y, w, icon, text, color, at, tag="", frm="opacity:0,y:-24,scale:.9"):
-        tg = (f'<div style="position:absolute;left:-14px;top:-18px;padding:2px 14px;border-radius:8px;background:{color};color:#fff;'
+        tg = (f'<div style="position:absolute;left:14px;top:10px;padding:1px 12px;border-radius:8px;background:{color};color:#fff;'
               f'font-family:heavy,sans-x;font-size:24px">{_e(tag)}</div>') if tag else ""
         return div(f'<div id="ID" style="position:absolute;left:{x - w / 2:.0f}px;top:{y - 70:.0f}px;width:{w}px;min-height:140px;box-sizing:border-box;'
-                   f'padding:18px 22px;border-radius:14px;background:linear-gradient(180deg,#FFFEFB,#F1EEE6);border:4px solid {color};box-shadow:{SH};'
+                   f'padding:44px 22px 16px;border-radius:14px;background:linear-gradient(180deg,#FFFEFB,#F1EEE6);border:4px solid {color};box-shadow:{SH};'
                    f'display:flex;align-items:center;gap:18px;opacity:0;z-index:6">{tg}{svg_markup(icon, 64, color) or ""}'
                    f'<div style="font-family:heavy,sans-x;font-size:32px;line-height:1.3;color:{color}">{_e(text)}</div></div>',
                    at, frm, "opacity:1,y:0,scale:1", 0.5, "back.out(1.7)")
@@ -830,9 +832,9 @@ def checklist_pics(D, sc: dict, bt: list):
             v = float(e["value"])
             D.js.append(f'tl.to("#{bi}",{{scaleY:{1 + v / 100:.3f},backgroundColor:"{REDC}",duration:0.8,ease:"power3.in"}},{td:.2f});')
             D.sfx.append(("whoosh-short", td))
-            num(x + 260, base - H * (1 + v / 100) / 2 - 20, "", v, e.get("unit", "%") + ("+" if e.get("plus") else ""), REDC, 72, td + 0.2, dur=0.8)
+            num(x + 270, base - H * (1 + v / 100) / 2 - 20, "", int(v) if v == int(v) else v, e.get("unit", "%") + ("+" if e.get("plus") else ""), REDC, 72, td + 0.2, dur=0.8)
             if e.get("note"):
-                label(x + 260, base - H * (1 + v / 100) / 2 + 60, e["note"], MUT, 28, td + 1.0)
+                label(CX, base + 50, e["note"], MUT, 28, td + 1.0)
         elif kind == "fraction":   # P/E = 주가 ÷ 이익: 아래(이익)가 무너지면 몫이 커진다
             pe_a, pe_b = e["pe"]
             earn, price = e["earn"], e["price"]
@@ -858,7 +860,7 @@ def checklist_pics(D, sc: dict, bt: list):
                 label(CX, 860, e["note"], MUT, 28, tr + 1.4)
         elif kind == "pins":     # 시간 축 위에 각자의 말을 그때에 꽂는다 (위 = 한쪽, 아래 = 다른 쪽)
             y0_, y1_ = e["range"]
-            AXY = e.get("axis_y", 670)
+            AXY = e.get("axis_y", 660)
             ax0, ax1 = X0 + 30, X1 - 30
             xof = lambda yr: ax0 + (yr - y0_) / (y1_ - y0_) * (ax1 - ax0)
             if e.get("head"):
@@ -868,7 +870,7 @@ def checklist_pics(D, sc: dict, bt: list):
                 label(xof(yr), AXY + 34, tx, MUT, 26, at + 0.3)
                 div(f'<div id="ID" style="position:absolute;left:{xof(yr) - 2:.0f}px;top:{AXY - 12}px;width:4px;height:24px;background:#BDB7AA;opacity:0"></div>', at + 0.3)
             placed = {"up": [], "down": []}
-            levels = {"up": [AXY - 95, AXY - 190, AXY - 285], "down": [AXY + 125, AXY + 218]}
+            levels = {"up": [AXY - 95, AXY - 190, AXY - 285], "down": [AXY + 112, AXY + 196]}
             for it in e["items"]:
                 ti, _ = cue(it["t"], it.get("beat"))
                 col = {"ok": GRN, "warn": REDC}.get(it.get("side"), INKC)
@@ -973,6 +975,7 @@ def checklist_pics(D, sc: dict, bt: list):
                          f'<div style="font-family:heavy,sans-x;font-size:27px;line-height:1.25;color:{col}">{_e(it["text"])}</div>{tag}</div>',
                          at + j * 0.08, "opacity:0,scale:.9", "opacity:0.3,scale:.94", 0.4)
                 ti, _ = cue(it["t"], it.get("beat"))
+                ti = max(ti, at + j * 0.08 + 0.45)   # 흐리게 까는 동작이 끝난 뒤에 켬
                 D.js.append(f'tl.to("#{ci}",{{opacity:1,scale:1.06,duration:0.25,ease:"power2.out"}},{ti:.2f});'
                             f'tl.to("#{ci}",{{scale:1,duration:0.3,ease:"back.out(2)"}},{ti + 0.25:.2f});')
                 D.sfx.append(("pop", ti))
