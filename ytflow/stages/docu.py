@@ -108,8 +108,14 @@ def s_docu(D, sc: dict, bt: list, dur: float):
             + (f'<div style="font-family:sans-x;font-size:24px;color:{"#9AA6AE" if rival else "#8FD9C6"}">{H.escape(role)}</div>' if role else "")
             + f'<div style="font-family:heavy;font-size:{size}px;color:{"#C9D0D5" if rival else INKL};line-height:1.1">{H.escape(lab)}</div>'
             + (f'<div id="{i}v" style="font-family:heavy;font-size:{size - 4}px;color:{vcol};line-height:1.1;opacity:0">{H.escape(val)}</div>' if val else "")
+            + (f'<div id="{i}t" style="position:absolute;left:50%;bottom:{h + 18:.0f}px;transform:translateX(-50%);white-space:nowrap;'
+               f'font-family:sans-x;font-size:28px;color:#16191B;background:#EDE6D6;padding:8px 16px;border-radius:22px;opacity:0;'
+               f'box-shadow:0 6px 18px rgba(0,0,0,.35)">{H.escape(nd["think"])}'
+               f'<span style="position:absolute;left:50%;bottom:-10px;width:18px;height:18px;background:#EDE6D6;transform:translateX(-50%) rotate(45deg)"></span></div>'
+               if nd.get("think") else "")
             + "</div>")
-        box[key] = {"id": i, "x": x, "y": y, "w": w, "h": h, "val": val, "vn": vn, "hub": hub, "rival": rival, "bord": bord}
+        box[key] = {"id": i, "x": x, "y": y, "w": w, "h": h, "val": val, "vn": vn, "hub": hub, "rival": rival, "bord": bord,
+                    "think": bool(nd.get("think"))}
 
     # 선: 판 안의 svg 에 (판과 함께 기울어짐)
     paths = []
@@ -128,12 +134,13 @@ def s_docu(D, sc: dict, bt: list, dur: float):
         cx, cy = (sx + ex) / 2 - uy * L * bend, (sy + ey) / 2 + ux * L * bend
         d = f"M{sx:.0f} {sy:.0f} Q{cx:.0f} {cy:.0f} {ex:.0f} {ey:.0f}"
         rival = ln.get("kind") == "rival"
-        strong = ln.get("w") == "strong"
-        col = GRAY if rival else TEAL
+        bad = ln.get("kind") == "bad"   # 하면 안 되는 관계(담합 등) — 빨강
+        strong = ln.get("w") == "strong" or bad
+        col = GRAY if rival else ("#F0706A" if bad else TEAL)
         wd = 3 if rival else (7 if strong else 4.5)
         pid = D._id()
         dash = ' stroke-dasharray="10 12"' if rival else ' pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"'
-        glow = "" if rival else f' style="filter:drop-shadow(0 0 {8 if strong else 5}px {TEAL})"'
+        glow = "" if rival else f' style="filter:drop-shadow(0 0 {8 if strong else 5}px {col})"'
         paths.append(f'<path id="{pid}" d="{d}" fill="none" stroke="{col}" stroke-width="{wd}" stroke-linecap="round"{dash} opacity="0"{glow}/>')
         dot = D._id()
         paths.append(f'<path id="{dot}" d="{d}" fill="none" stroke="#FFF6D8" stroke-width="{wd + 7}" stroke-linecap="round" pathLength="1" '
@@ -170,6 +177,8 @@ def s_docu(D, sc: dict, bt: list, dur: float):
         shown.add(key)
         js.append(f'tl.fromTo("#{bx["id"]}",{{opacity:0,y:26,scale:.88}},{{opacity:1,y:0,scale:1,duration:.42,ease:"back.out(1.8)"}},{t:.2f});')
         D.sfx.append(("click-soft", t))
+        if bx["think"]:
+            js.append(f'tl.fromTo("#{bx["id"]}t",{{opacity:0,y:10}},{{opacity:1,y:0,duration:.35,ease:"back.out(2)"}},{t + 0.35:.2f});')
         if bx["val"] and (bx["hub"] or bx["rival"] or not has_pulse):
             count(key, t + 0.25)
 
@@ -211,6 +220,12 @@ def s_docu(D, sc: dict, bt: list, dur: float):
             js.append(f'tl.fromTo("#{L_["label"]}",{{opacity:0,y:8}},{{opacity:1,y:0,duration:.3}},{t + 0.45:.2f});')
         D.sfx.append(("pencil", t))
 
+    # 하나 → 여럿 (R3-2, docs/67): 처음엔 한 칩에 가까이 다가가 있다가, replicate 때 물러나며 같은 칩들이 나타남
+    rep = next((a for b in sc.get("beats", []) for a in (b.get("do") or []) if isinstance(a, dict) and a.get("replicate")), None)
+    if rep and rep["replicate"] in box:
+        rb = box[rep["replicate"]]
+        z = rep.get("zoom", 1.7)
+        js.append(f'gsap.set("#{stage}",{{transformOrigin:"{rb["x"]:.0f}px {rb["y"]:.0f}px",scale:{z}}});')
     has_pulse = any(isinstance(a, dict) and "pulse" in a for b in sc.get("beats", []) for a in (b.get("do") or []))
     tilted = False
     for k, (b, (t0, d)) in enumerate(zip(sc.get("beats", []), bt)):
@@ -226,6 +241,19 @@ def s_docu(D, sc: dict, bt: list, dur: float):
             if "link" in act:
                 for j, key in enumerate(act["link"] if isinstance(act["link"], list) else [act["link"]]):
                     link(key, t + j * 0.2)
+            if act.get("headline") and not act.get("arrange"):   # 장면의 결론 한 줄 (위 가운데)
+                hid = D._id()
+                col_h = "#F0706A" if act.get("tone") == "bad" else GOLD
+                D.items.append(f'<div id="{hid}" style="position:absolute;left:960px;top:{act.get("y", 190)}px;transform:translate(-50%,-50%);font-family:heavy;'
+                               f'font-size:58px;color:{col_h};opacity:0;white-space:nowrap">{H.escape(act["headline"])}</div>')
+                js.append(f'tl.fromTo("#{hid}",{{opacity:0,y:14}},{{opacity:1,y:0,duration:.45,ease:"power2.out"}},{t:.2f});')
+                if act.get("out_t"):
+                    js.append(f'tl.to("#{hid}",{{opacity:0,duration:.3}},{_when(sc, k, b, t0, d, act["out_t"], t + 2):.2f});')
+            if act.get("replicate"):   # 규모가 바뀐다 — 물러나며 같은 것이 여럿 (카메라 움직임의 이유: 규모)
+                js.append(f'tl.to("#{stage}",{{scale:1,duration:1.6,ease:"power2.inOut"}},{t:.2f});')
+                for j, key in enumerate(act.get("copies") or []):
+                    show(key, t + 0.5 + j * 0.25)
+                D.sfx.append(("whoosh-short", t))
             if act.get("tilt") and not tilted:   # 개념 설명 장면에서만 쓰는 판 기울기 — 한 번, 천천히
                 tilted = True
                 js.append(f'tl.to("#{stage}",{{rotationX:18,y:-30,scale:.96,duration:1.4,ease:"power2.inOut"}},{t:.2f});')
@@ -295,7 +323,7 @@ def s_docu(D, sc: dict, bt: list, dur: float):
         D.qa.append(f"다큐 장면 {sc.get('id')}: 박자에서 보이지 않은 칩 — {', '.join(missing)}")
 
 
-BIG = ("tilt", "pulse", "arrange", "focus")
+BIG = ("tilt", "pulse", "arrange", "focus", "replicate")
 
 
 def _intent_qa(D, sc: dict) -> None:
