@@ -1,0 +1,1239 @@
+{
+ "project": "20261124-market-deep-nvidia-return",
+ "topic": "market",
+ "topic_name": "주식 · 시장",
+ "scenes": [
+  {
+   "scene": 1,
+   "type": "bite",
+   "chapter": 0,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [],
+   "beats": [
+    {
+     "say": "11월 17일, 엔비디아 이사회 의장 하비 존스는 실적 발표 자리를 이 말로 열었습니다.",
+     "situations": [
+      "earnings"
+     ],
+     "hits": [
+      "실적"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 2,
+   "type": "bignum",
+   "chapter": 0,
+   "situation": "hub-event",
+   "situation_name": "시장을 흔든 사건과 파급",
+   "origin": "add",
+   "also": [
+    "metric",
+    "call-bite"
+   ],
+   "beats": [
+    {
+     "say": "그리고 5일 뒤인 미국 시간 11월 22일, 같은 이사회가 만장일치로 젠슨 황 복귀를 결의했습니다. CEO와 사장, 이사 모두입니다. 사임한 지 11일 만이고, 발표는 23일에 나왔습니다.",
+     "situations": [
+      "hub-event",
+      "call-bite"
+     ],
+     "hits": [
+      "사임"
+     ]
+    },
+    {
+     "say": "주가는 발표 직후 장이 열리기 전 거래에서 30% 넘게 뛰었습니다. 그래서 오늘 질문은 둘입니다. 이사회는 왜 뒤집었나. 그리고 젠슨이 돌아오면, 엔비디아를 둘러싼 문제는 다 풀린 걸까요.",
+     "situations": [
+      "metric",
+      "hub-event"
+     ],
+     "hits": [
+      "30%",
+      "주가"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "map_causal",
+    "kb",
+    "chart"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "사건을 따로 떼어 나열",
+   "why": "v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로"
+  },
+  {
+   "scene": 3,
+   "type": "chapter",
+   "chapter": 1,
+   "situation": "hub-event",
+   "situation_name": "시장을 흔든 사건과 파급",
+   "origin": "add",
+   "also": [],
+   "beats": [
+    {
+     "say": "먼저 사임에서 복귀까지, 12일 동안 누가 무엇을 했는지 날짜 순서로 보겠습니다.",
+     "situations": [
+      "hub-event"
+     ],
+     "hits": [
+      "사임"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "map_causal",
+    "kb",
+    "chart"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "사건을 따로 떼어 나열",
+   "why": "v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로"
+  },
+  {
+   "scene": 4,
+   "type": "checklist",
+   "chapter": 1,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "said",
+    "hub-event"
+   ],
+   "beats": [
+    {
+     "say": "11일 이사회는 사임을 받아들였고, 재무 책임자 콜레트 크레스가 임시 CEO를 맡았습니다. 이틀 뒤인 13일, 엔비디아 주식을 크게 가진 운용사 두 곳이 공개서한으로 복귀까지 선택지에 두라고 요구했고, 일론 머스크는 복귀 청원에 서명한다고 썼습니다.",
+     "situations": [
+      "hub-event",
+      "call-bite"
+     ],
+     "hits": [
+      "사임"
+     ]
+    },
+    {
+     "say": "정부의 첫 반응은 반대였습니다. 15일 베선트 재무장관은 대대적인 쇄신과 외부 CEO를 말했습니다. 17일 이사회는 복귀시킬 뜻이 없다고 했고, 같은 날 황은 이사회가 원하면 돌아오겠다는 성명을 냈습니다. 하원은 그를 12월 1일 비공개로 면담하겠다고 밝혔습니다. 그리고 20일, SEC",
+     "situations": [
+      "metric",
+      "said"
+     ],
+     "hits": [
+      "14%",
+      "주가"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 5,
+   "type": "quote",
+   "chapter": 1,
+   "situation": "said",
+   "situation_name": "누가 말했다",
+   "origin": "main",
+   "also": [
+    "call-bite",
+    "route"
+   ],
+   "beats": [
+    {
+     "say": "흐름이 바뀐 건 22일입니다. 외부 CEO를 말했던 베선트 장관이 방송에서 이렇게 말했습니다. 밖에서 찾으라고 했는데, 그는 이제 밖에 있다.",
+     "situations": [
+      "said",
+      "call-bite"
+     ],
+     "hits": [
+      "말했",
+      "라고 했"
+     ]
+    },
+    {
+     "say": "같은 자리에서 그는 쟁점을 다시 짚었습니다. 문제는 개인사가 아니라, 회사의 어느 단계가 수출통제 문제를 알았느냐라는 겁니다. 재무부는 엔비디아에 우회 수출에 대한 답을 11월 25일까지 달라고 했고, 아직 받지 못했다고 보도됐습니다.",
+     "situations": [
+      "said",
+      "route"
+     ],
+     "hits": [
+      "라고 했"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bite",
+    "footage",
+    "quote"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "j-l-cut",
+     "status": "candidate"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "내레이션으로만 전하기",
+   "why": "그 사람의 목소리·원문이 증거 (source-cut, 03 §0-1)"
+  },
+  {
+   "scene": 6,
+   "type": "quote",
+   "chapter": 1,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "트럼프 대통령도 16일에는 돌아와도 상관없다고 했다가, 발표 직전 주말에는 이사회가 그를 다시 고용하길 바란다고 썼습니다. 그리고 미국 시간 22일, 이사회는 복귀를 결의했습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 7,
+   "type": "chapter",
+   "chapter": 2,
+   "situation": "say-vs-do",
+   "situation_name": "말과 행동을 맞댄다",
+   "origin": "add",
+   "also": [
+    "question"
+   ],
+   "beats": [
+    {
+     "say": "그렇다면 이사회는 스스로 무엇을 이유로 들었을까요. 회사가 낸 공시를 그대로 보겠습니다.",
+     "situations": [
+      "say-vs-do",
+      "question"
+     ],
+     "hits": [
+      "공시"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "versus",
+    "bite",
+    "compare"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "split-screen",
+     "status": "partial"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "한쪽만 크게",
+   "why": "v26 자료를 엮어 — 말(발언)과 행동(공시·거래)을 나란히"
+  },
+  {
+   "scene": 8,
+   "type": "quote",
+   "chapter": 2,
+   "situation": "say-vs-do",
+   "situation_name": "말과 행동을 맞댄다",
+   "origin": "add",
+   "also": [
+    "point",
+    "change"
+   ],
+   "beats": [
+    {
+     "say": "이유는 두 가지입니다. 하나는 황과 여러 차례 만난 뒤 그의 솔직함과 지도력에 만족했다는 것. 다른 하나가 이 문장입니다. 미국 정부 고위층의 의견을 받았고, 그에 근거해 복귀가 국가안보 위험이 없다고 확신한다.",
+     "situations": [
+      "point"
+     ],
+     "hits": [
+      "이 문장"
+     ]
+    },
+    {
+     "say": "공시가 든 회사 밖의 근거는 이 문장 하나뿐입니다. 6일 전의 결정을 뒤집은 이유로 이사회가 직접 적은 것이, 경영 실력이 아니라 정부의 판단이었다는 뜻입니다.",
+     "situations": [
+      "say-vs-do",
+      "change"
+     ],
+     "hits": [
+      "공시"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "versus",
+    "bite",
+    "compare"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-screen",
+     "status": "partial"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "한쪽만 크게",
+   "why": "v26 자료를 엮어 — 말(발언)과 행동(공시·거래)을 나란히"
+  },
+  {
+   "scene": 9,
+   "type": "motionboard",
+   "chapter": 2,
+   "situation": "say-vs-do",
+   "situation_name": "말과 행동을 맞댄다",
+   "origin": "add",
+   "also": [
+    "route"
+   ],
+   "beats": [
+    {
+     "say": "여기서부터는 공시에 없는 해석입니다. 이사회가 복귀를 막은 진짜 걸림돌은 개인사보다 수출통제와 안보였던 것으로 보입니다. 17일 이사회가 가장 먼저 만든 것이 국가안보와 수출통제를 감독하는 위원회였습니다.",
+     "situations": [
+      "say-vs-do",
+      "route"
+     ],
+     "hits": [
+      "공시"
+     ]
+    },
+    {
+     "say": "그리고 22일 정부가 쟁점을 회사의 수출통제 준수로 좁혔고, 같은 날 이사회는 정부 의견을 근거로 복귀를 결의했습니다. 다만 이 순서가 인과라는 말은 공시 어디에도 없습니다. 시간 순서가 그렇다는 것까지만 확인됩니다.",
+     "situations": [
+      "say-vs-do",
+      "route"
+     ],
+     "hits": [
+      "공시"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "versus",
+    "bite",
+    "compare"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-screen",
+     "status": "partial"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "한쪽만 크게",
+   "why": "v26 자료를 엮어 — 말(발언)과 행동(공시·거래)을 나란히"
+  },
+  {
+   "scene": 10,
+   "type": "chapter",
+   "chapter": 3,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "젠슨 황은 돌아왔지만, 그가 떠나기 전과 같은 회사로 돌아온 것은 아닙니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 11,
+   "type": "checklist",
+   "chapter": 3,
+   "situation": "say-vs-do",
+   "situation_name": "말과 행동을 맞댄다",
+   "origin": "add",
+   "also": [
+    "hub-event",
+    "route"
+   ],
+   "beats": [
+    {
+     "say": "공시에 적힌 조건은 다섯입니다. 사임 때 새로 생긴 이사회 의장 자리에 하비 존스가 그대로 남습니다. 황의 행동을 들여다보는 독립 조사위원회는 결론까지 가고, 황도 협조하겠다고 했습니다.",
+     "situations": [
+      "say-vs-do",
+      "hub-event"
+     ],
+     "hits": [
+      "공시"
+     ]
+    },
+    {
+     "say": "새로 만든 수출통제 위원회가 무역과 안보 위험을 감독하고, 회사 전체를 감시할 최고준법책임자 자리를 새로 뽑습니다. 그리고 정부 조사에는 계속 협조한다고 적었습니다.",
+     "situations": [
+      "route"
+     ],
+     "hits": [
+      "수출"
+     ]
+    },
+    {
+     "say": "33년 동안 회사를 혼자 이끈 창업자가, 이제 의장과 위원회의 감시를 받으며 일하게 된 겁니다. 돌아온 건 같은 사람이지만, 그를 둘러싼 장치는 달라졌습니다.",
+     "situations": [
+      "change"
+     ],
+     "hits": [
+      "달라졌"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "versus",
+    "bite",
+    "compare"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-screen",
+     "status": "partial"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "한쪽만 크게",
+   "why": "v26 자료를 엮어 — 말(발언)과 행동(공시·거래)을 나란히"
+  },
+  {
+   "scene": 12,
+   "type": "chapter",
+   "chapter": 4,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "이제 시장이 이 복귀에 얼마의 값을 매겼는지 계산해 보겠습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 13,
+   "type": "bars",
+   "chapter": 4,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "hub-event"
+   ],
+   "beats": [
+    {
+     "say": "엔비디아 주가는 10월 6일 239달러로 가장 높았습니다. 황이 사임한 날 173달러, 그리고 SEC 보도가 나온 20일 125달러까지 내려왔습니다. 고점에서 47% 넘게 빠진 겁니다.",
+     "situations": [
+      "metric",
+      "hub-event"
+     ],
+     "hits": [
+      "47%",
+      "주가"
+     ]
+    },
+    {
+     "say": "복귀 발표 뒤 장이 열리기 전, 주가는 165달러 근처까지 올라왔습니다. 정규장 종가는 아니지만, 시장의 첫 반응으로는 충분히 큰 숫자입니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "주가"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 14,
+   "type": "bite",
+   "chapter": 4,
+   "situation": "said",
+   "situation_name": "누가 말했다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "기술주 분석가 댄 아이브스는 복귀 닷새 전 이렇게 말했습니다.",
+     "situations": [
+      "said"
+     ],
+     "hits": [
+      "말했"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bite",
+    "footage",
+    "quote"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "j-l-cut",
+     "status": "candidate"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "내레이션으로만 전하기",
+   "why": "그 사람의 목소리·원문이 증거 (source-cut, 03 §0-1)"
+  },
+  {
+   "scene": 15,
+   "type": "bignum",
+   "chapter": 4,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "hub-event"
+   ],
+   "beats": [
+    {
+     "say": "계산해 보면 이렇습니다. 주당 약 40달러가 올랐고, 엔비디아 주식은 약 242억 주입니다. 늘어난 시가총액은 약 9,550억 달러, 거의 1조 달러입니다. 아이브스가 말한 크기와 거의 같습니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "올랐",
+      "억 달러",
+      "조 달러"
+     ]
+    },
+    {
+     "say": "그런데 같은 그래프가 다른 것도 보여 줍니다. 165달러는 황이 사임한 날의 주가와 거의 같고, 10월 고점보다는 여전히 31% 낮습니다. 복귀가 되돌린 건 사임 뒤에 빠진 몫이지, 10월부터 빠진 전부가 아닙니다.",
+     "situations": [
+      "metric",
+      "hub-event"
+     ],
+     "hits": [
+      "31%",
+      "주가"
+     ]
+    },
+    {
+     "say": "나머지는 순환금융 편에서 본 의심들입니다. 1,180억 달러 보증의 순환금융, SEC 회계 조사 보도, 그리고 금리입니다. 이 셋은 젠슨이 돌아왔다고 사라지지 않습니다.",
+     "situations": [
+      "hub-event",
+      "metric"
+     ],
+     "hits": [
+      "순환"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 16,
+   "type": "quote",
+   "chapter": 4,
+   "situation": "media",
+   "situation_name": "보도·매체가 어떻게 다뤘나",
+   "origin": "main",
+   "also": [
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "매체들이 같은 공시를 읽은 방식도 갈렸습니다. 해외의 포브스는 주가 30%를 제목에 올렸고, 게임 매체 코타쿠는 절대 안 한다더니 며칠 만에 뒤집었다는 데 무게를 뒀습니다. 국내의 KBS는 칩 밀수와 개인사는 별개라는 재무장관의 말을 앞세워 보도했습니다. 다만 주가와 번복을 앞세운 기사",
+     "situations": [
+      "media",
+      "metric"
+     ],
+     "hits": [
+      "보도",
+      "매체",
+      "기사"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "newspapers",
+    "quote"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "split-screen",
+     "status": "partial"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "매체 판단을 단정",
+   "why": "매체 프레임의 차이 자체가 이야기 (03 §0-2)"
+  },
+  {
+   "scene": 17,
+   "type": "chapter",
+   "chapter": 5,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "복귀를 두고 이름 있는 사람들의 말은 둘로 갈립니다. 하나씩 뜯어보겠습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 18,
+   "type": "bite",
+   "chapter": 5,
+   "situation": "said",
+   "situation_name": "누가 말했다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "첫 번째 주장, 젠슨이 곧 엔비디아라는 쪽입니다. 운용사 대표 진 먼스터는 황이 떠난 다음 날 이렇게 말했습니다.",
+     "situations": [
+      "said"
+     ],
+     "hits": [
+      "말했"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bite",
+    "footage",
+    "quote"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "j-l-cut",
+     "status": "candidate"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "내레이션으로만 전하기",
+   "why": "그 사람의 목소리·원문이 증거 (source-cut, 03 §0-1)"
+  },
+  {
+   "scene": 19,
+   "type": "motionboard",
+   "chapter": 5,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "explain-market",
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "이 주장은 세 고리입니다. 황이 공급망과 고객, 정부와의 관계를 직접 쥐고 있고, 그가 없으면 회사의 속도가 떨어지며, 시장이 그 차이를 값으로 매긴다는 겁니다.",
+     "situations": [
+      "explain-market",
+      "route"
+     ],
+     "hits": [
+      "공급망"
+     ]
+    },
+    {
+     "say": "세 번째 고리는 숫자가 받칩니다. 앞에서 계산한 1조 달러 가까운 시가총액입니다. 하지만 두 번째 고리는 아직 약합니다. 황 없이 치른 3분기 실적에서 매출은 두 배로 늘었고, 회사는 다음 해 성장 전망을 오히려 올렸습니다. 판정은 일부만 맞다입니다. 시장은 그를 믿지만, 그가 없으면 ",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출",
+      "실적",
+      "분기"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 20,
+   "type": "quote",
+   "chapter": 5,
+   "situation": "said",
+   "situation_name": "누가 말했다",
+   "origin": "main",
+   "also": [
+    "explain"
+   ],
+   "beats": [
+    {
+     "say": "두 번째 주장은 반대편입니다. 기업지배구조 전문가 찰스 엘슨은, 복귀는 아무 문제도 풀지 못한다고 봤습니다. 투자자 앤서니 스카라무치는 더 짧게 말했습니다. FBI는 청원을 받지 않는다.",
+     "situations": [
+      "said",
+      "explain"
+     ],
+     "hits": [
+      "말했"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bite",
+    "footage",
+    "quote"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "j-l-cut",
+     "status": "candidate"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "내레이션으로만 전하기",
+   "why": "그 사람의 목소리·원문이 증거 (source-cut, 03 §0-1)"
+  },
+  {
+   "scene": 21,
+   "type": "checklist",
+   "chapter": 5,
+   "situation": "route",
+   "situation_name": "어디서 어디로 움직였다",
+   "origin": "main",
+   "also": [
+    "change",
+    "cause"
+   ],
+   "beats": [
+    {
+     "say": "받치는 사실은 분명합니다. 이사회 조사도, 수출통제와 관련된 법무부의 형사 조사도, 하원 면담도 모두 아직 진행 중입니다. 그리고 이사회의 말은 5일 만에 바뀌었습니다.",
+     "situations": [
+      "route",
+      "change"
+     ],
+     "hits": [
+      "수출"
+     ]
+    },
+    {
+     "say": "어긋나는 사실도 있습니다. 정부가 안보 위험이 없다는 쪽에 섰고, 회사에는 감시 장치가 새로 붙었습니다. 판정은 근거 있음, 다만 지금이 아니라 앞으로의 경고입니다. 조사 결과가 나쁘게 나오면, 엔비디아는 두 번째 공백을 맞을 수 있습니다.",
+     "situations": [
+      "cause"
+     ],
+     "hits": [
+      "결과"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "journey",
+    "usmap"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "motion-path",
+     "status": "partial"
+    },
+    {
+     "id": "draw-on",
+     "status": "have"
+    }
+   ],
+   "blocked": [],
+   "avoid": "표로 보여 주기",
+   "why": "이동은 지도 위 경로로"
+  },
+  {
+   "scene": 22,
+   "type": "map_causal",
+   "chapter": 5,
+   "situation": "cause",
+   "situation_name": "원인 → 결과를 잇는다",
+   "origin": "main",
+   "also": [
+    "call-bite",
+    "say-vs-do"
+   ],
+   "beats": [
+    {
+     "say": "여기서부터는 가설입니다. 두 주장은 결국 한 질문에서 갈립니다. 수출통제 문제가 한 사람의 일이었나, 회사 차원의 일이었나.",
+     "situations": [
+      "call-bite",
+      "route"
+     ],
+     "hits": [
+      "질문에"
+     ]
+    },
+    {
+     "say": "회사 차원이 아니었다면, 복귀로 되돌린 1조 달러 가까운 값은 굳어집니다. 회사 차원이었다면, 벌금과 수출 제한이 따라오고, 이번에는 조사 결과 때문에 다시 리더십 공백이 올 수 있습니다. 그 답은 공시가 아니라, 앞으로 몇 주의 조사 일정에서 나옵니다.",
+     "situations": [
+      "cause",
+      "say-vs-do"
+     ],
+     "hits": [
+      "때문",
+      "결과"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "map_causal",
+    "analogy"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "장면마다 새 도식 (같은 칸 위치 유지)",
+   "why": "화살표가 말과 함께 그어져야 '이어진다'가 보임"
+  },
+  {
+   "scene": 23,
+   "type": "chapter",
+   "chapter": 6,
+   "situation": "route",
+   "situation_name": "어디서 어디로 움직였다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "이제 한국 계좌로 옮겨 보겠습니다.",
+     "situations": [
+      "route"
+     ],
+     "hits": [
+      "옮겨"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "journey",
+    "usmap"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "motion-path",
+     "status": "partial"
+    },
+    {
+     "id": "draw-on",
+     "status": "have"
+    }
+   ],
+   "blocked": [],
+   "avoid": "표로 보여 주기",
+   "why": "이동은 지도 위 경로로"
+  },
+  {
+   "scene": 24,
+   "type": "bignum",
+   "chapter": 6,
+   "situation": "hub-event",
+   "situation_name": "시장을 흔든 사건과 파급",
+   "origin": "add",
+   "also": [
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "순환금융 편에서 본 숫자입니다. 엔비디아가 공급사들과 맺은 약정은 3,900억 달러이고, 회사는 그 대부분이 여러 해에 걸친 메모리 구매라고 적었습니다. SK하이닉스와 삼성전자가 그 반대편에 있습니다. 복귀는 그 계약을 협상하고 지킬 사람이 다시 같은 사람이 됐다는 뜻입니다.",
+     "situations": [
+      "hub-event",
+      "metric"
+     ],
+     "hits": [
+      "순환"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "map_causal",
+    "kb",
+    "chart"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "사건을 따로 떼어 나열",
+   "why": "v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로"
+  },
+  {
+   "scene": 25,
+   "type": "checklist",
+   "chapter": 6,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "hub-event",
+    "next-week"
+   ],
+   "beats": [
+    {
+     "say": "지난 한 달 SK하이닉스는 29%, 삼성전자는 24%, 코스피는 21% 내렸습니다. 다만 이 하락을 황의 사임 하나로 설명할 수는 없습니다. 금리와 순환금융, SEC 보도가 함께 겹쳤습니다.",
+     "situations": [
+      "hub-event",
+      "metric"
+     ],
+     "hits": [
+      "사임",
+      "순환"
+     ]
+    },
+    {
+     "say": "그리고 시간을 정확히 봐야 합니다. 복귀 발표는 한국 시간 23일 밤에 나왔고, 한국 장은 그보다 먼저 끝났습니다. 23일의 하락은 복귀 소식을 모르고 움직인 값이고, 한국 주식의 첫 반응은 24일 장입니다.",
+     "situations": [
+      "next-week",
+      "metric"
+     ],
+     "hits": [
+      "한국 시간"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 26,
+   "type": "checklist",
+   "chapter": 6,
+   "situation": "hub-event",
+   "situation_name": "시장을 흔든 사건과 파급",
+   "origin": "add",
+   "also": [
+    "metric",
+    "route"
+   ],
+   "beats": [
+    {
+     "say": "판가름은 날짜로 옵니다. 11월 25일, 엔비디아가 재무부에 우회 수출에 대한 답을 냅니다. 12월 1일과 2일, 황과 회사의 법률총괄이 하원 위원회와 비공개로 면담합니다.",
+     "situations": [
+      "route"
+     ],
+     "hits": [
+      "수출"
+     ]
+    },
+    {
+     "say": "상원 공개 청문회와 이사회 조사의 결론은 아직 날짜가 없습니다. 그리고 매일 볼 숫자는 하나입니다. 엔비디아 주가가 사임 전 수준을 지키는지. 지키면 시장이 회사 차원의 문제는 아니라고 보는 것이고, 무너지면 조사 쪽 위험을 다시 값에 넣는 겁니다.",
+     "situations": [
+      "hub-event",
+      "metric"
+     ],
+     "hits": [
+      "사임"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "map_causal",
+    "kb",
+    "chart"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "사건을 따로 떼어 나열",
+   "why": "v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로"
+  },
+  {
+   "scene": 27,
+   "type": "kinetic",
+   "chapter": 6,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "젠슨은 돌아왔지만, 끝난 것은 아무것도 없습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 28,
+   "type": "outro",
+   "chapter": 6,
+   "situation": "hub-event",
+   "situation_name": "시장을 흔든 사건과 파급",
+   "origin": "add",
+   "also": [],
+   "beats": [
+    {
+     "say": "딱 하나만 기억한다면 이것입니다. 이번 복귀가 되돌린 것은 한 사람이 빠져서 생긴 할인이고, 순환금융과 조사가 만든 할인은 그대로입니다. 그리고 이사회가 든 이유는 정부의 판단이었습니다. 그렇다면 다음 질문은 이것입니다. 정부의 판단과 조사의 결론이 서로 다르게 나오면, 이사회는 이번에",
+     "situations": [
+      "hub-event"
+     ],
+     "hits": [
+      "순환"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "map_causal",
+    "kb",
+    "chart"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "사건을 따로 떼어 나열",
+   "why": "v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로"
+  }
+ ],
+ "coverage": 0.82,
+ "fit": 0.48,
+ "counts": {
+  "hub-event": 5,
+  "metric": 4,
+  "said": 4,
+  "say-vs-do": 4,
+  "earnings": 2,
+  "route": 2,
+  "media": 1,
+  "cause": 1
+ },
+ "defaults": {
+  "zoom": "off",
+  "camera": "calm",
+  "bgm": "none",
+  "motion_beats": true
+ }
+}
