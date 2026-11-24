@@ -1,0 +1,189 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- 실험: 학습 다큐식 '어텐션' 설명 장면 (docs/64). 구조·움직임 문법만 참고, 예문·색·배치는 우리 것.
+     장면: 순서대로 읽기(잊기) → 어텐션(뒤돌아보기) → 모두가 서로를(3D 패널·호) → 층 쌓기 -->
+<style>
+@font-face{font-family:K;src:url('file:///C:/Windows/Fonts/NotoSansKR-VF.ttf');font-weight:100 900}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;font-family:K,sans-serif;
+  background:radial-gradient(ellipse at 50% 45%,#2b3033 0%,#16191b 70%,#0d0f10 100%)}
+#grain{position:absolute;inset:0;opacity:.07;pointer-events:none}
+#title{position:absolute;left:80px;top:64px;color:#8fb5ad;font-size:30px;font-weight:600;letter-spacing:1px;opacity:0}
+#title b{color:#e9f5f1}
+#world{position:absolute;inset:0;perspective:1800px;perspective-origin:50% 40%}
+#cam{position:absolute;inset:0;transform-style:preserve-3d}
+.panel{position:absolute;left:210px;top:300px;width:1500px;height:430px;transform-style:preserve-3d;border-radius:22px}
+.panel .glass{position:absolute;inset:0;border-radius:22px;border:2px dashed rgba(120,190,255,.0);
+  background:rgba(40,70,110,0);transition:none}
+.layer-tag{position:absolute;right:26px;top:18px;color:#7fb2e6;font-size:22px;opacity:0}
+.chips{position:absolute;left:0;right:0;top:300px;display:flex;justify-content:center;gap:34px}
+.chip{position:relative;padding:14px 30px 16px;border-radius:16px;font-size:46px;font-weight:600;color:#e8fff8;
+  background:#1f6f5f;border:3px solid #47c6a6;box-shadow:0 0 0 rgba(71,198,166,0);opacity:0;white-space:nowrap}
+.chip.dim{color:#9fb8b1}
+svg.arcs{position:absolute;left:0;top:0;overflow:visible}
+#eng{position:absolute;left:0;right:0;top:895px;text-align:center;font-family:Consolas,monospace;font-size:34px;color:#6fd3b6;opacity:0}
+#cands{position:absolute;top:728px;opacity:0;background:rgba(10,12,13,.55);padding:8px 18px;border-radius:10px}
+.cand{display:flex;align-items:center;gap:16px;color:#dfe9e6;font-size:30px;margin:4px 0;font-weight:500}
+.cand .bar{height:22px;border-radius:4px;background:#e0a84a}
+.cand .pct{font-family:Consolas,monospace;color:#f2c879;width:90px}
+.cand.win .lab{color:#fff;font-weight:700}
+#cap{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);background:rgba(10,12,13,.78);color:#fff;font-size:36px;
+  font-weight:500;padding:12px 30px 14px;border-radius:10px;white-space:nowrap;opacity:0;border:1px solid #2f3a3a}
+#cap em{font-style:normal;color:#ffd27a}
+#meaning{position:absolute;font-size:40px;color:#16191b;background:#ffd27a;padding:6px 18px;border-radius:10px;font-weight:800;opacity:0;white-space:nowrap;box-shadow:0 0 30px rgba(255,210,122,.6)}
+</style></head><body>
+<svg id="grain" width="1920" height="1080"><filter id="n"><feTurbulence baseFrequency="0.9" numOctaves="2" seed="3"/></filter>
+<rect width="1920" height="1080" filter="url(#n)"/></svg>
+<div id="title"></div>
+<div id="world"><div id="cam"></div></div>
+<div id="eng"></div>
+<div id="cap"></div>
+<script>/*GSAP*/</script>
+<script>
+const WORDS=['어제','과수원에서','딴','배를','깎아','먹었다'];
+const KEY=3;                       // '배를'
+const ATT={0:.25,1:.95,2:.7,4:.35,5:.2};   // '배를'이 다른 단어를 얼마나 참고하나 (예시값, 화면에 '예시' 표시)
+const NS='http://www.w3.org/2000/svg';
+const cam=document.getElementById('cam');
+const tl=gsap.timeline({paused:true});
+const T=document.getElementById('title'), CAP=document.getElementById('cap'), ENG=document.getElementById('eng');
+
+function mkPanel(z){
+  const p=document.createElement('div');p.className='panel';
+  p.innerHTML='<div class="glass"></div><div class="layer-tag"></div><div class="chips"></div>';
+  const svg=document.createElementNS(NS,'svg');svg.setAttribute('class','arcs');svg.setAttribute('width',1500);svg.setAttribute('height',430);
+  p.appendChild(svg);cam.appendChild(p);
+  const box=p.querySelector('.chips');
+  const chips=WORDS.map(w=>{const c=document.createElement('div');c.className='chip';c.textContent=w;box.appendChild(c);return c});
+  gsap.set(p,{z});
+  return {p,svg,chips,glass:p.querySelector('.glass'),tag:p.querySelector('.layer-tag')};
+}
+function centers(L){return L.chips.map(c=>({x:c.offsetLeft+c.offsetWidth/2+L.chips[0].parentElement.offsetLeft, y:300, w:c.offsetWidth}))}
+function arc(L,i,j,w,color,down){
+  const C=centers(L), a=C[i], b=C[j];
+  const h=down?-110:40+Math.abs(a.x-b.x)*0.42, y0=down?a.y+76:a.y;
+  const path=document.createElementNS(NS,'path');
+  path.setAttribute('d',`M${a.x},${y0} C${a.x},${y0-h} ${b.x},${y0-h} ${b.x},${y0}`);
+  path.setAttribute('fill','none');path.setAttribute('stroke',color||'#8fe9ff');
+  path.setAttribute('stroke-width',(1.5+w*9).toFixed(1));path.setAttribute('stroke-linecap','round');
+  path.style.filter=`drop-shadow(0 0 ${4+w*12}px ${color||'#5fd8ff'})`;
+  L.svg.appendChild(path);const len=path.getTotalLength();
+  gsap.set(path,{strokeDasharray:len,strokeDashoffset:len,opacity:.25+w*.75});
+  return path;
+}
+function caption(t,html,dur){tl.call(()=>{CAP.innerHTML=html},null,t);tl.fromTo(CAP,{opacity:0,y:8},{opacity:1,y:0,duration:.25},t);if(dur)tl.to(CAP,{opacity:0,duration:.2},t+dur)}
+function title(t,html){tl.call(()=>{T.innerHTML=html},null,t);tl.fromTo(T,{opacity:0,x:-20},{opacity:1,x:0,duration:.4},t)}
+function typeEng(t,s,dur){tl.call(()=>{ENG.textContent=''},null,t);tl.set(ENG,{opacity:1},t);
+  const o={n:0};tl.to(o,{n:s.length,duration:dur,ease:'none',onUpdate:()=>ENG.textContent=s.slice(0,Math.round(o.n))},t)}
+
+const L0=mkPanel(0);
+// ── 장면 1 (0~9초): 순서대로 읽기 — 읽는 자리가 지나가면 앞 단어가 흐려짐(잊기)
+title(0.2,'① <b>순서대로 읽기</b> · 순환 신경망');
+WORDS.forEach((w,i)=>{
+  const t=0.8+i*0.9, c=L0.chips[i];
+  tl.fromTo(c,{opacity:0,y:30,scale:.85},{opacity:1,y:0,scale:1,duration:.35,ease:'back.out(2)'},t);
+  tl.to(c,{boxShadow:'0 0 34px rgba(71,198,166,.9)',borderColor:'#aaffe6',duration:.2},t);
+  tl.to(c,{boxShadow:'0 0 0 rgba(71,198,166,0)',borderColor:'#47c6a6',duration:.3},t+.75);
+  for(let k=0;k<i;k++){ // 앞 단어는 멀어질수록 흐려짐
+    const fade=Math.max(.18,1-(i-k)*.28);
+    tl.to(L0.chips[k],{opacity:fade,filter:`blur(${(1-fade)*2.2}px)`,duration:.4},t);
+  }
+  if(i>0){ // 넘겨주는 기억 고리 (작아지며 이어짐)
+    const p=arc(L0,i-1,i,.15,'#47c6a6',true);
+    tl.to(p,{strokeDashoffset:0,duration:.4},t-.1);
+  }
+});
+caption(1.0,'한 단어씩 읽으며 앞의 정보를 넘겨줍니다',3.2);
+caption(4.6,'문장이 길어지면 <em>앞에서 읽은 것</em>이 흐려지죠',4.0);
+typeEng(3.6,'Yesterday I peeled the ',1.2);
+// 후보 의미: 앞 단어를 잊은 채로 '배'를 고르면
+const cands=document.createElement('div');cands.id='cands';document.body.appendChild(cands);
+const CANDS=[['배 (boat)',.52],['배 (belly)',.30],['배 (pear)',.18]];
+cands.innerHTML=CANDS.map(([l,p])=>`<div class="cand"><span class="lab" style="width:220px">${l}</span><span class="bar" style="width:0"></span><span class="pct">0%</span></div>`).join('');
+tl.call(()=>{const c=centers(L0)[KEY];cands.style.left=(210+c.x-150)+'px'},null,0);
+tl.to(L0.chips[KEY],{borderColor:'#ffd27a',boxShadow:'0 0 30px rgba(255,210,122,.8)',duration:.3},6.2);
+tl.to(cands,{opacity:1,duration:.3},6.4);
+function setBars(t,vals,dur){[...cands.children].forEach((row,i)=>{const o={v:+row.dataset.v||0};
+  tl.to(o,{v:vals[i],duration:dur,ease:'power2.out',onUpdate:()=>{row.querySelector('.bar').style.width=(o.v*420)+'px';row.querySelector('.pct').textContent=Math.round(o.v*100)+'%';row.dataset.v=o.v}},t);
+  tl.call(()=>row.classList.toggle('win',vals[i]===Math.max(...vals)),null,t+dur)})}
+setBars(6.5,CANDS.map(c=>c[1]),.8);
+tl.call(()=>{ENG.innerHTML='Yesterday I peeled the <span style="color:#ff8a7a;text-decoration:underline">boat</span> …'},null,7.6);
+caption(9.0,'그래서 엉뚱한 뜻을 고릅니다 — <em>배(boat)</em>',2.6);
+
+// ── 장면 2 (12~20초): 어텐션 — '배를'에서 앞 단어로 호가 뻗어 다시 봄
+title(12.0,'② <b>어텐션</b> · 앞 단어를 다시 본다');
+tl.to(cands,{opacity:0,duration:.3},11.8);
+tl.to(ENG,{opacity:0,duration:.3},11.8);
+WORDS.forEach((w,k)=>tl.to(L0.chips[k],{opacity:1,filter:'blur(0px)',duration:.5},12.3));
+tl.to(L0.svg.querySelectorAll('path'),{opacity:0,duration:.3},12.0);
+const back=[];
+[1,2,0].forEach((k,n)=>{
+  const w=ATT[k], p=arc(L0,KEY,k,w,'#ffd27a'); back.push(p);
+  const t=13.0+n*0.7;
+  tl.to(p,{strokeDashoffset:0,duration:.6,ease:'power2.inOut'},t);
+  tl.to(L0.chips[k],{borderColor:'#ffd27a',boxShadow:`0 0 ${10+w*30}px rgba(255,210,122,${.3+w*.6})`,duration:.3},t+.5);
+});
+caption(12.6,'<em>과수원에서 · 딴</em> 을 다시 주목합니다',4.2);
+tl.to(cands,{opacity:1,duration:.3},15.6);
+setBars(15.8,[.07,.05,.88],1.0);
+typeEng(16.6,'Yesterday I peeled the pear I picked at the orchard.',1.6);
+caption(17.2,'과수원에서 딴 배라면 — <em>과일</em>이었던 거죠',2.8);
+
+// ── 장면 3 (20.5~29초): 모든 단어가 서로를 — 패널이 기울며 3D, 모든 쌍에 호
+title(20.6,'③ <b>트랜스포머</b> · 모든 단어가 동시에 서로를');
+tl.to([cands,ENG],{opacity:0,duration:.3},20.2);
+tl.to(back,{opacity:0,duration:.3},20.2);
+WORDS.forEach((w,k)=>tl.to(L0.chips[k],{borderColor:'#47c6a6',boxShadow:'0 0 0 rgba(0,0,0,0)',duration:.3},20.3));
+tl.to(L0.glass,{background:'rgba(40,80,130,.28)',borderColor:'rgba(120,190,255,.55)',duration:.6},20.6);
+tl.to(cam,{rotationX:24,y:-40,z:-120,duration:1.4,ease:'power2.inOut'},20.6);
+const all=[];
+for(let i=0;i<WORDS.length;i++)for(let j=i+1;j<WORDS.length;j++){
+  const w=0.15+0.85*Math.abs(Math.sin((i+1)*(j+2)*1.7)); // 예시 가중치
+  const p=arc(L0,i,j,w*.6,'#8fe9ff'); all.push([p,i,j,w]);
+}
+all.forEach(([p],n)=>tl.to(p,{strokeDashoffset:0,duration:.5,ease:'power1.out'},21.8+n*0.06));
+caption(21.6,'순서대로 넘기지 않고, <em>관계를 한꺼번에</em> 계산합니다',3.6);
+// 단어마다 차례로 '어디를 얼마나 보는지' 강조 스윕
+WORDS.forEach((w,k)=>{
+  const t=25.2+k*0.55;
+  tl.to(L0.chips[k],{borderColor:'#ffd27a',boxShadow:'0 0 26px rgba(255,210,122,.8)',duration:.15},t);
+  all.forEach(([p,i,j,wt])=>{ if(i===k||j===k) tl.to(p,{stroke:'#ffd27a',opacity:.35+wt*.65,duration:.15},t); });
+  tl.to(L0.chips[k],{borderColor:'#47c6a6',boxShadow:'0 0 0 rgba(0,0,0,0)',duration:.2},t+.5);
+  all.forEach(([p,i,j,wt])=>{ if(i===k||j===k) tl.to(p,{stroke:'#8fe9ff',opacity:.25+wt*.45,duration:.2},t+.5); });
+});
+caption(25.4,'각 단어가 <em>누구를 얼마나 참고할지</em> 정합니다',3.4);
+
+// ── 장면 4 (29.5~37초): 층 쌓기 — 같은 패널이 뒤로 겹쳐 쌓이고, 층마다 다시 계산
+title(29.6,'④ <b>층을 거듭할수록</b> 뜻이 또렷해진다');
+const layers=[L0];
+for(let n=1;n<=3;n++){
+  const L=mkPanel(-n*200); layers.push(L); gsap.set(L.p,{y:-n*190,x:n*30});
+  L.chips.forEach(c=>gsap.set(c,{opacity:1}));
+  gsap.set(L.p,{opacity:0});gsap.set(L.glass,{background:'rgba(40,80,130,.18)',borderColor:'rgba(120,190,255,.35)'});
+  L.tag.textContent=`층 ${n+1}`;
+}
+L0.tag.textContent='층 1';
+tl.to(cam,{rotationX:30,rotationY:-10,x:40,y:160,z:-420,duration:1.6,ease:'power2.inOut'},29.4);
+tl.to(L0.tag,{opacity:1,duration:.3},29.8);
+layers.slice(1).forEach((L,n)=>{
+  const t=30.2+n*0.6;
+  tl.fromTo(L.p,{opacity:0},{opacity:.42-n*.1,duration:.4},t);
+  tl.to(L.tag,{opacity:1,duration:.3},t);
+  [[1,3],[2,3],[0,3],[3,4]].forEach(([i,j],m)=>{const p=arc(L,i,j,.3+.2*(3-m)/3,'#8fe9ff');tl.to(p,{strokeDashoffset:0,duration:.4},t+.1+m*.08)});
+});
+// '배를' 위에 뜻이 점점 또렷하게
+const M=document.createElement('div');M.id='meaning';M.textContent='배 = 과일';document.body.appendChild(M);
+tl.call(()=>{const r=L0.chips[KEY].getBoundingClientRect();M.style.left=(r.left+r.width/2-90)+'px';M.style.top=(r.top+r.height+24)+'px'},null,32.6);
+tl.fromTo(M,{opacity:0,filter:'blur(8px)'},{opacity:1,filter:'blur(0px)',duration:1.6},32.8);
+caption(30.4,'층마다 <em>앞 층의 결과</em>로 관계를 다시 계산하고',3.0);
+caption(33.6,'단어는 <em>문맥 속에서</em> 뜻을 갖게 됩니다',3.2);
+tl.to({}, {duration:.1}, 37.0);
+// 시간 표시(예시값)
+const note=document.createElement('div');note.textContent='* 참고 정도는 이해를 돕기 위한 예시입니다';
+note.style.cssText='position:absolute;right:60px;top:66px;color:#6c7a78;font-size:22px';document.body.appendChild(note);
+
+window.DURATION=tl.duration();
+window.seek=t=>{tl.seek(t,false)};
+window.READY=true;
+if(!/[?&]still/.test(location.search)) tl.play();
+</script>
+</body></html>

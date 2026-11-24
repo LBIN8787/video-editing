@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-24T03:00:54",
- "source_hash": "e66275c3a50c",
+ "generated": "2026-11-24T21:43:00",
+ "source_hash": "39609b145a65",
  "audit": {
   "date": "2026-11-24T03:00",
   "counts": {
@@ -789,35 +789,35 @@
   "fixed": []
  },
  "stats": {
-  "manual_version": 124,
-  "versions": 124,
+  "manual_version": 125,
+  "versions": 125,
   "reviews": 58,
   "rejects": 31,
   "passes": 27,
   "pending": 0,
   "rules": 57,
   "checks": 90,
-  "sections": 219,
+  "sections": 220,
   "must": 30,
   "auto": 41,
-  "intents": 341,
-  "misaligned": 0,
-  "intents_reviewed": 6,
+  "intents": 345,
+  "misaligned": 1,
+  "intents_reviewed": 7,
   "conflicts": 3,
   "code": 85,
   "terms": 140,
-  "bans": 231,
-  "feedback": 257,
+  "bans": 233,
+  "feedback": 261,
   "topics": 4,
-  "episodes": 51,
+  "episodes": 52,
   "main_situations": 17,
   "tiers": {
    "principle": 57,
    "standard": 194,
-   "style": 28,
-   "trial": 9
+   "style": 29,
+   "trial": 10
   },
-  "overfit": 16,
+  "overfit": 17,
   "principle_bans": 51
  },
  "pending": [],
@@ -2119,6 +2119,42 @@
    "tier_note": "",
    "tier_fixed": false,
    "tier_label": "실험 기록"
+  },
+  {
+   "section": "sec:05§0-9",
+   "text": "왜: 방송·대형 제작 팀은 애니메이션 전에 방향(트리트먼트)·스토리보드·스타일 프레임을 정해 잠그고, 한 편을 시각 언어 하나(요소 목록) 안에서 만든다(docs/66 §1). 우리는 사람이 나눠 맡는 대신 기록으로 같은 일을 한다. 측정해 보니 최근 18편에서 장면의 약 65% 가 추천과 다르게 만들어졌는데 이유가 적힌 장면이 거의 없었다 — 어느 쪽이 맞았는지 아무도 모르고, 같은 판단을 매번 다시 하고, 추천기도 고쳐지지 않는다(docs/66 §2).",
+   "themes": [
+    "variety"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:d615f526",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": true,
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
+  },
+  {
+   "section": "sec:05§0-9",
+   "text": "검사: python -m ytflow decide <프로젝트> → 02_script/DIRECTION_LOG.md(사람이 렌더 전에 한 장으로 검토). check G5 — 2026-11-25 이후 영상은 MUST. 기록한 pick 이 실제 장면과 같은지, 근거가 실제로 있는 파일·기법인지, edit-plan 1순위를 버렸으면 그 이유가 있는지, 같은 상황 같은 선택인지(다르면 이유), 이유를 다른 장면에서 복사하지 않았는지. --draft 로 뼈대(TODO)를 ",
+   "themes": [],
+   "absolute": false,
+   "must": true,
+   "tier_key": "ban:de95751d",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
   },
   {
    "section": "sec:05§3",
@@ -3533,6 +3569,27 @@
   },
   {
    "section": "sec:09§6",
+   "text": "v31 의 뜻 (2026-11-24 사용자 바로잡음: \"애초에 제가 말한건 쓰지 말아야 할 상황에서 남용했기 때문입니다\"): 확대·축소·카메라 움직임 자체를 금지한 것이 아니라 쓰지 말아야 할 곳(차트·숫자·뉴스·인용 장면)에서 남용한 것을 막은 것. 그래서 차트·숫자·뉴스 장면은 계속 고정이고, 개념 설명 장면(구조·관계·원리를 보여 주는 다큐 장면 docu, docs/65 §8)에서는 판 기울기·따라가기를 쓸 수 있다 — 한 편에 1~2장면, 한 장면에 한 ",
+   "themes": [
+    "motion",
+    "script",
+    "intent"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:f84fc670",
+   "tier_auto": "trial",
+   "why": "스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨",
+   "overfit": true,
+   "single": true,
+   "tier": "trial",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "실험 기록"
+  },
+  {
+   "section": "sec:09§6",
    "text": "배경음 기본 없음. 카메라는 억지로 흔들지 않는다 (v30, 2026-11-15 사용자: \"정적이라고 했다고 정지 화면에서 굳이 억지로 화면을 웅웅거리며 미세하게 움직이지 않아도 됩니다\") — v27 박자 카메라는 기본 끔(\"camera\": \"beat\" 로만 켬). '정적'의 뜻은 화면이 흔들리지 않는다는 것이 아니라 말하는 내용이 화면에 나타나지 않는다는 것 → 아래 '말하는 것이 화면에 생긴다' 규칙으로 해결.",
    "themes": [
     "motion",
@@ -3550,25 +3607,6 @@
    "tier_note": "시장 채널 기본값: 배경음 없음·억지 카메라 없음 (v30 사용자 요청). 금지가 아니라 기본값",
    "tier_fixed": true,
    "tier_label": "스타일 기본값"
-  },
-  {
-   "section": "sec:09§6",
-   "text": "렌더 전 G4 MUST: 화면에 없는 숫자를 2개 이상 말하면서 motion 이 없는 박자 0개. 정지 화면 비율(motion.json)은 참고만 — 카메라를 흔들어 숫자를 맞추지 않는다 (v30).",
-   "themes": [
-    "motion"
-   ],
-   "absolute": false,
-   "must": true,
-   "tier_key": "ban:8d997e5d",
-   "tier_auto": "style",
-   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "Claude 제안 (2026-11-15) — 사용자 확인 필요",
-   "tier_note": "위 기준을 재는 검사 — 화면에 없는 숫자를 말할 때 그림이 생기는지",
-   "tier_fixed": true,
-   "tier_label": "작업 기준"
   },
   {
    "section": "sec:09§7",
@@ -3921,7 +3959,7 @@
    "tier_label": "영구 원칙"
   },
   {
-   "section": "sec:09§h513",
+   "section": "sec:09§h514",
    "text": "ElevenLabs 는 직접 API 로만 (MCP 생성 금지, 2026-11-22 사용자): 같은 문장(33자, Teo·eleven_v4)을 실측: 직접 API 15 크레딧(응답 헤더 Character-Cost) vs MCP creative_generate_speech 1테이크 33 크레딧·기본 2테이크 66 크레딧(estimate_only) — MCP 가 1테이크도 2.2배, 기본값이면 4.4배 (AGENTS 목소리 규칙, docs/08-voice.md).",
    "themes": [
     "sound"
@@ -3940,7 +3978,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:09§h513",
+   "section": "sec:09§h514",
    "text": "ElevenLabs 를 쓸 수 없는 날은 edge 초안으로 만들되 올리지 않는다 (v43, §2-1 — 공개본은 Teo). 크레딧이 모자라면 그날 편을 미루거나 voice-import 로 Teo 테이크를 만든다.",
    "themes": [],
    "absolute": false,
@@ -4818,7 +4856,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h149",
+   "section": "sec:feedback§h151",
    "text": "2026-11-11 · v11 기각 — “화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌”",
    "themes": [
     "motion",
@@ -4838,7 +4876,7 @@
    "tier_label": "실험 기록"
   },
   {
-   "section": "sec:feedback§h232",
+   "section": "sec:feedback§h234",
    "text": "2026-11-17 · 방향·기준 요청 — “그리고 반드시 하루1편을 올리는 것이 아니라 각 소스영상 인터뷰영상 주제 등 할 이야기가 많다면 하루에 세개까지 영상을 올려도 됩니다 즉 제한을 두지는 않는다는거에요”",
    "themes": [],
    "absolute": false,
@@ -4855,7 +4893,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h290",
+   "section": "sec:feedback§h294",
    "text": "2026-11-14 · v20 기각 — “중간중간 너무 난잡함. 목표·시청자 욕망을 먼저 정의하지 않고 만듦. 대본을 소제목처럼 글로 쓰거나 사진·그림을 붙여 넣기만 함 — 대본에 따른 애니메이션이 아님. 각 연출의 의도가 불분명”",
    "themes": [
     "variety",
@@ -4876,7 +4914,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h290",
+   "section": "sec:feedback§h294",
    "text": "2026-11-21 · 영상 검토 — “대본의 피드백입니다 — (의지력 편 v2 검토) 방향 통과, 2025 효과 배수 비교 금지·대조 조건과 주 지표 설명·생활 조언을 근거 범위 안으로·4~7장 연구 나열 대신 증거 추적·8장 전환 문장”",
    "themes": [
     "motion",
@@ -4896,7 +4934,7 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "section": "sec:feedback§h389",
+   "section": "sec:feedback§h393",
    "text": "2026-11-19 · 방향·기준 요청 — “대본 단계에 \"호기심 대본은 설명·지식 문장 30% 이하\"라는 기준 이런 기준은 또 빼주세요 너무 과적합입니다. / \"설명은 이야기 속에 엮는다\"는 원리 이런식으로 원리주의적으로 가지 방법 자체를 고정하지 말아주세요”",
    "themes": [
     "script",
@@ -4916,7 +4954,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h444",
+   "section": "sec:feedback§h448",
    "text": "2026-11-09 · v3 기각 — “강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)”",
    "themes": [
     "emphasis",
@@ -5494,7 +5532,7 @@
    "key": "05",
    "file": "manual/05-style-matching.md",
    "label": "05. 편집 스타일 고르기 — 영상마다, 장면마다",
-   "lines": 243,
+   "lines": 257,
    "versions": [
     1,
     2,
@@ -5595,7 +5633,7 @@
    "key": "09",
    "file": "manual/09-market-daily.md",
    "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13 · v36 인사이트·영상 소스 · v42 기술 분석·CEO 소식 2026-11-17)",
-   "lines": 533,
+   "lines": 534,
    "versions": [
     19,
     24,
@@ -5708,9 +5746,10 @@
     66,
     79,
     83,
-    121
+    121,
+    124
    ],
-   "last_version": 121
+   "last_version": 124
   },
   {
    "id": "doc:13",
@@ -5753,7 +5792,7 @@
    "key": "feedback",
    "file": "manual/feedback-by-repo.md",
    "label": "내 피드백 — 레포별 (자동 생성: `python -m ytflow manual-graph`)",
-   "lines": 455,
+   "lines": 459,
    "versions": [
     83,
     84,
@@ -5793,9 +5832,10 @@
     120,
     121,
     122,
-    123
+    123,
+    124
    ],
-   "last_version": 123
+   "last_version": 124
   },
   {
    "id": "doc:README",
@@ -6886,6 +6926,22 @@
    "last_version": null
   },
   {
+   "id": "sec:05§0-9",
+   "kind": "section",
+   "doc": "doc:05",
+   "num": "0-9",
+   "level": 2,
+   "label": "연출 결정 기록 — 여러 연출 가운데 '이것'을 고른 근거와 의도 (작업 기준, 2026-11-24 사용자)",
+   "title": "0-9. 연출 결정 기록 — 여러 연출 가운데 '이것'을 고른 근거와 의도 (작업 기준, 2026-11-24 사용자)",
+   "line": 167,
+   "end": 180,
+   "tag_version": null,
+   "versions": [
+    125
+   ],
+   "last_version": 125
+  },
+  {
    "id": "sec:05§0-8",
    "kind": "section",
    "doc": "doc:05",
@@ -6893,8 +6949,8 @@
    "level": 2,
    "label": "화풍과 연출은 상황이 고른다 — 그림은 원화, 코드는 움직임 (2026-11-18 사용자)",
    "title": "0-8. 화풍과 연출은 상황이 고른다 — 그림은 원화, 코드는 움직임 (2026-11-18 사용자)",
-   "line": 167,
-   "end": 178,
+   "line": 181,
+   "end": 192,
    "tag_version": null,
    "versions": [
     48,
@@ -6910,8 +6966,8 @@
    "level": 2,
    "label": "영상 단위: 그래픽 팩 고르기",
    "title": "1. 영상 단위: 그래픽 팩 고르기",
-   "line": 179,
-   "end": 191,
+   "line": 193,
+   "end": 205,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -6937,8 +6993,8 @@
    "level": 2,
    "label": "장면 단위: 연출 type 고르기 (말하는 내용 → 화면)",
    "title": "2. 장면 단위: 연출 type 고르기 (말하는 내용 → 화면)",
-   "line": 192,
-   "end": 218,
+   "line": 206,
+   "end": 232,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -6986,8 +7042,8 @@
    "level": 2,
    "label": "리듬 규칙 (docs/15 근거, `check` 가 일부 자동 검사)",
    "title": "3. 리듬 규칙 (docs/15 근거, `check` 가 일부 자동 검사)",
-   "line": 219,
-   "end": 223,
+   "line": 233,
+   "end": 237,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -7000,8 +7056,8 @@
    "level": 2,
    "label": "주제별 조합 (출발점) — 주제 레포로 옮김",
    "title": "4. 주제별 조합 (출발점) — 주제 레포로 옮김 (v34)",
-   "line": 224,
-   "end": 226,
+   "line": 238,
+   "end": 240,
    "tag_version": 34,
    "versions": [
     34
@@ -7016,8 +7072,8 @@
    "level": 2,
    "label": "시험작 (같은 이야기를 다른 연출로)",
    "title": "5. 시험작 (같은 이야기를 다른 연출로)",
-   "line": 227,
-   "end": 230,
+   "line": 241,
+   "end": 244,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -7038,8 +7094,8 @@
    "level": 2,
    "label": "UI 재연·문서 강조 도구",
    "title": "6. UI 재연·문서 강조 도구 (v50, 2026-11-19)",
-   "line": 231,
-   "end": 243,
+   "line": 245,
+   "end": 257,
    "tag_version": 50,
    "versions": [
     50
@@ -7915,14 +7971,15 @@
    "label": "화면 문법 (시장 카테고리 개성, `05 §0-7`)",
    "title": "6. 화면 문법 (시장 카테고리 개성, `05 §0-7`)",
    "line": 407,
-   "end": 429,
+   "end": 430,
    "tag_version": null,
    "versions": [
     27,
     34,
-    81
+    81,
+    125
    ],
-   "last_version": 81,
+   "last_version": 125,
    "terms": [
     "term:versus",
     "term:timeline",
@@ -7935,7 +7992,6 @@
     "term:beat-camera",
     "term:slow-push",
     "term:beat-motion",
-    "term:static-ratio",
     "term:change-rate",
     "term:transition",
     "term:layers",
@@ -7950,8 +8006,8 @@
    "level": 2,
    "label": "제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
    "title": "7. 제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
-   "line": 430,
-   "end": 439,
+   "line": 431,
+   "end": 440,
    "tag_version": null,
    "versions": [
     27
@@ -7971,8 +8027,8 @@
    "level": 3,
    "label": "썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
    "title": "7-1. 썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
-   "line": 440,
-   "end": 458,
+   "line": 441,
+   "end": 459,
    "tag_version": null,
    "versions": [
     51
@@ -7990,8 +8046,8 @@
    "level": 2,
    "label": "렌더 전 점검",
    "title": "8. 렌더 전 점검",
-   "line": 459,
-   "end": 461,
+   "line": 460,
+   "end": 462,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8004,8 +8060,8 @@
    "level": 2,
    "label": "렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
    "title": "9. 렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
-   "line": 462,
-   "end": 469,
+   "line": 463,
+   "end": 470,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8018,8 +8074,8 @@
    "level": 3,
    "label": "업로드 전 종합 검수 — 통과해야 올린다 (작업 기준, 2026-11-21 사용자: \"업로드 하기 전 항상 글씨겹침 그래픽끼리 겹침 자막밀림 자막과 나레이션 싱크 화면과 자막이 일치하는지 등 종합적으로 검수하세요 이는 메뉴얼에 반영하세요\")",
    "title": "9-1. 업로드 전 종합 검수 — 통과해야 올린다 (작업 기준, 2026-11-21 사용자: \"업로드 하기 전 항상 글씨겹침 그래픽끼리 겹침 자막밀림 자막과 나레이션 싱크 화면과 자막이 일치하는지 등 종합적으로 검수하세요 이는 메뉴얼에 반영하세요\")",
-   "line": 470,
-   "end": 477,
+   "line": 471,
+   "end": 478,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8032,8 +8088,8 @@
    "level": 2,
    "label": "업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
    "title": "10. 업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
-   "line": 478,
-   "end": 490,
+   "line": 479,
+   "end": 491,
    "tag_version": null,
    "versions": [
     34
@@ -8048,8 +8104,8 @@
    "level": 2,
    "label": "기록·되돌아보기",
    "title": "11. 기록·되돌아보기",
-   "line": 491,
-   "end": 494,
+   "line": 492,
+   "end": 495,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8062,8 +8118,8 @@
    "level": 2,
    "label": "예외 대응",
    "title": "12. 예외 대응",
-   "line": 495,
-   "end": 504,
+   "line": 496,
+   "end": 505,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8076,8 +8132,8 @@
    "level": 2,
    "label": "법·정책",
    "title": "13. 법·정책",
-   "line": 505,
-   "end": 512,
+   "line": 506,
+   "end": 513,
    "tag_version": null,
    "versions": [
     34
@@ -8085,43 +8141,43 @@
    "last_version": 34
   },
   {
-   "id": "sec:09§h513",
+   "id": "sec:09§h514",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h513",
+   "num": "h514",
    "level": 2,
    "label": "목소리 (2026-11-13 결정)",
    "title": "목소리 (2026-11-13 결정)",
-   "line": 513,
-   "end": 521,
+   "line": 514,
+   "end": 522,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h522",
+   "id": "sec:09§h523",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h522",
+   "num": "h523",
    "level": 2,
    "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
    "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
-   "line": 522,
-   "end": 527,
+   "line": 523,
+   "end": 528,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h528",
+   "id": "sec:09§h529",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h528",
+   "num": "h529",
    "level": 2,
    "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
    "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
-   "line": 528,
-   "end": 533,
+   "line": 529,
+   "end": 534,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9345,7 +9401,7 @@
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
    "line": 44,
-   "end": 146,
+   "end": 148,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9354,29 +9410,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h147",
+   "id": "sec:feedback§h149",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h147",
+   "num": "h149",
    "level": 2,
    "label": "시장 — `topics/market`",
    "title": "시장 — `topics/market`",
-   "line": 147,
-   "end": 148,
+   "line": 149,
+   "end": 150,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h149",
+   "id": "sec:feedback§h151",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h149",
+   "num": "h151",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 149,
-   "end": 231,
+   "line": 151,
+   "end": 233,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9387,43 +9443,43 @@
    ]
   },
   {
-   "id": "sec:feedback§h232",
+   "id": "sec:feedback§h234",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h232",
+   "num": "h234",
    "level": 3,
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
-   "line": 232,
-   "end": 287,
+   "line": 234,
+   "end": 291,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h288",
+   "id": "sec:feedback§h292",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h288",
+   "num": "h292",
    "level": 2,
    "label": "호기심 — `topics/curiosity`",
    "title": "호기심 — `topics/curiosity`",
-   "line": 288,
-   "end": 289,
+   "line": 292,
+   "end": 293,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h290",
+   "id": "sec:feedback§h294",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h290",
+   "num": "h294",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 290,
-   "end": 388,
+   "line": 294,
+   "end": 392,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9434,15 +9490,15 @@
    ]
   },
   {
-   "id": "sec:feedback§h389",
+   "id": "sec:feedback§h393",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h389",
+   "num": "h393",
    "level": 3,
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
-   "line": 389,
-   "end": 411,
+   "line": 393,
+   "end": 415,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9451,29 +9507,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h412",
+   "id": "sec:feedback§h416",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h412",
+   "num": "h416",
    "level": 2,
    "label": "시사 — `topics/issues`",
    "title": "시사 — `topics/issues`",
-   "line": 412,
-   "end": 413,
+   "line": 416,
+   "end": 417,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h414",
+   "id": "sec:feedback§h418",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h414",
+   "num": "h418",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 414,
-   "end": 441,
+   "line": 418,
+   "end": 445,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9483,29 +9539,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h442",
+   "id": "sec:feedback§h446",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h442",
+   "num": "h446",
    "level": 2,
    "label": "AI — `topics/ai`",
    "title": "AI — `topics/ai`",
-   "line": 442,
-   "end": 443,
+   "line": 446,
+   "end": 447,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h444",
+   "id": "sec:feedback§h448",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h444",
+   "num": "h448",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 444,
-   "end": 455,
+   "line": 448,
+   "end": 459,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -12456,13 +12512,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:483",
+   "id": "check:495",
    "kind": "check",
    "gate": "gate:G5",
    "level": "SHOULD",
    "label": "edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움)",
    "file": "ytflow/stages/checklist.py",
-   "line": 483,
+   "line": 495,
    "tier_key": "check:949b9462",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12475,13 +12531,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:487",
+   "id": "check:499",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "final.mp4",
    "file": "ytflow/stages/checklist.py",
-   "line": 487,
+   "line": 499,
    "tier_key": "check:502a31b3",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12494,13 +12550,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:503",
+   "id": "check:515",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)",
    "file": "ytflow/stages/checklist.py",
-   "line": 503,
+   "line": 515,
    "tier_key": "check:4f448879",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12513,13 +12569,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:508",
+   "id": "check:520",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "글자 겹침 점검 기록 (05_edit/overlap_qa.json)",
    "file": "ytflow/stages/checklist.py",
-   "line": 508,
+   "line": 520,
    "tier_key": "check:6265c603",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12532,13 +12588,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:513",
+   "id": "check:525",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "화면 글자 겹침 없음 — 글자끼리·카드에 가려짐·카드 밖 넘침·자막 자리 (overlap_qa)",
    "file": "ytflow/stages/checklist.py",
-   "line": 513,
+   "line": 525,
    "tier_key": "check:287f0a57",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12551,13 +12607,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:514",
+   "id": "check:526",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "글자가 카드·강조 상자 가장자리에 걸치지 않음 (overlap_qa)",
    "file": "ytflow/stages/checklist.py",
-   "line": 514,
+   "line": 526,
    "tier_key": "check:65538b9a",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -12570,13 +12626,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:520",
+   "id": "check:532",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
    "file": "ytflow/stages/checklist.py",
-   "line": 520,
+   "line": 532,
    "tier_key": "check:79a7c86e",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12589,71 +12645,14 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:523",
+   "id": "check:535",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "납품 점검(음량 등)",
    "file": "ytflow/stages/checklist.py",
-   "line": 523,
+   "line": 535,
    "tier_key": "check:5e0947d1",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "id": "check:536",
-   "kind": "check",
-   "gate": "gate:G6",
-   "level": "SHOULD",
-   "label": "최종 목소리 ElevenLabs",
-   "file": "ytflow/stages/checklist.py",
-   "line": 536,
-   "tier_key": "check:91c4c655",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "id": "check:540",
-   "kind": "check",
-   "gate": "gate:G7",
-   "level": "MUST",
-   "label": "제목 후보 3개 + 이유",
-   "file": "ytflow/stages/checklist.py",
-   "line": 540,
-   "tier_key": "check:533d8276",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "id": "check:542",
-   "kind": "check",
-   "gate": "gate:G7",
-   "level": "MUST",
-   "label": "썸네일 A/B/C + 점검 ok",
-   "file": "ytflow/stages/checklist.py",
-   "line": 542,
-   "tier_key": "check:a992f8cd",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -12667,11 +12666,68 @@
   {
    "id": "check:548",
    "kind": "check",
+   "gate": "gate:G6",
+   "level": "SHOULD",
+   "label": "최종 목소리 ElevenLabs",
+   "file": "ytflow/stages/checklist.py",
+   "line": 548,
+   "tier_key": "check:91c4c655",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "check:552",
+   "kind": "check",
+   "gate": "gate:G7",
+   "level": "MUST",
+   "label": "제목 후보 3개 + 이유",
+   "file": "ytflow/stages/checklist.py",
+   "line": 552,
+   "tier_key": "check:533d8276",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "check:554",
+   "kind": "check",
+   "gate": "gate:G7",
+   "level": "MUST",
+   "label": "썸네일 A/B/C + 점검 ok",
+   "file": "ytflow/stages/checklist.py",
+   "line": 554,
+   "tier_key": "check:a992f8cd",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "check:560",
+   "kind": "check",
    "gate": "gate:G8",
    "level": "MUST",
    "label": "완성본 보관 기록 — Drive(drive.json·drive_archive.json) 또는 공개 가능한 것만 GitHub Release(release.json)",
    "file": "ytflow/stages/checklist.py",
-   "line": 548,
+   "line": 560,
    "tier_key": "check:3d8271a6",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -12684,13 +12740,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:551",
+   "id": "check:563",
    "kind": "check",
    "gate": "gate:G8",
    "level": "MUST",
    "label": "episodes.md 기록",
    "file": "ytflow/stages/checklist.py",
-   "line": 551,
+   "line": 563,
    "tier_key": "check:45482bc9",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -16254,6 +16310,29 @@
    "themes": [
     "motion",
     "variety"
+   ],
+   "commit": {
+    "sha": "c8c38bdc352dfdb5d24cf0ec4ab5e0c712252dff",
+    "subject": "매뉴얼 v124: 카메라·모션그래픽 해석 바로잡기",
+    "date": "2026-11-24",
+    "other_files": [
+     "styles/anim-stage/STYLE.md",
+     "topics/curiosity/topic.yaml",
+     "ytflow/stages/manualgraph.py"
+    ]
+   }
+  },
+  {
+   "id": "ver:125",
+   "kind": "version",
+   "v": 125,
+   "date": "2026-11-24",
+   "label": "v125",
+   "summary": "연출 결정 기록 — 여러 연출·스타일 중 고른 근거·버린 대안·의도를 렌더 전에(영상 direction + 장면 decide, 같은 상황 같은 선택, 11-25부터 G5 MUST, 05 §0-9·docs/66) · v31 뜻 바로잡기: 남용 금지, 개념 설명 장면 docu 는 이유를 적고 판 기울기 허용(09 §6, docs/65 §8)",
+   "applied": [],
+   "themes": [
+    "variety",
+    "intent"
    ]
   },
   {
@@ -17782,10 +17861,10 @@
    "src": "if spec.get(\"scenes\"):   # v15 카테고리 개성 (05 §0-7)"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:489",
+   "id": "code:ytflow/stages/checklist.py:501",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 489,
+   "line": 501,
    "versions": [
     38
    ],
@@ -17793,10 +17872,10 @@
    "src": "_soft = (\"stage/crowded\", \"stage/text\", \"stage/static\")   # v38: 숫자로 감지하는 '붐빔·글자 수·정지'는 참고 — 판단은 D3 화면 확인"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:529",
+   "id": "code:ytflow/stages/checklist.py:541",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 529,
+   "line": 541,
    "versions": [
     25
    ],
@@ -18281,10 +18360,10 @@
    ]
   },
   {
-   "id": "code:ytflow/stages/hybrid.py:1734",
+   "id": "code:ytflow/stages/hybrid.py:1736",
    "kind": "code",
    "file": "ytflow/stages/hybrid.py",
-   "line": 1734,
+   "line": 1736,
    "versions": [
     22
    ],
@@ -18369,10 +18448,10 @@
    "src": "# 반짝이는 별 몇 개 (숫자 강조) — 시장 채널은 끔 (v32, 2026-11-15 사용자: 과하고 분위기와 안 맞음)"
   },
   {
-   "id": "code:ytflow/stages/newsletters.py:86",
+   "id": "code:ytflow/stages/newsletters.py:87",
    "kind": "code",
    "file": "ytflow/stages/newsletters.py",
-   "line": 86,
+   "line": 87,
    "versions": [
     2
    ],
@@ -20053,7 +20132,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/newsletters.py:86",
+     "ref": "code:ytflow/stages/newsletters.py:87",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -20237,7 +20316,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1734",
+     "ref": "code:ytflow/stages/hybrid.py:1736",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -20426,7 +20505,7 @@
      "by": "사용자 결정 2026-11-15 (매뉴얼 v34 — '말이 화면에 생기는 쪽', 스타일 규칙 유동)"
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:529",
+     "ref": "code:ytflow/stages/checklist.py:541",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -20468,7 +20547,7 @@
      "kind": "code"
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:529",
+     "ref": "code:ytflow/stages/checklist.py:541",
      "kind": "code"
     }
    ],
@@ -20500,7 +20579,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:529",
+     "ref": "code:ytflow/stages/checklist.py:541",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21866,20 +21945,34 @@
     {
      "ref": "code:ytflow/stages/hybrid.py:1286",
      "kind": "code"
+    },
+    {
+     "ref": "fb:259",
+     "kind": "feedback"
     }
    ],
    "variants": [],
    "member_ids": [
     "intent:a21b07e5"
    ],
+   "clarified": [
+    {
+     "date": "2026-11-24",
+     "quote": "1번입니다. 애초에 제가 말한건 쓰지 말아야 할 상황에서 남용했기 때문입니다.",
+     "ref": "fb:259"
+    }
+   ],
    "themes": [
     "motion",
     "sound"
    ],
    "ann_key": "intent:a21b07e5",
-   "meaning": "",
-   "not_meant": [],
-   "note": "",
+   "meaning": "확대·축소·카메라 움직임을 쓰지 말아야 할 곳(차트·숫자·뉴스·인용 장면)에서 남용하지 말라 — 움직임 자체의 금지가 아님",
+   "not_meant": [
+    "시장 채널은 어떤 장면에서도 카메라를 움직이지 않는다 (전면 금지)",
+    "개념 설명 장면에서도 판 기울기·따라가기를 쓸 수 없다"
+   ],
+   "note": "2026-11-24 사용자: \"애초에 제가 말한건 쓰지 말아야 할 상황에서 남용했기 때문입니다\" · \"쓸거면 그 이유와 의도가 명확해야합니다\"",
    "readings": [
     {
      "ref": "ver:31",
@@ -21919,13 +22012,13 @@
     },
     {
      "ref": "sec:09§6",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
+     "status": "over",
+     "note": "v31 을 '시장 채널은 카메라 움직임을 모두 끈다'(전면 금지)로 옮겼음 → v125 에서 '남용 금지, 개념 설명 장면(docu)은 이유를 적고 허용'으로 바로잡음",
+     "by": "사용자 바로잡음 2026-11-24"
     }
    ],
-   "status": "unreviewed",
-   "annotated": false
+   "status": "misaligned",
+   "annotated": true
   },
   {
    "id": "intent:adc35a90",
@@ -22723,7 +22816,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:489",
+     "ref": "code:ytflow/stages/checklist.py:501",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -22930,7 +23023,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:489",
+     "ref": "code:ytflow/stages/checklist.py:501",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -26780,7 +26873,7 @@
      "kind": "review"
     },
     {
-     "ref": "sec:feedback§h290",
+     "ref": "sec:feedback§h294",
      "kind": "manual"
     }
    ],
@@ -26816,7 +26909,7 @@
      "by": ""
     },
     {
-     "ref": "sec:feedback§h290",
+     "ref": "sec:feedback§h294",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -30617,7 +30710,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/newsletters.py:86",
+     "ref": "code:ytflow/stages/newsletters.py:87",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -32625,7 +32718,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/newsletters.py:86",
+     "ref": "code:ytflow/stages/newsletters.py:87",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -33551,7 +33644,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/hybrid.py:1734",
+     "ref": "code:ytflow/stages/hybrid.py:1736",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -34554,6 +34647,35 @@
    "annotated": false
   },
   {
+   "id": "intent:6ca3c450",
+   "kind": "intent",
+   "quote": "더 이런 편집사례들을 조사하세요 제가 원하는건 방송국이나 대형 인력들이 만드는 편집연출정도의 레벨입니다. 또한 단순 다큐를 사용할때만 이를 작설하는 것이 아니라 선택과 방향성 설정에 있어서 이를 기록하라는 것 입니다. 다양한 연출법 편집법 스타일들이 존재하는데 그 다양항것들중 이것을 선택한 근거와 의도가 명확해야합니다. 제가 주의하는건 추적 불가능하고 일관성이 없는 단순 슬롭입니다.",
+   "label": "더 이런 편집사례들을 조사하세요 제가 원하는건 방송국이나 대형 인력들이 만드는 편집연출정도의 레벨입니다. 또",
+   "versions": [],
+   "date": "2026-11-24",
+   "sources": [
+    {
+     "ref": "fb:261",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:6ca3c450"
+   ],
+   "themes": [
+    "variety",
+    "intent"
+   ],
+   "ann_key": "intent:6ca3c450",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:7b88afbf",
    "kind": "intent",
    "quote": "편집방식을 모션그래픽을 좀 잘쓰고싶습니다 적극적으로 많이요",
@@ -34587,6 +34709,105 @@
    "annotated": false
   },
   {
+   "id": "intent:b61f24d8",
+   "kind": "intent",
+   "quote": "애초에 제가 말한건 쓰지 말아야 할 상황에서 남용했기 때문입니다",
+   "label": "애초에 제가 말한건 쓰지 말아야 할 상황에서 남용했기 때문입니다",
+   "versions": [
+    31
+   ],
+   "date": "2026-11-24",
+   "sources": [
+    {
+     "ref": "sec:09§6",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:b61f24d8"
+   ],
+   "themes": [],
+   "ann_key": "intent:b61f24d8",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:31",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:09",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/directions.py:656",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/edit10.py:96",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/edit10.py:169",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1286",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§6",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:ba9c2a7a",
+   "kind": "intent",
+   "quote": "쓸거면 그 이유와 의도가 명확해야합니다.",
+   "label": "쓸거면 그 이유와 의도가 명확해야합니다.",
+   "versions": [],
+   "date": "2026-11-24",
+   "sources": [
+    {
+     "ref": "fb:260",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:ba9c2a7a"
+   ],
+   "themes": [
+    "intent"
+   ],
+   "ann_key": "intent:ba9c2a7a",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:e1fdf851",
    "kind": "intent",
    "quote": "(docs/63 원본 레이더 분석 요약을 붙여 넣으며) 이에 대한 내용이에요 / 소재 감시는 당연히 sonnet이 하시구요",
@@ -34607,6 +34828,32 @@
     "depth"
    ],
    "ann_key": "intent:e1fdf851",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:e663df06",
+   "kind": "intent",
+   "quote": "전문 방송국들이나 편집방식처럼 모션그래픽과 연출 편집방법을 나도 이런 퀄리티로 제작하고싶어 내 시장채널도 이런 다튜멘터리 편집법을 활용하고싶어",
+   "label": "전문 방송국들이나 편집방식처럼 모션그래픽과 연출 편집방법을 나도 이런 퀄리티로 제작하고싶어 내 시장채널도 이",
+   "versions": [],
+   "date": "2026-11-24",
+   "sources": [
+    {
+     "ref": "fb:258",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:e663df06"
+   ],
+   "themes": [],
+   "ann_key": "intent:e663df06",
    "meaning": "",
    "not_meant": [],
    "note": "",
@@ -36768,7 +37015,7 @@
     "sec:README§2-5",
     "ver:21",
     "code:ytflow/stages/hybrid.py:1331",
-    "code:ytflow/stages/hybrid.py:1734",
+    "code:ytflow/stages/hybrid.py:1736",
     "code:ytflow/stages/stage.py:1",
     "code:ytflow/stages/thumbnail.py:165"
    ],
@@ -37831,10 +38078,10 @@
     "sec:10§1",
     "sec:10§h9",
     "sec:10§3",
-    "sec:feedback§h389",
+    "sec:feedback§h393",
     "ver:21",
     "ver:34",
-    "code:ytflow/stages/hybrid.py:1734",
+    "code:ytflow/stages/hybrid.py:1736",
     "code:ytflow/stages/stage.py:1",
     "intent:b0fd8bcd",
     "fb:5"
@@ -40493,7 +40740,7 @@
     "sec:12§0-1",
     "sec:13§4-1",
     "sec:13§7",
-    "sec:feedback§h290",
+    "sec:feedback§h294",
     "ver:92",
     "rule:G4:1",
     "check:172",
@@ -40641,10 +40888,10 @@
     "sec:05§0-5",
     "sec:09§6",
     "sec:10§h136",
-    "sec:feedback§h149",
-    "sec:feedback§h290",
-    "sec:feedback§h414",
-    "sec:feedback§h444",
+    "sec:feedback§h151",
+    "sec:feedback§h294",
+    "sec:feedback§h418",
+    "sec:feedback§h448",
     "ver:10",
     "ver:30",
     "ver:31",
@@ -40872,7 +41119,7 @@
     },
     {
      "file": "ytflow/stages/motion2.py",
-     "line": 275,
+     "line": 279,
      "src": "def apply(D, sc: dict, bt: list, dur: float, w: int = 1920, h: int = 1080, keep: bool = True) -> None:"
     }
    ],
@@ -40904,7 +41151,7 @@
     "sec:04§0-4",
     "sec:09§5-1",
     "sec:09§6",
-    "sec:09§h528",
+    "sec:09§h529",
     "sec:11§2-4",
     "sec:README§2-5",
     "sec:README§3-1",
@@ -40966,7 +41213,6 @@
     "term:beat-motion"
    ],
    "mentioned_in": [
-    "sec:09§6",
     "sec:10§h136",
     "sec:feedback§h44",
     "sec:README§2-5",
@@ -41068,10 +41314,10 @@
     "sec:10§h136",
     "sec:10§4",
     "sec:12§0-1",
-    "sec:feedback§h149",
-    "sec:feedback§h290",
-    "sec:feedback§h414",
-    "sec:feedback§h444",
+    "sec:feedback§h151",
+    "sec:feedback§h294",
+    "sec:feedback§h418",
+    "sec:feedback§h448",
     "ver:10",
     "ver:12",
     "rev:11",
@@ -41232,9 +41478,9 @@
     "sec:06§G6",
     "sec:08§4",
     "sec:09§6",
-    "sec:09§h528",
+    "sec:09§h529",
     "sec:10§4",
-    "sec:feedback§h149",
+    "sec:feedback§h151",
     "sec:README§0",
     "sec:README§2",
     "ver:3",
@@ -48744,6 +48990,123 @@
    "tier_key": "fb:576ce5f8",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:258",
+   "kind": "feedback",
+   "date": "2026-11-24",
+   "quote": "전문 방송국들이나 편집방식처럼 모션그래픽과 연출 편집방법을 나도 이런 퀄리티로 제작하고싶어 내 시장채널도 이런 다튜멘터리 편집법을 활용하고싶어",
+   "label": "전문 방송국들이나 편집방식처럼 모션그래픽과 연출 편집방법을 나도 이런 퀄리티로 제작하고싶어 내 시장채널도 이",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "standard",
+   "repo": "market",
+   "repo_label": "시장",
+   "intent": "intent:e663df06",
+   "tier_key": "fb:e663df06",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:259",
+   "kind": "feedback",
+   "date": "2026-11-24",
+   "quote": "1번입니다. 애초에 제가 말한건 쓰지 말아야 할 상황에서 남용했기 때문입니다.",
+   "label": "1번입니다. 애초에 제가 말한건 쓰지 말아야 할 상황에서 남용했기 때문입니다.",
+   "fb_kind": "clarify",
+   "fb_kind_label": "뜻 바로잡기",
+   "project": "",
+   "about": "a21b07e5",
+   "note": "",
+   "pending": false,
+   "themes": [],
+   "scope": "style",
+   "repo": "market",
+   "repo_label": "시장",
+   "intent": "intent:a21b07e5",
+   "tier_key": "fb:31f78d1f",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "style",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "스타일 기본값"
+  },
+  {
+   "id": "fb:260",
+   "kind": "feedback",
+   "date": "2026-11-24",
+   "quote": "쓸거면 그 이유와 의도가 명확해야합니다.",
+   "label": "쓸거면 그 이유와 의도가 명확해야합니다.",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "intent"
+   ],
+   "scope": "standard",
+   "repo": "main",
+   "repo_label": "메인(공통)",
+   "intent": "intent:ba9c2a7a",
+   "tier_key": "fb:ba9c2a7a",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:261",
+   "kind": "feedback",
+   "date": "2026-11-24",
+   "quote": "더 이런 편집사례들을 조사하세요 제가 원하는건 방송국이나 대형 인력들이 만드는 편집연출정도의 레벨입니다. 또한 단순 다큐를 사용할때만 이를 작설하는 것이 아니라 선택과 방향성 설정에 있어서 이를 기록하라는 것 입니다. 다양한 연출법 편집법 스타일들이 존재하는데 그 다양항것들중 이것을 선택한 근거와 의도가 명확해야합니다. 제가 주의하는건 추적 불가능하고 일관성이 없는 단순 슬롭입니다.",
+   "label": "더 이런 편집사례들을 조사하세요 제가 원하는건 방송국이나 대형 인력들이 만드는 편집연출정도의 레벨입니다. 또",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "",
+   "pending": false,
+   "themes": [
+    "variety",
+    "intent"
+   ],
+   "scope": "standard",
+   "repo": "main",
+   "repo_label": "메인(공통)",
+   "intent": "intent:6ca3c450",
+   "tier_key": "fb:6ca3c450",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
    "overfit": false,
    "single": false,
    "tier": "standard",
@@ -64823,9 +65186,9 @@
     },
     {
      "project": "20261122-market-deep-memory-insight",
-     "scenes": 29,
-     "coverage": 0.76,
-     "fit": 0.36,
+     "scenes": 30,
+     "coverage": 0.77,
+     "fit": 0.35,
      "rows": [
       {
        "s": 1,
@@ -64849,6 +65212,18 @@
       },
       {
        "s": 3,
+       "type": "quote",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "주가는 이미 한쪽으로 기울었습니다. 11월 20일 반도체 폭락 날, 해외 매체 CNBC는 엔비디아가 14% 빠지며 2008년 이후 가장 긴 연속 하락을 마쳤다고 "
+      },
+      {
+       "s": 4,
        "type": "checklist",
        "sit": "explain",
        "fit": false,
@@ -64860,7 +65235,7 @@
        "say": "1부에서는 메모리 값이 왜 이렇게 흔들리는지를 봤습니다. 이번 2부는 그 원리를 도구로 써서, 이름 있는 사람들의 주장을 하나씩 뜯어보겠습니다. 도구는 세 가지입"
       },
       {
-       "s": 4,
+       "s": 5,
        "type": "chapter",
        "sit": null,
        "fit": false,
@@ -64868,7 +65243,7 @@
        "say": "먼저 가장 낙관적인 쪽, SK그룹 최태원 회장입니다."
       },
       {
-       "s": 5,
+       "s": 6,
        "type": "bite",
        "sit": "call-bite",
        "fit": true,
@@ -64879,7 +65254,7 @@
        "say": "지난 8월 CNBC 인터뷰에서, 메모리는 늘 호황과 불황을 오갔는데 이번에는 왜 다르냐는 질문에 그는 이렇게 답했습니다."
       },
       {
-       "s": 6,
+       "s": 7,
        "type": "motionboard",
        "sit": "explain",
        "fit": true,
@@ -64891,7 +65266,7 @@
        "say": "그의 논리는 이렇습니다. 예전 메모리 수요는 사람 수에 묶여 있었습니다. 한 사람이 스마트폰을 하루에 열 대씩 사지는 않으니까요."
       },
       {
-       "s": 7,
+       "s": 8,
        "type": "checklist",
        "sit": "metric",
        "fit": false,
@@ -64903,7 +65278,7 @@
        "say": "받치는 근거부터 보면 탄탄합니다. HBM이 D램 웨이퍼에서 차지하는 몫은 내년 30%까지 오를 전망입니다. 마이크론은 핵심 고객 수요의 절반에서 3분의 2밖에 채"
       },
       {
-       "s": 8,
+       "s": 9,
        "type": "chapter",
        "sit": "call-bite",
        "fit": true,
@@ -64914,7 +65289,7 @@
        "say": "두 번째, 마이크론의 산제이 메로트라 CEO입니다. 그의 말에는 낙관과 함께, 과잉 투자를 피하는 방법이 들어 있습니다."
       },
       {
-       "s": 9,
+       "s": 10,
        "type": "bite",
        "sit": "said",
        "fit": true,
@@ -64926,7 +65301,7 @@
        "say": "지난 5월 블룸버그 인터뷰에서 그는 이렇게 말했습니다."
       },
       {
-       "s": 10,
+       "s": 11,
        "type": "bite",
        "sit": null,
        "fit": false,
@@ -64934,7 +65309,7 @@
        "say": "기자가 물었습니다. 메모리는 늘 호황과 불황을 오가는데, 이번에도 지나치게 짓는 것 아니냐고요. 그의 답이 흥미롭습니다."
       },
       {
-       "s": 11,
+       "s": 12,
        "type": "motionboard",
        "sit": "compare",
        "fit": false,
@@ -64946,7 +65321,7 @@
        "say": "1부에서 공장은 2~3년이 걸린다고 했습니다. 메로트라는 그 시간을 둘로 나눕니다. 건물 껍데기를 짓는 데 몇 년, 그 안에 장비를 넣는 건 그때 수요를 보고 정"
       },
       {
-       "s": 12,
+       "s": 13,
        "type": "chapter",
        "sit": null,
        "fit": false,
@@ -64954,7 +65329,7 @@
        "say": "세 번째는 월가의 낙관입니다. 뱅크오브아메리카의 반도체 분석가 비벡 아리아입니다."
       },
       {
-       "s": 13,
+       "s": 14,
        "type": "quote",
        "sit": "said",
        "fit": true,
@@ -64966,7 +65341,7 @@
        "say": "지난 6월 CNBC에서 그는, 지금 보고 있는 건 사이클이 아니라 메모리 산업의 구조적 변화라고 말했습니다."
       },
       {
-       "s": 14,
+       "s": 15,
        "type": "checklist",
        "sit": "metric",
        "fit": false,
@@ -64978,7 +65353,7 @@
        "say": "그의 근거는 셋입니다. 첫째, AI용 메모리는 만들기가 3~4배 어렵습니다. 1부의 세 번째 도구, HBM 웨이퍼 이야기 그대로입니다. 이건 사실로 받쳐집니다."
       },
       {
-       "s": 15,
+       "s": 16,
        "type": "quote",
        "sit": "compare",
        "fit": false,
@@ -64990,7 +65365,7 @@
        "say": "메모리를 가장 많이 사는 쪽의 말도 같습니다. 젠슨 황은 지난 5월, 가장 큰 공급 병목이 메모리라며 수요가 세계 전체의 생산능력보다 훨씬 크다고 했습니다. 다만"
       },
       {
-       "s": 16,
+       "s": 17,
        "type": "chapter",
        "sit": "metric",
        "fit": true,
@@ -65002,7 +65377,7 @@
        "say": "이제 반대편입니다. 신중한 쪽도 메모리가 필요 없어진다고 말하지 않습니다. 그들이 문제 삼는 건 네 가지입니다. 지금 주가가 꼭대기 이익을 영원한 것처럼 매긴다는"
       },
       {
-       "s": 17,
+       "s": 18,
        "type": "bite",
        "sit": "earnings",
        "fit": false,
@@ -65014,7 +65389,7 @@
        "say": "첫 번째 문제 제기는 모닝스타의 반도체 분석가 윌리엄 커윈입니다. 그는 지난 6월, 이것을 슈퍼사이클이라고 부르면서도 이렇게 선을 그었습니다."
       },
       {
-       "s": 18,
+       "s": 19,
        "type": "motionboard",
        "sit": "metric",
        "fit": false,
@@ -65026,7 +65401,7 @@
        "say": "왜 꼭대기 이익이 문제일까요. 보통 주식은 이익에 견줘 주가가 낮으면, 그러니까 P/E가 낮으면 싸다고 봅니다. 메모리는 거꾸로입니다. 이익이 꼭대기일 때 P/E"
       },
       {
-       "s": 19,
+       "s": 20,
        "type": "bars",
        "sit": "metric",
        "fit": true,
@@ -65038,7 +65413,7 @@
        "say": "두 번째는 모건스탠리입니다. 그들이 올해 4분기부터 사이클 후반부라고 할 때 보는 건 값의 높이가 아니라, 오르는 속도입니다. TrendForce의 일반 D램 계"
       },
       {
-       "s": 20,
+       "s": 21,
        "type": "motionboard",
        "sit": "metric",
        "fit": false,
@@ -65050,7 +65425,7 @@
        "say": "세 번째는 경계현 전 삼성전자 반도체 부문장입니다. 그가 문제 삼는 건 1부에서 본 치킨 게임의 규칙이 통하지 않는 선수입니다. 치킨 게임은 버티다 손해가 너무 "
       },
       {
-       "s": 21,
+       "s": 22,
        "type": "bignum",
        "sit": "metric",
        "fit": true,
@@ -65062,7 +65437,7 @@
        "say": "네 번째는 낸드에서 먼저 금이 간다는 신호입니다. TrendForce는 지난 7월, 올해 낸드가 4에서 5% 모자란다고 했습니다. 그리고 11월 19일에는, 내년"
       },
       {
-       "s": 22,
+       "s": 23,
        "type": "checklist",
        "sit": "metric",
        "fit": false,
@@ -65074,7 +65449,7 @@
        "say": "정리하면 이렇습니다. 첫째, 주가가 꼭대기 이익을 영원한 것처럼 매긴다. 둘째, 오르는 속도가 이미 꺾였다. 셋째, 값이 내려도 줄이지 않는 공급자가 있다. 넷째"
       },
       {
-       "s": 23,
+       "s": 24,
        "type": "chapter",
        "sit": null,
        "fit": false,
@@ -65082,7 +65457,7 @@
        "say": "두 쪽의 말을 1부의 도구로 다시 놓아 보면, 갈리는 곳은 두 군데입니다."
       },
       {
-       "s": 24,
+       "s": 25,
        "type": "map_causal",
        "sit": "point",
        "fit": false,
@@ -65092,7 +65467,7 @@
        "say": "여기서부터는 가설입니다. 첫째, 수요 쪽입니다. 낙관론은 수요의 천장이 사람 수에서 풀렸다고 보고, 신중론은 그 수요의 돈을 내는 AI 회사들이 언제까지 낼 수 "
       },
       {
-       "s": 25,
+       "s": 26,
        "type": "motionboard",
        "sit": "open-scene",
        "fit": false,
@@ -65104,7 +65479,7 @@
        "say": "1부의 끝에서 세운 가설을 다시 꺼내 보면, 두 쪽은 서로 다른 메모리를 보고 있을 수 있습니다. HBM과 서버 메모리는 1년 전에 물량과 값을 정하는 장기 계약"
       },
       {
-       "s": 26,
+       "s": 27,
        "type": "chapter",
        "sit": null,
        "fit": false,
@@ -65112,7 +65487,7 @@
        "say": "마지막으로, 무엇이 나오면 누가 맞는지 날짜가 있는 신호로 정리하겠습니다."
       },
       {
-       "s": 27,
+       "s": 28,
        "type": "checklist",
        "sit": "earnings",
        "fit": false,
@@ -65124,7 +65499,7 @@
        "say": "첫째, 한국 시간 12월 18일 아침 마이크론 실적입니다. 총이익률이 버티고 장기 계약이 늘면 낙관 쪽, 총이익률이 크게 내려오면 신중 쪽입니다. 둘째, 1분기 "
       },
       {
-       "s": 28,
+       "s": 29,
        "type": "kinetic",
        "sit": null,
        "fit": false,
@@ -65132,7 +65507,7 @@
        "say": "낙관과 신중은 수요를 두고 다투는 게 아니라, 누가 그 수요의 돈을 내고, 언제 공장이 들어오느냐를 두고 다툽니다."
       },
       {
-       "s": 29,
+       "s": 30,
        "type": "outro",
        "sit": "earnings",
        "fit": false,
@@ -65407,9 +65782,9 @@
     },
     {
      "project": "20261122-market-deep-nvidia-insight",
-     "scenes": 31,
-     "coverage": 0.9,
-     "fit": 0.32,
+     "scenes": 32,
+     "coverage": 0.91,
+     "fit": 0.34,
      "rows": [
       {
        "s": 1,
@@ -65633,6 +66008,17 @@
       {
        "s": 20,
        "type": "quote",
+       "sit": "media",
+       "fit": true,
+       "rec": [
+        "newspapers",
+        "quote"
+       ],
+       "say": "매체들이 이 숫자를 읽은 방식도 갈렸습니다. 해외 매체 야후 파이낸스는 약정 합계가 6,700억 달러 가까이로 늘고 고객이 돈을 늦게 낸다는 데 무게를 뒀고, C"
+      },
+      {
+       "s": 21,
+       "type": "quote",
        "sit": "earnings",
        "fit": false,
        "rec": [
@@ -65643,7 +66029,7 @@
        "say": "국내 증권가의 시각도 있습니다. KB증권은 올해 9월, 매출채권이 는 건 돈을 받는 시점이 늦어진 것일 뿐이고, 엔비디아가 2026년부터 28년까지 벌 잉여현금이"
       },
       {
-       "s": 21,
+       "s": 22,
        "type": "chapter",
        "sit": null,
        "fit": false,
@@ -65651,7 +66037,7 @@
        "say": "이제 남은 의심 셋입니다. 이 고리가 끊기면 엔비디아만의 문제로 끝날까요, 시장 전체로 번질까요."
       },
       {
-       "s": 22,
+       "s": 23,
        "type": "bignum",
        "sit": "metric",
        "fit": true,
@@ -65663,7 +66049,7 @@
        "say": "연준은 11월 13일 금융안정보고서에서 이 돈의 크기를 쟀습니다. 미국 우량 회사채 발행 가운데 AI 컴퓨팅 관련 빚의 몫이 2023년 6% 미만에서 올해 약 3"
       },
       {
-       "s": 23,
+       "s": 24,
        "type": "quote",
        "sit": "hub-event",
        "fit": false,
@@ -65675,7 +66061,7 @@
        "say": "그리고 11월 18일 공개된 의사록에, 연준은 장부 밖 임대 약속과 AI 회사들 사이의 순환 금융이, AI 투자 수익이 실망스러우면 손실을 키울 수 있다고 적었습"
       },
       {
-       "s": 24,
+       "s": 25,
        "type": "checklist",
        "sit": "metric",
        "fit": false,
@@ -65687,7 +66073,7 @@
        "say": "세 번째 의심, 금리입니다. 의사록에는 거의 모든 참석자가 추가 인상이 적절할 것이라고 봤다고 적혀 있고, 쿡 이사는 11월 20일, 지금 금리로는 AI 건설이 "
       },
       {
-       "s": 25,
+       "s": 26,
        "type": "checklist",
        "sit": "media",
        "fit": false,
@@ -65698,7 +66084,7 @@
        "say": "마지막 의심, SEC입니다. 11월 20일 엔비디아를 가장 크게 끌어내린 건 이 보도였습니다. 월스트리트저널은 17일, SEC가 엔비디아의 공시가 투자자를 오도했"
       },
       {
-       "s": 26,
+       "s": 27,
        "type": "chapter",
        "sit": null,
        "fit": false,
@@ -65706,7 +66092,7 @@
        "say": "이제 양쪽을 1부의 도구 위에 올려 보겠습니다."
       },
       {
-       "s": 27,
+       "s": 28,
        "type": "map_causal",
        "sit": "cause",
        "fit": true,
@@ -65717,7 +66103,7 @@
        "say": "여기서부터는 가설입니다. 방어하는 쪽과 비판하는 쪽은 결국 한 숫자에서 갈립니다. GPU가 몇 년 동안 돈을 버느냐입니다."
       },
       {
-       "s": 28,
+       "s": 29,
        "type": "checklist",
        "sit": "route",
        "fit": false,
@@ -65728,7 +66114,7 @@
        "say": "판가름 신호는 넷입니다. 첫째, 구세대 GPU인 H100의 임대료가 새 칩이 나와도 버티는지. 버티면 젠슨 황의 8년이 맞아 가는 겁니다. 둘째, 월가의 칩 금융"
       },
       {
-       "s": 29,
+       "s": 30,
        "type": "checklist",
        "sit": "say-vs-do",
        "fit": false,
@@ -65740,7 +66126,7 @@
        "say": "시장 전체 쪽 신호도 둘입니다. 엔비디아가 공시에서 SEC 조사를 직접 밝히는지, 그리고 12월 연준 회의에서 금리를 더 올리는지입니다. 둘 다 GPU 수명의 숫"
       },
       {
-       "s": 30,
+       "s": 31,
        "type": "kinetic",
        "sit": "hub-event",
        "fit": false,
@@ -65752,7 +66138,7 @@
        "say": "순환금융이 안전한지는 엔비디아의 말이 아니라, GPU가 실제로 몇 년을 버느냐가 정합니다."
       },
       {
-       "s": 31,
+       "s": 32,
        "type": "outro",
        "sit": "hub-event",
        "fit": false,
@@ -66928,6 +67314,224 @@
        "say": "시장은 이익이 3분의 2쯤 줄어든다고 값을 매겼고, 한 사람은 그 절반도 안 줄어든다고 봤습니다. 내년 1월의 숫자는, 어느 쪽에 더 가까울까요?"
       }
      ]
+    },
+    {
+     "project": "20261124-market-daily",
+     "scenes": 19,
+     "coverage": 0.79,
+     "fit": 0.4,
+     "rows": [
+      {
+       "s": 1,
+       "type": "versus",
+       "sit": "question",
+       "fit": false,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "어제 월요일, 한국의 코스피는 3.31% 빠졌습니다. 그런데 몇 시간 뒤 같은 월요일 미국의 나스닥은 6.51% 올랐습니다. 그 사이에 한 사람이 돌아왔습니다."
+      },
+      {
+       "s": 2,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "숫자부터 보겠습니다. 11월 23일 월요일 미국 장 마감 기준, S&P 500은 4.73%, 나스닥은 6.51%, 반도체 지수는 14.03% 올랐습니다. 엔비디아"
+      },
+      {
+       "s": 3,
+       "type": "chapter",
+       "sit": "say-vs-do",
+       "fit": true,
+       "rec": [
+        "versus",
+        "bite",
+        "compare"
+       ],
+       "say": "먼저 무슨 일이 있었는지, 회사가 공시한 문서로 순서를 짚겠습니다."
+      },
+      {
+       "s": 4,
+       "type": "checklist",
+       "sit": "said",
+       "fit": false,
+       "rec": [
+        "bite",
+        "footage",
+        "quote"
+       ],
+       "say": "미국 날짜로 11일, 젠슨 황이 물러나고 콜레트 크레스 최고재무책임자가 임시로 회사를 맡았습니다. 17일 실적 발표에서는 하비 존스 이사회 의장이, 황을 다시 최"
+      },
+      {
+       "s": 5,
+       "type": "bignum",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "계산해 보겠습니다. 엔비디아 주가는 금요일 125.53달러에서 165.05달러가 됐습니다. 주당 39.52달러, 여기에 주식 수 약 241억 8천만 주를 곱하면,"
+      },
+      {
+       "s": 6,
+       "type": "chapter",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "두 번째, 왜 다른 회사들까지 올랐는지입니다. 같은 날 AI 관련주라도 오른 폭이 크게 갈렸습니다."
+      },
+      {
+       "s": 7,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "엔비디아 칩을 빌려주는 코어위브는 22.32%, 메모리를 대는 마이크론은 19.04%, 칩을 만들어 주는 TSMC는 14.08%, 데이터센터를 짓는 오라클은 12"
+      },
+      {
+       "s": 8,
+       "type": "motionboard",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "그림으로 정리하겠습니다. 엔비디아는 가운데에 있습니다. 엔비디아가 회사 문서에 적은 공급 약정은 3,900억 달러인데, 회사는 이것이 주로 여러 해짜리 메모리 구"
+      },
+      {
+       "s": 9,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "세 번째, 황이 돌아왔어도 그대로인 것들입니다."
+      },
+      {
+       "s": 10,
+       "type": "checklist",
+       "sit": "media",
+       "fit": false,
+       "rec": [
+        "newspapers",
+        "quote"
+       ],
+       "say": "회사 공시대로 이사회 독립위원회의 조사는 끝까지 갑니다. 지난 20일 로이터가 익명 소식통을 인용해 보도한 미국 증권거래위원회의 엔비디아 회계 조사도, 쟁점이 알"
+      },
+      {
+       "s": 11,
+       "type": "versus",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "사람들의 시각은 갈립니다. 댄 아이브스는 지난주 블룸버그 방송에서, 젠슨 황 한 사람이 엔비디아 회사 값의 1조 달러에 해당한다고 말했습니다. 어제의 9,560억"
+      },
+      {
+       "s": 12,
+       "type": "map_causal",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "여기서부터는 해석입니다. 월요일 미국 시장이 되돌린 건, 황이 물러나며 생긴 할인으로 보입니다. 사슬의 가운데가 다시 채워지자, 그 사슬에 묶인 회사들이 함께 올"
+      },
+      {
+       "s": 13,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "이제 한국입니다. 시간 순서가 중요합니다."
+      },
+      {
+       "s": 14,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "어제 한국 장은 오후 3시 30분에 닫혔고, 엔비디아 발표는 한국 시간 밤 10시 반 무렵이었습니다. 그러니 어제 코스피가 3.31% 내린 4,708.54로 닫힌"
+      },
+      {
+       "s": 15,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "이 해석을 확인할 날짜들입니다."
+      },
+      {
+       "s": 16,
+       "type": "checklist",
+       "sit": "open-scene",
+       "fit": false,
+       "rec": [
+        "kb",
+        "footage",
+        "stage"
+       ],
+       "say": "오늘 아침 9시, 한국 반도체가 미국의 사슬만큼 반응하는지 봅니다. 보도에 따르면 오늘부터 석 달 동안 상장사의 자기 주식 매수 한도도 완화됩니다. 수요일에는 재"
+      },
+      {
+       "s": 17,
+       "type": "checklist",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "틀리는 경우도 적어 둡니다. 오늘 한국 반도체가 미국과 달리 약하다면, 한국의 하락은 엔비디아의 리더십보다 메모리 값이나 수급 같은 다른 이유에 더 기대고 있었다"
+      },
+      {
+       "s": 18,
+       "type": "kinetic",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "돌아온 건 한 사람이고, 남은 건 조사와 금리입니다."
+      },
+      {
+       "s": 19,
+       "type": "outro",
+       "sit": "open-scene",
+       "fit": false,
+       "rec": [
+        "kb",
+        "footage",
+        "stage"
+       ],
+       "say": "미국은 사슬의 가운데가 돌아온 것을 하루 만에 값으로 매겼습니다. 그렇다면 오늘 아침, 그 사슬의 끝에 있는 한국 메모리는 얼마나 따라갈까요?"
+      }
+     ]
     }
    ]
   },
@@ -66960,7 +67564,7 @@
     "새벽",
     "아침"
    ],
-   "count": 26,
+   "count": 28,
    "fit": 5,
    "examples": [
     {
@@ -67012,7 +67616,7 @@
     "일까요",
     "을까요"
    ],
-   "count": 93,
+   "count": 94,
    "fit": 67,
    "examples": [
     {
@@ -67066,7 +67670,7 @@
     "답했",
     "라고 했"
    ],
-   "count": 30,
+   "count": 31,
    "fit": 24,
    "examples": [
     {
@@ -67231,8 +67835,8 @@
     "하락",
     "급등"
    ],
-   "count": 242,
-   "fit": 111,
+   "count": 252,
+   "fit": 116,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -67431,8 +68035,8 @@
     "헤드라인",
     "로이터"
    ],
-   "count": 13,
-   "fit": 5,
+   "count": 15,
+   "fit": 6,
    "examples": [
     {
      "project": "20261112-market-daily",
@@ -67791,8 +68395,8 @@
     "발행",
     "자사주"
    ],
-   "count": 20,
-   "fit": 4,
+   "count": 21,
+   "fit": 5,
    "examples": [
     {
      "project": "20261113-market-daily",
@@ -75146,9 +75750,9 @@
    "topic": "market",
    "label": "20261122-market-deep-memory-insight",
    "project": "20261122-market-deep-memory-insight",
-   "scenes": 29,
-   "coverage": 0.76,
-   "fit": 0.36,
+   "scenes": 30,
+   "coverage": 0.77,
+   "fit": 0.35,
    "rows": [
     {
      "s": 1,
@@ -75172,6 +75776,18 @@
     },
     {
      "s": 3,
+     "type": "quote",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "주가는 이미 한쪽으로 기울었습니다. 11월 20일 반도체 폭락 날, 해외 매체 CNBC는 엔비디아가 14% 빠지며 2008년 이후 가장 긴 연속 하락을 마쳤다고 "
+    },
+    {
+     "s": 4,
      "type": "checklist",
      "sit": "explain",
      "fit": false,
@@ -75183,7 +75799,7 @@
      "say": "1부에서는 메모리 값이 왜 이렇게 흔들리는지를 봤습니다. 이번 2부는 그 원리를 도구로 써서, 이름 있는 사람들의 주장을 하나씩 뜯어보겠습니다. 도구는 세 가지입"
     },
     {
-     "s": 4,
+     "s": 5,
      "type": "chapter",
      "sit": null,
      "fit": false,
@@ -75191,7 +75807,7 @@
      "say": "먼저 가장 낙관적인 쪽, SK그룹 최태원 회장입니다."
     },
     {
-     "s": 5,
+     "s": 6,
      "type": "bite",
      "sit": "call-bite",
      "fit": true,
@@ -75202,7 +75818,7 @@
      "say": "지난 8월 CNBC 인터뷰에서, 메모리는 늘 호황과 불황을 오갔는데 이번에는 왜 다르냐는 질문에 그는 이렇게 답했습니다."
     },
     {
-     "s": 6,
+     "s": 7,
      "type": "motionboard",
      "sit": "explain",
      "fit": true,
@@ -75214,7 +75830,7 @@
      "say": "그의 논리는 이렇습니다. 예전 메모리 수요는 사람 수에 묶여 있었습니다. 한 사람이 스마트폰을 하루에 열 대씩 사지는 않으니까요."
     },
     {
-     "s": 7,
+     "s": 8,
      "type": "checklist",
      "sit": "metric",
      "fit": false,
@@ -75226,7 +75842,7 @@
      "say": "받치는 근거부터 보면 탄탄합니다. HBM이 D램 웨이퍼에서 차지하는 몫은 내년 30%까지 오를 전망입니다. 마이크론은 핵심 고객 수요의 절반에서 3분의 2밖에 채"
     },
     {
-     "s": 8,
+     "s": 9,
      "type": "chapter",
      "sit": "call-bite",
      "fit": true,
@@ -75237,7 +75853,7 @@
      "say": "두 번째, 마이크론의 산제이 메로트라 CEO입니다. 그의 말에는 낙관과 함께, 과잉 투자를 피하는 방법이 들어 있습니다."
     },
     {
-     "s": 9,
+     "s": 10,
      "type": "bite",
      "sit": "said",
      "fit": true,
@@ -75249,7 +75865,7 @@
      "say": "지난 5월 블룸버그 인터뷰에서 그는 이렇게 말했습니다."
     },
     {
-     "s": 10,
+     "s": 11,
      "type": "bite",
      "sit": null,
      "fit": false,
@@ -75257,7 +75873,7 @@
      "say": "기자가 물었습니다. 메모리는 늘 호황과 불황을 오가는데, 이번에도 지나치게 짓는 것 아니냐고요. 그의 답이 흥미롭습니다."
     },
     {
-     "s": 11,
+     "s": 12,
      "type": "motionboard",
      "sit": "compare",
      "fit": false,
@@ -75269,7 +75885,7 @@
      "say": "1부에서 공장은 2~3년이 걸린다고 했습니다. 메로트라는 그 시간을 둘로 나눕니다. 건물 껍데기를 짓는 데 몇 년, 그 안에 장비를 넣는 건 그때 수요를 보고 정"
     },
     {
-     "s": 12,
+     "s": 13,
      "type": "chapter",
      "sit": null,
      "fit": false,
@@ -75277,7 +75893,7 @@
      "say": "세 번째는 월가의 낙관입니다. 뱅크오브아메리카의 반도체 분석가 비벡 아리아입니다."
     },
     {
-     "s": 13,
+     "s": 14,
      "type": "quote",
      "sit": "said",
      "fit": true,
@@ -75289,7 +75905,7 @@
      "say": "지난 6월 CNBC에서 그는, 지금 보고 있는 건 사이클이 아니라 메모리 산업의 구조적 변화라고 말했습니다."
     },
     {
-     "s": 14,
+     "s": 15,
      "type": "checklist",
      "sit": "metric",
      "fit": false,
@@ -75301,7 +75917,7 @@
      "say": "그의 근거는 셋입니다. 첫째, AI용 메모리는 만들기가 3~4배 어렵습니다. 1부의 세 번째 도구, HBM 웨이퍼 이야기 그대로입니다. 이건 사실로 받쳐집니다."
     },
     {
-     "s": 15,
+     "s": 16,
      "type": "quote",
      "sit": "compare",
      "fit": false,
@@ -75313,7 +75929,7 @@
      "say": "메모리를 가장 많이 사는 쪽의 말도 같습니다. 젠슨 황은 지난 5월, 가장 큰 공급 병목이 메모리라며 수요가 세계 전체의 생산능력보다 훨씬 크다고 했습니다. 다만"
     },
     {
-     "s": 16,
+     "s": 17,
      "type": "chapter",
      "sit": "metric",
      "fit": true,
@@ -75325,7 +75941,7 @@
      "say": "이제 반대편입니다. 신중한 쪽도 메모리가 필요 없어진다고 말하지 않습니다. 그들이 문제 삼는 건 네 가지입니다. 지금 주가가 꼭대기 이익을 영원한 것처럼 매긴다는"
     },
     {
-     "s": 17,
+     "s": 18,
      "type": "bite",
      "sit": "earnings",
      "fit": false,
@@ -75337,7 +75953,7 @@
      "say": "첫 번째 문제 제기는 모닝스타의 반도체 분석가 윌리엄 커윈입니다. 그는 지난 6월, 이것을 슈퍼사이클이라고 부르면서도 이렇게 선을 그었습니다."
     },
     {
-     "s": 18,
+     "s": 19,
      "type": "motionboard",
      "sit": "metric",
      "fit": false,
@@ -75349,7 +75965,7 @@
      "say": "왜 꼭대기 이익이 문제일까요. 보통 주식은 이익에 견줘 주가가 낮으면, 그러니까 P/E가 낮으면 싸다고 봅니다. 메모리는 거꾸로입니다. 이익이 꼭대기일 때 P/E"
     },
     {
-     "s": 19,
+     "s": 20,
      "type": "bars",
      "sit": "metric",
      "fit": true,
@@ -75361,7 +75977,7 @@
      "say": "두 번째는 모건스탠리입니다. 그들이 올해 4분기부터 사이클 후반부라고 할 때 보는 건 값의 높이가 아니라, 오르는 속도입니다. TrendForce의 일반 D램 계"
     },
     {
-     "s": 20,
+     "s": 21,
      "type": "motionboard",
      "sit": "metric",
      "fit": false,
@@ -75373,7 +75989,7 @@
      "say": "세 번째는 경계현 전 삼성전자 반도체 부문장입니다. 그가 문제 삼는 건 1부에서 본 치킨 게임의 규칙이 통하지 않는 선수입니다. 치킨 게임은 버티다 손해가 너무 "
     },
     {
-     "s": 21,
+     "s": 22,
      "type": "bignum",
      "sit": "metric",
      "fit": true,
@@ -75385,7 +76001,7 @@
      "say": "네 번째는 낸드에서 먼저 금이 간다는 신호입니다. TrendForce는 지난 7월, 올해 낸드가 4에서 5% 모자란다고 했습니다. 그리고 11월 19일에는, 내년"
     },
     {
-     "s": 22,
+     "s": 23,
      "type": "checklist",
      "sit": "metric",
      "fit": false,
@@ -75397,7 +76013,7 @@
      "say": "정리하면 이렇습니다. 첫째, 주가가 꼭대기 이익을 영원한 것처럼 매긴다. 둘째, 오르는 속도가 이미 꺾였다. 셋째, 값이 내려도 줄이지 않는 공급자가 있다. 넷째"
     },
     {
-     "s": 23,
+     "s": 24,
      "type": "chapter",
      "sit": null,
      "fit": false,
@@ -75405,7 +76021,7 @@
      "say": "두 쪽의 말을 1부의 도구로 다시 놓아 보면, 갈리는 곳은 두 군데입니다."
     },
     {
-     "s": 24,
+     "s": 25,
      "type": "map_causal",
      "sit": "point",
      "fit": false,
@@ -75415,7 +76031,7 @@
      "say": "여기서부터는 가설입니다. 첫째, 수요 쪽입니다. 낙관론은 수요의 천장이 사람 수에서 풀렸다고 보고, 신중론은 그 수요의 돈을 내는 AI 회사들이 언제까지 낼 수 "
     },
     {
-     "s": 25,
+     "s": 26,
      "type": "motionboard",
      "sit": "open-scene",
      "fit": false,
@@ -75427,7 +76043,7 @@
      "say": "1부의 끝에서 세운 가설을 다시 꺼내 보면, 두 쪽은 서로 다른 메모리를 보고 있을 수 있습니다. HBM과 서버 메모리는 1년 전에 물량과 값을 정하는 장기 계약"
     },
     {
-     "s": 26,
+     "s": 27,
      "type": "chapter",
      "sit": null,
      "fit": false,
@@ -75435,7 +76051,7 @@
      "say": "마지막으로, 무엇이 나오면 누가 맞는지 날짜가 있는 신호로 정리하겠습니다."
     },
     {
-     "s": 27,
+     "s": 28,
      "type": "checklist",
      "sit": "earnings",
      "fit": false,
@@ -75447,7 +76063,7 @@
      "say": "첫째, 한국 시간 12월 18일 아침 마이크론 실적입니다. 총이익률이 버티고 장기 계약이 늘면 낙관 쪽, 총이익률이 크게 내려오면 신중 쪽입니다. 둘째, 1분기 "
     },
     {
-     "s": 28,
+     "s": 29,
      "type": "kinetic",
      "sit": null,
      "fit": false,
@@ -75455,7 +76071,7 @@
      "say": "낙관과 신중은 수요를 두고 다투는 게 아니라, 누가 그 수요의 돈을 내고, 언제 공장이 들어오느냐를 두고 다툽니다."
     },
     {
-     "s": 29,
+     "s": 30,
      "type": "outro",
      "sit": "earnings",
      "fit": false,
@@ -75738,9 +76354,9 @@
    "topic": "market",
    "label": "20261122-market-deep-nvidia-insight",
    "project": "20261122-market-deep-nvidia-insight",
-   "scenes": 31,
-   "coverage": 0.9,
-   "fit": 0.32,
+   "scenes": 32,
+   "coverage": 0.91,
+   "fit": 0.34,
    "rows": [
     {
      "s": 1,
@@ -75964,6 +76580,17 @@
     {
      "s": 20,
      "type": "quote",
+     "sit": "media",
+     "fit": true,
+     "rec": [
+      "newspapers",
+      "quote"
+     ],
+     "say": "매체들이 이 숫자를 읽은 방식도 갈렸습니다. 해외 매체 야후 파이낸스는 약정 합계가 6,700억 달러 가까이로 늘고 고객이 돈을 늦게 낸다는 데 무게를 뒀고, C"
+    },
+    {
+     "s": 21,
+     "type": "quote",
      "sit": "earnings",
      "fit": false,
      "rec": [
@@ -75974,7 +76601,7 @@
      "say": "국내 증권가의 시각도 있습니다. KB증권은 올해 9월, 매출채권이 는 건 돈을 받는 시점이 늦어진 것일 뿐이고, 엔비디아가 2026년부터 28년까지 벌 잉여현금이"
     },
     {
-     "s": 21,
+     "s": 22,
      "type": "chapter",
      "sit": null,
      "fit": false,
@@ -75982,7 +76609,7 @@
      "say": "이제 남은 의심 셋입니다. 이 고리가 끊기면 엔비디아만의 문제로 끝날까요, 시장 전체로 번질까요."
     },
     {
-     "s": 22,
+     "s": 23,
      "type": "bignum",
      "sit": "metric",
      "fit": true,
@@ -75994,7 +76621,7 @@
      "say": "연준은 11월 13일 금융안정보고서에서 이 돈의 크기를 쟀습니다. 미국 우량 회사채 발행 가운데 AI 컴퓨팅 관련 빚의 몫이 2023년 6% 미만에서 올해 약 3"
     },
     {
-     "s": 23,
+     "s": 24,
      "type": "quote",
      "sit": "hub-event",
      "fit": false,
@@ -76006,7 +76633,7 @@
      "say": "그리고 11월 18일 공개된 의사록에, 연준은 장부 밖 임대 약속과 AI 회사들 사이의 순환 금융이, AI 투자 수익이 실망스러우면 손실을 키울 수 있다고 적었습"
     },
     {
-     "s": 24,
+     "s": 25,
      "type": "checklist",
      "sit": "metric",
      "fit": false,
@@ -76018,7 +76645,7 @@
      "say": "세 번째 의심, 금리입니다. 의사록에는 거의 모든 참석자가 추가 인상이 적절할 것이라고 봤다고 적혀 있고, 쿡 이사는 11월 20일, 지금 금리로는 AI 건설이 "
     },
     {
-     "s": 25,
+     "s": 26,
      "type": "checklist",
      "sit": "media",
      "fit": false,
@@ -76029,7 +76656,7 @@
      "say": "마지막 의심, SEC입니다. 11월 20일 엔비디아를 가장 크게 끌어내린 건 이 보도였습니다. 월스트리트저널은 17일, SEC가 엔비디아의 공시가 투자자를 오도했"
     },
     {
-     "s": 26,
+     "s": 27,
      "type": "chapter",
      "sit": null,
      "fit": false,
@@ -76037,7 +76664,7 @@
      "say": "이제 양쪽을 1부의 도구 위에 올려 보겠습니다."
     },
     {
-     "s": 27,
+     "s": 28,
      "type": "map_causal",
      "sit": "cause",
      "fit": true,
@@ -76048,7 +76675,7 @@
      "say": "여기서부터는 가설입니다. 방어하는 쪽과 비판하는 쪽은 결국 한 숫자에서 갈립니다. GPU가 몇 년 동안 돈을 버느냐입니다."
     },
     {
-     "s": 28,
+     "s": 29,
      "type": "checklist",
      "sit": "route",
      "fit": false,
@@ -76059,7 +76686,7 @@
      "say": "판가름 신호는 넷입니다. 첫째, 구세대 GPU인 H100의 임대료가 새 칩이 나와도 버티는지. 버티면 젠슨 황의 8년이 맞아 가는 겁니다. 둘째, 월가의 칩 금융"
     },
     {
-     "s": 29,
+     "s": 30,
      "type": "checklist",
      "sit": "say-vs-do",
      "fit": false,
@@ -76071,7 +76698,7 @@
      "say": "시장 전체 쪽 신호도 둘입니다. 엔비디아가 공시에서 SEC 조사를 직접 밝히는지, 그리고 12월 연준 회의에서 금리를 더 올리는지입니다. 둘 다 GPU 수명의 숫"
     },
     {
-     "s": 30,
+     "s": 31,
      "type": "kinetic",
      "sit": "hub-event",
      "fit": false,
@@ -76083,7 +76710,7 @@
      "say": "순환금융이 안전한지는 엔비디아의 말이 아니라, GPU가 실제로 몇 년을 버느냐가 정합니다."
     },
     {
-     "s": 31,
+     "s": 32,
      "type": "outro",
      "sit": "hub-event",
      "fit": false,
@@ -77275,6 +77902,228 @@
      "say": "시장은 이익이 3분의 2쯤 줄어든다고 값을 매겼고, 한 사람은 그 절반도 안 줄어든다고 봤습니다. 내년 1월의 숫자는, 어느 쪽에 더 가까울까요?"
     }
    ]
+  },
+  {
+   "id": "ep:20261124-market-daily",
+   "kind": "episode",
+   "topic": "market",
+   "label": "20261124-market-daily",
+   "project": "20261124-market-daily",
+   "scenes": 19,
+   "coverage": 0.79,
+   "fit": 0.4,
+   "rows": [
+    {
+     "s": 1,
+     "type": "versus",
+     "sit": "question",
+     "fit": false,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "어제 월요일, 한국의 코스피는 3.31% 빠졌습니다. 그런데 몇 시간 뒤 같은 월요일 미국의 나스닥은 6.51% 올랐습니다. 그 사이에 한 사람이 돌아왔습니다."
+    },
+    {
+     "s": 2,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "숫자부터 보겠습니다. 11월 23일 월요일 미국 장 마감 기준, S&P 500은 4.73%, 나스닥은 6.51%, 반도체 지수는 14.03% 올랐습니다. 엔비디아"
+    },
+    {
+     "s": 3,
+     "type": "chapter",
+     "sit": "say-vs-do",
+     "fit": true,
+     "rec": [
+      "versus",
+      "bite",
+      "compare"
+     ],
+     "say": "먼저 무슨 일이 있었는지, 회사가 공시한 문서로 순서를 짚겠습니다."
+    },
+    {
+     "s": 4,
+     "type": "checklist",
+     "sit": "said",
+     "fit": false,
+     "rec": [
+      "bite",
+      "footage",
+      "quote"
+     ],
+     "say": "미국 날짜로 11일, 젠슨 황이 물러나고 콜레트 크레스 최고재무책임자가 임시로 회사를 맡았습니다. 17일 실적 발표에서는 하비 존스 이사회 의장이, 황을 다시 최"
+    },
+    {
+     "s": 5,
+     "type": "bignum",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "계산해 보겠습니다. 엔비디아 주가는 금요일 125.53달러에서 165.05달러가 됐습니다. 주당 39.52달러, 여기에 주식 수 약 241억 8천만 주를 곱하면,"
+    },
+    {
+     "s": 6,
+     "type": "chapter",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "두 번째, 왜 다른 회사들까지 올랐는지입니다. 같은 날 AI 관련주라도 오른 폭이 크게 갈렸습니다."
+    },
+    {
+     "s": 7,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "엔비디아 칩을 빌려주는 코어위브는 22.32%, 메모리를 대는 마이크론은 19.04%, 칩을 만들어 주는 TSMC는 14.08%, 데이터센터를 짓는 오라클은 12"
+    },
+    {
+     "s": 8,
+     "type": "motionboard",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "그림으로 정리하겠습니다. 엔비디아는 가운데에 있습니다. 엔비디아가 회사 문서에 적은 공급 약정은 3,900억 달러인데, 회사는 이것이 주로 여러 해짜리 메모리 구"
+    },
+    {
+     "s": 9,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "세 번째, 황이 돌아왔어도 그대로인 것들입니다."
+    },
+    {
+     "s": 10,
+     "type": "checklist",
+     "sit": "media",
+     "fit": false,
+     "rec": [
+      "newspapers",
+      "quote"
+     ],
+     "say": "회사 공시대로 이사회 독립위원회의 조사는 끝까지 갑니다. 지난 20일 로이터가 익명 소식통을 인용해 보도한 미국 증권거래위원회의 엔비디아 회계 조사도, 쟁점이 알"
+    },
+    {
+     "s": 11,
+     "type": "versus",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "사람들의 시각은 갈립니다. 댄 아이브스는 지난주 블룸버그 방송에서, 젠슨 황 한 사람이 엔비디아 회사 값의 1조 달러에 해당한다고 말했습니다. 어제의 9,560억"
+    },
+    {
+     "s": 12,
+     "type": "map_causal",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "여기서부터는 해석입니다. 월요일 미국 시장이 되돌린 건, 황이 물러나며 생긴 할인으로 보입니다. 사슬의 가운데가 다시 채워지자, 그 사슬에 묶인 회사들이 함께 올"
+    },
+    {
+     "s": 13,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "이제 한국입니다. 시간 순서가 중요합니다."
+    },
+    {
+     "s": 14,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "어제 한국 장은 오후 3시 30분에 닫혔고, 엔비디아 발표는 한국 시간 밤 10시 반 무렵이었습니다. 그러니 어제 코스피가 3.31% 내린 4,708.54로 닫힌"
+    },
+    {
+     "s": 15,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "이 해석을 확인할 날짜들입니다."
+    },
+    {
+     "s": 16,
+     "type": "checklist",
+     "sit": "open-scene",
+     "fit": false,
+     "rec": [
+      "kb",
+      "footage",
+      "stage"
+     ],
+     "say": "오늘 아침 9시, 한국 반도체가 미국의 사슬만큼 반응하는지 봅니다. 보도에 따르면 오늘부터 석 달 동안 상장사의 자기 주식 매수 한도도 완화됩니다. 수요일에는 재"
+    },
+    {
+     "s": 17,
+     "type": "checklist",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "틀리는 경우도 적어 둡니다. 오늘 한국 반도체가 미국과 달리 약하다면, 한국의 하락은 엔비디아의 리더십보다 메모리 값이나 수급 같은 다른 이유에 더 기대고 있었다"
+    },
+    {
+     "s": 18,
+     "type": "kinetic",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "돌아온 건 한 사람이고, 남은 건 조사와 금리입니다."
+    },
+    {
+     "s": 19,
+     "type": "outro",
+     "sit": "open-scene",
+     "fit": false,
+     "rec": [
+      "kb",
+      "footage",
+      "stage"
+     ],
+     "say": "미국은 사슬의 가운데가 돌아온 것을 하루 만에 값으로 매겼습니다. 그렇다면 오늘 아침, 그 사슬의 끝에 있는 한국 메모리는 얼마나 따라갈까요?"
+    }
+   ]
   }
  ],
  "edges": [
@@ -77606,6 +78455,11 @@
   {
    "s": "doc:05",
    "t": "sec:05§0",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:05",
+   "t": "sec:05§0-9",
    "kind": "contains"
   },
   {
@@ -77950,17 +78804,17 @@
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h513",
+   "t": "sec:09§h514",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h522",
+   "t": "sec:09§h523",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h528",
+   "t": "sec:09§h529",
    "kind": "contains"
   },
   {
@@ -78295,52 +79149,52 @@
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h147",
-   "kind": "contains"
-  },
-  {
-   "s": "doc:feedback",
    "t": "sec:feedback§h149",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h232",
+   "t": "sec:feedback§h151",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h288",
+   "t": "sec:feedback§h234",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h290",
+   "t": "sec:feedback§h292",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h389",
+   "t": "sec:feedback§h294",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h412",
+   "t": "sec:feedback§h393",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h414",
+   "t": "sec:feedback§h416",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h442",
+   "t": "sec:feedback§h418",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h444",
+   "t": "sec:feedback§h446",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:feedback",
+   "t": "sec:feedback§h448",
    "kind": "contains"
   },
   {
@@ -79124,32 +79978,17 @@
    "kind": "enforces"
   },
   {
-   "s": "check:483",
+   "s": "check:495",
    "t": "gate:G5",
    "kind": "enforces"
   },
   {
-   "s": "check:487",
+   "s": "check:499",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:503",
-   "t": "gate:G6",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:508",
-   "t": "gate:G6",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:513",
-   "t": "gate:G6",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:514",
+   "s": "check:515",
    "t": "gate:G6",
    "kind": "enforces"
   },
@@ -79159,32 +79998,47 @@
    "kind": "enforces"
   },
   {
-   "s": "check:523",
+   "s": "check:525",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:536",
+   "s": "check:526",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:540",
-   "t": "gate:G7",
+   "s": "check:532",
+   "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:542",
-   "t": "gate:G7",
+   "s": "check:535",
+   "t": "gate:G6",
    "kind": "enforces"
   },
   {
    "s": "check:548",
+   "t": "gate:G6",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:552",
+   "t": "gate:G7",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:554",
+   "t": "gate:G7",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:560",
    "t": "gate:G8",
    "kind": "enforces"
   },
   {
-   "s": "check:551",
+   "s": "check:563",
    "t": "gate:G8",
    "kind": "enforces"
   },
@@ -82126,6 +82980,46 @@
    ]
   },
   {
+   "s": "ver:124",
+   "t": "doc:12",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:124",
+   "t": "doc:feedback",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:125",
+   "t": "sec:05§0-9",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:125",
+   "t": "sec:09§6",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
+   "s": "ver:125",
+   "t": "gate:G5",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -83392,6 +84286,16 @@
    "kind": "about"
   },
   {
+   "s": "ver:125",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:125",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
    "s": "ver:8",
    "t": "code:ytflow/stages/backdrop.py:1",
    "kind": "implemented_by"
@@ -83508,12 +84412,12 @@
   },
   {
    "s": "ver:38",
-   "t": "code:ytflow/stages/checklist.py:489",
+   "t": "code:ytflow/stages/checklist.py:501",
    "kind": "implemented_by"
   },
   {
    "s": "ver:25",
-   "t": "code:ytflow/stages/checklist.py:529",
+   "t": "code:ytflow/stages/checklist.py:541",
    "kind": "implemented_by"
   },
   {
@@ -83718,7 +84622,7 @@
   },
   {
    "s": "ver:22",
-   "t": "code:ytflow/stages/hybrid.py:1734",
+   "t": "code:ytflow/stages/hybrid.py:1736",
    "kind": "implemented_by"
   },
   {
@@ -83753,7 +84657,7 @@
   },
   {
    "s": "ver:2",
-   "t": "code:ytflow/stages/newsletters.py:86",
+   "t": "code:ytflow/stages/newsletters.py:87",
    "kind": "implemented_by"
   },
   {
@@ -83984,6 +84888,21 @@
   {
    "s": "intent:fabc98cc",
    "t": "theme:length",
+   "kind": "about"
+  },
+  {
+   "s": "intent:6ca3c450",
+   "t": "fb:261",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:6ca3c450",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:6ca3c450",
+   "t": "theme:intent",
    "kind": "about"
   },
   {
@@ -85372,6 +86291,11 @@
    "kind": "quoted_in"
   },
   {
+   "s": "intent:e663df06",
+   "t": "fb:258",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:aeda10c1",
    "t": "ver:39",
    "kind": "interpreted_in"
@@ -85603,7 +86527,7 @@
   },
   {
    "s": "intent:b3682647",
-   "t": "sec:feedback§h290",
+   "t": "sec:feedback§h294",
    "kind": "quoted_in"
   },
   {
@@ -86918,7 +87842,7 @@
   },
   {
    "s": "intent:8ecb5021",
-   "t": "code:ytflow/stages/checklist.py:529",
+   "t": "code:ytflow/stages/checklist.py:541",
    "kind": "quoted_in"
   },
   {
@@ -87092,6 +88016,16 @@
    "kind": "about"
   },
   {
+   "s": "intent:b61f24d8",
+   "t": "ver:31",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:b61f24d8",
+   "t": "sec:09§6",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:7b88afbf",
    "t": "sec:09§6",
    "kind": "quoted_in"
@@ -87134,6 +88068,11 @@
   {
    "s": "intent:a21b07e5",
    "t": "code:ytflow/stages/hybrid.py:1286",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:a21b07e5",
+   "t": "fb:259",
    "kind": "quoted_in"
   },
   {
@@ -87630,6 +88569,16 @@
    "s": "intent:515af871",
    "t": "fb:228",
    "kind": "quoted_in"
+  },
+  {
+   "s": "intent:ba9c2a7a",
+   "t": "fb:260",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:ba9c2a7a",
+   "t": "theme:intent",
+   "kind": "about"
   },
   {
    "s": "intent:2925f768",
@@ -88934,6 +89883,11 @@
   {
    "s": "topic:market",
    "t": "ep:20261123-market-deep-softbank-hynix",
+   "kind": "episode"
+  },
+  {
+   "s": "topic:market",
+   "t": "ep:20261124-market-daily",
    "kind": "episode"
   },
   {
@@ -93090,6 +94044,41 @@
    "s": "fb:257",
    "t": "intent:4f6397bd",
    "kind": "clarifies"
+  },
+  {
+   "s": "fb:258",
+   "t": "intent:e663df06",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:259",
+   "t": "intent:a21b07e5",
+   "kind": "clarifies"
+  },
+  {
+   "s": "fb:260",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
+   "s": "fb:260",
+   "t": "intent:ba9c2a7a",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:261",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "fb:261",
+   "t": "theme:intent",
+   "kind": "about"
+  },
+  {
+   "s": "fb:261",
+   "t": "intent:6ca3c450",
+   "kind": "quoted_as"
   }
  ]
 }

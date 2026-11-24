@@ -479,6 +479,18 @@ def run(path: Path, upto: str = "G8") -> Report:
         R.add("G5", "SHOULD", "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)", not rec or skin in rec, f"{skin} / 등록부 {sorted(rec)}")
         sp = path / "01_research" / "style_pick.json"
         R.add("G5", "SHOULD", "style-pick 기록 (상황에 맞춘 스타일 선택)", sp.exists(), "python -m ytflow style-pick <프로젝트>")
+        # 연출 결정 기록 (manual/05 §0-8, docs/66 — 2026-11-24 사용자: "다양한 연출법 편집법 스타일들 … 중 이것을 선택한 근거와 의도가
+        # 명확해야합니다. 제가 주의하는건 추적 불가능하고 일관성이 없는 단순 슬롭입니다") — 11-25 이후 영상은 MUST, 그 전은 참고
+        if (path / "02_script" / "hybrid.json").exists():
+            from . import decisions as _dc
+            try:
+                dr = _dc.check(path)
+                bad = [f"장면 {i['scene']}: {i['msg']}" for i in dr["items"] if i["level"] == "MUST"]
+                R.add("G5", "MUST" if _dc.applies(path) else "참고",
+                      "연출 결정 기록: 영상 방향·장면마다 고른 것·버린 대안·근거·의도, 같은 상황 같은 선택 (decide, 05 §0-9)",
+                      dr["pass"], bad[:12] or "python -m ytflow decide <프로젝트> → 02_script/DIRECTION_LOG.md")
+            except Exception as e:  # noqa: BLE001
+                R.add("G5", "MUST" if _dc.applies(path) else "참고", "연출 결정 기록 (decide)", False, f"검사 실패: {e}")
         ep = path / "02_script" / "EDIT_CONTEXT.md"   # 메인 → 주제 레포 → 이 영상 (docs/33)
         R.add("G5", "SHOULD", "edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움)", ep.exists(),
               "python -m ytflow edit-plan <프로젝트> → 02_script/EDIT_CONTEXT.md")
