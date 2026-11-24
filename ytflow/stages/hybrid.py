@@ -1731,6 +1731,8 @@ try:  # 새 연출 문법(아카이브 다큐·지도 여정·키네틱 타이�
     _uiflow.register()
     from . import docu as _docu          # 다큐 개념 장면 (docu: 칩·관계선·판 기울기·신호 퍼짐·관계도→순위, docs/65)
     _docu.register()
+    from . import fixedframe as _fixedframe  # 고정 틀 비교 (fixedframe: 같은 틀·한 변수, docs/67 R2-1)
+    _fixedframe.register()
     from . import story as _story        # 이야기 그림판 (story 장면, styles/story-board) — 호기심 채널
     _story.register()
     from . import stage as _stage        # 애니메이션 무대 (stage 장면, styles/anim-stage) — 호기심 채널 v22, manual/04 §0-5
