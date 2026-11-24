@@ -1,15 +1,15 @@
 {
  "project": "20261125-market-daily",
- "manual_version": "126",
- "checked": "2026-11-25T08:19:33",
- "pass": false,
+ "manual_version": "127",
+ "checked": "2026-11-25T08:52:15",
+ "pass": true,
  "rows": [
   {
    "gate": "G0",
    "level": "MUST",
    "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
-   "ok": false,
-   "detail": "[2026-11-24 · 사용자 피드백 · 층: 작업 기준] 우선 005 영상은 좀 둘다 별로에요 우선 005 오른쪽 개선안이 뭘 나타내고싶은건지 모르겠고 저 칩 이미지가 필요해? 저게 왜 필요하지? 엔비디아인데? 직관성도 떨어지고 별로 설명에도 안적합한데 라는 생각입니다 019영상도 좀 정지화면이 긴거같아요 보통 다큐멘터리나 공중파 등 대형 인력 편집스타일에서 저런 정지화면이나 연출을 자주 사용하나여? 그리고 상황설명에 있어서 도움이되냐 대본이 말하는 것을 이해하기 쉽게 표현했냐 직관성이 좋냐? 하면 별로 왼쪽보다 앞서지도 않습니다. 차라리 이전에 제가 호평한 008은 대본이 말하는 것데 대해서 설명과 직관성이 괜찮았는데 이번에는 전혀 그에 부합하지 않는 것 같아요"
+   "ok": true,
+   "detail": ""
   },
   {
    "gate": "G0",
@@ -155,14 +155,14 @@
    "gate": "G4",
    "level": "MUST",
    "item": "근거 검수표: 모든 주장에 근거·비약·괴리·착각 확인 (02_script/script_review.md '근거 검수', 13 §4-1, 2026-11-22 사용자)",
-   "ok": false,
+   "ok": true,
    "detail": ""
   },
   {
    "gate": "G4",
    "level": "SHOULD",
    "item": "대본 구성요소 대조표: 채널 대본 공식의 요소마다 있음/없음·어느 장 (02_script/script_review.md '구성요소', 13 §7)",
-   "ok": false,
+   "ok": true,
    "detail": ""
   },
   {
@@ -432,6 +432,13 @@
    "detail": "[]"
   },
   {
+   "gate": "G6",
+   "level": "참고",
+   "item": "길이(측정값만 — 시간 기준 없음, 구성요소가 정함, README §2-4)",
+   "ok": true,
+   "detail": "6.9분"
+  },
+  {
    "gate": "G5",
    "level": "SHOULD",
    "item": "배경: 한 가지 바탕으로 고정하지 않음 — 장면이 하는 일이 바뀌면 바탕도 바뀜 (05 §0-2)",
@@ -464,7 +471,7 @@
    "level": "참고",
    "item": "반복 피로: 볼거리(자료·지도·그림)가 있는 장면의 몫",
    "ok": false,
-   "detail": "7/13"
+   "detail": "6/13"
   },
   {
    "gate": "G5",
@@ -510,6 +517,20 @@
   },
   {
    "gate": "G5",
+   "level": "참고",
+   "item": "자료 화면 없이 그래픽만 이어지는 가장 긴 구간",
+   "ok": false,
+   "detail": "최장 403초"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "장 전환 없이 이어지는 가장 긴 구간",
+   "ok": true,
+   "detail": "최장 131초"
+  },
+  {
+   "gate": "G5",
    "level": "SHOULD",
    "item": "스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1)",
    "ok": true,
@@ -520,7 +541,7 @@
    "level": "참고",
    "item": "스타일 조합: 가장 많이 쓴 스타일의 몫·겹친 장면·같은 스타일 연속",
    "ok": false,
-   "detail": "data-report 0.38 · 겹침 0 · 최장 연속 3"
+   "detail": "data-report 0.43 · 겹침 0 · 최장 연속 3"
   },
   {
    "gate": "G5",
@@ -563,6 +584,104 @@
    "item": "edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움)",
    "ok": false,
    "detail": "python -m ytflow edit-plan <프로젝트> → 02_script/EDIT_CONTEXT.md"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "final.mp4",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "화면 글자 겹침 없음 — 글자끼리·카드에 가려짐·카드 밖 넘침·자막 자리 (overlap_qa)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "글자가 카드·강조 상자 가장자리에 걸치지 않음 (overlap_qa)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G6",
+   "level": "참고",
+   "item": "무대 화면: 한꺼번에 보이는 것·글자·멈춘 박자 (한 화면 한 생각인지 눈으로, 04 §0-5)",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
+   "ok": true,
+   "detail": "{'within_0_5s': 1.0, 'p95_abs_offset': 0.1, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.067}"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "납품 점검(음량 등)",
+   "ok": true,
+   "detail": "completed"
+  },
+  {
+   "gate": "G6",
+   "level": "참고",
+   "item": "움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5)",
+   "ok": false,
+   "detail": "변화 6.0/분 · 정지 0.73"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "최종 목소리 ElevenLabs",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "제목 후보 3개 + 이유",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "썸네일 A/B/C + 점검 ok",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "참고",
+   "item": "제목 앞부분에 질문·핵심 (목록에서 잘려도 무슨 영상인지 보이게)",
+   "ok": true,
+   "detail": "젠슨 황 돌아온 다음 날, 왜 마이크론만"
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "완성본 보관 기록 — Drive(drive.json·drive_archive.json) 또는 공개 가능한 것만 GitHub Release(release.json)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "episodes.md 기록",
+   "ok": true,
+   "detail": "ch-market-daily"
   }
  ]
 }
