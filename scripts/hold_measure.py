@@ -16,13 +16,21 @@ import sys
 W, H, FPS, EPS, MIN = 64, 36, 4, 0.6, 1.5
 
 
-def measure(path: str, t0: float = 0.0, t1: float | None = None) -> dict:
+def measure(path: str, t0: float = 0.0, t1: float | None = None, cumulative: bool = False) -> dict:
     cmd = ["ffmpeg", "-v", "error", "-ss", str(t0)] + (["-to", str(t1)] if t1 else []) + [
         "-i", path, "-vf", f"fps={FPS},scale={W}:{H},format=gray", "-f", "rawvideo", "-"]
     raw = subprocess.run(cmd, capture_output=True, check=True).stdout
     n = len(raw) // (W * H)
     frames = [raw[i * W * H:(i + 1) * W * H] for i in range(n)]
-    diffs = [0.0] + [sum(abs(a - b) for a, b in zip(frames[i], frames[i - 1])) / (W * H) for i in range(1, n)]
+    if cumulative:   # 천천히 나타나는 작은 요소도 잡기: '마지막으로 바뀐 화면'과 비교해 1.0 넘게 달라지면 바뀐 것
+        diffs, ref = [0.0], frames[0] if frames else b""
+        for i in range(1, n):
+            d = sum(abs(a - b) for a, b in zip(frames[i], ref)) / (W * H)
+            diffs.append(9.9 if d > 1.0 else 0.0)
+            if d > 1.0:
+                ref = frames[i]
+    else:
+        diffs = [0.0] + [sum(abs(a - b) for a, b in zip(frames[i], frames[i - 1])) / (W * H) for i in range(1, n)]
     holds, start = [], None
     for i, d in enumerate(diffs):
         t = i / FPS
@@ -46,7 +54,8 @@ if __name__ == "__main__":
     ap.add_argument("files", nargs="+")
     ap.add_argument("--from", dest="t0", type=float, default=0.0)
     ap.add_argument("--to", dest="t1", type=float, default=None)
+    ap.add_argument("--cumulative", action="store_true", help="작은 요소가 서서히 바뀌는 어두운 화면용 (레퍼런스 수치와는 직접 비교 불가)")
     a = ap.parse_args()
     for f in a.files:
-        print(json.dumps(measure(f, a.t0, a.t1), ensure_ascii=False))
+        print(json.dumps(measure(f, a.t0, a.t1, a.cumulative), ensure_ascii=False))
     sys.exit(0)
