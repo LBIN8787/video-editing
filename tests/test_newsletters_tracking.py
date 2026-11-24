@@ -135,5 +135,29 @@ class TrailingQuoteTests(unittest.TestCase):
         self.assertNotIn("link.axios.com", out[0]["url"])
 
 
+class MultiLineLabelTests(unittest.TestCase):
+    """평문 없이 HTML 만 온 메일: 앵커 글자가 여러 줄로 떨어져도 제목을 살린다.
+
+    KDI 경제정보센터 메일(2026-11-24)이 이 모양이었고, 제목이 `]` 하나로 잡혀
+    소재가 통째로 0건이 되었다. 줄바꿈을 글자로 인정하지 않는 규칙 때문.
+    """
+
+    BODY = ("[\n 첫 번째 정책 자료 제목 (보건복지부)\n](https://eiec.kdi.re.kr/policy/materialView.do?num=11&utm_source=newsletter)\n"
+            "\n"
+            "[\n 두 번째 정책 자료 제목 (재정경제부)\n](https://eiec.kdi.re.kr/policy/materialView.do?num=12&utm_source=newsletter)\n")
+
+    def test_multi_line_label_kept_as_title(self):
+        out = n.items_from(msg(self.BODY), C)
+        self.assertEqual(["https://eiec.kdi.re.kr/policy/materialView.do?num=11",
+                          "https://eiec.kdi.re.kr/policy/materialView.do?num=12"],
+                         [it["url"] for it in out])
+        self.assertEqual("첫 번째 정책 자료 제목 (보건복지부)", out[0]["title"])
+        self.assertEqual("두 번째 정책 자료 제목 (재정경제부)", out[1]["title"])
+
+    def test_lone_bracket_label_not_published(self):
+        out = n.items_from(msg("[\nX\n](https://eiec.kdi.re.kr/policy/materialView.do?num=13)"), C)
+        self.assertEqual([], [it for it in out if it["title"].strip("]") == ""])
+
+
 if __name__ == "__main__":
     unittest.main()

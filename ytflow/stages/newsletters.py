@@ -234,6 +234,10 @@ def skip(url: str, title: str, c: dict, own: list[str]) -> bool:
 
 # ── 메일 본문 → 소재 ──
 LINK_MD = re.compile(r"\[([^\]\n]{2,240})\]\((https?://[^)\s]+)\)")
+# 앵커 글자가 여러 줄인 마크다운 링크: `[` \n `제목` \n `](주소)`
+# 평문 파트가 없고 HTML 만 온 메일에 앵커 안에 블록(h3·div)이 들어 있으면 이렇게 나온다(KDI 2026-11-24).
+# 줄바꿈을 글자로 인정하지 않으면 제목이 `]` 하나로 잡혀 소재가 통째로 0건이 된다.
+LINK_MD_ML = re.compile(r"\[\s{0,2}([^\[\]]{2,400}?)\s{0,2}\]\s*\((https?://[^)\s]+)\)")
 LINK_ANGLE = re.compile(r"([^\n<>]{0,240}?)\s*[<(](https?://[^>)\s]+)[>)]")
 LINK_BARE = re.compile(r"https?://[^\s<>()\[\]\"']+")
 
@@ -274,7 +278,7 @@ def extract(body: str) -> list[tuple[str, str]]:
     """
     out, md_url_spans, seen_spans = [], [], []
     lines = body.splitlines()
-    for rx in (LINK_MD, LINK_ANGLE):
+    for rx in (LINK_MD_ML, LINK_MD, LINK_ANGLE):
         for m in rx.finditer(body):
             ua, ub = m.span(2)
             if any(a <= ua and ub <= b for a, b in md_url_spans):
@@ -282,7 +286,7 @@ def extract(body: str) -> list[tuple[str, str]]:
             if any(a <= m.start() < b for a, b in seen_spans):
                 continue
             seen_spans.append(m.span())
-            if rx is LINK_MD:
+            if rx is not LINK_ANGLE:
                 md_url_spans.append((ua, ub))
             title, url = _clean(m.group(1)), m.group(2).rstrip("'\"),;")
             if not title or GENERIC.match(title):   # 'Read more' → 앞 줄을 제목으로
