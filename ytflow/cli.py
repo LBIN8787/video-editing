@@ -16,6 +16,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 from pathlib import Path
 import yaml
@@ -634,6 +635,9 @@ def main(argv: list[str] | None = None) -> None:
         presenter.make(_P.open(a.project))
     elif a.cmd == "yt-publish":
         from .stages import ytpublish
+        if os.environ.get("YTFLOW_HOLD_PUBLISH") and not (a.update_meta or a.dry_run):
+            # 2026-11-24 사용자: "시장채널 일단은 업로드 자동업로드하지말고 냅둬주세요" — 정기 작업이 이 값을 켜고 돌림
+            raise SystemExit("[yt-publish] 보류 — 자동 업로드를 멈춰 둠(YTFLOW_HOLD_PUBLISH). 영상은 만들어 두고 올리지 않습니다")
         if not (a.resume or a.update_meta or a.dry_run):   # 새로 올릴 때만: 업로드 전 종합 검수 (2026-11-21 사용자, manual/09 §9-1)
             from .stages import preflight
             why = preflight.gate(Project.open(a.project))
