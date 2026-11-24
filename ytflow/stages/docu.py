@@ -19,6 +19,11 @@ hybrid.json 장면:
                                      {"tilt": true, "t": "..."}, {"pulse": "nv", "t": "돌아오자"},
                                      {"focus": "mu", "t": "..."}, {"arrange": "rank", "t": "가까울수록", "headline": "가까울수록 더 올랐다"}]}]}
   "t" 는 그 박자 대사 속 낱말 — 그 말이 들리는 순간 (없으면 박자 시작부터 차례로).
+이유와 의도 (2026-11-24 사용자: "쓸거면 그 이유와 의도가 명확해야합니다") — 없으면 검사 실패(G6, layout_qa):
+  · 장면 `goal`   : 이 장면이 끝나면 시청자는 무엇을 안다·기억한다
+  · 장면 `why_docu`: 왜 이 장면은 보통 장면(카드·차트) 대신 다큐 장면이어야 하나 — 보통 장면으로 무엇이 안 되나
+  · 큰 움직임(tilt·pulse·arrange·focus)마다 `why`: 이 움직임이 대본의 어느 말을 연기하고, 시청자에게 무엇을 주나
+    (같은 문장을 여러 움직임에 돌려 쓰면 실패 — 움직임마다 하는 일이 달라야 함)
 숫자는 대본·팩트시트에 있는 값만 씁니다(사실 규칙). 관계 세기(w)는 '공급·고객·경쟁' 같은 종류 표시이지 계산값이 아닙니다.
 """
 from __future__ import annotations
@@ -74,6 +79,7 @@ def s_docu(D, sc: dict, bt: list, dur: float):
                        f'letter-spacing:-0.5px;opacity:0">{H.escape(sc["title"])}</div>')
         D.js.append(f'tl.fromTo("#{tid}",{{opacity:0,x:-18}},{{opacity:1,x:0,duration:.45,ease:"power2.out"}},0.15);')
 
+    _intent_qa(D, sc)
     nodes = sc.get("nodes", {})
     links = sc.get("links", {})
     # 무대: 판 하나 — 기울기·재배치를 한꺼번에 받는 그릇
@@ -287,6 +293,46 @@ def s_docu(D, sc: dict, bt: list, dur: float):
     missing = [k_ for k_ in box if k_ not in shown]
     if missing:
         D.qa.append(f"다큐 장면 {sc.get('id')}: 박자에서 보이지 않은 칩 — {', '.join(missing)}")
+
+
+BIG = ("tilt", "pulse", "arrange", "focus")
+
+
+def _intent_qa(D, sc: dict) -> None:
+    """쓸 거면 이유와 의도가 분명해야 한다 — 장면 goal·why_docu, 큰 움직임마다 why (2026-11-24 사용자)."""
+    sid = sc.get("id")
+    if not str(sc.get("goal", "")).strip():
+        D.qa.append(f"docu/no_goal: 장면 {sid} — goal(이 장면이 끝나면 시청자는 …) 없음")
+    if not str(sc.get("why_docu", "")).strip():
+        D.qa.append(f"docu/no_why_docu: 장면 {sid} — why_docu(보통 장면 대신 다큐 장면이어야 하는 이유) 없음")
+    seen = {}
+    for k, b in enumerate(sc.get("beats", [])):
+        for act in b.get("do") or []:
+            if not isinstance(act, dict):
+                continue
+            kind = next((x for x in BIG if act.get(x)), None)
+            if not kind:
+                continue
+            why = str(act.get("why", "")).strip()
+            if not why:
+                D.qa.append(f"docu/no_why: 장면 {sid} 박자 {k + 1} — {kind} 에 why(어느 말을 연기하고 무엇을 주나) 없음")
+            elif why in seen:
+                D.qa.append(f"docu/same_why: 장면 {sid} 박자 {k + 1} — {kind} 의 why 가 {seen[why]} 와 같음 (움직임마다 하는 일이 달라야 함)")
+            else:
+                seen[why] = f"박자 {k + 1} {kind}"
+
+
+def intents(sc: dict) -> str:
+    """검토용 한 장: 이 장면의 목적과 움직임별 의도 (02_script/docu_intent.md 로 쓰거나 출력)."""
+    out = [f"### 장면 {sc.get('id')} — {sc.get('title', '')}", f"- 목표(goal): {sc.get('goal', '(없음)')}",
+           f"- 다큐 장면인 이유(why_docu): {sc.get('why_docu', '(없음)')}"]
+    for k, b in enumerate(sc.get("beats", [])):
+        for act in b.get("do") or []:
+            if isinstance(act, dict):
+                kind = next((x for x in BIG if act.get(x)), None)
+                if kind:
+                    out.append(f"- 박자 {k + 1} · {kind} ('{act.get('t', '')}'): {act.get('why', '(없음)')}")
+    return "\n".join(out)
 
 
 def register():
