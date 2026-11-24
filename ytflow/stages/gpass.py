@@ -100,7 +100,7 @@ def _beat_of(sc: dict, word: str) -> int:
 
 
 def _checklist(sc: dict, n: int) -> None:
-    if sc.get("panel") or sc.get("g_skip"):
+    if sc.get("panel") or sc.get("pics") or sc.get("g_skip"):   # 그림 패널이 있으면 아이콘을 따로 얹지 않음
         return
     rows = sc.get("rows") or []
     if not rows:

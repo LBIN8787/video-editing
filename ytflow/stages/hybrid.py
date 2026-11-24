@@ -670,6 +670,9 @@ def s_checklist(D: HDoc, sc: dict, bt: list, dur: float):
         _checklist_focus(D, sc, rows_at, xl, y0, rh, tw)
     if sc.get("panel"):
         _checklist_panel(D, sc, bt)
+    if sc.get("pics"):   # 오른쪽 빈자리에 지금 말하는 줄을 그림 하나로 (2026-11-24)
+        from .mechanism import checklist_pics
+        checklist_pics(D, sc, bt)
 
 
 def _checklist_focus(D: HDoc, sc: dict, rows_at: list, xl: float, y0: float, rh: float, tw: float):

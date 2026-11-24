@@ -504,6 +504,129 @@ def flowtoken(D, sc: dict, bt: list):
         n += 1
 
 
+def checklist_pics(D, sc: dict, bt: list):
+    """체크리스트 오른쪽 빈자리: 지금 말하는 줄을 '그림 하나'로 (글 목록 + 움직이는 그림, 2026-11-24 '원래 정적인 장면에 살짝').
+    sc["pics"] = [{"beat": 0, "t": "늦게", "kind": "timeline" | "bars" | "decay" | "switch" | "survive", ...}]"""
+    import re as _re
+    from . import motion2
+    from .icons import svg_markup
+    INKC, REDC, GRN, GRY = getattr(D, "ink", "#2B2B2B"), getattr(D, "red", "#B5302A"), "#2E7D4F", "#9AA0A8"
+    ents = []
+    for e in sc["pics"]:
+        kb = e.get("beat", 0)
+        b, (t0, d) = sc["beats"][kb], bt[kb]
+        at = t0 + 0.3
+        if e.get("t") and sc.get("_project_dir"):
+            at = max(t0, (motion2.row_time(sc, kb, b, t0, d, e["t"]) or at) - 0.1)
+        ents.append((at, t0 + d, e))
+    ents.sort(key=lambda x: x[0])
+    X0, X1, CX = 1160, 1820, 1490
+
+    def div(html, at, frm="opacity:0", to="opacity:1", dur=0.4, ease="power2.out"):
+        i = D._id()
+        D.items.append(html.replace('id="ID"', f'id="{i}"'))
+        D.js.append(f'tl.fromTo("#{i}",{{{frm}}},{{{to},duration:{dur},ease:"{ease}"}},{at:.2f});')
+        return i
+
+    def label(x, y, text, color, size, at, fam="sans-x"):
+        return div(f'<div id="ID" style="position:absolute;left:{x:.0f}px;top:{y:.0f}px;transform:translate(-50%,-50%);white-space:nowrap;'
+                   f'font-family:{fam},sans;font-size:{size}px;color:{color};opacity:0;z-index:6">{_e(text)}</div>', at)
+
+    def card(x, y, icon, text, at, w=200, color=None):
+        col = color or INKC
+        return div(f'<div id="ID" style="position:absolute;left:{x - w / 2:.0f}px;top:{y - 80:.0f}px;width:{w}px;height:160px;border-radius:8px;'
+                   f'background:linear-gradient(180deg,#FFFEFB,#F1EEE6);box-shadow:0 2px 3px rgba(30,24,16,.18),0 8px 16px rgba(30,24,16,.16);'
+                   f'display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;opacity:0;z-index:5">'
+                   f'{svg_markup(icon, 72, col) or ""}<div style="font-family:heavy,sans-x;font-size:30px;color:{col}">{_e(text)}</div></div>',
+                   at, "opacity:0,y:-20,scale:.9", "opacity:1,y:0,scale:1", 0.4, "back.out(1.7)")
+
+    def line(x1, y1, x2, y2, color, w, at, dur=0.6):
+        i = D._id()
+        D.svg.append(f'<path id="{i}" d="M{x1:.0f} {y1:.0f} L{x2:.0f} {y2:.0f}" stroke="{color}" stroke-width="{w}" fill="none" stroke-linecap="round" '
+                     f'pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>')
+        D.js.append(f'tl.to("#{i}",{{strokeDashoffset:0,duration:{dur},ease:"power2.inOut"}},{at:.2f});')
+        return i
+
+    for k, (at, bend, e) in enumerate(ents):
+        nxt = ents[k + 1][0] if k + 1 < len(ents) else None
+        n0, s0 = len(D.items), len(D.svg)
+        kind = e.get("kind")
+        if kind == "timeline":   # 결정 → 보임 → 닿음: 점이 천천히 지나가며 '몇 달'이 쌓인다
+            st = e.get("steps", ["생산을 정함", "남는 게 보임", "줄인 게 닿음"])
+            gaps = e.get("gaps", ["몇 달", "또 몇 달"])
+            xs = [X0 + 60, CX, X1 - 60]
+            line(xs[0], 560, xs[-1], 560, INKC, 6, at + 0.1, dur=0.5)
+            run = max(4.0, min(12.0, (bend - at) * 0.6))
+            for j, (x, s_) in enumerate(zip(xs, st)):
+                ta = at + 0.3 + run * j / (len(xs) - 1)
+                div(f'<div id="ID" style="position:absolute;left:{x - 14:.0f}px;top:546px;width:28px;height:28px;border-radius:50%;background:{INKC if j < 2 else REDC};opacity:0"></div>', ta)
+                label(x, 490, s_, INKC if j < 2 else REDC, 34, ta)
+                if j:
+                    label((xs[j - 1] + x) / 2, 625, gaps[j - 1], REDC, 36, ta - 0.4)
+            dot = div(f'<div id="ID" style="position:absolute;left:{xs[0] - 22:.0f}px;top:538px;width:44px;height:44px;border-radius:50%;background:{REDC};'
+                      f'box-shadow:0 0 0 8px {REDC}33;opacity:0;z-index:7"></div>', at + 0.3, dur=0.2)
+            D.js.append(f'tl.to("#{dot}",{{x:{xs[-1] - xs[0]:.0f},duration:{run:.2f},ease:"none"}},{at + 0.3:.2f});')
+            label(CX, 730, e.get("note", "그동안 공장은 계속 만든다"), "#5B606A", 32, at + 0.3 + run)
+        elif kind == "bars":     # 장부 원가 = 감가상각 + 현금 비용, 판매가 선 하나로 '장부 적자 / 현금 흑자'
+            u = 15.0
+            dep, cash, price = e.get("dep", 25), e.get("cash", 15), e.get("price", 30)
+            y = 470
+            x0 = CX - (dep + cash) * u / 2
+            label(CX, y - 125, f'칩 하나 장부 원가 {dep + cash}원', INKC, 34, at)
+            div(f'<div id="ID" style="position:absolute;left:{x0:.0f}px;top:{y - 40}px;width:{dep * u:.0f}px;height:80px;background:{GRY};transform-origin:left;'
+                f'display:flex;align-items:center;justify-content:center;font-family:sans-x;font-size:28px;color:#fff;white-space:nowrap">지은 공장 몫 {dep}</div>', at + 0.2,
+                "scaleX:0", "scaleX:1", 0.6)
+            div(f'<div id="ID" style="position:absolute;left:{x0 + dep * u:.0f}px;top:{y - 40}px;width:{cash * u:.0f}px;height:80px;background:{REDC};transform-origin:left;'
+                f'display:flex;align-items:center;justify-content:center;font-family:sans-x;font-size:28px;color:#fff;white-space:nowrap">현금 {cash}</div>', at + 0.8,
+                "scaleX:0", "scaleX:1", 0.5)
+            tp = at + max(2.0, (bend - at) * 0.45)
+            px = x0 + price * u
+            line(px, y - 80, px, y + 80, GRN, 7, tp, dur=0.4)
+            label(px, y + 112, f'판매가 {price}원', GRN, 34, tp)
+            label(CX, 700, f'장부로는 {price - dep - cash:+d}원', REDC, 46, tp + 1.2, "heavy")
+            label(CX, 780, f'현금은 {price - cash:+d}원 들어옴', GRN, 46, tp + 2.2, "heavy")
+        elif kind == "decay":    # 쌓아 둔 상자가 하나씩 값이 깎여 회색이 된다
+            boxes = []
+            for j in range(6):
+                bx, by = CX - 170 + (j % 3) * 170, 470 + (j // 3) * 150
+                boxes.append(div(f'<div id="ID" style="position:absolute;left:{bx - 70:.0f}px;top:{by - 60:.0f}px;width:140px;height:120px;border-radius:6px;'
+                                 f'background:#E9C46A;border:3px solid #9C6E12;display:flex;align-items:center;justify-content:center;opacity:0">'
+                                 f'{svg_markup("package", 70, "#6B4A08") or ""}</div>', at + j * 0.12, "opacity:0,y:-60", "opacity:1,y:0", 0.35, "bounce.out"))
+            label(CX, 360, e.get("head", "창고에 쌓인 재고"), INKC, 34, at)
+            td = at + max(1.5, (bend - at) * 0.3)
+            for j, bi in enumerate(boxes):
+                D.js.append(f'tl.to("#{bi}",{{backgroundColor:"#CFCFCF",borderColor:"#8A8A8A",duration:0.5}},{td + j * 0.5:.2f});')
+            label(CX, 790, e.get("value", ""), REDC, 44, td + 3.2, "heavy")
+            label(CX, 848, e.get("sub", ""), "#5B606A", 30, td + 3.4)
+        elif kind == "switch":   # 고객이 경쟁사 칩으로 검증을 마치면 그 자리는 다음 제품까지 남의 것
+            cy_, by_ = 400, 720
+            card(CX, cy_, "users", e.get("customer", "고객"), at, 220)
+            card(X0 + 130, by_, "cpu", e.get("us", "우리 칩"), at + 0.3, 220)
+            card(X1 - 130, by_, "cpu", e.get("rival", "경쟁사 칩"), at + 0.5, 220)
+            l1 = line(X0 + 175, by_ - 85, CX - 70, cy_ + 85, INKC, 7, at + 0.8)
+            tc = at + max(2.0, (bend - at) * 0.4)
+            D.js.append(f'tl.to("#{l1}",{{stroke:"{GRY}",duration:0.4}},{tc:.2f});')
+            label((X0 + 175 + CX - 70) / 2, (by_ - 85 + cy_ + 85) / 2, "✕", REDC, 80, tc + 0.2, "heavy")
+            line(X1 - 175, by_ - 85, CX + 70, cy_ + 85, REDC, 7, tc + 0.6)
+            label(CX, by_ + 130, e.get("note", "검증 몇 달 → 다음 제품까지 경쟁사 몫"), REDC, 34, tc + 1.2)
+        elif kind == "survive":  # 셋이 버티다 하나가 쓰러지고, 남은 쪽이 다음 호황을 나눔
+            xs = [X0 + 110, CX, X1 - 110]
+            names = e.get("names", ["A 회사", "B 회사", "C 회사"])
+            ids = [card(x, 400, "factory", nm, at + j * 0.2, 190) for j, (x, nm) in enumerate(zip(xs, names))]
+            tf = at + max(2.0, (bend - at) * 0.35)
+            D.js.append(f'tl.to("#{ids[2]}",{{rotation:-12,y:40,opacity:0.35,filter:"grayscale(1)",duration:0.6,ease:"power2.in"}},{tf:.2f});')
+            label(xs[2], 560, "쓰러짐", REDC, 34, tf + 0.4)
+            for j in (0, 1):
+                div(f'<div id="ID" style="position:absolute;left:{xs[j] - 50:.0f}px;top:{830 - 230:.0f}px;width:100px;height:230px;background:{GRN};'
+                    f'border-radius:6px 6px 0 0;transform-origin:bottom"></div>', tf + 1.2 + j * 0.2, "scaleY:0", "scaleY:1", 0.8, "power3.out")
+            label((xs[0] + xs[1]) / 2, 875, e.get("note", "남은 쪽이 다음 호황을 나눔"), GRN, 34, tf + 1.8)
+        new_ids = [m.group(1) for it in D.items[n0:] for m in [_re.search(r'id="([^"]+)"', it)] if m]
+        new_ids += [m.group(1) for it in D.svg[s0:] for m in [_re.search(r'id="([^"]+)"', it)] if m]
+        if nxt and new_ids:
+            D.js.append(f'tl.to("{",".join("#" + x for x in new_ids)}",{{opacity:0,duration:0.3}},{nxt - 0.35:.2f});')
+        D.sfx.append(("click-soft", at))
+
+
 def register():
     from . import hybrid
     from .explain import _themed
