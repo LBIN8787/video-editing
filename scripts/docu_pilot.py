@@ -51,8 +51,14 @@ def main() -> int:
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
     work = out / f"scene_{a.scene:03d}"
     D = hybrid.build_scene(proj, spec, sc, bt, dur, work)
+    if sc.get("type") == "docu":   # 검토용: 이 장면의 목표·움직임별 의도 (2026-11-24 사용자: "쓸거면 그 이유와 의도가 명확해야")
+        from ytflow.stages import docu
+        (out / f"docu_intent_{a.scene:03d}.md").write_text(docu.intents(sc) + "\n", encoding="utf-8")
     if D.qa:
         print("점검:", *D.qa, sep="\n  ")
+        if any(str(q).startswith("docu/") for q in D.qa):
+            print("의도가 분명하지 않은 다큐 장면은 렌더하지 않습니다 — goal·why_docu·움직임별 why 를 채우세요")
+            return 1
     silent = out / f"after_{a.scene:03d}_silent.mp4"
     err = hybrid.render_scene(work, silent)
     if err:
