@@ -465,6 +465,45 @@ def gapline(D, sc: dict, bt: list):
         bracket(x2 - 60, XB, 560, RED, tr, L["regap"], open_end=True)
 
 
+def flowtoken(D, sc: dict, bt: list):
+    """기존 설명 무대에 '움직이는 것 하나'만 더한다: 동전이 이미 그려진 화살표 길을 따라 카드 사이를 돈다 (2026-11-24 '기존 장면 + 살짝').
+      "flow": {"path": ["nv", "cu", "or", "nv"], "cue": "돌아옵니다", "tokens": ["coin", "coin", "chip"], "pulse": "nv", "pulse_label": "매출 +"}"""
+    f = sc.get("flow") or {}
+    els = sc.get("els") or {}
+    names = [n for n in f.get("path") or [] if n in els]
+    if len(names) < 2:
+        return
+    T = _cue_times(dict(sc, mechanism={"cues": {"go": f.get("cue", "")}}), bt)
+    start = T.get("go", bt[-1][0] + 0.5) + 0.8
+    end = bt[-1][0] + bt[-1][1] - 0.4
+    P = [(els[n]["x"], els[n]["y"]) for n in names]
+    segs = []
+    for a, b in zip(P, P[1:]):   # 화살표처럼 살짝 휜 길 — 카드 위는 지나지 않고 카드 가장자리에서 나타나고 사라짐
+        mx, my = (a[0] + b[0]) / 2, (a[1] + b[1]) / 2
+        dx, dy = b[0] - a[0], b[1] - a[1]
+        c = (mx - dy * 0.12, my + dx * 0.12)
+        q = lambda u: ((1 - u) ** 2 * a[0] + 2 * (1 - u) * u * c[0] + u * u * b[0], (1 - u) ** 2 * a[1] + 2 * (1 - u) * u * c[1] + u * u * b[1])
+        segs.append([q(0.28 + 0.44 * i / 10) for i in range(11)])
+    toks = f.get("tokens") or ["coin"]
+    lap = f.get("lap", 3.6)
+    seg_d = lap / len(segs)
+    pool = [_coin(D, P[0][0], P[0][1], 64) if (toks[k % len(toks)] == "coin") else _chiptok(D, P[0][0], P[0][1], 64) for k in range(len(segs) * 3)]
+    t, n = start, 0
+    pn = f.get("pulse")
+    while t + lap < end and n < 30:
+        for j, sg in enumerate(segs):
+            _travel(D, pool[(n % 3) * len(segs) + j], sg, t + j * seg_d, seg_d * 0.9, P[0][0], P[0][1])
+        if pn in els:
+            pid = D._id()
+            x, y = els[pn]["x"], els[pn]["y"]
+            D.items.append(f'<div id="{pid}" style="position:absolute;left:{x + 130}px;top:{y - 120}px;white-space:nowrap;padding:4px 14px;border-radius:8px;'
+                           f'background:rgba(10,12,16,.6);font-family:heavy,sans-x;font-size:44px;color:{GREEN};opacity:0;z-index:9">{_e(f.get("pulse_label", "+"))}</div>')
+            D.js.append(f'tl.fromTo("#{pid}",{{opacity:0,y:10}},{{opacity:1,y:0,duration:0.3}},{t + lap:.2f});'
+                        f'tl.to("#{pid}",{{opacity:0,y:-20,duration:0.4}},{t + lap + 0.8:.2f});')
+        t += f.get("every", 1.4)
+        n += 1
+
+
 def register():
     from . import hybrid
     from .explain import _themed

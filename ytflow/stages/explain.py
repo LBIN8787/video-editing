@@ -686,6 +686,9 @@ def s_board(D, sc: dict, bt: list, dur: float):
     if sc.get("gapline"):   # 기존 장면 아래 빈자리에 시간 줄 하나 (설명 애니메이션 '살짝 더하기', 2026-11-24)
         from .mechanism import gapline
         gapline(D, sc, bt)
+    if sc.get("flow"):   # 이미 그린 화살표 길을 따라 동전 하나가 돈다 ('살짝 더하기')
+        from .mechanism import flowtoken
+        flowtoken(D, sc, bt)
 
 
 def json_str(x: str) -> str:
