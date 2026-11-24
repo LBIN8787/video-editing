@@ -514,6 +514,21 @@ def checklist_pics(D, sc: dict, bt: list):
     from .icons import svg_markup
     INKC, REDC, GRN, GRY, MUT = getattr(D, "ink", "#2B2B2B"), getattr(D, "red", "#B5302A"), "#2E7D4F", "#A3A8B0", "#5B606A"
     SH = "0 2px 3px rgba(30,24,16,.18),0 10px 22px rgba(30,24,16,.16)"
+    # 스킨 밝기를 따라감 (2026-11-24 '빛나는 칠판' docs/66): 어두운 무대 = 어두운 유리 카드 + 빛나는 선
+    _pal = (getattr(D, "skin", None) or {}).get("palette", {}) or {}
+    _b = _pal.get("base", "#EEEEEE").lstrip("#")
+    DARK = (0.299 * int(_b[0:2], 16) + 0.587 * int(_b[2:4], 16) + 0.114 * int(_b[4:6], 16)) / 255 < 0.35
+    CARDBG, CARDGRAD, TRACK, AXISC, BARC, DIMC, LINEC = "#FFFEFB", "linear-gradient(180deg,#FFFEFB,#F1EEE6)", "#D9D4C8", "#BDB7AA", "#7C8592", "#D9D4C8", "#BDB7AA"
+    ACC = REDC
+    POST, BEAM = "#8A8174", "#5E564B"
+    if DARK:
+        INKC, REDC, GRN, GRY, MUT = _pal.get("ink", "#E6F1EC"), "#FF8A70", "#6FE3A8", "#5E7A72", _pal.get("muted_text", "#9DB5AC")
+        ACC = _pal.get("accent", "#5FE0D2")
+        SH = "0 0 0 1px rgba(255,255,255,.06),0 10px 26px rgba(0,0,0,.35)"
+        CARDBG, CARDGRAD = "#1F3D36", "linear-gradient(180deg,#24463E,#1B3731)"
+        TRACK, AXISC, BARC, DIMC, LINEC = "#2E4D45", "#4C6B62", "#5E7A72", "#2C4A43", _pal.get("line", "#4C6B62")
+        POST, BEAM = "#4C6B62", "#7FA096"
+    GLOW = (lambda c: f"text-shadow:0 0 16px {c}88;") if DARK else (lambda c: "")
     rows_beat = {}
     shown = 0
     for k_b, b_ in enumerate(sc["beats"]):
@@ -572,7 +587,7 @@ def checklist_pics(D, sc: dict, bt: list):
                         f'var s=o.v.toFixed({dec});document.getElementById("{i}_n").textContent={sg}s;}}}},{at + 0.15:.2f});}})();')
         D.items.append(f'<div id="{i}" style="position:absolute;left:{x:.0f}px;top:{y:.0f}px;opacity:0;z-index:7">'
                        f'<div style="transform:translate(-50%,-50%);white-space:nowrap;padding:12px 30px 12px 26px;border-radius:14px;'
-                       f'background:{color}1F;border-left:9px solid {color};font-family:heavy,sans-x;font-size:{size}px;color:{color};'
+                       f'background:{color}1F;border-left:9px solid {color};font-family:heavy,sans-x;font-size:{size}px;color:{color};{GLOW(color)}'
                        f'box-shadow:0 6px 16px rgba(30,24,16,.10)">{inner}</div></div>')
         D.js.append(f'tl.fromTo("#{i}",{{opacity:0,scale:.6}},{{opacity:1,scale:1,duration:0.45,ease:"back.out(2)"}},{at:.2f});'
                     f'tl.to("#{i}",{{scale:1.06,duration:0.18,yoyo:true,repeat:1,ease:"sine.inOut"}},{at + 1.1:.2f});')
@@ -582,7 +597,7 @@ def checklist_pics(D, sc: dict, bt: list):
     def card(x, y, icon, text, at, w=220, color=None, h=170):
         col = color or INKC
         return div(f'<div id="ID" style="position:absolute;left:{x - w / 2:.0f}px;top:{y - h / 2:.0f}px;width:{w}px;height:{h}px;border-radius:12px;'
-                   f'background:linear-gradient(180deg,#FFFEFB,#F1EEE6);box-shadow:{SH};'
+                   f'background:{CARDGRAD};box-shadow:{SH};'
                    f'display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;opacity:0;z-index:5">'
                    f'{svg_markup(icon, 78, col) or ""}<div style="font-family:heavy,sans-x;font-size:32px;color:{col}">{_e(text)}</div></div>',
                    at, "opacity:0,y:-24,scale:.85", "opacity:1,y:0,scale:1", 0.5, "back.out(1.7)")
@@ -609,7 +624,7 @@ def checklist_pics(D, sc: dict, bt: list):
         i = D._id()
         dec = max(len(str(v).split(".")[1]) if "." in str(v) else 0, len(str(start).split(".")[1]) if "." in str(start) else 0)
         D.items.append(f'<div id="{i}" style="position:absolute;left:{x:.0f}px;top:{y:.0f}px;opacity:0;z-index:7"><div style="transform:translate(-50%,-50%);'
-                       f'white-space:nowrap;font-family:{fam},sans-x;font-size:{size}px;color:{color}">{_e(pre)}<span id="{i}_n">{start}</span>{_e(post)}</div></div>')
+                       f'white-space:nowrap;font-family:{fam},sans-x;font-size:{size}px;color:{color};{GLOW(color)}">{_e(pre)}<span id="{i}_n">{start}</span>{_e(post)}</div></div>')
         D.js.append(f'tl.fromTo("#{i}",{{opacity:0,y:14}},{{opacity:1,y:0,duration:0.35,ease:"power3.out"}},{at:.2f});'
                     f'(function(){{var o={{v:{start}}};tl.to(o,{{v:{v},duration:{dur},ease:"power2.out",onUpdate:function(){{'
                     f'document.getElementById("{i}_n").textContent=o.v.toFixed({dec});}}}},{at + 0.1:.2f});}})();')
@@ -618,14 +633,14 @@ def checklist_pics(D, sc: dict, bt: list):
     def chip(x, y, text, color, at, w=None, size=28, frm="opacity:0,y:-40", ease="back.out(1.8)"):
         ww = f"width:{w}px;white-space:normal;text-align:center;" if w else "white-space:nowrap;"
         return div(f'<div id="ID" style="position:absolute;left:{x:.0f}px;top:{y:.0f}px;opacity:0;z-index:7"><div style="transform:translate(-50%,-50%);{ww}'
-                   f'padding:10px 18px;border-radius:12px;background:#FFFEFB;border:4px solid {color};font-family:heavy,sans-x;font-size:{size}px;line-height:1.25;color:{color};'
+                   f'padding:10px 18px;border-radius:12px;background:{CARDBG};border:4px solid {color};font-family:heavy,sans-x;font-size:{size}px;line-height:1.25;color:{color};'
                    f'box-shadow:{SH}">{_e(text)}</div></div>', at, frm, "opacity:1,y:0", 0.45, ease)
 
     def wcard(x, y, w, icon, text, color, at, tag="", frm="opacity:0,y:-24,scale:.9"):
         tg = (f'<div style="position:absolute;left:14px;top:10px;padding:1px 12px;border-radius:8px;background:{color};color:#fff;'
               f'font-family:heavy,sans-x;font-size:24px">{_e(tag)}</div>') if tag else ""
         return div(f'<div id="ID" style="position:absolute;left:{x - w / 2:.0f}px;top:{y - 70:.0f}px;width:{w}px;min-height:140px;box-sizing:border-box;'
-                   f'padding:44px 22px 16px;border-radius:14px;background:linear-gradient(180deg,#FFFEFB,#F1EEE6);border:4px solid {color};box-shadow:{SH};'
+                   f'padding:44px 22px 16px;border-radius:14px;background:{CARDGRAD};border:4px solid {color};box-shadow:{SH};'
                    f'display:flex;align-items:center;gap:18px;opacity:0;z-index:6">{tg}{svg_markup(icon, 64, color) or ""}'
                    f'<div style="font-family:heavy,sans-x;font-size:32px;line-height:1.3;color:{color}">{_e(text)}</div></div>',
                    at, frm, "opacity:1,y:0,scale:1", 0.5, "back.out(1.7)")
@@ -648,14 +663,14 @@ def checklist_pics(D, sc: dict, bt: list):
             Y = 560
             xs = [X0 + 70, CX, X1 - 70]
             run = max(4.0, min(12.0, span * 0.6))
-            bar(xs[0], Y - 6, xs[-1] - xs[0], 12, "#D9D4C8", at + 0.05, dur=0.5)
+            bar(xs[0], Y - 6, xs[-1] - xs[0], 12, TRACK, at + 0.05, dur=0.5)
             bar(xs[0], Y - 6, xs[-1] - xs[0], 12, REDC, at + 0.3, dur=run, ease="none")
             for j, (x, s_) in enumerate(zip(xs, st)):
                 ta = at + 0.3 + run * j / (len(xs) - 1)
                 last = j == len(xs) - 1
                 col = REDC if last else INKC
                 nid = div(f'<div id="ID" style="position:absolute;left:{x - 22:.0f}px;top:{Y - 22}px;width:44px;height:44px;border-radius:50%;'
-                          f'background:#FFFEFB;border:7px solid {col};box-sizing:border-box;opacity:0;z-index:7"></div>', at + 0.15 + 0.12 * j,
+                          f'background:{CARDBG};border:7px solid {col};box-sizing:border-box;opacity:0;z-index:7"></div>', at + 0.15 + 0.12 * j,
                           "opacity:0,scale:0", "opacity:1,scale:1", 0.35, "back.out(2)")
                 D.js.append(f'tl.to("#{nid}",{{backgroundColor:"{col}",scale:1.35,duration:0.18,ease:"power2.out"}},{ta:.2f});'
                             f'tl.to("#{nid}",{{scale:1,duration:0.3,ease:"back.out(2)"}},{ta + 0.18:.2f});')
@@ -743,7 +758,7 @@ def checklist_pics(D, sc: dict, bt: list):
             names = e.get("names", ["A 회사", "B 회사", "C 회사"])
             ids = [card(x, 370, "factory", nm, at + j * 0.18, 200) for j, (x, nm) in enumerate(zip(xs, names))]
             BOT, H0, H1 = 790, 110, 190
-            bars_ = [div(f'<div id="ID" style="position:absolute;left:{x - 55:.0f}px;top:{BOT - H0}px;width:110px;height:{H0}px;background:#8C929C;'
+            bars_ = [div(f'<div id="ID" style="position:absolute;left:{x - 55:.0f}px;top:{BOT - H0}px;width:110px;height:{H0}px;background:{BARC};'
                          f'border-radius:8px 8px 0 0;transform-origin:bottom;box-shadow:0 4px 10px rgba(30,24,16,.12)"></div>',
                          at + 0.5 + j * 0.15, "scaleY:0,opacity:1", "scaleY:1,opacity:1", 0.6, "power3.out") for j, x in enumerate(xs)]
             tf = at + max(2.2, span * 0.33)
@@ -827,7 +842,7 @@ def checklist_pics(D, sc: dict, bt: list):
             x = CX - 120
             div(f'<div id="ID" style="position:absolute;left:{x - w / 2:.0f}px;top:{base - H}px;width:{w}px;height:{H}px;border:4px dashed {GRY};border-radius:8px;'
                 f'box-sizing:border-box;opacity:0"></div>', at + 0.2, "opacity:0", "opacity:1", 0.3)
-            bi = bar(x - w / 2, base - H, w, H, "#7C8592", at + 0.2, origin="bottom", dur=0.6)
+            bi = bar(x - w / 2, base - H, w, H, BARC, at + 0.2, origin="bottom", dur=0.6)
             td = at + max(1.2, span * 0.25)
             v = float(e["value"])
             D.js.append(f'tl.to("#{bi}",{{scaleY:{1 + v / 100:.3f},backgroundColor:"{REDC}",duration:0.8,ease:"power3.in"}},{td:.2f});')
@@ -843,7 +858,7 @@ def checklist_pics(D, sc: dict, bt: list):
             W = min(420, 440 / max(1.0, 1 + price / 100))
             label(xl_ - 70, 450, "주가", INKC, 32, at + 0.2, "heavy")
             label(xl_ - 70, 590, "이익", GRN, 32, at + 0.2, "heavy")
-            pb = bar(xl_, 415, W, 70, "#7C8592", at + 0.2)
+            pb = bar(xl_, 415, W, 70, BARC, at + 0.2)
             line(xl_ - 120, 520, xl_ + W + 40, 520, INKC, 5, at + 0.3, dur=0.4)
             eb = bar(xl_, 555, W, 70, GRN, at + 0.4)
             t1 = at + max(1.0, span * 0.18)
@@ -865,10 +880,10 @@ def checklist_pics(D, sc: dict, bt: list):
             xof = lambda yr: ax0 + (yr - y0_) / (y1_ - y0_) * (ax1 - ax0)
             if e.get("head"):
                 label(CX, 325, e["head"], INKC, 32, at, "heavy")
-            bar(ax0, AXY - 4, ax1 - ax0, 8, "#BDB7AA", at + 0.1, dur=0.6)
+            bar(ax0, AXY - 4, ax1 - ax0, 8, AXISC, at + 0.1, dur=0.6)
             for yr, tx in e.get("ticks", []):
                 label(xof(yr), AXY + 34, tx, MUT, 26, at + 0.3)
-                div(f'<div id="ID" style="position:absolute;left:{xof(yr) - 2:.0f}px;top:{AXY - 12}px;width:4px;height:24px;background:#BDB7AA;opacity:0"></div>', at + 0.3)
+                div(f'<div id="ID" style="position:absolute;left:{xof(yr) - 2:.0f}px;top:{AXY - 12}px;width:4px;height:24px;background:{AXISC};opacity:0"></div>', at + 0.3)
             placed = {"up": [], "down": []}
             levels = {"up": [AXY - 95, AXY - 190, AXY - 285], "down": [AXY + 112, AXY + 196]}
             for it in e["items"]:
@@ -884,12 +899,12 @@ def checklist_pics(D, sc: dict, bt: list):
                 placed[pos].append((cxp, cw, lv))
                 cy = levels[pos][lv]
                 div(f'<div id="ID" style="position:absolute;left:{x - 13:.0f}px;top:{AXY - 13}px;width:26px;height:26px;border-radius:50%;background:{col};'
-                    f'border:4px solid #FFFEFB;box-sizing:border-box;opacity:0;z-index:8"></div>', ti, "opacity:0,scale:2.2", "opacity:1,scale:1", 0.35, "back.out(2)")
+                    f'border:4px solid {CARDBG};box-sizing:border-box;opacity:0;z-index:8"></div>', ti, "opacity:0,scale:2.2", "opacity:1,scale:1", 0.35, "back.out(2)")
                 top_, bot_ = (cy + 40, AXY - 13) if pos == "up" else (AXY + 13, cy - 40)
                 div(f'<div id="ID" style="position:absolute;left:{x - 2:.0f}px;top:{top_:.0f}px;width:4px;height:{max(0, bot_ - top_):.0f}px;background:{col};'
                     f'transform-origin:{"bottom" if pos == "up" else "top"};opacity:0;z-index:5"></div>', ti + 0.1, "opacity:1,scaleY:0", "opacity:1,scaleY:1", 0.3)
                 div(f'<div id="ID" style="position:absolute;left:{cxp:.0f}px;top:{cy:.0f}px;opacity:0;z-index:7"><div style="transform:translate(-50%,-50%);width:{cw}px;'
-                    f'padding:8px 12px;box-sizing:border-box;border-radius:12px;background:#FFFEFB;border:4px solid {col};box-shadow:{SH};text-align:center">'
+                    f'padding:8px 12px;box-sizing:border-box;border-radius:12px;background:{CARDBG};border:4px solid {col};box-shadow:{SH};text-align:center">'
                     f'<div style="font-family:heavy,sans-x;font-size:26px;color:{col};white-space:nowrap">{_e(it["name"])}</div>'
                     f'<div style="font-family:sans-x;font-size:23px;color:{INKC};line-height:1.25">{_e(it.get("say", ""))}</div></div></div>',
                     ti + 0.25, "opacity:0,scale:.7", "opacity:1,scale:1", 0.4, "back.out(1.8)")
@@ -897,8 +912,8 @@ def checklist_pics(D, sc: dict, bt: list):
         elif kind == "balance":  # 근거를 접시에 하나씩 얹으면 저울대가 기울고, 무거운 접시는 내려가고 가벼운 접시는 올라간다
             import math as _m
             BX, BY, BW = CX, 400, 600
-            div(f'<div id="ID" style="position:absolute;left:{BX - 8}px;top:{BY}px;width:16px;height:440px;background:#8A8174;border-radius:6px;opacity:0"></div>', at)
-            div(f'<div id="ID" style="position:absolute;left:{BX - 110}px;top:{BY + 430}px;width:220px;height:22px;background:#8A8174;border-radius:8px;opacity:0"></div>', at)
+            div(f'<div id="ID" style="position:absolute;left:{BX - 8}px;top:{BY}px;width:16px;height:440px;background:{POST};border-radius:6px;opacity:0"></div>', at)
+            div(f'<div id="ID" style="position:absolute;left:{BX - 110}px;top:{BY + 430}px;width:220px;height:22px;background:{POST};border-radius:8px;opacity:0"></div>', at)
             rig = D._id()
             lt, rt = e.get("left", "받침"), e.get("right", "어긋남")
             grp = {True: [], False: []}
@@ -910,7 +925,7 @@ def checklist_pics(D, sc: dict, bt: list):
                 ci = D._id()
                 col = GRN if left else REDC
                 grp[left].append(f'<div id="{ci}" style="position:absolute;left:10px;top:{392 - k_ * 92 - 30}px;width:220px;height:60px;box-sizing:border-box;border-radius:10px;'
-                                 f'background:#FFFEFB;border:4px solid {col};display:flex;align-items:center;justify-content:center;font-family:heavy,sans-x;font-size:25px;'
+                                 f'background:{CARDBG};border:4px solid {col};display:flex;align-items:center;justify-content:center;font-family:heavy,sans-x;font-size:25px;'
                                  f'color:{col};white-space:nowrap;box-shadow:0 3px 8px rgba(30,24,16,.15);opacity:0">{_e(it["text"])}</div>')
                 nl, nr = (nl + 1, nr) if left else (nl, nr + 1)
                 ang = max(-7, min(7, (nr - nl) * 3))
@@ -925,14 +940,14 @@ def checklist_pics(D, sc: dict, bt: list):
                 gx = 0 if side_left else 360
                 col = GRN if side_left else REDC
                 return (f'<div id="{rig}_{"l" if side_left else "r"}" style="position:absolute;left:{gx}px;top:0;width:240px;height:520px">'
-                        + "".join(f'<div style="position:absolute;left:{px - 2}px;top:30px;width:4px;height:398px;background:#8A8174"></div>' for px in (30, 210))
+                        + "".join(f'<div style="position:absolute;left:{px - 2}px;top:30px;width:4px;height:398px;background:{POST}"></div>' for px in (30, 210))
                         + f'<div style="position:absolute;left:10px;top:425px;width:220px;height:26px;border-radius:0 0 40px 40px;background:{col}"></div>'
                         f'<div style="position:absolute;left:120px;top:470px;transform:translateX(-50%);font-family:heavy,sans-x;font-size:34px;color:{col};white-space:nowrap">'
                         f'{_e(lt if side_left else rt)}</div>' + "".join(grp[side_left]) + '</div>')
             D.items.append(
                 f'<div id="{rig}" style="position:absolute;left:{BX - BW / 2}px;top:{BY - 40}px;width:{BW}px;height:520px;opacity:0;z-index:6">'
-                f'<div id="{rig}_b" style="position:absolute;left:30px;top:32px;width:{BW - 60}px;height:16px;background:#5E564B;border-radius:8px;transform-origin:50% 50%;z-index:2"></div>'
-                f'<div style="position:absolute;left:{BW / 2 - 18}px;top:22px;width:36px;height:36px;border-radius:50%;background:#5E564B;z-index:3"></div>'
+                f'<div id="{rig}_b" style="position:absolute;left:30px;top:32px;width:{BW - 60}px;height:16px;background:{BEAM};border-radius:8px;transform-origin:50% 50%;z-index:2"></div>'
+                f'<div style="position:absolute;left:{BW / 2 - 18}px;top:22px;width:36px;height:36px;border-radius:50%;background:{BEAM};z-index:3"></div>'
                 + pan(True) + pan(False) + '</div>')
             D.js.append(f'tl.to("#{rig}",{{opacity:1,duration:0.4}},{at:.2f});' + "".join(js_))
         elif kind == "twocol":   # 왼쪽 칸과 오른쪽 칸에 하나씩 쌓인다 (아는 것 / 모르는 것, 같은 점 / 다른 점)
@@ -970,7 +985,7 @@ def checklist_pics(D, sc: dict, bt: list):
                 tag = (f'<div style="margin-top:8px;padding:3px 12px;border-radius:8px;background:{col}1F;font-family:heavy,sans-x;font-size:22px;color:{col}">'
                        f'{_e(it["tag"])}</div>') if it.get("tag") else ""
                 ci = div(f'<div id="ID" style="position:absolute;left:{x - 160:.0f}px;top:{y - 115:.0f}px;width:320px;height:230px;box-sizing:border-box;border-radius:14px;'
-                         f'background:linear-gradient(180deg,#FFFEFB,#F1EEE6);border:4px solid {col};box-shadow:{SH};display:flex;flex-direction:column;align-items:center;'
+                         f'background:{CARDGRAD};border:4px solid {col};box-shadow:{SH};display:flex;flex-direction:column;align-items:center;'
                          f'justify-content:center;gap:4px;padding:12px;text-align:center;opacity:0;z-index:5">{svg_markup(it.get("icon", "search"), 60, col) or ""}'
                          f'<div style="font-family:heavy,sans-x;font-size:27px;line-height:1.25;color:{col}">{_e(it["text"])}</div>{tag}</div>',
                          at + j * 0.08, "opacity:0,scale:.9", "opacity:0.3,scale:.94", 0.4)
@@ -986,7 +1001,7 @@ def checklist_pics(D, sc: dict, bt: list):
             mx = max(max(abs(r["a"]), abs(r["b"])) for r in rows_)
             Z = CX - 60
             u = 280 / mx
-            line(Z, 400, Z, 820, "#8A8174", 4, at + 0.1, dur=0.4)
+            line(Z, 400, Z, 820, LINEC, 4, at + 0.1, dur=0.4)
             label(Z, 845, "0", MUT, 26, at + 0.2)
             t_shift = cue(e["shift_t"], e.get("shift_beat"))[0] if e.get("shift_t") else at + 2.0
             for j, r in enumerate(rows_):
@@ -1014,7 +1029,7 @@ def checklist_pics(D, sc: dict, bt: list):
             tdr = at + max(1.0, span * 0.2)
             run = max(3.0, min(6.0, span * 0.4))
             for j, (nm, h, rt) in enumerate(zip(names, hs, rates)):
-                div(f'<div id="ID" style="position:absolute;left:{xs[j] - 95:.0f}px;top:{base - 360}px;width:190px;height:362px;border:6px solid #8A8174;border-top:none;'
+                div(f'<div id="ID" style="position:absolute;left:{xs[j] - 95:.0f}px;top:{base - 360}px;width:190px;height:362px;border:6px solid {LINEC};border-top:none;'
                     f'border-radius:0 0 18px 18px;box-sizing:border-box;opacity:0"></div>', at + 0.1 + j * 0.1)
                 wb = bar(xs[j] - 89, base - h, 178, h - 6, "#3E8EC4", at + 0.3 + j * 0.15, origin="bottom", dur=0.6)
                 label(xs[j], base + 40, nm, INKC, 30, at + 0.2, "heavy")
@@ -1037,7 +1052,7 @@ def checklist_pics(D, sc: dict, bt: list):
             acc = 0
             for j, (nm, a_, b_) in enumerate(segs):
                 ids_.append(div(f'<div id="ID" style="position:absolute;left:{x + acc * W / 100:.0f}px;top:{y}px;width:{a_ * W / 100:.0f}px;height:110px;background:{cols[j % 3]};'
-                                f'display:flex;align-items:center;justify-content:center;font-family:heavy,sans-x;font-size:28px;color:#fff;border-right:3px solid #FFFEFB;'
+                                f'display:flex;align-items:center;justify-content:center;font-family:heavy,sans-x;font-size:28px;color:#fff;border-right:3px solid {CARDBG};'
                                 f'box-sizing:border-box">{_e(nm)}</div>', at + 0.2 + j * 0.15, "opacity:0,scaleY:0", "opacity:1,scaleY:1", 0.4))
                 acc += a_
             tsh = at + max(1.6, span * 0.3)
@@ -1061,6 +1076,215 @@ def checklist_pics(D, sc: dict, bt: list):
             else:
                 label(CX, 600, e["value"], e.get("color", REDC), 52, at + 0.3, "heavy")
             label(CX, 690, e.get("sub", ""), MUT, 30, at + 0.6)
+        elif kind == "waffle":   # 점 100개(또는 n개)로 몫: 전체가 먼저 깔리고, 말할 때 해당 몫만 색이 들어온다 (docs/66 점 격자)
+            n = e.get("n", 100)
+            cols_ = e.get("cols", 10)
+            parts = e["parts"]            # [[이름, 개수, 색키("accent"|"warn"|"ok"|"#hex"), 낱말], ...]
+            cell = e.get("cell", 40)
+            rows_n = (n + cols_ - 1) // cols_
+            gx0 = CX - cols_ * cell / 2 - 120
+            gy0 = 600 - rows_n * cell / 2 + 20
+            if e.get("head"):
+                label(CX, 330, e["head"], INKC, 32, at, "heavy")
+            dots = []
+            for j in range(n):
+                cx_, cy_ = gx0 + (j % cols_) * cell + cell / 2, gy0 + (j // cols_) * cell + cell / 2
+                dots.append(div(f'<div id="ID" style="position:absolute;left:{cx_ - cell * 0.36:.0f}px;top:{cy_ - cell * 0.36:.0f}px;width:{cell * 0.72:.0f}px;'
+                                f'height:{cell * 0.72:.0f}px;border-radius:50%;background:{DIMC};opacity:0"></div>',
+                                at + 0.2 + j * 0.006, "opacity:0,scale:0", "opacity:1,scale:1", 0.25, "back.out(2)"))
+            start = 0
+            lx = gx0 + cols_ * cell + 40
+            for p_i, (nm, cnt, ck, word) in enumerate(parts):
+                col = {"accent": ACC, "warn": REDC, "ok": GRN}.get(ck, ck)
+                tp = cue(word)[0] if word else at + 1.2 + p_i
+                ids_ = ",".join("#" + d for d in dots[start:start + cnt])
+                glow = f',boxShadow:"0 0 14px {col}"' if DARK else ""
+                D.js.append(f'tl.to("{ids_}",{{backgroundColor:"{col}"{glow},duration:0.3,stagger:{min(0.02, 1.2 / max(cnt, 1)):.3f}}},{tp:.2f});')
+                ly = gy0 + 30 + p_i * 120
+                div(f'<div id="ID" style="position:absolute;left:{lx:.0f}px;top:{ly:.0f}px;width:22px;height:22px;border-radius:50%;background:{col};opacity:0"></div>', tp)
+                num(lx + 120, ly + 10, "", cnt * e.get("unit", 1), e.get("suffix", ""), col, 44, tp)
+                label(lx + 120, ly + 58, nm, MUT, 26, tp + 0.2)
+                start += cnt
+            if e.get("note"):
+                label(CX, gy0 + rows_n * cell + 50, e["note"], MUT, 26, at + 1.0)
+        elif kind == "gauge":    # 세로 게이지: 해마다 채움이 오르고, 눈금에 해와 값이 남는다
+            pts = e["points"]             # [[낱말, 값(0~100), 이름표], ...]
+            GX, GT, GB, GW = CX - 60, 360, 820, 90
+            if e.get("head"):
+                label(CX, 320, e["head"], INKC, 30, at, "heavy")
+            div(f'<div id="ID" style="position:absolute;left:{GX - GW / 2:.0f}px;top:{GT}px;width:{GW}px;height:{GB - GT}px;border:4px solid {LINEC};border-radius:10px;'
+                f'box-sizing:border-box;opacity:0"></div>', at)
+            label(GX - GW / 2 - 50, GT + 10, "100%", MUT, 24, at + 0.2)
+            fill = div(f'<div id="ID" style="position:absolute;left:{GX - GW / 2 + 8:.0f}px;top:{GT + 8}px;width:{GW - 16}px;height:{GB - GT - 16}px;border-radius:6px;'
+                       f'background:linear-gradient(180deg,{ACC},{ACC}88);transform-origin:bottom;{"box-shadow:0 0 22px " + ACC + "88;" if DARK else ""}opacity:1"></div>',
+                       at, "scaleY:0", "scaleY:0", 0.1)
+            for p_i, (word, v, tx) in enumerate(pts):
+                tp = cue(word)[0] if word else at + 0.6 + p_i
+                D.js.append(f'tl.to("#{fill}",{{scaleY:{v / 100:.3f},duration:0.9,ease:"power3.out"}},{tp:.2f});')
+                y = GB - 8 - (GB - GT - 16) * v / 100
+                div(f'<div id="ID" style="position:absolute;left:{GX - GW / 2 - 10:.0f}px;top:{y - 2:.0f}px;width:{GW + 20}px;height:4px;background:{INKC};opacity:0"></div>', tp + 0.7)
+                label(GX + GW / 2 + 30 + 150, y, tx, ACC if p_i == len(pts) - 1 else MUT, 30, tp + 0.7, "heavy")
+            if e.get("note"):
+                label(CX, 870, e["note"], MUT, 26, at + 1.0)
+        elif kind == "zoomline":   # 가까이 보면 들쭉날쭉(계단), 물러서면 한 방향 — 같은 선을 카메라가 물러나며 다시 그림
+            import math as _m
+            AX0, AX1, AY0, AY1 = X0 + 60, X1 - 30, 820, 380
+            if e.get("head"):
+                label(CX, 330, e["head"], INKC, 30, at, "heavy")
+            line(AX0, AY0, AX1, AY0, LINEC, 4, at, 0.4)
+            line(AX0, AY0, AX0, AY1, LINEC, 4, at, 0.4)
+            seq = e["series"]             # 실제 값 목록 (가까이 = 앞쪽 일부, 멀리 = 전체)
+            near = max(4, int(len(seq) * e.get("near", 0.15)))
+            def path(vals, n_all):
+                lo, hi = min(vals), max(vals)
+                pts_ = []
+                for j, v in enumerate(vals):
+                    x = AX0 + (AX1 - AX0) * j / max(1, n_all - 1)
+                    y = AY0 - (AY0 - AY1) * (v - lo) / max(1e-9, hi - lo)
+                    if e.get("step") and pts_:
+                        pts_.append((x, pts_[-1][1]))
+                    pts_.append((x, y))
+                return "M" + " L".join(f"{x:.1f} {y:.1f}" for x, y in pts_)
+            p1, p2 = D._id(), D._id()
+            D.svg.append(f'<path id="{p1}" d="{path(seq[:near], near)}" stroke="{ACC}" stroke-width="6" fill="none" stroke-linejoin="round" pathLength="1" '
+                         f'stroke-dasharray="1" stroke-dashoffset="1"{(" style=\"filter:drop-shadow(0 0 8px " + ACC + ")\"") if DARK else ""}/>')
+            D.svg.append(f'<path id="{p2}" d="{path(seq, len(seq))}" stroke="{ACC}" stroke-width="5" fill="none" stroke-linejoin="round" pathLength="1" '
+                         f'stroke-dasharray="1" stroke-dashoffset="1" opacity="0"/>')
+            D.js.append(f'tl.to("#{p1}",{{strokeDashoffset:0,duration:1.4,ease:"none"}},{at + 0.4:.2f});')
+            lb1 = label(CX, AY0 + 40, e.get("near_label", "가까이"), MUT, 26, at + 0.4)
+            tz = cue(e["zoom_t"])[0] if e.get("zoom_t") else at + max(2.5, span * 0.45)
+            D.js.append(f'tl.to("#{p1}",{{opacity:0,duration:0.4}},{tz:.2f});tl.to("#{lb1}",{{opacity:0,duration:0.3}},{tz:.2f});'
+                        f'tl.set("#{p2}",{{opacity:1}},{tz:.2f});tl.to("#{p2}",{{strokeDashoffset:0,duration:1.6,ease:"power1.inOut"}},{tz:.2f});')
+            label(CX, AY0 + 40, e.get("far_label", "멀리서"), ACC, 28, tz + 0.2, "heavy")
+            if e.get("note"):
+                label(CX, 880, e["note"], MUT, 26, tz + 1.8)
+        elif kind == "ring":     # 도넛이 그 비율만큼 차오르고 가운데 숫자가 올라간다 (docs/67 PolyMatter)
+            v = float(e["value"])
+            R, SW = 190, 34
+            cy0 = 590
+            if e.get("head"):
+                label(CX, 330, e["head"], INKC, 32, at, "heavy")
+            col = {"accent": ACC, "warn": REDC, "ok": GRN}.get(e.get("color", "accent"), e.get("color", ACC))
+            bgc, fgc = D._id(), D._id()
+            D.svg.append(f'<circle id="{bgc}" cx="{CX}" cy="{cy0}" r="{R}" stroke="{DIMC}" stroke-width="{SW}" fill="none" opacity="0"/>')
+            D.svg.append(f'<circle id="{fgc}" cx="{CX}" cy="{cy0}" r="{R}" stroke="{col}" stroke-width="{SW}" fill="none" stroke-linecap="round" pathLength="100" '
+                         f'stroke-dasharray="0 100" transform="rotate(-90 {CX} {cy0})"{(" style=\"filter:drop-shadow(0 0 10px " + col + ")\"") if DARK else ""}/>')
+            D.js.append(f'tl.to("#{bgc}",{{opacity:1,duration:0.4}},{at:.2f});')
+            tr = cue(e["fill_t"])[0] if e.get("fill_t") else at + 0.5
+            D.js.append(f'tl.to("#{fgc}",{{attr:{{"stroke-dasharray":"{v:.1f} 100"}},duration:1.2,ease:"power2.out"}},{tr:.2f});')
+            num(CX, cy0 - 10, "", v, e.get("suffix", "%"), col, 84, tr, dur=1.2)
+            label(CX, cy0 + 62, e.get("sub", ""), MUT, 28, tr + 0.3)
+            if e.get("note"):
+                label(CX, cy0 + R + 70, e["note"], MUT, 28, tr + 1.2)
+        elif kind == "ask":      # 시청자의 질문을 먼저 세운다: 사람 아이콘 + 말풍선 (docs/67 14F)
+            px, py = X0 + 110, 640
+            div(f'<div id="ID" style="position:absolute;left:{px - 80:.0f}px;top:{py - 80:.0f}px;width:160px;height:160px;border-radius:50%;background:{CARDBG};'
+                f'box-shadow:{SH};display:flex;align-items:center;justify-content:center;opacity:0">{svg_markup("user", 96, MUT) or ""}</div>',
+                at, "opacity:0,y:30", "opacity:1,y:0", 0.45, "back.out(1.6)")
+            bw = 470
+            bx, by = X1 - bw / 2 - 10, 430
+            bub = div(f'<div id="ID" style="position:absolute;left:{bx - bw / 2:.0f}px;top:{by - 95:.0f}px;width:{bw}px;min-height:190px;box-sizing:border-box;padding:26px 30px;'
+                      f'border-radius:28px;background:{CARDBG};border:5px solid {INKC};box-shadow:{SH};font-family:heavy,sans-x;font-size:40px;line-height:1.3;color:{INKC};'
+                      f'display:flex;align-items:center;justify-content:center;text-align:center;opacity:0;transform-origin:0% 100%">{_e(e["q"])}'
+                      f'<div style="position:absolute;left:30px;bottom:-34px;width:0;height:0;border-left:22px solid transparent;border-right:22px solid transparent;'
+                      f'border-top:34px solid {INKC};transform:rotate(35deg)"></div></div>',
+                      at + 0.35, "opacity:0,scale:.3", "opacity:1,scale:1", 0.5, "back.out(2)")
+            D.sfx.append(("pop", at + 0.4))
+            if e.get("answer_t"):
+                ta = cue(e["answer_t"])[0]
+                badge(CX, 820, e.get("answer", ""), ACC if DARK else GRN, ta, None, 36)
+        elif kind == "orbit":    # 주인공 붙박기: 가운데 사물은 끝까지 남고, 줄마다 신호가 주변에 하나씩 붙는다 (docs/67 #1·#5)
+            hero = e["hero"]               # [아이콘, 이름, 아래 줄]
+            HX, HY, HW, HH = CX, 560, 290, 210
+            cracks = [((8, 8), (40, 34), (28, 62)), ((262, 8), (232, 36), (246, 64)), ((8, 202), (40, 178), (24, 150)),
+                      ((262, 202), (230, 180), (248, 150)), ((0, 100), (26, 92), (14, 122))]   # 모서리에만 — 가운데 글자를 지나지 않게
+            hid = D._id()
+            D.items.append(f'<div id="{hid}" style="position:absolute;left:{HX - HW / 2:.0f}px;top:{HY - HH / 2:.0f}px;width:{HW}px;height:{HH}px;box-sizing:border-box;'
+                           f'border-radius:16px;background:{CARDGRAD};border:6px solid {INKC};box-shadow:{SH};display:flex;flex-direction:column;align-items:center;'
+                           f'justify-content:center;gap:6px;opacity:0;z-index:6">{svg_markup(hero[0], 84, INKC) or ""}'
+                           f'<div style="font-family:heavy,sans-x;font-size:34px;color:{INKC}">{_e(hero[1])}</div>'
+                           f'<div style="font-family:sans-x;font-size:24px;color:{MUT};white-space:nowrap">{_e(hero[2] if len(hero) > 2 else "")}</div>'
+                           f'<svg width="{HW}" height="{HH}" style="position:absolute;left:-6px;top:-6px;overflow:visible">'
+                           + "".join(f'<path id="{hid}_k{q}" d="M' + " L".join(f"{x} {y}" for x, y in cracks[q % len(cracks)]) + f'" stroke="{REDC}" stroke-width="5" fill="none" '
+                                     f'stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>' for q in range(sum(1 for it in e["items"] if it.get("side", "warn") == "warn")))
+                           + '</svg></div>')
+            D.js.append(f'tl.fromTo("#{hid}",{{opacity:0,scale:.8}},{{opacity:1,scale:1,duration:0.5,ease:"back.out(1.7)"}},{at:.2f});')
+            spots = e.get("spots") or [(CX - 210, 350), (CX + 210, 350), (CX - 210, 772), (CX + 210, 772), (CX, 878)]
+            n_warn = 0
+            for j, it in enumerate(e["items"]):
+                ti, _ = cue(it["t"], it.get("beat"))
+                sx_, sy_ = spots[j % len(spots)]
+                col = {"ok": GRN, "warn": REDC}.get(it.get("side", "warn"), INKC)
+                # 주인공 가장자리 → 신호 카드로 선
+                ex = HX + (HW / 2 if sx_ > HX + 10 else -HW / 2 if sx_ < HX - 10 else 0)
+                ey = HY + (-HH / 2 if sy_ < HY else HH / 2)
+                line(ex, ey, sx_ + (-60 if sx_ > HX + 10 else 60 if sx_ < HX - 10 else 0), sy_ + (46 if sy_ < HY else -46), col, 5, ti, dur=0.35)
+                div(f'<div id="ID" style="position:absolute;left:{sx_ - 130:.0f}px;top:{sy_ - 46:.0f}px;width:260px;height:92px;box-sizing:border-box;border-radius:12px;'
+                    f'background:{CARDBG};border:4px solid {col};box-shadow:{SH};display:flex;align-items:center;gap:8px;padding:8px 10px;opacity:0;z-index:7">'
+                    f'<span style="flex:none;display:flex">{svg_markup(it.get("icon", "triangle-alert"), 44, col) or ""}</span><div><div style="font-family:heavy,sans-x;font-size:26px;line-height:1.15;color:{col};white-space:nowrap">'
+                    f'{_e(it["text"])}</div><div style="font-family:sans-x;font-size:20px;line-height:1.2;color:{MUT};white-space:nowrap">{_e(it.get("sub", ""))}</div></div></div>',
+                    ti + 0.25, "opacity:0,scale:.5", "opacity:1,scale:1", 0.45, "back.out(2)")
+                D.sfx.append(("pop", ti + 0.25))
+                if it.get("side", "warn") == "warn":   # 신호가 붙을 때마다 주인공에 금이 하나씩 — 흔들림
+                    D.js.append(f'tl.to("#{hid}_k{n_warn}",{{strokeDashoffset:0,duration:0.35,ease:"power2.out"}},{ti + 0.6:.2f});')
+                    D.js.append(f'tl.to("#{hid}",{{x:-8,duration:0.06,yoyo:true,repeat:5,ease:"none"}},{ti + 0.6:.2f});')
+                    n_warn += 1
+                    shade = min(1.0, n_warn / max(1, len(e["items"])))
+                    if shade >= 0.6:
+                        D.js.append(f'tl.to("#{hid}",{{borderColor:"{REDC}",duration:0.4}},{ti + 0.7:.2f});')
+            if e.get("verdict"):
+                tv, _ = cue(e["verdict"]["t"], e["verdict"].get("beat"))
+                badge(CX, HY, e["verdict"]["text"], REDC, tv, None, 34)
+        elif kind == "equation":   # 물건으로 식 세우기: 칸이 하나씩 놓이고, '=' 뒤 결과 숫자가 올라감 (docs/67 #3)
+            toks = e["tokens"]             # [{"t":낱말, "icon":..., "label":..., "value":...} | {"op":"×"}]
+            ncard = sum(1 for k_ in toks if "op" not in k_)
+            nop = len(toks) - ncard
+            cw, ow = 190, 56
+            tw_ = ncard * cw + nop * ow
+            x = CX - tw_ / 2
+            y = 470
+            if e.get("head"):
+                label(CX, 335, e["head"], INKC, 30, at, "heavy")
+            for k_ in toks:
+                tk = cue(k_["t"], k_.get("beat"))[0] if k_.get("t") else at + 0.3
+                if "op" in k_:
+                    label(x + ow / 2, y, k_["op"], INKC, 64, tk, "heavy")
+                    x += ow
+                    continue
+                div(f'<div id="ID" style="position:absolute;left:{x + 5:.0f}px;top:{y - 95:.0f}px;width:{cw - 10}px;height:190px;box-sizing:border-box;border-radius:14px;'
+                    f'background:{CARDGRAD};border:4px solid {INKC};box-shadow:{SH};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;'
+                    f'opacity:0;z-index:6">{svg_markup(k_.get("icon", "circle"), 64, INKC) or ""}'
+                    f'<div style="font-family:sans-x;font-size:24px;color:{MUT}">{_e(k_.get("label", ""))}</div>'
+                    f'<div style="font-family:heavy,sans-x;font-size:34px;color:{INKC}">{_e(k_.get("value", ""))}</div></div>',
+                    tk, "opacity:0,y:-40", "opacity:1,y:0", 0.45, "back.out(1.8)")
+                D.sfx.append(("click-soft", tk))
+                x += cw
+            r_ = e["result"]
+            tr = cue(r_["t"], r_.get("beat"))[0] if r_.get("t") else at + max(2.0, span * 0.5)
+            label(CX, 620, "=", INKC, 64, tr, "heavy")
+            col = {"accent": ACC, "warn": REDC, "ok": GRN}.get(r_.get("color", "warn"), r_.get("color", REDC))
+            m_ = _re.match(r"([^\d]*)([\d.]+)(.*)", r_["value"])
+            if m_:
+                num(CX, 715, m_.group(1), float(m_.group(2)), m_.group(3), col, 64, tr + 0.2, dur=1.0)
+            else:
+                label(CX, 715, r_["value"], col, 56, tr + 0.2, "heavy")
+            label(CX, 785, r_.get("label", ""), MUT, 28, tr + 0.4)
+        elif kind == "strike":   # 줄 긋고 덮어쓰기: 처음 값 위에 빨간 줄 → 새 값 (docs/67 #4)
+            if e.get("head"):
+                label(CX, 360, e["head"], INKC, 32, at, "heavy")
+            old_ = label(CX, 520, e["old"], INKC, 76, at + 0.2, "heavy")
+            ts_ = cue(e["strike_t"])[0] if e.get("strike_t") else at + max(1.4, span * 0.35)
+            ow_ = max(160, len(e["old"]) * 44)
+            line(CX - ow_ / 2, 525, CX + ow_ / 2, 515, REDC, 10, ts_, dur=0.3)
+            D.js.append(f'tl.to("#{old_}",{{opacity:0.45,duration:0.3}},{ts_ + 0.3:.2f});')
+            D.sfx.append(("whoosh-short", ts_))
+            m_ = _re.match(r"([^\d]*)([\d.]+)(.*)", e["new"])
+            if m_:
+                num(CX, 660, m_.group(1), float(m_.group(2)), m_.group(3), REDC, 92, ts_ + 0.4, dur=1.0)
+            else:
+                label(CX, 660, e["new"], REDC, 84, ts_ + 0.4, "heavy")
+            if e.get("note"):
+                label(CX, 770, e["note"], MUT, 28, ts_ + 1.2)
         new_ids = [m.group(1) for it in D.items[n0:] for m in [_re.search(r'id="([^"]+)"', it)] if m]
         new_ids += [m.group(1) for it in D.svg[s0:] for m in [_re.search(r'id="([^"]+)"', it)] if m]
         if nxt and new_ids:   # 다음 그림으로: 옆으로 넘기기 (지금 것은 왼쪽으로 빠지고, 다음 것은 아래에서 올라옴)
