@@ -1701,7 +1701,7 @@ def make(project: Project, workers: int = 3) -> Path:
         print(f"[hybrid] 움직임 측정 건너뜀: {e}")
     try:  # 글자 겹침 점검: 장면 HTML 을 박자 끝마다 멈춰 글자끼리·카드·자막 자리 겹침을 잼 → 05_edit/overlap_qa.json
         from . import overlapqa   # (2026-11-20 사용자: "자막이랑 영상 글씨가 겹치거나 전체적으로 글씨들이 겹치는 경우가 잦습니다")
-        overlapqa.run(project.path.name)
+        overlapqa.run(str(project.path.resolve()))
     except Exception as e:  # noqa: BLE001
         print(f"[hybrid] 겹침 점검 건너뜀: {e}")
     if spec.get("package"):  # 제목·썸네일 (영상과 함께 만든다 — prompts/thumbnail.md)

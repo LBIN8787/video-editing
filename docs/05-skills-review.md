@@ -114,3 +114,12 @@
 - **AgriciDaniel/claude-youtube** (MIT, `84c3fa6` 2026-04-10): execution/*.py 를 읽음 — googleapis 만, scope `youtube.readonly`·`yt-analytics.readonly`(읽기 전용), 토큰은 스킬 폴더 tmp/. 설치 스크립트(install.ps1)는 git clone·복사뿐이지만 쓰지 않음. 설명(description)이 'video·script·hook' 에도 걸려 우리 스킬을 가로챌 수 있어, 설치 때 **분석·점검·경쟁·재활용 전용으로 좁힘**(`description_override`).
 - **jamditis/claude-skills-journalism** (MIT, `e1f38cb` 2026-11-04): fact-check-workflow·source-verification·social-media-intelligence·data-journalism 만. 지침 문서뿐(스크립트 없음), 외부 자료를 '믿지 않는 데이터'로 다루는 규칙이 들어 있음.
 - **보류:** Remotion 공식 스킬, Manim 스킬, YouTube Clipper, Anthropic 디자인 스킬 (이유는 docs/62 §4).
+
+## 2026-11-26 awesome-opus5-5-videos (코드로 만든 모션그래픽 프롬프트 모음)
+- **무엇:** `yihui-dev/awesome-opus5-5-videos` (MIT, 커밋 `92aee2f` 2026-10-13 — 2주 규칙 충족). Claude Opus 5.5 에게 애니메이션을 코드(HTML·Canvas·SVG·GSAP·Three.js)로 쓰게 해 만든 영상 703개의 프롬프트와 원작 게시물 링크. 분류: motion 369 · 3d 117 · explainer 116 · interactive 101. 쇼츠 「오퍼스 5.5로 만든 모션그래픽 700개, 프롬프트까지 다 공개됨」(민둥이, youtube.com/shorts/ZgNJCiIIZAY)이 소개.
+- **읽은 것:** README, LICENSE, `data/videos.json`(slug·author·post_url·category·tech_tags·prompt), `prompts/*.md` 일부. 실행 파일·설치 스크립트 없음(문서·JSON 뿐) → 네트워크 호출·자동 설치 없음.
+- **설치:** `kind: "git"` — `python scripts/install_tools.py` 가 `tools/awesome-opus5-5-videos/` 에 고정 커밋으로 받음(.gitignore, 커밋하지 않음). skill 아님.
+- **쓰는 법:** 장면을 설계할 때 비슷한 영상의 프롬프트를 찾아 **기법만** 빌림. 예: `data/videos.json` 에서 category·tech_tags·prompt 로 거르기(종이·손그림·explainer·GSAP).
+  - 써 본 기법(실험작 `projects/20261126-ai-work-test`): 연필선 떨림 — 선을 살짝 흔들고 1초에 8번 모양을 바꿈(heyiamnick-119558) · 임계 감쇠 스프링 이징, 통통 튀는 이징 금지(같은 프롬프트) · 화면에서 증명한 뒤에 체크(koushikde-937635) · 모든 프레임은 `seek(t)` 하나의 순수 함수 → Playwright → ffmpeg(koushikde-937635, yankis0x-174321, 우리 렌더러와 같은 방식) · 숫자는 정확히·콜백·스틸 검증 루프(astrothewizard-618782).
+- **주의:** 프롬프트와 결과 영상의 권리는 각 원작자에게 있음 — 영상·그림·문장·캐릭터를 복제하지 않고 구조와 기법만(AGENTS.md 스타일 규칙). 일부 프롬프트는 상표·실존 인물·다른 작품 모방을 요구하므로 그대로 쓰지 않음. Skillry 링크(skillry.dev)는 저장소 운영사의 홍보 페이지.
+

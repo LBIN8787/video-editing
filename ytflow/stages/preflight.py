@@ -143,7 +143,7 @@ def run(project: Project, looked: bool = False) -> dict:
     #    바로 앞 편과 같은 사진, '왜 X만 -11%' 처럼 팩트시트와 어긋나는 '혼자' 주장을 막음
     from . import thumbnail as _th
     pi = _th.packaging_issues(project)
-    C["packaging"] = {"pass": not pi, "issues": pi[:5],
+    C["packaging"] = {"pass": not pi, "issues": pi[:5], "notes": _th.packaging_notes(project),
                       "note": "새 사진으로 썸네일을 다시 만들거나 제목·썸네일 글을 고친 뒤 thumbnail → preflight"}
 
     # 6. 사람 눈

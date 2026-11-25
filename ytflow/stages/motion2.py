@@ -26,7 +26,10 @@ import re
 YEL = "#FFD84D"
 
 
-import json as _json   # 2026-11-24: JS 글자는 HTML 이스케이프가 아니라 JS 문자열로 ('&#x27;' 이 화면에 그대로 찍히던 것)
+def _js(v) -> str:
+    """textContent 에 넣을 JS 문자열 — HTML 이스케이프를 하면 &#x27; 가 글자 그대로 보임 (2026-11-25)."""
+    import json as _json
+    return _json.dumps(str(v), ensure_ascii=False).replace("</", "<\\/")
 
 
 def _e(s) -> str:
@@ -165,7 +168,7 @@ class Stage:
                 fmt = (f'Number(o.v.toFixed({dec})).toLocaleString("en-US",{{minimumFractionDigits:{dec},maximumFractionDigits:{dec}}})'
                        if "," in core else f'o.v.toFixed({dec})')
                 self.js.append(f'(function(){{var o={{v:0}};tl.to(o,{{v:{numv},duration:0.9,ease:"power2.out",onUpdate:function(){{'
-                               f'document.getElementById("{self.p}_{m["id"]}_n").textContent={_json.dumps(pre)}+{fmt}+{_json.dumps(post)};}}}},{t + 0.1:.3f});}})();')
+                               f'document.getElementById("{self.p}_{m["id"]}_n").textContent={_js(pre)}+{fmt}+{_js(post)};}}}},{t + 0.1:.3f});}})();')
             # 반짝이는 별 몇 개 (숫자 강조) — 시장 채널은 끔 (v32, 2026-11-15 사용자: 과하고 분위기와 안 맞음)
             sc_ = cw / 900
             for k, (dx, dy) in [] if getattr(self, "no_sparkle", False) else enumerate(((-380 * sc_, -170 * sc_), (390 * sc_, -150 * sc_), (-330 * sc_, 170 * sc_), (360 * sc_, 180 * sc_))):
@@ -208,7 +211,7 @@ class Stage:
                 fmt = (f'Number(o.v.toFixed({dec})).toLocaleString("en-US",{{minimumFractionDigits:{dec},maximumFractionDigits:{dec}}})'
                        if "," in core else f'o.v.toFixed({dec})')
                 self.js.append(f'(function(){{var o={{v:0}};tl.to(o,{{v:{numv},duration:1.1,ease:"power2.out",onUpdate:function(){{'
-                               f'document.getElementById("{did}_n").textContent={_json.dumps(pre)}+{fmt}+{_json.dumps(post)};}}}},{t + 0.2:.3f});}})();')
+                               f'document.getElementById("{did}_n").textContent={_js(pre)}+{fmt}+{_js(post)};}}}},{t + 0.2:.3f});}})();')
             self.sfx.append(("click-soft", t))
         elif do == "type":
             text = m.get("text", "")

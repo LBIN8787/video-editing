@@ -56,14 +56,31 @@ def _font(path, size):
     return ImageFont.truetype(str(path), int(size))
 
 
+def series(project: Project | str) -> str | None:
+    """시장 채널 썸네일 계열 (manual/09 §7-1 ⑬·⑭): 'brief' 브리핑(매일·주간) = 기업 사진·brief_tab 틀 / 'analysis' 분석(심층·기술 등) = 인물·analysis_frame 틀.
+    목록에서 글씨를 읽지 않아도 둘이 갈리게 (2026-11-25 사용자: "브리핑이랑 분석이랑 구분 할 수 있도록 해주세요 글씨로 말구요")."""
+    name = project if isinstance(project, str) else project.path.name
+    m = re.match(r"\d{8}-market-(\w+)", name)
+    if not m:
+        return None
+    return "brief" if m.group(1) in ("daily", "weekly") else "analysis"
+
+
+def _bw(im: Image.Image) -> Image.Image:
+    """브리핑 흑백: 대비를 조금 올린 회색 — 빨간 띠·초록/빨강 지수 숫자만 색으로 남음."""
+    return ImageEnhance.Contrast(ImageOps.grayscale(im)).enhance(1.15).convert("RGB")
+
+
 def _image(project: Project, spec: dict, img: dict) -> Image.Image:
     if img.get("file"):
-        return Image.open(project.path / img["file"]).convert("RGB")
+        im = Image.open(project.path / img["file"]).convert("RGB")
+        return _bw(im) if img.get("_bw") else im
     src = project.dir("assets") / "footage" / spec["footage"][img["src"]]["file"]
     out = project.dir("edit") / f"_thumb_src_{img['src']}.png"
     subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-ss", str(img.get("t", 1)), "-i", str(src),
                     "-frames:v", "1", str(out)], check=True)
-    return Image.open(out).convert("RGB")
+    im = Image.open(out).convert("RGB")
+    return _bw(im) if img.get("_bw") else im
 
 
 def _cover(im: Image.Image, w: int, h: int, fx: float = 0.5, fy: float = 0.4) -> Image.Image:
@@ -403,11 +420,22 @@ def _week_badge(im: Image.Image, wk: dict, boxes: list) -> Image.Image:
 
 
 def render(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
+    sr = series(project)
+    # 브리핑·분석은 고정 틀(⑭)로 갈리므로 사진은 둘 다 컬러 그대로 (2026-11-25 사용자: "굳이 흑백이 아니여도 브리핑과 분석이 구분가기만 하면 돼요").
+    # 흑백을 원하는 변형만 "bw": true
+    if sr and v.get("image") and v.get("bw"):
+        v = dict(v, image=dict(v["image"], _bw=True), tone="none")
+    elif sr and v.get("layout", "photo") == "photo" and "tone" not in v:
+        v = dict(v, tone="none")                 # 시장 채널은 교양 채널의 옛 사진 톤을 쓰지 않음
     wk = v.get("week") or (spec.get("package") or {}).get("week") or week_of(project)
     im, boxes = _render_layout(project, spec, dict(v, _week=wk) if wk else v)
+    if v.get("credit") and v.get("layout", "photo") not in ("person", "brief_tab", "analysis_frame"):   # 사진 출처 (CC BY 표시 의무) — 인물 판은 _person 이 씀
+        d = ImageDraw.Draw(im)
+        fc = _font(GOTHIC_X, 18)
+        d.text((W - 14 - fc.getlength(v["credit"]), 10), v["credit"], font=fc, fill=(235, 235, 235), stroke_width=2, stroke_fill=(0, 0, 0))
     if wk:
         im = _week_badge(im, wk, boxes)
-    tk = None if v.get("no_ticker") else (v.get("ticker") or (spec.get("package") or {}).get("ticker"))   # 차트·칩이 있는 판은 지수 띠를 끔
+    tk = None if v.get("no_ticker") or v.get("layout") == "analysis_frame" else (v.get("ticker") or (spec.get("package") or {}).get("ticker"))   # 차트·칩이 있는 판은 지수 띠를 끔
     if tk:   # 아래 왼쪽 작은 지수 띠 [{"name": "S&P 500", "chg": "-3.70%"}] — 재생 시간 자리(TIMESTAMP_BOX)는 피함.
         # 일부러 작은 글씨라 휴대폰 글씨 점검(boxes)에는 넣지 않음 (manual/09 §7-1 ⑧, 2026-11-21 사용자)
         im = im.convert("RGBA")
@@ -415,7 +443,7 @@ def render(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
         d = ImageDraw.Draw(ov)
         fs = v.get("ticker_size", 30)
         fn, fc = _font(GOTHIC_X, fs), _font(GOTHIC_X, fs)
-        x0, y0 = 28, H - fs - 40
+        x0, y0 = (28, 24) if v.get("layout") == "brief_tab" else (28, H - fs - 40)   # 브리핑 틀은 아래가 흰 상자 자리 → 위 왼쪽
         x = x0 + 16
         parts = []
         for t in tk:
@@ -536,7 +564,109 @@ def _trend(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
     return base.convert("RGB"), boxes
 
 
+def _fit_font(d, text: str, size: int, maxw: int, minsize: int = 56):
+    f = _font(GOTHIC_X, size)
+    while d.textlength(text, font=f) > maxw and f.size > minsize:
+        f = _font(GOTHIC_X, f.size - 4)
+    return f
+
+
+def _brief_tab(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
+    """브리핑 고정 틀 (manual/09 §7-1 ⑭, 2026-11-25 사용자: "차라리 오선의 썸네일 제작방식을 참조하세요" ·
+    "썸네일 제목은 그날의 장에 대한 짧은 핵심 내용이 들어가야합니다"): 사진 꽉 채움 + 왼쪽 아래 빨간 날짜 탭 +
+    흰 상자 속 검은 글씨 한 줄(그날 장의 핵심) + 오른쪽 위 채널 표시. 매일 같은 틀이라 글씨를 읽지 않아도 브리핑으로 보임."""
+    im = _cover(_image(project, spec, v["image"]), W, H, *v["image"].get("focus", [0.5, 0.4]))
+    g = Image.new("L", (W, H), 0)
+    gd = ImageDraw.Draw(g)
+    for y in range(H):   # 아래로 갈수록 어둡게 (흰 상자가 뜨게)
+        gd.line([(0, y), (W, y)], fill=int(190 * max(0.0, (y - 260) / (H - 260)) ** 1.3))
+    im = Image.composite(Image.new("RGB", (W, H), (0, 0, 0)), im, g)
+    d = ImageDraw.Draw(im)
+    boxes = []
+    head = v.get("headline") or " ".join(v.get("lines", []))
+    f = _fit_font(d, head, v.get("size", 96), W - 150)
+    bx, by = 40, 600 - f.size - 44            # 상자 아래 끝이 재생 시간 자리(y 630) 위에서 끝나게
+    tw = d.textlength(head, font=f)
+    d.rectangle([bx, by, bx + tw + 56, by + f.size + 44], fill=(255, 255, 255))
+    hl = [h for h in v.get("hl", []) if h in head]
+    x = bx + 28
+    if hl:   # 강조 낱말만 빨강 (한 곳)
+        a, b = head.split(hl[0], 1)
+        for part, col in ((a, (12, 12, 12)), (hl[0], RED), (b, (12, 12, 12))):
+            d.text((x, by + 16), part, font=f, fill=col)
+            x += d.textlength(part, font=f)
+    else:
+        d.text((x, by + 16), head, font=f, fill=(12, 12, 12))
+    boxes.append((bx, by, bx + tw + 56, by + f.size + 44))
+    if v.get("top"):
+        fd = _font(GOTHIC_X, 40)
+        dw = d.textlength(v["top"], font=fd)
+        d.polygon([(bx, by - 64), (bx + dw + 40, by - 64), (bx + dw + 80, by), (bx, by)], fill=RED)
+        d.text((bx + 20, by - 56), v["top"], font=fd, fill=(255, 255, 255))
+        boxes.append((bx, by - 64, bx + dw + 80, by))
+    title = (spec.get("package") or {}).get("channel_mark", "이어 읽는 시장")
+    if title:
+        fm = _font(GOTHIC_X, 22)
+        mw = d.textlength(title, font=fm) + 28
+        d.rounded_rectangle([W - 24 - mw, 20, W - 24, 62], 8, fill=(14, 14, 18))
+        d.text((W - 24 - mw + 14, 28), title, font=fm, fill=(255, 255, 255))
+    if v.get("credit"):
+        fc = _font(GOTHIC_X, 18)
+        d.text((W - 24 - fc.getlength(v["credit"]), 70), v["credit"], font=fc, fill=(235, 235, 235), stroke_width=2, stroke_fill=(0, 0, 0))
+    return im, boxes
+
+
+def _analysis_frame(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
+    """분석 고정 틀 (manual/09 §7-1 ⑭): 검은 바탕 + 빨간 테두리 + 왼쪽 인물(컬러, 어둡게 이어 붙임) +
+    오른쪽 작은 소제목 · 큰 두 줄 · 빨간 날짜 상자. 인물이 없으면 컬러 사물 사진을 같은 자리에."""
+    base = Image.new("RGB", (W, H), (8, 8, 10))
+    pw = int(W * v.get("photo_width", 0.48))
+    src = _image(project, spec, v["image"])
+    im = _person_crop(src, pw, H, v.get("face_h", 0.46)) if v.get("person") else _cover(src, pw, H, *v["image"].get("focus", [0.5, 0.35]))
+    base.paste(im.convert("RGB"), (0, 0))
+    g = Image.new("L", (W, H), 0)
+    gd = ImageDraw.Draw(g)
+    for x in range(W):
+        gd.line([(x, 0), (x, H)], fill=int(255 * min(1.0, max(0.0, (x - (pw - 220)) / 220))))
+    base = Image.composite(Image.new("RGB", (W, H), (8, 8, 10)), base, g)
+    d = ImageDraw.Draw(base)
+    d.rectangle([0, 0, W - 1, H - 1], outline=RED, width=10)
+    boxes = []
+    xr = W - 60
+    y = v.get("text_y", 170)
+    if v.get("kicker"):
+        fk = _font(GOTHIC_X, 46)
+        d.text((xr, y), v["kicker"], font=fk, fill=(255, 255, 255), anchor="ra")
+        boxes.append((xr - d.textlength(v["kicker"], font=fk), y, xr, y + 46))
+        y += 70
+    for i, ln in enumerate(v.get("lines", [])):
+        f = _fit_font(d, ln, v.get("size", 120), W - pw - 60)
+        col = (255, 206, 0) if any(h in ln for h in v.get("hl", [])) else (255, 255, 255)
+        d.text((xr, y), ln, font=f, fill=col, anchor="ra")
+        boxes.append((xr - d.textlength(ln, font=f), y, xr, y + f.size))
+        y += f.size + 16
+    if v.get("top"):
+        fd = _font(GOTHIC_X, 38)
+        dw = d.textlength(v["top"], font=fd)
+        y = min(y + 18, 540)
+        d.rectangle([xr - dw - 40, y, xr, y + 60], fill=RED)
+        d.text((xr - 20, y + 30), v["top"], font=fd, fill=(255, 255, 255), anchor="rm")
+        boxes.append((xr - dw - 40, y, xr, y + 60))
+    per = v.get("person") or {}
+    if per.get("name"):
+        fn = _font(GOTHIC_X, 30)
+        d.text((40, H - 70), per["name"] + (f" · {per['role']}" if per.get("role") else ""), font=fn, fill=(255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0))
+    if v.get("credit"):
+        fc = _font(GOTHIC_X, 18)
+        d.text((24, 20), v["credit"], font=fc, fill=(235, 235, 235), stroke_width=2, stroke_fill=(0, 0, 0))
+    return base, boxes
+
+
 def _render_layout(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
+    if v.get("layout") == "brief_tab":
+        return _brief_tab(project, spec, v)
+    if v.get("layout") == "analysis_frame":
+        return _analysis_frame(project, spec, v)
     if v.get("layout") == "trend":
         return _trend(project, spec, v)
     if v.get("layout") == "person":
@@ -681,15 +811,28 @@ def _hot_words(project: Project) -> list[str]:
 _src_text = ""
 
 
-def score(v: dict, qa: dict, hot: list[str], title: str = "") -> tuple[float, list[str]]:
+def score(v: dict, qa: dict, hot: list[str], title: str = "", sr: str | None = None) -> tuple[float, list[str]]:
     """한 변형의 점수와 이유. 높을수록 조회수 쪽 근거가 많음 (인과 증명이 아니라 같은 채널 안 비교의 경향)."""
     import re
-    text = " ".join(v.get("lines", []) + [v.get("headline", ""), v.get("top", "")] +
+    text = " ".join(v.get("lines", []) + [v.get("headline", ""), v.get("top", ""), v.get("kicker", "")] +
                     [x.get("value", "") for x in (v.get("left") or {}, v.get("right") or {})])
     sc, why = 0.0, []
     if not qa.get("ok"):
         sc -= 5; why.append("점검 실패(글자 크기·재생 시간 자리) −5")
     per = (v.get("person") or {}).get("name")
+    if sr == "brief":   # 브리핑 = 기업 사진 (09 §7-1 ⑬) — 얼굴 가점 대신 기업 사진 가점, 인물은 분석 편으로
+        if v.get("layout") == "person" or per:
+            sc -= 3; why.append("브리핑에 인물 −3 — 인물은 분석 편 썸네일로 (09 §7-1 ⑬)")
+        elif v.get("company") or Path(((v.get("image") or {}).get("file")) or "").name.startswith("co_"):
+            sc += 2; why.append(f"그날 핵심 기업 사진({v.get('company') or '기업'}) +2 (09 §7-1 ⑬)")
+        per = None
+        if v.get("layout") == "brief_tab":
+            sc += 2; why.append("브리핑 고정 틀(장 핵심 한 줄) +2 — 목록에서 시리즈로 보임 (09 §7-1 ⑭)")
+    if sr == "analysis" and v.get("layout") == "analysis_frame":
+        sc += 2; why.append("분석 고정 틀 +2 — 목록에서 시리즈로 보임 (09 §7-1 ⑭)")
+    if v.get("layout") == "analysis_frame" and per and (qa.get("face_area") is None or qa.get("face_area", 0) >= 0.06):
+        sc += 3; why.append(f"사건 당사자 얼굴({per}) +3 — docs/55")
+        per = None
     if v.get("layout") == "person" and per and (qa.get("face_area") is None or qa.get("face_area", 0) >= 0.06):
         sc += 3; why.append(f"사건 당사자 얼굴 크게({per}) +3 — 인물 제목의 터진 영상 42% vs 안 된 10% (docs/55)")
         if per.split()[-1] in title or per in title:
@@ -736,7 +879,7 @@ def _hot_tokens(hot: list[str]) -> list[str]:
 
 
 def _vtext(v: dict) -> str:
-    return " ".join(v.get("lines", []) + [v.get("headline", ""), v.get("top", "")] +
+    return " ".join(v.get("lines", []) + [v.get("headline", ""), v.get("top", ""), v.get("kicker", "")] +
                     [x.get("value", "") for x in (v.get("left") or {}, v.get("right") or {})])
 
 
@@ -774,6 +917,18 @@ def packaging_issues(project: Project) -> list[str]:
     text = pkg.get("title", "") + " " + " ".join(_vtext(t) for t in pkg.get("thumbnails", []))
     out += only_claims(text, fs.read_text(encoding="utf-8") if fs.exists() else "")
     return out
+
+
+def packaging_notes(project: Project) -> list[str]:
+    """막지는 않고 알리기만 (스타일 기본값은 MUST 검사로 만들지 않음 — manual/README §3-1): 브리핑에 인물 썸네일."""
+    f, hy = project.dir("edit") / "thumbnail_pick.json", project.dir("script") / "hybrid.json"
+    if series(project) != "brief" or not (f.exists() and hy.exists()):
+        return []
+    pick_id = json.loads(f.read_text(encoding="utf-8")).get("pick")
+    v = next((t for t in (json.loads(hy.read_text(encoding="utf-8")).get("package") or {}).get("thumbnails", []) if t.get("id") == pick_id), None)
+    if v and (v.get("layout") == "person" or (v.get("person") or {}).get("name")):
+        return [f"브리핑인데 썸네일 {v['id']} 가 인물 — 기본은 그날 핵심 기업 사진, 인물은 분석 편으로 (manual/09 §7-1 ⑬, company-photo pick)"]
+    return []
 
 
 def recent_uploads(project: Project, n: int = 3) -> list[dict]:
@@ -850,7 +1005,8 @@ def pick(project: Project, pkg: dict, qa: dict) -> dict:
     fs = project.dir("research") / "factsheet.md"
     _src_text = fs.read_text(encoding="utf-8") if fs.exists() else ""
     title = pkg.get("title", "")
-    scores = {v["id"]: score(v, qa.get(v["id"], {}), hot, title) for v in pkg["thumbnails"]}
+    sr = series(project)
+    scores = {v["id"]: score(v, qa.get(v["id"], {}), hot, title, sr) for v in pkg["thumbnails"]}
     recent = recent_uploads(project)
     for v in pkg["thumbnails"]:
         s_, w_ = scores[v["id"]]
@@ -859,7 +1015,7 @@ def pick(project: Project, pkg: dict, qa: dict) -> dict:
             scores[v["id"]] = (round(s_ + d, 2), w_ + why)
     forced = pkg.get("thumb_pick")
     best = forced if forced in scores else max(scores, key=lambda k: (scores[k][0], -ord(k[0])))
-    res = {"pick": best, "forced": bool(forced in scores), "hot": hot,
+    res = {"pick": best, "forced": bool(forced in scores), "hot": hot, "series": sr,
            "recent": [{"project": r["project"], "image": r["image"], "layout": r["layout"]} for r in recent],
            "title_issues": only_claims(title + " " + " ".join(_vtext(v) for v in pkg["thumbnails"]), _src_text),
            "scores": {k: {"score": s_, "why": w} for k, (s_, w) in scores.items()}}

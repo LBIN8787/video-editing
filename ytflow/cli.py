@@ -396,6 +396,8 @@ def main(argv: list[str] | None = None) -> None:
     ec.add_argument("source", help="공식 녹취록 PDF·텍스트 경로 또는 주소 (IR 우선)")
     ec.add_argument("--ticker", default="")
     ec.add_argument("--period", default="", help="예: 3Q26")
+    cp_ = sub.add_parser("company-photo", help="브리핑 썸네일용 기업 사진 (list | pick <프로젝트> <회사> | find \"검색어\" | add <회사> \"File:…\"), manual/09 §7-1 ⑬")
+    cp_.add_argument("args", nargs=argparse.REMAINDER)
     nl = sub.add_parser("newsletters", help="뉴스레터 → 채널별 소재 목록 (ingest 메일JSON… | rss | show [--brand b --days n] | sources), docs/36")
     nl.add_argument("args", nargs=argparse.REMAINDER)
     ar = sub.add_parser("archive", help="공공 기록 사진·영상 찾기: search(미국 의회도서관)·commons(위키미디어)·si(스미스소니언 CC0)")
@@ -686,6 +688,9 @@ def main(argv: list[str] | None = None) -> None:
             radar.mark(*a.mark)
         else:
             radar.run(a.date, [x.strip() for x in a.people.split(",") if x.strip()] or None, not a.no_kr)
+    elif a.cmd == "company-photo":
+        from .stages import companyphoto
+        companyphoto.main(a.args)
     elif a.cmd == "newsletters":
         from .stages import newsletters
         newsletters.main(a.args)

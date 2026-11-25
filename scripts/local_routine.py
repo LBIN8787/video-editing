@@ -66,9 +66,13 @@ class Run:
     def __init__(self, job: str):
         self.job = job
         self.drive = drive_dir()
-        self.home = self.drive / "_local"
+        # Google Drive 가 잠깐 안 붙어 있어도(G: 없음) 작업은 돈다 — 로그·잠금·보고는 E: 에, 큰 파일은 작업 폴더에 남겨 다음 차례에 Drive 로 (2026-11-25)
+        self.drive_ok = self.drive.exists()
+        self.home = self.drive / "_local" if self.drive_ok else WORK / "_local"
         self.logf = self.home / "logs" / f"{job}.log"
         self.logf.parent.mkdir(parents=True, exist_ok=True)
+        if not self.drive_ok:
+            self.log(f"Google Drive 가 연결돼 있지 않음({self.drive}) — 로그·잠금은 {self.home}, 큰 파일은 작업 폴더에 둠")
 
     def log(self, msg: str) -> None:
         line = f"{dt.datetime.now():%Y-%m-%d %H:%M:%S} {msg}"
@@ -116,13 +120,25 @@ def find_claude() -> str | None:
     return cands[0] if cands else None
 
 
+_READY: dict = {}
+
+
 def claude_ready(exe: str, env: dict) -> bool:
+    """로그인 확인. 종료 코드만 보면 안 됨 — 짧은 답도 'Reached max turns (1)' 로 1 을 돌려줄 때가 있어
+    로그인돼 있는데도 Codex 로 넘어갔다(2026-11-25 호기심·심층 감시). 로그인·인증 오류 문구가 있을 때만 '안 됨'. 한 번 확인하면 이번 실행 동안 기억."""
+    if exe in _READY:
+        return _READY[exe]
     try:
-        r = subprocess.run([exe, "-p", "ok 라고만 답해", "--max-turns", "1"], capture_output=True, text=True,
-                           encoding="utf-8", errors="replace", timeout=120, env=env)
+        r = subprocess.run([exe, "-p", "ok 라고만 답해", "--max-turns", "2"], capture_output=True, text=True,
+                           encoding="utf-8", errors="replace", timeout=180, env=env)
+        out = (r.stdout + r.stderr).lower()
+        ok = not any(k in out for k in ("not logged in", "please run /login", "invalid api key", "authentication_error",
+                                         "oauth token has expired", "401"))
+        ok = ok and (r.returncode == 0 or "max turns" in out)
     except Exception:  # noqa: BLE001
-        return False
-    return r.returncode == 0 and "Not logged in" not in (r.stdout + r.stderr)
+        ok = False
+    _READY[exe] = ok
+    return ok
 
 
 def agent_cmd(wt: Path, env: dict, run: Run, model: str | None = None) -> tuple[list[str], str]:
@@ -142,6 +158,8 @@ def agent_cmd(wt: Path, env: dict, run: Run, model: str | None = None) -> tuple[
 def mirror_media(wt: Path, run: Run) -> list[str]:
     """작업 폴더의 큰 파일(git 무시 파일) → Drive 영상/<프로젝트>/ (없거나 크기가 다르면 복사, 복사 뒤 크기 확인)."""
     out, cut = [], time.time() - 2 * 86400
+    if not run.drive_ok:
+        return ["Drive 연결 안 됨 — 큰 파일은 작업 폴더에 그대로 (다음 차례에 옮김)"]
     for proj in sorted((wt / "projects").glob("*")):
         if not proj.is_dir():
             continue
@@ -170,6 +188,8 @@ def mirror_media(wt: Path, run: Run) -> list[str]:
 def prune_media(wt: Path, run: Run) -> None:
     """Drive 에 같은 크기 사본이 있고 PRUNE_DAYS 넘게 손대지 않은 큰 파일만 작업 폴더에서 지운다 (PC 용량 줄이기)."""
     cut, gone = time.time() - PRUNE_DAYS * 86400, 0
+    if not run.drive_ok:
+        return
     for f in (wt / "projects").rglob("*"):
         if f.is_file() and f.suffix.lower() in MEDIA_EXT and f.stat().st_mtime < cut:
             proj = f.relative_to(wt / "projects").parts[0]

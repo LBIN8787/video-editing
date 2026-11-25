@@ -1,0 +1,829 @@
+{
+ "project": "20261125-ai-explainer",
+ "topic": "ai",
+ "topic_name": "AI · 활용",
+ "scenes": [
+  {
+   "scene": 1,
+   "type": "share",
+   "chapter": 0,
+   "situation": "new-tool",
+   "situation_name": "새 도구·모델 소개",
+   "origin": "add",
+   "also": [
+    "open-scene",
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "2026년 5월, AI 회사 앤트로픽의 개발자들이 회사 코드에 새로 합친 코드 가운데 80% 넘게를 자기 회사 AI, 클로드가 썼습니다.",
+     "situations": [
+      "open-scene",
+      "metric"
+     ],
+     "hits": [
+      "2026년"
+     ]
+    },
+    {
+     "say": "그리고 이 회사는 공개 글에서 스스로 묻습니다. AI 가 자기 다음 모델을 처음부터 끝까지 혼자 만들 수 있게 되면, 무슨 일이 일어날까.",
+     "situations": [
+      "new-tool",
+      "timeline"
+     ],
+     "hits": [
+      "공개",
+      "모델"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "footage",
+    "kb",
+    "chat"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "홍보 문구 그대로",
+   "why": "'이거 뭔데 다들 난리야?' — 공식 화면으로"
+  },
+  {
+   "scene": 2,
+   "type": "motionboard",
+   "chapter": 0,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "AI 가 AI 를 만든다. 이 말을 따라가다 보면 하나가 보입니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "이 과정에서 사람에게 남은 일은 점점 한 칸으로 줄어들고 있고, 그 칸은 무엇을 풀지 고르는 일이라는 것.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "그리고 지금 AI 업계에서 가장 큰 내기는, 그 마지막 칸마저 넘어가느냐입니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 3,
+   "type": "chapter",
+   "chapter": 1,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "AI 가 만들어지는 과정을 고리 하나로 그려 보겠습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 4,
+   "type": "motionboard",
+   "chapter": 1,
+   "situation": "new-tool",
+   "situation_name": "새 도구·모델 소개",
+   "origin": "add",
+   "also": [
+    "cause",
+    "question"
+   ],
+   "beats": [
+    {
+     "say": "무엇을 연구할지 문제를 고르고, 실험을 설계해 코드를 짜고, 실험을 돌려 결과를 읽고, 그걸로 다음 모델을 만듭니다. 그리고 다시 처음으로.",
+     "situations": [
+      "new-tool",
+      "cause"
+     ],
+     "hits": [
+      "모델"
+     ]
+    },
+    {
+     "say": "지금까지 이 고리의 모든 칸은 사람이 맡았습니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "한 바퀴 돌면 더 나은 모델이 나오고, 그 모델이 다음 바퀴의 연구를 도우면, 다음 바퀴는 더 빨리 돕니다.",
+     "situations": [
+      "new-tool"
+     ],
+     "hits": [
+      "모델"
+     ]
+    },
+    {
+     "say": "이 고리의 모든 칸을 AI 가 맡게 되면, 그걸 재귀적 자기개선이라고 부릅니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "그러니 질문은 이겁니다. 지금 이 고리의 칸마다, 누가 일하고 있을까요.",
+     "situations": [
+      "question"
+     ],
+     "hits": [
+      "을까요"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "footage",
+    "kb",
+    "chat"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "홍보 문구 그대로",
+   "why": "'이거 뭔데 다들 난리야?' — 공식 화면으로"
+  },
+  {
+   "scene": 5,
+   "type": "chapter",
+   "chapter": 2,
+   "situation": "new-tool",
+   "situation_name": "새 도구·모델 소개",
+   "origin": "add",
+   "also": [
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "앤트로픽이 공개한 숫자는 대부분 회사가 스스로 잰 것이고, 회사는 숫자 옆에 직접 단서를 붙여 두었습니다. 숫자만큼 그 각주가 중요합니다.",
+     "situations": [
+      "new-tool",
+      "metric"
+     ],
+     "hits": [
+      "공개"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "footage",
+    "kb",
+    "chat"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "홍보 문구 그대로",
+   "why": "'이거 뭔데 다들 난리야?' — 공식 화면으로"
+  },
+  {
+   "scene": 6,
+   "type": "motionboard",
+   "chapter": 2,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "main",
+   "also": [
+    "open-scene"
+   ],
+   "beats": [
+    {
+     "say": "코드의 80% 이상.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "80%"
+     ]
+    },
+    {
+     "say": "각주: 코드 줄 수는 불완전한 잣대다. 얼마나 많이 썼는지만 잴 뿐, 얼마나 잘 썼는지는 재지 못한다. 코드의 80% 가 일의 80% 는 아닙니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "80%"
+     ]
+    },
+    {
+     "say": "개발자 한 사람이 하루에 합치는 코드는 2024년의 여덟 배.",
+     "situations": [
+      "open-scene"
+     ],
+     "hits": [
+      "2024년"
+     ]
+    },
+    {
+     "say": "각주: 거의 확실히 과장된 숫자.",
+     "situations": [],
+     "hits": []
+    }
+   ],
+   "recommended_scenes": [
+    "chart",
+    "bignum",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말하는 숫자가 그 순간 화면에 생긴다 (작업 기준, 09 §6 v27·v30)"
+  },
+  {
+   "scene": 7,
+   "type": "bars",
+   "chapter": 2,
+   "situation": "point",
+   "situation_name": "화면의 한 곳을 가리킨다",
+   "origin": "override",
+   "also": [],
+   "beats": [
+    {
+     "say": "프로그램을 빠르게 만드는 과제에서 숙련자는 몇 시간 들여 네 배쯤. AI 는 1년 사이 세 배에서 쉰두 배로.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "이 숫자에는 회사가 따로 각주를 달지 않았습니다.",
+     "situations": [
+      "point"
+     ],
+     "hits": [
+      "이 숫자"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "zoomshot",
+    "footage"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    }
+   ],
+   "blocked": [],
+   "avoid": "줌 3번 이상",
+   "why": "화면의 한 곳 — 실제 화면 위 표시"
+  },
+  {
+   "scene": 8,
+   "type": "bignum",
+   "chapter": 2,
+   "situation": "said",
+   "situation_name": "누가 말했다",
+   "origin": "main",
+   "also": [
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "AP 통신은 9월, 앤트로픽이 회사 연구개발의 26% 를 클로드가 주도한다고 밝혔다고 보도했습니다. 사람이 큰 방향만 주면 대부분을 끝까지 해낸다는 뜻이고, 2월엔 0이었다고 합니다.",
+     "situations": [
+      "said",
+      "metric"
+     ],
+     "hits": [
+      "밝혔"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bite",
+    "footage",
+    "quote"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "j-l-cut",
+     "status": "candidate"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "내레이션으로만 전하기",
+   "why": "그 사람의 목소리·원문이 증거 (source-cut, 03 §0-1)"
+  },
+  {
+   "scene": 9,
+   "type": "chapter",
+   "chapter": 3,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "그럼 고리로 돌아가 칸마다 채워 보죠.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 10,
+   "type": "motionboard",
+   "chapter": 3,
+   "situation": "cause",
+   "situation_name": "원인 → 결과를 잇는다",
+   "origin": "main",
+   "also": [
+    "new-tool",
+    "said"
+   ],
+   "beats": [
+    {
+     "say": "코드를 짜는 칸, 이미 상당 부분 AI 입니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "실험을 돌리고 결과를 읽는 칸. 앤트로픽은 올해 4월, AI 에이전트들이 스스로 연구를 진행해 성능 격차의 97% 를 메웠다고 밝혔습니다. 같은 과제에서 사람 연구자 둘은 23% 였고요.",
+     "situations": [
+      "said",
+      "cause"
+     ],
+     "hits": [
+      "밝혔"
+     ]
+    },
+    {
+     "say": "그런데 이 시연에도 회사가 직접 붙인 각주가 있습니다. 문제를 고른 것도, 채점 기준을 만든 것도 사람이었다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "주가"
+     ]
+    },
+    {
+     "say": "그리고 이 결과는 실제로 서비스하는 큰 모델에는 그대로 옮겨지지 않았다고 했습니다.",
+     "situations": [
+      "new-tool",
+      "cause"
+     ],
+     "hits": [
+      "모델"
+     ]
+    },
+    {
+     "say": "그래서 지금의 고리는 이렇게 생겼습니다. 여러 칸에 AI 가 들어갔지만, 고리의 출발점, 무엇을 풀지 고르는 칸에는 아직 사람 손이 남아 있습니다.",
+     "situations": [
+      "cause",
+      "conclusion"
+     ],
+     "hits": [
+      "그래서"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "map_causal",
+    "analogy"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "장면마다 새 도식 (같은 칸 위치 유지)",
+   "why": "화살표가 말과 함께 그어져야 '이어진다'가 보임"
+  },
+  {
+   "scene": 11,
+   "type": "quote",
+   "chapter": 3,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "회사 스스로 적은 이 한 줄이, 지금 고리의 모양을 가장 정확하게 보여 줍니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 12,
+   "type": "quote",
+   "chapter": 3,
+   "situation": "new-tool",
+   "situation_name": "새 도구·모델 소개",
+   "origin": "add",
+   "also": [],
+   "beats": [
+    {
+     "say": "회사 밖에서 본 결론도 같습니다. 미국 랜드연구소는 지난달 보고서에서, 여러 연구소가 새 코드 대부분을 AI 가 쓴다고 밝히고 있지만, 스스로 연구 의제를 정하거나 자기 후계 모델을 설계한다고 공개된 시스템은 아직 없다고 정리했습니다.",
+     "situations": [
+      "new-tool"
+     ],
+     "hits": [
+      "공개",
+      "모델"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "footage",
+    "kb",
+    "chat"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "홍보 문구 그대로",
+   "why": "'이거 뭔데 다들 난리야?' — 공식 화면으로"
+  },
+  {
+   "scene": 13,
+   "type": "chapter",
+   "chapter": 4,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "그런데 이 마지막 칸도 곧 넘어간다고 보는 사람들이 있습니다. 근거는 셋입니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 14,
+   "type": "bignum",
+   "chapter": 4,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "main",
+   "also": [
+    "compare"
+   ],
+   "beats": [
+    {
+     "say": "첫째, 연구 감각. 앤트로픽은 연구자가 갈림길에서 고른 선택과 AI 의 제안을 비교했습니다. AI 쪽이 낫다는 판정이 64% 였죠.",
+     "situations": [
+      "metric",
+      "compare"
+     ],
+     "hits": [
+      "64%"
+     ]
+    },
+    {
+     "say": "다만 사람이 고칠 여지가 있던 장면만 고른 시험이었고, 조건 없이 고른 비교에서는 20% 정도였습니다. 무엇을 할지 고르는 감각이 시험대에 오르기 시작했다는 것, 그리고 아직은 조건이 붙어 있다는 것. 둘 다 사실입니다.",
+     "situations": [
+      "metric",
+      "compare"
+     ],
+     "hits": [
+      "20%"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "chart",
+    "bignum",
+    "bars"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말하는 숫자가 그 순간 화면에 생긴다 (작업 기준, 09 §6 v27·v30)"
+  },
+  {
+   "scene": 15,
+   "type": "quote",
+   "chapter": 4,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "둘째, 스스로를 고치는 에이전트. 9월에 나온 한 논문에서는 AI 연구 에이전트가 자기 연구 코드를 고치고, 더 나은 판만 남기는 일을 8일 동안 사람 없이 되풀이해, 일곱 번 연달아 개선을 찾아냈습니다. 작은 규모이고 아직 동료 심사 전입니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 16,
+   "type": "quote",
+   "chapter": 4,
+   "situation": "open-scene",
+   "situation_name": "장면을 연다 (사람·장소·날짜)",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "셋째, 시간표. AI 연구자 인터뷰로 알려진 드와케시 파텔은 이번 주 글에서, 최고 수준의 AI 연구자를 완전히 자동화하는 해를 2028년쯤으로 본다고 했습니다.",
+     "situations": [
+      "open-scene"
+     ],
+     "hits": [
+      "2028년"
+     ]
+    },
+    {
+     "say": "그 말대로라면, 무엇을 풀지 고르는 사람도 그 안에 들어갑니다.",
+     "situations": [],
+     "hits": []
+    }
+   ],
+   "recommended_scenes": [
+    "kb",
+    "footage",
+    "stage"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "parallax-photo",
+     "status": "candidate"
+    },
+    {
+     "id": "draw-on",
+     "status": "have"
+    }
+   ],
+   "blocked": [],
+   "avoid": "글자 카드로 열기",
+   "why": "인트로 없이 첫 문장부터 장면 (README §2-1·§2-3)"
+  },
+  {
+   "scene": 17,
+   "type": "chapter",
+   "chapter": 5,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "반대편에는 이 이야기 자체를 의심하는 사람들이 있습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 18,
+   "type": "motionboard",
+   "chapter": 5,
+   "situation": "conclusion",
+   "situation_name": "꼭 기억할 한 문장 (결론·훅)",
+   "origin": "main",
+   "also": [
+    "said"
+   ],
+   "beats": [
+    {
+     "say": "파텔의 같은 글에는 반론도 모여 있습니다. AI 가 더 빨라지고 있다는 증거는 한 연구소의 짧은 측정에 기대고 있고, 결국 비싼 GPU 가 속도를 막을 거라는 지적입니다.",
+     "situations": [
+      "conclusion"
+     ],
+     "hits": [
+      "결국"
+     ]
+    },
+    {
+     "say": "랜드연구소도, AI 가 연구를 얼마나 빠르게 만들고 있는지는 아무도 체계적으로 보고하지 않아 알기 어렵다고 했습니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "그리고 정치 쪽의 비판. 백악관 AI 자문 데이비드 색스를 비롯한 비판자들은, AI 회사들의 위험 경고가 규제를 자기들에게 유리하게 짜려는 시도라고 말합니다. 경고하는 회사가 동시에 가장 앞서 달리는 회사라는 점을 짚는 거죠.",
+     "situations": [
+      "said"
+     ],
+     "hits": [
+      "말합니다"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "kinetic",
+    "card_type",
+    "recap"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "영상 내내 키네틱, 자막과 같은 문장 다시 쓰기",
+   "why": "강조는 아껴서 — 결론 한 번 (05 §0-1)"
+  },
+  {
+   "scene": 19,
+   "type": "chapter",
+   "chapter": 6,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "앤트로픽은 앞으로의 길을 셋으로 나눴습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 20,
+   "type": "motionboard",
+   "chapter": 6,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "추세가 멈추는 길, 사람이 방향을 정한 채 효율이 계속 쌓이는 길, 그리고 고리가 완전히 닫히는 길.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "회사는 지금 두 번째 길에 있다고 봤고, 세 번째가 가장 불확실하다고 했습니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "그리고 필요하면 최전선 AI 개발을 늦추거나 잠시 멈출 선택지가 세상에 있어야 한다고 덧붙였습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 21,
+   "type": "bignum",
+   "chapter": 6,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "이 이야기가 우리 일과 닿는 곳도 같은 칸입니다. 외부 측정에 따르면 AI 가 혼자 해내는 일의 길이는 넉 달마다 두 배로 늘고 있습니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "그렇다면 일하는 사람에게 오래 남는 칸도 고리의 첫 칸을 닮아 갈 겁니다. 무엇을 풀지 고르고, 무엇을 잘했다고 칠지 정하는 일.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 22,
+   "type": "motionboard",
+   "chapter": 6,
+   "situation": "new-tool",
+   "situation_name": "새 도구·모델 소개",
+   "origin": "add",
+   "also": [
+    "open-scene"
+   ],
+   "beats": [
+    {
+     "say": "그럼 이 영상의 해석은 언제 틀리게 될까요. 신호는 하나입니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "랜드연구소가 아직 없다고 한 것. 스스로 연구 의제를 정하는 시스템이 공개되는 날입니다.",
+     "situations": [
+      "new-tool"
+     ],
+     "hits": [
+      "공개"
+     ]
+    },
+    {
+     "say": "그날이 오면 고리의 마지막 칸이 넘어간 것이고, 그때부터 AI 뉴스는 지금과 전혀 다른 뉴스가 될 겁니다.",
+     "situations": [
+      "open-scene"
+     ],
+     "hits": [
+      "그날"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "footage",
+    "kb",
+    "chat"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "홍보 문구 그대로",
+   "why": "'이거 뭔데 다들 난리야?' — 공식 화면으로"
+  }
+ ],
+ "coverage": 0.55,
+ "fit": 0.17,
+ "counts": {
+  "new-tool": 5,
+  "metric": 2,
+  "point": 1,
+  "said": 1,
+  "cause": 1,
+  "open-scene": 1,
+  "conclusion": 1
+ },
+ "defaults": {
+  "real_screen": true,
+  "emphasis_budget": 1
+ }
+}

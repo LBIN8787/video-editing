@@ -173,6 +173,18 @@ def s_pricewalk(D, sc: dict, bt: list, dur: float):
             if "dim" in act:
                 for e in groups.get(act["dim"], []):
                     D.js.append(f'tl.to("#{e}",{{opacity:.25,duration:.4}},{t:.2f});')
+            if "pre" in act:   # 종가가 아닌 장 전 거래 값: 점선 + 속이 빈 점 (종가 선과 구별)
+                xa, ya = P(act["from"])
+                xb, yb2 = X(idx[act["pre"]]), Y(act["value"])
+                i = D._id()
+                D.svg.append(f'<path id="{i}" d="M{xa:.1f},{ya:.1f} L{xb:.1f},{yb2:.1f}" fill="none" stroke="{UP}" stroke-width="5" stroke-dasharray="10 9" opacity="0"/>')
+                D.js.append(f'tl.to("#{i}",{{opacity:1,duration:.5}},{t:.2f});')
+                j = D._id()
+                D.items.append(f'<div id="{j}" style="position:absolute;left:{xb - 13:.0f}px;top:{yb2 - 13:.0f}px;width:26px;height:26px;border-radius:50%;border:4px solid {UP};background:#14181B;transform:scale(0)"></div>')
+                D.js.append(f'tl.to("#{j}",{{scale:1,duration:.35,ease:"back.out(2.4)"}},{t + .3:.2f});')
+                k2 = _txt(D, act.get("lx", xb - 26), act.get("ly", yb2 - 74), H.escape(act.get("label", "")), 28, UP, font="heavy", anchor=act.get("anchor", "r"))
+                _show(D, k2, t + .4)
+                g += [i, j, k2]
             if "note" in act:
                 i = _txt(D, act.get("x", 1860), act.get("y", 250), H.escape(act["note"]), 28, MUTED, anchor="r")
                 _show(D, i, t, 0)
@@ -289,11 +301,11 @@ def s_standoff(D, sc: dict, bt: list, dur: float):
                 D.js.append(f'tl.to("#{clock}",{{rotation:360,duration:{act.get("hold", 4)},ease:"none"}},{t + .2:.2f});')
             if "chicken" in act:
                 rid = D._id()
-                D.items.append(f'<div id="{rid}" style="position:absolute;left:460px;top:880px;width:1000px;height:120px;opacity:0">'
+                D.items.append(f'<div id="{rid}" style="position:absolute;left:520px;top:836px;width:940px;height:100px;opacity:0">'
                                f'<div style="position:absolute;left:0;right:0;top:58px;height:4px;background:repeating-linear-gradient(90deg,#9AA6AE 0 30px,transparent 30px 54px)"></div>'
                                f'<div style="position:absolute;left:0;top:30px"><div id="{rid}a" style="font-size:58px"><span style="display:inline-block;transform:scaleX(-1)">🚗</span></div></div>'
                                f'<div style="position:absolute;right:0;top:30px"><div id="{rid}b" style="font-size:58px">🚗</div></div>'
-                               f'<div style="position:absolute;left:50%;top:-34px;transform:translateX(-50%);font-family:heavy;font-size:48px;color:{GOLD};white-space:nowrap">{H.escape(act["chicken"])}</div></div>')
+                               f'<div style="position:absolute;right:100%;margin-right:28px;top:30px;font-family:heavy;font-size:44px;color:{GOLD};white-space:nowrap">{H.escape(act["chicken"])}</div></div>')
                 D.js.append(f'tl.to("#{rid}",{{opacity:1,duration:.3}},{t:.2f});')
                 D.js.append(f'tl.to("#{rid}a",{{x:380,duration:1.6,ease:"power1.in"}},{t + .2:.2f});')
                 D.js.append(f'tl.to("#{rid}b",{{x:-380,duration:1.6,ease:"power1.in"}},{t + .2:.2f});')
@@ -346,7 +358,479 @@ def s_standoff(D, sc: dict, bt: list, dur: float):
                 D.sfx.append(("pop", t))
 
 
+# ── giveback ─────────────────────────────────────────────────────────────────
+def s_giveback(D, sc: dict, bt: list, dur: float):
+    """오른 만큼 중 돌려준 몫 — 회사마다 같은 축척(월요일에 오른 폭 = 100%)의 기둥.
+    초록 기둥 = 월요일에 오른 만큼, 위에서부터 내려오는 빨간 덮개 = 화요일에 돌려준 몫(100% 넘으면 금요일 선 아래로).
+    다음 장면이 같은 그림을 이어받을 때는 {"preset": "final"} 로 끝 상태에서 시작한다(E2 주인공 사물 유지)."""
+    from . import explain
+    sc = dict(sc)
+    sc.setdefault("theme", "dark")
+    explain._setup(D, sc, title=False)
+    _title(D, sc)
+    cos = sc["companies"]          # [{"id","label","pct"(돌려준 %)}]
+    n = len(cos)
+    xl, xr = 540, 1820
+    yb, yt = 720, 340              # 금요일 종가(0) · 월요일 종가(100%)
+    U = (yb - yt) / 100.0
+    cw = min(130, (xr - xl) / n * 0.55)
+    X = {c["id"]: xl + (xr - xl) * (j + .5) / n for j, c in enumerate(cos)}
+    ax = []
+    for y, lab in ((yt, "월요일 종가 — 오른 만큼 100%"), (yb, "금요일 종가 — 0")):
+        i = D._id()
+        D.svg.append(f'<line id="{i}" x1="70" y1="{y}" x2="{xr}" y2="{y}" stroke="{MUTED}" stroke-width="2" stroke-dasharray="10 9" opacity="0"/>')
+        j = _txt(D, 70, y - 38, lab, 24, MUTED)
+        ax += [i, j]
+    el = {}
+    for c in cos:
+        x = X[c["id"]]
+        g, r, pl, nm, kp = (D._id() for _ in range(5))
+        D.items.append(f'<div id="{g}" style="position:absolute;left:{x - cw / 2:.0f}px;top:{yt}px;width:{cw:.0f}px;height:{yb - yt}px;border-radius:6px 6px 0 0;'
+                       f'background:linear-gradient(180deg,#5FD394,#2F8F5C);transform-origin:50% 100%;transform:scaleY(0)"></div>')
+        rh = c["pct"] * U
+        D.items.append(f'<div id="{r}" style="position:absolute;left:{x - cw / 2 - 4:.0f}px;top:{yt}px;width:{cw + 8:.0f}px;height:{rh:.0f}px;border-radius:4px;'
+                       f'background:repeating-linear-gradient(135deg,rgba(240,106,90,.95) 0 14px,rgba(200,70,60,.95) 14px 28px);transform-origin:50% 0;transform:scaleY(0)"></div>')
+        D.items.append(f'<div id="{pl}" style="position:absolute;left:{x:.0f}px;top:{yt - 62}px;transform:translateX(-50%);font-family:heavy;font-size:40px;color:{DOWN};opacity:0">{c["pct"]:.0f}%</div>')
+        D.items.append(f'<div id="{nm}" style="position:absolute;left:{x:.0f}px;top:{max(yb, yt + rh) + 22:.0f}px;transform:translateX(-50%);font-family:heavy;font-size:32px;color:{CREAM};white-space:nowrap;opacity:0">{H.escape(c["label"])}</div>')
+        kh = max(0.0, 100 - c["pct"]) * U
+        D.items.append(f'<div id="{kp}" style="position:absolute;left:{x:.0f}px;top:{yb - kh / 2 - 34:.0f}px;transform:translateX(-50%);width:{cw:.0f}px;text-align:center;line-height:1.1;word-break:keep-all;font-family:heavy;font-size:30px;color:#0D1A12;opacity:0"></div>')
+        el[c["id"]] = dict(g=g, r=r, pl=pl, nm=nm, kp=kp)
+    ids = [c["id"] for c in cos]
+    kept: set[str] = set()
+
+    def rise(which, t, d=.6):
+        for j, k in enumerate(which):
+            D.js.append(f'tl.to("#{el[k]["g"]}",{{scaleY:1,duration:{d},ease:"power2.out"}},{t + j * .07:.2f});')
+            D.js.append(f'tl.to("#{el[k]["nm"]}",{{opacity:1,duration:.3}},{t + j * .07:.2f});')
+
+    def back(k, t, d=.7):
+        D.js.append(f'tl.to("#{el[k]["r"]}",{{scaleY:1,duration:{d},ease:"power2.in"}},{t:.2f});')
+        D.js.append(f'tl.to("#{el[k]["pl"]}",{{opacity:1,duration:.3}},{t + d * .8:.2f});')
+
+    for k_, (b, (t0, d)) in enumerate(zip(sc.get("beats", []), bt)):
+        seq = t0 + 0.2
+        for act in b.get("do") or []:
+            t = _when(sc, k_, b, t0, d, act.get("t"), seq)
+            seq = max(seq, t) + 0.6
+            if act.get("preset") == "final":   # 앞 장면 끝 모습 그대로 시작
+                for e in ax:
+                    D.js.append(f'tl.set("#{e}",{{opacity:1}},0);')
+                for k in ids:
+                    D.js.append(f'tl.set("#{el[k]["g"]}",{{scaleY:1}},0);tl.set("#{el[k]["r"]}",{{scaleY:1}},0);'
+                                f'tl.set("#{el[k]["pl"]}",{{opacity:1}},0);tl.set("#{el[k]["nm"]}",{{opacity:1}},0);')
+            if act.get("axes"):
+                for e in ax:
+                    D.js.append(f'tl.fromTo("#{e}",{{opacity:0}},{{opacity:1,duration:.4}},{t:.2f});')
+            if "rise" in act:
+                rise(ids if act["rise"] == "all" else act["rise"], t)
+                D.sfx.append(("whoosh-short", t))
+            if "back" in act:
+                for k in ([act["back"]] if isinstance(act["back"], str) else act["back"]):
+                    back(k, t)
+                    t += .25
+                D.sfx.append(("click-soft", t))
+            if "keep" in act:
+                k = act["keep"]
+                kept.add(k)
+                D.js.append(f'tl.set("#{el[k]["kp"]}",{{textContent:{H.escape(act.get("text", ""))!r}}},{t:.2f});')
+                D.js.append(f'tl.fromTo("#{el[k]["kp"]}",{{opacity:0,scale:.8}},{{opacity:1,scale:1,duration:.35,ease:"back.out(2)"}},{t:.2f});')
+                D.sfx.append(("pop", t))
+            if "focus" in act:
+                on = set(act["focus"])
+                for k in ids:
+                    op = 1 if k in on else .22
+                    for e in ("g", "r", "pl", "nm", "kp"):
+                        D.js.append(f'tl.to("#{el[k][e]}",{{opacity:{op},duration:.4}},{t:.2f});' if e != "kp" else
+                                    f'tl.to("#{el[k][e]}",{{autoAlpha:{op if op < 1 else 1},duration:.4}},{t:.2f});')
+            if "unfocus" in act:
+                for k in ids:
+                    for e in ("g", "r", "pl", "nm"):
+                        D.js.append(f'tl.to("#{el[k][e]}",{{opacity:1,duration:.4}},{t:.2f});')
+                    if k in kept:
+                        D.js.append(f'tl.to("#{el[k]["kp"]}",{{autoAlpha:1,duration:.4}},{t:.2f});')
+            if "group" in act:
+                ks = act["group"]
+                a, z = min(X[k] for k in ks) - cw / 2 - 10, max(X[k] for k in ks) + cw / 2 + 10
+                col = UP if act.get("tone") == "up" else DOWN if act.get("tone") == "down" else GOLD
+                i = D._id()
+                D.svg.append(f'<path id="{i}" d="M{a:.0f},{yt - 66} L{a:.0f},{yt - 84} L{z:.0f},{yt - 84} L{z:.0f},{yt - 66}" fill="none" stroke="{col}" stroke-width="4" '
+                             f'pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>')
+                D.js.append(f'tl.to("#{i}",{{strokeDashoffset:0,duration:.5}},{t:.2f});')
+                j = _txt(D, (a + z) / 2, yt - 136, H.escape(act["text"]), 34, col, font="heavy", anchor="c")
+                _show(D, j, t + .2)
+                D.sfx.append(("pop", t))
+            if "tag" in act:
+                i = _txt(D, 1860, 96, H.escape(act["tag"]), 28, "#1A1D20", font="heavy", anchor="r",
+                         extra=f"background:{GOLD};padding:6px 16px;border-radius:20px;")
+                _show(D, i, t, 0)
+
+
+# ── lifecost ─────────────────────────────────────────────────────────────────
+def s_lifecost(D, sc: dict, bt: list, dur: float):
+    """같은 매출 선 위에서 '몇 년으로 나누나'에 따라 해마다 비용 막대가 달라져 적자·흑자가 갈린다 (docs/68 E4·E5).
+    items: [{"id","label","cost"}], revenue: 숫자, unit: "억 달러".
+    do: {"revenue": true} 매출 선 · {"cost": id} 비용 막대 · {"gap": id} 매출 선과의 차이(적자 빨강·흑자 초록)
+        {"rate": 1.0, "label": "금리 +1%p → 해마다 +1억"} 모든 막대 위에 같은 조각을 얹고 차이를 다시 씀 · {"preset": "final"}"""
+    from . import explain
+    sc = dict(sc)
+    sc.setdefault("theme", "dark")
+    explain._setup(D, sc, title=False)
+    _title(D, sc)
+    items, rev, unit = sc["items"], float(sc["revenue"]), sc.get("unit", "억 달러")
+    top = max([rev] + [i["cost"] for i in items]) * 1.25
+    yb, yt = 840, 260
+    U = (yb - yt) / top
+    n = len(items)
+    X = {it["id"]: 560 + (1360 - 560) * j / max(1, n - 1) for j, it in enumerate(items)}
+    bw = 190
+    fmt = lambda v: f"{v:,.1f}".rstrip("0").rstrip(".")
+    D.svg.append(f'<line x1="300" y1="{yb}" x2="1650" y2="{yb}" stroke="#4A535A" stroke-width="2"/>')
+    ry = yb - rev * U
+    rl = D._id()
+    D.svg.append(f'<line id="{rl}" x1="300" y1="{ry:.0f}" x2="1650" y2="{ry:.0f}" stroke="{GOLD}" stroke-width="4" stroke-dasharray="14 10" opacity="0"/>')
+    rlab = _txt(D, 1650, ry - 40, H.escape(sc.get("revenue_label", f"해마다 매출 {fmt(rev)}{unit}")), 30, GOLD, font="heavy", anchor="r")   # 오른쪽 끝: 왼쪽 첫 막대(적자 막대는 선 위로 솟음)와 겹치지 않게
+    el = {}
+    for it in items:
+        x, c = X[it["id"]], it["cost"]
+        b, cl, nm, gp, gl, rt = (D._id() for _ in range(6))
+        D.items.append(f'<div id="{b}" style="position:absolute;left:{x - bw / 2:.0f}px;top:{yb - c * U:.0f}px;width:{bw}px;height:{c * U:.0f}px;'
+                       f'background:linear-gradient(180deg,#8FA3B4,#5E7183);border-radius:6px 6px 0 0;transform-origin:50% 100%;transform:scaleY(0)"></div>')
+        D.items.append(f'<div id="{cl}" style="position:absolute;left:{x:.0f}px;top:{yb - c * U + 14:.0f}px;transform:translateX(-50%);font-family:heavy;font-size:30px;color:#14181B;white-space:nowrap;opacity:0">비용 {fmt(c)}</div>')
+        D.items.append(f'<div id="{nm}" style="position:absolute;left:{x:.0f}px;top:{yb + 18}px;transform:translateX(-50%);font-family:heavy;font-size:34px;color:{CREAM};white-space:nowrap;opacity:0">{H.escape(it["label"])}</div>')
+        # 차이: 매출 선과 막대 꼭대기 사이를 칠함
+        D.items.append(f'<div id="{gp}" style="position:absolute;left:{x - bw / 2:.0f}px;width:{bw}px;opacity:0"></div>')
+        D.items.append(f'<div id="{gl}" style="position:absolute;left:{x + bw / 2 + 14:.0f}px;font-family:heavy;font-size:36px;white-space:nowrap;opacity:0"></div>')
+        D.items.append(f'<div id="{rt}" style="position:absolute;left:{x - bw / 2:.0f}px;width:{bw}px;opacity:0;background:repeating-linear-gradient(135deg,#F0A04B 0 10px,#C77A2E 10px 20px);border-radius:6px 6px 0 0"></div>')
+        el[it["id"]] = dict(b=b, cl=cl, nm=nm, gp=gp, gl=gl, rt=rt, cost=c)
+
+    def gap_js(k, cost, t, d=.5):
+        e = el[k]
+        top_y, bar_y = ry, yb - cost * U
+        y0, h = min(top_y, bar_y), abs(top_y - bar_y)
+        loss = cost > rev
+        col = DOWN if loss else UP
+        txt = (f"적자 {fmt(cost - rev)}{unit}" if loss else f"흑자 {fmt(rev - cost)}{unit}")
+        bg = "rgba(240,106,90,.55)" if loss else "rgba(79,203,134,.35)"
+        D.js.append(f'tl.set("#{e["gp"]}",{{top:{y0:.0f},height:{h:.0f},background:"{bg}",border:"3px dashed {col}"}},{t:.2f});')
+        D.js.append(f'tl.fromTo("#{e["gp"]}",{{opacity:0}},{{opacity:1,duration:{d}}},{t:.2f});')
+        D.js.append(f'tl.set("#{e["gl"]}",{{top:{y0 + h / 2 - 22:.0f},color:"{col}",textContent:{txt!r}}},{t:.2f});')
+        D.js.append(f'tl.fromTo("#{e["gl"]}",{{opacity:0,x:-8}},{{opacity:1,x:0,duration:.35}},{t + .1:.2f});')
+
+    for k_, (b, (t0, d)) in enumerate(zip(sc.get("beats", []), bt)):
+        seq = t0 + 0.2
+        for act in b.get("do") or []:
+            t = _when(sc, k_, b, t0, d, act.get("t"), seq)
+            seq = max(seq, t) + 0.6
+            if act.get("preset") == "final":
+                D.js.append(f'tl.set("#{rl}",{{opacity:1}},0);tl.set("#{rlab}",{{opacity:1}},0);')
+                for k, e in el.items():
+                    D.js.append(f'tl.set("#{e["b"]}",{{scaleY:1}},0);tl.set("#{e["cl"]}",{{opacity:1}},0);tl.set("#{e["nm"]}",{{opacity:1}},0);')
+                    gap_js(k, e["cost"], 0.0, 0.01)
+            if act.get("revenue"):
+                D.js.append(f'tl.to("#{rl}",{{opacity:1,duration:.5}},{t:.2f});')
+                _show(D, rlab, t + .1, 0)
+                D.sfx.append(("pencil", t))
+            if "cost" in act:
+                for k in ([act["cost"]] if isinstance(act["cost"], str) else act["cost"]):
+                    e = el[k]
+                    D.js.append(f'tl.to("#{e["b"]}",{{scaleY:1,duration:.6,ease:"power2.out"}},{t:.2f});')
+                    D.js.append(f'tl.to("#{e["cl"]}",{{opacity:1,duration:.3}},{t + .45:.2f});')
+                    D.js.append(f'tl.to("#{e["nm"]}",{{opacity:1,duration:.3}},{t:.2f});')
+                D.sfx.append(("whoosh-short", t))
+            if "gap" in act:
+                for k in ([act["gap"]] if isinstance(act["gap"], str) else act["gap"]):
+                    gap_js(k, el[k]["cost"], t)
+                    t += .3
+                D.sfx.append(("pop", t))
+            if "rate" in act:
+                r = float(act["rate"])
+                for j, (k, e) in enumerate(el.items()):
+                    nc = e["cost"] + r
+                    D.js.append(f'tl.set("#{e["rt"]}",{{top:{yb - nc * U:.0f},height:{r * U:.0f}}},{t:.2f});')
+                    D.js.append(f'tl.fromTo("#{e["rt"]}",{{opacity:0,y:-30}},{{opacity:1,y:0,duration:.45,ease:"bounce.out"}},{t + j * .15:.2f});')
+                    gap_js(k, nc, t + .6 + j * .15)
+                    e["cost"] = nc
+                if act.get("label"):
+                    i = _txt(D, 1650, act.get("y", 270), H.escape(act["label"]), 30, "#F0A04B", font="heavy", anchor="r")   # note(200)와 매출 글자(선 위) 사이 줄
+                    _show(D, i, t, 0)
+                D.sfx.append(("pop", t))
+            if "note" in act:
+                i = _txt(D, 1860, act.get("y", 200), H.escape(act["note"]), 28, MUTED, anchor="r")
+                _show(D, i, t, 0)
+
+
+# ── profitbar ────────────────────────────────────────────────────────────────
+def s_profitbar(D, sc: dict, bt: list, dur: float):
+    """매출 막대 = 비용(아래 회색) + 이익(위 초록). 값이 빠져 매출이 줄어도 비용은 그대로라 이익이 더 크게 준다 (E4·E5).
+    cols: [{"id","label","revenue","cost"}]; do: {"col": id} · {"profit": id} · {"note": ...} · {"dim": true} · {"mini": [[이름, 값, 글자], ...], "title": ...}"""
+    from . import explain
+    sc = dict(sc)
+    sc.setdefault("theme", "dark")
+    explain._setup(D, sc, title=False)
+    _title(D, sc)
+    cols, unit = sc["cols"], sc.get("unit", "")
+    top = max(c["revenue"] for c in cols) * 1.15
+    yb, yt = 860, 250
+    U = (yb - yt) / top
+    X = {c["id"]: 460 + 520 * j for j, c in enumerate(cols)}
+    bw = 240
+    el = {}
+    D.svg.append(f'<line x1="250" y1="{yb}" x2="1250" y2="{yb}" stroke="#4A535A" stroke-width="2"/>')
+    for c in cols:
+        x = X[c["id"]]
+        ch, ph, nm, cl, pl, rl = (D._id() for _ in range(6))
+        hc, hp = c["cost"] * U, (c["revenue"] - c["cost"]) * U
+        D.items.append(f'<div id="{ch}" style="position:absolute;left:{x - bw / 2}px;top:{yb - hc:.0f}px;width:{bw}px;height:{hc:.0f}px;background:#5E6B76;transform-origin:50% 100%;transform:scaleY(0)"></div>')
+        D.items.append(f'<div id="{ph}" style="position:absolute;left:{x - bw / 2}px;top:{yb - hc - hp:.0f}px;width:{bw}px;height:{hp:.0f}px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#5FD394,#2F8F5C);transform-origin:50% 100%;transform:scaleY(0)"></div>')
+        D.items.append(f'<div id="{cl}" style="position:absolute;left:{x:.0f}px;top:{yb - hc / 2 - 20:.0f}px;transform:translateX(-50%);font-family:heavy;font-size:30px;color:#E6EAED;white-space:nowrap;opacity:0">비용 {c["cost"]:g}{unit}</div>')
+        D.items.append(f'<div id="{pl}" style="position:absolute;left:{x:.0f}px;top:{yb - hc - hp / 2 - 24:.0f}px;transform:translateX(-50%);font-family:heavy;font-size:40px;color:#0D1A12;white-space:nowrap;opacity:0">이익 {c["revenue"] - c["cost"]:g}{unit}</div>')
+        D.items.append(f'<div id="{rl}" style="position:absolute;left:{x:.0f}px;top:{yb - hc - hp - 54:.0f}px;transform:translateX(-50%);font-family:heavy;font-size:32px;color:{GOLD};white-space:nowrap;opacity:0">매출 {c["revenue"]:g}{unit}</div>')
+        D.items.append(f'<div id="{nm}" style="position:absolute;left:{x:.0f}px;top:{yb + 18}px;transform:translateX(-50%);font-family:heavy;font-size:34px;color:{CREAM};white-space:nowrap;opacity:0">{H.escape(c["label"])}</div>')
+        el[c["id"]] = dict(ch=ch, ph=ph, cl=cl, pl=pl, rl=rl, nm=nm)
+    for k_, (b, (t0, d)) in enumerate(zip(sc.get("beats", []), bt)):
+        seq = t0 + 0.2
+        for act in b.get("do") or []:
+            t = _when(sc, k_, b, t0, d, act.get("t"), seq)
+            seq = max(seq, t) + 0.6
+            if "col" in act:
+                e = el[act["col"]]
+                D.js.append(f'tl.to("#{e["ch"]}",{{scaleY:1,duration:.5}},{t:.2f});tl.to("#{e["cl"]}",{{opacity:1,duration:.3}},{t + .4:.2f});')
+                D.js.append(f'tl.to("#{e["ph"]}",{{scaleY:1,duration:.5}},{t + .4:.2f});tl.to("#{e["rl"]}",{{opacity:1,duration:.3}},{t + .8:.2f});tl.to("#{e["nm"]}",{{opacity:1,duration:.3}},{t:.2f});')
+                D.sfx.append(("whoosh-short", t))
+            if "profit" in act:
+                e = el[act["profit"]]
+                D.js.append(f'tl.fromTo("#{e["pl"]}",{{opacity:0,scale:.8}},{{opacity:1,scale:1,duration:.35,ease:"back.out(2)"}},{t:.2f});')
+                D.sfx.append(("pop", t))
+            if act.get("dim"):
+                for e in el.values():
+                    for v in e.values():
+                        D.js.append(f'tl.to("#{v}",{{opacity:.18,duration:.4}},{t:.2f});')
+            if "note" in act:
+                i = _txt(D, act.get("x", 1300), act.get("y", 330), H.escape(act["note"]), act.get("size", 40), act.get("color", DOWN), font="heavy")
+                _show(D, i, t, 0)
+                D.sfx.append(("pop", t))
+            if "mini" in act:   # 오른쪽 작은 가로 막대 (같은 축척)
+                rows = act["mini"]
+                vmax = max(abs(r[1]) for r in rows) or 1
+                if act.get("title"):
+                    i = _txt(D, 1300, 470, H.escape(act["title"]), 28, MUTED)
+                    _show(D, i, t, 0)
+                for j, (nm_, v, txt) in enumerate(rows):
+                    y = 520 + j * 80
+                    a = _txt(D, 1300, y, H.escape(nm_), 30, CREAM, font="heavy")
+                    bar = D._id()
+                    w = 300 * abs(v) / vmax
+                    D.items.append(f'<div id="{bar}" style="position:absolute;left:1500px;top:{y + 4}px;height:36px;width:{w:.0f}px;background:{DOWN};border-radius:4px;transform-origin:0 50%;transform:scaleX(0)"></div>')
+                    vl = _txt(D, 1500 + w + 14, y, H.escape(txt), 30, DOWN, font="heavy")
+                    tt = t + j * .35
+                    _show(D, a, tt, 0)
+                    D.js.append(f'tl.to("#{bar}",{{scaleX:1,duration:.5}},{tt:.2f});')
+                    _show(D, vl, tt + .4, 0)
+                D.sfx.append(("pop", t))
+
+
+# ── pqbox ────────────────────────────────────────────────────────────────────
+def s_pqbox(D, sc: dict, bt: list, dur: float):
+    """매출 = 값 × 개수 를 넓이로: 가로 = 판 개수, 세로 = 값. 두 길의 넓이를 나란히 (E1·E5).
+    boxes: [{"id","label","qty","price","text","x"}], cap: 만들 수 있는 양
+    do: {"box": id} · {"spare": id, "text": ...} 만들 수 있지만 안 만든 몫(점선) · {"area": id} 넓이 칠하고 매출 글자 · {"headline": ...}"""
+    from . import explain
+    sc = dict(sc)
+    sc.setdefault("theme", "dark")
+    explain._setup(D, sc, title=False)
+    _title(D, sc)
+    boxes = sc["boxes"]
+    yb = 860
+    PX = sc.get("px_per_qty", 6.0)
+    PY = sc.get("px_per_price", 4.6)
+    cap = sc.get("cap", max(b["qty"] for b in boxes))
+    el = {}
+    for b in boxes:
+        x0 = b["x"]
+        w, h = b["qty"] * PX, b["price"] * PY
+        r, a, lb, nm, sp, ql = (D._id() for _ in range(6))
+        D.items.append(f'<div id="{r}" style="position:absolute;left:{x0}px;top:{yb - h:.0f}px;width:{w:.0f}px;height:{h:.0f}px;border:4px solid {CREAM};border-radius:4px;transform-origin:0 100%;transform:scale(0)"></div>')
+        D.items.append(f'<div id="{a}" style="position:absolute;left:{x0 + 4}px;top:{yb - h + 4:.0f}px;width:{w - 8:.0f}px;height:{h - 8:.0f}px;background:{b.get("fill", "rgba(240,190,90,.45)")};opacity:0"></div>')
+        ly = yb - h / 2 - 30 if h > 120 else yb - h - 70
+        D.items.append(f'<div id="{lb}" style="position:absolute;left:{x0 + w / 2:.0f}px;top:{ly:.0f}px;transform:translateX(-50%);font-family:heavy;font-size:46px;color:{GOLD};white-space:nowrap;opacity:0">{H.escape(b["text"])}</div>')
+        D.items.append(f'<div id="{nm}" style="position:absolute;left:{x0}px;top:{yb + 18}px;font-family:heavy;font-size:32px;color:{CREAM};white-space:nowrap;opacity:0">{H.escape(b["label"])}</div>')
+        D.items.append(f'<div id="{ql}" style="position:absolute;left:{x0 - 14}px;top:{yb - h - 2:.0f}px;transform:translateX(-100%);font-family:sans-x;font-size:26px;color:{MUTED};white-space:nowrap;opacity:0">값 {b["price"]:g}원</div>'
+                       f'<div id="{ql}q" style="position:absolute;left:{x0 + w - 4:.0f}px;top:{yb + 60}px;transform:translateX(-100%);font-family:sans-x;font-size:26px;color:{MUTED};white-space:nowrap;opacity:0">{b["qty"]:g}개</div>')
+        sw = (cap - b["qty"]) * PX
+        D.items.append(f'<div id="{sp}" style="position:absolute;left:{x0 + w:.0f}px;top:{yb - h:.0f}px;width:{max(sw, 0):.0f}px;height:{h:.0f}px;border:3px dashed {MUTED};border-left:none;opacity:0"></div>')
+        el[b["id"]] = dict(r=r, a=a, lb=lb, nm=nm, sp=sp, ql=ql, h=h, x=x0, w=w)
+    for k_, (bb, (t0, d)) in enumerate(zip(sc.get("beats", []), bt)):
+        seq = t0 + 0.2
+        for act in bb.get("do") or []:
+            t = _when(sc, k_, bb, t0, d, act.get("t"), seq)
+            seq = max(seq, t) + 0.6
+            if "box" in act:
+                e = el[act["box"]]
+                D.js.append(f'tl.to("#{e["r"]}",{{scale:1,duration:.6,ease:"power2.out"}},{t:.2f});tl.to("#{e["nm"]}",{{opacity:1,duration:.3}},{t:.2f});')
+                D.js.append(f'tl.to("#{e["ql"]}",{{opacity:1,duration:.3}},{t + .4:.2f});tl.to("#{e["ql"]}q",{{opacity:1,duration:.3}},{t + .4:.2f});')
+                D.sfx.append(("pencil", t))
+            if "spare" in act:
+                e = el[act["spare"]]
+                D.js.append(f'tl.to("#{e["sp"]}",{{opacity:1,duration:.4}},{t:.2f});')
+                if act.get("text"):
+                    i = _txt(D, e["x"] + e["w"] + 10, 860 - e["h"] - 44, H.escape(act["text"]), 26, MUTED)
+                    _show(D, i, t + .2, 0)
+            if "area" in act:
+                e = el[act["area"]]
+                D.js.append(f'tl.to("#{e["a"]}",{{opacity:1,duration:.5}},{t:.2f});')
+                D.js.append(f'tl.fromTo("#{e["lb"]}",{{opacity:0,scale:.8}},{{opacity:1,scale:1,duration:.35,ease:"back.out(2)"}},{t + .3:.2f});')
+                D.sfx.append(("pop", t))
+            if "headline" in act:
+                i = _txt(D, 960, act.get("y", 180), H.escape(act["headline"]), 46, act.get("color", GOLD), font="heavy", anchor="c")
+                _show(D, i, t)
+                D.sfx.append(("pop", t))
+
+
+# ── samend ───────────────────────────────────────────────────────────────────
+def _jar(D, jid, cx, n, top=380, w=240, h=300, cookie=True):
+    """유리병 하나 + 쿠키 n개(아래부터 쌓임). id: {jid}, 쿠키 {jid}k0.."""
+    pos = [(-62, 250), (0, 252), (62, 250), (-34, 202), (30, 204), (-66, 156), (0, 154), (64, 158), (-30, 108), (34, 110)]
+    ck = "".join(
+        f'<div id="{jid}k{i}" style="position:absolute;left:{w / 2 + x - 27:.0f}px;top:{y - 27}px;width:54px;height:54px;border-radius:50%;'
+        f'background:radial-gradient(circle at 35% 30%,#E2A867,#B97636);box-shadow:inset -4px -5px 0 rgba(0,0,0,.18)">'
+        f'<i style="position:absolute;left:16px;top:18px;width:9px;height:9px;border-radius:50%;background:#3A2414"></i>'
+        f'<i style="position:absolute;left:34px;top:28px;width:8px;height:8px;border-radius:50%;background:#3A2414"></i>'
+        f'<i style="position:absolute;left:22px;top:38px;width:7px;height:7px;border-radius:50%;background:#3A2414"></i></div>'
+        for i, (x, y) in enumerate(pos[:n]))
+    return (f'<div id="{jid}" style="position:absolute;left:{cx - w / 2:.0f}px;top:{top}px;width:{w}px;height:{h}px;opacity:0">'
+            f'<div style="position:absolute;left:{w * .22:.0f}px;top:-26px;width:{w * .56:.0f}px;height:30px;border-radius:6px;background:#8E99A1"></div>'
+            f'<div style="position:absolute;left:0;top:0;width:{w}px;height:{h}px;border-radius:38px 38px 30px 30px;'
+            f'border:4px solid rgba(214,226,232,.75);background:rgba(190,215,225,.08)"></div>{ck}</div>')
+
+
+def s_samend(D, sc: dict, bt: list, dur: float):
+    """같은 끝, 다른 과정 (docs/69 시각 먼저 시범). 끝 상태가 같은 대상 여럿을 나란히 놓고, 한 대상만 '줄어드는 과정'을 눈앞에서 겪게 한 뒤
+    결과값(값표)을 같은 축척으로 붙여 과정이 결과를 바꿨음을 보인다 (E1 실물·E2 같은 병·E5 나란히).
+    jars: {"a": {"label": "처음부터 10개", "n": 10, "x": 520, "price": 46.2}, "c": {"label": "10개 → 2개", "n": 10, "to": 2, "price": 71.5}}
+    do: {"phone": [5, 3]} 가운데 휴대전화 숫자가 줄어듦 · {"phone_side": true} 왼쪽으로 물러남 · {"jar": "a"} 병 등장
+        {"swap": "c"} 병째 바뀜(10개 병이 나가고 2개 병이 들어옴) · {"button": "c"} 숨은 버튼 깜빡임
+        {"price": "a"} 값표 (c 는 숫자가 올라감) · {"equal": ["a","b"]} 두 값표 사이 ≈ · {"taste": true} 맛 막대 셋이 같은 높이
+        {"focus": "c"} 나머지 흐리게 · {"link": "c"} 휴대전화 ↔ 병 c 를 잇는 선과 같은 모양 표시 · {"note": "..."} 아래 작은 주석"""
+    from . import explain
+    sc = dict(sc)
+    sc.setdefault("theme", "dark")
+    explain._setup(D, sc, title=False)
+    _title(D, sc)
+    jars = sc["jars"]
+    top, jh = 360, 300
+    for k, j in jars.items():
+        D.items.append(_jar(D, f"j{k}", j["x"], j["n"], top=top, h=jh))
+        D.items.append(f'<div id="j{k}lb" style="position:absolute;left:{j["x"]}px;top:{top + jh + 22}px;transform:translateX(-50%);font-family:heavy;'
+                       f'font-size:34px;color:{CREAM};white-space:nowrap;opacity:0">{H.escape(j["label"])}</div>')
+    unit = sc.get("unit", "¢")
+    # 휴대전화 (지우의 화면): 가운데에서 시작
+    D.items.append(f'<div id="ph" style="position:absolute;left:820px;top:250px;width:280px;height:500px;border-radius:40px;background:#14181B;'
+                   f'border:6px solid #3C454C;opacity:0;transform-origin:50% 50%">'
+                   f'<div style="position:absolute;left:30px;top:70px;width:220px;height:150px;border-radius:14px;background:#2A3238"></div>'
+                   f'<div style="position:absolute;left:0;right:0;top:250px;text-align:center;font-family:heavy;font-size:46px;color:{DOWN}">'
+                   f'<span id="phn">5</span>개 남음</div>'
+                   f'<div style="position:absolute;left:40px;right:40px;top:360px;height:64px;border-radius:32px;background:{DOWN};'
+                   f'color:#fff;font-family:heavy;font-size:30px;line-height:64px;text-align:center">결제하기</div></div>')
+    extra = []
+    for k_, (b, (t0, d)) in enumerate(zip(sc.get("beats", []), bt)):
+        seq = t0 + 0.2
+        for act in b.get("do") or []:
+            t = _when(sc, k_, b, t0, d, act.get("t"), seq)
+            seq = max(seq, t) + 0.6
+            if "phone" in act:
+                a0, a1 = act["phone"]
+                D.js.append(f'tl.fromTo("#ph",{{opacity:0,y:30}},{{opacity:1,y:0,duration:.45,ease:"power2.out"}},{t:.2f});')
+                D.js.append(f'tl.set("#phn",{{textContent:"{a0}"}},{t:.2f});')
+                for s in range(1, a0 - a1 + 1):
+                    D.js.append(f'tl.set("#phn",{{textContent:"{a0 - s}"}},{t + .9 + s * .55:.2f});')
+                    D.js.append(f'tl.fromTo("#phn",{{scale:1.5}},{{scale:1,duration:.3}},{t + .9 + s * .55:.2f});')
+                    D.sfx.append(("click-soft", t + .9 + s * .55))
+            if act.get("phone_side"):
+                D.js.append(f'tl.to("#ph",{{left:70,top:300,scale:.62,duration:.8,ease:"power2.inOut"}},{t:.2f});')
+            if "jar" in act:
+                for j, k in enumerate(act["jar"] if isinstance(act["jar"], list) else [act["jar"]]):
+                    D.js.append(f'tl.fromTo("#j{k}",{{opacity:0,y:40}},{{opacity:1,y:0,duration:.5,ease:"back.out(1.4)"}},{t + j * .35:.2f});')
+                    D.js.append(f'tl.fromTo("#j{k}lb",{{opacity:0,y:12}},{{opacity:1,y:0,duration:.35}},{t + .25 + j * .35:.2f});')
+                    D.sfx.append(("pop", t + j * .35))
+            if "swap" in act:
+                k = act["swap"]
+                j = jars[k]
+                D.items.append(_jar(D, f"j{k}n", j["x"], j["to"], top=top, h=jh))
+                D.items.append(f'<div id="j{k}gh" style="position:absolute;left:{j["x"] - 130}px;top:{top - 10}px;width:260px;height:{jh + 20}px;'
+                               f'border:3px dashed rgba(201,208,213,.45);border-radius:40px;opacity:0"></div>')
+                D.js.append(f'tl.to("#j{k}",{{x:900,opacity:0,duration:.9,ease:"power2.in"}},{t:.2f});')
+                D.js.append(f'tl.to("#j{k}gh",{{opacity:1,duration:.3}},{t + .5:.2f});')
+                D.js.append(f'tl.fromTo("#j{k}n",{{opacity:0,x:900}},{{opacity:1,x:0,duration:.9,ease:"power2.out"}},{t + 1.0:.2f});')
+                D.js.append(f'tl.to("#j{k}gh",{{opacity:0,duration:.4}},{t + 2.2:.2f});')
+                D.sfx.append(("whoosh", t))
+                D.sfx.append(("whoosh", t + 1.0))
+            if "button" in act:
+                j = jars[act["button"]]
+                bid = D._id()
+                D.items.append(f'<div id="{bid}" style="position:absolute;left:{j["x"] + 150}px;top:{top + jh - 40}px;opacity:0">'
+                               f'<div style="width:40px;height:40px;border-radius:50%;background:{DOWN};box-shadow:0 0 0 8px rgba(240,106,90,.25)"></div>'
+                               f'<div style="position:absolute;left:54px;top:4px;font-family:sans-x;font-size:26px;color:{MUTED};white-space:nowrap">숨은 버튼</div></div>')
+                D.js.append(f'tl.to("#{bid}",{{opacity:1,duration:.3}},{t:.2f});')
+                D.js.append(f'tl.fromTo("#{bid} div",{{scale:1}},{{scale:.8,duration:.18,yoyo:true,repeat:3}},{t + .3:.2f});')
+                D.js.append(f'tl.to("#{bid}",{{opacity:0,duration:.4}},{t + 3.2:.2f});')
+                D.sfx.append(("click-soft", t + .3))
+            if "price" in act:
+                for j_, k in enumerate(act["price"] if isinstance(act["price"], list) else [act["price"]]):
+                    j = jars[k]
+                    pid = f"pr{k}"
+                    big = j.get("big")
+                    D.items.append(f'<div id="{pid}" style="position:absolute;left:{j["x"]}px;top:{top - 120}px;transform:translateX(-50%);'
+                                   f'padding:8px 26px;border-radius:12px;background:{GOLD if big else CREAM};color:#1A1D20;font-family:heavy;'
+                                   f'font-size:{60 if big else 46}px;white-space:nowrap;opacity:0"><span id="{pid}v">{j["price"]}</span>{unit}</div>')
+                    tt = t + j_ * .45
+                    D.js.append(f'tl.fromTo("#{pid}",{{opacity:0,y:-30}},{{opacity:1,y:0,duration:.4,ease:"back.out(1.6)"}},{tt:.2f});')
+                    if j.get("count_from") is not None:
+                        D.js.append(f'tl.fromTo("#{pid}v",{{textContent:{j["count_from"]}}},{{textContent:{j["price"]},duration:1.4,ease:"power2.out",'
+                                    f'snap:{{textContent:0.1}},onUpdate:function(){{var e=document.getElementById("{pid}v");e.textContent=(+e.textContent).toFixed(1)}}}},{tt + .1:.2f});')
+                    D.sfx.append(("pop", tt))
+            if "equal" in act:
+                a, c = (jars[x] for x in act["equal"])
+                i = _txt(D, (a["x"] + c["x"]) / 2, top - 112, "≈", 64, GOLD, font="heavy", anchor="c")
+                _show(D, i, t, 0)
+            if act.get("taste"):
+                tl_ = _txt(D, 150, top + jh + 96, "맛", 30, MUTED, font="heavy")
+                _show(D, tl_, t, 0)
+                for j_, (k, j) in enumerate(jars.items()):
+                    bid = D._id()
+                    D.items.append(f'<div id="{bid}" style="position:absolute;left:{j["x"] - 90}px;top:{top + jh + 100}px;width:180px;height:26px;'
+                                   f'border-radius:6px;background:{LINE};transform-origin:0 50%;transform:scaleX(0)"></div>')
+                    D.js.append(f'tl.to("#{bid}",{{scaleX:1,duration:.5,ease:"power2.out"}},{t + .1 + j_ * .15:.2f});')
+                lid = D._id()
+                xs = [j["x"] for j in jars.values()]
+                D.svg.append(f'<path id="{lid}" d="M{min(xs) - 120},{top + jh + 113} L{max(xs) + 120},{top + jh + 113}" stroke="{GOLD}" '
+                             f'stroke-width="3" stroke-dasharray="10 10" fill="none" opacity="0"/>')
+                D.js.append(f'tl.to("#{lid}",{{opacity:.9,duration:.4}},{t + .7:.2f});')
+            if "focus" in act:
+                for k in jars:
+                    if k != act["focus"]:
+                        for e in (f"j{k}", f"j{k}lb", f"pr{k}"):
+                            D.js.append(f'tl.to("#{e}",{{opacity:.28,duration:.5}},{t:.2f});')
+            if "link" in act:
+                j = jars[act["link"]]
+                lid = D._id()
+                D.svg.append(f'<path id="{lid}" d="M180,{top + jh + 20} C420,{top + jh + 200} {j["x"] - 300},{top + jh + 200} {j["x"]},{top + jh + 64}" stroke="{GOLD}" stroke-width="5" '
+                             f'fill="none" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>')
+                D.js.append(f'tl.to("#ph",{{opacity:1,duration:.3}},{t:.2f});')
+                D.js.append(f'tl.to("#{lid}",{{strokeDashoffset:0,duration:.8,ease:"power2.inOut"}},{t:.2f});')
+                D.js.append(f'tl.fromTo("#ph",{{scale:.62}},{{scale:.7,duration:.3,yoyo:true,repeat:1}},{t + .8:.2f});')
+                D.js.append(f'tl.fromTo("#j{act["link"]}lb",{{scale:1}},{{scale:1.15,color:"{GOLD}",duration:.3,yoyo:true,repeat:1}},{t + .8:.2f});')
+                extra.append(lid)
+            if "note" in act:
+                i = _txt(D, 1840, 100, H.escape(act["note"]), 22, MUTED, anchor="r")
+                _show(D, i, t, 0)
+
+
 def register():
     from . import hybrid, explain
     hybrid.RENDER["pricewalk"] = explain._themed(s_pricewalk)
     hybrid.RENDER["standoff"] = explain._themed(s_standoff)
+    hybrid.RENDER["giveback"] = explain._themed(s_giveback)
+    hybrid.RENDER["lifecost"] = explain._themed(s_lifecost)
+    hybrid.RENDER["profitbar"] = explain._themed(s_profitbar)
+    hybrid.RENDER["pqbox"] = explain._themed(s_pqbox)
+    hybrid.RENDER["samend"] = explain._themed(s_samend)
