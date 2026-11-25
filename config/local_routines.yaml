@@ -7,10 +7,16 @@
 jobs:
   market-daily:
     # 2026-11-25 사용자: 일일 브리핑 영상 중단 → 매일 아침은 주제·사실·인사이트를 쌓기만, 분석은 쌓이면 (manual/09 §0-00)
-    title: "이어 읽는 시장 — 매일 아침 주제 쌓기 (영상 없음, 일요일 주간 종합만 영상)"
+    # 2026-11-26 사용자: "인사이트 수집기를 바탕으로 오늘 아침 작업으로 분석영상 제작해주세요. 업로드는 바로하지 말고 예약으로 하세요 · 자동화 작업 말하는겁니다"
+    #   → 아침: 모으기(+인사이트 수집) → 판단 → 제작 → 검수·예약 업로드 (심층 감시와 같은 단계 지시문)
+    title: "이어 읽는 시장 — 아침: 주제·인사이트 쌓기 → 인사이트 분석 영상 1편 (예약 업로드)"
     time: "08:00"               # 전날 미국 장 마감 뒤 실적·어닝콜까지 보려고 08:00 시작
     prompt: config/local_routines/market-daily.md
-    timeout_min: 240             # 평일은 30~60분(조사만), 일요일 주간 종합은 렌더까지
+    steps:
+      - {name: collect, prompt: config/local_routines/market-daily.md,     timeout_min: 120}   # 일요일은 주간 종합 영상까지 만들고 ROUTINE_STOP
+      - {name: judge,   prompt: config/local_routines/deep-watch-judge.md,  model: claude-fable-5-2, timeout_min: 40}
+      - {name: make,    prompt: config/local_routines/deep-watch-make.md,   timeout_min: 200}
+      - {name: review,  prompt: config/local_routines/deep-watch-review.md, model: claude-fable-5-2, timeout_min: 90}
   curiosity:
     title: "한겹 더 보면 — 호기심 채널 진행"
     time: "07:00"               # 진행 중인 편을 다음 사용자 결정(D1~D4)까지 밀고, 없으면 새 주제 카드 (주 1편)
