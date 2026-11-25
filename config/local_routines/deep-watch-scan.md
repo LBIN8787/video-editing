@@ -8,6 +8,7 @@
 1. `python -m ytflow radar` → `inbox/radar/<오늘>.md` (원본형·사건형·국내 해설 경쟁). 오늘 결과가 2시간 안이면 다시 돌리지 않고 읽습니다. 봇 확인이 뜨면 우회하지 않고 그 사람을 건너뜁니다.
 2. **지난 72시간 안에** 공개된 거물(투자 대가·CEO·당국자, `config/ceo_watch.yaml` + `config/radar.yaml` extra) 인터뷰·팟캐스트·연설·주주 서한·13F.
 3. 큰 날: 레이더의 사건형 판단(반도체·나스닥·S&P·코스피·코스닥 마지막 거래일 ±3%) — 있으면 그날 이름 있는 사람들의 공개 발언 단서(보도 제목)를 5~10개.
+4-0. **쌓임 (2026-11-25, manual/09 §0-00):** `inbox/research/deep-topics.md` 의 `## 쌓인 단서` 에서 주제(#)마다 쌓인 날 수를 세어, 3일 안팎 쌓였고 아직 만들지 않은 주제를 `쌓임형` 후보로 올립니다(무엇: 쌓인 날짜들과 한 줄씩).
 4. 그 밖의 단서: 오늘·어제 `projects/<날짜>-market-daily/01_research/daily_brief.md` ④ 심층 후보·⑥-1 CEO 소식, `inbox/research/deep-topics.md`·`source-backlog.md`, `inbox/newsletters/<오늘·어제>.md`, `inbox/save/`, `inbox/signals/log.md`.
 5. 걸러 내기: 최근 14일 `projects/*-market-deep-*`·`*-market-call-*`, `inbox/radar/tracker.json` 의 made/skip, `$YTFLOW_DRIVE/_local/deep-watch-log.md` 끝 30줄(이미 판단한 것) — 같은 원본·같은 질문은 '새 변화'가 없으면 뺍니다.
 
@@ -15,7 +16,7 @@
 - **새 후보가 하나도 없으면:** 작업 폴더 맨 위에 빈 파일 `ROUTINE_STOP`, `LOCAL_RESULT.md` 첫 줄 `심층 감시 <HH:MM>: 새 소재 없음`. `$YTFLOW_DRIVE/_local/deep-watch-log.md` 에 `<YYYY-MM-DD HH:MM> | 없음 | - | 훑기(Sonnet)` 한 줄. radar 결과가 바뀌었으면 그것만 커밋해 main 에 push(`심층 감시 <HH:MM>: 레이더 갱신`). 끝.
 - **있으면:** 작업 폴더 맨 위 `DEEP_SCAN.md` (git 에 넣지 않음) — 후보마다 한 덩어리, 강한 순서로 최대 5개:
   ```
-  ## <사람 또는 사건> — 사건형|원본형|어닝콜|기술·사업
+  ## <사람 또는 사건 또는 주제 #> — 쌓임형|사건형|원본형|어닝콜|기술·사업
   - 무엇: 누가 언제 어디서 무엇을 말·행동했나 (원본 공개 날짜·한국 시각, 몇 시간·며칠 전)
   - 원본: 공식 영상·녹취록·공시 주소 (없으면 '원본 미확인')
   - 따옴표 후보: 제목에 쓸 만한 그 사람의 한 마디 (보도 제목 그대로면 '보도 인용 — 원문 확인 필요')
