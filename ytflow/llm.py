@@ -83,8 +83,20 @@ def _check(msg) -> None:
 
 
 # ---------------------------------------------------------------- claude-cli 백엔드
+def _desktop_claude() -> str | None:
+    """PATH 에 claude 가 없을 때: 데스크톱 앱이 깐 claude.exe (scripts/local_routine.py find_claude 와 같은 자리, 2026-11-26)."""
+    import glob
+    import os
+    base = os.environ.get("LOCALAPPDATA", "")
+    if not base:
+        return None
+    c = glob.glob(os.path.join(base, "Claude-Data", "*", "claude-code", "*", "*", "claude.exe")) +         glob.glob(os.path.join(base, "AnthropicClaude", "**", "claude.exe"), recursive=True)
+    c.sort(key=os.path.getmtime, reverse=True)
+    return c[0] if c else None
+
+
 def _cli(system: str, user: str, schema: dict | None = None, tools: list[str] | None = None) -> dict:
-    exe = shutil.which("claude")
+    exe = shutil.which("claude") or _desktop_claude()
     if not exe:
         raise SystemExit("claude CLI 가 없습니다. `npm install -g @anthropic-ai/claude-code` 후 `claude` 로 로그인하세요.")
     cfg = _cfg()
@@ -94,7 +106,8 @@ def _cli(system: str, user: str, schema: dict | None = None, tools: list[str] | 
         cmd += ["--allowedTools", ",".join(tools)]
     if schema is not None:
         cmd += ["--json-schema", json.dumps(schema, ensure_ascii=False)]
-    proc = subprocess.run(cmd, input=user, capture_output=True, text=True, timeout=cfg.get("cli_timeout", 1800))
+    proc = subprocess.run(cmd, input=user, capture_output=True, text=True, encoding="utf-8", errors="replace",   # 윈도 기본(cp949)이면 — 같은 글자에서 깨짐 (2026-11-26)
+                          timeout=cfg.get("cli_timeout", 1800))
     try:
         out = json.loads(proc.stdout)
     except json.JSONDecodeError:
@@ -154,7 +167,7 @@ def _codex(system: str, user: str, schema: dict | None = None, web: bool = False
             cmd += ["-i", str(im)]
         cmd.append("-")  # 프롬프트는 stdin 으로 (codex exec 에는 별도 system 인자가 없어 앞에 붙인다)
         prompt = f"# 지시\n{system}\n\n# 입력\n{user}"
-        proc = subprocess.run(cmd, input=prompt, capture_output=True, text=True, timeout=cfg.get("cli_timeout", 1800))
+        proc = subprocess.run(cmd, input=prompt, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=cfg.get("cli_timeout", 1800))
         if proc.returncode != 0 or not out.exists():
             raise RuntimeError(f"codex exec 실패 (exit {proc.returncode}): {proc.stderr[-1500:]}")
         return out.read_text(encoding="utf-8").strip()

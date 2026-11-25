@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-26T01:49:27",
- "source_hash": "04359256ea79",
+ "generated": "2026-11-26T02:19:32",
+ "source_hash": "0353a2cef1c4",
  "audit": {
   "date": "2026-11-25T14:34",
   "counts": {
@@ -807,35 +807,35 @@
   "fixed": []
  },
  "stats": {
-  "manual_version": 137,
-  "versions": 137,
+  "manual_version": 138,
+  "versions": 138,
   "reviews": 60,
   "rejects": 33,
   "passes": 27,
   "pending": 0,
   "rules": 57,
   "checks": 90,
-  "sections": 225,
+  "sections": 226,
   "must": 30,
   "auto": 41,
-  "intents": 391,
+  "intents": 394,
   "misaligned": 1,
   "intents_reviewed": 7,
   "conflicts": 3,
   "code": 85,
   "terms": 140,
   "bans": 246,
-  "feedback": 304,
+  "feedback": 305,
   "topics": 4,
   "episodes": 59,
   "main_situations": 17,
   "tiers": {
    "principle": 61,
    "standard": 197,
-   "style": 33,
-   "trial": 12
+   "style": 34,
+   "trial": 11
   },
-  "overfit": 19,
+  "overfit": 18,
   "principle_bans": 55
  },
  "pending": [],
@@ -925,6 +925,12 @@
      "theme": "background",
      "pol": "-",
      "text": "7. **같은 화풍, 다른 연출.** 종이 배경의 인용문·지도·통계·챕터가 같은 모양으로 되풀이되지 않게, 자료의 역할에 따라 연출을 고릅니다(신문 원문은 해당 부분을 따라 읽기, 확산은 이동 경로가 변하는 지도, 두 도시 비교는 조치 날짜와 사망률을 같은 시간축에). 한 화풍을 편 전체에 쓰는 것은 괜찮습니다 — '한 스타일 40% 초과 실패' 같은 비율"
+    },
+    {
+     "section": "sec:09§5-00",
+     "theme": "background",
+     "pol": "-",
+     "text": "- 넘치면: 결론만 던지고 근거가 얇으면 '유명인 말 전달' 영상이 된다 — 근거와 틀릴 경우가 결론보다 길어야 한다. 이름값에 기대 확인 안 된 말을 결론으로 쓰지 않는다(원문 확인, §3-5). 모자라면: 앞에서 배경·개념을 길게 깔면 '그래서 결론이 뭐야?'에 답하지 못해 떠난다."
     },
     {
      "section": "sec:09§7",
@@ -3448,13 +3454,49 @@
   },
   {
    "section": "sec:09§5-00",
-   "text": "1. 여는 장면 — 그 사람의 목소리로: 날짜·장소 한 줄 + 원본 발언(bite) → 바로 그 말과 어긋나거나 받치는 사실 하나(말 vs 행동·장부·숫자)를 맞대어 질문을 세움. 숫자·지수로 열지 않는다(§5 여는 장면).",
+   "text": "누가 말하나: 결론을 말하는 사람은 이름·직함·왜 믿을 만한지(이력·자리·실적) 한 줄을 결론과 함께 화면에(§3-4 공신력). 우리가 결론을 지어내지 않는다 — 결론은 그 사람의 말, 우리는 그 말을 풀고 따진다.",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:abddcd11",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": true,
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
+  },
+  {
+   "section": "sec:09§5-00",
+   "text": "넘치면: 결론만 던지고 근거가 얇으면 '유명인 말 전달' 영상이 된다 — 근거와 틀릴 경우가 결론보다 길어야 한다. 이름값에 기대 확인 안 된 말을 결론으로 쓰지 않는다(원문 확인, §3-5). 모자라면: 앞에서 배경·개념을 길게 깔면 '그래서 결론이 뭐야?'에 답하지 못해 떠난다.",
+   "themes": [
+    "background"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:472d4549",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
+   "section": "sec:09§5-00",
+   "text": "1. 여는 장면 — 그 사람의 목소리로, 결론부터: 날짜·장소 한 줄 + 그 사람이 앞으로에 대해 내린 결론(원본 발언 bite, 누구인지·왜 믿을 만한지 한 줄) → 한 줄 정리 → 그 결론과 어긋나거나 받치는 사실 하나로 \"왜 그렇게 볼까?\"를 세움. 숫자·지수로 열지 않는다(§5 여는 장면).",
    "themes": [
     "sound"
    ],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:40040bc2",
+   "tier_key": "ban:e2943589",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
    "overfit": false,
@@ -3474,42 +3516,6 @@
    "absolute": false,
    "must": false,
    "tier_key": "ban:1db317ed",
-   "tier_auto": "principle",
-   "why": "사실·법·권리·안전에 관한 말",
-   "overfit": false,
-   "single": true,
-   "tier": "principle",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "영구 원칙"
-  },
-  {
-   "section": "sec:09§5-00",
-   "text": "어떻게: 첫 5~10초에 썸네일이 약속한 것 — 당사자의 원본 발언(bite), 갈등, 반전 — 을 바로 보여 주고, 숫자는 그 말을 받치거나 뒤집는 다음 장면에서. \"○월 ○일 장 마감 기준\"·지수 나열로 시작하지 않는다. 원본이 없으면 갈등이 보이는 숫자 하나(맞대기)로.",
-   "themes": [],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:08d809f2",
-   "tier_auto": "trial",
-   "why": "스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨",
-   "overfit": true,
-   "single": true,
-   "tier": "trial",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "실험 기록"
-  },
-  {
-   "section": "sec:09§5-00",
-   "text": "넘치면: 자극만 있고 영상이 약속을 지키지 않으면 시청 지속이 더 떨어진다(14 §8). 소문·사생활로 열지 않는다(README §3). 모자라면: 앞 30초가 배경 설명이 된다.",
-   "themes": [
-    "background"
-   ],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:21f93f85",
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
    "overfit": false,
@@ -4170,7 +4176,7 @@
    "tier_label": "영구 원칙"
   },
   {
-   "section": "sec:09§h563",
+   "section": "sec:09§h575",
    "text": "ElevenLabs 는 직접 API 로만 (MCP 생성 금지, 2026-11-22 사용자): 같은 문장(33자, Teo·eleven_v4)을 실측: 직접 API 15 크레딧(응답 헤더 Character-Cost) vs MCP creative_generate_speech 1테이크 33 크레딧·기본 2테이크 66 크레딧(estimate_only) — MCP 가 1테이크도 2.2배, 기본값이면 4.4배 (AGENTS 목소리 규칙, docs/08-voice.md).",
    "themes": [
     "sound"
@@ -4189,7 +4195,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:09§h563",
+   "section": "sec:09§h575",
    "text": "ElevenLabs 를 쓸 수 없는 날은 edge 초안으로 만들되 올리지 않는다 (v43, §2-1 — 공개본은 Teo). 크레딧이 모자라면 그날 편을 미루거나 voice-import 로 Teo 테이크를 만든다.",
    "themes": [],
    "absolute": false,
@@ -5159,7 +5165,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h341",
+   "section": "sec:feedback§h342",
    "text": "2026-11-14 · v20 기각 — “중간중간 너무 난잡함. 목표·시청자 욕망을 먼저 정의하지 않고 만듦. 대본을 소제목처럼 글로 쓰거나 사진·그림을 붙여 넣기만 함 — 대본에 따른 애니메이션이 아님. 각 연출의 의도가 불분명”",
    "themes": [
     "variety",
@@ -5180,7 +5186,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h341",
+   "section": "sec:feedback§h342",
    "text": "2026-11-21 · 영상 검토 — “대본의 피드백입니다 — (의지력 편 v2 검토) 방향 통과, 2025 효과 배수 비교 금지·대조 조건과 주 지표 설명·생활 조언을 근거 범위 안으로·4~7장 연구 나열 대신 증거 추적·8장 전환 문장”",
    "themes": [
     "motion",
@@ -5200,7 +5206,7 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "section": "sec:feedback§h443",
+   "section": "sec:feedback§h444",
    "text": "2026-11-19 · 방향·기준 요청 — “대본 단계에 \"호기심 대본은 설명·지식 문장 30% 이하\"라는 기준 이런 기준은 또 빼주세요 너무 과적합입니다. / \"설명은 이야기 속에 엮는다\"는 원리 이런식으로 원리주의적으로 가지 방법 자체를 고정하지 말아주세요”",
    "themes": [
     "script",
@@ -5220,7 +5226,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h501",
+   "section": "sec:feedback§h502",
    "text": "2026-11-09 · v3 기각 — “강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)”",
    "themes": [
     "emphasis",
@@ -5899,7 +5905,7 @@
    "key": "09",
    "file": "manual/09-market-daily.md",
    "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13 · v36 인사이트·영상 소스 · v42 기술 분석·CEO 소식 2026-11-17)",
-   "lines": 583,
+   "lines": 595,
    "versions": [
     19,
     24,
@@ -6064,7 +6070,7 @@
    "key": "feedback",
    "file": "manual/feedback-by-repo.md",
    "label": "내 피드백 — 레포별 (자동 생성: `python -m ytflow manual-graph`)",
-   "lines": 512,
+   "lines": 513,
    "versions": [
     83,
     84,
@@ -8044,6 +8050,20 @@
    "last_version": null
   },
   {
+   "id": "sec:09§3-0-3",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "3-0-3",
+   "level": 3,
+   "label": "인사이트 수집 — 사람이 아니라 '판단'을 넓게 (작업 기준, 2026-11-26 사용자: \"다른 사람들의 인사이트 유명 기술자 실리콘밸리의 기술 등등 … 기술 인사이트 시장 인사이트 등 말이죠 사람을 감시하기보다는 좀 더 폭넓게 다루고싶어요\", docs/70)",
+   "title": "3-0-3. 인사이트 수집 — 사람이 아니라 '판단'을 넓게 (작업 기준, 2026-11-26 사용자: \"다른 사람들의 인사이트 유명 기술자 실리콘밸리의 기술 등등 … 기술 인사이트 시장 인사이트 등 말이죠 사람을 감시하기보다는 좀 더 폭넓게 다루고싶어요\", docs/70)",
+   "line": 211,
+   "end": 216,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
    "id": "sec:09§3-1",
    "kind": "section",
    "doc": "doc:09",
@@ -8051,8 +8071,8 @@
    "level": 3,
    "label": "원인 종류별 어디서 확인하나",
    "title": "3-1. 원인 종류별 어디서 확인하나",
-   "line": 211,
-   "end": 222,
+   "line": 217,
+   "end": 228,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8065,8 +8085,8 @@
    "level": 3,
    "label": "팩트시트 쓰는 법 (`01_research/factsheet.md`)",
    "title": "3-2. 팩트시트 쓰는 법 (`01_research/factsheet.md`)",
-   "line": 223,
-   "end": 228,
+   "line": 229,
+   "end": 234,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8079,8 +8099,8 @@
    "level": 3,
    "label": "데이터 함정 (실제로 겪은 것)",
    "title": "3-3. 데이터 함정 (실제로 겪은 것)",
-   "line": 229,
-   "end": 237,
+   "line": 235,
+   "end": 243,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8093,8 +8113,8 @@
    "level": 3,
    "label": "사람·매체의 인사이트 — 사실과 나눠서, 넉넉하게",
    "title": "3-4. 사람·매체의 인사이트 — 사실과 나눠서, 넉넉하게 (v36, 2026-11-17 사용자 요청)",
-   "line": 238,
-   "end": 275,
+   "line": 244,
+   "end": 281,
    "tag_version": 36,
    "versions": [
     36,
@@ -8118,8 +8138,8 @@
    "level": 3,
    "label": "매체·인물의 인터뷰·방송을 영상 소스로",
    "title": "3-5. 매체·인물의 인터뷰·방송을 영상 소스로 (v36, 2026-11-17 사용자 요청)",
-   "line": 276,
-   "end": 312,
+   "line": 282,
+   "end": 318,
    "tag_version": 36,
    "versions": [
     36
@@ -8139,8 +8159,8 @@
    "level": 3,
    "label": "시간대 착각 방지 (영구 원칙, 2026-11-22 사용자: \"특히나 시장같은 경우는 시간대를 착각 할 수도 있는데 이런 경우가 없도록 하세요\")",
    "title": "3-6. 시간대 착각 방지 (영구 원칙, 2026-11-22 사용자: \"특히나 시장같은 경우는 시간대를 착각 할 수도 있는데 이런 경우가 없도록 하세요\")",
-   "line": 313,
-   "end": 322,
+   "line": 319,
+   "end": 328,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8153,8 +8173,8 @@
    "level": 2,
    "label": "대본 — 브리핑 (시간 기준 없음 — 아래 구성요소를 모두 채움, README §2-4)",
    "title": "4. 대본 — 브리핑 (시간 기준 없음 — 아래 구성요소를 모두 채움, README §2-4)",
-   "line": 323,
-   "end": 340,
+   "line": 329,
+   "end": 346,
    "tag_version": null,
    "versions": [
     34
@@ -8184,8 +8204,8 @@
    "level": 2,
    "label": "대본 — 심층 (시간 기준 없음 — 구성요소를 모두 채우고 길이는 자료·인사이트의 양이 정함)",
    "title": "5. 대본 — 심층 (시간 기준 없음 — 구성요소를 모두 채우고 길이는 자료·인사이트의 양이 정함)",
-   "line": 341,
-   "end": 341,
+   "line": 347,
+   "end": 347,
    "tag_version": null,
    "versions": [
     26,
@@ -8201,8 +8221,8 @@
    "level": 3,
    "label": "분석 영상의 기본 구성 = 드러켄밀러 편 틀 — 인터뷰 원본 + 그 사람의 인사이트를 해설 (작업 기준, 2026-11-26 사용자: \"앞으로 영상의 구성을 드러켄밀러 편처럼 구성해주세요 편집스타일은 이번 보강을 곁들이고 분석영상 자체의 구성을 말하는 것 입니다. 인터뷰와 그 영상소스 그리고 그 사람의 인사이트를 분석하거 해설하는 느낌으로 말이죠\")",
    "title": "5-00. 분석 영상의 기본 구성 = 드러켄밀러 편 틀 — 인터뷰 원본 + 그 사람의 인사이트를 해설 (작업 기준, 2026-11-26 사용자: \"앞으로 영상의 구성을 드러켄밀러 편처럼 구성해주세요 편집스타일은 이번 보강을 곁들이고 분석영상 자체의 구성을 말하는 것 입니다. 인터뷰와 그 영상소스 그리고 그 사람의 인사이트를 분석하거 해설하는 느낌으로 말이죠\")",
-   "line": 342,
-   "end": 375,
+   "line": 348,
+   "end": 387,
    "tag_version": null,
    "versions": [
     136,
@@ -8211,8 +8231,7 @@
    "last_version": 137,
    "terms": [
     "term:bite",
-    "term:quote",
-    "term:tech-split-screen"
+    "term:quote"
    ]
   },
   {
@@ -8223,8 +8242,8 @@
    "level": 3,
    "label": "원리에서 결론이 따라 나오게 — 외우게 하지 않는다 (작업 기준, 2026-11-22 사용자)",
    "title": "5-0. 원리에서 결론이 따라 나오게 — 외우게 하지 않는다 (작업 기준, 2026-11-22 사용자)",
-   "line": 376,
-   "end": 384,
+   "line": 388,
+   "end": 396,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -8240,8 +8259,8 @@
    "level": 3,
    "label": "만약에 검수 — 빠진 변수·다른 경우·숨은 가정 (작업 기준, 2026-11-22 사용자: \"제가 매번 만략에 만약에 등 경우의수나 다른 변수요인 등을 찾듯이 시장 대본을 구성 할 때는 이점을 항상 고려하고 검수해주세요. 특히나 심층분석은 이게 중요합니다. 사소한 디테일이나 빼먹은 요인 if가정 말이죠\")",
    "title": "5-0-1. 만약에 검수 — 빠진 변수·다른 경우·숨은 가정 (작업 기준, 2026-11-22 사용자: \"제가 매번 만략에 만약에 등 경우의수나 다른 변수요인 등을 찾듯이 시장 대본을 구성 할 때는 이점을 항상 고려하고 검수해주세요. 특히나 심층분석은 이게 중요합니다. 사소한 디테일이나 빼먹은 요인 if가정 말이죠\")",
-   "line": 385,
-   "end": 400,
+   "line": 397,
+   "end": 412,
    "tag_version": null,
    "versions": [
     96
@@ -8256,8 +8275,8 @@
    "level": 3,
    "label": "큰 주제는 1부(개념)·2부(인사이트)로 (작업 기준, 2026-11-22 사용자: \"2부로 만들어도 되니까 이 메모리호황을 보는 인사이트와 그 인터뷰내용과 명확한 논리근거 그 반대근거 등등 여러 인사이트로 확장해주세요\" · \"즉 지금은 약간 개념설명이고 이 개념을 바탕으로 진짜 인사이트와 각각의 근거까지 이어가자 입니다\" · \"이런 심층분석은 이 주제에 대한 다른 사람들의 인사이트 여러 인사이트로 볼 수 있어야 합니다. 그리고 가능한 이 발언이 담긴 영상소스를 넣어달라 했구요\")",
    "title": "5-0-2. 큰 주제는 1부(개념)·2부(인사이트)로 (작업 기준, 2026-11-22 사용자: \"2부로 만들어도 되니까 이 메모리호황을 보는 인사이트와 그 인터뷰내용과 명확한 논리근거 그 반대근거 등등 여러 인사이트로 확장해주세요\" · \"즉 지금은 약간 개념설명이고 이 개념을 바탕으로 진짜 인사이트와 각각의 근거까지 이어가자 입니다\" · \"이런 심층분석은 이 주제에 대한 다른 사람들의 인사이트 여러 인사이트로 볼 수 있어야 합니다. 그리고 가능한 이 발언이 담긴 영상소스를 넣어달라 했구요\")",
-   "line": 401,
-   "end": 409,
+   "line": 413,
+   "end": 421,
    "tag_version": null,
    "versions": [
     114
@@ -8272,8 +8291,8 @@
    "level": 3,
    "label": "나열하지 말고 풀어서 — 설명은 움직이는 장면으로",
    "title": "5-1. 나열하지 말고 풀어서 — 설명은 움직이는 장면으로 (v63, 2026-11-20)",
-   "line": 410,
-   "end": 438,
+   "line": 422,
+   "end": 450,
    "tag_version": 63,
    "versions": [
     63
@@ -8304,8 +8323,8 @@
    "level": 2,
    "label": "화면 문법 (시장 카테고리 개성, `05 §0-7`)",
    "title": "6. 화면 문법 (시장 카테고리 개성, `05 §0-7`)",
-   "line": 439,
-   "end": 462,
+   "line": 451,
+   "end": 474,
    "tag_version": null,
    "versions": [
     27,
@@ -8340,8 +8359,8 @@
    "level": 2,
    "label": "제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
    "title": "7. 제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
-   "line": 463,
-   "end": 472,
+   "line": 475,
+   "end": 484,
    "tag_version": null,
    "versions": [
     27
@@ -8361,8 +8380,8 @@
    "level": 3,
    "label": "썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
    "title": "7-1. 썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
-   "line": 473,
-   "end": 508,
+   "line": 485,
+   "end": 520,
    "tag_version": null,
    "versions": [
     51,
@@ -8384,8 +8403,8 @@
    "level": 2,
    "label": "렌더 전 점검",
    "title": "8. 렌더 전 점검",
-   "line": 509,
-   "end": 511,
+   "line": 521,
+   "end": 523,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8398,8 +8417,8 @@
    "level": 2,
    "label": "렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
    "title": "9. 렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
-   "line": 512,
-   "end": 519,
+   "line": 524,
+   "end": 531,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8412,8 +8431,8 @@
    "level": 3,
    "label": "업로드 전 종합 검수 — 통과해야 올린다 (작업 기준, 2026-11-21 사용자: \"업로드 하기 전 항상 글씨겹침 그래픽끼리 겹침 자막밀림 자막과 나레이션 싱크 화면과 자막이 일치하는지 등 종합적으로 검수하세요 이는 메뉴얼에 반영하세요\")",
    "title": "9-1. 업로드 전 종합 검수 — 통과해야 올린다 (작업 기준, 2026-11-21 사용자: \"업로드 하기 전 항상 글씨겹침 그래픽끼리 겹침 자막밀림 자막과 나레이션 싱크 화면과 자막이 일치하는지 등 종합적으로 검수하세요 이는 메뉴얼에 반영하세요\")",
-   "line": 520,
-   "end": 527,
+   "line": 532,
+   "end": 539,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8426,8 +8445,8 @@
    "level": 2,
    "label": "업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
    "title": "10. 업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
-   "line": 528,
-   "end": 540,
+   "line": 540,
+   "end": 552,
    "tag_version": null,
    "versions": [
     34
@@ -8442,8 +8461,8 @@
    "level": 2,
    "label": "기록·되돌아보기",
    "title": "11. 기록·되돌아보기",
-   "line": 541,
-   "end": 544,
+   "line": 553,
+   "end": 556,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8456,8 +8475,8 @@
    "level": 2,
    "label": "예외 대응",
    "title": "12. 예외 대응",
-   "line": 545,
-   "end": 554,
+   "line": 557,
+   "end": 566,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8470,8 +8489,8 @@
    "level": 2,
    "label": "법·정책",
    "title": "13. 법·정책",
-   "line": 555,
-   "end": 562,
+   "line": 567,
+   "end": 574,
    "tag_version": null,
    "versions": [
     34
@@ -8479,43 +8498,43 @@
    "last_version": 34
   },
   {
-   "id": "sec:09§h563",
+   "id": "sec:09§h575",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h563",
+   "num": "h575",
    "level": 2,
    "label": "목소리 (2026-11-13 결정)",
    "title": "목소리 (2026-11-13 결정)",
-   "line": 563,
-   "end": 571,
+   "line": 575,
+   "end": 583,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h572",
+   "id": "sec:09§h584",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h572",
+   "num": "h584",
    "level": 2,
    "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
    "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
-   "line": 572,
-   "end": 577,
+   "line": 584,
+   "end": 589,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h578",
+   "id": "sec:09§h590",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h578",
+   "num": "h590",
    "level": 2,
    "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
    "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
-   "line": 578,
-   "end": 583,
+   "line": 590,
+   "end": 595,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9820,35 +9839,35 @@
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
    "line": 263,
-   "end": 338,
+   "end": 339,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h339",
+   "id": "sec:feedback§h340",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h339",
+   "num": "h340",
    "level": 2,
    "label": "호기심 — `topics/curiosity`",
    "title": "호기심 — `topics/curiosity`",
-   "line": 339,
-   "end": 340,
+   "line": 340,
+   "end": 341,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h341",
+   "id": "sec:feedback§h342",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h341",
+   "num": "h342",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 341,
-   "end": 442,
+   "line": 342,
+   "end": 443,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9859,15 +9878,15 @@
    ]
   },
   {
-   "id": "sec:feedback§h443",
+   "id": "sec:feedback§h444",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h443",
+   "num": "h444",
    "level": 3,
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
-   "line": 443,
-   "end": 465,
+   "line": 444,
+   "end": 466,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9876,29 +9895,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h466",
+   "id": "sec:feedback§h467",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h466",
+   "num": "h467",
    "level": 2,
    "label": "시사 — `topics/issues`",
    "title": "시사 — `topics/issues`",
-   "line": 466,
-   "end": 467,
+   "line": 467,
+   "end": 468,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h468",
+   "id": "sec:feedback§h469",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h468",
+   "num": "h469",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 468,
-   "end": 498,
+   "line": 469,
+   "end": 499,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9908,29 +9927,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h499",
+   "id": "sec:feedback§h500",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h499",
+   "num": "h500",
    "level": 2,
    "label": "AI — `topics/ai`",
    "title": "AI — `topics/ai`",
-   "line": 499,
-   "end": 500,
+   "line": 500,
+   "end": 501,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h501",
+   "id": "sec:feedback§h502",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h501",
+   "num": "h502",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 501,
-   "end": 512,
+   "line": 502,
+   "end": 513,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -16982,6 +17001,18 @@
    }
   },
   {
+   "id": "ver:138",
+   "kind": "version",
+   "v": 138,
+   "date": "2026-11-26",
+   "label": "v138",
+   "summary": "분석 영상: 결론 먼저(믿을 만한 사람의 입으로) → 왜·근거, 인사이트 수집(§3-0-3), 공개 전 승인(§2-1 자동 공개 끝)",
+   "applied": [],
+   "themes": [
+    "depth"
+   ]
+  },
+  {
    "id": "rev:1",
    "kind": "review",
    "date": "2026-11-09",
@@ -23788,7 +23819,7 @@
    "quote": "자동으로 예약 공개로 해줘",
    "label": "자동으로 예약 공개로 해줘",
    "versions": [
-    43
+    39
    ],
    "date": "2026-11-17",
    "sources": [
@@ -23812,19 +23843,7 @@
    "note": "",
    "readings": [
     {
-     "ref": "ver:43",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:09",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    },
-    {
-     "ref": "doc:11",
+     "ref": "ver:39",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -27569,7 +27588,7 @@
      "kind": "review"
     },
     {
-     "ref": "sec:feedback§h341",
+     "ref": "sec:feedback§h342",
      "kind": "manual"
     }
    ],
@@ -27605,7 +27624,7 @@
      "by": ""
     },
     {
-     "ref": "sec:feedback§h341",
+     "ref": "sec:feedback§h342",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -34938,18 +34957,11 @@
     {
      "ref": "fb:240",
      "kind": "feedback"
-    },
-    {
-     "ref": "sec:09§5-00",
-     "kind": "manual"
     }
    ],
-   "variants": [
-    "우리 영상 시작하자마자 처음에 딱 보여주는 연출이 아마 개미털기인거같아 인터뷰영상은 처음 시작하자마자 인터뷰 화면도 보이고 색다른데 우리는 원래 시작하자마자 숫자부터 크게 보여주니까 이탈률이 높을거같은데 … 마치 웹소설 자극적인 제목과 자극적인 초반부 전개처럼 말이야"
-   ],
+   "variants": [],
    "member_ids": [
-    "intent:94db84ec",
-    "intent:08af1b7b"
+    "intent:94db84ec"
    ],
    "themes": [
     "intent"
@@ -34958,14 +34970,7 @@
    "meaning": "",
    "not_meant": [],
    "note": "",
-   "readings": [
-    {
-     "ref": "sec:09§5-00",
-     "status": "unreviewed",
-     "note": "",
-     "by": ""
-    }
-   ],
+   "readings": [],
    "status": "unreviewed",
    "annotated": false
   },
@@ -35968,9 +35973,19 @@
    "kind": "intent",
    "quote": "업로드하기 전 예약아로 제게 썸네일과 제목 통괴를 받아주세요",
    "label": "업로드하기 전 예약아로 제게 썸네일과 제목 통괴를 받아주세요",
-   "versions": [],
+   "versions": [
+    39
+   ],
    "date": "2026-11-25",
    "sources": [
+    {
+     "ref": "sec:09§2-00",
+     "kind": "manual"
+    },
+    {
+     "ref": "sec:09§2-1",
+     "kind": "manual"
+    },
     {
      "ref": "fb:277",
      "kind": "feedback"
@@ -35985,7 +36000,26 @@
    "meaning": "",
    "not_meant": [],
    "note": "",
-   "readings": [],
+   "readings": [
+    {
+     "ref": "ver:39",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§2-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§2-00",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -36695,6 +36729,43 @@
    "annotated": false
   },
   {
+   "id": "intent:339f3fcf",
+   "kind": "intent",
+   "quote": "결국 사람들이 인사이트를 원하는 이유도 결과를 빠르게 알고 즉 그래서 결론이 뭐야? (이 과정에서 유명한사람이나 대단한사람 신뢰도 있는 사람이 결론을 말해주면 더 믿음이 감) 빠르게 정보습득 > 이후 그 이유가 뭐지? 근거가 뭐지? 식의 자연스러운 몰입이라고 생각합니다. 우리 채널도 이를 반영해주세요",
+   "label": "결국 사람들이 인사이트를 원하는 이유도 결과를 빠르게 알고 즉 그래서 결론이 뭐야? (이 과정에서 유명한사람",
+   "versions": [],
+   "date": "2026-11-26",
+   "sources": [
+    {
+     "ref": "sec:09§5-00",
+     "kind": "manual"
+    },
+    {
+     "ref": "fb:305",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:339f3fcf"
+   ],
+   "themes": [],
+   "ann_key": "intent:339f3fcf",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§5-00",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:36bfaa9d",
    "kind": "intent",
    "quote": "제가 디전부터 수정수정 요청했는데 이 수정요청한것들 다 어디에 있는지도 모르겠어요 세션도 흩어지고 작어브랜치도 갈린거같아서 제가 요청한것들이 사라진거같아요",
@@ -36848,6 +36919,39 @@
    "annotated": false
   },
   {
+   "id": "intent:7c2e1970",
+   "kind": "intent",
+   "quote": "다른 사람들의 인사이트 유명 기술자 실리콘밸리의 기술 등등 … 기술 인사이트 시장 인사이트 등 말이죠 사람을 감시하기보다는 좀 더 폭넓게 다루고싶어요",
+   "label": "다른 사람들의 인사이트 유명 기술자 실리콘밸리의 기술 등등 … 기술 인사이트 시장 인사이트 등 말이죠 사람을",
+   "versions": [],
+   "date": "2026-11-26",
+   "sources": [
+    {
+     "ref": "sec:09§3-0-3",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:7c2e1970"
+   ],
+   "themes": [],
+   "ann_key": "intent:7c2e1970",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§3-0-3",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:87380da4",
    "kind": "intent",
    "quote": "사람들은 앞으로 어떻게 될지에 대한 인사이트를 궁금해하지 속보 정보 하나하나를 깊게 알고싶은게 아닌 것 같습니다 … 연준영상 자체에 초점을 두지 않는다 … 젠슨이 복귀한다 자체를 알고싶어한다가 아닙니다. 그 정보가 어떤 결과 인사이트로 이어지는지 직관적으로 알고싶은거죠 … 핵심은 정보를 다루기가 아닌 인사이트 앞으로 어떻게 될 것인가를 대신 편히 알려주는 인사이트 입니다. 그리고 그 근거를 설명해주는거죠",
@@ -36929,6 +37033,39 @@
    "not_meant": [],
    "note": "",
    "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:bb46c26f",
+   "kind": "intent",
+   "quote": "저녁이 아니라 아침으로",
+   "label": "저녁이 아니라 아침으로",
+   "versions": [],
+   "date": "2026-11-26",
+   "sources": [
+    {
+     "ref": "sec:09§2-00",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:bb46c26f"
+   ],
+   "themes": [],
+   "ann_key": "intent:bb46c26f",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§2-00",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -40149,7 +40286,7 @@
     "sec:10§1",
     "sec:10§h9",
     "sec:10§3",
-    "sec:feedback§h443",
+    "sec:feedback§h444",
     "ver:21",
     "ver:34",
     "code:ytflow/stages/hybrid.py:1746",
@@ -42516,7 +42653,6 @@
     "sec:05§0-2",
     "sec:09§3-4",
     "sec:09§3-5",
-    "sec:09§5-00",
     "sec:10§h81",
     "sec:10§4",
     "sec:11§2-5",
@@ -42812,7 +42948,7 @@
     "sec:12§0-1",
     "sec:13§4-1",
     "sec:13§7",
-    "sec:feedback§h341",
+    "sec:feedback§h342",
     "ver:92",
     "rule:G4:1",
     "check:172",
@@ -42961,9 +43097,9 @@
     "sec:09§6",
     "sec:10§h136",
     "sec:feedback§h164",
-    "sec:feedback§h341",
-    "sec:feedback§h468",
-    "sec:feedback§h501",
+    "sec:feedback§h342",
+    "sec:feedback§h469",
+    "sec:feedback§h502",
     "ver:10",
     "ver:30",
     "ver:31",
@@ -43223,7 +43359,7 @@
     "sec:04§0-4",
     "sec:09§5-1",
     "sec:09§6",
-    "sec:09§h578",
+    "sec:09§h590",
     "sec:11§2-4",
     "sec:README§2-5",
     "sec:README§3-1",
@@ -43387,9 +43523,9 @@
     "sec:10§4",
     "sec:12§0-1",
     "sec:feedback§h164",
-    "sec:feedback§h341",
-    "sec:feedback§h468",
-    "sec:feedback§h501",
+    "sec:feedback§h342",
+    "sec:feedback§h469",
+    "sec:feedback§h502",
     "ver:10",
     "ver:12",
     "rev:11",
@@ -43550,7 +43686,7 @@
     "sec:06§G6",
     "sec:08§4",
     "sec:09§6",
-    "sec:09§h578",
+    "sec:09§h590",
     "sec:10§4",
     "sec:feedback§h164",
     "sec:README§0",
@@ -52434,6 +52570,34 @@
    "repo_label": "시장",
    "intent": "intent:384da3ec",
    "tier_key": "fb:384da3ec",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:305",
+   "kind": "feedback",
+   "date": "2026-11-26",
+   "quote": "결국 사람들이 인사이트를 원하는 이유도 결과를 빠르게 알고 즉 그래서 결론이 뭐야? (이 과정에서 유명한사람이나 대단한사람 신뢰도 있는 사람이 결론을 말해주면 더 믿음이 감) 빠르게 정보습득 > 이후 그 이유가 뭐지? 근거가 뭐지? 식의 자연스러운 몰입이라고 생각합니다. 우리 채널도 이를 반영해주세요",
+   "label": "결국 사람들이 인사이트를 원하는 이유도 결과를 빠르게 알고 즉 그래서 결론이 뭐야? (이 과정에서 유명한사람",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "해석: 분석 영상은 결론 먼저(믿을 만한 사람의 입으로, 첫 30초 안) → '왜?' → 이유·근거 → 틀릴 경우 → 결론으로 닫기. 장마다도 결론 한 줄 먼저. 제목·썸네일 = 이름 + 그 사람의 결론. 반영: manual/09 §5-00 '결론 먼저'",
+   "pending": false,
+   "themes": [],
+   "scope": "standard",
+   "repo": "market",
+   "repo_label": "시장",
+   "intent": "intent:339f3fcf",
+   "tier_key": "fb:339f3fcf",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -84377,6 +84541,11 @@
   },
   {
    "s": "doc:09",
+   "t": "sec:09§3-0-3",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
    "t": "sec:09§3-1",
    "kind": "contains"
   },
@@ -84492,17 +84661,17 @@
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h563",
+   "t": "sec:09§h575",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h572",
+   "t": "sec:09§h584",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h578",
+   "t": "sec:09§h590",
    "kind": "contains"
   },
   {
@@ -84862,37 +85031,37 @@
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h339",
+   "t": "sec:feedback§h340",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h341",
+   "t": "sec:feedback§h342",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h443",
+   "t": "sec:feedback§h444",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h466",
+   "t": "sec:feedback§h467",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h468",
+   "t": "sec:feedback§h469",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h499",
+   "t": "sec:feedback§h500",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h501",
+   "t": "sec:feedback§h502",
    "kind": "contains"
   },
   {
@@ -90311,6 +90480,11 @@
    "kind": "about"
   },
   {
+   "s": "ver:138",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
    "s": "ver:8",
    "t": "code:ytflow/stages/backdrop.py:1",
    "kind": "implemented_by"
@@ -91092,11 +91266,6 @@
   },
   {
    "s": "intent:94db84ec",
-   "t": "sec:09§5-00",
-   "kind": "quoted_in"
-  },
-  {
-   "s": "intent:94db84ec",
    "t": "theme:intent",
    "kind": "about"
   },
@@ -91173,6 +91342,16 @@
   {
    "s": "intent:a02a2392",
    "t": "fb:132",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:339f3fcf",
+   "t": "sec:09§5-00",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:339f3fcf",
+   "t": "fb:305",
    "kind": "quoted_in"
   },
   {
@@ -92516,6 +92695,11 @@
    "kind": "quoted_in"
   },
   {
+   "s": "intent:7c2e1970",
+   "t": "sec:09§3-0-3",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:aeda10c1",
    "t": "ver:39",
    "kind": "interpreted_in"
@@ -92752,7 +92936,7 @@
   },
   {
    "s": "intent:b3682647",
-   "t": "sec:feedback§h341",
+   "t": "sec:feedback§h342",
    "kind": "quoted_in"
   },
   {
@@ -94421,6 +94605,26 @@
    "kind": "quoted_in"
   },
   {
+   "s": "intent:28dfe47e",
+   "t": "ver:39",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:28dfe47e",
+   "t": "sec:09§2-00",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:28dfe47e",
+   "t": "sec:09§2-1",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:28dfe47e",
+   "t": "fb:277",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:a21b07e5",
    "t": "ver:31",
    "kind": "interpreted_in"
@@ -94469,11 +94673,6 @@
    "s": "intent:58317d48",
    "t": "theme:depth",
    "kind": "about"
-  },
-  {
-   "s": "intent:28dfe47e",
-   "t": "fb:277",
-   "kind": "quoted_in"
   },
   {
    "s": "intent:7b8d7091",
@@ -95192,7 +95391,7 @@
   },
   {
    "s": "intent:8fa76feb",
-   "t": "ver:43",
+   "t": "ver:39",
    "kind": "interpreted_in"
   },
   {
@@ -95203,6 +95402,11 @@
   {
    "s": "intent:8fa76feb",
    "t": "fb:15",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:bb46c26f",
+   "t": "sec:09§2-00",
    "kind": "quoted_in"
   },
   {
@@ -100918,6 +101122,11 @@
   {
    "s": "fb:304",
    "t": "intent:384da3ec",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:305",
+   "t": "intent:339f3fcf",
    "kind": "quoted_as"
   }
  ]

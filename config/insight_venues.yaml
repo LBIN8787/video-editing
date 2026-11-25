@@ -1,0 +1,82 @@
+# 인사이트 자리 — 기술·시장 인사이트가 나오는 곳을 넓게 (2026-11-26 사용자: "사람을 감시하기보다는 좀 더 폭넓게 다루고싶어요",
+# docs/70). 사람 목록이 아니라 '인터뷰·강연·팟캐스트가 올라오는 자리'를 매일 훑고, 그 안에서 '앞으로에 대한 판단'을 골라낸다.
+# 사람 이름(ceo_watch·radar extra)은 거르는 조건이 아니라 점수 가산만.
+#
+# handle: 유튜브 @이름 — @ 가 없는 채널은 UC… 채널 id 그대로 (채널 id 는 처음 실행 때 찾아 inbox/insights/venues_cache.json 에 저장)
+# weight: 1 보통 · 2 좋음 · 3 1차 원본(본인·회사·대형 행사) / area: tech · market (둘 다면 both)
+# 늘리기: 이 파일에 한 줄 더하기. 찾지 못한 handle 은 실행 로그에 '! 자리 못 찾음'으로 남는다.
+
+window_days: 7          # 이 기간 안에 올라온 영상만
+min_minutes: 12         # 이보다 짧은 것(클립·요약)은 제외 — 인터뷰·강연·대담 위주
+per_venue: 8            # 자리마다 최근 몇 편까지 볼지
+extract_top: 8          # 하루에 자막까지 열어 판단을 뽑을 후보 수
+
+venues:
+  # ── 기술: 기술자·창업자·연구자의 긴 대화 ─────────────────────────
+  - {name: Dwarkesh Podcast, handle: DwarkeshPatel, area: tech, weight: 3}
+  - {name: Lex Fridman, handle: lexfridman, area: tech, weight: 2}
+  - {name: No Priors, handle: NoPriorsPodcast, area: tech, weight: 3}
+  - {name: Latent Space, handle: LatentSpacePod, area: tech, weight: 2}
+  - {name: Acquired, handle: AcquiredFM, area: both, weight: 2}
+  - {name: BG2 Pod, handle: Bg2Pod, area: both, weight: 3}
+  - {name: a16z, handle: a16z, area: tech, weight: 2}
+  - {name: Sequoia (Training Data), handle: sequoiacapital, area: tech, weight: 2}
+  - {name: 20VC, handle: 20VC, area: tech, weight: 2}
+  - {name: Y Combinator, handle: ycombinator, area: tech, weight: 2}
+  - {name: Stanford GSB, handle: stanfordgsb, area: both, weight: 2}
+  - {name: Lenny's Podcast, handle: LennysPodcast, area: tech, weight: 2}
+  - {name: Machine Learning Street Talk, handle: MachineLearningStreetTalk, area: tech, weight: 1}
+  - {name: AI Engineer, handle: aiDotEngineer, area: tech, weight: 2}
+  - {name: TBPN, handle: TBPNLive, area: tech, weight: 2}
+  - {name: Cheeky Pint (Stripe), handle: stripe, area: tech, weight: 2}
+  - {name: Google DeepMind, handle: googledeepmind, area: tech, weight: 3}
+  - {name: NVIDIA, handle: NVIDIA, area: tech, weight: 3}
+  - {name: OpenAI, handle: OpenAI, area: tech, weight: 3}
+  - {name: Anthropic, handle: anthropic-ai, area: tech, weight: 3}
+  - {name: Microsoft, handle: Microsoft, area: tech, weight: 2}
+  - {name: Bloomberg Technology, handle: BloombergTech, area: tech, weight: 2}
+  - {name: All-In Podcast, handle: allin, area: both, weight: 2}
+  - {name: The Diary Of A CEO, handle: TheDiaryOfACEO, area: both, weight: 1}
+  # ── 시장: 투자자·전략가·경영자·당국자 ───────────────────────────
+  - {name: CNBC Television, handle: CNBCtelevision, area: market, weight: 2}
+  - {name: CNBC, handle: CNBC, area: market, weight: 2}
+  - {name: Bloomberg Television, handle: markets, area: market, weight: 2}
+  - {name: Bloomberg Podcasts (Odd Lots 등), handle: BloombergPodcasts, area: market, weight: 3}
+  - {name: Fox Business, handle: FoxBusiness, area: market, weight: 1}
+  - {name: Yahoo Finance, handle: YahooFinance, area: market, weight: 1}
+  - {name: Financial Times, handle: FinancialTimes, area: market, weight: 2}
+  - {name: Wall Street Journal, handle: wsj, area: market, weight: 1}
+  - {name: Colossus (Invest Like the Best), handle: joincolossus, area: market, weight: 3}
+  - {name: iConnections, handle: iConnections, area: market, weight: 2}
+  - {name: Goldman Sachs, handle: GoldmanSachs, area: market, weight: 3}
+  - {name: Morgan Stanley, handle: MorganStanley, area: market, weight: 3}
+  - {name: Norges Bank (In Good Company), handle: NorgesBankInvestmentManagement, area: market, weight: 3}
+  - {name: Economic Club of New York, handle: TheEconomicClubofNewYork, area: market, weight: 3}
+  - {name: Economic Club of Washington, handle: UCMxg9TQdOZSu21CHffziZlw, area: market, weight: 3}
+  - {name: Milken Institute, handle: MilkenInstitute, area: market, weight: 2}
+  - {name: World Economic Forum, handle: wef, area: both, weight: 2}
+  - {name: Federal Reserve, handle: federalreserve, area: market, weight: 3}
+  - {name: Real Vision, handle: RealVisionFinance, area: market, weight: 1}
+  - {name: The Compound, handle: TheCompoundNews, area: market, weight: 1}
+  - {name: BlackRock, handle: blackrock, area: market, weight: 2}
+  - {name: Oaktree Capital, handle: OaktreeCapital, area: market, weight: 3}
+
+# 목록 밖에서 찾기 — 이번 주 검색(영어). 조회가 튄 인터뷰·강연을 잡는다. 결과는 같은 거르기(길이·해설 말투)를 거친다.
+discover:
+  min_views: 30000
+  queries:
+    - future of AI interview
+    - AI founder interview
+    - fireside chat CEO AI
+    - keynote future of computing
+    - semiconductor CEO interview
+    - robotics founder interview
+    - energy grid AI data center interview
+    - market outlook 2027 interview
+    - strategist outlook stocks interview
+    - investor interview economy outlook
+    - hedge fund manager interview
+  hn: true              # 해커뉴스 첫 화면의 강연·인터뷰 링크 (공개 API)
+
+# 해설 말투(남의 영상을 설명하는 것) — 원본이 아님
+commentary_words: [reacts, reaction, explained, "here's why", "here is why", "what it means", breakdown, analysis of, just sold, just bought, summary, recap, "#shorts"]
