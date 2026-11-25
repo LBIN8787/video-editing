@@ -94,11 +94,7 @@ motion(22, 1, C("HBM은 이미", "lock", "HBM은 이미 계약으로", "낸드·
 motion(26, 0, C("협상을 이미", "hbm", "SK하이닉스: 내년 HBM 협상 끝", "장기 계약", 960, 420, 420, 110, 24))
 motion(26, 1, C("함께 맞을", "both", "2030년까지 + 2027년 말부터", "함께 맞을 수 있다", 960, 560, 420, 110, 24))
 motion(26, 1, C("먼저 꺾이고", "kk", "현물·낸드 계약가가 먼저 꺾임", "짧은 계약 쪽", 1480, 860, 480, 110, 24))
-# 28 — 판가름 신호 넷
-add_pics(28, [stat("둘째", "calendar", "1분기 계약가", "낸드·범용 D램이 먼저 내리나", INK),
-              stat("셋째", "banknote", "모집·상장", "AI 회사들 — 수요의 천장"),
-              stat("넷째", "building", "증설·감산", "중국 증설 속도 · 감산을 언제 말하나", INK)],
-         ["첫째", "둘째", "셋째", "넷째"])
+# 28 은 등불판(lamps)이 장면 끝까지 남는 구조라 그림을 더하면 겹침 (11-25 overlap_qa) → 그대로 둠
 
 F.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
 print("memory-insight ok")

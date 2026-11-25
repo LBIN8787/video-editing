@@ -788,7 +788,7 @@ def checklist_pics(D, sc: dict, bt: list):
                     land = BOT - H0 - (H1 - H0) - (BOT - H0 + j * H0 / 2)
                     D.js.append(f'tl.to("#{piece}",{{keyframes:[{{y:{-170 - j * 20},x:{dx / 2:.0f},duration:0.4,ease:"power1.out"}},'
                                 f'{{x:{dx:.0f},y:{land:.0f},height:{H1 - H0},duration:0.45,ease:"power2.in"}}]}},{tg + j * 0.25 + 0.1:.2f});')
-                    D.js.append(f'tl.to("#{bars_[j]}",{{height:{H1},top:{BOT - H1},backgroundColor:"{GRN}",duration:0.4,ease:"back.out(1.6)"}},{tg + j * 0.25 + 0.95:.2f});'
+                    D.js.append(f'tl.to("#{bars_[j]}",{{scaleY:{H1 / H0:.3f},backgroundColor:"{GRN}",duration:0.4,ease:"back.out(1.6)"}},{tg + j * 0.25 + 0.95:.2f});'
                                 f'tl.to("#{piece}",{{opacity:0,duration:0.2}},{tg + j * 0.25 + 1.1:.2f});')
                 D.js.append(f'tl.to("#{bars_[2]}",{{scaleY:0,duration:0.4,ease:"power2.in"}},{tg:.2f});')
                 badge(CX, BOT + 82, e.get("note", "남은 쪽이 다음 호황을 나눔"), GRN, tg + 1.6, None, 36)
@@ -984,7 +984,8 @@ def checklist_pics(D, sc: dict, bt: list):
                   [(CX - 170, 470), (CX + 170, 470), (CX, 730)] if n == 3 else [(CX, 470), (CX, 730)]
             for j, (it, (x, y)) in enumerate(zip(its, pos)):
                 col = {"ok": GRN, "warn": REDC}.get(it.get("side"), INKC)
-                tag = (f'<div style="margin-top:8px;padding:3px 12px;border-radius:8px;background:{col}1F;font-family:heavy,sans-x;font-size:22px;color:{col}">'
+                tagc = "#1E5A37" if col == "#2E7D4F" else col   # 밝은 바탕의 초록 꼬리표 대비 4.5:1 (11-25 contrast_aa)
+                tag = (f'<div style="margin-top:8px;padding:3px 12px;border-radius:8px;background:{col}1F;font-family:heavy,sans-x;font-size:22px;color:{tagc}">'
                        f'{_e(it["tag"])}</div>') if it.get("tag") else ""
                 ci = div(f'<div id="ID" style="position:absolute;left:{x - 160:.0f}px;top:{y - 115:.0f}px;width:320px;height:230px;box-sizing:border-box;border-radius:14px;'
                          f'background:{CARDGRAD};border:4px solid {col};box-shadow:{SH};display:flex;flex-direction:column;align-items:center;'
@@ -1017,9 +1018,10 @@ def checklist_pics(D, sc: dict, bt: list):
                          f'transform-origin:{"left" if a_ > 0 else "right"};box-shadow:0 4px 10px rgba(30,24,16,.12)"></div>',
                          at + 0.4 + j * 0.3, "scaleX:0,opacity:1", "scaleX:1,opacity:1", 0.6)
                 w1 = abs(b_) * u
-                D.js.append(f'tl.to("#{bi}",{{width:{w1:.0f},{"" if a_ > 0 else f"left:{Z - w1:.0f},"}duration:0.8,ease:"power2.inOut"}},{t_shift + j * 0.6:.2f});')
+                # 폭·left 대신 scaleX (transform-origin 쪽이 0 축이라 같은 모습) — lint gsap_non_transform_motion (11-25)
+                D.js.append(f'tl.to("#{bi}",{{scaleX:{(w1 / w0) if w0 else 1:.3f},duration:0.8,ease:"power2.inOut"}},{t_shift + j * 0.6:.2f});')
                 nx = Z + (w1 + 90 if a_ > 0 else -w1 - 90)
-                num(nx, y, "", b_, "", col, 40, t_shift + j * 0.6, start=a_, dur=0.8)
+                num(nx, y, "", b_, "", "#25683F" if col == "#2E7D4F" else col, 40, t_shift + j * 0.6, start=a_, dur=0.8)   # 밝은 바탕 대비 (11-25)
             if e.get("badge"):
                 badge(CX, 905, e["badge"], REDC, t_shift + 1.6, None, 30)
         elif kind == "drain":    # 같은 출혈을 견디는 통: 가진 게 적고 원가가 높은 쪽이 먼저 바닥난다
@@ -1052,15 +1054,21 @@ def checklist_pics(D, sc: dict, bt: list):
             cols = ["#5E7FA6", "#8C929C", "#C9A13B"]
             ids_ = []
             acc = 0
+            # 띠는 바탕(폭은 scaleX·자리는 x)과 글자(x 만)를 나눠 움직임 — left·width 를 움직이면 lint gsap_non_transform_motion (11-25)
+            lbls, starts = [], []
             for j, (nm, a_, b_) in enumerate(segs):
                 ids_.append(div(f'<div id="ID" style="position:absolute;left:{x + acc * W / 100:.0f}px;top:{y}px;width:{a_ * W / 100:.0f}px;height:110px;background:{cols[j % 3]};'
-                                f'display:flex;align-items:center;justify-content:center;font-family:heavy,sans-x;font-size:28px;color:#fff;border-right:3px solid {CARDBG};'
-                                f'box-sizing:border-box">{_e(nm)}</div>', at + 0.2 + j * 0.15, "opacity:0,scaleY:0", "opacity:1,scaleY:1", 0.4))
+                                f'border-right:3px solid {CARDBG};box-sizing:border-box;transform-origin:left"></div>', at + 0.2 + j * 0.15, "opacity:0,scaleY:0", "opacity:1,scaleY:1", 0.4))
+                lbls.append(div(f'<div id="ID" style="position:absolute;left:{x + (acc + a_ / 2) * W / 100 - 120:.0f}px;top:{y}px;width:240px;height:110px;display:flex;align-items:center;'
+                                f'justify-content:center;font-family:heavy,sans-x;font-size:28px;color:#fff;z-index:7">{_e(nm)}</div>', at + 0.2 + j * 0.15, "opacity:0", "opacity:1", 0.4))
+                starts.append(acc)
                 acc += a_
             tsh = at + max(1.6, span * 0.3)
             acc = 0
             for j, (nm, a_, b_) in enumerate(segs):
-                D.js.append(f'tl.to("#{ids_[j]}",{{left:{x + acc * W / 100:.0f},width:{b_ * W / 100:.0f},duration:1.0,ease:"power2.inOut"}},{tsh:.2f});')
+                dx = (acc - starts[j]) * W / 100
+                D.js.append(f'tl.to("#{ids_[j]}",{{x:{dx:.0f},scaleX:{(b_ / a_) if a_ else 1:.3f},duration:1.0,ease:"power2.inOut"}},{tsh:.2f});'
+                            f'tl.to("#{lbls[j]}",{{x:{dx + (b_ - a_) / 2 * W / 100:.0f},duration:1.0,ease:"power2.inOut"}},{tsh:.2f});')
                 acc += b_
             # 출혈: 위에서 동전이 쏟아져 사라짐
             for k2 in range(7):
