@@ -1,0 +1,92 @@
+{
+ "project": "20261125-pilot-psych",
+ "manual_version": "135",
+ "checked": "2026-11-25T23:35:33",
+ "pass": false,
+ "rows": [
+  {
+   "gate": "G0",
+   "level": "MUST",
+   "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
+   "ok": false,
+   "detail": "[2026-11-25 · 20261125-curiosity-riemann 기각] 불합격 입니다. 전부 이미지느낌보다는 글씨느낌에 애니메이션효과 천천히 그리는 효과도 너무 매번 똑같아요 속도가 https://youtu.be/HK6wSr1JdL0?si=AjiOfIJYsvID6Z4T 이 채널의 편집방식을 벤치마킹해주세요 대본 작상과 소재 선정도요; [2026-11-25 · 20261125-issues-explainer 기각] 기존 편집방식과 다르지 않은거같아요 글로 설명하은 느낌이 강하다고 느껴져요 제가 예시로 준 채널들이나 링크 레퍼런스나 다큐멘터리 등의 모션그래픽과 많이 달라요 저는 새로운 스타일은 원했어요"
+  },
+  {
+   "gate": "G0",
+   "level": "SHOULD",
+   "item": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
+   "ok": true,
+   "detail": "manual/graph.json"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "topic_brief.json 있음",
+   "ok": true,
+   "detail": "01_research/topic_brief.json (schemas/topic_brief.schema.json)"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "브랜드(ai/market/curiosity)",
+   "ok": true,
+   "detail": "curiosity"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망·시청자 질문",
+   "ok": true,
+   "detail": "사람이 많을수록 아무도 돕지 않는다는 방관자 효과, 정말일까?"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "트리거·왜 지금",
+   "ok": true,
+   "detail": "교과서·SNS 에 계속 돌아다니는 '38명의 목격자' 이야기 — 원 보도의 정정과 CCTV 연구가 한국어로는 거의 다뤄지지 않음 (방관자 효과 검색 상위 9.2만 회, 2026-11-25)"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "욕망을 분명히 건드리고, 보여 줄 자료가 있다 (둘 중 하나라도 약하면 만들지 않음, 01 §3)",
+   "ok": true,
+   "detail": "강도 3 · 자료 3"
+  },
+  {
+   "gate": "G1",
+   "level": "참고",
+   "item": "욕망 점수 합계 (후보끼리 비교할 때 씀)",
+   "ok": true,
+   "detail": "합계 15 {'desire': 3, 'clarity': 3, 'timeliness': 1, 'demand': 2, 'visuals': 3, 'angle': 3}"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "수요 증거 1개 이상",
+   "ok": true,
+   "detail": "2"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "후보 3개 비교 기록",
+   "ok": true,
+   "detail": "3"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "우리만의 답(our_angle)",
+   "ok": true,
+   "detail": "한 실험을 이야기로 따라가되, 원 보도 → 정정 → 재현 연구 순으로 '배운 것'을 시청자가 직접 다시 판단하게 한다. 시리즈 틀: '다시 돌려 본 심리 실험'"
+  },
+  {
+   "gate": "G1",
+   "level": "SHOULD",
+   "item": "무엇이 띄우나(driver: 소재·각도·형식 + 근거)",
+   "ok": true,
+   "detail": "각도 · 누구나 아는 실험을 원 자료로 다시 돌려 보는 반전 각도가 시리즈로 반복"
+  }
+ ]
+}
