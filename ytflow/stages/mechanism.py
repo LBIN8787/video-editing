@@ -663,6 +663,8 @@ def checklist_pics(D, sc: dict, bt: list):
             Y = 560
             xs = [X0 + 70, CX, X1 - 70]
             run = max(4.0, min(12.0, span * 0.6))
+            if nxt:   # 다음 그림이 빨리 오면 그 안에 다 그려지게 (넘긴 뒤에 칸·상자가 나타나 다음 그림과 겹치던 것, 11-25)
+                run = min(run, max(1.2, span - 1.6))
             bar(xs[0], Y - 6, xs[-1] - xs[0], 12, TRACK, at + 0.05, dur=0.5)
             bar(xs[0], Y - 6, xs[-1] - xs[0], 12, REDC, at + 0.3, dur=run, ease="none")
             for j, (x, s_) in enumerate(zip(xs, st)):
