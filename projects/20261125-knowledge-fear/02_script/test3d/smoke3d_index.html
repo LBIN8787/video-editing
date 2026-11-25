@@ -1,0 +1,234 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<script src="assets/gsap.min.js"></script>
+<script type="importmap">{"imports":{"three":"./assets/three.module.js"}}</script>
+<style>
+@font-face{font-family:'NotoKR';src:url('assets/fonts/NotoSansKR-VF.ttf');font-weight:100 900}
+@font-face{font-family:'Myeongjo';src:url('assets/fonts/NanumMyeongjo-ExtraBold.ttf')}
+html,body{margin:0;background:#E8E3D9}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;font-family:'NotoKR';color:#22345F}
+#paper{position:absolute;inset:-30px;background:url('assets/img/paper.jpg') center/cover}
+#gl{position:absolute;left:0;top:0;width:1920px;height:1080px}
+.lab{position:absolute;font-size:34px;font-weight:600;letter-spacing:-.5px;color:#22345F;white-space:nowrap}
+.lab small{display:block;font-size:22px;font-weight:500;color:#7A7468;letter-spacing:0}
+#name{position:absolute;left:110px;top:96px;padding:18px 30px 16px;background:rgba(251,249,244,.96);box-shadow:0 10px 28px rgba(40,34,24,.16)}
+#name b{display:block;font-size:42px;font-weight:800;color:#1E2A44}
+#name span{display:block;font-size:24px;font-weight:500;color:#7A7468;margin-top:4px}
+.cap{position:absolute;left:0;width:1920px;top:968px;text-align:center;z-index:50}
+.cap span{display:inline-block;background:rgba(29,32,36,.82);color:#fff;font-weight:600;font-size:38px;padding:6px 22px;border-radius:6px;max-width:1720px;line-height:1.35}
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="19.2" data-width="1920" data-height="1080" data-layout-allow-overlap>
+  <div id="paper"></div>
+  <canvas id="gl" width="1920" height="1080"></canvas>
+  <div id="name"><b>랜돌프 네스</b><span>진화 의학자 · 미시간대</span></div>
+  <div class="lab" id="lt" style="left:640px;top:560px">살짝 탄 토스트<small>헛경보</small></div>
+  <div class="lab" id="lf" style="left:1090px;top:600px;color:#B23A2F">진짜 불<small>놓친 경보</small></div>
+  <div class="lab" id="ls" style="left:1150px;top:160px;color:#9A948A">울리지 않음</div>
+  <div class="clip cap" id="cap14" data-start="0.45" data-duration="7.26" data-track-index="20"><span>진화 의학자 랜돌프 네스는 같은 원리를, 집 천장에 달린 연기 감지기에 빗댑니다.</span></div>
+  <div class="clip cap" id="cap15" data-start="8.2" data-duration="9.85" data-track-index="20"><span>연기 감지기는 토스트만 살짝 태워도 요란하게 울리지만, 그 정도로 예민하지 않으면 진짜 불이 났을 때 울리지 않을 수 있습니다.</span></div>
+  <audio id="vo14" class="clip" src="assets/vo/l14.mp3" data-start="0.4" data-duration="7.51" data-track-index="7" data-volume="1"></audio>
+  <audio id="vo15" class="clip" src="assets/vo/l15.mp3" data-start="8.15" data-duration="10.1" data-track-index="7" data-volume="1"></audio>
+  <audio id="sx1" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="1.0" data-duration="0.57" data-track-index="8" data-volume="0.3"></audio>
+  <audio id="sx2" class="clip" src="assets/sfx/pop.mp3" data-start="1.55" data-duration="0.5" data-track-index="9" data-volume="0.25"></audio>
+  <audio id="sx3" class="clip" src="assets/sfx/whoosh.mp3" data-start="9.4" data-duration="0.57" data-track-index="8" data-volume="0.25"></audio>
+  <audio id="sx4" class="clip" src="assets/sfx/chime.mp3" data-start="11.2" data-duration="1.2" data-track-index="9" data-volume="0.3"></audio>
+  <audio id="sx5" class="clip" src="assets/sfx/whoosh-cinematic.mp3" data-start="14.2" data-duration="1.4" data-track-index="8" data-volume="0.22"></audio>
+</div>
+<script>
+// DOM 겹침(이름표·라벨) — GSAP
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#name", {opacity:0, x:-40}, {opacity:1, x:0, duration:.45, ease:"power3.out"}, 0.5);
+tl.to("#name", {opacity:0, duration:.3}, 8.0);
+tl.fromTo("#lt", {opacity:0, y:16}, {opacity:1, y:0, duration:.35, ease:"power2.out"}, 9.9);
+tl.to("#lt", {opacity:0, duration:.3}, 13.2);
+tl.fromTo("#lf", {opacity:0, y:16}, {opacity:1, y:0, duration:.35, ease:"power2.out"}, 14.8);
+tl.fromTo("#ls", {opacity:0}, {opacity:1, duration:.5}, 16.4);
+tl.fromTo("#paper", {x:0}, {x:-24, duration:19.2, ease:"none"}, 0);
+window.__timelines["main"] = tl;
+</script>
+<script type="module">
+import * as THREE from "three";
+import { RoundedBoxGeometry } from "./assets/RoundedBoxGeometry.js";
+import { RoomEnvironment } from "./assets/RoomEnvironment.js";
+
+const cv = document.getElementById("gl");
+const R = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true, preserveDrawingBuffer: true });
+R.setPixelRatio(1); R.setSize(1920, 1080, false);
+R.shadowMap.enabled = true; R.shadowMap.type = THREE.PCFSoftShadowMap;
+R.toneMapping = THREE.ACESFilmicToneMapping; R.toneMappingExposure = 1.05;
+R.outputColorSpace = THREE.SRGBColorSpace;
+const scene = new THREE.Scene();
+const pm = new THREE.PMREMGenerator(R);
+scene.environment = pm.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.55;
+const cam = new THREE.PerspectiveCamera(28, 1920 / 1080, 0.1, 100);
+
+// 빛: 따뜻한 주광(왼쪽 위 앞) + 차가운 테두리
+const key = new THREE.DirectionalLight(0xfff1dc, 2.4);
+key.position.set(-5, 7, 9); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048); key.shadow.radius = 8; key.shadow.blurSamples = 16;
+Object.assign(key.shadow.camera, { left: -10, right: 10, top: 7, bottom: -7, near: 1, far: 40 });
+key.shadow.bias = -0.0004;
+scene.add(key);
+const rim = new THREE.DirectionalLight(0xcfe0ff, 0.6); rim.position.set(6, 3, -4); scene.add(rim);
+scene.add(new THREE.HemisphereLight(0xfffaf0, 0xc9bfae, 0.5));
+
+// 종이 면: 그림자만 받음 (종이 무늬는 뒤의 DOM)
+const shadowPlane = new THREE.Mesh(new THREE.PlaneGeometry(60, 40), new THREE.ShadowMaterial({ opacity: 0.22 }));
+shadowPlane.receiveShadow = true; scene.add(shadowPlane);
+
+// ── 연기 감지기: 둥근 원반(선반 깎기) + 동심 홈 + 가운데 볼록 + LED
+const det = new THREE.Group();
+const prof = [];
+const Rd = 1.45, H = 0.42;
+prof.push(new THREE.Vector2(0, 0));
+for (let i = 0; i <= 12; i++) { const a = (i / 12) * Math.PI / 2; prof.push(new THREE.Vector2(Rd - 0.18 + Math.sin(a) * 0.18, H - 0.18 + Math.cos(a) * 0.18 - 0.18 + 0.18)); }
+prof.push(new THREE.Vector2(Rd, 0.05)); prof.push(new THREE.Vector2(Rd - 0.05, 0));
+const shell = new THREE.Mesh(new THREE.LatheGeometry(prof.reverse(), 96),
+  new THREE.MeshPhysicalMaterial({ color: 0xf4f1ea, roughness: 0.55, clearcoat: 0.25, clearcoatRoughness: 0.5 }));
+shell.rotation.x = Math.PI / 2; shell.castShadow = true; det.add(shell);
+const grooveMat = new THREE.MeshStandardMaterial({ color: 0xd9d4c9, roughness: 0.7 });
+for (const r of [0.55, 0.78, 1.0]) {
+  const g = new THREE.Mesh(new THREE.TorusGeometry(r, 0.028, 12, 120), grooveMat);
+  g.position.z = H + 0.002; det.add(g);
+}
+const dome = new THREE.Mesh(new THREE.SphereGeometry(0.34, 48, 24, 0, Math.PI * 2, 0, Math.PI / 2),
+  new THREE.MeshPhysicalMaterial({ color: 0xfaf8f3, roughness: 0.45, clearcoat: 0.4 }));
+dome.rotation.x = Math.PI / 2; dome.position.z = H - 0.06; dome.castShadow = true; det.add(dome);
+const ledMat = new THREE.MeshStandardMaterial({ color: 0x5a1712, emissive: 0xff2a1a, emissiveIntensity: 0, roughness: 0.3 });
+const led = new THREE.Mesh(new THREE.SphereGeometry(0.075, 24, 12), ledMat);
+led.position.set(0.92, 0.62, H + 0.03); det.add(led);
+const ledLight = new THREE.PointLight(0xff3020, 0, 3, 2); ledLight.position.set(0.92, 0.62, H + 0.4); det.add(ledLight);
+scene.add(det);
+
+// 울림 고리 (얇은 원환이 퍼짐)
+const rings = [];
+for (let i = 0; i < 6; i++) {
+  const m = new THREE.Mesh(new THREE.TorusGeometry(1.6, 0.035, 8, 160),
+    new THREE.MeshBasicMaterial({ color: 0xd9483b, transparent: true, opacity: 0 }));
+  m.position.z = 0.2; det.add(m); rings.push(m);
+}
+
+// ── 토스트: 식빵 모양 돌출 + 굽기 색 (앞면 캔버스 질감)
+const bs = new THREE.Shape();
+bs.moveTo(-1.05, -1.1); bs.lineTo(1.05, -1.1); bs.lineTo(1.05, 0.55);
+bs.bezierCurveTo(1.45, 0.75, 1.35, 1.45, 0.75, 1.4);
+bs.bezierCurveTo(0.45, 1.6, -0.45, 1.6, -0.75, 1.4);
+bs.bezierCurveTo(-1.35, 1.45, -1.45, 0.75, -1.05, 0.55); bs.lineTo(-1.05, -1.1);
+const tg = new THREE.ExtrudeGeometry(bs, { depth: 0.32, bevelEnabled: true, bevelThickness: 0.06, bevelSize: 0.06, bevelSegments: 4, curveSegments: 24 });
+const tc = document.createElement("canvas"); tc.width = tc.height = 512; const gx = tc.getContext("2d");
+const grd = gx.createRadialGradient(256, 256, 40, 256, 256, 300); grd.addColorStop(0, "#C98F52"); grd.addColorStop(.7, "#A86A34"); grd.addColorStop(1, "#6E3F1C");
+gx.fillStyle = grd; gx.fillRect(0, 0, 512, 512);
+let s = 7; const rnd = () => ((s = (s * 16807) % 2147483647) / 2147483647);
+for (let i = 0; i < 900; i++) { gx.fillStyle = `rgba(${60 + rnd() * 40},${30 + rnd() * 20},10,${rnd() * .18})`; gx.beginPath(); gx.arc(rnd() * 512, rnd() * 512, rnd() * 5 + 1, 0, 7); gx.fill(); }
+const tTex = new THREE.CanvasTexture(tc); tTex.colorSpace = THREE.SRGBColorSpace;
+tg.computeBoundingBox(); const bb = tg.boundingBox;
+const uv = tg.attributes.uv, pos = tg.attributes.position;
+for (let i = 0; i < uv.count; i++) uv.setXY(i, (pos.getX(i) - bb.min.x) / (bb.max.x - bb.min.x), (pos.getY(i) - bb.min.y) / (bb.max.y - bb.min.y));
+const toast = new THREE.Mesh(tg, [new THREE.MeshStandardMaterial({ map: tTex, roughness: 0.85 }), new THREE.MeshStandardMaterial({ color: 0x7a4620, roughness: 0.8 })]);
+toast.castShadow = true; scene.add(toast);
+
+// 연기: 부드러운 반투명 판 (정해진 씨앗으로)
+const sc = document.createElement("canvas"); sc.width = sc.height = 128; const sx = sc.getContext("2d");
+const sg = sx.createRadialGradient(64, 64, 0, 64, 64, 64); sg.addColorStop(0, "rgba(78,74,70,.7)"); sg.addColorStop(.5, "rgba(90,86,80,.35)"); sg.addColorStop(1, "rgba(100,96,90,0)");
+sx.fillStyle = sg; sx.fillRect(0, 0, 128, 128);
+const sTex = new THREE.CanvasTexture(sc);
+const puffs = [];
+for (let i = 0; i < 26; i++) {
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: sTex, transparent: true, depthWrite: false, opacity: 0 }));
+  m.userData = { off: i * 0.19, sw: 0.3 + (i % 5) * 0.08, ph: i * 1.7 }; scene.add(m); puffs.push(m);
+}
+
+// ── 불꽃: 세로 그라데이션 셰이더 세 겹(가산 혼합) + 빛 번짐 + 장작
+const fl = new THREE.Group();
+const flameGeo = (h, r) => { const p = []; for (let i = 0; i <= 32; i++) { const u = i / 32; p.push(new THREE.Vector2(Math.sin(Math.PI * Math.pow(u, .62)) * r * (1 - u * .3), u * h)); } return new THREE.LatheGeometry(p, 64); };
+const flameMat = (c0, c1, c2, a) => new THREE.ShaderMaterial({
+  transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+  uniforms: { uT: { value: 0 }, uA: { value: a } },
+  vertexShader: `uniform float uT; varying float vY; varying vec3 vN; varying vec3 vV;
+    void main(){ vec3 p = position; float h = clamp(p.y/2.4,0.,1.);
+      p.x += sin(uT*9.0 + p.y*3.0)*0.10*h*h; p.z += cos(uT*7.0 + p.y*2.5)*0.08*h*h;
+      vY = h; vec4 mv = modelViewMatrix*vec4(p,1.); vN = normalize(normalMatrix*normal); vV = normalize(-mv.xyz);
+      gl_Position = projectionMatrix*mv; }`,
+  fragmentShader: `uniform float uA; varying float vY; varying vec3 vN; varying vec3 vV;
+    void main(){ vec3 c = mix(vec3(${c0}), vec3(${c1}), smoothstep(0.,.45,vY)); c = mix(c, vec3(${c2}), smoothstep(.45,1.,vY));
+      float edge = pow(abs(dot(vN,vV)), 1.4); float a = uA*edge*(1.-smoothstep(.75,1.,vY));
+      gl_FragColor = vec4(c*a, a); }`
+});
+const fOuter = new THREE.Mesh(flameGeo(2.5, 0.95), flameMat("1.0,.55,.12", ".95,.28,.08", ".7,.08,.05", 1.0));
+const fMid = new THREE.Mesh(flameGeo(1.8, 0.68), flameMat("1.0,.85,.35", "1.0,.55,.12", ".9,.25,.06", 0.9));
+const fCore = new THREE.Mesh(flameGeo(1.0, 0.4), flameMat("1.0,.97,.8", "1.0,.85,.4", "1.0,.6,.2", 0.9));
+fMid.position.z = 0.1; fCore.position.set(0, 0.05, 0.2);
+fl.add(fOuter, fMid, fCore);
+const gc = document.createElement("canvas"); gc.width = gc.height = 256; const gg = gc.getContext("2d");
+const gr = gg.createRadialGradient(128, 128, 0, 128, 128, 128); gr.addColorStop(0, "rgba(255,170,80,.55)"); gr.addColorStop(1, "rgba(255,120,40,0)");
+gg.fillStyle = gr; gg.fillRect(0, 0, 256, 256);
+const glow = new THREE.Mesh(new THREE.PlaneGeometry(5.5, 5.5), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(gc), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+glow.position.set(0, 1.0, -0.3); fl.add(glow);
+const logMat = new THREE.MeshStandardMaterial({ color: 0x5a3d28, roughness: 0.85 });
+for (const [r, x] of [[0.38, -0.25], [-0.38, 0.25]]) { const lg = new THREE.Mesh(new THREE.CylinderGeometry(0.19, 0.21, 2.0, 24), logMat); lg.rotation.set(0, 0, Math.PI / 2 + r); lg.position.set(x * .3, -0.05, 0.35); lg.castShadow = true; fl.add(lg); }
+const fireLight = new THREE.PointLight(0xff7a30, 0, 9, 1.6); fireLight.position.set(0, 1.2, 1.4); fl.add(fireLight);
+scene.add(fl);
+
+// ── 시간 → 상태 (순수 함수)
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const ss = (a, b, t) => { const x = clamp((t - a) / (b - a)); return x * x * (3 - 2 * x); };
+const backOut = x => { const c = 1.9; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+function renderAt(t) {
+  // 카메라: 천천히 다가가고, 이야기를 따라 좌우로
+  const cx = -1.1 * ss(8.8, 10.2, t) * (1 - ss(13.0, 14.4, t)) + 1.2 * ss(13.4, 15.0, t);
+  const cz = 15 - 1.6 * ss(0, 19, t);
+  cam.position.set(cx, 0.6, cz); cam.lookAt(cx * 0.85, 0.35, 0);
+
+  // 감지기: 위에서 떨어져 자리 잡음 → 살짝 흔들림
+  const d = clamp((t - 1.0) / 0.65);
+  det.position.set(0, 7 - (7 - 1.85) * backOut(d), 0.6); det.scale.setScalar(0.72);
+  det.rotation.set(0.12 * Math.sin(Math.min(t - 1, 2) * 6) * (1 - ss(1.4, 2.6, t)), 0, 0);
+  det.visible = t > 0.95;
+
+  // 경보: 토스트 연기 → 울림
+  const alarm = t >= 11.2 && t < 13.4;
+  const blink = alarm ? (Math.floor((t - 11.2) / 0.22) % 2 === 0 ? 1 : 0.15) : 0;
+  ledMat.emissiveIntensity = 4 * blink; ledLight.intensity = 3 * blink;
+  rings.forEach((m, i) => {
+    const t0 = 11.2 + i * 0.36, u = (t - t0) / 1.0;
+    const on = u >= 0 && u <= 1 && t0 < 13.4;
+    m.material.opacity = on ? 0.85 * (1 - u) : 0;
+    const sc = 1 + u * 1.3; m.scale.set(sc, sc, 1);
+  });
+  det.position.x = alarm ? 0.03 * Math.sin(t * 90) : 0;
+
+  // 토스트: 왼쪽에서 미끄러져 들어와 → 나감
+  const tin = ss(9.35, 9.95, t), tout = ss(13.0, 13.6, t);
+  toast.position.set(-3.6 - 8 * (1 - tin) - 8 * tout, -1.05, 0.5); toast.scale.setScalar(0.72);
+  toast.rotation.set(-0.08, 0.35 * (1 - tin) + 0.12, 0.05 * Math.sin(t * 0.8));
+  toast.visible = t > 9.3 && t < 13.7;
+
+  // 연기: 토스트 위로 말려 올라감
+  puffs.forEach((m, i) => {
+    const { off, sw, ph } = m.userData;
+    const life = 1.9, lt = t - 9.9 - off;
+    const u = ((lt % life) + life) % life / life;
+    const alive = lt > 0 && t < 13.5;
+    const y = 0.0 + u * 3.0, x = toast.position.x + 0.1 + Math.sin(ph + u * 4) * sw * (0.4 + u);
+    m.position.set(x, y, 1.1 + i * 0.01);
+    const sc = 0.7 + u * 2.0; m.scale.set(sc, sc, 1);
+    m.material.opacity = alive ? Math.sin(u * Math.PI) * 0.95 * (1 - ss(13.0, 13.5, t)) : 0;
+  });
+
+  // 불꽃: 오른쪽에서 피어오름, 흔들림은 시간의 사인 합
+  const fin = ss(14.2, 14.9, t);
+  fl.position.set(3.6, -1.95, 0.6);
+  const fk = 1 + 0.06 * Math.sin(t * 13.1) + 0.04 * Math.sin(t * 7.3 + 1.3);
+  fl.scale.set(0.8 * fin * (1 + 0.03 * Math.sin(t * 9)), 0.8 * fin * fk, 0.8 * fin);
+  for (const m of [fOuter, fMid, fCore]) m.material.uniforms.uT.value = t;
+  fCore.scale.set(1, 0.95 + 0.08 * Math.sin(t * 17), 1); glow.material.opacity = 0.8 + 0.2 * Math.sin(t * 11);
+  fireLight.intensity = 14 * fin * fk;
+  fl.visible = fin > 0.001;
+
+  R.render(scene, cam);
+}
+window.addEventListener("hf-seek", e => renderAt(e.detail.time));
+renderAt(0);
+</script>
+</body></html>
