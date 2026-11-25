@@ -807,8 +807,8 @@ def checklist_pics(D, sc: dict, bt: list):
                 m_ = _re.match(r"([^\d]*)([\d.]+)(.*)", txt)
                 if m_ and j:
                     num(xs[j], base - h - 42, m_.group(1), float(m_.group(2)), m_.group(3), col, 46, tj + 0.2, dur=1.0)
-                else:
-                    label(xs[j], base - h - 42, txt, col, 46, tj + 0.2, "heavy")
+                else:   # 앞 막대(회색)의 숫자는 글자만 진하게 — 회색 글자는 종이 위 대비 1.7:1 (11-26 layout_qa)
+                    label(xs[j], base - h - 42, txt, MUT if j == 0 else col, 46, tj + 0.2, "heavy")
                 label(xs[j], base + 38, lab, MUT, 30, tj)
             if e.get("badge"):
                 badge(CX, 870, e["badge"], e.get("color", REDC), tb + 1.4, None, 38)
