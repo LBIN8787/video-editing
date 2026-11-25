@@ -26,15 +26,21 @@ def quote(who, role, ko, orig, keyword, says, label, insight=True):
 
 
 def board(title, els, beats, label=""):
+    for el in els.values():   # 카드가 작아 글자를 못 읽던 문제(첫 렌더) — 넓게, 줄에서는 렌더러가 간격에 맞춰 줄임
+        if el.get("kind") == "card":
+            el.setdefault("w", 520)
+            el.setdefault("size", 44)
+        if el.get("kind") == "text":
+            el["size"] = max(el.get("size", 56), 36)
     add({"type": "motionboard", "title": title, "theme": "dark", "label": label, "els": els, "beats": beats})
 
 
 # 고리 (A1) — 같은 좌표를 끝까지 씀
 LOOP = {
-    "c1": {"kind": "card", "x": 960, "y": 300, "icon": "search", "label": "① 문제 고르기"},
-    "c2": {"kind": "card", "x": 1460, "y": 540, "icon": "laptop", "label": "② 설계·코드"},
-    "c3": {"kind": "card", "x": 960, "y": 780, "icon": "flask-conical", "label": "③ 실험·결과"},
-    "c4": {"kind": "card", "x": 460, "y": 540, "icon": "cpu", "label": "④ 다음 모델"},
+    "c1": {"kind": "card", "x": 960, "y": 250, "icon": "search", "label": "① 문제 고르기"},
+    "c2": {"kind": "card", "x": 1560, "y": 540, "icon": "laptop", "label": "② 설계·코드"},
+    "c3": {"kind": "card", "x": 960, "y": 820, "icon": "flask-conical", "label": "③ 실험·결과"},
+    "c4": {"kind": "card", "x": 360, "y": 540, "icon": "cpu", "label": "④ 다음 모델"},
     "a12": {"kind": "arrow", "from": "c1", "to": "c2", "bend": 0.25},
     "a23": {"kind": "arrow", "from": "c2", "to": "c3", "bend": 0.25},
     "a34": {"kind": "arrow", "from": "c3", "to": "c4", "bend": 0.25},
@@ -164,7 +170,7 @@ add({"type": "bignum", "label": f"METR 측정 (앤트로픽 원문 인용) · �
      "beats": [{"say": "이 이야기가 우리 일과 닿는 곳도 같은 칸입니다. 외부 측정에 따르면 AI 가 혼자 해내는 일의 길이는 넉 달마다 두 배로 늘고 있습니다."},
                {"say": "그렇다면 일하는 사람에게 오래 남는 칸도 고리의 첫 칸을 닮아 갈 겁니다. 무엇을 풀지 고르고, 무엇을 잘했다고 칠지 정하는 일."}]})
 board("지켜볼 신호", loop({
-    "sig": {"kind": "text", "x": 960, "y": 540, "text": "신호: 스스로 연구 의제를 정하는 시스템 — 아직 공개 전", "size": 34, "color": "gold"}}),
+    "sig": {"kind": "text", "x": 960, "y": 540, "text": "신호: 연구 의제를 스스로 정하는 AI", "size": 36, "color": "gold"}}),
     [{"say": "그럼 이 영상의 해석은 언제 틀리게 될까요. 신호는 하나입니다.", "do": ["c1", "c2", "c3", "c4", "a12", "a23", "a34", "a41", {"swap": "c1", "text": "① 문제 고르기 — 사람"}, {"hi": "c1"}]},
      {"say": "랜드연구소가 아직 없다고 한 것. 스스로 연구 의제를 정하는 시스템이 공개되는 날입니다.", "do": ["sig"]},
      {"say": "그날이 오면 고리의 마지막 칸이 넘어간 것이고, 그때부터 AI 뉴스는 지금과 전혀 다른 뉴스가 될 겁니다.", "do": [{"swap": "c1", "text": "① 문제 고르기 — ?"}]}],

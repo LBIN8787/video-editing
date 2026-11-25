@@ -25,6 +25,12 @@ def quote(who, role, ko, orig, keyword, says, label, insight=True):
 
 
 def board(title, els, beats, label="", theme="dark"):
+    for el in els.values():   # 카드가 작아 글자를 못 읽던 문제(첫 렌더) — 넓게, 줄에서는 렌더러가 간격에 맞춰 줄임
+        if el.get("kind") == "card":
+            el.setdefault("w", 520)
+            el.setdefault("size", 44)
+        if el.get("kind") == "text":
+            el["size"] = max(el.get("size", 56), 36)
     add({"type": "motionboard", "title": title, "theme": theme, "label": label, "els": els, "beats": beats})
 
 
@@ -113,18 +119,22 @@ quote("진 먼스터", "딥워터 자산운용 · 블룸버그 (11.13)",
        "엔비디아 주식을 많이 가진 투자사들은 공개 편지까지 써서, 복귀를 포함해 모든 선택지를 열어 두라고 요구했습니다."],
       f"Bloomberg Podcasts 2026.11.13 (1:34~1:42) · 투자사 공개서한 11.13 (CNBC 보도) · {OP}")
 board("두 번째 힘, 정부 — 뒤집힌 말들", {
-    "inv": {"kind": "card", "x": 330, "y": 460, "icon": "briefcase", "label": "큰 주주: 복귀도 열어 두라", "color": "green"},
-    "bes": {"kind": "card", "x": 770, "y": 460, "icon": "landmark", "label": "재무장관: 외부 대표", "color": "red"},
-    "tru": {"kind": "card", "x": 1210, "y": 460, "icon": "flag", "label": "대통령: 상관없다"},
-    "jon": {"kind": "card", "x": 1650, "y": 460, "icon": "gavel", "label": "의장: 복귀 없음", "color": "red"},
+    "inv": {"kind": "card", "x": 330, "y": 460, "icon": "briefcase", "label": "복귀도 열어 둬라", "color": "green"},
+    "invn": {"kind": "text", "x": 330, "y": 600, "text": "큰 주주들", "size": 36},
+    "bes": {"kind": "card", "x": 770, "y": 460, "icon": "landmark", "label": "외부에서 찾아라", "color": "red"},
+    "besn": {"kind": "text", "x": 770, "y": 600, "text": "베선트 재무장관", "size": 36},
+    "tru": {"kind": "card", "x": 1210, "y": 460, "icon": "flag", "label": "상관없다"},
+    "trun": {"kind": "text", "x": 1210, "y": 600, "text": "트럼프 대통령", "size": 36},
+    "jon": {"kind": "card", "x": 1650, "y": 460, "icon": "gavel", "label": "복귀 없음", "color": "red"},
+    "jonn": {"kind": "text", "x": 1650, "y": 600, "text": "존스 이사회 의장", "size": 36},
     "d1": {"kind": "text", "x": 960, "y": 260, "text": "11.13 ~ 11.17", "size": 48},
     "d2": {"kind": "text", "x": 960, "y": 260, "text": "11.22 주말", "size": 48, "color": "gold"},
-    "8k": {"kind": "text", "x": 960, "y": 760, "text": "8-K: '미국 정부 고위층의 의견' → '안보 위험 없음'", "size": 38, "color": "gold"}},
-    [{"say": "두 번째 힘은 정부였습니다. 그런데 정부의 말은 처음엔 반대 방향이었죠.", "do": ["d1", "inv"]},
-     {"say": "베선트 재무장관은 외부에서 새 대표를 찾아야 한다는 취지로 말했고, 트럼프 대통령은 복귀해도 상관없다는 정도였습니다. 그리고 17일, 의장은 복귀는 없다고 못 박습니다.", "do": ["bes", "tru", "jon"]},
-     {"say": "주말 사이 말이 뒤집힙니다. 11월 22일, 베선트 장관은 이렇게 말했습니다. 외부에서 찾으라고 했는데, 이제 그도 외부 사람이 됐다.", "do": [{"hide": "d1"}, "d2", {"swap": "bes", "text": "재무장관: 이제 그도 외부 사람"}, {"hi": "bes"}]},
-     {"say": "트럼프 대통령은 이사회가 젠슨 황을 다시 고용하길 바란다는 글을 올렸습니다.", "do": [{"swap": "tru", "text": "대통령: 다시 고용하길"}]},
-     {"say": "바로 그날, 이사회는 만장일치로 복귀를 결의합니다.", "do": [{"swap": "jon", "text": "의장: 만장일치 복귀"}, {"hi": "jon"}]},
+    "8k": {"kind": "text", "x": 960, "y": 790, "text": "8-K: '미국 정부 고위층의 의견' → '안보 위험 없음'", "size": 38, "color": "gold"}},
+    [{"say": "두 번째 힘은 정부였습니다. 그런데 정부의 말은 처음엔 반대 방향이었죠.", "do": ["d1", "inv", "invn"]},
+     {"say": "베선트 재무장관은 외부에서 새 대표를 찾아야 한다는 취지로 말했고, 트럼프 대통령은 복귀해도 상관없다는 정도였습니다. 그리고 17일, 의장은 복귀는 없다고 못 박습니다.", "do": ["bes", "besn", "tru", "trun", "jon", "jonn"]},
+     {"say": "주말 사이 말이 뒤집힙니다. 11월 22일, 베선트 장관은 이렇게 말했습니다. 외부에서 찾으라고 했는데, 이제 그도 외부 사람이 됐다.", "do": [{"hide": "d1"}, "d2", {"swap": "bes", "text": "그도 외부 사람"}, {"hi": "bes"}]},
+     {"say": "트럼프 대통령은 이사회가 젠슨 황을 다시 고용하길 바란다는 글을 올렸습니다.", "do": [{"swap": "tru", "text": "다시 고용하길"}]},
+     {"say": "바로 그날, 이사회는 만장일치로 복귀를 결의합니다.", "do": [{"swap": "jon", "text": "만장일치 복귀"}, {"hi": "jon"}]},
      {"say": "그리고 발표문에 이 문장을 넣었습니다. 미국 정부 고위층의 의견을 들었고, 그 의견에 따라 복귀가 국가 안보 위험이 없다고 확신한다. 트럼프 대통령은 뒤에 자신이 이사회에 직접 복귀를 밀었다고 확인했습니다.", "do": ["8k"]}],
     label=f"투자사 서한(11.13)·베선트(폭스 11.15, CBS 11.22)·트럼프(11.16, 트루스소셜 주말 — 게시 시각 매체마다 다름)·실적 발표(11.17) 보도 · 8-K(11.23) · 트럼프 CNBC(알자지라 11.24) · {OP}")
 
