@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-26T01:40:23",
- "source_hash": "e8e36bef01e6",
+ "generated": "2026-11-26T01:45:13",
+ "source_hash": "8108fa28e518",
  "audit": {
   "date": "2026-11-25T14:34",
   "counts": {
@@ -807,41 +807,38 @@
   "fixed": []
  },
  "stats": {
-  "manual_version": 135,
-  "versions": 135,
+  "manual_version": 136,
+  "versions": 136,
   "reviews": 60,
   "rejects": 33,
   "passes": 27,
-  "pending": 2,
+  "pending": 0,
   "rules": 57,
   "checks": 90,
-  "sections": 224,
+  "sections": 225,
   "must": 30,
   "auto": 41,
-  "intents": 388,
+  "intents": 389,
   "misaligned": 1,
   "intents_reviewed": 7,
   "conflicts": 3,
   "code": 85,
   "terms": 140,
-  "bans": 242,
-  "feedback": 302,
+  "bans": 244,
+  "feedback": 303,
   "topics": 4,
   "episodes": 59,
   "main_situations": 17,
   "tiers": {
-   "principle": 59,
-   "standard": 198,
-   "style": 31,
-   "trial": 11
+   "principle": 60,
+   "standard": 197,
+   "style": 32,
+   "trial": 12
   },
-  "overfit": 18,
-  "principle_bans": 53
+  "overfit": 19,
+  "principle_bans": 54
  },
- "pending": [
-  "[2026-11-25 · 20261125-curiosity-riemann 기각] 불합격 입니다. 전부 이미지느낌보다는 글씨느낌에 애니메이션효과 천천히 그리는 효과도 너무 매번 똑같아요 속도가 https://youtu.be/HK6wSr1JdL0?si=AjiOfIJYsvID6Z4T 이 채널의 편집방식을 벤치마킹해주세요 대본 작상과 소재 선정도요",
-  "[2026-11-25 · 20261125-issues-explainer 기각] 기존 편집방식과 다르지 않은거같아요 글로 설명하은 느낌이 강하다고 느껴져요 제가 예시로 준 채널들이나 링크 레퍼런스나 다큐멘터리 등의 모션그래픽과 많이 달라요 저는 새로운 스타일은 원했어요"
- ],
+ "pending": [],
  "status_labels": {
   "aligned": "정렬됨",
   "over": "과잉 해석",
@@ -854,6 +851,12 @@
   {
    "theme": "sound",
    "plus": [
+    {
+     "section": "sec:09§5-00",
+     "theme": "sound",
+     "pol": "+",
+     "text": "- **원본 영상이 중심:** 장면 수가 아니라 흐름으로 — 해설자의 긴 설명이 이어지기 전에 그 사람의 목소리가 다시 나오게, 그리고 원본 다음엔 반드시 해설이 붙게(원본만 이어 붙이지 않음). 권리·길이는 §3-5(본인·회사 공식은 길어도 되고 방송사는 한 구간 20초·한 편 60초 안팎), 원본을 못 쓰면 인용 카드(`bite_fallback`)로 '"
+    },
     {
      "section": "sec:09§9-1",
      "theme": "sound",
@@ -3408,24 +3411,62 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:09§5",
+   "section": "sec:09§5-00",
+   "text": "1. 여는 장면 — 그 사람의 목소리로: 날짜·장소 한 줄 + 원본 발언(bite) → 바로 그 말과 어긋나거나 받치는 사실 하나(말 vs 행동·장부·숫자)를 맞대어 질문을 세움. 숫자·지수로 열지 않는다(§5 여는 장면).",
+   "themes": [
+    "sound"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:40040bc2",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": true,
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
+  },
+  {
+   "section": "sec:09§5-00",
+   "text": "넘치면: 원본을 길게 틀거나 원본끼리 이어 붙이면 번역 영상이 되고(저작권·§2 '통째로 번역 금지') 우리 해설이 사라진다. 한 사람을 치켜세우기만 하면 팬 영상 — 틀릴 수 있는 경우와 반대 시각을 같은 무게로. 모자라면: 이름만 나오고 목소리가 없거나, 말만 있고 숫자·행동으로 따지지 않으면 브리핑과 같다.",
+   "themes": [
+    "sound"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:1db317ed",
+   "tier_auto": "principle",
+   "why": "사실·법·권리·안전에 관한 말",
+   "overfit": false,
+   "single": true,
+   "tier": "principle",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "영구 원칙"
+  },
+  {
+   "section": "sec:09§5-00",
    "text": "어떻게: 첫 5~10초에 썸네일이 약속한 것 — 당사자의 원본 발언(bite), 갈등, 반전 — 을 바로 보여 주고, 숫자는 그 말을 받치거나 뒤집는 다음 장면에서. \"○월 ○일 장 마감 기준\"·지수 나열로 시작하지 않는다. 원본이 없으면 갈등이 보이는 숫자 하나(맞대기)로.",
    "themes": [],
    "absolute": false,
    "must": false,
    "tier_key": "ban:08d809f2",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
+   "tier_auto": "trial",
+   "why": "스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨",
+   "overfit": true,
+   "single": true,
+   "tier": "trial",
    "tier_by": "자동 추정",
    "tier_note": "",
    "tier_fixed": false,
-   "tier_label": "작업 기준"
+   "tier_label": "실험 기록"
   },
   {
-   "section": "sec:09§5",
+   "section": "sec:09§5-00",
    "text": "넘치면: 자극만 있고 영상이 약속을 지키지 않으면 시청 지속이 더 떨어진다(14 §8). 소문·사생활로 열지 않는다(README §3). 모자라면: 앞 30초가 배경 설명이 된다.",
    "themes": [
     "background"
@@ -3436,7 +3477,7 @@
    "tier_auto": "principle",
    "why": "사실·법·권리·안전에 관한 말",
    "overfit": false,
-   "single": false,
+   "single": true,
    "tier": "principle",
    "tier_by": "자동 추정",
    "tier_note": "",
@@ -4093,7 +4134,7 @@
    "tier_label": "영구 원칙"
   },
   {
-   "section": "sec:09§h544",
+   "section": "sec:09§h558",
    "text": "ElevenLabs 는 직접 API 로만 (MCP 생성 금지, 2026-11-22 사용자): 같은 문장(33자, Teo·eleven_v4)을 실측: 직접 API 15 크레딧(응답 헤더 Character-Cost) vs MCP creative_generate_speech 1테이크 33 크레딧·기본 2테이크 66 크레딧(estimate_only) — MCP 가 1테이크도 2.2배, 기본값이면 4.4배 (AGENTS 목소리 규칙, docs/08-voice.md).",
    "themes": [
     "sound"
@@ -4112,7 +4153,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:09§h544",
+   "section": "sec:09§h558",
    "text": "ElevenLabs 를 쓸 수 없는 날은 edge 초안으로 만들되 올리지 않는다 (v43, §2-1 — 공개본은 Teo). 크레딧이 모자라면 그날 편을 미루거나 voice-import 로 Teo 테이크를 만든다.",
    "themes": [],
    "absolute": false,
@@ -5082,7 +5123,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h339",
+   "section": "sec:feedback§h340",
    "text": "2026-11-14 · v20 기각 — “중간중간 너무 난잡함. 목표·시청자 욕망을 먼저 정의하지 않고 만듦. 대본을 소제목처럼 글로 쓰거나 사진·그림을 붙여 넣기만 함 — 대본에 따른 애니메이션이 아님. 각 연출의 의도가 불분명”",
    "themes": [
     "variety",
@@ -5103,7 +5144,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h339",
+   "section": "sec:feedback§h340",
    "text": "2026-11-21 · 영상 검토 — “대본의 피드백입니다 — (의지력 편 v2 검토) 방향 통과, 2025 효과 배수 비교 금지·대조 조건과 주 지표 설명·생활 조언을 근거 범위 안으로·4~7장 연구 나열 대신 증거 추적·8장 전환 문장”",
    "themes": [
     "motion",
@@ -5123,7 +5164,7 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "section": "sec:feedback§h441",
+   "section": "sec:feedback§h442",
    "text": "2026-11-19 · 방향·기준 요청 — “대본 단계에 \"호기심 대본은 설명·지식 문장 30% 이하\"라는 기준 이런 기준은 또 빼주세요 너무 과적합입니다. / \"설명은 이야기 속에 엮는다\"는 원리 이런식으로 원리주의적으로 가지 방법 자체를 고정하지 말아주세요”",
    "themes": [
     "script",
@@ -5143,7 +5184,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h499",
+   "section": "sec:feedback§h500",
    "text": "2026-11-09 · v3 기각 — “강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)”",
    "themes": [
     "emphasis",
@@ -5822,7 +5863,7 @@
    "key": "09",
    "file": "manual/09-market-daily.md",
    "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13 · v36 인사이트·영상 소스 · v42 기술 분석·CEO 소식 2026-11-17)",
-   "lines": 564,
+   "lines": 578,
    "versions": [
     19,
     24,
@@ -5987,7 +6028,7 @@
    "key": "feedback",
    "file": "manual/feedback-by-repo.md",
    "label": "내 피드백 — 레포별 (자동 생성: `python -m ytflow manual-graph`)",
-   "lines": 510,
+   "lines": 511,
    "versions": [
     83,
     84,
@@ -8106,13 +8147,29 @@
    "label": "대본 — 심층 (시간 기준 없음 — 구성요소를 모두 채우고 길이는 자료·인사이트의 양이 정함)",
    "title": "5. 대본 — 심층 (시간 기준 없음 — 구성요소를 모두 채우고 길이는 자료·인사이트의 양이 정함)",
    "line": 341,
-   "end": 356,
+   "end": 341,
    "tag_version": null,
    "versions": [
     26,
     28
    ],
-   "last_version": 28,
+   "last_version": 28
+  },
+  {
+   "id": "sec:09§5-00",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "5-00",
+   "level": 3,
+   "label": "분석 영상의 기본 구성 = 드러켄밀러 편 틀 — 인터뷰 원본 + 그 사람의 인사이트를 해설 (작업 기준, 2026-11-26 사용자: \"앞으로 영상의 구성을 드러켄밀러 편처럼 구성해주세요 편집스타일은 이번 보강을 곁들이고 분석영상 자체의 구성을 말하는 것 입니다. 인터뷰와 그 영상소스 그리고 그 사람의 인사이트를 분석하거 해설하는 느낌으로 말이죠\")",
+   "title": "5-00. 분석 영상의 기본 구성 = 드러켄밀러 편 틀 — 인터뷰 원본 + 그 사람의 인사이트를 해설 (작업 기준, 2026-11-26 사용자: \"앞으로 영상의 구성을 드러켄밀러 편처럼 구성해주세요 편집스타일은 이번 보강을 곁들이고 분석영상 자체의 구성을 말하는 것 입니다. 인터뷰와 그 영상소스 그리고 그 사람의 인사이트를 분석하거 해설하는 느낌으로 말이죠\")",
+   "line": 342,
+   "end": 370,
+   "tag_version": null,
+   "versions": [
+    136
+   ],
+   "last_version": 136,
    "terms": [
     "term:bite",
     "term:recap",
@@ -8128,8 +8185,8 @@
    "level": 3,
    "label": "원리에서 결론이 따라 나오게 — 외우게 하지 않는다 (작업 기준, 2026-11-22 사용자)",
    "title": "5-0. 원리에서 결론이 따라 나오게 — 외우게 하지 않는다 (작업 기준, 2026-11-22 사용자)",
-   "line": 357,
-   "end": 365,
+   "line": 371,
+   "end": 379,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -8145,8 +8202,8 @@
    "level": 3,
    "label": "만약에 검수 — 빠진 변수·다른 경우·숨은 가정 (작업 기준, 2026-11-22 사용자: \"제가 매번 만략에 만약에 등 경우의수나 다른 변수요인 등을 찾듯이 시장 대본을 구성 할 때는 이점을 항상 고려하고 검수해주세요. 특히나 심층분석은 이게 중요합니다. 사소한 디테일이나 빼먹은 요인 if가정 말이죠\")",
    "title": "5-0-1. 만약에 검수 — 빠진 변수·다른 경우·숨은 가정 (작업 기준, 2026-11-22 사용자: \"제가 매번 만략에 만약에 등 경우의수나 다른 변수요인 등을 찾듯이 시장 대본을 구성 할 때는 이점을 항상 고려하고 검수해주세요. 특히나 심층분석은 이게 중요합니다. 사소한 디테일이나 빼먹은 요인 if가정 말이죠\")",
-   "line": 366,
-   "end": 381,
+   "line": 380,
+   "end": 395,
    "tag_version": null,
    "versions": [
     96
@@ -8161,8 +8218,8 @@
    "level": 3,
    "label": "큰 주제는 1부(개념)·2부(인사이트)로 (작업 기준, 2026-11-22 사용자: \"2부로 만들어도 되니까 이 메모리호황을 보는 인사이트와 그 인터뷰내용과 명확한 논리근거 그 반대근거 등등 여러 인사이트로 확장해주세요\" · \"즉 지금은 약간 개념설명이고 이 개념을 바탕으로 진짜 인사이트와 각각의 근거까지 이어가자 입니다\" · \"이런 심층분석은 이 주제에 대한 다른 사람들의 인사이트 여러 인사이트로 볼 수 있어야 합니다. 그리고 가능한 이 발언이 담긴 영상소스를 넣어달라 했구요\")",
    "title": "5-0-2. 큰 주제는 1부(개념)·2부(인사이트)로 (작업 기준, 2026-11-22 사용자: \"2부로 만들어도 되니까 이 메모리호황을 보는 인사이트와 그 인터뷰내용과 명확한 논리근거 그 반대근거 등등 여러 인사이트로 확장해주세요\" · \"즉 지금은 약간 개념설명이고 이 개념을 바탕으로 진짜 인사이트와 각각의 근거까지 이어가자 입니다\" · \"이런 심층분석은 이 주제에 대한 다른 사람들의 인사이트 여러 인사이트로 볼 수 있어야 합니다. 그리고 가능한 이 발언이 담긴 영상소스를 넣어달라 했구요\")",
-   "line": 382,
-   "end": 390,
+   "line": 396,
+   "end": 404,
    "tag_version": null,
    "versions": [
     114
@@ -8177,8 +8234,8 @@
    "level": 3,
    "label": "나열하지 말고 풀어서 — 설명은 움직이는 장면으로",
    "title": "5-1. 나열하지 말고 풀어서 — 설명은 움직이는 장면으로 (v63, 2026-11-20)",
-   "line": 391,
-   "end": 419,
+   "line": 405,
+   "end": 433,
    "tag_version": 63,
    "versions": [
     63
@@ -8209,8 +8266,8 @@
    "level": 2,
    "label": "화면 문법 (시장 카테고리 개성, `05 §0-7`)",
    "title": "6. 화면 문법 (시장 카테고리 개성, `05 §0-7`)",
-   "line": 420,
-   "end": 443,
+   "line": 434,
+   "end": 457,
    "tag_version": null,
    "versions": [
     27,
@@ -8245,8 +8302,8 @@
    "level": 2,
    "label": "제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
    "title": "7. 제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
-   "line": 444,
-   "end": 453,
+   "line": 458,
+   "end": 467,
    "tag_version": null,
    "versions": [
     27
@@ -8266,8 +8323,8 @@
    "level": 3,
    "label": "썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
    "title": "7-1. 썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
-   "line": 454,
-   "end": 489,
+   "line": 468,
+   "end": 503,
    "tag_version": null,
    "versions": [
     51,
@@ -8289,8 +8346,8 @@
    "level": 2,
    "label": "렌더 전 점검",
    "title": "8. 렌더 전 점검",
-   "line": 490,
-   "end": 492,
+   "line": 504,
+   "end": 506,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8303,8 +8360,8 @@
    "level": 2,
    "label": "렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
    "title": "9. 렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
-   "line": 493,
-   "end": 500,
+   "line": 507,
+   "end": 514,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8317,8 +8374,8 @@
    "level": 3,
    "label": "업로드 전 종합 검수 — 통과해야 올린다 (작업 기준, 2026-11-21 사용자: \"업로드 하기 전 항상 글씨겹침 그래픽끼리 겹침 자막밀림 자막과 나레이션 싱크 화면과 자막이 일치하는지 등 종합적으로 검수하세요 이는 메뉴얼에 반영하세요\")",
    "title": "9-1. 업로드 전 종합 검수 — 통과해야 올린다 (작업 기준, 2026-11-21 사용자: \"업로드 하기 전 항상 글씨겹침 그래픽끼리 겹침 자막밀림 자막과 나레이션 싱크 화면과 자막이 일치하는지 등 종합적으로 검수하세요 이는 메뉴얼에 반영하세요\")",
-   "line": 501,
-   "end": 508,
+   "line": 515,
+   "end": 522,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8331,8 +8388,8 @@
    "level": 2,
    "label": "업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
    "title": "10. 업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
-   "line": 509,
-   "end": 521,
+   "line": 523,
+   "end": 535,
    "tag_version": null,
    "versions": [
     34
@@ -8347,8 +8404,8 @@
    "level": 2,
    "label": "기록·되돌아보기",
    "title": "11. 기록·되돌아보기",
-   "line": 522,
-   "end": 525,
+   "line": 536,
+   "end": 539,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8361,8 +8418,8 @@
    "level": 2,
    "label": "예외 대응",
    "title": "12. 예외 대응",
-   "line": 526,
-   "end": 535,
+   "line": 540,
+   "end": 549,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8375,8 +8432,8 @@
    "level": 2,
    "label": "법·정책",
    "title": "13. 법·정책",
-   "line": 536,
-   "end": 543,
+   "line": 550,
+   "end": 557,
    "tag_version": null,
    "versions": [
     34
@@ -8384,43 +8441,43 @@
    "last_version": 34
   },
   {
-   "id": "sec:09§h544",
+   "id": "sec:09§h558",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h544",
+   "num": "h558",
    "level": 2,
    "label": "목소리 (2026-11-13 결정)",
    "title": "목소리 (2026-11-13 결정)",
-   "line": 544,
-   "end": 552,
+   "line": 558,
+   "end": 566,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h553",
+   "id": "sec:09§h567",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h553",
+   "num": "h567",
    "level": 2,
    "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
    "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
-   "line": 553,
-   "end": 558,
+   "line": 567,
+   "end": 572,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h559",
+   "id": "sec:09§h573",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h559",
+   "num": "h573",
    "level": 2,
    "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
    "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
-   "line": 559,
-   "end": 564,
+   "line": 573,
+   "end": 578,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9725,35 +9782,35 @@
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
    "line": 263,
-   "end": 336,
+   "end": 337,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h337",
+   "id": "sec:feedback§h338",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h337",
+   "num": "h338",
    "level": 2,
    "label": "호기심 — `topics/curiosity`",
    "title": "호기심 — `topics/curiosity`",
-   "line": 337,
-   "end": 338,
+   "line": 338,
+   "end": 339,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h339",
+   "id": "sec:feedback§h340",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h339",
+   "num": "h340",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 339,
-   "end": 440,
+   "line": 340,
+   "end": 441,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9764,15 +9821,15 @@
    ]
   },
   {
-   "id": "sec:feedback§h441",
+   "id": "sec:feedback§h442",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h441",
+   "num": "h442",
    "level": 3,
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
-   "line": 441,
-   "end": 463,
+   "line": 442,
+   "end": 464,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9781,29 +9838,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h464",
+   "id": "sec:feedback§h465",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h464",
+   "num": "h465",
    "level": 2,
    "label": "시사 — `topics/issues`",
    "title": "시사 — `topics/issues`",
-   "line": 464,
-   "end": 465,
+   "line": 465,
+   "end": 466,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h466",
+   "id": "sec:feedback§h467",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h466",
+   "num": "h467",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 466,
-   "end": 496,
+   "line": 467,
+   "end": 497,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9813,29 +9870,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h497",
+   "id": "sec:feedback§h498",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h497",
+   "num": "h498",
    "level": 2,
    "label": "AI — `topics/ai`",
    "title": "AI — `topics/ai`",
-   "line": 497,
-   "end": 498,
+   "line": 498,
+   "end": 499,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h499",
+   "id": "sec:feedback§h500",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h499",
+   "num": "h500",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 499,
-   "end": 510,
+   "line": 500,
+   "end": 511,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -16838,6 +16895,31 @@
    ]
   },
   {
+   "id": "ver:136",
+   "kind": "version",
+   "v": 136,
+   "date": "2026-11-26",
+   "label": "v136",
+   "summary": "분석 영상 기본 구성 = 드러켄밀러 편 틀 (인터뷰 원본 + 그 사람의 인사이트 해설, 09 §5-00)",
+   "applied": [
+    {
+     "date": "2026-11-25",
+     "project": "20261125-curiosity-riemann",
+     "reason": "불합격 입니다. 전부 이미지느낌보다는 글씨느낌에 애니메이션효과 천천히 그리는 효과도 너무 매번 똑같아요 속도가 https://youtu.be/HK6wSr1JdL0?si=AjiOfIJYsvID6Z4T 이 채널의 편집방식을 벤치마킹해주세요 대본 작상과 소재 선정도요"
+    },
+    {
+     "date": "2026-11-25",
+     "project": "20261125-issues-explainer",
+     "reason": "기존 편집방식과 다르지 않은거같아요 글로 설명하은 느낌이 강하다고 느껴져요 제가 예시로 준 채널들이나 링크 레퍼런스나 다큐멘터리 등의 모션그래픽과 많이 달라요 저는 새로운 스타일은 원했어요"
+    }
+   ],
+   "themes": [
+    "variety",
+    "script",
+    "depth"
+   ]
+  },
+  {
    "id": "rev:1",
    "kind": "review",
    "date": "2026-11-09",
@@ -18075,7 +18157,7 @@
    ],
    "repo": "issues",
    "repo_label": "시사",
-   "status": "pending",
+   "status": "applied",
    "tier_key": "rev:ec6d7b0c",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -18100,7 +18182,7 @@
    ],
    "repo": "curiosity",
    "repo_label": "호기심",
-   "status": "pending",
+   "status": "applied",
    "tier_key": "rev:19dd3715",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -27425,7 +27507,7 @@
      "kind": "review"
     },
     {
-     "ref": "sec:feedback§h339",
+     "ref": "sec:feedback§h340",
      "kind": "manual"
     }
    ],
@@ -27461,7 +27543,7 @@
      "by": ""
     },
     {
-     "ref": "sec:feedback§h339",
+     "ref": "sec:feedback§h340",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -34770,7 +34852,7 @@
      "kind": "feedback"
     },
     {
-     "ref": "sec:09§5",
+     "ref": "sec:09§5-00",
      "kind": "manual"
     }
    ],
@@ -34788,7 +34870,7 @@
    "note": "",
    "readings": [
     {
-     "ref": "sec:09§5",
+     "ref": "sec:09§5-00",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -34810,7 +34892,7 @@
      "kind": "feedback"
     },
     {
-     "ref": "sec:09§5",
+     "ref": "sec:09§5-00",
      "kind": "manual"
     }
    ],
@@ -34830,7 +34912,7 @@
    "note": "",
    "readings": [
     {
-     "ref": "sec:09§5",
+     "ref": "sec:09§5-00",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -35789,7 +35871,9 @@
    "kind": "intent",
    "quote": "불합격 입니다. 전부 이미지느낌보다는 글씨느낌에 애니메이션효과 천천히 그리는 효과도 너무 매번 똑같아요 속도가 https://youtu.be/HK6wSr1JdL0?si=AjiOfIJYsvID6Z4T 이 채널의 편집방식을 벤치마킹해주세요 대본 작상과 소재 선정도요",
    "label": "불합격 입니다. 전부 이미지느낌보다는 글씨느낌에 애니메이션효과 천천히 그리는 효과도 너무 매번 똑같아요 속도",
-   "versions": [],
+   "versions": [
+    136
+   ],
    "date": "2026-11-25",
    "sources": [
     {
@@ -35808,7 +35892,20 @@
    "meaning": "",
    "not_meant": [],
    "note": "",
-   "readings": [],
+   "readings": [
+    {
+     "ref": "ver:136",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§5-00",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -36447,7 +36544,9 @@
    "kind": "intent",
    "quote": "기존 편집방식과 다르지 않은거같아요 글로 설명하은 느낌이 강하다고 느껴져요 제가 예시로 준 채널들이나 링크 레퍼런스나 다큐멘터리 등의 모션그래픽과 많이 달라요 저는 새로운 스타일은 원했어요",
    "label": "기존 편집방식과 다르지 않은거같아요 글로 설명하은 느낌이 강하다고 느껴져요 제가 예시로 준 채널들이나 링크 ",
-   "versions": [],
+   "versions": [
+    136
+   ],
    "date": "2026-11-25",
    "sources": [
     {
@@ -36466,7 +36565,20 @@
    "meaning": "",
    "not_meant": [],
    "note": "",
-   "readings": [],
+   "readings": [
+    {
+     "ref": "ver:136",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§5-00",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
    "status": "unreviewed",
    "annotated": false
   },
@@ -36605,6 +36717,49 @@
    "annotated": false
   },
   {
+   "id": "intent:7b56f24f",
+   "kind": "intent",
+   "quote": "또한 앞으로 영상의 구성을 드러켄밀러 편처럼 구성해주세요 편집스타일은 이번 보강을 곁들이고 분석영상 자체의 구성을 말하는 것 입니다. 인터뷰와 그 영상소스 그리고 그 사람의 인사이트를 분석하거 해설하는 느낌으로 말이죠",
+   "label": "또한 앞으로 영상의 구성을 드러켄밀러 편처럼 구성해주세요 편집스타일은 이번 보강을 곁들이고 분석영상 자체의 ",
+   "versions": [],
+   "date": "2026-11-26",
+   "sources": [
+    {
+     "ref": "fb:303",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:09§5-00",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "앞으로 영상의 구성을 드러켄밀러 편처럼 구성해주세요 편집스타일은 이번 보강을 곁들이고 분석영상 자체의 구성을 말하는 것 입니다. 인터뷰와 그 영상소스 그리고 그 사람의 인사이트를 분석하거 해설하는 느낌으로 말이죠"
+   ],
+   "member_ids": [
+    "intent:7b56f24f",
+    "intent:7da80613"
+   ],
+   "themes": [
+    "variety",
+    "depth"
+   ],
+   "ann_key": "intent:7b56f24f",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§5-00",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:964b2b8a",
    "kind": "intent",
    "quote": "젠슨복귀는 왜올렸어요 비공개로하고 썸네일 바꿔줘요",
@@ -36701,7 +36856,7 @@
     "sec:09§3-4",
     "sec:09§3-5",
     "sec:09§4",
-    "sec:09§5",
+    "sec:09§5-00",
     "sec:09§5-1",
     "sec:10§h37",
     "sec:10§4",
@@ -37207,7 +37362,7 @@
    "mentioned_in": [
     "sec:05§0-6",
     "sec:05§0-4",
-    "sec:09§5",
+    "sec:09§5-00",
     "sec:10§h107",
     "sec:10§5",
     "ver:10"
@@ -37886,7 +38041,7 @@
     "sec:08§6",
     "sec:09§3-4",
     "sec:09§4",
-    "sec:09§5",
+    "sec:09§5-00",
     "sec:09§5-1",
     "sec:10§h37",
     "sec:10§5",
@@ -39874,7 +40029,7 @@
     "sec:10§1",
     "sec:10§h9",
     "sec:10§3",
-    "sec:feedback§h441",
+    "sec:feedback§h442",
     "ver:21",
     "ver:34",
     "code:ytflow/stages/hybrid.py:1746",
@@ -42241,7 +42396,7 @@
     "sec:05§0-2",
     "sec:09§3-4",
     "sec:09§3-5",
-    "sec:09§5",
+    "sec:09§5-00",
     "sec:10§h81",
     "sec:10§4",
     "sec:11§2-5",
@@ -42537,7 +42692,7 @@
     "sec:12§0-1",
     "sec:13§4-1",
     "sec:13§7",
-    "sec:feedback§h339",
+    "sec:feedback§h340",
     "ver:92",
     "rule:G4:1",
     "check:172",
@@ -42686,9 +42841,9 @@
     "sec:09§6",
     "sec:10§h136",
     "sec:feedback§h164",
-    "sec:feedback§h339",
-    "sec:feedback§h466",
-    "sec:feedback§h499",
+    "sec:feedback§h340",
+    "sec:feedback§h467",
+    "sec:feedback§h500",
     "ver:10",
     "ver:30",
     "ver:31",
@@ -42948,7 +43103,7 @@
     "sec:04§0-4",
     "sec:09§5-1",
     "sec:09§6",
-    "sec:09§h559",
+    "sec:09§h573",
     "sec:11§2-4",
     "sec:README§2-5",
     "sec:README§3-1",
@@ -43112,9 +43267,9 @@
     "sec:10§4",
     "sec:12§0-1",
     "sec:feedback§h164",
-    "sec:feedback§h339",
-    "sec:feedback§h466",
-    "sec:feedback§h499",
+    "sec:feedback§h340",
+    "sec:feedback§h467",
+    "sec:feedback§h500",
     "ver:10",
     "ver:12",
     "rev:11",
@@ -43275,7 +43430,7 @@
     "sec:06§G6",
     "sec:08§4",
     "sec:09§6",
-    "sec:09§h559",
+    "sec:09§h573",
     "sec:10§4",
     "sec:feedback§h164",
     "sec:README§0",
@@ -52100,6 +52255,37 @@
    "tier_key": "fb:36bfaa9d",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:303",
+   "kind": "feedback",
+   "date": "2026-11-26",
+   "quote": "또한 앞으로 영상의 구성을 드러켄밀러 편처럼 구성해주세요 편집스타일은 이번 보강을 곁들이고 분석영상 자체의 구성을 말하는 것 입니다. 인터뷰와 그 영상소스 그리고 그 사람의 인사이트를 분석하거 해설하는 느낌으로 말이죠",
+   "label": "또한 앞으로 영상의 구성을 드러켄밀러 편처럼 구성해주세요 편집스타일은 이번 보강을 곁들이고 분석영상 자체의 ",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "해석: 분석(심층) 영상의 기본 뼈대를 드러켄밀러 편으로 — 그 사람의 원본 발언으로 열고, 왜 이 사람인가(읽는 틀) → 시간 순 장마다 원본 → 해설 → 숫자·행동 증거 → 모아 보기 → 반대 시각 → 내 계좌. 편집은 11-25~26 보강(문장 연기 모션그래픽·날짜 기준 표현). 반영: manual/09 §5-00",
+   "pending": false,
+   "themes": [
+    "variety",
+    "depth"
+   ],
+   "scope": "standard",
+   "repo": "market",
+   "repo_label": "시장",
+   "intent": "intent:7b56f24f",
+   "tier_key": "fb:7b56f24f",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
    "overfit": false,
    "single": false,
    "tier": "standard",
@@ -84081,6 +84267,11 @@
   },
   {
    "s": "doc:09",
+   "t": "sec:09§5-00",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
    "t": "sec:09§5-0",
    "kind": "contains"
   },
@@ -84151,17 +84342,17 @@
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h544",
+   "t": "sec:09§h558",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h553",
+   "t": "sec:09§h567",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h559",
+   "t": "sec:09§h573",
    "kind": "contains"
   },
   {
@@ -84521,37 +84712,37 @@
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h337",
+   "t": "sec:feedback§h338",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h339",
+   "t": "sec:feedback§h340",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h441",
+   "t": "sec:feedback§h442",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h464",
+   "t": "sec:feedback§h465",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h466",
+   "t": "sec:feedback§h467",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h497",
+   "t": "sec:feedback§h498",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h499",
+   "t": "sec:feedback§h500",
    "kind": "contains"
   },
   {
@@ -88570,6 +88761,14 @@
    ]
   },
   {
+   "s": "ver:136",
+   "t": "sec:09§5-00",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -88889,6 +89088,18 @@
    "s": "rev:58",
    "t": "ver:121",
    "kind": "approved_in"
+  },
+  {
+   "s": "rev:59",
+   "t": "ver:136",
+   "kind": "applied_in",
+   "how": "changelog"
+  },
+  {
+   "s": "rev:60",
+   "t": "ver:136",
+   "kind": "applied_in",
+   "how": "changelog"
   },
   {
    "s": "rev:1",
@@ -89906,6 +90117,21 @@
    "kind": "about"
   },
   {
+   "s": "ver:136",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "ver:136",
+   "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "ver:136",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
    "s": "ver:8",
    "t": "code:ytflow/stages/backdrop.py:1",
    "kind": "implemented_by"
@@ -90672,7 +90898,7 @@
   },
   {
    "s": "intent:94db84ec",
-   "t": "sec:09§5",
+   "t": "sec:09§5-00",
    "kind": "quoted_in"
   },
   {
@@ -90819,6 +91045,11 @@
    "s": "intent:2d01dbb8",
    "t": "theme:script",
    "kind": "about"
+  },
+  {
+   "s": "intent:19dd3715",
+   "t": "ver:136",
+   "kind": "interpreted_in"
   },
   {
    "s": "intent:19dd3715",
@@ -91246,6 +91477,26 @@
    "kind": "about"
   },
   {
+   "s": "intent:7b56f24f",
+   "t": "fb:303",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:7b56f24f",
+   "t": "sec:09§5-00",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:7b56f24f",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "intent:7b56f24f",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
    "s": "intent:45296941",
    "t": "ver:23",
    "kind": "interpreted_in"
@@ -91517,6 +91768,11 @@
   },
   {
    "s": "intent:ec6d7b0c",
+   "t": "ver:136",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:ec6d7b0c",
    "t": "rev:59",
    "kind": "quoted_in"
   },
@@ -91652,7 +91908,7 @@
   },
   {
    "s": "intent:90179785",
-   "t": "sec:09§5",
+   "t": "sec:09§5-00",
    "kind": "quoted_in"
   },
   {
@@ -92307,7 +92563,7 @@
   },
   {
    "s": "intent:b3682647",
-   "t": "sec:feedback§h339",
+   "t": "sec:feedback§h340",
    "kind": "quoted_in"
   },
   {
@@ -100448,6 +100704,21 @@
   {
    "s": "fb:302",
    "t": "intent:36bfaa9d",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:303",
+   "t": "theme:variety",
+   "kind": "about"
+  },
+  {
+   "s": "fb:303",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "fb:303",
+   "t": "intent:7b56f24f",
    "kind": "quoted_as"
   }
  ]
