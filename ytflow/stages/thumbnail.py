@@ -57,7 +57,7 @@ def _font(path, size):
 
 
 def series(project: Project | str) -> str | None:
-    """시장 채널 썸네일 계열 (manual/09 §7-1 ⑬): 'brief' 브리핑(매일·주간) = 흑백 기업 사진 / 'analysis' 분석(심층·기술 등) = 컬러 인물.
+    """시장 채널 썸네일 계열 (manual/09 §7-1 ⑬·⑭): 'brief' 브리핑(매일·주간) = 기업 사진·brief_tab 틀 / 'analysis' 분석(심층·기술 등) = 인물·analysis_frame 틀.
     목록에서 글씨를 읽지 않아도 둘이 갈리게 (2026-11-25 사용자: "브리핑이랑 분석이랑 구분 할 수 있도록 해주세요 글씨로 말구요")."""
     name = project if isinstance(project, str) else project.path.name
     m = re.match(r"\d{8}-market-(\w+)", name)
@@ -421,10 +421,12 @@ def _week_badge(im: Image.Image, wk: dict, boxes: list) -> Image.Image:
 
 def render(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
     sr = series(project)
-    if sr == "brief" and v.get("image"):        # 브리핑: 사진은 모두 흑백
+    # 브리핑·분석은 고정 틀(⑭)로 갈리므로 사진은 둘 다 컬러 그대로 (2026-11-25 사용자: "굳이 흑백이 아니여도 브리핑과 분석이 구분가기만 하면 돼요").
+    # 흑백을 원하는 변형만 "bw": true
+    if sr and v.get("image") and v.get("bw"):
         v = dict(v, image=dict(v["image"], _bw=True), tone="none")
-    elif sr == "analysis" and v.get("layout", "photo") == "photo" and "tone" not in v:
-        v = dict(v, tone="none")                 # 분석: 사진 판도 컬러 그대로 (교양 채널의 옛 사진 톤을 쓰지 않음)
+    elif sr and v.get("layout", "photo") == "photo" and "tone" not in v:
+        v = dict(v, tone="none")                 # 시장 채널은 교양 채널의 옛 사진 톤을 쓰지 않음
     wk = v.get("week") or (spec.get("package") or {}).get("week") or week_of(project)
     im, boxes = _render_layout(project, spec, dict(v, _week=wk) if wk else v)
     if v.get("credit") and v.get("layout", "photo") not in ("person", "brief_tab", "analysis_frame"):   # 사진 출처 (CC BY 표시 의무) — 인물 판은 _person 이 씀
@@ -818,7 +820,7 @@ def score(v: dict, qa: dict, hot: list[str], title: str = "", sr: str | None = N
     if not qa.get("ok"):
         sc -= 5; why.append("점검 실패(글자 크기·재생 시간 자리) −5")
     per = (v.get("person") or {}).get("name")
-    if sr == "brief":   # 브리핑 = 흑백 기업 사진 (09 §7-1 ⑬) — 얼굴 가점 대신 기업 사진 가점, 인물은 분석 편으로
+    if sr == "brief":   # 브리핑 = 기업 사진 (09 §7-1 ⑬) — 얼굴 가점 대신 기업 사진 가점, 인물은 분석 편으로
         if v.get("layout") == "person" or per:
             sc -= 3; why.append("브리핑에 인물 −3 — 인물은 분석 편 썸네일로 (09 §7-1 ⑬)")
         elif v.get("company") or Path(((v.get("image") or {}).get("file")) or "").name.startswith("co_"):
@@ -925,7 +927,7 @@ def packaging_notes(project: Project) -> list[str]:
     pick_id = json.loads(f.read_text(encoding="utf-8")).get("pick")
     v = next((t for t in (json.loads(hy.read_text(encoding="utf-8")).get("package") or {}).get("thumbnails", []) if t.get("id") == pick_id), None)
     if v and (v.get("layout") == "person" or (v.get("person") or {}).get("name")):
-        return [f"브리핑인데 썸네일 {v['id']} 가 인물 — 기본은 그날 핵심 기업 사진(흑백), 인물은 분석 편으로 (manual/09 §7-1 ⑬, company-photo pick)"]
+        return [f"브리핑인데 썸네일 {v['id']} 가 인물 — 기본은 그날 핵심 기업 사진, 인물은 분석 편으로 (manual/09 §7-1 ⑬, company-photo pick)"]
     return []
 
 
