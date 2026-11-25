@@ -182,7 +182,7 @@ def s_pricewalk(D, sc: dict, bt: list, dur: float):
                 j = D._id()
                 D.items.append(f'<div id="{j}" style="position:absolute;left:{xb - 13:.0f}px;top:{yb2 - 13:.0f}px;width:26px;height:26px;border-radius:50%;border:4px solid {UP};background:#14181B;transform:scale(0)"></div>')
                 D.js.append(f'tl.to("#{j}",{{scale:1,duration:.35,ease:"back.out(2.4)"}},{t + .3:.2f});')
-                k2 = _txt(D, xb - 26, yb2 - 74, H.escape(act.get("label", "")), 28, UP, font="heavy", anchor="r")
+                k2 = _txt(D, act.get("lx", xb - 26), act.get("ly", yb2 - 74), H.escape(act.get("label", "")), 28, UP, font="heavy", anchor=act.get("anchor", "r"))
                 _show(D, k2, t + .4)
                 g += [i, j, k2]
             if "note" in act:
