@@ -159,6 +159,8 @@ def discover(cfg: dict, now: datetime) -> list[dict]:
             except Exception as e:  # noqa: BLE001
                 print(f"  ! 검색 실패 {q}: {str(e)[:60]}", file=sys.stderr)
                 continue
+            if not r.get("entries"):
+                print(f"  ! 검색 결과 없음 (막혔을 수 있음, 우회하지 않음): {q}", file=sys.stderr)
             for e in (r.get("entries") or [])[:20]:
                 if not e or not e.get("id"):
                     continue
@@ -363,10 +365,12 @@ def run(extract_n: int | None = None, use_llm: bool = True, day: str = "") -> Pa
             if done >= n:
                 break
             s = L["seen"][it["id"]]
-            if s.get("extracted") or it["id"].startswith("hn:"):
+            if s.get("extracted") or it["id"].startswith("hn:") or s.get("tries", 0) >= 3:
                 continue
             ex = extract(it)
-            s["extracted"] = day if ex else "자막 없음"
+            s["tries"] = s.get("tries", 0) + 1   # 자막 요청 제한(429)이면 다음 차례에 다시 (최대 3번)
+            if ex:
+                s["extracted"] = day
             done += 1
             if not ex:
                 continue
