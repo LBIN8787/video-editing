@@ -797,8 +797,6 @@ def packaging_issues(project: Project) -> list[str]:
     pkg = json.loads(hy.read_text(encoding="utf-8")).get("package") or {}
     v = next((t for t in pkg.get("thumbnails", []) if t.get("id") == pk.get("pick")), None)
     out: list[str] = []
-    if v and series(project) == "brief" and (v.get("layout") == "person" or (v.get("person") or {}).get("name")):
-        out.append(f"브리핑인데 썸네일 {v['id']} 가 인물 — 브리핑은 그날 핵심 기업 사진(흑백), 인물은 분석 편으로 (manual/09 §7-1 ⑬, company-photo pick)")
     if v:
         rec = recent_uploads(project, 1)
         img = Path(((v.get("image") or {}).get("file")) or "").name
@@ -808,6 +806,18 @@ def packaging_issues(project: Project) -> list[str]:
     text = pkg.get("title", "") + " " + " ".join(_vtext(t) for t in pkg.get("thumbnails", []))
     out += only_claims(text, fs.read_text(encoding="utf-8") if fs.exists() else "")
     return out
+
+
+def packaging_notes(project: Project) -> list[str]:
+    """막지는 않고 알리기만 (스타일 기본값은 MUST 검사로 만들지 않음 — manual/README §3-1): 브리핑에 인물 썸네일."""
+    f, hy = project.dir("edit") / "thumbnail_pick.json", project.dir("script") / "hybrid.json"
+    if series(project) != "brief" or not (f.exists() and hy.exists()):
+        return []
+    pick_id = json.loads(f.read_text(encoding="utf-8")).get("pick")
+    v = next((t for t in (json.loads(hy.read_text(encoding="utf-8")).get("package") or {}).get("thumbnails", []) if t.get("id") == pick_id), None)
+    if v and (v.get("layout") == "person" or (v.get("person") or {}).get("name")):
+        return [f"브리핑인데 썸네일 {v['id']} 가 인물 — 기본은 그날 핵심 기업 사진(흑백), 인물은 분석 편으로 (manual/09 §7-1 ⑬, company-photo pick)"]
+    return []
 
 
 def recent_uploads(project: Project, n: int = 3) -> list[dict]:
