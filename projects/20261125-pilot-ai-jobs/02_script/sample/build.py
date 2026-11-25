@@ -89,6 +89,10 @@ y26 = c.text(1260, 660, "2026", 40, NAVY, "sans", "width:150px;text-align:center
 c.svg(f'<rect id="s2-h" x="1040" y="760" width="560" height="70" rx="10" fill="{BLU}"/>'
       f'<rect id="s2-hcut" x="{1040 + 560 * .908:.0f}" y="760" width="{560 * .092:.0f}" height="70" fill="{RED}"/>')
 hcap = c.text(1040, 845, "일하는 시간  −9.2%", 46, RED, "sans")
+laps = "".join(f'<g class="lp"><rect x="{170 + (k % 10) * 160}" y="{170 + (k // 10) * 200}" width="120" height="76" rx="6" fill="#2C313B"/><rect x="{178 + (k % 10) * 160}" y="{178 + (k // 10) * 200}" width="104" height="58" rx="3" fill="#F6F1E6"/></g>' for k in range(30))
+c.svg(f'<g id="s2-laps">{laps}</g>')
+c.j(f'tl.fromTo("#s2-laps .lp",{{opacity:0,scale:.4,transformOrigin:"50% 50%"}},{{opacity:1,scale:1,duration:.2,stagger:{{each:.05,from:"random"}}}},{c.cue(4, .05)});')
+c.j(f'tl.to("#s2-laps",{{opacity:0,duration:.35}},{c.cue(5, .2)});')
 for k in range(3):
     c.pop(f"s2-p{k}", c.cue(5, .35 + k * .06))
 c.fade(n665, c.cue(5, .7), .15); c.count(n665, c.cue(5, .7), 0, 66.5, .9, False)
@@ -156,9 +160,12 @@ c.svg(f'<path id="s6-br1" d="M590,475 L750,475" stroke="{INK}" stroke-width="16"
 qq = c.text(1215, 380, "?", 80, RED, "sans")
 chk = c.text(0, 700, "☐ 기준 하나      ☐ 기준 둘", 58, INK, "sans", center=True, extra="font-weight:600")
 c.rise(q, c.cue(16, .1))
-for k, (bid, tid) in enumerate((("s6-a", tA), ("s6-b", tB), ("s6-c", tC))):
-    tt = c.cue(18, .1 + k * .28)
+for bid, tid, tt in (("s6-a", tA, c.cue(16, .1)), ("s6-c", tC, c.cue(16, .55)), ("s6-b", tB, c.cue(18, .38))):
     c.j(f'tl.fromTo("#{bid}",{{opacity:0,y:40}},{{opacity:1,y:0,duration:.3,ease:"power3.out"}},{tt});'); c.fade(tid, tt + .05)
+dn = c.text(250, 610, "↓ 줄었다", 44, BLU, "sans"); c.pop(dn, c.cue(16, .3))
+fl = c.text(1420, 610, "→ 그대로", 44, GOLD, "sans"); c.pop(fl, c.cue(16, .75))
+up = c.tag(700, 230, "월급이 오른 사람들은 무엇이 달랐나?", RED, size=40); c.pop(up, c.cue(17, .3))
+c.out([up], c.cue(18, .2)); c.out([dn, fl], c.cue(19, .2))
 c.j(f'tl.fromTo("#s6-br1",{{scaleX:0,transformOrigin:"0% 50%"}},{{scaleX:1,duration:.4}},{c.cue(19, .3)});')
 c.j(f'tl.fromTo("#s6-br2",{{scaleX:0,transformOrigin:"0% 50%"}},{{scaleX:1,duration:.6}},{c.cue(19, .55)});'); c.pop(qq, c.cue(19, .8))
 c.rise(chk, c.cue(20, .5))
@@ -191,7 +198,8 @@ c.svg(f'<circle id="s8-pie" cx="1380" cy="480" r="230" fill="{BLU}" fill-opacity
 pl = c.text(1180, 760, "아낀 시간 중 소득이 된 몫", 44, INK, "sans")
 p37 = c.text(1520, 180, "3~7%", 84, GOLD, "sans")
 sk = c.text(1180, 830, "근로자 스스로 추정", 32, GRY, "sans", "font-weight:500")
-c.j(f'tl.to("#s8-g .cl",{{opacity:1,duration:.04,stagger:{{each:.012}}}},{c.cue(26, .05)});')
+c.j(f'tl.to("#s8-g .cl",{{opacity:1,duration:.04,stagger:{{each:.025}}}},{c.cue(25, .1)});')
+ask = c.text(180, 130, "AI 를 쓰는 사람에게 물었다: 소득이 달라졌나?", 46, INK, "sans"); c.rise(ask, c.cue(25, .05))
 c.rise(n977, c.cue(26, .5))
 c.j(f'tl.fromTo("#s8-pie",{{opacity:0,scale:.5,transformOrigin:"50% 50%"}},{{opacity:1,scale:1,duration:.4}},{c.cue(27, .1)});'); c.fade(pl, c.cue(27, .2))
 c.j(f'tl.fromTo("#s8-sl",{{opacity:0,scale:0,transformOrigin:"1380px 480px"}},{{opacity:1,scale:1,duration:.4,ease:"back.out(2)"}},{c.cue(27, .7)});')

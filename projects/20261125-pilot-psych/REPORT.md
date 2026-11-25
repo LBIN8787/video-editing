@@ -27,3 +27,4 @@
 - 한 일: 02_script/sample/build.py (HyperFrames 모션그래픽, 불안 편 도구를 scripts/anim/hflib.py 로 옮김) · 초안 목소리 scripts/anim/tempo_vo.py (대본의 (쉼)·(긴 쉼)·장별 빠르기 반영) · E:/ytflow-local/hf-pilot-*/renders/sample_v1.mp4
 - 혼자 판단한 것: hybrid 렌더러 대신 최신 호기심 편(불안 편)과 같은 HyperFrames 방식 — 템포를 조각 단위로 줄 수 있어서 / 샘플을 30~60초보다 길게(약 3분) — 템포 차이를 보이려고 두 장을 넣음
 - 막힌 것: 없음
+- 샘플 v2 (2026-11-26): 말하는데 화면이 빈 곳을 앞당겨 채움 → E:/ytflow-local/hf-pilot-*/renders/sample_v2(_720p).mp4. 정지 측정(hold_measure): ① 5초+ 정지 4곳(최장 8.2초, s7 '2년 · 2% 넘는 변화 없음' 구간) · ② 13곳(최장 6.8초, 실험 방 설명·결과 막대 대기) — D3 의견과 함께 전체 렌더 전 고칠 곳
