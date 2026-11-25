@@ -346,7 +346,115 @@ def s_standoff(D, sc: dict, bt: list, dur: float):
                 D.sfx.append(("pop", t))
 
 
+# ── giveback ─────────────────────────────────────────────────────────────────
+def s_giveback(D, sc: dict, bt: list, dur: float):
+    """오른 만큼 중 돌려준 몫 — 회사마다 같은 축척(월요일에 오른 폭 = 100%)의 기둥.
+    초록 기둥 = 월요일에 오른 만큼, 위에서부터 내려오는 빨간 덮개 = 화요일에 돌려준 몫(100% 넘으면 금요일 선 아래로).
+    다음 장면이 같은 그림을 이어받을 때는 {"preset": "final"} 로 끝 상태에서 시작한다(E2 주인공 사물 유지)."""
+    from . import explain
+    sc = dict(sc)
+    sc.setdefault("theme", "dark")
+    explain._setup(D, sc, title=False)
+    _title(D, sc)
+    cos = sc["companies"]          # [{"id","label","pct"(돌려준 %)}]
+    n = len(cos)
+    xl, xr = 540, 1820
+    yb, yt = 720, 340              # 금요일 종가(0) · 월요일 종가(100%)
+    U = (yb - yt) / 100.0
+    cw = min(130, (xr - xl) / n * 0.55)
+    X = {c["id"]: xl + (xr - xl) * (j + .5) / n for j, c in enumerate(cos)}
+    ax = []
+    for y, lab in ((yt, "월요일 종가 — 오른 만큼 100%"), (yb, "금요일 종가 — 0")):
+        i = D._id()
+        D.svg.append(f'<line id="{i}" x1="70" y1="{y}" x2="{xr}" y2="{y}" stroke="{MUTED}" stroke-width="2" stroke-dasharray="10 9" opacity="0"/>')
+        j = _txt(D, 70, y - 38, lab, 24, MUTED)
+        ax += [i, j]
+    el = {}
+    for c in cos:
+        x = X[c["id"]]
+        g, r, pl, nm, kp = (D._id() for _ in range(5))
+        D.items.append(f'<div id="{g}" style="position:absolute;left:{x - cw / 2:.0f}px;top:{yt}px;width:{cw:.0f}px;height:{yb - yt}px;border-radius:6px 6px 0 0;'
+                       f'background:linear-gradient(180deg,#5FD394,#2F8F5C);transform-origin:50% 100%;transform:scaleY(0)"></div>')
+        rh = c["pct"] * U
+        D.items.append(f'<div id="{r}" style="position:absolute;left:{x - cw / 2 - 4:.0f}px;top:{yt}px;width:{cw + 8:.0f}px;height:{rh:.0f}px;border-radius:4px;'
+                       f'background:repeating-linear-gradient(135deg,rgba(240,106,90,.95) 0 14px,rgba(200,70,60,.95) 14px 28px);transform-origin:50% 0;transform:scaleY(0)"></div>')
+        D.items.append(f'<div id="{pl}" style="position:absolute;left:{x:.0f}px;top:{yt - 62}px;transform:translateX(-50%);font-family:heavy;font-size:40px;color:{DOWN};opacity:0">{c["pct"]:.0f}%</div>')
+        D.items.append(f'<div id="{nm}" style="position:absolute;left:{x:.0f}px;top:{max(yb, yt + rh) + 22:.0f}px;transform:translateX(-50%);font-family:heavy;font-size:32px;color:{CREAM};white-space:nowrap;opacity:0">{H.escape(c["label"])}</div>')
+        kh = max(0.0, 100 - c["pct"]) * U
+        D.items.append(f'<div id="{kp}" style="position:absolute;left:{x:.0f}px;top:{yb - kh / 2 - 34:.0f}px;transform:translateX(-50%);width:{cw:.0f}px;text-align:center;line-height:1.1;word-break:keep-all;font-family:heavy;font-size:30px;color:#0D1A12;opacity:0"></div>')
+        el[c["id"]] = dict(g=g, r=r, pl=pl, nm=nm, kp=kp)
+    ids = [c["id"] for c in cos]
+    kept: set[str] = set()
+
+    def rise(which, t, d=.6):
+        for j, k in enumerate(which):
+            D.js.append(f'tl.to("#{el[k]["g"]}",{{scaleY:1,duration:{d},ease:"power2.out"}},{t + j * .07:.2f});')
+            D.js.append(f'tl.to("#{el[k]["nm"]}",{{opacity:1,duration:.3}},{t + j * .07:.2f});')
+
+    def back(k, t, d=.7):
+        D.js.append(f'tl.to("#{el[k]["r"]}",{{scaleY:1,duration:{d},ease:"power2.in"}},{t:.2f});')
+        D.js.append(f'tl.to("#{el[k]["pl"]}",{{opacity:1,duration:.3}},{t + d * .8:.2f});')
+
+    for k_, (b, (t0, d)) in enumerate(zip(sc.get("beats", []), bt)):
+        seq = t0 + 0.2
+        for act in b.get("do") or []:
+            t = _when(sc, k_, b, t0, d, act.get("t"), seq)
+            seq = max(seq, t) + 0.6
+            if act.get("preset") == "final":   # 앞 장면 끝 모습 그대로 시작
+                for e in ax:
+                    D.js.append(f'tl.set("#{e}",{{opacity:1}},0);')
+                for k in ids:
+                    D.js.append(f'tl.set("#{el[k]["g"]}",{{scaleY:1}},0);tl.set("#{el[k]["r"]}",{{scaleY:1}},0);'
+                                f'tl.set("#{el[k]["pl"]}",{{opacity:1}},0);tl.set("#{el[k]["nm"]}",{{opacity:1}},0);')
+            if act.get("axes"):
+                for e in ax:
+                    D.js.append(f'tl.fromTo("#{e}",{{opacity:0}},{{opacity:1,duration:.4}},{t:.2f});')
+            if "rise" in act:
+                rise(ids if act["rise"] == "all" else act["rise"], t)
+                D.sfx.append(("whoosh-short", t))
+            if "back" in act:
+                for k in ([act["back"]] if isinstance(act["back"], str) else act["back"]):
+                    back(k, t)
+                    t += .25
+                D.sfx.append(("click-soft", t))
+            if "keep" in act:
+                k = act["keep"]
+                kept.add(k)
+                D.js.append(f'tl.set("#{el[k]["kp"]}",{{textContent:{H.escape(act.get("text", ""))!r}}},{t:.2f});')
+                D.js.append(f'tl.fromTo("#{el[k]["kp"]}",{{opacity:0,scale:.8}},{{opacity:1,scale:1,duration:.35,ease:"back.out(2)"}},{t:.2f});')
+                D.sfx.append(("pop", t))
+            if "focus" in act:
+                on = set(act["focus"])
+                for k in ids:
+                    op = 1 if k in on else .22
+                    for e in ("g", "r", "pl", "nm", "kp"):
+                        D.js.append(f'tl.to("#{el[k][e]}",{{opacity:{op},duration:.4}},{t:.2f});' if e != "kp" else
+                                    f'tl.to("#{el[k][e]}",{{autoAlpha:{op if op < 1 else 1},duration:.4}},{t:.2f});')
+            if "unfocus" in act:
+                for k in ids:
+                    for e in ("g", "r", "pl", "nm"):
+                        D.js.append(f'tl.to("#{el[k][e]}",{{opacity:1,duration:.4}},{t:.2f});')
+                    if k in kept:
+                        D.js.append(f'tl.to("#{el[k]["kp"]}",{{autoAlpha:1,duration:.4}},{t:.2f});')
+            if "group" in act:
+                ks = act["group"]
+                a, z = min(X[k] for k in ks) - cw / 2 - 10, max(X[k] for k in ks) + cw / 2 + 10
+                col = UP if act.get("tone") == "up" else DOWN if act.get("tone") == "down" else GOLD
+                i = D._id()
+                D.svg.append(f'<path id="{i}" d="M{a:.0f},{yt - 66} L{a:.0f},{yt - 84} L{z:.0f},{yt - 84} L{z:.0f},{yt - 66}" fill="none" stroke="{col}" stroke-width="4" '
+                             f'pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>')
+                D.js.append(f'tl.to("#{i}",{{strokeDashoffset:0,duration:.5}},{t:.2f});')
+                j = _txt(D, (a + z) / 2, yt - 136, H.escape(act["text"]), 34, col, font="heavy", anchor="c")
+                _show(D, j, t + .2)
+                D.sfx.append(("pop", t))
+            if "tag" in act:
+                i = _txt(D, 1860, 96, H.escape(act["tag"]), 28, "#1A1D20", font="heavy", anchor="r",
+                         extra=f"background:{GOLD};padding:6px 16px;border-radius:20px;")
+                _show(D, i, t, 0)
+
+
 def register():
     from . import hybrid, explain
     hybrid.RENDER["pricewalk"] = explain._themed(s_pricewalk)
     hybrid.RENDER["standoff"] = explain._themed(s_standoff)
+    hybrid.RENDER["giveback"] = explain._themed(s_giveback)

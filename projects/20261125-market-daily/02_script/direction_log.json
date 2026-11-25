@@ -54,37 +54,38 @@
   },
   {
    "scene": 5,
-   "type": "bars",
+   "type": "giveback",
    "situation": "ratio",
-   "pick": "bars",
+   "pick": "giveback",
    "rec": [],
    "over": [
-    "isotype"
+    "bars"
    ],
-   "why": "돌려준 몫(%)을 회사마다 나란히 — 계산 결과는 막대 길이로 비교해야 차이가 보임",
-   "intent": "엔비디아 24% vs 마이크론 69%를 길이로 기억",
+   "why": "'오른 만큼 중 돌려준 몫'은 비율이 아니라 사건 두 개(월요일 오름·화요일 되돌림)라, 회사마다 같은 축척의 오른 기둥 위로 되돌린 몫이 내려오는 그림이 문장의 동사 그대로다 (docs/68 E1·E4·E5)",
+   "intent": "엔비디아는 기둥 대부분이 초록으로 남고 사슬은 거의 다 빨갛게 덮이며 경쟁사는 금요일 선 아래로 내려가는 모양을 기억",
    "refs": [
-    "manual/09-market-daily.md"
+    "docs/68-explainer-docu-benchmark.md",
+    "docs/67-docu-reference-analysis.md"
    ],
    "differs": "",
-   "new_vocab": ""
+   "new_vocab": "설명 다큐 문법(docs/68) 시범을 사용자가 2026-11-25 '바꾼 연출이 더 낫다'고 판정 — 이 편의 핵심 계산(돌려준 몫)을 그 문법으로 그림"
   },
   {
    "scene": 6,
-   "type": "motionboard",
+   "type": "giveback",
    "situation": "explain",
-   "pick": "motionboard",
+   "pick": "giveback",
    "rec": [],
    "over": [
-    "map_causal"
+    "motionboard"
    ],
-   "why": "앞 막대의 관계(중심이 지키고 사슬이 반납, 경쟁사는 금요일 아래)를 상황으로 풀어야 머릿속에 그려짐",
-   "intent": "'소식은 남기고 덤은 돌려줬다'를 그림으로",
+   "why": "앞 장면의 기둥 그림을 그대로 이어받아(E2 주인공 사물 유지) 같은 그림 위에서 '지킨 곳·돌려준 곳·금요일 아래'를 차례로 가리키면 새 그림을 배울 필요 없이 해석이 숫자 위에 붙는다",
+   "intent": "'소식은 남기고 덤은 돌려줬다'를 방금 본 기둥 세 무리로 기억",
    "refs": [
-    "manual/09-market-daily.md"
+    "docs/68-explainer-docu-benchmark.md"
    ],
    "differs": "",
-   "new_vocab": ""
+   "new_vocab": "설명 다큐 문법(docs/68) 시범을 사용자가 2026-11-25 '바꾼 연출이 더 낫다'고 판정 — 이 편의 핵심 계산(돌려준 몫)을 그 문법으로 그림"
   },
   {
    "scene": 8,
