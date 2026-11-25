@@ -694,7 +694,7 @@ def score(v: dict, qa: dict, hot: list[str], title: str = "") -> tuple[float, li
         sc += 3; why.append(f"사건 당사자 얼굴 크게({per}) +3 — 인물 제목의 터진 영상 42% vs 안 된 10% (docs/55)")
         if per.split()[-1] in title or per in title:
             sc += 1; why.append("제목 앞에도 같은 이름 +1")
-    hits = [w for w in hot if w in text]
+    hits = [w for w in hot if w in text] or [w for w in _hot_tokens(hot) if w in text]
     if hits:
         sc += 2; why.append(f"핫 키워드 큰 글씨({', '.join(hits[:2])}) +2 (manual/09 §7-1 ①)")
     src = _src_text  # 팩트시트 글 (낚시 막기: 거기 없는 말은 점수 없음)
@@ -720,6 +720,129 @@ def score(v: dict, qa: dict, hot: list[str], title: str = "") -> tuple[float, li
     return round(sc, 2), why
 
 
+_HOT_STOP = {"마감", "오늘", "어제", "하루", "월요일", "화요일", "수요일", "목요일", "금요일", "주말", "이후", "전망", "우려", "효과", "기록", "발표", "소식", "the", "and", "for", "with", "stocks", "stock"}
+
+
+def _hot_tokens(hot: list[str]) -> list[str]:
+    """핫 키워드가 기사 제목 통째일 때(예: '엔비디아 5.9%↓') 썸네일 글자와 맞대 볼 낱말 — 고유명사·지수 이름.
+    통째 비교만 하면 짧은 썸네일 글자와 거의 안 맞아 +2 가 매일 0건이었음 (2026-11-25 사용자 지적 뒤 확인)."""
+    out: list[str] = []
+    for h in hot:
+        for t in re.split(r"[\s·,…'\"‘’“”()\[\]:/|]+", h):
+            t = re.sub(r"(은|는|이|가|을|를|의|에|에서|보다|도|만|과|와)$", "", t)
+            if len(t) >= 2 and not re.search(r"\d", t) and t.lower() not in _HOT_STOP and t not in out:
+                out.append(t)
+    return out
+
+
+def _vtext(v: dict) -> str:
+    return " ".join(v.get("lines", []) + [v.get("headline", ""), v.get("top", "")] +
+                    [x.get("value", "") for x in (v.get("left") or {}, v.get("right") or {})])
+
+
+def _rethumbs() -> dict:
+    """data/analytics/actions.jsonl 의 rethumb 기록 → {영상 id: 지금 걸린 변형}."""
+    f = Path(__file__).resolve().parents[2] / "data" / "analytics" / "actions.jsonl"
+    out: dict = {}
+    if f.exists():
+        for ln in f.read_text(encoding="utf-8").splitlines():
+            try:
+                a = json.loads(ln)
+            except Exception:
+                continue
+            if a.get("action") == "rethumb" and a.get("video"):
+                out[a["video"]] = str(a.get("after", "")).upper()[:1] or out.get(a["video"])
+    return out
+
+
+def packaging_issues(project: Project) -> list[str]:
+    """업로드 전 종합 검수(preflight)용 — 올릴 썸네일이 바로 앞 편과 같은 사진이거나, 제목·썸네일의 '혼자' 주장이 팩트시트와 어긋나면."""
+    f = project.dir("edit") / "thumbnail_pick.json"
+    hy = project.dir("script") / "hybrid.json"
+    if not (f.exists() and hy.exists()):
+        return []
+    pk = json.loads(f.read_text(encoding="utf-8"))
+    pkg = json.loads(hy.read_text(encoding="utf-8")).get("package") or {}
+    v = next((t for t in pkg.get("thumbnails", []) if t.get("id") == pk.get("pick")), None)
+    out: list[str] = []
+    if v:
+        rec = recent_uploads(project, 1)
+        img = Path(((v.get("image") or {}).get("file")) or "").name
+        if rec and img and img == rec[0]["image"]:
+            out.append(f"썸네일 {v['id']} 가 바로 앞 편({rec[0]['project']})과 같은 사진({img}) — 새 사진(인물이면 다른 장면)으로 다시 (manual/09 §7-1)")
+    fs = project.dir("research") / "factsheet.md"
+    text = pkg.get("title", "") + " " + " ".join(_vtext(t) for t in pkg.get("thumbnails", []))
+    out += only_claims(text, fs.read_text(encoding="utf-8") if fs.exists() else "")
+    return out
+
+
+def recent_uploads(project: Project, n: int = 3) -> list[dict]:
+    """같은 줄기(날짜 뒤 이름이 같은 프로젝트, 예: …-market-daily)에서 이 편보다 앞서 실제로 올린 최근 n편의 썸네일 — 사진 파일·배치."""
+    name = project.path.name
+    m = re.match(r"(\d{8})-(.+)", name)
+    if not m:
+        return []
+    day, stem = m.groups()
+    out: list[dict] = []
+    for d in sorted(project.path.parent.glob(f"*-{stem}"), reverse=True):
+        dm = re.match(r"(\d{8})-", d.name)
+        if not dm or dm.group(1) >= day or d.name.split("-", 1)[1] != stem:
+            continue
+        pub, hy = d / "05_edit" / "youtube_publish.json", d / "02_script" / "hybrid.json"
+        if not (pub.exists() and hy.exists()):
+            continue
+        try:
+            pj = json.loads(pub.read_text(encoding="utf-8"))
+            used = re.search(r"thumbnail_([A-Z])", pj.get("thumbnail", "")).group(1)
+            used = _rethumbs().get(pj.get("video_id", ""), used)   # 올린 뒤 ops-act rethumb 로 바꾼 것이 지금 걸린 것
+            v = next(t for t in json.loads(hy.read_text(encoding="utf-8"))["package"]["thumbnails"] if t["id"] == used)
+        except Exception:
+            continue
+        out.append({"project": d.name, "image": Path(((v.get("image") or {}).get("file")) or "").name,
+                    "layout": v.get("layout", ""), "person": (v.get("person") or {}).get("name", "")})
+        if len(out) >= n:
+            break
+    return out
+
+
+def repeat_penalty(v: dict, recent: list[dict]) -> tuple[float, list[str]]:
+    """구독자 목록에서 어제 영상과 같아 보이면 새 소식이라는 신호가 사라짐 (2026-11-25 사용자: "오늘올린 썸네일 이전과 계속 똑같은데").
+    같은 사진 파일 = 거의 같은 썸네일 → 얼굴 가점(+3)을 넘게 깎음. 같은 인물(다른 사진)·같은 배치 연속은 조금만."""
+    if not recent:
+        return 0.0, []
+    img = Path(((v.get("image") or {}).get("file")) or "").name
+    per = (v.get("person") or {}).get("name", "")
+    for i, r in enumerate(recent):
+        if img and img == r["image"]:
+            return (-5.0 if i == 0 else -3.0), [f"최근 올린 썸네일({r['project']})과 같은 사진 {'−5' if i == 0 else '−3'} — 목록에서 같은 영상처럼 보임"]
+    d, why = 0.0, []
+    if per and per == recent[0]["person"]:
+        d -= 2; why.append(f"바로 앞 편도 같은 인물({per}) −2")
+    if v.get("layout") and len(recent) >= 2 and all(r["layout"] == v.get("layout") for r in recent[:2]):
+        d -= 1; why.append(f"같은 배치({v.get('layout')}) 세 편째 −1")
+    return d, why
+
+
+_PCT = re.compile(r"([가-힣]+|[A-Za-z&]{2,}(?:\([A-Z]+\))?)\s+[\d,]+(?:\.\d+)?\s*(?:달러|원|포인트|p)?\s*\(\s*([-−+]?\d+(?:\.\d+)?)%")
+
+
+def only_claims(text: str, factsheet: str) -> list[str]:
+    """'X만 -11%'·'왜 X만' 같은 '혼자' 주장을 팩트시트 숫자와 맞대 봄 — 같은 방향으로 X 만큼 이상 움직인 다른 종목이 있으면 틀린 말.
+    (2026-11-25: '왜 마이크론만 -11%였나' — 같은 날 코어위브 −11.86%·델 −11.83% 로 마이크론보다 더 빠짐)"""
+    vals: dict[str, float] = {}
+    for nm, pc in _PCT.findall(factsheet or ""):
+        vals.setdefault(nm.split("(")[0], float(pc.replace("−", "-")))
+    out: list[str] = []
+    for nm in dict.fromkeys(re.findall(r"([가-힣]+|[A-Za-z]{2,})만(?![가-힣])", text or "")):
+        if nm not in vals:
+            continue
+        x = vals[nm]
+        more = [f"{k} {v:+.2f}%" for k, v in vals.items() if k != nm and (v < 0) == (x < 0) and abs(v) >= abs(x)]
+        if more:
+            out.append(f"'{nm}만' — 팩트시트에 {nm}({x:+.2f}%)만큼 이상 같은 방향으로 움직인 종목이 있음: {', '.join(more[:4])}")
+    return out
+
+
 def pick(project: Project, pkg: dict, qa: dict) -> dict:
     """올릴 썸네일 하나 → 05_edit/thumbnail_pick.json (yt-publish 의 --thumb auto 가 읽음). package.thumb_pick 이 있으면 그대로."""
     hot = _hot_words(project)
@@ -728,9 +851,17 @@ def pick(project: Project, pkg: dict, qa: dict) -> dict:
     _src_text = fs.read_text(encoding="utf-8") if fs.exists() else ""
     title = pkg.get("title", "")
     scores = {v["id"]: score(v, qa.get(v["id"], {}), hot, title) for v in pkg["thumbnails"]}
+    recent = recent_uploads(project)
+    for v in pkg["thumbnails"]:
+        s_, w_ = scores[v["id"]]
+        d, why = repeat_penalty(v, recent)
+        if d:
+            scores[v["id"]] = (round(s_ + d, 2), w_ + why)
     forced = pkg.get("thumb_pick")
     best = forced if forced in scores else max(scores, key=lambda k: (scores[k][0], -ord(k[0])))
     res = {"pick": best, "forced": bool(forced in scores), "hot": hot,
+           "recent": [{"project": r["project"], "image": r["image"], "layout": r["layout"]} for r in recent],
+           "title_issues": only_claims(title + " " + " ".join(_vtext(v) for v in pkg["thumbnails"]), _src_text),
            "scores": {k: {"score": s_, "why": w} for k, (s_, w) in scores.items()}}
     (project.dir("edit") / "thumbnail_pick.json").write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
     return res

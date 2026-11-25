@@ -139,6 +139,13 @@ def run(project: Project, looked: bool = False) -> dict:
     C["timing"] = {"pass": not stale, "lines": stale[:8],
                    "note": "만든 날 기준 상대 날짜(이번 주·지난주·어제·지난 N일…)를 실제 날짜로 바꾸고 다시 렌더 — 올리는 날과 보는 날이 달라도 맞게"}
 
+    # 8. 제목·썸네일 (2026-11-25 사용자: "오늘올린 썸네일 이전과 계속 똑같은데" · "엔비디아는 지켰다가 맞나요? 제목도…애매")
+    #    바로 앞 편과 같은 사진, '왜 X만 -11%' 처럼 팩트시트와 어긋나는 '혼자' 주장을 막음
+    from . import thumbnail as _th
+    pi = _th.packaging_issues(project)
+    C["packaging"] = {"pass": not pi, "issues": pi[:5],
+                      "note": "새 사진으로 썸네일을 다시 만들거나 제목·썸네일 글을 고친 뒤 thumbnail → preflight"}
+
     # 6. 사람 눈
     sheet = frames_sheet(project)
     C["looked"] = {"pass": bool(looked), "sheet": str(sheet.relative_to(project.path)).replace("\\", "/"),
