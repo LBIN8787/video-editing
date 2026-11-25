@@ -182,7 +182,7 @@ def s_pricewalk(D, sc: dict, bt: list, dur: float):
                 j = D._id()
                 D.items.append(f'<div id="{j}" style="position:absolute;left:{xb - 13:.0f}px;top:{yb2 - 13:.0f}px;width:26px;height:26px;border-radius:50%;border:4px solid {UP};background:#14181B;transform:scale(0)"></div>')
                 D.js.append(f'tl.to("#{j}",{{scale:1,duration:.35,ease:"back.out(2.4)"}},{t + .3:.2f});')
-                k2 = _txt(D, xb - 26, yb2 - 74, H.escape(act.get("label", "")), 28, UP, font="heavy", anchor="r")
+                k2 = _txt(D, act.get("lx", xb - 26), act.get("ly", yb2 - 74), H.escape(act.get("label", "")), 28, UP, font="heavy", anchor=act.get("anchor", "r"))
                 _show(D, k2, t + .4)
                 g += [i, j, k2]
             if "note" in act:
@@ -301,11 +301,11 @@ def s_standoff(D, sc: dict, bt: list, dur: float):
                 D.js.append(f'tl.to("#{clock}",{{rotation:360,duration:{act.get("hold", 4)},ease:"none"}},{t + .2:.2f});')
             if "chicken" in act:
                 rid = D._id()
-                D.items.append(f'<div id="{rid}" style="position:absolute;left:460px;top:880px;width:1000px;height:120px;opacity:0">'
+                D.items.append(f'<div id="{rid}" style="position:absolute;left:520px;top:836px;width:940px;height:100px;opacity:0">'
                                f'<div style="position:absolute;left:0;right:0;top:58px;height:4px;background:repeating-linear-gradient(90deg,#9AA6AE 0 30px,transparent 30px 54px)"></div>'
                                f'<div style="position:absolute;left:0;top:30px"><div id="{rid}a" style="font-size:58px"><span style="display:inline-block;transform:scaleX(-1)">🚗</span></div></div>'
                                f'<div style="position:absolute;right:0;top:30px"><div id="{rid}b" style="font-size:58px">🚗</div></div>'
-                               f'<div style="position:absolute;left:50%;top:-34px;transform:translateX(-50%);font-family:heavy;font-size:48px;color:{GOLD};white-space:nowrap">{H.escape(act["chicken"])}</div></div>')
+                               f'<div style="position:absolute;right:100%;margin-right:28px;top:30px;font-family:heavy;font-size:44px;color:{GOLD};white-space:nowrap">{H.escape(act["chicken"])}</div></div>')
                 D.js.append(f'tl.to("#{rid}",{{opacity:1,duration:.3}},{t:.2f});')
                 D.js.append(f'tl.to("#{rid}a",{{x:380,duration:1.6,ease:"power1.in"}},{t + .2:.2f});')
                 D.js.append(f'tl.to("#{rid}b",{{x:-380,duration:1.6,ease:"power1.in"}},{t + .2:.2f});')
@@ -488,7 +488,7 @@ def s_lifecost(D, sc: dict, bt: list, dur: float):
     ry = yb - rev * U
     rl = D._id()
     D.svg.append(f'<line id="{rl}" x1="300" y1="{ry:.0f}" x2="1650" y2="{ry:.0f}" stroke="{GOLD}" stroke-width="4" stroke-dasharray="14 10" opacity="0"/>')
-    rlab = _txt(D, 300, ry - 52, H.escape(sc.get("revenue_label", f"해마다 매출 {fmt(rev)}{unit}")), 30, GOLD, font="heavy")
+    rlab = _txt(D, 1650, ry - 40, H.escape(sc.get("revenue_label", f"해마다 매출 {fmt(rev)}{unit}")), 30, GOLD, font="heavy", anchor="r")   # 오른쪽 끝: 왼쪽 첫 막대(적자 막대는 선 위로 솟음)와 겹치지 않게
     el = {}
     for it in items:
         x, c = X[it["id"]], it["cost"]
@@ -551,7 +551,7 @@ def s_lifecost(D, sc: dict, bt: list, dur: float):
                     gap_js(k, nc, t + .6 + j * .15)
                     e["cost"] = nc
                 if act.get("label"):
-                    i = _txt(D, 1650, 200, H.escape(act["label"]), 30, "#F0A04B", font="heavy", anchor="r")
+                    i = _txt(D, 1650, act.get("y", 270), H.escape(act["label"]), 30, "#F0A04B", font="heavy", anchor="r")   # note(200)와 매출 글자(선 위) 사이 줄
                     _show(D, i, t, 0)
                 D.sfx.append(("pop", t))
             if "note" in act:

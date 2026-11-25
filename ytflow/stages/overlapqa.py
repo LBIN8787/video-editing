@@ -18,6 +18,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 
+
+def _pd(project: str) -> Path:
+    """프로젝트 이름이면 저장소 projects/ 아래, 경로면 그 폴더 (저장소 밖에서 렌더한 프로젝트도 점검)."""
+    q = Path(project)
+    return q if q.is_absolute() and q.exists() else ROOT / "projects" / project
+
 JS = r"""
 (t) => {
   const tl = window.__timelines && window.__timelines.main;
@@ -132,7 +138,7 @@ def sub_top(ass: Path) -> float:
 
 def scan(project: str, only: set[int] | None = None) -> dict:
     from playwright.sync_api import sync_playwright
-    pd = ROOT / "projects" / project
+    pd = _pd(project)
     tl = json.loads((pd / "05_edit" / "hybrid_timeline.json").read_text(encoding="utf-8"))
     top = sub_top(pd / "05_edit" / "subs.ass")
     hb = pd / "04_assets" / "hb"
@@ -204,7 +210,7 @@ def scan(project: str, only: set[int] | None = None) -> dict:
 def run(project: str, only: set[int] | None = None) -> dict:
     """hybrid 렌더 끝에서 부름 — 결과를 05_edit/overlap_qa.json 에 쓰고 요약을 출력 (실패해도 렌더는 그대로)."""
     r = scan(project, only)
-    out = ROOT / "projects" / project / "05_edit" / "overlap_qa.json"
+    out = _pd(project) / "05_edit" / "overlap_qa.json"
     out.write_text(json.dumps(r, ensure_ascii=False, indent=1), encoding="utf-8")
     n = sum(len(v["issues"]) for v in r["scenes"].values())
     print(f"[overlap] 자막 위쪽 y≈{r['subtitle_top']} · 겹침 {n}건 · 장면 {len(r['scenes'])}개 → {out}")
@@ -222,7 +228,7 @@ def main():
     a = ap.parse_args()
     only = {int(s) for s in a.scenes.split(",") if s.strip()} or None
     r = scan(a.project, only)
-    out = ROOT / "projects" / a.project / a.json
+    out = _pd(a.project) / a.json
     out.write_text(json.dumps(r, ensure_ascii=False, indent=1), encoding="utf-8")
     n = sum(len(v["issues"]) for v in r["scenes"].values())
     print(f"[overlap] 자막 위쪽 y≈{r['subtitle_top']} · 겹침 {n}건 · 장면 {len(r['scenes'])}개 → {out}")
