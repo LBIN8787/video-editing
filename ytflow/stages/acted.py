@@ -173,6 +173,18 @@ def s_pricewalk(D, sc: dict, bt: list, dur: float):
             if "dim" in act:
                 for e in groups.get(act["dim"], []):
                     D.js.append(f'tl.to("#{e}",{{opacity:.25,duration:.4}},{t:.2f});')
+            if "pre" in act:   # 종가가 아닌 장 전 거래 값: 점선 + 속이 빈 점 (종가 선과 구별)
+                xa, ya = P(act["from"])
+                xb, yb2 = X(idx[act["pre"]]), Y(act["value"])
+                i = D._id()
+                D.svg.append(f'<path id="{i}" d="M{xa:.1f},{ya:.1f} L{xb:.1f},{yb2:.1f}" fill="none" stroke="{UP}" stroke-width="5" stroke-dasharray="10 9" opacity="0"/>')
+                D.js.append(f'tl.to("#{i}",{{opacity:1,duration:.5}},{t:.2f});')
+                j = D._id()
+                D.items.append(f'<div id="{j}" style="position:absolute;left:{xb - 13:.0f}px;top:{yb2 - 13:.0f}px;width:26px;height:26px;border-radius:50%;border:4px solid {UP};background:#14181B;transform:scale(0)"></div>')
+                D.js.append(f'tl.to("#{j}",{{scale:1,duration:.35,ease:"back.out(2.4)"}},{t + .3:.2f});')
+                k2 = _txt(D, xb - 26, yb2 - 74, H.escape(act.get("label", "")), 28, UP, font="heavy", anchor="r")
+                _show(D, k2, t + .4)
+                g += [i, j, k2]
             if "note" in act:
                 i = _txt(D, act.get("x", 1860), act.get("y", 250), H.escape(act["note"]), 28, MUTED, anchor="r")
                 _show(D, i, t, 0)
@@ -453,8 +465,232 @@ def s_giveback(D, sc: dict, bt: list, dur: float):
                 _show(D, i, t, 0)
 
 
+# ── lifecost ─────────────────────────────────────────────────────────────────
+def s_lifecost(D, sc: dict, bt: list, dur: float):
+    """같은 매출 선 위에서 '몇 년으로 나누나'에 따라 해마다 비용 막대가 달라져 적자·흑자가 갈린다 (docs/68 E4·E5).
+    items: [{"id","label","cost"}], revenue: 숫자, unit: "억 달러".
+    do: {"revenue": true} 매출 선 · {"cost": id} 비용 막대 · {"gap": id} 매출 선과의 차이(적자 빨강·흑자 초록)
+        {"rate": 1.0, "label": "금리 +1%p → 해마다 +1억"} 모든 막대 위에 같은 조각을 얹고 차이를 다시 씀 · {"preset": "final"}"""
+    from . import explain
+    sc = dict(sc)
+    sc.setdefault("theme", "dark")
+    explain._setup(D, sc, title=False)
+    _title(D, sc)
+    items, rev, unit = sc["items"], float(sc["revenue"]), sc.get("unit", "억 달러")
+    top = max([rev] + [i["cost"] for i in items]) * 1.25
+    yb, yt = 840, 260
+    U = (yb - yt) / top
+    n = len(items)
+    X = {it["id"]: 560 + (1360 - 560) * j / max(1, n - 1) for j, it in enumerate(items)}
+    bw = 190
+    fmt = lambda v: f"{v:,.1f}".rstrip("0").rstrip(".")
+    D.svg.append(f'<line x1="300" y1="{yb}" x2="1650" y2="{yb}" stroke="#4A535A" stroke-width="2"/>')
+    ry = yb - rev * U
+    rl = D._id()
+    D.svg.append(f'<line id="{rl}" x1="300" y1="{ry:.0f}" x2="1650" y2="{ry:.0f}" stroke="{GOLD}" stroke-width="4" stroke-dasharray="14 10" opacity="0"/>')
+    rlab = _txt(D, 300, ry - 52, H.escape(sc.get("revenue_label", f"해마다 매출 {fmt(rev)}{unit}")), 30, GOLD, font="heavy")
+    el = {}
+    for it in items:
+        x, c = X[it["id"]], it["cost"]
+        b, cl, nm, gp, gl, rt = (D._id() for _ in range(6))
+        D.items.append(f'<div id="{b}" style="position:absolute;left:{x - bw / 2:.0f}px;top:{yb - c * U:.0f}px;width:{bw}px;height:{c * U:.0f}px;'
+                       f'background:linear-gradient(180deg,#8FA3B4,#5E7183);border-radius:6px 6px 0 0;transform-origin:50% 100%;transform:scaleY(0)"></div>')
+        D.items.append(f'<div id="{cl}" style="position:absolute;left:{x:.0f}px;top:{yb - c * U + 14:.0f}px;transform:translateX(-50%);font-family:heavy;font-size:30px;color:#14181B;white-space:nowrap;opacity:0">비용 {fmt(c)}</div>')
+        D.items.append(f'<div id="{nm}" style="position:absolute;left:{x:.0f}px;top:{yb + 18}px;transform:translateX(-50%);font-family:heavy;font-size:34px;color:{CREAM};white-space:nowrap;opacity:0">{H.escape(it["label"])}</div>')
+        # 차이: 매출 선과 막대 꼭대기 사이를 칠함
+        D.items.append(f'<div id="{gp}" style="position:absolute;left:{x - bw / 2:.0f}px;width:{bw}px;opacity:0"></div>')
+        D.items.append(f'<div id="{gl}" style="position:absolute;left:{x + bw / 2 + 14:.0f}px;font-family:heavy;font-size:36px;white-space:nowrap;opacity:0"></div>')
+        D.items.append(f'<div id="{rt}" style="position:absolute;left:{x - bw / 2:.0f}px;width:{bw}px;opacity:0;background:repeating-linear-gradient(135deg,#F0A04B 0 10px,#C77A2E 10px 20px);border-radius:6px 6px 0 0"></div>')
+        el[it["id"]] = dict(b=b, cl=cl, nm=nm, gp=gp, gl=gl, rt=rt, cost=c)
+
+    def gap_js(k, cost, t, d=.5):
+        e = el[k]
+        top_y, bar_y = ry, yb - cost * U
+        y0, h = min(top_y, bar_y), abs(top_y - bar_y)
+        loss = cost > rev
+        col = DOWN if loss else UP
+        txt = (f"적자 {fmt(cost - rev)}{unit}" if loss else f"흑자 {fmt(rev - cost)}{unit}")
+        bg = "rgba(240,106,90,.55)" if loss else "rgba(79,203,134,.35)"
+        D.js.append(f'tl.set("#{e["gp"]}",{{top:{y0:.0f},height:{h:.0f},background:"{bg}",border:"3px dashed {col}"}},{t:.2f});')
+        D.js.append(f'tl.fromTo("#{e["gp"]}",{{opacity:0}},{{opacity:1,duration:{d}}},{t:.2f});')
+        D.js.append(f'tl.set("#{e["gl"]}",{{top:{y0 + h / 2 - 22:.0f},color:"{col}",textContent:{txt!r}}},{t:.2f});')
+        D.js.append(f'tl.fromTo("#{e["gl"]}",{{opacity:0,x:-8}},{{opacity:1,x:0,duration:.35}},{t + .1:.2f});')
+
+    for k_, (b, (t0, d)) in enumerate(zip(sc.get("beats", []), bt)):
+        seq = t0 + 0.2
+        for act in b.get("do") or []:
+            t = _when(sc, k_, b, t0, d, act.get("t"), seq)
+            seq = max(seq, t) + 0.6
+            if act.get("preset") == "final":
+                D.js.append(f'tl.set("#{rl}",{{opacity:1}},0);tl.set("#{rlab}",{{opacity:1}},0);')
+                for k, e in el.items():
+                    D.js.append(f'tl.set("#{e["b"]}",{{scaleY:1}},0);tl.set("#{e["cl"]}",{{opacity:1}},0);tl.set("#{e["nm"]}",{{opacity:1}},0);')
+                    gap_js(k, e["cost"], 0.0, 0.01)
+            if act.get("revenue"):
+                D.js.append(f'tl.to("#{rl}",{{opacity:1,duration:.5}},{t:.2f});')
+                _show(D, rlab, t + .1, 0)
+                D.sfx.append(("pencil", t))
+            if "cost" in act:
+                for k in ([act["cost"]] if isinstance(act["cost"], str) else act["cost"]):
+                    e = el[k]
+                    D.js.append(f'tl.to("#{e["b"]}",{{scaleY:1,duration:.6,ease:"power2.out"}},{t:.2f});')
+                    D.js.append(f'tl.to("#{e["cl"]}",{{opacity:1,duration:.3}},{t + .45:.2f});')
+                    D.js.append(f'tl.to("#{e["nm"]}",{{opacity:1,duration:.3}},{t:.2f});')
+                D.sfx.append(("whoosh-short", t))
+            if "gap" in act:
+                for k in ([act["gap"]] if isinstance(act["gap"], str) else act["gap"]):
+                    gap_js(k, el[k]["cost"], t)
+                    t += .3
+                D.sfx.append(("pop", t))
+            if "rate" in act:
+                r = float(act["rate"])
+                for j, (k, e) in enumerate(el.items()):
+                    nc = e["cost"] + r
+                    D.js.append(f'tl.set("#{e["rt"]}",{{top:{yb - nc * U:.0f},height:{r * U:.0f}}},{t:.2f});')
+                    D.js.append(f'tl.fromTo("#{e["rt"]}",{{opacity:0,y:-30}},{{opacity:1,y:0,duration:.45,ease:"bounce.out"}},{t + j * .15:.2f});')
+                    gap_js(k, nc, t + .6 + j * .15)
+                    e["cost"] = nc
+                if act.get("label"):
+                    i = _txt(D, 1650, 200, H.escape(act["label"]), 30, "#F0A04B", font="heavy", anchor="r")
+                    _show(D, i, t, 0)
+                D.sfx.append(("pop", t))
+            if "note" in act:
+                i = _txt(D, 1860, act.get("y", 200), H.escape(act["note"]), 28, MUTED, anchor="r")
+                _show(D, i, t, 0)
+
+
+# ── profitbar ────────────────────────────────────────────────────────────────
+def s_profitbar(D, sc: dict, bt: list, dur: float):
+    """매출 막대 = 비용(아래 회색) + 이익(위 초록). 값이 빠져 매출이 줄어도 비용은 그대로라 이익이 더 크게 준다 (E4·E5).
+    cols: [{"id","label","revenue","cost"}]; do: {"col": id} · {"profit": id} · {"note": ...} · {"dim": true} · {"mini": [[이름, 값, 글자], ...], "title": ...}"""
+    from . import explain
+    sc = dict(sc)
+    sc.setdefault("theme", "dark")
+    explain._setup(D, sc, title=False)
+    _title(D, sc)
+    cols, unit = sc["cols"], sc.get("unit", "")
+    top = max(c["revenue"] for c in cols) * 1.15
+    yb, yt = 860, 250
+    U = (yb - yt) / top
+    X = {c["id"]: 460 + 520 * j for j, c in enumerate(cols)}
+    bw = 240
+    el = {}
+    D.svg.append(f'<line x1="250" y1="{yb}" x2="1250" y2="{yb}" stroke="#4A535A" stroke-width="2"/>')
+    for c in cols:
+        x = X[c["id"]]
+        ch, ph, nm, cl, pl, rl = (D._id() for _ in range(6))
+        hc, hp = c["cost"] * U, (c["revenue"] - c["cost"]) * U
+        D.items.append(f'<div id="{ch}" style="position:absolute;left:{x - bw / 2}px;top:{yb - hc:.0f}px;width:{bw}px;height:{hc:.0f}px;background:#5E6B76;transform-origin:50% 100%;transform:scaleY(0)"></div>')
+        D.items.append(f'<div id="{ph}" style="position:absolute;left:{x - bw / 2}px;top:{yb - hc - hp:.0f}px;width:{bw}px;height:{hp:.0f}px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#5FD394,#2F8F5C);transform-origin:50% 100%;transform:scaleY(0)"></div>')
+        D.items.append(f'<div id="{cl}" style="position:absolute;left:{x:.0f}px;top:{yb - hc / 2 - 20:.0f}px;transform:translateX(-50%);font-family:heavy;font-size:30px;color:#E6EAED;white-space:nowrap;opacity:0">비용 {c["cost"]:g}{unit}</div>')
+        D.items.append(f'<div id="{pl}" style="position:absolute;left:{x:.0f}px;top:{yb - hc - hp / 2 - 24:.0f}px;transform:translateX(-50%);font-family:heavy;font-size:40px;color:#0D1A12;white-space:nowrap;opacity:0">이익 {c["revenue"] - c["cost"]:g}{unit}</div>')
+        D.items.append(f'<div id="{rl}" style="position:absolute;left:{x:.0f}px;top:{yb - hc - hp - 54:.0f}px;transform:translateX(-50%);font-family:heavy;font-size:32px;color:{GOLD};white-space:nowrap;opacity:0">매출 {c["revenue"]:g}{unit}</div>')
+        D.items.append(f'<div id="{nm}" style="position:absolute;left:{x:.0f}px;top:{yb + 18}px;transform:translateX(-50%);font-family:heavy;font-size:34px;color:{CREAM};white-space:nowrap;opacity:0">{H.escape(c["label"])}</div>')
+        el[c["id"]] = dict(ch=ch, ph=ph, cl=cl, pl=pl, rl=rl, nm=nm)
+    for k_, (b, (t0, d)) in enumerate(zip(sc.get("beats", []), bt)):
+        seq = t0 + 0.2
+        for act in b.get("do") or []:
+            t = _when(sc, k_, b, t0, d, act.get("t"), seq)
+            seq = max(seq, t) + 0.6
+            if "col" in act:
+                e = el[act["col"]]
+                D.js.append(f'tl.to("#{e["ch"]}",{{scaleY:1,duration:.5}},{t:.2f});tl.to("#{e["cl"]}",{{opacity:1,duration:.3}},{t + .4:.2f});')
+                D.js.append(f'tl.to("#{e["ph"]}",{{scaleY:1,duration:.5}},{t + .4:.2f});tl.to("#{e["rl"]}",{{opacity:1,duration:.3}},{t + .8:.2f});tl.to("#{e["nm"]}",{{opacity:1,duration:.3}},{t:.2f});')
+                D.sfx.append(("whoosh-short", t))
+            if "profit" in act:
+                e = el[act["profit"]]
+                D.js.append(f'tl.fromTo("#{e["pl"]}",{{opacity:0,scale:.8}},{{opacity:1,scale:1,duration:.35,ease:"back.out(2)"}},{t:.2f});')
+                D.sfx.append(("pop", t))
+            if act.get("dim"):
+                for e in el.values():
+                    for v in e.values():
+                        D.js.append(f'tl.to("#{v}",{{opacity:.18,duration:.4}},{t:.2f});')
+            if "note" in act:
+                i = _txt(D, act.get("x", 1300), act.get("y", 330), H.escape(act["note"]), act.get("size", 40), act.get("color", DOWN), font="heavy")
+                _show(D, i, t, 0)
+                D.sfx.append(("pop", t))
+            if "mini" in act:   # 오른쪽 작은 가로 막대 (같은 축척)
+                rows = act["mini"]
+                vmax = max(abs(r[1]) for r in rows) or 1
+                if act.get("title"):
+                    i = _txt(D, 1300, 470, H.escape(act["title"]), 28, MUTED)
+                    _show(D, i, t, 0)
+                for j, (nm_, v, txt) in enumerate(rows):
+                    y = 520 + j * 80
+                    a = _txt(D, 1300, y, H.escape(nm_), 30, CREAM, font="heavy")
+                    bar = D._id()
+                    w = 300 * abs(v) / vmax
+                    D.items.append(f'<div id="{bar}" style="position:absolute;left:1500px;top:{y + 4}px;height:36px;width:{w:.0f}px;background:{DOWN};border-radius:4px;transform-origin:0 50%;transform:scaleX(0)"></div>')
+                    vl = _txt(D, 1500 + w + 14, y, H.escape(txt), 30, DOWN, font="heavy")
+                    tt = t + j * .35
+                    _show(D, a, tt, 0)
+                    D.js.append(f'tl.to("#{bar}",{{scaleX:1,duration:.5}},{tt:.2f});')
+                    _show(D, vl, tt + .4, 0)
+                D.sfx.append(("pop", t))
+
+
+# ── pqbox ────────────────────────────────────────────────────────────────────
+def s_pqbox(D, sc: dict, bt: list, dur: float):
+    """매출 = 값 × 개수 를 넓이로: 가로 = 판 개수, 세로 = 값. 두 길의 넓이를 나란히 (E1·E5).
+    boxes: [{"id","label","qty","price","text","x"}], cap: 만들 수 있는 양
+    do: {"box": id} · {"spare": id, "text": ...} 만들 수 있지만 안 만든 몫(점선) · {"area": id} 넓이 칠하고 매출 글자 · {"headline": ...}"""
+    from . import explain
+    sc = dict(sc)
+    sc.setdefault("theme", "dark")
+    explain._setup(D, sc, title=False)
+    _title(D, sc)
+    boxes = sc["boxes"]
+    yb = 860
+    PX = sc.get("px_per_qty", 6.0)
+    PY = sc.get("px_per_price", 4.6)
+    cap = sc.get("cap", max(b["qty"] for b in boxes))
+    el = {}
+    for b in boxes:
+        x0 = b["x"]
+        w, h = b["qty"] * PX, b["price"] * PY
+        r, a, lb, nm, sp, ql = (D._id() for _ in range(6))
+        D.items.append(f'<div id="{r}" style="position:absolute;left:{x0}px;top:{yb - h:.0f}px;width:{w:.0f}px;height:{h:.0f}px;border:4px solid {CREAM};border-radius:4px;transform-origin:0 100%;transform:scale(0)"></div>')
+        D.items.append(f'<div id="{a}" style="position:absolute;left:{x0 + 4}px;top:{yb - h + 4:.0f}px;width:{w - 8:.0f}px;height:{h - 8:.0f}px;background:{b.get("fill", "rgba(240,190,90,.45)")};opacity:0"></div>')
+        ly = yb - h / 2 - 30 if h > 120 else yb - h - 70
+        D.items.append(f'<div id="{lb}" style="position:absolute;left:{x0 + w / 2:.0f}px;top:{ly:.0f}px;transform:translateX(-50%);font-family:heavy;font-size:46px;color:{GOLD};white-space:nowrap;opacity:0">{H.escape(b["text"])}</div>')
+        D.items.append(f'<div id="{nm}" style="position:absolute;left:{x0}px;top:{yb + 18}px;font-family:heavy;font-size:32px;color:{CREAM};white-space:nowrap;opacity:0">{H.escape(b["label"])}</div>')
+        D.items.append(f'<div id="{ql}" style="position:absolute;left:{x0 - 14}px;top:{yb - h - 2:.0f}px;transform:translateX(-100%);font-family:sans-x;font-size:26px;color:{MUTED};white-space:nowrap;opacity:0">값 {b["price"]:g}원</div>'
+                       f'<div id="{ql}q" style="position:absolute;left:{x0 + w - 4:.0f}px;top:{yb + 60}px;transform:translateX(-100%);font-family:sans-x;font-size:26px;color:{MUTED};white-space:nowrap;opacity:0">{b["qty"]:g}개</div>')
+        sw = (cap - b["qty"]) * PX
+        D.items.append(f'<div id="{sp}" style="position:absolute;left:{x0 + w:.0f}px;top:{yb - h:.0f}px;width:{max(sw, 0):.0f}px;height:{h:.0f}px;border:3px dashed {MUTED};border-left:none;opacity:0"></div>')
+        el[b["id"]] = dict(r=r, a=a, lb=lb, nm=nm, sp=sp, ql=ql, h=h, x=x0, w=w)
+    for k_, (bb, (t0, d)) in enumerate(zip(sc.get("beats", []), bt)):
+        seq = t0 + 0.2
+        for act in bb.get("do") or []:
+            t = _when(sc, k_, bb, t0, d, act.get("t"), seq)
+            seq = max(seq, t) + 0.6
+            if "box" in act:
+                e = el[act["box"]]
+                D.js.append(f'tl.to("#{e["r"]}",{{scale:1,duration:.6,ease:"power2.out"}},{t:.2f});tl.to("#{e["nm"]}",{{opacity:1,duration:.3}},{t:.2f});')
+                D.js.append(f'tl.to("#{e["ql"]}",{{opacity:1,duration:.3}},{t + .4:.2f});tl.to("#{e["ql"]}q",{{opacity:1,duration:.3}},{t + .4:.2f});')
+                D.sfx.append(("pencil", t))
+            if "spare" in act:
+                e = el[act["spare"]]
+                D.js.append(f'tl.to("#{e["sp"]}",{{opacity:1,duration:.4}},{t:.2f});')
+                if act.get("text"):
+                    i = _txt(D, e["x"] + e["w"] + 10, 860 - e["h"] - 44, H.escape(act["text"]), 26, MUTED)
+                    _show(D, i, t + .2, 0)
+            if "area" in act:
+                e = el[act["area"]]
+                D.js.append(f'tl.to("#{e["a"]}",{{opacity:1,duration:.5}},{t:.2f});')
+                D.js.append(f'tl.fromTo("#{e["lb"]}",{{opacity:0,scale:.8}},{{opacity:1,scale:1,duration:.35,ease:"back.out(2)"}},{t + .3:.2f});')
+                D.sfx.append(("pop", t))
+            if "headline" in act:
+                i = _txt(D, 960, act.get("y", 180), H.escape(act["headline"]), 46, act.get("color", GOLD), font="heavy", anchor="c")
+                _show(D, i, t)
+                D.sfx.append(("pop", t))
+
+
 def register():
     from . import hybrid, explain
     hybrid.RENDER["pricewalk"] = explain._themed(s_pricewalk)
     hybrid.RENDER["standoff"] = explain._themed(s_standoff)
     hybrid.RENDER["giveback"] = explain._themed(s_giveback)
+    hybrid.RENDER["lifecost"] = explain._themed(s_lifecost)
+    hybrid.RENDER["profitbar"] = explain._themed(s_profitbar)
+    hybrid.RENDER["pqbox"] = explain._themed(s_pqbox)
