@@ -237,8 +237,8 @@ sc.add(f'<div id="s4-y" style="position:absolute;left:{GX0 + 20}px;top:150px;fon
        f'<div id="s4-x" style="position:absolute;left:{GX1 - 140}px;top:{GY1 + 20}px;font-weight:800;font-size:36px;color:#4A4F56;opacity:0">수 (1~200)</div>'
        f'<div id="s4-sl" style="position:absolute;left:1180px;top:520px;font-weight:900;font-size:46px;opacity:0">계단: 실제 소수 개수</div>'
        f'<div id="s4-cl" style="position:absolute;left:760px;top:330px;font-weight:900;font-size:46px;color:{ACC};opacity:0">매끈한 곡선: 리만이 쓴 근사</div>'
-       f'<div id="s4-zoom" style="position:absolute;left:1240px;top:640px;width:520px;padding:18px 26px;background:#fff;box-shadow:0 18px 36px rgba(20,22,26,.18);opacity:0">'
-       f'<div style="font-weight:900;font-size:54px;color:{ACC}">이 틈의 크기</div><div style="font-weight:700;font-size:36px;margin-top:6px">← 리만가설이 참이면 가장 정확하게</div></div>')
+       f'<div id="s4-zoom" style="position:absolute;left:640px;top:620px;padding:18px 26px;white-space:nowrap;background:#fff;box-shadow:0 18px 36px rgba(20,22,26,.18);opacity:0">'
+       f'<div style="font-weight:900;font-size:54px;color:{ACC}">이 틈의 크기</div><div style="font-weight:700;font-size:36px;margin-top:6px">↑ 리만가설이 참이면 가장 정확하게 앎</div></div>')
 sc.pen("s4-ax", "s4-pa", sc.cue(13, .1), sc.dur(13))
 sc.appear("s4-y", sc.cue(13, .6))
 sc.appear("s4-x", sc.cue(13, .9))
@@ -247,6 +247,7 @@ sc.appear("s4-sl", sc.cue(14, sc.dur(14) * .6))
 sc.pen("s4-cv", "s4-pc", sc.cue(14, sc.dur(14) * .55), sc.dur(14) * .45 + .8)
 sc.appear("s4-cl", sc.cue(14, sc.dur(14) + .2))
 sc.j(f'tl.to("#{sc.sid}-in",{{scale:1.5,x:-420,y:-80,duration:1.4,ease:"power2.inOut"}},{sc.cue(15, .1)});')
+sc.j(f'tl.to("#s4-x",{{opacity:0,duration:.5}},{sc.cue(15, .1)});')   # 확대하면 가로축 글자가 자막 밑으로 들어감 (2026-11-26)
 sc.appear("s4-zoom", sc.cue(16, .2), .6, 40)
 S4 = sc
 
@@ -479,7 +480,7 @@ index = f"""<!doctype html><html><head><meta charset="utf-8">
 <style>
 @font-face{{font-family:'NotoKR';src:url('assets/fonts/NotoSansKR-VF.ttf');font-weight:100 900}}
 .cap{{position:absolute;left:0;width:1920px;top:930px;text-align:center;z-index:50;font-family:'NotoKR'}}
-.cap span{{display:inline-block;background:rgba(29,32,36,.86);color:#fff;font-weight:700;font-size:44px;padding:8px 24px;border-radius:8px;max-width:1500px;line-height:1.35}}
+.cap span{{display:inline-block;background:rgba(29,32,36,.86);color:#fff;font-weight:700;font-size:44px;padding:8px 24px;border-radius:8px;max-width:1500px;line-height:1.35;word-break:keep-all}}
 </style></head>
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="{END}" data-width="1920" data-height="1080">
