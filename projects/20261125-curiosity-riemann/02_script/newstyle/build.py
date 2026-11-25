@@ -61,7 +61,7 @@ class Scene:
     # ── 움직임 문법 ───────────────────────────────────────────────
     def pen(self, path_id, dot_id, t, d):
         """선이 펜 끝 점을 따라 천천히 그려짐 (사용자 2026-11-25)."""
-        self.j(f'tl.fromTo("#{path_id}",{{strokeDashoffset:1}},{{strokeDashoffset:0,duration:{d:.2f},ease:"none"}},{t:.2f});')
+        self.j(f'tl.fromTo("#{path_id}",{{drawSVG:"0%"}},{{drawSVG:"100%",duration:{d:.2f},ease:"none"}},{t:.2f});')
         if dot_id:
             self.j(f'tl.fromTo("#{dot_id}",{{opacity:0}},{{opacity:1,duration:.12}},{t:.2f});'
                    f'tl.to("#{dot_id}",{{motionPath:{{path:"#{path_id}",align:"#{path_id}",alignOrigin:[.5,.5]}},duration:{d:.2f},ease:"none"}},{t:.2f});'
@@ -92,7 +92,7 @@ class Scene:
 <div class="grain"></div><div class="vig"></div>
 </div>
 <script>
-gsap.registerPlugin(MotionPathPlugin);
+gsap.registerPlugin(MotionPathPlugin, DrawSVGPlugin);
 const tl = gsap.timeline({{ paused: true }});
 tl.fromTo("#{self.sid}-cam", {{scale:1}}, {{scale:1.05, duration:{d}, ease:"sine.inOut"}}, 0);
 {''.join(self.js)}
@@ -110,7 +110,7 @@ def svg(sc, inner, w=1920, h=1080, x=0, y=0, extra=""):
 
 def path(pid, d, color=INK, w=6, extra=""):
     return (f'<path id="{pid}" d="{d}" fill="none" stroke="{color}" stroke-width="{w}" stroke-linecap="round" stroke-linejoin="round" '
-            f'pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" {extra}/>')
+            f'{extra}/>')
 
 
 def pendot(did, color=INK, r=9):
@@ -153,7 +153,7 @@ inner = (path("s2-ln", f"M{X0},{Y} L{X1},{Y}", INK, 7) + pendot("s2-pd")
          + "".join(f'<circle id="s2-c{k}" cx="{yr(y):.0f}" cy="{Y}" r="14" fill="{c}" opacity="0"/>' for k, (y, c) in enumerate([(1859, INK), (1900, INK), (2000, INK), (2026, ACC)])))
 svg(sc, inner)
 sc.add(f'<div id="s2-big" style="position:absolute;left:0;width:1920px;top:110px;text-align:center;font-weight:900;font-size:230px;letter-spacing:-8px">1859</div>'
-       f'<div id="s2-yrs" style="position:absolute;left:0;width:1920px;top:360px;text-align:center;font-weight:800;font-size:52px;color:{ACC};opacity:0">167년</div>'
+       f'<div id="s2-yrs" style="position:absolute;left:0;width:1920px;top:395px;text-align:center;font-weight:800;font-size:52px;color:{ACC};opacity:0">167년</div>'
        + "".join(f'<div id="s2-l{k}" style="position:absolute;left:{yr(y) - 260:.0f}px;width:520px;text-align:center;top:{Y + 40 if y != 2026 else Y - 150}px;opacity:0">'
                  f'<div style="font-weight:900;font-size:56px">{y}</div><div style="font-weight:700;font-size:34px;color:#4A4F56">{lab}</div></div>'
                  for k, (y, lab) in enumerate([(1859, "리만의 논문"), (1900, "힐베르트 문제 8번"), (2000, "밀레니엄 문제 · 100만 달러"), (2026, "11월 20일")]))
@@ -455,7 +455,7 @@ sfx = []
 for s in SCENES:
     base = s.s["start"]
     for js in s.js:
-        if "strokeDashoffset:0" in js:
+        if "drawSVG:\"100%\"" in js:
             tt = float(js.rsplit(",", 1)[1].rstrip(");"))
             sfx.append(("pencil", round(base + tt, 2)))
 sfx += [("impact-bass-2", round(SCN["s10"]["start"] + SCS["s10"].cue(50, .4), 2)), ("whoosh", round(SCN["s1"]["start"] + .1, 2))]
@@ -475,7 +475,7 @@ aud += "".join(f'<audio id="sx{k}" class="clip" src="assets/sfx/{n}.{"wav" if n 
 hosts = "".join(f'<div id="{s.sid}" data-composition-id="{s.sid}" data-composition-src="compositions/{s.sid}.html" data-start="{s.s["start"]}" '
                 f'data-duration="{s.s["dur"]}" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>' for s in SCENES)
 index = f"""<!doctype html><html><head><meta charset="utf-8">
-<script src="assets/gsap.min.js"></script><script src="assets/MotionPathPlugin.min.js"></script>
+<script src="assets/gsap.min.js"></script><script src="assets/MotionPathPlugin.min.js"></script><script src="assets/DrawSVGPlugin.min.js"></script>
 <style>
 @font-face{{font-family:'NotoKR';src:url('assets/fonts/NotoSansKR-VF.ttf');font-weight:100 900}}
 .cap{{position:absolute;left:0;width:1920px;top:930px;text-align:center;z-index:50;font-family:'NotoKR'}}

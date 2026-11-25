@@ -6,3 +6,6 @@
 - 코드 화면은 '예시 화면 · 실제 증명 코드 아님' 표시
 - 다시 만들기 (작업 폴더 E:\ytflow-local\hf-riemann): 목소리 l00~l53.mp3(edge-tts InJoon -4%) → `python build.py` → `npx hyperframes check` → `npx hyperframes render -o renders/riemann_v1.mp4 --quality delivery`
 - 자막: 문장 하나를 말하는 동안 통째로(비례 분할 없음), 길면 두 줄
+
+## 고친 것 (2026-11-25)
+- 선 그리기를 `strokeDashoffset`(pathLength=1) 대신 GSAP **DrawSVGPlugin**(`drawSVG: "0%" → "100%"`)으로. 이전 방식은 렌더러가 한 프레임씩 멈춰 찍을 때 그리는 도중의 선이 보이지 않고 끝에 한꺼번에 나타났음 — 사용자의 "그래프가 한 번에 찍 그어진다"의 원인. 펜 끝 점만 움직이고 선은 없던 프레임을 정지 화면으로 확인함.
