@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-26T02:23:33",
- "source_hash": "9e0ff73df511",
+ "generated": "2026-11-26T02:30:18",
+ "source_hash": "b2092eeae21b",
  "audit": {
   "date": "2026-11-25T14:34",
   "counts": {
@@ -807,8 +807,8 @@
   "fixed": []
  },
  "stats": {
-  "manual_version": 139,
-  "versions": 139,
+  "manual_version": 140,
+  "versions": 140,
   "reviews": 60,
   "rejects": 33,
   "passes": 27,
@@ -818,20 +818,20 @@
   "sections": 226,
   "must": 30,
   "auto": 41,
-  "intents": 395,
+  "intents": 396,
   "misaligned": 1,
   "intents_reviewed": 7,
   "conflicts": 3,
   "code": 85,
   "terms": 140,
-  "bans": 246,
-  "feedback": 306,
+  "bans": 249,
+  "feedback": 307,
   "topics": 4,
   "episodes": 59,
   "main_situations": 17,
   "tiers": {
    "principle": 60,
-   "standard": 197,
+   "standard": 200,
    "style": 35,
    "trial": 11
   },
@@ -3620,6 +3620,62 @@
   },
   {
    "section": "sec:09§5-1",
+   "text": "왜: 시청자는 투자를 하지만 전문가가 아니다. 용어·전제를 아는 사람만 따라오면 '그럴듯한데?'(§5-00)가 생기지 않는다. 반대로 너무 쉽게 줄이면 원리가 빠져 '그래서 왜?'에 답하지 못하고, 시청자를 얕보는 말투가 된다.",
+   "themes": [
+    "script",
+    "intent"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:68d8c134",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§5-1",
+   "text": "어떻게: 기준은 '경제 뉴스를 가끔 보는 중·고등학생'. ① 전문 용어는 처음 나올 때 한 문장으로 풀고(감가상각 = 비싼 기계값을 쓰는 햇수로 나눠 해마다 비용으로 잡는 것) 그다음부터 같은 말로만 부른다 ② 숫자는 비교 기준을 붙인다(1,180억 달러 = 엔비디아 한 분기 매출과 비슷) ③ 원리는 생활 속 비유 하나 + 움직이는 그림으로, 단 비유가 원리를 대신하지 않게 — 비유 다음에 실제 고리(누가 누구에게 돈을 빌려주고 무엇이 담보인가)를 꼭 다시 말한",
+   "themes": [
+    "motion"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:4e519e4e",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§5-1",
+   "text": "지키는 깊이: 숫자·원리·반대 근거·틀릴 경우는 빼지 않는다. 쉬운 말로 바꾸되 내용은 줄이지 않는다(정확도를 지키는 선에서만 단순화 — '대략'·'예시'는 그렇다고 밝힘).",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:5f25e175",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§5-1",
    "text": "2. 그다음, 상황 설명이 필요한 대목만 모션그래픽으로 짧게 푼다. 대사는 앞에서 말한 사실의 관계(어디서 어디로·뒤에도 계속·전체 중 몫·닫힌 사이·무엇이 증거가 아닌가)만 말하고 새 사실을 더하지 않는다.",
    "themes": [],
    "absolute": false,
@@ -4178,7 +4234,7 @@
    "tier_label": "영구 원칙"
   },
   {
-   "section": "sec:09§h576",
+   "section": "sec:09§h582",
    "text": "ElevenLabs 는 직접 API 로만 (MCP 생성 금지, 2026-11-22 사용자): 같은 문장(33자, Teo·eleven_v4)을 실측: 직접 API 15 크레딧(응답 헤더 Character-Cost) vs MCP creative_generate_speech 1테이크 33 크레딧·기본 2테이크 66 크레딧(estimate_only) — MCP 가 1테이크도 2.2배, 기본값이면 4.4배 (AGENTS 목소리 규칙, docs/08-voice.md).",
    "themes": [
     "sound"
@@ -4197,7 +4253,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:09§h576",
+   "section": "sec:09§h582",
    "text": "ElevenLabs 를 쓸 수 없는 날은 edge 초안으로 만들되 올리지 않는다 (v43, §2-1 — 공개본은 Teo). 크레딧이 모자라면 그날 편을 미루거나 voice-import 로 Teo 테이크를 만든다.",
    "themes": [],
    "absolute": false,
@@ -5167,7 +5223,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h343",
+   "section": "sec:feedback§h344",
    "text": "2026-11-14 · v20 기각 — “중간중간 너무 난잡함. 목표·시청자 욕망을 먼저 정의하지 않고 만듦. 대본을 소제목처럼 글로 쓰거나 사진·그림을 붙여 넣기만 함 — 대본에 따른 애니메이션이 아님. 각 연출의 의도가 불분명”",
    "themes": [
     "variety",
@@ -5188,7 +5244,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h343",
+   "section": "sec:feedback§h344",
    "text": "2026-11-21 · 영상 검토 — “대본의 피드백입니다 — (의지력 편 v2 검토) 방향 통과, 2025 효과 배수 비교 금지·대조 조건과 주 지표 설명·생활 조언을 근거 범위 안으로·4~7장 연구 나열 대신 증거 추적·8장 전환 문장”",
    "themes": [
     "motion",
@@ -5208,7 +5264,7 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "section": "sec:feedback§h445",
+   "section": "sec:feedback§h446",
    "text": "2026-11-19 · 방향·기준 요청 — “대본 단계에 \"호기심 대본은 설명·지식 문장 30% 이하\"라는 기준 이런 기준은 또 빼주세요 너무 과적합입니다. / \"설명은 이야기 속에 엮는다\"는 원리 이런식으로 원리주의적으로 가지 방법 자체를 고정하지 말아주세요”",
    "themes": [
     "script",
@@ -5228,7 +5284,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h503",
+   "section": "sec:feedback§h504",
    "text": "2026-11-09 · v3 기각 — “강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)”",
    "themes": [
     "emphasis",
@@ -5907,7 +5963,7 @@
    "key": "09",
    "file": "manual/09-market-daily.md",
    "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13 · v36 인사이트·영상 소스 · v42 기술 분석·CEO 소식 2026-11-17)",
-   "lines": 596,
+   "lines": 602,
    "versions": [
     19,
     24,
@@ -6073,7 +6129,7 @@
    "key": "feedback",
    "file": "manual/feedback-by-repo.md",
    "label": "내 피드백 — 레포별 (자동 생성: `python -m ytflow manual-graph`)",
-   "lines": 514,
+   "lines": 515,
    "versions": [
     83,
     84,
@@ -6127,9 +6183,10 @@
     135,
     136,
     137,
-    138
+    138,
+    139
    ],
-   "last_version": 138
+   "last_version": 139
   },
   {
    "id": "doc:README",
@@ -8297,12 +8354,13 @@
    "label": "나열하지 말고 풀어서 — 설명은 움직이는 장면으로",
    "title": "5-1. 나열하지 말고 풀어서 — 설명은 움직이는 장면으로 (v63, 2026-11-20)",
    "line": 423,
-   "end": 451,
+   "end": 457,
    "tag_version": 63,
    "versions": [
-    63
+    63,
+    140
    ],
-   "last_version": 63,
+   "last_version": 140,
    "terms": [
     "term:bite",
     "term:afterline",
@@ -8317,6 +8375,7 @@
     "term:style-explain-stage",
     "term:tech-spread",
     "term:tech-share",
+    "term:tech-motionboard",
     "term:beat-motion"
    ]
   },
@@ -8328,8 +8387,8 @@
    "level": 2,
    "label": "화면 문법 (시장 카테고리 개성, `05 §0-7`)",
    "title": "6. 화면 문법 (시장 카테고리 개성, `05 §0-7`)",
-   "line": 452,
-   "end": 475,
+   "line": 458,
+   "end": 481,
    "tag_version": null,
    "versions": [
     27,
@@ -8364,8 +8423,8 @@
    "level": 2,
    "label": "제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
    "title": "7. 제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
-   "line": 476,
-   "end": 485,
+   "line": 482,
+   "end": 491,
    "tag_version": null,
    "versions": [
     27
@@ -8385,8 +8444,8 @@
    "level": 3,
    "label": "썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
    "title": "7-1. 썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
-   "line": 486,
-   "end": 521,
+   "line": 492,
+   "end": 527,
    "tag_version": null,
    "versions": [
     51,
@@ -8408,8 +8467,8 @@
    "level": 2,
    "label": "렌더 전 점검",
    "title": "8. 렌더 전 점검",
-   "line": 522,
-   "end": 524,
+   "line": 528,
+   "end": 530,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8422,8 +8481,8 @@
    "level": 2,
    "label": "렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
    "title": "9. 렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
-   "line": 525,
-   "end": 532,
+   "line": 531,
+   "end": 538,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8436,8 +8495,8 @@
    "level": 3,
    "label": "업로드 전 종합 검수 — 통과해야 올린다 (작업 기준, 2026-11-21 사용자: \"업로드 하기 전 항상 글씨겹침 그래픽끼리 겹침 자막밀림 자막과 나레이션 싱크 화면과 자막이 일치하는지 등 종합적으로 검수하세요 이는 메뉴얼에 반영하세요\")",
    "title": "9-1. 업로드 전 종합 검수 — 통과해야 올린다 (작업 기준, 2026-11-21 사용자: \"업로드 하기 전 항상 글씨겹침 그래픽끼리 겹침 자막밀림 자막과 나레이션 싱크 화면과 자막이 일치하는지 등 종합적으로 검수하세요 이는 메뉴얼에 반영하세요\")",
-   "line": 533,
-   "end": 540,
+   "line": 539,
+   "end": 546,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8450,8 +8509,8 @@
    "level": 2,
    "label": "업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
    "title": "10. 업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
-   "line": 541,
-   "end": 553,
+   "line": 547,
+   "end": 559,
    "tag_version": null,
    "versions": [
     34
@@ -8466,8 +8525,8 @@
    "level": 2,
    "label": "기록·되돌아보기",
    "title": "11. 기록·되돌아보기",
-   "line": 554,
-   "end": 557,
+   "line": 560,
+   "end": 563,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8480,8 +8539,8 @@
    "level": 2,
    "label": "예외 대응",
    "title": "12. 예외 대응",
-   "line": 558,
-   "end": 567,
+   "line": 564,
+   "end": 573,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8494,8 +8553,8 @@
    "level": 2,
    "label": "법·정책",
    "title": "13. 법·정책",
-   "line": 568,
-   "end": 575,
+   "line": 574,
+   "end": 581,
    "tag_version": null,
    "versions": [
     34
@@ -8503,28 +8562,14 @@
    "last_version": 34
   },
   {
-   "id": "sec:09§h576",
+   "id": "sec:09§h582",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h576",
+   "num": "h582",
    "level": 2,
    "label": "목소리 (2026-11-13 결정)",
    "title": "목소리 (2026-11-13 결정)",
-   "line": 576,
-   "end": 584,
-   "tag_version": null,
-   "versions": [],
-   "last_version": null
-  },
-  {
-   "id": "sec:09§h585",
-   "kind": "section",
-   "doc": "doc:09",
-   "num": "h585",
-   "level": 2,
-   "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
-   "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
-   "line": 585,
+   "line": 582,
    "end": 590,
    "tag_version": null,
    "versions": [],
@@ -8536,10 +8581,24 @@
    "doc": "doc:09",
    "num": "h591",
    "level": 2,
-   "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
-   "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
+   "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
+   "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
    "line": 591,
    "end": 596,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:09§h597",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "h597",
+   "level": 2,
+   "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
+   "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
+   "line": 597,
+   "end": 602,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9844,35 +9903,35 @@
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
    "line": 263,
-   "end": 340,
+   "end": 341,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h341",
+   "id": "sec:feedback§h342",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h341",
+   "num": "h342",
    "level": 2,
    "label": "호기심 — `topics/curiosity`",
    "title": "호기심 — `topics/curiosity`",
-   "line": 341,
-   "end": 342,
+   "line": 342,
+   "end": 343,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h343",
+   "id": "sec:feedback§h344",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h343",
+   "num": "h344",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 343,
-   "end": 444,
+   "line": 344,
+   "end": 445,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9883,15 +9942,15 @@
    ]
   },
   {
-   "id": "sec:feedback§h445",
+   "id": "sec:feedback§h446",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h445",
+   "num": "h446",
    "level": 3,
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
-   "line": 445,
-   "end": 467,
+   "line": 446,
+   "end": 468,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9900,29 +9959,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h468",
+   "id": "sec:feedback§h469",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h468",
+   "num": "h469",
    "level": 2,
    "label": "시사 — `topics/issues`",
    "title": "시사 — `topics/issues`",
-   "line": 468,
-   "end": 469,
+   "line": 469,
+   "end": 470,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h470",
+   "id": "sec:feedback§h471",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h470",
+   "num": "h471",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 470,
-   "end": 500,
+   "line": 471,
+   "end": 501,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9932,29 +9991,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h501",
+   "id": "sec:feedback§h502",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h501",
+   "num": "h502",
    "level": 2,
    "label": "AI — `topics/ai`",
    "title": "AI — `topics/ai`",
-   "line": 501,
-   "end": 502,
+   "line": 502,
+   "end": 503,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h503",
+   "id": "sec:feedback§h504",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h503",
+   "num": "h504",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 503,
-   "end": 514,
+   "line": 504,
+   "end": 515,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -17056,7 +17115,25 @@
    "themes": [
     "depth",
     "intent"
-   ]
+   ],
+   "commit": {
+    "sha": "30205742885b972bd74711469430e11a93e9d435",
+    "subject": "매뉴얼 v139: 분석 영상 순서 — 주 시청자 니즈로 흥미 → 결론+근거 한 마디 → 원리는 궁금해진 뒤 천천히 (09 §5-00)",
+    "date": "2026-11-26",
+    "other_files": [
+     "config/local_routines/deep-watch-make.md"
+    ]
+   }
+  },
+  {
+   "id": "ver:140",
+   "kind": "version",
+   "v": 140,
+   "date": "2026-11-26",
+   "label": "v140",
+   "summary": "설명 수준: 중·고등학생이 이해, 초등학생 수준으로 줄이지 않음 (09 §5-1)",
+   "applied": [],
+   "themes": []
   },
   {
    "id": "rev:1",
@@ -27634,7 +27711,7 @@
      "kind": "review"
     },
     {
-     "ref": "sec:feedback§h343",
+     "ref": "sec:feedback§h344",
      "kind": "manual"
     }
    ],
@@ -27670,7 +27747,7 @@
      "by": ""
     },
     {
-     "ref": "sec:feedback§h343",
+     "ref": "sec:feedback§h344",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -37156,6 +37233,60 @@
    "annotated": false
   },
   {
+   "id": "intent:dde4140f",
+   "kind": "intent",
+   "quote": "그리고 설명은 좀 직관적으로 이해하기 쉽게 즉 중학생 고등학생도 이해할 정도로 해주세요. 전문가가 아니여도 알 수 있어야 합니다. 단 초등학생정도로 너무 간소화 하지는 말아주세여",
+   "label": "그리고 설명은 좀 직관적으로 이해하기 쉽게 즉 중학생 고등학생도 이해할 정도로 해주세요. 전문가가 아니여도 ",
+   "versions": [
+    63
+   ],
+   "date": "2026-11-26",
+   "sources": [
+    {
+     "ref": "fb:307",
+     "kind": "feedback"
+    },
+    {
+     "ref": "sec:09§5-1",
+     "kind": "manual"
+    }
+   ],
+   "variants": [
+    "설명은 좀 직관적으로 이해하기 쉽게 즉 중학생 고등학생도 이해할 정도로 해주세요. 전문가가 아니여도 알 수 있어야 합니다. 단 초등학생정도로 너무 간소화 하지는 말아주세여"
+   ],
+   "member_ids": [
+    "intent:dde4140f",
+    "intent:f2817f40"
+   ],
+   "themes": [],
+   "ann_key": "intent:dde4140f",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:63",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§2",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§5-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "term:bite",
    "kind": "term",
    "key": "bite",
@@ -40372,7 +40503,7 @@
     "sec:10§1",
     "sec:10§h9",
     "sec:10§3",
-    "sec:feedback§h445",
+    "sec:feedback§h446",
     "ver:21",
     "ver:34",
     "code:ytflow/stages/hybrid.py:1746",
@@ -43034,7 +43165,7 @@
     "sec:12§0-1",
     "sec:13§4-1",
     "sec:13§7",
-    "sec:feedback§h343",
+    "sec:feedback§h344",
     "ver:92",
     "rule:G4:1",
     "check:172",
@@ -43122,7 +43253,8 @@
    ],
    "instead": [],
    "mentioned_in": [
-    "sec:05§2"
+    "sec:05§2",
+    "sec:09§5-1"
    ]
   },
   {
@@ -43183,9 +43315,9 @@
     "sec:09§6",
     "sec:10§h136",
     "sec:feedback§h164",
-    "sec:feedback§h343",
-    "sec:feedback§h470",
-    "sec:feedback§h503",
+    "sec:feedback§h344",
+    "sec:feedback§h471",
+    "sec:feedback§h504",
     "ver:10",
     "ver:30",
     "ver:31",
@@ -43445,7 +43577,7 @@
     "sec:04§0-4",
     "sec:09§5-1",
     "sec:09§6",
-    "sec:09§h591",
+    "sec:09§h597",
     "sec:11§2-4",
     "sec:README§2-5",
     "sec:README§3-1",
@@ -43609,9 +43741,9 @@
     "sec:10§4",
     "sec:12§0-1",
     "sec:feedback§h164",
-    "sec:feedback§h343",
-    "sec:feedback§h470",
-    "sec:feedback§h503",
+    "sec:feedback§h344",
+    "sec:feedback§h471",
+    "sec:feedback§h504",
     "ver:10",
     "ver:12",
     "rev:11",
@@ -43772,7 +43904,7 @@
     "sec:06§G6",
     "sec:08§4",
     "sec:09§6",
-    "sec:09§h591",
+    "sec:09§h597",
     "sec:10§4",
     "sec:feedback§h164",
     "sec:README§0",
@@ -52715,6 +52847,34 @@
    "repo_label": "시장",
    "intent": "intent:b2ef1bca",
    "tier_key": "fb:b2ef1bca",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:307",
+   "kind": "feedback",
+   "date": "2026-11-26",
+   "quote": "그리고 설명은 좀 직관적으로 이해하기 쉽게 즉 중학생 고등학생도 이해할 정도로 해주세요. 전문가가 아니여도 알 수 있어야 합니다. 단 초등학생정도로 너무 간소화 하지는 말아주세여",
+   "label": "그리고 설명은 좀 직관적으로 이해하기 쉽게 즉 중학생 고등학생도 이해할 정도로 해주세요. 전문가가 아니여도 ",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "해석: 설명 기준 = 경제 뉴스를 가끔 보는 중·고등학생. 용어는 첫 등장 때 한 문장 풀이, 숫자엔 비교 기준, 비유 뒤 실제 고리 다시, 한 문장 한 인과. 쉬운 말로 바꾸되 원리·숫자·반대 근거는 줄이지 않음(동화 말투·비유만 금지). 반영: manual/09 §5-1",
+   "pending": false,
+   "themes": [],
+   "scope": "standard",
+   "repo": "market",
+   "repo_label": "시장",
+   "intent": "intent:dde4140f",
+   "tier_key": "fb:dde4140f",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -84778,17 +84938,17 @@
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h576",
-   "kind": "contains"
-  },
-  {
-   "s": "doc:09",
-   "t": "sec:09§h585",
+   "t": "sec:09§h582",
    "kind": "contains"
   },
   {
    "s": "doc:09",
    "t": "sec:09§h591",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
+   "t": "sec:09§h597",
    "kind": "contains"
   },
   {
@@ -85148,37 +85308,37 @@
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h341",
+   "t": "sec:feedback§h342",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h343",
+   "t": "sec:feedback§h344",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h445",
+   "t": "sec:feedback§h446",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h468",
+   "t": "sec:feedback§h469",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h470",
+   "t": "sec:feedback§h471",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h501",
+   "t": "sec:feedback§h502",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h503",
+   "t": "sec:feedback§h504",
    "kind": "contains"
   },
   {
@@ -89253,6 +89413,22 @@
    ]
   },
   {
+   "s": "ver:139",
+   "t": "doc:feedback",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:140",
+   "t": "sec:09§5-1",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -92571,6 +92747,21 @@
    "kind": "about"
   },
   {
+   "s": "intent:dde4140f",
+   "t": "ver:63",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:dde4140f",
+   "t": "fb:307",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:dde4140f",
+   "t": "sec:09§5-1",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:fadf1ace",
    "t": "ver:27",
    "kind": "interpreted_in"
@@ -93107,7 +93298,7 @@
   },
   {
    "s": "intent:b3682647",
-   "t": "sec:feedback§h343",
+   "t": "sec:feedback§h344",
    "kind": "quoted_in"
   },
   {
@@ -101313,6 +101504,11 @@
   {
    "s": "fb:306",
    "t": "intent:b2ef1bca",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:307",
+   "t": "intent:dde4140f",
    "kind": "quoted_as"
   }
  ]
