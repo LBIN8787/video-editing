@@ -1,5 +1,6 @@
 유튜브 채널 '이어 읽는 시장'(주식, 1일 1영상)의 오늘 영상을 만들고 유튜브에 올리세요.
 
+
 ## 0. 준비 (이 PC — 클라우드 아님)
 - 지금 폴더는 이 작업 전용 git worktree 이고, 최신 origin/main 에서 시작했습니다. 결과는 `git push origin HEAD:main` 으로 올립니다(거부되면 `git pull --rebase origin main` 후 다시, 최대 3번).
 - 환경 준비가 안 됐을 때만 `pip install -q -r requirements.txt` · `python scripts/install_tools.py` 를 실행합니다(이미 있으면 건너뜀).

@@ -16,6 +16,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 from pathlib import Path
 import yaml
@@ -311,6 +312,9 @@ def main(argv: list[str] | None = None) -> None:
     au.add_argument("--full", action="store_true", help="--checked 와 함께: 전체 모순 점검도 마침 (다음은 7일 뒤)")
     ep = sub.add_parser("edit-plan", help="메인 → 주제 레포 → 이 영상: 박자마다 상황을 찾아 장면 종류·연출 기법 채우기 → 02_script/EDIT_CONTEXT.md·edit_plan.json (docs/33)")
     ep.add_argument("project")
+    dcp = sub.add_parser("decide", help="연출 결정 기록: 영상 방향·장면마다 고른 것·버린 대안·근거·의도 검사 → 02_script/DIRECTION_LOG.md (docs/66)")
+    dcp.add_argument("project")
+    dcp.add_argument("--draft", action="store_true", help="decide 가 없는 장면에 edit-plan 추천으로 뼈대(TODO) 채우기")
     sub.add_parser("topics", help="주제 레포(topics/<brand>) 목록 — 메인에서 물려받고 바꾸고 더한 상황")
     mg = sub.add_parser("manual-graph", help="매뉴얼 지식 그래프 → manual/graph.json (검토→버전→절·게이트·규칙·검사 코드), --html 로 보기 전용 페이지")
     mg.add_argument("--html", default=None); mg.add_argument("--artifact", default=None, help="공유 페이지(Artifact)로 올릴 HTML")
@@ -574,6 +578,19 @@ def main(argv: list[str] | None = None) -> None:
     elif a.cmd == "edit-plan":
         from .stages import layers
         layers.write_plan(Project.open(a.project).path)
+    elif a.cmd == "decide":
+        import json
+        from .stages import decisions
+        pth = Project.open(a.project).path
+        if a.draft:
+            print(f"[decide] 뼈대 {decisions.draft(pth)}곳 채움 — why·intent·why_not 의 TODO 를 직접 쓰세요")
+        out = decisions.write(pth)
+        r = json.loads((pth / "02_script" / "direction_log.json").read_text(encoding="utf-8"))
+        print(f"[decide] {'통과' if r['pass'] else '실패'} → {out}")
+        for i in r["items"][:30]:
+            print(f"  [{i['level']}] 장면 {i['scene']}: {i['msg']}")
+        if not r["pass"]:
+            raise SystemExit(1)
     elif a.cmd == "topics":
         from .stages import layers
         print(layers.listing())
@@ -634,6 +651,9 @@ def main(argv: list[str] | None = None) -> None:
         presenter.make(_P.open(a.project))
     elif a.cmd == "yt-publish":
         from .stages import ytpublish
+        if os.environ.get("YTFLOW_HOLD_PUBLISH") and not (a.update_meta or a.dry_run):
+            # 2026-11-24 사용자: "시장채널 일단은 업로드 자동업로드하지말고 냅둬주세요" — 정기 작업이 이 값을 켜고 돌림
+            raise SystemExit("[yt-publish] 보류 — 자동 업로드를 멈춰 둠(YTFLOW_HOLD_PUBLISH). 영상은 만들어 두고 올리지 않습니다")
         if not (a.resume or a.update_meta or a.dry_run):   # 새로 올릴 때만: 업로드 전 종합 검수 (2026-11-21 사용자, manual/09 §9-1)
             from .stages import preflight
             why = preflight.gate(Project.open(a.project))

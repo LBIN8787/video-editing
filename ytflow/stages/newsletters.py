@@ -43,6 +43,7 @@ KIND_KO = {"primary": "원문", "data": "원자료·통계", "media": "영상·�
 NOISE_SUBJ = re.compile(r"(?i)confirm|welcome|verify|subscription|preferences|update profile|구독 확인|구독해|환영|인증|가입")
 EMAIL_ADDRESS = re.compile(r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}")
 GENERIC = re.compile(r"(?i)^(read more|more|here|click here|link|learn more|full story|continue reading|read|sign up|subscribe|"
+                     r"keep reading|share this( story| item)?|share on \w+|share via|read the story|"
                      r"view online|this|website|자세히|더 보기|원문|바로가기|기사 보기)\W*$")
 # 짧은 라벨은 대개 'Read more' 같은 잡음이라 거부하지만, 한국어 낱말 둘 이상은 소재 이름이다
 # (예: '사이드카'·'공매도' — 어피티 머니레터, 2026-11-23).
@@ -87,6 +88,11 @@ def which(msg: dict, c: dict) -> dict | None:
 # 목적지가 주소 안에 그대로 들어 있어 네트워크 요청 없이 해독된다 (2026-11-23 확인).
 # 앞 묶음은 구독자·캠페인 번호라 해독해도 쓸 데가 없고, 그대로 두면 공개 목록에 수신자 식별자가 실린다.
 STIBEE_CLICK = re.compile(r"https?://event\.stibee\.com/v2/click/[^/\s?#]+/([A-Za-z0-9_\-=]+)")
+# Axios 메일의 클릭 주소. `https://link.axios.com/click/<캠페인>/<목적지 base64url>/<해시>` 처럼
+# 목적지가 주소 안에 그대로 들어 있다 — 스티비와 같은 방식으로 네트워크 요청 없이 해독한다.
+# (2026-11-24 확인: Axios AM·Markets 는 평문 본문 없이 HTML 만 오고 모든 링크가 이 형식이라,
+#  풀지 않으면 두 뉴스레터에서 소재가 하나도 남지 않는다.)
+AXIOS_CLICK = re.compile(r"https?://link\.axios\.com/click/[^/\s?#]+/([A-Za-z0-9_\-=]+)")
 
 
 def b64url_text(s: str) -> str:
@@ -115,8 +121,15 @@ def unwrap(url: str) -> str:
     """
     stibee = stibee_dest(url)
     m = re.search(r"/CL0/(https?(?::|%3A)[^/]*(?:/|%2F).+?)/\d+/[0-9a-f-]{20,}", url)
+    ax = AXIOS_CLICK.match(url)
+    axios = ""
+    if ax:
+        dest = b64url_text(ax.group(1))
+        axios = dest if dest.startswith(("http://", "https://")) else ""
     if stibee:
         url = stibee
+    elif axios:
+        url = axios
     elif m:
         url = urllib.parse.unquote(m.group(1))
     else:
@@ -143,6 +156,8 @@ PUBLIC_QUERY = {"id", "v", "q", "s", "page", "lang", "language", "year", "month"
 SENSITIVE_QUERY = re.compile(
     r"token|secret|email|recipient|subscriber|signature|auth|session|hash|"
     r"^key$|^code$|^uid$|^cid$|^mid$", re.I)
+# 호스트마다 공개로 확인된 쿼리 키 (자료 번호·섹션 이름 같은 공개 표식)
+HOST_QUERY = {"eiec.kdi.re.kr": {"num"}, "axios.com": {"stream"}, "naver.com": {"sid"}}
 
 
 def public_link(url: str, strict: bool = True) -> bool:
@@ -169,10 +184,14 @@ def public_link(url: str, strict: bool = True) -> bool:
         # Unknown query keys can be per-recipient identifiers: retain privately
         # for manual canonical-source lookup, never publish or request them.
         pairs = urllib.parse.parse_qsl(p.query, keep_blank_values=True)
-        # KDI 경제정보센터 자료 주소의 `?num=` 은 자료 번호(공개) — 그 호스트에서만 예외 (2026-11-23)
-        kdi_num = host == "eiec.kdi.re.kr"
+        # 호스트별로 공개가 확인된 쿼리 키만 예외로 둔다 (사람마다 다른 값이 아닌 표식):
+        #   eiec.kdi.re.kr `num` — 경제정보센터 자료 번호 (2026-11-23)
+        #   axios.com `stream` — 뉴스레터 섹션 이름 (2026-11-24, Axios AM·Markets)
+        #   naver.com `sid` — 네이버 뉴스 분야 번호 (2026-11-24, 어피티·미라클레터 뉴스 링크)
+        extra = next((keys for d, keys in HOST_QUERY.items()
+                      if host == d or host.endswith("." + d)), set())
         if any(SENSITIVE_QUERY.search(k) or len(v) > 80 or "@" in v or
-               (k.lower() not in PUBLIC_QUERY and not (kdi_num and k.lower() == "num")) for k, v in pairs):
+               (k.lower() not in PUBLIC_QUERY and k.lower() not in extra) for k, v in pairs):
             return False
         if strict and re.search(r"(?:^|/)[A-Za-z0-9_=-]{48,}(?:/|$)", urllib.parse.unquote(p.path)):
             return False
@@ -215,8 +234,31 @@ def skip(url: str, title: str, c: dict, own: list[str]) -> bool:
 
 # ── 메일 본문 → 소재 ──
 LINK_MD = re.compile(r"\[([^\]\n]{2,240})\]\((https?://[^)\s]+)\)")
+# 앵커 글자가 여러 줄인 마크다운 링크: `[` \n `제목` \n `](주소)`
+# 평문 파트가 없고 HTML 만 온 메일에 앵커 안에 블록(h3·div)이 들어 있으면 이렇게 나온다(KDI 2026-11-24).
+# 줄바꿈을 글자로 인정하지 않으면 제목이 `]` 하나로 잡혀 소재가 통째로 0건이 된다.
+LINK_MD_ML = re.compile(r"\[\s{0,2}([^\[\]]{2,400}?)\s{0,2}\]\s*\((https?://[^)\s]+)\)")
 LINK_ANGLE = re.compile(r"([^\n<>]{0,240}?)\s*[<(](https?://[^>)\s]+)[>)]")
 LINK_BARE = re.compile(r"https?://[^\s<>()\[\]\"']+")
+
+
+FOOTNOTE_REF = re.compile(r"^\[(\d{1,3})\]$")
+
+
+def footnote_title(body_before: str, n: str) -> str:
+    """맨주소 줄이 `[7]` 뿐일 때, 본문 위쪽에서 같은 각주 번호를 단 줄을 제목으로 찾는다.
+
+    TLDR 평문 본문은 `제목 (5 MINUTE READ) [7]` … 본문 끝 `[7] https://…` 로 온다.
+    각주 번호만 있는 줄(참조 목록 자신)은 건너뛰고, 글자가 있는 줄만 쓴다.
+    """
+    mark = f"[{n}]"
+    for line in reversed(body_before.splitlines()):
+        if mark not in line:
+            continue
+        cand = re.sub(r"\s*" + re.escape(mark) + r"\s*$", "", _clean(line)).strip()
+        if len(cand) >= 8:
+            return cand
+    return ""
 
 
 def _clean(t: str) -> str:
@@ -236,7 +278,7 @@ def extract(body: str) -> list[tuple[str, str]]:
     """
     out, md_url_spans, seen_spans = [], [], []
     lines = body.splitlines()
-    for rx in (LINK_MD, LINK_ANGLE):
+    for rx in (LINK_MD_ML, LINK_MD, LINK_ANGLE):
         for m in rx.finditer(body):
             ua, ub = m.span(2)
             if any(a <= ua and ub <= b for a, b in md_url_spans):
@@ -244,9 +286,9 @@ def extract(body: str) -> list[tuple[str, str]]:
             if any(a <= m.start() < b for a, b in seen_spans):
                 continue
             seen_spans.append(m.span())
-            if rx is LINK_MD:
+            if rx is not LINK_ANGLE:
                 md_url_spans.append((ua, ub))
-            title, url = _clean(m.group(1)), m.group(2)
+            title, url = _clean(m.group(1)), m.group(2).rstrip("'\"),;")
             if not title or GENERIC.match(title):   # 'Read more' → 앞 줄을 제목으로
                 before = body[: m.start()].rstrip().splitlines()
                 title = _clean(before[-1]) if before else ""
@@ -259,6 +301,8 @@ def extract(body: str) -> list[tuple[str, str]]:
             continue
         ln = body.count("\n", 0, m.start())
         title = _clean(lines[ln][: m.start() - (body.rfind("\n", 0, m.start()) + 1)]) or (_clean(lines[ln - 1]) if ln else "")
+        if FOOTNOTE_REF.match(title):   # '[7] https://…' — 제목은 각주 번호를 단 앞 줄 (TLDR 평문)
+            title = footnote_title(body[: m.start()], FOOTNOTE_REF.match(title).group(1)) or title
         out.append((m.start(), title, m.group(0).rstrip(".,;")))
     return [(t, u) for _, t, u in sorted(out)]   # 본문 순서대로 (원자료 링크를 바로 앞 소재에 붙이려면)
 

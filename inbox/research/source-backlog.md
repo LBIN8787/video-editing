@@ -25,3 +25,4 @@
 | 20261124-market-deep-nvidia-return | 스콧 베선트 (재무장관) | "dramatic shakeup"(11-15) → "he's on the outside now"(11-22 CBS) | Reuters https://youtu.be/gWrV1Rrqgu0 · Fox Business https://youtu.be/7Brh3BrhCvY · CBS 페이스 더 네이션 공식(주소 찾기) | 황 복귀 편 이야기 2 · 11-25 재무부 기한 | PC | 대기 |
 | 20261124-market-deep-nvidia-return | 브래드 거스트너 (알티미터) | "everyone is rushing to judgment … I simply don't know the facts" | Semafor https://youtu.be/vDTL0hLU_QQ · CNBC https://youtu.be/PXTQvj93yN0 (구간 미확인) | 황 복귀 편 압력 장면 | PC (받아쓰기로 구간) | 대기 |
 | 20261124-market-deep-nvidia-return | 도널드 트럼프 | "I would not mind that." (11-16) | 백악관 공식 유튜브 문답 (공공 저작물, 주소 찾기) | 황 복귀 편 이야기 2 | PC | 대기 |
+| 20261124-market-daily | 젠슨 황 (엔비디아 CEO, 복귀) | 복귀 보도자료 "I can't wait to get back to work." — 복귀 뒤 첫 공개 발언·영상은 아직 못 찾음 | 엔비디아 공식 채널·보도자료 (영상 주소 미확인) | 황 복귀 심층·12-01 하원 면담 뒤 | PC (공식 영상 나오면 clip-fetch) | 대기 |
