@@ -28,6 +28,7 @@ hybrid.json 장면:
 """
 from __future__ import annotations
 
+import json
 import html as H
 import math
 import re
@@ -195,8 +196,8 @@ def s_docu(D, sc: dict, bt: list, dur: float):
             pre, post = bx["val"][:m.start()], bx["val"][m.end():]
             sign = "+" if m.group().startswith("+") else ""
             js.append(f'(function(){{const o={{v:0}},el=document.getElementById("{bx["id"]}v");'
-                      f'tl.to(o,{{v:{abs(n)},duration:.8,ease:"power2.out",onUpdate:()=>{{el.textContent={H.escape(pre)!r}+"{sign}"+'
-                      f'o.v.toFixed({dec})+{H.escape(post)!r};}}}},{t:.2f});}})();')
+                      f'tl.to(o,{{v:{abs(n)},duration:.8,ease:"power2.out",onUpdate:()=>{{el.textContent={json.dumps(pre, ensure_ascii=False)}+"{sign}"+'
+                      f'o.v.toFixed({dec})+{json.dumps(post, ensure_ascii=False)};}}}},{t:.2f});}})();')
 
     def glow(key, t, on=True, col=None):
         bx = box[key]
