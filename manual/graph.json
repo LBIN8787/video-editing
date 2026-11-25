@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-25T14:53:49",
- "source_hash": "852e7b436e92",
+ "generated": "2026-11-25T16:55:11",
+ "source_hash": "d4ea3d17713d",
  "audit": {
   "date": "2026-11-25T14:34",
   "counts": {
@@ -809,16 +809,16 @@
  "stats": {
   "manual_version": 135,
   "versions": 135,
-  "reviews": 58,
-  "rejects": 31,
+  "reviews": 59,
+  "rejects": 32,
   "passes": 27,
-  "pending": 0,
+  "pending": 1,
   "rules": 57,
   "checks": 90,
   "sections": 224,
   "must": 30,
   "auto": 41,
-  "intents": 364,
+  "intents": 365,
   "misaligned": 1,
   "intents_reviewed": 7,
   "conflicts": 3,
@@ -827,7 +827,7 @@
   "bans": 242,
   "feedback": 280,
   "topics": 4,
-  "episodes": 54,
+  "episodes": 56,
   "main_situations": 17,
   "tiers": {
    "principle": 59,
@@ -838,7 +838,9 @@
   "overfit": 18,
   "principle_bans": 53
  },
- "pending": [],
+ "pending": [
+  "[2026-11-25 · 20261125-issues-explainer 기각] 기존 편집방식과 다르지 않은거같아요 글로 설명하은 느낌이 강하다고 느껴져요 제가 예시로 준 채널들이나 링크 레퍼런스나 다큐멘터리 등의 모션그래픽과 많이 달라요 저는 새로운 스타일은 원했어요"
+ ],
  "status_labels": {
   "aligned": "정렬됨",
   "over": "과잉 해석",
@@ -5140,7 +5142,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h469",
+   "section": "sec:feedback§h472",
    "text": "2026-11-09 · v3 기각 — “강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)”",
    "themes": [
     "emphasis",
@@ -5912,9 +5914,10 @@
     116,
     118,
     121,
-    134
+    134,
+    135
    ],
-   "last_version": 134
+   "last_version": 135
   },
   {
    "id": "doc:12",
@@ -5983,7 +5986,7 @@
    "key": "feedback",
    "file": "manual/feedback-by-repo.md",
    "label": "내 피드백 — 레포별 (자동 생성: `python -m ytflow manual-graph`)",
-   "lines": 480,
+   "lines": 483,
    "versions": [
     83,
     84,
@@ -6033,9 +6036,10 @@
     131,
     132,
     133,
-    134
+    134,
+    135
    ],
-   "last_version": 134
+   "last_version": 135
   },
   {
    "id": "doc:README",
@@ -9798,7 +9802,7 @@
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
    "line": 439,
-   "end": 466,
+   "end": 469,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9808,29 +9812,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h467",
+   "id": "sec:feedback§h470",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h467",
+   "num": "h470",
    "level": 2,
    "label": "AI — `topics/ai`",
    "title": "AI — `topics/ai`",
-   "line": 467,
-   "end": 468,
+   "line": 470,
+   "end": 471,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h469",
+   "id": "sec:feedback§h472",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h469",
+   "num": "h472",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 469,
-   "end": 480,
+   "line": 472,
+   "end": 483,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -16822,6 +16826,12 @@
    "themes": [
     "depth"
    ],
+   "commit": {
+    "sha": "26b85c06c236f282667893b897a48126f8ba5dd4",
+    "subject": "매뉴얼 v135: 인사이트 영상 — 통찰을 뼈대로, 이름 있는 시각 맞대기 (11 §3-3)",
+    "date": "2026-11-25",
+    "other_files": []
+   },
    "terms": [
     "term:tech-split-screen"
    ]
@@ -18052,6 +18062,31 @@
    "repo_label": "호기심"
   },
   {
+   "id": "rev:59",
+   "kind": "review",
+   "date": "2026-11-25",
+   "project": "20261125-issues-explainer",
+   "manual_version": 135,
+   "result": "reject",
+   "reason": "기존 편집방식과 다르지 않은거같아요 글로 설명하은 느낌이 강하다고 느껴져요 제가 예시로 준 채널들이나 링크 레퍼런스나 다큐멘터리 등의 모션그래픽과 많이 달라요 저는 새로운 스타일은 원했어요",
+   "themes": [
+    "variety"
+   ],
+   "repo": "issues",
+   "repo_label": "시사",
+   "status": "pending",
+   "tier_key": "rev:ec6d7b0c",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": false,
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
+  },
+  {
    "id": "theme:motion",
    "kind": "theme",
    "key": "motion",
@@ -18928,10 +18963,10 @@
    ]
   },
   {
-   "id": "code:ytflow/stages/motion2.py:166",
+   "id": "code:ytflow/stages/motion2.py:172",
    "kind": "code",
    "file": "ytflow/stages/motion2.py",
-   "line": 166,
+   "line": 172,
    "versions": [
     32
    ],
@@ -19318,7 +19353,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/motion2.py:166",
+     "ref": "code:ytflow/stages/motion2.py:172",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21588,7 +21623,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/motion2.py:166",
+     "ref": "code:ytflow/stages/motion2.py:172",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21868,7 +21903,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/motion2.py:166",
+     "ref": "code:ytflow/stages/motion2.py:172",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -35922,6 +35957,34 @@
    "annotated": false
   },
   {
+   "id": "intent:ec6d7b0c",
+   "kind": "intent",
+   "quote": "기존 편집방식과 다르지 않은거같아요 글로 설명하은 느낌이 강하다고 느껴져요 제가 예시로 준 채널들이나 링크 레퍼런스나 다큐멘터리 등의 모션그래픽과 많이 달라요 저는 새로운 스타일은 원했어요",
+   "label": "기존 편집방식과 다르지 않은거같아요 글로 설명하은 느낌이 강하다고 느껴져요 제가 예시로 준 채널들이나 링크 ",
+   "versions": [],
+   "date": "2026-11-25",
+   "sources": [
+    {
+     "ref": "rev:59",
+     "kind": "review"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:ec6d7b0c"
+   ],
+   "themes": [
+    "variety"
+   ],
+   "ann_key": "intent:ec6d7b0c",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:f3bd6081",
    "kind": "intent",
    "quote": "오늘올린 썸네일 이전과 계속 똑같은데 이래도 되나요? 아닌거같은데",
@@ -41979,7 +42042,7 @@
     "sec:feedback§h156",
     "sec:feedback§h315",
     "sec:feedback§h439",
-    "sec:feedback§h469",
+    "sec:feedback§h472",
     "ver:10",
     "ver:30",
     "ver:31",
@@ -42207,7 +42270,7 @@
     },
     {
      "file": "ytflow/stages/motion2.py",
-     "line": 279,
+     "line": 285,
      "src": "def apply(D, sc: dict, bt: list, dur: float, w: int = 1920, h: int = 1080, keep: bool = True) -> None:"
     }
    ],
@@ -42405,7 +42468,7 @@
     "sec:feedback§h156",
     "sec:feedback§h315",
     "sec:feedback§h439",
-    "sec:feedback§h469",
+    "sec:feedback§h472",
     "ver:10",
     "ver:12",
     "rev:11",
@@ -51776,6 +51839,236 @@
        "say": "오늘 AI 최전선은 여기까지입니다. 바로 써먹는 활용법은 쇼츠에서, 업계 소식은 다음 주에 또 찾아오겠습니다."
       }
      ]
+    },
+    {
+     "project": "20261125-ai-explainer",
+     "scenes": 22,
+     "coverage": 0.55,
+     "fit": 0.17,
+     "rows": [
+      {
+       "s": 1,
+       "type": "share",
+       "sit": "new-tool",
+       "fit": false,
+       "rec": [
+        "footage",
+        "kb",
+        "chat"
+       ],
+       "say": "2026년 5월, AI 회사 앤트로픽의 개발자들이 회사 코드에 새로 합친 코드 가운데 80% 넘게를 자기 회사 AI, 클로드가 썼습니다."
+      },
+      {
+       "s": 2,
+       "type": "motionboard",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "AI 가 AI 를 만든다. 이 말을 따라가다 보면 하나가 보입니다."
+      },
+      {
+       "s": 3,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "AI 가 만들어지는 과정을 고리 하나로 그려 보겠습니다."
+      },
+      {
+       "s": 4,
+       "type": "motionboard",
+       "sit": "new-tool",
+       "fit": false,
+       "rec": [
+        "footage",
+        "kb",
+        "chat"
+       ],
+       "say": "무엇을 연구할지 문제를 고르고, 실험을 설계해 코드를 짜고, 실험을 돌려 결과를 읽고, 그걸로 다음 모델을 만듭니다. 그리고 다시 처음으로."
+      },
+      {
+       "s": 5,
+       "type": "chapter",
+       "sit": "new-tool",
+       "fit": true,
+       "rec": [
+        "footage",
+        "kb",
+        "chat"
+       ],
+       "say": "앤트로픽이 공개한 숫자는 대부분 회사가 스스로 잰 것이고, 회사는 숫자 옆에 직접 단서를 붙여 두었습니다. 숫자만큼 그 각주가 중요합니다."
+      },
+      {
+       "s": 6,
+       "type": "motionboard",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "chart",
+        "bignum",
+        "bars"
+       ],
+       "say": "코드의 80% 이상."
+      },
+      {
+       "s": 7,
+       "type": "bars",
+       "sit": "point",
+       "fit": false,
+       "rec": [
+        "zoomshot",
+        "footage"
+       ],
+       "say": "프로그램을 빠르게 만드는 과제에서 숙련자는 몇 시간 들여 네 배쯤. AI 는 1년 사이 세 배에서 쉰두 배로."
+      },
+      {
+       "s": 8,
+       "type": "bignum",
+       "sit": "said",
+       "fit": false,
+       "rec": [
+        "bite",
+        "footage",
+        "quote"
+       ],
+       "say": "AP 통신은 9월, 앤트로픽이 회사 연구개발의 26% 를 클로드가 주도한다고 밝혔다고 보도했습니다. 사람이 큰 방향만 주면 대부분을 끝까지 해낸다는 뜻이고, 2월"
+      },
+      {
+       "s": 9,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "그럼 고리로 돌아가 칸마다 채워 보죠."
+      },
+      {
+       "s": 10,
+       "type": "motionboard",
+       "sit": "cause",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "analogy"
+       ],
+       "say": "코드를 짜는 칸, 이미 상당 부분 AI 입니다."
+      },
+      {
+       "s": 11,
+       "type": "quote",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "회사 스스로 적은 이 한 줄이, 지금 고리의 모양을 가장 정확하게 보여 줍니다."
+      },
+      {
+       "s": 12,
+       "type": "quote",
+       "sit": "new-tool",
+       "fit": false,
+       "rec": [
+        "footage",
+        "kb",
+        "chat"
+       ],
+       "say": "회사 밖에서 본 결론도 같습니다. 미국 랜드연구소는 지난달 보고서에서, 여러 연구소가 새 코드 대부분을 AI 가 쓴다고 밝히고 있지만, 스스로 연구 의제를 정하거"
+      },
+      {
+       "s": 13,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "그런데 이 마지막 칸도 곧 넘어간다고 보는 사람들이 있습니다. 근거는 셋입니다."
+      },
+      {
+       "s": 14,
+       "type": "bignum",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "chart",
+        "bignum",
+        "bars"
+       ],
+       "say": "첫째, 연구 감각. 앤트로픽은 연구자가 갈림길에서 고른 선택과 AI 의 제안을 비교했습니다. AI 쪽이 낫다는 판정이 64% 였죠."
+      },
+      {
+       "s": 15,
+       "type": "quote",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "둘째, 스스로를 고치는 에이전트. 9월에 나온 한 논문에서는 AI 연구 에이전트가 자기 연구 코드를 고치고, 더 나은 판만 남기는 일을 8일 동안 사람 없이 되풀"
+      },
+      {
+       "s": 16,
+       "type": "quote",
+       "sit": "open-scene",
+       "fit": false,
+       "rec": [
+        "kb",
+        "footage",
+        "stage"
+       ],
+       "say": "셋째, 시간표. AI 연구자 인터뷰로 알려진 드와케시 파텔은 이번 주 글에서, 최고 수준의 AI 연구자를 완전히 자동화하는 해를 2028년쯤으로 본다고 했습니다."
+      },
+      {
+       "s": 17,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "반대편에는 이 이야기 자체를 의심하는 사람들이 있습니다."
+      },
+      {
+       "s": 18,
+       "type": "motionboard",
+       "sit": "conclusion",
+       "fit": false,
+       "rec": [
+        "kinetic",
+        "card_type",
+        "recap"
+       ],
+       "say": "파텔의 같은 글에는 반론도 모여 있습니다. AI 가 더 빨라지고 있다는 증거는 한 연구소의 짧은 측정에 기대고 있고, 결국 비싼 GPU 가 속도를 막을 거라는 지"
+      },
+      {
+       "s": 19,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "앤트로픽은 앞으로의 길을 셋으로 나눴습니다."
+      },
+      {
+       "s": 20,
+       "type": "motionboard",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "추세가 멈추는 길, 사람이 방향을 정한 채 효율이 계속 쌓이는 길, 그리고 고리가 완전히 닫히는 길."
+      },
+      {
+       "s": 21,
+       "type": "bignum",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "이 이야기가 우리 일과 닿는 곳도 같은 칸입니다. 외부 측정에 따르면 AI 가 혼자 해내는 일의 길이는 넉 달마다 두 배로 늘고 있습니다."
+      },
+      {
+       "s": 22,
+       "type": "motionboard",
+       "sit": "new-tool",
+       "fit": false,
+       "rec": [
+        "footage",
+        "kb",
+        "chat"
+       ],
+       "say": "그럼 이 영상의 해석은 언제 틀리게 될까요. 신호는 하나입니다."
+      }
+     ]
     }
    ]
   },
@@ -51807,7 +52100,7 @@
     "새벽",
     "아침"
    ],
-   "count": 1,
+   "count": 2,
    "fit": 0,
    "examples": [
     {
@@ -51815,6 +52108,13 @@
      "scene": 11,
      "type": "card_type",
      "say": "바이브 코딩은 코드를 직접 짜지 않고 AI에게 말로 시켜 만드는 방식인데, 2025년 2월 안드레이 카르파시가 처음 쓴 말입니다.",
+     "fit": false
+    },
+    {
+     "project": "20261125-ai-explainer",
+     "scene": 16,
+     "type": "quote",
+     "say": "셋째, 시간표. AI 연구자 인터뷰로 알려진 드와케시 파텔은 이번 주 글에서, 최고 수준의 AI 연구자를 완전히 자동화하는 해를 2028년쯤으로 본다고 했습니다.",
      "fit": false
     }
    ]
@@ -51899,9 +52199,17 @@
     "답했",
     "라고 했"
    ],
-   "count": 0,
+   "count": 1,
    "fit": 0,
-   "examples": []
+   "examples": [
+    {
+     "project": "20261125-ai-explainer",
+     "scene": 8,
+     "type": "bignum",
+     "say": "AP 통신은 9월, 앤트로픽이 회사 연구개발의 26% 를 클로드가 주도한다고 밝혔다고 보도했습니다. 사람이 큰 방향만 주면 대부분을 끝까지 해낸다는 뜻이고, 2월엔 0이었다고 합니다.",
+     "fit": false
+    }
+   ]
   },
   {
    "id": "sit:ai:cause",
@@ -51931,7 +52239,7 @@
     "파급",
     "결과"
    ],
-   "count": 2,
+   "count": 3,
    "fit": 0,
    "examples": [
     {
@@ -51946,6 +52254,13 @@
      "scene": 16,
      "type": "checklist",
      "say": "마지막이 마감, 그림, 움직임입니다. 간격이 맨 앞인 건, 줄 간격이 맞아야 나머지가 제대로 보이기 때문이랍니다.",
+     "fit": false
+    },
+    {
+     "project": "20261125-ai-explainer",
+     "scene": 10,
+     "type": "motionboard",
+     "say": "실험을 돌리고 결과를 읽는 칸. 앤트로픽은 올해 4월, AI 에이전트들이 스스로 연구를 진행해 성능 격차의 97% 를 메웠다고 밝혔습니다. 같은 과제에서 사람 연구자 둘은 23% 였고요.",
      "fit": false
     }
    ]
@@ -51978,8 +52293,8 @@
     "하락",
     "급등"
    ],
-   "count": 2,
-   "fit": 1,
+   "count": 4,
+   "fit": 2,
    "examples": [
     {
      "project": "20261111-ai-industry-week",
@@ -51994,6 +52309,13 @@
      "type": "bars",
      "say": "얼마나 큰지 비교해 보죠. 2019년 석유 회사 사우디 아람코가 294억 달러를 모아 당시 역대 최대였습니다.",
      "fit": true
+    },
+    {
+     "project": "20261125-ai-explainer",
+     "scene": 6,
+     "type": "motionboard",
+     "say": "코드의 80% 이상.",
+     "fit": false
     }
    ]
   },
@@ -52215,7 +52537,7 @@
     "이 대목",
     "이 문장"
    ],
-   "count": 1,
+   "count": 2,
    "fit": 0,
    "examples": [
     {
@@ -52223,6 +52545,13 @@
      "scene": 15,
      "type": "outro",
      "say": "오늘 AI 최전선은 여기까지입니다. 바로 써먹는 활용법은 쇼츠에서, 업계 소식은 다음 주에 또 찾아오겠습니다.",
+     "fit": false
+    },
+    {
+     "project": "20261125-ai-explainer",
+     "scene": 7,
+     "type": "bars",
+     "say": "이 숫자에는 회사가 따로 각주를 달지 않았습니다.",
      "fit": false
     }
    ]
@@ -52255,7 +52584,7 @@
     "그래서 지금",
     "남은 질문"
    ],
-   "count": 1,
+   "count": 2,
    "fit": 1,
    "examples": [
     {
@@ -52264,6 +52593,13 @@
      "type": "recap",
      "say": "정리하면, AI 회사가 역대 손꼽히는 큰돈을 주식시장에서 모으고 있습니다.",
      "fit": true
+    },
+    {
+     "project": "20261125-ai-explainer",
+     "scene": 18,
+     "type": "motionboard",
+     "say": "파텔의 같은 글에는 반론도 모여 있습니다. AI 가 더 빨라지고 있다는 증거는 한 연구소의 짧은 측정에 기대고 있고, 결국 비싼 GPU 가 속도를 막을 거라는 지적입니다.",
+     "fit": false
     }
    ]
   },
@@ -52403,8 +52739,8 @@
     "모델",
     "기능이"
    ],
-   "count": 5,
-   "fit": 1,
+   "count": 10,
+   "fit": 2,
    "examples": [
     {
      "project": "20261109-ai-unslop",
@@ -52971,6 +53307,240 @@
       "footage"
      ],
      "say": "오늘 AI 최전선은 여기까지입니다. 바로 써먹는 활용법은 쇼츠에서, 업계 소식은 다음 주에 또 찾아오겠습니다."
+    }
+   ]
+  },
+  {
+   "id": "ep:20261125-ai-explainer",
+   "kind": "episode",
+   "topic": "ai",
+   "label": "20261125-ai-explainer",
+   "project": "20261125-ai-explainer",
+   "scenes": 22,
+   "coverage": 0.55,
+   "fit": 0.17,
+   "rows": [
+    {
+     "s": 1,
+     "type": "share",
+     "sit": "new-tool",
+     "fit": false,
+     "rec": [
+      "footage",
+      "kb",
+      "chat"
+     ],
+     "say": "2026년 5월, AI 회사 앤트로픽의 개발자들이 회사 코드에 새로 합친 코드 가운데 80% 넘게를 자기 회사 AI, 클로드가 썼습니다."
+    },
+    {
+     "s": 2,
+     "type": "motionboard",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "AI 가 AI 를 만든다. 이 말을 따라가다 보면 하나가 보입니다."
+    },
+    {
+     "s": 3,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "AI 가 만들어지는 과정을 고리 하나로 그려 보겠습니다."
+    },
+    {
+     "s": 4,
+     "type": "motionboard",
+     "sit": "new-tool",
+     "fit": false,
+     "rec": [
+      "footage",
+      "kb",
+      "chat"
+     ],
+     "say": "무엇을 연구할지 문제를 고르고, 실험을 설계해 코드를 짜고, 실험을 돌려 결과를 읽고, 그걸로 다음 모델을 만듭니다. 그리고 다시 처음으로."
+    },
+    {
+     "s": 5,
+     "type": "chapter",
+     "sit": "new-tool",
+     "fit": true,
+     "rec": [
+      "footage",
+      "kb",
+      "chat"
+     ],
+     "say": "앤트로픽이 공개한 숫자는 대부분 회사가 스스로 잰 것이고, 회사는 숫자 옆에 직접 단서를 붙여 두었습니다. 숫자만큼 그 각주가 중요합니다."
+    },
+    {
+     "s": 6,
+     "type": "motionboard",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "chart",
+      "bignum",
+      "bars"
+     ],
+     "say": "코드의 80% 이상."
+    },
+    {
+     "s": 7,
+     "type": "bars",
+     "sit": "point",
+     "fit": false,
+     "rec": [
+      "zoomshot",
+      "footage"
+     ],
+     "say": "프로그램을 빠르게 만드는 과제에서 숙련자는 몇 시간 들여 네 배쯤. AI 는 1년 사이 세 배에서 쉰두 배로."
+    },
+    {
+     "s": 8,
+     "type": "bignum",
+     "sit": "said",
+     "fit": false,
+     "rec": [
+      "bite",
+      "footage",
+      "quote"
+     ],
+     "say": "AP 통신은 9월, 앤트로픽이 회사 연구개발의 26% 를 클로드가 주도한다고 밝혔다고 보도했습니다. 사람이 큰 방향만 주면 대부분을 끝까지 해낸다는 뜻이고, 2월"
+    },
+    {
+     "s": 9,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "그럼 고리로 돌아가 칸마다 채워 보죠."
+    },
+    {
+     "s": 10,
+     "type": "motionboard",
+     "sit": "cause",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "analogy"
+     ],
+     "say": "코드를 짜는 칸, 이미 상당 부분 AI 입니다."
+    },
+    {
+     "s": 11,
+     "type": "quote",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "회사 스스로 적은 이 한 줄이, 지금 고리의 모양을 가장 정확하게 보여 줍니다."
+    },
+    {
+     "s": 12,
+     "type": "quote",
+     "sit": "new-tool",
+     "fit": false,
+     "rec": [
+      "footage",
+      "kb",
+      "chat"
+     ],
+     "say": "회사 밖에서 본 결론도 같습니다. 미국 랜드연구소는 지난달 보고서에서, 여러 연구소가 새 코드 대부분을 AI 가 쓴다고 밝히고 있지만, 스스로 연구 의제를 정하거"
+    },
+    {
+     "s": 13,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "그런데 이 마지막 칸도 곧 넘어간다고 보는 사람들이 있습니다. 근거는 셋입니다."
+    },
+    {
+     "s": 14,
+     "type": "bignum",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "chart",
+      "bignum",
+      "bars"
+     ],
+     "say": "첫째, 연구 감각. 앤트로픽은 연구자가 갈림길에서 고른 선택과 AI 의 제안을 비교했습니다. AI 쪽이 낫다는 판정이 64% 였죠."
+    },
+    {
+     "s": 15,
+     "type": "quote",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "둘째, 스스로를 고치는 에이전트. 9월에 나온 한 논문에서는 AI 연구 에이전트가 자기 연구 코드를 고치고, 더 나은 판만 남기는 일을 8일 동안 사람 없이 되풀"
+    },
+    {
+     "s": 16,
+     "type": "quote",
+     "sit": "open-scene",
+     "fit": false,
+     "rec": [
+      "kb",
+      "footage",
+      "stage"
+     ],
+     "say": "셋째, 시간표. AI 연구자 인터뷰로 알려진 드와케시 파텔은 이번 주 글에서, 최고 수준의 AI 연구자를 완전히 자동화하는 해를 2028년쯤으로 본다고 했습니다."
+    },
+    {
+     "s": 17,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "반대편에는 이 이야기 자체를 의심하는 사람들이 있습니다."
+    },
+    {
+     "s": 18,
+     "type": "motionboard",
+     "sit": "conclusion",
+     "fit": false,
+     "rec": [
+      "kinetic",
+      "card_type",
+      "recap"
+     ],
+     "say": "파텔의 같은 글에는 반론도 모여 있습니다. AI 가 더 빨라지고 있다는 증거는 한 연구소의 짧은 측정에 기대고 있고, 결국 비싼 GPU 가 속도를 막을 거라는 지"
+    },
+    {
+     "s": 19,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "앤트로픽은 앞으로의 길을 셋으로 나눴습니다."
+    },
+    {
+     "s": 20,
+     "type": "motionboard",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "추세가 멈추는 길, 사람이 방향을 정한 채 효율이 계속 쌓이는 길, 그리고 고리가 완전히 닫히는 길."
+    },
+    {
+     "s": 21,
+     "type": "bignum",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "이 이야기가 우리 일과 닿는 곳도 같은 칸입니다. 외부 측정에 따르면 AI 가 혼자 해내는 일의 길이는 넉 달마다 두 배로 늘고 있습니다."
+    },
+    {
+     "s": 22,
+     "type": "motionboard",
+     "sit": "new-tool",
+     "fit": false,
+     "rec": [
+      "footage",
+      "kb",
+      "chat"
+     ],
+     "say": "그럼 이 영상의 해석은 언제 틀리게 될까요. 신호는 하나입니다."
     }
    ]
   },
@@ -58009,6 +58579,247 @@
        "say": "같은 날, 신뢰를 흔드는 소식도 나왔습니다."
       }
      ]
+    },
+    {
+     "project": "20261125-issues-explainer",
+     "scenes": 21,
+     "coverage": 0.86,
+     "fit": 0.33,
+     "rows": [
+      {
+       "s": 1,
+       "type": "quote",
+       "sit": "compare",
+       "fit": false,
+       "rec": [
+        "versus",
+        "bars",
+        "compare"
+       ],
+       "say": "11월 17일, 엔비디아의 실적 발표. 숫자보다 먼저 나온 건 이사회 의장의 이 한마디였습니다."
+      },
+      {
+       "s": 2,
+       "type": "motionboard",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "chart",
+        "bignum",
+        "bars"
+       ],
+       "say": "엿새 뒤, 같은 이사회가 만장일치로 젠슨 황을 다시 불러들입니다."
+      },
+      {
+       "s": 3,
+       "type": "motionboard",
+       "sit": "change",
+       "fit": false,
+       "rec": [
+        "stage",
+        "analogy",
+        "shape"
+       ],
+       "say": "한 회사의 대표가 바뀌었다가 돌아온 이야기. 그런데 이 엿새를 따라가 보면, 더 큰 변화가 하나 보입니다."
+      },
+      {
+       "s": 4,
+       "type": "chapter",
+       "sit": "open-scene",
+       "fit": true,
+       "rec": [
+        "footage",
+        "kb",
+        "newspapers"
+       ],
+       "say": "젠슨 황은 1993년 엔비디아를 세운 뒤 33년 동안 대표였고, 이사회 의장을 따로 둔 적도 없었습니다."
+      },
+      {
+       "s": 5,
+       "type": "motionboard",
+       "sit": "us-link",
+       "fit": false,
+       "rec": [
+        "people",
+        "analogy",
+        "map_causal"
+       ],
+       "say": "그런 사람이 11월 12일, 행동강령에 맞지 않는 사생활 문제로 모든 자리에서 물러납니다."
+      },
+      {
+       "s": 6,
+       "type": "quote",
+       "sit": "explain",
+       "fit": false,
+       "rec": [
+        "motionboard",
+        "spread",
+        "share"
+       ],
+       "say": "개인의 스캔들이, 기업 지배구조의 문제로 번졌다는 겁니다."
+      },
+      {
+       "s": 7,
+       "type": "chapter",
+       "sit": "media",
+       "fit": true,
+       "rec": [
+        "newspapers",
+        "quote"
+       ],
+       "say": "사임 2주 전, 미국 언론은 젠슨 황이 중국 정보 활동의 표적이었다고 보도했습니다. 그 이야기 한가운데 싱가포르의 데이터센터 회사, 메가스피드가 있었습니다."
+      },
+      {
+       "s": 8,
+       "type": "journey",
+       "sit": "not-known",
+       "fit": false,
+       "rec": [
+        "card_type",
+        "checklist"
+       ],
+       "say": "미국은 가장 성능 좋은 AI 칩을 중국에 팔지 못하게 막고 있습니다."
+      },
+      {
+       "s": 9,
+       "type": "motionboard",
+       "sit": "route",
+       "fit": false,
+       "rec": [
+        "journey",
+        "usmap"
+       ],
+       "say": "미국 외교협회에서 이 사건을 분석한 전문가들의 말은 거칠었습니다. 외교협회가 인용한 크리스 맥과이어는 수출통제 집행이 여러 단계에서 실패했다고 했고, 외교협회의 "
+      },
+      {
+       "s": 10,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "사임 뒤 일주일 동안, 이사회를 향해 서로 다른 두 힘이 밀려옵니다."
+      },
+      {
+       "s": 11,
+       "type": "bignum",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "chart",
+        "bignum",
+        "bars"
+       ],
+       "say": "첫 번째 힘은 시장이었습니다. 사임 전날 173달러였던 주가는 열흘 만에 125달러까지, 30% 가까이 빠집니다. 그사이 회계 조사 보도까지 겹쳤죠."
+      },
+      {
+       "s": 12,
+       "type": "quote",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "애널리스트 댄 아이브스는 젠슨 황 한 사람의 값을 이렇게 매겼습니다."
+      },
+      {
+       "s": 13,
+       "type": "quote",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "진 먼스터는 창업자가 떠난 뒤 잘된 회사가 쉽게 떠오르지 않는다고 했고,"
+      },
+      {
+       "s": 14,
+       "type": "motionboard",
+       "sit": "said",
+       "fit": false,
+       "rec": [
+        "bite",
+        "footage",
+        "quote"
+       ],
+       "say": "두 번째 힘은 정부였습니다. 그런데 정부의 말은 처음엔 반대 방향이었죠."
+      },
+      {
+       "s": 15,
+       "type": "chapter",
+       "sit": "open-scene",
+       "fit": true,
+       "rec": [
+        "footage",
+        "kb",
+        "newspapers"
+       ],
+       "say": "그런데 젠슨 황이 돌아온 11월 23일, 바로 그날 오후입니다."
+      },
+      {
+       "s": 16,
+       "type": "motionboard",
+       "sit": "route",
+       "fit": false,
+       "rec": [
+        "journey",
+        "usmap"
+       ],
+       "say": "이사회는 정부의 의견을 근거로, 사람에게는 안보 위험이 없다고 했습니다."
+      },
+      {
+       "s": 17,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "처음 질문으로 돌아가 보죠. 엔비디아의 대표는 누가 정했을까요. 여기엔 세 가지 대답이 있습니다."
+      },
+      {
+       "s": 18,
+       "type": "motionboard",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "chart",
+        "bignum",
+        "bars"
+       ],
+       "say": "첫 번째 대답은 이 영상이 따라온 것, 국가입니다. 이사회가 복귀의 바깥 근거로 꼽은 건 정부 하나였고, 엿새 전의 말을 뒤집게 한 것도 그 판단이었던 것으로 보"
+      },
+      {
+       "s": 19,
+       "type": "motionboard",
+       "sit": "route",
+       "fit": false,
+       "rec": [
+        "journey",
+        "usmap"
+       ],
+       "say": "세 대답이 모두 맞는 부분이 하나 있습니다. 돌아온 자리는 떠나기 전과 같지 않다는 것."
+      },
+      {
+       "s": 20,
+       "type": "bignum",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "chart",
+        "bignum",
+        "bars"
+       ],
+       "say": "이 일은 한국과도 멀지 않습니다. 복귀 소식 다음 날, 코스피는 6% 넘게 오르며 5,000선을 되찾았습니다. 삼성전자와 SK하이닉스가 앞에서 끌었죠."
+      },
+      {
+       "s": 21,
+       "type": "motionboard",
+       "sit": "route",
+       "fit": false,
+       "rec": [
+        "journey",
+        "usmap"
+       ],
+       "say": "그럼 이 영상의 해석은 언제 틀리게 될까요. 12월 1일 젠슨 황은 하원 위원회와 비공개로 만납니다."
+      }
+     ]
     }
    ]
   },
@@ -58044,9 +58855,24 @@
     "새벽",
     "아침"
    ],
-   "count": 0,
-   "fit": 0,
-   "examples": []
+   "count": 2,
+   "fit": 2,
+   "examples": [
+    {
+     "project": "20261125-issues-explainer",
+     "scene": 4,
+     "type": "chapter",
+     "say": "젠슨 황은 1993년 엔비디아를 세운 뒤 33년 동안 대표였고, 이사회 의장을 따로 둔 적도 없었습니다.",
+     "fit": true
+    },
+    {
+     "project": "20261125-issues-explainer",
+     "scene": 15,
+     "type": "chapter",
+     "say": "그런데 젠슨 황이 돌아온 11월 23일, 바로 그날 오후입니다.",
+     "fit": true
+    }
+   ]
   },
   {
    "id": "sit:issues:question",
@@ -58074,8 +58900,8 @@
     "일까요",
     "을까요"
    ],
-   "count": 19,
-   "fit": 16,
+   "count": 20,
+   "fit": 17,
    "examples": [
     {
      "project": "20261109-issues-saudi",
@@ -58128,7 +58954,7 @@
     "답했",
     "라고 했"
    ],
-   "count": 1,
+   "count": 2,
    "fit": 1,
    "examples": [
     {
@@ -58137,6 +58963,13 @@
      "type": "quote",
      "say": "첫 번째 걱정은 감독하는 쪽입니다. 교원단체 설문에서 교사 82%가 지금 절차로는 구별이 어렵다고 답했습니다.",
      "fit": true
+    },
+    {
+     "project": "20261125-issues-explainer",
+     "scene": 14,
+     "type": "motionboard",
+     "say": "베선트 재무장관은 외부에서 새 대표를 찾아야 한다는 취지로 말했고, 트럼프 대통령은 복귀해도 상관없다는 정도였습니다. 그리고 17일, 의장은 복귀는 없다고 못 박습니다.",
+     "fit": false
     }
    ]
   },
@@ -58221,7 +59054,7 @@
     "옮겨",
     "퍼졌"
    ],
-   "count": 2,
+   "count": 6,
    "fit": 1,
    "examples": [
     {
@@ -58236,6 +59069,13 @@
      "scene": 16,
      "type": "quote",
      "say": "하나는 회복론입니다. 전 IMF 사우디 담당 국장 팀 캘런은, 유가 상승으로 4분기엔 석유 수입이 다시 늘 것으로 봅니다.",
+     "fit": false
+    },
+    {
+     "project": "20261125-issues-explainer",
+     "scene": 9,
+     "type": "motionboard",
+     "say": "미국 외교협회에서 이 사건을 분석한 전문가들의 말은 거칠었습니다. 외교협회가 인용한 크리스 맥과이어는 수출통제 집행이 여러 단계에서 실패했다고 했고, 외교협회의 러시 도시는 이 사건을 근래 가장 중요한 중국 관련 이",
      "fit": false
     }
    ]
@@ -58268,8 +59108,8 @@
     "하락",
     "급등"
    ],
-   "count": 14,
-   "fit": 2,
+   "count": 18,
+   "fit": 4,
    "examples": [
     {
      "project": "20261109-issues-saudi",
@@ -58326,7 +59166,7 @@
     "와 달리",
     "에 비해"
    ],
-   "count": 1,
+   "count": 2,
    "fit": 1,
    "examples": [
     {
@@ -58335,6 +59175,13 @@
      "type": "bars",
      "say": "9월에도 800만 배럴 안팎으로, 전쟁 전보다 하루 200만 배럴가량 적었습니다.",
      "fit": true
+    },
+    {
+     "project": "20261125-issues-explainer",
+     "scene": 1,
+     "type": "quote",
+     "say": "11월 17일, 엔비디아의 실적 발표. 숫자보다 먼저 나온 건 이사회 의장의 이 한마디였습니다.",
+     "fit": false
     }
    ]
   },
@@ -58436,9 +59283,17 @@
     "헤드라인",
     "로이터"
    ],
-   "count": 0,
-   "fit": 0,
-   "examples": []
+   "count": 1,
+   "fit": 1,
+   "examples": [
+    {
+     "project": "20261125-issues-explainer",
+     "scene": 7,
+     "type": "chapter",
+     "say": "사임 2주 전, 미국 언론은 젠슨 황이 중국 정보 활동의 표적이었다고 보도했습니다. 그 이야기 한가운데 싱가포르의 데이터센터 회사, 메가스피드가 있었습니다.",
+     "fit": true
+    }
+   ]
   },
   {
    "id": "sit:issues:rank",
@@ -58499,9 +59354,17 @@
     "달라졌",
     "탈바꿈"
    ],
-   "count": 0,
+   "count": 1,
    "fit": 0,
-   "examples": []
+   "examples": [
+    {
+     "project": "20261125-issues-explainer",
+     "scene": 3,
+     "type": "motionboard",
+     "say": "한 회사의 대표가 바뀌었다가 돌아온 이야기. 그런데 이 엿새를 따라가 보면, 더 큰 변화가 하나 보입니다.",
+     "fit": false
+    }
+   ]
   },
   {
    "id": "sit:issues:point",
@@ -58626,9 +59489,17 @@
     "이라는 뜻",
     "작동"
    ],
-   "count": 0,
+   "count": 1,
    "fit": 0,
-   "examples": []
+   "examples": [
+    {
+     "project": "20261125-issues-explainer",
+     "scene": 6,
+     "type": "quote",
+     "say": "개인의 스캔들이, 기업 지배구조의 문제로 번졌다는 겁니다.",
+     "fit": false
+    }
+   ]
   },
   {
    "id": "sit:issues:archive-evidence",
@@ -58738,7 +59609,7 @@
     "밝혀지지",
     "수사"
    ],
-   "count": 4,
+   "count": 5,
    "fit": 3,
    "examples": [
     {
@@ -58792,7 +59663,7 @@
     "물가",
     "내 "
    ],
-   "count": 2,
+   "count": 3,
    "fit": 0,
    "examples": [
     {
@@ -58807,6 +59678,13 @@
      "scene": 1,
      "type": "intro",
      "say": "오늘은 이런 순서로 따라가 보겠습니다. 무슨 일이 있었는지부터, 비싼 기름값은 누가 벌었는지, 그리고 우리에게 남는 것까지요.",
+     "fit": false
+    },
+    {
+     "project": "20261125-issues-explainer",
+     "scene": 5,
+     "type": "motionboard",
+     "say": "그런 사람이 11월 12일, 행동강령에 맞지 않는 사생활 문제로 모든 자리에서 물러납니다.",
      "fit": false
     }
    ]
@@ -59776,6 +60654,251 @@
      "fit": false,
      "rec": [],
      "say": "같은 날, 신뢰를 흔드는 소식도 나왔습니다."
+    }
+   ]
+  },
+  {
+   "id": "ep:20261125-issues-explainer",
+   "kind": "episode",
+   "topic": "issues",
+   "label": "20261125-issues-explainer",
+   "project": "20261125-issues-explainer",
+   "scenes": 21,
+   "coverage": 0.86,
+   "fit": 0.33,
+   "rows": [
+    {
+     "s": 1,
+     "type": "quote",
+     "sit": "compare",
+     "fit": false,
+     "rec": [
+      "versus",
+      "bars",
+      "compare"
+     ],
+     "say": "11월 17일, 엔비디아의 실적 발표. 숫자보다 먼저 나온 건 이사회 의장의 이 한마디였습니다."
+    },
+    {
+     "s": 2,
+     "type": "motionboard",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "chart",
+      "bignum",
+      "bars"
+     ],
+     "say": "엿새 뒤, 같은 이사회가 만장일치로 젠슨 황을 다시 불러들입니다."
+    },
+    {
+     "s": 3,
+     "type": "motionboard",
+     "sit": "change",
+     "fit": false,
+     "rec": [
+      "stage",
+      "analogy",
+      "shape"
+     ],
+     "say": "한 회사의 대표가 바뀌었다가 돌아온 이야기. 그런데 이 엿새를 따라가 보면, 더 큰 변화가 하나 보입니다."
+    },
+    {
+     "s": 4,
+     "type": "chapter",
+     "sit": "open-scene",
+     "fit": true,
+     "rec": [
+      "footage",
+      "kb",
+      "newspapers"
+     ],
+     "say": "젠슨 황은 1993년 엔비디아를 세운 뒤 33년 동안 대표였고, 이사회 의장을 따로 둔 적도 없었습니다."
+    },
+    {
+     "s": 5,
+     "type": "motionboard",
+     "sit": "us-link",
+     "fit": false,
+     "rec": [
+      "people",
+      "analogy",
+      "map_causal"
+     ],
+     "say": "그런 사람이 11월 12일, 행동강령에 맞지 않는 사생활 문제로 모든 자리에서 물러납니다."
+    },
+    {
+     "s": 6,
+     "type": "quote",
+     "sit": "explain",
+     "fit": false,
+     "rec": [
+      "motionboard",
+      "spread",
+      "share"
+     ],
+     "say": "개인의 스캔들이, 기업 지배구조의 문제로 번졌다는 겁니다."
+    },
+    {
+     "s": 7,
+     "type": "chapter",
+     "sit": "media",
+     "fit": true,
+     "rec": [
+      "newspapers",
+      "quote"
+     ],
+     "say": "사임 2주 전, 미국 언론은 젠슨 황이 중국 정보 활동의 표적이었다고 보도했습니다. 그 이야기 한가운데 싱가포르의 데이터센터 회사, 메가스피드가 있었습니다."
+    },
+    {
+     "s": 8,
+     "type": "journey",
+     "sit": "not-known",
+     "fit": false,
+     "rec": [
+      "card_type",
+      "checklist"
+     ],
+     "say": "미국은 가장 성능 좋은 AI 칩을 중국에 팔지 못하게 막고 있습니다."
+    },
+    {
+     "s": 9,
+     "type": "motionboard",
+     "sit": "route",
+     "fit": false,
+     "rec": [
+      "journey",
+      "usmap"
+     ],
+     "say": "미국 외교협회에서 이 사건을 분석한 전문가들의 말은 거칠었습니다. 외교협회가 인용한 크리스 맥과이어는 수출통제 집행이 여러 단계에서 실패했다고 했고, 외교협회의 "
+    },
+    {
+     "s": 10,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "사임 뒤 일주일 동안, 이사회를 향해 서로 다른 두 힘이 밀려옵니다."
+    },
+    {
+     "s": 11,
+     "type": "bignum",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "chart",
+      "bignum",
+      "bars"
+     ],
+     "say": "첫 번째 힘은 시장이었습니다. 사임 전날 173달러였던 주가는 열흘 만에 125달러까지, 30% 가까이 빠집니다. 그사이 회계 조사 보도까지 겹쳤죠."
+    },
+    {
+     "s": 12,
+     "type": "quote",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "애널리스트 댄 아이브스는 젠슨 황 한 사람의 값을 이렇게 매겼습니다."
+    },
+    {
+     "s": 13,
+     "type": "quote",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "진 먼스터는 창업자가 떠난 뒤 잘된 회사가 쉽게 떠오르지 않는다고 했고,"
+    },
+    {
+     "s": 14,
+     "type": "motionboard",
+     "sit": "said",
+     "fit": false,
+     "rec": [
+      "bite",
+      "footage",
+      "quote"
+     ],
+     "say": "두 번째 힘은 정부였습니다. 그런데 정부의 말은 처음엔 반대 방향이었죠."
+    },
+    {
+     "s": 15,
+     "type": "chapter",
+     "sit": "open-scene",
+     "fit": true,
+     "rec": [
+      "footage",
+      "kb",
+      "newspapers"
+     ],
+     "say": "그런데 젠슨 황이 돌아온 11월 23일, 바로 그날 오후입니다."
+    },
+    {
+     "s": 16,
+     "type": "motionboard",
+     "sit": "route",
+     "fit": false,
+     "rec": [
+      "journey",
+      "usmap"
+     ],
+     "say": "이사회는 정부의 의견을 근거로, 사람에게는 안보 위험이 없다고 했습니다."
+    },
+    {
+     "s": 17,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "처음 질문으로 돌아가 보죠. 엔비디아의 대표는 누가 정했을까요. 여기엔 세 가지 대답이 있습니다."
+    },
+    {
+     "s": 18,
+     "type": "motionboard",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "chart",
+      "bignum",
+      "bars"
+     ],
+     "say": "첫 번째 대답은 이 영상이 따라온 것, 국가입니다. 이사회가 복귀의 바깥 근거로 꼽은 건 정부 하나였고, 엿새 전의 말을 뒤집게 한 것도 그 판단이었던 것으로 보"
+    },
+    {
+     "s": 19,
+     "type": "motionboard",
+     "sit": "route",
+     "fit": false,
+     "rec": [
+      "journey",
+      "usmap"
+     ],
+     "say": "세 대답이 모두 맞는 부분이 하나 있습니다. 돌아온 자리는 떠나기 전과 같지 않다는 것."
+    },
+    {
+     "s": 20,
+     "type": "bignum",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "chart",
+      "bignum",
+      "bars"
+     ],
+     "say": "이 일은 한국과도 멀지 않습니다. 복귀 소식 다음 날, 코스피는 6% 넘게 오르며 5,000선을 되찾았습니다. 삼성전자와 SK하이닉스가 앞에서 끌었죠."
+    },
+    {
+     "s": 21,
+     "type": "motionboard",
+     "sit": "route",
+     "fit": false,
+     "rec": [
+      "journey",
+      "usmap"
+     ],
+     "say": "그럼 이 영상의 해석은 언제 틀리게 될까요. 12월 1일 젠슨 황은 하원 위원회와 비공개로 만납니다."
     }
    ]
   },
@@ -81313,12 +82436,12 @@
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h467",
+   "t": "sec:feedback§h470",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h469",
+   "t": "sec:feedback§h472",
    "kind": "contains"
   },
   {
@@ -85321,6 +86444,22 @@
    ]
   },
   {
+   "s": "ver:135",
+   "t": "doc:11",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:135",
+   "t": "doc:feedback",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -85884,6 +87023,11 @@
   {
    "s": "rev:47",
    "t": "theme:script",
+   "kind": "about"
+  },
+  {
+   "s": "rev:59",
+   "t": "theme:variety",
    "kind": "about"
   },
   {
@@ -87003,7 +88147,7 @@
   },
   {
    "s": "ver:32",
-   "t": "code:ytflow/stages/motion2.py:166",
+   "t": "code:ytflow/stages/motion2.py:172",
    "kind": "implemented_by"
   },
   {
@@ -88214,6 +89358,16 @@
   {
    "s": "intent:da41e107",
    "t": "theme:depth",
+   "kind": "about"
+  },
+  {
+   "s": "intent:ec6d7b0c",
+   "t": "rev:59",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:ec6d7b0c",
+   "t": "theme:variety",
    "kind": "about"
   },
   {
@@ -91647,6 +92801,11 @@
    "kind": "episode"
   },
   {
+   "s": "topic:ai",
+   "t": "ep:20261125-ai-explainer",
+   "kind": "episode"
+  },
+  {
    "s": "layer:main",
    "t": "topic:curiosity",
    "kind": "inherits"
@@ -92109,6 +93268,11 @@
   {
    "s": "topic:issues",
    "t": "ep:20261112-bg-trials",
+   "kind": "episode"
+  },
+  {
+   "s": "topic:issues",
+   "t": "ep:20261125-issues-explainer",
    "kind": "episode"
   },
   {

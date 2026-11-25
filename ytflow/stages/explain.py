@@ -522,7 +522,7 @@ def _el_html(D, sc, key: str, el: dict) -> tuple[str, float, float]:
         inner = (f'<div style="width:{w:.0f}px;height:{h:.0f}px;background:linear-gradient(180deg,#FFFEFB,#F1EEE6);border-radius:8px;'
                  f'box-shadow:{SHADOW};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;'
                  f'transform:rotate({rot}deg)">{mk}'
-                 + (f'<div style="font-family:heavy;font-size:{lsz}px;color:{col};line-height:1">{H.escape(lab)}</div>' if lab else "")
+                 + (f'<div class="lb" style="font-family:heavy;font-size:{lsz}px;color:{col};line-height:1;white-space:nowrap">{H.escape(lab)}</div>' if lab else "")
                  + (f'<div style="font-family:heavy;font-size:{vsz}px;color:{vcol};line-height:1.05;white-space:nowrap">{H.escape(val)}</div>' if val else "")
                  + "</div>")
         return inner, w, h
@@ -680,7 +680,7 @@ def s_board(D, sc: dict, bt: list, dur: float):
                 D.js.append(f'tl.to("#{bx["id"]}",{{opacity:0,y:20,duration:.35}},{t:.2f});')
             elif bx and "swap" in act:
                 D.js.append(f'tl.to("#{bx["id"]} div",{{opacity:0,duration:.15}},{t:.2f});'
-                            f'tl.call(()=>{{document.querySelector("#{bx["id"]} div").textContent={json_str(act["text"])}}},null,{t + 0.15:.2f});'
+                            f'tl.call(()=>{{(document.querySelector("#{bx["id"]} .lb")||document.querySelector("#{bx["id"]} div")).textContent={json_str(act["text"])}}},null,{t + 0.15:.2f});'
                             f'tl.to("#{bx["id"]} div",{{opacity:1,duration:.2}},{t + 0.16:.2f});')
             t += act.get("gap", 0.45) if isinstance(act, dict) else 0.45
 
