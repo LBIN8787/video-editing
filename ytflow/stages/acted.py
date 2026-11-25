@@ -686,6 +686,145 @@ def s_pqbox(D, sc: dict, bt: list, dur: float):
                 D.sfx.append(("pop", t))
 
 
+# ── samend ───────────────────────────────────────────────────────────────────
+def _jar(D, jid, cx, n, top=380, w=240, h=300, cookie=True):
+    """유리병 하나 + 쿠키 n개(아래부터 쌓임). id: {jid}, 쿠키 {jid}k0.."""
+    pos = [(-62, 250), (0, 252), (62, 250), (-34, 202), (30, 204), (-66, 156), (0, 154), (64, 158), (-30, 108), (34, 110)]
+    ck = "".join(
+        f'<div id="{jid}k{i}" style="position:absolute;left:{w / 2 + x - 27:.0f}px;top:{y - 27}px;width:54px;height:54px;border-radius:50%;'
+        f'background:radial-gradient(circle at 35% 30%,#E2A867,#B97636);box-shadow:inset -4px -5px 0 rgba(0,0,0,.18)">'
+        f'<i style="position:absolute;left:16px;top:18px;width:9px;height:9px;border-radius:50%;background:#3A2414"></i>'
+        f'<i style="position:absolute;left:34px;top:28px;width:8px;height:8px;border-radius:50%;background:#3A2414"></i>'
+        f'<i style="position:absolute;left:22px;top:38px;width:7px;height:7px;border-radius:50%;background:#3A2414"></i></div>'
+        for i, (x, y) in enumerate(pos[:n]))
+    return (f'<div id="{jid}" style="position:absolute;left:{cx - w / 2:.0f}px;top:{top}px;width:{w}px;height:{h}px;opacity:0">'
+            f'<div style="position:absolute;left:{w * .22:.0f}px;top:-26px;width:{w * .56:.0f}px;height:30px;border-radius:6px;background:#8E99A1"></div>'
+            f'<div style="position:absolute;left:0;top:0;width:{w}px;height:{h}px;border-radius:38px 38px 30px 30px;'
+            f'border:4px solid rgba(214,226,232,.75);background:rgba(190,215,225,.08)"></div>{ck}</div>')
+
+
+def s_samend(D, sc: dict, bt: list, dur: float):
+    """같은 끝, 다른 과정 (docs/69 시각 먼저 시범). 끝 상태가 같은 대상 여럿을 나란히 놓고, 한 대상만 '줄어드는 과정'을 눈앞에서 겪게 한 뒤
+    결과값(값표)을 같은 축척으로 붙여 과정이 결과를 바꿨음을 보인다 (E1 실물·E2 같은 병·E5 나란히).
+    jars: {"a": {"label": "처음부터 10개", "n": 10, "x": 520, "price": 46.2}, "c": {"label": "10개 → 2개", "n": 10, "to": 2, "price": 71.5}}
+    do: {"phone": [5, 3]} 가운데 휴대전화 숫자가 줄어듦 · {"phone_side": true} 왼쪽으로 물러남 · {"jar": "a"} 병 등장
+        {"swap": "c"} 병째 바뀜(10개 병이 나가고 2개 병이 들어옴) · {"button": "c"} 숨은 버튼 깜빡임
+        {"price": "a"} 값표 (c 는 숫자가 올라감) · {"equal": ["a","b"]} 두 값표 사이 ≈ · {"taste": true} 맛 막대 셋이 같은 높이
+        {"focus": "c"} 나머지 흐리게 · {"link": "c"} 휴대전화 ↔ 병 c 를 잇는 선과 같은 모양 표시 · {"note": "..."} 아래 작은 주석"""
+    from . import explain
+    sc = dict(sc)
+    sc.setdefault("theme", "dark")
+    explain._setup(D, sc, title=False)
+    _title(D, sc)
+    jars = sc["jars"]
+    top, jh = 360, 300
+    for k, j in jars.items():
+        D.items.append(_jar(D, f"j{k}", j["x"], j["n"], top=top, h=jh))
+        D.items.append(f'<div id="j{k}lb" style="position:absolute;left:{j["x"]}px;top:{top + jh + 22}px;transform:translateX(-50%);font-family:heavy;'
+                       f'font-size:34px;color:{CREAM};white-space:nowrap;opacity:0">{H.escape(j["label"])}</div>')
+    unit = sc.get("unit", "¢")
+    # 휴대전화 (지우의 화면): 가운데에서 시작
+    D.items.append(f'<div id="ph" style="position:absolute;left:820px;top:250px;width:280px;height:500px;border-radius:40px;background:#14181B;'
+                   f'border:6px solid #3C454C;opacity:0;transform-origin:50% 50%">'
+                   f'<div style="position:absolute;left:30px;top:70px;width:220px;height:150px;border-radius:14px;background:#2A3238"></div>'
+                   f'<div style="position:absolute;left:0;right:0;top:250px;text-align:center;font-family:heavy;font-size:46px;color:{DOWN}">'
+                   f'<span id="phn">5</span>개 남음</div>'
+                   f'<div style="position:absolute;left:40px;right:40px;top:360px;height:64px;border-radius:32px;background:{DOWN};'
+                   f'color:#fff;font-family:heavy;font-size:30px;line-height:64px;text-align:center">결제하기</div></div>')
+    extra = []
+    for k_, (b, (t0, d)) in enumerate(zip(sc.get("beats", []), bt)):
+        seq = t0 + 0.2
+        for act in b.get("do") or []:
+            t = _when(sc, k_, b, t0, d, act.get("t"), seq)
+            seq = max(seq, t) + 0.6
+            if "phone" in act:
+                a0, a1 = act["phone"]
+                D.js.append(f'tl.fromTo("#ph",{{opacity:0,y:30}},{{opacity:1,y:0,duration:.45,ease:"power2.out"}},{t:.2f});')
+                D.js.append(f'tl.set("#phn",{{textContent:"{a0}"}},{t:.2f});')
+                for s in range(1, a0 - a1 + 1):
+                    D.js.append(f'tl.set("#phn",{{textContent:"{a0 - s}"}},{t + .9 + s * .55:.2f});')
+                    D.js.append(f'tl.fromTo("#phn",{{scale:1.5}},{{scale:1,duration:.3}},{t + .9 + s * .55:.2f});')
+                    D.sfx.append(("click-soft", t + .9 + s * .55))
+            if act.get("phone_side"):
+                D.js.append(f'tl.to("#ph",{{left:70,top:300,scale:.62,duration:.8,ease:"power2.inOut"}},{t:.2f});')
+            if "jar" in act:
+                for j, k in enumerate(act["jar"] if isinstance(act["jar"], list) else [act["jar"]]):
+                    D.js.append(f'tl.fromTo("#j{k}",{{opacity:0,y:40}},{{opacity:1,y:0,duration:.5,ease:"back.out(1.4)"}},{t + j * .35:.2f});')
+                    D.js.append(f'tl.fromTo("#j{k}lb",{{opacity:0,y:12}},{{opacity:1,y:0,duration:.35}},{t + .25 + j * .35:.2f});')
+                    D.sfx.append(("pop", t + j * .35))
+            if "swap" in act:
+                k = act["swap"]
+                j = jars[k]
+                D.items.append(_jar(D, f"j{k}n", j["x"], j["to"], top=top, h=jh))
+                D.items.append(f'<div id="j{k}gh" style="position:absolute;left:{j["x"] - 130}px;top:{top - 10}px;width:260px;height:{jh + 20}px;'
+                               f'border:3px dashed rgba(201,208,213,.45);border-radius:40px;opacity:0"></div>')
+                D.js.append(f'tl.to("#j{k}",{{x:900,opacity:0,duration:.9,ease:"power2.in"}},{t:.2f});')
+                D.js.append(f'tl.to("#j{k}gh",{{opacity:1,duration:.3}},{t + .5:.2f});')
+                D.js.append(f'tl.fromTo("#j{k}n",{{opacity:0,x:900}},{{opacity:1,x:0,duration:.9,ease:"power2.out"}},{t + 1.0:.2f});')
+                D.js.append(f'tl.to("#j{k}gh",{{opacity:0,duration:.4}},{t + 2.2:.2f});')
+                D.sfx.append(("whoosh", t))
+                D.sfx.append(("whoosh", t + 1.0))
+            if "button" in act:
+                j = jars[act["button"]]
+                bid = D._id()
+                D.items.append(f'<div id="{bid}" style="position:absolute;left:{j["x"] + 150}px;top:{top + jh - 40}px;opacity:0">'
+                               f'<div style="width:40px;height:40px;border-radius:50%;background:{DOWN};box-shadow:0 0 0 8px rgba(240,106,90,.25)"></div>'
+                               f'<div style="position:absolute;left:54px;top:4px;font-family:sans-x;font-size:26px;color:{MUTED};white-space:nowrap">숨은 버튼</div></div>')
+                D.js.append(f'tl.to("#{bid}",{{opacity:1,duration:.3}},{t:.2f});')
+                D.js.append(f'tl.fromTo("#{bid} div",{{scale:1}},{{scale:.8,duration:.18,yoyo:true,repeat:3}},{t + .3:.2f});')
+                D.js.append(f'tl.to("#{bid}",{{opacity:0,duration:.4}},{t + 3.2:.2f});')
+                D.sfx.append(("click-soft", t + .3))
+            if "price" in act:
+                for j_, k in enumerate(act["price"] if isinstance(act["price"], list) else [act["price"]]):
+                    j = jars[k]
+                    pid = f"pr{k}"
+                    big = j.get("big")
+                    D.items.append(f'<div id="{pid}" style="position:absolute;left:{j["x"]}px;top:{top - 120}px;transform:translateX(-50%);'
+                                   f'padding:8px 26px;border-radius:12px;background:{GOLD if big else CREAM};color:#1A1D20;font-family:heavy;'
+                                   f'font-size:{60 if big else 46}px;white-space:nowrap;opacity:0"><span id="{pid}v">{j["price"]}</span>{unit}</div>')
+                    tt = t + j_ * .45
+                    D.js.append(f'tl.fromTo("#{pid}",{{opacity:0,y:-30}},{{opacity:1,y:0,duration:.4,ease:"back.out(1.6)"}},{tt:.2f});')
+                    if j.get("count_from") is not None:
+                        D.js.append(f'tl.fromTo("#{pid}v",{{textContent:{j["count_from"]}}},{{textContent:{j["price"]},duration:1.4,ease:"power2.out",'
+                                    f'snap:{{textContent:0.1}},onUpdate:function(){{var e=document.getElementById("{pid}v");e.textContent=(+e.textContent).toFixed(1)}}}},{tt + .1:.2f});')
+                    D.sfx.append(("pop", tt))
+            if "equal" in act:
+                a, c = (jars[x] for x in act["equal"])
+                i = _txt(D, (a["x"] + c["x"]) / 2, top - 112, "≈", 64, GOLD, font="heavy", anchor="c")
+                _show(D, i, t, 0)
+            if act.get("taste"):
+                tl_ = _txt(D, 150, top + jh + 96, "맛", 30, MUTED, font="heavy")
+                _show(D, tl_, t, 0)
+                for j_, (k, j) in enumerate(jars.items()):
+                    bid = D._id()
+                    D.items.append(f'<div id="{bid}" style="position:absolute;left:{j["x"] - 90}px;top:{top + jh + 100}px;width:180px;height:26px;'
+                                   f'border-radius:6px;background:{LINE};transform-origin:0 50%;transform:scaleX(0)"></div>')
+                    D.js.append(f'tl.to("#{bid}",{{scaleX:1,duration:.5,ease:"power2.out"}},{t + .1 + j_ * .15:.2f});')
+                lid = D._id()
+                xs = [j["x"] for j in jars.values()]
+                D.svg.append(f'<path id="{lid}" d="M{min(xs) - 120},{top + jh + 113} L{max(xs) + 120},{top + jh + 113}" stroke="{GOLD}" '
+                             f'stroke-width="3" stroke-dasharray="10 10" fill="none" opacity="0"/>')
+                D.js.append(f'tl.to("#{lid}",{{opacity:.9,duration:.4}},{t + .7:.2f});')
+            if "focus" in act:
+                for k in jars:
+                    if k != act["focus"]:
+                        for e in (f"j{k}", f"j{k}lb", f"pr{k}"):
+                            D.js.append(f'tl.to("#{e}",{{opacity:.28,duration:.5}},{t:.2f});')
+            if "link" in act:
+                j = jars[act["link"]]
+                lid = D._id()
+                D.svg.append(f'<path id="{lid}" d="M180,{top + jh + 20} C420,{top + jh + 200} {j["x"] - 300},{top + jh + 200} {j["x"]},{top + jh + 64}" stroke="{GOLD}" stroke-width="5" '
+                             f'fill="none" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>')
+                D.js.append(f'tl.to("#ph",{{opacity:1,duration:.3}},{t:.2f});')
+                D.js.append(f'tl.to("#{lid}",{{strokeDashoffset:0,duration:.8,ease:"power2.inOut"}},{t:.2f});')
+                D.js.append(f'tl.fromTo("#ph",{{scale:.62}},{{scale:.7,duration:.3,yoyo:true,repeat:1}},{t + .8:.2f});')
+                D.js.append(f'tl.fromTo("#j{act["link"]}lb",{{scale:1}},{{scale:1.15,color:"{GOLD}",duration:.3,yoyo:true,repeat:1}},{t + .8:.2f});')
+                extra.append(lid)
+            if "note" in act:
+                i = _txt(D, 1840, 100, H.escape(act["note"]), 22, MUTED, anchor="r")
+                _show(D, i, t, 0)
+
+
 def register():
     from . import hybrid, explain
     hybrid.RENDER["pricewalk"] = explain._themed(s_pricewalk)
@@ -694,3 +833,4 @@ def register():
     hybrid.RENDER["lifecost"] = explain._themed(s_lifecost)
     hybrid.RENDER["profitbar"] = explain._themed(s_profitbar)
     hybrid.RENDER["pqbox"] = explain._themed(s_pqbox)
+    hybrid.RENDER["samend"] = explain._themed(s_samend)
