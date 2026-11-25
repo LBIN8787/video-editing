@@ -814,7 +814,7 @@ def checklist_pics(D, sc: dict, bt: list):
             label(CX, 350, e.get("head", ""), INKC, 34, at, "heavy")
             W, y = 560, 470
             div(f'<div id="ID" style="position:absolute;left:{CX - W / 2:.0f}px;top:{y}px;width:{W}px;height:130px;border:5px dashed {INKC};border-radius:12px;'
-                f'box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-family:heavy,sans-x;font-size:44px;color:{INKC}55;transform-origin:left">'
+                f'box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-family:heavy,sans-x;font-size:44px;color:{INKC}AA;transform-origin:left">'
                 f'{_e(e.get("total", ""))}</div>', at + 0.2, "opacity:0,scaleX:0", "opacity:1,scaleX:1", 0.7, "power3.out")
             label(CX - W / 2 + 70, y + 170, "집행", MUT, 30, at + 0.9)
             cur = div(f'<div id="ID" style="position:absolute;left:{CX - W / 2 + 8:.0f}px;top:{y + 8}px;width:10px;height:114px;background:{REDC};border-radius:4px;opacity:0;z-index:6"></div>',

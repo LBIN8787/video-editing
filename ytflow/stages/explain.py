@@ -100,7 +100,7 @@ def _setup(D, sc: dict, title: bool = True):
         D.css.append(f"@font-face{{font-family:heavy;src:url('assets/fonts/{HEAVY.name}')}}")
     D.svg.insert(0, DEFS)
     D.label(sc.get("label", ""))
-    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""), dark=sc.get("theme") == "dark")   # 어두운 판에서 장 이름이 바탕에 묻히지 않게 (2026-11-25)
     if title and sc.get("title"):   # 레퍼런스처럼 왼쪽 위에 작고 굵게 (가운데 큰 제목·밑줄 대신)
         _txt(D, 150, 112, sc["title"], HEAVY, 44, "#3A3F48", at=0.15, anchor="lm")
 
