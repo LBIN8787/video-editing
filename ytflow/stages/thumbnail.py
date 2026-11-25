@@ -56,14 +56,31 @@ def _font(path, size):
     return ImageFont.truetype(str(path), int(size))
 
 
+def series(project: Project | str) -> str | None:
+    """시장 채널 썸네일 계열 (manual/09 §7-1 ⑬): 'brief' 브리핑(매일·주간) = 흑백 기업 사진 / 'analysis' 분석(심층·기술 등) = 컬러 인물.
+    목록에서 글씨를 읽지 않아도 둘이 갈리게 (2026-11-25 사용자: "브리핑이랑 분석이랑 구분 할 수 있도록 해주세요 글씨로 말구요")."""
+    name = project if isinstance(project, str) else project.path.name
+    m = re.match(r"\d{8}-market-(\w+)", name)
+    if not m:
+        return None
+    return "brief" if m.group(1) in ("daily", "weekly") else "analysis"
+
+
+def _bw(im: Image.Image) -> Image.Image:
+    """브리핑 흑백: 대비를 조금 올린 회색 — 빨간 띠·초록/빨강 지수 숫자만 색으로 남음."""
+    return ImageEnhance.Contrast(ImageOps.grayscale(im)).enhance(1.15).convert("RGB")
+
+
 def _image(project: Project, spec: dict, img: dict) -> Image.Image:
     if img.get("file"):
-        return Image.open(project.path / img["file"]).convert("RGB")
+        im = Image.open(project.path / img["file"]).convert("RGB")
+        return _bw(im) if img.get("_bw") else im
     src = project.dir("assets") / "footage" / spec["footage"][img["src"]]["file"]
     out = project.dir("edit") / f"_thumb_src_{img['src']}.png"
     subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-ss", str(img.get("t", 1)), "-i", str(src),
                     "-frames:v", "1", str(out)], check=True)
-    return Image.open(out).convert("RGB")
+    im = Image.open(out).convert("RGB")
+    return _bw(im) if img.get("_bw") else im
 
 
 def _cover(im: Image.Image, w: int, h: int, fx: float = 0.5, fy: float = 0.4) -> Image.Image:
@@ -403,8 +420,17 @@ def _week_badge(im: Image.Image, wk: dict, boxes: list) -> Image.Image:
 
 
 def render(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
+    sr = series(project)
+    if sr == "brief" and v.get("image"):        # 브리핑: 사진은 모두 흑백
+        v = dict(v, image=dict(v["image"], _bw=True), tone="none")
+    elif sr == "analysis" and v.get("layout", "photo") == "photo" and "tone" not in v:
+        v = dict(v, tone="none")                 # 분석: 사진 판도 컬러 그대로 (교양 채널의 옛 사진 톤을 쓰지 않음)
     wk = v.get("week") or (spec.get("package") or {}).get("week") or week_of(project)
     im, boxes = _render_layout(project, spec, dict(v, _week=wk) if wk else v)
+    if v.get("credit") and v.get("layout", "photo") != "person":   # 사진 출처 (CC BY 표시 의무) — 인물 판은 _person 이 씀
+        d = ImageDraw.Draw(im)
+        fc = _font(GOTHIC_X, 18)
+        d.text((W - 14 - fc.getlength(v["credit"]), 10), v["credit"], font=fc, fill=(235, 235, 235), stroke_width=2, stroke_fill=(0, 0, 0))
     if wk:
         im = _week_badge(im, wk, boxes)
     tk = None if v.get("no_ticker") else (v.get("ticker") or (spec.get("package") or {}).get("ticker"))   # 차트·칩이 있는 판은 지수 띠를 끔
@@ -681,7 +707,7 @@ def _hot_words(project: Project) -> list[str]:
 _src_text = ""
 
 
-def score(v: dict, qa: dict, hot: list[str], title: str = "") -> tuple[float, list[str]]:
+def score(v: dict, qa: dict, hot: list[str], title: str = "", sr: str | None = None) -> tuple[float, list[str]]:
     """한 변형의 점수와 이유. 높을수록 조회수 쪽 근거가 많음 (인과 증명이 아니라 같은 채널 안 비교의 경향)."""
     import re
     text = " ".join(v.get("lines", []) + [v.get("headline", ""), v.get("top", "")] +
@@ -690,6 +716,12 @@ def score(v: dict, qa: dict, hot: list[str], title: str = "") -> tuple[float, li
     if not qa.get("ok"):
         sc -= 5; why.append("점검 실패(글자 크기·재생 시간 자리) −5")
     per = (v.get("person") or {}).get("name")
+    if sr == "brief":   # 브리핑 = 흑백 기업 사진 (09 §7-1 ⑬) — 얼굴 가점 대신 기업 사진 가점, 인물은 분석 편으로
+        if v.get("layout") == "person" or per:
+            sc -= 3; why.append("브리핑에 인물 −3 — 인물은 분석 편 썸네일로 (09 §7-1 ⑬)")
+        elif v.get("company") or Path(((v.get("image") or {}).get("file")) or "").name.startswith("co_"):
+            sc += 2; why.append(f"그날 핵심 기업 사진({v.get('company') or '기업'}) +2 (09 §7-1 ⑬)")
+        per = None
     if v.get("layout") == "person" and per and (qa.get("face_area") is None or qa.get("face_area", 0) >= 0.06):
         sc += 3; why.append(f"사건 당사자 얼굴 크게({per}) +3 — 인물 제목의 터진 영상 42% vs 안 된 10% (docs/55)")
         if per.split()[-1] in title or per in title:
@@ -776,6 +808,18 @@ def packaging_issues(project: Project) -> list[str]:
     return out
 
 
+def packaging_notes(project: Project) -> list[str]:
+    """막지는 않고 알리기만 (스타일 기본값은 MUST 검사로 만들지 않음 — manual/README §3-1): 브리핑에 인물 썸네일."""
+    f, hy = project.dir("edit") / "thumbnail_pick.json", project.dir("script") / "hybrid.json"
+    if series(project) != "brief" or not (f.exists() and hy.exists()):
+        return []
+    pick_id = json.loads(f.read_text(encoding="utf-8")).get("pick")
+    v = next((t for t in (json.loads(hy.read_text(encoding="utf-8")).get("package") or {}).get("thumbnails", []) if t.get("id") == pick_id), None)
+    if v and (v.get("layout") == "person" or (v.get("person") or {}).get("name")):
+        return [f"브리핑인데 썸네일 {v['id']} 가 인물 — 기본은 그날 핵심 기업 사진(흑백), 인물은 분석 편으로 (manual/09 §7-1 ⑬, company-photo pick)"]
+    return []
+
+
 def recent_uploads(project: Project, n: int = 3) -> list[dict]:
     """같은 줄기(날짜 뒤 이름이 같은 프로젝트, 예: …-market-daily)에서 이 편보다 앞서 실제로 올린 최근 n편의 썸네일 — 사진 파일·배치."""
     name = project.path.name
@@ -850,7 +894,8 @@ def pick(project: Project, pkg: dict, qa: dict) -> dict:
     fs = project.dir("research") / "factsheet.md"
     _src_text = fs.read_text(encoding="utf-8") if fs.exists() else ""
     title = pkg.get("title", "")
-    scores = {v["id"]: score(v, qa.get(v["id"], {}), hot, title) for v in pkg["thumbnails"]}
+    sr = series(project)
+    scores = {v["id"]: score(v, qa.get(v["id"], {}), hot, title, sr) for v in pkg["thumbnails"]}
     recent = recent_uploads(project)
     for v in pkg["thumbnails"]:
         s_, w_ = scores[v["id"]]
@@ -859,7 +904,7 @@ def pick(project: Project, pkg: dict, qa: dict) -> dict:
             scores[v["id"]] = (round(s_ + d, 2), w_ + why)
     forced = pkg.get("thumb_pick")
     best = forced if forced in scores else max(scores, key=lambda k: (scores[k][0], -ord(k[0])))
-    res = {"pick": best, "forced": bool(forced in scores), "hot": hot,
+    res = {"pick": best, "forced": bool(forced in scores), "hot": hot, "series": sr,
            "recent": [{"project": r["project"], "image": r["image"], "layout": r["layout"]} for r in recent],
            "title_issues": only_claims(title + " " + " ".join(_vtext(v) for v in pkg["thumbnails"]), _src_text),
            "scores": {k: {"score": s_, "why": w} for k, (s_, w) in scores.items()}}

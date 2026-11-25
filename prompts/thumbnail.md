@@ -41,7 +41,8 @@
 `manual/09-market-daily.md` §7-1 — **핫 키워드 먼저**(팩트시트 `## 핫 키워드`), 단정 한 마디 + 숫자, 기본은 검은 톤 사진 꽉 채움(`photo` `full`), `punch`·`chart`·`person`·`trend`(시네마틱 실사풍) 는 변형, `versus theme: dark` 는 쓰지 않음. **통합 기준: `manual/14-packaging.md`.** 근거 `docs/49-thumbnail-research.md`.
 **클릭을 부르는 말 (2026-11-21, manual/09 §7-1 ①-1):** 큰 글씨는 그날 실제로 쓰인 공포·민감 키워드(검은 금요일·블랙 ○○·폭락·쇼크·경고)와 금리·연준, 사진은 그날 이야기의 핫한 인물·기업. 팩트시트·매체 제목에 없는 말은 쓰지 않음.
 **지수 띠 (2026-11-21, manual/09 §7-1 ⑧):** 시장 채널은 매번 `package.ticker` 에 S&P 500·나스닥·그날 가장 많이 움직인 섹터 지수(팩트시트 ✅ 숫자) — 아래 왼쪽 작은 띠로 모든 변형에 들어감.
-**유명 인물 (2026-11-20, docs/55):** 사건의 당사자(CEO·창업자·투자 대가·중앙은행 수장)가 있으면 A 는 `layout: person` —
+**브리핑 = 흑백 기업 / 분석 = 컬러 인물 (2026-11-25, manual/09 §7-1 ⑬):** `…-market-daily`·`weekly` 는 인물 없이 그날 핵심 기업 사진 — `python -m ytflow company-photo pick <프로젝트> <회사>` 가 준 파일·출처로 `{"layout": "photo", "photo_side": "full", "company": "엔비디아", "image": {"file": "04_assets/footage/raw/co_nvidia_1.jpg"}, "credit": "사진: … · CC BY 2.0", …}` (흑백은 렌더러가 자동). 아래 인물형은 분석 편(심층·기술)에 쓴다.
+**유명 인물 (2026-11-20, docs/55 — 분석 편):** 사건의 당사자(CEO·창업자·투자 대가·중앙은행 수장)가 있으면 A 는 `layout: person` —
 `{"layout": "person", "image": {"file": "04_assets/footage/raw/<이름>.jpg"}, "person": {"name": "젠슨 황", "role": "엔비디아 CEO"}, "top": "날짜 · 사건", "lines": ["두 줄", "숫자 하나"], "hl": ["숫자"], "quote": "원본 발언 한 마디(선택)", "credit": "사진: 저작자 · CC BY 2.0"}`.
 얼굴은 렌더러가 찾아 화면 높이의 40~50% 로 자름(`face_h`). 제목 후보 1번은 그 이름을 앞 20자 안에. 정치인을 배경으로 붙이지 않음, 사생활 금지, 사진은 PD·CC0·CC BY 만.
 
