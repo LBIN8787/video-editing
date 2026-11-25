@@ -13,7 +13,7 @@
 5. 커밋: `projects/<YYYYMMDD>-market-daily/01_research/`·`inbox/research/deep-topics.md`·`inbox/signals/log.md` 만. **렌더·yt-pack·yt-publish 를 하지 않습니다.**
 6. 보고(LOCAL_RESULT.md) 첫 줄: `시장 <날짜>: 쌓음 — <주제 n개에 더함, 새 주제 m개>`. 그 아래 가장 많이 쌓인 주제 3개(번호·질문·쌓인 날 수) — 감시 작업이 다음 차례에 읽습니다.
 
-## B. 일요일 — 한 주 종합 영상 (사용자 결정 전까지 그대로)
+## B. 일요일 — 한 주 종합 영상 (계속 만듦 — 2026-11-25 사용자: "일주일 주간 종합은 만드시고 앞으로 분석을 주력으로 합시다")
 아래 §0~§2 의 절차로 `<YYYYMMDD>-market-weekly` 를 만들어 올립니다. 이번 주 `deep-topics.md` 에 쌓인 것을 한 주의 흐름으로 엮습니다.
 
 ---
