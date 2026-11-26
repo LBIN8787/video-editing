@@ -8,7 +8,7 @@ from PIL import Image
 EP = Path(r"G:\내 드라이브\ytflow\영상\20261126-history-sohyeon")
 HF = EP / "hf"; AS = HF / "assets"; (AS / "fonts").mkdir(parents=True, exist_ok=True)
 WORK = Path(__file__).parent / "hfwork"; WORK.mkdir(exist_ok=True)
-VOICE, RATE = "ko-KR-InJoonNeural", "-12%"
+VOICE, RATE = "ko-KR-InJoonNeural", "+8%"   # 사용자: "대사가 너무 느려요" (-12% → +8%, 쉼도 줄임)
 W, H = 1920, 1080
 
 # ---------------------------------------------------------------- 대본 박자 (v2 콜드 오픈 + 사건 개요 + 마지막)
@@ -29,6 +29,10 @@ BEATS = [
  dict(t="그날 환경당에서 그를 데려간 것은 병이었을까요, 독이었을까요.", pause=0.8),
  dict(t="여러분의 판정은 어느 쪽입니까.", pause=2.6, sub=False),
 ]
+
+
+for _b in BEATS[:-1]: _b["pause"] = round(_b["pause"] * 0.5, 2)
+BEATS[-1]["pause"] = 1.8
 
 
 async def tts_all():
