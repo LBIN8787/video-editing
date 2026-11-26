@@ -28,7 +28,12 @@ def O(i, w):
 S = []
 
 
+SKIN_BY_TYPE = {"checklist": "newsprint", "bars": "dark-doc", "compare": "dark-doc"}   # 이전 영상(오픈AI·메모리·엔비디아 순환)과 같은 바탕 (2026-11-26 사용자)
+
+
 def add(**sc):
+    if sc.get("type") in SKIN_BY_TYPE:
+        sc.setdefault("skin", SKIN_BY_TYPE[sc["type"]])
     S.append(sc)
     return sc
 
@@ -145,14 +150,13 @@ add(type="bars", chapter=1, label="아마존 3분기(7~9월) 보도자료 · 영
     beats=[
         {"say": "아마존은 7월부터 9월까지 석 달 동안 424억 달러를 벌고, 773억 달러를 썼습니다. 한 분기에 348억 달러가 빈 겁니다."},
     ])
-add(type="zoomshot", chapter=1, insight=True, clip={"src": "src_amzn_8k", "start": 0},
-    label='원문: 아마존 3분기 실적 보도자료 (SEC 8-K 첨부 99.1, 2026.10.29)',
-    focus=[{'beat': 0, 'box': [132, 454, 1776, 165], 'label': '최근 12개월 잉여현금흐름 −424억 달러'}],
+add(type="bignum", chapter=1, insight=True, _kb=True, g_skip=True,
+    label="아마존 3분기 실적 보도자료 (SEC 8-K 첨부 99.1, 2026.10.29) · 최근 12개월 잉여현금흐름",
+    small="아마존 최근 12개월 잉여현금흐름 (번 돈 − 쓴 돈, 회사 보도자료)", value="−424억 달러",
     beats=[{'say': '최근 1년으로 넓히면, 번 돈에서 쓴 돈을 뺀 잉여현금흐름이 마이너스 424억 달러입니다. 회사 보도자료에 그대로 적혀 있습니다.'}],
-    _kb=True,
-    decide=dict(pick="zoomshot", situation="point", differs="같은 상황이어도 원문 화면이 있으면 원문으로",
-                over=[O("quote", "우리가 옮겨 적은 카드보다 원문 화면이 증거"), O("bignum", "숫자만 떼면 누가 어디서 말했는지가 사라짐"), O("map_causal", "인과 그림이 아니라 원문 한 문장을 가리키는 자리"), O("newspapers", "여러 매체 묶음이 아니라 한 원문"), O("bars", "원문에 적힌 숫자를 그대로 보여 주는 것이 증거")],
-                why='회사가 스스로 적은 숫자를 원문 화면으로', intent='−424억이 아마존 보도자료 원문이라는 것을 본다', refs=[R12, "technique:spotlight"]))
+    decide=dict(pick="bignum", situation="point", differs="원문 문서 화면 대신 숫자 하나 — 채널 톤 유지 (2026-11-26 사용자)",
+                over=[O("zoomshot", "흰 문서 화면이 이어지면 채널의 어두운 무대 톤이 깨짐"), O("bars", "앞 장면이 이미 막대")],
+                why="회사가 스스로 적은 숫자를 크게, 출처는 아래 줄에", intent="−424억이 아마존 스스로 적은 숫자라는 것을 본다", refs=[R12]))
 add(type="bignum", chapter=1, label="아마존 3분기 보도자료 재무상태표 · 장기부채 2025.12.31 → 2026.9.30",
     small="아마존 장기부채 656억 → 1,731억 달러 (작년 말 → 9월 말)", value="2.6배",
     beats=[{"say": "같은 기간 장기 빚은 작년 말 656억 달러에서 9월 말 1,731억 달러로, 2.6배가 됐습니다."}])
@@ -317,13 +321,15 @@ add(type="checklist", chapter=4, label="오라클 회계 1분기 보도자료(20
 
 # ── 5. 반대편 — 연준은 무엇을 문제 삼나 ──────────────────────────────────
 chap(5, "연준은 무엇을 문제 삼나", "landmark", "위글스워스가 말한 빚 금융이 된 해를, 미국 연준도 숫자로 짚었습니다. 연준 쪽은 터진다고 말하지 않았습니다. 그들이 문제 삼는 고리는 따로 있습니다.")
-add(type="zoomshot", chapter=5, insight=True, _kb=True, clip={"src": "src_stl_body", "start": 0},
-    label="원문: 세인트루이스 연준 'On the Economy' 2026.11.19 (코즐로프스키·산체스·설리번)",
-    focus=[{'beat': 1, 'box': [58, 392, 1248, 104], 'label': '영업현금으로 감당할 만큼은 거의 다 썼다 → 이제 빚'}],
+add(type="quote", chapter=5, insight=True, _kb=True,
+    label=STL + " · 원문 인용",
+    who="세인트루이스 연준 이코노미스트 3인", role="코즐로프스키·산체스·설리번 · 'On the Economy' 2026.11.19",
+    quote="영업현금으로 감당할 만큼은 거의 다 썼고, 이제 빚에 더 기대고 있다.", keyword="빚",
+    orig="Having largely exhausted what their operating cash flow can cover, data center builders are leaning more heavily on debt.",
     beats=[{'say': '같은 달, 미국 세인트루이스 연방준비은행의 이코노미스트 세 사람도 같은 장부를 숫자로 읽었습니다.'}, {'say': '데이터센터를 짓는 회사들은 영업으로 버는 현금으로 감당할 수 있는 만큼은 이미 거의 다 썼고, 이제 빚에 더 기대고 있다고요.'}, {'say': '그래서 이 속도가 이어질지는 앞으로의 이익과, 바깥에서 돈을 계속 구할 수 있느냐에 달렸다고 적었습니다.'}],
-    decide=dict(pick="zoomshot", situation="said", differs="같은 상황이어도 원문 화면이 있으면 원문으로",
-                over=[O("quote", "우리가 옮겨 적은 카드보다 원문 화면이 증거"), O("bignum", "숫자만 떼면 누가 어디서 말했는지가 사라짐"), O("map_causal", "인과 그림이 아니라 원문 한 문장을 가리키는 자리"), O("newspapers", "여러 매체 묶음이 아니라 한 원문"), O("bars", "원문에 적힌 숫자를 그대로 보여 주는 것이 증거")],
-                why='맞서는 결론을 연준 원문 문장 그대로 — 인용 카드 대신 실제 글', intent="'이제 빚이다'가 연준 이코노미스트의 원문이라는 것을 눈으로 본다", refs=[R12, "technique:spotlight"]))
+    decide=dict(pick="quote", situation="said", differs="원문 문서 화면 대신 인용 카드 — 오픈AI·엔비디아 편과 같은 문법 (2026-11-26 사용자)",
+                over=[O("zoomshot", "흰 문서 화면이 이어지면 채널의 어두운 무대·종이 톤이 깨짐 (2026-11-26 사용자: 이전 영상과 달라진 느낌)"), O("bignum", "숫자보다 누가 어떻게 말했는지가 주인공")],
+                why="맞서는 결론을 기관의 원문 문장으로, 원문·번역 2단", intent="'이제 빚이다'가 연준 이코노미스트의 말이라는 것을 듣는다", refs=[R13]))
 
 add(type="compare", chapter=5, label=STL + " 표 · 분기 평균, 실질 · 순부채 조달(억 달러)·주주환원 비중(영업현금 대비)",
     title="데이터센터를 짓는 회사들: 돈의 출처가 바뀌었다", cols=["2012~2018 평균", "2024년 말~2026년 중반"],
@@ -351,14 +357,17 @@ add(type="bars", chapter=5, label="로이터 2026.11.9 (뱅크오브아메리카
     items=[{"label": "빅테크 10년물", "value": 0.5, "text": "+약 0.5", "t": "0.5"},
            {"label": "AI 무관 우량 기업", "value": 0.2, "text": "+약 0.2", "t": "0.2"}],
     beats=[{"say": "빌려주는 쪽도 표정이 바뀌고 있습니다. 로이터가 11월 9일 전한 뱅크오브아메리카 분석으로는, 빅테크 10년 만기 회사채의 가산금리, 그러니까 국채보다 더 얹어 주는 이자가 올해 들어 0.5%포인트쯤 넓어졌습니다. AI와 상관없는 우량 기업은 0.2%포인트 정도였습니다."}])
-add(type="zoomshot", chapter=5, insight=True, clip={"src": "src_reuters_poggi", "start": 0},
-    label="원문: 로이터 2026.11.9 (야후 파이낸스 게재) 'Banks, investors grow wary of AI debt'",
-    focus=[{'beat': 0, 'box': [24, 451, 1248, 178], 'label': '롭스앤그레이 크리스 포기: 채권 투자자들의 장부가 꽉 찼다'}, {'beat': 1, 'box': [24, 744, 1248, 240], 'label': '골드만삭스: 2027년 발행 4,200억 달러, 60%+'}],
-    beats=[{'say': '같은 기사에서 로펌 롭스앤그레이의 금융 파트너 크리스 포기는 채권 투자자들의 장부가 꽉 찼다고 했습니다.'}, {'say': '그런데도 빌릴 돈은 더 늘어납니다. 골드만삭스는 빅테크의 내년 부채 발행을 4,200억 달러로, 올해보다 60% 넘게 많을 걸로 봤습니다.'}],
-    _kb=True,
-    decide=dict(pick="zoomshot", situation="said", differs="같은 상황이어도 원문 화면이 있으면 원문으로",
-                over=[O("quote", "우리가 옮겨 적은 카드보다 원문 화면이 증거"), O("bignum", "숫자만 떼면 누가 어디서 말했는지가 사라짐"), O("map_causal", "인과 그림이 아니라 원문 한 문장을 가리키는 자리"), O("newspapers", "여러 매체 묶음이 아니라 한 원문"), O("bars", "원문에 적힌 숫자를 그대로 보여 주는 것이 증거")],
-                why='빌려주는 쪽의 시각을 기사 원문 문장으로', intent="'장부가 꽉 찼다'와 내년 발행 전망이 같은 기사에 나란히 있다는 것을 본다", refs=[R12, "technique:spotlight"]))
+add(type="quote", chapter=5, insight=True, _kb=True,
+    label="로이터 2026.11.9 (야후 파이낸스 게재) 'Banks, investors grow wary of AI debt' · 골드만삭스 전망은 같은 기사",
+    who="크리스 포기", role="로펌 롭스앤그레이 금융 파트너 · 로이터 11월 9일",
+    quote="채권 투자자들의 장부가 꽉 찼다.", keyword="꽉 찼다",
+    orig="Debt investors' books have become full and now they are assessing if they have extended themselves as much as they're going to extend themselves this year.",
+    beats=[{'say': '같은 기사에서 로펌 롭스앤그레이의 금융 파트너 크리스 포기는 채권 투자자들의 장부가 꽉 찼다고 했습니다.'},
+           {'say': '그런데도 빌릴 돈은 더 늘어납니다. 골드만삭스는 빅테크의 내년 부채 발행을 4,200억 달러로, 올해보다 60% 넘게 많을 걸로 봤습니다.',
+            'motion': [ST("4,200억", "4,200억 달러", "골드만삭스: 2027년 빅테크 부채 발행 전망", "올해 2,500억보다 60%+", x=1450, y=880, fs=40)]}],
+    decide=dict(pick="quote", situation="said", differs="원문 문서 화면 대신 인용 카드 (2026-11-26 사용자)",
+                over=[O("zoomshot", "흰 문서 화면이 이어지면 채널의 어두운 무대·종이 톤이 깨짐 (2026-11-26 사용자: 이전 영상과 달라진 느낌)"), O("bignum", "숫자보다 누가 어떻게 말했는지가 주인공")],
+                why="빌려주는 쪽의 시각을 이름 있는 사람의 말로", intent="'장부가 꽉 찼다'와 내년 발행 전망을 나란히 듣는다", refs=[R13]))
 add(type="versus", chapter=5, insight=True,
     label="포기: 로이터 2026.11.9 · 리마: 모건스탠리 고객 노트 11.10 (CNBC 11.11 보도)",
     left={"value": "\"장부가 꽉 찼다\"", "label": "크리스 포기 · 롭스앤그레이 금융 파트너", "icon": "book-x"},
@@ -372,25 +381,28 @@ add(type="versus", chapter=5, insight=True,
 
 # ── 6. 내 반도체 계좌에서 ────────────────────────────────────────────
 chap(6, "내 반도체 계좌에서", "cpu", "이 소식을 국내 매체는 주로 한국 반도체에 미칠 영향으로, 해외 매체는 누가 이 빚을 빌려주나로 보도했습니다. 두 쪽을 이으면, 돈이 어디로 흘렀는지가 보입니다.")
-add(type="motionboard", chapter=6, label="이 채널의 해석 · 근거: " + STL + " · SK하이닉스 순현금·미국 매출 비중은 이코노미스트 2026.11.17 보도(분기보고서 인용)",
-    title="빌린 돈은 어디로 갔나",
-    els={"buy": {"kind": "card", "x": 290, "y": 470, "icon": "building-2", "label": "사는 쪽", "value": "빚 ↑", "w": 280},
-         "chip": {"kind": "card", "x": 940, "y": 470, "icon": "cpu", "label": "칩값", "w": 220},
-         "sell": {"kind": "card", "x": 1600, "y": 470, "icon": "vault", "label": "SK하이닉스", "value": "현금이 쌓임", "w": 360},
-         "a1": {"kind": "arrow", "from": "buy", "to": "chip", "label": "빌린 돈"},
-         "a2": {"kind": "arrow", "from": "chip", "to": "sell", "color": "red"}},
+add(type="map_causal", chapter=6, look="board", label="이 채널의 해석 · 근거: " + STL + " · SK하이닉스 순현금·미국 매출 비중은 이코노미스트 2026.11.17 보도(분기보고서 인용)",
+    map={"nodes": {"bond": {"label": "채권시장 (빌려주는 쪽)", "icon": "landmark", "x": 330, "y": 300},
+                   "buy": {"label": "빅테크 (사는 쪽) · 빚 ↑", "icon": "building-2", "x": 960, "y": 300},
+                   "chip": {"label": "칩값", "icon": "cpu", "x": 960, "y": 700},
+                   "sell": {"label": "SK하이닉스·삼성 · 현금이 쌓임", "icon": "vault", "x": 1590, "y": 700}},
+         "edges": [["bond", "buy"], ["buy", "chip"], ["chip", "sell"]]},
     beats=[
-        {"say": "사는 쪽이 빌린 돈의 상당 부분은 칩값으로 나가,", "do": ["buy", "chip", "a1"], "at": {"a1": "칩값"}},
-        {"say": "파는 쪽에 현금으로 쌓였습니다.", "do": ["sell", "a2"], "at": {"sell": "파는 쪽"}},
-    ])
-add(type="zoomshot", chapter=6, insight=False, clip={"src": "src_economist_cash", "start": 0},
-    label='원문: 이코노미스트 2026.11.17 (SK하이닉스 분기보고서 인용)',
-    focus=[{'beat': 0, 'box': [48, 384, 1848, 125], 'label': 'SK하이닉스 순현금 98조 6,600억 원 (9월 말)'}, {'beat': 1, 'box': [48, 576, 1848, 125], 'label': '1~9월 매출의 62.5% 가 미국'}],
-    beats=[{'say': '국내 보도 원문으로 보면, SK하이닉스는 9월 말 빚을 빼고도 98조 원이 넘는 순현금을 쥐고 있습니다.'}, {'say': '그리고 올해 1월부터 9월까지 매출의 62.5%가 미국에서 나왔습니다.'}],
-    _kb=True,
-    decide=dict(pick="zoomshot", situation="point", differs="같은 상황이어도 원문 화면이 있으면 원문으로",
-                over=[O("quote", "우리가 옮겨 적은 카드보다 원문 화면이 증거"), O("bignum", "숫자만 떼면 누가 어디서 말했는지가 사라짐"), O("map_causal", "인과 그림이 아니라 원문 한 문장을 가리키는 자리"), O("newspapers", "여러 매체 묶음이 아니라 한 원문"), O("bars", "원문에 적힌 숫자를 그대로 보여 주는 것이 증거")],
-                why='파는 쪽 금고의 크기를 기사 원문 숫자로', intent='빌린 돈이 칩값이 되어 파는 쪽 현금으로 쌓였다는 근거를 원문으로 본다', refs=[R12, "technique:spotlight"]))
+        {"say": "사는 쪽이 빌린 돈의 상당 부분은 칩값으로 나가,", "reveal": ["bond", "buy", "chip"], "draw": [["bond", "buy"], ["buy", "chip"]], "active": "chip"},
+        {"say": "파는 쪽에 현금으로 쌓였습니다.", "reveal": ["sell"], "draw": [["chip", "sell"]], "active": "sell"},
+    ],
+    decide=dict(pick="map_causal", situation="cause", differs="어두운 무대 대신 코르크판 인과 지도 — 오픈AI 편과 같은 문법 (2026-11-26 사용자)",
+                over=[O("motionboard", "같은 흐름이지만 이전 영상들의 인과 지도 톤과 달라 보임")],
+                why="채권시장 → 빅테크 → 칩값 → 파는 쪽 현금, 한 줄 사슬", intent="빌린 돈이 어디로 흘렀는지 한 장으로 본다", refs=[R12]))
+add(type="bignum", chapter=6, insight=False, _kb=True, g_skip=True,
+    label="이코노미스트 2026.11.17 (SK하이닉스 분기보고서 인용) · 순현금 9월 말 · 미국 매출 비중 1~9월",
+    small="SK하이닉스 순현금 (9월 말, 빚을 빼고 남은 현금)", value="98조 6,600억 원",
+    beats=[{'say': '국내 보도 원문으로 보면, SK하이닉스는 9월 말 빚을 빼고도 98조 원이 넘는 순현금을 쥐고 있습니다.'},
+           {'say': '그리고 올해 1월부터 9월까지 매출의 62.5%가 미국에서 나왔습니다.',
+            'motion': [ST("62.5%", "미국 매출 62.5%", "1~9월 SK하이닉스 매출 중", x=960, y=880, fs=44)]}],
+    decide=dict(pick="bignum", situation="point", differs="원문 문서 화면 대신 숫자 하나 (2026-11-26 사용자)",
+                over=[O("zoomshot", "흰 문서 화면이 이어지면 채널 톤이 깨짐"), O("bars", "비교 대상 없이 한 숫자")],
+                why="파는 쪽 금고의 크기를 숫자 하나로", intent="빌린 돈이 칩값이 되어 파는 쪽 현금으로 쌓였다는 것을 숫자로 본다", refs=[R12]))
 add(type="checklist", chapter=6, label="SK하이닉스 10.28 실적 콘퍼런스콜(뉴스토마토 2026.11.2 보도) · 한국신용평가 지적도 같은 보도 인용",
     title="장기계약이 묶는 것과 못 묶는 것", x=150, text_w=1150,
     rows=[{"label": "얼마나 사나 — 고객 14곳, 2027~28 생산능력 절반 이상", "state": "ok", "t": "14곳"},
@@ -407,14 +419,14 @@ add(type="zoomshot", chapter=6, insight=True, clip={"src": "src_tomato", "start"
     decide=dict(pick="zoomshot", situation="said", differs="같은 상황이어도 원문 화면이 있으면 원문으로",
                 over=[O("quote", "우리가 옮겨 적은 카드보다 원문 화면이 증거"), O("bignum", "숫자만 떼면 누가 어디서 말했는지가 사라짐"), O("map_causal", "인과 그림이 아니라 원문 한 문장을 가리키는 자리"), O("newspapers", "여러 매체 묶음이 아니라 한 원문"), O("bars", "원문에 적힌 숫자를 그대로 보여 주는 것이 증거")],
                 why='국내 시각을 기사 원문 문장으로', intent='장기계약의 한계와 낙관 시각을 원문으로 본다', refs=[R12, "technique:spotlight"]))
-add(type="zoomshot", chapter=6, insight=True, clip={"src": "src_economist_park", "start": 0},
-    label='원문: 이코노미스트 2026.11.17 (키움증권 보고서 인용)',
-    focus=[{'beat': 0, 'box': [48, 396, 1848, 180], 'label': "키움증권 박유악: 두 회사 2027년 2분기 '피크아웃' · 목표주가 하향"}],
+add(type="quote", chapter=6, insight=True, _kb=True,
+    label="이코노미스트 2026.11.17 (키움증권 보고서 인용) · 목표주가 하향",
+    who="박유악", role="키움증권 연구원 · 11월 보고서",
+    quote="두 기업 모두 내년 2분기 분기 실적이 '피크아웃'할 것으로 예상된다.", keyword="피크아웃",
     beats=[{'say': '키움증권 박유악 연구원은 SK하이닉스와 삼성전자의 분기 실적이 2027년 2분기에 정점을 찍고, D램이 그해 하반기 다시 공급 과잉에 들어갈 걸로 보고 목표주가를 낮췄습니다.'}],
-    _kb=True,
-    decide=dict(pick="zoomshot", situation="said", differs="같은 상황이어도 원문 화면이 있으면 원문으로",
-                over=[O("quote", "우리가 옮겨 적은 카드보다 원문 화면이 증거"), O("bignum", "숫자만 떼면 누가 어디서 말했는지가 사라짐"), O("map_causal", "인과 그림이 아니라 원문 한 문장을 가리키는 자리"), O("newspapers", "여러 매체 묶음이 아니라 한 원문"), O("bars", "원문에 적힌 숫자를 그대로 보여 주는 것이 증거")],
-                why='반대 시각도 같은 무게로, 기사 원문으로', intent='파는 쪽의 사이클을 경계하는 시각을 원문으로 본다', refs=[R12, "technique:spotlight"]))
+    decide=dict(pick="quote", situation="said", differs="원문 문서 화면 대신 인용 카드 (2026-11-26 사용자)",
+                over=[O("zoomshot", "흰 문서 화면이 이어지면 채널의 어두운 무대·종이 톤이 깨짐 (2026-11-26 사용자: 이전 영상과 달라진 느낌)"), O("bignum", "숫자보다 누가 어떻게 말했는지가 주인공")],
+                why="반대 시각도 같은 무게로, 이름 있는 사람의 말로", intent="파는 쪽의 사이클을 경계하는 시각을 듣는다", refs=[R13]))
 add(type="versus", chapter=6, insight=True, label="고영민: 뉴스토마토 2026.11.2 · 박유악: 이코노미스트 2026.11.17",
     left={"value": "\"한계 시점은 분명 아니다\"", "label": "고영민 · 한국투자증권 (사는 쪽의 돈)", "icon": "thumbs-up"},
     right={"value": "\"2027년 2분기 정점\"", "label": "박유악 · 키움증권 (파는 쪽의 사이클)", "icon": "trending-down"},
