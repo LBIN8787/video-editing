@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-26T17:00:20",
- "source_hash": "4878f3c049e1",
+ "generated": "2026-11-27T01:03:29",
+ "source_hash": "de9327833cde",
  "audit": {
   "date": "2026-11-25T14:34",
   "counts": {
@@ -807,8 +807,8 @@
   "fixed": []
  },
  "stats": {
-  "manual_version": 141,
-  "versions": 141,
+  "manual_version": 142,
+  "versions": 142,
   "reviews": 60,
   "rejects": 33,
   "passes": 27,
@@ -818,16 +818,16 @@
   "sections": 226,
   "must": 30,
   "auto": 41,
-  "intents": 402,
+  "intents": 405,
   "misaligned": 1,
   "intents_reviewed": 7,
   "conflicts": 3,
   "code": 85,
   "terms": 140,
   "bans": 251,
-  "feedback": 312,
+  "feedback": 314,
   "topics": 4,
-  "episodes": 61,
+  "episodes": 60,
   "main_situations": 17,
   "tiers": {
    "principle": 60,
@@ -2838,13 +2838,13 @@
   },
   {
    "section": "sec:09§2-0",
-   "text": "원본 발언(§3-5 bite)이 있으면 붙이고(조회수 쪽 근거 docs/18 §6-4), 없어도 만든다: 그때는 1차 문서(연설·공시·어닝콜 녹취록·보고서 원문)의 짧은 인용 + 이름 있는 사람·매체의 인사이트 4명+(§3-4) + 직접 계산 + 틀리는 경우로 깊이를 낸다. 소재가 §2-00 기준에 못 미치는 차례에는 만들지 않는다 — 매일 채우려고 억지로 만들지 않음.",
+   "text": "원본 발언(§3-5 bite)이 있으면 붙이고(조회수 쪽 근거 docs/18 §6-4), 없어도 만든다: 그때는 1차 문서(연설·공시·어닝콜 녹취록·보고서 원문)의 짧은 인용 + 이름 있는 사람의 판단과 그 반박(§3-4) + 직접 계산 + 틀리는 경우로 깊이를 낸다. 소재가 §2-00 기준에 못 미치는 차례에는 만들지 않는다 — 매일 채우려고 억지로 만들지 않음.",
    "themes": [
     "depth"
    ],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:f2812cb4",
+   "tier_key": "ban:d8821d22",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -3209,6 +3209,25 @@
   },
   {
    "section": "sec:09§3-4",
+   "text": "팩트시트 ## 인사이트 표 (check MUST, 시장 채널): | 누가 (이름·직함·소속) | 어디서 (매체·방송·자리) | 국내·해외 | 날짜 | 원문 한 줄 | 입장 (낙관·우려·중립) | 근거로 든 것 | 출처 주소 | — 주인공 판단과 그 반박이 들어가게(입장 2가지 이상), 유명인(위) 중심. 줄 수는 정해 두지 않는다(위 첫 항목). 원문은 따옴표 그대로(영어면 영어로), 번역은 대본에서.",
+   "themes": [
+    "script"
+   ],
+   "absolute": false,
+   "must": true,
+   "tier_key": "ban:011d2cba",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§3-4",
    "text": "말로 나눈다: \"○○는 이렇게 봤습니다 — 사실이 아니라 한 사람의 시각입니다\", \"반대로 △△는 …\". 화면 왼쪽 위 '의견' 배지는 기본으로 붙이지 않는다 (스타일 기본값, 2026-11-21·11-23 사용자: \"이런 왼쪽 위의 사족 빼주세요\") — 제목·자막을 가리고 정보가 없는 덧말이 되기 때문. 사실과 의견의 구분은 말(\"~라고 봅니다\")과 이름·출처로 한다. 꼭 필요한 편만 opinion_tag: true.",
    "themes": [
     "emphasis",
@@ -3253,23 +3272,6 @@
    "absolute": false,
    "must": false,
    "tier_key": "ban:67667c66",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": true,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "section": "sec:09§3-4",
-   "text": "확인: 기사 제목은 단서. 발언은 원문(공식 영상·녹취·보도자료·본인 계정)으로, 행동은 공시(8-K·Form 4·DART)·회사 발표로. 확인 못 하면 '보도'로만 말하고 단정하지 않음.",
-   "themes": [],
-   "absolute": false,
-   "must": false,
-   "tier_key": "ban:b437149d",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -4272,7 +4274,7 @@
    "tier_label": "영구 원칙"
   },
   {
-   "section": "sec:09§h584",
+   "section": "sec:09§h588",
    "text": "ElevenLabs 는 직접 API 로만 (MCP 생성 금지, 2026-11-22 사용자): 같은 문장(33자, Teo·eleven_v4)을 실측: 직접 API 15 크레딧(응답 헤더 Character-Cost) vs MCP creative_generate_speech 1테이크 33 크레딧·기본 2테이크 66 크레딧(estimate_only) — MCP 가 1테이크도 2.2배, 기본값이면 4.4배 (AGENTS 목소리 규칙, docs/08-voice.md).",
    "themes": [
     "sound"
@@ -4291,7 +4293,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:09§h584",
+   "section": "sec:09§h588",
    "text": "ElevenLabs 를 쓸 수 없는 날은 edge 초안으로 만들되 올리지 않는다 (v43, §2-1 — 공개본은 Teo). 크레딧이 모자라면 그날 편을 미루거나 voice-import 로 Teo 테이크를 만든다.",
    "themes": [],
    "absolute": false,
@@ -5261,7 +5263,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h350",
+   "section": "sec:feedback§h352",
    "text": "2026-11-14 · v20 기각 — “중간중간 너무 난잡함. 목표·시청자 욕망을 먼저 정의하지 않고 만듦. 대본을 소제목처럼 글로 쓰거나 사진·그림을 붙여 넣기만 함 — 대본에 따른 애니메이션이 아님. 각 연출의 의도가 불분명”",
    "themes": [
     "variety",
@@ -5282,7 +5284,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h350",
+   "section": "sec:feedback§h352",
    "text": "2026-11-21 · 영상 검토 — “대본의 피드백입니다 — (의지력 편 v2 검토) 방향 통과, 2025 효과 배수 비교 금지·대조 조건과 주 지표 설명·생활 조언을 근거 범위 안으로·4~7장 연구 나열 대신 증거 추적·8장 전환 문장”",
    "themes": [
     "motion",
@@ -5302,7 +5304,7 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "section": "sec:feedback§h453",
+   "section": "sec:feedback§h455",
    "text": "2026-11-19 · 방향·기준 요청 — “대본 단계에 \"호기심 대본은 설명·지식 문장 30% 이하\"라는 기준 이런 기준은 또 빼주세요 너무 과적합입니다. / \"설명은 이야기 속에 엮는다\"는 원리 이런식으로 원리주의적으로 가지 방법 자체를 고정하지 말아주세요”",
    "themes": [
     "script",
@@ -5322,7 +5324,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:feedback§h511",
+   "section": "sec:feedback§h513",
    "text": "2026-11-09 · v3 기각 — “강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)”",
    "themes": [
     "emphasis",
@@ -6001,7 +6003,7 @@
    "key": "09",
    "file": "manual/09-market-daily.md",
    "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13 · v36 인사이트·영상 소스 · v42 기술 분석·CEO 소식 2026-11-17)",
-   "lines": 604,
+   "lines": 608,
    "versions": [
     19,
     24,
@@ -6149,7 +6151,7 @@
    "key": "14",
    "file": "manual/14-packaging.md",
    "label": "14. 제목·썸네일·태그 통합 기준 (시장 채널 — 브리핑·심층·주간)",
-   "lines": 88,
+   "lines": 89,
    "versions": [
     109,
     114,
@@ -6167,7 +6169,7 @@
    "key": "feedback",
    "file": "manual/feedback-by-repo.md",
    "label": "내 피드백 — 레포별 (자동 생성: `python -m ytflow manual-graph`)",
-   "lines": 522,
+   "lines": 524,
    "versions": [
     83,
     84,
@@ -8217,13 +8219,14 @@
    "label": "사람·매체의 인사이트 — 사실과 나눠서, 넉넉하게",
    "title": "3-4. 사람·매체의 인사이트 — 사실과 나눠서, 넉넉하게 (v36, 2026-11-17 사용자 요청)",
    "line": 246,
-   "end": 283,
+   "end": 287,
    "tag_version": 36,
    "versions": [
     36,
-    52
+    52,
+    142
    ],
-   "last_version": 52,
+   "last_version": 142,
    "terms": [
     "term:bite",
     "term:versus",
@@ -8241,8 +8244,8 @@
    "level": 3,
    "label": "매체·인물의 인터뷰·방송을 영상 소스로",
    "title": "3-5. 매체·인물의 인터뷰·방송을 영상 소스로 (v36, 2026-11-17 사용자 요청)",
-   "line": 284,
-   "end": 320,
+   "line": 288,
+   "end": 324,
    "tag_version": 36,
    "versions": [
     36
@@ -8262,8 +8265,8 @@
    "level": 3,
    "label": "시간대 착각 방지 (영구 원칙, 2026-11-22 사용자: \"특히나 시장같은 경우는 시간대를 착각 할 수도 있는데 이런 경우가 없도록 하세요\")",
    "title": "3-6. 시간대 착각 방지 (영구 원칙, 2026-11-22 사용자: \"특히나 시장같은 경우는 시간대를 착각 할 수도 있는데 이런 경우가 없도록 하세요\")",
-   "line": 321,
-   "end": 330,
+   "line": 325,
+   "end": 334,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8276,8 +8279,8 @@
    "level": 2,
    "label": "대본 — 브리핑 (시간 기준 없음 — 아래 구성요소를 모두 채움, README §2-4)",
    "title": "4. 대본 — 브리핑 (시간 기준 없음 — 아래 구성요소를 모두 채움, README §2-4)",
-   "line": 331,
-   "end": 348,
+   "line": 335,
+   "end": 352,
    "tag_version": null,
    "versions": [
     34
@@ -8307,8 +8310,8 @@
    "level": 2,
    "label": "대본 — 심층 (시간 기준 없음 — 구성요소를 모두 채우고 길이는 자료·인사이트의 양이 정함)",
    "title": "5. 대본 — 심층 (시간 기준 없음 — 구성요소를 모두 채우고 길이는 자료·인사이트의 양이 정함)",
-   "line": 349,
-   "end": 349,
+   "line": 353,
+   "end": 353,
    "tag_version": null,
    "versions": [
     26,
@@ -8324,8 +8327,8 @@
    "level": 3,
    "label": "분석 영상의 기본 구성 = 드러켄밀러 편 틀 — 인터뷰 원본 + 그 사람의 인사이트를 해설 (작업 기준, 2026-11-26 사용자: \"앞으로 영상의 구성을 드러켄밀러 편처럼 구성해주세요 편집스타일은 이번 보강을 곁들이고 분석영상 자체의 구성을 말하는 것 입니다. 인터뷰와 그 영상소스 그리고 그 사람의 인사이트를 분석하거 해설하는 느낌으로 말이죠\")",
    "title": "5-00. 분석 영상의 기본 구성 = 드러켄밀러 편 틀 — 인터뷰 원본 + 그 사람의 인사이트를 해설 (작업 기준, 2026-11-26 사용자: \"앞으로 영상의 구성을 드러켄밀러 편처럼 구성해주세요 편집스타일은 이번 보강을 곁들이고 분석영상 자체의 구성을 말하는 것 입니다. 인터뷰와 그 영상소스 그리고 그 사람의 인사이트를 분석하거 해설하는 느낌으로 말이죠\")",
-   "line": 350,
-   "end": 390,
+   "line": 354,
+   "end": 394,
    "tag_version": null,
    "versions": [
     136,
@@ -8346,8 +8349,8 @@
    "level": 3,
    "label": "원리에서 결론이 따라 나오게 — 외우게 하지 않는다 (작업 기준, 2026-11-22 사용자)",
    "title": "5-0. 원리에서 결론이 따라 나오게 — 외우게 하지 않는다 (작업 기준, 2026-11-22 사용자)",
-   "line": 391,
-   "end": 399,
+   "line": 395,
+   "end": 403,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -8363,8 +8366,8 @@
    "level": 3,
    "label": "만약에 검수 — 빠진 변수·다른 경우·숨은 가정 (작업 기준, 2026-11-22 사용자: \"제가 매번 만략에 만약에 등 경우의수나 다른 변수요인 등을 찾듯이 시장 대본을 구성 할 때는 이점을 항상 고려하고 검수해주세요. 특히나 심층분석은 이게 중요합니다. 사소한 디테일이나 빼먹은 요인 if가정 말이죠\")",
    "title": "5-0-1. 만약에 검수 — 빠진 변수·다른 경우·숨은 가정 (작업 기준, 2026-11-22 사용자: \"제가 매번 만략에 만약에 등 경우의수나 다른 변수요인 등을 찾듯이 시장 대본을 구성 할 때는 이점을 항상 고려하고 검수해주세요. 특히나 심층분석은 이게 중요합니다. 사소한 디테일이나 빼먹은 요인 if가정 말이죠\")",
-   "line": 400,
-   "end": 415,
+   "line": 404,
+   "end": 419,
    "tag_version": null,
    "versions": [
     96
@@ -8379,8 +8382,8 @@
    "level": 3,
    "label": "큰 주제는 1부(개념)·2부(인사이트)로 (작업 기준, 2026-11-22 사용자: \"2부로 만들어도 되니까 이 메모리호황을 보는 인사이트와 그 인터뷰내용과 명확한 논리근거 그 반대근거 등등 여러 인사이트로 확장해주세요\" · \"즉 지금은 약간 개념설명이고 이 개념을 바탕으로 진짜 인사이트와 각각의 근거까지 이어가자 입니다\" · \"이런 심층분석은 이 주제에 대한 다른 사람들의 인사이트 여러 인사이트로 볼 수 있어야 합니다. 그리고 가능한 이 발언이 담긴 영상소스를 넣어달라 했구요\")",
    "title": "5-0-2. 큰 주제는 1부(개념)·2부(인사이트)로 (작업 기준, 2026-11-22 사용자: \"2부로 만들어도 되니까 이 메모리호황을 보는 인사이트와 그 인터뷰내용과 명확한 논리근거 그 반대근거 등등 여러 인사이트로 확장해주세요\" · \"즉 지금은 약간 개념설명이고 이 개념을 바탕으로 진짜 인사이트와 각각의 근거까지 이어가자 입니다\" · \"이런 심층분석은 이 주제에 대한 다른 사람들의 인사이트 여러 인사이트로 볼 수 있어야 합니다. 그리고 가능한 이 발언이 담긴 영상소스를 넣어달라 했구요\")",
-   "line": 416,
-   "end": 424,
+   "line": 420,
+   "end": 428,
    "tag_version": null,
    "versions": [
     114
@@ -8395,8 +8398,8 @@
    "level": 3,
    "label": "나열하지 말고 풀어서 — 설명은 움직이는 장면으로",
    "title": "5-1. 나열하지 말고 풀어서 — 설명은 움직이는 장면으로 (v63, 2026-11-20)",
-   "line": 425,
-   "end": 459,
+   "line": 429,
+   "end": 463,
    "tag_version": 63,
    "versions": [
     63,
@@ -8429,8 +8432,8 @@
    "level": 2,
    "label": "화면 문법 (시장 카테고리 개성, `05 §0-7`)",
    "title": "6. 화면 문법 (시장 카테고리 개성, `05 §0-7`)",
-   "line": 460,
-   "end": 483,
+   "line": 464,
+   "end": 487,
    "tag_version": null,
    "versions": [
     27,
@@ -8465,8 +8468,8 @@
    "level": 2,
    "label": "제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
    "title": "7. 제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
-   "line": 484,
-   "end": 493,
+   "line": 488,
+   "end": 497,
    "tag_version": null,
    "versions": [
     27
@@ -8486,8 +8489,8 @@
    "level": 3,
    "label": "썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
    "title": "7-1. 썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
-   "line": 494,
-   "end": 529,
+   "line": 498,
+   "end": 533,
    "tag_version": null,
    "versions": [
     51,
@@ -8509,8 +8512,8 @@
    "level": 2,
    "label": "렌더 전 점검",
    "title": "8. 렌더 전 점검",
-   "line": 530,
-   "end": 532,
+   "line": 534,
+   "end": 536,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8523,8 +8526,8 @@
    "level": 2,
    "label": "렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
    "title": "9. 렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
-   "line": 533,
-   "end": 540,
+   "line": 537,
+   "end": 544,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8537,8 +8540,8 @@
    "level": 3,
    "label": "업로드 전 종합 검수 — 통과해야 올린다 (작업 기준, 2026-11-21 사용자: \"업로드 하기 전 항상 글씨겹침 그래픽끼리 겹침 자막밀림 자막과 나레이션 싱크 화면과 자막이 일치하는지 등 종합적으로 검수하세요 이는 메뉴얼에 반영하세요\")",
    "title": "9-1. 업로드 전 종합 검수 — 통과해야 올린다 (작업 기준, 2026-11-21 사용자: \"업로드 하기 전 항상 글씨겹침 그래픽끼리 겹침 자막밀림 자막과 나레이션 싱크 화면과 자막이 일치하는지 등 종합적으로 검수하세요 이는 메뉴얼에 반영하세요\")",
-   "line": 541,
-   "end": 548,
+   "line": 545,
+   "end": 552,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8551,8 +8554,8 @@
    "level": 2,
    "label": "업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
    "title": "10. 업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
-   "line": 549,
-   "end": 561,
+   "line": 553,
+   "end": 565,
    "tag_version": null,
    "versions": [
     34
@@ -8567,8 +8570,8 @@
    "level": 2,
    "label": "기록·되돌아보기",
    "title": "11. 기록·되돌아보기",
-   "line": 562,
-   "end": 565,
+   "line": 566,
+   "end": 569,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8581,8 +8584,8 @@
    "level": 2,
    "label": "예외 대응",
    "title": "12. 예외 대응",
-   "line": 566,
-   "end": 575,
+   "line": 570,
+   "end": 579,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8595,8 +8598,8 @@
    "level": 2,
    "label": "법·정책",
    "title": "13. 법·정책",
-   "line": 576,
-   "end": 583,
+   "line": 580,
+   "end": 587,
    "tag_version": null,
    "versions": [
     34
@@ -8604,43 +8607,43 @@
    "last_version": 34
   },
   {
-   "id": "sec:09§h584",
+   "id": "sec:09§h588",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h584",
+   "num": "h588",
    "level": 2,
    "label": "목소리 (2026-11-13 결정)",
    "title": "목소리 (2026-11-13 결정)",
-   "line": 584,
-   "end": 592,
+   "line": 588,
+   "end": 596,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h593",
+   "id": "sec:09§h597",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h593",
+   "num": "h597",
    "level": 2,
    "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
    "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
-   "line": 593,
-   "end": 598,
+   "line": 597,
+   "end": 602,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h599",
+   "id": "sec:09§h603",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h599",
+   "num": "h603",
    "level": 2,
    "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
    "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
-   "line": 599,
-   "end": 604,
+   "line": 603,
+   "end": 608,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9779,7 +9782,7 @@
    "label": "심층 분석",
    "title": "4. 심층 분석",
    "line": 44,
-   "end": 54,
+   "end": 55,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9796,8 +9799,8 @@
    "level": 2,
    "label": "주간 종합",
    "title": "5. 주간 종합",
-   "line": 55,
-   "end": 59,
+   "line": 56,
+   "end": 60,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -9810,8 +9813,8 @@
    "level": 2,
    "label": "태그·해시태그·설명란",
    "title": "6. 태그·해시태그·설명란",
-   "line": 60,
-   "end": 70,
+   "line": 61,
+   "end": 71,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -9824,8 +9827,8 @@
    "level": 2,
    "label": "테스트로 가린다 (모든 채널·모든 영상)",
    "title": "7. 테스트로 가린다 (모든 채널·모든 영상)",
-   "line": 71,
-   "end": 75,
+   "line": 72,
+   "end": 76,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -9838,8 +9841,8 @@
    "level": 2,
    "label": "구독으로 이어지게",
    "title": "8. 구독으로 이어지게",
-   "line": 76,
-   "end": 84,
+   "line": 77,
+   "end": 85,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -9852,8 +9855,8 @@
    "level": 2,
    "label": "점검에서 찾은 어긋남 (사용자 결정 필요 — 정해질 때까지 위 본문이 기준)",
    "title": "9. 점검에서 찾은 어긋남 (사용자 결정 필요 — 정해질 때까지 위 본문이 기준)",
-   "line": 85,
-   "end": 88,
+   "line": 86,
+   "end": 89,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -9945,20 +9948,6 @@
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
    "line": 268,
-   "end": 347,
-   "tag_version": null,
-   "versions": [],
-   "last_version": null
-  },
-  {
-   "id": "sec:feedback§h348",
-   "kind": "section",
-   "doc": "doc:feedback",
-   "num": "h348",
-   "level": 2,
-   "label": "호기심 — `topics/curiosity`",
-   "title": "호기심 — `topics/curiosity`",
-   "line": 348,
    "end": 349,
    "tag_version": null,
    "versions": [],
@@ -9969,11 +9958,25 @@
    "kind": "section",
    "doc": "doc:feedback",
    "num": "h350",
+   "level": 2,
+   "label": "호기심 — `topics/curiosity`",
+   "title": "호기심 — `topics/curiosity`",
+   "line": 350,
+   "end": 351,
+   "tag_version": null,
+   "versions": [],
+   "last_version": null
+  },
+  {
+   "id": "sec:feedback§h352",
+   "kind": "section",
+   "doc": "doc:feedback",
+   "num": "h352",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 350,
-   "end": 452,
+   "line": 352,
+   "end": 454,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -9984,15 +9987,15 @@
    ]
   },
   {
-   "id": "sec:feedback§h453",
+   "id": "sec:feedback§h455",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h453",
+   "num": "h455",
    "level": 3,
    "label": "영상 밖에서 한 말 (방향·기준·도구)",
    "title": "영상 밖에서 한 말 (방향·기준·도구)",
-   "line": 453,
-   "end": 475,
+   "line": 455,
+   "end": 477,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -10001,29 +10004,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h476",
+   "id": "sec:feedback§h478",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h476",
+   "num": "h478",
    "level": 2,
    "label": "시사 — `topics/issues`",
    "title": "시사 — `topics/issues`",
-   "line": 476,
-   "end": 477,
+   "line": 478,
+   "end": 479,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h478",
+   "id": "sec:feedback§h480",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h478",
+   "num": "h480",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 478,
-   "end": 508,
+   "line": 480,
+   "end": 510,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -10033,29 +10036,29 @@
    ]
   },
   {
-   "id": "sec:feedback§h509",
+   "id": "sec:feedback§h511",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h509",
+   "num": "h511",
    "level": 2,
    "label": "AI — `topics/ai`",
    "title": "AI — `topics/ai`",
-   "line": 509,
-   "end": 510,
+   "line": 511,
+   "end": 512,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:feedback§h511",
+   "id": "sec:feedback§h513",
    "kind": "section",
    "doc": "doc:feedback",
-   "num": "h511",
+   "num": "h513",
    "level": 3,
    "label": "영상에서 한 말",
    "title": "영상에서 한 말",
-   "line": 511,
-   "end": 522,
+   "line": 513,
+   "end": 524,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -13044,33 +13047,14 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:515",
+   "id": "check:519",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)",
    "file": "ytflow/stages/checklist.py",
-   "line": 515,
+   "line": 519,
    "tier_key": "check:4f448879",
-   "tier_auto": "standard",
-   "why": "제작 방법·품질 기준",
-   "overfit": false,
-   "single": false,
-   "tier": "standard",
-   "tier_by": "자동 추정",
-   "tier_note": "",
-   "tier_fixed": false,
-   "tier_label": "작업 기준"
-  },
-  {
-   "id": "check:520",
-   "kind": "check",
-   "gate": "gate:G6",
-   "level": "SHOULD",
-   "label": "글자 겹침 점검 기록 (05_edit/overlap_qa.json)",
-   "file": "ytflow/stages/checklist.py",
-   "line": 520,
-   "tier_key": "check:6265c603",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -13085,10 +13069,29 @@
    "id": "check:525",
    "kind": "check",
    "gate": "gate:G6",
+   "level": "SHOULD",
+   "label": "글자 겹침 점검 기록 (05_edit/overlap_qa.json)",
+   "file": "ytflow/stages/checklist.py",
+   "line": 525,
+   "tier_key": "check:6265c603",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "check:530",
+   "kind": "check",
+   "gate": "gate:G6",
    "level": "MUST",
    "label": "화면 글자 겹침 없음 — 글자끼리·카드에 가려짐·카드 밖 넘침·자막 자리 (overlap_qa)",
    "file": "ytflow/stages/checklist.py",
-   "line": 525,
+   "line": 530,
    "tier_key": "check:287f0a57",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -13101,13 +13104,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:526",
+   "id": "check:531",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "글자가 카드·강조 상자 가장자리에 걸치지 않음 (overlap_qa)",
    "file": "ytflow/stages/checklist.py",
-   "line": 526,
+   "line": 531,
    "tier_key": "check:65538b9a",
    "tier_auto": "style",
    "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
@@ -13120,13 +13123,13 @@
    "tier_label": "스타일 기본값"
   },
   {
-   "id": "check:532",
+   "id": "check:537",
    "kind": "check",
    "gate": "gate:G6",
    "level": "MUST",
    "label": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
    "file": "ytflow/stages/checklist.py",
-   "line": 532,
+   "line": 537,
    "tier_key": "check:79a7c86e",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -13139,13 +13142,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:535",
+   "id": "check:540",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "납품 점검(음량 등)",
    "file": "ytflow/stages/checklist.py",
-   "line": 535,
+   "line": 540,
    "tier_key": "check:5e0947d1",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -13158,13 +13161,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:548",
+   "id": "check:553",
    "kind": "check",
    "gate": "gate:G6",
    "level": "SHOULD",
    "label": "최종 목소리 ElevenLabs",
    "file": "ytflow/stages/checklist.py",
-   "line": 548,
+   "line": 553,
    "tier_key": "check:91c4c655",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -13177,13 +13180,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:552",
+   "id": "check:557",
    "kind": "check",
    "gate": "gate:G7",
    "level": "MUST",
    "label": "제목 후보 3개 + 이유",
    "file": "ytflow/stages/checklist.py",
-   "line": 552,
+   "line": 557,
    "tier_key": "check:533d8276",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -13196,13 +13199,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:554",
+   "id": "check:559",
    "kind": "check",
    "gate": "gate:G7",
    "level": "MUST",
    "label": "썸네일 A/B/C + 점검 ok",
    "file": "ytflow/stages/checklist.py",
-   "line": 554,
+   "line": 559,
    "tier_key": "check:a992f8cd",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -13215,13 +13218,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:560",
+   "id": "check:565",
    "kind": "check",
    "gate": "gate:G8",
    "level": "MUST",
    "label": "완성본 보관 기록 — Drive(drive.json·drive_archive.json) 또는 공개 가능한 것만 GitHub Release(release.json)",
    "file": "ytflow/stages/checklist.py",
-   "line": 560,
+   "line": 565,
    "tier_key": "check:3d8271a6",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -13234,13 +13237,13 @@
    "tier_label": "작업 기준"
   },
   {
-   "id": "check:563",
+   "id": "check:568",
    "kind": "check",
    "gate": "gate:G8",
    "level": "MUST",
    "label": "episodes.md 기록",
    "file": "ytflow/stages/checklist.py",
-   "line": 563,
+   "line": 568,
    "tier_key": "check:45482bc9",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
@@ -17204,6 +17207,18 @@
    }
   },
   {
+   "id": "ver:142",
+   "kind": "version",
+   "v": 142,
+   "date": "2026-11-27",
+   "label": "v142",
+   "summary": "시장 인사이트: 4명+ 대신 '주인공 판단 하나 + 반박'(09 §3-4), 제목 경고형 각도 실험(14 §4) — 식스시그마 130편 분석 docs/73",
+   "applied": [],
+   "themes": [
+    "depth"
+   ]
+  },
+  {
    "id": "rev:1",
    "kind": "review",
    "date": "2026-11-09",
@@ -18790,10 +18805,10 @@
    "src": "_soft = (\"stage/crowded\", \"stage/text\", \"stage/static\")   # v38: 숫자로 감지하는 '붐빔·글자 수·정지'는 참고 — 판단은 D3 화면 확인"
   },
   {
-   "id": "code:ytflow/stages/checklist.py:541",
+   "id": "code:ytflow/stages/checklist.py:546",
    "kind": "code",
    "file": "ytflow/stages/checklist.py",
-   "line": 541,
+   "line": 546,
    "versions": [
     25
    ],
@@ -21423,7 +21438,7 @@
      "by": "사용자 결정 2026-11-15 (매뉴얼 v34 — '말이 화면에 생기는 쪽', 스타일 규칙 유동)"
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:541",
+     "ref": "code:ytflow/stages/checklist.py:546",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -21465,7 +21480,7 @@
      "kind": "code"
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:541",
+     "ref": "code:ytflow/stages/checklist.py:546",
      "kind": "code"
     }
    ],
@@ -21497,7 +21512,7 @@
      "by": ""
     },
     {
-     "ref": "code:ytflow/stages/checklist.py:541",
+     "ref": "code:ytflow/stages/checklist.py:546",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -27779,7 +27794,7 @@
      "kind": "review"
     },
     {
-     "ref": "sec:feedback§h350",
+     "ref": "sec:feedback§h352",
      "kind": "manual"
     }
    ],
@@ -27815,7 +27830,7 @@
      "by": ""
     },
     {
-     "ref": "sec:feedback§h350",
+     "ref": "sec:feedback§h352",
      "status": "unreviewed",
      "note": "",
      "by": ""
@@ -37535,6 +37550,181 @@
    "annotated": false
   },
   {
+   "id": "intent:7b02e763",
+   "kind": "intent",
+   "quote": "남는 GPU는 광케이블처럼 무너진다, 켄 그리핀의 경고",
+   "label": "남는 GPU는 광케이블처럼 무너진다, 켄 그리핀의 경고",
+   "versions": [],
+   "date": "2026-11-27",
+   "sources": [
+    {
+     "ref": "sec:14§4",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:7b02e763"
+   ],
+   "themes": [],
+   "ann_key": "intent:7b02e763",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:14§4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:b1b23e8f",
+   "kind": "intent",
+   "quote": "보통 공포마케팅이 조회수가 잘 나오는 것 같네요",
+   "label": "보통 공포마케팅이 조회수가 잘 나오는 것 같네요",
+   "versions": [],
+   "date": "2026-11-27",
+   "sources": [
+    {
+     "ref": "sec:14§4",
+     "kind": "manual"
+    },
+    {
+     "ref": "fb:314",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:b1b23e8f"
+   ],
+   "themes": [],
+   "ann_key": "intent:b1b23e8f",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:14§4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
+   "id": "intent:f0ca1667",
+   "kind": "intent",
+   "quote": "4명이상일 이유는 없어요 한명의 판단과 맞서는 판단 즉 반박까지 보려는 것 입니다",
+   "label": "4명이상일 이유는 없어요 한명의 판단과 맞서는 판단 즉 반박까지 보려는 것 입니다",
+   "versions": [
+    36
+   ],
+   "date": "2026-11-27",
+   "sources": [
+    {
+     "ref": "sec:09§3-4",
+     "kind": "manual"
+    },
+    {
+     "ref": "fb:313",
+     "kind": "feedback"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:f0ca1667"
+   ],
+   "themes": [],
+   "ann_key": "intent:f0ca1667",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "ver:36",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§3-4",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "sec:09§3-5",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "doc:03",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/checklist.py:293",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:176",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1352",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "code:ytflow/stages/hybrid.py:1583",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:299",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:303",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:309",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    },
+    {
+     "ref": "check:311",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "term:bite",
    "kind": "term",
    "key": "bite",
@@ -40751,7 +40941,7 @@
     "sec:10§1",
     "sec:10§h9",
     "sec:10§3",
-    "sec:feedback§h453",
+    "sec:feedback§h455",
     "ver:21",
     "ver:34",
     "code:ytflow/stages/hybrid.py:1746",
@@ -43413,7 +43603,7 @@
     "sec:12§0-1",
     "sec:13§4-1",
     "sec:13§7",
-    "sec:feedback§h350",
+    "sec:feedback§h352",
     "ver:92",
     "rule:G4:1",
     "check:172",
@@ -43563,9 +43753,9 @@
     "sec:09§6",
     "sec:10§h136",
     "sec:feedback§h164",
-    "sec:feedback§h350",
-    "sec:feedback§h478",
-    "sec:feedback§h511",
+    "sec:feedback§h352",
+    "sec:feedback§h480",
+    "sec:feedback§h513",
     "ver:10",
     "ver:30",
     "ver:31",
@@ -43825,7 +44015,7 @@
     "sec:04§0-4",
     "sec:09§5-1",
     "sec:09§6",
-    "sec:09§h599",
+    "sec:09§h603",
     "sec:11§2-4",
     "sec:README§2-5",
     "sec:README§3-1",
@@ -43989,9 +44179,9 @@
     "sec:10§4",
     "sec:12§0-1",
     "sec:feedback§h164",
-    "sec:feedback§h350",
-    "sec:feedback§h478",
-    "sec:feedback§h511",
+    "sec:feedback§h352",
+    "sec:feedback§h480",
+    "sec:feedback§h513",
     "ver:10",
     "ver:12",
     "rev:11",
@@ -44152,7 +44342,7 @@
     "sec:06§G6",
     "sec:08§4",
     "sec:09§6",
-    "sec:09§h599",
+    "sec:09§h603",
     "sec:10§4",
     "sec:feedback§h164",
     "sec:README§0",
@@ -53266,6 +53456,62 @@
    "repo_label": "시장",
    "intent": "intent:072ff457",
    "tier_key": "fb:072ff457",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "trial",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "실험 기록"
+  },
+  {
+   "id": "fb:313",
+   "kind": "feedback",
+   "date": "2026-11-27",
+   "quote": "4명이상일 이유는 없어요 한명의 판단과 맞서는 판단 즉 반박까지 보려는 것 입니다.",
+   "label": "4명이상일 이유는 없어요 한명의 판단과 맞서는 판단 즉 반박까지 보려는 것 입니다.",
+   "fb_kind": "clarify",
+   "fb_kind_label": "뜻 바로잡기",
+   "project": "",
+   "about": "",
+   "note": "09 §3-4 첫 항목 '판단 하나 + 반박', §0-00·§2-00·§2-0 과 deep-watch 지시문의 4명+ 삭제 (docs/73)",
+   "pending": false,
+   "themes": [],
+   "scope": "standard",
+   "repo": "market",
+   "repo_label": "시장",
+   "intent": "intent:f0ca1667",
+   "tier_key": "fb:f0ca1667",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": false,
+   "tier": "standard",
+   "tier_by": "기록할 때 지정",
+   "tier_note": "",
+   "tier_fixed": true,
+   "tier_label": "작업 기준"
+  },
+  {
+   "id": "fb:314",
+   "kind": "feedback",
+   "date": "2026-11-27",
+   "quote": "보통 공포마케팅이 조회수가 잘 나오는 것 같네요",
+   "label": "보통 공포마케팅이 조회수가 잘 나오는 것 같네요",
+   "fb_kind": "direction",
+   "fb_kind_label": "방향·기준 요청",
+   "project": "",
+   "about": "",
+   "note": "14 §4 경고형 각도: 이름 있는 사람이 실제로 한 경고를 제목 후보 하나로 (식스시그마 경고형 제목 2.24만 vs 1.15만, docs/73 §4)",
+   "pending": false,
+   "themes": [],
+   "scope": "trial",
+   "repo": "market",
+   "repo_label": "시장",
+   "intent": "intent:b1b23e8f",
+   "tier_key": "fb:b1b23e8f",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -73342,588 +73588,9 @@
     },
     {
      "project": "20261126-market-deep-dc-funding",
-     "scenes": 52,
-     "coverage": 0.79,
-     "fit": 0.46,
-     "rows": [
-      {
-       "s": 1,
-       "type": "bite",
-       "sit": "call-bite",
-       "fit": true,
-       "rec": [
-        "bite",
-        "quote"
-       ],
-       "say": "11월 18일, 아마존의 앤디 재시 CEO에게 이 막대한 설비투자의 근거를 물었습니다."
-      },
-      {
-       "s": 2,
-       "type": "bite",
-       "sit": null,
-       "fit": false,
-       "rec": [],
-       "say": ""
-      },
-      {
-       "s": 3,
-       "type": "bite",
-       "sit": "earnings",
-       "fit": false,
-       "rec": [
-        "bars",
-        "versus",
-        "bignum"
-       ],
-       "say": "3주 전 실적 발표에서는 더 짧게 말했습니다."
-      },
-      {
-       "s": 4,
-       "type": "bignum",
-       "sit": "metric",
-       "fit": true,
-       "rec": [
-        "bignum",
-        "chart",
-        "bars"
-       ],
-       "say": "결론은 분명합니다. 지금 써야 하고, 계속 쓰겠다. 그리고 그 돈을 댈 수 있다고 했습니다. 아마존은 올해 설비투자를 약 2,200억 달러로 잡고 있습니다."
-      },
-      {
-       "s": 5,
-       "type": "bite",
-       "sit": null,
-       "fit": false,
-       "rec": [],
-       "say": "그런데 채권시장을 오래 취재해 온 파이낸셜타임스의 로빈 위글스워스는, 같은 해를 전혀 다르게 봤습니다."
-      },
-      {
-       "s": 6,
-       "type": "bite",
-       "sit": null,
-       "fit": false,
-       "rec": [],
-       "say": ""
-      },
-      {
-       "s": 7,
-       "type": "versus",
-       "sit": "cause",
-       "fit": false,
-       "rec": [
-        "map_causal",
-        "analogy"
-       ],
-       "say": "두 결론을 겹쳐 보면 이 영상의 답이 나옵니다. 칩을 사는 돈은 멈추지 않겠지만, 늘어나는 몫은 이미 번 돈이 아니라 빌린 돈입니다."
-      },
-      {
-       "s": 8,
-       "type": "motionboard",
-       "sit": "cause",
-       "fit": false,
-       "rec": [
-        "map_causal",
-        "analogy"
-       ],
-       "say": "재시의 아마존처럼, SK하이닉스와 삼성전자의 메모리, 엔비디아의 칩을 사 주는 건 데이터센터를 짓는 몇몇 거대 기업입니다."
-      },
-      {
-       "s": 9,
-       "type": "chapter",
-       "sit": null,
-       "fit": false,
-       "rec": [],
-       "say": "먼저, 지금 써야 한다는 말이 장부에서는 어떻게 보이는지부터 보겠습니다."
-      },
-      {
-       "s": 10,
-       "type": "motionboard",
-       "sit": null,
-       "fit": false,
-       "rec": [],
-       "say": "회사의 지갑을 볼 때는 두 숫자를 나란히 놓으면 됩니다. 하나는 영업현금흐름, 물건과 서비스를 팔아 실제로 손에 들어온 현금입니다."
-      },
-      {
-       "s": 11,
-       "type": "bars",
-       "sit": "earnings",
-       "fit": true,
-       "rec": [
-        "bars",
-        "versus",
-        "bignum"
-       ],
-       "say": "아마존은 7월부터 9월까지 석 달 동안 424억 달러를 벌고, 773억 달러를 썼습니다. 한 분기에 348억 달러가 빈 겁니다."
-      },
-      {
-       "s": 12,
-       "type": "zoomshot",
-       "sit": "metric",
-       "fit": false,
-       "rec": [
-        "bignum",
-        "chart",
-        "bars"
-       ],
-       "say": "최근 1년으로 넓히면, 번 돈에서 쓴 돈을 뺀 잉여현금흐름이 마이너스 424억 달러입니다. 회사 보도자료에 그대로 적혀 있습니다."
-      },
-      {
-       "s": 13,
-       "type": "bignum",
-       "sit": "metric",
-       "fit": true,
-       "rec": [
-        "bignum",
-        "chart",
-        "bars"
-       ],
-       "say": "같은 기간 장기 빚은 작년 말 656억 달러에서 9월 말 1,731억 달러로, 2.6배가 됐습니다."
-      },
-      {
-       "s": 14,
-       "type": "compare",
-       "sit": null,
-       "fit": false,
-       "rec": [],
-       "say": "아마존만 그런 게 아닙니다. 같은 석 달, 알파벳은 423억을 벌고 514억을 썼습니다."
-      },
-      {
-       "s": 15,
-       "type": "bars",
-       "sit": "metric",
-       "fit": true,
-       "rec": [
-        "bignum",
-        "chart",
-        "bars"
-       ],
-       "say": "다섯 곳을 모두 더하면 번 돈의 116%를 썼습니다. 마이크로소프트를 빼면 136%입니다."
-      },
-      {
-       "s": 16,
-       "type": "chapter",
-       "sit": "question",
-       "fit": true,
-       "rec": [
-        "card_type",
-        "chapter"
-       ],
-       "say": "그럼 다섯 곳 가운데 유일하게 번 돈이 더 많은 마이크로소프트는 어떻게 짓고 있을까요."
-      },
-      {
-       "s": 17,
-       "type": "bite",
-       "sit": "call-bite",
-       "fit": true,
-       "rec": [
-        "bite",
-        "quote"
-       ],
-       "say": "돈을 어떻게 마련할 거냐는 질문에, 마이크로소프트의 재무책임자 에이미 후드는 이렇게 답했습니다."
-      },
-      {
-       "s": 18,
-       "type": "motionboard",
-       "sit": "explain",
-       "fit": true,
-       "rec": [
-        "motionboard",
-        "spread",
-        "share"
-       ],
-       "say": "리스는 쉽게 말해 빌려 쓰는 겁니다. 데이터센터를 직접 사는 대신, 다른 회사가 지은 건물을 오랜 기간 빌려 쓰기로 계약하는 거죠."
-      },
-      {
-       "s": 19,
-       "type": "bars",
-       "sit": "hub-event",
-       "fit": false,
-       "rec": [
-        "map_causal",
-        "kb",
-        "chart"
-       ],
-       "say": "연준은 11월 13일 금융안정보고서에서 이 약속의 크기를 처음 숫자로 적었습니다. 큰 기술 회사들이 아직 시작하지 않은 리스가 1조 달러를 넘고, 다른 회사의 빚"
-      },
-      {
-       "s": 20,
-       "type": "bignum",
-       "sit": "metric",
-       "fit": true,
-       "rec": [
-        "bignum",
-        "chart",
-        "bars"
-       ],
-       "say": "그리고 후드가 아직 쓰지 않았다고 한 채권시장. 다음 날인 10월 29일, 마이크로소프트가 250억 달러어치 회사채를 낸다는 보도가 나왔습니다. 가장 여유 있던 "
-      },
-      {
-       "s": 21,
-       "type": "chapter",
-       "sit": null,
-       "fit": false,
-       "rec": [],
-       "say": "빈 곳을 메우는 돈은 리스만이 아닙니다."
-      },
-      {
-       "s": 22,
-       "type": "zoomshot",
-       "sit": "media",
-       "fit": false,
-       "rec": [
-        "newspapers",
-        "quote"
-       ],
-       "say": "세 번째는 메타입니다. 10월 26일, 메타는 투자를 영업현금흐름, 투자등급 부채, 전략적 파트너십, 주식 자본의 균형 잡힌 조합으로 대겠다고 보도자료에 적었습니"
-      },
-      {
-       "s": 23,
-       "type": "checklist",
-       "sit": "metric",
-       "fit": false,
-       "rec": [
-        "bignum",
-        "chart",
-        "bars"
-       ],
-       "say": "실제로 메타는 이번에 보통주와 전환우선주로 약 350억 달러를 모으고, 내년 1분기부터는 의결권 없는 새 주식으로 약 600억 달러를 더 수시로 팔 계획이라고 밝"
-      },
-      {
-       "s": 24,
-       "type": "compare",
-       "sit": "explain-market",
-       "fit": false,
-       "rec": [
-        "motionboard",
-        "spread",
-        "share"
-       ],
-       "say": "자사주도 멈췄습니다. 자사주 매입은 회사가 남는 돈으로 자기 주식을 사서 주주에게 돌려주는 방법인데, 메타는 3분기에 한 주도 사지 않았습니다. 1년 전엔 33억"
-      },
-      {
-       "s": 25,
-       "type": "bars",
-       "sit": "metric",
-       "fit": true,
-       "rec": [
-        "bignum",
-        "chart",
-        "bars"
-       ],
-       "say": "대신 회사채로 287억 달러, 새 주식으로 124억 달러를 모았습니다. 현금과 증권을 2,650억 달러나 가진 회사가요."
-      },
-      {
-       "s": 26,
-       "type": "zoomshot",
-       "sit": "metric",
-       "fit": false,
-       "rec": [
-        "bignum",
-        "chart",
-        "bars"
-       ],
-       "say": "이게 모이면 숫자가 커집니다. 연준 보고서로는 AI 같은 첨단 컴퓨팅에 쓰려고 낸 빚이 올해 10월까지 6,800억 달러를 넘어, 2023년 한 해의 다섯 배쯤이"
-      },
-      {
-       "s": 27,
-       "type": "chapter",
-       "sit": null,
-       "fit": false,
-       "rec": [],
-       "say": "지금까지 나온 회사를 한 줄로 세워 보겠습니다."
-      },
-      {
-       "s": 28,
-       "type": "motionboard",
-       "sit": "explain-market",
-       "fit": true,
-       "rec": [
-        "motionboard",
-        "spread",
-        "share"
-       ],
-       "say": "세 층이 보입니다. 맨 위 마이크로소프트는 아직 번 돈이 쓴 돈보다 많습니다."
-      },
-      {
-       "s": 29,
-       "type": "bite",
-       "sit": "explain",
-       "fit": false,
-       "rec": [
-        "motionboard",
-        "spread",
-        "share"
-       ],
-       "say": "이 차이는 사는 쪽 대표도 알고 있습니다. 재시는 같은 인터뷰에서 이렇게 덧붙였습니다."
-      },
-      {
-       "s": 30,
-       "type": "bars",
-       "sit": "earnings",
-       "fit": true,
-       "rec": [
-        "bars",
-        "versus",
-        "bignum"
-       ],
-       "say": "맨 아래는 산수부터 다릅니다. 코어위브는 7월부터 9월까지 영업이익이 2억 700만 달러였는데, 같은 기간 이자로 8억 4,600만 달러를 냈습니다. 번 돈의 네"
-      },
-      {
-       "s": 31,
-       "type": "bignum",
-       "sit": "metric",
-       "fit": true,
-       "rec": [
-        "bignum",
-        "chart",
-        "bars"
-       ],
-       "say": "하나 가정해 보겠습니다. 이 회사 빚 약 470억 달러가 모두 금리에 따라 움직인다면, 금리가 1%포인트만 올라도 분기 이자가 1억 2천만 달러쯤 늘어납니다. 3"
-      },
-      {
-       "s": 32,
-       "type": "bite",
-       "sit": "said",
-       "fit": true,
-       "rec": [
-        "bite",
-        "footage",
-        "quote"
-       ],
-       "say": "채권시장은 이미 이 차이에 값을 매기고 있습니다. 코어위브 채권이 팔려 나가던 10월, 핌코의 시장 전략가 토니 크레센치는 이렇게 말했습니다."
-      },
-      {
-       "s": 33,
-       "type": "checklist",
-       "sit": "metric",
-       "fit": false,
-       "rec": [
-        "bignum",
-        "chart",
-        "bars"
-       ],
-       "say": "오라클은 한 칸 위입니다. 6월부터 8월까지 이자가 14억 달러로 영업이익 67억의 5분의 1쯤."
-      },
-      {
-       "s": 34,
-       "type": "chapter",
-       "sit": "hub-event",
-       "fit": true,
-       "rec": [
-        "map_causal",
-        "kb",
-        "chart"
-       ],
-       "say": "위글스워스가 말한 빚 금융이 된 해를, 미국 연준도 숫자로 짚었습니다. 연준 쪽은 터진다고 말하지 않았습니다. 그들이 문제 삼는 고리는 따로 있습니다."
-      },
-      {
-       "s": 35,
-       "type": "zoomshot",
-       "sit": "cause",
-       "fit": false,
-       "rec": [
-        "map_causal",
-        "analogy"
-       ],
-       "say": "같은 달, 미국 세인트루이스 연방준비은행의 이코노미스트 세 사람도 같은 장부를 숫자로 읽었습니다."
-      },
-      {
-       "s": 36,
-       "type": "compare",
-       "sit": "hub-event",
-       "fit": false,
-       "rec": [
-        "map_causal",
-        "kb",
-        "chart"
-       ],
-       "say": "첫째, 세인트루이스 연준 이코노미스트들이 짚은 건 돈의 출처가 바뀌었다는 점입니다. 데이터센터를 짓는 회사들이 분기마다 새로 끌어오는 순부채가, 2012년부터 2"
-      },
-      {
-       "s": 37,
-       "type": "zoomshot",
-       "sit": "hub-event",
-       "fit": false,
-       "rec": [
-        "map_causal",
-        "kb",
-        "chart"
-       ],
-       "say": "둘째, 연준 금융안정보고서는 25년 전과 같은 그림을 그렸습니다. 1995년부터의 통신망 투자 붐과 2020년부터의 하이퍼스케일러 다섯 곳의 누적 설비투자를 경제"
-      },
-      {
-       "s": 38,
-       "type": "bars",
-       "sit": "metric",
-       "fit": true,
-       "rec": [
-        "bignum",
-        "chart",
-        "bars"
-       ],
-       "say": "빌려주는 쪽도 표정이 바뀌고 있습니다. 로이터가 11월 9일 전한 뱅크오브아메리카 분석으로는, 빅테크 10년 만기 회사채의 가산금리, 그러니까 국채보다 더 얹어 "
-      },
-      {
-       "s": 39,
-       "type": "zoomshot",
-       "sit": "metric",
-       "fit": false,
-       "rec": [
-        "bignum",
-        "chart",
-        "bars"
-       ],
-       "say": "같은 기사에서 로펌 롭스앤그레이의 금융 파트너 크리스 포기는 채권 투자자들의 장부가 꽉 찼다고 했습니다."
-      },
-      {
-       "s": 40,
-       "type": "versus",
-       "sit": "compare",
-       "fit": true,
-       "rec": [
-        "versus",
-        "bars",
-        "compare"
-       ],
-       "say": "반대 시각도 같은 무게로 들어야 합니다. 모건스탠리 전략가 페르난다 리마는 11월 10일 고객 노트에서, 우량 빅테크 채권은 위험 대비 보상이 올해 들어 가장 좋"
-      },
-      {
-       "s": 41,
-       "type": "chapter",
-       "sit": "media",
-       "fit": true,
-       "rec": [
-        "newspapers",
-        "quote"
-       ],
-       "say": "이 소식을 국내 매체는 주로 한국 반도체에 미칠 영향으로, 해외 매체는 누가 이 빚을 빌려주나로 보도했습니다. 두 쪽을 이으면, 돈이 어디로 흘렀는지가 보입니다."
-      },
-      {
-       "s": 42,
-       "type": "motionboard",
-       "sit": null,
-       "fit": false,
-       "rec": [],
-       "say": "사는 쪽이 빌린 돈의 상당 부분은 칩값으로 나가,"
-      },
-      {
-       "s": 43,
-       "type": "zoomshot",
-       "sit": "metric",
-       "fit": false,
-       "rec": [
-        "bignum",
-        "chart",
-        "bars"
-       ],
-       "say": "국내 보도 원문으로 보면, SK하이닉스는 9월 말 빚을 빼고도 98조 원이 넘는 순현금을 쥐고 있습니다."
-      },
-      {
-       "s": 44,
-       "type": "checklist",
-       "sit": "earnings",
-       "fit": false,
-       "rec": [
-        "bars",
-        "versus",
-        "bignum"
-       ],
-       "say": "SK하이닉스는 10월 말 실적 발표에서 고객 14곳과 장기계약을 맺어 2027년과 2028년 생산능력의 절반 이상을 채웠다고 밝힌 것으로 보도됐습니다. 그래서 흔"
-      },
-      {
-       "s": 45,
-       "type": "zoomshot",
-       "sit": "metric",
-       "fit": false,
-       "rec": [
-        "bignum",
-        "chart",
-        "bars"
-       ],
-       "say": "같은 기사에서 한국신용평가는 2025년부터 2028년까지 AI 설비투자 약 2조 9천억 달러 가운데 절반가량이 외부 자금으로 채워질 걸로 보고, 고객의 신용이 나"
-      },
-      {
-       "s": 46,
-       "type": "zoomshot",
-       "sit": "earnings",
-       "fit": false,
-       "rec": [
-        "bars",
-        "versus",
-        "bignum"
-       ],
-       "say": "키움증권 박유악 연구원은 SK하이닉스와 삼성전자의 분기 실적이 2027년 2분기에 정점을 찍고, D램이 그해 하반기 다시 공급 과잉에 들어갈 걸로 보고 목표주가를"
-      },
-      {
-       "s": 47,
-       "type": "versus",
-       "sit": null,
-       "fit": false,
-       "rec": [],
-       "say": "한 사람은 사는 쪽의 돈을, 다른 사람은 파는 쪽의 사이클을 보고 있습니다. 이 영상의 세 층으로 옮기면, 위층의 주문은 쉽게 꺾이지 않겠지만, 늘어나는 주문의 "
-      },
-      {
-       "s": 48,
-       "type": "chapter",
-       "sit": null,
-       "fit": false,
-       "rec": [],
-       "say": "이 해석이 틀릴 수 있는 경우도 셋 있습니다."
-      },
-      {
-       "s": 49,
-       "type": "checklist",
-       "sit": "metric",
-       "fit": false,
-       "rec": [
-        "bignum",
-        "chart",
-        "bars"
-       ],
-       "say": "첫째, AI 매출이 빨리 현금이 되는 경우. 아마존 클라우드 매출은 3분기에 39% 늘었고, 마이크로소프트가 앞으로 받기로 한 계약은 6,770억 달러로 73% "
-      },
-      {
-       "s": 50,
-       "type": "chapter",
-       "sit": "cause",
-       "fit": true,
-       "rec": [
-        "map_causal",
-        "analogy"
-       ],
-       "say": "그래서 다음에 볼 숫자는 셋입니다."
-      },
-      {
-       "s": 51,
-       "type": "checklist",
-       "sit": "earnings",
-       "fit": false,
-       "rec": [
-        "bars",
-        "versus",
-        "bignum"
-       ],
-       "say": "하나, 내년 1월 말부터 나오는 빅테크 4분기 실적. 다섯 곳이 번 돈의 116%를 쓴 3분기에서 이 비율이 100% 아래로 돌아오는지, 알파벳과 메타가 자사주를"
-      },
-      {
-       "s": 52,
-       "type": "outro",
-       "sit": "earnings",
-       "fit": false,
-       "rec": [
-        "bars",
-        "versus",
-        "bignum"
-       ],
-       "say": "재시는 25년에 나눠 쓸 수 있다면 편하겠지만, 그건 우리가 사는 세상이 아니라고 했습니다."
-      }
-     ]
-    },
-    {
-     "project": "20261126-market-deep-dc-funding-sample",
-     "scenes": 10,
-     "coverage": 0.8,
-     "fit": 0.12,
+     "scenes": 46,
+     "coverage": 0.83,
+     "fit": 0.47,
      "rows": [
       {
        "s": 1,
@@ -73938,30 +73605,30 @@
       },
       {
        "s": 2,
-       "type": "kb",
+       "type": "bite",
        "sit": "call-bite",
-       "fit": false,
+       "fit": true,
        "rec": [
         "bite",
         "quote"
        ],
-       "say": "이 질문에, 가장 돈을 많이 쓰는 회사의 대표가 답한 적이 있습니다. 10월 29일 아마존 실적 발표 콜에서 앤디 재시 CEO는 스스로 이렇게 물었습니다. 이런 "
+       "say": "이 질문에, 가장 돈을 많이 쓰는 회사의 대표가 직접 답했습니다."
       },
       {
        "s": 3,
-       "type": "quote",
+       "type": "bignum",
        "sit": "metric",
-       "fit": false,
+       "fit": true,
        "rec": [
         "bignum",
         "chart",
         "bars"
        ],
-       "say": "그리고 답했습니다. 그럴지도 모릅니다. 하지만 그건 우리가 사는 세상이 아니고, 이 기회도 그렇지 않습니다."
+       "say": "결론은 분명합니다. 지금 써야 하고, 계속 쓰겠다. 그리고 그 돈을 댈 수 있다고 했습니다. 아마존은 올해 설비투자를 약 2,200억 달러로 잡고 있습니다."
       },
       {
        "s": 4,
-       "type": "quote",
+       "type": "zoomshot",
        "sit": "cause",
        "fit": false,
        "rec": [
@@ -73983,45 +73650,319 @@
       },
       {
        "s": 6,
-       "type": "kb",
+       "type": "chapter",
        "sit": null,
        "fit": false,
        "rec": [],
-       "say": "두 번째 목소리는 마이크로소프트의 재무를 책임지는 에이미 후드 최고재무책임자입니다."
+       "say": "먼저, 지금 써야 한다는 말이 장부에서는 어떻게 보이는지부터 보겠습니다."
       },
       {
        "s": 7,
-       "type": "quote",
-       "sit": "earnings",
+       "type": "motionboard",
+       "sit": null,
        "fit": false,
+       "rec": [],
+       "say": "회사의 지갑을 볼 때는 두 숫자를 나란히 놓으면 됩니다. 하나는 영업현금흐름, 물건과 서비스를 팔아 실제로 손에 들어온 현금입니다."
+      },
+      {
+       "s": 8,
+       "type": "bars",
+       "sit": "earnings",
+       "fit": true,
        "rec": [
         "bars",
         "versus",
         "bignum"
        ],
-       "say": "10월 28일 실적 콜에서 후드는 이렇게 말했다고 CNBC가 전했습니다. 리스라는 형태의 금융이 있고, 우리는 그걸 수단으로 써 왔다."
+       "say": "아마존은 7월부터 9월까지 석 달 동안 424억 달러를 벌고, 773억 달러를 썼습니다. 한 분기에 348억 달러가 빈 겁니다."
       },
       {
-       "s": 8,
-       "type": "kb",
+       "s": 9,
+       "type": "zoomshot",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "최근 1년으로 넓히면, 번 돈에서 쓴 돈을 뺀 잉여현금흐름이 마이너스 424억 달러입니다. 회사 보도자료에 그대로 적혀 있습니다."
+      },
+      {
+       "s": 10,
+       "type": "bignum",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "같은 기간 장기 빚은 작년 말 656억 달러에서 9월 말 1,731억 달러로, 2.6배가 됐습니다."
+      },
+      {
+       "s": 11,
+       "type": "compare",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "아마존만 그런 게 아닙니다. 같은 석 달, 알파벳은 423억을 벌고 514억을 썼습니다."
+      },
+      {
+       "s": 12,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "다섯 곳을 모두 더하면 번 돈의 116%를 썼습니다. 마이크로소프트를 빼면 136%입니다."
+      },
+      {
+       "s": 13,
+       "type": "chapter",
+       "sit": "question",
+       "fit": true,
+       "rec": [
+        "card_type",
+        "chapter"
+       ],
+       "say": "그럼 다섯 곳 가운데 유일하게 번 돈이 더 많은 마이크로소프트는 어떻게 짓고 있을까요."
+      },
+      {
+       "s": 14,
+       "type": "bite",
+       "sit": "call-bite",
+       "fit": true,
+       "rec": [
+        "bite",
+        "quote"
+       ],
+       "say": "돈을 어떻게 마련할 거냐는 질문에, 마이크로소프트의 재무책임자 에이미 후드는 이렇게 답했습니다."
+      },
+      {
+       "s": 15,
+       "type": "motionboard",
+       "sit": "explain",
+       "fit": true,
+       "rec": [
+        "motionboard",
+        "spread",
+        "share"
+       ],
+       "say": "리스는 쉽게 말해 빌려 쓰는 겁니다. 데이터센터를 직접 사는 대신, 다른 회사가 지은 건물을 오랜 기간 빌려 쓰기로 계약하는 거죠."
+      },
+      {
+       "s": 16,
+       "type": "bars",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "연준은 11월 13일 금융안정보고서에서 이 약속의 크기를 처음 숫자로 적었습니다. 큰 기술 회사들이 아직 시작하지 않은 리스가 1조 달러를 넘고, 다른 회사의 빚"
+      },
+      {
+       "s": 17,
+       "type": "bignum",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "그리고 후드가 아직 쓰지 않았다고 한 채권시장. 다음 날인 10월 29일, 마이크로소프트가 250억 달러어치 회사채를 낸다는 보도가 나왔습니다. 가장 여유 있던 "
+      },
+      {
+       "s": 18,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "빈 곳을 메우는 돈은 리스만이 아닙니다."
+      },
+      {
+       "s": 19,
+       "type": "zoomshot",
        "sit": "media",
        "fit": false,
        "rec": [
         "newspapers",
         "quote"
        ],
-       "say": "세 번째 목소리는 메타입니다. 메타는 아예 보도자료에 자금 계획을 적었습니다."
+       "say": "세 번째는 메타입니다. 10월 26일, 메타는 투자를 영업현금흐름, 투자등급 부채, 전략적 파트너십, 주식 자본의 균형 잡힌 조합으로 대겠다고 보도자료에 적었습니"
       },
       {
-       "s": 9,
-       "type": "quote",
+       "s": 20,
+       "type": "checklist",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "실제로 메타는 이번에 보통주와 전환우선주로 약 350억 달러를 모으고, 내년 1분기부터는 의결권 없는 새 주식으로 약 600억 달러를 더 수시로 팔 계획이라고 밝"
+      },
+      {
+       "s": 21,
+       "type": "compare",
+       "sit": "explain-market",
+       "fit": false,
+       "rec": [
+        "motionboard",
+        "spread",
+        "share"
+       ],
+       "say": "자사주도 멈췄습니다. 자사주 매입은 회사가 남는 돈으로 자기 주식을 사서 주주에게 돌려주는 방법인데, 메타는 3분기에 한 주도 사지 않았습니다. 1년 전엔 33억"
+      },
+      {
+       "s": 22,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "대신 회사채로 287억 달러, 새 주식으로 124억 달러를 모았습니다. 현금과 증권을 2,650억 달러나 가진 회사가요."
+      },
+      {
+       "s": 23,
+       "type": "zoomshot",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "이게 모이면 숫자가 커집니다. 연준 보고서로는 AI 같은 첨단 컴퓨팅에 쓰려고 낸 빚이 올해 10월까지 6,800억 달러를 넘어, 2023년 한 해의 다섯 배쯤이"
+      },
+      {
+       "s": 24,
+       "type": "chapter",
        "sit": null,
        "fit": false,
        "rec": [],
-       "say": "10월 26일, 메타는 투자를 영업현금흐름, 투자등급 부채, 전략적 파트너십, 주식 자본의 균형 잡힌 조합으로 대겠다고 적었습니다."
+       "say": "지금까지 나온 회사를 한 줄로 세워 보겠습니다."
       },
       {
-       "s": 10,
+       "s": 25,
+       "type": "motionboard",
+       "sit": "explain-market",
+       "fit": true,
+       "rec": [
+        "motionboard",
+        "spread",
+        "share"
+       ],
+       "say": "세 층이 보입니다. 맨 위 마이크로소프트는 아직 번 돈이 쓴 돈보다 많습니다."
+      },
+      {
+       "s": 26,
+       "type": "bars",
+       "sit": "earnings",
+       "fit": true,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "맨 아래는 산수부터 다릅니다. 코어위브는 7월부터 9월까지 영업이익이 2억 700만 달러였는데, 같은 기간 이자로 8억 4,600만 달러를 냈습니다. 번 돈의 네"
+      },
+      {
+       "s": 27,
+       "type": "bignum",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "하나 가정해 보겠습니다. 이 회사 빚 약 470억 달러가 모두 금리에 따라 움직인다면, 금리가 1%포인트만 올라도 분기 이자가 1억 2천만 달러쯤 늘어납니다. 3"
+      },
+      {
+       "s": 28,
+       "type": "checklist",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "오라클은 한 칸 위입니다. 6월부터 8월까지 이자가 14억 달러로 영업이익 67억의 5분의 1쯤."
+      },
+      {
+       "s": 29,
+       "type": "chapter",
+       "sit": "hub-event",
+       "fit": true,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "이제 처음의 두 번째 목소리로 돌아가 보겠습니다. 연준 쪽은 터진다고 말하지 않았습니다. 그들이 문제 삼는 고리는 따로 있습니다."
+      },
+      {
+       "s": 30,
+       "type": "compare",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "첫째, 세인트루이스 연준 이코노미스트들이 짚은 건 돈의 출처가 바뀌었다는 점입니다. 데이터센터를 짓는 회사들이 분기마다 새로 끌어오는 순부채가, 2012년부터 2"
+      },
+      {
+       "s": 31,
+       "type": "zoomshot",
+       "sit": "hub-event",
+       "fit": false,
+       "rec": [
+        "map_causal",
+        "kb",
+        "chart"
+       ],
+       "say": "둘째, 연준 금융안정보고서는 25년 전과 같은 그림을 그렸습니다. 1995년부터의 통신망 투자 붐과 2020년부터의 하이퍼스케일러 다섯 곳의 누적 설비투자를 경제"
+      },
+      {
+       "s": 32,
+       "type": "bars",
+       "sit": "metric",
+       "fit": true,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "빌려주는 쪽도 표정이 바뀌고 있습니다. 로이터가 11월 9일 전한 뱅크오브아메리카 분석으로는, 빅테크 10년 만기 회사채의 가산금리, 그러니까 국채보다 더 얹어 "
+      },
+      {
+       "s": 33,
+       "type": "zoomshot",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "같은 기사에서 로펌 롭스앤그레이의 금융 파트너 크리스 포기는 채권 투자자들의 장부가 꽉 찼다고 했습니다."
+      },
+      {
+       "s": 34,
        "type": "versus",
        "sit": "compare",
        "fit": true,
@@ -74030,7 +73971,137 @@
         "bars",
         "compare"
        ],
-       "say": "같은 기사에서 로펌 롭스앤그레이의 금융 파트너 크리스 포기는 채권 투자자들의 장부가 꽉 찼다고 했습니다."
+       "say": "반대 시각도 같은 무게로 들어야 합니다. 모건스탠리 전략가 페르난다 리마는 11월 10일 고객 노트에서, 우량 빅테크 채권은 위험 대비 보상이 올해 들어 가장 좋"
+      },
+      {
+       "s": 35,
+       "type": "chapter",
+       "sit": "media",
+       "fit": true,
+       "rec": [
+        "newspapers",
+        "quote"
+       ],
+       "say": "이 소식을 국내 매체는 주로 한국 반도체에 미칠 영향으로, 해외 매체는 누가 이 빚을 빌려주나로 보도했습니다. 두 쪽을 이으면, 돈이 어디로 흘렀는지가 보입니다."
+      },
+      {
+       "s": 36,
+       "type": "motionboard",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "사는 쪽이 빌린 돈의 상당 부분은 칩값으로 나가,"
+      },
+      {
+       "s": 37,
+       "type": "zoomshot",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "국내 보도 원문으로 보면, SK하이닉스는 9월 말 빚을 빼고도 98조 원이 넘는 순현금을 쥐고 있습니다."
+      },
+      {
+       "s": 38,
+       "type": "checklist",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "SK하이닉스는 10월 말 실적 발표에서 고객 14곳과 장기계약을 맺어 2027년과 2028년 생산능력의 절반 이상을 채웠다고 밝힌 것으로 보도됐습니다. 그래서 흔"
+      },
+      {
+       "s": 39,
+       "type": "zoomshot",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "같은 기사에서 한국신용평가는 2025년부터 2028년까지 AI 설비투자 약 2조 9천억 달러 가운데 절반가량이 외부 자금으로 채워질 걸로 보고, 고객의 신용이 나"
+      },
+      {
+       "s": 40,
+       "type": "zoomshot",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "키움증권 박유악 연구원은 SK하이닉스와 삼성전자의 분기 실적이 2027년 2분기에 정점을 찍고, D램이 그해 하반기 다시 공급 과잉에 들어갈 걸로 보고 목표주가를"
+      },
+      {
+       "s": 41,
+       "type": "versus",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "한 사람은 사는 쪽의 돈을, 다른 사람은 파는 쪽의 사이클을 보고 있습니다. 이 영상의 세 층으로 옮기면, 위층의 주문은 쉽게 꺾이지 않겠지만, 늘어나는 주문의 "
+      },
+      {
+       "s": 42,
+       "type": "chapter",
+       "sit": null,
+       "fit": false,
+       "rec": [],
+       "say": "이 해석이 틀릴 수 있는 경우도 셋 있습니다."
+      },
+      {
+       "s": 43,
+       "type": "checklist",
+       "sit": "metric",
+       "fit": false,
+       "rec": [
+        "bignum",
+        "chart",
+        "bars"
+       ],
+       "say": "첫째, AI 매출이 빨리 현금이 되는 경우. 아마존 클라우드 매출은 3분기에 39% 늘었고, 마이크로소프트가 앞으로 받기로 한 계약은 6,770억 달러로 73% "
+      },
+      {
+       "s": 44,
+       "type": "chapter",
+       "sit": "cause",
+       "fit": true,
+       "rec": [
+        "map_causal",
+        "analogy"
+       ],
+       "say": "그래서 다음에 볼 숫자는 셋입니다."
+      },
+      {
+       "s": 45,
+       "type": "checklist",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "하나, 내년 1월 말부터 나오는 빅테크 4분기 실적. 다섯 곳이 번 돈의 116%를 쓴 3분기에서 이 비율이 100% 아래로 돌아오는지, 알파벳과 메타가 자사주를"
+      },
+      {
+       "s": 46,
+       "type": "outro",
+       "sit": "earnings",
+       "fit": false,
+       "rec": [
+        "bars",
+        "versus",
+        "bignum"
+       ],
+       "say": "재시는 25년에 나눠 쓸 수 있다면 편하겠지만, 그건 우리가 사는 세상이 아니라고 했습니다."
       }
      ]
     },
@@ -74583,8 +74654,8 @@
     "답했",
     "라고 했"
    ],
-   "count": 37,
-   "fit": 30,
+   "count": 36,
+   "fit": 29,
    "examples": [
     {
      "project": "20261106-hybrid-데이터센터",
@@ -74637,7 +74708,7 @@
     "파급",
     "결과"
    ],
-   "count": 26,
+   "count": 23,
    "fit": 6,
    "examples": [
     {
@@ -74748,7 +74819,7 @@
     "하락",
     "급등"
    ],
-   "count": 289,
+   "count": 288,
    "fit": 129,
    "examples": [
     {
@@ -74802,8 +74873,8 @@
     "와 달리",
     "에 비해"
    ],
-   "count": 11,
-   "fit": 3,
+   "count": 10,
+   "fit": 2,
    "examples": [
     {
      "project": "20261114-market-weekly",
@@ -74948,7 +75019,7 @@
     "헤드라인",
     "로이터"
    ],
-   "count": 20,
+   "count": 19,
    "fit": 9,
    "examples": [
     {
@@ -75197,7 +75268,7 @@
     "이라는 뜻",
     "작동"
    ],
-   "count": 13,
+   "count": 12,
    "fit": 3,
    "examples": [
     {
@@ -75417,7 +75488,7 @@
     "분기",
     "EPS"
    ],
-   "count": 123,
+   "count": 121,
    "fit": 37,
    "examples": [
     {
@@ -75470,7 +75541,7 @@
     "CEO",
     "CFO"
    ],
-   "count": 32,
+   "count": 31,
    "fit": 21,
    "examples": [
     {
@@ -85578,592 +85649,9 @@
    "topic": "market",
    "label": "20261126-market-deep-dc-funding",
    "project": "20261126-market-deep-dc-funding",
-   "scenes": 52,
-   "coverage": 0.79,
-   "fit": 0.46,
-   "rows": [
-    {
-     "s": 1,
-     "type": "bite",
-     "sit": "call-bite",
-     "fit": true,
-     "rec": [
-      "bite",
-      "quote"
-     ],
-     "say": "11월 18일, 아마존의 앤디 재시 CEO에게 이 막대한 설비투자의 근거를 물었습니다."
-    },
-    {
-     "s": 2,
-     "type": "bite",
-     "sit": null,
-     "fit": false,
-     "rec": [],
-     "say": ""
-    },
-    {
-     "s": 3,
-     "type": "bite",
-     "sit": "earnings",
-     "fit": false,
-     "rec": [
-      "bars",
-      "versus",
-      "bignum"
-     ],
-     "say": "3주 전 실적 발표에서는 더 짧게 말했습니다."
-    },
-    {
-     "s": 4,
-     "type": "bignum",
-     "sit": "metric",
-     "fit": true,
-     "rec": [
-      "bignum",
-      "chart",
-      "bars"
-     ],
-     "say": "결론은 분명합니다. 지금 써야 하고, 계속 쓰겠다. 그리고 그 돈을 댈 수 있다고 했습니다. 아마존은 올해 설비투자를 약 2,200억 달러로 잡고 있습니다."
-    },
-    {
-     "s": 5,
-     "type": "bite",
-     "sit": null,
-     "fit": false,
-     "rec": [],
-     "say": "그런데 채권시장을 오래 취재해 온 파이낸셜타임스의 로빈 위글스워스는, 같은 해를 전혀 다르게 봤습니다."
-    },
-    {
-     "s": 6,
-     "type": "bite",
-     "sit": null,
-     "fit": false,
-     "rec": [],
-     "say": ""
-    },
-    {
-     "s": 7,
-     "type": "versus",
-     "sit": "cause",
-     "fit": false,
-     "rec": [
-      "map_causal",
-      "analogy"
-     ],
-     "say": "두 결론을 겹쳐 보면 이 영상의 답이 나옵니다. 칩을 사는 돈은 멈추지 않겠지만, 늘어나는 몫은 이미 번 돈이 아니라 빌린 돈입니다."
-    },
-    {
-     "s": 8,
-     "type": "motionboard",
-     "sit": "cause",
-     "fit": false,
-     "rec": [
-      "map_causal",
-      "analogy"
-     ],
-     "say": "재시의 아마존처럼, SK하이닉스와 삼성전자의 메모리, 엔비디아의 칩을 사 주는 건 데이터센터를 짓는 몇몇 거대 기업입니다."
-    },
-    {
-     "s": 9,
-     "type": "chapter",
-     "sit": null,
-     "fit": false,
-     "rec": [],
-     "say": "먼저, 지금 써야 한다는 말이 장부에서는 어떻게 보이는지부터 보겠습니다."
-    },
-    {
-     "s": 10,
-     "type": "motionboard",
-     "sit": null,
-     "fit": false,
-     "rec": [],
-     "say": "회사의 지갑을 볼 때는 두 숫자를 나란히 놓으면 됩니다. 하나는 영업현금흐름, 물건과 서비스를 팔아 실제로 손에 들어온 현금입니다."
-    },
-    {
-     "s": 11,
-     "type": "bars",
-     "sit": "earnings",
-     "fit": true,
-     "rec": [
-      "bars",
-      "versus",
-      "bignum"
-     ],
-     "say": "아마존은 7월부터 9월까지 석 달 동안 424억 달러를 벌고, 773억 달러를 썼습니다. 한 분기에 348억 달러가 빈 겁니다."
-    },
-    {
-     "s": 12,
-     "type": "zoomshot",
-     "sit": "metric",
-     "fit": false,
-     "rec": [
-      "bignum",
-      "chart",
-      "bars"
-     ],
-     "say": "최근 1년으로 넓히면, 번 돈에서 쓴 돈을 뺀 잉여현금흐름이 마이너스 424억 달러입니다. 회사 보도자료에 그대로 적혀 있습니다."
-    },
-    {
-     "s": 13,
-     "type": "bignum",
-     "sit": "metric",
-     "fit": true,
-     "rec": [
-      "bignum",
-      "chart",
-      "bars"
-     ],
-     "say": "같은 기간 장기 빚은 작년 말 656억 달러에서 9월 말 1,731억 달러로, 2.6배가 됐습니다."
-    },
-    {
-     "s": 14,
-     "type": "compare",
-     "sit": null,
-     "fit": false,
-     "rec": [],
-     "say": "아마존만 그런 게 아닙니다. 같은 석 달, 알파벳은 423억을 벌고 514억을 썼습니다."
-    },
-    {
-     "s": 15,
-     "type": "bars",
-     "sit": "metric",
-     "fit": true,
-     "rec": [
-      "bignum",
-      "chart",
-      "bars"
-     ],
-     "say": "다섯 곳을 모두 더하면 번 돈의 116%를 썼습니다. 마이크로소프트를 빼면 136%입니다."
-    },
-    {
-     "s": 16,
-     "type": "chapter",
-     "sit": "question",
-     "fit": true,
-     "rec": [
-      "card_type",
-      "chapter"
-     ],
-     "say": "그럼 다섯 곳 가운데 유일하게 번 돈이 더 많은 마이크로소프트는 어떻게 짓고 있을까요."
-    },
-    {
-     "s": 17,
-     "type": "bite",
-     "sit": "call-bite",
-     "fit": true,
-     "rec": [
-      "bite",
-      "quote"
-     ],
-     "say": "돈을 어떻게 마련할 거냐는 질문에, 마이크로소프트의 재무책임자 에이미 후드는 이렇게 답했습니다."
-    },
-    {
-     "s": 18,
-     "type": "motionboard",
-     "sit": "explain",
-     "fit": true,
-     "rec": [
-      "motionboard",
-      "spread",
-      "share"
-     ],
-     "say": "리스는 쉽게 말해 빌려 쓰는 겁니다. 데이터센터를 직접 사는 대신, 다른 회사가 지은 건물을 오랜 기간 빌려 쓰기로 계약하는 거죠."
-    },
-    {
-     "s": 19,
-     "type": "bars",
-     "sit": "hub-event",
-     "fit": false,
-     "rec": [
-      "map_causal",
-      "kb",
-      "chart"
-     ],
-     "say": "연준은 11월 13일 금융안정보고서에서 이 약속의 크기를 처음 숫자로 적었습니다. 큰 기술 회사들이 아직 시작하지 않은 리스가 1조 달러를 넘고, 다른 회사의 빚"
-    },
-    {
-     "s": 20,
-     "type": "bignum",
-     "sit": "metric",
-     "fit": true,
-     "rec": [
-      "bignum",
-      "chart",
-      "bars"
-     ],
-     "say": "그리고 후드가 아직 쓰지 않았다고 한 채권시장. 다음 날인 10월 29일, 마이크로소프트가 250억 달러어치 회사채를 낸다는 보도가 나왔습니다. 가장 여유 있던 "
-    },
-    {
-     "s": 21,
-     "type": "chapter",
-     "sit": null,
-     "fit": false,
-     "rec": [],
-     "say": "빈 곳을 메우는 돈은 리스만이 아닙니다."
-    },
-    {
-     "s": 22,
-     "type": "zoomshot",
-     "sit": "media",
-     "fit": false,
-     "rec": [
-      "newspapers",
-      "quote"
-     ],
-     "say": "세 번째는 메타입니다. 10월 26일, 메타는 투자를 영업현금흐름, 투자등급 부채, 전략적 파트너십, 주식 자본의 균형 잡힌 조합으로 대겠다고 보도자료에 적었습니"
-    },
-    {
-     "s": 23,
-     "type": "checklist",
-     "sit": "metric",
-     "fit": false,
-     "rec": [
-      "bignum",
-      "chart",
-      "bars"
-     ],
-     "say": "실제로 메타는 이번에 보통주와 전환우선주로 약 350억 달러를 모으고, 내년 1분기부터는 의결권 없는 새 주식으로 약 600억 달러를 더 수시로 팔 계획이라고 밝"
-    },
-    {
-     "s": 24,
-     "type": "compare",
-     "sit": "explain-market",
-     "fit": false,
-     "rec": [
-      "motionboard",
-      "spread",
-      "share"
-     ],
-     "say": "자사주도 멈췄습니다. 자사주 매입은 회사가 남는 돈으로 자기 주식을 사서 주주에게 돌려주는 방법인데, 메타는 3분기에 한 주도 사지 않았습니다. 1년 전엔 33억"
-    },
-    {
-     "s": 25,
-     "type": "bars",
-     "sit": "metric",
-     "fit": true,
-     "rec": [
-      "bignum",
-      "chart",
-      "bars"
-     ],
-     "say": "대신 회사채로 287억 달러, 새 주식으로 124억 달러를 모았습니다. 현금과 증권을 2,650억 달러나 가진 회사가요."
-    },
-    {
-     "s": 26,
-     "type": "zoomshot",
-     "sit": "metric",
-     "fit": false,
-     "rec": [
-      "bignum",
-      "chart",
-      "bars"
-     ],
-     "say": "이게 모이면 숫자가 커집니다. 연준 보고서로는 AI 같은 첨단 컴퓨팅에 쓰려고 낸 빚이 올해 10월까지 6,800억 달러를 넘어, 2023년 한 해의 다섯 배쯤이"
-    },
-    {
-     "s": 27,
-     "type": "chapter",
-     "sit": null,
-     "fit": false,
-     "rec": [],
-     "say": "지금까지 나온 회사를 한 줄로 세워 보겠습니다."
-    },
-    {
-     "s": 28,
-     "type": "motionboard",
-     "sit": "explain-market",
-     "fit": true,
-     "rec": [
-      "motionboard",
-      "spread",
-      "share"
-     ],
-     "say": "세 층이 보입니다. 맨 위 마이크로소프트는 아직 번 돈이 쓴 돈보다 많습니다."
-    },
-    {
-     "s": 29,
-     "type": "bite",
-     "sit": "explain",
-     "fit": false,
-     "rec": [
-      "motionboard",
-      "spread",
-      "share"
-     ],
-     "say": "이 차이는 사는 쪽 대표도 알고 있습니다. 재시는 같은 인터뷰에서 이렇게 덧붙였습니다."
-    },
-    {
-     "s": 30,
-     "type": "bars",
-     "sit": "earnings",
-     "fit": true,
-     "rec": [
-      "bars",
-      "versus",
-      "bignum"
-     ],
-     "say": "맨 아래는 산수부터 다릅니다. 코어위브는 7월부터 9월까지 영업이익이 2억 700만 달러였는데, 같은 기간 이자로 8억 4,600만 달러를 냈습니다. 번 돈의 네"
-    },
-    {
-     "s": 31,
-     "type": "bignum",
-     "sit": "metric",
-     "fit": true,
-     "rec": [
-      "bignum",
-      "chart",
-      "bars"
-     ],
-     "say": "하나 가정해 보겠습니다. 이 회사 빚 약 470억 달러가 모두 금리에 따라 움직인다면, 금리가 1%포인트만 올라도 분기 이자가 1억 2천만 달러쯤 늘어납니다. 3"
-    },
-    {
-     "s": 32,
-     "type": "bite",
-     "sit": "said",
-     "fit": true,
-     "rec": [
-      "bite",
-      "footage",
-      "quote"
-     ],
-     "say": "채권시장은 이미 이 차이에 값을 매기고 있습니다. 코어위브 채권이 팔려 나가던 10월, 핌코의 시장 전략가 토니 크레센치는 이렇게 말했습니다."
-    },
-    {
-     "s": 33,
-     "type": "checklist",
-     "sit": "metric",
-     "fit": false,
-     "rec": [
-      "bignum",
-      "chart",
-      "bars"
-     ],
-     "say": "오라클은 한 칸 위입니다. 6월부터 8월까지 이자가 14억 달러로 영업이익 67억의 5분의 1쯤."
-    },
-    {
-     "s": 34,
-     "type": "chapter",
-     "sit": "hub-event",
-     "fit": true,
-     "rec": [
-      "map_causal",
-      "kb",
-      "chart"
-     ],
-     "say": "위글스워스가 말한 빚 금융이 된 해를, 미국 연준도 숫자로 짚었습니다. 연준 쪽은 터진다고 말하지 않았습니다. 그들이 문제 삼는 고리는 따로 있습니다."
-    },
-    {
-     "s": 35,
-     "type": "zoomshot",
-     "sit": "cause",
-     "fit": false,
-     "rec": [
-      "map_causal",
-      "analogy"
-     ],
-     "say": "같은 달, 미국 세인트루이스 연방준비은행의 이코노미스트 세 사람도 같은 장부를 숫자로 읽었습니다."
-    },
-    {
-     "s": 36,
-     "type": "compare",
-     "sit": "hub-event",
-     "fit": false,
-     "rec": [
-      "map_causal",
-      "kb",
-      "chart"
-     ],
-     "say": "첫째, 세인트루이스 연준 이코노미스트들이 짚은 건 돈의 출처가 바뀌었다는 점입니다. 데이터센터를 짓는 회사들이 분기마다 새로 끌어오는 순부채가, 2012년부터 2"
-    },
-    {
-     "s": 37,
-     "type": "zoomshot",
-     "sit": "hub-event",
-     "fit": false,
-     "rec": [
-      "map_causal",
-      "kb",
-      "chart"
-     ],
-     "say": "둘째, 연준 금융안정보고서는 25년 전과 같은 그림을 그렸습니다. 1995년부터의 통신망 투자 붐과 2020년부터의 하이퍼스케일러 다섯 곳의 누적 설비투자를 경제"
-    },
-    {
-     "s": 38,
-     "type": "bars",
-     "sit": "metric",
-     "fit": true,
-     "rec": [
-      "bignum",
-      "chart",
-      "bars"
-     ],
-     "say": "빌려주는 쪽도 표정이 바뀌고 있습니다. 로이터가 11월 9일 전한 뱅크오브아메리카 분석으로는, 빅테크 10년 만기 회사채의 가산금리, 그러니까 국채보다 더 얹어 "
-    },
-    {
-     "s": 39,
-     "type": "zoomshot",
-     "sit": "metric",
-     "fit": false,
-     "rec": [
-      "bignum",
-      "chart",
-      "bars"
-     ],
-     "say": "같은 기사에서 로펌 롭스앤그레이의 금융 파트너 크리스 포기는 채권 투자자들의 장부가 꽉 찼다고 했습니다."
-    },
-    {
-     "s": 40,
-     "type": "versus",
-     "sit": "compare",
-     "fit": true,
-     "rec": [
-      "versus",
-      "bars",
-      "compare"
-     ],
-     "say": "반대 시각도 같은 무게로 들어야 합니다. 모건스탠리 전략가 페르난다 리마는 11월 10일 고객 노트에서, 우량 빅테크 채권은 위험 대비 보상이 올해 들어 가장 좋"
-    },
-    {
-     "s": 41,
-     "type": "chapter",
-     "sit": "media",
-     "fit": true,
-     "rec": [
-      "newspapers",
-      "quote"
-     ],
-     "say": "이 소식을 국내 매체는 주로 한국 반도체에 미칠 영향으로, 해외 매체는 누가 이 빚을 빌려주나로 보도했습니다. 두 쪽을 이으면, 돈이 어디로 흘렀는지가 보입니다."
-    },
-    {
-     "s": 42,
-     "type": "motionboard",
-     "sit": null,
-     "fit": false,
-     "rec": [],
-     "say": "사는 쪽이 빌린 돈의 상당 부분은 칩값으로 나가,"
-    },
-    {
-     "s": 43,
-     "type": "zoomshot",
-     "sit": "metric",
-     "fit": false,
-     "rec": [
-      "bignum",
-      "chart",
-      "bars"
-     ],
-     "say": "국내 보도 원문으로 보면, SK하이닉스는 9월 말 빚을 빼고도 98조 원이 넘는 순현금을 쥐고 있습니다."
-    },
-    {
-     "s": 44,
-     "type": "checklist",
-     "sit": "earnings",
-     "fit": false,
-     "rec": [
-      "bars",
-      "versus",
-      "bignum"
-     ],
-     "say": "SK하이닉스는 10월 말 실적 발표에서 고객 14곳과 장기계약을 맺어 2027년과 2028년 생산능력의 절반 이상을 채웠다고 밝힌 것으로 보도됐습니다. 그래서 흔"
-    },
-    {
-     "s": 45,
-     "type": "zoomshot",
-     "sit": "metric",
-     "fit": false,
-     "rec": [
-      "bignum",
-      "chart",
-      "bars"
-     ],
-     "say": "같은 기사에서 한국신용평가는 2025년부터 2028년까지 AI 설비투자 약 2조 9천억 달러 가운데 절반가량이 외부 자금으로 채워질 걸로 보고, 고객의 신용이 나"
-    },
-    {
-     "s": 46,
-     "type": "zoomshot",
-     "sit": "earnings",
-     "fit": false,
-     "rec": [
-      "bars",
-      "versus",
-      "bignum"
-     ],
-     "say": "키움증권 박유악 연구원은 SK하이닉스와 삼성전자의 분기 실적이 2027년 2분기에 정점을 찍고, D램이 그해 하반기 다시 공급 과잉에 들어갈 걸로 보고 목표주가를"
-    },
-    {
-     "s": 47,
-     "type": "versus",
-     "sit": null,
-     "fit": false,
-     "rec": [],
-     "say": "한 사람은 사는 쪽의 돈을, 다른 사람은 파는 쪽의 사이클을 보고 있습니다. 이 영상의 세 층으로 옮기면, 위층의 주문은 쉽게 꺾이지 않겠지만, 늘어나는 주문의 "
-    },
-    {
-     "s": 48,
-     "type": "chapter",
-     "sit": null,
-     "fit": false,
-     "rec": [],
-     "say": "이 해석이 틀릴 수 있는 경우도 셋 있습니다."
-    },
-    {
-     "s": 49,
-     "type": "checklist",
-     "sit": "metric",
-     "fit": false,
-     "rec": [
-      "bignum",
-      "chart",
-      "bars"
-     ],
-     "say": "첫째, AI 매출이 빨리 현금이 되는 경우. 아마존 클라우드 매출은 3분기에 39% 늘었고, 마이크로소프트가 앞으로 받기로 한 계약은 6,770억 달러로 73% "
-    },
-    {
-     "s": 50,
-     "type": "chapter",
-     "sit": "cause",
-     "fit": true,
-     "rec": [
-      "map_causal",
-      "analogy"
-     ],
-     "say": "그래서 다음에 볼 숫자는 셋입니다."
-    },
-    {
-     "s": 51,
-     "type": "checklist",
-     "sit": "earnings",
-     "fit": false,
-     "rec": [
-      "bars",
-      "versus",
-      "bignum"
-     ],
-     "say": "하나, 내년 1월 말부터 나오는 빅테크 4분기 실적. 다섯 곳이 번 돈의 116%를 쓴 3분기에서 이 비율이 100% 아래로 돌아오는지, 알파벳과 메타가 자사주를"
-    },
-    {
-     "s": 52,
-     "type": "outro",
-     "sit": "earnings",
-     "fit": false,
-     "rec": [
-      "bars",
-      "versus",
-      "bignum"
-     ],
-     "say": "재시는 25년에 나눠 쓸 수 있다면 편하겠지만, 그건 우리가 사는 세상이 아니라고 했습니다."
-    }
-   ]
-  },
-  {
-   "id": "ep:20261126-market-deep-dc-funding-sample",
-   "kind": "episode",
-   "topic": "market",
-   "label": "20261126-market-deep-dc-funding-sample",
-   "project": "20261126-market-deep-dc-funding-sample",
-   "scenes": 10,
-   "coverage": 0.8,
-   "fit": 0.12,
+   "scenes": 46,
+   "coverage": 0.83,
+   "fit": 0.47,
    "rows": [
     {
      "s": 1,
@@ -86178,30 +85666,30 @@
     },
     {
      "s": 2,
-     "type": "kb",
+     "type": "bite",
      "sit": "call-bite",
-     "fit": false,
+     "fit": true,
      "rec": [
       "bite",
       "quote"
      ],
-     "say": "이 질문에, 가장 돈을 많이 쓰는 회사의 대표가 답한 적이 있습니다. 10월 29일 아마존 실적 발표 콜에서 앤디 재시 CEO는 스스로 이렇게 물었습니다. 이런 "
+     "say": "이 질문에, 가장 돈을 많이 쓰는 회사의 대표가 직접 답했습니다."
     },
     {
      "s": 3,
-     "type": "quote",
+     "type": "bignum",
      "sit": "metric",
-     "fit": false,
+     "fit": true,
      "rec": [
       "bignum",
       "chart",
       "bars"
      ],
-     "say": "그리고 답했습니다. 그럴지도 모릅니다. 하지만 그건 우리가 사는 세상이 아니고, 이 기회도 그렇지 않습니다."
+     "say": "결론은 분명합니다. 지금 써야 하고, 계속 쓰겠다. 그리고 그 돈을 댈 수 있다고 했습니다. 아마존은 올해 설비투자를 약 2,200억 달러로 잡고 있습니다."
     },
     {
      "s": 4,
-     "type": "quote",
+     "type": "zoomshot",
      "sit": "cause",
      "fit": false,
      "rec": [
@@ -86223,45 +85711,319 @@
     },
     {
      "s": 6,
-     "type": "kb",
+     "type": "chapter",
      "sit": null,
      "fit": false,
      "rec": [],
-     "say": "두 번째 목소리는 마이크로소프트의 재무를 책임지는 에이미 후드 최고재무책임자입니다."
+     "say": "먼저, 지금 써야 한다는 말이 장부에서는 어떻게 보이는지부터 보겠습니다."
     },
     {
      "s": 7,
-     "type": "quote",
-     "sit": "earnings",
+     "type": "motionboard",
+     "sit": null,
      "fit": false,
+     "rec": [],
+     "say": "회사의 지갑을 볼 때는 두 숫자를 나란히 놓으면 됩니다. 하나는 영업현금흐름, 물건과 서비스를 팔아 실제로 손에 들어온 현금입니다."
+    },
+    {
+     "s": 8,
+     "type": "bars",
+     "sit": "earnings",
+     "fit": true,
      "rec": [
       "bars",
       "versus",
       "bignum"
      ],
-     "say": "10월 28일 실적 콜에서 후드는 이렇게 말했다고 CNBC가 전했습니다. 리스라는 형태의 금융이 있고, 우리는 그걸 수단으로 써 왔다."
+     "say": "아마존은 7월부터 9월까지 석 달 동안 424억 달러를 벌고, 773억 달러를 썼습니다. 한 분기에 348억 달러가 빈 겁니다."
     },
     {
-     "s": 8,
-     "type": "kb",
+     "s": 9,
+     "type": "zoomshot",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "최근 1년으로 넓히면, 번 돈에서 쓴 돈을 뺀 잉여현금흐름이 마이너스 424억 달러입니다. 회사 보도자료에 그대로 적혀 있습니다."
+    },
+    {
+     "s": 10,
+     "type": "bignum",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "같은 기간 장기 빚은 작년 말 656억 달러에서 9월 말 1,731억 달러로, 2.6배가 됐습니다."
+    },
+    {
+     "s": 11,
+     "type": "compare",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "아마존만 그런 게 아닙니다. 같은 석 달, 알파벳은 423억을 벌고 514억을 썼습니다."
+    },
+    {
+     "s": 12,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "다섯 곳을 모두 더하면 번 돈의 116%를 썼습니다. 마이크로소프트를 빼면 136%입니다."
+    },
+    {
+     "s": 13,
+     "type": "chapter",
+     "sit": "question",
+     "fit": true,
+     "rec": [
+      "card_type",
+      "chapter"
+     ],
+     "say": "그럼 다섯 곳 가운데 유일하게 번 돈이 더 많은 마이크로소프트는 어떻게 짓고 있을까요."
+    },
+    {
+     "s": 14,
+     "type": "bite",
+     "sit": "call-bite",
+     "fit": true,
+     "rec": [
+      "bite",
+      "quote"
+     ],
+     "say": "돈을 어떻게 마련할 거냐는 질문에, 마이크로소프트의 재무책임자 에이미 후드는 이렇게 답했습니다."
+    },
+    {
+     "s": 15,
+     "type": "motionboard",
+     "sit": "explain",
+     "fit": true,
+     "rec": [
+      "motionboard",
+      "spread",
+      "share"
+     ],
+     "say": "리스는 쉽게 말해 빌려 쓰는 겁니다. 데이터센터를 직접 사는 대신, 다른 회사가 지은 건물을 오랜 기간 빌려 쓰기로 계약하는 거죠."
+    },
+    {
+     "s": 16,
+     "type": "bars",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "연준은 11월 13일 금융안정보고서에서 이 약속의 크기를 처음 숫자로 적었습니다. 큰 기술 회사들이 아직 시작하지 않은 리스가 1조 달러를 넘고, 다른 회사의 빚"
+    },
+    {
+     "s": 17,
+     "type": "bignum",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "그리고 후드가 아직 쓰지 않았다고 한 채권시장. 다음 날인 10월 29일, 마이크로소프트가 250억 달러어치 회사채를 낸다는 보도가 나왔습니다. 가장 여유 있던 "
+    },
+    {
+     "s": 18,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "빈 곳을 메우는 돈은 리스만이 아닙니다."
+    },
+    {
+     "s": 19,
+     "type": "zoomshot",
      "sit": "media",
      "fit": false,
      "rec": [
       "newspapers",
       "quote"
      ],
-     "say": "세 번째 목소리는 메타입니다. 메타는 아예 보도자료에 자금 계획을 적었습니다."
+     "say": "세 번째는 메타입니다. 10월 26일, 메타는 투자를 영업현금흐름, 투자등급 부채, 전략적 파트너십, 주식 자본의 균형 잡힌 조합으로 대겠다고 보도자료에 적었습니"
     },
     {
-     "s": 9,
-     "type": "quote",
+     "s": 20,
+     "type": "checklist",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "실제로 메타는 이번에 보통주와 전환우선주로 약 350억 달러를 모으고, 내년 1분기부터는 의결권 없는 새 주식으로 약 600억 달러를 더 수시로 팔 계획이라고 밝"
+    },
+    {
+     "s": 21,
+     "type": "compare",
+     "sit": "explain-market",
+     "fit": false,
+     "rec": [
+      "motionboard",
+      "spread",
+      "share"
+     ],
+     "say": "자사주도 멈췄습니다. 자사주 매입은 회사가 남는 돈으로 자기 주식을 사서 주주에게 돌려주는 방법인데, 메타는 3분기에 한 주도 사지 않았습니다. 1년 전엔 33억"
+    },
+    {
+     "s": 22,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "대신 회사채로 287억 달러, 새 주식으로 124억 달러를 모았습니다. 현금과 증권을 2,650억 달러나 가진 회사가요."
+    },
+    {
+     "s": 23,
+     "type": "zoomshot",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "이게 모이면 숫자가 커집니다. 연준 보고서로는 AI 같은 첨단 컴퓨팅에 쓰려고 낸 빚이 올해 10월까지 6,800억 달러를 넘어, 2023년 한 해의 다섯 배쯤이"
+    },
+    {
+     "s": 24,
+     "type": "chapter",
      "sit": null,
      "fit": false,
      "rec": [],
-     "say": "10월 26일, 메타는 투자를 영업현금흐름, 투자등급 부채, 전략적 파트너십, 주식 자본의 균형 잡힌 조합으로 대겠다고 적었습니다."
+     "say": "지금까지 나온 회사를 한 줄로 세워 보겠습니다."
     },
     {
-     "s": 10,
+     "s": 25,
+     "type": "motionboard",
+     "sit": "explain-market",
+     "fit": true,
+     "rec": [
+      "motionboard",
+      "spread",
+      "share"
+     ],
+     "say": "세 층이 보입니다. 맨 위 마이크로소프트는 아직 번 돈이 쓴 돈보다 많습니다."
+    },
+    {
+     "s": 26,
+     "type": "bars",
+     "sit": "earnings",
+     "fit": true,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "맨 아래는 산수부터 다릅니다. 코어위브는 7월부터 9월까지 영업이익이 2억 700만 달러였는데, 같은 기간 이자로 8억 4,600만 달러를 냈습니다. 번 돈의 네"
+    },
+    {
+     "s": 27,
+     "type": "bignum",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "하나 가정해 보겠습니다. 이 회사 빚 약 470억 달러가 모두 금리에 따라 움직인다면, 금리가 1%포인트만 올라도 분기 이자가 1억 2천만 달러쯤 늘어납니다. 3"
+    },
+    {
+     "s": 28,
+     "type": "checklist",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "오라클은 한 칸 위입니다. 6월부터 8월까지 이자가 14억 달러로 영업이익 67억의 5분의 1쯤."
+    },
+    {
+     "s": 29,
+     "type": "chapter",
+     "sit": "hub-event",
+     "fit": true,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "이제 처음의 두 번째 목소리로 돌아가 보겠습니다. 연준 쪽은 터진다고 말하지 않았습니다. 그들이 문제 삼는 고리는 따로 있습니다."
+    },
+    {
+     "s": 30,
+     "type": "compare",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "첫째, 세인트루이스 연준 이코노미스트들이 짚은 건 돈의 출처가 바뀌었다는 점입니다. 데이터센터를 짓는 회사들이 분기마다 새로 끌어오는 순부채가, 2012년부터 2"
+    },
+    {
+     "s": 31,
+     "type": "zoomshot",
+     "sit": "hub-event",
+     "fit": false,
+     "rec": [
+      "map_causal",
+      "kb",
+      "chart"
+     ],
+     "say": "둘째, 연준 금융안정보고서는 25년 전과 같은 그림을 그렸습니다. 1995년부터의 통신망 투자 붐과 2020년부터의 하이퍼스케일러 다섯 곳의 누적 설비투자를 경제"
+    },
+    {
+     "s": 32,
+     "type": "bars",
+     "sit": "metric",
+     "fit": true,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "빌려주는 쪽도 표정이 바뀌고 있습니다. 로이터가 11월 9일 전한 뱅크오브아메리카 분석으로는, 빅테크 10년 만기 회사채의 가산금리, 그러니까 국채보다 더 얹어 "
+    },
+    {
+     "s": 33,
+     "type": "zoomshot",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "같은 기사에서 로펌 롭스앤그레이의 금융 파트너 크리스 포기는 채권 투자자들의 장부가 꽉 찼다고 했습니다."
+    },
+    {
+     "s": 34,
      "type": "versus",
      "sit": "compare",
      "fit": true,
@@ -86270,7 +86032,137 @@
       "bars",
       "compare"
      ],
-     "say": "같은 기사에서 로펌 롭스앤그레이의 금융 파트너 크리스 포기는 채권 투자자들의 장부가 꽉 찼다고 했습니다."
+     "say": "반대 시각도 같은 무게로 들어야 합니다. 모건스탠리 전략가 페르난다 리마는 11월 10일 고객 노트에서, 우량 빅테크 채권은 위험 대비 보상이 올해 들어 가장 좋"
+    },
+    {
+     "s": 35,
+     "type": "chapter",
+     "sit": "media",
+     "fit": true,
+     "rec": [
+      "newspapers",
+      "quote"
+     ],
+     "say": "이 소식을 국내 매체는 주로 한국 반도체에 미칠 영향으로, 해외 매체는 누가 이 빚을 빌려주나로 보도했습니다. 두 쪽을 이으면, 돈이 어디로 흘렀는지가 보입니다."
+    },
+    {
+     "s": 36,
+     "type": "motionboard",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "사는 쪽이 빌린 돈의 상당 부분은 칩값으로 나가,"
+    },
+    {
+     "s": 37,
+     "type": "zoomshot",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "국내 보도 원문으로 보면, SK하이닉스는 9월 말 빚을 빼고도 98조 원이 넘는 순현금을 쥐고 있습니다."
+    },
+    {
+     "s": 38,
+     "type": "checklist",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "SK하이닉스는 10월 말 실적 발표에서 고객 14곳과 장기계약을 맺어 2027년과 2028년 생산능력의 절반 이상을 채웠다고 밝힌 것으로 보도됐습니다. 그래서 흔"
+    },
+    {
+     "s": 39,
+     "type": "zoomshot",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "같은 기사에서 한국신용평가는 2025년부터 2028년까지 AI 설비투자 약 2조 9천억 달러 가운데 절반가량이 외부 자금으로 채워질 걸로 보고, 고객의 신용이 나"
+    },
+    {
+     "s": 40,
+     "type": "zoomshot",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "키움증권 박유악 연구원은 SK하이닉스와 삼성전자의 분기 실적이 2027년 2분기에 정점을 찍고, D램이 그해 하반기 다시 공급 과잉에 들어갈 걸로 보고 목표주가를"
+    },
+    {
+     "s": 41,
+     "type": "versus",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "한 사람은 사는 쪽의 돈을, 다른 사람은 파는 쪽의 사이클을 보고 있습니다. 이 영상의 세 층으로 옮기면, 위층의 주문은 쉽게 꺾이지 않겠지만, 늘어나는 주문의 "
+    },
+    {
+     "s": 42,
+     "type": "chapter",
+     "sit": null,
+     "fit": false,
+     "rec": [],
+     "say": "이 해석이 틀릴 수 있는 경우도 셋 있습니다."
+    },
+    {
+     "s": 43,
+     "type": "checklist",
+     "sit": "metric",
+     "fit": false,
+     "rec": [
+      "bignum",
+      "chart",
+      "bars"
+     ],
+     "say": "첫째, AI 매출이 빨리 현금이 되는 경우. 아마존 클라우드 매출은 3분기에 39% 늘었고, 마이크로소프트가 앞으로 받기로 한 계약은 6,770억 달러로 73% "
+    },
+    {
+     "s": 44,
+     "type": "chapter",
+     "sit": "cause",
+     "fit": true,
+     "rec": [
+      "map_causal",
+      "analogy"
+     ],
+     "say": "그래서 다음에 볼 숫자는 셋입니다."
+    },
+    {
+     "s": 45,
+     "type": "checklist",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "하나, 내년 1월 말부터 나오는 빅테크 4분기 실적. 다섯 곳이 번 돈의 116%를 쓴 3분기에서 이 비율이 100% 아래로 돌아오는지, 알파벳과 메타가 자사주를"
+    },
+    {
+     "s": 46,
+     "type": "outro",
+     "sit": "earnings",
+     "fit": false,
+     "rec": [
+      "bars",
+      "versus",
+      "bignum"
+     ],
+     "say": "재시는 25년에 나눠 쓸 수 있다면 편하겠지만, 그건 우리가 사는 세상이 아니라고 했습니다."
     }
    ]
   },
@@ -87389,17 +87281,17 @@
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h584",
+   "t": "sec:09§h588",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h593",
+   "t": "sec:09§h597",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h599",
+   "t": "sec:09§h603",
    "kind": "contains"
   },
   {
@@ -87759,22 +87651,17 @@
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h348",
-   "kind": "contains"
-  },
-  {
-   "s": "doc:feedback",
    "t": "sec:feedback§h350",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h453",
+   "t": "sec:feedback§h352",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h476",
+   "t": "sec:feedback§h455",
    "kind": "contains"
   },
   {
@@ -87784,12 +87671,17 @@
   },
   {
    "s": "doc:feedback",
-   "t": "sec:feedback§h509",
+   "t": "sec:feedback§h480",
    "kind": "contains"
   },
   {
    "s": "doc:feedback",
    "t": "sec:feedback§h511",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:feedback",
+   "t": "sec:feedback§h513",
    "kind": "contains"
   },
   {
@@ -88583,12 +88475,7 @@
    "kind": "enforces"
   },
   {
-   "s": "check:515",
-   "t": "gate:G6",
-   "kind": "enforces"
-  },
-  {
-   "s": "check:520",
+   "s": "check:519",
    "t": "gate:G6",
    "kind": "enforces"
   },
@@ -88598,42 +88485,47 @@
    "kind": "enforces"
   },
   {
-   "s": "check:526",
+   "s": "check:530",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:532",
+   "s": "check:531",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:535",
+   "s": "check:537",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:548",
+   "s": "check:540",
    "t": "gate:G6",
    "kind": "enforces"
   },
   {
-   "s": "check:552",
+   "s": "check:553",
+   "t": "gate:G6",
+   "kind": "enforces"
+  },
+  {
+   "s": "check:557",
    "t": "gate:G7",
    "kind": "enforces"
   },
   {
-   "s": "check:554",
+   "s": "check:559",
    "t": "gate:G7",
    "kind": "enforces"
   },
   {
-   "s": "check:560",
+   "s": "check:565",
    "t": "gate:G8",
    "kind": "enforces"
   },
   {
-   "s": "check:563",
+   "s": "check:568",
    "t": "gate:G8",
    "kind": "enforces"
   },
@@ -91912,6 +91804,14 @@
    ]
   },
   {
+   "s": "ver:142",
+   "t": "sec:09§3-4",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -93300,6 +93200,11 @@
    "kind": "about"
   },
   {
+   "s": "ver:142",
+   "t": "theme:depth",
+   "kind": "about"
+  },
+  {
    "s": "ver:8",
    "t": "code:ytflow/stages/backdrop.py:1",
    "kind": "implemented_by"
@@ -93421,7 +93326,7 @@
   },
   {
    "s": "ver:25",
-   "t": "code:ytflow/stages/checklist.py:541",
+   "t": "code:ytflow/stages/checklist.py:546",
    "kind": "implemented_by"
   },
   {
@@ -95826,7 +95731,7 @@
   },
   {
    "s": "intent:b3682647",
-   "t": "sec:feedback§h350",
+   "t": "sec:feedback§h352",
    "kind": "quoted_in"
   },
   {
@@ -97000,6 +96905,21 @@
    "kind": "quoted_in"
   },
   {
+   "s": "intent:f0ca1667",
+   "t": "ver:36",
+   "kind": "interpreted_in"
+  },
+  {
+   "s": "intent:f0ca1667",
+   "t": "sec:09§3-4",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:f0ca1667",
+   "t": "fb:313",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:610916a6",
    "t": "ver:86",
    "kind": "interpreted_in"
@@ -97251,7 +97171,7 @@
   },
   {
    "s": "intent:8ecb5021",
-   "t": "code:ytflow/stages/checklist.py:541",
+   "t": "code:ytflow/stages/checklist.py:546",
    "kind": "quoted_in"
   },
   {
@@ -97745,6 +97665,11 @@
    "kind": "quoted_in"
   },
   {
+   "s": "intent:7b02e763",
+   "t": "sec:14§4",
+   "kind": "quoted_in"
+  },
+  {
    "s": "intent:23479b78",
    "t": "fb:18",
    "kind": "quoted_in"
@@ -97888,6 +97813,16 @@
    "s": "intent:ded8e023",
    "t": "theme:depth",
    "kind": "about"
+  },
+  {
+   "s": "intent:b1b23e8f",
+   "t": "sec:14§4",
+   "kind": "quoted_in"
+  },
+  {
+   "s": "intent:b1b23e8f",
+   "t": "fb:314",
+   "kind": "quoted_in"
   },
   {
    "s": "intent:81815dc7",
@@ -99467,11 +99402,6 @@
   {
    "s": "topic:market",
    "t": "ep:20261126-market-deep-dc-funding",
-   "kind": "episode"
-  },
-  {
-   "s": "topic:market",
-   "t": "ep:20261126-market-deep-dc-funding-sample",
    "kind": "episode"
   },
   {
@@ -104087,6 +104017,16 @@
   {
    "s": "fb:312",
    "t": "intent:072ff457",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:313",
+   "t": "intent:f0ca1667",
+   "kind": "quoted_as"
+  },
+  {
+   "s": "fb:314",
+   "t": "intent:b1b23e8f",
    "kind": "quoted_as"
   }
  ]
