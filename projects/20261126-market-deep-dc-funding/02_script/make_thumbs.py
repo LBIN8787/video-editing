@@ -92,10 +92,12 @@ def thumb_a():
     cut = cut.crop((180, 0, 1720, 1100))   # 머리~가슴 (다리는 프레임 밖으로)
     person_into(bg, cut, 640, -40, H + 40, grade=(1.02, 0.98, 1.06), rim=(255, 160, 70))
     d = ImageDraw.Draw(bg)
-    tag(d, (600, 46), "아마존 CEO 앤디 재시", font(BOLD, 34))
-    text_line(d, (600, 112), "“25년에 나눠", font(HEAD, 100), hl=None)
-    text_line(d, (600, 228), "쓰는 세상 아니다”", font(HEAD, 92), hl="아니다")
-    tag(d, (600, 372), "2026년 설비투자 약 2,200억 달러", font(BOLD, 30), bg=(20, 22, 30), fg=YEL)
+    # 2차 (2026-11-26 사용자: "그래서 영상이 무슨 내용이지? 뭐가 핵심이고 뭘 주장하는 거지") — 소재(그의 말) 대신 주장을 큰 글씨로, 말은 근거로 작게
+    tag(d, (600, 46), "빅테크 AI 투자의 돈줄", font(BOLD, 36))
+    text_line(d, (600, 112), "번 돈 넘어", font(HEAD, 112))
+    text_line(d, (600, 236), "빚으로 짓는다", font(HEAD, 112), hl="빚으로")
+    tag(d, (600, 384), "아마존 CEO 재시: “25년에 나눠 쓰는 세상 아니다”", font(BOLD, 26), bg=(20, 22, 30), fg=WHITE)
+    tag(d, (600, 446), "칩 수요의 열쇠 = 채권시장", font(BOLD, 34), bg=YEL, fg=INK)
     d.text((24, H - 34), "사진: Andy Jassy in 2010 (CC BY 2.0) · 배경은 생성 그림", font=font(BOLD, 16), fill=(200, 200, 205))
     return bg.convert("RGB")
 
@@ -105,13 +107,16 @@ def thumb_b():
     bg = cover(Image.open(SRC / "bg_vault.png").convert("RGB"), focus=(0.5, 0.6))
     bg = vignette(bg, 0.65, side="top").convert("RGBA")
     d = ImageDraw.Draw(bg)
-    text_line(d, (W // 2 - d.textlength("늘어난 칩값은", font=font(HEAD, 118)) // 2, 34), "늘어난 칩값은", font(HEAD, 118))
-    text_line(d, (W // 2 - d.textlength("빚으로 낸다", font=font(HEAD, 118)) // 2, 160), "빚으로 낸다", font(HEAD, 118), hl="빚으로")
+    # 2차: 결론(칩 수요를 정하는 곳)을 큰 글씨로, 그림 위 딱지는 그 결론에 이르는 돈의 길
+    ft = font(BOLD, 34)
+    tw = d.textlength("빅테크가 AI 칩 사는 돈, 언제까지?", font=ft)
+    tag(d, (W // 2 - tw // 2 - 16, 26), "빅테크가 AI 칩 사는 돈, 언제까지?", ft, bg=(20, 22, 30), fg=WHITE)
+    text_line(d, (W // 2 - d.textlength("열쇠는 금고 아닌", font=font(HEAD, 104)) // 2, 96), "열쇠는 금고 아닌", font(HEAD, 104))
+    text_line(d, (W // 2 - d.textlength("채권시장", font=font(HEAD, 120)) // 2, 210), "채권시장", font(HEAD, 120), hl="채권시장")
     f = font(BOLD, 30)
-    tag(d, (60, 590), "빌린 돈", f, bg=(20, 22, 30), fg=WHITE)
-    tag(d, (W // 2 - 50, 620), "칩", f, bg=(20, 22, 30), fg=YEL)
-    tag(d, (930, 300), "파는 쪽 금고", f, bg=(20, 22, 30), fg=WHITE)
-    tag(d, (60, 300), "AI 회사채 6,800억 달러", font(BOLD, 32), bg=RED)
+    tag(d, (40, 590), "번 돈 넘는 몫은 빚으로", f, bg=RED, fg=WHITE)
+    tag(d, (W // 2 - 70, 640), "칩값으로", f, bg=(20, 22, 30), fg=YEL)
+    tag(d, (900, 360), "파는 쪽 금고로", f, bg=(20, 22, 30), fg=WHITE)
     return bg.convert("RGB")
 
 
@@ -121,18 +126,19 @@ def thumb_c():
     bg = vignette(bg, 0.6, side="right").convert("RGBA")
     d = ImageDraw.Draw(bg)
     x0 = 640
-    text_line(d, (x0, 40), "번 것보다", font(HEAD, 100))
-    text_line(d, (x0, 150), "더 쓴다", font(HEAD, 100), hl="더 쓴다")
-    tag(d, (x0, 280), "아마존 석 달 (7~9월, 달러)", font(BOLD, 28), bg=(20, 22, 30), fg=WHITE)
-    fl, fn = font(BOLD, 32), font(HEAD, 64)
+    # 2차: 아마존 하나 대신 빅테크 다섯 곳 합계 — 주제(빅테크 AI 투자)와 주장(모자란 건 빚)을 숫자로
+    tag(d, (x0, 30), "빅테크 5곳 AI 투자 (7~9월)", font(BOLD, 32), bg=(20, 22, 30), fg=WHITE)
+    text_line(d, (x0, 92), "번 돈의 116%", font(HEAD, 96), hl="116%")
+    text_line(d, (x0, 196), "모자란 건 빚", font(HEAD, 96), hl="빚")
+    fl, fn = font(BOLD, 32), font(HEAD, 56)
     maxw = 560
-    for i, (lab, v, col) in enumerate((("번 돈", 424, (90, 170, 255)), ("쓴 돈", 773, RED))):
-        y = 360 + i * 120
+    for i, (lab, v, txt, col) in enumerate((("번 돈", 1986, "1,986억", (90, 170, 255)), ("쓴 돈", 2304, "2,304억", RED))):
+        y = 330 + i * 110
         d.text((x0, y + 18), lab, font=fl, fill=WHITE, stroke_width=4, stroke_fill=INK)
-        bw = int(maxw * v / 773 * 0.52)
+        bw = int(maxw * v / 2304 * 0.55)
         d.rounded_rectangle([x0 + 110, y + 10, x0 + 110 + bw, y + 70], radius=10, fill=col)
-        d.text((x0 + 125 + bw, y), f"{v}억", font=fn, fill=WHITE, stroke_width=5, stroke_fill=INK)
-    tag(d, (x0, 610), "다섯 곳 합치면 번 돈의 116%", font(BOLD, 28), bg=YEL, fg=INK)
+        d.text((x0 + 125 + bw, y + 4), txt, font=fn, fill=WHITE, stroke_width=5, stroke_fill=INK)
+    tag(d, (x0, 570), "칩 수요가 언제까지 가나 = 채권시장이 정한다", font(BOLD, 26), bg=YEL, fg=INK)
     return bg.convert("RGB")
 
 
