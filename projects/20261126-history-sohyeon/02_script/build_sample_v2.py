@@ -261,8 +261,10 @@ def build():
     paper = ('<div id="pp" style="position:absolute;left:230px;top:120px;width:1460px;height:820px;border-radius:6px;'
              'background:radial-gradient(ellipse at 30% 20%,#e9dcbc,#cdb98d 75%,#a88f63);box-shadow:0 40px 90px rgba(0,0,0,.7)">'
              '<svg width="1460" height="820" style="position:absolute;inset:0;opacity:.35"><filter id="pn"><feTurbulence baseFrequency=".9" numOctaves="2" seed="2"/><feColorMatrix values="0 0 0 0 .3 0 0 0 0 .22 0 0 0 0 .12 0 0 0 .6 0"/></filter><rect width="1460" height="820" filter="url(#pn)"/></svg></div>')
-    clip('<div style="position:absolute;inset:0;background:#0c0b0a"></div>' + paper, T(4), E(5) - T(4), z=2)
-    JS.append(f'tl.fromTo("#pp",{{rotationX:12,rotationY:-8,scale:.92,y:40,transformPerspective:1400}},{{rotationX:2,rotationY:3,scale:1.03,y:0,duration:{E(5) - T(4):.2f},ease:"sine.out"}},{T(4):.3f});')
+    clip('<div style="position:absolute;inset:0;background:#0c0b0a"></div>', T(4), E(5) - T(4), z=2)
+    HTML.append('<div id="pw" style="position:absolute;inset:0;z-index:3" data-layout-allow-overflow data-layout-allow-overlap>')
+    clip(paper, T(4), E(5) - T(4), z=3)
+    JS.append(f'tl.fromTo("#pw",{{rotationX:10,rotationY:-3,scale:.9,y:40,transformPerspective:1800}},{{rotationX:2,rotationY:3,scale:1.03,y:0,duration:{E(5) - T(4):.2f},ease:"sine.out"}},{T(4):.3f});')
     whip(T(4)); SFX.append(("hit", T(4)))
     text(T(4) + 0.1, E(5) - T(4) - 0.1, "仁祖實錄 卷四十六 · 인조 23년(1645) 6월 27일", "left:300px;top:170px;font:700 30px Batang;color:#6b5033")
     lines = [("온몸이 전부 검은빛이었고,", 4, "온몸이"), ("이목구비의 일곱 구멍에서는", 4, "이목구비의"), ("모두 선혈이 흘러나왔다.", 4, "모두"), ("마치 약물에 중독되어 죽은 사람과 같았다.", 5, "마치")]
@@ -277,6 +279,7 @@ def build():
     i = nid("ul"); clip(f'<svg style="position:absolute;inset:0" width="{W}" height="{H}"><line id="{i}" x1="590" y1="700" x2="850" y2="700" stroke="#9a1015" stroke-width="9" stroke-linecap="round" stroke-dasharray="260" stroke-dashoffset="260"/></svg>', tdok, E(5) - tdok, z=30)
     JS.append(f'tl.to("#{i}",{{attr:{{"stroke-dashoffset":0}},duration:.4,ease:"power2.out"}},{tdok + .1:.3f});')
     stamp(E(5) - 1.0, 1.0, "기록", 1380, 760, size=64)
+    HTML.append('</div>')
     # 6: 실록을 쓰는 사관(시차·등불) + 이름표
     shot("N10", T(6), E(6) - T(6), move=(1.05, 1.13, -2, 2, 0, -1), fg=("linear-gradient(90deg,transparent 30%,#000 45%,#000 75%,transparent 85%)", 2.0), flick=(52, 40), dust=20)
     leak(T(6) - 0.3)
@@ -302,23 +305,23 @@ def build():
     # 8-11: 증거판 — 사진이 핀으로 꽂히고 붉은 실, 마지막에 연표가 그려짐
     board = '<div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,#2b2a27,#121110 85%)"></div>'
     t8 = T(8); tEnd = E(11)
-    clip(board + '<div style="position:absolute;left:0;right:0;top:40px;text-align:center;font:700 34px Batang;color:#cdb98d;letter-spacing:.4em">사 건 개 요</div>', t8, tEnd - t8, z=2)
+    clip(board + '<div style="position:absolute;left:0;right:0;top:96px;text-align:center;font:700 34px Batang;color:#cdb98d;letter-spacing:.4em">사 건 개 요</div>', t8, tEnd - t8, z=2)
     whip(t8)
     JS.append(f'tl.fromTo("#cam",{{scale:1.12}},{{immediateRender:false,scale:1.0,duration:{tEnd - t8:.2f},ease:"sine.inOut"}},{t8:.3f});tl.set("#cam",{{scale:1}},{tEnd:.3f});')
     def polaroid(img, crop, x, y, rot, t, cap, dur):
         i = nid("po"); cx, cy, cw, ch = crop; sc = 1 / cw
         clip(f'<div id="{i}" style="position:absolute;left:{x}px;top:{y}px;width:380px;padding:16px 16px 58px;background:#efe9dc;box-shadow:0 18px 40px rgba(0,0,0,.6);transform-origin:50% 0">'
-             f'<div style="width:348px;height:260px;overflow:hidden;position:relative"><img src="assets/{img}.jpg" style="position:absolute;left:{-cx * sc * 100:.1f}%;top:{-cy * sc * 100:.1f}%;width:{sc * 100:.1f}%;height:{(1 / ch) * 100:.1f}%;object-fit:cover;filter:sepia(.35) contrast(1.05)"></div>'
+             f'<div style="width:348px;height:260px;overflow:hidden;position:relative"><img src="assets/{img}.jpg" style="position:absolute;left:{-cx * sc * 100:.1f}%;top:{-cy * sc * 100:.1f}%;width:{sc * 100:.1f}%;height:{(1 / ch) * 100:.1f}%;object-fit:cover;filter:sepia(.35) contrast(1.05) brightness({1.9 if img=="N11" else 1})"></div>'
              f'<div style="position:absolute;left:0;right:0;bottom:12px;text-align:center;font:700 26px Malgun;color:#2a2018">{cap}</div>'
              f'<i style="position:absolute;left:176px;top:-12px;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#e24a4a,#7a0d10)"></i></div>', t, dur, z=24)
         JS.append(f'tl.fromTo("#{i}",{{y:-120,opacity:0,rotation:{rot + 12}}},{{y:0,opacity:1,rotation:{rot},duration:.45,ease:"back.out(1.6)"}},{t:.3f});')
         SFX.append(("thud", t + 0.3))
-    tp = w(9, "소현세자"); polaroid("A3", (0.0, 0.08, 0.5, 0.5), 160, 150, -5, tp, "소현세자 (1612~1645)", tEnd - tp)
-    tk = w(9, "왕"); polaroid("N11", (0.3, 0.18, 0.4, 0.4), 620, 120, 4, tk, "아버지 · 인조", tEnd - tk)
+    tp = T(8) + 0.9; polaroid("A3", (0.0, 0.08, 0.5, 0.5), 160, 150, -5, tp, "소현세자 (1612~1645)", tEnd - tp)
+    tk = w(9, "왕"); polaroid("N11", (0.56, 0.24, 0.28, 0.28), 620, 120, 4, tk, "아버지 · 인조", tEnd - tk)
     tt = w(10, "때"); polaroid("A1", (0.2, 0.25, 0.6, 0.6), 1100, 160, -3, tt, "창경궁 환경당", tEnd - tt)
     i = nid("str"); clip(f'<svg style="position:absolute;inset:0" width="{W}" height="{H}"><path id="{i}" d="M350 170 Q 560 300 810 140 T 1290 180" fill="none" stroke="#b0161b" stroke-width="5" stroke-dasharray="1200" stroke-dashoffset="1200"/></svg>', tk, tEnd - tk, z=26)
     JS.append(f'tl.to("#{i}",{{attr:{{"stroke-dashoffset":0}},duration:1.2,ease:"power2.inOut"}},{tk + .3:.3f});')
-    td = w(10, "1645년"); text(td, E(10) - td + 0.1, "1645. 4. 26 (음력)", "left:1150px;top:470px;font:700 40px Malgun;color:#f1e6cf;background:#7a0d10;padding:8px 18px;transform:rotate(-3deg)")
+    td = w(10, "1645년"); text(td, E(10) - td + 0.1, "1645. 4. 26 (음력)", "left:1120px;top:520px;font:700 40px Malgun;color:#f1e6cf;background:#7a0d10;padding:8px 18px;transform:rotate(-3deg)")
     # 연표: 1637 → 1645.2.18 → 4.23 → 4.26
     t11 = T(11)
     i = nid("tl"); clip(f'<svg style="position:absolute;inset:0" width="{W}" height="{H}"><line id="{i}" x1="180" y1="640" x2="1740" y2="640" stroke="#e9dcc4" stroke-width="4" stroke-dasharray="1560" stroke-dashoffset="1560"/></svg>', t11, E(11) - t11, z=27)
