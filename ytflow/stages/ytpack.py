@@ -92,13 +92,27 @@ def run(project: str):
     # 원본 영상·사진 출처 (manual/09 §3-5 '설명란 [원본] 목록', CC BY 표시 의무 — 2026-11-21 빠져 있던 것 채움)
     used = {sc.get("clip", {}).get("src") for sc in spec["scenes"] if isinstance(sc.get("clip"), dict)} | {sc.get("bg_src") for sc in spec["scenes"]}
     clips_, photos_ = [], []
+    # 같은 원본은 한 줄로 묶고 ①②③ 번호 — 사람·매체·원본 제목·공개 날짜·주소 (docs/63, 2026-11-26: 구간마다 같은 줄이 반복되던 것)
+    groups: dict = {}
     for k, f in (spec.get("footage") or {}).items():
         if k not in used or not isinstance(f, dict):
             continue
         if f.get("who") and f.get("url"):
-            clips_.append(f"- {f['who']} — {f.get('credit', '')} {f['url']}".strip())
+            g = groups.setdefault(f["url"], {"who": [], "f": f})
+            if f["who"] not in g["who"]:
+                g["who"].append(f["who"])
         elif f.get("credit") and "CC BY" in f.get("license", f.get("credit", "")):
             photos_.append(f"- {f['credit']}" + (f" {f['url']}" if f.get("url") else ""))
+    _num = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮"
+    for n, (url, g) in enumerate(groups.items()):
+        f = g["f"]
+        bits = [" · ".join(g["who"]), f.get("credit", "")]
+        if f.get("title"):
+            bits.append(f"「{f['title']}」")
+        if f.get("date"):
+            bits.append(f"공개 {f['date']}")
+        clips_.append(f"{_num[n] if n < len(_num) else str(n + 1) + '.'} " + " — ".join(b for b in bits[:2] if b)
+                      + "".join(f" · {b}" for b in bits[2:]) + f" {url}")
     extra = (["", "🎬 원본 영상 (짧은 인용)"] + clips_ if clips_ else []) + (["", "📷 사진"] + photos_ if photos_ else [])
     # 자료 기준일은 영상 끝 화면이 아니라 설명란에 (2026-11-23 사용자: "마지막에 ~~일까지의 자료 이런거 꼭 필요할꺼요?")
     asof = [f"📅 자료 기준: {spec['asof']}"] if spec.get("asof") else []

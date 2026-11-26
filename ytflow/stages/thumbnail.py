@@ -301,7 +301,10 @@ def _versus_dark(v: dict) -> tuple[Image.Image, list]:
         fl = _font(GOTHIC_X, 52)
         d.text((cx, 540), it["label"], font=fl, fill=(255, 255, 255), anchor="mm")
         boxes.append((cx - f.getlength(it["value"]) / 2, 240, cx + f.getlength(it["value"]) / 2, 570))
-    d.polygon([(600, 330), (680, 360), (600, 390)], fill=(255, 255, 255))
+    if v.get("mid"):   # 같은 종류의 두 판단을 맞붙일 때는 화살표(전→후) 대신 'vs' (2026-11-26, 화살표가 '바뀜'으로 읽힘)
+        d.text((640, 360), v["mid"], font=_font(GOTHIC_X, 64), fill=(255, 255, 255), anchor="mm", stroke_width=6, stroke_fill=(0, 0, 0))
+    else:
+        d.polygon([(600, 330), (680, 360), (600, 390)], fill=(255, 255, 255))
     return base, boxes
 
 

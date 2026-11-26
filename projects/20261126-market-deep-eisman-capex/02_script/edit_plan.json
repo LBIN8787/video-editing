@@ -1,0 +1,1493 @@
+{
+ "project": "20261126-market-deep-eisman-capex",
+ "topic": "market",
+ "topic_name": "주식 · 시장",
+ "scenes": [
+  {
+   "scene": 1,
+   "type": "bite",
+   "chapter": 0,
+   "situation": "open-scene",
+   "situation_name": "장면을 연다 (사람·장소·날짜)",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "11월 23일 공개된 인터뷰. 2008년 금융위기 전에 미국 주택시장의 붕괴에 걸었던, 영화 '빅쇼트'의 실제 모델 스티브 아이스먼은 AI 호황이 끝나는 길을 이렇게 그렸습니다.",
+     "situations": [
+      "open-scene"
+     ],
+     "hits": [
+      "2008년"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "kb",
+    "footage",
+    "stage"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    }
+   ],
+   "blocked": [
+    "parallax-photo"
+   ],
+   "avoid": "글자 카드로 열기",
+   "why": "인트로 없이 첫 문장부터 장면 (README §2-1·§2-3)"
+  },
+  {
+   "scene": 2,
+   "type": "bite",
+   "chapter": 0,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "다음 날 공개된 골드만삭스 대담에서, 미국 인터넷 업종 분석을 이끄는 에릭 셰리든은 정반대 결론을 냈습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 3,
+   "type": "bignum",
+   "chapter": 0,
+   "situation": "cause",
+   "situation_name": "원인 → 결과를 잇는다",
+   "origin": "main",
+   "also": [
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "두 사람 중 누가 맞느냐는, 한국 계좌에 바로 닿는 질문입니다. 11월 25일 한국 장에서 SK하이닉스는 11.05%, 삼성전자는 9.87% 내렸습니다. 회사에서 나온 새 악재는 없었습니다. 전날 밤 미국 반도체가 크게 빠진 것을 하루 늦게 받은 겁니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "11.05%"
+     ]
+    },
+    {
+     "say": "그래서 이 영상의 질문은 하나입니다. AI 투자가 꺾인다면, 반도체 주문은 무엇 때문에, 언제 멈추는가.",
+     "situations": [
+      "cause"
+     ],
+     "hits": [
+      "때문",
+      "그래서"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "map_causal",
+    "analogy"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "장면마다 새 도식 (같은 칸 위치 유지)",
+   "why": "화살표가 말과 함께 그어져야 '이어진다'가 보임"
+  },
+  {
+   "scene": 4,
+   "type": "kinetic",
+   "chapter": 0,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "결론부터 말하면, 두 사람은 꺾이느냐가 아니라, 무엇이 꺾느냐에서 갈립니다. 그리고 둘 다 같은 병목, 전력을 가리킵니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 5,
+   "type": "chapter",
+   "chapter": 1,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "먼저 아이스먼이 무엇으로 시장을 읽는지부터 보겠습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 6,
+   "type": "motionboard",
+   "chapter": 1,
+   "situation": "cause",
+   "situation_name": "원인 → 결과를 잇는다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "그의 틀은 집중 위험입니다. 그가 든 예를 그대로 옮기면, 빠르게 크는 소프트웨어 회사가 있는데 고객이 하나뿐이라면, 그 고객이 떠나는 날 회사도 끝납니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "그는 AI 산업 전체를 이 틀로 봅니다. 맨 앞에 오픈AI와 앤트로픽, 두 회사의 약정이 있고, 그 약정을 믿고 클라우드 회사와 오라클이 데이터센터를 주문하고, 그 주문이 엔비디아의 칩으로, 다시 그 칩에 들어가는 한국의 메모리로 이어집니다.",
+     "situations": [
+      "cause"
+     ],
+     "hits": [
+      "로 이어"
+     ]
+    },
+    {
+     "say": "맨 앞이 멈추면 뒤가 차례로 멈춘다. 이것이 그가 침체를 말하는 사슬입니다. 이제 고리마다 그가 든 숫자를 원문과 맞춰 보겠습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ],
+   "recommended_scenes": [
+    "map_causal",
+    "analogy"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "장면마다 새 도식 (같은 칸 위치 유지)",
+   "why": "화살표가 말과 함께 그어져야 '이어진다'가 보임"
+  },
+  {
+   "scene": 7,
+   "type": "chapter",
+   "chapter": 2,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [],
+   "beats": [
+    {
+     "say": "사슬의 첫 근거로 그는 엔비디아의 분기 보고서를 듭니다.",
+     "situations": [
+      "earnings"
+     ],
+     "hits": [
+      "분기"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 8,
+   "type": "bite",
+   "chapter": 2,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "엔비디아의 고객이 얼마나 몰려 있느냐는 대목입니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 9,
+   "type": "checklist",
+   "chapter": 2,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "엔비디아가 미국 증권거래위원회에 낸 분기 보고서 원문을 열어 보면, 70%라는 숫자는 있습니다. 다만 매출이 아니라 아직 받지 못한 돈, 매출채권입니다. 7월 26일 기준, 직접 고객 다섯 곳이 22, 14, 13, 11, 10%. 더하면 정확히 70%입니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출",
+      "분기"
+     ]
+    },
+    {
+     "say": "매출로 보면, 같은 분기에 10%를 넘은 직접 고객은 한 곳, 16%였습니다. 상반기로 넓혀도 세 곳이 16, 15, 13%입니다. 그리고 회사는 신용이 좋은 큰 고객에게는 지급 기한을 90일에서 1년까지 늘려 준다고 적었습니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출",
+      "분기"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 10,
+   "type": "share",
+   "chapter": 2,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "earnings"
+   ],
+   "beats": [
+    {
+     "say": "그림으로 놓으면 이렇습니다. 받을 돈 전체를 막대 하나로 두면,",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "다섯 곳이 차례로 22, 14, 13, 11, 10%. 합쳐서 70%입니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "10%"
+     ]
+    },
+    {
+     "say": "매출로 재면 가장 큰 고객도 16%입니다. 그러니 '매출의 70%'는 그의 말이 과장입니다. 하지만 방향은 맞습니다. 받을 돈이 다섯 곳에 몰려 있고, 기한까지 늘려 줬다면, 한 고객이 흔들릴 때 먼저 흔들리는 건 바로 이 받을 돈입니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 11,
+   "type": "checklist",
+   "chapter": 2,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "ratio"
+   ],
+   "beats": [
+    {
+     "say": "나머지 고리도 그는 숫자로 댑니다. 오라클이 받아 둔 미래 주문의 절반이 오픈AI에서 왔고, 앤트로픽은 상장 서류에 클라우드 회사들과 8,950억 달러의 약정을 적었고, 올해 미국 성장률 2% 남짓 가운데 절반 넘게가 AI 설비투자라는 겁니다.",
+     "situations": [
+      "metric",
+      "ratio"
+     ],
+     "hits": [
+      "2%",
+      "억 달러"
+     ]
+    },
+    {
+     "say": "이 세 숫자는 이번에 원문으로 다 맞춰 보지 못해, 그의 말로만 두겠습니다. 특히 성장률의 절반은 그 스스로 '제 생각에는'이라고 붙인 추정입니다.",
+     "situations": [
+      "ratio"
+     ],
+     "hits": [
+      "절반"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 12,
+   "type": "motionboard",
+   "chapter": 2,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "point",
+    "cause"
+   ],
+   "beats": [
+    {
+     "say": "여기서부터는 이 채널의 계산입니다. 그의 숫자를 그대로 받으면, 올해 성장 2% 남짓 가운데 1%포인트 넘게를 AI 설비투자가 만들었습니다.",
+     "situations": [
+      "metric",
+      "point"
+     ],
+     "hits": [
+      "2%"
+     ]
+    },
+    {
+     "say": "성장률은 작년보다 얼마나 더 썼느냐로 잽니다. 그래서 설비투자가 꺾이지 않고 그냥 제자리에만 머물러도 그 1%포인트가 사라지고, 성장은 1% 안팎으로 내려옵니다. 줄어들면 그 몫은 마이너스가 됩니다. 그가 '침체'라는 말을 쉽게 꺼내는 이유가 이 계산에 있습니다.",
+     "situations": [
+      "metric",
+      "cause"
+     ],
+     "hits": [
+      "1%"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 13,
+   "type": "quote",
+   "chapter": 2,
+   "situation": "open-scene",
+   "situation_name": "장면을 연다 (사람·장소·날짜)",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "그가 가장 세게 한 말은 이것입니다. 두 회사가 내일 파산하면 다음 날 침체가 온다. 다만 그는 바로 앞에 '큰 가정이고, 지금 그렇게 예측하는 건 아니다'라고 붙였습니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "그리고 2008년과는 다르다며, 은행은 규제가 훨씬 세고 빚도 적어 전혀 걱정하지 않는다고 했습니다. 침체는 아파도, 은행에서 돈을 못 찾는 금융위기는 아니라는 겁니다.",
+     "situations": [
+      "open-scene"
+     ],
+     "hits": [
+      "2008년"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "kb",
+    "footage",
+    "stage"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    }
+   ],
+   "blocked": [
+    "parallax-photo"
+   ],
+   "avoid": "글자 카드로 열기",
+   "why": "인트로 없이 첫 문장부터 장면 (README §2-1·§2-3)"
+  },
+  {
+   "scene": 14,
+   "type": "checklist",
+   "chapter": 2,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "판정해 보겠습니다. 받치는 쪽은, 엔비디아의 받을 돈이 다섯 곳에 몰려 있다는 원문, 그리고 그의 숫자대로라면 설비투자가 안 늘기만 해도 성장이 반으로 준다는 계산입니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "어긋나는 쪽은, 매출 기준 집중은 16%라는 원문, 그리고 칩을 직접 사는 빅테크는 AI가 아니어도 돈을 버는 회사라는 점입니다. 판정은, 사슬의 구조는 맞다. 다만 '무너지면'은 가정이고, 언제인지는 말하지 않았다입니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 15,
+   "type": "chapter",
+   "chapter": 3,
+   "situation": "media",
+   "situation_name": "보도·매체가 어떻게 다뤘나",
+   "origin": "main",
+   "also": [
+    "route"
+   ],
+   "beats": [
+    {
+     "say": "이 인터뷰를 다룬 매체 기사와 국내 요약 영상 대부분은 앞의 '무너지면 침체'까지만 옮겨 보도했습니다. 그런데 이 인터뷰에서 가장 중요한 대목은 그 다음에 나옵니다.",
+     "situations": [
+      "media",
+      "route"
+     ],
+     "hits": [
+      "보도",
+      "매체",
+      "기사"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "newspapers",
+    "quote"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "split-screen",
+     "status": "partial"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "매체 판단을 단정",
+   "why": "매체 프레임의 차이 자체가 이야기 (03 §0-2)"
+  },
+  {
+   "scene": 16,
+   "type": "bite",
+   "chapter": 3,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "진행자가 전 재산을 건다면 어느 쪽에 걸겠느냐고 묻자, 그는 이렇게 답합니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 17,
+   "type": "motionboard",
+   "chapter": 3,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "question",
+    "said"
+   ],
+   "beats": [
+    {
+     "say": "무엇이 바뀌었을까요. 그의 설명은 이렇습니다. 데이터센터를 짓는 허가는 대통령이 아니라 마을과 주가 정합니다. 땅, 물, 전기를 받는 일이 다 지역의 일입니다.",
+     "situations": [
+      "metric",
+      "question"
+     ],
+     "hits": [
+      "주가"
+     ]
+    },
+    {
+     "say": "그런데 선거 뒤 데이터센터가 지역 정치의 쟁점이 되면서, 한 곳이 막히면 다른 주로 옮겨 처음부터 다시 허가를 받아야 합니다. 그는 이것으로 2년과 돈을 잃는다고 봅니다. 그래서 건설은 느려진다. 다만 그는 10에서 20% 정도 느려지는 건 오히려 건강할 수 있다고 말합니다.",
+     "situations": [
+      "metric",
+      "said"
+     ],
+     "hits": [
+      "20%"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 18,
+   "type": "bite",
+   "chapter": 3,
+   "situation": "question",
+   "situation_name": "질문·명제 한 줄을 던진다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "왜 느려지는 게 건강하냐는 대목입니다.",
+     "situations": [
+      "question"
+     ],
+     "hits": [
+      "왜 "
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "card_type",
+    "chapter"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "그림을 억지로 넣기",
+   "why": "질문은 글자 하나로 — 강조 예산 안에서 (05 §0-1)"
+  },
+  {
+   "scene": 19,
+   "type": "checklist",
+   "chapter": 3,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "cause"
+   ],
+   "beats": [
+    {
+     "say": "그가 든 근거는 이렇습니다. 돈을 가장 잘 벌던 구글과 아마존이 데이터센터를 짓느라 현금흐름이 마이너스가 됐고, 빚에 이어 주식까지 찍어 돈을 구한다는 겁니다. 골드만 대담의 차마스 팔리하피티야도 같은 말을 했습니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "빌려서 짓는 회사는 빌려주는 쪽의 기분에 운명이 걸립니다. 그는 데이터센터를 빌려주는 회사, 코어위브의 빚 금리가 9%에서 15%로 뛰었고, 15%로는 데이터센터를 지을 수 없다고 했습니다. 느려지면 빌릴 일이 줄고, 그래서 건강해진다는 겁니다.",
+     "situations": [
+      "metric",
+      "cause"
+     ],
+     "hits": [
+      "9%"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 20,
+   "type": "bite",
+   "chapter": 3,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "그럼 언제냐는 물음에, 그는 자신이 읽은 한 보고서를 인용합니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 21,
+   "type": "motionboard",
+   "chapter": 3,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "cause",
+    "earnings"
+   ],
+   "beats": [
+    {
+     "say": "여기서부터는 이 채널의 해석입니다. 그가 말한 올해 설비투자는 1조 달러입니다. 그가 건강하다고 한 10에서 20%를 덜 쓰면, 1,000억에서 2,000억 달러입니다.",
+     "situations": [
+      "metric",
+      "point"
+     ],
+     "hits": [
+      "20%",
+      "억 달러",
+      "조 달러"
+     ]
+    },
+    {
+     "say": "그 돈을 덜 쓰는 쪽, 빅테크에게는 현금흐름이 돌아오는 건강한 일입니다. 하지만 그 돈은 원래 누군가의 매출이었습니다. 칩과 메모리를 파는 엔비디아, 하이닉스, 삼성에게는 같은 숫자가 덜 받은 주문입니다.",
+     "situations": [
+      "earnings"
+     ],
+     "hits": [
+      "매출"
+     ]
+    },
+    {
+     "say": "그래서 아이스먼이 생각을 바꾼 방향은, 미국 경제에는 덜 나쁜 소식이지만, 한국 반도체에는 꼭 좋은 소식이 아닙니다. 무너짐이 아니라 느려짐이라면, 그 속도를 가장 먼저 받는 곳이 공급사이기 때문입니다.",
+     "situations": [
+      "cause"
+     ],
+     "hits": [
+      "때문",
+      "그래서"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 22,
+   "type": "chapter",
+   "chapter": 4,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [],
+   "beats": [
+    {
+     "say": "이제 맞은편, 골드만삭스의 에릭 셰리든입니다. 그는 꺾을 변수를 셋으로 나눴습니다. 수요, 돈을 구하는 길, 전력. 그리고 주가는 그 셋에 없다고 했습니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "주가"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 23,
+   "type": "bite",
+   "chapter": 4,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "그가 낙관하는 근거는 수익률 계산입니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 24,
+   "type": "checklist",
+   "chapter": 4,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric",
+    "compare"
+   ],
+   "beats": [
+    {
+     "say": "그의 사슬은 이렇습니다. 빅테크 일부는 이미 받아 둔 주문의 절반이 2년 안에 매출이 된다고 공개했고, 골드만 계산으로는 그 주문을 다 매출로 바꾸지 못해도 15% 수익이 나온다. 그러니 돈을 계속 쓸 이유가 있다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    },
+    {
+     "say": "흥미로운 건 그가 스스로 틈도 말한다는 점입니다. 메모리 값이 예상보다 크게 올라 투입 비용이 커졌고, 기업 직원들은 AI가 자기 자리를 대신할까 봐 도입을 꺼립니다. 그리고 모두가 같은 수익을 내지는 않는다고 덧붙였습니다.",
+     "situations": [
+      "compare"
+     ],
+     "hits": [
+      "보다 "
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 25,
+   "type": "versus",
+   "chapter": 4,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "그런데 맞서던 두 사람이 한 고리에서는 같은 말을 합니다. 아이스먼은 데이터센터를 짓던 전기 기술자의 글을 전하며, 병목은 돈이 아니라 전력이고, 전기를 끌어올 전봇대조차 모자란다고 했습니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "셰리든도 같은 대담에서, 땅과 건물과 칩은 빨리 늘릴 수 있어도 전력은 그렇게 못 늘린다고 했습니다. 돈과 의지가 있어도 전기가 없어 불을 못 켜는 상황이 올 수 있다는 겁니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 26,
+   "type": "chapter",
+   "chapter": 5,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "두 사람 사이에 선 사람이 있습니다. 같은 골드만 대담에 나온 차마스 팔리하피티야입니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 27,
+   "type": "bite",
+   "chapter": 5,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "그는 AI 칩 회사 그록에 투자했고, 지금은 데이터센터를 지을 전력 부지를 모으는 사업을 합니다. 그가 꼽은 시험대는 하나입니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 28,
+   "type": "bite",
+   "chapter": 5,
+   "situation": "call-bite",
+   "situation_name": "어닝콜·기자회견 발언",
+   "origin": "add",
+   "also": [
+    "question"
+   ],
+   "beats": [
+    {
+     "say": "왜 수익이 아직 안 보이느냐는 질문에, 그는 자기 회사 이야기를 합니다. 회사 안에서 AI 에이전트가 사람보다 열 배쯤 많은 일을 하는데도,",
+     "situations": [
+      "call-bite",
+      "question"
+     ],
+     "hits": [
+      "질문에"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bite",
+    "quote"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "j-l-cut",
+     "status": "candidate"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "번역만 읽기",
+   "why": "원문+번역 2단, 그 사람의 목소리 (03 §0-1, source-cut)"
+  },
+  {
+   "scene": 29,
+   "type": "motionboard",
+   "chapter": 5,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric",
+    "cause"
+   ],
+   "beats": [
+    {
+     "say": "그가 걱정하는 곳은 빅테크가 아니라, 데이터센터를 빌려주는 네오클라우드입니다. 은행은 짧게 빌려 길게 빌려주는데, 네오클라우드는 거꾸로입니다. 매출은 짧고 불확실한데, 빚은 길고 고정돼 있습니다.",
+     "situations": [
+      "earnings"
+     ],
+     "hits": [
+      "매출"
+     ]
+    },
+    {
+     "say": "그는 비행기에 빗댑니다. 비행기는 좌석이 80에서 85% 차야 본전인데, 그가 보는 네오클라우드의 가동률은 70에서 75% 안팎입니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "85%"
+     ]
+    },
+    {
+     "say": "기업 고객이 수익을 보면 사용량이 폭증하고, 가동률이 오르고, 엔비디아와 메모리까지 모두 돈을 법니다. 지금 그대로면, 빚만 남습니다. 그래서 시험대가 18개월 안의 기업 수익입니다.",
+     "situations": [
+      "cause"
+     ],
+     "hits": [
+      "그래서"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 30,
+   "type": "bite",
+   "chapter": 5,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "그리고 인터넷 거품을 겪어 본 사람으로서, 그는 이렇게 정리합니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 31,
+   "type": "checklist",
+   "chapter": 5,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "open-scene",
+    "point"
+   ],
+   "beats": [
+    {
+     "say": "판정입니다. 맞은편 셰리든도 기업 도입이 느리다고 인정했으니, 시험대라는 말에는 근거가 있습니다. 다만 셰리든은 광고와 클라우드에서는 AI가 이미 매출로 나온다고 봅니다.",
+     "situations": [
+      "earnings"
+     ],
+     "hits": [
+      "매출"
+     ]
+    },
+    {
+     "say": "그리고 하나 더. 차마스는 전력 부지를 가진 사람입니다. 전력이 병목이라는 판단은 그의 사업에 유리한 판단이기도 합니다. 판정은, 날짜가 붙은 시험대로 쓸 만하다. 18개월, 2028년 봄까지 기업 고객의 수익이 숫자로 보이느냐입니다.",
+     "situations": [
+      "open-scene",
+      "point"
+     ],
+     "hits": [
+      "2028년"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 32,
+   "type": "chapter",
+   "chapter": 6,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "이제 세 사람을 한자리에 놓아 보겠습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 33,
+   "type": "map_causal",
+   "chapter": 6,
+   "situation": "point",
+   "situation_name": "화면의 한 곳을 가리킨다",
+   "origin": "main",
+   "also": [
+    "explain",
+    "open-scene"
+   ],
+   "beats": [
+    {
+     "say": "여기서부터는 이 채널의 정리입니다. 질문은 하나, 칩 주문을 멈추게 할 것은 무엇인가.",
+     "situations": [
+      "point"
+     ],
+     "hits": [
+      "여기"
+     ]
+    },
+    {
+     "say": "아이스먼은 돈을 봅니다. 두 회사의 약정과 빌린 돈에 기대 짓는 구조. 셰리든은 수요는 멀쩡하다고 봅니다. 차마스는 그 사이, 기업 고객이 실제로 수익을 내느냐를 봅니다.",
+     "situations": [
+      "explain"
+     ],
+     "hits": [
+      "구조"
+     ]
+    },
+    {
+     "say": "그리고 세 사람 모두, 아이스먼은 현장 기술자의 말을 빌려, 같은 곳을 가리킵니다. 전력입니다. 갈리는 곳은 무엇이 꺾느냐이고, 만나는 곳은 무엇이 늦추느냐입니다.",
+     "situations": [
+      "open-scene"
+     ],
+     "hits": [
+      "현장"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "zoomshot"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    }
+   ],
+   "blocked": [],
+   "avoid": "줌 3번 이상",
+   "why": "가리키는 곳만 표시"
+  },
+  {
+   "scene": 34,
+   "type": "checklist",
+   "chapter": 6,
+   "situation": "open-scene",
+   "situation_name": "장면을 연다 (사람·장소·날짜)",
+   "origin": "main",
+   "also": [
+    "say-vs-do",
+    "earnings"
+   ],
+   "beats": [
+    {
+     "say": "날짜를 같은 달력에 놓으면 하나가 겹칩니다. 아이스먼이 인용한 보고서는 설비투자 정점을 2027년 중반으로 봅니다.",
+     "situations": [
+      "open-scene"
+     ],
+     "hits": [
+      "2027년"
+     ]
+    },
+    {
+     "say": "그리고 25일 한국 장 하루 전, 프랑스 은행 BNP 파리바의 반도체 분석가 칼 애커먼은 마이크론 투자의견을 낮추며, 메모리 공급이 수요를 따라잡는 시점을 빠르면 2027년 중반으로 1년 당겼다고 보도됐습니다. 다른 사람, 다른 근거인데 같은 달에 만납니다.",
+     "situations": [
+      "open-scene",
+      "media"
+     ],
+     "hits": [
+      "2027년"
+     ]
+    },
+    {
+     "say": "그 앞에는 12월의 실적과 공시가, 그 뒤에는 차마스의 시한, 2028년 봄이 있습니다.",
+     "situations": [
+      "say-vs-do",
+      "earnings"
+     ],
+     "hits": [
+      "공시"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "kb",
+    "footage",
+    "stage"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    }
+   ],
+   "blocked": [
+    "parallax-photo"
+   ],
+   "avoid": "글자 카드로 열기",
+   "why": "인트로 없이 첫 문장부터 장면 (README §2-1·§2-3)"
+  },
+  {
+   "scene": 35,
+   "type": "chapter",
+   "chapter": 7,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "그럼 하이닉스와 삼성을 가진 사람은 무엇을 보면 될까요. 사라고 팔라는 말이 아니라, 누가 맞는지 먼저 알려 줄 숫자입니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 36,
+   "type": "checklist",
+   "chapter": 7,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric",
+    "point"
+   ],
+   "beats": [
+    {
+     "say": "첫째, 12월 초로 예상되는 엔비디아의 다음 분기 보고서입니다. 받을 돈이 다섯 곳에 더 몰렸는지, 지급 기한이 더 길어졌는지. 아이스먼의 고리가 여기서 보입니다.",
+     "situations": [
+      "earnings",
+      "point"
+     ],
+     "hits": [
+      "분기"
+     ]
+    },
+    {
+     "say": "둘째, 12월 9일 브로드컴, 17일 마이크론 실적입니다. 메모리 주문과 이익률이 BNP의 판단대로 꺾이기 시작하는지 봅니다.",
+     "situations": [
+      "earnings"
+     ],
+     "hits": [
+      "실적"
+     ]
+    },
+    {
+     "say": "셋째, 1월 말에서 2월, 빅테크가 내놓을 내년 설비투자 계획. 늘리는지, 아이스먼의 말대로 10에서 20% 줄이는지. 넷째, 기업 고객이 AI로 번 돈을 숫자로 말하기 시작하는지. 차마스의 시험대입니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "20%"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 37,
+   "type": "checklist",
+   "chapter": 7,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "틀리는 경우도 적어 두겠습니다. 두 회사가 상장과 투자로 돈을 계속 구해 약정을 지키면, 아이스먼의 사슬은 끊기지 않습니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "전력이 막혀 매출이 늦어지거나, 메모리 비용이 더 올라 수익률 계산을 깨면, 셰리든이 틀립니다. 그리고 정치가 건설을 20%보다 크게 막으면, 아이스먼 자신의 말대로 건강한 느려짐이 아니라 침체 쪽으로 갑니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 38,
+   "type": "kinetic",
+   "chapter": 7,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "문제는 꺾이느냐가 아니라, 얼마나 빨리 느려지느냐입니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 39,
+   "type": "outro",
+   "chapter": 7,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "compare"
+   ],
+   "beats": [
+    {
+     "say": "처음으로 돌아가 보겠습니다. 아이스먼은 두 회사 중 하나가 무너지면 주문이 멈춘다고 했고, 셰리든은 수요 문제는 없다고 했습니다. 하지만 아이스먼 자신도 지금은 무너짐보다 느려짐을 더 봅니다. 그렇다면 한국 계좌에 남는 질문은 이것입니다. 빅테크에게 건강한 10에서 20%의 느려짐을, ",
+     "situations": [
+      "metric",
+      "compare"
+     ],
+     "hits": [
+      "20%"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  }
+ ],
+ "coverage": 0.64,
+ "fit": 0.16,
+ "counts": {
+  "earnings": 8,
+  "metric": 8,
+  "open-scene": 3,
+  "cause": 2,
+  "media": 1,
+  "question": 1,
+  "call-bite": 1,
+  "point": 1
+ },
+ "defaults": {
+  "zoom": "off",
+  "camera": "calm",
+  "bgm": "none",
+  "motion_beats": true
+ }
+}
