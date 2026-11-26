@@ -10,20 +10,27 @@
 # 2026-11-22 사용자: "그냥 opus로 세션진행하고 fable은 중요할때만 호출하게 해보세요" → judge 도 Opus. Fable 은 .claude/agents/fable.md 로 중요한 판단에만.
 # 쓰는 곳: ytflow/llm.py (claude-cli·api → anthropic, codex-cli → openai) · .claude/agents/{senior,worker}.md
 # 새 모델이 나오면: providers 의 이름만 바꾸고 checked 날짜를 고친다 (정기 검토가 30일마다 묻는다).
-checked: '2026-11-22'
+# 2026-11-27 사용자: "판단이 필요한 부분이 아니라 단순 작업은 소넷이 판단이 필요하면 작업은 opus 종합적인 검수가 필요한 부분은 페이블이 계층적으로 판단의 중요성에 따라서 이를 나누어줘"
+#   → 세 층: simple(Sonnet, 판단 없는 단순 작업) · judge/complex(Opus, 판단이 필요한 작업) · review(Fable, D2·D4 직전 종합 검수 — .claude/agents/fable.md)
+checked: '2026-11-27'
 tiers:
   judge:   {label: 판단, effort: high}
   complex: {label: 복잡한 일, effort: high}
   simple:  {label: 간단한 일, effort: high}
+  review:  {label: 종합 검수, effort: high}   # 파이프라인 단계에는 쓰지 않음 — fable 에이전트로만
 providers:
   anthropic:
     judge:   {model: claude-opus-5-5, cli: opus}   # 2026-11-22 사용자: "오푸스로 바꿔주세요" (Fable 소모량 감당이 어려움) — 여유가 생기면 claude-fable-5-2 / fable 로
     complex: {model: claude-opus-5-5, cli: opus}
     simple:  {model: claude-sonnet-5-5, cli: sonnet}
+    review:  {model: claude-fable-5-2, cli: fable}
   openai:    # Codex — 비워 두면 Codex 기본 모델. 티어에 맞는 모델 이름을 사용자가 정해 채움
     judge:   {model: ""}
     complex: {model: ""}
     simple:  {model: ""}
+    review:  {model: ""}
+# 2026-11-27 사용자: "기계적인 단계는 소넷으로 작업하는게 현재 아니야? 아니라면 소넷으로 설정해줘"
+#   → LLM 호출이 아닌 기계적 단계(렌더·캡처·자막·음성 자르기·파일 정리·Drive 올리기)는 메인이 직접 하지 않고 worker(simple 티어, Sonnet)에게 넘긴다 (manual/11 §1-1).
 # ytflow 파이프라인 단계 → 티어 (없는 단계는 default)
 tasks:
   default: complex
