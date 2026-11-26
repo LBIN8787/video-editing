@@ -352,7 +352,10 @@ def _person(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
     pw = W if blend else int(W * v.get("photo_width", 0.56))
     right = blend and v.get("text_side") == "right"   # 인물이 사진 왼쪽에 있을 때: 글씨를 오른쪽에 (사진은 뒤집지 않음 — 뒤집어 깔고 다시 뒤집음)
     src = _image(project, spec, v["image"])
-    im = _person_crop(ImageOps.mirror(src) if right else src, pw, H, v.get("face_h", 0.46))
+    if blend and v.get("fixed"):   # 미리 16:9 로 잘라 둔 사진: 얼굴 찾기·밀기 없이 그대로 깖 (얼굴 인식이 빗나가는 사진용)
+        im, v = _cover(ImageOps.mirror(src) if right else src, W, H, 0.5, 0.5), dict(v, face_x=0.5)
+    else:
+        im = _person_crop(ImageOps.mirror(src) if right else src, pw, H, v.get("face_h", 0.46))
     im = ImageEnhance.Contrast(im).enhance(1.08)
     # blend: 얼굴(칸 가운데)을 오른쪽 face_x 로 밀어 붙이고, 빈 왼쪽은 어두운 바탕 → 그 위 글씨
     base.paste(im, (int(W * (v.get("face_x", 0.66) - 0.5)), 0) if blend else (W - pw, 0))
