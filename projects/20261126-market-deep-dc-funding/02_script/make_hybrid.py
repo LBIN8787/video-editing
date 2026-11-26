@@ -12,6 +12,14 @@ SRC_8K = "각 사 실적 보도자료(SEC 8-K 첨부 99.1)"
 FED = "연준 금융안정보고서 2026.11.13 상자 2.2"
 STL = "세인트루이스 연준 블로그 2026.11.19 (코즐로프스키·산체스·설리번)"
 
+R13 = "manual/09-market-daily.md"
+R12 = "manual/12-visual-storytelling.md"
+
+
+def O(i, w):
+    return {"id": i, "why_not": w}
+
+
 S = []
 
 
@@ -25,6 +33,20 @@ def chap(n, title, icon, say):
 
 
 # ── 0. 여는 장면: 사는 쪽 CEO 의 결론 → 맞서는 결론 → 이 영상의 답 ──────────────
+add(type="motionboard", chapter=0, label="사는 쪽: 데이터센터를 짓는 회사들 (마이크로소프트·알파벳·아마존·메타·오라클 등) · 그림은 단순화",
+    title="칩을 사 주는 쪽은 누구인가",
+    els={"hy": {"kind": "card", "x": 420, "y": 470, "icon": "cpu", "label": "SK하이닉스·삼성전자", "value": "메모리", "w": 360},
+         "nv": {"kind": "card", "x": 420, "y": 760, "icon": "microchip", "label": "엔비디아", "value": "AI 칩", "w": 360},
+         "buy": {"kind": "card", "x": 1440, "y": 600, "icon": "building-2", "label": "데이터센터를 짓는 회사", "value": "칩값을 내는 쪽", "w": 440},
+         "a1": {"kind": "arrow", "from": "hy", "to": "buy", "label": "칩"},
+         "a2": {"kind": "arrow", "from": "nv", "to": "buy"},
+         "q": {"kind": "text", "x": 1440, "y": 300, "text": "이 돈, 언제까지?", "size": 64, "color": "red"}},
+    decide=dict(pick="motionboard", situation="explain-market", over=[O("map_causal", "인과 사슬이 아니라 파는 쪽 → 사는 쪽 한 줄 관계"), O("bignum", "숫자가 아니라 '누가 누구에게 칩을 파나' 관계"), O("quote", "질문은 사람의 말이 아니라 시청자의 물음")],
+                why="첫 질문(사 주는 쪽의 돈)을 칩 → 사는 쪽 그림 위에 — 인용 카드에 질문을 얹지 않게", intent="이 영상이 '칩을 사 주는 쪽의 돈'을 따라간다는 것을 안다", refs=[R13]),
+    beats=[
+        {"say": "SK하이닉스와 삼성전자의 메모리, 엔비디아의 칩을 사 주는 건 데이터센터를 짓는 몇몇 거대 기업입니다.", "do": ["hy", "nv", "buy", "a1", "a2"], "at": {"buy": "거대 기업"}},
+        {"say": "그래서 반도체 주식을 가진 사람이라면 한 번쯤 묻게 됩니다. 이 회사들은 이 돈을 언제까지 낼 수 있을까.", "do": ["q"], "at": {"q": "언제까지"}},
+    ])
 add(type="quote", chapter=0, insight=True, id_key="open_jassy",
     label="CNBC 2026.10.30 보도 · 아마존 3분기 실적 콜(10.29) 발언 인용",
     who="앤디 재시", role="아마존 CEO · 2026년 설비투자 약 2,200억 달러",
@@ -32,11 +54,10 @@ add(type="quote", chapter=0, insight=True, id_key="open_jassy",
     keyword="우리가 사는 세상이 아닙니다",
     orig="Yeah, it might be more convenient, but that's not the world that we live in, and that's not the opportunity.",
     beats=[
-        {"say": "SK하이닉스와 삼성전자의 메모리, 엔비디아의 칩을 사 주는 건 데이터센터를 짓는 몇몇 거대 기업입니다. 그래서 반도체 주식을 가진 사람이라면 한 번쯤 묻게 됩니다. 이 회사들은 이 돈을 언제까지 낼 수 있을까."},
         {"say": "이 질문에, 가장 돈을 많이 쓰는 회사의 대표가 답한 적이 있습니다. 10월 29일 아마존 실적 발표 콜에서 앤디 재시 CEO는 스스로 이렇게 물었습니다. 이런 기회가 25년에 걸쳐 와서, 설비투자를 25년에 나눠 쓸 수 있다면 더 편하겠냐고요."},
         {"say": "그리고 답했습니다. 그럴지도 모릅니다. 하지만 그건 우리가 사는 세상이 아니고, 이 기회도 그렇지 않습니다."},
         {"say": "결론은 분명합니다. 지금 써야 하고, 계속 쓰겠다는 겁니다. 아마존은 올해 설비투자를 약 2,200억 달러로 잡고 있습니다.",
-         "motion": [{"t": "2,200억", "do": "stat", "id": "capex", "value": "약 2,200억 달러", "label": "아마존 2026년 설비투자 계획", "sub": "10.29 보도자료", "x": 1500, "y": 860, "fs": 56, "static": True}]},
+         "motion": [{"t": "2,200억", "do": "stat", "id": "capex", "value": "약 2,200억 달러", "label": "아마존 2026년 설비투자 계획", "sub": "10.29 보도자료", "x": 1500, "y": 230, "fs": 56, "static": True}]},
     ])
 add(type="quote", chapter=0, insight=True,
     label=STL + " · 원문 인용",
@@ -62,12 +83,23 @@ add(type="versus", chapter=0, insight=True,
 
 # ── 1. 재시의 말 뒤의 숫자 ─────────────────────────────────────────────
 chap(1, "번 돈보다 더 쓴 분기", "wallet", "먼저, 지금 써야 한다는 말이 장부에서는 어떻게 보이는지부터 보겠습니다.")
+add(type="motionboard", chapter=1, label="용어: 영업활동 현금흐름(번 돈)·유형자산 구입(쓴 돈) — 각 사 현금흐름표의 줄 이름",
+    title="회사의 지갑을 보는 두 숫자",
+    els={"in": {"kind": "card", "x": 560, "y": 520, "icon": "hand-coins", "label": "번 돈", "value": "영업현금흐름", "w": 440},
+         "out": {"kind": "card", "x": 1360, "y": 520, "icon": "server", "label": "쓴 돈", "value": "설비투자", "w": 440},
+         "t1": {"kind": "text", "x": 560, "y": 760, "text": "팔아서 손에 들어온 현금", "size": 40, "color": "ink"},
+         "t2": {"kind": "text", "x": 1360, "y": 760, "text": "건물·서버·칩을 사느라 나간 현금", "size": 40, "color": "ink"}},
+    decide=dict(pick="motionboard", situation="explain-market", over=[O("bars", "숫자가 나오기 전에 두 낱말의 뜻부터 — 빈 막대를 15초 보여 주지 않게"), O("compare", "표는 정의를 그림으로 못 보임")],
+                why="처음 듣는 두 용어(영업현금흐름·설비투자)를 첫 등장에서 한 문장씩 풀기(09 §5-1 설명 수준)", intent="번 돈과 쓴 돈이 무엇인지 안다", refs=[R13]),
+    beats=[
+        {"say": "회사의 지갑을 볼 때는 두 숫자를 나란히 놓으면 됩니다. 하나는 영업현금흐름, 물건과 서비스를 팔아 실제로 손에 들어온 현금입니다.", "do": ["in", "t1"], "at": {"in": "영업현금흐름"}},
+        {"say": "다른 하나는 설비투자, 데이터센터 건물과 서버, 칩처럼 오래 쓰는 설비를 사느라 나간 현금입니다. 앞의 것을 번 돈, 뒤의 것을 쓴 돈이라고 부르겠습니다.", "do": ["out", "t2"], "at": {"out": "설비투자"}},
+    ])
 add(type="bars", chapter=1, label="아마존 3분기(7~9월) 보도자료 · 영업활동 현금흐름·설비 구입 (억 달러)",
     title="아마존, 석 달 동안 (억 달러)", emph=1, key="amzn_bars",
     items=[{"label": "번 돈 (영업현금흐름)", "value": 424.22, "text": "424억", "t": "424억"},
            {"label": "쓴 돈 (설비투자)", "value": 772.59, "text": "773억", "t": "773억"}],
     beats=[
-        {"say": "회사의 지갑을 볼 때는 두 숫자를 나란히 놓으면 됩니다. 하나는 영업현금흐름, 물건과 서비스를 팔아 실제로 손에 들어온 현금입니다. 다른 하나는 설비투자, 데이터센터 건물과 서버, 칩처럼 오래 쓰는 설비를 사느라 나간 현금입니다. 앞의 것을 번 돈, 뒤의 것을 쓴 돈이라고 부르겠습니다."},
         {"say": "아마존은 7월부터 9월까지 석 달 동안 424억 달러를 벌고, 773억 달러를 썼습니다. 한 분기에 348억 달러가 빈 겁니다."},
     ])
 add(type="bignum", chapter=1, label="아마존 3분기 보도자료 · 잉여현금흐름은 최근 12개월(회사 정의) · 장기부채 2025.12.31 → 2026.9.30",
@@ -89,7 +121,7 @@ add(type="compare", chapter=1, label=SRC_8K + " · 오라클만 6~8월(회계 1�
         {"say": "번 돈이 더 많았던 곳은 마이크로소프트 하나, 580억을 벌고 394억을 썼습니다.", "upto": 4},
     ])
 add(type="bars", chapter=1, label="이 채널 계산: 다섯 곳 설비 구입 합 ÷ 영업현금 합 (MSFT·GOOGL·AMZN·META 7~9월 + ORCL 6~8월, 리스·매각대금 제외)",
-    title="쓴 돈 ÷ 번 돈", emph=1,
+    title="번 돈 대비 쓴 돈", emph=1,
     items=[{"label": "다섯 곳 합계", "value": 116.0, "text": "116%", "t": "116"},
            {"label": "마이크로소프트 빼면", "value": 135.9, "text": "136%", "t": "136"}],
     beats=[
@@ -109,14 +141,14 @@ add(type="quote", chapter=2, insight=True, label="CNBC 2026.10.29 보도 · 마�
     ])
 add(type="motionboard", chapter=2, label="구조: " + FED + " ('장기 리스 → 개발사가 담보로 자금 조달') · 그림은 단순화",
     title="빌려 쓰는 데이터센터 — 빚은 어디에 쌓이나",
-    els={"big": {"kind": "card", "x": 330, "y": 330, "icon": "building-2", "label": "빅테크 (임차인)", "w": 260},
-         "dev": {"kind": "card", "x": 960, "y": 330, "icon": "hard-hat", "label": "개발 회사", "w": 260},
-         "bank": {"kind": "card", "x": 1590, "y": 330, "icon": "landmark", "label": "은행·투자자", "w": 260},
-         "spv": {"kind": "card", "x": 960, "y": 760, "icon": "box", "label": "사업용 별도 회사", "value": "빚이 쌓이는 곳", "w": 300},
-         "a1": {"kind": "arrow", "from": "big", "to": "dev", "label": "여러 해 임대 계약"},
-         "a2": {"kind": "arrow", "from": "bank", "to": "dev", "label": "계약서를 담보로 건설 자금", "color": "red"},
+    els={"big": {"kind": "card", "x": 300, "y": 430, "icon": "building-2", "label": "빅테크 (임차인)", "w": 300},
+         "dev": {"kind": "card", "x": 960, "y": 430, "icon": "hard-hat", "label": "개발 회사", "w": 300},
+         "bank": {"kind": "card", "x": 1620, "y": 760, "icon": "landmark", "label": "은행·투자자", "w": 300},
+         "spv": {"kind": "card", "x": 960, "y": 800, "icon": "box", "label": "사업용 별도 회사", "value": "빚이 쌓이는 곳", "w": 340},
+         "a1": {"kind": "arrow", "from": "big", "to": "dev", "label": "임대 계약"},
+         "a2": {"kind": "arrow", "from": "bank", "to": "dev", "label": "담보 대출", "color": "red", "bend": 0.2},
          "a3": {"kind": "arrow", "from": "dev", "to": "spv", "color": "red"},
-         "note": {"kind": "text", "x": 330, "y": 760, "text": "빅테크 장부엔\n'앞으로 낼 임대료'", "size": 44, "color": "ink"}},
+         "note": {"kind": "text", "x": 300, "y": 800, "text": "빅테크 장부엔\n'앞으로 낼 임대료'", "size": 44, "color": "ink"}},
     beats=[
         {"say": "리스는 쉽게 말해 빌려 쓰는 겁니다. 데이터센터를 직접 사는 대신, 다른 회사가 지은 건물을 오랜 기간 빌려 쓰기로 계약하는 거죠.", "do": ["big", "dev", "a1"], "at": {"a1": "계약"}},
         {"say": "그런데 그 건물은 누군가 돈을 빌려서 짓습니다. 개발 회사는 빅테크와 맺은 계약서를 담보로 은행과 투자자에게서 건설 자금을 빌립니다.", "do": ["bank", "a2"], "at": {"a2": "담보로"}},
@@ -262,14 +294,15 @@ add(type="versus", chapter=5, insight=True,
 chap(6, "내 반도체 계좌에서", "cpu", "이 소식을 국내 매체는 주로 한국 반도체에 미칠 영향으로, 해외 매체는 누가 이 빚을 빌려주나로 보도했습니다. 두 쪽을 이으면, 돈이 어디로 흘렀는지가 보입니다.")
 add(type="motionboard", chapter=6, label="이 채널의 해석 · 근거: " + STL + " · SK하이닉스 순현금·미국 매출 비중은 이코노미스트 2026.11.17 보도(분기보고서 인용)",
     title="빌린 돈은 어디로 갔나",
-    els={"buy": {"kind": "card", "x": 330, "y": 470, "icon": "building-2", "label": "사는 쪽", "value": "빚 ↑", "w": 280},
-         "chip": {"kind": "card", "x": 960, "y": 470, "icon": "cpu", "label": "칩값", "w": 240},
-         "sell": {"kind": "card", "x": 1590, "y": 470, "icon": "vault", "label": "SK하이닉스", "value": "순현금 98조 원+", "w": 340},
+    els={"buy": {"kind": "card", "x": 290, "y": 470, "icon": "building-2", "label": "사는 쪽", "value": "빚 ↑", "w": 280},
+         "chip": {"kind": "card", "x": 940, "y": 470, "icon": "cpu", "label": "칩값", "w": 220},
+         "sell": {"kind": "card", "x": 1600, "y": 470, "icon": "vault", "label": "SK하이닉스", "value": "순현금 98조 원+", "w": 360},
          "a1": {"kind": "arrow", "from": "buy", "to": "chip", "label": "빌린 돈"},
-         "a2": {"kind": "arrow", "from": "chip", "to": "sell", "label": "매출의 62.5%가 미국", "color": "red"}},
+         "a2": {"kind": "arrow", "from": "chip", "to": "sell", "color": "red"},
+         "us": {"kind": "text", "x": 1600, "y": 760, "text": "1~9월 매출의 62.5%가 미국", "size": 44, "color": "red"}},
     beats=[
         {"say": "사는 쪽이 빌린 돈의 상당 부분은 칩값으로 나가,", "do": ["buy", "chip", "a1"], "at": {"a1": "칩값"}},
-        {"say": "파는 쪽에 현금으로 쌓였습니다. 국내 보도로는 SK하이닉스가 9월 말 빚을 빼고도 98조 원이 넘는 순현금을 쥐고 있고, 올해 1월부터 9월까지 매출의 62.5%가 미국에서 나왔습니다.", "do": ["sell", "a2"], "at": {"sell": "98조"}},
+        {"say": "파는 쪽에 현금으로 쌓였습니다. 국내 보도로는 SK하이닉스가 9월 말 빚을 빼고도 98조 원이 넘는 순현금을 쥐고 있고, 올해 1월부터 9월까지 매출의 62.5%가 미국에서 나왔습니다.", "do": ["sell", "a2", "us"], "at": {"sell": "98조", "us": "62.5%"}},
     ])
 add(type="checklist", chapter=6, label="SK하이닉스 10.28 실적 콘퍼런스콜(뉴스토마토 2026.11.2 보도) · 한국신용평가 지적도 같은 보도 인용",
     title="장기계약이 묶는 것과 못 묶는 것", x=150, text_w=1150,
@@ -411,11 +444,19 @@ MOT = {   # (장면 id, 박자 번호 1부터) → 말에 맞춰 생기는 숫�
     (29, 2): ST("11월 10일", "11월 10일", "모건스탠리 고객 노트", x=1560, y=930),
 }
 
+def _shift(i):   # 새 장면 둘(맨 앞 질문 · 1장 용어) 때문에 옛 번호 → 새 번호
+    return i + 1 if i < 5 else i + 2
+
+
+DECIDE = {_shift(k): v for k, v in DECIDE.items()}
+MOT = {(_shift(k[0]), k[1] - (1 if k[0] == 1 else 0)): v for k, v in MOT.items()}
+MOT[(_shift(5), 1)] = MOT.pop((_shift(5), 2))   # 아마존 막대: 정의 박자가 빠져 348억은 첫 박자로
+
 for i, sc in enumerate(S, 1):
     sc["id"] = i
     sc.pop("id_key", None)
     sc.pop("key", None)
-    if i in DECIDE:
+    if i in DECIDE and "decide" not in sc:
         sc["decide"] = dict(pick=sc["type"], **DECIDE[i])
     for k, b in enumerate(sc.get("beats", []), 1):
         if (i, k) in MOT:
@@ -473,6 +514,30 @@ SPEC = {
         "vocabulary": ["quote", "versus", "bars", "bignum", "compare", "checklist", "motionboard", "zoomshot"],
         "refs": ["manual/09-market-daily.md", "manual/12-visual-storytelling.md", "recipe:hybrid-causal"],
     },
+    "package": {   # S8 — 썸네일은 02_script/make_thumbs.py 로 합성(이 렌더러의 틀 대신, 2026-11-26 사용자 요청), 제목은 각도를 다르게 (14 §4)
+        "title": "아마존 재시 \"25년에 나눠 쓰는 세상 아니다\" vs 연준 \"이제 빚에 더 기댄다\" — 칩을 사는 돈, 언제까지?",
+        "title_options": [
+            "아마존 재시 \"25년에 나눠 쓰는 세상 아니다\" vs 연준 \"이제 빚에 더 기댄다\" — 칩을 사는 돈, 언제까지?",
+            "빅테크 다섯 곳, 번 돈의 116%를 썼다 — 늘어난 칩값은 빚으로 낸다",
+            "현금 2,650억 달러 구글 모회사는 왜 빚을 냈나 — SK하이닉스 칩값의 진짜 지갑",
+        ],
+        "title_why": ["인물 대결형: 이름 + 따옴표 결론 맞대기 (09 §5-00)", "반전 숫자형: 116% (직접 계산)", "구조·호기심형: 금고가 가득한데 빚 (알파벳 공시)"],
+        "thumb_test": ["A", "B", "C"],
+        "thumbnails": [
+            {"id": "A", "name": "인물 합성 — 재시를 빚 서류 더미 옆 공사장에 녹여 넣고 그의 말", "layout": "composite", "file": "05_edit/thumbnail_A.png",
+             "lines": ["“25년에 나눠", "쓰는 세상 아니다”"], "credit": "사진: Andy Jassy in 2010 (위키미디어 공용, CC BY 2.0) · 배경은 생성 그림(Codex $imagegen)",
+             "why": ["인물·발언 — 가장 많이 쓰는 회사 CEO 의 결론, 원문 'that's not the world that we live in' 에 맞춘 번역"]},
+            {"id": "B", "name": "구조 — 빌린 돈(서류) → 칩 → 파는 쪽 금고", "layout": "composite", "file": "05_edit/thumbnail_B.png",
+             "lines": ["늘어난 칩값은", "빚으로 낸다"], "credit": "배경은 생성 그림(Codex $imagegen), 실제 로고 없음",
+             "why": ["구조·호기심 — 영상의 통찰(추가분은 빌린 돈, 돈은 파는 쪽에 쌓임)을 한 장 그림으로", "6,800억 = 연준 금융안정보고서"]},
+            {"id": "C", "name": "숫자 맞대기 — 아마존 번 돈 424억 vs 쓴 돈 773억", "layout": "composite", "file": "05_edit/thumbnail_C.png",
+             "lines": ["번 것보다", "더 쓴다"], "credit": "배경은 생성 그림(Codex $imagegen) · 숫자: 아마존 3분기 보도자료",
+             "why": ["숫자·반전 — 막대 길이로 1초에 읽힘", "116% = 이 채널 계산(다섯 곳 합계)"]},
+        ],
+        "tags": ["빅테크 설비투자", "AI 설비투자", "AI 회사채", "데이터센터", "앤디 재시", "아마존", "마이크로소프트", "알파벳", "메타", "오라클", "코어위브",
+                 "잉여현금흐름", "연준 금융안정보고서", "AI 거품", "SK하이닉스", "삼성전자", "HBM", "반도체 수요", "회사채 스프레드"],
+        "hashtags": ["AI설비투자", "SK하이닉스", "빅테크"],
+    },
     "footage": {
         "fed_figA": {"file": "fed_figA.mp4", "url": "https://www.federalreserve.gov/publications/files/financial-stability-report-20261113.pdf",
                      "credit": "미국 연방준비제도 이사회 금융안정보고서 2026년 11월, 23쪽 상자 2.2 (미국 정부 저작물, 퍼블릭 도메인) · 그림 A 원자료: 뱅크오브아메리카·블룸버그",
@@ -488,7 +553,7 @@ SPEC["scenes"] = S
 
 if __name__ == "__main__":
     if "--sample" in sys.argv:   # S6: 여는 결론(1~3) · 번 돈 vs 쓴 돈(1장 bars 2개) · 돈의 흐름(6장 motionboard)
-        pick = [1, 3, 5, 8, 11, 31]   # 재시 quote·versus·아마존 bars·116% bars·리스 구조·돈의 흐름
+        pick = [1, 2, 4, 6, 7, 10, 13, 33]   # 재시 quote·versus·아마존 bars·116% bars·리스 구조·돈의 흐름
         pick_types = [S[i - 1] for i in pick]
         sample = dict(SPEC)
         sample["scenes"] = [dict(x) for x in pick_types]

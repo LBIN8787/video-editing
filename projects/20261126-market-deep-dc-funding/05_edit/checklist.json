@@ -1,8 +1,8 @@
 {
  "project": "20261126-market-deep-dc-funding",
  "manual_version": "141",
- "checked": "2026-11-26T10:25:43",
- "pass": false,
+ "checked": "2026-11-26T10:35:48",
+ "pass": true,
  "rows": [
   {
    "gate": "G0",
@@ -15,7 +15,7 @@
    "gate": "G0",
    "level": "SHOULD",
    "item": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
-   "ok": false,
+   "ok": true,
    "detail": "manual/graph.json"
   },
   {
@@ -239,7 +239,7 @@
    "gate": "G1",
    "level": "MUST",
    "item": "매일 브리핑: daily_brief.json 있음 (python -m ytflow daily)",
-   "ok": false,
+   "ok": true,
    "detail": "01_research/daily_brief.json"
   },
   {
@@ -457,7 +457,7 @@
    "level": "참고",
    "item": "반복 피로: 글씨·도형뿐인 장면이 이어지는 구간 — 자료·지도·그림으로 보여 줄 수 있는지 다시 볼 곳 (05 §0-3)",
    "ok": false,
-   "detail": "최장 5연속 (장면 37)"
+   "detail": "최장 5연속 (장면 39)"
   },
   {
    "gate": "G5",
@@ -471,7 +471,7 @@
    "level": "참고",
    "item": "반복 피로: 볼거리(자료·지도·그림)가 있는 장면의 몫",
    "ok": false,
-   "detail": "14/29"
+   "detail": "14/31"
   },
   {
    "gate": "G5",
@@ -498,8 +498,8 @@
    "gate": "G5",
    "level": "SHOULD",
    "item": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번 없음, 한 출처로 표지를 모두 때우지 않음",
-   "ok": false,
-   "detail": "표지 ['fed_figA', 'fed_until', 'fed_figA', 'fed_until', 'fed_figA', 'fed_until', 'fed_figA', 'fed_until'] · 가장 많은 출처 ('미국 연방준비제도 이사회 금융안정보고서 2026년 11월', 8)"
+   "ok": true,
+   "detail": "표지 [] · 가장 많은 출처 ('', 0)"
   },
   {
    "gate": "G5",
@@ -527,7 +527,7 @@
    "level": "참고",
    "item": "스타일 조합: 가장 많이 쓴 스타일의 몫·겹친 장면·같은 스타일 연속",
    "ok": false,
-   "detail": "data-report 0.32 · 겹침 0 · 최장 연속 4"
+   "detail": "data-report 0.3 · 겹침 0 · 최장 연속 4"
   },
   {
    "gate": "G5",
