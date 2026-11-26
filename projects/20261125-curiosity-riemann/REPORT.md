@@ -5,6 +5,9 @@
 | S2 조사 | 완료 — factsheet A1~A5·B1~B10·인사이트 7명 (기사 4곳 원문, 스미스소니언 403) |
 | S3 의도 | 완료 — intent.md, audience.md, visual_beats.md(R1~R12, 대본보다 먼저) |
 | S4 대본 | 완료 — script_v1.md |
-| D2 대본 | **사용자 결정 기다림** |
+| D2 대본 | 통과 (2026-11-25 "일단은 허용입니다", `02_script/script_review.md`) |
+| S5~S7 화면·렌더 | 새 스타일(HyperFrames) 생성기 `02_script/newstyle/` — v1 11-25 렌더, v2 11-26 겹침 3곳 고침(README '고친 것') |
+| S8 포장 | 제목 3·썸네일 A/B/C(`02_script/thumbnails.py`)·설명란 `05_edit/youtube.md`, 싱크 측정 `05_edit/sync_qa.json`(중앙값 0.35초, 화면−소리 0.0초) |
+| D4 최종 | **사용자 결정 기다림** — `inbox/decisions/20261126-20261125-curiosity-riemann-D4.md` |
 - 혼자 판단한 것: 채널 = 호기심(주인공 = 리만의 한 문장). 마시울로 '12년'·상금 지급 여부·1,700만 줄 출처 혼선은 쓰지 않음.
 - 렌더 전 확인: A5(10조 개)·A2(리만 원문 문장)를 위키백과 원문으로, 알푀게 remark.pdf 원문.

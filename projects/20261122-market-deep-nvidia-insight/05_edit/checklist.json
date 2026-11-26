@@ -1,7 +1,7 @@
 {
  "project": "20261122-market-deep-nvidia-insight",
- "manual_version": "121",
- "checked": "2026-11-24T02:03:00",
+ "manual_version": "128",
+ "checked": "2026-11-26T00:48:24",
  "pass": true,
  "rows": [
   {
@@ -15,7 +15,7 @@
    "gate": "G0",
    "level": "SHOULD",
    "item": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
-   "ok": false,
+   "ok": true,
    "detail": "manual/graph.json"
   },
   {
@@ -436,7 +436,7 @@
    "level": "참고",
    "item": "길이(측정값만 — 시간 기준 없음, 구성요소가 정함, README §2-4)",
    "ok": true,
-   "detail": "14.1분"
+   "detail": "14.2분"
   },
   {
    "gate": "G5",
@@ -457,7 +457,7 @@
    "level": "참고",
    "item": "반복 피로: 글씨·도형뿐인 장면이 이어지는 구간 — 자료·지도·그림으로 보여 줄 수 있는지 다시 볼 곳 (05 §0-3)",
    "ok": false,
-   "detail": "최장 6연속 (장면 30)"
+   "detail": "최장 5연속 (장면 30)"
   },
   {
    "gate": "G5",
@@ -470,8 +470,8 @@
    "gate": "G5",
    "level": "참고",
    "item": "반복 피로: 볼거리(자료·지도·그림)가 있는 장면의 몫",
-   "ok": false,
-   "detail": "13/25"
+   "ok": true,
+   "detail": "16/25"
   },
   {
    "gate": "G5",
@@ -520,7 +520,7 @@
    "level": "참고",
    "item": "자료 화면 없이 그래픽만 이어지는 가장 긴 구간",
    "ok": false,
-   "detail": "최장 813초"
+   "detail": "최장 819초"
   },
   {
    "gate": "G5",
@@ -573,6 +573,13 @@
   },
   {
    "gate": "G5",
+   "level": "참고",
+   "item": "연출 결정 기록: 영상 방향·장면마다 고른 것·버린 대안·근거·의도, 같은 상황 같은 선택 (decide, 05 §0-9)",
+   "ok": false,
+   "detail": "['장면 0: 영상 방향(direction) 없음 — 시각 언어 하나를 고른 근거·의도·고려한 대안', '장면 1: 결정 기록(decide) 없음 — bite 를 고른 근거·의도·대안', '장면 2: 결정 기록(decide) 없음 — bignum 를 고른 근거·의도·대안', '장면 3: 결정 기록(decide) 없음 — bignum 를 고른 근거·의도·대안', '장면 4: 결정 기록(decide) 없음 — checklist 를 고른 근거·의도·대안', '장면 5: 결정 기록(decide) 없음 — checklist 를 고른 근거·의도·대안', '장면 7: 결정 기록(decide) 없음 — bite 를 고른 근거·의도·대안', '장면 8: 결정 기록(decide) 없음 — motionboard 를 고른 근거·의도·대안', '장면 10: 결정 기록(decide) 없음 — bite 를 고른 근거·의도·대안', '장면 11: 결정 기록(decide) 없음 — checklist 를 고른 근거·의도·대안', '장면 13: 결정 기록(decide) 없음 — bite 를 고른 근거·의도·대안', '장면 14: 결정 기록(decide) 없음 — bite 를 고른 근거·의도·대안']"
+  },
+  {
+   "gate": "G5",
    "level": "SHOULD",
    "item": "edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움)",
    "ok": false,
@@ -618,7 +625,7 @@
    "level": "MUST",
    "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
    "ok": true,
-   "detail": "{'within_0_5s': 0.996, 'p95_abs_offset': 0.09, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.033}"
+   "detail": "{'within_0_5s': 0.996, 'p95_abs_offset': 0.09, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.067}"
   },
   {
    "gate": "G6",
@@ -632,7 +639,7 @@
    "level": "참고",
    "item": "움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5)",
    "ok": false,
-   "detail": "변화 10.7/분 · 정지 0.65"
+   "detail": "변화 11.7/분 · 정지 0.64"
   },
   {
    "gate": "G6",

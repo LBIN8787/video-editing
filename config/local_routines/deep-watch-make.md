@@ -25,7 +25,7 @@
 ## 2. 만들기 (manual/09 §3~§9)
 1. **팩트시트**: 1차 출처로 확인해 `01_research/factsheet.md` — `## 자료 지도`·`## 매체 프레임`·`## 인사이트`(4명+, 긍정·부정·중립)·`## 주장 해부`·`## 영상 소스`·`## 해석`. 시간대 착각 금지(§3-6: 미국·한국 날짜를 따로).
 2. **원본 발언**: `DEEP_WATCH.json` sources 의 공식 영상에서 주장마다 구간을 찾아 `bite` (`python -m ytflow clip-fetch <프로젝트>`, docs/50).
-3. **대본**: `scripts/deep_<주제>/make.py` 또는 가장 최근 심층 프로젝트의 make 스크립트를 본보기로 → `02_script/hybrid.json`. 대본 뒤 §5-0-1 '만약에 검수'.
+3. **대본**: 구성은 **§5-00 드러켄밀러 편 틀** — 영상의 주어는 앞으로에 대한 누군가의 판단(소식은 근거로만), 주 시청자 니즈로 여는 질문 → **결론 먼저**(믿을 만한 사람의 입으로 첫 30초 안, "그럴듯한데?") → 원리는 궁금해진 뒤 천천히, 설명은 중·고등학생이 따라올 수준(§5-1, 줄이지 않고 쉬운 말로): '왜?' → 이유·근거 → 틀릴 경우 → 결론으로 닫기, 장마다도 결론 한 줄 먼저. 해설 화면은 글 카드가 아니라 문장을 연기하는 모션그래픽, 시점 표현은 날짜 기준. 본보기: `projects/20261120-market-deep-druckenmiller/02_script/hybrid.json`(구성) · `scripts/deep_<주제>/make.py` 또는 가장 최근 심층 프로젝트의 make 스크립트(형식) → `02_script/hybrid.json`. 대본 뒤 §5-0-1 '만약에 검수'.
 4. **검사·렌더**: `python -m ytflow check <프로젝트> --upto G5` (MUST 실패 0) → `python -m ytflow hybrid <프로젝트>`. ElevenLabs 실패 → edge 면 초안 목소리 — 3단계에서 올리지 않도록 보고에 적음.
 5. **제목·썸네일**: manual/09 §7·§7-1 (심층은 날짜·'심층' 딱지·지수 띠 없음, 인물이면 `layout: person`), `thumbnail` 단계 → `05_edit/thumbnail_pick.json`. 태그 15~20개.
 6. **종합 검수 준비**: `python -m ytflow preflight <프로젝트>` 까지 돌려 둡니다(`--looked` 는 3단계가 직접 보고 붙임).

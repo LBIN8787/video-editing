@@ -343,6 +343,11 @@ def main(argv: list[str] | None = None) -> None:
     dl.add_argument("--brand", default="market", choices=["market", "issues"])
     dl.add_argument("--date", default="", help="기준 거래일 YYYY-MM-DD (기본: 한국 아침 기준 가장 최근 거래일)")
     dl.add_argument("--project", default="", help="결과를 넣을 프로젝트 (없으면 새로 만듦)")
+    ins = sub.add_parser("insights", help="인사이트 수집: 기술·시장 인사이트가 나오는 자리를 훑고 '앞으로에 대한 판단'을 주제별 장부로 → inbox/insights/<날짜>.md (docs/70)")
+    ins.add_argument("--no-llm", action="store_true", help="자리 훑기만 (거르기·판단 뽑기 없이)")
+    ins.add_argument("--extract", type=int, default=None, help="자막까지 열어 판단을 뽑을 후보 수 (기본: config 의 extract_top)")
+    ins.add_argument("--mark", nargs=2, metavar=("영상id", "상태"), help="made|skip|watch")
+    ins.add_argument("--our", default="", help="--mark made 와 함께: 우리 유튜브 영상 id (공개→업로드 걸린 날 기록)")
     rd = sub.add_parser("radar", help="원본 레이더: 이름 있는 사람의 원본 영상(원본형 2~9일)·큰 날(사건형 ±3%) 추적 → inbox/radar/<날짜>.md (docs/63)")
     rd.add_argument("--date", default="")
     rd.add_argument("--people", default="", help="쉼표로 몇 사람만 (예: 드러켄밀러,젠슨 황)")
@@ -682,6 +687,12 @@ def main(argv: list[str] | None = None) -> None:
     elif a.cmd == "daily":
         from .stages import daily
         daily.run(a.brand, a.date, a.project)
+    elif a.cmd == "insights":
+        from .stages import insights
+        if a.mark:
+            insights.mark(a.mark[0], a.mark[1], a.our)
+        else:
+            insights.run(a.extract, not a.no_llm)
     elif a.cmd == "radar":
         from .stages import radar
         if a.mark:

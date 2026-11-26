@@ -100,7 +100,7 @@ def _setup(D, sc: dict, title: bool = True):
         D.css.append(f"@font-face{{font-family:heavy;src:url('assets/fonts/{HEAVY.name}')}}")
     D.svg.insert(0, DEFS)
     D.label(sc.get("label", ""))
-    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""))
+    D.chapter_tag(sc.get("_chnum", ""), sc.get("_chtitle", ""), dark=sc.get("theme") == "dark")   # 어두운 판에서 장 이름이 바탕에 묻히지 않게 (2026-11-25)
     if title and sc.get("title"):   # 레퍼런스처럼 왼쪽 위에 작고 굵게 (가운데 큰 제목·밑줄 대신)
         _txt(D, 150, 112, sc["title"], HEAVY, 44, "#3A3F48", at=0.15, anchor="lm")
 
@@ -683,6 +683,12 @@ def s_board(D, sc: dict, bt: list, dur: float):
                             f'tl.call(()=>{{(document.querySelector("#{bx["id"]} .lb")||document.querySelector("#{bx["id"]} div")).textContent={json_str(act["text"])}}},null,{t + 0.15:.2f});'
                             f'tl.to("#{bx["id"]} div",{{opacity:1,duration:.2}},{t + 0.16:.2f});')
             t += act.get("gap", 0.45) if isinstance(act, dict) else 0.45
+    if sc.get("gapline"):   # 기존 장면 아래 빈자리에 시간 줄 하나 (설명 애니메이션 '살짝 더하기', 2026-11-24)
+        from .mechanism import gapline
+        gapline(D, sc, bt)
+    if sc.get("flow"):   # 이미 그린 화살표 길을 따라 동전 하나가 돈다 ('살짝 더하기')
+        from .mechanism import flowtoken
+        flowtoken(D, sc, bt)
 
 
 def json_str(x: str) -> str:

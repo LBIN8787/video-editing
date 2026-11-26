@@ -1,10 +1,10 @@
 {
  "project": "20261122-market-deep-nvidia-circular",
  "final": {
-  "size": 78453938,
-  "mtime": 1795447463
+  "size": 82543496,
+  "mtime": 1795592672
  },
- "at": "2026-11-24T02:24:29",
+ "at": "2026-11-25T18:17:04",
  "checks": {
   "overlap": {
    "pass": true,
@@ -14,12 +14,12 @@
   "subtitle_sync": {
    "pass": true,
    "p95": 0.09,
-   "worst_line": 0.35,
+   "worst_line": 0.33,
    "worst": []
   },
   "av_sync": {
    "pass": true,
-   "video_minus_audio_s": -0.033
+   "video_minus_audio_s": -0.067
   },
   "layout": {
    "pass": true,
@@ -34,9 +34,18 @@
    ]
   },
   "timing": {
-   "pass": true,
-   "lines": [],
+   "pass": false,
+   "lines": [
+    "황 사임 (11.11) → 23일 복귀",
+    "젠슨 황 사임 (11.11) → 23일 복귀",
+    "황 사임 → 크레스 임시 → 23일 복귀"
+   ],
    "note": "만든 날 기준 상대 날짜(이번 주·지난주·어제·지난 N일…)를 실제 날짜로 바꾸고 다시 렌더 — 올리는 날과 보는 날이 달라도 맞게"
+  },
+  "packaging": {
+   "pass": true,
+   "issues": [],
+   "note": "새 사진으로 썸네일을 다시 만들거나 제목·썸네일 글을 고친 뒤 thumbnail → preflight"
   },
   "looked": {
    "pass": true,
@@ -44,5 +53,5 @@
    "note": "프레임 모음을 직접 보고 겹침·잘림·화면 숫자=자막 숫자를 확인한 뒤 --looked 로 다시"
   }
  },
- "pass": true
+ "pass": false
 }

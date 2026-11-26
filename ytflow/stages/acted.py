@@ -103,8 +103,8 @@ def s_pricewalk(D, sc: dict, bt: list, dur: float):
                 x, y = P(act["dot"])
                 i = D._id()
                 D.items.append(f'<div id="{i}" style="position:absolute;left:{x - 11:.0f}px;top:{y - 11:.0f}px;width:22px;height:22px;border-radius:50%;'
-                               f'background:{act.get("color", GOLD)};box-shadow:0 0 0 6px rgba(240,190,90,.18);transform:scale(0)"></div>')
-                D.js.append(f'tl.to("#{i}",{{scale:1,duration:.35,ease:"back.out(2.4)"}},{t:.2f});')
+                               f'background:{act.get("color", GOLD)};box-shadow:0 0 0 6px rgba(240,190,90,.18);opacity:0"></div>')
+                D.js.append(f'tl.fromTo("#{i}",{{scale:0,opacity:1}},{{scale:1,opacity:1,duration:.35,ease:"back.out(2.4)"}},{t:.2f});')  # CSS transform 대신 GSAP 시작값 (lint gsap_css_transform_conflict)
                 side = act.get("side", "above")
                 lx, ly, an = {"above": (x, y - 78, "c"), "below": (x, y + 26, "c"), "left": (x - 26, y - 22, "r"),
                               "right": (x + 26, y - 22, "l")}[side]
