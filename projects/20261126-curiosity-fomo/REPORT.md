@@ -50,3 +50,9 @@ python make_evidence.py <PDF 폴더> <조각 폴더>
 SPEC=fomo.json OVERLAY=fomo_overlay.html TIMELINE=fomo_timeline.json python render_full.py <TTS 폴더> <조각 폴더> <작업 폴더> <출력.mp4> 6
 python thumbnails.py <조각 폴더> <출력 폴더>
 ```
+
+## 2026-11-26 밤 — 통과 → 더빙 → 업로드 대기
+- 사용자: "더빙해서 그대로 올려주세요" → 통과 기록(`review --pass`, 매뉴얼 잠금 중이라 제안함 `proposals/manual/20261126-213108-curiosity-fomo-pub.md`).
+- ElevenLabs 직접 API(`E:/ytflow-local/fix-jiwoo/el_voice.py`, Nobel Butler · eleven_v4)로 44박자 더빙 → Drive `…/05_edit/fomo_v2_el.mp4` (9:33). 싱크 중앙값 0.05초 · 화면−소리 0.004초(sync-qa 통과). 자막·챕터 시각은 더빙판 기준으로 다시 맞춤(`subs.ass`, `youtube.md`).
+- **업로드 대기:** `yt-publish` 전 종합 검수(preflight)가 이 렌더러를 못 읽음(overlapqa 가 hybrid_timeline.json 만 찾음). 사용자 선택 "올리지 말고 대기" → 검사 코드 고치기 요청 `proposals/manual/20261126-214206-curiosity-fomo-pub.md`(잠금: market-daily 세션).
+- 고친 뒤 올리기: `fomo_v2_el.mp4` 를 05_edit/final.mp4 로, 썸네일 A/B/C 를 05_edit 로 놓고 → `python -m ytflow preflight projects/20261126-curiosity-fomo` → `python -m ytflow yt-publish projects/20261126-curiosity-fomo --via here --at <다음 빈 날>T18:00 --thumb A`.
