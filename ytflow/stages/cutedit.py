@@ -189,9 +189,11 @@ def s_bite(D, sc: dict, bt: list, dur: float):
                        f'<div style="font-family:sans;font-size:30px;margin-top:14px;opacity:.85">{_e(role)}</div></div>')
         D.js.append(f'tl.fromTo("#{i}c",{{opacity:0,y:16}},{{opacity:1,y:0,duration:0.5}},0.3);')
         D.js.append(f'tl.to("#{i}c",{{opacity:0,duration:0.25}},{tb - 0.1:.2f});')
+    # 밝은 원본(흰 표지 화면 등)에서 이름표·원문 글자 대비가 모자라면 "dim": 0.55 처럼 어둡게 (2026-11-26)
+    _dim = f";filter:brightness({float(sc['dim']):.2f})" if sc.get("dim") else ""
     D.media.append(f'<div id="{i}w" style="position:absolute;inset:0;overflow:hidden;opacity:0">'
                    f'<video id="{i}" class="clip" src="assets/{name}" muted playsinline data-start="{tb:.2f}" data-duration="{bd:.2f}" '
-                   f'data-track-index="2" style="width:100%;height:100%;object-fit:cover"></video></div>'
+                   f'data-track-index="2" style="width:100%;height:100%;object-fit:cover{_dim}"></video></div>'
                    f'<div id="{i}g" style="position:absolute;inset:0;opacity:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 18%,'
                    f'rgba(0,0,0,0) 58%,rgba(0,0,0,.6) 100%)"></div>')
     D.js.append(f'tl.set("#{i}w,#{i}g",{{opacity:1}},{tb:.2f});')
