@@ -28,7 +28,7 @@
 
 **이유:** 검색어 '소현세자'를 앞 20자 안에, 의혹(아버지·독살)을 질문으로. 1번은 상위 영상들이 가장 많이 쓴 '아버지 인조' 대립, 2번은 숫자('두 달'), 3번은 우리 영상의 형식(단서·반대 증거)을 약속.
 
-## 썸네일 (Drive `영상/20261126-history-sohyeon/thumbs/thumbnail_A~C.png`, 미리보기 `thumbnail_preview.png`)
+## 썸네일 v3 — 채널 공통 스타일(Noto Sans KR Black·외곽선 없음·왼쪽 정렬·이름표 상자 없음)로 다시 그림 (Drive `영상/20261126-history-sohyeon/thumbs/thumbnail_A~C.png`, 미리보기 `thumbnail_preview.png`)
 | | 큰 글씨 두 줄 | 그림 |
 |---|---|---|
 | **A (추천)** | 아버지가 **독살**했나? / 소현세자의 죽음 | 왼쪽 아버지 인조 · 오른쪽 아들 소현세자 (이름표) |

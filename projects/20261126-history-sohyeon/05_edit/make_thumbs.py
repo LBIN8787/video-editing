@@ -1,84 +1,81 @@
-"""썸네일 A/B/C v2 — 사용자: "제목과 썸네일을 봤을 때 이게 뭔 내용이지? 뭘 말하고 싶은 건지 모르겠어요".
-같은 주제 인기 영상 12개 썸네일을 비교(05_edit/package.md): 잘 되는 썸네일은 ① 이름(소현세자)과 의혹(독살·아버지 인조)을
-아래쪽 큰 두 줄로 바로 말하고 ② 대립하는 두 사람 얼굴을 크게 ③ 강조 한 낱말만 색. 구조만 따르고 그림·문구는 우리 것.
+"""썸네일 A/B/C v3 — 문구는 v2(같은 주제 인기 영상 비교: 이름 + 의혹을 바로), 모양은 채널 공통 확정 스타일(2026-11-26):
+Noto Sans KR Black · 굵은 외곽선 없음(부드러운 그림자) · 작은 이름 한 줄 + 주장 두 줄 왼쪽 정렬 · 이름표 상자 없음 · 깊은 금색/진홍.
 그림은 본편과 같은 재현 그림(A안, Codex). 결과는 Drive 영상 폴더 thumbs/."""
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont, ImageEnhance, ImageFilter
+from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 
 EP = Path(r"G:\내 드라이브\ytflow\영상\20261126-history-sohyeon")
 OUT = EP / "thumbs"; OUT.mkdir(exist_ok=True)
 W, H = 1280, 720
-BOLD = r"C:\Windows\Fonts\malgunbd.ttf"
-YEL, RED, IVORY = (255, 214, 64), (225, 38, 38), (250, 246, 238)
+NOTO = r"C:\Windows\Fonts\NotoSansKR-VF.ttf"
+GOLD, CRIMSON, WHITE, GREY = (246, 196, 38), (228, 62, 52), (250, 250, 250), (205, 205, 210)
 
 
-def crop(img, cx, cy, cw, bright=1.0, aspect=9 / 16, size=(W, H)):
-    im = Image.open(EP / img).convert("RGB"); w, h = im.size
-    box = (int(cx * w), int(cy * h), int((cx + cw) * w), int(cy * h + cw * w * aspect))
-    return ImageEnhance.Brightness(im.crop(box).resize(size, Image.LANCZOS)).enhance(bright)
+def font(size, weight="Black"):
+    f = ImageFont.truetype(NOTO, size); f.set_variation_by_name(weight); return f
 
 
-def bottom_band(im, top=0.42):
-    g = Image.new("L", (1, H))
-    for y in range(H):
-        t = (y / H - top) / (1 - top); g.putpixel((0, y), int(255 * max(0, min(1, t)) ** 0.8 * 0.92))
-    return Image.composite(Image.new("RGB", (W, H)), im, g.resize((W, H)))
+def txt(im, xy, s, size, fill=WHITE, hl=None, hl_fill=GOLD, weight="Black", track=-0.045):
+    f = font(size, weight); d = ImageDraw.Draw(im)
+    adv = [d.textlength(c, font=f) + size * track for c in s]; x, y = xy
+    hs = s.index(hl) if hl and hl in s else -1
+    cols = [hl_fill if 0 <= hs <= i < hs + len(hl) else fill for i in range(len(s))]
+    sh = Image.new("RGBA", im.size, (0, 0, 0, 0)); ds = ImageDraw.Draw(sh); cx = x
+    for c, a in zip(s, adv): ds.text((cx + 2, y + size * .06), c, font=f, fill=(0, 0, 0, 200)); cx += a
+    im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(size * .08))); d = ImageDraw.Draw(im); cx = x
+    for c, a, col in zip(s, adv, cols): d.text((cx, y), c, font=f, fill=col); cx += a
+    return sum(adv)
 
 
-def two_lines(d, rows, size=112, y=None):
-    """rows=[[(글, 색), ...], ...] 가운데 정렬, 아래쪽 큰 두 줄."""
-    f = ImageFont.truetype(BOLD, size)
-    y = y if y is not None else H - 40 - len(rows) * int(size * 1.12)
-    for parts in rows:
-        tot = sum(d.textlength(s, font=f) for s, _ in parts); x = (W - tot) / 2
-        for s, c in parts:
-            d.text((x, y), s, font=f, fill=c, stroke_width=9, stroke_fill=(0, 0, 0)); x += d.textlength(s, font=f)
-        y += int(size * 1.12)
+def crop(img, cx, cy, cw, bright=1.0, size=(W, H)):
+    im = Image.open(EP / img).convert("RGB"); w, h = im.size; asp = size[1] / size[0]
+    box = (int(cx * w), int(cy * h), int((cx + cw) * w), int(cy * h + cw * w * asp))
+    im = ImageEnhance.Brightness(im.crop(box).resize(size, Image.LANCZOS)).enhance(bright)
+    im = ImageEnhance.Contrast(im).enhance(1.1)
+    return im.filter(ImageFilter.UnsharpMask(2, 80, 2))
 
 
-def tag(d, s, xy, bg=RED, size=40):
-    f = ImageFont.truetype(BOLD, size); x, y = xy; tw = d.textlength(s, font=f)
-    d.rounded_rectangle((x, y, x + tw + 36, y + size + 22), 8, fill=bg); d.text((x + 18, y + 8), s, font=f, fill=(255, 255, 255))
+def left_dark(im, start=.62, k=.9):
+    m = Image.new("L", (W, 1))
+    for i in range(W): m.putpixel((i, 0), int(255 * k * max(0, min(1, (1 - i / (W * start)) * 1.25))))
+    return Image.composite(Image.new("RGB", (W, H), (10, 10, 13)), im, m.resize((W, H)))
 
 
-def fit_check(rows, size):
-    f = ImageFont.truetype(BOLD, size); d = ImageDraw.Draw(Image.new("RGB", (1, 1)))
-    return max(sum(d.textlength(s, font=f) for s, _ in r) for r in rows) < W - 60
+def bottom_dark(im, start=.45, k=.9):
+    m = Image.new("L", (1, H))
+    for j in range(H): m.putpixel((0, j), int(255 * k * max(0, (j / H - start) / (1 - start)) ** .8))
+    return Image.composite(Image.new("RGB", (W, H), (10, 10, 13)), im, m.resize((W, H)))
 
 
-# A — 아버지(인조) 와 아들(소현세자) 두 얼굴 + "아버지가 독살했나? / 소현세자의 죽음"
+def layout(im, name, l1, l2, hl1=None, hl2=None, c1=GOLD, c2=GOLD, size=104):
+    im = im.convert("RGBA"); y = H - 70 - 2 * int(size * 1.08) - 52
+    txt(im, (64, y), name, 40, fill=GREY, weight="Bold", track=-.02)
+    txt(im, (60, y + 56), l1, size, hl=hl1, hl_fill=c1)
+    txt(im, (60, y + 56 + int(size * 1.08)), l2, size, hl=hl2, hl_fill=c2)
+    return im.convert("RGB")
+
+
+# A — 아버지 인조(왼쪽) · 아들 소현세자(오른쪽) 합친 판
 a = Image.new("RGB", (W, H))
-king = crop("art/N11_injo.png", 0.615, 0.25, 0.15, 2.2, aspect=720 / 640, size=(640, 720))
-prince = crop("samples/A3_observatory.png", 0.12, 0.02, 0.34, 1.0, aspect=720 / 640, size=(640, 720))
-a.paste(king, (0, 0)); a.paste(prince, (640, 0))
-mask = Image.linear_gradient("L").rotate(90).resize((120, H)); a.paste(king.crop((520, 0, 640, H)), (520, 0), mask)
-a = bottom_band(a, .40); d = ImageDraw.Draw(a)
-tag(d, "아버지 · 인조", (30, 30), bg=(40, 40, 40)); tag(d, "아들 · 소현세자", (W - 330, 30), bg=(40, 40, 40))
-rowsA = [[("아버지가 ", IVORY), ("독살", RED), ("했나?", IVORY)], [("소현세자의 죽음", YEL)]]
-assert fit_check(rowsA, 118); two_lines(d, rowsA, 118); a.save(OUT / "thumbnail_A.png")
+king = crop("art/N11_injo.png", .64, .25, .11, 2.1, size=(560, H)); prince = crop("samples/A3_observatory.png", .1, .0, .42, 1.0, size=(760, H))
+a.paste(king, (0, 0)); a.paste(prince, (520, 0))
+m = Image.linear_gradient("L").rotate(90).resize((120, H)); a.paste(king.crop((440, 0, 560, H)), (440, 0), m)
+a = bottom_dark(a, .38, .95)
+layout(a, "소현세자 · 1645", "아버지 인조가", "아들을 독살했나?", hl2="독살", c2=CRIMSON).save(OUT / "thumbnail_A.png")
 
-# B — 병상의 세자 + "귀국 두 달 만에 / 죽은 소현세자" + '실록: 독에 중독된 듯' 쪽지
-b = bottom_band(crop("art/N6_physician.png", 0.2, 0.05, 0.62, 1.25), .38); d = ImageDraw.Draw(b)
-tag(d, "실록: \"약물에 중독된 사람 같았다\"", (30, 30), size=38)
-rowsB = [[("귀국 ", IVORY), ("두 달", YEL), (" 만에", IVORY)], [("죽은 소현세자", IVORY)]]
-assert fit_check(rowsB, 120); two_lines(d, rowsB, 120); b.save(OUT / "thumbnail_B.png")
+# B — 병상의 세자
+b = bottom_dark(left_dark(crop("art/N6_physician.png", .2, .05, .62, 1.3), .55, .75), .4, .9)
+layout(b, "소현세자 · 1645", "귀국 두 달 만에", "갑자기 죽은 세자", hl1="두 달").save(OUT / "thumbnail_B.png")
 
-# C — 실록 종이 + 세자 얼굴, "누가 소현세자를 / 죽였나" (380년 미해결)
-c = Image.new("RGB", (W, H), (20, 16, 12))
-paper = Image.new("RGB", (700, H), (214, 196, 156)); dp = ImageDraw.Draw(paper); fs = ImageFont.truetype(r"C:\Windows\Fonts\batang.ttc", 52)
-for i, s in enumerate(["온몸이 전부 검은빛이었고", "일곱 구멍에서 선혈이", "마치 약물에 중독되어", "죽은 사람과 같았다"]):
-    dp.text((50, 60 + i * 80), s, font=fs, fill=(42, 30, 20))
-dp.ellipse((30, 270, 560, 360), outline=(190, 20, 25), width=8)
-c.paste(paper.rotate(3, expand=False, fillcolor=(20, 16, 12)), (-40, 0))
-c.paste(crop("samples/A3_observatory.png", 0.12, 0.02, 0.34, .95, aspect=720 / 640, size=(640, 720)), (640, 0))
-c = bottom_band(c, .45); d = ImageDraw.Draw(c)
-tag(d, "인조실록 · 1645", (30, 30), size=36)
-rowsC = [[("누가 ", IVORY), ("소현세자", YEL), ("를", IVORY)], [("죽였나", RED)]]
-assert fit_check(rowsC, 120); two_lines(d, rowsC, 120); c.save(OUT / "thumbnail_C.png")
+# C — 실제 실록 사진 + 세자
+c = Image.new("RGB", (W, H), (12, 12, 15))
+r = Image.open(EP / "real" / "R_sillok.jpg").convert("RGB"); r.thumbnail((700, 720)); c.paste(ImageEnhance.Brightness(r).enhance(.6), (0, (H - r.height) // 2))
+c.paste(crop("samples/A3_observatory.png", .12, .02, .34, .95, size=(600, H)), (680, 0))
+c = bottom_dark(c, .4, .95)
+layout(c, "인조실록이 남긴 죽음", "누가 소현세자를", "죽였나?", hl1="소현세자", hl2="죽였나?", c2=CRIMSON).save(OUT / "thumbnail_C.png")
 
-# 미리보기: 실제 크기 + 휴대폰 목록 크기
 pv = Image.new("RGB", (3 * 660 + 40, 520), (24, 24, 24)); dp = ImageDraw.Draw(pv)
-for i, (n, im) in enumerate([("A", a), ("B", b), ("C", c)]):
-    pv.paste(im.resize((640, 360)), (20 + i * 660, 20)); pv.paste(im.resize((168, 94)), (20 + i * 660, 400))
-    dp.text((210 + i * 660, 420), n, font=ImageFont.truetype(BOLD, 40), fill=(255, 255, 255))
-pv.save(OUT / "thumbnail_preview.png"); print("ok", OUT)
+for i, n in enumerate("ABC"):
+    im = Image.open(OUT / f"thumbnail_{n}.png"); pv.paste(im.resize((640, 360)), (20 + i * 660, 20)); pv.paste(im.resize((168, 94)), (20 + i * 660, 400))
+    dp.text((210 + i * 660, 420), n, font=font(40), fill=(255, 255, 255))
+pv.save(OUT / "thumbnail_preview.png"); print("ok")
