@@ -193,3 +193,14 @@
 - 이코노미스트·지디넷 숫자를 SK하이닉스·삼성전자 분기보고서(DART)로 대조
 - 오라클 회계 2분기 실적 날짜
 - 올리기 직전 그사이 바뀐 사실(오라클 실적·스프레드·새 발행) 덧붙이기 (03 §0-5 ④)
+
+## 인사이트 v2 — 사는 쪽의 말 (2026-11-26 추가, 대본 v2 주인공)
+| 누가 | 어디서 | 날짜 | 원문 | 상태 | 출처 |
+|---|---|---|---|---|---|
+| 앤디 재시 (아마존 CEO) | 3분기 실적 콜 | 2026-10-29 | "Would it be more convenient if this type of acceleration and opportunity happened over 25 years, and you can spread the capex over 25 years? … Yeah, it might be more convenient, but that's not the world that we live in, and that's not the opportunity." | ⚠️ CNBC 보도 인용(콜 녹취·웹캐스트 시각 미확인 — PC 에서 아마존 IR 웹캐스트로 원본 음성 찾기) | https://www.cnbc.com/2026/10/30/tech-giants-alphabet-meta-microsoft-amazon-ai-buildouts.html |
+| 에이미 후드 (마이크로소프트 CFO) | 회계 1분기 실적 콜 | 2026-10-28 | "There's a form of financing called leasing, and we've been using that one as a vehicle" / "We're fortunate to have access in the debt markets, given where our ratings are, and we haven't yet tapped that." | ⚠️ CNBC 10-29 보도 인용 | https://www.cnbc.com/2026/10/29/microsoft-25-billion-debt-offering.html |
+| 마이크로소프트 | 회사채 | 2026-10-29 보도 / 11-04 발행(Walnut 8-K 목록) | 250억 달러 | ⚠️ 보도 | 같은 주소 |
+| 메타 (회사) | 보도자료 | 2026-10-26 | 투자는 "a balanced mix of operating cash flow, investment-grade debt, strategic partnerships, and equity capital" · 보통주(선도 매도) 약 225억 + 의무 전환우선주 약 125억 (+초과 배정 33.75억) · C주 상장 뒤 약 600억 수시 발행, 2027년 1분기 전엔 시작 안 함 · 엔비디아·AMD·브로드컴 합계 최대 50억 매입 의향(구속력 없음) | ✅ 회사 보도자료 | https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Announces-Launch-of-Offering-of-Depositary-Shares-Representing-Series-A-Mandatory-Convertible-Preferred-Stock-and-Offering-of-Class-A-Common-Stock-in-Connection-with-Forward-Sale-Agreements/default.aspx |
+| 알파벳 CFO 아낫 아시케나지 | 2분기 콜 | 2026-07-22 | "we continue to expect our CapEx to increase significantly in 2027" | ⚠️ 2차(convexityos) · 10월 콜 아님 — 대본에 안 씀 | https://convexityos.com/blog/ai-buildout-financing-ledger |
+
+- 앞 판단 수정: 메타 'C주 약 600억'은 회사 보도자료로 ✅ 확인됨 (위 '쓰지 않는 것'에서 해제).
