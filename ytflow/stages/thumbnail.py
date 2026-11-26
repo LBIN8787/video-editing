@@ -991,6 +991,63 @@ def repeat_penalty(v: dict, recent: list[dict]) -> tuple[float, list[str]]:
     return d, why
 
 
+def _layout_sig(v: dict) -> str:
+    """구도 이름: 배치 + 합친 판 여부 (같은 인물을 다시 다룰 때 같은 구도인지 보는 데 씀)."""
+    return f"{v.get('layout', 'photo')}{'+blend' if v.get('blend') else ''}"
+
+
+def _img_hash(base: Path, f: str) -> str:
+    import hashlib
+    q = base / f if f else None
+    try:
+        return hashlib.sha1(q.read_bytes()).hexdigest()[:16] if q and q.is_file() else ""
+    except OSError:
+        return ""
+
+
+def person_uploads(project: Project) -> list[dict]:
+    """채널 전체(시리즈 무관)에서 이 편보다 먼저 실제로 올린 인물 썸네일 — 인물·사진(파일 이름·내용)·구도.
+    2026-11-26 사용자: "똑같은 인물에 대해서 이를 다룰때 똑같은 구도 똑같은 사진으로 썸네일을 작성하지 않도록 주의하세요"."""
+    out: list[dict] = []
+    for d in sorted(project.path.parent.glob("2*"), reverse=True):
+        if d.name == project.path.name:
+            continue
+        pub, hy = d / "05_edit" / "youtube_publish.json", d / "02_script" / "hybrid.json"
+        if not (pub.exists() and hy.exists()):
+            continue
+        try:
+            pj = json.loads(pub.read_text(encoding="utf-8"))
+            used = re.search(r"thumbnail_([A-Z])", pj.get("thumbnail", "")).group(1)
+            used = _rethumbs().get(pj.get("video_id", ""), used)
+            v = next(t for t in json.loads(hy.read_text(encoding="utf-8"))["package"]["thumbnails"] if t["id"] == used)
+        except Exception:
+            continue
+        per = (v.get("person") or {}).get("name", "")
+        if not per:
+            continue
+        f = ((v.get("image") or {}).get("file")) or ""
+        out.append({"project": d.name, "person": per, "image": Path(f).name, "hash": _img_hash(d, f), "layout": _layout_sig(v)})
+    return out
+
+
+def same_person_penalty(project: Project, v: dict, hist: list[dict]) -> tuple[float, list[str]]:
+    """같은 인물을 전에 썸네일에 썼으면: 같은 사진(이름이나 내용이 같음)은 크게 깎고(−6, 얼굴 가점을 넘게), 같은 구도는 −2.
+    같은 사람이라도 다른 장면의 얼굴(다른 인터뷰·다른 표정)과 다른 배치로 — 목록에서 '본 영상'으로 보이지 않게."""
+    per = (v.get("person") or {}).get("name", "")
+    if not per:
+        return 0.0, []
+    f = ((v.get("image") or {}).get("file")) or ""
+    img, h, sig = Path(f).name, _img_hash(project.path, f), _layout_sig(v)
+    for r in hist:
+        if r["person"] != per:
+            continue
+        if (img and img == r["image"]) or (h and h == r["hash"]):
+            return -6.0, [f"같은 인물({per})을 같은 사진으로 이미 씀({r['project']}) −6 — 다른 장면·다른 사진으로"]
+        if sig == r["layout"]:
+            return -2.0, [f"같은 인물({per})을 같은 구도({sig})로 이미 씀({r['project']}) −2 — 배치를 바꾸기(합친 판·반반·맞대기)"]
+    return 0.0, []
+
+
 _PCT = re.compile(r"([가-힣]+|[A-Za-z&]{2,}(?:\([A-Z]+\))?)\s+[\d,]+(?:\.\d+)?\s*(?:달러|원|포인트|p)?\s*\(\s*([-−+]?\d+(?:\.\d+)?)%")
 
 
@@ -1021,9 +1078,14 @@ def pick(project: Project, pkg: dict, qa: dict) -> dict:
     sr = series(project)
     scores = {v["id"]: score(v, qa.get(v["id"], {}), hot, title, sr) for v in pkg["thumbnails"]}
     recent = recent_uploads(project)
+    phist = person_uploads(project)
     for v in pkg["thumbnails"]:
         s_, w_ = scores[v["id"]]
         d, why = repeat_penalty(v, recent)
+        d2, why2 = same_person_penalty(project, v, phist)
+        d, why = d + d2, why + why2
+        for w in why2:
+            print(f"[thumbnail] ⚠ {v['id']}: {w}")
         if d:
             scores[v["id"]] = (round(s_ + d, 2), w_ + why)
     forced = pkg.get("thumb_pick")
