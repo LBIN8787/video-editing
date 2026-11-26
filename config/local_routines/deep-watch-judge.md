@@ -22,7 +22,7 @@
 한 차례에 가장 강한 **하나만** 만든다. 사건형과 원본형이 겹치면 사건형(마감이 짧음)을 먼저.
 
 ## 2. 결과 남기기
-- **모든 차례:** `$YTFLOW_DRIVE/_local/deep-watch-log.md` 에 `<YYYY-MM-DD HH:MM> | 만듦/안 만듦/지켜봄 | <후보> | <이유 한 줄> (Fable)` 한 줄씩(후보마다). 레이더 후보를 버렸으면 `python -m ytflow radar --mark <영상id> skip`, 지켜보면 `watch`.
+- **모든 차례:** `inbox/deep-watch/log.md`(git — 2026-11-26 부터 Drive 대신) 에 `<YYYY-MM-DD HH:MM> | 만듦/안 만듦/지켜봄 | <후보> | <이유 한 줄> (Fable)` 한 줄씩(후보마다). 레이더 후보를 버렸으면 `python -m ytflow radar --mark <영상id> skip`, 지켜보면 `watch`.
 - **안 만들면:** 작업 폴더 맨 위에 빈 파일 `ROUTINE_STOP`, `LOCAL_RESULT.md` 첫 줄 `심층 감시 <HH:MM>: 안 만듦 — <이유 한 줄>`. tracker 가 바뀌었으면 그것만 커밋해 main 에 push. 끝.
 - **만들면:** 작업 폴더 맨 위 `DEEP_WATCH.json` (git 에 넣지 않음):
   ```json
