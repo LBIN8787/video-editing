@@ -331,7 +331,7 @@ def _face_box(im: Image.Image):
     return max(fs, key=lambda f: f[2] * f[3]) if len(fs) else None
 
 
-def _person_crop(im: Image.Image, w: int, h: int, face_h: float = 0.46) -> Image.Image:
+def _person_crop(im: Image.Image, w: int, h: int, face_h: float = 0.46, face_x: float = 0.5) -> Image.Image:
     """얼굴이 칸 높이의 face_h 가 되고, 얼굴 가운데가 칸의 (0.5, 0.40) 에 오도록 자름. 얼굴을 못 찾으면 위쪽 가운데."""
     f = _face_box(im)
     if f is None:
@@ -340,7 +340,7 @@ def _person_crop(im: Image.Image, w: int, h: int, face_h: float = 0.46) -> Image
     s = max(face_h * h / fh, w / im.width, h / im.height)
     im2 = im.resize((math.ceil(im.width * s), math.ceil(im.height * s)), Image.LANCZOS)
     cx, cy = (fx + fw / 2) * s, (fy + fh / 2) * s
-    x = int(min(max(cx - w * 0.5, 0), im2.width - w))
+    x = int(min(max(cx - w * face_x, 0), im2.width - w))
     y = int(min(max(cy - h * 0.40, 0), im2.height - h))
     return im2.crop((x, y, x + w, y + h))
 
@@ -348,22 +348,31 @@ def _person_crop(im: Image.Image, w: int, h: int, face_h: float = 0.46) -> Image
 def _person(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
     """인물 썸네일: 오른쪽 얼굴 크게(컬러) + 이름표, 왼쪽 검은 바탕 큰 두 줄 (+ 따옴표 한 마디)."""
     base = Image.new("RGBA", (W, H), (12, 14, 20, 255))
-    pw = int(W * v.get("photo_width", 0.56))
+    blend = bool(v.get("blend"))   # 2026-11-26 사용자: "인물반 글씨반 말고 둘이 합쳐서" → 사진을 화면 전체에, 글씨는 사진 위에 (왼쪽만 어둡게)
+    pw = W if blend else int(W * v.get("photo_width", 0.56))
     im = _person_crop(_image(project, spec, v["image"]), pw, H, v.get("face_h", 0.46))
     im = ImageEnhance.Contrast(im).enhance(1.08)
-    base.paste(im, (W - pw, 0))
+    # blend: 얼굴(칸 가운데)을 오른쪽 face_x 로 밀어 붙이고, 빈 왼쪽은 어두운 바탕 → 그 위 글씨
+    base.paste(im, (int(W * (v.get("face_x", 0.66) - 0.5)), 0) if blend else (W - pw, 0))
     g = Image.new("L", (W, H), 0)   # 사진 왼쪽 가장자리를 검은 바탕으로 부드럽게
     gd = ImageDraw.Draw(g)
-    for i in range(260):
-        gd.line([(W - pw + i, 0), (W - pw + i, H)], fill=int(255 * (1 - i / 260) ** 1.5))
-    gd.rectangle([0, 0, W - pw, H], fill=255)
+    if blend:   # 왼쪽 60% 를 반투명으로 어둡게 — 사진이 비치되 글씨는 읽힘
+        span = int(W * v.get("shade_w", 0.62))
+        sx = int(W * (v.get("face_x", 0.66) - 0.5))   # 밀어 붙인 사진의 왼쪽 끝 — 경계선이 안 보이게 그 근처는 완전히 어둡게 이어 줌
+        for i in range(span):
+            edge = 255 if i < sx else (255 * max(0.0, 1 - (i - sx) / 220) ** 1.4)
+            gd.line([(i, 0), (i, H)], fill=int(max(v.get("shade", 205) * (1 - i / span) ** 1.2, edge)))
+    else:
+        for i in range(260):
+            gd.line([(W - pw + i, 0), (W - pw + i, H)], fill=int(255 * (1 - i / 260) ** 1.5))
+        gd.rectangle([0, 0, W - pw, H], fill=255)
     base = Image.composite(Image.new("RGBA", (W, H), (12, 14, 20, 255)), base, g)
     d = ImageDraw.Draw(base)
     boxes = []
     per = v.get("person") or {}
     if per.get("name"):   # 이름표: 얼굴 아래, 재생 시간 자리(오른쪽 아래) 피해서
         fn, fr = _font(GOTHIC_X, 46), _font(GOTHIC_X, 30)
-        nx, ny = W - pw + 60, H - 170
+        nx, ny = (int(W * 0.56) + 60 if blend else W - pw + 60), H - 170
         nw = max(fn.getlength(per["name"]), fr.getlength(per.get("role", ""))) + 40
         d.rounded_rectangle([nx, ny, nx + nw, ny + 104], 10, fill=(12, 14, 20, 235))
         d.rectangle([nx, ny, nx + 8, ny + 104], fill=RED)
@@ -376,7 +385,8 @@ def _person(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
         d.rounded_rectangle([tx - 6, y - 66, tx + ft.getlength(v["top"]) + 26, y - 14], 10, fill=RED)
         d.text((tx + 10, y - 62), v["top"], font=ft, fill=(255, 255, 255))
         boxes.append((tx, y - 66, tx + ft.getlength(v["top"]) + 26, y - 14))
-    boxes += _text_block(d, v["lines"], v.get("hl", []), tx, y, W - pw + 120, v.get("size", 132))
+    fnt = {"bhs": BHS, "myeongjo": MYEONGJO_X}.get(v.get("font", ""), GOTHIC_X)   # 글씨체 고르기 (기본 나눔고딕 ExtraBold)
+    boxes += _text_block(d, v["lines"], v.get("hl", []), tx, y, (int(W * 0.62) if blend else W - pw + 120), v.get("size", 132), font=fnt)
     if v.get("quote"):
         fq = _font(GOTHIC_X, 56)   # 휴대폰 목록(가로 168px)에서도 6px 넘게
         q = f"\u201c{v['quote']}\u201d"
