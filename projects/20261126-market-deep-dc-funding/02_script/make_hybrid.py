@@ -46,13 +46,13 @@ def kb(chapter, src, stamp, name, role, say, label, decide):
 
 
 def chap(n, title, icon, say):
-    add(type="chapter", chapter=n, num=str(n), title=title, icon=icon, look="board", beats=[{"say": say}])   # 표지: 문서 사진 반복 대신 보드 (드러켄밀러 편과 같음)
+    add(type="chapter", chapter=n, num=str(n), title=title, icon=icon, look="noir", beats=[{"say": say}])   # 표지: 코르크판 대신 어두운 누아르 카드 (2026-11-26 사용자: 코르크판 최대한 안 씀)
 
 
 # ── 0. 여는 장면: 사는 쪽 CEO 의 결론 → 맞서는 결론 → 이 영상의 답 ──────────────
 add(type="bite", chapter=0, insight=True, who='앤디 재시', role='아마존 CEO', _kb=True,
     label="세마포(Semafor) 공식 채널 2026.11.18 'We Have To Do It': Amazon CEO Andy Jassy On Racing China In The AI Buildout · 인용",
-    beats=[{'say': '11월 18일, 아마존의 앤디 재시 CEO에게 이 막대한 설비투자의 근거를 물었습니다.'}],
+    beats=[{'say': '빅테크는 AI 데이터센터 지을 돈을 어디서 구하고, 언제까지 낼 수 있을까요. 이 영상은 그 돈의 출처를 따라갑니다. 11월 18일, 아마존의 앤디 재시 CEO는 이렇게 답했습니다.'}],
     clip={"src": "sem_j1a", "lang": "en", "fit": "contain", "cuts": [{'find': 'you end up having a lot of capex which creates some headwinds on your short-term free cash flow', 'ko': '이렇게 빠르게 커지면 설비투자가 아주 많아지고, 그게 단기 잉여현금흐름에 역풍이 됩니다.'}]},
     show_en=False,
     decide=dict(pick="bite", situation="call-bite", differs="같은 사람·같은 상황이라도 원본 발언 영상이 있으면 영상으로 (2026-11-26 사용자)",
@@ -79,11 +79,11 @@ add(type="bite", chapter=0, insight=True, who="앤디 재시", role="아마존 C
     show_en=False,
     decide=dict(pick="bite", situation="call-bite", over=[O("quote", "인용 카드는 남이 전한 말 — 본인 목소리가 있으면 목소리로 (2026-11-26 사용자)"), O("kb", "사진만으로는 말이 안 들림"), O("bars", "숫자는 다음 장면에서 — 먼저 그의 말")],
                 why="결론을 그 사람의 목소리로 먼저 (09 §5-00 ①) — 아마존 IR 공식 녹음에서 대본과 같은 문장만 잘라 원문·번역", intent="'멈출 수 없다, 돈은 댈 수 있다'를 재시 본인의 목소리로 듣는다", refs=[R13]))
-add(type="bignum", chapter=0, label="아마존 3분기 보도자료(2026.10.29) — 'We continue to expect 2026 cash capital expenditures to be approximately $220 billion.'",
-    small="아마존 2026년 설비투자 계획", value="약 2,200억 달러", g_skip=True, _kb=True,
-    decide=dict(pick="bignum", situation="metric", differs="목소리 바로 뒤에 그 말의 크기를 숫자 하나로",
-                over=[O("bars", "비교가 아니라 한 숫자"), O("chart", "시계열 아님")],
-                why="원본 발언 다음엔 반드시 해설 (09 §5-00) — '계속 쓴다'의 크기를 숫자로", intent="그 말이 2,200억 달러짜리 결정이라는 것을 안다", refs=[R13]),
+add(type="zoomshot", chapter=0, insight=True, _kb=True, clip={"src": "src_amzn_capex", "start": 0},
+    label="원문: 아마존 3분기 실적 보도자료 (아마존 IR, 2026.10.29) — 'We continue to expect 2026 cash capital expenditures to be approximately $220 billion.'",
+    focus=[{"beat": 0, "box": [166, 512, 1588, 56], "label": "2026년 설비투자 약 2,200억 달러 전망"}],
+    decide=dict(pick="zoomshot", situation="point", differs="큰 숫자 대신 회사가 적은 원문 문장",
+                over=[O("bignum", "큰 숫자 화면보다 실제 자료 (2026-11-26 사용자: 큰 숫자·코르크판은 최대한 쓰지 말고 실제 자료로)")], why="'계속 쓴다'의 크기를 회사 원문으로", intent="그 말이 2,200억 달러짜리 결정이라는 것을 원문으로 본다", refs=[R12]),
     beats=[{"say": "결론은 분명합니다. 지금 써야 하고, 계속 쓰겠다. 그리고 그 돈을 댈 수 있다고 했습니다. 아마존은 올해 설비투자를 약 2,200억 달러로 잡고 있습니다."},
            {"say": "그 돈이 어디서 오는지가, 이 영상이 따라갈 질문입니다."}])
 add(type="bite", chapter=0, insight=True, who='로빈 위글스워스', role="파이낸셜타임스 칼럼니스트 · 채권시장 역사서 'A Fabulous Debt' 저자", _kb=True,
@@ -104,8 +104,8 @@ add(type="bite", chapter=0, insight=True, who='로빈 위글스워스', role='�
                 why='같은 답의 뒷부분 — 돈이 어디로 옮겨 갔나', intent='빈 곳이 채권시장·사모대출로 간다는 말을 끝까지 듣는다', refs=[R13]))
 add(type="versus", chapter=0, insight=True, _kb=True,
     label="재시: 세마포 11.18·아마존 실적 콜 10.29 · 위글스워스: 블룸버그 11.17 · 가운데 줄은 이 채널의 해석",
-    left={"value": "지금 쓰고 나중에 번다", "label": "재시 · 아마존 (사는 쪽)", "icon": "rocket"},
-    right={"value": "빚 금융이 된 해", "label": "위글스워스 · 파이낸셜타임스", "icon": "landmark"},
+    left={"value": "AI 투자는 몇 년 뒤 돈 된다", "label": "재시 · 아마존 CEO (사는 쪽)", "icon": "rocket"},
+    right={"value": "빅테크는 이제 빚으로 짓는다", "label": "위글스워스 · 파이낸셜타임스", "icon": "landmark"},
     decide=dict(pick="versus", situation="compare", over=[O("map_causal", "인과가 아니라 두 결론 맞대기"), O("bars", "숫자 비교가 아님")],
                 why="두 사람의 결론을 좌우로 맞대고 가운데에 이 영상의 해석", intent="두 말이 둘 다 맞을 수 있는 조건(채권시장)을 이 영상이 따라간다는 것을 안다", refs=[R13]),
     beats=[
@@ -114,6 +114,8 @@ add(type="versus", chapter=0, insight=True, _kb=True,
          "motion": [{"t": "채권시장", "do": "stat", "id": "thesis", "value": "열쇠 = 채권시장", "label": "이 채널의 해석", "sub": "금고가 아니라", "x": 960, "y": 880, "fs": 60, "static": True}]},
         {"say": "왜 그렇게 볼 수 있는지, 그리고 그게 내 반도체 계좌에 무슨 뜻인지 차례로 풀어 보겠습니다."},
     ])
+add(type="kinetic", chapter=0, _kb=True, decide=dict(pick="kinetic", situation="conclusion", over=[O("bignum", "숫자가 아니라 결론 한 문장"), O("quote", "누구의 말이 아니라 이 영상의 결론")], why="아이스먼 편 틀 — 결론을 한 줄 글자로 (09 §5-00 결론 먼저)", intent="영상의 답을 한 문장으로 기억한다", refs=[R13]),
+    beats=[{"say": "한 줄로 줄이면, 빅테크가 AI에 쓰는 돈 가운데 번 돈으로 모자란 몫은 빚입니다.", "hit": ["빚"]}])
 add(type="motionboard", chapter=0, _kb=True, label="사는 쪽: 데이터센터를 짓는 회사들 (마이크로소프트·알파벳·아마존·메타·오라클 등) · 그림은 단순화",
     title="칩을 사 주는 쪽은 누구인가",
     els={"hy": {"kind": "card", "x": 420, "y": 470, "icon": "cpu", "label": "SK하이닉스·삼성전자", "value": "메모리", "w": 360},
@@ -158,8 +160,11 @@ add(type="zoomshot", chapter=1, insight=True, clip={"src": "src_amzn_8k", "start
     decide=dict(pick="zoomshot", situation="point", differs="큰 숫자 화면보다 실제 자료가 낫다 (2026-11-26 사용자)",
                 over=[O("quote", "우리가 옮겨 적은 카드보다 원문 화면이 증거"), O("bignum", "숫자만 떼면 누가 어디서 말했는지가 사라짐"), O("map_causal", "인과 그림이 아니라 원문 한 문장을 가리키는 자리"), O("newspapers", "여러 매체 묶음이 아니라 한 원문"), O("bars", "원문에 적힌 숫자를 그대로 보여 주는 것이 증거")],
                 why='회사가 스스로 적은 숫자를 원문 화면으로', intent='−424억이 아마존 보도자료 원문이라는 것을 본다', refs=[R12, "technique:spotlight"]))
-add(type="bignum", chapter=1, label="아마존 3분기 보도자료 재무상태표 · 장기부채 2025.12.31 → 2026.9.30",
-    small="아마존 장기부채 656억 → 1,731억 달러 (작년 말 → 9월 말)", value="2.6배",
+add(type="zoomshot", chapter=1, clip={"src": "src_amzn_debt", "start": 0},
+    label="원문: 아마존 3분기 실적 보도자료 재무상태표 (아마존 IR) · 장기부채 2025.12.31 → 2026.9.30 (백만 달러)",
+    focus=[{"beat": 0, "box": [135, 512, 1650, 56], "label": "장기부채 656억 → 1,731억 달러 (2.6배)"}],
+    decide=dict(pick="zoomshot", situation="point", differs="큰 숫자 대신 재무상태표 원문 줄", over=[O("bignum", "큰 숫자 화면보다 실제 자료 (2026-11-26 사용자: 큰 숫자·코르크판은 최대한 쓰지 말고 실제 자료로)")],
+                why="빚이 늘었다는 것을 회사 장부 원문으로", intent="장기부채가 2.6배가 된 줄을 직접 본다", refs=[R12]),
     beats=[{"say": "같은 기간 장기 빚은 작년 말 656억 달러에서 9월 말 1,731억 달러로, 2.6배가 됐습니다."}])
 add(type="compare", chapter=1, label=SRC_8K + " · 오라클만 6~8월(회계 1분기) · 억 달러 · 차이는 이 채널 계산",
     title="번 돈 vs 쓴 돈 (석 달, 억 달러)", cols=["번 돈", "쓴 돈"],
@@ -218,8 +223,11 @@ add(type="bars", chapter=2, label=FED + " 그림 C · 7개사(아마존·알파�
         {"say": "연준은 11월 13일 금융안정보고서에서 이 약속의 크기를 처음 숫자로 적었습니다. 큰 기술 회사들이 아직 시작하지 않은 리스가 1조 달러를 넘고, 다른 회사의 빚을 받쳐 주는 보증이나 장기 구매 약정 같은 약속이 2조 달러를 넘습니다."},
         {"say": "미래 금액을 할인하지 않고 더한 숫자라 장부의 빚과 바로 비교할 수는 없지만, 연준은 이 회사들이 실제로 지고 있는 위험이 장부상 빚보다 훨씬 클 수 있다고 적었습니다."},
     ])
-add(type="bignum", chapter=2, label="CNBC 2026.10.29 보도 · 발행일 11.4 (8-K 대조 전)",
-    small="후드가 '아직 쓰지 않았다'고 한 다음 날 — 마이크로소프트 회사채", value="250억 달러", g_skip=True,
+add(type="zoomshot", chapter=2, clip={"src": "src_cnbc_msft", "start": 0},
+    label="원문: CNBC 2026.10.29 'Microsoft plans to raise $25 billion in debt as it pursues AI buildout' (발행일 11.4, 8-K 대조 전)",
+    focus=[{"beat": 0, "box": [217, 528, 983, 48], "label": "마이크로소프트 250억 달러 새 회사채 (CNBC 10.29)"}],
+    decide=dict(pick="zoomshot", situation="say-vs-do", differs="큰 숫자 대신 보도 원문 제목", over=[O("bignum", "큰 숫자 화면보다 실제 자료 (2026-11-26 사용자: 큰 숫자·코르크판은 최대한 쓰지 말고 실제 자료로)")],
+                why="말(아직 안 씀) 다음 날의 행동을 보도 원문으로", intent="가장 여유 있던 회사도 빚을 냈다는 것을 기사로 본다", refs=[R12]),
     beats=[{"say": "그리고 후드가 아직 쓰지 않았다고 한 채권시장. 다음 날인 10월 29일, 마이크로소프트가 250억 달러어치 회사채를 낸다는 보도가 나왔습니다. 가장 여유 있던 회사도 결국 빚을 꺼낸 겁니다."}])
 
 # ── 3. 메타의 말 — 빚, 주식, 멈춘 자사주 ─────────────────────────────────
@@ -294,11 +302,16 @@ add(type="bars", chapter=4, label="코어위브 3분기 보도자료(2026.11.10)
         {"say": "맨 아래는 산수부터 다릅니다. 코어위브는 7월부터 9월까지 영업이익이 2억 700만 달러였는데, 같은 기간 이자로 8억 4,600만 달러를 냈습니다. 번 돈의 네 배 넘게를 이자로 낸 거죠."},
         {"say": "회사는 4분기 이자가 10억 달러를 넘어, 한 분기 만에 30%쯤 늘 걸로 봤습니다."},
     ])
-add(type="bignum", chapter=4, label="이 채널 계산 · 가정: 부채 약 470억 달러가 모두 변동금리 (실제로는 고정금리가 섞여 이보다 작음) · 채권 수익률은 CNBC 2026.11.11",
-    small="가정: 금리 +1%p 이면 코어위브 분기 이자", value="+약 1.2억 달러", g_skip=True,
+add(type="checklist", chapter=4, label="이 채널 계산 · 가정: 부채 약 470억 달러가 모두 변동금리 (실제로는 고정금리가 섞여 이보다 작음) · 채권 수익률은 CNBC 2026.11.11",
+    title="가정해 보면 — 금리가 1%p 오르면", x=150, text_w=1150,
+    rows=[{"label": "가정: 코어위브 빚 약 470억 달러가 모두 변동금리", "state": "warn", "t": "470억"},
+          {"label": "금리 +1%p → 분기 이자 +약 1.2억 달러 (3분기 영업이익의 절반 넘음)", "state": "warn", "t": "1억 2천만"},
+          {"label": "실제로는 고정금리가 섞여 덜함 · 11월 초 채권 수익률 16%+", "state": "ok", "t": "16%"}],
+    decide=dict(pick="checklist", situation="explain-market", differs="이 채널 계산이라 원문이 없음 — 큰 숫자 대신 가정·결과·단서를 한 줄씩",
+                over=[O("bignum", "큰 숫자 화면은 최대한 쓰지 않음 (2026-11-26 사용자)")], why="계산의 가정과 단서를 숫자와 함께", intent="금리에 얼마나 매여 있는지 가정과 함께 본다", refs=[R13]),
     beats=[
-        {"say": "하나 가정해 보겠습니다. 이 회사 빚 약 470억 달러가 모두 금리에 따라 움직인다면, 금리가 1%포인트만 올라도 분기 이자가 1억 2천만 달러쯤 늘어납니다. 3분기 영업이익의 절반이 넘습니다."},
-        {"say": "실제로는 고정금리 빚이 섞여 있어 이보다 덜하지만, 금리와 신용시장에 얼마나 매여 있는지는 보입니다. 11월 초 이 회사 채권의 수익률은 16%를 넘었습니다."},
+        {"say": "하나 가정해 보겠습니다. 이 회사 빚 약 470억 달러가 모두 금리에 따라 움직인다면, 금리가 1%포인트만 올라도 분기 이자가 1억 2천만 달러쯤 늘어납니다. 3분기 영업이익의 절반이 넘습니다.", "upto": 2},
+        {"say": "실제로는 고정금리 빚이 섞여 있어 이보다 덜하지만, 금리와 신용시장에 얼마나 매여 있는지는 보입니다. 11월 초 이 회사 채권의 수익률은 16%를 넘었습니다.", "upto": 3},
     ])
 add(type="bite", chapter=4, insight=True, who='토니 크레센치', role='PIMCO 시장 전략가', _kb=True,
     label="블룸버그 팟캐스트 공식 채널 2026.10.18 'AI Debt Boom Faces Bond Market Reality Check' — 토니 크레센치(PIMCO) · 인용",
@@ -456,6 +469,9 @@ add(type="checklist", chapter=8, label="기준선: 이 채널 계산(3분기 116
         {"say": "셋, 빅테크 회사채의 가산금리. 11월 9일 기준 올해 0.5%포인트 넓어졌습니다. 더 벌어지면 채권시장의 문이 좁아지고 있다는 뜻입니다. 12월 중순으로 예상되는 오라클의 다음 실적도 함께 볼 만합니다.", "upto": 3},
     ])
 
+add(type="kinetic", chapter=8, _kb=True, decide=dict(pick="kinetic", situation="conclusion", over=[O("bignum", "숫자가 아니라 결론 한 문장"), O("quote", "누구의 말이 아니라 이 영상의 결론")], why="아이스먼 편 틀 — 결론을 한 줄 글자로 (09 §5-00 결론 먼저)", intent="영상의 답을 한 문장으로 기억한다", refs=[R13]),
+    beats=[{"say": "그래서 문제는 빅테크가 멈추느냐가 아니라, 채권시장이 언제까지 돈을 대 주느냐입니다.", "hit": ["채권시장"]}])
+
 # ── 9. 닫기 ──────────────────────────────────────────────────────
 add(type="outro", chapter=9, title="칩을 사는 돈, 열쇠는 채권시장", sub="출처는 설명란에 · 투자 권유가 아닙니다",
     beats=[
@@ -542,11 +558,8 @@ def ST(t, value, label, sub="", x=1500, y=880, fs=48):
 MOT = {   # (장면 id, 박자 번호 1부터) → 말에 맞춰 생기는 숫자
     (5, 2): ST("348억", "−348억 달러", "석 달 동안 빈 돈", "424 − 773"),
     (12, 1): ST("11월 13일", "11월 13일", "연준 금융안정보고서", x=1560, y=210),
-    (13, 1): ST("10월 29일", "10월 29일 보도", "실적 콜 다음 날", x=1560, y=210),
     (15, 1): ST("10월 26일", "10월 26일", "메타 보도자료", x=1560, y=910),
     (22, 1): ST("네 배", "이자 ÷ 영업이익 ≈ 4.1배", "8.46억 ÷ 2.07억", x=380, y=250),
-    (23, 1): ST("470억", "470억 × 1%p ÷ 4", "≈ 분기 1.2억 달러 (가정)", y=230),
-    (23, 2): ST("16%", "16%+", "11월 초 코어위브 채권 수익률", y=860),
     (29, 1): ST("11월 10일", "11월 10일", "모건스탠리 고객 노트", x=1560, y=930),
 }
 
@@ -630,8 +643,9 @@ SPEC = {
         "refs": ["manual/09-market-daily.md", "manual/12-visual-storytelling.md", "recipe:hybrid-causal"],
     },
     "package": {   # S8 — 썸네일은 02_script/make_thumbs.py 로 합성(이 렌더러의 틀 대신, 2026-11-26 사용자 요청), 제목은 각도를 다르게 (14 §4)
-        "title": "빅테크 AI 투자, 번 돈으론 모자라 빚 낸다 — SK하이닉스 칩 주문 언제까지?",
-        "title_options": [   # 3차(11-26 사용자: 은유 말고 직관적으로)
+        "title": "빅테크 AI 데이터센터, 이제 빚으로 짓는다 — SK하이닉스 칩 주문은 언제까지?",
+        "title_options": [   # 3차(11-26 사용자: 은유 말고 직관적으로) · 4차: 썸네일 B 와 같은 말
+            "빅테크 AI 데이터센터, 이제 빚으로 짓는다 — SK하이닉스 칩 주문은 언제까지?",
             "빅테크 AI 투자, 번 돈으론 모자라 빚 낸다 — SK하이닉스 칩 주문 언제까지?",
             "아마존 CEO \"몇 년 뒤 돈 된다\" vs FT \"이제 빚으로 짓는다\" — 빅테크 AI 투자 버틸까",
             "빅테크 5곳, 번 돈보다 16% 더 썼다 — 모자란 돈은 빚, 칩 수요는 채권시장에 달렸다",
@@ -663,6 +677,9 @@ SPEC = {
         "cres": {"file": "cres.mp4", "url": "https://www.youtube.com/watch?v=cR_V4Ngo95k", "start": "3:04.0", "end": "3:16.5", "who": "토니 크레센치", "credit": "블룸버그 팟캐스트 공식 채널 2026.10.18 'AI Debt Boom Faces Bond Market Reality Check' — 토니 크레센치(PIMCO) · 인용", "license": "인용 · 방송사·매체 공식 채널", "rights": "broadcast", "channel": "Bloomberg Podcasts", "cover": False},
         "src_stl_body": {"file": "src_stl_body.mp4", "url": "https://www.stlouisfed.org/on-the-economy/2026/nov/hyperscalers-financing-ai-investment-boom", "credit": "세인트루이스 연준 블로그 원문 화면 (2026.11.19) · 인용", "license": "인용 · 공식 자료·기사 원문 일부", "rights": "quote", "cover": False},
         "src_amzn_8k": {"file": "src_amzn_8k.mp4", "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000038/amzn-20260930xex991.htm", "credit": "아마존 3분기 실적 보도자료 원문 화면 (SEC 공시) · 인용", "license": "인용 · 공식 자료·기사 원문 일부", "rights": "quote", "cover": False},
+        "src_amzn_capex": {"file": "src_amzn_capex.mp4", "url": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx", "credit": "아마존 3분기 실적 보도자료 원문 화면 (아마존 IR) · 인용", "license": "인용 · 공식 자료·기사 원문 일부", "rights": "quote", "cover": False},
+        "src_amzn_debt": {"file": "src_amzn_debt.mp4", "url": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx", "credit": "아마존 3분기 실적 보도자료 재무상태표 원문 화면 (아마존 IR) · 인용", "license": "인용 · 공식 자료·기사 원문 일부", "rights": "quote", "cover": False},
+        "src_cnbc_msft": {"file": "src_cnbc_msft.mp4", "url": "https://www.cnbc.com/2026/10/29/microsoft-25-billion-debt-offering.html", "credit": "CNBC 기사 원문 화면 (2026.10.29) · 인용", "license": "인용 · 공식 자료·기사 원문 일부", "rights": "quote", "cover": False},
         "src_meta": {"file": "src_meta.mp4", "url": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Announces-Launch-of-Offering-of-Depositary-Shares-Representing-Series-A-Mandatory-Convertible-Preferred-Stock-and-Offering-of-Class-A-Common-Stock-in-Connection-with-Forward-Sale-Agreements/default.aspx", "credit": "메타 IR 보도자료 원문 화면 (2026.10.26) · 인용", "license": "인용 · 공식 자료·기사 원문 일부", "rights": "quote", "cover": False},
         "src_reuters_poggi": {"file": "src_reuters_poggi.mp4", "url": "https://finance.yahoo.com/technology/ai/articles/banks-investors-grow-wary-ai-110413813.html", "credit": "로이터 기사 원문 화면 (야후 파이낸스 게재, 2026.11.9) · 인용", "license": "인용 · 공식 자료·기사 원문 일부", "rights": "quote", "cover": False},
         "src_economist_cash": {"file": "src_economist_cash.mp4", "url": "https://economist.co.kr/article/view/ecn202611170025", "credit": "이코노미스트 기사 원문 화면 (2026.11.17) · 인용", "license": "인용 · 공식 자료·기사 원문 일부", "rights": "quote", "cover": False},

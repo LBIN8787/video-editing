@@ -125,8 +125,9 @@
   ]
  },
  "package": {
-  "title": "빅테크 AI 투자, 번 돈으론 모자라 빚 낸다 — SK하이닉스 칩 주문 언제까지?",
+  "title": "빅테크 AI 데이터센터, 이제 빚으로 짓는다 — SK하이닉스 칩 주문은 언제까지?",
   "title_options": [
+   "빅테크 AI 데이터센터, 이제 빚으로 짓는다 — SK하이닉스 칩 주문은 언제까지?",
    "빅테크 AI 투자, 번 돈으론 모자라 빚 낸다 — SK하이닉스 칩 주문 언제까지?",
    "아마존 CEO \"몇 년 뒤 돈 된다\" vs FT \"이제 빚으로 짓는다\" — 빅테크 AI 투자 버틸까",
    "빅테크 5곳, 번 돈보다 16% 더 썼다 — 모자란 돈은 빚, 칩 수요는 채권시장에 달렸다"
@@ -305,6 +306,30 @@
    "rights": "quote",
    "cover": false
   },
+  "src_amzn_capex": {
+   "file": "src_amzn_capex.mp4",
+   "url": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+   "credit": "아마존 3분기 실적 보도자료 원문 화면 (아마존 IR) · 인용",
+   "license": "인용 · 공식 자료·기사 원문 일부",
+   "rights": "quote",
+   "cover": false
+  },
+  "src_amzn_debt": {
+   "file": "src_amzn_debt.mp4",
+   "url": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Third-Quarter-Results/default.aspx",
+   "credit": "아마존 3분기 실적 보도자료 재무상태표 원문 화면 (아마존 IR) · 인용",
+   "license": "인용 · 공식 자료·기사 원문 일부",
+   "rights": "quote",
+   "cover": false
+  },
+  "src_cnbc_msft": {
+   "file": "src_cnbc_msft.mp4",
+   "url": "https://www.cnbc.com/2026/10/29/microsoft-25-billion-debt-offering.html",
+   "credit": "CNBC 기사 원문 화면 (2026.10.29) · 인용",
+   "license": "인용 · 공식 자료·기사 원문 일부",
+   "rights": "quote",
+   "cover": false
+  },
   "src_meta": {
    "file": "src_meta.mp4",
    "url": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Announces-Launch-of-Offering-of-Depositary-Shares-Representing-Series-A-Mandatory-Convertible-Preferred-Stock-and-Offering-of-Class-A-Common-Stock-in-Connection-with-Forward-Sale-Agreements/default.aspx",
@@ -406,7 +431,7 @@
    "label": "세마포(Semafor) 공식 채널 2026.11.18 'We Have To Do It': Amazon CEO Andy Jassy On Racing China In The AI Buildout · 인용",
    "beats": [
     {
-     "say": "11월 18일, 아마존의 앤디 재시 CEO에게 이 막대한 설비투자의 근거를 물었습니다."
+     "say": "빅테크는 AI 데이터센터 지을 돈을 어디서 구하고, 언제까지 낼 수 있을까요. 이 영상은 그 돈의 출처를 따라갑니다. 11월 18일, 아마존의 앤디 재시 CEO는 이렇게 답했습니다."
     }
    ],
    "clip": {
@@ -573,30 +598,40 @@
    "id": 3
   },
   {
-   "type": "bignum",
+   "type": "zoomshot",
    "chapter": 0,
-   "label": "아마존 3분기 보도자료(2026.10.29) — 'We continue to expect 2026 cash capital expenditures to be approximately $220 billion.'",
-   "small": "아마존 2026년 설비투자 계획",
-   "value": "약 2,200억 달러",
-   "g_skip": true,
+   "insight": true,
+   "clip": {
+    "src": "src_amzn_capex",
+    "start": 0
+   },
+   "label": "원문: 아마존 3분기 실적 보도자료 (아마존 IR, 2026.10.29) — 'We continue to expect 2026 cash capital expenditures to be approximately $220 billion.'",
+   "focus": [
+    {
+     "beat": 0,
+     "box": [
+      166,
+      512,
+      1588,
+      56
+     ],
+     "label": "2026년 설비투자 약 2,200억 달러 전망"
+    }
+   ],
    "decide": {
-    "pick": "bignum",
-    "situation": "metric",
-    "differs": "목소리 바로 뒤에 그 말의 크기를 숫자 하나로",
+    "pick": "zoomshot",
+    "situation": "point",
+    "differs": "큰 숫자 대신 회사가 적은 원문 문장",
     "over": [
      {
-      "id": "bars",
-      "why_not": "비교가 아니라 한 숫자"
-     },
-     {
-      "id": "chart",
-      "why_not": "시계열 아님"
+      "id": "bignum",
+      "why_not": "큰 숫자 화면보다 실제 자료 (2026-11-26 사용자: 큰 숫자·코르크판은 최대한 쓰지 말고 실제 자료로)"
      }
     ],
-    "why": "원본 발언 다음엔 반드시 해설 (09 §5-00) — '계속 쓴다'의 크기를 숫자로",
-    "intent": "그 말이 2,200억 달러짜리 결정이라는 것을 안다",
+    "why": "'계속 쓴다'의 크기를 회사 원문으로",
+    "intent": "그 말이 2,200억 달러짜리 결정이라는 것을 원문으로 본다",
     "refs": [
-     "manual/09-market-daily.md"
+     "manual/12-visual-storytelling.md"
     ]
    },
    "beats": [
@@ -729,12 +764,12 @@
    "insight": true,
    "label": "재시: 세마포 11.18·아마존 실적 콜 10.29 · 위글스워스: 블룸버그 11.17 · 가운데 줄은 이 채널의 해석",
    "left": {
-    "value": "지금 쓰고 나중에 번다",
-    "label": "재시 · 아마존 (사는 쪽)",
+    "value": "AI 투자는 몇 년 뒤 돈 된다",
+    "label": "재시 · 아마존 CEO (사는 쪽)",
     "icon": "rocket"
    },
    "right": {
-    "value": "빚 금융이 된 해",
+    "value": "빅테크는 이제 빚으로 짓는다",
     "label": "위글스워스 · 파이낸셜타임스",
     "icon": "landmark"
    },
@@ -783,6 +818,38 @@
     }
    ],
    "id": 7
+  },
+  {
+   "type": "kinetic",
+   "chapter": 0,
+   "decide": {
+    "pick": "kinetic",
+    "situation": "conclusion",
+    "over": [
+     {
+      "id": "bignum",
+      "why_not": "숫자가 아니라 결론 한 문장"
+     },
+     {
+      "id": "quote",
+      "why_not": "누구의 말이 아니라 이 영상의 결론"
+     }
+    ],
+    "why": "아이스먼 편 틀 — 결론을 한 줄 글자로 (09 §5-00 결론 먼저)",
+    "intent": "영상의 답을 한 문장으로 기억한다",
+    "refs": [
+     "manual/09-market-daily.md"
+    ]
+   },
+   "beats": [
+    {
+     "say": "한 줄로 줄이면, 빅테크가 AI에 쓰는 돈 가운데 번 돈으로 모자란 몫은 빚입니다.",
+     "hit": [
+      "빚"
+     ]
+    }
+   ],
+   "id": 8
   },
   {
    "type": "motionboard",
@@ -883,7 +950,7 @@
      }
     }
    ],
-   "id": 8
+   "id": 9
   },
   {
    "type": "chapter",
@@ -891,13 +958,13 @@
    "num": "1",
    "title": "번 돈보다 더 쓴 분기",
    "icon": "wallet",
-   "look": "board",
+   "look": "noir",
    "beats": [
     {
      "say": "먼저, 지금 써야 한다는 말이 장부에서는 어떻게 보이는지부터 보겠습니다."
     }
    ],
-   "id": 9
+   "id": 10
   },
   {
    "type": "motionboard",
@@ -981,7 +1048,7 @@
      }
     }
    ],
-   "id": 10
+   "id": 11
   },
   {
    "type": "bars",
@@ -1023,7 +1090,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 11,
+   "id": 12,
    "decide": {
     "pick": "bars",
     "situation": "earnings",
@@ -1103,39 +1170,50 @@
      "technique:spotlight"
     ]
    },
-   "id": 12
+   "id": 13
   },
   {
-   "type": "bignum",
+   "type": "zoomshot",
    "chapter": 1,
-   "label": "아마존 3분기 보도자료 재무상태표 · 장기부채 2025.12.31 → 2026.9.30",
-   "small": "아마존 장기부채 656억 → 1,731억 달러 (작년 말 → 9월 말)",
-   "value": "2.6배",
+   "clip": {
+    "src": "src_amzn_debt",
+    "start": 0
+   },
+   "label": "원문: 아마존 3분기 실적 보도자료 재무상태표 (아마존 IR) · 장기부채 2025.12.31 → 2026.9.30 (백만 달러)",
+   "focus": [
+    {
+     "beat": 0,
+     "box": [
+      135,
+      512,
+      1650,
+      56
+     ],
+     "label": "장기부채 656억 → 1,731억 달러 (2.6배)"
+    }
+   ],
+   "decide": {
+    "pick": "zoomshot",
+    "situation": "point",
+    "differs": "큰 숫자 대신 재무상태표 원문 줄",
+    "over": [
+     {
+      "id": "bignum",
+      "why_not": "큰 숫자 화면보다 실제 자료 (2026-11-26 사용자: 큰 숫자·코르크판은 최대한 쓰지 말고 실제 자료로)"
+     }
+    ],
+    "why": "빚이 늘었다는 것을 회사 장부 원문으로",
+    "intent": "장기부채가 2.6배가 된 줄을 직접 본다",
+    "refs": [
+     "manual/12-visual-storytelling.md"
+    ]
+   },
    "beats": [
     {
      "say": "같은 기간 장기 빚은 작년 말 656억 달러에서 9월 말 1,731억 달러로, 2.6배가 됐습니다."
     }
    ],
-   "id": 13,
-   "decide": {
-    "pick": "bignum",
-    "situation": "metric",
-    "over": [
-     {
-      "id": "chart",
-      "why_not": "시계열이 아니라 1년 합계 하나"
-     },
-     {
-      "id": "bars",
-      "why_not": "앞 장면이 이미 막대"
-     }
-    ],
-    "why": "아마존 1년 잉여현금흐름 한 숫자를 크게, 장기부채 변화는 작은 숫자로",
-    "intent": "한 분기가 아니라 1년 내내 비었다는 크기를 기억한다",
-    "refs": [
-     "manual/12-visual-storytelling.md"
-    ]
-   }
+   "id": 14
   },
   {
    "type": "compare",
@@ -1191,7 +1269,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 14,
+   "id": 15,
    "decide": {
     "pick": "compare",
     "situation": "compare",
@@ -1242,7 +1320,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 15,
+   "id": 16,
    "decide": {
     "pick": "bars",
     "situation": "metric",
@@ -1270,13 +1348,13 @@
    "num": "2",
    "title": "장부에 잘 안 보이는 돈",
    "icon": "file-signature",
-   "look": "board",
+   "look": "noir",
    "beats": [
     {
      "say": "그럼 다섯 곳 가운데 유일하게 번 돈이 더 많은 마이크로소프트는 어떻게 짓고 있을까요."
     }
    ],
-   "id": 16
+   "id": 17
   },
   {
    "type": "bite",
@@ -1326,7 +1404,7 @@
      "manual/09-market-daily.md"
     ]
    },
-   "id": 17
+   "id": 18
   },
   {
    "type": "motionboard",
@@ -1438,7 +1516,7 @@
      }
     }
    ],
-   "id": 18,
+   "id": 19,
    "decide": {
     "pick": "motionboard",
     "situation": "explain-market",
@@ -1503,7 +1581,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 19,
+   "id": 20,
    "decide": {
     "pick": "bars",
     "situation": "metric",
@@ -1530,51 +1608,47 @@
    }
   },
   {
-   "type": "bignum",
+   "type": "zoomshot",
    "chapter": 2,
-   "label": "CNBC 2026.10.29 보도 · 발행일 11.4 (8-K 대조 전)",
-   "small": "후드가 '아직 쓰지 않았다'고 한 다음 날 — 마이크로소프트 회사채",
-   "value": "250억 달러",
-   "g_skip": true,
-   "beats": [
+   "clip": {
+    "src": "src_cnbc_msft",
+    "start": 0
+   },
+   "label": "원문: CNBC 2026.10.29 'Microsoft plans to raise $25 billion in debt as it pursues AI buildout' (발행일 11.4, 8-K 대조 전)",
+   "focus": [
     {
-     "say": "그리고 후드가 아직 쓰지 않았다고 한 채권시장. 다음 날인 10월 29일, 마이크로소프트가 250억 달러어치 회사채를 낸다는 보도가 나왔습니다. 가장 여유 있던 회사도 결국 빚을 꺼낸 겁니다.",
-     "motion": [
-      {
-       "t": "10월 29일",
-       "do": "stat",
-       "id": "m10월29일보도",
-       "value": "10월 29일 보도",
-       "label": "실적 콜 다음 날",
-       "sub": "",
-       "x": 1560,
-       "y": 210,
-       "fs": 48,
-       "static": true
-      }
-     ]
+     "beat": 0,
+     "box": [
+      217,
+      528,
+      983,
+      48
+     ],
+     "label": "마이크로소프트 250억 달러 새 회사채 (CNBC 10.29)"
     }
    ],
-   "id": 20,
    "decide": {
-    "pick": "bignum",
+    "pick": "zoomshot",
     "situation": "say-vs-do",
+    "differs": "큰 숫자 대신 보도 원문 제목",
     "over": [
      {
-      "id": "versus",
-      "why_not": "말(아직 안 씀)은 바로 앞 장면에 있음 — 행동 숫자 하나만"
-     },
-     {
-      "id": "compare",
-      "why_not": "표가 필요 없는 한 숫자"
+      "id": "bignum",
+      "why_not": "큰 숫자 화면보다 실제 자료 (2026-11-26 사용자: 큰 숫자·코르크판은 최대한 쓰지 말고 실제 자료로)"
      }
     ],
-    "why": "'아직 채권시장은 쓰지 않았다' 다음 날의 행동을 숫자 하나로",
-    "intent": "가장 여유 있던 회사도 빚을 꺼냈다는 말과 행동의 차이를 본다",
+    "why": "말(아직 안 씀) 다음 날의 행동을 보도 원문으로",
+    "intent": "가장 여유 있던 회사도 빚을 냈다는 것을 기사로 본다",
     "refs": [
-     "manual/09-market-daily.md"
+     "manual/12-visual-storytelling.md"
     ]
-   }
+   },
+   "beats": [
+    {
+     "say": "그리고 후드가 아직 쓰지 않았다고 한 채권시장. 다음 날인 10월 29일, 마이크로소프트가 250억 달러어치 회사채를 낸다는 보도가 나왔습니다. 가장 여유 있던 회사도 결국 빚을 꺼낸 겁니다."
+    }
+   ],
+   "id": 21
   },
   {
    "type": "chapter",
@@ -1582,13 +1656,13 @@
    "num": "3",
    "title": "빚, 주식, 그리고 멈춘 자사주",
    "icon": "layers",
-   "look": "board",
+   "look": "noir",
    "beats": [
     {
      "say": "빈 곳을 메우는 돈은 리스만이 아닙니다."
     }
    ],
-   "id": 21
+   "id": 22
   },
   {
    "type": "zoomshot",
@@ -1666,7 +1740,7 @@
      "technique:spotlight"
     ]
    },
-   "id": 22
+   "id": 23
   },
   {
    "type": "checklist",
@@ -1703,7 +1777,7 @@
     }
    ],
    "skin": "newsprint",
-   "id": 23,
+   "id": 24,
    "decide": {
     "pick": "checklist",
     "situation": "earnings",
@@ -1761,7 +1835,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 24,
+   "id": 25,
    "decide": {
     "pick": "compare",
     "situation": "say-vs-do",
@@ -1822,7 +1896,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 25,
+   "id": 26,
    "decide": {
     "pick": "bars",
     "situation": "metric",
@@ -1882,7 +1956,7 @@
      "say": "미국에서 신용등급 좋은 일반 기업이 새로 낸 회사채 가운데 이 몫이 2023년엔 6%도 안 됐는데, 올해는 31% 정도입니다. 세 장에 한 장꼴입니다."
     }
    ],
-   "id": 26,
+   "id": 27,
    "decide": {
     "pick": "zoomshot",
     "situation": "point",
@@ -1910,13 +1984,13 @@
    "num": "4",
    "title": "같은 '빅테크'가 아니다",
    "icon": "layers-3",
-   "look": "board",
+   "look": "noir",
    "beats": [
     {
      "say": "지금까지 나온 회사를 한 줄로 세워 보겠습니다."
     }
    ],
-   "id": 27
+   "id": 28
   },
   {
    "type": "motionboard",
@@ -1981,7 +2055,7 @@
      }
     }
    ],
-   "id": 28,
+   "id": 29,
    "decide": {
     "pick": "motionboard",
     "situation": "explain-market",
@@ -2060,7 +2134,7 @@
      "manual/09-market-daily.md"
     ]
    },
-   "id": 29
+   "id": 30
   },
   {
    "type": "bars",
@@ -2111,7 +2185,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 30,
+   "id": 31,
    "decide": {
     "pick": "bars",
     "situation": "earnings",
@@ -2134,69 +2208,57 @@
    }
   },
   {
-   "type": "bignum",
+   "type": "checklist",
    "chapter": 4,
    "label": "이 채널 계산 · 가정: 부채 약 470억 달러가 모두 변동금리 (실제로는 고정금리가 섞여 이보다 작음) · 채권 수익률은 CNBC 2026.11.11",
-   "small": "가정: 금리 +1%p 이면 코어위브 분기 이자",
-   "value": "+약 1.2억 달러",
-   "g_skip": true,
+   "title": "가정해 보면 — 금리가 1%p 오르면",
+   "x": 150,
+   "text_w": 1150,
+   "rows": [
+    {
+     "label": "가정: 코어위브 빚 약 470억 달러가 모두 변동금리",
+     "state": "warn",
+     "t": "470억"
+    },
+    {
+     "label": "금리 +1%p → 분기 이자 +약 1.2억 달러 (3분기 영업이익의 절반 넘음)",
+     "state": "warn",
+     "t": "1억 2천만"
+    },
+    {
+     "label": "실제로는 고정금리가 섞여 덜함 · 11월 초 채권 수익률 16%+",
+     "state": "ok",
+     "t": "16%"
+    }
+   ],
+   "decide": {
+    "pick": "checklist",
+    "situation": "explain-market",
+    "differs": "이 채널 계산이라 원문이 없음 — 큰 숫자 대신 가정·결과·단서를 한 줄씩",
+    "over": [
+     {
+      "id": "bignum",
+      "why_not": "큰 숫자 화면은 최대한 쓰지 않음 (2026-11-26 사용자)"
+     }
+    ],
+    "why": "계산의 가정과 단서를 숫자와 함께",
+    "intent": "금리에 얼마나 매여 있는지 가정과 함께 본다",
+    "refs": [
+     "manual/09-market-daily.md"
+    ]
+   },
    "beats": [
     {
      "say": "하나 가정해 보겠습니다. 이 회사 빚 약 470억 달러가 모두 금리에 따라 움직인다면, 금리가 1%포인트만 올라도 분기 이자가 1억 2천만 달러쯤 늘어납니다. 3분기 영업이익의 절반이 넘습니다.",
-     "motion": [
-      {
-       "t": "470억",
-       "do": "stat",
-       "id": "m470억1p4",
-       "value": "470억 × 1%p ÷ 4",
-       "label": "≈ 분기 1.2억 달러 (가정)",
-       "sub": "",
-       "x": 1500,
-       "y": 230,
-       "fs": 48,
-       "static": true
-      }
-     ]
+     "upto": 2
     },
     {
      "say": "실제로는 고정금리 빚이 섞여 있어 이보다 덜하지만, 금리와 신용시장에 얼마나 매여 있는지는 보입니다. 11월 초 이 회사 채권의 수익률은 16%를 넘었습니다.",
-     "motion": [
-      {
-       "t": "16%",
-       "do": "stat",
-       "id": "m16",
-       "value": "16%+",
-       "label": "11월 초 코어위브 채권 수익률",
-       "sub": "",
-       "x": 1500,
-       "y": 860,
-       "fs": 48,
-       "static": true
-      }
-     ]
+     "upto": 3
     }
    ],
-   "id": 31,
-   "decide": {
-    "pick": "bignum",
-    "situation": "metric",
-    "differs": "가정 계산 결과 하나 — 가정을 출처 줄에",
-    "over": [
-     {
-      "id": "bars",
-      "why_not": "비교 대상 없이 가정의 결과 하나"
-     },
-     {
-      "id": "chart",
-      "why_not": "시계열 아님"
-     }
-    ],
-    "why": "민감도 계산(03 §0-4 ⑥)을 한 숫자로, 가정은 화면 출처 줄에 밝힘",
-    "intent": "금리 1%p 가 이 회사에 얼마나 큰지 감을 잡는다",
-    "refs": [
-     "manual/03-market.md"
-    ]
-   }
+   "skin": "newsprint",
+   "id": 32
   },
   {
    "type": "bite",
@@ -2255,7 +2317,7 @@
      "manual/09-market-daily.md"
     ]
    },
-   "id": 32
+   "id": 33
   },
   {
    "type": "checklist",
@@ -2299,7 +2361,7 @@
     }
    ],
    "skin": "newsprint",
-   "id": 33,
+   "id": 34,
    "decide": {
     "pick": "checklist",
     "situation": "earnings",
@@ -2331,13 +2393,13 @@
    "num": "5",
    "title": "연준은 무엇을 문제 삼나",
    "icon": "landmark",
-   "look": "board",
+   "look": "noir",
    "beats": [
     {
      "say": "위글스워스가 말한 빚 금융이 된 해를, 미국 연준도 숫자로 짚었습니다. 연준 쪽은 터진다고 말하지 않았습니다. 그들이 문제 삼는 고리는 따로 있습니다."
     }
    ],
-   "id": 34
+   "id": 35
   },
   {
    "type": "quote",
@@ -2380,7 +2442,7 @@
      "manual/09-market-daily.md"
     ]
    },
-   "id": 35
+   "id": 36
   },
   {
    "type": "compare",
@@ -2423,7 +2485,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 36,
+   "id": 37,
    "decide": {
     "pick": "compare",
     "situation": "compare",
@@ -2504,7 +2566,7 @@
      "say": "그런데 그 문장 끝에 단서가 붙어 있습니다. 적어도 올해까지는. 지금까지 이 붐을 통신 때와 갈라놓던 바로 그 차이가, 2026년에 줄기 시작했다는 뜻입니다."
     }
    ],
-   "id": 37,
+   "id": 38,
    "decide": {
     "pick": "zoomshot",
     "situation": "point",
@@ -2556,7 +2618,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 38,
+   "id": 39,
    "decide": {
     "pick": "bars",
     "situation": "compare",
@@ -2630,7 +2692,7 @@
      "manual/09-market-daily.md"
     ]
    },
-   "id": 39
+   "id": 40
   },
   {
    "type": "versus",
@@ -2674,7 +2736,7 @@
      "say": "재시의 지금 쓰고 나중에 번다와 위글스워스의 빚 금융이 된 해도 둘 다 맞을 수 있습니다. 멈추지 않는 대신, 그 속도를 채권시장이 받쳐 줘야 하는 거죠."
     }
    ],
-   "id": 40,
+   "id": 41,
    "decide": {
     "pick": "versus",
     "situation": "said",
@@ -2702,13 +2764,13 @@
    "num": "6",
    "title": "내 반도체 계좌에서",
    "icon": "cpu",
-   "look": "board",
+   "look": "noir",
    "beats": [
     {
      "say": "이 소식을 국내 매체는 주로 한국 반도체에 미칠 영향으로, 해외 매체는 누가 이 빚을 빌려주나로 보도했습니다. 두 쪽을 이으면, 돈이 어디로 흘렀는지가 보입니다."
     }
    ],
-   "id": 41
+   "id": 42
   },
   {
    "type": "motionboard",
@@ -2778,7 +2840,7 @@
      }
     }
    ],
-   "id": 42,
+   "id": 43,
    "decide": {
     "pick": "motionboard",
     "situation": "explain-market",
@@ -2876,7 +2938,7 @@
      "technique:spotlight"
     ]
    },
-   "id": 43
+   "id": 44
   },
   {
    "type": "checklist",
@@ -2908,7 +2970,7 @@
     }
    ],
    "skin": "newsprint",
-   "id": 44,
+   "id": 45,
    "decide": {
     "pick": "checklist",
     "situation": "earnings",
@@ -3002,7 +3064,7 @@
      "technique:spotlight"
     ]
    },
-   "id": 45
+   "id": 46
   },
   {
    "type": "quote",
@@ -3038,7 +3100,7 @@
      "manual/09-market-daily.md"
     ]
    },
-   "id": 46
+   "id": 47
   },
   {
    "type": "versus",
@@ -3060,7 +3122,7 @@
      "say": "한 사람은 사는 쪽의 돈을, 다른 사람은 파는 쪽의 사이클을 보고 있습니다. 이 영상의 세 층으로 옮기면, 위층의 주문은 쉽게 꺾이지 않겠지만, 늘어나는 주문의 끝자락인 아래층의 추가 주문이 먼저 흔들릴 수 있습니다."
     }
    ],
-   "id": 47,
+   "id": 48,
    "decide": {
     "pick": "versus",
     "situation": "said",
@@ -3088,13 +3150,13 @@
    "num": "7",
    "title": "틀릴 수 있는 세 가지",
    "icon": "circle-help",
-   "look": "board",
+   "look": "noir",
    "beats": [
     {
      "say": "이 해석이 틀릴 수 있는 경우도 셋 있습니다."
     }
    ],
-   "id": 48
+   "id": 49
   },
   {
    "type": "checklist",
@@ -3135,7 +3197,7 @@
     }
    ],
    "skin": "newsprint",
-   "id": 49,
+   "id": 50,
    "decide": {
     "pick": "checklist",
     "situation": "next-week",
@@ -3166,13 +3228,13 @@
    "num": "8",
    "title": "다음에 볼 숫자 셋",
    "icon": "list-checks",
-   "look": "board",
+   "look": "noir",
    "beats": [
     {
      "say": "그래서 다음에 볼 숫자는 셋입니다."
     }
    ],
-   "id": 50
+   "id": 51
   },
   {
    "type": "checklist",
@@ -3213,7 +3275,7 @@
     }
    ],
    "skin": "newsprint",
-   "id": 51,
+   "id": 52,
    "decide": {
     "pick": "checklist",
     "situation": "next-week",
@@ -3235,6 +3297,38 @@
    }
   },
   {
+   "type": "kinetic",
+   "chapter": 8,
+   "decide": {
+    "pick": "kinetic",
+    "situation": "conclusion",
+    "over": [
+     {
+      "id": "bignum",
+      "why_not": "숫자가 아니라 결론 한 문장"
+     },
+     {
+      "id": "quote",
+      "why_not": "누구의 말이 아니라 이 영상의 결론"
+     }
+    ],
+    "why": "아이스먼 편 틀 — 결론을 한 줄 글자로 (09 §5-00 결론 먼저)",
+    "intent": "영상의 답을 한 문장으로 기억한다",
+    "refs": [
+     "manual/09-market-daily.md"
+    ]
+   },
+   "beats": [
+    {
+     "say": "그래서 문제는 빅테크가 멈추느냐가 아니라, 채권시장이 언제까지 돈을 대 주느냐입니다.",
+     "hit": [
+      "채권시장"
+     ]
+    }
+   ],
+   "id": 53
+  },
+  {
    "type": "outro",
    "chapter": 9,
    "title": "칩을 사는 돈, 열쇠는 채권시장",
@@ -3250,7 +3344,7 @@
      "say": "그렇다면 반도체 주식을 가진 우리가 지켜봐야 할 건, 빅테크의 실적 발표만이 아니라 채권시장의 표정이 아닐까요."
     }
    ],
-   "id": 52
+   "id": 54
   }
  ]
 }

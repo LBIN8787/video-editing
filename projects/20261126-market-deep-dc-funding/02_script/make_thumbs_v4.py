@@ -91,13 +91,13 @@ def credit(im, s):
     txt(im, (24, H - 34), s, 17, fill=(175, 177, 185), weight="Medium", track=0, shadow=False, main=False)
 
 
-def person(src, crop, label, l1, l2, hl, hl_fill, cred):
+def person(src, crop, label, l1, l2, hl, hl_fill, cred, maxw=640):
     im = left_dark(frame(src, crop)).convert("RGBA")
     d = ImageDraw.Draw(im)
     d.rectangle([48, 214, 56, 252], fill=hl_fill)   # 이름 앞 작은 색 막대 (꼬리표 상자 대신)
     txt(im, (70, 206), label, 34, fill=GREY, weight="Bold", track=-0.02, main=False)
     size = 104
-    while max(ImageDraw.Draw(im).textlength(s, font=font(size)) for s in (l1, l2)) * 0.95 > 640:   # 얼굴에 닿지 않게
+    while max(ImageDraw.Draw(im).textlength(s, font=font(size)) for s in (l1, l2)) * 0.95 > maxw:   # 얼굴에 닿지 않게
         size -= 4
     txt(im, (44, 270), l1, size, track=-0.05)
     txt(im, (44, 270 + size * 1.18), l2, size, track=-0.05, hl=hl, hl_fill=hl_fill)
@@ -106,13 +106,13 @@ def person(src, crop, label, l1, l2, hl, hl_fill, cred):
 
 
 def thumb_a():
-    return person("semb_10.jpg", (0, 0, 1250, 703), "아마존 CEO 앤디 재시", "AI 투자,", "몇 년 뒤 돈 된다", "돈 된다", GOLD,
+    return person("semb_10.jpg", (0, 0, 1250, 703), "아마존 CEO 앤디 재시", "AI 데이터센터 투자,", "몇 년 뒤 돈 된다", "돈 된다", GOLD,
                   "화면: 세마포(Semafor) 인터뷰 2026.11.18")
 
 
 def thumb_b():
-    return person("wg_2.jpg", (-420, 0, 1500, 1080), "파이낸셜타임스 로빈 위글스워스", "빅테크,", "이제 빚으로 짓는다", "빚으로", CRIMSON,
-                  "화면: 블룸버그 팟캐스트 2026.11.17")
+    return person("wg_2.jpg", (-420, 0, 1500, 1080), "파이낸셜타임스 로빈 위글스워스", "빅테크 AI 데이터센터,", "이제 빚으로 짓는다", "빚으로", CRIMSON,
+                  "화면: 블룸버그 팟캐스트 2026.11.17", maxw=690)   # 무엇에 대한 영상인지(주제) + 주장 (2026-11-26 사용자: 바로 이해되게)
 
 
 def thumb_c():
