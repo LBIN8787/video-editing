@@ -95,9 +95,19 @@ def thumb_a():
     """A 인물·발언 — 재시를 빚 서류 더미 옆 공사장 장면에 녹여 넣고, 그의 말을 따옴표로."""
     bg = cover(Image.open(SRC / "bg_tower.png").convert("RGB"), focus=(0.65, 0.5))
     bg = vignette(bg, 0.5).convert("RGBA")
-    cut = Image.open(SRC / "jassy_cut.png").convert("RGBA")
-    cut = cut.crop((180, 0, 1720, 1100))   # 머리~가슴 (다리는 프레임 밖으로)
-    person_into(bg, cut, 640, -40, H + 40, grade=(1.02, 0.98, 1.06), rim=(255, 160, 70))
+    # 3차 (2026-11-26 사용자: "앤디제시 10년전 사진이 아니라 다른걸") — 아마존 보도 센터 최신 사진. 배경이 복잡해 누끼 대신
+    # 사진 오른쪽·아래 가장자리를 장면으로 서서히 녹이고(그러데이션 마스크), 장면 색으로 살짝 맞춤
+    ph = Image.open(PROJ / "04_assets" / "footage" / "raw" / "jassy_press.jpg").convert("RGB")
+    pw, phh = 600, 720
+    ph = cover(ph, pw, phh, focus=(0.5, 0.18))
+    r_, g_, b_ = ImageEnhance.Contrast(ph).enhance(1.06).split()
+    ph = Image.merge("RGB", (r_.point(lambda v: int(v * 0.97)), g_.point(lambda v: int(v * 0.97)), b_.point(lambda v: min(255, int(v * 1.04)))))
+    m = Image.new("L", (pw, phh), 255); dm = ImageDraw.Draw(m)
+    for i in range(170):   # 오른쪽 170px 에 걸쳐 투명하게
+        dm.line([(pw - 170 + i, 0), (pw - 170 + i, phh)], fill=int(255 * (1 - i / 170) ** 1.4))
+    m = m.filter(ImageFilter.GaussianBlur(6))
+    ppa = ph.convert("RGBA"); ppa.putalpha(m)
+    bg.alpha_composite(ppa, (0, 0))
     d = ImageDraw.Draw(bg)
     # 2차 (2026-11-26 사용자: "그래서 영상이 무슨 내용이지? 뭐가 핵심이고 뭘 주장하는 거지") — 소재(그의 말) 대신 주장을 큰 글씨로, 말은 근거로 작게
     tag(d, (600, 46), "빅테크 AI 투자의 돈줄", font(BOLD, 36))
@@ -105,7 +115,7 @@ def thumb_a():
     text_line(d, (600, 236), "빚으로 짓는다", font(HEAD, 112), hl="빚으로")
     tag(d, (600, 384), "아마존 CEO 재시: “25년에 나눠 쓰는 세상 아니다”", font(BOLD, 26), bg=(20, 22, 30), fg=WHITE)
     tag(d, (600, 446), "칩 수요의 열쇠 = 채권시장", font(BOLD, 34), bg=YEL, fg=INK)
-    d.text((24, H - 34), "사진: Andy Jassy in 2010 (CC BY 2.0) · 배경은 생성 그림", font=font(BOLD, 16), fill=(200, 200, 205))
+    d.text((24, H - 34), "사진: 아마존 보도 센터 · 배경은 생성 그림", font=font(BOLD, 16), fill=(200, 200, 205))
     return bg.convert("RGB")
 
 

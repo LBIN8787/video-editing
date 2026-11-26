@@ -107,6 +107,7 @@
   "why": "시청자는 '사 주는 쪽이 언제까지 낼 수 있나'의 판단을 들으러 온다 — 사는 쪽 CEO·CFO·회사의 말과 연준의 말을 근거(공시 숫자·연준 원문)로 따진다. 원본 영상이 없어 인용 카드 + 원문 문서로 증거를 보인다",
   "intent": "끝나면 시청자는 세 층 그림과 '열쇠는 채권시장'이라는 판단, 판가름 숫자 셋을 안다",
   "vocabulary": [
+   "bite",
    "quote",
    "versus",
    "bars",
@@ -217,30 +218,85 @@
   ]
  },
  "footage": {
-  "jassy": {
-   "file": "jassy.mp4",
-   "url": "https://commons.wikimedia.org/wiki/File:Andy_Jassy_in_2010.jpg",
-   "credit": "Andy Jassy in 2010 — 위키미디어 공용 (CC BY 2.0)",
-   "license": "CC BY 2.0",
-   "rights": "cc",
+  "src_stl_body": {
+   "file": "src_stl_body.mp4",
+   "url": "https://www.stlouisfed.org/on-the-economy/2026/nov/hyperscalers-financing-ai-investment-boom",
+   "credit": "세인트루이스 연준 블로그 원문 화면 (2026.11.19) · 인용",
+   "license": "인용 · 공식 자료·기사 원문 일부",
+   "rights": "quote",
+   "cover": false
+  },
+  "src_amzn_8k": {
+   "file": "src_amzn_8k.mp4",
+   "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000038/amzn-20260930xex991.htm",
+   "credit": "아마존 3분기 실적 보도자료 원문 화면 (SEC 공시) · 인용",
+   "license": "인용 · 공식 자료·기사 원문 일부",
+   "rights": "quote",
+   "cover": false
+  },
+  "src_meta": {
+   "file": "src_meta.mp4",
+   "url": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Announces-Launch-of-Offering-of-Depositary-Shares-Representing-Series-A-Mandatory-Convertible-Preferred-Stock-and-Offering-of-Class-A-Common-Stock-in-Connection-with-Forward-Sale-Agreements/default.aspx",
+   "credit": "메타 IR 보도자료 원문 화면 (2026.10.26) · 인용",
+   "license": "인용 · 공식 자료·기사 원문 일부",
+   "rights": "quote",
+   "cover": false
+  },
+  "src_reuters_poggi": {
+   "file": "src_reuters_poggi.mp4",
+   "url": "https://finance.yahoo.com/technology/ai/articles/banks-investors-grow-wary-ai-110413813.html",
+   "credit": "로이터 기사 원문 화면 (야후 파이낸스 게재, 2026.11.9) · 인용",
+   "license": "인용 · 공식 자료·기사 원문 일부",
+   "rights": "quote",
+   "cover": false
+  },
+  "src_economist_cash": {
+   "file": "src_economist_cash.mp4",
+   "url": "https://economist.co.kr/article/view/ecn202611170025",
+   "credit": "이코노미스트 기사 원문 화면 (2026.11.17) · 인용",
+   "license": "인용 · 공식 자료·기사 원문 일부",
+   "rights": "quote",
+   "cover": false
+  },
+  "src_tomato": {
+   "file": "src_tomato.mp4",
+   "url": "https://newstomato.com/ReadNews.aspx?no=1318917",
+   "credit": "뉴스토마토 기사 원문 화면 (2026.11.2) · 인용 · 기자 이메일 가림",
+   "license": "인용 · 공식 자료·기사 원문 일부",
+   "rights": "quote",
+   "cover": false
+  },
+  "src_economist_park": {
+   "file": "src_economist_park.mp4",
+   "url": "https://economist.co.kr/article/view/ecn202611170025",
+   "credit": "이코노미스트 기사 원문 화면 (2026.11.17) · 인용",
+   "license": "인용 · 공식 자료·기사 원문 일부",
+   "rights": "quote",
+   "cover": false
+  },
+  "jassy_call": {
+   "file": "jassy_call.mp4",
+   "url": "https://ir.aboutamazon.com/files/doc_earnings/2026/q3/Q3-2026-Amazon-Earnings-Conference-Call.mp3",
+   "credit": "음성: 아마존 Q3 2026 실적 콜 공식 녹음 (아마존 IR) · 사진: 아마존 보도 센터 'Andy Jassy headshot'",
+   "license": "인용 · 회사 공식 녹음·보도 사진",
+   "rights": "official",
+   "who": "앤디 재시",
    "cover": false,
-   "make": "raw/jassy.jpg 크롭(1360x765 @300,0) → 1920x1080 정지 영상"
+   "start": "49:05.4",
+   "end": "49:30.0",
+   "make": "raw/amzn_q3_call.mp3 2945.4~2970.0초 + raw/jassy_frame.jpg (assets.aboutamazon.com andy-jassy-headshot.jpg 16:9 크롭)"
   },
-  "msft_hq": {
-   "file": "msft_hq.mp4",
-   "url": "https://commons.wikimedia.org/wiki/File:Building_92_of_Microsoft_Redmond_Campus_-_panoramio.jpg",
-   "credit": "Building 92 of Microsoft Redmond Campus — 위키미디어 공용 (CC BY 3.0)",
-   "license": "CC BY 3.0",
-   "rights": "cc",
-   "cover": false
-  },
-  "meta_hq": {
-   "file": "meta_hq.mp4",
-   "url": "https://commons.wikimedia.org/wiki/File:Meta_Platforms_Headquarters_Menlo_Park_California.jpg",
-   "credit": "Meta Platforms Headquarters Menlo Park California — 위키미디어 공용 (CC0)",
-   "license": "CC0",
-   "rights": "cc",
-   "cover": false
+  "hood_call": {
+   "file": "hood_call.mp4",
+   "url": "https://www.microsoft.com/en-us/investor/events/fy-2027/earnings-fy-2027-q1",
+   "credit": "음성: 마이크로소프트 FY27 1분기 실적 콜 공식 다시보기 (마이크로소프트 IR) · 사진: news.microsoft.com 'Amy Hood' 보도용 사진",
+   "license": "인용 · 회사 공식 다시보기·보도 사진",
+   "rights": "official",
+   "who": "에이미 후드",
+   "cover": false,
+   "start": "56:12.8",
+   "end": "56:32.8",
+   "make": "공식 다시보기 MP4 의 2900초부터 받은 소리(raw/msft_q1_tail.mp3) 472.8~492.8초 + raw/hood_frame.jpg (amyhood-silhouette 를 어두운 바탕에)"
   },
   "ms_hq": {
    "file": "ms_hq.mp4",
@@ -372,124 +428,120 @@
    "id": 1
   },
   {
-   "type": "kb",
-   "chapter": 0,
-   "clip": {
-    "src": "jassy",
-    "start": 0
-   },
-   "move": "in",
-   "stamp": "10월 29일 · 아마존 실적 콜 · '25년에 나눠 쓴다면?'",
-   "label": "사진: Andy Jassy in 2010 (위키미디어 공용, CC BY 2.0) · 발언: CNBC 2026.10.30 보도",
-   "decide": {
-    "pick": "kb",
-    "situation": "said",
-    "differs": "말하기 전에 '누구인가'를 얼굴로",
-    "new_vocab": "인물 사진 장면 — 2026-11-26 사용자: 인사이트의 주인공 사진을 넣으라",
-    "over": [
-     {
-      "id": "bite",
-      "why_not": "실적 콜 원본 음성 시각 미확인"
-     },
-     {
-      "id": "quote",
-      "why_not": "인용 카드만으로는 누가 말했는지 얼굴이 안 보임"
-     }
-    ],
-    "why": "결론을 말하는 사람의 얼굴을 먼저 — 이름 있는 사람의 판단이라는 신뢰(09 §5-00)",
-    "intent": "이 결론이 아마존 CEO 의 말이라는 것을 얼굴로 기억한다",
-    "refs": [
-     "manual/09-market-daily.md"
-    ]
-   },
-   "beats": [
-    {
-     "say": "이 질문에, 가장 돈을 많이 쓰는 회사의 대표가 답한 적이 있습니다. 10월 29일 아마존 실적 발표 콜에서 앤디 재시 CEO는 스스로 이렇게 물었습니다. 이런 기회가 25년에 걸쳐 와서, 설비투자를 25년에 나눠 쓸 수 있다면 더 편하겠냐고요.",
-     "lower": {
-      "name": "앤디 재시",
-      "role": "아마존 CEO (사진은 2010년)"
-     }
-    }
-   ],
-   "id": 2
-  },
-  {
-   "type": "quote",
+   "type": "bite",
    "chapter": 0,
    "insight": true,
-   "label": "CNBC 2026.10.30 보도 · 아마존 3분기 실적 콜(10.29) 발언 인용",
    "who": "앤디 재시",
-   "role": "아마존 CEO · 2026년 설비투자 약 2,200억 달러",
-   "quote": "25년에 나눠 쓸 수 있다면 편하겠죠. 하지만 그건 우리가 사는 세상이 아닙니다",
-   "keyword": "우리가 사는 세상이 아닙니다",
-   "orig": "Yeah, it might be more convenient, but that's not the world that we live in, and that's not the opportunity.",
+   "role": "아마존 CEO",
+   "label": "음성: 아마존 IR 공식 녹음 (2026.10.29 3분기 실적 콜) · 사진: 아마존 보도 센터",
    "beats": [
     {
-     "say": "그리고 답했습니다. 그럴지도 모릅니다. 하지만 그건 우리가 사는 세상이 아니고, 이 기회도 그렇지 않습니다.",
-     "motion": [
-      {
-       "t": "우리가 사는 세상",
-       "do": "stat",
-       "id": "m10월29일",
-       "value": "10월 29일",
-       "label": "아마존 3분기 실적 콜",
-       "sub": "",
-       "x": 1560,
-       "y": 910,
-       "fs": 48,
-       "static": true
-      }
-     ]
-    },
-    {
-     "say": "결론은 분명합니다. 지금 써야 하고, 계속 쓰겠다는 겁니다. 아마존은 올해 설비투자를 약 2,200억 달러로 잡고 있습니다.",
-     "motion": [
-      {
-       "t": "2,200억",
-       "do": "stat",
-       "id": "capex",
-       "value": "약 2,200억 달러",
-       "label": "아마존 2026년 설비투자 계획",
-       "sub": "10.29 보도자료",
-       "x": 1500,
-       "y": 230,
-       "fs": 56,
-       "static": true
-      }
-     ]
+     "say": "이 질문에, 가장 돈을 많이 쓰는 회사의 대표가 직접 답했습니다."
     }
    ],
-   "id": 3,
+   "clip": {
+    "src": "jassy_call",
+    "lang": "en",
+    "fit": "contain",
+    "cuts": [
+     {
+      "find": "would it be more convenient if this type of acceleration and opportunity happened over 25 years",
+      "ko": "이런 가속과 기회가 25년에 걸쳐 와서,"
+     },
+     {
+      "find": "and you could spread the capex over 25 years",
+      "ko": "설비투자를 25년에 나눠 쓸 수 있다면 더 편하겠냐고요?"
+     },
+     {
+      "from": "yeah it might be more convenient",
+      "to": "that's not the opportunity",
+      "ko": "네, 더 편할지도 모르죠. 하지만 그건 우리가 사는 세상이 아니고, 이 기회도 그렇지 않습니다."
+     },
+     {
+      "find": "we can fund this plan",
+      "ko": "우리는 이 계획에 돈을 댈 수 있습니다."
+     }
+    ]
+   },
+   "show_en": false,
    "decide": {
-    "pick": "quote",
+    "pick": "bite",
     "situation": "call-bite",
     "over": [
      {
-      "id": "bite",
-      "why_not": "실적 콜 원본 음성·시각을 아직 못 찾음(CNBC 보도 인용) — PC 에서 웹캐스트를 찾으면 bite 로 바꿈"
+      "id": "quote",
+      "why_not": "인용 카드는 남이 전한 말 — 본인 목소리가 있으면 목소리로 (2026-11-26 사용자)"
      },
      {
-      "id": "bignum",
-      "why_not": "숫자로 열면 30초 안에 이탈(09 §5 여는 장면)"
+      "id": "kb",
+      "why_not": "사진만으로는 말이 안 들림"
      }
     ],
-    "why": "09 §5-00 결론 먼저 — 사는 쪽에서 가장 많이 쓰는 회사 CEO 의 결론을 첫 화면에, 원문·번역 2단",
-    "intent": "첫 30초에 '사는 쪽은 멈출 생각이 없다'는 결론을 그 사람의 말로 듣는다",
+    "why": "결론을 그 사람의 목소리로 먼저 (09 §5-00 ①) — 아마존 IR 공식 녹음에서 대본과 같은 문장만 잘라 원문·번역",
+    "intent": "'멈출 수 없다, 돈은 댈 수 있다'를 재시 본인의 목소리로 듣는다",
     "refs": [
      "manual/09-market-daily.md"
     ]
-   }
+   },
+   "id": 2
   },
   {
-   "type": "quote",
+   "type": "bignum",
+   "chapter": 0,
+   "label": "아마존 3분기 보도자료(2026.10.29) — 'We continue to expect 2026 cash capital expenditures to be approximately $220 billion.'",
+   "small": "아마존 2026년 설비투자 계획",
+   "value": "약 2,200억 달러",
+   "decide": {
+    "pick": "bignum",
+    "situation": "metric",
+    "differs": "목소리 바로 뒤에 그 말의 크기를 숫자 하나로",
+    "over": [
+     {
+      "id": "bars",
+      "why_not": "비교가 아니라 한 숫자"
+     },
+     {
+      "id": "chart",
+      "why_not": "시계열 아님"
+     }
+    ],
+    "why": "원본 발언 다음엔 반드시 해설 (09 §5-00) — '계속 쓴다'의 크기를 숫자로",
+    "intent": "그 말이 2,200억 달러짜리 결정이라는 것을 안다",
+    "refs": [
+     "manual/09-market-daily.md"
+    ]
+   },
+   "beats": [
+    {
+     "say": "결론은 분명합니다. 지금 써야 하고, 계속 쓰겠다. 그리고 그 돈을 댈 수 있다고 했습니다. 아마존은 올해 설비투자를 약 2,200억 달러로 잡고 있습니다."
+    },
+    {
+     "say": "그 돈이 어디서 오는지가, 이 영상이 따라갈 질문입니다."
+    }
+   ],
+   "id": 3
+  },
+  {
+   "type": "zoomshot",
    "chapter": 0,
    "insight": true,
-   "label": "세인트루이스 연준 블로그 2026.11.19 (코즐로프스키·산체스·설리번) · 원문 인용",
-   "who": "세인트루이스 연준 이코노미스트 3인",
-   "role": "줄리안 코즐로프스키·후안 산체스·니컬러스 설리번",
-   "quote": "영업현금으로 감당할 수 있는 만큼은 거의 다 썼고, 이제 빚에 더 기대고 있다",
-   "keyword": "이제 빚에",
-   "orig": "Having largely exhausted what their operating cash flow can cover, data center builders are leaning more heavily on debt.",
+   "clip": {
+    "src": "src_stl_body",
+    "start": 0
+   },
+   "label": "원문: 세인트루이스 연준 'On the Economy' 2026.11.19 (코즐로프스키·산체스·설리번)",
+   "focus": [
+    {
+     "beat": 1,
+     "box": [
+      58,
+      392,
+      1248,
+      104
+     ],
+     "label": "영업현금으로 감당할 만큼은 거의 다 썼다 → 이제 빚"
+    }
+   ],
    "beats": [
     {
      "say": "3주 뒤, 미국 세인트루이스 연방준비은행의 이코노미스트 세 사람은 이 회사들의 장부를 거꾸로 읽었습니다."
@@ -501,35 +553,40 @@
      "say": "그래서 이 속도가 이어질지는 앞으로의 이익과, 바깥에서 돈을 계속 구할 수 있느냐에 달렸다고 적었습니다."
     }
    ],
-   "id": 4,
    "decide": {
-    "pick": "quote",
+    "pick": "zoomshot",
     "situation": "said",
-    "differs": "공개 라이선스 사진이 없고 원문 사이트는 자동 접속을 막아 캡처도 못 함 — 사진 장면 없이 인용 카드",
+    "differs": "같은 상황이어도 원문 화면이 있으면 원문으로",
     "over": [
      {
-      "id": "kb",
-      "why_not": "쓸 수 있는 본인·기관 사진이 없음"
+      "id": "quote",
+      "why_not": "우리가 옮겨 적은 카드보다 원문 화면이 증거"
+     },
+     {
+      "id": "bignum",
+      "why_not": "숫자만 떼면 누가 어디서 말했는지가 사라짐"
      },
      {
       "id": "map_causal",
-      "why_not": "원인→결과 사슬이 아니라 한 기관의 결론 문장 — 말이 주인공인 자리(09 §5-1 ③)"
+      "why_not": "인과 그림이 아니라 원문 한 문장을 가리키는 자리"
      },
      {
-      "id": "bite",
-      "why_not": "블로그 글이라 영상 원본이 없음"
+      "id": "newspapers",
+      "why_not": "여러 매체 묶음이 아니라 한 원문"
      },
      {
-      "id": "versus",
-      "why_not": "두 결론을 맞대기 전에 두 번째 목소리를 따로 들려줘야 무게가 같음"
+      "id": "bars",
+      "why_not": "원문에 적힌 숫자를 그대로 보여 주는 것이 증거"
      }
     ],
-    "why": "맞서는 결론도 이름 있는 기관의 원문으로 — 같은 무게(09 §5-0-2)",
-    "intent": "'이제 빚이다'라는 반대 결론을 원문으로 듣는다",
+    "why": "맞서는 결론을 연준 원문 문장 그대로 — 인용 카드 대신 실제 글",
+    "intent": "'이제 빚이다'가 연준 이코노미스트의 원문이라는 것을 눈으로 본다",
     "refs": [
-     "manual/09-market-daily.md"
+     "manual/12-visual-storytelling.md",
+     "technique:spotlight"
     ]
-   }
+   },
+   "id": 4
   },
   {
    "type": "versus",
@@ -751,34 +808,78 @@
    }
   },
   {
-   "type": "bignum",
+   "type": "zoomshot",
    "chapter": 1,
-   "label": "아마존 3분기 보도자료 · 잉여현금흐름은 최근 12개월(회사 정의) · 장기부채 2025.12.31 → 2026.9.30",
-   "small": "아마존 최근 1년 잉여현금흐름 (번 돈 − 쓴 돈)",
-   "value": "−424억 달러",
-   "beats": [
+   "insight": true,
+   "clip": {
+    "src": "src_amzn_8k",
+    "start": 0
+   },
+   "label": "원문: 아마존 3분기 실적 보도자료 (SEC 8-K 첨부 99.1, 2026.10.29)",
+   "focus": [
     {
-     "say": "최근 1년으로 넓히면, 번 돈에서 쓴 돈을 뺀 잉여현금흐름이 마이너스 424억 달러입니다."
-    },
-    {
-     "say": "같은 기간 장기 빚은 작년 말 656억 달러에서 9월 말 1,731억 달러로, 2.6배가 됐습니다.",
-     "motion": [
-      {
-       "t": "1,731억",
-       "do": "stat",
-       "id": "ltd",
-       "value": "656억 → 1,731억",
-       "label": "아마존 장기부채",
-       "sub": "2.6배 · 9개월",
-       "x": 1500,
-       "y": 860,
-       "fs": 52,
-       "static": true
-      }
-     ]
+     "beat": 0,
+     "box": [
+      132,
+      454,
+      1776,
+      165
+     ],
+     "label": "최근 12개월 잉여현금흐름 −424억 달러"
     }
    ],
-   "id": 9,
+   "beats": [
+    {
+     "say": "최근 1년으로 넓히면, 번 돈에서 쓴 돈을 뺀 잉여현금흐름이 마이너스 424억 달러입니다. 회사 보도자료에 그대로 적혀 있습니다."
+    }
+   ],
+   "decide": {
+    "pick": "zoomshot",
+    "situation": "point",
+    "differs": "같은 상황이어도 원문 화면이 있으면 원문으로",
+    "over": [
+     {
+      "id": "quote",
+      "why_not": "우리가 옮겨 적은 카드보다 원문 화면이 증거"
+     },
+     {
+      "id": "bignum",
+      "why_not": "숫자만 떼면 누가 어디서 말했는지가 사라짐"
+     },
+     {
+      "id": "map_causal",
+      "why_not": "인과 그림이 아니라 원문 한 문장을 가리키는 자리"
+     },
+     {
+      "id": "newspapers",
+      "why_not": "여러 매체 묶음이 아니라 한 원문"
+     },
+     {
+      "id": "bars",
+      "why_not": "원문에 적힌 숫자를 그대로 보여 주는 것이 증거"
+     }
+    ],
+    "why": "회사가 스스로 적은 숫자를 원문 화면으로",
+    "intent": "−424억이 아마존 보도자료 원문이라는 것을 본다",
+    "refs": [
+     "manual/12-visual-storytelling.md",
+     "technique:spotlight"
+    ]
+   },
+   "id": 9
+  },
+  {
+   "type": "bignum",
+   "chapter": 1,
+   "label": "아마존 3분기 보도자료 재무상태표 · 장기부채 2025.12.31 → 2026.9.30",
+   "small": "아마존 장기부채 (작년 말 → 9월 말)",
+   "value": "656억 → 1,731억 달러",
+   "beats": [
+    {
+     "say": "같은 기간 장기 빚은 작년 말 656억 달러에서 9월 말 1,731억 달러로, 2.6배가 됐습니다."
+    }
+   ],
+   "id": 10,
    "decide": {
     "pick": "bignum",
     "situation": "metric",
@@ -852,7 +953,7 @@
      ]
     }
    ],
-   "id": 10,
+   "id": 11,
    "decide": {
     "pick": "compare",
     "situation": "compare",
@@ -902,7 +1003,7 @@
      "say": "다섯 중 넷이 이미 번 돈보다 더 쓰고 있고, 한 회사의 여유가 나머지의 빈 곳을 가려 주고 있었던 셈이죠. 그럼 빈 곳은 무엇으로 메웠을까요. 이번엔 마이크로소프트의 재무책임자가 힌트를 줍니다."
     }
    ],
-   "id": 11,
+   "id": 12,
    "decide": {
     "pick": "bars",
     "situation": "metric",
@@ -933,105 +1034,60 @@
    "look": "board",
    "beats": [
     {
-     "say": "그럼 다섯 곳 가운데 유일하게 번 돈이 더 많은 회사는 어떻게 짓고 있을까요."
-    }
-   ],
-   "id": 12
-  },
-  {
-   "type": "kb",
-   "chapter": 2,
-   "clip": {
-    "src": "msft_hq",
-    "start": 0
-   },
-   "move": "in",
-   "stamp": "10월 28일 · 마이크로소프트 실적 콜",
-   "label": "사진: Building 92 of Microsoft Redmond Campus (위키미디어 공용, CC BY 3.0) · 본인 사진은 공개 라이선스로 찾지 못함",
-   "decide": {
-    "pick": "kb",
-    "situation": "said",
-    "differs": "말하기 전에 누구인가를 — 본인 사진이 없어 그 회사 본사",
-    "new_vocab": "인물·기관 사진 장면 (2026-11-26 사용자)",
-    "over": [
-     {
-      "id": "bite",
-      "why_not": "원본 음성 미확인"
-     },
-     {
-      "id": "quote",
-      "why_not": "인용 카드만으로는 어느 회사의 말인지 한눈에 안 보임"
-     }
-    ],
-    "why": "두 번째 사는 쪽 목소리의 회사를 사진으로 — 본인 사진이 공개 라이선스로 없어 다른 사람을 잘못 쓰지 않게 본사",
-    "intent": "마이크로소프트 CFO 의 말이라는 것을 안다",
-    "refs": [
-     "manual/09-market-daily.md"
-    ]
-   },
-   "beats": [
-    {
-     "say": "두 번째 목소리는 마이크로소프트의 재무를 책임지는 에이미 후드 최고재무책임자입니다.",
-     "lower": {
-      "name": "에이미 후드",
-      "role": "마이크로소프트 최고재무책임자 (사진은 레드먼드 본사)"
-     }
+     "say": "그럼 다섯 곳 가운데 유일하게 번 돈이 더 많은 마이크로소프트는 어떻게 짓고 있을까요."
     }
    ],
    "id": 13
   },
   {
-   "type": "quote",
+   "type": "bite",
    "chapter": 2,
    "insight": true,
-   "label": "CNBC 2026.10.29 보도 · 마이크로소프트 회계 1분기 실적 콜(10.28) 발언 인용",
    "who": "에이미 후드",
    "role": "마이크로소프트 최고재무책임자(CFO)",
-   "quote": "리스라는 형태의 금융이 있고, 우리는 그걸 수단으로 써 왔습니다",
-   "keyword": "리스",
-   "orig": "There's a form of financing called leasing, and we've been using that one as a vehicle",
+   "label": "음성: 마이크로소프트 IR 공식 다시보기 (2026.10.28 실적 콜) · 사진: 마이크로소프트 보도 페이지",
    "beats": [
     {
-     "say": "10월 28일 실적 콜에서 후드는 이렇게 말했다고 CNBC가 전했습니다. 리스라는 형태의 금융이 있고, 우리는 그걸 수단으로 써 왔다.",
-     "motion": [
-      {
-       "t": "10월 28일",
-       "do": "stat",
-       "id": "m10월28일",
-       "value": "10월 28일",
-       "label": "마이크로소프트 실적 콜",
-       "sub": "",
-       "x": 1560,
-       "y": 910,
-       "fs": 48,
-       "static": true
-      }
-     ]
-    },
-    {
-     "say": "그리고, 신용등급 덕분에 채권시장에 접근할 수 있지만 아직 그건 쓰지 않았다고요."
+     "say": "돈을 어떻게 마련할 거냐는 질문에, 마이크로소프트의 재무책임자 에이미 후드는 이렇게 답했습니다."
     }
    ],
-   "id": 14,
+   "clip": {
+    "src": "hood_call",
+    "lang": "en",
+    "fit": "contain",
+    "cuts": [
+     {
+      "find": "there's a form of financing called leasing and we've been using that one as a vehicle",
+      "ko": "리스라는 형태의 금융이 있고, 우리는 그걸 수단으로 써 왔습니다."
+     },
+     {
+      "from": "we're fortunate to have access in the debt markets",
+      "to": "tap that",
+      "ko": "신용등급 덕분에 채권시장에도 접근할 수 있는데, 아직은, 말하자면, 쓰지 않았습니다."
+     }
+    ]
+   },
+   "show_en": false,
    "decide": {
-    "pick": "quote",
+    "pick": "bite",
     "situation": "call-bite",
     "over": [
      {
-      "id": "bite",
-      "why_not": "원본 음성 미확보(CNBC 보도 인용)"
+      "id": "quote",
+      "why_not": "인용 카드는 남이 전한 말 — 공식 다시보기에 본인 목소리가 있음"
      },
      {
-      "id": "bars",
-      "why_not": "숫자가 아니라 말이 주인공인 자리(09 §5-1 ③)"
+      "id": "kb",
+      "why_not": "사진만으로는 말이 안 들림"
      }
     ],
-    "why": "두 번째 사는 쪽 목소리 — 리스라는 '보이지 않는 돈'을 그 회사 CFO 의 입으로",
-    "intent": "빈 곳을 메우는 첫 방법(리스)이 있다는 것을 듣는다",
+    "why": "두 번째 사는 쪽 목소리를 본인 음성으로 — 공식 녹취록과 대조한 문장만",
+    "intent": "리스와 '아직 안 쓴 채권시장'을 후드 본인의 목소리로 듣는다",
     "refs": [
      "manual/09-market-daily.md"
     ]
-   }
+   },
+   "id": 14
   },
   {
    "type": "motionboard",
@@ -1294,64 +1350,29 @@
    "id": 18
   },
   {
-   "type": "kb",
-   "chapter": 3,
-   "clip": {
-    "src": "meta_hq",
-    "start": 0
-   },
-   "move": "in",
-   "stamp": "10월 26일 · 메타 보도자료",
-   "label": "사진: Meta Platforms Headquarters Menlo Park California (위키미디어 공용, CC0)",
-   "decide": {
-    "pick": "kb",
-    "situation": "said",
-    "differs": "회사 보도자료라 사람 대신 본사",
-    "new_vocab": "인물·기관 사진 장면 (2026-11-26 사용자)",
-    "over": [
-     {
-      "id": "newspapers",
-      "why_not": "매체 보도가 아니라 회사가 직접 낸 보도자료"
-     },
-     {
-      "id": "quote",
-      "why_not": "인용 카드만으로는 어느 회사인지 한눈에 안 보임"
-     },
-     {
-      "id": "bite",
-      "why_not": "보도자료라 영상 없음"
-     }
-    ],
-    "why": "세 번째 목소리(메타)를 본사 사진으로 먼저",
-    "intent": "메타가 스스로 적은 계획이라는 것을 안다",
-    "refs": [
-     "manual/09-market-daily.md"
-    ]
-   },
-   "beats": [
-    {
-     "say": "세 번째 목소리는 메타입니다. 메타는 아예 보도자료에 자금 계획을 적었습니다.",
-     "lower": {
-      "name": "메타",
-      "role": "회사 보도자료 (사진은 멘로파크 본사)"
-     }
-    }
-   ],
-   "id": 19
-  },
-  {
-   "type": "quote",
+   "type": "zoomshot",
    "chapter": 3,
    "insight": true,
-   "label": "메타 보도자료 2026.10.26 (주식 발행 공고)",
-   "who": "메타",
-   "role": "회사 보도자료",
-   "quote": "영업현금흐름, 투자등급 부채, 전략적 파트너십, 주식 자본의 균형 잡힌 조합",
-   "keyword": "균형 잡힌 조합",
-   "orig": "a balanced mix of operating cash flow, investment-grade debt, strategic partnerships, and equity capital",
+   "clip": {
+    "src": "src_meta",
+    "start": 0
+   },
+   "label": "원문: 메타 IR 보도자료 2026.10.26 (주식 발행 공고)",
+   "focus": [
+    {
+     "beat": 0,
+     "box": [
+      144,
+      341,
+      1608,
+      115
+     ],
+     "label": "영업현금 · 투자등급 부채 · 파트너십 · 주식"
+    }
+   ],
    "beats": [
     {
-     "say": "10월 26일, 메타는 투자를 영업현금흐름, 투자등급 부채, 전략적 파트너십, 주식 자본의 균형 잡힌 조합으로 대겠다고 적었습니다.",
+     "say": "세 번째는 메타입니다. 10월 26일, 메타는 투자를 영업현금흐름, 투자등급 부채, 전략적 파트너십, 주식 자본의 균형 잡힌 조합으로 대겠다고 보도자료에 적었습니다.",
      "motion": [
       {
        "t": "10월 26일",
@@ -1371,27 +1392,40 @@
      "say": "네 가지 가운데 번 돈은 첫 번째 하나뿐입니다. 나머지 셋은 모두 바깥에서 구하는 돈입니다."
     }
    ],
-   "id": 20,
    "decide": {
-    "pick": "quote",
+    "pick": "zoomshot",
     "situation": "said",
-    "differs": "회사 보도자료 원문 — 사람 발언(장면 2)과 같은 인용 카드",
+    "differs": "같은 상황이어도 원문 화면이 있으면 원문으로",
     "over": [
      {
-      "id": "bite",
-      "why_not": "보도자료라 영상 없음"
+      "id": "quote",
+      "why_not": "우리가 옮겨 적은 카드보다 원문 화면이 증거"
      },
      {
-      "id": "checklist",
-      "why_not": "네 가지를 목록으로 먼저 보이면 '번 돈은 하나뿐'이라는 해설이 약해짐"
+      "id": "bignum",
+      "why_not": "숫자만 떼면 누가 어디서 말했는지가 사라짐"
+     },
+     {
+      "id": "map_causal",
+      "why_not": "인과 그림이 아니라 원문 한 문장을 가리키는 자리"
+     },
+     {
+      "id": "newspapers",
+      "why_not": "여러 매체 묶음이 아니라 한 원문"
+     },
+     {
+      "id": "bars",
+      "why_not": "원문에 적힌 숫자를 그대로 보여 주는 것이 증거"
      }
     ],
-    "why": "회사가 스스로 적은 자금 계획 원문 — 네 가지 중 번 돈은 하나",
-    "intent": "메타가 바깥 돈 셋을 공식 계획으로 적었다는 것을 안다",
+    "why": "회사가 스스로 적은 자금 계획 원문을 그 문장 그대로",
+    "intent": "메타가 바깥 돈 셋을 공식 계획으로 적었다는 것을 원문으로 본다",
     "refs": [
-     "manual/09-market-daily.md"
+     "manual/12-visual-storytelling.md",
+     "technique:spotlight"
     ]
-   }
+   },
+   "id": 19
   },
   {
    "type": "checklist",
@@ -1427,7 +1461,7 @@
      "upto": 3
     }
    ],
-   "id": 21,
+   "id": 20,
    "decide": {
     "pick": "checklist",
     "situation": "earnings",
@@ -1484,7 +1518,7 @@
      "upto": 2
     }
    ],
-   "id": 22,
+   "id": 21,
    "decide": {
     "pick": "compare",
     "situation": "say-vs-do",
@@ -1544,7 +1578,7 @@
      "say": "금고가 비어서가 아닙니다. 쌓아 둔 돈은 남겨 두고, 지금 짓는 데 드는 추가분을 바깥에서 가져오는 쪽을 택한 겁니다. 주주에게 돌려주던 돈까지 데이터센터로 돌리면서요."
     }
    ],
-   "id": 23,
+   "id": 22,
    "decide": {
     "pick": "bars",
     "situation": "metric",
@@ -1604,7 +1638,7 @@
      "say": "미국에서 신용등급 좋은 일반 기업이 새로 낸 회사채 가운데 이 몫이 2023년엔 6%도 안 됐는데, 올해는 31% 정도입니다. 세 장에 한 장꼴입니다."
     }
    ],
-   "id": 24,
+   "id": 23,
    "decide": {
     "pick": "zoomshot",
     "situation": "point",
@@ -1638,7 +1672,7 @@
      "say": "지금까지 나온 회사를 한 줄로 세워 보겠습니다."
     }
    ],
-   "id": 25
+   "id": 24
   },
   {
    "type": "motionboard",
@@ -1703,7 +1737,7 @@
      }
     }
    ],
-   "id": 26,
+   "id": 25,
    "decide": {
     "pick": "motionboard",
     "situation": "explain-market",
@@ -1773,7 +1807,7 @@
      "say": "회사는 4분기 이자가 10억 달러를 넘어, 한 분기 만에 30%쯤 늘 걸로 봤습니다."
     }
    ],
-   "id": 27,
+   "id": 26,
    "decide": {
     "pick": "bars",
     "situation": "earnings",
@@ -1837,7 +1871,7 @@
      ]
     }
    ],
-   "id": 28,
+   "id": 27,
    "decide": {
     "pick": "bignum",
     "situation": "metric",
@@ -1900,7 +1934,7 @@
      "say": "그러니 빅테크는 돈이 많아 괜찮다도, 빚더미라 곧 터진다도 반만 맞습니다. 위층은 버틸 힘이 크고, 아래층으로 갈수록 이자와 차환, 그러니까 빚을 새 빚으로 갚아 나가는 일이 빡빡합니다."
     }
    ],
-   "id": 29,
+   "id": 28,
    "decide": {
     "pick": "checklist",
     "situation": "earnings",
@@ -1938,7 +1972,7 @@
      "say": "이제 처음의 두 번째 목소리로 돌아가 보겠습니다. 연준 쪽은 터진다고 말하지 않았습니다. 그들이 문제 삼는 고리는 따로 있습니다."
     }
    ],
-   "id": 30
+   "id": 29
   },
   {
    "type": "compare",
@@ -1980,7 +2014,7 @@
      "upto": 3
     }
    ],
-   "id": 31,
+   "id": 30,
    "decide": {
     "pick": "compare",
     "situation": "compare",
@@ -2061,7 +2095,7 @@
      "say": "그런데 그 문장 끝에 단서가 붙어 있습니다. 적어도 올해까지는. 지금까지 이 붐을 통신 때와 갈라놓던 바로 그 차이가, 2026년에 줄기 시작했다는 뜻입니다."
     }
    ],
-   "id": 32,
+   "id": 31,
    "decide": {
     "pick": "zoomshot",
     "situation": "point",
@@ -2112,7 +2146,7 @@
      "say": "빌려주는 쪽도 표정이 바뀌고 있습니다. 로이터가 11월 9일 전한 뱅크오브아메리카 분석으로는, 빅테크 10년 만기 회사채의 가산금리, 그러니까 국채보다 더 얹어 주는 이자가 올해 들어 0.5%포인트쯤 넓어졌습니다. AI와 상관없는 우량 기업은 0.2%포인트 정도였습니다."
     }
    ],
-   "id": 33,
+   "id": 32,
    "decide": {
     "pick": "bars",
     "situation": "compare",
@@ -2135,6 +2169,80 @@
    }
   },
   {
+   "type": "zoomshot",
+   "chapter": 5,
+   "insight": true,
+   "clip": {
+    "src": "src_reuters_poggi",
+    "start": 0
+   },
+   "label": "원문: 로이터 2026.11.9 (야후 파이낸스 게재) 'Banks, investors grow wary of AI debt'",
+   "focus": [
+    {
+     "beat": 0,
+     "box": [
+      24,
+      451,
+      1248,
+      178
+     ],
+     "label": "롭스앤그레이 크리스 포기: 채권 투자자들의 장부가 꽉 찼다"
+    },
+    {
+     "beat": 1,
+     "box": [
+      24,
+      744,
+      1248,
+      240
+     ],
+     "label": "골드만삭스: 2027년 발행 4,200억 달러, 60%+"
+    }
+   ],
+   "beats": [
+    {
+     "say": "같은 기사에서 로펌 롭스앤그레이의 금융 파트너 크리스 포기는 채권 투자자들의 장부가 꽉 찼다고 했습니다."
+    },
+    {
+     "say": "그런데도 빌릴 돈은 더 늘어납니다. 골드만삭스는 빅테크의 내년 부채 발행을 4,200억 달러로, 올해보다 60% 넘게 많을 걸로 봤습니다."
+    }
+   ],
+   "decide": {
+    "pick": "zoomshot",
+    "situation": "said",
+    "differs": "같은 상황이어도 원문 화면이 있으면 원문으로",
+    "over": [
+     {
+      "id": "quote",
+      "why_not": "우리가 옮겨 적은 카드보다 원문 화면이 증거"
+     },
+     {
+      "id": "bignum",
+      "why_not": "숫자만 떼면 누가 어디서 말했는지가 사라짐"
+     },
+     {
+      "id": "map_causal",
+      "why_not": "인과 그림이 아니라 원문 한 문장을 가리키는 자리"
+     },
+     {
+      "id": "newspapers",
+      "why_not": "여러 매체 묶음이 아니라 한 원문"
+     },
+     {
+      "id": "bars",
+      "why_not": "원문에 적힌 숫자를 그대로 보여 주는 것이 증거"
+     }
+    ],
+    "why": "빌려주는 쪽의 시각을 기사 원문 문장으로",
+    "intent": "'장부가 꽉 찼다'와 내년 발행 전망이 같은 기사에 나란히 있다는 것을 본다",
+    "refs": [
+     "manual/12-visual-storytelling.md",
+     "technique:spotlight"
+    ]
+   },
+   "id": 33
+  },
+  {
    "type": "versus",
    "chapter": 5,
    "insight": true,
@@ -2152,9 +2260,6 @@
    "bg": "photo",
    "bg_src": "ms_hq",
    "beats": [
-    {
-     "say": "같은 기사에서 로펌 롭스앤그레이의 금융 파트너 크리스 포기는 채권 투자자들의 장부가 꽉 찼다고 했습니다."
-    },
     {
      "say": "반대 시각도 같은 무게로 들어야 합니다. 모건스탠리 전략가 페르난다 리마는 11월 10일 고객 노트에서, 우량 빅테크 채권은 위험 대비 보상이 올해 들어 가장 좋다고 봤습니다. 가산금리가 이미 넓어졌으니 오히려 사 볼 만하다는 거죠. 다만 리마도 데이터센터 사업 채권과 신생 클라우드 쪽은 변동성이 커질 거라고 했습니다.",
      "motion": [
@@ -2244,7 +2349,7 @@
      "y": 470,
      "icon": "vault",
      "label": "SK하이닉스",
-     "value": "순현금 98조 원+",
+     "value": "현금이 쌓임",
      "w": 360
     },
     "a1": {
@@ -2257,14 +2362,6 @@
      "kind": "arrow",
      "from": "chip",
      "to": "sell",
-     "color": "red"
-    },
-    "us": {
-     "kind": "text",
-     "x": 1600,
-     "y": 760,
-     "text": "1~9월 매출의 62.5%가 미국",
-     "size": 44,
      "color": "red"
     }
    },
@@ -2281,15 +2378,13 @@
      }
     },
     {
-     "say": "파는 쪽에 현금으로 쌓였습니다. 국내 보도로는 SK하이닉스가 9월 말 빚을 빼고도 98조 원이 넘는 순현금을 쥐고 있고, 올해 1월부터 9월까지 매출의 62.5%가 미국에서 나왔습니다.",
+     "say": "파는 쪽에 현금으로 쌓였습니다.",
      "do": [
       "sell",
-      "a2",
-      "us"
+      "a2"
      ],
      "at": {
-      "sell": "98조",
-      "us": "62.5%"
+      "sell": "파는 쪽"
      }
     }
    ],
@@ -2320,6 +2415,80 @@
    }
   },
   {
+   "type": "zoomshot",
+   "chapter": 6,
+   "insight": false,
+   "clip": {
+    "src": "src_economist_cash",
+    "start": 0
+   },
+   "label": "원문: 이코노미스트 2026.11.17 (SK하이닉스 분기보고서 인용)",
+   "focus": [
+    {
+     "beat": 0,
+     "box": [
+      48,
+      384,
+      1848,
+      125
+     ],
+     "label": "SK하이닉스 순현금 98조 6,600억 원 (9월 말)"
+    },
+    {
+     "beat": 1,
+     "box": [
+      48,
+      576,
+      1848,
+      125
+     ],
+     "label": "1~9월 매출의 62.5% 가 미국"
+    }
+   ],
+   "beats": [
+    {
+     "say": "국내 보도 원문으로 보면, SK하이닉스는 9월 말 빚을 빼고도 98조 원이 넘는 순현금을 쥐고 있습니다."
+    },
+    {
+     "say": "그리고 올해 1월부터 9월까지 매출의 62.5%가 미국에서 나왔습니다."
+    }
+   ],
+   "decide": {
+    "pick": "zoomshot",
+    "situation": "point",
+    "differs": "같은 상황이어도 원문 화면이 있으면 원문으로",
+    "over": [
+     {
+      "id": "quote",
+      "why_not": "우리가 옮겨 적은 카드보다 원문 화면이 증거"
+     },
+     {
+      "id": "bignum",
+      "why_not": "숫자만 떼면 누가 어디서 말했는지가 사라짐"
+     },
+     {
+      "id": "map_causal",
+      "why_not": "인과 그림이 아니라 원문 한 문장을 가리키는 자리"
+     },
+     {
+      "id": "newspapers",
+      "why_not": "여러 매체 묶음이 아니라 한 원문"
+     },
+     {
+      "id": "bars",
+      "why_not": "원문에 적힌 숫자를 그대로 보여 주는 것이 증거"
+     }
+    ],
+    "why": "파는 쪽 금고의 크기를 기사 원문 숫자로",
+    "intent": "빌린 돈이 칩값이 되어 파는 쪽 현금으로 쌓였다는 근거를 원문으로 본다",
+    "refs": [
+     "manual/12-visual-storytelling.md",
+     "technique:spotlight"
+    ]
+   },
+   "id": 37
+  },
+  {
    "type": "checklist",
    "chapter": 6,
    "label": "SK하이닉스 10.28 실적 콘퍼런스콜(뉴스토마토 2026.11.2 보도) · 한국신용평가 지적도 같은 보도 인용",
@@ -2344,11 +2513,11 @@
      "upto": 1
     },
     {
-     "say": "장기계약은 얼마나 사느냐를 묶어 줍니다. 하지만 제때 낼 수 있느냐는 상대의 지갑, 그러니까 그 계약 상대가 앞에서 본 세 층 가운데 어디냐에 달려 있습니다. 보도에 따르면 한국신용평가도 장기계약 고객의 신용이 나빠지면 조건이 다시 협상될 수 있다고 짚었습니다.",
+     "say": "장기계약은 얼마나 사느냐를 묶어 줍니다. 하지만 제때 낼 수 있느냐는 상대의 지갑, 그러니까 그 계약 상대가 앞에서 본 세 층 가운데 어디냐에 달려 있습니다.",
      "upto": 2
     }
    ],
-   "id": 37,
+   "id": 38,
    "decide": {
     "pick": "checklist",
     "situation": "earnings",
@@ -2371,6 +2540,141 @@
    }
   },
   {
+   "type": "zoomshot",
+   "chapter": 6,
+   "insight": true,
+   "clip": {
+    "src": "src_tomato",
+    "start": 0
+   },
+   "label": "원문: 뉴스토마토 2026.11.2 '삼전·하닉 역대급 호황에도…AI 기업들 돈줄 압박'",
+   "focus": [
+    {
+     "beat": 0,
+     "box": [
+      24,
+      240,
+      1872,
+      221
+     ],
+     "label": "한국신용평가: 2025~2028 AI 설비투자 약 2조 9천억 달러, 절반가량 외부 자금 · 신용 악화 시 재협상"
+    },
+    {
+     "beat": 1,
+     "box": [
+      24,
+      547,
+      1872,
+      154
+     ],
+     "label": "한국투자증권 고영민: '걱정해야 할 한계 시점은 분명 아니'"
+    }
+   ],
+   "beats": [
+    {
+     "say": "같은 기사에서 한국신용평가는 2025년부터 2028년까지 AI 설비투자 약 2조 9천억 달러 가운데 절반가량이 외부 자금으로 채워질 걸로 보고, 고객의 신용이 나빠지면 장기계약 조건이 다시 협상될 수 있다고 짚었습니다."
+    },
+    {
+     "say": "국내 증권가는 갈립니다. 한국투자증권 고영민 연구원은 빅테크의 투자를 실질적으로 걱정해야 할 한계 시점은 분명 아니라고 봤습니다."
+    }
+   ],
+   "decide": {
+    "pick": "zoomshot",
+    "situation": "said",
+    "differs": "같은 상황이어도 원문 화면이 있으면 원문으로",
+    "over": [
+     {
+      "id": "quote",
+      "why_not": "우리가 옮겨 적은 카드보다 원문 화면이 증거"
+     },
+     {
+      "id": "bignum",
+      "why_not": "숫자만 떼면 누가 어디서 말했는지가 사라짐"
+     },
+     {
+      "id": "map_causal",
+      "why_not": "인과 그림이 아니라 원문 한 문장을 가리키는 자리"
+     },
+     {
+      "id": "newspapers",
+      "why_not": "여러 매체 묶음이 아니라 한 원문"
+     },
+     {
+      "id": "bars",
+      "why_not": "원문에 적힌 숫자를 그대로 보여 주는 것이 증거"
+     }
+    ],
+    "why": "국내 시각을 기사 원문 문장으로",
+    "intent": "장기계약의 한계와 낙관 시각을 원문으로 본다",
+    "refs": [
+     "manual/12-visual-storytelling.md",
+     "technique:spotlight"
+    ]
+   },
+   "id": 39
+  },
+  {
+   "type": "zoomshot",
+   "chapter": 6,
+   "insight": true,
+   "clip": {
+    "src": "src_economist_park",
+    "start": 0
+   },
+   "label": "원문: 이코노미스트 2026.11.17 (키움증권 보고서 인용)",
+   "focus": [
+    {
+     "beat": 0,
+     "box": [
+      48,
+      396,
+      1848,
+      180
+     ],
+     "label": "키움증권 박유악: 두 회사 2027년 2분기 '피크아웃' · 목표주가 하향"
+    }
+   ],
+   "beats": [
+    {
+     "say": "키움증권 박유악 연구원은 SK하이닉스와 삼성전자의 분기 실적이 2027년 2분기에 정점을 찍고, D램이 그해 하반기 다시 공급 과잉에 들어갈 걸로 보고 목표주가를 낮췄습니다."
+    }
+   ],
+   "decide": {
+    "pick": "zoomshot",
+    "situation": "said",
+    "differs": "같은 상황이어도 원문 화면이 있으면 원문으로",
+    "over": [
+     {
+      "id": "quote",
+      "why_not": "우리가 옮겨 적은 카드보다 원문 화면이 증거"
+     },
+     {
+      "id": "bignum",
+      "why_not": "숫자만 떼면 누가 어디서 말했는지가 사라짐"
+     },
+     {
+      "id": "map_causal",
+      "why_not": "인과 그림이 아니라 원문 한 문장을 가리키는 자리"
+     },
+     {
+      "id": "newspapers",
+      "why_not": "여러 매체 묶음이 아니라 한 원문"
+     },
+     {
+      "id": "bars",
+      "why_not": "원문에 적힌 숫자를 그대로 보여 주는 것이 증거"
+     }
+    ],
+    "why": "반대 시각도 같은 무게로, 기사 원문으로",
+    "intent": "파는 쪽의 사이클을 경계하는 시각을 원문으로 본다",
+    "refs": [
+     "manual/12-visual-storytelling.md",
+     "technique:spotlight"
+    ]
+   },
+   "id": 40
+  },
+  {
    "type": "versus",
    "chapter": 6,
    "insight": true,
@@ -2387,16 +2691,10 @@
    },
    "beats": [
     {
-     "say": "국내 증권가도 갈립니다. 한국투자증권 고영민 연구원은 빅테크의 투자를 실질적으로 걱정해야 할 한계 시점은 분명 아니라고 봤습니다."
-    },
-    {
-     "say": "키움증권 박유악 연구원은 SK하이닉스와 삼성전자의 분기 실적이 2027년 2분기에 정점을 찍고, D램이 그해 하반기 다시 공급 과잉에 들어갈 걸로 보고 목표주가를 낮췄습니다."
-    },
-    {
      "say": "한 사람은 사는 쪽의 돈을, 다른 사람은 파는 쪽의 사이클을 보고 있습니다. 이 영상의 세 층으로 옮기면, 위층의 주문은 쉽게 꺾이지 않겠지만, 늘어나는 주문의 끝자락인 아래층의 추가 주문이 먼저 흔들릴 수 있습니다."
     }
    ],
-   "id": 38,
+   "id": 41,
    "decide": {
     "pick": "versus",
     "situation": "said",
@@ -2430,7 +2728,7 @@
      "say": "이 해석이 틀릴 수 있는 경우도 셋 있습니다."
     }
    ],
-   "id": 39
+   "id": 42
   },
   {
    "type": "checklist",
@@ -2470,7 +2768,7 @@
      "upto": 3
     }
    ],
-   "id": 40,
+   "id": 43,
    "decide": {
     "pick": "checklist",
     "situation": "next-week",
@@ -2507,7 +2805,7 @@
      "say": "그래서 다음에 볼 숫자는 셋입니다."
     }
    ],
-   "id": 41
+   "id": 44
   },
   {
    "type": "checklist",
@@ -2547,7 +2845,7 @@
      "upto": 3
     }
    ],
-   "id": 42,
+   "id": 45,
    "decide": {
     "pick": "checklist",
     "situation": "next-week",
@@ -2584,7 +2882,7 @@
      "say": "그렇다면 반도체 주식을 가진 우리가 지켜봐야 할 건, 빅테크의 실적 발표만이 아니라 채권시장의 표정이 아닐까요."
     }
    ],
-   "id": 43
+   "id": 46
   }
  ]
 }
