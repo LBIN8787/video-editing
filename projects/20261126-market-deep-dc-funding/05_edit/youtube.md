@@ -12,14 +12,14 @@
 
 📌 챕터
 00:00 오프닝
-1:40 1. 번 돈보다 더 쓴 분기
-3:22 2. 장부에 잘 안 보이는 돈
-5:06 3. 빚, 주식, 그리고 멈춘 자사주
-7:19 4. 같은 '빅테크'가 아니다
-9:23 5. 연준은 무엇을 문제 삼나
-12:20 6. 내 반도체 계좌에서
-14:01 7. 틀릴 수 있는 세 가지
-15:05 8. 다음에 볼 숫자 셋
+2:18 1. 번 돈보다 더 쓴 분기
+4:04 2. 장부에 잘 안 보이는 돈
+5:51 3. 빚, 주식, 그리고 멈춘 자사주
+8:01 4. 같은 '빅테크'가 아니다
+10:51 5. 연준은 무엇을 문제 삼나
+14:24 6. 내 반도체 계좌에서
+16:15 7. 틀릴 수 있는 세 가지
+17:20 8. 다음에 볼 숫자 셋
 
 📚 출처
 - https://www.microsoft.com/en-us/investor/earnings/fy-2027-q1/press-release-webcast
@@ -41,10 +41,16 @@
 - https://www.cnbc.com/2026/10/29/microsoft-25-billion-debt-offering.html
 - https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Announces-Launch-of-Offering-of-Depositary-Shares-Representing-Series-A-Mandatory-Convertible-Preferred-Stock-and-Offering-of-Class-A-Common-Stock-in-Connection-with-Forward-Sale-Agreements/default.aspx
 - https://convexityos.com/blog/ai-buildout-financing-ledger
+- https://ir.aboutamazon.com/files/doc_earnings/2026/q3/Q3-2026-Amazon-Earnings-Conference-Call.mp3
+
+🎬 원본 영상 (짧은 인용)
+① 앤디 재시 — 세마포(Semafor) 공식 채널 2026.11.18 'We Have To Do It': Amazon CEO Andy Jassy On Racing China In The AI Buildout · 인용 https://www.youtube.com/watch?v=AcFE-uESAy8
+② 로빈 위글스워스 — 블룸버그 팟캐스트 공식 채널 2026.11.17 — 로빈 위글스워스(파이낸셜타임스 칼럼니스트) · 인용 https://www.youtube.com/watch?v=nS3iG7ZLq60
+③ 토니 크레센치 — 블룸버그 팟캐스트 공식 채널 2026.10.18 'AI Debt Boom Faces Bond Market Reality Check' — 토니 크레센치(PIMCO) · 인용 https://www.youtube.com/watch?v=cR_V4Ngo95k
+④ 앤디 재시 — 음성: 아마존 Q3 2026 실적 콜 공식 녹음 (아마존 IR) · 사진: 아마존 보도 센터 'Andy Jassy headshot' https://ir.aboutamazon.com/files/doc_earnings/2026/q3/Q3-2026-Amazon-Earnings-Conference-Call.mp3
+⑤ 에이미 후드 — 음성: 마이크로소프트 FY27 1분기 실적 콜 공식 다시보기 (마이크로소프트 IR) · 사진: news.microsoft.com 'Amy Hood' 보도용 사진 https://www.microsoft.com/en-us/investor/events/fy-2027/earnings-fy-2027-q1
 
 📷 사진
-- Andy Jassy in 2010 — 위키미디어 공용 (CC BY 2.0) https://commons.wikimedia.org/wiki/File:Andy_Jassy_in_2010.jpg
-- Building 92 of Microsoft Redmond Campus — 위키미디어 공용 (CC BY 3.0) https://commons.wikimedia.org/wiki/File:Building_92_of_Microsoft_Redmond_Campus_-_panoramio.jpg
 - Morgan Stanley Headquarters — 위키미디어 공용 (CC BY 2.0) https://commons.wikimedia.org/wiki/File:Morgan_Stanley_Headquarters_(48105951892).jpg
 
 ※ 정보 제공 목적이며 투자 권유가 아닙니다. 사실과 가설을 구분해 전달하며, 가설은 영상에서 '가설'이라고 밝힙니다.
@@ -64,9 +70,9 @@
 - AI 회사채 → isa 회사채, 애플 회사채
 - 데이터센터 → 데이터센터 소음, 데이터센터 관련주, 데이터센터란, 데이터센터 냉각, 데이터센터 규제, 데이터센터 전력, 데이터센터 대장주, 데이터센터 반대
 - 앤디 재시 → 앤디제시
-- 아마존 → 아마존 활명수, 아마존 익스프레스, 아마존강, 아마존 프라임, 아마존 프라임 추천, 아마존 블랙프라이데이, 아마존 소울리스좌, 아마존 원주민
+- 아마존 → 아마존 활명수, 아마존 익스프레스, 아마존강, 아마존 프라임, 아마존 프라임 추천, 아마존 블랙프라이데이, 아마존 원주민, 아마존 댄스
 - 마이크로소프트 → 마이크로소프트 주가, 마이크로소프트 주가 전망, 마이크로소프트 계정 만드는법, 마이크로소프트 실적발표, 마이크로소프트 계정 삭제, 마이크로소프트 전망, 마이크로소프트 노트북, 마이크로소프트 주식
-- 알파벳 → 알파벳송, 알파벳 로어, 알파벳 실적, 알파벳요가, 알파벳 댄스, 알파벳a, 알파벳 주가, 알파벳 쓰기
+- 알파벳 → 알파벳송, 알파벳 로어, 알파벳 노래, 알파벳 실적, 알파벳 요가, 알파벳 댄스, 알파벳 주가, 알파벳a
 
 ## 썸네일
 05_edit/thumbnail_A.png · B · C → 유튜브 '테스트 및 비교'에 세 장 모두

@@ -233,3 +233,16 @@
 | 에이미 후드 (같은 답) | 같은 녹취록 | 바로 뒤 | "We're lucky; we have a lot of flexibility in terms of our capacity to raise financing." / "we're feeling good that we're free cash flow positive" | ✅ (영상에는 안 씀) |
 - 재시의 새 말 "we can fund this plan"(이 계획에 돈을 댈 수 있다)은 이 영상의 질문(그 돈이 어디서 오나)과 바로 맞닿음 → 여는 장면 해설에 넣음
 - 사진: 재시 = 아마존 보도 센터 'Andy Jassy headshot'(assets.aboutamazon.com, 보도용), 후드 = news.microsoft.com 'Amy Hood' 보도용 사진 (위키미디어 2010년 사진은 사용자 요청으로 뺌)
+
+## 원본 발언 영상 (2026-11-26 v10 — 사용자: "원문은 글이 아니라 발언 영상으로, 인터뷰로 시작")
+| 장면 | 누구 | 원본 (공식 채널) | 구간 | 원문 (받아쓰기) | 상태 |
+|---|---|---|---|---|---|
+| 여는 장면 ① | 앤디 재시 (아마존 CEO) | 세마포 공식 채널 2026.11.18 https://www.youtube.com/watch?v=AcFE-uESAy8 | 4:35.6~4:43.3 | "you end up having a lot of capex which creates some headwinds on your short-term free cash flow" | ✅ 받아쓰기 대조 |
+| 여는 장면 ② | 앤디 재시 | 같은 영상 | 4:43.4~4:58.2 | "but the economics of the business … investment capital" (몇 년 뒤 잉여현금흐름·투자수익률이 좋아진다) | ✅ |
+| 여는 장면 ③ | 앤디 재시 | 아마존 IR 공식 녹음 (위 '원본 발언 확인') | 49:07.9~ | "…that's not the world that we live in…" | ✅ |
+| 여는 장면 ④⑤ | 로빈 위글스워스 (파이낸셜타임스) | 블룸버그 팟캐스트 공식 채널 2026.11.17 https://www.youtube.com/watch?v=nS3iG7ZLq60 | 2:17.8~2:31.2, 2:33.6~2:41.8 | "this is an unusual time … of these companies" / "this year they kind of tapped out … private credit" | ✅ |
+| 4장 | 앤디 재시 | 세마포 (위와 같음) | 8:23.0~8:39.8 | "it'll be interesting over time … we'll have to see" (데이터센터 짓는 회사들이 오래 버틸지는 두고 봐야) | ✅ |
+| 4장 | 토니 크레센치 (PIMCO) | 블룸버그 팟캐스트 공식 채널 2026.10.18 https://www.youtube.com/watch?v=cR_V4Ngo95k | 3:04.0~3:16.5 | "what it's showing you is that the bond market … less clear to them" (채권시장이 현금흐름 불분명한 차입자에게 규율을 건다) | ✅ |
+- 방송·매체 구간 합계 약 77초(한 구간 ≤20초). 아마존·마이크로소프트 IR 녹음은 공식 자료라 따로.
+- 에이미 후드는 공식 다시보기가 음성뿐이라 보도용 사진 + 음성.
+- 세인트루이스 연은 블로그는 인용이 아니라 근거 화면(5장)으로.

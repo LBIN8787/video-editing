@@ -3,28 +3,6 @@
  "rows": [
   {
    "scene": 1,
-   "type": "motionboard",
-   "situation": "explain-market",
-   "pick": "motionboard",
-   "rec": [
-    "map_causal",
-    "analogy"
-   ],
-   "over": [
-    "map_causal",
-    "bignum",
-    "quote"
-   ],
-   "why": "첫 질문(사 주는 쪽의 돈)을 칩 → 사는 쪽 그림 위에 — 인용 카드에 질문을 얹지 않게",
-   "intent": "이 영상이 '칩을 사 주는 쪽의 돈'을 따라간다는 것을 안다",
-   "refs": [
-    "manual/09-market-daily.md"
-   ],
-   "differs": "",
-   "new_vocab": ""
-  },
-  {
-   "scene": 2,
    "type": "bite",
    "situation": "call-bite",
    "pick": "bite",
@@ -34,7 +12,54 @@
    ],
    "over": [
     "quote",
-    "kb"
+    "map_causal",
+    "kb",
+    "bars",
+    "motionboard"
+   ],
+   "why": "여는 장면은 그 사람의 목소리로, 결론부터 (09 §5-00 ①) — 사는 쪽 CEO 가 스스로 '현금흐름 역풍'을 말함",
+   "intent": "재시가 직접 '번 돈보다 많이 쓴다'를 인정하는 것을 듣는다",
+   "refs": [
+    "manual/09-market-daily.md"
+   ],
+   "differs": "같은 사람·같은 상황이라도 원본 발언 영상이 있으면 영상으로 (2026-11-26 사용자)",
+   "new_vocab": ""
+  },
+  {
+   "scene": 2,
+   "type": "bite",
+   "situation": "call-bite",
+   "pick": "bite",
+   "rec": [],
+   "over": [
+    "quote",
+    "map_causal",
+    "kb",
+    "bars",
+    "motionboard"
+   ],
+   "why": "같은 답의 뒷부분 — 그의 결론(지금 쓰고 나중에 번다)",
+   "intent": "재시의 결론을 끝까지 듣는다",
+   "refs": [
+    "manual/09-market-daily.md"
+   ],
+   "differs": "같은 사람·같은 상황이라도 원본 발언 영상이 있으면 영상으로 (2026-11-26 사용자)",
+   "new_vocab": ""
+  },
+  {
+   "scene": 3,
+   "type": "bite",
+   "situation": "call-bite",
+   "pick": "bite",
+   "rec": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "over": [
+    "quote",
+    "kb",
+    "bars"
    ],
    "why": "결론을 그 사람의 목소리로 먼저 (09 §5-00 ①) — 아마존 IR 공식 녹음에서 대본과 같은 문장만 잘라 원문·번역",
    "intent": "'멈출 수 없다, 돈은 댈 수 있다'를 재시 본인의 목소리로 듣는다",
@@ -45,7 +70,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 3,
+   "scene": 4,
    "type": "bignum",
    "situation": "metric",
    "pick": "bignum",
@@ -67,32 +92,49 @@
    "new_vocab": ""
   },
   {
-   "scene": 4,
-   "type": "zoomshot",
+   "scene": 5,
+   "type": "bite",
    "situation": "said",
-   "pick": "zoomshot",
-   "rec": [
-    "map_causal",
-    "analogy"
-   ],
+   "pick": "bite",
+   "rec": [],
    "over": [
     "quote",
-    "bignum",
     "map_causal",
-    "newspapers",
-    "bars"
+    "kb",
+    "bars",
+    "motionboard"
    ],
-   "why": "맞서는 결론을 연준 원문 문장 그대로 — 인용 카드 대신 실제 글",
-   "intent": "'이제 빚이다'가 연준 이코노미스트의 원문이라는 것을 눈으로 본다",
+   "why": "맞서는 결론도 이름 있는 사람의 목소리로, 같은 무게 (09 §5-0-2)",
+   "intent": "'올해 AI 붐은 빚 금융이 됐다'를 그의 목소리로 듣는다",
    "refs": [
-    "manual/12-visual-storytelling.md",
-    "technique:spotlight"
+    "manual/09-market-daily.md"
    ],
-   "differs": "같은 상황이어도 원문 화면이 있으면 원문으로",
+   "differs": "같은 사람·같은 상황이라도 원본 발언 영상이 있으면 영상으로 (2026-11-26 사용자)",
    "new_vocab": ""
   },
   {
-   "scene": 5,
+   "scene": 6,
+   "type": "bite",
+   "situation": "said",
+   "pick": "bite",
+   "rec": [],
+   "over": [
+    "quote",
+    "map_causal",
+    "kb",
+    "bars",
+    "motionboard"
+   ],
+   "why": "같은 답의 뒷부분 — 돈이 어디로 옮겨 갔나",
+   "intent": "빈 곳이 채권시장·사모대출로 간다는 말을 끝까지 듣는다",
+   "refs": [
+    "manual/09-market-daily.md"
+   ],
+   "differs": "같은 사람·같은 상황이라도 원본 발언 영상이 있으면 영상으로 (2026-11-26 사용자)",
+   "new_vocab": ""
+  },
+  {
+   "scene": 7,
    "type": "versus",
    "situation": "compare",
    "pick": "versus",
@@ -104,8 +146,8 @@
     "map_causal",
     "bars"
    ],
-   "why": "두 결론을 좌우로 맞대고 가운데에 이 영상의 해석(열쇠 = 채권시장)을 얹음",
-   "intent": "이 영상이 무엇을 따라가는지(두 말이 둘 다 맞을 수 있는 조건) 안다",
+   "why": "두 사람의 결론을 좌우로 맞대고 가운데에 이 영상의 해석",
+   "intent": "두 말이 둘 다 맞을 수 있는 조건(채권시장)을 이 영상이 따라간다는 것을 안다",
    "refs": [
     "manual/09-market-daily.md"
    ],
@@ -113,7 +155,29 @@
    "new_vocab": ""
   },
   {
-   "scene": 7,
+   "scene": 8,
+   "type": "motionboard",
+   "situation": "explain-market",
+   "pick": "motionboard",
+   "rec": [
+    "map_causal",
+    "analogy"
+   ],
+   "over": [
+    "map_causal",
+    "bignum",
+    "quote"
+   ],
+   "why": "첫 질문(사 주는 쪽의 돈)을 칩 → 사는 쪽 그림 위에 — 인용 카드에 질문을 얹지 않게",
+   "intent": "이 영상이 '칩을 사 주는 쪽의 돈'을 따라간다는 것을 안다",
+   "refs": [
+    "manual/09-market-daily.md"
+   ],
+   "differs": "",
+   "new_vocab": ""
+  },
+  {
+   "scene": 10,
    "type": "motionboard",
    "situation": "explain-market",
    "pick": "motionboard",
@@ -131,7 +195,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 8,
+   "scene": 11,
    "type": "bars",
    "situation": "earnings",
    "pick": "bars",
@@ -153,7 +217,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 9,
+   "scene": 12,
    "type": "zoomshot",
    "situation": "point",
    "pick": "zoomshot",
@@ -179,7 +243,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 10,
+   "scene": 13,
    "type": "bignum",
    "situation": "metric",
    "pick": "bignum",
@@ -201,7 +265,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 11,
+   "scene": 14,
    "type": "compare",
    "situation": "compare",
    "pick": "compare",
@@ -219,7 +283,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 12,
+   "scene": 15,
    "type": "bars",
    "situation": "metric",
    "pick": "bars",
@@ -241,7 +305,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 14,
+   "scene": 17,
    "type": "bite",
    "situation": "call-bite",
    "pick": "bite",
@@ -262,7 +326,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 15,
+   "scene": 18,
    "type": "motionboard",
    "situation": "explain-market",
    "pick": "motionboard",
@@ -286,7 +350,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 16,
+   "scene": 19,
    "type": "bars",
    "situation": "metric",
    "pick": "bars",
@@ -309,7 +373,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 17,
+   "scene": 20,
    "type": "bignum",
    "situation": "say-vs-do",
    "pick": "bignum",
@@ -331,7 +395,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 19,
+   "scene": 22,
    "type": "zoomshot",
    "situation": "said",
    "pick": "zoomshot",
@@ -356,7 +420,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 20,
+   "scene": 23,
    "type": "checklist",
    "situation": "earnings",
    "pick": "checklist",
@@ -379,7 +443,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 21,
+   "scene": 24,
    "type": "compare",
    "situation": "say-vs-do",
    "pick": "compare",
@@ -403,7 +467,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 22,
+   "scene": 25,
    "type": "bars",
    "situation": "metric",
    "pick": "bars",
@@ -425,7 +489,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 23,
+   "scene": 26,
    "type": "zoomshot",
    "situation": "point",
    "pick": "zoomshot",
@@ -448,7 +512,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 25,
+   "scene": 28,
    "type": "motionboard",
    "situation": "explain-market",
    "pick": "motionboard",
@@ -471,7 +535,33 @@
    "new_vocab": ""
   },
   {
-   "scene": 26,
+   "scene": 29,
+   "type": "bite",
+   "situation": "said",
+   "pick": "bite",
+   "rec": [
+    "motionboard",
+    "spread",
+    "share",
+    "afterline"
+   ],
+   "over": [
+    "quote",
+    "map_causal",
+    "kb",
+    "bars",
+    "motionboard"
+   ],
+   "why": "세 층 그림의 '아래층 위험'을 위층 CEO 의 입으로",
+   "intent": "아래층의 지속성은 아마존 CEO 도 장담하지 않는다는 것을 듣는다",
+   "refs": [
+    "manual/09-market-daily.md"
+   ],
+   "differs": "같은 사람·같은 상황이라도 원본 발언 영상이 있으면 영상으로 (2026-11-26 사용자)",
+   "new_vocab": ""
+  },
+  {
+   "scene": 30,
    "type": "bars",
    "situation": "earnings",
    "pick": "bars",
@@ -493,7 +583,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 27,
+   "scene": 31,
    "type": "bignum",
    "situation": "metric",
    "pick": "bignum",
@@ -515,7 +605,32 @@
    "new_vocab": ""
   },
   {
-   "scene": 28,
+   "scene": 32,
+   "type": "bite",
+   "situation": "said",
+   "pick": "bite",
+   "rec": [
+    "bite",
+    "footage",
+    "quote"
+   ],
+   "over": [
+    "quote",
+    "map_causal",
+    "kb",
+    "bars",
+    "motionboard"
+   ],
+   "why": "'열쇠는 채권시장'을 채권 운용사의 목소리로",
+   "intent": "채권시장이 아래층부터 돈값을 올린다는 것을 듣는다",
+   "refs": [
+    "manual/09-market-daily.md"
+   ],
+   "differs": "같은 사람·같은 상황이라도 원본 발언 영상이 있으면 영상으로 (2026-11-26 사용자)",
+   "new_vocab": ""
+  },
+  {
+   "scene": 33,
    "type": "checklist",
    "situation": "earnings",
    "pick": "checklist",
@@ -538,7 +653,32 @@
    "new_vocab": ""
   },
   {
-   "scene": 30,
+   "scene": 35,
+   "type": "zoomshot",
+   "situation": "said",
+   "pick": "zoomshot",
+   "rec": [
+    "map_causal",
+    "analogy"
+   ],
+   "over": [
+    "quote",
+    "bignum",
+    "map_causal",
+    "newspapers",
+    "bars"
+   ],
+   "why": "맞서는 결론을 연준 원문 문장 그대로 — 인용 카드 대신 실제 글",
+   "intent": "'이제 빚이다'가 연준 이코노미스트의 원문이라는 것을 눈으로 본다",
+   "refs": [
+    "manual/12-visual-storytelling.md",
+    "technique:spotlight"
+   ],
+   "differs": "같은 상황이어도 원문 화면이 있으면 원문으로",
+   "new_vocab": ""
+  },
+  {
+   "scene": 36,
    "type": "compare",
    "situation": "compare",
    "pick": "compare",
@@ -561,7 +701,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 31,
+   "scene": 37,
    "type": "zoomshot",
    "situation": "point",
    "pick": "zoomshot",
@@ -585,7 +725,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 32,
+   "scene": 38,
    "type": "bars",
    "situation": "compare",
    "pick": "bars",
@@ -607,7 +747,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 33,
+   "scene": 39,
    "type": "zoomshot",
    "situation": "said",
    "pick": "zoomshot",
@@ -633,7 +773,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 34,
+   "scene": 40,
    "type": "versus",
    "situation": "said",
    "pick": "versus",
@@ -655,7 +795,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 36,
+   "scene": 42,
    "type": "motionboard",
    "situation": "explain-market",
    "pick": "motionboard",
@@ -674,7 +814,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 37,
+   "scene": 43,
    "type": "zoomshot",
    "situation": "point",
    "pick": "zoomshot",
@@ -700,7 +840,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 38,
+   "scene": 44,
    "type": "checklist",
    "situation": "earnings",
    "pick": "checklist",
@@ -722,7 +862,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 39,
+   "scene": 45,
    "type": "zoomshot",
    "situation": "said",
    "pick": "zoomshot",
@@ -748,7 +888,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 40,
+   "scene": 46,
    "type": "zoomshot",
    "situation": "said",
    "pick": "zoomshot",
@@ -774,7 +914,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 41,
+   "scene": 47,
    "type": "versus",
    "situation": "said",
    "pick": "versus",
@@ -792,7 +932,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 43,
+   "scene": 49,
    "type": "checklist",
    "situation": "next-week",
    "pick": "checklist",
@@ -815,7 +955,7 @@
    "new_vocab": ""
   },
   {
-   "scene": 45,
+   "scene": 51,
    "type": "checklist",
    "situation": "next-week",
    "pick": "checklist",

@@ -5,70 +5,23 @@
  "scenes": [
   {
    "scene": 1,
-   "type": "motionboard",
-   "chapter": 0,
-   "situation": "cause",
-   "situation_name": "원인 → 결과를 잇는다",
-   "origin": "main",
-   "also": [],
-   "beats": [
-    {
-     "say": "SK하이닉스와 삼성전자의 메모리, 엔비디아의 칩을 사 주는 건 데이터센터를 짓는 몇몇 거대 기업입니다.",
-     "situations": [],
-     "hits": []
-    },
-    {
-     "say": "그래서 반도체 주식을 가진 사람이라면 한 번쯤 묻게 됩니다. 이 회사들은 이 돈을 언제까지 낼 수 있을까.",
-     "situations": [
-      "cause"
-     ],
-     "hits": [
-      "그래서"
-     ]
-    }
-   ],
-   "recommended_scenes": [
-    "map_causal",
-    "analogy"
-   ],
-   "type_fits": false,
-   "techniques": [
-    {
-     "id": "draw-on",
-     "status": "have"
-    },
-    {
-     "id": "spotlight",
-     "status": "have"
-    },
-    {
-     "id": "match-move",
-     "status": "candidate"
-    }
-   ],
-   "blocked": [],
-   "avoid": "장면마다 새 도식 (같은 칸 위치 유지)",
-   "why": "화살표가 말과 함께 그어져야 '이어진다'가 보임"
-  },
-  {
-   "scene": 2,
    "type": "bite",
    "chapter": 0,
    "situation": "call-bite",
    "situation_name": "어닝콜·기자회견 발언",
    "origin": "add",
    "also": [
-    "said"
+    "metric"
    ],
    "beats": [
     {
-     "say": "이 질문에, 가장 돈을 많이 쓰는 회사의 대표가 직접 답했습니다.",
+     "say": "11월 18일, 아마존의 앤디 재시 CEO에게 2,200억 달러 설비투자의 근거를 물었습니다.",
      "situations": [
       "call-bite",
-      "said"
+      "metric"
      ],
      "hits": [
-      "질문에"
+      "CEO"
      ]
     }
    ],
@@ -92,7 +45,59 @@
    "why": "원문+번역 2단, 그 사람의 목소리 (03 §0-1, source-cut)"
   },
   {
+   "scene": 2,
+   "type": "bite",
+   "chapter": 0,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": []
+  },
+  {
    "scene": 3,
+   "type": "bite",
+   "chapter": 0,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "said"
+   ],
+   "beats": [
+    {
+     "say": "3주 전 실적 발표에서는 더 짧게 말했습니다.",
+     "situations": [
+      "earnings",
+      "said"
+     ],
+     "hits": [
+      "실적"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 4,
    "type": "bignum",
    "chapter": 0,
    "situation": "metric",
@@ -136,59 +141,33 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 4,
-   "type": "zoomshot",
+   "scene": 5,
+   "type": "bite",
    "chapter": 0,
-   "situation": "cause",
-   "situation_name": "원인 → 결과를 잇는다",
-   "origin": "main",
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
    "also": [],
    "beats": [
     {
-     "say": "3주 뒤, 미국 세인트루이스 연방준비은행의 이코노미스트 세 사람은 이 회사들의 장부를 거꾸로 읽었습니다.",
+     "say": "그런데 채권시장을 오래 취재해 온 파이낸셜타임스의 로빈 위글스워스는, 같은 해를 전혀 다르게 봤습니다.",
      "situations": [],
      "hits": []
-    },
-    {
-     "say": "데이터센터를 짓는 회사들은 영업으로 버는 현금으로 감당할 수 있는 만큼은 이미 거의 다 썼고, 이제 빚에 더 기대고 있다고요.",
-     "situations": [],
-     "hits": []
-    },
-    {
-     "say": "그래서 이 속도가 이어질지는 앞으로의 이익과, 바깥에서 돈을 계속 구할 수 있느냐에 달렸다고 적었습니다.",
-     "situations": [
-      "cause"
-     ],
-     "hits": [
-      "그래서"
-     ]
     }
-   ],
-   "recommended_scenes": [
-    "map_causal",
-    "analogy"
-   ],
-   "type_fits": false,
-   "techniques": [
-    {
-     "id": "draw-on",
-     "status": "have"
-    },
-    {
-     "id": "spotlight",
-     "status": "have"
-    },
-    {
-     "id": "match-move",
-     "status": "candidate"
-    }
-   ],
-   "blocked": [],
-   "avoid": "장면마다 새 도식 (같은 칸 위치 유지)",
-   "why": "화살표가 말과 함께 그어져야 '이어진다'가 보임"
+   ]
   },
   {
-   "scene": 5,
+   "scene": 6,
+   "type": "bite",
+   "chapter": 0,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": []
+  },
+  {
+   "scene": 7,
    "type": "versus",
    "chapter": 0,
    "situation": "cause",
@@ -246,7 +225,54 @@
    "why": "화살표가 말과 함께 그어져야 '이어진다'가 보임"
   },
   {
-   "scene": 6,
+   "scene": 8,
+   "type": "motionboard",
+   "chapter": 0,
+   "situation": "cause",
+   "situation_name": "원인 → 결과를 잇는다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "재시의 아마존처럼, SK하이닉스와 삼성전자의 메모리, 엔비디아의 칩을 사 주는 건 데이터센터를 짓는 몇몇 거대 기업입니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "그래서 반도체 주식을 가진 사람에게 이 맞대결은 곧 내 계좌의 질문입니다. 이 회사들은 이 돈을 언제까지 낼 수 있을까.",
+     "situations": [
+      "cause"
+     ],
+     "hits": [
+      "그래서"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "map_causal",
+    "analogy"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "장면마다 새 도식 (같은 칸 위치 유지)",
+   "why": "화살표가 말과 함께 그어져야 '이어진다'가 보임"
+  },
+  {
+   "scene": 9,
    "type": "chapter",
    "chapter": 1,
    "situation": null,
@@ -262,7 +288,7 @@
    ]
   },
   {
-   "scene": 7,
+   "scene": 10,
    "type": "motionboard",
    "chapter": 1,
    "situation": null,
@@ -283,7 +309,7 @@
    ]
   },
   {
-   "scene": 8,
+   "scene": 11,
    "type": "bars",
    "chapter": 1,
    "situation": "earnings",
@@ -325,7 +351,7 @@
    "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
   },
   {
-   "scene": 9,
+   "scene": 12,
    "type": "zoomshot",
    "chapter": 1,
    "situation": "metric",
@@ -367,7 +393,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 10,
+   "scene": 13,
    "type": "bignum",
    "chapter": 1,
    "situation": "metric",
@@ -406,7 +432,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 11,
+   "scene": 14,
    "type": "compare",
    "chapter": 1,
    "situation": null,
@@ -432,7 +458,7 @@
    ]
   },
   {
-   "scene": 12,
+   "scene": 15,
    "type": "bars",
    "chapter": 1,
    "situation": "metric",
@@ -484,7 +510,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 13,
+   "scene": 16,
    "type": "chapter",
    "chapter": 2,
    "situation": "question",
@@ -518,7 +544,7 @@
    "why": "질문은 글자 하나로 — 강조 예산 안에서 (05 §0-1)"
   },
   {
-   "scene": 14,
+   "scene": 17,
    "type": "bite",
    "chapter": 2,
    "situation": "call-bite",
@@ -559,7 +585,7 @@
    "why": "원문+번역 2단, 그 사람의 목소리 (03 §0-1, source-cut)"
   },
   {
-   "scene": 15,
+   "scene": 18,
    "type": "motionboard",
    "chapter": 2,
    "situation": "explain",
@@ -622,7 +648,7 @@
    "why": "2026-11-20 사용자: \"쉽게 설명해야 하는 부분이다 상황설명이 필요하다 = 모션그래픽 을 주로 사용\" — 설명 무대(styles/explain-stage), 12 §0-1"
   },
   {
-   "scene": 16,
+   "scene": 19,
    "type": "bars",
    "chapter": 2,
    "situation": "hub-event",
@@ -680,7 +706,7 @@
    "why": "v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로"
   },
   {
-   "scene": 17,
+   "scene": 20,
    "type": "bignum",
    "chapter": 2,
    "situation": "metric",
@@ -722,7 +748,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 18,
+   "scene": 21,
    "type": "chapter",
    "chapter": 3,
    "situation": null,
@@ -738,7 +764,7 @@
    ]
   },
   {
-   "scene": 19,
+   "scene": 22,
    "type": "zoomshot",
    "chapter": 3,
    "situation": "media",
@@ -781,7 +807,7 @@
    "why": "매체 프레임의 차이 자체가 이야기 (03 §0-2)"
   },
   {
-   "scene": 20,
+   "scene": 23,
    "type": "checklist",
    "chapter": 3,
    "situation": "metric",
@@ -834,7 +860,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 21,
+   "scene": 24,
    "type": "compare",
    "chapter": 3,
    "situation": "explain-market",
@@ -895,7 +921,7 @@
    "why": "2026-11-20 사용자 — 주식 채널도 상황 설명이 필요하면 모션그래픽(설명 무대). 흐름은 자료로 질문 → 설명 무대로 원리 → 자료로 확인 (docs/31)"
   },
   {
-   "scene": 22,
+   "scene": 25,
    "type": "bars",
    "chapter": 3,
    "situation": "metric",
@@ -939,7 +965,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 23,
+   "scene": 26,
    "type": "zoomshot",
    "chapter": 3,
    "situation": "metric",
@@ -992,7 +1018,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 24,
+   "scene": 27,
    "type": "chapter",
    "chapter": 4,
    "situation": null,
@@ -1008,7 +1034,7 @@
    ]
   },
   {
-   "scene": 25,
+   "scene": 28,
    "type": "motionboard",
    "chapter": 4,
    "situation": "explain-market",
@@ -1074,7 +1100,55 @@
    "why": "2026-11-20 사용자 — 주식 채널도 상황 설명이 필요하면 모션그래픽(설명 무대). 흐름은 자료로 질문 → 설명 무대로 원리 → 자료로 확인 (docs/31)"
   },
   {
-   "scene": 26,
+   "scene": 29,
+   "type": "bite",
+   "chapter": 4,
+   "situation": "explain",
+   "situation_name": "상황을 쉽게 풀어 준다 (원리·구조·누가 무엇을 누구에게)",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "이 차이는 사는 쪽 대표도 알고 있습니다. 재시는 같은 인터뷰에서 이렇게 덧붙였습니다.",
+     "situations": [
+      "explain"
+     ],
+     "hits": [
+      "차이"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "motionboard",
+    "spread",
+    "share",
+    "afterline"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "motionboard",
+     "status": "have"
+    },
+    {
+     "id": "spread",
+     "status": "have"
+    },
+    {
+     "id": "share",
+     "status": "have"
+    },
+    {
+     "id": "afterline",
+     "status": "have"
+    }
+   ],
+   "blocked": [],
+   "avoid": "글·숫자 카드만으로 설명, 'PPT 도형' 같은 평면 도식",
+   "why": "2026-11-20 사용자: \"쉽게 설명해야 하는 부분이다 상황설명이 필요하다 = 모션그래픽 을 주로 사용\" — 설명 무대(styles/explain-stage), 12 §0-1"
+  },
+  {
+   "scene": 30,
    "type": "bars",
    "chapter": 4,
    "situation": "earnings",
@@ -1126,7 +1200,7 @@
    "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
   },
   {
-   "scene": 27,
+   "scene": 31,
    "type": "bignum",
    "chapter": 4,
    "situation": "metric",
@@ -1180,7 +1254,49 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 28,
+   "scene": 32,
+   "type": "bite",
+   "chapter": 4,
+   "situation": "said",
+   "situation_name": "누가 말했다",
+   "origin": "main",
+   "also": [
+    "explain"
+   ],
+   "beats": [
+    {
+     "say": "채권시장은 이미 이 차이에 값을 매기고 있습니다. 코어위브 채권이 팔려 나가던 10월, 핌코의 시장 전략가 토니 크레센치는 이렇게 말했습니다.",
+     "situations": [
+      "said",
+      "explain"
+     ],
+     "hits": [
+      "말했"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bite",
+    "footage",
+    "quote"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "j-l-cut",
+     "status": "candidate"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "내레이션으로만 전하기",
+   "why": "그 사람의 목소리·원문이 증거 (source-cut, 03 §0-1)"
+  },
+  {
+   "scene": 33,
    "type": "checklist",
    "chapter": 4,
    "situation": "metric",
@@ -1247,21 +1363,18 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 29,
+   "scene": 34,
    "type": "chapter",
    "chapter": 5,
    "situation": "hub-event",
    "situation_name": "시장을 흔든 사건과 파급",
    "origin": "add",
-   "also": [
-    "timeline"
-   ],
+   "also": [],
    "beats": [
     {
-     "say": "이제 처음의 두 번째 목소리로 돌아가 보겠습니다. 연준 쪽은 터진다고 말하지 않았습니다. 그들이 문제 삼는 고리는 따로 있습니다.",
+     "say": "위글스워스가 말한 빚 금융이 된 해를, 미국 연준도 숫자로 짚었습니다. 연준 쪽은 터진다고 말하지 않았습니다. 그들이 문제 삼는 고리는 따로 있습니다.",
      "situations": [
-      "hub-event",
-      "timeline"
+      "hub-event"
      ],
      "hits": [
       "연준"
@@ -1293,7 +1406,59 @@
    "why": "v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로"
   },
   {
-   "scene": 30,
+   "scene": 35,
+   "type": "zoomshot",
+   "chapter": 5,
+   "situation": "cause",
+   "situation_name": "원인 → 결과를 잇는다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "11월 19일, 미국 세인트루이스 연방준비은행의 이코노미스트 세 사람도 같은 장부를 숫자로 읽었습니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "데이터센터를 짓는 회사들은 영업으로 버는 현금으로 감당할 수 있는 만큼은 이미 거의 다 썼고, 이제 빚에 더 기대고 있다고요.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "그래서 이 속도가 이어질지는 앞으로의 이익과, 바깥에서 돈을 계속 구할 수 있느냐에 달렸다고 적었습니다.",
+     "situations": [
+      "cause"
+     ],
+     "hits": [
+      "그래서"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "map_causal",
+    "analogy"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "장면마다 새 도식 (같은 칸 위치 유지)",
+   "why": "화살표가 말과 함께 그어져야 '이어진다'가 보임"
+  },
+  {
+   "scene": 36,
    "type": "compare",
    "chapter": 5,
    "situation": "hub-event",
@@ -1360,7 +1525,7 @@
    "why": "v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로"
   },
   {
-   "scene": 31,
+   "scene": 37,
    "type": "zoomshot",
    "chapter": 5,
    "situation": "hub-event",
@@ -1432,7 +1597,7 @@
    "why": "v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로"
   },
   {
-   "scene": 32,
+   "scene": 38,
    "type": "bars",
    "chapter": 5,
    "situation": "metric",
@@ -1474,7 +1639,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 33,
+   "scene": 39,
    "type": "zoomshot",
    "chapter": 5,
    "situation": "metric",
@@ -1527,15 +1692,15 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 34,
+   "scene": 40,
    "type": "versus",
    "chapter": 5,
    "situation": "compare",
    "situation_name": "둘을 비교한다",
    "origin": "main",
    "also": [
-    "hub-event",
-    "said"
+    "said",
+    "cause"
    ],
    "beats": [
     {
@@ -1559,13 +1724,9 @@
      ]
     },
     {
-     "say": "재시의 멈출 수 없다와 연준의 이제 빚이다도 둘 다 맞을 수 있습니다. 멈추지 않는 대신, 그 속도를 채권시장이 받쳐 줘야 하는 거죠.",
-     "situations": [
-      "hub-event"
-     ],
-     "hits": [
-      "연준"
-     ]
+     "say": "재시의 지금 쓰고 나중에 번다와 위글스워스의 빚 금융이 된 해도 둘 다 맞을 수 있습니다. 멈추지 않는 대신, 그 속도를 채권시장이 받쳐 줘야 하는 거죠.",
+     "situations": [],
+     "hits": []
     }
    ],
    "recommended_scenes": [
@@ -1589,7 +1750,7 @@
    "why": "같은 틀에 나란히"
   },
   {
-   "scene": 35,
+   "scene": 41,
    "type": "chapter",
    "chapter": 6,
    "situation": "media",
@@ -1628,7 +1789,7 @@
    "why": "매체 프레임의 차이 자체가 이야기 (03 §0-2)"
   },
   {
-   "scene": 36,
+   "scene": 42,
    "type": "motionboard",
    "chapter": 6,
    "situation": null,
@@ -1649,7 +1810,7 @@
    ]
   },
   {
-   "scene": 37,
+   "scene": 43,
    "type": "zoomshot",
    "chapter": 6,
    "situation": "metric",
@@ -1702,7 +1863,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 38,
+   "scene": 44,
    "type": "checklist",
    "chapter": 6,
    "situation": "earnings",
@@ -1749,7 +1910,7 @@
    "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
   },
   {
-   "scene": 39,
+   "scene": 45,
    "type": "zoomshot",
    "chapter": 6,
    "situation": "metric",
@@ -1796,7 +1957,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 40,
+   "scene": 46,
    "type": "zoomshot",
    "chapter": 6,
    "situation": "earnings",
@@ -1839,7 +2000,7 @@
    "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
   },
   {
-   "scene": 41,
+   "scene": 47,
    "type": "versus",
    "chapter": 6,
    "situation": null,
@@ -1855,7 +2016,7 @@
    ]
   },
   {
-   "scene": 42,
+   "scene": 48,
    "type": "chapter",
    "chapter": 7,
    "situation": null,
@@ -1871,7 +2032,7 @@
    ]
   },
   {
-   "scene": 43,
+   "scene": 49,
    "type": "checklist",
    "chapter": 7,
    "situation": "metric",
@@ -1930,7 +2091,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 44,
+   "scene": 50,
    "type": "chapter",
    "chapter": 8,
    "situation": "cause",
@@ -1972,7 +2133,7 @@
    "why": "화살표가 말과 함께 그어져야 '이어진다'가 보임"
   },
   {
-   "scene": 45,
+   "scene": 51,
    "type": "checklist",
    "chapter": 8,
    "situation": "earnings",
@@ -2034,7 +2195,7 @@
    "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
   },
   {
-   "scene": 46,
+   "scene": 52,
    "type": "outro",
    "chapter": 9,
    "situation": "earnings",
@@ -2094,18 +2255,19 @@
    "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
   }
  ],
- "coverage": 0.83,
- "fit": 0.47,
+ "coverage": 0.79,
+ "fit": 0.46,
  "counts": {
   "metric": 15,
-  "earnings": 6,
+  "earnings": 7,
   "cause": 4,
   "hub-event": 4,
   "call-bite": 2,
+  "explain": 2,
   "media": 2,
   "explain-market": 2,
   "question": 1,
-  "explain": 1,
+  "said": 1,
   "compare": 1
  },
  "defaults": {
