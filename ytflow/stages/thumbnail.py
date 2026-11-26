@@ -350,7 +350,9 @@ def _person(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
     base = Image.new("RGBA", (W, H), (12, 14, 20, 255))
     blend = bool(v.get("blend"))   # 2026-11-26 사용자: "인물반 글씨반 말고 둘이 합쳐서" → 사진을 화면 전체에, 글씨는 사진 위에 (왼쪽만 어둡게)
     pw = W if blend else int(W * v.get("photo_width", 0.56))
-    im = _person_crop(_image(project, spec, v["image"]), pw, H, v.get("face_h", 0.46))
+    right = blend and v.get("text_side") == "right"   # 인물이 사진 왼쪽에 있을 때: 글씨를 오른쪽에 (사진은 뒤집지 않음 — 뒤집어 깔고 다시 뒤집음)
+    src = _image(project, spec, v["image"])
+    im = _person_crop(ImageOps.mirror(src) if right else src, pw, H, v.get("face_h", 0.46))
     im = ImageEnhance.Contrast(im).enhance(1.08)
     # blend: 얼굴(칸 가운데)을 오른쪽 face_x 로 밀어 붙이고, 빈 왼쪽은 어두운 바탕 → 그 위 글씨
     base.paste(im, (int(W * (v.get("face_x", 0.66) - 0.5)), 0) if blend else (W - pw, 0))
@@ -367,26 +369,30 @@ def _person(project: Project, spec: dict, v: dict) -> tuple[Image.Image, list]:
             gd.line([(W - pw + i, 0), (W - pw + i, H)], fill=int(255 * (1 - i / 260) ** 1.5))
         gd.rectangle([0, 0, W - pw, H], fill=255)
     base = Image.composite(Image.new("RGBA", (W, H), (12, 14, 20, 255)), base, g)
+    if right:
+        base = ImageOps.mirror(base)
     d = ImageDraw.Draw(base)
     boxes = []
     per = v.get("person") or {}
     if per.get("name"):   # 이름표: 얼굴 아래, 재생 시간 자리(오른쪽 아래) 피해서
         fn, fr = _font(GOTHIC_X, 46), _font(GOTHIC_X, 30)
-        nx, ny = (int(W * 0.56) + 60 if blend else W - pw + 60), H - 170
+        nx, ny = (int(W * 0.56) + 60 if blend else W - pw + 60), (H - 210 if blend else H - 170)   # 합친 판: 재생 시간 자리(TIMESTAMP_BOX) 위로
         nw = max(fn.getlength(per["name"]), fr.getlength(per.get("role", ""))) + 40
+        if right:   # 이름표는 인물 쪽(왼쪽) 아래
+            nx = int(W * 0.44) - 60 - int(nw)
         d.rounded_rectangle([nx, ny, nx + nw, ny + 104], 10, fill=(12, 14, 20, 235))
         d.rectangle([nx, ny, nx + 8, ny + 104], fill=RED)
         d.text((nx + 22, ny + 8), per["name"], font=fn, fill=(255, 255, 255))
         d.text((nx + 22, ny + 62), per.get("role", ""), font=fr, fill=(210, 214, 222))
         boxes.append((nx, ny, nx + nw, ny + 104))
-    tx, y = 50, v.get("text_y", 120)
+    tx, y = (int(W * 0.44) if right else 50), v.get("text_y", 120)
     if v.get("top"):
         ft = _font(GOTHIC_X, 38)
         d.rounded_rectangle([tx - 6, y - 66, tx + ft.getlength(v["top"]) + 26, y - 14], 10, fill=RED)
         d.text((tx + 10, y - 62), v["top"], font=ft, fill=(255, 255, 255))
         boxes.append((tx, y - 66, tx + ft.getlength(v["top"]) + 26, y - 14))
     fnt = {"bhs": BHS, "myeongjo": MYEONGJO_X}.get(v.get("font", ""), GOTHIC_X)   # 글씨체 고르기 (기본 나눔고딕 ExtraBold)
-    boxes += _text_block(d, v["lines"], v.get("hl", []), tx, y, (int(W * 0.62) if blend else W - pw + 120), v.get("size", 132), font=fnt)
+    boxes += _text_block(d, v["lines"], v.get("hl", []), tx, y, (W - tx - 40 if right else int(W * 0.62) if blend else W - pw + 120), v.get("size", 132), font=fnt)
     if v.get("quote"):
         fq = _font(GOTHIC_X, 56)   # 휴대폰 목록(가로 168px)에서도 6px 넘게
         q = f"\u201c{v['quote']}\u201d"
