@@ -4,7 +4,7 @@
                   "작업파일은 c드라이브에 두지 말고 구글드라이브에 보관해줘"
 
 Windows 작업 스케줄러가 config/local_routines.yaml 의 시각마다 실행한다 (설치: scripts/install_local_routines.ps1).
-    python scripts/local_routine.py <작업>            # market-daily | curiosity
+    python scripts/local_routine.py <작업>            # market-daily | curiosity | channel-ops | market-deep-watch
     python scripts/local_routine.py <작업> --dry-run  # 준비·에이전트 확인만, 실행 안 함
     python scripts/local_routine.py --list            # 작업|시각 (설치 스크립트가 읽음)
 
@@ -249,6 +249,17 @@ def main() -> None:
         if a.job not in jobs:
             raise SystemExit(f"config/local_routines.yaml 에 '{a.job}' 작업이 없습니다")
         job = jobs[a.job]
+        # queue: 클라우드 판단이 올린 일감이 있을 때만 에이전트를 띄움 (2026-11-26 — 탐색은 클라우드, 제작만 PC)
+        if job.get("queue"):
+            q = sorted(p for p in (wt / job["queue"]).glob("*.json"))
+            if not q:
+                run.log("대기 일감 없음 — 이번 차례는 건너뜀")
+                return
+            import json
+            item = json.loads(q[0].read_text(encoding="utf-8"))
+            item["queue_file"] = q[0].relative_to(wt).as_posix()
+            (wt / "DEEP_WATCH.json").write_text(json.dumps(item, ensure_ascii=False, indent=1), encoding="utf-8")
+            run.log(f"일감 집음: {item['queue_file']} (남은 일감 {len(q) - 1}개)")
         tmp = WORK / "tmp" / a.job   # 임시 파일: C 드라이브(기본 TEMP) 대신 E:
         shutil.rmtree(tmp, ignore_errors=True)
         tmp.mkdir(parents=True, exist_ok=True)
