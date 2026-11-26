@@ -1,8 +1,8 @@
-'이어 읽는 시장' 심층(분석) 영상의 **소재 감시 — 클라우드 차례 (훑기 Sonnet → 판단 Fable)**입니다. **4시간마다** 클라우드 루틴으로 돕니다.
+'이어 읽는 시장' 심층(분석) 영상의 **소재 감시 — 클라우드 차례 (훑기 Sonnet → 판단 Opus)**입니다. **4시간마다** 클라우드 루틴으로 돕니다.
 영상은 만들지 않습니다. "만든다"로 정해지면 **일감 한 장**을 `inbox/deep-watch/queue/` 에 올리고 끝냅니다 — 제작·검수·예약 업로드는 사용자 PC 의 `market-deep-watch`(4시간마다, 클라우드 차례 1시간 반 뒤)가 그 일감을 집어 이어 갑니다.
 
 > 2026-11-26 사용자: "4시간 간격으로 설정하고 클라우드에서 탐색해주세요 영상 제작만 로컬에서 진행하시구요"
-> 2026-11-24 사용자: "소재 감시는 당연히 sonnet이 하시구요" · 판단·검수는 Fable.
+> 2026-11-24 사용자: "소재 감시는 당연히 sonnet이 하시구요" · 판단·검수는 Fable → 2026-11-27 사용자: "네 바꿔주세요" (판단 = Opus, Fable 은 종합 검수만 — manual/11 §1-1).
 
 ## 0. 준비
 - 저장소 LBIN8787/video-editing 이 없으면 add_repo(owner LBIN8787, repo video-editing, access push) → clone → register_repo_root. main 에서 `git pull`. `pip install -q -r requirements.txt`. `git config core.hooksPath .githooks`.
@@ -15,8 +15,8 @@
 - 걸러 내기(§1-5)에는 `inbox/deep-watch/log.md` 끝 40줄과 `inbox/deep-watch/queue/`·`done/` 의 일감(같은 원본·같은 질문)을 더합니다.
 - 결과는 `deep-watch-scan.md` §2 형식의 `DEEP_SCAN.md`(커밋하지 않음). 새 후보가 없으면 `inbox/deep-watch/log.md` 에 `<YYYY-MM-DD HH:MM> | 없음 | - | 훑기(클라우드 Sonnet)` 한 줄 → 3번으로.
 
-## 2. 판단 (Fable 하위 에이전트 — 후보가 있을 때만)
-Agent 도구로 **model `fable`** 하위 에이전트 하나를 띄워 맡깁니다. 프롬프트에 넣을 것: 저장소 경로, "`DEEP_SCAN.md` 와 `config/local_routines/deep-watch-judge.md` 를 읽고 §0·§1 기준으로 판단하라. 결과는 §2 형식대로 — 기록 줄은 `inbox/deep-watch/log.md` 에 `(클라우드 Fable)` 로, 만들면 `DEEP_WATCH.json` 을 저장소 맨 위에. `ROUTINE_STOP`·`LOCAL_RESULT.md` 는 쓰지 않는다. 원본을 클라우드에서 못 열었으면 그 사실을 sources·quote 에 표시하고, 그것만으로 '안 만듦'으로 하지 말 것(원문 확인은 PC 제작 단계가 함). 결론을 한 줄로 돌려줄 것."
+## 2. 판단 (Opus 하위 에이전트 — 후보가 있을 때만)
+Agent 도구로 **model `opus`** 하위 에이전트 하나를 띄워 맡깁니다. 프롬프트에 넣을 것: 저장소 경로, "`DEEP_SCAN.md` 와 `config/local_routines/deep-watch-judge.md` 를 읽고 §0·§1 기준으로 판단하라. 결과는 §2 형식대로 — 기록 줄은 `inbox/deep-watch/log.md` 에 `(클라우드 Opus)` 로, 만들면 `DEEP_WATCH.json` 을 저장소 맨 위에. `ROUTINE_STOP`·`LOCAL_RESULT.md` 는 쓰지 않는다. 원본을 클라우드에서 못 열었으면 그 사실을 sources·quote 에 표시하고, 그것만으로 '안 만듦'으로 하지 말 것(원문 확인은 PC 제작 단계가 함). 결론을 한 줄로 돌려줄 것."
 - 하위 에이전트가 `DEEP_WATCH.json` 을 썼으면, 그 내용에 `"status": "pending"`, `"judged_at": "<YYYY-MM-DD HH:MM KST>"`, `"judged_by": "cloud"` 를 더해 **`inbox/deep-watch/queue/<YYYYMMDD-HHMM>-<project>.json`** 으로 옮깁니다(같은 project 의 일감이 queue·done 에 이미 있거나 `projects/<project>` 가 main 에 있으면 올리지 않고 log 에 '이미 있음').
 
 ## 3. 올리기

@@ -1,8 +1,8 @@
-'이어 읽는 시장' 심층(분석) 영상의 **소재 감시 — 2단계: 제작**입니다. 1단계(판단, Fable)가 "만든다"고 정한 소재로 한 편을 만듭니다. **유튜브에는 올리지 않습니다** — 3단계(검수, Fable)가 확인하고 올립니다.
+'이어 읽는 시장' 심층(분석) 영상의 **소재 감시 — 2단계: 제작**입니다. 1단계(판단, Opus)가 "만든다"고 정한 소재로 한 편을 만듭니다. **유튜브에는 올리지 않습니다** — 3단계(검수, Fable)가 확인하고 올립니다.
 
 
 ## 0. 준비
-- **클라우드 일감이면 (2026-11-26 사용자: "클라우드에서 탐색해주세요 영상 제작만 로컬에서"):** `DEEP_WATCH.json` 에 `queue_file` 이 있으면 클라우드 판단(Fable)이 올린 일감입니다. 맨 먼저 그 파일을 `inbox/deep-watch/done/` 으로 `git mv` 하고 `status: taken`·`taken_at` 을 적어, `inbox/deep-watch/log.md` 에 `| 제작 시작 | <project> | (PC)` 한 줄과 함께 커밋해 main 에 push 합니다(다음 차례가 같은 일감을 다시 집지 않게). 같은 프로젝트가 이미 main 에 있거나, `deadline` 이 지나 지금 만들면 늦은 편이 되면(사건형 큰 날+72시간·원본형 공개+12일 넘음) 만들지 않고 done 파일에 `status: expired` 와 이유, log 한 줄 → `ROUTINE_STOP`, `LOCAL_RESULT.md` 첫 줄 `심층 제작: 지남 — <project> <이유>`. 클라우드에서 원문을 못 연 표시('원문 미확인')는 여기서 원본으로 확인합니다 — 확인이 안 되면 문서형 심층(§1)으로.
+- **클라우드 일감이면 (2026-11-26 사용자: "클라우드에서 탐색해주세요 영상 제작만 로컬에서"):** `DEEP_WATCH.json` 에 `queue_file` 이 있으면 클라우드 판단(Opus)이 올린 일감입니다. 맨 먼저 그 파일을 `inbox/deep-watch/done/` 으로 `git mv` 하고 `status: taken`·`taken_at` 을 적어, `inbox/deep-watch/log.md` 에 `| 제작 시작 | <project> | (PC)` 한 줄과 함께 커밋해 main 에 push 합니다(다음 차례가 같은 일감을 다시 집지 않게). 같은 프로젝트가 이미 main 에 있거나, `deadline` 이 지나 지금 만들면 늦은 편이 되면(사건형 큰 날+72시간·원본형 공개+12일 넘음) 만들지 않고 done 파일에 `status: expired` 와 이유, log 한 줄 → `ROUTINE_STOP`, `LOCAL_RESULT.md` 첫 줄 `심층 제작: 지남 — <project> <이유>`. 클라우드에서 원문을 못 연 표시('원문 미확인')는 여기서 원본으로 확인합니다 — 확인이 안 되면 문서형 심층(§1)으로.
 - 작업 폴더 맨 위 `DEEP_WATCH.json` 을 먼저 읽습니다: project·kind·person·quote·question·new_angle·korea_tie·sources·insights_to_find·deadline. 이 질문과 각도를 지키고, **deadline 전에 공개될 수 있게** 범위를 정합니다(바꿔야 하면 이유를 보고에).
 - **이 편의 모양 (docs/63, 2026-11-24 사용자):** 출발점은 그 사람의 말 — 여는 장면은 원본 발언, 제목 후보 1번은 **이름 + 따옴표 발언**(원본에서 확인한 말 그대로). 사건형이면 '큰 날 + 이름 있는 n명은 뭐라 했나'(사람마다 원본 발언 → 근거 → 판정). 원본형이면 그 한 편을 깊게(원문 해부·말과 장부 맞대기). **끝은 한국 투자자의 종목으로 묶습니다**(`korea_tie` — "하이닉스·삼성 어쩌나", "내 엔비디아는?"처럼, 투자 권유 없이 무엇을 보면 되는지).
 - AGENTS.md, manual/README.md, **manual/09-market-daily.md**(특히 §2·§2-0·§3·§5·§6·§7·§9-1), manual/03-market.md §0-2·§0-4, docs/24-youtube-publish.md 를 읽고 그 절차를 따릅니다. 어닝콜이면 03 §0-1 어닝콜 해부.
