@@ -27,6 +27,8 @@ def _t(s: str) -> float:
 def _dur(path, stream: str) -> float:
     out = subprocess.run(["ffprobe", "-v", "error", "-select_streams", stream, "-show_entries", "stream=duration", "-of", "csv=p=0", str(path)],
                          capture_output=True, text=True).stdout.strip()
+    # 새 ffprobe(8.x)는 csv 끝에 쉼표를 붙이거나 줄을 더 냄('642.533333,') — 첫 값만 (호기심 편들에서 매번 감싸 우회하던 것)
+    out = out.splitlines()[0].strip().strip(",").split(",")[0] if out else ""
     return float(out or 0)
 
 

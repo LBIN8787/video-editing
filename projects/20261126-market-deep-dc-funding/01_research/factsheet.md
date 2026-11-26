@@ -223,3 +223,13 @@
 | 알파벳 CFO 아낫 아시케나지 | 2분기 콜 | 2026-07-22 | "we continue to expect our CapEx to increase significantly in 2027" | ⚠️ 2차(convexityos) · 10월 콜 아님 — 대본에 안 씀 | https://convexityos.com/blog/ai-buildout-financing-ledger |
 
 - 앞 판단 수정: 메타 'C주 약 600억'은 회사 보도자료로 ✅ 확인됨 (위 '쓰지 않는 것'에서 해제).
+
+
+## 원본 발언 확인 (2026-11-26 — 공식 녹음으로 대조, CNBC 인용 ⚠️ → ✅)
+| 누구 | 원본 | 시각 | 원문 (받아쓰기) | 상태 |
+|---|---|---|---|---|
+| 앤디 재시 | 아마존 IR 공식 녹음 https://ir.aboutamazon.com/files/doc_earnings/2026/q3/Q3-2026-Amazon-Earnings-Conference-Call.mp3 | 49:07.9~49:26.9 | "would it be more convenient if this type of acceleration and opportunity happened over 25 years and you could spread the capex over 25 years yeah it might be more convenient but that's not the world that we live in and that's not the opportunity and um and we we can fund this plan um and I think it will forever change the size of Amazon" | ✅ (영상에 넣은 것: 'would it be…' ~ 'that's not the opportunity' + 'we can fund this plan') |
+| 에이미 후드 | 마이크로소프트 IR 공식 다시보기 https://www.microsoft.com/en-us/investor/events/fy-2027/earnings-fy-2027-q1 (같은 페이지 공식 녹취록) | 56:13~56:32 | "There's a form of financing called leasing, and we've been using that one as a vehicle. Also, we're fortunate to have access in the debt markets, given that where our ratings are, and we haven't been able to, and we haven't yet, I would say, tap that." (녹취록) | ✅ — 앞 판의 둘째 문장('…and we haven't yet tapped that')은 CNBC 요약이라 녹취록대로 고침 |
+| 에이미 후드 (같은 답) | 같은 녹취록 | 바로 뒤 | "We're lucky; we have a lot of flexibility in terms of our capacity to raise financing." / "we're feeling good that we're free cash flow positive" | ✅ (영상에는 안 씀) |
+- 재시의 새 말 "we can fund this plan"(이 계획에 돈을 댈 수 있다)은 이 영상의 질문(그 돈이 어디서 오나)과 바로 맞닿음 → 여는 장면 해설에 넣음
+- 사진: 재시 = 아마존 보도 센터 'Andy Jassy headshot'(assets.aboutamazon.com, 보도용), 후드 = news.microsoft.com 'Amy Hood' 보도용 사진 (위키미디어 2010년 사진은 사용자 요청으로 뺌)

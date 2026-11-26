@@ -208,8 +208,10 @@ def scan(project: str, only: set[int] | None = None) -> dict:
 
 
 def run(project: str, only: set[int] | None = None) -> dict:
-    """hybrid 렌더 끝에서 부름 — 결과를 05_edit/overlap_qa.json 에 쓰고 요약을 출력 (실패해도 렌더는 그대로)."""
-    r = scan(project, only)
+    """hybrid 렌더 끝에서 부름 — 결과를 05_edit/overlap_qa.json 에 쓰고 요약을 출력 (실패해도 렌더는 그대로).
+    hybrid 시각표가 없고 캔버스 렌더러 편(<spec>_timeline.json + <spec>_overlay.html)이면 scan_canvas 로 잰다."""
+    pd = _pd(project)
+    r = scan_canvas(project) if not (pd / "05_edit" / "hybrid_timeline.json").exists() and canvas_spec(pd) else scan(project, only)
     out = _pd(project) / "05_edit" / "overlap_qa.json"
     out.write_text(json.dumps(r, ensure_ascii=False, indent=1), encoding="utf-8")
     n = sum(len(v["issues"]) for v in r["scenes"].values())
@@ -240,3 +242,89 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# ── 캔버스 렌더러 (호기심 지우 삽화 편: 02_script/render_full.py + <spec>_overlay.html) ──────────────
+# 2026-11-26 사용자: "해결하시고 검수하고 오늘 업로드하세요" — 포모 편에서 preflight 가 hybrid_timeline.json 만 찾아 멈춤.
+# 이 렌더러는 글자를 DOM 이 아니라 캔버스에 그리므로, 같은 overlay 페이지에서 장면을 다시 그리며 fillText 를 가로채
+# 글자 상자(위치·크기·글꼴·투명도)를 모아 같은 기준(글자끼리 · 자막 자리 · 화면 밖)으로 잰다.
+CANVAS_HOOK = r"""
+(() => {
+  window.__TXT = [];
+  const P = CanvasRenderingContext2D.prototype, F = P.fillText, DI = P.drawImage;
+  P.drawImage = function (...a) { try { return DI.apply(this, a) } catch (e) {} };   // 그림 없이 재므로 깨진 그림은 건너뜀
+  P.fillText = function (s, X, Y, mw) {
+    try {
+      const m = this.measureText(s), w = m.width, fs = parseFloat((this.font.match(/(\d+(?:\.\d+)?)px/) || [0, 40])[1]);
+      const a = this.textAlign, b = this.textBaseline;
+      let x0 = a === 'center' ? X - w / 2 : (a === 'right' || a === 'end') ? X - w : X;
+      let y0 = b === 'middle' ? Y - fs * 0.6 : b === 'top' ? Y : Y - fs * 0.9;
+      const T = this.getTransform(), pt = (px, py) => [T.a * px + T.c * py + T.e, T.b * px + T.d * py + T.f];
+      const [ax, ay] = pt(x0, y0), [bx, by] = pt(x0 + w, y0 + fs * 1.2);
+      if (String(s).trim() && this.globalAlpha > 0.15)
+        window.__TXT.push({text: String(s), x: Math.min(ax, bx), y: Math.min(ay, by), w: Math.abs(bx - ax), h: Math.abs(by - ay), font: this.font, alpha: this.globalAlpha});
+    } catch (e) {}
+    return F.call(this, s, X, Y, mw);
+  };
+})();
+"""
+
+
+def canvas_spec(pd: Path):
+    """캔버스 렌더러 편이면 (timeline, spec, overlay) 경로, 아니면 None."""
+    for tl in sorted((pd / "05_edit").glob("*_timeline.json")):
+        name = tl.name[: -len("_timeline.json")]
+        if name == "hybrid":
+            continue
+        spec, ov = pd / "02_script" / f"{name}.json", pd / "02_script" / f"{name}_overlay.html"
+        if spec.exists() and ov.exists():
+            return tl, spec, ov
+    return None
+
+
+def scan_canvas(project: str) -> dict:
+    """장면마다 화면이 바뀌는 때(낱말 kw 직후)와 끝 무렵을 다시 그려 글자 상자를 잰다. 자막 = 아래 가운데 42px 상자(SUB)."""
+    from playwright.sync_api import sync_playwright
+    pd = _pd(project)
+    tl_p, spec_p, ov_p = canvas_spec(pd)
+    tl = json.loads(tl_p.read_text(encoding="utf-8"))
+    spec = {s["id"]: s for s in json.loads(spec_p.read_text(encoding="utf-8"))["scenes"]}
+    scenes = [{"data": spec[x["id"]], "K": list(x.get("kw", {}).values()), "D": x["dur"], "A": 0, "AD": x["dur"]} for x in tl]
+    res = {"renderer": "canvas", "timeline": tl_p.name, "subtitle_top": 966, "scenes": {}}
+    with sync_playwright() as p:
+        br = p.chromium.launch()
+        pg = br.new_page(viewport={"width": 1920, "height": 1080})
+        pg.add_init_script(CANVAS_HOOK)
+        pg.goto(ov_p.resolve().as_uri())
+        pg.evaluate("(a)=>INIT(a[0],a[1])", [scenes, (pd / "_no_art").resolve().as_uri()])   # 그림 없이도 글자 자리는 같음
+        pg.wait_for_function("window.READY===true", timeout=60000)
+        for si, x in enumerate(tl):
+            times = sorted({round(min(k + 0.7, x["dur"] - 0.05), 2) for k in scenes[si]["K"]} | {round(x["dur"] * 0.5, 2), round(x["dur"] - 0.1, 2)})
+            probs = []
+            for t in times:
+                sub = next((s for a, b, s in x.get("subs", []) if a <= t <= b), "")
+                items = pg.evaluate("(a)=>{window.__TXT=[];R(a[0],a[1],a[2]);return window.__TXT}", [si, t, sub])
+                subs = [i for i in items if sub and i["text"] == sub and i["y"] > 900]
+                rest = [i for i in items if i not in subs]
+                sb = subs[0] if subs else None
+                for i in rest:
+                    if i["x"] < -2 or i["x"] + i["w"] > 1922 or i["y"] < -2 or i["y"] + i["h"] > 1082:
+                        probs.append({"t": t, "kind": "화면 밖 잘림", "text": i["text"][:40]})
+                    if sb and i["y"] + i["h"] > sb["y"] - 4 and min(i["x"] + i["w"], sb["x"] + sb["w"]) - max(i["x"], sb["x"]) > 0:
+                        probs.append({"t": t, "kind": "자막과 겹침", "text": i["text"][:40], "bottom": round(i["y"] + i["h"])})
+                for a in range(len(rest)):
+                    for b in range(a + 1, len(rest)):
+                        A, B = rest[a], rest[b]
+                        ix = max(0, min(A["x"] + A["w"], B["x"] + B["w"]) - max(A["x"], B["x"]))
+                        iy = max(0, min(A["y"] + A["h"], B["y"] + B["h"]) - max(A["y"], B["y"]))
+                        small = min(A["w"] * A["h"], B["w"] * B["h"])
+                        if small and (ix * iy / small >= 0.12 or ix * iy >= 300):
+                            probs.append({"t": t, "kind": "글자끼리 겹침", "text": f'{A["text"][:30]} ↔ {B["text"][:30]}'})
+            uniq = []
+            for q in probs:
+                if (q["kind"], q["text"]) not in {(u["kind"], u["text"]) for u in uniq}:
+                    uniq.append(q)
+            if uniq:
+                res["scenes"][str(x["id"])] = {"type": x.get("mg", ""), "issues": uniq}
+        br.close()
+    return res

@@ -29,7 +29,7 @@
 4. 기록: 인사이트형이면 판단을 가져온 원본마다 `python -m ytflow insights --mark <원본 영상id> made --our <우리 유튜브 id>`(공개→우리 업로드 걸린 날) · 레이더 원본이면 `python -m ytflow radar --mark <영상id> made` · `inbox/research/deep-topics.md` 의 그 후보 상태 '만듦' · `channels/ch-market-daily/episodes.md` 한 줄 → 커밋해 main 에 push.
 
 ## 3. 보류 → 올리지 않음
-`LOCAL_RESULT.md` 에 무엇이 왜 틀렸는지·고치려면 무엇이 필요한지 적고, `$YTFLOW_DRIVE/_local/deep-watch-log.md` 에 `| 보류 | <프로젝트> | <이유>` 한 줄. 프로젝트는 그대로 두어 사람이나 다음 차례가 이어서 고칠 수 있게 합니다.
+`LOCAL_RESULT.md` 에 무엇이 왜 틀렸는지·고치려면 무엇이 필요한지 적고, `inbox/deep-watch/log.md`(git — 2026-11-26 부터 Drive 대신) 에 `| 보류 | <프로젝트> | <이유>` 한 줄. 프로젝트는 그대로 두어 사람이나 다음 차례가 이어서 고칠 수 있게 합니다.
 
 ## 보고 (LOCAL_RESULT.md)
 첫 줄: `분석 <프로젝트>: 예약됨 <MM-DD 07:00> — <제목> (<유튜브 주소>) · 바꿀 것 있으면 알려 주세요` 또는 `심층 <프로젝트>: 보류 — <이유 한 줄>`.

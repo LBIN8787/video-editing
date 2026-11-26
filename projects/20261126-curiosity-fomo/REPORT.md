@@ -50,3 +50,15 @@ python make_evidence.py <PDF 폴더> <조각 폴더>
 SPEC=fomo.json OVERLAY=fomo_overlay.html TIMELINE=fomo_timeline.json python render_full.py <TTS 폴더> <조각 폴더> <작업 폴더> <출력.mp4> 6
 python thumbnails.py <조각 폴더> <출력 폴더>
 ```
+
+## 2026-11-26 밤 — 통과 → 더빙 → 업로드 대기
+- 사용자: "더빙해서 그대로 올려주세요" → 통과 기록(`review --pass`, 매뉴얼 잠금 중이라 제안함 `proposals/manual/20261126-213108-curiosity-fomo-pub.md`).
+- ElevenLabs 직접 API(`E:/ytflow-local/fix-jiwoo/el_voice.py`, Nobel Butler · eleven_v4)로 44박자 더빙 → Drive `…/05_edit/fomo_v2_el.mp4` (9:33). 싱크 중앙값 0.05초 · 화면−소리 0.004초(sync-qa 통과). 자막·챕터 시각은 더빙판 기준으로 다시 맞춤(`subs.ass`, `youtube.md`).
+- **업로드 대기:** `yt-publish` 전 종합 검수(preflight)가 이 렌더러를 못 읽음(overlapqa 가 hybrid_timeline.json 만 찾음). 사용자 선택 "올리지 말고 대기" → 검사 코드 고치기 요청 `proposals/manual/20261126-214206-curiosity-fomo-pub.md`(잠금: market-daily 세션).
+- 고친 뒤 올리기: `fomo_v2_el.mp4` 를 05_edit/final.mp4 로, 썸네일 A/B/C 를 05_edit 로 놓고 → `python -m ytflow preflight projects/20261126-curiosity-fomo` → `python -m ytflow yt-publish projects/20261126-curiosity-fomo --via here --at <다음 빈 날>T18:00 --thumb A`.
+
+## 2026-11-26 23:3x — 검수 고치고 업로드 (사용자: "해결하시고 검수하고 오늘 업로드하세요")
+- 고친 것(검사 코드, 매뉴얼 잠금 잡고): ① `overlapqa` — hybrid 시각표가 없고 캔버스 렌더러 편이면 `scan_canvas`(같은 overlay 페이지에서 장면을 다시 그리며 fillText 를 가로채 글자끼리·자막 자리·화면 밖을 잼) ② `preflight` 프레임 모음이 `<spec>_timeline.json` 도 읽음 ③ `checklist` G6 레이아웃 — 캔버스 렌더러는 overlap_qa 가 대신 ④ `syncqa._dur` — 새 ffprobe 의 '642.53,' 꼴을 첫 값만 읽게(그동안 감싸서 우회하던 것).
+- 검출이 실제로 되는지: 자막 자리에 띠 글을 일부러 놓아 잡히는 것을 확인.
+- preflight 통과 — 겹침 0 · 싱크 중앙값 0.05초(95% 0.47초) · 화면−소리 0.004초 · check MUST 실패 없음 · 프레임 모음 직접 확인(`--looked`).
+- **업로드:** https://youtu.be/vr14EVgFC80 — 비공개 → **2026-11-27(목) 18:00 KST 공개 예약** (오늘 18:00 은 지나서 채널 규칙대로 다음 날), 썸네일 A·자막·재생목록. 기록 `05_edit/youtube_publish.json`.
