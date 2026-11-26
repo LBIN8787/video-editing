@@ -28,7 +28,7 @@ def O(i, w):
 S = []
 
 
-SKIN_BY_TYPE = {"checklist": "newsprint", "bars": "dark-doc", "compare": "dark-doc"}   # 이전 영상(오픈AI·메모리·엔비디아 순환)과 같은 바탕 (2026-11-26 사용자)
+SKIN_BY_TYPE = {"checklist": "dark-doc", "bars": "dark-doc", "compare": "dark-doc"}   # 이전 영상(오픈AI·메모리·엔비디아 순환)과 같은 바탕 (2026-11-26 사용자)
 
 
 def add(**sc):
@@ -367,7 +367,7 @@ add(type="compare", chapter=5, label=STL + " 표 · 분기 평균, 실질 · 순
         {"say": "반면 칩을 만드는 회사들은 늘어난 투자를 번 돈으로 넉넉히 감당하고 오히려 빚을 갚았습니다. 같은 붐 안에서 사는 쪽은 빚을 늘리고, 파는 쪽은 빚을 줄인 겁니다. 이 차이는 마지막 장에서 다시 나옵니다.", "upto": 3},
     ])
 add(type="motionboard", chapter=5, _kb=True, title="25년 전 통신 붐과 지금", label="연준 금융안정보고서 2026.11 상자 2.2 · 누적 설비투자 ÷ 경제 규모 · 통신 1995~, AI 2020~(하이퍼스케일러 5곳)",
-    els={'tel': {'kind': 'card', 'x': 480, 'y': 450, 'icon': 'radio-tower', 'label': '1995~ 통신망 붐', 'w': 440, 'value': '빚으로 지음'}, 'ai': {'kind': 'card', 'x': 1440, 'y': 450, 'icon': 'server', 'label': '2020~ AI 데이터센터', 'w': 440, 'value': '현금흐름으로 지음'}, 'mid': {'kind': 'text', 'x': 960, 'y': 250, 'text': '누적 투자 궤적은 비슷, AI 쪽이 더 가파름', 'size': 44, 'color': 'white'}, 'end': {'kind': 'text', 'x': 480, 'y': 700, 'text': '끝: 월드컴·글로벌크로싱 파산', 'size': 40, 'color': 'red'}, 'diff': {'kind': 'text', 'x': 1440, 'y': 700, 'text': '그래서 빚을 덜 냈다', 'size': 40, 'color': 'white'}},
+    els={'tel': {'kind': 'card', 'x': 480, 'y': 450, 'icon': 'radio', 'label': '1995~ 통신망 붐', 'w': 440, 'value': '빚으로 지음'}, 'ai': {'kind': 'card', 'x': 1440, 'y': 450, 'icon': 'server', 'label': '2020~ AI 데이터센터', 'w': 440, 'value': '현금흐름으로 지음'}, 'mid': {'kind': 'text', 'x': 960, 'y': 250, 'text': '누적 투자 궤적은 비슷, AI 쪽이 더 가파름', 'size': 44, 'color': 'white'}, 'end': {'kind': 'text', 'x': 480, 'y': 700, 'text': '끝: 월드컴·글로벌크로싱 파산', 'size': 40, 'color': 'red'}, 'diff': {'kind': 'text', 'x': 1440, 'y': 700, 'text': '그래서 빚을 덜 냈다', 'size': 40, 'color': 'white'}},
     decide=dict(pick="motionboard", situation="explain-market", differs="원문 다음 설명 장면 (2026-11-26 사용자: 잠깐 자료를 보여주고 설명씬으로)", over=[O("zoomshot", "글씨만 있는 화면을 길게 두지 않음"), O("bignum", "큰 숫자 화면은 최대한 안 씀")], why="원문이 말하는 것을 그림으로 풀기", intent="무엇이 무엇으로 바뀌었는지 한눈에 안다", refs=[R12]),
     beats=[{'say': '둘째, 연준 금융안정보고서는 25년 전과 같은 그림을 그렸습니다. 1995년부터의 통신망 투자 붐과 2020년부터의 하이퍼스케일러 다섯 곳의 누적 설비투자를 경제 규모에 견줘 같은 축에 놓았더니, 두 선이 꽤 비슷하게 따라왔고, 최근엔 AI 쪽이 더 가팔라 곧 넘어설 수 있다고요.', 'do': ['tel', 'ai', 'mid'], 'at': {'ai': '2020년부터', 'mid': '비슷하게'}}, {'say': '그 통신 붐 끝에는 월드컴, 글로벌크로싱 같은 큰 회사들의 파산이 있었습니다.', 'do': ['end'], 'at': {'end': '파산'}}, {'say': '연준이 짚은 결정적 차이는 빚이었습니다. 통신 회사들은 빚으로 지었고, 빅테크는 강한 현금흐름 덕에 빚을 덜 냈다는 거죠.', 'do': ['diff'], 'at': {'diff': '덜 냈다'}}])
 add(type="zoomshot", chapter=5, insight=True, clip={"src": "fed_until_key", "start": 0},
@@ -376,7 +376,7 @@ add(type="zoomshot", chapter=5, insight=True, clip={"src": "fed_until_key", "sta
     decide=dict(pick="zoomshot", situation="point", differs="원문은 핵심 줄만 짧게 잘라 어두운 무대 위에 — 글씨만 가득한 화면 대신 (2026-11-26 사용자)", over=[O("bignum", "큰 숫자보다 실제 자료"), O("quote", "원문 증거가 있음")], why="근거를 잠깐 원문으로 보여 주고 바로 설명으로", intent="숫자가 실제 문서에 있다는 것을 본다", refs=[R12]),
     beats=[{"say": "그런데 그 문장 끝에 단서가 붙어 있습니다. 적어도 올해까지는."}])
 add(type="motionboard", chapter=5, _kb=True, title="그 차이가 줄기 시작했다", label="연준 금융안정보고서 2026.11 상자 2.2 · 'at least until this year' · 이 채널의 해석",
-    els={'tel': {'kind': 'card', 'x': 480, 'y': 500, 'icon': 'radio-tower', 'label': '통신 붐', 'w': 380, 'value': '빚으로'}, 'ai': {'kind': 'card', 'x': 1440, 'y': 500, 'icon': 'server', 'label': 'AI 붐 (2026)', 'w': 420, 'value': '빚이 늘기 시작'}, 'a1': {'kind': 'arrow', 'from': 'ai', 'to': 'tel', 'label': '가까워짐', 'color': 'red'}},
+    els={'tel': {'kind': 'card', 'x': 480, 'y': 500, 'icon': 'radio', 'label': '통신 붐', 'w': 380, 'value': '빚으로'}, 'ai': {'kind': 'card', 'x': 1440, 'y': 500, 'icon': 'server', 'label': 'AI 붐 (2026)', 'w': 420, 'value': '빚이 늘기 시작'}, 'a1': {'kind': 'arrow', 'from': 'ai', 'to': 'tel', 'label': '가까워짐', 'color': 'red'}},
     decide=dict(pick="motionboard", situation="explain-market", differs="원문 다음 설명 장면 (2026-11-26 사용자: 잠깐 자료를 보여주고 설명씬으로)", over=[O("zoomshot", "글씨만 있는 화면을 길게 두지 않음"), O("bignum", "큰 숫자 화면은 최대한 안 씀")], why="원문이 말하는 것을 그림으로 풀기", intent="무엇이 무엇으로 바뀌었는지 한눈에 안다", refs=[R12]),
     beats=[{'say': '지금까지 이 붐을 통신 때와 갈라놓던 바로 그 차이가, 2026년에 줄기 시작했다는 뜻입니다.', 'do': ['tel', 'ai', 'a1'], 'at': {'a1': '줄기'}}])
 add(type="bars", chapter=5, label="로이터 2026.11.9 (뱅크오브아메리카 유리 셀리거 분석) · 10년 만기 회사채 가산금리, 연초 대비 · %p",
@@ -580,7 +580,6 @@ def ST(t, value, label, sub="", x=1500, y=880, fs=48):
 MOT = {   # (장면 id, 박자 번호 1부터) → 말에 맞춰 생기는 숫자
     (5, 2): ST("348억", "−348억 달러", "석 달 동안 빈 돈", "424 − 773"),
     (12, 1): ST("11월 13일", "11월 13일", "연준 금융안정보고서", x=1560, y=210),
-    (15, 1): ST("10월 26일", "10월 26일", "메타 보도자료", x=1560, y=910),
     (22, 1): ST("네 배", "이자 ÷ 영업이익 ≈ 4.1배", "8.46억 ÷ 2.07억", x=380, y=250),
     (29, 1): ST("11월 10일", "11월 10일", "모건스탠리 고객 노트", x=1560, y=930),
 }
