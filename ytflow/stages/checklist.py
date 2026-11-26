@@ -296,8 +296,9 @@ def run(path: Path, upto: str = "G8") -> Report:
                     st_ = {k for r_ in ins for k in ("낙관", "우려", "중립") if any(k in c for c in r_)}
                     dom = any(any("국내" in c for c in r_) for r_ in ins)
                     abroad = any(any("해외" in c for c in r_) for r_ in ins)
-                    R.add("G3", "MUST", "v36: 팩트시트 '## 인사이트' — 이름·직함 있는 사람·매체의 엇갈리는 해석(입장이 갈림), 원문·근거·출처 (09 §3-4)",
-                          len(ins) >= 2 and len(st_) >= 2, f"{len(ins)}줄 · 입장 {sorted(st_)} · 국내 {'✓' if dom else '✗'} 해외 {'✓' if abroad else '✗'}")
+                    # v143 (2026-11-27 사용자): 판단 하나면 충분, 반박은 찬반이 갈릴 때만 — 입장 수는 MUST 에서 뺌
+                    R.add("G3", "MUST", "v143: 팩트시트 '## 인사이트' — 이름·직함 있는 사람의 판단(찬반이 갈리면 반박도), 원문·근거·출처 (09 §3-4)",
+                          len(ins) >= 1, f"{len(ins)}줄 · 입장 {sorted(st_)} · 국내 {'✓' if dom else '✗'} 해외 {'✓' if abroad else '✗'}")
                     vm = re.search(r"^## 영상 소스[^\n]*\n(.*?)(?=^## |\Z)", fs, re.S | re.M)
                     vrows = _rows("영상 소스")
                     R.add("G3", "MUST", "v36: 팩트시트 '## 영상 소스' — 인터뷰·방송 원본 후보 1줄+ (못 찾으면 '없음: 이유') (09 §3-5)",
