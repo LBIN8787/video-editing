@@ -1485,6 +1485,36 @@ def _word_starts(wav: Path, parts: list[str], dur: float) -> list[float] | None:
     return out
 
 
+def bite_pairs(ko: str, en: str, t0: float, t1: float) -> list:
+    """원본 발언 자막: 한글 번역을 자막 줄로 끊고, 영어 원문을 같은 수의 조각으로 (단어 단위, 한글 조각 길이 비율대로) 나눠
+    위 줄 영어(작게·옅게) + 아래 줄 한글을 한 상자에 함께 띄운다. 2026-11-26 사용자: '원문 영어랑 번역 한글을 같이 달아주세요'."""
+    kp = _chunks(ko, 30)
+    words = en.split()
+    if not kp or not words:
+        return []
+    n = min(len(kp), len(words))
+    if n < len(kp):   # 영어 단어가 모자라면 한글 줄을 합쳐 개수를 맞춤
+        kp = kp[:n - 1] + [" ".join(kp[n - 1:])]
+    tot = sum(len(x) for x in kp)
+    ep, i, acc = [], 0, 0
+    for k, x in enumerate(kp):
+        acc += len(x)
+        j = len(words) if k == n - 1 else max(i + 1, min(len(words) - (n - 1 - k), round(len(words) * acc / tot)))
+        if k < n - 1:   # 가까운 쉼표·마침표 뒤에서 끊어 영어 조각이 뜻 단위가 되게 (±4단어 안)
+            near = [q for q in range(max(i + 1, j - 4), min(len(words) - (n - 1 - k), j + 4) + 1) if words[q - 1][-1:] in ",.?!;:"]
+            if near:
+                j = min(near, key=lambda q: abs(q - j))
+        ep.append(" ".join(words[i:j]))
+        i = j
+    out, t = [], t0
+    for x, e in zip(kp, ep):
+        d = (t1 - t0) * len(x) / tot
+        e = e.replace("{", "(").replace("}", ")")
+        out.append((t, t + d - 0.02, r"{\fs34\c&H00D8D8D8&\b0}" + e + r"\N{\r}" + x))
+        t += d
+    return out
+
+
 def subtitles(events: list, path: Path) -> None:
     """events: (시작, 끝, 문장). 아래 가운데 상자형 자막."""
     head = """[Script Info]
@@ -1504,7 +1534,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         t0, t1, text = ev[:3]
         wav = ev[3] if len(ev) > 3 else None
         nm = ev[4] if len(ev) > 4 else ""
-        parts = _chunks(text)
+        parts = [text] if nm == "bite2" else _chunks(text)   # bite2: 원문·번역 짝은 이미 끊어 둠
         starts = _word_starts(wav, parts, t1 - t0) if wav else None
         if starts:  # 실제로 그 말을 하는 순간에 자막이 바뀐다 (faster-whisper 단어 시각)
             for k, p in enumerate(parts):
@@ -1636,7 +1666,12 @@ def make(project: Project, workers: int = 3) -> Path:
             parts.append((sc["_bite_at"], Path(sc["_bite"]["wav"])))
             for s_ in sc["_bite"]["segs"]:
                 if s_.get("ko"):
-                    subs.append((t_acc + sc["_bite_at"] + s_["t0"], t_acc + sc["_bite_at"] + s_["t1"] - 0.05, s_["ko"], None, "bite"))
+                    t0_, t1_ = t_acc + sc["_bite_at"] + s_["t0"], t_acc + sc["_bite_at"] + s_["t1"] - 0.05
+                    if sc.get("show_en", True) and s_.get("en"):   # 원문 영어 + 번역 한글을 한 상자에 두 줄로, 같은 순간에 바뀜 (2026-11-26 사용자 요청)
+                        for a_, b_, txt in bite_pairs(s_["ko"], s_["en"], t0_, t1_):
+                            subs.append((a_, b_, txt, None, "bite2"))
+                    else:
+                        subs.append((t0_, t1_, s_["ko"], None, "bite"))
         for name, at in results[sc["id"]][0]:
             sfx_events.append((name, t_acc + at))
         sa = work / f"a_{sc['id']:03d}.wav"

@@ -133,7 +133,7 @@ def prepare(project, spec: dict) -> None:
         t, segt = 0.0, []
         for s in segs:
             d = s["end"] - s["start"]
-            segt.append({"t0": round(t, 3), "t1": round(t + d, 3), "ko": s.get("ko", ""), "en": s.get("heard", "")})
+            segt.append({"t0": round(t, 3), "t1": round(t + d, 3), "ko": s.get("ko", ""), "en": s.get("key") or s.get("heard", "")})   # 대본에 적은 원문(문장 부호 그대로)을 먼저, 없으면 받아쓴 것
             t += d
         # 실제 이어 붙인 길이 (프레임 반올림 차이)
         real = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(wav)],
@@ -204,7 +204,7 @@ def s_bite(D, sc: dict, bt: list, dur: float):
         D.lower_top = sc.get("lower_top")   # 원본 방송 자막 띠와 겹칠 때 위로 (예: 560)
         D.lower(sc.get("who", ""), sc.get("role", ""), tb + 0.4, dark=True)
         D.lower_top = None
-    if sc.get("show_en", True):   # 원문 한 줄 (번역 자막 위, 작게): 원문·번역 2단
+    if sc.get("show_en_html", False):   # 옛 방식: 화면 위 작은 원문 줄. 2026-11-26 부터 원문은 번역 자막과 한 상자에 짝지어 (hybrid.bite_pairs)
         for s in b["segs"]:
             parts = _en_chunks(s.get("en", ""))
             if not parts:

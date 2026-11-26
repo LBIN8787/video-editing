@@ -60,7 +60,7 @@ def run(project: Project) -> dict:
         if ln.startswith("Dialogue:"):
             f = ln.split(",", 9)
             spans.append((_t(f[1]), _t(f[2])))   # 모든 자막(원본 발언 포함)의 시각 — '앞 줄이 아직 떠 있는 시각' 판단용
-            if f[4].strip() == "bite":   # 원본 발언 번역 자막: 내레이션이 아니므로 싱크 점검에서 뺀다
+            if f[4].strip().startswith("bite"):   # 원본 발언 번역 자막(bite·원문 짝 bite2): 내레이션이 아니므로 싱크 점검에서 뺀다
                 continue
             lines.append((_t(f[1]), _t(f[2]), f[9]))
     wav = edir / "hb_work" / "final_audio.wav"
