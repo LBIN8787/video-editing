@@ -52,14 +52,13 @@
   },
   {
    "scene": 2,
-   "type": "quote",
+   "type": "kb",
    "chapter": 0,
    "situation": "call-bite",
    "situation_name": "어닝콜·기자회견 발언",
    "origin": "add",
    "also": [
-    "earnings",
-    "metric"
+    "earnings"
    ],
    "beats": [
     {
@@ -72,7 +71,38 @@
       "질문에",
       "CEO"
      ]
+    }
+   ],
+   "recommended_scenes": [
+    "bite",
+    "quote"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "j-l-cut",
+     "status": "candidate"
     },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "번역만 읽기",
+   "why": "원문+번역 2단, 그 사람의 목소리 (03 §0-1, source-cut)"
+  },
+  {
+   "scene": 3,
+   "type": "quote",
+   "chapter": 0,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "said"
+   ],
+   "beats": [
     {
      "say": "그리고 답했습니다. 그럴지도 모릅니다. 하지만 그건 우리가 사는 세상이 아니고, 이 기회도 그렇지 않습니다.",
      "situations": [
@@ -93,26 +123,27 @@
     }
    ],
    "recommended_scenes": [
-    "bite",
-    "quote"
+    "bignum",
+    "chart",
+    "bars"
    ],
-   "type_fits": true,
+   "type_fits": false,
    "techniques": [
     {
-     "id": "j-l-cut",
-     "status": "candidate"
+     "id": "count-up",
+     "status": "have"
     },
     {
-     "id": "rough-highlight",
-     "status": "partial"
+     "id": "scramble",
+     "status": "candidate"
     }
    ],
    "blocked": [],
-   "avoid": "번역만 읽기",
-   "why": "원문+번역 2단, 그 사람의 목소리 (03 §0-1, source-cut)"
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 3,
+   "scene": 4,
    "type": "quote",
    "chapter": 0,
    "situation": "cause",
@@ -164,7 +195,7 @@
    "why": "화살표가 말과 함께 그어져야 '이어진다'가 보임"
   },
   {
-   "scene": 4,
+   "scene": 5,
    "type": "versus",
    "chapter": 0,
    "situation": "cause",
@@ -222,7 +253,7 @@
    "why": "화살표가 말과 함께 그어져야 '이어진다'가 보임"
   },
   {
-   "scene": 5,
+   "scene": 6,
    "type": "chapter",
    "chapter": 1,
    "situation": null,
@@ -238,7 +269,7 @@
    ]
   },
   {
-   "scene": 6,
+   "scene": 7,
    "type": "motionboard",
    "chapter": 1,
    "situation": null,
@@ -259,7 +290,7 @@
    ]
   },
   {
-   "scene": 7,
+   "scene": 8,
    "type": "bars",
    "chapter": 1,
    "situation": "earnings",
@@ -301,7 +332,7 @@
    "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
   },
   {
-   "scene": 8,
+   "scene": 9,
    "type": "bignum",
    "chapter": 1,
    "situation": "metric",
@@ -349,7 +380,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 9,
+   "scene": 10,
    "type": "compare",
    "chapter": 1,
    "situation": null,
@@ -375,7 +406,7 @@
    ]
   },
   {
-   "scene": 10,
+   "scene": 11,
    "type": "bars",
    "chapter": 1,
    "situation": "metric",
@@ -427,8 +458,42 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 11,
+   "scene": 12,
    "type": "chapter",
+   "chapter": 2,
+   "situation": "question",
+   "situation_name": "질문·명제 한 줄을 던진다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "그럼 다섯 곳 가운데 유일하게 번 돈이 더 많은 회사는 어떻게 짓고 있을까요.",
+     "situations": [
+      "question"
+     ],
+     "hits": [
+      "을까요"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "card_type",
+    "chapter"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "그림을 억지로 넣기",
+   "why": "질문은 글자 하나로 — 강조 예산 안에서 (05 §0-1)"
+  },
+  {
+   "scene": 13,
+   "type": "kb",
    "chapter": 2,
    "situation": null,
    "situation_name": null,
@@ -436,14 +501,14 @@
    "also": [],
    "beats": [
     {
-     "say": "두 번째 목소리는 지금도 번 돈이 더 많은, 마이크로소프트에서 나왔습니다.",
+     "say": "두 번째 목소리는 마이크로소프트의 재무를 책임지는 에이미 후드 최고재무책임자입니다.",
      "situations": [],
      "hits": []
     }
    ]
   },
   {
-   "scene": 12,
+   "scene": 14,
    "type": "quote",
    "chapter": 2,
    "situation": "earnings",
@@ -454,7 +519,7 @@
    ],
    "beats": [
     {
-     "say": "10월 28일 실적 콜에서 마이크로소프트의 에이미 후드 최고재무책임자는 이렇게 말했다고 CNBC가 전했습니다. 리스라는 형태의 금융이 있고, 우리는 그걸 수단으로 써 왔다.",
+     "say": "10월 28일 실적 콜에서 후드는 이렇게 말했다고 CNBC가 전했습니다. 리스라는 형태의 금융이 있고, 우리는 그걸 수단으로 써 왔다.",
      "situations": [
       "earnings",
       "said"
@@ -490,7 +555,7 @@
    "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
   },
   {
-   "scene": 13,
+   "scene": 15,
    "type": "motionboard",
    "chapter": 2,
    "situation": "explain",
@@ -553,7 +618,7 @@
    "why": "2026-11-20 사용자: \"쉽게 설명해야 하는 부분이다 상황설명이 필요하다 = 모션그래픽 을 주로 사용\" — 설명 무대(styles/explain-stage), 12 §0-1"
   },
   {
-   "scene": 14,
+   "scene": 16,
    "type": "bars",
    "chapter": 2,
    "situation": "hub-event",
@@ -611,7 +676,7 @@
    "why": "v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로"
   },
   {
-   "scene": 15,
+   "scene": 17,
    "type": "bignum",
    "chapter": 2,
    "situation": "metric",
@@ -653,8 +718,24 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 16,
+   "scene": 18,
    "type": "chapter",
+   "chapter": 3,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "빈 곳을 메우는 돈은 리스만이 아닙니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 19,
+   "type": "kb",
    "chapter": 3,
    "situation": "media",
    "situation_name": "보도·매체가 어떻게 다뤘나",
@@ -675,7 +756,7 @@
     "newspapers",
     "quote"
    ],
-   "type_fits": true,
+   "type_fits": false,
    "techniques": [
     {
      "id": "split-screen",
@@ -691,7 +772,7 @@
    "why": "매체 프레임의 차이 자체가 이야기 (03 §0-2)"
   },
   {
-   "scene": 17,
+   "scene": 20,
    "type": "quote",
    "chapter": 3,
    "situation": null,
@@ -712,7 +793,7 @@
    ]
   },
   {
-   "scene": 18,
+   "scene": 21,
    "type": "checklist",
    "chapter": 3,
    "situation": "metric",
@@ -765,7 +846,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 19,
+   "scene": 22,
    "type": "compare",
    "chapter": 3,
    "situation": "explain-market",
@@ -826,7 +907,7 @@
    "why": "2026-11-20 사용자 — 주식 채널도 상황 설명이 필요하면 모션그래픽(설명 무대). 흐름은 자료로 질문 → 설명 무대로 원리 → 자료로 확인 (docs/31)"
   },
   {
-   "scene": 20,
+   "scene": 23,
    "type": "bars",
    "chapter": 3,
    "situation": "metric",
@@ -870,7 +951,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 21,
+   "scene": 24,
    "type": "zoomshot",
    "chapter": 3,
    "situation": "metric",
@@ -923,7 +1004,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 22,
+   "scene": 25,
    "type": "chapter",
    "chapter": 4,
    "situation": null,
@@ -939,7 +1020,7 @@
    ]
   },
   {
-   "scene": 23,
+   "scene": 26,
    "type": "motionboard",
    "chapter": 4,
    "situation": "explain-market",
@@ -1005,7 +1086,7 @@
    "why": "2026-11-20 사용자 — 주식 채널도 상황 설명이 필요하면 모션그래픽(설명 무대). 흐름은 자료로 질문 → 설명 무대로 원리 → 자료로 확인 (docs/31)"
   },
   {
-   "scene": 24,
+   "scene": 27,
    "type": "bars",
    "chapter": 4,
    "situation": "earnings",
@@ -1056,7 +1137,7 @@
    "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
   },
   {
-   "scene": 25,
+   "scene": 28,
    "type": "bignum",
    "chapter": 4,
    "situation": "metric",
@@ -1110,7 +1191,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 26,
+   "scene": 29,
    "type": "checklist",
    "chapter": 4,
    "situation": "metric",
@@ -1177,7 +1258,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 27,
+   "scene": 30,
    "type": "chapter",
    "chapter": 5,
    "situation": "hub-event",
@@ -1223,7 +1304,7 @@
    "why": "v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로"
   },
   {
-   "scene": 28,
+   "scene": 31,
    "type": "compare",
    "chapter": 5,
    "situation": "hub-event",
@@ -1290,7 +1371,7 @@
    "why": "v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로"
   },
   {
-   "scene": 29,
+   "scene": 32,
    "type": "zoomshot",
    "chapter": 5,
    "situation": "hub-event",
@@ -1362,7 +1443,7 @@
    "why": "v28 사건이 중심축 — 회사→업종→금융·연준→한국으로 뻗는 경로"
   },
   {
-   "scene": 30,
+   "scene": 33,
    "type": "bars",
    "chapter": 5,
    "situation": "metric",
@@ -1404,7 +1485,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 31,
+   "scene": 34,
    "type": "versus",
    "chapter": 5,
    "situation": "compare",
@@ -1475,7 +1556,7 @@
    "why": "같은 틀에 나란히"
   },
   {
-   "scene": 32,
+   "scene": 35,
    "type": "chapter",
    "chapter": 6,
    "situation": "media",
@@ -1514,7 +1595,7 @@
    "why": "매체 프레임의 차이 자체가 이야기 (03 §0-2)"
   },
   {
-   "scene": 33,
+   "scene": 36,
    "type": "motionboard",
    "chapter": 6,
    "situation": "metric",
@@ -1562,7 +1643,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 34,
+   "scene": 37,
    "type": "checklist",
    "chapter": 6,
    "situation": "earnings",
@@ -1614,7 +1695,7 @@
    "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
   },
   {
-   "scene": 35,
+   "scene": 38,
    "type": "versus",
    "chapter": 6,
    "situation": "earnings",
@@ -1667,7 +1748,7 @@
    "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
   },
   {
-   "scene": 36,
+   "scene": 39,
    "type": "chapter",
    "chapter": 7,
    "situation": null,
@@ -1683,7 +1764,7 @@
    ]
   },
   {
-   "scene": 37,
+   "scene": 40,
    "type": "checklist",
    "chapter": 7,
    "situation": "metric",
@@ -1742,7 +1823,7 @@
    "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
   },
   {
-   "scene": 38,
+   "scene": 41,
    "type": "chapter",
    "chapter": 8,
    "situation": "cause",
@@ -1784,7 +1865,7 @@
    "why": "화살표가 말과 함께 그어져야 '이어진다'가 보임"
   },
   {
-   "scene": 39,
+   "scene": 42,
    "type": "checklist",
    "chapter": 8,
    "situation": "earnings",
@@ -1846,7 +1927,7 @@
    "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
   },
   {
-   "scene": 40,
+   "scene": 43,
    "type": "outro",
    "chapter": 9,
    "situation": "earnings",
@@ -1906,16 +1987,17 @@
    "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
   }
  ],
- "coverage": 0.82,
- "fit": 0.52,
+ "coverage": 0.81,
+ "fit": 0.46,
  "counts": {
-  "metric": 11,
+  "metric": 12,
   "earnings": 7,
   "cause": 4,
   "hub-event": 4,
   "media": 2,
   "explain-market": 2,
   "call-bite": 1,
+  "question": 1,
   "explain": 1,
   "compare": 1
  },

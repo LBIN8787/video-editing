@@ -16,6 +16,11 @@ R13 = "manual/09-market-daily.md"
 R12 = "manual/12-visual-storytelling.md"
 
 
+def ST(t, value, label, sub="", x=1500, y=880, fs=48):
+    return {"t": t, "do": "stat", "id": "m" + "".join(c for c in value if c.isalnum())[:12], "value": value, "label": label, "sub": sub,
+            "x": x, "y": y, "fs": fs, "static": True}
+
+
 def O(i, w):
     return {"id": i, "why_not": w}
 
@@ -26,6 +31,15 @@ S = []
 def add(**sc):
     S.append(sc)
     return sc
+
+
+def kb(chapter, src, stamp, name, role, say, label, decide):
+    """사진 장면: 화면 가득 사진 + 천천히 다가감 + 날짜·자리 도장 + 이름표 (인용 앞에서 '누구의 말인가'를 먼저)."""
+    b = {"say": say, "lower": {"name": name, "role": role}}
+    if "25년" in say:   # 말한 숫자가 화면에 (09 §6 v27)
+        b["motion"] = [ST("25년", "25년에 나눠 쓴다면?", "재시가 스스로 던진 물음", x=1500, y=230)]
+    add(type="kb", chapter=chapter, clip={"src": src, "start": 0}, move="in", stamp=stamp, label=label, _kb=True,
+        decide=decide, beats=[b])
 
 
 def chap(n, title, icon, say):
@@ -47,6 +61,12 @@ add(type="motionboard", chapter=0, label="사는 쪽: 데이터센터를 짓는 
         {"say": "SK하이닉스와 삼성전자의 메모리, 엔비디아의 칩을 사 주는 건 데이터센터를 짓는 몇몇 거대 기업입니다.", "do": ["hy", "nv", "buy", "a1", "a2"], "at": {"buy": "거대 기업"}},
         {"say": "그래서 반도체 주식을 가진 사람이라면 한 번쯤 묻게 됩니다. 이 회사들은 이 돈을 언제까지 낼 수 있을까.", "do": ["q"], "at": {"q": "언제까지"}},
     ])
+kb(0, "jassy", "2026.10.29 · 아마존 3분기 실적 콜", "앤디 재시", "아마존 CEO (사진은 2010년)",
+   "이 질문에, 가장 돈을 많이 쓰는 회사의 대표가 답한 적이 있습니다. 10월 29일 아마존 실적 발표 콜에서 앤디 재시 CEO는 스스로 이렇게 물었습니다. 이런 기회가 25년에 걸쳐 와서, 설비투자를 25년에 나눠 쓸 수 있다면 더 편하겠냐고요.",
+   "사진: Andy Jassy in 2010 (위키미디어 공용, CC BY 2.0) · 발언: CNBC 2026.10.30 보도",
+   dict(pick="kb", situation="said", differs="말하기 전에 '누구인가'를 얼굴로", new_vocab="인물 사진 장면 — 2026-11-26 사용자: 인사이트의 주인공 사진을 넣으라",
+        over=[O("bite", "실적 콜 원본 음성 시각 미확인"), O("quote", "인용 카드만으로는 누가 말했는지 얼굴이 안 보임")],
+        why="결론을 말하는 사람의 얼굴을 먼저 — 이름 있는 사람의 판단이라는 신뢰(09 §5-00)", intent="이 결론이 아마존 CEO 의 말이라는 것을 얼굴로 기억한다", refs=[R13]))
 add(type="quote", chapter=0, insight=True, id_key="open_jassy",
     label="CNBC 2026.10.30 보도 · 아마존 3분기 실적 콜(10.29) 발언 인용",
     who="앤디 재시", role="아마존 CEO · 2026년 설비투자 약 2,200억 달러",
@@ -54,7 +74,6 @@ add(type="quote", chapter=0, insight=True, id_key="open_jassy",
     keyword="우리가 사는 세상이 아닙니다",
     orig="Yeah, it might be more convenient, but that's not the world that we live in, and that's not the opportunity.",
     beats=[
-        {"say": "이 질문에, 가장 돈을 많이 쓰는 회사의 대표가 답한 적이 있습니다. 10월 29일 아마존 실적 발표 콜에서 앤디 재시 CEO는 스스로 이렇게 물었습니다. 이런 기회가 25년에 걸쳐 와서, 설비투자를 25년에 나눠 쓸 수 있다면 더 편하겠냐고요."},
         {"say": "그리고 답했습니다. 그럴지도 모릅니다. 하지만 그건 우리가 사는 세상이 아니고, 이 기회도 그렇지 않습니다."},
         {"say": "결론은 분명합니다. 지금 써야 하고, 계속 쓰겠다는 겁니다. 아마존은 올해 설비투자를 약 2,200억 달러로 잡고 있습니다.",
          "motion": [{"t": "2,200억", "do": "stat", "id": "capex", "value": "약 2,200억 달러", "label": "아마존 2026년 설비투자 계획", "sub": "10.29 보도자료", "x": 1500, "y": 230, "fs": 56, "static": True}]},
@@ -130,13 +149,19 @@ add(type="bars", chapter=1, label="이 채널 계산: 다섯 곳 설비 구입 �
     ])
 
 # ── 2. 후드의 말 — 장부에 잘 안 보이는 돈 ───────────────────────────────────
-chap(2, "장부에 잘 안 보이는 돈", "file-signature", "두 번째 목소리는 지금도 번 돈이 더 많은, 마이크로소프트에서 나왔습니다.")
+chap(2, "장부에 잘 안 보이는 돈", "file-signature", "그럼 다섯 곳 가운데 유일하게 번 돈이 더 많은 회사는 어떻게 짓고 있을까요.")
+kb(2, "msft_hq", "2026.10.28 · 마이크로소프트 실적 콜", "에이미 후드", "마이크로소프트 최고재무책임자 (사진은 레드먼드 본사)",
+   "두 번째 목소리는 마이크로소프트의 재무를 책임지는 에이미 후드 최고재무책임자입니다.",
+   "사진: Building 92 of Microsoft Redmond Campus (위키미디어 공용, CC BY 3.0) · 본인 사진은 공개 라이선스로 찾지 못함",
+   dict(pick="kb", situation="said", differs="말하기 전에 누구인가를 — 본인 사진이 없어 그 회사 본사", new_vocab="인물·기관 사진 장면 (2026-11-26 사용자)",
+        over=[O("bite", "원본 음성 미확인"), O("quote", "인용 카드만으로는 어느 회사의 말인지 한눈에 안 보임")],
+        why="두 번째 사는 쪽 목소리의 회사를 사진으로 — 본인 사진이 공개 라이선스로 없어 다른 사람을 잘못 쓰지 않게 본사", intent="마이크로소프트 CFO 의 말이라는 것을 안다", refs=[R13]))
 add(type="quote", chapter=2, insight=True, label="CNBC 2026.10.29 보도 · 마이크로소프트 회계 1분기 실적 콜(10.28) 발언 인용",
     who="에이미 후드", role="마이크로소프트 최고재무책임자(CFO)",
     quote="리스라는 형태의 금융이 있고, 우리는 그걸 수단으로 써 왔습니다", keyword="리스",
     orig="There's a form of financing called leasing, and we've been using that one as a vehicle",
     beats=[
-        {"say": "10월 28일 실적 콜에서 마이크로소프트의 에이미 후드 최고재무책임자는 이렇게 말했다고 CNBC가 전했습니다. 리스라는 형태의 금융이 있고, 우리는 그걸 수단으로 써 왔다."},
+        {"say": "10월 28일 실적 콜에서 후드는 이렇게 말했다고 CNBC가 전했습니다. 리스라는 형태의 금융이 있고, 우리는 그걸 수단으로 써 왔다."},
         {"say": "그리고, 신용등급 덕분에 채권시장에 접근할 수 있지만 아직 그건 쓰지 않았다고요."},
     ])
 add(type="motionboard", chapter=2, label="구조: " + FED + " ('장기 리스 → 개발사가 담보로 자금 조달') · 그림은 단순화",
@@ -168,7 +193,13 @@ add(type="bignum", chapter=2, label="CNBC 2026.10.29 보도 · 발행일 11.4 (8
     beats=[{"say": "그리고 후드가 아직 쓰지 않았다고 한 채권시장. 다음 날인 10월 29일, 마이크로소프트가 250억 달러어치 회사채를 낸다는 보도가 나왔습니다. 가장 여유 있던 회사도 결국 빚을 꺼낸 겁니다."}])
 
 # ── 3. 메타의 말 — 빚, 주식, 멈춘 자사주 ─────────────────────────────────
-chap(3, "빚, 주식, 그리고 멈춘 자사주", "layers", "세 번째 목소리는 메타입니다. 메타는 아예 보도자료에 자금 계획을 적었습니다.")
+chap(3, "빚, 주식, 그리고 멈춘 자사주", "layers", "빈 곳을 메우는 돈은 리스만이 아닙니다.")
+kb(3, "meta_hq", "2026.10.26 · 메타 보도자료", "메타", "회사 보도자료 (사진은 멘로파크 본사)",
+   "세 번째 목소리는 메타입니다. 메타는 아예 보도자료에 자금 계획을 적었습니다.",
+   "사진: Meta Platforms Headquarters Menlo Park California (위키미디어 공용, CC0)",
+   dict(pick="kb", situation="said", differs="회사 보도자료라 사람 대신 본사", new_vocab="인물·기관 사진 장면 (2026-11-26 사용자)",
+        over=[O("newspapers", "매체 보도가 아니라 회사가 직접 낸 보도자료"), O("quote", "인용 카드만으로는 어느 회사인지 한눈에 안 보임"), O("bite", "보도자료라 영상 없음")],
+        why="세 번째 목소리(메타)를 본사 사진으로 먼저", intent="메타가 스스로 적은 계획이라는 것을 안다", refs=[R13]))
 add(type="quote", chapter=3, insight=True, label="메타 보도자료 2026.10.26 (주식 발행 공고)",
     who="메타", role="회사 보도자료",
     quote="영업현금흐름, 투자등급 부채, 전략적 파트너십, 주식 자본의 균형 잡힌 조합",
@@ -283,6 +314,7 @@ add(type="versus", chapter=5, insight=True,
     label="포기: 로이터 2026.11.9 · 리마: 모건스탠리 고객 노트 11.10 (CNBC 11.11 보도)",
     left={"value": "\"장부가 꽉 찼다\"", "label": "크리스 포기 · 롭스앤그레이 금융 파트너", "icon": "book-x"},
     right={"value": "\"보상이 올해 최고\"", "label": "페르난다 리마 · 모건스탠리 전략가", "icon": "trending-up"},
+    bg="photo", bg_src="ms_hq",
     beats=[
         {"say": "같은 기사에서 로펌 롭스앤그레이의 금융 파트너 크리스 포기는 채권 투자자들의 장부가 꽉 찼다고 했습니다."},
         {"say": "반대 시각도 같은 무게로 들어야 합니다. 모건스탠리 전략가 페르난다 리마는 11월 10일 고객 노트에서, 우량 빅테크 채권은 위험 대비 보상이 올해 들어 가장 좋다고 봤습니다. 가산금리가 이미 넓어졌으니 오히려 사 볼 만하다는 거죠. 다만 리마도 데이터센터 사업 채권과 신생 클라우드 쪽은 변동성이 커질 거라고 했습니다."},
@@ -364,7 +396,7 @@ def O(i, w):
 DECIDE = {   # 연출 결정 기록 (05 §0-9) — 장면 id 기준
     1: dict(situation="call-bite", over=[O("bite", "실적 콜 원본 음성·시각을 아직 못 찾음(CNBC 보도 인용) — PC 에서 웹캐스트를 찾으면 bite 로 바꿈"), O("bignum", "숫자로 열면 30초 안에 이탈(09 §5 여는 장면)")],
             why="09 §5-00 결론 먼저 — 사는 쪽에서 가장 많이 쓰는 회사 CEO 의 결론을 첫 화면에, 원문·번역 2단", intent="첫 30초에 '사는 쪽은 멈출 생각이 없다'는 결론을 그 사람의 말로 듣는다", refs=[R13]),
-    2: dict(situation="said", over=[O("map_causal", "원인→결과 사슬이 아니라 한 기관의 결론 문장 — 말이 주인공인 자리(09 §5-1 ③)"), O("bite", "블로그 글이라 영상 원본이 없음"), O("versus", "두 결론을 맞대기 전에 두 번째 목소리를 따로 들려줘야 무게가 같음")],
+    2: dict(situation="said", differs="공개 라이선스 사진이 없고 원문 사이트는 자동 접속을 막아 캡처도 못 함 — 사진 장면 없이 인용 카드", over=[O("kb", "쓸 수 있는 본인·기관 사진이 없음"), O("map_causal", "원인→결과 사슬이 아니라 한 기관의 결론 문장 — 말이 주인공인 자리(09 §5-1 ③)"), O("bite", "블로그 글이라 영상 원본이 없음"), O("versus", "두 결론을 맞대기 전에 두 번째 목소리를 따로 들려줘야 무게가 같음")],
             why="맞서는 결론도 이름 있는 기관의 원문으로 — 같은 무게(09 §5-0-2)", intent="'이제 빚이다'라는 반대 결론을 원문으로 듣는다", refs=[R13]),
     3: dict(situation="compare", over=[O("map_causal", "인과 사슬이 아니라 두 결론을 한 화면에 나란히 놓는 자리"), O("bars", "숫자 비교가 아님")],
             why="두 결론을 좌우로 맞대고 가운데에 이 영상의 해석(열쇠 = 채권시장)을 얹음", intent="이 영상이 무엇을 따라가는지(두 말이 둘 다 맞을 수 있는 조건) 안다", refs=[R13]),
@@ -429,7 +461,7 @@ def ST(t, value, label, sub="", x=1500, y=880, fs=48):
 
 
 MOT = {   # (장면 id, 박자 번호 1부터) → 말에 맞춰 생기는 숫자
-    (1, 2): ST("10월 29일", "10월 29일", "아마존 3분기 실적 콜", x=1560, y=910),
+    (1, 2): ST("우리가 사는 세상", "10월 29일", "아마존 3분기 실적 콜", x=1560, y=910),
     (5, 2): ST("348억", "−348억 달러", "석 달 동안 빈 돈", "424 − 773"),
     (10, 1): ST("10월 28일", "10월 28일", "마이크로소프트 실적 콜", x=1560, y=910),
     (12, 1): ST("11월 13일", "11월 13일", "연준 금융안정보고서", x=1560, y=210),
@@ -452,7 +484,16 @@ DECIDE = {_shift(k): v for k, v in DECIDE.items()}
 MOT = {(_shift(k[0]), k[1] - (1 if k[0] == 1 else 0)): v for k, v in MOT.items()}
 MOT[(_shift(5), 1)] = MOT.pop((_shift(5), 2))   # 아마존 막대: 정의 박자가 빠져 348억은 첫 박자로
 
+_old2new, _n = {}, 0
+for _i, _sc in enumerate(S, 1):
+    if not _sc.get("_kb"):
+        _n += 1
+        _old2new[_n] = _i
+DECIDE = {_old2new[k]: v for k, v in DECIDE.items()}
+MOT = {(_old2new[k[0]], k[1]): v for k, v in MOT.items()}
+
 for i, sc in enumerate(S, 1):
+    sc.pop("_kb", None)
     sc["id"] = i
     sc.pop("id_key", None)
     sc.pop("key", None)
@@ -511,7 +552,7 @@ SPEC = {
                  {"id": "evidence-board", "why_not": "사건·인물 연결이 아니라 돈의 흐름·층이 핵심이라 코르크 증거판보다 어두운 무대가 맞음"}],
         "why": "시청자는 '사 주는 쪽이 언제까지 낼 수 있나'의 판단을 들으러 온다 — 사는 쪽 CEO·CFO·회사의 말과 연준의 말을 근거(공시 숫자·연준 원문)로 따진다. 원본 영상이 없어 인용 카드 + 원문 문서로 증거를 보인다",
         "intent": "끝나면 시청자는 세 층 그림과 '열쇠는 채권시장'이라는 판단, 판가름 숫자 셋을 안다",
-        "vocabulary": ["quote", "versus", "bars", "bignum", "compare", "checklist", "motionboard", "zoomshot"],
+        "vocabulary": ["quote", "versus", "bars", "bignum", "compare", "checklist", "motionboard", "zoomshot", "kb"],
         "refs": ["manual/09-market-daily.md", "manual/12-visual-storytelling.md", "recipe:hybrid-causal"],
     },
     "package": {   # S8 — 썸네일은 02_script/make_thumbs.py 로 합성(이 렌더러의 틀 대신, 2026-11-26 사용자 요청), 제목은 각도를 다르게 (14 §4)
@@ -541,6 +582,15 @@ SPEC = {
         "hashtags": ["AI설비투자", "SK하이닉스", "빅테크"],
     },
     "footage": {
+        "jassy": {"file": "jassy.mp4", "url": "https://commons.wikimedia.org/wiki/File:Andy_Jassy_in_2010.jpg",
+                  "credit": "Andy Jassy in 2010 — 위키미디어 공용 (CC BY 2.0)", "license": "CC BY 2.0", "rights": "cc", "cover": False,
+                  "make": "raw/jassy.jpg 크롭(1360x765 @300,0) → 1920x1080 정지 영상"},
+        "msft_hq": {"file": "msft_hq.mp4", "url": "https://commons.wikimedia.org/wiki/File:Building_92_of_Microsoft_Redmond_Campus_-_panoramio.jpg",
+                    "credit": "Building 92 of Microsoft Redmond Campus — 위키미디어 공용 (CC BY 3.0)", "license": "CC BY 3.0", "rights": "cc", "cover": False},
+        "meta_hq": {"file": "meta_hq.mp4", "url": "https://commons.wikimedia.org/wiki/File:Meta_Platforms_Headquarters_Menlo_Park_California.jpg",
+                    "credit": "Meta Platforms Headquarters Menlo Park California — 위키미디어 공용 (CC0)", "license": "CC0", "rights": "cc", "cover": False},
+        "ms_hq": {"file": "ms_hq.mp4", "url": "https://commons.wikimedia.org/wiki/File:Morgan_Stanley_Headquarters_(48105951892).jpg",
+                  "credit": "Morgan Stanley Headquarters — 위키미디어 공용 (CC BY 2.0)", "license": "CC BY 2.0", "rights": "cc", "cover": False},
         "fed_figA": {"file": "fed_figA.mp4", "url": "https://www.federalreserve.gov/publications/files/financial-stability-report-20261113.pdf",
                      "credit": "미국 연방준비제도 이사회 금융안정보고서 2026년 11월, 23쪽 상자 2.2 (미국 정부 저작물, 퍼블릭 도메인) · 그림 A 원자료: 뱅크오브아메리카·블룸버그",
                      "license": "public domain (U.S. government work)", "rights": "official", "cover": False,
@@ -555,7 +605,7 @@ SPEC["scenes"] = S
 
 if __name__ == "__main__":
     if "--sample" in sys.argv:   # S6: 여는 결론(1~3) · 번 돈 vs 쓴 돈(1장 bars 2개) · 돈의 흐름(6장 motionboard)
-        pick = [1, 2, 4, 6, 7, 10, 13, 33]   # 재시 quote·versus·아마존 bars·116% bars·리스 구조·돈의 흐름
+        pick = [1, 2, 3, 4, 5, 13, 14, 19, 20, 34]   # 재시 quote·versus·아마존 bars·116% bars·리스 구조·돈의 흐름
         pick_types = [S[i - 1] for i in pick]
         sample = dict(SPEC)
         sample["scenes"] = [dict(x) for x in pick_types]
