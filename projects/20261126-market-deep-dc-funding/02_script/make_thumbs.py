@@ -32,16 +32,22 @@ def cover(im, w=W, h=H, focus=(0.5, 0.5)):
     return im.crop((x, y, x + w, y + h))
 
 
+BOXES = []   # 점검용 글자 상자 (출처 표기 줄 제외) — 썸네일 렌더러의 thumbnail_qa 와 같은 기준
+
+
 def text_line(d, xy, s, f, fill=WHITE, hl=None, stroke=8, anchor="la"):
     """한 줄을 쓰되 hl 낱말만 노랑. 굵은 검은 테두리(휴대폰 목록에서 읽히게)."""
     x, y = xy
     if anchor == "ra":
         x -= d.textlength(s, font=f)
     parts = [(s, fill)] if not hl or hl not in s else [(s[:s.index(hl)], fill), (hl, YEL), (s[s.index(hl) + len(hl):], fill)]
+    x_start = x
     for t, c in parts:
         if t:
             d.text((x, y), t, font=f, fill=c, stroke_width=stroke, stroke_fill=INK)
             x += d.textlength(t, font=f)
+    bb = d.textbbox((x_start, y), s, font=f, stroke_width=stroke)
+    BOXES.append(bb)
 
 
 def tag(d, xy, s, f, bg=RED, fg=WHITE, pad=(16, 8)):
@@ -49,6 +55,7 @@ def tag(d, xy, s, f, bg=RED, fg=WHITE, pad=(16, 8)):
     tw = d.textlength(s, font=f); bb = f.getbbox(s)
     d.rounded_rectangle([x, y, x + tw + pad[0] * 2, y + (bb[3] - bb[1]) + pad[1] * 2 + 6], radius=8, fill=bg)
     d.text((x + pad[0], y + pad[1] - bb[1] + 3), s, font=f, fill=fg)
+    BOXES.append((x, y, x + tw + pad[0] * 2, y + (bb[3] - bb[1]) + pad[1] * 2 + 6))
 
 
 def vignette(im, strength=0.55, side=None):
@@ -145,8 +152,18 @@ def thumb_c():
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
     out = []
+    import json
+    qa = {}
     for k, fn in (("A", thumb_a), ("B", thumb_b), ("C", thumb_c)):
+        BOXES.clear()
         im = fn(); p = OUT / f"thumbnail_{k}.png"; im.save(p); out.append(im)
+        tx0, ty0 = W - 200, H - 90   # 재생 시간 자리 (오른쪽 아래)
+        clash = [b for b in BOXES if b[2] > tx0 and b[3] > ty0]
+        small = min((b[3] - b[1]) for b in BOXES) * 168 / W if BOXES else 0
+        qa[k] = {"timestamp_overlap": bool(clash), "smallest_text_px_at_168w": round(small, 1), "ok": not clash and small >= 6,
+                 "note": "합성 썸네일(make_thumbs.py) — 출처 표기 줄은 의무 표기라 측정에서 뺌"}
+    (OUT / "thumbnail_qa.json").write_text(json.dumps(qa, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(qa)
     # 휴대폰 목록 크기 미리보기 (가로 168px 기준 ×2) + 큰 판
     sheet = Image.new("RGB", (W, H * 3 // 2 + 40), (245, 245, 247))
     for i, im in enumerate(out):

@@ -1,8 +1,8 @@
 {
  "project": "20261126-market-deep-dc-funding",
  "manual_version": "141",
- "checked": "2026-11-26T10:35:48",
- "pass": true,
+ "checked": "2026-11-26T12:23:38",
+ "pass": false,
  "rows": [
   {
    "gate": "G0",
@@ -107,7 +107,7 @@
    "level": "MUST",
    "item": "자료 화면마다 credit·url",
    "ok": true,
-   "detail": "2개, 빠짐 []"
+   "detail": "6개, 빠짐 []"
   },
   {
    "gate": "G2",
@@ -120,8 +120,8 @@
    "gate": "G2",
    "level": "참고",
    "item": "자료 화면 소스 종류 (한 곳에서만 가져오면 화면이 단조로워짐)",
-   "ok": false,
-   "detail": "1종"
+   "ok": true,
+   "detail": "5종"
   },
   {
    "gate": "G3",
@@ -439,6 +439,13 @@
    "detail": "[]"
   },
   {
+   "gate": "G6",
+   "level": "참고",
+   "item": "길이(측정값만 — 시간 기준 없음, 구성요소가 정함, README §2-4)",
+   "ok": true,
+   "detail": "16.4분"
+  },
+  {
    "gate": "G5",
    "level": "SHOULD",
    "item": "배경: 한 가지 바탕으로 고정하지 않음 — 장면이 하는 일이 바뀌면 바탕도 바뀜 (05 §0-2)",
@@ -457,7 +464,7 @@
    "level": "참고",
    "item": "반복 피로: 글씨·도형뿐인 장면이 이어지는 구간 — 자료·지도·그림으로 보여 줄 수 있는지 다시 볼 곳 (05 §0-3)",
    "ok": false,
-   "detail": "최장 5연속 (장면 39)"
+   "detail": "최장 5연속 (장면 42)"
   },
   {
    "gate": "G5",
@@ -471,7 +478,7 @@
    "level": "참고",
    "item": "반복 피로: 볼거리(자료·지도·그림)가 있는 장면의 몫",
    "ok": false,
-   "detail": "14/31"
+   "detail": "17/34"
   },
   {
    "gate": "G5",
@@ -506,7 +513,7 @@
    "level": "참고",
    "item": "반복 피로: 같은 채널 직전 편과 화면 구성이 얼마나 겹치나",
    "ok": true,
-   "detail": "45%"
+   "detail": "38%"
   },
   {
    "gate": "G5",
@@ -517,10 +524,24 @@
   },
   {
    "gate": "G5",
+   "level": "참고",
+   "item": "자료 화면 없이 그래픽만 이어지는 가장 긴 구간",
+   "ok": false,
+   "detail": "최장 639초"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "장 전환 없이 이어지는 가장 긴 구간",
+   "ok": true,
+   "detail": "최장 177초"
+  },
+  {
+   "gate": "G5",
    "level": "SHOULD",
    "item": "스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1)",
    "ok": true,
-   "detail": "6종 ['data-report', 'explain-stage', 'hybrid-causal', 'paper-column', 'screen-zoom', 'statement-brief']"
+   "detail": "7종 ['archive-doc', 'data-report', 'explain-stage', 'hybrid-causal', 'paper-column', 'screen-zoom', 'statement-brief']"
   },
   {
    "gate": "G5",
@@ -570,6 +591,104 @@
    "item": "edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움)",
    "ok": true,
    "detail": "python -m ytflow edit-plan <프로젝트> → 02_script/EDIT_CONTEXT.md"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "final.mp4",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "화면 글자 겹침 없음 — 글자끼리·카드에 가려짐·카드 밖 넘침·자막 자리 (overlap_qa)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "글자가 카드·강조 상자 가장자리에 걸치지 않음 (overlap_qa)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G6",
+   "level": "참고",
+   "item": "무대 화면: 한꺼번에 보이는 것·글자·멈춘 박자 (한 화면 한 생각인지 눈으로, 04 §0-5)",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
+   "ok": true,
+   "detail": "{'within_0_5s': 0.986, 'p95_abs_offset': 0.08, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.1}"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "납품 점검(음량 등)",
+   "ok": true,
+   "detail": "completed"
+  },
+  {
+   "gate": "G6",
+   "level": "참고",
+   "item": "움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5)",
+   "ok": false,
+   "detail": "변화 7.0/분 · 정지 0.69"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "최종 목소리 ElevenLabs",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "제목 후보 3개 + 이유",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "MUST",
+   "item": "썸네일 A/B/C + 점검 ok",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G7",
+   "level": "참고",
+   "item": "제목 앞부분에 질문·핵심 (목록에서 잘려도 무슨 영상인지 보이게)",
+   "ok": false,
+   "detail": "빅테크 AI 투자, 번 돈 넘어 빚으로 "
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "완성본 보관 기록 — Drive(drive.json·drive_archive.json) 또는 공개 가능한 것만 GitHub Release(release.json)",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G8",
+   "level": "MUST",
+   "item": "episodes.md 기록",
+   "ok": false,
+   "detail": "ch-market-daily"
   }
  ]
 }
