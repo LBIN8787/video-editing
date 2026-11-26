@@ -1,6 +1,6 @@
 # 체크리스트 — 20261126-curiosity-fomo
 
-매뉴얼 v141 · 2026-11-26T11:08:32 · **MUST 실패 2개**
+매뉴얼 v141 · 2026-11-26T23:21:51 · **통과**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
@@ -55,10 +55,11 @@
 | G5 | MUST | 연출 결정 기록: 영상 방향·장면마다 고른 것·버린 대안·근거·의도, 같은 상황 같은 선택 (decide, 05 §0-9) | ✅ | python -m ytflow decide <프로젝트> → 02_script/DIRECTION_LOG.md |
 | G5 | SHOULD | edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움) | ⚠️ | python -m ytflow edit-plan <프로젝트> → 02_script/EDIT_CONTEXT.md |
 | G6 | MUST | final.mp4 | ✅ |  |
-| G6 | MUST | 레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why) | ❌ | {} |
-| G6 | SHOULD | 글자 겹침 점검 기록 (05_edit/overlap_qa.json) | ⚠️ | python scripts/overlap_scan.py <프로젝트> |
+| G6 | MUST | 레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why) | ✅ | 캔버스 렌더러 — overlap_qa 로 대신 잼 |
+| G6 | MUST | 화면 글자 겹침 없음 — 글자끼리·카드에 가려짐·카드 밖 넘침·자막 자리 (overlap_qa) | ✅ | [] |
+| G6 | SHOULD | 글자가 카드·강조 상자 가장자리에 걸치지 않음 (overlap_qa) | ✅ | [] |
 | G6 | 참고 | 무대 화면: 한꺼번에 보이는 것·글자·멈춘 박자 (한 화면 한 생각인지 눈으로, 04 §0-5) | ✅ | {} |
-| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ❌ | {'within_0_5s': 0.988, 'p95_abs_offset': 0.29, 'median_abs_offset': 0.26, 'video |
+| G6 | MUST | 싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초) | ✅ | {'within_0_5s': 0.959, 'p95_abs_offset': 0.47, 'median_abs_offset': 0.05, 'video |
 | G6 | SHOULD | 납품 점검(음량 등) | ⚠️ | None |
 | G6 | SHOULD | 최종 목소리 ElevenLabs | ✅ |  |
 | G7 | MUST | 제목 후보 3개 + 이유 | ✅ |  |
