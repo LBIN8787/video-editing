@@ -1,21 +1,21 @@
 {
  "project": "20261126-market-deep-dc-funding",
- "manual_version": "135",
- "checked": "2026-11-26T01:38:30",
+ "manual_version": "141",
+ "checked": "2026-11-26T10:25:43",
  "pass": false,
  "rows": [
   {
    "gate": "G0",
    "level": "MUST",
    "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
-   "ok": false,
-   "detail": "[2026-11-25 · 20261125-curiosity-riemann 기각] 불합격 입니다. 전부 이미지느낌보다는 글씨느낌에 애니메이션효과 천천히 그리는 효과도 너무 매번 똑같아요 속도가 https://youtu.be/HK6wSr1JdL0?si=AjiOfIJYsvID6Z4T 이 채널의 편집방식을 벤치마킹해주세요 대본 작상과 소재 선정도요; [2026-11-25 · 20261125-issues-explainer 기각] 기존 편집방식과 다르지 않은거같아요 글로 설명하은 느낌이 강하다고 느껴져요 제가 예시로 준 채널들이나 링크 레퍼런스나 다큐멘터리 등의 모션그래픽과 많이 달라요 저는 새로운 스타일은 원했어요"
+   "ok": true,
+   "detail": ""
   },
   {
    "gate": "G0",
    "level": "SHOULD",
    "item": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
-   "ok": true,
+   "ok": false,
    "detail": "manual/graph.json"
   },
   {
@@ -90,24 +90,24 @@
   },
   {
    "gate": "G2",
-   "level": "SHOULD",
+   "level": "MUST",
    "item": "시장: SAVE(오선) 시장 소식 알림 확인 기록 — 상태 '확인함' 또는 '확인 못 함: 이유' (01_research/save_check.md)",
-   "ok": false,
-   "detail": "save_check.md 없음 (python -m ytflow daily 가 만듦)"
+   "ok": true,
+   "detail": "확인함 (inbox/save/ 11-17·11-18·11-20·11-21, origin/main b72c8e07 기준 — 11-22 이후 파일 없음)"
   },
   {
    "gate": "G2",
    "level": "SHOULD",
    "item": "시장: SAVE 실제로 확인함 (항목 1개 이상)",
-   "ok": false,
-   "detail": " · 항목 0"
+   "ok": true,
+   "detail": "확인함 (inbox/save/ 11-17·11-18·11-20·11-21, origin/main b72c8e07 기준 — 11-22 이후 파일 없음) · 항목 2"
   },
   {
    "gate": "G2",
    "level": "MUST",
    "item": "자료 화면마다 credit·url",
-   "ok": false,
-   "detail": "0개, 빠짐 []"
+   "ok": true,
+   "detail": "2개, 빠짐 []"
   },
   {
    "gate": "G2",
@@ -121,14 +121,14 @@
    "level": "참고",
    "item": "자료 화면 소스 종류 (한 곳에서만 가져오면 화면이 단조로워짐)",
    "ok": false,
-   "detail": "0종"
+   "detail": "1종"
   },
   {
    "gate": "G3",
    "level": "MUST",
    "item": "팩트시트 + 출처 링크 3개 이상",
    "ok": true,
-   "detail": "링크 15개"
+   "detail": "링크 19개"
   },
   {
    "gate": "G3",
@@ -155,7 +155,7 @@
    "gate": "G4",
    "level": "MUST",
    "item": "core_message·question·logic",
-   "ok": false,
+   "ok": true,
    "detail": ""
   },
   {
@@ -176,8 +176,8 @@
    "gate": "G4",
    "level": "MUST",
    "item": "쉬운 대본: 숫자엔 비교 기준, 낯선 개념엔 비유, 과거 사례, 어려운 말 풀이가 있다",
-   "ok": false,
-   "detail": "{'compare_to': 0, 'analogies': 0, 'past_cases': 0, 'glossary': 0}"
+   "ok": true,
+   "detail": "{'compare_to': 5, 'analogies': 2, 'past_cases': 1, 'glossary': 8}"
   },
   {
    "gate": "G4",
@@ -222,11 +222,207 @@
    "detail": ""
   },
   {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "연결·의미: 팩트시트에 '## 해석'(근거 번호와 함께) — 사실만 옮기지 않기 (03 §0-1)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "연결·의미: 대본에서 해석을 해석이라고 밝힘 ('해석'·'의미'·'로 볼 수 있')",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "매일 브리핑: daily_brief.json 있음 (python -m ytflow daily)",
+   "ok": false,
+   "detail": "01_research/daily_brief.json"
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "시간대: 팩트시트에 현지(ET)·한국(KST) 시각을 함께 적음 — 날짜·장 구분 착각 방지 (09 §3-6, 2026-11-22 사용자)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "매일 시장: 이야기마다 원인 종류(이슈·보고서·전망·실적)와 1차 출처를 팩트시트에",
+   "ok": true,
+   "detail": "['보고서', '전망', '실적']"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "v26: topic_brief 에 known(이미 알려진 것)·new_angle(자료를 엮어야 보이는 것) — 제목·훅은 new_angle 에서 (03 §0-2)",
+   "ok": true,
+   "detail": "다섯 회사를 한 줄로 세우면 같은 '빅테크'가 아니다 — 맨 위(마이크로"
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "v26: 팩트시트 '## 자료 지도' — 서로 다른 종류(보고서·발언·행동)를 맞대고, 자료마다 의미 칸 (03 §0-2)",
+   "ok": true,
+   "detail": "16줄 {'보고서': 4, '발언': 6, '행동': 7} 의미✓"
+  },
+  {
+   "gate": "G3",
+   "level": "참고",
+   "item": "v26: 자료 지도 분량 (종류별 줄 수)",
+   "ok": true,
+   "detail": "16줄 {'보고서': 4, '발언': 6, '행동': 7}"
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "v33: 팩트시트 '## 직접 계산' 1개+ (식·출처 숫자) — 연결 비율·민감도 (03 §0-4)",
+   "ok": true,
+   "detail": "7개"
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "v33: 팩트시트 '## 틀리는 경우' — 이 판단이 틀리는 조건 (03 §0-4)",
+   "ok": true,
+   "detail": "5개"
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "v33: 팩트시트 '## 신호' — 숫자 기준선·날짜가 있는 확인 신호 (03 §0-4)",
+   "ok": true,
+   "detail": "4개"
+  },
+  {
+   "gate": "G3",
+   "level": "참고",
+   "item": "v33: 틀리는 경우·신호 개수",
+   "ok": true,
+   "detail": "틀림 5 · 신호 4"
+  },
+  {
+   "gate": "G1",
+   "level": "MUST",
+   "item": "v28: topic_brief hub_event — 시장을 흔든 사건이 있으면 중심축, 없으면 '없음: 이유' (03 §0-3)",
+   "ok": true,
+   "detail": "데이터센터를 짓는 빅테크 5곳, 3분기에 번 돈보다 더 썼다 — 틈은 회"
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "v28: 팩트시트 '## 파급 경로'·'## 주의할 점' (03 §0-3)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "v28: 여는 부분에 중심 사건 (03 §0-3)",
+   "ok": true,
+   "detail": "설비투자"
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "v26: 팩트시트 '## 매체 프레임' — 매체끼리 어떻게 다르게 읽었나 (제목·강조점·빠진 것, 03 §0-2)",
+   "ok": true,
+   "detail": "6곳"
+  },
+  {
+   "gate": "G3",
+   "level": "참고",
+   "item": "v26: 매체 프레임 범위 (국내·해외를 함께 보면 프레임 차이가 더 잘 보임)",
+   "ok": true,
+   "detail": "6곳"
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "v28: 매체 프레임에 '입장' 칸 (낙관·우려·중립, 03 §0-3)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "v26: 대본에 매체가 어떻게 다뤘나 + 말과 행동 맞대기 (03 §0-2)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "v36: 팩트시트 '## 인사이트' — 이름·직함 있는 사람·매체의 엇갈리는 해석(입장이 갈림), 원문·근거·출처 (09 §3-4)",
+   "ok": true,
+   "detail": "11줄 · 입장 ['낙관', '중립'] · 국내 ✓ 해외 ✓"
+  },
+  {
+   "gate": "G3",
+   "level": "MUST",
+   "item": "v36: 팩트시트 '## 영상 소스' — 인터뷰·방송 원본 후보 1줄+ (못 찾으면 '없음: 이유') (09 §3-5)",
+   "ok": true,
+   "detail": "2줄"
+  },
+  {
+   "gate": "G3",
+   "level": "SHOULD",
+   "item": "v42: 팩트시트 '## CEO 소식' — 오늘 이야기와 이어지는 경영진의 말·행동 1줄+, 원문·공시 출처 (09 §3-4-2)",
+   "ok": true,
+   "detail": "3줄"
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "v36: 대본에 인사이트 장면 (\"insight\": true — 화면에 '의견' 표시, 사실과 구분) (09 §3-4)",
+   "ok": true,
+   "detail": "8개"
+  },
+  {
+   "gate": "G4",
+   "level": "참고",
+   "item": "v36·v52: 인사이트 분량 — 유명인(이름난 투자자·경영자·당국자·석학)의 분석을 넉넉히 다뤘나 (국내 증권사는 필수 아님)",
+   "ok": true,
+   "detail": "장면 8 · 팩트시트 11줄 · 국내 ✓ 해외 ✓"
+  },
+  {
+   "gate": "G4",
+   "level": "SHOULD",
+   "item": "v36: 매체·인물의 원본 발언 장면(bite) 1개+ — 원본이 없으면 인용 카드로 그려짐 (09 §3-5)",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "gate": "G4",
+   "level": "MUST",
+   "item": "v27: 말로 숫자를 늘어놓는 순간 화면이 따라 바뀜 — 말은 많은데 화면이 멈춘 박자 없음 (manual/09 §6)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "제목·썸네일에 채널 이름(이어 읽는 시장) 없음 — 날짜만 (manual/09 §7)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G6",
+   "level": "SHOULD",
+   "item": "심층·분석 제목·썸네일에 날짜·'심층' 없음 — 브리핑에만 (manual/09 §7)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
    "gate": "G4",
    "level": "SHOULD",
    "item": "market: 끝에 확인할 신호(checklist)",
-   "ok": false,
-   "detail": "[]"
+   "ok": true,
+   "detail": "['chapter', 'checklist', 'outro']"
   },
   {
    "gate": "G4",
@@ -241,6 +437,139 @@
    "item": "말투: 말 걸기·감탄 표현 없음 (README §2-3, 참고용)",
    "ok": true,
    "detail": "[]"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "배경: 한 가지 바탕으로 고정하지 않음 — 장면이 하는 일이 바뀌면 바탕도 바뀜 (05 §0-2)",
+   "ok": true,
+   "detail": "['film', 'grid', 'photo', 'spot', 'tint']"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "배경: 같은 바탕이 이어지는 구간",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "반복 피로: 글씨·도형뿐인 장면이 이어지는 구간 — 자료·지도·그림으로 보여 줄 수 있는지 다시 볼 곳 (05 §0-3)",
+   "ok": false,
+   "detail": "최장 5연속 (장면 37)"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "장식 효과(dust·leak)를 쓴 장면 — 내용이 담긴 볼거리 대신 쓰지 않았는지 (05 §0-4)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "반복 피로: 볼거리(자료·지도·그림)가 있는 장면의 몫",
+   "ok": false,
+   "detail": "14/29"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "반복 피로: 같은 시각 효과가 이어지는 구간 (효과 종류 수는 채우지 않음 — 05 §0-5)",
+   "ok": true,
+   "detail": "[] 연속 []"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "바탕 계열: 같은 채널 직전 두 편과 같은 바탕 계열인지 (바꿔도 되고 이어 써도 됨 — 카테고리 얼굴 05 §0-7 이 먼저)",
+   "ok": true,
+   "detail": "이번 cream · 직전 []"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "v15: 카테고리 개성 — hybrid.json 에 brand (장 표지·인과 지도·듀오톤이 카테고리답게)",
+   "ok": true,
+   "detail": "market"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "v15: 장 표지 사진은 주제에 맞게 — 같은 사진 두 번 없음, 한 출처로 표지를 모두 때우지 않음",
+   "ok": false,
+   "detail": "표지 ['fed_figA', 'fed_until', 'fed_figA', 'fed_until', 'fed_figA', 'fed_until', 'fed_figA', 'fed_until'] · 가장 많은 출처 ('미국 연방준비제도 이사회 금융안정보고서 2026년 11월', 8)"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "반복 피로: 같은 채널 직전 편과 화면 구성이 얼마나 겹치나",
+   "ok": true,
+   "detail": "45%"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "같은 장면 type 이 이어지는 구간 — 하는 일이 바뀌었는데 화면이 같지 않나",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1)",
+   "ok": true,
+   "detail": "6종 ['data-report', 'explain-stage', 'hybrid-causal', 'paper-column', 'screen-zoom', 'statement-brief']"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "스타일 조합: 가장 많이 쓴 스타일의 몫·겹친 장면·같은 스타일 연속",
+   "ok": false,
+   "detail": "data-report 0.32 · 겹침 0 · 최장 연속 4"
+  },
+  {
+   "gate": "G5",
+   "level": "참고",
+   "item": "강조 횟수·강조가 겹친 장면 — 기억할 숫자·반전·결론에만 썼는지 (05 §0-1)",
+   "ok": true,
+   "detail": "0번 [] · 겹친 장면 []"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "핵심 단어 띄우기에 문장을 쓰지 않음 — 자막과 같은 내용을 위에 반복하지 않음 (v3)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "그래픽 팩이 브랜드에 맞는 스타일 등록부 안 (styles/recipes)",
+   "ok": true,
+   "detail": "paper-sketch / 등록부 ['blueprint', 'clean-flat', 'clean-white', 'corkboard', 'crumpled-paper', 'dark-doc', 'kinetic-poster', 'midnight', 'newsprint', 'none', 'paper-sketch']"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "style-pick 기록 (상황에 맞춘 스타일 선택)",
+   "ok": true,
+   "detail": "python -m ytflow style-pick <프로젝트>"
+  },
+  {
+   "gate": "G5",
+   "level": "MUST",
+   "item": "연출 결정 기록: 영상 방향·장면마다 고른 것·버린 대안·근거·의도, 같은 상황 같은 선택 (decide, 05 §0-9)",
+   "ok": true,
+   "detail": "python -m ytflow decide <프로젝트> → 02_script/DIRECTION_LOG.md"
+  },
+  {
+   "gate": "G5",
+   "level": "SHOULD",
+   "item": "edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움)",
+   "ok": true,
+   "detail": "python -m ytflow edit-plan <프로젝트> → 02_script/EDIT_CONTEXT.md"
   }
  ]
 }
