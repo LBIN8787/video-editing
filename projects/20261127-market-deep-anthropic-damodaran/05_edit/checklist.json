@@ -1,7 +1,7 @@
 {
  "project": "20261127-market-deep-anthropic-damodaran",
- "manual_version": "145",
- "checked": "2026-11-27T21:45:32",
+ "manual_version": "147",
+ "checked": "2026-11-27T23:21:51",
  "pass": true,
  "rows": [
   {
@@ -506,7 +506,7 @@
    "level": "참고",
    "item": "반복 피로: 같은 채널 직전 편과 화면 구성이 얼마나 겹치나",
    "ok": true,
-   "detail": "50%"
+   "detail": "56%"
   },
   {
    "gate": "G5",
@@ -520,14 +520,14 @@
    "level": "참고",
    "item": "자료 화면 없이 그래픽만 이어지는 가장 긴 구간",
    "ok": false,
-   "detail": "최장 896초"
+   "detail": "최장 901초"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "장 전환 없이 이어지는 가장 긴 구간",
    "ok": true,
-   "detail": "최장 168초"
+   "detail": "최장 173초"
   },
   {
    "gate": "G5",
@@ -625,7 +625,7 @@
    "level": "MUST",
    "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
    "ok": true,
-   "detail": "{'within_0_5s': 1.0, 'p95_abs_offset': 0.07, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.067}"
+   "detail": "{'within_0_5s': 1.0, 'p95_abs_offset': 0.1, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.033}"
   },
   {
    "gate": "G6",
@@ -639,7 +639,7 @@
    "level": "참고",
    "item": "움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5)",
    "ok": true,
-   "detail": "변화 16.0/분 · 정지 0.38"
+   "detail": "변화 15.3/분 · 정지 0.38"
   },
   {
    "gate": "G6",
