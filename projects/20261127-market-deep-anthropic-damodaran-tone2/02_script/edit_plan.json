@@ -1,0 +1,1365 @@
+{
+ "project": "20261127-market-deep-anthropic-damodaran",
+ "topic": "market",
+ "topic_name": "주식 · 시장",
+ "scenes": [
+  {
+   "scene": 1,
+   "type": "bite",
+   "chapter": 0,
+   "situation": "said",
+   "situation_name": "누가 말했다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "가치평가의 대가로 불리는 뉴욕대 교수 애스워스 다모다란. 상장한 앤트로픽의 값을 직접 계산한 그는, 그 값에서 가장 지켜볼 숫자 하나를 이렇게 말했습니다.",
+     "situations": [
+      "said"
+     ],
+     "hits": [
+      "말했"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bite",
+    "footage",
+    "quote"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "j-l-cut",
+     "status": "candidate"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "내레이션으로만 전하기",
+   "why": "그 사람의 목소리·원문이 증거 (source-cut, 03 §0-1)"
+  },
+  {
+   "scene": 2,
+   "type": "zoomshot",
+   "chapter": 0,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "earnings"
+   ],
+   "beats": [
+    {
+     "say": "그 앤트로픽 주가는 상장 첫날 97달러로 마감했다가, 11월 25일에는 82달러 79센트, 공모가 83달러 아래로 내려왔습니다. 다모다란이 공개한 평가표 맨 아래 칸, 그가 계산한 값은 주당 76달러 43센트. 주가가 그의 숫자 쪽으로 다가온 겁니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "주가"
+     ]
+    },
+    {
+     "say": "그 값은 이 칸에서 나옵니다. 10년 뒤 매출 1조 44억 달러. 그래서 이 영상의 질문은 하나입니다. 지금 이 값은 앞으로 얼마의 매출을 깔고 있을까요. 그리고 그 매출이 안 나오면, 누가 흔들릴까요.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 3,
+   "type": "kinetic",
+   "chapter": 0,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "earnings"
+   ],
+   "beats": [
+    {
+     "say": "결론부터 말하면, 그의 평가표를 거꾸로 풀면 지금 주가는 10년 뒤, 2036년 매출 약 1조 800억 달러를 깔고 있습니다. 그 길의 절반만 가면, 같은 계산으로 값은 3분의 1 남짓입니다.",
+     "situations": [
+      "metric",
+      "earnings"
+     ],
+     "hits": [
+      "주가",
+      "억 달러"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 4,
+   "type": "chapter",
+   "chapter": 1,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "먼저 다모다란이 어떤 이야기로 이 값을 만들었는지부터 보겠습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 5,
+   "type": "motionboard",
+   "chapter": 1,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "earnings",
+    "explain"
+   ],
+   "beats": [
+    {
+     "say": "그의 이야기는 이렇습니다. AI가 사무직의 일을 대신하면서 시장은 5조 달러 넘게 커지고, 앤트로픽은 그중 가장 비싼 자리, 기업용 시장을 차지한다.",
+     "situations": [
+      "metric",
+      "explain"
+     ],
+     "hits": [
+      "조 달러"
+     ]
+    },
+    {
+     "say": "그래서 10년 뒤 매출은 1조 달러, 영업이익률은 26.5%. 지금 세계에 매출 1조 달러를 넘는 회사는 하나도 없습니다. 가장 큰 아마존과 월마트가 7,000억 달러대입니다.",
+     "situations": [
+      "metric",
+      "earnings"
+     ],
+     "hits": [
+      "26.5%",
+      "억 달러",
+      "조 달러"
+     ]
+    },
+    {
+     "say": "이 이야기를 숫자로 풀어 지분 가치 1조 3,588억 달러, 주당 76달러 남짓이 나왔습니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "억 달러"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 6,
+   "type": "bars",
+   "chapter": 1,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "earnings",
+    "open-scene"
+   ],
+   "beats": [
+    {
+     "say": "그 길을 막대로 놓아 보겠습니다. 출발점은 최근 12개월 매출 352억 달러. 그는 내년에 거의 세 배, 1,023억 달러를 넣었습니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    },
+    {
+     "say": "5년차에 4,160억, 그리고 10년차인 2036년에 1조 44억 달러. 10년에 약 28배, 해마다 평균 40%씩 10년을 커야 하는 길입니다.",
+     "situations": [
+      "metric",
+      "open-scene"
+     ],
+     "hits": [
+      "40%",
+      "억 달러"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 7,
+   "type": "bite",
+   "chapter": 1,
+   "situation": "said",
+   "situation_name": "누가 말했다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "그 스스로도 이 길이 얼마나 가파른지 말합니다.",
+     "situations": [
+      "said"
+     ],
+     "hits": [
+      "말합니다"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bite",
+    "footage",
+    "quote"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "j-l-cut",
+     "status": "candidate"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "내레이션으로만 전하기",
+   "why": "그 사람의 목소리·원문이 증거 (source-cut, 03 §0-1)"
+  },
+  {
+   "scene": 8,
+   "type": "bite",
+   "chapter": 1,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "그리고 자기 숫자를 이렇게 부릅니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 9,
+   "type": "chapter",
+   "chapter": 2,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "question"
+   ],
+   "beats": [
+    {
+     "say": "왜 매출 하나가 이렇게 중요할까요. 그의 평가표 안을 열어 보면 이유가 보입니다.",
+     "situations": [
+      "earnings",
+      "question"
+     ],
+     "hits": [
+      "매출"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 10,
+   "type": "share",
+   "chapter": 2,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "earnings",
+    "open-scene"
+   ],
+   "beats": [
+    {
+     "say": "회사 가치를 계산하는 방법은 단순합니다. 앞으로 벌 현금을 지금 돈으로 바꿔 더하는 겁니다. 그의 표에서 그 합은 1조 7,279억 달러입니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "억 달러"
+     ]
+    },
+    {
+     "say": "그런데 쪼개 보면, 앞으로 10년 동안 버는 현금은 23%뿐이고, 77%는 10년이 지난 뒤의 가치입니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "23%"
+     ]
+    },
+    {
+     "say": "10년 뒤의 가치는 10년차 매출과 이익에서 나옵니다. 그래서 2036년 매출이 흔들리면 값의 4분의 3이 같이 흔들립니다. 그가 '매출이 안 오면 다 무너진다'고 한 이유입니다.",
+     "situations": [
+      "earnings",
+      "open-scene"
+     ],
+     "hits": [
+      "매출"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 11,
+   "type": "bars",
+   "chapter": 2,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric",
+    "question"
+   ],
+   "beats": [
+    {
+     "say": "여기서부터는 이 채널의 계산입니다. 그가 공개한 표를 그대로 다시 짜서 돌렸더니 주당 75달러 87센트, 그의 76달러와 1% 안으로 맞았습니다. 이 틀에서 다른 건 그대로 두고 매출 길만 바꿔 보겠습니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    },
+    {
+     "say": "10년차 매출 1조면 76달러. 8,000억이면 56달러, 6,000억이면 37달러입니다.",
+     "situations": [
+      "earnings"
+     ],
+     "hits": [
+      "매출"
+     ]
+    },
+    {
+     "say": "그의 길의 절반, 5,000억 달러면 27달러 50센트, 4,000억이면 18달러. 매출이 반이 되면 값은 3분의 1 남짓으로 줄어듭니다. 매출보다 값이 훨씬 크게 움직이는 겁니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    },
+    {
+     "say": "왜 이렇게 크게 움직일까요. 컴퓨트 약정 같은 큰 고정비와 빚은 매출이 줄어도 그대로 빼야 하기 때문입니다. 그가 처음 평가 때 그린 최악의 길, 10년 뒤 매출 2,000억 달러에서는 지분 가치가 마이너스 3,730억 달러, 회사가 버틸 수 없다고 적었습니다.",
+     "situations": [
+      "question",
+      "earnings"
+     ],
+     "hits": [
+      "왜 ",
+      "일까요"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 12,
+   "type": "motionboard",
+   "chapter": 2,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "earnings",
+    "compare"
+   ],
+   "beats": [
+    {
+     "say": "이번엔 거꾸로 풀어 봅니다. 11월 25일 주가 82달러 79센트를 이 틀에 넣으면, 2036년 매출이 약 1조 770억 달러여야 합니다.",
+     "situations": [
+      "metric",
+      "earnings"
+     ],
+     "hits": [
+      "주가",
+      "억 달러"
+     ]
+    },
+    {
+     "say": "그가 스스로 낙관의 모자를 썼다고 한 1조 달러보다 7% 정도 더 많고, 지금 세계에서 가장 많이 파는 회사들의 1.5배입니다. 공모가보다 내려왔어도, 주가는 여전히 가장 밝은 길을 조금 넘게 깔고 있는 셈입니다.",
+     "situations": [
+      "metric",
+      "compare"
+     ],
+     "hits": [
+      "7%",
+      "주가",
+      "조 달러"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 13,
+   "type": "chapter",
+   "chapter": 3,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [],
+   "beats": [
+    {
+     "say": "그럼 매출이 늦게 오면 무엇이 먼저 아플까요. 다모다란이 짚은 곳은 앤트로픽의 약정입니다.",
+     "situations": [
+      "earnings"
+     ],
+     "hits": [
+      "매출"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 14,
+   "type": "checklist",
+   "chapter": 3,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric",
+    "open-scene"
+   ],
+   "beats": [
+    {
+     "say": "앤트로픽이 상장하며 낸 투자설명서 원문입니다. 컴퓨트와 데이터센터에 약속한 돈이 모두 약 9,009억 달러. 그중 4,516억 달러는 2030년 말까지, 앞으로 12개월 안에만 707억 달러입니다.",
+     "situations": [
+      "metric",
+      "open-scene"
+     ],
+     "hits": [
+      "억 달러"
+     ]
+    },
+    {
+     "say": "그리고 회사는 이 계약 상당수가 실제로 쓰든 안 쓰든 내야 하는 계약이라고 적었습니다. 매출과 상관없이 나가는 고정비라는 뜻입니다.",
+     "situations": [
+      "earnings"
+     ],
+     "hits": [
+      "매출"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 15,
+   "type": "bite",
+   "chapter": 3,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "다모다란은 이것을 회사 재무의 첫 번째 원칙과 맞댑니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 16,
+   "type": "motionboard",
+   "chapter": 3,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "earnings"
+   ],
+   "beats": [
+    {
+     "say": "여기서부터는 이 채널의 계산입니다. 앞으로 12개월 약정 707억 달러를, 회사가 밝힌 10월 말 연 환산 매출 810억 달러와 나란히 놓으면, 약 87%입니다. 버는 돈의 9할 가까이가 이미 약속돼 있는 겁니다.",
+     "situations": [
+      "metric",
+      "earnings"
+     ],
+     "hits": [
+      "87%",
+      "억 달러"
+     ]
+    },
+    {
+     "say": "다모다란은 그래도 당장은 괜찮다고 봅니다. 상장 뒤 현금이 약 2,000억 달러라 앞으로 3년치 약정은 덮인다는 겁니다. 다만 조건을 붙였습니다. 그 3년 안에 매출이 아주 빨리 올라야 숨 쉴 틈이 된다고요. 아니면 다시 시장에 손을 벌려야 합니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 17,
+   "type": "quote",
+   "chapter": 3,
+   "situation": "question",
+   "situation_name": "질문·명제 한 줄을 던진다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "공정하게 덧붙이면, 그는 왜 이렇게 약속했는지도 이해한다고 했습니다. 컴퓨트가 귀해질 사업에서, 1년 전 오픈AI에 한참 뒤졌던 앤트로픽이 약정으로 따라잡고 앞질렀다는 겁니다. 성장할 때 쓸 자리를 미리 잡아 둔 셈입니다.",
+     "situations": [
+      "question"
+     ],
+     "hits": [
+      "왜 "
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "card_type",
+    "chapter"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "그림을 억지로 넣기",
+   "why": "질문은 글자 하나로 — 강조 예산 안에서 (05 §0-1)"
+  },
+  {
+   "scene": 18,
+   "type": "chapter",
+   "chapter": 4,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "같은 날, 정반대로 판단한 사람이 있습니다. 아크 인베스트의 캐시 우드입니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 19,
+   "type": "bite",
+   "chapter": 4,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "explain"
+   ],
+   "beats": [
+    {
+     "say": "상장 다음 날 CNBC에 나온 그는, 앤트로픽이 기업 시장을 사실상 차지하면서 확신이 시간이 갈수록 커졌다고 했습니다. 주가가 첫날 고점에서 내려오는 걸 보면서도 이렇게 덧붙였습니다.",
+     "situations": [
+      "metric",
+      "explain"
+     ],
+     "hits": [
+      "주가"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 20,
+   "type": "bite",
+   "chapter": 4,
+   "situation": "compare",
+   "situation_name": "둘을 비교한다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "그 근거는 값 대비 성능입니다. 같은 값이면 누가 가장 똑똑한 답을 내느냐를 이은 선, 그 맨 앞에 앤트로픽이 있다는 겁니다.",
+     "situations": [
+      "compare"
+     ],
+     "hits": [
+      "대비"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "versus",
+    "bars",
+    "compare"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "split-screen",
+     "status": "partial"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 나열",
+   "why": "같은 틀에 나란히"
+  },
+  {
+   "scene": 21,
+   "type": "checklist",
+   "chapter": 4,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric",
+    "open-scene"
+   ],
+   "beats": [
+    {
+     "say": "우드의 사슬은 이렇습니다. 기업 시장을 차지했고, 값 대비 성능의 맨 앞이니 비싸도 쓴다, 그러니 성장은 이어진다. 받치는 숫자는 있습니다. 1년에 10만 달러 넘게 쓰는 기업 고객이 950곳에서 11,900곳으로 늘었고, 연 환산 매출은 10월 한 달에만 100억 달러 늘었습니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    },
+    {
+     "say": "어긋나는 쪽은, 회사 스스로 투자설명서에 지금 같은 성장률이 이어질 거라 보지 않는다고 적었다는 점, 그리고 다모다란이 짚은 3분기 성장 둔화입니다. 하나 더, 우드는 2023년부터 이 회사를 가진 사람입니다. 판단에 이해관계가 걸려 있습니다.",
+     "situations": [
+      "earnings",
+      "open-scene"
+     ],
+     "hits": [
+      "분기"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 22,
+   "type": "chapter",
+   "chapter": 5,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "두 사람은 지금 성장이 크다는 데는 다르지 않습니다. 갈리는 곳은 한 고리, 값입니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 23,
+   "type": "bite",
+   "chapter": 5,
+   "situation": "said",
+   "situation_name": "누가 말했다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "다모다란은 오픈AI가 계속 값을 낮추고 있다고 짚은 뒤, 이렇게 말합니다.",
+     "situations": [
+      "said"
+     ],
+     "hits": [
+      "말합니다"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bite",
+    "footage",
+    "quote"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "j-l-cut",
+     "status": "candidate"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "내레이션으로만 전하기",
+   "why": "그 사람의 목소리·원문이 증거 (source-cut, 03 §0-1)"
+  },
+  {
+   "scene": 24,
+   "type": "versus",
+   "chapter": 5,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric",
+    "compare"
+   ],
+   "beats": [
+    {
+     "say": "정리하면 이렇습니다. 다모다란은 대부분의 기업에는 가장 비싼 모델이 과하다고 봅니다. 바퀴 넷 달린 차면 되는데 옵션을 다 단 차를 팔고 있다는 겁니다. 그러면 값을 내려야 하고, 매출이 늘어도 이익률 26.5%가 안 나옵니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    },
+    {
+     "say": "우드는 반대입니다. 값 대비 성능의 맨 앞이라 기업들이 비싸도 쓴다고 봅니다. 그러면 매출과 이익률이 함께 갑니다. 앞서 본 계산대로, 값은 매출과 이익률 둘 다에 크게 흔들립니다.",
+     "situations": [
+      "earnings",
+      "compare"
+     ],
+     "hits": [
+      "매출"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 25,
+   "type": "checklist",
+   "chapter": 5,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric",
+    "open-scene"
+   ],
+   "beats": [
+    {
+     "say": "판가름은 앤트로픽의 첫 분기 실적에서 납니다. 아직 날짜는 발표 전이지만, 관행대로라면 2027년 초입니다. 매출이 해마다 두 배 가까운 속도로 가는지가 다모다란의 길이고,",
+     "situations": [
+      "earnings",
+      "open-scene"
+     ],
+     "hits": [
+      "매출",
+      "실적",
+      "분기"
+     ]
+    },
+    {
+     "say": "같은 실적의 매출총이익률이 버티는지가 두 사람의 갈림길입니다. 그 사이에는 10월 말 810억 달러 다음에 나올 연 환산 매출이 속도를 먼저 알려 줄 겁니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출",
+      "실적"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 26,
+   "type": "chapter",
+   "chapter": 6,
+   "situation": "question",
+   "situation_name": "질문·명제 한 줄을 던진다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "그럼 이 이야기가 한국 계좌에는 어떻게 닿을까요. 사라 팔라는 말이 아니라, 무엇을 보면 되는지입니다.",
+     "situations": [
+      "question"
+     ],
+     "hits": [
+      "을까요"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "card_type",
+    "chapter"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "그림을 억지로 넣기",
+   "why": "질문은 글자 하나로 — 강조 예산 안에서 (05 §0-1)"
+  },
+  {
+   "scene": 27,
+   "type": "motionboard",
+   "chapter": 6,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "앤트로픽은 칩을 직접 만들지 않습니다. 투자설명서에 따르면 아마존의 트레이니엄, 구글의 TPU, 엔비디아와 AMD의 GPU를 씁니다. 그리고 이 가속기에는 하이닉스와 삼성이 만드는 고대역폭 메모리, HBM이 들어갑니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "여기서부터는 이 채널의 해석입니다. 2030년까지 약속한 4,516억 달러는 안 써도 내는 계약입니다. 그러니 이 몫의 칩과 메모리 주문은 앤트로픽의 다음 분기 매출에 바로 흔들리지 않습니다. 이미 묶여 있는 겁니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출",
+      "분기"
+     ]
+    },
+    {
+     "say": "매출에 달린 건 두 가지입니다. 하나, 그 약속을 끝까지 낼 수 있느냐. 다모다란은 실패 확률을 10%로 넣었습니다. 둘, 그다음 약정이 늘어나느냐. 매출이 다모다란의 길을 따라가면 컴퓨트를 더 사야 하고, 못 따라가면 새 약정이 줄어듭니다. 한국 메모리에 걸린 건 지금의 주문이 아니라",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 28,
+   "type": "checklist",
+   "chapter": 6,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "그래서 볼 숫자는 넷입니다. 첫째, 앤트로픽의 새 컴퓨트 약정. 9,009억 달러에 얼마가 더해지느냐가 메모리의 다음 몫입니다. 둘째, 첫 분기 실적의 매출 속도와 이익률.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출",
+      "실적",
+      "분기"
+     ]
+    },
+    {
+     "say": "셋째, 미국 계좌라면 아마존과 구글의 실적입니다. 아마존은 상장 뒤 앤트로픽 자본의 23.6%를 갖습니다. 주가가 곧 그 회사들의 평가손익입니다. 넷째, 주가와 다모다란의 76달러. 그는 많이 내려와야 사겠다고 했습니다.",
+     "situations": [
+      "metric",
+      "earnings"
+     ],
+     "hits": [
+      "23.6%",
+      "주가"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 29,
+   "type": "checklist",
+   "chapter": 6,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "say-vs-do",
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "틀리는 경우도 적어 두겠습니다. 연 환산 매출이 10월처럼 한 달에 100억 달러씩 계속 늘면, 그의 1년차 1,023억 달러는 일찍 넘습니다. 그러면 다모다란의 길이 오히려 보수적인 겁니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    },
+    {
+     "say": "반대로 값을 내리며 크면, 매출이 늘어도 이익률이 안 나와 우드가 틀립니다. 그리고 이 채널의 계산은 매출만 바꾼 단순 계산입니다. 실제로는 매출이 적으면 컴퓨트도 덜 사는 식으로 다른 숫자도 같이 움직입니다.",
+     "situations": [
+      "say-vs-do",
+      "earnings"
+     ],
+     "hits": [
+      "실제로는"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 30,
+   "type": "kinetic",
+   "chapter": 6,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [],
+   "beats": [
+    {
+     "say": "앤트로픽의 값은 기술이 아니라, 매출의 속도에 걸려 있습니다.",
+     "situations": [
+      "earnings"
+     ],
+     "hits": [
+      "매출"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 31,
+   "type": "outro",
+   "chapter": 6,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "next-week"
+   ],
+   "beats": [
+    {
+     "say": "처음으로 돌아가 보겠습니다. 다모다란은 매출이 안 오면 다 무너진다고 했고, 캐시 우드는 확신이 커졌다며 더 샀습니다. 지금 주가는 그가 낙관이라 부른 길보다 조금 더 밝은 길을 깔고 있습니다. 그렇다면 남는 질문은 이것입니다. 그 매출이 오는 속도를, 앤트로픽의 다음 약정과 한국 메모",
+     "situations": [
+      "earnings",
+      "next-week"
+     ],
+     "hits": [
+      "매출"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  }
+ ],
+ "coverage": 0.84,
+ "fit": 0.35,
+ "counts": {
+  "earnings": 12,
+  "metric": 8,
+  "said": 3,
+  "question": 2,
+  "compare": 1
+ },
+ "defaults": {
+  "zoom": "off",
+  "camera": "calm",
+  "bgm": "none",
+  "motion_beats": true
+ }
+}
