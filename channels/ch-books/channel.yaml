@@ -37,9 +37,15 @@ art:   # 2026-11-27 사용자: "차라리 삽화로 해주세요" → 형식별 
   check: "새 편 원화는 대표 장면 2~4장을 기준 그림과 나란히 먼저 보이고, 통과한 뒤 나머지를 그림."
   formats:
     story:     # ③ 명작 서사형
-      look: "유화풍 실사 — 따뜻하고 차분한 과슈·유화 붓 자국, 시대 고증이 있는 배경, 영화 같은 빛, 채도 낮게. 고전의 무게감"
-      prompt_style: "painterly storybook illustration in warm muted gouache/oil with visible brush texture, period-accurate setting, cinematic film-like lighting, slightly desaturated, realistic proportions, no text"
-      refs: ["refs/ch-books/story_style_open.png", "refs/ch-books/story_style_mind.png"]   # Google Drive ytflow/ 아래 (『죄와 벌』 예시)
+      # 2026-11-27 사용자: "해당 소설의 삽화 느낌으로 해주세요" — 채널 공통 그림체 대신, 작품마다 그 소설이 나온 시대·나라의 책 삽화 기법으로
+      look: "작품마다 다름 — 그 소설이 처음 읽히던 시대·나라의 책 삽화 기법(시대 기법만, 특정 삽화가의 그림을 베끼지 않음). 한 편 안에서는 한 기법으로 통일. 인물·배경은 시대 고증"
+      by_era:   # 편을 시작할 때 이 표에서 고르고, 첫 2~4장을 먼저 승인받아 그 편의 기준 그림으로 씀
+        "19세기 러시아 (죄와 벌·안나 카레니나)": "pen-and-ink with cross-hatching and light sepia wash, wood-engraving look on aged cream paper, restrained chiaroscuro"
+        "20세기 초 독일어권 (데미안·변신)": "expressionist black-and-white woodcut / linocut, bold carved shapes, stark contrast, a single muted accent color"
+        "1920년대 미국 (위대한 개츠비)": "1920s art deco magazine illustration, flat elegant shapes, gold and deep teal, geometric ornament"
+        "20세기 중반 (노인과 바다·이방인)": "mid-century book illustration, gouache and ink with limited palette, strong sunlight and shadow"
+      prompt_style_example: "a 19th-century Russian novel book illustration as printed in an 1870s edition: fine pen-and-ink with cross-hatching and a light sepia wash, wood-engraving look on aged cream paper, restrained chiaroscuro, realistic period figures; a generic period technique, not a copy of any specific artist; no text"
+      refs: ["refs/ch-books/crime_and_punishment_open.png", "refs/ch-books/crime_and_punishment_mind.png"]   # Google Drive ytflow/ 아래 — 『죄와 벌』 편 기준 그림 (작품마다 새로 정함)
       overlays: "생각 풍선(손글씨)·인물 카드(원하는 것/두려운 것)·결말 포함 표시·밑줄 인용·페이지 넘김"
       footage: "영화·드라마 장면 쓰지 않음 (권리) — 삽화만"
     question:  # ② 질문형
