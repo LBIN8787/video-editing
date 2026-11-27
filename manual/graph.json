@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated": "2026-11-27T21:53:57",
- "source_hash": "a420823454df",
+ "generated": "2026-11-27T22:08:44",
+ "source_hash": "dc6d3f4aacc7",
  "audit": {
   "date": "2026-11-27T01:04",
   "counts": {
@@ -814,35 +814,35 @@
   "fixed": []
  },
  "stats": {
-  "manual_version": 146,
-  "versions": 146,
+  "manual_version": 147,
+  "versions": 147,
   "reviews": 61,
   "rejects": 33,
   "passes": 28,
   "pending": 0,
   "rules": 57,
   "checks": 90,
-  "sections": 228,
+  "sections": 229,
   "must": 30,
   "auto": 41,
-  "intents": 419,
+  "intents": 420,
   "misaligned": 1,
   "intents_reviewed": 7,
   "conflicts": 3,
   "code": 85,
   "terms": 140,
-  "bans": 257,
+  "bans": 264,
   "feedback": 323,
   "topics": 4,
   "episodes": 61,
   "main_situations": 17,
   "tiers": {
    "principle": 60,
-   "standard": 205,
-   "style": 37,
-   "trial": 12
+   "standard": 210,
+   "style": 38,
+   "trial": 13
   },
-  "overfit": 19,
+  "overfit": 20,
   "principle_bans": 54
  },
  "pending": [],
@@ -932,6 +932,12 @@
      "theme": "background",
      "pol": "-",
      "text": "- 넘치면: 결론만 던지고 근거가 얇으면 '유명인 말 전달' 영상이 된다 — 근거와 틀릴 경우가 결론보다 길어야 한다. 이름값에 기대 확인 안 된 말을 결론으로 쓰지 않는다(원문 확인, §3-5). 모자라면: 앞에서 배경·개념을 길게 깔면 '그래서 결론이 뭐야?'에 답하지 못해 떠난다."
+    },
+    {
+     "section": "sec:09§5-00-1",
+     "theme": "background",
+     "pol": "-",
+     "text": "8. **바탕 톤은 빅테크 빚 편과 같게.** 설명·장 표지·발언 화면은 먹색 기본, 체크리스트·막대·비교는 `dark-doc`이다. 큰 글자 키네틱과 베이지 `newsprint`는 쓰지 않는다. 체크리스트 오른쪽 자동 아이콘이 뜻 없이 겹치면 `g_skip: true`로 끈다(README §2-6)."
     },
     {
      "section": "sec:09§7",
@@ -3582,6 +3588,135 @@
    "tier_label": "스타일 기본값"
   },
   {
+   "section": "sec:09§5-00-1",
+   "text": "1. 원본 전체를 받아 받아쓰기부터. 발언 구간을 문장 하나로 미리 정해 받지 않는다. 그 사람이 나온 원본(인터뷰·팟캐스트·방송)을 통째로 받아 단어 시각까지 받아쓴다(yt_dlp 720p, faster-whisper word_timestamps). 그다음 주장 단위로 구간을 고른다.",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:1523360b",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§5-00-1",
+   "text": "이어진 문장은 한 구간으로 두고 자막만 문장마다 나눈다. cuts.json 항목 하나에 subs: [{\"t\": 0, \"ko\": …, \"en\": …}, …]를 쓰면 점프 컷도 효과음도 들어가지 않는다.",
+   "themes": [
+    "sound",
+    "emphasis"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:9d38addd",
+   "tier_auto": "style",
+   "why": "소리·카메라·바탕·스타일 비율에 관한 말 — 기본값",
+   "overfit": false,
+   "single": true,
+   "tier": "style",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "스타일 기본값"
+  },
+  {
+   "section": "sec:09§5-00-1",
+   "text": "4. 발언 앞 내레이션은 한 문장. 누가·어디서·무슨 질문에 대한 답인지만 말한다. 예: \"상장 다음 날, 주가가 첫날 고점에서 내려오던 때 CNBC에 나온 그는 이렇게 말했습니다.\" 그가 할 말을 미리 요약하지 않는다. 발언 뒤 설명도 그가 방금 한 말을 되풀이하지 않는다. 대본을 고쳐 쓸 때 그 사람이 이미 말한 문장은 내레이션에서 뺀다.",
+   "themes": [
+    "script"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:759be32c",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§5-00-1",
+   "text": "방송사 화면처럼 자체 자막 띠가 있으면 clip.vf: \"scale=1664:936,pad=1920:1080:128:0:color=0x15171c\"로 화면을 위쪽에 줄여 두고, 아래 띠를 우리 자막 자리로 쓴다. 이때 이름표·영어 줄은 끈다(show_lower: false, show_en: false). 방송 화면이 이미 이름을 보여 주기 때문이다.",
+   "themes": [
+    "emphasis"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:c257c855",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§5-00-1",
+   "text": "원본이 있는 발언은 인용 카드로 만들지 않는다.",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:754f4866",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
+   "section": "sec:09§5-00-1",
+   "text": "8. 바탕 톤은 빅테크 빚 편과 같게. 설명·장 표지·발언 화면은 먹색 기본, 체크리스트·막대·비교는 dark-doc이다. 큰 글자 키네틱과 베이지 newsprint는 쓰지 않는다. 체크리스트 오른쪽 자동 아이콘이 뜻 없이 겹치면 g_skip: true로 끈다(README §2-6).",
+   "themes": [
+    "background",
+    "emphasis"
+   ],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:c201e123",
+   "tier_auto": "trial",
+   "why": "스타일 말인데 영상 한 편의 반응에서 금지·MUST 가 됨",
+   "overfit": true,
+   "single": true,
+   "tier": "trial",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "실험 기록"
+  },
+  {
+   "section": "sec:09§5-00-1",
+   "text": "넘치면: 발언이 길어도 원본끼리 바로 붙이지 않는다. 발언 사이에는 반드시 의문에 답하는 설명이 온다. 해설 시간이 원본보다 길게 유지된다(견본: 발언 6분 / 전체 15분).",
+   "themes": [],
+   "absolute": false,
+   "must": false,
+   "tier_key": "ban:f15f788b",
+   "tier_auto": "standard",
+   "why": "제작 방법·품질 기준",
+   "overfit": false,
+   "single": true,
+   "tier": "standard",
+   "tier_by": "자동 추정",
+   "tier_note": "",
+   "tier_fixed": false,
+   "tier_label": "작업 기준"
+  },
+  {
    "section": "sec:09§5-0",
    "text": "넘치면/모자라면: 원리 없이 사례·숫자만 이어지면 정보 나열이 되고(브리핑과 같아짐), '이러면 좋다·나쁘다' 표는 외우는 공식이 된다. 반대로 원리 설명만 길고 숫자·사례로 확인하지 않으면 주장과 구분되지 않는다. 계산은 앞에서 세운 원리로 '증명'하고, 결론은 그 계산의 끝에서 말한다.",
    "themes": [],
@@ -4287,7 +4422,7 @@
    "tier_label": "영구 원칙"
   },
   {
-   "section": "sec:09§h589",
+   "section": "sec:09§h618",
    "text": "ElevenLabs 는 직접 API 로만 (MCP 생성 금지, 2026-11-22 사용자): 같은 문장(33자, Teo·eleven_v4)을 실측: 직접 API 15 크레딧(응답 헤더 Character-Cost) vs MCP creative_generate_speech 1테이크 33 크레딧·기본 2테이크 66 크레딧(estimate_only) — MCP 가 1테이크도 2.2배, 기본값이면 4.4배 (AGENTS 목소리 규칙, docs/08-voice.md).",
    "themes": [
     "sound"
@@ -4306,7 +4441,7 @@
    "tier_label": "작업 기준"
   },
   {
-   "section": "sec:09§h589",
+   "section": "sec:09§h618",
    "text": "ElevenLabs 를 쓸 수 없는 날은 edge 초안으로 만들되 올리지 않는다 (v43, §2-1 — 공개본은 Teo). 크레딧이 모자라면 그날 편을 미루거나 voice-import 로 Teo 테이크를 만든다.",
    "themes": [],
    "absolute": false,
@@ -5570,14 +5705,14 @@
   },
   {
    "section": "sec:README§2-7",
-   "text": "어떻게: ① 발언 구간 하나에 주장 하나가 처음부터 끝까지(주장 → 이유 → 그래서) 담기게 자른다. 이어진 문장은 점프 컷 없이 한 구간으로 두고 자막만 문장마다 나눈다(cuts.json 의 subs). ② 발언 앞 내레이션은 누가·어떤 자리에서 정도만 짧게 하고, 그가 할 말을 미리 요약하지 않는다. ③ 설명은 그 말을 듣고 시청자에게 실제로 의문이 생길 곳에서만 한다(낯선 숫자·용어, 그 주장이 맞는지 따질 근거). ④ 원본 영상이 있는 발언은 인용 카드로",
+   "text": "어떻게 (만드는 순서는 [09 §5-00-1](09-market-daily.md) 견본): ① 발언 구간 하나에 주장 하나가 처음부터 끝까지(주장 → 이유 → 그래서) 담기게 자른다. 이어진 문장은 점프 컷 없이 한 구간으로 두고 자막만 문장마다 나눈다(cuts.json 의 subs). ② 발언 앞 내레이션은 누가·어떤 자리에서 정도만 짧게 하고, 그가 할 말을 미리 요약하지 않는다. ③ 설명은 그 말을 듣고 시청자에게 실제로 의문이 생길 곳에서만 한다(낯선 숫",
    "themes": [
     "emphasis",
     "intent"
    ],
    "absolute": false,
    "must": false,
-   "tier_key": "ban:59f19006",
+   "tier_key": "ban:3c74b464",
    "tier_auto": "standard",
    "why": "제작 방법·품질 기준",
    "overfit": false,
@@ -6127,7 +6262,7 @@
    "key": "09",
    "file": "manual/09-market-daily.md",
    "label": "09. 이어 읽는 시장 — 매일 운영 매뉴얼 (v19, 2026-11-13 · v36 인사이트·영상 소스 · v42 기술 분석·CEO 소식 2026-11-17)",
-   "lines": 609,
+   "lines": 638,
    "versions": [
     19,
     24,
@@ -6286,9 +6421,10 @@
     130,
     131,
     142,
-    143
+    143,
+    146
    ],
-   "last_version": 143
+   "last_version": 146
   },
   {
    "id": "doc:feedback",
@@ -8476,6 +8612,29 @@
    ]
   },
   {
+   "id": "sec:09§5-00-1",
+   "kind": "section",
+   "doc": "doc:09",
+   "num": "5-00-1",
+   "level": 3,
+   "label": "인터뷰 중심 분석 영상 만드는 순서 — 견본: 다모다란 편 2판 (작업 기준, 2026-11-27 사용자: \"이 영상을 만든대로 메뉴얼 작성하세요\")",
+   "title": "5-00-1. 인터뷰 중심 분석 영상 만드는 순서 — 견본: 다모다란 편 2판 (작업 기준, 2026-11-27 사용자: \"이 영상을 만든대로 메뉴얼 작성하세요\")",
+   "line": 396,
+   "end": 424,
+   "tag_version": null,
+   "versions": [
+    147
+   ],
+   "last_version": 147,
+   "terms": [
+    "term:zoomshot",
+    "term:skin-dark-doc",
+    "term:skin-newsprint",
+    "term:style-explain-stage",
+    "term:tech-split-screen"
+   ]
+  },
+  {
    "id": "sec:09§5-0",
    "kind": "section",
    "doc": "doc:09",
@@ -8483,8 +8642,8 @@
    "level": 3,
    "label": "원리에서 결론이 따라 나오게 — 외우게 하지 않는다 (작업 기준, 2026-11-22 사용자)",
    "title": "5-0. 원리에서 결론이 따라 나오게 — 외우게 하지 않는다 (작업 기준, 2026-11-22 사용자)",
-   "line": 396,
-   "end": 404,
+   "line": 425,
+   "end": 433,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -8500,8 +8659,8 @@
    "level": 3,
    "label": "만약에 검수 — 빠진 변수·다른 경우·숨은 가정 (작업 기준, 2026-11-22 사용자: \"제가 매번 만략에 만약에 등 경우의수나 다른 변수요인 등을 찾듯이 시장 대본을 구성 할 때는 이점을 항상 고려하고 검수해주세요. 특히나 심층분석은 이게 중요합니다. 사소한 디테일이나 빼먹은 요인 if가정 말이죠\")",
    "title": "5-0-1. 만약에 검수 — 빠진 변수·다른 경우·숨은 가정 (작업 기준, 2026-11-22 사용자: \"제가 매번 만략에 만약에 등 경우의수나 다른 변수요인 등을 찾듯이 시장 대본을 구성 할 때는 이점을 항상 고려하고 검수해주세요. 특히나 심층분석은 이게 중요합니다. 사소한 디테일이나 빼먹은 요인 if가정 말이죠\")",
-   "line": 405,
-   "end": 420,
+   "line": 434,
+   "end": 449,
    "tag_version": null,
    "versions": [
     96
@@ -8516,8 +8675,8 @@
    "level": 3,
    "label": "큰 주제는 1부(개념)·2부(인사이트)로 (작업 기준, 2026-11-22 사용자: \"2부로 만들어도 되니까 이 메모리호황을 보는 인사이트와 그 인터뷰내용과 명확한 논리근거 그 반대근거 등등 여러 인사이트로 확장해주세요\" · \"즉 지금은 약간 개념설명이고 이 개념을 바탕으로 진짜 인사이트와 각각의 근거까지 이어가자 입니다\" · \"이런 심층분석은 이 주제에 대한 다른 사람들의 인사이트 여러 인사이트로 볼 수 있어야 합니다. 그리고 가능한 이 발언이 담긴 영상소스를 넣어달라 했구요\")",
    "title": "5-0-2. 큰 주제는 1부(개념)·2부(인사이트)로 (작업 기준, 2026-11-22 사용자: \"2부로 만들어도 되니까 이 메모리호황을 보는 인사이트와 그 인터뷰내용과 명확한 논리근거 그 반대근거 등등 여러 인사이트로 확장해주세요\" · \"즉 지금은 약간 개념설명이고 이 개념을 바탕으로 진짜 인사이트와 각각의 근거까지 이어가자 입니다\" · \"이런 심층분석은 이 주제에 대한 다른 사람들의 인사이트 여러 인사이트로 볼 수 있어야 합니다. 그리고 가능한 이 발언이 담긴 영상소스를 넣어달라 했구요\")",
-   "line": 421,
-   "end": 429,
+   "line": 450,
+   "end": 458,
    "tag_version": null,
    "versions": [
     114
@@ -8532,8 +8691,8 @@
    "level": 3,
    "label": "나열하지 말고 풀어서 — 설명은 움직이는 장면으로",
    "title": "5-1. 나열하지 말고 풀어서 — 설명은 움직이는 장면으로 (v63, 2026-11-20)",
-   "line": 430,
-   "end": 464,
+   "line": 459,
+   "end": 493,
    "tag_version": 63,
    "versions": [
     63,
@@ -8566,8 +8725,8 @@
    "level": 2,
    "label": "화면 문법 (시장 카테고리 개성, `05 §0-7`)",
    "title": "6. 화면 문법 (시장 카테고리 개성, `05 §0-7`)",
-   "line": 465,
-   "end": 488,
+   "line": 494,
+   "end": 517,
    "tag_version": null,
    "versions": [
     27,
@@ -8602,8 +8761,8 @@
    "level": 2,
    "label": "제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
    "title": "7. 제목·썸네일 (`prompts/thumbnail.md` + 시장판)",
-   "line": 489,
-   "end": 498,
+   "line": 518,
+   "end": 527,
    "tag_version": null,
    "versions": [
     27
@@ -8623,8 +8782,8 @@
    "level": 3,
    "label": "썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
    "title": "7-1. 썸네일 방식 (2026-11-19 사용자: \"앞으로 썸네일 생성 전에 어떤 키워드가 핫한지 바탕으로 작성해줘 제목도\" · \"썸네일 방식 커밋하세요\")",
-   "line": 499,
-   "end": 534,
+   "line": 528,
+   "end": 563,
    "tag_version": null,
    "versions": [
     51,
@@ -8646,8 +8805,8 @@
    "level": 2,
    "label": "렌더 전 점검",
    "title": "8. 렌더 전 점검",
-   "line": 535,
-   "end": 537,
+   "line": 564,
+   "end": 566,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8660,8 +8819,8 @@
    "level": 2,
    "label": "렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
    "title": "9. 렌더 뒤 확인 (사람 눈 — 빠뜨리지 않기)",
-   "line": 538,
-   "end": 545,
+   "line": 567,
+   "end": 574,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8674,8 +8833,8 @@
    "level": 3,
    "label": "업로드 전 종합 검수 — 통과해야 올린다 (작업 기준, 2026-11-21 사용자: \"업로드 하기 전 항상 글씨겹침 그래픽끼리 겹침 자막밀림 자막과 나레이션 싱크 화면과 자막이 일치하는지 등 종합적으로 검수하세요 이는 메뉴얼에 반영하세요\")",
    "title": "9-1. 업로드 전 종합 검수 — 통과해야 올린다 (작업 기준, 2026-11-21 사용자: \"업로드 하기 전 항상 글씨겹침 그래픽끼리 겹침 자막밀림 자막과 나레이션 싱크 화면과 자막이 일치하는지 등 종합적으로 검수하세요 이는 메뉴얼에 반영하세요\")",
-   "line": 546,
-   "end": 553,
+   "line": 575,
+   "end": 582,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8688,8 +8847,8 @@
    "level": 2,
    "label": "업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
    "title": "10. 업로드 (자동: `yt-pack` → `upload` → `yt-publish`)",
-   "line": 554,
-   "end": 566,
+   "line": 583,
+   "end": 595,
    "tag_version": null,
    "versions": [
     34
@@ -8704,8 +8863,8 @@
    "level": 2,
    "label": "기록·되돌아보기",
    "title": "11. 기록·되돌아보기",
-   "line": 567,
-   "end": 570,
+   "line": 596,
+   "end": 599,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8718,8 +8877,8 @@
    "level": 2,
    "label": "예외 대응",
    "title": "12. 예외 대응",
-   "line": 571,
-   "end": 580,
+   "line": 600,
+   "end": 609,
    "tag_version": null,
    "versions": [],
    "last_version": null
@@ -8732,8 +8891,8 @@
    "level": 2,
    "label": "법·정책",
    "title": "13. 법·정책",
-   "line": 581,
-   "end": 588,
+   "line": 610,
+   "end": 617,
    "tag_version": null,
    "versions": [
     34
@@ -8741,43 +8900,43 @@
    "last_version": 34
   },
   {
-   "id": "sec:09§h589",
+   "id": "sec:09§h618",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h589",
+   "num": "h618",
    "level": 2,
    "label": "목소리 (2026-11-13 결정)",
    "title": "목소리 (2026-11-13 결정)",
-   "line": 589,
-   "end": 597,
+   "line": 618,
+   "end": 626,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h598",
+   "id": "sec:09§h627",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h598",
+   "num": "h627",
    "level": 2,
    "label": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
    "title": "유튜브 올리기·관리 자동화 (2026-11-13, docs/24)",
-   "line": 598,
-   "end": 603,
+   "line": 627,
+   "end": 632,
    "tag_version": null,
    "versions": [],
    "last_version": null
   },
   {
-   "id": "sec:09§h604",
+   "id": "sec:09§h633",
    "kind": "section",
    "doc": "doc:09",
-   "num": "h604",
+   "num": "h633",
    "level": 2,
    "label": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
    "title": "요약 + 움직이는 그림 (2026-11-13 사용자 확정 방향, docs/25 §8)",
-   "line": 604,
-   "end": 609,
+   "line": 633,
+   "end": 638,
    "tag_version": null,
    "versions": [],
    "last_version": null,
@@ -17471,6 +17630,25 @@
    "applied": [],
    "themes": [
     "background"
+   ],
+   "commit": {
+    "sha": "b1d3b556b695652aff9c56251062adaa2b82dc01",
+    "subject": "매뉴얼 v146: 인터뷰는 본인 영상으로 주장 전체를 먼저·'가설' 표기(모든 채널)·바탕 톤 통일·한국 고리는 자연스러울 때만·썸네일 확정 글씨",
+    "date": "2026-11-27",
+    "other_files": []
+   }
+  },
+  {
+   "id": "ver:147",
+   "kind": "version",
+   "v": 147,
+   "date": "2026-11-27",
+   "label": "v147",
+   "summary": "인터뷰 중심 분석 영상 만드는 순서(09 §5-00-1, 견본: 다모다란 편 2판) — 원본 전체 받아쓰기 → 주장 단위 구간 → 발언·의문·설명 → 가설 → 원본 화면 배치 → 바탕 톤 → 썸네일 → 무료 판 확인 뒤 더빙·교체",
+   "applied": [],
+   "themes": [
+    "background",
+    "depth"
    ]
   },
   {
@@ -38153,6 +38331,39 @@
    "annotated": false
   },
   {
+   "id": "intent:5d6cc885",
+   "kind": "intent",
+   "quote": "이 영상을 만든대로 메뉴얼 작성하세요",
+   "label": "이 영상을 만든대로 메뉴얼 작성하세요",
+   "versions": [],
+   "date": "2026-11-27",
+   "sources": [
+    {
+     "ref": "sec:09§5-00-1",
+     "kind": "manual"
+    }
+   ],
+   "variants": [],
+   "member_ids": [
+    "intent:5d6cc885"
+   ],
+   "themes": [],
+   "ann_key": "intent:5d6cc885",
+   "meaning": "",
+   "not_meant": [],
+   "note": "",
+   "readings": [
+    {
+     "ref": "sec:09§5-00-1",
+     "status": "unreviewed",
+     "note": "",
+     "by": ""
+    }
+   ],
+   "status": "unreviewed",
+   "annotated": false
+  },
+  {
    "id": "intent:74bd13ec",
    "kind": "intent",
    "quote": "그리고 현재 인터뷰부분? 영상부분 주장부분이 너무 짧아서 이사람들이 무얼 말하고자 하는지 확실히 인식하기 힘든 것 같아요",
@@ -38855,6 +39066,7 @@
    "mentioned_in": [
     "sec:05§0-3",
     "sec:05§2",
+    "sec:09§5-00-1",
     "sec:10§h37",
     "sec:10§5"
    ],
@@ -41295,6 +41507,7 @@
     "sec:05§1",
     "sec:05§5",
     "sec:08§4",
+    "sec:09§5-00-1",
     "sec:10§h159",
     "sec:README§2-6"
    ]
@@ -41479,6 +41692,7 @@
     "sec:05§0-1",
     "sec:05§1",
     "sec:05§5",
+    "sec:09§5-00-1",
     "sec:10§h159",
     "sec:README§2-6"
    ]
@@ -42184,6 +42398,7 @@
     "sec:03§2",
     "sec:05§2",
     "sec:09§2-0",
+    "sec:09§5-00-1",
     "sec:09§5-1",
     "sec:09§6",
     "sec:10§3",
@@ -44028,6 +44243,7 @@
     "sec:05§0-2",
     "sec:09§3-4",
     "sec:09§3-5",
+    "sec:09§5-00-1",
     "sec:10§h81",
     "sec:10§4",
     "sec:11§2-5",
@@ -44735,7 +44951,7 @@
     "sec:04§0-4",
     "sec:09§5-1",
     "sec:09§6",
-    "sec:09§h604",
+    "sec:09§h633",
     "sec:11§2-4",
     "sec:README§2-5",
     "sec:README§3-1",
@@ -45062,7 +45278,7 @@
     "sec:06§G6",
     "sec:08§4",
     "sec:09§6",
-    "sec:09§h604",
+    "sec:09§h633",
     "sec:10§4",
     "sec:feedback§h167",
     "sec:README§0",
@@ -89277,6 +89493,11 @@
   },
   {
    "s": "doc:09",
+   "t": "sec:09§5-00-1",
+   "kind": "contains"
+  },
+  {
+   "s": "doc:09",
    "t": "sec:09§5-0",
    "kind": "contains"
   },
@@ -89347,17 +89568,17 @@
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h589",
+   "t": "sec:09§h618",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h598",
+   "t": "sec:09§h627",
    "kind": "contains"
   },
   {
    "s": "doc:09",
-   "t": "sec:09§h604",
+   "t": "sec:09§h633",
    "kind": "contains"
   },
   {
@@ -93984,6 +94205,22 @@
    ]
   },
   {
+   "s": "ver:146",
+   "t": "doc:14",
+   "kind": "touched",
+   "via": [
+    "git"
+   ]
+  },
+  {
+   "s": "ver:147",
+   "t": "sec:09§5-00-1",
+   "kind": "touched",
+   "via": [
+    "changelog"
+   ]
+  },
+  {
    "s": "rev:1",
    "t": "ver:3",
    "kind": "applied_in",
@@ -95384,6 +95621,16 @@
   {
    "s": "ver:146",
    "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "ver:147",
+   "t": "theme:background",
+   "kind": "about"
+  },
+  {
+   "s": "ver:147",
+   "t": "theme:depth",
    "kind": "about"
   },
   {
@@ -100325,6 +100572,11 @@
    "s": "intent:b0441ed1",
    "t": "theme:script",
    "kind": "about"
+  },
+  {
+   "s": "intent:5d6cc885",
+   "t": "sec:09§5-00-1",
+   "kind": "quoted_in"
   },
   {
    "s": "intent:2925f768",
