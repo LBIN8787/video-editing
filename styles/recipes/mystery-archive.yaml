@@ -1,0 +1,17 @@
+id: mystery-archive
+name: "미스터리 역사 사건 파일 (실제 자료 + 구절마다 컷 + 잔잔한 배경음악)"
+status: demo                 # 시험작: 소현세자의 죽음 v3 (사용자 "이 매뉴얼 템플릿을 미스테리로 기록하고 보관하세요" 2026-11-28) — 업로드·통과 판정 전
+renderer: hyperframes        # styles/mystery-archive/engine/build_v3.py (HyperFrames HTML 생성)
+skin: mystery-archive        # 깨끗한 어두운 바탕(#111317) + 사료 글자 무늬, 강조색 하나(#e8503a), 글꼴 맑은고딕 Bold·바탕
+format: [longform]
+owns: [case_file, clue_tracker, verdict_table]
+scene_types: [real_photo, broll_video, ai_reconstruction, archive_paper, case_file, clue_tracker, evidence_board, map_route, family_tree, verdict_table]
+fits:
+  brands: [curiosity]
+  questions: [숨은 장면, 과거 사례, 원인]
+  moods: [긴장, 과거, 위기]
+  needs: [archive, map]
+roles: [whole]
+avoid: "기록·사진이 거의 없는 주제(실제 자료 카드가 5장 미만이면 재현 그림이 화면을 채워 v1 처럼 정적이 됨) / 숫자 비교가 핵심인 주제 / 이야기형(story-only) 대본 — 단서·판정 구조가 없는 편"
+demo: "20261126-history-sohyeon"
+skill: ""
