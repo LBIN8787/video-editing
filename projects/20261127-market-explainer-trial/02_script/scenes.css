@@ -1,0 +1,12 @@
+/* 시장 채널(이어 읽는 시장) 색: 검은 배경 카드 · 빨강(앞 10년) · 파랑(10년 뒤) · 겨자(강조) */
+:root{--base:#1C2024;--grid:#22272C;--ink:#F2EEE6;--accent:#E5534B;--teal:#6E9BEA;--marker:#E3A93B;--muted:#9AA3AA;--line:#3A4148}
+html,body{background:var(--base);color:var(--ink)}
+#vig{background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,.35) 100%)}
+.card{background:#262B31;border:2px solid #59626B;box-shadow:0 12px 30px rgba(0,0,0,.35);color:var(--ink)}
+#logo{display:none}
+#chap{left:40px;right:auto;background:#262B31;color:var(--ink);border-color:#59626B}
+#chap b{background:var(--accent)}
+#srcl{position:absolute;left:40px;top:92px;font-size:20px;color:#AEB6BC;font-weight:600;max-width:1300px;z-index:5;line-height:1.35}
+#srcl b{color:var(--marker);font-weight:800;margin-right:8px}
+.ctitle{font-family:"Noto Serif KR",serif;font-size:84px;letter-spacing:0;top:150px}
+.hl{background:linear-gradient(transparent 60%,rgba(227,169,59,.55) 60%)}
