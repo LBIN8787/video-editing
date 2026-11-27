@@ -99,7 +99,7 @@ def align_tokens(e):
 
 SUB_MAX = 30 if plan.get("subtitle") == "plain" else 40      # v2: 레퍼런스처럼 짧게 끊음
 SUB_COMMA = 12 if plan.get("subtitle") == "plain" else 24
-SUB_WRAP = 18 if plan.get("subtitle") == "plain" else 22
+SUB_WRAP = 26 if plan.get("subtitle") == "plain" else 22   # 레퍼런스: 한 줄 26자 안팎까지
 def chunks(e):
     out, cur = [], []
     def flush():
