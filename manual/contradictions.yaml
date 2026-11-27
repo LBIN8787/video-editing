@@ -6,8 +6,8 @@
 #       status: open(사용자 판단 필요 → manual-audit 의 '물어볼 것') | decided(답을 decision 에 적음 → '고칠 것') | resolved(고침) | kept(범위가 달라 둘 다 유지, 사용자 확인)
 # 낡은 쪽이 분명하면(더 새 버전·날짜의 매뉴얼 규칙이 대체) 바로 고치고 resolved 로 적습니다. 사용자 원문(feedback·reviews·인용)은 고치지 않습니다.
 # 정기 작업(예약된 작업) 지시문은 저장소 밖에 있으므로 file 에 "schedule:<작업 이름>" 으로 적습니다.
-last_sweep: '2026-11-20'
-last_commit: a822f1ebbf3ff4780ba0a3fd9b32912595c446de
+last_sweep: '2026-11-27'
+last_commit: f9c3cda480606906e63b7e87e4f1475ce4cd0ad4
 items:
 - id: c-20261120-01
   found: '2026-11-20'
@@ -745,3 +745,185 @@ items:
   fix: 브리핑을 README §2-4 예외(7분 이상)로 넣고 §4 제목을 7~10분으로 — 또는 브리핑도 10분 이상으로 09 §2 를 고침
   status: resolved
   decision: '2026-11-21 사용자: "유동적으로 할 수 있도록 그냥 타임기준은 없애주세요. 단 대본의 구성요소를 즉 원리 자체를 지킬 수 있도록 합시다" — 시간 기준(분·초 목표, target_minutes) 전부 삭제, 대본 구성요소로 판단 (README §2-4, 09 §4·§5, 03 §4)'
+- id: c-20261127-01
+  found: '2026-11-27'
+  topic: 출처 라벨에 날짜
+  a:
+    file: manual/03-market.md §0 2
+    text: 화면 출처 라벨에도 날짜
+  b:
+    file: manual/05 §0-1 · 09
+    text: 오른쪽 위 출처 라벨 기본 끔 (2026-11-22·23 사용자)
+  current: b
+  why: 정기 검토 2026-11-27 모순 점검(변경분 + 7일 전체)
+  fix: 03 문장을 설명란 기준 + 라벨은 켰을 때만으로
+  status: resolved
+- id: c-20261127-02
+  found: '2026-11-27'
+  topic: 시간 기준 잔재
+  a:
+    file: channels/ch-market-daily/channel.yaml · ch-issues-daily · prompts/script.md · issue-quick-brief · manual-review SKILL
+    text: minutes [12,20] · 10분 이상 · 분량 목표 · 5~8분 · 8~10분→10분~
+  b:
+    file: manual/README §2-4
+    text: '시간 기준 없음 (2026-11-21 사용자: "타임기준은 없애주세요")'
+  current: b
+  why: 정기 검토 2026-11-27 모순 점검(변경분 + 7일 전체)
+  fix: 분 기준 삭제·구성요소로
+  status: resolved
+- id: c-20261127-03
+  found: '2026-11-27'
+  topic: 시장 브리핑 매일 운영
+  a:
+    file: AGENTS.md 표 · manual/11 §표 '공개'
+    text: 아침 브리핑 + 매일 심층 / 시장 매일 브리핑만 자동
+  b:
+    file: manual/09 §0-00
+    text: 매일 브리핑 영상 중단, 주제 쌓기 (2026-11-25 사용자)
+  current: b
+  why: 정기 검토 2026-11-27 모순 점검(변경분 + 7일 전체)
+  fix: AGENTS·11 고침. 03:135 '(기본)'·14:86 '브리핑은 평일 아침'은 휴면 브리핑 절차로 남겨 둠
+  status: resolved
+- id: c-20261127-04
+  found: '2026-11-27'
+  topic: 심층 공개 즉시/예약
+  a:
+    file: 'manual/09 §2-00·§2·§2-1 · ch-market-daily publish: now'
+    text: 완성 즉시 공개 / --at 지금
+  b:
+    file: manual/09 §2-00 '공개'
+    text: '예약 07:00 (2026-11-26 사용자: "업로드는 바로하지 말고 예약으로")'
+  current: b
+  why: 정기 검토 2026-11-27 모순 점검(변경분 + 7일 전체)
+  fix: 즉시 공개 문장을 예약으로 (09:73·112·141, channel.yaml). 09:47·71·162·171·318 의 남은 표현은 다음 검토
+  status: resolved
+- id: c-20261127-05
+  found: '2026-11-27'
+  topic: 심층 감시 주기·장소
+  a:
+    file: manual/09 §0-00·§2-00
+    text: 2시간마다 PC 가 훑기부터
+  b:
+    file: config/local_routines.yaml · docs/56
+    text: 4시간마다, 훑기·판단 클라우드, 제작 PC (2026-11-26 사용자) · 판단 Opus (11-27)
+  current: b
+  why: 정기 검토 2026-11-27 모순 점검(변경분 + 7일 전체)
+  fix: 09:15·73 과 channel.yaml 의 Fable 판단을 고침
+  status: resolved
+- id: c-20261127-06
+  found: '2026-11-27'
+  topic: 해석 첫머리 말
+  a:
+    file: ch-market-daily/brand/about.md · manual/11 §통찰
+    text: 여기서부터는 해석입니다 / 화면에 '해석'
+  b:
+    file: manual/README §2-8
+    text: '''가설''로 (2026-11-27 사용자)'
+  current: b
+  why: 정기 검토 2026-11-27 모순 점검(변경분 + 7일 전체)
+  fix: about·11 고침. 09:256 '💬 이 채널의 해석' 표기는 남음 — 다음 검토
+  status: resolved
+- id: c-20261127-07
+  found: '2026-11-27'
+  topic: 공개 전 승인 방식
+  a:
+    file: manual/09:79
+    text: 예약해 두고 알림 — 사용자가 멈추지 않으면 공개
+  b:
+    file: manual/09:144
+    text: 비공개로 올려 두고 승인 뒤 공개
+  current: unknown
+  why: 정기 검토 2026-11-27 모순 점검(변경분 + 7일 전체)
+  fix: '시장 분석 편: 예약 후 멈추지 않으면 07:00 자동 공개인가, 비공개 후 승인해야 공개인가?'
+  status: open
+- id: c-20261127-08
+  found: '2026-11-27'
+  topic: '''최종 승인은 사용자만''의 시장 예외'
+  a:
+    file: manual/11:6
+    text: v43 자동 예약 공개, 검토는 공개 뒤
+  b:
+    file: manual/09:144
+    text: 2026-11-25 공개 전 제목·썸네일 승인
+  current: b
+  why: 정기 검토 2026-11-27 모순 점검(변경분 + 7일 전체)
+  fix: 위 '공개 전 승인 방식' 답에 맞춰 11:6 을 고침
+  status: open
+- id: c-20261127-09
+  found: '2026-11-27'
+  topic: 분석 영상의 대본 먼저 vs 주장 장면 그림 먼저
+  a:
+    file: manual/13 §0·§3
+    text: 화풍·장면 종류는 D2 뒤
+  b:
+    file: manual/12 §0-2 · 11 S4
+    text: 주장 장면은 그림 먼저 (2026-11-25 사용자)
+  current: b
+  why: 정기 검토 2026-11-27 모순 점검(변경분 + 7일 전체)
+  fix: 주장 장면 비트표가 D2 전에 장면 문법까지 정하는 것도 허용인가요?
+  status: open
+- id: c-20261127-10
+  found: '2026-11-27'
+  topic: 정기 검토 main 반영
+  a:
+    file: skills/manual-review §5
+    text: 작업 브랜치 → PR 로 main
+  b:
+    file: AGENTS.md 규칙
+    text: main 직접 커밋·푸시 허용 (2026-11-21)
+  current: unknown
+  why: 정기 검토 2026-11-27 모순 점검(변경분 + 7일 전체)
+  fix: 정기 검토도 PR 없이 main 에 바로 커밋·푸시해도 될까요?
+  status: open
+- id: c-20261127-11
+  found: '2026-11-27'
+  topic: 삽화 스타일 박자마다 카메라 이동
+  a:
+    file: styles/illustrated/STYLE.md:7·27
+    text: 박자마다 말하는 곳으로 확대·이동
+  b:
+    file: manual/README 표 · 05:117
+    text: 박자마다 이동 없음 (2026-11-23 사용자)
+  current: unknown
+  why: 정기 검토 2026-11-27 모순 점검(변경분 + 7일 전체)
+  fix: 삽화 스타일의 박자마다 이동은 '이야기를 따라가는 이동'으로 허용인가요?
+  status: open
+- id: c-20261127-12
+  found: '2026-11-27'
+  topic: 호기심 채널 범위
+  a:
+    file: manual/04 §범위 · AGENTS 표 · prompts/script_knowledge · topics/curiosity · ch-knowledge/README
+    text: 심리학·현대인의 일상
+  b:
+    file: channels/ch-knowledge/channel.yaml
+    text: 다양한 소재, 심리는 그중 하나 (2026-11-22 사용자)
+  current: b
+  why: 정기 검토 2026-11-27 모순 점검(변경분 + 7일 전체)
+  fix: 04·AGENTS·topic 이름을 '분야를 가리지 않는 호기심 이야기'로 맞출까요? (본문 틀이 심리 중심이라 확인)
+  status: open
+- id: c-20261127-13
+  found: '2026-11-27'
+  topic: 시장 썸네일 기본 톤
+  a:
+    file: prompts/thumbnail.md:41
+    text: 검은 톤 사진 꽉 채움
+  b:
+    file: manual/14 §9 · 09 §7-1 ⑬
+    text: 컬러 그대로, 글씨 자리만 어둡게 (2026-11-25)
+  current: b
+  why: 정기 검토 2026-11-27 모순 점검(변경분 + 7일 전체)
+  fix: '''검은 톤''이 흑백인지 어두운 보정인지 — 컬러 기본으로 고칠까요?'
+  status: open
+- id: c-20261127-14
+  found: '2026-11-27'
+  topic: 사족 금지의 층
+  a:
+    file: manual/13:47
+    text: '영구 원칙: 앞 편 언급·지어낸 질문 없이'
+  b:
+    file: manual/README §3-1
+    text: 영구 원칙은 사실·법·권리·안전만
+  current: unknown
+  why: 정기 검토 2026-11-27 모순 점검(변경분 + 7일 전체)
+  fix: '''지어낸 질문 금지''는 영구 원칙, ''앞 편 언급 안 하기''는 작업 기준으로 낮출까요?'
+  status: open
