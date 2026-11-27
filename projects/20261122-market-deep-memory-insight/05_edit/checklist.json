@@ -1,21 +1,21 @@
 {
  "project": "20261122-market-deep-memory-insight",
- "manual_version": "128",
- "checked": "2026-11-26T01:32:32",
- "pass": true,
+ "manual_version": "147",
+ "checked": "2026-11-28T02:28:42",
+ "pass": false,
  "rows": [
   {
    "gate": "G0",
    "level": "MUST",
    "item": "기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음)",
-   "ok": true,
-   "detail": ""
+   "ok": false,
+   "detail": "[2026-11-27 · 20261123-curiosity-soldout 기각] 아 약간 전체적으로 지우 눈이 작고 전이랑 달라보여요 이점 한번 짚고가고싶어요 맨 처음도 약간 날카로운 인상에 눈도 작아보이구요 화풍이랑 인물이 좀 달라진거같아서요"
   },
   {
    "gate": "G0",
    "level": "SHOULD",
    "item": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
-   "ok": true,
+   "ok": false,
    "detail": "manual/graph.json"
   },
   {
@@ -107,7 +107,7 @@
    "level": "MUST",
    "item": "자료 화면마다 credit·url",
    "ok": true,
-   "detail": "12개, 빠짐 []"
+   "detail": "18개, 빠짐 []"
   },
   {
    "gate": "G2",
@@ -350,7 +350,7 @@
   {
    "gate": "G3",
    "level": "MUST",
-   "item": "v36: 팩트시트 '## 인사이트' — 이름·직함 있는 사람·매체의 엇갈리는 해석(입장이 갈림), 원문·근거·출처 (09 §3-4)",
+   "item": "v143: 팩트시트 '## 인사이트' — 이름·직함 있는 사람의 판단(찬반이 갈리면 반박도), 원문·근거·출처 (09 §3-4)",
    "ok": true,
    "detail": "7줄 · 입장 ['낙관', '우려', '중립'] · 국내 ✓ 해외 ✓"
   },
@@ -393,8 +393,8 @@
    "gate": "G4",
    "level": "MUST",
    "item": "v27: 말로 숫자를 늘어놓는 순간 화면이 따라 바뀜 — 말은 많은데 화면이 멈춘 박자 없음 (manual/09 §6)",
-   "ok": true,
-   "detail": "[]"
+   "ok": false,
+   "detail": "['18-2']"
   },
   {
    "gate": "G6",
@@ -415,7 +415,7 @@
    "level": "SHOULD",
    "item": "market: 끝에 확인할 신호(checklist)",
    "ok": true,
-   "detail": "['checklist', 'kinetic', 'outro']"
+   "detail": "['chapter', 'checklist', 'outro']"
   },
   {
    "gate": "G4",
@@ -436,7 +436,7 @@
    "level": "참고",
    "item": "길이(측정값만 — 시간 기준 없음, 구성요소가 정함, README §2-4)",
    "ok": true,
-   "detail": "15.8분"
+   "detail": "19.7분"
   },
   {
    "gate": "G5",
@@ -457,7 +457,7 @@
    "level": "참고",
    "item": "반복 피로: 글씨·도형뿐인 장면이 이어지는 구간 — 자료·지도·그림으로 보여 줄 수 있는지 다시 볼 곳 (05 §0-3)",
    "ok": true,
-   "detail": "최장 2연속 (장면 15)"
+   "detail": "최장 2연속 (장면 25)"
   },
   {
    "gate": "G5",
@@ -471,7 +471,7 @@
    "level": "참고",
    "item": "반복 피로: 볼거리(자료·지도·그림)가 있는 장면의 몫",
    "ok": true,
-   "detail": "15/23"
+   "detail": "15/22"
   },
   {
    "gate": "G5",
@@ -484,8 +484,8 @@
    "gate": "G5",
    "level": "참고",
    "item": "바탕 계열: 같은 채널 직전 두 편과 같은 바탕 계열인지 (바꿔도 되고 이어 써도 됨 — 카테고리 얼굴 05 §0-7 이 먼저)",
-   "ok": true,
-   "detail": "이번 cream · 직전 ['cream']"
+   "ok": false,
+   "detail": "이번 cream · 직전 ['cream', 'cream']"
   },
   {
    "gate": "G5",
@@ -505,8 +505,8 @@
    "gate": "G5",
    "level": "참고",
    "item": "반복 피로: 같은 채널 직전 편과 화면 구성이 얼마나 겹치나",
-   "ok": false,
-   "detail": "78%"
+   "ok": true,
+   "detail": "67%"
   },
   {
    "gate": "G5",
@@ -520,35 +520,35 @@
    "level": "참고",
    "item": "자료 화면 없이 그래픽만 이어지는 가장 긴 구간",
    "ok": false,
-   "detail": "최장 928초"
+   "detail": "최장 1164초"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "장 전환 없이 이어지는 가장 긴 구간",
    "ok": false,
-   "detail": "최장 316초"
+   "detail": "최장 373초"
   },
   {
    "gate": "G5",
    "level": "SHOULD",
    "item": "스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1)",
    "ok": true,
-   "detail": "7종 ['data-report', 'explain-stage', 'hybrid-causal', 'kinetic-type', 'paper-column', 'source-cut', 'statement-brief']"
+   "detail": "6종 ['data-report', 'explain-stage', 'hybrid-causal', 'paper-column', 'source-cut', 'statement-brief']"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "스타일 조합: 가장 많이 쓴 스타일의 몫·겹친 장면·같은 스타일 연속",
    "ok": false,
-   "detail": "paper-column 0.3 · 겹침 0 · 최장 연속 2"
+   "detail": "source-cut 0.38 · 겹침 0 · 최장 연속 2"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "강조 횟수·강조가 겹친 장면 — 기억할 숫자·반전·결론에만 썼는지 (05 §0-1)",
    "ok": true,
-   "detail": "1번 [(29, 'kinetic')] · 겹친 장면 []"
+   "detail": "0번 [] · 겹친 장면 []"
   },
   {
    "gate": "G5",
@@ -576,13 +576,13 @@
    "level": "참고",
    "item": "연출 결정 기록: 영상 방향·장면마다 고른 것·버린 대안·근거·의도, 같은 상황 같은 선택 (decide, 05 §0-9)",
    "ok": false,
-   "detail": "['장면 0: 영상 방향(direction) 없음 — 시각 언어 하나를 고른 근거·의도·고려한 대안', '장면 1: 결정 기록(decide) 없음 — bite 를 고른 근거·의도·대안', '장면 2: 결정 기록(decide) 없음 — checklist 를 고른 근거·의도·대안', '장면 3: 결정 기록(decide) 없음 — quote 를 고른 근거·의도·대안', '장면 4: 결정 기록(decide) 없음 — checklist 를 고른 근거·의도·대안', '장면 6: 결정 기록(decide) 없음 — bite 를 고른 근거·의도·대안', '장면 7: 결정 기록(decide) 없음 — motionboard 를 고른 근거·의도·대안', '장면 8: 결정 기록(decide) 없음 — checklist 를 고른 근거·의도·대안', '장면 10: 결정 기록(decide) 없음 — bite 를 고른 근거·의도·대안', '장면 11: 결정 기록(decide) 없음 — bite 를 고른 근거·의도·대안', '장면 12: 결정 기록(decide) 없음 — motionboard 를 고른 근거·의도·대안', '장면 14: 결정 기록(decide) 없음 — quote 를 고른 근거·의도·대안']"
+   "detail": "['장면 0: 영상 방향(direction) 없음 — 시각 언어 하나를 고른 근거·의도·고려한 대안', '장면 2: 결정 기록(decide) 없음 — checklist 를 고른 근거·의도·대안', '장면 3: 결정 기록(decide) 없음 — quote 를 고른 근거·의도·대안', '장면 4: 결정 기록(decide) 없음 — checklist 를 고른 근거·의도·대안', '장면 6: why 가 장면 1 와 똑같음 (복사한 이유는 이유가 아님)', '장면 7: 결정 기록(decide) 없음 — motionboard 를 고른 근거·의도·대안', '장면 8: 결정 기록(decide) 없음 — checklist 를 고른 근거·의도·대안', '장면 10: why 가 장면 1 와 똑같음 (복사한 이유는 이유가 아님)', '장면 11: why 가 장면 1 와 똑같음 (복사한 이유는 이유가 아님)', '장면 12: 결정 기록(decide) 없음 — motionboard 를 고른 근거·의도·대안', '장면 15: 결정 기록(decide) 없음 — checklist 를 고른 근거·의도·대안', '장면 16: 결정 기록(decide) 없음 — quote 를 고른 근거·의도·대안']"
   },
   {
    "gate": "G5",
    "level": "SHOULD",
    "item": "edit-plan 기록 (메인·주제 레포에서 이 영상의 상황별 장면·기법을 채움)",
-   "ok": false,
+   "ok": true,
    "detail": "python -m ytflow edit-plan <프로젝트> → 02_script/EDIT_CONTEXT.md"
   },
   {
@@ -639,7 +639,7 @@
    "level": "참고",
    "item": "움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5)",
    "ok": false,
-   "detail": "변화 9.1/분 · 정지 0.65"
+   "detail": "변화 9.9/분 · 정지 0.53"
   },
   {
    "gate": "G6",
@@ -667,7 +667,7 @@
    "level": "참고",
    "item": "제목 앞부분에 질문·핵심 (목록에서 잘려도 무슨 영상인지 보이게)",
    "ok": true,
-   "detail": "메모리 호황, 2030년까지 간다? 20"
+   "detail": "최태원 \"2030년까지\" vs 모닝스타 "
   },
   {
    "gate": "G8",
