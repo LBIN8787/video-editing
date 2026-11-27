@@ -233,7 +233,7 @@ add(type="zoomshot", chapter=2, insight=True, clip={"src": "src_cnbc_msft_key", 
     label="원문(핵심 줄): CNBC 2026.10.29 'Microsoft plans to raise $25 billion in debt as it pursues AI buildout' (발행일 11.4, 8-K 대조 전)",
     focus=[{"beat": 0, "box": [163, 528, 1594, 85], "label": "마이크로소프트 250억 달러 새 회사채 (CNBC 10.29)"}],
     decide=dict(pick="zoomshot", situation="point", differs="원문은 핵심 줄만 짧게 잘라 어두운 무대 위에 — 글씨만 가득한 화면 대신 (2026-11-26 사용자)", over=[O("bignum", "큰 숫자보다 실제 자료"), O("quote", "원문 증거가 있음")], why="근거를 잠깐 원문으로 보여 주고 바로 설명으로", intent="숫자가 실제 문서에 있다는 것을 본다", refs=[R12]),
-    beats=[{"say": "그리고 다음 날인 10월 29일, 마이크로소프트가 250억 달러어치 회사채를 낸다는 보도가 나왔습니다."}])
+    beats=[{"say": "그리고 다음 날인 10월 29일, 마이크로소프트가 250억 달러어치 회사채를 낸다는 보도가 나왔습니다.", "motion": [ST("250억", "회사채 250억 달러", "마이크로소프트 · 10월 29일 CNBC 보도", x=1460, y=900, fs=44)]}])
 add(type="motionboard", chapter=2, _kb=True, title="말, 그리고 다음 날의 행동", label="후드 발언: 마이크로소프트 실적 콜 10.28 (CNBC 보도) · 회사채: CNBC 2026.10.29",
     els={'say': {'kind': 'card', 'x': 480, 'y': 500, 'icon': 'mic', 'label': '10월 28일 · 후드 (MS 최고재무책임자)', 'w': 540, 'value': '채권시장은 아직 안 썼다'}, 'do': {'kind': 'card', 'x': 1440, 'y': 500, 'icon': 'landmark', 'label': '10월 29일 · 마이크로소프트', 'w': 480, 'value': '회사채 250억 달러'}, 'a1': {'kind': 'arrow', 'from': 'say', 'to': 'do', 'label': '하루 뒤', 'color': 'red'}, 't': {'kind': 'text', 'x': 960, 'y': 800, 'text': '가장 여유 있던 회사도 빚을 꺼냈다', 'size': 50, 'color': 'red'}},
     decide=dict(pick="motionboard", situation="explain-market", differs="원문 다음 설명 장면 (2026-11-26 사용자: 잠깐 자료를 보여주고 설명씬으로)", over=[O("zoomshot", "글씨만 있는 화면을 길게 두지 않음"), O("bignum", "큰 숫자 화면은 최대한 안 씀")], why="원문이 말하는 것을 그림으로 풀기", intent="무엇이 무엇으로 바뀌었는지 한눈에 안다", refs=[R12]),
@@ -383,7 +383,7 @@ add(type="bars", chapter=5, label="로이터 2026.11.9 (뱅크오브아메리카
     title="올해 넓어진 가산금리 (%p, 11월 9일 로이터)", emph=0,
     items=[{"label": "빅테크 10년물", "value": 0.5, "text": "+약 0.5", "t": "0.5"},
            {"label": "AI 무관 우량 기업", "value": 0.2, "text": "+약 0.2", "t": "0.2"}],
-    beats=[{"say": "빌려주는 쪽도 표정이 바뀌고 있습니다. 로이터가 11월 9일 전한 뱅크오브아메리카 분석으로는, 빅테크 10년 만기 회사채의 가산금리, 그러니까 국채보다 더 얹어 주는 이자가 올해 들어 0.5%포인트쯤 넓어졌습니다. AI와 상관없는 우량 기업은 0.2%포인트 정도였습니다."}])
+    beats=[{"say": "빌려주는 쪽도 표정이 바뀌고 있습니다. 로이터가 11월 9일에 전한 뱅크오브아메리카 분석으로는, 빅테크 10년 만기 회사채의 가산금리, 그러니까 국채보다 더 얹어 주는 이자가 2026년 들어 0.5%포인트쯤 넓어졌습니다. AI와 상관없는 우량 기업은 0.2%포인트 정도였습니다."}])
 add(type="quote", chapter=5, insight=True, _kb=True,
     label="로이터 2026.11.9 (야후 파이낸스 게재) 'Banks, investors grow wary of AI debt' · 골드만삭스 전망은 같은 기사",
     who="크리스 포기", role="로펌 롭스앤그레이 금융 파트너 · 로이터 11월 9일",
@@ -611,6 +611,39 @@ for i, sc in enumerate(S, 1):
         if (i, k) in MOT:
             b.setdefault("motion", []).append(MOT[(i, k)])
 
+# ── 연출 기록 다듬기 (check G5): 같은 문구를 복사한 why 는 장면마다, edit-plan 1순위를 버렸으면 그 이유를 over 에
+_plan = HERE / "edit_plan.json"
+_rec = {}
+if _plan.exists():
+    for _p in json.loads(_plan.read_text(encoding="utf-8")).get("scenes", []):
+        if _p.get("recommended_scenes"):
+            _rec[_p["scene"]] = _p["recommended_scenes"][0]
+_WHY_BY_PICK = {
+    "zoomshot": "숫자가 실제 문서에 있다는 증거 — 원문 핵심 줄을 잠깐, 설명은 바로 다음 장면에서 (2026-11-26 사용자)",
+    "motionboard": "원문 다음 설명 장면 — 무엇이 무엇으로 바뀌었는지 카드 그림이 더 빨리 읽힘 (2026-11-26 사용자)",
+    "compare": "여러 회사·시점의 값을 한 표에 — 한눈에 비교",
+    "bars": "두세 값의 크기 차이를 막대 길이로",
+    "kinetic": "이 영상의 결론 한 줄 — 그림 없이 글자로",
+    "quote": "이름 있는 사람의 말이 주인공인 자리",
+    "checklist": "조건·항목을 한 줄씩 켜는 목록",
+    "versus": "두 결론을 좌우로 맞대는 자리",
+    "bite": "그 사람의 목소리가 있는 자리",
+}
+_seen = {}
+for sc in S:
+    d = sc.get("decide")
+    if not d:
+        continue
+    pick = d.get("pick", sc["type"])
+    w = d.get("why", "")
+    if w in _seen:   # 복사한 이유 → 이 장면의 내용으로
+        what = sc.get("title") or (sc.get("focus") or [{}])[0].get("label") or sc.get("who") or ""
+        d["why"] = f"{w} — 이 장면: {what}" if what else w + f" (장면 {sc['id']})"
+    _seen[d["why"]] = sc["id"]
+    r = _rec.get(sc["id"])
+    if r and r != pick and r not in [o["id"] for o in d.get("over", [])]:
+        d.setdefault("over", []).append(O(r, _WHY_BY_PICK.get(pick, "이 자리에 맞는 장면을 따로 골랐음") + f" — 추천 '{r}' 대신"))
+
 SPEC = {
     "title": "아마존 재시 \"25년에 나눠 쓸 수 없다\" vs 연준 \"이제 빚이다\" — 칩을 사는 돈, 언제까지?",
     "brand": "market",
@@ -660,7 +693,8 @@ SPEC = {
                  {"id": "evidence-board", "why_not": "사건·인물 연결이 아니라 돈의 흐름·층이 핵심이라 코르크 증거판보다 어두운 무대가 맞음"}],
         "why": "시청자는 '사 주는 쪽이 언제까지 낼 수 있나'의 판단을 들으러 온다 — 사는 쪽 CEO·CFO·회사의 말과 연준의 말을 근거(공시 숫자·연준 원문)로 따진다. 원본 영상이 없어 인용 카드 + 원문 문서로 증거를 보인다",
         "intent": "끝나면 시청자는 세 층 그림과 '열쇠는 채권시장'이라는 판단, 판가름 숫자 셋을 안다",
-        "vocabulary": ["bite", "quote", "versus", "bars", "bignum", "compare", "checklist", "motionboard", "zoomshot", "kb"],
+        "vocabulary": ["bite", "quote", "versus", "bars", "bignum", "compare", "checklist", "motionboard", "zoomshot", "kb", "kinetic"],
+        "new_vocab": {"kinetic": "아이스먼 편 틀 — 여는 곳·닫는 곳에 이 영상의 결론 한 줄 (2026-11-26 사용자: 두 템플릿을 보완)"},
         "refs": ["manual/09-market-daily.md", "manual/12-visual-storytelling.md", "recipe:hybrid-causal"],
     },
     "package": {   # S8 — 썸네일은 02_script/make_thumbs.py 로 합성(이 렌더러의 틀 대신, 2026-11-26 사용자 요청), 제목은 각도를 다르게 (14 §4)
@@ -734,6 +768,12 @@ SPEC = {
                       "make": "같은 쪽 크롭(905x250 @220,1098) → 폭 1700 → 1920x1080"},
     },
 }
+for _k, _v in list(SPEC["footage"].items()):   # 핵심 줄 클립은 원본과 같은 출처
+    if _k.endswith("_key") and _k[:-4] in SPEC["footage"]:
+        _b = SPEC["footage"][_k[:-4]]
+        _v["url"] = _b.get("url", "")
+        _v["credit"] = _b.get("credit", "").replace("원문 화면", "원문 핵심 줄") + " · 핵심 줄만 잘라 어두운 바탕에"
+
 SPEC["scenes"] = S
 
 if __name__ == "__main__":
