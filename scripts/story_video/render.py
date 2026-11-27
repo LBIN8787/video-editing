@@ -235,8 +235,16 @@ def word_time(say, word):
 def morph(fr, s, t):
     m = s.get("morph")
     if not m: return fr
-    t0 = word_time(m["say"], m.get("word", "")); d = m.get("dur", 0.8)
+    t0 = word_time(m["say"], m.get("word", "")) + m.get("offset", 0.0); d = m.get("dur", 0.8)
     if t < t0: return fr
+    if m.get("seq"):   # GPT 단계 그림 여러 장을 움짤처럼 (단계마다 step 초, 사이 0.1초 섞기)
+        seq, step = m["seq"], m.get("step", 0.22); u = (t - t0) / step
+        k = min(int(u), len(seq) - 1); a = min(1.0, (u - k) / 0.45) if k < len(seq) - 1 else 1.0
+        cur, _ = frame_img(dict(s, img=seq[k]), t)
+        if k + 1 < len(seq) and a > 0.0 and (u - k) > 0.55:
+            nxt, _ = frame_img(dict(s, img=seq[k + 1]), t); b = ease(((u - k) - 0.55) / 0.45)
+            cur = cv2.addWeighted(nxt, b, cur, 1 - b, 0)
+        return cur
     s2 = dict(s, img=m["to"]); fr2, _ = frame_img(s2, t)
     a = ease((t - t0) / d)
     return cv2.addWeighted(fr2, a, fr, 1 - a, 0) if a < 1 else fr2
