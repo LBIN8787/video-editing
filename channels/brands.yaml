@@ -64,6 +64,18 @@ brands:
       daily: ch-issues-daily            # v17 매일: 전날 가장 크게 다뤄진 구조적 이슈 하나 (python -m ytflow daily --brand issues)
     manual: manual/08-issues.md
 
+  books:   # 2026-11-27 실험 — research/book-channel 브랜치에만 (docs/74). 책 매뉴얼이 생기기 전까지 호기심 매뉴얼 문법을 따름
+    title: "(가칭) 책이 답한다"
+    desire: "책 한 권을 다 읽지 않아도, 내가 품은 질문에 대한 답과 세상을 보는 새 눈을 얻고 싶다 (읽을 책을 고르고 싶다)"
+    viewer_questions:
+      - "왜 나는 이럴까? 이 문제에 답한 책이 있을까? (② 질문형)"
+      - "그 유명한 책, 대체 뭐가 그렇게 놀라운데? (③ 다큐형)"
+      - "읽어 볼 만한가? 어디부터 읽으면 되지?"
+    triggers: ["베스트셀러·스테디셀러 순위", "시청자 일상의 고민(습관·집중·관계·돈)", "과학·역사 교양서의 놀라운 발견", "수요 분석 아웃라이어 (python -m ytflow demand --channel ch-books)"]
+    lines:
+      longform: ch-books
+    manual: manual/04-curiosity.md
+
 # ---------------------------------------------------------------- v15 카테고리 개성 (identity)
 # 채널을 몇 개로 묶어 운영해도(예: 세 채널) 카테고리마다 '보는 순간 알 수 있는' 편집이 남도록.
 # 한 편의 hybrid.json 에 "brand": "<id>" 를 쓰면 ytflow/stages/identity.py 가 적용 (장면에 "brand" 를 쓰면 그 장면만).
