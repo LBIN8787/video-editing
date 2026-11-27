@@ -121,8 +121,20 @@ def chunks(e):
     res[-1]["e"] += 0.3
     return res
 SUBS = [c for e in SAYS for c in chunks(e)]
+def _plain_sub(lines):   # v2: 상자 없이 흰 글자 + 부드러운 그림자 테두리 (레퍼런스 자막)
+    f = F("NanumGothic-Bold.ttf", 42)
+    base = text_rgba(lines, f, fill=(255, 255, 255), pad=(24, 12), spacing=12)
+    sh = text_rgba(lines, f, fill=(0, 0, 0), pad=(24, 12), spacing=12)
+    a = cv2.GaussianBlur(sh[..., 3].astype(np.float32), (0, 0), 3.2)
+    a = np.clip(a * 1.9, 0, 255)
+    out = np.zeros_like(base); out[..., 3] = np.maximum(a * 0.85, base[..., 3]).astype(np.uint8)
+    m = base[..., 3:4].astype(np.float32) / 255
+    out[..., :3] = (base[..., :3] * m).astype(np.uint8)
+    return out
 @functools.lru_cache(maxsize=64)
-def sub_img(i): return text_rgba(SUBS[i]["lines"], SUBF, box=(15, 15, 18, 170), pad=(34, 12))
+def sub_img(i):
+    if plan.get("subtitle") == "plain": return _plain_sub(SUBS[i]["lines"])
+    return text_rgba(SUBS[i]["lines"], SUBF, box=(15, 15, 18, 170), pad=(34, 12))
 
 # ---------- 카드 (전체 화면) ----------
 TITLEF = F("NanumMyeongjo-ExtraBold.ttf", 64); SMALLF = F("NanumGothic-Regular.ttf", 34); NAMEF = F("NanumMyeongjo-ExtraBold.ttf", 46)
@@ -222,8 +234,21 @@ def overlays(fr, s, t, geo):
         r = quote_img(q["text"], q.get("sub", "")); paste(fr, r, (W - r.shape[1]) / 2, H / 2 - 175 + (230 - r.shape[0]) / 2, a)
     if s.get("caption"):
         a = min(1.0, (t - s["t0"]) / 0.6, max(0.0, (s["t1"] - t) / 0.4)); paste(fr, lab_img(s["caption"], "caption"), 70, 60, a)
-    if s.get("recon", "img" in s):
+    if s.get("recon", "img" in s and plan.get("recon", True)):
         r = lab_img("재현 삽화", "recon"); paste(fr, r, W - r.shape[1] - 28, 26, 0.9)
+    ti = s.get("title")   # v2: 장 제목은 그림 위 가운데 글자 (검은 카드 아님)
+    if ti:
+        u = t - s["t0"] - 0.3; a = min(1.0, max(0.0, u / 0.6), max(0.0, (4.2 - u) / 0.6))
+        if a > 0: r = title_img(ti[0], ti[1]); paste(fr, r, (W - r.shape[1]) / 2, H * 0.42 - r.shape[0] / 2, a)
+
+@functools.lru_cache(maxsize=8)
+def title_img(small, text):
+    a = text_rgba([small], F("NanumMyeongjo-Bold.ttf", 28), fill=(235, 228, 214), pad=(10, 2), shadow=True)
+    b = text_rgba([text], F("NanumMyeongjo-ExtraBold.ttf", 64), fill=(246, 240, 228), pad=(14, 6), shadow=True)
+    w = max(a.shape[1], b.shape[1]); im = np.zeros((a.shape[0] + b.shape[0], w, 4), np.uint8)
+    im[:a.shape[0], (w - a.shape[1]) // 2:(w - a.shape[1]) // 2 + a.shape[1]] = a
+    im[a.shape[0]:, (w - b.shape[1]) // 2:(w - b.shape[1]) // 2 + b.shape[1]] = b
+    return im
 
 # ---------- 움직임 1: GPT '전·후' 두 장을 말에 맞춰 바꾸기 ----------
 def word_time(say, word):
@@ -300,7 +325,7 @@ def render_frame(t):
     if tr == "dissolve" and k > 0 and dt < 0.7 and shots[k - 1]["t1"] >= s["t0"] - 0.01:
         prev, _ = base_frame(shots[k - 1], t); a = ease(dt / 0.7)
         fr = cv2.addWeighted(fr, a, prev, 1 - a, 0)
-    elif tr == "fade" and dt < 0.6: fr = (fr * ease(dt / 0.6)).astype(np.uint8)
+    elif tr == "fade" and dt < s.get("fade_dur", 0.6): fr = (fr * ease(dt / s.get("fade_dur", 0.6))).astype(np.uint8)
     if s.get("fade_out") and s["t1"] - t < 0.8: fr = (fr * ease((s["t1"] - t) / 0.8)).astype(np.uint8)
     if plan.get("tag") and t < plan["tag"][1]: paste(fr, lab_img(plan["tag"][0], "tag"), 60, 40 if not s.get("caption") else 130)
     if not s.get("nosub"):
@@ -319,9 +344,12 @@ if "--frames" in args:   # 샷마다 가운데 프레임 한 장씩 (점검용)
 
 out = pathlib.Path(plan["out"]); vw, vh = int(W * PREVIEW) // 2 * 2, int(H * PREVIEW) // 2 * 2
 cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "bgr24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
-       "-i", str(pathlib.Path(plan["voice_dir"]) / "narration.wav"),
-       "-vf", f"scale={vw}:{vh}", "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
-       "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", str(out)]
+       "-i", str(pathlib.Path(plan["voice_dir"]) / "narration.wav")]
+if plan.get("bgm"):   # 배경음악을 끝까지 (음량은 bgm 파일에서 맞춤)
+    cmd += ["-i", plan["bgm"], "-filter_complex", "[1:a]aformat=channel_layouts=stereo,aresample=44100[v];[2:a]aresample=44100[m];[v][m]amix=inputs=2:duration=first:normalize=0[a]",
+            "-map", "0:v", "-map", "[a]"]
+cmd += ["-vf", f"scale={vw}:{vh}", "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
+        "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", str(out)]
 p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
 N = int(DUR * FPS)
 for f in range(N):

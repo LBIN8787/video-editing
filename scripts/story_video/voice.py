@@ -10,7 +10,16 @@ PARTS = OUT / "parts"; PARTS.mkdir(parents=True, exist_ok=True)
 RATE = {"가장 느리게": "-12%", "느리게": "-8%", "또박또박": "-6%", "차분하게": "-6%", "보통": "+0%", "빠르게": "+6%"}
 SR = 24000
 
+import os
+BASE = os.environ.get("YT_RATE")   # 예: +22% (레퍼런스 분당 약 440자)
+
 def parse():
+    if SRC.suffix == ".json":   # v2 대본(remake.json): 구간마다 문장 목록
+        R = json.loads(SRC.read_text(encoding="utf-8")); items = []
+        for sec in R["sections"]:
+            items += [("section", sec["name"]), ("gap", 0.6 if items else 1.0)]
+            for ln in sec["lines"]: items.append(("say", ln["say"], BASE or "+0%"))
+        return items
     text = SRC.read_text(encoding="utf-8").split("## 대본 점검")[0]
     items, rate = [], "+0%"
     for line in text.split("\n"):
@@ -72,7 +81,7 @@ async def main():
             events.append({"kind": "say", "i": n, "text": it[1], "start": round(t, 3), "end": round(t + d, 3),
                            "words": [[w, round(t + s, 3), round(t + e, 3)] for w, s, e in words]})
             rows.append(wav); t += d; n += 1
-            gap(0.35)
+            gap(float(os.environ.get("YT_GAP", "0.35")))
     gap(1.0)
     lst = OUT / "list.txt"; lst.write_text("\n".join(f"file '{r.resolve().as_posix()}'" for r in rows), encoding="utf-8")
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", str(lst), "-c:a", "pcm_s16le", str(OUT / "narration.wav")], check=True)
