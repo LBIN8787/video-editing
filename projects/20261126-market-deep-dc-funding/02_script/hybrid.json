@@ -116,8 +116,7 @@
    "checklist",
    "motionboard",
    "zoomshot",
-   "kb",
-   "kinetic"
+   "kb"
   ],
   "new_vocab": {
    "kinetic": "아이스먼 편 틀 — 여는 곳·닫는 곳에 이 영상의 결론 한 줄 (2026-11-26 사용자: 두 템플릿을 보완)"
@@ -190,7 +189,7 @@
     "credit": "배경은 생성 그림(Codex $imagegen) · 숫자: 아마존 3분기 보도자료",
     "why": [
      "숫자·반전 — 막대 길이로 1초에 읽힘",
-     "116% = 이 채널 계산(다섯 곳 합계)"
+     "116% = 가설 계산(다섯 곳 합계)"
     ]
    }
   ],
@@ -487,6 +486,54 @@
    "rights": "official",
    "cover": false,
    "make": "같은 쪽 크롭(905x250 @220,1098) → 폭 1700 → 1920x1080"
+  },
+  "semL_cash": {
+   "file": "semL_cash.mp4",
+   "url": "https://www.youtube.com/watch?v=AcFE-uESAy8",
+   "start": "4:21.3",
+   "end": "5:18.0",
+   "who": "앤디 재시",
+   "credit": "세마포(Semafor) 공식 채널 2026.11.18 'We Have To Do It': Amazon CEO Andy Jassy On Racing China In The AI Buildout · 인용",
+   "license": "인용 · 방송사·매체 공식 채널",
+   "rights": "broadcast",
+   "channel": "Semafor",
+   "cover": false
+  },
+  "wiggL": {
+   "file": "wiggL.mp4",
+   "url": "https://www.youtube.com/watch?v=nS3iG7ZLq60",
+   "start": "2:14.3",
+   "end": "2:46.3",
+   "who": "로빈 위글스워스",
+   "credit": "블룸버그 팟캐스트 공식 채널 2026.11.17 — 로빈 위글스워스(파이낸셜타임스 칼럼니스트) · 인용",
+   "license": "인용 · 방송사·매체 공식 채널",
+   "rights": "broadcast",
+   "channel": "Bloomberg Podcasts",
+   "cover": false
+  },
+  "semL_players": {
+   "file": "semL_players.mp4",
+   "url": "https://www.youtube.com/watch?v=AcFE-uESAy8",
+   "start": "8:22.3",
+   "end": "8:44.1",
+   "who": "앤디 재시",
+   "credit": "세마포(Semafor) 공식 채널 2026.11.18 'We Have To Do It': Amazon CEO Andy Jassy On Racing China In The AI Buildout · 인용",
+   "license": "인용 · 방송사·매체 공식 채널",
+   "rights": "broadcast",
+   "channel": "Semafor",
+   "cover": false
+  },
+  "cresL": {
+   "file": "cresL.mp4",
+   "url": "https://www.youtube.com/watch?v=cR_V4Ngo95k",
+   "start": "2:58.6",
+   "end": "4:00.0",
+   "who": "토니 크레센치",
+   "credit": "블룸버그 팟캐스트 공식 채널 2026.10.18 'AI Debt Boom Faces Bond Market Reality Check' — 토니 크레센치(PIMCO) · 인용",
+   "license": "인용 · 방송사·매체 공식 채널",
+   "rights": "broadcast",
+   "channel": "Bloomberg Podcasts",
+   "cover": false
   }
  },
  "scenes": [
@@ -499,17 +546,32 @@
    "label": "세마포(Semafor) 공식 채널 2026.11.18 'We Have To Do It': Amazon CEO Andy Jassy On Racing China In The AI Buildout · 인용",
    "beats": [
     {
-     "say": "빅테크는 AI 데이터센터 지을 돈을 어디서 구하고, 언제까지 낼 수 있을까요. 이 영상은 그 돈의 출처를 따라갑니다. 11월 18일, 아마존의 앤디 재시 CEO는 이렇게 답했습니다."
+     "say": "빅테크는 AI 데이터센터 지을 돈을 어디서 구하고, 언제까지 낼 수 있을까요. 이 영상은 그 돈의 출처를 따라갑니다. 11월 18일, 아마존의 앤디 재시 CEO는 이렇게 말했습니다."
     }
    ],
    "clip": {
-    "src": "sem_j1a",
+    "src": "semL_cash",
     "lang": "en",
-    "fit": "contain",
     "cuts": [
      {
-      "find": "you end up having a lot of capex which creates some headwinds on your short-term free cash flow",
-      "ko": "이렇게 빠르게 커지면 설비투자가 아주 많아지고, 그게 단기 잉여현금흐름에 역풍이 됩니다."
+      "find": "Now, the way the cash cycle works in a business like AWS is that you have to spend the cash for data centers, servers and networking gear well in advance of when you can monetize it.",
+      "ko": "AWS 같은 사업에서 현금이 도는 방식은, 데이터센터와 서버·네트워크 장비에 돈을 버는 시점보다 한참 먼저 써야 한다는 겁니다."
+     },
+     {
+      "find": "So when you're growing at this unprecedented rate, you end up having a lot of capex, which creates some headwinds on your short-term free cash flow,",
+      "ko": "그래서 전례 없는 속도로 크면, 설비투자가 많아지고 단기 잉여현금흐름에는 역풍이 됩니다."
+     },
+     {
+      "find": "but the economics of the business are such that once you get a few years out, with the data centers installed and monetizing the servers and gear in place, you really like the free cash flow and the return on invested capital.",
+      "ko": "하지만 몇 년 지나 데이터센터가 다 들어서고 서버와 장비로 돈을 벌기 시작하면, 잉여현금흐름과 투하자본수익률이 아주 좋아지는 사업입니다."
+     },
+     {
+      "find": "And I think we're going to be a much larger company, and AWS a much larger business than we ever anticipated.",
+      "ko": "그리고 아마존은 훨씬 큰 회사가, AWS는 저희가 생각했던 것보다 훨씬 큰 사업이 될 겁니다."
+     },
+     {
+      "find": "We felt AWS could be a few hundred billion-dollar revenue run-rate business. We now believe it can be over a trillion dollars in the next five to ten years.",
+      "ko": "AWS가 연 매출 수천억 달러 사업이 될 수 있다고 봤는데, 이제는 5~10년 안에 1조 달러를 넘을 수 있다고 봅니다."
      }
     ]
    },
@@ -538,70 +600,47 @@
      {
       "id": "motionboard",
       "why_not": "설명 그림보다 그 사람의 목소리가 먼저"
+     },
+     {
+      "id": "card_type",
+      "why_not": "카드로 줄이면 그 사람이 어떤 논리로 말하는지 안 보임 (2026-11-27 사용자)"
+     },
+     {
+      "id": "bignum",
+      "why_not": "숫자 하나로 줄이면 결과만 남음"
+     },
+     {
+      "id": "checklist",
+      "why_not": "목록으로 줄이면 논리가 끊김"
+     },
+     {
+      "id": "versus",
+      "why_not": "맞대기는 말을 들은 뒤"
+     },
+     {
+      "id": "kinetic",
+      "why_not": "큰 글자 연출은 쓰지 않음"
+     },
+     {
+      "id": "footage",
+      "why_not": "말 없이 화면만 깔면 판단의 주인이 흐려짐"
+     },
+     {
+      "id": "stage",
+      "why_not": "설명 무대는 주장을 들은 뒤"
+     },
+     {
+      "id": "zoomshot",
+      "why_not": "원문 확대는 근거 장면에서"
      }
     ],
-    "why": "여는 장면은 그 사람의 목소리로, 결론부터 (09 §5-00 ①) — 사는 쪽 CEO 가 스스로 '현금흐름 역풍'을 말함",
+    "why": "앤디 재시의 주장을 본인 말로 끝까지 — 'AWS 같은 사업에서 현금이 도는 방식은, 데이터센…'",
     "intent": "재시가 직접 '번 돈보다 많이 쓴다'를 인정하는 것을 듣는다",
     "refs": [
      "manual/09-market-daily.md"
     ]
    },
    "id": 1
-  },
-  {
-   "type": "bite",
-   "chapter": 0,
-   "insight": true,
-   "who": "앤디 재시",
-   "role": "아마존 CEO",
-   "label": "세마포(Semafor) 공식 채널 2026.11.18 'We Have To Do It': Amazon CEO Andy Jassy On Racing China In The AI Buildout · 인용",
-   "beats": [],
-   "clip": {
-    "src": "sem_j1b",
-    "lang": "en",
-    "fit": "contain",
-    "cuts": [
-     {
-      "from": "but the economics of the business",
-      "to": "investment capital",
-      "ko": "하지만 몇 년 지나 데이터센터가 다 깔리고 서버와 장비로 돈을 벌기 시작하면, 잉여현금흐름과 투자수익률이 아주 좋아집니다."
-     }
-    ]
-   },
-   "show_en": false,
-   "decide": {
-    "pick": "bite",
-    "situation": "call-bite",
-    "differs": "같은 사람·같은 상황이라도 원본 발언 영상이 있으면 영상으로 (2026-11-26 사용자)",
-    "over": [
-     {
-      "id": "quote",
-      "why_not": "인용 카드·글 화면이 아니라 그 사람이 말하는 영상 (2026-11-26 사용자: 원문은 발언 영상)"
-     },
-     {
-      "id": "map_causal",
-      "why_not": "말이 주인공인 자리"
-     },
-     {
-      "id": "kb",
-      "why_not": "사진만으로는 말이 안 들림"
-     },
-     {
-      "id": "bars",
-      "why_not": "숫자보다 그 사람의 판단이 먼저"
-     },
-     {
-      "id": "motionboard",
-      "why_not": "설명 그림보다 그 사람의 목소리가 먼저"
-     }
-    ],
-    "why": "같은 답의 뒷부분 — 그의 결론(지금 쓰고 나중에 번다)",
-    "intent": "재시의 결론을 끝까지 듣는다",
-    "refs": [
-     "manual/09-market-daily.md"
-    ]
-   },
-   "id": 2
   },
   {
    "type": "bite",
@@ -663,7 +702,7 @@
      "manual/09-market-daily.md"
     ]
    },
-   "id": 3
+   "id": 2
   },
   {
    "type": "zoomshot",
@@ -711,7 +750,7 @@
      "say": "아마존은 올해 설비투자를 약 2,200억 달러로 잡고 있습니다."
     }
    ],
-   "id": 4
+   "id": 3
   },
   {
    "type": "motionboard",
@@ -794,7 +833,7 @@
      }
     }
    ],
-   "id": 5
+   "id": 4
   },
   {
    "type": "bite",
@@ -809,16 +848,27 @@
     }
    ],
    "clip": {
-    "src": "wigg_a",
+    "src": "wiggL",
     "lang": "en",
-    "fit": "contain",
     "cuts": [
      {
-      "from": "this is an unusual time",
-      "to": "of these companies",
-      "ko": "올해는 특이한 해입니다. AI 붐이 빚 금융이 된 해죠. 원래는 이 회사들의 엄청난 잉여현금흐름으로 댔는데,"
+      "find": "My view is it's always an incredible year for the bond market. But I think this is an unusual time, because it's really the year when the AI boom became debt-financed.",
+      "ko": "채권시장은 늘 대단한 해라고 보지만, 올해는 특별합니다. AI 호황이 빚으로 굴러가기 시작한 해거든요."
+     },
+     {
+      "find": "It used to be financed primarily by the huge, prodigious free cash flows of these companies — incredible companies with incredible products.",
+      "ko": "전에는 주로 이 회사들의 어마어마한 잉여현금으로 돈을 댔습니다. 대단한 제품을 가진 대단한 회사들이죠."
+     },
+     {
+      "find": "But this year they're kind of tapped out of that, and are turning to the bond market, to securitization, to private credit.",
+      "ko": "그런데 올해는 그 돈을 거의 다 써서, 채권시장으로, 유동화로, 사모 대출로 가고 있습니다."
+     },
+     {
+      "find": "I think if this does break bad at some point, we're going to look at 2026 as the year when it started.",
+      "ko": "언젠가 이게 나빠진다면, 2026년을 그 시작으로 돌아보게 될 겁니다."
      }
-    ]
+    ],
+    "vf": "scale=1664:936,pad=1920:1080:128:0:color=0x15171c"
    },
    "show_en": false,
    "decide": {
@@ -845,76 +895,54 @@
      {
       "id": "motionboard",
       "why_not": "설명 그림보다 그 사람의 목소리가 먼저"
+     },
+     {
+      "id": "card_type",
+      "why_not": "카드로 줄이면 그 사람이 어떤 논리로 말하는지 안 보임 (2026-11-27 사용자)"
+     },
+     {
+      "id": "bignum",
+      "why_not": "숫자 하나로 줄이면 결과만 남음"
+     },
+     {
+      "id": "checklist",
+      "why_not": "목록으로 줄이면 논리가 끊김"
+     },
+     {
+      "id": "versus",
+      "why_not": "맞대기는 말을 들은 뒤"
+     },
+     {
+      "id": "kinetic",
+      "why_not": "큰 글자 연출은 쓰지 않음"
+     },
+     {
+      "id": "footage",
+      "why_not": "말 없이 화면만 깔면 판단의 주인이 흐려짐"
+     },
+     {
+      "id": "stage",
+      "why_not": "설명 무대는 주장을 들은 뒤"
+     },
+     {
+      "id": "zoomshot",
+      "why_not": "원문 확대는 근거 장면에서"
      }
     ],
-    "why": "맞서는 결론도 이름 있는 사람의 목소리로, 같은 무게 (09 §5-0-2)",
+    "why": "로빈 위글스워스의 주장을 본인 말로 끝까지 — '채권시장은 늘 대단한 해라고 보지만, 올해는 특별합…'",
     "intent": "'올해 AI 붐은 빚 금융이 됐다'를 그의 목소리로 듣는다",
     "refs": [
      "manual/09-market-daily.md"
     ]
    },
-   "id": 6
-  },
-  {
-   "type": "bite",
-   "chapter": 0,
-   "insight": true,
-   "who": "로빈 위글스워스",
-   "role": "파이낸셜타임스 칼럼니스트",
-   "label": "블룸버그 팟캐스트 공식 채널 2026.11.17 — 로빈 위글스워스(파이낸셜타임스 칼럼니스트) · 인용",
-   "beats": [],
-   "clip": {
-    "src": "wigg_b",
-    "lang": "en",
-    "fit": "contain",
-    "cuts": [
-     {
-      "from": "this year they kind of tapped out",
-      "to": "private credit",
-      "ko": "올해는 그게 바닥나서, 채권시장으로, 증권화로, 사모대출로 돌아서고 있습니다."
-     }
-    ]
-   },
-   "show_en": false,
-   "decide": {
-    "pick": "bite",
-    "situation": "said",
-    "differs": "같은 사람·같은 상황이라도 원본 발언 영상이 있으면 영상으로 (2026-11-26 사용자)",
-    "over": [
-     {
-      "id": "quote",
-      "why_not": "인용 카드·글 화면이 아니라 그 사람이 말하는 영상 (2026-11-26 사용자: 원문은 발언 영상)"
-     },
-     {
-      "id": "map_causal",
-      "why_not": "말이 주인공인 자리"
-     },
-     {
-      "id": "kb",
-      "why_not": "사진만으로는 말이 안 들림"
-     },
-     {
-      "id": "bars",
-      "why_not": "숫자보다 그 사람의 판단이 먼저"
-     },
-     {
-      "id": "motionboard",
-      "why_not": "설명 그림보다 그 사람의 목소리가 먼저"
-     }
-    ],
-    "why": "같은 답의 뒷부분 — 돈이 어디로 옮겨 갔나",
-    "intent": "빈 곳이 채권시장·사모대출로 간다는 말을 끝까지 듣는다",
-    "refs": [
-     "manual/09-market-daily.md"
-    ]
-   },
-   "id": 7
+   "id": 5,
+   "show_lower": false
   },
   {
    "type": "versus",
    "chapter": 0,
    "insight": true,
-   "label": "재시: 세마포 11.18·아마존 실적 콜 10.29 · 위글스워스: 블룸버그 11.17 · 가운데 줄은 이 채널의 해석",
+   "label": "재시: 세마포 11.18·아마존 실적 콜 10.29 · 위글스워스: 블룸버그 11.17 · 가운데 줄은 가설",
    "left": {
     "value": "AI 투자는 몇 년 뒤 돈 된다",
     "label": "재시 · 아마존 CEO (사는 쪽)",
@@ -956,7 +984,7 @@
        "do": "stat",
        "id": "thesis",
        "value": "열쇠 = 채권시장",
-       "label": "이 채널의 해석",
+       "label": "가설",
        "sub": "금고가 아니라",
        "x": 960,
        "y": 880,
@@ -969,39 +997,7 @@
      "say": "왜 그렇게 볼 수 있는지, 그리고 그게 내 반도체 계좌에 무슨 뜻인지 차례로 풀어 보겠습니다."
     }
    ],
-   "id": 8
-  },
-  {
-   "type": "kinetic",
-   "chapter": 0,
-   "decide": {
-    "pick": "kinetic",
-    "situation": "conclusion",
-    "over": [
-     {
-      "id": "bignum",
-      "why_not": "숫자가 아니라 결론 한 문장"
-     },
-     {
-      "id": "quote",
-      "why_not": "누구의 말이 아니라 이 영상의 결론"
-     }
-    ],
-    "why": "아이스먼 편 틀 — 결론을 한 줄 글자로 (09 §5-00 결론 먼저)",
-    "intent": "영상의 답을 한 문장으로 기억한다",
-    "refs": [
-     "manual/09-market-daily.md"
-    ]
-   },
-   "beats": [
-    {
-     "say": "한 줄로 줄이면, 빅테크가 AI에 쓰는 돈 가운데 번 돈으로 모자란 몫은 빚입니다.",
-     "hit": [
-      "빚"
-     ]
-    }
-   ],
-   "id": 9
+   "id": 6
   },
   {
    "type": "motionboard",
@@ -1102,7 +1098,7 @@
      }
     }
    ],
-   "id": 10
+   "id": 7
   },
   {
    "type": "chapter",
@@ -1116,7 +1112,7 @@
      "say": "먼저, 지금 써야 한다는 말이 장부에서는 어떻게 보이는지부터 보겠습니다."
     }
    ],
-   "id": 11
+   "id": 8
   },
   {
    "type": "motionboard",
@@ -1200,7 +1196,7 @@
      }
     }
    ],
-   "id": 12
+   "id": 9
   },
   {
    "type": "bars",
@@ -1242,7 +1238,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 13,
+   "id": 10,
    "decide": {
     "pick": "bars",
     "situation": "earnings",
@@ -1309,7 +1305,7 @@
      "say": "최근 1년으로 넓히면, 번 돈에서 쓴 돈을 뺀 잉여현금흐름이 마이너스 424억 달러입니다."
     }
    ],
-   "id": 14
+   "id": 11
   },
   {
    "type": "motionboard",
@@ -1392,7 +1388,7 @@
      }
     }
    ],
-   "id": 15
+   "id": 12
   },
   {
    "type": "zoomshot",
@@ -1440,7 +1436,7 @@
      "say": "같은 기간 장기 빚도 크게 늘었습니다. 재무상태표의 장기부채 줄입니다."
     }
    ],
-   "id": 16
+   "id": 13
   },
   {
    "type": "motionboard",
@@ -1508,12 +1504,12 @@
      }
     }
    ],
-   "id": 17
+   "id": 14
   },
   {
    "type": "compare",
    "chapter": 1,
-   "label": "각 사 실적 보도자료(SEC 8-K 첨부 99.1) · 오라클만 6~8월(회계 1분기) · 억 달러 · 차이는 이 채널 계산",
+   "label": "각 사 실적 보도자료(SEC 8-K 첨부 99.1) · 오라클만 6~8월(회계 1분기) · 억 달러 · 차이는 가설 계산",
    "title": "번 돈 vs 쓴 돈 (석 달, 억 달러)",
    "cols": [
     "번 돈",
@@ -1564,7 +1560,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 18,
+   "id": 15,
    "decide": {
     "pick": "compare",
     "situation": "compare",
@@ -1589,7 +1585,7 @@
   {
    "type": "bars",
    "chapter": 1,
-   "label": "이 채널 계산: 다섯 곳 설비 구입 합 ÷ 영업현금 합 (MSFT·GOOGL·AMZN·META 7~9월 + ORCL 6~8월, 리스·매각대금 제외)",
+   "label": "가설 계산: 다섯 곳 설비 구입 합 ÷ 영업현금 합 (MSFT·GOOGL·AMZN·META 7~9월 + ORCL 6~8월, 리스·매각대금 제외)",
    "title": "번 돈 대비 쓴 돈",
    "emph": 1,
    "items": [
@@ -1615,7 +1611,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 19,
+   "id": 16,
    "decide": {
     "pick": "bars",
     "situation": "metric",
@@ -1649,7 +1645,7 @@
      "say": "그럼 다섯 곳 가운데 유일하게 번 돈이 더 많은 마이크로소프트는 어떻게 짓고 있을까요."
     }
    ],
-   "id": 20
+   "id": 17
   },
   {
    "type": "bite",
@@ -1699,7 +1695,7 @@
      "manual/09-market-daily.md"
     ]
    },
-   "id": 21
+   "id": 18
   },
   {
    "type": "motionboard",
@@ -1811,7 +1807,7 @@
      }
     }
    ],
-   "id": 22,
+   "id": 19,
    "decide": {
     "pick": "motionboard",
     "situation": "explain-market",
@@ -1876,7 +1872,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 23,
+   "id": 20,
    "decide": {
     "pick": "bars",
     "situation": "metric",
@@ -1962,7 +1958,7 @@
      ]
     }
    ],
-   "id": 24
+   "id": 21
   },
   {
    "type": "motionboard",
@@ -2050,7 +2046,7 @@
      }
     }
    ],
-   "id": 25
+   "id": 22
   },
   {
    "type": "chapter",
@@ -2064,7 +2060,7 @@
      "say": "빈 곳을 메우는 돈은 리스만이 아닙니다."
     }
    ],
-   "id": 26
+   "id": 23
   },
   {
    "type": "zoomshot",
@@ -2116,7 +2112,7 @@
      "say": "세 번째는 메타입니다. 10월 26일 보도자료에서, 메타는 투자할 돈을 네 가지로 대겠다고 적었습니다."
     }
    ],
-   "id": 27
+   "id": 24
   },
   {
    "type": "motionboard",
@@ -2214,7 +2210,7 @@
      }
     }
    ],
-   "id": 28
+   "id": 25
   },
   {
    "type": "checklist",
@@ -2251,7 +2247,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 29,
+   "id": 26,
    "decide": {
     "pick": "checklist",
     "situation": "earnings",
@@ -2309,7 +2305,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 30,
+   "id": 27,
    "decide": {
     "pick": "compare",
     "situation": "say-vs-do",
@@ -2370,7 +2366,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 31,
+   "id": 28,
    "decide": {
     "pick": "bars",
     "situation": "metric",
@@ -2430,7 +2426,7 @@
      "say": "미국에서 신용등급 좋은 일반 기업이 새로 낸 회사채 가운데 이 몫이 2023년엔 6%도 안 됐는데, 올해는 31% 정도입니다. 세 장에 한 장꼴입니다."
     }
    ],
-   "id": 32,
+   "id": 29,
    "decide": {
     "pick": "zoomshot",
     "situation": "point",
@@ -2464,12 +2460,12 @@
      "say": "지금까지 나온 회사를 한 줄로 세워 보겠습니다."
     }
    ],
-   "id": 33
+   "id": 30
   },
   {
    "type": "motionboard",
    "chapter": 4,
-   "label": "이 채널의 해석 · 근거: 각 사 실적 보도자료(SEC 8-K 첨부 99.1) (3분기)",
+   "label": "가설 · 근거: 각 사 실적 보도자료(SEC 8-K 첨부 99.1) (3분기)",
    "title": "칩을 사는 쪽의 세 층",
    "els": {
     "t": {
@@ -2529,7 +2525,7 @@
      }
     }
    ],
-   "id": 34,
+   "id": 31,
    "decide": {
     "pick": "motionboard",
     "situation": "explain-market",
@@ -2564,14 +2560,16 @@
     }
    ],
    "clip": {
-    "src": "sem_j2",
+    "src": "semL_players",
     "lang": "en",
-    "fit": "contain",
     "cuts": [
      {
-      "from": "it'll be interesting over time",
-      "to": "we'll have to see",
-      "ko": "데이터센터를 짓는 여러 회사가, 오래 버틸 사업을 만들 만큼 사업이 넓은지는, 시간이 지나 봐야 알겠죠."
+      "find": "I think it'll be interesting over time whether all the different players who are building data centers have a broad enough business, with enough services, to build long-term sustainable businesses. We'll have to see.",
+      "ko": "데이터센터를 짓는 여러 회사가 오래 버틸 사업을 만들 만큼 넓은 사업과 서비스를 가졌는지는, 시간이 지나 봐야 알 겁니다. 지켜봐야죠."
+     },
+     {
+      "find": "It is growing so fast — I can understand why a lot of people are interested in it.",
+      "ko": "워낙 빨리 크니까, 많은 사람이 뛰어드는 이유는 이해합니다."
      }
     ]
    },
@@ -2600,15 +2598,47 @@
      {
       "id": "motionboard",
       "why_not": "설명 그림보다 그 사람의 목소리가 먼저"
+     },
+     {
+      "id": "card_type",
+      "why_not": "카드로 줄이면 그 사람이 어떤 논리로 말하는지 안 보임 (2026-11-27 사용자)"
+     },
+     {
+      "id": "bignum",
+      "why_not": "숫자 하나로 줄이면 결과만 남음"
+     },
+     {
+      "id": "checklist",
+      "why_not": "목록으로 줄이면 논리가 끊김"
+     },
+     {
+      "id": "versus",
+      "why_not": "맞대기는 말을 들은 뒤"
+     },
+     {
+      "id": "kinetic",
+      "why_not": "큰 글자 연출은 쓰지 않음"
+     },
+     {
+      "id": "footage",
+      "why_not": "말 없이 화면만 깔면 판단의 주인이 흐려짐"
+     },
+     {
+      "id": "stage",
+      "why_not": "설명 무대는 주장을 들은 뒤"
+     },
+     {
+      "id": "zoomshot",
+      "why_not": "원문 확대는 근거 장면에서"
      }
     ],
-    "why": "세 층 그림의 '아래층 위험'을 위층 CEO 의 입으로",
+    "why": "앤디 재시의 주장을 본인 말로 끝까지 — '데이터센터를 짓는 여러 회사가 오래 버틸 사업을 만…'",
     "intent": "아래층의 지속성은 아마존 CEO 도 장담하지 않는다는 것을 듣는다",
     "refs": [
      "manual/09-market-daily.md"
     ]
    },
-   "id": 35
+   "id": 32
   },
   {
    "type": "bars",
@@ -2659,7 +2689,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 36,
+   "id": 33,
    "decide": {
     "pick": "bars",
     "situation": "earnings",
@@ -2684,7 +2714,7 @@
   {
    "type": "checklist",
    "chapter": 4,
-   "label": "이 채널 계산 · 가정: 부채 약 470억 달러가 모두 변동금리 (실제로는 고정금리가 섞여 이보다 작음) · 채권 수익률은 CNBC 2026.11.11",
+   "label": "가설 계산 · 가정: 부채 약 470억 달러가 모두 변동금리 (실제로는 고정금리가 섞여 이보다 작음) · 채권 수익률은 CNBC 2026.11.11",
    "title": "가정해 보면 — 금리가 1%p 오르면",
    "x": 150,
    "text_w": 1150,
@@ -2708,7 +2738,7 @@
    "decide": {
     "pick": "checklist",
     "situation": "explain-market",
-    "differs": "이 채널 계산이라 원문이 없음 — 큰 숫자 대신 가정·결과·단서를 한 줄씩",
+    "differs": "가설 계산이라 원문이 없음 — 큰 숫자 대신 가정·결과·단서를 한 줄씩",
     "over": [
      {
       "id": "bignum",
@@ -2732,7 +2762,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 37
+   "id": 34
   },
   {
    "type": "bite",
@@ -2747,16 +2777,23 @@
     }
    ],
    "clip": {
-    "src": "cres",
+    "src": "cresL",
     "lang": "en",
-    "fit": "contain",
     "cuts": [
      {
-      "from": "what it's showing you is that the bond market",
-      "to": "less clear to them",
-      "ko": "이건 채권시장이, 현금흐름이 불분명해 보이는 차입자에게 규율을 걸 준비가 돼 있다는 뜻입니다."
+      "find": "Well, it's not considered to be amongst the strongest. It's not a hyperscaler, so to speak. So what it's showing you is that the bond market is willing to impose discipline on borrowers that may have cash flow that's less clear to them.",
+      "ko": "코어위브는 가장 튼튼한 쪽으로 여겨지지 않습니다. 이른바 하이퍼스케일러가 아니죠. 그러니 이건, 현금흐름이 덜 분명한 차입자에게 채권시장이 규율을 들이댈 준비가 돼 있다는 걸 보여 줍니다."
+     },
+     {
+      "find": "So it may not apply simply to lower-rated companies. It can eventually apply to high-rated nations. Look at France — considered much better as a credit, but with a very high budget deficit, and the bond market is beginning to impose discipline on it.",
+      "ko": "신용등급 낮은 회사에만 해당하는 것도 아닙니다. 결국 등급 높은 나라에도 해당될 수 있어요. 프랑스를 보세요. 신용은 훨씬 좋다지만 재정적자가 커서, 채권시장이 규율을 들이대기 시작했습니다."
+     },
+     {
+      "find": "It did so in 2022 when Liz Truss attempted to raise the budget deficit. The bond market said no, and the 10-year yield rose 150 basis points in a few weeks — dramatic for a government bond market. So the CoreWeave story can be applied to all bonds.",
+      "ko": "2022년 리즈 트러스 총리가 재정적자를 늘리려 하자 채권시장이 안 된다고 했고, 10년물 금리가 몇 주 만에 1.5%포인트 뛰었습니다. 국채시장에선 극적인 일이죠. 그러니 코어위브 이야기는 모든 채권에 적용될 수 있습니다."
      }
-    ]
+    ],
+    "vf": "scale=1664:936,pad=1920:1080:128:0:color=0x15171c"
    },
    "show_en": false,
    "decide": {
@@ -2783,15 +2820,48 @@
      {
       "id": "motionboard",
       "why_not": "설명 그림보다 그 사람의 목소리가 먼저"
+     },
+     {
+      "id": "card_type",
+      "why_not": "카드로 줄이면 그 사람이 어떤 논리로 말하는지 안 보임 (2026-11-27 사용자)"
+     },
+     {
+      "id": "bignum",
+      "why_not": "숫자 하나로 줄이면 결과만 남음"
+     },
+     {
+      "id": "checklist",
+      "why_not": "목록으로 줄이면 논리가 끊김"
+     },
+     {
+      "id": "versus",
+      "why_not": "맞대기는 말을 들은 뒤"
+     },
+     {
+      "id": "kinetic",
+      "why_not": "큰 글자 연출은 쓰지 않음"
+     },
+     {
+      "id": "footage",
+      "why_not": "말 없이 화면만 깔면 판단의 주인이 흐려짐"
+     },
+     {
+      "id": "stage",
+      "why_not": "설명 무대는 주장을 들은 뒤"
+     },
+     {
+      "id": "zoomshot",
+      "why_not": "원문 확대는 근거 장면에서"
      }
     ],
-    "why": "'열쇠는 채권시장'을 채권 운용사의 목소리로",
+    "why": "토니 크레센치의 주장을 본인 말로 끝까지 — '코어위브는 가장 튼튼한 쪽으로 여겨지지 않습니다. …'",
     "intent": "채권시장이 아래층부터 돈값을 올린다는 것을 듣는다",
     "refs": [
      "manual/09-market-daily.md"
     ]
    },
-   "id": 38
+   "id": 35,
+   "show_lower": false
   },
   {
    "type": "checklist",
@@ -2835,7 +2905,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 39,
+   "id": 36,
    "decide": {
     "pick": "checklist",
     "situation": "earnings",
@@ -2873,7 +2943,7 @@
      "say": "위글스워스가 말한 빚 금융이 된 해를, 미국 연준도 숫자로 짚었습니다. 연준 쪽은 터진다고 말하지 않았습니다. 그들이 문제 삼는 고리는 따로 있습니다."
     }
    ],
-   "id": 40
+   "id": 37
   },
   {
    "type": "quote",
@@ -2920,7 +2990,7 @@
      "manual/09-market-daily.md"
     ]
    },
-   "id": 41
+   "id": 38
   },
   {
    "type": "compare",
@@ -2963,7 +3033,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 42,
+   "id": 39,
    "decide": {
     "pick": "compare",
     "situation": "compare",
@@ -3094,7 +3164,7 @@
      }
     }
    ],
-   "id": 43
+   "id": 40
   },
   {
    "type": "zoomshot",
@@ -3142,13 +3212,13 @@
      "say": "그런데 그 문장 끝에 단서가 붙어 있습니다. 적어도 올해까지는."
     }
    ],
-   "id": 44
+   "id": 41
   },
   {
    "type": "motionboard",
    "chapter": 5,
    "title": "그 차이가 줄기 시작했다",
-   "label": "연준 금융안정보고서 2026.11 상자 2.2 · 'at least until this year' · 이 채널의 해석",
+   "label": "연준 금융안정보고서 2026.11 상자 2.2 · 'at least until this year' · 가설",
    "els": {
     "tel": {
      "kind": "card",
@@ -3213,7 +3283,7 @@
      }
     }
    ],
-   "id": 45
+   "id": 42
   },
   {
    "type": "bars",
@@ -3241,7 +3311,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 46,
+   "id": 43,
    "decide": {
     "pick": "bars",
     "situation": "compare",
@@ -3315,7 +3385,7 @@
      "manual/09-market-daily.md"
     ]
    },
-   "id": 47
+   "id": 44
   },
   {
    "type": "versus",
@@ -3359,7 +3429,7 @@
      "say": "재시의 지금 쓰고 나중에 번다와 위글스워스의 빚 금융이 된 해도 둘 다 맞을 수 있습니다. 멈추지 않는 대신, 그 속도를 채권시장이 받쳐 줘야 하는 거죠."
     }
    ],
-   "id": 48,
+   "id": 45,
    "decide": {
     "pick": "versus",
     "situation": "said",
@@ -3393,12 +3463,12 @@
      "say": "이 소식을 국내 매체는 주로 한국 반도체에 미칠 영향으로, 해외 매체는 누가 이 빚을 빌려주나로 보도했습니다. 두 쪽을 이으면, 돈이 어디로 흘렀는지가 보입니다."
     }
    ],
-   "id": 49
+   "id": 46
   },
   {
    "type": "motionboard",
    "chapter": 6,
-   "label": "이 채널의 해석 · 근거: 세인트루이스 연준 블로그 2026.11.19 (코즐로프스키·산체스·설리번) · SK하이닉스 순현금·미국 매출 비중은 이코노미스트 2026.11.17 보도(분기보고서 인용)",
+   "label": "가설 · 근거: 세인트루이스 연준 블로그 2026.11.19 (코즐로프스키·산체스·설리번) · SK하이닉스 순현금·미국 매출 비중은 이코노미스트 2026.11.17 보도(분기보고서 인용)",
    "title": "빌린 돈은 어디로 갔나",
    "els": {
     "buy": {
@@ -3463,7 +3533,7 @@
      }
     }
    ],
-   "id": 50,
+   "id": 47,
    "decide": {
     "pick": "motionboard",
     "situation": "explain-market",
@@ -3535,7 +3605,7 @@
      "say": "국내 보도 원문으로 보면, SK하이닉스는 9월 말 빚을 빼고도 98조 원이 넘는 순현금을 쥐고 있습니다."
     }
    ],
-   "id": 51
+   "id": 48
   },
   {
    "type": "motionboard",
@@ -3606,7 +3676,7 @@
      }
     }
    ],
-   "id": 52
+   "id": 49
   },
   {
    "type": "checklist",
@@ -3638,7 +3708,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 53,
+   "id": 50,
    "decide": {
     "pick": "checklist",
     "situation": "earnings",
@@ -3706,7 +3776,7 @@
      "say": "같은 기사에서 한국신용평가는, 2028년까지 AI 설비투자 약 2조 9천억 달러 가운데 절반가량이 외부 자금으로 채워질 걸로 봤습니다."
     }
    ],
-   "id": 54
+   "id": 51
   },
   {
    "type": "motionboard",
@@ -3792,7 +3862,7 @@
      }
     }
    ],
-   "id": 55
+   "id": 52
   },
   {
    "type": "quote",
@@ -3824,7 +3894,7 @@
      "manual/09-market-daily.md"
     ]
    },
-   "id": 56
+   "id": 53
   },
   {
    "type": "quote",
@@ -3864,7 +3934,7 @@
      "manual/09-market-daily.md"
     ]
    },
-   "id": 57
+   "id": 54
   },
   {
    "type": "versus",
@@ -3886,7 +3956,7 @@
      "say": "한 사람은 사는 쪽의 돈을, 다른 사람은 파는 쪽의 사이클을 보고 있습니다. 이 영상의 세 층으로 옮기면, 위층의 주문은 쉽게 꺾이지 않겠지만, 늘어나는 주문의 끝자락인 아래층의 추가 주문이 먼저 흔들릴 수 있습니다."
     }
    ],
-   "id": 58,
+   "id": 55,
    "decide": {
     "pick": "versus",
     "situation": "said",
@@ -3920,7 +3990,7 @@
      "say": "이 해석이 틀릴 수 있는 경우도 셋 있습니다."
     }
    ],
-   "id": 59
+   "id": 56
   },
   {
    "type": "checklist",
@@ -3961,7 +4031,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 60,
+   "id": 57,
    "decide": {
     "pick": "checklist",
     "situation": "next-week",
@@ -3998,12 +4068,12 @@
      "say": "그래서 다음에 볼 숫자는 셋입니다."
     }
    ],
-   "id": 61
+   "id": 58
   },
   {
    "type": "checklist",
    "chapter": 8,
-   "label": "기준선: 이 채널 계산(3분기 116%)·각 사 보도자료(자사주 0)·코어위브 4분기 이자 예상·로이터 11.9(+0.5%p) · 오라클 실적일은 회사 공지로 확인",
+   "label": "기준선: 가설 계산(3분기 116%)·각 사 보도자료(자사주 0)·코어위브 4분기 이자 예상·로이터 11.9(+0.5%p) · 오라클 실적일은 회사 공지로 확인",
    "title": "판가름 숫자 — 날짜와 기준선",
    "x": 150,
    "text_w": 1200,
@@ -4039,7 +4109,7 @@
     }
    ],
    "skin": "dark-doc",
-   "id": 62,
+   "id": 59,
    "decide": {
     "pick": "checklist",
     "situation": "next-week",
@@ -4061,42 +4131,6 @@
    }
   },
   {
-   "type": "kinetic",
-   "chapter": 8,
-   "decide": {
-    "pick": "kinetic",
-    "situation": "conclusion",
-    "over": [
-     {
-      "id": "bignum",
-      "why_not": "숫자가 아니라 결론 한 문장"
-     },
-     {
-      "id": "quote",
-      "why_not": "누구의 말이 아니라 이 영상의 결론"
-     },
-     {
-      "id": "map_causal",
-      "why_not": "이 영상의 결론 한 줄 — 그림 없이 글자로 — 추천 'map_causal' 대신"
-     }
-    ],
-    "why": "아이스먼 편 틀 — 결론을 한 줄 글자로 (09 §5-00 결론 먼저) (장면 63)",
-    "intent": "영상의 답을 한 문장으로 기억한다",
-    "refs": [
-     "manual/09-market-daily.md"
-    ]
-   },
-   "beats": [
-    {
-     "say": "그래서 문제는 빅테크가 멈추느냐가 아니라, 채권시장이 언제까지 돈을 대 주느냐입니다.",
-     "hit": [
-      "채권시장"
-     ]
-    }
-   ],
-   "id": 63
-  },
-  {
    "type": "outro",
    "chapter": 9,
    "title": "칩을 사는 돈, 열쇠는 채권시장",
@@ -4112,7 +4146,7 @@
      "say": "그렇다면 반도체 주식을 가진 우리가 지켜봐야 할 건, 빅테크의 실적 발표만이 아니라 채권시장의 표정이 아닐까요."
     }
    ],
-   "id": 64
+   "id": 60
   }
  ]
 }
