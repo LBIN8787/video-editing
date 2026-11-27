@@ -1,0 +1,45 @@
+# 연출 결정 기록 — 20261127-market-deep-anthropic-damodaran
+
+여러 연출·편집·스타일 가운데 이것을 고른 근거와 의도 (manual/05 §0-9, docs/66). 렌더 전에 이 한 장으로 검토합니다.
+
+**결과: 통과**
+
+## 영상 방향
+
+- 고른 것: **hybrid-causal — 드러켄밀러 편 틀(09 §5-00): 원본 발언으로 결론 먼저, 평가표를 열어 직접 계산으로 따지고, 해설은 문장을 연기하는 설명 무대**
+- 왜: 질문이 '이 값은 무엇을 깔고 있나'라서 평가표(숫자)와 판단(원본 목소리)을 한 장 안에서 맞대야 한다
+- 의도: 시청자는 지금 주가가 깔고 있는 매출(1.08조)과 그 민감도(절반이면 3분의 1)를 알고, 하이닉스·삼성에 걸린 것이 '다음 약정'이라는 것을 들고 간다
+- 버린 것: `docu` — 레퍼런스 형식을 먼저 고른 다큐 판은 기각(v127) — 이 편은 한 사람의 평가표가 주인공
+- 버린 것: `moneycrew` — 평면 인포그래픽만으로는 원본 발언 맞대기를 들려줄 수 없음
+- 버린 것: `news-desk` — 한 소식 한 장은 브리핑용 — 이 편은 평가 하나를 해부하는 심층
+- 이 영상의 장면 어휘(닫힌 목록): bite, zoomshot, kinetic, chapter, motionboard, bars, share, checklist, quote, versus, outro
+- 근거 문서: manual/09-market-daily.md#5-00, manual/09-market-daily.md#5-0-2, docs/68-explainer-docu-benchmark.md, recipe:hybrid-causal
+
+## 장면마다
+
+| 장면 | 상황 | 고른 것 | 추천(edit-plan) | 버린 것 | 왜 | 의도 |
+|---|---|---|---|---|---|---|
+| 1 | said | bite | bite → footage → quote | quote, footage | 썸네일이 약속한 장면(다모다란의 조건)을 첫 화면에서 본인 목소리로 | 이 값이 '매출 하나'에 걸려 있다는 판단을 먼저 듣는다 |
+| 2 | say-vs-do | zoomshot | bignum → chart → bars | bignum, bars | 주가와 그의 값, 그 값의 뿌리(10년차 매출)를 원문 표 위에서 | 76달러와 1조 44억이 그의 표에 적힌 숫자임을 보고 질문을 들고 간다 |
+| 3 | conclusion | kinetic | bignum → chart → bars | bignum, bars, quote | §5-00 결론 먼저 — 첫 30초 안에 영상의 답을 한 줄로 | '1조 800억'과 '3분의 1'을 들고 뒤의 계산을 따라간다 |
+| 5 | explain | motionboard | bignum → chart → bars | checklist, bignum | 그의 '이야기 → 숫자' 방식을 사슬로 그린다 | 값이 어떤 가정 위에 서 있는지 본다 |
+| 6 | ratio | bars | bignum → chart → bars | chart, bignum | 그의 매출 경로를 제 크기 막대로 — 352억과 1조의 차이를 눈으로 | '10년에 28배'의 무게를 느낀다 |
+| 7 | said | bite | bite → footage → quote | quote, footage | 길의 가파름을 그 본인의 목소리로 | '해마다 두 배'가 그 스스로의 말이라는 것을 듣는다 |
+| 8 | said | bite |  | quote, footage | 자기 평가를 '낙관'이라 부른 반전 | 그의 76달러조차 낙관적인 가정이라는 것을 안다 |
+| 10 | ratio | share | bignum → chart → bars | bignum, bars | 값의 구조(앞 10년 vs 그 뒤)를 한 막대로 (다른 선택 이유: 6번은 연도별 매출 크기(제 크기 막대), 여기는 한 값 안의 몫(앞 10년 vs 그 뒤) — 전체 중 몫이라 한 막대의 조각) | 값이 왜 먼 미래 매출에 매달리는지 원리로 이해한다 |
+| 11 | ratio | bars | bars → versus → bignum | chart, checklist | 직접 계산 — 매출 경로 하나만 바꿨을 때 값의 민감도를 제 모양 그래프로 | 매출이 반이면 값은 3분의 1이라는 비대칭을 눈으로 본다 |
+| 12 | explain | motionboard | bignum → chart → bars | bignum, bars | §5-0 직접 계산 — 가격에서 가정을 꺼내는 역산 | 지금 주가가 이미 가장 밝은 길을 가격에 넣었다는 것을 안다 |
+| 14 | say-vs-do | checklist | bars → versus → bignum | bignum, quote, bars | §5-1 원문 숫자를 한 줄씩 먼저 (다른 선택 이유: 2번은 한 장짜리 원문 표라 화면에 상자를 칠 수 있음, 424B4 는 숫자가 문서 여러 곳(개요·위험 요인)에 흩어져 한 화면 캡처가 안 됨 — 원문 숫자 넷을 목록으로) | 약정의 크기와 '안 써도 낸다'는 조건을 원문으로 확인한다 |
+| 15 | said | bite |  | quote, footage | 약정을 '빚'으로 읽는 그의 판단을 본인 목소리로 | 약정이 왜 위험한지 그의 원칙으로 듣는다 |
+| 16 | explain | motionboard | bignum → chart → bars | bars, quote, bignum | 직접 계산(87%)과 그의 '숨 쉴 틈' 조건을 한 장면에 | 약정이 왜 매출 속도에 매달리는지 숫자로 이해한다 |
+| 17 | said | quote | card_type → chapter | bite, kinetic, card_type | §3-4 같은 무게 — 그의 비판 다음에 그가 인정한 이유도 (다른 선택 이유: 원본 영상이 있는 말은 bite, 이 문장은 같은 방송 매체 원본을 이미 다섯 구간 써서 원문·번역 카드) | 약정이 위험이자 무기라는 양면을 본다 |
+| 19 | said | bite | bignum → chart → bars | quote, footage, bignum | 반대 판단을 같은 무게(원본 목소리)로 | 낙관하는 쪽이 무엇을 근거로 드는지 듣는다 |
+| 20 | said | bite | versus → bars → compare | quote, footage, versus | 낙관 쪽 핵심 근거(가격 결정력)를 본인 목소리로 | 우드가 '비싸도 쓴다'를 근거로 든다는 것을 안다 |
+| 21 | compare | checklist | bars → versus → bignum | versus, bars | §5-0-2 주장 해부 — 낙관 쪽도 받침·어긋남·이해관계를 같은 깊이로 | 우드의 '확신'이 어디까지 받쳐지는지 본다 |
+| 23 | said | bite | bite → footage → quote | quote, footage | 갈리는 고리(가격 결정력)에서 회의 쪽 판단을 본인 목소리로 | 다모다란이 '비싼 자리'를 의심한다는 것을 듣는다 |
+| 24 | compare | versus | bars → versus → bignum | checklist, map_causal | 두 판단이 갈리는 단 하나의 고리를 좌우로 (다른 선택 이유: 21번은 한 사람의 받침·어긋남 판정(목록), 여기는 맞선 두 사람의 같은 고리(가격 결정력)를 좌우로 맞댐) | 누가 맞는지는 '값'에서 판가름 난다는 것을 기억한다 |
+| 25 | timeline | checklist | bars → versus → bignum | bars, kinetic | 갈리는 고리마다 먼저 움직일 숫자 하나씩 | 무엇이 나오면 누가 맞는지 안다 |
+| 27 | explain | motionboard | bars → versus → bignum | map_causal, checklist, bars | 약정이 한국 메모리까지 가는 경로와 '묶인 몫 vs 다음 몫'을 가른다 | 하이닉스·삼성에 걸린 것이 '다음 약정'이라는 것을 이해한다 |
+| 28 | timeline | checklist | bars → versus → bignum | kinetic, map_causal, bars | 한국 계좌·미국 계좌에 먼저 움직일 숫자를 날짜와 함께 | 다음 몇 달 무엇을 보면 되는지 안다 |
+| 29 | point | checklist | bars → versus → bignum | kinetic, map_causal, bars | 판단마다, 그리고 이 채널 계산의 한계까지 같은 무게로 | 어느 쪽이든 틀릴 수 있는 조건을 안다 |
+| 30 | conclusion | kinetic | bars → versus → bignum | recap, quote, bars | 영상 전체를 한 문장으로 닫는다 (첫 결론과 같은 축) | '매출의 속도'를 기억한다 |
