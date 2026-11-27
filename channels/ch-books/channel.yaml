@@ -31,6 +31,23 @@ formats:   # 두 형식 — 대기열에서 주제마다 하나를 고름 (docs/
     fits: "소설·고전 문학·철학 고전(이야기가 있는 것) — 주인공의 마음이 오늘의 고민(사랑·상실·불안·욕망)과 닿는 작품"
     rights: "저작권이 끝난 고전 우선(한국 기준 저자 사망 1962년 이전 등은 확인 후). 현대 소설은 본문 인용을 짧게, 줄거리는 우리 말로 다시 씀. 본문 전문 낭독 없음"
 
+art:   # 2026-11-27 사용자: "차라리 삽화로 해주세요" → 형식별 화풍을 보고 "형식별로 나눠주세요"
+  generator: "사용자 Codex $imagegen (ChatGPT 구독) — API 키·다른 서비스 아님"
+  rule: "형식마다 화풍 하나. 새 그림은 그 형식의 기준 그림을 참조(-i)로 붙여 화풍을 맞춤. 한 편 안에서 같은 인물은 첫 승인 장면을 참조로 '얼굴은 그대로, 자세·배경만' 고쳐 그림. 그림 속 글자 없음."
+  check: "새 편 원화는 대표 장면 2~4장을 기준 그림과 나란히 먼저 보이고, 통과한 뒤 나머지를 그림."
+  formats:
+    story:     # ③ 명작 서사형
+      look: "유화풍 실사 — 따뜻하고 차분한 과슈·유화 붓 자국, 시대 고증이 있는 배경, 영화 같은 빛, 채도 낮게. 고전의 무게감"
+      prompt_style: "painterly storybook illustration in warm muted gouache/oil with visible brush texture, period-accurate setting, cinematic film-like lighting, slightly desaturated, realistic proportions, no text"
+      refs: ["refs/ch-books/story_style_open.png", "refs/ch-books/story_style_mind.png"]   # Google Drive ytflow/ 아래 (『죄와 벌』 예시)
+      overlays: "생각 풍선(손글씨)·인물 카드(원하는 것/두려운 것)·결말 포함 표시·밑줄 인용·페이지 넘김"
+      footage: "영화·드라마 장면 쓰지 않음 (권리) — 삽화만"
+    question:  # ② 질문형
+      look: "부드러운 애니풍 — 둥근 얼굴, 따뜻한 조명의 요즘 한국 생활 공간, 연필·과슈 질감. 시청자 자신의 일상처럼"
+      prompt_style: "soft warm anime-style illustration with gentle pencil and gouache texture, cozy present-day Korean interiors, warm lamp light, simple rounded faces, no text"
+      refs: ["refs/ch-books/question_style.png"]
+      overlays: "손그림 표시(✓·✗·동그라미)·연구 숫자 모션그래픽(흰 바탕)·연구자 실제 사진"
+      footage: "무료 스톡 실사 인물 영상(책 읽는 사람·직장인)을 마디에 섞어도 됨 — 출처·라이선스 기록"
 cadence: "주 2편으로 시작 — ③ 명작 서사형을 주력(주 1~2), ② 질문형을 곁들임. 반응을 보고 조정"
 voice: "초안 무료 목소리(edge·Gemini), 채널 목소리는 첫 편 확정 후 정함"
 tts:
