@@ -264,12 +264,22 @@ def auto_thumb(pr: Project, thumb: str) -> str:
 
 
 def run(project: str, at: str | None = None, privacy: str | None = None, dry_run: bool = False, thumb: str = "auto", resume: bool = False,
-        update_meta: bool = False) -> dict:
+        update_meta: bool = False, delete: str | None = None) -> dict:
     pr = Project.open(project)
-    thumb = auto_thumb(pr, thumb)
     edir = pr.dir("edit")
     rec_p = edir / "youtube_publish.json"
     old = json.loads(rec_p.read_text(encoding="utf-8")) if rec_p.exists() else {}
+    if delete:   # 사용자가 지우라고 한 영상만 (영구 삭제 — 되돌릴 수 없음, 2026-11-27 사용자: 다모다란 1판 "지워주시고")
+        if dry_run:
+            print(f"[yt-publish] 삭제 미리 보기 (지우지 않음): {delete}")
+            return {"delete": delete}
+        tok = _token(settings(pr).get("credentials"))
+        _req(tok, "DELETE", f"{API}/videos?id={delete}")
+        old.setdefault("deleted", []).append({"video_id": delete, "at": dt.datetime.now(KST).isoformat(timespec="seconds")})
+        rec_p.write_text(json.dumps(old, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(f"[yt-publish] 삭제함: {delete}")
+        return old
+    thumb = auto_thumb(pr, thumb)
     if update_meta:
         if not old.get("video_id"):
             raise SystemExit("[yt-publish] --update-meta: 아직 올린 영상이 없습니다 (youtube_publish.json 의 video_id)")
@@ -372,7 +382,7 @@ def _resume(pr: Project, rec: dict, rec_p: Path, thumb: str) -> dict:
 
 
 def request_github(project: str, at: str | None = None, privacy: str | None = None, thumb: str = "auto", resume: bool = False,
-                   update_meta: bool = False) -> None:
+                   update_meta: bool = False, delete: str | None = None) -> None:
     """GitHub Actions 에 올리기를 맡긴다: publish/<프로젝트> 브랜치에 요청 파일 하나를 올리면 워크플로가 Release 영상을 받아 올린다."""
     import subprocess
     import tempfile
@@ -382,10 +392,10 @@ def request_github(project: str, at: str | None = None, privacy: str | None = No
     name = pr.path.name
     if not (pr.dir("edit") / "youtube.md").exists():
         raise SystemExit("[yt-publish] 05_edit/youtube.md 가 없습니다 — 먼저 python -m ytflow yt-pack " + name)
-    resume = resume or update_meta   # 이미 올린 영상: 영상 파일은 다시 받지 않음
+    resume = resume or update_meta or bool(delete)   # 이미 올린 영상: 영상 파일은 다시 받지 않음
     if not resume and not (pr.dir("edit") / "release.json").exists():
         raise SystemExit("[yt-publish] 영상이 GitHub Release 에 없습니다 — 먼저 python -m ytflow upload " + name)
-    req = json.dumps({"project": name, "at": at, "privacy": privacy, "thumb": thumb, "resume": resume, "update_meta": update_meta}, ensure_ascii=False)
+    req = json.dumps({"project": name, "at": at, "privacy": privacy, "thumb": thumb, "resume": resume, "update_meta": update_meta, "delete": delete}, ensure_ascii=False)
     work = Path(tempfile.mkdtemp(prefix="ytflow-pub-"))
     (work / "req.json").write_text(req, encoding="utf-8")
     env = dict(os.environ, GIT_INDEX_FILE=str(work / "index"))

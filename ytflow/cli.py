@@ -381,6 +381,7 @@ def main(argv: list[str] | None = None) -> None:
     yu.add_argument("--thumb", default="auto", help="썸네일 A/B/C 또는 auto(기본: thumbnail 단계가 docs/49·55 근거 점수로 고른 것 05_edit/thumbnail_pick.json)")
     yu.add_argument("--dry-run", action="store_true", help="올리지 않고 무엇을 할지만 보기")
     yu.add_argument("--resume", action="store_true", help="이미 올린 영상에 빠진 단계(썸네일·자막·재생목록)만 다시")
+    yu.add_argument("--delete", metavar="영상ID", help="올린 영상을 영구 삭제 (사용자가 지우라고 한 것만 — 되돌릴 수 없음)")
     yu.add_argument("--update-meta", action="store_true", help="이미 올린 영상의 제목·설명란·태그를 youtube.md(제목 1번)로 다시 맞추기")
     yu.add_argument("--skip-preflight", default="", metavar="이유", help="종합 검수 없이 올리기 (사용자가 허락한 경우만, 이유를 기록)")
     op = sub.add_parser("ops", help="채널 운영·분석: 올린 영상 수치·시청 지속·노출·댓글 수집 → channels/<채널>/ops/<날짜>.md (docs/63)")
@@ -658,10 +659,10 @@ def main(argv: list[str] | None = None) -> None:
         presenter.make(_P.open(a.project))
     elif a.cmd == "yt-publish":
         from .stages import ytpublish
-        if os.environ.get("YTFLOW_HOLD_PUBLISH") and not (a.update_meta or a.dry_run):
+        if os.environ.get("YTFLOW_HOLD_PUBLISH") and not (a.update_meta or a.dry_run or a.delete):
             # 2026-11-24 사용자: "시장채널 일단은 업로드 자동업로드하지말고 냅둬주세요" — 정기 작업이 이 값을 켜고 돌림
             raise SystemExit("[yt-publish] 보류 — 자동 업로드를 멈춰 둠(YTFLOW_HOLD_PUBLISH). 영상은 만들어 두고 올리지 않습니다")
-        if not (a.resume or a.update_meta or a.dry_run):   # 새로 올릴 때만: 업로드 전 종합 검수 (2026-11-21 사용자, manual/09 §9-1)
+        if not (a.resume or a.update_meta or a.dry_run or a.delete):   # 새로 올릴 때만: 업로드 전 종합 검수 (2026-11-21 사용자, manual/09 §9-1)
             from .stages import preflight
             why = preflight.gate(Project.open(a.project))
             if why and not a.skip_preflight:
@@ -669,9 +670,9 @@ def main(argv: list[str] | None = None) -> None:
             if why:
                 print(f"[yt-publish] 종합 검수 건너뜀 (사유: {a.skip_preflight}) — {why}")
         if a.dry_run or a.via == "here":
-            ytpublish.run(a.project, at=a.at, privacy=a.privacy, dry_run=a.dry_run, thumb=a.thumb, resume=a.resume, update_meta=a.update_meta)
+            ytpublish.run(a.project, at=a.at, privacy=a.privacy, dry_run=a.dry_run, thumb=a.thumb, resume=a.resume, update_meta=a.update_meta, delete=a.delete)
         else:
-            ytpublish.request_github(a.project, at=a.at, privacy=a.privacy, thumb=a.thumb, resume=a.resume, update_meta=a.update_meta)
+            ytpublish.request_github(a.project, at=a.at, privacy=a.privacy, thumb=a.thumb, resume=a.resume, update_meta=a.update_meta, delete=a.delete)
     elif a.cmd == "ops":
         from .stages import channelops
         channelops.run(a.channels or None, do_fetch=not a.report_only, do_report=not a.no_report)
