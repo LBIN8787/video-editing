@@ -21,7 +21,7 @@ for i, ln in enumerate(lines):
     shots.append(s)
 shots[0]["tr"] = "fade"; shots[0]["fade_dur"] = 1.0
 shots[-1]["fade_out"] = True
-plan = {"art_dir": str(proj / "art"), "voice_dir": str(proj / "voice"), "out": str(proj / "eden_remake.mp4"),
+plan = {"art_dir": str(proj / "art"), "voice_dir": str(proj / "voice"), "out": str(proj / (sys.argv[3] if len(sys.argv) > 3 else "story.mp4")),
         "subtitle": "plain", "recon": False, "bgm": str(proj / "bgm.wav"), "shots": shots}
 (proj / "plan.json").write_text(json.dumps(plan, ensure_ascii=False, indent=1), encoding="utf-8")
 from collections import Counter

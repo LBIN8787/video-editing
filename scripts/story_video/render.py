@@ -97,22 +97,25 @@ def align_tokens(e):
         out.append([t, s, e_])
     return out
 
+SUB_MAX = 30 if plan.get("subtitle") == "plain" else 40      # v2: 레퍼런스처럼 짧게 끊음
+SUB_COMMA = 12 if plan.get("subtitle") == "plain" else 24
+SUB_WRAP = 18 if plan.get("subtitle") == "plain" else 22
 def chunks(e):
     out, cur = [], []
     def flush():
         if cur: out.append(cur.copy()); cur.clear()
     for w in align_tokens(e):
-        if cur and len(" ".join(x[0] for x in cur + [w])) > 40: flush()
+        if cur and len(" ".join(x[0] for x in cur + [w])) > SUB_MAX: flush()
         cur.append(w)
         if w[0].endswith((".", "?", "!", "\"", "”")): flush()   # 한 자막엔 한 문장만
-        elif w[0].endswith(",") and len(" ".join(x[0] for x in cur)) > 24: flush()
+        elif w[0].endswith(",") and len(" ".join(x[0] for x in cur)) > SUB_COMMA: flush()
     flush()
     for c in out:  # 자막 끝 마침표는 뗌
         if c[-1][0].endswith("."): c[-1] = [c[-1][0][:-1]] + c[-1][1:]
     res = []
     for c in out:
         txt = " ".join(x[0] for x in c)
-        if len(txt) > 22:  # 두 줄로 — 가운데 가까운 띄어쓰기에서
+        if len(txt) > SUB_WRAP and len(c) > 1:  # 두 줄로 — 가운데 가까운 띄어쓰기에서
             ws = [x[0] for x in c]; best = min(range(1, len(ws)), key=lambda k: abs(len(" ".join(ws[:k])) - len(txt) / 2))
             lines = [" ".join(ws[:best]), " ".join(ws[best:])]
         else: lines = [txt]
@@ -122,7 +125,7 @@ def chunks(e):
     return res
 SUBS = [c for e in SAYS for c in chunks(e)]
 def _plain_sub(lines):   # v2: 상자 없이 흰 글자 + 부드러운 그림자 테두리 (레퍼런스 자막)
-    f = F("NanumGothic-Bold.ttf", 42)
+    f = F("NanumGothic-Bold.ttf", 58)   # 레퍼런스 자막 크기에 맞춤 (2차 대조)
     base = text_rgba(lines, f, fill=(255, 255, 255), pad=(24, 12), spacing=12)
     sh = text_rgba(lines, f, fill=(0, 0, 0), pad=(24, 12), spacing=12)
     a = cv2.GaussianBlur(sh[..., 3].astype(np.float32), (0, 0), 3.2)
@@ -244,7 +247,11 @@ def overlays(fr, s, t, geo):
 @functools.lru_cache(maxsize=8)
 def title_img(small, text):
     a = text_rgba([small], F("NanumMyeongjo-Bold.ttf", 28), fill=(235, 228, 214), pad=(10, 2), shadow=True)
-    b = text_rgba([text], F("NanumMyeongjo-ExtraBold.ttf", 64), fill=(246, 240, 228), pad=(14, 6), shadow=True)
+    ws = text.split(" ")   # v2: 긴 제목은 두 줄로 크게 (레퍼런스)
+    if len(text) > 14 and len(ws) > 1:
+        k = min(range(1, len(ws)), key=lambda i: abs(len(" ".join(ws[:i])) - len(text) / 2)); lines = [" ".join(ws[:k]), " ".join(ws[k:])]
+    else: lines = [text]
+    b = text_rgba(lines, F("NanumMyeongjo-ExtraBold.ttf", 76), fill=(246, 240, 228), pad=(14, 6), spacing=18, shadow=True)
     w = max(a.shape[1], b.shape[1]); im = np.zeros((a.shape[0] + b.shape[0], w, 4), np.uint8)
     im[:a.shape[0], (w - a.shape[1]) // 2:(w - a.shape[1]) // 2 + a.shape[1]] = a
     im[a.shape[0]:, (w - b.shape[1]) // 2:(w - b.shape[1]) // 2 + b.shape[1]] = b
@@ -331,7 +338,7 @@ def render_frame(t):
     if not s.get("nosub"):
         for i, c in enumerate(SUBS):
             if c["s"] - 0.05 <= t < c["e"]:
-                r = sub_img(i); paste(fr, r, (W - r.shape[1]) / 2, H - 70 - r.shape[0]); break
+                r = sub_img(i); paste(fr, r, (W - r.shape[1]) / 2, (H - 70 if plan.get("subtitle") != "plain" else H * 0.93) - r.shape[0]); break
     return fr
 
 # ---------- 출력 ----------
