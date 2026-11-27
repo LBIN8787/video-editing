@@ -1,0 +1,991 @@
+{
+ "project": "20261128-market-deep-optics-earnings",
+ "topic": "market",
+ "topic_name": "주식 · 시장",
+ "scenes": [
+  {
+   "scene": 1,
+   "type": "bite",
+   "chapter": 0,
+   "situation": "call-bite",
+   "situation_name": "어닝콜·기자회견 발언",
+   "origin": "add",
+   "also": [
+    "open-scene"
+   ],
+   "beats": [
+    {
+     "say": "11월 2일, 반도체 회사 마벨이 광학 회사 루멘텀을 주식으로 사겠다고 발표한 날 아침. 마벨의 CEO 맷 머피는 그 이유를 이렇게 말했습니다.",
+     "situations": [
+      "call-bite",
+      "open-scene"
+     ],
+     "hits": [
+      "CEO"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bite",
+    "quote"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "j-l-cut",
+     "status": "candidate"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "번역만 읽기",
+   "why": "원문+번역 2단, 그 사람의 목소리 (03 §0-1, source-cut)"
+  },
+  {
+   "scene": 2,
+   "type": "motionboard",
+   "chapter": 0,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "next-week",
+    "call-bite"
+   ],
+   "beats": [
+    {
+     "say": "루멘텀 한 주를 마벨 네 주 반으로 바꿔 주는 거래입니다. 그리고 미국 시간 12월 1일, 한국 시간으로는 2일 아침, 마벨과 연결 칩 회사 크리도가 나란히 실적을 냅니다.",
+     "situations": [
+      "earnings",
+      "next-week"
+     ],
+     "hits": [
+      "실적"
+     ]
+    },
+    {
+     "say": "그래서 이 영상의 질문은 이겁니다. AI 데이터센터의 다음 병목은 정말 연결일까. 결론부터 말하면, 연결을 만드는 회사 네 곳의 CEO는 모두 같은 답을 했습니다. 수요는 넘친다. 그렇다면 이번 실적에서 볼 것은 수요가 아니라, 공급이 얼마나 빨리 느는지, 몇 안 되는 고객에게 얼마나 ",
+     "situations": [
+      "earnings",
+      "call-bite"
+     ],
+     "hits": [
+      "실적"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 3,
+   "type": "chapter",
+   "chapter": 1,
+   "situation": "question",
+   "situation_name": "질문·명제 한 줄을 던진다",
+   "origin": "main",
+   "also": [
+    "said"
+   ],
+   "beats": [
+    {
+     "say": "먼저, 왜 하필 연결일까요. 머피는 10월 7일, 투자자의 날 다음 날 CNBC에서 이렇게 설명했습니다.",
+     "situations": [
+      "question",
+      "said"
+     ],
+     "hits": [
+      "왜 ",
+      "일까요"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "card_type",
+    "chapter"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "그림을 억지로 넣기",
+   "why": "질문은 글자 하나로 — 강조 예산 안에서 (05 §0-1)"
+  },
+  {
+   "scene": 4,
+   "type": "bite",
+   "chapter": 1,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "AI 반도체 붐이 어떤 순서로 왔는지부터 짚습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 5,
+   "type": "motionboard",
+   "chapter": 1,
+   "situation": "cause",
+   "situation_name": "원인 → 결과를 잇는다",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "데이터센터 안의 연결은 크게 두 가지입니다. 서버 랙과 랙 사이를 잇는 스케일아웃, 그리고 한 랙 안에서 GPU끼리 하나처럼 묶는 스케일업입니다.",
+     "situations": [],
+     "hits": []
+    },
+    {
+     "say": "랙 사이는 이미 빛, 광모듈을 꽂아 씁니다. 그런데 랙 안은 아직 대부분 구리선입니다. 묶는 GPU가 수백, 수천 개로 늘면 구리는 멀리, 많이 보내지 못합니다. 그래서 마지막 남은 구리, 랙 안까지 빛으로 바뀐다는 것이 이 회사들의 판단입니다.",
+     "situations": [
+      "cause"
+     ],
+     "hits": [
+      "그래서"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "map_causal",
+    "analogy"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    },
+    {
+     "id": "spotlight",
+     "status": "have"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "장면마다 새 도식 (같은 칸 위치 유지)",
+   "why": "화살표가 말과 함께 그어져야 '이어진다'가 보임"
+  },
+  {
+   "scene": 6,
+   "type": "bite",
+   "chapter": 1,
+   "situation": "call-bite",
+   "situation_name": "어닝콜·기자회견 발언",
+   "origin": "add",
+   "also": [],
+   "beats": [
+    {
+     "say": "광학 회사 코히런트의 CEO 짐 앤더슨도 8월, 언젠가 구리를 광섬유로 다 바꿀 수 있겠냐는 질문에 같은 그림을 그렸습니다.",
+     "situations": [
+      "call-bite"
+     ],
+     "hits": [
+      "질문에",
+      "CEO"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bite",
+    "quote"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "j-l-cut",
+     "status": "candidate"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "번역만 읽기",
+   "why": "원문+번역 2단, 그 사람의 목소리 (03 §0-1, source-cut)"
+  },
+  {
+   "scene": 7,
+   "type": "checklist",
+   "chapter": 1,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric",
+    "said"
+   ],
+   "beats": [
+    {
+     "say": "숫자로도 확인됩니다. 마벨의 회계 2분기, 5월에서 7월 데이터센터 매출은 21억 7천만 달러로 1년 전보다 46% 늘었고, 3분기에는 한 분기 만에 20% 넘게 더 늘 거라고 했습니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출",
+      "분기"
+     ]
+    },
+    {
+     "say": "그리고 실적 콜에서 머피는 고객들이 이르면 내년부터 스케일업 광학을 공격적으로 배치하려 한다고 말했습니다. 다만 단서를 달았습니다. 이 전환은 여러 해가 걸리고, 그동안 구리와 빛이 함께 쓰인다고요. 랙 사이는 꽂는 광모듈이 계속 주류일 거라는 말도 했습니다.",
+     "situations": [
+      "earnings",
+      "said"
+     ],
+     "hits": [
+      "실적"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 8,
+   "type": "chapter",
+   "chapter": 2,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "call-bite"
+   ],
+   "beats": [
+    {
+     "say": "그런데 수요가 이렇게 넘치는데, 광학 회사 주가는 11월 초 크게 흔들렸습니다. 11월 6일 CNBC는 루멘텀이 그 주에만 40% 가까이 빠졌다고 전했습니다. AI 종목 매도에, 주식으로 하는 인수까지 겹친 겁니다. 루멘텀의 CEO 마이클 헐스턴은 11월 6일 이렇게 말했습니다.",
+     "situations": [
+      "metric",
+      "call-bite"
+     ],
+     "hits": [
+      "40%",
+      "주가"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 9,
+   "type": "bite",
+   "chapter": 2,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": []
+  },
+  {
+   "scene": 10,
+   "type": "checklist",
+   "chapter": 2,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric",
+    "open-scene"
+   ],
+   "beats": [
+    {
+     "say": "그가 말한 주문 장부의 모습은 실적 콜에 있습니다. 8월 콜에서 헐스턴은 고출력 레이저 출하가 수요보다 한참 뒤처졌다고 했습니다. 마벨은 부품을 미리 잡으려고 이번 회계연도에만 공급처에 10억 달러가량을 먼저 내고 있습니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "실적"
+     ]
+    },
+    {
+     "say": "코히런트는 레이저 재료인 인듐인 생산능력을 1년 새 두 배로 늘렸고 2027년 말까지 또 두 배 넘게 늘립니다. 데이터센터 사이를 잇는 시에나의 게리 스미스는 여러 해 이어질 투자 시대의 아주 초기라며, 부품 공급 계약을 2029년까지 묶었습니다. 매출의 천장은 수요가 아니라 공급이라는",
+     "situations": [
+      "earnings",
+      "open-scene"
+     ],
+     "hits": [
+      "매출"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 11,
+   "type": "bite",
+   "chapter": 2,
+   "situation": "call-bite",
+   "situation_name": "어닝콜·기자회견 발언",
+   "origin": "add",
+   "also": [
+    "said"
+   ],
+   "beats": [
+    {
+     "say": "그런데 투자자들이 바로 여기서 묻습니다. 루멘텀의 레이저는 특별한 기술인가, 아니면 지금 모자라서 비쌀 뿐인 흔한 부품인가. 인수가 끝날 18개월 뒤엔 남아돌 수도 있지 않냐는 질문에, 머피는 이렇게 답했습니다.",
+     "situations": [
+      "call-bite",
+      "said"
+     ],
+     "hits": [
+      "질문에"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bite",
+    "quote"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "j-l-cut",
+     "status": "candidate"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "번역만 읽기",
+   "why": "원문+번역 2단, 그 사람의 목소리 (03 §0-1, source-cut)"
+  },
+  {
+   "scene": 12,
+   "type": "motionboard",
+   "chapter": 2,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric",
+    "cause"
+   ],
+   "beats": [
+    {
+     "say": "여기서부터는 가설입니다. 공급 부족은 양면이 있습니다. 지금은 값이 버티고 마진이 오릅니다. 실제로 헐스턴은 11월 2일, 루멘텀의 매출총이익률이 53%로 역대 최고라고 했습니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    },
+    {
+     "say": "하지만 모두가 동시에 공장을 늘리면, 몇 년 뒤엔 남을 수 있습니다. 메모리가 여러 번 겪은 길입니다. 머피의 말처럼 고객이 쉽게 바꾸지 못하는 제품이라면 마진이 버티고, 흔한 부품이라면 증설과 함께 마진이 꺾입니다. 그래서 수요보다 레이저 회사의 매출총이익률이 먼저 답을 알려 줍니다.",
+     "situations": [
+      "earnings",
+      "cause"
+     ],
+     "hits": [
+      "매출"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 13,
+   "type": "chapter",
+   "chapter": 3,
+   "situation": "call-bite",
+   "situation_name": "어닝콜·기자회견 발언",
+   "origin": "add",
+   "also": [],
+   "beats": [
+    {
+     "say": "그럼 수요가 금방 꺾이지 않는다고 보는 이유는 뭘까요. 그 질문에 머피는 5년 전 자기가 산 회사 이야기로 답합니다.",
+     "situations": [
+      "call-bite"
+     ],
+     "hits": [
+      "질문에"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bite",
+    "quote"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "j-l-cut",
+     "status": "candidate"
+    },
+    {
+     "id": "rough-highlight",
+     "status": "partial"
+    }
+   ],
+   "blocked": [],
+   "avoid": "번역만 읽기",
+   "why": "원문+번역 2단, 그 사람의 목소리 (03 §0-1, source-cut)"
+  },
+  {
+   "scene": 14,
+   "type": "bite",
+   "chapter": 3,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": []
+  },
+  {
+   "scene": 15,
+   "type": "motionboard",
+   "chapter": 3,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "머피 말로는 인파이가 연 7억 달러에서 5년 만에 열 배가 됐고, 그건 랙 사이 광 전환을 탄 결과입니다. 머피는 랙 안에서 같은 일이 다시 온다고 보는 겁니다. 다만 순서가 있습니다. 지금 매출은 거의 다 랙 사이를 잇는 쪽, 광모듈과 케이블입니다. 머피도 8월에 스케일업 기회는 아직",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    },
+    {
+     "say": "머피는 이르면 내년부터 스케일업 배치가 시작된다고 했고, 코히런트는 스케일업용으로 칩 옆에 붙이는 광학, CPO 출하를 2027년 하반기에 시작한다고 했습니다. 코히런트가 큰 AI 회사와 맺은 5년 200억 달러 계약도 매출은 2028년 초부터입니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출"
+     ]
+    },
+    {
+     "say": "여기서부터는 가설입니다. 200억 달러를 5년으로 나누면 한 해 40억, 지금 코히런트 연 매출의 42% 정도가 2028년부터 얹히는 셈입니다. 큰돈이지만 시간이 걸립니다. 그래서 12월 1일에 나올 숫자는 거의 다 랙 사이의 몫입니다. 스케일업 이야기는 이번 실적으로 판정할 수 없습니",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출",
+      "실적"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 16,
+   "type": "chapter",
+   "chapter": 4,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": [
+    {
+     "say": "이제 반대편입니다. 수요가 넘친다는 말에 반대하는 사람은 드뭅니다. 걱정은 다른 곳에 있습니다.",
+     "situations": [],
+     "hits": []
+    }
+   ]
+  },
+  {
+   "scene": 17,
+   "type": "checklist",
+   "chapter": 4,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "earnings"
+   ],
+   "beats": [
+    {
+     "say": "크리도는 12월 1일 마벨과 같은 날 실적을 내는 연결 칩 회사입니다. 9월 1일 실적에서 매출은 4억 7,900만 달러, 1년 전보다 115% 늘었습니다. 그런데 다음 날 주가는 20% 빠졌습니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출",
+      "실적"
+     ]
+    },
+    {
+     "say": "모틀리풀의 앤더스 바일런드는 이유를 이렇게 봤습니다. 완벽을 전제로 한 값이었고, 가장 큰 고객 셋이 매출의 74%라 한 곳만 주문을 늦춰도 성장이 벽에 부딪힐 수 있다고요. 다만 그도 공정하게 덧붙였습니다. 구리 케이블을 이미 하이퍼스케일러 다섯 곳에 팔고 있고, 광학을 더해 한 기술",
+     "situations": [
+      "metric",
+      "earnings"
+     ],
+     "hits": [
+      "74%",
+      "하락"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 18,
+   "type": "bars",
+   "chapter": 4,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "ratio",
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "여기서부터는 가설입니다. 세 고객 비중이 2분기에도 74%라고 치면, 전망 중간값 5억 3천만 달러 가운데 약 3억 9천만 달러가 세 고객 몫입니다. 셋이 같은 크기라고 치고, 그중 한 곳이 주문을 절반으로 줄이면 매출은 약 4억 6,500만 달러.",
+     "situations": [
+      "earnings",
+      "ratio"
+     ],
+     "hits": [
+      "매출",
+      "분기"
+     ]
+    },
+    {
+     "say": "1분기보다도 낮아집니다. 1년 전보다 115% 성장하던 회사가, 한 고객의 결정 하나로 전 분기보다 뒷걸음질하는 겁니다. 바일런드가 말한 '벽'이 이 그림입니다. 실제 고객별 비중은 공개되지 않아, 이번 실적에서 고객 비중을 다시 봐야 합니다.",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "실적",
+      "분기"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 19,
+   "type": "motionboard",
+   "chapter": 4,
+   "situation": "metric",
+   "situation_name": "숫자·지표가 움직였다",
+   "origin": "override",
+   "also": [
+    "call-bite"
+   ],
+   "beats": [
+    {
+     "say": "또 하나의 걱정은 인수 방식입니다. 마벨은 현금이 아니라 주식으로 삽니다. 루멘텀 한 주가 마벨 네 주 반이 되고, 합친 회사는 마벨 주주가 3분의 2, 루멘텀 주주가 3분의 1을 갖습니다.",
+     "situations": [
+      "metric"
+     ],
+     "hits": [
+      "주가"
+     ]
+    },
+    {
+     "say": "그래서 루멘텀 주가는 마벨 주가를 따라 움직이고, 거래가 끝나는 건 2028년 상반기로 예상됩니다. CNBC는 중국을 포함한 규제 승인에 1년 넘게 걸릴 수 있다고 짚었습니다. 그때까지 왜 들고 있어야 하냐는 질문에, 헐스턴은 이렇게 답했습니다.",
+     "situations": [
+      "call-bite",
+      "metric"
+     ],
+     "hits": [
+      "질문에"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bignum",
+    "chart",
+    "bars"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "scramble",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "손그림 가짜 그래프, 말한 숫자가 화면에 없는 것",
+   "why": "말한 숫자는 그 박자에 카드로 생김(motion count) — 확대 대신 숫자가 바뀜 (09 §6)"
+  },
+  {
+   "scene": 20,
+   "type": "bite",
+   "chapter": 4,
+   "situation": null,
+   "situation_name": null,
+   "origin": null,
+   "also": [],
+   "beats": []
+  },
+  {
+   "scene": 21,
+   "type": "chapter",
+   "chapter": 5,
+   "situation": "conclusion",
+   "situation_name": "꼭 기억할 한 문장 (결론·훅)",
+   "origin": "main",
+   "also": [
+    "call-bite"
+   ],
+   "beats": [
+    {
+     "say": "정리하면, 네 CEO는 모두 수요는 넘친다고 말했고, 남은 질문은 공급과 고객과 시간에 있습니다. 그럼 12월 1일, 한국 시간 2일 아침에 무엇을 보면 될까요. 사라 팔라는 말이 아니라, 지켜볼 숫자입니다.",
+     "situations": [
+      "conclusion",
+      "call-bite"
+     ],
+     "hits": [
+      "정리하면",
+      "남은 질문"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "kinetic",
+    "card_type",
+    "recap"
+   ],
+   "type_fits": true,
+   "techniques": [
+    {
+     "id": "split-reveal",
+     "status": "partial"
+    },
+    {
+     "id": "match-move",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "영상 내내 키네틱, 자막과 같은 문장 다시 쓰기",
+   "why": "강조는 아껴서 — 결론 한 번 (05 §0-1)"
+  },
+  {
+   "scene": 22,
+   "type": "checklist",
+   "chapter": 5,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "next-week",
+    "metric"
+   ],
+   "beats": [
+    {
+     "say": "첫째, 마벨의 4분기 전망입니다. 3분기 매출은 11월에 이미 31억 5천만 달러 근처로 미리 알렸기 때문에, 새로 알게 되는 건 다음 분기 숫자입니다. 둘째, 매출총이익률입니다. 마벨은 57.5에서 58.5%, 크리도는 67에서 69%를 예고했습니다. 비GAAP 기준이고, 마벨은 맞춤",
+     "situations": [
+      "earnings",
+      "metric"
+     ],
+     "hits": [
+      "매출",
+      "분기"
+     ]
+    },
+    {
+     "say": "셋째, 크리도의 큰 고객 비중입니다. 실적 발표나 뒤이은 분기 보고서에서 나옵니다. 넷째, 머피가 이르면 내년이라던 스케일업 광학 일정을 그대로 말하는지, 늦추는지입니다. 그다음 확인은 12월 10일 시에나의 수주잔고입니다.",
+     "situations": [
+      "earnings",
+      "next-week"
+     ],
+     "hits": [
+      "실적",
+      "분기"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  },
+  {
+   "scene": 23,
+   "type": "checklist",
+   "chapter": 5,
+   "situation": "open-scene",
+   "situation_name": "장면을 연다 (사람·장소·날짜)",
+   "origin": "main",
+   "also": [],
+   "beats": [
+    {
+     "say": "틀리는 경우도 적어 두겠습니다. 구리 기술이 좋아져 랙 안 전환이 2028년 뒤로 밀리면 머피의 시간표가 틀립니다. 증설이 한꺼번에 풀리고 AI 투자가 느려지면, 헐스턴의 수요도 값에서 먼저 꺾입니다.",
+     "situations": [
+      "open-scene"
+     ],
+     "hits": [
+      "2028년"
+     ]
+    },
+    {
+     "say": "반대로 크리도의 고객이 넓어지면 바일런드의 걱정은 줄어듭니다. 그리고 앞의 가설 계산은 고객 셋을 같은 크기로, 큰 계약은 다 나온다고 놓은 단순 계산입니다.",
+     "situations": [],
+     "hits": []
+    }
+   ],
+   "recommended_scenes": [
+    "kb",
+    "footage",
+    "stage"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "draw-on",
+     "status": "have"
+    }
+   ],
+   "blocked": [
+    "parallax-photo"
+   ],
+   "avoid": "글자 카드로 열기",
+   "why": "인트로 없이 첫 문장부터 장면 (README §2-1·§2-3)"
+  },
+  {
+   "scene": 24,
+   "type": "outro",
+   "chapter": 5,
+   "situation": "earnings",
+   "situation_name": "실적·가이던스",
+   "origin": "add",
+   "also": [
+    "cause"
+   ],
+   "beats": [
+    {
+     "say": "처음으로 돌아가 보겠습니다. 머피는 광학이 데이터센터 안으로 들어온다고 했고, 헐스턴은 수요가 이보다 강할 수 없다고 했습니다. 그 말은 실적 콜의 숫자가 받칩니다. 그래서 12월 1일 실적이 답할 것은 수요가 아니라, 공급이 얼마나 빨리 늘고, 그 수요가 몇 곳에 몰려 있고, 랙 안의",
+     "situations": [
+      "earnings",
+      "cause"
+     ],
+     "hits": [
+      "실적"
+     ]
+    }
+   ],
+   "recommended_scenes": [
+    "bars",
+    "versus",
+    "bignum"
+   ],
+   "type_fits": false,
+   "techniques": [
+    {
+     "id": "count-up",
+     "status": "have"
+    },
+    {
+     "id": "chart-morph",
+     "status": "candidate"
+    }
+   ],
+   "blocked": [],
+   "avoid": "숫자 표를 통째로",
+   "why": "숫자마다 비교 기준(compare_to) 과 함께 (규칙: 쉬운 대본)"
+  }
+ ],
+ "coverage": 0.79,
+ "fit": 0.42,
+ "counts": {
+  "earnings": 8,
+  "call-bite": 4,
+  "metric": 3,
+  "question": 1,
+  "cause": 1,
+  "conclusion": 1,
+  "open-scene": 1
+ },
+ "defaults": {
+  "zoom": "off",
+  "camera": "calm",
+  "bgm": "none",
+  "motion_beats": true
+ }
+}
