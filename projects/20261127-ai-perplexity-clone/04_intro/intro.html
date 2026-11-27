@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<!-- 척추 그래프 해설(singularity-explainer) 도입부 시험작. render(t) 로 한 장면을 그린다. timeline.json 은 make_intro.py 가 window.TL 로 넣는다. -->
+<style>
+:root{--base:#FAF9F2;--grid:#EEF0E6;--ink:#1F4A5A;--accent:#E0703F;--teal:#4FB3A5;--marker:#E6C36A;--muted:#7A8A8F;--line:#C9D2CC;--hatch:#D9DDD6}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--base);font-family:"Noto Sans KR",sans-serif;color:var(--ink)}
+#bg{position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:48px 48px}
+#stage{position:absolute;inset:0;perspective:1600px}
+#world{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+.layer{position:absolute;left:0;top:0;width:1920px;height:1080px}
+.mono{font-family:Consolas,monospace}
+#article{padding:110px 0 0 360px}
+#article h1{font-size:76px;font-weight:800;line-height:1.08;color:#141A26;letter-spacing:-1px}
+#article .by{margin-top:22px;font-size:24px;font-weight:600;color:#333}
+#article .chip{display:inline-block;margin-top:18px;background:var(--ink);color:#fff;font-size:20px;padding:4px 12px;border-radius:6px;font-weight:700}
+#article .chip span{font-weight:500;opacity:.85;margin-left:10px}
+.gl{height:14px;background:#E3E6DF;border-radius:7px;margin-top:16px}
+#thumb{position:absolute;left:360px;top:760px;width:1000px;height:560px;border:2px solid #E3E6DF;border-radius:10px;background:#fff}
+#scrub{position:absolute;top:24px;width:2px;height:500px;background:var(--ink)}
+#scrub b{position:absolute;top:-6px;left:-36px;background:var(--ink);color:#fff;font-size:20px;padding:2px 10px;border-radius:5px}
+#chartwrap{transform-origin:960px 540px}
+.card{position:absolute;background:#fff;border:3px solid var(--ink);border-radius:14px;box-shadow:0 8px 24px rgba(31,74,90,.12)}
+#quote{left:150px;top:560px;width:640px;padding:22px 26px}
+#quote .who{display:flex;align-items:center;gap:12px;font-weight:800;font-size:24px}
+#quote .av{width:46px;height:46px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px}
+#quote .tag{background:var(--ink);color:#fff;font-size:14px;padding:2px 8px;border-radius:4px}
+#quote .src{position:absolute;right:22px;top:20px;font-size:16px;color:var(--muted)}
+#quote .ko{margin-top:16px;font-size:30px;font-weight:700;position:relative;display:inline-block}
+#quote .ko i{position:absolute;left:0;bottom:2px;height:14px;background:var(--marker);opacity:.75;z-index:-1}
+#quote .note{margin-top:12px;font-size:16px;color:var(--muted)}
+#axcard{left:360px;top:350px;padding:22px 44px;text-align:center}
+#axcard .a{font-size:52px;font-weight:800}
+#axcard .b{font-size:26px;color:var(--muted);margin-top:4px;font-weight:600}
+#sign{position:absolute;left:380px;top:470px;text-align:center}
+#sign .box{background:#fff;border:3px solid var(--ink);border-radius:12px;padding:16px 26px;font-size:40px;font-weight:800;display:flex;align-items:center;gap:16px}
+#sign .blank{width:96px;height:52px;border:3px dashed var(--accent);border-radius:8px;background:#FDF0E8}
+#sign .pole{width:8px;height:120px;background:var(--ink);margin:0 auto}
+#sign .foot{width:110px;height:8px;background:var(--ink);margin:0 auto;border-radius:4px}
+.sym{position:absolute;font-weight:800;font-family:"Times New Roman",serif}
+#now{position:absolute;font-size:22px;font-weight:800;color:#fff;background:var(--accent);padding:3px 12px;border-radius:8px}
+#brake{position:absolute;left:1690px;top:560px;text-align:center;font-weight:800;font-size:26px}
+/* HUD */
+#logo{position:absolute;left:32px;top:28px;width:64px;height:64px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px;letter-spacing:-1px;border:4px solid var(--marker)}
+#sub{position:absolute;left:0;right:0;bottom:46px;text-align:center;font-size:50px;font-weight:700;color:#fff;line-height:1.28;
+ text-shadow:-3px -3px 0 #222A2E,3px -3px 0 #222A2E,-3px 3px 0 #222A2E,3px 3px 0 #222A2E,0 3px 0 #222A2E,0 -3px 0 #222A2E,3px 0 0 #222A2E,-3px 0 0 #222A2E,0 0 10px rgba(0,0,0,.35)}
+</style></head><body>
+<div id="bg"></div>
+<div id="stage"><div id="world">
+  <div class="layer" id="article">
+    <h1>Perplexity and<br>Intelligence</h1>
+    <div class="by">Jakub Pachocki · OpenAI</div>
+    <div class="chip" id="achip">2026.11.22<span>야쿠프 파호츠키 · OpenAI 수석과학자</span></div>
+    <div style="width:1000px;margin-top:40px"><div class="gl" style="width:96%"></div><div class="gl" style="width:88%"></div><div class="gl" style="width:93%"></div><div class="gl" style="width:60%"></div></div>
+    <div id="thumb"><svg id="thumbsvg" width="1000" height="560"></svg><div id="scrub"><b class="mono">2022</b></div></div>
+  </div>
+  <div class="layer" id="chartwrap">
+    <svg id="chart" width="1920" height="1080"></svg>
+    <div class="card" id="quote"><div class="src">X 게시물 · 2026.11.22</div>
+      <div class="who"><div class="av">SA</div>Sam Altman <span class="tag">OpenAI CEO</span></div>
+      <div class="ko"><i id="hl"></i>최근 OpenAI가 낸 글 가운데 가장 중요한 글</div>
+      <div class="note">게시물 요지 · 우리말 옮김</div></div>
+    <div class="card" id="axcard"><div class="a">로그 퍼플렉시티</div><div class="b">낮을수록 잘 맞힘</div></div>
+    <div id="sign"><div class="box">공동 한도 = <div class="blank"></div></div><div class="pole"></div><div class="foot"></div></div>
+    <div class="sym" id="s0" style="left:1560px;top:330px;font-size:64px;color:var(--ink)">∑</div>
+    <div class="sym" id="s1" style="left:1640px;top:360px;font-size:120px;color:var(--accent);font-family:'Noto Sans KR'">?</div>
+    <div class="sym" id="s2" style="left:1745px;top:300px;font-size:60px;color:var(--accent)">∫</div>
+    <div class="sym" id="s3" style="left:1560px;top:470px;font-size:54px;color:var(--accent)">π</div>
+    <div class="sym" id="s4" style="left:1760px;top:440px;font-size:58px;color:var(--ink)">√</div>
+    <div class="sym" id="s5" style="left:1700px;top:520px;font-size:50px;color:var(--teal)">∞</div>
+    <div id="now" class="">지금</div>
+    <div id="brake"><svg width="120" height="200" viewBox="0 0 120 200"><rect x="20" y="168" width="80" height="18" rx="6" fill="#1F4A5A"/><rect x="54" y="60" width="12" height="112" rx="5" fill="#1F4A5A" transform="rotate(-14 60 170)"/><rect x="34" y="14" width="34" height="62" rx="14" fill="#E0703F" transform="rotate(-14 60 170)"/></svg><div>브레이크</div></div>
+  </div>
+</div></div>
+<div id="logo">YF</div>
+<div id="sub"></div>
+<script>
+const W=1920,H=1080;
+const X=y=>300+(y-2022)*275, Y=v=>820-(v-0.70)/0.30*660;
+const PTS=[[2022.2,.986],[2023.2,.913],[2023.7,.911],[2024.3,.906],[2024.8,.899],[2025.12,.876],[2025.3,.902],[2025.6,.896],[2025.93,.888],[2026.2,.871],[2026.5,.828],[2026.85,.761]];
+const LAB={0:['유창한 대화','0.986','GPT-3.5','bubble',-10,-70],1:['생각하고 답하기','0.913','GPT-4','bulb',30,-90],9:['쓸 만한 코더','0.871','GPT-5.3-Codex / 5.4','code',-400,56],10:['사이버보안 전문가','0.828','GPT-5.6 Sol','shield',-420,44],11:['밀레니엄 수학 난제를 풀었다','0.761','GPT-6.2 Astra','sigma',-560,30]};
+const NS='http://www.w3.org/2000/svg';
+const el=(tag,a,parent)=>{const e=document.createElementNS(NS,tag);for(const k in a)e.setAttribute(k,a[k]);(parent||svg).appendChild(e);return e};
+const svg=document.getElementById('chart');
+// 정의: 빗금
+const defs=el('defs',{});const pat=el('pattern',{id:'hatch',width:14,height:14,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'},defs);el('rect',{width:14,height:14,fill:'#EEF0EA'},pat);el('line',{x1:0,y1:0,x2:0,y2:14,stroke:'#C9CEC6','stroke-width':6},pat);
+// 축
+const G={};
+G.axis=el('g',{});
+for(let v=0.70;v<=1.0001;v+=0.05){el('line',{x1:220,x2:1700,y1:Y(v),y2:Y(v),stroke:'#E6E9E1','stroke-width':1.5},G.axis);el('text',{x:200,y:Y(v)+8,'text-anchor':'end','font-size':22,fill:'#8A979B','font-family':'Consolas'},G.axis).textContent=v.toFixed(2)}
+for(let y=2022;y<=2027;y++){el('text',{x:X(y),y:866,'text-anchor':'middle','font-size':22,fill:'#8A979B','font-family':'Consolas'},G.axis).textContent=y}
+el('line',{x1:220,x2:220,y1:140,y2:840,stroke:'#1F4A5A','stroke-width':3},G.axis);el('line',{x1:220,x2:1700,y1:840,y2:840,stroke:'#1F4A5A','stroke-width':3},G.axis);
+G.ylab=el('g',{transform:'translate(120 490) rotate(-90)'},G.axis);
+G.ypill=el('rect',{x:-190,y:-34,width:380,height:68,rx:34,fill:'none',stroke:'#E0703F','stroke-width':5},G.ylab);
+el('text',{x:0,y:-2,'text-anchor':'middle','font-size':30,'font-weight':800,fill:'#1F4A5A'},G.ylab).textContent='로그 퍼플렉시티';
+el('text',{x:0,y:24,'text-anchor':'middle','font-size':16,fill:'#7A8A8F'},G.ylab).textContent='Log-perplexity · 낮을수록 잘 맞힘';
+G.title=el('g',{});el('text',{x:1700,y:110,'text-anchor':'end','font-size':34,'font-weight':800,fill:'#1F4A5A'},G.title).textContent='기반 모델 로그 퍼플렉시티';
+el('text',{x:1700,y:138,'text-anchor':'end','font-size':17,fill:'#7A8A8F'},G.title).textContent='OpenAI 사내 코드베이스 기준 · 원문 값을 다시 그림';
+G.arrow=el('path',{d:'M 160 490 Q 250 440 345 440',fill:'none',stroke:'#E0703F','stroke-width':5,'marker-end':''},svg);
+G.arrowHead=el('path',{d:'M 330 426 L 352 440 L 330 454',fill:'none',stroke:'#E0703F','stroke-width':5,'stroke-linejoin':'round'},svg);
+// 아이콘 열
+const ICON={bubble:'M-18,-12 h36 a6,6 0 0 1 6,6 v16 a6,6 0 0 1 -6,6 h-20 l-10,9 v-9 h-6 a6,6 0 0 1 -6,-6 v-16 a6,6 0 0 1 6,-6 z',bulb:'M0,-20 a14,14 0 0 1 9,25 v7 h-18 v-7 a14,14 0 0 1 9,-25 z M-7,16 h14',code:'M-10,-10 l-12,10 l12,10 M10,-10 l12,10 l-12,10 M4,-16 l-8,32',shield:'M0,-20 l16,6 v10 c0,12 -8,20 -16,24 c-8,-4 -16,-12 -16,-24 v-10 z',sigma:'M12,-16 h-24 l14,16 l-14,16 h24'};
+G.icons=el('g',{});const ICOL=['bubble','bulb','code','shield','sigma'];
+ICOL.forEach((k,i)=>{const g=el('g',{transform:`translate(262 ${Y([.986,.913,.871,.828,.761][i])})`},G.icons);el('circle',{r:24,fill:'#fff',stroke:'#E0703F','stroke-width':2.5},g);el('path',{d:ICON[k],fill:'none',stroke:'#1F4A5A','stroke-width':3,'stroke-linecap':'round','stroke-linejoin':'round',transform:'scale(.72)'},g)});
+// 미래 띠
+G.band=el('g',{});
+el('rect',{x:220,y:Y(0.70),width:1480,height:Y(0.68)-Y(0.70)+18,fill:'url(#hatch)'},G.band);
+el('text',{x:1300,y:Y(0.695)+22,'text-anchor':'middle','font-size':34,'font-weight':700,fill:'#E0703F','font-family':'Consolas'},G.band).textContent='0.68–0.70';
+G.bandbox=el('rect',{x:220,y:Y(0.70),width:1480,height:Y(0.68)-Y(0.70)+18,fill:'none',stroke:'#E0703F','stroke-width':4,rx:6});
+G.q=el('text',{x:1560,y:Y(0.69)+40,'text-anchor':'middle','font-size':150,'font-weight':900,fill:'#1F4A5A'});G.q.textContent='?';
+// 선
+const pts=PTS.map(p=>[X(p[0]),Y(p[1])]);const dstr='M'+pts.map(p=>p.join(' ')).join(' L ');
+G.ghost=el('path',{d:dstr,fill:'none',stroke:'#E0703F','stroke-width':4,opacity:.18});
+G.line=el('path',{d:dstr,fill:'none',stroke:'#E0703F','stroke-width':5,'stroke-linejoin':'round'});
+const cum=[0];for(let i=1;i<pts.length;i++){cum.push(cum[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]))}const LEN=cum[cum.length-1];
+G.line.setAttribute('stroke-dasharray',LEN+' '+LEN);
+G.dots=pts.map((p,i)=>el('circle',{cx:p[0],cy:p[1],r:LAB[i]?11:7,fill:'#fff',stroke:'#1F4A5A','stroke-width':LAB[i]?4:3}));
+G.labs={};
+for(const i in LAB){const [a,v,m,ic,dx,dy]=LAB[i];const g=el('g',{transform:`translate(${pts[i][0]+dx} ${pts[i][1]+dy})`});
+ el('text',{x:0,y:0,'font-size':30,'font-weight':800,fill:'#1F4A5A'},g).textContent=a;
+ const t2=el('text',{x:0,y:30,'font-size':22,fill:'#7A8A8F'},g);t2.innerHTML=`<tspan fill="#E0703F" font-family="Consolas" font-weight="700" font-size="24">${v}</tspan>  ${m}`;
+ G.labs[i]=g}
+// 내부 모델
+G.inner=el('g',{});const ip=[X(2026.95),Y(0.732)];
+el('rect',{x:ip[0]-10,y:ip[1]-10,width:20,height:20,fill:'#1F4A5A'},G.inner);
+el('text',{x:ip[0]+22,y:ip[1]-4,'font-size':22,'font-weight':700,fill:'#1F4A5A'},G.inner).textContent='내부 모델';
+G.innerv=el('text',{x:ip[0]+22,y:ip[1]+26,'font-size':28,'font-weight':700,fill:'#E0703F','font-family':'Consolas'},G.inner);
+// 지금 점선
+G.nowl=el('line',{x1:X(2026.95),x2:X(2026.95),y1:150,y2:840,stroke:'#E0703F','stroke-width':3,'stroke-dasharray':'8 8'});
+// 값 알약(축 위)
+G.vp=el('g',{});el('rect',{x:-58,y:-20,width:116,height:40,rx:20,fill:'#E0703F'},G.vp);G.vpt=el('text',{x:0,y:9,'text-anchor':'middle','font-size':24,'font-weight':700,fill:'#fff','font-family':'Consolas'},G.vp);
+// 썸네일 차트
+const ts=document.getElementById('thumbsvg');const tp=PTS.map(p=>[80+(p[0]-2022)*170,60+(1-p[1])/0.3*420]);
+const tpath=document.createElementNS(NS,'path');tpath.setAttribute('d','M'+tp.map(p=>p.join(' ')).join(' L '));tpath.setAttribute('fill','none');tpath.setAttribute('stroke','#E0703F');tpath.setAttribute('stroke-width','3');ts.appendChild(tpath);
+
+// ---- 시간 도구
+const TL=window.TL; const L={},E={};TL.lines.forEach(l=>{L[l.id]=l.start;E[l.id]=l.end});
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2, eout=x=>1-Math.pow(1-x,3);
+const P=(t,s,d=.35)=>eout(cl((t-s)/d)); // 등장 진행
+const show=(node,p,dy=12)=>{node.style.opacity=p;node.style.transform=`translateY(${(1-p)*dy}px)`};
+const sv=(node,p,extra='')=>{node.setAttribute('opacity',p)};
+const pop=(node,p,cx,cy)=>{const s=.6+.4*p;node.setAttribute('opacity',p);node.setAttribute('transform',`translate(${cx} ${cy}) scale(${s}) translate(${-cx} ${-cy})`)};
+// 카메라 키프레임 [시각, cx, cy, 배율, 걸리는 시간]
+const CAM=()=>[[0,960,540,1,0],[L.article+4.2,960,860,1,1.4],[L.lift+1.4,960,540,1,1.2],[L.axis,250,490,2.0,1.1],[L.scrub,960,540,1,1.1],[L.p1,620,330,1.75,1.2],[L.p3,960,540,1,1.3],[L.below,1320,700,1.8,1.3],[L.face,960,540,1,1.3],[L.hello,960,540,.56,1.0]];
+function cam(t){const C=CAM();let i=0;while(i+1<C.length&&C[i+1][0]<=t)i++;const c=C[i],p=C[Math.max(0,i-1)];const k=i==0?1:ease(cl((t-c[0])/c[4]));return [p[1]+(c[1]-p[1])*k,p[2]+(c[2]-p[2])*k,p[3]+(c[3]-p[3])*k]}
+function wrap(s){if(s.length<=24)return s;let m=Math.floor(s.length/2),best=-1;for(let d=0;d<m;d++){for(const i of [m-d,m+d]){if(s[i]===','||s[i]===' '){best=i;break}}if(best>=0)break}return best<0?s:s.slice(0,best+1).trim()+'<br>'+s.slice(best+1).trim()}
+
+window.render=function(t){
+ const [cx,cy,s]=cam(t);document.getElementById('world').style.transform=`translate(${W/2}px,${H/2}px) scale(${s}) translate(${-cx}px,${-cy}px)`;
+ // 원문
+ const art=document.getElementById('article');const ao=1-P(t,L.lift+0.3,.6);art.style.opacity=ao;art.style.display=ao<=0.001?'none':'block';
+ show(document.getElementById('achip'),P(t,L.article+1.3));
+ const sc=document.getElementById('scrub');const sp=cl((t-(L.article+6.2))/2.2);sc.style.opacity=sp>0&&t<L.lift+0.4?1:0;sc.style.left=(80+ease(sp)*720)+'px';sc.querySelector('b').textContent=Math.round(2022+sp*4);
+ // 차트 층: 기울어진 종이 → 평평하게
+ const cw=document.getElementById('chartwrap');const ci=P(t,L.lift,.5),fl=ease(cl((t-(L.lift+1.4))/1.2));
+ cw.style.opacity=t<L.lift?0:ci;cw.style.transform=`translateY(${(1-fl)*260}px) scale(${.5+.5*fl}) rotateX(${(1-fl)*26}deg) rotateZ(${(1-fl)*-4}deg)`;
+ cw.style.background=fl<1&&t>=L.lift?`rgba(255,255,255,${(1-fl)})`:'transparent';cw.style.boxShadow=fl<1&&t>=L.lift?`0 30px 60px rgba(0,0,0,${.18*(1-fl)})`:'none';
+ // 따옴표 카드
+ const q=document.getElementById('quote');const qo=P(t,L.quote+0.2,.45)*(1-P(t,E.quote+0.15,.35));q.style.opacity=qo;q.style.transform=`translateX(${(1-P(t,L.quote+0.2,.45))*-80}px)`;
+ document.getElementById('hl').style.width=(cl((t-(L.quote+1.6))/.6)*100)+'%';
+ // 세로축 알약·카드
+ G.ypill.setAttribute('stroke-dasharray','1200');G.ypill.setAttribute('stroke-dashoffset',1200*(1-cl((t-(L.axis+0.6))/.6)));G.ypill.setAttribute('opacity',t<L.scrub+0.6?1:1-P(t,L.scrub,.5));
+ const ap=P(t,L.axis+1.4,.4)*(1-P(t,L.scrub,.4));G.arrow.setAttribute('opacity',ap);G.arrowHead.setAttribute('opacity',ap);G.arrow.setAttribute('stroke-dasharray','260');G.arrow.setAttribute('stroke-dashoffset',260*(1-cl((t-(L.axis+1.4))/.4)));
+ const ax=document.getElementById('axcard');ax.style.opacity=P(t,L.axis+1.7,.4)*(1-P(t,L.scrub,.4));ax.style.transform=`scale(${.9+.1*P(t,L.axis+1.7,.4)})`;
+ // 값 알약: 축 따라 내려감
+ const vk=cl((t-(L.scrub+0.4))/2.4),vv=.986-(.986-.90)*ease(vk);G.vp.setAttribute('transform',`translate(220 ${Y(vv)})`);G.vpt.textContent=vv.toFixed(3);G.vp.setAttribute('opacity',P(t,L.scrub+0.2,.3)*(1-P(t,L.scrub+3.4,.4)));
+ // 유령선·제목·아이콘
+ sv(G.ghost,t<L.scrub+2?1:(t<L.p1?.18/0.18*0.6:1));G.ghost.setAttribute('opacity',(t<L.scrub+2.2?.9:.18)*(t<L.below+0.2?1:1));
+ sv(G.title,1);G.icons.setAttribute('opacity',P(t,L.scrub+3.0,.5));
+ // 선 그리기
+ const tgt=[[L.p1,0,0],[L.p2+0.2,1,1.0],[L.p3+0.2,9,1.6],[L.p4+0.2,10,.7],[L.p5+0.2,11,.8]];let len=0;
+ for(const [st,idx,d] of tgt){const prev=len;len=prev+(cum[idx]-prev)*ease(cl((t-st)/d));if(t<st){len=prev;break}}
+ G.line.setAttribute('stroke-dashoffset',LEN-len);G.line.setAttribute('opacity',t<L.p1?0:1);
+ G.dots.forEach((d,i)=>{const on=t>=L.p1&&cum[i]<=len+0.5;d.setAttribute('opacity',on?1:0)});
+ const labT={0:L.p1+0.3,1:L.p2+1.2,9:L.p3+1.8,10:L.p4+0.9,11:L.p5+1.0};for(const i in G.labs){const p=P(t,labT[i],.4);G.labs[i].setAttribute('opacity',p)}
+ // 아래쪽: 내부 모델·띠·물음표
+ const ii=P(t,L.internal+0.3,.4);G.inner.setAttribute('opacity',ii);G.innerv.textContent=(0.761-(0.761-0.732)*ease(cl((t-(L.internal+0.6))/.9))).toFixed(3);
+ G.band.setAttribute('opacity',P(t,L.band+0.5,.5));const qp=P(t,L.band+1.6,.35);pop(G.q,qp,1560,Y(0.69));
+ G.bandbox.setAttribute('opacity',P(t,L.face+1.0,.4));
+ // 공동 한도 표지
+ const sg=document.getElementById('sign');const sp2=P(t,L.cap+1.2,.45);sg.style.opacity=sp2;sg.style.transform=`translateY(${(1-sp2)*30}px)`;
+ // 기호
+ ['s0','s1','s2','s3','s4','s5'].forEach((k,i)=>{const n=document.getElementById(k),p=P(t,L.q1+2.2+i*0.18,.3)*(1-P(t,L.q2,.4));n.style.opacity=p;n.style.transform=`scale(${.5+.5*p})`});
+ // 지금·브레이크
+ const nw=document.getElementById('now');const np=P(t,L.q2+1.6,.3);nw.style.opacity=np;nw.style.left=(X(2026.95)-34)+'px';nw.style.top=(118)+'px';G.nowl.setAttribute('opacity',np);
+ G.nowl.setAttribute('stroke-dashoffset',0);
+ const bk=document.getElementById('brake');const bp=P(t,L.q2+3.0,.4);bk.style.opacity=bp;bk.style.transform=`translateY(${(1-bp)*40}px)`;
+ // 자막
+ const cur=TL.lines.find(l=>t>=l.start-0.05&&t<l.end+0.2);document.getElementById('sub').innerHTML=cur?wrap(cur.t):'';
+};
+render(0);
+</script></body></html>
