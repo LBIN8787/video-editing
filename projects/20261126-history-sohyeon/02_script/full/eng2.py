@@ -60,7 +60,7 @@ def clip(inner, t0, dur, z=1, extra=""):
     return i
 
 
-def shot(img, t0, dur, crop=(0, 0, 1, 1), move=(1.0, 1.08, 0, -2, 0, 0), fg=None, flick=None, dust=0, tint=None, bright=1.0, grade=""):
+def shot(img, t0, dur, crop=(0, 0, 1, 1), move=(1.0, 1.08, 0, -2, 0, 0), fg=None, flick=None, dust=0, tint=None, bright=1.0, grade="", z=1):
     flick, dust = None, 0   # v2: 촛불·먼지 없음
     """그림의 한 부분(crop, 0~1)을 화면 가득 → 카메라 move=(s0,s1,x0%,x1%,y0%,y1%). fg=(마스크, 배율) 앞층 시차."""
     cx, cy, cw, ch = crop
@@ -84,7 +84,7 @@ def shot(img, t0, dur, crop=(0, 0, 1, 1), move=(1.0, 1.08, 0, -2, 0, 0), fg=None
             dots.append(f'<i id="{pid}_{k}" style="position:absolute;left:{x:.1f}%;top:{y:.1f}%;width:{s:.1f}px;height:{s:.1f}px;border-radius:50%;background:rgba(255,220,170,{R.uniform(.25,.7):.2f});filter:blur({R.uniform(0,1.5):.1f}px)"></i>')
         inner += "".join(dots)
     inner += '<div style="position:absolute;right:56px;top:118px;font:700 24px Malgun;color:rgba(233,220,196,.55);letter-spacing:.1em" data-layout-ignore>재현 그림</div>'
-    cid = clip(inner, t0, dur, z=1)
+    cid = clip(inner, t0, dur, z=z)
     s0, s1, x0, x1, y0, y1 = move
     JS.append(f'tl.fromTo("#{bg}",{{scale:{s0},xPercent:{x0},yPercent:{y0}}},{{scale:{s1},xPercent:{x1},yPercent:{y1},duration:{dur:.2f},ease:"sine.inOut"}},{t0:.3f});')
     if fg:
