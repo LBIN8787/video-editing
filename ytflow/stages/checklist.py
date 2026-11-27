@@ -296,8 +296,9 @@ def run(path: Path, upto: str = "G8") -> Report:
                     st_ = {k for r_ in ins for k in ("낙관", "우려", "중립") if any(k in c for c in r_)}
                     dom = any(any("국내" in c for c in r_) for r_ in ins)
                     abroad = any(any("해외" in c for c in r_) for r_ in ins)
-                    R.add("G3", "MUST", "v36: 팩트시트 '## 인사이트' — 이름·직함 있는 사람·매체의 엇갈리는 해석(입장이 갈림), 원문·근거·출처 (09 §3-4)",
-                          len(ins) >= 2 and len(st_) >= 2, f"{len(ins)}줄 · 입장 {sorted(st_)} · 국내 {'✓' if dom else '✗'} 해외 {'✓' if abroad else '✗'}")
+                    # v143 (2026-11-27 사용자): 판단 하나면 충분, 반박은 찬반이 갈릴 때만 — 입장 수는 MUST 에서 뺌
+                    R.add("G3", "MUST", "v143: 팩트시트 '## 인사이트' — 이름·직함 있는 사람의 판단(찬반이 갈리면 반박도), 원문·근거·출처 (09 §3-4)",
+                          len(ins) >= 1, f"{len(ins)}줄 · 입장 {sorted(st_)} · 국내 {'✓' if dom else '✗'} 해외 {'✓' if abroad else '✗'}")
                     vm = re.search(r"^## 영상 소스[^\n]*\n(.*?)(?=^## |\Z)", fs, re.S | re.M)
                     vrows = _rows("영상 소스")
                     R.add("G3", "MUST", "v36: 팩트시트 '## 영상 소스' — 인터뷰·방송 원본 후보 1줄+ (못 찾으면 '없음: 이유') (09 §3-5)",
@@ -512,7 +513,12 @@ def run(path: Path, upto: str = "G8") -> Report:
             h_, s_ = _split(lq)
             if h_: hard["all"] = h_
             if s_: soft["all"] = s_
-        R.add("G6", "MUST", "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)", lq is not None and not hard, hard)
+        # 캔버스 렌더러 편(호기심 지우 삽화, render_full.py)은 hybrid 의 배치 점검(layout_qa)을 만들지 않음 → 완성본을 다시 그려 잰
+        # overlap_qa(renderer: canvas)가 그 자리를 맡음 (2026-11-26 포모 편, 사용자: "해결하시고 검수하고 오늘 업로드하세요")
+        _oqc = _load(edt / "overlap_qa.json") or {}
+        _canvas = lq is None and _oqc.get("renderer") == "canvas"
+        R.add("G6", "MUST", "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)", (lq is not None or _canvas) and not hard,
+              hard if not _canvas else "캔버스 렌더러 — overlap_qa 로 대신 잼")
         # 2026-11-20 사용자: "자막이랑 영상 글씨가 겹치거나 전체적으로 글씨들이 겹치는 경우가 잦습니다"
         # → 렌더된 장면을 박자 끝마다 멈춰 실제 글자 상자로 잰 결과 (hybrid 렌더 끝에 자동, ytflow/stages/overlapqa.py)
         oq = _load(edt / "overlap_qa.json")

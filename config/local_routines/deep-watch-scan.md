@@ -1,7 +1,7 @@
-'이어 읽는 시장' 심층(분석) 영상의 **소재 감시 — 0단계: 훑기 (Sonnet)**입니다. 2시간마다 돕니다.
-새로 생긴 소재를 모아 **후보 표**만 만듭니다. 만들지 말지는 다음 단계(Fable)가 정하고, 영상은 만들지 않습니다.
+'이어 읽는 시장' 심층(분석) 영상의 **소재 감시 — 0단계: 훑기 (Sonnet)**입니다. 2026-11-26 부터 클라우드 루틴이 4시간마다 이 절차를 따릅니다(`config/cloud_routines/deep-watch-scan-judge.md` — 클라우드에서 다른 점은 그 파일에).
+새로 생긴 소재를 모아 **후보 표**만 만듭니다. 만들지 말지는 다음 단계(Opus)가 정하고, 영상은 만들지 않습니다.
 
-> 2026-11-24 사용자: "소재 감시는 당연히 sonnet이 하시구요" · 판단·검수는 Fable. 기준은 docs/63-source-radar.md(아래 요약).
+> 2026-11-24 사용자: "소재 감시는 당연히 sonnet이 하시구요" · 판단은 Opus·검수는 Fable (11-27). 기준은 docs/63-source-radar.md(아래 요약).
 > 출발점은 지표가 아니라 **이름 있는 사람의 말**입니다. 시점은 둘: **사건형**(지수 ±3% 큰 날 다음, "이름 있는 사람들은 뭐라 하나") · **원본형**(거물 인터뷰·팟캐스트·행사 공개 뒤 2~9일 안, 그 한 편을 깊게). 같은 원본을 남보다 나흘 늦게 올린 드러켄밀러 편은 1,530회 대 28만이었습니다 — 빨리 잡는 것이 이 단계의 일입니다.
 
 ## 1. 모으기 (20분 안에, 받아쓰기·내려받기 없이 목록·정보만)
@@ -11,10 +11,10 @@
 3. 큰 날: 레이더의 사건형 판단(반도체·나스닥·S&P·코스피·코스닥 마지막 거래일 ±3%) — 있으면 그날 이름 있는 사람들의 공개 발언 단서(보도 제목)를 5~10개.
 4-0. **쌓임 (2026-11-25, manual/09 §0-00):** `inbox/research/deep-topics.md` 의 `## 쌓인 단서` 에서 주제(#)마다 쌓인 날 수를 세어, 3일 안팎 쌓였고 아직 만들지 않은 주제를 `쌓임형` 후보로 올립니다(무엇: 쌓인 날짜들과 한 줄씩).
 4. 그 밖의 단서: 오늘·어제 `projects/<날짜>-market-daily/01_research/daily_brief.md` ④ 심층 후보·⑥-1 CEO 소식, `inbox/research/deep-topics.md`·`source-backlog.md`, `inbox/newsletters/<오늘·어제>.md`, `inbox/save/`, `inbox/signals/log.md`.
-5. 걸러 내기: 최근 14일 `projects/*-market-deep-*`·`*-market-call-*`, `inbox/radar/tracker.json` 의 made/skip, `$YTFLOW_DRIVE/_local/deep-watch-log.md` 끝 30줄(이미 판단한 것) — 같은 원본·같은 질문은 '새 변화'가 없으면 뺍니다.
+5. 걸러 내기: 최근 14일 `projects/*-market-deep-*`·`*-market-call-*`, `inbox/radar/tracker.json` 의 made/skip, `inbox/deep-watch/log.md`(git — 2026-11-26 부터 Drive 대신) 끝 30줄(이미 판단한 것) — 같은 원본·같은 질문은 '새 변화'가 없으면 뺍니다.
 
 ## 2. 결과
-- **새 후보가 하나도 없으면:** 작업 폴더 맨 위에 빈 파일 `ROUTINE_STOP`, `LOCAL_RESULT.md` 첫 줄 `심층 감시 <HH:MM>: 새 소재 없음`. `$YTFLOW_DRIVE/_local/deep-watch-log.md` 에 `<YYYY-MM-DD HH:MM> | 없음 | - | 훑기(Sonnet)` 한 줄. radar 결과가 바뀌었으면 그것만 커밋해 main 에 push(`심층 감시 <HH:MM>: 레이더 갱신`). 끝.
+- **새 후보가 하나도 없으면:** 작업 폴더 맨 위에 빈 파일 `ROUTINE_STOP`, `LOCAL_RESULT.md` 첫 줄 `심층 감시 <HH:MM>: 새 소재 없음`. `inbox/deep-watch/log.md`(git — 2026-11-26 부터 Drive 대신) 에 `<YYYY-MM-DD HH:MM> | 없음 | - | 훑기(Sonnet)` 한 줄. radar 결과가 바뀌었으면 그것만 커밋해 main 에 push(`심층 감시 <HH:MM>: 레이더 갱신`). 끝.
 - **있으면:** 작업 폴더 맨 위 `DEEP_SCAN.md` (git 에 넣지 않음) — 후보마다 한 덩어리, 강한 순서로 최대 5개:
   ```
   ## <사람 또는 사건 또는 주제 #> — 인사이트형|쌓임형|사건형|원본형|어닝콜|기술·사업
@@ -26,4 +26,4 @@
   - 한국 종목 고리: 하이닉스·삼성·엔비디아 보유자 등 누구 계좌로 이어지나
   - 마감: 원본형 공개+9일 / 사건형 큰 날+48시간
   ```
-  `LOCAL_RESULT.md` 첫 줄 `심층 감시 <HH:MM>: 후보 <n>개 — <가장 강한 후보>`. `ROUTINE_STOP` 은 만들지 않습니다(Fable 판단으로 이어짐).
+  `LOCAL_RESULT.md` 첫 줄 `심층 감시 <HH:MM>: 후보 <n>개 — <가장 강한 후보>`. `ROUTINE_STOP` 은 만들지 않습니다(Opus 판단으로 이어짐).

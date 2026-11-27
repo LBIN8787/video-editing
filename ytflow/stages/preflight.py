@@ -40,7 +40,15 @@ def frames_sheet(project: Project) -> Path:
     """장면마다 끝 무렵 프레임 한 장씩 → 한 장의 모음 그림 (사람 눈 확인용)."""
     from PIL import Image, ImageDraw
     edir = project.dir("edit")
-    tl = json.loads((edir / "hybrid_timeline.json").read_text(encoding="utf-8"))
+    hb = edir / "hybrid_timeline.json"
+    if hb.exists():
+        tl = json.loads(hb.read_text(encoding="utf-8"))
+    else:   # 캔버스 렌더러 편(호기심 지우 삽화, render_full.py): <spec>_timeline.json — id·dur 를 같은 꼴로 (2026-11-26 포모 편)
+        from . import overlapqa
+        cs = overlapqa.canvas_spec(project.path)
+        if not cs:
+            raise SystemExit("[preflight] 장면 시각표가 없습니다 (05_edit/hybrid_timeline.json 또는 <spec>_timeline.json)")
+        tl = [{"scene": x["id"], "dur": x["dur"]} for x in json.loads(cs[0].read_text(encoding="utf-8"))]
     tmp = edir / "hb_work" / "preflight"
     tmp.mkdir(parents=True, exist_ok=True)
     t, shots = 0.0, []

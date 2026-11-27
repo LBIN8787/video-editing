@@ -28,14 +28,14 @@
 ```bash
 python -m ytflow insights                  # 전부 (아침 작업이 매일 돌림)
 python -m ytflow insights --no-llm         # 자리 훑기만
-python -m ytflow insights --extract 3      # 자막까지 열 후보 수 (2시간 감시는 3)
+python -m ytflow insights --extract 3      # 자막까지 열 후보 수 (4시간 클라우드 감시는 3)
 python -m ytflow insights --mark <원본id> made --our <우리 유튜브 id>   # 공개→우리 업로드 걸린 날 기록
 ```
 자리 늘리기: `config/insight_venues.yaml` 에 한 줄(`handle` 은 @이름, 없으면 UC… 채널 id). 찾지 못하면 실행 로그에 '! 자리 못 찾음'.
 
 ## 자동 작업에 들어간 곳
 - 아침 `market-daily` 3-1: 매일 한 번 전부 → 같은 질문이면 `deep-topics.md` 쌓인 단서에도.
-- 2시간 `market-deep-watch` 훑기 0: 오늘 결과를 읽고, 6시간 넘었으면 `--extract 3` → `인사이트형` 후보.
+- 4시간 클라우드 감시(`config/cloud_routines/deep-watch-scan-judge.md`) 훑기 0: 오늘 결과를 읽고, 6시간 넘었으면 `--extract 3` → `인사이트형` 후보.
 - 판단 −1: 영상의 주어 = 앞으로에 대한 판단, 장부에 판단·반대 판단·원본이 갖춰지면 만든다.
 - 검수: **자동 공개하지 않음** — 비공개로 올리고 제목·썸네일 승인 요청(2026-11-25 규칙, 11-26 "네 그대로").
 

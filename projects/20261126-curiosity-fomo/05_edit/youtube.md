@@ -18,11 +18,11 @@
 금요일 밤 이불 속에서 친구들의 송년회 사진을 넘기는 지우와 함께, '포모'라는 말이 생긴 날부터, 신입생 1,099명에게 던진 질문, 그리고 SNS를 줄이는 실험을 다시 해 본 올해의 결과까지 따라갑니다.
 
 0:00 금요일 밤 11시
-1:07 이름이 생긴 날
-3:11 신입생 1,099명에게 물었다
-5:21 식당 창과 기숙사 방
-7:02 믿음의 값
-7:57 그럼 끊으면 될까
+0:57 이름이 생긴 날
+2:51 신입생 1,099명에게 물었다
+4:44 식당 창과 기숙사 방
+6:14 믿음의 값
+7:04 그럼 끊으면 될까
 
 출처
 - Przybylski, A. K., Murayama, K., DeHaan, C. R., & Gladwell, V. (2013). Motivational, emotional, and behavioral correlates of fear of missing out. Computers in Human Behavior, 29(4), 1841–1848. https://doi.org/10.1016/j.chb.2013.02.014

@@ -1,8 +1,8 @@
 {
  "project": "20261126-curiosity-fomo",
  "manual_version": "141",
- "checked": "2026-11-26T11:08:32",
- "pass": false,
+ "checked": "2026-11-26T23:21:51",
+ "pass": true,
  "rows": [
   {
    "gate": "G0",
@@ -365,15 +365,22 @@
    "gate": "G6",
    "level": "MUST",
    "item": "레이아웃 결함 없음 (겹침·잘림·대비·장면 의도 goal/why)",
-   "ok": false,
-   "detail": "{}"
+   "ok": true,
+   "detail": "캔버스 렌더러 — overlap_qa 로 대신 잼"
+  },
+  {
+   "gate": "G6",
+   "level": "MUST",
+   "item": "화면 글자 겹침 없음 — 글자끼리·카드에 가려짐·카드 밖 넘침·자막 자리 (overlap_qa)",
+   "ok": true,
+   "detail": "[]"
   },
   {
    "gate": "G6",
    "level": "SHOULD",
-   "item": "글자 겹침 점검 기록 (05_edit/overlap_qa.json)",
-   "ok": false,
-   "detail": "python scripts/overlap_scan.py <프로젝트>"
+   "item": "글자가 카드·강조 상자 가장자리에 걸치지 않음 (overlap_qa)",
+   "ok": true,
+   "detail": "[]"
   },
   {
    "gate": "G6",
@@ -386,8 +393,8 @@
    "gate": "G6",
    "level": "MUST",
    "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
-   "ok": false,
-   "detail": "{'within_0_5s': 0.988, 'p95_abs_offset': 0.29, 'median_abs_offset': 0.26, 'video_minus_audio_s': 0.01}"
+   "ok": true,
+   "detail": "{'within_0_5s': 0.959, 'p95_abs_offset': 0.47, 'median_abs_offset': 0.05, 'video_minus_audio_s': 0.004}"
   },
   {
    "gate": "G6",

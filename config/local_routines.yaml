@@ -14,7 +14,7 @@ jobs:
     prompt: config/local_routines/market-daily.md
     steps:
       - {name: collect, prompt: config/local_routines/market-daily.md,     timeout_min: 120}   # 일요일은 주간 종합 영상까지 만들고 ROUTINE_STOP
-      - {name: judge,   prompt: config/local_routines/deep-watch-judge.md,  model: claude-fable-5-2, timeout_min: 40}
+      - {name: judge,   prompt: config/local_routines/deep-watch-judge.md,  model: claude-opus-5-5, timeout_min: 40}
       - {name: make,    prompt: config/local_routines/deep-watch-make.md,   timeout_min: 200}
       - {name: review,  prompt: config/local_routines/deep-watch-review.md, model: claude-fable-5-2, timeout_min: 90}
   curiosity:
@@ -28,17 +28,16 @@ jobs:
     prompt: config/local_routines/channel-ops.md
     timeout_min: 90
   market-deep-watch:
-    # 2026-11-24 사용자: "분석영상을 꼭 특정시간마다 업로드보다는 소재가 생기면 업로드 할 수 있도록" →
-    #   선택: 2시간마다 감시 · 소재 생길 때만(매일 고정 심층 없음) · "완성 즉시 공개하고 검수와 분석영상을 제작할지 제작할만한 내용인지의 판단은 fable이 해주세요"
-    #   2026-11-25·26 사용자: 공개 전에 제목·썸네일 승인 → 검수 단계는 비공개 업로드 + 승인 요청 (자동 공개 안 함). 훑기는 인사이트 장부도 읽음 (docs/70)
-    title: "이어 읽는 시장 — 심층 소재 감시 (2시간마다)"
-    time: "00:40"               # 첫 차례. repeat_hours 마다 다시 (앱 예약 cron '40 */2 * * *')
-    repeat_hours: 2
-    wait_for: [market-daily]    # 아침 브리핑이 도는 동안은 건너뜀 (PC·목소리 크레딧을 나눠 쓰지 않음)
-    quiet_skip: [scan, judge]   # 이 단계에서 멈추면(새 소재 없음·안 만듦) 알림·보고 파일 없이 로그 한 줄만
-    # 2026-11-24 사용자: "소재 감시는 당연히 sonnet이 하시구요" — 2시간마다 훑기는 Sonnet, 만들지 판단·검수는 Fable (후보가 있을 때만)
+    # 2026-11-24 사용자: "분석영상을 꼭 특정시간마다 업로드보다는 소재가 생기면 업로드 할 수 있도록" → 판단·검수는 Fable → 2026-11-27 사용자: "네 바꿔주세요" (판단 = Opus, Fable 은 종합 검수만 — manual/11 §1-1): 판단 Opus·검수 Fable
+    #   2026-11-25·26 사용자: 공개 전에 제목·썸네일 승인 → 검수 단계는 예약 업로드 + 승인 요청 (자동 공개 안 함)
+    # 2026-11-26 사용자: "4시간 간격으로 설정하고 클라우드에서 탐색해주세요 영상 제작만 로컬에서 진행하시구요"
+    #   → 훑기(Sonnet)·판단(Opus)은 클라우드 루틴(config/cloud_routines/deep-watch-scan-judge.md, 02:40부터 4시간마다)이
+    #     inbox/deep-watch/queue/ 에 일감을 올리고, 이 PC 는 그 1시간 반 뒤 일감을 집어 제작·검수만 (inbox/deep-watch/README.md)
+    title: "이어 읽는 시장 — 심층 제작 (클라우드 일감 → PC, 4시간마다)"
+    time: "00:10"               # 첫 차례. repeat_hours 마다 다시 (앱 예약 cron '10 0-23/4 * * *')
+    repeat_hours: 4
+    queue: inbox/deep-watch/queue   # 일감(*.json)이 없으면 에이전트를 띄우지 않고 로그 한 줄로 끝. 있으면 가장 오래된 것 → DEEP_WATCH.json
+    wait_for: [market-daily]    # 아침 작업이 도는 동안은 건너뜀 (PC·목소리 크레딧을 나눠 쓰지 않음) — 일감은 다음 차례로
     steps:
-      - {name: scan,   prompt: config/local_routines/deep-watch-scan.md,   model: claude-sonnet-5-5, timeout_min: 30}
-      - {name: judge,  prompt: config/local_routines/deep-watch-judge.md,  model: claude-fable-5-2, timeout_min: 40}
       - {name: make,   prompt: config/local_routines/deep-watch-make.md,   timeout_min: 200}
       - {name: review, prompt: config/local_routines/deep-watch-review.md, model: claude-fable-5-2, timeout_min: 90}
