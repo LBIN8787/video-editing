@@ -1,7 +1,7 @@
 {
  "project": "20261127-market-deep-anthropic-damodaran",
  "manual_version": "145",
- "checked": "2026-11-27T10:21:25",
+ "checked": "2026-11-27T21:45:32",
  "pass": true,
  "rows": [
   {
@@ -15,7 +15,7 @@
    "gate": "G0",
    "level": "SHOULD",
    "item": "매뉴얼 그래프가 최신 (python -m ytflow manual-graph)",
-   "ok": false,
+   "ok": true,
    "detail": "manual/graph.json"
   },
   {
@@ -107,7 +107,7 @@
    "level": "MUST",
    "item": "자료 화면마다 credit·url",
    "ok": true,
-   "detail": "8개, 빠짐 []"
+   "detail": "20개, 빠짐 []"
   },
   {
    "gate": "G2",
@@ -373,14 +373,14 @@
    "level": "MUST",
    "item": "v36: 대본에 인사이트 장면 (\"insight\": true — 화면에 '의견' 표시, 사실과 구분) (09 §3-4)",
    "ok": true,
-   "detail": "13개"
+   "detail": "18개"
   },
   {
    "gate": "G4",
    "level": "참고",
    "item": "v36·v52: 인사이트 분량 — 유명인(이름난 투자자·경영자·당국자·석학)의 분석을 넉넉히 다뤘나 (국내 증권사는 필수 아님)",
    "ok": false,
-   "detail": "장면 13 · 팩트시트 3줄 · 국내 ✗ 해외 ✗"
+   "detail": "장면 18 · 팩트시트 3줄 · 국내 ✗ 해외 ✗"
   },
   {
    "gate": "G4",
@@ -415,7 +415,7 @@
    "level": "SHOULD",
    "item": "market: 끝에 확인할 신호(checklist)",
    "ok": true,
-   "detail": "['checklist', 'kinetic', 'outro']"
+   "detail": "['checklist', 'checklist', 'outro']"
   },
   {
    "gate": "G4",
@@ -436,14 +436,14 @@
    "level": "참고",
    "item": "길이(측정값만 — 시간 기준 없음, 구성요소가 정함, README §2-4)",
    "ok": true,
-   "detail": "12.5분"
+   "detail": "15.3분"
   },
   {
    "gate": "G5",
    "level": "SHOULD",
    "item": "배경: 한 가지 바탕으로 고정하지 않음 — 장면이 하는 일이 바뀌면 바탕도 바뀜 (05 §0-2)",
    "ok": true,
-   "detail": "['film', 'grid', 'photo', 'spot', 'tint']"
+   "detail": "['film', 'grid', 'photo', 'tint']"
   },
   {
    "gate": "G5",
@@ -456,8 +456,8 @@
    "gate": "G5",
    "level": "참고",
    "item": "반복 피로: 글씨·도형뿐인 장면이 이어지는 구간 — 자료·지도·그림으로 보여 줄 수 있는지 다시 볼 곳 (05 §0-3)",
-   "ok": false,
-   "detail": "최장 5연속 (장면 29)"
+   "ok": true,
+   "detail": "최장 2연속 (장면 6)"
   },
   {
    "gate": "G5",
@@ -471,7 +471,7 @@
    "level": "참고",
    "item": "반복 피로: 볼거리(자료·지도·그림)가 있는 장면의 몫",
    "ok": false,
-   "detail": "11/24"
+   "detail": "15/26"
   },
   {
    "gate": "G5",
@@ -506,7 +506,7 @@
    "level": "참고",
    "item": "반복 피로: 같은 채널 직전 편과 화면 구성이 얼마나 겹치나",
    "ok": true,
-   "detail": "67%"
+   "detail": "50%"
   },
   {
    "gate": "G5",
@@ -520,35 +520,35 @@
    "level": "참고",
    "item": "자료 화면 없이 그래픽만 이어지는 가장 긴 구간",
    "ok": false,
-   "detail": "최장 722초"
+   "detail": "최장 896초"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "장 전환 없이 이어지는 가장 긴 구간",
    "ok": true,
-   "detail": "최장 170초"
+   "detail": "최장 168초"
   },
   {
    "gate": "G5",
    "level": "SHOULD",
    "item": "스타일 조합: 한 스타일로만 만들지 않음 — 장면이 하는 일에 맞춰 섞음 (05 §0-1)",
    "ok": true,
-   "detail": "8종 ['data-report', 'explain-stage', 'hybrid-causal', 'kinetic-type', 'paper-column', 'screen-zoom', 'source-cut', 'statement-brief']"
+   "detail": "6종 ['data-report', 'explain-stage', 'hybrid-causal', 'paper-column', 'screen-zoom', 'source-cut']"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "스타일 조합: 가장 많이 쓴 스타일의 몫·겹친 장면·같은 스타일 연속",
    "ok": false,
-   "detail": "explain-stage 0.29 · 겹침 0 · 최장 연속 2"
+   "detail": "source-cut 0.5 · 겹침 0 · 최장 연속 3"
   },
   {
    "gate": "G5",
    "level": "참고",
    "item": "강조 횟수·강조가 겹친 장면 — 기억할 숫자·반전·결론에만 썼는지 (05 §0-1)",
    "ok": true,
-   "detail": "2번 [(3, 'kinetic'), (30, 'kinetic')] · 겹친 장면 []"
+   "detail": "0번 [] · 겹친 장면 []"
   },
   {
    "gate": "G5",
@@ -625,7 +625,7 @@
    "level": "MUST",
    "item": "싱크 (0.5초 안 ≥95%, 화면−소리 ≤0.1초, 중앙값 ≤0.2초)",
    "ok": true,
-   "detail": "{'within_0_5s': 0.991, 'p95_abs_offset': 0.09, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.033}"
+   "detail": "{'within_0_5s': 1.0, 'p95_abs_offset': 0.07, 'median_abs_offset': 0.05, 'video_minus_audio_s': -0.067}"
   },
   {
    "gate": "G6",
@@ -638,8 +638,8 @@
    "gate": "G6",
    "level": "참고",
    "item": "움직임: 화면 변화·정지 화면 몫 (완성본 측정 — 정신없지도 멈춰 있지도 않은지 눈으로, README §2-5)",
-   "ok": false,
-   "detail": "변화 10.1/분 · 정지 0.59"
+   "ok": true,
+   "detail": "변화 16.0/분 · 정지 0.38"
   },
   {
    "gate": "G6",

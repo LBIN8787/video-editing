@@ -104,7 +104,11 @@ def prepare(project, spec: dict) -> None:
         framing = ("scale=1920:1080:force_original_aspect_ratio=decrease:force_divisible_by=2,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=0x161a20"
                    if contain else "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080")
         sig = json.dumps([(s["start"], s["end"]) for s in segs]) + str(src.stat().st_size)
-        if contain:
+        if sc["clip"].get("crop"):   # 원본 방송 화면의 자막 띠·시세판을 잘라 내고 사람만 (예 "crop": "1240:698:0:0", 2026-11-27)
+            framing = f"crop={sc['clip']['crop']}," + framing
+        if sc["clip"].get("vf"):   # 화면 배치를 직접 (예: 방송 화면을 위쪽에 줄여 두고 아래 띠를 우리 자막 자리로)
+            framing = sc["clip"]["vf"]
+        if contain or sc["clip"].get("crop") or sc["clip"].get("vf"):
             sig += framing
         vid, wav, side = bdir / f"bite_{sc['id']:03d}.mp4", bdir / f"bite_{sc['id']:03d}.wav", bdir / f"bite_{sc['id']:03d}.txt"
         if not (vid.exists() and wav.exists() and side.exists() and side.read_text(encoding="utf-8") == sig):
@@ -133,7 +137,15 @@ def prepare(project, spec: dict) -> None:
         t, segt = 0.0, []
         for s in segs:
             d = s["end"] - s["start"]
-            segt.append({"t0": round(t, 3), "t1": round(t + d, 3), "ko": s.get("ko", ""), "en": s.get("heard", "")})
+            if s.get("subs"):   # 긴 구간 하나를 끊지 않고 자막만 문장마다 나눔 (2026-11-27 사용자: 인터뷰를 충분히 길게) — t 는 구간 시작 기준 초
+                subs = s["subs"]
+                for k, u in enumerate(subs):
+                    u0 = float(u.get("t", 0))
+                    u1 = float(subs[k + 1]["t"]) if k + 1 < len(subs) else d
+                    segt.append({"t0": round(t + u0, 3), "t1": round(t + min(u1, d), 3), "ko": u.get("ko", ""), "en": u.get("en", ""),
+                                 "cont": k > 0})
+            else:
+                segt.append({"t0": round(t, 3), "t1": round(t + d, 3), "ko": s.get("ko", ""), "en": s.get("heard", "")})
             t += d
         # 실제 이어 붙인 길이 (프레임 반올림 차이)
         real = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(wav)],
@@ -219,8 +231,9 @@ def s_bite(D, sc: dict, bt: list, dur: float):
                                f'{_e(p)}</span></div>')
                 D.js.append(f'tl.set("#{j}",{{opacity:1}},{t:.2f});tl.set("#{j}",{{opacity:0}},{t + d - 0.03:.2f});')
                 t += d
-    for s in b["segs"][1:]:   # 점프 컷 소리
-        D.sfx.append(("click-soft", tb + s["t0"]))
+    for s in b["segs"][1:]:   # 점프 컷 소리 (한 구간 안에서 자막만 나뉜 곳은 컷이 아니므로 소리 없음)
+        if not s.get("cont"):
+            D.sfx.append(("click-soft", tb + s["t0"]))
 
 
 def register():

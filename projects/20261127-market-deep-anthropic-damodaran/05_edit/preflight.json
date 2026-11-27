@@ -1,10 +1,10 @@
 {
  "project": "20261127-market-deep-anthropic-damodaran",
  "final": {
-  "size": 118136291,
-  "mtime": 1795742055
+  "size": 224364835,
+  "mtime": 1795782351
  },
- "at": "2026-11-27T10:18:07",
+ "at": "2026-11-27T21:41:24",
  "checks": {
   "overlap": {
    "pass": true,
@@ -13,20 +13,20 @@
   },
   "subtitle_sync": {
    "pass": true,
-   "p95": 0.09,
-   "worst_line": 0.89,
+   "p95": 0.07,
+   "worst_line": 0.48,
    "worst": []
   },
   "av_sync": {
    "pass": true,
-   "video_minus_audio_s": -0.033
+   "video_minus_audio_s": -0.067
   },
   "layout": {
    "pass": true,
    "issues": 0
   },
   "check_must": {
-   "pass": false,
+   "pass": true,
    "tail": [
     "",
     "**참고**(ℹ️)는 실패가 아니라 측정값입니다 — 숫자를 맞추지 말고, 표시된 곳이 그 연출의 원리(manual/05 §0-0)에 맞는지 화면 확인(D3)에서 봅니다.",
@@ -34,10 +34,8 @@
    ]
   },
   "timing": {
-   "pass": false,
-   "lines": [
-    "있습니다. 그렇다면 남는 질문은 이것입니다. 그 매출이 오는 속도를, 앤트로픽의 다음 약정과 한국 메모리의 다음 주문은 얼마나 먼저 알려 줄까요."
-   ],
+   "pass": true,
+   "lines": [],
    "note": "만든 날 기준 상대 날짜(이번 주·지난주·어제·지난 N일…)를 실제 날짜로 바꾸고 다시 렌더 — 올리는 날과 보는 날이 달라도 맞게"
   },
   "packaging": {
@@ -47,10 +45,10 @@
    "note": "새 사진으로 썸네일을 다시 만들거나 제목·썸네일 글을 고친 뒤 thumbnail → preflight"
   },
   "looked": {
-   "pass": false,
+   "pass": true,
    "sheet": "05_edit/preflight_frames.jpg",
    "note": "프레임 모음을 직접 보고 겹침·잘림·화면 숫자=자막 숫자를 확인한 뒤 --looked 로 다시"
   }
  },
- "pass": false
+ "pass": true
 }
