@@ -61,6 +61,8 @@ items:
   illust: {group: act, does: 손그림 삽화 한 장 위를 카메라가 옮겨 가며 표시, when: "사람들의 생각·행동·상황을 한 장의 그림으로 (그림을 준비했을 때)", not_when: "그림이 없을 때 (자리 카드만 나옴)", instead: [stage], situations: [open-scene, character-acts]}
   metaphor: {group: act, does: 무리가 한쪽으로 몰려가고 의태어가 튀어나오는 비유, when: "돈·사람·데이터가 한쪽으로 쏠리는 비유 — 사용자가 고를 때만", not_when: "매뉴얼 기본 선택으로는 쓰지 않음 (품질 보완 필요)", instead: [analogy, stage], situations: []}
   studio3d: {group: act, does: 어두운 3D 무대의 물체, when: "제품·물체 하나를 입체로 돌려 볼 때", not_when: "이야기·숫자 장면 (무겁고 느림)", instead: [stage], situations: []}
+  mechanism: {group: act, does: "한 장치 위에서 돈·주문·물건이 흐르고 채워지고 끊기며 원리를 연기 (3b1b 식, 등장한 사물은 남고 변함)", when: "돈·물건이 어떻게 도나 — 벤더 파이낸싱·순환 금융처럼 고리가 있는 원리", not_when: "공간·부품 배치 → cutaway3d, 누가 누구에게 한 번 넘기나 → motionboard", instead: [motionboard, map_causal], situations: [structure, explain]}
+  cutaway3d: {group: act, does: "3D 구조 세트(데이터센터 랙 등) 안을 카메라가 박자마다 옮겨 가며 열고·빛을 흘리고·이름표를 붙임 (샷을 대본이 고름)", when: "무엇이 어디에 있고 어떻게 이어지나 — 랙 사이·랙 안·트레이·GPU·광/구리 연결처럼 처음 듣는 구조를 글씨 카드 대신 (05 §0-10)", not_when: "맞는 세트가 없을 때(다른 세트를 억지로 쓰지 않음), 돈·관계의 원리 → mechanism·motionboard, 숫자 하나 → bignum", instead: [mechanism, motionboard], situations: [structure, explain]}
 
   # ───────── 원인·관계
   map_causal: {group: link, does: 칸과 화살표 인과 지도 — 같은 칸 위치를 유지하며 하나씩 켬, when: "원인 → 결과가 3단계 이상 이어질 때, 시장을 흔든 사건의 파급 경로", not_when: "화살표가 1~2개뿐 (말로 충분)", instead: [analogy, story], situations: [cause, hub-event]}

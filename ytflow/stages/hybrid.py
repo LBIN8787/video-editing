@@ -1749,6 +1749,8 @@ try:  # 새 연출 문법(아카이브 다큐·지도 여정·키네틱 타이�
     _explain.register()
     from . import mechanism as _mechanism   # 설명 애니메이션 (원리를 움직임으로, 3b1b 식 — 2026-11-24)
     _mechanism.register()
+    from . import cutaway3d as _cutaway3d   # 3D 구조 장면 (구조·공간·내부·연결, styles/3d-docu-motion/sets.yaml — 2026-11-29)
+    _cutaway3d.register()
     from . import noir as _noir          # 누아르 사건 보드 (hubweb 관계망·ledger 두 열 장부, 날짜 눈금) — docs/57
     _noir.register()
     from . import noircase as _noircase  # 누아르 변형 (noirtitle·noircase·noirsides, 2026-11-21 드러켄밀러 편)

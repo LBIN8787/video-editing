@@ -25,6 +25,50 @@ TOPICS = ROOT / "topics"
 TECH = ROOT / "styles" / "techniques.yaml"
 TECH_STATUS = {"have": "있음", "partial": "비슷한 것 있음", "candidate": "후보", "hold": "보류"}
 
+# 글씨 카드로 끝나는 설명 (2026-11-29 사용자: "단순 글씨카드에서 끝나는게 아니라 추가 설명이 있으면 좋은 장면은
+# 3d그래픽이나 상황에 따라 모션그래픽 등을 추가") — manual/05 §0-10. 금지가 아니라 '다시 볼 곳' 표시.
+TEXT_CARDS = {"card_type", "checklist", "bignum", "kinetic", "recap", "statecard"}
+EXPLAIN_SITS = {"explain", "structure", "cause", "change", "ratio", "route"}
+SETS_YAML = ROOT / "styles" / "3d-docu-motion" / "sets.yaml"
+
+
+def _three_d(text: str) -> list[dict]:
+    """대본이 3D 세트의 소재(context 낱말 둘 이상)와 맞고 샷 keywords 가 맞으면 → [{set, shot, hits}] (맞는 낱말 많은 순)."""
+    try:
+        sets = (yaml.safe_load(SETS_YAML.read_text(encoding="utf-8")) or {}).get("sets", {}) or {}
+    except Exception:  # noqa: BLE001
+        return []
+    out = []
+    for sid, st in sets.items():
+        ctx = {k for k in (st.get("context") or []) if k and k in (text or "")}
+        if len(ctx) < 2:   # 소재가 맞지 않으면 샷 낱말('지금은'·'앞으로')만으로 추천하지 않음
+            continue
+        for shot, x in (st.get("shots") or {}).items():
+            hits = [k for k in (x.get("keywords") or []) if k and k in (text or "")]
+            if hits:
+                out.append({"set": sid, "shot": shot, "hits": hits})
+    return sorted(out, key=lambda r: -len(r["hits"]))
+
+
+def card_gap(rec: dict, eff: dict) -> dict | None:
+    """지금 장면이 글씨 카드이고, 박자가 설명할 거리(구조·원리·원인·변화·비율·이동)를 담고 있으면 → 더할 그림 후보."""
+    if rec.get("type") not in TEXT_CARDS:
+        return None
+    sits = [x for b in rec.get("beats") or [] for x in b["situations"]]
+    why = [x for x in dict.fromkeys(sits) if x in EXPLAIN_SITS]
+    if not why:
+        return None
+    text = " ".join(b["say"] for b in rec.get("beats") or [])
+    scenes = []
+    for sid in why:
+        for t in (eff["situations"].get(sid) or {}).get("scenes") or []:
+            if t not in TEXT_CARDS and t not in scenes:
+                scenes.append(t)
+    d3 = _three_d(text)[:3]
+    if d3 and "cutaway3d" not in scenes:
+        scenes.insert(0, "cutaway3d")
+    return {"because": why, "scenes": scenes[:5], "three_d": d3}
+
 
 def _y(p: Path) -> dict:
     try:
@@ -133,12 +177,16 @@ def plan(path: Path, eff: dict | None = None) -> dict:
             rec.update(recommended_scenes=s.get("scenes") or [], type_fits=cur in (s.get("scenes") or []) or cur in ("chapter",),
                        techniques=[{"id": t, "status": s["technique_status"].get(t, "?")} for t in s["techniques_ok"]],
                        blocked=s["techniques_blocked"], avoid=s.get("avoid", ""), why=s.get("why", ""))
+        gap = card_gap(rec, eff)
+        if gap:
+            rec["card_gap"] = gap
         rows.append(rec)
     matched = [r for r in rows if r["situation"]]
     return {"project": path.name, "topic": eff["id"], "topic_name": eff["name"], "scenes": rows,
             "coverage": round(len(matched) / len(rows), 2) if rows else 0,
             "fit": round(sum(1 for r in matched if r.get("type_fits")) / len(matched), 2) if matched else 0,
-            "counts": dict(sorted(counts.items(), key=lambda kv: -kv[1])), "defaults": eff["defaults"]}
+            "counts": dict(sorted(counts.items(), key=lambda kv: -kv[1])), "defaults": eff["defaults"],
+            "card_gaps": sum(1 for r in rows if r.get("card_gap"))}
 
 
 def context_md(eff: dict, p: dict | None = None) -> str:
@@ -179,6 +227,24 @@ def context_md(eff: dict, p: dict | None = None) -> str:
             L.append(f"| {r['scene']} | {r['type']}{mark} | {r['situation_name']} | {' → '.join(r['recommended_scenes'])} | "
                      + ", ".join(f"{t['id']}({TECH_STATUS.get(t['status'], '?')})" for t in r["techniques"]) + " |")
         L += ["", "⚠ = 지금 장면 종류가 상황의 추천 목록에 없음 — 틀린 게 아니라 다시 볼 곳. 기법이 '후보'면 아직 렌더러에 없음."]
+        gaps = [r for r in p["scenes"] if r.get("card_gap")]
+        L += ["", f"## 5. 글씨 카드로 끝나는 설명 — 그림을 더할 곳 ({len(gaps)}곳, manual/05 §0-10)", ""]
+        if not gaps:
+            L.append("없음 — 설명 박자가 모두 그림·모션그래픽·자료 화면으로 채워져 있음.")
+        else:
+            L += ["글씨 카드(체크리스트·큰 숫자·키네틱 등)인데 대본이 구조·원리·원인·변화를 설명하는 장면입니다. "
+                  "카드를 지우라는 뜻이 아니라, 카드 앞이나 뒤에 **그 설명을 보여 주는 장면을 하나 더할지** 판단할 곳입니다. "
+                  "더하지 않으면 그 이유를 DIRECTION_LOG 에 한 줄 남깁니다.", "",
+                  "| 장면 | 지금 | 설명 거리 | 더할 장면 후보 | 3D 세트 샷 (맞은 낱말) |", "|---|---|---|---|---|"]
+            names = {k: (eff["situations"].get(k) or {}).get("name", k) for r in gaps for k in r["card_gap"]["because"]}
+            for r in gaps:
+                g = r["card_gap"]
+                d3 = "; ".join(f"`{x['set']}:{x['shot']}` ({', '.join(x['hits'])})" for x in g["three_d"]) or "-"
+                L.append(f"| {r['scene']} | {r['type']} | {', '.join(names[k] for k in g['because'])} | "
+                         f"{' · '.join(g['scenes']) or '-'} | {d3} |")
+            L += ["", "고르는 법 — 구조·공간·안쪽(무엇이 어디에 있고 어떻게 이어지나) → `cutaway3d` (세트·샷: `python -m ytflow cutaway3d list`) · "
+                  "돈·물건이 도는 원리 → `mechanism` · 값 사이 차이·몫·이후 누적 → `spread`·`share`·`afterline` · "
+                  "말에 맞춰 생기는 사물 → `motionboard` · 원인→결과 → `map_causal`."]
     return "\n".join(L) + "\n"
 
 

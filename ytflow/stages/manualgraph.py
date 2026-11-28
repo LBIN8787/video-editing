@@ -563,7 +563,7 @@ def parse_lexicon() -> list[dict]:
         for m in re.finditer(r"\"(\w+)\"\s*:\s*(s_\w+)", txt):
             if m.group(2) in defs or True:
                 T(m.group(1), _fn=m.group(2))
-        for m in re.finditer(r"RENDER\[\"(\w+)\"\]\s*=\s*(s_\w+)", txt):
+        for m in re.finditer(r"RENDER\[\"(\w+)\"\]\s*=\s*(?:\w+\()?(s_\w+)", txt):   # _themed(s_mechanism) 처럼 감싼 등록도
             T(m.group(1), _fn=m.group(2))
         # 반복문으로 등록하는 모듈 (explain.py: for k, fn in (("afterline", s_afterline), ...))
         for m in re.finditer(r"\(\"(\w+)\"\s*,\s*(s_\w+)\)", txt):

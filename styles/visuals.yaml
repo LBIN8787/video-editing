@@ -200,6 +200,15 @@ scene:
       - "els 에 요소를 미리 선언(person·card·img·text·arrow·brush·ban·dashed, 위치 x·y)"
       - "박자 do 에 나올 요소와 동작(move·hide·hi·dim·swap)을 적으면 그대로 연기 — 정해진 틀이 없는 관계 설명용"
       - "theme: paper(구겨진 종이)·light·dark"
+  mechanism:
+    name: 설명 애니메이션 (원리 장치)
+    group: structure
+    key: '"type": "mechanism"'
+    what: 한 장치 위에서 돈·주문·물건이 흐르고 채워지고 끊기며 원리를 연기
+    fits: 돈·물건이 도는 고리가 있는 원리 (벤더 파이낸싱·순환 금융)
+    build:
+      - "mechanism.kind(loop 등)와 등장 이름(seller·buyer·…)을 적고, cues 에 단계 → 대사 낱말을 적으면 그 낱말을 말하는 순간 그 단계가 움직임"
+      - "등장한 사물은 끝까지 남고 사라지지 않고 변함, 색은 뜻 하나(돈 초록·주문 주황·위험 빨강), 카메라 고정 (ytflow/stages/mechanism.py)"
   checklist:
     name: 체크리스트
     group: chapter
@@ -475,6 +484,16 @@ scene:
     build:
       - "어두운 스튜디오에 3D 물체(object·preset)를 그리고 메인 시간축이 매 프레임 다시 그림"
       - "in·out·n·left·right 로 물체 수·좌우 이름. 시안 단계"
+  cutaway3d:
+    name: 3D 구조 세트
+    group: story
+    key: '"type": "cutaway3d"'
+    what: 3D 세트(데이터센터 랙) 안을 카메라가 박자마다 옮겨 가며 열고 빛을 흘리고 이름표를 붙임
+    fits: 처음 듣는 구조·공간·연결을 글씨 카드 대신 보여 줄 때 (05 §0-10)
+    build:
+      - "세트 = 미리 짜 둔 3D 무대(styles/3d-docu-motion/sets/<id>.html), 샷 = 그 무대의 한 구간 (sets.yaml)"
+      - "박자마다 shot(+at 낱말) → 구간이 말 길이에 맞춰 0.6~2배로 늘거나 줄고, 브라우저(WebGL2)로 프레임을 뽑아 원본 영상처럼 깖"
+      - "labels·titles 로 이름표·구간 이름을 그 영상의 말로, chrome lite(기본)는 아래 자막 자리를 비움"
 
 transition:
   fade:

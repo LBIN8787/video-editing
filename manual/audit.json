@@ -1,11 +1,11 @@
 {
- "date": "2026-11-28T13:20",
+ "date": "2026-11-29T02:12",
  "manual_version": 148,
  "counts": {
-  "fix": 0,
+  "fix": 1,
   "ask": 106,
   "new": 0,
-  "resolved": 1
+  "resolved": 4
  },
  "items": [
   {
@@ -240,7 +240,7 @@
    "kind": "overfit",
    "level": "ask",
    "file": "manual/feedback-by-repo.md",
-   "line": 179,
+   "line": 180,
    "text": "2026-11-11 · v11 기각 — “화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌”",
    "why": "실험 기록 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
    "id": "3359d61da7",
@@ -251,7 +251,7 @@
    "kind": "overfit",
    "level": "ask",
    "file": "manual/feedback-by-repo.md",
-   "line": 376,
+   "line": 377,
    "text": "2026-11-21 · 영상 검토 — “대본의 피드백입니다 — (의지력 편 v2 검토) 방향 통과, 2025 효과 배수 비교 금지·대조 조건과 주 지표 설명·생활 조언을 근거 범위 안으로·4~7장 연구 나열 대신 증거 추적·8장 전환 문장”",
    "why": "스타일 기본값 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
    "id": "5f50c13cd0",
@@ -262,7 +262,7 @@
    "kind": "overfit",
    "level": "ask",
    "file": "manual/feedback-by-repo.md",
-   "line": 549,
+   "line": 550,
    "text": "2026-11-09 · v3 기각 — “강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)”",
    "why": "스타일 기본값 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
    "id": "e9a26d8514",
@@ -1192,55 +1192,70 @@
    "id": "6ba0bb3605",
    "new": false,
    "since": "2026-11-28"
+  },
+  {
+   "kind": "sweep",
+   "level": "fix",
+   "file": "manual/contradictions.yaml",
+   "line": 0,
+   "text": "바뀐 지침 2개 모순 점검: manual/08-issues.md, manual/09-market-daily.md",
+   "why": "바뀐 줄이 다른 지침·정기 작업 지시문과 반대인지 확인 → 장부에 적고 manual-audit --checked",
+   "id": "5d73d67c19",
+   "new": false,
+   "since": "2026-11-29"
   }
  ],
  "resolved": [
   {
-   "kind": "stale",
+   "kind": "topic",
    "level": "fix",
-   "file": "manual/graph.json",
+   "file": "topics/ai/topic.yaml",
    "line": 0,
-   "text": "매뉴얼 그래프가 옛것",
-   "why": "python -m ytflow manual-graph",
-   "id": "9e7e585dd5",
-   "new": true,
-   "since": "2026-11-28",
-   "resolved": "2026-11-28"
+   "text": "structure → 장면 mechanism",
+   "why": "그런 장면 종류(렌더 함수)가 없음",
+   "id": "132ff79fe6",
+   "new": false,
+   "since": "2026-11-29",
+   "resolved": "2026-11-29"
+  },
+  {
+   "kind": "topic",
+   "level": "fix",
+   "file": "topics/curiosity/topic.yaml",
+   "line": 0,
+   "text": "structure → 장면 mechanism",
+   "why": "그런 장면 종류(렌더 함수)가 없음",
+   "id": "7f9196c5de",
+   "new": false,
+   "since": "2026-11-29",
+   "resolved": "2026-11-29"
+  },
+  {
+   "kind": "topic",
+   "level": "fix",
+   "file": "topics/issues/topic.yaml",
+   "line": 0,
+   "text": "structure → 장면 mechanism",
+   "why": "그런 장면 종류(렌더 함수)가 없음",
+   "id": "9f06c9e0d2",
+   "new": false,
+   "since": "2026-11-29",
+   "resolved": "2026-11-29"
+  },
+  {
+   "kind": "topic",
+   "level": "fix",
+   "file": "topics/market/topic.yaml",
+   "line": 0,
+   "text": "structure → 장면 mechanism",
+   "why": "그런 장면 종류(렌더 함수)가 없음",
+   "id": "8672dcc2d6",
+   "new": false,
+   "since": "2026-11-29",
+   "resolved": "2026-11-29"
   }
  ],
  "log": [
-  {
-   "date": "2026-11-19T13:53",
-   "fix": 0,
-   "ask": 1,
-   "new": 0,
-   "resolved": 0,
-   "note": ""
-  },
-  {
-   "date": "2026-11-19T13:54",
-   "fix": 0,
-   "ask": 0,
-   "new": 0,
-   "resolved": 1,
-   "note": "사용자 정정 반영"
-  },
-  {
-   "date": "2026-11-20T10:11",
-   "fix": 20,
-   "ask": 13,
-   "new": 33,
-   "resolved": 0,
-   "note": ""
-  },
-  {
-   "date": "2026-11-20T10:12",
-   "fix": 0,
-   "ask": 13,
-   "new": 0,
-   "resolved": 20,
-   "note": ""
-  },
   {
    "date": "2026-11-20T10:12",
    "fix": 0,
@@ -1456,10 +1471,39 @@
    "new": 0,
    "resolved": 1,
    "note": "정기 검토"
+  },
+  {
+   "date": "2026-11-29T02:07",
+   "fix": 9,
+   "ask": 107,
+   "new": 10,
+   "resolved": 0,
+   "note": ""
+  },
+  {
+   "date": "2026-11-29T02:09",
+   "fix": 5,
+   "ask": 106,
+   "new": 0,
+   "resolved": 5,
+   "note": ""
+  },
+  {
+   "date": "2026-11-29T02:10",
+   "fix": 5,
+   "ask": 106,
+   "new": 0,
+   "resolved": 0,
+   "note": ""
+  },
+  {
+   "date": "2026-11-29T02:12",
+   "fix": 1,
+   "ask": 106,
+   "new": 0,
+   "resolved": 4,
+   "note": ""
   }
  ],
- "fixed_by_agent": [
-  "해석 → 가설 잔재 2곳(08:51·09:256) 고침, audit RETIRED 에 한 줄",
-  "모순 점검(변경분 14개): 1 고침·1 새로 물어봄(미스터리 템플릿 배경음)"
- ]
+ "fixed_by_agent": []
 }

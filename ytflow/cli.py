@@ -310,6 +310,8 @@ def main(argv: list[str] | None = None) -> None:
     au.add_argument("--fixed", action="append", default=[], help="이번 검토에서 고친 것 한 줄 (여러 번)")
     au.add_argument("--checked", action="store_true", help="모순 점검을 마침 → contradictions.yaml 의 기준 커밋을 지금으로 (변경분 점검 끝)")
     au.add_argument("--full", action="store_true", help="--checked 와 함께: 전체 모순 점검도 마침 (다음은 7일 뒤)")
+    c3 = sub.add_parser("cutaway3d", help="3D 구조 세트(cutaway3d 장면): list = 세트·샷 목록, sheet = 샷마다 한 장 미리보기 (styles/3d-docu-motion/sets.yaml)")
+    c3.add_argument("args", nargs=argparse.REMAINDER)
     ep = sub.add_parser("edit-plan", help="메인 → 주제 레포 → 이 영상: 박자마다 상황을 찾아 장면 종류·연출 기법 채우기 → 02_script/EDIT_CONTEXT.md·edit_plan.json (docs/33)")
     ep.add_argument("project")
     dcp = sub.add_parser("decide", help="연출 결정 기록: 영상 방향·장면마다 고른 것·버린 대안·근거·의도 검사 → 02_script/DIRECTION_LOG.md (docs/66)")
@@ -583,6 +585,9 @@ def main(argv: list[str] | None = None) -> None:
         if a.checked:
             audit.mark_checked(a.full)
         audit.write(a.quiet, a.note, a.fixed)
+    elif a.cmd == "cutaway3d":
+        from .stages import cutaway3d
+        raise SystemExit(cutaway3d.main(a.args or ["list"]))
     elif a.cmd == "edit-plan":
         from .stages import layers
         layers.write_plan(Project.open(a.project).path)
