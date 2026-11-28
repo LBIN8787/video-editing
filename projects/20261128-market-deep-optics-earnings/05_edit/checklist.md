@@ -1,10 +1,10 @@
 # 체크리스트 — 20261128-market-deep-optics-earnings
 
-매뉴얼 v147 · 2026-11-28T09:31:06 · **MUST 실패 1개**
+매뉴얼 v147 · 2026-11-28T10:05:58 · **통과**
 
 | 게이트 | 등급 | 항목 | 결과 | 내용 |
 |---|---|---|---|---|
-| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ❌ | [2026-11-27 · 20261123-curiosity-soldout 기각] 아 약간 전체적으로 지우 눈이 작고 전이랑 달라보여요 이점 한번 |
+| G0 | MUST | 기각 사유가 매뉴얼에 모두 반영됨 (manual/CHANGELOG.md '반영 대기' 비어 있음) | ✅ |  |
 | G0 | SHOULD | 매뉴얼 그래프가 최신 (python -m ytflow manual-graph) | ⚠️ | manual/graph.json |
 | G1 | MUST | topic_brief.json 있음 | ✅ | 01_research/topic_brief.json (schemas/topic_brief.schema.json) |
 | G1 | MUST | 브랜드(ai/market/curiosity) | ✅ | market |
