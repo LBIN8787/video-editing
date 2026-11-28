@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "1.0.0",
+  "kitVersion": "0.1.0",
+  "displayName": "3D 다큐 모션 — 광학 편",
+  "aliases": ["3D 모션", "3D 그래픽"],
+  "status": "review_unapproved",
+  "id": "20261128-market-deep-optics-v2-v4-v5",
+  "inputs": {
+    "original": {
+      "cli": "--source",
+      "filenameHint": "final.mp4",
+      "required": [
+        "review",
+        "full"
+      ],
+      "sha256": "a3f674b9155068451de6e43d0b7522931cad5ac4c7aaf06f5708160dfe71528d",
+      "video": {
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "startSec": 0,
+        "frames": 27210
+      },
+      "audio": {
+        "codec": "aac",
+        "selector": "0:a:0",
+        "payloadSha256": "af249553430d213f7ee6a2574d227a2d997b77e9186afa5f4517fe6c79ab9c9a"
+      }
+    },
+    "plate": {
+      "cli": "--plate",
+      "required": [
+        "review",
+        "full"
+      ],
+      "generator": "render-plate.cjs",
+      "scene": "scene.html",
+      "qaFallback": "fixtures/v2-B-video-only.mp4",
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "frames": 969,
+      "audio": "none (runner ignores it if present)"
+    }
+  },
+  "time": {
+    "unit": "seconds",
+    "clock": "absolute source for timeline, plate-relative for plate ranges/fades; 30 fps grid",
+    "review": {
+      "start": 152.6,
+      "endExclusive": 184.9,
+      "frames": 969
+    },
+    "v4": {
+      "start": 152.6,
+      "endExclusive": 177.6,
+      "plateIn": 0,
+      "plateOutExclusive": 25,
+      "fadeIn": [
+        0.95,
+        1.45
+      ],
+      "fadeOut": [
+        24.2,
+        24.9
+      ]
+    },
+    "v5": {
+      "start": 163.333333,
+      "endExclusive": 171.7,
+      "plateIn": 10.733333,
+      "plateOutExclusive": 19.1
+    },
+    "qa": [
+      {
+        "id": "start",
+        "frame": 0
+      },
+      {
+        "id": "small-panel",
+        "frame": 240
+      },
+      {
+        "id": "fiber",
+        "frame": 357
+      },
+      {
+        "id": "copper",
+        "frame": 499
+      },
+      {
+        "id": "small-panel-return",
+        "frame": 642
+      },
+      {
+        "id": "finish",
+        "frame": 900
+      }
+    ]
+  },
+  "placement": {
+    "unit": "px",
+    "origin": "top-left",
+    "cropOrder": [
+      "width",
+      "height",
+      "x",
+      "y"
+    ],
+    "scaleOrder": [
+      "width",
+      "height"
+    ],
+    "positionOrder": [
+      "x",
+      "y"
+    ],
+    "v4": {
+      "crop": [
+        1280,
+        500,
+        0,
+        68
+      ],
+      "scale": [
+        1056,
+        412
+      ],
+      "position": [
+        432,
+        510
+      ],
+      "border": {
+        "color": "526c76",
+        "width": 2,
+        "status": "inferred from archived V4 pixels, not a recovered command literal"
+      }
+    },
+    "v5": {
+      "crop": [
+        1152,
+        300,
+        64,
+        174
+      ],
+      "scale": [
+        1728,
+        450
+      ],
+      "position": [
+        96,
+        487
+      ],
+      "border": {
+        "color": "527681",
+        "width": 2
+      }
+    },
+    "qaZones": {
+      "cardsAndHeader": [
+        1920,
+        480,
+        0,
+        0
+      ],
+      "subtitles": [
+        1920,
+        130,
+        0,
+        950
+      ],
+      "zoomInterior": [
+        1648,
+        400,
+        136,
+        512
+      ]
+    }
+  },
+  "pipeline": {
+    "order": [
+      "v4",
+      "v5"
+    ],
+    "videoCodec": "libx264",
+    "crf": 19,
+    "preset": "veryfast",
+    "threads": 6,
+    "format": "yuv420p",
+    "color": [
+      "tv",
+      "bt709",
+      "bt709",
+      "bt709"
+    ],
+    "audio": "copy 0:a:0; review trims packet boundaries without re-encoding"
+  },
+  "provenance": {
+    "repositorySceneLfSha256": "dd967eb1a36ba3a3c9f8f8e9d5f47e8a602fa2989d0a037185c413e75793e1c9",
+    "sourceSceneSha256": "5c3389b68202a56277ca357d0875cc0335a27059870bfb1a8ac2c5c2dcda21e5",
+    "v4": "source-thread timing/placement + archived V4 visual evidence; retain-layout.ps1 is not final optics V4",
+    "v5": "v5/render-zoom.ps1 + archived V5",
+    "scope": "Optics chapter only; no project or repository dependencies"
+  }
+}
