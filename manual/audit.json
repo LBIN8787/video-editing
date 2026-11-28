@@ -1,11 +1,11 @@
 {
- "date": "2026-11-27T13:25",
- "manual_version": 147,
+ "date": "2026-11-28T13:20",
+ "manual_version": 148,
  "counts": {
-  "fix": 1,
+  "fix": 0,
   "ask": 106,
   "new": 0,
-  "resolved": 0
+  "resolved": 1
  },
  "items": [
   {
@@ -240,7 +240,7 @@
    "kind": "overfit",
    "level": "ask",
    "file": "manual/feedback-by-repo.md",
-   "line": 178,
+   "line": 179,
    "text": "2026-11-11 · v11 기각 — “화면이 너무 정신없이 움직임(박자마다 카메라 이동·매 장면 휙 전환) + 배경음은 꼭 필요하지 않은데 안 어울리는 곡을 억지로 넣은 느낌”",
    "why": "실험 기록 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
    "id": "3359d61da7",
@@ -251,7 +251,7 @@
    "kind": "overfit",
    "level": "ask",
    "file": "manual/feedback-by-repo.md",
-   "line": 375,
+   "line": 376,
    "text": "2026-11-21 · 영상 검토 — “대본의 피드백입니다 — (의지력 편 v2 검토) 방향 통과, 2025 효과 배수 비교 금지·대조 조건과 주 지표 설명·생활 조언을 근거 범위 안으로·4~7장 연구 나열 대신 증거 추적·8장 전환 문장”",
    "why": "스타일 기본값 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
    "id": "5f50c13cd0",
@@ -262,7 +262,7 @@
    "kind": "overfit",
    "level": "ask",
    "file": "manual/feedback-by-repo.md",
-   "line": 545,
+   "line": 549,
    "text": "2026-11-09 · v3 기각 — “강조 남용: 화면 위 키네틱 글자가 아래 자막과 같은 문장을 반복해 위아래로 같은 내용이 보임. 강조는 정말 중요한 곳에만, 웬만하면 쓰지 않기 (남용은 안 쓰는 것만 못함)”",
    "why": "스타일 기본값 층인데 금지·MUST 로 적힘 — 기본값 문장으로 바꿀지, 원칙·기준으로 확정할지",
    "id": "e9a26d8514",
@@ -279,17 +279,6 @@
    "id": "38129265bd",
    "new": false,
    "since": "2026-11-20"
-  },
-  {
-   "kind": "pending",
-   "level": "ask",
-   "file": "manual/CHANGELOG.md",
-   "line": 0,
-   "text": "[2026-11-27 · 20261123-curiosity-soldout 기각] 아 약간 전체적으로 지우 눈이 작고 전이랑 달라보여요 이점 한번 짚고가고싶어요 맨 처음도 약간 날카로운 인상에 눈도 작아보이구요 화풍이랑 인물이 좀 달라진거같아서요",
-   "why": "반영 대기 — 매뉴얼을 고치고 manual-bump (그동안 check G0 실패)",
-   "id": "3f99ee59c7",
-   "new": false,
-   "since": "2026-11-27"
   },
   {
    "kind": "misaligned",
@@ -1194,6 +1183,19 @@
    "since": "2026-11-27"
   },
   {
+   "kind": "contra",
+   "level": "ask",
+   "file": "styles/mystery-archive/STYLE.md §1·§4 · AGENTS 표",
+   "line": 0,
+   "text": "c-20261128-02: styles/mystery-archive/STYLE.md §1·§4 · AGENTS 표 ↔ manual/05-style-matching.md:119 — 미스터리 템플릿의 배경음 기본",
+   "why": "어느 쪽이 맞는지 사용자 판단 — 답을 decision 에 적고 status: decided",
+   "id": "6ba0bb3605",
+   "new": false,
+   "since": "2026-11-28"
+  }
+ ],
+ "resolved": [
+  {
    "kind": "stale",
    "level": "fix",
    "file": "manual/graph.json",
@@ -1201,36 +1203,12 @@
    "text": "매뉴얼 그래프가 옛것",
    "why": "python -m ytflow manual-graph",
    "id": "9e7e585dd5",
-   "new": false,
-   "since": "2026-11-27"
+   "new": true,
+   "since": "2026-11-28",
+   "resolved": "2026-11-28"
   }
  ],
- "resolved": [],
  "log": [
-  {
-   "date": "2026-11-19T13:52",
-   "fix": 0,
-   "ask": 1,
-   "new": 1,
-   "resolved": 0,
-   "note": ""
-  },
-  {
-   "date": "2026-11-19T13:52",
-   "fix": 0,
-   "ask": 1,
-   "new": 0,
-   "resolved": 0,
-   "note": ""
-  },
-  {
-   "date": "2026-11-19T13:53",
-   "fix": 0,
-   "ask": 1,
-   "new": 0,
-   "resolved": 0,
-   "note": ""
-  },
   {
    "date": "2026-11-19T13:53",
    "fix": 0,
@@ -1454,12 +1432,34 @@
    "new": 0,
    "resolved": 0,
    "note": "정기 검토"
+  },
+  {
+   "date": "2026-11-28T13:19",
+   "fix": 1,
+   "ask": 105,
+   "new": 1,
+   "resolved": 2,
+   "note": ""
+  },
+  {
+   "date": "2026-11-28T13:20",
+   "fix": 1,
+   "ask": 106,
+   "new": 2,
+   "resolved": 1,
+   "note": ""
+  },
+  {
+   "date": "2026-11-28T13:20",
+   "fix": 0,
+   "ask": 106,
+   "new": 0,
+   "resolved": 1,
+   "note": "정기 검토"
   }
  ],
  "fixed_by_agent": [
-  "14 §9 공개 시각 정리됨으로",
-  "제안함 15건 → feedback 10·review 4로 옮기고 done (2건은 이미 반영)",
-  "모순 6건 고침: 출처 라벨 날짜·시간 기준 잔재·브리핑 매일 운영·심층 즉시→예약·감시 4시간·해석→가설",
-  "모순 점검 변경분+7일 전체 완료(장부 c-20261127-01~14)"
+  "해석 → 가설 잔재 2곳(08:51·09:256) 고침, audit RETIRED 에 한 줄",
+  "모순 점검(변경분 14개): 1 고침·1 새로 물어봄(미스터리 템플릿 배경음)"
  ]
 }

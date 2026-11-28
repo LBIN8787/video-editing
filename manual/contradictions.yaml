@@ -7,7 +7,7 @@
 # 낡은 쪽이 분명하면(더 새 버전·날짜의 매뉴얼 규칙이 대체) 바로 고치고 resolved 로 적습니다. 사용자 원문(feedback·reviews·인용)은 고치지 않습니다.
 # 정기 작업(예약된 작업) 지시문은 저장소 밖에 있으므로 file 에 "schedule:<작업 이름>" 으로 적습니다.
 last_sweep: '2026-11-27'
-last_commit: f9c3cda480606906e63b7e87e4f1475ce4cd0ad4
+last_commit: 1f16eb0af3db347773d0241ef001eb8ef510800b
 items:
 - id: c-20261120-01
   found: '2026-11-20'
@@ -926,4 +926,30 @@ items:
   current: unknown
   why: 정기 검토 2026-11-27 모순 점검(변경분 + 7일 전체)
   fix: '''지어낸 질문 금지''는 영구 원칙, ''앞 편 언급 안 하기''는 작업 기준으로 낮출까요?'
+  status: open
+- id: c-20261128-01
+  found: '2026-11-28'
+  topic: 해석 첫머리 말 (남은 곳)
+  a:
+    file: manual/08-issues.md:51 · manual/09-market-daily.md:256
+    text: 여기서부터는 해석입니다 / 💬 이 채널의 해석
+  b:
+    file: manual/README §2-8
+    text: '''가설''로 (2026-11-27 사용자)'
+  current: b
+  why: 정기 검토 2026-11-28 모순 점검(변경분) — c-20261127-06 에서 '다음 검토'로 남긴 곳
+  fix: 두 곳을 '가설'로 고침, audit.py RETIRED 에 한 줄 더함
+  status: resolved
+- id: c-20261128-02
+  found: '2026-11-28'
+  topic: 미스터리 템플릿의 배경음 기본
+  a:
+    file: styles/mystery-archive/STYLE.md §1·§4 · AGENTS 표
+    text: 배경음악 목소리보다 약 −18dB 로 깔고 장 전환 울림 하나
+  b:
+    file: manual/05-style-matching.md:119
+    text: 배경음은 사용자가 조절 — 에이전트는 넣지 않은 상태로 넘김 (2026-11-20 사용자)
+  current: unknown
+  why: 정기 검토 2026-11-28 모순 점검(변경분) — 새 템플릿(11-28)이 배경음을 기본으로 넣음
+  fix: 미스터리 템플릿에서는 배경음을 기본으로 깔아도 되나요, 아니면 05 처럼 빼고 넘길까요?
   status: open
