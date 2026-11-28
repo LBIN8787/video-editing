@@ -44,8 +44,16 @@ def ease(u):  # 부드러운 가감속 (sine in-out)
 
 def cam_at(s, t):
     c = s.get("cam") or {"from": [0.5, 0.5, 1.0], "to": [0.5, 0.5, 0.97]}
-    u = ease((t - s["t0"]) / max(0.01, s["t1"] - s["t0"]))
-    return [c["from"][i] + (c["to"][i] - c["from"][i]) * u for i in range(3)]
+    d = max(0.01, s["t1"] - s["t0"]); u = (t - s["t0"]) / d
+    if c.get("snap") is not None:     # 빠른 밀기(크래시 줌): snap 초 시점에서 0.45초 만에 도착, 그 뒤 멈춤
+        t_s = s["t0"] + c["snap"]; u = 0.0 if t < t_s else min(1.0, (t - t_s) / 0.45); u = 1 - (1 - u) ** 3
+    elif c.get("ease") == "linear": u = min(max(u, 0.0), 1.0)   # 느린 압박: 끝까지 같은 속도로 다가감
+    else: u = ease(u)
+    v = [c["from"][i] + (c["to"][i] - c["from"][i]) * u for i in range(3)]
+    if s.get("shake"):                 # 손에 든 카메라: 아주 작은 흔들림 (긴장·혼란)
+        a = s["shake"] * v[2] * 0.004; tt = t * 1.7
+        v[0] += a * (math.sin(tt * 2.3) + 0.5 * math.sin(tt * 5.1 + 1)); v[1] += a * (math.sin(tt * 1.9 + 2) + 0.5 * math.sin(tt * 4.3))
+    return v
 
 def frame_img(s, t):
     im = art(s["img"]); ih, iw = im.shape[:2]
@@ -316,9 +324,34 @@ def weather(fr, s, t):
             fr[:] = (fr.astype(np.float32) * (1 - f) + 235 * f).astype(np.uint8)
     return fr
 
+@functools.lru_cache(maxsize=2)
+def _vig_mask():
+    yy, xx = np.mgrid[0:H, 0:W]; r = np.sqrt(((xx - W / 2) / (W / 2)) ** 2 + ((yy - H / 2) / (H / 2)) ** 2)
+    return np.clip((r - 0.35) / 0.9, 0, 1).astype(np.float32)[..., None]
+
+def lens(fr, s, t):
+    """카메라 렌즈 연출: focus(흐림→선명, 깨달음·기억이 또렷해짐) · vignette(가장자리가 서서히 어두워짐, 고립·압박)"""
+    dt = t - s["t0"]
+    f = s.get("focus")
+    if f:   # {"from": 초, "dur": 초, "blur": 픽셀}
+        a0, du, bl = f.get("from", 0.0), f.get("dur", 1.4), f.get("blur", 14)
+        k = 1.0 if dt < a0 else max(0.0, 1 - ease((dt - a0) / du))
+        if k > 0.02: fr = cv2.GaussianBlur(fr, (0, 0), bl * k)
+    v = s.get("vignette")
+    if v:   # 0~1 세기, 샷 동안 서서히 조여 옴
+        k = v * ease(min(1.0, dt / max(0.5, s["t1"] - s["t0"])))
+        fr = (fr.astype(np.float32) * (1 - _vig_mask() * k)).astype(np.uint8)
+    return fr
+
 def base_frame(s, t):
     if "card" in s: return card_frame(card_state(s, t)).copy(), None
-    fr, geo = frame_img(s, t); fr = morph(fr, s, t); fr = weather(fr, s, t); overlays(fr, s, t, geo); return fr, geo
+    fr, geo = frame_img(s, t); fr = morph(fr, s, t); fr = weather(fr, s, t); fr = lens(fr, s, t); overlays(fr, s, t, geo); return fr, geo
+
+def whip_blur(fr, strength, direction=1):
+    """휙 넘기기(위프 팬): 가로 움직임 흐림 + 밀림"""
+    k = max(1, int(strength * 140)) | 1; ker = np.zeros((1, k), np.float32); ker[0, :] = 1.0 / k
+    out = cv2.filter2D(fr, -1, ker); sh = int(direction * strength * W * 0.18)
+    return np.roll(out, sh, axis=1)
 
 def render_frame(t):
     for (a, b, title) in CHAP_SLOTS:
@@ -329,7 +362,12 @@ def render_frame(t):
     if k is None: return np.zeros((H, W, 3), np.uint8)
     s = shots[k]; fr, _ = base_frame(s, t)
     tr = s.get("tr", "cut"); dt = t - s["t0"]
-    if tr == "dissolve" and k > 0 and dt < 0.7 and shots[k - 1]["t1"] >= s["t0"] - 0.01:
+    if tr == "whip" and k > 0 and dt < 0.5:   # 앞 샷이 휙 밀려나가며 다음 샷이 휙 들어옴 (시간·장소 점프, 드물게)
+        if dt < 0.22:
+            prev, _ = base_frame(shots[k - 1], t); fr = whip_blur(prev, ease(dt / 0.22), -1)
+        else:
+            fr = whip_blur(fr, 1 - ease((dt - 0.22) / 0.28), 1)
+    elif tr == "dissolve" and k > 0 and dt < 0.7 and shots[k - 1]["t1"] >= s["t0"] - 0.01:
         prev, _ = base_frame(shots[k - 1], t); a = ease(dt / 0.7)
         fr = cv2.addWeighted(fr, a, prev, 1 - a, 0)
     elif tr == "fade" and dt < s.get("fade_dur", 0.6): fr = (fr * ease(dt / s.get("fade_dur", 0.6))).astype(np.uint8)
